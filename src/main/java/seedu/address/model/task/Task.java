@@ -3,12 +3,20 @@ package seedu.address.model.task;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * Represents a Task
  */
 public class Task {
 
-    public final String description;
+    public String description;
+
+    /**
+     * To be used with json deserialisation
+     */
+    public Task() {}
 
     /**
      * Validates given tag name.

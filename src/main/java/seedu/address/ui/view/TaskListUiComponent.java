@@ -29,7 +29,7 @@ public class TaskListUiComponent extends UiComponent {
     @Override
     protected void viewDidMount () {
         setConnections(taskList);
-        FxViewUtil.makeFullWidth(getParent());
+        FxViewUtil.makeFullWidth(getRoot());
     }
 
     private void setConnections(ObservableList<Task> taskList) {
@@ -48,8 +48,9 @@ public class TaskListUiComponent extends UiComponent {
                 setText(null);
             } else {
                 final Pane node = new Pane();
-                new TaskUiComponent(node, task, getIndex() + 1).render();
                 setGraphic(node);
+                FxViewUtil.makeFullWidth(node);
+                new TaskUiComponent(node, task, getIndex() + 1).render();
             }
         }
     }

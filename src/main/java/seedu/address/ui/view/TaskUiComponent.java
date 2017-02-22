@@ -3,6 +3,7 @@ package seedu.address.ui.view;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import seedu.address.commons.util.FxViewUtil;
 import seedu.address.model.task.Task;
 
 /**
@@ -31,5 +32,6 @@ public class TaskUiComponent extends UiComponent {
     protected void viewDidMount() {
         name.setText(task.description);
         id.setText(displayedIndex + ". ");
+        FxViewUtil.makeFullWidth(getRoot());
     }
 }

@@ -1,9 +1,11 @@
 package seedu.address.model;
 
-import seedu.address.commons.core.EventsCenter;
 import seedu.address.model.task.Task;
+import seedu.address.storage.JsonStorage;
+import seedu.address.storage.Storage;
 import seedu.address.ui.UiStore;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,12 +18,16 @@ import javafx.collections.ObservableList;
 public class TodoList implements UiStore {
     private static TodoList instance;
 
-    private final EventsCenter eventsCenter = EventsCenter.getInstance();
+    private static final Storage storage = new JsonStorage();
     private ArrayList<Task> allTasks = new ArrayList<Task>();
 
     public static TodoList getInstance() {
         if (instance == null) {
-            instance = new TodoList();
+            try {
+                instance = storage.load();
+            } catch (IOException e) {
+                instance = new TodoList();
+            }
         }
         return instance;
     }
@@ -36,5 +42,14 @@ public class TodoList implements UiStore {
 
     public void addTask(Task task) {
         allTasks.add(task);
+        save();
+    }
+
+    public void save() {
+        try {
+            storage.save(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

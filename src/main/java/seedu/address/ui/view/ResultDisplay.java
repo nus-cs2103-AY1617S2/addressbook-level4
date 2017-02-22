@@ -37,8 +37,8 @@ public class ResultDisplay extends UiComponent {
     @Override
     protected void viewDidMount() {
         resultDisplay.textProperty().bind(displayed);
-        FxViewUtil.applyAnchorBoundaryParameters(resultDisplay, 0.0, 0.0, 0.0, 0.0);
-        FxViewUtil.applyAnchorBoundaryParameters(mainPane, 0.0, 0.0, 0.0, 0.0);
+        FxViewUtil.makeFullWidth(resultDisplay);
+        FxViewUtil.makeFullWidth(mainPane);
         registerAsAnEventHandler(this);
     }
 

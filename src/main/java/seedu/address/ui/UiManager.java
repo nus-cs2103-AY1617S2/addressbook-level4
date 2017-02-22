@@ -16,6 +16,7 @@ import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.dispatcher.CommandDispatcher;
 
 /**
  * The manager of the UI component.
@@ -50,7 +51,7 @@ public class UiManager extends ComponentManager implements Ui {
             mainView = new MainWindow(primaryStage);
             mainView.render(store);
             mainView.show();
-
+            CommandDispatcher.getInstance().dispatch("");
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
