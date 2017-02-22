@@ -35,3 +35,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
+  | user | group my todos | arrange them by projects, assignments, classes, etc.
+  | user | retrieve my todos by groups | determine my focus when needed
+  | user | add deadlines for my todos | keep track of when tasks are due
+  | user | view my todos by deadlines | know which ones are more urgent
+  | user | set daily goals of the min no. of completed tasks | have clear targets
+  | user | get reminders of my goals and set their frequency | remember my goals
+  | user | receive meaningful rewards for completing my daily goals | stay motivated
+  | user | have my friends who use the app share their todos with me | keep track of tasks without adding them myself
+  | user | receive a weekly, monthly or annually report of my done tasks and remaining todos | regularly review my efficiency
+  | user | view my done tasks of up to a month | stay accountable and be proud of myself once in a while
