@@ -19,7 +19,8 @@ public class TodoList implements UiStore {
     private static TodoList instance;
 
     private static final Storage storage = new JsonStorage();
-    private ArrayList<Task> allTasks = new ArrayList<Task>();
+    private ArrayList<Task> allTasks = new ArrayList<>();
+    private ArrayList<Task> lastViewedTasks = new ArrayList<>();
 
     public static TodoList getInstance() {
         if (instance == null) {
@@ -32,16 +33,31 @@ public class TodoList implements UiStore {
         return instance;
     }
 
-    public List<Task> getTasks() {
+    public ArrayList<Task> getTasks() {
         return allTasks;
+    }
+
+    public ArrayList<Task> getLastViewedTasks() {
+        return lastViewedTasks;
     }
     
     public ObservableList<Task> getUiTasks() {
-        return FXCollections.observableArrayList(getTasks());
+        lastViewedTasks = getTasks();
+        return FXCollections.observableArrayList(lastViewedTasks);
     }
 
     public void addTask(Task task) {
         allTasks.add(task);
+        save();
+    }
+
+    public void removeTask(Task task) {
+        allTasks.remove(task);
+        save();
+    }
+    
+    public void updateTask(Task task, String description) {
+        task.setDescription(description);
         save();
     }
 

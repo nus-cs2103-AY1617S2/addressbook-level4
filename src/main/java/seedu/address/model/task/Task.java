@@ -28,6 +28,10 @@ public class Task {
         String trimmedDescription = description.trim();
         this.description = trimmedDescription;
     }
+    
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     @Override
     public boolean equals(Object other) {

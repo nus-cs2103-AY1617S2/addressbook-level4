@@ -11,9 +11,9 @@ import java.util.HashMap;
 public abstract class Controller {
     final UiManager renderer = UiManager.getInstance();
 
-    abstract public CommandResult execute(String command);
+    abstract public CommandResult execute(String commandArgs);
 
-    public HashMap<String, String> tokenize(String command) {
+    public HashMap<String, String> tokenize(String commandArgs) {
         return new HashMap<>();
     }
 
