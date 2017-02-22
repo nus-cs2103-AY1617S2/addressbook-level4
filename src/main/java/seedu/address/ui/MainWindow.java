@@ -11,14 +11,13 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
-import seedu.address.commons.util.FxViewUtil;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.task.Task;
 import seedu.address.ui.view.CommandBox;
-import seedu.address.ui.view.TaskListView;
+import seedu.address.ui.view.TaskListUiComponent;
+import seedu.address.ui.view.ResultDisplay;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -43,7 +42,7 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane taskListPlaceholder;
 
     @FXML
-    private AnchorPane statusbarPlaceholder;
+    private AnchorPane resultDisplayPlaceholder;
 
     public MainWindow (Stage primaryStage) {
         super(FXML);
@@ -65,8 +64,9 @@ public class MainWindow extends UiPart<Region> {
     
     public void render(UiStore store) {
         final ObservableList<Task> tasks = store.getUiTasks();
-        new TaskListView(getTaskListPlaceholder(), tasks);
-        new CommandBox(getCommandBoxPlaceholder());
+        new TaskListUiComponent(getTaskListPlaceholder(), tasks).render();
+        new CommandBox(getCommandBoxPlaceholder()).render();
+        new ResultDisplay(getResultDisplayPlaceholder()).render();
     }
 
     private void setAccelerators() {
@@ -113,6 +113,10 @@ public class MainWindow extends UiPart<Region> {
 
     private AnchorPane getCommandBoxPlaceholder() {
         return commandBoxPlaceholder;
+    }
+
+    private AnchorPane getResultDisplayPlaceholder() {
+        return resultDisplayPlaceholder;
     }
 
 //    private void setTitle(String appTitle) {

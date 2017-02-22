@@ -1,5 +1,7 @@
 package seedu.address.dispatcher;
 
+import seedu.address.commons.core.EventsCenter;
+import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.controller.AddTaskController;
 
 /**
@@ -16,9 +18,12 @@ public class CommandDispatcher {
         return instance;
     }
 
+    private final EventsCenter eventsCenter = EventsCenter.getInstance();
+
     private CommandDispatcher() {}
 
     public void dispatch(String command) {
-        new AddTaskController().execute(command);
+        final CommandResult feedbackToUser = new AddTaskController().execute(command);
+        eventsCenter.post(new NewResultAvailableEvent(feedbackToUser.getFeedbackToUser()));
     }
 }

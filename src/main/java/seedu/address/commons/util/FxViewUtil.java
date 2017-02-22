@@ -24,4 +24,7 @@ public class FxViewUtil {
         stage.getIcons().setAll(AppUtil.getImage(iconSource));
     }
 
+    public static void makeFullWidth(Node node) {
+        applyAnchorBoundaryParameters(node, 0.0, 0.0, 0.0, 0.0);
+    }
 }

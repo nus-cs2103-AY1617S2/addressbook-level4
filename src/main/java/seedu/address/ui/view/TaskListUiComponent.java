@@ -4,38 +4,37 @@ import javafx.fxml.FXML;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.model.task.Task;
-import seedu.address.ui.UiPart;
 
 /**
  * Created by louis on 21/2/17.
  */
-public class TaskListView extends UiPart<Region> {
+public class TaskListUiComponent extends UiComponent {
 
     private static final String FXML = "TaskListView.fxml";
 
     @FXML
     private ListView<Task> taskListView;
 
+    private ObservableList<Task> taskList;
 
-    public TaskListView(AnchorPane taskListViewPlaceholder, ObservableList<Task> taskList) {
-        super(FXML);
+
+    public TaskListUiComponent(Pane parentNode, ObservableList<Task> taskList) {
+        super(FXML, parentNode);
+        this.taskList = taskList;
+    }
+
+    @Override
+    protected void viewDidMount () {
         setConnections(taskList);
-        addToPlaceholder(taskListViewPlaceholder);
+        FxViewUtil.makeFullWidth(getParent());
     }
 
     private void setConnections(ObservableList<Task> taskList) {
         taskListView.setItems(taskList);
         taskListView.setCellFactory(listView -> new TaskListViewCell());
-    }
-
-    private void addToPlaceholder(AnchorPane placeHolderPane) {
-        FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
-        placeHolderPane.getChildren().add(getRoot());
     }
 
     class TaskListViewCell extends ListCell<Task> {
@@ -48,7 +47,9 @@ public class TaskListView extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TaskView(task, getIndex() + 1).getRoot());
+                final Pane node = new Pane();
+                new TaskUiComponent(node, task, getIndex() + 1).render();
+                setGraphic(node);
             }
         }
     }

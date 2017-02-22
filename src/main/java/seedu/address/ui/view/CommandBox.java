@@ -3,17 +3,13 @@ package seedu.address.ui.view;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
+import javafx.scene.layout.Pane;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.dispatcher.CommandDispatcher;
-import seedu.address.ui.UiPart;
 
-public class CommandBox extends UiPart<Region> {
+public class CommandBox extends UiComponent {
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private static final String FXML = "CommandBox.fxml";
     public static final String ERROR_STYLE_CLASS = "error";
@@ -23,14 +19,12 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     private TextField commandTextField;
 
-    public CommandBox(AnchorPane commandBoxPlaceholder) {
-        super(FXML);
-        addToPlaceholder(commandBoxPlaceholder);
+    public CommandBox(Pane parentNode) {
+        super(FXML, parentNode);
     }
 
-    private void addToPlaceholder(AnchorPane placeHolderPane) {
-        SplitPane.setResizableWithParent(placeHolderPane, false);
-        placeHolderPane.getChildren().add(commandTextField);
+    @Override
+    protected void viewDidMount () {
         FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
         FxViewUtil.applyAnchorBoundaryParameters(commandTextField, 0.0, 0.0, 0.0, 0.0);
     }

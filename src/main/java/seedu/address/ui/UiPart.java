@@ -38,15 +38,15 @@ public abstract class UiPart<T> {
     }
 
     /**
-     * Constructs a RefreshableUiView using the specified FXML file within {@link #FXML_FILE_FOLDER}.
-     * @see #RefreshableUiView(URL)
+     * Constructs a UiPart using the specified FXML file within {@link #FXML_FILE_FOLDER}.
+     * @see #UiPart(URL)
      */
     public UiPart(String fxmlFileName) {
         this(fxmlFileName != null ? MainApp.class.getResource(FXML_FILE_FOLDER + fxmlFileName) : null);
     }
 
     /**
-     * Returns the root object of the scene graph of this RefreshableUiView.
+     * Returns the root object of the scene graph of this UiViewPart.
      */
     public T getRoot() {
         return fxmlLoader.getRoot();

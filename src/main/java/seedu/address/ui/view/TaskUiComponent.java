@@ -2,14 +2,13 @@ package seedu.address.ui.view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Region;
+import javafx.scene.layout.Pane;
 import seedu.address.model.task.Task;
-import seedu.address.ui.UiPart;
 
 /**
  * Created by louis on 21/2/17.
  */
-public class TaskView extends UiPart<Region> {
+public class TaskUiComponent extends UiComponent {
 
     private static final String FXML = "TaskView.fxml";
 
@@ -18,9 +17,18 @@ public class TaskView extends UiPart<Region> {
     @FXML
     private Label id;
 
+    private Task task;
+    private int displayedIndex;
 
-    public TaskView(Task task, int displayedIndex) {
-        super(FXML);
+
+    public TaskUiComponent (Pane parent, Task task, int displayedIndex) {
+        super(FXML, parent);
+        this.task = task;
+        this.displayedIndex = displayedIndex;
+    }
+
+    @Override
+    protected void viewDidMount() {
         name.setText(task.description);
         id.setText(displayedIndex + ". ");
     }
