@@ -35,6 +35,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
+  | user | add events | help myself make tasks more manageable
+  | user | add tasks | help myself make tasks more manageable
+  | user | add deadlines | help myself make tasks more manageable
+  | user | CRUD events, tasks, deadlines | help myself make tasks more manageable
+  | user | undo last operation | help myself make tasks more manageable
+  | user | have some flexiblity in commands | help myself make tasks more manageable
+  | user | simple search for finding an item | help myself make tasks more manageable
+  | user | view uncompleted/completed tasks | help myself make tasks more manageable
+  | user | specify which folder data is stored | help myself make tasks more manageable
+  --
   | user | break my tasks into subtasks | help myself make tasks more manageable
   | user | have inspirational quotes reminders | feel more motivated when doing my tasks
   | user | see my goals | see how my tasks are in line with them
