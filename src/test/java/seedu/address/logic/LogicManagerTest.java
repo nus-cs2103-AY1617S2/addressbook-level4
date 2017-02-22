@@ -21,7 +21,7 @@ import org.junit.rules.TemporaryFolder;
 import com.google.common.eventbus.Subscribe;
 
 import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.TodoListChangedEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.commands.AddCommand;
@@ -35,10 +35,6 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -67,7 +63,7 @@ public class LogicManagerTest {
     private int targetedJumpIndex;
 
     @Subscribe
-    private void handleLocalModelChangedEvent(AddressBookChangedEvent abce) {
+    private void handleLocalModelChangedEvent(TodoListChangedEvent abce) {
         latestSavedAddressBook = new AddressBook(abce.data);
     }
 

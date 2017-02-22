@@ -55,7 +55,9 @@ public class LogsCenter {
      * Creates a Logger for the given class name.
      */
     public static <T> Logger getLogger(Class<T> clazz) {
-        if (clazz == null) return Logger.getLogger("");
+        if (clazz == null) {
+            return Logger.getLogger("");
+        }
         return getLogger(clazz.getSimpleName());
     }
 
