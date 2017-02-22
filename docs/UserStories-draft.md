@@ -35,6 +35,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
+  | user | break my tasks into subtasks | help myself make tasks more manageable
+  | user | have inspirational quotes reminders | feel more motivated when doing my tasks
+  | user | see my goals | see how my tasks are in line with them
+  | user | read productivity tips | be more productive by trying new things
+  | user | see suggestions on how to do tasks | remove barriers that stop me
+  | user | see how much time I spend on tasks | know where i'm spending my time
+  | user | do tasks via pomodoro | work on my tasks in 25 minute sprints
+  | user | have shortcuts for adding tasks | save time using the software
+  | user | see advice from influential people | make more meaningful decisions about my day
+  | user | see when i'm most efficient | work accordingly and get more things done
+  | user | have a bullet journal workflow | use my favourite workflow more effectively
+  --
   | user | group my todos | arrange them by projects, assignments, classes, etc.
   | user | retrieve my todos by groups | determine my focus when needed
   | user | add deadlines for my todos | keep track of when tasks are due
