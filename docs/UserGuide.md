@@ -90,15 +90,28 @@ Examples:
 * `add attend skills upgrading workshop from 05/12 to 05/16`
 * `add meeting at board room 4 from 10am to 11am t/project A #meetings`
 
-### 2.3. Listing all persons : `list`
+### 2.3. Listing tasks by type : `list LIST_TYPE`
 
-Shows a list of all persons in the address book.<br>
-Format: `list`
+Format: `list`<br>
+Shows a list of all overdue tasks and upcoming tasks set for the next day.<br>
 
-### 2.4. Editing a person : `edit`
+Format: `list all`<br>
+Shows a list of all tasks.<br>
 
-Edits an existing person in the address book.<br>
-Format: `edit INDEX [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Format: `list float`<br>
+Shows a list of all floating tasks.<br>
+
+Format: `list day`<br>
+Shows a list of deadlines and events scheduled on the current day.<br>
+
+Format: `list week`<br>
+Shows a list of deadlines and events scheduled for the week.<br>
+
+Format: `list #TAG`<br>
+Shows a list of tasks labeled with the given TAG.<br>
+
+Format: `list marked`<br>
+Shows a list of all tasks that have been marked as completed.<br>
 
 > * Edits the person at the specified `INDEX`.
     The index refers to the index number shown in the last person listing.<br>
