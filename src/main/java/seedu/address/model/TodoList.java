@@ -1,25 +1,28 @@
 package seedu.address.model;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import seedu.address.model.task.Task;
 import seedu.address.storage.JsonStorage;
 import seedu.address.storage.Storage;
 import seedu.address.ui.UiStore;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
 /**
- * Created by louis on 21/2/17.
+ * Singleton TodoList. Save to storage on every mutating actions.
  */
 public class TodoList implements UiStore {
     private static TodoList instance;
 
     private static final Storage storage = new JsonStorage();
     private ArrayList<Task> allTasks = new ArrayList<>();
+
+    /**
+     * Holds the tasks that were last viewed from UI
+     */
     private ArrayList<Task> lastViewedTasks = new ArrayList<>();
 
     public static TodoList getInstance() {
@@ -40,7 +43,7 @@ public class TodoList implements UiStore {
     public ArrayList<Task> getLastViewedTasks() {
         return lastViewedTasks;
     }
-    
+
     public ObservableList<Task> getUiTasks() {
         lastViewedTasks = getTasks();
         return FXCollections.observableArrayList(lastViewedTasks);
@@ -55,7 +58,7 @@ public class TodoList implements UiStore {
         allTasks.remove(task);
         save();
     }
-    
+
     public void updateTask(Task task, String description) {
         task.setDescription(description);
         save();

@@ -1,14 +1,14 @@
 package seedu.address.storage;
 
-import seedu.address.model.TodoList;
-
 import java.io.IOException;
 
+import seedu.address.model.TodoList;
+
 /**
- * Created by louis on 22/2/17.
+ * Interface for Storage that saves/loads TodoList object
  */
 public interface Storage {
-    public void save(TodoList todoList) throws IOException;
+    void save(TodoList todoList) throws IOException;
 
-    public TodoList load() throws IOException;
+    TodoList load() throws IOException;
 }

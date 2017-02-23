@@ -1,11 +1,5 @@
 package seedu.address.model.task;
 
-
-import seedu.address.commons.exceptions.IllegalValueException;
-
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
 /**
  * Represents a Task
  */
@@ -18,17 +12,12 @@ public class Task {
      */
     public Task() {}
 
-    /**
-     * Validates given tag name.
-     *
-     * @throws IllegalValueException if the given tag name string is invalid.
-     */
-    public Task(String description) throws IllegalValueException {
+    public Task(String description) {
         assert description != null;
         String trimmedDescription = description.trim();
         this.description = trimmedDescription;
     }
-    
+
     public void setDescription(String description) {
         this.description = description;
     }

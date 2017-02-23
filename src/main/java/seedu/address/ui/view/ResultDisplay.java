@@ -47,5 +47,4 @@ public class ResultDisplay extends UiComponent {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         displayed.setValue(event.message);
     }
-
 }

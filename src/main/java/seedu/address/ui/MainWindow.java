@@ -11,13 +11,14 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.task.Task;
 import seedu.address.ui.view.CommandBox;
-import seedu.address.ui.view.TaskListUiComponent;
 import seedu.address.ui.view.ResultDisplay;
+import seedu.address.ui.view.TaskListUiComponent;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -61,7 +62,7 @@ public class MainWindow extends UiPart<Region> {
     public Stage getPrimaryStage() {
         return primaryStage;
     }
-    
+
     public void render(UiStore store) {
         final ObservableList<Task> tasks = store.getUiTasks();
         new TaskListUiComponent(getTaskListPlaceholder(), tasks).render();
@@ -165,9 +166,9 @@ public class MainWindow extends UiPart<Region> {
     void show() {
         primaryStage.show();
     }
-    
+
     /** ================ ACTION HANDLERS ================== **/
-    
+
     @FXML
     public void handleHelp() {
     }

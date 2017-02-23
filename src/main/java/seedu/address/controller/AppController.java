@@ -4,10 +4,10 @@ import seedu.address.dispatcher.CommandResult;
 import seedu.address.model.TodoList;
 
 /**
- * Created by louis on 22/2/17.
+ * AppController is responsible for rendering the initial UI
  */
 public class AppController extends Controller {
-    private static String RESULT_MESSAGE = "App loaded";
+    private static final String RESULT_MESSAGE = "App loaded";
 
     public CommandResult execute(String command) {
         final TodoList todoList = TodoList.getInstance();

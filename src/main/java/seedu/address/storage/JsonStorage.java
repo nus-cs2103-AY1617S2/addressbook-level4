@@ -1,14 +1,14 @@
 package seedu.address.storage;
 
+import java.io.File;
+import java.io.IOException;
+
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.TodoList;
 
-import java.io.File;
-import java.io.IOException;
-
 /**
- * Created by louis on 22/2/17.
+ * JsonStorage saves TodoList object to json file.
  */
 public class JsonStorage implements Storage {
     private static final String STORAGE_FILE_PATH = "todolist.json";

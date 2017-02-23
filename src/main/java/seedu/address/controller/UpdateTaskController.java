@@ -1,24 +1,23 @@
 package seedu.address.controller;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.dispatcher.CommandResult;
-import seedu.address.model.TodoList;
-import seedu.address.model.task.Task;
-
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.dispatcher.CommandResult;
+import seedu.address.model.TodoList;
+import seedu.address.model.task.Task;
+
 /**
- * Created by louis on 21/2/17.
+ * UpdateTaskController is responsible for updating a task
  */
 public class UpdateTaskController extends Controller {
 
-    private static String COMMAND_WORD = "update";
-    private static String RESULT_MESSAGE = "Task updated";
-    private static String TASK_VIEW_INDEX = "index";
-    private static String TASK_DESCRIPTION = "description";
-    private static Pattern ARGUMENT_FORMAT = 
+    private static final String COMMAND_WORD = "update";
+    private static final String RESULT_MESSAGE = "Task updated";
+    private static final String TASK_VIEW_INDEX = "index";
+    private static final String TASK_DESCRIPTION = "description";
+    private static final Pattern ARGUMENT_FORMAT =
             Pattern.compile("(?<index>.+)"
                     + " (?<description>.+)");
 

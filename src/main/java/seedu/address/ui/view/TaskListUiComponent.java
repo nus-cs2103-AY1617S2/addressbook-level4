@@ -1,7 +1,7 @@
 package seedu.address.ui.view;
 
-import javafx.fxml.FXML;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
@@ -9,7 +9,7 @@ import seedu.address.commons.util.FxViewUtil;
 import seedu.address.model.task.Task;
 
 /**
- * Created by louis on 21/2/17.
+ * TaskListUiComponent to display the list of tasks
  */
 public class TaskListUiComponent extends UiComponent {
 

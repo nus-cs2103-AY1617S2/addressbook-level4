@@ -1,20 +1,26 @@
 package seedu.address.dispatcher;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
-import seedu.address.controller.*;
-
-import javax.naming.ldap.Control;
-import java.util.*;
-import java.util.stream.Stream;
+import seedu.address.controller.AddTaskController;
+import seedu.address.controller.AppController;
+import seedu.address.controller.Controller;
+import seedu.address.controller.DeleteTaskController;
+import seedu.address.controller.UpdateTaskController;
 
 /**
- * Created by louis on 21/2/17.
+ * CommandDispatcher is the bridge between the UI input & Controller
+ * It acts like a Router in a MVC. From the input, it deduces what is the appropriate
+ * the controller to dispatch the command to
  */
 public class CommandDispatcher {
 
     private static CommandDispatcher instance;
-    private static String WHITE_SPACE = "\\s+";
+    private static final String WHITE_SPACE = "\\s+";
 
     public static CommandDispatcher getInstance() {
         if (instance == null) {
@@ -46,7 +52,7 @@ public class CommandDispatcher {
     private String getPreamble(String command) {
         return command.split(WHITE_SPACE)[0];
     }
-    
+
     private String getArgs(String command) {
         final ArrayList<String> commandParts = new ArrayList<>(Arrays.asList(command.split(WHITE_SPACE)));
         commandParts.remove(0);
@@ -55,10 +61,10 @@ public class CommandDispatcher {
 
     private Collection<Controller> getAllControllers() {
         return new ArrayList<>(Arrays.asList(new Controller[] {
-                new AppController(),
-                new AddTaskController(),
-                new DeleteTaskController(),
-                new UpdateTaskController()
+            new AppController(),
+            new AddTaskController(),
+            new DeleteTaskController(),
+            new UpdateTaskController()
         }));
     }
 }

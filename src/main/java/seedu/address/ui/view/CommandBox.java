@@ -52,5 +52,4 @@ public class CommandBox extends UiComponent {
     private void setStyleToIndicateCommandFailure() {
         commandTextField.getStyleClass().add(ERROR_STYLE_CLASS);
     }
-
 }

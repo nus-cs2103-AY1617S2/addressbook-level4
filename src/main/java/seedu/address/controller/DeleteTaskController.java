@@ -1,20 +1,19 @@
 package seedu.address.controller;
 
-import seedu.address.commons.exceptions.IllegalValueException;
+import java.util.HashMap;
+
 import seedu.address.dispatcher.CommandResult;
 import seedu.address.model.TodoList;
 import seedu.address.model.task.Task;
 
-import java.util.HashMap;
-
 /**
- * Created by louis on 21/2/17.
+ * DeleteTaskController is responsible for deleting a task
  */
 public class DeleteTaskController extends Controller {
 
-    private static String COMMAND_WORD = "delete";
-    private static String RESULT_MESSAGE = "Task removed";
-    private static String TASK_VIEW_INDEX = "viewIndex";
+    private static final String COMMAND_WORD = "delete";
+    private static final String RESULT_MESSAGE = "Task removed";
+    private static final String TASK_VIEW_INDEX = "viewIndex";
 
     public CommandResult execute(String commandArgs) {
         final TodoList todoList = TodoList.getInstance();

@@ -19,7 +19,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.dispatcher.CommandDispatcher;
 
 /**
- * The manager of the UI component.
+ * The manager of the UI component. Singleton
  */
 public class UiManager extends ComponentManager implements Ui {
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
@@ -63,7 +63,7 @@ public class UiManager extends ComponentManager implements Ui {
 //        prefs.updateLastUsedGuiSetting(mainView.getCurrentGuiSetting());
         mainView.hide();
     }
-    
+
     public void render(UiStore store) {
         mainView.render(store);
     }
