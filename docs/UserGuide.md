@@ -129,26 +129,32 @@ Examples:
 
 * `find file filing`<br>
   Returns any tasks with `file`, `files`, `filing` etc. as part of its description
+
+### 2.5. Editing a task : `edit`
+
+Edits an existing task in the task manager.<br>
+Format: `edit INDEX [TASK] [by DATETIME] [from START_DATETIME to END_DATETIME] [#TAG]...`
+
 > * Edits the person at the specified `INDEX`.
-    The index refers to the index number shown in the last person listing.<br>
+    The index refers to the index number shown in the last task listing.<br>
     The index **must be a positive integer** 1, 2, 3, ...
 > * At least one of the optional fields must be provided.
+> * If changing the DATETIME, format must match the chosen task type (either deadline or event)
 > * Existing values will be updated to the input values.
-> * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-> * You can remove all the person's tags by typing `t/` without specifying any tags after it. 
+> * When editing tags, the existing tags of the tasks will be removed i.e adding of tags is not cumulative.
+> * You can remove all the task's tags by typing `#` without specifying any tags after it. 
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@yahoo.com`<br>
-  Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@yahoo.com` respectively.
+* `list today`
+  `edit 5 meeting at board room 2`<br>
+  Edits the task description of the 5th task today to be `meeting at board room 2`.
 
-* `edit 2 Betsy Crower t/`<br>
-  Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `list`
+  `edit 2 by mon #`<br>
+  Edits the deadline of the 2nd task listed to be `mon` and clears all existing tags.
 
-### 2.5. Finding all persons containing any keyword in their name: `find`
 
-Finds persons whose names contain any of the given keywords.<br>
-Format: `find KEYWORD [MORE_KEYWORDS]`
 
 > * The search is case sensitive. e.g `hans` will not match `Hans`
 > * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
