@@ -403,17 +403,38 @@ Use case ends.
 
 ## Appendix E : Product Survey
 
-**Product Name**
-
-Author: ...
+**Todoist**
 
 Pros:
 
-* ...
-* ...
+* Supports many variations of keywords for time and dates (eg. next week, 3 days, everyday etc.)
+* Shortcut keys such as for adding and finding allow use of mouse clicks to be minimized 
+* Auto-complete when adding tags helps to increase efficiency of usage
+* Can add a variety of tags (category, priority) to tasks to organize them better 
+* Powerful search feature that can find tasks given minimal keywords, and also find tasks by their deadlines 
+* Good visual feedback through colour coding for tasks with different priorities and categories
+* Karma trend and goals enable user to track productivity and stay motivated to complete tasks on time 
 
 Cons:
 
-* ...
-* ...
+* Requires Internet connection and web browser to use
+* Requires logging in to account which means there is an extra step to launch the software 
+* Certain features (eg. sync with calendar, customize theme) are only available with paid subscription
+* Most other functions are not command line interface friendly (Eg. edit, mark as complete require mouse clicks)
+* No help feature to guide new users to keywords like date and time. Need to refer to the user guide.
+* If user backspaces after typing a keyword but retypes it again for the same task, the date will not be registered anymore, which gives little allowance if users type wrongly. 
+
+**HiTask**
+
+Pros:
+
+* Good GUI especially the calendar that automatically highlights dates with tasks due/ events scheduled, which makes it easy for user to find an empty time slot to schedule a new task if needed.
+* Nice and clear GUI display when listing tasks for the day, week or month which come with a time-line so that task cards height are proportional to the task duration.
+
+Cons:
+
+* Software requires Internet connection and not available as a desktop application
+* Requires an account to use and is only free for a limited period
+* Not very command line interface friendly
+
 
