@@ -113,6 +113,22 @@ Shows a list of tasks labeled with the given TAG.<br>
 Format: `list marked`<br>
 Shows a list of all tasks that have been marked as completed.<br>
 
+### 2.4. Finding all tasks containing any keyword in their description: `find`
+
+Finds tasks which contain any of the given keywords in their description.<br>
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+> * Only the task description is searched.
+> * The search is case insensitive. e.g `Report` will match `report`
+> * The order of the keywords does not matter. e.g. `proposal for boss` will match `for boss proposal`
+> * Partial words will be matched e.g. `meet` will match `meeting`
+> * Tasks matching at least one keyword will be returned (i.e. `OR` search).
+    e.g. `lunch` will match `lunch appointment`
+
+Examples:
+
+* `find file filing`<br>
+  Returns any tasks with `file`, `files`, `filing` etc. as part of its description
 > * Edits the person at the specified `INDEX`.
     The index refers to the index number shown in the last person listing.<br>
     The index **must be a positive integer** 1, 2, 3, ...
