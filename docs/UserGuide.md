@@ -155,22 +155,21 @@ Examples:
   Edits the deadline of the 2nd task listed to be `mon` and clears all existing tags.
 
 
+### 2.6. Deleting a task : `delete`
 
-> * The search is case sensitive. e.g `hans` will not match `Hans`
-> * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-> * Only the name is searched.
-> * Only full words will be matched e.g. `Han` will not match `Hans`
-> * Persons matching at least one keyword will be returned (i.e. `OR` search).
-    e.g. `Hans` will match `Hans Bo`
+Deletes the specified task from the task manager. <br>
+Format: `delete INDEX`
+
+> Deletes the task at the specified `INDEX`. <br>
+> The index refers to the index number shown in the most recent listing.<br>
+> The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 
-* `find John`<br>
-  Returns `John Doe` but not `john`
-* `find Betsy Tim John`<br>
-  Returns Any person having names `Betsy`, `Tim`, or `John`
+* `list all`<br>
+  `delete 2`<br>
+  Deletes the 2nd task in the list of all tasks.
 
-### 2.6. Deleting a person : `delete`
 
 Deletes the specified person from the address book. Irreversible.<br>
 Format: `delete INDEX`
