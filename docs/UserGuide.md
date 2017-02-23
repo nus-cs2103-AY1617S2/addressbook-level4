@@ -170,40 +170,40 @@ Examples:
   `delete 2`<br>
   Deletes the 2nd task in the list of all tasks.
 
+### 2.7. Mark a task : `mark`
 
-Deletes the specified person from the address book. Irreversible.<br>
-Format: `delete INDEX`
+Marks the task identified by the index number used in the last task listing.<br>
+Format: `mark INDEX`
 
-> Deletes the person at the specified `INDEX`. <br>
+_**Alternative keyword: check, finish**_
+
+> Marks the task as completed and hides it from view.
+> Task is added to a list of completed tasks that can be viewed by calling `list marked`.<br>
 > The index refers to the index number shown in the most recent listing.<br>
 > The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 
-* `list`<br>
-  `delete 2`<br>
-  Deletes the 2nd person in the address book.
-* `find Betsy`<br>
-  `delete 1`<br>
-  Deletes the 1st person in the results of the `find` command.
+* `list today`<br>
+  `mark 2`<br>
+  Marks the 2nd task in the list of task today.
 
-### 2.7. Select a person : `select`
+### 2.8. Unmark a task : `unmark`
 
-Selects the person identified by the index number used in the last person listing.<br>
-Format: `select INDEX`
+Unmarks the task identified by the index number used in the marked task listing.<br>
+Format: `unmark INDEX`
 
-> Selects the person and loads the Google search page the person at the specified `INDEX`.<br>
+_**Alternative keyword: uncheck, unfinish**_
+
+> Unmarks a previously marked task and restores it back into its original location and view.
 > The index refers to the index number shown in the most recent listing.<br>
 > The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 
-* `list`<br>
-  `select 2`<br>
-  Selects the 2nd person in the address book.
-* `find Betsy` <br>
-  `select 1`<br>
-  Selects the 1st person in the results of the `find` command.
+* `list marked`<br>
+  `unmark 2`<br>
+  Unmarks the 2nd task in the list.
 
 ### 2.8. Clearing all entries : `clear`
 
