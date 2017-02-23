@@ -44,7 +44,6 @@ Priority | As a ... | I want to ... | So that I can...
   | user | simple search for finding an item | help myself make tasks more manageable
   | user | view uncompleted/completed tasks | help myself make tasks more manageable
   | user | specify which folder data is stored | help myself make tasks more manageable
-  --
   | user | break my tasks into subtasks | help myself make tasks more manageable
   | user | have inspirational quotes reminders | feel more motivated when doing my tasks
   | user | see my goals | see how my tasks are in line with them
@@ -56,7 +55,6 @@ Priority | As a ... | I want to ... | So that I can...
   | user | see advice from influential people | make more meaningful decisions about my day
   | user | see when i'm most efficient | work accordingly and get more things done
   | user | have a bullet journal workflow | use my favourite workflow more effectively
-  --
   | user | group my todos | arrange them by projects, assignments, classes, etc.
   | user | retrieve my todos by groups | determine my focus when needed
   | user | add deadlines for my todos | keep track of when tasks are due
