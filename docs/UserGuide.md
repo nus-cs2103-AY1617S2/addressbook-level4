@@ -233,24 +233,34 @@ There is no need to save manually.
 
 ## 4. Command Summary
 
-* **Add**  `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` <br>
-  e.g. `add James Ho p/22224444 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+* **Add**  
+> * `add TASK [#TAG]...` <br>
+> * `add TASK by DATETIME [#TAG]...`
+> * `add TASK from START_DATETIME to END_DATETIME [#TAG]...`
 
-* **Clear** : `clear`
+* **List** : `list` <br>
+> * `list`<br>
+> * `list all`<br>
+> * `list float`<br>
+> * `list day`<br>
+> * `list week`<br>
+> * `list #TAG`<br>
+> * `list marked`<br>
+
+* **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
+
+* **Edit** :
+> `edit INDEX [TASK] [by DATETIME] [from START_DATETIME to END_DATETIME] [#TAG]...`
+
+* **Mark** : `mark INDEX` <br>
+
+* **Unmark** : `unmark INDEX` <br>
 
 * **Delete** : `delete INDEX` <br>
    e.g. `delete 3`
 
-* **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
-  e.g. `find James Jake`
+* **Clear** : `clear`
 
-* **List** : `list` <br>
-  e.g.
+* **Undo** : `undo` <br>
 
 * **Help** : `help` <br>
-  e.g.
-
-* **Select** : `select INDEX` <br>
-  e.g.`select 2`
-
-
