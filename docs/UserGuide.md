@@ -205,26 +205,31 @@ Examples:
   `unmark 2`<br>
   Unmarks the 2nd task in the list.
 
-### 2.8. Clearing all entries : `clear`
+### 2.9. Undoing previous step : `undo`
 
-Clears all entries from the address book.<br>
+Undo the previous command and restore the data to one step before.<br>
+Format: `undo`
+
+### 2.10. Clearing all entries : `clear`
+
+Clears all entries from the task manager.<br>
 Format: `clear`
 
-### 2.9. Exiting the program : `exit`
+### 2.11. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.10. Saving the data
+### 2.12. Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data.<br>
+Task manager data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
 ## 3. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
-       the file that contains the data of your previous Address Book folder.
+       the file that contains the data of your previous Task Manager folder.
 
 ## 4. Command Summary
 
