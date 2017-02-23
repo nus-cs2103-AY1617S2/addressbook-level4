@@ -38,7 +38,20 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 > * Words in `UPPER_CASE` are the parameters.
 > * Items in `SQUARE_BRACKETS` are optional.
 > * Items with `...` after them can have multiple instances.
-> * Parameters can be in any order.
+> * Parameters must be in the specified order.
+
+> **Date and Time Format**
+>
+> A wide variety of date and time format is accepted.
+> Some examples are: 
+> * `2017-02-23` (yyyy-mm-dd) <br>
+> * `04/05` (mm/dd) <br>
+> * `today` <br>
+> * `tomorrow` or `tmr` <br>
+> * `next tues` <br>
+> * `3 weeks from now` <br>
+> * `9pm` or `21:00` <br>
+> * `noon` <br>
 
 ### 2.1. Viewing help : `help`
 
@@ -46,17 +59,36 @@ Format: `help`
 
 > Help is also shown if you enter an incorrect command e.g. `abcd`
 
-### 2.2. Adding a person: `add`
+### 2.2. Adding a task : `add`
 
-Adds a person to the address book<br>
-Format: `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Adds a task to the task manager<br>
+> Task can have any number of tags (including 0)
 
-> Persons can have any number of tags (including 0)
+### 2.2.1. Floating task 
+
+Format: `add TASK [#TAG]...`
 
 Examples:
 
-* `add John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01`
-* `add Betsy Crowe t/friend e/betsycrowe@gmail.com a/Newgate Prison p/1234567 t/criminal`
+* `add read Lord of The Rings #personal`
+
+### 2.2.2. Adding a deadline
+
+Format: `add TASK by DATETIME [#TAG]...`
+
+Examples:
+
+* `add prepare meeting slides by tomorrow 9am #impt #work`
+* `add send budget proposal by next Thurs noon to boss #project A`
+
+### 2.2.3. Adding an event 
+
+Format: `add TASK from START_DATETIME to END_DATETIME [#TAG]...`
+
+Examples:
+
+* `add attend skills upgrading workshop from 05/12 to 05/16`
+* `add meeting at board room 4 from 10am to 11am t/project A #meetings`
 
 ### 2.3. Listing all persons : `list`
 
