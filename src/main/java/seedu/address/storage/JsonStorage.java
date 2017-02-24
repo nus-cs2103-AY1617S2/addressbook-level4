@@ -11,7 +11,7 @@ import seedu.address.model.TodoList;
  * JsonStorage saves TodoList object to json file.
  */
 public class JsonStorage implements Storage {
-    private static final String STORAGE_FILE_PATH = "todolist.json";
+    private static final String STORAGE_FILE_PATH = "data/todolist.json";
 
     public void save(TodoList todoList) throws IOException {
         final File storageFile = getStorageFile();
