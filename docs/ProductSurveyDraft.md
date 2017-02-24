@@ -1,5 +1,13 @@
 
 ## Google Calendar
+Strengths:
+-Google Calendar is easy and fast to set up, especially if you use a Google account
+-Clean, minimal interface, easy to invite people to events
+-Organize events and appointments via different calendars
+
+Weaknesses:
+-Possible problems communicating with other calendars such as iCal
+-Not specifically a task manager, just a calendar
 
 ## Momentum 
 
