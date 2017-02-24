@@ -1,6 +1,5 @@
 package seedu.address;
 
-import java.util.Map;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;

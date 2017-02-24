@@ -6,9 +6,9 @@ import java.util.Collection;
 
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
-import seedu.address.controller.task.AddTaskController;
 import seedu.address.controller.AppController;
 import seedu.address.controller.Controller;
+import seedu.address.controller.task.AddTaskController;
 import seedu.address.controller.task.DeleteTaskController;
 import seedu.address.controller.task.UpdateTaskController;
 
