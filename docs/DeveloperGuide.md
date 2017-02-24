@@ -346,7 +346,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-
 `* * *` | user | add task | add task
 `* * *` | user | delete task | remove tasks that I have completed
 `* * *` | user | edit task | update my tasks accordingly
