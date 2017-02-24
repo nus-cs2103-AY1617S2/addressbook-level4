@@ -1,13 +1,13 @@
 
 ## Google Calendar
 Strengths:
--Google Calendar is easy and fast to set up, especially if you use a Google account
--Clean, minimal interface, easy to invite people to events
--Organize events and appointments via different calendars
+Google Calendar is easy and fast to set up, especially if you use a Google account
+Clean, minimal interface, easy to invite people to events
+Organize events and appointments via different calendars
 
 Weaknesses:
--Possible problems communicating with other calendars such as iCal
--Not specifically a task manager, just a calendar
+Possible problems communicating with other calendars such as iCal
+Not specifically a task manager, just a calendar
 
 ## Momentum 
 
@@ -17,6 +17,6 @@ Apple’s built-in Notes App is nothing different from a paper notebook except t
 While Notes may be better than paper notebooks, there are still some problems if you want to use it as a task manager. First, Notes is only available for the Apple OS platform. As our target are MS users, Notes is not an option for them. Moreover, Notes cannot recognize task’s data and group them together. All the updating need to be done by directly manipulating the text, which is quite a bother. If the user mistakenly edited something wrongly, there is no turning back for them since there is no undo function. Our App need to be more organized about the tasks than Notes.
 
 ## Calendar in iPhone
-- No localisation, for instance in China there is not lunar calendar and no Japanese traditional holidays calendar in Japan. 
-- Display interface too small, unable to see all events.
-- Add/Remove function not user-friendly enough, hard to find.
+No localisation, for instance in China there is not lunar calendar and no Japanese traditional holidays calendar in Japan. 
+Display interface too small, unable to see all events.
+Add/Remove function not user-friendly enough, hard to find.
