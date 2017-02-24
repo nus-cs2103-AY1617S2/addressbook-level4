@@ -346,9 +346,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
+
+`* * *` | user | add task | add task
+`* * *` | user | delete task | remove tasks that I have completed
+`* * *` | user | edit task | update my tasks accordingly
+`* * *` | user | view task | recall the details of the task that I have input earlier
 `* * *` | user | be able to mark completed tasks | differentiate between completed and uncompleted tasks
 `* *` | user working in teams | be able to import task files | add multiple tasks given by team mates
 `* *` | user working in teams | be able to export task files | transfer multiple tasks to team mates
+`* *` | user with many tasks | list all tasks | recall all the tasks I have so far
+`* *` | user with many tasks | list all urgent tasks | recall all the important tasks to be completed
 `*` | user who works with complex tasks | create subtasks | break a task into smaller tasks for easier management
 `*` | user who also use other task managing applications | synchronize my task list across all my applications | manage the same tasks from different applications 
 
@@ -424,6 +431,99 @@ Use case ends.
 
 > 5a1. KoolToDoManager shows an error message <br>
   Use case resumes at step 4
+#### Use case: Adding a new task
+
+**MSS**
+
+1. User requests to add tasks
+2. KoolToDoManager prompts user for name of task
+3. User inputs name of task
+4. KoolToDoManager adds the task 
+Use case ends.
+
+**Extensions**
+
+3a. Name of task is empty
+
+> Use case resumes at step 2
+
+
+#### Use case: Deleting a task
+
+**MSS**
+
+1. User requests to delete tasks
+2. KoolToDoManager prompts user for name of task
+3. User inputs name of task
+4. KoolToDoManager deletes the task 
+Use case ends.
+
+**Extensions**
+
+3a. No such name of task exists
+> Use case resumes at step 2
+
+#### Use case: Editing a task
+
+**MSS**
+
+1. User requests to edit a task
+2. KoolToDoManager prompts user for name of task
+3. User inputs name of task
+4. KoolToDoManager prompts user for new details of task 
+5. User inputs new details of task
+6. KoolToDoManager edits the task
+Use case ends.
+
+**Extensions**
+
+3a. No such name of task exists
+> Use case resumes at step 2
+
+5a. New details of task is empty
+> Use case resumes at step 4
+
+#### Use case: View task
+
+**MSS**
+
+1. User requests to view a task
+2. KoolToDoManager prompts for name of task
+3. User inputs name of task
+4. KoolToDoManager brings up details of task
+Use case ends.
+
+**Extensions**
+
+3a. No such name of task exists
+> Use case resumes at step 2
+
+#### Use case: List all tasks
+
+**MSS**
+
+1. User requests to list all tasks
+2. KoolToDoManager lists all tasks
+Use case ends.
+
+**Extensions**
+
+1a. No tasks exist
+> KoolToDoManager shows an error message <br>
+
+#### Use case: List all urgent tasks
+
+**MSS**
+
+1. User requests to list all urgent tasks
+2. KoolToDoManager lists all urgent tasks
+Use case ends.
+
+**Extensions**
+
+1a. No urgent tasks exist
+> KoolToDoManager shows an error message <br>
+
 
 {More to be added}
 
