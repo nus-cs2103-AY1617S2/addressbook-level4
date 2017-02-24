@@ -65,3 +65,5 @@ Priority | As a ... | I want to ... | So that I can...
   | user | have my friends who use the app share their todos with me | keep track of tasks without adding them myself
   | user | receive a weekly, monthly or annually report of my done tasks and remaining todos | regularly review my efficiency
   | user | view my done tasks of up to a month | stay accountable and be proud of myself once in a while
+  | user | check if event falls on a local PH | to avoid inconvenience 
+  | user | merge multiple events to become subtasks under one event | help myself make tasks more manageable
