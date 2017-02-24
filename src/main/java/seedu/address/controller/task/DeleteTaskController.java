@@ -1,7 +1,8 @@
-package seedu.address.controller;
+package seedu.address.controller.task;
 
 import java.util.HashMap;
 
+import seedu.address.controller.Controller;
 import seedu.address.dispatcher.CommandResult;
 import seedu.address.model.TodoList;
 import seedu.address.model.task.Task;

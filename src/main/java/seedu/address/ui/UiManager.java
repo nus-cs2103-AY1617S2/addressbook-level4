@@ -7,13 +7,11 @@ import com.google.common.eventbus.Subscribe;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import seedu.address.MainApp;
 import seedu.address.commons.core.ComponentManager;
+import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.dispatcher.CommandDispatcher;
@@ -26,6 +24,7 @@ public class UiManager extends ComponentManager implements Ui {
     private static UiManager instance;
 
     private MainWindow mainView;
+    private Config config;
 
     public static UiManager getInstance() {
         if (instance == null) {
@@ -41,10 +40,7 @@ public class UiManager extends ComponentManager implements Ui {
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting UI...");
-//        primaryStage.setTitle(config.getAppTitle());
-
-        //Set the application icon.
-//        primaryStage.getIcons().add(getImage(ICON_APPLICATION));
+        primaryStage.setTitle(config.getAppTitle());
 
         try {
             final UiStore store = new InitialUiStore();
@@ -60,8 +56,11 @@ public class UiManager extends ComponentManager implements Ui {
 
     @Override
     public void stop() {
-//        prefs.updateLastUsedGuiSetting(mainView.getCurrentGuiSetting());
         mainView.hide();
+    }
+
+    public void init(Config config) {
+        this.config = config;
     }
 
     public void render(UiStore store) {
@@ -71,10 +70,6 @@ public class UiManager extends ComponentManager implements Ui {
     private void showFileOperationAlertAndWait(String description, String details, Throwable cause) {
         final String content = details + ":\n" + cause.toString();
         showAlertDialogAndWait(AlertType.ERROR, "File Op Error", description, content);
-    }
-
-    private Image getImage(String imagePath) {
-        return new Image(MainApp.class.getResourceAsStream(imagePath));
     }
 
     void showAlertDialogAndWait(Alert.AlertType type, String title, String headerText, String contentText) {
@@ -89,7 +84,6 @@ public class UiManager extends ComponentManager implements Ui {
         alert.setTitle(title);
         alert.setHeaderText(headerText);
         alert.setContentText(contentText);
-//        alert.getDialogPane().setId(ALERT_DIALOG_PANE_FIELD_ID);
         alert.showAndWait();
     }
 
@@ -112,11 +106,5 @@ public class UiManager extends ComponentManager implements Ui {
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
 //        mainView.handleHelp();
-    }
-
-    @Subscribe
-    private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-//        mainView.getPersonListPanel().scrollTo(event.targetIndex);
     }
 }

@@ -12,9 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
-import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
-import seedu.address.model.UserPrefs;
 import seedu.address.model.task.Task;
 import seedu.address.ui.view.CommandBox;
 import seedu.address.ui.view.ResultDisplay;
@@ -120,41 +118,9 @@ public class MainWindow extends UiPart<Region> {
         return resultDisplayPlaceholder;
     }
 
-//    private void setTitle(String appTitle) {
-//        primaryStage.setTitle(appTitle);
-//    }
-//
-//    /**
-//     * Sets the given image as the icon of the main window.
-//     * @param iconSource e.g. {@code "/images/help_icon.png"}
-//     */
-//    private void setIcon(String iconSource) {
-//        FxViewUtil.setStageIcon(primaryStage, iconSource);
-//    }
-
-    /**
-     * Sets the default size based on user preferences.
-     */
-    private void setWindowDefaultSize(UserPrefs prefs) {
-        primaryStage.setHeight(prefs.getGuiSettings().getWindowHeight());
-        primaryStage.setWidth(prefs.getGuiSettings().getWindowWidth());
-        if (prefs.getGuiSettings().getWindowCoordinates() != null) {
-            primaryStage.setX(prefs.getGuiSettings().getWindowCoordinates().getX());
-            primaryStage.setY(prefs.getGuiSettings().getWindowCoordinates().getY());
-        }
-    }
-
     private void setWindowMinSize() {
         primaryStage.setMinHeight(MIN_HEIGHT);
         primaryStage.setMinWidth(MIN_WIDTH);
-    }
-
-    /**
-     * Returns the current size and the position of the main Window.
-     */
-    GuiSettings getCurrentGuiSetting() {
-        return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
     }
 
 //    @FXML
