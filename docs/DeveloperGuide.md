@@ -346,12 +346,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | user | be able to mark completed tasks | differentiate between completed and uncompleted tasks
+`* *` | user working in teams | be able to import task files | add multiple tasks given by team mates
+`* *` | user working in teams | be able to export task files | transfer multiple tasks to team mates
+`*` | user who works with complex tasks | create subtasks | break a task into smaller tasks for easier management
+`*` | user who also use other task managing applications | synchronize my task list across all my applications | manage the same tasks from different applications 
 
 {More to be added}
 
@@ -359,14 +358,14 @@ Priority | As a ... | I want to ... | So that I can...
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: Mark task as complete
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User requests to list tasks
+2. KoolToDoManager shows a list of tasks
+3. User requests to mark a specific task in the list as complete
+4. KoolToDoManager updates the task <br>
 Use case ends.
 
 **Extensions**
@@ -377,8 +376,54 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. AddressBook shows an error message <br>
+> 3a1. KoolToDoManager shows an error message <br>
   Use case resumes at step 2
+  
+  #### Use case: Export task files
+
+**MSS**
+
+1. User requests to list tasks
+2. KoolToDoManager shows a list of tasks
+3. User requests to export specific tasks in the list to file
+4. KoolToDoManager requests for the desired file name and path
+5. User inputs file name and path
+6. KoolToDoManager outputs task file to the specified path <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+5a. The given file name or path is invalid
+
+> 5a1. KoolToDoManager shows an error message <br>
+  Use case resumes at step 4
+  
+  #### Use case: Create subtasks
+
+**MSS**
+
+1. User requests to list tasks
+2. KoolToDoManager shows a list of tasks
+3. User requests to specify a task as a subtask of another task
+4. KoolToDoManager requests for the index of the subtask and the parent task
+5. User inputs the indexes of subtask and parent task
+6. KoolToDoManager updates task list <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty or contains only 1 task
+
+> Use case ends
+
+5a. The given indexes are invalid
+
+> 5a1. KoolToDoManager shows an error message <br>
+  Use case resumes at step 4
 
 {More to be added}
 
