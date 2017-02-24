@@ -4,12 +4,11 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.dispatcher.CommandDispatcher;
 
-public class CommandBox extends UiComponent {
+public class CommandBox extends UiView {
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private static final String FXML = "CommandBox.fxml";
     public static final String ERROR_STYLE_CLASS = "error";
@@ -19,8 +18,8 @@ public class CommandBox extends UiComponent {
     @FXML
     private TextField commandTextField;
 
-    public CommandBox(Pane parentNode) {
-        super(FXML, parentNode);
+    public CommandBox() {
+        super(FXML);
     }
 
     @Override

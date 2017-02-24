@@ -4,14 +4,13 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.Pane;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.model.task.Task;
 
 /**
- * TaskListUiComponent to display the list of tasks
+ * TaskListUiView to display the list of tasks
  */
-public class TaskListUiComponent extends UiComponent {
+public class TaskListUiView extends UiView {
 
     private static final String FXML = "TaskListView.fxml";
 
@@ -21,8 +20,8 @@ public class TaskListUiComponent extends UiComponent {
     private ObservableList<Task> taskList;
 
 
-    public TaskListUiComponent(Pane parentNode, ObservableList<Task> taskList) {
-        super(FXML, parentNode);
+    public TaskListUiView (ObservableList<Task> taskList) {
+        super(FXML);
         this.taskList = taskList;
     }
 
@@ -47,10 +46,9 @@ public class TaskListUiComponent extends UiComponent {
                 setGraphic(null);
                 setText(null);
             } else {
-                final Pane node = new Pane();
-                setGraphic(node);
-                FxViewUtil.makeFullWidth(node);
-                new TaskUiComponent(node, task, getIndex() + 1).render();
+                final UiView taskRow = new TaskUiView(task, getIndex() + 1);
+                setGraphic(taskRow.getRoot());
+                taskRow.render();
             }
         }
     }

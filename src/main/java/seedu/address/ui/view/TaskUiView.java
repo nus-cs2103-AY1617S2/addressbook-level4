@@ -2,14 +2,13 @@ package seedu.address.ui.view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.model.task.Task;
 
 /**
  * Created by louis on 21/2/17.
  */
-public class TaskUiComponent extends UiComponent {
+public class TaskUiView extends UiView {
 
     private static final String FXML = "TaskView.fxml";
 
@@ -22,8 +21,8 @@ public class TaskUiComponent extends UiComponent {
     private int displayedIndex;
 
 
-    public TaskUiComponent (Pane parent, Task task, int displayedIndex) {
-        super(FXML, parent);
+    public TaskUiView (Task task, int displayedIndex) {
+        super(FXML);
         this.task = task;
         this.displayedIndex = displayedIndex;
     }

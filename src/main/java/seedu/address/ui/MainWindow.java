@@ -15,8 +15,8 @@ import javafx.stage.Stage;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.model.task.Task;
 import seedu.address.ui.view.CommandBox;
-import seedu.address.ui.view.ResultDisplay;
-import seedu.address.ui.view.TaskListUiComponent;
+import seedu.address.ui.view.ResultView;
+import seedu.address.ui.view.TaskListUiView;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -25,7 +25,7 @@ import seedu.address.ui.view.TaskListUiComponent;
 public class MainWindow extends UiPart<Region> {
 
     private static final String ICON = "/images/address_book_32.png";
-    private static final String FXML = "MainView.fxml";
+    private static final String FXML = "MainWindow.fxml";
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 450;
 
@@ -63,9 +63,18 @@ public class MainWindow extends UiPart<Region> {
 
     public void render(UiStore store) {
         final ObservableList<Task> tasks = store.getUiTasks();
-        new TaskListUiComponent(getTaskListPlaceholder(), tasks).render();
-        new CommandBox(getCommandBoxPlaceholder()).render();
-        new ResultDisplay(getResultDisplayPlaceholder()).render();
+
+        final TaskListUiView taskList = new TaskListUiView(tasks);
+        taskList.setParent(getTaskListPlaceholder());
+        taskList.render();
+
+        final CommandBox commandBox = new CommandBox();
+        commandBox.setParent(getCommandBoxPlaceholder());
+        commandBox.render();
+
+        final ResultView resultDisplay = new ResultView();
+        resultDisplay.setParent(getResultDisplayPlaceholder());
+        resultDisplay.render();
     }
 
     private void setAccelerators() {
@@ -86,13 +95,13 @@ public class MainWindow extends UiPart<Region> {
          *
          * According to the bug report, TextInputControl (TextField, TextArea) will
          * consume function-key events. Because CommandBox contains a TextField, and
-         * ResultDisplay contains a TextArea, thus some accelerators (e.g F1) will
+         * ResultView contains a TextArea, thus some accelerators (e.g F1) will
          * not work when the focus is in them because the key event is consumed by
          * the TextInputControl(s).
          *
          * For now, we add following event filter to capture such key events and open
          * help window purposely so to support accelerators even when focus is
-         * in CommandBox or ResultDisplay.
+         * in CommandBox or ResultView.
          */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {

@@ -9,7 +9,6 @@ import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.commons.util.FxViewUtil;
@@ -17,10 +16,10 @@ import seedu.address.commons.util.FxViewUtil;
 /**
  * A ui for the status bar that is displayed at the header of the application.
  */
-public class ResultDisplay extends UiComponent {
+public class ResultView extends UiView {
 
-    private static final Logger logger = LogsCenter.getLogger(ResultDisplay.class);
-    private static final String FXML = "ResultDisplay.fxml";
+    private static final Logger logger = LogsCenter.getLogger(ResultView.class);
+    private static final String FXML = "ResultView.fxml";
 
     private final StringProperty displayed = new SimpleStringProperty("");
 
@@ -30,8 +29,8 @@ public class ResultDisplay extends UiComponent {
     @FXML
     private TextArea resultDisplay;
 
-    public ResultDisplay(Pane parentNode) {
-        super(FXML, parentNode);
+    public ResultView () {
+        super(FXML);
     }
 
     @Override
