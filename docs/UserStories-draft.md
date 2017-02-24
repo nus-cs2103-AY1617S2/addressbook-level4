@@ -65,7 +65,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user | have my friends who use the app share their todos with me | keep track of tasks without adding them myself
 `* *` | user | receive a weekly, monthly or annually report of my done tasks and remaining todos | regularly review my efficiency
 `* *` | user | view my done tasks of up to a month | stay accountable and be proud of myself once in a while
-`* *` | user | check if event falls on a local PH | to avoid inconvenience 
+`* *` | user | check if event falls on a local PH | to avoid inconvenience
 `* *` | user | merge multiple events to become subtasks under one event | help myself make tasks more manageable
 `* *` | user | display tasks by date | clearly know what to do at which day
 `* *` | user | add periodic tasks | need not to add one task for many times
@@ -77,4 +77,3 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user | divide multiple-days task to several tasks and show them on different days | clearly see each day’s tasks
 `* *` | user | only show the days with tasks | need not to scroll through a lot of no-tasks days to find the days with tasks
 `* *` | user | keep track of that are done or undone | know what I have done and what I need to do next
- 
