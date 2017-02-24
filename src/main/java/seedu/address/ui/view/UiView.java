@@ -5,7 +5,7 @@ import seedu.address.ui.UiPart;
 
 /**
  * UiView is basic building block for the Ui
- * To show a UiView, {@link #render()} needs to be expicitly called
+ * To show a UiView, {@link #render()} needs to be explicitly called
  * Also a parent node is required through {@link #setParent(Pane)}
  */
 abstract class UiView extends UiPart<Pane> {

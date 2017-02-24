@@ -19,29 +19,30 @@ public abstract class Controller {
     protected final UiManager renderer = UiManager.getInstance();
 
     /**
-     * Given a command argument string, execute the command
+     * Given a command string, execute the command
      * and modifies the data appropriately. Also optionally
      * update the UI
-     * @param commandArgs
+     * @param command
      * @return
      */
-    public abstract CommandResult execute(String commandArgs);
+    public abstract CommandResult execute(String command);
 
     /**
-     * Given command argument strings, tokenize the string into
+     * Given command string, tokenize the string into
      * a dictionary of tokens
-     * @param commandArgs
+     * @param command
      * @return
      */
-    protected HashMap<String, String> tokenize(String commandArgs) {
+    protected HashMap<String, String> tokenize(String command) {
         return new HashMap<>();
     }
 
     /**
-     * Get signature command phrase for the Controller
+     * Check if Controller can handle this command
+     * @param command
      * @return
      */
-    public String getCommandWord() {
-        return new String("");
+    public boolean matchesCommand(String command) {
+        return true;
     }
 }
