@@ -36,9 +36,14 @@ public class ResultView extends UiView {
     @Override
     protected void viewDidMount() {
         resultDisplay.textProperty().bind(displayed);
-        FxViewUtil.makeFullWidth(resultDisplay);
-        FxViewUtil.makeFullWidth(mainPane);
         registerAsAnEventHandler(this);
+        makeFullWidth();
+    }
+
+    private void makeFullWidth() {
+        FxViewUtil.makeFullWidth(getRoot());
+        FxViewUtil.makeFullWidth(mainPane);
+        FxViewUtil.makeFullWidth(resultDisplay);
     }
 
     @Subscribe

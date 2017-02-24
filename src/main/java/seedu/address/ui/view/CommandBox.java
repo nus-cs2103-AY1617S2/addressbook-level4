@@ -24,8 +24,8 @@ public class CommandBox extends UiView {
 
     @Override
     protected void viewDidMount () {
-        FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
-        FxViewUtil.applyAnchorBoundaryParameters(commandTextField, 0.0, 0.0, 0.0, 0.0);
+        FxViewUtil.makeFullWidth(getRoot());
+        FxViewUtil.makeFullWidth(commandTextField);
     }
 
     @FXML
