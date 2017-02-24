@@ -19,7 +19,7 @@
 #### Difficulty-medium
 
 1. PowerSearch : More powerful and intelligent search. e.g. search for empty slots, near-match search, auto-complete (similar to Google search box), filters for other attributes (e.g. start time).
-2. FlexiCommands: High flexibility in command format. e.g., non-strict ordering of keywords, ability to specify aliases for commands, support for more ‘natural’ language input, multiple undo/redo, How flexible should the format be? As flexible, intuitive, and user-friendly as you can make it.
+2. FlexiCommands: High flexibility in command format. e.g., non-strict ordering of keywords, ability to specify aliases for commands, support for more 'natural' languages input, multiple undo/redo, How flexible should the format be? As flexible, intuitive, and user-friendly as you can make it.
 
 #### Difficulty-high
 
@@ -67,3 +67,14 @@ Priority | As a ... | I want to ... | So that I can...
   | user | view my done tasks of up to a month | stay accountable and be proud of myself once in a while
   | user | check if event falls on a local PH | to avoid inconvenience 
   | user | merge multiple events to become subtasks under one event | help myself make tasks more manageable
+  | user | display tasks by date | clearly know what to do at which day
+  | user | add periodic tasks | need not to add one task for many times
+  | user | have short yet clear command words | need not to try very hard to remember them
+  | user | have a shortcut for showing and hiding the main window | need not to look for it when I need it
+  | user | hide the overdue tasks into one single row and unfolded by a click | usually see today’s tasks
+  | user | search for certain task by the name or tag | locate the task easily
+  | user | show tasks of certain day | get an idea of what to do on that day
+  | user | divide multiple-days task to several tasks and show them on different days | clearly see each day’s tasks
+  | user | only show the days with tasks | need not to scroll through a lot of no-tasks days to find the days with tasks
+  | user | keep track of that are done or undone | know what I have done and what I need to do next
+ 
