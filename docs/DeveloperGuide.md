@@ -449,3 +449,21 @@ Cons:
 * ...
 * ...
 
+**Todoist**
+
+Author: Wang Zexin
+
+Pros:
+
+*Can create projects using “#”
+*Can switch to project and add task of this project
+*Can specify date using many different forms
+*Can create repeating tasks (every Sunday)
+*Can finish one occurrence of a repeating task early
+
+Cons:
+
+*Cannot add comment/description for task
+*Cannot differentiate between deleting and finishing tasks
+*Must click in order to navigate to projects
+*Cannot customize background
