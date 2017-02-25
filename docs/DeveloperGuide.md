@@ -460,7 +460,7 @@ Use case ends.
 
 1a. The given date is invalid
 
-> 1a1. Dueue shows an error message
+> 1a1. Dueue shows an error message<br>
   1a2. Dueue shows a list of allowed format for specifying dates<br>
   Use case resumes at step 1
 
@@ -515,8 +515,8 @@ Use case ends.
   
 3b. The specified list still has unfinished tasks
 
-> 3b1. Dueue prompts the user to decide whether to move the unfinished tasks to the Personal list
-  3b2. User requests to move to the Personal list or just delete
+> 3b1. Dueue prompts the user to decide whether to move the unfinished tasks to the Personal list<br>
+  3b2. User requests to move to the Personal list or just delete<br>
   3b3. Dueue moves all unfinished tasks to Personal list or delete all unfinished tasks and deletes the list<br>
   Use case ends
 
@@ -532,7 +532,7 @@ Use case ends.
 
 1a. The given n is invalid
 
-> 1a1. Dueue shows an error message <br><br>
+> 1a1. Dueue shows an error message <br>
   Use case resumes at step 1
 
 2a. The list is empty
