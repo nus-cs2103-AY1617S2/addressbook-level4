@@ -370,7 +370,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user | view the list of task by its due date| view the task due on that day
 `* *` | user | specify priority level for a task when adding the task| know which task is more urgent
 `* *` | user | undo my previous command| undo whenever I regret
-`* *` | user | delete one most recent occurrence of a repeated task | choose not to see the task for one time
+`* *` | user | delete one most recent occurrence of a repeating task | choose not to see the task for one time
 `*` | user | add in the map of the venue  | know how to get to a venue
 `*` | user | add the venue of the task | add a venue to the task
 `*` | user | delete the list and put all the tasks inside into Personal or delete all the tasks | delete the list and delete tasks by lists
@@ -410,6 +410,176 @@ Use case ends.
 
 > 3a1. AddressBook shows an error message <br>
   Use case resumes at step 2
+
+#### Use case: View tasks due today
+
+**MSS**
+
+1. User requests to list tasks due today
+2. Dueue shows a list of persons
+Use case ends.
+
+**Extensions**
+
+2a. There is not task due today
+
+> 2a1. Dueue shows message "You are done for today!"
+  Use case ends
+
+#### Use case: View tasks by list
+
+**MSS**
+
+1. User requests to display all list names
+2. Dueue shows a list of list names
+3. User requests to display all tasks of one list
+4. Dueue display the tasks of that list <br>
+Use case ends.
+
+**Extensions**
+
+3a. The given list index is invalid
+
+> 3a1. Dueue shows an error message <br>
+  Use case resumes at step 2
+
+4a. The list is empty
+
+> 4a1. Dueue shows message "This list is currently empty."
+  Use case ends
+
+#### Use case: View by due date
+
+**MSS**
+
+1. User requests to view all tasks due by a specified date
+2. Dueue shows a list of tasks due that date
+Use case ends.
+
+**Extensions**
+
+1a. The given date is invalid
+
+> 1a1. Dueue shows an error message <br>
+  1a2. Dueue shows a list of allowed format for specifying dates
+  Use case resumes at step 1
+
+2a. The list is empty
+
+> 2a1. Dueue shows message "You have no task due on that date."
+  Use case ends
+
+#### Use case: Delete one most recent occurrence of repeating task
+
+**MSS**
+
+1. User requests to list all repeating tasks
+2. Dueue shows a list of repeating tasks
+3. User requests to delete one most recent occurrence of a task in the list
+4. AddressBook deletes the occurrence <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> 2a1. Dueue shows message "You have no repeating tasks."
+  Use case ends
+
+3a. The given task index is invalid
+
+> 3a1. Dueue shows an error message <br>
+  Use case resumes at step 2
+
+#### Use case: Delete list
+
+**MSS**
+
+1. User requests to display all the list names and indices
+2. Dueue shows a list of list names and indices
+3. User requests to delete a specific list
+4. Dueue deletes the list <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> 2a1. Dueue shows message "There are no lists."
+  Use case ends
+
+3a. The given index is invalid
+
+> 3a1. Dueue shows an error message <br>
+  Use case resumes at step 2
+  
+3b. The specified list still has unfinished tasks
+
+> 3b1. Dueue prompts the user to decide whether to move the unfinished tasks to the Personal list
+  3b2. User requests to move to the Personal list or just delete
+  3b3. Dueue moves all unfinished tasks to Personal list or delete all unfinished tasks and deletes the list
+  Use case ends
+
+#### Use case: View all tasks due in the next n days
+
+**MSS**
+
+1. User requests to view all tasks due in the next n days
+2. Dueue shows a list of tasks in chronological order
+Use case ends.
+
+**Extensions**
+
+1a. The given n is invalid
+
+> 1a1. Dueue shows an error message <br>
+  Use case resumes at step 1
+
+2a. The list is empty
+
+> 2a1. Dueue shows message "You have no tasks during that period."
+  Use case ends
+
+#### Use case: See autocomplete messages when typing
+
+**MSS**
+
+1. User requests to list all tasks
+2. Dueue shows a list of tasks
+3. User types "finish" and types part of the name of a very long task name
+4. Dueue displays all the possible tasks <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given name is not part of any task name
+
+> 3a1. Dueue shows message "There is no matching task name" <br>
+  3a2. User edits the name
+  Use case resumes at step 3
+
+#### Use case: Change user interface
+
+**MSS**
+
+1. Advanced user requests to go into settings
+2. Dueue shows a menu of settings
+3. Advanced user requests to go into appearance
+4. Dueue shows a list of commands you can use in appearance
+5. Advanced user requests to change background color of UI to blue
+6. Dueue changes the background color to blue <br>
+Use case ends.
+
+**Extensions**
+
+6a. The RGB code of blue entered is invalid
+
+> 6a1. Dueue shows message "RGB code entered is invalid"
+  Use case resumes at step 5
 
 {More to be added}
 
