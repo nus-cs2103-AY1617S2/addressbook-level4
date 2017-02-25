@@ -352,6 +352,37 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | find a person by name | locate details of persons without having to go through the entire list
 `* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
 `*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | user | add a task by specifying a task name and description only | record tasks that need to be done some day
+`* * *` | user | add a task by specifying a task name only | update its description some other day
+`* * *` | user | specify task's due date and time when adding a task | record tasks that need to be done on a specific date and time
+`* * *` | user | update its parent list after adding a task | group tasks that belong to the same category
+`* * *` | user | view today's upcoming tasks | decide what do I need to finish by today
+`* * *` | user | view all tasks under a specific list | view my tasks by categories
+`* * *` | user | create a customised list other than the default lists | personalize my categories
+`* * *` | user | delete a task | remove the tasks that is no longer useful or created by mistake
+`* * *` | user | update the name of the list | modify it after creating
+`* * *` | user | view the help message for a specific feature | know how to use a command
+`* *` | user | view the finished tasks under each list | see what I have already completed
+`* *` | user | mark a task as finished | know it's done
+`* *` | user | update the name/time/due date/description of task | change its content
+`* *` | user | add a task which repeats | save the effort of creating it every week/day
+`* *` | first-time user | view the entire help messages | get to know various commands
+`* *` | user | view the list of task by its due date| view the task due on that day
+`* *` | user | specify priority level for a task when adding the task| know which task is more urgent
+`* *` | user | undo my previous command| undo whenever I regret
+`* *` | user | delete one most recent occurrence of a repeated task | choose not to see the task for one time
+`*` | user | add in the map of the venue  | know how to get to a venue
+`*` | user | add the venue of the task | add a venue to the task
+`*` | user | delete the list and put all the tasks inside into Personal or delete all the tasks | delete the list and delete tasks by lists
+`*` | user | see different colours for different priority levels | know which one is more emergent
+`*` | user | specify priority level for a task after adding the task | know which task is more urgent
+`*` | user | star a task to be my favourite (independent from list) | view it under list view
+`*` | user | view all the starred tasks using a "favourite" command | view all my favourite tasks
+`*` | user | list next n days tasks | know what to do in n days' time
+`*` | user | see the autocomplete messages when I type | know what I can type
+`*` | advanced user | change the appearance of the user interface | personalize the view
+`*` | user | view all the past due tasks | get to know what task is left undone
+`*` | user | specify its parent list when adding a task | group tasks that belong to the same category
 
 {More to be added}
 
@@ -388,6 +419,7 @@ Use case ends.
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should be 
 
 {More to be added}
 
