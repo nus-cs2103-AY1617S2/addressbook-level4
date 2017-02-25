@@ -476,7 +476,7 @@ Use case ends.
 1. User requests to list all repeating tasks
 2. Dueue shows a list of repeating tasks
 3. User requests to delete one most recent occurrence of a task in the list
-4. AddressBook deletes the occurrence <br>
+4. Dueue deletes the occurrence <br>
 Use case ends.
 
 **Extensions**
