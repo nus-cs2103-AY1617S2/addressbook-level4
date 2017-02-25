@@ -12,12 +12,12 @@ import seedu.address.dispatcher.CommandResult;
 import seedu.address.model.TodoList;
 
 /**
- * Responsible for storage-related task
+ * Responsible for redo-related task
  */
-public class UndoController extends Controller {
-    private static final String COMMAND_TEMPLATE = "^undo( (?<number>\\d+))?";
-    private static final String UNDO_TIMES = "number";
-    private static final String COMMAND_RESULT_TEMPLATE = "List undo-ed %d times";
+public class RedoController extends Controller {
+    private static final String COMMAND_TEMPLATE = "^redo( (?<number>\\d+))?";
+    private static final String REDO_TIMES = "number";
+    private static final String COMMAND_RESULT_TEMPLATE = "List redo-ed %d times";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -25,17 +25,17 @@ public class UndoController extends Controller {
         logger.info(getClass() + "will handle command");
 
         HashMap<String, String> tokens = tokenize(command);
-        String undoTimesToken = tokens.get(UNDO_TIMES);
-        int undoTimes = undoTimesToken != null ? Integer.parseInt(undoTimesToken) : 1;
+        String redoTimesToken = tokens.get(REDO_TIMES);
+        int redoTimes = redoTimesToken != null ? Integer.parseInt(redoTimesToken) : 1;
 
-        Pair<TodoList, Integer> undoResult = storage.undo(undoTimes);
-        TodoList todoList = undoResult.getKey();
-        int actualUndoTimes =  undoResult.getValue();
+        Pair<TodoList, Integer> redoResult = storage.redo(redoTimes);
+        TodoList todoList = redoResult.getKey();
+        int actualRedoTimes = redoResult.getValue();
 
         uiStore.setTask(todoList.getTasks());
         renderer.render();
 
-        return new CommandResult(String.format(COMMAND_RESULT_TEMPLATE, actualUndoTimes));
+        return new CommandResult(String.format(COMMAND_RESULT_TEMPLATE, actualRedoTimes));
     }
 
     @Override
@@ -44,7 +44,7 @@ public class UndoController extends Controller {
         final Matcher matcher = pattern.matcher(command.trim());
         matcher.find();
         final HashMap<String, String> tokens = new HashMap<>();
-        tokens.put(UNDO_TIMES, matcher.group(UNDO_TIMES));
+        tokens.put(REDO_TIMES, matcher.group(REDO_TIMES));
         return tokens;
     }
 
