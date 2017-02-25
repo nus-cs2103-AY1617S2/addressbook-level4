@@ -460,7 +460,7 @@ Use case ends.
 
 1a. The given date is invalid
 
-> 1a1. Dueue shows an error message <br>
+> 1a1. Dueue shows an error message
   1a2. Dueue shows a list of allowed format for specifying dates<br>
   Use case resumes at step 1
 
