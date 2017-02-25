@@ -416,14 +416,14 @@ Use case ends.
 **MSS**
 
 1. User requests to list tasks due today
-2. Dueue shows a list of persons
+2. Dueue shows a list of persons<br>
 Use case ends.
 
 **Extensions**
 
 2a. There is not task due today
 
-> 2a1. Dueue shows message "You are done for today!"
+> 2a1. Dueue shows message "You are done for today!"<br>
   Use case ends
 
 #### Use case: View tasks by list
@@ -445,7 +445,7 @@ Use case ends.
 
 4a. The list is empty
 
-> 4a1. Dueue shows message "This list is currently empty."
+> 4a1. Dueue shows message "This list is currently empty."<br>
   Use case ends
 
 #### Use case: View by due date
@@ -453,7 +453,7 @@ Use case ends.
 **MSS**
 
 1. User requests to view all tasks due by a specified date
-2. Dueue shows a list of tasks due that date
+2. Dueue shows a list of tasks due that date<br>
 Use case ends.
 
 **Extensions**
@@ -461,12 +461,12 @@ Use case ends.
 1a. The given date is invalid
 
 > 1a1. Dueue shows an error message <br>
-  1a2. Dueue shows a list of allowed format for specifying dates
+  1a2. Dueue shows a list of allowed format for specifying dates<br>
   Use case resumes at step 1
 
 2a. The list is empty
 
-> 2a1. Dueue shows message "You have no task due on that date."
+> 2a1. Dueue shows message "You have no task due on that date."<br>
   Use case ends
 
 #### Use case: Delete one most recent occurrence of repeating task
@@ -483,7 +483,7 @@ Use case ends.
 
 2a. The list is empty
 
-> 2a1. Dueue shows message "You have no repeating tasks."
+> 2a1. Dueue shows message "You have no repeating tasks."<br>
   Use case ends
 
 3a. The given task index is invalid
@@ -505,7 +505,7 @@ Use case ends.
 
 2a. The list is empty
 
-> 2a1. Dueue shows message "There are no lists."
+> 2a1. Dueue shows message "There are no lists."<br>
   Use case ends
 
 3a. The given index is invalid
@@ -517,7 +517,7 @@ Use case ends.
 
 > 3b1. Dueue prompts the user to decide whether to move the unfinished tasks to the Personal list
   3b2. User requests to move to the Personal list or just delete
-  3b3. Dueue moves all unfinished tasks to Personal list or delete all unfinished tasks and deletes the list
+  3b3. Dueue moves all unfinished tasks to Personal list or delete all unfinished tasks and deletes the list<br>
   Use case ends
 
 #### Use case: View all tasks due in the next n days
@@ -525,19 +525,19 @@ Use case ends.
 **MSS**
 
 1. User requests to view all tasks due in the next n days
-2. Dueue shows a list of tasks in chronological order
+2. Dueue shows a list of tasks in chronological order<br>
 Use case ends.
 
 **Extensions**
 
 1a. The given n is invalid
 
-> 1a1. Dueue shows an error message <br>
+> 1a1. Dueue shows an error message <br><br>
   Use case resumes at step 1
 
 2a. The list is empty
 
-> 2a1. Dueue shows message "You have no tasks during that period."
+> 2a1. Dueue shows message "You have no tasks during that period."<br>
   Use case ends
 
 #### Use case: See autocomplete messages when typing
@@ -559,7 +559,7 @@ Use case ends.
 3a. The given name is not part of any task name
 
 > 3a1. Dueue shows message "There is no matching task name" <br>
-  3a2. User edits the name
+  3a2. User edits the name<br>
   Use case resumes at step 3
 
 #### Use case: Change user interface
@@ -578,7 +578,7 @@ Use case ends.
 
 6a. The RGB code of blue entered is invalid
 
-> 6a1. Dueue shows message "RGB code entered is invalid"
+> 6a1. Dueue shows message "RGB code entered is invalid"<br>
   Use case resumes at step 5
 
 {More to be added}
