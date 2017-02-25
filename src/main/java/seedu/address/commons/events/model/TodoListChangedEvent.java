@@ -14,6 +14,6 @@ public class TodoListChangedEvent extends BaseEvent {
 
     @Override
     public String toString() {
-        return "number of tasks " + data.getUiTasks().size();
+        return "number of tasks " + data.getTasks().size();
     }
 }

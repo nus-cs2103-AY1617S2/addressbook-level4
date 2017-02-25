@@ -12,5 +12,7 @@ public interface Storage {
 
     Optional<TodoList> load();
 
-    boolean move(TodoList todoList, String path);
+    boolean move(String path);
+
+    String getStoragePath();
 }

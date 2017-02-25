@@ -8,6 +8,7 @@ import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.controller.AppController;
 import seedu.address.controller.Controller;
+import seedu.address.controller.StoreController;
 import seedu.address.controller.TaskController;
 
 /**
@@ -27,7 +28,6 @@ public class CommandDispatcher {
     }
 
     private final EventsCenter eventsCenter = EventsCenter.getInstance();
-    private final Collection<Controller> controllerCollection = getAllControllers();
 
     private CommandDispatcher() {}
 
@@ -38,7 +38,7 @@ public class CommandDispatcher {
     }
 
     private Controller getBestFitController(String command) {
-        return controllerCollection
+        return getAllControllers()
                 .stream()
                 .filter(controller -> controller.matchesCommand(command))
                 .findFirst()
@@ -48,6 +48,7 @@ public class CommandDispatcher {
     private Collection<Controller> getAllControllers() {
         return new ArrayList<>(Arrays.asList(new Controller[] {
             new TaskController(),
+            new StoreController(),
             new AppController()
         }));
     }

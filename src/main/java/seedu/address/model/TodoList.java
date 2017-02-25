@@ -3,7 +3,6 @@ package seedu.address.model;
 import java.util.ArrayList;
 
 import seedu.address.model.task.Task;
-import seedu.address.ui.UiStore;
 
 /**
  * TodoList Model

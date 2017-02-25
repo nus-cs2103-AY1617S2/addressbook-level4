@@ -1,10 +1,10 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.task.Task;
-
-import java.util.ArrayList;
 
 public class UiStore {
     private static UiStore instance;
