@@ -15,4 +15,8 @@ public interface Storage {
     boolean move(String path);
 
     String getStoragePath();
+
+    Optional<TodoList> undo(int times);
+
+    Optional<TodoList> redo(int times);
 }

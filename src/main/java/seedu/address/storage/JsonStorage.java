@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import seedu.address.commons.util.FileUtil;
@@ -15,6 +16,8 @@ public class JsonStorage implements Storage {
     private static JsonStorage instance;
 
     private String storagePath = "data/todolist.json";
+    private ArrayList<String> undoHistory = new ArrayList<>();
+    private int redoIndex = 0;
 
     public static JsonStorage getInstance() {
         if (instance == null) {
@@ -25,9 +28,9 @@ public class JsonStorage implements Storage {
 
     public Optional<TodoList> load() {
         try {
-            final String jsonString = FileUtil.readFromFile(getStorageFile());
+            String jsonString = getDataJson().get();
             return Optional.of(JsonUtil.fromJsonString(jsonString, TodoList.class));
-        } catch (IOException e) {
+        } catch (Exception e) {
             return Optional.empty();
         }
     }
@@ -59,10 +62,55 @@ public class JsonStorage implements Storage {
     private boolean save(TodoList todoList, String storagePath) {
         try {
             final String jsonString = JsonUtil.toJsonString(todoList);
+            Optional<String> previousTodoJson = getDataJson();
             FileUtil.writeToFile(FileUtil.getFile(storagePath), jsonString);
+            if (previousTodoJson.isPresent()) {
+                undoHistory.add(previousTodoJson.get());
+            }
+            clearRedo();
             return true;
         } catch (IOException e) {
             return false;
+        }
+    }
+
+    /**
+     * Assume that the serialized history in undoHistory & redoHistory are reliable
+     * @param times
+     * @return
+     */
+    public Optional<TodoList> undo(int times) {
+        int undoHistoryIndex = Math.max(0, undoHistory.size() - times);
+        return getUndoedTodoList(undoHistoryIndex);
+    }
+
+    public Optional<TodoList> redo(int times) {
+        int undoHistoryIndex = Math.min(undoHistory.size() + redoIndex + times, undoHistory.size());
+        return getUndoedTodoList(undoHistoryIndex);
+    }
+
+    private void clearRedo() {
+        while (redoIndex < 0) {
+            undoHistory.remove(undoHistory.size() - 1);
+            redoIndex += 1;
+        }
+    }
+
+    private Optional<TodoList> getUndoedTodoList(int undoHistoryIndex) {
+        try {
+            TodoList todoList = JsonUtil.fromJsonString(undoHistory.get(undoHistoryIndex), TodoList.class);
+            redoIndex = undoHistoryIndex - undoHistory.size();
+            return Optional.of(todoList);
+        } catch (IOException e) {
+            return Optional.empty();
+        }
+    }
+
+    private Optional<String> getDataJson() {
+        try {
+            return Optional.of(FileUtil.readFromFile(getStorageFile()));
+        } catch (IOException e) {
+            return Optional.empty();
         }
     }
 
