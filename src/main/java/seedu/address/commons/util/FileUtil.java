@@ -89,6 +89,17 @@ public class FileUtil {
     }
 
     /**
+     * Converts a string to a platform-specific file path
+     * @param pathWithForwardSlash A String representing a file path but using '/' as the separator
+     * @return {@code pathWithForwardSlash} but '/' replaced with {@code File.separator}
+     */
+    public static String getPath(String pathWithForwardSlash) {
+        assert pathWithForwardSlash != null;
+        assert pathWithForwardSlash.contains("/");
+        return pathWithForwardSlash.replace("/", File.separator);
+    }
+
+    /**
      * Converts a string to a file
      * @param path A String representing a file path
      * @return a new File
