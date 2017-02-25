@@ -1,6 +1,7 @@
 package seedu.address.controller;
 
 import java.util.HashMap;
+import java.util.Optional;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -9,6 +10,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.dispatcher.CommandResult;
 import seedu.address.model.TodoList;
 import seedu.address.model.task.Task;
+import seedu.address.ui.UiStore;
 
 /**
  * UpdateTaskController is responsible for updating a task
@@ -32,35 +34,46 @@ public class TaskController extends Controller {
     private static final String DELETE_TASK_RESULT = "Task deleted";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
-    private final TodoList todoList = TodoList.getInstance();
 
     public CommandResult execute(String command) {
         logger.info(getClass().getName() + "will handle command");
+        Optional<TodoList> optionalTodoList = storage.load();
+        CommandResult commandResult = new CommandResult("");
 
+        if (!optionalTodoList.isPresent()) {
+            return commandResult;
+        }
+
+        final TodoList todoList = optionalTodoList.get();
         final HashMap<String, String> tokens = tokenize(command);
 
         final String taskCommand = tokens.get(TASK_COMMAND);
         final String description = tokens.get(TASK_DESCRIPTION);
         final String indexToken = tokens.get(TASK_VIEW_INDEX);
         final int index = indexToken != null ? Integer.parseInt(indexToken) - 1 : -1;
-        final Task task = indexToken != null ? todoList.getLastViewedTasks().get(index) : null;
+        final Task task = indexToken != null
+                ? UiStore.getInstance().getTasks().get(index)
+                : null;
 
-        CommandResult commandResult = new CommandResult("");
         switch (taskCommand) {
         case ADD_TASK_COMMAND:
-            commandResult = add(description);
+            commandResult = add(todoList, description);
             break;
         case UPDATE_TASK_COMMAND:
-            commandResult = update(task, description);
+            commandResult = update(todoList, task, description);
             break;
         case DELETE_TASK_COMMAND:
-            commandResult = delete(task);
+            commandResult = delete(todoList, task);
             break;
         default:
             break;
         }
 
-        renderer.render(todoList);
+        if (storage.save(todoList)) {
+            uiStore.setTask(todoList.getTasks());
+            renderer.render();
+        }
+
 
         return commandResult;
     }
@@ -82,17 +95,17 @@ public class TaskController extends Controller {
         return command.matches(COMMAND_TEMPLATE);
     }
 
-    private CommandResult update(Task task, String description) {
+    private CommandResult update(TodoList todoList, Task task, String description) {
         todoList.updateTask(task, description);
         return new CommandResult(UPDATE_TASK_RESULT);
     }
 
-    private CommandResult add(String description) {
+    private CommandResult add(TodoList todoList, String description) {
         todoList.addTask(new Task(description));
         return new CommandResult(ADD_TASK_RESULT);
     }
 
-    private CommandResult delete(Task task) {
+    private CommandResult delete(TodoList todoList, Task task) {
         todoList.removeTask(task);
         return new CommandResult(DELETE_TASK_RESULT);
     }

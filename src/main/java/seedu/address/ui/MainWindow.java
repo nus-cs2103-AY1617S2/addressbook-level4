@@ -61,7 +61,8 @@ public class MainWindow extends UiPart<Region> {
         return primaryStage;
     }
 
-    public void render(UiStore store) {
+    public void render() {
+        UiStore store = UiStore.getInstance();
         final ObservableList<Task> tasks = store.getUiTasks();
 
         final TaskListUiView taskList = new TaskListUiView(tasks);

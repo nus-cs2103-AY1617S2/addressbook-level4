@@ -3,7 +3,10 @@ package seedu.address.controller;
 import java.util.HashMap;
 
 import seedu.address.dispatcher.CommandResult;
+import seedu.address.storage.JsonStorage;
+import seedu.address.storage.Storage;
 import seedu.address.ui.UiManager;
+import seedu.address.ui.UiStore;
 
 
 /**
@@ -14,9 +17,19 @@ import seedu.address.ui.UiManager;
 public abstract class Controller {
 
     /**
+     * Persistent storage to interact with the models
+     */
+    protected final Storage storage = JsonStorage.getInstance();
+
+    /**
      * Default renderer used to update the UI
      */
     protected final UiManager renderer = UiManager.getInstance();
+
+    /**
+     * UiStore to store data to be used by Ui
+     */
+    protected final UiStore uiStore = UiStore.getInstance();
 
     /**
      * Given a command string, execute the command

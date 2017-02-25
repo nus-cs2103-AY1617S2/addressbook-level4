@@ -23,7 +23,7 @@ public class UiManager extends ComponentManager implements Ui {
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
     private static UiManager instance;
 
-    private MainWindow mainView;
+    private MainWindow mainWindow;
     private Config config;
 
     public static UiManager getInstance() {
@@ -43,10 +43,9 @@ public class UiManager extends ComponentManager implements Ui {
         primaryStage.setTitle(config.getAppTitle());
 
         try {
-            final UiStore store = new InitialUiStore();
-            mainView = new MainWindow(primaryStage);
-            mainView.render(store);
-            mainView.show();
+            mainWindow = new MainWindow(primaryStage);
+            mainWindow.render();
+            mainWindow.show();
             CommandDispatcher.getInstance().dispatch("");
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
@@ -56,15 +55,15 @@ public class UiManager extends ComponentManager implements Ui {
 
     @Override
     public void stop() {
-        mainView.hide();
+        mainWindow.hide();
     }
 
     public void init(Config config) {
         this.config = config;
     }
 
-    public void render(UiStore store) {
-        mainView.render(store);
+    public void render() {
+        mainWindow.render();
     }
 
     private void showFileOperationAlertAndWait(String description, String details, Throwable cause) {
@@ -73,7 +72,7 @@ public class UiManager extends ComponentManager implements Ui {
     }
 
     void showAlertDialogAndWait(Alert.AlertType type, String title, String headerText, String contentText) {
-        showAlertDialogAndWait(mainView.getPrimaryStage(), type, title, headerText, contentText);
+        showAlertDialogAndWait(mainWindow.getPrimaryStage(), type, title, headerText, contentText);
     }
 
     private static void showAlertDialogAndWait(Stage owner, AlertType type, String title, String headerText,
@@ -105,6 +104,6 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-//        mainView.handleHelp();
+//        mainWindow.handleHelp();
     }
 }
