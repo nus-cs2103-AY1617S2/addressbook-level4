@@ -351,10 +351,16 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | edit task | update my tasks accordingly
 `* * *` | user | view task | recall the details of the task that I have input earlier
 `* * *` | user | be able to mark completed tasks | differentiate between completed and uncompleted tasks
+`* * *` | user | be able to undo action | undo unwanted command
+`* * *` | user | be able to redo action | restore previous command
 `* *` | user working in teams | be able to import task files | add multiple tasks given by team mates
 `* *` | user working in teams | be able to export task files | transfer multiple tasks to team mates
 `* *` | user with many tasks | list all tasks | recall all the tasks I have so far
 `* *` | user with many tasks | list all urgent tasks | recall all the important tasks to be completed
+`* *` | user with many tasks | list all tasks by alphabetical order | recall all the tasks by alphabetical order
+`* *` | user with many tasks | list all tasks by date | recall all tasks by date
+`* *` | user with many tasks | list all tasks by priority | recall all the tasks by priority
+`* *` | user with many tasks | list all tasks by tag | recall all the tasks with a particular tag
 `*` | user who works with complex tasks | create subtasks | break a task into smaller tasks for easier management
 `*` | user who also use other task managing applications | synchronize my task list across all my applications | manage the same tasks from different applications 
 
