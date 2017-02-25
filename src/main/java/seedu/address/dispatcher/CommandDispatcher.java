@@ -8,8 +8,10 @@ import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.controller.AppController;
 import seedu.address.controller.Controller;
+import seedu.address.controller.RedoController;
 import seedu.address.controller.StoreController;
 import seedu.address.controller.TaskController;
+import seedu.address.controller.UndoController;
 
 /**
  * CommandDispatcher is the bridge between the UI input & Controller
@@ -49,6 +51,8 @@ public class CommandDispatcher {
         return new ArrayList<>(Arrays.asList(new Controller[] {
             new TaskController(),
             new StoreController(),
+            new UndoController(),
+            new RedoController(),
             new AppController()
         }));
     }
