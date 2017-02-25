@@ -3,7 +3,6 @@ package seedu.address.storage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Optional;
 
 import javafx.util.Pair;

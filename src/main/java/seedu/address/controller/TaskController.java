@@ -1,7 +1,6 @@
 package seedu.address.controller;
 
 import java.util.HashMap;
-import java.util.Optional;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
