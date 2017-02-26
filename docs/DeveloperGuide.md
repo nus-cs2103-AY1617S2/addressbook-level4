@@ -78,9 +78,9 @@ By : `Team ToLuist`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nb
 ### 2.1. Architecture
 
 <img src="images/Architecture.png" width="600"><br>
-_Figure 2.1.1 : Architecture Diagram_
+_Figure 2.1 : Architecture Diagram_
 
-The **_Architecture Diagram_** given above explains the high-level design of the App.
+The **_Architecture Diagram_** given above explains the high-level design of ToLuist.
 Given below is a quick overview of each component.
 
 > Tip: The `.pptx` files used to create diagrams in this document can be found in the [diagrams](diagrams/) folder.
@@ -101,19 +101,16 @@ Two of those classes play important roles at the architecture level.
 The rest of the App consists of four components.
 
 * [**`UI`**](#ui-component) : The UI of the App.
-* [**`Logic`**](#logic-component) : The command executor.
+* [**`Dispatcher`**](): Invokes the suitable command executor. 
+* [**`Controller`**](#logic-component) : The command executor.
 * [**`Model`**](#model-component) : Holds the data of the App in-memory.
 * [**`Storage`**](#storage-component) : Reads data from, and writes data to, the hard disk.
 
-Each of the four components
+Each of the five components defines its _API_ in an `interface` with the same name as the Component.
 
-* Defines its _API_ in an `interface` with the same name as the Component.
-* Exposes its functionality using a `{Component Name}Manager` class.
+Our architecture follows the MVC Pattern: UI displays data and interacts with the user; Commands are passed through Dispatcher and routed to a suitable Controller, Controller receives requests from the Dispatcher and acts as the bridge between UI and Model; Model & Storage stores and maintain the data. A lot of inspirations come from MVC architectures used by web MVC frameworks such as [Ruby on Rails](http://paulhan221.tumblr.com/post/114731592051/rails-http-requests-for-mvc) and [Laravel](http://laravelbook.com/laravel-architecture/).
 
-For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java`
-interface and exposes its functionality using the `LogicManager.java` class.<br>
-<img src="images/LogicClassDiagram.png" width="800"><br>
-_Figure 2.1.2 : Class Diagram of the Logic Component_
+The sections below give more details of each component.
 
 #### Events-Driven nature of the design
 
@@ -137,30 +134,56 @@ _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 
 The sections below give more details of each component.
 
-### 2.2. UI component
-
-Author: Alice Bee
+### 2.1. UI component
 
 <img src="images/UiClassDiagram.png" width="800"><br>
-_Figure 2.2.1 : Structure of the UI Component_
+_Figure 2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
-`StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+**JavaFX** is used for the UI. `MainWindow` which holds all the views that make up the different parts of the UI. These views inherit from the abstract `UiView` class, while `MainWindow` itself inherits from the abstract `UiPart` class.
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
- that are in the `src/main/resources/view` folder.<br>
- For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
- [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
+#### 2.1.1. UiView
 
-The `UI` component,
+`UiView` is the building block for the UI. Each `UiView` should preferably be responsible for only one UI functionality.
 
-* Executes user commands using the `Logic` component.
-* Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
-* Responds to events raised from various parts of the App and updates the UI accordingly.
+Some of the key properties of a `UiView` are described below
 
-### 2.3. Logic component
+####Associated with a FXML ####
+Each UIView class is associated with a FXML file. For example, `TaskView` is associated with `TaskView.fxml` file. The corresponding FXML file will be loaded automatically when a new `UiView` instance is created.
+
+#### Attachable to one single parent node ####
+Each `UiView` can be attached to a parent node. At any point in time, there should always be a maximum of one parent. The parent node must be an object of `Pane` class or any of its subclasses.
+
+#### Idempotent rendering ####
+
+After being attached to a parent node, a `UiView` can be rendered by calling its public method `.render()`. Each render call is guaranteed to be idempotent, i.e. subsequent calls to `render()` will render the same UI, as long as the data do not change.
+
+#### Able to load subviews
+
+Each `UiView` has a mini lifecycle. `viewDidLoad` is run after `render` is called. There are a few uses of `viewDidLoad`:
+
+- Control UI-specific properties which cannot be done in FXML
+- Set UI component values (e.g. using `setText` on an FXML `Text` object)
+- Attach subviews and propagate the chain
+
+#### 2.1.2. UiStore ####
+
+`UiStore` holds the data to be used by the `UI`. An example would be the task data to be displayed to the user.
+
+#### 2.1.3. Reactive Data Flow ####
+
+To keep the UI predictable and to reduce the number of lines of codes used to dictate how the UI should change based on state changes, reactive programming is used. How the UI should be rendered can be simply declared based on the states held by the `UiStore`.
+
+The diagram below shows how the UI reacts when an add command is called. The UI simply needs to display all the tasks available in the UiStore, without knowing what is the exact change
+
+<img src="images/UiSequence.png" width="600"><br>
+_Figure 2.1.3 : Interactions Inside the UI for the `add study` Command_
+
+The idea of reactive data flow is borrowed from modern Javascript front-end frameworks such as React.js and Vue.js.
+
+
+### 2.2. Controller component:
 
 Author: Bernard Choo
 
