@@ -424,7 +424,7 @@ Use case ends.
 2a. There is not task due today
 
 > 2a1. Dueue shows message "You are done for today!"<br>
-  Use case ends
+  Use case ends.
 
 #### Use case: View tasks by list
 
@@ -446,7 +446,72 @@ Use case ends.
 4a. The list is empty
 
 > 4a1. Dueue shows message "This list is currently empty."<br>
-  Use case ends
+  Use case ends.
+
+#### Use case: Create a customized list
+
+**MSS**
+
+1. User requests to create a new list
+2. Dueue asks for the list name
+3. User type in the name of the new list
+4. Dueue displays the new customized list with new name <br>
+Use case ends.
+
+**Extensions**
+
+3a. The name is already used for some other list 
+
+> 3a1. Dueue shows the message "This name is already used."<br>
+  Use case resumes at step 2
+
+#### Use case: Update list name
+
+**MSS**
+
+1. User requests to display all list names
+2. Dueue shows a list of list name
+3. User requests to change name of a specific list
+4. Dueue asks for a new name
+5. User types in the new name
+6. Dueue displays the list with new name <br>
+
+**Extensions**
+
+3a. The given index is invalid
+
+> 3a1. Dueue shows an error message <br>
+  Use case resumes at step 2
+
+5a. The name is already used for some other list 
+
+> 5a1. Dueue shows the message "This name is already used."<br>
+  Use case resumes at step 4
+
+#### Use case: View help message
+
+1. User requests to view the help message
+2. Dueue displays the help message <br>
+Use case ends.
+
+#### Use case: View finished tasks
+
+1. User requests to display all lists name with finished tasks
+2. Dueue displays a list of lists
+3. User requests to view the finished tasks under specific list
+4. Dueue displays the finished tasks under this list <br>
+
+**Extensions**
+
+2a. The list is empty
+
+> 2a1. Dueue shows the message "There is no finished task."<br>
+  Use case ends.
+
+3a. The given index is invalid
+
+> 3a1. Dueue shows an error message <br>
+  Use case resumes at step 2
 
 #### Use case: View by due date
 
@@ -467,7 +532,7 @@ Use case ends.
 2a. The list is empty
 
 > 2a1. Dueue shows message "You have no task due on that date."<br>
-  Use case ends
+  Use case ends.
 
 #### Use case: Delete one most recent occurrence of repeating task
 
@@ -484,7 +549,7 @@ Use case ends.
 2a. The list is empty
 
 > 2a1. Dueue shows message "You have no repeating tasks."<br>
-  Use case ends
+  Use case ends.
 
 3a. The given task index is invalid
 
@@ -506,7 +571,7 @@ Use case ends.
 2a. The list is empty
 
 > 2a1. Dueue shows message "There are no lists."<br>
-  Use case ends
+  Use case ends.
 
 3a. The given index is invalid
 
@@ -518,8 +583,80 @@ Use case ends.
 > 3b1. Dueue prompts the user to decide whether to move the unfinished tasks to the Personal list<br>
   3b2. User requests to move to the Personal list or just delete<br>
   3b3. Dueue moves all unfinished tasks to Personal list or delete all unfinished tasks and deletes the list<br>
-  Use case ends
+  Use case ends.
 
+#### Use case: View different colors for different priority levels
+
+**MSS**
+
+1. User requests to display different colors for different priority levels
+2. Dueue displays priority levels with different colors <br>
+Use case ends.
+
+#### Use case: View the same colors for different priority levels
+
+**MSS**
+
+1. User requests not to display different colors for diffrent priority levels.
+2. Dueue displays priority levels with same color <br>
+Use case ends.
+
+#### Use case: Specify priority level for a task
+
+**MSS**
+
+1. User requests to change priority of a certain task
+2. Dueue asks for new priority level
+3. User types in the new level
+4. Dueue display this tasks with new level <br>
+Use case ends.
+
+**Extensions**
+
+1a. The given index is invalid
+
+> 1a1. Dueue shows an error message <br>
+  Use case resumes at step 1
+
+3a. The priority level is invalid
+
+> 3a1. Dueue shows an error message <br>
+  Use case resums at step 2
+
+#### Use case: "Star" a task to be favorite
+
+**MSS**
+
+1. User requests to "star" a certain task
+2. Dueue displays the task with star <br>
+Use case ends.
+
+**Extension**
+
+1a. The given index is invalid
+
+> 1a1. Dueue shows an error message <br>
+  Use case resumes at step 1
+
+1b. The task is already "starred"
+
+> 1b1. Dueue shows an error message "This task is already starred." <br>
+  Use case ends.
+
+#### Use case: View all starred tasks
+
+**MSS**
+
+1. User requests to view all starred tasks
+2. Dueue displays all tasks being starred <br>
+Use case ends
+
+**Extension**
+
+1a. There is no task being starred.
+
+> 1a1. Dueue displays an error message "There is no task being starred." <br>
+  Use case ends.
 #### Use case: View all tasks due in the next n days
 
 **MSS**
