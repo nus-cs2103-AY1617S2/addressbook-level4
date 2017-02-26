@@ -348,7 +348,7 @@ Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
 `* * *` | user | add a new task with completion date | remind myself of things I have to do and the deadlines to meet
-`* * *` | user | add a new recurring task | prevent the need of keying the same cyclical task every period
+`* * *` | user | add a new [recurring task](#recurring-task) | prevent the need of keying the same cyclical task every period
 `* * *` | user | see all tasks | have an overview of all the things I need to do and decide what I should do first
 `* * *` | user | update a task | change entries that are errorneous or outdated
 `* * *` | user | mark a task as completed/incompleted | focus on the tasks I have still not cleared
@@ -363,7 +363,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | see my command history | to identify what I have to recover if I accidentally performed some wrong commands.
 `* * *` | user | change my storage file path | decide where I want to save my files for my own use
 `* *` | user with many tasks | sort task by priority level then by end date | figure out which task should be cleared first
-`* *` | user | add an alias for a command | customise my own keyboard shortcuts to improve my efficiency
+`* *` | user | add an [alias](#alias) for a command | customise my own keyboard shortcuts to improve my efficiency
 `* *` | user | update an alias for a command | change entries that are errorneous or outdated
 `* *` | user | view all alias for commands | review the alias in case I forget what I set for them
 
@@ -413,9 +413,13 @@ Use case ends.
 
 > Windows, Linux, Unix, OS-X
 
-##### Private contact detail
+##### Recurring task
 
-> A contact detail that is not meant to be shared with others
+> A task that has to be done every fixed length of time.
+
+##### Alias
+
+> An alternative name to a given command.
 
 ## Appendix E : Product Survey
 
