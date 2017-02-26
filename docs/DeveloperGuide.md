@@ -774,3 +774,40 @@ Cons:
 * Cannot differentiate between deleting and finishing tasks
 * Must click in order to navigate to projects
 * Cannot customize background
+
+**Trello**
+
+Author: Mou Ziyang
+
+Pros:
+
+* Has clear 2 levels of hierarchy (Board; List)
+* Has the option to archive and delete for finished tasks
+* Very flexible layout, every object is dragable
+* Can incorporate with many other softwares
+* Can share with teammates
+* Can attach relative files and images to a task
+
+Cons:
+
+* Hard to use without watching tutorial
+* Cannot create repeated tasks
+* Cannot customized background
+* Cannot add priority for tasks (Have to sort tasks manually)
+
+**Mac Calender**
+
+Author: Mou Ziyang
+
+Pros:
+
+* Can customize notification
+* Can add repeated tasks
+* Can delete one occurence of the task
+* Can mark festival and holiday out
+
+Cons:
+* "Bar graph schedule view" is not very useful
+* Can only sort task in chronological order
+* Ambiguous hierarchy
+* Do not have importance level
