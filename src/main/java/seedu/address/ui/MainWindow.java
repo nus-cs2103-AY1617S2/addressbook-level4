@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -10,13 +11,12 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import seedu.address.commons.core.Config;
-import seedu.address.commons.core.GuiSettings;
+
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
-import seedu.address.commons.util.FxViewUtil;
-import seedu.address.logic.Logic;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.task.Task;
+import seedu.address.ui.view.CommandBox;
+import seedu.address.ui.view.ResultView;
+import seedu.address.ui.view.TaskListUiView;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -30,15 +30,6 @@ public class MainWindow extends UiPart<Region> {
     private static final int MIN_WIDTH = 450;
 
     private Stage primaryStage;
-    private Logic logic;
-
-    // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
-    private PersonListPanel personListPanel;
-    private Config config;
-
-    @FXML
-    private AnchorPane browserPlaceholder;
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
@@ -47,35 +38,44 @@ public class MainWindow extends UiPart<Region> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private AnchorPane personListPanelPlaceholder;
+    private AnchorPane taskListPlaceholder;
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
 
-    @FXML
-    private AnchorPane statusbarPlaceholder;
-
-    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
+    public MainWindow (Stage primaryStage) {
         super(FXML);
 
         // Set dependencies
         this.primaryStage = primaryStage;
-        this.logic = logic;
-        this.config = config;
 
         // Configure the UI
-        setTitle(config.getAppTitle());
-        setIcon(ICON);
         setWindowMinSize();
-        setWindowDefaultSize(prefs);
+//        setWindowDefaultSize(prefs);
         Scene scene = new Scene(getRoot());
         primaryStage.setScene(scene);
-
         setAccelerators();
     }
 
     public Stage getPrimaryStage() {
         return primaryStage;
+    }
+
+    public void render() {
+        UiStore store = UiStore.getInstance();
+        final ObservableList<Task> tasks = store.getUiTasks();
+
+        final TaskListUiView taskList = new TaskListUiView(tasks);
+        taskList.setParent(getTaskListPlaceholder());
+        taskList.render();
+
+        final CommandBox commandBox = new CommandBox();
+        commandBox.setParent(getCommandBoxPlaceholder());
+        commandBox.render();
+
+        final ResultView resultDisplay = new ResultView();
+        resultDisplay.setParent(getResultDisplayPlaceholder());
+        resultDisplay.render();
     }
 
     private void setAccelerators() {
@@ -96,13 +96,13 @@ public class MainWindow extends UiPart<Region> {
          *
          * According to the bug report, TextInputControl (TextField, TextArea) will
          * consume function-key events. Because CommandBox contains a TextField, and
-         * ResultDisplay contains a TextArea, thus some accelerators (e.g F1) will
+         * ResultView contains a TextArea, thus some accelerators (e.g F1) will
          * not work when the focus is in them because the key event is consumed by
          * the TextInputControl(s).
          *
          * For now, we add following event filter to capture such key events and open
          * help window purposely so to support accelerators even when focus is
-         * in CommandBox or ResultDisplay.
+         * in CommandBox or ResultView.
          */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
@@ -112,56 +112,20 @@ public class MainWindow extends UiPart<Region> {
         });
     }
 
-    void fillInnerParts() {
-        browserPanel = new BrowserPanel(browserPlaceholder);
-        personListPanel = new PersonListPanel(getPersonListPlaceholder(), logic.getFilteredPersonList());
-        new ResultDisplay(getResultDisplayPlaceholder());
-        new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
-        new CommandBox(getCommandBoxPlaceholder(), logic);
+    void hide() {
+        primaryStage.hide();
+    }
+
+    private AnchorPane getTaskListPlaceholder() {
+        return taskListPlaceholder;
     }
 
     private AnchorPane getCommandBoxPlaceholder() {
         return commandBoxPlaceholder;
     }
 
-    private AnchorPane getStatusbarPlaceholder() {
-        return statusbarPlaceholder;
-    }
-
     private AnchorPane getResultDisplayPlaceholder() {
         return resultDisplayPlaceholder;
-    }
-
-    private AnchorPane getPersonListPlaceholder() {
-        return personListPanelPlaceholder;
-    }
-
-    void hide() {
-        primaryStage.hide();
-    }
-
-    private void setTitle(String appTitle) {
-        primaryStage.setTitle(appTitle);
-    }
-
-    /**
-     * Sets the given image as the icon of the main window.
-     * @param iconSource e.g. {@code "/images/help_icon.png"}
-     */
-    private void setIcon(String iconSource) {
-        FxViewUtil.setStageIcon(primaryStage, iconSource);
-    }
-
-    /**
-     * Sets the default size based on user preferences.
-     */
-    private void setWindowDefaultSize(UserPrefs prefs) {
-        primaryStage.setHeight(prefs.getGuiSettings().getWindowHeight());
-        primaryStage.setWidth(prefs.getGuiSettings().getWindowWidth());
-        if (prefs.getGuiSettings().getWindowCoordinates() != null) {
-            primaryStage.setX(prefs.getGuiSettings().getWindowCoordinates().getX());
-            primaryStage.setY(prefs.getGuiSettings().getWindowCoordinates().getY());
-        }
     }
 
     private void setWindowMinSize() {
@@ -169,22 +133,24 @@ public class MainWindow extends UiPart<Region> {
         primaryStage.setMinWidth(MIN_WIDTH);
     }
 
-    /**
-     * Returns the current size and the position of the main Window.
-     */
-    GuiSettings getCurrentGuiSetting() {
-        return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
-    }
-
-    @FXML
-    public void handleHelp() {
-        HelpWindow helpWindow = new HelpWindow();
-        helpWindow.show();
-    }
+//    @FXML
+//    public void handleHelp() {
+//        HelpWindow helpWindow = new HelpWindow();
+//        helpWindow.show();
+//    }
 
     void show() {
         primaryStage.show();
+    }
+
+    /** ================ ACTION HANDLERS ================== **/
+
+    @FXML
+    public void handleHelp() {
+    }
+
+    @FXML
+    public void handleMenu() {
     }
 
     /**
@@ -194,17 +160,4 @@ public class MainWindow extends UiPart<Region> {
     private void handleExit() {
         raise(new ExitAppRequestEvent());
     }
-
-    public PersonListPanel getPersonListPanel() {
-        return this.personListPanel;
-    }
-
-    void loadPersonPage(ReadOnlyPerson person) {
-        browserPanel.loadPersonPage(person);
-    }
-
-    void releaseResources() {
-        browserPanel.freeResources();
-    }
-
 }

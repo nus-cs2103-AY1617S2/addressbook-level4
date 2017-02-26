@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 import seedu.address.TestApp;
 
 /**
- * A handler for the ResultDisplay of the UI
+ * A handler for the ResultView of the UI
  */
 public class ResultDisplayHandle extends GuiHandle {
 

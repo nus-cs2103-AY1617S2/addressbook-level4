@@ -23,7 +23,7 @@ public abstract class UiPart<T> {
     private FXMLLoader fxmlLoader;
 
     /**
-     * Constructs a UiPart with the specified FXML file URL.
+     * Constructs a RefreshableUiView with the specified FXML file URL.
      * The FXML file must not specify the {@code fx:controller} attribute.
      */
     public UiPart(URL fxmlFileUrl) {
@@ -46,7 +46,7 @@ public abstract class UiPart<T> {
     }
 
     /**
-     * Returns the root object of the scene graph of this UiPart.
+     * Returns the root object of the scene graph of this UiViewPart.
      */
     public T getRoot() {
         return fxmlLoader.getRoot();
@@ -83,5 +83,4 @@ public abstract class UiPart<T> {
         dialogStage.setScene(scene);
         return dialogStage;
     }
-
 }
