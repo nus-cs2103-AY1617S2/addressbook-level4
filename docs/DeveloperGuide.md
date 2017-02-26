@@ -1,6 +1,6 @@
-# AddressBook Level 4 - Developer Guide
+# ToLuist - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team ToLuist`  &nbsp;&nbsp;&nbsp;&nbsp;
 
 ---
 
@@ -347,17 +347,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | user | add a new task |
+`* * *` | user | delete a task | remove entries that I no longer need
+`* * *` | user | find a task by name | locate details of task without having to go through the entire list
+`*` | user with many tasks | sort task by priority level then by end date | figure out which task should be cleared first
 
 {More to be added}
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ToLuist` and the **Actor** is the `user`, unless specified otherwise)
 
 #### Use case: Delete person
 
