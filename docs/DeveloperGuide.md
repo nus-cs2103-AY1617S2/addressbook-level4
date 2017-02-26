@@ -360,9 +360,9 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | remove tag from task | remove entries that I no longer need
 `* * *` | user | undo previous command(s) | recover gracefully from making mistakes
 `* * *` | user | redo previously undone command(s) | recover gracefully from  wrongly resolving a mistake
-`* * *` | user | see my command history | to identify what I have to recover if I accidentally performed some wrong commands.
+`* * *` | user | see my [command history](#command-history) | to identify what I have to recover if I accidentally performed some wrong commands.
 `* * *` | user | change my storage file path | decide where I want to save my files for my own use
-`* *` | user with many tasks | sort task by priority level then by end date | figure out which task should be cleared first
+`* *` | user with many tasks | sort task by [priority level](#priority-level) then by end date | figure out which task should be cleared first
 `* *` | user | add an [alias](#alias) for a command | customise my own keyboard shortcuts to improve my efficiency
 `* *` | user | update an alias for a command | change entries that are errorneous or outdated
 `* *` | user | view all alias for commands | review the alias in case I forget what I set for them
@@ -417,9 +417,17 @@ Use case ends.
 
 > A task that has to be done every fixed length of time.
 
+##### Command history
+
+> A list of commands that the user has entered.
+
+##### Priority level
+
+> The relative importance or urgency of a task compared to other tasks.
+
 ##### Alias
 
-> An alternative name to a given command.
+> An alternative name to a default command name.
 
 ## Appendix E : Product Survey
 
