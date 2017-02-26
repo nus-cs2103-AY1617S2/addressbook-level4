@@ -347,12 +347,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new task |
+`* * *` | user | add a new task with completion date | remind myself of things I have to do and the deadlines to meet
+`* * *` | user | see all tasks | have an overview of all the things I need to do and decide what I should do first
+`* * *` | user | update a task | change entries that are errorneous or outdated
+`* * *` | user | mark a task as completed/incompleted | focus on only the tasks I have still not cleared
 `* * *` | user | delete a task | remove entries that I no longer need
 `* * *` | user | find a task by name | locate details of task without having to go through the entire list
-`*` | user with many tasks | sort task by priority level then by end date | figure out which task should be cleared first
-
-{More to be added}
+`* * *` | user | find a task by tag | locate details of task without having to go through the entire list
+`* * *` | user | add tag to task | group my tasks to provide more context
+`* * *` | user | update tag in task | change entries that are errorneous or outdated
+`* * *` | user | remove tag from task | remove entries that I no longer need
+`* * *` | user | undo previous command(s) | recover gracefully from making mistakes
+`* * *` | user | see my command history | to identify what I have to recover if I accidentally performed some wrong commands.
+`* * *` | user | redo previously undone command(s) | recover gracefully from  wrongly resolving a mistake
+`* * *` | user | add a new recurring task | prevent the need of keying the same cyclical task every period
+`* * *` | user | change my storage file path | decide where I want to save my files for my own use
+`* *` | user with many tasks | sort task by priority level then by end date | figure out which task should be cleared first
+`* *` | user | add an alias for a command | customise my own keyboard shortcuts to improve my efficiency
+`* *` | user | update an alias for a command | change entries that are errorneous or outdated
+`* *` | user | view all alias for commands | review the alias in case I forget what I set for them
 
 ## Appendix B : Use Cases
 
