@@ -397,11 +397,15 @@ Use case ends.
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Commands must be fluid and flexible (i.e. look like written English) so it is more intuitive for users.
+5. When command entered is errorneous, should guess the user's intentions, and execute the command after user's confirmation. 
+6. The stored data should never, ever be destroyed unless that is what the user wants.
+7. Should have nice UI/UX so user have a pleasant experience using this App.
+8. Should integrate with Google Calendar.
 
-{More to be added}
 
 ## Appendix D : Glossary
 
