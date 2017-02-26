@@ -346,39 +346,148 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the TaskBoss
+`* * *` | user | add tasks to record tasks that I need to get done |
+`* * *` | user | delete tasks | get rid of tasks that I no longer need
+`* * *` | user | edit tasks | update any outdated information
+`* * *` | user | see a list of all the tasks |
+`* * *` | user | mark my tasks as done | keep track of the task status
+`* * *` | user | set deadlines for tasks that have due dates | track the urgency of any given task
+`* * *` | user | sort the tasks based on their deadlines | know the most urgent tasks to address
+`* * *` | user | search for any task | find a task if I remember some keywords from the description
+`* *` | user | add a description to my tasks | keep note of the details related to any given task
+`* *` | user | undo a command | not worry about any accidental actions I do
+`* *` | user | export all the tasks into a specified folder to save | get access of my tasks from multiple computers
+`* *` | user | set start and end times for any given task | cater for any event that I need to attend
+`* *` | user | set priority levels for each of my tasks | give my attention to tasks without deadlines that are urgent
+`* *` | user | see my tasks sorted based on priority | check what I need to do urgently
+`* *` | user | categorize my tasks | keep my tasks organized
+`* *` | user | see the tasks under a specific category | 
+`* *` | user | see the tasks that I’ve completed or have yet to be addressed | 
+`* *` | user | create categories | add tasks under specific categories
+`* *` | user | view a specific task | focus on that task
+`* *` | user | clear all tasks under a specific category | delete a bulk of tasks at one time
+`*` | user | set recurring tasks | not have to manually add the same task over and over again
+`*` | user | set reminders | reminded of tasks
+`*` | user | set locations | reminded of the location associated with the task
+`*` | user | add people | reminded of the people associated with the task
+`*` | user | create labels for tasks | reminded of the type of task
+`*` | user | redo a command after undoing a command | 
+`*` | user | type shorter commands | execute commands faster
+`*` | user | integrate Google Calendar | see a monthly view of my tasks
+`*` | user | view all tasks that are between a specified date/time interval | not be distracted by other tasks meant for another time/date
 
 {More to be added}
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is`TaskBossk` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: Add a task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User types the add command, followed by the task name. User can also choose to include description, date, start and/or end time, category as well as priority level, which are optional.
+2.  TaskBoss adds the new task. <br>
+Use case ends
+
+**Extensions**
+
+1a. User input invalid
+
+> 1a1. TaskBoss shows error message with the correct input format <br>
+Use case ends
+
+1b. The category user enters does not match the existing categories
+
+> 1b1. TaskBoss shows error message <br>
+> 1b2. TaskBoss adds the new task without the category <br>
+Use case ends
+
+1c. User enters incorrect format for time and date
+
+> 1c1. TaskBoss displays an error message with the correct input format <br>
+> 1c2. TaskBoss adds the new task without the time and date <br>
+Use case ends
+
+1d. Start time and end time are the same
+
+> 1d1. TaskBoss displays an error message <br>
+> 1d2. TaskBoss adds the new task without the time and date <br>
+Use case ends
+
+1e. Start time is later than end time
+
+> 1e1. TaskBoss displays an error message <br>
+> 1e2. TaskBoss adds the new task without the time and date <br>
+Use case ends
+  
+#### Use case: List all tasks
+
+**MSS**
+
+1.  User chooses to list all the tasks.
+2.  TaskBoss displays all the tasks. <br>
 Use case ends.
 
 **Extensions**
 
-2a. The list is empty
+1a.  No tasks to display
 
-> Use case ends
+> 1a1. TaskBoss displays “No tasks to display” <br>
+Use case ends
 
-3a. The given index is invalid
+#### Use case: Edit a task
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+**MSS**
+
+1.  User chooses to edit a task by entering the task index, and the information to be updated (name, description, date, start time and/or end time, category, priority level)
+2.  TaskBoss updates the task. <br>
+Use case ends
+
+**Extensions**
+
+1a. The given task index is invalid
+
+> 1a1. TaskBoss shows an error message <br>
+Use case ends
+
+#### Use case: Delete a task
+
+**MSS**
+
+1.  User chooses to delete a task by entering the task index.
+2.  TaskBoss deletes the specific task the user requests for. <br>
+Use case ends
+
+**Extensions**
+
+1a. The given task index is invalid
+
+> 1a1. TaskBoss shows an error message <br>
+Use case ends
+
+#### Use case: Mark done for task
+
+**MSS**
+
+1. User inputs the mark done command, followed by a task index
+2. TaskBoss adds the task to the ‘Done’ section, and removes it from ‘All Tasks’ and the task’s category. <br>
+Use case ends
+
+**Extensions**
+
+1a. The given task index is invalid
+
+> 1a1. TaskBoss shows an error message. <br>
+Use case ends
+
+1b. The status entered is invalid
+
+> 1b1. TaskBoss shows an error message and requests for correct status <br>
+> 1b2. User enters correct status <br>
+Use case ends
+
 
 {More to be added}
 
@@ -405,15 +514,72 @@ Use case ends.
 
 **Product Name**
 
-Author: ...
+Author: A0138961W
 
-Pros:
+#### Competing product: Google Calendar
 
-* ...
-* ...
+**Pros:**
 
-Cons:
+1. Uses sticky notes to record tasks
+2. Has colorful UI
+3. Provides instant capturing of anything by speech and pictures
+4. Able to be integrated with google drive and google docs
+5. Free to use 
+6. No need to set up an account
+7. Supports offline editing 
+8. Supports undo option <br>
 
-* ...
-* ...
+**Cons:**
 
+1. Doesn’t support calendar view
+2. Hard to organize large amount of notes
+3. Unable to categorise tasks
+4. Doesn’t support short-cut typed commands
+5. Depends on mouse clicks <br>
+
+#### Competing product: MeisterTask
+
+**Pros:**
+
+1. Has beautiful user interface
+2. Free for personal use
+3. Supports for third-party app integrations (eg. Google, Dropbox)
+4. Available across most platforms (web app, android, OS X)
+5. Can enable task relationships <br>
+
+**Cons:**
+
+1. Doesn’t support monthly calendar view
+2. Unable to set recurring tasks
+3. Unable to set reminders
+4. Tasks are in card-view. Can be hard to track large amount of tasks.  <br>
+
+#### Competing product: Just
+
+**Pros:**
+
+1. Has simple and clear user interface
+2. Provides statistical analysis to track daily/monthly/yearly statistics
+3. Support tasks categorizing 
+4. Easy to use(add, delete and sort the tasks)
+5. Supports priority setting
+6. Supports task reminders <br>
+
+**Cons:**
+
+1. Hard to search if the to-do list is long <br>
+
+#### Competing product: Persoda
+
+**Pros:**
+
+1. Provides secure accounts and protected password 
+2. Has user-friendly interface
+3. Provides a wide range of functions
+4. Requires users to pay per usage
+5. Supports task reminders/hierarchy 
+6. Supports instant messaging teams within users <br>
+
+**Cons:**
+
+1. Might be confusing to new users as features are based off different price plans <br>
