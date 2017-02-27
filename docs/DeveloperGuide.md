@@ -353,17 +353,18 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
 `*` | user with many persons in the address book | sort persons by name | locate a person easily
 
+
+### New User Guide
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-### New User Guide
 `* * *` | new user | get a list of basic commands | understand what the task manager will allow me to do.
 `* * *` | new user | get help if I enter an invalid command | know that I am using it wrongly and how to correct myself.
 `* * *` | new user | view more information about a particular command | learn how to use various commands.
 `* * *` | new user | view the features offered by this task manager | identify what I can actually do with this task manager.
 
+### Essential Functions
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-### Essential Functions
 `* * *` | user |find upcoming tasks | decide what needs to be done soon.
 `* * *` | user | delete a task | get rid of tasks that I no longer care to track.
 `* * *` | user | edit a task detail/deadline | change the deadline or the specifics of the tasks.
@@ -375,49 +376,53 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | view the task manager in a calendar mode | have an overall picture of how busy I will be over the next few days/weeks.
 `* * *` | user | save my task list | easily retrieve my tasks.
 
+
+### Reminders
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-### Reminders
 `* * *` | user | reminders about a task that is due soon | start working on the more important tasks first.
 `* * *` | user | have recurring reminders for every deadline that is coming | not forget to wrap up a task.
 
+
+### Prioritization
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-### Prioritization
 `* * *` | user | add priority levels to different tasks | identify which tasks are the most urgent.
 `* * *` | user | edit the priority levels of the tasks | change the priority levels to suit my needs. 
 `* * *` | user | sort the tasks by deadline | know which tasks are more urgent and which are less urgent.
 
+
+### Tagging-related
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-### Tagging-related
 `* * *` | user | tag the tasks with relevant tags ( eg. study / work ) | easily categorise tasks.
 `* * *` | user | search for tasks using tags | easily find a category of tasks.
 `* * *` | user | delete a tag | remove a category of tasks that I no longer care to track.
 `* * *` | user | sort the tasks by tags | prioritise a certain category of tasks.
 
+
+### Security Features
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-### Security Features
 `* *` | user | be able to encrypt the information in the task manager | ensure the security of my data.
 
+### Subtasking
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-### Subtasking
 `* *` | user | add subtasks to a task that is already present | break down said task into smaller problems.
 `* *` | user | delete subtasks | get rid of subtasks that are no longer relevant.
 `* *` | user | clear subtasks | keep track of my progress against the big picture.
 
+### Customization 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-### Customization 
 `* *` | user | set a quote of the day at the frontpage of the task manager | be more motivated in doing my tasks.
 `* *` | user | set a custom/standard background image of the task manager | be more motivated.
 `* *` | user | change the aesthetics (colours/layout) of the task manager | make it feel more personalised. 
 
+### Advanced Features
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-### Advanced Features
 `* *` | user | view the tasks that were completed | keep track of my efficiency
 `* *` | user | sync my tasks and notes from any device | have higher convenience in viewing my tasks.
 `* *` | user | set the type of reminder about a task (vibration/ring) about a task that is due soon | punctually complete the tasks.
