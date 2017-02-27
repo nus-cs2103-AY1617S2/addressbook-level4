@@ -8,8 +8,10 @@ import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.controller.ListController;
 import seedu.address.controller.Controller;
+import seedu.address.controller.RedoController;
 import seedu.address.controller.StoreController;
 import seedu.address.controller.TaskController;
+import seedu.address.controller.UndoController;
 
 public class CommandDispatcher implements Dispatcher {
 
@@ -44,6 +46,8 @@ public class CommandDispatcher implements Dispatcher {
         return new ArrayList<>(Arrays.asList(new Controller[] {
             new TaskController(),
             new StoreController(),
+            new UndoController(),
+            new RedoController(),
             new ListController()
         }));
     }

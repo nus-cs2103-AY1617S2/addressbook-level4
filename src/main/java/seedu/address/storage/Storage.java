@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import java.util.Optional;
 
+import javafx.util.Pair;
 import seedu.address.model.TodoList;
 
 /**
@@ -15,4 +16,8 @@ public interface Storage {
     boolean move(String path);
 
     String getStoragePath();
+
+    Pair<TodoList, Integer> undo(int times);
+
+    Pair<TodoList, Integer> redo(int times);
 }
