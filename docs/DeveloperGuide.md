@@ -184,10 +184,6 @@ _Figure 2.3.1 : Structure of the Controller Component_
 3. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the dispatcher.
 4. After every `execute` invocation, `Controller` can optionally set new states in the `UiStore` and ask the `UI` to re-render.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
- API call.<br>
-<img src="images/DeletePersonSdForLogic.png" width="800"><br>
-_Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
 ### 2.4. Model Component ###
 
