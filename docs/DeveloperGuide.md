@@ -697,6 +697,114 @@ Use case ends.
 > 6a1. Dueue shows message "RGB code entered is invalid"<br>
   Use case resumes at step 5
 
+#### Use case: Change the list of a task
+ 
+**MSS**
+ 
+1. User requests to change the list of a task
+2. Dueue ask the user for a list
+3. User type in the name of the list
+4. Dueue shows the tasks in the list
+Use case ends.
+ 
+**Extension**
+ 
+1a. The given task is invalid
+ 
+> 1a1. Dueue shows an error message and ask for a task<br>
+  Use case resumes at step 2
+ 
+3a. The user wants to create a new list for the task
+ 
+> 3a1. Dueue shows an error message and ask whether the user wants to create a new list
+> 3a2. User indicate yes<br>
+Use case resume at step 4
+ 
+3b. The list name does not exist
+ 
+> 3b1. Dueue shows an error message and ask whether the user wants to create a new list
+> 3b2. User indicate No
+> 3b3. Dueue ask the user for a new list name<br>
+  Use case resume at step 3 
+ 
+#### Use case: Mark task as finished
+ 
+**MSS**
+ 
+1. User requests to mark a task as finished
+2. Dueue show the current unfinished task
+Use case ends.
+ 
+**Extension**
+ 
+1a. Task does not exist
+> 1a1. Dueue shows an error message
+Use case resume at step 1
+ 
+1b. The task had been marked as finished
+> 1b1. Dueue inform the User that the task had been marked
+  Use case ends.
+ 
+#### Use case: Change details of a task
+ 
+**MSS**
+ 
+1. User requests to change details of the task
+2. Dueue ask for the details to be change
+3. User type in the details to be changed
+4. Dueue shows the changes
+Use case ends.
+ 
+**Extension**
+ 
+1a. Task does not exist
+> 1a1. Dueue shows an error message
+Use case resume at step 1
+ 
+#### Use case: View help message when entering the system.
+ 
+**MSS**
+ 
+1. User starts the system
+2. Dueue display the help message
+Use case ends
+ 
+#### Use case: Add a task with priority level
+ 
+**MSS**
+ 
+1. User request for to add a task with priority level
+2. Dueue shows the created task
+Use case ends
+ 
+**Extension**
+ 
+1a. Priority level does not exist
+> 1a1. Dueue shows an error message
+Use case resume at step 1
+ 
+#### Use case: Undo previous command
+ 
+**MSS**
+ 
+1. User request to undo previous command
+2. Dueue display a successful undo message
+Use case ends
+ 
+#### Use case: View all past due task
+ 
+**MSS**
+ 
+1. User request to view all past due task
+2. Dueue display all the past due task.
+Use case ends
+ 
+**Extension**
+ 
+1a. There is no past due task
+> 1a1. Dueue shows an error message
+Use case ends
+
 {More to be added}
 
 ## Appendix C : Non Functional Requirements
@@ -825,3 +933,17 @@ Cons:
 * Can only sort task in chronological order
 * Ambiguous hierarchy
 * Do not have importance level
+
+**S Planner**
+
+Author: Shermine Jong
+
+Pros:
+* Can set multiple reminders to an event/task
+* Can set different task as different colour to group the tasks
+* Can synchronize from email’s calendar
+* Can Specify the venue of the task and is linked to google map
+* Could specify whether to repeat a certain task, the frequency of the repeat, the end date of the repeat or the number of repeat
+
+Cons:
+* There is a default reminder for a task which could be quite irritating
