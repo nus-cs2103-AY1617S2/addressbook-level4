@@ -117,13 +117,13 @@ The sections below give more details of each component.
 <img src="images/UiClassDiagram.png" width="800"><br>
 _Figure 2.1 : Structure of the UI Component_
 
-**API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
+**API** : [`Ui.java`](../src/main/java/seedu/toluist/ui/Ui.java)
 
 **JavaFX** is used for the UI. `MainWindow` holds all the views that make up the different parts of the UI. These views inherit from the abstract `UiView` class, while `MainWindow` itself inherits from the abstract `UiPart` class.
 
 #### 2.1.1. UiView
 
-**API** : [`UiView.java`](../src/main/java/seedu/address/ui/view/UiView.java)
+**API** : [`UiView.java`](../src/main/java/seedu/toluist/ui/view/UiView.java)
 
 `UiView` is the building block for the UI. Each `UiView` should preferably be responsible for only one UI functionality.
 
@@ -149,7 +149,7 @@ Each `UiView` has a mini lifecycle. `viewDidLoad` is run after `render` is calle
 
 #### 2.1.2. UiStore ####
 
-**API** : [`UiStore.java`](../src/main/java/seedu/address/ui/UiStore.java)
+**API** : [`UiStore.java`](../src/main/java/seedu/toluist/ui/UiStore.java)
 
 `UiStore` holds the data to be used by the `UI`. An example would be the task data to be displayed to the user.
 
@@ -166,7 +166,7 @@ The reactive approach is borrowed from modern Javascript front-end frameworks su
 
 #### 2.2 Dispatcher component ####
 
-**API** : [`Dispatcher.java`](../src/main/java/seedu/address/dispatcher/CommmandDispatcher.java)
+**API** : [`Dispatcher.java`](../src/main/java/seedu/toluist/dispatcher/Dispatcher.java)
 
 `Dispatcher` acts like a router in a Web MVC architecture. On receiving new input from the UI, `Dispatcher` decides which `Controller` is the best candidate to handle the input, instantiate and ask the `Controller` object to execute the event.
 
@@ -177,7 +177,7 @@ The reactive approach is borrowed from modern Javascript front-end frameworks su
 <img src="images/ControllerClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Controller Component_
 
-**API** : [`Controller.java`](../src/main/java/seedu/address/controller/Controller.java)
+**API** : [`Controller.java`](../src/main/java/seedu/toluist/controller/Controller.java)
 
 1. `Controller` has a `execute` method to execute the command passed by the dispatcher.
 2. The command execution can affect the `Model`, the `Storage` (e.g. adding a task) and/or raise events.
@@ -191,14 +191,13 @@ _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Comma
 
 ### 2.4. Model Component ###
 
-
 The `Model`,
 * stores the task data.
 * does not depend on any of the other four components.
 
 ### 2.5. Storage component
 
-**API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](../src/main/java/seedu/toluist/storage/Storage.java)
 
 The `Storage` acts like a database in the application. It provides read/write funcionalities to the `Model`, encapsuling all the inner implementation details. The `Storage` is a singleton, analogous to how a typical database service is always runninng in a traditional database-dependent application.
 
@@ -217,7 +216,7 @@ This approach is reliable as it eliminates the need to implement an "unexecute" 
 
 ### 2.6. Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.toluist.commons` package.
 
 ## 3. Implementation
 
