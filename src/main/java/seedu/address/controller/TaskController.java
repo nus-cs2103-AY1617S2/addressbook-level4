@@ -17,8 +17,8 @@ import seedu.address.ui.UiStore;
  */
 public class TaskController extends Controller {
 
-    private static final String COMMAND_TEMPLATE = "^(?<command>(add|delete|update)) "
-                + "task( (?<index>\\d+))?"
+    private static final String COMMAND_TEMPLATE = "^(?<command>(add|delete|update))"
+                + "( (?<index>\\d+))?"
                 + "( (?<description>.+))?";
 
     private static final String TASK_COMMAND = "command";
@@ -37,14 +37,14 @@ public class TaskController extends Controller {
 
     public CommandResult execute(String command) {
         logger.info(getClass().getName() + "will handle command");
-        Optional<TodoList> optionalTodoList = storage.load();
+        Optional<TodoList> todoListOptional = TodoList.load();
         CommandResult commandResult = new CommandResult("");
 
-        if (!optionalTodoList.isPresent()) {
+        if (!todoListOptional.isPresent()) {
             return commandResult;
         }
 
-        final TodoList todoList = optionalTodoList.get();
+        final TodoList todoList = todoListOptional.get();
         final HashMap<String, String> tokens = tokenize(command);
 
         final String taskCommand = tokens.get(TASK_COMMAND);
@@ -69,7 +69,7 @@ public class TaskController extends Controller {
             break;
         }
 
-        if (storage.save(todoList)) {
+        if (todoList.save()) {
             uiStore.setTask(todoList.getTasks());
             renderer.render();
         }
@@ -96,17 +96,17 @@ public class TaskController extends Controller {
     }
 
     private CommandResult update(TodoList todoList, Task task, String description) {
-        todoList.updateTask(task, description);
+        todoList.update(task, description);
         return new CommandResult(UPDATE_TASK_RESULT);
     }
 
     private CommandResult add(TodoList todoList, String description) {
-        todoList.addTask(new Task(description));
+        todoList.add(new Task(description));
         return new CommandResult(ADD_TASK_RESULT);
     }
 
     private CommandResult delete(TodoList todoList, Task task) {
-        todoList.removeTask(task);
+        todoList.remove(task);
         return new CommandResult(DELETE_TASK_RESULT);
     }
 }

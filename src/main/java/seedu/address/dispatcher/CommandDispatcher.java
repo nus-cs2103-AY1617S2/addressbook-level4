@@ -6,17 +6,12 @@ import java.util.Collection;
 
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
-import seedu.address.controller.AppController;
+import seedu.address.controller.ListController;
 import seedu.address.controller.Controller;
 import seedu.address.controller.StoreController;
 import seedu.address.controller.TaskController;
 
-/**
- * CommandDispatcher is the bridge between the UI input & Controller
- * It acts like a Router in a MVC. From the input, it deduces what is the appropriate
- * the controller to dispatch the command to
- */
-public class CommandDispatcher {
+public class CommandDispatcher implements Dispatcher {
 
     private static CommandDispatcher instance;
 
@@ -42,14 +37,14 @@ public class CommandDispatcher {
                 .stream()
                 .filter(controller -> controller.matchesCommand(command))
                 .findFirst()
-                .orElse(new AppController()); // fail-safe
+                .orElse(new ListController()); // fail-safe
     }
 
     private Collection<Controller> getAllControllers() {
         return new ArrayList<>(Arrays.asList(new Controller[] {
             new TaskController(),
             new StoreController(),
-            new AppController()
+            new ListController()
         }));
     }
 }
