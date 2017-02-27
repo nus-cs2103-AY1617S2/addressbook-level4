@@ -36,6 +36,20 @@ public class FileUtil {
         return file.createNewFile();
     }
 
+
+    /**
+     * Remove a file
+     *
+     * @return true if file is removed, false otherwise
+     */
+    public static boolean removeFile(File file) {
+        if (!file.exists()) {
+            return true;
+        }
+
+        return file.delete();
+    }
+
     /**
      * Creates the given directory along with its parent directories
      *
@@ -83,6 +97,16 @@ public class FileUtil {
         assert pathWithForwardSlash != null;
         assert pathWithForwardSlash.contains("/");
         return pathWithForwardSlash.replace("/", File.separator);
+    }
+
+    /**
+     * Converts a string to a file
+     * @param path A String representing a file path
+     * @return a new File
+     */
+    public static File getFile(String path) {
+        String normalizedPath = path.replace("/", File.separator);
+        return new File(normalizedPath);
     }
 
 }
