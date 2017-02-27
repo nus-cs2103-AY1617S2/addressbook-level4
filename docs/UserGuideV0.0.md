@@ -26,15 +26,15 @@ By : Miao Ling, Ian , Qi Xiang and Dylan
    * **`Priority`** : Eg. Highest
    * **`Details`** (if any) : Eat Bar Chor Mee
    * **`Tags`** (if any) : Chores
-   > Click “Done” once you have finished.
+   Click “Done” once you have finished.
 
 5. After step 6, you can view your task in 3 different tabs.
 
-   > <Today/Date>
-   * Shows you the list of tasks you have for the specified date. Click left/right arrow to navigate between the dates.
-
-   > <Overview>
-   * Shows you an overall view of the dates. The highest priority tasks will be shown as a preview for every single date. Scroll to navigate between the dates.
-
-   > <Priority>
-   * Shows you 4 options of priority tabs, from highest to lowest. Selecting the tab allows you to view the list of tasks that is under that priority. Eg. By clicking on “Highest Priority” tab, it will bring you to the list of tasks that you have in it. 
+   > **Today/Date**
+   > * Shows you the list of tasks you have for the specified date. Click left/right arrow to navigate between the dates.
+   >
+   > **Overview**
+   > * Shows you an overall view of the dates. The highest priority tasks will be shown as a preview for every single date. Scroll to navigate between the dates.
+   >
+   > **Priority**
+   > * Shows you 4 options of priority tabs, from highest to lowest. Selecting the tab allows you to view the list of tasks that is under that priority. Eg. By clicking on “Highest Priority” tab, it will bring you to the list of tasks that you have in it. 
