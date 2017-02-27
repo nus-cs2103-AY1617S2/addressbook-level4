@@ -783,7 +783,7 @@ Pros:
 
 * Has clear 2 levels of hierarchy (Board; List)
 * Has the option to archive and delete for finished tasks
-* Very flexible layout, every object is dragable
+* Very flexible layout, every object is draggable
 * Can incorporate with many other softwares
 * Can share with teammates
 * Can attach relative files and images to a task
@@ -803,7 +803,7 @@ Pros:
 
 * Can customize notification
 * Can add repeated tasks
-* Can delete one occurence of the task
+* Can delete one occurrence of the task
 * Can mark festival and holiday out
 
 Cons:
