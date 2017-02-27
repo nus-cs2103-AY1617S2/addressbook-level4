@@ -8,17 +8,19 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.commons.core.Config;
+
 public class ConfigTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void toString_defaultObject_stringReturned() {
-        String defaultConfigAsString = "App title : Address App\n" +
+        String defaultConfigAsString = "App title : ToDo App\n" +
                 "Current log level : INFO\n" +
                 "Preference file Location : preferences.json\n" +
-                "Local data file location : data/addressbook.xml\n" +
-                "AddressBook name : MyAddressBook";
+                "Local data file location : data/todolist.xml\n" +
+                "ToDoList name : MyToDoList";
 
         assertEquals(defaultConfigAsString, new Config().toString());
     }

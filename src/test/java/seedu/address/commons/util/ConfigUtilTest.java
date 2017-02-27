@@ -15,6 +15,8 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.address.commons.core.Config;
 import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.commons.util.ConfigUtil;
+import seedu.address.commons.util.FileUtil;
 
 public class ConfigUtilTest {
 
@@ -76,8 +78,8 @@ public class ConfigUtilTest {
         config.setAppTitle("Typical App Title");
         config.setLogLevel(Level.INFO);
         config.setUserPrefsFilePath("C:\\preferences.json");
-        config.setAddressBookFilePath("addressbook.xml");
-        config.setAddressBookName("TypicalAddressBookName");
+        config.setToDoListFilePath("todolist.xml");
+        config.setToDoListName("TypicalToDoListName");
         return config;
     }
 
