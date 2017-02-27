@@ -487,6 +487,7 @@ Pros:
 * Support fuzzy search for events.
 * Certain operations does not require clicking (e.g. add event).
 * Support sharing of calendar with other users through export to CSV or iCal.
+* Can be used offline.
 
 Cons:
 
