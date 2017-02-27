@@ -357,28 +357,40 @@ Priority | As a ... | I want to ... | So that I can...
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `ToLuist` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case 1: Add a task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. Actor requests to add a task with `description` in the input box.
+2. System adds the task.
+3. System shows a feedback message ("Task `description` added") and displays the updated list.<br>
 Use case ends.
 
 **Extensions**
 
-2a. The list is empty
+2a. `description` is not provided.
 
-> Use case ends
+> 2a1. System shows an error message ("Please provide a task description") with the correct format example.
+> Use case resumes at step 1
 
-3a. The given index is invalid
+#### Use case 2: Delete a task
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+**MSS**
+
+1. Actor requests to delete a task with `index` number in the input box.
+2. System finds the task and deletes it.
+3. System shows a feedback message ("Task `description` removed") and displays the updated list.<br>
+Use case ends.
+
+**Extensions**
+
+2a. `index` number given is invalid (not a positive integer, or an out-of-range positive integer).
+
+> 2a1. System shows an error message ("Please provide a proper index number") with the correct format example.
+> Use case resumes at step 1
+
 
 {More to be added}
 
