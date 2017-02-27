@@ -457,8 +457,6 @@ Use case ends.
 > Use case resumes at step 1.
 
 
-{More to be added}
-
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
