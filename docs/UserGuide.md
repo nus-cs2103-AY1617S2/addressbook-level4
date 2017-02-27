@@ -147,7 +147,7 @@ Examples:
   `undo`<br>
   Undoes adding Test to the todo list.
 * `add Assignment` <br>
-  `add Project`
+  `add Project` <br>
   `undo 2`<br>
   Undoes both commands.
 
@@ -175,68 +175,68 @@ Examples:
 
 ### 2.10. Saving the data
 
-todo list data are saved in the hard disk automatically after any command that changes the data.<br>
+Todo list data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
-### 2.11. Viewing previous commands and accessing them : 'history'
+### 2.11. Viewing previous commands and accessing them : `history`
 
 Shows previous commands entered
-Format: 'history'
+Format: `history`
 
-> * previous commands are listed in order from latest command to earlier command
-> * alternatively, pressing on the 'up' and 'down' arrow keys on the keyboard will cycle through the commands previously entered
+> * Previous commands are listed in order from latest command to earlier command
+> * Alternatively, pressing on the <kbd>up</kbd> and <kbd>down</kbd> arrow keys on the keyboard will cycle through the commands previously entered
 
 Examples:
-* 'add Test' <br>
-  'history' <br>
-  Shows 'add Test' in the list.
-* 'add Test' <br>
-  you press on the 'up' arrow key. <br>
-  Shows 'add Test' in your input text field.
+* `add Test` <br>
+  `history` <br>
+  Shows `add Test` in the list.
+* `add Test` <br>
+  you press on the <kbd>up</kbd>kbd> arrow key. <br>
+  Shows `add Test` in your input text field.
 
-### 2.12. Add alias for commands: 'add alias'
+### 2.12. Add alias for commands: `add alias`
 
 Adds an alias for a command
-Format: 'addalias COMMAND ALIAS'
+Format: `addalias COMMAND ALIAS`
 
 > * Once added, alias can be used instead of the command to perform operations.
 
 Example:
-* 'addalias history hs' <br>
-  'hs' <br>
-  Shows 'addalias history hs' in the list.
+* `addalias history hs` <br>
+  `hs` <br>
+  Shows `addalias history hs` in the list.
 
-### 2.13. Delete alias for commands: 'delete alias'
+### 2.13. Delete alias for commands: `delete alias`
 
 Removes an alias for a command
-Format: 'deletealias ALIAS'
+Format: `deletealias ALIAS`
 
-### 2.14. View aliases for commands: 'view alias'
+### 2.14. View aliases for commands: `view alias`
 
 Views aliases in the system
-Format: 'viewalias [COMMAND]'
+Format: `viewalias [COMMAND]`
 
 > * Inputting a value for command will only show all aliases for that command.
 > * Otherwise will show all aliases.
-> * Lists aliases in the format 'COMMAND:ALIAS'.
+> * Lists aliases in the format `COMMAND:ALIAS`.
 
 Example:
-* 'addalias history hs' <br>
-  'viewaliases' <br>
-  Shows 'history:hs' in the list.
+* `addalias history hs` <br>
+  `viewaliases` <br>
+  Shows `history:hs` in the list.
 
-### 2.15. Change storage location for data: 'change storage location'
+### 2.15. Change storage location for data: `change storage location`
 
 Changes the location for the storage file used in this system
-Format: 'save NEWFILELOCATION'
+Format: `save NEWFILELOCATION`
 
 > * All data will be moved to the new file location.
 > * If the file does not exist, the file will be created.
 > * The old file will be removed.
 
 Example:
-* 'setstoragelocation data/savefile.txt'
-  Sets the storage location to 'data/savefile.txt' 
+* `setstoragelocation data/savefile.txt` <br>
+  Sets the storage location to `data/savefile.txt` 
 
 ## 3. Command Summary
 
