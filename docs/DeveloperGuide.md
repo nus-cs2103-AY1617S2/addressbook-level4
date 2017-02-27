@@ -420,7 +420,7 @@ Use case ends.
 11. Should be kept open source.
 12. Should be a free software.
 13. Source code should be well-documented.
-14. Application should be easy to set up (i.e. no installer required, no assisted required other than a user guide).
+14. Application should be easy to set up (i.e. no installer required, no assistance required other than a user guide).
 
 
 ## Appendix D : Glossary
