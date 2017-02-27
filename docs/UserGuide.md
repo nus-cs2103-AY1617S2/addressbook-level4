@@ -59,7 +59,7 @@ Examples:
 ### 2.3. Updating a task : `update`
 
 Updates an existing task in the todo list.<br>
-Format: `update INDEX [NAME] [d/ENDDATE] [sd/STARTDATE] [r/PERIOD(DAY/WEEK/MONTH)] [t/TAG]...`
+Format: `update INDEX [NAME] [sd/STARTDATE] [d/ENDDATE] [r/PERIOD(DAY/WEEK/MONTH)] [t/TAG]...`
 
 > * Updates the task at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
@@ -83,7 +83,7 @@ Examples:
 Finds tasks whose names contain any of the given keywords.<br>
 Format: `find [KEYWORDS] [t/] [d/] [n/]`
 
-> * The search is case sensitive. e.g `hans` will not match `Hans`
+> * The search is case insensitive. e.g `hans` will match `Hans`
 > * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 > * By default only the name is searched.
 > * Adding 't/' will search by tag instead.
@@ -91,8 +91,8 @@ Format: `find [KEYWORDS] [t/] [d/] [n/]`
 > * Adding 'n/' will still search by name.
 > * If no keyword is entered, the list of all tasks is displayed.
 > * 't/', 'd/' and 'n/' can be combined to search by multiple fields
-> * Only full words will be matched e.g. `Han` will not match `Hans`
-> * tasks matching at least one keyword will be returned (i.e. `OR` search).
+> * Partial words will be matched e.g. `Han` will match `Hans`
+> * Tasks matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `Hans` will match `Hans Bo`
 
 Examples:
@@ -228,7 +228,7 @@ Example:
 ### 2.15. Change storage location for data: 'change storage location'
 
 Changes the location for the storage file used in this system
-Format: 'setstoragelocation NEWFILELOCATION'
+Format: 'save NEWFILELOCATION'
 
 > * All data will be moved to the new file location.
 > * If the file does not exist, the file will be created.
@@ -251,35 +251,33 @@ Example:
 * **Find** : `find [KEYWORDS] [t/] [d/] [n/]` <br>
   e.g. `find school t/`
 
-* **List** : `list` <br>
-  e.g.
+* **List** : `list`
 
-* **Help** : `help` <br>
-  e.g.
+* **Help** : `help`
 
 * **Select** : `select INDEX` <br>
   e.g.`select 2`
 
-* **Update** : '`update INDEX [NAME] [d/ENDDATE] [sd/STARTDATE] [r/PERIOD(DAY/WEEK/MONTH)] [t/TAG]...'
-  e.g. 'update 1 d/11/12/2011'
+* **Update** : '`update INDEX [NAME] [d/ENDDATE] [sd/STARTDATE] [r/PERIOD(DAY/WEEK/MONTH)] [t/TAG]...` <br>
+  e.g. `update 1 d/11/12/2011`
 
-* **Exit** : 'exit'
+* **Exit** : `exit`
 
-* **Undo** : 'undo [NUMBER]'
-  e.g. 'undo 5'
+* **Undo** : `undo [NUMBER]` <br>
+  e.g. `undo 5`
 
-* **Redo** : 'redo [NUMBER]'
-  e.g. 'redo 5'
+* **Redo** : `redo [NUMBER]` <br>
+  e.g. `redo 5`
 
-* **History** : 'history'
+* **History** : `history`
 
-* **Add Alias** : 'addalias COMMAND ALIAS'
-  e.g. 'addalias history hs'
+* **Add Alias** : `addalias COMMAND ALIAS` <br>
+  e.g. `addalias history hs`
 
-* **Delete Alias** : 'deletealias ALIAS'
-  e.g. 'deletealias hs'
+* **Delete Alias** : `deletealias ALIAS` <br>
+  e.g. `deletealias hs`
 
-* **View Aliases** : 'viewalias [COMMAND]'
-  e.g. 'view alias history'
+* **View Aliases** : `viewalias [COMMAND]` <br>
+  e.g. `view alias history`
 
-* **Change Storage Location** : 'setstoragelocation FILELOCATION'
+* **Change Storage Location** : `save FILELOCATION`
