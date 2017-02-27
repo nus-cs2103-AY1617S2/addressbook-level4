@@ -25,11 +25,11 @@ By : Miao Ling, Ian , Qi Xiang and Dylan
 
    > **Today/Date**
    >
-   > * Shows you the list of tasks you have for the specified date. Click left/right arrow to navigate between the dates.
+   > * Shows you the list of tasks you have for the specified date. Click left/right arrow to navigate between the dates.  
    >
    > **Overview**
    >
-   > * Shows you an overall view of the dates. The highest priority tasks will be shown as a preview for every single date. Scroll to navigate between the dates.
+   > * Shows you an overall view of the dates. The highest priority tasks will be shown as a preview for every single date. Scroll to navigate between the dates.  
    >
    > **Priority**
    >
@@ -42,11 +42,11 @@ By : Miao Ling, Ian , Qi Xiang and Dylan
 
 2.2. Adding a Task
    Add a task to the doTASK by clicking on the “+” sign located at the bottom right hand corner
-   > A pop out window will appear and you have to fill in the relevant information that include Title, Deadline, Priority (1, 2, 3, 4), Details and Tags.
-   > You will have to type in the
-   * **`Title`** : Eg. Eat
-   * **`Deadline`** : Eg. 28 Feb 2017 @ 1400hrs
-   * **`Priority`** : Eg. 1 (Highest)
+   > A pop out window will appear and you have to fill in the relevant information that include Title, Deadline,  Priority (1, 2, 3, 4), Details and Tags.  
+   > For example
+   * **`Title`** : Eat
+   * **`Deadline`** : 28 Feb 2017 @ 1400hrs
+   * **`Priority`** : 1 (Highest)
    * **`Details`** (if any) : Eat Bar Chor Mee
    * **`Tags`** (if any) : Chores  
    Click “Done” once you have finished.
@@ -58,7 +58,7 @@ By : Miao Ling, Ian , Qi Xiang and Dylan
 	Click on the task itself and the pop out window will appear, you are able to edit the Title, Deadline, Priority or Details.
 
 2.5. Finding a task according to specific tags
-	Under the `Priority` tab, the user is able to select or unselect tags by ticking the respective boxes. There are 4 default tags,  which are School, Work, Home & CCA. 
+	Under the `Priority` tab, the user is able to select or unselect tags by ticking the respective boxes. There are 4 default tags,  which are School, Work, Home & CCA.  
 	> In addition, the user is able to add his or her own tags by clicking on the “Add Tag” button located at the bottom right hand corner.
 
 2.6. Deleting a task
