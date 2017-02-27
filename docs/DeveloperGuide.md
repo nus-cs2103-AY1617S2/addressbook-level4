@@ -941,7 +941,7 @@ Author: Shermine Jong
 Pros:
 * Can set multiple reminders to an event/task
 * Can set different task as different colour to group the tasks
-* Can synchronize from email’s calendar
+* Can synchronize from email's calendar
 * Can Specify the venue of the task and is linked to google map
 * Could specify whether to repeat a certain task, the frequency of the repeat, the end date of the repeat or the number of repeat
 
