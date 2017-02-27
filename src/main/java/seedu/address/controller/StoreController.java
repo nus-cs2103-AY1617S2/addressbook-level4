@@ -28,10 +28,10 @@ public class StoreController extends Controller {
 
     @Override
     public HashMap<String, String> tokenize(String command) {
-        final Pattern pattern = Pattern.compile(COMMAND_TEMPLATE);
-        final Matcher matcher = pattern.matcher(command.trim());
+        Pattern pattern = Pattern.compile(COMMAND_TEMPLATE);
+        Matcher matcher = pattern.matcher(command.trim());
         matcher.find();
-        final HashMap<String, String> tokens = new HashMap<>();
+        HashMap<String, String> tokens = new HashMap<>();
         tokens.put(STORE_DIRECTORY, matcher.group(STORE_DIRECTORY));
         return tokens;
     }

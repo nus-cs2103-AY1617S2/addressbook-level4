@@ -32,7 +32,7 @@ public class TaskController extends Controller {
     private static final String UPDATE_TASK_RESULT = "Task updated";
     private static final String DELETE_TASK_RESULT = "Task deleted";
 
-    private final Logger logger = LogsCenter.getLogger(getClass());
+    private Logger logger = LogsCenter.getLogger(getClass());
 
     public CommandResult execute(String command) {
         logger.info(getClass().getName() + "will handle command");
@@ -40,13 +40,13 @@ public class TaskController extends Controller {
         TodoList todoList = TodoList.load().orElse(new TodoList());
         CommandResult commandResult = new CommandResult("");
 
-        final HashMap<String, String> tokens = tokenize(command);
+        HashMap<String, String> tokens = tokenize(command);
 
-        final String taskCommand = tokens.get(TASK_COMMAND);
-        final String description = tokens.get(TASK_DESCRIPTION);
-        final String indexToken = tokens.get(TASK_VIEW_INDEX);
-        final int index = indexToken != null ? Integer.parseInt(indexToken) - 1 : -1;
-        final Task task = indexToken != null
+        String taskCommand = tokens.get(TASK_COMMAND);
+        String description = tokens.get(TASK_DESCRIPTION);
+        String indexToken = tokens.get(TASK_VIEW_INDEX);
+        int index = indexToken != null ? Integer.parseInt(indexToken) - 1 : -1;
+        Task task = indexToken != null
                 ? UiStore.getInstance().getTasks().get(index)
                 : null;
 
@@ -75,10 +75,10 @@ public class TaskController extends Controller {
 
     @Override
     public HashMap<String, String> tokenize(String commandArgs) {
-        final Pattern pattern = Pattern.compile(COMMAND_TEMPLATE);
-        final Matcher matcher = pattern.matcher(commandArgs.trim());
+        Pattern pattern = Pattern.compile(COMMAND_TEMPLATE);
+        Matcher matcher = pattern.matcher(commandArgs.trim());
         matcher.find();
-        final HashMap<String, String> tokens = new HashMap<>();
+        HashMap<String, String> tokens = new HashMap<>();
         tokens.put(TASK_COMMAND, matcher.group(TASK_COMMAND));
         tokens.put(TASK_DESCRIPTION, matcher.group(TASK_DESCRIPTION));
         tokens.put(TASK_VIEW_INDEX, matcher.group(TASK_VIEW_INDEX));
