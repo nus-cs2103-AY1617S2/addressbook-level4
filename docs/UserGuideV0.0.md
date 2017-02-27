@@ -8,7 +8,7 @@ By : Miao Ling, Ian , Qi Xiang and Dylan
 2. [Features] (#features)
 3. [FAQ] (#faq)
 
-## Quick Start (#quick-start)
+## 1. Quick Start 
 
 0. Ensure you have Java version 1.8.0_60 or later installed in your Computer.
 
