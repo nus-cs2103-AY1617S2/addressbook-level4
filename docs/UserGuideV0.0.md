@@ -59,7 +59,7 @@ By : Miao Ling, Ian , Qi Xiang and Dylan
 
 2.5. Finding a task according to specific tags
 	Under the `Priority` tab, the user is able to select or unselect tags by ticking the respective boxes. There are 4 default tags,  which are School, Work, Home & CCA.  
-	> In addition, the user is able to add his or her own tags by clicking on the “Add Tag” button located at the bottom right hand corner.
+   > In addition, the user is able to add his or her own tags by clicking on the “Add Tag” button located at the bottom right hand corner.
 
 2.6. Deleting a task
 	Click on the task itself and the pop out window will appear, click on the delete button if the task is no longer applicable to you.
@@ -72,11 +72,11 @@ By : Miao Ling, Ian , Qi Xiang and Dylan
 	 
 2.9. Overdue tasks
 	Under the `Overdue` tab, you can see the list of overdue tasks that you have yet to clear.  
-	> Editing the deadline will result in the relocation of the task out of the `Overdue` tab, until it has reached its due date.
+   > Editing the deadline will result in the relocation of the task out of the `Overdue` tab, until it has reached its due date.
 	
 2.10. Saving the tasks
 	Upon creation of tasks, the tasks will be automatically saved in the folder where the program is held in.  
-	> Do not erase the saved data as it will result in a complete loss of data that cannot be recovered by the application itself.
+   > Do not erase the saved data as it will result in a complete loss of data that cannot be recovered by the application itself.
 
 ## 3. FAQ
 
