@@ -370,9 +370,9 @@ Use case ends.
 
 **Extensions**
 
-2a. `description` is not provided.
+1a. `description` is not provided.
 
-> 2a1. System shows an error message ("Please provide a task description") with the correct format example.
+> 1a1. System shows an error message ("Please provide a task description") with the correct format example.
 > Use case resumes at step 1
 
 #### Use case 2: Delete a task
@@ -386,10 +386,75 @@ Use case ends.
 
 **Extensions**
 
-2a. `index` number given is invalid (not a positive integer, or an out-of-range positive integer).
+2a. `index` number given is invalid or cannot be found (i.e. `index` number is not a positive integer, or an out-of-range positive integer).
 
 > 2a1. System shows an error message ("Please provide a proper index number") with the correct format example.
 > Use case resumes at step 1
+
+#### Use case 3: Undo previous mutated command
+
+**MSS**
+
+1. Actor requests to `undo` action in the input box.
+2. System finds the most recent command that mutates the list and undo it.
+3. System shows a feedback message ("Undo `previous command`") and displays the updated list.<br>
+Use case ends.
+
+**Extensions**
+
+2a. No previous mutated command to undo
+
+> 2a1. System does nothing since there is nothing to undo.
+> Use case ends
+
+#### Use case 4: Add alias command
+
+**MSS**
+
+1. Actor requests to `alias` a command in the input box with a new alias name.
+2. System finds the command and alias it.
+3. System shows a feedback message ("`alias` is set as the new alias for `original command`.").<br>
+Use case ends.
+
+**Extensions**
+
+2a. Command name is not found.
+
+> 2a1. System shows an error message ("The command `original command` does not exist.").
+> Use case ends
+
+2b. The alias is already reserved for other commands.
+
+> 2b1. System prompts Actor with a message ("`alias` is used as an alias for `original command`, set `alias` to refer to `new command`? yes/no").
+>     2b1a. If user types Yes, system updates the alias name to refer to the new command.
+>     2b1b. If user types No, use case ends.
+> Use case ends
+
+#### Use case 5: Set data storage file path
+
+**MSS**
+
+1. Actor requests to save data to a new file path.
+2. System saves task list to the new data storage file path and delete the old file.
+3. System shows a message ("Storage file path is updated to: `new file path`").<br>
+Use case ends.
+
+**Extensions**
+
+1a. File path entered is `default`.
+
+> 1a1. System updates data storage file path to default file path.
+> 1a2. System shows a message ("Storage file path is updated to: `default file path`").
+
+1b. File path is not in the correct format.
+
+> 1b1. System shows an error message ("Storage file path is in the wrong format.") with the correct format example.
+> Use case resumes at step 1.
+
+1c. File path already exist.
+
+> 1c1. System shows an error message ("Storage file path is already being used, please choose another location.").
+> Use case resumes at step 1.
 
 
 {More to be added}
