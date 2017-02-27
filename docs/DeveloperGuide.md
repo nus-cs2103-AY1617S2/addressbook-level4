@@ -426,8 +426,8 @@ Use case ends.
 2b. The alias is already reserved for other commands.
 
 > 2b1. System prompts Actor with a message ("`alias` is used as an alias for `original command`, set `alias` to refer to `new command`? yes/no").<br>
->> 2b1a. If user types Yes, system updates the alias name to refer to the new command.<br>
->> 2b1b. If user types No, use case ends.<br>
+>> 2b1a. If user types yes, system updates the alias name to refer to the new command.<br>
+>> 2b1b. If user types no, use case ends.<br>
 > Use case ends
 
 #### Use case 5: Set data storage file path
