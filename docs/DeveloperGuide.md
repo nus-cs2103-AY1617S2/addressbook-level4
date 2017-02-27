@@ -388,35 +388,14 @@ Priority | As a ... | I want to ... | So that I can...
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
-
-#### Use case: Delete person
-
-**MSS**
-
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
-Use case ends.
-
-**Extensions**
-
-2a. The list is empty
-
-> Use case ends
-
-3a. The given index is invalid
-
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+(For all use cases below, the **System** is the `Dueue` and the **Actor** is the `user`, unless specified otherwise)
 
 #### Use case: View tasks due today
 
 **MSS**
 
 1. User requests to list tasks due today
-2. Dueue shows a list of persons<br>
+2. Dueue shows a list of tasks<br>
 Use case ends.
 
 **Extensions**
@@ -431,8 +410,8 @@ Use case ends.
 **MSS**
 
 1. User requests to display all list names
-2. Dueue shows a list of list names
-3. User requests to display all tasks of one list
+2. Dueue shows a list of list names with list indices
+3. User requests to display all tasks of one list specified by list index
 4. Dueue display the tasks of that list <br>
 Use case ends.
 
@@ -494,11 +473,11 @@ Use case ends.
 2. Dueue displays the help message <br>
 Use case ends.
 
-#### Use case: View finished tasks
+#### Use case: View finished tasks by list
 
 1. User requests to display all lists name with finished tasks
 2. Dueue displays a list of lists
-3. User requests to view the finished tasks under specific list
+3. User requests to view the finished tasks under a list specified with list index
 4. Dueue displays the finished tasks under this list <br>
 
 **Extensions**
@@ -508,7 +487,7 @@ Use case ends.
 > 2a1. Dueue shows the message "There is no finished task."<br>
   Use case ends.
 
-3a. The given index is invalid
+3a. The given list index is invalid
 
 > 3a1. Dueue shows an error message <br>
   Use case resumes at step 2
@@ -601,7 +580,7 @@ Use case ends.
 2. Dueue displays priority levels with same color <br>
 Use case ends.
 
-#### Use case: Specify priority level for a task
+#### Use case: Set priority level for a task
 
 **MSS**
 
@@ -653,7 +632,7 @@ Use case ends
 
 **Extension**
 
-1a. There is no task being starred.
+1a. There is no starred task.
 
 > 1a1. Dueue displays an error message "There is no task being starred." <br>
   Use case ends.
