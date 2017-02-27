@@ -133,7 +133,6 @@ public class MainApp extends Application {
 
         String prefsFilePath = config.getUserPrefsFilePath();
         logger.info("Using prefs file : " + prefsFilePath);
-        
         UserPrefs initializedPrefs;
         try {
             Optional<UserPrefs> prefsOptional = storage.readUserPrefs();
