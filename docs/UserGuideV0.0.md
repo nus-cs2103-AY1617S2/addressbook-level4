@@ -20,13 +20,6 @@ By : Miao Ling, Ian , Qi Xiang and Dylan
    > <Adds GUI Image here>
 
 4. Adding your first task: Click on the + floating button at the bottom right of the application the application. A pop out box will appear on your GUI.
-   > You will have to type in the
-   * **`Title`** : Eg. Eat
-   * **`Deadline`** : Eg. 28 Feb 2017 @ 1400hrs
-   * **`Priority`** : Eg. Highest
-   * **`Details`** (if any) : Eat Bar Chor Mee
-   * **`Tags`** (if any) : Chores
-   Click “Done” once you have finished.
 
 5. After step 6, you can view your task in 3 different tabs.
 
@@ -50,12 +43,13 @@ By : Miao Ling, Ian , Qi Xiang and Dylan
 2.2. Adding a Task
    Add a task to the doTASK by clicking on the “+” sign located at the bottom right hand corner
    > A pop out window will appear and you have to fill in the relevant information that include Title, Deadline, Priority (1, 2, 3, 4), Details and Tags.
-	Examples: 
-	> * Title: `Oral Presentation 2`
-	> * Deadline: `19th March`
-	> * Priority: `1 (Highest)`
-	> * Details: `Do research`
-	> * Tags: `School`
+   > You will have to type in the
+   * **`Title`** : Eg. Eat
+   * **`Deadline`** : Eg. 28 Feb 2017 @ 1400hrs
+   * **`Priority`** : Eg. 1 (Highest)
+   * **`Details`** (if any) : Eat Bar Chor Mee
+   * **`Tags`** (if any) : Chores  
+   Click “Done” once you have finished.
 
 2.3. Listing all the tasks
 	Click on the `Overview` Tab to view all the upcoming tasks sorted by dates.
@@ -77,23 +71,23 @@ By : Miao Ling, Ian , Qi Xiang and Dylan
 	Click on the `...` bar available at the side of the task. Select the option of completed and confirm your choice before clearing.
 	 
 2.9. Overdue tasks
-	Under the `Overdue` tab, you can see the list of overdue tasks that you have yet to clear.
+	Under the `Overdue` tab, you can see the list of overdue tasks that you have yet to clear.  
 	> Editing the deadline will result in the relocation of the task out of the `Overdue` tab, until it has reached its due date.
 	
 2.10. Saving the tasks
-	Upon creation of tasks, the tasks will be automatically saved in the folder where the program is held in.
+	Upon creation of tasks, the tasks will be automatically saved in the folder where the program is held in.  
 	> Do not erase the saved data as it will result in a complete loss of data that cannot be recovered by the application itself.
 
 ## 3. FAQ
 
-Q: How do I transfer my data to another Computer?
+Q: How do I transfer my data to another Computer?  
 A: Install the application in the other computer and overwrite the empty data file with the file <file_name.extension> that contains the data of your current doTASK manager.
 
-Q: If I had keyed in the wrong details for a recently added task, how do I change it? 
+Q: If I had keyed in the wrong details for a recently added task, how do I change it?  
 A: Head to the “recently added” tab and select the task that you have just added (it should be at the top of the list). Click on the task and edit accordingly. Click done after completion. 
 
-Q: How do I clear all tasks?
+Q: How do I clear all tasks?  
 A: Under the `help` button, there will be a reset feature. It automatically wipes the saved data.
 
-Q: How do I clear all the tasks under a certain tag?
+Q: How do I clear all the tasks under a certain tag?  
 A: Navigate to `Priority` tab, click the `Clear All` button. There will be a confirmation prompt upon doing so, click confirm to clear the tasks of the tags.
