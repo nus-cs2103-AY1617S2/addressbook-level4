@@ -101,7 +101,7 @@ Two of those classes play important roles at the architecture level.
 The rest of the App consists of four components.
 
 * [**`UI`**](#ui-component) : The UI of the App.
-* [**`Dispatcher`**](): Invokes the suitable command executor. 
+* [**`Dispatcher`**](#dispatcher-component): Invokes the suitable command executor. 
 * [**`Controller`**](#logic-component) : The command executor.
 * [**`Model`**](#model-component) : Holds the data of the App in-memory.
 * [**`Storage`**](#storage-component) : Reads data from, and writes data to, the hard disk.
@@ -119,11 +119,12 @@ _Figure 2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
 
-**JavaFX** is used for the UI. `MainWindow` which holds all the views that make up the different parts of the UI. These views inherit from the abstract `UiView` class, while `MainWindow` itself inherits from the abstract `UiPart` class.
+**JavaFX** is used for the UI. `MainWindow` holds all the views that make up the different parts of the UI. These views inherit from the abstract `UiView` class, while `MainWindow` itself inherits from the abstract `UiPart` class.
 
 #### 2.1.1. UiView
 
 **API** : [`UiView.java`](../src/main/java/seedu/address/ui/view/UiView.java)
+
 `UiView` is the building block for the UI. Each `UiView` should preferably be responsible for only one UI functionality.
 
 Some of the key properties of a `UiView` are described below
@@ -148,7 +149,7 @@ Each `UiView` has a mini lifecycle. `viewDidLoad` is run after `render` is calle
 
 #### 2.1.2. UiStore ####
 
-**API** : [`Controller.java`](../src/main/java/seedu/address/ui/UiStore.java)
+**API** : [`UiStore.java`](../src/main/java/seedu/address/ui/UiStore.java)
 
 `UiStore` holds the data to be used by the `UI`. An example would be the task data to be displayed to the user.
 
@@ -165,7 +166,7 @@ The reactive approach is borrowed from modern Javascript front-end frameworks su
 
 #### 2.2 Dispatcher component ####
 
-**API** : [`Controller.java`](../src/main/java/seedu/address/dispatcher/CommmandDispatcher.java)
+**API** : [`Dispatcher.java`](../src/main/java/seedu/address/dispatcher/CommmandDispatcher.java)
 
 `Dispatcher` acts like a router in a Web MVC architecture. On receiving new input from the UI, `Dispatcher` decides which `Controller` is the best candidate to handle the input, instantiate and ask the `Controller` object to execute the event.
 
@@ -188,18 +189,14 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 <img src="images/DeletePersonSdForLogic.png" width="800"><br>
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
-### 2.4. Model component
-<img src="images/ModelClassDiagram.png" width="800"><br>
-_Figure 2.4.1 : Structure of the Model Component_
+### 2.4. Model Component ###
+
 
 The `Model`,
 * stores the task data.
 * does not depend on any of the other four components.
 
 ### 2.5. Storage component
-
-<img src="images/StorageClassDiagram.png" width="800"><br>
-_Figure 2.5.1 : Structure of the Storage Component_
 
 **API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
 
