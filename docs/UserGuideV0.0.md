@@ -8,7 +8,7 @@ By : Miao Ling, Ian , Qi Xiang and Dylan
 2. [Features] (#features)
 3. [FAQ] (#faq)
 
-## 1. Quick Start
+#quick-start
 
 0. Ensure you have Java version 1.8.0_60 or later installed in your Computer.
 
@@ -84,4 +84,16 @@ By : Miao Ling, Ian , Qi Xiang and Dylan
 	Upon creation of tasks, the tasks will be automatically saved in the folder where the program is held in.
 	> Do not erase the saved data as it will result in a complete loss of data that cannot be recovered by the application itself.
 
-2.11. 
+## 3. FAQ
+
+Q: How do I transfer my data to another Computer?
+A: Install the application in the other computer and overwrite the empty data file with the file <file_name.extension> that contains the data of your current doTASK manager.
+
+Q: If I had keyed in the wrong details for a recently added task, how do I change it? 
+A: Head to the “recently added” tab and select the task that you have just added (it should be at the top of the list). Click on the task and edit accordingly. Click done after completion. 
+
+Q: How do I clear all tasks?
+A: Under the `help` button, there will be a reset feature. It automatically wipes the saved data.
+
+Q: How do I clear all the tasks under a certain tag?
+A: Navigate to `Priority` tab, click the `Clear All` button. There will be a confirmation prompt upon doing so, click confirm to clear the tasks of the tags.
