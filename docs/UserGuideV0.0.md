@@ -55,20 +55,21 @@ By : Miao Ling, Ian , Qi Xiang and Dylan
 	Click on the `Overview` Tab to view all the upcoming tasks sorted by dates.  
 
 ###2.4. Editing an existing task  
-	Click on the task itself and the pop out window will appear, you are able to edit the Title, Deadline, Priority or Details.  
+	Click on the task itself and the pop out window will appear.<br> You will able to edit the Title, Deadline, Priority, Details and Tags.  
 
 ###2.5. Finding a task according to specific tags  
-	Under the `Priority` tab, the user is able to select or unselect tags by ticking the respective boxes. There are 4 default tags,  which are School, Work, Home & CCA.  
+	Under the `Priority` tab, the user is able to select or unselect tags by ticking the respective boxes.<br> There are 4 default tags,  which are School, Work, Home & CCA.  
    > In addition, the user is able to add his or her own tags by clicking on the “Add Tag” button located at the bottom right hand corner.  
 
 ###2.6. Deleting a task  
-	Click on the task itself and the pop out window will appear, click on the delete button if the task is no longer applicable to you.  
+	Click on the task itself and the pop out window will appear.<br> Click on the delete button if the task is no longer applicable to you.  
 
 ###2.7. Viewing the task according to different priorities  
-	Click on the `Priority` tab, the task are sorted in 4 different priorities with different colours indicating the level of importance. The user can easily identify the tasks which are more important.  
+	Click on the `Priority` tab. <br> The tasks are sorted in 4 types of priorities with different colours indicating the level of importance. <br>
+	The user can easily identify the tasks which are more important.  
 
 ###2.8. Completion of a task  
-	Click on the `...` bar available at the side of the task. Select the option of completed and confirm your choice before clearing.  
+	Click on the `...` bar available at the side of the task. <br> Select the option of completed and confirm your choice before clearing.  
 	 
 ###2.9. Overdue tasks  
 	Under the `Overdue` tab, you can see the list of overdue tasks that you have yet to clear.  
