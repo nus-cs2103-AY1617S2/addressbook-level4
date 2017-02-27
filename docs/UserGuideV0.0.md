@@ -37,10 +37,10 @@ By : Miao Ling, Ian , Qi Xiang and Dylan
 
 ## 2. Features
 
-2.1. Viewing help  
+###2.1. Viewing help  
    The User Guide will be shown when the user click on the Help Button.
 
-2.2. Adding a Task  
+###2.2. Adding a Task  
    Add a task to the doTASK by clicking on the “+” sign located at the bottom right hand corner
    > A pop out window will appear and you have to fill in the relevant information that include Title, Deadline,  Priority (1, 2, 3, 4), Details and Tags.  
    > For example
@@ -51,43 +51,43 @@ By : Miao Ling, Ian , Qi Xiang and Dylan
    * **`Tags`** (if any) : Chores  
    Click “Done” once you have finished.
 
-2.3. Listing all the tasks  
+###2.3. Listing all the tasks  
 	Click on the `Overview` Tab to view all the upcoming tasks sorted by dates.  
 
-2.4. Editing an existing task  
+###2.4. Editing an existing task  
 	Click on the task itself and the pop out window will appear, you are able to edit the Title, Deadline, Priority or Details.  
 
-2.5. Finding a task according to specific tags  
+###2.5. Finding a task according to specific tags  
 	Under the `Priority` tab, the user is able to select or unselect tags by ticking the respective boxes. There are 4 default tags,  which are School, Work, Home & CCA.  
    > In addition, the user is able to add his or her own tags by clicking on the “Add Tag” button located at the bottom right hand corner.  
 
-2.6. Deleting a task  
+###2.6. Deleting a task  
 	Click on the task itself and the pop out window will appear, click on the delete button if the task is no longer applicable to you.  
 
-2.7. Viewing the task according to different priorities  
+###2.7. Viewing the task according to different priorities  
 	Click on the `Priority` tab, the task are sorted in 4 different priorities with different colours indicating the level of importance. The user can easily identify the tasks which are more important.  
 
-2.8. Completion of a task  
+###2.8. Completion of a task  
 	Click on the `...` bar available at the side of the task. Select the option of completed and confirm your choice before clearing.  
 	 
-2.9. Overdue tasks  
+###2.9. Overdue tasks  
 	Under the `Overdue` tab, you can see the list of overdue tasks that you have yet to clear.  
    > Editing the deadline will result in the relocation of the task out of the `Overdue` tab, until it has reached its due date.  
 	
-2.10. Saving the tasks  
+###2.10. Saving the tasks  
 	Upon creation of tasks, the tasks will be automatically saved in the folder where the program is held in.  
    > Do not erase the saved data as it will result in a complete loss of data that cannot be recovered by the application itself.  
 
 ## 3. FAQ
 
-Q: How do I transfer my data to another Computer?  
-A: Install the application in the other computer and overwrite the empty data file with the file <file_name.extension> that contains the data of your current doTASK manager.
+**Q**: How do I transfer my data to another Computer?  
+**A**: Install the application in the other computer and overwrite the empty data file with the file <file_name.extension> that contains the data of your current doTASK manager.
 
-Q: If I had keyed in the wrong details for a recently added task, how do I change it?  
-A: Head to the “recently added” tab and select the task that you have just added (it should be at the top of the list). Click on the task and edit accordingly. Click done after completion. 
+**Q**: If I had keyed in the wrong details for a recently added task, how do I change it?  
+**A**: Head to the “recently added” tab and select the task that you have just added (it should be at the top of the list). Click on the task and edit accordingly. Click done after completion. 
 
-Q: How do I clear all tasks?  
-A: Under the `help` button, there will be a reset feature. It automatically wipes the saved data.
+**Q**: How do I clear all tasks?  
+**A**: Under the `help` button, there will be a reset feature. It automatically wipes the saved data.
 
-Q: How do I clear all the tasks under a certain tag?  
-A: Navigate to `Priority` tab, click the `Clear All` button. There will be a confirmation prompt upon doing so, click confirm to clear the tasks of the tags.
+**Q**: How do I clear all the tasks under a certain tag?  
+**A**: Navigate to `Priority` tab, click the `Clear All` button. There will be a confirmation prompt upon doing so, click confirm to clear the tasks of the tags.
