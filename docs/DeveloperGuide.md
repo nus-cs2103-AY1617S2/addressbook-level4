@@ -742,19 +742,54 @@ Use case ends.
 
 ## Appendix E : Product Survey
 
-**Product Name**
+**Wunderlist**
 
-Author: ...
+Author: Yan Xiaoxuan
 
 Pros:
 
-* ...
-* ...
+* Can star a task as most important and task will automatically float to top
+* Can customize background for the UI
+* Can organize multiple tasks in lists, lists under folders
+* Finished tasks will be automatically folded below unfinished ones
+* Can restore deleted lists
+* Can export task lists to formatted printable document
+* Overdue tasks will be highlighted as red (relevant lists and folders are also highlighted)
+* Subtask and notes functions are optional under each task 
 
 Cons:
 
-* ...
-* ...
+* Command msg format is a bit rigid (e.g. cannot interpret “due on Feb 14”)
+* No priority feature attached to tasks (only have the “star” function)
+* Cannot add repeated task (e.g. does not understand “everyday” command)
+* Has no “undo” function
+* Sorting by “alphabetical” or “creation date” order has low usability
+
+**Remember the Milk**
+
+Author: Yan Xiaoxuan
+
+Pros:
+
+* Can add repeated tasks (and deletion of repeated tasks is well-facilitated)
+* Repeated task will be indicated with a special icon on the side (i.e. a everyday task will only be displayed for one time with the “repeat icon” in “this week’s list”, instead of repeated for several times)
+* Can undo previous action
+* Task addition function is easy to understand for new users (with a toolbar suggesting different functions)
+* Special characters like ‘~’ and ‘^’ can replace words like “from” and “due on” for fast typing when adding tasks
+* Can customize a lot of things, such as reminder frequency and “daily digest”
+* Can archive a list instead of moving to trash
+* Can add “location” (which is supported by Google Maps) and “tag”s to individual tasks by user defined location and tag lists
+* Has “bulk update” function to process selected tasks together
+* Can postpone task due date
+* Tasks in the trash folder will be removed automatically after 30 days
+* Can view “keyboard shortcuts” conveniently (users can continually learn to use them)
+
+Cons:
+
+* To mark a task as finished takes two steps to complete
+* Cannot customize background
+* Toolbars and sidebar is a bit monotone, with few visual highlights on key functions
+
 
 **Todoist**
 
