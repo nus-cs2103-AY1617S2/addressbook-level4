@@ -112,28 +112,6 @@ Our architecture follows the MVC Pattern: UI displays data and interacts with th
 
 The sections below give more details of each component.
 
-#### Events-Driven nature of the design
-
-The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
-command `delete 1`.
-
-<img src="images\SDforDeletePerson.png" width="800"><br>
-_Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
-
->Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed,
- instead of asking the `Storage` to save the updates to the hard disk.
-
-The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
-being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
-<img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
-_Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
-
-> Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
-  to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
-  coupling between components.
-
-The sections below give more details of each component.
-
 ### 2.1. UI component
 
 <img src="images/UiClassDiagram.png" width="800"><br>
@@ -145,6 +123,7 @@ _Figure 2.1 : Structure of the UI Component_
 
 #### 2.1.1. UiView
 
+**API** : [`UiView.java`](../src/main/java/seedu/address/ui/view/UiView.java)
 `UiView` is the building block for the UI. Each `UiView` should preferably be responsible for only one UI functionality.
 
 Some of the key properties of a `UiView` are described below
@@ -169,9 +148,11 @@ Each `UiView` has a mini lifecycle. `viewDidLoad` is run after `render` is calle
 
 #### 2.1.2. UiStore ####
 
+**API** : [`Controller.java`](../src/main/java/seedu/address/ui/UiStore.java)
+
 `UiStore` holds the data to be used by the `UI`. An example would be the task data to be displayed to the user.
 
-#### 2.1.3. Reactive Data Flow ####
+#### 2.1.3. Reactive nature of the UI ####
 
 To keep the UI predictable and to reduce the number of lines of codes used to dictate how the UI should change based on state changes, reactive programming is used. How the UI should be rendered can be simply declared based on the states held by the `UiStore`.
 
@@ -180,22 +161,27 @@ The diagram below shows how the UI reacts when an add command is called. The UI 
 <img src="images/UiSequence.png" width="600"><br>
 _Figure 2.1.3 : Interactions Inside the UI for the `add study` Command_
 
-The idea of reactive data flow is borrowed from modern Javascript front-end frameworks such as React.js and Vue.js.
+The reactive approach is borrowed from modern Javascript front-end frameworks such as React.js and Vue.js.
 
+#### 2.2 Dispatcher component ####
 
-### 2.2. Controller component:
+**API** : [`Controller.java`](../src/main/java/seedu/address/dispatcher/CommmandDispatcher.java)
 
-Author: Bernard Choo
+`Dispatcher` acts like a router in a Web MVC architecture. On receiving new input from the UI, `Dispatcher` decides which `Controller` is the best candidate to handle the input, instantiate and ask the `Controller` object to execute the event.
 
-<img src="images/LogicClassDiagram.png" width="800"><br>
-_Figure 2.3.1 : Structure of the Logic Component_
+`Dispatcher` acts as bridge from the Ui to the controllers, nothing more nothing less.
 
-**API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
+### 2.3. Controller component
 
-1. `Logic` uses the `Parser` class to parse the user command.
-2. This results in a `Command` object which is executed by the `LogicManager`.
-3. The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
-4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
+<img src="images/ControllerClassDiagram.png" width="800"><br>
+_Figure 2.3.1 : Structure of the Controller Component_
+
+**API** : [`Controller.java`](../src/main/java/seedu/address/controller/Controller.java)
+
+1. `Controller` has a `execute` method to execute the command passed by the dispatcher.
+2. The command execution can affect the `Model`, the `Storage` (e.g. adding a task) and/or raise events.
+3. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the dispatcher.
+4. After every `execute` invocation, `Controller` can optionally set new states in the `UiStore` and ask the `UI` to re-render.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
@@ -203,35 +189,34 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
 ### 2.4. Model component
-
-Author: Cynthia Dharman
-
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 2.4.1 : Structure of the Model Component_
 
-**API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
-
 The `Model`,
-
-* stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
-* exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
-  so that the UI automatically updates when the data in the list change.
-* does not depend on any of the other three components.
+* stores the task data.
+* does not depend on any of the other four components.
 
 ### 2.5. Storage component
-
-Author: Darius Foong
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
 
 **API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
 
-The `Storage` component,
+The `Storage` acts like a database in the application. It provides read/write funcionalities to the `Model`, encapsuling all the inner implementation details. The `Storage` is a singleton, analogous to how a typical database service is always runninng in a traditional database-dependent application.
 
-* can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+The `Storage` component,
+* can save the task data in json format and read it back.
+* holds the history of all data changes
+
+####Undoable History
+
+`historyStack` hold the serialized json strings of the task list data. The minimum size of this stack is always 1. The json string at the top of the stack is the serialization of the current todo list data.
+
+To undo the most recent changes, we simply pop the irrelevant data the top of the `historyStack` and deserialize the json at the top of the stack into task list data.
+
+This approach is reliable as it eliminates the need to implement an "unexecute" method and store the changes separately for each command that will mutate the task list.
+
 
 ### 2.6. Common classes
 
