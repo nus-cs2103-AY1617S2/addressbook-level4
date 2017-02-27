@@ -830,7 +830,7 @@ Cons:
 * Cannot customized background
 * Cannot add priority for tasks (Have to sort tasks manually)
 
-**Mac Calender**
+**Mac Calendar**
 
 Author: Mou Ziyang
 
