@@ -478,17 +478,19 @@ Use case ends.
 
 ## Appendix E : Product Survey
 
-**Product Name**
-
-Author: ...
+**Google Calendar**
 
 Pros:
 
-* ...
-* ...
+* Support recurring events.
+* Monthly, weekly, daily calendar view is useful for users to visualise their schedule.
+* Support fuzzy search for events.
+* Certain operations does not require clicking (e.g. add event).
+* Support sharing of calendar with other users through export to CSV or iCal.
 
 Cons:
 
-* ...
-* ...
+* Does not support task without deadline.
+* Does not support marking task as complete/incomplete.
+* Certain operations requires clicking (e.g. update task), which is not what Jim wants.
 
