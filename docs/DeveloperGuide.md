@@ -423,30 +423,105 @@ Priority | As a ... | I want to ... | So that I can...
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Typed` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: View history of actions ####
+
+**MSS**
+User keys in a series of command(s)
+User requests to view history of actions
+Typed displays the list of past actions
+Use case ends.
+
+**Extensions**
+1a. Command is typed in wrongly
+	| Systems indicate error and output a list of valid commands
+2a. List is empty
+	| System indicate History Command only
+2b. List size is way too large
+	| System shows the recent 10 commands
+
+#### Use case: Perform simple keyword query ####
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+User enters a keyword to find any matching to do in Typed.
+Typed displays all the todos with matching keywords.
+
+**Extensions** 
+1a. Typed is empty
+	| User search his todos using keywords
+	| Typed displays that there are no todo with the any matching keywords.
+	| Use case ends
+
+#### Use case: Undo previous action ####
+
+**MSS**
+
+User keys in a series of command(s) changing information stored in Typed.
+User requests to undo the last action done.
+Typed undoes the last action done.
+Typed displays text informing user that the last action has been successfully undone.
 Use case ends.
 
 **Extensions**
 
-2a. The list is empty
+1a. User does not key in any command at all
+	| User requests to undo the last action done
+	| Typed displays text informing user that there are no actions to be undone
+	| Use case ends
 
-> Use case ends
+1b. User keys in a series of command(s) that do not change the information stored in Typed
+	| User requests to undo the last action done
+	| Typed displays text informing user that there are no actions to be undone
+	| Use case ends
 
-3a. The given index is invalid
+2a. User restarts the session
+	| User requests to undo the last action done
+	| Typed displays text informing user that there are no actions to be undone
+	| Use case ends
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+#### Use case: Redo previous undone action ####
 
-{More to be added}
+**MSS**
+
+User keys in a series of command(s) changing information stored in Typed.
+User requests to undo the last action done.
+User requests to redo the previously undone action.
+Typed redoes the last action undone by Typed. 
+Typed displays text informing user that the last undone action has been successfully redone.
+Use case ends.
+
+**Extensions**
+
+1a. User does not key in any command at all
+	| User requests to undo the last action done
+	| Typed displays text informing user that there are no actions to be undone
+	| Use case ends
+
+1b. User keys in a series of command(s) that do not change the information stored in Typed
+	| User requests to undo the last action done
+	| Typed displays text informing user that there are no actions to be undone
+	| Use case ends
+
+2a. User restarts the session
+	| User requests to undo the last action done
+	| Typed displays text informing user that there are no actions to be undone
+	| Use case ends
+
+3a. User keys in a command that changes the information stored in Typed
+	| User requests to redo the last action done
+	| Typed displays text informing user that there are no undone actions to be redone
+	| Use case ends
+
+3b. User keys in a series of command(s) that do not change the information stored in Typed
+	| Use case continues from step 3
+
+3c. User restarts the session
+	| User requests to redo the last action done
+	| Typed displays text informing user that there are no undone actions to be redone
+	| Use case ends
+
 
 ## Appendix C : Non Functional Requirements
 
