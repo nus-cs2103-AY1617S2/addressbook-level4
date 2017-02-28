@@ -1,4 +1,4 @@
-# AddressBook Level 4 - Developer Guide
+# WhatsLeft - Developer Guide
 
 By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
@@ -346,27 +346,67 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | new user | view all available commands | refer to them when I forget how to use the App
+`* * *` | user | add new [task](#task-definition) | keep track of it
+`* * *` | user | update chosen task | change relevant details
+`* * *` | user | delete chosen task | mark it as cancelled
+`* * *` | user | view list of tasks | know what is left
+`* * *` | user | mark task as complete | archive the completed task
+`* * *` | user | sort the list of tasks by due date | know what is due first
+`* * *` | user | sort the list of tasks by priority level | know what to do first
+`* * *` | user | select the storage folder/file | store them on a local file controlled by a cloud syncing service
+`* * *` | user | undo my last operation | reverse any mistake made
+`* * *` | user | let completed events automatically archive themselves | save time checking them off
+`* * *` | user | view all completed tasks
+`* *` | user | search for tasks by attribute | find out details on specific tasks
+`* *` | user | set up recurring tasks | save time setting them up every day/month/year
+`* *` | user | sync my tasks with google calendar/tasks | access them online through other applications and devices (mobile)
+`* *` | user | receive an email reminder for tasks | be prompt on tasks that are due
+`* *` | user | customise the reminder myself | choose how and when to be notified
+`* *` | user | block multiple slots for unconfirmed events | ensure no other events will clash
+`* *` | user | confirm an event to release blocked timeslots | maximise the use of my time
+`* *` | user | pin/star a task | see it at the top of my list all the time
+`* *` | user | add comments to my tasks | put in details that i might want to remember
+`* *` | user | see the overview of tasks in calendar format | see how busy the month will be for me
+`*` | Advanced user | use shorter version of commands | type them easily and quickly
+`*` | user | schedule events based on day ("this wed, next tues") without knowing the date | add tasks quickly
+`*` | user | view list of uncompleted tasks of same nature (events, deadlines, floating tasks) | see things that are important to me
+`*` | user | send reminders to other people involved in certain tasks | notify collaborators
+`*` | Advanced user | color code the tasks myself | see the importance of tasks without opening them up
+`*` | user | view list of deleted tasks | check details of deleted tasks
+`*` | user | view list of archived tasks | check details of archived tasks
+`*` | user | move task from deleted list to [active list](#active-list) | add the task without re-creating it entirely
+`*` | user | copy a task from the archived list to the active list | add the same task without re-creating it entirely
 
 {More to be added}
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `WhatsLeft` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: Add [Task](#Task-definition)
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User requests to add Task/Event/Deadline
+2. WhatsLeft adds specified Task/Event/Deadline <br>
+Use case ends.
+
+**Extensions**
+
+1a. The command entered is not in the correct format
+
+> 1a1. WhatsLeft shows error message and suggests correct format <br>
+  Use case ends
+
+#### Use case: Delete [Task](#Task-definition)
+
+**MSS**
+
+1. User requests to list Task/Event/Deadline
+2. WhatsLeft shows user the list of all Task/Event/Deadline
+3. User requests to delete a specific Task/Event/Deadline
+4. WhatsLeft deletes the specified Task/Event/Deadline
 Use case ends.
 
 **Extensions**
@@ -377,43 +417,190 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. AddressBook shows an error message <br>
+> 3a1. WhatsLeft shows an error message <br>
   Use case resumes at step 2
+
+#### Use case: Update [Task](#Task-definition)
+
+**MSS**
+
+1. User requests to list Task/Event/Deadline
+2. WhatsLeft shows user the list of all Task/Event/Deadline
+3. User requests to update a specific Task/Event/Deadline
+4. WhatsLeft updates the specified Task/Event/Deadline
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given index is invalid
+
+> 3a1. WhatsLeft shows an error message <br>
+  Use case resumes at step 2
+
+#### Use case: Mark [Task](#Task-definition) as complete
+
+**MSS**
+
+1. User requests to list Task/Event/Deadline
+2. WhatsLeft shows user the list of all Task/Event/Deadline
+3. User requests to mark a specific Task/Event/Deadline as complete
+4. WhatsLeft archives the specified Task/Event/Deadline
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given index is invalid
+
+> 3a1. WhatsLeft shows an error message <br>
+  Use case resumes at step 2
+
+#### Use case: Sort list of [Tasks](#Task-definition) by specified parameters
+
+**MSS**
+
+1. User requests to list Task/Event/Deadline
+2. WhatsLeft shows user the list of all Task/Event/Deadline
+3. User requests to sort list of Task/Event/Deadline by specified parameters
+4. WhatsLeft sorts and displays list of Task/Event/Deadline
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given parameter is invalid
+
+> 3a1. WhatsLeft shows an error message <br>
+  Use case resumes at step 2
+
+#### Use case: Undo last [operation](#operation-definition)
+
+**MSS**
+
+1. User requests to undo last operation
+2. WhatsLeft undoes last operation
+Use case ends.
+
+**Extensions**
+
+2a. There was no previous [operation](#operation-definition)
+
+> Use case ends
 
 {More to be added}
 
 ## Appendix C : Non Functional Requirements
 
-1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
+1. Should work on any desktop running windows 7 and above as long as it has Java `1.8.0_60` or higher installed.
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should be able to work without needing any installation.
 
 {More to be added}
 
 ## Appendix D : Glossary
 
-##### Mainstream OS
+##### Active list
 
-> Windows, Linux, Unix, OS-X
+> List of all tasks that have not been completed
 
-##### Private contact detail
+##### Task definition
 
-> A contact detail that is not meant to be shared with others
+> Can be a floating task (no specified ending date), event, or a deadline
+
+##### Operation definition
+
+> Refers to the following operations: add, update, delete, completed, clear 
+
 
 ## Appendix E : Product Survey
 
-**Product Name**
+**Trello**
 
-Author: ...
+Author: Fog Creek
 
 Pros:
 
-* ...
-* ...
+* Board > list > card (task)
+* Allows copying
+* Allows dragging 
+* Can "star" boards
 
 Cons:
 
-* ...
-* ...
+* Does not allow deletion
 
+
+**Wunderlist**
+
+Author: 6Wunderkinder
+
+Pros:
+
+* Archives completed tasks automatically
+* Allows adding subtask
+* Allows creating multiple lists
+* Allows sharing with friends
+* Allows sort alphabetically/by due date/by creation date/by priority
+
+Cons:
+
+* Does not show the due date in the task list
+
+**Microsoft Outlook**
+
+Author: Microsoft
+
+Pros:
+
+* Syncs events from all connected accounts to calendar automatically, including birthdays, Facebook events
+* Color coded
+* See tasks/events in a weekly/monthly/daily view
+
+Cons:
+
+* Past events are lost forever/inaccessible
+* No integrated free-floating task list
+
+**HiTask**
+
+Author: Human Computer LLC
+
+Pros:
+
+* Allows shared calendar with collaborators
+* Allows individual tasks and to assign shared tasks
+* Integrated communication client
+* Integrated platforms for mobile and desktop
+* Create tasks by email
+
+Cons:
+
+* Steep learning curve due to many features
+
+**Remember the milk**
+
+Author: Emily Boyd, Omar Kilani
+
+Pros:
+
+* Can share with others
+* Sync on multiple devices
+* Smart add
+* Can break tasks down into subtasks
+* Smart search
+
+Cons:
+
+* Only paying users get access to full features
