@@ -17,7 +17,7 @@ By : `Miao Ling` , `Ian` , `Qi Xiang` and `Dylan` - `[W09-B4]` Since : `Feb 2017
 2. Copy the file to the folder you want to use as the home folder for your task manager.
 
 3. Double-click on the file to start the application. The GUI should appear in a few seconds.<br>
-   > <img src="images/Priority_screen.png" width="600">
+   > <img src="images/Priority_screen.jpg" width="600">
 
 4. Adding your first task: Click on the + floating button at the bottom right of the application the application. A pop out box will appear on your GUI.
 
