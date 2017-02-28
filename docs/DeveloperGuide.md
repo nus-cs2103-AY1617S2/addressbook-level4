@@ -377,30 +377,98 @@ Priority | As a ... | I want to ... | So that I can...
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `ToLuist` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+(For all use cases below, the **System** is `ToLuist` and the **Actor** is the `user`, unless specified otherwise)
+
+#### Use case 1: Add a task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. Actor requests to add a task with `description` in the input box.
+2. System adds the task.
+3. System shows a feedback message ("Task `description` added") and displays the updated list.<br>
 Use case ends.
 
 **Extensions**
 
-2a. The list is empty
+1a. `description` is not provided.
 
+> 1a1. System shows an error message ("Please provide a task description") with the correct format example.<br>
+> Use case resumes at step 1
+
+#### Use case 2: Delete a task
+
+**MSS**
+
+1. Actor requests to delete a task with `index` number in the input box.
+2. System finds the task and deletes it.
+3. System shows a feedback message ("Task `description` removed") and displays the updated list.<br>
+Use case ends.
+
+**Extensions**
+
+2a. `index` number given is invalid or cannot be found (i.e. `index` number is not a positive integer, or an out-of-range positive integer).
+
+> 2a1. System shows an error message ("Please provide a proper index number") with the correct format example.
+> Use case resumes at step 1
+
+#### Use case 3: Undo previous mutated command
+
+**MSS**
+
+1. Actor requests to `undo` action in the input box.
+2. System finds the most recent command that mutates the list and undo it.
+3. System shows a feedback message ("Undo '`previous command`'") and displays the updated list.<br>
+Use case ends.
+
+**Extensions**
+
+2a. No previous mutated command to undo
+
+> 2a1. System does nothing since there is nothing to undo.
 > Use case ends
 
-3a. The given index is invalid
+#### Use case 4: Add alias command
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+**MSS**
 
-{More to be added}
+1. Actor requests to `alias` a command in the input box with a `new alias name`.
+2. System finds the command and alias it.
+3. System shows a feedback message ("`new alias name` is set as the new alias for `command`.").<br>
+Use case ends.
+
+2a. The alias is already reserved for other commands.
+
+> 2a1. System updates the alias name to refer to the new command.<br>
+> Use case resumes at step 3.
+
+#### Use case 5: Set data storage file path
+
+**MSS**
+
+1. Actor requests to save data to a `new file path`.
+2. System saves task list to the new data storage file path and delete the old file.
+3. System shows a message ("Storage file path is updated to: `new file path`").<br>
+Use case ends.
+
+**Extensions**
+
+1a. File path entered is `default`.
+
+> 1a1. System updates data storage file path to default file path.<br>
+> 1a2. System shows a message ("Storage file path is updated to: `default file path`").<br>
+> Use case ends.
+
+1b. File path is not in the correct format.
+
+> 1b1. System shows an error message ("Storage file path is in the wrong format.") with the correct format example.<br>
+> Use case resumes at step 1.
+
+1c. File path already exist.
+
+> 1c1. System shows an error message ("Storage file path is already being used, please choose another location.").<br>
+> Use case resumes at step 1.
+
 
 ## Appendix C : Non Functional Requirements
 
@@ -445,17 +513,20 @@ Use case ends.
 
 ## Appendix E : Product Survey
 
-**Product Name**
-
-Author: ...
+**Google Calendar**
 
 Pros:
 
-* ...
-* ...
+* Support recurring events.
+* Monthly, weekly, daily calendar view is useful for users to visualise their schedule.
+* Support fuzzy search for events.
+* Certain operations does not require clicking (e.g. add event).
+* Support sharing of calendar with other users through export to CSV or iCal.
+* Can be used offline.
 
 Cons:
 
-* ...
-* ...
+* Does not support task without deadline.
+* Does not support marking task as complete/incomplete.
+* Certain operations requires clicking (e.g. update task), which is not what Jim wants.
 
