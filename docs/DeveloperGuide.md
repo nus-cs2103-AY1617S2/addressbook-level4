@@ -343,7 +343,7 @@ b. Require developers to download those libraries manually (this creates extra w
 
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
 
-
+### Example User Stories
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
@@ -353,7 +353,73 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
 `*` | user with many persons in the address book | sort persons by name | locate a person easily
 
-{More to be added}
+### Our User Stories 
+# TODO: sort and categorise user stories
+
+`* * *` | user | enter commands with the use of flags | specify the perimeters of the command more clearly
+`* * *` | user | mark a task as complete | remove it from undone tasks
+`* * *` | user | task type filter | view tasks by their types
+`* * *` | user | have each command processed within a second | be more efficient and productive in managing my tasks
+`* * *` | user | perform simple keyword/(s) queries | view all relevant tasks containing the keyword/(s)
+`* * *` | advanced user | use shorter versions of commands | type each command faster
+`* * *` | user | undo my last move | correct my mistake
+`* * *` | user | have common words (e.g. today, next monday) to be valid commands | I don't have to look up a calendar to get exact dates
+`* * *` | user | view information about a particular command | learn to use it
+`* * *` | user | find upcoming tasks | see what needs to be done soon
+`* * *` | user | add a task by specifying task description only | record tasks without deadlines
+`* * *` | user | update or edit a task | change information about the task 
+`* * *` | user | delete a task | get rid of tasks i no longer wish to track
+`* * *` | user | have a tutorial | know how to use the task manager
+`* * *` | user | be able to do everything through typing | it is convenient for me
+`* * *` | user | view undone tasks according to deadlines | I can prioritise tasks that are more urgent
+`* * *` | user | view my tasks by day | know what my tasks and schedule are for a certain day
+`* * *` | user | weekly overview of what is due this week | plan my time better
+
+
+`* *` | user | redo an action | redo an undo action
+`* *` | user | big picture overview of my daily performance | learn the patterns of my own productivity 
+`* *` | user | access my email alongside the task manager | do not need to switch screens in order to add tasks
+`* *` | user | set recurring tasks | don't have to key recurring events repeatedly
+`* *` | user | commands to be highlighted | know they are valid commands
+`* *` | user | see command formats as I type | refer to it if I am unsure of the format
+`* *` | user | a daily progress check-in function | know I have worked on a task today even if I cannot complete it
+`* *` | user | see all upcoming deadlines in a calendar view | have an overview of all my tasks
+`* *` | user | integration with text notifications | receive text alerts regarding important tasks that are due even when I do not have access to my task manager
+`* *` | user | view tasks by their given tags | sort them according to tags
+`* *` | user | to archive completed tasks | know what I have completed in the past
+`* *` | user | create new shortcuts | speed up my workflow
+`* *` | user | see overdue tasks | know I need to finish those fast
+`* *` | user | change font, font size, colour of words | feel more comfortable using the task manager
+`* *` | user | my task manager to link to the necessary resources such as email or IVLE exact pages | I do not have to open a browser to do such things
+`* *` | user | import calendars' schedule into the task manager | I can look at my calendar
+`* *` | user | redo commands | redo what I have undo-ed
+`* *` | user | mark a whole group of tasks as done | I don't have to mark each task individually
+`* *` | user | port my whole schedule over to online platforms such as Dropbox | can access it on any computer
+`* *` | user | add tasks with multiple tags | assign each task multiple keywords
+`* *` | user | undo multiple actions at once | save time undo-ing individually 
+`* *` | user | check my spelling as I type | correct it immediately
+`* *` | user | have a countdown day timer | know how much time is left to do each task
+`* *` | user | redo multiple actions at once | save time redo-ing individually
+`* *` | user | have a confirmation that my command has been processed | be assured
+`* *` | user | add comments to a task | know more details about the task
+`* *` | user | enable backup | have a backup copy in case the storage fails or crashes
+`* *` | user | have my list of to-dos sync across all my devices | work without the computer
+`* *` | user | open the respective application to complete a particular task | save extra steps
+`* *` | user | some sort of points or incentive system | accomplish more and be more motivated to be productive
+`* *` | user | attach documents to my tasks | organise my documents according to tasks
+`* *` | user | a reminder function | get notified when deadlines or events are nearer
+`* *` | user | sort the tasks based on tags | view tasks by tags
+`* *` | user | add subtasks to a bigger task | organise my tasks into smaller parts
+`* *` | user | prioritise my tasks | finish those of higher priority first
+`* *` | user | be prompted when adding clashing events | be aware of prior engagements I have already scheduled to be occurring at the same time
+
+
+`*` | user | see affirmations of my effort upon task completions | look forward to accomplishing more tasks
+`*` | user | be greeted with motivational lines when I launch the task manager | feel motivated to start doing things
+`*` | user | greeted with a compliment when I launch the task manager | be in a good mood to start doing things
+`*` | user | receive encouragement | feel good about myself and want to use the task manager more
+`*` | user | some sort of punishment when I fail to complete a task | not forget to do my tasks
+`*` | user | a simple user interface | be less distracted and more productive
 
 ## Appendix B : Use Cases
 
@@ -385,11 +451,9 @@ Use case ends.
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-{More to be added}
 
 ## Appendix D : Glossary
 
