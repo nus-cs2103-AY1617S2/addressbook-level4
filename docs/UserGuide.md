@@ -46,7 +46,7 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Adds a task to the todo list<br>
-Format: `add NAME [d/ENDDATE] [sd/STARTDATE] [r/PERIOD(DAY/WEEK/MONTH)] [t/TAG]...`
+Format: `add NAME [d/ENDDATE] [sd/STARTDATE] [r/PERIOD(DAY/WEEK/MONTH)] [p/PRIORITY] [t/TAG]...`
 
 > Tasks can have any number of tags (including 0).
 
@@ -59,7 +59,7 @@ Examples:
 ### 2.3. Updating a task : `update`
 
 Updates an existing task in the todo list.<br>
-Format: `update INDEX [NAME] [sd/STARTDATE] [d/ENDDATE] [r/PERIOD(DAY/WEEK/MONTH)] [t/TAG]...`
+Format: `update INDEX [NAME] [sd/STARTDATE] [d/ENDDATE] [r/PERIOD(DAY/WEEK/MONTH)] [p/PRIORITY] [t/TAG]...`
 
 > * Updates the task at the specified `INDEX`. <br>
     The index refers to the index number shown in the last task listing.<br>
@@ -137,7 +137,7 @@ Format: `exit`
 Undoes previous commands by the user.<br>
 Format: `undo [NUMBER]`
 
-> Undoes the last data-mutating command inputted by the user.<br>
+> Undo the last data-mutating command inputted by the user.<br>
 > If a number is entered, undoes that ammount of previous commands instead.<br>
 > The number **must be a positive integer** 1, 2, 3, ...
 
@@ -153,7 +153,7 @@ Examples:
 
 ### 2.9. Redo a command : `redo`
 
-Redoes previously undone commands by the user.<br>
+Redo previously undone commands by the user.<br>
 Format: `redo [NUMBER]`
 
 > Redo the last data-mutating command inputted since the undone point.<br>
