@@ -163,8 +163,8 @@ There is no need to save manually.
 
 ## 4. Command Summary
 
-* **Add**  `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` <br>
-  e.g. `add James Ho p/22224444 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+* **Add**  `add TASKNAME due/DUEDATE #/LISTNAME d/DESCRIPTION FAVOURITEORNOT` <br>
+  e.g. `add laundry due/every sunday #/personal d/wash clothes favourite`
 
 * **Clear** : `clear`
 
@@ -175,7 +175,7 @@ There is no need to save manually.
   e.g. `find James Jake`
 
 * **List** : `list` <br>
-  e.g.
+  e.g. `list all tasks`
 
 * **Help** : `help` <br>
   e.g.
@@ -183,4 +183,5 @@ There is no need to save manually.
 * **Select** : `select INDEX` <br>
   e.g.`select 2`
 
-
+* **Update** : `update Task-INDEX [parameters]` <br>
+  e.g.`update 103 due/tomorrow`
