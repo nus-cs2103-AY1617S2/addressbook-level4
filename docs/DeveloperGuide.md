@@ -506,6 +506,7 @@ Use case ends.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should be able to work without needing any installation.
+5. Response time of 1s for each operation.
 
 {More to be added}
 
@@ -517,7 +518,7 @@ Use case ends.
 
 ##### Task definition
 
-> Can be a floating task (no specified ending date), event, or a deadline
+> Can be a floating task (no specified ending date), event (start and end time possible), or a deadline (only end time)
 
 ##### Operation definition
 
