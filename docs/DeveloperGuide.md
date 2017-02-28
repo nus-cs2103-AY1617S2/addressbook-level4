@@ -346,14 +346,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
-
-{More to be added}
+`* * *` | new user | see usage instructions | refer to instructions when I forget how to use Opus
+`* * *` | user | add a new task using the task descriptor | record all my tasks
+`* * *` | user | edit a task | modify the attributes of the task whenever needed
+`* * *` | user | delete a task | remove tasks that I do not wish to keep track of
+`* * *` | user | list out all uncompleted task | quickly view my outstanding tasks that I need to complete
+`* * *` | user | mark a task as completed | differentiate between completed and uncompleted tasks
+`* * *` | user | set a deadline to a task | easily keep track of deadline for a certain task to be completed
+`* *` | user | search for a specific task using the task descriptor | locate a certain task quickly
+`* *` | user | assign a tag to a task | group tasks that belongs to the same category together
+`* *` | user | list the tasks based on tags | keep track of a specific set of tasks
+`*` | user | add notes to a task | include more information to a task
+`*` | user | rate the workload of a task | understand how many tasks I can accomplish within a period of time
 
 ## Appendix B : Use Cases
 
