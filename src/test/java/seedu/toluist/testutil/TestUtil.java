@@ -23,8 +23,6 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
-import junit.framework.AssertionFailedError;
-import seedu.toluist.commons.exceptions.IllegalValueException;
 import seedu.toluist.commons.util.FileUtil;
 import seedu.toluist.commons.util.XmlUtil;
 import seedu.toluist.model.Tag;
@@ -43,32 +41,11 @@ public class TestUtil {
 
     public static final Tag[] SAMPLE_TAG_DATA = getSampleTagData();
 
-    public static void assertThrows(Class<? extends Throwable> expected, Runnable executable) {
-        try {
-            executable.run();
-        } catch (Throwable actualException) {
-            if (actualException.getClass().isAssignableFrom(expected)) {
-                return;
-            }
-            String message = String.format("Expected thrown: %s, actual: %s", expected.getName(),
-                    actualException.getClass().getName());
-            throw new AssertionFailedError(message);
-        }
-        throw new AssertionFailedError(
-                String.format("Expected %s to be thrown, but nothing was thrown.", expected.getName()));
-    }
-
     private static Tag[] getSampleTagData() {
-        try {
-            return new Tag[]{
-                new Tag("relatives"),
-                new Tag("friends")
-            };
-        } catch (IllegalValueException e) {
-            assert false;
-            return null;
-            //not possible
-        }
+        return new Tag[] {
+            new Tag("relatives"),
+            new Tag("friends")
+        };
     }
 
     /**
@@ -243,13 +220,7 @@ public class TestUtil {
         final String[] split = tags.split(", ");
 
         final List<Tag> collect = Arrays.asList(split).stream().map(e -> {
-            try {
-                return new Tag(e.replaceFirst("Tag: ", ""));
-            } catch (IllegalValueException e1) {
-                //not possible
-                assert false;
-                return null;
-            }
+            return new Tag(e.replaceFirst("Tag: ", ""));
         }).collect(Collectors.toList());
 
         return collect.toArray(new Tag[split.length]);
