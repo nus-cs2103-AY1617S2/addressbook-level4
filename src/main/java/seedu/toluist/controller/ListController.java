@@ -1,7 +1,5 @@
 package seedu.toluist.controller;
 
-import java.util.Optional;
-
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.UiStore;

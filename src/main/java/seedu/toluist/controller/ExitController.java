@@ -4,8 +4,6 @@ import seedu.toluist.commons.core.EventsCenter;
 import seedu.toluist.commons.events.ui.ExitAppRequestEvent;
 import seedu.toluist.dispatcher.CommandResult;
 
-import java.util.logging.Logger;
-
 /**
  * Handle exit command
  */
