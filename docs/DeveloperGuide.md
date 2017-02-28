@@ -396,7 +396,7 @@ Use case ends.
 > 3a1. KoolToDoManager shows an error message <br>
   Use case resumes at step 2
   
-  #### Use case: Export task files
+#### Use case: Export task files
 
 **MSS**
 
@@ -419,7 +419,7 @@ Use case ends.
 > 5a1. KoolToDoManager shows an error message <br>
   Use case resumes at step 4
   
-  #### Use case: Create subtasks
+#### Use case: Create subtasks
 
 **MSS**
 
@@ -441,6 +441,7 @@ Use case ends.
 
 > 5a1. KoolToDoManager shows an error message <br>
   Use case resumes at step 4
+  
 #### Use case: Adding a new task
 
 **MSS**
@@ -448,7 +449,7 @@ Use case ends.
 1. User requests to add tasks
 2. KoolToDoManager prompts user for name of task
 3. User inputs name of task
-4. KoolToDoManager adds the task 
+4. KoolToDoManager adds the task <br>
 Use case ends.
 
 **Extensions**
@@ -465,7 +466,7 @@ Use case ends.
 1. User requests to delete tasks
 2. KoolToDoManager prompts user for name of task
 3. User inputs name of task
-4. KoolToDoManager deletes the task 
+4. KoolToDoManager deletes the task <br>
 Use case ends.
 
 **Extensions**
@@ -482,7 +483,7 @@ Use case ends.
 3. User inputs name of task
 4. KoolToDoManager prompts user for new details of task 
 5. User inputs new details of task
-6. KoolToDoManager edits the task
+6. KoolToDoManager edits the task <br>
 Use case ends.
 
 **Extensions**
@@ -500,7 +501,7 @@ Use case ends.
 1. User requests to view a task
 2. KoolToDoManager prompts for name of task
 3. User inputs name of task
-4. KoolToDoManager brings up details of task
+4. KoolToDoManager brings up details of task <br>
 Use case ends.
 
 **Extensions**
@@ -513,7 +514,7 @@ Use case ends.
 **MSS**
 
 1. User requests to list all tasks
-2. KoolToDoManager lists all tasks
+2. KoolToDoManager lists all tasks <br>
 Use case ends.
 
 **Extensions**
@@ -526,13 +527,13 @@ Use case ends.
 **MSS**
 
 1. User requests to list all urgent tasks
-2. KoolToDoManager lists all urgent tasks
+2. KoolToDoManager lists all urgent tasks <br>
 Use case ends.
 
 **Extensions**
 
 1a. No urgent tasks exist
-> KoolToDoManager shows an error message <br>
+> KoolToDoManager shows an error message
 
 #### Use case: Create alarms and reminders
 
@@ -541,7 +542,7 @@ Use case ends.
 1. User requests to create alarm
 2. KoolToDoManager prompts for date and time
 3. User inputs date and time
-4. KoolToDoManager creates alarm
+4. KoolToDoManager creates alarm <br>
 Use case ends.
 
 **Extensions**
@@ -556,7 +557,7 @@ Use case ends.
 **MSS**
 
 1. User requests to list commands
-2. KoolToDoManager shows a list of commands
+2. KoolToDoManager shows a list of commands <br>
 Use case ends.
 
 **Extensions**
@@ -569,7 +570,7 @@ Use case ends.
 
 1. KoolToDoManager requests for a shortcut
 2. User keys in a shortcut
-3. KoolToDoManager executes shortcut 
+3. KoolToDoManager executes shortcut <br>
 Use case ends.
 
 **Extensions**
@@ -585,7 +586,7 @@ Use case ends.
 1. User requests to undo action
 2. KoolToDoManager prompts for confirmation
 3. User inputs "yes"
-4. KoolToDoManager undo action
+4. KoolToDoManager undo action <br>
 Use case ends.
 
 **Extensions**
@@ -605,7 +606,7 @@ Use case ends.
 1. User requests to redo action
 2. KoolToDoManager prompts for confirmation
 3. User inputs "yes"
-4. KoolToDoManager redo action
+4. KoolToDoManager redo action <br>
 Use case ends.
 
 **Extensions**
@@ -623,7 +624,7 @@ Use case ends.
 **MSS**
 
 1. User requests to list all tasks by alphabetical order
-2. KoolToDoManager executes command
+2. KoolToDoManager executes command <br>
 Use case ends.
 
 **Extensions**
@@ -637,7 +638,7 @@ Use case ends.
 **MSS**
 
 1. User requests to list all tasks by date
-2. KoolToDoManager executes command
+2. KoolToDoManager executes command <br>
 Use case ends.
 
 **Extensions**
@@ -651,7 +652,7 @@ Use case ends.
 **MSS**
 
 1. User requests to list all tasks by priority
-2. KoolToDoManager executes command
+2. KoolToDoManager executes command <br>
 Use case ends.
 
 **Extensions**
@@ -667,7 +668,7 @@ Use case ends.
 1. User requests to list all tasks by tag
 2. KoolToDoManager prompts for name of tag
 3. User inputs name of tag
-4. KoolToDoManager executes command
+4. KoolToDoManager executes command <br>
 Use case ends.
 
 **Extensions**
