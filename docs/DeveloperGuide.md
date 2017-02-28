@@ -361,17 +361,33 @@ Priority | As a ... | I want to ... | So that I can...
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `Opus` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: Display help information
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
-Use case ends.
+1. User requests to display help information
+2. Opus displays help information
+Use case ends
+
+#### Use case: Add task
+
+**MSS**
+
+1. User input command to add task
+2. Opus adds the task and shows the added task details
+Use case ends
+
+#### Use case: Delete task
+
+**MSS**
+
+1. User requests to list tasks
+2. Opus shows a list of tasks
+3. User requests to delete a specific task in the list
+4. Opus deletes the task
+Use case ends
 
 **Extensions**
 
@@ -381,10 +397,106 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+> 3a1. Opus shows an error message
+Use case resumes at step 2
 
-{More to be added}
+#### Use case: Edit task
+
+**MSS**
+
+1. User requests to list tasks
+2. Opus shows a list of tasks
+3. User requests to edit a specific task in the list
+4. Opus edits the task
+Use case ends
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given index is invalid
+
+> 3a1. Opus shows an error message
+Use case resumes at step 2
+
+3b. The attribute given is invalid
+
+> 3b1. Opus shows an error message
+Use case resumes at step 2
+
+3c. The value of the attribute is invalid
+
+> 3c1. Opus shows an error message
+Use case resumes at step 2
+
+3d. The value of the attribute is the same as the previous value
+
+>Use case ends
+
+
+#### Use case: List task
+
+**MSS**
+
+1. User input command to list task
+2. Opus shows a list of tasks sorted by due dates
+Use case ends
+
+**Extensions**
+
+2a. The list is empty
+
+> 2a1. Opus shows a message that the list is empty
+Use case ends
+
+#### Use case: Mark task as complete
+
+**MSS**
+
+1. User requests to list tasks
+2. Opus shows a list of tasks
+3. User requests to mark a specific task in the list as complete
+4. Opus marks the task as complete
+Use case ends
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given index is invalid
+
+> 3a1. Opus shows an error message
+Use case resumes at step 2
+
+#### Use case: Set deadline to a task
+
+**MSS**
+
+1. User requests to list tasks
+2. Opus shows a list of tasks
+3. User requests to set a deadline to a specific task
+4. Opus sets a deadline for the task and displays the task
+Use case ends
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given index is invalid
+
+> 3a1. Opus shows an error message
+Use case resumes at step 2
+
+3b. The date input by user is invalid
+
+> 3b1. Opus shows an error message
+Use case resumes at step 2
 
 ## Appendix C : Non Functional Requirements
 
