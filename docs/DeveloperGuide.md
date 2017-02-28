@@ -384,6 +384,135 @@ Priority | As a ... | I want to ... | So that I can...
 
 (For all use cases below, the **System** is the `Dueue` and the **Actor** is the `user`, unless specified otherwise)
 
+#### Use case: Add task by name only
+
+**MSS**
+1. User requests to add task by specifying the name only
+2. Dueue shows the added task by name
+Use case ends.
+
+**Extensions**
+
+1a. The given add command input is invalid 
+
+> 1a1. Dueue shows an error and a help message on how to add a task<br>
+  Use case resumes at step 1
+
+#### Use case: Add task by name and description
+
+**MSS**
+
+1. User requests to add task by specifying the name and description
+2. Dueue shows the added task by name and description
+Use case ends.
+
+**Extensions**
+
+1a. The given add command input is invalid 
+
+> 1a1. Dueue shows an error and a help message on how to add a task<br>
+  Use case resumes at step 1
+
+#### Use case: Add task with due date and time
+
+**MSS**
+
+1. User requests to add task by specifying the name with due date and time
+2. Dueue shows the added task 
+Use case ends.
+
+**Extensions**
+
+1a. The given add command input is invalid 
+
+> 1a1. Dueue shows an error and a help message on how to add a task<br>
+  Use case resumes at step 1
+ 
+#### Use case: Task deletion
+
+**MSS**
+
+1. User requests to delete tasks 
+2. Dueue displays all finished and unfinished tasks under current list
+3. User requests to delete tasks by task indices
+4. Dueue shows the remaining tasks in the list
+Use case ends.
+
+**Extensions**
+
+3a. User input task indices contain undefined items.
+>3a1. Dueue shows an error message<br>
+ Use case resumes at step 2.
+
+
+#### Use case: Create repeating task
+
+**MSS**
+
+1. User requests to add task by specifying the name and repeating frequency
+2. Dueue shows the added task 
+Use case ends.
+
+**Extensions**
+
+1a. The given add command input is invalid 
+
+> 1a1. Dueue shows an error and a help message on how to add a task<br>
+  Use case resumes at step 1
+
+#### Use case: Add a venue to a task
+
+**MSS**
+
+1. User requests to add venue to a specific task
+2. Dueue displays the updated task description with the venue.
+Use case ends.
+
+**Extensions**
+
+1a. The given add command input is invalid 
+
+> 1a1. Dueue shows an error and a help message on how to add a task<br>
+  Use case resumes at step 1
+
+
+#### Use case: Add the map to the venue of a task
+
+**MSS**
+
+1. User requests to add a map to the venue of a task
+2. Dueue displays the task updated task description with the map.
+Use case ends.
+
+**Extensions**
+
+1a. The given add command input is invalid 
+
+> 1a1. Dueue shows an error and a help message on how to add a task<br>
+  Use case resumes at step 1
+
+#### Use case: Add a task with the list it belongs to
+
+**MSS**
+
+1. User requests to add a task with a list name provided 
+2. Dueue displays the added task under the list
+Use case ends.
+
+**Extensions**
+
+1a. Given list does not exist.
+> 3a1. Dueue shows an error message and ask whether the user wants to create a new list
+> 3a2. User indicate yes<br>
+  Use case resume at step 1
+
+1b. The list name does not exist
+ 
+> 1b1. Dueue shows an error message and ask whether the user wants to create a new list
+> 1b2. User indicate No
+  Use case resumes at step 1
+
+
 #### Use case: View tasks due today
 
 **MSS**
