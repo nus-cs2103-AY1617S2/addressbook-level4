@@ -488,17 +488,184 @@ Use case ends
 > 1b2. User enters correct status <br>
 Use case ends
 
+#### Use case: Sort tasks by deadline
 
-{More to be added}
+**MSS**
+
+1. User requests to sort tasks by deadline
+2. TaskBoss displays list of tasks by deadline <br>
+Use case ends.
+
+#### Use case: Undo previous command
+
+**MSS**
+
+1. User requests to undo previous command
+2. TaskBoss undoes previous command and returns to a state before previous command.<br>
+Use case ends
+
+**Extensions**
+
+2a. There is no previous command to undo
+
+> 2a1. TaskBoss displays a "cannot undo" error message. <br>
+Use case ends. 
+
+#### Use case: Export tasks to an existing file
+
+**MSS**
+
+1. User requests to export data to existing file from TaskBoss for data storage
+2. TaskBoss changes the storage location, and saves all existing data into the new file. <br>
+Use case ends
+
+**Extensions**
+
+2a. The given file path cannot be accessed
+
+> 2a1. TaskBoss displays an error message. <br>
+Use case ends.
+
+2b. The given file path does not exist
+
+> 2b1. TaskBoss displays an error message. <br>
+Use case ends.
+
+#### Use case: Export tasks to a new file
+
+**MSS**
+
+1. User requests to export data to a new file from TaskBoss for data storage after specifying the file path and the new file name. 
+2. TaskBoss saves all existing data into the new file. <br>
+Use case ends
+
+**Extensions**
+
+2a. The given file path cannot be accessed
+
+> 2a1. TaskBoss displays a "cannot access file path" error message.<br>
+ Use case ends.
+ 
+#### Use case: Search tasks
+
+**MSS**
+
+1. User requests to search task by keyword (keyword from description, task title, or deadline)
+2. TaskBoss displays list of tasks containing keyword. <br>
+Use case ends
+
+**Extensions**
+
+3a. The task does not exist
+
+> 3a1. TaskBoss displays a “0 tasks found” . <br>
+Use case ends.
+ 
+#### Use case: List tasks by category
+
+**MSS**
+
+1. User requests to list tasks by specified category
+2. TaskBoss displays all tasks of the category user requests. <br>
+Use case ends
+
+**Extension**
+
+3a. The category does not exist
+
+> 3a1. TaskBoss displays a “0 tasks found” . <br>
+Use case ends.
+
+#### Use case: Create new category
+
+**MSS**
+
+1. User requests to create a new category and specifies name
+2. TaskBoss creates category. <br>
+Use case ends.
+
+**Extensions**
+
+1a. Category name exists
+
+> 1a1. TaskBoss displays error message “Category name exists”. <br>
+Use case ends.
+
+#### Use Case: Edit category name
+
+**MSS**
+
+1. User inputs edit command, followed by the original category name and new category name.
+2. TaskBoss updates the category name.<br>
+Use case ends.
+
+**Extensions**
+
+1a. Category to be edited does not exist.
+		
+> 1a1. TaskBoss displays error message “Category does not exist”. <br>
+Use case ends.
+
+#### Use case: Exit TaskBoss
+
+**MSS**
+
+1. User inputs exit command to exit the TaskBoss application.
+2. TaskBoss exits. <br>
+User case ends.
+
+#### Use case: Clear tasks under certain category
+
+**MSS**
+
+1. User requests clear all tasks of certain category
+2. TaskBoss clears the tasks. <br>
+Use case ends.
+
+**Extensions**
+
+1a. The category user enters does not match the existing categories.
+
+> 1a1. TaskBoss displays error message. <br>
+Use case ends.
+
+#### Use case: Display help message
+
+**MSS**
+
+1. User inputs help command.
+2. TaskBoss displays help guide.
+3. User type any key in the command line.
+4. Help guide disappears. <br>
+Use case ends
+
+#### Use case: View a specific task
+
+**MSS**
+
+1.User requests to view a specific task by entering task index.
+2.TaskBoss displays the task user requests. <br>
+Use case ends
+
+**Extensions**
+
+1a. The given task index is invalid
+
+> 1a1. TaskBoss shows an error message.<br>
+Use case ends  
+
+
+
 
 ## Appendix C : Non Functional Requirements
 
-1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
-   should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-{More to be added}
+1. Should handle atelast 100 tasks.
+2. Should work without internet connection.
+3. Should have an intuitive user interface.
+4. Should start up in less than  2 seconds.
+5. Should respond to commands in less than 1 second.
+6. Should come with automated unit tests and open source code.
+ 
 
 ## Appendix D : Glossary
 
@@ -509,6 +676,16 @@ Use case ends
 ##### Private contact detail
 
 > A contact detail that is not meant to be shared with others
+
+##### Priority level
+
+> A number between 1 and 3 inclusive that indicates how urgent a task is
+
+##### Task index
+
+> A number assigned to each tasks to ease referrals when deleting or editing.
+
+{add more here}
 
 ## Appendix E : Product Survey
 
