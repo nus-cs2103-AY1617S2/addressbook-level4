@@ -421,13 +421,29 @@ Use case ends.
 
 ## Appendix D : Glossary
 
-##### Mainstream OS
+#### Task
+> A task is to be completed by some deadline. If a task does not have a deadline, then it is considered to be "done someday"
 
-> Windows, Linux, Unix, OS-X
+#### Event
+> An event takes place during a specific time frame, which may or may not extend over one or more days.
 
-##### Private contact detail
+#### Tentative event
+> A tentative event is an event whose time is not yet finalized. User may add a tentative event together with its possible time slots so that these slots can be blocked until the event is finalized. 
 
-> A contact detail that is not meant to be shared with others
+#### Blocking
+> when a tentative event blocks a time slot, that time slot by default cannot be occupied by another event.
+
+#### Releasing
+> When the time slot for a tentative event is finalized, those time slots which had been blocked by that event bu are not part of the finalized time slot become free again for other events to occupy.
+
+#### Active task/event
+> An active task or event is one that is yet to be marked as `completed` or `cannot be done` by the user.
+
+#### Active list
+> The active list contains all the active events and tasks. The active list may contain overdue tasks and past events since it is up to the user to remove them from this list.
+
+#### Expired list
+> The expired set contains all the tasks and events that are removed from the active list by the user, which may be recycled. This list can be emptied by the user.  
 
 ## Appendix E : Product Survey
 
