@@ -501,11 +501,12 @@ Use case resumes at step 2
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-{More to be added}
+4. Should include well-written guides for users and developers
+5. Should follow OOP principles
+6. Should come with automated tests
 
 ## Appendix D : Glossary
 
