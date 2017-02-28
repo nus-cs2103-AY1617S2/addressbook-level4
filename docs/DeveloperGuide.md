@@ -683,10 +683,17 @@ Use case ends.
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
-
+4. Should be easy to install 
+5. Should be quick when starting the application(within 1 second)
+6. Should be a free and open source project
+7. Should be reliable and outputs error messages correctly
+8. Should complete an operationwithin 0.5 seconds
+9. Should be easy to use and non-technical
+10. Should be private, tasks will not be shared without permission
+11. Should be able to back up
 {More to be added}
 
 ## Appendix D : Glossary
