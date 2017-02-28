@@ -477,4 +477,25 @@ Cons:
 * Requires an account to use and is only free for a limited period
 * Not very command line interface friendly
 
+**Any.do**
+
+Pros:
+
+* Able to be synced between mobile and computer as tasks can be managed either through going to the website on a browser and/or downloading and using the mobile application.
+* Clean and simple UI design for anti clutter.
+* Lists can be sorted by manually entered types followed by urgency (Today, tomorrow, upcoming, someday)
+* Premium only: Able to change the colour theme.
+* Premium only: Able to manage as a group
+* Premium only: Able to attach notes and files to tasks
+* Premium only: Able to assign tasks to group members
+* Luckily, premium is quite affordable at $1.49/month
+* Able to add notes and subtasks
+
+Cons:
+
+* Quite a number of features require premium account.
+* Requires Internet connection to sync tasks.
+* Limited options to customise UI.
+
+
 
