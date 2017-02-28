@@ -416,19 +416,10 @@ Use case ends.
 3. System shows a feedback message ("`new alias name` is set as the new alias for `command`.").<br>
 Use case ends.
 
-**Extensions**
+2a. The alias is already reserved for other commands.
 
-2a. Command name is not found.
-
-> 2a1. System shows an error message ("The command `original command` does not exist.").<br>
-> Use case ends
-
-2b. The alias is already reserved for other commands.
-
-> 2b1. System prompts Actor with a message ("`alias` is used as an alias for `original command`, set `alias` to refer to `new command`? yes/no").<br>
->> 2b1a. If user types yes, system updates the alias name to refer to the new command.<br>
->> 2b1b. If user types no, use case ends.<br>
-> Use case ends
+> 2a1. System updates the alias name to refer to the new command.<br>
+> Use case resumes at step 3.
 
 #### Use case 5: Set data storage file path
 
