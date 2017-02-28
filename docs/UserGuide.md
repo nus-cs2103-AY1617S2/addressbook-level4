@@ -241,7 +241,7 @@ Format: `save NEWFILELOCATION`
 
 Example:
 * `save data/savefile.txt` <br>
-  Sets the storage location to `data/savefile.txt` 
+  Sets the storage location to `data/savefile.txt`
 
 ## 3. Command Summary
 

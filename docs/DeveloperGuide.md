@@ -99,7 +99,7 @@ Two of those classes play important roles at the architecture level.
 The rest of the App consists of four components.
 
 * [**`UI`**](#ui-component) : The UI of the App.
-* [**`Dispatcher`**](#dispatcher-component): Invokes the suitable command executor. 
+* [**`Dispatcher`**](#dispatcher-component): Invokes the suitable command executor.
 * [**`Controller`**](#logic-component) : The command executor.
 * [**`Model`**](#model-component) : Holds the data of the App in-memory.
 * [**`Storage`**](#storage-component) : Reads data from, and writes data to, the hard disk.
@@ -365,7 +365,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | redo previously undone command(s) | recover gracefully from  wrongly resolving a mistake
 `* * *` | user | see my [command history](#command-history) | to identify what I have to recover if I accidentally performed some wrong commands.
 `* * *` | user | change my storage file path | decide where I want to save my files for my own use
-`* * *` | user | exit the program | gracefully shut down the program when I don't need to use it 
+`* * *` | user | exit the program | gracefully shut down the program when I don't need to use it
 `* *` | experienced user | add an [alias](#alias) for a command | customise my own keyboard shortcuts to improve my efficiency
 `* *` | experienced user | update an alias for a command | change entries that are errorneous or outdated
 `* *` | experienced user | view all alias for commands | review the alias in case I forget what I set for them
@@ -477,7 +477,7 @@ Use case ends.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Commands should be reasonably fluid and flexible (i.e. look like written English) so it is more intuitive for users.
-5. When the command entered is errorneous, the system should guess the user's intentions to the best of its ability, and execute the corrected command after the user give his confirmation. 
+5. When the command entered is errorneous, the system should guess the user's intentions to the best of its ability, and execute the corrected command after the user give his confirmation.
 6. The stored data should never, ever be destroyed unless that is what the user wants.
 7. Should have nice UI/UX so user have a pleasant experience using this App.
 8. Each command should finish executing in less than 2 seconds.
