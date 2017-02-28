@@ -194,10 +194,10 @@ Examples:
   You press on the <kbd>up</kbd> arrow key. <br>
   Shows `add Test` in your input text field.
 
-### 2.12. Add alias for any phrase: `add alias`
+### 2.12. Add alias for any phrase: `alias`
 
 Adds an alias for a phrase. <br>
-Format: `addalias ALIAS PHRASE`
+Format: `alias ALIAS PHRASE`
 
 > * Once added, alias can be used instead of the phrase to perform operations.
 > * The phrase can be multiple words long
@@ -211,12 +211,12 @@ Example:
   Performs the command `add Test` which will add a new task called 'Test'.
 
 
-### 2.13. Delete alias for commands: `delete alias`
+### 2.13. Delete alias for commands: `unalias`
 
 Removes an alias for a command. <br>
 Format: `unalias ALIAS`
 
-### 2.14. View aliases for commands: `view alias`
+### 2.14. View aliases for commands: `viewalias`
 
 Views aliases in the system. <br>
 Format: `viewalias`
