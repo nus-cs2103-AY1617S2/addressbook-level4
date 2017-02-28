@@ -1,6 +1,6 @@
-# TuLuist - User Guide
+# ToLuist - User Guide
 
-By : `Team TuLuist`  &nbsp;&nbsp;&nbsp;&nbsp;
+By : `Team ToLuist`  &nbsp;&nbsp;&nbsp;&nbsp;
 
 ---
 
@@ -17,8 +17,8 @@ By : `Team TuLuist`  &nbsp;&nbsp;&nbsp;&nbsp;
 3. Some example commands you can try:
    * **`add`**` Try Out Todo List  d/11-12-2011` :
      adds a task named `Try Out Todo List` to the todo list.
-   * **`delete`**` 3` : deletes the 3rd task shown in the current list
-   * **`exit`** : exits the app
+   * **`delete`**` 3` : deletes the 3rd task shown in the current list.
+   * **`exit`** : exits the app.
 4. Refer to the [Features](#features) section below for details of each command.<br>
 
 
@@ -41,14 +41,14 @@ By : `Team TuLuist`  &nbsp;&nbsp;&nbsp;&nbsp;
 
 Format: `help`
 
-> Help is also shown if you enter an incorrect command e.g. `abcd`
+> Help is also shown if you enter an incorrect command. e.g. `abcd`
 
 ### 2.2. Adding a task: `add`
 
 Adds a task to the todo list<br>
 Format: `add NAME [d/ENDDATE] [sd/STARTDATE] [r/PERIOD(DAY/WEEK/MONTH)] [t/TAG]...`
 
-> Tasks can have any number of tags (including 0)
+> Tasks can have any number of tags (including 0).
 
 Examples:
 
@@ -61,11 +61,11 @@ Examples:
 Updates an existing task in the todo list.<br>
 Format: `update INDEX [NAME] [sd/STARTDATE] [d/ENDDATE] [r/PERIOD(DAY/WEEK/MONTH)] [t/TAG]...`
 
-> * Updates the task at the specified `INDEX`.
+> * Updates the task at the specified `INDEX`. <br>
     The index refers to the index number shown in the last task listing.<br>
     The index **must be a positive integer** 1, 2, 3, ...
 > * If no optional fields are added, task will be set to completed if not completed.
-> * Otherwise, if task is completed, the task will be set to not completed
+> * Otherwise, if task is completed, the task will be set to not completed.
 > * Existing values will be updated to the input values.
 > * When editing tags, the existing tags of the task will be removed if it already exists.
 > * Otherwise, if the tag does not exist, the tag will be added.
@@ -90,19 +90,19 @@ Format: `find [KEYWORDS] [t/] [d/] [n/]`
 > * Adding 'd/' will search by end date instead.
 > * Adding 'n/' will still search by name.
 > * If no keyword is entered, the list of all tasks is displayed.
-> * 't/', 'd/' and 'n/' can be combined to search by multiple fields
-> * Partial words will be matched e.g. `Han` will match `Hans`
+> * 't/', 'd/' and 'n/' can be combined to search by multiple fields.
+> * Partial words will be matched e.g. `Han` will match `Hans`.
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `Hans` will match `Hans Bo`
 
 Examples:
 
 * `find Assignment`<br>
-  Returns `Assignment 1` but not `assignment 2`
+  Returns `Assignment 1` and also `assignment 2`
 * `find Assignment Project Tutorial`<br>
-  Returns any task having names `Assignment`, `Project`, or `Tutorial`
-* 'find school t/' <br>
-  Returns any task with tags with 'school' in the name
+  Returns any task having `Assignment`, `Project`, or `Tutorial` in their names.
+* `find school t/` <br>
+  Returns any task with tags with 'school' in the name.
 
 ### 2.5. Deleting a task : `delete`
 
@@ -115,7 +115,7 @@ Format: `delete INDEX`
 
 Examples:
 
-* `list`<br>
+* `find`<br>
   `delete 2`<br>
   Deletes the 2nd task in the todo list.
 * `find Project`<br>
@@ -145,19 +145,19 @@ Examples:
 
 * `add Test`<br>
   `undo`<br>
-  Undoes adding Test to the todo list.
+  Undo adding Test to the todo list.
 * `add Assignment` <br>
   `add Project` <br>
   `undo 2`<br>
-  Undoes both commands.
+  Undo both commands.
 
 ### 2.9. Redo a command : `redo`
 
 Redoes previously undone commands by the user.<br>
 Format: `redo [NUMBER]`
 
-> Redoes the last data-mutating command inputted since the undone point.<br>
-> If a number is entered, redoes that ammount of previous commands instead.<br>
+> Redo the last data-mutating command inputted since the undone point.<br>
+> If a number is entered, redo that ammount of previous commands instead.<br>
 > The number **must be a positive integer** 1, 2, 3, ...
 > The number must be less than or equal to the number of commands undone.
 
@@ -165,13 +165,13 @@ Examples:
 
 * `add Test`<br>
   `undo`<br>
-  `redo`
-  Redoes adding Test to the todo list.
+  `redo` <br>
+  Redo adding Test to the todo list.
 * `add Assignment` <br>
   `add Project`<br>
   `undo 2`<br>
   `redo`<br>
-  Redoes `add Assignment`.
+  Redo `add Assignment`.
 
 ### 2.10. Saving the data
 
@@ -180,54 +180,58 @@ There is no need to save manually.
 
 ### 2.11. Viewing previous commands and accessing them : `history`
 
-Shows previous commands entered
+Shows previous commands entered. <br>
 Format: `history`
 
-> * Previous commands are listed in order from latest command to earlier command
-> * Alternatively, pressing on the <kbd>up</kbd> and <kbd>down</kbd> arrow keys on the keyboard will cycle through the commands previously entered
+> * Previous commands are listed in order from latest command to earlier command.
+> * Alternatively, pressing on the <kbd>up</kbd> and <kbd>down</kbd> arrow keys on the keyboard will cycle through the commands previously entered.
 
 Examples:
 * `add Test` <br>
   `history` <br>
   Shows `add Test` in the list.
 * `add Test` <br>
-  you press on the <kbd>up</kbd>kbd> arrow key. <br>
+  You press on the <kbd>up</kbd> arrow key. <br>
   Shows `add Test` in your input text field.
 
-### 2.12. Add alias for commands: `add alias`
+### 2.12. Add alias for any phrase: `add alias`
 
-Adds an alias for a command
-Format: `addalias COMMAND ALIAS`
+Adds an alias for a phrase. <br>
+Format: `addalias ALIAS PHRASE`
 
-> * Once added, alias can be used instead of the command to perform operations.
+> * Once added, alias can be used instead of the phrase to perform operations.
+> * The phrase can be multiple words long
 
 Example:
-* `addalias history hs` <br>
+* `alias hs history` <br>
   `hs` <br>
-  Shows `addalias history hs` in the list.
+  Shows `alias hs history` in the list.
+* `alias addTaskNamedTest add Test`
+  `addTaskNamedTest`
+  Performs the command `add Test` which will add a new task called 'Test'.
+
 
 ### 2.13. Delete alias for commands: `delete alias`
 
-Removes an alias for a command
-Format: `deletealias ALIAS`
+Removes an alias for a command. <br>
+Format: `unalias ALIAS`
 
 ### 2.14. View aliases for commands: `view alias`
 
-Views aliases in the system
-Format: `viewalias [COMMAND]`
+Views aliases in the system. <br>
+Format: `viewalias`
 
-> * Inputting a value for command will only show all aliases for that command.
-> * Otherwise will show all aliases.
-> * Lists aliases in the format `COMMAND:ALIAS`.
+> * Lists aliases in the format `ALIAS:PHRASE`.
 
 Example:
-* `addalias history hs` <br>
+* `addalias hs history` <br>
   `viewaliases` <br>
-  Shows `history:hs` in the list.
+  Shows `hs:history` in the list.
 
 ### 2.15. Change storage location for data: `change storage location`
 
-Changes the location for the storage file used in this system
+Changes the location for the storage file used in this system. <br>
+Warning: If a file with the requested name already exists, it will be overwritten. <br>
 Format: `save NEWFILELOCATION`
 
 > * All data will be moved to the new file location.
@@ -271,13 +275,13 @@ Example:
 
 * **History** : `history`
 
-* **Add Alias** : `addalias COMMAND ALIAS` <br>
-  e.g. `addalias history hs`
+* **Add Alias** : `alias ALIAS PHRASE` <br>
+  e.g. `alias hs history`
 
-* **Delete Alias** : `deletealias ALIAS` <br>
-  e.g. `deletealias hs`
+* **Delete Alias** : `unalias ALIAS` <br>
+  e.g. `unalias hs`
 
-* **View Aliases** : `viewalias [COMMAND]` <br>
-  e.g. `view alias history`
+* **View Aliases** : `viewalias` <br>
+  e.g. `viewalias history`
 
 * **Change Storage Location** : `save FILELOCATION`
