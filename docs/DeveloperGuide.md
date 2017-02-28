@@ -404,16 +404,20 @@ Use case ends.
 ## Appendix E : Product Survey
 
 **Product Name**
+HiTask
+Author: Zhang Yan Hao
 
-Author: ...
-
-Pros:
-
-* ...
-* ...
+Pros:HiTask:         
+ +HiTask has data backup, I think this feature is suitable for Jim,
+   since Jim is a forgetful person, he might delete some important task accidentally.
+ +HiTask can synch with google calendar, I think this is useful since Jim may have plenty tasks,
+   he might need to rely heavily on google calendar to help him organize his schedule.
+ +HiTask is easy to use, available in office, at home and on the road. I think this is useful for Jim,
+   Jim is a busy man, so he might use his free time like on his way to work or back home to check his
+   schedule. 
 
 Cons:
-
-* ...
-* ...
-
+*HiTask is a team project management and task collaboration, I think this feature is not suitable for Jim,
+ since Jim usually work alone.
+ 
+From the analysis, HiTask is suitable for Jim beside that this is a collaboration tool for group work.
