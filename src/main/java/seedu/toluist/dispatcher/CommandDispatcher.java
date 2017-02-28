@@ -7,6 +7,7 @@ import java.util.Collection;
 import seedu.toluist.commons.core.EventsCenter;
 import seedu.toluist.commons.events.ui.NewResultAvailableEvent;
 import seedu.toluist.controller.Controller;
+import seedu.toluist.controller.ExitController;
 import seedu.toluist.controller.ListController;
 import seedu.toluist.controller.RedoController;
 import seedu.toluist.controller.StoreController;
@@ -48,6 +49,7 @@ public class CommandDispatcher implements Dispatcher {
             new StoreController(),
             new UndoController(),
             new RedoController(),
+            new ExitController(),
             new ListController()
         }));
     }
