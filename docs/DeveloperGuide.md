@@ -412,12 +412,18 @@ Use case ends.
 
 ## Appendix C : Non Functional Requirements
 
-1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
-   should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any desktop machine running on Windows 7 or later as long as it has Java `1.8.0_60` or higher installed.
+2. Must be fully functioning offline.
+3. No installation on the user machine should be required. 
+4. Should work stand-alone. 
+5. Must come with extensive JUnit error-testing.
+6. Must not rely on any relational databases.
+7. Must rely minimally on GUI. GUI is used only for output. 
+8. Must be able to support CLI.
+9. Supports one and only one user.  
+10. A user with an above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+11. Should be able to hold up to 1000 tasks without a noticeable decline in performance.
 
-{More to be added}
 
 ## Appendix D : Glossary
 
