@@ -206,8 +206,8 @@ Example:
 * `alias hs history` <br>
   `hs` <br>
   Shows `alias hs history` in the list.
-* `alias addTaskNamedTest add Test`
-  `addTaskNamedTest`
+* `alias addTaskNamedTest add Test` <br>
+  `addTaskNamedTest` <br>
   Performs the command `add Test` which will add a new task called 'Test'.
 
 
@@ -224,11 +224,11 @@ Format: `viewalias`
 > * Lists aliases in the format `ALIAS:PHRASE`.
 
 Example:
-* `addalias hs history` <br>
+* `alias hs history` <br>
   `viewaliases` <br>
   Shows `hs:history` in the list.
 
-### 2.15. Change storage location for data: `change storage location`
+### 2.15. Change storage location for data: `save`
 
 Changes the location for the storage file used in this system. <br>
 Warning: If a file with the requested name already exists, it will be overwritten. <br>
@@ -239,7 +239,7 @@ Format: `save NEWFILELOCATION`
 > * The old file will be removed.
 
 Example:
-* `setstoragelocation data/savefile.txt` <br>
+* `save data/savefile.txt` <br>
   Sets the storage location to `data/savefile.txt` 
 
 ## 3. Command Summary
@@ -282,6 +282,6 @@ Example:
   e.g. `unalias hs`
 
 * **View Aliases** : `viewalias` <br>
-  e.g. `viewalias history`
+  e.g. `viewalias`
 
 * **Change Storage Location** : `save FILELOCATION`
