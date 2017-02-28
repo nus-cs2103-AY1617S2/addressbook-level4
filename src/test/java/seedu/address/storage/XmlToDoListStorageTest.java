@@ -16,7 +16,6 @@ import seedu.address.commons.util.FileUtil;
 import seedu.address.model.ReadOnlyToDoList;
 import seedu.address.model.ToDoList;
 import seedu.address.model.person.Task;
-import seedu.address.storage.XmlToDoListStorage;
 import seedu.address.testutil.TypicalTestTasks;
 
 public class XmlToDoListStorageTest {

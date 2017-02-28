@@ -83,7 +83,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> description} into an {@code Optional<Description>} if {@code description} is present.
+     * Parses a {@code Optional<String> description} into an {@code Optional<Description>}
+     * if {@code description} is present.
      */
     public static Optional<Description> parseDescription(Optional<String> description) throws IllegalValueException {
         assert description != null;
