@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import seedu.toluist.commons.util.FxViewUtil;
-import seedu.toluist.model.task.Task;
+import seedu.toluist.model.Task;
 
 /**
  * TaskListUiView to display the list of tasks

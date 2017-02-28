@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.toluist.model.task.Task;
+import seedu.toluist.model.Task;
 
 public class UiStore {
     private static UiStore instance;

@@ -3,7 +3,6 @@ package seedu.toluist.model;
 import java.util.ArrayList;
 import java.util.Optional;
 
-import seedu.toluist.model.task.Task;
 import seedu.toluist.storage.JsonStorage;
 import seedu.toluist.storage.Storage;
 
@@ -50,6 +49,6 @@ public class TodoList {
     }
 
     public void update(Task task, String description) {
-        task.setDescription(description);
+        task.description = description;
     }
 }

@@ -13,7 +13,7 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import seedu.toluist.commons.events.ui.ExitAppRequestEvent;
-import seedu.toluist.model.task.Task;
+import seedu.toluist.model.Task;
 import seedu.toluist.ui.view.CommandBox;
 import seedu.toluist.ui.view.ResultView;
 import seedu.toluist.ui.view.TaskListUiView;

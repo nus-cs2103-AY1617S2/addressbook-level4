@@ -3,7 +3,7 @@ package seedu.toluist.ui.view;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import seedu.toluist.commons.util.FxViewUtil;
-import seedu.toluist.model.task.Task;
+import seedu.toluist.model.Task;
 
 /**
  * Created by louis on 21/2/17.

@@ -27,7 +27,7 @@ import junit.framework.AssertionFailedError;
 import seedu.toluist.commons.exceptions.IllegalValueException;
 import seedu.toluist.commons.util.FileUtil;
 import seedu.toluist.commons.util.XmlUtil;
-import seedu.toluist.model.tag.Tag;
+import seedu.toluist.model.Tag;
 
 /**
  * A utility class for test cases.
