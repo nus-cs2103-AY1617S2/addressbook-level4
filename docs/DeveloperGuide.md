@@ -545,18 +545,22 @@ Use case ends.
 Use case ends.
 
 **Extensions**
+
 2a. Date or time does not exist 
+
 > 2a1. KoolToDoManager shows an error message <br>
   Use case resumes at step 2
 
 #### Use case: List commands
 
 **MSS**
+
 1. User requests to list commands
 2. KoolToDoManager shows a list of commands
 Use case ends.
 
 **Extensions**
+
 2a. The list is empty 
 
 > Use case ends
@@ -568,7 +572,8 @@ Use case ends.
 3. KoolToDoManager executes shortcut 
 Use case ends.
 
-Extensions
+**Extensions**
+
 3a. Shortcut does not exist 
 
 > Use case resumes at step 1
