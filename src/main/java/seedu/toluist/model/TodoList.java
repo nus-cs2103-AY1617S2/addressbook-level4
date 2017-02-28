@@ -14,17 +14,29 @@ public class TodoList {
 
     protected static Storage storage = new JsonStorage();
 
+    private static TodoList currentTodoList = new TodoList();
+
     private ArrayList<Task> allTasks = new ArrayList<>();
 
     public ArrayList<Task> getTasks() {
         return allTasks;
     }
 
-    public static Optional<TodoList> load() {
-        return storage.load();
+    public static TodoList load() {
+        Optional<TodoList> todoListOptional = storage.load();
+
+        // Save data to file again if data is not found on disk
+        if (!todoListOptional.isPresent()) {
+            currentTodoList.save();
+        } else {
+            currentTodoList = todoListOptional.get();
+        }
+
+        return storage.load().orElse(currentTodoList);
     }
 
     public boolean save() {
+        currentTodoList = this;
         return storage.save(this);
     }
 

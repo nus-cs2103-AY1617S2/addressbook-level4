@@ -13,10 +13,8 @@ public class ListController extends Controller {
     private static final String RESULT_MESSAGE = "App loaded";
 
     public CommandResult execute(String command) {
-        Optional<TodoList> todoList = TodoList.load();
-        if (todoList.isPresent()) {
-            UiStore.getInstance().setTask(todoList.get().getTasks());
-        }
+        TodoList todoList = TodoList.load();
+        UiStore.getInstance().setTask(todoList.getTasks());
         renderer.render();
         return new CommandResult(RESULT_MESSAGE);
     }

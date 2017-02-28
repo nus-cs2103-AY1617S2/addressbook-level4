@@ -37,7 +37,7 @@ public class TaskController extends Controller {
     public CommandResult execute(String command) {
         logger.info(getClass().getName() + "will handle command");
 
-        TodoList todoList = TodoList.load().orElse(new TodoList());
+        TodoList todoList = TodoList.load();
         CommandResult commandResult = new CommandResult("");
 
         HashMap<String, String> tokens = tokenize(command);
