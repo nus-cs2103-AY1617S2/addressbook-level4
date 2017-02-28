@@ -549,7 +549,7 @@ Use case ends.
 
 2a. Date or time does not exist 
 
-> 2a1. KoolToDoManager shows an error message <br>
+> KoolToDoManager shows an error message <br>
   Use case resumes at step 2
 
 #### Use case: List commands
