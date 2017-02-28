@@ -343,17 +343,45 @@ b. Require developers to download those libraries manually (this creates extra w
 
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
 
-
 Priority | As a ... | I want to ... | So that I can...
--------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
-
-{More to be added}
+-------- | :----------- | :-------------------- | :-------------------------
+`* * *` | new user | refer to help | quickly view instructions when I forget how to use the App
+`* * *` | user | quit the program from the command line | avoid the trouble of using the GUI when quit
+`* * *` | user with events| add an event by specifying its start date/time and end date/time either in relative or absolute form i.e. `12 Mar` or `today`<br /><br /> **condition**: <br />when there is already an event booked for that time frame, I can be notified and choose whether or not to force the addition| book that time slot and be reminded of the event
+`* * *` | user with tentative events| temporarily block multiple time slots for an event whose time is not finalized yet<br /><br /> **condition**: <br />I can later confirm its finalized time slot and release all the other time slots| avoid time clash between events
+`* * *` | user with events| specify the location of an event | later adapt my actions based on where the event is located
+`* * *` | user with tasks| add a task with a deadline, either in relative or absolute form | 
+`* * *` | user with tasks| add a task without a deadline | 
+`* * *` | user with tasks or events that are related to each other | add tags to tasks or events | easily search and categorize tasks or events
+`* * *` | user | add a description to a task or an event | refer to relevant information in the future
+`* * *` | user with tasks| specify the priority of a task | later compare the importance of tasks, which can be especially useful for comparing tasks without deadlines
+`* * *` | user with tasks| view only tasks with deadlines | 
+`* * *` | user with tasks| view only tasks without deadlines | 
+`* * *` | user with active tasks| view the list of tasks that need to be completed by a specific deadline | 
+`* * *` | user with active events| view the list of events taking place during a specific time frame |
+`* * *` | user with many active tasks | sort tasks by their fields <ul><li>sort by name</li><li>sort by priority</li><li>sort by deadline</li><li>sort by tag</li></ul>| locate tasks with certain fields easily
+`* * *` | user with an active event | cancel an event | 
+`* * *` | user with an active task | mark a task as `done` | separate it from other active tasks and events
+`* * *` | user with an active task | mark a task as `cannot be done`  <br /><br /> **condition**:<br />I can add a reason for why it could not be done before it gets moved into the log| distinguish between a task that was successfully done with one that failed
+`* * *` | user | view the effect of the last action undertaken | confirm the details of the action and amend/undo if necessary
+`* * *` | user with many tasks and events in the active list | search for tasks or events by keywords <ul><li>keywords in name</li> <li>keywords in tag</li><li>keywords in description </li></ul>| 
+`* * *` | user who have completed one or more tasks | view a reverse chronological log of all completed tasks | see which tasks I have marked as complete in the past
+`* * *` | user who have completed one or more events | view a reverse chronological log of all completed events | see which events I have marked as complete in the past
+`* * *` | user who have marked a task as `cannot be done` | reverse chronological log of all unsuccessful tasks | see which events I have discarded
+`* * *` | user who have completed or discarded tasks or events | recycle a task or an event kept in the log | 
+`* * *` | user who have completed or discarded tasks or events | clear all the past tasks and events from the log | eliminate no-longer-relevant tasks and events and keep the log clean
+`* * *` | user | see error message when I enter an invalid command | ammend the command appropriately
+`* * *` | user | switch between multiple storage files | have separate task managers of different aspects of my life
+`* * *` | user | specify the location of the storage file <br /><br /> **condition**:<br />If the file does not exist in the path, create a new file| place the file anywhere I find convenient, for example, in a shared folder
+`* * *` | advanced user | have raw access to the storage files | directly perform CRUD operation on the data all at once
+`* * *` | user | undo the last command entered |
+`* *` | user with recurring tasks or events| add a task or an event that are reccuring| avoid the trouble of manually adding repeatedly on a regular basis
+`* *` | user | identify free time slots in a day, week or month | can evaluate how busy I am and optimize the date for tasks and events to add
+`* *` | user | display daily, weekly, or monthly calendar views | visualize the deadlines of tasks and times of events for the day/week/month
+`* *` | user | view a history of all previously undertaken actions | prevent duplicate commands and correct entries that are erroneous in hindsight
+`* *` | user | choose between automatic save and manual save |
+`*` | user | have an auto-completion for commands that are predictable | avoid the trouble of typing in the full command
+`*` | user | enter the options for a command in any order | 
 
 ## Appendix B : Use Cases
 
