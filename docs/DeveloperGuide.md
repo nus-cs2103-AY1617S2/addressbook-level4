@@ -578,6 +578,105 @@ Use case ends.
 
 > Use case resumes at step 1
 
+#### Use case: Undo action
+
+**MSS**
+
+1. User requests to undo action
+2. KoolToDoManager prompts for confirmation
+3. User inputs "yes"
+4. KoolToDoManager undo action
+Use case ends.
+
+**Extensions**
+
+1a. No action has been done
+
+> Use case ends
+
+2a. User inputs "no"
+
+> Use case ends
+
+#### Use case: Redo action
+
+**MSS**
+
+1. User requests to redo action
+2. KoolToDoManager prompts for confirmation
+3. User inputs "yes"
+4. KoolToDoManager redo action
+Use case ends.
+
+**Extensions**
+
+1a. No action has been done
+
+> Use case ends
+
+2a. User inputs "no"
+
+> Use case ends
+
+#### Use case: List all tasks by alphabetical order
+
+**MSS**
+
+1. User requests to list all tasks by alphabetical order
+2. KoolToDoManager executes command
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+#### Use case: List all tasks by date
+
+**MSS**
+
+1. User requests to list all tasks by date
+2. KoolToDoManager executes command
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+#### Use case: List all tasks by priority
+
+**MSS**
+
+1. User requests to list all tasks by priority
+2. KoolToDoManager executes command
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+#### Use case: List all tasks by tag
+
+**MSS**
+
+1. User requests to list all tasks by tag
+2. KoolToDoManager prompts for name of tag
+3. User inputs name of tag
+4. KoolToDoManager executes command
+Use case ends.
+
+**Extensions**
+
+3a. Name of tag does not exist
+
+> KoolToDoManager shows an error message <br>
+  Use case resumes at step 2
+
 {More to be added}
 
 ## Appendix C : Non Functional Requirements
