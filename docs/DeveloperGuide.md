@@ -538,17 +538,77 @@ Use case ends.
 
 ## Appendix E : Product Survey
 
-**Product Name**
+** Eclipse **
 
-Author: ...
+Author: Lee Pei Xuan
 
 Pros:
-
-* ...
-* ...
+* Organise tasks into projects
+* Organise projects by classifying them into groups
+* Color coding according to groups
+* Get overall status of each project at one glance using progress bars that inform you how many percent of the project is completed
+* View all tasks by deadlines to prioritise your time better
+* Stamp tasks that you have worked on but not completed each day
 
 Cons:
+* Typed navigation is not available 
+* No offline functionality 
+* Only available on Windows 10 computers
 
-* ...
-* ...
+** Reminder **
 
+Author: Low Yong Siang
+
+Pros:
+* Multi-device syncing allows for the user to be able to continue on different devices.
+* Able to mark off the list of todos and it is transferred to the Completed section.
+* Able to set a reminder notification on a date or given a location.
+* Offline functionality, and will sync across devices when internet connection is available.
+* Able to add priority to each task (3 levels in total).
+* Clean and intuitive user interface.
+* Able to add comments and notes to a to do which helps to organise thoughts on the specific task. 
+* Able to color code todo, for organization.
+
+Cons:
+* Multi-device syncing only happens when internet connection is available.
+* Does not sort the list in the priority level. Only shows the priority symbol at the side of the task.
+* Only available on Apple devices.
+* Typed navigation to the completed and pending list is not available.
+
+** Evernote **
+
+Author: Mun Le Yuan
+
+Pros:
+* Can be accessed on both laptops and smartphones
+* Notes can be tagged with text and location
+* Allows great extent of organisation by giving users the ability to group notes into notebooks and even group notebooks
+* Users can add images and sound clips to notes
+* Users can attach documents to notes
+* Users can share notes with others (not really relevant)
+* Users can search through notes using key words
+* Allows notes or notebooks to be added to shortcuts for easy access
+* Users can set reminders for notes
+* Data is stored in the cloud
+* Shows search history
+* Users can clip webpages to the notes (only on laptops)
+* Allows users to forward emails to Evernote
+
+Cons:
+* Involves quite a bit of GUI (not very suitable for Jim)
+* Does not allow users to prioritise tasks in notes
+
+** Any.Do **
+
+Author: Yim Chia Hui 
+
+Pros:
+* Minimalist design reduces the clutter on the screen
+* Provides Any.do Moment which runs through the things to do for the day/review what has been done already
+* Organise into categories
+* View based on priorities
+* GUI is simple and easy to learn
+
+Cons:
+* Not much customizable possible
+* No calendar view
