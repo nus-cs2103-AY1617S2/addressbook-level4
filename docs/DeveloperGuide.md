@@ -353,6 +353,8 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | be able to mark completed tasks | differentiate between completed and uncompleted tasks
 `* * *` | user | be able to undo action | undo unwanted command
 `* * *` | user | be able to redo action | restore previous command
+`* * *` | user | set alarms and reminders | remember tasks on hand
+`* * *` | user | have a list of commands to show | see all commands
 `* *` | user working in teams | be able to import task files | add multiple tasks given by team mates
 `* *` | user working in teams | be able to export task files | transfer multiple tasks to team mates
 `* *` | user with many tasks | list all tasks | recall all the tasks I have so far
@@ -361,8 +363,11 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user with many tasks | list all tasks by date | recall all tasks by date
 `* *` | user with many tasks | list all tasks by priority | recall all the tasks by priority
 `* *` | user with many tasks | list all tasks by tag | recall all the tasks with a particular tag
+`* *` | user | have shortcuts | set up a reminder quicker
 `*` | user who works with complex tasks | create subtasks | break a task into smaller tasks for easier management
 `*` | user who also use other task managing applications | synchronize my task list across all my applications | manage the same tasks from different applications 
+`*` | user | be able to customize the colours | make it look more appealing
+`*` | user | have UI dark mode | ease the stress on my eyes
 
 {More to be added}
 
@@ -529,6 +534,44 @@ Use case ends.
 1a. No urgent tasks exist
 > KoolToDoManager shows an error message <br>
 
+#### Use case: Create alarms and reminders
+
+**MSS**
+
+1. User requests to create alarm
+2. KoolToDoManager prompts for date and time
+3. User inputs date and time
+4. KoolToDoManager creates alarm
+Use case ends.
+
+**Extensions**
+2a. Date or time does not exist 
+> 2a1. KoolToDoManager shows an error message <br>
+  Use case resumes at step 2
+
+#### Use case: List commands
+
+**MSS**
+1. User requests to list commands
+2. KoolToDoManager shows a list of commands
+Use case ends.
+
+**Extensions**
+2a. The list is empty 
+
+> Use case ends
+
+#### Use case: Use shortcuts
+
+1. KoolToDoManager requests for a shortcut
+2. User keys in a shortcut
+3. KoolToDoManager executes shortcut 
+Use case ends.
+
+Extensions
+3a. Shortcut does not exist 
+
+> Use case resumes at step 1
 
 {More to be added}
 
