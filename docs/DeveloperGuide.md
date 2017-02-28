@@ -520,17 +520,54 @@ Use case resumes at step 2
 
 ## Appendix E : Product Survey
 
-**Product Name**
+[**Simpliday**](http://www.simpliday.com/)
 
-Author: ...
+Author: Yan Zheng
 
 Pros:
 
-* ...
-* ...
+* Excellent user interface design and user experience
+* Intuitive design for users to pick up easily
+* Easy to organize tasks reminiscent of a physical organiser
+* Convenient integration with cloud-based services (Google sign-in)
+* Advanced features for tasks including geo-tagging, sharing through social media, emails
 
 Cons:
 
-* ...
-* ...
+* Certain features are not relevant to certain types of user
+* Only available on App Store (iOS)
+
+[**Pivotal Tracker**](https://www.pivotaltracker.com/)
+
+Author: Han Lynn
+
+Pros:
+
+* Dashboard view for entire project
+* Tasks tracking & prioritizing
+* Release and milestone management
+* Dedicated apps are available on major platforms
+* Open APIs for developers to integrate
+
+Cons:
+
+* Not intuitive enough that it requires a few tutorials to fully understand the controls
+* Very specific to software engineering projects
+
+[**Trello**](https://trello.com/)
+
+Author: Xu Bili
+
+Pros:
+
+* Intuitive UI that needs little explaining of how to use it
+* Stores information on the cloud, accessible from any device
+* Collaborative, *kanban* can be shared with other people
+* Integrates with GitHub and other useful services
+
+Cons:
+
+* Specific to technical tasks
+* Tasks have to be small enough to be broken down into cards
+* Gets really messy when the project scales up
 
