@@ -32,7 +32,8 @@ By : `Team ToLuist`  &nbsp;&nbsp;&nbsp;&nbsp;
 > * Parameters can be in any order.
 
 ### 2.0. Viewing tasks
-
+Viewing all tasks in the todo list<br>
+Format: `list`
 > * A list of tasks will always be displayed.
 > * When starting the program, the list will show all tasks which are currently not completed.
 > * When performing find operations, this list will be updated to show only the results searched for.
