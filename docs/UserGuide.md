@@ -35,7 +35,7 @@ By : `Miao Ling` , `Ian` , `Qi Xiang` and `Dylan` - `[W09-B4]` Since : `Feb 2017
    >
    > **Priority**
    >
-   > * Shows you 4 options of priority tabs, from highest to lowest. Selecting the tab allows you to view the list of tasks that is under that priority. Eg. By clicking on “Highest Priority” tab, it will bring you to the list of tasks that you have in it.
+   > * Shows you 4 options of priority tabs, from highest to lowest. Selecting the tab allows you to view the list of tasks that is under that priority. Eg. By clicking on “Highest Priority” tab, it will bring you to the list of tasks that you have in it.<br>
    > <img src="images/Priority_screen.jpg" width="600">
 
 ## 2. Features
