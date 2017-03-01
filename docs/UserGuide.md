@@ -8,7 +8,6 @@ By : `Team W14-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
 2. [Features](#features)
 3. [Command Summary](#command-summary)
  
-Our target user is Jim who usually works alone on either his personal computer or office computer. Jim does not share his computer with other employees or his family members. He prefers a command-line approach over a mouse-clicking approach. Jim would like to have an organized set up of his tasks so that he can categorize, sort, and prioritise them for ease of task management.  
 
 ## TaskBoss Prototype
 <img src="images/TaskBoss (all tasks).png" width="600"> <br>
