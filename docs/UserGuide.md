@@ -25,7 +25,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbs
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
    * **`list`** : lists all tasks
-   * **`add`**`  add laundry due/every sunday #/personal d/wash clothes @B1 *f` :
+   * **`add`**`  add laundry due/every sunday #personal d/wash clothes @B1 *f` :
      adds a task to Dueue named `laundry` which is repeating `every sunday` under list `personal` with description `wash clothes` at venue `B1` and star it as `favourite`.
    * **`delete`**` 3` : deletes the task with index 3 as shown in the current list
    * **`exit`** : exits the app
@@ -49,17 +49,18 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Adds a task to Dueue<br>
-Format: `add TASKNAME [due/DUEDATE] [t/TIME] [#/LISTNAME] [d/DESCRIPTION] [@VENUE] [p/PRIORITYLEVEL] [*f]`
+Format: `add [n/TASKNAME] [due/DUEDATE] [t/TIME] [#LISTNAME] [d/DESCRIPTION] [@VENUE] [p/PRIORITYLEVEL] [*f]`
 
 > Tasks cannot have multiple lists<br>
 > Due dates of tasks can repeating, e.g. every sunday<br>
 > Time of each task can only be one time point, e.g. 4pm<br>
-> Specifications of fields for task can be entered in any order
+> Specifications of fields for task can be entered in any order<br>
+> If no fields are entered, help message for add command will appear.
 
 Examples:
 
-* `add laundry due/every sunday #/personal d/wash clothes @B1 *f`
-* `add 2103lecture due/every friday t/4pm #/study d/go for lecture p/IMPORTANT @iCube`
+* `add n/laundry due/every sunday #personal d/wash clothes @B1 *f`
+* `add n/2103lecture due/every friday t/4pm #study d/go for lecture p/IMPORTANT @iCube`
 
 ### 2.3. Listing all tasks : `list`
 
@@ -92,10 +93,10 @@ Format: `update list LISTINDEX NEW_LISTNAME`
 > Listname cannot begin with digits
 > Do not need to specify whether the parameter is LISTINDEX or LISTNAME<br>
 
-### 2.6. Updating a task : `update`
+### 2.6. Updating task(s) : `update`
 
-Edits an existing task in Dueue.<br>
-Format: `edit INDEX [NAME] [due/DUEDATE] [t/TIME] [#/LISTNAME] [d/DESCRIPTION] [@VENUE] [p/PRIORITYLEVEL]`
+Updates existing task(s) in Dueue.<br>
+Format: `update TASKINDEX ... [n/NAME] [due/DUEDATE] [t/TIME] [#LISTNAME] [d/DESCRIPTION] [@VENUE] [p/PRIORITYLEVEL] [FAVOURITE]`
 
 > * Edits the task at the specified `INDEX`.
     The index refers to the index number shown in the last person listing.<br>
@@ -103,35 +104,33 @@ Format: `edit INDEX [NAME] [due/DUEDATE] [t/TIME] [#/LISTNAME] [d/DESCRIPTION] [
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
 > * You can remove details by typing `` after the `/` or `@`without specifying any tags after it eg,`due/`.
-> *Specifications of fields for task can be entered in any order.
-
+> * Specifications of fields for task can be entered in any order.
 
 Examples:
 
 * `update 1 Laundry due/every sunday @`<br>
-  Edits the name, due date and the venue of the 1st task to be `Laundry`, `every sunday` and remove the venue respectively.
+  Updates the name, due date and the venue of the 1st task to be `Laundry`, `every sunday` and remove the venue respectively.
 
-* `edit 2 due/`<br>
-  remove the due date of the second task.
+* `update 2 due/ &f`<br>
+  Remove the due date of the task with `INDEX` 2 and make it not favourite.
 
 ### 2.7. View certain tasks: `view`
 
-Finds persons whose names contain any of the given keywords.<br>
-Format: `find KEYWORD [MORE_KEYWORDS]`
+View tasks due on a specified date.<br>
+Format: `view dueon/DATE`
 
-> * The search is case sensitive. e.g `hans` will not match `Hans`
-> * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-> * Only the name is searched.
-> * Only full words will be matched e.g. `Han` will not match `Hans`
-> * Persons matching at least one keyword will be returned (i.e. `OR` search).
-    e.g. `Hans` will match `Hans Bo`
+View tasks due by a specified date.<br>
+Format: `view dueby/DATE`
+
+> * The date has to be specified in a certain format.
+> * User will be able to see repeating tasks due on/by that date also.
 
 Examples:
 
-* `find John`<br>
-  Returns `John Doe` but not `john`
-* `find Betsy Tim John`<br>
-  Returns Any person having names `Betsy`, `Tim`, or `John`
+* `view dueon/today`<br>
+  Returns a list of tasks due today
+* `view dueby/next Friday`<br>
+  Returns a list of tasks due by next Friday
 
 ### 2.8. Deleting a person : `delete`
 
@@ -192,25 +191,22 @@ There is no need to save manually.
 
 ## 4. Command Summary
 
-* **Add**  `add TASKNAME [due/DUEDATE] [#/LISTNAME] [d/DESCRIPTION] [@VENUE] [*f]` <br>
-  e.g. `add laundry due/every sunday #/personal d/wash clothes @B1 *f`
+* **Add**  `add [n/TASKNAME] [due/DUEDATE] [#LISTNAME] [d/DESCRIPTION] [@VENUE] [FAVOURITE]` <br>
+  e.g. `add n/laundry due/every sunday #personal d/wash clothes @B1 *f`
 
 * **Clear** : `clear`
 
-* **Delete** : `delete INDEX` <br>
+* **Delete** : `delete TASKINDEX` <br>
    e.g. `delete 3`
-
-* **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
-  e.g. `find James Jake`
 
 * **List** : `list` <br>
   e.g. `list`
 
 * **Help** : `help` <br>
-  e.g.
+  e.g. `help`
 
-* **Select** : `select INDEX` <br>
-  e.g.`select 2`
-
-* **Update** : `update Task-INDEX [parameters]` <br>
-  e.g.`update 103 due/tomorrow`
+* **Update** : `update TASKINDEX ... [n/NAME] [due/DUEDATE] [t/TIME] [#LISTNAME] [d/DESCRIPTION] [@VENUE] [p/PRIORITYLEVEL] [FAVOURITE]` <br>
+  e.g.`update 1 Laundry due/every sunday @`
+  
+* **View** : `view DUETYPE/DUEDATE`
+  e.g. `view dueon/today`
