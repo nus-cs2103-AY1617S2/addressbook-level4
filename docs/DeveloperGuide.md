@@ -638,8 +638,8 @@ Use case ends
 
 **MSS**
 
-1.User requests to view a specific task
-2.TaskBoss displays the task user requests. <br>
+1. User requests to view a specific task
+2. TaskBoss displays the task user requests. <br>
 Use case ends
 
 **Extensions**
