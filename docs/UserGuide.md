@@ -76,7 +76,21 @@ Format: Format: `list lists`
 
 ### 2.4. Creating a list : `create`
 
+Creates a new list in Dueue<br>
+Format: `create LISTNAME`
+
+> Listname cannot be the same as other existing lists<br>
+> Listname cannot begin with digits
+
 ### 2.5. Updating a list : `update list`
+
+Update a list in Dueue with new name<br>
+Format: `update list LISTNAME NEW_LISTNAME`
+Format: `update list LISTINDEX NEW_LISTNAME`
+
+> Listname cannot be the same as other existing lists<br>
+> Listname cannot begin with digits
+> Do not need to specify whether the parameter is LISTINDEX or LISTNAME<br>
 
 ### 2.6. Updating a task : `update`
 
