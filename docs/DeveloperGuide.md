@@ -501,7 +501,7 @@ Pros:
 * Sync Email directly into Calendar. Jim will be able to schedule his tasks.
 * Integrated search function for finding emails, contacts, date. Jim will be able to find a specific task.
 * Portable
-* Retrieve others’ calendars for references
+* Retrieve othersï¿½ calendars for references
 
 Cons:
 
@@ -509,4 +509,20 @@ Cons:
 * Little support to run on Linux-based system
 * Too much functionalities and may be complex for users to use. Confusing for Jim.
 
+**Wunderlist**
 
+Author: My Duy Hoang Long
+
+Pros:
+
+* Subtasks can be created for each task
+* Tags can be added to each task using hashtag
+* Allow natural language input
+* Simple and friendly UI
+* Support multiple platforms
+* Share list with other people. Since Jim work alone, this function might not be useful for Jim.
+
+Cons:
+
+* Sync process slow down the application
+* Sync with Google Calendar and Outlook may not work properly
