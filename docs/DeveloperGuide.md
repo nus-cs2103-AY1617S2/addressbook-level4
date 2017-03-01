@@ -374,12 +374,12 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | view undone tasks according to deadlines | I can prioritise tasks that are more urgent <br>
 `* * *` | user | view my tasks by day | know what my tasks and schedule are for a certain day <br>
 `* * *` | user | weekly overview of what is due this week | plan my time better <br>
+`* * *` | user | set recurring tasks | don't have to key recurring events repeatedly <br>
 
 
 `* *` | user | redo an action | redo an undo action <br>
 `* *` | user | big picture overview of my daily performance | learn the patterns of my own productivity  <br>
 `* *` | user | access my email alongside the task manager | do not need to switch screens in order to add tasks <br>
-`* *` | user | set recurring tasks | don't have to key recurring events repeatedly <br>
 `* *` | user | commands to be highlighted | know they are valid commands <br>
 `* *` | user | see command formats as I type | refer to it if I am unsure of the format <br>
 `* *` | user | a daily progress check-in function | know I have worked on a task today even if I cannot complete it <br>
