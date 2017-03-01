@@ -377,254 +377,254 @@ Priority | As a ... | I want to ... | So that I can...
 (For all use cases below, the **System** is the `Task Manger` and the **Actor** is the `user`, unless specified otherwise)
 
 #### Use case: Create new task 
-Use case ID: UC01 Create new task
-Actor: User
-Precondition: User has opened the application
+Use case ID: UC01 Create new task<br />
+Actor: User<br />
+Precondition: User has opened the application<br />
 
 **MSS**
 
 1. User enters command to create new task and details of the task.
 2. System creates new task.
-3. System displays the details of the new task created.
+3. System displays the details of the new task created.<br />
 Use case ends.
 
 **Extensions**
 
 1a. User inputs a start and end time for the task.
 
-> System verifies if there are any clashes with the time slot chosen.
+> 1a. System verifies if there are any clashes with the time slot chosen.
 
-> 1a1. There is a clash
-  System shows error to the user. 
+> 1a1. There is a clash<br />
+  1a11. System shows error to the user.<br />
   Resume at step 1.
   
-> 1a2. There is no clash
+> 1a2. There is no clash<br />
   Resume at step 2.
 
 #### Use case: Delete a task
-Use case ID: UC02 Delete task
-Actor: User
-Precondition: User has opened the application and a list of tasks is being displayed
+Use case ID: UC02 Delete task<br />
+Actor: User<br />
+Precondition: User has opened the application and a list of tasks is being displayed<br />
 
 **MSS**
 
 1. User requests to delete a specific task in the list.
-2. System deletes the task.
+2. System deletes the task.<br />
 Use case ends.
 
 **Extensions**
 
 1a. The given index is invalid
 
-> 1a1. System shows an error message
+> 1a1. System shows an error message<br />
   Use case resumes at step 1
 
 #### Use case: Update a task
-Use case ID: UC03 Update a task
-Actor: User
-Precondition: A list of tasks is being displayed
+Use case ID: UC03 Update a task<br />
+Actor: User<br />
+Precondition: A list of tasks is being displayed<br />
 
 **MSS**
 
-1. User identifies the task to update, enters attributes of the task. to be changed and instructs system to save changes.
-2. System saves the updated task.
-Use case ends.
+1. User identifies the task to update, enters attributes of the task. to be changed and instructs system to save changes
+2. System saves the updated task<br />
+Use case ends
 
 **Extensions** 
 
-3a. There is a clash with another task.
+3a. There is a clash with another task
 
-> System shows error to the user.
-  System asks user to reenter the attributes (timeslot).
+> 3a1. System shows error to the user<br />
+  3a2. System asks user to reenter the attributes (timeslot)<br />
   Resume at step 2.
 
 #### Use case: View an existing task
-Use case ID: UC04 View an existing task
-Actor: User
-Precondition: A list of tasks is being displayed/
+Use case ID: UC04 View an existing task<br />
+Actor: User<br />
+Precondition: A list of tasks is being displayed<br />
 
 **MSS**
 
-1. User identifies the task to view.
-2. System displays the details of the task.
-Use case ends.
+1. User identifies the task to view
+2. System displays the details of the task<br />
+Use case ends
  
 #### Use case: View all outstanding tasks in a chronological order
-Use case ID: UC05 View all outstanding tasks in a chronological order
-Actor: User
-Precondition: User has opened the application.
+Use case ID: UC05 View all outstanding tasks in a chronological order<br />
+Actor: User<br />
+Precondition: User has opened the application.<br />
 
 **MSS**
 
-1. User prompts the system to list all outstanding tasks.
-2. System displays a list of all outstanding tasks.
-Use case ends.
+1. User prompts the system to list all outstanding tasks
+2. System displays a list of all outstanding tasks<br />
+Use case ends
 
 **Extensions** 
 
-2a. There are no outstanding tasks.
+2a. There are no outstanding tasks
         
-> 2a1. System notifies user that there are no outstanding tasks.
+> 2a1. System notifies user that there are no outstanding tasks<br />
   Use case ends
 
 #### Use case: Add attachments and links to a task
-Use case ID: UC06 Add attachments and links to a task
-Actor: User
-Precondition: User has opened the application and a list of task is being displayed
+Use case ID: UC06 Add attachments and links to a task<br />
+Actor: User<br />
+Precondition: User has opened the application and a list of task is being displayed<br />
 
 **MSS**
 
-1. User identifies the task to attach a file/hyperlink and specifies the location of the file or hyperlink.
-2. System adds the links and attachments to the task and displays the updated task.
-Use case ends.
+1. User identifies the task to attach a file/hyperlink and specifies the location of the file or hyperlink
+2. System adds the links and attachments to the task and displays the updated task<br />
+Use case ends
 
 #### Use case: Undo previous operation
-Use case ID: UC07 Undo previous operation
-Actor: User
+Use case ID: UC07 Undo previous operation<br />
+Actor: User<br />
 
 **MSS**
 
-1. User requests to undo the previous operation.
-2. System reverts the results of the last command executed by the user.
-Use case ends.
+1. User requests to undo the previous operation
+2. System reverts the results of the last command executed by the user<br />
+Use case ends
 
 **Extensions**
 
 2a. Previously executed command does not manipulate data
             
-> 2a1. System executes the undo command and notifies user that nothing was changed
+> 2a1. System executes the undo command and notifies user that nothing was changed<br />
   Use case ends
 
 2b. No previously executed command exist
   
-> 2b1. System notifies the user that there is no previous operation executed in the current session
+> 2b1. System notifies the user that there is no previous operation executed in the current session<br />
   Use case ends
 
 #### Use case: Find a task
-Use case ID: UC08 Find a task
-Actor: User
-Precondition: User has opened the application
+Use case ID: UC08 Find a task<br />
+Actor: User<br />
+Precondition: User has opened the application<br />
 
 **MSS**
 
-1. User enters some search terms for search for a task.
-2. System searches for a task based on search terms and returns a list of task that fit the criteria.
-Use case ends.
+1. User enters some search terms for search for a task
+2. System searches for a task based on search terms and returns a list of task that fit the criteria<br />
+Use case ends
 
 **Extensions**
 
 2a. No task found based on search term
 
-> 2a1. System notifies user that no task matches the search term
+> 2a1. System notifies user that no task matches the search term<br />
   Use case ends
 
 #### Use case: Add a label to an outstanding task
-Use case ID: UC09 Add a label to an outstanding task
-Actor: User
-Precondition: User has opened the application and a list of tasks is being displayed
+Use case ID: UC09 Add a label to an outstanding task<br />
+Actor: User<br />
+Precondition: User has opened the application and a list of tasks is being displayed<br />
 
 **MSS**
 
-1. User requests to add a label to a task.
-2. System tags the task with the specified label and notifies user.
-Use case ends.
+1. User requests to add a label to a task
+2. System tags the task with the specified label and notifies user<br />
+Use case ends
 
 **Extensions**
 
 1a. User specifies an invalid or non-existent task
 
-> 1a1. System notifies user that the task does not exist
+> 1a1. System notifies user that the task does not exist<br />
   Use case ends
 
 #### Use case: Remove a label from a task
-Use case ID: UC10 Remove a label from a task
-Actor: User
-Precondition: User has opened the application and a list of task is being displayed
+Use case ID: UC10 Remove a label from a task<br />
+Actor: User<br />
+Precondition: User has opened the application and a list of task is being displayed<br />
 
 **MSS**
 
-1. User request to remove a label from a task.
-2. System removes the label from the task and notifies user.
+1. User request to remove a label from a task
+2. System removes the label from the task and notifies user
 
 **Extensions**
 
 1a. User request to remove a label from an invalid or non-existent task
 
-> 1a1. System notifies user that the task does not exists
+> 1a1. System notifies user that the task does not exists<br />
   Use case ends
 
-#### Use case: Edit a label 
-Use case ID: UC11 Edit a label 
-Actor: User
-Precondition: User has opened the application
+#### Use case: Edit a label
+Use case ID: UC11 Edit a label<br />
+Actor: User<br />
+Precondition: User has opened the application<br />
 
 **MSS**
 
-1. User request to edit a label to a new label.
-2. System searches through all tasks and renames all labels to the new label.
-Use case ends.
+1. User request to edit a label to a new label
+2. System searches through all tasks and renames all labels to the new label<br />
+Use case ends
 
 **Extensions**
 
 1a. User specifies an invalid or non-existent task/label
 
-> 1a1. System notifies user that the task/label specified does not exist
+> 1a1. System notifies user that the task/label specified does not exist<br />
   Use case ends
 
 #### Use case: List all tasks under a label
-Use case ID: UC12 List all outstanding tasks under a label
-Actor: User
-Precondition: User has opened the application
+Use case ID: UC12 List all outstanding tasks under a label<br />
+Actor: User<br />
+Precondition: User has opened the application<br />
 
 **MSS**
 
-1. User requests to list tasks with a label name.
-2. System shows a list of tasks under a label name.
-Use case ends.
+1. User requests to list tasks with a label name
+2. System shows a list of tasks under a label name<br />
+Use case ends
 
 **Extensions**
 
 1a. The given label name is invalid
 
-> 1a1. System shows an error message
+> 1a1. System shows an error message<br />
   Use case ends
 
 #### Use case: Allocating multiple slots for a task
-Use case ID: UC13 Allocating multiple slots for a task
-Actor: User
-Precondition: User has opened the application
+Use case ID: UC13 Allocating multiple slots for a task<br />
+Actor: User<br />
+Precondition: User has opened the application<br />
 
 **MSS**
 
-1. User selects a task for scheduling.
-2. System shows the list of available slots.
-3. User selects the available slots to allocate.
-4. System allocate the selected slots for a task.
+1. User selects a task for scheduling
+2. System shows the list of available slots
+3. User selects the available slots to allocate
+4. System allocate the selected slots for a task<br />
 Use case ends.
 
 **Extensions**
 
 1a. The given task name is invalid
 
-> 1a1. System shows error message
+> 1a1. System shows error message<br />
   Use case ends
 
 3a. The given selection is invalid
 
-> 3a1. System show error message
+> 3a1. System show error message<br />
   Use case resumes at step 2 
 
 #### Use case: Free-ing slot when user confirms a slot for a task
-Use case ID: UC14 Free-ing slot when user confirms a slot for a task
-Actor: User
-Precondition: User has opened the application
+Use case ID: UC14 Free-ing slot when user confirms a slot for a task<br />
+Actor: User<br />
+Precondition: User has opened the application<br />
 
 **MSS**
 
-1. User selects task to view details.
-2. System shows allocated time slots for task.
-3. User selects time slots to work on task.
-4. System free the rest of the not selected time slots and display the details of the updated task.
+1. User selects task to view details
+2. System shows allocated time slots for task
+3. User selects time slots to work on task
+4. System free the rest of the not selected time slots and display the details of the updated task<br />
 Use case ends
 
 **Extensions**
@@ -635,101 +635,101 @@ Use case ends
 
 3a. The given input is invalid or allocated by another task
 
-> 3a1. System shows an error message
-  Use case resumes at step 2.
+> 3a1. System shows an error message<br />
+  Use case resumes at step 2
 
 #### Use case: Add a recurring task
-Use case ID: UC15 Add a recurring task
-Actor: User
-Precondition: User has opened the application
+Use case ID: UC15 Add a recurring task<br />
+Actor: User<br />
+Precondition: User has opened the application<br />
 
 **MSS**
 
-1. User request to add a recurring task and inputs the information required.
-2. System creates recurring task and displays the task.
+1. User request to add a recurring task and inputs the information required
+2. System creates recurring task and displays the task<br />
 Use case ends
 
 **Extensions**
 
 2a. The input in invalid or insufficient
 
-> 2a1. System shows error message
-  Resume at step 1.
+> 2a1. System shows error message<br />
+  Resume at step 1
 
 #### Use case: Mark a task as completed
-Use case ID: UC16 Mark a task as completed
-Actor: User
-Precondition: A list of tasks is being displayed
+Use case ID: UC16 Mark a task as completed<br />
+Actor: User<br />
+Precondition: A list of tasks is being displayed<br />
 
 **MSS**
 
-1. User marks a specific task in the list as completed.
-2. System update the task, set it to be completed and display the updated task.
-Use case ends.
+1. User marks a specific task in the list as completed
+2. System update the task, set it to be completed and display the updated task<br />
+Use case ends
 
 **Extensions**
 
 1a. The given index is invalid
 
-> 1a1. System shows an error message
+> 1a1. System shows an error message<br />
   Use case resumes at step 1
 
 #### Use case: View completed tasks
-Use case ID: UC17 View completed tasks
-Actor: User
-Precondition: User has opened the applications 
+Use case ID: UC17 View completed tasks<br />
+Actor: User<br />
+Precondition: User has opened the applications<br />
 
 **MSS**
 
-1. User request to list completed tasks.
-2. System shows a list of completed task.
-Use case ends.
+1. User request to list completed tasks
+2. System shows a list of completed task<br />
+Use case ends
 
 **Extensions**
 
 2a. The list is empty
 
-> 2a1. System notifies the user that there is no completed task
+> 2a1. System notifies the user that there is no completed task<br />
   Use case ends
 
 #### Use case: Add location to a task
-Use case ID: UC18 Add location to a task
-Actor: User
-Precondition: User has opened the application and a list of tasks is being displayed
+Use case ID: UC18 Add location to a task<br />
+Actor: User<br />
+Precondition: User has opened the application and a list of tasks is being displayed<br />
 
 **MSS**
 
-1. User selects a task to add location to the task and specifies location.
-2. System adds the location attribute to the task and displays updated task.
+1. User selects a task to add location to the task and specifies location
+2. System adds the location attribute to the task and displays updated task<br />
 Use case ends
 
 #### Use case: List down agenda for the day
-Use case ID: UC19 List down agenda for the day
-Actor: User
-Precondition: User has opened the application
+Use case ID: UC19 List down agenda for the day<br />
+Actor: User<br />
+Precondition: User has opened the application<br />
 
 **MSS**
 
-1. User prompts system to display agenda for the day.
-2. System returns the list of tasks for the current day.
-Use case ends.
+1. User prompts system to display agenda for the day
+2. System returns the list of tasks for the current day<br />
+Use case ends
 
 **Extensions**
 
-2a. There are no tasks for the current day.
+2a. There are no tasks for the current day
 
-> System notifies the user that there are no tasks for the current day.
-  Use case ends.
+> System notifies the user that there are no tasks for the current day<br />
+  Use case ends
 
 #### Use case: Iterate through command history
-Use case ID: UC20 Iterate through command history
-Actor: User
-Precondition: User has opened the application
+Use case ID: UC20 Iterate through command history<br />
+Actor: User<br />
+Precondition: User has opened the application<br />
 
 **MSS**
 
-1. User request to iterate through previous commands executed.
-2. System retrieves a list previously used command and displays it to the user.
+1. User request to iterate through previous commands executed
+2. System retrieves a list previously used command and displays it to the user<br />
 Use case ends
 
 **Extensions**
@@ -739,15 +739,15 @@ Use case ends
 > Use case ends
 
 #### Use case: Autocomplete words that user is typing
-Use case ID: UC21 Autocomplete words that user is typing
-Actor: User
-Precondition: User has opened the application
+Use case ID: UC21 Autocomplete words that user is typing<br />
+Actor: User<br />
+Precondition: User has opened the application<br />
 
 **MSS**
 
-1. User is in the midst of typing a command and request for an autocomplete option.
-2. System searches through a dictionary and completes the command if there is a single term found.
-Use case ends.
+1. User is in the midst of typing a command and request for an autocomplete option
+2. System searches through a dictionary and completes the command if there is a single term found<br />
+Use case ends
 
 **Extensions**
 
@@ -759,22 +759,22 @@ Use case ends.
   
 > 2b1. System will display list of words that currently match whatever the user is typing
 
-> 2b2. User continues to enter more letters into the command and request for an autocomplete option again
-  Steps 2b1-2b2 are repeated until there is 0 or 1 word that matches the partial command
+> 2b2. User continues to enter more letters into the command and request for an autocomplete option again<br />
+  Steps 2b1-2b2 are repeated until there is 0 or 1 word that matches the partial command<br />
   Use case resumes from step 2
 
 #### Use case: Delete a label
-Use case ID: UC22 Delete a label
-Actor: User
-Precondition: User has opened the application
+Use case ID: UC22 Delete a label<br />
+Actor: User<br />
+Precondition: User has opened the application<br />
 
 **MSS**
 
 1. User requests to list outstanding tasks (UC05)
-2. System shows a list of tasks with its details.
-3. User selects the label to delete.
-4. System delete the label and display the updated list of tasks.
-Use case ends.
+2. System shows a list of tasks with its details
+3. User selects the label to delete
+4. System delete the label and display the updated list of tasks<br />
+Use case ends
 
 **Extensions**
 
@@ -784,46 +784,46 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. System shows an error message
+> 3a1. System shows an error message<br />
   Use case resumes at step 2
 
 #### Use case: Launch application using shortcut
-Use case ID: UC23 Launch application using shortcut
-Actor: User
-Precondition: User has booted up his computer
+Use case ID: UC23 Launch application using shortcut<br />
+Actor: User<br />
+Precondition: User has booted up his computer<br />
 
 **MSS**
 
-1. User inputs the shortcut to launch the application.
-2. Operating System launch System.
-Use case ends.
+1. User inputs the shortcut to launch the application
+2. Operating System launch System<br />
+Use case ends
 
 **Extensions**
 
 1a. The input is invalid
 
-> Use case ends.
+> Use case ends
 
 2a. System is already running
 
-> Use case ends.
+> Use case ends
 
 #### Use case: PDF to printable format
-Use case ID: UC24 PDF to printable format
-Actor: User
-Precondition: User has opened the application
+Use case ID: UC24 PDF to printable format<br />
+Actor: User<br />
+Precondition: User has opened the application<br />
 
 **MSS**
 
-1. User request to print schedule for datetime range.
-2. System generates printable format.
-
+1. User request to print schedule for datetime range
+2. System generates printable format<br />
+Use case ends
 
 **Extensions**
 
 1a. The given date time range is invalid.
 
-> Use case ends.
+> Use case ends
 
 ## Appendix C : Non Functional Requirements
 
