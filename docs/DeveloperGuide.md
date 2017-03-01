@@ -482,6 +482,7 @@ Use case ends.
 
 {More to be added}
 
+
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
@@ -538,3 +539,26 @@ Cons:
 
 * Sync process slow down the application
 * Sync with Google Calendar and Outlook may not work properly
+
+**Google Calendar**
+
+Author : Ivan Koh
+
+Pros
+
+* Can be used in both online and offline mode
+* can use color code to dictate the priority of each task
+* Can share your tasks with others by simply inviting them
+* Support multiple platforms
+* Can view tasks in either daily, monthly, or even yearly mode
+* Can setup reminder in Google Calender, which will be especially useful to Jim
+* Allows you to repeat some events automatically
+* Allows natural language input
+* Allows you to jump to a specific date easily
+* Can sync with other task manager inlcuding Microsoft Outlook
+
+Cons
+
+* Google Calender doesn't allows you to use tags to categorize your task
+
+
