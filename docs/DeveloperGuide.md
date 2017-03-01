@@ -526,18 +526,25 @@ Use case ends
 > The expired set contains all the tasks and events that are removed from the active list by the user, which may be recycled. This list can be emptied by the user.  
 
 ## Appendix E : Product Survey
+This product survey is conducted with respect to Jim's needs. Therefore, it may not mention some of the remarkable features of a product should they be irrelevant to Jim.
 
-**Product Name**
+**Product Name: Remember the Milk**
 
-Author: ...
+Author: Yoshiaki Nishimura
 
 Pros:
 
-* ...
-* ...
+* Many supplementary information can be specified with the task, including location, start date, due date and priority.
+* The task inbox can be sorted by various fields, including task name, due date and priority.
+* Adding of tasks can be achieved both through keyboard as well as clicking. After the typing in the task name, you can specify options like due date and tags using meta characters. For example, you can specify due date with `^` followed by date
+* The web page supports many keyboard shortcuts, such as `t` for adding tasks.
+* Removed tasks are temporarily put into trash, from which a customer can recover tasks within 30 days.
+* Can undo a previous delete with one click. 
+* Can break a task into its subtasks (pro-version).
 
 Cons:
 
-* ...
-* ...
+* The Web App is browser-based and needs internet connection, at least for free-versions.
+* Only addition of a task can be done from the command line. The rest of user operations rely heavily on GUI.  
+* Does not offer time-slot “block” feature for tentative events whose time is yet to be finalized.
 
