@@ -10,7 +10,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 5. [Command Summary](#command-summary)
 
 ## 1. Introduction 
-Welcome. We will take you for an enthralling journey as we bring forward our task manager 
+Welcome. We will take you for an enthralling journey as we bring forward our task manager "TASKCRUSHER"
 
 It can help you manage events, deadlines, add tasks with or without deadlines or view your history. This is a great amanager if you are looking to move away from clicking as the simplified scheduling is just a few short and sweet command lines away.
 
@@ -204,6 +204,44 @@ Format : `Undo`
        the file that contains the data of your previous Address Book folder.
 
 ## 4. Command Summary
+
+
+COMMAND | FORMAT 
+--------|:--------
+ADD EVENT|`add event[start datetime] to [end datetime] [t/TAG]...`
+ADD TASK WITH DEADLINE |`add task [end datetime]`
+ADD TASK WITHOUT DEADLINE|`add task `
+VIEW TASK WITH DEADLINE|` Viewd task`
+VIEW TASK WITHOUT DEADLINE|`View task`
+VIEW TASK TO BE COMPLETED BY DEADLINE|`View task by date`
+VIEW LIST OF EVENT IN TIME FRAME|` View event [start time] to [End time]`
+VIEW OVERDUE TASK|`View over`
+VIEW LAST ACTION|`View last`
+VIEW COMPLETED TASKS|`View done`
+VIEW HISTORY|`view history`
+VIEW THE CALENDAR|`view calendar`
+VIEW FREETIME|`view free [daily/weekly/monthly]`
+UPDATE BY NAME|`Update task/event name [New name]`
+UPDATE BY DESCRIPTION|`Update task/event desc [Description]`
+UPDATE EVENT BY LOCATION|`Update event location [Location]`
+UPDATE EVENT BY TIME|`Update event time [Time]`
+UPDATE EVENT BY PRIOIRITY|` Update task Priority [1...10]`
+UPDATE TASK BY DEADLINE|` Update task Deadline [New Date]`
+SORT TASK|`Sort taskname By Name/Priority/deadline`
+SORT EVENTS|`Sort Eventname By Name/Start date`
+FIND TASK/EVENT|`find KEYWORD [MORE_KEYWORDS]`
+DELETE TASK/EVENT|`delete task/event name `
+CLEAR EXPIRED EVENTS|`clear`
+MOVE EXPIRED EVENT TO ACTIVE LIST|`Recycle Task/event name`
+UNDO|`Undo`
+ADD A NEW FILENAME|`New Filename`
+SWITCH BETWEEN FILES|`Goto Filename`
+EXIT|`exit`
+HELP|`help`
+
+
+
+
 
 * **Add**  `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` <br>
   e.g. `add James Ho p/22224444 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
