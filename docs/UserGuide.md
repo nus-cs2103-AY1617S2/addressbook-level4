@@ -163,6 +163,15 @@ There is no need to save manually.
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
        the file that contains the data of your previous Address Book folder.
 
+**Q**: I found a bug in the program, how do I report it?<br>
+**A**: Please create a new issue via this [link](https://github.com/CS2103JAN2017-T11-B4/main/issues) with a detailed title and description. Please also include [BUG] in the beginning of the title.
+
+**Q**: I am a developer. How can I contribute to the project?<br>
+**A**: Please feel free to open a pull request with implementation of new features. Our only request is that you review the [developer guide](https://github.com/CS2103JAN2017-T11-B4/main/blob/developer-guide/docs/DeveloperGuide.md) and abide to all the requirements.
+
+**Q**: Is it possible for me to change the appearance of the application?<br>
+**A**: At the moment, there are no ways to edit the theme of the application.
+
 ## 4. Command Summary
 
 * **Help**: `help` <br>
