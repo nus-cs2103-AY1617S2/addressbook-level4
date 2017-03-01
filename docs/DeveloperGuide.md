@@ -408,8 +408,8 @@ Precondition: User has opened the application and a list of tasks is being displ
 
 **MSS**
 
-1. User requests to delete a specific task in the list
-2. System deletes the task
+1. User requests to delete a specific task in the list.
+2. System deletes the task.
 Use case ends.
 
 **Extensions**
@@ -426,8 +426,8 @@ Precondition: A list of tasks is being displayed
 
 **MSS**
 
-1. User identifies the task to update, enters attributes of the task to be changed and instructs system to save changes
-2. System saves the updated task
+1. User identifies the task to update, enters attributes of the task. to be changed and instructs system to save changes.
+2. System saves the updated task.
 Use case ends.
 
 **Extensions** 
@@ -456,9 +456,9 @@ Precondition: User has opened the application.
 
 **MSS**
 
-1. User prompts the system to list all outstanding tasks
-2. System displays a list of all outstanding tasks
-Use case ends
+1. User prompts the system to list all outstanding tasks.
+2. System displays a list of all outstanding tasks.
+Use case ends.
 
 **Extensions** 
 
@@ -474,9 +474,9 @@ Precondition: User has opened the application and a list of task is being displa
 
 **MSS**
 
-1. User identifies the task to attach a file/hyperlink and specifies the location of the file or hyperlink
-2. System adds the links and attachments to the task and displays the updated task
-Use case ends
+1. User identifies the task to attach a file/hyperlink and specifies the location of the file or hyperlink.
+2. System adds the links and attachments to the task and displays the updated task.
+Use case ends.
 
 #### Use case: Undo previous operation
 Use case ID: UC07 Undo previous operation
@@ -484,8 +484,8 @@ Actor: User
 
 **MSS**
 
-1. User requests to undo the previous operation
-2. System reverts the results of the last command executed by the user
+1. User requests to undo the previous operation.
+2. System reverts the results of the last command executed by the user.
 Use case ends.
 
 **Extensions**
@@ -507,9 +507,9 @@ Precondition: User has opened the application
 
 **MSS**
 
-1. User enters some search terms for search for a task
-2. System searches for a task based on search terms and returns a list of task that fit the criteria
-Use case ends
+1. User enters some search terms for search for a task.
+2. System searches for a task based on search terms and returns a list of task that fit the criteria.
+Use case ends.
 
 **Extensions**
 
@@ -525,9 +525,9 @@ Precondition: User has opened the application and a list of tasks is being displ
 
 **MSS**
 
-1. User requests to add a label to a task
-2. System tags the task with the specified label and notifies user
-Use case ends
+1. User requests to add a label to a task.
+2. System tags the task with the specified label and notifies user.
+Use case ends.
 
 **Extensions**
 
@@ -543,8 +543,8 @@ Precondition: User has opened the application and a list of task is being displa
 
 **MSS**
 
-1. User request to remove a label from a task
-2. System removes the label from the task and notifies user
+1. User request to remove a label from a task.
+2. System removes the label from the task and notifies user.
 
 **Extensions**
 
@@ -560,9 +560,9 @@ Precondition: User has opened the application
 
 **MSS**
 
-1. User request to edit a label to a new label
-2. System searches through all tasks and renames all labels to the new label
-Use case ends
+1. User request to edit a label to a new label.
+2. System searches through all tasks and renames all labels to the new label.
+Use case ends.
 
 **Extensions**
 
@@ -578,9 +578,9 @@ Precondition: User has opened the application
 
 **MSS**
 
-1. User requests to list tasks with a label name
-2. System shows a list of tasks under a label name
-Use case ends
+1. User requests to list tasks with a label name.
+2. System shows a list of tasks under a label name.
+Use case ends.
 
 **Extensions**
 
@@ -596,11 +596,11 @@ Precondition: User has opened the application
 
 **MSS**
 
-1. User selects a task for scheduling
-2. System shows the list of available slots
-3. User selects the available slots to allocate 
-4. System allocate the selected slots for a task
-Use case ends
+1. User selects a task for scheduling.
+2. System shows the list of available slots.
+3. User selects the available slots to allocate.
+4. System allocate the selected slots for a task.
+Use case ends.
 
 **Extensions**
 
@@ -621,9 +621,9 @@ Precondition: User has opened the application
 
 **MSS**
 
-1. User selects task to view details
-2. System shows allocated time slots for task
-3. User selects time slots to work on task
+1. User selects task to view details.
+2. System shows allocated time slots for task.
+3. User selects time slots to work on task.
 4. System free the rest of the not selected time slots and display the details of the updated task.
 Use case ends
 
@@ -663,9 +663,9 @@ Precondition: A list of tasks is being displayed
 
 **MSS**
 
-1. User marks a specific task in the list as completed
-2. System update the task, set it to be completed and display the updated task
-Use case ends
+1. User marks a specific task in the list as completed.
+2. System update the task, set it to be completed and display the updated task.
+Use case ends.
 
 **Extensions**
 
@@ -681,9 +681,9 @@ Precondition: User has opened the applications
 
 **MSS**
 
-1. User request to list completed tasks
-2. System shows a list of completed task
-Use case ends
+1. User request to list completed tasks.
+2. System shows a list of completed task.
+Use case ends.
 
 **Extensions**
 
@@ -710,9 +710,9 @@ Precondition: User has opened the application
 
 **MSS**
 
-1. User prompts system to display agenda for the day
-2. System returns the list of tasks for the current day
-Use case ends
+1. User prompts system to display agenda for the day.
+2. System returns the list of tasks for the current day.
+Use case ends.
 
 **Extensions**
 
@@ -728,8 +728,8 @@ Precondition: User has opened the application
 
 **MSS**
 
-1. User request to iterate through previous commands executed
-2. System retrieves a list previously used command and displays it to the user
+1. User request to iterate through previous commands executed.
+2. System retrieves a list previously used command and displays it to the user.
 Use case ends
 
 **Extensions**
@@ -745,9 +745,9 @@ Precondition: User has opened the application
 
 **MSS**
 
-1. User is in the midst of typing a command and request for an autocomplete option
-2. System searches through a dictionary and completes the command if there is a single term found
-Use case ends
+1. User is in the midst of typing a command and request for an autocomplete option.
+2. System searches through a dictionary and completes the command if there is a single term found.
+Use case ends.
 
 **Extensions**
 
@@ -771,10 +771,10 @@ Precondition: User has opened the application
 **MSS**
 
 1. User requests to list outstanding tasks (UC05)
-2. System shows a list of tasks with its details
-3. User selects the label to delete
-4. System delete the label and display the updated list of tasks
-Use case ends
+2. System shows a list of tasks with its details.
+3. User selects the label to delete.
+4. System delete the label and display the updated list of tasks.
+Use case ends.
 
 **Extensions**
 
@@ -794,9 +794,9 @@ Precondition: User has booted up his computer
 
 **MSS**
 
-1. User inputs the shortcut to launch the application
-2. Operating System launch System
-Use case ends
+1. User inputs the shortcut to launch the application.
+2. Operating System launch System.
+Use case ends.
 
 **Extensions**
 
@@ -815,12 +815,13 @@ Precondition: User has opened the application
 
 **MSS**
 
-1. User request to print schedule for datetime range
-2. System generates printable format
+1. User request to print schedule for datetime range.
+2. System generates printable format.
+
 
 **Extensions**
 
-1a. The given date time range is invalid
+1a. The given date time range is invalid.
 
 > Use case ends.
 
@@ -856,17 +857,71 @@ Precondition: User has opened the application
 
 ## Appendix E : Product Survey
 
-**Product Name**
+**Todoist**
 
-Author: ...
+Author: Lai Zhiyuan
 
 Pros:
 
-* ...
-* ...
+* Their application and extensions are accessable through 10 over different platforms, which makes it easy for users to collaborate and access their tasks everywhere.
+* Application is straightforward to use, and they allow users to easily access the more important details of the to-do item.
+* See at a glance whether the user is focusing on the right tasks.
+* The Karma Mode feature in the application encourages the user to keep up with the good habit of clearing their tasks on hand.
+* Allows users to break down big tasks to smaller sub-tasks.
+* Provide priority levels to prioritize your tasks on-hand.
+* Allows sharing of projects, delegating tasks and discussions on cross platform device.
+* Allow user to search for tasks by typing keywords into search bar.
+* Allow user to upload notes or files to tasks.
 
 Cons:
 
-* ...
-* ...
+* Does not have the features to allow users to create subproject.
+* A few important features such as location based reminders, ability to add tasks via email and full collaboration capabilities are not available to free users.
+* Karma report are only available to premium users.
+
+**Wunderlist**
+
+Author: Yip Mun Kit Bernard
+
+Pros:
+
+* Can easily edit and rearrange tasks based on changing priorities.
+* Allow sharing of task list with other users or collaborators.
+* Reminders for the upcoming deadlines no matter which device the user is carrying at the moment.
+* Allows the users to upload files to their tasks.
+* Easy and straightforward for new user to get started.
+* Customizable user interface.
+* Allows the user to assign tasks to collarborators.
+* The application has features that suggest some task list to get started such as Work list.
+* Application supports many different platforms and many different browser plugins. 
+
+Cons:
+
+* No location based reminders.
+* Only the paid versions allows the user to upload files of any size.
+* Limit the number of collaborators to 25.
+
+**Any.do**
+
+Author: Shimaria Yesha Bharat
+
+Pros:
+
+* Interactive search feature which provides suggestions to users while they type on the search bar.
+* Simple and easy to use interface. Easy to get started for new users.
+* AI assistance to review tasks and connect to smart robots who can help the user to accomplish the task.
+* Tasks are almost instantly synced across different platforms.
+* Chat system feature which allows different collaborators to chat with each other.
+* Work seamlessly with other service providers such as Google calendar, Exchange and iCloud.
+* User Interface is customizable.
+* Able to capture task by voice.
+* Application have smart suggestion feature.
+
+Cons:
+
+* Customization of recurring tasks are only available to premium users.
+* Unlimited collaboration feature is only available to premium users.
+* Extensive location based reminders are only available to premium users.
+* Limits the size on attachments.
+* Timed and location based services only available to premium users.
 
