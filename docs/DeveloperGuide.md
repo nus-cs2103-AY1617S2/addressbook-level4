@@ -1,6 +1,6 @@
-# AddressBook Level 4 - Developer Guide
+# Suru - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team W09-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `?`
 
 ---
 
@@ -346,48 +346,713 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the application
+`* * *` | new user | can view more information about a particular command | learn how to use various commands
+`* * *` | user | add task by specifying task description only | record tasks that need to be done ‘someday’
+`* * *` | user | add task with due date | record task that has to be done by given date
+`* * *` | user | add event with specific duration | record event that takes place within a given timeframe
+`* * *` | user | add follow-up tasks using start time | record tasks that has to be done after a certain date
+`* * *` | user | delete task | get rid of task that I no longer care to track
+`* * *` | user | edit task | edit task name, description
+`* * *` | user | view all tasks |
+`* * *` | user | view incomplete tasks |
+`* * *` | user | view completed tasks |
+`* * *` | user | undo previous action | revert previous action in case of mistakes
+`* * *` | user | search incomplete tasks by date or date range | check tasks due on a certain day or within a time frame
+`* * *` | user | search for tasks | find a specific task
+`* * *` | user | check off task | track what tasks are done
+`* * *` | user | uncheck a task | correct accidental check off of a task
+`* * *` | advanced user | Define save and load directory | specify which directory the program read and write from
+`* *` | user | add reminders to task | be reminded before task is going to be due
+`* *` | user | edit reminders of task |
+`* *` | user | delete reminders of task |
+`* *` | user | add a recurring task | add multiple entries of repetitive tasks
+`* *` | user | add tags to task | categorize tasks by tags
+`* *` | user | edit tags under a task |
+`* *` | user | remove tags from task |
+`* *` | user | sort tasks by tags | search for tasks with common category
+`* *` | advanced user | hotkey shortcut | auto open the application without mouse interaction
+`*` | new user | step-by-step tutorial for common features | get familiar with the program
+`*` | user | add a task with checklist | find out about the different things to be done for the task
+`*` | user | edit a checklist |
+`*` | user | remove a checklist |
+`*` | advanced user | use shorter versions of a command | type command faster
+`*` | advanced user | add task reminder to Google Cal | due task shown as full day event in calendar
+`*` | advanced user | parse my email automatically | automatically add task into my todo list
+`*` | advanced user | voice recognition | auto include my task in without keyboard interaction
 
 {More to be added}
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Suru Task Manager` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: UC01 - Add task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User requests to add new task specifying task description and no date.
+2. Suru adds task to list of tasks.
+3. Suru GUI is refreshed to show the updated list of tasks.
 Use case ends.
 
 **Extensions**
 
-2a. The list is empty
+1a. User requests to add new task specifying tasks and due date/time.
 
-> Use case ends
+> 1a1. Suru adds task to list of task with due date/time.
+> Use case resumes at step 3.
 
-3a. The given index is invalid
+1b. User requests to add new task specifying tasks and time frame for task.
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+> 1b1. Suru adds task to list of task with time frame.
+> Use case resumes at step 3.
+
+1c. User requests to add new task specifying tasks and start date/time.
+
+> 1c1. Suru adds task to list of task with start date/time.
+> Use case resumes at step 3.
+
+1d. User requests to add task without task description or using invalid syntax.
+
+> 1d1. Suru displays error message.
+> Use case ends.
+  
+  
+#### Use case: UC02 - view tasks
+
+**MSS**
+
+1. User requests to shows all tasks.
+2. Suru displays all tasks.
+Use case ends.
+
+**Extensions**
+
+1a. User requests to show only incomplete tasks.
+
+> Use case resumes at step 2.
+
+1b. User requests to show only complete tasks.
+
+> Use case resumes at step 2.
+
+2a. The requested list is empty.
+
+> 2a1. Suru displays error message.
+> Use case ends.
+
+#### Use case: UC03 - search for tasks
+
+**MSS**
+
+1. User requests to find tasks with specific keyword(s).
+2. Suru displays all tasks containing specified keyword(s).
+Use case ends.
+
+**Extensions**
+
+2a. The requested list is empty.
+
+> 2a1. Suru displays error message.
+> Use case ends.
+
+#### Use case: UC04 - edit task
+
+**MSS**
+
+1. User **view all tasks (_UC02_).**
+2. User requests to update a task by index with changed details.
+3. Suru requests user for confirmation.
+4. User confirms changes.
+5. Suru GUI is refreshed to show updated list of tasks.
+Use case ends.
+
+**Extensions**
+
+2a. The given index is invalid.
+
+> 2a1. Suru displays error message.
+> Use case ends.
+
+2b. The new details are given using invalid syntax.
+
+> 2b1. Suru displays error message.
+> Use case ends.
+
+4a. User rejects changes.
+
+> Use case ends.
+
+#### Use case: UC05 - delete task
+
+**MSS**
+
+1. User **view all tasks (_UC02_).**
+2. User requests to delete a task by index.
+3. Suru requests user for confirmation.
+4. User confirms changes.
+5. Suru GUI is refreshed to show updated list of tasks.
+Use case ends.
+
+**Extensions**
+
+2a. The given index is invalid.
+
+> 2a1. Suru displays error message.
+> Use case ends.
+
+4a. User rejects changes.
+
+> Use case ends.
+
+#### Use case: UC06 - Undo previous action
+
+**MSS**
+
+1. User requests to undo action.
+2. Suru displays list of tasks as according to before previous action.
+Use case ends.
+
+**Extensions**
+
+2a. Undo is the first command entered by User during current start up.
+
+> 2a1. Suru displays error message.
+> Use case ends.
+
+#### Use case: UC07 - Search for incomplete task by date or date range
+
+**MSS**
+
+1. User requests to search for task with either date or date range.
+2. Suru displays list of tasks that falls on specified date or within date range.
+Use case ends.
+
+**Extensions**
+
+2a. The requested list is empty.
+
+> 2a1. Suru displays error message.
+> Use case ends.
+
+2b. The date or date range is in invalid format. (e.g end date earlier than start date)
+
+> 2b1. Suru displays error message.
+> Use case ends.
+
+#### Use case: UC08 - check off task
+
+**MSS**
+
+1. User **view all tasks (_UC02_).**
+2. User requests to check off a task by index.
+3. Suru requests user for confirmation.
+4. User confirms changes.
+5. Suru GUI is refreshed to show updated list of tasks.
+Use case ends.
+
+**Extensions**
+
+2a. The given index is invalid.
+
+> 2a1. Suru displays error message.
+> Use case ends.
+
+2b. The requested task to check off is already checked.
+
+> 2b1. Suru displays error message.
+> Use case ends.
+
+4a. User rejects changes.
+
+> Use case ends.
+
+#### Use case: UC09 - uncheck a task
+
+**MSS**
+
+1. User **view all tasks (_UC02_).**
+2. User requests to uncheck a task by index.
+3. Suru requests user for confirmation.
+4. User confirms changes.
+5. Suru GUI is refreshed to show updated list of tasks.
+Use case ends.
+
+**Extensions**
+
+2a. The given index is invalid.
+
+> 2a1. Suru displays error message.
+> Use case ends.
+
+2b. The requested task to uncheck is not checked.
+
+> 2b1. Suru displays error message.
+> Use case ends.
+
+4a. User rejects changes.
+
+> Use case ends.
+
+#### Use case: UC10 - add a reminder to a task
+
+**MSS**
+
+1. User **view all tasks (_UC02_).**
+2. User requests to add a reminder to a task by index and reminder date/time.
+3. Suru requests user for confirmation.
+4. User confirms changes.
+5. Suru GUI is refreshed to show updated list of tasks.
+6. Suru shows user a notification when reminder date/time is hit.
+Use case ends.
+
+**Extensions**
+
+2a. The given index is invalid.
+
+> 2a1. Suru displays error message.
+> Use case ends.
+
+2b. The requested task to add reminder is already completed.
+
+> 2b1. Suru displays error message.
+> Use case ends.
+
+2c. The date for reminder is after due date of task. 
+
+> 2c1. Suru displays error message.
+> Use case ends.
+
+2d. The date is in invalid format. 
+
+> 2d1. Suru displays error message.
+> Use case ends.
+
+4a. User rejects changes.
+
+> Use case ends.
+
+#### Use case: UC11 - edit reminder for a task
+
+**MSS**
+
+1. User **view all tasks (_UC02_).**
+2. User requests to edit a reminder for a task by index and reminder date/time.
+3. Suru requests user for confirmation.
+4. User confirms changes.
+5. Suru GUI is refreshed to show updated list of tasks.
+6. Suru shows user a notification when new reminder date/time is hit.
+Use case ends.
+
+**Extensions**
+
+2a. The given index is invalid.
+
+> 2a1. Suru displays error message.
+> Use case ends.
+
+2b. The requested task to edit reminder is already completed.
+
+> 2b1. Suru displays error message.
+> Use case ends.
+
+2c. The requested task to edit reminder has no existing reminder.
+
+> 2c1. Suru displays error message.
+> Use case ends.
+> 
+2d. The date for reminder is after due date of task. 
+
+> 2d1. Suru displays error message.
+> Use case ends.
+
+2e. The date is in invalid format. 
+
+> 2e1. Suru displays error message.
+> Use case ends.
+
+4a. User rejects changes.
+
+> Use case ends.
+
+#### Use case: UC12 - delete reminder for a task
+
+**MSS**
+
+1. User **view all tasks (_UC02_).**
+2. User requests to delete a reminder for a task by index and reminder date/time.
+3. Suru requests user for confirmation.
+4. User confirms changes.
+5. Suru GUI is refreshed to show updated list of tasks.
+6. Suru does not show user notification when deleted reminder date/time is hit.
+Use case ends.
+
+**Extensions**
+
+2a. The given index is invalid.
+
+> 2a1. Suru displays error message.
+> Use case ends.
+
+2b. The requested task to delete reminder has no existing reminder.
+
+> 2b1. Suru displays error message.
+> Use case ends.
+
+2c. The date is in invalid format. 
+
+> 2c1. Suru displays error message.
+> Use case ends.
+
+4a. User rejects changes.
+
+> Use case ends.
+
+#### Use case: UC13 - add recurring task
+
+**MSS**
+
+1. User **view all tasks (_UC02_).**
+2. User requests to repeat a task by index.
+3. Suru requests user for confirmation together with number of times to be repeated.
+4. User confirms changes.
+5. Suru GUI is refreshed to show updated list of tasks. 
+
+Use case ends.
+
+**Extensions**
+
+2a. The given index is invalid.
+
+> 2a1. Suru displays error message.
+> Use case ends.
+
+2b. Task selected is repeated already.
+
+> 2b1. Suru notify user about repeated task and new value will overwrite old value.
+> Use case resumes at 3.
+
+4a. User rejects changes.
+
+> Use case ends.
+
+#### Use case: UC14 - add tags to a task
+
+**MSS**
+
+1. User **view all tasks (_UC02_).**
+2. User requests to add a tag or a few tags to a task by index.
+3. Suru requests user for confirmation.
+4. User confirms changes.
+5. Suru GUI is refreshed to show updated list of tasks.
+Use case ends.
+
+**Extensions**
+
+2a. The given index is invalid.
+
+> 2a1. Suru displays error message.
+> Use case ends.
+
+2b. The requested task to add tags already exists.
+
+> 2b1. Suru displays error message.
+> Use case ends.
+
+4a. User rejects changes.
+
+> Use case ends.
+
+#### Use case: UC15 - edit tags
+
+**MSS**
+
+1. User **view all tasks (_UC02_).**
+2. User requests to update tag of a task by index with an updated tag.
+3. Suru requests user for confirmation and existings tags will be overwritten by the new tags.
+4. User confirms changes.
+5. Suru GUI is refreshed to show updated tags tied to the task.
+Use case ends.
+
+**Extensions**
+
+2a. The given index is invalid.
+
+> 2a1. Suru displays error message.
+> Use case ends.
+
+2b. The given index has no active tags.
+
+> 2b1. Suru displays error message.
+> Use case ends.
+
+4a. User rejects changes.
+
+> Use case ends.
+
+#### Use case: UC16 - delete tags
+
+**MSS**
+
+1. User **view all tasks (_UC02_).**
+2. User requests to delete tags for a task by index.
+3. Suru requests user for confirmation.
+4. User confirms changes.
+5. Suru GUI is refreshed to show updated tasks witout tags.
+Use case ends.
+
+**Extensions**
+
+2a. The given index is invalid.
+
+> 2a1. Suru displays error message.
+> Use case ends.
+
+2b. The requested tags to be deleted from the task does not exists.
+
+> 2b1. Suru displays error message.
+> Use case ends.
+
+4a. User rejects changes.
+
+> Use case ends.
+
+#### Use case: UC17 - filter tasks by tags
+
+**MSS**
+
+1. User **view all tasks (_UC02_).**
+2. User requests to filter tasks by tags.
+3. Suru requests user for name of tags to filter the task by.
+4. Suru GUI is refreshed to show updated list of tasks by tags. 
+
+Use case ends.
+
+**Extensions**
+
+2a. The given tags does not exists.
+
+> 2a1. Suru displays error message.
+> Use case ends.
+
+#### Use case: UC18 - add subtask to task
+
+**MSS**
+
+1. User **view all tasks (_UC02_).**
+2. User selects task by index.
+3. Suru display task details.
+4. User add subtask inside the task.
+5. Suru requests user for confirmation.
+6. Suru GUI is refreshed to show updated list of tasks.
+
+Use case ends.
+
+**Extensions**
+
+2a. The given index is invalid.
+
+> 2a1. Suru displays error message.
+> Use case ends.
+
+4a. Task already have existing subtask.
+
+> 4a1. Suru displays error message.
+> Use case ends.
+
+5a. User rejects changes.
+
+> Use case ends.
+
+#### Use case: UC19 - edit subtask in task 
+
+**MSS**
+
+1. User **view all tasks (_UC02_).**
+2. User select task by index.
+3. Suru displays subtask details inside the selected task.
+4. User requests to edit subtask in the task by subtask index.
+5. User insert updated subtask.
+6. Suru request for user confirmation.
+7. User confirm changes.
+8. Suru GUI is refreshed to show updated checklist tied to the task.
+
+Use case ends.
+
+**Extensions**
+
+2a. The given index is invalid.
+
+> 2a1. Suru displays error message.
+> Use case ends.
+
+2b. The given task index has no checklist.
+
+> 2b1. Suru displays error message.
+> Use case ends.
+
+4a. The given subtask index is invalid.
+
+> 4a1. Suru displays error message.
+> Use case ends.
+
+7a. User rejects changes.
+
+> Use case ends.
+
+#### Use case: UC20 - delete subtask in task
+
+**MSS**
+
+1. User **view all tasks (_UC02_).**
+2. User select task by index.
+3. Suru displays subtask details inside the selected task.
+4. User requests to delete subtask by subtask index.
+5. Suru requests user for confirmation
+6. User confirm changes.
+7. Suru GUI is refreshed to show updated subtask details.
+Use case ends.
+
+**Extensions**
+
+2a. The given index is invalid.
+
+> 2a1. Suru displays error message.
+> Use case ends.
+
+2b. The given task index has no subtasks.
+
+> 2b1. Suru displays error message.
+> Use case ends.
+
+4a. The given subtask index is invalid.
+
+> 4a1. Suru displays error message.
+> Use case ends.
+
+7a. User rejects changes.
+> Use case ends.
+
+
+#### Use case: UC21 - Define save and load database
+
+**MSS**
+
+1. Suru scans default directory for previous save database during start-up
+2. Save database is loaded into memory from default file location
+3. Suru runs as per normal
+
+Use case ends.
+
+**Extensions**
+
+2a. File not found in default directory
+
+>2a1. Suru request user to locate database file or create new database file.<br>
+ Use case resumes at step 2.
+  
+#### Use case: UC22 - Command Shortcut
+
+**MSS**
+
+1. Suru detects specific command shortcut during runtime
+2. Suru maps to main command
+
+Use case ends.
+
+**Extensions**
+
+1a. Command entered not found or invalid.
+
+> 1a1. Suru displays error message.
+> Use case ends.
+
+#### Use case: UC23 - Add task reminder and due date to Google Calendar
+
+**MSS**
+
+1. User **view all tasks (_UC02_).**
+2. User requests to add reminder and due date of the task to Google Calendar as an all day event.
+3. Suru requests user for confirmation.
+4. User confirms changes.
+5. Added event will be reflected on user Google Calendar
+
+Use case ends.
+
+**Extensions**
+
+2a. No Gmail account associated with the current session.
+
+> 2a1. Suru displays error message.
+> 2a2. Suru prompts user to enter Google login details.
+> Use case resumes at 3.
+
+2b. The selected task has no due date or reminder associated with it.
+
+> 2b1. Suru displays error message.
+> Use case ends.
+
+4a. User rejects changes.
+
+> Use case ends.
+
+#### Use case: UC24 - Parse email to add task automatically
+
+**MSS**
+
+1. User requests to add new task by reading users email.
+2. Suru scans user email content for possible upcoming task todo.
+3. Suru displays possible todo task with their due dates.
+4. User confirms which task to be added into the task manager.
+5. Suru GUI is refreshed to show the updated list of tasks.
+
+Use case ends.
+
+**Extensions**
+
+2a. No possible tasks detected in email.
+
+> 2a1. Suru displays error message.
+> 2a2. Suru prompts user if a manual add is required.
+> Use case resumes at **(_UC1_ - Add task)**.
+
+3a. Suru detected unwanted task from the email.
+
+> 3a1. Suru displays list of possible tasks.
+> 3a2. Suru asks for user confirmation.0
+> Use case ends.
+
+4a. User rejects changes.
+
+> Use case ends.
+
+#### Use case: UC25 - Hotkey Shortcut
+
+**MSS**
+
+1. Suru waits for user hotkey combination in background
+2. User press selected keyboard combination to perform certain task in Suru
+3. Suru GUI refreshed based on user input.
+
+Use case ends.
+
+**Extensions**
+
+2a. User input wrong hotkey shortcut.
+
+> 2a1. No action from Suru.
 
 {More to be added}
 
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should be able to work without any internet connection.
+5. Should be able to have data file synced using cloud syncing services (e.g dropbox) if save/load directory is in the appropriate location.
 
 {More to be added}
 
@@ -395,25 +1060,76 @@ Use case ends.
 
 ##### Mainstream OS
 
-> Windows, Linux, Unix, OS-X
+> Windows
 
 ##### Private contact detail
 
 > A contact detail that is not meant to be shared with others
 
 ## Appendix E : Product Survey
-
-**Product Name**
-
-Author: ...
+**IKE**
+Author: Shawn Lin Jingjue
 
 Pros:
 
-* ...
-* ...
+* Prioritizes task by urgency and importance
+* Due dates
+* Checklists
 
 Cons:
 
-* ...
-* ...
+* No syncing across devices
+* Only Android platform
+
+**Wunderlist**
+
+Author: Muhammad Mustaqiim Bin Muhar
+
+Pros:
+
+* Able to share group tasks easily with teammates 
+* Cross platform support on most devices and Operating Systems.
+* Able to auto add reminders and due dates using rss link to a calendar of your choice
+
+Cons:
+
+* No import function of existing task from other apps to Wunderlist
+* Assigning of to-dos to your team members is a paid feature (Organisation Features)
+
+**Habitica**
+
+Author: Jeremy Heng Wen Ming
+
+Pros:
+* Gamification paradigm extends to the social features of the application in the form of team quests. This is essentially a mechanism to share group tasks and to mantain accountability
+* A loot and shop system allows users to obtain and purchase cosmetic items to signify character progress
+* Splits tasks into dailies, habits and to-dos
+* Tasks can be split into subtasks which can be assigned individual reward values
+
+Cons:
+* The interface is not efficient to use when adding many tasks
+* There is no integration with any calendar applications
+
+**Trello**
+
+Author: Teo Tian Song
+
+Pros:
+* Has due date capability
+* Keeps track of completed task
+* Has checklist to break down tasks into components
+
+Cons:
+* Requires internet connection to utilize
+* Requires consistent usage of mouse to perform commands
+
+
+
+
+
+
+
+
+
+
 
