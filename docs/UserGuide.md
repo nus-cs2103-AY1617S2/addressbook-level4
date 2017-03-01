@@ -62,12 +62,16 @@ Examples:
 
 ### 2.3. Listing all persons : `list`
 
-Shows a list of all persons in the address book.<br>
-Format: `list`
-Format: `list lists`
-Format: `list list LISTINDEX`
-Format: `list favourite`
-Format: `list list LISTNAME`
+Shows a list of all tasks in Dueue/ in a specific list<br>
+Format: `list [favorite]`
+Format: `list list LISTINDEX [favorite]`
+Format: `list list LISTNAME [favorite]`
+
+Shows a list of all list names in Dueue<br>
+Format: Format: `list lists`
+
+> Do not need to specify whether the parameter is LISTINDEX or LISTNAME
+> Returns only favorite tasks by adding keyword "favorite" 
 
 ### 2.4. Creating a list : `create`
 
