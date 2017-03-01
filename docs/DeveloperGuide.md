@@ -346,12 +346,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | user | add a task that has a deadline | 
+`* * *` | user | add a task that does not have a deadline |
+`* * *` | user | add a task that can be set to repeat at a given interval | 
+`* * *` | user | add an event that spans from a start to end time | 
+`* * *` | user | add an event description | 
+`* * *` | user | view all task titles in order of scheduled date/time | see what tasks I need to do next
+`* * *` | user | select a task title to view information attached to the task | 
+`* * *` | user | search for a task by typing in a keyword | find a specific task
+`* * *` | user | view the completion status of the task | 
+`* * *` | user | organise tasks by their completion status | keep track of which tasks are done and which are not
+`* * *` | user | update a task’s completion status | keep a record of tasks that have been completed
+`* * *` | user | update the scheduled date/time | reflect changes in deadlines.
+`* * *` | user | update the information attached to the task | reflect changes in the plan as well as new requirements to fulfill.
+`* * *` | user | delete a task | get rid of tasks that I no longer care to track
+`* * *` | user | undo any action | 
+`* * *` | user | use the program offline | 
+`* * *` | user | specify the storage file and location | control the save file location
+`* *` | user | attach an email to the task | find the email that prompted the task easily
+`* *` | user | give a task a priority | find the email that prompted the task easily
+`* *` | user | sort the tasks based on completion status, date, priority, category, etc. | organise my tasks more intuitively
+`* *` | user | schedule a follow up action after a task is marked as completed |
+`* *` | user | open the application using a keyboard shortcut | access my task manager quickly and without fuss
+`* *` | user | see typing suggestions when typing a new task | add tasks without typing out everything
+`* *` | user | set a task to be automatically deleted once the due date/time has passed | 
+`*` | user | attach a webpage to the task | act on that webpage later
+
+
 
 {More to be added}
 
