@@ -94,24 +94,25 @@ Format: `update list LISTINDEX NEW_LISTNAME`
 
 ### 2.6. Updating a task : `update`
 
-Edits an existing person in the address book.<br>
-Format: `edit INDEX [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Edits an existing task in Dueue.<br>
+Format: `edit INDEX [NAME] [due/DUEDATE] [t/TIME] [#/LISTNAME] [d/DESCRIPTION] [@VENUE] [p/PRIORITYLEVEL]`
 
-> * Edits the person at the specified `INDEX`.
+> * Edits the task at the specified `INDEX`.
     The index refers to the index number shown in the last person listing.<br>
     The index **must be a positive integer** 1, 2, 3, ...
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
-> * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-> * You can remove all the person's tags by typing `t/` without specifying any tags after it. 
+> * You can remove details by typing `` after the `/` or `@`without specifying any tags after it eg,`due/`.
+> *Specifications of fields for task can be entered in any order.
+
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@yahoo.com`<br>
-  Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@yahoo.com` respectively.
+* `update 1 Laundry due/every sunday @`<br>
+  Edits the name, due date and the venue of the 1st task to be `Laundry`, `every sunday` and remove the venue respectively.
 
-* `edit 2 Betsy Crower t/`<br>
-  Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `edit 2 due/`<br>
+  remove the due date of the second task.
 
 ### 2.7. View certain tasks: `view`
 
