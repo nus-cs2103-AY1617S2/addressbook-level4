@@ -16,6 +16,7 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
     - [Listing all the tags](#listing-all-the-tags--list-tag-ls-tag)
     - [Undoing the previous commands](#undoing-the-previous-commands--undo)
     - [Clearning all entries](#clearing-all-entries--clear)
+    - [Set an alias for a command word](#set-an-alias-for-a-command-word--alias)
     - [Exiting the program](#exiting-the-program--exit)
     - [Changing the storage destination](#changing-the-storage-destination--save-at)
     - [Saving the data](#saving-the-data)
@@ -189,6 +190,16 @@ Format: `undo`
 Clears all entries from the to-do list.<br>
 Format: `clear`  
 
+### Set an alias for a command word : `alias`
+
+Set an alias for an existing command word so that the alias can also be used to trigger the command.<br>
+Format: `alias ALIAS \for COMMAND_WORD`
+
+> `ALIAS` should be a string without spaces, underscors are suggested to replace spaces.
+
+Examples: 
+* `alias list_tags \for list_tag`
+
 ### Exiting the program : `exit`
 
 Exits the program.<br>
@@ -219,6 +230,10 @@ There is no need to save manually.
   `(add|do) TASK_DESCRIPTION [\from START_TIME] [\to END_TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]` <br>
   `(add|do) TASK_DESCRIPTION [\by TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]` <br>
   e.g. `add James Ho p/22224444 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+
+* **Alias** :  
+  `alias ALIAS \for COMMAND_WORD` <br>
+  e.g. `alias alias \for set_alias`
 
 * **Clear** :  
   `clear` <br>
