@@ -9,19 +9,19 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
     - [Viewing help](#viewing-help--help)
     - [Adding a new task](#adding-a-new-task--add-do)
     - [Listing tasks](#listing-tasks--list-ls)
-    - [Finding all tasks containing any search key in their descriptioin](#finding-all-tasks-containing-any-search-key-in-their-description--find)
+    - [Finding all tasks containing any search key in their description](#finding-all-tasks-containing-any-search-key-in-their-description--find)
     - [Deleting tasks](#deleting-tasks--delete)
     - [Marking tasks as finished](#marking-tasks-as-finished--finish)
     - [Editing an existing task](#editing-an-existing-task--edit)
     - [Listing all the tags](#listing-all-the-tags--list-tag-ls-tag)
     - [Undoing the previous commands](#undoing-the-previous-commands--undo)
-    - [Clearning all entries](#clearing-all-entries--clear)
+    - [Clearing all entries](#clearing-all-entries--clear)
     - [Set an alias for a command word](#set-an-alias-for-a-command-word--alias)
     - [Exiting the program](#exiting-the-program--exit)
     - [Changing the storage destination](#changing-the-storage-destination--save-at)
     - [Saving the data](#saving-the-data)
 3. [FAQ](#3-faq)
-4. [Command Summary](#4-command-summary) 
+4. [Command Summary](#4-command-summary)
 
 ## 1. Quick Start
 
@@ -53,7 +53,7 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 > * All keys start with the backslash `\`.
 > e.g. `\from`, `\every`.
 > * If users want to use backslash in the value, use `\\`.
-> * Both command word and keys are strings without space. Underscore is used separete different words. 
+> * Both command word and keys are strings without space. Underscore is used separete different words.
 > e.g. `list_tag`, `\remind_at`
 > * Words in `UPPER_CASE` are the values.
 > * (A|B) means A and B can be used interchangeably.
@@ -67,12 +67,12 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 Format: `help`
 
 > Help is also shown if the command format is invalid. e.g. `abcd`
- 
+
 ### Adding a new task : `add`, `do`
 
 Adds a new task into the to-do list<br>
 Format 1: `(add|do) TASK_DESCRIPTION [\from START_TIME] [\to END_TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]`  
-Format 2: `(add|do) TASK_DESCRIPTION [\by TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]` 
+Format 2: `(add|do) TASK_DESCRIPTION [\by TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]`
 
 > - Tasks can have any number of tags (including 0)
 > - Tasks can have neither start time and end time. They are floating tasks
@@ -81,10 +81,10 @@ Format 2: `(add|do) TASK_DESCRIPTION [\by TIME] [\remind_at REMIND_TIME] [\every
 > - If the user does not specified the priority, it will be set to a default value
 > - The start time and remind time must be earlier or equal to the end time
 > - If the user specify the recurrence interval, every time the end time passes, start time, end time and remind time will be updated to the next occurrence.
-> - For format 2, start time and end time will both be set to TIME. 
+> - For format 2, start time and end time will both be set to TIME.
 > That is, `add ... by 8pm` is equivalent to `add ... from 8pm to 8pm`
 
-Examples: 
+Examples:
 
 * `do group meeting \from 4pm today \to 6pm today \remind_at 3pm \as important \under school_work CS2103T`
 * `add submit pre-tutorial activities \by 6pm this Wednesday \remind_at 5pm this Wednesday \every week`
@@ -118,7 +118,7 @@ Format: `find 'KEY' ['KEY'...]`
 > * Persons matching at least one search key will be returned (i.e. `OR` search).
     e.g. `Hans` will match `Hans Bo`
 
-Examples: 
+Examples:
 
 * `find 'hiking'`
 * `find 'CS2103T' 'group meeting' 'project'`
@@ -132,15 +132,15 @@ Format: `delete INDEX [INDEX...]`
 > The index refers to the index number shown in the most recent listing.<br>
 > The index must be a **positive integer** 1, 2, 3, ...
 
-Examples: 
+Examples:
 
 * `list finished`<br>
   `delete 1 2`<br>
   Deletes the 1st and the 2nd tasks in the result of `list` command.
-* `find 'party'`<br> 
+* `find 'party'`<br>
   `delete 1`<br>
   Deletes the 1st task in the results of the `find` command.
-  
+
 ### Marking tasks as finished : `finish`
 
 Mark the specified tasks as finished.<br>
@@ -151,15 +151,15 @@ Format: `finish INDEX [INDEX...]`
 > The index must be a **positive integer** 1, 2, 3, ...<br>
 > If the tasks at the specified `INDEX` are already finished, no change made.
 
-Examples: 
+Examples:
 
 * `list pending \in this week`<br>
   `finish 1 2`<br>
   Marks the 1st and the 2nd tasks in the result of `list` command as finished.
-* `find 'project'`<br> 
+* `find 'project'`<br>
   `finish 1`<br>
   Mark the 1st task in the results of the `find` command as finished.
-  
+
 ### Editing an existing task : `edit`
 
 Edit the specified task.<br>
@@ -168,12 +168,12 @@ Format 2: `edit INDEX [\desc TASK_DESCRIPTION] [\by TIME] [\remind_at REMIND_TIM
 
 > The rule for `edit` command is the same as `add` command
 
-Examples: 
+Examples:
 * `list`<br>
   `edit 1 \desc watch NBA \remind_at this Sunday 8am`<br>
   Suppose originally, the description of this task is `watch nba`,
   it will be change to `watch NBA`.
-  The remind time will also be updated to the specified one: `this Sunday 8am`.
+  The reminder time will also be updated to the specified one: `this Sunday 8am`.
 
 ### Listing all the tags : `list_tag`, `ls_tag`
 
@@ -195,9 +195,9 @@ Format: `clear`
 Set an alias for an existing command word so that the alias can also be used to trigger the command.<br>
 Format: `alias ALIAS \for COMMAND_WORD`
 
-> `ALIAS` should be a string without spaces, underscors are suggested to replace spaces.
+> `ALIAS` should be a string without spaces, underscores are suggested to replace spaces.
 
-Examples: 
+Examples:
 * `alias list_tags \for list_tag`
 
 ### Exiting the program : `exit`
@@ -210,10 +210,10 @@ Format: `exit`
 Change the storage path to the specified one.<br>
 Format: `save_at PATH`
 
-Examples: 
+Examples:
 * `save_at C:\Users\admin\Desktop\todolist.xml`
 
-### Saving the data 
+### Saving the data
 
 Address book data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
@@ -221,9 +221,9 @@ There is no need to save manually.
 ## 3. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with 
+**A**: Install the app in the other computer and overwrite the empty data file it creates with
        the file that contains the data of your previous Doist folder.
-       
+
 ## 4. Command Summary
 
 * **Add** :  
@@ -237,15 +237,15 @@ There is no need to save manually.
 
 * **Clear** :  
   `clear` <br>
-  
+
 * **Change storage path** :  
   `save_at PATH`  
   e.g. `save_at C:\Users\admin\Desktop\todolist.xml`
-  
+
 * **Delete** :  
-  `delete INDEX [INDEX...]` <br> 
+  `delete INDEX [INDEX...]` <br>
    e.g. `delete 3 4 5`
-  
+
 * **Edit** :  
   `edit INDEX [\desc TASK_DESCRIPTION] [\from START_TIME] [\to END_TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]` <br>
   `edit INDEX [\desc TASK_DESCRIPTION] [\by TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]` <br>
@@ -253,11 +253,11 @@ There is no need to save manually.
 
 * **Exit** :  
   `exit`
-   
+
 * **Find** :  
   `find KEYWORD [MORE_KEYWORDS]` <br>
   e.g. `find 'test' 'midterm'`
-  
+
 * **List** :  
   `(list|ls) [TYPE] [\from TIME] [\to TIME] [\under TAG]` <br>
   `(list|ls) [TYPE] [\in STRING_REPRESENTING_TIME_INTERVAL] [\under TAG]` <br>
@@ -265,14 +265,13 @@ There is no need to save manually.
 
 * **List tags** :  
   `(list_tag|ls_tag)`
-  
+
 * **Help** :  
   `help`
 
 * **Undo** :  
   `undo`
-  
+
 * **Mark as finished** :  
   `finish INDEX [INDEX...]`  
   e.g. `finish 1 8`
-  

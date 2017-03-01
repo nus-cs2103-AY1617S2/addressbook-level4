@@ -477,7 +477,7 @@ http://www.comp.nus.edu.sg/~cs2103/AY1617S2/contents/handbook.html#handbook-proj
     - `Deadline`
     A task with the same `start time` and `end time`. It represents tasks that have to be done before a specific time
     - `Floating task`
-    A task with no `start time` and `end time`. It represetns tasks that are not associated with any timing. It can only be `pending` and `finished`, never `overdue`.
+    A task with no `start time` and `end time`. It represents tasks that are not associated with any timing. It can only be `pending` and `finished`, never `overdue`.
     - `Pending tasks`
     Tasks that have not been `finished` nor `ended`
     - `Overdue tasks`
@@ -485,7 +485,7 @@ http://www.comp.nus.edu.sg/~cs2103/AY1617S2/contents/handbook.html#handbook-proj
     - `Finished tasks`
     Tasks that have been `finished`
     - `Recurring task`
-    A task with a `recurring interval` set. A new task will automatically be cloned from this task, with the recurring interval added to the task’s `start time`, `end time` and `reminder time` when a task is marked as `Finished` or becomes `Overdue`
+    A task with a `recurrence interval` set. A new task will automatically be cloned from this task, with the recurrence interval added to the task’s `start time`, `end time` and `reminder time` when a task is marked as `Finished` or becomes `Overdue`
 
 **Mutating Command**
     Any command which causes a change in the state of apps (E.g. add, delete, finished)
