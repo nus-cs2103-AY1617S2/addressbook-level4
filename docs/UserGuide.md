@@ -25,8 +25,8 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
    * **`list`** : lists all tasks
-   * **`add`**`  add laundry due/every sunday #/personal d/wash clothes @B1 *f:
-     adds a task to Dueue named `laundry` which is repeating every sunday under list `personal` with description `wash clothes` at venue `B1` and star it favourite.
+   * **`add`**`  add laundry due/every sunday #/personal d/wash clothes @B1 *f` :
+     adds a task to Dueue named `laundry` which is repeating every sunday under list `personal` with description `wash clothes` at venue `B1` and star it as `favourite`.
    * **`delete`**` 3` : deletes the task with index 3 as shown in the current list
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
@@ -61,12 +61,12 @@ Examples:
 * `add laundry due/every sunday #/personal d/wash clothes @B1 *f`
 * `add 2103lecture due/every friday t/4pm #/study d/go for lecture @iCube`
 
-### 2.3. Listing all persons : `list`
+### 2.3. Listing all tasks : `list`
 
 Shows a list of all tasks in Dueue/ in a specific list<br>
-Format: `list [favorite]`
-Format: `list list LISTINDEX [favorite]`
-Format: `list list LISTNAME [favorite]`
+Format: `list [favourite]`
+Format: `list list LISTINDEX [favourite]`
+Format: `list list LISTNAME [favourite]`
 
 Shows a list of all list names in Dueue<br>
 Format: Format: `list lists`
