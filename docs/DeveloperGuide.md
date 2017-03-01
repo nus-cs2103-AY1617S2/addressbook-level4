@@ -350,14 +350,17 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | add a new task using the task descriptor | record all my tasks
 `* * *` | user | edit a task | modify the attributes of the task whenever needed
 `* * *` | user | delete a task | remove tasks that I do not wish to keep track of
-`* * *` | user | list out all uncompleted task | quickly view my outstanding tasks that I need to complete
 `* * *` | user | mark a task as completed | differentiate between completed and uncompleted tasks
 `* * *` | user | set a deadline to a task | easily keep track of deadline for a certain task to be completed
-`* *` | user | search for a specific task using the task descriptor | locate a certain task quickly
+`* *` | user | undo  the previous action | recover from the unintended mistakes
+`* *` | user | redo  the previous undo action | recover from the unintended undo action
+`* *` | user | find for specific tasks using the attributes | locate certain tasks quickly
 `* *` | user | assign a tag to a task | group tasks that belongs to the same category together
-`* *` | user | list the tasks based on tags | keep track of a specific set of tasks
-`*` | user | add notes to a task | include more information to a task
-`*` | user | rate the workload of a task | understand how many tasks I can accomplish within a period of time
+`* *` | user | specify the location of the storage file | save the data to the location of my preference
+`*` | user | add a note to a task | include more information to a task
+`*` | user | set the priority of a task | focus on the tasks of higher priorities
+`*` | user | sync the  to my google calendar | sync the tasks with the calendar and get notified
+`*` | user | input the command quickly | save time and effort
 
 ## Appendix B : Use Cases
 
@@ -383,119 +386,196 @@ Use case ends
 
 **MSS**
 
-1. User requests to list tasks
-2. Opus shows a list of tasks
-3. User requests to delete a specific task in the list
-4. Opus deletes the task
+1. User requests to delete a specific task in the list
+2. Opus deletes the task
 Use case ends
 
 **Extensions**
 
-2a. The list is empty
+1a. The given index is invalid
 
-> Use case ends
-
-3a. The given index is invalid
-
-> 3a1. Opus shows an error message
-Use case resumes at step 2
+> 1a1. Opus shows an error message
+Use case ends
 
 #### Use case: Edit task
 
 **MSS**
 
-1. User requests to list tasks
-2. Opus shows a list of tasks
-3. User requests to edit a specific task in the list
-4. Opus edits the task
+1. User requests to edit a specific task in the list
+2. Opus edits the task
 Use case ends
 
 **Extensions**
 
-2a. The list is empty
+1a. The given index is invalid
 
-> Use case ends
+> 1a1. Opus shows an error message
+Use case ends
 
-3a. The given index is invalid
-
-> 3a1. Opus shows an error message
-Use case resumes at step 2
-
-3b. The attribute given is invalid
+1b. The attribute given is invalid
 
 > 3b1. Opus shows an error message
-Use case resumes at step 2
+Use case ends
 
-3c. The value of the attribute is invalid
+1c. The value of the attribute is invalid
 
-> 3c1. Opus shows an error message
-Use case resumes at step 2
+> 1c1. Opus shows an error message
+Use case ends
 
 3d. The value of the attribute is the same as the previous value
 
 >Use case ends
 
 
-#### Use case: List task
-
-**MSS**
-
-1. User input command to list task
-2. Opus shows a list of tasks sorted by due dates
-Use case ends
-
-**Extensions**
-
-2a. The list is empty
-
-> 2a1. Opus shows a message that the list is empty
-Use case ends
-
 #### Use case: Mark task as complete
 
 **MSS**
 
-1. User requests to list tasks
-2. Opus shows a list of tasks
-3. User requests to mark a specific task in the list as complete
-4. Opus marks the task as complete
+1. User requests to mark a specific task in the list as complete
+2. Opus marks the task as complete
 Use case ends
 
 **Extensions**
 
-2a. The list is empty
+1a. The given index is invalid
 
-> Use case ends
-
-3a. The given index is invalid
-
-> 3a1. Opus shows an error message
-Use case resumes at step 2
+> 1a1. Opus shows an error message
+Use case ends
 
 #### Use case: Set deadline to a task
 
 **MSS**
 
-1. User requests to list tasks
-2. Opus shows a list of tasks
-3. User requests to set a deadline to a specific task
-4. Opus sets a deadline for the task and displays the task
+1. User requests to set a deadline to a specific task
+2. Opus sets a deadline for the task and displays the task
 Use case ends
 
 **Extensions**
 
-2a. The list is empty
+1a. The given index is invalid
+
+> 1a1. Opus shows an error message
+Use case ends
+
+1b. The date input by user is invalid
+
+> 1b1. Opus shows an error message
+Use case ends
+
+#### Use case: Undo the previous action
+
+**MSS**
+
+1. User requests to undo the previous action
+2. Opus shows which action is undone
+Use case ends
+
+**Extensions**
+
+1a. The history stack is empty
 
 > Use case ends
 
-3a. The given index is invalid
+#### Use case: Redo the previous undo action
 
-> 3a1. Opus shows an error message
+**MSS**
+
+1. User requests redo the previous undo action
+2. Opus shows which action is restored
+Use case ends
+
+**Extensions**
+
+1a. The restoration history stack is empty
+
+> Use case ends
+
+#### Use case: Find for specific tasks using the attributes
+
+**MSS**
+
+1. User requests to find tasks based on the attributes
+2. Opus shows a list of tasks
+Use case ends
+
+**Extensions**
+1a. The list is empty
+
+> Use case ends
+
+1a. The input attribute is invalid
+
+> 1a1. Opus shows an error message
+Use case ends
+
+#### Use case: Assign a tag to a task
+
+**MSS**
+
+1. User requests to assign a tag to the task
+2. Opus shows the tag is assigned to the task
+Use case ends
+
+**Extensions**
+
+1a. The given index is invalid
+
+> 1a1. Opus shows an error message
+Use case ends
+
+1b. The tag input by user is invalid
+
+> 1b1. Opus shows an error message
+Use case ends
+
+#### Use case: Specify the location of the storage file
+
+**MSS**
+
+1. User requests to specify the location of the storage file
+2. Opus shows the location of the storage file is changed
+Use case ends
+
+**Extensions**
+
+1a. The location path is invalid
+
+> 1a1. Opus shows an error message
+Use case ends
+
+#### Use case: Add a note to a task
+
+**MSS**
+
+1. User requests to add a note to the task
+2. Opus shows the note is added to the task
+Use case ends
+
+**Extensions**
+
+1a. The input index is invalid
+
+> 1a1. Opus shows an error message
+Use case ends
+
+#### Use case: Set the priority of a task
+
+**MSS**
+
+1. User requests to set the priority of a task
+2. Opus shows the priority is set.
+Use case ends
+
+**Extensions**
+
+1a. The input index is invalid
+
+> 1a1. Opus shows an error message
 Use case resumes at step 2
 
-3b. The date input by user is invalid
+1b. The priority value is invalid
 
-> 3b1. Opus shows an error message
+> 1b1. Opus shows an error message
 Use case resumes at step 2
 
 ## Appendix C : Non Functional Requirements
