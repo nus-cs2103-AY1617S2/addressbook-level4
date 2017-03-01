@@ -1,4 +1,4 @@
-# [] - Developer Guide
+# TaskCrusher - Developer Guide
 
 By : `Team T15B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
@@ -389,7 +389,7 @@ Priority | As a ... | I want to ... | So that I can...
 
 ## Appendix B : Sample Use Cases
 
-(For all use cases below, the **System** is the `[]` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TaskCrusher` and the **Actor** is the `user`, unless specified otherwise)
 
 
 #### Use case: Add an event
@@ -397,8 +397,8 @@ Priority | As a ... | I want to ... | So that I can...
 **MSS**
 
 1. User enters the name of an event to be added, together with its start and end date/time and other options.
-2. [] adds the event to the active list
-3. [] displays back the details of the add action.
+2. TaskCrusher adds the event to the active list
+3. TaskCrusher displays back the details of the add action.
 
 Use case ends.
 
@@ -406,11 +406,11 @@ Use case ends.
 
 2a. The command format is invalid
 
-> 2a1. [] shows an error message <br>
+> 2a1. TaskCrusher shows an error message <br>
   Use case resumes at step 1
 
 2b. The entered time slot is already occupied by another event 
-> 2b1. [] notifies the user that the time slot for the event has been already occupied by other event.
+> 2b1. TaskCrusher notifies the user that the time slot for the event has been already occupied by other event.
   2b2. User decides whether or not to force the addition. 
   
 > Use case ends
@@ -421,7 +421,7 @@ Use case ends.
 **MSS**
 
 1. User requests to list active tasks, active events or both. Additional sort field may be specified.
-2. [] displays the active list according to the listing options, assigning each entry an index.
+2. TaskCrusher displays the active list according to the listing options, assigning each entry an index.
 
 Use case ends
 
@@ -429,11 +429,11 @@ Use case ends
 
 2a. The command format is invalid
 
-> 2a1. [] shows an error message <br>
+> 2a1. TaskCrusher shows an error message <br>
 > Use case resumes at step 1
 
 2b. The active list is empty.
-> 2b1. [] notifies the user that the active list is currently empty.<br/>
+> 2b1. TaskCrusher notifies the user that the active list is currently empty.<br/>
 > Use case ends
 
 #### Use case: Mark a task/event as `done`
@@ -442,7 +442,7 @@ Use case ends
 
 1. User requests to [display the active list](#list).
 2. User uses the index of the task/event of interest to request to mark it as `done`. Multiple indices can be entered to process more than one entries. 
-3. [] moves the task/event from the active list to the expired list.
+3. TaskCrusher moves the task/event from the active list to the expired list.
 
 Use case ends
 
@@ -455,7 +455,7 @@ Use case ends
 > Use case ends
 
 3a. The index is invalid
-> 3a1. [] shows an error message <br>
+> 3a1. TaskCrusher shows an error message <br>
 Use case resumes at step 2
 <br>
 #### Use case: manage overdue tasks and/or past events
@@ -464,9 +464,9 @@ Use case resumes at step 2
 
 1. User requests to [display the active list](#list) with the option to list only overdue tasks and/or past events relative to the current time.
 2. For each item in the displayed list, user uses the index to request to mark it as `done`, or dismiss it. Multiple indices may be entered to process more than one items. 
-3. If the user chose to dismiss an item, [] prompts the user to enter the reason for it. 
+3. If the user chose to dismiss an item, TaskCrusher prompts the user to enter the reason for it. 
 4. User enters the reason for dismissing a task/event. If user does not need to do so, user does nothing and proceeds.
-5. [] moves the task/event from the active list to the expired list.
+5. TaskCrusher moves the task/event from the active list to the expired list.
 
 Use case ends
 
