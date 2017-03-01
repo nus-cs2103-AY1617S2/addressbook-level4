@@ -1,6 +1,6 @@
-# AddressBook Level 4 - Developer Guide
+# [] - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team T15B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -362,11 +362,11 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user with active events| view the list of events taking place during a specific time frame |
 `* * *` | user with many active tasks | sort tasks by their fields <ul><li>sort by name</li><li>sort by priority</li><li>sort by deadline</li><li>sort by tag</li></ul>| locate tasks with certain fields easily
 `* * *` | user with many active events | sort events by their fields <ul><li>sort by name</li><li>sort by start date</li><li>sort by tag</li></ul>| locate events with certain fields easily
-`* * *` | user with an active event | mark an active event as `done` and remove from the active list
-`* * *` | user with an active event | cancel and dismiss an event in the active list | 
+`* * *` | user with an active event | mark an active event as `done` and remove from the active list | separate it from other active tasks and events
+`* * *` | user with an active event | cancel and dismiss an event in the active list <br /><br /> **condition**:<br />I can add a reason for why it is being dismissed before it gets moved into the [expired list](#expired-list)| distinguish between a successful event and a cancelled one
 `* * *` | user with an active task | mark an active task as `done` and remove from the active list | separate it from other active tasks and events
-`* * *` | user with an active task | dismiss an active task and remove from the active list <br /><br /> **condition**:<br />I can add a reason for why it is being dismissed before it gets moved into the [expired list](#expired-list)| distinguish between a task that was successfully done with one that failed
-`* * *` | user with overdue tasks and past events| view the list of tasks that are considered overdue or events past relative to the current time and manage them all at once
+`* * *` | user with an active task | dismiss an active task and remove from the active list <br /><br /> **condition**:<br />I can add a reason for why it is being dismissed before it gets moved into the expired list| distinguish between a task that was successfully done with one that failed
+`* * *` | user with overdue tasks and past events| view the list of tasks that are considered overdue or events past relative to the current time | manage them all at once
 `* * *` | user | view the effect of the last action undertaken | confirm the details of the action and amend if necessary
 `* * *` | user with many tasks and events in the active list | search for tasks or events by a keyword <ul><li>keyword in name</li> <li>keyword in tag</li><li>keyword in description </li></ul>| 
 `* * *` | user who have completed one or more tasks | view a reverse chronological log of all completed tasks | see which tasks I have marked as `done` in the past
@@ -395,6 +395,7 @@ Priority | As a ... | I want to ... | So that I can...
 #### Use case: Add an event
 
 **MSS**
+
 1. User enters the name of an event to be added, together with its start and end date/time and other options.
 2. [] adds the event to the active list
 3. [] displays back the details of the add action.
@@ -438,6 +439,7 @@ Use case ends
 #### Use case: Mark a task/event as `done`
 
 **MSS**
+
 1. User requests to [display the active list](#list).
 2. User uses the index of the task/event of interest to request to mark it as `done`. Multiple indices can be entered to process more than one entries. 
 3. [] moves the task/event from the active list to the expired list.
@@ -459,6 +461,7 @@ Use case resumes at step 2
 #### Use case: manage overdue tasks and/or past events
 
 **MSS**
+
 1. User requests to [display the active list](#list) with the option to list only overdue tasks and/or past events relative to the current time.
 2. For each item in the displayed list, user uses the index to request to mark it as `done`, or dismiss it. Multiple indices may be entered to process more than one items. 
 3. If the user chose to dismiss an item, [] prompts the user to enter the reason for it. 
