@@ -1,36 +1,28 @@
-# AddressBook Level 4 - User Guide
+# Task Manager - User Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+Please refer to the [Setting up](DeveloperGuide.md#setting-up) section to learn how to set up Task Manager.
 
 ---
 
-1. [Quick Start](#quick-start)
+1. [Start Project](#start-project)
 2. [Features](#features)
 3. [FAQ](#faq)
 4. [Command Summary](#command-summary)
 
-## 1. Quick Start
+## 1. Start Project
 
-0. Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
+1. Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
 
    > Having any Java 8 version is not enough. <br>
    > This app will not work with earlier versions of Java 8.
 
-1. Download the latest `addressbook.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for your Address Book.
-3. Double-click the file to start the app. The GUI should appear in a few seconds.
-   > <img src="images/Ui.png" width="600">
+2. Find the project in the `Project Explorer` or `Package Explorer` (usually located at the left hand side of the project explorer)
+3. Right click on the project.
+4. Click `Run As` > `Java Application` > select `MainApp` and click `ok` at the bottom right hand corner.
+5. The GUI should appear in a few seconds.
+<img src="images/TaskManager.jpg" width="600">
 
-4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
-   e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
-5. Some example commands you can try:
-   * **`list`** : lists all contacts
-   * **`add`**` John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01` :
-     adds a contact named `John Doe` to the Address Book.
-   * **`delete`**` 3` : deletes the 3rd contact shown in the current list
-   * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
-
 
 ## 2. Features
 
@@ -45,84 +37,137 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 
 Format: `help`
 
-> Help is also shown if you enter an incorrect command e.g. `abcd`
+> * Help is also shown if you enter an incorrect command e.g. `abcd`
 
-### 2.2. Adding a person: `add`
+### 2.2. Adding a task: `add`
 
-Adds a person to the address book<br>
-Format: `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Adds a task to the task manager<br>
+Format: `add [task] TASKNAME [label LABELNAME] [(by|on) DEADLINE]`
 
-> Persons can have any number of tags (including 0)
+> * Tasks can have a deadline, or can do without one as well.
+>   * Tasks added without specifying a deadline will be displayed under "No Deadline".
+>   * Date formats can be flexible. The application is able to parse commonly-used human-readable date formats.
+>     * e.g. `Monday`, `next wed`, `tomorrow`, `5 days after`, `4 Apr` etc.
+> * Dates can include time as well.
+>   * If only time is specified, it will default to today's date.
+>   * If time is not specified, it will default to the current time of the particular date.
+>   * Time formats are flexible as well. The application supports 24 hour format and AM/PM format.
+>     * e.g. `Monday 3pm`, `today 1930`, `5:30pm`, `10.00 am`
+> * Tasks can have any number of label name. (including 0).
+> * Using the `add` command without specifying `task` will interpret the command as `add task`.
 
 Examples:
 
-* `add John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01`
-* `add Betsy Crowe t/friend e/betsycrowe@gmail.com a/Newgate Prison p/1234567 t/criminal`
+ * `add CS2106 Mid terms`
+ * `add CS2103 V0.0 by tmr`
+ * `add task Make baby by next wednesday`
 
-### 2.3. Listing all persons : `list`
+### 2.3 Listing all tasks : `list`
 
-Shows a list of all persons in the address book.<br>
-Format: `list`
+Shows a list of all tasks in Task Manager. Able to filter by type of task (task), or based on status of task such as completed or outstanding.
 
-### 2.4. Editing a person : `edit`
+Format: `list [TYPE]`
 
-Edits an existing person in the address book.<br>
-Format: `edit INDEX [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+> Valid parameters: 
+> * `tasks` / `task`
+> * `complete` / `completed`
+> * `incomplete` / `outstanding`
+> * `overdue` / `over`
+> * `by DATE`
+> * `from STARTDATE to ENDDATE`
 
-> * Edits the person at the specified `INDEX`.
-    The index refers to the index number shown in the last person listing.<br>
+Examples:
+
+* `list`  
+ Lists all tasks.
+
+* `list overdue tasks`    
+ Lists all overdued tasks
+
+* `list outstanding tasks`   
+ Lists all outstanding tasks
+
+* `list completed tasks`    
+ Lists all completed tasks
+
+* `list by today`  
+ Lists all tasks due by today
+
+* `list from monday to friday`    
+ Lists all tasks due within Monday-Friday
+ 
+### 2.4. Editing a task : `update`
+
+Edits the specified task's details.
+
+Format:`update INDEX [TASKNAME] [label LABELNAME] ([(by|on) DATE] | [from STARTDATE to ENDATE])`
+
+> * Edits the task at the specified `INDEX`.
+    The index refers to the index number shown in the task listing.<br>
     The index **must be a positive integer** 1, 2, 3, ...
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
-> * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-> * You can remove all the person's tags by typing `t/` without specifying any tags after it. 
+> * When editing labels, the existing labels of the person will be removed i.e adding of labels is not cumulative.
+> * You can remove all the person's tags by typing `label` without specifying any tags after it. 
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@yahoo.com`<br>
-  Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@yahoo.com` respectively.
+* `update 1 label tedious shit by thursday`<br>
+  Edits the label and deadline of the 1st task to be `tedious shit` and deadline to `Thursday` respectively.
 
-* `edit 2 Betsy Crower t/`<br>
-  Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `update 2 CS2106Assignment label`<br>
+  Edits the name of the 2nd task to be `CS2106Assignment` and clears all existing labels.
 
-### 2.5. Finding all persons containing any keyword in their name: `find`
+### 2.5. Finding all task containing any keyword in task name and labels : `find`
 
-Finds persons whose names contain any of the given keywords.<br>
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Finds tasks whose name and labels containin any of the specified keywords.  
 
-> * The search is case sensitive. e.g `hans` will not match `Hans`
-> * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-> * Only the name is searched.
-> * Only full words will be matched e.g. `Han` will not match `Hans`
-> * Persons matching at least one keyword will be returned (i.e. `OR` search).
-    e.g. `Hans` will match `Hans Bo`
+Format: `find [TYPE] KEYWORD [MORE_KEYWORDS]...`
 
-Examples:
+> Valid parameters: 
+> * `TaskName`
+> * `LabelName`
+> * `Complete` / `Completed`
+> * `Incomplete` / `Outstanding`
+> * `DATE`
+> * `from STARTDATE to ENDDATE`
 
-* `find John`<br>
-  Returns `John Doe` but not `john`
-* `find Betsy Tim John`<br>
-  Returns Any person having names `Betsy`, `Tim`, or `John`
+> * The search is case insensitive and the order of the keywords does not matter.
+> * Task names, label names will be searched, and tasks with at least one keyword match will be return and display to user.
 
-### 2.6. Deleting a person : `delete`
+Examples: 
 
-Deletes the specified person from the address book. Irreversible.<br>
+* `find CS2103`   
+Returns all task containing the keyword or label containing `CS2103` & `cs2103`.
+
+* `find task project`  
+Returns all task with the name containing `project` & `Project`.
+
+* `find label glocery`    
+Returns all task with the label name containing `glocery` & `Glocery`.
+  
+* `find project glocery`  
+Returns all tasks having name or label name containing `project`, `Project`,  `glocery`, `Glocery`.
+
+### 2.6. Deleting a task : `delete`
+
+Deletes the specified task from the address book. Reversible via undo command.
+
 Format: `delete INDEX`
 
-> Deletes the person at the specified `INDEX`. <br>
-> The index refers to the index number shown in the most recent listing.<br>
+> Deletes the task at the specified `INDEX`. <br>
+> The index refers to the index number shown in the most recent task listing.
 > The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 
-* `list`<br>
-  `delete 2`<br>
-  Deletes the 2nd person in the address book.
-* `find Betsy`<br>
-  `delete 1`<br>
-  Deletes the 1st person in the results of the `find` command.
+* `delete 2`    
+  Deletes the 2nd task in the Task Manager.
+* `find Project`    
+  `delete 1`    
+  Deletes the 1st task in the results of the `find` command.
 
-### 2.7. Select a person : `select`
+### 2.7. Select a Task : `select`
 
 Selects the person identified by the index number used in the last person listing.<br>
 Format: `select INDEX`
@@ -142,24 +187,23 @@ Examples:
 
 ### 2.8. Clearing all entries : `clear`
 
-Clears all entries from the address book.<br>
+Clears all entries from the Task Manager.<br>
 Format: `clear`
 
 ### 2.9. Exiting the program : `exit`
 
-Exits the program.<br>
+Exits the Task Manager.<br>
 Format: `exit`
 
 ### 2.10. Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data.<br>
+Task manager data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
 ## 3. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with
-       the file that contains the data of your previous Address Book folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
 
 ## 4. Command Summary
 
