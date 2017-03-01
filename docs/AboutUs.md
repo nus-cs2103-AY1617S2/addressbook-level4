@@ -6,7 +6,7 @@ We are Typed, a team based in the [School of Computing, National University of S
 
 #### [Lee Pei Xuan](http://github.com/pyxyyy) <br>
 <img src="images/LeePeiXuan.jpeg" width="150"><br>
-Role: Developer
+Role: Developer <br>
 Responsibilities:
 
 -----
@@ -35,6 +35,3 @@ Responsibilities: ?
 # Contributors
 
 We welcome contributions. See [Contact Us](ContactUs.md) page for more info.
-
-* [Akshay Narayan](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Aokkhoy)
-* [Sam Yong](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Amauris)
