@@ -690,10 +690,8 @@ Use case ends.
 5. Should be quick when starting the application(within 1 second)
 6. Should be a free and open source project
 7. Should be reliable and outputs error messages correctly
-8. Should complete an operationwithin 0.5 seconds
+8. Should complete an operation within 0.5 seconds
 9. Should be easy to use and non-technical
-10. Should be private, tasks will not be shared without permission
-11. Should be able to back up
 {More to be added}
 
 ## Appendix D : Glossary
