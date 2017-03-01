@@ -5,7 +5,7 @@ We are Typedwriters, a team based in the [School of Computing, National Universi
 ## Project Team
 
 #### [Lee Pei Xuan](http://github.com/pyxyyy) <br>
-<img src="images/LeePeiXuan.jpeg" width="150"><br>
+<img src="images/LeePeiXuan.jpg" width="150"><br>
 Role: Chief Typed Officer (CTO) <br>
 Responsibilities:
 
