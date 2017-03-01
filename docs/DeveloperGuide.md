@@ -372,6 +372,7 @@ Priority | As a ... | I want to ... | So that I can...
 
 1. User requests to display help information
 2. Opus displays help information
+
 Use case ends
 
 #### Use case: Add task
@@ -380,6 +381,15 @@ Use case ends
 
 1. User input command to add task
 2. Opus adds the task and shows the added task details
+
+Use case ends
+
+**Extensions**
+
+1a. The input format is invalid
+
+> 1a1. Opus shows an error message
+
 Use case ends
 
 #### Use case: Delete task
@@ -388,6 +398,7 @@ Use case ends
 
 1. User requests to delete a specific task in the list
 2. Opus deletes the task
+
 Use case ends
 
 **Extensions**
@@ -395,6 +406,7 @@ Use case ends
 1a. The given index is invalid
 
 > 1a1. Opus shows an error message
+
 Use case ends
 
 #### Use case: Edit task
@@ -403,6 +415,7 @@ Use case ends
 
 1. User requests to edit a specific task in the list
 2. Opus edits the task
+
 Use case ends
 
 **Extensions**
@@ -410,16 +423,19 @@ Use case ends
 1a. The given index is invalid
 
 > 1a1. Opus shows an error message
+
 Use case ends
 
 1b. The attribute given is invalid
 
 > 3b1. Opus shows an error message
+
 Use case ends
 
 1c. The value of the attribute is invalid
 
 > 1c1. Opus shows an error message
+
 Use case ends
 
 3d. The value of the attribute is the same as the previous value
@@ -433,6 +449,7 @@ Use case ends
 
 1. User requests to mark a specific task in the list as complete
 2. Opus marks the task as complete
+
 Use case ends
 
 **Extensions**
@@ -440,6 +457,7 @@ Use case ends
 1a. The given index is invalid
 
 > 1a1. Opus shows an error message
+
 Use case ends
 
 #### Use case: Set deadline to a task
@@ -448,6 +466,7 @@ Use case ends
 
 1. User requests to set a deadline to a specific task
 2. Opus sets a deadline for the task and displays the task
+
 Use case ends
 
 **Extensions**
@@ -455,11 +474,13 @@ Use case ends
 1a. The given index is invalid
 
 > 1a1. Opus shows an error message
+
 Use case ends
 
 1b. The date input by user is invalid
 
 > 1b1. Opus shows an error message
+
 Use case ends
 
 #### Use case: Undo the previous action
@@ -468,6 +489,7 @@ Use case ends
 
 1. User requests to undo the previous action
 2. Opus shows which action is undone
+
 Use case ends
 
 **Extensions**
@@ -482,6 +504,7 @@ Use case ends
 
 1. User requests redo the previous undo action
 2. Opus shows which action is restored
+
 Use case ends
 
 **Extensions**
@@ -496,16 +519,19 @@ Use case ends
 
 1. User requests to find tasks based on the attributes
 2. Opus shows a list of tasks
+
 Use case ends
 
 **Extensions**
+
 1a. The list is empty
 
 > Use case ends
 
-1a. The input attribute is invalid
+1b. The input bttribute is invalid
 
-> 1a1. Opus shows an error message
+> 1b1. Opus shows an error message
+
 Use case ends
 
 #### Use case: Assign a tag to a task
@@ -514,6 +540,7 @@ Use case ends
 
 1. User requests to assign a tag to the task
 2. Opus shows the tag is assigned to the task
+
 Use case ends
 
 **Extensions**
@@ -521,11 +548,13 @@ Use case ends
 1a. The given index is invalid
 
 > 1a1. Opus shows an error message
+
 Use case ends
 
 1b. The tag input by user is invalid
 
 > 1b1. Opus shows an error message
+
 Use case ends
 
 #### Use case: Specify the location of the storage file
@@ -534,6 +563,7 @@ Use case ends
 
 1. User requests to specify the location of the storage file
 2. Opus shows the location of the storage file is changed
+
 Use case ends
 
 **Extensions**
@@ -541,6 +571,7 @@ Use case ends
 1a. The location path is invalid
 
 > 1a1. Opus shows an error message
+
 Use case ends
 
 #### Use case: Add a note to a task
@@ -549,6 +580,7 @@ Use case ends
 
 1. User requests to add a note to the task
 2. Opus shows the note is added to the task
+
 Use case ends
 
 **Extensions**
@@ -556,6 +588,7 @@ Use case ends
 1a. The input index is invalid
 
 > 1a1. Opus shows an error message
+
 Use case ends
 
 #### Use case: Set the priority of a task
@@ -564,6 +597,7 @@ Use case ends
 
 1. User requests to set the priority of a task
 2. Opus shows the priority is set.
+
 Use case ends
 
 **Extensions**
@@ -571,12 +605,14 @@ Use case ends
 1a. The input index is invalid
 
 > 1a1. Opus shows an error message
-Use case resumes at step 2
+
+Use case ends
 
 1b. The priority value is invalid
 
 > 1b1. Opus shows an error message
-Use case resumes at step 2
+
+Use case ends
 
 ## Appendix C : Non Functional Requirements
 
