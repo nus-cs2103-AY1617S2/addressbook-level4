@@ -1,14 +1,15 @@
-# AddressBook Level 4 - Developer Guide
+# TaskBoss - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team W14-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
 1. [Setting Up](#setting-up)
-2. [Design](#design)
-3. [Implementation](#implementation)
-4. [Testing](#testing)
-5. [Dev Ops](#dev-ops)
+2. [Target Users](#target-users)
+3. [Design](#design)
+4. [Implementation](#implementation)
+5. [Testing](#testing)
+6. [Dev Ops](#dev-ops)
 
 * [Appendix A: User Stories](#appendix-a--user-stories)
 * [Appendix B: Use Cases](#appendix-b--use-cases)
@@ -17,7 +18,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 * [Appendix E : Product Survey](#appendix-e--product-survey)
 
 
-## 1. Setting up
+## Setting up
 
 ### 1.1. Prerequisites
 
@@ -72,10 +73,18 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 * Reason: Required libraries may not have been downloaded during the project import.
 * Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries).
 
+## Target Users
 
-## 2. Design
+Our target users (eg. `Jim`) are people who:
+* usually work alone on their personal or office computer
+* do not share their computer with others
+* prefer a command-line approach over a mouse-clicking approach
+* would like to have an organized set up of tasks to categorize, sort, and prioritise them for ease of task management  
 
-### 2.1. Architecture
+
+## Design
+
+### 3.1. Architecture
 
 <img src="images/Architecture.png" width="600"><br>
 _Figure 2.1.1 : Architecture Diagram_
@@ -137,7 +146,7 @@ _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 
 The sections below give more details of each component.
 
-### 2.2. UI component
+### 3.2. UI component
 
 Author: Alice Bee
 
@@ -160,7 +169,7 @@ The `UI` component,
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
 
-### 2.3. Logic component
+### 3.3. Logic component
 
 Author: Bernard Choo
 
@@ -179,7 +188,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 <img src="images/DeletePersonSdForLogic.png" width="800"><br>
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
-### 2.4. Model component
+### 3.4. Model component
 
 Author: Cynthia Dharman
 
@@ -196,7 +205,7 @@ The `Model`,
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
-### 2.5. Storage component
+### 3.5. Storage component
 
 Author: Darius Foong
 
@@ -210,13 +219,13 @@ The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
 * can save the Address Book data in xml format and read it back.
 
-### 2.6. Common classes
+### 3.6. Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
-## 3. Implementation
+## Implementation
 
-### 3.1. Logging
+### 4.1. Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels
 and logging destinations.
@@ -235,13 +244,13 @@ and logging destinations.
 * `FINE` : Details that is not usually noteworthy but may be useful in debugging
   e.g. print the actual list instead of just its size
 
-### 3.2. Configuration
+### 4.2. Configuration
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
 (default: `config.json`):
 
 
-## 4. Testing
+## Testing
 
 Tests can be found in the `./src/test/java` folder.
 
@@ -278,7 +287,7 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
  That means the developer can do other things on the Computer while the tests are running.<br>
  See [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in headless mode.
 
-### 4.1. Troubleshooting tests
+### 5.1. Troubleshooting tests
 
  **Problem: Tests fail because NullPointException when AssertionError is expected**
 
@@ -288,23 +297,23 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
    [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
    Delete run configurations created when you ran tests earlier.
 
-## 5. Dev Ops
+## Dev Ops
 
-### 5.1. Build Automation
+### 6.1. Build Automation
 
 See [UsingGradle.md](UsingGradle.md) to learn how to use Gradle for build automation.
 
-### 5.2. Continuous Integration
+### 6.2. Continuous Integration
 
 We use [Travis CI](https://travis-ci.org/) and [AppVeyor](https://www.appveyor.com/) to perform _Continuous Integration_ on our projects.
 See [UsingTravis.md](UsingTravis.md) and [UsingAppVeyor.md](UsingAppVeyor.md) for more details.
 
-### 5.3. Publishing Documentation
+### 6.3. Publishing Documentation
 
 See [UsingGithubPages.md](UsingGithubPages.md) to learn how to use GitHub Pages to publish documentation to the
 project site.
 
-### 5.4. Making a Release
+### 6.4. Making a Release
 
 Here are the steps to create a new release.
 
@@ -313,7 +322,7 @@ Here are the steps to create a new release.
  2. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/)
     and upload the JAR file you created.
 
-### 5.5. Converting Documentation to PDF format
+### 6.5. Converting Documentation to PDF format
 
 We use [Google Chrome](https://www.google.com/chrome/browser/desktop/) for converting documentation to PDF format,
 as Chrome's PDF engine preserves hyperlinks used in webpages.
@@ -330,7 +339,7 @@ Here are the steps to convert the project documentation files to PDF format.
     <img src="images/chrome_save_as_pdf.png" width="300"><br>
     _Figure 5.4.1 : Saving documentation as PDF files in Chrome_
 
-### 5.6. Managing Dependencies
+### 6.6. Managing Dependencies
 
 A project often depends on third-party libraries. For example, Address Book depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
@@ -339,6 +348,7 @@ is better than these alternatives.<br>
 a. Include those libraries in the repo (this bloats the repo size)<br>
 b. Require developers to download those libraries manually (this creates extra work for developers)<br>
 
+
 ## Appendix A : User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
@@ -346,74 +356,418 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the TaskBoss
+`* * *` | user | add tasks | record tasks that I need to get done |
+`* * *` | user | delete tasks | get rid of tasks that I no longer need
+`* * *` | user | edit tasks | update any outdated information
+`* * *` | user | see a list of all the tasks | view all my pending tasks in a single view
+`* * *` | user | mark my tasks as done | keep track of the task status
+`* * *` | user | set deadlines for tasks that have due dates | track the urgency of any given task
+`* * *` | user | sort the tasks based on their deadlines | know the most urgent tasks to address
+`* * *` | user | search for any task | find a task if I remember some keywords from the description
+`* *` | user | add a description to my tasks | keep note of the details related to any given task
+`* *` | user | undo a command | not worry about any accidental actions I do
+`* *` | user | export all the tasks into a specified folder to save | get access of my tasks from multiple computers
+`* *` | user | set start and end times for any given task | cater for any event that I need to attend
+`* *` | user | set priority levels for each of my tasks | give my attention to tasks without deadlines that are urgent
+`* *` | user | see my tasks sorted based on priority | check what I need to do urgently
+`* *` | user | categorize my tasks | keep my tasks organized
+`* *` | user | see the tasks under a specific category | better manage my pending tasks
+`* *` | user | see the tasks that I have completed | re-trace my completed tasks if need be
+`* *` | user | create categories | add tasks under specific categories
+`* *` | user | view a specific task | focus on that task
+`* *` | user | clear all tasks under a specific category | delete a bulk of tasks at one time
+`*` | user | set recurring tasks | not have to manually add the same task over and over again
+`*` | user | set reminders | be reminded of tasks if need be
+`*` | user | set locations | check location of the task (if any)
+`*` | user | add people | check people associated with the task (if any)
+`*` | user | create labels for tasks | easily group certain similar tasks together
+`*` | user | redo a command after undoing a command | revert the state of TaskBoss if need be
+`*` | user | type shorter commands | execute commands faster
+`*` | user | integrate Google Calendar | see a monthly view of my tasks
+`*` | user | view all tasks that are between a specified date/time interval | not be distracted by other tasks meant for another time/date
 
 {More to be added}
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is`TaskBoss` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: Add a task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1.  User requests to add a task according to some parameters
+2.  TaskBoss adds the new task. <br>
+Use case ends
+
+**Extensions**
+
+1a. User input is invalid
+
+> 1a1. TaskBoss shows an error message <br>
+Use case ends
+
+1b. The category user enters does not match the existing categories
+
+> 1b1. TaskBoss shows an error message <br>
+> 1b2. TaskBoss adds the new task without the category <br>
+Use case ends
+
+1c. User enters incorrect format for time and date
+
+> 1c1. TaskBoss shows an error message with the expected input format <br>
+> 1c2. TaskBoss adds the new task without time and date <br>
+Use case ends
+
+1d. Start time and end time are the same
+
+> 1d1. TaskBoss shows an error message <br>
+> 1d2. TaskBoss adds the new task without time and date <br>
+Use case ends
+
+1e. Start time is later than end time
+
+> 1e1. TaskBoss shows an error message <br>
+> 1e2. TaskBoss adds the new task without time and date <br>
+Use case ends
+  
+#### Use case: List all tasks
+
+**MSS**
+
+1.  User requests to list all tasks
+2.  TaskBoss displays all tasks. <br>
 Use case ends.
 
 **Extensions**
 
-2a. The list is empty
+1a.  No tasks to display
 
-> Use case ends
+> 1a1. TaskBoss shows “No tasks to display” message <br>
+Use case ends
 
-3a. The given index is invalid
+#### Use case: Edit a task
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+**MSS**
 
-{More to be added}
+1.  User requests to edit certain attribute(s) of a task
+2.  TaskBoss updates the task. <br>
+Use case ends
+
+**Extensions**
+
+1a. The given task index is invalid
+
+> 1a1. TaskBoss shows an error message <br>
+Use case ends
+
+#### Use case: Delete a task
+
+**MSS**
+
+1.  User requests to delete a task
+2.  TaskBoss deletes the specific task the user requests for. <br>
+Use case ends
+
+**Extensions**
+
+1a. The given task index is invalid
+
+> 1a1. TaskBoss shows an error message <br>
+Use case ends
+
+#### Use case: Mark task as done
+
+**MSS**
+
+1. User requests to mark a task as done
+2. TaskBoss adds the task to the ‘Done’ section, and removes it from ‘All Tasks’ and the task’s category. <br>
+Use case ends
+
+**Extensions**
+
+1a. The given task index is invalid
+
+> 1a1. TaskBoss shows an error message. <br>
+Use case ends
+
+
+#### Use case: Sort tasks by deadline
+
+**MSS**
+
+1. User requests to sort tasks by deadline
+2. TaskBoss displays list of tasks sorted by deadline. <br>
+Use case ends.
+
+#### Use case: Undo previous command
+
+**MSS**
+
+1. User requests to undo previous command
+2. TaskBoss undoes previous command and returns to a state before the previous command. <br>
+Use case ends
+
+**Extensions**
+
+2a. Previous command is invalid
+
+> 2a1. TaskBoss shows "cannot undo" error message. <br>
+Use case ends. 
+
+#### Use case: Export tasks to an existing file
+
+**MSS**
+
+1. User requests to export tasks to an existing file for data storage
+2. TaskBoss changes the storage location, and saves all existing data into the new file. <br>
+Use case ends
+
+**Extensions**
+
+2a. The given file path cannot be accessed
+
+> 2a1. TaskBoss shows an error message. <br>
+Use case ends.
+
+2b. The given file path does not exist
+
+> 2b1. TaskBoss shows an error message. <br>
+Use case ends.
+
+#### Use case: Export tasks to a new file
+
+**MSS**
+
+1. User requests to export tasks to a new file for data storage, specifying the file path and the new file name
+2. TaskBoss saves all existing data into the new file. <br>
+Use case ends
+
+**Extensions**
+
+2a. The given file path cannot be accessed
+
+> 2a1. TaskBoss shows "Cannot access file path" error message.<br>
+ Use case ends.
+ 
+#### Use case: Search tasks
+
+**MSS**
+
+1. User requests to search task by keyword (keyword from description, task title, or deadline)
+2. TaskBoss displays list of tasks containing keyword. <br>
+Use case ends
+
+**Extensions**
+
+3a. The task does not exist
+
+> 3a1. TaskBoss shows “0 tasks found” message. <br>
+Use case ends.
+ 
+#### Use case: List tasks by category
+
+**MSS**
+
+1. User requests to list tasks by specified category
+2. TaskBoss displays all tasks of the category that user requests. <br>
+Use case ends
+
+**Extension**
+
+3a. The category does not exist
+
+> 3a1. TaskBoss shows “0 tasks found” message. <br>
+Use case ends.
+
+#### Use case: Create new category
+
+**MSS**
+
+1. User requests to create a new category and specifies name
+2. TaskBoss creates category. <br>
+Use case ends.
+
+**Extensions**
+
+1a. Category name already exists
+
+> 1a1. TaskBoss shows error message “Category already exists”. <br>
+Use case ends.
+
+#### Use Case: Edit category name
+
+**MSS**
+
+1. User requests to edit category name
+2. TaskBoss updates the category name.<br>
+Use case ends.
+
+**Extensions**
+
+1a. Category to be edited does not exist.
+		
+> 1a1. TaskBoss shows error message “Category does not exist”. <br>
+Use case ends.
+
+#### Use case: Exit TaskBoss
+
+**MSS**
+
+1. User requests to exit the TaskBoss application
+2. TaskBoss exits. <br>
+User case ends.
+
+#### Use case: Clear tasks under certain category
+
+**MSS**
+
+1. User requests to clear all tasks of certain category
+2. TaskBoss clears all tasks of the specified category. <br>
+Use case ends.
+
+**Extensions**
+
+1a. The category user enters does not match the existing categories.
+
+> 1a1. TaskBoss shows an error message. <br>
+Use case ends.
+
+#### Use case: Display help guide
+
+**MSS**
+
+1. User requests for help guide
+2. TaskBoss displays help guide
+3. User types any key in the command line
+4. Help guide disappears. <br>
+Use case ends
+
+#### Use case: View a specific task
+
+**MSS**
+
+1. User requests to view a specific task
+2. TaskBoss displays the task user requests. <br>
+Use case ends
+
+**Extensions**
+
+1a. The given task index is invalid
+
+> 1a1. TaskBoss shows an error message.<br>
+Use case ends  
+
 
 ## Appendix C : Non Functional Requirements
 
-1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
-   should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-{More to be added}
+1. Should handle at least 100 tasks.
+2. Should work without Internet connection.
+3. Should have an intuitive user interface.
+4. Should start up in less than  2 seconds.
+5. Should respond to commands in less than 1 second.
+6. Should come with automated unit tests and open source code.
+ 
 
 ## Appendix D : Glossary
 
-##### Mainstream OS
+##### Priority level
 
-> Windows, Linux, Unix, OS-X
+> A number between 1 and 3 inclusive that indicates how urgent a task is
 
-##### Private contact detail
+##### Task index
 
-> A contact detail that is not meant to be shared with others
+> A number assigned to each tasks to ease referrals when deleting or editing.
+
+##### Category
+
+> A way to classify each type of task.
+
+##### Done tasks
+
+> Tasks that have been completed.
+
+##### Previous command
+
+> The last executed command.
+
+{add more here}
 
 ## Appendix E : Product Survey
 
-**Product Name**
+####Google Keep
 
-Author: ...
+Author: Al Sharef Haya Fayez M
 
-Pros:
+**Pros:**
 
-* ...
-* ...
+1. Uses sticky notes to record tasks
+2. Has colorful UI
+3. Provides instant capturing of anything by speech and pictures
+4. Able to be integrated with Google Drive and Google Docs
+5. Free to use 
+6. No need to set up an account
+7. Supports offline editing 
+8. Supports undo option <br>
 
-Cons:
+**Cons:**
 
-* ...
-* ...
+1. Does not support calendar view
+2. Hard to organize large amount of notes
+3. Unable to categorize tasks
+4. Does not support short-cut typed commands
+5. Depends on mouse clicks <br>
 
+####MeisterTask
+
+Author: Tan Wei
+
+**Pros:**
+
+1. Has beautiful user interface
+2. Free for personal use
+3. Supports third-party application integrations (eg. Google, Dropbox)
+4. Available across most platforms (Web app, Android, OS X)
+5. Can enable task relationships <br>
+
+**Cons:**
+
+1. Does not support monthly calendar view
+2. Unable to set recurring tasks
+3. Unable to set reminders
+4. Tasks are in card-view. Can be hard to track large amount of tasks.  <br>
+
+####Just
+
+Author: Xu RuoLan
+
+**Pros:**
+
+1. Has simple and clear user interface
+2. Provides statistical analysis to track daily/monthly/yearly statistics
+3. Support tasks categorizing 
+4. Easy to use(add, delete and sort the tasks)
+5. Supports priority setting
+6. Supports task reminders <br>
+
+**Cons:**
+
+1. Hard to search if the to-do list is long <br>
+
+####Persoda
+
+Author: Soh Wei Kiat Melvin
+
+**Pros:**
+
+1. Provides secure accounts and protected password 
+2. Has user-friendly interface
+3. Provides a wide range of functions
+4. Requires users to pay per usage
+5. Supports task reminders/hierarchy 
+6. Supports instant messaging teams within users <br>
+
+**Cons:**
+
+1. Might be confusing to new users as features are based off different price plans <br>
