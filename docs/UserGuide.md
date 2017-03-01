@@ -131,7 +131,7 @@ Examples:
 ### 2.5. Finding all tasks by Name/Date/Information: `find`
 
 Finds tasks whose names contain any of the given keywords.<br>
-Format: `find n/TASK_NAME` `find ed/END_DATE` `find kw/KEYWORD`
+Format: `find n/TASK_NAME` `find ed/END_DATE` `find i/imformation`
 
 > * The search is case-sensitive. e.g `Project` will not match `project`
 > * The order of the keywords does not matter. e.g. `meeting project` will match `project meeting`
