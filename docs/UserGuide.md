@@ -6,8 +6,21 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 1. [Quick Start](#1-quick-start)
 2. [Features](#2-features)
+    1. [Viewing help](#viewing-help--help)
+    2. [Adding a new task](#adding-a-new-task--add-do)
+    3. [Listing tasks](#listing-tasks--list-ls)
+    4. [Finding all tasks containing any search key in their descriptioin](#finding-all-tasks-containing-any-search-key-in-their-description--find)
+    5. [Deleting tasks](#deleting-tasks--delete)
+    6. [Marking tasks as finished](#marking-tasks-as-finished--finish)
+    7. [Editing an existing task](#editing-an-existing-task--edit)
+    8. [Listing all the tags](#listing-all-the-tags--list-tag-ls-tag)
+    9. [Undoing the previous commands](#undoing-the-previous-commands--undo)
+    10. [Clearning all entries](#clearing-all-entries--clear)
+    11. [Exiting the program](#exiting-the-program--exit)
+    12. [Changing the storage destination](#changing-the-storage-destination--save-at)
+    13. [Saving the data](#saving-the-data)
 3. [FAQ](#3-faq)
-4. [Command Summary](#4-command-summary)
+4. [Command Summary](#4-command-summary) 
 
 ## 1. Quick Start
 
@@ -48,13 +61,13 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 > * Key-value pairs can be in any order.
 > * Tags cannot have space.
 
-### 2.1. Viewing help : `help`
+### Viewing help : `help`
 
 Format: `help`
 
 > Help is also shown if the command format is invalid. e.g. `abcd`
  
-### 2.2. Adding a new task: `add`, `do`
+### Adding a new task : `add`, `do`
 
 Adds a new task into the to-do list<br>
 Format 1: `(add|do) TASK_DESCRIPTION [\from START_TIME] [\to END_TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]`  
@@ -75,7 +88,7 @@ Examples:
 * `do group meeting \from 4pm today \to 6pm today \remind_at 3pm \as important \under school_work CS2103T`
 * `add submit pre-tutorial activities \by 6pm this Wednesday \remind_at 5pm this Wednesday \every week`
 
-### 2.3. Listing tasks : `list`, `ls`
+### Listing tasks : `list`, `ls`
 
 Displays a list of tasks.<br>
 Format 1: `(list|ls) [TYPE] [\from TIME] [\to TIME] [\under TAG]`  
@@ -92,7 +105,7 @@ Examples:
 * list \in this week
 * list finished \from 1st March \to 20th March \under internship
 
-### 2.4. Finding all tasks containing any search key in their description: `find`
+### Finding all tasks containing any search key in their description : `find`
 
 Finds tasks whose description contain any of the given search keys.<br>
 Format: `find 'KEY' ['KEY'...]`
@@ -109,7 +122,7 @@ Examples:
 * `find 'hiking'`
 * `find 'CS2103T' 'group meeting' 'project'`
 
-### 2.5. Deleting tasks : `delete`
+### Deleting tasks : `delete`
 
 Deletes the specified tasks from to-do list. Irreversible.<br>
 Format: `delete INDEX [INDEX...]`
@@ -127,7 +140,7 @@ Examples:
   `delete 1`<br>
   Deletes the 1st task in the results of the `find` command.
   
-### 2.6. Mark tasks as finished : `finish`
+### Marking tasks as finished : `finish`
 
 Mark the specified tasks as finished.<br>
 Format: `finish INDEX [INDEX...]`
@@ -146,7 +159,7 @@ Examples:
   `finish 1`<br>
   Mark the 1st task in the results of the `find` command as finished.
   
-### 2.7. Edit an existing task : `edit`
+### Editing an existing task : `edit`
 
 Edit the specified task.<br>
 Format 1: `edit INDEX [\desc TASK_DESCRIPTION] [\from START_TIME] [\to END_TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]`  
@@ -161,27 +174,27 @@ Examples:
   it will be change to `watch NBA`.
   The remind time will also be updated to the specified one: `this Sunday 8am`.
 
-### 2.8. List all the tags : `list_tag`, `ls_tag`
+### Listing all the tags : `list_tag`, `ls_tag`
 
 Displays a list of all tags.<br>
 Format: `(list_tag|ls_tag)`  
 
-### 2.9. Undo the previous commands : `undo`
+### Undoing the previous commands : `undo`
 
 Undo the command previous to the current command.<br>
 Format: `undo`  
 
-### 2.10. Clearing all entries : `clear`
+### Clearing all entries : `clear`
 
 Clears all entries from the to-do list.<br>
 Format: `clear`  
 
-### 2.11. Exiting the program : `exit`
+### Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`  
 
-### 2.12. Change the storage destination : `save_at`
+### Changing the storage destination : `save_at`
 
 Change the storage path to the specified one.<br>
 Format: `save_at PATH`
@@ -189,7 +202,7 @@ Format: `save_at PATH`
 Examples: 
 * `save_at C:\Users\admin\Desktop\todolist.xml`
 
-### 2.13. Saving the data 
+### Saving the data 
 
 Address book data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
