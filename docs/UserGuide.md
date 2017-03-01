@@ -96,7 +96,7 @@ Examples:
 
 * `view 1`
 
-## 2.8. Finding all tasks containing any keyword in the task name: `find -`
+## 2.8. Finding all tasks containing any keyword in the task name: `find`
 
 Finds tasks that satisfy given parameters
 Format: find [-n KEYWORDS] [-o KEYWORDS] [-d DATE]
