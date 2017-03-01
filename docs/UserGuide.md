@@ -47,13 +47,13 @@ Format: `help`
 ### 2.2. Adding a todo: `add`
 
 Adds a task<br>
-Format: `add task TODO
+Format: `add task TODO`
 
 Adds an event<br>
-Format: 'add event TODO s/STARTTIME e/ENDTIME'
+Format: `add event TODO s/STARTTIME e/ENDTIME`
 
 Adds a deadline<br>
-Format: 'add deadline TODO d/DEADLINE'
+Format: `add deadline TODO d/DEADLINE`
 
 Examples:
 
@@ -205,3 +205,4 @@ There is no need to save manually.
 
 * **Select** : `select INDEX` <br>
   e.g.`select 2`
+  
