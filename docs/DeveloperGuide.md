@@ -382,16 +382,30 @@ Priority | As a ... | I want to ... | So that I can...
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `myPotato` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: Add a task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
+1. User request to add a task
+2. myPotato shows the list with added task
+
+**Extension**
+
+1a. The command is invalid
+
+> 1a1. myPotato shows the list of command help
+> Use case ends
+
+#### Use case: Delete a task
+
+**MSS**
+
+1. User requests to list all tasks
+2. myPotato shows a list of persons
 3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+4. myPotato deletes the person <br>
 Use case ends.
 
 **Extensions**
@@ -402,27 +416,25 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. AddressBook shows an error message <br>
+> 3a1. myPotato shows an error message <br>
   Use case resumes at step 2
-  
-(For all use cases below, the **System** is the `myPotato` and the **Actor** is the `user`, unless specified otherwise)
 
 #### Use Case: Sort tasks by date
 
 **MSS**
 
 1. User choose a date;
-2. The system show all the tasks in that day;
+2. myPotato show all the tasks in that day;
 3. User type in command sort;
-4. System sort the tasks according to deadlines;
-5. System shows the list of tasks according to deadlines;
+4. myPotato sort the tasks according to deadlines;
+5. myPotato shows the list of tasks according to deadlines;
 Use case ends.
 
 **Extensions**
 
 2a. If there is no task in that day
 
-> 2a1. System shows an error message <br>
+> 2a1. myPotato shows an error message <br>
 
 3a.If there are more than one tasks sharing the same deadline:
 
@@ -501,7 +513,7 @@ Pros:
 * Sync Email directly into Calendar. Jim will be able to schedule his tasks.
 * Integrated search function for finding emails, contacts, date. Jim will be able to find a specific task.
 * Portable
-* Retrieve others’ calendars for references
+* Retrieve othersï¿½ calendars for references
 
 Cons:
 
@@ -509,4 +521,20 @@ Cons:
 * Little support to run on Linux-based system
 * Too much functionalities and may be complex for users to use. Confusing for Jim.
 
+**Wunderlist**
 
+Author: My Duy Hoang Long
+
+Pros:
+
+* Subtasks can be created for each task
+* Tags can be added to each task using hashtag
+* Allow natural language input
+* Simple and friendly UI
+* Support multiple platforms
+* Share list with other people. Since Jim work alone, this function might not be useful for Jim.
+
+Cons:
+
+* Sync process slow down the application
+* Sync with Google Calendar and Outlook may not work properly
