@@ -347,26 +347,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | user | add a new task|
+`* * *` | user | delete a task | remove tasks that I have completed.
+`* * *` | user | delete multiple task| remove multiple tasks that I have completed.
+`* * *` | user | edit a task | update relevant information about the task
+`* * *` | user | search for a task | see detailed information about the task.
+`* * *` | user | update the status of a task | view completed or pending tasks. 
+`* * *` | user | see upcoming tasks | see what needs to be done soon.
+`* *` | user | categorize a task | organize the tasks.
+`* *` | user | favourite tasks | keep track of important tasks.
+`* *` | user | see alerts on upcoming tasks | complete time sensitive tasks.
 
 {More to be added}
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Task Manager` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: Delete a task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User requests to list tasks
+2. Task manager shows a list of completed and not completed tasks.
+3. User requests to delete a specific task in the list
+4. Task manager deletes the task <br>
 Use case ends.
 
 **Extensions**
@@ -375,9 +380,25 @@ Use case ends.
 
 > Use case ends
 
-3a. The given index is invalid
+3a. The given task name is invalid
 
-> 3a1. AddressBook shows an error message <br>
+> 3a1. Task manager shows an error message <br>
+  Use case resumes at step 2
+
+#### Use case: Add a new task
+
+**MSS**
+
+1. User requests to add a task
+2. Task manager shows dialouge box for users to enter task details.
+3. Task shows up in list.<br>
+Use case ends.
+
+**Extensions**
+
+3a. The tasks is invalid format
+
+> 3a1. Task manager shows an error message <br>
   Use case resumes at step 2
 
 {More to be added}
@@ -385,7 +406,7 @@ Use case ends.
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 100 tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
 
@@ -397,23 +418,39 @@ Use case ends.
 
 > Windows, Linux, Unix, OS-X
 
-##### Private contact detail
-
-> A contact detail that is not meant to be shared with others
-
 ## Appendix E : Product Survey
 
-**Product Name**
+**Couple**
 
-Author: ...
+Author: Jacob
 
 Pros:
 
-* ...
-* ...
+* Can edit tasks by clicking on the task itself 
+* Can create categories for tasks
+* Can visually cross out a completed task, similar to a sheet of paper
+* Can favorite specific tasks
 
 Cons:
 
-* ...
-* ...
+* Cannot search for a task
+* Can only have a limited number of tasks
+* Cannot set a deadline for when the task must be completed
+* Cannot write a description for the task
+
+## Appendix E : Product Survey
+
+**Begin**
+
+Author: Edwin
+
+Pros:
+
+* Has simplistic view of tasks with 3 lists, today, tommorrow and yesterday.  
+* Easy to use interface
+
+Cons:
+
+* unable to manage tasks that stretches for more than 3 days.
+* unable to see previousl completed tasks.
 
