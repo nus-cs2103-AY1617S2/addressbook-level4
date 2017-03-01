@@ -1,14 +1,14 @@
 # Doist - Developer Guide
 
-By : `CS2103T Group 1 Team 4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
-1. [Setting Up](#setting-up)
-2. [Design](#design)
-3. [Implementation](#implementation)
-4. [Testing](#testing)
-5. [Dev Ops](#dev-ops)
+1. [Setting Up](#1-setting-up)
+2. [Design](#2-design)
+3. [Implementation](#3-implementation)
+4. [Testing](#4-testing)
+5. [Dev Ops](#5-dev-ops)
 
 * [Appendix A: User Stories](#appendix-a--user-stories)
 * [Appendix B: Use Cases](#appendix-b--use-cases)
@@ -57,7 +57,7 @@ By : `CS2103T Group 1 Team 4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp
 6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
 7. Click OK twice. Rebuild project if prompted
 
-> Note to click on the `files from packages` text after ticking in order to enable the `Change...` button
+> Note to click on the `files from packages` text after ticking in order to enable the `Change...` button  
 
 ### 1.4. Troubleshooting project setup
 
@@ -72,7 +72,6 @@ By : `CS2103T Group 1 Team 4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp
 * Reason: Required libraries may not have been downloaded during the project import.
 * Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries).
 
-
 ## 2. Design
 
 ### 2.1. Architecture
@@ -83,136 +82,7 @@ _Figure 2.1.1 : Architecture Diagram_
 The **_Architecture Diagram_** given above explains the high-level design of the App.
 Given below is a quick overview of each component.
 
-> Tip: The `.pptx` files used to create diagrams in this document can be found in the [diagrams](diagrams/) folder.
-> To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
-
-`Main` has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java). It is responsible for,
-
-* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
-* At shut down: Shuts down the components and invokes cleanup method where necessary.
-
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
-Two of those classes play important roles at the architecture level.
-
-* `EventsCenter` : This class (written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained))
-  is used by components to communicate with other components using events (i.e. a form of _Event Driven_ design)
-* `LogsCenter` : Used by many classes to write log messages to the App's log file.
-
-The rest of the App consists of four components.
-
-* [**`UI`**](#ui-component) : The UI of the App.
-* [**`Logic`**](#logic-component) : The command executor.
-* [**`Model`**](#model-component) : Holds the data of the App in-memory.
-* [**`Storage`**](#storage-component) : Reads data from, and writes data to, the hard disk.
-
-Each of the four components
-
-* Defines its _API_ in an `interface` with the same name as the Component.
-* Exposes its functionality using a `{Component Name}Manager` class.
-
-For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java`
-interface and exposes its functionality using the `LogicManager.java` class.<br>
-<img src="images/LogicClassDiagram.png" width="800"><br>
-_Figure 2.1.2 : Class Diagram of the Logic Component_
-
-#### Events-Driven nature of the design
-
-The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
-command `delete 1`.
-
-<img src="images\SDforDeletePerson.png" width="800"><br>
-_Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
-
->Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed,
- instead of asking the `Storage` to save the updates to the hard disk.
-
-The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
-being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
-<img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
-_Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
-
-> Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
-  to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
-  coupling between components.
-
-The sections below give more details of each component.
-
-### 2.2. UI component
-
-Author: Alice Bee
-
-<img src="images/UiClassDiagram.png" width="800"><br>
-_Figure 2.2.1 : Structure of the UI Component_
-
-**API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
-
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
-`StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
-
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
- that are in the `src/main/resources/view` folder.<br>
- For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
- [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
-
-The `UI` component,
-
-* Executes user commands using the `Logic` component.
-* Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
-* Responds to events raised from various parts of the App and updates the UI accordingly.
-
-### 2.3. Logic component
-
-Author: Bernard Choo
-
-<img src="images/LogicClassDiagram.png" width="800"><br>
-_Figure 2.3.1 : Structure of the Logic Component_
-
-**API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
-
-1. `Logic` uses the `Parser` class to parse the user command.
-2. This results in a `Command` object which is executed by the `LogicManager`.
-3. The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
-4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
-
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
- API call.<br>
-<img src="images/DeletePersonSdForLogic.png" width="800"><br>
-_Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
-
-### 2.4. Model component
-
-Author: Cynthia Dharman
-
-<img src="images/ModelClassDiagram.png" width="800"><br>
-_Figure 2.4.1 : Structure of the Model Component_
-
-**API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
-
-The `Model`,
-
-* stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
-* exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
-  so that the UI automatically updates when the data in the list change.
-* does not depend on any of the other three components.
-
-### 2.5. Storage component
-
-Author: Darius Foong
-
-<img src="images/StorageClassDiagram.png" width="800"><br>
-_Figure 2.5.1 : Structure of the Storage Component_
-
-**API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
-
-The `Storage` component,
-
-* can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
-
-### 2.6. Common classes
-
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Work in progress.
 
 ## 3. Implementation
 
@@ -332,84 +202,259 @@ Here are the steps to convert the project documentation files to PDF format.
 
 ### 5.6. Managing Dependencies
 
-A project often depends on third-party libraries. For example, Address Book depends on the
+A project often depends on third-party libraries. For example, Doist depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
 can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
 is better than these alternatives.<br>
 a. Include those libraries in the repo (this bloats the repo size)<br>
 b. Require developers to download those libraries manually (this creates extra work for developers)<br>
 
+
 ## Appendix A : User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
 
-
-Priority | As a ... | I want to ... | So that I can...
--------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
-
-{More to be added}
+Priority | As a ... | I want to ... |So that I can ...
+-------- | :------- | :------------ | :-----------
+**`* * *`** | user | create a new task with a optional start time, optional end time, optional reminder time, optional recurrence interval and ranked priority | create an priortised event, deadline or a floating task that might be recurring
+**`* * *`** | user | view the details of a task | see details of a task such as recurrance interval
+**`* * *`** | user | see a list of pending, overdue or finished tasks separately
+**`* * *`** | user | edit task properties
+**`* * *`** | user | mark a task as “Finished”
+**`* * *`** | user with many tasks |  find tasks using keywords (appearing in titles or in description) | easily find the task
+**`* * *`** | user | view all commands that I can use with detailed instructions, including examples
+**`* * *`** | user that makes mistakes | undo my last action(s) | revert to the previous state
+**`* * *`** | user | delete multiple tasks at the same time by their indices
+**`* * *`** | user | change the storage directory (path) | decide where the storage file will be saved
+**`* *`** | user | delete all tasks listed under a tag
+**`* *`** | user | create or delete a new tag
+**`* *`** | user | add or delete tags for a specific task | better filter the tasks
+**`* *`** | user | see a list of tasks within a specified time interval
+**`* *`** | user | see a list of all tasks with a specific tag | filter tasks by tag
+**`* *`** | user |  recover a certain task in the “Trash Bin”
+**`* *`** | user | use arrow key to see the previous commands I execute | I can re-execute the past commands conveniently without manually typing them
+**`* *`** | user | I want an error message to appear at the feedback textbox | I know what error occured
+**`*`** | user | rename existing commands | customise to the ones I am more used to
+**`*`** | user | reset all changes to existing commands | return to using the default commands
+**`*`** | user | I want the keywords in the command to be highlighted
+**`*`** | user | I want the auto-completion / content-assistant of the keywords when I am typing
+**`*`** | user | create a new task by entering the date in a “natural language” way | it feels more natural when typing
+**`*`** | user | see my “Trash Bin” that consists of deleted tasks | view and/or recover them
+**`*`** | user | see my tasks on Google Calendar | integrate tasks with Google Calendar
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the System is Doist and the Actor is the user, unless specified otherwise)
 
-#### Use case: Delete person
+### Use Case: Add a new task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User types in the command for adding a new task and specifies the parameters.
+2. Doist adds a new task, and displays a success message
+
 Use case ends.
 
 **Extensions**
 
-2a. The list is empty
+2a. The command format is invalid
 
+>2a1. Doist shows an error message
+>Use case ends
+
+2b. The given input is invalid
+
+> 2b1. Doist shows an error message
+  Use case ends
+
+### Use Case: List all tasks
+
+**MSS**
+
+1. User types in the command to list tasks
+2. Doist list tasks, and displays a success message
+
+Use case ends.
+
+**Extensions**
+
+2a. The command format is invalid
+
+>2a1. Doist shows an error message
+>Use case ends
+
+2b. There are no tasks currently stored
+
+> 2b1. Doist shows an appropriate message
+  Use case ends
+
+
+### Use Case: Edit an existing task
+
+**MSS**
+
+1. User types in the command to edit a task
+2. Doist updates the task, and displays a success message
+
+Use case ends.
+
+**Extensions**
+
+2a. The command format is invalid
+
+>2a1. Doist shows an error message
+>Use case ends
+
+2b. The task does not exist
+
+> 2b1. Doist shows an appropriate message
 > Use case ends
 
-3a. The given index is invalid
+2c. The new properties are invalid
+> 2c1. Doist shows and appropriate message
+> Use case ends
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+### Use Case: Delete a task
 
-{More to be added}
+**MSS**
+
+1. User types in the command to delete a task
+2. Doist deletes the task, and displays a success message
+
+Use case ends.
+
+**Extensions**
+
+2a. The command format is invalid
+
+>2a1. Doist shows an error message
+>Use case ends
+
+2b. The task does not exist
+
+> 2b1. Doist shows an appropriate message
+> Use case ends
+
+### Use Case: Undo a command
+
+**MSS**
+
+1. User types in the command to undo the previous mutating command
+2. Doist performs the undo, and displays a success message
+
+Use case ends.
+
+**Extensions**
+
+2a. The command format is invalid
+
+>2a1. Doist shows an error message
+>Use case ends
+
+2b. There is no previous mutating command
+
+> 2b1. Doist shows an appropriate message
+> Use case ends
+
+### Use Case: Mark task as finished
+
+**MSS**
+
+1. User types in the command to mark a task as finished
+2. Doist marks the task as finished, and displays a success message
+
+Use case ends.
+
+**Extensions**
+
+2a. The command format is invalid
+
+>2a1. Doist shows an error message
+>Use case ends
+
+2b. Task is already finished
+
+> 2b1. Doist shows an appropriate message
+> Use case ends
+
+### Use Case: Find a task
+
+**MSS**
+
+1. User types in the command to find a task
+2. Doist shows the task, and displays a success message
+
+Use case ends.
+
+**Extensions**
+
+2a. The command format is invalid
+
+>2a1. Doist shows an error message
+>Use case ends
+
+2b. The task does not exist
+
+> 2b1. Doist shows an appropriate message
+> Use case ends
+
+2c. There are multiple potential matches
+
+>2c1. Show all possible matches
+>Use case ends
+
+### Use Case: Change file storage location
+
+**MSS**
+
+1. User types in the command to change file storage location
+2. Doist shows the task, and displays a success message
+
+Use case ends.
+
+**Extensions**
+
+2a. The command format is invalid
+
+>2a1. Doist shows an error message
+>Use case ends
+
+2b. The specified file path is invalid
+
+> 2b1. Doist shows an appropriate message
+> Use case ends
+
+2c. There already exists a file (that is not a valid storage file) with the same name at that path
+
+> 2b1. Doist shows an appropriate message
+> Use case ends
+
 
 ## Appendix C : Non Functional Requirements
 
-1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
-   should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. It is a desktop app.
-5. Have multiple UI themes
-6. Come with automated unit tests.
-7. Run fast enough by responding to a user’s command on the command line interface within 5 secs
-8. Be open source.
-9. Have flexible commands that accept variations
-10. Allow user to customise default commands
-11. Show tags and priority of tasks in a user-friendly, obvious way
-12. Allow user to change storage folder directory
-13. Mouse actions should have keyboard alternatives and typing is preferred over key combinations. Command-line is the best choice of input.
-14. Commands should be easy to learn.
-15. The data should be stored locally in the form of a human editable text file.
-16. The software should work without requiring an installer.
-17. Send reminders by pop-ups
-18. Can have tasks across days, weeks, months, years, centuries...
+- The project should work on any mainstream OS as long as it has Java 8 or higher installed
+- It is a desktop app
+- Have multiple UI themes
+- Come with automated unit tests
+- Be able to hold up to 1000 tasks
+- Run fast enough by responding to a user’s command on the command line interface within 5 secs
+- Be open source
+- Have flexible commands that accept variations
+- Allow user to customise default commands
+- Show tags and priority of tasks in a user-friendly, obvious way
+- Allow user to change storage folder directory
+- Mouse actions should have keyboard alternatives and typing is preferred over key combinations. Command-line is the best choice of input
+- Commands should be easy to learn.
+- The data should be stored locally in the form of a human editable text file
+- The software should work without requiring an installer
+- Send reminders by pop-ups
+- Can have tasks across days, weeks, months, years, centuries...
 
-   See the rest of the NFRs at:
-   http://www.comp.nus.edu.sg/~cs2103/AY1617S2/contents/handbook.html#handbook-project-constraints
+See the rest of the NFRs at:
+http://www.comp.nus.edu.sg/~cs2103/AY1617S2/contents/handbook.html#handbook-project-constraints
 
 ## Appendix D : Glossary
-
-**2.1 Task**
+**Task**
 - Properties
     - `Description`
     - `Priority`
@@ -423,9 +468,9 @@ Use case ends.
     - `Priority`
     There are three priorities: High, Medium, Low. By default, tasks are low priority.
     - `Tags`
-    Tags are independent of tasks. Tags and tasks have a many-to-many relationship where zero or more tags can be added to a task and zero or more tasks can be related to a tag
-    - `Reminder`
-    Would be sent to the user using a pop-up at the `reminder time`
+    Tags are independent of tasks. Tags and tasks have a many-to-many relationship where zero or more tags can be added to a task and zero or more tasks can be listed under a tag
+    - `Recurrence interval`
+    Specifies the interval at which user wants to be reminded of a recurring task
 - Special Types
     - `Event`
     A task with different `start time` and `end time`. It represents tasks to be carried out over a period of time
@@ -442,24 +487,101 @@ Use case ends.
     - `Recurring task`
     A task with a `recurring interval` set. A new task will automatically be cloned from this task, with the recurring interval added to the task’s `start time`, `end time` and `reminder time` when a task is marked as `Finished` or becomes `Overdue`
 
-**2.2 Mutating Command**
+**Mutating Command**
     Any command which causes a change in the state of apps (E.g. add, delete, finished)
 
-**2.3 Mainstream OS**
+**Mainstream OS**
     Windows, Linux, Unix, OS-X
 
 ## Appendix E : Product Survey
 
-**Product Name**
+**Remember the Milk**
 
-Author: ...
+Author: Lee Yan Hwa
 
 Pros:
 
-* ...
-* ...
+* Almost “natural language” command-line interface to enter tasks
+* Neat UI to display tasks and view different types of tasks (Finished, Overdue, Not finished, Due today, Tomorrow, This Week, Trash)
+* Tasks are automatically added to Smart Lists according to criterias set by user
+* Has subtasks
+* Has all the normal features of a task manager such as due-date, mark as finished, notes, priority, different sorting methods, tagging, postponing, recurring tasks
+* Able to share tasks and collaborate with others
+* Available for use on many different platforms (Mobile, PC)
+
 
 Cons:
 
-* ...
-* ...
+* Some of the best features like subtasks is pro-only
+* Doesn’t have support for handwritten tasks, drawings, images, calendar view
+* Reminder timing cannot be customised
+* No attachment of files
+
+**Wunderlist**
+
+Author:  Ram Janarthan
+
+Pros:
+
+* Has a good user interface that feels nice to use
+* Can provide context for each tasks, by allowing attachment of files
+* Easy sharing for multiple users, supports collaboration very well
+* Allows for subtasks, and also reminders for tasks
+* Tasks are very user-customisable
+* Automatically fixes reminders if it detects dates in the input
+* Available for use on many different platforms (Mobile, PC)
+
+
+Cons:
+
+* Pro version is quite expensive
+* There is no dedicated ‘Sync’ button
+    * Setup is a bit lengthy, and may require you to download the mobile version as well
+
+
+
+
+**Google tasks**
+
+Author: Yuyang Luo
+
+Pros:
+
+* It is integrated with Google Calendar, so you can check your tasks in the Calendar view
+* There is support for groups (assign tasks into groups)
+* Users can sort tasks in chronological order
+
+
+
+Cons:
+
+* There is no official mobile apps (neither for Android nor iOS)
+* Only support plain text
+* The webapp UI is not well-designed
+* There is no support for labels
+* There is no support for task priority in the official webapp (some third-party apps add this feature)
+* Almost all the third-party mobile apps are paid
+* There is no support for reminder in the official webapp (some third-party apps add this feature)
+* Users can only set the deadline, which is a date for the task, cannot set the specific time
+* There is no support for searching feature
+
+**Google Keep**
+
+Author: Yuyang Luo
+
+Pros:
+
+* Cross-platform: chrome extension, mobile app for iOS and Android, web app
+* The interface are well-designed (similar to sticky notes)
+* There is support for labels
+* Users can pin certain notes or reminders to be shown at the top
+* Can insert images and hand-drawing
+* Users can search for notes and reminders
+
+
+
+
+Cons:
+
+* There is no support for priority
+* There is no support for sorting (by priority, by deadline)
