@@ -25,7 +25,7 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
    * **`list`** : lists all tasks
-   * **`add Buy the milk \from 3pm \to 5pm`**:
+   * **`add Buy the milk \from 3pm \to 5pm`**:  
      adds an event with a description of "Buy the milk" from upcoming 3pm to 5pm
    * **`delete 3`** : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
@@ -57,7 +57,7 @@ Format: `help`
 ### 2.2. Adding a new task: `add`, `do`
 
 Adds a new task into the to-do list<br>
-Format 1: `(add|do) TASK_DESCRIPTION [\from START_TIME] [\to END_TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]` 
+Format 1: `(add|do) TASK_DESCRIPTION [\from START_TIME] [\to END_TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]`  
 Format 2: `(add|do) TASK_DESCRIPTION [\by TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]` 
 
 > - Tasks can have any number of tags (including 0)
@@ -78,7 +78,7 @@ Examples:
 ### 2.3. Listing tasks : `list`, `ls`
 
 Displays a list of tasks.<br>
-Format 1: `(list|ls) [TYPE] [\from TIME] [\to TIME] [\under TAG]`
+Format 1: `(list|ls) [TYPE] [\from TIME] [\to TIME] [\under TAG]`  
 Format 2: `(list|ls) [TYPE] [\in STRING_REPRESENTING_TIME_INTERVAL] [\under TAG]`
 
 > - `TYPE` can be `pending`, `overdue`, `finished`
@@ -149,7 +149,7 @@ Examples:
 ### 2.7. Edit an existing task : `edit`
 
 Edit the specified task.<br>
-Format 1: `edit INDEX [\desc TASK_DESCRIPTION] [\from START_TIME] [\to END_TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]`
+Format 1: `edit INDEX [\desc TASK_DESCRIPTION] [\from START_TIME] [\to END_TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]`  
 Format 2: `edit INDEX [\desc TASK_DESCRIPTION] [\by TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]`
 
 > The rule for `edit` command is the same as `add` command
@@ -202,50 +202,49 @@ There is no need to save manually.
        
 ## 4. Command Summary
 
-* **Add** : 
+* **Add** :  
   `(add|do) TASK_DESCRIPTION [\from START_TIME] [\to END_TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]` <br>
   `(add|do) TASK_DESCRIPTION [\by TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]` <br>
   e.g. `add James Ho p/22224444 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 
-* **Clear** : 
+* **Clear** :  
   `clear` <br>
-  `save_at C:\Users\admin\Desktop\todolist.xml`
   
-* **Change storage path** : 
-  `save_at PATH`
-  e.g.
+* **Change storage path** :  
+  `save_at PATH`  
+  e.g. `save_at C:\Users\admin\Desktop\todolist.xml`
   
-* **Delete** : 
+* **Delete** :  
   `delete INDEX [INDEX...]` <br> 
    e.g. `delete 3 4 5`
   
-* **Edit** : 
+* **Edit** :  
   `edit INDEX [\desc TASK_DESCRIPTION] [\from START_TIME] [\to END_TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]` <br>
   `edit INDEX [\desc TASK_DESCRIPTION] [\by TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]` <br>
   e.g. `edit 1 \desc watch NBA \remind_at this Sunday 8am`
 
-* **Exit** : 
+* **Exit** :  
   `exit`
    
-* **Find** : 
+* **Find** :  
   `find KEYWORD [MORE_KEYWORDS]` <br>
   e.g. `find 'test' 'midterm'`
   
-* **List** : 
+* **List** :  
   `(list|ls) [TYPE] [\from TIME] [\to TIME] [\under TAG]` <br>
   `(list|ls) [TYPE] [\in STRING_REPRESENTING_TIME_INTERVAL] [\under TAG]` <br>
   e.g. `ls pending \in this month \under internship`
 
-* **List tags** : 
+* **List tags** :  
   `(list_tag|ls_tag)`
   
-* **Help** : 
+* **Help** :  
   `help`
 
-* **Undo** : 
+* **Undo** :  
   `undo`
   
-* **Mark as finished** : 
-  `finish INDEX [INDEX...]`
+* **Mark as finished** :  
+  `finish INDEX [INDEX...]`  
   e.g. `finish 1 8`
   
