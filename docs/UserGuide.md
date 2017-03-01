@@ -25,8 +25,8 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
    * **`list`** : lists all tasks
-   * **`add`**`  laundry due/every sunday #/personal d/wash clothes *f`:
-     adds a task named `laundry` which is repeating every sunday under list `personal` with description `wash clothes` and star it favourite to Dueue.
+   * **`add`**`  add laundry due/every sunday #/personal d/wash clothes @B1 *f:
+     adds a task to Dueue named `laundry` which is repeating every sunday under list `personal` with description `wash clothes` at venue `B1` and star it favourite.
    * **`delete`**` 3` : deletes the task with index 3 as shown in the current list
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
@@ -54,6 +54,7 @@ Format: `add TASKNAME [due/DUEDATE] [t/TIME] [#/LISTNAME] [d/DESCRIPTION] [@VENU
 > Tasks cannot have multiple lists<br>
 > Due dates of tasks can repeating, e.g. every sunday<br>
 > Time of each task can only be one time point, e.g. 4pm
+> Specifications of fields for task can be entered in any order
 
 Examples:
 
