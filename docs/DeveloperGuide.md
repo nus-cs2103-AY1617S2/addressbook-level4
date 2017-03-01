@@ -346,27 +346,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | new user | see usage instructions |  refer to instructions when I forget how to use the App
+`* * *` | user | add a new task |
+`* * *` | user | delete a task | remove tasks that are no longer relevant
+`* * *` | user | find a task by name | locate details of task without having to go through the entire list
+`* * *`| user | edit a parameter of a task | update a task without needing to delete and re adding it
+`* *`| user | list tasks in order of due date | prioritize what to do next
+`* *`| user | mark tasks as important | prioritize what to do next
+`*`| user | print out all tasks | keep a paper copy when there is no computer access
 
 {More to be added}
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `DoTomorrow` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: Delete task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User requests to list all tasks
+2. DoTomorrow shows a list of tasks
+3. User requests to delete a specific task in the list
+4. DoTomorrow deletes the task <br>
 Use case ends.
 
 **Extensions**
@@ -377,19 +379,64 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. AddressBook shows an error message <br>
+> 3a1. DoTomorrow shows an error message <br>
   Use case resumes at step 2
 
-{More to be added}
+#### Use case: Edit task
+
+**MSS**
+
+1. User requests a list of all tasks
+2. DoTomorrow shows a list of all tasks
+3. User requests changes to a certain parameter of a specific task
+4. DoTomorrow changes the requested parameter of the task and displays the updated item to the user
+Use case ends.
+
+**Extensions**
+
+3a. The given index is invalid
+
+> 3a1. DoTomorrow shows an error message <br>
+  Use case resumes at step 2
+
+#### Use case: Add task
+
+**MSS**
+
+1. User enters the task with optional parameters
+2. DoTomorrow parses task and stores it to memory, then displays the task with formatted parameters back to user
+Use case ends.
+
+**Extensions**
+
+2a. Parameters are entered in the wrong format
+
+> 2a1. DoTomorrow shows an error message and an example of correct formatting
+> Use case resumes at step 1
+
+#### Use case: Undo last action
+
+**MSS**
+
+1. User enters undo command
+2. DoTomorrow display command to be undone, and undoes the command
+Use case ends.
+
+**Extensions**
+
+2a. There is no previous action
+
+> Use case ends.
 
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands).
    should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-{More to be added}
+4. All classes and public methods should have documentation.
+5. All commands should be completed within 200ms.
+6. 80% test coverage.
 
 ## Appendix D : Glossary
 
@@ -397,23 +444,69 @@ Use case ends.
 
 > Windows, Linux, Unix, OS-X
 
-##### Private contact detail
-
-> A contact detail that is not meant to be shared with others
-
 ## Appendix E : Product Survey
 
-**Product Name**
+**Wunderlist**
 
-Author: ...
+Author: 6 Wunderkinder GmbH
 
 Pros:
 
-* ...
-* ...
+* Can star tasks so important tasks to be easily found.
+* Can parse natural language, ex., “Task A due Wednesday” will be converted to a task with the name Task A and the upcoming Wednesday as the due date.
+* Supports subtasks, comments, and attachments for richer task details.
+* Has reminders to user can be notified before a due date.
+* Entry of tasks is very quick.
 
 Cons:
 
-* ...
-* ...
+* No calendar view to schedule tasks
 
+**Trello**
+
+Author: Fog Creek Software
+
+Pros:
+
+* Organize according to lists within a board (kanban)
+* Tags on an item for organization across lists
+* Due dates for reminding users when things have to be finished
+* Calendar view to see what is due today/this week/this month
+* Subtasks (checklists) for breaking down what needs to be done to complete the item
+* Can subscribe to changes of a task so users know when collaborators update the tasks
+* Task descriptions to provide more information about the task
+* Collaborative - multiple people can share boards
+* Commenting for conversations about tasks
+* Add attachments (e.g. PDFs) for additional information
+* Can filter cards for quickly finding tasks based on tags
+* Integrates into other apps (e.g. Github, Dropbox, etc.)
+* Can email tasks to a board to allow non-collaborators to add tasks (e.g. for customer support)
+
+Cons:
+
+* Takes longer to add complex tasks; no natural language input
+* Keyboard shortcuts are slow to move around with
+* Cards are narrow so long descriptions have line wraps
+* Can get cluttered with too many "done" tasks
+
+**Reminder**
+
+Author: Apple Inc
+
+Pros:
+
+* simple ui design, easy to learn to use
+* can set due dates for alert
+* well integrated with notification center on the iPhone (can see tasks and check off for the day)
+* can sync with other apple products
+* has a search filter
+* data can be backed up on iCloud
+
+Cons:
+
+* Only 1 dimension of lists (cannot create lists within lists)
+* can only filter by dates (cannot filter by categories, due dates, etc)
+* Very limited application, low customizability
+* Cannot integrate with other technologies
+* Only available for iPhone users
+* Only for a single user (cannot collaborate)
