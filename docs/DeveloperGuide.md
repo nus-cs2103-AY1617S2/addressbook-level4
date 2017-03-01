@@ -392,6 +392,11 @@ Use case ends.
 {More to be added}
 
 ## Appendix D : Glossary
+1. Event: Task that has a start time and an end time
+2. Deadline: Task that has to be completed before a specific deadline
+3. Floating Tasks: Task that has no specific timing attached
+4. Simple Search: Search for items by keywords in the item title and item description
+5. CRUD: Create, Read, Update, Delete
 
 ##### Mainstream OS
 
@@ -403,17 +408,50 @@ Use case ends.
 
 ## Appendix E : Product Survey
 
-**Product Name**
+**Remember the Milk**
 
-Author: ...
+Pros: 
 
-Pros:
-
-* ...
-* ...
+1. Available on almost any platform.
+2. Natural language input
+3. Can set as many reminders as you want on multiple platforms
+4. Includes collaboration and sharing features
 
 Cons:
 
-* ...
-* ...
+1. Pro version with the more impressive features is expensive (most importantly push notifications are only available in the pro version.)
+2. Lacks location based reminders
+
+**Google Inbox**
+
+Pros:
+
+1. Organize your emails like it is a to-do list
+2. Automatic sorting of emails (tasks) into bundles
+3. Snooze emails which will pop-up later like its new
+4. Support for classic to-do tasks (Reminders)
+5. Supported on most platforms
+6. Free
+
+Cons:
+
+1. Tied to Google ecosystem
+2. Requires a change in workflow regarding emails
+3. Reminders are limited
+
+**Any.do**
+
+Pros:
+ 
+1. Automatically syncs across platforms
+2. Suggestive typing & voice input
+3. Timed reminders as well as recurring tasks
+4. Able to have multiple lists for different tasks
+
+Cons:
+
+1. Freemium model is somewhat restrictive:
+2. Limited moments
+3. Location based reminders unavailable
+
 
