@@ -3,13 +3,19 @@
 By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
+1. [Introduction](#introduction)
+2. [Quick Start](#quick-start)
+3. [Features](#features)
+4. [FAQ](#faq)
+5. [Command Summary](#command-summary)
 
-1. [Quick Start](#quick-start)
-2. [Features](#features)
-3. [FAQ](#faq)
-4. [Command Summary](#command-summary)
+## 1. Introduction 
+Welcome. We will take you for an enthralling journey as we bring forward our task manager 
 
-## 1. Quick Start
+It can help you manage events, deadlines, add tasks with or without deadlines or view your history. This is a great amanager if you are looking to move away from clicking as the simplified scheduling is just a few short and sweet command lines away.
+
+
+## 2. Quick Start
 
 0. Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
 
@@ -32,7 +38,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
 
-## 2. Features
+## 3. Features
 
 > **Command Format**
 >
@@ -47,113 +53,149 @@ Format: `help`
 
 > Help is also shown if you enter an incorrect command e.g. `abcd`
 
-### 2.2. Adding a person: `add`
+### 2.2. Adding a item: `add`
 
-Adds a person to the address book<br>
-Format: `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Adds an event, task <br>
+**Format(event)**: `add event[start datetime] to [end datetime] [t/TAG]...`<br>
+**Format(task with deadline)**:`add task [end datetime]`<br>
+**Format(task without deadline)**:`add task `<br>
 
-> Persons can have any number of tags (including 0)
-
-Examples:
-
-* `add John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01`
-* `add Betsy Crowe t/friend e/betsycrowe@gmail.com a/Newgate Prison p/1234567 t/criminal`
-
-### 2.3. Listing all persons : `list`
-
-Shows a list of all persons in the address book.<br>
-Format: `list`
-
-### 2.4. Editing a person : `edit`
-
-Edits an existing person in the address book.<br>
-Format: `edit INDEX [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
-
-> * Edits the person at the specified `INDEX`.
-    The index refers to the index number shown in the last person listing.<br>
-    The index **must be a positive integer** 1, 2, 3, ...
-> * At least one of the optional fields must be provided.
-> * Existing values will be updated to the input values.
-> * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-> * You can remove all the person's tags by typing `t/` without specifying any tags after it. 
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@yahoo.com`<br>
-  Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@yahoo.com` respectively.
+* `add Cs2103 meeting 3 Mar 17:00 to 18:00`
+* `add Buy tickets 3 mar 17:00`
+* `add Take GF for dinner`
 
-* `edit 2 Betsy Crower t/`<br>
-  Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+### 2.3 View : `View`
 
-### 2.5. Finding all persons containing any keyword in their name: `find`
+View task with deadline or without deadlines, View tasks to be completed by specific deadline,
+View list of events in time frame, View the overdue task, view last action, view done, view history 
 
-Finds persons whose names contain any of the given keywords.<br>
+**View task with deadline**: ` Viewd task`
+
+Example 
+
+* ` Viewd class Hw`
+
+**View task without deadline**: `View task`
+
+Example:
+* `View Dinner`
+
+**View task to be completed by deadline** :`View task by date`
+
+Example:
+* ` View class HW by 5 Mar`
+
+**View list of event in time frame** :` View event [start time] to [End time]`
+
+Example:
+* `View Boss meeting 17:00 to 18:00`
+
+
+**View overdue task** : `View over`
+
+
+**View last action** : `View last`
+
+
+**View completed task**: `View done`
+
+
+**View history**: `view history`
+
+**View the calendar**: `view calendar`
+
+**View freetime** : `view free [daily/weekly/monthly]`
+
+
+
+
+
+### 2.3. Update : `Update`
+
+**Update by name**: `Update task/event name [New name]`
+
+**Update by description**: `Update task/event desc [Description]`
+
+**Update Event by location**: `Update event location [Location]`
+
+**Update Event by time**: `Update event time [Time]`
+
+**Update task by priority**:` Update task Priority [1...10]`
+
+**Update task by deadline** :` Update task Deadline [New Date]`
+
+
+### 2.4 Sorting : `Sort`
+
+**Sort tasks** : `Sort taskname By Name/Priority/deadline`
+
+**Sort events**: `Sort Eventname By Name/Start date`
+
+
+
+
+### 2.5. Finding event or task by keyword: `find`
+
+Finds task/Events whose names/decription contain any of the given keywords.<br>
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-> * The search is case sensitive. e.g `hans` will not match `Hans`
-> * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-> * Only the name is searched.
-> * Only full words will be matched e.g. `Han` will not match `Hans`
-> * Persons matching at least one keyword will be returned (i.e. `OR` search).
-    e.g. `Hans` will match `Hans Bo`
+
 
 Examples:
 
-* `find John`<br>
-  Returns `John Doe` but not `john`
-* `find Betsy Tim John`<br>
-  Returns Any person having names `Betsy`, `Tim`, or `John`
+* `find cs2103`<br>
+  Returns any task or event pertaining to cs2103
 
-### 2.6. Deleting a person : `delete`
+### 2.6. Deleting a task/event: `delete`
 
-Deletes the specified person from the address book. Irreversible.<br>
-Format: `delete INDEX`
 
-> Deletes the person at the specified `INDEX`. <br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+Format: `delete task/event name `
 
 Examples:
 
-* `list`<br>
-  `delete 2`<br>
-  Deletes the 2nd person in the address book.
-* `find Betsy`<br>
-  `delete 1`<br>
-  Deletes the 1st person in the results of the `find` command.
+* `delete cs2103 lab 2`<br>
+  Deletes the above task.
 
-### 2.7. Select a person : `select`
 
-Selects the person identified by the index number used in the last person listing.<br>
-Format: `select INDEX`
 
-> Selects the person and loads the Google search page the person at the specified `INDEX`.<br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+### 2.7. Clearing all expired task/event : `clear`
 
-Examples:
-
-* `list`<br>
-  `select 2`<br>
-  Selects the 2nd person in the address book.
-* `find Betsy` <br>
-  `select 1`<br>
-  Selects the 1st person in the results of the `find` command.
-
-### 2.8. Clearing all entries : `clear`
-
-Clears all entries from the address book.<br>
 Format: `clear`
 
-### 2.9. Exiting the program : `exit`
+### 2.8. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.10. Saving the data
+### 2.9. Saving the data
 
 Address book data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
+
+### 2.10 Recyle 
+
+Brings back the expired events back to active list 
+
+Format : `Recycle Task/event name`
+
+### 2.11 Undo 
+
+Undo the last command
+
+Format : `Undo`
+
+### 2.12 Files 
+
+**Add a new file**: `New Filename`
+
+**Switch between files**: `Goto Filename`
+
+
+
+
 
 ## 3. FAQ
 
