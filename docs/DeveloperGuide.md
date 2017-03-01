@@ -347,10 +347,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the TaskBoss
-`* * *` | user | add tasks to record tasks that I need to get done |
+`* * *` | user | add tasks | record tasks that I need to get done |
 `* * *` | user | delete tasks | get rid of tasks that I no longer need
 `* * *` | user | edit tasks | update any outdated information
-`* * *` | user | see a list of all the tasks |
+`* * *` | user | see a list of all the tasks | view all my pending tasks in a single view
 `* * *` | user | mark my tasks as done | keep track of the task status
 `* * *` | user | set deadlines for tasks that have due dates | track the urgency of any given task
 `* * *` | user | sort the tasks based on their deadlines | know the most urgent tasks to address
@@ -362,17 +362,17 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user | set priority levels for each of my tasks | give my attention to tasks without deadlines that are urgent
 `* *` | user | see my tasks sorted based on priority | check what I need to do urgently
 `* *` | user | categorize my tasks | keep my tasks organized
-`* *` | user | see the tasks under a specific category | 
-`* *` | user | see the tasks that I’ve completed or have yet to be addressed | 
+`* *` | user | see the tasks under a specific category | better manage my pending tasks
+`* *` | user | see the tasks that I have completed | re-trace my completed tasks if need be
 `* *` | user | create categories | add tasks under specific categories
 `* *` | user | view a specific task | focus on that task
 `* *` | user | clear all tasks under a specific category | delete a bulk of tasks at one time
 `*` | user | set recurring tasks | not have to manually add the same task over and over again
-`*` | user | set reminders | reminded of tasks
-`*` | user | set locations | reminded of the location associated with the task
-`*` | user | add people | reminded of the people associated with the task
-`*` | user | create labels for tasks | reminded of the type of task
-`*` | user | redo a command after undoing a command | 
+`*` | user | set reminders | be reminded of tasks if need be
+`*` | user | set locations | check location of the task (if any)
+`*` | user | add people | check people associated with the task (if any)
+`*` | user | create labels for tasks | easily group certain similar tasks together
+`*` | user | redo a command after undoing a command | revert the state of TaskBoss if need be
 `*` | user | type shorter commands | execute commands faster
 `*` | user | integrate Google Calendar | see a monthly view of my tasks
 `*` | user | view all tasks that are between a specified date/time interval | not be distracted by other tasks meant for another time/date
