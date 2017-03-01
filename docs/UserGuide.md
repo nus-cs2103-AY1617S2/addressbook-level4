@@ -50,8 +50,10 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Adds a person to the address book<br>
-Format: `add NAME [t/TAG]...`
+Format: `add NAME [d/DEADLINE] [p/PRIORITY] [t/TAG]...`
 
+> Task can have a deadline
+> Task can have a priority ranking from 1 - 5
 > Task can have any number of tags (including 0)
 
 Examples:
@@ -62,12 +64,12 @@ Examples:
 ### 2.3. Listing all tasks : `list`
 
 Shows a list of all tasks in Opus.<br>
-Format: `list`
+Format: `list status/complete` for completed tasks, `list incomplete/` for incomplete tasks
 
 ### 2.4. Editing a task : `edit`
 
 Edits an existing task in Opus.<br>
-Format: `edit INDEX [NAME] [t/TAG]...`
+Format: `edit INDEX [NAME] [d/DEADLINE] [p/PRIORITY] [t/TAG]...`
 
 > * Edits the task at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
@@ -82,75 +84,56 @@ Examples:
 * `edit 1 Finish tutorial exercises`<br>
   Edits the name of the 1st task to `Finish tutorial exercises`.
 
-### 2.5. Finding all persons containing any keyword in their name: `find`
+### 2.5. Mark task
 
-Finds persons whose names contain any of the given keywords.<br>
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Marks task as complete.<br>
+Format: `mark [INDEX]...`
 
-> * The search is case sensitive. e.g `hans` will not match `Hans`
-> * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-> * Only the name is searched.
-> * Only full words will be matched e.g. `Han` will not match `Hans`
-> * Persons matching at least one keyword will be returned (i.e. `OR` search).
-    e.g. `Hans` will match `Hans Bo`
+> * Marks the task at all the specified `INDEX` as complete.
+    The index refers to the index number shown in the last task listing.<br>
+    The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 
-* `find John`<br>
-  Returns `John Doe` but not `john`
-* `find Betsy Tim John`<br>
-  Returns Any person having names `Betsy`, `Tim`, or `John`
+* `mark 3 4 5`<br>
+Marks tasks at index 3, 4 and 5 as complete.
 
-### 2.6. Deleting a person : `delete`
+### 2.6. Unmark task
 
-Deletes the specified person from the address book. Irreversible.<br>
-Format: `delete INDEX`
+Marks task as incomplete.<br>
+Format: `unmark [INDEX]...`
 
-> Deletes the person at the specified `INDEX`. <br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+> * Marks the task at all the specified `INDEX` as incomplete.
+    The index refers to the index number shown in the last task listing.<br>
+    The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 
-* `list`<br>
-  `delete 2`<br>
-  Deletes the 2nd person in the address book.
-* `find Betsy`<br>
-  `delete 1`<br>
-  Deletes the 1st person in the results of the `find` command.
+* `unmark 3 4 5`<br>
+Marks tasks at index 3, 4 and 5 as incomplete.
 
-### 2.7. Select a person : `select`
+### 2.7. Set deadline for task
 
-Selects the person identified by the index number used in the last person listing.<br>
-Format: `select INDEX`
+Sets a new deadline for task.<br>
+Format: `schedule INDEX DEADLINE`
 
-> Selects the person and loads the Google search page the person at the specified `INDEX`.<br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+> * Updates the task deadline at the specified `INDEX` as `DEADLINE`.
+    The index refers to the index number shown in the last task listing.<br>
+    The index **must be a positive integer** 1, 2, 3, ...
 
-Examples:
+### 2.8. Undo
 
-* `list`<br>
-  `select 2`<br>
-  Selects the 2nd person in the address book.
-* `find Betsy` <br>
-  `select 1`<br>
-  Selects the 1st person in the results of the `find` command.
+Undo the latest command.<br>
+Format: `undo`
 
-### 2.8. Clearing all entries : `clear`
+> * Reverts the change done by the command that was run previously.
 
-Clears all entries from the address book.<br>
-Format: `clear`
+### 2.9. Redo
 
-### 2.9. Exiting the program : `exit`
+Reverts the previous undo.<br>
+Format: `redo`
 
-Exits the program.<br>
-Format: `exit`
-
-### 2.10. Saving the data
-
-Address book data are saved in the hard disk automatically after any command that changes the data.<br>
-There is no need to save manually.
+> * Reverts the change done by the previous undo.
 
 ## 3. FAQ
 
