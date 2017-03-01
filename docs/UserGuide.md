@@ -25,7 +25,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
    * **`list`** : lists all tasks
-   * **`add`**`  laundry due/every sunday #/personal d/wash clothes f/f :
+   * **`add`**`  laundry due/every sunday #/personal d/wash clothes f/f`:
      adds a task named `laundry` which is repeating every sunday under personal list with description `wash clothes` and star it favourite to Dueue.
    * **`delete`**` 3` : deletes the task with index 3 as shown in the current list
    * **`exit`** : exits the app
