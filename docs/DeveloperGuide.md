@@ -216,12 +216,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... |So that I can ...
 -------- | :------- | :------------ | :-----------
-**`* * *`** | user | create a new task with a optional start time, optional end time, optional reminder time and optional recurrence interval | create an event, deadline or a floating task that might be recurring
-**`* * *`** | user | create a task with a ranked priority | prioritise important tasks
+**`* * *`** | user | create a new task with a optional start time, optional end time, optional reminder time, optional recurrence interval and ranked priority | create an priortised event, deadline or a floating task that might be recurring
 **`* * *`** | user | view the details of a task | see details of a task such as recurrance interval
 **`* * *`** | user | see a list of pending, overdue or finished tasks separately
 **`* * *`** | user | edit task properties
 **`* * *`** | user | mark a task as “Finished”
+**`* * *`** | user with many tasks |  find tasks using keywords (appearing in titles or in description) | easily find the task
 **`* * *`** | user | view all commands that I can use with detailed instructions, including examples
 **`* * *`** | user that makes mistakes | undo my last action(s) | revert to the previous state
 **`* * *`** | user | delete multiple tasks at the same time by their indices
@@ -231,7 +231,6 @@ Priority | As a ... | I want to ... |So that I can ...
 **`* *`** | user | add or delete tags for a specific task | better filter the tasks
 **`* *`** | user | see a list of tasks within a specified time interval
 **`* *`** | user | see a list of all tasks with a specific tag | filter tasks by tag
-**`* *`** | user with many tasks |  search for tasks using keywords (appearing in titles or in description) | easily find the task
 **`* *`** | user |  recover a certain task in the “Trash Bin”
 **`* *`** | user | use arrow key to see the previous commands I execute | I can re-execute the past commands conveniently without manually typing them
 **`* *`** | user | I want an error message to appear at the feedback textbox | I know what error occured
@@ -353,6 +352,27 @@ Use case ends.
 >Use case ends
 
 2b. There is no previous mutating command
+
+> 2b1. Doist shows an appropriate message
+> Use case ends
+
+### Use Case: Mark task as finished
+
+**MSS**
+
+1. User types in the command to mark a task as finished
+2. Doist marks the task as finished, and displays a success message
+
+Use case ends.
+
+**Extensions**
+
+2a. The command format is invalid
+
+>2a1. Doist shows an error message
+>Use case ends
+
+2b. Task is already finished
 
 > 2b1. Doist shows an appropriate message
 > Use case ends
