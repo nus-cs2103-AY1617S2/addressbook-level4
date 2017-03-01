@@ -12,7 +12,7 @@ import seedu.toluist.storage.Storage;
  */
 public class TodoList {
 
-    protected static Storage storage = new JsonStorage();
+    protected static Storage storage = JsonStorage.getInstance();
 
     private static TodoList currentTodoList = new TodoList();
 

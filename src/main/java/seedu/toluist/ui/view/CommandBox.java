@@ -6,11 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.util.FxViewUtil;
-import seedu.toluist.dispatcher.CommandDispatcher;
 import seedu.toluist.dispatcher.Dispatcher;
 import seedu.toluist.ui.UiManager;
-
-import javax.swing.*;
 
 public class CommandBox extends UiView {
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);

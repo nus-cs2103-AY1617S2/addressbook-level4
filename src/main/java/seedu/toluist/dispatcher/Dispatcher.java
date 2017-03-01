@@ -8,5 +8,5 @@ import seedu.toluist.ui.Ui;
  * the controller to dispatch the command to
  */
 public abstract class Dispatcher {
-    abstract public void dispatch(Ui renderer, String command);
+    public abstract void dispatch(Ui renderer, String command);
 }

@@ -17,8 +17,6 @@ import seedu.toluist.dispatcher.Dispatcher;
 import seedu.toluist.ui.Ui;
 import seedu.toluist.ui.UiManager;
 
-import javax.swing.*;
-
 /**
  * The main entry point to the application.
  */

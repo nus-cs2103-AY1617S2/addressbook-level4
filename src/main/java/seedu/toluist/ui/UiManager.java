@@ -14,7 +14,6 @@ import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.events.storage.DataSavingExceptionEvent;
 import seedu.toluist.commons.events.ui.ShowHelpRequestEvent;
 import seedu.toluist.commons.util.StringUtil;
-import seedu.toluist.dispatcher.CommandDispatcher;
 import seedu.toluist.dispatcher.Dispatcher;
 
 /**

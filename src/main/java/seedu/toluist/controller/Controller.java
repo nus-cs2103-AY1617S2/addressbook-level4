@@ -6,7 +6,6 @@ import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.storage.JsonStorage;
 import seedu.toluist.storage.Storage;
 import seedu.toluist.ui.Ui;
-import seedu.toluist.ui.UiManager;
 import seedu.toluist.ui.UiStore;
 
 

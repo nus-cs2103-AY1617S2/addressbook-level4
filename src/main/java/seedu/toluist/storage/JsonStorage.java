@@ -90,6 +90,7 @@ public class JsonStorage implements Storage {
      * @return
      */
     public Pair<TodoList, Integer> undo(int times) {
+        assert historyStack.size() >= 1;
         int steps = times;
         while (steps > 0 && historyStack.size() > 1) {
             redoHistoryStack.addLast(historyStack.pollLast());
