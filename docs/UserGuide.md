@@ -58,7 +58,7 @@ Examples:
 * `add -n Make payment -d 01/08/2017 -o Pay credit card bills -p`
 * `add -n Complete project -d 12/12/2017`
 
-## 2.3. Modifying a task: ‘update’
+## 2.3. Modifying a task: `update`
 
 Updates an existing task in the task list
 Format: update INDEX [-n TASKNAME] [-d DATE] [-o DESCRIPTION] [-p]
@@ -96,7 +96,7 @@ Examples:
 
 * `view 1`
 
-## 2.8. Finding all tasks containing any keyword in the task name: `find -’
+## 2.8. Finding all tasks containing any keyword in the task name: `find -`
 
 Finds tasks that satisfy given parameters
 Format: find [-n KEYWORDS] [-o KEYWORDS] [-d DATE]
