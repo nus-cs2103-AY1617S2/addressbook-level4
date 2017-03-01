@@ -198,10 +198,10 @@ Example:
 
 * `name School ModuleStudy`<br>
 
-### 2.11. Listing tasks by category : `ls`
+### 2.11. Listing tasks by category : `list`
 
 Lists all tasks under a specified category.<br>
-Format: `ls CATEGORY`
+Format: `list CATEGORY`
 
 Example:
 
@@ -279,8 +279,8 @@ Format: `save n/FILE_PATH NEW_FILE_NAME`
 
 * **List** : `list` <br>
 
-* **List by category** : `ls CATEGORY` <br>
-  e.g. `ls study`
+* **List by category** : `list CATEGORY` <br>
+  e.g. `list study`
 
 * **Help** : `help` <br>
 
