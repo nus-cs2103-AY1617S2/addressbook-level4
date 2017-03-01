@@ -243,24 +243,3 @@ HELP|`help`
 
 
 
-* **Add**  `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` <br>
-  e.g. `add James Ho p/22224444 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-
-* **Clear** : `clear`
-
-* **Delete** : `delete INDEX` <br>
-   e.g. `delete 3`
-
-* **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
-  e.g. `find James Jake`
-
-* **List** : `list` <br>
-  e.g.
-
-* **Help** : `help` <br>
-  e.g.
-
-* **Select** : `select INDEX` <br>
-  e.g.`select 2`
-
-
