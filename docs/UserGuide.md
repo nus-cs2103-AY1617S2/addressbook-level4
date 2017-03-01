@@ -284,7 +284,7 @@ Format: `save n/FILE_PATH NEW_FILE_NAME`
 * **Help** : `help` <br>
 
 * **Edit** : `edit INDEX [i/INFO] [sd/START_DATE] [ed/END_DATE] [st/START_TIME] [et/END_TIME] [c/CATEGORY] [p/PRIORITY_LEVEL]` <br>
-  e.g.`edit 1 i/CS2103T v0.0 ed/03-06-2017 c/study p/2`
+  e.g.`edit 1 i/Use Stack et/23:59`
 
 * **Undo** : `undo` <br>
 
