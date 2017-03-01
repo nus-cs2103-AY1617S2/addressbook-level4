@@ -346,27 +346,50 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | user | create a task without a specific start time and deadline | create a task with little details
+`* * *` | user | read my task
+`* * *` | user | add a new task |
+`* * *` | user | delete a task | remove entries that I no longer need
+`* * *` | user | update the details of a task
+`* * *` | user | undo recent action | fix my error quickly
+`* * *` | user | perform a text search for a task | find my task quickly
+`* * *` | user | see my task history | determine which tasks are done and which are not
+`* * *` | user | assign a task a due date
+`* *` | new user | see usage instructions | refer to instructions when I forget how to use the App
+`* *` | user | delete tasks by tag or category | delete tasks in batches
+`* *` | user | find a task by name | locate details of task without having to go through the entire list
+`*` | user with many tasks in the todo | sort tasks by category | locate a task easily
+`*` | user | notified if a task is due soon | start on the task
 
 {More to be added}
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Todo` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+
+### Use case: List tasks
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User requests to list tasks
+2. Todo shows a list of tasks
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+### Use case: Delete task
+
+**MSS**
+
+1. User requests to list tasks
+2. Todo shows a list of tasks
+3. User requests to delete a specific task in the list
+4. Todo deletes the task <br>
 Use case ends.
 
 **Extensions**
@@ -377,17 +400,83 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. AddressBook shows an error message <br>
+> 3a1. Todo shows an error message <br>
   Use case resumes at step 2
+
+### Use case: Reschedule task
+
+**MSS**
+
+1. User requests to list tasks
+2. Todo shows a list of tasks
+3. User requests to reschedule a specific task in the list with a new due date
+4. Todo reschedules the task <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given index is invalid
+
+> 3a1. Todo shows an error message <br>
+  Use case resumes at step 2
+
+### Use case: Completing a task
+
+**MSS**
+
+1. User requests to list tasks
+2. Todo shows a list of tasks
+3. User requests to mark a specific task in the list as complete
+4. Todo marks the task as complete <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given index is invalid
+
+> 3a1. Todo shows an error message <br>
+  Use case resumes at step 2
+
+3b. The given task is already marked as complete
+
+> 3b1. Todo shows an error message <br>
+  Use case resumes at step 2
+
+### Use case: Searching for a task
+
+**MSS**
+
+1. User requests to search for a task
+2. Todo searches for task with exact or similar names
+3. Todo lists the tasks that best match the search query
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
 
 {More to be added}
 
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should work with the command line.
+5. Program should boot up in less than 3 seconds.
+6. Should work without any third party extensions.
+7. Should not require an installer
 
 {More to be added}
 
@@ -403,17 +492,78 @@ Use case ends.
 
 ## Appendix E : Product Survey
 
-**Product Name**
+**Wunderlist**
 
-Author: ...
+Author: Wunderlist
 
 Pros:
 
-* ...
-* ...
+* Desktop, web and mobile app available with cloud sync (access from anywhere)
+* Desktop app supports keyboard shortcuts
+* Todo-list-style-app captures tasks that need to be done before/after a specific date/time or tasks without specific times
+* Able to add a task with just the keyboard (i.e. keyboard shortcut to add a new task and then key in the new task)
+* Operates with/without internet connectivity
+* Can prioritize/flag important tasks
+* Easy and intuitive to mark a completed task or to postpone an item
+* Feature to add notes to tasks
+* Notifications, due dates and reminders
+* Folders for categorizing and grouping similar tasks
+* Tagging to add more context to to-dos
+* Search support
+* Email and web plug-ins (e.g. turn emails into actions by forwarding * them) which accelerate the process of adding an email related task
+* Sub tasks
+* File attachments to a task
 
 Cons:
 
-* ...
-* ...
+* Unable to view schedule availability (i.e. no concept of open slot, busy slot, conflicts, etc.)
+* No calendar view so it is difficult to visually understand when tasks are due
 
+**Reminders**
+
+Author: Apple Inc.
+
+Pros:
+
+* Desktop, web and mobile app available with cloud sync (access from anywhere)
+* Siri and spotlight support (with 3rd party addon) that allows users to quickly add tasks with voice commands and spotlight commands respectively
+* Keyboard shortcuts
+* Operates with/without internet connectivity
+* Easy and intuitive to mark a completed task
+* Notifications, due dates and reminders
+* Categories/folders
+* Search support
+
+Cons:
+
+* Desktop and mobile apps only available for OSX
+* No intuitive way of postponing a task
+* Cannot add notes to tasks
+* Cannot add files/attachments to tasks
+* No email and web plug-in support
+* No sub tasks
+* Unable to view schedule availability
+* No calendar view
+* Cannot prioritize tasks
+
+**Fantastical**
+
+Author: Flexibits Inc.
+
+Pros:
+
+* Desktop, web and mobile app available with cloud sync
+* Keyboard shorcuts
+* Operates with/without internet connectivity
+* Calendar view to easily visualize calendar events, task deadlines, conflicts, etc.
+* Notifications, due dates and reminders
+* Categories and tags
+* Search support
+* Supports calendar events as well as todo tasks
+* Natural language processing
+
+Cons:
+* No email forwarding
+* Cannot add notes to tasks
+* No sub tasks
+* No file or attachment support
