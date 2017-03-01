@@ -385,11 +385,27 @@ Use case ends.
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. It is a desktop app.
+5. Have multiple UI themes
+6. Come with automated unit tests.
+7. Run fast enough by responding to a user’s command on the command line interface within 5 secs
+8. Be open source.
+9. Have flexible commands that accept variations
+10. Allow user to customise default commands
+11. Show tags and priority of tasks in a user-friendly, obvious way
+12. Allow user to change storage folder directory
+13. Mouse actions should have keyboard alternatives and typing is preferred over key combinations. Command-line is the best choice of input.
+14. Commands should be easy to learn.
+15. The data should be stored locally in the form of a human editable text file.
+16. The software should work without requiring an installer.
+17. Send reminders by pop-ups
+18. Can have tasks across days, weeks, months, years, centuries...
 
-{More to be added}
+   See the rest of the NFRs at:
+   http://www.comp.nus.edu.sg/~cs2103/AY1617S2/contents/handbook.html#handbook-project-constraints
 
 ## Appendix D : Glossary
 
@@ -416,4 +432,3 @@ Cons:
 
 * ...
 * ...
-
