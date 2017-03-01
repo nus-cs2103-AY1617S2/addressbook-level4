@@ -103,10 +103,10 @@ Examples:
 * `add Post-exam celebration i/@Zouk sd/10-03-2017 ed/11-03-2017 st/12:00 et/15:00 c/Leisure p/1`
 
 
-### 2.3. Listing all tasks : `ls`
+### 2.3. Listing all tasks : `list`
 
 Shows a list of all tasks in the TaskBoss.<br>
-Format: `ls`
+Format: `list`
 
 ### 2.4. Editing a task : `edit`
 
@@ -146,10 +146,10 @@ Examples:
 * `find ed/04-02-2017`<br>
   Returns all tasks with the end day `04-02-2017`
 
-### 2.6. Deleting a task : `del`
+### 2.6. Deleting a task : `delete`
 
 Deletes the specified task from the TaskBoss.<br>
-Format: `del INDEX`
+Format: `delete INDEX`
 
 > Deletes the task at the specified `INDEX`. <br>
 > The index refers to the index number shown in the most recent listing.<br>
@@ -262,7 +262,7 @@ Format: `save n/FILE_PATH NEW_FILE_NAME`
 * **Clear by Category** : `clear CATEGORY`
   e.g. `clear School`
 
-* **Delete** : `del INDEX` <br>
+* **Delete** : `delete INDEX` <br>
    e.g. `delete 3`
 
 * **Find by name** : `find n/TASK_NAME` <br>
@@ -278,7 +278,7 @@ Format: `save n/FILE_PATH NEW_FILE_NAME`
 
 * **Edit category** : `name EXISTING_CATEGORY NEW_CATEGORY` <br>
 
-* **List** : `ls` <br>
+* **List** : `list` <br>
 
 * **List by category** : `ls CATEGORY` <br>
   e.g. `ls study`
