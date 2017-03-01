@@ -25,12 +25,11 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
    * **`list`** : lists all tasks
-   * **`add`**`  laundry due/every sunday #/personal d/wash clothes f/f`:
-     adds a task named `laundry` which is repeating every sunday under personal list with description `wash clothes` and star it favourite to Dueue.
+   * **`add`**`  laundry due/every sunday #/personal d/wash clothes *f`:
+     adds a task named `laundry` which is repeating every sunday under list `personal` with description `wash clothes` and star it favourite to Dueue.
    * **`delete`**` 3` : deletes the task with index 3 as shown in the current list
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
-
 
 ## 2. Features
 
@@ -47,24 +46,34 @@ Format: `help`
 
 > Help is also shown if you enter an incorrect command e.g. `abcd`
 
-### 2.2. Adding a person: `add`
+### 2.2. Adding a task: `add`
 
-Adds a person to the address book<br>
-Format: `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Adds a task to Dueue<br>
+Format: `add TASKNAME [due/DUEDATE] [t/TIME] [#/LISTNAME] [d/DESCRIPTION] [@VENUE] [*f]`
 
-> Persons can have any number of tags (including 0)
+> Tasks cannot have multiple lists
+> Due dates of tasks can repeating, e.g. every sunday
+> Time of each task can only be one time point, e.g. 4pm
 
 Examples:
 
-* `add John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01`
-* `add Betsy Crowe t/friend e/betsycrowe@gmail.com a/Newgate Prison p/1234567 t/criminal`
+* `add laundry due/every sunday #/personal d/wash clothes @B1 *f`
+* `add 2103lecture due/every friday t/4pm #/study d/go for lecture @iCube`
 
 ### 2.3. Listing all persons : `list`
 
 Shows a list of all persons in the address book.<br>
 Format: `list`
+Format: `list lists`
+Format: `list list LISTINDEX`
+Format: `list favourite`
+Format: `list list LISTNAME`
 
-### 2.4. Editing a person : `edit`
+### 2.4. Creating a list : `create`
+
+### 2.5. Updating a list : `update list`
+
+### 2.6. Updating a task : `update`
 
 Edits an existing person in the address book.<br>
 Format: `edit INDEX [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
@@ -85,7 +94,7 @@ Examples:
 * `edit 2 Betsy Crower t/`<br>
   Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### 2.5. Finding all persons containing any keyword in their name: `find`
+### 2.7. View certain tasks: `view`
 
 Finds persons whose names contain any of the given keywords.<br>
 Format: `find KEYWORD [MORE_KEYWORDS]`
@@ -104,7 +113,7 @@ Examples:
 * `find Betsy Tim John`<br>
   Returns Any person having names `Betsy`, `Tim`, or `John`
 
-### 2.6. Deleting a person : `delete`
+### 2.8. Deleting a person : `delete`
 
 Deletes the specified person from the address book. Irreversible.<br>
 Format: `delete INDEX`
@@ -122,7 +131,7 @@ Examples:
   `delete 1`<br>
   Deletes the 1st person in the results of the `find` command.
 
-### 2.7. Select a person : `select`
+### 2.9. Switch to list mode : `switch`
 
 Selects the person identified by the index number used in the last person listing.<br>
 Format: `select INDEX`
@@ -140,17 +149,17 @@ Examples:
   `select 1`<br>
   Selects the 1st person in the results of the `find` command.
 
-### 2.8. Clearing all entries : `clear`
+### 2.10. Clearing all entries : `clear`
 
 Clears all entries from the address book.<br>
 Format: `clear`
 
-### 2.9. Exiting the program : `exit`
+### 2.11. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.10. Saving the data
+### 2.12. Saving the data
 
 Address book data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
@@ -163,8 +172,8 @@ There is no need to save manually.
 
 ## 4. Command Summary
 
-* **Add**  `add TASKNAME due/DUEDATE #/LISTNAME d/DESCRIPTION FAVOURITEORNOT` <br>
-  e.g. `add laundry due/every sunday #/personal d/wash clothes f/f`
+* **Add**  `add TASKNAME [due/DUEDATE] [#/LISTNAME] [d/DESCRIPTION] [@VENUE] [*f]` <br>
+  e.g. `add laundry due/every sunday #/personal d/wash clothes @B1 *f`
 
 * **Clear** : `clear`
 
