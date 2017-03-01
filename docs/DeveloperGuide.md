@@ -346,8 +346,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions |  refer to instructions when I forget how to use the App
-`* * *` | user | add a new task |
+`* * *` | new user | see [usage instructions](#usage-instructions) |  refer to instructions when I forget how to use the App
+`* * *` | user | add a new task | keep track of tasks I need to complete
 `* * *` | user | delete a task | remove tasks that are no longer relevant
 `* * *` | user | find a task by name | locate details of task without having to go through the entire list
 `* * *`| user | edit a parameter of a task | update a task without needing to delete and re adding it
@@ -432,7 +432,7 @@ Use case ends.
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands).
+3. A user with above average typing speed for regular English text (i.e. not code, not [system admin commands](#system-admin-commands)).
    should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. All classes and public methods should have documentation.
 5. All commands should be completed within 200ms.
@@ -443,6 +443,14 @@ Use case ends.
 ##### Mainstream OS
 
 > Windows, Linux, Unix, OS-X
+
+##### Usage Instructions
+
+> list of commands with instructions on how to use them appropriately
+
+##### System Admin Commands
+
+> shell commands used to perform system level tasks
 
 ## Appendix E : Product Survey
 
@@ -500,7 +508,7 @@ Pros:
 * well integrated with notification center on the iPhone (can see tasks and check off for the day)
 * can sync with other apple products
 * has a search filter
-* data can be backed up on iCloud
+* data can be backed up on [iCloud](https://support.apple.com/kb/ph2608?locale=en_US)
 
 Cons:
 
