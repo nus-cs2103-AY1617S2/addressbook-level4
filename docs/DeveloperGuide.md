@@ -346,27 +346,106 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | New user | See usage instructions | Refer to the instructions when i forget how to use the App
+`* * *` | user | Add a new task | Keep track of the task in the App
+`* * *` | user | Delete a task | Remove entries I no longer need
+`* * *` | user | Find a task by date | Locate task without having to go through the entire list
+`* * *` | user | Find a task by task name | Locate date of task without having to go through entire list
+`* * *` | user | Copy a task from one date to another | Assign the same task to another date
+`* * *` | user | Modify a task name | Update the task name in the App when the task name changes
+`* * *` | user | Modify a task details | Update the task details in the App when the task details changes
+`* * *` | user | Modify a task date | Update the task date in the App when the task date changes
+`* * *` | user | Set a task as private | Prevent others from seeing my schedule
+`* * *` | user | Undo the most recent command | Easily revert mistakes
+`* * *` | user | Specify the location for data storage | Store the tasks in an appropriate and/or secure location
+`* * *` | user | Specify the file for data storage | Store the tasks in an appropriate and/or secure location
+`* *` | user | Mark a task as completed | Will not do the same task twice
+`* *` | user | Assign priority to the task entry | Prioritize which task to be done first
+`*` | user | Sort the list of tasks by name | Locate a task by name easily 
+`*` | user | Sort the list of tasks by details | Locate a task by details easily 
+`*` | user | Sort the list of tasks by date | Locate a task by date easily 
+`*` | user | Delete all tasks in the App | Start a new list easily
+`*` | user | Add a single task to multiple dates at the same time | Waste less time
+`*` | user | Search for a list of tasks by priority | Find tasks by priority easily
+`*` | user | Sort the list of tasks by priority | Locate the important tasks to complete easily
+`*` | user | Redo the most recent command | Repeat a command easily
+`*` | user | Modify multiple task dates | Quickly update similar task deadlines easily
+`*` | user | Modify multiple task priorities | Quickly update similar task priority easily
+`*` | user | Be reminded of tasks that are due soon | Will not forget to do to task
+`*` | user | Be issued an appropriate task when i am free with only one command | Quickly get started on the task
+`*` | user | Have a quick display of the number of undone tasks | Have a rough gauge of how much I have left to be done
+`*` | user | Be able to set flexible deadlines (eg. This month, this week, today, tomorrow) | Easily set deadlines for my tasks
+`*` | user | Set username & password | Prevent others from seeing my schedule & modify my data
+`*` | user | Import my data from Google Calendar | Save time
+`*` | user | Have a backup of my tasks | Easily restore my tasks if the software is removed
+`*` | user | Export by tasks as a pdf,jpeg,...  | Print out my schedule when needed
 
-{More to be added}
-
+{More to be added} 
 ## Appendix B : Use Cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: Create task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User requests to add new task
+2. Application asks for confirmation to add new task
+3. User confirms to add new task
+4. Application adds new task
+Use case ends
+
+**Extensions**
+
+1a. User enters invalid input format
+
+> Application shows an error message
+  Use case resumes at step 1
+
+1b.   Task name and date already exists in list
+
+> Application notifies user that task already exists for the given date
+  Use case resumes at step 1
+
+3a.  User cancels add on of new task
+
+> Use case ends
+
+#### Use case: Update task
+
+**MSS**
+
+1. Use requests to list tasks
+2. Application shows a list of tasks
+3. User requests to update a specific task in the list
+4. Application updates the task and shows new changes
+Use case ends.
+
+**Extensions**
+
+2a. Task list is empty
+
+> Use case ends
+
+3a.   Invalid input format 
+
+> Application shows an error message
+  Use case resumes at step 2
+
+3b.   Task name and date already exists in list
+
+> Application notifies user that task already exists for the given date
+  Use case resumes at step 2
+
+
+#### Use case: Delete task
+
+**MSS**
+
+1. User requests to list tasks
+2. Application shows a list of tasks
+3. User requests to delete a specific task in the list
+4. Application deletes the task
 Use case ends.
 
 **Extensions**
@@ -377,17 +456,59 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. AddressBook shows an error message <br>
+> 3a1. Application shows an error message <br>
   Use case resumes at step 2
+
+#### Use case: Undo command
+
+**MSS**
+
+1. User requests to undo most recent command
+2. Application asks for confirmation to undo most recent command
+3. User confirms to undo most recent command
+4. Application undo most recent command
+Use case ends
+
+**Extensions**
+
+1a. There are no most recent commands that changes the data of task list
+
+> Application shows an error message
+> Use case ends
+
+3a.  User cancels undo most recent command
+
+> Use case ends
+
+#### Use case: Sort tasks list
+
+**MSS**
+
+1. User requests to list tasks by a certain order
+2. Application shows list of tasks by given order
+Use case ends
+
+**Extensions**
+
+1a. User inputs invalid order
+
+> Application displays error message
+  Use case resumes at step 1
+
+2a. Task list is empty
+
+> Application displays error message
+  Use case ends
 
 {More to be added}
 
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1024 tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should use only 10MB of memory or less. 
 
 {More to be added}
 
@@ -397,23 +518,73 @@ Use case ends.
 
 > Windows, Linux, Unix, OS-X
 
-##### Private contact detail
+##### Password
 
-> A contact detail that is not meant to be shared with others
+> String of characters that authenticates a user
+
+##### Username
+
+> String of characters that identifies a user
+
+##### Java (.java) file
+
+> Application file which stores the application
+
+##### Commands
+
+> Inputs that the user enters to interact with the application
+
+##### Hard drive
+
+> Data storage device
+
+##### Data 
+
+> Digital information that is stored/used by the application
+
+##### Megabyte (MB)
+
+> Multiple of data storage unit
+
+##### Memory
+
+> Temporary storage space for application to run
+
+##### MSS 
+
+> Main success scenario
+
+##### Storage space
+
+> Available space in hard disk
+
+##### Portable Document Format (PDF)
+
+> One type of file format
+
+##### Joint Photographics Expert Group (JPEG)
+
+> One type of image file format
 
 ## Appendix E : Product Survey
 
-**Product Name**
+**Wunderlist**
 
-Author: ...
+Author: Kristen
 
 Pros:
 
-* ...
-* ...
+* Calendar Feed, able to export to google calendar → If Jim still wishes to have a copy of his tasks on Google Calendar
+* Tasks need not necessarily need a deadline → Jim cannot decide when is a good time to complete the task. 
+* Easy input (using only task name) → Jim prefers a one shot approach
+* Subtasks function → Jim can include follow up action if needed
+* Desktop and mobile application → Jim wants a desktop software he can activate quickly
+* Notifications
+* Bookmark task function
+* Able to add notes to each task
+* Customisable themes
 
 Cons:
 
-* ...
-* ...
+* Requires subscription for unlimited subtasks, file uploads and assignment of tasks → not really applicable to Jim as it is a personal task manager
 
