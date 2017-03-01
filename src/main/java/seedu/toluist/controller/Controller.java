@@ -5,6 +5,7 @@ import java.util.HashMap;
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.storage.JsonStorage;
 import seedu.toluist.storage.Storage;
+import seedu.toluist.ui.Ui;
 import seedu.toluist.ui.UiManager;
 import seedu.toluist.ui.UiStore;
 
@@ -16,20 +17,21 @@ import seedu.toluist.ui.UiStore;
  */
 public abstract class Controller {
 
+    protected final Ui renderer;
+
     /**
      * Persistent storage to interact with the models
      */
     protected final Storage storage = JsonStorage.getInstance();
 
     /**
-     * Default renderer used to update the UI
-     */
-    protected final UiManager renderer = UiManager.getInstance();
-
-    /**
      * UiStore to store data to be used by Ui
      */
     protected final UiStore uiStore = UiStore.getInstance();
+
+    public Controller(Ui renderer) {
+        this.renderer = renderer;
+    }
 
     /**
      * Given a command string, execute the command

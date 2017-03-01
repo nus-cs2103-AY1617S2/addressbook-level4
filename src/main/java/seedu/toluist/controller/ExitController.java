@@ -3,6 +3,7 @@ package seedu.toluist.controller;
 import seedu.toluist.commons.core.EventsCenter;
 import seedu.toluist.commons.events.ui.ExitAppRequestEvent;
 import seedu.toluist.dispatcher.CommandResult;
+import seedu.toluist.ui.Ui;
 
 /**
  * Handle exit command
@@ -10,8 +11,13 @@ import seedu.toluist.dispatcher.CommandResult;
 public class ExitController extends Controller {
     private static final String COMMAND_TEMPLATE = "^exit$";
 
+    public ExitController(Ui renderer) {
+        super(renderer);
+    }
+
     public CommandResult execute(String command) {
-        EventsCenter.getInstance().post(new ExitAppRequestEvent());
+        renderer.stop();
+        // This result won't be displayed
         return new CommandResult("");
     }
 

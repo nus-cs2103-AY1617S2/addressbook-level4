@@ -9,6 +9,7 @@ import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.model.task.Task;
+import seedu.toluist.ui.Ui;
 import seedu.toluist.ui.UiStore;
 
 /**
@@ -33,6 +34,10 @@ public class TaskController extends Controller {
     private static final String DELETE_TASK_RESULT = "Task deleted";
 
     private Logger logger = LogsCenter.getLogger(getClass());
+
+    public TaskController(Ui renderer) {
+        super(renderer);
+    }
 
     public CommandResult execute(String command) {
         logger.info(getClass().getName() + "will handle command");

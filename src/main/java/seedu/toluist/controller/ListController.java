@@ -2,6 +2,7 @@ package seedu.toluist.controller;
 
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.TodoList;
+import seedu.toluist.ui.Ui;
 import seedu.toluist.ui.UiStore;
 
 /**
@@ -9,6 +10,10 @@ import seedu.toluist.ui.UiStore;
  */
 public class ListController extends Controller {
     private static final String RESULT_MESSAGE = "App loaded";
+
+    public ListController(Ui renderer) {
+        super(renderer);
+    }
 
     public CommandResult execute(String command) {
         TodoList todoList = TodoList.load();

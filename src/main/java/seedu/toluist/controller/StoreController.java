@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.dispatcher.CommandResult;
+import seedu.toluist.ui.Ui;
 
 /**
  * Responsible for storage-related task
@@ -17,6 +18,10 @@ public class StoreController extends Controller {
     private static final String COMMAND_RESULT_TEMPLATE = "Storage is changed %s";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
+
+    public StoreController(Ui renderer) {
+        super(renderer);
+    }
 
     public CommandResult execute(String command) {
         logger.info(getClass() + "will handle command");

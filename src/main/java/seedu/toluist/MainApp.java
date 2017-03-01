@@ -12,8 +12,12 @@ import seedu.toluist.commons.core.EventsCenter;
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.core.Version;
 import seedu.toluist.commons.events.ui.ExitAppRequestEvent;
+import seedu.toluist.dispatcher.CommandDispatcher;
+import seedu.toluist.dispatcher.Dispatcher;
 import seedu.toluist.ui.Ui;
 import seedu.toluist.ui.UiManager;
+
+import javax.swing.*;
 
 /**
  * The main entry point to the application.
@@ -24,6 +28,7 @@ public class MainApp extends Application {
     public static final Version VERSION = new Version(1, 0, 0, true);
 
     protected Ui ui;
+    protected Dispatcher dispatcher;
     protected Config config = new Config();
 
 
@@ -34,8 +39,9 @@ public class MainApp extends Application {
 
         initLogging(config);
 
+        dispatcher = new CommandDispatcher();
         ui = UiManager.getInstance();
-        ui.init(config);
+        ui.init(config, dispatcher);
 
         initEventsCenter();
     }

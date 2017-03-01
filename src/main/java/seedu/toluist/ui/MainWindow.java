@@ -13,6 +13,7 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import seedu.toluist.commons.events.ui.ExitAppRequestEvent;
+import seedu.toluist.dispatcher.Dispatcher;
 import seedu.toluist.model.task.Task;
 import seedu.toluist.ui.view.CommandBox;
 import seedu.toluist.ui.view.ResultView;
@@ -30,6 +31,7 @@ public class MainWindow extends UiPart<Region> {
     private static final int MIN_WIDTH = 450;
 
     private Stage primaryStage;
+    private Dispatcher dispatcher;
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
@@ -43,11 +45,12 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private AnchorPane resultDisplayPlaceholder;
 
-    public MainWindow (Stage primaryStage) {
+    public MainWindow (Stage primaryStage, Dispatcher dispatcher) {
         super(FXML);
 
         // Set dependencies
         this.primaryStage = primaryStage;
+        this.dispatcher = dispatcher;
 
         // Configure the UI
         setWindowMinSize();
@@ -69,7 +72,7 @@ public class MainWindow extends UiPart<Region> {
         taskList.setParent(getTaskListPlaceholder());
         taskList.render();
 
-        final CommandBox commandBox = new CommandBox();
+        final CommandBox commandBox = new CommandBox(dispatcher);
         commandBox.setParent(getCommandBoxPlaceholder());
         commandBox.render();
 

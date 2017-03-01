@@ -1,10 +1,12 @@
 package seedu.toluist.dispatcher;
 
+import seedu.toluist.ui.Ui;
+
 /**
  * Dispatcher is the bridge between the UI input & Controller
  * It acts like a Router in a MVC. From the input, it deduces what is the appropriate
  * the controller to dispatch the command to
  */
-public interface Dispatcher {
-    void dispatch(String command);
+public abstract class Dispatcher {
+    abstract public void dispatch(Ui renderer, String command);
 }

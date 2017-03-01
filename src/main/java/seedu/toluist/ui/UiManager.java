@@ -15,6 +15,7 @@ import seedu.toluist.commons.events.storage.DataSavingExceptionEvent;
 import seedu.toluist.commons.events.ui.ShowHelpRequestEvent;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.dispatcher.CommandDispatcher;
+import seedu.toluist.dispatcher.Dispatcher;
 
 /**
  * The manager of the UI component. Singleton
@@ -25,6 +26,7 @@ public class UiManager extends ComponentManager implements Ui {
 
     private MainWindow mainWindow;
     private Config config;
+    private Dispatcher dispatcher;
 
     public static UiManager getInstance() {
         if (instance == null) {
@@ -43,10 +45,10 @@ public class UiManager extends ComponentManager implements Ui {
         primaryStage.setTitle(config.getAppTitle());
 
         try {
-            mainWindow = new MainWindow(primaryStage);
+            mainWindow = new MainWindow(primaryStage, dispatcher);
             mainWindow.render();
             mainWindow.show();
-            CommandDispatcher.getInstance().dispatch("");
+            dispatcher.dispatch(this, "");
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
@@ -58,11 +60,14 @@ public class UiManager extends ComponentManager implements Ui {
         mainWindow.hide();
     }
 
-    public void init(Config config) {
+    public void init(Config config, Dispatcher dispatcher) {
         this.config = config;
+        this.dispatcher = dispatcher;
     }
 
     public void render() {
+        assert config != null;
+        assert dispatcher != null;
         mainWindow.render();
     }
 

@@ -13,44 +13,34 @@ import seedu.toluist.controller.RedoController;
 import seedu.toluist.controller.StoreController;
 import seedu.toluist.controller.TaskController;
 import seedu.toluist.controller.UndoController;
+import seedu.toluist.ui.Ui;
 
-public class CommandDispatcher implements Dispatcher {
-
-    private static CommandDispatcher instance;
-
-    public static CommandDispatcher getInstance() {
-        if (instance == null) {
-            instance = new CommandDispatcher();
-        }
-        return instance;
-    }
+public class CommandDispatcher extends Dispatcher {
 
     private final EventsCenter eventsCenter = EventsCenter.getInstance();
 
-    private CommandDispatcher() {}
-
-    public void dispatch(String command) {
-        final Controller controller = getBestFitController(command);
+    public void dispatch(Ui renderer, String command) {
+        final Controller controller = getBestFitController(renderer, command);
         final CommandResult feedbackToUser = controller.execute(command);
         eventsCenter.post(new NewResultAvailableEvent(feedbackToUser.getFeedbackToUser()));
     }
 
-    private Controller getBestFitController(String command) {
-        return getAllControllers()
+    private Controller getBestFitController(Ui renderer, String command) {
+        return getAllControllers(renderer)
                 .stream()
                 .filter(controller -> controller.matchesCommand(command))
                 .findFirst()
-                .orElse(new ListController()); // fail-safe
+                .orElse(new ListController(renderer)); // fail-safe
     }
 
-    private Collection<Controller> getAllControllers() {
+    private Collection<Controller> getAllControllers(Ui renderer) {
         return new ArrayList<>(Arrays.asList(new Controller[] {
-            new TaskController(),
-            new StoreController(),
-            new UndoController(),
-            new RedoController(),
-            new ExitController(),
-            new ListController()
+            new TaskController(renderer),
+            new StoreController(renderer),
+            new UndoController(renderer),
+            new RedoController(renderer),
+            new ExitController(renderer),
+            new ListController(renderer)
         }));
     }
 }
