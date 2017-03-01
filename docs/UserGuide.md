@@ -205,7 +205,7 @@ Format: `list CATEGORY`
 
 Example:
 
-* `ls School`<br>
+* `list School`<br>
 
 ### 2.12. Marking a task done : `done`
 
