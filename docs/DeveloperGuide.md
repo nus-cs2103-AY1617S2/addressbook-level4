@@ -5,6 +5,10 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 ---
 
 1. [Setting Up](#setting-up)
+2. [Design](#design)
+3. [Implementation](#implementation)
+4. [Testing](#testing)
+5. [Dev Ops](#dev-ops)
 
 * [Appendix A: User Stories](#appendix-a--user-stories)
 * [Appendix B: Use Cases](#appendix-b--use-cases)
@@ -68,6 +72,142 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 * Reason: Required libraries may not have been downloaded during the project import.
 * Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries).
 
+## 2. Design
+
+### 2.1. Architecture
+
+<img src="images/Architecture.png" width="600"><br>
+_Figure 2.1.1 : Architecture Diagram_
+
+The **_Architecture Diagram_** given above explains the high-level design of the App.
+Given below is a quick overview of each component.
+
+Work in progress.
+
+## 3. Implementation
+
+### 3.1. Logging
+
+We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels
+and logging destinations.
+
+* The logging level can be controlled using the `logLevel` setting in the configuration file
+  (See [Configuration](#configuration))
+* The `Logger` for a class can be obtained using `LogsCenter.getLogger(Class)` which will log messages according to
+  the specified logging level
+* Currently log messages are output through: `Console` and to a `.log` file.
+
+**Logging Levels**
+
+* `SEVERE` : Critical problem detected which may possibly cause the termination of the application
+* `WARNING` : Can continue, but with caution
+* `INFO` : Information showing the noteworthy actions by the App
+* `FINE` : Details that is not usually noteworthy but may be useful in debugging
+  e.g. print the actual list instead of just its size
+
+### 3.2. Configuration
+
+Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
+(default: `config.json`):
+
+
+## 4. Testing
+
+Tests can be found in the `./src/test/java` folder.
+
+**In Eclipse**:
+
+* To run all tests, right-click on the `src/test/java` folder and choose
+  `Run as` > `JUnit Test`
+* To run a subset of tests, you can right-click on a test package, test class, or a test and choose
+  to run as a JUnit test.
+
+**Using Gradle**:
+
+* See [UsingGradle.md](UsingGradle.md) for how to run tests using Gradle.
+
+We have two types of tests:
+
+1. **GUI Tests** - These are _System Tests_ that test the entire App by simulating user actions on the GUI.
+   These are in the `guitests` package.
+
+2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
+   1. _Unit tests_ targeting the lowest level methods/classes. <br>
+      e.g. `seedu.address.commons.UrlUtilTest`
+   2. _Integration tests_ that are checking the integration of multiple code units
+     (those code units are assumed to be working).<br>
+      e.g. `seedu.address.storage.StorageManagerTest`
+   3. Hybrids of unit and integration tests. These test are checking multiple code units as well as
+      how the are connected together.<br>
+      e.g. `seedu.address.logic.LogicManagerTest`
+
+#### Headless GUI Testing
+Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
+ our GUI tests can be run in the _headless_ mode.
+ In the headless mode, GUI tests do not show up on the screen.
+ That means the developer can do other things on the Computer while the tests are running.<br>
+ See [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in headless mode.
+
+### 4.1. Troubleshooting tests
+
+ **Problem: Tests fail because NullPointException when AssertionError is expected**
+
+ * Reason: Assertions are not enabled for JUnit tests.
+   This can happen if you are not using a recent Eclipse version (i.e. _Neon_ or later)
+ * Solution: Enable assertions in JUnit tests as described
+   [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
+   Delete run configurations created when you ran tests earlier.
+
+## 5. Dev Ops
+
+### 5.1. Build Automation
+
+See [UsingGradle.md](UsingGradle.md) to learn how to use Gradle for build automation.
+
+### 5.2. Continuous Integration
+
+We use [Travis CI](https://travis-ci.org/) and [AppVeyor](https://www.appveyor.com/) to perform _Continuous Integration_ on our projects.
+See [UsingTravis.md](UsingTravis.md) and [UsingAppVeyor.md](UsingAppVeyor.md) for more details.
+
+### 5.3. Publishing Documentation
+
+See [UsingGithubPages.md](UsingGithubPages.md) to learn how to use GitHub Pages to publish documentation to the
+project site.
+
+### 5.4. Making a Release
+
+Here are the steps to create a new release.
+
+ 1. Generate a JAR file [using Gradle](UsingGradle.md#creating-the-jar-file).
+ 2. Tag the repo with the version number. e.g. `v0.1`
+ 2. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/)
+    and upload the JAR file you created.
+
+### 5.5. Converting Documentation to PDF format
+
+We use [Google Chrome](https://www.google.com/chrome/browser/desktop/) for converting documentation to PDF format,
+as Chrome's PDF engine preserves hyperlinks used in webpages.
+
+Here are the steps to convert the project documentation files to PDF format.
+
+ 1. Make sure you have set up GitHub Pages as described in [UsingGithubPages.md](UsingGithubPages.md#setting-up).
+ 1. Using Chrome, go to the [GitHub Pages version](UsingGithubPages.md#viewing-the-project-site) of the
+    documentation file. <br>
+    e.g. For [UserGuide.md](UserGuide.md), the URL will be `https://<your-username-or-organization-name>.github.io/addressbook-level4/docs/UserGuide.html`.
+ 1. Click on the `Print` option in Chrome's menu.
+ 1. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. <br>
+    For best results, use the settings indicated in the screenshot below. <br>
+    <img src="images/chrome_save_as_pdf.png" width="300"><br>
+    _Figure 5.4.1 : Saving documentation as PDF files in Chrome_
+
+### 5.6. Managing Dependencies
+
+A project often depends on third-party libraries. For example, Doist depends on the
+[Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
+can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
+is better than these alternatives.<br>
+a. Include those libraries in the repo (this bloats the repo size)<br>
+b. Require developers to download those libraries manually (this creates extra work for developers)<br>
 
 
 ## Appendix A : User Stories
