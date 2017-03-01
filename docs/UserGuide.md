@@ -50,7 +50,7 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Adds a person to the address book<br>
-Format: `add NAME [d/DEADLINE] [p/PRIORITY] [t/TAG]...`
+Format: `add NAME [n/NOTES] [d/DEADLINE] [p/PRIORITY] [t/TAG]...`
 
 > Task can have a deadline
 > Task can have a priority ranking from 1 - 5
@@ -59,17 +59,17 @@ Format: `add NAME [d/DEADLINE] [p/PRIORITY] [t/TAG]...`
 Examples:
 
 * `add Do laundry`
-* `add Finish v0.0 documentation  t/CS2103T`
+* `add Finish v0.0 documentation t/CS2103T`
 
-### 2.3. Listing all tasks : `list`
+### 2.3. Sort tasks : `sort`
 
-Shows a list of all tasks in Opus.<br>
-Format: `list status/complete` for completed tasks, `list incomplete/` for incomplete tasks
+Sorts the list of task currently being shown according to the parameters.<br>
+Format: `sort [s/STATUS] [d/DEADLINE] [p/PRIORITY] [t/TAG]...`
 
 ### 2.4. Editing a task : `edit`
 
 Edits an existing task in Opus.<br>
-Format: `edit INDEX [NAME] [d/DEADLINE] [p/PRIORITY] [t/TAG]...`
+Format: `edit INDEX [NAME] [n/NOTES] [d/DEADLINE] [p/PRIORITY] [t/TAG]...`
 
 > * Edits the task at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
@@ -101,7 +101,7 @@ Marks tasks at index 3, 4 and 5 as complete.
 ### 2.6. Unmark task
 
 Marks task as incomplete.<br>
-Format: `unmark [INDEX]...`
+Format: `unmark INDEX...`
 
 > * Marks the task at all the specified `INDEX` as incomplete.
     The index refers to the index number shown in the last task listing.<br>
@@ -134,6 +134,21 @@ Reverts the previous undo.<br>
 Format: `redo`
 
 > * Reverts the change done by the previous undo.
+
+### 2.10. Find
+
+Displays a list of tasks based on keywords and/or tags.<br>
+Format: `find [NAME] [s/STATUS] [d/DEADLINE] [p/PRIORITY] [t/TAG]...`
+
+> * Displays the list of tasks matching the search parameters
+> * `find` without parameters will display the help section for the command
+
+### 2.11. Autocomplete
+
+Autocomplete the user's command on the CLI.
+
+> * Example:
+    User enters `f` and presses `TAB`, `find` command will appear in the input box.
 
 ## 3. FAQ
 
