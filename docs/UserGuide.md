@@ -51,8 +51,8 @@ Format: `help`
 Adds a task to Dueue<br>
 Format: `add TASKNAME [due/DUEDATE] [t/TIME] [#/LISTNAME] [d/DESCRIPTION] [@VENUE] [*f]`
 
-> Tasks cannot have multiple lists
-> Due dates of tasks can repeating, e.g. every sunday
+> Tasks cannot have multiple lists<br>
+> Due dates of tasks can repeating, e.g. every sunday<br>
 > Time of each task can only be one time point, e.g. 4pm
 
 Examples:
@@ -70,7 +70,7 @@ Format: `list list LISTNAME [favorite]`
 Shows a list of all list names in Dueue<br>
 Format: Format: `list lists`
 
-> Do not need to specify whether the parameter is LISTINDEX or LISTNAME
+> Do not need to specify whether the parameter is LISTINDEX or LISTNAME<br>
 > Returns only favorite tasks by adding keyword "favorite" 
 
 ### 2.4. Creating a list : `create`
