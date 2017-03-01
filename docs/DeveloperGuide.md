@@ -346,14 +346,40 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
-
-{More to be added}
+`* * *` | user | add a new task | record tasks that need to be done ‘some day’. 
+`* * *` | user | view upcoming tasks | see what needs to be done soon. 
+`* * *` | user | delete a task | remove tasks that I no longer care to track. 
+`* * *` | new user | view more information about a particular command | learn how to use various commands. 
+`* * *` | user | add task deadlines | prioritize what is most urgent.
+`* * *` | user | mark a task as completed | view old tasks.
+`* * *` | user | undo last command | revert my last action if I make a mistake.
+`* * *` | user | add task notes | keep relevant information nearby.
+`* * *` | user | confirm a delete action | avoid accidently delete a task.  
+`* * *` | user | view tasks by day | view relevant tasks.
+`* * *` | user | add notification timings | see a popup for high priority tasks prior to the deadline.
+`* * *` | user | assign task prioritize | view tasks by importance.
+`* * *` | user | close the application | save CPU resources.
+`* * *` | user | schedule time to work on a task | plan my time.
+`* * *` | user | modify task details | update tasks.
+`* *` | advanced user | use command shortcuts | save time. 
+`* *` | user | backup my data | protect against data loss.
+`* *` | user | create subtasks | break up large tasks.
+`* *` | user | choose custom background | have a pleasant viewing experience. 
+`* *` | user | hear nice sounds | further enjoy completing tasks.
+`* *` | user | get reminders | know to start doing something.
+`* *` | user | change calendar view between month/week/day | see my schedule for that time frame. 
+`* *` | user | add recurring tasks | avoid repetitive task input. 
+`* *` | user | estimate task length | know how much effort is required.
+`* *` | user | add collaborators | know who I have to work with. 
+`* *` | user | see error messages for invalid commands | know how to fix my mistake.
+`* *` | user | sort tasks by priority | choose most urgent tasks.
+`* *` | new user | see user guide in a sidebar | have it for easy reference.
+`* *` | user | search tasks by keyword | find tasks.
+`* *` | user | see today's tasks on startup | get started immediately.
+`* *` | user | categorize tasks | organize more effectively.
+`* *` | user | have task manager open on bootup | get started immediately.
+`*` | user | view my command history | review my progress.
+`*` | user | enter distraction-free mode | be stopped from opening games or social websites before tasks are completed
 
 ## Appendix B : Use Cases
 
