@@ -1,6 +1,6 @@
-# AddressBook Level 4 - User Guide
+# TaskCrusher - User Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team T15B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -8,6 +8,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 2. [Features](#features)
 3. [FAQ](#faq)
 4. [Command Summary](#command-summary)
+5. [Storage file format](#storage-file-format)
 
 ## 1. Quick Start
 
@@ -16,19 +17,16 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
    > Having any Java 8 version is not enough. <br>
    > This app will not work with earlier versions of Java 8.
 
-1. Download the latest `addressbook.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for your Address Book.
+1. Download the latest `TaskCrusher.jar` from the [releases](../../../releases) tab.
+2. Copy the file to the folder you want to use as the home folder for TaskCrusher.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
-   > <img src="images/Ui.png" width="600">
-
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
-   * **`list`** : lists all contacts
-   * **`add`**` John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01` :
-     adds a contact named `John Doe` to the Address Book.
-   * **`delete`**` 3` : deletes the 3rd contact shown in the current list
-   * **`exit`** : exits the app
+   * **`??`** :??what it does
+   * **`??`**` ??sample command here` : ??
+   * **`??`**` ??` : ??
+   * **`??`** : ??
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
 
@@ -157,9 +155,14 @@ There is no need to save manually.
 
 ## 3. FAQ
 
+**Q**: How do I create my own storage file to import into the app?<br>
+**A**: Refer to [Storage file format](#storage-file-format) for instructions
+
+**Q**: How do I import my own storage file into the app?<br>
+**A**: Back up your current storage file as appropriate and overwrite it with the storage file you wish to use.
+
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with
-       the file that contains the data of your previous Address Book folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TaskCrusher installation.
 
 ## 4. Command Summary
 
@@ -183,4 +186,6 @@ There is no need to save manually.
 * **Select** : `select INDEX` <br>
   e.g.`select 2`
 
+## 5. Storage File Format
 
+> ????
