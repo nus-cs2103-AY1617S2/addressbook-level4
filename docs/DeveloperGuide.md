@@ -1,6 +1,6 @@
-# AddressBook Level 4 - Developer Guide
+# Doist - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `CS2103T Group 1 Team 4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -409,13 +409,44 @@ Use case ends.
 
 ## Appendix D : Glossary
 
-##### Mainstream OS
+**2.1 Task**
+- Properties
+    - `Description`
+    - `Priority`
+    - `Start time` (optional)
+    - `End time` (optional)
+    - `Reminder time` (optional)
+    - `Recurrence interval` (optional)
+    - `isFinished` (default false)
+    - `Tags` (can be empty)
+- About the properties
+    - `Priority`
+    There are three priorities: High, Medium, Low. By default, tasks are low priority.
+    - `Tags`
+    Tags are independent of tasks. Tags and tasks have a many-to-many relationship where zero or more tags can be added to a task and zero or more tasks can be related to a tag
+    - `Reminder`
+    Would be sent to the user using a pop-up at the `reminder time`
+- Special Types
+    - `Event`
+    A task with different `start time` and `end time`. It represents tasks to be carried out over a period of time
+    - `Deadline`
+    A task with the same `start time` and `end time`. It represents tasks that have to be done before a specific time
+    - `Floating task`
+    A task with no `start time` and `end time`. It represetns tasks that are not associated with any timing. It can only be `pending` and `finished`, never `overdue`.
+    - `Pending tasks`
+    Tasks that have not been `finished` nor `ended`
+    - `Overdue tasks`
+    Tasks that have `ended` but not been `finished`
+    - `Finished tasks`
+    Tasks that have been `finished`
+    - `Recurring task`
+    A task with a `recurring interval` set. A new task will automatically be cloned from this task, with the recurring interval added to the task’s `start time`, `end time` and `reminder time` when a task is marked as `Finished` or becomes `Overdue`
 
-> Windows, Linux, Unix, OS-X
+**2.2 Mutating Command**
+    Any command which causes a change in the state of apps (E.g. add, delete, finished)
 
-##### Private contact detail
-
-> A contact detail that is not meant to be shared with others
+**2.3 Mainstream OS**
+    Windows, Linux, Unix, OS-X
 
 ## Appendix E : Product Survey
 
