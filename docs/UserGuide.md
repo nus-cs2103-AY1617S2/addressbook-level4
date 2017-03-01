@@ -1,6 +1,6 @@
 # Dueue - User Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -26,7 +26,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 5. Some example commands you can try:
    * **`list`** : lists all tasks
    * **`add`**`  add laundry due/every sunday #/personal d/wash clothes @B1 *f` :
-     adds a task to Dueue named `laundry` which is repeating every sunday under list `personal` with description `wash clothes` at venue `B1` and star it as `favourite`.
+     adds a task to Dueue named `laundry` which is repeating `every sunday` under list `personal` with description `wash clothes` at venue `B1` and star it as `favourite`.
    * **`delete`**` 3` : deletes the task with index 3 as shown in the current list
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
@@ -49,17 +49,17 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Adds a task to Dueue<br>
-Format: `add TASKNAME [due/DUEDATE] [t/TIME] [#/LISTNAME] [d/DESCRIPTION] [@VENUE] [*f]`
+Format: `add TASKNAME [due/DUEDATE] [t/TIME] [#/LISTNAME] [d/DESCRIPTION] [@VENUE] [p/PRIORITYLEVEL] [*f]`
 
 > Tasks cannot have multiple lists<br>
 > Due dates of tasks can repeating, e.g. every sunday<br>
-> Time of each task can only be one time point, e.g. 4pm
+> Time of each task can only be one time point, e.g. 4pm<br>
 > Specifications of fields for task can be entered in any order
 
 Examples:
 
 * `add laundry due/every sunday #/personal d/wash clothes @B1 *f`
-* `add 2103lecture due/every friday t/4pm #/study d/go for lecture @iCube`
+* `add 2103lecture due/every friday t/4pm #/study d/go for lecture p/IMPORTANT @iCube`
 
 ### 2.3. Listing all tasks : `list`
 
