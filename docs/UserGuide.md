@@ -48,12 +48,13 @@ By : `Miao Ling` , `Ian` , `Qi Xiang` and `Dylan` - `[W09-B4]` Since : `Feb 2017
 > * Parameters can be in any order.
 	
 ### 2.1. Viewing help : `help`
-Format: `help`
-	> Help is shown if you enter an incorrect command e.g. `asdf`
-	> Alternatively, type /help to obtain a list of commands that you can use. 
+Format: `help`<br>
+
+> Help is shown if you enter an incorrect command e.g. `asdf` <br>
+> Alternatively, type /help to obtain a list of commands that you can use. 
 
 ### 2.2. Adding a Task : `add`
-Adds a task to the task manager
+Adds a task to the task manager. <br>
 Format: `add TASK_NAME d/DEADLINE p/PRIORITY_LEVEL [i/ANY_INFO] [t/TAGS]...`
    > `PRIORITY_LEVEL` should be defined by integers 1 (high) to 4(low).<br>
    > `ANY_INFO` allows you to key in details with regards to the task, optional.<br>
@@ -70,16 +71,16 @@ Shows a list of all the tasks in the task manager.<br>
 > However, user can specify to list all the tasks he has in, which will be shown in a pop up.<br>
 > User can also sort it accordingly to the deadlines, priorities, etc.
 	
-Shows a list of all the tasks in lexographical order
+Shows a list of all the tasks in lexographical order.<br>
 Format: `list all`
 
-Shows a list of all the tasks sorted by deadlines.
+Shows a list of all the tasks sorted by deadlines.<br>
 Format: `list deadlines`
 	
-Shows a list of all the tasks sorted by priority.
+Shows a list of all the tasks sorted by priority.<br>
 Format: `list priority`
 	
-Shows a list of tasks of the tags sorted in lexographical order
+Shows a list of tasks of the tags sorted in lexographical order.<br>
 Format: `list t/TAGS...`
 > The tasks listed will be in clusters according to tags, but sorted in alphabetical order.<br>
 
@@ -88,14 +89,14 @@ Examples:
 
 ### 2.4. Editing an existing task: `edit`
 Edits an existing task in the task manager.<br>
-Format: `edit INDEX [NAME] [d/DEADLINE] [p/PRIORITY_LEVEL] [i/ANY_INFO] [t/TAGS]...`
+Format: `edit i/INDEX [n/TASK_NAME] [d/DEADLINE] [p/PRIORITY_LEVEL] [i/ANY_INFO] [t/TAGS]...`
 	
 > * Edits the task labeled by the INDEX digit as shown on the screen. The INDEX must be a positive integer, e.g. 1, 2, 3, ...
 > * At least one of the optional [fields] must be provided.
 > * Existing fields will be overwritten.
 
 Examples:
-* `edit 1 Assignment 2 d/25 Feb 2018 p/2`
+* `edit i/1 n/Assignment 2 d/25 Feb 2018 p/2`
 
 ### 2.5. Shifting tabs: `switch`
 Switch the current tab to the next tab.
@@ -170,7 +171,10 @@ Examples:
 	e.g. `list t/CS2103 t/Work t/School`
 	
 * **Switching between tabs** : `switch`
-
+	
+* **Edit** : `edit`<br>
+	e.g. `edit i/3 n/Buy a house`
+	
 * **Done** : `done`<br>
 	e.g. `done 1`
  
