@@ -1,4 +1,4 @@
-# AddressBook Level 4 - User Guide
+# Task Manager - User Guide
 
 By : `T09-B04`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
@@ -22,7 +22,7 @@ By : `T09-B04`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&n
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
-   * **`list`** : lists all contacts
+   * **`list`** : lists all tasks
    * **`add`**` Finish Progress Report; 030217 1159PM` :
      adds a task named `Finish Progress Report` with due date `3rd Feb 2017 1159PM` to the Task Manager.
    * **`delete`**` project` : deletes the task with the name `project`
@@ -33,8 +33,8 @@ By : `T09-B04`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&n
 ## 2. Features
 > **Command Format**
 >
-> * Duration must be specified in “hrs”, “mins” and/or “secs”.
-> * Time must be specified in “am” and/or “pm”.
+> * Duration must be specified in "hrs", "mins" and/or "secs".
+> * Time must be specified in "am" and/or "pm".
 > * For <... date and time> parameters, either date or time can be left out but not both.
 > * `<task>` refers to the name of the task.
 > * Parameters include: name, start time, start date, end (due) time, end (due) date, duration.
@@ -111,8 +111,8 @@ Formats:
 > * `update <task>; <parameter1> <new_value1>; <parameter2> <new_value2>`
 
 Examples:
-* `update start time 1000`
-* `update project proposal; name app development project proposal; end time 2359`
+* `update start time 1000AM`
+* `update project proposal; name app development project proposal; end time 2359PM`
 
 
 ### 2.8. Exiting the program : `exit`
