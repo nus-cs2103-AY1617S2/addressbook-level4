@@ -107,8 +107,8 @@ Examples:
 ### 2.7. Update a task : `update`
 
 Formats:
-> * `update <element> <new_value>` (when task to be updated has already been selected)
-> * `update <task>; <element1> <new_value1>; <element2> <new_value2>`
+> * `update <parameter> <new_value>` (when task to be updated has already been selected)
+> * `update <task>; <parameter1> <new_value1>; <parameter2> <new_value2>`
 
 Examples:
 * `update start time 1000`
