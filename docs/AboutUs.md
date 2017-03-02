@@ -4,49 +4,50 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Damith C. Rajapakse](http://www.comp.nus.edu.sg/~damithch) <br>
-<img src="images/DamithRajapakse.jpg" width="150"><br>
-**Role**: Project Advisor
+#### [Lee Yanhwa](https://github.com/)
+<img src="" width="150"><br>
+**Role**: Team Lead <br>
+
+* Components in charge of: Model, Storage
+* Aspects/tools in charge of: Eclipse, travis CI
+* Features implemented:
+    * TBA
+* Code written: [functional code]() [test code]() [docs]()
+* Other major contributions:
+* Aspects responsible for:　     　　　　　 
+    * Ensuring tasks are done properly and on time
+    * Integration: versioning of the code, maintaining teh code repository, integrating various parts of the software to create a whole
 
 -----
 
-#### [Joshua Lee](http://github.com/lejolly)
-<img src="images/JoshuaLee.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: UI
+#### [Ram Janarthan](https://github.com/)
+<img src="" width="150"><br>
+**Role**: Developer <br>
+
+* Components in charge of: Logic, UI
+* Aspects/tools in charge of: JavaFX
+* Features implemented:
+    * TBA
+* Code written: [functional code]() [test code]() [docs]()
+* Other major contributions:
+* Aspects responsible for:
+    * Quality of project documents
+    * Scheduling and tracking
 
 -----
 
-#### [Leow Yijin](http://github.com/yijinl)
-<img src="images/LeowYijin.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Data
+#### [Luo Yuyang](https://github.com/R-o-y)
+<img src="" width="150"><br>
+**Role**: Developer <br>
 
------
+* Components in charge of: Logic, UI
+* Aspects/tools in charge of: Git
+* Features implemented:
+    * TBA
+* Code written: [functional code]() [test code]() [docs]()
+* Other major contributions:
+* Aspects responsible for:
+    * Code quality
+    * Ensuring project deliverables are done on time and in the right format
 
-#### [Martin Choo](http://github.com/m133225)
-<img src="images/MartinChoo.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Dev Ops
 
------
-
-#### [Thien Nguyen](https://github.com/ndt93)
- Role: Developer <br>
- Responsibilities: Threading
-
- -----
-
-#### [You Liang](http://github.com/yl-coder)
-<img src="images/YouLiang.jpg" width="150"><br>
- Role: Developer <br>
- Responsibilities: UI
-
- -----
-
-# Contributors
-
-We welcome contributions. See [Contact Us](ContactUs.md) page for more info.
-
-* [Akshay Narayan](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Aokkhoy)
-* [Sam Yong](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Amauris)
