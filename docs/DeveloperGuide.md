@@ -478,7 +478,28 @@ Use case ends.
 2a. The given task is invalid
 
 > 2a1. myPotato shows an error message
-  Use case resumes at step 3
+  Use case resumes at step 2
+  
+####Use case: Setting Priority
+
+**MSS**
+
+1. User requests to list tasks
+2. myPotato shows the list of tasks
+3. User requests to set a priority for a task
+4. myPotato updates and save changes
+Use case ends.
+
+**Extension**
+
+2a. The given task is invalid
+
+> 2a1. myPotato shows an error message
+  Use case resumes at step 2
+  
+3a. the list is empty
+
+> Use case ends
 
 {More to be added}
 
@@ -561,4 +582,21 @@ Cons
 
 * Google Calender doesn't allows you to use tags to categorize your task
 
+**HiTask**
 
+Author: Zhang Yan Hao
+
+Pros: 
+      
+* HiTask has data backup, I think this feature is suitable for Jim,
+* since Jim is a forgetful person, he might delete some important task accidentally.
+* HiTask can sync with google calendar, I think this is useful since Jim may have plenty tasks,
+* he might need to rely heavily on google calendar to help him organize his schedule.
+* HiTask is easy to use, available in office, at home and on the road. I think this is useful for Jim,
+* Jim is a busy man, so he might use his free time like on his way to work or back home to check his schedule.
+ 
+Cons:
+
+* HiTask is a team project management and task collaboration, I think this feature is not suitable for Jim,
+  since Jim usually work alone.
+* From the analysis, HiTask is suitable for Jim beside that this is a collaboration tool for group work.
