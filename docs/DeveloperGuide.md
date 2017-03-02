@@ -1,4 +1,4 @@
-# AddressBook Level 4 - Developer Guide
+# To-do List - Developer Guide
 
 By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
@@ -393,26 +393,139 @@ Priority | As a ... | I want to ... | So that...
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
-
+#### Use case 1: add task
+ 
 **MSS**
-
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
-Use case ends.
-
+ 
+1. User requests to add a task
+2. To-do list adds the new task and shows
+the details of the new task on UI
+Use case ends
+ 
 **Extensions**
-
-2a. The list is empty
-
+ 
+1a. The new task created contains some
+optional parameters including description, start time, end time, tag, urgency
+level and so on.
+ 
+>1a1. To-do list adds in the input
+parameters and shows the details on UI <br>
+> Use case ends
+ 
+1b. The input task name contains invalid
+input
+ 
+> 1b1. To-do list shows an error
+message for invalid name input <br>
+> Use case ends
+ 
+1c. The input start time is before the end
+time
+ 
+>1c1. To-do list shows an error message
+for invalid input <br>
 > Use case ends
 
-3a. The given index is invalid
+1d. The input start time or end time is in an invalid format
+ 
+>1d1. To-do list shows an error message
+for invalid input <br>
+> Use case ends
+ 
+1e. The input tag name does not exist and user would like to create a new tag
+ 
+> 1e1. To-do list prompts a message to
+query if the user would like to create the tag
+> 1e2. User choose yes
+> 1e3. To-do list creates the new tag and shows information for the new task on UI <br>
+> Use case ends
+ 
+1f. The input tag name does not exist and it is actually a typo error
+ 
+> 1f1. To-do list prompts a message to
+query if the user would like to create the tag
+> 1f2. User choose no <br>
+> Use case resumes at Step 1
+ 
+1g. The input urgency level is not valid e.g. the user input a float while an integer is expected
+ 
+>1d1. To-do list shows an error message
+for invalid input <br>
+> Use case ends
+ 
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+ 
+#### Use case 2: add tag
+ 
+**MSS**
+ 
+1. User requests to add a tag
+2. To-do list adds the new tag and shows
+the details of the new task on UI
+Use case ends
+ 
+**Extensions**
+ 
+1a. The input tag name already exists
+ 
+> 1a1. To-do list prompts an error
+message that the tag name already exists <br>
+> Use case ends
+ 
+1b. The input new tag name does not have a proper format
+ 
+> 1b1. To-do list prompts an error message for invalid input <br>
+> Use case ends
+ 
+1c. User would like to add new task immediately to the task
+> 1c1. To-do list processes Update tags of a task (UC #)
+> Use case ends
+ 
+
+ 
+ 
+#### Use case 3: customize commands
+ 
+**MSS**
+ 
+1. User requests to customize some command
+with their customized shortcut
+2. To-do list updates the command input
+and show message on UI
+Use case ends
+ 
+**Extensions**
+ 
+1a. The input command word already exists
+> 1a1. To-do list prompts an error message for invalid input <br>
+> Use case ends
+ 
+1b. The input command word contains invalid input
+>1b1. To-do list prompts an error message for invalid input <br>
+> Use case ends
+
+ 
+#### Use case 4: delete task or tag
+ 
+**MSS**
+ 
+1. User requests to delete some task or
+tag
+2. To-do list delete the task and prompts message
+on UI to show success  
+Use case ends
+ 
+**Extensions**
+ 
+1a. The task/tag selected does not exist
+> 1a1. To-do list shows an error message for target not found <br>
+> Use case ends
+ 
+1b. The user requests to delete all tasks under certain criteria, e.g. under the same tag or contains certain key words
+>1b1. To-do list lists out the tasks that fulfil the criteria (UC #) and prompts a confirmation message
+>1b2. User confirms his actions
+>1b3. To-do list delete the selected tasks and prompts a message on UI to show success <br>
+> Use case ends
 
 {More to be added}
 
