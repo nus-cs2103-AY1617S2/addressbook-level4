@@ -81,6 +81,20 @@ Use case ends
 
 ### Delete Task
 
+**MSS**
+
+1. User retrieves list of tasks [via Use Case: List all Tasks](#list-all-tasks)
+2. User enters command to delete task
+3. TaskBook deletes specified task
+Use case ends
+
+**Extensions**
+
+2a. The given index is invalid
+
+> 2a1. TaskBook shows an error message <br>
+  Use case resumes at step 2
+
 ### Find task
 
 **MSS**
