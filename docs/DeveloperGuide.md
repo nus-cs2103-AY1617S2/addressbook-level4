@@ -435,7 +435,7 @@ Use case ends.
 
 **Google Calendar**
 
-Author:Google
+Author: Jay Kabra
 
 Pros:
 * Syncs with your phone so that the calendar is viewable from gmail on your laptop as well as on your phone 
