@@ -409,7 +409,7 @@ Use case ends.
 
 ## Appendix C : Non Functional Requirements
 
-1. Should be able to hold up to 2 years’ worth of tasks.
+1. Should be able to hold up to 2 years worth of tasks.
 2. Should process and respond to user commands within 1s. 
 3. Should conform to the Java coding standard.
 4. Should automatically back up data once a week. 
@@ -422,14 +422,36 @@ Use case ends.
 
 ## Appendix D : Glossary
 
-Activity: a task or event
-Element: detail associated with an activity (e.g. duration, name, start time)
-Recurring task: a task that has to be completed periodically (e.g. daily or monthly)
-Subtask: a component of a task
-Autocomplete: complete words or strings without the user needing to type them in full
-Sync: ensure that data files in two or more locations are updated
-Hotkey: A single or combination of keys that is registered with the system to perform specific activity when pressed
-Mainstream OS: Windows, Linux, Mac
+#####Activity
+
+> a task or event
+
+#####Element
+> detail associated with an activity (e.g. duration, name, start time)
+
+#####Recurring task:
+
+> a task that has to be completed periodically (e.g. daily or monthly)
+
+#####Subtask:
+
+> a component of a task
+
+#####Autocomplete:
+
+> complete words or strings without the user needing to type them in full
+
+#####Sync:
+
+> ensure that data files in two or more locations are updated
+
+#####Hotkey:
+
+> A single or combination of keys that is registered with the system to perform specific activity when pressed
+
+#####Mainstream OS:
+
+> Windows, Linux, Mac
 
 ##### Mainstream OS
 
