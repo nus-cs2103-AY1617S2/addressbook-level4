@@ -1,6 +1,6 @@
-# Savvy To-Do - User Guide
+# AddressBook Level 4 - User Guide
 
-By : `Team F12-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -8,7 +8,6 @@ By : `Team F12-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbs
 2. [Features](#features)
 3. [FAQ](#faq)
 4. [Command Summary](#command-summary)
-5. [Keyboard Shortcuts](#keyboard-shortcuts)
 
 ## 1. Quick Start
 
@@ -17,18 +16,18 @@ By : `Team F12-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbs
    > Having any Java 8 version is not enough. <br>
    > This app will not work with earlier versions of Java 8.
 
-1. Download the latest `SavvyToDo.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for your Savvy To-Do.
+1. Download the latest `addressbook.jar` from the [releases](../../../releases) tab.
+2. Copy the file to the folder you want to use as the home folder for your Address Book.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
    > <img src="images/Ui.png" width="600">
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
-   * **`list`** : lists all tasks
+   * **`list`** : lists all contacts
    * **`add`**` John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01` :
      adds a contact named `John Doe` to the Address Book.
-   * **`delete`**` 3` : deletes the 3rd task shown in the current list
+   * **`delete`**` 3` : deletes the 3rd contact shown in the current list
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
@@ -185,17 +184,3 @@ There is no need to save manually.
   e.g.`select 2`
 
 
-[//]: # (@@author yeejfe)
-
-## 5. Keyboard Shortcuts
-
-Key Codes | Function | Command Box Input 
--------- | :--------  | :-------- 
-<kbd>Esc</kbd> | Toggle to show/hide a list of keyboard shortcuts | -
-<kbd>Ctrl</kbd> + <kbd>H</kbd> | [Help](#viewing-help--help) | `help`
-<kbd>Ctrl</kbd> + <kbd>Q</kbd> | [Exit](#exiting-the-program--exit) | `exit`
-<kbd>Ctrl</kbd> + <kbd>D</kbd> | [Clear](#clearing-all-entries--clear) all entries | `clear`
-<kbd>Ctrl</kbd> + <kbd>L</kbd> | [List](#listing-all-tasks-list) all unmarked task by date, earliest task first | `list`
-<kbd>Ctrl</kbd> + <kbd>P</kbd> | [List](#listing-all-tasks-list) all unmarked task by priority level, highest to lowest | `list priorityLevel`
-<kbd>Ctrl</kbd> + <kbd>S</kbd> | Popups a directory chooser dialog box to choose a new filepath | `storage NEW_FILEPATH`
-<kbd>Ctrl</kbd> + <kbd>Z</kbd> | [Undo](#undo-the-most-recent-operation--undo) | `undo`

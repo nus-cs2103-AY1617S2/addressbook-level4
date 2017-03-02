@@ -1,6 +1,6 @@
-# Savvy To-Do - Developer Guide
+# AddressBook Level 4 - Developer Guide
 
-By : `Team F12-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -344,27 +344,16 @@ b. Require developers to download those libraries manually (this creates extra w
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
 
 
-Priority | As a(n) ... | I want to ... | So that I can...
+Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new [task](#task) | record task that needs to be completed
-`* * *` | user | update a task | modify the details of the task without deletion and re-addition
-`* * *` | user | delete a task | remove entries that I no longer need
-`* * *` | user | find a task by some keywords | locate similar tasks without having to go through the entire list
-`* * *` | user | mark a completed task done | know this task has been completed
-`* * *` | user | view list of archived | know what tasks has been completed
-`* * *` | user | view list of ongoing | know what tasks need to be done
-`* * *` | user | view list of archived | know what has been completed
-`* * *` | user | sort ongoing tasks by due date or priority | know what has been completed and upcoming schedule
-`* * *` | user | change storage location | choose to store the data file in a local folder controlled by a cloud syncing service
-`* *` | user | undo the recent command | revert the changes quickly
-`* *` | user | view the calendar view | better plan my tasks 
-`* *` | user | view selected day summary of tasks | know what tasks need to be done for that day
-`*` | user | set recurring task | not add a similar task each time
-`* *` | advanced user | use keyboards commands/hot keys | quickly achieve what I want without typing
-`* *` | advanced user | have [alias](#alias) for keywords | quickly type what I want
+`* * *` | user | add a new person |
+`* * *` | user | delete a person | remove entries that I no longer need
+`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
+`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
+`*` | user with many persons in the address book | sort persons by name | locate a person easily
 
-[//]: # (@@author yeejfe)
+{More to be added}
 
 ## Appendix B : Use Cases
 
@@ -396,17 +385,11 @@ Use case ends.
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. Should come with automated unit tests and open source code.
-5. Should favor DOS style commands over Unix-style commands.
-6. Should store data in text file.
-7. Should work stand-alone and should not be a plug-in to another software.
-8. Should work without internet connection.
-9. Should work without requiring an installer.
 
-[//]: # (@@author yeejfe)
+{More to be added}
 
 ## Appendix D : Glossary
 
@@ -414,34 +397,23 @@ Use case ends.
 
 > Windows, Linux, Unix, OS-X
 
-##### Task
+##### Private contact detail
 
-> Event: Task that has a start time and end time
-> Deadline: Task that has to be done before a specific deadline
-> Floating Task: Task without specific times
-
-##### Alias
-
-> For instance, 'ppt' stands for 'presentation'
-
-[//]: # (@@author yeejfe)
+> A contact detail that is not meant to be shared with others
 
 ## Appendix E : Product Survey
 
-**Wunderlist** 
+**Product Name**
 
-[//]: # (@@author yeejfe)
+Author: ...
 
 Pros:
 
-* Allows creation of subtasks within a task.
-* Allows local storage, in case there is no internet access.
-* Allows the grouping of tasks as a list and even grouping into folders.
-* Can sync across devices by signing in.
-* Can invite other person(s), sharing the tasks with them.
+* ...
+* ...
 
 Cons:
 
-* No calendar view.
-* Cannot block slots.
-* Cannot ordered by due date.
+* ...
+* ...
+
