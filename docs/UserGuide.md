@@ -2,14 +2,13 @@
 
 By : `Team T15B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
----
 1. [Introduction](#introduction)
 2. [Quick Start](#quick-start)
 3. [Features](#features)
 4. [FAQ](#faq)
 5. [Command Summary](#command-summary)
 6. [Storage file format](#storage-file-format)
-=======
+
 ## 1. Introduction 
 Welcome. We will take you for an enthralling journey as we bring forward our task manager "TASKCRUSHER"
 
@@ -238,4 +237,3 @@ HELP|`help`
 
 ## 6. Storage File Format
 
-> ????
