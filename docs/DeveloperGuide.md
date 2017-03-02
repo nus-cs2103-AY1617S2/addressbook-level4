@@ -374,6 +374,7 @@ Priority | As a ... | I want to ... | So that...
 `* * *` | user |select one/multiple tasks/tags	| I can carry out further actions on the selected tasks
 `* * *` | user |save the data into a folder I have specified	| I know where to find the data I have entered
 `* * *` | user |undo the most recent operation	| in case I made a mistake I can reverse
+`* * *` | user |exit the software | I can move to other windows when I finish using To-do list
 `* *` | user |group/filter tasks according to categories such as work/family/etc |	I will not be distracted by irrelevant tasks at specific times
 `* *` | user | edit the subtasks of a task	| I can update the subtasks if there is any changes
 `* *` | user |have suggestions when I typed invalidly |	I will know how to correct my mistakes
