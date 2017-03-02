@@ -1,7 +1,7 @@
 # Address Book (Level 4)
 
 [![Build Status](https://travis-ci.org/CS2103JAN2017-T16-B2/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-T16-B2/main)
-[![Build status](https://ci.appveyor.com/api/projects/status/3boko2x2vr5cc3w2?svg=true)](https://ci.appveyor.com/project/damithc/addressbook-level4)
+[![Build status](https://ci.appveyor.com/api/projects/status/qcfw2kpnoim4tkkp?svg=true)](https://ci.appveyor.com/project/BernardYip/main)
 [![Coverage Status](https://coveralls.io/repos/github/se-edu/addressbook-level4/badge.svg?branch=master)](https://www.codacy.com/app/damith/addressbook-level4?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=se-edu/addressbook-level4&amp;utm_campaign=Badge_Grade)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7358c2cf354244e6b53bc50d2aaf727b)](https://www.codacy.com/app/bernardyip/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103JAN2017-T16-B2/main/&amp;utm_campaign=Badge_Grade)
 <img src="docs/images/TaskManager.jpg" width="600"><br>
