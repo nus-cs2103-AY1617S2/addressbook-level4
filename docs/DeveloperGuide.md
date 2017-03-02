@@ -346,50 +346,283 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
-
-{More to be added}
+`* * *` | new user | see usage instructions | refer to instructions when I forget how to use Opus
+`* * *` | user | add a new task using the task descriptor | record all my tasks
+`* * *` | user | edit a task | modify the attributes of the task whenever needed
+`* * *` | user | delete a task | remove tasks that I do not wish to keep track of
+`* * *` | user | mark a task as completed | differentiate between completed and uncompleted tasks
+`* * *` | user | set a deadline to a task | easily keep track of deadline for a certain task to be completed
+`* *` | user | undo  the previous action | recover from the unintended mistakes
+`* *` | user | redo  the previous undo action | recover from the unintended undo action
+`* *` | user | find for specific tasks using the attributes | locate certain tasks quickly
+`* *` | user | assign a tag to a task | group tasks that belongs to the same category together
+`* *` | user | specify the location of the storage file | save the data to the location of my preference
+`*` | user | add a note to a task | include more information to a task
+`*` | user | set the priority of a task | focus on the tasks of higher priorities
+`*` | user | sync the  to my google calendar | sync the tasks with the calendar and get notified
+`*` | user | input the command quickly | save time and effort
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `Opus` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: Display help information
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
-Use case ends.
+1. User requests to display help information
+2. Opus displays help information
+
+Use case ends
+
+#### Use case: Add task
+
+**MSS**
+
+1. User input command to add task
+2. Opus adds the task and shows the added task details
+
+Use case ends
 
 **Extensions**
 
-2a. The list is empty
+1a. The input format is invalid
+
+> 1a1. Opus shows an error message
+
+Use case ends
+
+#### Use case: Delete task
+
+**MSS**
+
+1. User requests to delete a specific task in the list
+2. Opus deletes the task
+
+Use case ends
+
+**Extensions**
+
+1a. The given index is invalid
+
+> 1a1. Opus shows an error message
+
+Use case ends
+
+#### Use case: Edit task
+
+**MSS**
+
+1. User requests to edit a specific task in the list
+2. Opus edits the task
+
+Use case ends
+
+**Extensions**
+
+1a. The given index is invalid
+
+> 1a1. Opus shows an error message
+
+Use case ends
+
+1b. The attribute given is invalid
+
+> 3b1. Opus shows an error message
+
+Use case ends
+
+1c. The value of the attribute is invalid
+
+> 1c1. Opus shows an error message
+
+Use case ends
+
+3d. The value of the attribute is the same as the previous value
+
+>Use case ends
+
+
+#### Use case: Mark task as complete
+
+**MSS**
+
+1. User requests to mark a specific task in the list as complete
+2. Opus marks the task as complete
+
+Use case ends
+
+**Extensions**
+
+1a. The given index is invalid
+
+> 1a1. Opus shows an error message
+
+Use case ends
+
+#### Use case: Set deadline to a task
+
+**MSS**
+
+1. User requests to set a deadline to a specific task
+2. Opus sets a deadline for the task and displays the task
+
+Use case ends
+
+**Extensions**
+
+1a. The given index is invalid
+
+> 1a1. Opus shows an error message
+
+Use case ends
+
+1b. The date input by user is invalid
+
+> 1b1. Opus shows an error message
+
+Use case ends
+
+#### Use case: Undo the previous action
+
+**MSS**
+
+1. User requests to undo the previous action
+2. Opus shows which action is undone
+
+Use case ends
+
+**Extensions**
+
+1a. The history stack is empty
 
 > Use case ends
 
-3a. The given index is invalid
+#### Use case: Redo the previous undo action
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+**MSS**
 
-{More to be added}
+1. User requests redo the previous undo action
+2. Opus shows which action is restored
+
+Use case ends
+
+**Extensions**
+
+1a. The restoration history stack is empty
+
+> Use case ends
+
+#### Use case: Find for specific tasks using the attributes
+
+**MSS**
+
+1. User requests to find tasks based on the attributes
+2. Opus shows a list of tasks
+
+Use case ends
+
+**Extensions**
+
+1a. The list is empty
+
+> Use case ends
+
+1b. The input bttribute is invalid
+
+> 1b1. Opus shows an error message
+
+Use case ends
+
+#### Use case: Assign a tag to a task
+
+**MSS**
+
+1. User requests to assign a tag to the task
+2. Opus shows the tag is assigned to the task
+
+Use case ends
+
+**Extensions**
+
+1a. The given index is invalid
+
+> 1a1. Opus shows an error message
+
+Use case ends
+
+1b. The tag input by user is invalid
+
+> 1b1. Opus shows an error message
+
+Use case ends
+
+#### Use case: Specify the location of the storage file
+
+**MSS**
+
+1. User requests to specify the location of the storage file
+2. Opus shows the location of the storage file is changed
+
+Use case ends
+
+**Extensions**
+
+1a. The location path is invalid
+
+> 1a1. Opus shows an error message
+
+Use case ends
+
+#### Use case: Add a note to a task
+
+**MSS**
+
+1. User requests to add a note to the task
+2. Opus shows the note is added to the task
+
+Use case ends
+
+**Extensions**
+
+1a. The input index is invalid
+
+> 1a1. Opus shows an error message
+
+Use case ends
+
+#### Use case: Set the priority of a task
+
+**MSS**
+
+1. User requests to set the priority of a task
+2. Opus shows the priority is set.
+
+Use case ends
+
+**Extensions**
+
+1a. The input index is invalid
+
+> 1a1. Opus shows an error message
+
+Use case ends
+
+1b. The priority value is invalid
+
+> 1b1. Opus shows an error message
+
+Use case ends
 
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-{More to be added}
+4. Should include well-written guides for users and developers
+5. Should follow OOP principles
+6. Should come with automated tests
 
 ## Appendix D : Glossary
 
@@ -403,17 +636,54 @@ Use case ends.
 
 ## Appendix E : Product Survey
 
-**Product Name**
+[**Simpliday**](http://www.simpliday.com/)
 
-Author: ...
+Author: Yan Zheng
 
 Pros:
 
-* ...
-* ...
+* Excellent user interface design and user experience
+* Intuitive design for users to pick up easily
+* Easy to organize tasks reminiscent of a physical organiser
+* Convenient integration with cloud-based services (Google sign-in)
+* Advanced features for tasks including geo-tagging, sharing through social media, emails
 
 Cons:
 
-* ...
-* ...
+* Certain features are not relevant to certain types of user
+* Only available on App Store (iOS)
+
+[**Pivotal Tracker**](https://www.pivotaltracker.com/)
+
+Author: Han Lynn
+
+Pros:
+
+* Dashboard view for entire project
+* Tasks tracking & prioritizing
+* Release and milestone management
+* Dedicated apps are available on major platforms
+* Open APIs for developers to integrate
+
+Cons:
+
+* Not intuitive enough that it requires a few tutorials to fully understand the controls
+* Very specific to software engineering projects
+
+[**Trello**](https://trello.com/)
+
+Author: Xu Bili
+
+Pros:
+
+* Intuitive UI that needs little explaining of how to use it
+* Stores information on the cloud, accessible from any device
+* Collaborative, *kanban* can be shared with other people
+* Integrates with GitHub and other useful services
+
+Cons:
+
+* Specific to technical tasks
+* Tasks have to be small enough to be broken down into cards
+* Gets really messy when the project scales up
 
