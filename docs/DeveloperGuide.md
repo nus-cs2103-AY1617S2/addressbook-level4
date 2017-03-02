@@ -351,7 +351,14 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | delete a person | remove entries that I no longer need
 `* * *` | user | find a person by name | locate details of persons without having to go through the entire list
 `* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
+`* *` | user | add label to tasks | organise my tasks into different groups
+`* *` | user | edit a task and change its labels | organise my tasks' groups with flexibility
+`* *` | user | see tasks filtered by tags | know all the tasks labeled with a particular tag
+`* *` | user | have a calendar view of all tasks | get an intuitive understanding of my schedules.
 `*` | user with many persons in the address book | sort persons by name | locate a person easily
+`*` | advanced user | create subtasks within a task | break down a complicated task into smaller ones
+`*` | advanced user | associate a task with collaborators | know which tasks are related to a particular person
+`*` | advanced user | see tasks filtered by collaborators | be reminded of the people involved in a task
 
 {More to be added}
 
