@@ -9,7 +9,7 @@ import seedu.address.model.ReadOnlyTodoList;
 /**
  * Represents a storage for {@link seedu.address.model.TodoList}.
  */
-public interface AddressBookStorage {
+public interface TodoListStorage {
 
     /**
      * Returns the file path of the data file.
