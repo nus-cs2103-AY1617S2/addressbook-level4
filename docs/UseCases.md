@@ -27,9 +27,43 @@ By : `CS2103JAN2017-W15-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&
 
 ### Add Floating Task
 
+**MSS**
+
+1. User enters command with name and description of task
+2. Taskbook enters task into system
+Use case ends
+
+**Extensions**
+[Add Deadline Task](#add-deadline-task) occurs after step 1.
+
 ### Add Deadline Task
+This use case extends [Add Floating task](#add-floating-task). It is inserted at extension point Add Deadline Task.
+
+**MSS**
+
+1. User enters parameters for end date/time
+Use case ends
+
+**Extensions**
+1a. End date/time is in the wrong format
+> 1a1. TaskBook shows an error message <br>
+  Use case ends
+
+[Add Event](#add-event) occurs after step 1.
 
 ### Add Event
+
+This use case extends [Add Deadline Task](#add-deadline-task). It is inserted at extension point Add Event.
+
+**MSS**
+
+1. User enters parameters for start date/time
+Use case ends
+
+**Extensions**
+1a. Start date/time is in the wrong format
+> 1a1. TaskBook shows an error message <br>
+  Use case ends
 
 ### List all tasks
 
