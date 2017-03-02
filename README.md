@@ -8,7 +8,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/0649f4dee2df4032b0be526b133bd23c)](https://www.codacy.com/app/louislai/main/dashboard)
 
 <img src="docs/images/Ui.png" width="600"><br>
-A command-based todo list app for Jim.
+A CLI-based todo list app for Jim.
 
 #### Site Map
 * [User Guide](docs/UserGuide.md)
