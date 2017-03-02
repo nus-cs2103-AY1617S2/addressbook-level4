@@ -65,8 +65,8 @@ Examples:
 ### 2.3. Listing all tasks : `list`
 
 Shows a list of all tasks in Dueue/ in a specific list<br>
-Format: `list [favourite]`
-Format: `list list LISTINDEX [favourite]`
+Format: `list [favourite]`<br>
+Format: `list list LISTINDEX [favourite]`<br>
 Format: `list list LISTNAME [favourite]`
 
 Shows a list of all list names in Dueue<br>
@@ -75,6 +75,13 @@ Format: Format: `list lists`
 > Do not need to specify whether the parameter is LISTINDEX or LISTNAME<br>
 > Returns only favorite tasks by adding keyword "favorite" 
 
+Examples:
+
+* `list`
+* `list work`
+* `list 1 favorite`
+* `list lists`
+
 ### 2.4. Creating a list : `create`
 
 Creates a new list in Dueue<br>
@@ -82,6 +89,10 @@ Format: `create LISTNAME`
 
 > Listname cannot be the same as other existing lists<br>
 > Listname cannot begin with digits
+
+Examples:
+
+* `create school`
 
 ### 2.5. Updating a list : `update list`
 
@@ -92,6 +103,11 @@ Format: `update list LISTINDEX NEW_LISTNAME`
 > Listname cannot be the same as other existing lists<br>
 > Listname cannot begin with digits
 > Do not need to specify whether the parameter is LISTINDEX or LISTNAME<br>
+
+Examples:
+
+* `update list school newSchool`
+* `update list 1 newList`
 
 ### 2.6. Updating task(s) : `update`
 
@@ -199,14 +215,17 @@ There is no need to save manually.
 * **Delete** : `delete TASKINDEX` <br>
    e.g. `delete 3`
 
-* **List** : `list` <br>
-  e.g. `list`
+* **List** : `list [lists/LISTINDEX/LISTNAME] [favorite]` <br>
+  e.g. `list work favorite`
 
 * **Help** : `help` <br>
   e.g. `help`
 
+* **Update List** : `udpate list LISTNAME/LISTINDEX NEW_LISTNAME` <br>
+  e.g. `update list school nus`
+
 * **Update** : `update TASKINDEX ... [n/NAME] [due/DUEDATE] [t/TIME] [#LISTNAME] [d/DESCRIPTION] [@VENUE] [p/PRIORITYLEVEL] [FAVOURITE]` <br>
   e.g.`update 1 Laundry due/every sunday @`
   
-* **View** : `view DUETYPE/DUEDATE`
+* **View** : `view DUETYPE/DUEDATE`<br>
   e.g. `view dueon/today`
