@@ -51,11 +51,11 @@ Format: `help`
 Adds a task to Dueue<br>
 Format: `add [n/TASKNAME] [due/DUEDATE] [t/TIME] [#LISTNAME] [d/DESCRIPTION] [@VENUE] [p/PRIORITYLEVEL] [*f]`
 
-> Tasks cannot have multiple lists<br>
-> Due dates of tasks can repeating, e.g. every sunday<br>
-> Time of each task can only be one time point, e.g. 4pm<br>
-> Specifications of fields for task can be entered in any order<br>
-> If no fields are entered, help message for add command will appear.
+> * Tasks cannot have multiple lists<br>
+> * Due dates of tasks can repeating, e.g. every sunday<br>
+> * Time of each task can only be one time point, e.g. 4pm<br>
+> * Specifications of fields for task can be entered in any order<br>
+> * If no fields are entered, help message for add command will appear.
 
 Examples:
 
@@ -72,8 +72,8 @@ Format: `list list LISTNAME [favourite]`
 Shows a list of all list names in Dueue<br>
 Format: Format: `list lists`
 
-> Do not need to specify whether the parameter is LISTINDEX or LISTNAME<br>
-> Returns only favorite tasks by adding keyword "favorite" 
+> * Do not need to specify whether the parameter is LISTINDEX or LISTNAME<br>
+> * Returns only favorite tasks by adding keyword "favorite" 
 
 Examples:
 
@@ -100,9 +100,10 @@ Update a list in Dueue with new name<br>
 Format: `update list LISTNAME NEW_LISTNAME`
 Format: `update list LISTINDEX NEW_LISTNAME`
 
-> Listname cannot be the same as other existing lists<br>
-> Listname cannot begin with digits
-> Do not need to specify whether the parameter is LISTINDEX or LISTNAME<br>
+> * Listname cannot be the same as other existing lists<br>
+> * Listname cannot begin with digits
+> * Listname cannot contain whitespaces
+> * Do not need to specify whether the parameter is LISTINDEX or LISTNAME<br>
 
 Examples:
 
@@ -138,7 +139,7 @@ Format: `view dueon/DATE`
 View tasks due by a specified date.<br>
 Format: `view dueby/DATE`
 
-> * The date has to be specified in a certain format.
+> * The date has to be specified in a certain format.<br>
 > * User will be able to see repeating tasks due on/by that date also.
 
 Examples:
@@ -153,9 +154,9 @@ Examples:
 Deletes the specified person from the address book. Irreversible.<br>
 Format: `delete INDEX`
 
-> Deletes the person at the specified `INDEX`. <br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+> * Deletes the person at the specified `INDEX`. <br>
+> * The index refers to the index number shown in the most recent listing.<br>
+> * The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 
@@ -171,9 +172,9 @@ Examples:
 Selects the person identified by the index number used in the last person listing.<br>
 Format: `select INDEX`
 
-> Selects the person and loads the Google search page the person at the specified `INDEX`.<br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+> * Selects the person and loads the Google search page the person at the specified `INDEX`.<br>
+> * The index refers to the index number shown in the most recent listing.<br>
+> * The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 
@@ -221,11 +222,11 @@ There is no need to save manually.
 * **Help** : `help` <br>
   e.g. `help`
 
-* **Update List** : `udpate list LISTNAME/LISTINDEX NEW_LISTNAME` <br>
-  e.g. `update list school nus`
-
 * **Update** : `update TASKINDEX ... [n/NAME] [due/DUEDATE] [t/TIME] [#LISTNAME] [d/DESCRIPTION] [@VENUE] [p/PRIORITYLEVEL] [FAVOURITE]` <br>
   e.g.`update 1 Laundry due/every sunday @`
   
+* **Update List** : `update list LISTNAME/LISTINDEX NEW_LISTNAME` <br>
+  e.g. `update list school nus`
+
 * **View** : `view DUETYPE/DUEDATE`<br>
   e.g. `view dueon/today`
