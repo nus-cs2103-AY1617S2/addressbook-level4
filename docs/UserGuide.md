@@ -68,7 +68,7 @@ Shows a list of all tasks in Task Manager. Able to filter by type of task (task)
 
 Format: `list [TYPE]`
 
-> Valid parameters: 
+> Valid parameters:
 > * `tasks` / `task`
 > * `complete` / `completed`
 > * `incomplete` / `outstanding`
@@ -78,24 +78,24 @@ Format: `list [TYPE]`
 
 Examples:
 
-* `list`  
+* `list`
  Lists all tasks.
 
-* `list overdue tasks`    
+* `list overdue tasks`
  Lists all overdued tasks
 
-* `list outstanding tasks`   
+* `list outstanding tasks`
  Lists all outstanding tasks
 
-* `list completed tasks`    
+* `list completed tasks`
  Lists all completed tasks
 
-* `list by today`  
+* `list by today`
  Lists all tasks due by today
 
-* `list from monday to friday`    
+* `list from monday to friday`
  Lists all tasks due within Monday-Friday
- 
+
 ### 2.4. Editing a task : `update`
 
 Edits the specified task's details.
@@ -108,7 +108,7 @@ Format:`update INDEX [TASKNAME] [label LABELNAME] ([(by|on) DATE] | [from STARTD
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
 > * When editing labels, the existing labels of the person will be removed i.e adding of labels is not cumulative.
-> * You can remove all the person's tags by typing `label` without specifying any tags after it. 
+> * You can remove all the person's tags by typing `label` without specifying any tags after it.
 
 Examples:
 
@@ -120,11 +120,11 @@ Examples:
 
 ### 2.5. Finding all task containing any keyword in task name and labels : `find`
 
-Finds tasks whose name and labels containin any of the specified keywords.  
+Finds tasks whose name and labels containin any of the specified keywords.
 
 Format: `find [TYPE] KEYWORD [MORE_KEYWORDS]...`
 
-> Valid parameters: 
+> Valid parameters:
 > * `TaskName`
 > * `LabelName`
 > * `Complete` / `Completed`
@@ -135,18 +135,18 @@ Format: `find [TYPE] KEYWORD [MORE_KEYWORDS]...`
 > * The search is case insensitive and the order of the keywords does not matter.
 > * Task names, label names will be searched, and tasks with at least one keyword match will be return and display to user.
 
-Examples: 
+Examples:
 
-* `find CS2103`   
+* `find CS2103`
 Returns all task containing the keyword or label containing `CS2103` & `cs2103`.
 
-* `find task project`  
+* `find task project`
 Returns all task with the name containing `project` & `Project`.
 
-* `find label glocery`    
+* `find label glocery`
 Returns all task with the label name containing `glocery` & `Glocery`.
-  
-* `find project glocery`  
+
+* `find project glocery`
 Returns all tasks having name or label name containing `project`, `Project`,  `glocery`, `Glocery`.
 
 ### 2.6. Deleting a task : `delete`
@@ -161,10 +161,10 @@ Format: `delete INDEX`
 
 Examples:
 
-* `delete 2`    
+* `delete 2`
   Deletes the 2nd task in the Task Manager.
-* `find Project`    
-  `delete 1`    
+* `find Project`
+  `delete 1`
   Deletes the 1st task in the results of the `find` command.
 
 ### 2.7. Select a Task : `select`

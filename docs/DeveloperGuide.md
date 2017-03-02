@@ -376,7 +376,7 @@ Priority | As a ... | I want to ... | So that I can...
 
 (For all use cases below, the **System** is the `Task Manger` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Create new task 
+#### Use case: Create new task
 Use case ID: UC01 Create new task<br />
 Actor: User<br />
 Precondition: User has opened the application<br />
@@ -397,7 +397,7 @@ Use case ends.
 > 1a1. There is a clash<br />
   1a11. System shows error to the user.<br />
   Resume at step 1.
-  
+
 > 1a2. There is no clash<br />
   Resume at step 2.
 
@@ -430,7 +430,7 @@ Precondition: A list of tasks is being displayed<br />
 2. System saves the updated task<br />
 Use case ends
 
-**Extensions** 
+**Extensions**
 
 3a. There is a clash with another task
 
@@ -448,7 +448,7 @@ Precondition: A list of tasks is being displayed<br />
 1. User identifies the task to view
 2. System displays the details of the task<br />
 Use case ends
- 
+
 #### Use case: View all outstanding tasks in a chronological order
 Use case ID: UC05 View all outstanding tasks in a chronological order<br />
 Actor: User<br />
@@ -460,10 +460,10 @@ Precondition: User has opened the application.<br />
 2. System displays a list of all outstanding tasks<br />
 Use case ends
 
-**Extensions** 
+**Extensions**
 
 2a. There are no outstanding tasks
-        
+
 > 2a1. System notifies user that there are no outstanding tasks<br />
   Use case ends
 
@@ -491,12 +491,12 @@ Use case ends
 **Extensions**
 
 2a. Previously executed command does not manipulate data
-            
+
 > 2a1. System executes the undo command and notifies user that nothing was changed<br />
   Use case ends
 
 2b. No previously executed command exist
-  
+
 > 2b1. System notifies the user that there is no previous operation executed in the current session<br />
   Use case ends
 
@@ -612,7 +612,7 @@ Use case ends.
 3a. The given selection is invalid
 
 > 3a1. System show error message<br />
-  Use case resumes at step 2 
+  Use case resumes at step 2
 
 #### Use case: Free-ing slot when user confirms a slot for a task
 Use case ID: UC14 Free-ing slot when user confirms a slot for a task<br />
@@ -756,7 +756,7 @@ Use case ends
 > Use case ends
 
 2b. Multiple matches found
-  
+
 > 2b1. System will display list of words that currently match whatever the user is typing
 
 > 2b2. User continues to enter more letters into the command and request for an autocomplete option again<br />
@@ -893,7 +893,7 @@ Pros:
 * Customizable user interface.
 * Allows the user to assign tasks to collarborators.
 * The application has features that suggest some task list to get started such as Work list.
-* Application supports many different platforms and many different browser plugins. 
+* Application supports many different platforms and many different browser plugins.
 
 Cons:
 
