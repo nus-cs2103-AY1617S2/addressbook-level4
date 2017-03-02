@@ -34,6 +34,7 @@ By : `CS2103JAN2017-W15-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&
 Use case ends
 
 **Extensions**
+
 [Add Deadline Task](#add-deadline-task) occurs after step 1.
 
 ### Add Deadline Task
@@ -45,6 +46,7 @@ This use case extends [Add Floating task](#add-floating-task). It is inserted at
 Use case ends
 
 **Extensions**
+
 1a. End date/time is in the wrong format
 > 1a1. TaskBook shows an error message <br>
   Use case ends
@@ -61,6 +63,7 @@ This use case extends [Add Deadline Task](#add-deadline-task). It is inserted at
 Use case ends
 
 **Extensions**
+
 1a. Start date/time is in the wrong format
 > 1a1. TaskBook shows an error message <br>
   Use case ends
@@ -74,6 +77,7 @@ Use case ends
 Use case ends
 
 **Extensions**
+
 2a. The list is empty
 > 2a1. TaskBook shows a notice message <br>
   Use case ends
@@ -138,6 +142,7 @@ Use case ends
 Use case ends
 
 **Extensions**
+
 2a. The list is empty
 > 2a1. TaskBook shows a notice message <br>
   Use case ends
@@ -152,6 +157,7 @@ Use case ends
 Use case ends
 
 **Extensions**
+
 2a. There exists no valid action that can be undone
 > 2a1. TaskBook shows a notice message <br>
   Use case ends
@@ -166,6 +172,7 @@ Use case ends
 Use case ends
 
 **Extensions**
+
 2a. There exists no valid undo action that can be redone
 > 2a1. TaskBook shows a notice message <br>
   Use case ends
