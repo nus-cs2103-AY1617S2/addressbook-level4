@@ -48,26 +48,21 @@ Use case ends
 
 **MSS**
 
-1. User requests to list tasks
-2. TaskBook shows a list of tasks
-3. User requests to edit a specific task in the list
-4. TaskBook edits the task <br>
+1. User retrieves list of tasks [via Use Case: List all Tasks](#list-all-tasks)
+2. User enters command to edit task
+3. TaskBook edits task according to given parameters
 Use case ends
 
 **Extensions**
 
-2a. The list is empty
+2a. The given index is invalid
 
-> Use case ends
-
-3a. The given index is invalid
-
-> 3a1. TaskBook shows an error message <br>
+> 2a1. TaskBook shows an error message <br>
   Use case resumes at step 2
 
-3b. The given edits are invalid
+2b. The given parameters are invalid
 
- > 3b1. TaskBook shows an error message <br>
+ > 2b1. TaskBook shows an error message <br>
   Use case resumes at step 2
 
 ### Mark Tasks as Completed
