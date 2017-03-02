@@ -14,7 +14,7 @@ Role: Team Leader <br>
 -----
 
 #### [Melvin Tan](http://github.com/Melvin-Tan)
-<img src="images/MelvinTan" width="150"><br>
+<img src="images/MelvinTan.jpg" width="150"><br>
 Role: Developer <br>
 
 * Components in charge of: Task, Event
