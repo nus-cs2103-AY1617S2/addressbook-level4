@@ -7,8 +7,8 @@ import java.util.regex.Pattern;
 
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.dispatcher.CommandResult;
+import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
-import seedu.toluist.model.task.Task;
 import seedu.toluist.ui.Ui;
 import seedu.toluist.ui.UiStore;
 
