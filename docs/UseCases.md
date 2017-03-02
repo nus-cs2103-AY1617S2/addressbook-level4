@@ -76,27 +76,27 @@ Use case ends
 2a. The list is empty
 > 2a1. TaskBook shows a notice message <br>
   Use case ends
-  
+
 ### Undo Action
 
 **MSS**
 
 1. User requests to undo the previous action
-2. TaskBook undos the last action  
+2. TaskBook undos the last action
 3. TaskBook shows the reflected changes <br>
 Use case ends
 
 **Extensions**
 2a. There exists no valid action that can be undone
 > 2a1. TaskBook shows a notice message <br>
-  Use case ends 
-  
+  Use case ends
+
 ### Redo Action
 
 **MSS**
 
-1. User requests to redo the previous undo 
-2. TaskBook redos the previous undo 
+1. User requests to redo the previous undo
+2. TaskBook redos the previous undo
 3. TaskBook shows the reflected changes <br>
 Use case ends
 
