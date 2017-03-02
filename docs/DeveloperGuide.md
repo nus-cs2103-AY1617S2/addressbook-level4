@@ -355,7 +355,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | add a new event | remind myself of things I have to attend
 `* * *` | user | see all events | have an overview of all the things I need to events
 `* * *` | user | update an event | change entries that are errorneous or outdated
-`* * *` | user | delete a task | remove entries that I no longer need
+`* * *` | user | delete an event | remove entries that I no longer need
 `* * *` | user | find a task by name | locate details of task without having to go through the entire list
 `* * *` | user | find a task by tag | locate details of task without having to go through the entire list
 `* * *` | user | add tag to task | group my tasks to provide more context
