@@ -117,8 +117,8 @@ Updates existing task(s) in Dueue<br>
 Format: `update TASKINDEX ... [n/NAME] [due/DUEDATE] [t/TIME] [#LISTNAME] [d/DESCRIPTION] [@VENUE] [p/PRIORITYLEVEL] [FAVOURITE]`
 
 > * Edits the task at the specified `INDEX`.
-    The index refers to the index number shown in the last person listing.<br>
-    The index **must be a positive integer** 1, 2, 3, ...
+> * The index refers to the index number shown in the last person listing.<br>
+> * The index **must be a positive integer** 1, 2, 3, ...
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
 > * You can remove details by typing `` after the `/` or `@`without specifying any tags after it eg,`due/`.
