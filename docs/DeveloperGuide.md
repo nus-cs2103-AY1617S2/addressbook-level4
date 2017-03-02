@@ -513,7 +513,7 @@ Use case ends
 
 > a task or event
 
-#####Element
+#####Parameter
 > detail associated with an activity (e.g. duration, name, start time)
 
 #####Recurring task:
