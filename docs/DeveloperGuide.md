@@ -379,6 +379,32 @@ Priority | As a ... | I want to ... | So that I can...
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
+#### Use case: Edit task
+
+**MSS**
+
+1. User requests to list tasks
+2. TaskBook shows a list of tasks
+3. User requests to edit a specific task in the list
+4. TaskBook edits the task <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given index is invalid
+
+> 3a1. TaskBook shows an error message <br>
+  Use case resumes at step 2
+
+3b. The given edits are invalid
+
+ > 3b1. TaskBook shows an error message <br>
+  Use case resumes at step 2
+
 #### Use case: Delete person
 
 **MSS**
