@@ -351,14 +351,14 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | indicate a starting and ending time for my tasks | keep track of events I need to attend
 `* * *` | user | display my tasks in a calendar view | obtain a general overview of the tasks I need to complete
 `* * *` | user  | set tasks as recurring at certain intervals | save time having to add the task repeatedly for different times
-`* * *` | user | add subtasks to existing tasks | keep track of subtasks to be completed as part of bigger tasks
+`* * *` | user | add subtasks to existing tasks | keep track of and manage subtasks to be completed as part of bigger tasks
 `* * *` | user | mark a task as completed and filter tasks that are not completed | keep tracks of tasks that I have to complete
 `* * *` | user | view completed tasks | avoid working on tasks that are already completed
 `* * *` | user | set notifications to go off when certain tasks are nearing their deadline | avoid missing those deadlines
 `* * *` | user | set notifications to go off when I have planned to work on certain tasks | remind myself to work on those tasks that need to be completed
 `* * *` | user | undo previous commands | revert back to previous states in case of wrongly entered commands
 `* * *` | user  | activate the application quickly using a keyboard shortcut | access my task manager conveniently and efficiently
-`* * *` | advanced user | autocomplete my command by pressing a key (e.g. tab) | type my commands faster
+`* * *` | advanced user | autocomplete my command by pressing a key (e.g. enter) | type my commands faster
 `* * *` | user | specify a particular location I want to save the data file of my task manager | sync my task list and access it from other devices
 `* * *` | user | search for names of particular tasks | update or view specific tasks efficiently
 `* *` | advanced user | use shorter versions of commands | type my commands faster
@@ -369,7 +369,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user | postpone an existing task via a specific command | save time having to specifically enter the new deadline
 `* *` | user | attach related documents and links to my tasks | conveniently access documents needed for me to work on the tasks
 `* *` | new user | view command hints when typing commands | ensure my commands are correct
-`* *` | user | block off multiple slots for the same task and release the unused slots when the exact timing of a task is confirmed | avoid having to add multiple copies of the same task to different time slots
+`* *` | user | block off multiple slots for the same task and release the unused slots when the exact timing of a task is confirmed | avoid having to add multiple copies of the same task to multiple potential time slots
 `* *` | user | view the slots at which I have not planned for any task to be completed | find a suitable slot for new tasks easily
 `*` | user sharing this computer with other users | switch between different accounts on this task manager | share this application with the other users of this computer
 `*` | user | backup my entire task list to the cloud or external storage via export | have extra redundancy against system failures
@@ -431,17 +431,16 @@ Use case ends
 
 1. User presses on predefined hotkey
 2. System displays main window
-3. Use case ends
 Use case ends
 
 #### Use case: Delete task
 
 **MSS**
 
-1. User requests to list task
-2. System shows a list of task
+1. User requests to list tasks
+2. System shows a list of tasks
 3. User requests to delete a specific task in the list
-4. User deletes the task
+4. System deletes the task
 Use case ends.
 
 
@@ -453,7 +452,7 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. System shows an error message<br>
+> 3a1. System informs the user that the given index is invalid<br>
 Use case resumes at step 2
 
 #### Use case: Add task
@@ -468,7 +467,7 @@ Use case ends.
 
 1a. Parameters are wrong
 
-> 1a1. System shows error message<br>
+> 1a1. System informs user that the parameters for the add command are wrong<br>
 Use case ends
 
 #### Use case: Undo task
@@ -509,12 +508,9 @@ Use case ends
 
 ## Appendix D : Glossary
 
-#####Activity
+#####Parameter: 
 
-> a task or event
-
-#####Parameter
-> detail associated with an activity (e.g. duration, name, start time)
+> detail associated with a task (e.g. duration, name, start time)
 
 #####Recurring task:
 
@@ -534,7 +530,7 @@ Use case ends
 
 #####Hotkey:
 
-> A single or combination of keys that is registered with the system to perform specific activity when pressed
+> a single or combination of keys that is registered with the system to perform specific activity when pressed
 
 #####Mainstream OS:
 
@@ -551,8 +547,8 @@ Pros:
 * Customizable to-do lists for different purposes (e.g. movies to watch, grocery list)
 * Alarm reminders for task when deadline is up AND when user should be working on the task
 * Save links and web pages easily for later by via an Add to Wunderlist browser extension
-* Compatible and syncable across many operating systems and popular devices
-* Transform emails into to-do tasks in Wunderlist by simply forwarding them
+* Compatible and syncable across many operating systems and commonly-used devices
+* Transform emails into to-do tasks by simply forwarding them to a specific address
 * Print task lists neatly and easily
 
 
