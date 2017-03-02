@@ -17,10 +17,10 @@ By : `Miao Ling` , `Ian` , `Qi Xiang` and `Dylan` - `[W09-B4]` Since : `Feb 2017
 2. Copy the file to the folder you want to use as the home folder for your task manager.
 
 3. Double-click on the file to start the application. The GUI should appear in a few seconds.<br>
-   > <img src="images/startup_screen.jpg" width="600">
+> <img src="images/startup_screen.jpg" width="600">
 
 4. Get started by adding the first task that you have in mind! Refer to "2. Features" for instructions. <br>
-   > <img src="images/addtask_screen.jpg" width="600">
+> <img src="images/addtask_screen.jpg" width="600">
 
 
 5. After step 6, you can view your task in 3 different tabs.
@@ -39,27 +39,29 @@ By : `Miao Ling` , `Ian` , `Qi Xiang` and `Dylan` - `[W09-B4]` Since : `Feb 2017
    > <img src="images/Priority_screen.jpg" width="600">
 
 ## 2. Features
-	> Command Format
-	> * Words in `UPPER_CASE` are the parameters.
-	> * Items in `SQUARE_BREACKETS` are optional.
-	> * Items with `...` after them can have multiple instances.
-	> * Parameters can be in any order.
+
+> Command Format
+>
+> * Words in `UPPER_CASE` are the parameters.
+> * Items in `SQUARE_BREACKETS` are optional.
+> * Items with `...` after them can have multiple instances.
+> * Parameters can be in any order.
 	
 ### 2.1. Viewing help : `help`
-   Format: `help`
+Format: `help`
 	> Help is shown if you enter an incorrect command e.g. `asdf`
 	> Alternatively, type /help to obtain a list of commands that you can use. 
 
 ### 2.2. Adding a Task : `add`
-	Adds a task to the task manager
-	Format: `add TASK_NAME d/DEADLINE p/PRIORITY_LEVEL [i/ANY_INFO] [t/TAGS]...`
+Adds a task to the task manager
+Format: `add TASK_NAME d/DEADLINE p/PRIORITY_LEVEL [i/ANY_INFO] [t/TAGS]...`
    > `PRIORITY_LEVEL` should be defined by integers 1 (high) to 4(low)
    > `ANY_INFO` allows you to key in details with regards to the task, optional
 	> `TAGS` allows you to assign tags to the tasks, optional.
 	
-	Examples:
-	* add CS3230 Assignment 1 d/8 Jan 2018 p/1 i/How to do? t/School t/CS3230
-	* add Buy Milk d/23 Fev 2017 p/4 t/Chores
+Examples:
+* add CS3230 Assignment 1 d/8 Jan 2018 p/1 i/How to do? t/School t/CS3230
+* add Buy Milk d/23 Fev 2017 p/4 t/Chores
 
 ### 2.3. Listing the tasks: `list`
 	Shows a list of all the tasks in the task manager.<br>
@@ -76,10 +78,11 @@ By : `Miao Ling` , `Ian` , `Qi Xiang` and `Dylan` - `[W09-B4]` Since : `Feb 2017
 	Shows a list of all the tasks sorted by priority.
 	Format: `list priority`
 	
-	Shows a list of tasks sorted lexographically by tags.
+	Shows a list of tasks of the tags sorted in lexographical order
 	Format: `list t/TAGS...`
+	> The tasks listed will be in clusters according to tags, but sorted in alphabetical order.
 	Examples:
-	* `list t/CS3230` 
+	* `list t/CS3230 t/Work` 
 
 ### 2.4. Editing an existing task: `edit`
 	Edits an existing task in the task manager.
@@ -147,22 +150,23 @@ By : `Miao Ling` , `Ian` , `Qi Xiang` and `Dylan` - `[W09-B4]` Since : `Feb 2017
 
 ## 4. Command Summary
 
-* **Add** `add TASK_NAME d/DEADLINE p/PRIORITY_LEVEL [i/ANY_INFO] [t/TAGS]...`
+* **Add** : `add TASK_NAME d/DEADLINE p/PRIORITY_LEVEL [i/ANY_INFO] [t/TAGS]...`<br>
 	e.g. `add Sleep d/27 December 2018 p/1 i/Sleep is good t/Home`
 	
-* **Help** `help`
+* **Help** : `help` 
 	
-* **List All** `list all`
+* **List All** : `list all`
 
-* **List by Deadlines** `list deadlines`
+* **List by Deadlines** : `list deadlines`
 
-* **list by Priority** `list priority`
+* **List by Priority** : `list priority`
 
-* **List of tasks by Tags** `list t/TAGS`
-	e.g. `list t/CS2103`
+* **List by Tags** : `list t/TAGS [MORE_TAGS]`<br>
+	e.g. `list t/CS2103 t/Work t/School`
 	
-* **Switching between tabs** `switch`
+* **Switching between tabs** : `switch`
 
-* **Done** `done`
+* **Done** : `done`<br>
 	e.g. `done 1`
-  
+ 
+ 
