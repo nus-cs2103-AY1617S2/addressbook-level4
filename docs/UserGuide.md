@@ -36,8 +36,8 @@ By : `T09-B04`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&n
 > * Duration must be specified in “hrs”, “mins” and/or “secs”.
 > * Time must be specified in “am” and/or “pm”.
 > * For <... date and time> parameters, either date or time can be left out but not both.
-> * <task> refers to the name of the task.
-> * Elements include: name, start time, start date, end (due) time, end (due) date, duration.
+> * `<task>` refers to the name of the task.
+> * Parameters include: name, start time, start date, end (due) time, end (due) date, duration.
 
 ### 2.1. Adding a task: `add`
 
@@ -70,12 +70,10 @@ Examples:
 
 ### 2.3. Find a task: `find`
 
-Finds persons whose names contain any of the given keywords.<br>
+Finds task(s) whose names contain any of the given keywords.<br>
 Formats:
 > * `find <task>`
-> * `find <task>; <due date>`
-	** `show tasks before a certain due date`
-	** `also show tasks without any due date`
+> * `find <task>; <due date>` (`show tasks before the due date and also tasks without any due date`)
 
 Examples:
 
@@ -85,7 +83,8 @@ Examples:
 ### 2.4. Listing all tasks : `list`
 
 Shows a list of all tasks in the task manager.<br>
-Format: `list`
+Format:
+> * `list`
 
 ### 2.5. Viewing help : `help`
 
@@ -119,7 +118,8 @@ Examples:
 ### 2.8. Exiting the program : `exit`
 
 Exits the program.<br>
-Format: `exit`
+Format:
+> * `exit`
 
 ### 2.9. Change save file location
 
