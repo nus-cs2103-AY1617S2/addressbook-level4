@@ -428,6 +428,22 @@ Use case ends.
 
 > Use case ends.
 
+#### Use case: Search tasks
+
+**MSS**
+
+1. User enters the search command with given parameters to search for
+2. DoTomorrow interprets the search command and displays a list of matching tasks
+Use case ends.
+
+**Extensions**
+
+2a. No search terms are given
+
+> 2a1. DoTomorrow shows an error message indicating the user's error
+> Use case resumes at step 1
+
+
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
