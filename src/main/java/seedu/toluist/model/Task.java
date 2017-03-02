@@ -2,6 +2,7 @@ package seedu.toluist.model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Represents a Task
@@ -40,8 +41,8 @@ public class Task {
                 || (other instanceof Task // instanceof handles nulls
                 && this.description.equals(((Task) other).description)) // state check
                 && this.allTags.equals(((Task) other).allTags)
-                && this.startDateTime.equals(((Task) other).startDateTime)
-                && this.endDateTime.equals(((Task) other).endDateTime)
+                && Objects.equals(this.startDateTime, ((Task) other).startDateTime) // handles null
+                && Objects.equals(this.endDateTime, ((Task) other).endDateTime) // handles null
                 && this.isCompleted == ((Task) other).isCompleted;
     }
 

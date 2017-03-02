@@ -40,6 +40,10 @@ public class TodoList {
     }
 
     public void add(Task task) {
+        // Don't allow duplicate tasks
+        if (allTasks.indexOf(task) > -1) {
+            return;
+        }
 
         allTasks.add(task);
     }
@@ -48,7 +52,9 @@ public class TodoList {
         allTasks.remove(task);
     }
 
-    public void update(Task task, String description) {
-        task.description = description;
+    public void update(int index, String description) {
+        if (index >= 0 && index < allTasks.size()) {
+            allTasks.get(index).description = description;
+        }
     }
 }
