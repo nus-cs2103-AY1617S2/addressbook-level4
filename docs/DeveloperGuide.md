@@ -347,14 +347,47 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | user | add a task by specifying a task description and the deadline | I can record tasks that need to be done by a specific day
+`* * *` | user |add an event/task with description, time period and date	| I can record events that need to be done in a specific period 
+`* * *` | user |add an event/task with description that has variation of formats	| I am not limited to one and only one format - I can have some flexibility
+`* * *` | user |add a recurring task with description, time, frequency	|I can record tasks that need to be done on a specific day
+`* * *` | user |add a tag/multiple tag to an existing event/task	| I do not have to always add the tag when I add the task
+`* * *` | user |delete unwanted tag	| I can remove the tags when I no longer need them
+`* * *` | user |delete task | I can remove the tasks when I have completed them
+`* * *` | user |to have confirmation on deleting uncompleted task	| I will not accidentally delete a task
+`* * *` | user |edit the description/deadline of a certain task |	I can update the task once the conditions changes/deadline extended
+`* * *` | user |edit the tag of a certain task	| I can update the task once I feel another tag is more suitable
+`* * *` | user |edit the tag name	| I can update name of a tag for all tasks under it once for all
+`* * *` | user |find the tasks whose description contains certain key words	| I can easily locate the task if I cannot remember fully the task name
+`* * *` | user |find the tasks by giving multiple criteria	| I can have the choice of input more information to search for the task I have in mind
+`* * *` | user |find the tag by typing the keywords	| I can locate the tags if I cannot remember fully the tag name
+`* * *` | user |find the most urgent task/the task with the highest urgency level	| I can know in a blink what I am supposed to do now
+`* * *` | user |have an exhaustive user guide on all commands	| I will know all availabe commands that I have
+`* * *` | user |have user guide on specific area of commands |	I will know what are the available commands for that area
+`* * *` | user | obtain a list of all task |	I can know all the tasks I have at hand
+`* * *` | user |list tasks whose deadlines are within a certain time period	| I can know all the tasks that have deadlines within that time period
+`* * *` | user |list all tasks whose deadline is on one given day	| I can know by certain time point what I should have completed
+`* * *` | user |have a list of completed task	| I can check what I have done
+`* * *` | user |list all tasks by under a certain tag	| I can know that tasks I have within one category
+`* * *` | user |list the ongoing tasks for a given day	| I can know what I am occupied with on that day
+`* * *` | user |list all tasks under multiple tags	| I can know the tasks under more than just one tag
+`* * *` | user |select one/multiple tasks/tags	| I can carry out further actions on the selected tasks
+`* * *` | user |save the data into a folder I have specified	| I know where to find the data I have entered
+`* * *` | user |undo the most recent operation	| in case I made a mistake I can reverse
+`* *` | user |group/filter tasks according to categories such as work/family/etc |	I will not be distracted by irrelevant tasks at specific times
+`* *` | user | edit the subtasks of a task	| I can update the subtasks if there is any changes
+`* *` | user |have suggestions when I typed invalidly |	I will know how to correct my mistakes
+`* *` | New user | have reminders of format when I started a command word	| I will know the correct format of the input
+`* *` | user | assign importance levels to each task with colour coding	| I can easily spot the more important tasks and prioritize them
+`* *` | user |set notifications before the due time for certain tasks |	I will be reminded of the task in a timely manner
+`* *` | user |split tasks into subtasks with a progress bar | I can keep track of my progress in individual tasks
+`* *` | user |copy and paste the task to some other day |	I don't need to type extra
+`* * ` | Advanced user | use shorter versions of a command/customize my commands	 | type a command faster
+`*` | user|have a guided tour of the software	| I will know what are the available features of the software
+`*` | user|customize the timing for reminder	| I will not be bombasted with too many reminders
+`*` | user| share task/tasks with others |	I can designate my tasks to others
 
 {More to be added}
-
 ## Appendix B : Use Cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
