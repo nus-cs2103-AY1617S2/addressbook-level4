@@ -347,11 +347,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | user | add a new task | 
+`* * *` | user | edit a new task | change information of a task
+`* * *` | user | delete a task | remove tasks that I no longer need to track
+`* * *` | user | find upcoming tasks by date | can track of what is dued soon
+`* * *` | user | get more information about a command | learn how to use various commands
+`* * *` | user with different kind of tasks| tag a task | so that I can add labels associated with the task 
+`* * *` | user | retrieve tasks by tag | so that I can see tasks associated with a label
+`* * *` | user | retrieve tasks due on certain date | so that I can see tasks due on specified date
+`* *` | advanced user | use shorter versions of a command to type faster
+`* *` | frequent user | add a recurring task | keep track of task that needs to be done many times
+`* *` | user | get a week view of tasks | plan for my week
+`* *` | user | change the reccurence setting of a task | update if the task is recurring
+`* ` | user | create a copy of task in google calendar | refer to tasks outside of app
+`* ` | user | set task reminders | remind myself of certain tasks
+
 
 {More to be added}
 
