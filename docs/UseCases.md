@@ -25,6 +25,12 @@ By : `CS2103JAN2017-W15-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&
 
 ## Use Cases
 
+### Add Floating Task
+
+### Add Deadline Task
+
+### Add Event
+
 ### List all tasks
 
 **MSS**
@@ -63,6 +69,10 @@ Use case ends
 
  > 3b1. TaskBook shows an error message <br>
   Use case resumes at step 2
+
+### Mark Tasks as Completed
+
+### Delete Task
 
 ### Find task
 
@@ -104,3 +114,7 @@ Use case ends
 2a. There exists no valid undo action that can be redone
 > 2a1. TaskBook shows a notice message <br>
   Use case ends
+
+### Save to File
+
+### Change File storage
