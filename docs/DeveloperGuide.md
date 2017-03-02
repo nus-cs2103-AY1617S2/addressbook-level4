@@ -497,5 +497,15 @@ Cons:
 * Requires Internet connection to sync tasks.
 * Limited options to customise UI.
 
+**Remember the Milk**
 
+Pros:
+* Able to filter tasks according to their deadline.
+* Able to most of the commands with mouse clicks.
+* Able to sync with other apps such as iCalendar and Feed.
+* Simple UI that is easy on the eyes.
+* Most of the essential features are not locked behind the paywall.
+Cons:
+
+* Requires internet connection to use.
 
