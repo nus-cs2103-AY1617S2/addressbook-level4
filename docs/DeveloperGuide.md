@@ -391,7 +391,7 @@ Priority | As a ... | I want to ... | So that I can...
 1. User types a letter or a sequence of letters
 2. System shows a list of commands that contain that letter or sequence of letters
 3. User selects specific command in list
-4. System autocompletes user’s command
+4. System autocompletes user's command
 Use case ends. 
 
 **Extensions**
@@ -408,7 +408,7 @@ Use case ends.
 
 **MSS**
 
-1. User clicks on “Change Save Location”
+1. User clicks on "Change Save Location"
 2. System displays a directory chooser
 3. User selects a directory
 4. System changed the save location to the one selected
@@ -417,11 +417,11 @@ Use case ends
 
 **Extensions**
 
-1a. User pressed “Alt + S” keys
+1a. User pressed "Alt + S" keys
 
 > Use case resumes at step 2
 
-3a. User clicks on “Cancel”
+3a. User clicks on "Cancel"
 
 > Use case ends
 
@@ -572,10 +572,10 @@ Author: Lim Shun Xian
 Pros:
 
 * Cross platform
-* Integrated with majority of Google’s app such as Gmail
-* Able to compare friends’ calendar with yours to find common free slots
+* Integrated with majority of Google's app such as Gmail
+* Able to compare friends' calendar with yours to find common free slots
 * Able to share calendar to others to view
-* Able to send a daily reminder email of today’s agenda (due tasks) at 5AM 
+* Able to send a daily reminder email of today's agenda (due tasks) at 5AM 
 
 Cons:
 
