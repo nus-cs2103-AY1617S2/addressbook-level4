@@ -4,9 +4,9 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/qcfw2kpnoim4tkkp?svg=true)](https://ci.appveyor.com/project/BernardYip/main)
 [![Coverage Status](https://coveralls.io/repos/github/se-edu/addressbook-level4/badge.svg?branch=master)](https://www.codacy.com/app/damith/addressbook-level4?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=se-edu/addressbook-level4&amp;utm_campaign=Badge_Grade)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7358c2cf354244e6b53bc50d2aaf727b)](https://www.codacy.com/app/bernardyip/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103JAN2017-T16-B2/main/&amp;utm_campaign=Badge_Grade)
-<img src="docs/images/TaskManager.jpg" width="600"><br>
+<img src="docs/images/DoOrDie.jpg" width="600"><br>
 
-* This is a desktop Address Book application. It has a GUI but most of the user interactions happen using
+* This is a desktop task manager application. It has a GUI but most of the user interactions happen using
   a CLI (Command Line Interface).
 * It is a Java sample application intended for students learning Software Engineering while using Java as
   the main programming language.

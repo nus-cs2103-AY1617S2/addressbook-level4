@@ -1,6 +1,6 @@
-# Task Manager - User Guide
+# DoOrDie - User Guide
 
-Please refer to the [Setting up](DeveloperGuide.md#setting-up) section to learn how to set up Task Manager.
+Please refer to the [Setting up](DeveloperGuide.md#setting-up) section to learn how to set up DoOrDie.
 
 ---
 
@@ -16,8 +16,8 @@ Please refer to the [Setting up](DeveloperGuide.md#setting-up) section to learn 
    > Having any Java 8 version is not enough. <br />
    > This app will not work with earlier versions of Java 8.
 
-2. Download the latest `taskmanager.jar` from the [releases](../../../releases) tab.
-3. Navigate to the location of the `taskmanager.jar` and double click the jar.
+2. Download the latest `doordie.jar` from the [releases](../../../releases) tab.
+3. Navigate to the location of the `doordie.jar` and double click the jar.
 4. The GUI should appear in a few seconds.
 <img src="images/TaskManager.jpg" width="600">
 
@@ -42,7 +42,7 @@ Format: `help`
 
 ### 2.2. Adding a task: `add`
 
-Adds a task to the task manager<br />
+Adds a task to DoOrDie<br />
 Format: `add TASKNAME [label LABEL] ([(by|on) DEADLINE] | [from START_DATE to END_DATE]) [repeat (hourly|daily|weekly|monthly|yearly)]`
 
 > * Tasks can have a deadline, or can do without one as well.
@@ -67,7 +67,7 @@ Examples:
 
 ### 2.3 Listing all tasks : `list`
 
-Shows a list of all tasks in Task Manager. Able to filter by type of task (task), or based on status of task such as completed or outstanding.
+Shows a list of all tasks in DoOrDie. Able to filter by type of task (task), or based on status of task such as completed or outstanding.
 
 Format: `list [TYPE]`
 
@@ -171,9 +171,9 @@ Format: `delete [TASK_ID|LABEL]`
 Examples:
 
 * `delete`<br />
-  Deletes the currently selected task in the Task Manager.
+  Deletes the currently selected task in DoOrDie.
 * `delete 2`<br />
-  Deletes the task with the id `2` in the Task Manager.
+  Deletes the task with the id `2` in the DoOrDie.
 * `delete school`<br />
   Deletes all task with the label `school`.
 
@@ -232,17 +232,17 @@ Examples:
 
 ### 2.10. Undo the previously executed command : `undo`
 
-Revert results of a previously executed command. If the previously executed command does not modify the data of Task Manager, nothing will be reverted.<br />
+Revert results of a previously executed command. If the previously executed command does not modify the data of DoOrDie, nothing will be reverted.<br />
 Format: `undo`
 
 ### 2.11. Clearing all entries : `clear`
 
-Clears all entries from the Task Manager.<br />
+Clears all entries from DoOrDie.<br />
 Format: `clear`
 
 ### 2.12. Push task changes to Google Calendar : `push`
 
-Updates `Google Calendar` with newly added/modified tasks. Priority goes to `Task Manager` if there is a conflict.<br />
+Updates `Google Calendar` with newly added/modified tasks. Priority goes to `DoOrDie` if there is a conflict.<br />
 Format: `push`
 
 ### 2.13. Pull task changes from Google Calendar : `pull`
@@ -252,7 +252,7 @@ Format: `pull`
 
 ### 2.14. Export agenda to PDF file : `export`
 
-Saves a PDF format with all tasks and details to the same directory as `taskmanager.jar`.<br />
+Saves a PDF format with all tasks and details to the same directory as `doordie.jar`.<br />
 Format: `export [DATE|START_DATE to END_DATE]`
 
 > * If no date is specified, the default date will be today's date
@@ -273,12 +273,12 @@ Examples:
 
 ### 2.15. Exiting the program : `exit`
 
-Exits the Task Manager.<br />
+Exits DoOrDie<br />
 Format: `exit`
 
 ### 2.16. Saving the data
 
-Task manager data are saved in the hard disk automatically after any command that changes the data.<br />
+DoOrDie data are saved in the hard disk automatically after any command that changes the data.<br />
 There is no need to save manually.
 
 ## 3. FAQ
