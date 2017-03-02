@@ -21,7 +21,7 @@ By : `CS2103JAN2017-W15-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&
 
 ## Use Case Diagram
 
-![Use Case Diagram](diagrams/Use_Case_Diagram.png)
+![Use Case Diagram](diagrams/Use_Case_Diagram.PNG)
 
 ## Use Cases
 
