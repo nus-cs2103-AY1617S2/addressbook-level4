@@ -416,9 +416,9 @@ Use case ends.
 
 ##### Task
 
-> Event: Task that has a start time and end time
-> Deadline: Task that has to be done before a specific deadline
-> Floating Task: Task without specific times
+> * Event: Task that has a start time and end time
+> * Deadline: Task that has to be done before a specific deadline
+> * Floating Task: Task without specific times
 
 ##### Alias
 
