@@ -437,10 +437,7 @@ Use case ends.
 
 **Wunderlist** 
 
-[//]: # (@@author yeejfe)
-
 Pros:
-
 * Allows creation of subtasks within a task.
 * Allows local storage, in case there is no internet access.
 * Allows the grouping of tasks as a list and even grouping into folders.
@@ -448,10 +445,9 @@ Pros:
 * Can invite other person(s), sharing the tasks with them.
 
 Cons:
-
 * No calendar view.
 * Cannot block slots.
 * Cannot ordered by due date.
 
-** The (really) Big Table of Comparison **
+**The (really) Big Table of Comparison**
 An extensive table of products comparison can be found [here (credits: Reddit/r/productivity)] (https://docs.google.com/spreadsheets/d/1yP6ZOXMWK-KsMZ-_Bod8tFhyEGdPndCu4HUBO_3rUww/edit#gid=0).
