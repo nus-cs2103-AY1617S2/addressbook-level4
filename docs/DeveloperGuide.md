@@ -374,7 +374,6 @@ Priority | As a ... | I want to ... | So that I can...
 
 
 
-{More to be added}
 
 ## Appendix B : Use Cases
 
