@@ -208,8 +208,8 @@ There is no need to save manually.
 
 ## 4. Command Summary
 
-* **Add**  `add [n/TASKNAME] [due/DUEDATE] [#LISTNAME] [d/DESCRIPTION] [@VENUE] [FAVOURITE]` <br>
-  e.g. `add n/laundry due/every sunday #personal d/wash clothes @B1 *f`
+* **Add**  `add [n/TASKNAME] [due/DUEDATE] [t/TIME] [#LISTNAME] [d/DESCRIPTION] [@VENUE] [p/PRIORITYLEVEL] [FAVOURITE]` <br>
+  e.g. `add n/laundry due/every sunday #personal d/wash clothes @B1 p/IMPORTANT *f`
 
 * **Clear** : `clear`
 

@@ -897,7 +897,7 @@ Author: Mou Ziyang
 
 Pros:
 
-* Has clear 2 levels of hierarchy (Board; List)
+* Has clear 2 levels of hierarchy (Board, List)
 * Has the option to archive and delete for finished tasks
 * Very flexible layout, every object is draggable
 * Can incorporate with many other softwares
@@ -923,6 +923,7 @@ Pros:
 * Can mark festival and holiday out
 
 Cons:
+
 * "Bar graph schedule view" is not very useful
 * Can only sort task in chronological order
 * Ambiguous hierarchy
