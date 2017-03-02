@@ -4,11 +4,11 @@ import seedu.address.commons.events.BaseEvent;
 import seedu.address.model.ReadOnlyTodoList;
 
 /** Indicates the AddressBook in the model has changed*/
-public class AddressBookChangedEvent extends BaseEvent {
+public class TodoListChangedEvent extends BaseEvent {
 
     public final ReadOnlyTodoList data;
 
-    public AddressBookChangedEvent(ReadOnlyTodoList data) {
+    public TodoListChangedEvent(ReadOnlyTodoList data) {
         this.data = data;
     }
 
