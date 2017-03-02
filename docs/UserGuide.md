@@ -19,15 +19,13 @@ By : `T09-B04`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&n
 1. Download the latest `taskmanager.jar` from the [releases](../../../releases) tab.
 2. Copy the file to the folder you want to use as the home folder for your Task Manager.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
-   /**> <img src="images/Ui.png" width="600">**/
-
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
    * **`list`** : lists all contacts
    * **`add`**` Finish Progress Report; 030217 1159PM` :
      adds a task named `Finish Progress Report` with due date `3rd Feb 2017 1159PM` to the Task Manager.
-   * **`delete`**` 3` : deletes the 3rd task shown in the current list
+   * **`delete`**` project` : deletes the task with the name `project`
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
@@ -45,13 +43,11 @@ By : `T09-B04`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&n
 
 Adds a task to the task manager<br>
 Formats:
-> add <task>
-> add <task>; <duration>
+> * `add <task>`
+> * `add <task>; <duration>`
 > * `add <task>; <due date and time>`
-> add <task>; <start date and time>; <duration>
-> add <task>; <start date and time>; <end date and time>
-
-> Persons can have any number of tags (including 0)
+> * `add <task>; <start date and time>; <duration>`
+> * `add <task>; <start date and time>; <end date and time>`
 
 Examples:
 
@@ -76,10 +72,10 @@ Examples:
 
 Finds persons whose names contain any of the given keywords.<br>
 Formats:
-> * find <task>
-> * find <task>; <due date>
-	> show tasks before a certain due date
-	> also show tasks without any due date
+> * `find <task>`
+> * `find <task>; <due date>`
+	>> * `show tasks before a certain due date`
+	>> * `also show tasks without any due date`
 
 Examples:
 
