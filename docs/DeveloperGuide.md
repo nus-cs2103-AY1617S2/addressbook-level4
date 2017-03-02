@@ -346,12 +346,37 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`***` | user | obtain a list of tasks due today / this week | plan my time to complete these urgent tasks before they are due
+`***` | user | view tasks planned to be completed within a certain time range | easily decide on tasks I should work on during that period
+`***` | user | indicate a starting and ending time for my tasks | keep track of events I need to attend
+`***` | user | display my tasks in a calendar view | obtain a general overview of the tasks I need to complete
+`***` | user  | set tasks as recurring at certain intervals | save time having to add the task repeatedly for different times
+`***` | user | add subtasks to existing tasks | keep track of subtasks to be completed as part of bigger tasks
+`***` | user | mark a task as completed and filter tasks that are not completed | keep tracks of tasks that I have to complete
+`***` | user | view completed tasks | avoid working on tasks that are already completed
+`***` | user | set notifications to go off when certain tasks are nearing their deadline | avoid missing those deadlines
+`***` | user | set notifications to go off when I have planned to work on certain tasks | remind myself to work on those tasks that need to be completed
+`***` | user | undo previous commands | revert back to previous states in case of wrongly entered commands
+`***` | user  | activate the application quickly using a keyboard shortcut | access my task manager conveniently and efficiently
+`***` | advanced user | autocomplete my command by pressing a key (e.g. tab) | type my commands faster
+`***` | user | specify a particular location I want to save the data file of my task manager | sync my task list and access it from other devices
+`***` | user | search for names of particular tasks | update or view specific tasks efficiently
+`**` | advanced user | use shorter versions of commands | type my commands faster
+`**` | new user | view additional usage information for particular commands | learn how to use specific commands effectively
+`**` | user | secure my task list | prevent other people from viewing my task list
+`**` | user | sync my task list to Google or Microsoft | view my tasks through their respective calendars
+`**` | user | retrieve previously typed commands using the UP and DOWN keys and execute them directly | save time having to retype similar commands repeatedly
+`**` | user | postpone an existing task via a specific command | save time having to specifically enter the new deadline
+`**` | user | attach related documents and links to my tasks | conveniently access documents needed for me to work on the tasks
+`**` | new user | view command hints when typing commands | ensure my commands are correct
+`**` | user | block off multiple slots for the same task and release the unused slots when the exact timing of a task is confirmed | avoid having to add multiple copies of the same task to different time slots
+`**` | user | view the slots at which I have not planned for any task to be completed | find a suitable slot for new tasks easily
+`*` | user sharing this computer with other users | switch between different accounts on this task manager | share this application with the other users of this computer
+`*` | user | backup my entire task list to the cloud or external storage via export | have extra redundancy against system failures
+`*` | user | create shared tasks across different users | track the progress of other users for shared tasks
+`*` | user | import previously exported data back | continue from where I left off
+`*` | user | receive a daily email at a preferred time that contains tasks due that day | plan my schedule for that day effectively
+
 
 {More to be added}
 
@@ -384,14 +409,27 @@ Use case ends.
 
 ## Appendix C : Non Functional Requirements
 
-1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
-   should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should be able to hold up to 2 years’ worth of tasks.
+2. Should process and respond to user commands within 1s. 
+3. Should conform to the Java coding standard.
+4. Should automatically back up data once a week. 
+5. Should detect any intrusion within 10 seconds.
+6. Should work on any mainstream OS as long as it has Java 1.8.0_60 or higher installed.
+7. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+
 
 {More to be added}
 
 ## Appendix D : Glossary
+
+Activity: a task or event
+Element: detail associated with an activity (e.g. duration, name, start time)
+Recurring task: a task that has to be completed periodically (e.g. daily or monthly)
+Subtask: a component of a task
+Autocomplete: complete words or strings without the user needing to type them in full
+Sync: ensure that data files in two or more locations are updated
+Hotkey: A single or combination of keys that is registered with the system to perform specific activity when pressed
+Mainstream OS: Windows, Linux, Mac
 
 ##### Mainstream OS
 
