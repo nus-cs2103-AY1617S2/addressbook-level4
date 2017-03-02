@@ -64,49 +64,52 @@ Examples:
 * add Buy Milk d/23 Fev 2017 p/4 t/Chores
 
 ### 2.3. Listing the tasks: `list`
-	Shows a list of all the tasks in the task manager.<br>
-	> Listing is done automatically when user switches between the tabs.<br>
-	> However, user can specify to list all the tasks he has in, which will be shown in a pop up.
-	> User can also sort it accordingly to the deadlines, priorities, etc.<br>
+
+Shows a list of all the tasks in the task manager.<br>
+> Listing is done automatically when user switches between the tabs.<br>
+> However, user can specify to list all the tasks he has in, which will be shown in a pop up.
+> User can also sort it accordingly to the deadlines, priorities, etc.<br>
 	
-	Shows a list of all the tasks in lexographical order
-	Format: `list all`
+Shows a list of all the tasks in lexographical order
+Format: `list all`
+
+Shows a list of all the tasks sorted by deadlines.
+Format: `list deadlines`
 	
-	Shows a list of all the tasks sorted by deadlines.
-	Format: `list deadlines`
+Shows a list of all the tasks sorted by priority.
+Format: `list priority`
 	
-	Shows a list of all the tasks sorted by priority.
-	Format: `list priority`
-	
-	Shows a list of tasks of the tags sorted in lexographical order
-	Format: `list t/TAGS...`
+Shows a list of tasks of the tags sorted in lexographical order
+Format: `list t/TAGS...`
 	> The tasks listed will be in clusters according to tags, but sorted in alphabetical order.
-	Examples:
-	* `list t/CS3230 t/Work` 
+Examples:
+* `list t/CS3230 t/Work` 
 
 ### 2.4. Editing an existing task: `edit`
-	Edits an existing task in the task manager.
-	Format: edit `INDEX [NAME] [d/DEADLINE] [p/PRIORITY_LEVEL] [i/ANY_INFO] [t/TAGS]...`
+Edits an existing task in the task manager.
+Format: `edit INDEX [NAME] [d/DEADLINE] [p/PRIORITY_LEVEL] [i/ANY_INFO] [t/TAGS]...`
 	
-	> * Edits the task labeled by the INDEX digit as shown on the screen. The INDEX must be a positive integer, e.g. 1, 2, 3, ...
-	> * At least one of the optional [fields] must be provided.
-	> * Existing 
-	Click on the task itself and the pop out window will appear.<br> 
-	You will able to edit the Title, Deadline, Priority, Details and Tags.
+> * Edits the task labeled by the INDEX digit as shown on the screen. The INDEX must be a positive integer, e.g. 1, 2, 3, ...
+> * At least one of the optional [fields] must be provided.
+> * Existing fields will be overwritten.
+
+Examples:
+* `edit 1 Assignment 2 d/25 Feb 2018 p/2`
 
 ### 2.5. Shifting tabs: `switch`
-	Switch the current tab to the next tab.
-	Format: `switch`
-	> Th	ere will be 3 tabs as stated, which can be toggled using this command.
+Switch the current tab to the next tab.
+Format: `switch`
+> There will be 3 tabs, which can be toggled using this command.
 
 ### 2.6. Completing a task: `done`
-	Archives the completed task. 
-	Format: `done INDEX_NUMBER`
-	> task labeled by INDEX_NUMBER will be removed from the list.
-	> INDEX_NUMBER of task is shown as according to the current tab.
-	Example: 
-	* `done 1` 
-	* `done 4`	
+
+Archives the completed task. 
+Format: `done INDEX_NUMBER`
+> task labeled by INDEX_NUMBER will be removed from the list.
+> INDEX_NUMBER of task is shown as according to the current tab.
+Examples: 
+* `done 1` 
+* `done 4`	
 	
 [Work in progress]
 ### 2.6. Deleting a task
