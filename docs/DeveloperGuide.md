@@ -362,7 +362,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | User | Update the deadline of a task | Make changes to deadlines if necessary
 `* * *` | User | Update the information attached to the task | Reflect changes in the plan as well as new requirements to fulfill.
 `* * *` | User | Delete a task | Get rid of tasks that no longer needs to tracked
-`* * *` | User | Undo any action | Reverse any wrong action that was taken 
+`* * *` | User | Undo any action | Reverse any wrong action that was taken
 `* * *` | User | Use the program offline | Keep track of my tasks without anInternet connection
 `* * *` | User | Specify the storage file and location | Control the save file location and name
 `* *` | User | Attach an email to the task | Find the email that prompted the task easily
