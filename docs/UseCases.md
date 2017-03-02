@@ -11,7 +11,7 @@ By : `CS2103JAN2017-W15-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&
     - [Add Event](#add-event)
     - [List all Tasks](#list-all-tasks)
     - [Edit Task](#edit-task)
-    - [Mark Tasks as Completed](#mark-tasks-as-completed)
+    - [Mark Task as Completed](#mark-task-as-completed)
     - [Delete Task](#delete-task)
     - [Find Task](#find-task)
     - [Undo Action](#undo-action)
@@ -65,7 +65,19 @@ Use case ends
  > 2b1. TaskBook shows an error message <br>
   Use case resumes at step 2
 
-### Mark Tasks as Completed
+### Mark Task as Completed
+
+1. User retrieves list of tasks [via Use Case: List all Tasks](#list-all-tasks)
+2. User enters command to mark task as completed
+3. TaskBook marks specified task as completed
+Use case ends
+
+**Extensions**
+
+2a. The given index is invalid
+
+> 2a1. TaskBook shows an error message <br>
+  Use case resumes at step 2
 
 ### Delete Task
 
