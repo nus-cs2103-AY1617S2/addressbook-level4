@@ -344,9 +344,9 @@ b. Require developers to download those libraries manually (this creates extra w
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
 
 
-Priority | As a ... | I want to ... | So that I can...
+Priority | As a ... | I want to ... | So that...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
+`* * *` | new user | see usage instructions | I can refer to instructions when I forget how to use the App
 `* * *` | user | add a task by specifying a task description and the deadline | I can record tasks that need to be done by a specific day
 `* * *` | user |add an event/task with description, time period and date	| I can record events that need to be done in a specific period 
 `* * *` | user |add an event/task with description that has variation of formats	| I am not limited to one and only one format - I can have some flexibility
@@ -382,7 +382,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user |set notifications before the due time for certain tasks |	I will be reminded of the task in a timely manner
 `* *` | user |split tasks into subtasks with a progress bar | I can keep track of my progress in individual tasks
 `* *` | user |copy and paste the task to some other day |	I don't need to type extra
-`* * ` | Advanced user | use shorter versions of a command/customize my commands	 | type a command faster
+`* * ` | Advanced user | use shorter versions of a command/customize my commands	 | I can type a command faster
 `*` | user|have a guided tour of the software	| I will know what are the available features of the software
 `*` | user|customize the timing for reminder	| I will not be bombasted with too many reminders
 `*` | user| share task/tasks with others |	I can designate my tasks to others
