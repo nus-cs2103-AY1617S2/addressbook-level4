@@ -74,8 +74,8 @@ Finds persons whose names contain any of the given keywords.<br>
 Formats:
 > * `find <task>`
 > * `find <task>; <due date>`
-	>> * `show tasks before a certain due date`
-	>> * `also show tasks without any due date`
+	** `show tasks before a certain due date`
+	** `also show tasks without any due date`
 
 Examples:
 
