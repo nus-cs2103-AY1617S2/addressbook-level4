@@ -399,11 +399,11 @@ Use case ends.
 > 3a1. DoTomorrow shows an error message <br>
   Use case resumes at step 2
 
-#### Use case: Add task
+#### Use case: Add task or event
 
 **MSS**
 
-1. User enters the task with optional parameters
+1. User enters the task with optional parameters such as due date, start and end time
 2. DoTomorrow parses task and stores it to memory, then displays the task with formatted parameters back to user
 Use case ends.
 
