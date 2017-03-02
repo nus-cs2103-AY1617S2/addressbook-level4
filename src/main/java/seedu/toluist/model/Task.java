@@ -56,4 +56,8 @@ public class Task {
     public void replaceTags(ArrayList<Tag> tags) {
         this.allTags = tags;
     }
+
+    public boolean isOverdue() {
+        return startDateTime != null && startDateTime.isBefore(LocalDateTime.now());
+    }
 }
