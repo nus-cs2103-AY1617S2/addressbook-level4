@@ -352,19 +352,19 @@ Priority | As a(n) ... | I want to ... | So that I can...
 `* * *` | user | delete a task | remove entries that I no longer need
 `* * *` | user | find a task by some keywords | locate similar tasks without having to go through the entire list
 `* * *` | user | mark a completed task done | know this task has been completed
-`* * *` | user | view list of archived | know what tasks has been completed
-`* * *` | user | view list of ongoing | know what tasks need to be done
-`* * *` | user | view list of archived | know what has been completed
+`* * *` | user | view list of ongoing tasks| know what tasks need to be done
+`* * *` | user | view list of archived tasks| know what has been completed
 `* * *` | user | sort ongoing tasks by due date or priority | know what has been completed and upcoming schedule
 `* * *` | user | change storage location | choose to store the data file in a local folder controlled by a cloud syncing service
 `* *` | user | undo the recent command | revert the changes quickly
 `* *` | user | view the calendar view | better plan my tasks 
 `* *` | user | view selected day summary of tasks | know what tasks need to be done for that day
-`*` | user | set recurring task | not add a similar task each time
 `* *` | advanced user | use keyboards commands/hot keys | quickly achieve what I want without typing
 `* *` | advanced user | have [alias](#alias) for keywords | quickly type what I want
-
+`*` | user | set recurring task | not add a similar task each time
+`*` | user | have smart autocomplete suggestions as I enter my task | speed up the process of creating a task
 [//]: # (@@author yeejfe)
+
 
 ## Appendix B : Use Cases
 
@@ -395,16 +395,23 @@ Use case ends.
 
 ## Appendix C : Non Functional Requirements
 
+### System 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
 2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
-   should be able to accomplish most of the tasks faster using commands than using the mouse.
+3. Should work without requiring an installer.
 4. Should come with automated unit tests and open source code.
 5. Should favor DOS style commands over Unix-style commands.
 6. Should store data in text file.
 7. Should work stand-alone and should not be a plug-in to another software.
 8. Should work without internet connection.
-9. Should work without requiring an installer.
+
+### User Experience
+1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
+   should be able to accomplish most of the tasks faster using commands than using the mouse.
+2. Hotkeys/shortcuts should be intuitive so that users can remember them easily.
+
+### Development
+1. All code should be properly documented.
 
 [//]: # (@@author yeejfe)
 
@@ -445,3 +452,6 @@ Cons:
 * No calendar view.
 * Cannot block slots.
 * Cannot ordered by due date.
+
+** The (really) Big Table of Comparison **
+An extensive table of products comparison can be found [here (credits: Reddit/r/productivity)] (https://docs.google.com/spreadsheets/d/1yP6ZOXMWK-KsMZ-_Bod8tFhyEGdPndCu4HUBO_3rUww/edit#gid=0).
