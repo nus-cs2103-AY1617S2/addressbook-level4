@@ -15,7 +15,7 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.model.ReadOnlyTodoList;
 import seedu.address.model.TodoList;
-import seedu.address.model.person.Task;
+import seedu.address.model.task.Task;
 import seedu.address.testutil.TypicalTestPersons;
 
 public class XmlAddressBookStorageTest {

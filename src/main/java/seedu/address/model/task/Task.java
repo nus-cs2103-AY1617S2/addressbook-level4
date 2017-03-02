@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.task;
 
 import java.util.Objects;
 
@@ -11,7 +11,7 @@ import seedu.address.model.tag.UniqueTagList;
  */
 public class Task implements ReadOnlyTask {
 
-    private Name name;
+    private Description name;
     private Phone phone;
     private Email email;
     private Address address;
@@ -21,7 +21,7 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Phone phone, Email email, Address address, UniqueTagList tags) {
+    public Task(Description name, Phone phone, Email email, Address address, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -37,13 +37,13 @@ public class Task implements ReadOnlyTask {
         this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(), source.getTags());
     }
 
-    public void setName(Name name) {
+    public void setName(Description name) {
         assert name != null;
         this.name = name;
     }
 
     @Override
-    public Name getName() {
+    public Description getName() {
         return name;
     }
 

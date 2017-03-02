@@ -6,14 +6,14 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.ReadOnlyTask;
-import seedu.address.model.person.Task;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Address;
+import seedu.address.model.task.Description;
+import seedu.address.model.task.Email;
+import seedu.address.model.task.Phone;
+import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Task;
 
 /**
  * JAXB-friendly version of the Person.
@@ -65,7 +65,7 @@ public class XmlAdaptedPerson {
         for (XmlAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
         }
-        final Name name = new Name(this.name);
+        final Description name = new Description(this.name);
         final Phone phone = new Phone(this.phone);
         final Email email = new Email(this.email);
         final Address address = new Address(this.address);

@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.task;
 
 import seedu.address.model.tag.UniqueTagList;
 
@@ -8,7 +8,7 @@ import seedu.address.model.tag.UniqueTagList;
  */
 public interface ReadOnlyTask {
 
-    Name getName();
+    Description getName();
     Phone getPhone();
     Email getEmail();
     Address getAddress();

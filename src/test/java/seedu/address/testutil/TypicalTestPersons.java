@@ -2,8 +2,8 @@ package seedu.address.testutil;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.TodoList;
-import seedu.address.model.person.Task;
-import seedu.address.model.person.UniqueTaskList;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.UniqueTaskList;
 
 /**
  *

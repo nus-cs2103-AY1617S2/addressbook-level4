@@ -6,14 +6,14 @@ import java.util.Optional;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Task;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.ReadOnlyTask;
-import seedu.address.model.person.UniqueTaskList;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Address;
+import seedu.address.model.task.Email;
+import seedu.address.model.task.Description;
+import seedu.address.model.task.Phone;
+import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.UniqueTaskList;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -77,7 +77,7 @@ public class EditCommand extends Command {
                                              EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
+        Description updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
         Phone updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
         Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
         Address updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
@@ -91,7 +91,7 @@ public class EditCommand extends Command {
      * corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
-        private Optional<Name> name = Optional.empty();
+        private Optional<Description> name = Optional.empty();
         private Optional<Phone> phone = Optional.empty();
         private Optional<Email> email = Optional.empty();
         private Optional<Address> address = Optional.empty();
@@ -114,12 +114,12 @@ public class EditCommand extends Command {
             return CollectionUtil.isAnyPresent(this.name, this.phone, this.email, this.address, this.tags);
         }
 
-        public void setName(Optional<Name> name) {
+        public void setName(Optional<Description> name) {
             assert name != null;
             this.name = name;
         }
 
-        public Optional<Name> getName() {
+        public Optional<Description> getName() {
             return name;
         }
 

@@ -39,14 +39,14 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyTodoList;
 import seedu.address.model.TodoList;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Task;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Address;
+import seedu.address.model.task.Email;
+import seedu.address.model.task.Description;
+import seedu.address.model.task.Phone;
+import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Task;
 import seedu.address.storage.StorageManager;
 
 
@@ -197,7 +197,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidPersonData() {
         assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
-                Name.MESSAGE_NAME_CONSTRAINTS);
+                Description.MESSAGE_NAME_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
                 Phone.MESSAGE_PHONE_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
@@ -415,7 +415,7 @@ public class LogicManagerTest {
     class TestDataHelper {
 
         Task adam() throws Exception {
-            Name name = new Name("Adam Brown");
+            Description name = new Description("Adam Brown");
             Phone privatePhone = new Phone("111111");
             Email email = new Email("adam@gmail.com");
             Address privateAddress = new Address("111, alpha street");
@@ -434,7 +434,7 @@ public class LogicManagerTest {
          */
         Task generatePerson(int seed) throws Exception {
             return new Task(
-                    new Name("Person " + seed),
+                    new Description("Person " + seed),
                     new Phone("" + Math.abs(seed)),
                     new Email(seed + "@email"),
                     new Address("House of " + seed),
@@ -533,7 +533,7 @@ public class LogicManagerTest {
          */
         Task generatePersonWithName(String name) throws Exception {
             return new Task(
-                    new Name(name),
+                    new Description(name),
                     new Phone("1"),
                     new Email("1@email"),
                     new Address("House of 1"),

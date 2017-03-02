@@ -5,14 +5,14 @@ import java.util.Set;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Task;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.UniqueTaskList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Address;
+import seedu.address.model.task.Email;
+import seedu.address.model.task.Description;
+import seedu.address.model.task.Phone;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.UniqueTaskList;
 
 /**
  * Adds a person to the address book.
@@ -43,7 +43,7 @@ public class AddCommand extends Command {
             tagSet.add(new Tag(tagName));
         }
         this.toAdd = new Task(
-                new Name(name),
+                new Description(name),
                 new Phone(phone),
                 new Email(email),
                 new Address(address),
