@@ -820,8 +820,12 @@ Use case ends
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-{More to be added}
+4. Data should be recoverable in case of unexpected program termination by simply retrieving the data stored in the target location.
+5. Program should be able to start up within 3s and respond to commands within 1s.
+6. Command format should be self-explanatory and easy to use so that new users can pick up within 5 minutes.
+7. Program should be able to handle up to 1000 tasks/events.
+8. Program should store data in local environment and thus be able to work offline.
+9. Does not require any third party extensions nor should work as a third party extension of other applications.
 
 ## Appendix D : Glossary
 
