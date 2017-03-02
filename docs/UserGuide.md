@@ -19,7 +19,7 @@ By : `Miao Ling` , `Ian` , `Qi Xiang` and `Dylan` - `[W09-B4]` Since : `Feb 2017
 3. Double-click on the file to start the application. The GUI should appear in a few seconds.<br>
    > <img src="images/startup_screen.jpg" width="600">
 
-4. Adding your first task: Click on the + floating button at the bottom right of the application the application. A pop out box will appear on your GUI.<br>
+4. Get started by adding the first task that you have in mind! Refer to "2. Features" for instructions. <br>
    > <img src="images/addtask_screen.jpg" width="600">
 
 
@@ -39,50 +39,94 @@ By : `Miao Ling` , `Ian` , `Qi Xiang` and `Dylan` - `[W09-B4]` Since : `Feb 2017
    > <img src="images/Priority_screen.jpg" width="600">
 
 ## 2. Features
+	> Command Format
+	> * Words in `UPPER_CASE` are the parameters.
+	> * Items in `SQUARE_BREACKETS` are optional.
+	> * Items with `...` after them can have multiple instances.
+	> * Parameters can be in any order.
+	
+### 2.1. Viewing help : `help`
+   Format: `help`
+	> Help is shown if you enter an incorrect command e.g. `asdf`
+	> Alternatively, type /help to obtain a list of commands that you can use. 
 
-### 2.1. Viewing help
-   The User Guide will be shown when the user click on the Help Button.
+### 2.2. Adding a Task : `add`
+	Adds a task to the task manager
+	Format: `add TASK_NAME d/DEADLINE p/PRIORITY_LEVEL [i/ANY_INFO] [t/TAGS]...`
+   > `PRIORITY_LEVEL` should be defined by integers 1 (high) to 4(low)
+   > `ANY_INFO` allows you to key in details with regards to the task, optional
+	> `TAGS` allows you to assign tags to the tasks, optional.
+	
+	Examples:
+	* add CS3230 Assignment 1 d/8 Jan 2018 p/1 i/How to do? t/School t/CS3230
+	* add Buy Milk d/23 Fev 2017 p/4 t/Chores
 
-### 2.2. Adding a Task
-   Add a task to the doTASK by clicking on the “+” sign located at the bottom right hand corner
-   > A pop out window will appear and you have to fill in the relevant information that include Title, Deadline,  Priority (1, 2, 3, 4), Details and Tags.
-   > For example
-   * **`Title`** : Eat
-   * **`Deadline`** : 28 Feb 2017 @ 1400hrs
-   * **`Priority`** : 1 (Highest)
-   * **`Details`** (if any) : Eat Bar Chor Mee
-   * **`Tags`** (if any) : Chores<br>
-   Click “Done” once you have finished.
+### 2.3. Listing the tasks: `list`
+	Shows a list of all the tasks in the task manager.<br>
+	> Listing is done automatically when user switches between the tabs.<br>
+	> However, user can specify to list all the tasks he has in, which will be shown in a pop up.
+	> User can also sort it accordingly to the deadlines, priorities, etc.<br>
+	
+	Shows a list of all the tasks in lexographical order
+	Format: `list all`
+	
+	Shows a list of all the tasks sorted by deadlines.
+	Format: `list deadlines`
+	
+	Shows a list of all the tasks sorted by priority.
+	Format: `list priority`
+	
+	Shows a list of tasks sorted lexographically by tags.
+	Format: `list t/TAGS...`
+	Examples:
+	* `list t/CS3230` 
 
-### 2.3. Listing all the tasks
-	Click on the `Overview` Tab to view all the upcoming tasks sorted by dates.  
-
-### 2.4. Editing an existing task
+### 2.4. Editing an existing task: `edit`
+	Edits an existing task in the task manager.
+	Format: edit `INDEX [NAME] [d/DEADLINE] [p/PRIORITY_LEVEL] [i/ANY_INFO] [t/TAGS]...`
+	
+	> * Edits the task labeled by the INDEX digit as shown on the screen. The INDEX must be a positive integer, e.g. 1, 2, 3, ...
+	> * At least one of the optional [fields] must be provided.
+	> * Existing 
 	Click on the task itself and the pop out window will appear.<br> 
-	You will able to edit the Title, Deadline, Priority, Details and Tags.  
+	You will able to edit the Title, Deadline, Priority, Details and Tags.
 
-### 2.5. Finding a task according to specific tags
-	Under the `Priority` tab, the user is able to select or unselect tags by ticking the respective boxes.<br>
-	There are 4 default tags,  which are School, Work, Home & CCA.
-   > In addition, the user is able to add his or her own tags by clicking on the “Add Tag” button located at the bottom right hand corner.
+### 2.5. Shifting tabs: `switch`
+	Switch the current tab to the next tab.
+	Format: `switch`
+	> Th	ere will be 3 tabs as stated, which can be toggled using this command.
 
+### 2.6. Completing a task: `done`
+	Archives the completed task. 
+	Format: `done INDEX_NUMBER`
+	> task labeled by INDEX_NUMBER will be removed from the list.
+	> INDEX_NUMBER of task is shown as according to the current tab.
+	Example: 
+	* `done 1` 
+	* `done 4`	
+	
+[Work in progress]
 ### 2.6. Deleting a task
 	Click on the task itself and the pop out window will appear.<br>
 	Click on the delete button if the task is no longer applicable to you.
 
+[Work in progress]
 ### 2.7. Viewing the task according to different priorities
 	Click on the `Priority` tab. <br>
 	The tasks are sorted in 4 types of priorities with different colours indicating the level of importance.<br>
 	The user can easily identify the tasks which are more important.
 
+[Work in progress]
 ### 2.8. Completion of a task
 	Click on the `...` bar available at the side of the task.<br>
 	Select the option of completed and confirm your choice before clearing.
-	 
+
+[Work in progress]
 ### 2.9. Overdue tasks
 	Under the `Overdue` tab, you can see the list of overdue tasks that you have yet to clear. 
    > Editing the deadline will result in the relocation of the task out of the `Overdue` tab, until it has reached its due date.
-	
+
+[Work in progress]
 ### 2.10. Saving the tasks
 	Upon creation of tasks, the tasks will be automatically saved in the folder where the program is held in.
    > Do not erase the saved data as it will result in a complete loss of data that cannot be recovered by the application itself.
@@ -101,3 +145,24 @@ By : `Miao Ling` , `Ian` , `Qi Xiang` and `Dylan` - `[W09-B4]` Since : `Feb 2017
 **Q**: How do I clear all the tasks under a certain tag?<br>
 **A**: Navigate to `Priority` tab, click the `Clear All` button. There will be a confirmation prompt upon doing so, click confirm to clear the tasks of the tags.
 
+## 4. Command Summary
+
+* **Add** `add TASK_NAME d/DEADLINE p/PRIORITY_LEVEL [i/ANY_INFO] [t/TAGS]...`
+	e.g. `add Sleep d/27 December 2018 p/1 i/Sleep is good t/Home`
+	
+* **Help** `help`
+	
+* **List All** `list all`
+
+* **List by Deadlines** `list deadlines`
+
+* **list by Priority** `list priority`
+
+* **List of tasks by Tags** `list t/TAGS`
+	e.g. `list t/CS2103`
+	
+* **Switching between tabs** `switch`
+
+* **Done** `done`
+	e.g. `done 1`
+  
