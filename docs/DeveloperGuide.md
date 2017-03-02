@@ -346,31 +346,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`***` | user | obtain a list of tasks due today / this week | plan my time to complete these urgent tasks before they are due
-`***` | user | view tasks planned to be completed within a certain time range | easily decide on tasks I should work on during that period
-`***` | user | indicate a starting and ending time for my tasks | keep track of events I need to attend
-`***` | user | display my tasks in a calendar view | obtain a general overview of the tasks I need to complete
-`***` | user  | set tasks as recurring at certain intervals | save time having to add the task repeatedly for different times
-`***` | user | add subtasks to existing tasks | keep track of subtasks to be completed as part of bigger tasks
-`***` | user | mark a task as completed and filter tasks that are not completed | keep tracks of tasks that I have to complete
-`***` | user | view completed tasks | avoid working on tasks that are already completed
-`***` | user | set notifications to go off when certain tasks are nearing their deadline | avoid missing those deadlines
-`***` | user | set notifications to go off when I have planned to work on certain tasks | remind myself to work on those tasks that need to be completed
-`***` | user | undo previous commands | revert back to previous states in case of wrongly entered commands
-`***` | user  | activate the application quickly using a keyboard shortcut | access my task manager conveniently and efficiently
-`***` | advanced user | autocomplete my command by pressing a key (e.g. tab) | type my commands faster
-`***` | user | specify a particular location I want to save the data file of my task manager | sync my task list and access it from other devices
-`***` | user | search for names of particular tasks | update or view specific tasks efficiently
-`**` | advanced user | use shorter versions of commands | type my commands faster
-`**` | new user | view additional usage information for particular commands | learn how to use specific commands effectively
-`**` | user | secure my task list | prevent other people from viewing my task list
-`**` | user | sync my task list to Google or Microsoft | view my tasks through their respective calendars
-`**` | user | retrieve previously typed commands using the UP and DOWN keys and execute them directly | save time having to retype similar commands repeatedly
-`**` | user | postpone an existing task via a specific command | save time having to specifically enter the new deadline
-`**` | user | attach related documents and links to my tasks | conveniently access documents needed for me to work on the tasks
-`**` | new user | view command hints when typing commands | ensure my commands are correct
-`**` | user | block off multiple slots for the same task and release the unused slots when the exact timing of a task is confirmed | avoid having to add multiple copies of the same task to different time slots
-`**` | user | view the slots at which I have not planned for any task to be completed | find a suitable slot for new tasks easily
+`* * *` | user | obtain a list of tasks due today / this week | plan my time to complete these urgent tasks before they are due
+`* * *` | user | view tasks planned to be completed within a certain time range | easily decide on tasks I should work on during that period
+`* * *` | user | indicate a starting and ending time for my tasks | keep track of events I need to attend
+`* * *` | user | display my tasks in a calendar view | obtain a general overview of the tasks I need to complete
+`* * *` | user  | set tasks as recurring at certain intervals | save time having to add the task repeatedly for different times
+`* * *` | user | add subtasks to existing tasks | keep track of subtasks to be completed as part of bigger tasks
+`* * *` | user | mark a task as completed and filter tasks that are not completed | keep tracks of tasks that I have to complete
+`* * *` | user | view completed tasks | avoid working on tasks that are already completed
+`* * *` | user | set notifications to go off when certain tasks are nearing their deadline | avoid missing those deadlines
+`* * *` | user | set notifications to go off when I have planned to work on certain tasks | remind myself to work on those tasks that need to be completed
+`* * *` | user | undo previous commands | revert back to previous states in case of wrongly entered commands
+`* * *` | user  | activate the application quickly using a keyboard shortcut | access my task manager conveniently and efficiently
+`* * *` | advanced user | autocomplete my command by pressing a key (e.g. tab) | type my commands faster
+`* * *` | user | specify a particular location I want to save the data file of my task manager | sync my task list and access it from other devices
+`* * *` | user | search for names of particular tasks | update or view specific tasks efficiently
+`* *` | advanced user | use shorter versions of commands | type my commands faster
+`* *` | new user | view additional usage information for particular commands | learn how to use specific commands effectively
+`* *` | user | secure my task list | prevent other people from viewing my task list
+`* *` | user | sync my task list to Google or Microsoft | view my tasks through their respective calendars
+`* *` | user | retrieve previously typed commands using the UP and DOWN keys and execute them directly | save time having to retype similar commands repeatedly
+`* *` | user | postpone an existing task via a specific command | save time having to specifically enter the new deadline
+`* *` | user | attach related documents and links to my tasks | conveniently access documents needed for me to work on the tasks
+`* *` | new user | view command hints when typing commands | ensure my commands are correct
+`* *` | user | block off multiple slots for the same task and release the unused slots when the exact timing of a task is confirmed | avoid having to add multiple copies of the same task to different time slots
+`* *` | user | view the slots at which I have not planned for any task to be completed | find a suitable slot for new tasks easily
 `*` | user sharing this computer with other users | switch between different accounts on this task manager | share this application with the other users of this computer
 `*` | user | backup my entire task list to the cloud or external storage via export | have extra redundancy against system failures
 `*` | user | create shared tasks across different users | track the progress of other users for shared tasks
@@ -382,28 +382,115 @@ Priority | As a ... | I want to ... | So that I can...
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TaskManager` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: Show possible commands to be executed
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
-Use case ends.
+1. User types a letter or a sequence of letters
+2. System shows a list of commands that contain that letter or sequence of letters
+3. User selects specific command in list
+4. System autocompletes user’s command
+Use case ends. 
 
 **Extensions**
 
-2a. The list is empty
+2a. No command contains letter or sequence of letters typed by user
+
+> Use case ends
+
+2b. User makes changes to input
+
+> Use case resumes at step 2
+
+#### Use case: Change save location
+
+**MSS**
+
+1. User clicks on “Change Save Location”
+2. System displays a directory chooser
+3. User selects a directory
+4. System changed the save location to the one selected
+5. System displays a message 
+Use case ends
+
+**Extensions**
+
+1a. User pressed “Alt + S” keys
+
+> Use case resumes at step 2
+
+3a. User clicks on “Cancel”
+
+> Use case ends
+
+#### Use case: Switch to console with hotkeys
+
+**MSS**
+
+1. User presses on predefined hotkey
+2. System displays main window
+3. Use case ends
+Use case ends
+
+#### Use case: Delete task
+
+**MSS**
+
+1. User requests to list task
+2. System shows a list of task
+3. User requests to delete a specific task in the list
+4. User deletes the task
+Use case ends.
+
+
+**Extensions**
+
+2a. List is empty
 
 > Use case ends
 
 3a. The given index is invalid
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+> 3a1. System shows an error message<br>
+Use case resumes at step 2
+
+#### Use case: Add task
+
+**MSS**
+
+1. User enters add command 
+2. System displays confirmation of add operation
+Use case ends.
+
+**Extensions**
+
+1a. Parameters are wrong
+
+> 1a1. System shows error message<br>
+Use case ends
+
+#### Use case: Undo task
+
+**MSS**
+
+1. User enters undo command
+2. System undoes last change
+Use case ends.
+
+**Extensions**
+
+2a. No change to undo
+
+> 2a1. System shows nothing to undo<br>
+Use case ends
+
+2a. Error undoing change
+
+> 2a1. System notifies user of failure to undo<br>
+Use case ends
+
 
 {More to be added}
 
@@ -453,27 +540,79 @@ Use case ends.
 
 > Windows, Linux, Mac
 
-##### Mainstream OS
-
-> Windows, Linux, Unix, OS-X
-
-##### Private contact detail
-
-> A contact detail that is not meant to be shared with others
-
 ## Appendix E : Product Survey
 
-**Product Name**
+**Wunderlist (free version)**
 
-Author: ...
+Author: Tan Yu Wei
 
 Pros:
 
-* ...
-* ...
+* Customizable to-do lists for different purposes (e.g. movies to watch, grocery list)
+* Alarm reminders for task when deadline is up AND when user should be working on the task
+* Save links and web pages easily for later by via an Add to Wunderlist browser extension
+* Compatible and syncable across many operating systems and popular devices
+* Transform emails into to-do tasks in Wunderlist by simply forwarding them
+* Print task lists neatly and easily
+
 
 Cons:
 
-* ...
-* ...
+* Files added to to-do list have a limited size (i.e. 5 MB)
+* Limited number of subtasks per task (i.e. 25)
+* Limited number of backgrounds to personalize Wunderlist (i.e. 20)
+* No support for nested to-do lists
+* Cannot manage events (cannot add start and end time)
+* No calendar view of tasks
 
+**Google Calendar**
+
+Author: Lim Shun Xian
+
+Pros:
+
+* Cross platform
+* Integrated with majority of Google’s app such as Gmail
+* Able to compare friends’ calendar with yours to find common free slots
+* Able to share calendar to others to view
+* Able to send a daily reminder email of today’s agenda (due tasks) at 5AM 
+
+Cons:
+
+* Difficult to migrate over should one be already using Outlook or other calendars 
+* The daily reminder email is fixed at 5AM
+
+**Wunderlist (free version)**
+
+Author: Brandon Tan Jian Sin
+
+Pros:
+
+* Simple layout
+* Intuitive controls
+* Free
+* Syncable across different platforms that wunderlist supports
+* Allows custom categorization of tasks
+* Email, Desktop, Push Notifications
+
+Cons:
+
+* No calendar view
+* Limitations in number of subtasks and file attachments
+* Tasks only scheduled by day not time
+
+**Get it Done**
+Author: Ang Zhi Yuan
+
+Pros:
+
+* Simple, clear layout
+* Widely accessible across multiple platforms
+* Allows cooperation between multiple users
+* Clean email notifications
+* Can sync to other calendars
+
+Cons:
+
+* Subscription based
+* No calendar-view, only list view
