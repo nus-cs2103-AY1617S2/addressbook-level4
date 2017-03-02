@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/CS2103JAN2017-T16-B2/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-T16-B2/main)
 [![Build status](https://ci.appveyor.com/api/projects/status/qcfw2kpnoim4tkkp?svg=true)](https://ci.appveyor.com/project/BernardYip/main)
-[![Coverage Status](https://coveralls.io/repos/github/se-edu/addressbook-level4/badge.svg?branch=master)](https://www.codacy.com/app/damith/addressbook-level4?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=se-edu/addressbook-level4&amp;utm_campaign=Badge_Grade)
+[![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-T16-B2/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-T16-B2/main?branch=master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7358c2cf354244e6b53bc50d2aaf727b)](https://www.codacy.com/app/bernardyip/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103JAN2017-T16-B2/main/&amp;utm_campaign=Badge_Grade)
 <img src="docs/images/DoOrDie.jpg" width="600"><br>
 
