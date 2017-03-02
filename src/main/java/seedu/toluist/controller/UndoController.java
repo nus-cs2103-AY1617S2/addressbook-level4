@@ -15,7 +15,7 @@ import seedu.toluist.ui.Ui;
  * Responsible for storage-related task
  */
 public class UndoController extends Controller {
-    private static final String COMMAND_TEMPLATE = "^undo( (?<number>\\d+))?";
+    private static final String COMMAND_TEMPLATE = "^undo(\\s+(?<number>\\d+))?\\s*";
     private static final String UNDO_TIMES = "number";
     private static final String COMMAND_RESULT_TEMPLATE = "List undo-ed %d times";
 

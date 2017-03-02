@@ -18,8 +18,8 @@ import seedu.toluist.ui.UiStore;
 public class TaskController extends Controller {
 
     private static final String COMMAND_TEMPLATE = "^(?<command>(add|delete|update))"
-                + "( (?<index>\\d+))?"
-                + "( (?<description>.+))?";
+                + "(\\s+(?<index>\\d+))?"
+                + "(\\s+(?<description>.+))?\\s*";
 
     private static final String TASK_COMMAND = "command";
     private static final String TASK_VIEW_INDEX = "index";
