@@ -24,7 +24,7 @@ By : `T09-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nb
 5. Some example commands you can try:
    * **`list`** : lists all tasks
    * **`add`**` Finish Progress Report; 030217 1159PM` :
-     adds a task named `Finish Progress Report` with due date `3rd Feb 2017 1159PM` to the Task Manager.
+     adds a task named `Finish Progress Report` with due date `3rd Feb 2017' and due time '1159PM` to the Task Manager.
    * **`delete`**` project` : deletes the task with the name `project`
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
@@ -33,7 +33,7 @@ By : `T09-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nb
 ## 2. Features
 > **Command Format**
 >
-> * Duration must be specified in "hrs", "mins" and/or "secs".
+> * Duration must be specified in "hr", "min" and/or "sec".
 > * Time must be specified in "am" and/or "pm".
 > * For <... date and time> parameters, either date or time can be left out but not both.
 > * `<task>` refers to the name of the task.
@@ -51,10 +51,10 @@ Formats:
 
 Examples:
 
-* `add watch tv with the children; 1h`
+* `add watch tv with the children; 1hr`
 * `add iron the clothes; 5pm`
-* `add project proposal; tue 1400`
-* `add committee meeting; 15 june; 2 hours`
+* `add project proposal; tue 2pm`
+* `add committee meeting; 15 june; 2 hr`
 * `add sushi restaurant promotion; 040117 10am; 110117 9pm`
 
 ### 2.2. Deleting a task : `delete`
@@ -111,8 +111,8 @@ Formats:
 > * `update <task>; <parameter1> <new_value1>; <parameter2> <new_value2>`
 
 Examples:
-* `update start time 1000AM`
-* `update project proposal; name app development project proposal; end time 2359PM`
+* `update start time 10am`
+* `update project proposal; name app development project proposal; end time 11.59pm`
 
 
 ### 2.8. Exiting the program : `exit`
