@@ -388,6 +388,9 @@ Use case ends.
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. should be able to store at least 100 tasks
+5. should be open source
+6. should open the app in less than 3 sec
 
 {More to be added}
 
@@ -403,17 +406,36 @@ Use case ends.
 
 ## Appendix E : Product Survey
 
-**Product Name**
 
-Author: ...
+**Google Calendar**
+
+Author:Google
 
 Pros:
-
-* ...
-* ...
+* Syncs with your phone so that the calendar is viewable from gmail on your laptop as well as on your phone 
+* Allows you to add reminder notifications for events at a customized amount of time
+* Can customize tasks by color 
+* Can easily perform CRUD operations on events
+* Can add recurring events and edit them individually if there are exceptions for a particular day  
+* More GUI based rather than command line 
+* Relatively intuitive for new users 
 
 Cons:
+* No way to prioritize tasks 
+* Need connection to the internet to view on laptop - not a desktop application 
+* Since it is more GUI based, takes more clicks to add a task rather than typing the task in a command line and having the task added 
+* appropriately  
 
-* ...
-* ...
+**Google Tasks**
+
+Author:Google
+Pros:
+* easy to use
+* have all the basic functions a normal user would use.
+* easy to install
+ 
+Cons:
+* cannot change the color of tasks based on priority
+* alert would not pop out automatically
+* everytime I boot up my computer, I have to open the app manually
 
