@@ -6,7 +6,6 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/ac90hb6eyk0jek2v/branch/master?svg=true)](https://ci.appveyor.com/project/louislai/main/branch/master)
 [![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-W13-B3/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-W13-B3/main?branch=master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/0649f4dee2df4032b0be526b133bd23c)](https://www.codacy.com/app/louislai/main/dashboard)
-[]
 
 <img src="docs/images/Ui.png" width="600"><br>
 A command-based todo list app for Jim.
