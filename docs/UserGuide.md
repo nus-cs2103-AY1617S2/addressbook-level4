@@ -47,22 +47,23 @@ Format: `help`
 
 > Help is also shown if you enter an incorrect command e.g. `abcd`
 
-### 2.2. Adding a person: `add`
+### 2.2. Adding a task: `add`
 
-Adds a person to the address book<br>
-Format: `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Adds a task to the task manager<br>
+Format: `add TASK_NAME s/START_DATE d/DUE_DATE [t/TAG]...`
+Date Format: dd-mm-yy
 
-> Persons can have any number of tags (including 0)
+> Task can have any number of tags (including 0)
 
 Examples:
 
-* `add John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01`
-* `add Betsy Crowe t/friend e/betsycrowe@gmail.com a/Newgate Prison p/1234567 t/criminal`
+* `add Study for midterm s/02-03-17 d/04-03-17 t/study t/midterm
+* `add Attend CS2103 tutorial s/02-03-17 d/02-03-17 t/lesson t/school t/tutorial
 
-### 2.3. Listing all persons : `list`
+### 2.3. Listing all tasks : `list`
 
-Shows a list of all persons in the address book.<br>
-Format: `list`
+Shows a list of all task in the task manager on a particular day.<br>
+Format: `list d/02-03-17`
 
 ### 2.4. Editing a person : `edit`
 
