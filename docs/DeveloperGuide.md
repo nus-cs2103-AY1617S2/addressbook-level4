@@ -1,4 +1,4 @@
-# AddressBook Level 4 - Developer Guide
+# maiTuLiao - Developer Guide
 
 By : `Team CS2103JAN2017-T16-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `JAN 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
@@ -359,7 +359,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | remove a label from a task | remove a specific task from a label for further filtering
 `* * *` | user | edit a label | change a label on all existing tasks that are associated with this label
 `* * *` | user | list all task with the same label | view all related tasks
-`* * *` | user | reserve multiple time slots for a task | not need to wait till a time slot is confirmed to be able to add the task
+`* * *` | user | book multiple time slots for a task | not need to wait till a time slot is confirmed to be able to add the task
 `* * *` | user | other slots to be freed when I confirm a particular slot | better allocate my time for other tasks
 `* * *` | user | add a recurring task | not need to create the same task every time
 `* * *` | user | mark the completion of a task | better organise outstanding task
@@ -384,22 +384,17 @@ Precondition: User has opened the application<br />
 **MSS**
 
 1. User enters command to create new task and details of the task.
-2. System creates new task.
+2. System verify task details and creates the new task.
 3. System displays the details of the new task created.<br />
 Use case ends.
 
 **Extensions**
 
-1a. User inputs a start and end time for the task.
+2a. System verifies if there are any clashes with the time slot chosen.
 
-> 1a. System verifies if there are any clashes with the time slot chosen.
-
-> 1a1. There is a clash<br />
-  1a11. System shows error to the user.<br />
-  Resume at step 1.
-
-> 1a2. There is no clash<br />
-  Resume at step 2.
+> 2a1. There is a clash<br />
+  System shows a warning message to the user.<br />
+  Resume at step 3.
 
 #### Use case: Delete a task
 Use case ID: UC02 Delete task<br />
@@ -589,30 +584,23 @@ Use case ends
 > 1a1. System shows an error message<br />
   Use case ends
 
-#### Use case: Allocating multiple slots for a task
-Use case ID: UC13 Allocating multiple slots for a task<br />
+#### Use case: Booking multiple slots for a task
+Use case ID: UC13 Booking multiple slots for a task<br />
 Actor: User<br />
 Precondition: User has opened the application<br />
 
 **MSS**
 
-1. User selects a task for scheduling
-2. System shows the list of available slots
-3. User selects the available slots to allocate
-4. System allocate the selected slots for a task<br />
+1. User creates a scheduled task with multiple date slots
+2. System checks for overlap of events and allocate the selected slots for a task<br />
 Use case ends.
 
 **Extensions**
 
-1a. The given task name is invalid
+2a. There is an overlap of events
 
-> 1a1. System shows error message<br />
+> 1a1. System shows a warning message to the user<br />
   Use case ends
-
-3a. The given selection is invalid
-
-> 3a1. System show error message<br />
-  Use case resumes at step 2
 
 #### Use case: Free-ing slot when user confirms a slot for a task
 Use case ID: UC14 Free-ing slot when user confirms a slot for a task<br />
@@ -621,10 +609,8 @@ Precondition: User has opened the application<br />
 
 **MSS**
 
-1. User selects task to view details
-2. System shows allocated time slots for task
-3. User selects time slots to work on task
-4. System free the rest of the not selected time slots and display the details of the updated task<br />
+1. User confirms a slot for a booked task
+2. System free the rest of the not selected time slots and display the details of the updated task<br />
 Use case ends
 
 **Extensions**
@@ -633,9 +619,9 @@ Use case ends
 
 > Use case ends
 
-3a. The given input is invalid or allocated by another task
+2a. The confirmed task has a clash with another task
 
-> 3a1. System shows an error message<br />
+> 3a1. System shows a warning message to the user<br />
   Use case resumes at step 2
 
 #### Use case: Add a recurring task

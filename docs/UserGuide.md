@@ -43,7 +43,7 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Adds a task to the task manager<br />
-Format: `add [task] TASKNAME [label LABEL] [(by|on) DEADLINE] [repeat (hourly|daily|weekly|monthly|yearly)]`
+Format: `add TASKNAME [label LABEL] ([(by|on) DEADLINE] | [from START_DATE to END_DATE]) [repeat (hourly|daily|weekly|monthly|yearly)]`
 
 > * Tasks can have a deadline, or can do without one as well.
 >   * Tasks added without specifying a deadline will be displayed under "No Deadline".
