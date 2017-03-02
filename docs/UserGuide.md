@@ -1,6 +1,6 @@
 # Dueue - User Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team CS2103JAN2017-W10-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -49,9 +49,10 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Adds a task to Dueue<br>
-Format: `add [n/TASKNAME] [due/DUEDATE] [t/TIME] [#LISTNAME] [d/DESCRIPTION] [@VENUE] [p/PRIORITYLEVEL] [*f]`
+Format: `add n/TASKNAME [due/DUEDATE] [t/TIME] [#LISTNAME] [d/DESCRIPTION] [@VENUE] [p/PRIORITYLEVEL] [*f]`
 
 > * Tasks cannot have multiple lists<br>
+> * The required field for a task is TASKNAME, while other fields are optional<br>
 > * Due dates of tasks can repeating, e.g. every sunday<br>
 > * Time of each task can only be one time point, e.g. 4pm<br>
 > * Specifications of fields for task can be entered in any order<br>
@@ -64,7 +65,7 @@ Examples:
 
 ### 2.3. Listing all tasks : `list`
 
-Shows a list of all tasks in Dueue/ in a specific list<br>
+Shows a list of all tasks in Dueue in a specific list<br>
 Format: `list [favourite]`<br>
 Format: `list list LISTINDEX [favourite]`<br>
 Format: `list list LISTNAME [favourite]`
@@ -87,8 +88,8 @@ Examples:
 Creates a new list in Dueue<br>
 Format: `create LISTNAME`
 
-> Listname cannot be the same as other existing lists<br>
-> Listname cannot begin with digits
+> * Listname cannot be the same as other existing lists<br>
+> * Listname cannot begin with digits
 
 Examples:
 
@@ -112,7 +113,7 @@ Examples:
 
 ### 2.6. Updating task(s) : `update`
 
-Updates existing task(s) in Dueue.<br>
+Updates existing task(s) in Dueue<br>
 Format: `update TASKINDEX ... [n/NAME] [due/DUEDATE] [t/TIME] [#LISTNAME] [d/DESCRIPTION] [@VENUE] [p/PRIORITYLEVEL] [FAVOURITE]`
 
 > * Edits the task at the specified `INDEX`.
