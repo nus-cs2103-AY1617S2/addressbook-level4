@@ -53,7 +53,7 @@ Format: `add n/TASKNAME [due/DUEDATE] [t/TIME] [#LISTNAME] [d/DESCRIPTION] [@VEN
 
 > * Tasks cannot have multiple lists<br>
 > * The required field for a task is TASKNAME, while other fields are optional<br>
-> * By default, task will be added to current viewing list, unless [#LISTNAME] is specified.
+> * By default, task will be added to current viewing list, unless [#LISTNAME] is specified.<br>
 > * Due dates of tasks can repeating, e.g. every sunday<br>
 > * Time of each task can only be one time point, e.g. 4pm<br>
 > * Specifications of fields for task can be entered in any order<br>
@@ -66,22 +66,35 @@ Examples:
 
 ### 2.3. Listing all tasks : `list`
 
-Shows a list of all tasks in Dueue in a specific list<br>
+Shows a list of all tasks in Dueue in a specific list and/or favourite and switch to that list and/or favourite<br>
 Format: `list [favourite]`<br>
 Format: `list list LISTINDEX [favourite]`<br>
 Format: `list list LISTNAME [favourite]`
 
-Shows a list of all list names in Dueue<br>
-Format: Format: `list lists`
+Shows all unfinished tasks in Dueue and unswitch<br>
+Format: `list`
+
+Shows a list of finished tasks in Dueue and unswitch<br>
+Format: `list finished`
+
+Shows all tasks in Dueue (finished and unfinished) and unswitch<br>
+Format: `list all`
+
+Shows a list of all list names in Dueue and unswitch<br>
+Format: `list lists`
 
 > * Do not need to specify whether the parameter is LISTINDEX or LISTNAME<br>
-> * Returns only favorite tasks by adding keyword "favorite" 
+> * Returns only favorite tasks by adding keyword "favorite"
+> * Definition of `switch` : all the tasks added after switching will be automatically added to the current list (favourite) unless otherwise stated
+> * Definition of `unswitch` : switch back to main, the tasks added will not be automatically added to this list (favourite)
 
 Examples:
 
 * `list`
+* `list finished`
+* `list all`
 * `list work`
-* `list 1 favorite`
+* `list study favorite`
 * `list lists`
 
 ### 2.4. Creating a list : `create`
@@ -160,7 +173,7 @@ Format: `delete TASKINDEX...`
 > * The index refers to the index number shown in the most recent listing.<br>
 > * To delete multiple entries, indices must be seperated by whitespaces.
 > * Each index **must be a positive integer** 1, 2, 3, ...
-> * When a repeated task is deleted, user will be questioned whether it should be deleted for once or deleted forever (stop repeating).
+> * When a repeated task is deleted, user will be asked to confirm whether it should be deleted for once or deleted forever (stop repeating).
 
 Examples:
 
@@ -210,7 +223,7 @@ There is no need to save manually.
 
 ## 4. Command Summary
 
-* **Add**  `add [n/TASKNAME] [due/DUEDATE] [t/TIME] [#LISTNAME] [d/DESCRIPTION] [@VENUE] [p/PRIORITYLEVEL] [FAVOURITE]` <br>
+* **Add**  `add n/TASKNAME [due/DUEDATE] [t/TIME] [#LISTNAME] [d/DESCRIPTION] [@VENUE] [p/PRIORITYLEVEL] [FAVOURITE]` <br>
   e.g. `add n/laundry due/every sunday #personal d/wash clothes @B1 p/IMPORTANT *f`
 
 * **Clear** : `clear`
