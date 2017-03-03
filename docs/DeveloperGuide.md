@@ -607,7 +607,7 @@ Use case ends
 > Use case ends
  
 1b. To-do list does not found any tasks
-> 1b1. To-do list returns ‘No task has been found.’ <br>
+> 1b1. To-do list returns 'No task has been found.' <br>
 > Use case ends <br>
 
 <br>
@@ -628,7 +628,7 @@ Use case ends
 > Use case ends
  
 1b. To-do list does not found any tags
->1b1. To-do list returns ‘No tags has been found.’ <br>
+>1b1. To-do list returns 'No tags has been found.' <br>
 > Use case ends
 
 <br>
@@ -649,7 +649,7 @@ Use case ends
 > Use case ends
  
 1b. To-do list does not found any tags
-> 1b1. To-do list returns ‘No reminder has been found.’ <br>
+> 1b1. To-do list returns 'No reminder has been found.' <br>
 > Use case ends
 
 <br>
@@ -703,7 +703,7 @@ or change the path of the storage file to a new file and export all data into th
 or  clear all existing data <br>
 2. To-do list asks for confirmation.
 3. User inputs yes or no.
-4. To-do list do the commands accordingly and displays ‘operation done’ on UI
+4. To-do list do the commands accordingly and displays 'operation done' on UI
 Use case ends
  
 **Extensions**
@@ -719,7 +719,7 @@ Use case ends
 **MSS**
  
 1. User requests to set a reminder including its description, frequency and end time (for a specific task)
-2. To-do list set the reminder and displays ‘operation done’ on UI
+2. To-do list set the reminder and displays 'operation done' on UI
 Use case ends
  
 **Extensions**
@@ -735,7 +735,7 @@ Use case ends
 **MSS**
  
 1. User requests to add a tag to the selected tasks
-2. To-do created the tag or added the tag and displays ‘operation done’ on UI
+2. To-do created the tag or added the tag and displays 'operation done' on UI
 Use case ends
  
 **Extensions**
@@ -771,7 +771,7 @@ Use case ends
 **MSS**
 
 1. User requests to look for tasks or tags with a certain criteria
-2. To-do list provides a list of tasks or tags that fulfil the criteria (UC #8)
+2. To-do list provides a list of tasks or tags that fulfill the criteria (UC #8)
 3. User select one of the tasks or tags (UC #9)
 Use case ends
 
@@ -791,7 +791,7 @@ Use case ends
 **MSS**
  
 1. User requests to undo the last operations. Only a maximum of three consecutive undo requests is allowed.
-2. To-do list undoes the last operation and displays ‘operation done’ on UI.
+2. To-do list undoes the last operation and displays 'operation done' on UI.
  
 Use case ends
  
@@ -799,7 +799,7 @@ Use case ends
  
 1a. To-do list finds no previous operation. There could be result from too many undo requests or first time using the software.
  
->1a1. To-do list shows ‘no previous operation found’<br>
+>1a1. To-do list shows 'no previous operation found'<br>
 > Use case ends
  
 1b. Last operation is invalid
