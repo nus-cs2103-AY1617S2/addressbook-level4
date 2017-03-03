@@ -53,7 +53,7 @@ Format: `add n/TASKNAME [due/DUEDATE] [t/TIME] [#LISTNAME] [d/DESCRIPTION] [@VEN
 
 > * Tasks cannot have multiple lists<br>
 > * The required field for a task is TASKNAME, while other fields are optional<br>
-> * By default, task will be added to current viewing list, unless [#LISTNAME] is specified.
+> * By default, task will be added to current viewing list, unless [#LISTNAME] is specified.<br>
 > * Due dates of tasks can repeating, e.g. every sunday<br>
 > * Time of each task can only be one time point, e.g. 4pm<br>
 > * Specifications of fields for task can be entered in any order<br>
@@ -66,23 +66,42 @@ Examples:
 
 ### 2.3. Listing all tasks : `list`
 
-Shows a list of all tasks in Dueue in a specific list<br>
+Shows a list of all tasks in Dueue in a specific list and/or favourite and switch to that list and/or favourite<br>
 Format: `list [favourite]`<br>
 Format: `list list LISTINDEX [favourite]`<br>
 Format: `list list LISTNAME [favourite]`
 
-Shows a list of all list names in Dueue<br>
-Format: Format: `list lists`
+Shows all unfinished tasks in Dueue and unswitch<br>
+Format: `list`
+
+Shows a list of finished tasks in Dueue and unswitch<br>
+Format: `list finished`
+
+Shows all tasks in Dueue (finished and unfinished) and unswitch<br>
+Format: `list all`
+
+Shows a list of all list names (together with list indices) in Dueue and unswitch<br>
+Format: `list lists`
 
 > * Do not need to specify whether the parameter is LISTINDEX or LISTNAME<br>
-> * Returns only favorite tasks by adding keyword "favorite" 
+> * Returns only favorite tasks by adding keyword "favorite"
+> * Definition of `switch` : all the tasks added after switching will be automatically added to the current list (favourite) unless otherwise stated
+> * Definition of `unswitch` : switch back to main, the tasks added will not be automatically added to this list (favourite)
 
 Examples:
 
 * `list`
+  Lists all unfinished tasks
+* `list finished`
+  Lists all finished tasks
+* `list all`
+  Lists all unfinished and finished tasks
 * `list work`
-* `list 1 favorite`
+  List all unfinished tasks in list `work`
+* `list study favourite`
+  List all favourite tasks in list `study`
 * `list lists`
+  List all listname with list indices
 
 ### 2.4. Adding a new list : `add list`
 
@@ -110,7 +129,9 @@ Format: `update list LISTINDEX NEW_LISTNAME`
 Examples:
 
 * `update list school newSchool`
-* `update list 1 newList`
+  Update the name of list `school` to `newSchool`
+* `update list oldList newList`
+  Update the name of list `oldList` to `newList`
 
 ### 2.6. Updating task(s) : `update`
 
@@ -118,11 +139,12 @@ Updates existing task(s) in Dueue<br>
 Format: `update TASKINDEX ... [n/NAME] [due/DUEDATE] [t/TIME] [#LISTNAME] [d/DESCRIPTION] [@VENUE] [p/PRIORITYLEVEL] [FAVOURITE]`
 
 > * Edits the task at the specified `INDEX`.
-> * The index refers to the index number shown in the last person listing.<br>
+> * The index refers to the index number shown in the last listing.<br>
 > * The index **must be a positive integer** 1, 2, 3, ...
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
-> * You can remove details by typing `` after the `/` or `@`without specifying any tags after it eg,`due/`.
+> * You can remove details by typing nothing after the `/` or `@`without specifying any tags after it eg,`due/`.
+> * To update multiple entries, indices must be seperated by whitespaces.
 > * Specifications of fields for task can be entered in any order.
 
 Examples:
@@ -199,7 +221,6 @@ Examples:
 * `redo`<br>
   Previous `undo` command is reversed.
 
-
 ### 2.11. Clearing all entries : `clear`
 
 Clears all entries from the address book.<br>
@@ -223,7 +244,7 @@ There is no need to save manually.
 
 ## 4. Command Summary
 
-* **Add**  `add [n/TASKNAME] [due/DUEDATE] [t/TIME] [#LISTNAME] [d/DESCRIPTION] [@VENUE] [p/PRIORITYLEVEL] [FAVOURITE]` <br>
+* **Add**  `add n/TASKNAME [due/DUEDATE] [t/TIME] [#LISTNAME] [d/DESCRIPTION] [@VENUE] [p/PRIORITYLEVEL] [FAVOURITE]` <br>
   e.g. `add n/laundry due/every sunday #personal d/wash clothes @B1 p/IMPORTANT *f`
 
 * **Clear** : `clear`
