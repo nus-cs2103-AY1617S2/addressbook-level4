@@ -7,9 +7,9 @@ import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.UniqueTaskList;
 
 /**
- * A utility class to help with building Addressbook objects.
+ * A utility class to help with building EzDo objects.
  * Example usage: <br>
- *     {@code AddressBook ab = new AddressBookBuilder().withPerson("John", "Doe").withTag("Friend").build();}
+ *     {@code EzDo ez = new EzDoBuilder().withPerson("John", "Doe").withTag("Friend").build();}
  */
 public class EzDoBuilder {
 

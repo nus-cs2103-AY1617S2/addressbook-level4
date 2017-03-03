@@ -43,10 +43,10 @@ public class TypicalTestTasks {
         }
     }
 
-    public static void loadEzDoWithSampleData(EzDo ab) {
-        for (TestTask person : new TypicalTestTasks().getTypicalTasks()) {
+    public static void loadEzDoWithSampleData(EzDo ez) {
+        for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
             try {
-                ab.addTask(new Task(person));
+                ez.addTask(new Task(task));
             } catch (UniqueTaskList.DuplicateTaskException e) {
                 assert false : "not possible";
             }
@@ -58,8 +58,8 @@ public class TypicalTestTasks {
     }
 
     public EzDo getTypicalEzDo() {
-        EzDo ab = new EzDo();
-        loadEzDoWithSampleData(ab);
-        return ab;
+        EzDo ez = new EzDo();
+        loadEzDoWithSampleData(ez);
+        return ez;
     }
 }
