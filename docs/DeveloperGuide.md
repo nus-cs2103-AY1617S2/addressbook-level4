@@ -388,6 +388,16 @@ Priority | As a ... | I want to ... | So that I can...
 3. Task is created <br>
 Use case ends
 
+**Extensions**
+
+1a. Task entered consists of all spacebar characters
+
+> 1a1. Task is not created
+
+1b. Task is entered but with spacebar characters either before or after the nonspacebar characters
+
+> 1b2. Task is created without the extra spacebar characters
+
 #### Use case: Edit task
 
 **MSS**
