@@ -84,17 +84,17 @@ Examples:
 * `list 1 favorite`
 * `list lists`
 
-### 2.4. Creating a list : `create`
+### 2.4. Adding a new list : `add list`
 
-Creates a new list in Dueue<br>
-Format: `create LISTNAME`
+Add a new list in Dueue<br>
+Format: `add list LISTNAME`
 
 > * Listname cannot be the same as other existing lists<br>
 > * Listname cannot begin with digits
 
 Examples:
 
-* `create school`
+* `add list school`
 
 ### 2.5. Updating a list : `update list`
 
@@ -151,53 +151,66 @@ Examples:
 * `view dueby/next Friday`<br>
   Returns a list of tasks due by next Friday
 
-### 2.8. Deleting task(s) : `delete`
+### 2.8. Deleting task(s) or list(s) : `delete`
 
-Deletes the specified task from the address book.<br>
+Deletes the specified task(s) from Dueue.<br>
 Format: `delete TASKINDEX...`
 
-> * Deletes the task at the specified `TASKINDEX`. <br>
+Deletes the specified list(s) from Dueue.<br>
+Format: `delete LISTINDEX...`
+
+> * Deletes the task at the specified `TASKINDEX` or `LISTINDEX`. <br>
 > * The index refers to the index number shown in the most recent listing.<br>
 > * To delete multiple entries, indices must be seperated by whitespaces.
 > * Each index **must be a positive integer** 1, 2, 3, ...
-> * When a repeated task is deleted, user will be questioned whether it should be deleted for once or deleted forever (stop repeating).
+> * When a repeated task is deleted, user will need to confirm whether it should be deleted for once or deleted forever (stop repeating).
 
 Examples:
 
 * `delete 2`<br>
-  Deletes the 2nd task in the most recent listing.
+  Deletes the 2nd task/list in the most recent listing.
 * `delete 1 2 3`<br>
-  Deletes the 1st, 2nd and 3rd tasks in the most recent listing.
+  Deletes the 1st, 2nd and 3rd tasks/lists in the most recent listing.
 
-### 2.9. Switch to list mode : `switch`
+### 2.9. Undo latest command: `undo`.
 
-Selects the person identified by the index number used in the last person listing.<br>
-Format: `select INDEX`
+Undo the immediately preceding command.<br>
+Format: `undo`
 
-> * Selects the person and loads the Google search page the person at the specified `INDEX`.<br>
-> * The index refers to the index number shown in the most recent listing.<br>
-> * The index **must be a positive integer** 1, 2, 3, ...
+> * Undo the latest command, including `add`,`add list`, `delete`, `update` and `update list`.
+> * Cannot undo twice in succession. 
 
 Examples:
 
-* `list`<br>
-  `select 2`<br>
-  Selects the 2nd person in the address book.
-* `find Betsy` <br>
-  `select 1`<br>
-  Selects the 1st person in the results of the `find` command.
+* `undo`<br>
+  Latest command is reversed.
 
-### 2.10. Clearing all entries : `clear`
+### 2.10. Reverse previous `undo` command: `redo`.
+
+Reverse the immediately preceding undo command.<br>
+Format: `redo`
+
+> * Reverse `undo` command if user made a mistake.
+> * Can only redo right after an `undo` command.
+> * Cannot redo twice. 
+
+Examples:
+
+* `redo`<br>
+  Previous `undo` command is reversed.
+
+
+### 2.11. Clearing all entries : `clear`
 
 Clears all entries from the address book.<br>
 Format: `clear`
 
-### 2.11. Exiting the program : `exit`
+### 2.12. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.12. Saving the data
+### 2.13. Saving the data
 
 Address book data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
