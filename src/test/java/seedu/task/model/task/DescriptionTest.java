@@ -10,17 +10,17 @@ import seedu.task.model.task.Description;
 public class DescriptionTest {
 
     @Test
-    public void isValidPhone() {
-        // invalid phone numbers
-        assertFalse(Description.isValidPhone("")); // empty string
-        assertFalse(Description.isValidPhone(" ")); // spaces only
-        assertFalse(Description.isValidPhone("phone")); // non-numeric
-        assertFalse(Description.isValidPhone("9011p041")); // alphabets within digits
-        assertFalse(Description.isValidPhone("9312 1534")); // spaces within digits
+    public void isValidDescription() {
+        // invalid descriptions
+        assertFalse(Description.isValidDescription("")); // empty string
+        assertFalse(Description.isValidDescription(" ")); // spaces only
 
-        // valid phone numbers
-        assertTrue(Description.isValidPhone("93121534"));
-        assertTrue(Description.isValidPhone("4")); // short phone numbers
-        assertTrue(Description.isValidPhone("124293842033123")); // long phone numbers
+        // valid descriptions
+        assertTrue(Description.isValidDescription("Get the milk")); // Text only
+        assertTrue(Description.isValidDescription("12345678")); // Numbers only
+        assertTrue(Description.isValidDescription("ಠ_ಠ")); // Symbols only
+        assertTrue(Description.isValidDescription("つ ◕_◕ ༽つ TAKE MY ENERGY ༼ つ ◕_◕ ༽つ")); // Text and symbols
+        assertTrue(Description.isValidDescription("Call delivery at 91234567")); // Text and numbers
+        assertTrue(Description.isValidDescription("Tweet @Abcdefg with hashtag #hijkl123")); // Mix of text, numbers and symbols
     }
 }
