@@ -6,8 +6,7 @@ By : `Team T15B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp
 2. [Quick Start](#quick-start)
 3. [Features](#features)
 4. [FAQ](#faq)
-5. [Command Summary](#command-summary)
-6. [Storage file format](#storage-file-format)
+5. [Storage file format](#storage-file-format)
 
 ## 1. Introduction 
 Welcome. We will take you for an enthralling journey as we bring forward our task manager `TaskCrusher`.
@@ -29,8 +28,8 @@ It can help you manage events, deadlines, add tasks with or without deadlines or
    
 5. Some example commands you can try:
    * **`help`** : displays help documentation
-   * **`add`:**  `add "Cs2103 meeting" 3 Mar 17:00 to 18:00` : adds an event called "Cs2103 meeting" on 3 March from 17:00 to 18:00
-   * **`view`** `view calendar` : displays the calendar with tasks and events you have added
+   * **`add`:**  `add "Cs2103 meeting" 3 Mar 17:00 to 18:00` adds an event called "Cs2103 meeting" on 3 March from 17:00 to 18:00
+   * **`view`**: `view calendar` displays the calendar with tasks and events you have added
 
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
@@ -104,6 +103,7 @@ Example:
 
 `listc`
 
+NOTE:
 > note that tasks and events have different fields, and therefore the parameter SORT_FIELD may vary between events and tasks.
 
 ### 3.4 Viewing other material: `view`
@@ -161,9 +161,11 @@ Format: `exit`
 
 ### 3.10 Undoing the last command: `undo`
 
+Format: `undo`
+
 ### 3.11 Recycle 
 
-Brings back the expired tasks/events back to active list, with the deadline/event date altered.
+Brings back the expired tasks/events back to active list, with the deadline/event date altered.The index is as shown by `listc` command.
 
 Format : `Recycle INDEX DEADLINE | START_DATE START_TIME to [END_DATE] END_TIME`
 
