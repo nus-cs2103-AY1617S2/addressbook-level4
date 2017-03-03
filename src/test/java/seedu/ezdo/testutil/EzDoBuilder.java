@@ -11,20 +11,20 @@ import seedu.ezdo.model.todo.UniqueTaskList;
  * Example usage: <br>
  *     {@code AddressBook ab = new AddressBookBuilder().withPerson("John", "Doe").withTag("Friend").build();}
  */
-public class AddressBookBuilder {
+public class EzDoBuilder {
 
     private EzDo ezDo;
 
-    public AddressBookBuilder(EzDo ezDo) {
+    public EzDoBuilder(EzDo ezDo) {
         this.ezDo = ezDo;
     }
 
-    public AddressBookBuilder withPerson(Task task) throws UniqueTaskList.DuplicateTaskException {
+    public EzDoBuilder withTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         ezDo.addTask(task);
         return this;
     }
 
-    public AddressBookBuilder withTag(String tagName) throws IllegalValueException {
+    public EzDoBuilder withTag(String tagName) throws IllegalValueException {
         ezDo.addTag(new Tag(tagName));
         return this;
     }

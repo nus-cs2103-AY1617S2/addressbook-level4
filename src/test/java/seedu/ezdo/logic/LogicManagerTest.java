@@ -179,9 +179,9 @@ public class LogicManagerTest {
     @Test
     public void execute_clear() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        model.addTask(helper.generatePerson(1));
-        model.addTask(helper.generatePerson(2));
-        model.addTask(helper.generatePerson(3));
+        model.addTask(helper.generateTask(1));
+        model.addTask(helper.generateTask(2));
+        model.addTask(helper.generateTask(3));
 
         assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new EzDo(), Collections.emptyList());
     }
@@ -244,7 +244,7 @@ public class LogicManagerTest {
     public void execute_list_showsAllPersons() throws Exception {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
-        EzDo expectedAB = helper.generateAddressBook(2);
+        EzDo expectedAB = helper.generateEzDo(2);
         List<? extends ReadOnlyTask> expectedList = expectedAB.getTaskList();
 
         // prepare address book state
@@ -281,7 +281,7 @@ public class LogicManagerTest {
     private void assertIndexNotFoundBehaviorForCommand(String commandWord) throws Exception {
         String expectedMessage = MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
         TestDataHelper helper = new TestDataHelper();
-        List<Task> personList = helper.generatePersonList(2);
+        List<Task> personList = helper.generateTaskList(2);
 
         // set AB state to 2 persons
         model.resetData(new EzDo());
@@ -306,9 +306,9 @@ public class LogicManagerTest {
     @Test
     public void execute_select_jumpsToCorrectPerson() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        List<Task> threePersons = helper.generatePersonList(3);
+        List<Task> threePersons = helper.generateTaskList(3);
 
-        EzDo expectedAB = helper.generateAddressBook(threePersons);
+        EzDo expectedAB = helper.generateEzDo(threePersons);
         helper.addToModel(model, threePersons);
 
         assertCommandSuccess("select 2",
@@ -334,9 +334,9 @@ public class LogicManagerTest {
     @Test
     public void execute_delete_removesCorrectPerson() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        List<Task> threePersons = helper.generatePersonList(3);
+        List<Task> threePersons = helper.generateTaskList(3);
 
-        EzDo expectedAB = helper.generateAddressBook(threePersons);
+        EzDo expectedAB = helper.generateEzDo(threePersons);
         expectedAB.removeTask(threePersons.get(1));
         helper.addToModel(model, threePersons);
 
@@ -356,57 +356,57 @@ public class LogicManagerTest {
     @Test
     public void execute_find_onlyMatchesFullWordsInNames() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task pTarget1 = helper.generatePersonWithName("bla bla KEY bla");
-        Task pTarget2 = helper.generatePersonWithName("bla KEY bla bceofeia");
-        Task p1 = helper.generatePersonWithName("KE Y");
-        Task p2 = helper.generatePersonWithName("KEYKEYKEY sduauo");
+        Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
+        Task pTarget2 = helper.generateTaskWithName("bla KEY bla bceofeia");
+        Task p1 = helper.generateTaskWithName("KE Y");
+        Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
 
-        List<Task> fourPersons = helper.generatePersonList(p1, pTarget1, p2, pTarget2);
-        EzDo expectedAB = helper.generateAddressBook(fourPersons);
-        List<Task> expectedList = helper.generatePersonList(pTarget1, pTarget2);
-        helper.addToModel(model, fourPersons);
+        List<Task> fourTasks = helper.generateTaskList(p1, pTarget1, p2, pTarget2);
+        EzDo expectedEZ = helper.generateEzDo(fourTasks);
+        List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2);
+        helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find KEY",
                 Command.getMessageForTaskListShownSummary(expectedList.size()),
-                expectedAB,
+                expectedEZ,
                 expectedList);
     }
 
     @Test
     public void execute_find_isNotCaseSensitive() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task p1 = helper.generatePersonWithName("bla bla KEY bla");
-        Task p2 = helper.generatePersonWithName("bla KEY bla bceofeia");
-        Task p3 = helper.generatePersonWithName("key key");
-        Task p4 = helper.generatePersonWithName("KEy sduauo");
+        Task p1 = helper.generateTaskWithName("bla bla KEY bla");
+        Task p2 = helper.generateTaskWithName("bla KEY bla bceofeia");
+        Task p3 = helper.generateTaskWithName("key key");
+        Task p4 = helper.generateTaskWithName("KEy sduauo");
 
-        List<Task> fourPersons = helper.generatePersonList(p3, p1, p4, p2);
-        EzDo expectedAB = helper.generateAddressBook(fourPersons);
-        List<Task> expectedList = fourPersons;
-        helper.addToModel(model, fourPersons);
+        List<Task> fourTasks = helper.generateTaskList(p3, p1, p4, p2);
+        EzDo expectedEZ = helper.generateEzDo(fourTasks);
+        List<Task> expectedList = fourTasks;
+        helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find KEY",
                 Command.getMessageForTaskListShownSummary(expectedList.size()),
-                expectedAB,
+                expectedEZ,
                 expectedList);
     }
 
     @Test
     public void execute_find_matchesIfAnyKeywordPresent() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task pTarget1 = helper.generatePersonWithName("bla bla KEY bla");
-        Task pTarget2 = helper.generatePersonWithName("bla rAnDoM bla bceofeia");
-        Task pTarget3 = helper.generatePersonWithName("key key");
-        Task p1 = helper.generatePersonWithName("sduauo");
+        Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
+        Task pTarget2 = helper.generateTaskWithName("bla rAnDoM bla bceofeia");
+        Task pTarget3 = helper.generateTaskWithName("key key");
+        Task p1 = helper.generateTaskWithName("sduauo");
 
-        List<Task> fourPersons = helper.generatePersonList(pTarget1, p1, pTarget2, pTarget3);
-        EzDo expectedAB = helper.generateAddressBook(fourPersons);
-        List<Task> expectedList = helper.generatePersonList(pTarget1, pTarget2, pTarget3);
-        helper.addToModel(model, fourPersons);
+        List<Task> fourTasks = helper.generateTaskList(pTarget1, p1, pTarget2, pTarget3);
+        EzDo expectedEZ = helper.generateEzDo(fourTasks);
+        List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
+        helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find key rAnDoM",
                 Command.getMessageForTaskListShownSummary(expectedList.size()),
-                expectedAB,
+                expectedEZ,
                 expectedList);
     }
 
@@ -428,13 +428,13 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates a valid person using the given seed.
-         * Running this function with the same parameter values guarantees the returned person will have the same state.
-         * Each unique seed will generate a unique Person object.
+         * Generates a valid task using the given seed.
+         * Running this function with the same parameter values guarantees the returned task will have the same state.
+         * Each unique seed will generate a unique Task object.
          *
-         * @param seed used to generate the person data field values
+         * @param seed used to generate the task data field values
          */
-        Task generatePerson(int seed) throws Exception {
+        Task generateTask(int seed) throws Exception {
             return new Task(
                     new Name("Person " + seed),
                     new Phone("" + Math.abs(seed)),
@@ -444,7 +444,7 @@ public class LogicManagerTest {
             );
         }
 
-        /** Generates the correct add command based on the person given */
+        /** Generates the correct add command based on the task given */
         String generateAddCommand(Task p) {
             StringBuffer cmd = new StringBuffer();
 
@@ -464,76 +464,76 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates an AddressBook with auto-generated persons.
+         * Generates an EzDo with auto-generated tasks.
          */
-        EzDo generateAddressBook(int numGenerated) throws Exception {
+        EzDo generateEzDo(int numGenerated) throws Exception {
             EzDo ezDo = new EzDo();
-            addToAddressBook(ezDo, numGenerated);
+            addToEzDo(ezDo, numGenerated);
             return ezDo;
         }
 
         /**
-         * Generates an AddressBook based on the list of Persons given.
+         * Generates an EzDo based on the list of Tasks given.
          */
-        EzDo generateAddressBook(List<Task> tasks) throws Exception {
+        EzDo generateEzDo(List<Task> tasks) throws Exception {
             EzDo ezDo = new EzDo();
-            addToAddressBook(ezDo, tasks);
+            addToEzDo(ezDo, tasks);
             return ezDo;
         }
 
         /**
-         * Adds auto-generated Person objects to the given AddressBook
-         * @param ezDo The AddressBook to which the Persons will be added
+         * Adds auto-generated Task objects to the given EzDo
+         * @param ezDo The EzDo to which the Tasks will be added
          */
-        void addToAddressBook(EzDo ezDo, int numGenerated) throws Exception {
-            addToAddressBook(ezDo, generatePersonList(numGenerated));
+        void addToEzDo(EzDo ezDo, int numGenerated) throws Exception {
+            addToEzDo(ezDo, generateTaskList(numGenerated));
         }
 
         /**
-         * Adds the given list of Persons to the given AddressBook
+         * Adds the given list of Tasks to the given EzDo
          */
-        void addToAddressBook(EzDo ezDo, List<Task> personsToAdd) throws Exception {
-            for (Task p: personsToAdd) {
+        void addToEzDo(EzDo ezDo, List<Task> tasksToAdd) throws Exception {
+            for (Task p: tasksToAdd) {
                 ezDo.addTask(p);
             }
         }
 
         /**
-         * Adds auto-generated Person objects to the given model
-         * @param model The model to which the Persons will be added
+         * Adds auto-generated Task objects to the given model
+         * @param model The model to which the Tasks will be added
          */
         void addToModel(Model model, int numGenerated) throws Exception {
-            addToModel(model, generatePersonList(numGenerated));
+            addToModel(model, generateTaskList(numGenerated));
         }
 
         /**
-         * Adds the given list of Persons to the given model
+         * Adds the given list of Tasks to the given model
          */
-        void addToModel(Model model, List<Task> personsToAdd) throws Exception {
-            for (Task p: personsToAdd) {
+        void addToModel(Model model, List<Task> tasksToAdd) throws Exception {
+            for (Task p: tasksToAdd) {
                 model.addTask(p);
             }
         }
 
         /**
-         * Generates a list of Persons based on the flags.
+         * Generates a list of Tasks based on the flags.
          */
-        List<Task> generatePersonList(int numGenerated) throws Exception {
+        List<Task> generateTaskList(int numGenerated) throws Exception {
             List<Task> tasks = new ArrayList<>();
             for (int i = 1; i <= numGenerated; i++) {
-                tasks.add(generatePerson(i));
+                tasks.add(generateTask(i));
             }
             return tasks;
         }
 
-        List<Task> generatePersonList(Task... persons) {
-            return Arrays.asList(persons);
+        List<Task> generateTaskList(Task... tasks) {
+            return Arrays.asList(tasks);
         }
 
         /**
-         * Generates a Person object with given name. Other fields will have some dummy values.
+         * Generates a Task object with given name. Other fields will have some dummy values.
          */
-        Task generatePersonWithName(String name) throws Exception {
+        Task generateTaskWithName(String name) throws Exception {
             return new Task(
                     new Name(name),
                     new Phone("1"),

@@ -15,7 +15,7 @@ import seedu.ezdo.commons.util.FileUtil;
 import seedu.ezdo.commons.util.XmlUtil;
 import seedu.ezdo.model.EzDo;
 import seedu.ezdo.storage.XmlSerializableEzDo;
-import seedu.ezdo.testutil.AddressBookBuilder;
+import seedu.ezdo.testutil.EzDoBuilder;
 import seedu.ezdo.testutil.TestUtil;
 
 public class XmlUtilTest {
@@ -87,9 +87,9 @@ public class XmlUtilTest {
         assertEquals((new EzDo(dataToWrite)).toString(), (new EzDo(dataFromFile)).toString());
         //TODO: use equality instead of string comparisons
 
-        AddressBookBuilder builder = new AddressBookBuilder(new EzDo());
+        EzDoBuilder builder = new EzDoBuilder(new EzDo());
         dataToWrite = new XmlSerializableEzDo(
-                builder.withPerson(TestUtil.generateSamplePersonData().get(0)).withTag("Friends").build());
+                builder.withTask(TestUtil.generateSampleTaskData().get(0)).withTag("Friends").build());
 
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
         dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableEzDo.class);

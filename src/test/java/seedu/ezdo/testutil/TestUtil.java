@@ -107,7 +107,7 @@ public class TestUtil {
         }
     }
 
-    public static List<Task> generateSamplePersonData() {
+    public static List<Task> generateSampleTaskData() {
         return Arrays.asList(SAMPLE_PERSON_DATA);
     }
 

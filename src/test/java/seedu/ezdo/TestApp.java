@@ -22,7 +22,7 @@ public class TestApp extends MainApp {
     protected static final String DEFAULT_PREF_FILE_LOCATION_FOR_TESTING =
             TestUtil.getFilePathInSandboxFolder("pref_testing.json");
     public static final String APP_TITLE = "Test App";
-    protected static final String ADDRESS_BOOK_NAME = "Test";
+    protected static final String EZDO_NAME = "Test";
     protected Supplier<ReadOnlyEzDo> initialDataSupplier = () -> null;
     protected String saveFileLocation = SAVE_LOCATION_FOR_TESTING;
 
@@ -48,7 +48,7 @@ public class TestApp extends MainApp {
         config.setAppTitle(APP_TITLE);
         config.setEzDoFilePath(saveFileLocation);
         config.setUserPrefsFilePath(DEFAULT_PREF_FILE_LOCATION_FOR_TESTING);
-        config.setEzDoName(ADDRESS_BOOK_NAME);
+        config.setEzDoName(EZDO_NAME);
         return config;
     }
 
