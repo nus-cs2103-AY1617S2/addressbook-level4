@@ -539,7 +539,7 @@ Use case ends
   3a3. Program deletes the task. <br>
   Use case ends
 
-3b. Program detects the specified task is not valid. 
+3b. Program detects the specified task is not valid.
 
 > 3b1. Program shows an error message. <br>
   3b2. Program requests for re-input. <br>
@@ -567,7 +567,7 @@ Use case ends
   3a2. Program informs user that multiple tasks are marked as complete.
   Use case ends
 
-3b. Program detects the specified task is not valid. 
+3b. Program detects the specified task is not valid.
 
 > 3b1. Program shows an error message.
   3b2. Program requests for re-input.
@@ -631,7 +631,7 @@ Use case ends
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the faster using commands than using the mouse.
 4. Should have a response time of at most five seconds, including functionality that require longer than five seconds to
-   execute. This can be achieved by status updates on an ongoing function. 
+   execute. This can be achieved by status updates on an ongoing function.
 5. Should have reasonable amount of documentation so that future developers can easily extend the project.
 6. Should have reasonably high quality source code as determined by the supervisor.
 7. Should not have any proprietary dependencies.
@@ -717,4 +717,4 @@ Cons:
 
 * Web application is either not well developed or very hard to use (unintuitive).  I could not add a task after trying for 10 minutes. (Difficult to add a task)
 * Android application does not allow due time to be set directly when setting (creating?) new task
-Tasks cannot be sorted by due date
+* Tasks cannot be sorted by due date
