@@ -199,7 +199,18 @@ Examples:
 * `delete 1 2 3`<br>
   Deletes the 1st, 2nd and 3rd tasks/lists in the most recent listing.
 
-### 2.9. Undo latest command: `undo`
+### 2.9 Finishing task(s) : `finish`
+
+Finishes the specified task(s) from Dueue.<br>
+Format: `finish TASKINDEX...`
+
+> * Finishes the task(s) at the specified `TASKINDEX`. <br>
+> * The index refers to the index number shown in the most recent listing.<br>
+> * To delete multiple entries, indices must be seperated by whitespaces.
+> * Each index **must be a positive integer** 1, 2, 3, ...
+> * When a repeating task is finished, user will need to confirm whether it should be deleted for once or deleted forever (stop repeating).
+
+### 2.10. Undo latest command: `undo`
 
 Undo the immediately preceding command.<br>
 Format: `undo`
@@ -213,7 +224,7 @@ Examples:
 * `undo`<br>
   Latest command is reversed.
 
-### 2.10. Reverse previous `undo` command: `redo`
+### 2.11. Reverse previous `undo` command: `redo`
 
 Reverse the immediately preceding undo command.<br>
 Format: `redo`
@@ -227,19 +238,19 @@ Examples:
 * `redo`<br>
   Previous `undo` command is reversed.
 
-### 2.11. Clearing all entries : `clear`
+### 2.12. Clearing all entries : `clear`
 
 Clears all tasks from Dueue.<br>
 Format: `clear`
 
 > * User will be asked to confirm before clearing everything.
 
-### 2.12. Exiting the program : `exit`
+### 2.13. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.13. Saving the data
+### 2.14. Saving the data
 
 Dueue data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
