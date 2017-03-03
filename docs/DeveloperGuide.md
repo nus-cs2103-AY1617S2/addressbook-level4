@@ -397,7 +397,7 @@ Use case ends.
 
 > Windows, Linux, Unix, OS-X
 
-##### Private contact detail
+##### Private task detail
 
 > A task detail that is not meant to be shared with others
 
