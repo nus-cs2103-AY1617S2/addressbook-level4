@@ -346,28 +346,141 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
-
-{More to be added}
+`* * *` | user | I can add tasks/events that may or may not have deadlines/dates | so that i can keep track of what i need to do
+`* * *` | user | I can delete tasks/events| get rid of tasks that need not be done anymore 
+`* * *` | user | reschedule a task/event | accommodate changes in my schedule 
+`* * *` | user | mark a task/event as done | so that i can reduce clutter in my todo list
+`* * *` | user | add tasks/events that have multiple dates/times | accomodate events that span over multiple days
+`* * *` | user | have a scheduler that automatically syncs my schedulers | so that i can reduce clutter in my todo list
+`* * *` | user | I will be given confirmation whether i enter a command | so that i know when the command has been executed
+`* * *` | user | I can edit the task/event's description' and name | so that i can accomodate any changes
+`* * *` | user | I can view my to-do list of undone tasks with and sorted by deadlines | so that I can find out what I have to do
+`* * *` | new user | I can view more information about a particular command | so that i can learn how to use the task manager easily.	
+`* *` | user | I can tag my tasks | so that I can easily categorise my tasks
+`* *` | user | I am able to undo my last action | so that i can rectify my mistakes quickly
+`* *` | user | I am able to add reminder alarms to tasks | to prompt follow up action	
+`* *` | user | I can get prompted on yesterday’s tasks that have yet to be completed | so that I can reschedule the task or flag as cannot be done. 
+`* *` | user | I can search my tasks by keyword | so that I can quickly access the desired task in mind
+`* *` | user | I can flag a task/events | so as to highlight the importance	
+`* *` | user | I can easily see an overview of my schedule and todo list | so that i can keep track of things that need to be done	
+`* *` | user | I can access a list of previously completed tasks | so as to keep track of things i have done	
+`* *` | user | I can search my tasks according to categories | so that I can easily visualize my tasks in a particular category
+`* *` | user | I can add tasks that repeat according to a stipulated number of days | So that i can reduce the amount of redundant work i need to do
+`* *` | user | I can change the folder to store my data | so that I can easily copy my data/program and work in another computer.	
+`* *` | user | I am able to manually sync my scheduler | so that I can back it up on my cloud/local folder
+`* *` | advanced user | System will recognise incomplete command words | so as to save time typing	
+`* *` | user | I can stipulate ranges of time for my tasks to be slotted into | so that i neednt consider my schedule directly	
+`*` | user | I can have a shortcut key | to quickly access the program.	
+`*` | user | I will be prompted for my password to enter the Task Manager |  prevent unauthorised users from using my Task Manager	
+`*` | user | I can place a tasks that was previously marked as done back into my todo list | so that i can save time	
+`*` | user | I can change the text size in the GUI | in case i have bad eyesight	
+`*` | user | I will be notified of all the commands i have given when i exit the program | to keep track of what i did	
+`*` | user | I can use the Task Manager across time zones | so that i can travel while using the Task Manager	
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TaskManager` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: Add task/event
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User requests to Add task/event
+2. TaskManager feedbacks and verifies that task/event is added
+3. Use case ends.
+
 Use case ends.
+
+**Extensions**
+
+1a. Task/event is given in an invalid format error
+
+> Use case ends
+
+#### Use case: Delete task/event
+
+**MSS**
+
+1. User requests to list tasks or search tasks by keyword 
+2. TaskManager shows a list of tasks or shows a list of tasks with the keyword
+3. User requests to delete a specific task in the list
+4. TaskManager deletes the task 
+5. Use case ends.
+
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+2b. The keyword does not match any of the tasks
+
+> 2b1. TaskManager shows an error message
+
+> Use case ends 
+
+3a. The given index is invalid
+
+> 3a1. AddressBook shows an error message 
+> Use case resumes at step 2
+
+#### Use case: Find Task by keyword
+
+**MSS**
+
+1. User requests to find task with specific Keyword
+2. Taskmanager shows details of list of Tasks with said Keyword
+3. Use case ends.
+
+
+**Extensions**
+
+2a.  Keyword is not found, Taskmanager shows a Keyword not found message.
+
+> Use case ends
+
+#### Use case: List all task
+
+**MSS**
+
+1. User requests to list all task
+2. Taskmanager shows a list of all task 
+3. Use case ends.
+
+
+**Extensions**
+
+2a.  Task list is empty, Taskmanager shows a Task list is empty message.
+
+> Use case ends
+
+#### Use case: Show list of tasks that is done or event that has passed
+
+**MSS**
+
+1. User requests to show archive
+2. TaskManager feedbacks and generates the list of task/event that is done/passed
+3. Use case ends.
+
+**Extensions**
+
+1a. There is no tasks/events that is done/passed
+
+> 1a1. TaskManager feedbacks that there are no past event/task
+
+> Use case ends
+
+#### Use case:  edit task/event
+
+**MSS**
+
+1. User requests to list or find tasks/events
+2. TaskManager shows a list of tasks/events
+3. User requests to edit a specific task/event in the list
+4. TaskManager edits the task/event
+5. Use case ends.
 
 **Extensions**
 
@@ -377,19 +490,58 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+> 3a1.TaskManager shows an error message
 
-{More to be added}
+> Use case resumes at step 2
+
+3b. The user gives index but no other input
+
+> 3b1. TaskManager shows an error message
+
+> Use case resumes at step 2
+
+3c. The user enters input that is invalid (i.e. edit start time when it is a task)
+
+> 3c1. TaskManager shows an error message
+
+> Use case resumes at step 2
+
+#### Use case:  Mark task as done
+
+**MSS**
+
+1. User requests to list tasks or search tasks by keyword 
+2. TaskManager shows a list of tasks or shows a list of tasks with the keyword
+3. User requests to mark specific task(s) in the list as done
+4. TaskManager marks the specified task(s) as done
+5. Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+2b. The keyword does not match any of the tasks
+
+> 2b1. TaskManager shows an error message
+
+> Use case ends 
+
+3a. The given index is invalid
+
+> 3a1. AddressBook shows an error message 
+
+> Use case resumes at step 2
 
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
-   should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-{More to be added}
+2. Should be able to hold up to 2000 tasks without a noticeable sluggishness in performance for typical usage.
+3. A user should be able to complete certain action in less than 3 step.
+4. A user should be able to search for task/events within 3seconds.
+5. Should automatically sync with online cloud when internet connection is available
+6. Should automatically save its data locally after every edit
 
 ## Appendix D : Glossary
 
