@@ -4,7 +4,7 @@ By : `CS2103JAN2017-W10-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&
 
 ---
 
-1. [Setting Up](#setting-up)
+1. [Setting Up](#1.-setting-up)
 2. [Design](#design)
 3. [Implementation](#implementation)
 4. [Testing](#testing)
@@ -350,7 +350,7 @@ Priority | As a ... | I want to ... | So that...
 `* * *` | user | add a task by specifying a task description and the deadline | I can record tasks that need to be done by a specific day
 `* * *` | user |add an event/task with description, time period and date	| I can record events that need to be done in a specific period 
 `* * *` | user |add an event/task with description that has variation of formats	| I am not limited to one and only one format - I can have some flexibility
-`* * *` | user |add a recurring task with description, time, frequency	|I can record tasks that need to be done on a specific day
+`* * *` | user |add a [recurring task](#recurring-task) with description, time, frequency	|I can record tasks that need to be done on a specific day
 `* * *` | user |add a tag/multiple tag to an existing event/task	| I do not have to always add the tag when I add the task
 `* * *` | user |delete unwanted tag	| I can remove the tags when I no longer need them
 `* * *` | user |delete task | I can remove the tasks when I have completed them
@@ -376,16 +376,16 @@ Priority | As a ... | I want to ... | So that...
 `* * *` | user |undo the most recent operation	| in case I made a mistake I can reverse
 `* * *` | user |exit the software | I can move to other windows when I finish using To-do list
 `* *` | user |group/filter tasks according to categories such as work/family/etc |	I will not be distracted by irrelevant tasks at specific times
-`* *` | user | edit the subtasks of a task	| I can update the subtasks if there is any changes
-`* *` | user |have suggestions when I typed invalidly |	I will know how to correct my mistakes
-`* *` | New user | have reminders of format when I started a command word	| I will know the correct format of the input
+`* *` | user | edit the subtasks of a task	| I can update the subtasks if there are any changes
+`* *` | user |have suggestions when I type invalidly |	I will know how to correct my mistakes
+`* *` | New user | have reminders of format when I start a command word	| I will know the correct format of the input
 `* *` | user | assign importance levels to each task with colour coding	| I can easily spot the more important tasks and prioritize them
 `* *` | user |set notifications before the due time for certain tasks |	I will be reminded of the task in a timely manner
 `* *` | user |split tasks into subtasks with a progress bar | I can keep track of my progress in individual tasks
 `* *` | user |copy and paste the task to some other day |	I don't need to type extra
 `* * ` | Advanced user | use shorter versions of a command/customize my commands	 | I can type a command faster
-`*` | user|have a guided tour of the software	| I will know what are the available features of the software
-`*` | user|customize the timing for reminder	| I will not be bombasted with too many reminders
+`*` | user|have a guided tour of the software	| I will know what the available features of the software are
+`*` | user|customize the timing for reminder	| I will not be bombarded with too many reminders
 `*` | user| share task/tasks with others |	I can designate my tasks to others
 
 {More to be added}
@@ -820,11 +820,11 @@ Use case ends
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. Data should be recoverable in case of unexpected program termination by simply retrieving the data stored in the target location.
+4. Data should be recoverable in case of [unexpected program termination](#unexpected-program-termination) by simply retrieving the data stored in the target location.
 5. Program should be able to start up within 3s and respond to commands within 1s.
 6. Command format should be self-explanatory and easy to use so that new users can pick up within 5 minutes.
 7. Program should be able to handle up to 1000 tasks/events.
-8. Program should store data in local environment and thus be able to work offline.
+8. Program should store data in [local environment](#local-environment ) and thus be able to work offline.
 9. Does not require any third party extensions nor should work as a third party extension of other applications.
 
 ## Appendix D : Glossary
@@ -833,9 +833,33 @@ Use case ends
 
 > Windows, Linux, Unix, OS-X
 
-##### Private contact detail
+##### Unexpected program termination
 
-> A contact detail that is not meant to be shared with others
+> Program stopped or forced to close by user via external mechanisms (ie Windows Task Manager)
+
+##### Local environment
+
+> User's computer hard disk or thumb drive, wherever the user specified to store the data or if not, where the program directory is located
+
+##### Recurring task
+
+> A task that occurs with a certain frequency (eg. every 2 hours/every Monday)
+
+##### Browser-based
+
+> Runs in a browser (eg. Chrome, IE, Firefox)
+
+##### Theme
+
+> Aesthetic design for user personalization, by changing the colour scheme/background picture/etc
+
+##### Calendar view
+
+> A calendar with tasks noted on their respective dates
+
+##### Synchronizes
+
+> Updates new edits on all directories that are linked together to ensure all directories have the most updated file versions
 
 ## Appendix E : Product Survey
 
@@ -863,9 +887,9 @@ Features not important to Jim:
 Cons
 
 * No CLI
-* Difficult for new user to learn as the UI is is not self explanatory and there is no help function.
+* Difficult for new user to learn as the UI is not self explanatory and there is no help function.
 * No calendar/timeline view.
-* Browser-based so it requires internet connection.
+* [Browser-based](#browser-based) so it requires internet connection.
 
 **Remember the milk**
 
@@ -930,11 +954,11 @@ Features that are not important for Jim
 * Can print list
 * Have account and password
 * Can duplicate list
-* Can change theme of task manager
+* Can change [theme](#theme) of task manager
 
 Cons
 
-* No calendar view
+* No [calendar view](#calendar-view)
 * Does not have a start and end time for items
 * Not completely free.
 * Setup is inconvenient
@@ -950,19 +974,17 @@ Main functionality
 
 Features we might like to have
 
-* Calendar/Project Task collaboration with a team
-* Features we might like to have
 * Show a calendar on the side
 * User can choose a category for new tasks and upload files that are tagged to the specific task
 * Easily add short comments to existing tasks
 * Add subtasks
 * Move task to archive (instead of deleting the task)
 * UI: Provide tabs that contain lists of different tasks such as:
-    * ‘Today’ – tasks without deadlines or tasks due today
-    * ‘Overdue’ – tasks that are already overdue
-    * ‘Project’ – tasks that are large scale and with contain subtasks
-    * ‘Calendar’ – tasks displayed in a calendar format
-    * ‘Activity’ – a history or log of past actions
+    * 'Today' – tasks without deadlines or tasks due today
+    * 'Overdue' – tasks that are already overdue
+    * 'Project' – tasks that are large scale and with contain subtasks
+    * 'Calendar' – tasks displayed in a calendar format
+    * 'Activity' – a history or log of past actions
 * Tasks can be sorted according to priority.
 * Requires log-in with username and password so data is protected.
 
@@ -973,7 +995,7 @@ Features not important to Jim
 * Create copy of task
 * Input/import tasks from external sources, such as online
 * Assign project/task item to team members
-* Can see the tasks on team members’ schedules
+* Can see the tasks on team members' schedules
 * Everything can be controlled via the UI except inputting the names and labels
 
 Cons
@@ -998,7 +1020,7 @@ Features we might like to have
 * List projects associated with project or keywords
 * Give a task a priority level
 * Each priority level task has its own colour code
-* Syncs easily with file syncing software such as Dropbox
+* [Synchronizes](#synchronizes) easily with file synchronizing software such as Dropbox
 
 Features not important to Jim
 
