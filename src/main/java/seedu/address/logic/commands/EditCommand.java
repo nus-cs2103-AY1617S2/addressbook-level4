@@ -7,7 +7,6 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Address;
 import seedu.address.model.task.Email;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Phone;
@@ -80,10 +79,9 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
         Phone updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
         Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
-        Address updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
-        return new Task(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Task(updatedName, updatedPhone, updatedEmail, updatedTags);
     }
 
     /**
@@ -94,7 +92,6 @@ public class EditCommand extends Command {
         private Optional<Name> name = Optional.empty();
         private Optional<Phone> phone = Optional.empty();
         private Optional<Email> email = Optional.empty();
-        private Optional<Address> address = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditPersonDescriptor() {}
@@ -103,7 +100,6 @@ public class EditCommand extends Command {
             this.name = toCopy.getName();
             this.phone = toCopy.getPhone();
             this.email = toCopy.getEmail();
-            this.address = toCopy.getAddress();
             this.tags = toCopy.getTags();
         }
 
@@ -111,7 +107,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.phone, this.email, this.address, this.tags);
+            return CollectionUtil.isAnyPresent(this.name, this.phone, this.email, this.tags);
         }
 
         public void setName(Optional<Name> name) {
@@ -139,15 +135,6 @@ public class EditCommand extends Command {
 
         public Optional<Email> getEmail() {
             return email;
-        }
-
-        public void setAddress(Optional<Address> address) {
-            assert address != null;
-            this.address = address;
-        }
-
-        public Optional<Address> getAddress() {
-            return address;
         }
 
         public void setTags(Optional<UniqueTagList> tags) {
