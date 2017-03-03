@@ -63,10 +63,10 @@ public class LogicManagerTest {
     private boolean helpShown;
     private int targetedJumpIndex;
 
-    @Subscribe
-    private void handleLocalModelChangedEvent(TodoListChangedEvent abce) {
-        latestSavedAddressBook = new TodoList(abce.data);
-    }
+//    @Subscribe
+//    private void handleLocalModelChangedEvent(TodoListChangedEvent abce) {
+//        latestSavedAddressBook = new TodoList(abce.data);
+//    }
 
     @Subscribe
     private void handleShowHelpRequestEvent(ShowHelpRequestEvent she) {

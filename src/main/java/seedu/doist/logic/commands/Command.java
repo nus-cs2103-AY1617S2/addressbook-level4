@@ -35,5 +35,5 @@ public abstract class Command {
      */
     public void setData(Model model) {
         this.model = model;
-    } 
+    }
 }
