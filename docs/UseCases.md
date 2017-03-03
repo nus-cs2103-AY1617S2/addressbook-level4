@@ -192,7 +192,7 @@ This use case extends [List all Tasks](#list-all-tasks). It is inserted at exten
 ### Save to File
 
 1. User enters command to save progress
-2. Task manager saves progress in the directory
+2. Task manager saves progress in the directory<br>
 **Use case ends**
 
 ### Change File storage
@@ -201,12 +201,13 @@ This use case extends [List all Tasks](#list-all-tasks). It is inserted at exten
 
 1. User enters command to retrieve file saving directory
 2. User switches directory
-2. All data is then relocated to the specified location
+2. All data is then relocated to the specified location<br>
 **Use case ends**
 
 #### Extensions
 
 1a. At first startup, an options message will display available directories for the files to be saved to
-> 1a1. Save to desktop by default in the options
+> 1a1. Save to desktop by default in the options<br>
   **Use case ends**
-
+  
+  
