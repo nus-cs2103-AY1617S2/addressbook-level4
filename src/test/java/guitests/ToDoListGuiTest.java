@@ -24,15 +24,15 @@ import javafx.stage.Stage;
 import seedu.address.TestApp;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.AddressBook;
+import seedu.address.model.ToDoList;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.testutil.TestUtil;
 import seedu.address.testutil.TypicalTestPersons;
 
 /**
- * A GUI Test class for AddressBook.
+ * A GUI Test class for ToDoList.
  */
-public abstract class AddressBookGuiTest {
+public abstract class ToDoListGuiTest {
 
     /* The TestName Rule makes the current test name available inside test methods */
     @Rule
@@ -86,9 +86,9 @@ public abstract class AddressBookGuiTest {
      * Override this in child classes to set the initial local data.
      * Return null to use the data in the file specified in {@link #getDataFileLocation()}
      */
-    protected AddressBook getInitialData() {
-        AddressBook ab = new AddressBook();
-        TypicalTestPersons.loadAddressBookWithSampleData(ab);
+    protected ToDoList getInitialData() {
+        ToDoList ab = new ToDoList();
+        TypicalTestPersons.loadToDoListWithSampleData(ab);
         return ab;
     }
 
