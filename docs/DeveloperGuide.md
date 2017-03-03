@@ -5,10 +5,11 @@ By : `Team W14-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
 ---
 
 1. [Setting Up](#setting-up)
-2. [Design](#design)
-3. [Implementation](#implementation)
-4. [Testing](#testing)
-5. [Dev Ops](#dev-ops)
+2. [Target Users](#target-users)
+3. [Design](#design)
+4. [Implementation](#implementation)
+5. [Testing](#testing)
+6. [Dev Ops](#dev-ops)
 
 * [Appendix A: User Stories](#appendix-a--user-stories)
 * [Appendix B: Use Cases](#appendix-b--use-cases)
@@ -17,7 +18,7 @@ By : `Team W14-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
 * [Appendix E : Product Survey](#appendix-e--product-survey)
 
 
-## 1. Setting up
+## Setting up
 
 ### 1.1. Prerequisites
 
@@ -72,10 +73,18 @@ By : `Team W14-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
 * Reason: Required libraries may not have been downloaded during the project import.
 * Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries).
 
+## Target Users
 
-## 2. Design
+Our target users (eg. `Jim`) are people who:
+* usually work alone on their personal or office computer
+* do not share their computer with others
+* prefer a command-line approach over a mouse-clicking approach
+* would like to have an organized set up of tasks to categorize, sort, and prioritise them for ease of task management  
 
-### 2.1. Architecture
+
+## Design
+
+### 3.1. Architecture
 
 <img src="images/Architecture.png" width="600"><br>
 _Figure 2.1.1 : Architecture Diagram_
@@ -137,7 +146,7 @@ _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 
 The sections below give more details of each component.
 
-### 2.2. UI component
+### 3.2. UI component
 
 Author: Alice Bee
 
@@ -160,7 +169,7 @@ The `UI` component,
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
 
-### 2.3. Logic component
+### 3.3. Logic component
 
 Author: Bernard Choo
 
@@ -179,7 +188,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 <img src="images/DeletePersonSdForLogic.png" width="800"><br>
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
-### 2.4. Model component
+### 3.4. Model component
 
 Author: Cynthia Dharman
 
@@ -196,7 +205,7 @@ The `Model`,
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
-### 2.5. Storage component
+### 3.5. Storage component
 
 Author: Darius Foong
 
@@ -210,13 +219,13 @@ The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
 * can save the Address Book data in xml format and read it back.
 
-### 2.6. Common classes
+### 3.6. Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
-## 3. Implementation
+## Implementation
 
-### 3.1. Logging
+### 4.1. Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels
 and logging destinations.
@@ -235,13 +244,13 @@ and logging destinations.
 * `FINE` : Details that is not usually noteworthy but may be useful in debugging
   e.g. print the actual list instead of just its size
 
-### 3.2. Configuration
+### 4.2. Configuration
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
 (default: `config.json`):
 
 
-## 4. Testing
+## Testing
 
 Tests can be found in the `./src/test/java` folder.
 
@@ -278,7 +287,7 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
  That means the developer can do other things on the Computer while the tests are running.<br>
  See [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in headless mode.
 
-### 4.1. Troubleshooting tests
+### 5.1. Troubleshooting tests
 
  **Problem: Tests fail because NullPointException when AssertionError is expected**
 
@@ -288,23 +297,23 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
    [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
    Delete run configurations created when you ran tests earlier.
 
-## 5. Dev Ops
+## Dev Ops
 
-### 5.1. Build Automation
+### 6.1. Build Automation
 
 See [UsingGradle.md](UsingGradle.md) to learn how to use Gradle for build automation.
 
-### 5.2. Continuous Integration
+### 6.2. Continuous Integration
 
 We use [Travis CI](https://travis-ci.org/) and [AppVeyor](https://www.appveyor.com/) to perform _Continuous Integration_ on our projects.
 See [UsingTravis.md](UsingTravis.md) and [UsingAppVeyor.md](UsingAppVeyor.md) for more details.
 
-### 5.3. Publishing Documentation
+### 6.3. Publishing Documentation
 
 See [UsingGithubPages.md](UsingGithubPages.md) to learn how to use GitHub Pages to publish documentation to the
 project site.
 
-### 5.4. Making a Release
+### 6.4. Making a Release
 
 Here are the steps to create a new release.
 
@@ -313,7 +322,7 @@ Here are the steps to create a new release.
  2. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/)
     and upload the JAR file you created.
 
-### 5.5. Converting Documentation to PDF format
+### 6.5. Converting Documentation to PDF format
 
 We use [Google Chrome](https://www.google.com/chrome/browser/desktop/) for converting documentation to PDF format,
 as Chrome's PDF engine preserves hyperlinks used in webpages.
@@ -330,7 +339,7 @@ Here are the steps to convert the project documentation files to PDF format.
     <img src="images/chrome_save_as_pdf.png" width="300"><br>
     _Figure 5.4.1 : Saving documentation as PDF files in Chrome_
 
-### 5.6. Managing Dependencies
+### 6.6. Managing Dependencies
 
 A project often depends on third-party libraries. For example, Address Book depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
@@ -338,6 +347,7 @@ can be automated using Gradle. For example, Gradle can download the dependencies
 is better than these alternatives.<br>
 a. Include those libraries in the repo (this bloats the repo size)<br>
 b. Require developers to download those libraries manually (this creates extra work for developers)<br>
+
 
 ## Appendix A : User Stories
 
@@ -347,10 +357,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the TaskBoss
-`* * *` | user | add tasks to record tasks that I need to get done |
+`* * *` | user | add tasks | record tasks that I need to get done |
 `* * *` | user | delete tasks | get rid of tasks that I no longer need
 `* * *` | user | edit tasks | update any outdated information
-`* * *` | user | see a list of all the tasks |
+`* * *` | user | see a list of all the tasks | view all my pending tasks in a single view
 `* * *` | user | mark my tasks as done | keep track of the task status
 `* * *` | user | set deadlines for tasks that have due dates | track the urgency of any given task
 `* * *` | user | sort the tasks based on their deadlines | know the most urgent tasks to address
@@ -362,17 +372,17 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user | set priority levels for each of my tasks | give my attention to tasks without deadlines that are urgent
 `* *` | user | see my tasks sorted based on priority | check what I need to do urgently
 `* *` | user | categorize my tasks | keep my tasks organized
-`* *` | user | see the tasks under a specific category | 
-`* *` | user | see the tasks that I’ve completed or have yet to be addressed | 
+`* *` | user | see the tasks under a specific category | better manage my pending tasks
+`* *` | user | see the tasks that I have completed | re-trace my completed tasks if need be
 `* *` | user | create categories | add tasks under specific categories
 `* *` | user | view a specific task | focus on that task
 `* *` | user | clear all tasks under a specific category | delete a bulk of tasks at one time
 `*` | user | set recurring tasks | not have to manually add the same task over and over again
-`*` | user | set reminders | reminded of tasks
-`*` | user | set locations | reminded of the location associated with the task
-`*` | user | add people | reminded of the people associated with the task
-`*` | user | create labels for tasks | reminded of the type of task
-`*` | user | redo a command after undoing a command | 
+`*` | user | set reminders | be reminded of tasks if need be
+`*` | user | set locations | check location of the task (if any)
+`*` | user | add people | check people associated with the task (if any)
+`*` | user | create labels for tasks | easily group certain similar tasks together
+`*` | user | redo a command after undoing a command | revert the state of TaskBoss if need be
 `*` | user | type shorter commands | execute commands faster
 `*` | user | integrate Google Calendar | see a monthly view of my tasks
 `*` | user | view all tasks that are between a specified date/time interval | not be distracted by other tasks meant for another time/date
@@ -638,8 +648,8 @@ Use case ends
 
 **MSS**
 
-1.User requests to view a specific task
-2.TaskBoss displays the task user requests. <br>
+1. User requests to view a specific task
+2. TaskBoss displays the task user requests. <br>
 Use case ends
 
 **Extensions**
