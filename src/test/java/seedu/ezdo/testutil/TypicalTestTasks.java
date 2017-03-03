@@ -57,7 +57,7 @@ public class TypicalTestTasks {
         return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
     }
 
-    public EzDo getTypicalAddressBook() {
+    public EzDo getTypicalEzDo() {
         EzDo ab = new EzDo();
         loadEzDoWithSampleData(ab);
         return ab;

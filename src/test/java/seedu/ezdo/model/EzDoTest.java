@@ -21,7 +21,7 @@ import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.testutil.TypicalTestTasks;
 
-public class AddressBookTest {
+public class EzDoTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -41,19 +41,19 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        EzDo newData = new TypicalTestTasks().getTypicalAddressBook();
+    public void resetData_withValidReadOnlyEzDo_replacesData() {
+        EzDo newData = new TypicalTestTasks().getTypicalEzDo();
         ezDo.resetData(newData);
         assertEquals(newData, ezDo);
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsAssertionError() {
+    public void resetData_withDuplicateTasks_throwsAssertionError() {
         TypicalTestTasks td = new TypicalTestTasks();
         // Repeat td.alice twice
-        List<Task> newPersons = Arrays.asList(new Task(td.alice), new Task(td.alice));
+        List<Task> newTasks = Arrays.asList(new Task(td.alice), new Task(td.alice));
         List<Tag> newTags = td.alice.getTags().asObservableList();
-        AddressBookStub newData = new AddressBookStub(newPersons, newTags);
+        EzDoStub newData = new EzDoStub(newTasks, newTags);
 
         thrown.expect(AssertionError.class);
         ezDo.resetData(newData);
@@ -61,32 +61,32 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
-        EzDo typicalAddressBook = new TypicalTestTasks().getTypicalAddressBook();
-        List<ReadOnlyTask> newPersons = typicalAddressBook.getTaskList();
-        List<Tag> newTags = new ArrayList<>(typicalAddressBook.getTagList());
+        EzDo typicalEzDo = new TypicalTestTasks().getTypicalEzDo();
+        List<ReadOnlyTask> newTasks = typicalEzDo.getTaskList();
+        List<Tag> newTags = new ArrayList<>(typicalEzDo.getTagList());
         // Repeat the first tag twice
         newTags.add(newTags.get(0));
-        AddressBookStub newData = new AddressBookStub(newPersons, newTags);
+        EzDoStub newData = new EzDoStub(newTasks, newTags);
 
         thrown.expect(AssertionError.class);
         ezDo.resetData(newData);
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons and tags lists can violate interface constraints.
+     * A stub ReadOnlyEzDo whose tasks and tags lists can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyEzDo {
-        private final ObservableList<ReadOnlyTask> persons = FXCollections.observableArrayList();
+    private static class EzDoStub implements ReadOnlyEzDo {
+        private final ObservableList<ReadOnlyTask> tasks = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<? extends ReadOnlyTask> persons, Collection<? extends Tag> tags) {
-            this.persons.setAll(persons);
+        EzDoStub(Collection<? extends ReadOnlyTask> tasks, Collection<? extends Tag> tags) {
+            this.tasks.setAll(tasks);
             this.tags.setAll(tags);
         }
 
         @Override
         public ObservableList<ReadOnlyTask> getTaskList() {
-            return persons;
+            return tasks;
         }
 
         @Override

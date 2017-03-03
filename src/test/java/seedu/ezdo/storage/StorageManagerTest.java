@@ -64,7 +64,7 @@ public class StorageManagerTest {
          * {@link XmlAddressBookStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link XmlAddressBookStorageTest} class.
          */
-        EzDo original = new TypicalTestTasks().getTypicalAddressBook();
+        EzDo original = new TypicalTestTasks().getTypicalEzDo();
         storageManager.saveEzDo(original);
         ReadOnlyEzDo retrieved = storageManager.readEzDo().get();
         assertEquals(original, new EzDo(retrieved));
