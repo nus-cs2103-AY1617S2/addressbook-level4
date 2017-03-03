@@ -1,4 +1,4 @@
-# AddressBook Level 4 - User Guide
+# DoTomorrow - User Guide
 
 By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
@@ -25,8 +25,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
    * **`list`** : lists all TODOs
-   * **`add`**` Email manager due tomorrow:
-     adds a task "Email manager" to the TODO list and sets the .
+   * **`add`**` Email manager due 2017/01/08 0900: adds a task "Email manager" to the TODO list and set the due date to January 8th at 9am.
    * **`delete`**` 3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
@@ -67,8 +66,8 @@ Format: `list all`, `ls`
 
 ### 2.4. Listing completed tasks: `list complete`
 
-Shows a list of all uncompleted tasks.<br>
-Format: `list uncomplete`
+Shows a list of all completed tasks.<br>
+Format: `list complete`
 
 ### 2.5. Sort current list : `sort`
 
@@ -154,14 +153,14 @@ Format: `exit`
 
 ### 2.13. Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data.<br>
+DoTomorrow data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
 ## 3. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
-       the file that contains the data of your previous Address Book folder.
+       the file that contains the data of your previous DoTomorrow folder.
 
 **Q**: I found a bug in the program, how do I report it?<br>
 **A**: Please create a new issue via this [link](https://github.com/CS2103JAN2017-T11-B4/main/issues) with a detailed title and description. Please also include [BUG] in the beginning of the title.
