@@ -357,7 +357,7 @@ Priority | As a(n) ... | I want to ... | So that I can...
 `* * *` | user | sort ongoing tasks by due date or priority | know what has been completed and upcoming schedule
 `* * *` | user | change storage location | choose to store the data file in a local folder controlled by a cloud syncing service
 `* *` | user | undo the recent command | revert the changes quickly
-`* *` | user | view the calendar view | better plan my tasks 
+`* *` | user | view the calendar view | better plan my tasks
 `* *` | user | view selected day summary of tasks | know what tasks need to be done for that day
 `* *` | advanced user | use keyboards commands/hot keys | quickly achieve what I want without typing
 `* *` | advanced user | have [alias](#alias) for keywords | quickly type what I want
@@ -393,7 +393,7 @@ Use case ends.
 
 ## Appendix C : Non Functional Requirements
 
-### System 
+### System
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
 2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
 3. Should work without requiring an installer.
@@ -433,7 +433,7 @@ Use case ends.
 
 ## Appendix E : Product Survey
 
-**Wunderlist** 
+**Wunderlist**
 
 Pros:
 * Allows creation of subtasks within a task.
@@ -447,5 +447,40 @@ Cons:
 * Cannot block slots.
 * Cannot ordered by due date.
 
+**TickTick**
+
+Pros:
+* Allow voice or Siri as input 
+* Supports up to 11 platforms
+* Automatic categorization of tasks into `Overdue`, `Today`, `Next 7 days` and `Complete` 
+
+Cons:
+* Requires internet connection to use
+
+**Trello**
+
+Pros:
+* Always in sync with all your devices
+* Provides a board filled with "cards", that can used by the user or a team to organize projects
+* Add comments, upload file attachments, create checklists, add labels and due dates on a Trello card
+* Custimizable looks
+
+Cons:
+* Limited file attachment size
+* Free version has limited customization features
+
+**Google Calender**
+
+Pros:
+* Simple and intuitive UI
+* Multiple calenders for different purposes
+* Able to access the calender when offline
+
+Cons:
+* Only available as an web app on computers
+* No command line inputs
+
+
 **The (really) Big Table of Comparison**
+
 > An extensive table of products comparison can be found [here (credits: Reddit/r/productivity)] (https://docs.google.com/spreadsheets/d/1yP6ZOXMWK-KsMZ-_Bod8tFhyEGdPndCu4HUBO_3rUww/edit#gid=0).

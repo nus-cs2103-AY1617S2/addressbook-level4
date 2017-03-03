@@ -51,10 +51,10 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Adds a task to the Savvy To-Do<br>
-Format: `add TASK_NAME [s/START_DATE] [e/END_DATE] [l/LOCATION] [p/PRIORITY_LEVEL] [r/RECURRING_TYPE] [n/NUMBER_OF_RECURRENCE] [c/CATEGORY] [d/DESCRIPTION]` 
+Format: `add TASK_NAME [s/START_DATE] [e/END_DATE] [l/LOCATION] [p/PRIORITY_LEVEL] [r/RECURRING_TYPE] [n/NUMBER_OF_RECURRENCE] [c/CATEGORY] [d/DESCRIPTION]`
 
-> Parameters | Description  
-> -------- | :-------- 
+> Parameters | Description
+> -------- | :--------
 > TASK_NAME | `Mandatory` Specifies the name of the task.
 > START_DATE (See [DATE](#date)) | `Optional` Specifies the starting date and time of the task.
 > END_DATE (See [DATE](#date)) | `Optional` Specifies the ending date and time of the task.
@@ -69,7 +69,7 @@ Format: `add TASK_NAME [s/START_DATE] [e/END_DATE] [l/LOCATION] [p/PRIORITY_LEVE
 
 > If only the DATE is specified, the TIME defaults to starting at 12am or ending at 11:59pm.<br>If only the TIME is specified, the DATE defaults to today.<br><br>If only `START_DATE` is supplied, the task will be a 1-day event starting from the specified `START_DATE` and ending on the same day at 11:59pm.<br>If only `END_DATE` is supplied, the task will start today at 12am.<br><br>The date and time can be entered in a formal format like <i>17-03-2016</i>, or a natural format like <i>next wednesday, 2pm</i>. The formal format follows the system's settings for whether <i>mm-dd-yyyy</i> or <i>dd-mm-yyyy</i> is used.
 
-Examples: 
+Examples:
 * `add Project Meeting s/05-10-2016 2pm e/6pm r/daily n/2 c/CS2103 d/Discuss about roles and milestones` <br>
   Add task named, Project Meeting, under CS2103 category. The task is schedule to take place on 5th and 6th of October 2016 from 2pm to 6pm each day.
 * `add NUSSU Leadership Camp s/05-10-2016 2pm e/08-10-2016 6pm c/NUSSU`
@@ -91,7 +91,7 @@ Format: `edit INDEX [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
 > * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
-> * You can remove all the task's tags by typing `t/` without specifying any tags after it. 
+> * You can remove all the task's tags by typing `t/` without specifying any tags after it.
 
 Examples:
 
@@ -204,8 +204,8 @@ There is no need to save manually.
 
 ## 5. Keyboard Shortcuts
 
-Key Codes | Function | Command Box Input 
--------- | :--------  | :-------- 
+Key Codes | Function | Command Box Input
+-------- | :--------  | :--------
 <kbd>Esc</kbd> | Toggle to show/hide a list of keyboard shortcuts | -
 <kbd>Ctrl</kbd> + <kbd>H</kbd> | [Help](#viewing-help--help) | `help`
 <kbd>Ctrl</kbd> + <kbd>Q</kbd> | [Exit](#exiting-the-program--exit) | `exit`
