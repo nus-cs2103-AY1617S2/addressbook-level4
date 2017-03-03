@@ -21,13 +21,13 @@ import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-import seedu.address.TestApp;
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.AddressBook;
-import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.testutil.TestUtil;
-import seedu.address.testutil.TypicalTestPersons;
+import seedu.ezdo.TestApp;
+import seedu.ezdo.commons.core.EventsCenter;
+import seedu.ezdo.commons.events.BaseEvent;
+import seedu.ezdo.model.AddressBook;
+import seedu.ezdo.model.todo.ReadOnlyPerson;
+import seedu.ezdo.testutil.TestUtil;
+import seedu.ezdo.testutil.TypicalTestPersons;
 
 /**
  * A GUI Test class for AddressBook.
