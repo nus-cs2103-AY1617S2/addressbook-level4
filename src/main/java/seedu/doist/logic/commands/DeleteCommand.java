@@ -68,6 +68,6 @@ public class DeleteCommand extends Command {
     }
     
     public static boolean canCommandBeTriggeredByWord(String word) {
-    	return commandWords.contains(word) || DEFAULT_COMMAND_WORD == word;
+    	return commandWords.contains(word) || DEFAULT_COMMAND_WORD.equals(word);
     }
 }
