@@ -42,27 +42,32 @@ By : `Team CS2103JAN2017-W10-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &n
 
 ### 2.1. Viewing help : `help`
 
-Format: `help`
+Format: `help [COMMAND]`
 
-> Help is also shown if you enter an incorrect command e.g. `abcd`
+> * When there is no command specified, `help` will print help messages of all commands.
+> * Help is also shown if you enter an incorrect command e.g. `abcd`
 
 ### 2.2. Adding a task: `add`
 
 Adds a task to Dueue<br>
 Format: `add n/TASKNAME [due/DUEDATE] [t/TIME] [#LISTNAME] [d/DESCRIPTION] [@VENUE] [p/PRIORITYLEVEL] [*f]`
 
-> * Tasks cannot have multiple lists<br>
-> * The required field for a task is TASKNAME, while other fields are optional<br>
-> * By default, task will be added to current viewing list, unless [#LISTNAME] is specified.<br>
-> * Due dates of tasks can repeating, e.g. every sunday<br>
-> * Time of each task can only be one time point, e.g. 4pm<br>
-> * Specifications of fields for task can be entered in any order<br>
+> * Tasks cannot have multiple lists.
+> * Tasks must be added with task name.
+> * The required field for a task is TASKNAME, while other fields are optional.
+> * By default, task will be added to current viewing list, unless [#LISTNAME] is specified.
+> * Due dates of tasks can repeating, e.g. every sunday.
+> * Time of each task can only be one time point, e.g. 4pm.
+> * Specifications of fields for task can be entered in any order.
 > * If no fields are entered, help message for add command will appear.
+> * User can choose to replace the priority levels `IMPORTANT`, `NORMAL` and `TRIVIAL` by 3, 2 and 1.
 
 Examples:
 
-* `add n/laundry due/every sunday #personal d/wash clothes @B1 *f`
-* `add n/2103lecture due/every friday t/4pm #study d/go for lecture p/IMPORTANT @iCube`
+* `add n/laundry due/every sunday #personal d/wash clothes @B1 *f`<br>
+  Add a task with taskname `laundry` due `every sunday` under the list `personal` with description `wash clothes` at the venue `B1` and mark it as favourite.
+* `add n/2103lecture due/every friday t/4pm #study d/go for lecture p/3 @iCube`<br>
+  Add a task with taskname `2103lecture` due `every friday` at time `4pm` under the list `study` with description `go for lecture` at the venue `iCube` with priority level `IMPORTANT`
 
 ### 2.3. Listing all tasks : `list`
 
@@ -83,10 +88,10 @@ Format: `list all`
 Shows a list of all list names (together with list indices) in Dueue and unswitch<br>
 Format: `list lists`
 
-> * Do not need to specify whether the parameter is LISTINDEX or LISTNAME<br>
+> * Do not need to specify whether the parameter is LISTINDEX or LISTNAME
 > * Returns only favorite tasks by adding keyword "favorite"
-> * Definition of `switch` : all the tasks added after switching will be automatically added to the current list (favourite) unless otherwise stated
-> * Definition of `unswitch` : switch back to main, the tasks added will not be automatically added to this list (favourite)
+> * Definition of **switch** : all the tasks added after switching will be automatically added to the current list (favourite) unless otherwise stated
+> * Definition of **unswitch** : switch back to main, the tasks added will not be automatically added to this list (favourite)
 
 Examples:
 
@@ -108,8 +113,8 @@ Examples:
 Add a new list in Dueue<br>
 Format: `add list LISTNAME`
 
-> * Listname cannot be the same as other existing lists<br>
-> * Listname cannot begin with digits
+> * Listname cannot be the same as other existing lists
+> * Listname cannot begin with numbers
 
 Examples:
 
@@ -121,10 +126,10 @@ Update a list in Dueue with new name<br>
 Format: `update list LISTNAME NEW_LISTNAME`
 Format: `update list LISTINDEX NEW_LISTNAME`
 
-> * Listname cannot be the same as other existing lists<br>
+> * Listname cannot be the same as other existing lists
 > * Listname cannot begin with digits
 > * Listname cannot contain whitespaces
-> * Do not need to specify whether the parameter is LISTINDEX or LISTNAME<br>
+> * Do not need to specify whether the parameter is LISTINDEX or LISTNAME
 
 Examples:
 
@@ -194,33 +199,28 @@ Examples:
 * `delete 1 2 3`<br>
   Deletes the 1st, 2nd and 3rd tasks/lists in the most recent listing.
 
-### 2.9. Undo latest command: `undo`.
+### 2.9. Undo latest command: `undo`
 
 Undo the immediately preceding command.<br>
 Format: `undo`
 
-> * Undo the latest command, including `add`,`add list`, `delete`, `update` and `update list`.
-> * Cannot undo twice in succession. 
+> * Undo the latest mutating command, including `add`,`add list`, `delete`, `update` and `update list`.
+> * Definition of **mutating** : making changes to the tasks/lists
+> * Cannot undo more than once in succession. 
 
 Examples:
 
 * `undo`<br>
   Latest command is reversed.
 
-### 2.10. Reverse previous `undo` command: `redo`.
+### 2.10. Reverse previous `undo` command: `redo`
 
 Reverse the immediately preceding undo command.<br>
 Format: `redo`
 
-<<<<<<< HEAD
-> * Marks the task(s) as finished.<br>
-> * To finish multiple entries, indices must be seperated by whitespaces.<br>
-> * When a repeated task is deleted, user will be asked to confirm whether it should be deleted for once or deleted forever (stop repeating).
-=======
 > * Reverse `undo` command if user made a mistake.
 > * Can only redo right after an `undo` command.
-> * Cannot redo twice. 
->>>>>>> 53208313fe3a74543c8536a62e199af84aad599d
+> * Cannot redo more than once.
 
 Examples:
 
@@ -262,11 +262,17 @@ There is no need to save manually.
 * **Finish** : `finish TASKINDEX` <br>
    e.g. `finish 5`
 
+* **Help** : `help` <br>
+  e.g. `help`
+
 * **List** : `list [lists/LISTINDEX/LISTNAME/finished/all] [favorite]` <br>
   e.g. `list work favorite`
 
-* **Help** : `help` <br>
-  e.g. `help`
+* **Redo** : `redo` <br>
+  e.g. `redo`
+
+* **Undo** : `undo` <br>
+  e.g. `undo`
 
 * **Update** : `update TASKINDEX ... [n/NAME] [due/DUEDATE] [t/TIME] [#LISTNAME] [d/DESCRIPTION] [@VENUE] [p/PRIORITYLEVEL] [FAVOURITE]` <br>
   e.g.`update 1 Laundry due/every sunday @`
