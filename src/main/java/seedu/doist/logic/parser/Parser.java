@@ -37,28 +37,28 @@ public class Parser {
     public Command parseCommand(String userInput) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+        	return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
-        if (AddCommand.commandWords.contains(commandWord) || AddCommand.DEFAULT_COMMAND_WORD == commandWord) {
+        if (AddCommand.canCommandBeTriggeredByWord(commandWord)) {
         	return new AddCommandParser().parse(arguments);
-        } else if (EditCommand.commandWords.contains(commandWord) || EditCommand.DEFAULT_COMMAND_WORD == commandWord) {
+        } else if (EditCommand.canCommandBeTriggeredByWord(commandWord)) {
         	return new EditCommandParser().parse(arguments);
-        } else if (SelectCommand.commandWords.contains(commandWord) || SelectCommand.DEFAULT_COMMAND_WORD == commandWord) {
+        } else if (SelectCommand.canCommandBeTriggeredByWord(commandWord)) {
         	return new SelectCommandParser().parse(arguments);
-        } else if (DeleteCommand.commandWords.contains(commandWord) || DeleteCommand.DEFAULT_COMMAND_WORD == commandWord) {
+        } else if (DeleteCommand.canCommandBeTriggeredByWord(commandWord)) {
         	return new DeleteCommandParser().parse(arguments);
-        } else if (ClearCommand.commandWords.contains(commandWord) || ClearCommand.DEFAULT_COMMAND_WORD == commandWord) {
+        } else if (ClearCommand.canCommandBeTriggeredByWord(commandWord)) {
         	return new ClearCommand();
-        } else if (FindCommand.commandWords.contains(commandWord) || FindCommand.DEFAULT_COMMAND_WORD == commandWord) {
+        } else if (FindCommand.canCommandBeTriggeredByWord(commandWord)) {
         	return new FindCommandParser().parse(arguments);
-        } else if (ListCommand.commandWords.contains(commandWord) || ListCommand.DEFAULT_COMMAND_WORD == commandWord) {
+        } else if (ListCommand.canCommandBeTriggeredByWord(commandWord)) {
         	return new ListCommand();
-        } else if (ExitCommand.commandWords.contains(commandWord) || ExitCommand.DEFAULT_COMMAND_WORD == commandWord) {
+        } else if (ExitCommand.canCommandBeTriggeredByWord(commandWord)) {
         	return new ExitCommand();
-        } else if (HelpCommand.commandWords.contains(commandWord) || HelpCommand.DEFAULT_COMMAND_WORD == commandWord) {
+        } else if (HelpCommand.canCommandBeTriggeredByWord(commandWord)) {
         	return new HelpCommand();
         } else {
         	return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
