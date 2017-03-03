@@ -450,9 +450,9 @@ Cons:
 **TickTick**
 
 Pros:
-* Allow voice or Siri as input 
+* Allow voice or Siri as input
 * Supports up to 11 platforms
-* Automatic categorization of tasks into `Overdue`, `Today`, `Next 7 days` and `Complete` 
+* Automatic categorization of tasks into `Overdue`, `Today`, `Next 7 days` and `Complete`
 
 Cons:
 * Requires internet connection to use
