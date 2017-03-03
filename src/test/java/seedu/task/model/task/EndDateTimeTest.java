@@ -10,14 +10,14 @@ import seedu.task.model.task.EndDateTime;
 public class EndDateTimeTest {
 
     @Test
-    public void isValidAddress() {
-        // invalid addresses
-        assertFalse(EndDateTime.isValidAddress("")); // empty string
-        assertFalse(EndDateTime.isValidAddress(" ")); // spaces only
+    public void isValidEndDateTime() {
+        // invalid end datetime
+        assertFalse(EndDateTime.isValidEndDateTime("")); // empty string
+        assertFalse(EndDateTime.isValidEndDateTime(" ")); // spaces only
+        assertFalse(EndDateTime.isValidEndDateTime("120315 12:35PM")); // wrong datetime format
+        assertFalse(EndDateTime.isValidEndDateTime("11/13/2017 2530")); // invalid datetime
 
-        // valid addresses
-        assertTrue(EndDateTime.isValidAddress("Blk 456, Den Road, #01-355"));
-        assertTrue(EndDateTime.isValidAddress("-")); // one character
-        assertTrue(EndDateTime.isValidAddress("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
+        // valid end datetime
+        assertTrue(EndDateTime.isValidEndDateTime("03/03/2017 2230")); // valid datetime format
     }
 }
