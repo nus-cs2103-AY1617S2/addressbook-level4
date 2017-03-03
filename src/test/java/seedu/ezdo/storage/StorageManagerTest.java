@@ -20,7 +20,7 @@ import seedu.ezdo.model.UserPrefs;
 import seedu.ezdo.storage.JsonUserPrefsStorage;
 import seedu.ezdo.storage.Storage;
 import seedu.ezdo.storage.StorageManager;
-import seedu.ezdo.storage.XmlAddressBookStorage;
+import seedu.ezdo.storage.XmlEzDoStorage;
 import seedu.ezdo.testutil.EventsCollector;
 import seedu.ezdo.testutil.TypicalTestPersons;
 
@@ -65,14 +65,14 @@ public class StorageManagerTest {
          * More extensive testing of UserPref saving/reading is done in {@link XmlAddressBookStorageTest} class.
          */
         EzDo original = new TypicalTestPersons().getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyEzDo retrieved = storageManager.readAddressBook().get();
+        storageManager.saveEzDo(original);
+        ReadOnlyEzDo retrieved = storageManager.readEzDo().get();
         assertEquals(original, new EzDo(retrieved));
     }
 
     @Test
     public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+        assertNotNull(storageManager.getEzDoFilePath());
     }
 
     @Test
@@ -81,7 +81,7 @@ public class StorageManagerTest {
         Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub("dummy"),
                                              new JsonUserPrefsStorage("dummy"));
         EventsCollector eventCollector = new EventsCollector();
-        storage.handleAddressBookChangedEvent(new EzDoChangedEvent(new EzDo()));
+        storage.handleEzDoChangedEvent(new EzDoChangedEvent(new EzDo()));
         assertTrue(eventCollector.get(0) instanceof DataSavingExceptionEvent);
     }
 
@@ -89,14 +89,14 @@ public class StorageManagerTest {
     /**
      * A Stub class to throw an exception when the save method is called
      */
-    class XmlAddressBookStorageExceptionThrowingStub extends XmlAddressBookStorage {
+    class XmlAddressBookStorageExceptionThrowingStub extends XmlEzDoStorage {
 
         public XmlAddressBookStorageExceptionThrowingStub(String filePath) {
             super(filePath);
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyEzDo addressBook, String filePath) throws IOException {
+        public void saveEzDo(ReadOnlyEzDo addressBook, String filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }

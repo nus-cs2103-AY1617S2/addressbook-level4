@@ -16,7 +16,7 @@ import seedu.ezdo.commons.util.FileUtil;
 import seedu.ezdo.model.EzDo;
 import seedu.ezdo.model.ReadOnlyEzDo;
 import seedu.ezdo.model.todo.Task;
-import seedu.ezdo.storage.XmlAddressBookStorage;
+import seedu.ezdo.storage.XmlEzDoStorage;
 import seedu.ezdo.testutil.TypicalTestPersons;
 
 public class XmlAddressBookStorageTest {
@@ -35,7 +35,7 @@ public class XmlAddressBookStorageTest {
     }
 
     private java.util.Optional<ReadOnlyEzDo> readAddressBook(String filePath) throws Exception {
-        return new XmlAddressBookStorage(filePath).readAddressBook(addToTestDataPathIfNotNull(filePath));
+        return new XmlEzDoStorage(filePath).readEzDo(addToTestDataPathIfNotNull(filePath));
     }
 
     private String addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -65,24 +65,24 @@ public class XmlAddressBookStorageTest {
         String filePath = testFolder.getRoot().getPath() + "TempAddressBook.xml";
         TypicalTestPersons td = new TypicalTestPersons();
         EzDo original = td.getTypicalAddressBook();
-        XmlAddressBookStorage xmlAddressBookStorage = new XmlAddressBookStorage(filePath);
+        XmlEzDoStorage xmlEzDoStorage = new XmlEzDoStorage(filePath);
 
         //Save in new file and read back
-        xmlAddressBookStorage.saveAddressBook(original, filePath);
-        ReadOnlyEzDo readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
+        xmlEzDoStorage.saveEzDo(original, filePath);
+        ReadOnlyEzDo readBack = xmlEzDoStorage.readEzDo(filePath).get();
         assertEquals(original, new EzDo(readBack));
 
         //Modify data, overwrite exiting file, and read back
         original.addTask(new Task(td.hoon));
         original.removeTask(new Task(td.alice));
-        xmlAddressBookStorage.saveAddressBook(original, filePath);
-        readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
+        xmlEzDoStorage.saveEzDo(original, filePath);
+        readBack = xmlEzDoStorage.readEzDo(filePath).get();
         assertEquals(original, new EzDo(readBack));
 
         //Save and read without specifying file path
         original.addTask(new Task(td.ida));
-        xmlAddressBookStorage.saveAddressBook(original); //file path not specified
-        readBack = xmlAddressBookStorage.readAddressBook().get(); //file path not specified
+        xmlEzDoStorage.saveEzDo(original); //file path not specified
+        readBack = xmlEzDoStorage.readEzDo().get(); //file path not specified
         assertEquals(original, new EzDo(readBack));
 
     }
@@ -94,7 +94,7 @@ public class XmlAddressBookStorageTest {
     }
 
     private void saveAddressBook(ReadOnlyEzDo addressBook, String filePath) throws IOException {
-        new XmlAddressBookStorage(filePath).saveAddressBook(addressBook, addToTestDataPathIfNotNull(filePath));
+        new XmlEzDoStorage(filePath).saveEzDo(addressBook, addToTestDataPathIfNotNull(filePath));
     }
 
     @Test

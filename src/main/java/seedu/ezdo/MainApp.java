@@ -77,11 +77,11 @@ public class MainApp extends Application {
         Optional<ReadOnlyEzDo> addressBookOptional;
         ReadOnlyEzDo initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
+            addressBookOptional = storage.readEzDo();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleEzDo);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
             initialData = new EzDo();

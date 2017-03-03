@@ -14,31 +14,31 @@ import seedu.ezdo.model.ReadOnlyEzDo;
 /**
  * A class to access AddressBook data stored as an xml file on the hard disk.
  */
-public class XmlAddressBookStorage implements AddressBookStorage {
+public class XmlEzDoStorage implements EzDoStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(XmlAddressBookStorage.class);
+    private static final Logger logger = LogsCenter.getLogger(XmlEzDoStorage.class);
 
     private String filePath;
 
-    public XmlAddressBookStorage(String filePath) {
+    public XmlEzDoStorage(String filePath) {
         this.filePath = filePath;
     }
 
-    public String getAddressBookFilePath() {
+    public String getEzDoFilePath() {
         return filePath;
     }
 
     @Override
-    public Optional<ReadOnlyEzDo> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(filePath);
+    public Optional<ReadOnlyEzDo> readEzDo() throws DataConversionException, IOException {
+        return readEzDo(filePath);
     }
 
     /**
-     * Similar to {@link #readAddressBook()}
+     * Similar to {@link #readEzDo()}
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyEzDo> readAddressBook(String filePath) throws DataConversionException,
+    public Optional<ReadOnlyEzDo> readEzDo(String filePath) throws DataConversionException,
                                                                                  FileNotFoundException {
         assert filePath != null;
 
@@ -55,15 +55,15 @@ public class XmlAddressBookStorage implements AddressBookStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyEzDo addressBook) throws IOException {
-        saveAddressBook(addressBook, filePath);
+    public void saveEzDo(ReadOnlyEzDo addressBook) throws IOException {
+        saveEzDo(addressBook, filePath);
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyEzDo)}
+     * Similar to {@link #saveEzDo(ReadOnlyEzDo)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveAddressBook(ReadOnlyEzDo addressBook, String filePath) throws IOException {
+    public void saveEzDo(ReadOnlyEzDo addressBook, String filePath) throws IOException {
         assert addressBook != null;
         assert filePath != null;
 

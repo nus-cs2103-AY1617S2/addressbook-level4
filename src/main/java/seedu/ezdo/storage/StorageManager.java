@@ -15,23 +15,23 @@ import seedu.ezdo.model.ReadOnlyEzDo;
 import seedu.ezdo.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of EzDo data in local storage.
  */
 public class StorageManager extends ComponentManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AddressBookStorage addressBookStorage;
+    private EzDoStorage ezDoStorage;
     private UserPrefsStorage userPrefsStorage;
 
 
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(EzDoStorage ezDoStorage, UserPrefsStorage userPrefsStorage) {
         super();
-        this.addressBookStorage = addressBookStorage;
+        this.ezDoStorage = ezDoStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
-    public StorageManager(String addressBookFilePath, String userPrefsFilePath) {
-        this(new XmlAddressBookStorage(addressBookFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
+    public StorageManager(String ezDoFilePath, String userPrefsFilePath) {
+        this(new XmlEzDoStorage(ezDoFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
     }
 
     // ================ UserPrefs methods ==============================
@@ -47,42 +47,42 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ EzDo methods ==============================
 
     @Override
-    public String getAddressBookFilePath() {
-        return addressBookStorage.getAddressBookFilePath();
+    public String getEzDoFilePath() {
+        return ezDoStorage.getEzDoFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyEzDo> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(addressBookStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyEzDo> readEzDo() throws DataConversionException, IOException {
+        return readEzDo(ezDoStorage.getEzDoFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyEzDo> readAddressBook(String filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyEzDo> readEzDo(String filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return addressBookStorage.readAddressBook(filePath);
+        return ezDoStorage.readEzDo(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyEzDo addressBook) throws IOException {
-        saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
+    public void saveEzDo(ReadOnlyEzDo ezDo) throws IOException {
+        saveEzDo(ezDo, ezDoStorage.getEzDoFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyEzDo addressBook, String filePath) throws IOException {
+    public void saveEzDo(ReadOnlyEzDo ezDo, String filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveAddressBook(addressBook, filePath);
+        ezDoStorage.saveEzDo(ezDo, filePath);
     }
 
 
     @Override
     @Subscribe
-    public void handleAddressBookChangedEvent(EzDoChangedEvent event) {
+    public void handleEzDoChangedEvent(EzDoChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
-            saveAddressBook(event.data);
+            saveEzDo(event.data);
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }

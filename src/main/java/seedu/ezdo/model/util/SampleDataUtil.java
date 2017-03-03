@@ -12,7 +12,7 @@ import seedu.ezdo.model.todo.Phone;
 import seedu.ezdo.model.todo.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
-    public static Task[] getSamplePersons() {
+    public static Task[] getSampleTasks() {
         try {
             return new Task[] {
                 new Task(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@gmail.com"),
@@ -39,15 +39,15 @@ public class SampleDataUtil {
         }
     }
 
-    public static ReadOnlyEzDo getSampleAddressBook() {
+    public static ReadOnlyEzDo getSampleEzDo() {
         try {
-            EzDo sampleAB = new EzDo();
-            for (Task samplePerson : getSamplePersons()) {
-                sampleAB.addTask(samplePerson);
+            EzDo sampleEzDo = new EzDo();
+            for (Task sampleTask : getSampleTasks()) {
+                sampleEzDo.addTask(sampleTask);
             }
-            return sampleAB;
+            return sampleEzDo;
         } catch (DuplicateTaskException e) {
-            throw new AssertionError("sample data cannot contain duplicate persons", e);
+            throw new AssertionError("sample data cannot contain duplicate tasks", e);
         }
     }
 }

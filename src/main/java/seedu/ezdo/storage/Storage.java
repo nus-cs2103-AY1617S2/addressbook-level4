@@ -12,7 +12,7 @@ import seedu.ezdo.model.UserPrefs;
 /**
  * API of the Storage component
  */
-public interface Storage extends AddressBookStorage, UserPrefsStorage {
+public interface Storage extends EzDoStorage, UserPrefsStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
@@ -21,18 +21,18 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
     void saveUserPrefs(UserPrefs userPrefs) throws IOException;
 
     @Override
-    String getAddressBookFilePath();
+    String getEzDoFilePath();
 
     @Override
-    Optional<ReadOnlyEzDo> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyEzDo> readEzDo() throws DataConversionException, IOException;
 
     @Override
-    void saveAddressBook(ReadOnlyEzDo addressBook) throws IOException;
+    void saveEzDo(ReadOnlyEzDo addressBook) throws IOException;
 
     /**
-     * Saves the current version of the Address Book to the hard disk.
+     * Saves the current version of the EzDo to the hard disk.
      *   Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
-    void handleAddressBookChangedEvent(EzDoChangedEvent abce);
+    void handleEzDoChangedEvent(EzDoChangedEvent ezce);
 }
