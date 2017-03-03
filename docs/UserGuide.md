@@ -12,8 +12,7 @@ By : `Team T15B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp
 ## 1. Introduction 
 Welcome. We will take you for an enthralling journey as we bring forward our task manager `TaskCrusher`.
 
-It can help you manage events, deadlines, add tasks with or without deadlines or view your history. This is a great amanager if you are looking to move away from clicking as the simplified scheduling is just a few short and sweet command lines away.
-
+It can help you manage events, deadlines, add tasks with or without deadlines or view your history. This is a great manager if you are looking to move away from clicking as the simplified scheduling is just a few short and sweet command lines away.
 
 ## 2. Quick Start
 
@@ -27,13 +26,13 @@ It can help you manage events, deadlines, add tasks with or without deadlines or
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
+   
 5. Some example commands you can try:
    * **`help`** : displays help documentation
-   * **`add`:** `add "Cs2103 meeting" 3 Mar 17:00 to 18:00` : adds an event called "Cs 2103 meeting" on 3 March from 17:00 to 18:00
-   * **`view`** `view calendar` : displays calendar
-   * **`update`** update 1 Priority 1 : updates task #1 in previous search results to priority 1
-6. Refer to the [Features](#features) section below for details of each command.<br>
+   * **`add`:**  `add "Cs2103 meeting" 3 Mar 17:00 to 18:00` : adds an event called "Cs2103 meeting" on 3 March from 17:00 to 18:00
+   * **`view`** `view calendar` : displays the calendar with tasks and events you have added
 
+6. Refer to the [Features](#features) section below for details of each command.<br>
 
 ## 3. Features
 
@@ -43,7 +42,7 @@ It can help you manage events, deadlines, add tasks with or without deadlines or
 > * Items in `SQUARE_BRACKETS` are optional.
 > * Items surrounding `|` means we only choose one of them (OR).
 > * Items with `...` after them can have multiple instances.
-> * Parameters should be in the order stated. 
+> * Parameters should be in the order stated (at least for now).
 
 ### 3.1. Viewing help : `help`
 
@@ -51,30 +50,29 @@ Format: `help`
 
 > Help is also shown if you enter an incorrect command e.g. `abcd`
 
-### 3.2. Adding an item: `add`
+### 3.2. Adding an item: `adde` or `addt`
 
-**Format** (event): 
+**Format** (event):
 
-`add "event name" START_DATE START_TIME to [END_DATE] END_TIME [t/TAG]... [//DESCRIPTION]`<br>
+`adde "event name" START_DATE START_TIME to [END_DATE] END_TIME [t/TAG]... [//DESCRIPTION]`<br>
 
 **Format** (tentative event. blocks multiple time slots): 
 
-`add "event name" START_DATE START_TIME to [END_DATE] END_TIME ... [t/TAG]... [//DESCRIPTION]`<br>
+`adde "event name" START_DATE START_TIME to [END_DATE] END_TIME or ... [t/TAG]... [//DESCRIPTION]`<br>
 
 **Format** (task with deadline): 
 
-`add "task name" DEADLINE [t/TAG] [p/PRIORITY] [//DESCRIPTION]`  <br>
+`addt "task name" DEADLINE [t/TAG] [p/PRIORITY] [//DESCRIPTION]`  <br>
 
 **Format** (task without deadline): 
 
-`add "task name" [t/TAG] [p/PRIORITY] [//DESCRIPTION] `<br>
-
+`addt "task name" [t/TAG] [p/PRIORITY] [//DESCRIPTION] `<br>
 
 Examples:
 
-* `add "Cs2103 meeting" 3 Mar 17:00 to 18:00`
-* `add "Buy tickets" 3 mar 17:00`
-* `add "Take GF for dinner"`
+* `adde "Cs2103 meeting" 3 Mar 17:00 to 18:00`
+* `addt "Buy tickets" 3 mar 17:00`
+* `addt "Take GF for dinner"`
 
 ### 3.3 Viewing the active/expired list: `list`
 
@@ -84,7 +82,7 @@ Examples:
 
 **View tasks with/without deadline**: 
 
-`listd [DEADLINE]`
+`listd [DEADLINE] [SORT_FIELD]`
 
 Example:
 
@@ -92,18 +90,21 @@ Example:
 
 **View events within a time frame, or with no time frame specified** : 
 
-`liste [START_DATE START_TIME to END_DATE END TIME]`
+`liste [START_DATE START_TIME to END_DATE END TIME] [SORT_FIELD]`
 
 Example:
+
 * `liste today 17:00 to tomorrow 18:00`
 
 **View overdue task** : 
 
 `listo`
 
-**View completed task and events in the expired list**: 
+**View tasks and events in the expired list**: 
 
 `listc`
+
+> note that tasks and events have different fields, and therefore the parameter SORT_FIELD may vary between events and tasks.
 
 ### 3.4 Viewing other material: `view`
 
@@ -120,6 +121,7 @@ Example:
 `view free day | week | month`
 
 ### 3.5 Updating a field of a task/event in the active list : `edit`
+
 > User can edit the fields of the tasks and events in the active list by using their indexes specified in the most recent list. The steps are therefore as follows:
 
 1. Use `list` command
@@ -133,65 +135,41 @@ e.g.
 
 `edit 1 priority 3`, assuming that the item with index 1 is a task.
 
-### 3.4 Sorting : `Sort`
+### 3.6. Finding event or task by keyword: `find`
 
-**Sort tasks** : `Sort taskname By Name/Priority/deadline`
+Finds tasks or events whose field(s) contain any of the given keywords.<br>
 
-**Sort events**: `Sort Eventname By Name/Start date`
-
-### 3.5. Finding event or task by keyword: `find`
-
-Finds task/Events whose names/decription contain any of the given keywords.<br>
 Format: `find KEYWORD [MORE_KEYWORDS]`
-
-
 
 Examples:
 
 * `find cs2103`<br>
   Returns any task or event pertaining to cs2103
 
-### 3.6. Deleting a task/event: `delete`
+### 3.7. Deleting a task/event: `delete`
+> Just like edit, user can delete tasks and events in the active list by using their indexes specified in the most recent list.
 
+Format: `delete INDEX`
 
-Format: `delete task/event name `
-
-Examples:
-
-* `delete cs2103 lab 2`<br>
-  Deletes the above task.
-
-### 3.7. Clearing all expired task/event : `clear`
+### 3.8. Clearing all expired tasks and events : `clear`
 
 Format: `clear`
 
-### 3.8. Exiting the program : `exit`
+### 3.9. Exiting the program : `exit`
 
-Exits the program.<br>
 Format: `exit`
 
-### 3.9. Saving the data
+### 3.10 Undoing the last command: `undo`
 
-Address book data are saved in the hard disk automatically after any command that changes the data.<br>
-There is no need to save manually.
+### 3.11 Recycle 
 
-### 3.10 Recyle 
+Brings back the expired tasks/events back to active list, with the deadline/event date altered.
 
-Brings back the expired events back to active list 
+Format : `Recycle INDEX DEADLINE | START_DATE START_TIME to [END_DATE] END_TIME`
 
-Format : `Recycle Task/event name`
+### 3.12 Files
 
-### 3.11 Undo 
-
-Undo the last command
-
-Format : `Undo`
-
-### 3.12 Files 
-
-**Add a new file**: `New Filename`
-
-**Switch between files**: `Goto Filename`
+**Switch between files**: `switchf Filename`
 
 ## 4. FAQ
 
@@ -203,42 +181,6 @@ Format : `Undo`
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TaskCrusher installation.
-
-## 5. Command Summary
-
-
-COMMAND | FORMAT 
---------|:--------
-ADD EVENT|`add event[start datetime] to [end datetime] [t/TAG]...`
-ADD TASK WITH DEADLINE |`add task [end datetime]`
-ADD TASK WITHOUT DEADLINE|`add task `
-VIEW TASK WITH DEADLINE|` Viewd task`
-VIEW TASK WITHOUT DEADLINE|`View task`
-VIEW TASK TO BE COMPLETED BY DEADLINE|`View task by date`
-VIEW LIST OF EVENT IN TIME FRAME|` View event [start time] to [End time]`
-VIEW OVERDUE TASK|`View over`
-VIEW LAST ACTION|`View last`
-VIEW COMPLETED TASKS|`View done`
-VIEW HISTORY|`view history`
-VIEW THE CALENDAR|`view calendar`
-VIEW FREETIME|`view free [daily/weekly/monthly]`
-UPDATE BY NAME|`Update task/event name [New name]`
-UPDATE BY DESCRIPTION|`Update task/event desc [Description]`
-UPDATE EVENT BY LOCATION|`Update event location [Location]`
-UPDATE EVENT BY TIME|`Update event time [Time]`
-UPDATE EVENT BY PRIOIRITY|` Update task Priority [1...10]`
-UPDATE TASK BY DEADLINE|` Update task Deadline [New Date]`
-SORT TASK|`Sort taskname By Name/Priority/deadline`
-SORT EVENTS|`Sort Eventname By Name/Start date`
-FIND TASK/EVENT|`find KEYWORD [MORE_KEYWORDS]`
-DELETE TASK/EVENT|`delete task/event name `
-CLEAR EXPIRED EVENTS|`clear`
-MOVE EXPIRED EVENT TO ACTIVE LIST|`Recycle Task/event name`
-UNDO|`Undo`
-ADD A NEW FILENAME|`New Filename`
-SWITCH BETWEEN FILES|`Goto Filename`
-EXIT|`exit`
-HELP|`help`
 
 ## 6. Storage File Format
 
