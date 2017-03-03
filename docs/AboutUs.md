@@ -5,30 +5,34 @@ Hello from the creators of **Typed**! We like to call ourselves Typedwriters. We
 ## Project Team
 
 #### [Lee Pei Xuan](http://github.com/pyxyyy) <br>
-<img src="images/LeePeiXuan.jpg" width="150"><br>
+<img src="images/pyxyyy.jpg" width="150"><br>
 Role: Chief Technical(ly Not An) Officer (CTO), aka Chief Typed Officer <br>
-Responsibilities: Back-end Development, Documentation, Github
+Responsibilities: Team Lead, Documentation, Scheduling & Tracking
+Component: Logic
 
 -----
 
 #### [Low Yong Siang](http://github.com/YongSiang94)
-<img src="images/LowYongSiang.jpg" width="150"><br>
+<img src="images/yongsiang94.jpg" width="150"><br>
 Role: Director of First Impressions <br>
-Responsibilities: Front-end Development, User Interface
+Responsibilities: User Interface, Deliverables & Deadlines
+Component: GUI
 
 -----
 
 #### [Mun Le Yuan](http://github.com/Ley94)
-<img src="images/MunLeYuan.jpg" width="150"><br>
+<img src="images/ley94.jpg" width="150"><br>
 Role: Director of Back Side <br>
-Responsibilities: Back-end Development, Testing
+Responsibilities: Integration, Code Quality 
+Component: Model
 
 -----
 
 #### [Yim Chia Hui](http://github.com/sharkey1314)
-<img src="images/YimChiaHui.jpg" width="150"><br>
+<img src="images/sharkey1314.jpg" width="150"><br>
 Role: Director of Unrequited Love Because No One Cares About The People Behind The Scene <br>
-Responsibilities: Back-end Development, Integration
+Responsibilities: Testing, Travis + Codacy + Coveralls (Our All-Tools) Expert
+Component: Storage
 
 -----
 
