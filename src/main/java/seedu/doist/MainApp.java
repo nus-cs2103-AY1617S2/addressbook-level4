@@ -38,6 +38,8 @@ public class MainApp extends Application {
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
     public static final Version VERSION = new Version(1, 0, 0, true);
+    
+    private static final String APPLICATION_NAME = "Doist";
 
     protected Ui ui;
     protected Logic logic;
@@ -49,7 +51,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing Doist ]===========================");
+        logger.info("=============================[ Initializing " + APPLICATION_NAME + " ]===========================");
         super.init();
 
         config = initConfig(getApplicationParameter("config"));
@@ -163,13 +165,13 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting " + APPLICATION_NAME + " " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping " + APPLICATION_NAME + " ] =============================");
         ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);
