@@ -2,6 +2,7 @@
 
 By : `Team F12-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
+[//]: # (@@author jingloon)
 ---
 
 1. [Quick Start](#1-quick-start)
@@ -18,18 +19,23 @@ By : `Team F12-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbs
    > This app will not work with earlier versions of Java 8.
 
 1. Download the latest `SavvyToDo.jar` from the [releases](../../../releases) tab.
+
 2. Copy the file to the folder you want to use as the home folder for your Savvy To-Do.
+
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
-   > <img src="images/Ui.png" width="600">
+   > <img src="images/Ui.jpg" width="600">
+   > (Mockup of Savvy To-Do app. Final design subject to changes.)
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
+
 5. Some example commands you can try:
+   * **`add`**  `collect parcels from mailbox` : adds a new task
    * **`list`** : lists all tasks
-   * **`add`**` John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01` :
-     adds a contact named `John Doe` to the Savvy To-Do.
-   * **`delete`**` 3` : deletes the 3rd task shown in the current list
+     adds a new task
+   * **`delete`** `3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
+
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
 
@@ -82,8 +88,8 @@ Format: `list`
 
 ### 2.4. Editing a task : `edit`
 
-Edits an existing task in the Savvy To-Do.<br>
-Format: `edit INDEX [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Edits an existing task in the Savvy To-Do. <br>
+Format: `edit INDEX [t/TASK_NAME] [s/START_DATE] [e/END_DATE] [l/LOCATION] [p/PRIORITY_LEVEL] [r/RECURRING_TYPE] [n/NUMBER_OF_RECURRENCE] [c/CATEGORY] [d/DESCRIPTION]`
 
 > * Edits the task at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
@@ -95,11 +101,9 @@ Format: `edit INDEX [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@yahoo.com`<br>
-  Edits the phone number and email address of the 1st task to be `91234567` and `johndoe@yahoo.com` respectively.
+* `edit 1 c/CS2103 d/Complete group project component`<br>
+  Edits the specified task to be tagged under `CS2103` with the description `Complete group project component`.
 
-* `edit 2 Betsy Crower t/`<br>
-  Edits the name of the 2nd task to be `Betsy Crower` and clears all existing tags.
 
 ### 2.5. Finding all tasks containing any keyword in their name: `find`
 
@@ -115,10 +119,10 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 
-* `find John`<br>
-  Returns `John Doe` but not `john`
-* `find Betsy Tim John`<br>
-  Returns Any task having names `Betsy`, `Tim`, or `John`
+* `find homework`<br>
+  Returns `do homework` but not `Homework`
+* `find dinner lunch breakfast`<br>
+  Returns Any task having `dinner`, `lunch`, or `breakfast` in their names.
 
 ### 2.6. Deleting a task : `delete`
 
@@ -134,7 +138,7 @@ Examples:
 * `list`<br>
   `delete 2`<br>
   Deletes the 2nd task in the Savvy To-Do.
-* `find Betsy`<br>
+* `find laundry`<br>
   `delete 1`<br>
   Deletes the 1st task in the results of the `find` command.
 
@@ -143,7 +147,7 @@ Examples:
 Selects the task identified by the index number used in the last task listing.<br>
 Format: `select INDEX`
 
-> Selects the task and loads the Google search page the task at the specified `INDEX`.<br>
+> Selects the task at the specified `INDEX` and displays the details.<br>
 > The index refers to the index number shown in the most recent listing.<br>
 > The index **must be a positive integer** 1, 2, 3, ...
 
@@ -152,13 +156,13 @@ Examples:
 * `list`<br>
   `select 2`<br>
   Selects the 2nd task in the Savvy To-Do.
-* `find Betsy` <br>
+* `find shopping` <br>
   `select 1`<br>
   Selects the 1st task in the results of the `find` command.
 
 ### 2.8. Clearing all entries : `clear`
 
-Clears all entries from the Savvy To-Do.<br>
+Clears all displayed entries from the interface<br>
 Format: `clear`
 
 ### 2.9. Exiting the program : `exit`
@@ -179,25 +183,21 @@ There is no need to save manually.
 
 ## 4. Command Summary
 
-* **Add**  `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` <br>
-  e.g. `add James Ho p/22224444 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+* **Add**  `add TASK_NAME [s/START_DATE] [e/END_DATE] [l/LOCATION] [p/PRIORITY_LEVEL] [r/RECURRING_TYPE] [n/NUMBER_OF_RECURRENCE] [c/CATEGORY] [d/DESCRIPTION]`
+
+* **Edit**  `edit INDEX [t/TASK_NAME] [s/START_DATE] [e/END_DATE] [l/LOCATION] [p/PRIORITY_LEVEL] [r/RECURRING_TYPE] [n/NUMBER_OF_RECURRENCE] [c/CATEGORY] [d/DESCRIPTION]`
 
 * **Clear** : `clear`
 
 * **Delete** : `delete INDEX` <br>
-   e.g. `delete 3`
-
+  
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
-  e.g. `find `
-
+ 
 * **List** : `list` <br>
-  e.g.
 
 * **Help** : `help` <br>
-  e.g.
 
 * **Select** : `select INDEX` <br>
-  e.g.`select 2`
 
 
 [//]: # (@@author yeejfe)
