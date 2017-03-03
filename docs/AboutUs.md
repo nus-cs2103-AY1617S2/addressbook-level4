@@ -10,43 +10,41 @@ We are a team based in the [School of Computing, National University of Singapor
 
 -----
 
-#### [Joshua Lee](http://github.com/lejolly)
-<img src="images/JoshuaLee.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: UI
+#### [Yee Jian Feng, Eric](http://github.com/qhng) <br>
+<img src="images/YEEJFE.jpg" width="150"><br>
+**Role**: Developer <br>
+* Components in charge of: [Developer Guide]
+* Aspects/tools in charge of: [Example: Testing, Integration, Deliverables, Deadlines]
+* Features implemented:
+   * [User Guide]
+* Code written:[functional code][test code][docs]
+* Other major contributions:
+  * Did the initial refactoring from AddressBook-Level-4 to SavvyTo-Do
+  * Set up Travis, Appveyor, Coveralls and Codacy
 
 -----
 
-#### [Leow Yijin](http://github.com/yijinl)
-<img src="images/LeowYijin.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Data
+#### [Goh Jing Loon](https://github.com/jingloon)
+<img src="images/JingLoon.png" width="150"><br>
+**Role**: Developer <br>
+Responsibilities: 
 
 -----
 
-#### [Martin Choo](http://github.com/m133225)
-<img src="images/MartinChoo.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Dev Ops
+#### [Joel Lim](https://github.com/aljorhythm)
+<img src="images/JoelLim.jpg" width="150"><br>
+**Role**: Developer <br>
+Responsibilities: 
 
 -----
 
-#### [Thien Nguyen](https://github.com/ndt93)
- Role: Developer <br>
- Responsibilities: Threading
-
- -----
-
-#### [You Liang](http://github.com/yl-coder)
-<img src="images/YouLiang.jpg" width="150"><br>
- Role: Developer <br>
- Responsibilities: UI
+#### [Wang Si Qi](https://github.com/coyotestarrkwsq)
+<img src="images/WangSiQi.jpg" width="150"><br>
+**Role**: Developer <br>
+Responsibilities: 
 
  -----
 
 # Contributors
 
 We welcome contributions. See [Contact Us](ContactUs.md) page for more info.
-
-* [Akshay Narayan](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Aokkhoy)
-* [Sam Yong](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Amauris)
