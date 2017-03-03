@@ -555,17 +555,78 @@ Use case ends.
 
 ## Appendix E : Product Survey
 
-**Product Name**
-
-Author: ...
+**Sticky Notes**
 
 Pros:
 
-* ...
-* ...
+> * Can create multiple notes for items of different category, providing easy visual based on category
+> * Can have multiple items under one category
+> * Can edit the space it takes on the screen as compared to the rest of the notes to allow the more important ones to stand out
+> * Easy to delete task by just erasing them
+> * Color code different categories to help visualize them better
+> * Can easily edit the tasks
 
 Cons:
 
-* ...
-* ...
+> * Hard to sort out which items are more important by deadline
+> * No deadline function to remind me of important dates
+> * There is no calendar view to look at a snapshot of events/tasks by time
+> * Requires multiple use of the mouse with the GUI
+> * Unable to search for a particular tasks by keyword
+> * Unable to find out what was previously done (list of completed items)
+> * Cannot sync/connect to a cloud network
+
+**S Planner**
+
+Pros:
+
+> * Shows a calendar of events/tasks that is upcoming for the month
+> * Can create tasks/events with description
+> * Can create repetitive tasks
+> * Can color code tasks for better visualization of different categories
+> * Can notify user when the tasks is upcoming
+> * Can include more details about an event/tasks which is shown only upon detail reading of the event/task itself
+
+Cons: 
+
+> * Cannot search by keyword
+> * Cannot mark an item as done
+> * Unable to undo a previous input
+
+**Google Calendar**
+
+Pros:
+
+> * Separate task as different “calendars” as oppose to category
+> * Able to specify task down to half hourly
+> * Able to share said calendar to other user (Useful for secretary or coordinating among user)
+> * Able to sync across multiple platform
+> * Able to color code tasks of different calendar
+> * Able to remind user of tasks
+> * Able to specify Location of said task
+> * Able to search for task by keyword
+
+Cons: 
+
+> * Unable to sort Task by importance (Only in chronological timeline)
+> * Unable to identify task as done/undone
+> * Complicated control and Learning curve are quite steep
+
+**WunderList**
+
+Pros:
+
+> * Can sync with ical 
+> * Able to organise tasks
+> * Can set due dates and reminders that are separate 
+> * Can work with friends/teammates
+> * Shows tasks based on due dates
+
+Cons: 
+
+> * Does not differentiate between tasks and events
+> * No inbuilt calendar
+> * Unable to set multiple reminders
+> * Priority lists not very useful
+
 
