@@ -60,13 +60,13 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-        ezDo.removePerson(target);
+        ezDo.removeTask(target);
         indicateAddressBookChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        ezDo.addPerson(task);
+        ezDo.addTask(task);
         updateFilteredListToShowAll();
         indicateAddressBookChanged();
     }
@@ -77,7 +77,7 @@ public class ModelManager extends ComponentManager implements Model {
         assert editedPerson != null;
 
         int addressBookIndex = filteredPersons.getSourceIndex(filteredPersonListIndex);
-        ezDo.updatePerson(addressBookIndex, editedPerson);
+        ezDo.updateTask(addressBookIndex, editedPerson);
         indicateAddressBookChanged();
     }
 

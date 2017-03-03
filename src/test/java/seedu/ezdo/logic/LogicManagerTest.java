@@ -215,7 +215,7 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.adam();
         EzDo expectedAB = new EzDo();
-        expectedAB.addPerson(toBeAdded);
+        expectedAB.addTask(toBeAdded);
 
         // execute command and verify result
         assertCommandSuccess(helper.generateAddCommand(toBeAdded),
@@ -337,7 +337,7 @@ public class LogicManagerTest {
         List<Task> threePersons = helper.generatePersonList(3);
 
         EzDo expectedAB = helper.generateAddressBook(threePersons);
-        expectedAB.removePerson(threePersons.get(1));
+        expectedAB.removeTask(threePersons.get(1));
         helper.addToModel(model, threePersons);
 
         assertCommandSuccess("delete 2",
@@ -494,7 +494,7 @@ public class LogicManagerTest {
          */
         void addToAddressBook(EzDo ezDo, List<Task> personsToAdd) throws Exception {
             for (Task p: personsToAdd) {
-                ezDo.addPerson(p);
+                ezDo.addTask(p);
             }
         }
 
