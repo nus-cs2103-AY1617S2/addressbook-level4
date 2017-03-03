@@ -3,35 +3,35 @@ package seedu.task.model.task;
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's phone number in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
+ * Represents a Task description in the task book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidDescription(String)}
  */
 public class Description {
 
-    public static final String MESSAGE_PHONE_CONSTRAINTS = "Person phone numbers should only contain numbers";
-    public static final String PHONE_VALIDATION_REGEX = "\\d+";
+    public static final String MESSAGE_DESCRIPTION_CONSTRAINTS = "Description can contain any characters";
+    public static final String DESCRIPTION_VALIDATION_REGEX = ".";
 
     public final String value;
 
     /**
-     * Validates given phone number.
+     * Validates given description.
      *
-     * @throws IllegalValueException if given phone string is invalid.
+     * @throws IllegalValueException if given description string is invalid.
      */
-    public Description(String phone) throws IllegalValueException {
-        assert phone != null;
-        String trimmedPhone = phone.trim();
-        if (!isValidPhone(trimmedPhone)) {
-            throw new IllegalValueException(MESSAGE_PHONE_CONSTRAINTS);
+    public Description(String description) throws IllegalValueException {
+        assert description != null;
+        String trimmedDescription = description.trim();
+        if (!isValidDescription(trimmedDescription)) {
+            throw new IllegalValueException(MESSAGE_DESCRIPTION_CONSTRAINTS);
         }
-        this.value = trimmedPhone;
+        this.value = trimmedDescription;
     }
 
     /**
-     * Returns true if a given string is a valid person phone number.
+     * Returns true if a given string is a valid task description.
      */
-    public static boolean isValidPhone(String test) {
-        return test.matches(PHONE_VALIDATION_REGEX);
+    public static boolean isValidDescription(String test) {
+        return test.matches(DESCRIPTION_VALIDATION_REGEX);
     }
 
     @Override
