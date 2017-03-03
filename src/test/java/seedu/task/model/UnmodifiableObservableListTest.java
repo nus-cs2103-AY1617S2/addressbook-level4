@@ -1,4 +1,4 @@
-package seedu.address.model;
+package seedu.task.model;
 
 import static org.junit.Assert.assertSame;
 import static seedu.address.testutil.TestUtil.assertThrows;

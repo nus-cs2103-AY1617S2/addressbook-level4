@@ -1,4 +1,4 @@
-package seedu.address.model;
+package seedu.task.model;
 
 import static org.junit.Assert.assertEquals;
 
@@ -21,7 +21,7 @@ import seedu.task.model.tag.Tag;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.ReadOnlyTask;
 
-public class AddressBookTest {
+public class TaskBookTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();

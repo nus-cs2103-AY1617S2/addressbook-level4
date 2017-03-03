@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.task.model.task;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import seedu.task.model.task.StartDateTime;
 
-public class EmailTest {
+public class StartDateTimeTest {
 
     @Test
     public void isValidEmail() {
