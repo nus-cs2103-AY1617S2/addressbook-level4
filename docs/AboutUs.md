@@ -31,16 +31,10 @@ Responsibilities: Dev Ops
 
 -----
 
-#### [Thien Nguyen](https://github.com/ndt93)
+#### [Wang Zexin](https://github.com/wangzexin)
+<img src="images/WangZexin.jpg" width="150"><br>
  Role: Developer <br>
- Responsibilities: Threading
-
- -----
-
-#### [You Liang](http://github.com/yl-coder)
-<img src="images/YouLiang.jpg" width="150"><br>
- Role: Developer <br>
- Responsibilities: UI
+ Responsibilities: Dev Ops
 
  -----
 
