@@ -43,25 +43,25 @@ public class Parser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         if (AddCommand.canCommandBeTriggeredByWord(commandWord)) {
-        	return new AddCommandParser().parse(arguments);
+            return new AddCommandParser().parse(arguments);
         } else if (EditCommand.canCommandBeTriggeredByWord(commandWord)) {
-        	return new EditCommandParser().parse(arguments);
+            return new EditCommandParser().parse(arguments);
         } else if (SelectCommand.canCommandBeTriggeredByWord(commandWord)) {
-        	return new SelectCommandParser().parse(arguments);
+            return new SelectCommandParser().parse(arguments);
         } else if (DeleteCommand.canCommandBeTriggeredByWord(commandWord)) {
-        	return new DeleteCommandParser().parse(arguments);
+            return new DeleteCommandParser().parse(arguments);
         } else if (ClearCommand.canCommandBeTriggeredByWord(commandWord)) {
-        	return new ClearCommand();
+            return new ClearCommand();
         } else if (FindCommand.canCommandBeTriggeredByWord(commandWord)) {
-        	return new FindCommandParser().parse(arguments);
+            return new FindCommandParser().parse(arguments);
         } else if (ListCommand.canCommandBeTriggeredByWord(commandWord)) {
-        	return new ListCommand();
+            return new ListCommand();
         } else if (ExitCommand.canCommandBeTriggeredByWord(commandWord)) {
-        	return new ExitCommand();
+            return new ExitCommand();
         } else if (HelpCommand.canCommandBeTriggeredByWord(commandWord)) {
-        	return new HelpCommand();
+            return new HelpCommand();
         } else {
-        	return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
+            return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
 //        switch (commandWord) {
 //
