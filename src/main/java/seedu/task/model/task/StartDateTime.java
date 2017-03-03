@@ -1,44 +1,55 @@
 package seedu.task.model.task;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's phone number in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
+ * Represents a Task Start DateTime in the task book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidDateTime(String)}
  */
 public class StartDateTime {
 
-    public static final String MESSAGE_EMAIL_CONSTRAINTS =
-            "Person emails should be 2 alphanumeric/period strings separated by '@'";
-    public static final String EMAIL_VALIDATION_REGEX = "[\\w\\.]+@[\\w\\.]+";
+    public static final String MESSAGE_START_DATETIME_CONSTRAINTS =
+            "Start Date/Time must be in the format of DD/MM/YYYY HHMM, where time is represented in 24 hours";
+    public static final SimpleDateFormat START_DATETIME_FORMATTER = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
-    public final String value;
+    public final Date value;
 
     /**
-     * Validates given email.
+     * Validates given start datetime.
      *
      * @throws IllegalValueException if given email address string is invalid.
      */
-    public StartDateTime(String email) throws IllegalValueException {
-        assert email != null;
-        String trimmedEmail = email.trim();
-        if (!isValidEmail(trimmedEmail)) {
-            throw new IllegalValueException(MESSAGE_EMAIL_CONSTRAINTS);
+    public StartDateTime(String startDateTime) throws IllegalValueException {
+        assert startDateTime != null;
+        String trimmedStartDateTime = startDateTime.trim();
+        try {
+        	this.value = START_DATETIME_FORMATTER.parse(trimmedStartDateTime);
+        } catch (ParseException e) {
+        	throw new IllegalValueException(MESSAGE_START_DATETIME_CONSTRAINTS);
         }
-        this.value = trimmedEmail;
     }
 
     /**
-     * Returns if a given string is a valid person email.
+     * Returns if a given string is a valid start datetime.
      */
-    public static boolean isValidEmail(String test) {
-        return test.matches(EMAIL_VALIDATION_REGEX);
+    public static boolean isValidStartDateTime(String test) {
+    	START_DATETIME_FORMATTER.setLenient(false);
+        try {
+        	START_DATETIME_FORMATTER.parse(test);
+        } catch(ParseException e) {
+        	return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        return value;
+        return value.toString();
     }
 
     @Override
