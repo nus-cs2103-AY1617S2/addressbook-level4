@@ -80,7 +80,7 @@ Format: `list finished`
 Shows all tasks in Dueue (finished and unfinished) and unswitch<br>
 Format: `list all`
 
-Shows a list of all list names in Dueue and unswitch<br>
+Shows a list of all list names (together with list indices) in Dueue and unswitch<br>
 Format: `list lists`
 
 > * Do not need to specify whether the parameter is LISTINDEX or LISTNAME<br>
@@ -91,11 +91,17 @@ Format: `list lists`
 Examples:
 
 * `list`
+  Lists all unfinished tasks
 * `list finished`
+  Lists all finished tasks
 * `list all`
+  Lists all unfinished and finished tasks
 * `list work`
-* `list study favorite`
+  List all unfinished tasks in list `work`
+* `list study favourite`
+  List all favourite tasks in list `study`
 * `list lists`
+  List all listname with list indices
 
 ### 2.4. Creating a list : `create`
 
@@ -123,7 +129,9 @@ Format: `update list LISTINDEX NEW_LISTNAME`
 Examples:
 
 * `update list school newSchool`
-* `update list 1 newList`
+  Update the name of list `school` to `newSchool`
+* `update list oldList newList`
+  Update the name of list `oldList` to `newList`
 
 ### 2.6. Updating task(s) : `update`
 
@@ -131,11 +139,12 @@ Updates existing task(s) in Dueue<br>
 Format: `update TASKINDEX ... [n/NAME] [due/DUEDATE] [t/TIME] [#LISTNAME] [d/DESCRIPTION] [@VENUE] [p/PRIORITYLEVEL] [FAVOURITE]`
 
 > * Edits the task at the specified `INDEX`.
-> * The index refers to the index number shown in the last person listing.<br>
+> * The index refers to the index number shown in the last listing.<br>
 > * The index **must be a positive integer** 1, 2, 3, ...
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
-> * You can remove details by typing `` after the `/` or `@`without specifying any tags after it eg,`due/`.
+> * You can remove details by typing nothing after the `/` or `@`without specifying any tags after it eg,`due/`.
+> * To update multiple entries, indices must be seperated by whitespaces.
 > * Specifications of fields for task can be entered in any order.
 
 Examples:
@@ -182,23 +191,19 @@ Examples:
 * `delete 1 2 3`<br>
   Deletes the 1st, 2nd and 3rd tasks in the most recent listing.
 
-### 2.9. Switch to list mode : `switch`
+### 2.9. Finishing task(s) : `finish`
 
-Selects the person identified by the index number used in the last person listing.<br>
-Format: `select INDEX`
+Finishes the specified task(s) from Dueue.<br>
+Format: `finish TASKINDEX...`
 
-> * Selects the person and loads the Google search page the person at the specified `INDEX`.<br>
-> * The index refers to the index number shown in the most recent listing.<br>
-> * The index **must be a positive integer** 1, 2, 3, ...
+> * Marks the task(s) as finished.<br>
+> * To finish multiple entries, indices must be seperated by whitespaces.
+> * When a repeated task is deleted, user will be asked to confirm whether it should be deleted for once or deleted forever (stop repeating).
 
 Examples:
 
-* `list`<br>
-  `select 2`<br>
-  Selects the 2nd person in the address book.
-* `find Betsy` <br>
-  `select 1`<br>
-  Selects the 1st person in the results of the `find` command.
+* `finish 10`<br>
+  Finishes the task with task index 10.
 
 ### 2.10. Clearing all entries : `clear`
 
