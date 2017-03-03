@@ -15,7 +15,7 @@ public class Name {
      * The first character of the name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String NAME_VALIDATION_REGEX = ".";
+    public static final String NAME_VALIDATION_REGEX = ".+";
 
     public final String taskName;
 
@@ -34,9 +34,10 @@ public class Name {
     }
 
     /**
-     * Returns true if a given string is a valid person name.
+     * Returns true if a given string is a valid task name.
      */
     public static boolean isValidName(String test) {
+    	test = test.trim();
         return test.matches(NAME_VALIDATION_REGEX);
     }
 
