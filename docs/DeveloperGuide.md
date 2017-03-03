@@ -474,7 +474,7 @@ Use case ends
 > Use case ends
  
 <br>
-
+
 #### Use case #3: customize commands
  
 **MSS**
@@ -528,6 +528,7 @@ Use case ends
 Use case ends
  
 **Extensions**
+
 3a. The task is not found
 > 1a1. To-do list prompts an error message for target not found <br>
 > Use case ends
@@ -553,6 +554,7 @@ Use case ends
 Use case ends
  
 **Extensions**
+
 1a. The selected tag does not exist
 > 1a1. To-do list shows error message on target not found. <br>
 > Use case ends
@@ -688,6 +690,7 @@ Use case ends
 Use case ends
 
 **Extension**
+
 1a. The user input exit in the middle of an unfinished action
 > 1a1. To-do List show error message that the user could not exit until he finishes the action <br>
 > Use case ends <br>
@@ -741,7 +744,6 @@ Use case ends
 **Extensions**
  
 1a. User input is invalid
- 
 > 1a1. To-do list shows an error message for invalid input. <br>
  
 1b. The tag input does not exist
@@ -776,6 +778,7 @@ Use case ends
 Use case ends
 
 **Extension**
+
 1a. The input criteria does not match any tasks or tags
 > 1a1. To-do list prompts error message for target not found. <br>
 > Use case ends
@@ -957,11 +960,11 @@ Features we might like to have
 * Add subtasks
 * Move task to archive (instead of deleting the task)
 * UI: Provide tabs that contain lists of different tasks such as:
-  * Today  tasks without deadlines or tasks due today
-  * Overdue  tasks that are already overdue
-  * Project  tasks that are large scale and with contain subtasks
-  * Calendar  tasks displayed in a calendar format
-  * Activity  a history or log of past actions
+  * Today: tasks without deadlines or tasks due today
+  * Overdue: tasks that are already overdue
+  * Project: tasks that are large scale and with contain subtasks
+  * Calendar: tasks displayed in a calendar format
+  * Activity: a history or log of past actions
 * Tasks can be sorted according to priority.
 * Requires log-in with username and password so data is protected.
 
