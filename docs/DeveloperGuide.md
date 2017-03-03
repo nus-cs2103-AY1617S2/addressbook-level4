@@ -346,50 +346,298 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
-
-{More to be added}
+`***` | new user | use the program easily | use the program almost immediately without much learning
+`***` | user | add event | create new tasks
+`***` | user | add floating task | create tasks that have no associated dates
+`***` | user | mark task as complete | keep a record of completed tasks
+`***` | user | modify a task | update a task with new details or fix an incorrectly entered tasks
+`***` | user | delete a task | delete tasks that are no longer necessary
+`***` | user | view instructions | learn how to use the program with more details
+`***` | user | search for tasks by keywords | look for the tasks I want quickly
+`***` | user | choose where to save my tasks | backup my tasks
+`***` | user | undo previous operations | revert unintended actions
+`***` | user | redo previous operations | change my mind on whether to perform an action
+`**` | user | add recurring tasks | create repeating tasks easily
+`**` | user | view tasks in a time period | look for related tasks in a time period (use the find command)
+`**` | user | see suggestions when typing commands | use the program with minimal reference to instructions
+`*` | user | have syntax highlighting | ensure commands are entered correctly
+`*` | user | view tasks that require the most attention | pay attention to them first
+`*` | user | star a task | mark an important task for priority display
+`*` | user | view tasks in a calendar view | visualize tasks assigned to different time periods quickly
+`*` | user | create subtasks | add high level and low level tasks
+`*` | user | link tasks together | access related tasks quickly
+`*` | user | link emails/files/folders to tasks | view more information about a task easily
+`*` | user | generate tasks from emails using subject and dates found in the email or using a specified format | create tasks quickly or automatically
+`*` | user | receive email reminders for upcoming tasks | remember to complete my tasks
+`*` | user | switch interface from normal to compact interface | focus on what i need right now
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
-
-#### Use case: Delete person
+#### Use case: UC01 - Input task details
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
-Use case ends.
+1. Program requests for description of task.
+2. User inputs description of task.<br>
+Use case ends
 
 **Extensions**
 
-2a. The list is empty
+2a. Program detects the description is empty.
+
+> 2a1. Program shows an error message stating the description is empty. <br>
+  2a2. Program requests for re-input. <br>
+  Use case resumes at step 3
+
+2b. User chooses to add tags(UC02).
 
 > Use case ends
 
-3a. The given index is invalid
+#### Use case: UC02 - Input tags for task
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+**MSS**
 
-{More to be added}
+1. User chooses to add tags.
+2. Program requests for tags to be added.
+3. User inputs tags.
+Use case ends
+
+**Extensions**
+
+3a. Program detects that there are no tags specified.
+
+> 3a1. Program shows a warning that there are no tags specified. <br>
+  Use case ends
+
+3b. Program detects that there are duplicate tags specified.
+
+> 3a1. Programs shows a warning that there are duplicate tags specified. <br>
+  Use case ends
+
+#### Use case: Create floating task
+
+**MSS**
+
+1. User chooses to add a floating task.
+2. User inputs task details(UC01).
+3. Program adds the task to the list of tasks.
+Use case ends
+
+#### Use case: Create an event
+
+**MSS**
+
+1. User chooses to add an event.
+2. User inputs task details(UC01).
+3. Program requests for start date.
+4. User inputs start date.
+5. Program requests for end date.
+6. User inputs end date.
+7. Program adds the task to the list of tasks.
+Use case ends
+
+**Extensions**
+
+4a. Program detects the start date is empty.
+
+> 4a1. Program shows an error message stating the start date is empty. <br>
+  4a2. Program requests for re-input. <br>
+  Use case resumes at step 4
+
+4b. Program detects the start date is invalid.
+
+> 4b1. Program shows an error message stating the start date is invalid. <br>
+  4b2. Program requests for re-input. <br>
+  Use case resumes at step 4
+
+6a. Program detects the end date is empty.
+
+> 6a1. Program shows an error message stating the end date is empty. <br>
+  6a2. Program requests for re-input. <br>
+  Use case resumes at step 6
+
+6b. Program detects the end date is invalid.
+
+> 6b1. Program shows an error message stating the end date is invalid. <br>
+  6b2. Program requests for re-input. <br>
+  Use case resumes at step 6
+
+
+#### Use case: Create task with deadline
+
+**MSS**
+
+1. User chooses to add a task with deadline.
+2. User inputs task details(UC01).
+3. Program requests for deadline.
+4. User inputs deadline.
+5. Program adds the task to the list of tasks.
+Use case ends
+
+**Extensions**
+
+4a. Program detects the deadline is empty.
+
+> 4a1. Program shows an error message stating the deadline is empty. <br>
+  4a2. Program requests for re-input. <br>
+  Use case resumes at step 4
+
+4b. Program detects the deadline is invalid.
+
+> 4b1. Program shows an error message stating the deadline is invalid. <br>
+  4b2. Program requests for re-input. <br>
+  Use case resumes at step 4
+
+#### Use case: Update a task
+
+**MSS**
+
+1. User chooses to update a task.
+2. Program requests for the task to be updated.
+3. User inputs the task to be updated.
+4. Program requests for changes to be made to the task.
+5. User inputs the changes to to be made to the task.
+6. Program updates the task.
+Use case ends
+
+**Extensions**
+
+3a. Program detects that there are multiple tasks with the same words specified by user.
+
+> 3a1. Program requests user to specify the exact task. <br>
+  3a2. User specifies the exact task to be updated. <br>
+  3a3. Program deletes the task. <br>
+  Use case ends
+
+3b. Program detects the specified task is not valid.
+
+> 3b1. Program returns an error message. <br>
+  3b2. Program requests for re-input. <br>
+  Use case resumes at step 3
+
+3a2a. Program detects that there are still multiple tasks with the same words specified by the user.
+
+> Use case resumes at step 3a1
+
+
+#### Use case: Delete a task
+
+**MSS**
+
+1. User chooses to delete task.
+2. Program requests for the task to be deleted.
+3. User inputs the task to be deleted.
+4. Program deletes the task.
+Use case ends
+
+**Extensions**
+
+3a. Program detects that there are multiple tasks with the same words specified by the user.
+
+> 3a1. Program requests user to specify the exact task. <br>
+  3a2. User specifies the exact task to be deleted. <br>
+  3a3. Program deletes the task. <br>
+  Use case ends
+
+3b. Program detects the specified task is not valid. 
+
+> 3b1. Program shows an error message. <br>
+  3b2. Program requests for re-input. <br>
+  Use case resumes at step 3
+
+3a2a. Program detects that there are still multiple tasks with the same words specified by the user.
+
+> Use case resumes at step 3a1
+
+#### Use case: Mark a task as complete
+
+**MSS**
+
+1. User chooses to mark a task as complete.
+2. Program requests for the task to be marked complete.
+3. User inputs the task to be marked complete.
+4. Program marks the task as complete.
+Use case ends
+
+**Extensions**
+
+3a. Program detects that there are multiple tasks with the same words specified by the user.
+
+> 3a1. Program marks all the tasks with the same words as complete.
+  3a2. Program informs user that multiple tasks are marked as complete.
+  Use case ends
+
+3b. Program detects the specified task is not valid. 
+
+> 3b1. Program shows an error message.
+  3b2. Program requests for re-input.
+  Use case resumes at step 3
+
+3a2a. Program detects that there are still multiple tasks with the same words specified by the user.
+
+> Use case resumes at step 3a1
+
+
+#### Use case: Undo operations
+
+**MSS**
+
+1. User chooses to undo operation.
+2. Program requests for number of operations to undo.
+3. User specifies the number of operations to undo.
+4. Program undo the number of operations specified.
+Use case ends
+
+**Extensions**
+
+3a. Program detects that user did not specify the number of operations.
+
+> 3a1. Program undo one operation. <br>
+  Use case ends
+
+3b. Program detects the specified number of operations is not valid.
+
+> 3b1. Program requests for re-input for number of operations. <br>
+  Use case resumes at step 3
+
+3c. Programs detect the number of operations to undo is more than the undo history.
+
+> 3c1. Program undo all the operations in the undo history. <br>
+  3c2. Program informs the user that the number specified is more than the undo history so it will undo all operations in the history. <br>
+  Use case ends
+
+#### Use case: Search for tasks
+
+**MSS**
+
+1. User chooses to search for tasks.
+2. Program requests for the keywords.
+3. User inputs the keywords.
+4. Program shows the tasks with the specified keywords.
+Use case ends
+
+**Extensions**
+
+3a. Program detects that user did not specify any keywords.
+
+> 3a1. Program shows an error message stating no keywords are specified. <br>
+  3a2. Program requests for re-input. <br>
+  Use case resumes at step 3
 
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 100 tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
-   should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-{More to be added}
+   should be able to accomplish most of the faster using commands than using the mouse.
+4. Should have a response time of at most five seconds, including functionality that require longer than five seconds to
+   execute. This can be achieved by status updates on an ongoing function. 
+5. Should have reasonable amount of documentation so that future developers can easily extend the project.
+6. Should have reasonably high quality source code as determined by the supervisor.
+7. Should not have any proprietary dependencies.
+8. Should be able to function standalone without any installation of third-party software (excluding Java).
+9. Data should be stored locally in the form of a human editable text file.
+10. Should able to work offline.
 
 ## Appendix D : Glossary
 
@@ -397,23 +645,76 @@ Use case ends.
 
 > Windows, Linux, Unix, OS-X
 
-##### Private contact detail
+##### Response time
 
-> A contact detail that is not meant to be shared with others
+> Amount of time elapsed before a system respond upon user input
+
+##### Third-party software
+
+> Any software that is not iManager or pre-installed with the OS
+
+##### Operation
+
+> An action that the user wants to perform, usually a command.
+
+##### Task
+
+> TODO
+
+##### Command
+
+> TODO
+
+##### Functionality
+
+> TODO
 
 ## Appendix E : Product Survey
 
-**Product Name**
-
-Author: ...
+**Hitask**
 
 Pros:
 
-* ...
-* ...
+* Can easily sign in with Google account
+* Support team work
+* Settings allow users to change date and time preferences
+* Users can close or open calendar and team when they need to
 
 Cons:
 
-* ...
-* ...
+* Ask for too much information when signing in with Google account, might make users feel their privacy are insecure
+* Font size is too small, difficult for users to read
+* Too much information in one page
 
+**Trello**
+
+Pros:
+
+* Easy to sign in with Google account without asking for too much information
+* Uses a novel way to display tasks
+* Clear to see the emergency of tasks
+* Easy to add detail information for tasks
+
+Cons:
+
+* Small font size
+* After clicking on close menu button or show menu button, the tasks in the same interface do not become larger or smaller accordingly.
+* There are boards, labels and due dates, which might be too complex and troublesome for some users.
+
+**Wunderlist**
+
+Pros:
+
+* Accessible on many devices.
+* Easy to sign in with Google account without asking for too much information
+* Lists including not only tasks from work but also movies to watch and familiy etc. Creates a less stressful environment for users.
+* Interface is simple and clear
+* Can make list copies or share lists easily
+* Can start conversations
+* Can set reminders while creating tasks
+
+Cons:
+
+* Web application is either not well developed or very hard to use (unintuitive).  I could not add a task after trying for 10 minutes. (Difficult to add a task)
+* Android application does not allow due time to be set directly when setting (creating?) new task
+Tasks cannot be sorted by due date
