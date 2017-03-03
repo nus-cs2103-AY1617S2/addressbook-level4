@@ -839,17 +839,173 @@ Use case ends
 
 ## Appendix E : Product Survey
 
-**Product Name**
+**Trello**
 
-Author: ...
+Author: Chen Penghao
 
-Pros:
+Main functionality
 
-* ...
-* ...
+* Stores and displays a list of task lists on the same interface.
 
-Cons:
+Features we might like to have:
 
-* ...
-* ...
+* Instant adding and displaying
+* Tagging and due dates
+* Display tasks of different type/tags on the same screen
+* (Might be useful): divide tasks into subtasks
+* Searching with keywords - one search produce result for both boards and tasks
+
+Features not important to Jim:
+
+* Share/private/team/public options
+* Display - no need to display everything at the same time. Just what Jim will like to know according to his own criteria
+
+Cons
+
+* No CLI
+* Difficult for new user to learn as the UI is is not self explanatory and there is no help function.
+* No calendar/timeline view.
+* Browser-based so it requires internet connection.
+
+**Remember the milk**
+
+Author: Jia Yilin
+
+Main functionality
+
+* It allows users to have multiple task lists.
+
+Features we might like to have
+
+* Tagging
+* Can add levels of priority to tasks
+* Can add location to tasks
+* Can add estimated time for tasks
+* Display of total number of tasks , tasks overdue and tasks completed on the UI
+* Search by keywords
+* Trash for containing deleted tasks
+* Reminders
+
+Features not important to JIM
+
+* Share/give tasks to others
+* Contacts of others
+* Print task lists
+* Search for tasks that do not contain certain keywords
+* Integration with other softwares
+
+Cons
+
+* Based in a browser, so it requires internet.
+* Full features not available in the free version.
+* Controls are very much based on the GUI.
+* Cannot attach files to tasks
+* Cannot change the timing for reminders
+
+**Wunderlist**
+
+Author: Toh Yina
+
+Main functionality
+
+* It works as a list of tasks, so you create a list first before adding in the tasks to do
+    * E.g. List: CS2103, tasks -> read notes
+                -> do tutorial
+* Have folders to contain several lists to keep organized
+    * E.g. Folder: School, inside several lists of modules.
+
+Features that we might like to have
+
+* When clicked on complete, task auto hide
+* Can choose to view completed tasks
+* Allowed to rename folders / lists
+* Can delete list
+* Can restore deleted list
+* Priority marked by star -> only one level of priority
+* Can sort tasks by creation date / alphabetical order / priority
+
+Features that are not important for Jim
+
+* Can email list
+* Can print list
+* Have account and password
+* Can duplicate list
+* Can change theme of task manager
+
+Cons
+
+* No calendar view
+* Does not have a start and end time for items
+* Not completely free.
+* Setup is inconvenient
+
+
+**HiTask**
+
+Author: Wang Chi
+
+Main functionality
+
+* Tasks-tracking with team collaboration
+
+Features we might like to have
+
+* Calendar/Project Task collaboration with a team
+* Features we might like to have
+* Show a calendar on the side
+* User can choose a category for new tasks and upload files that are tagged to the specific task
+* Easily add short comments to existing tasks
+* Add subtasks
+* Move task to archive (instead of deleting the task)
+* UI: Provide tabs that contain lists of different tasks such as:
+    * ‘Today’ – tasks without deadlines or tasks due today
+    * ‘Overdue’ – tasks that are already overdue
+    * ‘Project’ – tasks that are large scale and with contain subtasks
+    * ‘Calendar’ – tasks displayed in a calendar format
+    * ‘Activity’ – a history or log of past actions
+* Tasks can be sorted according to priority.
+* Requires log-in with username and password so data is protected.
+
+Features not important to Jim
+
+* Showing the team members on the side
+* Create an online link to a task
+* Create copy of task
+* Input/import tasks from external sources, such as online
+* Assign project/task item to team members
+* Can see the tasks on team members’ schedules
+* Everything can be controlled via the UI except inputting the names and labels
+
+Cons
+
+* Mostly an online organizer that stores everything online and operates online as well so an internet connection is needed to use it.
+* The above also means that the data can be lost with the server.
+* Category tabs are not customizable
+* All features are shown on the main frame even when not using them, cluttering up the UI.
+* Not completely free.
+
+
+**Todo.txt**
+
+Main functionality
+
+* Uses CLI to access a todo.txt file and use it to store tasks data. (similar to our product)
+
+Features we might like to have
+
+* Associate tasks with a/multiple project(s)
+* Tag the context with certain labels
+* List projects associated with project or keywords
+* Give a task a priority level
+* Each priority level task has its own colour code
+* Syncs easily with file syncing software such as Dropbox
+
+Features not important to Jim
+
+* nil
+
+Cons
+
+* Too simple with few features
+* Purely CLI with no UI thus making it messy and difficult to read when dealing with large outputs
 
