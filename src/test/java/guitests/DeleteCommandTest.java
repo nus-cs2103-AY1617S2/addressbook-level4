@@ -3,6 +3,8 @@ package guitests;
 import static org.junit.Assert.assertTrue;
 import static seedu.doist.logic.commands.DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 import seedu.doist.testutil.TestPerson;
@@ -49,7 +51,9 @@ public class DeleteCommandTest extends AddressBookGuiTest {
         assertTrue(personListPanel.isListMatching(expectedRemainder));
 
         //confirm the result message is correct
-        assertResultMessage(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+        ArrayList<TestPerson> personsToDelete = new ArrayList<TestPerson>();
+        personsToDelete.add(personToDelete);
+        assertResultMessage(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personsToDelete));
     }
 
 }

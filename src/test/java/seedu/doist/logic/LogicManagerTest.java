@@ -21,7 +21,7 @@ import org.junit.rules.TemporaryFolder;
 import com.google.common.eventbus.Subscribe;
 
 import seedu.doist.commons.core.EventsCenter;
-//import seedu.doist.commons.events.model.TodoListChangedEvent;
+import seedu.doist.commons.events.model.TodoListChangedEvent;
 import seedu.doist.commons.events.ui.JumpToListRequestEvent;
 import seedu.doist.commons.events.ui.ShowHelpRequestEvent;
 import seedu.doist.logic.commands.AddCommand;
@@ -63,10 +63,10 @@ public class LogicManagerTest {
     private boolean helpShown;
     private int targetedJumpIndex;
 
-//    @Subscribe
-//    private void handleLocalModelChangedEvent(TodoListChangedEvent abce) {
-//        latestSavedAddressBook = new TodoList(abce.data);
-//    }
+    @Subscribe
+    private void handleLocalModelChangedEvent(TodoListChangedEvent tce) {
+        latestSavedAddressBook = new TodoList(tce.data);
+    }
 
     @Subscribe
     private void handleShowHelpRequestEvent(ShowHelpRequestEvent she) {
@@ -336,8 +336,10 @@ public class LogicManagerTest {
         expectedAB.removeTask(threePersons.get(1));
         helper.addToModel(model, threePersons);
 
+        ArrayList<Task> tasksDeleted = new ArrayList<Task>();
+        tasksDeleted.add(threePersons.get(1));
         assertCommandSuccess("delete 2",
-                String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, threePersons.get(1)),
+                String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, tasksDeleted),
                 expectedAB,
                 expectedAB.getTaskList());
     }
