@@ -347,73 +347,96 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | user | add a new task | add task to manage all my to-do
+`* * *` | user | remove a task | remove entries that I no longer need
+`* * *` | user | mark a task as complete | mark a task as complete when I finish it
+`* * *` | user | find a task by keyword | search for specific task especially when the list is huge
+`* * *` | user | change the due time of a task | set the due time of a task to a new one
+`* *` | user | edit a task | edit a task if there are any changes
+`* *` | user | clear all tasks | when I want to stop using the app
+`* *` | user | list all tasks | see all tasks at one glance and consider if I want to make any adjustment
+`* *` | user | undo most recent changes | revert back to original state(ie if i remove something, it will be unremoved; if i added something, it will be removed.
+`*` | user | categorise my tasks(eg deadlines, events, floating tasks) | I can easily search for the specific task type
+`*` | user | prioritize my tasks | I can be reminded about the importance of a certain task among other tasks
 
-{More to be added}
+
+
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `task manager` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
-
-**MSS**
-
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
-Use case ends.
-
-**Extensions**
-
-2a. The list is empty
-
-> Use case ends
-
-3a. The given index is invalid
-
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
-
-{More to be added}
 
 ## Appendix C : Non Functional Requirements
 
-1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
-   should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should run with JRE7 or above, Windows 7 or above.
+2. Should be able to store up to 500 tasks.
+3. Should work primarily offline.
+4. Should be able to handle exceptions from user input.
+5. Should work as a standalone application (exe).
+6. Should not use relational databases to store data.
+7. Command line interface should be the main mode of input.
 
-{More to be added}
 
 ## Appendix D : Glossary
 
-##### Mainstream OS
+##### Invalid Commands
 
-> Windows, Linux, Unix, OS-X
+> Invalid commands includes invalid arguments
 
-##### Private contact detail
+##### Error message
 
-> A contact detail that is not meant to be shared with others
+> Error message includes suggestion for correct command
+
 
 ## Appendix E : Product Survey
 
-**Product Name**
-
-Author: ...
+**[Remember the Milk](https://www.rememberthemilk.com/)**
 
 Pros:
 
-* ...
-* ...
+* Easy to use interface.
+* User can add recurring tasks.
+* User can set a start date and end date for the task.
+* User can add tag to the task.
+* User can view a list of all completed tasks.
+* User can set priority to task.
+* User can postpone a task.
 
 Cons:
 
-* ...
-* ...
+* Most features are only available in pro version, but pro version is very expensive.
 
+
+**[Google Calender](https://calendar.google.com)**
+
+Pros:
+
+* Calendar user interface, click on events on the calendar to view more details.
+* Users are able to import calendars using .ical files.
+* Users can add or recurring events.
+* Users can be notified of approaching events.
+* Users can access on multiple platforms, like Android and iOS.
+
+Cons:
+
+* Have to be online to access calendar.
+* Slow to sync.
+
+
+**[Apple Reminders]**
+
+Pros:
+
+* Easy to use interface
+* Good for daily task managing
+* Users can add alarms for tasks
+* Users can store lists related to their tasks
+
+Cons:
+
+* No calendar view
+* Can get confusing exponentially when more tasks are added
+* Not a great option for long term planning
+* Tagging system is really simple
+* Only available in ios system
