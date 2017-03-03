@@ -41,6 +41,7 @@ It can help you manage events, deadlines, add tasks with or without deadlines or
 >
 > * Words in `UPPER_CASE` are the parameters.
 > * Items in `SQUARE_BRACKETS` are optional.
+> * Items surrounding `|` means we only choose one of them (OR).
 > * Items with `...` after them can have multiple instances.
 > * Parameters should be in the order stated. 
 
@@ -52,11 +53,21 @@ Format: `help`
 
 ### 3.2. Adding an item: `add`
 
-Adds an event or a task <br>
-**Format (event)**: `add "event name" START_DATE START_TIME to [END_DATE] END_TIME [t/TAG]... [//DESCRIPTION]`<br>
-**Format (tentative event. blocks multiple time slots)**: `add "event name" START_DATE START_TIME to [END_DATE] END_TIME ... [t/TAG]... [//DESCRIPTION]`<br>
-**Format (task with deadline)**: `add "task name" DEADLINE [t/TAG] [p/PRIORITY] [//DESCRIPTION]`  <br>
-**Format (task without deadline)**: `add "task name" [t/TAG] [p/PRIORITY] [//DESCRIPTION] `<br>
+**Format** (event): 
+
+`add "event name" START_DATE START_TIME to [END_DATE] END_TIME [t/TAG]... [//DESCRIPTION]`<br>
+
+**Format** (tentative event. blocks multiple time slots): 
+
+`add "event name" START_DATE START_TIME to [END_DATE] END_TIME ... [t/TAG]... [//DESCRIPTION]`<br>
+
+**Format** (task with deadline): 
+
+`add "task name" DEADLINE [t/TAG] [p/PRIORITY] [//DESCRIPTION]`  <br>
+
+**Format** (task without deadline): 
+
+`add "task name" [t/TAG] [p/PRIORITY] [//DESCRIPTION] `<br>
 
 
 Examples:
@@ -65,75 +76,68 @@ Examples:
 * `add "Buy tickets" 3 mar 17:00`
 * `add "Take GF for dinner"`
 
-### 3.3 View : `View`
+### 3.3 Viewing the active/expired list: `list`
 
-View task with deadline or without deadlines, View tasks to be completed by specific deadline,
-View list of events in time frame, View the overdue task, view last action, view done, view history 
+**View the entire active list**: 
 
-**View tasks with deadline**: ` Viewd task`
+`list`
 
-Example 
+**View tasks with/without deadline**: 
 
-* ` Viewd class Hw`
-
-**View tasks without deadline**: `View task`
+`listd [DEADLINE]`
 
 Example:
-* `View Dinner`
 
-**View task to be completed by deadline** :`View task by date`
+* `listd 3 March`
 
-Example:
-* ` View class HW by 5 Mar`
+**View events within a time frame, or with no time frame specified** : 
 
-**View list of event in time frame** :` View event [start time] to [End time]`
+`liste [START_DATE START_TIME to END_DATE END TIME]`
 
 Example:
-* `View Boss meeting 17:00 to 18:00`
+* `liste today 17:00 to tomorrow 18:00`
 
+**View overdue task** : 
 
-**View overdue task** : `View over`
+`listo`
 
+**View completed task and events in the expired list**: 
 
-**View last action** : `View last`
+`listc`
 
+### 3.4 Viewing other material: `view`
 
-**View completed task**: `View done`
+**View command history**: 
 
+`view history`
 
-**View history**: `view history`
+**View the calendar**: 
 
-**View the calendar**: `view calendar`
+`view calendar`
 
-**View freetime** : `view free [daily/weekly/monthly]`
+**View free time during the day/week/month** : 
 
+`view free day | week | month`
 
+### 3.5 Updating a field of a task/event in the active list : `edit`
+> User can edit the fields of the tasks and events in the active list by using their indexes specified in the most recent list. The steps are therefore as follows:
 
+1. Use `list` command
+2. Using the index, call `edit INDEX etc.`
 
+**Updating the fields**:
 
-### 3.3. Update : `Update`
+`edit INDEX FIELD_NAME NEW_VALUE`
 
-**Update by name**: `Update task/event name [New name]`
+e.g.
 
-**Update by description**: `Update task/event desc [Description]`
-
-**Update Event by location**: `Update event location [Location]`
-
-**Update Event by time**: `Update event time [Time]`
-
-**Update task by priority**:` Update task Priority [1...10]`
-
-**Update task by deadline** :` Update task Deadline [New Date]`
-
+`edit 1 priority 3`, assuming that the item with index 1 is a task.
 
 ### 3.4 Sorting : `Sort`
 
 **Sort tasks** : `Sort taskname By Name/Priority/deadline`
 
 **Sort events**: `Sort Eventname By Name/Start date`
-
-
-
 
 ### 3.5. Finding event or task by keyword: `find`
 
