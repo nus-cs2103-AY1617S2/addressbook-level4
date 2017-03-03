@@ -229,8 +229,10 @@ Examples:
 
 ### 2.11. Clearing all entries : `clear`
 
-Clears all entries from the address book.<br>
+Clears all tasks from Dueue.<br>
 Format: `clear`
+
+> * User will be asked to confirm before clearing everything.
 
 ### 2.12. Exiting the program : `exit`
 
@@ -239,14 +241,14 @@ Format: `exit`
 
 ### 2.13. Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data.<br>
+Dueue data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
 ## 3. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
-       the file that contains the data of your previous Address Book folder.
+       the file that contains the data of your previous Dueue folder.
 
 ## 4. Command Summary
 
