@@ -11,11 +11,9 @@ public class DescriptionTest {
 
     @Test
     public void isValidDescription() {
-        // invalid descriptions
-        assertFalse(Description.isValidDescription("")); // empty string
-        assertFalse(Description.isValidDescription(" ")); // spaces only
-
         // valid descriptions
+    	assertTrue(Description.isValidDescription("")); // empty string
+        assertTrue(Description.isValidDescription(" ")); // spaces only
         assertTrue(Description.isValidDescription("Get the milk")); // Text only
         assertTrue(Description.isValidDescription("12345678")); // Numbers only
         assertTrue(Description.isValidDescription("ಠ_ಠ")); // Symbols only
