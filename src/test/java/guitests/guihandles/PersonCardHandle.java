@@ -16,7 +16,6 @@ import seedu.address.model.task.ReadOnlyPerson;
  */
 public class PersonCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
-    private static final String ADDRESS_FIELD_ID = "#address";
     private static final String PHONE_FIELD_ID = "#phone";
     private static final String EMAIL_FIELD_ID = "#email";
     private static final String TAGS_FIELD_ID = "#tags";
@@ -34,10 +33,6 @@ public class PersonCardHandle extends GuiHandle {
 
     public String getFullName() {
         return getTextFromLabel(NAME_FIELD_ID);
-    }
-
-    public String getAddress() {
-        return getTextFromLabel(ADDRESS_FIELD_ID);
     }
 
     public String getPhone() {
@@ -76,7 +71,6 @@ public class PersonCardHandle extends GuiHandle {
         return getFullName().equals(person.getName().fullName)
                 && getPhone().equals(person.getPhone().value)
                 && getEmail().equals(person.getEmail().value)
-                && getAddress().equals(person.getAddress().value)
                 && getTags().equals(getTags(person.getTags()));
     }
 
@@ -87,7 +81,6 @@ public class PersonCardHandle extends GuiHandle {
             return getFullName().equals(handle.getFullName())
                     && getPhone().equals(handle.getPhone())
                     && getEmail().equals(handle.getEmail())
-                    && getAddress().equals(handle.getAddress())
                     && getTags().equals(handle.getTags());
         }
         return super.equals(obj);
@@ -95,6 +88,6 @@ public class PersonCardHandle extends GuiHandle {
 
     @Override
     public String toString() {
-        return getFullName() + " " + getAddress();
+        return getFullName();
     }
 }
