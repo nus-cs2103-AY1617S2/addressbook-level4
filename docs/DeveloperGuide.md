@@ -357,39 +357,105 @@ Priority | As a ... | I want to ... | So that I can...
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Watoodoo` and the `Actor` is the **user**, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: add a new task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User requests to add a new task by specifying the name, date and time frame.
+2. System adds a new task.<br>
 Use case ends.
 
 **Extensions**
 
-2a. The list is empty
+2a. Task already exists
+>2a1. System informs user that task already exists and doesn’t add repeated task.
 
-> Use case ends
+>Use case ends
+ 
+2b. Invalid command format
+>2b1. System informs user that command format is invalid and outputs sample correct format to user.
 
-3a. The given index is invalid
+>Use case ends.
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+
+#### Use case: mark a task as complete
+
+**MSS**
+
+1. User requests to mark a task as complete.
+2. Watoodoo changes the status of the task as complete.<br>
+Use case ends
+
+**Extensions**
+
+1a. List is empty
+>1a1. System informs user that there is no task to list. 
+>
+>Use case ends.
+
+#### Use case: search for tasks by keywords
+
+1. User searches for one/more keyword(s).
+2. Watoodoo displays all tasks containing the keywords. <br> Use case ends
+
+**Extensions**
+
+1a. There is no task containing the keyword(s).
+> 1a1. System informs user that no tasks found. 
+> 
+> Use case ends.
+
+#### Use case: list out all tasks
+
+**MSS** 
+
+1. User requests list of tasks
+2. System displays list of tasks. <br>
+Use case ends.
+
+**Extensions**
+
+1a. List is empty
+>1a1. System informs user that there is no task to list. 
+>
+>Use case ends.
+
+#### Use case: remove a task
+
+**MSS**
+
+1. System display a list of tasks. 
+2. User input task index to specify which task to delete. 
+3. System notifies user that task has been successfully deleted.<br>Use case ends.
+
+**Extensions**
+
+2a. List is empty
+>2a1. System informs user that there is no task to delete. 
+>
+>Use case ends.
+
+2b. User input index is not valid
+>2b1. System informs user that the input index is not valid. 
+>
+>Use case ends.
+
 
 {More to be added}
 
 ## Appendix C : Non Functional Requirements
 
-1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
-   should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. The main interface should provide visual feedback whenever users enters a command.
+2. The application only handles type-in command, and commands it accepts should be systematically structured, while allowing some extent of flexibility.
+3. Task Manager works primarily offline.
+4. It should run with JRE7 or above, Windows 7 or above
+5. Should be able to handle exceptions from user input.
+6. Should work as a standalone application (exe).
+7. Should not use relational databases to store data.
 
-{More to be added}
+
 
 ## Appendix D : Glossary
 
