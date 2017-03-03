@@ -31,7 +31,7 @@ public class TaskListPanelHandle extends GuiHandle {
         super(guiRobot, primaryStage, TestApp.APP_TITLE);
     }
 
-    public List<ReadOnlyTask> getSelectedPersons() {
+    public List<ReadOnlyTask> getSelectedTasks() {
         ListView<ReadOnlyTask> personList = getListView();
         return personList.getSelectionModel().getSelectedItems();
     }
@@ -143,7 +143,7 @@ public class TaskListPanelHandle extends GuiHandle {
     /**
      * Gets a person from the list by index
      */
-    public ReadOnlyTask getPerson(int index) {
+    public ReadOnlyTask getTask(int index) {
         return getListView().getItems().get(index);
     }
 

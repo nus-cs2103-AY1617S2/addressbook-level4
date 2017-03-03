@@ -23,7 +23,7 @@ public class SampleDataTest extends EzDoGuiTest {
     }
 
     @Test
-    public void addressBook_dataFileDoesNotExist_loadSampleData() throws Exception {
+    public void ezDo_dataFileDoesNotExist_loadSampleData() throws Exception {
         Task[] expectedList = SampleDataUtil.getSampleTasks();
         assertTrue(taskListPanel.isListMatching(expectedList));
     }
