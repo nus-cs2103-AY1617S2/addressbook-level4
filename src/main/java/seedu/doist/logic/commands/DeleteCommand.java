@@ -41,12 +41,13 @@ public class DeleteCommand extends Command {
             if (lastShownList.size() < targetIndex) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
-
             ReadOnlyTask taskToDelete = lastShownList.get(targetIndex - 1);
             tasksToDelete.add(taskToDelete);
+        }
 
+        for (ReadOnlyTask task : tasksToDelete) {
             try {
-                model.deleteTask(taskToDelete);
+                model.deleteTask(task);
             } catch (TaskNotFoundException pnfe) {
                 assert false : "The target person cannot be missing";
             }
