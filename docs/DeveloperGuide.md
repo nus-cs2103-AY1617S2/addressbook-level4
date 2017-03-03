@@ -350,8 +350,9 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | add a new task | add task to manage all my to-do
 `* * *` | user | delete a task | remove entries that I no longer need
 `* * *` | user with many tasks | find a task by [keywords](#keyword) | search for specific task especially when the list is huge
-`* * *` | user | edit a task | edit a task if there is some changes
+`* * *` | user | edit a task | edit a task if there are any changes
 `* * *` | user | clear all tasks | quickly start using the tool from scratch
+`* * *` | user | close application | exit after use
 `* * *` | organized user | add tags to a task | orginaze them by tags
 `* * *` | user | add description to task | describe tasks in more detail
 `* * *` | user | view task description | view the task in details
@@ -359,11 +360,11 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | advance user | sort task by importance | prioritise which task to do first
 `* * *` | last minute user | sort tasks by most upcoming tasks | get myself prepared for more urgent tasks
 `* * *` | advance user | find tasks by tag | find tasks quickly that contains the specific tag
-`* * *` | advance user | set reminder to a task | be notified when tasks are approaching due [date](#date)
+`* * *` | advance user | set reminder to a task | be notified when tasks are approaching due date
 `* * *` | user | select folder to save data storage | specify a specific folder and file for data storage
 `* * *` | user | undo most recent action | undo action to rectify mistake
 `* *` | user | redo most recent action | redo action to rectify mistake
-`* *` | user | add task to nearest free slot automatically | addn task easily without browsing for free [time](#time)
+`* *` | user | add task to nearest free slot automatically | add task easily without browsing for free time
 `* *` | user with multiple recurring tasks | add recurring tasks | avoid adding similar task one by one
 `* *` | user with multiple recurring tasks | edit all instances of a recurring task | be more efficient when editing recurring tasks
 `* *` | advance user | filter tasks by multiple [keywords](#keyword) | search tasks by more specific criteria
@@ -372,20 +373,19 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | busy user | postpone task | defer uncompleted task to near future where I am free
 `* *` | advance user | select task and pin it at the top of display | quickly mark certain tasks as demanding of priority attention
 `* *` | existing google calander user | sync google calendar on create, update and delete tasks | exploit google calendar and sync with this task manager
-`* *` | user with heavy email usage | send email notification for upcoming tasks | remind me on tasks that are approaching due [date](#date)
-`* *` | user who prefer keyboard | open/close application via keyboard shortcut | quickly open or exit programe easily without mouse click
+`* *` | user with heavy email usage | send email notification for upcoming tasks | remind me on tasks that are approaching due date
+`* *` | user who prefer keyboard | open/close application via keyboard shortcut | quickly open or exit program easily without mouse click
 `* *` | advance user | remove all tasks with certain tag | quickly remove all tasks wih some similarity
 `*` | advance user | change all tag names in one go | quickly update all tasks with that tag name
 `*` | user with a many tasks | assign priorities to tasks | distinguish and pinpoint importance task immediately just by looking
 `*` | user | list overdue tasks | filter out overdue tasks to decide for further actions 
-`*` | user | remove tasks within certain range | easily specify [dates](#date) to remove tasks within that range.
+`*` | user | remove tasks within certain range | easily specify date to remove tasks within that range.
 `*` | user | list near future free slot | choose suitable free slot to add task
 
-{More to be added}
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `To Do List` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `task manager` and the **Actor** is the `user`, unless specified otherwise)
 
 #### Use case : Add task
 
@@ -397,7 +397,7 @@ Priority | As a ... | I want to ... | So that I can...
 **Extensions**
 
 2a. Task already exists
->2a1. System informs user that task already exists and doesn’t add repeat task.
+>2a1. System informs user that task already exists and doesn’t add repeated task.
 > Use case ends
 
 2b. Invalid command format
@@ -469,6 +469,38 @@ Priority | As a ... | I want to ... | So that I can...
 >2a1. System informs user that no tasks found
 >Use case ends
 
+#### Use case : List tasks
+
+**MSS**
+
+1. User requests list of tasks
+2. System displays list of tasks.<br>Use case ends
+
+**Extensions**
+
+1a. User requests to list task in a certain category
+>1a1. System displays list of tasks in that category
+>Use case ends
+
+2a. The list is empty
+>2a1. System displays empty list
+>Use case ends
+
+#### Use case : Done task
+
+**MSS**
+
+1. User requests list of tasks
+2. System displays list of tasks summaries
+3. User selects task to mark as done
+4. System shows user remaining tasks that are uncompleted
+
+**Extensions**
+
+3a. User task selection is invalid
+> 3a1. System shows error message
+Use case resumes from step 2
+
 
 #### Use case : Undo most recent action
 
@@ -487,53 +519,13 @@ Priority | As a ... | I want to ... | So that I can...
 >Use case ends
 
 
-#### Use case : List tasks
-
-**MSS**
-
-1. User requests list of tasks
-2. System displays list of tasks.<br>Use case ends
-
-**Extensions**
-
-1a. User requests pending tasks 
->1a1. System displays list of pending tasks
->Use case ends
-
-1b. User requests completed tasks
->1b1. System displays list of completed tasks
->Use case ends
-
-2a. The list is empty
->2a1. System displays empty list
->Use case ends
-
-
-#### Use case : View task description
-
-**MSS**
-
-1. System display a list of tasks to user.
-2. User input index to specify task to view its description
-3. System display the description of that task.<br>Use case ends
-
-**Extensions**
-
-1a. Incorrect input of specific task
->1a1. System notify user the error
->System resume at 2.
-
-
-
-{More to be added}
-
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os).
 2. Should be able to store up to 500 tasks.
 3. Should work in online or offline mode.
-4. Should respond to commands within 2s.
-5. Programme should startup within 3s.
+4. Should respond to commands within 2 seconds.
+5. Programme should startup within 3 seconds.
 6. Programme should be open source code and readily available.
 7. Should have an easy to use interface.
 8. Should be able to handle exceptions from user input.
@@ -544,8 +536,6 @@ Priority | As a ... | I want to ... | So that I can...
 13. Should not violate any copyrights.
 14. Should not contain obscene or inappropriate content.
 
-{More to be added}
-
 ## Appendix D : Glossary
 
 ##### Mainstream OS
@@ -555,13 +545,6 @@ Priority | As a ... | I want to ... | So that I can...
 ##### Keyword
 > Words in task names, tag names, and task description
 
-##### Block time slots
-
-> Block time slots is able to be deleted like normal task
-
-##### Free time slots
-
-> Free time slots allow tasks to be added
 
 ##### Invalid Commands
 
@@ -571,29 +554,29 @@ Priority | As a ... | I want to ... | So that I can...
 
 > Error message includes suggestion for correct command
 
-##### DATE
+##### START_DATE
+> START_DATE refers to start date and time entered
+> Defaults to time of 0000 hrs if no time is indicated
 
-> Date is in DD mm format e.g. 29 sep
-
-##### TIME
-
-> Time is in 12 hours format 12pm, 7am
-
-##### Deadline task
-
-> Tasks that have a specific deadline
-
-##### Floating task
-
-> Tasks that do not have a specific deadline
+##### END_DATE
+> END_DATE refers to end of date and time entered
+> Defaults to time of 2359 hrs if no time is indicated 
 
 ##### Event task
 
-> Tasks that have a specific timeslot. i.e. Meeting from 1pm to 2pm.
+> Tasks that have a specific start and end date
+
+##### Deadline
+
+> Tasks that only have a specific end date
+
+##### To-Do
+
+> Tasks that have no start or end date
 
 ##### Category
 
-> User-defined tags used to categorise tasks
+> One of Event, Deadline or To-do. 
 
 ## Appendix E : Product Survey
 
@@ -636,6 +619,7 @@ Cons:
 * Have to be online to access calendar.
 * No command line interface.
 * Updates may take a while to sync due to network issues.
+
 
 **[Wunderlist](https://www.wunderlist.com/)**
 

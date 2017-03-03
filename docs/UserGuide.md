@@ -41,6 +41,19 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 > * Items with `...` after them can have multiple instances.
 > * Parameters can be in any order.
 
+> **Common Options**
+> * `PREFIX_INDEX`
+> -- Refers to the index number shown in the most recent listing.
+> -- Comprises of a category prefix (`e`, `d`, or `t`, for `Event`, `Deadline` and `To-Do` categories) and category index (a positive integer, e.g. `1`, `2`, `3`..)
+> 
+> * `START_DATE`
+> -- Represents start date and time entered
+> -- Defaults to time of 0000 hrs if no time is indicated
+>
+> * `END_DATE`
+> -- Represents end date and time entered
+> -- Defaults to time of 2359 hrs if no time is indicated 
+
 ### 2.1. Viewing help : `help`
 
 Format: `help`
@@ -50,40 +63,40 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Adds a task to the task manager<br>
-Format: `add TASK_NAME [s/START_DATE] [e/END_DATE] [d/DESCRIPTION] [p/PRIORITY_LEVEL] [t/TAG]...` <br>
+Format: `add NAME [s/START_DATE] [e/END_DATE] [t/TAG]...` <br>
 
-> Task can have any number of tags (including 0)
+> * Task can have any number of tags
+> * Tasks cannot have `START_DATE` without `END_DATE`
+> * A Task with both `START_DATE` and `END_DATE` is an `Event`
+> * A Task with only `END_DATE` is a `Deadline`
+> * A Task with no `START_DATE` and no `END_DATE` is a `To-Do`
 
 Examples:
 
-* `add Complete assignment s/13 Mar 2017 e/15 Mar 2017 p/3 t/2103 t/work`
+* `add Exercise s/tomorrow 0900 e/tomorrow 1330 t/workout t/daily t/habits`
 
 ### 2.3. Deleting a task : `delete`
 
-Deletes the specified task from the task manager. Irreversible.<br>
-Format: `delete INDEX`
+Deletes the specified task from the task manager.<br>
+Format: `delete PREFIX_INDEX`
 
-> Deletes the task at the specified `INDEX`. <br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+>* Deletes the task at the specified `PREFIX_INDEX`. <br>
 
 Examples:
 
 * `list`<br>
-  `delete 2`<br>
-  Deletes the 2nd task in the task manager.
+  `delete e2`<br>
+  Deletes the 2nd task under `EVENT` category in the task manager.
 * `find Assignment`<br>
-  `delete 1`<br>
-  Deletes the 1st task in the results of the `find` command.
+  `delete t1`<br>
+  Deletes the 1st task under `To-Do` category in the task manager.
 
 ### 2.4. Editing a task : `edit`
 
 Edits an existing task in the task manager.<br>
-Format: `edit INDEX [TASK_NAME] [s/START_DATE] [d/END_DATE] [d/DESCRIPTION] [p/PRIORITY_LEVEL] [t/TAG]...`
+Format: `edit PREFIX_INDEX [TASK_NAME] [s/START_DATE] [e/END_DATE] [t/TAG]...`
 
-> * Edits the task at the specified `INDEX`.
-    The index refers to the index number shown in the last task listing.<br>
-    The index **must be a positive integer** 1, 2, 3, ...
+> * Edits the task at the specified `PREFIX_INDEX`.
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
 > * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
@@ -91,64 +104,94 @@ Format: `edit INDEX [TASK_NAME] [s/START_DATE] [d/END_DATE] [d/DESCRIPTION] [p/P
 
 Examples:
 
-* `edit 1 p/2 t/`<br>
-  Edits the priority level of task to be 2 and remove all its tags.
+* `edit d1 t/`<br>
+  Edits the 1st task in `DEADLINE` category to remove all its tags.
 
-* `edit 2 e/16 Dec 2017 t/project t/2103 `<br>
-  Edits the end date of task to 16 Dec 2017 and update tags to "project" and "2103".
+* `edit t2 e/16 Dec 2017 t/project t/2103 `<br>
+  Edits the 2nd task in `To-Do` category to update `END_DATE` of task to 16 Dec 2017 and update tags to "project" and "2103".
 
-### 2.5. Finding all tasks containing any keyword in their name or tags: `find`
 
-Find tasks whose names or tags contain any of the given keywords.<br>
+### 2.5. Delete all tasks: `Clear`
+Delete all tasks in the to-do list.<br>
+Format: `clear`
+
+### 2.6. Finding all tasks containing a keyword in their name or tag: `find`
+
+Find tasks which have names and/or tags containing any of the given keywords.<br>
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-> * The search is case sensitive. e.g `work` will not match `Work`
+> * The search is case-insensitive. e.g `work` will match `Work`
 > * The order of the keywords does not matter. e.g. `project work` will match `work project`
-> * Only the name and tags are searched.
+> * Only the name and/or tag are searched.
 > * Only full words will be matched e.g. `Han` will not match `Hans`
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `Project` will match `Project Work`
 
 Examples:
 
-* `find Assignment`<br>
-  Returns `Assignment` but not `assignment`
 * `find Project Tutorial Assignment`<br>
-  Returns Any task having names `Project`, `Tutorial`, or `Assignment`
+  Returns Any task having names or tags containing `Project`, `Tutorial`, or `Assignment`
 
-### 2.6. Listing all tasks : `list`
+
+### 2.7. Listing all tasks : `list`
 
 Shows a list of all tasks in the task manager.<br>
-Format: `list [e/END_DATE]`
+Format: `list CATEGORY`
 
-> * If no end date is given, all task will be listed out.
-> 
+> * If no input is given, all uncompleted tasks will be listed out.
+> * `CATEGORY` can represent `END_DATE`, `TAG`, or natural language categories like `completed` or `uncompleted`.
+
 Examples:
 
 * `list`<br>
-  List all tasks.
+  List all uncompleted tasks.
 
-* `list e/03 Mar 2017`<br>
-  List out all the tasks that have specified end date.
+* `list 03 Mar 2017`<br>
+  List out all the tasks that has specified `END_DATE` in `DEADLINE` category and has date that falls within `EVENT` category.
 
+### 2.8. Marking a task as completed: `done`
+Marks a task as completed.<br>
+Format: `done PREFIX_INDEX`
+> * Marks a task at the specified PREFIX_INDEX as done
 
-### 2.7. View description : `view`
-
-Exits the program.<br>
-Format: `view INDEX`
 
 Examples:
 
-* `view 2`<br>
-  View the 2nd task's description.
+* `done e1`<br>
+  Mark event 1 as completed.
 
-### 2.8. Saving the data
+### 2.9. Marking a task as uncompleted: `undone`
+Marks a task as uncompleted.<br>
+Format: `undone PREFIX_INDEX`
+> * Marks a task at the specified PREFIX_INDEX as not done
 
-Task manager data are saved in the hard disk automatically after any command that changes the data.<br>
-There is no need to save manually.
+Examples:
 
+* `undone e1`<br>
+  Mark event 1 as uncompleted.
 
-### 2.9. Exiting the program : `exit`
+### 2.10. Undoing actions: `undo`
+Undo actions taken previously.<br>
+Format: `undo`
+
+### 2.11. Redoing actions: `redo`
+Redo actions undone previously.<br>
+Format: `redo`
+
+### 2.12. Saving the data: `save`
+
+By default, to-do list data are saved in a file called `todo.txt` in the data folder. You can 
+change the file location by provideing a new file name as the parameter.
+Note that changes made to the to-do list is automatically saved. You do not need to manually save it each time. 
+
+Format: `save NEW_FILE_NAME`
+
+Examples:
+
+* `save newFile.txt`<br>
+  Save the to-do list in a new file entitled newFile.txt. 
+
+### 2.13. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
@@ -162,32 +205,41 @@ Format: `exit`
 ## 4. Command Summary
 
 * **Help**  `help` <br>
-  
-* **Add**  `add NAME [s/START_DATE] [e/END_DATE] [d/DESCRIPTION] [p/PRIORITY_LEVEL] [t/TAG]...` <br>
-  
-  e.g. `add Complete Assignment  e/02 Feb 2017 p/1 t/CS2103T`
 
-* **Delete** : `delete INDEX` <br>
-   e.g. `delete 1`
 
- * **Edit**  `edit INDEX [TASK_NAME] [s/START_DATE] [e/END_DATE] [d/DESCRIPTION] [p/PRIORITY_LEVEL] [t/TAG]...` <br>
+* **Add**  `add NAME [s/START_DATE] [e/END_DATE] [t/TAG]...` <br>
   
-    e.g. `edit 1 d/bring pen and paper p/3`
+  e.g. `add Complete Assignment  e/02 Feb 2017 t/CS2103T`
 
- * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
-  e.g. find Assignment Meeting Tutorial
+
+* **Delete** : `delete PREFIX_INDEX` <br>
+   e.g. `delete e2`
+
+
+* **Edit**  `edit PREFIX_INDEX [NAME] [s/START_DATE] [e/END_DATE] [t/TAG]...`<br>
+  
+    e.g. `edit d1 e/31 Dec 2017`
+
+* **Clear** : `clear` <br>
+
+* **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
+  e.g. `find Assignment Meeting Tutorial`
+
+
+* **List** : `list CATEGORY` <br>
+  e.g. `list 31 Dec 2017`
+
+
+* **Done** : `done RPEFIX_INDEX` <br>
+  e.g. `done d2`
+  
+* **Undone** : `undone RPEFIX_INDEX` <br>
+  e.g. `undone t3`
 
 * **Undo** : `undo` <br>
 
-* **List** : `list` <br>
+* **Redo** : `redo` <br>
 
-* **List** : `list [e/END_DATE]` <br>
-  e.g. list 31 Dec 2017
+* **Save** : `save` <br>
 
-* **View Description** : `view INDEX` <br>
-   e.g. `view 1`
-  
 * **Exit** : `exit` <br>
-
-
-
