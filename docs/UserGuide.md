@@ -90,17 +90,17 @@ Format: `list lists`
 
 Examples:
 
-* `list`
+* `list`<br>
   Lists all unfinished tasks
-* `list finished`
+* `list finished`<br>
   Lists all finished tasks
-* `list all`
+* `list all`<br>
   Lists all unfinished and finished tasks
-* `list work`
+* `list work`<br>
   List all unfinished tasks in list `work`
-* `list study favourite`
+* `list study favourite`<br>
   List all favourite tasks in list `study`
-* `list lists`
+* `list lists`<br>
   List all listname with list indices
 
 ### 2.4. Creating a list : `create`
@@ -128,9 +128,9 @@ Format: `update list LISTINDEX NEW_LISTNAME`
 
 Examples:
 
-* `update list school newSchool`
+* `update list school newSchool`<br>
   Update the name of list `school` to `newSchool`
-* `update list oldList newList`
+* `update list oldList newList`<br>
   Update the name of list `oldList` to `newList`
 
 ### 2.6. Updating task(s) : `update`
@@ -197,7 +197,7 @@ Finishes the specified task(s) from Dueue.<br>
 Format: `finish TASKINDEX...`
 
 > * Marks the task(s) as finished.<br>
-> * To finish multiple entries, indices must be seperated by whitespaces.
+> * To finish multiple entries, indices must be seperated by whitespaces.<br>
 > * When a repeated task is deleted, user will be asked to confirm whether it should be deleted for once or deleted forever (stop repeating).
 
 Examples:
@@ -232,11 +232,15 @@ There is no need to save manually.
   e.g. `add n/laundry due/every sunday #personal d/wash clothes @B1 p/IMPORTANT *f`
 
 * **Clear** : `clear`
+  e.g. `clear`
 
 * **Delete** : `delete TASKINDEX` <br>
    e.g. `delete 3`
 
-* **List** : `list [lists/LISTINDEX/LISTNAME] [favorite]` <br>
+* **Finish** : `finish TASKINDEX` <br>
+   e.g. `finish 5`
+
+* **List** : `list [lists/LISTINDEX/LISTNAME/finished/all] [favorite]` <br>
   e.g. `list work favorite`
 
 * **Help** : `help` <br>
