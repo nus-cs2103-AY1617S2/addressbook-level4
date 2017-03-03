@@ -37,6 +37,3 @@ public abstract class Command {
         this.model = model;
     } 
 }
-
-
-

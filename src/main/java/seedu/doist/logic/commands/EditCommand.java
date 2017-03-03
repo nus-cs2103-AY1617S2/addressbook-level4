@@ -22,9 +22,8 @@ public class EditCommand extends Command {
     public static ArrayList<String> commandWords = new ArrayList<>(Arrays.asList("edit"));
     public static final String DEFAULT_COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = getUsageTextForCommandWords() 
-            + ": Edits the details of the person identified "
-            + "by the index number used in the last person listing. "
+    public static final String MESSAGE_USAGE = getUsageTextForCommandWords()
+            + ": Edits the details of the person identified " + "by the index number used in the last person listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS ] [t/TAG]...\n"
             + "Example: " + DEFAULT_COMMAND_WORD + " 1 p/91234567 e/johndoe@yahoo.com";
@@ -37,8 +36,10 @@ public class EditCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param filteredPersonListIndex the index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param filteredPersonListIndex
+     *            the index of the person in the filtered person list to edit
+     * @param editPersonDescriptor
+     *            details to edit the person with
      */
     public EditCommand(int filteredPersonListIndex, EditPersonDescriptor editPersonDescriptor) {
         assert filteredPersonListIndex > 0;
@@ -71,11 +72,10 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Person} with the details of
+     * {@code personToEdit} edited with {@code editPersonDescriptor}.
      */
-    private static Task createEditedPerson(ReadOnlyTask personToEdit,
-                                             EditPersonDescriptor editPersonDescriptor) {
+    private static Task createEditedPerson(ReadOnlyTask personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
         Description updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getDescription);
@@ -85,14 +85,15 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the person with. Each non-empty field value
+     * will replace the corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
         private Optional<Description> name = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
-        public EditPersonDescriptor() {}
+        public EditPersonDescriptor() {
+        }
 
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             this.name = toCopy.getName();
@@ -124,9 +125,10 @@ public class EditCommand extends Command {
             return tags;
         }
     }
-    
+
     /**
-     * @return a string containing all the command words to be shown in the usage message, in the format of (word1|word2|...)
+     * @return a string containing all the command words to be shown in the
+     *         usage message, in the format of (word1|word2|...)
      */
     protected static String getUsageTextForCommandWords() {
         StringBuilder sb = new StringBuilder();
@@ -134,13 +136,13 @@ public class EditCommand extends Command {
         if (!commandWords.contains(DEFAULT_COMMAND_WORD)) {
             sb.append(DEFAULT_COMMAND_WORD + "|");
         }
-        for (String commandWord: commandWords) {
+        for (String commandWord : commandWords) {
             sb.append(commandWord + "|");
         }
         sb.setCharAt(sb.length() - 1, ')');
         return sb.toString();
     }
-    
+
     public static boolean canCommandBeTriggeredByWord(String word) {
         return commandWords.contains(word) || DEFAULT_COMMAND_WORD.equals(word);
     }

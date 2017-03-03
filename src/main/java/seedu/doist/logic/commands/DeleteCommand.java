@@ -66,7 +66,7 @@ public class DeleteCommand extends Command {
         sb.setCharAt(sb.length() - 1, ')');
         return sb.toString();
     }
-    
+
     public static boolean canCommandBeTriggeredByWord(String word) {
         return commandWords.contains(word) || DEFAULT_COMMAND_WORD.equals(word);
     }
