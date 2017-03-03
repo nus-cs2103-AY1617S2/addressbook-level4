@@ -302,4 +302,4 @@ e.g.`select 2`
 e.g. `storage C:\user\docs\taskmanager.txt`
 
 * **Undo** : `undo`
-e.g.
+e.g. 'undo'
