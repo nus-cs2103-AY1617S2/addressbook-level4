@@ -51,7 +51,6 @@ public class ParserUtil {
         for (String component : commandStringComponents) {
             indices.add(parseIndex(component));
         }
-        System.out.println(indices);
         return indices;
     }
 
