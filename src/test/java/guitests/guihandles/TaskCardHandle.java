@@ -12,7 +12,7 @@ import seedu.ezdo.model.tag.UniqueTagList;
 import seedu.ezdo.model.todo.ReadOnlyTask;
 
 /**
- * Provides a handle to a person card in the person list panel.
+ * Provides a handle to a task card in the task list panel.
  */
 public class TaskCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
@@ -72,12 +72,12 @@ public class TaskCardHandle extends GuiHandle {
         return guiRobot.from(node).lookup(TAGS_FIELD_ID).query();
     }
 
-    public boolean isSamePerson(ReadOnlyTask person) {
-        return getFullName().equals(person.getName().fullName)
-                && getPhone().equals(person.getPhone().value)
-                && getEmail().equals(person.getEmail().value)
-                && getAddress().equals(person.getAddress().value)
-                && getTags().equals(getTags(person.getTags()));
+    public boolean isSameTask(ReadOnlyTask task) {
+        return getFullName().equals(task.getName().fullName)
+                && getPhone().equals(task.getPhone().value)
+                && getEmail().equals(task.getEmail().value)
+                && getAddress().equals(task.getAddress().value)
+                && getTags().equals(getTags(task.getTags()));
     }
 
     @Override
