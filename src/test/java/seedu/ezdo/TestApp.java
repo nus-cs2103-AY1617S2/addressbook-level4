@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 import seedu.ezdo.MainApp;
 import seedu.ezdo.commons.core.Config;
 import seedu.ezdo.commons.core.GuiSettings;
-import seedu.ezdo.model.ReadOnlyAddressBook;
+import seedu.ezdo.model.ReadOnlyEzDo;
 import seedu.ezdo.model.UserPrefs;
 import seedu.ezdo.storage.XmlSerializableAddressBook;
 import seedu.ezdo.testutil.TestUtil;
@@ -23,13 +23,13 @@ public class TestApp extends MainApp {
             TestUtil.getFilePathInSandboxFolder("pref_testing.json");
     public static final String APP_TITLE = "Test App";
     protected static final String ADDRESS_BOOK_NAME = "Test";
-    protected Supplier<ReadOnlyAddressBook> initialDataSupplier = () -> null;
+    protected Supplier<ReadOnlyEzDo> initialDataSupplier = () -> null;
     protected String saveFileLocation = SAVE_LOCATION_FOR_TESTING;
 
     public TestApp() {
     }
 
-    public TestApp(Supplier<ReadOnlyAddressBook> initialDataSupplier, String saveFileLocation) {
+    public TestApp(Supplier<ReadOnlyEzDo> initialDataSupplier, String saveFileLocation) {
         super();
         this.initialDataSupplier = initialDataSupplier;
         this.saveFileLocation = saveFileLocation;

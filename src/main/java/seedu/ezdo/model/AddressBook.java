@@ -21,7 +21,7 @@ import seedu.ezdo.model.todo.UniquePersonList.DuplicatePersonException;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .equals comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class AddressBook implements ReadOnlyEzDo {
 
     private final UniquePersonList persons;
     private final UniqueTagList tags;
@@ -43,7 +43,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Creates an AddressBook using the Persons and Tags in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public AddressBook(ReadOnlyEzDo toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -59,10 +59,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.tags.setTags(tags);
     }
 
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyEzDo newData) {
         assert newData != null;
         try {
-            setPersons(newData.getPersonList());
+            setPersons(newData.getTaskList());
         } catch (UniquePersonList.DuplicatePersonException e) {
             assert false : "AddressBooks should not have duplicate persons";
         }
@@ -162,7 +162,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<ReadOnlyPerson> getPersonList() {
+    public ObservableList<ReadOnlyPerson> getTaskList() {
         return new UnmodifiableObservableList<>(persons.asObservableList());
     }
 

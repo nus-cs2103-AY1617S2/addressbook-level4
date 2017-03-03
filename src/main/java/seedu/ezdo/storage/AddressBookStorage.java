@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 import seedu.ezdo.commons.exceptions.DataConversionException;
-import seedu.ezdo.model.ReadOnlyAddressBook;
+import seedu.ezdo.model.ReadOnlyEzDo;
 
 /**
  * Represents a storage for {@link seedu.ezdo.model.AddressBook}.
@@ -17,28 +17,28 @@ public interface AddressBookStorage {
     String getAddressBookFilePath();
 
     /**
-     * Returns AddressBook data as a {@link ReadOnlyAddressBook}.
+     * Returns AddressBook data as a {@link ReadOnlyEzDo}.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyEzDo> readAddressBook() throws DataConversionException, IOException;
 
     /**
      * @see #getAddressBookFilePath()
      */
-    Optional<ReadOnlyAddressBook> readAddressBook(String filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyEzDo> readAddressBook(String filePath) throws DataConversionException, IOException;
 
     /**
-     * Saves the given {@link ReadOnlyAddressBook} to the storage.
+     * Saves the given {@link ReadOnlyEzDo} to the storage.
      * @param addressBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    void saveAddressBook(ReadOnlyEzDo addressBook) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlyAddressBook)
+     * @see #saveAddressBook(ReadOnlyEzDo)
      */
-    void saveAddressBook(ReadOnlyAddressBook addressBook, String filePath) throws IOException;
+    void saveAddressBook(ReadOnlyEzDo addressBook, String filePath) throws IOException;
 
 }

@@ -8,13 +8,13 @@ import seedu.ezdo.model.todo.ReadOnlyPerson;
 /**
  * Unmodifiable view of an address book
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyEzDo {
 
     /**
      * Returns an unmodifiable view of the persons list.
      * This list will not contain any duplicate persons.
      */
-    ObservableList<ReadOnlyPerson> getPersonList();
+    ObservableList<ReadOnlyPerson> getTaskList();
 
     /**
      * Returns an unmodifiable view of the tags list.

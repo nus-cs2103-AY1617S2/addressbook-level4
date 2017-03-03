@@ -21,7 +21,7 @@ import org.junit.rules.TemporaryFolder;
 import com.google.common.eventbus.Subscribe;
 
 import seedu.ezdo.commons.core.EventsCenter;
-import seedu.ezdo.commons.events.model.AddressBookChangedEvent;
+import seedu.ezdo.commons.events.model.EzDoChangedEvent;
 import seedu.ezdo.commons.events.ui.JumpToListRequestEvent;
 import seedu.ezdo.commons.events.ui.ShowHelpRequestEvent;
 import seedu.ezdo.logic.Logic;
@@ -40,7 +40,7 @@ import seedu.ezdo.logic.commands.exceptions.CommandException;
 import seedu.ezdo.model.AddressBook;
 import seedu.ezdo.model.Model;
 import seedu.ezdo.model.ModelManager;
-import seedu.ezdo.model.ReadOnlyAddressBook;
+import seedu.ezdo.model.ReadOnlyEzDo;
 import seedu.ezdo.model.tag.Tag;
 import seedu.ezdo.model.tag.UniqueTagList;
 import seedu.ezdo.model.todo.Address;
@@ -64,12 +64,12 @@ public class LogicManagerTest {
     private Logic logic;
 
     //These are for checking the correctness of the events raised
-    private ReadOnlyAddressBook latestSavedAddressBook;
+    private ReadOnlyEzDo latestSavedAddressBook;
     private boolean helpShown;
     private int targetedJumpIndex;
 
     @Subscribe
-    private void handleLocalModelChangedEvent(AddressBookChangedEvent abce) {
+    private void handleLocalModelChangedEvent(EzDoChangedEvent abce) {
         latestSavedAddressBook = new AddressBook(abce.data);
     }
 
@@ -110,10 +110,10 @@ public class LogicManagerTest {
     /**
      * Executes the command, confirms that a CommandException is not thrown and that the result message is correct.
      * Also confirms that both the 'address book' and the 'last shown list' are as specified.
-     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyAddressBook, List)
+     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyEzDo, List)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
-                                      ReadOnlyAddressBook expectedAddressBook,
+                                      ReadOnlyEzDo expectedAddressBook,
                                       List<? extends ReadOnlyPerson> expectedShownList) {
         assertCommandBehavior(false, inputCommand, expectedMessage, expectedAddressBook, expectedShownList);
     }
@@ -121,7 +121,7 @@ public class LogicManagerTest {
     /**
      * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
      * Both the 'address book' and the 'last shown list' are verified to be unchanged.
-     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyAddressBook, List)
+     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyEzDo, List)
      */
     private void assertCommandFailure(String inputCommand, String expectedMessage) {
         AddressBook expectedAddressBook = new AddressBook(model.getAddressBook());
@@ -138,7 +138,7 @@ public class LogicManagerTest {
      *      - {@code expectedAddressBook} was saved to the storage file. <br>
      */
     private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand, String expectedMessage,
-                                       ReadOnlyAddressBook expectedAddressBook,
+                                       ReadOnlyEzDo expectedAddressBook,
                                        List<? extends ReadOnlyPerson> expectedShownList) {
 
         try {
@@ -221,7 +221,7 @@ public class LogicManagerTest {
         assertCommandSuccess(helper.generateAddCommand(toBeAdded),
                 String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
                 expectedAB,
-                expectedAB.getPersonList());
+                expectedAB.getTaskList());
 
     }
 
@@ -245,7 +245,7 @@ public class LogicManagerTest {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
         AddressBook expectedAB = helper.generateAddressBook(2);
-        List<? extends ReadOnlyPerson> expectedList = expectedAB.getPersonList();
+        List<? extends ReadOnlyPerson> expectedList = expectedAB.getTaskList();
 
         // prepare address book state
         helper.addToModel(model, 2);
@@ -314,7 +314,7 @@ public class LogicManagerTest {
         assertCommandSuccess("select 2",
                 String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, 2),
                 expectedAB,
-                expectedAB.getPersonList());
+                expectedAB.getTaskList());
         assertEquals(1, targetedJumpIndex);
         assertEquals(model.getFilteredPersonList().get(1), threePersons.get(1));
     }
@@ -343,7 +343,7 @@ public class LogicManagerTest {
         assertCommandSuccess("delete 2",
                 String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, threePersons.get(1)),
                 expectedAB,
-                expectedAB.getPersonList());
+                expectedAB.getTaskList());
     }
 
 

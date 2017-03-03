@@ -23,7 +23,7 @@ import seedu.ezdo.logic.LogicManager;
 import seedu.ezdo.model.AddressBook;
 import seedu.ezdo.model.Model;
 import seedu.ezdo.model.ModelManager;
-import seedu.ezdo.model.ReadOnlyAddressBook;
+import seedu.ezdo.model.ReadOnlyEzDo;
 import seedu.ezdo.model.UserPrefs;
 import seedu.ezdo.model.util.SampleDataUtil;
 import seedu.ezdo.storage.Storage;
@@ -74,8 +74,8 @@ public class MainApp extends Application {
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyEzDo> addressBookOptional;
+        ReadOnlyEzDo initialData;
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {

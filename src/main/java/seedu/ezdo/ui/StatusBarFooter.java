@@ -11,7 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.ezdo.commons.core.LogsCenter;
-import seedu.ezdo.commons.events.model.AddressBookChangedEvent;
+import seedu.ezdo.commons.events.model.EzDoChangedEvent;
 import seedu.ezdo.commons.util.FxViewUtil;
 
 /**
@@ -49,7 +49,7 @@ public class StatusBarFooter extends UiPart<Region> {
     }
 
     @Subscribe
-    public void handleAddressBookChangedEvent(AddressBookChangedEvent abce) {
+    public void handleAddressBookChangedEvent(EzDoChangedEvent abce) {
         String lastUpdated = (new Date()).toString();
         logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
         setSyncStatus("Last Updated: " + lastUpdated);

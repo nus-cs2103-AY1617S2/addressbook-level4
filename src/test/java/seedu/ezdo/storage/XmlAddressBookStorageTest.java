@@ -14,7 +14,7 @@ import org.junit.rules.TemporaryFolder;
 import seedu.ezdo.commons.exceptions.DataConversionException;
 import seedu.ezdo.commons.util.FileUtil;
 import seedu.ezdo.model.AddressBook;
-import seedu.ezdo.model.ReadOnlyAddressBook;
+import seedu.ezdo.model.ReadOnlyEzDo;
 import seedu.ezdo.model.todo.Person;
 import seedu.ezdo.storage.XmlAddressBookStorage;
 import seedu.ezdo.testutil.TypicalTestPersons;
@@ -34,7 +34,7 @@ public class XmlAddressBookStorageTest {
         readAddressBook(null);
     }
 
-    private java.util.Optional<ReadOnlyAddressBook> readAddressBook(String filePath) throws Exception {
+    private java.util.Optional<ReadOnlyEzDo> readAddressBook(String filePath) throws Exception {
         return new XmlAddressBookStorage(filePath).readAddressBook(addToTestDataPathIfNotNull(filePath));
     }
 
@@ -69,7 +69,7 @@ public class XmlAddressBookStorageTest {
 
         //Save in new file and read back
         xmlAddressBookStorage.saveAddressBook(original, filePath);
-        ReadOnlyAddressBook readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
+        ReadOnlyEzDo readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
         assertEquals(original, new AddressBook(readBack));
 
         //Modify data, overwrite exiting file, and read back
@@ -93,7 +93,7 @@ public class XmlAddressBookStorageTest {
         saveAddressBook(null, "SomeFile.xml");
     }
 
-    private void saveAddressBook(ReadOnlyAddressBook addressBook, String filePath) throws IOException {
+    private void saveAddressBook(ReadOnlyEzDo addressBook, String filePath) throws IOException {
         new XmlAddressBookStorage(filePath).saveAddressBook(addressBook, addToTestDataPathIfNotNull(filePath));
     }
 

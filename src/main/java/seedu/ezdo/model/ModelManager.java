@@ -7,7 +7,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.ezdo.commons.core.ComponentManager;
 import seedu.ezdo.commons.core.LogsCenter;
 import seedu.ezdo.commons.core.UnmodifiableObservableList;
-import seedu.ezdo.commons.events.model.AddressBookChangedEvent;
+import seedu.ezdo.commons.events.model.EzDoChangedEvent;
 import seedu.ezdo.commons.util.CollectionUtil;
 import seedu.ezdo.commons.util.StringUtil;
 import seedu.ezdo.model.todo.Person;
@@ -28,14 +28,14 @@ public class ModelManager extends ComponentManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyEzDo addressBook, UserPrefs userPrefs) {
         super();
         assert !CollectionUtil.isAnyNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPersons = new FilteredList<>(this.addressBook.getTaskList());
     }
 
     public ModelManager() {
@@ -43,19 +43,19 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyEzDo newData) {
         addressBook.resetData(newData);
         indicateAddressBookChanged();
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
+    public ReadOnlyEzDo getAddressBook() {
         return addressBook;
     }
 
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
-        raise(new AddressBookChangedEvent(addressBook));
+        raise(new EzDoChangedEvent(addressBook));
     }
 
     @Override

@@ -2,7 +2,7 @@ package seedu.ezdo.model.util;
 
 import seedu.ezdo.commons.exceptions.IllegalValueException;
 import seedu.ezdo.model.AddressBook;
-import seedu.ezdo.model.ReadOnlyAddressBook;
+import seedu.ezdo.model.ReadOnlyEzDo;
 import seedu.ezdo.model.tag.UniqueTagList;
 import seedu.ezdo.model.todo.Address;
 import seedu.ezdo.model.todo.Email;
@@ -39,7 +39,7 @@ public class SampleDataUtil {
         }
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
+    public static ReadOnlyEzDo getSampleAddressBook() {
         try {
             AddressBook sampleAB = new AddressBook();
             for (Person samplePerson : getSamplePersons()) {
