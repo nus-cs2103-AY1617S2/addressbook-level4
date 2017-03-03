@@ -28,7 +28,7 @@ It can help you manage events, deadlines, add tasks with or without deadlines or
    
 5. Some example commands you can try:
    * **`help`** : displays help documentation
-   * **`add`:**  `add "Cs2103 meeting" 3 Mar 17:00 to 18:00` adds an event called "Cs2103 meeting" on 3 March from 17:00 to 18:00
+   * **`adde`:**  `add "Cs2103 meeting" 3 Mar 17:00 to 18:00` adds an event called "Cs2103 meeting" on 3 March from 17:00 to 18:00
    * **`view`**: `view calendar` displays the calendar with tasks and events you have added
 
 6. Refer to the [Features](#features) section below for details of each command.<br>
@@ -51,19 +51,19 @@ Format: `help`
 
 ### 3.2. Adding an item: `adde` or `addt`
 
-**Format** (event):
+Format (event):
 
 `adde "event name" START_DATE START_TIME to [END_DATE] END_TIME [t/TAG]... [//DESCRIPTION]`<br>
 
-**Format** (tentative event. blocks multiple time slots): 
+Format (tentative event. blocks multiple time slots): 
 
 `adde "event name" START_DATE START_TIME to [END_DATE] END_TIME or ... [t/TAG]... [//DESCRIPTION]`<br>
 
-**Format** (task with deadline): 
+Format (task with deadline): 
 
 `addt "task name" DEADLINE [t/TAG] [p/PRIORITY] [//DESCRIPTION]`  <br>
 
-**Format** (task without deadline): 
+Format (task without deadline): 
 
 `addt "task name" [t/TAG] [p/PRIORITY] [//DESCRIPTION] `<br>
 
@@ -77,11 +77,11 @@ Examples:
 
 **View the entire active list**: 
 
-`list`
+Format: `list`
 
 **View tasks with/without deadline**: 
 
-`listd [DEADLINE] [SORT_FIELD]`
+Format: `listd [DEADLINE] [SORT_FIELD]`
 
 Example:
 
@@ -89,7 +89,7 @@ Example:
 
 **View events within a time frame, or with no time frame specified** : 
 
-`liste [START_DATE START_TIME to END_DATE END TIME] [SORT_FIELD]`
+Format: `liste [START_DATE START_TIME to END_DATE END TIME] [SORT_FIELD]`
 
 Example:
 
@@ -97,11 +97,11 @@ Example:
 
 **View overdue task** : 
 
-`listo`
+Format: `listo`
 
 **View tasks and events in the expired list**: 
 
-`listc`
+Format: `listc`
 
 NOTE:
 > note that tasks and events have different fields, and therefore the parameter SORT_FIELD may vary between events and tasks.
@@ -110,15 +110,15 @@ NOTE:
 
 **View command history**: 
 
-`view history`
+Format: `view history`
 
 **View the calendar**: 
 
-`view calendar`
+Format: `view calendar`
 
 **View free time during the day/week/month** : 
 
-`view free day | week | month`
+Format: `view free day | week | month`
 
 ### 3.5 Updating a field of a task/event in the active list : `edit`
 
@@ -129,15 +129,15 @@ NOTE:
 
 **Updating the fields**:
 
-`edit INDEX FIELD_NAME NEW_VALUE`
+Format: `edit INDEX FIELD_NAME NEW_VALUE`
 
-e.g.
+Examples: 
 
 `edit 1 priority 3`, assuming that the item with index 1 is a task.
 
 ### 3.6. Finding event or task by keyword: `find`
 
-Finds tasks or events whose field(s) contain any of the given keywords.<br>
+> Finds tasks or events whose field(s) contain any of the given keywords.<br>
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -171,7 +171,8 @@ Format : `Recycle INDEX DEADLINE | START_DATE START_TIME to [END_DATE] END_TIME`
 
 ### 3.12 Files
 
-**Switch between files**: `switchf Filename`
+**Switch between files**: `switchf FILEPATH`
+> if the file given by FILEPATH does not exist, `TaskCrusher` creates a new file
 
 ## 4. FAQ
 
