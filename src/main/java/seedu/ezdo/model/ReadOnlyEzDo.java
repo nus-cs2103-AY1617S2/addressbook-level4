@@ -6,13 +6,13 @@ import seedu.ezdo.model.tag.Tag;
 import seedu.ezdo.model.todo.ReadOnlyTask;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of an ezDo
  */
 public interface ReadOnlyEzDo {
 
     /**
-     * Returns an unmodifiable view of the persons list.
-     * This list will not contain any duplicate persons.
+     * Returns an unmodifiable view of the tasks list.
+     * This list will not contain any duplicate tasks.
      */
     ObservableList<ReadOnlyTask> getTaskList();
 
