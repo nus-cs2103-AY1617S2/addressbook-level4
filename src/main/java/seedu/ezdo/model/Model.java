@@ -31,7 +31,7 @@ public interface Model {
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code filteredPersonListIndex} < 0 or >= the size of the filtered list.
      */
-    void updatePerson(int filteredPersonListIndex, ReadOnlyTask editedPerson)
+    void updateTask(int filteredPersonListIndex, ReadOnlyTask editedPerson)
             throws UniqueTaskList.DuplicateTaskException;
 
     /** Returns the filtered person list as an {@code UnmodifiableObservableList<ReadOnlyPerson>} */
@@ -41,6 +41,6 @@ public interface Model {
     void updateFilteredListToShowAll();
 
     /** Updates the filter of the filtered person list to filter by the given keywords*/
-    void updateFilteredPersonList(Set<String> keywords);
+    void updateFilteredTaskList(Set<String> keywords);
 
 }
