@@ -350,6 +350,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | add a new task | 
 `* * *` | user | edit a new task | change information of a task
 `* * *` | user | delete a task | remove tasks that I no longer need to track
+`* * *` | user | list out all uncompleted tasks | To view outstanding tasks
 `* * *` | user | block out a period of time | keep a period of time unavailable
 `* * *` | user | release a blocked period of time | make a period of time available again
 `* * *` | user | find upcoming tasks by date | can track of what is dued soon
@@ -376,28 +377,135 @@ Priority | As a ... | I want to ... | So that I can...
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TodoApp` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: Add a task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
-Use case ends.
+1. User inputs command to add a new task
+2. TodoApp adds said task, and shows the task's details
+Use case ends
+
+#### Use case: Delete a task
+
+**MSS**
+
+1. User requests to list tasks
+2. TodoApp shows a list of tasks
+3. User requests to delete a specific task in the list
+4. TodoApp deletes the task
+Use case ends
 
 **Extensions**
 
-2a. The list is empty
+2a. List is empty
+
+> Use case ends
+
+3a. Invalid index given to delete
+
+> 3a1. TodoApp shows an error message
+  Use case resumes at step 2
+
+#### Use case: Edit a task
+
+**MSS**
+
+1. User requests to list tasks
+2. TodoApp shows a list of tasks
+3. User requests to edit the details of a specific task in the list
+4. TodoApp edits the details of that task
+Use case ends
+
+**Extensions**
+
+2a. List is empty
+
+> Use case ends
+
+3a. Invalid index given to delete
+
+> 3a1. TodoApp shows an error message
+  Use case resumes at step 2
+
+3b. The attribute given is invalid
+
+> 3b1. TodoApp shows an error message
+  Use case resumes at step 2
+
+3c. Value of the attribute is invalid
+
+> 3c1. TodoApp shows an error message
+  Use case resumes at step 2
+
+3d. Value of the attribute is the same as the previous value
+> 3d1. TodoApp does nothing
+
+>Use case ends
+
+
+#### Use case: List task
+
+**MSS**
+
+1. User input command to list task
+2. TodoApp shows a list of tasks sorted by due dates
+Use case ends
+
+**Extensions**
+
+2a. List is empty
+
+> 2a1. TodoApp shows a message to indicate that the list is empty
+Use case ends
+
+#### Use case: Mark a task as complete
+
+**MSS**
+
+1. User requests to list tasks
+2. TodoApp shows a list of tasks
+3. User marks a specific task in the list as complete
+4. TodoApp marks the task as complete
+Use case ends
+
+**Extensions**
+
+2a. List is empty
 
 > Use case ends
 
 3a. The given index is invalid
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+> 3a1. TodoApp shows an error message
+Use case resumes at step 2
+
+#### Use case: Set deadline to a task
+
+**MSS**
+
+1. User requests to list tasks
+2. TodoApp shows a list of tasks
+3. User requests to set a deadline to a specific task
+4. TodoApp sets a deadline for the task and displays the task
+Use case ends
+
+**Extensions**
+
+2a. List is empty
+
+> Use case ends
+
+3a. The given index is invalid
+
+> 3a1. TodoApp shows an error message
+Use case resumes at step 2
+
+3b. The date input by user is invalid
+
+> 3b1. TodoApp shows an error message
+Use case resumes at step 2
 
 {More to be added}
 
