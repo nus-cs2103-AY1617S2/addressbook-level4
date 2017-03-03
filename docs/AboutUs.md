@@ -4,15 +4,17 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Damith C. Rajapakse](http://www.comp.nus.edu.sg/~damithch) <br>
-<img src="images/DamithRajapakse.jpg" width="150"><br>
+#### [Nil] <br>
+<img src="" width="150"><br>
 **Role**: Project Advisor
 
 -----
 
-#### [Joshua Lee](http://github.com/lejolly)
-<img src="images/JoshuaLee.jpg" width="150"><br>
-Role: Developer <br>
+#### [Leslie Ho Zong Hong](http://github.com/lejolly)
+<img src="images/Leslie.jpg" width="150"><br>
+Year 2 Computer Science Major
+Role: Team lead <br>
+      Developer <br>
 Responsibilities: UI
 
 -----
