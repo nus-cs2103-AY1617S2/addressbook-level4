@@ -14,10 +14,10 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.ezdo.model.AddressBook;
+import seedu.ezdo.model.EzDo;
 import seedu.ezdo.model.ReadOnlyEzDo;
 import seedu.ezdo.model.tag.Tag;
-import seedu.ezdo.model.todo.Person;
+import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.testutil.TypicalTestPersons;
 
@@ -26,42 +26,42 @@ public class AddressBookTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final AddressBook addressBook = new AddressBook();
+    private final EzDo ezDo = new EzDo();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getTaskList());
-        assertEquals(Collections.emptyList(), addressBook.getTagList());
+        assertEquals(Collections.emptyList(), ezDo.getTaskList());
+        assertEquals(Collections.emptyList(), ezDo.getTagList());
     }
 
     @Test
     public void resetData_null_throwsAssertionError() {
         thrown.expect(AssertionError.class);
-        addressBook.resetData(null);
+        ezDo.resetData(null);
     }
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = new TypicalTestPersons().getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+        EzDo newData = new TypicalTestPersons().getTypicalAddressBook();
+        ezDo.resetData(newData);
+        assertEquals(newData, ezDo);
     }
 
     @Test
     public void resetData_withDuplicatePersons_throwsAssertionError() {
         TypicalTestPersons td = new TypicalTestPersons();
         // Repeat td.alice twice
-        List<Person> newPersons = Arrays.asList(new Person(td.alice), new Person(td.alice));
+        List<Task> newPersons = Arrays.asList(new Task(td.alice), new Task(td.alice));
         List<Tag> newTags = td.alice.getTags().asObservableList();
         AddressBookStub newData = new AddressBookStub(newPersons, newTags);
 
         thrown.expect(AssertionError.class);
-        addressBook.resetData(newData);
+        ezDo.resetData(newData);
     }
 
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
-        AddressBook typicalAddressBook = new TypicalTestPersons().getTypicalAddressBook();
+        EzDo typicalAddressBook = new TypicalTestPersons().getTypicalAddressBook();
         List<ReadOnlyTask> newPersons = typicalAddressBook.getTaskList();
         List<Tag> newTags = new ArrayList<>(typicalAddressBook.getTagList());
         // Repeat the first tag twice
@@ -69,7 +69,7 @@ public class AddressBookTest {
         AddressBookStub newData = new AddressBookStub(newPersons, newTags);
 
         thrown.expect(AssertionError.class);
-        addressBook.resetData(newData);
+        ezDo.resetData(newData);
     }
 
     /**

@@ -1,9 +1,9 @@
 package seedu.ezdo.testutil;
 
 import seedu.ezdo.commons.exceptions.IllegalValueException;
-import seedu.ezdo.model.AddressBook;
-import seedu.ezdo.model.todo.Person;
-import seedu.ezdo.model.todo.UniquePersonList;
+import seedu.ezdo.model.EzDo;
+import seedu.ezdo.model.todo.Task;
+import seedu.ezdo.model.todo.UniqueTaskList;
 
 /**
  *
@@ -43,11 +43,11 @@ public class TypicalTestPersons {
         }
     }
 
-    public static void loadAddressBookWithSampleData(AddressBook ab) {
+    public static void loadAddressBookWithSampleData(EzDo ab) {
         for (TestPerson person : new TypicalTestPersons().getTypicalPersons()) {
             try {
-                ab.addPerson(new Person(person));
-            } catch (UniquePersonList.DuplicatePersonException e) {
+                ab.addPerson(new Task(person));
+            } catch (UniqueTaskList.DuplicateTaskException e) {
                 assert false : "not possible";
             }
         }
@@ -57,8 +57,8 @@ public class TypicalTestPersons {
         return new TestPerson[]{alice, benson, carl, daniel, elle, fiona, george};
     }
 
-    public AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public EzDo getTypicalAddressBook() {
+        EzDo ab = new EzDo();
         loadAddressBookWithSampleData(ab);
         return ab;
     }

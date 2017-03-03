@@ -4,14 +4,14 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.ezdo.model.AddressBook;
-import seedu.ezdo.model.todo.Person;
+import seedu.ezdo.model.EzDo;
+import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.util.SampleDataUtil;
 import seedu.ezdo.testutil.TestUtil;
 
 public class SampleDataTest extends AddressBookGuiTest {
     @Override
-    protected AddressBook getInitialData() {
+    protected EzDo getInitialData() {
         // return null to force test app to load data from file only
         return null;
     }
@@ -24,7 +24,7 @@ public class SampleDataTest extends AddressBookGuiTest {
 
     @Test
     public void addressBook_dataFileDoesNotExist_loadSampleData() throws Exception {
-        Person[] expectedList = SampleDataUtil.getSamplePersons();
+        Task[] expectedList = SampleDataUtil.getSamplePersons();
         assertTrue(personListPanel.isListMatching(expectedList));
     }
 }

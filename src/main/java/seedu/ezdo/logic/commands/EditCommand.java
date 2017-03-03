@@ -10,10 +10,10 @@ import seedu.ezdo.model.tag.UniqueTagList;
 import seedu.ezdo.model.todo.Address;
 import seedu.ezdo.model.todo.Email;
 import seedu.ezdo.model.todo.Name;
-import seedu.ezdo.model.todo.Person;
+import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.Phone;
 import seedu.ezdo.model.todo.ReadOnlyTask;
-import seedu.ezdo.model.todo.UniquePersonList;
+import seedu.ezdo.model.todo.UniqueTaskList;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -58,11 +58,11 @@ public class EditCommand extends Command {
         }
 
         ReadOnlyTask personToEdit = lastShownList.get(filteredPersonListIndex);
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Task editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         try {
             model.updatePerson(filteredPersonListIndex, editedPerson);
-        } catch (UniquePersonList.DuplicatePersonException dpe) {
+        } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
         model.updateFilteredListToShowAll();
@@ -73,7 +73,7 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(ReadOnlyTask personToEdit,
+    private static Task createEditedPerson(ReadOnlyTask personToEdit,
                                              EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
@@ -83,7 +83,7 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Task(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
 
     /**

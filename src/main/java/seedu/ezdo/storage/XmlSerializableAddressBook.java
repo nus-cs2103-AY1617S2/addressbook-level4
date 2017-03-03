@@ -13,7 +13,7 @@ import seedu.ezdo.commons.core.UnmodifiableObservableList;
 import seedu.ezdo.commons.exceptions.IllegalValueException;
 import seedu.ezdo.model.ReadOnlyEzDo;
 import seedu.ezdo.model.tag.Tag;
-import seedu.ezdo.model.todo.Person;
+import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.ReadOnlyTask;
 
 /**
@@ -47,7 +47,7 @@ public class XmlSerializableAddressBook implements ReadOnlyEzDo {
 
     @Override
     public ObservableList<ReadOnlyTask> getTaskList() {
-        final ObservableList<Person> persons = this.persons.stream().map(p -> {
+        final ObservableList<Task> tasks = this.persons.stream().map(p -> {
             try {
                 return p.toModelType();
             } catch (IllegalValueException e) {
@@ -56,7 +56,7 @@ public class XmlSerializableAddressBook implements ReadOnlyEzDo {
                 return null;
             }
         }).collect(Collectors.toCollection(FXCollections::observableArrayList));
-        return new UnmodifiableObservableList<>(persons);
+        return new UnmodifiableObservableList<>(tasks);
     }
 
     @Override

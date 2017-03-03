@@ -10,10 +10,10 @@ import seedu.ezdo.commons.core.UnmodifiableObservableList;
 import seedu.ezdo.commons.events.model.EzDoChangedEvent;
 import seedu.ezdo.commons.util.CollectionUtil;
 import seedu.ezdo.commons.util.StringUtil;
-import seedu.ezdo.model.todo.Person;
+import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.ReadOnlyTask;
-import seedu.ezdo.model.todo.UniquePersonList;
-import seedu.ezdo.model.todo.UniquePersonList.PersonNotFoundException;
+import seedu.ezdo.model.todo.UniqueTaskList;
+import seedu.ezdo.model.todo.UniqueTaskList.PersonNotFoundException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,7 +22,7 @@ import seedu.ezdo.model.todo.UniquePersonList.PersonNotFoundException;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final EzDo ezDo;
     private final FilteredList<ReadOnlyTask> filteredPersons;
 
     /**
@@ -34,50 +34,50 @@ public class ModelManager extends ComponentManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
-        filteredPersons = new FilteredList<>(this.addressBook.getTaskList());
+        this.ezDo = new EzDo(addressBook);
+        filteredPersons = new FilteredList<>(this.ezDo.getTaskList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new EzDo(), new UserPrefs());
     }
 
     @Override
     public void resetData(ReadOnlyEzDo newData) {
-        addressBook.resetData(newData);
+        ezDo.resetData(newData);
         indicateAddressBookChanged();
     }
 
     @Override
     public ReadOnlyEzDo getAddressBook() {
-        return addressBook;
+        return ezDo;
     }
 
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
-        raise(new EzDoChangedEvent(addressBook));
+        raise(new EzDoChangedEvent(ezDo));
     }
 
     @Override
     public synchronized void deletePerson(ReadOnlyTask target) throws PersonNotFoundException {
-        addressBook.removePerson(target);
+        ezDo.removePerson(target);
         indicateAddressBookChanged();
     }
 
     @Override
-    public synchronized void addPerson(Person person) throws UniquePersonList.DuplicatePersonException {
-        addressBook.addPerson(person);
+    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+        ezDo.addPerson(task);
         updateFilteredListToShowAll();
         indicateAddressBookChanged();
     }
 
     @Override
     public void updatePerson(int filteredPersonListIndex, ReadOnlyTask editedPerson)
-            throws UniquePersonList.DuplicatePersonException {
+            throws UniqueTaskList.DuplicateTaskException {
         assert editedPerson != null;
 
         int addressBookIndex = filteredPersons.getSourceIndex(filteredPersonListIndex);
-        addressBook.updatePerson(addressBookIndex, editedPerson);
+        ezDo.updatePerson(addressBookIndex, editedPerson);
         indicateAddressBookChanged();
     }
 

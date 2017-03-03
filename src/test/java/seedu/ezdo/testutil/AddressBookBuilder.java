@@ -1,10 +1,10 @@
 package seedu.ezdo.testutil;
 
 import seedu.ezdo.commons.exceptions.IllegalValueException;
-import seedu.ezdo.model.AddressBook;
+import seedu.ezdo.model.EzDo;
 import seedu.ezdo.model.tag.Tag;
-import seedu.ezdo.model.todo.Person;
-import seedu.ezdo.model.todo.UniquePersonList;
+import seedu.ezdo.model.todo.Task;
+import seedu.ezdo.model.todo.UniqueTaskList;
 
 /**
  * A utility class to help with building Addressbook objects.
@@ -13,23 +13,23 @@ import seedu.ezdo.model.todo.UniquePersonList;
  */
 public class AddressBookBuilder {
 
-    private AddressBook addressBook;
+    private EzDo ezDo;
 
-    public AddressBookBuilder(AddressBook addressBook) {
-        this.addressBook = addressBook;
+    public AddressBookBuilder(EzDo ezDo) {
+        this.ezDo = ezDo;
     }
 
-    public AddressBookBuilder withPerson(Person person) throws UniquePersonList.DuplicatePersonException {
-        addressBook.addPerson(person);
+    public AddressBookBuilder withPerson(Task task) throws UniqueTaskList.DuplicateTaskException {
+        ezDo.addPerson(task);
         return this;
     }
 
     public AddressBookBuilder withTag(String tagName) throws IllegalValueException {
-        addressBook.addTag(new Tag(tagName));
+        ezDo.addTag(new Tag(tagName));
         return this;
     }
 
-    public AddressBook build() {
-        return addressBook;
+    public EzDo build() {
+        return ezDo;
     }
 }

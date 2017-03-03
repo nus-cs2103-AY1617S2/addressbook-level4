@@ -3,10 +3,10 @@ package seedu.ezdo.model;
 import java.util.Set;
 
 import seedu.ezdo.commons.core.UnmodifiableObservableList;
-import seedu.ezdo.model.todo.Person;
+import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.ReadOnlyTask;
-import seedu.ezdo.model.todo.UniquePersonList;
-import seedu.ezdo.model.todo.UniquePersonList.DuplicatePersonException;
+import seedu.ezdo.model.todo.UniqueTaskList;
+import seedu.ezdo.model.todo.UniqueTaskList.DuplicateTaskException;
 
 /**
  * The API of the Model component.
@@ -19,20 +19,20 @@ public interface Model {
     ReadOnlyEzDo getAddressBook();
 
     /** Deletes the given person. */
-    void deletePerson(ReadOnlyTask target) throws UniquePersonList.PersonNotFoundException;
+    void deletePerson(ReadOnlyTask target) throws UniqueTaskList.PersonNotFoundException;
 
     /** Adds the given person */
-    void addPerson(Person person) throws UniquePersonList.DuplicatePersonException;
+    void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
     /**
      * Updates the person located at {@code filteredPersonListIndex} with {@code editedPerson}.
      *
-     * @throws DuplicatePersonException if updating the person's details causes the person to be equivalent to
+     * @throws DuplicateTaskException if updating the person's details causes the person to be equivalent to
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code filteredPersonListIndex} < 0 or >= the size of the filtered list.
      */
     void updatePerson(int filteredPersonListIndex, ReadOnlyTask editedPerson)
-            throws UniquePersonList.DuplicatePersonException;
+            throws UniqueTaskList.DuplicateTaskException;
 
     /** Returns the filtered person list as an {@code UnmodifiableObservableList<ReadOnlyPerson>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();

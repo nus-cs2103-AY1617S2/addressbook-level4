@@ -24,7 +24,7 @@ import javafx.stage.Stage;
 import seedu.ezdo.TestApp;
 import seedu.ezdo.commons.core.EventsCenter;
 import seedu.ezdo.commons.events.BaseEvent;
-import seedu.ezdo.model.AddressBook;
+import seedu.ezdo.model.EzDo;
 import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.testutil.TestUtil;
 import seedu.ezdo.testutil.TypicalTestPersons;
@@ -86,8 +86,8 @@ public abstract class AddressBookGuiTest {
      * Override this in child classes to set the initial local data.
      * Return null to use the data in the file specified in {@link #getDataFileLocation()}
      */
-    protected AddressBook getInitialData() {
-        AddressBook ab = new AddressBook();
+    protected EzDo getInitialData() {
+        EzDo ab = new EzDo();
         TypicalTestPersons.loadAddressBookWithSampleData(ab);
         return ab;
     }

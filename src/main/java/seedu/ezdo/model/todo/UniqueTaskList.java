@@ -14,12 +14,12 @@ import seedu.ezdo.commons.util.CollectionUtil;
  *
  * Supports a minimal set of list operations.
  *
- * @see Person#equals(Object)
+ * @see Task#equals(Object)
  * @see CollectionUtil#elementsAreUnique(Collection)
  */
-public class UniquePersonList implements Iterable<Person> {
+public class UniqueTaskList implements Iterable<Task> {
 
-    private final ObservableList<Person> internalList = FXCollections.observableArrayList();
+    private final ObservableList<Task> internalList = FXCollections.observableArrayList();
 
     /**
      * Returns true if the list contains an equivalent person as the given argument.
@@ -32,12 +32,12 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Adds a person to the list.
      *
-     * @throws DuplicatePersonException if the person to add is a duplicate of an existing person in the list.
+     * @throws DuplicateTaskException if the person to add is a duplicate of an existing person in the list.
      */
-    public void add(Person toAdd) throws DuplicatePersonException {
+    public void add(Task toAdd) throws DuplicateTaskException {
         assert toAdd != null;
         if (contains(toAdd)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateTaskException();
         }
         internalList.add(toAdd);
     }
@@ -45,16 +45,16 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Updates the person in the list at position {@code index} with {@code editedPerson}.
      *
-     * @throws DuplicatePersonException if updating the person's details causes the person to be equivalent to
+     * @throws DuplicateTaskException if updating the person's details causes the person to be equivalent to
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updatePerson(int index, ReadOnlyTask editedPerson) throws DuplicatePersonException {
+    public void updatePerson(int index, ReadOnlyTask editedPerson) throws DuplicateTaskException {
         assert editedPerson != null;
 
-        Person personToUpdate = internalList.get(index);
+        Task personToUpdate = internalList.get(index);
         if (!personToUpdate.equals(editedPerson) && internalList.contains(editedPerson)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateTaskException();
         }
 
         personToUpdate.resetData(editedPerson);
@@ -78,33 +78,33 @@ public class UniquePersonList implements Iterable<Person> {
         return personFoundAndDeleted;
     }
 
-    public void setPersons(UniquePersonList replacement) {
+    public void setPersons(UniqueTaskList replacement) {
         this.internalList.setAll(replacement.internalList);
     }
 
-    public void setPersons(List<? extends ReadOnlyTask> persons) throws DuplicatePersonException {
-        final UniquePersonList replacement = new UniquePersonList();
+    public void setPersons(List<? extends ReadOnlyTask> persons) throws DuplicateTaskException {
+        final UniqueTaskList replacement = new UniqueTaskList();
         for (final ReadOnlyTask person : persons) {
-            replacement.add(new Person(person));
+            replacement.add(new Task(person));
         }
         setPersons(replacement);
     }
 
-    public UnmodifiableObservableList<Person> asObservableList() {
+    public UnmodifiableObservableList<Task> asObservableList() {
         return new UnmodifiableObservableList<>(internalList);
     }
 
     @Override
-    public Iterator<Person> iterator() {
+    public Iterator<Task> iterator() {
         return internalList.iterator();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniquePersonList // instanceof handles nulls
+                || (other instanceof UniqueTaskList // instanceof handles nulls
                 && this.internalList.equals(
-                ((UniquePersonList) other).internalList));
+                ((UniqueTaskList) other).internalList));
     }
 
     @Override
@@ -115,8 +115,8 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Signals that an operation would have violated the 'no duplicates' property of the list.
      */
-    public static class DuplicatePersonException extends DuplicateDataException {
-        protected DuplicatePersonException() {
+    public static class DuplicateTaskException extends DuplicateDataException {
+        protected DuplicateTaskException() {
             super("Operation would result in duplicate persons");
         }
     }

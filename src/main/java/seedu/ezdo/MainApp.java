@@ -20,7 +20,7 @@ import seedu.ezdo.commons.util.ConfigUtil;
 import seedu.ezdo.commons.util.StringUtil;
 import seedu.ezdo.logic.Logic;
 import seedu.ezdo.logic.LogicManager;
-import seedu.ezdo.model.AddressBook;
+import seedu.ezdo.model.EzDo;
 import seedu.ezdo.model.Model;
 import seedu.ezdo.model.ModelManager;
 import seedu.ezdo.model.ReadOnlyEzDo;
@@ -84,10 +84,10 @@ public class MainApp extends Application {
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            initialData = new EzDo();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            initialData = new EzDo();
         }
 
         return new ModelManager(initialData, userPrefs);

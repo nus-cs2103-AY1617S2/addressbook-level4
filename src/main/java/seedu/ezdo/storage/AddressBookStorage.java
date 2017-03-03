@@ -7,7 +7,7 @@ import seedu.ezdo.commons.exceptions.DataConversionException;
 import seedu.ezdo.model.ReadOnlyEzDo;
 
 /**
- * Represents a storage for {@link seedu.ezdo.model.AddressBook}.
+ * Represents a storage for {@link seedu.ezdo.model.EzDo}.
  */
 public interface AddressBookStorage {
 

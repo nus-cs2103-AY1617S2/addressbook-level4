@@ -14,7 +14,7 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.ezdo.commons.events.model.EzDoChangedEvent;
 import seedu.ezdo.commons.events.storage.DataSavingExceptionEvent;
-import seedu.ezdo.model.AddressBook;
+import seedu.ezdo.model.EzDo;
 import seedu.ezdo.model.ReadOnlyEzDo;
 import seedu.ezdo.model.UserPrefs;
 import seedu.ezdo.storage.JsonUserPrefsStorage;
@@ -64,10 +64,10 @@ public class StorageManagerTest {
          * {@link XmlAddressBookStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link XmlAddressBookStorageTest} class.
          */
-        AddressBook original = new TypicalTestPersons().getTypicalAddressBook();
+        EzDo original = new TypicalTestPersons().getTypicalAddressBook();
         storageManager.saveAddressBook(original);
         ReadOnlyEzDo retrieved = storageManager.readAddressBook().get();
-        assertEquals(original, new AddressBook(retrieved));
+        assertEquals(original, new EzDo(retrieved));
     }
 
     @Test
@@ -81,7 +81,7 @@ public class StorageManagerTest {
         Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub("dummy"),
                                              new JsonUserPrefsStorage("dummy"));
         EventsCollector eventCollector = new EventsCollector();
-        storage.handleAddressBookChangedEvent(new EzDoChangedEvent(new AddressBook()));
+        storage.handleAddressBookChangedEvent(new EzDoChangedEvent(new EzDo()));
         assertTrue(eventCollector.get(0) instanceof DataSavingExceptionEvent);
     }
 

@@ -12,18 +12,18 @@ import javafx.collections.ObservableList;
 import seedu.ezdo.commons.core.UnmodifiableObservableList;
 import seedu.ezdo.model.tag.Tag;
 import seedu.ezdo.model.tag.UniqueTagList;
-import seedu.ezdo.model.todo.Person;
+import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.ReadOnlyTask;
-import seedu.ezdo.model.todo.UniquePersonList;
-import seedu.ezdo.model.todo.UniquePersonList.DuplicatePersonException;
+import seedu.ezdo.model.todo.UniqueTaskList;
+import seedu.ezdo.model.todo.UniqueTaskList.DuplicateTaskException;
 
 /**
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .equals comparison)
  */
-public class AddressBook implements ReadOnlyEzDo {
+public class EzDo implements ReadOnlyEzDo {
 
-    private final UniquePersonList persons;
+    private final UniqueTaskList persons;
     private final UniqueTagList tags;
 
     /*
@@ -34,16 +34,16 @@ public class AddressBook implements ReadOnlyEzDo {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        persons = new UniqueTaskList();
         tags = new UniqueTagList();
     }
 
-    public AddressBook() {}
+    public EzDo() {}
 
     /**
      * Creates an AddressBook using the Persons and Tags in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyEzDo toBeCopied) {
+    public EzDo(ReadOnlyEzDo toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -51,7 +51,7 @@ public class AddressBook implements ReadOnlyEzDo {
 //// list overwrite operations
 
     public void setPersons(List<? extends ReadOnlyTask> persons)
-            throws UniquePersonList.DuplicatePersonException {
+            throws UniqueTaskList.DuplicateTaskException {
         this.persons.setPersons(persons);
     }
 
@@ -63,7 +63,7 @@ public class AddressBook implements ReadOnlyEzDo {
         assert newData != null;
         try {
             setPersons(newData.getTaskList());
-        } catch (UniquePersonList.DuplicatePersonException e) {
+        } catch (UniqueTaskList.DuplicateTaskException e) {
             assert false : "AddressBooks should not have duplicate persons";
         }
         try {
@@ -81,9 +81,9 @@ public class AddressBook implements ReadOnlyEzDo {
      * Also checks the new person's tags and updates {@link #tags} with any new tags found,
      * and updates the Tag objects in the person to point to those in {@link #tags}.
      *
-     * @throws UniquePersonList.DuplicatePersonException if an equivalent person already exists.
+     * @throws UniqueTaskList.DuplicateTaskException if an equivalent person already exists.
      */
-    public void addPerson(Person p) throws UniquePersonList.DuplicatePersonException {
+    public void addPerson(Task p) throws UniqueTaskList.DuplicateTaskException {
         syncMasterTagListWith(p);
         persons.add(p);
     }
@@ -91,17 +91,17 @@ public class AddressBook implements ReadOnlyEzDo {
     /**
      * Updates the person in the list at position {@code index} with {@code editedReadOnlyPerson}.
      * {@code AddressBook}'s tag list will be updated with the tags of {@code editedReadOnlyPerson}.
-     * @see #syncMasterTagListWith(Person)
+     * @see #syncMasterTagListWith(Task)
      *
-     * @throws DuplicatePersonException if updating the person's details causes the person to be equivalent to
+     * @throws DuplicateTaskException if updating the person's details causes the person to be equivalent to
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
     public void updatePerson(int index, ReadOnlyTask editedReadOnlyPerson)
-            throws UniquePersonList.DuplicatePersonException {
+            throws UniqueTaskList.DuplicateTaskException {
         assert editedReadOnlyPerson != null;
 
-        Person editedPerson = new Person(editedReadOnlyPerson);
+        Task editedPerson = new Task(editedReadOnlyPerson);
         syncMasterTagListWith(editedPerson);
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any person
@@ -114,8 +114,8 @@ public class AddressBook implements ReadOnlyEzDo {
      *  - exists in the master list {@link #tags}
      *  - points to a Tag object in the master list
      */
-    private void syncMasterTagListWith(Person person) {
-        final UniqueTagList personTags = person.getTags();
+    private void syncMasterTagListWith(Task task) {
+        final UniqueTagList personTags = task.getTags();
         tags.mergeFrom(personTags);
 
         // Create map with values = tag object references in the master list
@@ -126,24 +126,24 @@ public class AddressBook implements ReadOnlyEzDo {
         // Rebuild the list of person tags to point to the relevant tags in the master tag list.
         final Set<Tag> correctTagReferences = new HashSet<>();
         personTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
-        person.setTags(new UniqueTagList(correctTagReferences));
+        task.setTags(new UniqueTagList(correctTagReferences));
     }
 
     /**
      * Ensures that every tag in these persons:
      *  - exists in the master list {@link #tags}
      *  - points to a Tag object in the master list
-     *  @see #syncMasterTagListWith(Person)
+     *  @see #syncMasterTagListWith(Task)
      */
-    private void syncMasterTagListWith(UniquePersonList persons) {
+    private void syncMasterTagListWith(UniqueTaskList persons) {
         persons.forEach(this::syncMasterTagListWith);
     }
 
-    public boolean removePerson(ReadOnlyTask key) throws UniquePersonList.PersonNotFoundException {
+    public boolean removePerson(ReadOnlyTask key) throws UniqueTaskList.PersonNotFoundException {
         if (persons.remove(key)) {
             return true;
         } else {
-            throw new UniquePersonList.PersonNotFoundException();
+            throw new UniqueTaskList.PersonNotFoundException();
         }
     }
 
@@ -174,9 +174,9 @@ public class AddressBook implements ReadOnlyEzDo {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && this.persons.equals(((AddressBook) other).persons)
-                && this.tags.equalsOrderInsensitive(((AddressBook) other).tags));
+                || (other instanceof EzDo // instanceof handles nulls
+                && this.persons.equals(((EzDo) other).persons)
+                && this.tags.equalsOrderInsensitive(((EzDo) other).tags));
     }
 
     @Override

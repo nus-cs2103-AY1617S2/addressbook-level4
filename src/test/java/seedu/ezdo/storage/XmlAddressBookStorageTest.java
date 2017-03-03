@@ -13,9 +13,9 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.ezdo.commons.exceptions.DataConversionException;
 import seedu.ezdo.commons.util.FileUtil;
-import seedu.ezdo.model.AddressBook;
+import seedu.ezdo.model.EzDo;
 import seedu.ezdo.model.ReadOnlyEzDo;
-import seedu.ezdo.model.todo.Person;
+import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.storage.XmlAddressBookStorage;
 import seedu.ezdo.testutil.TypicalTestPersons;
 
@@ -64,26 +64,26 @@ public class XmlAddressBookStorageTest {
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         String filePath = testFolder.getRoot().getPath() + "TempAddressBook.xml";
         TypicalTestPersons td = new TypicalTestPersons();
-        AddressBook original = td.getTypicalAddressBook();
+        EzDo original = td.getTypicalAddressBook();
         XmlAddressBookStorage xmlAddressBookStorage = new XmlAddressBookStorage(filePath);
 
         //Save in new file and read back
         xmlAddressBookStorage.saveAddressBook(original, filePath);
         ReadOnlyEzDo readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
-        assertEquals(original, new AddressBook(readBack));
+        assertEquals(original, new EzDo(readBack));
 
         //Modify data, overwrite exiting file, and read back
-        original.addPerson(new Person(td.hoon));
-        original.removePerson(new Person(td.alice));
+        original.addPerson(new Task(td.hoon));
+        original.removePerson(new Task(td.alice));
         xmlAddressBookStorage.saveAddressBook(original, filePath);
         readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
-        assertEquals(original, new AddressBook(readBack));
+        assertEquals(original, new EzDo(readBack));
 
         //Save and read without specifying file path
-        original.addPerson(new Person(td.ida));
+        original.addPerson(new Task(td.ida));
         xmlAddressBookStorage.saveAddressBook(original); //file path not specified
         readBack = xmlAddressBookStorage.readAddressBook().get(); //file path not specified
-        assertEquals(original, new AddressBook(readBack));
+        assertEquals(original, new EzDo(readBack));
 
     }
 
@@ -100,7 +100,7 @@ public class XmlAddressBookStorageTest {
     @Test
     public void saveAddressBook_nullFilePath_assertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
-        saveAddressBook(new AddressBook(), null);
+        saveAddressBook(new EzDo(), null);
     }
 
 

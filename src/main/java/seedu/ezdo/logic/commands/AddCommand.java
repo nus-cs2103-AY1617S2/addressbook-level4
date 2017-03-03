@@ -10,26 +10,26 @@ import seedu.ezdo.model.tag.UniqueTagList;
 import seedu.ezdo.model.todo.Address;
 import seedu.ezdo.model.todo.Email;
 import seedu.ezdo.model.todo.Name;
-import seedu.ezdo.model.todo.Person;
+import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.Phone;
-import seedu.ezdo.model.todo.UniquePersonList;
+import seedu.ezdo.model.todo.UniqueTaskList;
 
 /**
- * Adds a person to the address book.
+ * Adds a task to ezDo.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
-            + "Parameters: NAME p/PHONE e/EMAIL a/ADDRESS  [t/TAG]...\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to ezDo. "
+            + "Parameters: TASK p/PHONE e/EMAIL a/ADDRESS  [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
             + " John Doe p/98765432 e/johnd@gmail.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New task added: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in ezDo";
 
-    private final Person toAdd;
+    private final Task toAdd;
 
     /**
      * Creates an AddCommand using raw values.
@@ -42,7 +42,7 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        this.toAdd = new Person(
+        this.toAdd = new Task(
                 new Name(name),
                 new Phone(phone),
                 new Email(email),
@@ -55,9 +55,9 @@ public class AddCommand extends Command {
     public CommandResult execute() throws CommandException {
         assert model != null;
         try {
-            model.addPerson(toAdd);
+            model.addTask(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-        } catch (UniquePersonList.DuplicatePersonException e) {
+        } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 

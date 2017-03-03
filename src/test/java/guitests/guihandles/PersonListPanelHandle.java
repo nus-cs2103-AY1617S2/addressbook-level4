@@ -13,7 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import seedu.ezdo.TestApp;
-import seedu.ezdo.model.todo.Person;
+import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.testutil.TestUtil;
 
@@ -148,7 +148,7 @@ public class PersonListPanelHandle extends GuiHandle {
     }
 
     public PersonCardHandle getPersonCardHandle(int index) {
-        return getPersonCardHandle(new Person(getListView().getItems().get(index)));
+        return getPersonCardHandle(new Task(getListView().getItems().get(index)));
     }
 
     public PersonCardHandle getPersonCardHandle(ReadOnlyTask person) {
