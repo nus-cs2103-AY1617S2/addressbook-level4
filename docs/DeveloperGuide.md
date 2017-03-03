@@ -533,17 +533,40 @@ Use case resumes at step 2
 
 ## Appendix E : Product Survey
 
-**Product Name**
+**Trello**
 
-Author: ...
+Author: Lim Jing Rong
 
 Pros:
 
-* ...
-* ...
+* Simple to use
+* Intuitive UI
+* Cloud support
+* Good integration (Github, etc)
+* Modular and flexible based on user
+* Can be fitlered by tags & users
 
 Cons:
 
-* ...
-* ...
+* Tasks have to be small enough to be described in a few words
+* Okay for specific projects/todo lists. Bad if you have multiple 'big projects'
+
+**Wunderlist**
+
+Author: Lim Jing Rong
+
+Pros:
+
+* Straight forward to use
+* Multi-platform (Desktop application, Chrome ext, mobile app, web app, etc)
+* Cloud support
+* Great UI/ graphics
+* Free
+* Good search
+
+Cons:
+
+* Not much integrations
+* No options for subtasks
+* No repeat options
 
