@@ -15,7 +15,7 @@ import seedu.doist.model.task.UniqueTaskList.TaskNotFoundException;
  */
 public class DeleteCommand extends Command {
 
-    public static ArrayList<String> commandWords = new ArrayList<>(Arrays.asList("delete"));
+    public static ArrayList<String> commandWords = new ArrayList<>(Arrays.asList("delete", "del"));
     public static final String DEFAULT_COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = getUsageTextForCommandWords()
