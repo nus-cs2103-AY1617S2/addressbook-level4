@@ -21,18 +21,18 @@ public interface Storage extends TodoListStorage, UserPrefsStorage {
     void saveUserPrefs(UserPrefs userPrefs) throws IOException;
 
     @Override
-    String getAddressBookFilePath();
+    String getTodoListFilePath();
 
     @Override
-    Optional<ReadOnlyTodoList> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyTodoList> readTodoList() throws DataConversionException, IOException;
 
     @Override
-    void saveAddressBook(ReadOnlyTodoList addressBook) throws IOException;
+    void saveTodoList(ReadOnlyTodoList todoList) throws IOException;
 
     /**
-     * Saves the current version of the Address Book to the hard disk.
+     * Saves the current version of the To-do List to the hard disk.
      *   Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
-    void handleAddressBookChangedEvent(TodoListChangedEvent abce);
+    void handleTodoListChangedEvent(TodoListChangedEvent abce);
 }

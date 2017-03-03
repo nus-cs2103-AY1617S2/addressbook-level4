@@ -24,21 +24,21 @@ public class XmlTodoListStorage implements TodoListStorage {
         this.filePath = filePath;
     }
 
-    public String getAddressBookFilePath() {
+    public String getTodoListFilePath() {
         return filePath;
     }
 
     @Override
-    public Optional<ReadOnlyTodoList> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(filePath);
+    public Optional<ReadOnlyTodoList> readTodoList() throws DataConversionException, IOException {
+        return readTodoList(filePath);
     }
 
     /**
-     * Similar to {@link #readAddressBook()}
+     * Similar to {@link #readTodoList()}
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyTodoList> readAddressBook(String filePath) throws DataConversionException,
+    public Optional<ReadOnlyTodoList> readTodoList(String filePath) throws DataConversionException,
                                                                                  FileNotFoundException {
         assert filePath != null;
 
@@ -55,15 +55,15 @@ public class XmlTodoListStorage implements TodoListStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyTodoList addressBook) throws IOException {
-        saveAddressBook(addressBook, filePath);
+    public void saveTodoList(ReadOnlyTodoList addressBook) throws IOException {
+        saveTodoList(addressBook, filePath);
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyTodoList)}
+     * Similar to {@link #saveTodoList(ReadOnlyTodoList)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveAddressBook(ReadOnlyTodoList addressBook, String filePath) throws IOException {
+    public void saveTodoList(ReadOnlyTodoList addressBook, String filePath) throws IOException {
         assert addressBook != null;
         assert filePath != null;
 

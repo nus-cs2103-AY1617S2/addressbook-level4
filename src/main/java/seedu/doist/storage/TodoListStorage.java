@@ -14,31 +14,31 @@ public interface TodoListStorage {
     /**
      * Returns the file path of the data file.
      */
-    String getAddressBookFilePath();
+    String getTodoListFilePath();
 
     /**
-     * Returns AddressBook data as a {@link ReadOnlyTodoList}.
+     * Returns TodoList data as a {@link ReadOnlyTodoList}.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyTodoList> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyTodoList> readTodoList() throws DataConversionException, IOException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getTodoListFilePath()
      */
-    Optional<ReadOnlyTodoList> readAddressBook(String filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyTodoList> readTodoList(String filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyTodoList} to the storage.
      * @param addressBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyTodoList addressBook) throws IOException;
+    void saveTodoList(ReadOnlyTodoList addressBook) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlyTodoList)
+     * @see #saveTodoList(ReadOnlyTodoList)
      */
-    void saveAddressBook(ReadOnlyTodoList addressBook, String filePath) throws IOException;
+    void saveTodoList(ReadOnlyTodoList addressBook, String filePath) throws IOException;
 
 }

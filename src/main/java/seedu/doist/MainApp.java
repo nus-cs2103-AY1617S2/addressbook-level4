@@ -76,19 +76,19 @@ public class MainApp extends Application {
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyTodoList> addressBookOptional;
+        Optional<ReadOnlyTodoList> todoListOptional;
         ReadOnlyTodoList initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+            todoListOptional = storage.readTodoList();
+            if (!todoListOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample To-do List");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleTodoList);
+            initialData = todoListOptional.orElseGet(SampleDataUtil::getSampleTodoList);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
+            logger.warning("Data file not in the correct format. Will be starting with an empty To-do List");
             initialData = new TodoList();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty To-do List");
             initialData = new TodoList();
         }
 
@@ -145,7 +145,7 @@ public class MainApp extends Application {
                     "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty To-do List");
             initializedPrefs = new UserPrefs();
         }
 
