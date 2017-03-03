@@ -13,10 +13,10 @@ We are a team based in the [School of Computing, National University of Singapor
 #### [Yee Jian Feng, Eric](http://github.com/qhng) <br>
 <img src="images/YEEJFE.jpg" width="150"><br>
 **Role**: Developer <br>
-* Components in charge of: [Developer Guide]
+* Components in charge of: [Example: link from Developer Guide]
 * Aspects/tools in charge of: [Example: Testing, Integration, Deliverables, Deadlines]
 * Features implemented:
-   * [User Guide]
+   * [Example: link from User Guide]
 * Code written:[functional code][test code][docs]
 * Other major contributions:
   * Did the initial refactoring from AddressBook-Level-4 to SavvyTo-Do
