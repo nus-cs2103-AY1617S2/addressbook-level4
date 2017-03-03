@@ -14,7 +14,7 @@ import seedu.ezdo.commons.exceptions.IllegalValueException;
 import seedu.ezdo.model.ReadOnlyEzDo;
 import seedu.ezdo.model.tag.Tag;
 import seedu.ezdo.model.todo.Person;
-import seedu.ezdo.model.todo.ReadOnlyPerson;
+import seedu.ezdo.model.todo.ReadOnlyTask;
 
 /**
  * An Immutable AddressBook that is serializable to XML format
@@ -46,7 +46,7 @@ public class XmlSerializableAddressBook implements ReadOnlyEzDo {
     }
 
     @Override
-    public ObservableList<ReadOnlyPerson> getTaskList() {
+    public ObservableList<ReadOnlyTask> getTaskList() {
         final ObservableList<Person> persons = this.persons.stream().map(p -> {
             try {
                 return p.toModelType();

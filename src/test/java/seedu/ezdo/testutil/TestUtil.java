@@ -37,7 +37,7 @@ import seedu.ezdo.model.todo.Email;
 import seedu.ezdo.model.todo.Name;
 import seedu.ezdo.model.todo.Person;
 import seedu.ezdo.model.todo.Phone;
-import seedu.ezdo.model.todo.ReadOnlyPerson;
+import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.storage.XmlSerializableAddressBook;
 
 /**
@@ -333,7 +333,7 @@ public class TestUtil {
         return list;
     }
 
-    public static boolean compareCardAndPerson(PersonCardHandle card, ReadOnlyPerson person) {
+    public static boolean compareCardAndPerson(PersonCardHandle card, ReadOnlyTask person) {
         return card.isSamePerson(person);
     }
 

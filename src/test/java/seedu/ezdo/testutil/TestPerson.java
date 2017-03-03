@@ -5,12 +5,12 @@ import seedu.ezdo.model.todo.Address;
 import seedu.ezdo.model.todo.Email;
 import seedu.ezdo.model.todo.Name;
 import seedu.ezdo.model.todo.Phone;
-import seedu.ezdo.model.todo.ReadOnlyPerson;
+import seedu.ezdo.model.todo.ReadOnlyTask;
 
 /**
  * A mutable person object. For testing only.
  */
-public class TestPerson implements ReadOnlyPerson {
+public class TestPerson implements ReadOnlyTask {
 
     private Name name;
     private Address address;

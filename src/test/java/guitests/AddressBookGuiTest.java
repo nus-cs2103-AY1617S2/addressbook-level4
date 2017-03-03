@@ -25,7 +25,7 @@ import seedu.ezdo.TestApp;
 import seedu.ezdo.commons.core.EventsCenter;
 import seedu.ezdo.commons.events.BaseEvent;
 import seedu.ezdo.model.AddressBook;
-import seedu.ezdo.model.todo.ReadOnlyPerson;
+import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.testutil.TestUtil;
 import seedu.ezdo.testutil.TypicalTestPersons;
 
@@ -107,7 +107,7 @@ public abstract class AddressBookGuiTest {
     /**
      * Asserts the person shown in the card is same as the given person
      */
-    public void assertMatching(ReadOnlyPerson person, PersonCardHandle card) {
+    public void assertMatching(ReadOnlyTask person, PersonCardHandle card) {
         assertTrue(TestUtil.compareCardAndPerson(card, person));
     }
 

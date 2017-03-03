@@ -4,7 +4,7 @@ import java.util.Set;
 
 import seedu.ezdo.commons.core.UnmodifiableObservableList;
 import seedu.ezdo.model.todo.Person;
-import seedu.ezdo.model.todo.ReadOnlyPerson;
+import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.model.todo.UniquePersonList;
 import seedu.ezdo.model.todo.UniquePersonList.DuplicatePersonException;
 
@@ -19,7 +19,7 @@ public interface Model {
     ReadOnlyEzDo getAddressBook();
 
     /** Deletes the given person. */
-    void deletePerson(ReadOnlyPerson target) throws UniquePersonList.PersonNotFoundException;
+    void deletePerson(ReadOnlyTask target) throws UniquePersonList.PersonNotFoundException;
 
     /** Adds the given person */
     void addPerson(Person person) throws UniquePersonList.DuplicatePersonException;
@@ -31,11 +31,11 @@ public interface Model {
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code filteredPersonListIndex} < 0 or >= the size of the filtered list.
      */
-    void updatePerson(int filteredPersonListIndex, ReadOnlyPerson editedPerson)
+    void updatePerson(int filteredPersonListIndex, ReadOnlyTask editedPerson)
             throws UniquePersonList.DuplicatePersonException;
 
     /** Returns the filtered person list as an {@code UnmodifiableObservableList<ReadOnlyPerson>} */
-    UnmodifiableObservableList<ReadOnlyPerson> getFilteredPersonList();
+    UnmodifiableObservableList<ReadOnlyTask> getFilteredPersonList();
 
     /** Updates the filter of the filtered person list to show all persons */
     void updateFilteredListToShowAll();

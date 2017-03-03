@@ -13,7 +13,7 @@ import seedu.ezdo.model.todo.Email;
 import seedu.ezdo.model.todo.Name;
 import seedu.ezdo.model.todo.Person;
 import seedu.ezdo.model.todo.Phone;
-import seedu.ezdo.model.todo.ReadOnlyPerson;
+import seedu.ezdo.model.todo.ReadOnlyTask;
 
 /**
  * JAXB-friendly version of the Person.
@@ -44,7 +44,7 @@ public class XmlAdaptedPerson {
      *
      * @param source future changes to this will not affect the created XmlAdaptedPerson
      */
-    public XmlAdaptedPerson(ReadOnlyPerson source) {
+    public XmlAdaptedPerson(ReadOnlyTask source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;

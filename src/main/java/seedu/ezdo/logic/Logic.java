@@ -3,7 +3,7 @@ package seedu.ezdo.logic;
 import javafx.collections.ObservableList;
 import seedu.ezdo.logic.commands.CommandResult;
 import seedu.ezdo.logic.commands.exceptions.CommandException;
-import seedu.ezdo.model.todo.ReadOnlyPerson;
+import seedu.ezdo.model.todo.ReadOnlyTask;
 
 /**
  * API of the Logic component
@@ -18,6 +18,6 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException;
 
     /** Returns the filtered list of persons */
-    ObservableList<ReadOnlyPerson> getFilteredPersonList();
+    ObservableList<ReadOnlyTask> getFilteredPersonList();
 
 }

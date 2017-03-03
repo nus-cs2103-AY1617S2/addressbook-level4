@@ -12,7 +12,7 @@ import seedu.ezdo.model.todo.Email;
 import seedu.ezdo.model.todo.Name;
 import seedu.ezdo.model.todo.Person;
 import seedu.ezdo.model.todo.Phone;
-import seedu.ezdo.model.todo.ReadOnlyPerson;
+import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.model.todo.UniquePersonList;
 
 /**
@@ -51,13 +51,13 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
+        List<ReadOnlyTask> lastShownList = model.getFilteredPersonList();
 
         if (filteredPersonListIndex >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyPerson personToEdit = lastShownList.get(filteredPersonListIndex);
+        ReadOnlyTask personToEdit = lastShownList.get(filteredPersonListIndex);
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         try {
@@ -73,7 +73,7 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(ReadOnlyPerson personToEdit,
+    private static Person createEditedPerson(ReadOnlyTask personToEdit,
                                              EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 

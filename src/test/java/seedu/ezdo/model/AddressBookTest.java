@@ -18,7 +18,7 @@ import seedu.ezdo.model.AddressBook;
 import seedu.ezdo.model.ReadOnlyEzDo;
 import seedu.ezdo.model.tag.Tag;
 import seedu.ezdo.model.todo.Person;
-import seedu.ezdo.model.todo.ReadOnlyPerson;
+import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.testutil.TypicalTestPersons;
 
 public class AddressBookTest {
@@ -62,7 +62,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
         AddressBook typicalAddressBook = new TypicalTestPersons().getTypicalAddressBook();
-        List<ReadOnlyPerson> newPersons = typicalAddressBook.getTaskList();
+        List<ReadOnlyTask> newPersons = typicalAddressBook.getTaskList();
         List<Tag> newTags = new ArrayList<>(typicalAddressBook.getTagList());
         // Repeat the first tag twice
         newTags.add(newTags.get(0));
@@ -76,16 +76,16 @@ public class AddressBookTest {
      * A stub ReadOnlyAddressBook whose persons and tags lists can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyEzDo {
-        private final ObservableList<ReadOnlyPerson> persons = FXCollections.observableArrayList();
+        private final ObservableList<ReadOnlyTask> persons = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<? extends ReadOnlyPerson> persons, Collection<? extends Tag> tags) {
+        AddressBookStub(Collection<? extends ReadOnlyTask> persons, Collection<? extends Tag> tags) {
             this.persons.setAll(persons);
             this.tags.setAll(tags);
         }
 
         @Override
-        public ObservableList<ReadOnlyPerson> getTaskList() {
+        public ObservableList<ReadOnlyTask> getTaskList() {
             return persons;
         }
 

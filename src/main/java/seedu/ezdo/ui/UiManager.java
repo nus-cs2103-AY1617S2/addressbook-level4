@@ -15,7 +15,7 @@ import seedu.ezdo.commons.core.Config;
 import seedu.ezdo.commons.core.LogsCenter;
 import seedu.ezdo.commons.events.storage.DataSavingExceptionEvent;
 import seedu.ezdo.commons.events.ui.JumpToListRequestEvent;
-import seedu.ezdo.commons.events.ui.PersonPanelSelectionChangedEvent;
+import seedu.ezdo.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.ezdo.commons.events.ui.ShowHelpRequestEvent;
 import seedu.ezdo.commons.util.StringUtil;
 import seedu.ezdo.logic.Logic;
@@ -120,7 +120,7 @@ public class UiManager extends ComponentManager implements Ui {
     }
 
     @Subscribe
-    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
+    private void handlePersonPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.loadPersonPage(event.getNewSelection());
     }

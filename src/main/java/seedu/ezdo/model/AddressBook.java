@@ -13,7 +13,7 @@ import seedu.ezdo.commons.core.UnmodifiableObservableList;
 import seedu.ezdo.model.tag.Tag;
 import seedu.ezdo.model.tag.UniqueTagList;
 import seedu.ezdo.model.todo.Person;
-import seedu.ezdo.model.todo.ReadOnlyPerson;
+import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.model.todo.UniquePersonList;
 import seedu.ezdo.model.todo.UniquePersonList.DuplicatePersonException;
 
@@ -50,7 +50,7 @@ public class AddressBook implements ReadOnlyEzDo {
 
 //// list overwrite operations
 
-    public void setPersons(List<? extends ReadOnlyPerson> persons)
+    public void setPersons(List<? extends ReadOnlyTask> persons)
             throws UniquePersonList.DuplicatePersonException {
         this.persons.setPersons(persons);
     }
@@ -97,7 +97,7 @@ public class AddressBook implements ReadOnlyEzDo {
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updatePerson(int index, ReadOnlyPerson editedReadOnlyPerson)
+    public void updatePerson(int index, ReadOnlyTask editedReadOnlyPerson)
             throws UniquePersonList.DuplicatePersonException {
         assert editedReadOnlyPerson != null;
 
@@ -139,7 +139,7 @@ public class AddressBook implements ReadOnlyEzDo {
         persons.forEach(this::syncMasterTagListWith);
     }
 
-    public boolean removePerson(ReadOnlyPerson key) throws UniquePersonList.PersonNotFoundException {
+    public boolean removePerson(ReadOnlyTask key) throws UniquePersonList.PersonNotFoundException {
         if (persons.remove(key)) {
             return true;
         } else {
@@ -162,7 +162,7 @@ public class AddressBook implements ReadOnlyEzDo {
     }
 
     @Override
-    public ObservableList<ReadOnlyPerson> getTaskList() {
+    public ObservableList<ReadOnlyTask> getTaskList() {
         return new UnmodifiableObservableList<>(persons.asObservableList());
     }
 
