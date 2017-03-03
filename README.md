@@ -11,7 +11,7 @@
   a CLI (Command Line Interface).
 * It is **written in OOP fashion**. It provides a **reasonably well-written** code example that is
   **significantly bigger** (around 6 KLoC)than what students usually write in beginner-level SE modules.
-* It leverages on a Java sample application `[AddressBook level 4](https://github.com/se-edu/addressbook-level4)` intended for students learning Software Engineering while using Java as the main programming language.
+* It leverages on a Java sample application [[AddressBook level 4](https://github.com/se-edu/addressbook-level4)] intended for students learning Software Engineering while using Java as the main programming language.
 
 
 #### Site Map
