@@ -106,21 +106,7 @@ Format: `listc`
 NOTE:
 > note that tasks and events have different fields, and therefore the parameter SORT_FIELD may vary between events and tasks.
 
-### 3.4 Viewing other material: `view`
-
-**View command history**: 
-
-Format: `view history`
-
-**View the calendar**: 
-
-Format: `view calendar`
-
-**View free time during the day/week/month** : 
-
-Format: `view free day | week | month`
-
-### 3.5 Updating a field of a task/event in the active list : `edit`
+### 3.4 Updating a field of a task/event in the active list : `edit`
 
 > User can edit the fields of the tasks and events in the active list by using their indexes specified in the most recent list. The steps are therefore as follows:
 
@@ -135,6 +121,21 @@ Examples:
 
 `edit 1 priority 3`, assuming that the item with index 1 is a task.
 
+### 3.5 Mark as `done` or dimiss tasks and events: `done` and `dis`
+> Just like the `edit` command, the user makes use of the index provided by the `list`-type commands. Either way, the task/event gets stored in the expired list.
+
+**Marking a task or event as done**:
+
+Format: `done INDEX`
+
+**Dismissing a task or event, without actually completing**:
+
+Format: `dis INDEX [\\REASON]`
+
+Example:
+
+`dis 2 \\dropped the module so no longer need to complete this assignment`
+
 ### 3.6. Finding event or task by keyword: `find`
 
 > Finds tasks or events whose field(s) contain any of the given keywords.<br>
@@ -146,8 +147,9 @@ Examples:
 * `find cs2103`<br>
   Returns any task or event pertaining to cs2103
 
-### 3.7. Deleting a task/event: `delete`
-> Just like edit, user can delete tasks and events in the active list by using their indexes specified in the most recent list.
+### 3.7. Deleting a task/event without moving it to the expired list: `delete`
+
+> Just like edit, user can delete tasks and events in the active list by using their indexes specified in the most recent list. This option can also be used for tasks or events already in the expired list from which the user wants to get rid of.
 
 Format: `delete INDEX`
 
@@ -155,21 +157,35 @@ Format: `delete INDEX`
 
 Format: `clear`
 
-### 3.9. Exiting the program : `exit`
+### 3.9 Viewing other material: `view`
+
+**View command history**: 
+
+Format: `view history`
+
+**View the calendar**: 
+
+Format: `view calendar`
+
+**View free time during the day/week/month** : 
+
+Format: `view free day | week | month`
+
+### 3.10 Exiting the program : `exit`
 
 Format: `exit`
 
-### 3.10 Undoing the last command: `undo`
+### 3.11 Undoing the last command: `undo`
 
 Format: `undo`
 
-### 3.11 Recycle 
+### 3.12 Recycle 
 
 Brings back the expired tasks/events back to active list, with the deadline/event date altered.The index is as shown by `listc` command.
 
 Format : `Recycle INDEX DEADLINE | START_DATE START_TIME to [END_DATE] END_TIME`
 
-### 3.12 Files
+### 3.13 Files
 
 **Switch between files**: `switchf FILEPATH`
 > if the file given by FILEPATH does not exist, `TaskCrusher` creates a new file
