@@ -1,5 +1,7 @@
 package seedu.doist.logic.commands;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,15 +18,16 @@ import seedu.doist.model.task.UniqueTaskList;
  */
 public class AddCommand extends Command {
 
-    public static final String COMMAND_WORD = "add";
+    public static ArrayList<String> commandWords = new ArrayList<>(Arrays.asList("add", "do"));
+    public static final String DEFAULT_COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = CommandUtil.getUsageTextForCommandWords(commandWords, DEFAULT_COMMAND_WORD) + ": Adds a person to the address book. "
             + "Parameters: NAME p/PHONE e/EMAIL a/ADDRESS  [t/TAG]...\n"
-            + "Example: " + COMMAND_WORD
+            + "Example: " + DEFAULT_COMMAND_WORD
             + " John Doe p/98765432 e/johnd@gmail.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New task added: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the to-do list";
 
     private final Task toAdd;
 
@@ -54,7 +57,5 @@ public class AddCommand extends Command {
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-
     }
-
 }

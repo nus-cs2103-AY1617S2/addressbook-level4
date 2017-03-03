@@ -1,5 +1,8 @@
 package seedu.doist.logic.commands;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import seedu.doist.commons.core.Messages;
 import seedu.doist.commons.core.UnmodifiableObservableList;
 import seedu.doist.logic.commands.exceptions.CommandException;
@@ -11,12 +14,13 @@ import seedu.doist.model.task.UniqueTaskList.TaskNotFoundException;
  */
 public class DeleteCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete";
+	public static ArrayList<String> commandWords = new ArrayList<>(Arrays.asList("delete"));
+    public static final String DEFAULT_COMMAND_WORD = "delete";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
+    public static final String MESSAGE_USAGE = CommandUtil.getUsageTextForCommandWords(commandWords, DEFAULT_COMMAND_WORD)
             + ": Deletes the person identified by the index number used in the last person listing.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Example: " + DEFAULT_COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 

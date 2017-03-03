@@ -1,5 +1,8 @@
 package seedu.doist.logic.commands;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import seedu.doist.commons.core.EventsCenter;
 import seedu.doist.commons.core.Messages;
 import seedu.doist.commons.core.UnmodifiableObservableList;
@@ -14,12 +17,13 @@ public class SelectCommand extends Command {
 
     public final int targetIndex;
 
-    public static final String COMMAND_WORD = "select";
+    public static ArrayList<String> commandWords = new ArrayList<>(Arrays.asList("select"));
+    public static final String DEFAULT_COMMAND_WORD = "select";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
+    public static final String MESSAGE_USAGE = CommandUtil.getUsageTextForCommandWords(commandWords, DEFAULT_COMMAND_WORD)
             + ": Selects the person identified by the index number used in the last person listing.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Example: " + DEFAULT_COMMAND_WORD + " 1";
 
     public static final String MESSAGE_SELECT_PERSON_SUCCESS = "Selected Person: %1$s";
 

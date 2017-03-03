@@ -1,5 +1,8 @@
 package seedu.doist.logic.commands;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import seedu.doist.commons.core.EventsCenter;
 import seedu.doist.commons.events.ui.ExitAppRequestEvent;
 
@@ -8,7 +11,8 @@ import seedu.doist.commons.events.ui.ExitAppRequestEvent;
  */
 public class ExitCommand extends Command {
 
-    public static final String COMMAND_WORD = "exit";
+	public static ArrayList<String> commandWords = new ArrayList<>(Arrays.asList("exit"));
+    public static final String DEFAULT_COMMAND_WORD = "exit";
 
     public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Exiting Address Book as requested ...";
 
