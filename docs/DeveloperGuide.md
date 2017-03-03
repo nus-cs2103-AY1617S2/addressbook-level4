@@ -350,7 +350,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | new user | view more information about a particular command | so that I can learn how to use various commands
 `* * *` | user | set a task by specifying a deadline | know when the task is due
 `* * *` | user | add a task with a start time and end time | record tasks that are events
-`* * *` | user | add a task by specifying a task description only | record tasks that need to be done ¡®some day¡¯
+`* * *` | user | add a task by specifying a task description only | record tasks that need to be done some day
 `* * *` | user | delete a task | get rid of tasks that I no longer care to track
 `* * *` | user | mark a task as done so that the task will not appear in my to-do list anymore
 `* * *` | user | unmark tasks previously marked as done to edit the task status
@@ -368,7 +368,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user | be notified if the time period an event I am adding clashes or overlaps with another event already added | reschedule the event to another free time slot if needed
 `* *` | user | assign tags to the tasks | organise them properly
 `* *` | user | indicate the priority of a task | see which tasks are more urgent or important
-`* *` | user | add a ¡°VERY IMPORTANT¡± Task to be shown whenever I open up the task list
+`* *` | user | add a "VERY IMPORTANT" Task to be shown whenever I open up the task list
 `* *` | user | colour code my tasks | I can differentiate tasks better
 `* *` | user | add icons to my tasks | quickly tell what kind of tasks I have
 `* *` | user | organise my tasks into different sections | view only the tasks that are relevant to the situation
@@ -399,28 +399,113 @@ Priority | As a ... | I want to ... | So that I can...
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: Add task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User inputs task details
+2. TaskList shows updated task list <br>
 Use case ends.
 
 **Extensions**
 
-2a. The list is empty
+1a. User adds time period for event which overlaps with time period of existing event
 
-> Use case ends
-
-3a. The given index is invalid
-
-> 3a1. AddressBook shows an error message <br>
+> 1a1. TaskList shows an error message and prompts user to edit time period of event
+> 1a2. User inputs task details <br>
+Steps 1a1-1a2 are repeated until the time period of event entered is valid
   Use case resumes at step 2
 
-{More to be added}
+#### Use case: Delete task
+
+**MSS**
+
+1. User selects task to delete
+2. TaskList asks for user confirmation
+3. User confirms deletion
+4. TaskList deletes task and shows updated task list <br>
+Use case ends.
+
+**Extensions**
+
+3a. User cancels deletion
+> Use case ends
+
+#### Use case: Mark task
+
+**MSS**
+
+1. User marks a task
+2. TaskList moves task from task list to list of completed tasks and shows updated task list <br>
+Use case ends.
+
+#### Use case: Unmark task
+
+**MSS**
+
+1. User unmarks a task
+2. TaskList moves task from list of completed tasks back to current task list and shows updated task list <br>
+Use case ends.
+
+#### Use case: Edit task details (includes deadline)
+
+**MSS**
+
+1. User selects task to edit
+2. TaskList shows task details
+3. User edits task details
+4. TaskList shows updated task details <br>
+Use case ends.
+
+**Extensions**
+
+3a. New time period of event added overlaps with time period of existing event
+
+> 3a1. TaskList shows an error message and prompts user to edit time period of event
+> 3a2. User inputs task details <br>
+Steps 3a1-3a2 are repeated until the time period of event entered is valid
+  Use case resumes at step 4	
+
+#### Use case: View by deadlines
+
+**MSS**
+
+1. User selects time filter to filter the deadlines of the task list by 
+2. TaskList displays tasks that are due within the timeline specified by the filter <br>
+  Use case ends.
+
+#### Use case: Change UI layout
+
+**MSS**
+
+1. User requests to change UI layout
+2. TaskList shows UI layout features that can be customised
+3. User edits UI layout features
+4. TaskList shows a preview and asks for confirmation
+5. User confirms changes to UI layout
+6. TaskList returns to user’s previous screen <br>
+Use case ends.
+
+#### Use case: Add default keywords
+
+**MSS**
+
+1. User requests to add default keywords
+2. TaskList displays a list of TaskList functions and their keywords
+3. User selects function to add a keyword to
+4. TaskList asks for keyword
+5. User inputs keyword
+6. TaskList shows updated list of TaskList functions and their keywords <br>
+Use case ends.
+
+**Extensions**
+
+5a. Keyword already in use
+
+> 5a1. TaskList shows an error message and asks users for keyword again
+> 5a2. User inputs keyword
+Steps 5a1-5a2 are repeated until the keyword entered is valid
+  Use case resumes at step 6
 
 ## Appendix C : Non Functional Requirements
 
