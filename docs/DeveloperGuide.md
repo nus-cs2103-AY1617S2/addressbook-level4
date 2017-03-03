@@ -10,11 +10,11 @@ By : `Team F12-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbs
 4. [Testing](#4-testing)
 5. [Dev Ops](#5-dev-ops)
 
-* [Appendix A: User Stories](#appendix-a-user-stories)
-* [Appendix B: Use Cases](#appendix-b-use-cases)
-* [Appendix C: Non Functional Requirements](#appendix-c-non-functional-requirements)
-* [Appendix D: Glossary](#appendix-d-glossary)
-* [Appendix E : Product Survey](#appendix-e-product-survey)
+* [Appendix A: User Stories](#appendix-a--user-stories)
+* [Appendix B: Use Cases](#appendix-b--use-cases)
+* [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
+* [Appendix D: Glossary](#appendix-d--glossary)
+* [Appendix E : Product Survey](#appendix-e--product-survey)
 
 
 ## 1. Setting up
@@ -374,10 +374,10 @@ Priority | As a(n) ... | I want to ... | So that I can...
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User requests to list tasks
+2. SavvyToDo shows a list of tasks
+3. User requests to delete a specific task in the list
+4. AddressBook deletes the task <br>
 Use case ends.
 
 **Extensions**
