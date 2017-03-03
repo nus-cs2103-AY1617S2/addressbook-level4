@@ -167,7 +167,7 @@ Format: `clear`
 
 ### 2.12. Setting Priority: `priority`
 
-Set Priority for a task with 1 being the most important and 3 being the least important.
+Set Priority for a task with 1 being the most important and 3 being the least important. <br>
 Format: `priority t/TASK p/INDEX`
 
 > The `task` refers to the title of the task and the `index` refers to the ranking of priorities.
