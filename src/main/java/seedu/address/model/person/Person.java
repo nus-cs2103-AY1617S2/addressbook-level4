@@ -12,8 +12,8 @@ import seedu.address.model.tag.UniqueTagList;
 public class Person implements ReadOnlyPerson {
 
     private Name name;
-    private Phone phone;
-    private Email email;
+    private Priority phone;
+    private Status email;
     private Note address;
 
     private UniqueTagList tags;
@@ -21,7 +21,7 @@ public class Person implements ReadOnlyPerson {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Note address, UniqueTagList tags) {
+    public Person(Name name, Priority phone, Status email, Note address, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -47,23 +47,23 @@ public class Person implements ReadOnlyPerson {
         return name;
     }
 
-    public void setPhone(Phone phone) {
+    public void setPhone(Priority phone) {
         assert phone != null;
         this.phone = phone;
     }
 
     @Override
-    public Phone getPhone() {
+    public Priority getPhone() {
         return phone;
     }
 
-    public void setEmail(Email email) {
+    public void setEmail(Status email) {
         assert email != null;
         this.email = email;
     }
 
     @Override
-    public Email getEmail() {
+    public Status getEmail() {
         return email;
     }
 
