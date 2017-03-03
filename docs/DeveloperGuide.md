@@ -346,12 +346,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | user | see usage instructions | refer to instructions when I forget how to use the App
+`* * *` | user | add a new task with description only | remember what I have to do
+`* * *` | user | add a new task with description and deadline | remember what I have to do before stipulated date/time
+`* * *` | user | add a new task with description and reminder | remember what I have to do and be reminded at specified date/time
+`* * *` | user | add a new task with description and multiple execution dates | remember what I have to do that happens more than once
+`* * *` | user | tag a task | organise my tasks into different group (tags)
+`* * *` | user | delete a task | remove tasks that I no longer need
+`* * *` | user | delete the tag of a task | delete the unnecessary tags
+`* * *` | user | edit a task description | edit tasks description I need to change
+`* * *` | user | edit task timings | edit tasks timings I need to change
+`* * *` | user | edit the tag of a task | modify the tags of my tasks
+`* * *` | user | find a task to do today | locate details of tasks to do today without having to go through the entire list
+`* * *` | user | find a specific task by keyword | locate details of tasks to do by searching for keywords
+`* * *` | user | find a specific task by tags | locate details of tasks to do by searching for tags
+`* * *` | user | mark a task as done | mark tasks as done and become part of history
+`* * *` | user | undo an action | undo action if I made a mistake in making an entry
+`* *` | user | rank tasks by deadlines | prioritise tasks I need to do
+`* *` | user | see a walkthorough | know the features and how to use the App
+`* *` | user | create clickable links in tasks | Access important links quickly from task description
+`* *` | user | delete date/time on multiple-timings task | remove one or more timings on a certain task I no longer need
+`* *` | user | clear all tasks on period of time | easily remove tasks on holiday
+`* *` | busy user | set an alarm for task with deadlines | be reminded regarding deadlines ahead and not miss it
+`*` | migrating user from Google Tasks | Import tasks from Google Tasks | import automatically and not have to key in manually
+`*` | user with Google Calendar | Import tasks from Google Calendar events | import tasks stored in Google Calendar and add on to that
+`*` | user | create group tasks | share group task with fellow users
+`*` | user | attach documents | be more versatile with my task description
+`*` | advanced user | import and export tasks | have backup and transfer my lists of tasks
+`*` | advanced user | create subtasks within a task | break down complicated tasks into smaller ones
+`*` | user | find tasks in relation to collaborators | find tasks related to a person and possibly combine a few tasks in a meeting
+`*` | user with many tasks | see graphical overview of tasks | plan better
 
 {More to be added}
 
