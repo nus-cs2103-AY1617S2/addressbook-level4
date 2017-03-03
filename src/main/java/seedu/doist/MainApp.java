@@ -38,7 +38,7 @@ public class MainApp extends Application {
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
     public static final Version VERSION = new Version(1, 0, 0, true);
-    
+
     private static final String APPLICATION_NAME = "Doist";
 
     protected Ui ui;
@@ -51,7 +51,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing " + APPLICATION_NAME + " ]===========================");
+        logger.info("=========================[ Initializing " + APPLICATION_NAME + " ]=======================");
         super.init();
 
         config = initConfig(getApplicationParameter("config"));
