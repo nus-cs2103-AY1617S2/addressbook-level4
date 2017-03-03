@@ -1,3 +1,5 @@
+﻿[//]: # (27 Feb | Tian Song: User Stories, UC01 - UC12, Product Survey | Mustaqiim: UC13 - UC25, Product Survey | Shawn: Product Survey | Jeremy: Product Survey)
+
 # Suru - Developer Guide
 
 By : `Team W09-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `?`
@@ -1060,11 +1062,8 @@ Use case ends.
 
 ##### Mainstream OS
 
-> Windows
+> Windows 7 and above
 
-##### Private contact detail
-
-> A contact detail that is not meant to be shared with others
 
 ## Appendix E : Product Survey
 **IKE**
