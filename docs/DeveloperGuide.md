@@ -889,7 +889,7 @@ Cons:
 
 **Any.do**
 
-Author: Shimaria Yesha Bharat
+Author: Simaria Yesha Bharat
 
 Pros:
 
