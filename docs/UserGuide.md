@@ -52,7 +52,7 @@ Examples:
   `delete groceries shopping`<br>
   Deletes groceries shopping in the task manager.
 
-## View non-private details of a person : `view`
+## View description of a task : `view`
 Displays details of the specified task.<br>
 Format: `view TASKNAME`
 
