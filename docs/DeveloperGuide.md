@@ -350,12 +350,10 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | add a new task | keep track of tasks I need to complete
 `* * *` | user | delete a task | remove tasks that are no longer relevant
 `* * *` | user | find a task by name | locate details of task without having to go through the entire list
-`* * *`| user | edit a parameter of a task | update a task without needing to delete and re adding it
+`* * *`| user | edit a parameter of a task | update a task without needing to delete and re-add it
 `* *`| user | list tasks in order of due date | prioritize what to do next
 `* *`| user | mark tasks as important | prioritize what to do next
 `*`| user | print out all tasks | keep a paper copy when there is no computer access
-
-{More to be added}
 
 ## Appendix B : Use Cases
 
@@ -479,7 +477,7 @@ Pros:
 * Can star tasks so important tasks to be easily found.
 * Can parse natural language, ex., “Task A due Wednesday” will be converted to a task with the name Task A and the upcoming Wednesday as the due date.
 * Supports subtasks, comments, and attachments for richer task details.
-* Has reminders to user can be notified before a due date.
+* Has reminders so user can be notified before a due date.
 * Entry of tasks is very quick.
 
 Cons:
@@ -519,17 +517,17 @@ Author: Apple Inc
 
 Pros:
 
-* simple ui design, easy to learn to use
-* can set due dates for alert
-* well integrated with notification center on the iPhone (can see tasks and check off for the day)
-* can sync with other apple products
-* has a search filter
-* data can be backed up on [iCloud](https://support.apple.com/kb/ph2608?locale=en_US)
+* Simple UI design, easy to learn to use
+* Can set due dates for alert
+* Well integrated with notification center on the iPhone (can see tasks and check off for the day)
+* Can sync with other apple products
+* Has a search filter
+* Data can be backed up on [iCloud](https://support.apple.com/kb/ph2608?locale=en_US)
 
 Cons:
 
 * Only 1 dimension of lists (cannot create lists within lists)
-* can only filter by dates (cannot filter by categories, due dates, etc)
+* Can only filter by dates (cannot filter by categories, due dates, etc)
 * Very limited application, low customizability
 * Cannot integrate with other technologies
 * Only available for iPhone users
