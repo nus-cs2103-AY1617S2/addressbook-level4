@@ -13,12 +13,12 @@ import java.util.stream.Collectors;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Note;
-import seedu.address.model.person.Priority;
-import seedu.address.model.person.Status;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Name;
+import seedu.address.model.task.Note;
+import seedu.address.model.task.Priority;
+import seedu.address.model.task.Status;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
