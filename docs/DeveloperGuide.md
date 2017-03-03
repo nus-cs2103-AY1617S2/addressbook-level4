@@ -370,6 +370,21 @@ Priority | As a(n) ... | I want to ... | So that I can...
 
 (For all use cases below, the **System** is the `SavvyToDo` and the **Actor** is the `user`, unless specified otherwise)
 
+#### Use case: Add task
+
+**MSS**
+
+1. User enters command to add task
+2. System adds the task <br>
+Use case ends.
+
+**Extensions**
+
+1a. User input is invalid
+
+> 1a1. System shows error message
+> Use case ends
+
 #### Use case: Delete person
 
 **MSS**
@@ -388,8 +403,25 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. AddressBook shows an error message <br>
+> 3a1. System shows an error message <br>
   Use case resumes at step 2
+
+#### Use case: Change Storage Location
+
+**MSS**
+
+1. User requests to change storage location
+2. System prompts for storage location and file name
+3. User selects storage location and file name
+4. System saves tasks into new location and shows user a complete message<br>
+Use case ends.
+
+**Extensions**
+
+3a. Error using given storage location
+
+> 3a1. System shows an error message
+> Use case ends
 
 ## Appendix C : Non Functional Requirements
 
@@ -484,3 +516,4 @@ Cons:
 **The (really) Big Table of Comparison**
 
 > An extensive table of products comparison can be found [here (credits: Reddit/r/productivity)] (https://docs.google.com/spreadsheets/d/1yP6ZOXMWK-KsMZ-_Bod8tFhyEGdPndCu4HUBO_3rUww/edit#gid=0).
+>
