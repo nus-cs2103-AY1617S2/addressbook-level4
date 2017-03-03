@@ -1,5 +1,6 @@
 package seedu.doist.logic.parser;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -39,7 +40,19 @@ public class ParserUtil {
             return Optional.empty();
         }
         return Optional.of(Integer.parseInt(index));
+    }
 
+    /**
+     * Returns an array of integers separated using space in the input string
+     */
+    public static List<Optional<Integer>> parseIndices(String command) {
+        ArrayList<Optional<Integer>> indices = new ArrayList<Optional<Integer>>();
+        String[] commandStringComponents = command.trim().split(" ");
+        for (String component : commandStringComponents) {
+            indices.add(parseIndex(component));
+        }
+        System.out.println(indices);
+        return indices;
     }
 
     /**

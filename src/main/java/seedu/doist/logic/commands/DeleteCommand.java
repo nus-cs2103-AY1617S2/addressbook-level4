@@ -19,35 +19,40 @@ public class DeleteCommand extends Command {
     public static final String DEFAULT_COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = getUsageTextForCommandWords()
-            + ": Deletes the person identified by the index number used in the last person listing.\n"
-            + "Parameters: INDEX (must be a positive integer)\n" + "Example: " + DEFAULT_COMMAND_WORD + " 1";
+            + ": Deletes the tasks identified by the index numbers used in the last task listing.\n"
+            + "Parameters: INDEX [INDEX...] (must be a positive integer)\n"
+            + "Example: " + DEFAULT_COMMAND_WORD + " 1 8";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
-    public final int targetIndex;
+    public final int[] targetIndices;
 
-    public DeleteCommand(int targetIndex) {
-        this.targetIndex = targetIndex;
+    public DeleteCommand(int[] targetIndices) {
+        this.targetIndices = targetIndices;
     }
 
     @Override
     public CommandResult execute() throws CommandException {
 
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        ArrayList<ReadOnlyTask> tasksToDelete = new ArrayList<ReadOnlyTask>();
 
-        if (lastShownList.size() < targetIndex) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        for (int targetIndex : targetIndices) {
+            if (lastShownList.size() < targetIndex) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+
+            ReadOnlyTask taskToDelete = lastShownList.get(targetIndex - 1);
+            tasksToDelete.add(taskToDelete);
+
+            try {
+                model.deleteTask(taskToDelete);
+            } catch (TaskNotFoundException pnfe) {
+                assert false : "The target person cannot be missing";
+            }
         }
 
-        ReadOnlyTask personToDelete = lastShownList.get(targetIndex - 1);
-
-        try {
-            model.deleteTask(personToDelete);
-        } catch (TaskNotFoundException pnfe) {
-            assert false : "The target person cannot be missing";
-        }
-
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, tasksToDelete));
     }
 
     /**
