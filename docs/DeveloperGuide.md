@@ -343,83 +343,117 @@ b. Require developers to download those libraries manually (this creates extra w
 
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
 
-### Example User Stories
+### Our User Stories
+
+### Add Functions
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App <br>
-`* * *` | user | add a new person | <br>
-`* * *` | user | delete a person | remove entries that I no longer need <br>
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list <br>
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident <br>
-`*` | user with many persons in the address book | sort persons by name | locate a person easily <br>
+`* * *` | user | add a new task with a specified deadline | track when it is due <br>
+`* * *` | user | add a new task without specifying deadline | do it sometime later <br>
+`* * *` | user | add a new event | block out my schedule <br>
+`* * *` | user | add a tentative event | hold my schedule until confirmation <br>
+`* * *` | user | add recurring tasks | add all at once <br>
+`* * *` | user | add tasks using everyday phrases (e.g. today, next monday) | save time looking the exact dates up on a calendar<br>
+`* *` | user | add subtasks to a bigger task | organise my tasks into smaller parts <br>
+`* *` | user | add comments to a task | refer back to details about the task <br>
+`* *` | user | add tasks with multiple tags | track overlapping tasks <br>
+`* *` | user | add attachments to a task | complete my task with greater ease <br>
+`* *` | user | be alerted when adding clashing events | know I am unavailable <br>
 
-### Our User Stories 
-# TODO: sort and categorise user stories
 
-`* * *` | user | enter commands with the use of flags | specify the perimeters of the command more clearly <br>
-`* * *` | user | mark a task as complete | remove it from undone tasks <br>
+### Find/Sort Functions
+Priority | As a ... | I want to ... | So that I can...
+-------- | :-------- | :--------- | :-----------
+`* * *` | user | find tasks with upcoming deadlines | prioritise these tasks <br>
+`* * *` | user | find my upcoming events | be aware of my upcoming schedule <br>
+`* * *` | user | find a task by name | easily view more about it <br>
+`* * *` | user | sort tasks by name | locate a task easily <br>
 `* * *` | user | task type filter | view tasks by their types <br>
-`* * *` | user | have each command processed within a second | be more efficient and productive in managing my tasks <br>
-`* * *` | user | perform simple keyword/(s) queries | view all relevant tasks containing the keyword/(s) <br>
-`* * *` | advanced user | use shorter versions of commands | type each command faster <br>
+`* * *` | user | search for a keyword | view all associated tasks <br>
+`* * *` | user | do power searching | find tasks whose exact names I have forgotten  <br>
+`* *` | user | sort the tasks based on tags | view tasks by tags <br>
+
+### Edit Functions
+Priority | As a ... | I want to ... | So that I can...
+-------- | :-------- | :--------- | :-----------
+`* * *` | user | mark a task as done | remove it from my to-dos  <br>
+`* *` | user | archive a done task | track what I have completed <br>
+`* * *` | user | delete a task | remove what I no longer want to track <br>
+`* * *` | user | edit a task | modify and update its details  <br>
 `* * *` | user | undo my last move | correct my mistake <br>
-`* * *` | user | have common words (e.g. today, next monday) to be valid commands | I don't have to look up a calendar to get exact dates <br>
-`* * *` | user | view information about a particular command | learn to use it <br>
-`* * *` | user | find upcoming tasks | see what needs to be done soon <br>
-`* * *` | user | add a task by specifying task description only | record tasks without deadlines <br>
-`* * *` | user | update or edit a task | change information about the task  <br>
-`* * *` | user | delete a task | get rid of tasks i no longer wish to track <br>
-`* * *` | user | have a tutorial | know how to use the task manager <br>
-`* * *` | user | be able to do everything through typing | it is convenient for me <br>
+`* *` | user | redo my last move | redo an undo action <br>
+`* *` | user | undo a series of moves | correct multiple consecutive mistakes <br>
+`* *` | user | redo a series of moves | redo multiple consecutive undo actions <br>
+`* *` | user | mark a whole group of tasks as done | save time and effort <br>
+
+### View Functions
+Priority | As a ... | I want to ... | So that I can...
+-------- | :-------- | :--------- | :-----------
 `* * *` | user | view undone tasks according to deadlines | I can prioritise tasks that are more urgent <br>
+`* *` | user | see overdue tasks | finish them right away <br>
 `* * *` | user | view my tasks by day | know what my tasks and schedule are for a certain day <br>
 `* * *` | user | weekly overview of what is due this week | plan my time better <br>
-`* * *` | user | set recurring tasks | don't have to key recurring events repeatedly <br>
-
-
-`* *` | user | redo an action | redo an undo action <br>
 `* *` | user | big picture overview of my daily performance | learn the patterns of my own productivity  <br>
-`* *` | user | access my email alongside the task manager | do not need to switch screens in order to add tasks <br>
-`* *` | user | commands to be highlighted | know they are valid commands <br>
-`* *` | user | see command formats as I type | refer to it if I am unsure of the format <br>
-`* *` | user | a daily progress check-in function | know I have worked on a task today even if I cannot complete it <br>
 `* *` | user | see all upcoming deadlines in a calendar view | have an overview of all my tasks <br>
-`* *` | user | integration with text notifications | receive text alerts regarding important tasks that are due even when I do not have access to my task manager <br>
 `* *` | user | view tasks by their given tags | sort them according to tags <br>
-`* *` | user | to archive completed tasks | know what I have completed in the past <br>
+`* *` | user | see a countdown timer | know how much time is left to do each task <br>
+`* *` | user | view a confirmation that my command has been processed | be assured  <br>
+
+### Help Functions
+Priority | As a ... | I want to ... | So that I can...
+-------- | :-------- | :--------- | :-----------
+`* * *` | user | view information about a particular command | learn to use it <br>
+`* * *` | user | have the option of having a tutorial | know how to use the task manager <br>
+`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App <br>
+`* *` | user | see command formats as I type | refer to it if I am unsure of the format <br>
+
+### Advanced Functions
+Priority | As a ... | I want to ... | So that I can...
+-------- | :-------- | :--------- | :-----------
+`* * *` | advanced user | enter commands with the use of flags | specify the perimeters of the command more clearly <br>
+`* * *` | advanced user | use shorter versions of commands | type each command faster <br>
 `* *` | user | create new shortcuts | speed up my workflow <br>
-`* *` | user | see overdue tasks | know I need to finish those fast <br>
-`* *` | user | change font, font size, colour of words | feel more comfortable using the task manager <br>
+
+### Integration Functions
+Priority | As a ... | I want to ... | So that I can...
+-------- | :-------- | :--------- | :-----------
+`* *` | user | have integration with text notifications | receive text alerts on important tasks that are due when I am away from my task manager <br>
+`* *` | user | access my email alongside the task manager | do not need to switch screens in order to add tasks <br>
 `* *` | user | my task manager to link to the necessary resources such as email or IVLE exact pages | I do not have to open a browser to do such things <br>
-`* *` | user | import calendars' schedule into the task manager | I can look at my calendar <br>
-`* *` | user | redo commands | redo what I have undo-ed <br>
-`* *` | user | mark a whole group of tasks as done | I don't have to mark each task individually <br>
-`* *` | user | port my whole schedule over to online platforms such as Dropbox | can access it on any computer <br>
-`* *` | user | add tasks with multiple tags | assign each task multiple keywords <br>
-`* *` | user | undo multiple actions at once | save time undo-ing individually  <br>
-`* *` | user | check my spelling as I type | correct it immediately <br>
-`* *` | user | have a countdown day timer | know how much time is left to do each task <br>
-`* *` | user | redo multiple actions at once | save time redo-ing individually <br>
-`* *` | user | have a confirmation that my command has been processed | be assured  <br>
-`* *` | user | add comments to a task | know more details about the task <br>
-`* *` | user | enable backup | have a backup copy in case the storage fails or crashes <br>
-`* *` | user | have my list of to-dos sync across all my devices | work without the computer <br>
 `* *` | user | open the respective application to complete a particular task | save extra steps <br>
-`* *` | user | some sort of points or incentive system | accomplish more and be more motivated to be productive <br>
-`* *` | user | attach documents to my tasks | organise my documents according to tasks <br>
-`* *` | user | a reminder function | get notified when deadlines or events are nearer <br>
-`* *` | user | sort the tasks based on tags | view tasks by tags <br>
-`* *` | user | add subtasks to a bigger task | organise my tasks into smaller parts <br>
-`* *` | user | prioritise my tasks | finish those of higher priority first <br>
-`* *` | user | be prompted when adding clashing events | be aware of prior engagements I have already scheduled to be occurring at the same time <br>
+`* *` | user | have my list of to-dos sync across all my devices | work without the computer <br>
+`* *` | user | port my whole schedule over to online platforms such as Dropbox | can access it on any computer <br>
+`* *` | user | import calendars' schedule into the task manager | I can look at my calendar <br>
 
-
+### Design/UIUX Functions
+Priority | As a ... | I want to ... | So that I can...
+-------- | :-------- | :--------- | :-----------
+`*` | user | a simple user interface | be less distracted and more productive <br>
+`* *` | user | change font, font size, colour of words | personalise my task manager to my preference <br>
+`* *` | user | have a few colour themes I can choose between | select colours I am more comfortable with <br>
 `*` | user | see affirmations of my effort upon task completions | look forward to accomplishing more tasks <br>
 `*` | user | be greeted with motivational lines when I launch the task manager | feel motivated to start doing things <br>
 `*` | user | greeted with a compliment when I launch the task manager | be in a good mood to start doing things <br>
 `*` | user | receive encouragement | feel good about myself and want to use the task manager more <br>
 `*` | user | some sort of punishment when I fail to complete a task | not forget to do my tasks <br>
-`*` | user | a simple user interface | be less distracted and more productive <br>
+
+### Unique Functions
+Priority | As a ... | I want to ... | So that I can...
+-------- | :-------- | :--------- | :-----------
+`* *` | user | have a daily progress check-in function | know I have worked on a task today even if I cannot complete it <br>
+`* *` | user | have some sort of points or incentive system | accomplish more and be more motivated to be productive <br>
+`* *` | user | have a priority system on my tasks | finish those of higher priority first <br>
+`* *` | user | commands to be highlighted | know they are valid commands <br>
+`* *` | user | have spellcheck as I type commands | correct errors immediately <br>
+`* *` | user | a reminder function | get notified when deadlines or events are nearer <br>
+
+### Basic Functions
+Priority | As a ... | I want to ... | So that I can...
+-------- | :-------- | :--------- | :-----------
+`* * *` | user | be able to do everything through typing | it is convenient for me <br>
+`* * *` | user | have each command processed within a second | be more efficient and productive in managing my tasks <br>
+`* *` | user | enable backup | have a backup copy in case the storage fails or crashes <br>
+
 
 ## Appendix B : Use Cases
 
@@ -428,12 +462,14 @@ Priority | As a ... | I want to ... | So that I can...
 #### Use case: View history of actions ####
 
 **MSS**
+
 User keys in a series of command(s)
 User requests to view history of actions
 Typed displays the list of past actions
 Use case ends.
 
 **Extensions**
+
 1a. Command is typed in wrongly
 	| Systems indicate error and output a list of valid commands
 2a. List is empty
@@ -538,7 +574,7 @@ Use case ends.
 
 ## Appendix E : Product Survey
 
-** Eclipse **
+### **Eclipse**
 
 Author: Lee Pei Xuan
 
@@ -555,7 +591,7 @@ Cons:
 * No offline functionality 
 * Only available on Windows 10 computers
 
-** Reminder **
+### **Reminder**
 
 Author: Low Yong Siang
 
@@ -575,7 +611,7 @@ Cons:
 * Only available on Apple devices.
 * Typed navigation to the completed and pending list is not available.
 
-** Evernote **
+### **Evernote**
 
 Author: Mun Le Yuan
 
@@ -598,7 +634,7 @@ Cons:
 * Involves quite a bit of GUI (not very suitable for Jim)
 * Does not allow users to prioritise tasks in notes
 
-** Any.Do **
+### **Any.do**
 
 Author: Yim Chia Hui 
 
@@ -612,3 +648,4 @@ Pros:
 Cons:
 * Not much customizable possible
 * No calendar view
+
