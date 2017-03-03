@@ -53,6 +53,7 @@ Format: `add n/TASKNAME [due/DUEDATE] [t/TIME] [#LISTNAME] [d/DESCRIPTION] [@VEN
 
 > * Tasks cannot have multiple lists<br>
 > * The required field for a task is TASKNAME, while other fields are optional<br>
+> * By default, task will be added to current viewing list, unless [#LISTNAME] is specified.
 > * Due dates of tasks can repeating, e.g. every sunday<br>
 > * Time of each task can only be one time point, e.g. 4pm<br>
 > * Specifications of fields for task can be entered in any order<br>
@@ -150,23 +151,23 @@ Examples:
 * `view dueby/next Friday`<br>
   Returns a list of tasks due by next Friday
 
-### 2.8. Deleting a person : `delete`
+### 2.8. Deleting task(s) : `delete`
 
-Deletes the specified person from the address book. Irreversible.<br>
-Format: `delete INDEX`
+Deletes the specified task from the address book.<br>
+Format: `delete TASKINDEX...`
 
-> * Deletes the person at the specified `INDEX`. <br>
+> * Deletes the task at the specified `TASKINDEX`. <br>
 > * The index refers to the index number shown in the most recent listing.<br>
-> * The index **must be a positive integer** 1, 2, 3, ...
+> * To delete multiple entries, indices must be seperated by whitespaces.
+> * Each index **must be a positive integer** 1, 2, 3, ...
+> * When a repeated task is deleted, user will be questioned whether it should be deleted for once or deleted forever (stop repeating).
 
 Examples:
 
-* `list`<br>
-  `delete 2`<br>
-  Deletes the 2nd person in the address book.
-* `find Betsy`<br>
-  `delete 1`<br>
-  Deletes the 1st person in the results of the `find` command.
+* `delete 2`<br>
+  Deletes the 2nd task in the most recent listing.
+* `delete 1 2 3`<br>
+  Deletes the 1st, 2nd and 3rd tasks in the most recent listing.
 
 ### 2.9. Switch to list mode : `switch`
 
