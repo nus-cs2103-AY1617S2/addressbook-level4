@@ -139,11 +139,11 @@ public class EzDo implements ReadOnlyEzDo {
         persons.forEach(this::syncMasterTagListWith);
     }
 
-    public boolean removePerson(ReadOnlyTask key) throws UniqueTaskList.PersonNotFoundException {
+    public boolean removePerson(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
         if (persons.remove(key)) {
             return true;
         } else {
-            throw new UniqueTaskList.PersonNotFoundException();
+            throw new UniqueTaskList.TaskNotFoundException();
         }
     }
 

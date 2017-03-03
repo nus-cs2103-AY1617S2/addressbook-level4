@@ -19,7 +19,7 @@ public interface Model {
     ReadOnlyEzDo getAddressBook();
 
     /** Deletes the given person. */
-    void deletePerson(ReadOnlyTask target) throws UniqueTaskList.PersonNotFoundException;
+    void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
     /** Adds the given person */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;

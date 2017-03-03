@@ -13,7 +13,7 @@ import seedu.ezdo.commons.util.StringUtil;
 import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.model.todo.UniqueTaskList;
-import seedu.ezdo.model.todo.UniqueTaskList.PersonNotFoundException;
+import seedu.ezdo.model.todo.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -59,7 +59,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void deletePerson(ReadOnlyTask target) throws PersonNotFoundException {
+    public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         ezDo.removePerson(target);
         indicateAddressBookChanged();
     }
