@@ -208,7 +208,7 @@ Format: `finish TASKINDEX...`
 > * The index refers to the index number shown in the most recent listing.<br>
 > * To delete multiple entries, indices must be seperated by whitespaces.
 > * Each index **must be a positive integer** 1, 2, 3, ...
-> * When a repeating task is finished, user will need to confirm whether it should be deleted for once or deleted forever (stop repeating).
+> * When a repeating task is finished, user will need to confirm whether it should be finished for once or finished forever (stop repeating).
 
 ### 2.10. Undo latest command: `undo`
 
