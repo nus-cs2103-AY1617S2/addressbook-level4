@@ -26,7 +26,7 @@ public class TestPerson implements ReadOnlyTask {
      * Creates a copy of {@code personToCopy}.
      */
     public TestPerson(TestPerson personToCopy) {
-        this.name = personToCopy.getName();
+        this.name = personToCopy.getDescription();
         this.phone = personToCopy.getPhone();
         this.email = personToCopy.getEmail();
         this.address = personToCopy.getAddress();
@@ -54,7 +54,7 @@ public class TestPerson implements ReadOnlyTask {
     }
 
     @Override
-    public Description getName() {
+    public Description getDescription() {
         return name;
     }
 
@@ -85,7 +85,7 @@ public class TestPerson implements ReadOnlyTask {
 
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
-        sb.append("add " + this.getName().fullName + " ");
+        sb.append("add " + this.getDescription().desc + " ");
         sb.append("a/" + this.getAddress().value + " ");
         sb.append("p/" + this.getPhone().value + " ");
         sb.append("e/" + this.getEmail().value + " ");

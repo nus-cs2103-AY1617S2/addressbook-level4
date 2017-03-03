@@ -6,12 +6,12 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Task in the to-do list.
  * Guarantees: details are present and not null, field values are validated.
  */
 public class Task implements ReadOnlyTask {
 
-    private Description name;
+    private Description desc;
 
     private UniqueTagList tags;
 
@@ -20,7 +20,7 @@ public class Task implements ReadOnlyTask {
      */
     public Task(Description name, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, tags);
-        this.name = name;
+        this.desc = name;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -28,17 +28,17 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyPerson.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getTags());
+        this(source.getDescription(), source.getTags());
     }
 
-    public void setName(Description name) {
-        assert name != null;
-        this.name = name;
+    public void setDescription(Description desc) {
+        assert desc != null;
+        this.desc = desc;
     }
 
     @Override
-    public Description getName() {
-        return name;
+    public Description getDescription() {
+        return desc;
     }
 
     @Override
@@ -54,12 +54,12 @@ public class Task implements ReadOnlyTask {
     }
 
     /**
-     * Updates this person with the details of {@code replacement}.
+     * Updates this task with the details of {@code replacement}.
      */
     public void resetData(ReadOnlyTask replacement) {
         assert replacement != null;
 
-        this.setName(replacement.getName());
+        this.setDescription(replacement.getDescription());
         this.setTags(replacement.getTags());
     }
 
@@ -73,7 +73,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, tags);
+        return Objects.hash(desc, tags);
     }
 
     @Override

@@ -197,7 +197,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidPersonData() {
         assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
-                Description.MESSAGE_NAME_CONSTRAINTS);
+                Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
                 Phone.MESSAGE_PHONE_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
@@ -448,7 +448,7 @@ public class LogicManagerTest {
 
             cmd.append("add ");
 
-            cmd.append(p.getName().toString());
+            cmd.append(p.getDescription().toString());
             cmd.append(" e/").append(p.getEmail());
             cmd.append(" p/").append(p.getPhone());
             cmd.append(" a/").append(p.getAddress());
