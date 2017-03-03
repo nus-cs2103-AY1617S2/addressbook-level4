@@ -510,7 +510,7 @@ Use case ends
 > Use case ends
  
 1b. The user requests to delete all tasks under certain criteria, e.g. under the same tag or contains certain keywords
-> 1b1. To-do list lists out the tasks that fulfill the criteria (UC #) and prompts a confirmation message <br>
+> 1b1. To-do list lists out the tasks that fulfill the criteria (UC #8) and prompts a confirmation message <br>
 > 1b2. User confirms his actions <br>
 > 1b3. To-do list delete the selected tasks and prompts a message on UI to show success <br>
 > Use case ends
@@ -628,9 +628,9 @@ Use case ends
 > Use case ends
  
 1b. To-do list does not found any tags
->1b1. To-do list returns 'No tags has been found.' <br>
+> 1b1. To-do list returns 'No tags has been found.' <br>
 > Use case ends
-
+
 <br>
 
 #### Use case #10: List reminders
@@ -980,11 +980,11 @@ Features we might like to have
 * Add subtasks
 * Move task to archive (instead of deleting the task)
 * UI: Provide tabs that contain lists of different tasks such as:
-    * 'Today' – tasks without deadlines or tasks due today
-    * 'Overdue' – tasks that are already overdue
-    * 'Project' – tasks that are large scale and with contain subtasks
-    * 'Calendar' – tasks displayed in a calendar format
-    * 'Activity' – a history or log of past actions
+    * 'Today' - tasks without deadlines or tasks due today
+    * 'Overdue' - tasks that are already overdue
+    * 'Project' - tasks that are large scale and with contain subtasks
+    * 'Calendar' - tasks displayed in a calendar format
+    * 'Activity' - a history or log of past actions
 * Tasks can be sorted according to priority.
 * Requires log-in with username and password so data is protected.
 
