@@ -347,38 +347,207 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
-
-{More to be added}
+`* * *` | user | add a new floating task | save tasks without specified deadlines
+`* * *` | user | add a new deadline task | know when some tasks need to be completed by
+`* * *` | user | add a new event | know when my events are
+`* * *` | user | mark a task as complete or incomplete | know what tasks still need to be completed
+`* * *` | user | delete an existing task | get rid of tasks that no longer matter to me
+`* * *` | user | search tasks based on keywords | find all similar tasks
+`* * *` | user | search tasks based on tags | find all tasks in a group
+`* * *` | user | search tasks based on date | find all tasks due near a certain time
+`* * *` | user | modify an existing task's name | change the name of the task
+`* * *` | user | modify an existing task's description | edit the task's requirements
+`* * *` | user | modify an existing task's deadline | keep up with changing deadlines
+`* * *` | user | sort tasks by date | see which tasks will be coming up soon
+`* * *` | user | undo an action | undo any mistakes I make
+`* * *` | user | view all tasks | see all the tasks I've ever added
+`* * *` | user | view all undone tasks | see what tasks I still need to work on
+`* * *` | user | view all floating tasks | see which tasks do not have a deadline
+`* * *` | user | view all events | see what my events are
+`* * *` | user | Save all the tasks in specified local folder/file | Store everything in local file that is controlled by a cloud syncing service (e.g. dropbox) to synchronise across multiple computers
+`* *` | user | categorize tasks into work, study, leisure etc | group my tasks together
+`* * ` | user | Assign priority to each task | rank my tasks depending on what has to get done first
+`* * ` | user | sort tasks by priority | see which tasks will need my attention the most
+`*` | user | Add recurring tasks | so that I can easily add a task that occurs regularly
+`*` | user |Sync with other calendars (e.g. Google calendar) | I can add functionality that TaskIt may not have
+`*` | user | See today’s most important task when opening the app | so that I immediately know what I need to work on
+`*` | user | Receive reminder for the most recent task  | so that I remember what I need to work on
+`*` | user | See encouraging words for completing priority tasks  | so that I feel good about myself and motivated to keep finishing tasks
+`*` | user | Duplicate a task  | so that I don't have to reenter a complicated task
+`*` | user | Link one task to another  | so that I can see when tasks are connected to each other
+`*` | user | view tasks with the same day as a deadline  | so that I can see tasks that are all due on the same day
+`*` | user | view tasks with the same week as a deadline  | so that I can see tasks that are all due in the same week
 
 ## Appendix B : Use Cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
-
-#### Use case: Delete person
+<br>
+#### Use case 1: Add a task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
-Use case ends.
+1. User requests to add a task
+2. TaskIt asks user to confirm
+3. User confirms
+4. TaskIt adds the task <br>
+Use case ends. <br>
 
 **Extensions**
 
-2a. The list is empty
+2a. The given format is invalid
+> 2a1. TaskIt requests a valid command and suggests valid format to users
+> Use case resumes at step 1
+> Use case ends <br>
 
+2b. The end time of an event is before the start time
+> 2b1. TaskIt notifies the user of this error
+> Use case resumes at step 1
+> Use case ends <br>
+<br>
+#### Use case 2: Search for an existing task based on keywords, tags and dates
+
+**MSS**
+
+1. User requests to search for tasks based on given keywords, tags and dates
+2. TaskIt searches for the tasks and returns all the matched tasks to the user <br>
+Use case ends. <br>
+
+**Extensions**
+
+1a. The given command is invalid
+> 2a1. TaskIt requests a valid command and suggests valid format to users
+> Use case resumes at step 1
 > Use case ends
 
-3a. The given index is invalid
+1b. User gives empty keywords
+> 2b1. TaskIt requests user to input keywords
+> Use case resumes at step 1
+> Use case ends
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+1c. No matched tasks found
+> TaskIt returns a message letting the user know there were no matches
+> Use case ends <br>
+<br>
+#### Use case 3: Delete a task
+
+**MSS**
+
+1. User requests to delete a specific task based on keywords
+2. TaskIt deletes the task <br>
+Use case ends. <br>
+
+**Extensions**
+
+1a. The given command is invalid
+> 1a1. TaskIt requests a valid command and suggests valid format to users
+> Use case resumes at step 1
+> Use case ends
+
+1b. User did not specify a valid task
+> 1b1. TaskIt notifies the user and lists all tasks and indices (UC7)
+> 1b2. User specifies task to delete based on index
+> Use case ends
+
+1c. Multiple tasks are found based on the keywords
+> 1c1. TaskIt notifies the user and lists all tasks and indices that were found (UC2)
+> 1c2. User specifies task to delete based on index
+> Use case ends <br>
+<br>
+#### Use case 4: Modify an existing task
+
+**MSS**
+
+1. User searches a task
+2. TaskIt returns the requested list of tasks (UC2)
+3. User specifies the task to modify and the new task details (name, dates etc.)
+4. TaskIt asks for confirmation from user
+5. User confirms
+6. TaskIt changes the task specifications and notifies user <br>
+Use case ends. <br>
+
+**Extensions**
+
+1a. The given command is invalid
+> 1a1. TaskIt requests a valid command and suggests valid format to users
+> Use case resumes at step 1
+> Use case ends
+
+2a. No tasks were found
+> 2a1. TaskIt notifies the user and lists all tasks and indices (UC7)
+> 2a2. User specifies task to modify based on index
+> Use case ends
+
+2b. Multiple tasks are found based on the keywords
+> 2b1. TaskIt notifies the user and lists all tasks and indices that were found (UC2)
+> 2b2. User specifies task to modify based on index
+> Use case ends <br>
+<br>
+#### Use case 5: Undo an action
+
+**MSS**
+
+1. User requests to undo last action
+2. TaskIt asks for confirmation
+3. User confirms
+4. TaskIt undoes last action <br>
+Use case ends. <br>
+
+**Extensions**
+1a. The given command is invalid
+> 1a1. TaskIt requests a valid command and suggests valid format to users
+> Use case resumes at step 1
+> Use case ends
+
+2a. No previous action found
+> 2a1. TaskIt notifies the user
+> Use case ends
+
+1b. Multiple tasks are found based on the keywords
+> 1b1. TaskIt notifies the user and lists all tasks and indices that were found (UC2)
+> 1b2. User specifies task to delete based on index
+> Use case ends <br>
+<br>
+#### Use case 6: Mark a task as completed or incompleted
+
+**MSS**
+
+1. User requests to mark a specific task based on keywords
+2. TaskIt marks the task <br>
+Use case ends. <br>
+
+**Extensions**
+1a. The given command is invalid
+> 1a1. TaskIt requests a valid command and suggests valid format to users
+> Use case resumes at step 1
+> Use case ends
+
+1b. User did not specify a valid task
+> 1b1. TaskIt notifies the user and lists all tasks and indices (UC7)
+> 1b2. User specifies task to mark based on index
+> Use case ends
+
+1c. Multiple tasks are found based on the keywords
+> 1c1. TaskIt notifies the user and lists all tasks and indices that were found (UC2)
+> 1c2. User specifies task to mark based on index
+> Use case ends <br>
+<br>
+#### Use case 7: View all tasks
+
+**MSS**
+
+1. User requests to view all tasks
+2. TaskIt lists all tasks <br>
+Use case ends. <br>
+
+**Extensions**
+1a. The given command is invalid
+> 1a1. TaskIt requests a valid command and suggests valid format to users
+> Use case resumes at step 1
+> Use case ends
+
+1b. User requests to view all tasks with keywords & tags
+> 1b1. TaskIt lists all aforementioned tasks
+> Use case ends <br>
 
 {More to be added}
 
@@ -388,6 +557,8 @@ Use case ends.
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should come with automated unit tests and open source code.
+5. Should return to a functioning state when system restarts <br>
 
 {More to be added}
 
@@ -403,17 +574,61 @@ Use case ends.
 
 ## Appendix E : Product Survey
 
-**Product Name**
 
-Author: ...
+**Google Calendar**
+
+Author: Google
 
 Pros:
 
-* ...
-* ...
+* Can sync with other users
+* Multi-platform
+* Send reminders
+* Calendar view
+* Can put tasks in categories
 
 Cons:
 
-* ...
-* ...
+* Unappealing UI
+* Cannot sync with other calendars
 
+**Todoist**
+
+Author: Doist
+
+Pros:
+
+* Text-based interface makes it easy to input and modify tasks
+* Nice UI
+* Very simple to use
+* Can put tasks in categories
+* Can create recurring tasks in an intuitive way
+
+Cons:
+
+* Lists everything out rather with no option for a calendar view
+* Tasks split into categories with no option of just view ALL tasks
+
+**Wunderlist**
+
+Author: 6Wunderkinder
+
+Pros:
+
+* broad platform support
+
+Cons:
+
+* lacking recurring feature
+
+**Trello**
+
+Author: Fog Creek Software
+
+Pros:
+
+* Agile board layout
+
+Cons:
+
+* No calendar view
