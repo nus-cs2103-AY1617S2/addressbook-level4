@@ -1,48 +1,55 @@
 package seedu.task.model.task;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's address in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
+ * Represents a Task End DateTime in the task book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidDateTime(String)}
  */
 public class EndDateTime {
 
-    public static final String MESSAGE_ADDRESS_CONSTRAINTS =
-            "Person addresses can take any values, and it should not be blank";
+    public static final String MESSAGE_END_DATETIME_CONSTRAINTS =
+            "End Date/Time must be in the format of DD/MM/YYYY HHMM, where time is represented in 24 hours";
+    public static final SimpleDateFormat END_DATETIME_FORMATTER = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String ADDRESS_VALIDATION_REGEX = "[^\\s].*";
-
-    public final String value;
+    public final Date value;
 
     /**
-     * Validates given address.
+     * Validates given start datetime.
      *
-     * @throws IllegalValueException if given address string is invalid.
+     * @throws IllegalValueException if given email address string is invalid.
      */
-    public EndDateTime(String address) throws IllegalValueException {
-        assert address != null;
-        if (!isValidAddress(address)) {
-            throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
+    public EndDateTime(String endDateTime) throws IllegalValueException {
+        assert endDateTime != null;
+        String trimmedendDateTime = endDateTime.trim();
+        try {
+        	this.value = END_DATETIME_FORMATTER.parse(trimmedendDateTime);
+        } catch (ParseException e) {
+        	throw new IllegalValueException(MESSAGE_END_DATETIME_CONSTRAINTS);
         }
-        this.value = address;
     }
 
     /**
-     * Returns true if a given string is a valid person email.
+     * Returns if a given string is a valid end datetime.
      */
-    public static boolean isValidAddress(String test) {
-        return test.matches(ADDRESS_VALIDATION_REGEX);
+    public static boolean isValidEndDateTime(String test) {
+    	END_DATETIME_FORMATTER.setLenient(false);
+        try {
+        	END_DATETIME_FORMATTER.parse(test);
+        } catch(ParseException e) {
+        	return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        return value;
+        return value.toString();
     }
 
     @Override
