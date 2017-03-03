@@ -381,7 +381,7 @@ Priority | As a ... | I want to ... | So that I can...
 ## Appendix B : Use Cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
-<br>
+
 #### Use case 1: Add a task
 
 **MSS**
@@ -390,69 +390,70 @@ Priority | As a ... | I want to ... | So that I can...
 2. TaskIt asks user to confirm
 3. User confirms
 4. TaskIt adds the task <br>
-Use case ends. <br>
+Use case ends.
 
 **Extensions**
 
 2a. The given format is invalid
 > 2a1. TaskIt requests a valid command and suggests valid format to users
-> Use case resumes at step 1
-> Use case ends <br>
+> Use case resumes at step 1 <br>
+Use case ends.
 
 2b. The end time of an event is before the start time
 > 2b1. TaskIt notifies the user of this error
-> Use case resumes at step 1
-> Use case ends <br>
-<br>
+> Use case resumes at step 1 <br>
+Use case ends.
+
+
 #### Use case 2: Search for an existing task based on keywords, tags and dates
 
 **MSS**
 
 1. User requests to search for tasks based on given keywords, tags and dates
 2. TaskIt searches for the tasks and returns all the matched tasks to the user <br>
-Use case ends. <br>
+Use case ends.
 
 **Extensions**
 
 1a. The given command is invalid
 > 2a1. TaskIt requests a valid command and suggests valid format to users
-> Use case resumes at step 1
-> Use case ends
+> Use case resumes at step 1 <br>
+Use case ends
 
 1b. User gives empty keywords
 > 2b1. TaskIt requests user to input keywords
-> Use case resumes at step 1
-> Use case ends
+> Use case resumes at step 1 <br>
+Use case ends
 
 1c. No matched tasks found
-> TaskIt returns a message letting the user know there were no matches
-> Use case ends <br>
-<br>
+> TaskIt returns a message letting the user know there were no matches <br>
+Use case ends.
+
 #### Use case 3: Delete a task
 
 **MSS**
 
 1. User requests to delete a specific task based on keywords
 2. TaskIt deletes the task <br>
-Use case ends. <br>
+Use case ends.
 
 **Extensions**
 
 1a. The given command is invalid
 > 1a1. TaskIt requests a valid command and suggests valid format to users
-> Use case resumes at step 1
-> Use case ends
+> Use case resumes at step 1 <br>
+Use case ends.
 
 1b. User did not specify a valid task
 > 1b1. TaskIt notifies the user and lists all tasks and indices (UC7)
-> 1b2. User specifies task to delete based on index
-> Use case ends
+> 1b2. User specifies task to delete based on index <br>
+Use case ends.
 
 1c. Multiple tasks are found based on the keywords
 > 1c1. TaskIt notifies the user and lists all tasks and indices that were found (UC2)
-> 1c2. User specifies task to delete based on index
-> Use case ends <br>
-<br>
+> 1c2. User specifies task to delete based on index <br>
+Use case ends.
+
 #### Use case 4: Modify an existing task
 
 **MSS**
@@ -463,25 +464,25 @@ Use case ends. <br>
 4. TaskIt asks for confirmation from user
 5. User confirms
 6. TaskIt changes the task specifications and notifies user <br>
-Use case ends. <br>
+Use case ends.
 
 **Extensions**
 
 1a. The given command is invalid
 > 1a1. TaskIt requests a valid command and suggests valid format to users
-> Use case resumes at step 1
-> Use case ends
+> Use case resumes at step 1 <br>
+Use case ends.
 
 2a. No tasks were found
 > 2a1. TaskIt notifies the user and lists all tasks and indices (UC7)
-> 2a2. User specifies task to modify based on index
-> Use case ends
+> 2a2. User specifies task to modify based on index <br>
+Use case ends.
 
 2b. Multiple tasks are found based on the keywords
 > 2b1. TaskIt notifies the user and lists all tasks and indices that were found (UC2)
-> 2b2. User specifies task to modify based on index
-> Use case ends <br>
-<br>
+> 2b2. User specifies task to modify based on index <br>
+Use case ends.
+
 #### Use case 5: Undo an action
 
 **MSS**
@@ -490,64 +491,64 @@ Use case ends. <br>
 2. TaskIt asks for confirmation
 3. User confirms
 4. TaskIt undoes last action <br>
-Use case ends. <br>
+Use case ends.
 
 **Extensions**
 1a. The given command is invalid
 > 1a1. TaskIt requests a valid command and suggests valid format to users
-> Use case resumes at step 1
-> Use case ends
+> Use case resumes at step 1 <br>
+Use case ends.
 
 2a. No previous action found
-> 2a1. TaskIt notifies the user
-> Use case ends
+> 2a1. TaskIt notifies the user <br>
+Use case ends.
 
 1b. Multiple tasks are found based on the keywords
 > 1b1. TaskIt notifies the user and lists all tasks and indices that were found (UC2)
-> 1b2. User specifies task to delete based on index
-> Use case ends <br>
-<br>
+> 1b2. User specifies task to delete based on index <br>
+Use case ends.
+
 #### Use case 6: Mark a task as completed or incompleted
 
 **MSS**
 
 1. User requests to mark a specific task based on keywords
 2. TaskIt marks the task <br>
-Use case ends. <br>
+Use case ends.
 
 **Extensions**
 1a. The given command is invalid
 > 1a1. TaskIt requests a valid command and suggests valid format to users
-> Use case resumes at step 1
-> Use case ends
+> Use case resumes at step 1 <br>
+Use case ends.
 
 1b. User did not specify a valid task
 > 1b1. TaskIt notifies the user and lists all tasks and indices (UC7)
-> 1b2. User specifies task to mark based on index
-> Use case ends
+> 1b2. User specifies task to mark based on index <br>
+Use case ends.
 
 1c. Multiple tasks are found based on the keywords
 > 1c1. TaskIt notifies the user and lists all tasks and indices that were found (UC2)
-> 1c2. User specifies task to mark based on index
-> Use case ends <br>
-<br>
+> 1c2. User specifies task to mark based on index <br>
+Use case ends.
+
 #### Use case 7: View all tasks
 
 **MSS**
 
 1. User requests to view all tasks
 2. TaskIt lists all tasks <br>
-Use case ends. <br>
+Use case ends.
 
 **Extensions**
 1a. The given command is invalid
 > 1a1. TaskIt requests a valid command and suggests valid format to users
-> Use case resumes at step 1
-> Use case ends
+> Use case resumes at step 1 <br>
+Use case ends.
 
 1b. User requests to view all tasks with keywords & tags
-> 1b1. TaskIt lists all aforementioned tasks
-> Use case ends <br>
+> 1b1. TaskIt lists all aforementioned tasks <br>
+Use case ends
 
 {More to be added}
 
