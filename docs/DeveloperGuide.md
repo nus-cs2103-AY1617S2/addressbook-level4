@@ -347,47 +347,202 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | user | add a new task | add task to manage all my to-do
+`* * *` | user | delete a task | remove entries that I no longer need
+`* * *` | user with many tasks | find a task by [keywords](#keyword) | search for specific task especially when the list is huge
+`* * *` | user | edit a task | edit a task if there is some changes
+`* * *` | user | clear all tasks | quickly start using the tool from scratch
+`* * *` | organized user | add tags to a task | orginaze them by tags
+`* * *` | user | add description to task | describe tasks in more detail
+`* * *` | user | view task description | view the task in details
+`* * *` | user | list tasks | view all uncompleted task
+`* * *` | advance user | sort task by importance | prioritise which task to do first
+`* * *` | last minute user | sort tasks by most upcoming tasks | get myself prepared for more urgent tasks
+`* * *` | advance user | find tasks by tag | find tasks quickly that contains the specific tag
+`* * *` | advance user | set reminder to a task | be notified when tasks are approaching due [date](#date)
+`* * *` | user | select folder to save data storage | specify a specific folder and file for data storage
+`* * *` | user | undo most recent action | undo action to rectify mistake
+`* *` | user | redo most recent action | redo action to rectify mistake
+`* *` | user | add task to nearest free slot automatically | addn task easily without browsing for free [time](#time)
+`* *` | user with multiple recurring tasks | add recurring tasks | avoid adding similar task one by one
+`* *` | user with multiple recurring tasks | edit all instances of a recurring task | be more efficient when editing recurring tasks
+`* *` | advance user | filter tasks by multiple [keywords](#keyword) | search tasks by more specific criteria
+`* *` | user | list all tags | quickly view all the tags in the to-do list
+`* *` | user | keep track of completed tasks | keep them in track for future references
+`* *` | busy user | postpone task | defer uncompleted task to near future where I am free
+`* *` | advance user | select task and pin it at the top of display | quickly mark certain tasks as demanding of priority attention
+`* *` | existing google calander user | sync google calendar on create, update and delete tasks | exploit google calendar and sync with this task manager
+`* *` | user with heavy email usage | send email notification for upcoming tasks | remind me on tasks that are approaching due [date](#date)
+`* *` | user who prefer keyboard | open/close application via keyboard shortcut | quickly open or exit programe easily without mouse click
+`* *` | advance user | remove all tasks with certain tag | quickly remove all tasks wih some similarity
+`*` | advance user | change all tag names in one go | quickly update all tasks with that tag name
+`*` | user with a many tasks | assign priorities to tasks | distinguish and pinpoint importance task immediately just by looking
+`*` | user | list overdue tasks | filter out overdue tasks to decide for further actions 
+`*` | user | remove tasks within certain range | easily specify [dates](#date) to remove tasks within that range.
+`*` | user | list near future free slot | choose suitable free slot to add task
 
 {More to be added}
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `To Do List` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case : Add task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
-Use case ends.
+1. User input information to add task
+2. System notifies user that task has been successfully added.<br>Use case ends.
+
+**Extensions**
+
+2a. Task already exists
+>2a1. System informs user that task already exists and doesn’t add repeat task.
+> Use case ends
+
+2b. Invalid command format
+>2b1. System informs user that command format is invalid and outputs sample correct format to user.
+>Use case ends
+
+#### Use case : Delete task
+
+**MSS**
+1. System display a list of tasks.
+2. User input task index to specify which task to delete.
+3. System notifies user that task has been successfully deleted.<br>Use case ends
+
+**Extensions**
+
+1a. List is empty
+>1a1. System informs user that there is no task to delete.
+>Use case ends.
+
+2a. Invalid command format
+>2a1. System informs user that the input is invalid and outputs sample correct format to user.
+>Use case resume at 1.
+
+2b. User input index is not valid
+>2b1. System informs user that the input index is not valid.
+>Use case resume at 1.
+
+#### Use case : Edit task
+
+**MSS**
+
+1. User requests list of tasks
+2. System displays list of tasks summaries
+3. User selects task to edit
+4. System shows user task information
+5. User edits and submits new task information 
+6. System displays changes made to task<br>Use case ends
 
 **Extensions**
 
 2a. The list is empty
+>2a1. System informs user that there is no task to edit.
+>Use case ends
 
-> Use case ends
+3a. User task selection is invalid
+>3a1. System shows error message 
+>Use case resumes from step 2
 
-3a. The given index is invalid
+3b. System detects an error in the data that user entered
+>3b1. System selects valid task
+>3b2. User enters new data 
+>3b3. Repeat steps 3b1 and 3b2 until data has no errors 
+>Use case resumes from step 4.
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+3c. User requests to tag a task with a category that is not currently in the system
+>3c1. OneLine creates the category 
+>Use case resumes from step 4.
+
+
+#### Use case : Find task
+
+**MSS**
+1. User searches for task
+2. System lists tasks which match the keywords entered by user<br>Use case ends
+
+**Extensions**
+
+2a. Task does not exist
+>2a1. System informs user that no tasks found
+>Use case ends
+
+
+#### Use case : Undo most recent action
+
+**MSS**
+1. User issues command undo
+2. System reverts user’s previous command and displays feedback message to user.<br>Use case ends
+
+**Extensions**
+
+2a. There is no previous command yet. 
+>2a1. System feedbacks to user no previous command found
+>Use case ends
+
+2b. Previous command is not mutable. 
+>2b1. System feedbacks to user no action required. 
+>Use case ends
+
+
+#### Use case : List tasks
+
+**MSS**
+
+1. User requests list of tasks
+2. System displays list of tasks.<br>Use case ends
+
+**Extensions**
+
+1a. User requests pending tasks 
+>1a1. System displays list of pending tasks
+>Use case ends
+
+1b. User requests completed tasks
+>1b1. System displays list of completed tasks
+>Use case ends
+
+2a. The list is empty
+>2a1. System displays empty list
+>Use case ends
+
+
+#### Use case : View task description
+
+**MSS**
+
+1. System display a list of tasks to user.
+2. User input index to specify task to view its description
+3. System display the description of that task.<br>Use case ends
+
+**Extensions**
+
+1a. Incorrect input of specific task
+>1a1. System notify user the error
+>System resume at 2.
+
+
 
 {More to be added}
 
 ## Appendix C : Non Functional Requirements
 
-1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
-   should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any [mainstream OS](#mainstream-os).
+2. Should be able to store up to 500 tasks.
+3. Should work in online or offline mode.
+4. Should respond to commands within 2s.
+5. Programme should startup within 3s.
+6. Programme should be open source code and readily available.
+7. Should have an easy to use interface.
+8. Should be able to handle exceptions from user input.
+9. Should work as a standalone application.
+10. Should have an executable file that can be launched by double clicking or keyboard shortcut.
+11. Should not use relational databases to store data.
+12. Command line interface should be the main mode of input.
+13. Should not violate any copyrights.
+14. Should not contain obscene or inappropriate content.
 
 {More to be added}
 
@@ -397,23 +552,131 @@ Use case ends.
 
 > Windows, Linux, Unix, OS-X
 
-##### Private contact detail
+##### Keyword
+> Words in task names, tag names, and task description
 
-> A contact detail that is not meant to be shared with others
+##### Block time slots
+
+> Block time slots is able to be deleted like normal task
+
+##### Free time slots
+
+> Free time slots allow tasks to be added
+
+##### Invalid Commands
+
+> Invalid commands includes invalid arguments
+
+##### Error message
+
+> Error message includes suggestion for correct command
+
+##### DATE
+
+> Date is in DD mm format e.g. 29 sep
+
+##### TIME
+
+> Time is in 12 hours format 12pm, 7am
+
+##### Deadline task
+
+> Tasks that have a specific deadline
+
+##### Floating task
+
+> Tasks that do not have a specific deadline
+
+##### Event task
+
+> Tasks that have a specific timeslot. i.e. Meeting from 1pm to 2pm.
+
+##### Category
+
+> User-defined tags used to categorise tasks
 
 ## Appendix E : Product Survey
 
-**Product Name**
+**[Remember the Milk](https://www.rememberthemilk.com/)**
 
-Author: ...
+Author: Apoorva
 
 Pros:
 
-* ...
-* ...
+* Easy to use interface.
+* User can add recurring tasks.
+* User can set a start date and end date for the task.
+* User can add tag to the task.
+* User can view a list of all completed tasks.
+* User can set priority to task.
+* User can postpone a task.
 
 Cons:
 
-* ...
-* ...
+* No online support or video tutorials for beginners.
+* Pro version is very expensive and most features are only available in pro version.
+* No security for data in terms of encryption or HTTPS.
+
+**[Google Calender](https://calendar.google.com)**
+
+Author: Leon Mak
+
+Pros:
+
+* Calendar user interface, click on events on the calendar to view more details.
+* Users can edit events by dragging.
+* Users are able to import calendars using .ical files.
+* Users can edit a single instance of event, or recurring events.
+* Users can be notified of approaching events.
+* Users have daily, weekly, monthly, and “4-days” types of view.
+* Users can sync and access on multiple platforms, like mobile, and desktop.
+
+Cons:
+
+* Have to be online to access calendar.
+* No command line interface.
+* Updates may take a while to sync due to network issues.
+
+**[Wunderlist](https://www.wunderlist.com/)**
+
+Author: Li Heng
+
+Pros:
+
+* Allows user to note down descriptions and more information for each task.
+* Allows user to create subtasks for each task.
+* Allows user to set “Reminder” and “Due Date” separately.
+* Allows user to highlight(star) a task.
+* Separates “Delete” and “Mark as complete”.
+* Parses the reminder time when user types in the task name.
+* Automatically creates “Today” and “Week” folder for user to see what needs to be done for today and this week (more urgent tasks).
+* Allows user to categorise tasks using folders, e.g. (work, family).
+
+Cons:
+
+* Just highlighting (starring) is not enough. User may just highlight all tasks and that defeats the purpose of starring. 
+* Tasks are not sorted in chronological order in the main folder.
+
+
+**[Habitica](https://habitica.com/static/front)**
+
+Author: Chan Yu Feng
+
+Pros:
+
+* It has simulation game element which keep the work fun and motivating.
+* It has colourful and clean user interface that make important tasks stand out.
+* It supports multiple platforms such as mobile and desktop.
+* It supports recurring task adding.
+* It can set multiple and different reminders on any task.
+* It can easily be reordered/sorted using name or tags.
+
+Cons:
+
+* Unable to view the calendar when selecting tasks
+* Adding tasks require mouse/ touch screen instead of keyboard entering.
+* Has the potential of distraction due to the existence of game elements.
+* Deadline of the tasks are not shown unless clicked.
+* Unable to mark completed tasks as done without keeping them for future references.
+
 

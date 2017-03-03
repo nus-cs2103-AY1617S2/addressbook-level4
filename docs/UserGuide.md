@@ -45,71 +45,25 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 
 Format: `help`
 
-> Help is also shown if you enter an incorrect command e.g. `abcd`
+> Help is also shown if you enter an incorrect command e.g. `hellpppppp!`
 
-### 2.2. Adding a person: `add`
+### 2.2. Adding a task: `add`
 
-Adds a person to the address book<br>
-Format: `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Adds a task to the task manager<br>
+Format: `add TASK_NAME [s/START_DATE] [e/END_DATE] [d/DESCRIPTION] [p/PRIORITY_LEVEL] [t/TAG]...` <br>
 
-> Persons can have any number of tags (including 0)
-
-Examples:
-
-* `add John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01`
-* `add Betsy Crowe t/friend e/betsycrowe@gmail.com a/Newgate Prison p/1234567 t/criminal`
-
-### 2.3. Listing all persons : `list`
-
-Shows a list of all persons in the address book.<br>
-Format: `list`
-
-### 2.4. Editing a person : `edit`
-
-Edits an existing person in the address book.<br>
-Format: `edit INDEX [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
-
-> * Edits the person at the specified `INDEX`.
-    The index refers to the index number shown in the last person listing.<br>
-    The index **must be a positive integer** 1, 2, 3, ...
-> * At least one of the optional fields must be provided.
-> * Existing values will be updated to the input values.
-> * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-> * You can remove all the person's tags by typing `t/` without specifying any tags after it. 
+> Task can have any number of tags (including 0)
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@yahoo.com`<br>
-  Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@yahoo.com` respectively.
+* `add Complete assignment s/13 Mar 2017 e/15 Mar 2017 p/3 t/2103 t/work`
 
-* `edit 2 Betsy Crower t/`<br>
-  Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+### 2.3. Deleting a task : `delete`
 
-### 2.5. Finding all persons containing any keyword in their name: `find`
-
-Finds persons whose names contain any of the given keywords.<br>
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-> * The search is case sensitive. e.g `hans` will not match `Hans`
-> * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-> * Only the name is searched.
-> * Only full words will be matched e.g. `Han` will not match `Hans`
-> * Persons matching at least one keyword will be returned (i.e. `OR` search).
-    e.g. `Hans` will match `Hans Bo`
-
-Examples:
-
-* `find John`<br>
-  Returns `John Doe` but not `john`
-* `find Betsy Tim John`<br>
-  Returns Any person having names `Betsy`, `Tim`, or `John`
-
-### 2.6. Deleting a person : `delete`
-
-Deletes the specified person from the address book. Irreversible.<br>
+Deletes the specified task from the task manager. Irreversible.<br>
 Format: `delete INDEX`
 
-> Deletes the person at the specified `INDEX`. <br>
+> Deletes the task at the specified `INDEX`. <br>
 > The index refers to the index number shown in the most recent listing.<br>
 > The index **must be a positive integer** 1, 2, 3, ...
 
@@ -117,43 +71,87 @@ Examples:
 
 * `list`<br>
   `delete 2`<br>
-  Deletes the 2nd person in the address book.
-* `find Betsy`<br>
+  Deletes the 2nd task in the task manager.
+* `find Assignment`<br>
   `delete 1`<br>
-  Deletes the 1st person in the results of the `find` command.
+  Deletes the 1st task in the results of the `find` command.
 
-### 2.7. Select a person : `select`
+### 2.4. Editing a task : `edit`
 
-Selects the person identified by the index number used in the last person listing.<br>
-Format: `select INDEX`
+Edits an existing task in the task manager.<br>
+Format: `edit INDEX [TASK_NAME] [s/START_DATE] [d/END_DATE] [d/DESCRIPTION] [p/PRIORITY_LEVEL] [t/TAG]...`
 
-> Selects the person and loads the Google search page the person at the specified `INDEX`.<br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+> * Edits the task at the specified `INDEX`.
+    The index refers to the index number shown in the last task listing.<br>
+    The index **must be a positive integer** 1, 2, 3, ...
+> * At least one of the optional fields must be provided.
+> * Existing values will be updated to the input values.
+> * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
+> * You can remove all the task's tags by typing `t/` without specifying any tags after it. 
 
 Examples:
 
+* `edit 1 p/2 t/`<br>
+  Edits the priority level of task to be 2 and remove all its tags.
+
+* `edit 2 e/16 Dec 2017 t/project t/2103 `<br>
+  Edits the end date of task to 16 Dec 2017 and update tags to "project" and "2103".
+
+### 2.5. Finding all tasks containing any keyword in their name or tags: `find`
+
+Find tasks whose names or tags contain any of the given keywords.<br>
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+> * The search is case sensitive. e.g `work` will not match `Work`
+> * The order of the keywords does not matter. e.g. `project work` will match `work project`
+> * Only the name and tags are searched.
+> * Only full words will be matched e.g. `Han` will not match `Hans`
+> * Tasks matching at least one keyword will be returned (i.e. `OR` search).
+    e.g. `Project` will match `Project Work`
+
+Examples:
+
+* `find Assignment`<br>
+  Returns `Assignment` but not `assignment`
+* `find Project Tutorial Assignment`<br>
+  Returns Any task having names `Project`, `Tutorial`, or `Assignment`
+
+### 2.6. Listing all tasks : `list`
+
+Shows a list of all tasks in the task manager.<br>
+Format: `list [e/END_DATE]`
+
+> * If no end date is given, all task will be listed out.
+> 
+Examples:
+
 * `list`<br>
-  `select 2`<br>
-  Selects the 2nd person in the address book.
-* `find Betsy` <br>
-  `select 1`<br>
-  Selects the 1st person in the results of the `find` command.
+  List all tasks.
 
-### 2.8. Clearing all entries : `clear`
+* `list e/03 Mar 2017`<br>
+  List out all the tasks that have specified end date.
 
-Clears all entries from the address book.<br>
-Format: `clear`
+
+### 2.7. View description : `view`
+
+Exits the program.<br>
+Format: `view INDEX`
+
+Examples:
+
+* `view 2`<br>
+  View the 2nd task's description.
+
+### 2.8. Saving the data
+
+Task manager data are saved in the hard disk automatically after any command that changes the data.<br>
+There is no need to save manually.
+
 
 ### 2.9. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
-
-### 2.10. Saving the data
-
-Address book data are saved in the hard disk automatically after any command that changes the data.<br>
-There is no need to save manually.
 
 ## 3. FAQ
 
@@ -163,24 +161,33 @@ There is no need to save manually.
 
 ## 4. Command Summary
 
-* **Add**  `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` <br>
-  e.g. `add James Ho p/22224444 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-
-* **Clear** : `clear`
+* **Help**  `help` <br>
+  
+* **Add**  `add NAME [s/START_DATE] [e/END_DATE] [d/DESCRIPTION] [p/PRIORITY_LEVEL] [t/TAG]...` <br>
+  
+  e.g. `add Complete Assignment  e/02 Feb 2017 p/1 t/CS2103T`
 
 * **Delete** : `delete INDEX` <br>
-   e.g. `delete 3`
+   e.g. `delete 1`
 
-* **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
-  e.g. `find James Jake`
+ * **Edit**  `edit INDEX [TASK_NAME] [s/START_DATE] [e/END_DATE] [d/DESCRIPTION] [p/PRIORITY_LEVEL] [t/TAG]...` <br>
+  
+    e.g. `edit 1 d/bring pen and paper p/3`
+
+ * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
+  e.g. find Assignment Meeting Tutorial
+
+* **Undo** : `undo` <br>
 
 * **List** : `list` <br>
-  e.g.
 
-* **Help** : `help` <br>
-  e.g.
+* **List** : `list [e/END_DATE]` <br>
+  e.g. list 31 Dec 2017
 
-* **Select** : `select INDEX` <br>
-  e.g.`select 2`
+* **View Description** : `view INDEX` <br>
+   e.g. `view 1`
+  
+* **Exit** : `exit` <br>
+
 
 
