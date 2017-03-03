@@ -8,8 +8,8 @@ import seedu.address.commons.exceptions.IllegalValueException;
  */
 public class Description {
 
-    public static final String MESSAGE_DESCRIPTION_CONSTRAINTS = "Description can contain any characters";
-    public static final String DESCRIPTION_VALIDATION_REGEX = ".";
+    public static final String MESSAGE_DESCRIPTION_CONSTRAINTS = "Description can be empty and can contain any chracters";
+    public static final String DESCRIPTION_VALIDATION_REGEX = ".*";
 
     public final String value;
 
