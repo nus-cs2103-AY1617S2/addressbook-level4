@@ -19,7 +19,7 @@ import seedu.ezdo.model.ReadOnlyEzDo;
 import seedu.ezdo.model.tag.Tag;
 import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.ReadOnlyTask;
-import seedu.ezdo.testutil.TypicalTestPersons;
+import seedu.ezdo.testutil.TypicalTestTasks;
 
 public class AddressBookTest {
 
@@ -42,14 +42,14 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        EzDo newData = new TypicalTestPersons().getTypicalAddressBook();
+        EzDo newData = new TypicalTestTasks().getTypicalAddressBook();
         ezDo.resetData(newData);
         assertEquals(newData, ezDo);
     }
 
     @Test
     public void resetData_withDuplicatePersons_throwsAssertionError() {
-        TypicalTestPersons td = new TypicalTestPersons();
+        TypicalTestTasks td = new TypicalTestTasks();
         // Repeat td.alice twice
         List<Task> newPersons = Arrays.asList(new Task(td.alice), new Task(td.alice));
         List<Tag> newTags = td.alice.getTags().asObservableList();
@@ -61,7 +61,7 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
-        EzDo typicalAddressBook = new TypicalTestPersons().getTypicalAddressBook();
+        EzDo typicalAddressBook = new TypicalTestTasks().getTypicalAddressBook();
         List<ReadOnlyTask> newPersons = typicalAddressBook.getTaskList();
         List<Tag> newTags = new ArrayList<>(typicalAddressBook.getTagList());
         // Repeat the first tag twice

@@ -17,7 +17,7 @@ import seedu.ezdo.model.EzDo;
 import seedu.ezdo.model.ReadOnlyEzDo;
 import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.storage.XmlEzDoStorage;
-import seedu.ezdo.testutil.TypicalTestPersons;
+import seedu.ezdo.testutil.TypicalTestTasks;
 
 public class XmlAddressBookStorageTest {
     private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlAddressBookStorageTest/");
@@ -63,7 +63,7 @@ public class XmlAddressBookStorageTest {
     @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         String filePath = testFolder.getRoot().getPath() + "TempAddressBook.xml";
-        TypicalTestPersons td = new TypicalTestPersons();
+        TypicalTestTasks td = new TypicalTestTasks();
         EzDo original = td.getTypicalAddressBook();
         XmlEzDoStorage xmlEzDoStorage = new XmlEzDoStorage(filePath);
 

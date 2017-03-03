@@ -22,7 +22,7 @@ import seedu.ezdo.storage.Storage;
 import seedu.ezdo.storage.StorageManager;
 import seedu.ezdo.storage.XmlEzDoStorage;
 import seedu.ezdo.testutil.EventsCollector;
-import seedu.ezdo.testutil.TypicalTestPersons;
+import seedu.ezdo.testutil.TypicalTestTasks;
 
 public class StorageManagerTest {
 
@@ -64,7 +64,7 @@ public class StorageManagerTest {
          * {@link XmlAddressBookStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link XmlAddressBookStorageTest} class.
          */
-        EzDo original = new TypicalTestPersons().getTypicalAddressBook();
+        EzDo original = new TypicalTestTasks().getTypicalAddressBook();
         storageManager.saveEzDo(original);
         ReadOnlyEzDo retrieved = storageManager.readEzDo().get();
         assertEquals(original, new EzDo(retrieved));
