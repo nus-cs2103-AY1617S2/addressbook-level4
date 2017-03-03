@@ -21,7 +21,7 @@ import org.junit.rules.TemporaryFolder;
 import com.google.common.eventbus.Subscribe;
 
 import seedu.doist.commons.core.EventsCenter;
-import seedu.doist.commons.events.model.TodoListChangedEvent;
+//import seedu.doist.commons.events.model.TodoListChangedEvent;
 import seedu.doist.commons.events.ui.JumpToListRequestEvent;
 import seedu.doist.commons.events.ui.ShowHelpRequestEvent;
 import seedu.doist.logic.commands.AddCommand;
