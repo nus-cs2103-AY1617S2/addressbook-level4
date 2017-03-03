@@ -356,8 +356,8 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user | clear all tasks | when I want to stop using the app
 `* *` | user | list all tasks | see all tasks at one glance and consider if I want to make any adjustment
 `* *` | user | undo most recent changes | revert back to original state(ie if i remove something, it will be unremoved; if i added something, it will be removed.
-`*` | user | categorise my tasks(eg deadlines, events, floating tasks) | I can easily search for the specific task type
-`*` | user | prioritize my tasks | I can be reminded about the importance of a certain task among other tasks
+`*` | user | categorise my tasks(eg deadlines, events, floating tasks) | easily search for the specific task type
+`*` | user | prioritize my tasks | be reminded about the importance of a certain task among other tasks
 
 ## Appendix B : Use Cases
 
