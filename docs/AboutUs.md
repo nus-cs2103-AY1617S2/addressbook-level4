@@ -13,9 +13,11 @@ We are a team based in the [School of Computing, National University of Singapor
 #### [Leslie Ho Zong Hong](http://github.com/lejolly)
 <img src="images/Leslie.jpg" width="150"><br>
 Year 2 Computer Science Major<br>
-Role: Team lead <br>
-      Developer <br>
-Responsibilities: UI
+**Role**: <br>
+Team lead <br>
+Developer <br>
+**Responsibilities:**<br>
+UI
 
 -----
 
