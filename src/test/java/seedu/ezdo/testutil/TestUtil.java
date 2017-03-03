@@ -38,7 +38,7 @@ import seedu.ezdo.model.todo.Name;
 import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.Phone;
 import seedu.ezdo.model.todo.ReadOnlyTask;
-import seedu.ezdo.storage.XmlSerializableAddressBook;
+import seedu.ezdo.storage.XmlSerializableEzDo;
 
 /**
  * A utility class for test cases.
@@ -144,8 +144,8 @@ public class TestUtil {
         createDataFileWithSampleData(TestApp.SAVE_LOCATION_FOR_TESTING);
     }
 
-    public static XmlSerializableAddressBook generateSampleStorageAddressBook() {
-        return new XmlSerializableAddressBook(new EzDo());
+    public static XmlSerializableEzDo generateSampleStorageAddressBook() {
+        return new XmlSerializableEzDo(new EzDo());
     }
 
     /**

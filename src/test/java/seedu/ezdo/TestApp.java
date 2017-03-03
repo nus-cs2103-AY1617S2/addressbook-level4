@@ -9,7 +9,7 @@ import seedu.ezdo.commons.core.Config;
 import seedu.ezdo.commons.core.GuiSettings;
 import seedu.ezdo.model.ReadOnlyEzDo;
 import seedu.ezdo.model.UserPrefs;
-import seedu.ezdo.storage.XmlSerializableAddressBook;
+import seedu.ezdo.storage.XmlSerializableEzDo;
 import seedu.ezdo.testutil.TestUtil;
 
 /**
@@ -37,7 +37,7 @@ public class TestApp extends MainApp {
         // If some initial local data has been provided, write those to the file
         if (initialDataSupplier.get() != null) {
             TestUtil.createDataFileWithData(
-                    new XmlSerializableAddressBook(this.initialDataSupplier.get()),
+                    new XmlSerializableEzDo(this.initialDataSupplier.get()),
                     this.saveFileLocation);
         }
     }

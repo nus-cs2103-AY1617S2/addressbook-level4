@@ -12,7 +12,7 @@ import seedu.ezdo.commons.util.FileUtil;
 import seedu.ezdo.model.ReadOnlyEzDo;
 
 /**
- * A class to access AddressBook data stored as an xml file on the hard disk.
+ * A class to access EzDo data stored as an xml file on the hard disk.
  */
 public class XmlEzDoStorage implements EzDoStorage {
 
@@ -42,34 +42,34 @@ public class XmlEzDoStorage implements EzDoStorage {
                                                                                  FileNotFoundException {
         assert filePath != null;
 
-        File addressBookFile = new File(filePath);
+        File ezDoFile = new File(filePath);
 
-        if (!addressBookFile.exists()) {
-            logger.info("AddressBook file "  + addressBookFile + " not found");
+        if (!ezDoFile.exists()) {
+            logger.info("EzDo file "  + ezDoFile + " not found");
             return Optional.empty();
         }
 
-        ReadOnlyEzDo addressBookOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
+        ReadOnlyEzDo ezDoOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
 
-        return Optional.of(addressBookOptional);
+        return Optional.of(ezDoOptional);
     }
 
     @Override
-    public void saveEzDo(ReadOnlyEzDo addressBook) throws IOException {
-        saveEzDo(addressBook, filePath);
+    public void saveEzDo(ReadOnlyEzDo ezDo) throws IOException {
+        saveEzDo(ezDo, filePath);
     }
 
     /**
      * Similar to {@link #saveEzDo(ReadOnlyEzDo)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveEzDo(ReadOnlyEzDo addressBook, String filePath) throws IOException {
-        assert addressBook != null;
+    public void saveEzDo(ReadOnlyEzDo ezDo, String filePath) throws IOException {
+        assert ezDo != null;
         assert filePath != null;
 
         File file = new File(filePath);
         FileUtil.createIfMissing(file);
-        XmlFileStorage.saveDataToFile(file, new XmlSerializableAddressBook(addressBook));
+        XmlFileStorage.saveDataToFile(file, new XmlSerializableEzDo(ezDo));
     }
 
 }

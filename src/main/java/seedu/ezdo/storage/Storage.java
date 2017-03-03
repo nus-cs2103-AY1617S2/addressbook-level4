@@ -27,7 +27,7 @@ public interface Storage extends EzDoStorage, UserPrefsStorage {
     Optional<ReadOnlyEzDo> readEzDo() throws DataConversionException, IOException;
 
     @Override
-    void saveEzDo(ReadOnlyEzDo addressBook) throws IOException;
+    void saveEzDo(ReadOnlyEzDo ezDo) throws IOException;
 
     /**
      * Saves the current version of the EzDo to the hard disk.

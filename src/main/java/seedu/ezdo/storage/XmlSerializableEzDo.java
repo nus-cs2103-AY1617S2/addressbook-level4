@@ -17,37 +17,37 @@ import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.ReadOnlyTask;
 
 /**
- * An Immutable AddressBook that is serializable to XML format
+ * An Immutable EzDo that is serializable to XML format
  */
-@XmlRootElement(name = "addressbook")
-public class XmlSerializableAddressBook implements ReadOnlyEzDo {
+@XmlRootElement(name = "ezDo")
+public class XmlSerializableEzDo implements ReadOnlyEzDo {
 
     @XmlElement
-    private List<XmlAdaptedPerson> persons;
+    private List<XmlAdaptedTask> tasks;
     @XmlElement
     private List<XmlAdaptedTag> tags;
 
     /**
-     * Creates an empty XmlSerializableAddressBook.
+     * Creates an empty XmlSerializableEzDo.
      * This empty constructor is required for marshalling.
      */
-    public XmlSerializableAddressBook() {
-        persons = new ArrayList<>();
+    public XmlSerializableEzDo() {
+        tasks = new ArrayList<>();
         tags = new ArrayList<>();
     }
 
     /**
      * Conversion
      */
-    public XmlSerializableAddressBook(ReadOnlyEzDo src) {
+    public XmlSerializableEzDo(ReadOnlyEzDo src) {
         this();
-        persons.addAll(src.getTaskList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        tasks.addAll(src.getTaskList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
     }
 
     @Override
     public ObservableList<ReadOnlyTask> getTaskList() {
-        final ObservableList<Task> tasks = this.persons.stream().map(p -> {
+        final ObservableList<Task> tasks = this.tasks.stream().map(p -> {
             try {
                 return p.toModelType();
             } catch (IllegalValueException e) {
