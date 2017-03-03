@@ -58,11 +58,11 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void ezDoReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link XmlAddressBookStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link XmlAddressBookStorageTest} class.
+         * {@link XmlEzDoStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link XmlEzDoStorageTest} class.
          */
         EzDo original = new TypicalTestTasks().getTypicalEzDo();
         storageManager.saveEzDo(original);
@@ -71,14 +71,14 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void getAddressBookFilePath() {
+    public void getEzDoFilePath() {
         assertNotNull(storageManager.getEzDoFilePath());
     }
 
     @Test
-    public void handleAddressBookChangedEvent_exceptionThrown_eventRaised() throws IOException {
+    public void handleEzDoChangedEvent_exceptionThrown_eventRaised() throws IOException {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
-        Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub("dummy"),
+        Storage storage = new StorageManager(new XmlEzDoStorageExceptionThrowingStub("dummy"),
                                              new JsonUserPrefsStorage("dummy"));
         EventsCollector eventCollector = new EventsCollector();
         storage.handleEzDoChangedEvent(new EzDoChangedEvent(new EzDo()));
@@ -89,9 +89,9 @@ public class StorageManagerTest {
     /**
      * A Stub class to throw an exception when the save method is called
      */
-    class XmlAddressBookStorageExceptionThrowingStub extends XmlEzDoStorage {
+    class XmlEzDoStorageExceptionThrowingStub extends XmlEzDoStorage {
 
-        public XmlAddressBookStorageExceptionThrowingStub(String filePath) {
+        public XmlEzDoStorageExceptionThrowingStub(String filePath) {
             super(filePath);
         }
 

@@ -19,8 +19,8 @@ import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.storage.XmlEzDoStorage;
 import seedu.ezdo.testutil.TypicalTestTasks;
 
-public class XmlAddressBookStorageTest {
-    private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlAddressBookStorageTest/");
+public class XmlEzDoStorageTest {
+    private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlEzDoStorageTest/");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -29,12 +29,12 @@ public class XmlAddressBookStorageTest {
     public TemporaryFolder testFolder = new TemporaryFolder();
 
     @Test
-    public void readAddressBook_nullFilePath_assertionFailure() throws Exception {
+    public void readEzDo_nullFilePath_assertionFailure() throws Exception {
         thrown.expect(AssertionError.class);
-        readAddressBook(null);
+        readEzDo(null);
     }
 
-    private java.util.Optional<ReadOnlyEzDo> readAddressBook(String filePath) throws Exception {
+    private java.util.Optional<ReadOnlyEzDo> readEzDo(String filePath) throws Exception {
         return new XmlEzDoStorage(filePath).readEzDo(addToTestDataPathIfNotNull(filePath));
     }
 
@@ -46,14 +46,14 @@ public class XmlAddressBookStorageTest {
 
     @Test
     public void read_missingFile_emptyResult() throws Exception {
-        assertFalse(readAddressBook("NonExistentFile.xml").isPresent());
+        assertFalse(readEzDo("NonExistentFile.xml").isPresent());
     }
 
     @Test
     public void read_notXmlFormat_exceptionThrown() throws Exception {
 
         thrown.expect(DataConversionException.class);
-        readAddressBook("NotXmlFormatAddressBook.xml");
+        readEzDo("NotXmlFormatEzDo.xml");
 
         /* IMPORTANT: Any code below an exception-throwing line (like the one above) will be ignored.
          * That means you should not have more than one exception test in one method
@@ -61,7 +61,7 @@ public class XmlAddressBookStorageTest {
     }
 
     @Test
-    public void readAndSaveAddressBook_allInOrder_success() throws Exception {
+    public void readAndSaveEzDo_allInOrder_success() throws Exception {
         String filePath = testFolder.getRoot().getPath() + "TempAddressBook.xml";
         TypicalTestTasks td = new TypicalTestTasks();
         EzDo original = td.getTypicalEzDo();
@@ -88,19 +88,19 @@ public class XmlAddressBookStorageTest {
     }
 
     @Test
-    public void saveAddressBook_nullAddressBook_assertionFailure() throws IOException {
+    public void saveEzDo_nullEzDo_assertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
-        saveAddressBook(null, "SomeFile.xml");
+        saveEzDo(null, "SomeFile.xml");
     }
 
-    private void saveAddressBook(ReadOnlyEzDo addressBook, String filePath) throws IOException {
-        new XmlEzDoStorage(filePath).saveEzDo(addressBook, addToTestDataPathIfNotNull(filePath));
+    private void saveEzDo(ReadOnlyEzDo ezDo, String filePath) throws IOException {
+        new XmlEzDoStorage(filePath).saveEzDo(ezDo, addToTestDataPathIfNotNull(filePath));
     }
 
     @Test
-    public void saveAddressBook_nullFilePath_assertionFailure() throws IOException {
+    public void saveEzDo_nullFilePath_assertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
-        saveAddressBook(new EzDo(), null);
+        saveEzDo(new EzDo(), null);
     }
 
 

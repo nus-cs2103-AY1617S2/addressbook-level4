@@ -1,4 +1,4 @@
-package seedu.ezdo.model.person;
+package seedu.ezdo.model.task;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
