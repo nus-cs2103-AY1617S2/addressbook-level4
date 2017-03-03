@@ -347,36 +347,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | view all available commands | refer to them when I forget how to use the App
-`* * *` | user | add new [task](#task-definition) | keep track of it
-`* * *` | user | update chosen task | change relevant details
-`* * *` | user | delete chosen task | mark it as cancelled
-`* * *` | user | view list of tasks | know what is left
-`* * *` | user | mark task as complete | archive the completed task
-`* * *` | user | sort the list of tasks by due date | know what is due first
-`* * *` | user | sort the list of tasks by priority level | know what to do first
+`* * *` | user | add new Task/Event/Deadline | keep track of it
+`* * *` | user | update chosen Task/Event/Deadline | change relevant details
+`* * *` | user | delete chosen Task/Event/Deadline | mark it as cancelled
+`* * *` | user | view list of Task/Event/Deadlines | know what is left
+`* * *` | user | mark Task/Event/Deadline as complete | archive the completed Task/Event/Deadline
+`* * *` | user | sort the list of Task/Event/Deadlines by due date | know what is due first
+`* * *` | user | sort the list of Task/Event/Deadlines by priority level | know what to do first
 `* * *` | user | select the storage folder/file | store them on a local file controlled by a cloud syncing service
 `* * *` | user | undo my last operation | reverse any mistake made
 `* * *` | user | let completed events automatically archive themselves | save time checking them off
-`* * *` | user | view all completed tasks
-`* *` | user | search for tasks by attribute | find out details on specific tasks
-`* *` | user | set up recurring tasks | save time setting them up every day/month/year
-`* *` | user | sync my tasks with google calendar/tasks | access them online through other applications and devices (mobile)
-`* *` | user | receive an email reminder for tasks | be prompt on tasks that are due
+`* * *` | user | view all completed Task/Event/Deadlines
+`* *` | user | search for Task/Event/Deadlines by attribute | find out details on specific Task/Event/Deadlines
+`* *` | user | set up recurring Task/Event/Deadlines | save time setting them up every day/month/year
+`* *` | user | sync my Task/Event/Deadlines with google calendar/tasks | access them online through other applications and devices (mobile)
+`* *` | user | receive an email reminder for Task/Event/Deadlines | be prompt on Task/Event/Deadlines that are due
 `* *` | user | customise the reminder myself | choose how and when to be notified
 `* *` | user | block multiple slots for unconfirmed events | ensure no other events will clash
 `* *` | user | confirm an event to release blocked timeslots | maximise the use of my time
-`* *` | user | pin/star a task | see it at the top of my list all the time
-`* *` | user | add comments to my tasks | put in details that i might want to remember
-`* *` | user | see the overview of tasks in calendar format | see how busy the month will be for me
+`* *` | user | pin/star a Task/Event/Deadline | see it at the top of my list all the time
+`* *` | user | add comments to my Task/Event/Deadlines | put in details that i might want to remember
+`* *` | user | see the overview of Task/Event/Deadlines in calendar format | see how busy the month will be for me
 `*` | Advanced user | use shorter version of commands | type them easily and quickly
-`*` | user | schedule events based on day ("this wed, next tues") without knowing the date | add tasks quickly
-`*` | user | view list of uncompleted tasks of same nature (events, deadlines, floating tasks) | see things that are important to me
-`*` | user | send reminders to other people involved in certain tasks | notify collaborators
-`*` | Advanced user | color code the tasks myself | see the importance of tasks without opening them up
-`*` | user | view list of deleted tasks | check details of deleted tasks
-`*` | user | view list of archived tasks | check details of archived tasks
-`*` | user | move task from deleted list to [active list](#active-list) | add the task without re-creating it entirely
-`*` | user | copy a task from the archived list to the active list | add the same task without re-creating it entirely
+`*` | user | schedule events based on day ("this wed, next tues") without knowing the date | add events quickly
+`*` | user | view list of uncompleted Task/Event/Deadlines of same nature (events, deadlines, floating tasks) | see things that are important to me
+`*` | user | send reminders to other people involved in certain Task/Event/Deadlines | notify collaborators
+`*` | Advanced user | color code the Task/Event/Deadlines myself | see the importance of Task/Event/Deadlines without opening them up
+`*` | user | view list of deleted Task/Event/Deadlines | check details of deleted Task/Event/Deadlines
+`*` | user | view list of archived Task/Event/Deadlines | check details of archived Task/Event/Deadlines
+`*` | user | move Task/Event/Deadline from deleted list to [active list](#active-list) | add the Task/Event/Deadline without re-creating it entirely
+`*` | user | copy a Task/Event/Deadline from the archived list to the active list | add the same Task/Event/Deadline without re-creating it entirely
 
 {More to be added}
 
@@ -518,11 +518,11 @@ Use case ends.
 
 ##### Task definition
 
-> Can be a floating task (no specified ending date), event (start and end time possible), or a deadline (only end time)
+> Can be a floating task (no specified ending date), event (start and end times/dates possible), or a deadline (with end date/time)
 
 ##### Operation definition
 
-> Refers to the following operations: add, update, delete, completed, clear 
+> Refers to the following operations: add, edit, delete, completed, clear 
 
 
 ## Appendix E : Product Survey
