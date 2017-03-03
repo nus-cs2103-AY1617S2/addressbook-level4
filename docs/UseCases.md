@@ -9,11 +9,12 @@ By : `CS2103JAN2017-W15-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&
     - [Add Floating Task](#add-floating-task)
     - [Add Deadline Task](#add-deadline-task)
     - [Add Event](#add-event)
+    - [List Tasks](#list-tasks)
     - [List all Tasks](#list-all-tasks)
+    - [Find Tasks](#find-tasks)
     - [Edit Task](#edit-task)
     - [Mark Task as Completed](#mark-task-as-completed)
     - [Delete Task](#delete-task)
-    - [Find Task](#find-task)
     - [Undo Action](#undo-action)
     - [Redo Action](#redo-action)
     - [Save to File](#save-to-file)
@@ -68,25 +69,56 @@ Use case ends
 > 1a1. TaskBook shows an error message <br>
   Use case ends
 
-### List all tasks
+### List Tasks
 
 **MSS**
 
-1. User requests to list tasks
-2. TaskBook shows a list of tasks <br>
+1. TaskBook shows the list of tasks
+
 Use case ends
+
+[List all Tasks](#list-all-tasks) occurs before step 1
+[Find Tasks](#find-tasks) occurs before step 1
+
+### List all Tasks
+
+This use case extends [List all Tasks](#list-all-tasks). It is inserted at extension point List all tasks.
+
+**MSS**
+
+1. User request to list all tasks
+2. TaskBook retrieves all tasks
+
+Use Case continues in step 1 of [List Tasks](#list-tasks)
 
 **Extensions**
 
-2a. The list is empty
+2a. There are no tasks
 > 2a1. TaskBook shows a notice message <br>
   Use case ends
 
-### Edit task
+### Find Tasks
+
+This use case extends [List all Tasks](#list-all-tasks). It is inserted at extension point Find Tasks.
 
 **MSS**
 
-1. User retrieves list of tasks [via Use Case: List all Tasks](#list-all-tasks)
+1. User requests to find tasks by keyword
+2. TaskBook shows a list of tasks with keywords that match the exact keyword
+
+Use Case continues in step 1 of [List Tasks](#list-tasks)
+
+**Extensions**
+
+2a. No tasks match the specified keywords
+> 2a1. TaskBook shows a notice message <br>
+  Use case ends
+
+### Edit Task
+
+**MSS**
+
+1. User retrieves list of tasks [via Use Case: List Tasks](#list-tasks)
 2. User enters command to edit task
 3. TaskBook edits task according to given parameters
 Use case ends
@@ -105,7 +137,7 @@ Use case ends
 
 ### Mark Task as Completed
 
-1. User retrieves list of tasks [via Use Case: List all Tasks](#list-all-tasks)
+1. User retrieves list of tasks [via Use Case: List Tasks](#list-tasks)
 2. User enters command to mark task as completed
 3. TaskBook marks specified task as completed
 Use case ends
@@ -121,7 +153,7 @@ Use case ends
 
 **MSS**
 
-1. User retrieves list of tasks [via Use Case: List all Tasks](#list-all-tasks)
+1. User retrieves list of tasks [via Use Case: List Tasks](#list-tasks)
 2. User enters command to delete task
 3. TaskBook deletes specified task
 Use case ends
@@ -132,20 +164,6 @@ Use case ends
 
 > 2a1. TaskBook shows an error message <br>
   Use case resumes at step 2
-
-### Find task
-
-**MSS**
-
-1. User requests to find tasks by keyword
-2. TaskBook shows a list of tasks with keywords that match the exact keyword <br>
-Use case ends
-
-**Extensions**
-
-2a. The list is empty
-> 2a1. TaskBook shows a notice message <br>
-  Use case ends
 
 ### Undo Action
 
