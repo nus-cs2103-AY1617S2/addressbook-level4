@@ -509,3 +509,27 @@ Cons:
 
 * Requires internet connection to use.
 
+**Wunderlist**
+
+Pros:
+
+* Able to repeat tasks with customisable frequency (days, weeks, months, years)
+* Able to add subtasks, notes and files
+* Can star a task with the option of making it automatically go to the top of the list
+* List can be subsumed under folders
+* Can enable sound effects for notifications or upon completion of a task
+* User is able to make a Feature Request to Wunderlist
+* Able to snooze reminders for a customisable time
+* Able to have email, push and desktop notifications
+* Able to sync due dates with any calendar that supports the iCalendar format
+* Has both a mobile and desktop application that can work offline
+* Able to duplicate list
+* Able to customise shortcuts 
+* Able to specify preferred formats for the data, time and start of the week
+* Able to restore deleted lists
+* Able to print list
+
+Cons:
+* Priority is based on due dates only, tasks cannot be sorted into broad priority categories
+* Lacks colour coding of tasks
+
