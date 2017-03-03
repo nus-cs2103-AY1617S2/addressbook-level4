@@ -42,11 +42,11 @@ import seedu.task.model.ReadOnlyTaskBook;
 import seedu.task.model.TaskBook;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
-import seedu.task.model.task.Address;
-import seedu.task.model.task.Email;
+import seedu.task.model.task.EndDateTime;
+import seedu.task.model.task.StartDateTime;
 import seedu.task.model.task.Name;
 import seedu.task.model.task.Task;
-import seedu.task.model.task.Phone;
+import seedu.task.model.task.Description;
 import seedu.task.model.task.ReadOnlyTask;
 
 
@@ -199,9 +199,9 @@ public class LogicManagerTest {
         assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
                 Name.MESSAGE_NAME_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
-                Phone.MESSAGE_PHONE_CONSTRAINTS);
+                Description.MESSAGE_PHONE_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
-                Email.MESSAGE_EMAIL_CONSTRAINTS);
+                StartDateTime.MESSAGE_EMAIL_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
@@ -416,9 +416,9 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
-            Phone privatePhone = new Phone("111111");
-            Email email = new Email("adam@gmail.com");
-            Address privateAddress = new Address("111, alpha street");
+            Description privatePhone = new Description("111111");
+            StartDateTime email = new StartDateTime("adam@gmail.com");
+            EndDateTime privateAddress = new EndDateTime("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
@@ -435,9 +435,9 @@ public class LogicManagerTest {
         Task generatePerson(int seed) throws Exception {
             return new Task(
                     new Name("Person " + seed),
-                    new Phone("" + Math.abs(seed)),
-                    new Email(seed + "@email"),
-                    new Address("House of " + seed),
+                    new Description("" + Math.abs(seed)),
+                    new StartDateTime(seed + "@email"),
+                    new EndDateTime("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -534,9 +534,9 @@ public class LogicManagerTest {
         Task generatePersonWithName(String name) throws Exception {
             return new Task(
                     new Name(name),
-                    new Phone("1"),
-                    new Email("1@email"),
-                    new Address("House of 1"),
+                    new Description("1"),
+                    new StartDateTime("1@email"),
+                    new EndDateTime("House of 1"),
                     new UniqueTagList(new Tag("tag"))
             );
         }

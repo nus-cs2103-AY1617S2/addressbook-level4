@@ -3,10 +3,10 @@ package seedu.address.testutil;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
-import seedu.task.model.task.Address;
-import seedu.task.model.task.Email;
+import seedu.task.model.task.EndDateTime;
+import seedu.task.model.task.StartDateTime;
 import seedu.task.model.task.Name;
-import seedu.task.model.task.Phone;
+import seedu.task.model.task.Description;
 
 /**
  *
@@ -40,17 +40,17 @@ public class PersonBuilder {
     }
 
     public PersonBuilder withAddress(String address) throws IllegalValueException {
-        this.person.setAddress(new Address(address));
+        this.person.setAddress(new EndDateTime(address));
         return this;
     }
 
     public PersonBuilder withPhone(String phone) throws IllegalValueException {
-        this.person.setPhone(new Phone(phone));
+        this.person.setPhone(new Description(phone));
         return this;
     }
 
     public PersonBuilder withEmail(String email) throws IllegalValueException {
-        this.person.setEmail(new Email(email));
+        this.person.setEmail(new StartDateTime(email));
         return this;
     }
 

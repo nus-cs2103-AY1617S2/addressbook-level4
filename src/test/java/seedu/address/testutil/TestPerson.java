@@ -1,10 +1,10 @@
 package seedu.address.testutil;
 
 import seedu.task.model.tag.UniqueTagList;
-import seedu.task.model.task.Address;
-import seedu.task.model.task.Email;
+import seedu.task.model.task.EndDateTime;
+import seedu.task.model.task.StartDateTime;
 import seedu.task.model.task.Name;
-import seedu.task.model.task.Phone;
+import seedu.task.model.task.Description;
 import seedu.task.model.task.ReadOnlyTask;
 
 /**
@@ -13,9 +13,9 @@ import seedu.task.model.task.ReadOnlyTask;
 public class TestPerson implements ReadOnlyTask {
 
     private Name name;
-    private Address address;
-    private Email email;
-    private Phone phone;
+    private EndDateTime address;
+    private StartDateTime email;
+    private Description phone;
     private UniqueTagList tags;
 
     public TestPerson() {
@@ -37,15 +37,15 @@ public class TestPerson implements ReadOnlyTask {
         this.name = name;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(EndDateTime address) {
         this.address = address;
     }
 
-    public void setEmail(Email email) {
+    public void setEmail(StartDateTime email) {
         this.email = email;
     }
 
-    public void setPhone(Phone phone) {
+    public void setPhone(Description phone) {
         this.phone = phone;
     }
 
@@ -59,17 +59,17 @@ public class TestPerson implements ReadOnlyTask {
     }
 
     @Override
-    public Phone getPhone() {
+    public Description getPhone() {
         return phone;
     }
 
     @Override
-    public Email getEmail() {
+    public StartDateTime getEmail() {
         return email;
     }
 
     @Override
-    public Address getAddress() {
+    public EndDateTime getAddress() {
         return address;
     }
 

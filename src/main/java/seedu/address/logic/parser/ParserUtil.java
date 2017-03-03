@@ -15,10 +15,10 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
-import seedu.task.model.task.Address;
-import seedu.task.model.task.Email;
+import seedu.task.model.task.EndDateTime;
+import seedu.task.model.task.StartDateTime;
 import seedu.task.model.task.Name;
-import seedu.task.model.task.Phone;
+import seedu.task.model.task.Description;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -77,25 +77,25 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> phone} into an {@code Optional<Phone>} if {@code phone} is present.
      */
-    public static Optional<Phone> parsePhone(Optional<String> phone) throws IllegalValueException {
+    public static Optional<Description> parsePhone(Optional<String> phone) throws IllegalValueException {
         assert phone != null;
-        return phone.isPresent() ? Optional.of(new Phone(phone.get())) : Optional.empty();
+        return phone.isPresent() ? Optional.of(new Description(phone.get())) : Optional.empty();
     }
 
     /**
      * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.
      */
-    public static Optional<Address> parseAddress(Optional<String> address) throws IllegalValueException {
+    public static Optional<EndDateTime> parseAddress(Optional<String> address) throws IllegalValueException {
         assert address != null;
-        return address.isPresent() ? Optional.of(new Address(address.get())) : Optional.empty();
+        return address.isPresent() ? Optional.of(new EndDateTime(address.get())) : Optional.empty();
     }
 
     /**
      * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
      */
-    public static Optional<Email> parseEmail(Optional<String> email) throws IllegalValueException {
+    public static Optional<StartDateTime> parseEmail(Optional<String> email) throws IllegalValueException {
         assert email != null;
-        return email.isPresent() ? Optional.of(new Email(email.get())) : Optional.empty();
+        return email.isPresent() ? Optional.of(new StartDateTime(email.get())) : Optional.empty();
     }
 
     /**

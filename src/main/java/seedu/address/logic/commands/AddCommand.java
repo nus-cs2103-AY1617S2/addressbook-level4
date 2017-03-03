@@ -7,11 +7,11 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
-import seedu.task.model.task.Address;
-import seedu.task.model.task.Email;
+import seedu.task.model.task.EndDateTime;
+import seedu.task.model.task.StartDateTime;
 import seedu.task.model.task.Name;
 import seedu.task.model.task.Task;
-import seedu.task.model.task.Phone;
+import seedu.task.model.task.Description;
 import seedu.task.model.task.UniqueTaskList;
 
 /**
@@ -44,9 +44,9 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Task(
                 new Name(name),
-                new Phone(phone),
-                new Email(email),
-                new Address(address),
+                new Description(phone),
+                new StartDateTime(email),
+                new EndDateTime(address),
                 new UniqueTagList(tagSet)
         );
     }

@@ -7,11 +7,11 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.task.model.tag.UniqueTagList;
-import seedu.task.model.task.Address;
-import seedu.task.model.task.Email;
+import seedu.task.model.task.EndDateTime;
+import seedu.task.model.task.StartDateTime;
 import seedu.task.model.task.Name;
 import seedu.task.model.task.Task;
-import seedu.task.model.task.Phone;
+import seedu.task.model.task.Description;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.UniqueTaskList;
 
@@ -78,9 +78,9 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
-        Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
-        Address updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
+        Description updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
+        StartDateTime updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
+        EndDateTime updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
         return new Task(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
@@ -92,9 +92,9 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Optional<Name> name = Optional.empty();
-        private Optional<Phone> phone = Optional.empty();
-        private Optional<Email> email = Optional.empty();
-        private Optional<Address> address = Optional.empty();
+        private Optional<Description> phone = Optional.empty();
+        private Optional<StartDateTime> email = Optional.empty();
+        private Optional<EndDateTime> address = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditPersonDescriptor() {}
@@ -123,30 +123,30 @@ public class EditCommand extends Command {
             return name;
         }
 
-        public void setPhone(Optional<Phone> phone) {
+        public void setPhone(Optional<Description> phone) {
             assert phone != null;
             this.phone = phone;
         }
 
-        public Optional<Phone> getPhone() {
+        public Optional<Description> getPhone() {
             return phone;
         }
 
-        public void setEmail(Optional<Email> email) {
+        public void setEmail(Optional<StartDateTime> email) {
             assert email != null;
             this.email = email;
         }
 
-        public Optional<Email> getEmail() {
+        public Optional<StartDateTime> getEmail() {
             return email;
         }
 
-        public void setAddress(Optional<Address> address) {
+        public void setAddress(Optional<EndDateTime> address) {
             assert address != null;
             this.address = address;
         }
 
-        public Optional<Address> getAddress() {
+        public Optional<EndDateTime> getAddress() {
             return address;
         }
 

@@ -6,83 +6,79 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.task.model.tag.UniqueTagList;
 
 /**
- * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated.
+ * Represents a Task in the task book.
+ * Guarantees: name is present and not null, field values are validated.
  */
 public class Task implements ReadOnlyTask {
 
     private Name name;
-    private Phone phone;
-    private Email email;
-    private Address address;
+    private Description description;
+    private StartDateTime startDateTime;
+    private EndDateTime endDateTime;
 
     private UniqueTagList tags;
 
     /**
-     * Every field must be present and not null.
+     * Name must be present and not null.
      */
-    public Task(Name name, Phone phone, Email email, Address address, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, phone, email, address, tags);
+    public Task(Name name, Description description, StartDateTime startDateTime, EndDateTime endDateTime, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name);
         this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
+        this.description = description;
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
     /**
-     * Creates a copy of the given ReadOnlyPerson.
+     * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(), source.getTags());
+        this(source.getName(), source.getDescription(), source.getStartDateTime(), source.getEndDateTime(), source.getTags());
     }
 
+    @Override
+	public Name getName() {
+		return name;
+	}
+    
     public void setName(Name name) {
         assert name != null;
         this.name = name;
     }
+    
+    @Override
+    public Description getDescription() {
+		return description;
+	}
+
+	public void setDescription(Description description) {
+		this.description = description;
+	}
 
     @Override
-    public Name getName() {
-        return name;
-    }
+	public StartDateTime getStartDateTime() {
+		return startDateTime;
+	}
 
-    public void setPhone(Phone phone) {
-        assert phone != null;
-        this.phone = phone;
-    }
-
-    @Override
-    public Phone getPhone() {
-        return phone;
-    }
-
-    public void setEmail(Email email) {
-        assert email != null;
-        this.email = email;
-    }
+	public void setStartDateTime(StartDateTime startDateTime) {
+		this.startDateTime = startDateTime;
+	}
 
     @Override
-    public Email getEmail() {
-        return email;
-    }
+	public EndDateTime getEndDateTime() {
+		return endDateTime;
+	}
 
-    public void setAddress(Address address) {
-        assert address != null;
-        this.address = address;
-    }
+	public void setEndDateTime(EndDateTime endDateTime) {
+		this.endDateTime = endDateTime;
+	}
 
-    @Override
-    public Address getAddress() {
-        return address;
-    }
+	public UniqueTagList getTags() {
+		return tags;
+	}
 
-    @Override
-    public UniqueTagList getTags() {
-        return new UniqueTagList(tags);
-    }
-
-    /**
+	/**
      * Replaces this person's tags with the tags in the argument tag list.
      */
     public void setTags(UniqueTagList replacement) {
@@ -96,9 +92,9 @@ public class Task implements ReadOnlyTask {
         assert replacement != null;
 
         this.setName(replacement.getName());
-        this.setPhone(replacement.getPhone());
-        this.setEmail(replacement.getEmail());
-        this.setAddress(replacement.getAddress());
+        this.setDescription(replacement.getDescription());
+        this.setStartDateTime(replacement.getStartDateTime());
+        this.setEndDateTime(replacement.getEndDateTime());
         this.setTags(replacement.getTags());
     }
 
@@ -112,7 +108,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, description, startDateTime, endDateTime, tags);
     }
 
     @Override
