@@ -10,7 +10,7 @@ By : `Team T15B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp
 6. [Storage file format](#storage-file-format)
 
 ## 1. Introduction 
-Welcome. We will take you for an enthralling journey as we bring forward our task manager "TASKCRUSHER"
+Welcome. We will take you for an enthralling journey as we bring forward our task manager `TaskCrusher`.
 
 It can help you manage events, deadlines, add tasks with or without deadlines or view your history. This is a great amanager if you are looking to move away from clicking as the simplified scheduling is just a few short and sweet command lines away.
 
@@ -29,9 +29,9 @@ It can help you manage events, deadlines, add tasks with or without deadlines or
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
    * **`help`** : displays help documentation
-   * **`add`**` add Cs2103 meeting 3 Mar 17:00 to 18:00` : adds an event called "Cs 2103 meeting" on 3 March from 17:00 to 18:00
-   * **`view`**` view calendar` : displays calendar
-   * **`update`**`update 1 Priority 1 : updates task #1 in previous search results to priority 1
+   * **`add`:** `add "Cs2103 meeting" 3 Mar 17:00 to 18:00` : adds an event called "Cs 2103 meeting" on 3 March from 17:00 to 18:00
+   * **`view`** `view calendar` : displays calendar
+   * **`update`** update 1 Priority 1 : updates task #1 in previous search results to priority 1
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
 
@@ -42,7 +42,7 @@ It can help you manage events, deadlines, add tasks with or without deadlines or
 > * Words in `UPPER_CASE` are the parameters.
 > * Items in `SQUARE_BRACKETS` are optional.
 > * Items with `...` after them can have multiple instances.
-> * Parameters can be in any order.
+> * Parameters should be in the order stated. 
 
 ### 3.1. Viewing help : `help`
 
@@ -50,32 +50,33 @@ Format: `help`
 
 > Help is also shown if you enter an incorrect command e.g. `abcd`
 
-### 3.2. Adding a item: `add`
+### 3.2. Adding an item: `add`
 
-Adds an event, task <br>
-**Format(event)**: `add event[start datetime] to [end datetime] [t/TAG]...`<br>
-**Format(task with deadline)**:`add task [end datetime]`<br>
-**Format(task without deadline)**:`add task `<br>
+Adds an event or a task <br>
+**Format (event)**: `add "event name" START_DATE START_TIME to [END_DATE] END_TIME [t/TAG]... [//DESCRIPTION]`<br>
+**Format (tentative event. blocks multiple time slots)**: `add "event name" START_DATE START_TIME to [END_DATE] END_TIME ... [t/TAG]... [//DESCRIPTION]`<br>
+**Format (task with deadline)**: `add "task name" DEADLINE [t/TAG] [p/PRIORITY] [//DESCRIPTION]`  <br>
+**Format (task without deadline)**: `add "task name" [t/TAG] [p/PRIORITY] [//DESCRIPTION] `<br>
 
 
 Examples:
 
-* `add Cs2103 meeting 3 Mar 17:00 to 18:00`
-* `add Buy tickets 3 mar 17:00`
-* `add Take GF for dinner`
+* `add "Cs2103 meeting" 3 Mar 17:00 to 18:00`
+* `add "Buy tickets" 3 mar 17:00`
+* `add "Take GF for dinner"`
 
 ### 3.3 View : `View`
 
 View task with deadline or without deadlines, View tasks to be completed by specific deadline,
 View list of events in time frame, View the overdue task, view last action, view done, view history 
 
-**View task with deadline**: ` Viewd task`
+**View tasks with deadline**: ` Viewd task`
 
 Example 
 
 * ` Viewd class Hw`
 
-**View task without deadline**: `View task`
+**View tasks without deadline**: `View task`
 
 Example:
 * `View Dinner`
