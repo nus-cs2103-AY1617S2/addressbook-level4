@@ -22,10 +22,10 @@ By : `Team myPotato`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `FEB 2017`  &nbsp;&nbsp;&n
 3. Type the command in the command line and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 4. Some example commands you can try:
-   * **`list`** : lists all tasks
-   * **`add`**` CS2103 midterm d/27/03 : adds a task to the task list. 
-   * **`delete`**` 3` : deletes the 3rd task shown in the current list
-   * **`exit`** : exits myPotato
+   * **`list`** : Lists all tasks
+   * **`add`** : CS2103 midterm d/27/03 : adds a task to the task list. 
+   * **`delete`**` 3` : Deletes the 3rd task shown in the current list
+   * **`exit`** : Exits myPotato
 5. Refer to the [Features](#features) section below for details of each command.<br>
 
 
@@ -46,14 +46,14 @@ Format: `help`
 
 ### 2.2. Adding a task: `add`
 
-Adds a task to the task list<br>
+Adds a task to the task list.<br>
 Format: `add t/TASK [d/DATE] [#tags]`
 
 > Persons can have any number of tags (including 0)
 
 Examples:
 
-* `add CS2103 meeting d/03/03 #Programming Lab 2`
+* `add t/CS2103 meeting d/03/03 #Programming Lab 2`
 
 ### 2.3. Listing all tasks : `list`
 
@@ -62,13 +62,13 @@ Format: `list`
 
 ### 2.4. Create a list: `createlist`
 
-Create a new list. 
+Create a new list. <br>
 Format: `createlist NAME`
 
 The name refers to name of the task list.
 
 Examples:
-* `createlist Sports`
+* `createlist Sports` <br>
   Create a new list named Sports.
 
 ### 2.5. Editing a person : `edit`
@@ -128,9 +128,9 @@ Examples:
 * `list`<br>
   `delete 2`<br>
   Deletes the 2nd task.
-* `find Betsy`<br>
+* `find Project`<br>
   `delete 1`<br>
-  Deletes the 1st person in the results of the `find` command.
+  Deletes the 1st task from the results of the `find` command.
 
 ### 2.8. Select a task : `select`
 
@@ -152,12 +152,12 @@ Examples:
   
 ### 2.9. Sorting the list of tasks: `sort`
 
-Sort all the tasks by due dates, closest to furthest from the current date.
+Sort all the tasks by due dates, closest to furthest from the current date. <br>
 Format : `sort`
 
-### 2.10. Undo previous command: `undo`
+### 2.10. Undo previous command: `undo` 
 
-Undo previous add/ delete command. 
+Undo previous add/ delete command. <br>
 Format: `undo`
 
 ### 2.11. Clearing all entries : `clear`
@@ -175,11 +175,11 @@ Format: `priority t/TASK p/INDEX`
 
 Examples:
 
-* `Priority meeting 1`
+* `Priority t/meeting p/1`
    Mark the priority of meeting as most important
-* `Priority CS3230 assignment 2`
+* `Priority t/CS3230 assignment p/2`
    Mark the priority of CS3230 assignment as important.
-* `Priority housework 3`
+* `Priority t/housework p/3`
    Mark the priority of housework as the least important.
 
 ### 2.13. Exiting the program : `exit`
@@ -217,7 +217,7 @@ There is no need to save manually.
   
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
   e.g. ` find CS2101 meeting` <br>
-  	   ` #Programming Lab2` <br>
+  e.g. ` find #Programming Lab 2` <br>
 
 * **Delete** : `delete INDEX` <br>
    e.g. ` delete 3`
