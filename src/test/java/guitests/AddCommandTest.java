@@ -5,10 +5,10 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import guitests.guihandles.PersonCardHandle;
-import seedu.address.commons.core.Messages;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.testutil.TestPerson;
-import seedu.address.testutil.TestUtil;
+import seedu.doist.commons.core.Messages;
+import seedu.doist.logic.commands.AddCommand;
+import seedu.doist.testutil.TestPerson;
+import seedu.doist.testutil.TestUtil;
 
 public class AddCommandTest extends AddressBookGuiTest {
 

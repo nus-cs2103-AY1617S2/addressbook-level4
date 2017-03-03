@@ -1,17 +1,17 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.doist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
 
 import guitests.guihandles.PersonCardHandle;
-import seedu.address.commons.core.Messages;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.task.Description;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.TestPerson;
+import seedu.doist.commons.core.Messages;
+import seedu.doist.logic.commands.EditCommand;
+import seedu.doist.model.tag.Tag;
+import seedu.doist.model.task.Description;
+import seedu.doist.testutil.PersonBuilder;
+import seedu.doist.testutil.TestPerson;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
 public class EditCommandTest extends AddressBookGuiTest {
