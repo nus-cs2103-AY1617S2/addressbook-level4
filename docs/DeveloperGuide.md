@@ -370,12 +370,12 @@ Use case ends.
 **Extensions**
 
 2a. Task already exists
->2a1. System informs user that task already exists and doesn’t add repeated task.
+>2a1. System does not perform the addition and informs user that task with the same name already exists.
 
 >Use case ends
- 
+
 2b. Invalid command format
->2b1. System informs user that command format is invalid and outputs sample correct format to user.
+>2b1. System prompts user that command format is not recognized and display sample format to user.
 
 >Use case ends.
 
