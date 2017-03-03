@@ -1,6 +1,6 @@
-# AddressBook Level 4 - Developer Guide
+# TaskCrusher - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team T15B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -343,77 +343,208 @@ b. Require developers to download those libraries manually (this creates extra w
 
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
 
-
 Priority | As a ... | I want to ... | So that I can...
--------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+-------- | :----------- | :-------------------- | :-------------------------
+`* * *` | new user |  view an instruction manual | remember the format and syntax of commands when necessary
+`* * *` | user | quit the program from the command line | avoid the trouble of using the GUI when quit
+`* * *` | user with [events](#event)| add an event by specifying its start date/time and end date/time either in relative or absolute form i.e. `12 Mar` or `today`<br /><br /> **condition**: <br />when there is already an event booked for that time frame, I can be notified and choose whether or not to force the addition| book that time slot and be reminded of the event
+`* * *` | user with [tentative events](#tentative-event)| temporarily [block](#blocking) multiple time slots for a tentative event<br /><br /> **condition**: <br />I can later confirm its finalized time slot and [release](#releasing) all the other time slots| avoid time clash between events
+`* * *` | user with events| specify the location of an event | later adapt my actions based on where the event is located
+`* * *` | user with [tasks](#task)| add a task with a deadline, either in relative or absolute form | 
+`* * *` | user with tasks| add a task without a deadline | 
+`* * *` | user with tasks or events that are related to each other | add tags to tasks or events | easily search and categorize tasks or events
+`* * *` | user | add a description to a task or an event | refer to relevant information in the future
+`* * *` | user with tasks| specify the priority of a task | later compare the importance of tasks, which can be especially useful for comparing tasks without deadlines
+`* * *` | user with tasks| view only tasks with deadlines | 
+`* * *` | user with tasks| view only tasks without deadlines | 
+`* * *` | user with an [active task](#active-task-or-event)| view the list of tasks that need to be completed by a specific deadline | 
+`* * *` | user with an active task or event | update their fields.  **For both:** <ul><li>name</li><li>tag</li><li>description</li></ul>**For an event:**<ul><li>time frame</li><li>location</li></ul> **For a task:**<ul><li>priority</li><li>deadline</li></ul>| 
+`* * *` | user with active events| view the list of events taking place during a specific time frame |
+`* * *` | user with many active tasks | sort tasks by their fields <ul><li>sort by name</li><li>sort by priority</li><li>sort by deadline</li><li>sort by tag</li></ul>| locate tasks with certain fields easily
+`* * *` | user with many active events | sort events by their fields <ul><li>sort by name</li><li>sort by start date</li><li>sort by tag</li></ul>| locate events with certain fields easily
+`* * *` | user with an active event | mark an active event as `done` and remove from the active list | separate it from other active tasks and events
+`* * *` | user with an active event | cancel and dismiss an event in the active list <br /><br /> **condition**:<br />I can add a reason for why it is being dismissed before it gets moved into the [expired list](#expired-list)| distinguish between a successful event and a cancelled one
+`* * *` | user with an active task | mark an active task as `done` and remove from the active list | separate it from other active tasks and events
+`* * *` | user with an active task | dismiss an active task and remove from the active list <br /><br /> **condition**:<br />I can add a reason for why it is being dismissed before it gets moved into the expired list| distinguish between a task that was successfully done with one that failed
+`* * *` | user with overdue tasks and past events| view the list of tasks that are considered overdue or events past relative to the current time | manage them all at once
+`* * *` | user | view the effect of the last action undertaken | confirm the details of the action and amend if necessary
+`* * *` | user with many tasks and events in the active list | search for tasks or events by a keyword <ul><li>keyword in name</li> <li>keyword in tag</li><li>keyword in description </li></ul>| 
+`* * *` | user who have completed one or more tasks | view a reverse chronological log of all completed tasks | see which tasks I have marked as `done` in the past
+`* * *` | user who have completed one or more events | view a reverse chronological log of all completed events | see which events I have marked as `done` in the past
+`* * *` | user who have dismissed a task | reverse chronological log of all dismissed tasks | see which tasks I have dismissed
+`* * *` | user who have completed or dismissed tasks or events | recycle a task or an event kept in the expired list | 
+`* * *` | user who have completed or dismissed tasks or events | clear all the past tasks and events from the expired list | eliminate no-longer-relevant tasks and events and keep the log clean
+`* * *` | user | see error message when I enter an invalid command | ammend the command appropriately
+`* * *` | user | undo the last command entered |
+`* * *` | user | switch between multiple storage files | have separate task managers of different aspects of my life
+`* * *` | user | specify the location of the storage file <br /><br /> **condition**:<br />If the file does not exist in the path, create a new file| place the file anywhere I find convenient, for example, in a shared folder
+`* * *` | advanced user | have raw access to the storage files | directly perform CRUD operation on the data all at once
+`* *` | user with recurring tasks or events| add a task or an event that are reccuring| avoid the trouble of manually adding repeatedly on a regular basis
+`* *` | user | identify free time slots in a day, week or month | can evaluate how busy I am and optimize the date for tasks and events to add
+`* *` | user | display daily, weekly, or monthly calendar views | visualize the deadlines of tasks and times of events for the day/week/month
+`* *` | user | view the history of all previously undertaken actions | prevent duplicate commands and correct entries that are erroneous in hindsight
+`* *` | user | choose between automatic save and manual save |
+`*` | user | have an auto-completion for commands that are predictable | avoid the trouble of typing in the full command
+`*` | user | enter the options for a command in any order | 
 
-{More to be added}
+## Appendix B : Sample Use Cases
 
-## Appendix B : Use Cases
+(For all use cases below, the **System** is the `TaskCrusher` and the **Actor** is the `user`, unless specified otherwise)
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: Add an event
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User enters the name of an event to be added, together with its start and end date/time and other options.
+2. TaskCrusher adds the event to the active list
+3. TaskCrusher displays back the details of the add action.
+
 Use case ends.
 
 **Extensions**
 
-2a. The list is empty
+2a. The command format is invalid
 
+> 2a1. TaskCrusher shows an error message <br>
+  Use case resumes at step 1
+
+2b. The entered time slot is already occupied by another event 
+> 2b1. TaskCrusher notifies the user that the time slot for the event has been already occupied by other event.
+  2b2. User decides whether or not to force the addition. 
+  
 > Use case ends
 
-3a. The given index is invalid
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+#### <a name = "list"> Use case: Display the active list
 
-{More to be added}
+**MSS**
+
+1. User requests to list active tasks, active events or both. Additional sort field may be specified.
+2. TaskCrusher displays the active list according to the listing options, assigning each entry an index.
+
+Use case ends
+
+**Extensions**
+
+2a. The command format is invalid
+
+> 2a1. TaskCrusher shows an error message <br>
+> Use case resumes at step 1
+
+2b. The active list is empty.
+> 2b1. TaskCrusher notifies the user that the active list is currently empty.<br/>
+> Use case ends
+
+#### Use case: Mark a task/event as `done`
+
+**MSS**
+
+1. User requests to [display the active list](#list).
+2. User uses the index of the task/event of interest to request to mark it as `done`. Multiple indices can be entered to process more than one entries. 
+3. TaskCrusher moves the task/event from the active list to the expired list.
+
+Use case ends
+
+**Extensions**
+
+2a. The task/event is not found in the list
+> Use case ends
+
+2b. User decides not to mark a task/event.
+> Use case ends
+
+3a. The index is invalid
+> 3a1. TaskCrusher shows an error message <br>
+Use case resumes at step 2
+<br>
+#### Use case: manage overdue tasks and/or past events
+
+**MSS**
+
+1. User requests to [display the active list](#list) with the option to list only overdue tasks and/or past events relative to the current time.
+2. For each item in the displayed list, user uses the index to request to mark it as `done`, or dismiss it. Multiple indices may be entered to process more than one items. 
+3. If the user chose to dismiss an item, TaskCrusher prompts the user to enter the reason for it. 
+4. User enters the reason for dismissing a task/event. If user does not need to do so, user does nothing and proceeds.
+5. TaskCrusher moves the task/event from the active list to the expired list.
+
+Use case ends
+
+**Extensions**
+
+2a. There are no overdue tasks or past events
+> Use case ends
+
+2b. User quits the process
+> Use case ends
+
+3a. The index is invalid
+> Use case resumes at step 2
+
+4a. The reason is in the wrong format
+> Use case resumes at step 3
 
 ## Appendix C : Non Functional Requirements
 
-1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
-   should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any desktop machine running on Windows 7 or later as long as it has Java `1.8.0_60` or higher installed.
+2. Must be fully functioning offline.
+3. No installation on the user machine should be required. 
+4. Should work stand-alone. 
+5. Must come with extensive JUnit error-testing.
+6. Must not rely on any relational databases.
+7. Must rely minimally on GUI. GUI is used only for output. 
+8. Must be able to support CLI.
+9. Supports one and only one user.  
+10. A user with an above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+11. Should be able to hold up to 1000 tasks without a noticeable decline in performance.
 
-{More to be added}
 
 ## Appendix D : Glossary
 
-##### Mainstream OS
+#### Task
+> A task is to be completed by some deadline. If a task does not have a deadline, then it is considered to be "done someday"
 
-> Windows, Linux, Unix, OS-X
+#### Event
+> An event takes place during a specific time frame, which may or may not extend over one or more days.
 
-##### Private contact detail
+#### Tentative event
+> A tentative event is an event whose time is not yet finalized. User may add a tentative event together with its possible time slots so that these slots can be blocked until the event is finalized. 
 
-> A contact detail that is not meant to be shared with others
+#### Blocking
+> when a tentative event blocks a time slot, that time slot by default cannot be occupied by another event.
+
+#### Releasing
+> When the time slot for a tentative event is finalized, those time slots which had been blocked by that event bu are not part of the finalized time slot become free again for other events to occupy.
+
+#### Active task or event
+> An active task or event is one that is yet to be marked as `completed` or `cannot be done` by the user.
+
+#### Active list
+> The active list contains all the active events and tasks. The active list may contain overdue tasks and past events since it is up to the user to remove them from this list.
+
+#### Expired list
+> The expired set contains all the tasks and events that are removed from the active list by the user, which may be recycled. This list can be emptied by the user.  
 
 ## Appendix E : Product Survey
+This product survey is conducted with respect to Jim's needs. Therefore, it may not mention some of the remarkable features of a product should they be irrelevant to Jim.
 
-**Product Name**
+**Product Name: Remember the Milk**
 
-Author: ...
+Author: Yoshiaki Nishimura
 
 Pros:
 
-* ...
-* ...
+* Many supplementary information can be specified with the task, including location, start date, due date and priority.
+* The task inbox can be sorted by various fields, including task name, due date and priority.
+* Adding of tasks can be achieved both through keyboard as well as clicking. After the typing in the task name, you can specify options like due date and tags using meta characters. For example, you can specify due date with `^` followed by date
+* The web page supports many keyboard shortcuts, such as `t` for adding tasks.
+* Removed tasks are temporarily put into trash, from which a customer can recover tasks within 30 days.
+* Can undo a previous delete with one click. 
+* Can break a task into its subtasks (pro-version).
 
 Cons:
 
-* ...
-* ...
+* The Web App is browser-based and needs internet connection, at least for free-versions.
+* Only addition of a task can be done from the command line. The rest of user operations rely heavily on GUI.  
+* Does not offer time-slot “block” feature for tentative events whose time is yet to be finalized.
 
