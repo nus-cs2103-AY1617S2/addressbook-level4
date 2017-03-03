@@ -112,7 +112,7 @@ public class MainWindow extends UiPart<Region> {
         });
     }
 
-    void fillInnerParts() {
+    protected void fillInnerParts() {
         browserPanel = new BrowserPanel(browserPlaceholder);
         personListPanel = new PersonListPanel(getPersonListPlaceholder(), logic.getFilteredPersonList());
         new ResultDisplay(getResultDisplayPlaceholder());
@@ -136,7 +136,7 @@ public class MainWindow extends UiPart<Region> {
         return personListPanelPlaceholder;
     }
 
-    void hide() {
+    protected void hide() {
         primaryStage.hide();
     }
 
@@ -172,7 +172,7 @@ public class MainWindow extends UiPart<Region> {
     /**
      * Returns the current size and the position of the main Window.
      */
-    GuiSettings getCurrentGuiSetting() {
+    protected GuiSettings getCurrentGuiSetting() {
         return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
     }
@@ -183,7 +183,7 @@ public class MainWindow extends UiPart<Region> {
         helpWindow.show();
     }
 
-    void show() {
+    protected void show() {
         primaryStage.show();
     }
 
@@ -199,11 +199,11 @@ public class MainWindow extends UiPart<Region> {
         return this.personListPanel;
     }
 
-    void loadPersonPage(ReadOnlyTask person) {
+    protected void loadPersonPage(ReadOnlyTask person) {
         browserPanel.loadPersonPage(person);
     }
 
-    void releaseResources() {
+    protected void releaseResources() {
         browserPanel.freeResources();
     }
 

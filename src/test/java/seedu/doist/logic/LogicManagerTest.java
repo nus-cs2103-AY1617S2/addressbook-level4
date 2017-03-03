@@ -410,9 +410,9 @@ public class LogicManagerTest {
     /**
      * A utility class to generate test data.
      */
-    class TestDataHelper {
+    protected class TestDataHelper {
 
-        Task adam() throws Exception {
+        protected Task adam() throws Exception {
             Description name = new Description("Adam Brown");
             //Phone privatePhone = new Phone("111111");
             //Email email = new Email("adam@gmail.com");
@@ -430,7 +430,7 @@ public class LogicManagerTest {
          *
          * @param seed used to generate the person data field values
          */
-        Task generateTask(int seed) throws Exception {
+        protected Task generateTask(int seed) throws Exception {
             return new Task(
                     new Description("Person " + seed),
                     //new Phone("" + Math.abs(seed)),
@@ -441,7 +441,7 @@ public class LogicManagerTest {
         }
 
         /** Generates the correct add command based on the person given */
-        String generateAddCommand(Task p) {
+        protected String generateAddCommand(Task p) {
             StringBuffer cmd = new StringBuffer();
 
             cmd.append("add ");
@@ -462,7 +462,7 @@ public class LogicManagerTest {
         /**
          * Generates an AddressBook with auto-generated persons.
          */
-        TodoList generateAddressBook(int numGenerated) throws Exception {
+        protected TodoList generateAddressBook(int numGenerated) throws Exception {
             TodoList addressBook = new TodoList();
             addToAddressBook(addressBook, numGenerated);
             return addressBook;
@@ -471,7 +471,7 @@ public class LogicManagerTest {
         /**
          * Generates an AddressBook based on the list of Persons given.
          */
-        TodoList generateAddressBook(List<Task> persons) throws Exception {
+        protected TodoList generateAddressBook(List<Task> persons) throws Exception {
             TodoList addressBook = new TodoList();
             addToAddressBook(addressBook, persons);
             return addressBook;
@@ -481,14 +481,14 @@ public class LogicManagerTest {
          * Adds auto-generated Person objects to the given AddressBook
          * @param addressBook The AddressBook to which the Persons will be added
          */
-        void addToAddressBook(TodoList addressBook, int numGenerated) throws Exception {
+        protected void addToAddressBook(TodoList addressBook, int numGenerated) throws Exception {
             addToAddressBook(addressBook, generateTaskList(numGenerated));
         }
 
         /**
          * Adds the given list of Persons to the given AddressBook
          */
-        void addToAddressBook(TodoList addressBook, List<Task> personsToAdd) throws Exception {
+        protected void addToAddressBook(TodoList addressBook, List<Task> personsToAdd) throws Exception {
             for (Task p: personsToAdd) {
                 addressBook.addTask(p);
             }
@@ -498,14 +498,14 @@ public class LogicManagerTest {
          * Adds auto-generated Person objects to the given model
          * @param model The model to which the Persons will be added
          */
-        void addToModel(Model model, int numGenerated) throws Exception {
+        protected void addToModel(Model model, int numGenerated) throws Exception {
             addToModel(model, generateTaskList(numGenerated));
         }
 
         /**
          * Adds the given list of Persons to the given model
          */
-        void addToModel(Model model, List<Task> personsToAdd) throws Exception {
+        protected void addToModel(Model model, List<Task> personsToAdd) throws Exception {
             for (Task p: personsToAdd) {
                 model.addTask(p);
             }
@@ -514,7 +514,7 @@ public class LogicManagerTest {
         /**
          * Generates a list of Tasks based on the flags.
          */
-        List<Task> generateTaskList(int numGenerated) throws Exception {
+        protected List<Task> generateTaskList(int numGenerated) throws Exception {
             List<Task> tasks = new ArrayList<>();
             for (int i = 1; i <= numGenerated; i++) {
                 tasks.add(generateTask(i));
@@ -522,14 +522,14 @@ public class LogicManagerTest {
             return tasks;
         }
 
-        List<Task> generateTaskList(Task... tasks) {
+        protected List<Task> generateTaskList(Task... tasks) {
             return Arrays.asList(tasks);
         }
 
         /**
          * Generates a Task object with given description. Other fields will have some dummy values.
          */
-        Task generateTaskWithDescription(String name) throws Exception {
+        protected Task generateTaskWithDescription(String name) throws Exception {
             return new Task(
                     new Description(name),
                     new UniqueTagList(new Tag("tag"))
