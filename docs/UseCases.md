@@ -34,15 +34,9 @@ By : `CS2103JAN2017-W15-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&
 2. Taskbook enters task into system
 **Use case ends**
 
-<<<<<<< HEAD
-**Extensions**
-
-[Add Deadline Task](#add-deadline-task) occurs after step 1.
-=======
 #### Extensions
 
 - [Add Deadline Task](#add-deadline-task) occurs after step 1.
->>>>>>> use-cases
 
 ### Add Deadline Task
 This use case extends [Add Floating task](#add-floating-task). It is inserted at extension point Add Deadline Task.
@@ -54,11 +48,6 @@ This use case extends [Add Floating task](#add-floating-task). It is inserted at
 
 #### Extensions
 
-<<<<<<< HEAD
-**Extensions**
-
-=======
->>>>>>> use-cases
 1a. End date/time is in the wrong format
 > 1a1. TaskBook shows an error message
   **Use case ends**
@@ -76,11 +65,6 @@ This use case extends [Add Deadline Task](#add-deadline-task). It is inserted at
 
 #### Extensions
 
-<<<<<<< HEAD
-**Extensions**
-
-=======
->>>>>>> use-cases
 1a. Start date/time is in the wrong format
 > 1a1. TaskBook shows an error message
   **Use case ends**
@@ -101,13 +85,6 @@ This use case extends [List all Tasks](#list-all-tasks). It is inserted at exten
 
 #### MSS
 
-<<<<<<< HEAD
-**Extensions**
-
-2a. The list is empty
-> 2a1. TaskBook shows a notice message <br>
-  Use case ends
-=======
 1. User request to list all tasks
 2. TaskBook retrieves all tasks
 **Use Case continues in step 1 of [List Tasks](#list-tasks)**
@@ -127,7 +104,6 @@ This use case extends [List all Tasks](#list-all-tasks). It is inserted at exten
 1. User requests to find tasks by keyword
 2. TaskBook shows a list of tasks with keywords that match the exact keyword
 **Use Case continues in step 1 of [List Tasks](#list-tasks)**
->>>>>>> use-cases
 
 #### Extensions
 
@@ -179,28 +155,8 @@ This use case extends [List all Tasks](#list-all-tasks). It is inserted at exten
 #### Extensions
 
 2a. The given index is invalid
-<<<<<<< HEAD
-
-> 2a1. TaskBook shows an error message <br>
-  Use case resumes at step 2
-
-### Find task
-
-**MSS**
-
-1. User requests to find tasks by keyword
-2. TaskBook shows a list of tasks with keywords that match the exact keyword <br>
-Use case ends
-
-**Extensions**
-
-2a. The list is empty
-> 2a1. TaskBook shows a notice message <br>
-  Use case ends
-=======
 > 2a1. TaskBook shows an error message
   **Use case resumes at step 2**
->>>>>>> use-cases
 
 ### Undo Action
 
@@ -213,11 +169,6 @@ Use case ends
 
 #### Extensions
 
-<<<<<<< HEAD
-**Extensions**
-
-=======
->>>>>>> use-cases
 2a. There exists no valid action that can be undone
 > 2a1. TaskBook shows a notice message
   **Use case ends**
@@ -233,11 +184,6 @@ Use case ends
 
 #### Extensions
 
-<<<<<<< HEAD
-**Extensions**
-
-=======
->>>>>>> use-cases
 2a. There exists no valid undo action that can be redone
 > 2a1. TaskBook shows a notice message
   **Use case ends**
