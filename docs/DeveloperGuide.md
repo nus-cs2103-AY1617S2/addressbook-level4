@@ -357,15 +357,16 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user with different kind of tasks| tag a task | so that I can add labels associated with the task 
 `* * *` | user | retrieve tasks by tag | so that I can see tasks associated with a label
 `* * *` | user | retrieve tasks due on certain date | so that I can see tasks due on specified date
+`* * *` | user | assign priority to tasks | so that I can keep track of the priority of tasks
+`* * *` | user | retrieve tasks based on priority | so that I can see tasks ranked by priority
 `* *` | advanced user | use shorter versions of a command to type faster | more quickly use the app
 `* *` | complex user | break a task into subtasks | keep track of complex tasks
 `* *` | frequent user | add a recurring task | keep track of task that needs to be done many times
 `* *` | user | get a week view of tasks | plan for my week
+`* *` | frequent user | access app with shortcut | quickly access the app
 `* *` | user | change the reccurence setting of a task | update if the task is recurring
 `* ` | user | create a copy of task in google calendar | refer to tasks outside of app
 `* ` | user | set task reminders | remind myself of certain tasks
-`* ` | frequent user | access app with shortcut | quickly access the app
-
 
 {More to be added}
 
