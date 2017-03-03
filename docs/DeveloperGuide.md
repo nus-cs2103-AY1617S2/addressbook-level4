@@ -353,6 +353,8 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | block out a period of time | keep a period of time unavailable
 `* * *` | user | release a blocked period of time | make a period of time available again
 `* * *` | user | find upcoming tasks by date | can track of what is dued soon
+`* * *` | user | mark a task as completed | differentiate between completed and uncompleted tasks
+`* * *` | user | set a deadline to a task | easily keep track of deadline for a certain task to be completed
 `* * *` | user | get more information about a command | learn how to use various commands
 `* * *` | user with different kind of tasks| tag a task | so that I can add labels associated with the task 
 `* * *` | user | retrieve tasks by tag | so that I can see tasks associated with a label
@@ -367,6 +369,8 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user | change the reccurence setting of a task | update if the task is recurring
 `* ` | user | create a copy of task in google calendar | refer to tasks outside of app
 `* ` | user | set task reminders | remind myself of certain tasks
+`* ` | user | sync the  to my google calendar | sync the tasks with the calendar and get notified
+`* ` | user | specify the location of the storage file | save the data to the location of my preference
 
 {More to be added}
 
