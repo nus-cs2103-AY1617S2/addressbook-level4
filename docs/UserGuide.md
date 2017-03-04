@@ -64,7 +64,22 @@ Examples:
 Shows a list of all tasks in the Task Manager.<br>
 Format: `list`
 
-### 2.4. Editing a task : `edit`
+### 2.4. Listing today tasks : `listday`
+
+Shows a list of today tasks in the Task Manager.<br>
+Format: `listday`
+
+### 2.5. Listing proirity tasks : `list*`
+
+Shows a list of proirity tasks in the Task Manager.<br>
+Format: `list*`
+
+### 2.6. Listing completed tasks : `listdone`
+
+Shows a list of completed tasks in the Task Manager.<br>
+Format: `listdone`
+
+### 2.7. Editing a task : `edit`
 
 Edits an existing task in the address book.<br>
 Format: `edit INDEX [TASK] [d/DATE] [t/TIME] [f/TAG]...`
@@ -85,7 +100,7 @@ Examples:
 * `edit 2 CS2013T Meeting t/`<br>
   Edits the label of the 2nd task to be `CS2013T Meeting` and clears all existing tags.
 
-### 2.5. Finding all tasks containing any keyword in their label: `find`
+### 2.8. Finding all tasks containing any keyword in their label: `find`
 
 Finds tasks whose labels contain any of the given keywords.<br>
 Format: `find KEYWORD [MORE_KEYWORDS]`
@@ -104,9 +119,9 @@ Examples:
 * `find Meeting Study Shop`<br>
   Returns Any tasks having labels `Meeting`, `Study`, or `Shop`
 
-### 2.6. Deleting a task : `delete`
+### 2.9. Deleting a task : `delete`
 
-Deletes the specified task from the address book. Irreversible.<br>
+Deletes the specified task from the Task Manager. Irreversible.<br>
 Format: `delete INDEX`
 
 > Deletes the task at the specified `INDEX`. <br>
@@ -122,7 +137,7 @@ Examples:
   `delete 2 3`<br>
   Deletes the 2nd and 3rd task in the Task Manager.
 
-### 2.7. Complete a task : `done`
+### 2.10. Complete a task : `done`
 
 Marks the task as done identified by the index number used in the last task listing.<br>
 Format: `Done INDEX`
@@ -140,17 +155,85 @@ Examples:
   `done 1`<br>
   Removes the 1st task in the results of the `find` command.
 
-### 2.8. Clearing all entries : `clear`
+### 2.11. Blocking a task : `block`
+
+Blocks the specified task from the Task Manager if task is uncertain. <br>
+Format: `block INDEX`
+
+> Blocks the task at the specified `INDEX`. <br>
+> The index refers to the index number shown in the most recent listing.<br>
+> The index **must be a positive integer** 1, 2, 3, ...
+
+Examples:
+
+* `find Meeting`<br>
+  `block 1`<br>
+  Blocks the 1st task in the results of the `find` command.
+* `list`<br>
+  `block 2 3`<br>
+  Blocks the 2nd and 3rd task in the Task Manager.
+
+ ### 2.12. Unblocking a task : `unblock`
+
+Unblocks the specified task from the Task Manager if task is certain. <br>
+Format: `unblock INDEX`
+
+> Unblocks the task at the specified `INDEX`. <br>
+> The index refers to the index number shown in the most recent listing.<br>
+> The index **must be a positive integer** 1, 2, 3, ...
+
+Examples:
+
+* `find Meeting`<br>
+  `unblock 1`<br>
+  Unblocks the 1st task in the results of the `find` command.
+* `list`<br>
+  `unblock 2 3`<br>
+  Unblocks the 2nd and 3rd task in the Task Manager.
+ 
+  ### 2.13. Undo the latest command : `undo`
+
+Undos the recent typed command. <br>
+Format: `undo`
+
+### 2.9. Saving data in another destination folder : `save`
+
+Saves the data in another folder given by the user. <br>
+Format: `save dest/FILE_PATH`
+
+Examples:
+
+* `save dest/C:/Desktop/myTask`<br>
+
+### 2.9. Changing default storage folder : `setting`
+
+Changing the default storage folder in another folder given by the user. <br>
+Format: `setting dest/FILE_PATH`
+
+Examples:
+
+* `setting dest/C:/Desktop/myTask`<br>
+
+### 2.14. Using data from another folder : `uss`
+
+Using data from another folder given by the user. <br>
+Format: `use dest/FILE_PATH`
+
+Examples:
+
+* `use dest/C:/Desktop/myTask`<br>
+
+### 2.15. Clearing all entries : `clear`
 
 Clears all entries from the Task Manager.<br>
 Format: `clear`
 
-### 2.9. Exiting the program : `exit`
+### 2.16. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.10. Saving the data
+### 2.17. Saving the data
 
 Task Manager data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
