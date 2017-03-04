@@ -1,3 +1,5 @@
+[//]: # (27 Feb | Tian Song: User Stories, UC01 - UC12, Product Survey | Mustaqiim: UC13 - UC25, Product Survey | Shawn: Product Survey | Jeremy: Product Survey)
+
 # Suru - Developer Guide
 
 By : `Team W09-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `?`
@@ -1060,11 +1062,8 @@ Use case ends.
 
 ##### Mainstream OS
 
-> Windows
+> Windows 7 and above
 
-##### Private contact detail
-
-> A contact detail that is not meant to be shared with others
 
 ## Appendix E : Product Survey
 **IKE**
@@ -1096,6 +1095,20 @@ Cons:
 * No import function of existing task from other apps to Wunderlist
 * Assigning of to-dos to your team members is a paid feature (Organisation Features)
 
+**Habitica**
+
+Author: Jeremy Heng Wen Ming
+
+Pros:
+* Gamification paradigm extends to the social features of the application in the form of team quests. This is essentially a mechanism to share group tasks and to mantain accountability
+* A loot and shop system allows users to obtain and purchase cosmetic items to signify character progress
+* Splits tasks into dailies, habits and to-dos
+* Tasks can be split into subtasks which can be assigned individual reward values
+
+Cons:
+* The interface is not efficient to use when adding many tasks
+* There is no integration with any calendar applications
+
 **Trello**
 
 Author: Teo Tian Song
@@ -1107,4 +1120,15 @@ Pros:
 
 Cons:
 * Requires internet connection to utilize
-* Lack of hotkeys
+* Requires consistent usage of mouse to perform commands
+
+
+
+
+
+
+
+
+
+
+
