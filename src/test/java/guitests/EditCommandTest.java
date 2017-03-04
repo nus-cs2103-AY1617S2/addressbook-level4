@@ -29,7 +29,7 @@ public class EditCommandTest extends EzDoGuiTest {
         int ezDoIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Bobby").withPhone("91234567")
-                .withEmail("bobby@gmail.com").withAddress("Block 123, Bobby Street 3").withTags("husband").build();
+                .withEmail("bobby@gmail.com").withStartDate("Block 123, Bobby Street 3").withTags("husband").build();
 
         assertEditSuccess(ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
     }

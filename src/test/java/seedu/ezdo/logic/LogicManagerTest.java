@@ -43,12 +43,7 @@ import seedu.ezdo.model.ModelManager;
 import seedu.ezdo.model.ReadOnlyEzDo;
 import seedu.ezdo.model.tag.Tag;
 import seedu.ezdo.model.tag.UniqueTagList;
-import seedu.ezdo.model.todo.Address;
-import seedu.ezdo.model.todo.Email;
-import seedu.ezdo.model.todo.Name;
-import seedu.ezdo.model.todo.Task;
-import seedu.ezdo.model.todo.Phone;
-import seedu.ezdo.model.todo.ReadOnlyTask;
+import seedu.ezdo.model.todo.*;
 import seedu.ezdo.storage.StorageManager;
 
 
@@ -420,11 +415,11 @@ public class LogicManagerTest {
             Name name = new Name("Adam Brown");
             Phone privatePhone = new Phone("111111");
             Email email = new Email("adam@gmail.com");
-            Address privateAddress = new Address("111, alpha street");
+            StartDate privateStartDate = new StartDate("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, privatePhone, email, privateAddress, tags);
+            return new Task(name, privatePhone, email, privateStartDate, tags);
         }
 
         /**
@@ -439,7 +434,7 @@ public class LogicManagerTest {
                     new Name("Person " + seed),
                     new Phone("" + Math.abs(seed)),
                     new Email(seed + "@email"),
-                    new Address("House of " + seed),
+                    new StartDate("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -453,7 +448,7 @@ public class LogicManagerTest {
             cmd.append(p.getName().toString());
             cmd.append(" e/").append(p.getEmail());
             cmd.append(" p/").append(p.getPhone());
-            cmd.append(" a/").append(p.getAddress());
+            cmd.append(" a/").append(p.getStartDate());
 
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {
@@ -538,7 +533,7 @@ public class LogicManagerTest {
                     new Name(name),
                     new Phone("1"),
                     new Email("1@email"),
-                    new Address("House of 1"),
+                    new StartDate("House of 1"),
                     new UniqueTagList(new Tag("tag"))
             );
         }
