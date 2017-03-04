@@ -484,7 +484,7 @@ Use case ends.
 
 1. User requests to list tasks
 2. System shows a list of tasks
-3. User request to mark specific tasks in the list based on task’s index
+3. User request to mark specific tasks in the list based on task's index
 4. System marks the tasks, removes it from the task list, and adds it to the Archived list<br>
 Use case ends.
 
@@ -508,7 +508,7 @@ Use case ends.
 
 1. User requests to list archived tasks
 2. System displays a list of archived tasks, sorted by time and date the task has been marked
-3. User requests to unmark the specific task in the list based on task’s index
+3. User requests to unmark the specific task in the list based on task's index
 4. System removes the marked status of the specific task, removes it from the Archived list, and adds it back to the task list <br>
 Use case ends.
 
