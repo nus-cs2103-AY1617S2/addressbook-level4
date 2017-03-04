@@ -24,7 +24,7 @@ import seedu.address.model.person.UniquePersonList.DuplicatePersonException;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-    private final UniqueLabelList tags;
+    private final UniqueLabelList labels;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -35,28 +35,28 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
-        tags = new UniqueLabelList();
+        labels = new UniqueLabelList();
     }
 
     public AddressBook() {}
 
     /**
-     * Creates an AddressBook using the Persons and Tags in the {@code toBeCopied}
+     * Creates an AddressBook using the Persons and Labels in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
         resetData(toBeCopied);
     }
 
-//// list overwrite operations
+    //// list overwrite operations
 
     public void setPersons(List<? extends ReadOnlyPerson> persons)
             throws UniquePersonList.DuplicatePersonException {
         this.persons.setPersons(persons);
     }
 
-    public void setTags(Collection<Label> tags) throws UniqueLabelList.DuplicateLabelException {
-        this.tags.setLabels(tags);
+    public void setLabels(Collection<Label> labels) throws UniqueLabelList.DuplicateLabelException {
+        this.labels.setLabels(labels);
     }
 
     public void resetData(ReadOnlyAddressBook newData) {
@@ -67,31 +67,31 @@ public class AddressBook implements ReadOnlyAddressBook {
             assert false : "AddressBooks should not have duplicate persons";
         }
         try {
-            setTags(newData.getTagList());
+            setLabels(newData.getLabelList());
         } catch (UniqueLabelList.DuplicateLabelException e) {
-            assert false : "AddressBooks should not have duplicate tags";
+            assert false : "AddressBooks should not have duplicate labels";
         }
-        syncMasterTagListWith(persons);
+        syncMasterLabelListWith(persons);
     }
 
-//// person-level operations
+    //// person-level operations
 
     /**
      * Adds a person to the address book.
-     * Also checks the new person's tags and updates {@link #tags} with any new tags found,
-     * and updates the Tag objects in the person to point to those in {@link #tags}.
+     * Also checks the new person's labels and updates {@link #labels} with any new labels found,
+     * and updates the Label objects in the person to point to those in {@link #labels}.
      *
      * @throws UniquePersonList.DuplicatePersonException if an equivalent person already exists.
      */
     public void addPerson(Person p) throws UniquePersonList.DuplicatePersonException {
-        syncMasterTagListWith(p);
+        syncMasterLabelListWith(p);
         persons.add(p);
     }
 
     /**
      * Updates the person in the list at position {@code index} with {@code editedReadOnlyPerson}.
-     * {@code AddressBook}'s tag list will be updated with the tags of {@code editedReadOnlyPerson}.
-     * @see #syncMasterTagListWith(Person)
+     * {@code AddressBook}'s label list will be updated with the labels of {@code editedReadOnlyPerson}.
+     * @see #syncMasterLabelListWith(Person)
      *
      * @throws DuplicatePersonException if updating the person's details causes the person to be equivalent to
      *      another existing person in the list.
@@ -102,41 +102,41 @@ public class AddressBook implements ReadOnlyAddressBook {
         assert editedReadOnlyPerson != null;
 
         Person editedPerson = new Person(editedReadOnlyPerson);
-        syncMasterTagListWith(editedPerson);
-        // TODO: the tags master list will be updated even though the below line fails.
-        // This can cause the tags master list to have additional tags that are not tagged to any person
+        syncMasterLabelListWith(editedPerson);
+        // TODO: the labels master list will be updated even though the below line fails.
+        // This can cause the labels master list to have additional labels that are not labeled to any person
         // in the person list.
         persons.updatePerson(index, editedPerson);
     }
 
     /**
-     * Ensures that every tag in this person:
-     *  - exists in the master list {@link #tags}
-     *  - points to a Tag object in the master list
+     * Ensures that every label in this person:
+     *  - exists in the master list {@link #labels}
+     *  - points to a {@link Label} object in the master list
      */
-    private void syncMasterTagListWith(Person person) {
-        final UniqueLabelList personTags = person.getTags();
-        tags.mergeFrom(personTags);
+    private void syncMasterLabelListWith(Person person) {
+        final UniqueLabelList personLabels = person.getLabels();
+        labels.mergeFrom(personLabels);
 
-        // Create map with values = tag object references in the master list
-        // used for checking person tag references
-        final Map<Label, Label> masterTagObjects = new HashMap<>();
-        tags.forEach(tag -> masterTagObjects.put(tag, tag));
+        // Create map with values = label object references in the master list
+        // used for checking person label references
+        final Map<Label, Label> masterLabelObjects = new HashMap<>();
+        labels.forEach(label -> masterLabelObjects.put(label, label));
 
-        // Rebuild the list of person tags to point to the relevant tags in the master tag list.
-        final Set<Label> correctTagReferences = new HashSet<>();
-        personTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
-        person.setTags(new UniqueLabelList(correctTagReferences));
+        // Rebuild the list of person labels to point to the relevant labels in the master label list.
+        final Set<Label> correctLabelReferences = new HashSet<>();
+        personLabels.forEach(label -> correctLabelReferences.add(masterLabelObjects.get(label)));
+        person.setLabels(new UniqueLabelList(correctLabelReferences));
     }
 
     /**
-     * Ensures that every tag in these persons:
-     *  - exists in the master list {@link #tags}
-     *  - points to a Tag object in the master list
-     *  @see #syncMasterTagListWith(Person)
+     * Ensures that every label in these persons:
+     *  - exists in the master list {@link #labels}
+     *  - points to a LAbel object in the master list
+     *  @see #syncMasterLabelListWith(Person)
      */
-    private void syncMasterTagListWith(UniquePersonList persons) {
-        persons.forEach(this::syncMasterTagListWith);
+    private void syncMasterLabelListWith(UniquePersonList persons) {
+        persons.forEach(this::syncMasterLabelListWith);
     }
 
     public boolean removePerson(ReadOnlyPerson key) throws UniquePersonList.PersonNotFoundException {
@@ -147,17 +147,17 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
     }
 
-//// tag-level operations
+    //// label-level operations
 
-    public void addTag(Label t) throws UniqueLabelList.DuplicateLabelException {
-        tags.add(t);
+    public void addLabel(Label t) throws UniqueLabelList.DuplicateLabelException {
+        labels.add(t);
     }
 
-//// util methods
+    //// util methods
 
     @Override
     public String toString() {
-        return persons.asObservableList().size() + " persons, " + tags.asObservableList().size() +  " tags";
+        return persons.asObservableList().size() + " persons, " + labels.asObservableList().size() +  " labels";
         // TODO: refine later
     }
 
@@ -167,21 +167,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<Label> getTagList() {
-        return new UnmodifiableObservableList<>(tags.asObservableList());
+    public ObservableList<Label> getLabelList() {
+        return new UnmodifiableObservableList<>(labels.asObservableList());
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && this.persons.equals(((AddressBook) other).persons)
-                && this.tags.equalsOrderInsensitive(((AddressBook) other).tags));
+                        && this.persons.equals(((AddressBook) other).persons)
+                        && this.labels.equalsOrderInsensitive(((AddressBook) other).labels));
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(persons, tags);
+        return Objects.hash(persons, labels);
     }
 }

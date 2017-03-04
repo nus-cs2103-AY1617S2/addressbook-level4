@@ -24,8 +24,8 @@ public class AddressBookBuilder {
         return this;
     }
 
-    public AddressBookBuilder withTag(String tagName) throws IllegalValueException {
-        addressBook.addTag(new Label(tagName));
+    public AddressBookBuilder withLabel(String labelName) throws IllegalValueException {
+        addressBook.addLabel(new Label(labelName));
         return this;
     }
 

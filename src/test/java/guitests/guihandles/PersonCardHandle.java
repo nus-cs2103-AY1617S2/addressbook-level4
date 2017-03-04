@@ -19,7 +19,7 @@ public class PersonCardHandle extends GuiHandle {
     private static final String ADDRESS_FIELD_ID = "#address";
     private static final String PHONE_FIELD_ID = "#phone";
     private static final String EMAIL_FIELD_ID = "#email";
-    private static final String TAGS_FIELD_ID = "#tags";
+    private static final String LABELS_FIELD_ID = "#labels";
 
     private Node node;
 
@@ -48,28 +48,28 @@ public class PersonCardHandle extends GuiHandle {
         return getTextFromLabel(EMAIL_FIELD_ID);
     }
 
-    public List<String> getTags() {
-        return getTags(getTagsContainer());
+    public List<String> getLabels() {
+        return getLabels(getLabelsContainer());
     }
 
-    private List<String> getTags(Region tagsContainer) {
-        return tagsContainer
+    private List<String> getLabels(Region labelsContainer) {
+        return labelsContainer
                 .getChildrenUnmodifiable()
                 .stream()
                 .map(node -> ((Labeled) node).getText())
                 .collect(Collectors.toList());
     }
 
-    private List<String> getTags(UniqueLabelList tags) {
-        return tags
+    private List<String> getLabels(UniqueLabelList labels) {
+        return labels
                 .asObservableList()
                 .stream()
-                .map(tag -> tag.labelName)
+                .map(label -> label.labelName)
                 .collect(Collectors.toList());
     }
 
-    private Region getTagsContainer() {
-        return guiRobot.from(node).lookup(TAGS_FIELD_ID).query();
+    private Region getLabelsContainer() {
+        return guiRobot.from(node).lookup(LABELS_FIELD_ID).query();
     }
 
     public boolean isSamePerson(ReadOnlyPerson person) {
@@ -77,7 +77,7 @@ public class PersonCardHandle extends GuiHandle {
                 && getPhone().equals(person.getPhone().value)
                 && getEmail().equals(person.getEmail().value)
                 && getAddress().equals(person.getAddress().value)
-                && getTags().equals(getTags(person.getTags()));
+                && getLabels().equals(getLabels(person.getLabels()));
     }
 
     @Override
@@ -88,7 +88,7 @@ public class PersonCardHandle extends GuiHandle {
                     && getPhone().equals(handle.getPhone())
                     && getEmail().equals(handle.getEmail())
                     && getAddress().equals(handle.getAddress())
-                    && getTags().equals(handle.getTags());
+                    && getLabels().equals(handle.getLabels());
         }
         return super.equals(obj);
     }

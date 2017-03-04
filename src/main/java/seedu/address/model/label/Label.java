@@ -17,7 +17,7 @@ public class Label {
     /**
      * Validates given label name.
      *
-     * @throws IllegalValueException if the given tag name string is invalid.
+     * @throws IllegalValueException if the given label name string is invalid.
      */
     public Label(String name) throws IllegalValueException {
         assert name != null;
@@ -29,7 +29,7 @@ public class Label {
     }
 
     /**
-     * Returns true if a given string is a valid tag name.
+     * Returns true if a given string is a valid label name.
      */
     public static boolean isValidLabelName(String test) {
         return test.matches(LABEL_VALIDATION_REGEX);

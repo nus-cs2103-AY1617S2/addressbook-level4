@@ -25,7 +25,7 @@ public class XmlSerializableAddressBook implements ReadOnlyAddressBook {
     @XmlElement
     private List<XmlAdaptedPerson> persons;
     @XmlElement
-    private List<XmlAdaptedTag> tags;
+    private List<XmlAdaptedLabel> labels;
 
     /**
      * Creates an empty XmlSerializableAddressBook.
@@ -33,7 +33,7 @@ public class XmlSerializableAddressBook implements ReadOnlyAddressBook {
      */
     public XmlSerializableAddressBook() {
         persons = new ArrayList<>();
-        tags = new ArrayList<>();
+        labels = new ArrayList<>();
     }
 
     /**
@@ -42,7 +42,7 @@ public class XmlSerializableAddressBook implements ReadOnlyAddressBook {
     public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
         this();
         persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
-        tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
+        labels.addAll(src.getLabelList().stream().map(XmlAdaptedLabel::new).collect(Collectors.toList()));
     }
 
     @Override
@@ -60,8 +60,8 @@ public class XmlSerializableAddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<Label> getTagList() {
-        final ObservableList<Label> tags = this.tags.stream().map(t -> {
+    public ObservableList<Label> getLabelList() {
+        final ObservableList<Label> labels = this.labels.stream().map(t -> {
             try {
                 return t.toModelType();
             } catch (IllegalValueException e) {
@@ -70,7 +70,7 @@ public class XmlSerializableAddressBook implements ReadOnlyAddressBook {
                 return null;
             }
         }).collect(Collectors.toCollection(FXCollections::observableArrayList));
-        return new UnmodifiableObservableList<>(tags);
+        return new UnmodifiableObservableList<>(labels);
     }
 
 }

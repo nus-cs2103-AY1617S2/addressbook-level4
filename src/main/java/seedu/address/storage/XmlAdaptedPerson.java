@@ -30,7 +30,7 @@ public class XmlAdaptedPerson {
     private String address;
 
     @XmlElement
-    private List<XmlAdaptedTag> tagged = new ArrayList<>();
+    private List<XmlAdaptedLabel> labeled = new ArrayList<>();
 
     /**
      * Constructs an XmlAdaptedPerson.
@@ -49,9 +49,9 @@ public class XmlAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        tagged = new ArrayList<>();
-        for (Label tag : source.getTags()) {
-            tagged.add(new XmlAdaptedTag(tag));
+        labeled = new ArrayList<>();
+        for (Label label : source.getLabels()) {
+            labeled.add(new XmlAdaptedLabel(label));
         }
     }
 
@@ -61,15 +61,15 @@ public class XmlAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Label> personTags = new ArrayList<>();
-        for (XmlAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+        final List<Label> personLabels = new ArrayList<>();
+        for (XmlAdaptedLabel label : labeled) {
+            personLabels.add(label.toModelType());
         }
         final Name name = new Name(this.name);
         final Phone phone = new Phone(this.phone);
         final Email email = new Email(this.email);
         final Address address = new Address(this.address);
-        final UniqueLabelList tags = new UniqueLabelList(personTags);
-        return new Person(name, phone, email, address, tags);
+        final UniqueLabelList labels = new UniqueLabelList(personLabels);
+        return new Person(name, phone, email, address, labels);
     }
 }

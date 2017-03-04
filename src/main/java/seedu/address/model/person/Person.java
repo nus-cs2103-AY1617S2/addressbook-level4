@@ -16,25 +16,25 @@ public class Person implements ReadOnlyPerson {
     private Email email;
     private Address address;
 
-    private UniqueLabelList tags;
+    private UniqueLabelList labels;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, UniqueLabelList tags) {
-        assert !CollectionUtil.isAnyNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, UniqueLabelList labels) {
+        assert !CollectionUtil.isAnyNull(name, phone, email, address, labels);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.tags = new UniqueLabelList(tags); // protect internal tags from changes in the arg list
+        this.labels = new UniqueLabelList(labels); // protect internal labels from changes in the arg list
     }
 
     /**
      * Creates a copy of the given ReadOnlyPerson.
      */
     public Person(ReadOnlyPerson source) {
-        this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(), source.getTags());
+        this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(), source.getLabels());
     }
 
     public void setName(Name name) {
@@ -78,15 +78,15 @@ public class Person implements ReadOnlyPerson {
     }
 
     @Override
-    public UniqueLabelList getTags() {
-        return new UniqueLabelList(tags);
+    public UniqueLabelList getLabels() {
+        return new UniqueLabelList(labels);
     }
 
     /**
-     * Replaces this person's tags with the tags in the argument tag list.
+     * Replaces this person's labels with the labels in the argument label list.
      */
-    public void setTags(UniqueLabelList replacement) {
-        tags.setTags(replacement);
+    public void setLabels(UniqueLabelList replacement) {
+        labels.setLabels(replacement);
     }
 
     /**
@@ -99,20 +99,20 @@ public class Person implements ReadOnlyPerson {
         this.setPhone(replacement.getPhone());
         this.setEmail(replacement.getEmail());
         this.setAddress(replacement.getAddress());
-        this.setTags(replacement.getTags());
+        this.setLabels(replacement.getLabels());
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ReadOnlyPerson // instanceof handles nulls
-                && this.isSameStateAs((ReadOnlyPerson) other));
+                        && this.isSameStateAs((ReadOnlyPerson) other));
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, labels);
     }
 
     @Override

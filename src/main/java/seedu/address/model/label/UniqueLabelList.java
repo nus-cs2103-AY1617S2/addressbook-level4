@@ -84,7 +84,7 @@ public class UniqueLabelList implements Iterable<Label> {
     }
 
     /**
-     * Returns all tags in this list as a Set.
+     * Returns all labels in this list as a Set.
      * This set is mutable and change-insulated against the internal list.
      */
     public Set<Label> toSet() {
@@ -92,9 +92,9 @@ public class UniqueLabelList implements Iterable<Label> {
     }
 
     /**
-     * Replaces the Tags in this list with those in the argument tag list.
+     * Replaces the Tags in this list with those in the argument label list.
      */
-    public void setTags(UniqueLabelList replacement) {
+    public void setLabels(UniqueLabelList replacement) {
         this.internalList.setAll(replacement.internalList);
     }
 
@@ -107,7 +107,7 @@ public class UniqueLabelList implements Iterable<Label> {
     }
 
     /**
-     * Ensures every tag in the argument list exists in this object.
+     * Ensures every label in the argument list exists in this object.
      */
     public void mergeFrom(UniqueLabelList from) {
         final Set<Label> alreadyInside = this.toSet();
@@ -168,7 +168,7 @@ public class UniqueLabelList implements Iterable<Label> {
      */
     public static class DuplicateLabelException extends DuplicateDataException {
         protected DuplicateLabelException() {
-            super("Operation would result in duplicate tags");
+            super("Operation would result in duplicate labels");
         }
     }
 

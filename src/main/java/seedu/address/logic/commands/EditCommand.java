@@ -81,9 +81,9 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
         Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
         Address updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
-        UniqueLabelList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
+        UniqueLabelList updatedLabels = editPersonDescriptor.getLabels().orElseGet(personToEdit::getLabels);
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedLabels);
     }
 
     /**
@@ -95,7 +95,7 @@ public class EditCommand extends Command {
         private Optional<Phone> phone = Optional.empty();
         private Optional<Email> email = Optional.empty();
         private Optional<Address> address = Optional.empty();
-        private Optional<UniqueLabelList> tags = Optional.empty();
+        private Optional<UniqueLabelList> labels = Optional.empty();
 
         public EditPersonDescriptor() {}
 
@@ -104,14 +104,14 @@ public class EditCommand extends Command {
             this.phone = toCopy.getPhone();
             this.email = toCopy.getEmail();
             this.address = toCopy.getAddress();
-            this.tags = toCopy.getTags();
+            this.labels = toCopy.getLabels();
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.phone, this.email, this.address, this.tags);
+            return CollectionUtil.isAnyPresent(this.name, this.phone, this.email, this.address, this.labels);
         }
 
         public void setName(Optional<Name> name) {
@@ -150,13 +150,13 @@ public class EditCommand extends Command {
             return address;
         }
 
-        public void setTags(Optional<UniqueLabelList> tags) {
-            assert tags != null;
-            this.tags = tags;
+        public void setLabels(Optional<UniqueLabelList> labels) {
+            assert labels != null;
+            this.labels = labels;
         }
 
-        public Optional<UniqueLabelList> getTags() {
-            return tags;
+        public Optional<UniqueLabelList> getLabels() {
+            return labels;
         }
     }
 }

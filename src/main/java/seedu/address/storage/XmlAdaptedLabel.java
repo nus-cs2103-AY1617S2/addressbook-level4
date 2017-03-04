@@ -8,33 +8,33 @@ import seedu.address.model.label.Label;
 /**
  * JAXB-friendly adapted version of the Tag.
  */
-public class XmlAdaptedTag {
+public class XmlAdaptedLabel {
 
     @XmlValue
-    public String tagName;
+    public String labelName;
 
     /**
      * Constructs an XmlAdaptedTag.
      * This is the no-arg constructor that is required by JAXB.
      */
-    public XmlAdaptedTag() {}
+    public XmlAdaptedLabel() {}
 
     /**
      * Converts a given Tag into this class for JAXB use.
      *
      * @param source future changes to this will not affect the created
      */
-    public XmlAdaptedTag(Label source) {
-        tagName = source.labelName;
+    public XmlAdaptedLabel(Label source) {
+        labelName = source.labelName;
     }
 
     /**
-     * Converts this jaxb-friendly adapted tag object into the model's Tag object.
+     * Converts this jaxb-friendly adapted label object into the model's {@link Label} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person
      */
     public Label toModelType() throws IllegalValueException {
-        return new Label(tagName);
+        return new Label(labelName);
     }
 
 }

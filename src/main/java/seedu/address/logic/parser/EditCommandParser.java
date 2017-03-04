@@ -15,8 +15,8 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.label.UniqueLabelList;
 import seedu.address.logic.commands.IncorrectCommand;
+import seedu.address.model.label.UniqueLabelList;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -45,7 +45,7 @@ public class EditCommandParser {
             editPersonDescriptor.setPhone(ParserUtil.parsePhone(argsTokenizer.getValue(PREFIX_PHONE)));
             editPersonDescriptor.setEmail(ParserUtil.parseEmail(argsTokenizer.getValue(PREFIX_EMAIL)));
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argsTokenizer.getValue(PREFIX_ADDRESS)));
-            editPersonDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
+            editPersonDescriptor.setLabels(parseLabelsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
@@ -58,18 +58,18 @@ public class EditCommandParser {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into an {@code Optional<UniqueTagList>} if {@code tags} is non-empty.
-     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Optional<UniqueTagList>} containing zero tags.
+     * Parses {@code Collection<String> labels} into an {@code Optional<UniqueTagList>} if {@code labels} is non-empty.
+     * If {@code labels} contain only one element which is an empty string, it will be parsed into a
+     * {@code Optional<UniqueTagList>} containing zero labels.
      */
-    private Optional<UniqueLabelList> parseTagsForEdit(Collection<String> tags) throws IllegalValueException {
-        assert tags != null;
+    private Optional<UniqueLabelList> parseLabelsForEdit(Collection<String> labels) throws IllegalValueException {
+        assert labels != null;
 
-        if (tags.isEmpty()) {
+        if (labels.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseTags(tagSet));
+        Collection<String> labelSet = labels.size() == 1 && labels.contains("") ? Collections.emptySet() : labels;
+        return Optional.of(ParserUtil.parseLabels(labelSet));
     }
 
 }

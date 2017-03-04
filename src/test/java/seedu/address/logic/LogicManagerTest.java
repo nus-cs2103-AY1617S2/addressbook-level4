@@ -111,8 +111,8 @@ public class LogicManagerTest {
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyAddressBook, List)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
-                                      ReadOnlyAddressBook expectedAddressBook,
-                                      List<? extends ReadOnlyPerson> expectedShownList) {
+            ReadOnlyAddressBook expectedAddressBook,
+            List<? extends ReadOnlyPerson> expectedShownList) {
         assertCommandBehavior(false, inputCommand, expectedMessage, expectedAddressBook, expectedShownList);
     }
 
@@ -136,8 +136,8 @@ public class LogicManagerTest {
      *      - {@code expectedAddressBook} was saved to the storage file. <br>
      */
     private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand, String expectedMessage,
-                                       ReadOnlyAddressBook expectedAddressBook,
-                                       List<? extends ReadOnlyPerson> expectedShownList) {
+            ReadOnlyAddressBook expectedAddressBook,
+            List<? extends ReadOnlyPerson> expectedShownList) {
 
         try {
             CommandResult result = logic.execute(inputCommand);
@@ -202,7 +202,7 @@ public class LogicManagerTest {
                 Phone.MESSAGE_PHONE_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
                 Email.MESSAGE_EMAIL_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
+        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.label",
                 Label.MESSAGE_LABEL_CONSTRAINTS);
 
     }
@@ -419,10 +419,10 @@ public class LogicManagerTest {
             Phone privatePhone = new Phone("111111");
             Email email = new Email("adam@gmail.com");
             Address privateAddress = new Address("111, alpha street");
-            Label tag1 = new Label("tag1");
-            Label tag2 = new Label("longertag2");
-            UniqueLabelList tags = new UniqueLabelList(tag1, tag2);
-            return new Person(name, privatePhone, email, privateAddress, tags);
+            Label label1 = new Label("label1");
+            Label label2 = new Label("longerlabel2");
+            UniqueLabelList labels = new UniqueLabelList(label1, label2);
+            return new Person(name, privatePhone, email, privateAddress, labels);
         }
 
         /**
@@ -438,8 +438,8 @@ public class LogicManagerTest {
                     new Phone("" + Math.abs(seed)),
                     new Email(seed + "@email"),
                     new Address("House of " + seed),
-                    new UniqueLabelList(new Label("tag" + Math.abs(seed)), new Label("tag" + Math.abs(seed + 1)))
-            );
+                    new UniqueLabelList(new Label("label" + Math.abs(seed)), new Label("label" + Math.abs(seed + 1)))
+                    );
         }
 
         /** Generates the correct add command based on the person given */
@@ -453,8 +453,8 @@ public class LogicManagerTest {
             cmd.append(" p/").append(p.getPhone());
             cmd.append(" a/").append(p.getAddress());
 
-            UniqueLabelList tags = p.getTags();
-            for (Label t: tags) {
+            UniqueLabelList labels = p.getLabels();
+            for (Label t: labels) {
                 cmd.append(" t/").append(t.labelName);
             }
 
@@ -537,8 +537,8 @@ public class LogicManagerTest {
                     new Phone("1"),
                     new Email("1@email"),
                     new Address("House of 1"),
-                    new UniqueLabelList(new Label("tag"))
-            );
+                    new UniqueLabelList(new Label("label"))
+                    );
         }
     }
 }

@@ -29,7 +29,7 @@ public class AddressBookTest {
     @Test
     public void constructor() {
         assertEquals(Collections.emptyList(), addressBook.getPersonList());
-        assertEquals(Collections.emptyList(), addressBook.getTagList());
+        assertEquals(Collections.emptyList(), addressBook.getLabelList());
     }
 
     @Test
@@ -50,36 +50,36 @@ public class AddressBookTest {
         TypicalTestPersons td = new TypicalTestPersons();
         // Repeat td.alice twice
         List<Person> newPersons = Arrays.asList(new Person(td.alice), new Person(td.alice));
-        List<Label> newTags = td.alice.getTags().asObservableList();
-        AddressBookStub newData = new AddressBookStub(newPersons, newTags);
+        List<Label> newLabels = td.alice.getLabels().asObservableList();
+        AddressBookStub newData = new AddressBookStub(newPersons, newLabels);
 
         thrown.expect(AssertionError.class);
         addressBook.resetData(newData);
     }
 
     @Test
-    public void resetData_withDuplicateTags_throwsAssertionError() {
+    public void resetData_withDuplicateLabels_throwsAssertionError() {
         AddressBook typicalAddressBook = new TypicalTestPersons().getTypicalAddressBook();
         List<ReadOnlyPerson> newPersons = typicalAddressBook.getPersonList();
-        List<Label> newTags = new ArrayList<>(typicalAddressBook.getTagList());
-        // Repeat the first tag twice
-        newTags.add(newTags.get(0));
-        AddressBookStub newData = new AddressBookStub(newPersons, newTags);
+        List<Label> newLabels = new ArrayList<>(typicalAddressBook.getLabelList());
+        // Repeat the first label twice
+        newLabels.add(newLabels.get(0));
+        AddressBookStub newData = new AddressBookStub(newPersons, newLabels);
 
         thrown.expect(AssertionError.class);
         addressBook.resetData(newData);
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons and tags lists can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose persons and labels lists can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<ReadOnlyPerson> persons = FXCollections.observableArrayList();
-        private final ObservableList<Label> tags = FXCollections.observableArrayList();
+        private final ObservableList<Label> labels = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<? extends ReadOnlyPerson> persons, Collection<? extends Label> tags) {
+        AddressBookStub(Collection<? extends ReadOnlyPerson> persons, Collection<? extends Label> labels) {
             this.persons.setAll(persons);
-            this.tags.setAll(tags);
+            this.labels.setAll(labels);
         }
 
         @Override
@@ -88,8 +88,8 @@ public class AddressBookTest {
         }
 
         @Override
-        public ObservableList<Label> getTagList() {
-            return tags;
+        public ObservableList<Label> getLabelList() {
+            return labels;
         }
     }
 

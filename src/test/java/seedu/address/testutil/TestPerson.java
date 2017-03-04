@@ -16,10 +16,10 @@ public class TestPerson implements ReadOnlyPerson {
     private Address address;
     private Email email;
     private Phone phone;
-    private UniqueLabelList tags;
+    private UniqueLabelList labels;
 
     public TestPerson() {
-        tags = new UniqueLabelList();
+        labels = new UniqueLabelList();
     }
 
     /**
@@ -30,7 +30,7 @@ public class TestPerson implements ReadOnlyPerson {
         this.phone = personToCopy.getPhone();
         this.email = personToCopy.getEmail();
         this.address = personToCopy.getAddress();
-        this.tags = personToCopy.getTags();
+        this.labels = personToCopy.getLabels();
     }
 
     public void setName(Name name) {
@@ -49,8 +49,8 @@ public class TestPerson implements ReadOnlyPerson {
         this.phone = phone;
     }
 
-    public void setTags(UniqueLabelList tags) {
-        this.tags = tags;
+    public void setLabels(UniqueLabelList labels) {
+        this.labels = labels;
     }
 
     @Override
@@ -74,8 +74,8 @@ public class TestPerson implements ReadOnlyPerson {
     }
 
     @Override
-    public UniqueLabelList getTags() {
-        return tags;
+    public UniqueLabelList getLabels() {
+        return labels;
     }
 
     @Override
@@ -89,7 +89,7 @@ public class TestPerson implements ReadOnlyPerson {
         sb.append("a/" + this.getAddress().value + " ");
         sb.append("p/" + this.getPhone().value + " ");
         sb.append("e/" + this.getEmail().value + " ");
-        this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.labelName + " "));
+        this.getLabels().asObservableList().stream().forEach(s -> sb.append("t/" + s.labelName + " "));
         return sb.toString();
     }
 }

@@ -56,10 +56,10 @@ public class ParserUtil {
     }
 
     /**
-    * Splits a preamble string into ordered fields.
-    * @return A list of size {@code numFields} where the ith element is the ith field value if specified in
-    *         the input, {@code Optional.empty()} otherwise.
-    */
+     * Splits a preamble string into ordered fields.
+     * @return A list of size {@code numFields} where the ith element is the ith field value if specified in
+     *         the input, {@code Optional.empty()} otherwise.
+     */
     public static List<Optional<String>> splitPreamble(String preamble, int numFields) {
         return Arrays.stream(Arrays.copyOf(preamble.split("\\s+", numFields), numFields))
                 .map(Optional::ofNullable)
@@ -99,14 +99,14 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.
+     * Parses {@code Collection<String> labels} into an {@code UniqueTagList}.
      */
-    public static UniqueLabelList parseTags(Collection<String> tags) throws IllegalValueException {
-        assert tags != null;
-        final Set<Label> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(new Label(tagName));
+    public static UniqueLabelList parseLabels(Collection<String> labels) throws IllegalValueException {
+        assert labels != null;
+        final Set<Label> labelSet = new HashSet<>();
+        for (String labelName : labels) {
+            labelSet.add(new Label(labelName));
         }
-        return new UniqueLabelList(tagSet);
+        return new UniqueLabelList(labelSet);
     }
 }

@@ -31,10 +31,10 @@ public class PersonBuilder {
         return this;
     }
 
-    public PersonBuilder withTags(String ... tags) throws IllegalValueException {
-        person.setTags(new UniqueLabelList());
-        for (String tag: tags) {
-            person.getTags().add(new Label(tag));
+    public PersonBuilder withLabels(String ... labels) throws IllegalValueException {
+        person.setLabels(new UniqueLabelList());
+        for (String label: labels) {
+            person.getLabels().add(new Label(label));
         }
         return this;
     }

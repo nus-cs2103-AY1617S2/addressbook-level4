@@ -29,7 +29,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         int addressBookIndex = 1;
 
         TestPerson editedPerson = new PersonBuilder().withName("Bobby").withPhone("91234567")
-                .withEmail("bobby@gmail.com").withAddress("Block 123, Bobby Street 3").withTags("husband").build();
+                .withEmail("bobby@gmail.com").withAddress("Block 123, Bobby Street 3").withLabels("husband").build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
@@ -40,18 +40,18 @@ public class EditCommandTest extends AddressBookGuiTest {
         int addressBookIndex = 2;
 
         TestPerson personToEdit = expectedPersonsList[addressBookIndex - 1];
-        TestPerson editedPerson = new PersonBuilder(personToEdit).withTags("sweetie", "bestie").build();
+        TestPerson editedPerson = new PersonBuilder(personToEdit).withLabels("sweetie", "bestie").build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
 
     @Test
-    public void edit_clearTags_success() throws Exception {
+    public void edit_clearLabels_success() throws Exception {
         String detailsToEdit = "t/";
         int addressBookIndex = 2;
 
         TestPerson personToEdit = expectedPersonsList[addressBookIndex - 1];
-        TestPerson editedPerson = new PersonBuilder(personToEdit).withTags().build();
+        TestPerson editedPerson = new PersonBuilder(personToEdit).withLabels().build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
     }

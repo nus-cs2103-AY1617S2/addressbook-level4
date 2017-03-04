@@ -14,10 +14,10 @@ public interface ReadOnlyPerson {
     Address getAddress();
 
     /**
-     * The returned TagList is a deep copy of the internal TagList,
-     * changes on the returned list will not affect the person's internal tags.
+     * The returned LabelList is a deep copy of the internal LabelList,
+     * changes on the returned list will not affect the person's internal labels.
      */
-    UniqueLabelList getTags();
+    UniqueLabelList getLabels();
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
@@ -37,14 +37,14 @@ public interface ReadOnlyPerson {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append(" Phone: ")
-                .append(getPhone())
-                .append(" Email: ")
-                .append(getEmail())
-                .append(" Address: ")
-                .append(getAddress())
-                .append(" Tags: ");
-        getTags().forEach(builder::append);
+        .append(" Phone: ")
+        .append(getPhone())
+        .append(" Email: ")
+        .append(getEmail())
+        .append(" Address: ")
+        .append(getAddress())
+        .append(" Label: ");
+        getLabels().forEach(builder::append);
         return builder.toString();
     }
 
