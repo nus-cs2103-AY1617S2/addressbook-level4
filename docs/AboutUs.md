@@ -20,6 +20,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Code written:[functional code][test code][docs]
 * Other major contributions:
   * Did the initial refactoring from AddressBook-Level-4 to SavvyTo-Do
+  * Issue tracker, milestones and repo setup
   * Set up Travis, Appveyor, Coveralls and Codacy
 
 -----
@@ -27,21 +28,21 @@ We are a team based in the [School of Computing, National University of Singapor
 #### [Goh Jing Loon](https://github.com/jingloon)
 <img src="images/JingLoon.png" width="150"><br>
 **Role**: Developer <br>
-Responsibilities: 
+Responsibilities:
 
 -----
 
 #### [Joel Lim](https://github.com/aljorhythm)
 <img src="images/JoelLim.jpg" width="150"><br>
 **Role**: Developer <br>
-Responsibilities: 
+Responsibilities:
 
 -----
 
 #### [Wang Si Qi](https://github.com/coyotestarrkwsq)
 <img src="images/WangSiQi.jpg" width="150"><br>
 **Role**: Developer <br>
-Responsibilities: 
+Responsibilities:
 
  -----
 

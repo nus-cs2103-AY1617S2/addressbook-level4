@@ -406,7 +406,7 @@ Use case ends.
 > 3a1. System shows an error message <br>
   Use case resumes at step 2
 
-#### Use case: Change Storage Location
+#### Use case: Change storage location
 
 **MSS**
 
@@ -516,4 +516,3 @@ Cons:
 **The (really) Big Table of Comparison**
 
 > An extensive table of products comparison can be found [here (credits: Reddit/r/productivity)] (https://docs.google.com/spreadsheets/d/1yP6ZOXMWK-KsMZ-_Bod8tFhyEGdPndCu4HUBO_3rUww/edit#gid=0).
->
