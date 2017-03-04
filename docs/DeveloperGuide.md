@@ -681,17 +681,80 @@ Use case ends.
 
 ## Appendix E : Product Survey
 
-**Product Name**
+**Google Keep**
 
-Author: ...
+Author: Gabriel
 
 Pros:
 
-* ...
-* ...
+* Sticky note-style task management
+* Has location reminders
+* Fast and responsive UI
+* Supports hand drawings on mobile app
+* Works offline 
 
 Cons:
 
-* ...
-* ...
+* Cannot attach files
+* No rich text editing
+* No integration with Google Tasks
+* No ability to clip web pages
 
+
+**Todoist**
+
+Author: Maggie
+
+Pros:
+
+* Clean interface
+* Works offline
+* Supports natural language
+* Allows collaboration
+* Integrates with IFTTT.com
+
+Cons:
+
+* Most features require a premium subscription
+* Search function limited in free plan
+* Keyboard shortcuts cannot be customized
+
+
+**Wunderlist**
+
+Author: Aditya
+
+Pros:
+
+* Slack integration
+* Can attach files
+* Allows collaboration
+* Supports natural language
+* Has  #Hashtag feature
+
+Cons:
+
+* No location based reminders
+* Does not show last synced time
+* Hides subtask from the main view
+* Supports drag and drop tasks but cannot drag a task to become a subtask
+
+
+**Any.do**
+
+Author: Shen Qi
+
+Pros:
+
+* Allows collaboration
+* Customizable themes in UI
+* No size limits on attachments
+* Mobile app has built-in speech recognition
+* Can star a task to mark as high priority
+
+Cons:
+
+* Most features require a premium subscription
+* Does not hide automatically hide a task when completed
+* Does not support natural language
+* Does not support email reminders
