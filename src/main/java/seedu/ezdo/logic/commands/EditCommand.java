@@ -7,13 +7,7 @@ import seedu.ezdo.commons.core.Messages;
 import seedu.ezdo.commons.util.CollectionUtil;
 import seedu.ezdo.logic.commands.exceptions.CommandException;
 import seedu.ezdo.model.tag.UniqueTagList;
-import seedu.ezdo.model.todo.Address;
-import seedu.ezdo.model.todo.Email;
-import seedu.ezdo.model.todo.Name;
-import seedu.ezdo.model.todo.Person;
-import seedu.ezdo.model.todo.Phone;
-import seedu.ezdo.model.todo.ReadOnlyPerson;
-import seedu.ezdo.model.todo.UniquePersonList;
+import seedu.ezdo.model.todo.*;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -80,10 +74,10 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
         Phone updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
         Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
-        Address updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
+        StartDate updatedStartDate = editPersonDescriptor.getStartDate().orElseGet(personToEdit::getStartDate);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedStartDate, updatedTags);
     }
 
     /**
@@ -94,7 +88,7 @@ public class EditCommand extends Command {
         private Optional<Name> name = Optional.empty();
         private Optional<Phone> phone = Optional.empty();
         private Optional<Email> email = Optional.empty();
-        private Optional<Address> address = Optional.empty();
+        private Optional<StartDate> startDate = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditPersonDescriptor() {}
@@ -103,7 +97,7 @@ public class EditCommand extends Command {
             this.name = toCopy.getName();
             this.phone = toCopy.getPhone();
             this.email = toCopy.getEmail();
-            this.address = toCopy.getAddress();
+            this.startDate = toCopy.getStartDate();
             this.tags = toCopy.getTags();
         }
 
@@ -111,7 +105,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.phone, this.email, this.address, this.tags);
+            return CollectionUtil.isAnyPresent(this.name, this.phone, this.email, this.startDate, this.tags);
         }
 
         public void setName(Optional<Name> name) {
@@ -141,13 +135,13 @@ public class EditCommand extends Command {
             return email;
         }
 
-        public void setAddress(Optional<Address> address) {
-            assert address != null;
-            this.address = address;
+        public void setStartDate(Optional<StartDate> startDate) {
+            assert startDate != null;
+            this.startDate = startDate;
         }
 
-        public Optional<Address> getAddress() {
-            return address;
+        public Optional<StartDate> getStartDate() {
+            return startDate;
         }
 
         public void setTags(Optional<UniqueTagList> tags) {
