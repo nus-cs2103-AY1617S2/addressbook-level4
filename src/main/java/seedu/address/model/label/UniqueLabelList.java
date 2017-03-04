@@ -111,9 +111,7 @@ public class UniqueLabelList implements Iterable<Label> {
      */
     public void mergeFrom(UniqueLabelList from) {
         final Set<Label> alreadyInside = this.toSet();
-        from.internalList.stream()
-        .filter(label -> !alreadyInside.contains(label))
-        .forEach(internalList::add);
+        from.internalList.stream().filter(label -> !alreadyInside.contains(label)).forEach(internalList::add);
     }
 
     /**
