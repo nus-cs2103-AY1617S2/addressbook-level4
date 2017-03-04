@@ -10,11 +10,12 @@ import seedu.doist.commons.exceptions.IllegalValueException;
 public class Priority {
 
     public static final String EXAMPLE = "HIGH";
-    public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority should be 'LOW', 'MEDIUM' or 'HIGH'";
-    public static final PriorityLevel DEFAULT_PRIORITY = PriorityLevel.LOW;
+    public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority should be 'NORMAL', "
+            + "'IMPORTANT' or 'VERYIMPORTANT'";
+    public static final PriorityLevel DEFAULT_PRIORITY = PriorityLevel.NORMAL;
 
     public enum PriorityLevel {
-        LOW, MEDIUM, HIGH
+        NORMAL, IMPORTANT, VERYIMPORTANT
     }
     public final PriorityLevel priority;
 
@@ -31,6 +32,7 @@ public class Priority {
      * @throws IllegalValueException if given name string is invalid.
      */
     public Priority(String priority) throws IllegalValueException {
+        priority = priority.toUpperCase();
         if (!isValidPriority(priority)) {
             System.out.println(priority);
             throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
@@ -46,9 +48,9 @@ public class Priority {
      * Returns true if a given integer is a valid priority string
      */
     public static boolean isValidPriority(String priority) {
-        return priority.equals(PriorityLevel.HIGH.toString())
-                || priority.equals(PriorityLevel.MEDIUM.toString())
-                || priority.equals(PriorityLevel.LOW.toString());
+        return priority.equals(PriorityLevel.VERYIMPORTANT.toString())
+                || priority.equals(PriorityLevel.IMPORTANT.toString())
+                || priority.equals(PriorityLevel.NORMAL.toString());
     }
 
     @Override
