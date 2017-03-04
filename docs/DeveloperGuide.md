@@ -350,7 +350,8 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | add a new task with description only | remember what I have to do
 `* * *` | user | add a new task with description and deadline | remember what I have to do before stipulated date/time
 `* * *` | user | add a new task with description and reminder | remember what I have to do and be reminded at specified date/time
-`* * *` | user | add a new task with description and multiple execution dates | remember what I have to do that happens more than once
+`* * *` | user | add a new task with description and on selective execution dates | remember what I have to do that happens over non-consecutive days
+`* * *` | user | add a new recurring task | remember what I have to do that happens repeatedly
 `* * *` | user | tag a task | organise my tasks into different group (tags)
 `* * *` | user | delete a task | remove tasks that I no longer need
 `* * *` | user | delete the tag of a task | delete the unnecessary tags
