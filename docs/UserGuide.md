@@ -17,10 +17,10 @@ By : `Miao Ling` , `Ian` , `Qi Xiang` and `Dylan` - `[W09-B4]` Since : `Feb 2017
 2. Copy the file to the folder you want to use as the home folder for your task manager.
 
 3. Double-click on the file to start the application. The GUI should appear in a few seconds.<br>
-> <img src="images/startup screen.jpg" width="600">
+> <img src="images/startup_screen.jpg" width="600">
 
 4. Get started by adding the first task that you have in mind! Refer to "2. Features" for instructions. <br>
-> <img src="images/add screen.jpg" width="600">
+> <img src="images/add_screen.jpg" width="600">
 
 
 5. After step 6, you can view your task in 3 different tabs.
@@ -28,17 +28,17 @@ By : `Miao Ling` , `Ian` , `Qi Xiang` and `Dylan` - `[W09-B4]` Since : `Feb 2017
    > **Today/Date**
    >
    > * Shows you the list of tasks you have for the specified date. Click left/right arrow to navigate between the dates.
-   > <img src="images/today screen.jpg" width="600">
+   > <img src="images/today_screen.jpg" width="600">
    >
    > **Overview**
    >
    > * Shows you an overall view of the dates. The highest priority tasks will be shown as a preview for every single date. Scroll to navigate between the dates.
-   > <img src="images/overview screen.jpg" width="600">
+   > <img src="images/overview_screen.jpg" width="600">
    >
    > **Priority**
    >
    > * Shows you 4 options of priority tabs, from highest to lowest. Selecting the tab allows you to view the list of tasks that is under that priority. Eg. By clicking on â€œHighest Priorityâ€� tab, it will bring you to the list of tasks that you have in it.<br>
-   > <img src="images/priority screen.jpg" width="600">
+   > <img src="images/priority_screen.jpg" width="600">
 
 ## 2. Features
 
