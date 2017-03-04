@@ -3,7 +3,7 @@ package seedu.ezdo.logic.parser;
 import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import seedu.ezdo.model.todo.Priority;
 import seedu.ezdo.commons.exceptions.IllegalValueException;
 import seedu.ezdo.logic.commands.Command;
 import seedu.ezdo.logic.commands.EditCommand;
@@ -30,7 +31,7 @@ public class EditCommandParser {
     public Command parse(String args) {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
@@ -41,8 +42,14 @@ public class EditCommandParser {
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         try {
+            
+            //argument type manipulation because priority is Integer type
+            String currentPriority = argsTokenizer.getValue(PREFIX_PRIORITY).get();
+            Priority optionalPriority = new Priority(Integer.parseInt(currentPriority));
+            Optional<Priority> optional = Optional.of(optionalPriority);
+            
             editPersonDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
-            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argsTokenizer.getValue(PREFIX_PHONE)));
+            editPersonDescriptor.setPriority(optional);
             editPersonDescriptor.setEmail(ParserUtil.parseEmail(argsTokenizer.getValue(PREFIX_EMAIL)));
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argsTokenizer.getValue(PREFIX_ADDRESS)));
             editPersonDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));

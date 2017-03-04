@@ -12,7 +12,7 @@ import seedu.ezdo.model.todo.Address;
 import seedu.ezdo.model.todo.Email;
 import seedu.ezdo.model.todo.Name;
 import seedu.ezdo.model.todo.Person;
-import seedu.ezdo.model.todo.Phone;
+import seedu.ezdo.model.todo.Priority;
 import seedu.ezdo.model.todo.ReadOnlyPerson;
 
 /**
@@ -23,7 +23,7 @@ public class XmlAdaptedPerson {
     @XmlElement(required = true)
     private String name;
     @XmlElement(required = true)
-    private String phone;
+    private int priority;
     @XmlElement(required = true)
     private String email;
     @XmlElement(required = true)
@@ -46,7 +46,7 @@ public class XmlAdaptedPerson {
      */
     public XmlAdaptedPerson(ReadOnlyPerson source) {
         name = source.getName().fullName;
-        phone = source.getPhone().value;
+        priority = source.getPriority().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
         tagged = new ArrayList<>();
@@ -66,10 +66,10 @@ public class XmlAdaptedPerson {
             personTags.add(tag.toModelType());
         }
         final Name name = new Name(this.name);
-        final Phone phone = new Phone(this.phone);
+        final Priority priority = new Priority(this.priority);
         final Email email = new Email(this.email);
         final Address address = new Address(this.address);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, priority, email, address, tags);
     }
 }

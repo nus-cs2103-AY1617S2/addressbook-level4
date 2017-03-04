@@ -12,7 +12,7 @@ import seedu.ezdo.model.tag.UniqueTagList;
 public class Person implements ReadOnlyPerson {
 
     private Name name;
-    private Phone phone;
+    private Priority priority;
     private Email email;
     private Address address;
 
@@ -21,10 +21,10 @@ public class Person implements ReadOnlyPerson {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, phone, email, address, tags);
+    public Person(Name name, Priority priority, Email email, Address address, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, priority, email, address, tags);
         this.name = name;
-        this.phone = phone;
+        this.priority = priority;
         this.email = email;
         this.address = address;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
@@ -34,7 +34,7 @@ public class Person implements ReadOnlyPerson {
      * Creates a copy of the given ReadOnlyPerson.
      */
     public Person(ReadOnlyPerson source) {
-        this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(), source.getTags());
+        this(source.getName(), source.getPriority(), source.getEmail(), source.getAddress(), source.getTags());
     }
 
     public void setName(Name name) {
@@ -47,14 +47,14 @@ public class Person implements ReadOnlyPerson {
         return name;
     }
 
-    public void setPhone(Phone phone) {
-        assert phone != null;
-        this.phone = phone;
+    public void setPriority(Priority priority) {
+        assert priority != null;
+        this.priority = priority;
     }
 
     @Override
-    public Phone getPhone() {
-        return phone;
+    public Priority getPriority() {
+        return priority;
     }
 
     public void setEmail(Email email) {
@@ -96,7 +96,7 @@ public class Person implements ReadOnlyPerson {
         assert replacement != null;
 
         this.setName(replacement.getName());
-        this.setPhone(replacement.getPhone());
+        this.setPriority(replacement.getPriority());
         this.setEmail(replacement.getEmail());
         this.setAddress(replacement.getAddress());
         this.setTags(replacement.getTags());
@@ -112,7 +112,7 @@ public class Person implements ReadOnlyPerson {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, priority, email, address, tags);
     }
 
     @Override

@@ -11,7 +11,7 @@ import seedu.ezdo.model.todo.Address;
 import seedu.ezdo.model.todo.Email;
 import seedu.ezdo.model.todo.Name;
 import seedu.ezdo.model.todo.Person;
-import seedu.ezdo.model.todo.Phone;
+import seedu.ezdo.model.todo.Priority;
 import seedu.ezdo.model.todo.ReadOnlyPerson;
 import seedu.ezdo.model.todo.UniquePersonList;
 
@@ -78,12 +78,12 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
+        Priority updatedPriority = editPersonDescriptor.getPriority().orElseGet(personToEdit::getPriority);
         Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
         Address updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPriority, updatedEmail, updatedAddress, updatedTags);
     }
 
     /**
@@ -92,7 +92,7 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Optional<Name> name = Optional.empty();
-        private Optional<Phone> phone = Optional.empty();
+        private Optional<Priority> priority = Optional.empty();
         private Optional<Email> email = Optional.empty();
         private Optional<Address> address = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
@@ -101,7 +101,7 @@ public class EditCommand extends Command {
 
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             this.name = toCopy.getName();
-            this.phone = toCopy.getPhone();
+            this.priority = toCopy.getPriority();
             this.email = toCopy.getEmail();
             this.address = toCopy.getAddress();
             this.tags = toCopy.getTags();
@@ -111,7 +111,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.phone, this.email, this.address, this.tags);
+            return CollectionUtil.isAnyPresent(this.name, this.priority, this.email, this.address, this.tags);
         }
 
         public void setName(Optional<Name> name) {
@@ -123,13 +123,13 @@ public class EditCommand extends Command {
             return name;
         }
 
-        public void setPhone(Optional<Phone> phone) {
-            assert phone != null;
-            this.phone = phone;
+        public void setPriority(Optional<Priority> priority) {
+            assert priority != null;
+            this.priority = priority;
         }
 
-        public Optional<Phone> getPhone() {
-            return phone;
+        public Optional<Priority> getPriority() {
+            return priority;
         }
 
         public void setEmail(Optional<Email> email) {
