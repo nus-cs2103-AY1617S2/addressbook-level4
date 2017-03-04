@@ -1,0 +1,7 @@
+{
+  "appTitle" : "DoOrDie",
+  "logLevel" : "INFO",
+  "userPrefsFilePath" : "preferences.json",
+  "addressBookFilePath" : "data/addressbook.xml",
+  "addressBookName" : "DoOrDie"
+}
