@@ -32,13 +32,15 @@ By : `Typedwriters`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `March 2017`  &nbsp;&nbsp;&
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
 
-## 2. Features
+## 2. Features #TODO: fix
 
 > **Command Format**
 >
 > * Words in `UPPER_CASE` are the parameters.
+> * Words in `lower_case` are the exact strings.
 > * Items in `SQUARE_BRACKETS` are optional.
 > * Items with `...` after them can have multiple instances.
+> * 
 
 ### 2.1. Viewing help : `help`
 
@@ -169,24 +171,75 @@ There is no need to save manually.
 
 ## 4. Command Summary
 
+#IGNORE: sample
 * **Add**  `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` <br>
   e.g. `add James Ho p/22224444 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+#ENDIGNORE
+ 
+* **Add**  `add TASK [by|every|from|on] [date] [to] [date]` #TODO: fix <br> 
+  e.g. `add read the little prince` <br>
+  e.g. `add push git commit by next wednesday` <br>
+  e.g. `add write blog post every day` <br>
+  e.g. `add meet boss every monday` <br>
+  e.g. `add release paycheck every month` <br>
+  e.g. `add my birthday every year` <br>
+  e.g. `add training camp from 2 May to 5 May` <br>
+  e.g. `add drinks with client tomorrow from 1PM to 2PM` <br>
+  e.g. `add clean room on Sunday` <br>
 
-* **Clear** : `clear`
+* **Complete**  `complete INDEX [all|to|,] [INDEX] ...` #TODO: fix <br>
+  e.g. `complete 2` <br>
+  e.g. `complete 2 to 10` <br>
+  e.g. `complete 1,3,5` <br>
+  e.g. `complete 1, 3, 5 to 10` <br>
+  e.g. `complete all` <br>
 
-* **Delete** : `delete INDEX` <br>
-   e.g. `delete 3`
+* **Delete** : `delete INDEX [all|to|,] [INDEX] ...` #TODO: fix <br>
+  e.g. `delete 2` <br>
+  e.g. `delete 2 to 10` <br>
+  e.g. `delete 1,3,5` <br>
+  e.g. `delete 1, 3, 5 to 10` <br>
+  e.g. `delete all` <br>
 
-* **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
-  e.g. `find James Jake`
+* **Edit** : `edit INDEX ...` #TODO: fix <br>
+  e.g. `edit 1 by following Saturday` <br>
+  e.g. `edit 2 on 2 May` <br>
+  e.g. `edit 4 from 13:00 to 5pm` <br>
+  e.g. `edit 3 every Wednesday` <br>
+  e.g. `edit 7 play mousehunt` <br>
+  e.g. `edit 5 #work` <br>
+  e.g. `edit 6 -#supplier` <br>
 
-* **List** : `list` <br>
-  e.g.
-
+* **Find** : `find KEYWORD|TAG [MORE_KEYWORDS|MORE_TAGS] ...` <br> 
+  e.g. `find johnny depp` <br>
+  e.g. `find boss #work` <br>
+  e.g. `find #forever #alone` <br>
+  
 * **Help** : `help` <br>
-  e.g.
+  e.g. help <br>
+  
+* **History** : `history` <br>
+  e.g. `history` <br>
+  
+* **List** : `list TYPE` <br>
+  e.g. `list` <br>
+  e.g. `list all` <br>
+  e.g. `list undone` <br>
+  e.g. `list done` <br>
+  e.g. `list events` <br>
 
-* **Select** : `select INDEX` <br>
-  e.g.`select 2`
+* **Redo** : `redo [INDEX|all]` #TODO: fix <br>
+  e.g.`redo` <br>
+  e.g.`redo 5` <br>
+  e.g.`redo all` <br>
 
-
+* **Save** : `save FILENAME` <br>
+  e.g.`save newfile.txt` <br>
+  
+* **Quit** : `quit` <br>
+  e.g.`quit` <br>
+  
+* **Undo** : `undo [INDEX|all]` #TODO: fix <br>
+  e.g.`undo` <br>
+  e.g.`undo 5` <br>
+  e.g.`undo all` <br>
