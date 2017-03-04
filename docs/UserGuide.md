@@ -164,13 +164,23 @@ There is no need to save manually.
 ## 4. Command Summary
 Command | Shortcut | Format | Example
 -------- | :-------- | :--------- | :-----------
-add | a, + | add TASK d/DATE t/TIME [f/TAG]...| e.g. add Shop Shoes d/20082017 t/4:30pm t/Shopping t/Party
-delete | d, remove, rm, - | delete INDEX | e.g. delete 10
-find | find, search, s | find KEYWORD [MORE_KEYWORDS] | e.g. find Study Math
-done | complete, finish| done INDEX | e.g. done 2
+add | a, + | add TASK d/DATE t/TIME [f/TAG]...| add Shop Shoes d/20082017 t/4:30pm t/Shopping t/Party
+find | find, search, f | find KEYWORD [MORE_KEYWORDS] | find Study Math
+delete | d, remove, rm, - | delete INDEX | delete 10
+done | complete, finish | done INDEX | done 2
+block | b | block INDEX | block 6
+unblock | ub | unblock INDEX | unblock 6
+save | s | save FILE_PATH| use dest/C:/Desktop/myTask
+setting | set | setting FILE_PATH| save dest/C:/Desktop/myTask
+use | udf | save FILE_PATH| save dest/C:/Desktop/myOtherTask
 help | help, guide | | |
-list | list, l| | |
-clear | cr| | |
+list | list, l | | |
+listToday | listday, lt| | |
+listProirity | list*, lp| | |
+listDone | listdone, ld| | |
+undo | u | | |
+clear | cr | | |
+exit | e | | |
 
 
 
