@@ -21,9 +21,9 @@ public class AddCommand extends Command {
     public static ArrayList<String> commandWords = new ArrayList<>(Arrays.asList("add", "do"));
     public static final String DEFAULT_COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = getUsageTextForCommandWords() + ": Adds a person to the address book. "
-            + "Parameters: NAME p/PHONE e/EMAIL a/ADDRESS  [t/TAG]...\n" + "Example: " + DEFAULT_COMMAND_WORD
-            + " John Doe p/98765432 e/johnd@gmail.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney";
+    public static final String MESSAGE_USAGE = getUsageTextForCommandWords() + ": Adds a task to Doist "
+            + "Parameters: TASK_DESCRIPTION  [\\from START_TIME] [\\to END_TIME] [\\as PRIORITY] [\\under TAG...]" 
+            + "Example: " + DEFAULT_COMMAND_WORD + "Group meeting \\from 1600 \\to 1800 \\as IMPORTANT \\under school ";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the to-do list";
@@ -36,12 +36,13 @@ public class AddCommand extends Command {
      * @throws IllegalValueException
      *             if any of the raw values are invalid
      */
-    public AddCommand(String name, Set<String> tags) throws IllegalValueException {
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(new Tag(tagName));
+    public AddCommand(ArrayList<String> arguments) throws IllegalValueException {
+        if(arguments.isEmpty()){
+            throw new IllegalValueException("No arguments passed");
         }
-        this.toAdd = new Task(new Description(name), new UniqueTagList(tagSet));
+        final Set<Tag> tagSet = new HashSet<>();
+        
+        this.toAdd = new Task(new Description(arguments.get(0)), new UniqueTagList(tagSet));
     }
 
     @Override
