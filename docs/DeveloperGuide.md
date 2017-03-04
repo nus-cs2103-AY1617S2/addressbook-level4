@@ -444,12 +444,15 @@ Author: Bryan Lee
 Pros:
 
 *Google Calendar is easy and fast to set up, especially if you use a Google account
+
 *Clean, minimal interface, easy to invite people to events
+
 *Organize events and appointments via different calendars
 
 Cons:
 
 *Possible problems communicating with other calendars such as iCal
+
 *Not specifically a task manager, just a calendar
 
 **Momentum**
@@ -493,5 +496,7 @@ Author: Zhang Heyang
 Cons:
 
 *No localisation, for instance in China there is not lunar calendar and no Japanese traditional holidays calendar in Japan.
+
 *Display interface too small, unable to see all events.
+
 *Add/Remove function not user-friendly enough, hard to find.
