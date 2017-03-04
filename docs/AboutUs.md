@@ -11,21 +11,21 @@ Responsibilities: Data?
 
 -----
 
-#### [Joshua Lee](http://github.com/lejolly)
+#### [FOO CHUAN WEN](http://github.com/lejolly)
 <img src="images/JoshuaLee.jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: UI
 
 -----
 
-#### [Leow Yijin](http://github.com/yijinl)
-<img src="images/LeowYijin.jpg" width="150"><br>
+#### [Peng Chong](https://github.com/Ellie-Peng)<br>
+
 Role: Developer <br>
-Responsibilities: Data
+Responsibilities: UI
 
 -----
 
-#### [Martin Choo](http://github.com/m133225)
+#### [Zhou Fanyi](http://github.com/m133225)
 <img src="images/MartinChoo.jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: Dev Ops
