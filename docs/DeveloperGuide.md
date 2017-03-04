@@ -10,175 +10,175 @@ Priorities: High (must have) - \* \* \*, Medium (nice to have) - \* \*, Low (unl
     <td>So that I can...</td>
   </tr>
   <tr>
-    <td>\* \* \*</td>
+    <td>* * *</td>
     <td>new user</td>
     <td>see usage instructions</td>
     <td>refer to instructions when I forget how to use the App</td>
   </tr>
   <tr>
-    <td>\* \* \*</td>
+    <td>* * *</td>
     <td>new user</td>
     <td>specify file location for the data storage</td>
     <td></td>
   </tr>
   <tr>
-    <td>\* \* </td>
+    <td>* * </td>
     <td>user</td>
     <td>change file location for the data storage</td>
     <td></td>
   </tr>
   <tr>
-    <td>\* \* \*</td>
+    <td>* * *</td>
     <td>user</td>
     <td>add a new event</td>
     <td></td>
   </tr>
   <tr>
-    <td>\* </td>
+    <td>* </td>
     <td>user</td>
     <td>add multiple time periods to an event</td>
     <td>confirm the exact start and end time for the event later</td>
   </tr>
   <tr>
-    <td>\* \* \*</td>
+    <td>* * *</td>
     <td>user</td>
     <td>add a new task</td>
     <td></td>
   </tr>
   <tr>
-    <td>\* \* \*</td>
+    <td>* * *</td>
     <td>user</td>
     <td>list unfinished tasks</td>
     <td>see all the tasks I have yet to complete</td>
   </tr>
   <tr>
-    <td>\* \* \*</td>
+    <td>* * *</td>
     <td>user</td>
     <td>list unfinished events</td>
     <td>see all the events yet to come to pass</td>
   </tr>
   <tr>
-    <td>\* \* </td>
+    <td>* * </td>
     <td>user</td>
     <td>list upcoming events for the week</td>
     <td>see all the upcoming events from now till the end of the week</td>
   </tr>
   <tr>
-    <td>\* \* \*</td>
+    <td>* * *</td>
     <td>user</td>
     <td>update an event</td>
     <td>change the event name, start and end time in case of a mistake or change of plans</td>
   </tr>
   <tr>
-    <td>\* \* \*</td>
+    <td>* * *</td>
     <td>user</td>
     <td>update a task name</td>
     <td>change the task name</td>
   </tr>
   <tr>
-    <td>\* \* \*</td>
+    <td>* * *</td>
     <td>user</td>
     <td>add a ending time to a task</td>
     <td>dynamically change a task into a deadline</td>
   </tr>
   <tr>
-    <td>\* \* \*</td>
+    <td>* * *</td>
     <td>user</td>
     <td>update the ending time for a task</td>
     <td>postpone an unfinished task</td>
   </tr>
   <tr>
-    <td>\* \* \*</td>
+    <td>* * *</td>
     <td>user</td>
     <td>mark a task as done or undone</td>
     <td></td>
   </tr>
   <tr>
-    <td>\* \* </td>
+    <td>* * </td>
     <td>user</td>
     <td>automatically mark an event as done</td>
     <td>mark an event as done when it is over</td>
   </tr>
   <tr>
-    <td>\* \* \*</td>
+    <td>* * *</td>
     <td>user</td>
     <td>delete a task</td>
     <td></td>
   </tr>
   <tr>
-    <td>\* \* \*</td>
+    <td>* * *</td>
     <td>user</td>
     <td>delete an event</td>
     <td></td>
   </tr>
   <tr>
-    <td>\* \* \*</td>
+    <td>* * *</td>
     <td>user</td>
     <td>undo previous command</td>
     <td>revert the most recent command</td>
   </tr>
   <tr>
-    <td>\* \*</td>
+    <td>* *</td>
     <td>user</td>
     <td>redo last undo command</td>
     <td>revert the most recent undo command</td>
   </tr>
   <tr>
-    <td>\* \*</td>
+    <td>* *</td>
     <td>advanced user</td>
     <td>use short versions of commands</td>
     <td>type a command faster</td>
   </tr>
   <tr>
-    <td>\* \* \*</td>
+    <td>* * *</td>
     <td>user with many events and tasks</td>
     <td>search the events and tasks by name</td>
     <td>find a specific event or task without listing all of them</td>
   </tr>
   <tr>
-    <td>\* \* </td>
+    <td>* * </td>
     <td>user</td>
     <td>make an event recurring</td>
     <td>have the same event repeat itself over a specified duration without manually adding all of them</td>
   </tr>
   <tr>
-    <td>\* \* </td>
+    <td>* * </td>
     <td>user</td>
     <td>make a task recurring</td>
     <td>have the same task repeat itself over a specified duration without manually adding all of them</td>
   </tr>
   <tr>
-    <td>\* \* </td>
+    <td>* * </td>
     <td>user with many events and tasks</td>
     <td>list all events and tasks within a time period</td>
     <td>find events and tasks within a time period without listing all of them</td>
   </tr>
   <tr>
-    <td>\* \* </td>
+    <td>* * </td>
     <td>user </td>
     <td>check all events and tasks for the day</td>
     <td>mark them as done, postpone or delete as necessary</td>
   </tr>
   <tr>
-    <td>\*</td>
+    <td>*</td>
     <td>user</td>
     <td>add description to a task</td>
     <td>have miscellaneous details not clutter the task title</td>
   </tr>
   <tr>
-    <td>\* </td>
+    <td>* </td>
     <td>user</td>
     <td>add venue to an event</td>
     <td>see location that event takes place</td>
   </tr>
   <tr>
-    <td>\* </td>
+    <td>* </td>
     <td>user with many events and tasks</td>
     <td>list all upcoming events at a particular location</td>
     <td>see events and tasks to be completed at a particular location</td>
   </tr>
   <tr>
-    <td>\* </td>
+    <td>* </td>
     <td>user who also uses Google Calendar</td>
     <td>sync tasks to Google Calendar</td>
     <td>see existing tasks and add local tasks to Google Calendar</td>
