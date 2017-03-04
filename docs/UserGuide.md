@@ -52,9 +52,9 @@ Format: `help`
 Adds a task to the task list<br>
 Format: `add NAME [d/DEADLINE] [p/PRIORITY] [t/TAG] [n/NOTES]...`
 
--> Task can have a deadline
--> Task can have a priority ranking from 1 - 5
--> Task can have any number of tags (including 0)
+> * Task can have a deadline
+> * Task can have a priority ranking from 1 - 5
+> * Task can have any number of tags (including 0)
 
 Examples:
 
@@ -94,8 +94,8 @@ Marks a task as complete.<br>
 Format: `mark [INDEX]...`
 
 > * Marks the task at ALL the specified `INDEX` as completed.
-    The index refers to the index number shown in the most recent task listing.<br>
-    The index **must be a positive integer** 1, 2, ...
+> * The index refers to the index number shown in the most recent task listing.
+> * The index **must be a positive integer** 1, 2, ...
 
 Examples:
 
@@ -108,8 +108,8 @@ Marks task as incomplete.<br>
 Format: `unmark INDEX...`
 
 > * Marks the task at ALL the specified `INDEX` as incomplete.
-    The index refers to the index number shown in the most recent task listing.<br>
-    The index **must be a positive integer** 1, 2, ...
+> * The index refers to the index number shown in the most recent task listing.
+> * The index **must be a positive integer** 1, 2, ...
 
 Examples:
 
@@ -122,8 +122,8 @@ Sets a new deadline for task.<br>
 Format: `schedule INDEX DEADLINE`
 
 > * Updates the task deadline at the specified `INDEX` as `DEADLINE`.
-    The index refers to the index number shown in the most recent task listing.<br>
-    The index **must be a positive integer** 1, 2, ...
+> * The index refers to the index number shown in the most recent task listing.
+> * The index **must be a positive integer** 1, 2, ...
 
 Examples:
 
@@ -141,7 +141,6 @@ Examples:
 
 * `find t/CS2103`<br>
 Retrieve all tasks with the tag CS2103.
-
 
 ### 2.9. Exiting the program : `exit`
 
