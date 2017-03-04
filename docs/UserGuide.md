@@ -164,8 +164,7 @@ There is no need to save manually.
 ## 4. Command Summary
 Command | Shortcut | Format | Example
 -------- | :-------- | :--------- | :-----------
-
-* **Add** |   | `add TASK d/DATE t/TIME [f/TAG]...` <br> | e.g. `add Shop Shoes d/20082017 t/4:30pm t/Shopping t/Party`
+add | a, + | add TASK d/DATE t/TIME [f/TAG]...| e.g. add Shop Shoes d/20082017 t/4:30pm t/Shopping t/Party
 
 * **Clear** : `clear`
 
