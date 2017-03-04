@@ -28,7 +28,7 @@ public class CommandAliasConfig {
      * @return true / false
      */
     public boolean setAlias(String alias, String command) {
-        if (reservedKeywords.contains(alias)) {
+        if (isReservedWord(alias)) {
             return false;
         }
 
@@ -67,6 +67,16 @@ public class CommandAliasConfig {
      * @param command
      * @return converted command
      */
+
+    /**
+     * Check if the alias is a reserved word
+     * @param alias
+     * @return true/false
+     */
+    public boolean isReservedWord(String alias) {
+        return reservedKeywords.contains(alias);
+    }
+
     public String dealias(String command) {
         for (String alias: aliasMapping.keySet()) {
             if (command.startsWith(alias)) {

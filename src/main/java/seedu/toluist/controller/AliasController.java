@@ -14,6 +14,7 @@ import seedu.toluist.ui.Ui;
 public class AliasController extends Controller {
     private static final String RESULT_MESSAGE_SUCCESS = "Alias %s for %s added";
     private static final String RESULT_MESSAGE_FAILURE = "Alias %s for %s cannot be added";
+    private static final String RESULT_MESSGE_RESERVED_WORD = "%s is a reserved word";
     private static final String COMMAND_TEMPLATE = "alias\\s+(?<alias>\\S+)\\s+(?<command>.+)";
     private static final String COMMAND_WORD = "alias";
 
@@ -30,6 +31,10 @@ public class AliasController extends Controller {
         HashMap<String, String> tokens = tokenize(command);
         String alias = tokens.get(ALIAS_TERM);
         String commandPhrase = tokens.get(COMMAND_TERM);
+
+        if (aliasConfig.isReservedWord(alias)) {
+            return new CommandResult(String.format(RESULT_MESSGE_RESERVED_WORD, alias));
+        }
 
         if (aliasConfig.setAlias(alias, commandPhrase)) {
             return new CommandResult(String.format(RESULT_MESSAGE_SUCCESS, alias, commandPhrase));
