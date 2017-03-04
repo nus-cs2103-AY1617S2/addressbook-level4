@@ -38,11 +38,24 @@ public class AddCommand extends Command {
      *             if any of the raw values are invalid
      */
     public AddCommand(String name, String priority, Set<String> tags) throws IllegalValueException {
+        final Set<Tag> tagSet = makeTagSet(tags);
+        this.toAdd = new Task(new Description(name), new Priority(priority), new UniqueTagList(tagSet));
+    }
+    
+    public AddCommand(String name, Set<String> tags) throws IllegalValueException {
+        final Set<Tag> tagSet = makeTagSet(tags);
+        this.toAdd = new Task(new Description(name), new UniqueTagList(tagSet));
+    }
+    
+    /**
+     * @return a set of tags created by making tags with a set of strings 
+     */
+    private Set<Tag> makeTagSet(Set<String> tags) throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        this.toAdd = new Task(new Description(name), new Priority(priority), new UniqueTagList(tagSet));
+        return tagSet;
     }
 
     @Override

@@ -11,12 +11,20 @@ public class Priority {
 
     public static final String EXAMPLE = "HIGH";
     public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority should be 'LOW', 'MEDIUM' or 'HIGH'";
+    public static final PriorityLevel DEFAULT_PRIORITY = PriorityLevel.LOW;
 
     public enum PriorityLevel {
         LOW, MEDIUM, HIGH
     }
     public final PriorityLevel priority;
 
+    /**
+     * If no parameters are given, it is set to default priority
+     */
+    public Priority() {
+        this.priority = DEFAULT_PRIORITY;
+    }
+    
     /**
      * Validates given name.
      *
