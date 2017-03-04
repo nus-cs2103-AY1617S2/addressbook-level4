@@ -1,4 +1,4 @@
-# Address Book (Level 4)
+# DoOrDie Task Manager
 
 [![Build Status](https://travis-ci.org/CS2103JAN2017-T16-B2/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-T16-B2/main)
 [![Build status](https://ci.appveyor.com/api/projects/status/qcfw2kpnoim4tkkp?svg=true)](https://ci.appveyor.com/project/BernardYip/main)
