@@ -37,13 +37,13 @@ public interface ReadOnlyPerson {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-        .append(" Phone: ")
-        .append(getPhone())
-        .append(" Email: ")
-        .append(getEmail())
-        .append(" Address: ")
-        .append(getAddress())
-        .append(" Label: ");
+            .append(" Phone: ")
+            .append(getPhone())
+            .append(" Email: ")
+            .append(getEmail())
+            .append(" Address: ")
+            .append(getAddress())
+            .append(" Label: ");
         getLabels().forEach(builder::append);
         return builder.toString();
     }
