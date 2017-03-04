@@ -367,15 +367,18 @@ Priority | As a ... | I want to ... | So that I can...
 `*` | user | redo my undone command| redo when I regret my undo command
 `*` | user | view the finished tasks under each list | see what I have already completed
 `*` | user | delete the list and put all the tasks inside into Personal or delete all the tasks | delete the list and delete tasks by lists
-`*` | user | see different colours for different priority levels | know which one is more emergent
+`*` | user | see different colours for different priority levels | know which one is more urgent
 `*` | user | specify priority level for a task after adding the task | know which task is more urgent
-`*` | user | star a task to be my favourite (independent from list) | view it under list view
+`*` | user | mark a task to be my favourite | view it under list favorite 
 `*` | user | update the name of the list | modify it after creating
 `*` | user | view all the starred tasks using a "favourite" command | view all my favourite tasks
 `*` | user | see the autocomplete messages when I type | know what I can type
 `*` | advanced user | change the appearance of the user interface | personalize the view
 `*` | user | view all the past due tasks | get to know what task is left undone
 `*` | user | specify its list when adding a task | group tasks that belong to the same category
+`*` | user | list all list names | get to know current lists
+`*` | user | view finished tasks under current/another list | view my completed tasks
+`*` | user | view/list all finished and unfinised tasks | manage all tasks
 
 {More to be added}
 
