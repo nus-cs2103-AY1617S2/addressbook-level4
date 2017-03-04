@@ -10,7 +10,7 @@ We are a team based in the [School of Computing, National University of Singapor
 -----
 
 #### [Gerald Wong Wei Chuen](https://github.com/geraldwong) <br>
-<img src="images/DamithRajapakse.jpg" width="150"><br>
+<img src="images/geraldwong.jpg" width="150"><br>
 **Role**: Project Advisor
 
 -----
