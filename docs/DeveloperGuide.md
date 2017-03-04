@@ -377,7 +377,7 @@ Priority | As a ... | I want to ... | So that I can...
 `*` | user | get a reminder to do a certain task | remind to do a task without having to forget
 `*` | user | view a list of to-do items that are done | I know what tasks I have completed
 `*` | user with many tasks in the task manager | sort taks by name | locate a task easily
-
+`*` | user | clear all tasks | start fresh by clearing all the tasks in the task manager 
 {More to be added}
 
 ## Appendix B : Use Cases
