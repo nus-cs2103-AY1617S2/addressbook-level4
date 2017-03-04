@@ -370,29 +370,100 @@ Priority | As a(n) ... | I want to ... | So that I can...
 
 (For all use cases below, the **System** is the `SavvyToDo` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Add task
+### Use case: Add task
 
 **MSS**
 
-1. User enters command to add task
-2. System adds the task <br>
+1. User enters command to add task according to parameters
+2. System adds the task to a list of tasks <br>
 Use case ends.
 
 **Extensions**
 
 1a. User input is invalid
+> 1a1. System shows an error message <br>
+> Use case resumes at step 1
 
-> 1a1. System shows error message
-> Use case ends
+1b. START_DATE and END_DATE are different, the RECURRING_TYPE has to be larger than the duration between START_DATE and END_DATE. (e.g. A 3d2n trip can be recurring weekly, not daily)
+> 2b1. System shows an error message <br>
+> Use case resumes at step 1
 
-#### Use case: Delete person
+1c. START_DATE and END_DATE are different, END_DATE is before START_DATE
+> 1c1. System shows an error message <br>
+> Use case resumes at step 1
+
+1d. START_DATE and END_DATE are the same, END_TIME is before START_TIME
+> 1d1. System shows an error message <br>
+> Use case resumes at step 1
+
+### Use case: List tasks
 
 **MSS**
 
 1. User requests to list tasks
-2. SavvyToDo shows a list of tasks
+2. System shows a list of tasks <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> 2a1. System shows an alert message <br>
+> Use case ends
+
+### Use case: Search task
+
+**MSS**
+
+1. User requests to find tasks by keyword
+2. System displays the list of tasks that contains the keyword in the name<br>
+Use case ends.
+
+**Extensions**
+
+1a. No parameter entered after command word
+> System shows a 'no parameter entered' error message.<br>
+> Use case resumes at step 1
+
+
+3a. The list is empty
+> 2a1. System shows a 'no task found' alert message.<br>
+> Use case ends
+
+### Use case: Modify task
+
+**MSS**
+
+1. User requests to list tasks
+2. System shows a list of tasks
+3. User requests to modify certain attribute(s) of a specific task
+4. System modifies the task and saves it <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> 2a1. Use case ends
+
+3a. The given index is invalid
+
+> 3a1. System shows an error message <br>
+  Use case resumes at step 2
+
+3b. At least one parameter entered by user is invalid
+
+> 3b1. System shows an error message and display the expected format <br>
+  Use case resumes at step 2
+
+### Use case: Delete task
+
+**MSS**
+
+1. User requests to list tasks
+2. System shows a list of tasks
 3. User requests to delete a specific task in the list
-4. AddressBook deletes the task <br>
+4. System deletes the task <br>
 Use case ends.
 
 **Extensions**
@@ -406,7 +477,51 @@ Use case ends.
 > 3a1. System shows an error message <br>
   Use case resumes at step 2
 
-#### Use case: Change storage location
+
+### Use case: Mark task as completed
+
+**MSS**
+
+1. User requests to list tasks
+2. System shows a list of tasks
+3. User request to mark specific tasks in the list based on task’s index
+4. System marks the tasks, removes it from the task list, and adds it to the Archived list<br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+> 2a1. System shows a 'no task found' alert message.<br>
+> Use case ends
+
+3a. The given index is invalid
+> 3a1. System shows a 'invalid index' error message <br>
+> Use case resumes at step 1
+
+3b. The task is already marked as done
+> 3b1. System shows a 'task already marked' information message.<br>
+> Use case resumes at step 1
+
+### Use case: Unmark marked task
+
+**MSS**
+
+1. User requests to list archived tasks
+2. System displays a list of archived tasks, sorted by time and date the task has been marked
+3. User requests to unmark the specific task in the list based on task’s index
+4. System removes the marked status of the specific task, removes it from the Archived list, and adds it back to the task list <br>
+Use case ends.
+
+**Extensions**
+
+1a. The list is empty
+> Use case ends
+
+3a. The given index is invalid
+> 3a1. System shows a 'invalid index' error message <br>
+> Use case resumes at step 1
+
+### Use case: Change storage location
 
 **MSS**
 
@@ -421,6 +536,55 @@ Use case ends.
 3a. Error using given storage location
 
 > 3a1. System shows an error message
+> Use case ends
+
+### Use case: Alias keyword
+
+**MSS**
+
+1. User requests to alias a keyword (can be a command or any other frequently used word)
+2. System store the shorten keyword associated with the keyword in its database
+3. User request a command
+4. System check if the command contain any shorten keyword, if it does, replace the shorten keyword with the associated keyword from its database
+5. System carry out the command <br>
+Use case ends.
+
+**Extensions**
+
+1a. The alias keyword contains only 1 character
+> 1a1. System shows a error message 
+> Use case resumes at step 1 <br>
+
+1b. The alias keyword has already been associated with other keywords
+> 1b1. System shows a error message and the alias keyword's original associated keyword 
+> Use case resumes at step 1 <br>
+
+### Use case: Unalias keyword
+
+**MSS**
+
+1. User requests to unalias a keyword
+2. System remove the alias keyword associated with the keyword in its database <br>
+Use case ends.
+
+**Extensions**
+
+1a. The shorten keyword could not be found in System database
+> 1a1. System shows a 'not found' error message 
+> Use case resumes at step 1 <br>
+
+### Use case: Undo previous command
+
+**MSS**
+
+1. User requests to undo last executed command
+2. System undos the last executed command to return to the state before that command was executed <br>
+Use case ends.
+
+**Extensions**
+
+1a. There is no previously executed command to undo
+> 1a1. System shows a 'last command does not exist' error message <br>
 > Use case ends
 
 ## Appendix C : Non Functional Requirements
