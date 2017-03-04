@@ -1,6 +1,6 @@
-# AddressBook Level 4 - Developer Guide
+# Task Manager - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `[F12-B3]`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -51,7 +51,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 ### 1.3. Configuring Checkstyle
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
-3. Enter an arbitrary configuration name e.g. addressbook
+3. Enter an arbitrary configuration name e.g. taskmanager
 4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
 5. Click OK once, go to the `Main` tab, use the newly imported check configuration.
 6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
@@ -86,7 +86,7 @@ Given below is a quick overview of each component.
 > Tip: The `.pptx` files used to create diagrams in this document can be found in the [diagrams](diagrams/) folder.
 > To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
 
-`Main` has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java). It is responsible for,
+`Main` has only one class called [`MainApp`](../src/main/java/seedu/taskmanager/MainApp.java). It is responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
@@ -120,15 +120,15 @@ _Figure 2.1.2 : Class Diagram of the Logic Component_
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
 command `delete 1`.
 
-<img src="images\SDforDeletePerson.png" width="800"><br>
+<img src="images\SDforDeleteTask.png" width="800"><br>
 _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 
->Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed,
+>Note how the `Model` simply raises a `TaskChangedEvent` when the Task Manager data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
-<img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
+<img src="images\SDforDeleteTaskEventHandling.png" width="800"><br>
 _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
@@ -139,19 +139,19 @@ The sections below give more details of each component.
 
 ### 2.2. UI component
 
-Author: Alice Bee
+Author: Shen Qi
 
 <img src="images/UiClassDiagram.png" width="800"><br>
 _Figure 2.2.1 : Structure of the UI Component_
 
-**API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
+**API** : [`Ui.java`](../src/main/java/seedu/taskmanager/ui/Ui.java)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
 `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
- For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
+ For example, the layout of the [`MainWindow`](../src/main/java/seedu/taskmanager/ui/MainWindow.java) is specified in
  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
@@ -162,57 +162,57 @@ The `UI` component,
 
 ### 2.3. Logic component
 
-Author: Bernard Choo
+Author: Gabriel
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
 
-**API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](../src/main/java/seedu/taskmanager/logic/Logic.java)
 
 1. `Logic` uses the `Parser` class to parse the user command.
 2. This results in a `Command` object which is executed by the `LogicManager`.
-3. The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
+3. The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
 4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
-<img src="images/DeletePersonSdForLogic.png" width="800"><br>
+<img src="images/DeleteTaskSdForLogic.png" width="800"><br>
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
 ### 2.4. Model component
 
-Author: Cynthia Dharman
+Author: Maggie
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 2.4.1 : Structure of the Model Component_
 
-**API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](../src/main/java/seedu/taskmanager/model/Model.java)
 
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
+* stores the Task Manager data.
 * exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 ### 2.5. Storage component
 
-Author: Darius Foong
+Author: Aditya
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
 
-**API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](../src/main/java/seedu/taskmanager/storage/Storage.java)
 
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the Task Manager data in xml format and read it back.
 
 ### 2.6. Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.taskmanager.commons` package.
 
 ## 3. Implementation
 
@@ -263,13 +263,13 @@ We have two types of tests:
 
 2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
    1. _Unit tests_ targeting the lowest level methods/classes. <br>
-      e.g. `seedu.address.commons.UrlUtilTest`
+      e.g. `seedu.task.commons.UrlUtilTest`
    2. _Integration tests_ that are checking the integration of multiple code units
      (those code units are assumed to be working).<br>
-      e.g. `seedu.address.storage.StorageManagerTest`
+      e.g. `seedu.task.storage.StorageManagerTest`
    3. Hybrids of unit and integration tests. These test are checking multiple code units as well as
       how the are connected together.<br>
-      e.g. `seedu.address.logic.LogicManagerTest`
+      e.g. `seedu.task.logic.LogicManagerTest`
 
 #### Headless GUI Testing
 Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
@@ -323,7 +323,7 @@ Here are the steps to convert the project documentation files to PDF format.
  1. Make sure you have set up GitHub Pages as described in [UsingGithubPages.md](UsingGithubPages.md#setting-up).
  1. Using Chrome, go to the [GitHub Pages version](UsingGithubPages.md#viewing-the-project-site) of the
     documentation file. <br>
-    e.g. For [UserGuide.md](UserGuide.md), the URL will be `https://<your-username-or-organization-name>.github.io/addressbook-level4/docs/UserGuide.html`.
+    e.g. For [UserGuide.md](UserGuide.md), the URL will be `https://<your-username-or-organization-name>.github.io/taskmanager/docs/UserGuide.html`.
  1. Click on the `Print` option in Chrome's menu.
  1. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. <br>
     For best results, use the settings indicated in the screenshot below. <br>
@@ -332,7 +332,7 @@ Here are the steps to convert the project documentation files to PDF format.
 
 ### 5.6. Managing Dependencies
 
-A project often depends on third-party libraries. For example, Address Book depends on the
+A project often depends on third-party libraries. For example, Task Manager depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
 can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
 is better than these alternatives.<br>
@@ -346,6 +346,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
+<<<<<<< HEAD
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
 `* * *` | user | add a new person |
 `* * *` | user | delete a person | remove entries that I no longer need
@@ -359,21 +360,54 @@ Priority | As a ... | I want to ... | So that I can...
 `*` | advanced user | create subtasks within a task | break down a complicated task into smaller ones
 `*` | advanced user | associate a task with collaborators | know which tasks are related to a particular person
 `*` | advanced user | see tasks filtered by collaborators | be reminded of the people involved in a task
+=======
+`* * *` | user | see usage instructions | refer to instructions when I forget how to use the App
+`* * *` | user | add a new task with description only | remember what I have to do
+`* * *` | user | add a new task with description and deadline | remember what I have to do before stipulated date/time
+`* * *` | user | add a new task with description and reminder | remember what I have to do and be reminded at specified date/time
+`* * *` | user | add a new task with description and on selective execution dates | remember what I have to do that happens over non-consecutive days
+`* * *` | user | add a new recurring task | remember what I have to do that happens repeatedly
+`* * *` | user | tag a task | organise my tasks into different group (tags)
+`* * *` | user | delete a task | remove tasks that I no longer need
+`* * *` | user | delete the tag of a task | delete the unnecessary tags
+`* * *` | user | edit a task description | edit tasks description I need to change
+`* * *` | user | edit task timings | edit tasks timings I need to change
+`* * *` | user | edit the tag of a task | modify the tags of my tasks
+`* * *` | user | find a task to do today | locate details of tasks to do today without having to go through the entire list
+`* * *` | user | find a specific task by keyword | locate details of tasks to do by searching for keywords
+`* * *` | user | find a specific task by tags | locate details of tasks to do by searching for tags
+`* * *` | user | mark a task as done | mark tasks as done and become part of history
+`* * *` | user | undo an action | undo action if I made a mistake in making an entry
+`* *` | user | rank tasks by deadlines | prioritise tasks I need to do
+`* *` | user | see a walkthorough | know the features and how to use the App
+`* *` | user | create clickable links in tasks | Access important links quickly from task description
+`* *` | user | delete date/time on multiple-timings task | remove one or more timings on a certain task I no longer need
+`* *` | user | clear all tasks on period of time | easily remove tasks on holiday
+`* *` | busy user | set an alarm for task with deadlines | be reminded regarding deadlines ahead and not miss it
+`*` | migrating user from Google Tasks | Import tasks from Google Tasks | import automatically and not have to key in manually
+`*` | user with Google Calendar | Import tasks from Google Calendar events | import tasks stored in Google Calendar and add on to that
+`*` | user | create group tasks | share group task with fellow users
+`*` | user | attach documents | be more versatile with my task description
+`*` | advanced user | import and export tasks | have backup and transfer my lists of tasks
+`*` | advanced user | create subtasks within a task | break down complicated tasks into smaller ones
+`*` | user | find tasks in relation to collaborators | find tasks related to a person and possibly combine a few tasks in a meeting
+`*` | user with many tasks | see graphical overview of tasks | plan better
+>>>>>>> 942514ca2bac53eea4b86398905cfec83b19ff04
 
 {More to be added}
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TaskManager` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: UC01 - Delete task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User requests to list tasks
+2. TaskManager shows a list of tasks
+3. User requests to delete a specific task in the list
+4. TaskManager deletes the person <br>
 Use case ends.
 
 **Extensions**
@@ -384,8 +418,261 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. AddressBook shows an error message <br>
+> 3a1. TaskManager shows an error message <br>
   Use case resumes at step 2
+
+#### Use case: UC02 - Add new task with a task description
+
+**MSS**
+
+1. User enter the new task to be added with all the details including date/time, tags, and description
+2. TaskManager accepts the new task with a confirmation
+Use case ends.
+
+**Extensions**
+
+1a. The input is not valid
+
+> The TaskManager ask for the correct input <br>
+  Use case resumes at step 1
+
+2a. User requests to undo the action
+
+> 2a1. TaskManager shows that undo is successful <br>
+  Use case ends
+
+#### Use case: UC03 - Edit task description
+
+**MSS**
+
+1. User requests to list tasks
+2. TaskManager shows a list of tasks
+3. User requests to edit a specific task in the list
+4. TaskManager asks user which section of the task needs changes (description, date/time, or tags)
+5. User selects the description to be changed
+6. TaskManager prompts user to enter changes needed
+7. User writes the change to be made
+8. TaskManager applies the change <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given index is invalid
+
+> 3a1. TaskManager shows an error message <br>
+  Use case resumes at step 2
+
+5a. The given index is invalid
+
+> 5a1. TaskManager shows an error message <br>
+  Use case resumes at step 4
+
+7a. The edit is invalid
+
+> 7a1. TaskManager shows an error message <br>
+  Use case resumes at step 6
+
+8a. User requests to undo the action
+
+> 8a1. TaskManager shows that undo is successful <br>
+  Use case ends
+
+#### Use case: UC04 - Edit tags of a task
+
+**MSS**
+
+1. User requests to list tasks
+2. TaskManager shows a list of tasks
+3. User requests to edit a specific task in the list
+4. TaskManager asks user which section of the task needs changes (description, date/time, or tags)
+5. User selects the tags to be changed
+6. TaskManager shows user list of current tags with extra option to add new one
+7. User selects the index and writes the change to be made
+8. TaskManager applies the change <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given index is invalid
+
+> 3a1. TaskManager shows an error message <br>
+  Use case resumes at step 2
+
+5a. The given index is invalid
+
+> 5a1. TaskManager shows an error message <br>
+  Use case resumes at step 4
+
+7a. The edit entry is invalid
+
+> 7a1. TaskManager shows an error message <br>
+  Use case resumes at step 6
+
+8a. User requests to undo the action
+
+> 8a1. TaskManager shows that undo is successful <br>
+  Use case ends
+
+#### Use case: UC05 - Edit task timing(s)
+
+**MSS**
+
+1. User requests to list tasks
+2. TaskManager shows a list of tasks
+3. User requests to edit a specific task in the list
+4. TaskManager asks user which section of the task needs changes (description, date/time, or tags)
+5. User selects the date/time to be changed
+6. TaskManager prompts user to enter changes needed
+7. User writes the change to be made
+8. TaskManager applies the change <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given index is invalid
+
+> 3a1. TaskManager shows an error message <br>
+  Use case resumes at step 2
+
+5a. The given index is invalid
+
+> 5a1. TaskManager shows an error message <br>
+  Use case resumes at step 4
+
+7a. The edit is invalid
+
+> 7a1. TaskManager shows an error message <br>
+  Use case resumes at step 6
+
+8a. User requests to undo the action
+
+> 8a1. TaskManager shows that undo is successful <br>
+  Use case ends
+
+#### Use case: UC06 - Find a task with a keyword
+
+**MSS**
+
+1. User requests to find task by keyword(s)
+2. TaskManager shows a list of tasks containing given keyword
+3. User selects a task to view in detail.
+4. User can request to make an edit of the task (UC03, UC04, UC05, or UC09)
+Use case ends.
+
+**Extensions**
+
+1a. The input is not valid
+
+> The TaskManager ask for the correct input <br>
+  Use case resumes at step 1
+
+2a. Cannot find relevant result based on keyword
+
+> The TaskManager shows no result found for the input <br>
+  Use case ends
+
+3a. The given index is not valid
+
+> TaskManager shows an error message <br>
+  Use case resumes at step 2
+
+#### Use case: UC07 - Find a task by a tag
+
+**MSS**
+
+1. User requests to find task by a tag
+2. TaskManager shows a list of tasks containing given tag
+3. User selects a task to view in detail.
+4. User can request to make an edit of the task (UC03, UC04, UC05, or UC09)
+Use case ends.
+
+**Extensions**
+
+1a. The input is not valid
+
+> The TaskManager ask for the correct input <br>
+  Use case resumes at step 1
+
+2a. Cannot find relevant result based on keyword
+
+> The TaskManager shows no result found for the input <br>
+  Use case ends
+
+3a. The given index is not valid
+
+> TaskManager shows an error message <br>
+  Use case resumes at step 2
+
+#### Use case: UC08 - Find a task to do today
+
+**MSS**
+
+1. User requests to find task to do today
+2. TaskManager shows a list of tasks with deadlines/reminder scheduled today
+3. User selects a task to view in detail
+4. User can request to make a further action with of the task (UC03, UC04, UC05, or UC09)
+Use case ends.
+
+**Extensions**
+
+1a. The input is not valid
+
+> The TaskManager ask for the correct input <br>
+  Use case resumes at step 1
+
+2a. Cannot find relevant result based on keyword
+
+> The TaskManager shows no result found for the input <br>
+  Use case ends
+
+3a. The given index is not valid
+
+> TaskManager shows an error message <br>
+  Use case resumes at step 2
+
+#### Use case: UC09 - Mark a task as done
+
+**MSS**
+
+1. User requests to find a specific task
+2. TaskManager shows a list of tasks given the search conditions
+3. User requests a task to be marked as done
+4. TaskManager marks the task as done and move task to history
+Use case ends.
+
+**Extensions**
+
+1a. The input is not valid
+
+> The TaskManager ask for the correct input <br>
+  Use case resumes at step 1
+
+2a. Cannot find relevant result based on keyword
+
+> The TaskManager shows no result found for the input <br>
+  Use case ends
+
+3a. The given index is not valid
+
+> TaskManager shows an error message <br>
+  Use case resumes at step 2
+
+4a. User requests to undo the action
+
+> 4a1. TaskManager shows that undo is successful <br>
+  Use case ends
 
 {More to be added}
 
@@ -404,23 +691,86 @@ Use case ends.
 
 > Windows, Linux, Unix, OS-X
 
-##### Private contact detail
+##### Private task detail
 
-> A contact detail that is not meant to be shared with others
+> A task detail that is not meant to be shared with others
 
 ## Appendix E : Product Survey
 
-**Product Name**
+**Google Keep**
 
-Author: ...
+Author: Gabriel
 
 Pros:
 
-* ...
-* ...
+* Sticky note-style task management
+* Has location reminders
+* Fast and responsive UI
+* Supports hand drawings on mobile app
+* Works offline 
 
 Cons:
 
-* ...
-* ...
+* Cannot attach files
+* No rich text editing
+* No integration with Google Tasks
+* No ability to clip web pages
 
+
+**Todoist**
+
+Author: Maggie
+
+Pros:
+
+* Clean interface
+* Works offline
+* Supports natural language
+* Allows collaboration
+* Integrates with IFTTT.com
+
+Cons:
+
+* Most features require a premium subscription
+* Search function limited in free plan
+* Keyboard shortcuts cannot be customized
+
+
+**Wunderlist**
+
+Author: Aditya
+
+Pros:
+
+* Slack integration
+* Can attach files
+* Allows collaboration
+* Supports natural language
+* Has  #Hashtag feature
+
+Cons:
+
+* No location based reminders
+* Does not show last synced time
+* Hides subtask from the main view
+* Supports drag and drop tasks but cannot drag a task to become a subtask
+
+
+**Any.do**
+
+Author: Shen Qi
+
+Pros:
+
+* Allows collaboration
+* Customizable themes in UI
+* No size limits on attachments
+* Mobile app has built-in speech recognition
+* Can star a task to mark as high priority
+
+Cons:
+
+* Most features require a premium subscription
+* Does not hide automatically hide a task when completed
+* Does not support natural language
+* Does not support email reminders
