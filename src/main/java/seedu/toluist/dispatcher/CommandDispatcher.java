@@ -22,6 +22,7 @@ import seedu.toluist.controller.ListController;
 import seedu.toluist.controller.RedoController;
 import seedu.toluist.controller.StoreController;
 import seedu.toluist.controller.TaskController;
+import seedu.toluist.controller.UnaliasController;
 import seedu.toluist.controller.UndoController;
 import seedu.toluist.model.CommandAliasConfig;
 import seedu.toluist.ui.Ui;
@@ -62,6 +63,7 @@ public class CommandDispatcher extends Dispatcher {
                 RedoController.class,
                 ExitController.class,
                 AliasController.class,
+                UnaliasController.class,
                 ListController.class
         ));
     }

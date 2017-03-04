@@ -37,6 +37,16 @@ public class CommandAliasConfig {
     }
 
     /**
+     * Remove an alias. Return sucess status
+     * @param alias
+     * @return true / false
+     */
+    public boolean removeAlias(String alias) {
+        aliasMapping.remove(alias);
+        return true;
+    }
+
+    /**
      * Returns the matching command for an alias
      * Returns Option.empty if no such alias exists
      * @param alias
@@ -61,14 +71,6 @@ public class CommandAliasConfig {
     }
 
     /**
-     * Convert a command that possibly contains an alias prefix to one without
-     * Recursive unpacking of alias is not supported
-     * e.g if a is an alias for b, and b is an alias a, dealias(a) will return b
-     * @param command
-     * @return converted command
-     */
-
-    /**
      * Check if the alias is a reserved word
      * @param alias
      * @return true/false
@@ -77,6 +79,22 @@ public class CommandAliasConfig {
         return reservedKeywords.contains(alias);
     }
 
+    /**
+     * Check if argument is an alias
+     * @param alias
+     * @return true / false
+     */
+    public boolean isAlias(String alias) {
+        return aliasMapping.containsKey(alias);
+    }
+
+    /**
+     * Convert a command that possibly contains an alias prefix to one without
+     * Recursive unpacking of alias is not supported
+     * e.g if a is an alias for b, and b is an alias a, dealias(a) will return b
+     * @param command
+     * @return converted command
+     */
     public String dealias(String command) {
         for (String alias: aliasMapping.keySet()) {
             if (command.startsWith(alias)) {
