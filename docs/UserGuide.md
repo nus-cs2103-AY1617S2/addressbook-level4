@@ -98,7 +98,8 @@ Format: `edit INDEX [TASK]`
     The index **must be a positive integer** 1, 2, 3, ...
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
-> 
+>
+
 Examples:
 
 * `edit 1 Play with dog d/11-11-2017/16:00`<br>
@@ -210,4 +211,5 @@ Examples:
 
 * **Select** : `select INDEX` <br>
   e.g.`select 2`
-  
+
+
