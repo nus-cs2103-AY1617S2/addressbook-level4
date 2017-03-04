@@ -20,7 +20,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Code written:[functional code][test code][docs]
 * Other major contributions:
   * Did the initial refactoring from AddressBook-Level-4 to SavvyTo-Do
-  * Issue tracker, milestones and repo setup
+  * Issue tracker and repo setup
   * Set up Travis, Appveyor, Coveralls and Codacy
 
 -----
