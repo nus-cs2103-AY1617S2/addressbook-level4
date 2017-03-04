@@ -151,4 +151,4 @@ There is no need to save manually.
 
 * **History** : `history` <br>
 
-* **exit** : `exit` <br>
+* **Exit** : `exit` <br>
