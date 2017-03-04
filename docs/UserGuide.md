@@ -47,7 +47,7 @@ Format: `help`
 
 > Help is also shown if you enter an incorrect command e.g. `abcd`
 
-### 2.2. Adding a person: `add`
+### 2.2. Adding a task: `add`
 
 Adds a person to the address book<br>
 Format: `add TASK d/DATE t/TIME [f/TAG]...`
@@ -115,14 +115,14 @@ Format: `delete INDEX`
 
 Examples:
 
-* `list`<br>
-  `delete 2`<br>
-  Deletes the 2nd task in the Task Manager.
 * `find Meeting`<br>
   `delete 1`<br>
   Deletes the 1st task in the results of the `find` command.
+* `list`<br>
+  `delete 2 3`<br>
+  Deletes the 2nd and 3rd task in the Task Manager.
 
-### 2.7. Select a task : `done`
+### 2.7. Complete a task : `done`
 
 Marks the task as done identified by the index number used in the last task listing.<br>
 Format: `Done INDEX`
@@ -162,9 +162,10 @@ There is no need to save manually.
        the file that contains the data of your previous Address Book folder.
 
 ## 4. Command Summary
+Command | Shortcut | Format | Example
+-------- | :-------- | :--------- | :-----------
 
-* **Add**  `add TASK d/DATE t/TIME [f/TAG]...` <br>
-  e.g. `add Shop Shoes d/20082017 t/4:30pm t/Shopping t/Party`
+* **Add** |   | `add TASK d/DATE t/TIME [f/TAG]...` <br> | e.g. `add Shop Shoes d/20082017 t/4:30pm t/Shopping t/Party`
 
 * **Clear** : `clear`
 
@@ -180,7 +181,7 @@ There is no need to save manually.
 * **Help** : `help` <br>
   e.g.
 
-* **Select** : `select INDEX` <br>
-  e.g.`select 2`
+* **Complete** : `done INDEX` <br>
+  e.g.`done 2`
 
 
