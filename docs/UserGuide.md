@@ -1,4 +1,4 @@
-# AddressBook Level 4 - User Guide
+# TaskIt - User Guide
 
 By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
@@ -47,27 +47,32 @@ Format: `help`
 
 > Help is also shown if you enter an incorrect command e.g. `abcd`
 
-### 2.2. Adding a person: `add`
+### 2.2. Adding a task: `add`
 
-Adds a person to the address book<br>
-Format: `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
-
-> Persons can have any number of tags (including 0)
+Add a new task to TaskIt<br>
+Format: `add <name> [t/TIME] [tag/TAG] [p/PRIORITY] [d/DESCRIPTION]`
 
 Examples:
 
-* `add John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01`
-* `add Betsy Crowe t/friend e/betsycrowe@gmail.com a/Newgate Prison p/1234567 t/criminal`
+* `add Group Meeting t/this Wednesday 8pm tag/Study p/Urgent d/Software engineering project	meeting`
+* `add Interview t/this Friday 3pm`
 
-### 2.3. Listing all persons : `list`
+> Persons can have any number of tags (including 0)
 
-Shows a list of all persons in the address book.<br>
+
+
+### 2.3. Listing all tasks : `list`
+
+List all the existing tasks in TaskIt.<br>
 Format: `list`
 
-### 2.4. Editing a person : `edit`
+List only the undone tasks in TaskIt.<br>
+Format: `list undone`
 
-Edits an existing person in the address book.<br>
-Format: `edit INDEX [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+### 2.4. Updating an existing task : `update`
+
+Edits an existing task in TaskIt.<br>
+Format: `update index  <name|description|deadline> new`
 
 > * Edits the person at the specified `INDEX`.
     The index refers to the index number shown in the last person listing.<br>
@@ -79,16 +84,19 @@ Format: `edit INDEX [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@yahoo.com`<br>
-  Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@yahoo.com` respectively.
+* `update 2 name finish SWE HW`<br>
+  Update the second task name to finish SWE HW.
 
-* `edit 2 Betsy Crower t/`<br>
-  Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `Update 4 description work on user guide`<br>
+  Update the fourth task description to work on user guide.
+  
+* `Update 1 deadline this Friday 3 pm`<br>
+  Update the first task deadline to this Friday 3pm.
 
-### 2.5. Finding all persons containing any keyword in their name: `find`
+### 2.5. Searching all tasks containing any keyword in their name: `search`
 
-Finds persons whose names contain any of the given keywords.<br>
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Finds tasks which matched name/description/deadline/tag.<br>
+Format: ` search <name|description|deadline|tag>`
 
 > * The search is case sensitive. e.g `hans` will not match `Hans`
 > * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -104,10 +112,10 @@ Examples:
 * `find Betsy Tim John`<br>
   Returns Any person having names `Betsy`, `Tim`, or `John`
 
-### 2.6. Deleting a person : `delete`
+### 2.6. Deleting a task : `delete`
 
-Deletes the specified person from the address book. Irreversible.<br>
-Format: `delete INDEX`
+Deletes the specified task from the TaskIt. 
+Format: `delete index <name|description|deadline|tag>`
 
 > Deletes the person at the specified `INDEX`. <br>
 > The index refers to the index number shown in the most recent listing.<br>
@@ -152,7 +160,7 @@ Format: `exit`
 
 ### 2.10. Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data.<br>
+TaskIt data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
 ## 3. FAQ
