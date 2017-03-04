@@ -346,7 +346,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-
 `* * *` | user | see usage instructions | refer to instructions when I forget how to use the App
 `* * *` | user | add a new task with description only | remember what I have to do
 `* * *` | user | add a new task with description and deadline | remember what I have to do before stipulated date/time
