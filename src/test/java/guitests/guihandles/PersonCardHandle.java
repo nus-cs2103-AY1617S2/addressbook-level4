@@ -8,8 +8,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.ReadOnlyTask;
 
 /**
  * Provides a handle to a person card in the person list panel.
@@ -36,15 +36,15 @@ public class PersonCardHandle extends GuiHandle {
         return getTextFromLabel(NAME_FIELD_ID);
     }
 
-    public String getAddress() {
+    public String getNote() {
         return getTextFromLabel(ADDRESS_FIELD_ID);
     }
 
-    public String getPhone() {
+    public String getPriority() {
         return getTextFromLabel(PHONE_FIELD_ID);
     }
 
-    public String getEmail() {
+    public String getStatus() {
         return getTextFromLabel(EMAIL_FIELD_ID);
     }
 
@@ -72,11 +72,11 @@ public class PersonCardHandle extends GuiHandle {
         return guiRobot.from(node).lookup(TAGS_FIELD_ID).query();
     }
 
-    public boolean isSamePerson(ReadOnlyPerson person) {
+    public boolean isSamePerson(ReadOnlyTask person) {
         return getFullName().equals(person.getName().fullName)
-                && getPhone().equals(person.getPhone().value)
-                && getEmail().equals(person.getEmail().value)
-                && getAddress().equals(person.getAddress().value)
+                && getPriority().equals(person.getPriority().value)
+                && getStatus().equals(person.getStatus().value)
+                && getNote().equals(person.getNote().value)
                 && getTags().equals(getTags(person.getTags()));
     }
 
@@ -85,9 +85,9 @@ public class PersonCardHandle extends GuiHandle {
         if (obj instanceof PersonCardHandle) {
             PersonCardHandle handle = (PersonCardHandle) obj;
             return getFullName().equals(handle.getFullName())
-                    && getPhone().equals(handle.getPhone())
-                    && getEmail().equals(handle.getEmail())
-                    && getAddress().equals(handle.getAddress())
+                    && getPriority().equals(handle.getPriority())
+                    && getStatus().equals(handle.getStatus())
+                    && getNote().equals(handle.getNote())
                     && getTags().equals(handle.getTags());
         }
         return super.equals(obj);
@@ -95,6 +95,6 @@ public class PersonCardHandle extends GuiHandle {
 
     @Override
     public String toString() {
-        return getFullName() + " " + getAddress();
+        return getFullName() + " " + getNote();
     }
 }

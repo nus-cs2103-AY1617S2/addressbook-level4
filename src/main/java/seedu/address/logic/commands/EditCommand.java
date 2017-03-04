@@ -6,14 +6,14 @@ import java.util.Optional;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Name;
+import seedu.address.model.task.Note;
+import seedu.address.model.task.Priority;
+import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Status;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.UniquePersonList;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -51,14 +51,14 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
+        List<ReadOnlyTask> lastShownList = model.getFilteredPersonList();
 
         if (filteredPersonListIndex >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        ReadOnlyPerson personToEdit = lastShownList.get(filteredPersonListIndex);
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        ReadOnlyTask personToEdit = lastShownList.get(filteredPersonListIndex);
+        Task editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         try {
             model.updatePerson(filteredPersonListIndex, editedPerson);
@@ -73,17 +73,17 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(ReadOnlyPerson personToEdit,
+    private static Task createEditedPerson(ReadOnlyTask personToEdit,
                                              EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
-        Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
-        Address updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
+        Priority updatedPhone = editPersonDescriptor.getPriority().orElseGet(personToEdit::getPriority);
+        Status updatedEmail = editPersonDescriptor.getStatus().orElseGet(personToEdit::getStatus);
+        Note updatedAddress = editPersonDescriptor.getNote().orElseGet(personToEdit::getNote);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Task(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
 
     /**
@@ -92,18 +92,18 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Optional<Name> name = Optional.empty();
-        private Optional<Phone> phone = Optional.empty();
-        private Optional<Email> email = Optional.empty();
-        private Optional<Address> address = Optional.empty();
+        private Optional<Priority> phone = Optional.empty();
+        private Optional<Status> email = Optional.empty();
+        private Optional<Note> address = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditPersonDescriptor() {}
 
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             this.name = toCopy.getName();
-            this.phone = toCopy.getPhone();
-            this.email = toCopy.getEmail();
-            this.address = toCopy.getAddress();
+            this.phone = toCopy.getPriority();
+            this.email = toCopy.getStatus();
+            this.address = toCopy.getNote();
             this.tags = toCopy.getTags();
         }
 
@@ -123,30 +123,30 @@ public class EditCommand extends Command {
             return name;
         }
 
-        public void setPhone(Optional<Phone> phone) {
+        public void setPriority(Optional<Priority> phone) {
             assert phone != null;
             this.phone = phone;
         }
 
-        public Optional<Phone> getPhone() {
+        public Optional<Priority> getPriority() {
             return phone;
         }
 
-        public void setEmail(Optional<Email> email) {
+        public void setStatus(Optional<Status> email) {
             assert email != null;
             this.email = email;
         }
 
-        public Optional<Email> getEmail() {
+        public Optional<Status> getStatus() {
             return email;
         }
 
-        public void setAddress(Optional<Address> address) {
+        public void setNote(Optional<Note> address) {
             assert address != null;
             this.address = address;
         }
 
-        public Optional<Address> getAddress() {
+        public Optional<Note> getNote() {
             return address;
         }
 
