@@ -21,6 +21,10 @@ public class CommandAliasConfig {
     private HashMap<String, String> aliasMapping = new HashMap<>();
     private Set<String> reservedKeywords = new HashSet<>();
 
+    public HashMap<String, String> getAliasMapping() {
+        return aliasMapping;
+    }
+
     /**
      * Set alias for a command. Returns success status
      * @param alias
@@ -96,7 +100,7 @@ public class CommandAliasConfig {
      * @return converted command
      */
     public String dealias(String command) {
-        for (String alias: aliasMapping.keySet()) {
+        for (String alias : aliasMapping.keySet()) {
             if (command.startsWith(alias)) {
                 return aliasMapping.get(alias) + command.substring(alias.length(), command.length());
             }

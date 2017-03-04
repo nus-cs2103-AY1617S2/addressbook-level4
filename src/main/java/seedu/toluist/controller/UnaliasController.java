@@ -9,7 +9,7 @@ import seedu.toluist.model.CommandAliasConfig;
 import seedu.toluist.ui.Ui;
 
 /**
- * Alias Controller is responsible for handling alias requests
+ * Alias Controller is responsible for handling unalias requests
  */
 public class UnaliasController extends Controller {
     private static final String RESULT_MESSAGE_SUCCESS = "Alias %s has been removed";
