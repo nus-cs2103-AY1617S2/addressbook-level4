@@ -1,14 +1,19 @@
 package seedu.toluist.dispatcher;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import seedu.toluist.commons.core.EventsCenter;
+import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.events.ui.NewResultAvailableEvent;
 import seedu.toluist.controller.AliasController;
 import seedu.toluist.controller.Controller;
@@ -22,21 +27,25 @@ import seedu.toluist.model.CommandAliasConfig;
 import seedu.toluist.ui.Ui;
 
 public class CommandDispatcher extends Dispatcher {
-
+    private final Logger logger = LogsCenter.getLogger(getClass());
     private final EventsCenter eventsCenter = EventsCenter.getInstance();
-    private final CommandAliasConfig aliasConfig = new CommandAliasConfig();
+    private final CommandAliasConfig aliasConfig = CommandAliasConfig.getInstance();
+
+    public CommandDispatcher() {
+        aliasConfig.setReservedKeywords(getControllerKeywords());
+    }
 
     public void dispatch(Ui renderer, String command) {
-        final Controller controller = getBestFitController(renderer, command);
-        final CommandResult feedbackToUser = controller.execute(command);
+        String deAliasedCommand = aliasConfig.dealias(command);
+        logger.info("De-aliased command to be dispatched: " + deAliasedCommand);
+
+        Controller controller = getBestFitController(renderer, deAliasedCommand);
+        CommandResult feedbackToUser = controller.execute(deAliasedCommand);
         eventsCenter.post(new NewResultAvailableEvent(feedbackToUser.getFeedbackToUser()));
     }
 
     private Controller getBestFitController(Ui renderer, String command) {
         Collection<Controller> controllerCollection = getAllControllers(renderer);
-        Set<String> reservedKeywords = getControllerKeywords(controllerCollection);
-        // It is okay to do this because the commands are the same throughout
-        aliasConfig.setReservedKeywords(reservedKeywords);
 
         return controllerCollection
                 .stream()
@@ -45,22 +54,46 @@ public class CommandDispatcher extends Dispatcher {
                 .orElse(new ListController(renderer)); // fail-safe
     }
 
-    private Collection<Controller> getAllControllers(Ui renderer) {
-        return new ArrayList<>(Arrays.asList(new Controller[] {
-            new TaskController(renderer),
-            new StoreController(renderer),
-            new UndoController(renderer),
-            new RedoController(renderer),
-            new ExitController(renderer),
-            new AliasController(renderer, aliasConfig),
-            new ListController(renderer)
-        }));
+    private Collection<Class <? extends Controller>> getAllControllerClasses() {
+        return new ArrayList<>(Arrays.asList(
+                TaskController.class,
+                StoreController.class,
+                UndoController.class,
+                RedoController.class,
+                ExitController.class,
+                AliasController.class,
+                ListController.class
+        ));
     }
 
-    private Set<String> getControllerKeywords(Collection<Controller> controllerCollection) {
-        List<String> keywordList = controllerCollection
+    private Collection<Controller> getAllControllers(Ui renderer) {
+        return getAllControllerClasses()
                 .stream()
-                .map(controller -> Arrays.asList(controller.getCommandWords()))
+                .map((Class<? extends Controller> klass) -> {
+                    try {
+                        Constructor constructor = klass.getConstructor(Ui.class);
+                        return (Controller) constructor.newInstance(renderer);
+                    } catch (NoSuchMethodException | InstantiationException
+                            | IllegalAccessException | InvocationTargetException e) {
+                        // fail-safe. But should not actually reach here
+                        return new ListController(renderer);
+                    }
+                })
+                .collect(Collectors.toList());
+    }
+
+    private Set<String> getControllerKeywords() {
+        List<String> keywordList = getAllControllerClasses()
+                .stream()
+                .map((Class<? extends Controller> klass) -> {
+                    try {
+                        final String methodName = "getCommandWords";
+                        Method method = klass.getMethod(methodName, Controller.class);
+                        return Arrays.asList((String[]) method.invoke(null));
+                    } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                        return new ArrayList<String>();
+                    }
+                })
                 .flatMap(List::stream)
                 .collect(Collectors.toList());
         return new HashSet<>(keywordList);

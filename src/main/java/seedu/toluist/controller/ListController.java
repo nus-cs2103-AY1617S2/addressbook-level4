@@ -23,7 +23,7 @@ public class ListController extends Controller {
         return new CommandResult(RESULT_MESSAGE);
     }
 
-    public String[] getCommandWords() {
+    public static String[] getCommandWords() {
         return new String[] { COMMAND_WORD };
     }
 }

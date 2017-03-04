@@ -110,8 +110,8 @@ public class TaskController extends Controller {
         todoList.remove(task);
         return new CommandResult(DELETE_TASK_RESULT);
     }
-
-    public String[] getCommandWords() {
+    
+    public static String[] getCommandWords() {
         return new String[] { UPDATE_TASK_COMMAND, DELETE_TASK_COMMAND, ADD_TASK_COMMAND };
     }
 }

@@ -22,11 +22,10 @@ public class AliasController extends Controller {
     private static final String ALIAS_TERM = "alias";
     private static final String COMMAND_TERM = "command";
 
-    private final CommandAliasConfig aliasConfig;
+    private final CommandAliasConfig aliasConfig = CommandAliasConfig.getInstance();
 
-    public AliasController(Ui renderer, CommandAliasConfig aliasConfig) {
+    public AliasController(Ui renderer) {
         super(renderer);
-        this.aliasConfig = aliasConfig;
     }
 
     public CommandResult execute(String command) {
@@ -57,7 +56,7 @@ public class AliasController extends Controller {
         return command.matches(COMMAND_TEMPLATE);
     }
 
-    public String[] getCommandWords() {
+    public static String[] getCommandWords() {
         return new String[] { COMMAND_WORD };
     }
 }

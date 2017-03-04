@@ -47,7 +47,7 @@ public class StoreController extends Controller {
         return command.matches(COMMAND_TEMPLATE);
     }
 
-    public String[] getCommandWords() {
+    public static String[] getCommandWords() {
         return new String[] { COMMAND_WORD };
     }
 }

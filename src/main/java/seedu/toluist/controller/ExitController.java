@@ -25,8 +25,7 @@ public class ExitController extends Controller {
         return command.matches(COMMAND_TEMPLATE);
     }
 
-    @Override
-    public String[] getCommandWords() {
+    public static String[] getCommandWords() {
         return new String[] { COMMAND_WORD };
     }
 }

@@ -1,11 +1,23 @@
 package seedu.toluist.model;
 
-import java.util.*;
+import java.util.Optional;
+import java.util.Set;
+import java.util.HashMap;
+import java.util.HashSet;
 
 /**
  * A model to manage alias
  */
 public class CommandAliasConfig {
+    private static CommandAliasConfig instance;
+
+    public static CommandAliasConfig getInstance() {
+        if (instance == null) {
+            instance = new CommandAliasConfig();
+        }
+        return instance;
+    }
+
     private HashMap<String, String> aliasMapping = new HashMap<>();
     private Set<String> reservedKeywords = new HashSet<>();
 
@@ -38,5 +50,29 @@ public class CommandAliasConfig {
         } else {
             return Optional.of(command);
         }
+    }
+
+    /**
+     * Set reserved keywords
+     * @param reservedKeywords
+     */
+    public void setReservedKeywords(Set<String> reservedKeywords) {
+        this.reservedKeywords = reservedKeywords;
+    }
+
+    /**
+     * Convert a command that possibly contains an alias prefix to one without
+     * Recursive unpacking of alias is not supported
+     * e.g if a is an alias for b, and b is an alias a, dealias(a) will return b
+     * @param command
+     * @return converted command
+     */
+    public String dealias(String command) {
+        for (String alias: aliasMapping.keySet()) {
+            if (command.startsWith(alias)) {
+                return aliasMapping.get(alias) + command.substring(alias.length(), command.length());
+            }
+        }
+        return command;
     }
 }
