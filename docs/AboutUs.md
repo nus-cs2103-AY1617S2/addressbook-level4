@@ -10,8 +10,8 @@ We are a team based in the [School of Computing, National University of Singapor
 
 -----
 
-#### [Joshua Lee](http://github.com/lejolly)
-<img src="images/JoshuaLee.jpg" width="150"><br>
+#### [Yan Xiaoxuan](https://github.com/Matilda-Yxx)
+<img src="images/matilda-yxx.jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: UI
 
