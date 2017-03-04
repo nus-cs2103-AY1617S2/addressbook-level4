@@ -1,4 +1,4 @@
-# AddressBook Level 4 - Developer Guide
+# TaskIt - Developer Guide
 
 By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
@@ -350,11 +350,12 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | add a new floating task | save tasks without specified deadlines
 `* * *` | user | add a new deadline task | know when some tasks need to be completed by
 `* * *` | user | add a new event | know when my events are
-`* * *` | user | mark a task as complete or incomplete | know what tasks still need to be completed
+`* * *` | user | mark a task as done or undone | know what tasks still need to be completed
 `* * *` | user | delete an existing task | get rid of tasks that no longer matter to me
+`* * *` | user | search tasks based on name | find all tasks with the same name
 `* * *` | user | search tasks based on keywords | find all similar tasks
 `* * *` | user | search tasks based on tags | find all tasks in a group
-`* * *` | user | search tasks based on date | find all tasks due near a certain time
+`* * *` | user | search tasks based on deadline | find all tasks due near a certain time
 `* * *` | user | modify an existing task's name | change the name of the task
 `* * *` | user | modify an existing task's description | edit the task's requirements
 `* * *` | user | modify an existing task's deadline | keep up with changing deadlines
@@ -365,9 +366,9 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | view all floating tasks | see which tasks do not have a deadline
 `* * *` | user | view all events | see what my events are
 `* * *` | user | Save all the tasks in specified local folder/file | Store everything in local file that is controlled by a cloud syncing service (e.g. dropbox) to synchronise across multiple computers
-`* *` | user | categorize tasks into work, study, leisure etc | group my tasks together
-`* * ` | user | Assign priority to each task | rank my tasks depending on what has to get done first
-`* * ` | user | sort tasks by priority | see which tasks will need my attention the most
+`* * *` | user | categorize tasks into work, study, leisure etc | group my tasks together
+`* *` | user | Assign priority to each task | rank my tasks depending on what has to get done first
+`* *` | user | sort tasks by priority | see which tasks will need my attention the most
 `*` | user | Add recurring tasks | so that I can easily add a task that occurs regularly
 `*` | user |Sync with other calendars (e.g. Google calendar) | I can add functionality that TaskIt may not have
 `*` | user | See today’s most important task when opening the app | so that I immediately know what I need to work on
@@ -569,9 +570,6 @@ Use case ends
 
 > Windows, Linux, Unix, OS-X
 
-##### Private contact detail
-
-> A contact detail that is not meant to be shared with others
 
 ## Appendix E : Product Survey
 
