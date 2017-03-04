@@ -4,23 +4,23 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Lee Yanhwa](https://github.com/)
+#### [Lee Yan Hwa](https://github.com/leeyh20)
 <img src="" width="150"><br>
 **Role**: Team Lead <br>
 
 * Components in charge of: Model, Storage
-* Aspects/tools in charge of: Eclipse, travis CI
+* Aspects/tools in charge of: Eclipse, Travis CI
 * Features implemented:
     * TBA
 * Code written: [functional code]() [test code]() [docs]()
 * Other major contributions:
-* Aspects responsible for:　     　　　　　 
+* Aspects responsible for:　     　　　　　
     * Ensuring tasks are done properly and on time
     * Integration: versioning of the code, maintaining teh code repository, integrating various parts of the software to create a whole
 
 -----
 
-#### [Ram Janarthan](https://github.com/)
+#### [Ram Janarthan](https://github.com/ramjanarthan)
 <img src="" width="150"><br>
 **Role**: Developer <br>
 
@@ -49,5 +49,3 @@ We are a team based in the [School of Computing, National University of Singapor
 * Aspects responsible for:
     * Code quality
     * Ensuring project deliverables are done on time and in the right format
-
-
