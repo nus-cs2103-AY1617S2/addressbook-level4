@@ -16,6 +16,7 @@ public class TestPerson implements ReadOnlyTask {
 
     public TestPerson() {
         tags = new UniqueTagList();
+        priority = new Priority();
     }
 
     /**
@@ -29,6 +30,10 @@ public class TestPerson implements ReadOnlyTask {
 
     public void setName(Description name) {
         this.name = name;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 
     public void setTags(UniqueTagList tags) {
