@@ -1,6 +1,6 @@
 # Address Book (Level 4)
 
-[![Build Status](https://travis-ci.org/CS2103JAN2017-F12-B4/addressbook-level4.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-F12-B4/addressbook-level4.svg?branch=master)
+[![Build Status](https://travis-ci.org/CS2103JAN2017-F12-B4/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-F12-B4/main)
 [![Build status](https://ci.appveyor.com/api/projects/status/2fgsii7sa8ling2f?svg=true)](https://ci.appveyor.com/project/bryanleejh/main)
 [![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-F12-B4/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-F12-B4/main?branch=master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/129c2b2680614e0782cf9cc658797e83)](https://www.codacy.com/app/CS2103JAN2017-F12-B4/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103JAN2017-F12-B4/main&amp;utm_campaign=Badge_Grade)
