@@ -64,6 +64,7 @@ public class TaskCardHandle extends GuiHandle {
         return tags
                 .asObservableList()
                 .stream()
+                .sorted((f1,f2) -> f1.tagName.compareTo(f2.tagName))
                 .map(tag -> tag.tagName)
                 .collect(Collectors.toList());
     }
