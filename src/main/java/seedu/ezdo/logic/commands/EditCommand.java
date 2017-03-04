@@ -7,17 +7,14 @@ import seedu.ezdo.commons.core.Messages;
 import seedu.ezdo.commons.util.CollectionUtil;
 import seedu.ezdo.logic.commands.exceptions.CommandException;
 import seedu.ezdo.model.tag.UniqueTagList;
-<<<<<<< HEAD
 import seedu.ezdo.model.todo.Address;
 import seedu.ezdo.model.todo.Email;
 import seedu.ezdo.model.todo.Name;
-import seedu.ezdo.model.todo.Person;
+import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.Priority;
-import seedu.ezdo.model.todo.ReadOnlyPerson;
-import seedu.ezdo.model.todo.UniquePersonList;
-=======
+import seedu.ezdo.model.todo.ReadOnlyTask;
+import seedu.ezdo.model.todo.UniqueTaskList;
 import seedu.ezdo.model.todo.*;
->>>>>>> 6228ae6b03115b0e64fed2b189d86d8b94d2fa7e
 
 /**
  * Edits the details of an existing task in the address book.
@@ -81,23 +78,13 @@ public class EditCommand extends Command {
                                              EditTaskDescriptor editTaskDescriptor) {
         assert taskToEdit != null;
 
-<<<<<<< HEAD
-        Name updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
-        Priority updatedPriority = editPersonDescriptor.getPriority().orElseGet(personToEdit::getPriority);
-        Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
-        Address updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
-        UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
-
-        return new Person(updatedName, updatedPriority, updatedEmail, updatedAddress, updatedTags);
-=======
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
-        Phone updatedPhone = editTaskDescriptor.getPhone().orElseGet(taskToEdit::getPhone);
+        Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
         Email updatedEmail = editTaskDescriptor.getEmail().orElseGet(taskToEdit::getEmail);
         StartDate updatedStartDate = editTaskDescriptor.getStartDate().orElseGet(taskToEdit::getStartDate);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedName, updatedPhone, updatedEmail, updatedStartDate, updatedTags);
->>>>>>> 6228ae6b03115b0e64fed2b189d86d8b94d2fa7e
+        return new Task(updatedName, updatedPriority, updatedEmail, updatedStartDate, updatedTags);
     }
 
     /**
@@ -125,11 +112,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-<<<<<<< HEAD
-            return CollectionUtil.isAnyPresent(this.name, this.priority, this.email, this.address, this.tags);
-=======
-            return CollectionUtil.isAnyPresent(this.name, this.phone, this.email, this.startDate, this.tags);
->>>>>>> 6228ae6b03115b0e64fed2b189d86d8b94d2fa7e
+            return CollectionUtil.isAnyPresent(this.name, this.priority, this.email, this.startDate, this.tags);
         }
 
         public void setName(Optional<Name> name) {
