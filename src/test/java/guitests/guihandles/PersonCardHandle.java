@@ -16,8 +16,6 @@ import seedu.address.model.task.ReadOnlyPerson;
  */
 public class PersonCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
-    private static final String PHONE_FIELD_ID = "#phone";
-    private static final String EMAIL_FIELD_ID = "#email";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private Node node;
@@ -33,14 +31,6 @@ public class PersonCardHandle extends GuiHandle {
 
     public String getFullName() {
         return getTextFromLabel(NAME_FIELD_ID);
-    }
-
-    public String getPhone() {
-        return getTextFromLabel(PHONE_FIELD_ID);
-    }
-
-    public String getEmail() {
-        return getTextFromLabel(EMAIL_FIELD_ID);
     }
 
     public List<String> getTags() {
@@ -69,8 +59,6 @@ public class PersonCardHandle extends GuiHandle {
 
     public boolean isSamePerson(ReadOnlyPerson person) {
         return getFullName().equals(person.getName().fullName)
-                && getPhone().equals(person.getPhone().value)
-                && getEmail().equals(person.getEmail().value)
                 && getTags().equals(getTags(person.getTags()));
     }
 
@@ -79,8 +67,6 @@ public class PersonCardHandle extends GuiHandle {
         if (obj instanceof PersonCardHandle) {
             PersonCardHandle handle = (PersonCardHandle) obj;
             return getFullName().equals(handle.getFullName())
-                    && getPhone().equals(handle.getPhone())
-                    && getEmail().equals(handle.getEmail())
                     && getTags().equals(handle.getTags());
         }
         return super.equals(obj);
