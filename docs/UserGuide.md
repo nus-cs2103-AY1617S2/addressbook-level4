@@ -217,7 +217,7 @@ Format: `undo`
 
 > * Undo the latest mutating command, including `add`,`add list`, `delete`, `update` and `update list`.
 > * Definition of **mutating** : making changes to the tasks/lists
-> * Cannot undo more than once in succession. 
+> * Cannot undo more than once in succession.
 
 Examples:
 
@@ -289,7 +289,7 @@ There is no need to save manually.
 
 * **Update** : `update TASKINDEX ... [n/NAME] [due/DUEDATE] [t/TIME] [#LISTNAME] [d/DESCRIPTION] [@VENUE] [p/PRIORITYLEVEL] [FAVOURITE]` <br>
   e.g.`update 1 Laundry due/every sunday @`
-  
+
 * **Update List** : `update list LISTNAME/LISTINDEX NEW_LISTNAME` <br>
   e.g. `update list school nus`
 

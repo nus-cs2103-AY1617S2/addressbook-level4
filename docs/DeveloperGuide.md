@@ -393,7 +393,7 @@ Use case ends.
 
 **Extensions**
 
-1a. The given add command input is invalid 
+1a. The given add command input is invalid
 
 > 1a1. Dueue shows an error and a help message on how to add a task<br>
   Use case resumes at step 1
@@ -408,7 +408,7 @@ Use case ends.
 
 **Extensions**
 
-1a. The given add command input is invalid 
+1a. The given add command input is invalid
 
 > 1a1. Dueue shows an error and a help message on how to add a task<br>
   Use case resumes at step 1
@@ -418,21 +418,21 @@ Use case ends.
 **MSS**
 
 1. User requests to add task by specifying the name with due date and time
-2. Dueue shows the added task 
+2. Dueue shows the added task
 Use case ends.
 
 **Extensions**
 
-1a. The given add command input is invalid 
+1a. The given add command input is invalid
 
 > 1a1. Dueue shows an error and a help message on how to add a task<br>
   Use case resumes at step 1
- 
+
 #### Use case: Task deletion
 
 **MSS**
 
-1. User requests to delete tasks 
+1. User requests to delete tasks
 2. Dueue displays all finished and unfinished tasks under current list
 3. User requests to delete tasks by task indices
 4. Dueue shows the remaining tasks in the list
@@ -450,12 +450,12 @@ Use case ends.
 **MSS**
 
 1. User requests to add task by specifying the name and repeating frequency
-2. Dueue shows the added task 
+2. Dueue shows the added task
 Use case ends.
 
 **Extensions**
 
-1a. The given add command input is invalid 
+1a. The given add command input is invalid
 
 > 1a1. Dueue shows an error and a help message on how to add a task<br>
   Use case resumes at step 1
@@ -470,7 +470,7 @@ Use case ends.
 
 **Extensions**
 
-1a. The given add command input is invalid 
+1a. The given add command input is invalid
 
 > 1a1. Dueue shows an error and a help message on how to add a task<br>
   Use case resumes at step 1
@@ -486,7 +486,7 @@ Use case ends.
 
 **Extensions**
 
-1a. The given add command input is invalid 
+1a. The given add command input is invalid
 
 > 1a1. Dueue shows an error and a help message on how to add a task<br>
   Use case resumes at step 1
@@ -495,7 +495,7 @@ Use case ends.
 
 **MSS**
 
-1. User requests to add a task with a list name provided 
+1. User requests to add a task with a list name provided
 2. Dueue displays the added task under the list
 Use case ends.
 
@@ -507,7 +507,7 @@ Use case ends.
   Use case resume at step 1
 
 1b. The list name does not exist
- 
+
 > 1b1. Dueue shows an error message and ask whether the user wants to create a new list
 > 1b2. User indicate No
   Use case resumes at step 1
@@ -562,7 +562,7 @@ Use case ends.
 
 **Extensions**
 
-3a. The name is already used for some other list 
+3a. The name is already used for some other list
 
 > 3a1. Dueue shows the message "This name is already used."<br>
   Use case resumes at step 2
@@ -585,7 +585,7 @@ Use case ends.
 > 3a1. Dueue shows an error message <br>
   Use case resumes at step 2
 
-5a. The name is already used for some other list 
+5a. The name is already used for some other list
 
 > 5a1. Dueue shows the message "This name is already used."<br>
   Use case resumes at step 4
@@ -679,7 +679,7 @@ Use case ends.
 
 > 3a1. Dueue shows an error message <br>
   Use case resumes at step 2
-  
+
 3b. The specified list still has unfinished tasks
 
 > 3b1. Dueue prompts the user to decide whether to move the unfinished tasks to the Personal list<br>
@@ -743,7 +743,7 @@ Use case ends.
 1b. The task is already "starred"
 
 > 1b1. Dueue shows an error message "This task is already starred." <br>
-  Use case ends.
+Use case ends.
 
 #### Use case: View all starred tasks
 
@@ -772,7 +772,7 @@ Use case ends.
 1a. The given n is invalid
 
 > 1a1. Dueue shows an error message <br>
-  Use case resumes at step 1
+Use case resumes at step 1
 
 2a. The list is empty
 
@@ -821,111 +821,111 @@ Use case ends.
   Use case resumes at step 5
 
 #### Use case: Change the list of a task
- 
+
 **MSS**
- 
+
 1. User requests to change the list of a task
 2. Dueue ask the user for a list
 3. User type in the name of the list
 4. Dueue shows the tasks in the list
-Use case ends.
- 
+  Use case ends.
+
 **Extension**
- 
+
 1a. The given task is invalid
- 
+
 > 1a1. Dueue shows an error message and ask for a task<br>
   Use case resumes at step 2
- 
+
 3a. The user wants to create a new list for the task
- 
-> 3a1. Dueue shows an error message and ask whether the user wants to create a new list
+
+> 3a1. Dueue shows an error message and ask whether the user wants to create a new list<br>
 > 3a2. User indicate yes<br>
-Use case resume at step 4
- 
+  Use case resume at step 4
+
 3b. The list name does not exist
- 
-> 3b1. Dueue shows an error message and ask whether the user wants to create a new list
-> 3b2. User indicate No
+
+> 3b1. Dueue shows an error message and ask whether the user wants to create a new list<br>
+> 3b2. User indicate No<br>
 > 3b3. Dueue ask the user for a new list name<br>
-  Use case resume at step 3 
- 
+  Use case resume at step 3
+
 #### Use case: Mark task as finished
- 
+
 **MSS**
- 
+
 1. User requests to mark a task as finished
 2. Dueue show the current unfinished task
 Use case ends.
- 
+
 **Extension**
- 
+
 1a. Task does not exist
-> 1a1. Dueue shows an error message
-Use case resume at step 1
- 
+> 1a1. Dueue shows an error message<br>
+  Use case resume at step 1
+
 1b. The task had been marked as finished
-> 1b1. Dueue inform the User that the task had been marked
+> 1b1. Dueue inform the User that the task had been marked<br>
   Use case ends.
- 
+
 #### Use case: Change details of a task
- 
+
 **MSS**
- 
+
 1. User requests to change details of the task
 2. Dueue ask for the details to be change
 3. User type in the details to be changed
 4. Dueue shows the changes
 Use case ends.
- 
+
 **Extension**
- 
+
 1a. Task does not exist
-> 1a1. Dueue shows an error message
+> 1a1. Dueue shows an error message<br>
 Use case resume at step 1
- 
+
 #### Use case: View help message when entering the system.
- 
+
 **MSS**
- 
+
 1. User starts the system
 2. Dueue display the help message
 Use case ends
- 
+
 #### Use case: Add a task with priority level
- 
+
 **MSS**
- 
+
 1. User request for to add a task with priority level
 2. Dueue shows the created task
 Use case ends
- 
+
 **Extension**
- 
+
 1a. Priority level does not exist
-> 1a1. Dueue shows an error message
+> 1a1. Dueue shows an error message<br>
 Use case resume at step 1
- 
+
 #### Use case: Undo previous command
- 
+
 **MSS**
- 
+
 1. User request to undo previous command
 2. Dueue display a successful undo message
 Use case ends
- 
+
 #### Use case: View all past due task
- 
+
 **MSS**
- 
+
 1. User request to view all past due task
 2. Dueue display all the past due task.
 Use case ends
- 
+
 **Extension**
- 
+
 1a. There is no past due task
-> 1a1. Dueue shows an error message
+> 1a1. Dueue shows an error message<br>
 Use case ends
 
 {More to be added}
