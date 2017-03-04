@@ -1,6 +1,6 @@
-# AddressBook Level 4 - User Guide
+# WhatsLeft - User Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team CS2103JAN2017-W10-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -16,19 +16,19 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
    > Having any Java 8 version is not enough. <br>
    > This app will not work with earlier versions of Java 8.
 
-1. Download the latest `tasklist.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for your Address Book.
+1. Download the latest `whatsleft.jar` from the [releases](../../../releases) tab.
+2. Copy the file to the folder you want to use as the home folder for your WhatsLeft.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
    > <img src="images/Ui.png" width="600">
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
-   * **`list`** : lists all tasks
-   * **`add`** add CS2010 PS3 d/problem set 3 t/03-08 p/3 :
-     adds a task named CS2010 PS3 to the TaskList.
-   * **`delete`**` 3` : deletes the 3rd task shown in the current list
-   * **`exit`** : exits the app
+   * **`list`** : lists all events, deadlines and tasks.
+   * **`add task`**` read CS2103 handout c/do quiz p/2` :
+     adds a floating task named read CS2103 handout with comments do quiz and priority 2 to the task list.
+   * **`delete deadline`**` 3` : deletes the 3rd deadline shown in the current deadline list.
+   * **`exit`** : exits the app.
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
 
@@ -43,128 +43,296 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 
 ### 2.1. Viewing help : `help`
 
-Format: `help`
+Format: `help [COMMAND]`
 
-> Help is also shown if you enter an incorrect command e.g. `abcd`
+> * Command is optional.
+> * When there is no command specified, help will print help messages of all commands.
+> * Help is also shown if you enter an incorrect command e.g. `abcd`
 
-### 2.2. Adding a task: `add`
+### 2.2. Adding an event/deadline/task : `add`
 
-Adds a task to the task list<br>
-Format: `add NAME d/DESCRIPTION t/TIME p/PRIORITY [tg/TAG]...`
+#### 2.2.1. Adding an event : `add ev`
 
-> Persons can have any number of tags (including 0)
+Adds an event to the event list. Undoable.<br>
+Format: `add ev DESCRIPTION [s/START_TIME] f/START_DATE [e/END_TIME] [t/END_DATE] [c/COMMENTS]... [l/LOCATION]`
+
+> * `ev` is used as an acronym for "event"
+> * Events must be added with description.
+> * Start date is required, while other fields are optional.
+> * Start date and end date should have format `DD-MM-YY`, e.g. 23-01-17.
+> * Start time and end time should have format `XXXX`, e.g. 2359.
+> * If end time is entered and end date is not entered, end date is set to be start date by default.
+> * Events can have any number of comments(including 0).
+> * If description is not entered, help message for add event will appear.
 
 Examples:
 
-* `add CS2010 PS3 d/problem set 3 t/03-08-17 p/3 tg/CS2010`
-* `add Read handout d/read CS2103 L6 handout t/03-01-17 p/2 tg/CS2103`
+* `add ev PhotoShop Workshop s/1900 f/13-02-17 c/take laptop l/CLB`
+* `add ev Industrial Talk s/1800 f/03-05-17 e/2000 l/FoS`
 
-### 2.3. Listing all tasks : `list`
+#### 2.2.2. Adding a deadline : `add dl`
 
-Shows a list of all tasks in the task list.<br>
-Format: `list`
+Adds a deadline to the deadline list. Undoable.<br>
+Format: `add dl DESCRIPTION b/BY_DATE [e/END_TIME] [c/COMMENTS]... [l/LOCATION]`
 
-### 2.4. Editing a task : `edit`
+> * `dl` is used as an acronym for "deadline"
+> * Deadlines must be added with description.
+> * By date is required, while other fields are optional.
+> * By date should have format `DD-MM-YY`, e.g. 23-01-17.
+> * End time should have format `XXXX`, e.g. 2359.
+> * Deadlines can have any number of comments(including 0).
+> * If description is not entered, help message for add deadline will appear.
 
-Edits an existing task in the task list.<br>
-Format: `edit INDEX [NAME] [d/DESCRIPTION] [t/TIME] [p/PRIORITY] [tg/TAG]...`
+Examples:
+
+* `add dl Home Assignment 1 b/21-03-17 c/submit hardcopy l/general office`
+* `add dl Project Report b/12-04-17 e/2359 c/submit softcopy c/online discussion`
+
+#### 2.2.3. Adding a task : `add ts`
+
+Adds a task to the task list. Undoable.<br>
+Format: `add ts DESCRIPTION [c/COMMENTS]... [l/LOCATION] [p/PRIORITY]`
+
+> * `ts` is used as an acronym for "task"
+> * Tasks must be added with description.
+> * Other fields are optional.
+> * Tasks can have any number of comments(including 0).
+> * Tasks can have priority 0, 1, 2 or 3.
+> * If priority is not entered, it is set to be 0 by default.
+> * If description is not entered, help message for add task will appear.
+
+Examples:
+
+* `add ts Review CS2103 c/watch webcast p/1`
+* `add ts Buy fruits l/FairPrice p/2`
+
+### 2.3. Listing all events/deadlines/tasks : `list`
+
+Shows the lists of all events/deadlines/tasks in WhatsLeft.<br>
+Format: `list [TYPE]`
+
+> * Type is optional.
+> * If type is not specified, 3 separated lists of all events, deadlines and tasks will appear.
+> * Type should be `event`, `deadline` or `task`.
+
+Examples:
+
+* `list` <br>
+  Shows 3 separated lists of all events, deadlines and tasks in WhatsLeft.
+
+* `list deadline`<br>
+  Shows the list of all deadlines in WhatsLeft.
+
+### 2.4. Editing an event/deadline/task : `edit`
+
+#### 2.4.1. Editing an event : `edit ev`
+
+Edits an existing event in WhatsLeft. Undoable.<br>
+Format: `edit ev INDEX [DESCRIPTION] [s/START_TIME] [f/START_DATE] [e/END_TIME] [t/END_DATE] [c/COMMENTS]... [l/LOCATION]`
+
+> * Edits the event at the specified `INDEX`.
+    The index refers to the index number shown in the last event ing.<br>
+    The index **must be a positive integer** 1, 2, 3, ...
+> * At least one of the optional fields must be provided.
+> * Existing values will be updated to the input values.
+> * When editing comments, the existing comments of the event will be removed i.e adding of comments is not cumulative.
+> * You can remove start time, end time, end date, comments or location by typing `s/`, `e/`, `t/`, `c/` or `l/` without specifying any content after it.
+
+Examples:
+
+* `edit ev 2 s/0900 e/1300`<br>
+  Edits the start time and end time of the 2nd event to be `0900` and `1300` respectively.
+
+* `edit ev 3 Project Discussion c/`<br>
+  Edits the description of the 3rd event to be `Project Discussion` and clears all comments.
+
+
+#### 2.4.2. Editing a deadline : `edit dl`
+
+Edits an existing deadline in WhatsLeft. Undoable.<br>
+Format: `edit dl INDEX [DESCRIPTION] [b/BY_DATE] [e/END_TIME] [c/COMMENTS]... [l/LOCATION]`
+
+> * Edits the deadline at the specified `INDEX`.
+    The index refers to the index number shown in the last deadline listing.<br>
+    The index **must be a positive integer** 1, 2, 3, ...
+> * At least one of the optional fields must be provided.
+> * Existing values will be updated to the input values.
+> * When editing comments, the existing comments of the event will be removed i.e adding of comments is not cumulative.
+> * You can remove end time, comments or location by typing `e/`, `c/` or `l/` without specifying any content after it.
+
+Examples:
+
+* `edit dl 1 e/2200`<br>
+  Edits the end time of the 1st deadline to be `2200`.
+
+* `edit dl 3 c/submit PDF file l/`<br>
+  Edits the comments of the 3rd deadline to be `submit PDF file` and clears the location.
+
+#### 2.4.3. Editing a task : `edit ts`
+
+Edits an existing task in WhatsLeft. Undoable.<br>
+Format: `edit ts INDEX [DESCRIPTION] [c/COMMENTS]... [l/LOCATION] [p/PRIORITY]`
 
 > * Edits the task at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
     The index **must be a positive integer** 1, 2, 3, ...
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
-> * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
-> * You can remove all the task's tags by typing `tg/` without specifying any tags after it.
+> * When editing comments, the existing comments of the event will be removed i.e adding of comments is not cumulative.
+> * You can remove comments, location or update the priority to be 0 by typing `c/`, `l/` or `p/` without specifying any content after it.
 
 Examples:
 
-* `edit 1 p/3 t/10-03-17`<br>
-  Edits the priority and time of the 1st task to be `3` and `10-13-17` respectively.
+* `edit ts 5 l/discussion room 3`<br>
+  Edits the location of the 5th task to be `discussion room 3`.
 
-* `edit 3 Project Discussion t/`<br>
-  Edits the name of the 3rd task to be `Project Discussion` and clears all existing tags.
+* `edit ts 3 p/3 c/`<br>
+  Edits the priority of the 3rd task to be 3 and clears the comments.
 
-### 2.5. Finding all tasks containing any keyword in their name or description: `find`
+### 2.5. Finding all events/deadlines/tasks containing any keyword in their description : `find`
 
-Finds tasks whose names or descriptions contain any of the given keywords.<br>
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Finds events/deadlines/tasks whose descriptions contain any of the given keywords.<br>
+Format: `find [TYPE] KEYWORD [MORE_KEYWORDS]`
 
+> * Type is optional.
+> * If type is not specified, 3 separated lists of matched events, deadlines and tasks will appear.
+> * Type should be `ev`, `dl` or `ts`.
 > * The search is case insensitive. e.g `discussion` will match `Discussion`
 > * The order of the keywords does not matter. e.g. `Project Discussion` will match `Discussion Project`
-> * Only the name and description are searched.
-> * Only full words will be matched e.g. `Project` will not match `Projects`
-> * Tasks matching at least one keyword will be returned (i.e. `OR` search).
+> * Only the description is searched.
+> * Events/deadlines/tasks matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `Project` will match `Project Discussion`
 
 Examples:
 
-* `find project`<br>
-  Returns `Project Discussion`
 * `find project discussion`<br>
-  Returns Any tasks having description `project` or `discussion`
+  Returns 3 separated lists of events/deadlines/tasks having description `project` or `discussion`.
 
-### 2.6. Finding all tasks happening on a certain day: `date`
+* `find ts survey`<br>
+  Returns a task list of tasks having description `survey`.
 
-Finds tasks which happen on the given date.<br>
-Format: `date DATE`
+### 2.6. Finding all events/deadlines happening on a certain day : `on`
 
-> * DATE should have format `DD-MM-YY`
-> * If only `DD-MM` is entered, year is set to be the current year.
-> * If only `DD` is entered, month is set to be the current month.
+Finds events and deadlines which happen on the given date.<br>
+Format: `on DATE`
+
+> * DATE should have format `DD-MM-YY`, `DD-MM` or `DD`.
+> * If `DD-MM-YY` is entered, 2 separated lists of events and deadlines on the entered date will appear.
+> * If `DD-MM` is entered, 2 separated lists of events and deadlines on the entered date in any year will appear.
+> * If `DD` is entered, 2 separated lists of events and deadlines on the entered date in any month and any year will appear.
 
 Examples:
 
-* `date 23-04`<br>
-  Returns all tasks happening on 23rd April 2017.
+* `on 23-04`<br>
+  Returns 2 separated lists of all events and deadlines happening on 23rd April in any year.
 
-### 2.7. Deleting a task : `delete`
+### 2.7. Viewing an event/deadline/task : `view`
 
-Deletes the specified task from the task list. Undoable.<br>
-Format: `delete INDEX`
+Views the specified event/deadline/task form the event/deadline/task list.
 
-> Deletes the task at the specified `INDEX`. <br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+Format: `view TYPE INDEX`
+
+> * Type should be `ev`, `dl` or `ts`.
+> * Views the event/deadline/task at the specified `INDEX`.
+> * The index refers to the index number shown in the most recent event/deadline/task listing.
+> * The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 
 * `list`<br>
-  `delete 2`<br>
-  Deletes the 2nd task in the task list.
+  `view ev 2`<br>
+  Views the 2nd event in the event list.
+
+### 2.8. Deleting an event/deadline/task : `delete`
+
+Deletes the specified event/deadline/task from WhatsLeft. Undoable.<br>
+Format: `delete TYPE INDEX`
+
+> * Type should be `ev`, `dl` or `ts`.
+> * Deletes the event/deadline/task at the specified `INDEX`.
+> * The index refers to the index number shown in the most recent event/deadline/task listing.
+> * The index **must be a positive integer** 1, 2, 3, ...
+
+Examples:
+
+* `list`<br>
+  `delete ev 2`<br>
+  Deletes the 2nd event in the event list.
 * `find exam`<br>
-  `delete 1`<br>
-  Deletes the 1st task in the results of the `find` command.
+  `delete ev 1`<br>
+  Deletes the 1st event in the results of the `find` command.
 
-### 2.8. Select a person : `select`
+### 2.9. Finishing an event/deadline/task : `finish`
 
-Selects the task identified by the index number used in the last task listing.<br>
-Format: `select INDEX`
+Finishes the specified event/deadline/task in WhatsLeft. Undoable.<br>
+Format: `finish TYPE INDEX`
 
-> Selects the task and loads the Google search page the task at the specified `INDEX`.<br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+> * Type should be `ev`, `dl` or `ts`.
+> * Finishes the event at the specified `INDEX`.
+> * The index refers to the index number shown in the most recent event listing.
+> * The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 
 * `list`<br>
-  `select 2`<br>
-  Selects the 2nd task in the address book.
-* `find Betsy` <br>
-  `select 1`<br>
-  Selects the 1st task in the results of the `find` command.
+  `finish ts 2`<br>
+  Finishes the 2nd task in the task list.
+* `find exam`<br>
+  `delete ev 1`<br>
+  Finishes the 1st event in the results of the `find` command.
 
-### 2.9. Clearing all entries : `clear`
+### 2.10. Clearing all entries : `clear`
 
-Clears all entries from the task list.<br>
-Format: `clear`
+Clears all event/deadline/task in WhatsLeft. Undoable.<br>
+Format: `clear [TYPE]`
 
-### 2.10. Exiting the program : `exit`
+> * Type is optional.
+> * If type is not specified, all events, deadlines and tasks in WhatsLeft will be removed.
+> * Type should be `ev`, `dl` or `ts`.
+
+Examples:
+
+* `clear` <br>
+  Removes all events, deadlines and tasks in WhatsLeft.
+
+* `clear dl`<br>
+  Removes all deadlines in WhatsLeft.
+
+### 2.11. Undoing the latest command : `undo`
+
+Undoes the latest command.<br>
+Format: `undo`
+
+> * Undoes immediately after `add`, `edit`, `delete`, `finish` and `clear` commands.
+> * Cannot undo more than once consecutively.
+
+Examples:
+
+* `finish ts 4`<br>
+  `undo`<br>
+  Undoes finishing task 4.
+
+### 2.12. Redoing the previous undo command : `redo`
+
+Redoes the previous undo command.<br>
+Format: `redo`
+
+> * Recovers if the latest command is `undo`.
+> * Cannot redo more than once consecutively.
+
+Examples:
+
+* `edit dl 2 b/23-04-17`<br>
+  `undo`<br>
+  `redo`<br>
+  Reverses the previous undo command.
+
+### 2.13. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.11. Saving the data
+### 2.14. Saving the data
 
 Task list data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
@@ -173,24 +341,53 @@ There is no need to save manually.
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
-       the file that contains the data of your previous Task List folder.
+       the file that contains the data of your previous WhatsLeft folder.
 
 ## 4. Command Summary
 
-* **Add**  `add NAME d/DESCRIPTION t/TIME p/PRIORITY [tg/TAG]...` <br>
-  e.g. `add Read handout d/read CS2103 L6 handout t/03-01-17 p/2 tg/CS2103`
-
-* **Clear** : `clear`
-
-* **Delete** : `delete INDEX` <br>
-  e.g. `delete 3`
-
-* **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
-  e.g. `find exam cs2103`
-
-* **List** : `list` <br>
-
 * **Help** : `help` <br>
 
-* **Select** : `select INDEX` <br>
-  e.g. `select 2`
+* **Add Event** : `add ev DESCRIPTION [s/START_TIME] f/START_DATE [e/END_TIME] [t/END_DATE] [c/COMMENTS]... [l/LOCATION]` <br>
+  e.g. `add ev Industrial Talk s/1800 f/03-05-17 e/2000 l/FoS`
+
+* **Add Deadline** : `add dl DESCRIPTION b/BY_DATE [e/END_TIME] [c/COMMENTS]... [l/LOCATION]`<br>
+  e.g. `add dl Home Assignment 1 b/21-03-17 c/submit hardcopy l/general office`
+
+* **Add Task** : `add ts DESCRIPTION [c/COMMENTS]... [l/LOCATION] [p/PRIORITY]`<br>
+  e.g. `add ts Buy fruits l/FairPrice p/2`
+
+* **List** : `list [TYPE]` <br>
+  e.g. `list dl`
+
+* **Edit Event** : `edit ev INDEX [DESCRIPTION] [s/START_TIME] [f/START_DATE] [e/END_TIME] [t/END_DATE] [c/COMMENTS]... [l/LOCATION]`<br>
+  e.g. `edit ev 3 Project Discussion c/`
+
+* **Edit Deadline** : `edit dl INDEX [DESCRIPTION] [b/BY_DATE] [e/END_TIME] [c/COMMENTS]... [l/LOCATION]`<br>
+  e.g. `edit dl 1 e/2200`
+
+* **Edit Task** : `edit ts INDEX [DESCRIPTION] [c/COMMENTS]... [l/LOCATION] [p/PRIORITY]`<br>
+  e.g. `edit ts 5 l/discussion room 3`
+
+* **Find** : `find [TYPE] KEYWORD [MORE_KEYWORDS]` <br>
+  e.g. `find exam CS2103`
+
+* **On** : `on DATE`<br>
+  e.g. `on 23-04`
+
+* **View** : `view TYPE INDEX`<br>
+  e.g. `view ev 2`
+
+* **Delete** : `delete TYPE INDEX` <br>
+  e.g. `delete ts 3`
+
+* **Finish** : `finish TYPE INDEX`<br>
+  e.g. `finish ts 2`
+
+* **Clear** : `clear [TYPE]`<br>
+  e.g. `clear dl`
+
+* **Undo** : `undo`
+
+* **Redo** : `redo`
+
+* **Exit** : `exit`
