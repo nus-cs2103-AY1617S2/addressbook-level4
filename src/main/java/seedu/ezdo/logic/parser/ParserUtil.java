@@ -15,10 +15,7 @@ import seedu.ezdo.commons.exceptions.IllegalValueException;
 import seedu.ezdo.commons.util.StringUtil;
 import seedu.ezdo.model.tag.Tag;
 import seedu.ezdo.model.tag.UniqueTagList;
-import seedu.ezdo.model.todo.Address;
-import seedu.ezdo.model.todo.Email;
-import seedu.ezdo.model.todo.Name;
-import seedu.ezdo.model.todo.Phone;
+import seedu.ezdo.model.todo.*;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -88,6 +85,14 @@ public class ParserUtil {
     public static Optional<Address> parseAddress(Optional<String> address) throws IllegalValueException {
         assert address != null;
         return address.isPresent() ? Optional.of(new Address(address.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code Optional<String> startDate} into an {@code Optional<StartDate>} if {@code startDate} is present.
+     */
+    public static Optional<StartDate> parseStartDate(Optional<String> startDate) throws IllegalValueException {
+        assert startDate != null;
+        return startDate.isPresent() ? Optional.of(new StartDate(startDate.get())) : Optional.empty();
     }
 
     /**

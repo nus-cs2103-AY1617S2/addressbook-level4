@@ -163,7 +163,7 @@ public class ArgumentTokenizer {
 
     /**
      * A prefix that marks the beginning of an argument.
-     * e.g. '/t' in 'add James /t friend'
+     * e.g. '/t' in 'add Buy milk /t friend'
      */
     public static class Prefix {
         final String prefix;

@@ -15,7 +15,7 @@ import seedu.ezdo.commons.core.Config;
 import seedu.ezdo.commons.core.LogsCenter;
 import seedu.ezdo.commons.events.storage.DataSavingExceptionEvent;
 import seedu.ezdo.commons.events.ui.JumpToListRequestEvent;
-import seedu.ezdo.commons.events.ui.PersonPanelSelectionChangedEvent;
+import seedu.ezdo.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.ezdo.commons.events.ui.ShowHelpRequestEvent;
 import seedu.ezdo.commons.util.StringUtil;
 import seedu.ezdo.logic.Logic;
@@ -26,7 +26,7 @@ import seedu.ezdo.model.UserPrefs;
  */
 public class UiManager extends ComponentManager implements Ui {
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
-    private static final String ICON_APPLICATION = "/images/address_book_32.png";
+    private static final String ICON_APPLICATION = "/images/ezDo_32.png";
     public static final String ALERT_DIALOG_PANE_FIELD_ID = "alertDialogPane";
 
     private Logic logic;
@@ -116,13 +116,13 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.getPersonListPanel().scrollTo(event.targetIndex);
+        mainWindow.getTaskListPanel().scrollTo(event.targetIndex);
     }
 
     @Subscribe
-    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
+    private void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.loadPersonPage(event.getNewSelection());
+        mainWindow.loadTaskPage(event.getNewSelection());
     }
 
 }
