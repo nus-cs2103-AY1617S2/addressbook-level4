@@ -214,7 +214,7 @@ Examples:
 
 * `setting dest/C:/Desktop/myTask`<br>
 
-### 2.14. Using data from another folder : `uss`
+### 2.14. Using data from another folder : `use`
 
 Using data from another folder given by the user. <br>
 Format: `use dest/FILE_PATH`
@@ -264,7 +264,3 @@ listDone | listdone, ld| | |
 undo | u | | |
 clear | cr | | |
 exit | e | | |
-
-
-
-
