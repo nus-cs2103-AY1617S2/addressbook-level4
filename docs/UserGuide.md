@@ -165,22 +165,13 @@ There is no need to save manually.
 Command | Shortcut | Format | Example
 -------- | :-------- | :--------- | :-----------
 add | a, + | add TASK d/DATE t/TIME [f/TAG]...| e.g. add Shop Shoes d/20082017 t/4:30pm t/Shopping t/Party
+delete | d, remove, rm, - | delete INDEX | e.g. delete 10
+find | find, search, s | find KEYWORD [MORE_KEYWORDS] | e.g. find Study Math
+done | complete, finish| done INDEX | e.g. done 2
+help | help, guide | | |
+list | list, l| | |
+clear | cr| | |
 
-* **Clear** : `clear`
 
-* **Delete** : `delete INDEX` <br>
-   e.g. `delete 3`
-
-* **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
-  e.g. `find Study Math`
-
-* **List** : `list` <br>
-  e.g.
-
-* **Help** : `help` <br>
-  e.g.
-
-* **Complete** : `done INDEX` <br>
-  e.g.`done 2`
 
 
