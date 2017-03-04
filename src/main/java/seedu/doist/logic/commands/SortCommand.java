@@ -17,18 +17,18 @@ public class SortCommand extends Command {
 
     public SortType sortType;
 
-    public static final String COMMAND_WORD = "sort";
+    public static final String DEFAULT_COMMAND_WORD = "sort";
 
-    public static ArrayList<String> commandWords = new ArrayList<>(Arrays.asList(COMMAND_WORD, "sorted", "sort_by"));
+    public static ArrayList<String> commandWords = new ArrayList<>(Arrays.asList(DEFAULT_COMMAND_WORD, "sorted", "sort_by"));
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ":\n" + "Sorts previously listed people." + "\n"
+    public static final String MESSAGE_USAGE = DEFAULT_COMMAND_WORD + ":\n" + "Sorts previously listed people." + "\n"
             + "Can sort by priority for now. \n\t"
             + "Parameters: SORTTYPE " + "\n\t"
-            + "Example: " + COMMAND_WORD
+            + "Example: " + DEFAULT_COMMAND_WORD
             + " priority";
 
     public static final String MESSAGE_SORT_CONSTRAINTS =
-            "You can only " + COMMAND_WORD + "\n"
+            "You can only " + DEFAULT_COMMAND_WORD + "\n"
             + SortType.PRIORITY.toString();
 
     public SortCommand(SortType theSortType) throws IllegalValueException {
@@ -51,6 +51,6 @@ public class SortCommand extends Command {
     }
 
     public static boolean canCommandBeTriggeredByWord(String word) {
-        return commandWords.contains(word) || COMMAND_WORD.equals(word);
+        return commandWords.contains(word) || DEFAULT_COMMAND_WORD.equals(word);
     }
 }
