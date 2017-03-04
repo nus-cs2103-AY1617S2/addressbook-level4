@@ -951,12 +951,12 @@ Use case ends
 
 ##### switch
 
-> A functionality of certain `list` commands
+> A functionality of certain `list` commands<br>
   All the tasks added after switching will be automatically added to the current list (favourite) unless otherwise stated
 
 ##### unswitch
 
-> A functionality of certain `list` commands
+> A functionality of certain `list` commands<br>
   After switching back to main, the tasks added will not be automatically added to this list (favourite)
 
 ## Appendix E : Product Survey
