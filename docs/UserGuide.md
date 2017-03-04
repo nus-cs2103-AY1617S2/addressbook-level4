@@ -242,10 +242,10 @@ There is no need to save manually.
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
-       the file that contains the data of your previous Address Book folder.
+       the file that contains the data of your previous Task Manager folder.
 
 ## 4. Command Summary
-Command | Shortcut | Format | Example
+Command | Shortcuts | Format | Example
 -------- | :-------- | :--------- | :-----------
 add | a, + | add TASK d/DATE t/TIME [f/TAG]...| add Shop Shoes d/20082017 t/4:30pm t/Shopping t/Party
 find | find, search, f | find KEYWORD [MORE_KEYWORDS] | find Study Math
