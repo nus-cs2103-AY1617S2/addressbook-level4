@@ -10,7 +10,7 @@ import seedu.ezdo.logic.commands.CommandResult;
 import seedu.ezdo.logic.commands.exceptions.CommandException;
 import seedu.ezdo.logic.parser.Parser;
 import seedu.ezdo.model.Model;
-import seedu.ezdo.model.todo.ReadOnlyPerson;
+import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.storage.Storage;
 
 /**
@@ -36,7 +36,7 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
-    public ObservableList<ReadOnlyPerson> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<ReadOnlyTask> getFilteredTaskList() {
+        return model.getFilteredTaskList();
     }
 }
