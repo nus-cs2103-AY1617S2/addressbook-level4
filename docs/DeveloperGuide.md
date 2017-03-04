@@ -351,15 +351,26 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | delete a task | remove tasks that are no longer relevant
 `* * *` | user | find a task by name | locate details of task without having to go through the entire list
 `* * *`| user | edit a parameter of a task | update a task without needing to delete and re-add it
+`* * *` | user | mark tasks as complete | see what I've already completed (and still have left to do)
+`* * *` | user | undo my last action | easily fix typos and mistakes I make
+`* * *` | user | specify a duration of the task | plan when I will complete the task
 `* *`| user | list tasks in order of due date | prioritize what to do next
 `* *`| user | mark tasks as important | prioritize what to do next
 `* *`| user | have a calendar view of all tasks | see how busy I am
 `* *`| user | have my emails converted to tasks or events automatically | save time on manually entering tasks and events
+`* *`| user | add custom tags to tasks | organize my tasks by category
+`* *`| user | be able to migrate my data to another computer | change computers without losing my tasks
+`* *`| user | get a reminder about a task | don't miss a task due date
 `*`| user | print out all tasks | keep a paper copy when there is no computer access
 `*`| user | have an automatically prioritized list | have more time to do the items instead of planning
 `*`| user | have an customizable GUI | feel good looking at my tasks and be motivated
+`*`| user | attach files to tasks | keep track of supplimentary information for the task
 `*`| user | email updates on tasks to people | alert individuals when a task is done
 `*`| user | see percentage of time I spend doing certain types of tasks | have a better understanding of how my time is allocated
+`*`| user | easily share tasks with other people | collaborate on a project with them
+`*`| new user | import task data from other TODO products | easily migrate to DoTomorrow
+`*`| user | add subtasks to tasks | break down larger tasks
+`*`| user | have a history of task edits | keep track of when tasks change (or when I make mistakes)
 
 ## Appendix B : Use Cases
 
