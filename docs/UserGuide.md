@@ -131,7 +131,7 @@ There is no need to save manually.
 * **Add**  `add TASK` <br>
            `add TASK by DEADLINE` <br>
   e.g. `add submit report by Friday`
-  
+
 * **List** : `list` <br>
 
 * **Select** : `select INDEX` <br>
@@ -143,10 +143,10 @@ There is no need to save manually.
 * **Find** : `find KEYWORD` <br>
   e.g. `find report`
   e.g. `find Friday`
-  
+
 * **Delete** : `delete INDEX` <br>
   e.g. `delete 3`
-  
+
 * **Clear** : `clear` <br>
 
 * **History** : `history` <br>
