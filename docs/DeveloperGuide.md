@@ -352,7 +352,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | mark a task as finished | know it's done
 `* * *` | user | view all tasks under a specific list | view my tasks by categories
 `* * *` | user | create a customised list other than the default lists | personalize my categories
-`* * *` | user | delete a task | remove the tasks that is no longer useful or created by mistake
+`* * *` | user | delete task(s) | remove task(s) that is/are no longer useful or created by mistake
 `* * *` | user | view the help message for a specific feature | know how to use a command
 `* * *` | first-time user | view the entire help messages | get to know various commands
 `* *` | user | view next n days tasks | know what to do in n days' time
