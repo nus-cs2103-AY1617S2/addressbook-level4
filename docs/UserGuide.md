@@ -79,13 +79,10 @@ Format: `list list LISTNAME [favourite]`
 Shows all unfinished tasks in Dueue and unswitch<br>
 Format: `list`
 
-Shows a list of finished tasks in Dueue and unswitch<br>
-Format: `list finished`
-
 Shows all tasks in Dueue (finished and unfinished) and unswitch<br>
 Format: `list all`
 
-Shows a list of all list names (together with list indices) in Dueue and unswitch<br>
+Shows a list of all list names (together with list indices) in Dueue and switch to list of lists<br>
 Format: `list lists`
 
 > * Do not need to specify whether the parameter is LISTINDEX or LISTNAME
@@ -97,8 +94,6 @@ Examples:
 
 * `list`<br>
   Lists all unfinished tasks
-* `list finished`<br>
-  Lists all finished tasks
 * `list all`<br>
   Lists all unfinished and finished tasks
 * `list work`<br>
@@ -167,6 +162,15 @@ Format: `view dueon/DATE`
 
 View tasks due by a specified date.<br>
 Format: `view dueby/DATE`
+
+Views a list of all tasks in Dueue in a specific list and/or favourite and/or finished and unswitch<br>
+Format: `view finished`<br>
+Format: `view [favourite] [finished]`<br>
+Format: `view list LISTINDEX [favourite] [finished]`<br>
+Format: `view list LISTNAME [favourite] [finished]`
+
+Views all tasks in Dueue (finished and unfinished) and unswitch<br>
+Format: `list all`
 
 > * The date has to be specified in a certain format.<br>
 > * User will be able to see repeating tasks due on/by that date also.
