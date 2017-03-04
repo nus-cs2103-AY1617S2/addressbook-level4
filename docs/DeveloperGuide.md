@@ -357,6 +357,15 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user | categorize a task | organize the tasks.
 `* *` | user | favourite tasks | keep track of important tasks.
 `* *` | user | see alerts on upcoming tasks | complete time sensitive tasks.
+`* *` | user | quickly add predefined tasks | to save time defining tasks
+`* *` | user | can undo last command | to fix mistakes.
+`* *` | user | be notified if two tasks have a time conflict | be aware of schedule conflicts
+`* *` | user | can use multiple devices | have more opportunity to check task manager
+`* *` | user | can undo last command | to fix mistakes.
+`*` | user | drag and drop events from UI | change event times easier
+`*` | user | copy and paste events from UI | add events quicker
+`*` | user | can send copy of task manager | share my schedule easily
+`*` | user | can have a shared group calendar | to coordinate with team members
 
 {More to be added}
 
