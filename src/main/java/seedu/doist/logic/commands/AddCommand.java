@@ -10,6 +10,7 @@ import seedu.doist.logic.commands.exceptions.CommandException;
 import seedu.doist.model.tag.Tag;
 import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.Description;
+import seedu.doist.model.task.Priority;
 import seedu.doist.model.task.Task;
 import seedu.doist.model.task.UniqueTaskList;
 
@@ -36,12 +37,12 @@ public class AddCommand extends Command {
      * @throws IllegalValueException
      *             if any of the raw values are invalid
      */
-    public AddCommand(String name, Set<String> tags) throws IllegalValueException {
+    public AddCommand(String name, String priority, Set<String> tags) throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        this.toAdd = new Task(new Description(name), new UniqueTagList(tagSet));
+        this.toAdd = new Task(new Description(name), new Priority(priority), new UniqueTagList(tagSet));
     }
 
     @Override

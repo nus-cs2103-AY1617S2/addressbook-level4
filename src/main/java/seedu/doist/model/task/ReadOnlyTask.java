@@ -1,6 +1,9 @@
 package seedu.doist.model.task;
 
+import java.util.Comparator;
+
 import seedu.doist.model.tag.UniqueTagList;
+import seedu.doist.model.task.Priority.PriorityLevel;
 
 /**
  * A read-only immutable interface for a Task in the to-do list.
@@ -9,6 +12,7 @@ import seedu.doist.model.tag.UniqueTagList;
 public interface ReadOnlyTask {
 
     Description getDescription();
+    Priority getPriority();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -22,7 +26,8 @@ public interface ReadOnlyTask {
     default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                && other.getDescription().equals(this.getDescription())); // state checks here onwards
+                && other.getDescription().equals(this.getDescription()) // state checks here onwards
+                && other.getPriority().equals(this.getPriority()));
     }
 
     /**
@@ -35,4 +40,14 @@ public interface ReadOnlyTask {
         return builder.toString();
     }
 
+    public class ReadOnlyTaskPriorityComparator implements Comparator<ReadOnlyTask> {
+
+        @Override
+        public int compare(ReadOnlyTask o1, ReadOnlyTask o2) {
+            // Highest priority to lowest priority
+            PriorityLevel o1Priority = o1.getPriority().getPriorityLevel();
+            PriorityLevel o2Priority = o2.getPriority().getPriorityLevel();
+            return o2Priority.compareTo(o1Priority);
+        }
+    }
 }

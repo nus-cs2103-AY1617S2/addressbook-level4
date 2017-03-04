@@ -2,6 +2,7 @@ package seedu.doist.testutil;
 
 import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.Description;
+import seedu.doist.model.task.Priority;
 import seedu.doist.model.task.ReadOnlyTask;
 
 /**
@@ -10,6 +11,7 @@ import seedu.doist.model.task.ReadOnlyTask;
 public class TestPerson implements ReadOnlyTask {
 
     private Description name;
+    private Priority priority;
     private UniqueTagList tags;
 
     public TestPerson() {
@@ -21,6 +23,7 @@ public class TestPerson implements ReadOnlyTask {
      */
     public TestPerson(TestPerson personToCopy) {
         this.name = personToCopy.getDescription();
+        this.priority = personToCopy.getPriority();
         this.tags = personToCopy.getTags();
     }
 
@@ -40,6 +43,11 @@ public class TestPerson implements ReadOnlyTask {
     @Override
     public UniqueTagList getTags() {
         return tags;
+    }
+
+    @Override
+    public Priority getPriority() {
+        return priority;
     }
 
     @Override
