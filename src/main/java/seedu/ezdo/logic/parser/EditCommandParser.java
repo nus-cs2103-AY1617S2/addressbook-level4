@@ -1,15 +1,12 @@
 package seedu.ezdo.logic.parser;
 
 import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-<<<<<<< HEAD
-import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_TAG;
-=======
 import static seedu.ezdo.logic.parser.CliSyntax.*;
 import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_STARTDATE;
->>>>>>> 6228ae6b03115b0e64fed2b189d86d8b94d2fa7e
+
 
 import java.util.Collection;
 import java.util.Collections;
@@ -35,12 +32,8 @@ public class EditCommandParser {
      */
     public Command parse(String args) {
         assert args != null;
-        ArgumentTokenizer argsTokenizer =
-<<<<<<< HEAD
-                new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
-=======
-                new ArgumentTokenizer(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_STARTDATE, PREFIX_TAG);
->>>>>>> 6228ae6b03115b0e64fed2b189d86d8b94d2fa7e
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_EMAIL, PREFIX_STARTDATE, PREFIX_TAG);
+
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
@@ -51,25 +44,18 @@ public class EditCommandParser {
 
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
-<<<<<<< HEAD
-            
+
             //argument type manipulation because priority is Integer type
             String currentPriority = argsTokenizer.getValue(PREFIX_PRIORITY).get();
             Priority optionalPriority = new Priority(Integer.parseInt(currentPriority));
             Optional<Priority> optional = Optional.of(optionalPriority);
             
-            editPersonDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
-            editPersonDescriptor.setPriority(optional);
-            editPersonDescriptor.setEmail(ParserUtil.parseEmail(argsTokenizer.getValue(PREFIX_EMAIL)));
-            editPersonDescriptor.setAddress(ParserUtil.parseAddress(argsTokenizer.getValue(PREFIX_ADDRESS)));
-            editPersonDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
-=======
             editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
-            editTaskDescriptor.setPhone(ParserUtil.parsePhone(argsTokenizer.getValue(PREFIX_PHONE)));
+            editTaskDescriptor.setPriority(optional);
             editTaskDescriptor.setEmail(ParserUtil.parseEmail(argsTokenizer.getValue(PREFIX_EMAIL)));
             editTaskDescriptor.setStartDate(ParserUtil.parseStartDate(argsTokenizer.getValue(PREFIX_STARTDATE)));
             editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
->>>>>>> 6228ae6b03115b0e64fed2b189d86d8b94d2fa7e
+
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }

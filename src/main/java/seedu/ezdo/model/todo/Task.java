@@ -21,13 +21,9 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-<<<<<<< HEAD:src/main/java/seedu/ezdo/model/todo/Person.java
-    public Person(Name name, Priority priority, Email email, Address address, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, priority, email, address, tags);
-=======
-    public Task(Name name, Phone phone, Email email, StartDate startDate, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, phone, email, startDate, tags);
->>>>>>> 6228ae6b03115b0e64fed2b189d86d8b94d2fa7e:src/main/java/seedu/ezdo/model/todo/Task.java
+
+    public Task(Name name, Priority priority, Email email, StartDate startDate, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, priority, email, startDate, tags);
         this.name = name;
         this.priority = priority;
         this.email = email;
@@ -38,13 +34,9 @@ public class Task implements ReadOnlyTask {
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
-<<<<<<< HEAD:src/main/java/seedu/ezdo/model/todo/Person.java
-    public Person(ReadOnlyPerson source) {
-        this(source.getName(), source.getPriority(), source.getEmail(), source.getAddress(), source.getTags());
-=======
+
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getPhone(), source.getEmail(), source.getStartDate(), source.getTags());
->>>>>>> 6228ae6b03115b0e64fed2b189d86d8b94d2fa7e:src/main/java/seedu/ezdo/model/todo/Task.java
+        this(source.getName(), source.getPriority(), source.getEmail(), source.getStartDate(), source.getTags());
     }
 
     public void setName(Name name) {
@@ -122,11 +114,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-<<<<<<< HEAD:src/main/java/seedu/ezdo/model/todo/Person.java
-        return Objects.hash(name, priority, email, address, tags);
-=======
-        return Objects.hash(name, phone, email, startDate, tags);
->>>>>>> 6228ae6b03115b0e64fed2b189d86d8b94d2fa7e:src/main/java/seedu/ezdo/model/todo/Task.java
+        return Objects.hash(name, priority, email, startDate, tags);
     }
 
     @Override
