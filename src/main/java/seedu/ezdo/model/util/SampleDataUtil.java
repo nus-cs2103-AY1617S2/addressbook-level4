@@ -4,8 +4,6 @@ import seedu.ezdo.commons.exceptions.IllegalValueException;
 import seedu.ezdo.model.EzDo;
 import seedu.ezdo.model.ReadOnlyEzDo;
 import seedu.ezdo.model.tag.UniqueTagList;
-import seedu.ezdo.model.todo.*;
-import seedu.ezdo.model.todo.UniquePersonList.DuplicatePersonException;
 import seedu.ezdo.model.todo.StartDate;
 import seedu.ezdo.model.todo.Email;
 import seedu.ezdo.model.todo.Name;
