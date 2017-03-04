@@ -8,6 +8,7 @@ import seedu.toluist.ui.Ui;
  */
 public class ExitController extends Controller {
     private static final String COMMAND_TEMPLATE = "^exit$";
+    private static final String COMMAND_WORD = "exit";
 
     public ExitController(Ui renderer) {
         super(renderer);
@@ -22,5 +23,10 @@ public class ExitController extends Controller {
     @Override
     public boolean matchesCommand(String command) {
         return command.matches(COMMAND_TEMPLATE);
+    }
+
+    @Override
+    public String[] getCommandWords() {
+        return new String[] { COMMAND_WORD };
     }
 }

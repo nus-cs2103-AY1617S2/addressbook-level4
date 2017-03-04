@@ -1,5 +1,6 @@
 package seedu.toluist.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import seedu.toluist.dispatcher.CommandResult;
@@ -59,4 +60,6 @@ public abstract class Controller {
     public boolean matchesCommand(String command) {
         return true;
     }
+
+    public abstract String[] getCommandWords();
 }

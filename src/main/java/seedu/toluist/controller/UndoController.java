@@ -16,6 +16,7 @@ import seedu.toluist.ui.Ui;
  */
 public class UndoController extends Controller {
     private static final String COMMAND_TEMPLATE = "^undo(\\s+(?<number>\\d+))?\\s*";
+    private static final String COMMAND_WORD = "undo";
     private static final String UNDO_TIMES = "number";
     private static final String COMMAND_RESULT_TEMPLATE = "List undo-ed %d times";
 
@@ -55,5 +56,9 @@ public class UndoController extends Controller {
     @Override
     public boolean matchesCommand(String command) {
         return command.matches(COMMAND_TEMPLATE);
+    }
+
+    public String[] getCommandWords() {
+        return new String[] { COMMAND_WORD };
     }
 }

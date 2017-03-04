@@ -14,6 +14,7 @@ import seedu.toluist.ui.Ui;
  */
 public class StoreController extends Controller {
     private static final String COMMAND_TEMPLATE = "^save\\s+(?<directory>\\S+)\\s*";
+    private static final String COMMAND_WORD = "save";
     private static final String STORE_DIRECTORY = "directory";
     private static final String COMMAND_RESULT_TEMPLATE = "Storage is changed %s";
 
@@ -44,5 +45,9 @@ public class StoreController extends Controller {
     @Override
     public boolean matchesCommand(String command) {
         return command.matches(COMMAND_TEMPLATE);
+    }
+
+    public String[] getCommandWords() {
+        return new String[] { COMMAND_WORD };
     }
 }

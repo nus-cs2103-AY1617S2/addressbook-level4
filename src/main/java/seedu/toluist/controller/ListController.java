@@ -10,6 +10,7 @@ import seedu.toluist.ui.UiStore;
  */
 public class ListController extends Controller {
     private static final String RESULT_MESSAGE = "App loaded";
+    private static final String COMMAND_WORD = "list";
 
     public ListController(Ui renderer) {
         super(renderer);
@@ -20,5 +21,9 @@ public class ListController extends Controller {
         UiStore.getInstance().setTask(todoList.getTasks());
         renderer.render();
         return new CommandResult(RESULT_MESSAGE);
+    }
+
+    public String[] getCommandWords() {
+        return new String[] { COMMAND_WORD };
     }
 }
