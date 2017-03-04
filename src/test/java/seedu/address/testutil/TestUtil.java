@@ -32,9 +32,7 @@ import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.AddressBook;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Email;
 import seedu.address.model.task.Name;
-import seedu.address.model.task.Phone;
 import seedu.address.model.task.ReadOnlyPerson;
 import seedu.address.model.task.Task;
 import seedu.address.storage.XmlSerializableAddressBook;
@@ -74,15 +72,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Name("Ali Muster"), new Phone("9482424"), new Email("hans@google.com"), new UniqueTagList()),
-                new Task(new Name("Boris Mueller"), new Phone("87249245"), new Email("ruth@google.com"), new UniqueTagList()),
-                new Task(new Name("Carl Kurz"), new Phone("95352563"), new Email("heinz@yahoo.com"), new UniqueTagList()),
-                new Task(new Name("Daniel Meier"), new Phone("87652533"), new Email("cornelia@google.com"), new UniqueTagList()),
-                new Task(new Name("Elle Meyer"), new Phone("9482224"), new Email("werner@gmail.com"), new UniqueTagList()),
-                new Task(new Name("Fiona Kunz"), new Phone("9482427"), new Email("lydia@gmail.com"), new UniqueTagList()),
-                new Task(new Name("George Best"), new Phone("9482442"), new Email("anna@google.com"), new UniqueTagList()),
-                new Task(new Name("Hoon Meier"), new Phone("8482424"), new Email("stefan@mail.com"), new UniqueTagList()),
-                new Task(new Name("Ida Mueller"), new Phone("8482131"), new Email("hans@google.com"), new UniqueTagList())
+                new Task(new Name("Ali Muster"), new UniqueTagList()),
+                new Task(new Name("Boris Mueller"), new UniqueTagList()),
+                new Task(new Name("Carl Kurz"), new UniqueTagList()),
+                new Task(new Name("Daniel Meier"), new UniqueTagList()),
+                new Task(new Name("Elle Meyer"), new UniqueTagList()),
+                new Task(new Name("Fiona Kunz"), new UniqueTagList()),
+                new Task(new Name("George Best"), new UniqueTagList()),
+                new Task(new Name("Hoon Meier"), new UniqueTagList()),
+                new Task(new Name("Ida Mueller"), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
