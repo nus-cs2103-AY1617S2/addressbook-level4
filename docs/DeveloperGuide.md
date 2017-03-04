@@ -358,14 +358,20 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | specify a folder as the data storage location | save the data file into any directory that I want
 `* * *` | user | undo my most recent command | revert the most recent command if it was wrongly issued
 `* * *` | user | do task operations offline | remove the restriction of connecting to the internet to do operations
+`* * *` | user | list all my to-do items in chronological order  | I can easily see all my tasks in chronological order
+`* * *` | user | Use an existing data file | reuse my data file from another device
 `* * *` | Advanced user | use shortcut commands | type in the tasks quickly
+`* * *` | user | input a deadline | keep track of my deadline
+`* * ` | user | list my today tasks | view what tasks I have to do today
 `* * ` | user | prioritize my task | know this task is more important to do
+`* * ` | user | remove the priority of task | remove task from priority list
 `* * ` | user | list priority tasks | See all the urgent tasks I have to do
 `* * ` | Advanced user | use shortcut commands | type in the tasks quickly
 `* * ` | user | block a date and time for an unconfirmed event
  | deal with the confirmed task/event when I am certain
-
-
+`* * ` | user | list block tasks | See all the block tasks in task manager 
+`* * ` | user | delete a blocked date and time event | remove an unconfirmed event when the event is confirmed to be cancelled
+`* * ` | user | delete multiple to-do items at one go | I can quickly delete multiple items
 `* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
 `*` | user | see my google calendar | view my tasks in a calender format
 `*` | user | get a reminder to do a certain task | remind to do a task without having to forget
@@ -424,8 +430,8 @@ Use case ends.
   > 2c1. A window popup warning will be shown to confirm user’s request
   > 2c2. User click ok
   > Use case ends
-   2c2.1 User click no
-Use case ends.
+   > 2c2.1 User click no
+  > Use case ends.
 
 
 #### Use Case: Search for existing task
@@ -439,14 +445,14 @@ Use case ends
 **Extensions**
 
 2a. List is empty
-  2a1. System shows a message that indicates the command has been executed
-  Use case ends
+  > 2a1. System shows a message that indicates the command has been executed
+  > Use case ends
 4a. Invalid format
-4a1. System shows an error message
-Use case resumes at step 3
+  > 4a1. System shows an error message
+  > Use case resumes at step 3
 4b. Task does not exist
-  4b1. System shows an error message
-  Use case resumes at step 3
+  > 4b1. System shows an error message
+  > Use case resumes at step 3
 
 
 
@@ -454,23 +460,23 @@ Use case resumes at step 3
 
 **MSS**
 
-3.  User searches for an existing task
-4.  System display the task
-5.  User enters the delete command with task ID
-6.  System deletes the task with the specified id
+1.  User searches for an existing task
+2.  System display the task
+3.  User enters the delete command with task ID
+4.  System deletes the task with the specified id
 Use case ends
 
 **Extensions**
 
 2a. List is empty
-  2a1. System shows a message that indicates the command has been executed
-  Use case ends
+  > 2a1. System shows a message that indicates the command has been executed
+  > Use case ends
 4a. Invalid format
-4a1. System shows an error message
-Use case resumes at step 3
+> 4a1. System shows an error message
+> Use case resumes at step 3
 4b. Task does not exist
-  4b1. System shows an error message
-  Use case resumes at step 3
+  > 4b1. System shows an error message
+  > Use case resumes at step 3
 
 
 #### Use Case: Deleting multiple task
@@ -486,16 +492,16 @@ Use case ends
 **Extensions**
 
 2a. List is empty
-  2a1. System shows a message that indicates the command has been executed
+  > 2a1. System shows a message that indicates the command has been executed
 Use case ends
 
 4a. Invalid format
-4a1. System shows an error message
-Use case resumes at step 3
+> 4a1. System shows an error message
+> Use case resumes at step 3
 
 4b. Task does not exist in one of the multiple ids
-  4b1. System shows an error message
-Use case resumes at step 3
+  > 4b1. System shows an error message
+> Use case resumes at step 3
 
 
 #### Use Case: Editing an existing task
@@ -511,13 +517,13 @@ Use case ends
 **Extensions**
 
 2a. List is empty
-  2a1. System shows a message that indicates the command has been executed
+  > 2a1. System shows a message that indicates the command has been executed
 4a. Invalid format
-4a1. System shows an error message
-Use case resumes at step 3
+> 4a1. System shows an error message
+> Use case resumes at step 3
 4b. Task does not exist
-  4b1. System shows an error message
-
+  > 4b1. System shows an error message
+  > Use case resumes at step 3
 
 #### Use Case: Mark task as complete
 
@@ -532,16 +538,16 @@ Use case ends
 **Extensions**
 
 2a. List is empty
-  2a1. System shows a message that indicates the command has been executed
-Use case ends
+> 2a1. System shows a message that indicates the command has been executed
+> Use case ends
 
 4a. Invalid format
-4a1. System shows an error message
-Use case resumes at step 3
+> 4a1. System shows an error message
+> Use case resumes at step 3
 
 4b. Task does not exist
-  4b1. System shows an error message
-Use case resumes at step 3
+  > 4b1. System shows an error message
+  > Use case resumes at step 3
 
 
 #### Use Case: List today task
@@ -555,8 +561,8 @@ Use case ends
 **Extensions**
 
 2a. List is empty
-  2a1. System shows a message that indicates the command has been executed
-Use case ends
+  > 2a1. System shows a message that indicates the command has been executed
+ > Use case ends
 
 
 #### Use Case: List all task in chronological order
@@ -570,8 +576,8 @@ Use case ends
 **Extensions**
 
 2a. List is empty
-  2a1. System shows a message that indicates the command has been executed
-Use case ends
+  > 2a1. System shows a message that indicates the command has been executed
+> Use case ends
 
 
 #### Use Case: List of completed task
@@ -585,8 +591,8 @@ Use case ends
 **Extensions**
 
 2a. List is empty
-  2a1. System shows a message that indicates the command has been executed
-Use case ends
+  > 2a1. System shows a message that indicates the command has been executed
+> Use case ends
 
 
 #### Use Case: List all priority task
@@ -600,8 +606,8 @@ Use case ends
 **Extensions**
 
 2a. List is empty
-  2a1. System shows a message that indicates the command has been executed
-Use case ends
+  > 2a1. System shows a message that indicates the command has been executed
+> Use case ends
 
 
 #### Use Case: Learning useful commands
@@ -615,8 +621,8 @@ Use case ends
 **Extensions**
 
 2a. Invalid format
-  2a1. System shows an error message
-Use case ends
+  > 2a1. System shows an error message
+> Use case ends
 
 
 #### Use Case: Block existing task
@@ -632,14 +638,14 @@ Use case ends
 **Extensions**
 
 2a. List is empty
-  2a1. System shows a message that indicates the command has been executed
-Use case ends
+  > 2a1. System shows a message that indicates the command has been executed
+> Use case ends
 4a. Task does not exist
-  4a1. System shows an error message
-  Use case resumes at step 3
+  > 4a1. System shows an error message
+  > Use case resumes at step 3
 4b. Invalid format
-  4b1. System shows an error message
-  Use case resumes at step 3
+  > 4b1. System shows an error message
+  > Use case resumes at step 3
 
 
 #### Use Case: Unblock existing task
@@ -653,11 +659,11 @@ Use case ends
 **Extensions**
 
 2a. Task does not exist
-  2a1. System shows an error message
-  Use case resumes at step 3
+ >  2a1. System shows an error message
+ >  Use case resumes at step 3
 2b. Invalid format
-  2b1. System shows an error message
-  Use case resumes at step 3
+  > 2b1. System shows an error message
+  > Use case resumes at step 3
 2c. Duplicate task with same date and same time found 
 
 #### Use Case: Saving data in another folder
@@ -671,16 +677,16 @@ Use case ends
 **Extensions**
 
 2a. Invalid format
-  2a1. System shows error message
-Use case ends
+  > 2a1. System shows error message
+> Use case ends
 
 2b. Invalid path
-  2b1. System shows error message.
-Use case ends
+ >  2b1. System shows error message.
+> Use case ends
 
 2c. Existing file found
-  2c1. System will overwrite the existing file.
-Use case ends.
+  > 2c1. System will overwrite the existing file.
+> Use case ends.
 
 #### Use case: Changing default storage folder
 
@@ -693,16 +699,16 @@ Use case ends
 **Extensions**
 
 2a. Invalid format
-  2a1. System shows error message
-Use case ends
+  > 2a1. System shows error message
+> Use case ends
 
 2b. Invalid path
-  2b1. System shows error message.
-Use case ends 
+  > 2b1. System shows error message
+> Use case ends 
 
 2c. Existing file found
-  2c1. System will overwrite the existing file.
-Use case ends.
+  > 2c1. System will overwrite the existing file
+> Use case ends.
 
 
 #### Use case: Using data from another folder
@@ -716,11 +722,11 @@ Use case ends
 **Extensions**
 
 2a. Invalid format
-  2a1. System shows an error message
-Use case ends
+ >  2a1. System shows an error message
+> Use case ends
 2b. Invalid file path
-  2b1. System shows an error message
-Use case ends
+  > 2b1. System shows an error message
+> Use case ends
 
 
 #### Use case: Undo last command
@@ -734,12 +740,12 @@ Use case ends
 **Extensions**
 
 2a. Invalid format
-  2a1. System shows an error message
-Use case ends
+  > 2a1. System shows an error message
+> Use case ends
 
 2b. No previous command exists
-  2b1. System shows an error message
-Use case ends
+  > 2b1. System shows an error message
+> Use case ends
 
 #### Use case: Exit application
 
@@ -751,8 +757,8 @@ Use case ends
 **Extensions**
 
 2a. Invalid format
-  2a1. System shows an error message
-Use case ends
+  > 2a1. System shows an error message
+> Use case ends
 
 
 ## Appendix C : Non Functional Requirements
@@ -761,15 +767,15 @@ Use case ends
 2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. Should function on OS,Windows 7 or later.
-5. Should function on a desktop either with or without network or Internet connection.
-6. Should have minimal mouse-click actions.
-7. Should function stand-alone, not as a plug-in to another software.
-8. Should store data locally into a human editable file.
-9. Should function without requiring an installer.
-10. Should be able to hold up to 1000 to-do items.
-11. Should come with automated unit tests and open source code.
-12. Should display command results within 100 milliseconds.
+4. Should function on OS,Windows 7 or later
+5. Should function on a desktop either with or without network or Internet connection
+6. Should have minimal mouse-click actions
+7. Should function stand-alone, not as a plug-in to another software
+8. Should store data locally into a human editable file
+9. Should function without requiring an installer
+10. Should be able to hold up to 1000 to-do items
+11. Should come with automated unit tests and open source code
+12. Should display command results within 100 milliseconds
 
 
 ## Appendix D : Glossary
@@ -827,90 +833,89 @@ Author: ...
 
 Pros:
 
-*1.  Supports offline work. User does not have to depend on Internet connectivity to use application.
-*2.  Supports adding of tasks without deadlines. User’s one-shot approach is met when adding.
-*3.  Supports editing and deleting of existing tasks. User is able to not only reschedule, but also discard tasks that cannot be completed. 
-*4.  Supports adding of deadlines and reminders. User will be reminded when a deadline is approaching.
-*5.  Supports searching and sorting of to-do items. User is able to find specific tasks easily.
-*6.  Supports viewing of tasks that are completed. User is able to know which tasks are completed and which are yet to be completed.
-*7.  Displays tasks in a user-friendly manner.
-*8.  Supports a way to prioritise a task. User is able to view prioritised task at the top of the task list.
-*9.  Supports a way to recover deleted task. User is able to recover deleted task when the task is deleted unintentionally.
-*10. Supports grouping of task. User is able to create lists to group related task together.
-*11. Supports sharing of task. User is able to share task list with other users with internet connection.
-*12. Supports synchronisation. User is able to view updated shared list real-time with internet connection.
-*13. Supports predictive due date input. Wunderlist can understand more colloquial/natural inputs and translate to specific dates, e.g. Wunderlist can detect words like ‘next week’ and add a specific due date to the input task.
+* Supports offline work. User does not have to depend on Internet connectivity to use application.
+* Supports adding of tasks without deadlines. User’s one-shot approach is met when adding.
+* Supports editing and deleting of existing tasks. User is able to not only reschedule, but also discard tasks that cannot be completed. 
+* Supports adding of deadlines and reminders. User will be reminded when a deadline is approaching.
+* Supports searching and sorting of to-do items. User is able to find specific tasks easily.
+* Supports viewing of tasks that are completed. User is able to know which tasks are completed and which are yet to be completed.
+* Displays tasks in a user-friendly manner.
+* Supports a way to prioritise a task. User is able to view prioritised task at the top of the task list.
+* Supports a way to recover deleted task. User is able to recover deleted task when the task is deleted unintentionally.
+* Supports grouping of task. User is able to create lists to group related task together.
+* Supports sharing of task. User is able to share task list with other users with internet connection.
+* Supports synchronisation. User is able to view updated shared list real-time with internet connection.
+* Supports predictive due date input. Wunderlist can understand more colloquial/natural inputs and translate to specific dates, e.g. Wunderlist can detect words like ‘next week’ and add a specific due date to the input task.
 
 
 Cons:
 
-*1. Does not work with event with time slots. User is not able to manage events.
-*2. Does not categorise tasks. User may find it hard to differentiate tasks with and without deadlines.
-*3. Does not support an "Undo" option. Tasks that were incorrectly added has to be edited or deleted manually.
-*4. Does not store data into local storage files but links to an online user account instead. Internet connectivity is still dependent if user wants to work from different computers.
-*5. Does not have one-shot approach when performing functions other than adding a task with no deadlines. Requires a few clicks to perform functions.
+* Does not work with event with time slots. User is not able to manage events
+* Does not categorise tasks. User may find it hard to differentiate tasks with and without deadlines
+* Does not support an "Undo" option. Tasks that were incorrectly added has to be edited or deleted manually
+* Does not store data into local storage files but links to an online user account instead. Internet connectivity is still dependent if user wants to work from different computers
+* Does not have one-shot approach when performing functions other than adding a task with no deadlines
+* Requires a few clicks to perform functions
 
 **Product #2: Google Calendar + Google Task**
 
 Pros:
 
-*1. Supports displaying tasks in different views. Users are able to use multiple views.
-*2. Supports setting notification for tasks. Users are able to set notification timing for specific tasks
-*3. Supports syncing with multiple calendars (Personal + Shared Calendars). Users are able to see tasks/events from multiple calendars in 1 page.
-*4. Supports sharing of calendars. Users are able to share their calendars with other users.
-*5.  Supports integration with smartphones. Users are able to view the tasks from any devices
-*6.  Supports unique holidays calendar, e.g. Holidays in Singapore. Users are able to check on the holidays of the countries they are visiting.
-*7.  Supports daily agenda emails. Users are able to enable daily agenda emails to be reminded on the agenda of that day
-*8.  Supports embedding of calendar. Users are able to embed their Google Calendar to their website/blog.
-*9.  Supports changing the colour of the tab. Users are able to group tasks by changing the colour of the tab
-*10. Supports creating repeated task, e.g. Weekly group meeting at certain timings. Users are able to create events/tasks that will be repeated every day/week/month/year, e.g. timetable
+* Supports displaying tasks in different views. Users are able to use multiple views
+* Supports setting notification for tasks. Users are able to set notification timing for specific tasks
+* Supports syncing with multiple calendars (Personal + Shared Calendars). Users are able to see tasks/events from multiple calendars in 1 page
+* Supports sharing of calendars. Users are able to share their calendars with other users
+* Supports integration with smartphones. Users are able to view the tasks from any devices
+* Supports unique holidays calendar, e.g. Holidays in Singapore. Users are able to check on the holidays of the countries they are visiting
+* Supports daily agenda emails. Users are able to enable daily agenda emails to be reminded on the agenda of that day
+* Supports embedding of calendar. Users are able to embed their Google Calendar to their website/blog
+* Supports changing the colour of the tab. Users are able to group tasks by changing the colour of the tab
+* Supports creating repeated task, e.g. Weekly group meeting at certain timings. Users are able to create events/tasks that will be repeated every day/week/month/year, e.g. timetable
 
 Cons:
 
-*1. Requires a Google Account
-*2. Daily agenda emails are sent only at 5am of that day
-*3. No tutorial on all features, new users will not be able to use the hidden advanced features, e.g. Daily Agenda Emails, task, reminders (By Google Inbox).
-*4. Reminders from Google Inbox are shown only on the smartphones.
+* Requires a Google Account
+* Daily agenda emails are sent only at 5am of that day
+* No tutorial on all features, new users will not be able to use the hidden advanced features, e.g. Daily Agenda Emails, task, reminders (By Google Inbox)
+* Reminders from Google Inbox are shown only on the smartphones
 
 
 **Product #3: to-doist**
 
 Pros:
 
-* 1. Supports adding of tasks that can be marked as 'done'. User is able to mark completed tasks as done.
-* 2. Supports adding of tasks without deadlines. User is able to add task without deadlines with a one shot approach.
-* 3. Supports searching of tasks. User is able to find a task quickly.
-* 4. Supports in different platform. User is able to access the application quickly from the computer or mobile devices.
-* 5. Supports offline environment. User does not have to depend on Internet connectivity to use application.
-* 6. Supports postponement of tasks. User can postpone tasks when the need arise.
+* Supports adding of tasks that can be marked as 'done'. User is able to mark completed tasks as done
+* Supports adding of tasks without deadlines. User is able to add task without deadlines with a one shot approach
+* Supports searching of tasks. User is able to find a task quickly
+* Supports in different platform. User is able to access the application quickly from the computer or mobile devices
+* Supports offline environment. User does not have to depend on Internet connectivity to use application
+* Supports postponement of tasks. User can postpone tasks when the need arise
 
 Cons:
 
-* 1. The user has to search through all existing tasks to look for an empty slot, which is not considered a user-friendly approach. 
-* 2. Blocking of multiple slots for tasks with unconfirmed timings is not supported. User will not be able to schedule tasks with unconfirmed timings.
-* 3. Internet connectivity is required to access the application through other devices.
+* The user has to search through all existing tasks to look for an empty slot, which is not considered a user-friendly approach.
+* Blocking of multiple slots for tasks with unconfirmed timings is not supported. User will not be able to schedule tasks with unconfirmed timings
+* Internet connectivity is required to access the application through other devices
 
 **Product #4: Remember the Milk**
 
 Pros:
 
-* 1. Supports searching of task. User is able to search for task through keywords.
-* 2. Supports adding of task with no deadlines.
-* 3. Supports capturing of tasks to be done after a certain date.
-* 4. Supports capturing of tasks to be done before a certain date, i.e. ‘due date’
-* 5. Supports task repetition.
-* 6. Supports the ‘one shot’ approach through “Smart Add” feature. User is able to use each feature with the respective commands all in a single command. 
-* 7. Support categorisation of tasks through “List” feature, making organisation simpler.
-* 8. Supports offline use.
-* 9. Supports prioritising of tasks.
-* 10. Supports checking off completed tasks.
-* 11. Support multi-platform use: Android, iOS, BlackBerry
+* Supports searching of task. User is able to search for task through keywords
+* Supports adding of task with no deadlines
+* Supports capturing of tasks to be done after a certain date
+* Supports capturing of tasks to be done before a certain date, i.e. ‘due date’
+* Supports task repetition
+* Supports the ‘one shot’ approach through “Smart Add” feature. User is able to use each feature with the respective commands all in a single command
+* Support categorisation of tasks through “List” feature, making organisation simpler
+* Supports offline use
+* Supports prioritising of tasks
+* Supports checking off completed tasks
+* Support multi-platform use: Android, iOS, BlackBerry
 
 Cons:
 
-* 1.  Requires user to sign in.
-* 2.  Certain features are only accessible through purchase.
-* 3.  Does not support automatic release of blocked dates once date is confirmed..
-* 4.  Does not offer a calendar view or any function to easily determine a free time slot for a task.
-
-
+* Requires user to sign in
+* Certain features are only accessible through purchase
+* Does not support automatic release of blocked dates once date is confirmed
+* Does not offer a calendar view or any function to easily determine a free time slot for a task
