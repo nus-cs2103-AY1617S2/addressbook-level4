@@ -1,14 +1,12 @@
 package seedu.toluist.controller;
 
-import seedu.toluist.dispatcher.CommandResult;
-import seedu.toluist.model.CommandAliasConfig;
-import seedu.toluist.model.TodoList;
-import seedu.toluist.ui.Ui;
-import seedu.toluist.ui.UiStore;
-
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import seedu.toluist.dispatcher.CommandResult;
+import seedu.toluist.model.CommandAliasConfig;
+import seedu.toluist.ui.Ui;
 
 /**
  * Alias Controller is responsible for handling alias requests
@@ -29,15 +27,15 @@ public class AliasController extends Controller {
     }
 
     public CommandResult execute(String command) {
-         HashMap<String, String> tokens = tokenize(command);
-         String alias = tokens.get(ALIAS_TERM);
-         String commandPhrase = tokens.get(COMMAND_TERM);
+        HashMap<String, String> tokens = tokenize(command);
+        String alias = tokens.get(ALIAS_TERM);
+        String commandPhrase = tokens.get(COMMAND_TERM);
 
-         if (aliasConfig.setAlias(alias, commandPhrase)) {
-             return new CommandResult(String.format(RESULT_MESSAGE_SUCCESS, alias, commandPhrase));
-         } else {
-             return new CommandResult(String.format(RESULT_MESSAGE_FAILURE, alias, commandPhrase));
-         }
+        if (aliasConfig.setAlias(alias, commandPhrase)) {
+            return new CommandResult(String.format(RESULT_MESSAGE_SUCCESS, alias, commandPhrase));
+        } else {
+            return new CommandResult(String.format(RESULT_MESSAGE_FAILURE, alias, commandPhrase));
+        }
     }
 
     @Override

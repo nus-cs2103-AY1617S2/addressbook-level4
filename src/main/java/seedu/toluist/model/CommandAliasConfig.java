@@ -1,9 +1,9 @@
 package seedu.toluist.model;
 
-import java.util.Optional;
-import java.util.Set;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
 /**
  * A model to manage alias
