@@ -353,7 +353,13 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *`| user | edit a parameter of a task | update a task without needing to delete and re-add it
 `* *`| user | list tasks in order of due date | prioritize what to do next
 `* *`| user | mark tasks as important | prioritize what to do next
+`* *`| user | have a calendar view of all tasks | see how busy I am
+`* *`| user | have my emails converted to tasks or events automatically | save time on manually entering tasks and events
 `*`| user | print out all tasks | keep a paper copy when there is no computer access
+`*`| user | have an automatically prioritized list | have more time to do the items instead of planning
+`*`| user | have an customizable GUI | feel good looking at my tasks and be motivated
+`*`| user | email updates on tasks to people | alert individuals when a task is done
+`*`| user | see percentage of time I spend doing certain types of tasks | have a better understanding of how my time is allocated
 
 ## Appendix B : Use Cases
 
