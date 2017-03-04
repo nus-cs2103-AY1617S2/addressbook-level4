@@ -389,3 +389,31 @@ Cons:
 * Unable to check off completed tasks
 
 * Mainly a calendar app rather than a task managing one
+
+Gmail Tasks
+
+Author: Liu Ziyang
+
+Pros:
+
++ Allows to mark a task as done
+
++ Allows to postpone a task
+
++ Has shortcuts for editing tasks
+
++ Allows self-defined categorizing
+
++ Integrates with Google Calendar
+
+Cons:
+
++ Only works online
+
++ Does not support  command line inputs
+
++ Does not support events
+
++ Does not support undoing an action
+
++ Urgent events cannot stand out
