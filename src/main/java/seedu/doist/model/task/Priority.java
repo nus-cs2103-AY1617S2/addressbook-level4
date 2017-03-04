@@ -27,14 +27,13 @@ public class Priority {
     }
 
     /**
-     * Validates given name.
+     * Validates given string priority.
      *
-     * @throws IllegalValueException if given name string is invalid.
+     * @throws IllegalValueException if given priority string is invalid.
      */
     public Priority(String priority) throws IllegalValueException {
         priority = priority.toUpperCase();
         if (!isValidPriority(priority)) {
-            System.out.println(priority);
             throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
         }
         this.priority = PriorityLevel.valueOf(priority);
@@ -45,7 +44,7 @@ public class Priority {
     }
 
     /**
-     * Returns true if a given integer is a valid priority string
+     * Returns true if a given string is a valid priority
      */
     public static boolean isValidPriority(String priority) {
         return priority.equals(PriorityLevel.VERYIMPORTANT.toString())

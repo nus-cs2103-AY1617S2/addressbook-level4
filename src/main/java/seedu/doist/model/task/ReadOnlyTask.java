@@ -42,11 +42,11 @@ public interface ReadOnlyTask {
     public class ReadOnlyTaskPriorityComparator implements Comparator<ReadOnlyTask> {
 
         @Override
-        public int compare(ReadOnlyTask o1, ReadOnlyTask o2) {
+        public int compare(ReadOnlyTask task1, ReadOnlyTask task2) {
             // Highest priority to lowest priority
-            PriorityLevel o1Priority = o1.getPriority().getPriorityLevel();
-            PriorityLevel o2Priority = o2.getPriority().getPriorityLevel();
-            return o2Priority.compareTo(o1Priority);
+            PriorityLevel task1Priority = task1.getPriority().getPriorityLevel();
+            PriorityLevel task2Priority = task2.getPriority().getPriorityLevel();
+            return task2Priority.compareTo(task1Priority);
         }
     }
 }
