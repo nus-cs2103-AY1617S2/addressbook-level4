@@ -19,7 +19,8 @@ public class SortCommand extends Command {
 
     public static final String DEFAULT_COMMAND_WORD = "sort";
 
-    public static ArrayList<String> commandWords = new ArrayList<>(Arrays.asList(DEFAULT_COMMAND_WORD, "sorted", "sort_by"));
+    public static ArrayList<String> commandWords =
+            new ArrayList<>(Arrays.asList(DEFAULT_COMMAND_WORD, "sorted", "sort_by"));
 
     public static final String MESSAGE_USAGE = DEFAULT_COMMAND_WORD + ":\n" + "Sorts previously listed people." + "\n"
             + "Can sort by priority for now. \n\t"

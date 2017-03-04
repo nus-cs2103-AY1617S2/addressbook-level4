@@ -96,7 +96,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void sortTasksByPriority() {
-        filteredTasks.sort(new ReadOnlyTaskPriorityComparator());
+        todoList.sortTasks(new ReadOnlyTaskPriorityComparator());
     }
 
     @Override
