@@ -32,7 +32,7 @@ Responsibilities: Dev Ops
 -----
 
 #### [Wang Zexin](https://github.com/wangzexin)
-<img src="images/WangZexin.jpg" width="150"><br>
+<img src="images/wangzexin.jpg" width="150"><br>
  Role: Developer <br>
  Responsibilities: Dev Ops
 
