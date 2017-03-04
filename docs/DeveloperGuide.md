@@ -877,40 +877,40 @@ Cons:
 
 Pros:
 
-*1. Supports adding of tasks that can be marked as 'done'. User is able to mark completed tasks as done.
-*2. Supports adding of tasks without deadlines. User is able to add task without deadlines with a one shot approach.
-*3. Supports searching of tasks. User is able to find a task quickly.
-*4. Supports in different platform. User is able to access the application quickly from the computer or mobile devices.
-*5. Supports offline environment. User does not have to depend on Internet connectivity to use application.
-*6. Supports postponement of tasks. User can postpone tasks when the need arise.
+* 1. Supports adding of tasks that can be marked as 'done'. User is able to mark completed tasks as done.
+* 2. Supports adding of tasks without deadlines. User is able to add task without deadlines with a one shot approach.
+* 3. Supports searching of tasks. User is able to find a task quickly.
+* 4. Supports in different platform. User is able to access the application quickly from the computer or mobile devices.
+* 5. Supports offline environment. User does not have to depend on Internet connectivity to use application.
+* 6. Supports postponement of tasks. User can postpone tasks when the need arise.
 
 Cons:
 
-*1. The user has to search through all existing tasks to look for an empty slot, which is not considered a user-friendly approach. 
-*2. Blocking of multiple slots for tasks with unconfirmed timings is not supported. User will not be able to schedule tasks with unconfirmed timings.
-*3. Internet connectivity is required to access the application through other devices.
+* 1. The user has to search through all existing tasks to look for an empty slot, which is not considered a user-friendly approach. 
+* 2. Blocking of multiple slots for tasks with unconfirmed timings is not supported. User will not be able to schedule tasks with unconfirmed timings.
+* 3. Internet connectivity is required to access the application through other devices.
 
 **Product #4: Remember the Milk**
 
 Pros:
 
-*1. Supports searching of task. User is able to search for task through keywords.
-*2. Supports adding of task with no deadlines.
-*3. Supports capturing of tasks to be done after a certain date.
-*4. Supports capturing of tasks to be done before a certain date, i.e. ‘due date’
-*5. Supports task repetition.
-*6. Supports the ‘one shot’ approach through “Smart Add” feature. User is able to use each feature with the respective commands all in a single command. 
-*7. Support categorisation of tasks through “List” feature, making organisation simpler.
-*8. Supports offline use.
-*9. Supports prioritising of tasks.
-*10. Supports checking off completed tasks.
-*11. Support multi-platform use: Android, iOS, BlackBerry
+* 1. Supports searching of task. User is able to search for task through keywords.
+* 2. Supports adding of task with no deadlines.
+* 3. Supports capturing of tasks to be done after a certain date.
+* 4. Supports capturing of tasks to be done before a certain date, i.e. ‘due date’
+* 5. Supports task repetition.
+* 6. Supports the ‘one shot’ approach through “Smart Add” feature. User is able to use each feature with the respective commands all in a single command. 
+* 7. Support categorisation of tasks through “List” feature, making organisation simpler.
+* 8. Supports offline use.
+* 9. Supports prioritising of tasks.
+* 10. Supports checking off completed tasks.
+* 11. Support multi-platform use: Android, iOS, BlackBerry
 
 Cons:
 
-*1.  Requires user to sign in.
-*2.  Certain features are only accessible through purchase.
-*3.  Does not support automatic release of blocked dates once date is confirmed..
-*4.  Does not offer a calendar view or any function to easily determine a free time slot for a task.
+* 1.  Requires user to sign in.
+* 2.  Certain features are only accessible through purchase.
+* 3.  Does not support automatic release of blocked dates once date is confirmed..
+* 4.  Does not offer a calendar view or any function to easily determine a free time slot for a task.
 
 
