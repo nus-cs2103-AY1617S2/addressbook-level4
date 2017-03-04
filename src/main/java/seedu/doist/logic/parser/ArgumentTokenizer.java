@@ -39,6 +39,32 @@ public class ArgumentTokenizer {
         List<PrefixPosition> positions = findAllPrefixPositions(argsString);
         extractArguments(argsString, positions);
     }
+    
+    /**
+     * Returns true if all tokens passed are valid prefixes
+     * @param tokens
+     * @return boolean
+     */
+    public boolean validateTokens(ArrayList<String> tokens){
+        boolean flag = true;
+        for(String token : tokens){
+            flag = flag &&
+        }
+    }
+    
+    /**
+     * Returns true if a token is a valid prefix
+     * @param tokens
+     * @return boolean
+     */    
+    public boolean validateToken(String token){
+        boolean flag = false;
+        ArrayList<Prefix> temp = new ArrayList<Prefix>(prefixes);
+        for(Prefix prefix: prefixes){
+            flag = flag || prefix.getPrefix().equals(token);
+        }
+        return flag;
+    }
 
     /**
      * Returns last value of given prefix.
@@ -126,7 +152,9 @@ public class ArgumentTokenizer {
 
         // Extract the prefixed arguments and preamble (if any)
         for (int i = 0; i < prefixPositions.size() - 1; i++) {
+            
             String argValue = extractArgumentValue(argsString, prefixPositions.get(i), prefixPositions.get(i + 1));
+            System.out.println("argValue : " + argValue);
             saveArgument(prefixPositions.get(i).getPrefix(), argValue);
         }
 
