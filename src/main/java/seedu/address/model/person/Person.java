@@ -3,7 +3,7 @@ package seedu.address.model.person;
 import java.util.Objects;
 
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.label.UniqueLabelList;
 
 /**
  * Represents a Person in the address book.
@@ -16,18 +16,18 @@ public class Person implements ReadOnlyPerson {
     private Email email;
     private Address address;
 
-    private UniqueTagList tags;
+    private UniqueLabelList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, UniqueTagList tags) {
+    public Person(Name name, Phone phone, Email email, Address address, UniqueLabelList tags) {
         assert !CollectionUtil.isAnyNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.tags = new UniqueLabelList(tags); // protect internal tags from changes in the arg list
     }
 
     /**
@@ -78,14 +78,14 @@ public class Person implements ReadOnlyPerson {
     }
 
     @Override
-    public UniqueTagList getTags() {
-        return new UniqueTagList(tags);
+    public UniqueLabelList getTags() {
+        return new UniqueLabelList(tags);
     }
 
     /**
      * Replaces this person's tags with the tags in the argument tag list.
      */
-    public void setTags(UniqueTagList replacement) {
+    public void setTags(UniqueLabelList replacement) {
         tags.setTags(replacement);
     }
 

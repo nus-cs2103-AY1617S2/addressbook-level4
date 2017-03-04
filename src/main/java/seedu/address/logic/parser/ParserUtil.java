@@ -13,12 +13,12 @@ import java.util.stream.Collectors;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.label.Label;
+import seedu.address.model.label.UniqueLabelList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -101,12 +101,12 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.
      */
-    public static UniqueTagList parseTags(Collection<String> tags) throws IllegalValueException {
+    public static UniqueLabelList parseTags(Collection<String> tags) throws IllegalValueException {
         assert tags != null;
-        final Set<Tag> tagSet = new HashSet<>();
+        final Set<Label> tagSet = new HashSet<>();
         for (String tagName : tags) {
-            tagSet.add(new Tag(tagName));
+            tagSet.add(new Label(tagName));
         }
-        return new UniqueTagList(tagSet);
+        return new UniqueLabelList(tagSet);
     }
 }

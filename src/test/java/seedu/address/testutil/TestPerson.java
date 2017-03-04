@@ -1,11 +1,11 @@
 package seedu.address.testutil;
 
+import seedu.address.model.label.UniqueLabelList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.tag.UniqueTagList;
 
 /**
  * A mutable person object. For testing only.
@@ -16,10 +16,10 @@ public class TestPerson implements ReadOnlyPerson {
     private Address address;
     private Email email;
     private Phone phone;
-    private UniqueTagList tags;
+    private UniqueLabelList tags;
 
     public TestPerson() {
-        tags = new UniqueTagList();
+        tags = new UniqueLabelList();
     }
 
     /**
@@ -49,7 +49,7 @@ public class TestPerson implements ReadOnlyPerson {
         this.phone = phone;
     }
 
-    public void setTags(UniqueTagList tags) {
+    public void setTags(UniqueLabelList tags) {
         this.tags = tags;
     }
 
@@ -74,7 +74,7 @@ public class TestPerson implements ReadOnlyPerson {
     }
 
     @Override
-    public UniqueTagList getTags() {
+    public UniqueLabelList getTags() {
         return tags;
     }
 
@@ -89,7 +89,7 @@ public class TestPerson implements ReadOnlyPerson {
         sb.append("a/" + this.getAddress().value + " ");
         sb.append("p/" + this.getPhone().value + " ");
         sb.append("e/" + this.getEmail().value + " ");
-        this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
+        this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.labelName + " "));
         return sb.toString();
     }
 }

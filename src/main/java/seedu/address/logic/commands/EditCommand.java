@@ -6,6 +6,7 @@ import java.util.Optional;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.label.UniqueLabelList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -13,7 +14,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.tag.UniqueTagList;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -81,7 +81,7 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
         Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
         Address updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
-        UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
+        UniqueLabelList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
@@ -95,7 +95,7 @@ public class EditCommand extends Command {
         private Optional<Phone> phone = Optional.empty();
         private Optional<Email> email = Optional.empty();
         private Optional<Address> address = Optional.empty();
-        private Optional<UniqueTagList> tags = Optional.empty();
+        private Optional<UniqueLabelList> tags = Optional.empty();
 
         public EditPersonDescriptor() {}
 
@@ -150,12 +150,12 @@ public class EditCommand extends Command {
             return address;
         }
 
-        public void setTags(Optional<UniqueTagList> tags) {
+        public void setTags(Optional<UniqueLabelList> tags) {
             assert tags != null;
             this.tags = tags;
         }
 
-        public Optional<UniqueTagList> getTags() {
+        public Optional<UniqueLabelList> getTags() {
             return tags;
         }
     }

@@ -10,12 +10,12 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.address.model.label.Label;
+import seedu.address.model.label.UniqueLabelList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.UniquePersonList.DuplicatePersonException;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
 
 /**
  * Wraps all data at the address-book level
@@ -24,7 +24,7 @@ import seedu.address.model.tag.UniqueTagList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-    private final UniqueTagList tags;
+    private final UniqueLabelList tags;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -35,7 +35,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
-        tags = new UniqueTagList();
+        tags = new UniqueLabelList();
     }
 
     public AddressBook() {}
@@ -55,8 +55,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
 
-    public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
-        this.tags.setTags(tags);
+    public void setTags(Collection<Label> tags) throws UniqueLabelList.DuplicateLabelException {
+        this.tags.setLabels(tags);
     }
 
     public void resetData(ReadOnlyAddressBook newData) {
@@ -68,7 +68,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
         try {
             setTags(newData.getTagList());
-        } catch (UniqueTagList.DuplicateTagException e) {
+        } catch (UniqueLabelList.DuplicateLabelException e) {
             assert false : "AddressBooks should not have duplicate tags";
         }
         syncMasterTagListWith(persons);
@@ -115,18 +115,18 @@ public class AddressBook implements ReadOnlyAddressBook {
      *  - points to a Tag object in the master list
      */
     private void syncMasterTagListWith(Person person) {
-        final UniqueTagList personTags = person.getTags();
+        final UniqueLabelList personTags = person.getTags();
         tags.mergeFrom(personTags);
 
         // Create map with values = tag object references in the master list
         // used for checking person tag references
-        final Map<Tag, Tag> masterTagObjects = new HashMap<>();
+        final Map<Label, Label> masterTagObjects = new HashMap<>();
         tags.forEach(tag -> masterTagObjects.put(tag, tag));
 
         // Rebuild the list of person tags to point to the relevant tags in the master tag list.
-        final Set<Tag> correctTagReferences = new HashSet<>();
+        final Set<Label> correctTagReferences = new HashSet<>();
         personTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
-        person.setTags(new UniqueTagList(correctTagReferences));
+        person.setTags(new UniqueLabelList(correctTagReferences));
     }
 
     /**
@@ -149,7 +149,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
 //// tag-level operations
 
-    public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
+    public void addTag(Label t) throws UniqueLabelList.DuplicateLabelException {
         tags.add(t);
     }
 
@@ -167,7 +167,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<Tag> getTagList() {
+    public ObservableList<Label> getTagList() {
         return new UnmodifiableObservableList<>(tags.asObservableList());
     }
 
