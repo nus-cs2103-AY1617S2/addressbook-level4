@@ -24,7 +24,7 @@ public class Priority {
     public Priority() {
         this.priority = DEFAULT_PRIORITY;
     }
-    
+
     /**
      * Validates given name.
      *
