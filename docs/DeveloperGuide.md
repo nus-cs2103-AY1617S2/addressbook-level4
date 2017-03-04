@@ -347,13 +347,47 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
-
-{More to be added}
+`* * *` | user | add events | help myself make tasks more manageable
+`* * *` | user | add tasks | help myself make tasks more manageable
+`* * *` | user | add deadlines | help myself make tasks more manageable
+`* * *` | user | CRUD events, tasks, deadlines | help myself make tasks more manageable
+`* * *` | user | undo last operation | help myself make tasks more manageable
+`* * *` | user | have some flexiblity in commands | help myself make tasks more manageable
+`* * *` | user | simple search for finding an item | help myself make tasks more manageable
+`* * *` | user | view uncompleted/completed tasks | help myself make tasks more manageable
+`* * *` | user | specify which folder data is stored | help myself make tasks more manageable
+`* *` | user | break my tasks into subtasks | help myself make tasks more manageable
+`* *` | user | have a bullet journal workflow | use my favourite workflow more effectively
+`* *` | user | group my todos | arrange them by projects, assignments, classes, etc.
+`* *` | user | retrieve my todos by groups | determine my focus when needed
+`* *` | user | add deadlines for my todos | keep track of when tasks are due
+`* *` | user | view my todos by deadlines | know which ones are more urgent
+`* *` | user | set daily goals of the min no. of completed tasks | have clear targets
+`* *` | user | get reminders of my goals and set their frequency | remember my goals
+`* *` | user | receive meaningful rewards for completing my daily goals | stay motivated
+`* *` | user | have my friends who use the app share their todos with me | keep track of tasks without adding them myself
+`* *` | user | receive a weekly, monthly or annually report of my done tasks and remaining todos | regularly review my efficiency
+`* *` | user | view my done tasks of up to a month | stay accountable and be proud of myself once in a while
+`* *` | user | check if event falls on a local PH | to avoid inconvenience
+`* *` | user | merge multiple events to become subtasks under one event | help myself make tasks more manageable
+`* *` | user | display tasks by date | clearly know what to do at which day
+`* *` | user | add periodic tasks | need not to add one task for many times
+`* *` | user | have short yet clear command words | need not to try very hard to remember them
+`* *` | user | have a shortcut for showing and hiding the main window | need not to look for it when I need it
+`* *` | user | hide the overdue tasks into one single row and unfolded by a click | usually see today's tasks
+`* *` | user | search for certain task by the name or tag | locate the task easily
+`* *` | user | show tasks of certain day | get an idea of what to do on that day
+`* *` | user | divide multiple-days task to several tasks and show them on different days | clearly see each day's tasks
+`* *` | user | only show the days with tasks | need not to scroll through a lot of no-tasks days to find the days with tasks
+`*` | user | have inspirational quotes reminders | feel more motivated when doing my tasks
+`*` | user | see my goals | see how my tasks are in line with them
+`*` | user | read productivity tips | be more productive by trying new things
+`*` | user | see suggestions on how to do tasks | remove barriers that stop me
+`*` | user | see how much time I spend on tasks | know where i'm spending my time
+`*` | user | do tasks via pomodoro | work on my tasks in 25 minute sprints
+`*` | user | have shortcuts for adding tasks | save time using the software
+`*` | user | see advice from influential people | make more meaningful decisions about my day
+`*` | user | see when i'm most efficient | work accordingly and get more things done
 
 ## Appendix B : Use Cases
 
@@ -403,17 +437,66 @@ Use case ends.
 
 ## Appendix E : Product Survey
 
-**Product Name**
+**Google Calendar**
 
-Author: ...
+Author: Bryan Lee
 
 Pros:
 
-* ...
-* ...
+*Google Calendar is easy and fast to set up, especially if you use a Google account
+
+*Clean, minimal interface, easy to invite people to events
+
+*Organize events and appointments via different calendars
 
 Cons:
 
-* ...
-* ...
+*Possible problems communicating with other calendars such as iCal
 
+*Not specifically a task manager, just a calendar
+
+**Momentum**
+
+Author: Aris Huynh
+
+Pros:
+
+*...
+
+Cons:
+
+*...
+
+**Apple's Notes App**
+
+Author: Wang Yu
+
+Pros:
+
+*Apple's built-in Notes App is nothing different from a paper notebook except that it is electronic which makes it capable of storing more than enough notes and deleting notes that are no longer needed. 
+
+*Due to its sustainability, Notes is very suitable for traditional notes takers who are not comfortable with being restricted by commands and forms.
+ 
+*With the Notes App on iCloud.com, users can easily get to see their notes on different platforms if Internet connection is available.
+
+Cons:
+
+*Notes is only available for the Apple OS platform. As our target are MS users, Notes is not an option for them.
+
+*Notes cannot recognize task's data and group them together.
+ 
+*All the updating need to be done by directly manipulating the text, which is quite a bother.
+ 
+*If the user mistakenly edited something wrongly, there is no turning back for them since there is no undo function.
+
+**Calendar in iPhone**
+
+Author: Zhang Heyang
+
+Cons:
+
+*No localisation, for instance in China there is not lunar calendar and no Japanese traditional holidays calendar in Japan.
+
+*Display interface too small, unable to see all events.
+
+*Add/Remove function not user-friendly enough, hard to find.
