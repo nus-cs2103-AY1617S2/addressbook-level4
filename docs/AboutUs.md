@@ -16,7 +16,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Other major contributions:
 * Aspects responsible for:　     　　　　　
     * Ensuring tasks are done properly and on time
-    * Integration: versioning of the code, maintaining teh code repository, integrating various parts of the software to create a whole
+    * Integration: Versioning of the code, maintaining the code repository, integrating various parts of the software to create a whole
 
 -----
 
