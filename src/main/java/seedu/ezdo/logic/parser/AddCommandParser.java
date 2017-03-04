@@ -1,15 +1,11 @@
 package seedu.ezdo.logic.parser;
 
 import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-<<<<<<< HEAD
-import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_TAG;
-=======
 import static seedu.ezdo.logic.parser.CliSyntax.*;
 import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_STARTDATE;
->>>>>>> 6228ae6b03115b0e64fed2b189d86d8b94d2fa7e
 
 import java.util.NoSuchElementException;
 
@@ -28,12 +24,7 @@ public class AddCommandParser {
      * and returns an AddCommand object for execution.
      */
     public Command parse(String args) {
-        ArgumentTokenizer argsTokenizer =
-<<<<<<< HEAD
-                new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
-=======
-                new ArgumentTokenizer(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_STARTDATE, PREFIX_TAG);
->>>>>>> 6228ae6b03115b0e64fed2b189d86d8b94d2fa7e
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_EMAIL, PREFIX_STARTDATE, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         try {
             return new AddCommand(
