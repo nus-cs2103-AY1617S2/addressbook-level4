@@ -51,11 +51,12 @@ Format: `help [COMMAND]`
 
 ### 2.2. Adding an event/deadline/task : `add`
 
-#### 2.2.1. Adding an event : `add event`
+#### 2.2.1. Adding an event : `add ev`
 
 Adds an event to the event list. Undoable.<br>
-Format: `add event DESCRIPTION [s/START_TIME] f/START_DATE [e/END_TIME] [t/END_DATE] [c/COMMENTS]... [l/LOCATION]`
+Format: `add ev DESCRIPTION [s/START_TIME] f/START_DATE [e/END_TIME] [t/END_DATE] [c/COMMENTS]... [l/LOCATION]`
 
+> * `ev` is used as an acronym for "event"
 > * Events must be added with description.
 > * Start date is required, while other fields are optional.
 > * Start date and end date should have format `DD-MM-YY`, e.g. 23-01-17.
@@ -66,14 +67,15 @@ Format: `add event DESCRIPTION [s/START_TIME] f/START_DATE [e/END_TIME] [t/END_D
 
 Examples:
 
-* `add event PhotoShop Workshop s/1900 f/13-02-17 c/take laptop l/CLB`
-* `add event Industrial Talk s/1800 f/03-05-17 e/2000 l/FoS`
+* `add ev PhotoShop Workshop s/1900 f/13-02-17 c/take laptop l/CLB`
+* `add ev Industrial Talk s/1800 f/03-05-17 e/2000 l/FoS`
 
-#### 2.2.2. Adding a deadline : `add deadline`
+#### 2.2.2. Adding a deadline : `add dl`
 
 Adds a deadline to the deadline list. Undoable.<br>
-Format: `add deadline DESCRIPTION b/BY_DATE [e/END_TIME] [c/COMMENTS]... [l/LOCATION]`
+Format: `add dl DESCRIPTION b/BY_DATE [e/END_TIME] [c/COMMENTS]... [l/LOCATION]`
 
+> * `dl` is used as an acronym for "deadline"
 > * Deadlines must be added with description.
 > * By date is required, while other fields are optional.
 > * By date should have format `DD-MM-YY`, e.g. 23-01-17.
@@ -83,14 +85,15 @@ Format: `add deadline DESCRIPTION b/BY_DATE [e/END_TIME] [c/COMMENTS]... [l/LOCA
 
 Examples:
 
-* `add deadline Home Assignment 1 b/21-03-17 c/submit hardcopy l/general office`
-* `add deadline Project Report b/12-04-17 e/2359 c/submit softcopy c/online discussion`
+* `add dl Home Assignment 1 b/21-03-17 c/submit hardcopy l/general office`
+* `add dl Project Report b/12-04-17 e/2359 c/submit softcopy c/online discussion`
 
-#### 2.2.3. Adding a task : `add task`
+#### 2.2.3. Adding a task : `add ts`
 
 Adds a task to the task list. Undoable.<br>
-Format: `add task DESCRIPTION [c/COMMENTS]... [l/LOCATION] [p/PRIORITY]`
+Format: `add ts DESCRIPTION [c/COMMENTS]... [l/LOCATION] [p/PRIORITY]`
 
+> * `ts` is used as an acronym for "task"
 > * Tasks must be added with description.
 > * Other fields are optional.
 > * Tasks can have any number of comments(including 0).
@@ -100,8 +103,8 @@ Format: `add task DESCRIPTION [c/COMMENTS]... [l/LOCATION] [p/PRIORITY]`
 
 Examples:
 
-* `add task Review CS2103 c/watch webcast p/1`
-* `add task Buy fruits l/FairPrice p/2`
+* `add ts Review CS2103 c/watch webcast p/1`
+* `add ts Buy fruits l/FairPrice p/2`
 
 ### 2.3. Listing all events/deadlines/tasks : `list`
 
@@ -122,10 +125,10 @@ Examples:
 
 ### 2.4. Editing an event/deadline/task : `edit`
 
-#### 2.4.1. Editing an event : `edit event`
+#### 2.4.1. Editing an event : `edit ev`
 
 Edits an existing event in WhatsLeft. Undoable.<br>
-Format: `edit event INDEX [DESCRIPTION] [s/START_TIME] [f/START_DATE] [e/END_TIME] [t/END_DATE] [c/COMMENTS]... [l/LOCATION]`
+Format: `edit ev INDEX [DESCRIPTION] [s/START_TIME] [f/START_DATE] [e/END_TIME] [t/END_DATE] [c/COMMENTS]... [l/LOCATION]`
 
 > * Edits the event at the specified `INDEX`.
     The index refers to the index number shown in the last event ing.<br>
@@ -137,17 +140,17 @@ Format: `edit event INDEX [DESCRIPTION] [s/START_TIME] [f/START_DATE] [e/END_TIM
 
 Examples:
 
-* `edit event 2 s/0900 e/1300`<br>
+* `edit ev 2 s/0900 e/1300`<br>
   Edits the start time and end time of the 2nd event to be `0900` and `1300` respectively.
 
-* `edit event 3 Project Discussion c/`<br>
+* `edit ev 3 Project Discussion c/`<br>
   Edits the description of the 3rd event to be `Project Discussion` and clears all comments.
 
 
-#### 2.4.2. Editing a deadline : `edit deadline`
+#### 2.4.2. Editing a deadline : `edit dl`
 
 Edits an existing deadline in WhatsLeft. Undoable.<br>
-Format: `edit deadline INDEX [DESCRIPTION] [b/BY_DATE] [e/END_TIME] [c/COMMENTS]... [l/LOCATION]`
+Format: `edit dl INDEX [DESCRIPTION] [b/BY_DATE] [e/END_TIME] [c/COMMENTS]... [l/LOCATION]`
 
 > * Edits the deadline at the specified `INDEX`.
     The index refers to the index number shown in the last deadline listing.<br>
@@ -159,16 +162,16 @@ Format: `edit deadline INDEX [DESCRIPTION] [b/BY_DATE] [e/END_TIME] [c/COMMENTS]
 
 Examples:
 
-* `edit deadline 1 e/2200`<br>
+* `edit dl 1 e/2200`<br>
   Edits the end time of the 1st deadline to be `2200`.
 
-* `edit deadline 3 c/submit PDF file l/`<br>
+* `edit dl 3 c/submit PDF file l/`<br>
   Edits the comments of the 3rd deadline to be `submit PDF file` and clears the location.
 
-#### 2.4.3. Editing a task : `edit task`
+#### 2.4.3. Editing a task : `edit ts`
 
 Edits an existing task in WhatsLeft. Undoable.<br>
-Format: `edit task INDEX [DESCRIPTION] [c/COMMENTS]... [l/LOCATION] [p/PRIORITY]`
+Format: `edit ts INDEX [DESCRIPTION] [c/COMMENTS]... [l/LOCATION] [p/PRIORITY]`
 
 > * Edits the task at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
@@ -180,10 +183,10 @@ Format: `edit task INDEX [DESCRIPTION] [c/COMMENTS]... [l/LOCATION] [p/PRIORITY]
 
 Examples:
 
-* `edit task 5 l/discussion room 3`<br>
+* `edit ts 5 l/discussion room 3`<br>
   Edits the location of the 5th task to be `discussion room 3`.
 
-* `edit task 3 p/3 c/`<br>
+* `edit ts 3 p/3 c/`<br>
   Edits the priority of the 3rd task to be 3 and clears the comments.
 
 ### 2.5. Finding all events/deadlines/tasks containing any keyword in their description : `find`
@@ -193,7 +196,7 @@ Format: `find [TYPE] KEYWORD [MORE_KEYWORDS]`
 
 > * Type is optional.
 > * If type is not specified, 3 separated lists of matched events, deadlines and tasks will appear.
-> * Type should be `event`, `deadline` or `task`.
+> * Type should be `ev`, `dl` or `ts`.
 > * The search is case insensitive. e.g `discussion` will match `Discussion`
 > * The order of the keywords does not matter. e.g. `Project Discussion` will match `Discussion Project`
 > * Only the description is searched.
@@ -205,7 +208,7 @@ Examples:
 * `find project discussion`<br>
   Returns 3 separated lists of events/deadlines/tasks having description `project` or `discussion`.
 
-* `find task survey`<br>
+* `find ts survey`<br>
   Returns a task list of tasks having description `survey`.
 
 ### 2.6. Finding all events/deadlines happening on a certain day : `on`
@@ -229,7 +232,7 @@ Views the specified event/deadline/task form the event/deadline/task list.
 
 Format: `view TYPE INDEX`
 
-> * Type should be `event`, `deadline` or `task`.
+> * Type should be `ev`, `dl` or `ts`.
 > * Views the event/deadline/task at the specified `INDEX`.
 > * The index refers to the index number shown in the most recent event/deadline/task listing.
 > * The index **must be a positive integer** 1, 2, 3, ...
@@ -237,7 +240,7 @@ Format: `view TYPE INDEX`
 Examples:
 
 * `list`<br>
-  `view event 2`<br>
+  `view ev 2`<br>
   Views the 2nd event in the event list.
 
 ### 2.8. Deleting an event/deadline/task : `delete`
@@ -245,7 +248,7 @@ Examples:
 Deletes the specified event/deadline/task from WhatsLeft. Undoable.<br>
 Format: `delete TYPE INDEX`
 
-> * Type should be `event`, `deadline` or `task`.
+> * Type should be `ev`, `dl` or `ts`.
 > * Deletes the event/deadline/task at the specified `INDEX`.
 > * The index refers to the index number shown in the most recent event/deadline/task listing.
 > * The index **must be a positive integer** 1, 2, 3, ...
@@ -253,10 +256,10 @@ Format: `delete TYPE INDEX`
 Examples:
 
 * `list`<br>
-  `delete event 2`<br>
+  `delete ev 2`<br>
   Deletes the 2nd event in the event list.
 * `find exam`<br>
-  `delete event 1`<br>
+  `delete ev 1`<br>
   Deletes the 1st event in the results of the `find` command.
 
 ### 2.9. Finishing an event/deadline/task : `finish`
@@ -264,7 +267,7 @@ Examples:
 Finishes the specified event/deadline/task in WhatsLeft. Undoable.<br>
 Format: `finish TYPE INDEX`
 
-> * Type should be `event`, `deadline` or `task`.
+> * Type should be `ev`, `dl` or `ts`.
 > * Finishes the event at the specified `INDEX`.
 > * The index refers to the index number shown in the most recent event listing.
 > * The index **must be a positive integer** 1, 2, 3, ...
@@ -272,10 +275,10 @@ Format: `finish TYPE INDEX`
 Examples:
 
 * `list`<br>
-  `finish task 2`<br>
+  `finish ts 2`<br>
   Finishes the 2nd task in the task list.
 * `find exam`<br>
-  `delete event 1`<br>
+  `delete ev 1`<br>
   Finishes the 1st event in the results of the `find` command.
 
 ### 2.10. Clearing all entries : `clear`
@@ -285,14 +288,14 @@ Format: `clear [TYPE]`
 
 > * Type is optional.
 > * If type is not specified, all events, deadlines and tasks in WhatsLeft will be removed.
-> * Type should be `event`, `deadline` or `task`.
+> * Type should be `ev`, `dl` or `ts`.
 
 Examples:
 
 * `clear` <br>
   Removes all events, deadlines and tasks in WhatsLeft.
 
-* `clear deadline`<br>
+* `clear dl`<br>
   Removes all deadlines in WhatsLeft.
 
 ### 2.11. Undoing the latest command : `undo`
@@ -305,7 +308,7 @@ Format: `undo`
 
 Examples:
 
-* `finish task 4`<br>
+* `finish ts 4`<br>
   `undo`<br>
   Undoes finishing task 4.
 
@@ -319,7 +322,7 @@ Format: `redo`
 
 Examples:
 
-* `edit deadline 2 b/23-04-17`<br>
+* `edit dl 2 b/23-04-17`<br>
   `undo`<br>
   `redo`<br>
   Reverses the previous undo command.
@@ -344,26 +347,26 @@ There is no need to save manually.
 
 * **Help** : `help` <br>
 
-* **Add Event** : `add event DESCRIPTION [s/START_TIME] f/START_DATE [e/END_TIME] [t/END_DATE] [c/COMMENTS]... [l/LOCATION]` <br>
-  e.g. `add event Industrial Talk s/1800 f/03-05-17 e/2000 l/FoS`
+* **Add Event** : `add ev DESCRIPTION [s/START_TIME] f/START_DATE [e/END_TIME] [t/END_DATE] [c/COMMENTS]... [l/LOCATION]` <br>
+  e.g. `add ev Industrial Talk s/1800 f/03-05-17 e/2000 l/FoS`
 
-* **Add Deadline** : `add deadline DESCRIPTION b/BY_DATE [e/END_TIME] [c/COMMENTS]... [l/LOCATION]`<br>
-  e.g. `add deadline Home Assignment 1 b/21-03-17 c/submit hardcopy l/general office`
+* **Add Deadline** : `add dl DESCRIPTION b/BY_DATE [e/END_TIME] [c/COMMENTS]... [l/LOCATION]`<br>
+  e.g. `add dl Home Assignment 1 b/21-03-17 c/submit hardcopy l/general office`
 
-* **Add Task** : `add task DESCRIPTION [c/COMMENTS]... [l/LOCATION] [p/PRIORITY]`<br>
-  e.g. `add task Buy fruits l/FairPrice p/2`
+* **Add Task** : `add ts DESCRIPTION [c/COMMENTS]... [l/LOCATION] [p/PRIORITY]`<br>
+  e.g. `add ts Buy fruits l/FairPrice p/2`
 
 * **List** : `list [TYPE]` <br>
-  e.g. `list deadline`
+  e.g. `list dl`
 
-* **Edit Event** : `edit event INDEX [DESCRIPTION] [s/START_TIME] [f/START_DATE] [e/END_TIME] [t/END_DATE] [c/COMMENTS]... [l/LOCATION]`<br>
-  e.g. `edit event 3 Project Discussion c/`
+* **Edit Event** : `edit ev INDEX [DESCRIPTION] [s/START_TIME] [f/START_DATE] [e/END_TIME] [t/END_DATE] [c/COMMENTS]... [l/LOCATION]`<br>
+  e.g. `edit ev 3 Project Discussion c/`
 
-* **Edit Deadline** : `edit deadline INDEX [DESCRIPTION] [b/BY_DATE] [e/END_TIME] [c/COMMENTS]... [l/LOCATION]`<br>
-  e.g. `edit deadline 1 e/2200`
+* **Edit Deadline** : `edit dl INDEX [DESCRIPTION] [b/BY_DATE] [e/END_TIME] [c/COMMENTS]... [l/LOCATION]`<br>
+  e.g. `edit dl 1 e/2200`
 
-* **Edit Task** : `edit task INDEX [DESCRIPTION] [c/COMMENTS]... [l/LOCATION] [p/PRIORITY]`<br>
-  e.g. `edit task 5 l/discussion room 3`
+* **Edit Task** : `edit ts INDEX [DESCRIPTION] [c/COMMENTS]... [l/LOCATION] [p/PRIORITY]`<br>
+  e.g. `edit ts 5 l/discussion room 3`
 
 * **Find** : `find [TYPE] KEYWORD [MORE_KEYWORDS]` <br>
   e.g. `find exam CS2103`
@@ -372,16 +375,16 @@ There is no need to save manually.
   e.g. `on 23-04`
 
 * **View** : `view TYPE INDEX`<br>
-  e.g. `view event 2`
+  e.g. `view ev 2`
 
 * **Delete** : `delete TYPE INDEX` <br>
-  e.g. `delete task 3`
+  e.g. `delete ts 3`
 
 * **Finish** : `finish TYPE INDEX`<br>
-  e.g. `finish task 2`
+  e.g. `finish ts 2`
 
 * **Clear** : `clear [TYPE]`<br>
-  e.g. `clear deadline`
+  e.g. `clear dl`
 
 * **Undo** : `undo`
 
