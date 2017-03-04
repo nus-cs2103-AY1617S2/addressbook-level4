@@ -11,7 +11,7 @@ We are a team based in the [School of Computing, National University of Singapor
 -----
 
 #### [Yan Xiaoxuan](https://github.com/Matilda-Yxx)
-<img src="images/YanXiaoxuan.jpg" width="150"><br>
+<img src="images/matilda-yxx.jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: UI
 
