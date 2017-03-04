@@ -4,7 +4,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 #### [Johann Wong Jun Guo](https://github.com/Jslyfer) <br>
-<img src="images/jslyfer.jpg" width="150"rotate ="90"><br>
+<img src="images/jslyfer.jpg" width="150"><br>
 **Role**: Project Advisor
 
 -----
