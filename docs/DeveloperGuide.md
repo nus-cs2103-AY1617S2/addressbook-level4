@@ -1,4 +1,4 @@
-# Task Manager - Developer Guide
+# Fast Task - Developer Guide
 
 By : `Team CS2103JAN2017-F11-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
