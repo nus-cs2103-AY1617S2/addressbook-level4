@@ -8,7 +8,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Name;
-import seedu.address.model.task.ReadOnlyPerson;
+import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniquePersonList;
 
@@ -48,13 +48,13 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
+        List<ReadOnlyTask> lastShownList = model.getFilteredPersonList();
 
         if (filteredPersonListIndex >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        ReadOnlyPerson personToEdit = lastShownList.get(filteredPersonListIndex);
+        ReadOnlyTask personToEdit = lastShownList.get(filteredPersonListIndex);
         Task editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         try {
@@ -70,7 +70,7 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Task createEditedPerson(ReadOnlyPerson personToEdit,
+    private static Task createEditedPerson(ReadOnlyTask personToEdit,
                                              EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
