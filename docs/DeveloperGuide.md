@@ -375,7 +375,7 @@ Priority | As a ... | I want to ... | So that I can...
 `*` | user | see the autocomplete messages when I type | know what I can type
 `*` | advanced user | change the appearance of the user interface | personalize the view
 `*` | user | view all the past due tasks | get to know what task is left undone
-`*` | user | specify its parent list when adding a task | group tasks that belong to the same category
+`*` | user | specify its list when adding a task | group tasks that belong to the same category
 
 {More to be added}
 
