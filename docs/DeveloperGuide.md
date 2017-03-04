@@ -346,21 +346,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-<<<<<<< HEAD
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`* *` | user | add label to tasks | organise my tasks into different groups
-`* *` | user | edit a task and change its labels | organise my tasks' groups with flexibility
-`* *` | user | see tasks filtered by tags | know all the tasks labeled with a particular tag
-`* *` | user | have a calendar view of all tasks | get an intuitive understanding of my schedules.
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
-`*` | advanced user | create subtasks within a task | break down a complicated task into smaller ones
-`*` | advanced user | associate a task with collaborators | know which tasks are related to a particular person
-`*` | advanced user | see tasks filtered by collaborators | be reminded of the people involved in a task
-=======
+
 `* * *` | user | see usage instructions | refer to instructions when I forget how to use the App
 `* * *` | user | add a new task with description only | remember what I have to do
 `* * *` | user | add a new task with description and deadline | remember what I have to do before stipulated date/time
@@ -392,7 +378,6 @@ Priority | As a ... | I want to ... | So that I can...
 `*` | advanced user | create subtasks within a task | break down complicated tasks into smaller ones
 `*` | user | find tasks in relation to collaborators | find tasks related to a person and possibly combine a few tasks in a meeting
 `*` | user with many tasks | see graphical overview of tasks | plan better
->>>>>>> 942514ca2bac53eea4b86398905cfec83b19ff04
 
 {More to be added}
 
