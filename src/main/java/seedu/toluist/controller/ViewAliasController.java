@@ -1,7 +1,7 @@
 package seedu.toluist.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -26,7 +26,7 @@ public class ViewAliasController extends Controller {
     }
 
     public CommandResult execute(String command) {
-        HashMap<String, String> aliasMapping = aliasConfig.getAliasMapping();
+        Map<String, String> aliasMapping = aliasConfig.getAliasMapping();
         return new CommandResult(getAliasCommandResult(aliasMapping));
     }
 
@@ -39,7 +39,7 @@ public class ViewAliasController extends Controller {
         return new String[] { COMMAND_WORD };
     }
 
-    private String getAliasCommandResult(HashMap<String, String> aliasMapping) {
+    private String getAliasCommandResult(Map<String, String> aliasMapping) {
         ArrayList<String> lines = new ArrayList<>();
 
         SortedSet<String> aliases = new TreeSet<>(aliasMapping.keySet());

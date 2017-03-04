@@ -34,6 +34,7 @@ public class CommandDispatcher extends Dispatcher {
     private final CommandAliasConfig aliasConfig = CommandAliasConfig.getInstance();
 
     public CommandDispatcher() {
+        super();
         aliasConfig.setReservedKeywords(getControllerKeywords());
     }
 

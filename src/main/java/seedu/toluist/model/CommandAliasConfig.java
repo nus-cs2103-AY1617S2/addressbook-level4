@@ -2,6 +2,7 @@ package seedu.toluist.model;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -11,18 +12,18 @@ import java.util.Set;
 public class CommandAliasConfig {
     private static CommandAliasConfig instance;
 
+    private Map<String, String> aliasMapping = new HashMap<>();
+    private Set<String> reservedKeywords = new HashSet<>();
+
+    public Map<String, String> getAliasMapping() {
+        return aliasMapping;
+    }
+
     public static CommandAliasConfig getInstance() {
         if (instance == null) {
             instance = new CommandAliasConfig();
         }
         return instance;
-    }
-
-    private HashMap<String, String> aliasMapping = new HashMap<>();
-    private Set<String> reservedKeywords = new HashSet<>();
-
-    public HashMap<String, String> getAliasMapping() {
-        return aliasMapping;
     }
 
     /**
