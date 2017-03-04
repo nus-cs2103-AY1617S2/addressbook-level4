@@ -10,19 +10,19 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.Parser;
 import seedu.address.model.Model;
-import seedu.address.model.person.ReadOnlyTask;
+import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.storage.Storage;
 
 /**
  * The main LogicManager of the app.
  */
-public class LogicManagerRf extends ComponentManager implements Logic {
-    private final Logger logger = LogsCenter.getLogger(LogicManagerRf.class);
+public class LogicManager extends ComponentManager implements Logic {
+    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
     private final Parser parser;
 
-    public LogicManagerRf(Model model, Storage storage) {
+    public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.parser = new Parser();
     }
