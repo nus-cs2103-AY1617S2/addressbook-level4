@@ -1,6 +1,6 @@
-# AddressBook Level 4 - User Guide
+# TypeTask - User Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team T09-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `JAN 2016`  &nbsp;&nbsp;&nbsp;&nbsp;
 
 ---
 
@@ -16,18 +16,18 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
    > Having any Java 8 version is not enough. <br>
    > This app will not work with earlier versions of Java 8.
 
-1. Download the latest `addressbook.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for your Address Book.
+1. Download the latest `TypeTask.jar` from the [releases](../../../releases) tab.
+2. Copy the file to the folder you want to use as the home folder for your Task Manager.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
    > <img src="images/Ui.png" width="600">
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
-   * **`list`** : lists all contacts
-   * **`add`**` John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01` :
-     adds a contact named `John Doe` to the Address Book.
-   * **`delete`**` 3` : deletes the 3rd contact shown in the current list
+   * **`list`** : lists all tasks
+   * **`add`**` CS2103T Meeting d/12022107 t/11:00am` :
+     adds a task named `CS2103T Meeting` to the Task Manager.
+   * **`delete`**` 3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
@@ -50,66 +50,66 @@ Format: `help`
 ### 2.2. Adding a person: `add`
 
 Adds a person to the address book<br>
-Format: `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Format: `add TASK d/DATE t/TIME [f/TAG]...`
 
-> Persons can have any number of tags (including 0)
+> Tasks can have any number of tags (including 0)
 
 Examples:
 
-* `add John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01`
-* `add Betsy Crowe t/friend e/betsycrowe@gmail.com a/Newgate Prison p/1234567 t/criminal`
+* `add CS2103T Meeting d/12022107 t/11:00am`
+* `add Buy Notebook f/Shopping t/11:00am`
 
-### 2.3. Listing all persons : `list`
+### 2.3. Listing all tasks : `list`
 
-Shows a list of all persons in the address book.<br>
+Shows a list of all tasks in the Task Manager.<br>
 Format: `list`
 
-### 2.4. Editing a person : `edit`
+### 2.4. Editing a task : `edit`
 
-Edits an existing person in the address book.<br>
-Format: `edit INDEX [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Edits an existing task in the address book.<br>
+Format: `edit INDEX [TASK] [d/DATE] [t/TIME] [f/TAG]...`
 
-> * Edits the person at the specified `INDEX`.
-    The index refers to the index number shown in the last person listing.<br>
+> * Edits the task at the specified `INDEX`.
+    The index refers to the index number shown in the last task listing.<br>
     The index **must be a positive integer** 1, 2, 3, ...
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
-> * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-> * You can remove all the person's tags by typing `t/` without specifying any tags after it. 
+> * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
+> * You can remove all the task's tags by typing `t/` without specifying any tags after it. 
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@yahoo.com`<br>
-  Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@yahoo.com` respectively.
+* `edit 1 d/02122017 t/11:00am`<br>
+  Edits the date and time of the 1st task to be `02122017` and `11:00am` respectively.
 
-* `edit 2 Betsy Crower t/`<br>
-  Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `edit 2 CS2013T Meeting t/`<br>
+  Edits the label of the 2nd task to be `CS2013T Meeting` and clears all existing tags.
 
-### 2.5. Finding all persons containing any keyword in their name: `find`
+### 2.5. Finding all tasks containing any keyword in their label: `find`
 
-Finds persons whose names contain any of the given keywords.<br>
+Finds tasks whose labels contain any of the given keywords.<br>
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-> * The search is case sensitive. e.g `hans` will not match `Hans`
-> * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+> * The search is case sensitive. e.g `meeting` will not match `Meeting`
+> * The order of the keywords does not matter. e.g. `Meeting Tutor` will match `Tutor Meeting`
 > * Only the name is searched.
-> * Only full words will be matched e.g. `Han` will not match `Hans`
-> * Persons matching at least one keyword will be returned (i.e. `OR` search).
-    e.g. `Hans` will match `Hans Bo`
+> * Only full words will be matched e.g. `Meeting` will not match `Meetings`
+> * Tasks matching at least one keyword will be returned (i.e. `OR` search).
+    e.g. `Meeting` will match `Meeting Tutor`
 
 Examples:
 
-* `find John`<br>
-  Returns `John Doe` but not `john`
-* `find Betsy Tim John`<br>
-  Returns Any person having names `Betsy`, `Tim`, or `John`
+* `find Study`<br>
+  Returns `Study Math` but not `Study`
+* `find Meeting Study Shop`<br>
+  Returns Any tasks having labels `Meeting`, `Study`, or `Shop`
 
-### 2.6. Deleting a person : `delete`
+### 2.6. Deleting a task : `delete`
 
-Deletes the specified person from the address book. Irreversible.<br>
+Deletes the specified task from the address book. Irreversible.<br>
 Format: `delete INDEX`
 
-> Deletes the person at the specified `INDEX`. <br>
+> Deletes the task at the specified `INDEX`. <br>
 > The index refers to the index number shown in the most recent listing.<br>
 > The index **must be a positive integer** 1, 2, 3, ...
 
@@ -117,32 +117,32 @@ Examples:
 
 * `list`<br>
   `delete 2`<br>
-  Deletes the 2nd person in the address book.
-* `find Betsy`<br>
+  Deletes the 2nd task in the Task Manager.
+* `find Meeting`<br>
   `delete 1`<br>
-  Deletes the 1st person in the results of the `find` command.
+  Deletes the 1st task in the results of the `find` command.
 
-### 2.7. Select a person : `select`
+### 2.7. Select a task : `done`
 
-Selects the person identified by the index number used in the last person listing.<br>
-Format: `select INDEX`
+Marks the task as done identified by the index number used in the last task listing.<br>
+Format: `Done INDEX`
 
-> Selects the person and loads the Google search page the person at the specified `INDEX`.<br>
+> Completes the task at the specified `INDEX` and removes it from the list.<br>
 > The index refers to the index number shown in the most recent listing.<br>
 > The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 
 * `list`<br>
-  `select 2`<br>
-  Selects the 2nd person in the address book.
-* `find Betsy` <br>
-  `select 1`<br>
-  Selects the 1st person in the results of the `find` command.
+  `done 2`<br>
+  Removes the 2nd task in the Task Manager.
+* `find Meeting` <br>
+  `done 1`<br>
+  Removes the 1st task in the results of the `find` command.
 
 ### 2.8. Clearing all entries : `clear`
 
-Clears all entries from the address book.<br>
+Clears all entries from the Task Manager.<br>
 Format: `clear`
 
 ### 2.9. Exiting the program : `exit`
@@ -152,7 +152,7 @@ Format: `exit`
 
 ### 2.10. Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data.<br>
+Task Manager data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
 ## 3. FAQ
@@ -163,8 +163,8 @@ There is no need to save manually.
 
 ## 4. Command Summary
 
-* **Add**  `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` <br>
-  e.g. `add James Ho p/22224444 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+* **Add**  `add TASK d/DATE t/TIME [f/TAG]...` <br>
+  e.g. `add Shop Shoes d/20082017 t/4:30pm t/Shopping t/Party`
 
 * **Clear** : `clear`
 
@@ -172,7 +172,7 @@ There is no need to save manually.
    e.g. `delete 3`
 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
-  e.g. `find James Jake`
+  e.g. `find Study Math`
 
 * **List** : `list` <br>
   e.g.
