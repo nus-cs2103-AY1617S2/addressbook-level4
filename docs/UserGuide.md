@@ -53,7 +53,7 @@ Adds an event<br>
 Format: `add event TODO s/STARTTIME e/ENDTIME`
 
 Adds a deadline<br>
-Format: `add deadline TODO d/DEADLINE`
+Format: `add dl TODO d/DEADLINE`
 
 Examples:
 
@@ -67,19 +67,19 @@ Shows a list of all todos.<br>
 Format: `list`
 
 Shows a list of all uncompleted todos.<br>
-Format: `list -u`
+Format: `list u`
 
 Shows a list of all completed todos.<br>
-Format: `list -c`
+Format: `list c`
 
 Shows a list of all tasks.<br>
-Format: `list -t`
+Format: `list t`
 
 Shows a list of all deadlines.<br>
-Format: `list -d`
+Format: `list d`
 
 Shows a list of all events.<br>
-Format: `list -e`
+Format: `list e`
 
 ### 2.4. Editing a todo : `edit`
 
@@ -140,38 +140,43 @@ Examples:
   `delete 1`<br>
   Deletes the 1st todo in the results of the `find` command.
 
-### 2.7. Select a todo : `select`
+### 2.7. Mark todo as completed : `complete`
 
-Selects the todo identified by the index number used in the last todo listing.<br>
-Format: `select INDEX`
+Marks the specified todo as completed.<br>
+Format: `complete INDEX`
 
-> Selects the todo
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+### 2.8. Undo last command : `undo`
 
-Examples:
+Undoes last command if it involves changing a todo.<br>
+Format: `undo`
 
-* `list`<br>
-  `select 2`<br>
-  Selects the 2nd todo in the listing.
-* `find Dog` <br>
-  `select 1`<br>
-  Selects the 1st todo in the results of the `find` command.
-
-### 2.8. Clearing all entries : `clear`
+### 2.9. Clearing all entries : `clear`
 
 Clears all todos. Irreversible.<br>
 Format: `clear`
 
-### 2.9. Exiting the program : `exit`
+### 2.10. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.10. Saving the data
+### 2.11. Saving the data
 
 Todo data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
+
+### 2.12 Setting the data save location : `save`
+
+Sets the save location file containing todo data.<br>
+Format: `save PATH_TO_FILE`
+
+> Changes the file save location to specified `PATH_TO_FILE`. <br>
+
+If the path does not exist it will be created
+
+Examples:
+
+* `save Documents/savefiles/`
 
 ## 3. FAQ
 
