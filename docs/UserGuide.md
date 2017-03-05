@@ -56,7 +56,7 @@ The statuses of a task is shown as below:
 > * Items with `...` after them can have multiple instances.
 > * The order of optional parameters are flexible.
 
-### Viewing help
+### Viewing help: `help` 
 
 Shows a list of all commands in iManager.<br>
 
@@ -191,7 +191,7 @@ Format : `exit`
 
  Command | Format  | Description
 -------- | -------- | -------- 
-[help](#viewing-help) | `help`| Opens a help page
+[help](#viewing-help:-`help`) | `help`| Opens a help page
 [add](#Adding-a-task:-`add`) | `add NAME [PRIORITY] [/t TAG1, TAG2…]`| Adds a floating task with priority and tags
  | `add NAME at START_DATETIME [PRIORITY] [/t TAG1, TAG2…]`| Adds a pending task with only start time, priority and tags
  | `add NAME by END_DATETIME [PRIORITY] [/t TAG1, TAG2…]`| Adds a pending task with only deadline, priority and tags
