@@ -1,6 +1,6 @@
-# AddressBook Level 4 - Developer Guide
+# myPotato - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team myPotato`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -403,9 +403,9 @@ Priority | As a ... | I want to ... | So that I can...
 **MSS**
 
 1. User requests to list all tasks
-2. myPotato shows a list of persons
-3. User requests to delete a specific person in the list
-4. myPotato deletes the person <br>
+2. myPotato shows a list of tasks
+3. User requests to delete a specific task in the list
+4. myPotato deletes the task <br>
 Use case ends.
 
 **Extensions**
@@ -426,8 +426,7 @@ Use case ends.
 1. User choose a date;
 2. myPotato show all the tasks in that day;
 3. User type in command sort;
-4. myPotato sort the tasks according to deadlines;
-5. myPotato shows the list of tasks according to deadlines;
+4. myPotato sort and shows the list of tasks according to deadlines;
 Use case ends.
 
 **Extensions**
@@ -514,7 +513,7 @@ Pros:
 * Sync Email directly into Calendar. Jim will be able to schedule his tasks.
 * Integrated search function for finding emails, contacts, date. Jim will be able to find a specific task.
 * Portable
-* Retrieve others� calendars for references
+* Retrieve others' calendars for references
 
 Cons:
 
