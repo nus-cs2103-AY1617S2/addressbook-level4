@@ -59,7 +59,6 @@ The status of a task can be classified as one of the following:
 
 ### Viewing help
 
-#### Viewing all commands
 Shows a list of commands available in iManager.<br>
 
 Format: `help`
@@ -67,8 +66,8 @@ Format: `help`
 
 Examples: 
 
-* `help`
-  Shows all available commands and examples 
+* `help` <br>
+  Shows all available commands with examples
 
 #### Viewing a specific commands
 Show details of a specific command using `[KEYWORD]` flag.
@@ -91,18 +90,24 @@ Format: `help [KEY_WORD]`
 
 Examples:
 
-* `help add`
-  Shows all add command and example
+* `help add` <br>
+  Shows add command with examples
   
 ### Adding a task
 
-Adds a task to iManager<br>
+Adds a task to the task list<br>
 
-Format: `add`<br>
+Format: `add NAME [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` <br>
+> * Tasks can have any number of tags.
+> * If no priority is specified, the task will be added to the bottom of the list.
 
 Examples: 
-* 
-* 
+* `add exam`
+* `add exam p/1`
+* `add exam p/1 d/SR1`
+* `add exam p/1 d/SR1 t/2010`<br>
+  Add a priority 1 task named "exam" with description "SR1" and TAG "2010" into task list.
+
 
 ### Editing a task
 
