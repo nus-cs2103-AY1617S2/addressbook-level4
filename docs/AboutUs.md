@@ -5,7 +5,7 @@ We are a team based in the [School of Computing, National University of Singapor
 ## Project Team
 
 #### [Liu Ziyang](http://github.com/VeryLazyBoy)
-<img src="images/LiuZiyang.jpg" width="150"><br>
+<img src="images/Ziyang.jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: UI
 
