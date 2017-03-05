@@ -20,10 +20,12 @@ public class ArgumentTokenizer {
 
     /** Given prefixes **/
     private final List<Prefix> prefixes;
+    private ArrayList<Prefix> temp;
 
     /** Arguments found after tokenizing **/
     private final Map<Prefix, List<String>> tokenizedArguments = new HashMap<>();
 
+    
     /**
      * Creates an ArgumentTokenizer that can tokenize arguments string as described by prefixes
      */
@@ -41,15 +43,33 @@ public class ArgumentTokenizer {
     }
     
     /**
+     * Returns a HashMap that maps the present prefixes with their arguments
+     * @return
+     */
+    public Map<String, List<String>> getTokenizedArguments() {
+        Map<String, List<String>> arguments = new HashMap<String, List<String>>();
+        for(int i = 0; i < prefixes.size(); i ++) {
+            Prefix prefix = prefixes.get(i);
+            List<String> prefixArgs = tokenizedArguments.get(prefix);
+            if(!(prefixArgs == null || prefixArgs.size() == 0 )){
+                arguments.put(prefix.getPrefix(), prefixArgs);
+            }
+        }
+        return arguments;
+    }
+    
+    /**
      * Returns true if all tokens passed are valid prefixes
      * @param tokens
      * @return boolean
      */
     public boolean validateTokens(ArrayList<String> tokens){
         boolean flag = true;
+        this.temp = new ArrayList<Prefix>(this.prefixes);
         for(String token : tokens){
-            flag = flag &&
+            flag = flag && validateToken(token);
         }
+        return flag;
     }
     
     /**
@@ -59,9 +79,11 @@ public class ArgumentTokenizer {
      */    
     public boolean validateToken(String token){
         boolean flag = false;
-        ArrayList<Prefix> temp = new ArrayList<Prefix>(prefixes);
-        for(Prefix prefix: prefixes){
-            flag = flag || prefix.getPrefix().equals(token);
+        for(Prefix prefix: temp){
+            if(prefix.getPrefix().equals(token)){
+               temp.remove(prefix);
+               return true;
+            }
         }
         return flag;
     }
@@ -154,7 +176,6 @@ public class ArgumentTokenizer {
         for (int i = 0; i < prefixPositions.size() - 1; i++) {
             
             String argValue = extractArgumentValue(argsString, prefixPositions.get(i), prefixPositions.get(i + 1));
-            System.out.println("argValue : " + argValue);
             saveArgument(prefixPositions.get(i).getPrefix(), argValue);
         }
 
