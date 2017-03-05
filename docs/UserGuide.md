@@ -120,7 +120,7 @@ Format: `switch`
 Deletes the specified task.
 Format: `delete INDEX_NUMBER`
 
-> Task labeled by INDEX_NUMBER will be deleted from the list.
+> Task labeled by INDEX_NUMBER will be deleted from the list.<br>
 > INDEX_NUMBER of task is shown as according to the current tab.
 
 Examples:
@@ -131,7 +131,7 @@ Examples:
 
 Marks the specified task as complete.<br>
 Format: `complete INDEX_NUMBER`
-> The task at INDEX_NUMBER will be marked as completed.
+> The task at INDEX_NUMBER will be marked as completed.<br>
 > INDEX_NUMBER of task is shown as according to the current tab.
 
 Examples:
@@ -141,16 +141,27 @@ Examples:
 ### 2.8. Track overall progress: `progress`
 
 Shows all the tasks completed over time and also specifying the tasks overdued.<br>
-> A general overview of performance/efficiency based on the usage of the task manager will be shown<br>
+> A general overview of performance/efficiency based on the usage of the task manager will be shown.<br>
 
-Format: `progress NUMBER_OF_DAYS`:
-> NUMBER_OF_DAYS is a interger which indicates the your progress for these past days (excluding today).
+Format: `progress NUMBER_OF_DAYS`
+> NUMBER_OF_DAYS is a interger which indicates the your progress for these past days (excluding today).<br>
 > It will provide an analysis on the number of task that you have completed/overdue.
 
 Examples:
 * `progress 7`
 
-### 2.9. Saving the tasks
+### 2.9. Search for tasks: `search`
+
+Searches for tasks based on keywords by user's input.<br>
+
+Format: `search KEYWORD`
+> A valid input needs to be keyed in. No special characters such as ASCII whitespace is allowed.<br>
+> A popout will appear to show you the list of tasks that contains the stated `KEYWORD`
+
+Examples:
+* `search potato`
+
+### 2.10. Saving the tasks
 
 Upon creation of tasks, the tasks will be automatically saved in the folder where the program is held in.
 > Do not erase the saved data as it will result in a complete loss of data that cannot be recovered by the application itself.
@@ -161,7 +172,7 @@ Upon creation of tasks, the tasks will be automatically saved in the folder wher
 **A**: Install the application in the other computer and overwrite the empty data file with the file <file_name.extension> that contains the data of your current doTASK manager.
 
 **Q**: If I had keyed in the wrong details for a recently added task, how do I change it?<br>
-**A**: Head to the â€œrecently addedâ€� tab and select the task that you have just added (it should be at the top of the list). Click on the task and edit accordingly. Click done after completion.
+**A**: Head to the recently added tab and select the task that you have just added (it should be at the top of the list). Click on the task and edit accordingly. Click done after completion.
 
 **Q**: How do I clear all tasks?<br>
 **A**: Under the `help` button, there will be a reset feature. It automatically wipes the saved data.
@@ -169,7 +180,7 @@ Upon creation of tasks, the tasks will be automatically saved in the folder wher
 **Q**: How do I clear all the tasks under a certain tag?<br>
 **A**: Navigate to `Priority` tab, click the `Clear All` button. There will be a confirmation prompt upon doing so, click confirm to clear the tasks of the tags.
 
-**Q**: Will I get reminded if the deadline of certain high priority tasks are near?
+**Q**: Will I get reminded if the deadline of certain high priority tasks are near?<br>
 **A**: For the tasks that is due in the next 24 hours, it will be distinguished by the colours on its name.
 
 ## 4. Command Summary
@@ -204,3 +215,6 @@ Upon creation of tasks, the tasks will be automatically saved in the folder wher
 
 * **Checking progress/performance** : `progress NUMBER_OF_DAYS`<br>
 	e.g. `progress 7`
+	
+* **Search for tasks** : `search KEYWORD`
+	e.g. `search potato`
