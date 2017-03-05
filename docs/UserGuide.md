@@ -238,7 +238,6 @@ The task manager will store its data in MyStorage.txt located at StorageFile/Sto
 The task manager will store its data in AnotherStorage.txt located under StorageFile instead of the default storage location, provided that this file exists before calling the command.
 
 ## 2.25 Reminder mode: `reminder`
----
 Tell the task manager to/not to remind the user when it is a) 1 hour before the deadline of the most urgent task and b) 30 minutes before the deadline of the most urgent task.
 
 _Format:_ 
@@ -257,7 +256,6 @@ Tell the task manager to remind the user 1 hour and 30 minutes before the task `
 
 
 ## 2.26 Collaborate with others: `collaborate`
----
 Collaborate with other colleagues in managing the user's to-do list.
 _Format:_ 
 `collaborate EMAIL_1 [MORE EMAILS]`
