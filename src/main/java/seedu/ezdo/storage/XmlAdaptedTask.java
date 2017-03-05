@@ -8,16 +8,14 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.ezdo.commons.exceptions.IllegalValueException;
 import seedu.ezdo.model.tag.Tag;
 import seedu.ezdo.model.tag.UniqueTagList;
-<<<<<<< HEAD:src/main/java/seedu/ezdo/storage/XmlAdaptedPerson.java
-import seedu.ezdo.model.todo.Address;
+import seedu.ezdo.model.todo.StartDate;
 import seedu.ezdo.model.todo.Email;
 import seedu.ezdo.model.todo.Name;
-import seedu.ezdo.model.todo.Person;
+import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.Priority;
-import seedu.ezdo.model.todo.ReadOnlyPerson;
-=======
-import seedu.ezdo.model.todo.*;
->>>>>>> 6228ae6b03115b0e64fed2b189d86d8b94d2fa7e:src/main/java/seedu/ezdo/storage/XmlAdaptedTask.java
+import seedu.ezdo.model.todo.ReadOnlyTask;
+//import seedu.ezdo.model.todo.*;
+
 
 /**
  * JAXB-friendly version of the Task.
@@ -72,14 +70,8 @@ public class XmlAdaptedTask {
         final Name name = new Name(this.name);
         final Priority priority = new Priority(this.priority);
         final Email email = new Email(this.email);
-<<<<<<< HEAD:src/main/java/seedu/ezdo/storage/XmlAdaptedPerson.java
-        final Address address = new Address(this.address);
-        final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Person(name, priority, email, address, tags);
-=======
         final StartDate startDate = new StartDate(this.startDate);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(name, phone, email, startDate, tags);
->>>>>>> 6228ae6b03115b0e64fed2b189d86d8b94d2fa7e:src/main/java/seedu/ezdo/storage/XmlAdaptedTask.java
+        return new Task(name, priority, email, startDate, tags);
     }
 }

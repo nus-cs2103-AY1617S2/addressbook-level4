@@ -4,19 +4,19 @@ package seedu.ezdo.model.todo;
 import seedu.ezdo.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's address in the address book.
+ * Represents a Person's Priority in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
 public class Priority {
 
     public static final String MESSAGE_ADDRESS_CONSTRAINTS =
-            "Person addresses can take numerical values from 1 to 3, and it should not be blank";
+            "Person Priority can take numerical values from 1 to 3, and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String ADDRESS_VALIDATION_REGEX = "/[1-3]{1,1}/";
+    public static final String ADDRESS_VALIDATION_REGEX = "[1-3]";
 
     public final int value;
 
