@@ -83,6 +83,15 @@ Format: `list deadlines`
 Shows a list of all the tasks sorted by priority.<br>
 Format: `list priority`
 
+Shows a list of the tasks sorted by a stated priority level, from 1 - 4.<br>
+Format: `list priority PRIORITY_LEVEL`
+> Tasks can be given any priority level from 0 to 3.
+> Tasks with PRORITY_LEVEL priority will be displayed.
+
+Examples:
+* `list priority 1`
+* `list priority 2`
+
 Shows a list of tasks of the tags sorted in lexographical order.<br>
 Format: `list t/TAGS...`
 > The tasks listed will be in clusters according to tags, but sorted in alphabetical order.<br>
@@ -107,19 +116,7 @@ Switch the current tab to the next tab.
 Format: `switch`
 > There will be 3 tabs, which can be toggled using this command.
 
-### 2.6. Completing a task: `done`
-
-Archives the completed task.
-Format: `done INDEX_NUMBER`
-> Task labeled by INDEX_NUMBER will be removed from the list.<br>
-> INDEX_NUMBER of task is shown as according to the current tab.
-
-Examples:
-* `done 1`
-* `done 4`
-
-[Work in progress]
-### 2.7. Deleting a task
+### 2.6. Deleting a task
 Deletes the specified task.
 Format: `delete INDEX_NUMBER`
 
@@ -130,23 +127,10 @@ Examples:
 * `delete 2`
 * `delete 5`
 
-[Work in progress]
-### 2.8. Viewing the task according to different priorities
-Shows the tasks with the specified priority level, from 0-3.
-Format: `viewpriority PRIORITY_LEVEL`
+### 2.7. Completion of a task
 
-> Tasks can be given any priority level from 0 to 3.
-> Tasks with PRORITY_LEVEL priority will be displayed.
-
-Examples:
-* `viewpriority 0`
-* `viewpriority 2`
-
-[Work in progress]
-### 2.9. Completion of a task
-Marks the specified task as complete.
+Marks the specified task as complete.<br>
 Format: `complete INDEX_NUMBER`
-
 > The task at INDEX_NUMBER will be marked as completed.
 > INDEX_NUMBER of task is shown as according to the current tab.
 
@@ -154,22 +138,17 @@ Examples:
 * `complete 2`
 * `complete 5`
 
-[Work in progress]
-### 2.10. Overdue tasks
-Under the `Overdue` tab, you can see the list of overdue tasks that you have yet to clear.
-> Editing the deadline will result in the relocation of the task out of the `Overdue` tab, until it has reached its due date.
-> In addition, there will be an exclamation mark on the overdue tab to remind the user of any overdue tasks.
+### 2.8. Saving the tasks
 
-[Work in progress]
-### 2.11. Saving the tasks
 Upon creation of tasks, the tasks will be automatically saved in the folder where the program is held in.
 > Do not erase the saved data as it will result in a complete loss of data that cannot be recovered by the application itself.
    
-### 2.11. Track overall progress
-You are able to see how many task you completed over time, and how many tasks that fails to complete (overdue).
-It gives an general overview on how well you performed in using the task manager in becoming more effecient.
-Format: `progress NUMBER_OF_DAYS`
+### 2.9. Track overall progress
 
+Shows all the tasks completed over time and also specifying the tasks overdued.<br>
+> A general overview of performance/efficiency based on the usage of the task manager will be shown<br>
+
+Format: `progress NUMBER_OF_DAYS`
 > NUMBER_OF_DAYS is a interger which indicates the your progress for these past days (excluding today).
 > It will provide an analysis on the number of task that you have completed/overdue.
 
@@ -202,10 +181,13 @@ Examples:
 
 * **List All** : `list all`
 
-* **List by Deadlines** : `list deadlines`
+* **List All by Deadlines** : `list deadlines`
 
-* **List by Priority** : `list priority`
+* **List All by Priority** : `list priority`
 
+* **List by Specific Priority** : `list priority PRIORITY_LEVEL`
+	e.g. `list priority 1`
+	
 * **List by Tags** : `list t/TAGS [MORE_TAGS]`<br>
 	e.g. `list t/CS2103 t/Work t/School`
 
@@ -214,5 +196,11 @@ Examples:
 * **Edit** : `edit`<br>
 	e.g. `edit i/3 n/Buy a house`
 
-* **Done** : `done`<br>
-	e.g. `done 1`
+* **Delete** : `delete`<br>
+	e.g. `delete 1`
+
+* **Completion of task** : `complete`<br>
+	e.g. `complete 1`
+
+* **Checking progress/performance** : `progress NUMBER_OF_DAYS`
+	e.g. `progress 7`
