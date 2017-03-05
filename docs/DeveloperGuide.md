@@ -346,41 +346,265 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
 
-{More to be added}
+|`***`|New User|view instructions|keep track of things to do|
+|`***`|User|add task|keep track of things to do|
+|`***`|User|complete task|update my progress|
+|`***`|User|view incomplete tasks|keep track of what I still need to do|
+|`***`|User|view complete tasks|keep track of tasks I have completed|
+|`***`|User|delete a task|remove tasks I no longer want to keep track of|
+|`***`|User|edit task|correct or revise the task name and its details|
+|`***`|User|view task progress|keep track of my progress|
+|`***`|User|sync list with Google Calendar|view my todo list across different platforms|
+|`***`|User|undo previous command|revert accidental changes|
+|`***`|User|search for keyword|search for a task by keywords|
+|`***`|User|view overdue tasks|know which tasks to prioritise finishing|
+|`***`|User|add tags to task|be able to group tasks under a category|
+|`***`|User|choose location to store save data|adjust application according to my needs|
+|`**`|User|view upcoming deadlines|keep track of my deadlines|
+|`**`|User|have a relevant link for my task|keep track of the task details|
+|`**`|User|snooze my tasks|adjust application according to my needs|
+|`**`|User|be reminded of my tasks x minutes before deadline|get reminder to do my task|
+|`**`|User|change UI theme|customise the application|
+|`**`|User|repeat tasks|add a repeating task just once|
+|`**`|User|add notes about a task|keep track of my progress|
+|`**`|User|be alerted of conflicting tasks|avoid duplicates|
+|`*`|User|change font size|adjust application according to my needs|
+|`*`|User|view progress report|have a detailed overview of my current progress|
+|`*`|User|view my tasks in calendar form|have a visual representation of my schedule|
+|`*`|User|use arrow keys to scroll through previously typed commands|save myself the trouble of typing similar words|
+|`*`|User|add a message of the day|customise the application|
+|`*`|User|share my todo list|collaborate with others|
+|`*`|User|view inspirational messages|feel motivated to complete my tasks|
+
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `AddressBook`)
 
-#### Use case: Delete person
+### Use case: Display help
 
-**MSS**
+#### Main Success Scenario:
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+    1. User requests to display help.
+    2. System displays the help messages.
+    3. Use case ends.
+
+##### Extensions
+
+1a. User entered an invalid command.
+
+* 1a1. System displays help messages.
+
+* 1a2. Use case ends.
+
+
+### Use case: Add Task
+
+#### Main Success Scenario:
+
+    1. User requests to add a task.
+    2. System accepts the task.
+    3. Use case ends.
+
+##### Extensions
+
+1a. User entered an invalid command.
+
+* 1a1. System display unsuccessful message.
+
+* 1a2. Use case ends.
+
+
+### Use case: Complete Task
+
+#### Main Success Scenario:
+	1. User selects a task based on its task number and marks it as completed.
+    2. System marks the task as completed.
+	   Use case ends.
+
+#### Extension
+    1a. The task has already been completed.
+    > System shows error message that the task has already been completed.
+    > Use case ends.
+    1b. The provided task number does not exist.
+    > System shows error message that the task number does not exist.
+    > Use case ends.
+
+
+### Use Case: View Upcoming Deadlines
+
+#### Main Success Scenario:
+	1. User requests to view all upcoming deadlines.
+    2. System displays all tasks that have yet to be marked as complete.
+	   Use case ends.
+
+
+### Use case: Calendar View
+
+#### Main Success Scenario:
+	1. User requests to view todo list in the form of a calendar.
+    2. System displays the current and next month as a calendar.
+    3. System populates the days with dots for incomplete tasks' due dates.
+    	Use case ends.
+
+### Use case: Sync with Google Calendar
+
+#### Main Success Scenario:
+	1. User requests to sync his/her to-do list by giving his/her email address.
+	2. System requests password of the email account from user.
+	3. User enter the password.
+	4. System shows success message to the user.
+	   Use case ends.
+
+#### Extension
+    3a. Email address/Password provided by the user is incorrect 
+    > System shows error message.
+      Use case ends.
+
+### Use case: Customize file storing
+#### Main Success Scenario:
+	1. User requests to store data in the specified file instead of the default storing location.
+	2. System transfer all data to the specified file.
+	3. System shows success message.
+	   Use case ends.
+
+#### Extension
+    1a. Specified file does not exist 
+    > System shows error message that specified file does not exist.
+      Use case ends.
+    1b. Specified file is not a .txt file
+    > System shows error message that specified file's format is not valid.
+      Use case ends.
+
+### Use case: Reminder mode
+#### Main Success Scenario:
+	1. User requests to turn on/off reminder mode for the specified task(s).
+	2. System start/stop tracking the specified tasks for reminder.
+	3. System shows success message.
+	   Use case ends.
+
+#### Extension
+    1a. Some of the specified task(s) do not exist/are completed/are overdue.
+    > System shows the list of task numbers previously input by the user that are invalid.
+      Use case ends.
+    1b. Some of the specified task(s) are already tracked/untracked.
+    > System execute step 2 for untracked/tracked tasks.
+    > System continue with step 3.
+    > Use case ends.
+
+### Use case: Attach links
+#### Main Success Scenario:
+	1. User inputs a link and requests for it to be attached to a task corresponding to the input task number.
+	2. System attach the specified link to the specified task.
+	3. System shows success message.
+	   Use case ends.
+
+#### Extension
+    1a. The provided link is of invalid format.
+    > System shows error message that the link is of invalid format.
+    > Use case ends.
+    1b. The provided task number does not exist.
+    > System shows error message that the task number does not exist.
+    > Use case ends.
+
+### Use case: Progress report
+
+#### Main Success Scenario:
+	1. User requests for a report of his/her completed tasks, overdue tasks and upcoming tasks.
+	2. System shows a report of the user's completed tasks, overdue tasks and upcoming tasks.
+	   Use case ends.
+
+#### Extension
+2a. The list is empty.
+> Use case ends.
+
+### Use case: Collaborate with others
+
+#### Main Success Scenario:
+	1. User requests for a report of his/her completed tasks, overdue tasks and upcoming tasks.
+	2. System shows a report of the user's completed tasks, overdue tasks and upcoming tasks.
+	   Use case ends.
+
+#### Extension
+    2a. The list is empty.
+    > Use case ends.
+
+### Use case: Search
+#### Main Success Scenario:
+User requests for a list of tasks that have matching keywords typed in.
+System shows a list of tasks that have the matching keywords.  
+	Use case ends. 
+
+
+### Use case: View overdue tasks
+#### Main Success Scenario:
+User requests for a list of overdue tasks. 
+System shows a list of tasks that are overdue.  
 Use case ends.
 
-**Extensions**
 
-2a. The list is empty
+### Use case: Undo previous command
+#### Main Success Scenario:
+User requests to undo a previous command that mutates the data. 
+System returns the command that was undone.  
+Use case ends.
+##### Extensions
+2. There is nothing to undo.  
+Use case ends. 
 
-> Use case ends
+### Use case: Repeat tasks 
+#### Main Success Scenario:
+    1. User requests to list persons.
+    2. System shows a list of persons. 
+    3. User requests to repeat a specific task in the list. 
+    4. System puts the task that was put on repeat and displays the task.   
+    	Use case ends.
 
-3a. The given index is invalid
+##### Extensions
+    2a. There is no list.  
+    Use case ends.
+    3a. The given index is invalid.  
+        3a1. System gives an error message.  
+        Use case resumes at step 2.
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+### Use case: Add tags to created task
+I think this should be under edit also what do yall think? (makes sense to separate)
 
-{More to be added}
+### Use case: Customise Message of the Day 
+#### Main Success Scenario:
+    1. User requests set a Message of the Day.
+    2. System shows current message if it exists. 
+    3. User edits the Message of the Day. 
+    4. System saves the message and displays it on subsequent program launches.   
+    	Use case ends.
+
+### Use case: Scroll Through Previous Commands
+#### Main Success Scenario:
+    1. User presses the arrow keys to retype the previously typed commands.
+    2. System shows previous command if it exists.  
+    	Use case ends.
+
+##### Extensions
+    1a. User presses the up arrow key more than once.  
+    	* 1a1. System shows the previously submitted command in reverse order.
+        Use case ends.
+    1b. User presses the down arrow key.
+    	* 1b1. System shows the command that was submitted next.
+        Use case ends.
+
+#Product survey
+
+##### Reminders
+
+> Pros:
+> *  Simple and intuitive interface
+> *  Syncs across Apple devices
+
+> Cons:
+> *  Only available on iOS
+> *  Lacks collaborative features
+> *  Unable to customise
 
 ## Appendix C : Non Functional Requirements
 
