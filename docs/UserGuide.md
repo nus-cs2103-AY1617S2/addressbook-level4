@@ -56,7 +56,7 @@ The statuses of a task is shown as below:
 > * Items with `...` after them can have multiple instances.
 > * The order of optional parameters are flexible.
 
-### Viewing help: `help`
+[###Viewing help: 'help'](##Viewing-help:--help)
 
 Shows a list of all commands in iManager.<br>
 
