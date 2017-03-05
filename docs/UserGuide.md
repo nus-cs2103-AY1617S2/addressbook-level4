@@ -216,5 +216,5 @@ Upon creation of tasks, the tasks will be automatically saved in the folder wher
 * **Checking progress/performance** : `progress NUMBER_OF_DAYS`<br>
 	e.g. `progress 7`
 	
-* **Search for tasks** : `search KEYWORD`
+* **Search for tasks** : `search KEYWORD`<br>
 	e.g. `search potato`
