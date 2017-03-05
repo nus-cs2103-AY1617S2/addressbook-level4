@@ -1,186 +1,212 @@
-# AddressBook Level 4 - User Guide
+# User Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+* [Introduction](#introduction)
+* [Quick Start](#quick-start)
+* [UI Control](#ui-control)
+* [Features](#features)
+* [FAQ](#faq)
+* [Command Summary](#command-summary)
 
----
+## Introduction
+In the hectic world of today, people are constantly bombarded by innumerable tasks at hand. As a result, people tend to lose track of their work progress and deviate from their priorities. Problems like these are far too common among working adults and students embarking on tight projects. Thus, our team would like to present to you a solution that could curb all your management problem! 
 
-1. [Quick Start](#quick-start)
-2. [Features](#features)
-3. [FAQ](#faq)
-4. [Command Summary](#command-summary)
+Presenting to you, iManager.
 
-## 1. Quick Start
+iManager is a task manager application that helps you manage all your tasks at one place. With its interactive UI, user can now experience managing their tasks like never before.  Our product incorporates niche features such as FlexiCommands and Google Integration that brings convenient to user in managing their schedules and tasks. iManager remove the need to rely on multiple applications as it manages it all! 
 
+Without further ado, let’s get started. 
+
+   
+## Quick Start
 0. Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
-
    > Having any Java 8 version is not enough. <br>
-   > This app will not work with earlier versions of Java 8.
-
-1. Download the latest `addressbook.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for your Address Book.
-3. Double-click the file to start the app. The GUI should appear in a few seconds.
-   > <img src="images/Ui.png" width="600">
+   This app will not work with earlier versions of Java 8.
+   
+1.  Download the latest `iManager.jar` from the [releases](../../../releases) tab.
+2. Copy the file to the folder you want to use as the home folder for your iManager application.
+3. Double-click the file to start the app. The GUI should appear in a few seconds. Refer to [UI Control](#ui-control) for a more detailed walkthrough of various UI components. 
+   > <img src="images/UIOverview.png" width="800">
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
-   e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
+   e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window. 
 5. Some example commands you can try:
-   * **`list`** : lists all contacts
-   * **`add`**` John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01` :
-     adds a contact named `John Doe` to the Address Book.
-   * **`delete`**` 3` : deletes the 3rd contact shown in the current list
-   * **`exit`** : exits the app
-6. Refer to the [Features](#features) section below for details of each command.<br>
+   * **`NIL`**:    
+6. Refer to the[Features](#features) section below for details of each command.
+   
 
 
-## 2. Features
+## UI Control
+
+#### Task Status     
+The statuses of a task is shown as below:  
+| Avatar | Status |
+| --- | --- |
+| <img src="images/Floating.png" width="150"> | Floating |
+| <img src="images/Completed.png" width="150"> | Complete |
+| <img src="images/Pending.png" width="150"> | Pending |
+| <img src="images/Overdue.png" width="150"> | Overdue |
+
+
+## Features
 
 > **Command Format**
->
 > * Words in `UPPER_CASE` are the parameters.
 > * Items in `SQUARE_BRACKETS` are optional.
 > * Items with `...` after them can have multiple instances.
-> * Parameters can be in any order.
+> * The order of optional parameters are flexible.
 
-### 2.1. Viewing help : `help`
+#### Viewing help : `help`
+
+Shows a list of all commands in iManager.
+
+List of available [KEY_WORD] for help: 
+- 
+- 
+- 
+- 
 
 Format: `help`
 
-> Help is also shown if you enter an incorrect command e.g. `abcd`
-
-### 2.2. Adding a person: `add`
-
-Adds a person to the address book<br>
-Format: `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
-
-> Persons can have any number of tags (including 0)
-
 Examples:
 
-* `add John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01`
-* `add Betsy Crowe t/friend e/betsycrowe@gmail.com a/Newgate Prison p/1234567 t/criminal`
+* `help`  
+  Shows all available commands and examples 
+  
+#### Adding a task: `add` 
 
-### 2.3. Listing all persons : `list`
+Adds a task to iManager<br>
 
-Shows a list of all persons in the address book.<br>
-Format: `list`
+Format: `add`<br>
 
-### 2.4. Editing a person : `edit`
+Examples: 
+* 
+* 
 
-Edits an existing person in the address book.<br>
-Format: `edit INDEX [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+#### Editing a task: `add` 
 
-> * Edits the person at the specified `INDEX`.
-    The index refers to the index number shown in the last person listing.<br>
-    The index **must be a positive integer** 1, 2, 3, ...
-> * At least one of the optional fields must be provided.
-> * Existing values will be updated to the input values.
-> * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-> * You can remove all the person's tags by typing `t/` without specifying any tags after it.
+Edit a task in iManager<br>
+
+Format: `edit`<br>
 
 Examples:
+* 
+* 
 
-* `edit 1 p/91234567 e/johndoe@yahoo.com`<br>
-  Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@yahoo.com` respectively.
+#### Deleting a task: `delete` 
 
-* `edit 2 Betsy Crower t/`<br>
-  Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+Delete a task from iManager<br>
 
-### 2.5. Finding all persons containing any keyword in their name: `find`
+Format: `delete`<br>
 
-Finds persons whose names contain any of the given keywords.<br>
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Examples: 
+* 
+* 
 
-> * The search is case sensitive. e.g `hans` will not match `Hans`
-> * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-> * Only the name is searched.
-> * Only full words will be matched e.g. `Han` will not match `Hans`
-> * Persons matching at least one keyword will be returned (i.e. `OR` search).
-    e.g. `Hans` will match `Hans Bo`
+#### Viewing all tasks : `view` 
+Shows a list of all tasks iManage. Able to filter based on status of task/event.
 
-Examples:
+Format: `view`<br>
 
-* `find John`<br>
-  Returns `John Doe` but not `john`
-* `find Betsy Tim John`<br>
-  Returns Any person having names `Betsy`, `Tim`, or `John`
+Examples: 
+* 
+* 
 
-### 2.6. Deleting a person : `delete`
+#### Marking a task as completed : `done` 
+Mark an existing task as completed in iManager.
 
-Deletes the specified person from the address book. Irreversible.<br>
-Format: `delete INDEX`
+Format: `done`
 
-> Deletes the person at the specified `INDEX`. <br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+Examples: 
+* 
+* 
+ 
+#### Finding for tasks : `find` 
+With the find command, you can find for tasks or events which contain some keywords in their **name** as well as in their **descriptions**. 
 
-Examples:
-
-* `list`<br>
-  `delete 2`<br>
-  Deletes the 2nd person in the address book.
-* `find Betsy`<br>
-  `delete 1`<br>
-  Deletes the 1st person in the results of the `find` command.
-
-### 2.7. Select a person : `select`
-
-Selects the person identified by the index number used in the last person listing.<br>
-Format: `select INDEX`
-
-> Selects the person and loads the Google search page the person at the specified `INDEX`.<br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+Format: `find `
 
 Examples:
+* 
+*  
+  
+#### Clearing of tasks
+Clears all completed tasks. <br>
 
-* `list`<br>
-  `select 2`<br>
-  Selects the 2nd person in the address book.
-* `find Betsy` <br>
-  `select 1`<br>
-  Selects the 1st person in the results of the `find` command.
-
-### 2.8. Clearing all entries : `clear`
-
-Clears all entries from the address book.<br>
 Format: `clear`
 
-### 2.9. Exiting the program : `exit`
+Examples: 
+* 
+* 
 
-Exits the program.<br>
-Format: `exit`
+#### Toggle google calender
+Toggle the view of google calendar and focus to certain time time as user specified. 
 
-### 2.10. Saving the data
+Format: 
 
-Address book data are saved in the hard disk automatically after any command that changes the data.<br>
-There is no need to save manually.
+Examples:
+* 
+* 
 
-## 3. FAQ
+#### Redo most recent command 
+You can go advance to historical versions of Dowat with the use of redo commands. Only commands that modify Dowat in the same session will be restored. Any versions of current session will not be accessible after restarting Dowat.  
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with
-       the file that contains the data of your previous Address Book folder.
+Format: `redo`
 
-## 4. Command Summary
+#### Undo most recent command 
+You can go back to historical versions of iManager with the use of undo commands. Only commands that modify iManager in the same session will be restored. Any versions of current session will not be accessible after restarting iManager.  
 
-* **Add**  `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` <br>
-  e.g. `add James Ho p/22224444 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+Format: `undo`
 
-* **Clear** : `clear`
+#### Changing the save location
+iManager will save data in a file called iManager.txt in the project root folder by dafault or if the file path is not specified. 
+You can change the location by specifying the file path as a command argument.
+New file will be automatically created as long as given directory is valid.
 
-* **Delete** : `delete INDEX` <br>
-   e.g. `delete 3`
+Format: `saveto FILEPATH`
 
-* **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
-  e.g. `find James Jake`
+> FILEPATH (must be valid)
 
-* **List** : `list` <br>
-  e.g.
+Examples:
+* `saveto C:\Users\Computing\Desktop\CS2103` 
 
-* **Help** : `help` <br>
-  e.g.
+#### Exiting the program
+Format : `exit`
 
-* **Select** : `select INDEX` <br>
-  e.g.`select 2`
+
+
+## FAQ
+
+**Q**: <br>
+**A**: <br>
+
+
+## Command Summary
+
+ Command | Format  | Description
+-------- | -------- | -------- 
+[help](#help) | `help`| Opens a help page
+[add](#add) | `add NAME [PRIORITY] [/t TAG1, TAG2…]`| Adds a floating task with priority and tags
+ | `add NAME at START_DATETIME [PRIORITY] [/t TAG1, TAG2…]`| Adds a pending task with only start time, priority and tags
+ | `add NAME by END_DATETIME [PRIORITY] [/t TAG1, TAG2…]`| Adds a pending task with only deadline, priority and tags
+ | `add NAME by END_DATETIME [PRIORITY] [/t TAG1, TAG2…]`| Adds a pending task with start time, end time, priority and tags
+ | `add [INSTANCES] NAME [at|by|from START_DATETIME] [to END_DATETIME][PRIORITY] every [DAY|MONTH|YEAR] [/t TAG1, TAG2…]` | Adds a recurring number of task instances that spans over a period of time with priority and tags
+[edit](#edit) | `Edit INDEX|NAME [at|by|from START_DATETIME] [to END_DATETIME][PRIORITY] every [DAY|MONTH|YEAR] [/t TAG1, TAG2…]` | Edits a task with the new parameters
+[delete](#delete) | `Delete INDEX|NAME` | Delete a task 
+[view](#view) | `view` | Show all tasks
+[view](#view) | `view t` | Show all today’s tasks
+[view](#view) | `view p` |Show all pending task
+[view](#view) | `view c` | Show all completed task
+[view](#view) | `view f` | Show all floating task
+[view](#view) | `view o` | Show all overdue task
+[view](#view) | `view INDEX|NAME|START_DATETIME|END_DATETIME|PRIORITY|DAY|MONTH|YEAR TAG` | Show a specified task based on its detail 
+[done](#done) | `done INDEX|NAME`| Mark a task as done
+[undo](#undo) | `undo` | Undo the most recent command
+[redo](#redo) | `redo` | Redo the most recent undo
+[find](#find) | `Find KEYWORDS [KEYWORD 1, KEYWORD2,..]`| Find the task associated to the keyword 
+[clear](#clear) | `clear` | Clear all completed tasks
+[reset](#reset) | `reset` | Reset save data
+[saveto](#saveto) | `saveto PATH` | Change the default save directory 
+[exit](#exit) | `exit` | Exit the application
+
 
 
