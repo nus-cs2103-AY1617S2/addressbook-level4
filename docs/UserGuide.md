@@ -87,8 +87,8 @@ View a list of tasks which are overdue
 _Format:_  
 `overdue`
 
-_Example:_
-`overdue` <br>  
+_Example:_  
+`overdue`  
 Returns a list of overdue tasks (if any)
 
 
@@ -103,7 +103,7 @@ _Format:_
 `due today` <br>
 `due this week`
 
-_Example:_
+_Example:_    
 `due tomorrow` <br> 
 Returns a list of tasks due by tomorrow
 
@@ -192,8 +192,8 @@ Change the font size
 > You can specify how much you want to increase or decrease the font size by adding a “by” followed by an integer from 1-10.
 > If no integer is specified, the app will change the font size by 1. 
 
-_Format:_ 
-`increase font (by 1)`
+_Format:_   
+`increase font (by 1)`    
 `decrease font (by 1)`
 
 _Examples:_
