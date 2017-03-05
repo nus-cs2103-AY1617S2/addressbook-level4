@@ -417,3 +417,28 @@ Cons:
 + Does not support undoing an action
 
 + Urgent events cannot stand out
+
+Habitica
+
+Author: How Si Wei
+
+Pros:
+
+* Gamification adds extra motivation
+
+* Intuitive UI
+
+* Categorization of events through taggings
+
+* Has option to export data
+
+* Has a large number of official and user-created apps and extensions
+
+Cons:
+
+* Requires a Habitica account
+
+* Gamification may be distracting
+
+* Group plans are only available to paid users
+
