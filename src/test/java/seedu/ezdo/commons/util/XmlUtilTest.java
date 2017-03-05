@@ -11,8 +11,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.ezdo.commons.util.FileUtil;
-import seedu.ezdo.commons.util.XmlUtil;
 import seedu.ezdo.model.EzDo;
 import seedu.ezdo.storage.XmlSerializableEzDo;
 import seedu.ezdo.testutil.EzDoBuilder;

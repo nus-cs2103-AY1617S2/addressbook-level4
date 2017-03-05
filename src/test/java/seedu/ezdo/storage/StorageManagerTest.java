@@ -17,10 +17,6 @@ import seedu.ezdo.commons.events.storage.DataSavingExceptionEvent;
 import seedu.ezdo.model.EzDo;
 import seedu.ezdo.model.ReadOnlyEzDo;
 import seedu.ezdo.model.UserPrefs;
-import seedu.ezdo.storage.JsonUserPrefsStorage;
-import seedu.ezdo.storage.Storage;
-import seedu.ezdo.storage.StorageManager;
-import seedu.ezdo.storage.XmlEzDoStorage;
 import seedu.ezdo.testutil.EventsCollector;
 import seedu.ezdo.testutil.TypicalTestTasks;
 

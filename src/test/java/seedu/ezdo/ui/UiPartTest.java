@@ -12,7 +12,6 @@ import org.junit.rules.TemporaryFolder;
 
 import javafx.fxml.FXML;
 import seedu.ezdo.MainApp;
-import seedu.ezdo.ui.UiPart;
 
 public class UiPartTest {
 

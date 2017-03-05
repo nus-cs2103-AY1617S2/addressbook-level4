@@ -15,8 +15,6 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.ezdo.commons.core.Config;
 import seedu.ezdo.commons.exceptions.DataConversionException;
-import seedu.ezdo.commons.util.ConfigUtil;
-import seedu.ezdo.commons.util.FileUtil;
 
 public class ConfigUtilTest {
 

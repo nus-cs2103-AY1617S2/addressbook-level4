@@ -24,8 +24,6 @@ import seedu.ezdo.commons.core.EventsCenter;
 import seedu.ezdo.commons.events.model.EzDoChangedEvent;
 import seedu.ezdo.commons.events.ui.JumpToListRequestEvent;
 import seedu.ezdo.commons.events.ui.ShowHelpRequestEvent;
-import seedu.ezdo.logic.Logic;
-import seedu.ezdo.logic.LogicManager;
 import seedu.ezdo.logic.commands.AddCommand;
 import seedu.ezdo.logic.commands.ClearCommand;
 import seedu.ezdo.logic.commands.Command;
@@ -43,7 +41,12 @@ import seedu.ezdo.model.ModelManager;
 import seedu.ezdo.model.ReadOnlyEzDo;
 import seedu.ezdo.model.tag.Tag;
 import seedu.ezdo.model.tag.UniqueTagList;
-import seedu.ezdo.model.todo.*;
+import seedu.ezdo.model.todo.Email;
+import seedu.ezdo.model.todo.Name;
+import seedu.ezdo.model.todo.Priority;
+import seedu.ezdo.model.todo.ReadOnlyTask;
+import seedu.ezdo.model.todo.StartDate;
+import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.storage.StorageManager;
 
 

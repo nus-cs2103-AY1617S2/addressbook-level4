@@ -32,7 +32,12 @@ import seedu.ezdo.commons.util.XmlUtil;
 import seedu.ezdo.model.EzDo;
 import seedu.ezdo.model.tag.Tag;
 import seedu.ezdo.model.tag.UniqueTagList;
-import seedu.ezdo.model.todo.*;
+import seedu.ezdo.model.todo.Email;
+import seedu.ezdo.model.todo.Name;
+import seedu.ezdo.model.todo.Priority;
+import seedu.ezdo.model.todo.ReadOnlyTask;
+import seedu.ezdo.model.todo.StartDate;
+import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.storage.XmlSerializableEzDo;
 
 /**

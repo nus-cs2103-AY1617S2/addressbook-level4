@@ -7,8 +7,6 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-import seedu.ezdo.commons.util.FileUtil;
-import seedu.ezdo.commons.util.JsonUtil;
 import seedu.ezdo.testutil.SerializableTestClass;
 import seedu.ezdo.testutil.TestUtil;
 

@@ -16,7 +16,6 @@ import seedu.ezdo.commons.util.FileUtil;
 import seedu.ezdo.model.EzDo;
 import seedu.ezdo.model.ReadOnlyEzDo;
 import seedu.ezdo.model.todo.Task;
-import seedu.ezdo.storage.XmlEzDoStorage;
 import seedu.ezdo.testutil.TypicalTestTasks;
 
 public class XmlEzDoStorageTest {

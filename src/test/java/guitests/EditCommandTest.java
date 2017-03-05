@@ -9,7 +9,10 @@ import guitests.guihandles.TaskCardHandle;
 import seedu.ezdo.commons.core.Messages;
 import seedu.ezdo.logic.commands.EditCommand;
 import seedu.ezdo.model.tag.Tag;
-import seedu.ezdo.model.todo.*;
+import seedu.ezdo.model.todo.Email;
+import seedu.ezdo.model.todo.Name;
+import seedu.ezdo.model.todo.Priority;
+import seedu.ezdo.model.todo.StartDate;
 import seedu.ezdo.testutil.TaskBuilder;
 import seedu.ezdo.testutil.TestTask;
 

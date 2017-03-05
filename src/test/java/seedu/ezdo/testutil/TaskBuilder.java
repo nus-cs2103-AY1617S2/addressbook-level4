@@ -3,7 +3,10 @@ package seedu.ezdo.testutil;
 import seedu.ezdo.commons.exceptions.IllegalValueException;
 import seedu.ezdo.model.tag.Tag;
 import seedu.ezdo.model.tag.UniqueTagList;
-import seedu.ezdo.model.todo.*;
+import seedu.ezdo.model.todo.Email;
+import seedu.ezdo.model.todo.Name;
+import seedu.ezdo.model.todo.Priority;
+import seedu.ezdo.model.todo.StartDate;
 
 /**
  *

@@ -4,7 +4,6 @@ import java.util.function.Supplier;
 
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import seedu.ezdo.MainApp;
 import seedu.ezdo.commons.core.Config;
 import seedu.ezdo.commons.core.GuiSettings;
 import seedu.ezdo.model.ReadOnlyEzDo;

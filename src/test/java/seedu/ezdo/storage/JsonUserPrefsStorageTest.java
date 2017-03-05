@@ -16,7 +16,6 @@ import org.junit.rules.TemporaryFolder;
 import seedu.ezdo.commons.exceptions.DataConversionException;
 import seedu.ezdo.commons.util.FileUtil;
 import seedu.ezdo.model.UserPrefs;
-import seedu.ezdo.storage.JsonUserPrefsStorage;
 
 public class JsonUserPrefsStorageTest {
 
