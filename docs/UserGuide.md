@@ -4,37 +4,31 @@ By : `Typedwriters`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `March 2017`  &nbsp;&nbsp;&
 
 ---
 
-1. [Quick Start](#quick-start)
-2. [Features](#features)
-3. [FAQ](#faq)
+1. [Getting Started](#getting-started)
+2. [Returning to *Typed*](#returning-to-typed)
+3. [Features](#features)
 4. [Command Summary](#command-summary)
+5. [FAQ](#faq)
 
-## 1. Quick Start
+## 1. Getting Started
 
-0. Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
+Before you setup *Typed*, you should have Java version `1.8.0_60` or later installed. <br>
 
-   > Having any Java 8 version is not enough. <br>
-   > This app will not work with earlier versions of Java 8.
+1. Download the latest `typed.jar` from the [releases](../../../releases) tab. 
+2. Copy the file to the folder you want to use as *Typed*'s new home.
+3. Press the Ctrl+Shift+T key to launch the app. *Typed* will welcome you in a few seconds.
+    <img src="images/StartingUI.png" width="600"> <br>
+4. Walk through the tutorial to try out basic features, or experiment with **[Features](#features)** below. 
 
-1. Download the latest `typed.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for Typed.
-3. Double-click the file to start the app. The "Welcome" screen should appear in a few seconds.
-   > <img src="images/StartingUI.png" width="600">
+## 2. Returning to *Typed*
 
-4. Upcoming events and tasks would then be shown on the screen. These are tasks, that are not yet completed and due today, or overdue. Events that are upcoming today would also be shown on the screen. Press <kbd>Enter</kbd> to continue to the default home screen.  
-   > <img src="images/TodayScreen.png" width="600"> <br>
-   Today's screen <br> <br>
-   > <img src="images/DefaultHome.png" width="600"> <br>
-   Default Typed screen
-5. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
-   e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
-5. Some example commands you can try:
-   * **`list`** : lists all tasks
-   * **`add`**` email boss by tomorrow ` :
-     adds a task to be completed by tomorrow.
-   * **`delete`**` 3` : deletes the 3rd task shown in the current list
-   * **`exit`** : exits the app
-6. Refer to the [Features](#features) section below for details of each command.<br>
+*Typed* is always happy to see you again. <br>
+
+1. Forget the tutorial, *Typed* is ready for a productive day! You will be greeted with a view of today's focus. This view includes events happening today, overdue tasks and tasks due today. 
+2. Let *Typed* know when you are ready to start work by pressing <kbd>Enter</kbd>. 
+    <img src="images/TodayScreen.png" width="600"> <br>
+3. This will bring you to the default view, where tasks and events are sorted by deadlines. 
+    <img src="images/DefaultHome.png" width="600"> <br>
 
 
 ## 2. Features #TODO: fix
@@ -162,30 +156,15 @@ Format: `clear`
 Exits the program.<br>
 Format: `exit`
 
-### 2.10. Saving the data
+### 2.10. Saving the data : `exit`
 
 Address book data are saved in the hard disk automatically after any command that changes the data.<br>
-There is no need to save manually.
+There is no need to save manually, unless you would like to save to a new file.
 
-## 3. FAQ
+Saves the data in a new file.<br>
+Format: `save FILENAME`
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with
-       the file that contains the data of your previous Typed folder.
-       
-**Q**: How do I backup my data to another location?<br>
-**A**: Copy the saved Typed file to any desired location of your choice. Alternatively, 
-       use our in-built backup feature as described in the [Features](#features) section above.<br>
-       
-**Q**: Is my personal data and information kept secure from the eyes of others (including the dev team)?<br>
-**A**: Yes! Everything you enter into Typed is only stored on your local machine in your specified storage file.<br>
-
-## 4. Command Summary
-
-#IGNORE: sample
-* **Add**  `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` <br>
-  e.g. `add James Ho p/22224444 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-#ENDIGNORE
+## 3. Command Summary
  
 * **Add**  `add TASK [by|every|from|on] [date] [to] [date] [#/tags]...` #TODO: fix <br> 
   e.g. `add read the little prince` <br>
@@ -254,3 +233,16 @@ There is no need to save manually.
   e.g.`undo` <br>
   e.g.`undo 5` <br>
   e.g.`undo all` <br>
+
+## 4. FAQ
+
+**Q**: How do I transfer my data to another Computer?<br>
+**A**: Install the app in the other computer and overwrite the empty data file it creates with
+       the file that contains the data of your previous Typed folder.
+       
+**Q**: How do I backup my data to another location?<br>
+**A**: Copy the saved Typed file to any desired location of your choice. Alternatively, 
+       use our in-built backup feature as described in the [Features](#features) section above.<br>
+       
+**Q**: Is my personal data and information kept secure from the eyes of others (including the dev team)?<br>
+**A**: Yes! Everything you enter into Typed is only stored on your local machine in your specified storage file.<br>
