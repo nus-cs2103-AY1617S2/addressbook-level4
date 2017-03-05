@@ -22,9 +22,9 @@ By : `Typedwriters`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `March 2017`  &nbsp;&nbsp;&
    > <img src="images/StartingUI.png" width="600">
 
 4. Upcoming events and tasks would then be shown on the screen. These are tasks, that are not yet completed and due today, or overdue. Events that are upcoming today would also be shown on the screen. Press <kbd>Enter</kbd> to continue to the default home screen.  
-   > <img src="images/Ui.png" width="600"> <br>
+   > <img src="images/TodayScreen.png" width="600"> <br>
    Today's screen <br> <br>
-   > <img src="images/Ui.png" width="600"> <br>
+   > <img src="images/DefaultHome.png" width="600"> <br>
    Default Typed screen
 5. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
