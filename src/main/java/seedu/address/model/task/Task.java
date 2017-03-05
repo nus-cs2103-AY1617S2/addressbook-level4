@@ -6,27 +6,27 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Represents a Task in the address book.
+ * Represents a Task in the endtime book.
  * Guarantees: details are present and not null, field values are validated.
  */
 public class Task implements ReadOnlyTask {
 
-    private Name name;
-    private Phone phone;
-    private Email email;
-    private Address address;
+    private Title title;
+    private StartTime starttime;
+    private Venue venue;
+    private EndTime endtime;
 
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Phone phone, Email email, Address address, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, phone, email, address, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
+    public Task(Title title, StartTime starttime, Venue venue, EndTime endtime, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(title, starttime, venue, endtime, tags);
+        this.title = title;
+        this.starttime = starttime;
+        this.venue = venue;
+        this.endtime = endtime;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -34,47 +34,47 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(), source.getTags());
+        this(source.getTitle(), source.getStartTime(), source.getVenue(), source.getEndTime(), source.getTags());
     }
 
-    public void setName(Name name) {
+    public void setTitle(Title name) {
         assert name != null;
-        this.name = name;
+        this.title = name;
     }
 
     @Override
-    public Name getName() {
-        return name;
+    public Title getTitle() {
+        return title;
     }
 
-    public void setPhone(Phone phone) {
-        assert phone != null;
-        this.phone = phone;
-    }
-
-    @Override
-    public Phone getPhone() {
-        return phone;
-    }
-
-    public void setEmail(Email email) {
-        assert email != null;
-        this.email = email;
+    public void setStartTime(StartTime starttime) {
+        assert starttime != null;
+        this.starttime = starttime;
     }
 
     @Override
-    public Email getEmail() {
-        return email;
+    public StartTime getStartTime() {
+        return starttime;
     }
 
-    public void setAddress(Address address) {
-        assert address != null;
-        this.address = address;
+    public void setVenue(Venue venue) {
+        assert venue != null;
+        this.venue = venue;
     }
 
     @Override
-    public Address getAddress() {
-        return address;
+    public Venue getVenue() {
+        return venue;
+    }
+
+    public void setEndTime(EndTime endtime) {
+        assert endtime != null;
+        this.endtime = endtime;
+    }
+
+    @Override
+    public EndTime getEndTime() {
+        return endtime;
     }
 
     @Override
@@ -95,10 +95,10 @@ public class Task implements ReadOnlyTask {
     public void resetData(ReadOnlyTask replacement) {
         assert replacement != null;
 
-        this.setName(replacement.getName());
-        this.setPhone(replacement.getPhone());
-        this.setEmail(replacement.getEmail());
-        this.setAddress(replacement.getAddress());
+        this.setTitle(replacement.getTitle());
+        this.setStartTime(replacement.getStartTime());
+        this.setVenue(replacement.getVenue());
+        this.setEndTime(replacement.getEndTime());
         this.setTags(replacement.getTags());
     }
 
@@ -112,7 +112,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(title, starttime, venue, endtime, tags);
     }
 
     @Override

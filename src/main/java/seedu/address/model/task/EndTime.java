@@ -4,40 +4,40 @@ package seedu.address.model.task;
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's address in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
+ * Represents a task's end time in the to-do list.
+ * Guarantees: immutable; is valid as declared in {@link #isValidEndTime(String)}
  */
-public class Address {
+public class EndTime {
 
-    public static final String MESSAGE_ADDRESS_CONSTRAINTS =
+    public static final String MESSAGE_ENDTIME_CONSTRAINTS =
             "Person addresses can take any values, and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String ADDRESS_VALIDATION_REGEX = "[^\\s].*";
+    public static final String ENDTIME_VALIDATION_REGEX = "[^\\s].*";
 
     public final String value;
 
     /**
-     * Validates given address.
+     * Validates given end time.
      *
      * @throws IllegalValueException if given address string is invalid.
      */
-    public Address(String address) throws IllegalValueException {
-        assert address != null;
-        if (!isValidAddress(address)) {
-            throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
+    public EndTime(String endtime) throws IllegalValueException {
+        assert endtime != null;
+        if (!isValidEndTime(endtime)) {
+            throw new IllegalValueException(MESSAGE_ENDTIME_CONSTRAINTS);
         }
-        this.value = address;
+        this.value = endtime;
     }
 
     /**
      * Returns true if a given string is a valid person email.
      */
-    public static boolean isValidAddress(String test) {
-        return test.matches(ADDRESS_VALIDATION_REGEX);
+    public static boolean isValidEndTime(String test) {
+        return test.matches(ENDTIME_VALIDATION_REGEX);
     }
 
     @Override
@@ -48,8 +48,8 @@ public class Address {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Address // instanceof handles nulls
-                && this.value.equals(((Address) other).value)); // state check
+                || (other instanceof EndTime // instanceof handles nulls
+                && this.value.equals(((EndTime) other).value)); // state check
     }
 
     @Override

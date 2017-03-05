@@ -9,6 +9,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.testutil.TestTask;
 import seedu.address.testutil.TestUtil;
+import seedu.address.ui.TaskListPanel;
 
 public class AddCommandTest extends ToDoListGuiTest {
 
@@ -27,8 +28,8 @@ public class AddCommandTest extends ToDoListGuiTest {
 
         //add duplicate Task
         commandBox.runCommand(td.hoon.getAddCommand());
-        assertResultMessage(AddCommand.MESSAGE_DUPLICATE_Task);
-        assertTrue(TaskListPanel.isListMatching(currentList));
+        assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
+        assertTrue(taskListPanel.isListMatching(currentList));
 
         //add to empty list
         commandBox.runCommand("clear");
@@ -43,12 +44,12 @@ public class AddCommandTest extends ToDoListGuiTest {
         commandBox.runCommand(TaskToAdd.getAddCommand());
 
         //confirm the new card contains the right data
-        TaskCardHandle addedCard = TaskListPanel.navigateToTask(TaskToAdd.getName().fullName);
+        TaskCardHandle addedCard = taskListPanel.navigateToTask(TaskToAdd.getName().fullName);
         assertMatching(TaskToAdd, addedCard);
 
         //confirm the list now contains all previous Tasks plus the new Task
         TestTask[] expectedList = TestUtil.addTasksToList(currentList, TaskToAdd);
-        assertTrue(TaskListPanel.isListMatching(expectedList));
+        assertTrue(taskListPanel.isListMatching(expectedList));
     }
 
 }

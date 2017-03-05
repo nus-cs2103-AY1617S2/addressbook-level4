@@ -1,16 +1,16 @@
 package seedu.address.testutil;
 
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.task.Address;
+import seedu.address.model.task.Email;
+import seedu.address.model.task.Name;
+import seedu.address.model.task.Phone;
+import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * A mutable person object. For testing only.
+ * A mutable task object. For testing only.
  */
-public class TestPerson implements ReadOnlyPerson {
+public class TestTask implements ReadOnlyTask {
 
     private Name name;
     private Address address;
@@ -18,19 +18,19 @@ public class TestPerson implements ReadOnlyPerson {
     private Phone phone;
     private UniqueTagList tags;
 
-    public TestPerson() {
+    public TestTask() {
         tags = new UniqueTagList();
     }
 
     /**
-     * Creates a copy of {@code personToCopy}.
+     * Creates a copy of {@code taskToCopy}.
      */
-    public TestPerson(TestPerson personToCopy) {
-        this.name = personToCopy.getName();
-        this.phone = personToCopy.getPhone();
-        this.email = personToCopy.getEmail();
-        this.address = personToCopy.getAddress();
-        this.tags = personToCopy.getTags();
+    public TestTask(TestTask taskToCopy) {
+        this.name = taskToCopy.getName();
+        this.phone = taskToCopy.getPhone();
+        this.email = taskToCopy.getEmail();
+        this.address = taskToCopy.getAddress();
+        this.tags = taskToCopy.getTags();
     }
 
     public void setName(Name name) {
