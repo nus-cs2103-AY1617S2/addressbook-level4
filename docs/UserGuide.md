@@ -229,5 +229,3 @@ There is no need to save manually.
 
 * **Select** : `select INDEX` <br>
   e.g.`select 2`
-
-
