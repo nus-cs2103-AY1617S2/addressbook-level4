@@ -189,10 +189,8 @@ Format : `exit`
  | `add NAME at START_DATETIME [PRIORITY] [/t TAG1, TAG2…]`| Adds a pending task with only start time, priority and tags
  | `add NAME by END_DATETIME [PRIORITY] [/t TAG1, TAG2…]`| Adds a pending task with only deadline, priority and tags
  | `add NAME by END_DATETIME [PRIORITY] [/t TAG1, TAG2…]`| Adds a pending task with start time, end time, priority and tags
- | `add [INSTANCES] NAME [at|by|from START_DATETIME] [to END_DATETIME]
-[PRIORITY] every [DAY|MONTH|YEAR] [/t TAG1, TAG2…]`| Adds a recurring number of task instances that spans over a period of time with priority and tags
-[edit](#edit) | `Edit INDEX|NAME [at|by|from START_DATETIME] [to END_DATETIME]
-[PRIORITY] every [DAY|MONTH|YEAR] [/t TAG1, TAG2…]` | Edits a task with the new parameters
+ | `add [INSTANCES] NAME [at|by|from START_DATETIME] [to END_DATETIME][PRIORITY] every [DAY|MONTH|YEAR] [/t TAG1, TAG2…]` | Adds a recurring number of task instances that spans over a period of time with priority and tags
+[edit](#edit) | `Edit INDEX|NAME [at|by|from START_DATETIME] [to END_DATETIME][PRIORITY] every [DAY|MONTH|YEAR] [/t TAG1, TAG2…]` | Edits a task with the new parameters
 [delete](#delete) | `Delete INDEX|NAME` | Delete a task 
 [view](#view) | `view` | Show all tasks
 [view](#view) | `view t` | Show all today’s tasks
