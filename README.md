@@ -9,7 +9,7 @@
 
 * This is a desktop task manager application. It has a GUI but most of the user interactions happen using
   a CLI (Command Line Interface).
-* It is **written in OOP fashion**. 
+* It is **written in OOP fashion**.
 
 
 #### Site Map
