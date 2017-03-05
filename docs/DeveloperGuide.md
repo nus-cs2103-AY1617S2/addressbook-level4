@@ -30,7 +30,7 @@
 5. Click `Finish`
 
 ## Target Users
-Our main target users (Jim): 
+Our main target users (Jim):
 * Are office workers and power users
 * Are willing to use the task manager in advanced and complicated ways
 * Have many tasks at hand with varying deadlines
@@ -99,7 +99,7 @@ Use case ends.
 
 > 1a1. ezDo shows an error message and prompts the user to retry
   Use case resumes at step 1
-  
+
 #### Use case: Updating a task
 
 **MSS**
@@ -126,7 +126,7 @@ Use case resumes at step 1
 
 1. User enters index of task to delete
 2. ezDo deletes the task and gives confirmation
-Use case ends. 
+Use case ends.
 
 **Extensions**
 
@@ -141,7 +141,7 @@ Use case resumes at step 1
 
 1. User enters command to change save location, along with the new file path
 2. ezDo updates the save location to the given path
-Use case ends. 
+Use case ends.
 
 **Extensions**
 
@@ -168,7 +168,7 @@ Use case resumes at step 1
 
 > Windows, Linux, Unix, OS X
 
-##### 
+#####
 
 ## Appendix E : Product Surveys
 ### Trello
@@ -200,8 +200,8 @@ Trello requires most of the work to be done with a mouse (moving of tasks by mou
 - No reminders (Need Windows 10 Cortana - privacy!)
 
 #### Verdict - NO
-Sticky notes is not so good for Jim. 
-Jim follows 'Inbox Zero'. He no longer has to worry about an inbox full of emails, because he gets a desktop full of notes now instead. 
+Sticky notes is not so good for Jim.
+Jim follows 'Inbox Zero'. He no longer has to worry about an inbox full of emails, because he gets a desktop full of notes now instead.
 Sticky notes require mouse-clicks and Jim prefers typing.
 Doesn't show what has to be done by what deadline.
 
@@ -209,17 +209,17 @@ Doesn't show what has to be done by what deadline.
 #### Pros
 - Has all the features expected from a standard to-do list application and more, such as due dates, notes, attachments, reminders and synchronisation.
 - Has a keyboard shortcut to quickly input tasks (Quick Add).
-- Intuitive user experience. 
+- Intuitive user experience.
 
 
 #### Cons
 - Quick Add still requires mouse input if you wish to specify a due date.
-- Does not support tagging of tasks. 
+- Does not support tagging of tasks.
 
 
 #### Verdict - NO
 Wunderlist does not suit Jim's needs.
-Though it supports basic task creation with the keyboard alone, it does not allow Jim to record essential details such as the deadlines or priority without using a mouse. 
+Though it supports basic task creation with the keyboard alone, it does not allow Jim to record essential details such as the deadlines or priority without using a mouse.
 
 ### Nirvana for GTD
 #### Pros
@@ -232,7 +232,7 @@ Though it supports basic task creation with the keyboard alone, it does not allo
 - Due time cannot be specified for any task.
 - Reminders cannot be set for any task.
 - Limited commands (e.g. Unable to delete a task).
-- No native apps provided for OS X and Windows platforms. 
+- No native apps provided for OS X and Windows platforms.
 
 #### Verdict - NO
-For Jim, the applications allows him to zoom in to tasks or projects that require immediate action. However, this application is restricting  him to add tasks or projects using the command line interface. He has to use the graphical interface to edit or delete a task which will decrease his productivity and therefore it is not suitable for him. 
+For Jim, the applications allows him to zoom in to tasks or projects that require immediate action. However, this application is restricting  him to add tasks or projects using the command line interface. He has to use the graphical interface to edit or delete a task which will decrease his productivity and therefore it is not suitable for him.
