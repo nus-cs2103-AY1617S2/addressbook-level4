@@ -50,7 +50,7 @@ Format: `help [COMMAND]`
 
 ### 2.2. Adding a task or event: `add`
 
-Adds a task or event to Typed<br>
+Adds a task or event to *Typed*<br>
 Format: `add TASK [by|every|from|now] [DATE] [to] [DATE] [#/TAGS]...`
 
 > Tasks and events can have any number of tags (including 0)
@@ -60,38 +60,40 @@ Examples:
 * `add read the little prince`
 * `add training camp from 2 May to 5 May`
 
-### 2.3. Listing all persons : `list`
+### 2.3. Listing all tasks and events : `list`
 
-Shows a list of the tasks and events in Typed.<br>
+Shows a list of the tasks and events in *Typed*.<br>
 Format: `list [TYPE]`
 
 Examples:
 
-* `list all`
-* `list undone`
+* `list`<br>
+  List the tasks and events, in a similar way as the default screen.<br>
+* `list undone`<br>
+  List all the undone tasks. <br>
 
-### 2.4. Editing a person : `edit`
 
-Edits an task or event in Typed.<br>
+### 2.4. Editing a task or event : `edit`
+
+Edits an task or event in *Typed*.<br>
 Format: `edit INDEX [DESCRIPTION] [by] DATE | DAY | TIME] [+TAGS | -TAGS]`
 
-> * Edits the person at the specified `INDEX`.
+> * Edits the task or event at the specified `INDEX`.
     The index refers to the index number shown on the screen.<br>
     The index **must be a positive integer** 1, 2, 3, ...
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
-> * When editing tags, the user can only remove or add tags.
+> * When editing tags, the user can remove or add tags.
 > * You can remove all tags by typing `t/` without specifying any tags after it.
 
 Examples:
 
 * `edit 1 by following Sunday`<br>
-  Edits the deadline of the task to the following Sunday.
+  Edits the deadline of the task to the following Sunday.<br>
+* `edit 5 +#work`<br>
+  Adds a tag #work to index 5 of the shown list on the screen.<br>
 
-* `edit 5 + #work`<br>
-  Adds a tag #work to index 5 of the shown list on the screen.
-
-### 2.5. Finding all tasks containing any keyword in their name: `find`
+### 2.5. Finding all tasks and events containing any keyword in their name : `find`
 
 Finds tasks and events whose names contain any or close to the given keywords.<br>
 Format: `find KEYWORD|TAGS [MORE_KEYWORDS | MORE_TAGS]`
@@ -110,12 +112,12 @@ Examples:
 * `find boss #work`<br>
   Returns any tasks or events with similar words to boss or contains similar tagging to work.
 
-### 2.6. Deleting a person : `delete`
+### 2.6. Deleting a task or event : `delete`
 
-Deletes the specified person from the address book. Irreversible.<br>
-Format: `delete INDEX`
+Deletes the specified task or event from *Typed*. Undo-able<br>
+Format: `delete INDEX [all | to | ...] [INDEX]`
 
-> Deletes the person at the specified `INDEX`. <br>
+> Deletes the task at the specified `INDEX` or range of `INDEX`. <br>
 > The index refers to the index number shown in the most recent listing.<br>
 > The index **must be a positive integer** 1, 2, 3, ...
 
@@ -123,46 +125,103 @@ Examples:
 
 * `list`<br>
   `delete 2`<br>
-  Deletes the 2nd person in the address book.
-* `find Betsy`<br>
+  Deletes the task or event labelled as index 2 on the screen on *Typed*.
+* `find boss`<br>
   `delete 1`<br>
-  Deletes the 1st person in the results of the `find` command.
+  Deletes the 1st task or event in the results of the `find` command.
 
-### 2.7. Select a person : `select`
+### 2.7. Showing history : `history`
 
-Selects the person identified by the index number used in the last person listing.<br>
-Format: `select INDEX`
-
-> Selects the person and loads the Google search page the person at the specified `INDEX`.<br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+Shows a list of the past commands used in that session.<br>
+Format: `history`
 
 Examples:
 
-* `list`<br>
-  `select 2`<br>
-  Selects the 2nd person in the address book.
-* `find Betsy` <br>
-  `select 1`<br>
-  Selects the 1st person in the results of the `find` command.
+* `history`<br>
 
-### 2.8. Clearing all entries : `clear`
+### 2.8. Undo : `undo`
 
-Clears all entries from the address book.<br>
-Format: `clear`
+Undo the last mutable command e.g. `add`, `delete`, `edit`.<br>
+Format: `undo [INDEX | all]`
 
-### 2.9. Exiting the program : `exit`
+> There must be commands that mutate the data before `undo` is called. <br>
+> Undo only works for if mutable commands are used in the **same** session. <br>
 
-Exits the program.<br>
-Format: `exit`
+Examples:
 
-### 2.10. Saving the data : `exit`
+* `add read the little prince`<br>
+  `undo`<br>
+  Undo the previous add command.<br>
+* `add read the little prince`<br>
+  `add push git commit by next wednesday`<br>
+  `add write blog post`<br>
+  `undo 2`<br>
+  Undo the previous 2 command, leaving only `add read the little prince` as the only task.<br>
 
-Address book data are saved in the hard disk automatically after any command that changes the data.<br>
+### 2.9. Redo : `redo`
+
+Redo the last undo.<br>
+Format: `redo [INDEX | all]`
+
+> There must be undo(s) before `redo` is called. <br>
+> `redo` only works for if `undo` commands are used in the **same** session. <br>
+> If a mutable command (e.g. `add`, `delete`, `undo`) is used after `undo`, `redo` have no effect.<br>
+
+Examples:
+
+* `add read the little prince`<br>
+  `undo`<br>
+  Undo the previous add command.<br>
+  'redo'<br>
+  Redo the undo command i.e. read the little prince is added back to *Typed*.
+* `add read the little prince`<br>
+  `add push git commit by next wednesday` <br>
+  `add write blog post`<br>
+  `undo 3`<br>
+  Undo the previous 2 command, leaving only read the little prince as the only task.<br>
+  `redo 2`<br>
+  Redo 2 undos i.e. push git commit and write blog post is added back to *Typed*.
+  
+### 2.10. Saving the data : `save`
+
+*Typed* data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually, unless you would like to save to a new file.
 
 Saves the data in a new file.<br>
 Format: `save FILENAME`
+
+Examples:
+
+* `save newTyped.txt`<br>
+  Saves data to the new file with file name newTyped.txt.
+
+### 2.11. Quiting the program : `exit`
+
+Exits *Typed*<br>
+
+Format: `exit | quit`
+
+Examples:
+
+* `exit`<br>
+* `quit`<br>
+
+### 2.12. Completing the task : `complete`
+
+Marks the task(s) as completed in *Typed*<br>
+
+Format: `complete INDEX [all | to | ,] [INDEX] ...`
+
+> Marks the task at the specified `INDEX` or range of `INDEX` as completed. <br>
+> The index refers to the index number shown in the most recent listing.<br>
+> The index **must be a positive integer** 1, 2, 3, ...<br>
+
+Examples:
+
+* `complete 2`<br>
+  Marks the task at index 2 of the listing shown as completed. Removes from the list of tasks shown.
+* `complete 2 to 5`<br>
+  Marks multiple tasks from index 2 to 5 as completed. Remove from the list of tasks shown.
 
 ## 3. Command Summary
  
