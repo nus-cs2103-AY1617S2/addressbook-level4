@@ -1,6 +1,6 @@
 package seedu.address.model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
@@ -17,7 +17,13 @@ public class PersonTest {
     public void person_hashCodeShouldMatch_returnTrue() {
         TestPerson pb;
         try {
-            pb = (new PersonBuilder()).withAddress("Singapore").withLabels("testLabel").withName("Name").withPhone("12345678").withEmail("email@email.com").build();
+            pb = (new PersonBuilder())
+                    .withAddress("Singapore")
+                    .withLabels("testLabel")
+                    .withName("Name")
+                    .withPhone("12345678")
+                    .withEmail("email@email.com")
+                    .build();
             Person p = new Person(pb);
             int hashcode = 1027801006;
             assert(p.hashCode() == hashcode);
@@ -25,6 +31,5 @@ public class PersonTest {
             e.printStackTrace();
             fail("Person fail Illegal value");
         }
-        
     }
 }
