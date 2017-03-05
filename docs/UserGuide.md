@@ -57,7 +57,7 @@ Format: `help [COMMAND]`
 ### 2.2. Adding a task or event: `add`
 
 Adds a task or event to Typed<br>
-Format: `add TASK [by|every|from|now] [DATE] [to] [DATE] [#/tags]...`
+Format: `add TASK [by|every|from|now] [DATE] [to] [DATE] [#/TAGS]...`
 
 > Tasks and events can have any number of tags (including 0)
 
@@ -68,48 +68,53 @@ Examples:
 
 ### 2.3. Listing all persons : `list`
 
-Shows a list of all persons in the address book.<br>
-Format: `list`
+Shows a list of the tasks and events in Typed.<br>
+Format: `list [TYPE]`
+
+Examples:
+
+* `list all`
+* `list undone`
 
 ### 2.4. Editing a person : `edit`
 
-Edits an existing person in the address book.<br>
-Format: `edit INDEX [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Edits an task or event in Typed.<br>
+Format: `edit INDEX [DESCRIPTION] [by] DATE | DAY | TIME] [+TAGS | -TAGS]`
 
 > * Edits the person at the specified `INDEX`.
-    The index refers to the index number shown in the last person listing.<br>
+    The index refers to the index number shown on the screen.<br>
     The index **must be a positive integer** 1, 2, 3, ...
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
-> * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-> * You can remove all the person's tags by typing `t/` without specifying any tags after it. 
+> * When editing tags, the user can only remove or add tags.
+> * You can remove all tags by typing `t/` without specifying any tags after it.
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@yahoo.com`<br>
-  Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@yahoo.com` respectively.
+* `edit 1 by following Sunday`<br>
+  Edits the deadline of the task to the following Sunday.
 
-* `edit 2 Betsy Crower t/`<br>
-  Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `edit 5 + #work`<br>
+  Adds a tag #work to index 5 of the shown list on the screen.
 
-### 2.5. Finding all persons containing any keyword in their name: `find`
+### 2.5. Finding all tasks containing any keyword in their name: `find`
 
-Finds persons whose names contain any of the given keywords.<br>
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Finds tasks and events whose names contain any or close to the given keywords.<br>
+Format: `find KEYWORD|TAGS [MORE_KEYWORDS | MORE_TAGS]`
 
-> * The search is case sensitive. e.g `hans` will not match `Hans`
+> * The search is not case sensitive. e.g `boss` will match `Boss`
 > * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-> * Only the name is searched.
-> * Only full words will be matched e.g. `Han` will not match `Hans`
-> * Persons matching at least one keyword will be returned (i.e. `OR` search).
-    e.g. `Hans` will match `Hans Bo`
+> * Only the name of the tasks and events is searched.
+> * Fuzzy find is used e.g. `bss` will match `boss`
+> * Tasks or events matching at least one keyword will be returned (i.e. `OR` search).
+    e.g. `Expo` will match `IT Expo`
 
 Examples:
 
-* `find John`<br>
-  Returns `John Doe` but not `john`
-* `find Betsy Tim John`<br>
-  Returns Any person having names `Betsy`, `Tim`, or `John`
+* `find johnny depp`<br>
+  Returns any tasks and events that names have close to the keywords, johnny and depp
+* `find boss #work`<br>
+  Returns any tasks or events with similar words to boss or contains similar tagging to work.
 
 ### 2.6. Deleting a person : `delete`
 
@@ -213,7 +218,7 @@ There is no need to save manually.
   e.g. `edit 4 from 13:00 to 5pm` <br>
   e.g. `edit 3 every Wednesday` <br>
   e.g. `edit 7 play mousehunt` <br>
-  e.g. `edit 5 #work` <br>
+  e.g. `edit 5 +#work` <br>
   e.g. `edit 6 -#supplier` <br>
 
 * **Find** : `find KEYWORD|TAG [MORE_KEYWORDS|MORE_TAGS] ...` <br> 
