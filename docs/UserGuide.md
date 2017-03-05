@@ -28,7 +28,7 @@ It can help you manage events, deadlines, add tasks with or without deadlines or
    
 5. Some example commands you can try:
    * **`help`** : displays help documentation
-   * **`adde`:**  `add "Cs2103 meeting" 3 Mar 17:00 to 18:00` adds an event called "Cs2103 meeting" on 3 March from 17:00 to 18:00
+   * **`add e`:**  `add "Cs2103 meeting" 3 Mar 17:00 to 18:00` adds an event called "Cs2103 meeting" on 3 March from 17:00 to 18:00
    * **`view`**: `view calendar` displays the calendar with tasks and events you have added
 
 6. Refer to the [Features](#features) section below for details of each command.<br>
@@ -53,25 +53,25 @@ Format: `help`
 
 Format (event):
 
-`adde "event name" START_DATE START_TIME to [END_DATE] END_TIME [t/TAG]... [//DESCRIPTION]`<br>
+`add e "event name" START_DATE START_TIME to [END_DATE] END_TIME [t/TAG]... [//DESCRIPTION]`<br>
 
 Format (tentative event. blocks multiple time slots): 
 
-`adde "event name" START_DATE START_TIME to [END_DATE] END_TIME or ... [t/TAG]... [//DESCRIPTION]`<br>
+`add e "event name" START_DATE START_TIME to [END_DATE] END_TIME or ... [t/TAG]... [//DESCRIPTION]`<br>
 
 Format (task with deadline): 
 
-`addt "task name" DEADLINE [t/TAG] [p/PRIORITY] [//DESCRIPTION]`  <br>
+`add t "task name" DEADLINE [t/TAG] [p/PRIORITY] [//DESCRIPTION]`  <br>
 
 Format (task without deadline): 
 
-`addt "task name" [t/TAG] [p/PRIORITY] [//DESCRIPTION] `<br>
+`add t "task name" [t/TAG] [p/PRIORITY] [//DESCRIPTION] `<br>
 
 Examples:
 
-* `adde "Cs2103 meeting" 3 Mar 17:00 to 18:00`
-* `addt "Buy tickets" 3 mar 17:00`
-* `addt "Take GF for dinner"`
+* `add e "Cs2103 meeting" 3 Mar 17:00 to 18:00`
+* `add t "Buy tickets" 3 mar 17:00`
+* `add t "Take GF for dinner"`
 
 ### 3.3 Viewing the active/expired list: `list`
 
@@ -81,27 +81,27 @@ Format: `list`
 
 **View tasks with/without deadline**: 
 
-Format: `listd [DEADLINE] [SORT_FIELD]`
+Format: `list t [DEADLINE] [SORT_FIELD]`
 
 Example:
 
-* `listd 3 March`
+* `list t 3 March`
 
 **View events within a time frame, or with no time frame specified** : 
 
-Format: `liste [START_DATE START_TIME to END_DATE END TIME] [SORT_FIELD]`
+Format: `list e [START_DATE START_TIME to END_DATE END TIME] [SORT_FIELD]`
 
 Example:
 
-* `liste today 17:00 to tomorrow 18:00`
+* `list e today 17:00 to tomorrow 18:00`
 
 **View overdue task** : 
 
-Format: `listo`
+Format: `list o`
 
 **View tasks and events in the expired list**: 
 
-Format: `listc`
+Format: `list c`
 
 NOTE:
 > note that tasks and events have different fields, and therefore the parameter SORT_FIELD may vary between events and tasks.
@@ -157,38 +157,28 @@ Format: `delete INDEX`
 
 Format: `clear`
 
-### 3.9 Viewing other material: `view`
-
-**View command history**: 
-
-Format: `view history`
-
-**View the calendar**: 
-
-Format: `view calendar`
-
-**View free time during the day/week/month** : 
-
-Format: `view free day | week | month`
-
-### 3.10 Exiting the program : `exit`
+### 3.9 Exiting the program : `exit`
 
 Format: `exit`
 
-### 3.11 Undoing the last command: `undo`
+### 3.10 Undoing the last command: `undo`
 
 Format: `undo`
 
-### 3.12 Recycle 
+### 3.11 Recycle 
 
 Brings back the expired tasks/events back to active list, with the deadline/event date altered.The index is as shown by `listc` command.
 
 Format : `Recycle INDEX DEADLINE | START_DATE START_TIME to [END_DATE] END_TIME`
 
-### 3.13 Files
+### 3.12 Files
 
 **Switch between files**: `switchf FILEPATH`
 > if the file given by FILEPATH does not exist, `TaskCrusher` creates a new file
+
+### 3.13 History
+
+Format: `view history`
 
 ## 4. FAQ
 
@@ -203,3 +193,4 @@ Format : `Recycle INDEX DEADLINE | START_DATE START_TIME to [END_DATE] END_TIME`
 
 ## 6. Storage File Format
 
+**TODO**
