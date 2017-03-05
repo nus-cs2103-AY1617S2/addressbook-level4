@@ -304,13 +304,19 @@ Examples:
 * 
 
 ### Marking a task as completed
-Mark an existing task as completed in iManager.
+Mark an existing task as completed in iManager. A completed task gets transferred to the done list. 
 
-Format: `done`
+Format: `done INDEX|NAME`
+> * INDEX refers to the index number shown in the most recent listing of tasks.
+> * INDEX must be positive integer (e.g 1, 2, 3)
+> * Marking an uncompleted task will change its status to completed while marking a completed task will change its status to uncompleted. 
+> * Marked tasks in the current session can be reverted with the `undo` command.
 
 Examples: 
-* 
-* 
+* `done 1`
+   Mark the first task in the task list as completed.
+* `done exam`
+   Mark a task named "exam" in the task list as completed.
  
 ### Finding for tasks
 With the find command, you can find for tasks or events which contain some keywords in their **name** as well as in their **descriptions**. 
@@ -321,40 +327,34 @@ Examples:
 * 
 *  
   
-### Clearing of tasks
+### Clearing of completed tasks
 Clears all completed tasks. <br>
 
 Format: `clear`
 
-Examples: 
-* 
-* 
+> * Cleared tasks in the current session can be restored with the `undo` command.
 
 ### Toggle google calender
-Toggle the view of google calendar and focus to certain time time as user specified. 
+Toggle the view of Google Calendar. The tasks in iManager will be synchronised with your Google Calendar. You cannot make any modification through the calendar.
 
-Format: 
-
-Examples:
-* 
-* 
+Format: `toggle`
 
 ### Undo most recent command
 Undo the most recent command that was successfully executed. Only commands that modify iManager in the same session can be undone. Command history will be cleared once iManager exits. 
 
 Format: `undo`
 
-> * `undo` only support add, edit, delete, done, clear and redo. 
+> * `undo` only support add, edit, delete, done, clear and redo command. 
 
 ### Redo most recent command
 Redo the most recent undo.  Only commands that modify iManager in the same session can be redo. Command history will be cleared once iManager exits. 
 
 Format: `redo`
 
-> * `redo` only support add, edit, delete, done, clear and undo. 
+> * `redo` only support add, edit, delete, done, clear and undo command. 
 
 ### Reset data
-Reset the applcation data. iManager can completely erase the saved data and start with a "clean" state. Application data will be save in the default save directory. (under project root folder) Once application data gets resetted, it cannot be restored. 
+Reset the applcation data. iManager can completely erase the saved data and start with a "clean" state. Application data will be save in the default save directory. (under project root folder) Once application data gets resetted, it CANNOT be restored. 
 
 Format: `reset`
 
@@ -403,12 +403,14 @@ Format : `exit`
  | `view c` | Show all completed task
  | `view f` | Show all floating task
  | `view o` | Show all overdue task
- | `view INDEX|NAME|START_DATETIME|END_DATETIME|PRIORITY|DAY|MONTH|YEAR TAG` | Show a specified task based on its detail 
-[done](#marking-a-task-as-completed) | `done INDEX|NAME`| Mark a task as done
-[find](#finding-for-tasks) | `Find KEYWORDS [KEYWORD 1, KEYWORD2,..]`| Find the task associated to the keyword
-[clear](#clearing-of-tasks) | `clear` | Clear all completed tasks
-[undo](#undo-most-recent-command) | `undo` | Undo the most recent command
-[redo](#redo-most-recent-command) | `redo` | Redo the most recent undo
-[reset](#reset-data) | `reset` | Reset saved data
-[saveto](#changing-the-save-location) | `saveto PATH` | Change the default save directory 
-[exit](#exiting-the-program) | `exit`
+ | `view INDEX|NAME|START_DATETIME|END_DATETIME|PRIORITY|DAY|MONTH|YEAR TAG` | Show a specified task based on its detail.
+[done](#marking-a-task-as-completed) | `done INDEX|NAME`| Mark a task as completed.
+[find](#finding-for-tasks) | `Find KEYWORDS [KEYWORD 1, KEYWORD2,..]`| Find the task associated to the keyword.
+[clear](#clearing-of-tasks) | `clear` | Clear all completed tasks.
+[toggle](#clearing-of-tasks) | `toggle` | Toggle Google Calender.
+[undo](#undo-most-recent-command) | `undo` | Undo the most recent command.
+[redo](#redo-most-recent-command) | `redo` | Redo the most recent undo.
+[reset](#reset-data) | `reset` | Reset saved data.
+[saveto](#changing-the-save-location) | `saveto PATH` | Change the default save directory.
+ | `cd` | Show current save directory.
+[exit](#exiting-the-program) | `exit` | Exit the application.
