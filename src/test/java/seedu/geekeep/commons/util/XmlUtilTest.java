@@ -11,8 +11,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.geekeep.commons.util.FileUtil;
-import seedu.geekeep.commons.util.XmlUtil;
 import seedu.geekeep.model.AddressBook;
 import seedu.geekeep.storage.XmlSerializableAddressBook;
 import seedu.geekeep.testutil.AddressBookBuilder;

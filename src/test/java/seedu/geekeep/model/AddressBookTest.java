@@ -14,8 +14,6 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.geekeep.model.AddressBook;
-import seedu.geekeep.model.ReadOnlyAddressBook;
 import seedu.geekeep.model.person.Person;
 import seedu.geekeep.model.person.ReadOnlyPerson;
 import seedu.geekeep.model.tag.Tag;

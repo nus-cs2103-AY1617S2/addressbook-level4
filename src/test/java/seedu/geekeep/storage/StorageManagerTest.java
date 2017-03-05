@@ -17,10 +17,6 @@ import seedu.geekeep.commons.events.storage.DataSavingExceptionEvent;
 import seedu.geekeep.model.AddressBook;
 import seedu.geekeep.model.ReadOnlyAddressBook;
 import seedu.geekeep.model.UserPrefs;
-import seedu.geekeep.storage.JsonUserPrefsStorage;
-import seedu.geekeep.storage.Storage;
-import seedu.geekeep.storage.StorageManager;
-import seedu.geekeep.storage.XmlAddressBookStorage;
 import seedu.geekeep.testutil.EventsCollector;
 import seedu.geekeep.testutil.TypicalTestPersons;
 

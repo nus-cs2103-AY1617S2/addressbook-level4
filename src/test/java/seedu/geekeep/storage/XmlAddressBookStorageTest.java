@@ -16,7 +16,6 @@ import seedu.geekeep.commons.util.FileUtil;
 import seedu.geekeep.model.AddressBook;
 import seedu.geekeep.model.ReadOnlyAddressBook;
 import seedu.geekeep.model.person.Person;
-import seedu.geekeep.storage.XmlAddressBookStorage;
 import seedu.geekeep.testutil.TypicalTestPersons;
 
 public class XmlAddressBookStorageTest {

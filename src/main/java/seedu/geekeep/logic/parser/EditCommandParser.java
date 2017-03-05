@@ -14,8 +14,8 @@ import java.util.Optional;
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.logic.commands.Command;
 import seedu.geekeep.logic.commands.EditCommand;
-import seedu.geekeep.logic.commands.IncorrectCommand;
 import seedu.geekeep.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.geekeep.logic.commands.IncorrectCommand;
 import seedu.geekeep.model.tag.UniqueTagList;
 
 /**

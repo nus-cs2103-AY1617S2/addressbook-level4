@@ -24,8 +24,6 @@ import seedu.geekeep.commons.core.EventsCenter;
 import seedu.geekeep.commons.events.model.AddressBookChangedEvent;
 import seedu.geekeep.commons.events.ui.JumpToListRequestEvent;
 import seedu.geekeep.commons.events.ui.ShowHelpRequestEvent;
-import seedu.geekeep.logic.Logic;
-import seedu.geekeep.logic.LogicManager;
 import seedu.geekeep.logic.commands.AddCommand;
 import seedu.geekeep.logic.commands.ClearCommand;
 import seedu.geekeep.logic.commands.Command;
