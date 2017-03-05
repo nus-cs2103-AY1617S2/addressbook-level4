@@ -361,14 +361,14 @@ Format : `exit`
 
  Command | Format  | Description
 -------- | -------- | -------- 
-[help](#viewing-help) | `help`| Opens a help page
+[help](#viewing-help) | `help`| Opens a help page.
 | `help [COMMAND]`| Help with specific command. 
-[add](#adding-a-task) | `add NAME [p/PRIORITY] [d/DESCRIPTION] [/t TAG...]`| Adds a floating task with priority and tags
- | `add NAME at START_DATETIME [p/PRIORITY] [d/DESCRIPTION] [/t TAG...]`| Adds a pending task with only start date&time, priority and tags
- | `add NAME by END_DATETIME [p/PRIORITY] [d/DESCRIPTION] [/t TAG...]`| Adds a pending task with only end date&time, priority and tags
- | `add NAME from END_DATETIME to START_DATETIME [p/PRIORITY] [d/DESCRIPTION] [/t TAG...]`| Adds a pending task with start date&time, end date&time, priority and tags
- | `add NAME [at|on|by|from START_DATETIME] [to END_DATETIME] every [DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION] [/t TAG...]` | Adds a recurring task that spans over a period of time with priority and tags
-[edit](#editing-a-task) | `Edit INDEX|NAME [at|by|from START_DATETIME] [to END_DATETIME][PRIORITY] every [DAY|MONTH|YEAR] [/t TAG1, TAG2…]` | Edits a task with the new parameters
+[add](#adding-a-task) | `add NAME [p/PRIORITY] [d/DESCRIPTION] [/t TAG...]`| Adds a floating task with priority and tags.
+ | `add NAME at START_DATETIME [p/PRIORITY] [d/DESCRIPTION] [/t TAG...]`| Adds a pending task with only start date&time, priority and tags.
+ | `add NAME by END_DATETIME [p/PRIORITY] [d/DESCRIPTION] [/t TAG...]`| Adds a pending task with only end date&time, priority and tags.
+ | `add NAME from END_DATETIME to START_DATETIME [p/PRIORITY] [d/DESCRIPTION] [/t TAG...]`| Adds a pending task with start date&time, end date&time, priority and tags.
+ | `add NAME [at|on|by|from START_DATETIME] [to END_DATETIME] every [DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION] [/t TAG...]` | Adds a recurring task that spans over a period of time with priority and tags.
+[edit](#editing-a-task) | `Edit INDEX|NAME [at|by|from START_DATETIME] [to END_DATETIME][PRIORITY] every [DAY|MONTH|YEAR] [/t TAG1, TAG2…]` | Edits a task with the new parameters.
 [delete](#deleting-a-task) | `Delete INDEX|NAME` | Delete a task 
 [view](#viewing-tasks) | `view` | Show all tasks
  | `view t` | Show all today’s tasks
