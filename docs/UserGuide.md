@@ -37,7 +37,7 @@ Without further ado, let’s get started.
 
 ## UI Control
 
-#### Task Status     
+### Task Status     
 The statuses of a task is shown as below: 
 
 |  Avatar | Status  
@@ -56,7 +56,7 @@ The statuses of a task is shown as below:
 > * Items with `...` after them can have multiple instances.
 > * The order of optional parameters are flexible.
 
-#### Viewing help : `help`
+### Viewing help : `help`
 
 Shows a list of all commands in iManager.<br>
 
@@ -72,7 +72,7 @@ Examples:
 * `help`  
   Shows all available commands and examples 
   
-#### Adding a task: `add` 
+### Adding a task: `add` 
 
 Adds a task to iManager<br>
 
@@ -82,7 +82,7 @@ Examples:
 * 
 * 
 
-#### Editing a task: `edit` 
+### Editing a task: `edit` 
 
 Edit a task in iManager<br>
 
@@ -92,7 +92,7 @@ Examples:
 * 
 * 
 
-#### Deleting a task: `delete` 
+### Deleting a task: `delete` 
 
 Delete a task from iManager<br>
 
@@ -102,7 +102,7 @@ Examples:
 * 
 * 
 
-#### Viewing all tasks : `view` 
+### Viewing tasks : `view` 
 Shows a list of all tasks iManage. Able to filter based on status of task/event.
 
 Format: `view`<br>
@@ -111,7 +111,7 @@ Examples:
 * 
 * 
 
-#### Marking a task as completed : `done` 
+### Marking a task as completed : `done` 
 Mark an existing task as completed in iManager.
 
 Format: `done`
@@ -120,7 +120,7 @@ Examples:
 * 
 * 
  
-#### Finding for tasks : `find` 
+### Finding for tasks : `find` 
 With the find command, you can find for tasks or events which contain some keywords in their **name** as well as in their **descriptions**. 
 
 Format: `find `
@@ -129,7 +129,7 @@ Examples:
 * 
 *  
   
-#### Clearing of tasks : `clear` 
+### Clearing of tasks : `clear` 
 Clears all completed tasks. <br>
 
 Format: `clear`
@@ -138,7 +138,7 @@ Examples:
 * 
 * 
 
-#### Toggle google calender
+### Toggle google calender
 Toggle the view of google calendar and focus to certain time time as user specified. 
 
 Format: 
@@ -147,24 +147,24 @@ Examples:
 * 
 * 
 
-#### Undo most recent command : `undo` 
+### Undo most recent command : `undo` 
 You can go back to historical versions of iManager with the use of undo commands. Only commands that modify iManager in the same session will be restored. Any versions of current session will not be accessible after restarting iManager.  
 
 Format: `undo`
 
-#### Redo most recent command : `redo` 
+### Redo most recent command : `redo` 
 You can go advance to historical versions of Dowat with the use of redo commands. Only commands that modify Dowat in the same session will be restored. Any versions of current session will not be accessible after restarting Dowat.  
 
 Format: `redo`
 
-#### reset data : `reset`
+### reset data : `reset`
 iManager will save data in a file called iManager.txt in the project root folder by dafault or if the file path is not specified. 
 You can change the location by specifying the file path as a command argument.
 New file will be automatically created as long as given directory is valid.
 
 Format: `reset`
 
-#### Changing the save location : `saveto`
+### Changing the save location : `saveto`
 iManager will save data in a file called iManager.txt in the project root folder by dafault or if the file path is not specified. 
 You can change the location by specifying the file path as a command argument.
 New file will be automatically created as long as given directory is valid.
@@ -176,7 +176,7 @@ Format: `saveto FILEPATH`
 Examples:
 * `saveto C:\Users\Computing\Desktop\CS2103` 
 
-#### Exiting the program
+### Exiting the program
 Format : `exit`
 
 
