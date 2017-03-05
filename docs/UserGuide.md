@@ -53,7 +53,7 @@ Format: `help [COMMAND]`
 ### 2.2. Adding a task or event: `add`
 
 Adds a task or event to Typed<br>
-Format: `add TASK [by|every|from|now] [date] [to] [date] [#/tags]...`
+Format: `add TASK [by|every|from|now] [DATE] [to] [DATE] [#/tags]...`
 
 > Tasks and events can have any number of tags (including 0)
 
