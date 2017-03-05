@@ -318,7 +318,7 @@ Examples:
 * `done exam`
    Mark a task named "exam" in the task list as completed.
  
-### Finding for tasks
+### Finding for task
 With the find command, you can find for tasks or events which contain some keywords in their **name** as well as in their **descriptions**. 
 
 Format: `find `
@@ -334,7 +334,7 @@ Format: `clear`
 
 > * Cleared tasks in the current session can be restored with the `undo` command.
 
-### Toggle google calender
+### Toggle Google Calender
 Toggle the view of Google Calendar. The tasks in iManager will be synchronised with your Google Calendar. You cannot make any modification through the calendar.
 
 Format: `toggle`
@@ -371,6 +371,7 @@ Format: `saveto FILEPATH`
 > * `cd` will tell you the current location of the save data. 
 
 Examples:
+* `cd`
 * `saveto C:\Users\Computing\Desktop\CS2103`
 
 ### Exiting the program:`exit`
@@ -405,12 +406,12 @@ Format : `exit`
  | `view o` | Show all overdue task
  | `view INDEX|NAME|START_DATETIME|END_DATETIME|PRIORITY|DAY|MONTH|YEAR TAG` | Show a specified task based on its detail.
 [done](#marking-a-task-as-completed) | `done INDEX|NAME`| Mark a task as completed.
-[find](#finding-for-tasks) | `Find KEYWORDS [KEYWORD 1, KEYWORD2,..]`| Find the task associated to the keyword.
-[clear](#clearing-of-tasks) | `clear` | Clear all completed tasks.
-[toggle](#clearing-of-tasks) | `toggle` | Toggle Google Calender.
+[find](#finding-for-task) | `Find KEYWORDS [KEYWORD 1, KEYWORD2,..]`| Find the task associated to the keyword.
+[clear](#clearing-of-completed-tasks) | `clear` | Clear all completed tasks.
+[toggle](#toggle-google-calender) | `toggle` | Toggle Google Calender.
 [undo](#undo-most-recent-command) | `undo` | Undo the most recent command.
 [redo](#redo-most-recent-command) | `redo` | Redo the most recent undo.
 [reset](#reset-data) | `reset` | Reset saved data.
-[saveto](#changing-the-save-location) | `saveto PATH` | Change the default save directory.
+[saveto](#save) | `saveto PATH` | Change the default save directory.
  | `cd` | Show current save directory.
 [exit](#exiting-the-program) | `exit` | Exit the application.
