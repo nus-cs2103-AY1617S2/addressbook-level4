@@ -41,11 +41,11 @@ Without further ado, let’s get started.
 The statuses of a task is shown as below: 
 
 Avatar  | Status  
--------- | -------- 
-| <img src="images/Floating.png" width="150"> | Floating 
-| <img src="images/Completed.png" width="150"> | Complete 
-| <img src="images/Pending.png" width="150"> | Pending 
-| <img src="images/Overdue.png" width="150"> | Overdue 
+--------------------------------------------| -------- 
+<img src="images/Floating.png" width="100"> | Floating 
+<img src="images/Completed.png" width="100"> | Complete 
+<img src="images/Pending.png" width="100"> | Pending 
+<img src="images/Overdue.png" width="100"> | Overdue 
 
 
 ## Features
