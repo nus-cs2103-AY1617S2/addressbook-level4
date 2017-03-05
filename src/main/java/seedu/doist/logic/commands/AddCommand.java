@@ -1,8 +1,10 @@
 package seedu.doist.logic.commands;
 
+import java.awt.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import seedu.doist.commons.exceptions.IllegalValueException;
@@ -36,15 +38,26 @@ public class AddCommand extends Command {
      * @throws IllegalValueException
      *             if any of the raw values are invalid
      */
-    public AddCommand(ArrayList<String> arguments) throws IllegalValueException {
-        if(arguments.isEmpty()){
+    public AddCommand(String preamble, Map<String, java.util.List<String>> parameters) throws IllegalValueException {
+        if(preamble == null || preamble.trim().isEmpty()){
             throw new IllegalValueException("No arguments passed");
         }
+        java.util.List<String> tags = parameters.get("\\under");
         final Set<Tag> tagSet = new HashSet<>();
         
-        this.toAdd = new Task(new Description(arguments.get(0)), new UniqueTagList(tagSet));
+        if(tags != null && tags.size() > 0) {
+           String allTags = tags.get(0).trim();
+           String[] extractedTags = allTags.split(" ");
+           for(String extractedTag : extractedTags){
+               tagSet.add(new Tag(extractedTag));
+           }
+        }
+        
+        this.toAdd = new Task(new Description(preamble), new UniqueTagList(tagSet));
+        
     }
 
+   
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
