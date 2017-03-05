@@ -25,7 +25,7 @@ public class EditCommandTest extends EzDoGuiTest {
         String detailsToEdit = "Bobby p/91234567 e/bobby@gmail.com s/Block 123, Bobby Street 3 t/husband";
         int ezDoIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withName("Bobby").withPhone("91234567")
+        TestTask editedTask = new TaskBuilder().withName("Bobby").withPriority(1)
                 .withEmail("bobby@gmail.com").withStartDate("Block 123, Bobby Street 3").withTags("husband").build();
 
         assertEditSuccess(ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
@@ -91,7 +91,7 @@ public class EditCommandTest extends EzDoGuiTest {
         assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 p/abcd");
-        assertResultMessage(Phone.MESSAGE_PHONE_CONSTRAINTS);
+        assertResultMessage(Priority.MESSAGE_PRIORITY_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 e/yahoo!!!");
         assertResultMessage(Email.MESSAGE_EMAIL_CONSTRAINTS);

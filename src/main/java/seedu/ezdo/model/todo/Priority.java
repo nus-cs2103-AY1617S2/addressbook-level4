@@ -5,18 +5,18 @@ import seedu.ezdo.commons.exceptions.IllegalValueException;
 
 /**
  * Represents a Person's Priority in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidPriority(String)}
  */
 public class Priority {
 
-    public static final String MESSAGE_ADDRESS_CONSTRAINTS =
+    public static final String MESSAGE_PRIORITY_CONSTRAINTS =
             "Person Priority can take numerical values from 1 to 3, and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String ADDRESS_VALIDATION_REGEX = "[1-3]";
+    public static final String PRIORITY_VALIDATION_REGEX = "[1-3]";
 
     public final int value;
 
@@ -28,8 +28,8 @@ public class Priority {
     public Priority(int priority) throws IllegalValueException {
         String stringPriority = Integer.toString(priority);
         assert stringPriority != null;
-        if (!isValidAddress(stringPriority)) {
-            throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
+        if (!isValidPriority(stringPriority)) {
+            throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
         }
         this.value = priority;
     }
@@ -37,8 +37,8 @@ public class Priority {
     /**
      * Returns true if a given string is a valid person email.
      */
-    public static boolean isValidAddress(String test) {
-        return test.matches(ADDRESS_VALIDATION_REGEX);
+    public static boolean isValidPriority(String test) {
+        return test.matches(PRIORITY_VALIDATION_REGEX);
     }
 
     @Override
