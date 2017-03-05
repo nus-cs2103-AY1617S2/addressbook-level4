@@ -14,7 +14,7 @@ import javafx.fxml.FXML;
 import seedu.geekeep.MainApp;
 
 public class UiPartTest {
-    
+
     private static final String MISSING_FILE_PATH = "UiPartTest/missingFile.fxml";
     private static final String INVALID_FILE_PATH = "UiPartTest/invalidFile.fxml";
     private static final String VALID_FILE_PATH = "UiPartTest/validFile.fxml";
