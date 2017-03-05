@@ -4,32 +4,45 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 
 ---
 
+0. [Introduction](#introduction)
 1. [Quick Start](#quick-start)
 2. [Features](#features)
 3. [FAQ](#faq)
 4. [Command Summary](#command-summary)
 
+## 0. Introduction
+
+This User Guide will aid you in understanding how ProcrastiNomore operates and what are 
+the functionalities this application has.
+
+ProcrastinNomore is a single command line task-management application that is able to 
+store new tasks and edit existing tasks. It is able to store the tasks in Google calendar 
+and will aid you in organizing all your corresponding tasks and events.
+
 ## 1. Quick Start
 
-0. Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
+0. Please ensure that you have Java version 1.8.0_60 or later install in your Computer.<br>
 
-   > Having any Java 8 version is not enough. <br>
+   > Having any Java 8 version is not enough.<br>
    > This app will not work with earlier versions of Java 8.
 
-1. Download the latest `addressbook.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for your Address Book.
+1. Download the latest `procrastinomore.jar` from the [releases](../../../releases) tab.
+2. Copy the file to the folder you want to use as the home folder for your Task Manager.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
-   > <img src="images/Ui.png" width="600">
+   > <img src="images/Ui.png" width="300">
 
-4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
-   e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
-5. Some example commands you can try:
-   * **`list`** : lists all contacts
-   * **`add`**` John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01` :
-     adds a contact named `John Doe` to the Address Book.
-   * **`delete`**` 3` : deletes the 3rd contact shown in the current list
-   * **`exit`** : exits the app
-6. Refer to the [Features](#features) section below for details of each command.<br>
+4. Using the application
+
+   >a. This application works by entering commands via the keyboard.<br>
+   >b. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
+   >c. There are also several keyboard shortcuts found at the bottom of the User Guide for 
+   quick access of several functions
+   >d. typing **`help`** and pressing <kbd>Enter</kbd> in the command box and it will 
+   open the help window.
+   > <img src="images/Ui_help.png" width="300">
+   
+5. Refer to the [Features](#features) section below for more details on the various 
+commands you can use.<br>
 
 
 ## 2. Features
@@ -146,53 +159,23 @@ Format: `clear completed`
 Examples:
 * `clear 03/03/17`
 
-### 2.6. Deleting a person : `delete`
 
-Deletes the specified person from the address book. Irreversible.<br>
-Format: `delete INDEX`
+### 2.9. To Undo your previous commands: `undo`
 
-> Deletes the person at the specified `INDEX`. <br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+Shortcut: `Ctrl+Z`<br>
+1 command will be undone every time this command is called.
 
-Examples:
+### 2.10. To Redo your previous commands: `redo`
 
-* `list`<br>
-  `delete 2`<br>
-  Deletes the 2nd person in the address book.
-* `find Betsy`<br>
-  `delete 1`<br>
-  Deletes the 1st person in the results of the `find` command.
+Shortcut: `Ctrl+Y`<br>
+1 command will be redone every time this command is called.
 
-### 2.7. Select a person : `select`
-
-Selects the person identified by the index number used in the last person listing.<br>
-Format: `select INDEX`
-
-> Selects the person and loads the Google search page the person at the specified `INDEX`.<br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
-
-Examples:
-
-* `list`<br>
-  `select 2`<br>
-  Selects the 2nd person in the address book.
-* `find Betsy` <br>
-  `select 1`<br>
-  Selects the 1st person in the results of the `find` command.
-
-### 2.8. Clearing all entries : `clear`
-
-Clears all entries from the address book.<br>
-Format: `clear`
-
-### 2.9. Exiting the program : `exit`
+### 2.11. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.10. Saving the data
+### 2.12. Saving the data
 
 Address book data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
