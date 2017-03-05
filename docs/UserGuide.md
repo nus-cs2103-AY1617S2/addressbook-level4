@@ -30,6 +30,7 @@ By : `Team ToLuist`  &nbsp;&nbsp;&nbsp;&nbsp;
 > * Items in `SQUARE_BRACKETS` are optional.
 > * Items with `...` after them can have multiple instances.
 > * Parameters can be in any order.
+> * Options with '/' allow either word to be used.
 
 ### 2.0. Viewing tasks
 Viewing all tasks in the todo list<br>
@@ -47,20 +48,20 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Adds a task to the todo list<br>
-Format: `add NAME [d/ENDDATE] [sd/STARTDATE] [r/PERIOD(DAY/WEEK/MONTH)] [p/PRIORITY] [t/TAG]...`
+Format: `add NAME [startdate/STARTDATE] [enddate/ENDDATE] [recurring/PERIOD(day/week/month)] [priority/PRIORITY] [tag/TAG]...`
 
 > Tasks can have any number of tags (including 0).
 
 Examples:
 
 * `add Do Homework`
-* `add Meeting With Boss d/11-11-2011 19:30 sd/11-11-2011 17:30`
-* `add Check Email d/today r/day`
+* `add Meeting With Boss enddate/11-11-2011 19:30 startdate/11-11-2011 17:30`
+* `add Check Email startdate/today recurring/day`
 
 ### 2.3. Updating a task : `update`
 
 Updates an existing task in the todo list.<br>
-Format: `update INDEX [NAME] [sd/STARTDATE] [d/ENDDATE] [r/PERIOD(DAY/WEEK/MONTH)] [p/PRIORITY] [t/TAG]...`
+Format: `update INDEX [NAME] [startdate/STARTDATE] [enddate/ENDDATE] [recurring/PERIOD(day/week/month)] [priority/PRIORITY] [tag/TAG]...`
 
 > * Updates the task at the specified `INDEX`. <br>
     The index refers to the index number shown in the last task listing.<br>
@@ -76,22 +77,23 @@ Examples:
 * `update 1`<br>
   Updates the 1st task to be 'completed' if not completed. If it was already completed, update the task to 'not completed'.
 
-* `update 2 Assignment 3 t/schoolwork`<br>
+* `update 2 Assignment 3 tag/schoolwork`<br>
   Updates the name of the 2nd task to be `Assignment 3` and adds the tag 'schoolwork' if it did not exist. If it already existed, removes the tag 'schoolwork'.
 
-### 2.4. Finding all tasks containing any keyword in their name or tag or date: `find`
+### 2.4. Filter all tasks containing any keyword in their name or tag or date: `filter`
 
 Finds tasks whose names contain any of the given keywords.<br>
-Format: `find [KEYWORDS] [t/] [d/] [n/]`
+Format: `filter/list/find [KEYWORDS] [tag/] [startdate/] [enddate/] [name/]`
 
 > * The search is case insensitive. e.g `hans` will match `Hans`
 > * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 > * By default only the name is searched.
-> * Adding 't/' will search by tag instead.
-> * Adding 'd/' will search by end date instead.
-> * Adding 'n/' will still search by name.
+> * Adding 'tag/' will search by tag instead.
+> * Adding 'startdate/' will search by end date instead.
+> * Adding 'enddate/' will search by end date instead.
+> * Adding 'name/' will still search by name.
 > * If no keyword is entered, the list of all tasks is displayed.
-> * 't/', 'd/' and 'n/' can be combined to search by multiple fields.
+> * 'tag/', 'startdate/', 'enddate/' and 'name/' can be combined to search by multiple fields.
 > * Partial words will be matched e.g. `Han` will match `Hans`.
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `Hans` will match `Hans Bo`
@@ -102,7 +104,7 @@ Examples:
   Returns `Assignment 1` and also `assignment 2`
 * `find Assignment Project Tutorial`<br>
   Returns any task having `Assignment`, `Project`, or `Tutorial` in their names.
-* `find school t/` <br>
+* `find school tag/` <br>
   Returns any task with tags with 'school' in the name.
 
 ### 2.5. Deleting a task : `delete`
@@ -131,7 +133,7 @@ Format: `clear`
 ### 2.7. Exiting the program : `exit`
 
 Exits the program.<br>
-Format: `exit`
+Format: `exit/quit`
 
 ### 2.8. Undo a command : `undo`
 
@@ -229,7 +231,7 @@ Example:
   `viewaliases` <br>
   Shows `hs:history` in the list.
 
-### 2.15. Change storage location for data: `save`
+### 2.15. Change storage location for save data: `save`
 
 Changes the location for the storage file used in this system. <br>
 Warning: If a file with the requested name already exists, it will be overwritten. <br>
@@ -242,31 +244,59 @@ Format: `save NEWFILELOCATION`
 Example:
 * `save data/savefile.txt` <br>
   Sets the storage location to `data/savefile.txt`
+  Sets the save storage location to `data/savefile.txt` 
+
+### 2.16. Change storage location for load data: `load`
+
+Changes the location for the storage file used in this system. <br>
+Format: `load NEWFILELOCATION`
+
+> * The new save location will be updated to the location.
+> * The program will replace the data in the program with data from the new file location.
+> * If the file does not exist, an error message will be displayed.
+> * Warning: The old data in the program will stay in the old save file, and will not be updated with new values.
+
+Example:
+* `load data/savefile.txt` <br>
+  Sets the load storage location to `data/savefile.txt` 
+
+### 2.17. Switch Display Task Window : `switch`
+
+Changes the displayed task list.
+Format: `switch WINDOWIDENTIFIER`
+
+> * If a number is given for window identifier, that will be the number of the tab from the left which is selected.
+> * If a letter is given, it will be the underlined letter in the window list name.
+> * If a word is given, it will be the word with the underlined letter in the window list name.
+
+### 2.18. Complete or Make Uncomplete a Task : `mark [complete/uncomplete] INDEX`
+
+Marks a task to be complete or incomplete.
+Format: `mark [complete/uncomplete] INDEX`
+
+> * Using complete as a parameter will mark the selected task as complete.
+> * Using incomplete as a parameter will mark the selected task as incomplete.
+> * Using neither will default the command to mark as complete.
 
 ## 3. Command Summary
 
-* **Add**  `add NAME [d/ENDDATE] [sd/STARTDATE] [r/PERIOD(DAY/WEEK/MONTH)] [t/TAG]...` <br>
-  e.g. `add Assigment 1 d/Friday t/school`
+* **Add**  `add NAME [enddate/ENDDATE] [startdate/STARTDATE] [recurring/PERIOD(day/week/month)] [priority/PRIORITY] [tag/TAG]...` <br>
+  e.g. `add Assigment 1 enddate/Friday tag/school`
 
 * **Clear** : `clear`
 
 * **Delete** : `delete INDEX` <br>
    e.g. `delete 3`
 
-* **Find** : `find [KEYWORDS] [t/] [d/] [n/]` <br>
-  e.g. `find school t/`
-
-* **List** : `list`
+* **Filter** : `filter/list/find [KEYWORDS] [tag/] [startdate/] [enddate/] [name/]` <br>
+  e.g. `find school tag/`
 
 * **Help** : `help`
 
-* **Select** : `select INDEX` <br>
-  e.g.`select 2`
+* **Update** : '`update INDEX [name/NAME] [enddate/ENDDATE] [startdate/STARTDATE] [recurring/PERIOD(day/week/month)] [priority/PRIORITY] [tag/TAG]...` <br>
+  e.g. `update 1 enddate/11/12/2011`
 
-* **Update** : '`update INDEX [NAME] [d/ENDDATE] [sd/STARTDATE] [r/PERIOD(DAY/WEEK/MONTH)] [t/TAG]...` <br>
-  e.g. `update 1 d/11/12/2011`
-
-* **Exit** : `exit`
+* **Exit** : `exit/quit`
 
 * **Undo** : `undo [NUMBER]` <br>
   e.g. `undo 5`
@@ -285,4 +315,10 @@ Example:
 * **View Aliases** : `viewalias` <br>
   e.g. `viewalias`
 
-* **Change Storage Location** : `save FILELOCATION`
+* **Change Save Storage Location** : `save FILELOCATION`
+
+* **Change Load Storage Location** : `load FILELOCATION`
+
+* **Switch Display Task Window** : `switch WINDOWIDENTIFIER`
+
+* **Complete or Make Uncomplete a Task : `mark [complete/uncomplete] INDEX`
