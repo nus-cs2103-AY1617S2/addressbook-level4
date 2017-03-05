@@ -1,4 +1,4 @@
-package seedu.address.model.tag;
+package seedu.tache.model.tag;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,10 +10,10 @@ import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.commons.exceptions.DuplicateDataException;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.CollectionUtil;
+import seedu.tache.commons.core.UnmodifiableObservableList;
+import seedu.tache.commons.exceptions.DuplicateDataException;
+import seedu.tache.commons.exceptions.IllegalValueException;
+import seedu.tache.commons.util.CollectionUtil;
 
 /**
  * A list of tags that enforces no nulls and uniqueness between its elements.

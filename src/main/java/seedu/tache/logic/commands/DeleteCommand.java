@@ -1,10 +1,10 @@
-package seedu.address.logic.commands;
+package seedu.tache.logic.commands;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.UniquePersonList.PersonNotFoundException;
+import seedu.tache.commons.core.Messages;
+import seedu.tache.commons.core.UnmodifiableObservableList;
+import seedu.tache.logic.commands.exceptions.CommandException;
+import seedu.tache.model.person.ReadOnlyPerson;
+import seedu.tache.model.person.UniquePersonList.PersonNotFoundException;
 
 /**
  * Deletes a person identified using it's last displayed index from the address book.

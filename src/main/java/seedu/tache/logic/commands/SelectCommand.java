@@ -1,11 +1,11 @@
-package seedu.address.logic.commands;
+package seedu.tache.logic.commands;
 
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.tache.commons.core.EventsCenter;
+import seedu.tache.commons.core.Messages;
+import seedu.tache.commons.core.UnmodifiableObservableList;
+import seedu.tache.commons.events.ui.JumpToListRequestEvent;
+import seedu.tache.logic.commands.exceptions.CommandException;
+import seedu.tache.model.person.ReadOnlyPerson;
 
 /**
  * Selects a person identified using it's last displayed index from the address book.

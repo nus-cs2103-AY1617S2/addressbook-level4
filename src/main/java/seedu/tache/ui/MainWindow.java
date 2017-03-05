@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.tache.ui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,13 +10,13 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import seedu.address.commons.core.Config;
-import seedu.address.commons.core.GuiSettings;
-import seedu.address.commons.events.ui.ExitAppRequestEvent;
-import seedu.address.commons.util.FxViewUtil;
-import seedu.address.logic.Logic;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.tache.commons.core.Config;
+import seedu.tache.commons.core.GuiSettings;
+import seedu.tache.commons.events.ui.ExitAppRequestEvent;
+import seedu.tache.commons.util.FxViewUtil;
+import seedu.tache.logic.Logic;
+import seedu.tache.model.UserPrefs;
+import seedu.tache.model.person.ReadOnlyPerson;
 
 /**
  * The Main Window. Provides the basic application layout containing

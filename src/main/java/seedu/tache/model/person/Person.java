@@ -1,9 +1,9 @@
-package seedu.address.model.person;
+package seedu.tache.model.person;
 
 import java.util.Objects;
 
-import seedu.address.commons.util.CollectionUtil;
-import seedu.address.model.tag.UniqueTagList;
+import seedu.tache.commons.util.CollectionUtil;
+import seedu.tache.model.tag.UniqueTagList;
 
 /**
  * Represents a Person in the address book.

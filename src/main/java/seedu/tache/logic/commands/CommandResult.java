@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.tache.logic.commands;
 
 /**
  * Represents the result of a command execution.

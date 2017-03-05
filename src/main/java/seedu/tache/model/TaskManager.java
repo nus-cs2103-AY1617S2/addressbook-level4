@@ -1,4 +1,4 @@
-package seedu.address.model;
+package seedu.tache.model;
 
 public class TaskManager {
 

@@ -1,4 +1,4 @@
-package seedu.address.commons.events;
+package seedu.tache.commons.events;
 
 public abstract class BaseEvent {
 

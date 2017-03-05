@@ -1,4 +1,4 @@
-package seedu.address.commons.util;
+package seedu.tache.commons.util;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -11,6 +11,8 @@ import java.util.List;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import seedu.tache.commons.util.CollectionUtil;
 
 public class CollectionUtilTest {
     @Rule

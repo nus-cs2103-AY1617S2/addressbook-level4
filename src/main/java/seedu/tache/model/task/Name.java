@@ -1,4 +1,4 @@
-package seedu.address.model.task;
+package seedu.tache.model.task;
 
 public class Name {
 

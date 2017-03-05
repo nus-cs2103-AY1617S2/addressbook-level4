@@ -1,4 +1,4 @@
-package seedu.address.model;
+package seedu.tache.model;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -9,13 +9,13 @@ import java.util.Objects;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.person.UniquePersonList.DuplicatePersonException;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
+import seedu.tache.commons.core.UnmodifiableObservableList;
+import seedu.tache.model.person.Person;
+import seedu.tache.model.person.ReadOnlyPerson;
+import seedu.tache.model.person.UniquePersonList;
+import seedu.tache.model.person.UniquePersonList.DuplicatePersonException;
+import seedu.tache.model.tag.Tag;
+import seedu.tache.model.tag.UniqueTagList;
 
 /**
  * Wraps all data at the address-book level

@@ -1,8 +1,8 @@
-package seedu.address.model;
+package seedu.tache.model;
 
 import java.util.Objects;
 
-import seedu.address.commons.core.GuiSettings;
+import seedu.tache.commons.core.GuiSettings;
 
 /**
  * Represents User's preferences.

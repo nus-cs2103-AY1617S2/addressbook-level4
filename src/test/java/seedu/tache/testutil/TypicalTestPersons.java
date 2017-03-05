@@ -1,9 +1,9 @@
-package seedu.address.testutil;
+package seedu.tache.testutil;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
+import seedu.tache.commons.exceptions.IllegalValueException;
+import seedu.tache.model.AddressBook;
+import seedu.tache.model.person.Person;
+import seedu.tache.model.person.UniquePersonList;
 
 /**
  *

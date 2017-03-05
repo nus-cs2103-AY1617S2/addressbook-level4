@@ -1,11 +1,11 @@
-package seedu.address.ui;
+package seedu.tache.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.tache.model.person.ReadOnlyPerson;
 
 public class PersonCard extends UiPart<Region> {
 

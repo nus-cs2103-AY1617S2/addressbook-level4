@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.tache.ui;
 
 import java.util.logging.Logger;
 
@@ -10,10 +10,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
-import seedu.address.commons.util.FxViewUtil;
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.tache.commons.core.LogsCenter;
+import seedu.tache.commons.events.ui.PersonPanelSelectionChangedEvent;
+import seedu.tache.commons.util.FxViewUtil;
+import seedu.tache.model.person.ReadOnlyPerson;
 
 /**
  * Panel containing the list of persons.

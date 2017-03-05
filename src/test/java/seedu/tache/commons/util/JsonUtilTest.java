@@ -1,4 +1,4 @@
-package seedu.address.commons.util;
+package seedu.tache.commons.util;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,8 +7,10 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-import seedu.address.testutil.SerializableTestClass;
-import seedu.address.testutil.TestUtil;
+import seedu.tache.commons.util.FileUtil;
+import seedu.tache.commons.util.JsonUtil;
+import seedu.tache.testutil.SerializableTestClass;
+import seedu.tache.testutil.TestUtil;
 
 /**
  * Tests JSON Read and Write

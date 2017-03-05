@@ -1,9 +1,11 @@
-package seedu.address.model.person;
+package seedu.tache.model.person;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+
+import seedu.tache.model.person.Email;
 
 public class EmailTest {
 

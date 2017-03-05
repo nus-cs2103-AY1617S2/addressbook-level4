@@ -1,12 +1,12 @@
-package seedu.address.logic.parser;
+package seedu.tache.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.tache.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Optional;
 
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.IncorrectCommand;
-import seedu.address.logic.commands.SelectCommand;
+import seedu.tache.logic.commands.Command;
+import seedu.tache.logic.commands.IncorrectCommand;
+import seedu.tache.logic.commands.SelectCommand;
 
 /**
  * Parses input arguments and creates a new SelectCommand object

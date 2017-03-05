@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.tache.ui;
 
 import java.util.logging.Logger;
 
@@ -7,12 +7,12 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ui.NewResultAvailableEvent;
-import seedu.address.commons.util.FxViewUtil;
-import seedu.address.logic.Logic;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.tache.commons.core.LogsCenter;
+import seedu.tache.commons.events.ui.NewResultAvailableEvent;
+import seedu.tache.commons.util.FxViewUtil;
+import seedu.tache.logic.Logic;
+import seedu.tache.logic.commands.CommandResult;
+import seedu.tache.logic.commands.exceptions.CommandException;
 
 public class CommandBox extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);

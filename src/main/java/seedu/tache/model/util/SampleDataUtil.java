@@ -1,15 +1,15 @@
-package seedu.address.model.util;
+package seedu.tache.model.util;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.UniquePersonList.DuplicatePersonException;
-import seedu.address.model.tag.UniqueTagList;
+import seedu.tache.commons.exceptions.IllegalValueException;
+import seedu.tache.model.AddressBook;
+import seedu.tache.model.ReadOnlyAddressBook;
+import seedu.tache.model.person.Address;
+import seedu.tache.model.person.Email;
+import seedu.tache.model.person.Name;
+import seedu.tache.model.person.Person;
+import seedu.tache.model.person.Phone;
+import seedu.tache.model.person.UniquePersonList.DuplicatePersonException;
+import seedu.tache.model.tag.UniqueTagList;
 
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {

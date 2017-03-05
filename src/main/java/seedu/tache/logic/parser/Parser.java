@@ -1,22 +1,22 @@
-package seedu.address.logic.parser;
+package seedu.tache.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.tache.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.tache.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.IncorrectCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.SelectCommand;
+import seedu.tache.logic.commands.AddCommand;
+import seedu.tache.logic.commands.ClearCommand;
+import seedu.tache.logic.commands.Command;
+import seedu.tache.logic.commands.DeleteCommand;
+import seedu.tache.logic.commands.EditCommand;
+import seedu.tache.logic.commands.ExitCommand;
+import seedu.tache.logic.commands.FindCommand;
+import seedu.tache.logic.commands.HelpCommand;
+import seedu.tache.logic.commands.IncorrectCommand;
+import seedu.tache.logic.commands.ListCommand;
+import seedu.tache.logic.commands.SelectCommand;
 
 /**
  * Parses user input.

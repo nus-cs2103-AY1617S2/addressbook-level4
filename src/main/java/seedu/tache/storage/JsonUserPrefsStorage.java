@@ -1,11 +1,11 @@
-package seedu.address.storage;
+package seedu.tache.storage;
 
 import java.io.IOException;
 import java.util.Optional;
 
-import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.commons.util.JsonUtil;
-import seedu.address.model.UserPrefs;
+import seedu.tache.commons.exceptions.DataConversionException;
+import seedu.tache.commons.util.JsonUtil;
+import seedu.tache.model.UserPrefs;
 
 /**
  * A class to access UserPrefs stored in the hard disk as a json file

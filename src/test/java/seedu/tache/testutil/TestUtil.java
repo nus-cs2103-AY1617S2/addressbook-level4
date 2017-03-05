@@ -1,4 +1,4 @@
-package seedu.address.testutil;
+package seedu.tache.testutil;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,20 +25,20 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import junit.framework.AssertionFailedError;
-import seedu.address.TestApp;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.FileUtil;
-import seedu.address.commons.util.XmlUtil;
-import seedu.address.model.AddressBook;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
-import seedu.address.storage.XmlSerializableAddressBook;
+import seedu.tache.TestApp;
+import seedu.tache.commons.exceptions.IllegalValueException;
+import seedu.tache.commons.util.FileUtil;
+import seedu.tache.commons.util.XmlUtil;
+import seedu.tache.model.AddressBook;
+import seedu.tache.model.person.Address;
+import seedu.tache.model.person.Email;
+import seedu.tache.model.person.Name;
+import seedu.tache.model.person.Person;
+import seedu.tache.model.person.Phone;
+import seedu.tache.model.person.ReadOnlyPerson;
+import seedu.tache.model.tag.Tag;
+import seedu.tache.model.tag.UniqueTagList;
+import seedu.tache.storage.XmlSerializableAddressBook;
 
 /**
  * A utility class for test cases.

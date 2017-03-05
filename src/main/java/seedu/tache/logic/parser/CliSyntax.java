@@ -1,8 +1,8 @@
-package seedu.address.logic.parser;
+package seedu.tache.logic.parser;
 
 import java.util.regex.Pattern;
 
-import seedu.address.logic.parser.ArgumentTokenizer.Prefix;
+import seedu.tache.logic.parser.ArgumentTokenizer.Prefix;
 
 /**
  * Contains Command Line Interface (CLI) syntax definitions common to multiple commands

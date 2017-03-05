@@ -1,13 +1,13 @@
-package seedu.address.model.person;
+package seedu.tache.model.person;
 
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.commons.exceptions.DuplicateDataException;
-import seedu.address.commons.util.CollectionUtil;
+import seedu.tache.commons.core.UnmodifiableObservableList;
+import seedu.tache.commons.exceptions.DuplicateDataException;
+import seedu.tache.commons.util.CollectionUtil;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.

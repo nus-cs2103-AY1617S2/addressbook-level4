@@ -1,11 +1,11 @@
-package seedu.address.logic;
+package seedu.tache.logic;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.tache.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.tache.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.tache.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,34 +20,36 @@ import org.junit.rules.TemporaryFolder;
 
 import com.google.common.eventbus.Subscribe;
 
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.events.model.AddressBookChangedEvent;
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
-import seedu.address.commons.events.ui.ShowHelpRequestEvent;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.SelectCommand;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
-import seedu.address.storage.StorageManager;
+import seedu.tache.commons.core.EventsCenter;
+import seedu.tache.commons.events.model.AddressBookChangedEvent;
+import seedu.tache.commons.events.ui.JumpToListRequestEvent;
+import seedu.tache.commons.events.ui.ShowHelpRequestEvent;
+import seedu.tache.logic.Logic;
+import seedu.tache.logic.LogicManager;
+import seedu.tache.logic.commands.AddCommand;
+import seedu.tache.logic.commands.ClearCommand;
+import seedu.tache.logic.commands.Command;
+import seedu.tache.logic.commands.CommandResult;
+import seedu.tache.logic.commands.DeleteCommand;
+import seedu.tache.logic.commands.ExitCommand;
+import seedu.tache.logic.commands.FindCommand;
+import seedu.tache.logic.commands.HelpCommand;
+import seedu.tache.logic.commands.ListCommand;
+import seedu.tache.logic.commands.SelectCommand;
+import seedu.tache.logic.commands.exceptions.CommandException;
+import seedu.tache.model.AddressBook;
+import seedu.tache.model.Model;
+import seedu.tache.model.ModelManager;
+import seedu.tache.model.ReadOnlyAddressBook;
+import seedu.tache.model.person.Address;
+import seedu.tache.model.person.Email;
+import seedu.tache.model.person.Name;
+import seedu.tache.model.person.Person;
+import seedu.tache.model.person.Phone;
+import seedu.tache.model.person.ReadOnlyPerson;
+import seedu.tache.model.tag.Tag;
+import seedu.tache.model.tag.UniqueTagList;
+import seedu.tache.storage.StorageManager;
 
 
 public class LogicManagerTest {

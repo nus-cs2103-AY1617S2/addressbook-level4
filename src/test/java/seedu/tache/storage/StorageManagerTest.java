@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package seedu.tache.storage;
 
 
 import static junit.framework.TestCase.assertNotNull;
@@ -12,13 +12,17 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import seedu.address.commons.events.model.AddressBookChangedEvent;
-import seedu.address.commons.events.storage.DataSavingExceptionEvent;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.UserPrefs;
-import seedu.address.testutil.EventsCollector;
-import seedu.address.testutil.TypicalTestPersons;
+import seedu.tache.commons.events.model.AddressBookChangedEvent;
+import seedu.tache.commons.events.storage.DataSavingExceptionEvent;
+import seedu.tache.model.AddressBook;
+import seedu.tache.model.ReadOnlyAddressBook;
+import seedu.tache.model.UserPrefs;
+import seedu.tache.storage.JsonUserPrefsStorage;
+import seedu.tache.storage.Storage;
+import seedu.tache.storage.StorageManager;
+import seedu.tache.storage.XmlAddressBookStorage;
+import seedu.tache.testutil.EventsCollector;
+import seedu.tache.testutil.TypicalTestPersons;
 
 public class StorageManagerTest {
 

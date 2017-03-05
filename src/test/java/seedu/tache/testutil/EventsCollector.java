@@ -1,12 +1,12 @@
-package seedu.address.testutil;
+package seedu.tache.testutil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.eventbus.Subscribe;
 
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.events.BaseEvent;
+import seedu.tache.commons.core.EventsCenter;
+import seedu.tache.commons.events.BaseEvent;
 
 /**
  * A class that collects events raised by other classes.

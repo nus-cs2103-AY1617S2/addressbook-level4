@@ -1,6 +1,6 @@
-package seedu.address.commons.events.ui;
+package seedu.tache.commons.events.ui;
 
-import seedu.address.commons.events.BaseEvent;
+import seedu.tache.commons.events.BaseEvent;
 
 /**
  * Indicates a request for App termination

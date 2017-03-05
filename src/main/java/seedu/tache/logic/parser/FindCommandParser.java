@@ -1,16 +1,16 @@
-package seedu.address.logic.parser;
+package seedu.tache.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.KEYWORDS_ARGS_FORMAT;
+import static seedu.tache.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.tache.logic.parser.CliSyntax.KEYWORDS_ARGS_FORMAT;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.IncorrectCommand;
+import seedu.tache.logic.commands.Command;
+import seedu.tache.logic.commands.FindCommand;
+import seedu.tache.logic.commands.IncorrectCommand;
 
 /**
  * Parses input arguments and creates a new FindCommand object

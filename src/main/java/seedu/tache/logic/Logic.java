@@ -1,9 +1,9 @@
-package seedu.address.logic;
+package seedu.tache.logic;
 
 import javafx.collections.ObservableList;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.tache.logic.commands.CommandResult;
+import seedu.tache.logic.commands.exceptions.CommandException;
+import seedu.tache.model.person.ReadOnlyPerson;
 
 /**
  * API of the Logic component

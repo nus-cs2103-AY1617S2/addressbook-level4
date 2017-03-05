@@ -1,12 +1,12 @@
-package seedu.address.testutil;
+package seedu.tache.testutil;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
+import seedu.tache.commons.exceptions.IllegalValueException;
+import seedu.tache.model.person.Address;
+import seedu.tache.model.person.Email;
+import seedu.tache.model.person.Name;
+import seedu.tache.model.person.Phone;
+import seedu.tache.model.tag.Tag;
+import seedu.tache.model.tag.UniqueTagList;
 
 /**
  *

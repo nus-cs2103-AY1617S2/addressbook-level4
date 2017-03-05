@@ -1,4 +1,4 @@
-package seedu.address;
+package seedu.tache;
 
 import java.io.IOException;
 import java.util.Map;
@@ -10,26 +10,26 @@ import com.google.common.eventbus.Subscribe;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-import seedu.address.commons.core.Config;
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.core.Version;
-import seedu.address.commons.events.ui.ExitAppRequestEvent;
-import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.commons.util.ConfigUtil;
-import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.Logic;
-import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.Storage;
-import seedu.address.storage.StorageManager;
-import seedu.address.ui.Ui;
-import seedu.address.ui.UiManager;
+import seedu.tache.commons.core.Config;
+import seedu.tache.commons.core.EventsCenter;
+import seedu.tache.commons.core.LogsCenter;
+import seedu.tache.commons.core.Version;
+import seedu.tache.commons.events.ui.ExitAppRequestEvent;
+import seedu.tache.commons.exceptions.DataConversionException;
+import seedu.tache.commons.util.ConfigUtil;
+import seedu.tache.commons.util.StringUtil;
+import seedu.tache.logic.Logic;
+import seedu.tache.logic.LogicManager;
+import seedu.tache.model.AddressBook;
+import seedu.tache.model.Model;
+import seedu.tache.model.ModelManager;
+import seedu.tache.model.ReadOnlyAddressBook;
+import seedu.tache.model.UserPrefs;
+import seedu.tache.model.util.SampleDataUtil;
+import seedu.tache.storage.Storage;
+import seedu.tache.storage.StorageManager;
+import seedu.tache.ui.Ui;
+import seedu.tache.ui.UiManager;
 
 /**
  * The main entry point to the application.

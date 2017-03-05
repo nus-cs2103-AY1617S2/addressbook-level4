@@ -1,7 +1,7 @@
-package seedu.address.logic.commands;
+package seedu.tache.logic.commands;
 
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.events.ui.ExitAppRequestEvent;
+import seedu.tache.commons.core.EventsCenter;
+import seedu.tache.commons.events.ui.ExitAppRequestEvent;
 
 /**
  * Terminates the program.

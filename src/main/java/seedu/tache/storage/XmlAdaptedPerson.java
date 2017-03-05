@@ -1,19 +1,19 @@
-package seedu.address.storage;
+package seedu.tache.storage;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
+import seedu.tache.commons.exceptions.IllegalValueException;
+import seedu.tache.model.person.Address;
+import seedu.tache.model.person.Email;
+import seedu.tache.model.person.Name;
+import seedu.tache.model.person.Person;
+import seedu.tache.model.person.Phone;
+import seedu.tache.model.person.ReadOnlyPerson;
+import seedu.tache.model.tag.Tag;
+import seedu.tache.model.tag.UniqueTagList;
 
 /**
  * JAXB-friendly version of the Person.

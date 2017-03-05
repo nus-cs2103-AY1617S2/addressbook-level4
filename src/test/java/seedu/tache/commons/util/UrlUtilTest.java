@@ -1,4 +1,4 @@
-package seedu.address.commons.util;
+package seedu.tache.commons.util;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -7,6 +7,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.junit.Test;
+
+import seedu.tache.commons.util.UrlUtil;
 
 /**
  * Tests the UrlUtil methods.

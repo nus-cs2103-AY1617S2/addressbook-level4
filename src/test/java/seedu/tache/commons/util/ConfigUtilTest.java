@@ -1,4 +1,4 @@
-package seedu.address.commons.util;
+package seedu.tache.commons.util;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -13,8 +13,10 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
-import seedu.address.commons.core.Config;
-import seedu.address.commons.exceptions.DataConversionException;
+import seedu.tache.commons.core.Config;
+import seedu.tache.commons.exceptions.DataConversionException;
+import seedu.tache.commons.util.ConfigUtil;
+import seedu.tache.commons.util.FileUtil;
 
 public class ConfigUtilTest {
 

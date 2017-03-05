@@ -1,15 +1,16 @@
-package seedu.address;
+package seedu.tache;
 
 import java.util.function.Supplier;
 
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import seedu.address.commons.core.Config;
-import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.UserPrefs;
-import seedu.address.storage.XmlSerializableAddressBook;
-import seedu.address.testutil.TestUtil;
+import seedu.tache.MainApp;
+import seedu.tache.commons.core.Config;
+import seedu.tache.commons.core.GuiSettings;
+import seedu.tache.model.ReadOnlyAddressBook;
+import seedu.tache.model.UserPrefs;
+import seedu.tache.storage.XmlSerializableAddressBook;
+import seedu.tache.testutil.TestUtil;
 
 /**
  * This class is meant to override some properties of MainApp so that it will be suited for
