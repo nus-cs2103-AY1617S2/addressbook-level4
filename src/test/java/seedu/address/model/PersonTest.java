@@ -5,9 +5,9 @@ import static org.junit.Assert.fail;
 import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.TestPerson;
+import seedu.address.model.person.Task;
+import seedu.address.testutil.TaskBuilder;
+import seedu.address.testutil.TestTask;
 
 /**
  * Test classes for Person
@@ -15,16 +15,14 @@ import seedu.address.testutil.TestPerson;
 public class PersonTest {
     @Test
     public void person_hashCodeShouldMatch_returnTrue() {
-        TestPerson pb;
+        TestTask pb;
         try {
-            pb = (new PersonBuilder())
+            pb = (new TaskBuilder())
                     .withAddress("Singapore")
                     .withLabels("testLabel")
                     .withName("Name")
-                    .withPhone("12345678")
-                    .withEmail("email@email.com")
                     .build();
-            Person p = new Person(pb);
+            Task p = new Task(pb);
             int hashcode = 1027801006;
             assert(p.hashCode() == hashcode);
         } catch (IllegalValueException e) {

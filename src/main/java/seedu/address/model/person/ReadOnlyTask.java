@@ -3,15 +3,13 @@ package seedu.address.model.person;
 import seedu.address.model.label.UniqueLabelList;
 
 /**
- * A read-only immutable interface for a Person in the addressbook.
+ * A read-only immutable interface for a Task in the doordie.
  * Implementations should guarantee: details are present and not null, field values are validated.
  */
-public interface ReadOnlyPerson {
+public interface ReadOnlyTask {
 
-    Name getName();
-    Phone getPhone();
-    Email getEmail();
-    Address getAddress();
+    Title getTitle();
+    Deadline getDeadline();
 
     /**
      * The returned LabelList is a deep copy of the internal LabelList,
@@ -22,27 +20,21 @@ public interface ReadOnlyPerson {
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
      */
-    default boolean isSameStateAs(ReadOnlyPerson other) {
+    default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                && other.getName().equals(this.getName()) // state checks here onwards
-                && other.getPhone().equals(this.getPhone())
-                && other.getEmail().equals(this.getEmail())
-                && other.getAddress().equals(this.getAddress()));
+                && other.getTitle().equals(this.getTitle()) // state checks here onwards
+                && other.getDeadline().equals(this.getDeadline()));
     }
 
     /**
-     * Formats the person as text, showing all contact details.
+     * Formats the task as text, showing all details.
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-            .append(" Phone: ")
-            .append(getPhone())
-            .append(" Email: ")
-            .append(getEmail())
-            .append(" Address: ")
-            .append(getAddress())
+        builder.append(getTitle())
+            .append(" Deadline: ")
+            .append(getDeadline())
             .append(" Label: ");
         getLabels().forEach(builder::append);
         return builder.toString();
