@@ -70,9 +70,9 @@ Examples:
   Shows all available commands with examples.
 
 #### Viewing a specific commands
-Show details of a specific command using `[KEYWORD]` flag.
+Show details of a specific command using `[COMMAND]` flag.
 
-List of available [KEY_WORD] for help: <br>
+List of available [COMMAND] for help: <br>
 - add <br>
 - edit <br>
 - delete <br>
@@ -86,7 +86,7 @@ List of available [KEY_WORD] for help: <br>
 - saveto <br>
 - exit <br>
 
-Format: `help [KEY_WORD]`
+Format: `help [COMMAND]`
 
 Examples:
 
@@ -109,15 +109,15 @@ Examples:
 * `add exam p/1 d/SR1 t/CS2010`<br>
   Add a priority 1 task named "exam" with description "SR1" and tag "CS2010" into task list.
 
-#### Adding a pending task with START DATE only
+#### Adding a pending task with START DATE & TIME only
 
-Adds a pending task with only start date to the task list. <br>
+Adds a pending task with only start date & time to the task list. <br>
 
-Format: `add NAME on START_DATE [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` <br>
+Format: `add NAME on START_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` <br>
 > * Tasks can have any number of tags.
 > * If no priority is specified, the task will be of lowest priority.
 > * Date format is MM-DD-YYYY HHMM (24 hour Format) e.g. 10-22-2017 1500.
-> * If no time is specified, the time will be the CURRENT time.
+> * If no time (i.e HHMM) is specified, the time will be the CURRENT time.
 
 Examples:
 * `add exam on 10-22-2017`
@@ -128,16 +128,16 @@ Examples:
   Add a priority 1 task named "exam" on 22 October 2017 with description "SR1" and tag "CS2010" into task list.
  
  
-#### Adding a pending task with END DATE only
+#### Adding a pending task with END DATE & TIME only
 
-Adds a pending task with only end date to the task list. <br>
+Adds a pending task with only end date & time to the task list. <br>
 
-Format: `add NAME by END_DATE [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` <br>
+Format: `add NAME by END_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` <br>
 > * Tasks can have any number of tags.
 > * If no priority is specified, the task will be of lowest priority.
 > * Date format is MM-DD-YYYY HHMM (24 hour Format) e.g. 10-22-2017 1500.
-> * If no time is specified, the time will be 2359.
-> * The START_DATE is the CURRENT date and time.
+> * If no time (i.e HHMM) is specified, the time will be 2359.
+> * The START_DATETIME is the CURRENT date and time by default.
 
 Examples: 
 * `add exam by 10-22-2017`
@@ -149,16 +149,16 @@ Examples:
   list.
   
   
-#### Adding a pending task with both START DATE & END DATE 
+#### Adding a pending task with both START DATE & TIME + END DATE & TIME 
 
-Adds a pending task with both start date and end date to the task list. <br>
+Adds a pending task with both start date & time and end date & time to the task list. <br>
 
-Format: `add NAME from START_DATE to END_DATE [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` <br>
+Format: `add NAME from START_DATETIME to END_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` <br>
 > * Tasks can have any number of tags.
 > * If no priority is specified, the task will be of lowest priority.
 > * Date format is MM-DD-YYYY HHMM (24 hour Format) e.g. 10-22-2017 1500.
-> * If no start time is specified, the time will be the CURRENT time.
-> * If no end time is specified, the time will 2359.
+> * If no start time (i.e HHMM) is specified, the time will be the CURRENT time.
+> * If no end time (i.e HHMM) is specified, the time will 2359.
 
 Examples:
 * `add exam from 10-22-2017 to 10-22-2016`
@@ -173,17 +173,17 @@ Examples:
 
 Adds a recurring task that spans over a period of time. <br>
 
-Format: `add NAME [at|on|by|from START_DATE] [to END_DATE] [every DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` <br>
+Format: `add NAME [at|on|by|from START_DATETIME] [to END_DATETIME] every [DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` <br>
 > * Tasks can have any number of tags.
 > * If no priority is specified, the task will be of lowest priority.
 > * Date format is MM-DD-YYYY HHMM (24 hour Format) e.g. 10-22-2017 1500.
-> * If no start time is specified, the time will be the CURRENT time. 
-> * If no end time is specified, the time will 2359. 
+> * If no start time (i.e HHMM) is specified, the time will be the CURRENT time. 
+> * If no end time (i.e HHMM) is specified, the time will 2359. 
 > * Any form of abbreviation can be use for WEEK (e.g Tue, Tues, Tuesday), case insensitve. 
 > * No abbreviation can be use for DAY, MONTH and YEAR
 > * Month (i.e MM) is ignored for every MONTH.
 > * It is suffice to use time for every DAY and every WEEK. Date (i.e MM-DD-YYYY) will be ignored.
-> * One must include START_DATE and END_DATE for every MONTH and every YEAR. 
+> * One must include START_DATETIME and END_DATETIME for every MONTH and every YEAR. 
 
 Examples:
 * `add exam every day p/1 d/SR1 t/CS2010`<br>
@@ -362,11 +362,12 @@ Format : `exit`
  Command | Format  | Description
 -------- | -------- | -------- 
 [help](#viewing-help) | `help`| Opens a help page
-[add](#adding-a-task) | `add NAME [PRIORITY] [/t TAG1, TAG2…]`| Adds a floating task with priority and tags
- | `add NAME at START_DATETIME [PRIORITY] [/t TAG1, TAG2…]`| Adds a pending task with only start time, priority and tags
- | `add NAME by END_DATETIME [PRIORITY] [/t TAG1, TAG2…]`| Adds a pending task with only deadline, priority and tags
- | `add NAME by END_DATETIME [PRIORITY] [/t TAG1, TAG2…]`| Adds a pending task with start time, end time, priority and tags
- | `add [INSTANCES] NAME [at|by|from START_DATETIME] [to END_DATETIME][PRIORITY] every [DAY|MONTH|YEAR] [/t TAG1, TAG2…]` | Adds a recurring number of task instances that spans over a period of time with priority and tags
+| `help [COMMAND]`| Help with specific command. 
+[add](#adding-a-task) | `add NAME [p/PRIORITY] [d/DESCRIPTION] [/t TAG...]`| Adds a floating task with priority and tags
+ | `add NAME at START_DATETIME [p/PRIORITY] [d/DESCRIPTION] [/t TAG...]`| Adds a pending task with only start date&time, priority and tags
+ | `add NAME by END_DATETIME [p/PRIORITY] [d/DESCRIPTION] [/t TAG...]`| Adds a pending task with only end date&time, priority and tags
+ | `add NAME from END_DATETIME to START_DATETIME [p/PRIORITY] [d/DESCRIPTION] [/t TAG...]`| Adds a pending task with start date&time, end date&time, priority and tags
+ | `add NAME [at|on|by|from START_DATETIME] [to END_DATETIME] every [DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION] [/t TAG...]` | Adds a recurring task that spans over a period of time with priority and tags
 [edit](#editing-a-task) | `Edit INDEX|NAME [at|by|from START_DATETIME] [to END_DATETIME][PRIORITY] every [DAY|MONTH|YEAR] [/t TAG1, TAG2…]` | Edits a task with the new parameters
 [delete](#deleting-a-task) | `Delete INDEX|NAME` | Delete a task 
 [view](#viewing-tasks) | `view` | Show all tasks
