@@ -47,62 +47,104 @@ Format: `help`
 
 > Help is also shown if you enter an incorrect command e.g. `abcd`
 
-### 2.2. Adding a person: `add`
+### 2.2. Adding a new Task: `add`
 
-Adds a person to the address book<br>
-Format: `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+There are 4 forms of task that ProcrastiNomore supports:
 
-> Persons can have any number of tags (including 0)
+#### 2.2.1. Events
 
-Examples:
+Format: `add TASK on DATE/DAY`
+		`add TASK from STARTTIME to ENDTIME`
+		`add TASK on DATE/DAY from STARTTIME to ENDTIME`
+		
+#### 2.2.2. Deadlines
 
-* `add John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01`
-* `add Betsy Crowe t/friend e/betsycrowe@gmail.com a/Newgate Prison p/1234567 t/criminal`
+Format: `add TASK by DATE/TIME/DATE+TIME
 
-### 2.3. Listing all persons : `list`
+#### 2.2.3. Untimed
 
-Shows a list of all persons in the address book.<br>
-Format: `list`
+Format:	`add TASK`
 
-### 2.4. Editing a person : `edit`
+#### 2.2.4. Unconfirmed events
 
-Edits an existing person in the address book.<br>
-Format: `edit INDEX [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Format: `add TASK on DATE1 or DATE2 or DATE3`
 
-> * Edits the person at the specified `INDEX`.
-    The index refers to the index number shown in the last person listing.<br>
-    The index **must be a positive integer** 1, 2, 3, ...
-> * At least one of the optional fields must be provided.
-> * Existing values will be updated to the input values.
-> * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-> * You can remove all the person's tags by typing `t/` without specifying any tags after it. 
+> TIME input can be in 24hrs format or 12hrs format with am/pm
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@yahoo.com`<br>
-  Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@yahoo.com` respectively.
+* `add eat breakfast on 3/3/17`
+* `add eat lunch on THURSDAY`
+* `add eat dinner from 530pm to 730pm`
+* `add eat breakfast from 1730 to 1930`
+* `add eat lunch on 3/3/17 from 530pm to 730pm`
+* `add eat dinner by 3/3/17`
+* `add eat breakfast by 730pm`
+* `add eat lunch by 3/3/17 by 330pm`
+* `add eat dinner on 3/3/17 or 4/3/17 or 5/3/17`
+* `add eat breakfast`
 
-* `edit 2 Betsy Crower t/`<br>
-  Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+### 2.3. Update an existing task : `update`
 
-### 2.5. Finding all persons containing any keyword in their name: `find`
+There are 3 types of edit that ProcrastiNomore supports:
 
-Finds persons whose names contain any of the given keywords.<br>
-Format: `find KEYWORD [MORE_KEYWORDS]`
+#### 2.3.1. Update task name
 
-> * The search is case sensitive. e.g `hans` will not match `Hans`
-> * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-> * Only the name is searched.
-> * Only full words will be matched e.g. `Han` will not match `Hans`
-> * Persons matching at least one keyword will be returned (i.e. `OR` search).
-    e.g. `Hans` will match `Hans Bo`
+Format: `update TASK to NEWTASK`
+
+#### 2.3.2. Update task time
+
+Format: `update TASK to STARTTIME to ENDTIME`
+		`update TASK to TIME`
+		
+#### 2.3.3. Update the entire task index
+
+Format: `update TASKINDEX NEWTASKNAME/DATE/TIME
+
+> For 2.3.1. and 2.3.2., ProcrastiNomore will show a list of task with the 
+> same task name and user will be required to put the TASKINDEX of the 
+> TASK user wants to change
 
 Examples:
+*`update eat breakfast to eat lunch`
+ `1`
+*`update eat dinner to 730pm`
+ `1`
 
-* `find John`<br>
-  Returns `John Doe` but not `john`
-* `find Betsy Tim John`<br>
-  Returns Any person having names `Betsy`, `Tim`, or `John`
+### 2.4. Delete an existing task: `delete`
+
+Format: `delete TASKNAME`
+		`delete TASKINDEX`
+		
+> In the event of delete TASKNAME, ProcrastiNomore will show a list of tasks
+> with the same TASKNAME and user will be required to input the TASKINDEX of 
+> the TASK user wants to delete
+
+Examples:
+*`delete breakfast`
+ `1`
+*`list`
+ `delete 1`
+
+### 2.5. Wipe out history of all or specified tasks: clear
+
+There are 3 types of clear commands.
+
+#### 2.5.1. Delete all tasks
+
+Format: `clear all`
+
+#### 2.5.2. Delete all tasks on date specified
+
+Format: `clear DATE`
+
+#### 2.5.3. Delete all previously marked uncomplete/complete tasks
+
+Format: `clear completed`
+		`clear uncompleted`
+
+Examples:
+*`Clear 03/03/17`
 
 ### 2.6. Deleting a person : `delete`
 
@@ -182,5 +224,3 @@ There is no need to save manually.
 
 * **Select** : `select INDEX` <br>
   e.g.`select 2`
-
-
