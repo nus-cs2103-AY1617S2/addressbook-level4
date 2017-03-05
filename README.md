@@ -5,8 +5,8 @@
 [![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-W14-B4/main/badge.svg?branch=v0.0)](https://coveralls.io/github/CS2103JAN2017-W14-B4/main?branch=v0.0)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/3dbcf8e8ed8544b0a97d73c547890322)](https://www.codacy.com/app/e0003133/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103JAN2017-W14-B4/main&amp;utm_campaign=Badge_Grade)
 
-<p align="center">
-  <img src="docs/images/Ui.png" width="800"><br>
+<p align="center" style="padding:25px">
+  <img src="docs/images/Ui.png" width="700"><br>
 </p>
 
 
