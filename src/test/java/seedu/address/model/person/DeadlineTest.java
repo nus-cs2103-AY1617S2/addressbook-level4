@@ -12,10 +12,10 @@ public class DeadlineTest {
         // invalid addresses
         assertFalse(Deadline.isValidDate("")); // empty string
         assertFalse(Deadline.isValidDate(" ")); // spaces only
+        assertFalse(Deadline.isValidDate("Blk 456, Den Road, #01-355"));
+        assertFalse(Deadline.isValidDate("23")); // two characters only
 
         // valid addresses
-        assertTrue(Deadline.isValidDate("Blk 456, Den Road, #01-355"));
-        assertTrue(Deadline.isValidDate("-")); // one character
-        assertTrue(Deadline.isValidDate("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
+        assertTrue(Deadline.isValidDate("11-12-2106")); // date
     }
 }

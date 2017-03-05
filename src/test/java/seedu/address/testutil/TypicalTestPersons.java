@@ -3,7 +3,7 @@ package seedu.address.testutil;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Task;
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.UniqueTaskList;
 
 /**
  *
@@ -14,19 +14,19 @@ public class TypicalTestPersons {
 
     public TypicalTestPersons() {
         try {
-            alice = new TaskBuilder().withName("Alice Pauline")
-                    .withAddress("123, Jurong West Ave 6, #08-111").withLabels("friends").build();
-            benson = new TaskBuilder().withName("Benson Meier").withAddress("311, Clementi Ave 2, #02-25")
+            alice = new TaskBuilder().withTitle("Alice Pauline")
+                    .withDeadline("11-11-2017").withLabels("friends").build();
+            benson = new TaskBuilder().withTitle("Benson Meier").withDeadline("11-11-2017")
                     .withLabels("owesMoney", "friends").build();
-            carl = new TaskBuilder().withName("Carl Kurz").withAddress("wall street").build();
-            daniel = new TaskBuilder().withName("Daniel Meier").withAddress("10th street").build();
-            elle = new TaskBuilder().withName("Elle Meyer").withAddress("michegan ave").build();
-            fiona = new TaskBuilder().withName("Fiona Kunz").withAddress("little tokyo").build();
-            george = new TaskBuilder().withName("George Best").withAddress("4th street").build();
+            carl = new TaskBuilder().withTitle("Carl Kurz").withDeadline("11-11-2017").build();
+            daniel = new TaskBuilder().withTitle("Daniel Meier").withDeadline("11-11-2017").build();
+            elle = new TaskBuilder().withTitle("Elle Meyer").withDeadline("11-11-2017").build();
+            fiona = new TaskBuilder().withTitle("Fiona Kunz").withDeadline("11-11-2017").build();
+            george = new TaskBuilder().withTitle("George Best").withDeadline("11-11-2017").build();
 
             // Manually added
-            hoon = new TaskBuilder().withName("Hoon Meier").withAddress("little india").build();
-            ida = new TaskBuilder().withName("Ida Mueller").withAddress("chicago ave").build();
+            hoon = new TaskBuilder().withTitle("Hoon Meier").withDeadline("11-11-2017").build();
+            ida = new TaskBuilder().withTitle("Ida Mueller").withDeadline("11-11-2017").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -36,8 +36,8 @@ public class TypicalTestPersons {
     public static void loadAddressBookWithSampleData(AddressBook ab) {
         for (TestTask person : new TypicalTestPersons().getTypicalPersons()) {
             try {
-                ab.addPerson(new Task(person));
-            } catch (UniquePersonList.DuplicatePersonException e) {
+                ab.addTask(new Task(person));
+            } catch (UniqueTaskList.DuplicateTaskException e) {
                 assert false : "not possible";
             }
         }

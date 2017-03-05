@@ -3,7 +3,7 @@ package seedu.address.model.person;
 import seedu.address.model.label.UniqueLabelList;
 
 /**
- * A read-only immutable interface for a Task in the doordie.
+ * A read-only immutable interface for a Task in the task manager.
  * Implementations should guarantee: details are present and not null, field values are validated.
  */
 public interface ReadOnlyTask {
@@ -34,7 +34,7 @@ public interface ReadOnlyTask {
         final StringBuilder builder = new StringBuilder();
         builder.append(getTitle())
             .append(" Deadline: ")
-            .append(getDeadline())
+            .append(getDeadline().toString())
             .append(" Label: ");
         getLabels().forEach(builder::append);
         return builder.toString();

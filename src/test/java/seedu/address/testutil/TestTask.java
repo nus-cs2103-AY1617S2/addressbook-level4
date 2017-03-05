@@ -10,8 +10,8 @@ import seedu.address.model.person.ReadOnlyTask;
  */
 public class TestTask implements ReadOnlyTask {
 
-    private Title name;
-    private Deadline address;
+    private Title title;
+    private Deadline deadline;
     private UniqueLabelList labels;
 
     public TestTask() {
@@ -19,20 +19,20 @@ public class TestTask implements ReadOnlyTask {
     }
 
     /**
-     * Creates a copy of {@code personToCopy}.
+     * Creates a copy of {@code taskToCopy}.
      */
-    public TestTask(TestTask personToCopy) {
-        this.name = personToCopy.getTitle();
-        this.address = personToCopy.getDeadline();
-        this.labels = personToCopy.getLabels();
+    public TestTask(TestTask taskToCopy) {
+        this.title = taskToCopy.getTitle();
+        this.deadline = taskToCopy.getDeadline();
+        this.labels = taskToCopy.getLabels();
     }
 
-    public void setName(Title name) {
-        this.name = name;
+    public void setTitle(Title name) {
+        this.title = name;
     }
 
-    public void setAddress(Deadline address) {
-        this.address = address;
+    public void setDeadline(Deadline address) {
+        this.deadline = address;
     }
 
     public void setLabels(UniqueLabelList labels) {
@@ -41,12 +41,12 @@ public class TestTask implements ReadOnlyTask {
 
     @Override
     public Title getTitle() {
-        return name;
+        return title;
     }
 
     @Override
     public Deadline getDeadline() {
-        return address;
+        return deadline;
     }
 
     @Override
@@ -62,7 +62,7 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getTitle().title + " ");
-        sb.append("a/" + this.getDeadline().value + " ");
+        sb.append("a/" + this.getDeadline().value.toString() + " ");
         this.getLabels().asObservableList().stream().forEach(s -> sb.append("t/" + s.labelName + " "));
         return sb.toString();
     }

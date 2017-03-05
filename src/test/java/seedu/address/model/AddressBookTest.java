@@ -28,7 +28,7 @@ public class AddressBookTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), addressBook.getTaskList());
         assertEquals(Collections.emptyList(), addressBook.getLabelList());
     }
 
@@ -60,7 +60,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicateLabels_throwsAssertionError() {
         AddressBook typicalAddressBook = new TypicalTestPersons().getTypicalAddressBook();
-        List<ReadOnlyTask> newPersons = typicalAddressBook.getPersonList();
+        List<ReadOnlyTask> newPersons = typicalAddressBook.getTaskList();
         List<Label> newLabels = new ArrayList<>(typicalAddressBook.getLabelList());
         // Repeat the first label twice
         newLabels.add(newLabels.get(0));
@@ -83,7 +83,7 @@ public class AddressBookTest {
         }
 
         @Override
-        public ObservableList<ReadOnlyTask> getPersonList() {
+        public ObservableList<ReadOnlyTask> getTaskList() {
             return persons;
         }
 

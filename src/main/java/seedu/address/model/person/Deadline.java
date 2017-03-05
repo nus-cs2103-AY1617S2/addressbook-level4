@@ -9,8 +9,8 @@ import java.util.Date;
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's address in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
+ * Represents a Task's deadline in the task manager.
+ * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
 public class Deadline {
 
@@ -18,33 +18,24 @@ public class Deadline {
             "Date should be entered as DD-MM-YYYY";
 
     /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * The deadline must be in the form: dd-MM-yyyy
      */
-    public static final String DATE_VALIDATION_REGEX = "\\d{2}-\\d{2}-\\d{4}";
+    public static final String DATE_VALIDATION_REGEX = "";
 
-    public Date value;
+    public String value;
 
     /**
-     * Validates given address.
+     * Validates given date.
      *
-     * @throws IllegalValueException if given address string is invalid.
+     * @throws IllegalValueException if given date string is invalid.
      */
     public Deadline(String date) throws IllegalValueException {
         assert date != null;
-        if (!isValidDate(date)) {
-            throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
-        }
-        DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-        try {
-			this.value = format.parse(date);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		this.value = date;
     }
 
     /**
-     * Returns true if a given string is a valid person email.
+     * Returns true if a given string is a valid date.
      */
     public static boolean isValidDate(String test) {
         return test.matches(DATE_VALIDATION_REGEX);

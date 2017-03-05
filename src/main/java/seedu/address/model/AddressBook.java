@@ -14,8 +14,8 @@ import seedu.address.model.label.Label;
 import seedu.address.model.label.UniqueLabelList;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.ReadOnlyTask;
-import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.person.UniquePersonList.DuplicatePersonException;
+import seedu.address.model.person.UniqueTaskList;
+import seedu.address.model.person.UniqueTaskList.DuplicateTaskException;
 
 /**
  * Wraps all data at the address-book level
@@ -23,7 +23,7 @@ import seedu.address.model.person.UniquePersonList.DuplicatePersonException;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniquePersonList persons;
+    private final UniqueTaskList tasks;
     private final UniqueLabelList labels;
 
     /*
@@ -34,14 +34,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        tasks = new UniqueTaskList();
         labels = new UniqueLabelList();
     }
 
     public AddressBook() {}
 
     /**
-     * Creates an AddressBook using the Persons and Labels in the {@code toBeCopied}
+     * Creates an AddressBook using the Tasks and Labels in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -50,9 +50,9 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     //// list overwrite operations
 
-    public void setPersons(List<? extends ReadOnlyTask> persons)
-            throws UniquePersonList.DuplicatePersonException {
-        this.persons.setPersons(persons);
+    public void setTasks(List<? extends ReadOnlyTask> tasks)
+            throws UniqueTaskList.DuplicateTaskException {
+        this.tasks.setTasks(tasks);
     }
 
     public void setLabels(Collection<Label> labels) throws UniqueLabelList.DuplicateLabelException {
@@ -62,8 +62,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         assert newData != null;
         try {
-            setPersons(newData.getPersonList());
-        } catch (UniquePersonList.DuplicatePersonException e) {
+            setTasks(newData.getTaskList());
+        } catch (UniqueTaskList.DuplicateTaskException e) {
             assert false : "AddressBooks should not have duplicate persons";
         }
         try {
@@ -71,79 +71,79 @@ public class AddressBook implements ReadOnlyAddressBook {
         } catch (UniqueLabelList.DuplicateLabelException e) {
             assert false : "AddressBooks should not have duplicate labels";
         }
-        syncMasterLabelListWith(persons);
+        syncMasterLabelListWith(tasks);
     }
 
-    //// person-level operations
+    //// task-level operations
 
     /**
-     * Adds a person to the address book.
-     * Also checks the new person's labels and updates {@link #labels} with any new labels found,
-     * and updates the Label objects in the person to point to those in {@link #labels}.
+     * Adds a task to the task manager.
+     * Also checks the new task's labels and updates {@link #labels} with any new labels found,
+     * and updates the Label objects in the tasks to point to those in {@link #labels}.
      *
-     * @throws UniquePersonList.DuplicatePersonException if an equivalent person already exists.
+     * @throws UniqueTaskList.DuplicateTaskException if an equivalent person already exists.
      */
-    public void addPerson(Task p) throws UniquePersonList.DuplicatePersonException {
+    public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
         syncMasterLabelListWith(p);
-        persons.add(p);
+        tasks.add(p);
     }
 
     /**
-     * Updates the person in the list at position {@code index} with {@code editedReadOnlyPerson}.
-     * {@code AddressBook}'s label list will be updated with the labels of {@code editedReadOnlyPerson}.
+     * Updates the task in the list at position {@code index} with {@code editedReadOnlyTask}.
+     * {@code AddressBook}'s label list will be updated with the labels of {@code editedReadOnlyTask}.
      * @see #syncMasterLabelListWith(Task)
      *
-     * @throws DuplicatePersonException if updating the person's details causes the person to be equivalent to
-     *      another existing person in the list.
+     * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
+     *      another existing task in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updatePerson(int index, ReadOnlyTask editedReadOnlyPerson)
-            throws UniquePersonList.DuplicatePersonException {
-        assert editedReadOnlyPerson != null;
+    public void updateTask(int index, ReadOnlyTask editedReadOnlyTask)
+            throws UniqueTaskList.DuplicateTaskException {
+        assert editedReadOnlyTask != null;
 
-        Task editedPerson = new Task(editedReadOnlyPerson);
-        syncMasterLabelListWith(editedPerson);
+        Task editedTask = new Task(editedReadOnlyTask);
+        syncMasterLabelListWith(editedTask);
         // TODO: the labels master list will be updated even though the below line fails.
         // This can cause the labels master list to have additional labels that are not labeled to any person
         // in the person list.
-        persons.updatePerson(index, editedPerson);
+        tasks.updateTask(index, editedTask);
     }
 
     /**
-     * Ensures that every label in this person:
+     * Ensures that every label in this task:
      *  - exists in the master list {@link #labels}
      *  - points to a {@link Label} object in the master list
      */
-    private void syncMasterLabelListWith(Task person) {
-        final UniqueLabelList personLabels = person.getLabels();
-        labels.mergeFrom(personLabels);
+    private void syncMasterLabelListWith(Task task) {
+        final UniqueLabelList taskLabels = task.getLabels();
+        labels.mergeFrom(taskLabels);
 
         // Create map with values = label object references in the master list
-        // used for checking person label references
+        // used for checking task label references
         final Map<Label, Label> masterLabelObjects = new HashMap<>();
         labels.forEach(label -> masterLabelObjects.put(label, label));
 
-        // Rebuild the list of person labels to point to the relevant labels in the master label list.
+        // Rebuild the list of task labels to point to the relevant labels in the master label list.
         final Set<Label> correctLabelReferences = new HashSet<>();
-        personLabels.forEach(label -> correctLabelReferences.add(masterLabelObjects.get(label)));
-        person.setLabels(new UniqueLabelList(correctLabelReferences));
+        taskLabels.forEach(label -> correctLabelReferences.add(masterLabelObjects.get(label)));
+        task.setLabels(new UniqueLabelList(correctLabelReferences));
     }
 
     /**
-     * Ensures that every label in these persons:
+     * Ensures that every label in these tasks:
      *  - exists in the master list {@link #labels}
-     *  - points to a LAbel object in the master list
+     *  - points to a Label object in the master list
      *  @see #syncMasterLabelListWith(Task)
      */
-    private void syncMasterLabelListWith(UniquePersonList persons) {
+    private void syncMasterLabelListWith(UniqueTaskList persons) {
         persons.forEach(this::syncMasterLabelListWith);
     }
 
-    public boolean removePerson(ReadOnlyTask key) throws UniquePersonList.PersonNotFoundException {
-        if (persons.remove(key)) {
+    public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
+        if (tasks.remove(key)) {
             return true;
         } else {
-            throw new UniquePersonList.PersonNotFoundException();
+            throw new UniqueTaskList.TaskNotFoundException();
         }
     }
 
@@ -157,13 +157,13 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public String toString() {
-        return persons.asObservableList().size() + " persons, " + labels.asObservableList().size() +  " labels";
+        return tasks.asObservableList().size() + " tasks, " + labels.asObservableList().size() +  " labels";
         // TODO: refine later
     }
 
     @Override
-    public ObservableList<ReadOnlyTask> getPersonList() {
-        return new UnmodifiableObservableList<>(persons.asObservableList());
+    public ObservableList<ReadOnlyTask> getTaskList() {
+        return new UnmodifiableObservableList<>(tasks.asObservableList());
     }
 
     @Override
@@ -175,13 +175,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                        && this.persons.equals(((AddressBook) other).persons)
+                        && this.tasks.equals(((AddressBook) other).tasks)
                         && this.labels.equalsOrderInsensitive(((AddressBook) other).labels));
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(persons, labels);
+        return Objects.hash(tasks, labels);
     }
 }

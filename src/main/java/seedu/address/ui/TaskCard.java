@@ -7,14 +7,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.ReadOnlyTask;
 
-public class PersonCard extends UiPart<Region> {
+public class TaskCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "TaskListCard.fxml";
 
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
+    private Label title;
     @FXML
     private Label id;
     @FXML
@@ -22,11 +22,11 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane labels;
 
-    public PersonCard(ReadOnlyTask person, int displayedIndex) {
+    public TaskCard(ReadOnlyTask person, int displayedIndex) {
         super(FXML);
-        name.setText(person.getTitle().title);
+        title.setText(person.getTitle().title);
         id.setText(displayedIndex + ". ");
-        deadline.setText(person.getDeadline().value.toString());
+        deadline.setText(person.getDeadline().value);
         initLabels(person);
     }
 

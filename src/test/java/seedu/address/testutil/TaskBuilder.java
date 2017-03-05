@@ -11,39 +11,39 @@ import seedu.address.model.person.Title;
  */
 public class TaskBuilder {
 
-    private TestTask person;
+    private TestTask task;
 
     public TaskBuilder() {
-        this.person = new TestTask();
+        this.task = new TestTask();
     }
 
     /**
      * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
-    public TaskBuilder(TestTask personToCopy) {
-        this.person = new TestTask(personToCopy);
+    public TaskBuilder(TestTask taskToCopy) {
+        this.task = new TestTask(taskToCopy);
     }
 
-    public TaskBuilder withName(String name) throws IllegalValueException {
-        this.person.setName(new Title(name));
+    public TaskBuilder withTitle(String title) throws IllegalValueException {
+        this.task.setTitle(new Title(title));
         return this;
     }
 
     public TaskBuilder withLabels(String ... labels) throws IllegalValueException {
-        person.setLabels(new UniqueLabelList());
+        task.setLabels(new UniqueLabelList());
         for (String label: labels) {
-            person.getLabels().add(new Label(label));
+            task.getLabels().add(new Label(label));
         }
         return this;
     }
 
-    public TaskBuilder withAddress(String address) throws IllegalValueException {
-        this.person.setAddress(new Deadline(address));
+    public TaskBuilder withDeadline(String deadline) throws IllegalValueException {
+        this.task.setDeadline(new Deadline(deadline));
         return this;
     }
 
     public TestTask build() {
-        return this.person;
+        return this.task;
     }
 
 }

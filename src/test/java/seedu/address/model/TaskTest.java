@@ -12,15 +12,15 @@ import seedu.address.testutil.TestTask;
 /**
  * Test classes for Person
  */
-public class PersonTest {
+public class TaskTest {
     @Test
     public void person_hashCodeShouldMatch_returnTrue() {
         TestTask pb;
         try {
             pb = (new TaskBuilder())
-                    .withAddress("Singapore")
+                    .withDeadline("07-03-2017")
                     .withLabels("testLabel")
-                    .withName("Name")
+                    .withTitle("Title")
                     .build();
             Task p = new Task(pb);
             int hashcode = 1027801006;
