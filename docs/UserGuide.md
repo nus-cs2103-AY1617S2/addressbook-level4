@@ -4,10 +4,10 @@ By : `Team CS2103JAN2017-W15-B4`   &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &
 
 ---
 
-* [Quick Start](#quick-start)
-* [Features](#features)
-* [FAQ](#faq)
-* [Command Summary](#command-summary)
+* [Quick Start](#1-quick-start)
+* [Features](#2-features)
+* [FAQ](#3-faq)
+* [Command Summary](#4-command-summary)
 
 ## 1. Quick Start
 
@@ -19,7 +19,7 @@ By : `Team CS2103JAN2017-W15-B4`   &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &
 3. Copy the file to the folder you want to use as the home folder for your task manager.
 	> <img src="images/GeekKeep.png" width="600">
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
-5. Type the command in the command box and press Enter to execute it.<br>
+5. Type the command in the command box and press  <kbd>Enter</kbd> to execute it.<br>
 e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 6. Some example commands you can try:
     * **`list`** : lists all events and tasks
