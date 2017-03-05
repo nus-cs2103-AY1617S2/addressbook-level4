@@ -20,6 +20,12 @@ public class JsonStorage implements Storage {
     private ArrayDeque<String> historyStack = new ArrayDeque<>();
     private ArrayDeque<String> redoHistoryStack = new ArrayDeque<>();
 
+    public JsonStorage() {}
+
+    public JsonStorage(String storagePath) {
+        this.storagePath = storagePath;
+    }
+
     public static JsonStorage getInstance() {
         if (instance == null) {
             instance = new JsonStorage();

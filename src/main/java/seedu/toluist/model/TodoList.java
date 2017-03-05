@@ -11,7 +11,7 @@ import seedu.toluist.storage.Storage;
  */
 public class TodoList {
 
-    protected static Storage storage = JsonStorage.getInstance();
+    private static Storage storage = JsonStorage.getInstance();
 
     private static TodoList currentTodoList = new TodoList();
 
@@ -19,6 +19,10 @@ public class TodoList {
 
     public ArrayList<Task> getTasks() {
         return allTasks;
+    }
+
+    public static void setStorage(Storage storage) {
+        TodoList.storage = storage;
     }
 
     public static TodoList load() {
