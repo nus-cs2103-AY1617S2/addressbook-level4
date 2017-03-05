@@ -5,7 +5,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-W15-B4/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-W15-B4/main?branch=master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/43c1404bac364bb7852a769d8f796a9e)](https://www.codacy.com/app/yirui94/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103JAN2017-W15-B4/main&amp;utm_campaign=Badge_Grade)
 
-<img src="docs/images/GeekKeep.png" width="600"><br>
+<img src="docs/images/GeeKeep.png" width="600"><br>
 
 * This is a desktop Address Book application. It has a GUI but most of the user interactions happen using
   a CLI (Command Line Interface).

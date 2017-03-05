@@ -17,7 +17,7 @@ By : `Team CS2103JAN2017-W15-B4`   &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &
 
 2. Download the latest taskmanager.jar from the [releases](https://github.com/CS2103JAN2017-W15-B4/main/releases) tab.
 3. Copy the file to the folder you want to use as the home folder for your task manager.
-	> <img src="images/GeekKeep.png" width="600">
+	> <img src="images/GeeKeep.png" width="600">
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
 5. Type the command in the command box and press  <kbd>Enter</kbd> to execute it.<br>
 e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
