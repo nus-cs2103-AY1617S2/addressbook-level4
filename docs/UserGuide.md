@@ -38,13 +38,10 @@ Without further ado, let’s get started.
 ## UI Control
 
 #### Task Status     
-The statuses of a task is shown as below:  
-| Avatar | Status |
-| --- | --- |
-| <img src="images/Floating.png" width="150"> | Floating |
-| <img src="images/Completed.png" width="150"> | Complete |
-| <img src="images/Pending.png" width="150"> | Pending |
-| <img src="images/Overdue.png" width="150"> | Overdue |
+The statuses of a task is shown as below: 
+
+Command | Format  | Description
+-------- | -------- | -------- 
 
 
 ## Features
