@@ -192,28 +192,28 @@ Format : `exit`
  Command | Format  | Description
 -------- | -------- | -------- 
 [help](#viewing-help) | `help`| Opens a help page
-[add](#Adding-a-task) | `add NAME [PRIORITY] [/t TAG1, TAG2…]`| Adds a floating task with priority and tags
+[add](#adding-a-task) | `add NAME [PRIORITY] [/t TAG1, TAG2…]`| Adds a floating task with priority and tags
  | `add NAME at START_DATETIME [PRIORITY] [/t TAG1, TAG2…]`| Adds a pending task with only start time, priority and tags
  | `add NAME by END_DATETIME [PRIORITY] [/t TAG1, TAG2…]`| Adds a pending task with only deadline, priority and tags
  | `add NAME by END_DATETIME [PRIORITY] [/t TAG1, TAG2…]`| Adds a pending task with start time, end time, priority and tags
  | `add [INSTANCES] NAME [at|by|from START_DATETIME] [to END_DATETIME][PRIORITY] every [DAY|MONTH|YEAR] [/t TAG1, TAG2…]` | Adds a recurring number of task instances that spans over a period of time with priority and tags
-[edit](#Editing-a-task) | `Edit INDEX|NAME [at|by|from START_DATETIME] [to END_DATETIME][PRIORITY] every [DAY|MONTH|YEAR] [/t TAG1, TAG2…]` | Edits a task with the new parameters
-[delete](#Deleting-a-task) | `Delete INDEX|NAME` | Delete a task 
-[view](#Viewing-tasks) | `view` | Show all tasks
+[edit](#editing-a-task) | `Edit INDEX|NAME [at|by|from START_DATETIME] [to END_DATETIME][PRIORITY] every [DAY|MONTH|YEAR] [/t TAG1, TAG2…]` | Edits a task with the new parameters
+[delete](#deleting-a-task) | `Delete INDEX|NAME` | Delete a task 
+[view](#viewing-tasks) | `view` | Show all tasks
  | `view t` | Show all today’s tasks
  | `view p` |Show all pending task
  | `view c` | Show all completed task
  | `view f` | Show all floating task
  | `view o` | Show all overdue task
  | `view INDEX|NAME|START_DATETIME|END_DATETIME|PRIORITY|DAY|MONTH|YEAR TAG` | Show a specified task based on its detail 
-[done](#Marking-a-task-as-completed) | `done INDEX|NAME`| Mark a task as done
-[find](#Finding-for-tasks) | `Find KEYWORDS [KEYWORD 1, KEYWORD2,..]`| Find the task associated to the keyword
-[clear](#Clearing-of-tasks) | `clear` | Clear all completed tasks
-[undo](Undo-most-recent-command) | `undo` | Undo the most recent command
-[redo](#Redo-most-recent-command) | `redo` | Redo the most recent undo
+[done](#marking-a-task-as-completed) | `done INDEX|NAME`| Mark a task as done
+[find](#finding-for-tasks) | `Find KEYWORDS [KEYWORD 1, KEYWORD2,..]`| Find the task associated to the keyword
+[clear](#clearing-of-tasks) | `clear` | Clear all completed tasks
+[undo](#undo-most-recent-command) | `undo` | Undo the most recent command
+[redo](#redo-most-recent-command) | `redo` | Redo the most recent undo
 [reset](#reset-data) | `reset` | Reset save data
-[saveto](#Changing-the-save-location) | `saveto PATH` | Change the default save directory 
-[exit](#Exiting-the-program) | `exit` | Exit the application
+[saveto](#changing-the-save-location) | `saveto PATH` | Change the default save directory 
+[exit](#exiting-the-program) | `exit` | Exit the application
 
 
 
