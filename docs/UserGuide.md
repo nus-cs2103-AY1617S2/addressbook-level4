@@ -40,26 +40,27 @@ By : `Typedwriters`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `March 2017`  &nbsp;&nbsp;&
 > * Words in `UPPER_CASE` are the parameters.
 > * Words in `lower_case` are the exact strings.
 > * Items in `SQUARE_BRACKETS` are optional.
+> * Items with `|` indicates either or field.
 > * Items with `...` after them can have multiple instances.
-> * 
 
 ### 2.1. Viewing help : `help`
 
-Format: `help`
+Format: `help [COMMAND]`
 
+> `help [COMMAND]` shows a more detailed explanation of the command e.g. `help add` <br>
 > Help is also shown if you enter an incorrect command e.g. `abcd`
 
-### 2.2. Adding a person: `add`
+### 2.2. Adding a task or event: `add`
 
-Adds a person to the address book<br>
-Format: `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Adds a task or event to Typed<br>
+Format: `add TASK [by|every|from|now] [date] [to] [date] [#/tags]...`
 
-> Persons can have any number of tags (including 0)
+> Tasks and events can have any number of tags (including 0)
 
 Examples:
 
-* `add John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01`
-* `add Betsy Crowe t/friend e/betsycrowe@gmail.com a/Newgate Prison p/1234567 t/criminal`
+* `add read the little prince`
+* `add training camp from 2 May to 5 May`
 
 ### 2.3. Listing all persons : `list`
 
@@ -177,10 +178,10 @@ There is no need to save manually.
   e.g. `add James Ho p/22224444 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 #ENDIGNORE
  
-* **Add**  `add TASK [by|every|from|on] [date] [to] [date]` #TODO: fix <br> 
+* **Add**  `add TASK [by|every|from|on] [date] [to] [date] [#/tags]...` #TODO: fix <br> 
   e.g. `add read the little prince` <br>
   e.g. `add push git commit by next wednesday` <br>
-  e.g. `add write blog post every day` <br>
+  e.g. `add write blog post every day #/hobby` <br>
   e.g. `add meet boss every monday` <br>
   e.g. `add release paycheck every month` <br>
   e.g. `add my birthday every year` <br>
