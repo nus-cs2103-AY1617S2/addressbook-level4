@@ -340,19 +340,21 @@ Examples:
 * 
 
 ### Undo most recent command
-You can go back to historical versions of iManager with the use of undo commands. Only commands that modify iManager in the same session will be restored. Any versions of current session will not be accessible after restarting iManager.  
+Undo the most recent command that was successfully executed. Only commands that modify iManager in the same session can be undone. Command history will be cleared once iManager exits. 
 
 Format: `undo`
 
+> * `undo` only support add, edit, delete, done, clear and redo. 
+
 ### Redo most recent command
-You can go advance to historical versions of Dowat with the use of redo commands. Only commands that modify Dowat in the same session will be restored. Any versions of current session will not be accessible after restarting Dowat.  
+Redo the most recent undo.  Only commands that modify iManager in the same session can be redo. Command history will be cleared once iManager exits. 
 
 Format: `redo`
 
-### reset data
-iManager will save data in a file called iManager.txt in the project root folder by dafault or if the file path is not specified. 
-You can change the location by specifying the file path as a command argument.
-New file will be automatically created as long as given directory is valid.
+> * `redo` only support add, edit, delete, done, clear and undo. 
+
+### Reset data
+Reset the applcation data. iManager can completely erase the saved data and start with a "clean" state. Application data will be save in the default save directory. (under project root folder) Once application data gets resetted, it cannot be restored. 
 
 Format: `reset`
 
@@ -361,7 +363,7 @@ Format: `reset`
 The application data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 #### Changing the save location
-The application data is saved in a file called iManager.txt under the project root folder by dafault or if the file path is not specified. You can change the location by specifying the file path as a command argument. New file will be automatically created as long as given directory is valid.
+Change the save directory. The application data is saved in a file called iManager.txt under the project root folder by dafault or if the file path is not specified. You can change the location by specifying the file path as a command argument. New file will be automatically created as long as given directory is valid.
 
 Format: `saveto FILEPATH`
 
@@ -407,6 +409,6 @@ Format : `exit`
 [clear](#clearing-of-tasks) | `clear` | Clear all completed tasks
 [undo](#undo-most-recent-command) | `undo` | Undo the most recent command
 [redo](#redo-most-recent-command) | `redo` | Redo the most recent undo
-[reset](#reset-data) | `reset` | Reset save data
+[reset](#reset-data) | `reset` | Reset saved data
 [saveto](#changing-the-save-location) | `saveto PATH` | Change the default save directory 
 [exit](#exiting-the-program) | `exit`
