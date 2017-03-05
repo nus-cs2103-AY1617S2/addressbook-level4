@@ -136,8 +136,8 @@ Format: `add NAME by END_DATE [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` <br>
 > * Tasks can have any number of tags.
 > * If no priority is specified, the task will be of lowest priority.
 > * Date format is MM-DD-YYYY HHMM (24 hour Format) e.g. 10-22-2017 1500.
-> * If no time is specified, the time will be the CURRENT time.
-> * The START DATE is the CURRENT date and time.
+> * If no time is specified, the time will be 2359.
+> * The START_DATE is the CURRENT date and time.
 
 Examples: 
 * `add exam by 10-22-2017`
@@ -157,7 +157,8 @@ Format: `add NAME from START_DATE to END_DATE [p/PRIORITY] [d/DESCRIPTION] [t/TA
 > * Tasks can have any number of tags.
 > * If no priority is specified, the task will be of lowest priority.
 > * Date format is MM-DD-YYYY HHMM (24 hour Format) e.g. 10-22-2017 1500.
-> * If no time is specified, the time will be the CURRENT time.
+> * If no start time is specified, the time will be the CURRENT time.
+> * If no end time is specified, the time will 2359.
 
 Examples:
 * `add exam from 10-22-2017 to 10-22-2016`
@@ -172,114 +173,84 @@ Examples:
 
 Adds a recurring task that spans over a period of time. <br>
 
-Format: `add NAME [on|from START_DATE] [to END_DATE] every DAY|WEEK|MONTH|YEAR [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` <br>
+Format: `add NAME [at|on|by|from START_DATE] [to END_DATE] [every DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` <br>
 > * Tasks can have any number of tags.
 > * If no priority is specified, the task will be of lowest priority.
 > * Date format is MM-DD-YYYY HHMM (24 hour Format) e.g. 10-22-2017 1500.
-> * If no time is specified, the time will be the CURRENT time.
-> * If no START_DATE is specified, the date is the CURRENT date and time.
-> * Interval is case insensitive 
-> * Any form of abbreviation can be use for WEEK (e.g Tue, Tues, Tuesday)
+> * It is suffice to use time for every DAY and every WEEK. Date will be ignored
+> * One must INCLUDE START_DATE and END_DATE for every MONTH and every YEAR. 
+> * If no start time is specified, the time will be the CURRENT time. 
+> * If no end time is specified, the time will 2359. 
+> * Any form of abbreviation can be use for WEEK (e.g Tue, Tues, Tuesday), case insensitve. 
 > * No abbreviation can be use for DAY, MONTH and YEAR
 
 Examples:
 * `add exam every day p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 task named "exam" that starts now everyday with description "SR1" and tag "CS2010" into task list.
+   Add a priority 1 task named "exam" that starts at the current time everyday with description "SR1" and tag "CS2010" into task list.
    
-* `add exam on 1300 every day p/1 d/SR1 t/CS2010`<br>
+* `add exam at 1300 every day p/1 d/SR1 t/CS2010`<br>
    Add a priority 1 task named "exam" that starts at 1300 everyday with description "SR1" and tag "CS2010" into task list.
    
 * `add exam by 1500 every day p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 task named "exam" that starts nows and end by 1500 everyday with description "SR1" and tag "CS2010" into task list.
+   Add a priority 1 task named "exam" that starts at the current time and end by 1500 everyday with description "SR1" and tag "CS2010" 
+   into task list.
    
 * `add exam from 1300 to 1500 every day p/1 d/SR1 t/CS2010`<br>
    Add a priority 1 task named "exam" that starts from 1300 to 1500 everyday with description "SR1" and tag "CS2010" into task list.
    
-
-
-* `add exam every Tue p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 task named "exam" that starts now every Tuesday with description "SR1" and tag "CS2010" into task list.
    
-* `add exam on 1300 every Tue p/1 d/SR1 t/CS2010`<br>
+   
+* `add exam every Tue p/1 d/SR1 t/CS2010`<br>
+   Add a priority 1 task named "exam" that starts at the current time every Tuesday with description "SR1" and tag "CS2010" into task 
+   list.
+   
+* `add exam at 1300 every Tue p/1 d/SR1 t/CS2010`<br>
    Add a priority 1 task named "exam" that starts at 1300 every Tuesday with description "SR1" and tag "CS2010" into task list.
    
 * `add exam by 1500 every Tue p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 task named "exam" that starts nows and end by 1500 every Tuesday with description "SR1" and tag "CS2010" into task 
-   list.
+   Add a priority 1 task named "exam" that starts at the current time and end by 1500 every Tuesday with description "SR1" and tag 
+   "CS2010" into task list.
    
 * `add exam from 1300 to 1500 every Tue p/1 d/SR1 t/CS2010`<br>
    Add a priority 1 task named "exam" that starts from 1300 to 1500 every Tuesday with description "SR1" and tag "CS2010" into task 
    list.
 
 
+
 * `add exam on 10-22-2017 every month p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 task named "exam" that starts now on the 22nd of every month with description "SR1" and tag "CS2010" into task list.
+   Add a priority 1 task named "exam" that starts on the 22nd of every month, current time, with description "SR1" and tag "CS2010" into 
+   task list.
    
-* `add exam on 10-22-2017 1300 every moth p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 task named "exam" that starts at 1300 on the 22nd of every month with description "SR1" and tag "CS2010" into task 
+* `add exam on 10-22-2017 1300 every month p/1 d/SR1 t/CS2010`<br>
+   Add a priority 1 task named "exam" that starts on 22nd of every month 1300 with description "SR1" and tag "CS2010" into task 
    list.
    
-* `add exam from 10-22-2017 to 10-22-2017 1500 every moth p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 task named "exam" that starts  the current time from 22nd of every month to 1500 on the 22nd of every month with description "SR1" 
-   and tag "CS2010" into task list.
+* `add exam from 10-22-2017 to 10-22-2017 every month p/1 d/SR1 t/CS2010`<br>
+   Add a priority 1 task named "exam" that starts from the 22nd of every month, current time, to 22nd of every month 2359 with
+   description "SR1" and tag "CS2010" into task list.
    
-* `add exam from 10-22-2017 1300 to 10-22-2017 1500 every moth p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 task named "exam" that starts at 1300 from 22nd of every month to 1500 on the 22nd of every month with description 
+* `add exam from 10-22-2017 1300 to 10-22-2017 1500 every month p/1 d/SR1 t/CS2010`<br>
+   Add a priority 1 task named "exam" that starts from the 22nd of every month 1300 to 22nd of every month 1500 with description 
    "SR1" and tag "CS2010" into task list.
-
-
-
-
-
-
-
-
-* `add exam every Mon p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 task named "exam" that starts now every Monday with description "SR1" and tag "CS2010" into task list.
-* `add exam every week p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 task named "exam" that starts now every week with description "SR1" and tag "CS2010" into task list.
-* `add exam every Jan p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 task named "exam" that starts now every January with description "SR1" and tag "CS2010" into task list.
-* `add exam every year p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 task named "exam" that starts now every year with description "SR1" and tag "CS2010" into task list.
-* `add exam on 1300 every Monday p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 task named "exam" that starts at 1300 every Monday with description "SR1" and tag "CS2010" into task list. 
-* `add exam on 10-22-2017 1300 every January p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 task named "exam" that starts on 22 January 1300 every January with description "SR1" and tag "CS2010" into task 
-   list.
+   
+   
+   
+* `add exam on 10-22-2017 every year p/1 d/SR1 t/CS2010`<br>
+   Add a priority 1 task named "exam" that starts on the 22nd October of every year, current time,  with description "SR1" and tag 
+   "CS2010" into task list.
+   
 * `add exam on 10-22-2017 1300 every year p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 task named "exam" that starts on 22 October 1300 every year with description "SR1" and tag "CS2010" into task list. 
- 
+   Add a priority 1 task named "exam" that starts on the 22nd October of every year 1300 with description "SR1" and tag "CS2010" into 
+   task list.
    
-* `add exam by 1500 every Monday p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 task named "exam" that starts now and ends by 1500 every Monday with description "SR1" and tag "CS2010" into task   
-   list. 
-
-* `add exam by 10-22-2017 1500 every January p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 task named "exam" that starts now and ends by 22 January 1500 every January with description "SR1" and tag "CS2010" 
-   into task list. 
-
-* `add exam by 10-22-2017 1500 every year p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 task named "exam"  that starts now and ends by 22 October 1500 every year with description "SR1" and tag "CS2010" 
-   into task list. 
-
+* `add exam from 10-22-2017 to 10-22-2017 every year p/1 d/SR1 t/CS2010`<br>
+   Add a priority 1 task named "exam" that starts on the 22nd October of every year, current time, to 22nd October of every year 2359 
+   with description "SR1" and tag "CS2010" into task list.
    
- 
-   
-* `add exam from 10-22-2017 to 10-22-2016`
-* `add exam from 1300 to 1500 every Monday p/1 d/SR1 t/CS2010`<br> 
+* `add exam from 10-22-2017 1300 to 10-22-2017 1500 every year p/1 d/SR1 t/CS2010`<br>
+   Add a priority 1 task named "exam" that starts on the 22nd October of every year 1300 to 22nd October of every year 1500 with 
+   description "SR1" and tag "CS2010" into task list.
 
-* `add exam from 10-22-2017 to 10-22-2017 every Jan p/1 d/SR1 t/CS2010`<br> 
-* `add exam from 10-22-2017 1300 to 10-22-2017 1300 every Jan p/1 d/SR1 t/CS2010`<br> 
-
-* `add exam from 10-22-2017 to 10-22-2017 every year p/1 d/SR1 t/CS2010`<br> 
-* `add exam from 10-22-2017 1300 to 10-22-2017 1300 every year p/1 d/SR1 t/CS2010`<br> 
-
-
-
-* `add exam from 10-22-2017 1300 to 10-22-2017 1500 every Monday p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 task named "exam" that starts on 22 October 2017 1300 and end by 22 October 2017 1500 with description "SR1" and tag   "CS2010" into task list.
-  
 ### Editing a task
 
 Edit a task in iManager<br>
