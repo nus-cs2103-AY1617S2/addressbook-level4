@@ -17,10 +17,10 @@ Responsibilities: UI
 
 -----
 
-#### [Leow Yijin](http://github.com/yijinl)
-<img src="images/LeowYijin.jpg" width="150"><br>
+#### [Jong Xue Min Shermine Ruth](https://github.com/ShermineJong)
+<img src="images/sherminejong.jpg" width="150"><br>
 Role: Developer <br>
-Responsibilities: Data
+Responsibilities: Logic and Storage
 
 -----
 
