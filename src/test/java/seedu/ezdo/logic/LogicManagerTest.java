@@ -413,7 +413,7 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
-            Priority privatePriority = new Priority(1);
+            Priority privatePriority = new Priority("111111");
             Email email = new Email("adam@gmail.com");
             StartDate privateStartDate = new StartDate("111, alpha street");
             Tag tag1 = new Tag("tag1");
@@ -432,7 +432,7 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Name("Person " + seed),
-                    new Priority(1),
+                    new Priority("" + Math.abs(seed)),
                     new Email(seed + "@email"),
                     new StartDate("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
@@ -531,7 +531,7 @@ public class LogicManagerTest {
         Task generateTaskWithName(String name) throws Exception {
             return new Task(
                     new Name(name),
-                    new Priority(3),
+                    new Priority("1"),
                     new Email("1@email"),
                     new StartDate("House of 1"),
                     new UniqueTagList(new Tag("tag"))

@@ -1,9 +1,6 @@
 package seedu.ezdo.logic.parser;
 
 import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_PRIORITY;
-import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.ezdo.logic.parser.CliSyntax.*;
 import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_STARTDATE;
 
@@ -24,12 +21,13 @@ public class AddCommandParser {
      * and returns an AddCommand object for execution.
      */
     public Command parse(String args) {
-        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_EMAIL, PREFIX_STARTDATE, PREFIX_TAG);
+        ArgumentTokenizer argsTokenizer =
+                new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_EMAIL, PREFIX_STARTDATE, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         try {
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
-                    Integer.parseInt(argsTokenizer.getValue(PREFIX_PRIORITY).get()),
+                    argsTokenizer.getValue(PREFIX_PRIORITY).get(),
                     argsTokenizer.getValue(PREFIX_EMAIL).get(),
                     argsTokenizer.getValue(PREFIX_STARTDATE).get(),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))

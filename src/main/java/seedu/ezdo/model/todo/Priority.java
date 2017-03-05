@@ -1,41 +1,34 @@
 package seedu.ezdo.model.todo;
 
-
 import seedu.ezdo.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's Priority in the address book.
+ * Represents a Task's priority in the ezDo.
  * Guarantees: immutable; is valid as declared in {@link #isValidPriority(String)}
  */
 public class Priority {
 
-    public static final String MESSAGE_PRIORITY_CONSTRAINTS =
-            "Person Priority can take numerical values from 1 to 3, and it should not be blank";
+    public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority should only contain numbers";
+    public static final String PRIORITY_VALIDATION_REGEX = "\\d+";
 
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String PRIORITY_VALIDATION_REGEX = "[1-3]";
-
-    public final int value;
+    public final String value;
 
     /**
      * Validates given priority.
      *
-     * @throws IllegalValueException if given address string is invalid.
+     * @throws IllegalValueException if given priority string is invalid.
      */
-    public Priority(int priority) throws IllegalValueException {
-        String stringPriority = Integer.toString(priority);
-        assert stringPriority != null;
-        if (!isValidPriority(stringPriority)) {
+    public Priority(String priority) throws IllegalValueException {
+        assert priority != null;
+        String trimmedPriority = priority.trim();
+        if (!isValidPriority(trimmedPriority)) {
             throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
         }
-        this.value = priority;
+        this.value = trimmedPriority;
     }
 
     /**
-     * Returns true if a given string is a valid person email.
+     * Returns true if a given string is a valid priority.
      */
     public static boolean isValidPriority(String test) {
         return test.matches(PRIORITY_VALIDATION_REGEX);
@@ -43,19 +36,19 @@ public class Priority {
 
     @Override
     public String toString() {
-        return Integer.toString(value);
+        return value;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Priority // instanceof handles nulls
-                && this.value == ((Priority) other).value); // state check
+                && this.value.equals(((Priority) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return Integer.toString(value).hashCode();
+        return value.hashCode();
     }
 
 }

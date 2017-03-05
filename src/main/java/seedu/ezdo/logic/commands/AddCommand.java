@@ -11,10 +11,9 @@ import seedu.ezdo.model.todo.Address;
 import seedu.ezdo.model.todo.StartDate;
 import seedu.ezdo.model.todo.Email;
 import seedu.ezdo.model.todo.Name;
-import seedu.ezdo.model.todo.Priority;
 import seedu.ezdo.model.todo.Task;
+import seedu.ezdo.model.todo.Priority;
 import seedu.ezdo.model.todo.UniqueTaskList;
-
 
 /**
  * Adds a task to ezDo.
@@ -23,12 +22,10 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to ezDo. "
             + "Parameters: NAME p/PRIORITY e/EMAIL a/ADDRESS  [t/TAG]...\n"
-
             + "Example: " + COMMAND_WORD
-            + " John Doe p/1 e/johnd@gmail.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney";
+            + " John Doe p/98765432 e/johnd@gmail.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in ezDo";
@@ -40,7 +37,7 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, int priority, String email, String startDate, Set<String> tags)
+    public AddCommand(String name, String priority, String email, String startDate, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {

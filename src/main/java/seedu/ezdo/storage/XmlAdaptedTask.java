@@ -8,12 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.ezdo.commons.exceptions.IllegalValueException;
 import seedu.ezdo.model.tag.Tag;
 import seedu.ezdo.model.tag.UniqueTagList;
-import seedu.ezdo.model.todo.StartDate;
-import seedu.ezdo.model.todo.Email;
-import seedu.ezdo.model.todo.Name;
-import seedu.ezdo.model.todo.Task;
-import seedu.ezdo.model.todo.Priority;
-import seedu.ezdo.model.todo.ReadOnlyTask;
+import seedu.ezdo.model.todo.*;
 
 /**
  * JAXB-friendly version of the Task.
@@ -23,7 +18,7 @@ public class XmlAdaptedTask {
     @XmlElement(required = true)
     private String name;
     @XmlElement(required = true)
-    private int priority;
+    private String priority;
     @XmlElement(required = true)
     private String email;
     @XmlElement(required = true)

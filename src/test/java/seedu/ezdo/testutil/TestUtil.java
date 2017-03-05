@@ -70,15 +70,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Name("Ali Muster"), new Priority(1), new Email("hans@google.com"), new StartDate("4th street"), new UniqueTagList()),
-                new Task(new Name("Boris Mueller"), new Priority(1), new Email("ruth@google.com"), new StartDate("81th street"), new UniqueTagList()),
-                new Task(new Name("Carl Kurz"), new Priority(1), new Email("heinz@yahoo.com"), new StartDate("wall street"), new UniqueTagList()),
-                new Task(new Name("Daniel Meier"), new Priority(1), new Email("cornelia@google.com"), new StartDate("10th street"), new UniqueTagList()),
-                new Task(new Name("Elle Meyer"), new Priority(1), new Email("werner@gmail.com"), new StartDate("michegan ave"), new UniqueTagList()),
-                new Task(new Name("Fiona Kunz"), new Priority(1), new Email("lydia@gmail.com"), new StartDate("little tokyo"), new UniqueTagList()),
-                new Task(new Name("George Best"), new Priority(1), new Email("anna@google.com"), new StartDate("4th street"), new UniqueTagList()),
-                new Task(new Name("Hoon Meier"), new Priority(1), new Email("stefan@mail.com"), new StartDate("little india"), new UniqueTagList()),
-                new Task(new Name("Ida Mueller"), new Priority(1), new Email("hans@google.com"), new StartDate("chicago ave"), new UniqueTagList())
+                new Task(new Name("Ali Muster"), new Priority("9482424"), new Email("hans@google.com"), new StartDate("4th street"), new UniqueTagList()),
+                new Task(new Name("Boris Mueller"), new Priority("87249245"), new Email("ruth@google.com"), new StartDate("81th street"), new UniqueTagList()),
+                new Task(new Name("Carl Kurz"), new Priority("95352563"), new Email("heinz@yahoo.com"), new StartDate("wall street"), new UniqueTagList()),
+                new Task(new Name("Daniel Meier"), new Priority("87652533"), new Email("cornelia@google.com"), new StartDate("10th street"), new UniqueTagList()),
+                new Task(new Name("Elle Meyer"), new Priority("9482224"), new Email("werner@gmail.com"), new StartDate("michegan ave"), new UniqueTagList()),
+                new Task(new Name("Fiona Kunz"), new Priority("9482427"), new Email("lydia@gmail.com"), new StartDate("little tokyo"), new UniqueTagList()),
+                new Task(new Name("George Best"), new Priority("9482442"), new Email("anna@google.com"), new StartDate("4th street"), new UniqueTagList()),
+                new Task(new Name("Hoon Meier"), new Priority("8482424"), new Email("stefan@mail.com"), new StartDate("little india"), new UniqueTagList()),
+                new Task(new Name("Ida Mueller"), new Priority("8482131"), new Email("hans@google.com"), new StartDate("chicago ave"), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -329,7 +329,6 @@ public class TestUtil {
     }
 
     public static boolean compareCardAndTask(TaskCardHandle card, ReadOnlyTask task) {
-        System.out.println(card);
         return card.isSameTask(task);
     }
 

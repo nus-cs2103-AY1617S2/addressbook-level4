@@ -16,8 +16,8 @@ import seedu.ezdo.model.todo.ReadOnlyTask;
  */
 public class TaskCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
-    private static final String PRIORITY_FIELD_ID = "#priority";
     private static final String STARTDATE_FIELD_ID = "#startDate";
+    private static final String PRIORITY_FIELD_ID = "#priority";
     private static final String EMAIL_FIELD_ID = "#email";
     private static final String TAGS_FIELD_ID = "#tags";
 
@@ -64,6 +64,7 @@ public class TaskCardHandle extends GuiHandle {
         return tags
                 .asObservableList()
                 .stream()
+                .sorted((f1,f2) -> f1.tagName.compareTo(f2.tagName))
                 .map(tag -> tag.tagName)
                 .collect(Collectors.toList());
     }

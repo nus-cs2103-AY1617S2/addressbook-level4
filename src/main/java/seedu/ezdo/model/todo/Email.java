@@ -4,7 +4,7 @@ package seedu.ezdo.model.todo;
 import seedu.ezdo.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's phone number in the address book.
+ * Represents a Person's priority number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
  */
 public class Email {

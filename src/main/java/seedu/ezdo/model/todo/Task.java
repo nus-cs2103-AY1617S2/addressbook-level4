@@ -21,7 +21,6 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-
     public Task(Name name, Priority priority, Email email, StartDate startDate, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, priority, email, startDate, tags);
         this.name = name;
@@ -34,7 +33,6 @@ public class Task implements ReadOnlyTask {
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
-
     public Task(ReadOnlyTask source) {
         this(source.getName(), source.getPriority(), source.getEmail(), source.getStartDate(), source.getTags());
     }
