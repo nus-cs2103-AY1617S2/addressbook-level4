@@ -67,7 +67,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Optional<String> description} into {@code Optional<Description>} if {@code description} is present.
+     * Parses a {@code Optional<String> description} into an {@code Optional<Description>}
+     * if {@code description} is present.
      */
     public static Optional<Description> parseDescription(Optional<String> description) throws IllegalValueException {
         assert description != null;
@@ -83,11 +84,11 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.
+     * Parses a {@code Optional<String> location} into an {@code Optional<Location>} if {@code location} is present.
      */
-    public static Optional<Location> parseAddress(Optional<String> address) throws IllegalValueException {
-        assert address != null;
-        return address.isPresent() ? Optional.of(new Location(address.get())) : Optional.empty();
+    public static Optional<Location> parseLocation(Optional<String> location) throws IllegalValueException {
+        assert location != null;
+        return location.isPresent() ? Optional.of(new Location(location.get())) : Optional.empty();
     }
 
     /**

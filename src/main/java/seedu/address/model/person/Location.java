@@ -4,13 +4,13 @@ package seedu.address.model.person;
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a task's location in WhatsLeft.
+ * Represents an Activity's location in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidLocation(String)}
  */
 public class Location {
 
     public static final String MESSAGE_LOCATION_CONSTRAINTS =
-            "Task location can take any values, and it should not be blank";
+            "Activity location can take any values, and it should not be blank";
 
     /*
      * The first character of the location must not be a whitespace,
@@ -21,7 +21,7 @@ public class Location {
     public final String value;
 
     /**
-     * Validates given address.
+     * Validates given location.
      *
      * @throws IllegalValueException if given location string is invalid.
      */
@@ -34,7 +34,7 @@ public class Location {
     }
 
     /**
-     * Returns true if a given string is a valid person email.
+     * Returns true if a given string is a valid activity location.
      */
     public static boolean isValidLocation(String test) {
         return test.matches(LOCATION_VALIDATION_REGEX);

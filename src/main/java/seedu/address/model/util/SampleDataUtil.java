@@ -15,23 +15,24 @@ public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         try {
             return new Person[] {
-                new Person(new Description("CS2103 TUT1"), new Phone("87438807"), new Email("alexyeoh@gmail.com"),
-                    new Location("National University of Singapore"),
+                new Person(new Description("CS2010 Written Quiz 1"), new Phone("87438807"),
+                    new Email("alexyeoh@gmail.com"), new Location("SR1"),
                     new UniqueTagList("friends")),
-                new Person(new Description("CS2103 TUT2"), new Phone("99272758"), new Email("berniceyu@gmail.com"),
-                    new Location("NUS"),
+                new Person(new Description("CS2103 Tutorial 6"), new Phone("99272758"),
+                    new Email("berniceyu@gmail.com"), new Location("COM-1-B1"),
                     new UniqueTagList("colleagues", "friends")),
-                new Person(new Description("CS2103 TUT3"), new Phone("93210283"), new Email("charlotte@yahoo.com"),
-                    new Location("SOC"),
+                new Person(new Description("Buy fruits"), new Phone("93210283"),
+                    new Email("charlotte@yahoo.com"),
+                    new Location("FairPrice"),
                     new UniqueTagList("neighbours")),
-                new Person(new Description("CS2103 TUT4"), new Phone("91031282"), new Email("lidavid@google.com"),
-                    new Location("NUS"),
+                new Person(new Description("Home Assignment 2"), new Phone("91031282"), new Email("lidavid@google.com"),
+                    new Location("CLB"),
                     new UniqueTagList("family")),
-                new Person(new Description("CS2103 TUT5"), new Phone("92492021"), new Email("irfan@outlook.com"),
-                    new Location("NUS"),
+                new Person(new Description("CS2102 Consultation"), new Phone("92492021"),
+                    new Email("irfan@outlook.com"), new Location("I-Cube"),
                     new UniqueTagList("classmates")),
-                new Person(new Description("CS2103 TUT6"), new Phone("92624417"), new Email("royb@gmail.com"),
-                    new Location("NUS"),
+                new Person(new Description("IVLE Survey"), new Phone("92624417"), new Email("royb@gmail.com"),
+                    new Location("anywhere"),
                     new UniqueTagList("colleagues"))
             };
         } catch (IllegalValueException e) {

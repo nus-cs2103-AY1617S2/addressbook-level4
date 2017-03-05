@@ -15,19 +15,20 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Adds a person to the address book.
+ * Adds an activity to WhatsLeft.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to WhatsLeft. "
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an activity to WhatsLeft. "
             + "Parameters: DESCRIPTION p/PHONE e/EMAIL l/LOCATION  [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " CS2103 EXAM p/98765432 e/johnd@gmail.com l/311, Clementi Ave 2, #02-25 t/friends t/owesMoney";
+            + " Project Discussion p/98765432 e/johnd@gmail.com l/discussion room 4 t/friends t/owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New task added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in WhatsLeft";
+    public static final String MESSAGE_SUCCESS = "New activity added: %1$s";
+    public static final String MESSAGE_DUPLICATE_ACTIVITY = "This activity already exists in WhatsLeft";
 
     private final Person toAdd;
 
@@ -36,14 +37,16 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, String phone, String email, String location, Set<String> tags)
+
+    public AddCommand(String description, String phone, String email, String location, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
         this.toAdd = new Person(
-                new Description(name),
+
+                new Description(description),
                 new Phone(phone),
                 new Email(email),
                 new Location(location),
@@ -58,7 +61,7 @@ public class AddCommand extends Command {
             model.addPerson(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniquePersonList.DuplicatePersonException e) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_ACTIVITY);
         }
 
     }

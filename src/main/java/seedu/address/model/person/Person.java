@@ -6,7 +6,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Represents a Person in the address book.
+ * Represents an Activity in WhatsLeft.
  * Guarantees: details are present and not null, field values are validated.
  */
 public class Person implements ReadOnlyPerson {
@@ -21,12 +21,12 @@ public class Person implements ReadOnlyPerson {
     /**
      * Every field must be present and not null.
      */
-    public Person(Description description, Phone phone, Email email, Location address, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(description, phone, email, address, tags);
+    public Person(Description description, Phone phone, Email email, Location location, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(description, phone, email, location, tags);
         this.description = description;
         this.phone = phone;
         this.email = email;
-        this.location = address;
+        this.location = location;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -37,9 +37,9 @@ public class Person implements ReadOnlyPerson {
         this(source.getDescription(), source.getPhone(), source.getEmail(), source.getLocation(), source.getTags());
     }
 
-    public void setDescription(Description name) {
-        assert name != null;
-        this.description = name;
+    public void setDescription(Description description) {
+        assert description != null;
+        this.description = description;
     }
 
     @Override
