@@ -4,14 +4,12 @@ import static seedu.doist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.doist.logic.parser.CliSyntax.*;
 
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.doist.commons.exceptions.IllegalValueException;
 import seedu.doist.logic.commands.AddCommand;
 import seedu.doist.logic.commands.Command;
-import seedu.doist.logic.commands.HelpCommand;
 import seedu.doist.logic.commands.IncorrectCommand;
 
 /**
@@ -58,24 +56,5 @@ public class AddCommandParser {
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
-//       
-//        try {
-//            
-//            return new AddCommand(
-//                    argsTokenizer.getPreamble().get(),
-//                    argsTokenizer.getValue(PREFIX_FROM).get(),
-//                    argsTokenizer.getValue(PREFIX_TO).get(),
-//                    argsTokenizer.getValue(PREFIX_REMIND).get(),
-//                    argsTokenizer.getValue(PREFIX_EVERY).get(),
-//                    argsTokenizer.getValue(PREFIX_AS).get(),
-//                    argsTokenizer.getValue(PREFIX_BY).get(),
-//                    argsTokenizer.getValue(PREFIX_UNDER).get()
-//                    );
-//        } catch (NoSuchElementException nsee) {
-//            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-//        } catch (IllegalValueException ive) {
-//           
-//        }
     }
-
 }
