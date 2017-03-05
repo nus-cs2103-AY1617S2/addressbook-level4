@@ -62,10 +62,10 @@ Format: `list`
 
 ### 2.4. Create a list: `createlist`
 
-Create a new list. <br>
+Create a new list of tasks with a specified name. <br>
 Format: `createlist NAME`
 
-The name refers to name of the task list.
+> The name refers to name of the task list.
 
 Examples:
 * `createlist Sports` <br>
@@ -97,7 +97,7 @@ Examples:
   
 ### 2.6. Finding all tasks containing any keyword in their title or due dates: `find`
 
-Finds tasks containing any of the given keywords or due in given date.<br>
+Finds tasks containing any of the given keywords or due by given date.<br>
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 > * The search is case sensitive. e.g `project` will not match `Project`
@@ -112,9 +112,9 @@ Examples:
 * `find Meeting`<br>
   Returns `Project Meeting`
 * `find 23/03`<br>
-  Returns Any task due in `23/03`.
+  Returns Any task due by `23/03`.
 
-### 2.7. Deleting a person : `delete`
+### 2.7. Deleting a task : `delete`
 
 Deletes the specified task from the task list. <br>
 Format: `delete INDEX`
@@ -168,10 +168,10 @@ Format: `clear`
 ### 2.12. Setting Priority: `priority`
 
 Set Priority for a task with 1 being the most important and 3 being the least important. <br>
-Format: `priority t/TASK p/INDEX`
+Format: `priority t/TASK p/RANK`
 
-> The `task` refers to the title of the task and the `index` refers to the ranking of priorities.
-> The index **must be a positive integer** 1, 2, or 3.
+> The `task` refers to the title of the task and the `rank` refers to the ranking of priorities.
+> The rank **must be a positive integer** 1, 2, or 3.
 
 Examples:
 
@@ -200,44 +200,32 @@ There is no need to save manually.
 
 ## 4. Command Summary
 
-* **Help** : `help` <br>
-  e.g. ` help`
-
-* **Add**  `add t/TASK [d/task] [#tags]` <br>
-  e.g. ` add t/CS2103 meeting d/03/03 #Programming Lab 2`
-  
-* **List** : `list` <br>
-  e.g. ` list`
-
-* **Create List** : `createlist NAME` <br>
-  e.g. ` createlist Sports`
-
-* **Edit** : `edit INDEX [t/TASK] [d/DATE] [#tags]` <br>
-  e.g. ` edit 1 t/CS2101 meeting d/04/03 #Progress Report`
-  
-* **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
-  e.g. ` find CS2101 meeting` <br>
-  e.g. ` find #Programming Lab 2` <br>
-
-* **Delete** : `delete INDEX` <br>
-   e.g. ` delete 3`
-
-* **Select** : `select INDEX` <br>
-  e.g.` select 2`
-
-* **Sort** : `sort` <br>
-  e.g.` sort`
-  
-* **Undo** : `undo` <br>
-  e.g.` undo`
-  
-* **Clear** : `clear` <br>
-  e.g.` clear`
-
-* **Priority** : `priority t/TASK p/INDEX` <br>
-  e.g. ` priority t/Project Meeting p/1`
-
-* **Exit** : `exit` <br>
-  e.g.` exit`
-
-
+| **Command** | **Format** |
+| ----------- | --------------- |
+| Help | `help` |
+| |e.g. ` help` |
+| Add  | `add t/TASK [d/task] [#tags]` |
+| |e.g. ` add t/CS2103 meeting d/03/03 #Programming Lab 2` |
+| List  | `list` |
+| |e.g. `list` |
+| Createlist | `createlist NAME` |
+| |e.g. ` createlist Sports` |
+| Edit | `edit INDEX [t/TASK] [d/DATE] [#tags]` |
+| |e.g. ` edit 1 t/CS2101 meeting d/04/03 #Progress Report` |
+| Find  | `find KEYWORD [MORE_KEYWORDS]` |
+| |e.g. ` find CS2101 meeting` |
+| |e.g. ` find #Programming Lab 2` |
+| Delete | `delete INDEX` |
+| |e.g. ` delete 3` |
+| Select | `select INDEX` |
+| |e.g.` select 2` |
+| Sort | `sort` |
+| |e.g.` sort` |
+| Undo | `undo`   |
+| |e.g. `undo` |
+| Clear | `clear` |
+| |e.g. `clear` |
+| Priority | `priority t/TASK p/INDEX` |
+| |e.g. ` priority t/Project Meeting p/1` |
+| Exit | `exit` |
+| |e.g. `exit` |
