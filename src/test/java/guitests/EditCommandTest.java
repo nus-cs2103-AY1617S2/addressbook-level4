@@ -21,7 +21,7 @@ public class EditCommandTest extends EzDoGuiTest {
 
     // The list of tasks in the task list panel is expected to match this list.
     // This list is updated with every successful call to assertEditSuccess().
-    TestTask[] expectedTasksList = td.getTypicalTasks();
+    private TestTask[] expectedTasksList = td.getTypicalTasks();
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
