@@ -406,7 +406,7 @@ Format : `exit`
  | `view o` | Show all overdue task
  | `view INDEX|NAME|START_DATETIME|END_DATETIME|PRIORITY|DAY|MONTH|YEAR TAG` | Show a specified task based on its detail.
 [done](#marking-a-task-as-completed) | `done INDEX|NAME`| Mark a task as completed.
-[find](#finding-for-tasks) | `find [KEYWORDS..]`| Look for tasks associated with the keywords.
+[find](#finding-for-tasks) | `find [KEYWORDS..]`| Search for tasks associated with the keywords.
 [clear](#clearing-of-completed-tasks) | `clear` | Clear all completed tasks.
 [toggle](#toggle-google-calender) | `toggle` | Toggle Google Calender.
 [undo](#undo-most-recent-command) | `undo` | Undo the most recent command.
