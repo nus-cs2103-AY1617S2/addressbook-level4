@@ -3,8 +3,8 @@ package seedu.ezdo.model;
 import java.util.Set;
 
 import seedu.ezdo.commons.core.UnmodifiableObservableList;
-import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.ReadOnlyTask;
+import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.UniqueTaskList;
 import seedu.ezdo.model.todo.UniqueTaskList.DuplicateTaskException;
 

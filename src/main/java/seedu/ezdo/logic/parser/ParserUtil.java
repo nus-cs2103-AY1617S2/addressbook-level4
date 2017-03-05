@@ -15,7 +15,11 @@ import seedu.ezdo.commons.exceptions.IllegalValueException;
 import seedu.ezdo.commons.util.StringUtil;
 import seedu.ezdo.model.tag.Tag;
 import seedu.ezdo.model.tag.UniqueTagList;
-import seedu.ezdo.model.todo.*;
+import seedu.ezdo.model.todo.Address;
+import seedu.ezdo.model.todo.Email;
+import seedu.ezdo.model.todo.Name;
+import seedu.ezdo.model.todo.Priority;
+import seedu.ezdo.model.todo.StartDate;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes

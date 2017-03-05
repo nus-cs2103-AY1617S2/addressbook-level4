@@ -1,8 +1,10 @@
 package seedu.ezdo.logic.parser;
 
 import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.ezdo.logic.parser.CliSyntax.*;
+import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_STARTDATE;
+import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -12,8 +14,8 @@ import java.util.Optional;
 import seedu.ezdo.commons.exceptions.IllegalValueException;
 import seedu.ezdo.logic.commands.Command;
 import seedu.ezdo.logic.commands.EditCommand;
-import seedu.ezdo.logic.commands.IncorrectCommand;
 import seedu.ezdo.logic.commands.EditCommand.EditTaskDescriptor;
+import seedu.ezdo.logic.commands.IncorrectCommand;
 import seedu.ezdo.model.tag.UniqueTagList;
 
 /**

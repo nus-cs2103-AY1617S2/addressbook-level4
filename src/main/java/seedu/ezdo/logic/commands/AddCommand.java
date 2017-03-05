@@ -7,12 +7,11 @@ import seedu.ezdo.commons.exceptions.IllegalValueException;
 import seedu.ezdo.logic.commands.exceptions.CommandException;
 import seedu.ezdo.model.tag.Tag;
 import seedu.ezdo.model.tag.UniqueTagList;
-import seedu.ezdo.model.todo.Address;
-import seedu.ezdo.model.todo.StartDate;
 import seedu.ezdo.model.todo.Email;
 import seedu.ezdo.model.todo.Name;
-import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.Priority;
+import seedu.ezdo.model.todo.StartDate;
+import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.UniqueTaskList;
 
 /**

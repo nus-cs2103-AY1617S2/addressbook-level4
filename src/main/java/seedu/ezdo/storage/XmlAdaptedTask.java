@@ -8,7 +8,12 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.ezdo.commons.exceptions.IllegalValueException;
 import seedu.ezdo.model.tag.Tag;
 import seedu.ezdo.model.tag.UniqueTagList;
-import seedu.ezdo.model.todo.*;
+import seedu.ezdo.model.todo.Email;
+import seedu.ezdo.model.todo.Name;
+import seedu.ezdo.model.todo.Priority;
+import seedu.ezdo.model.todo.ReadOnlyTask;
+import seedu.ezdo.model.todo.StartDate;
+import seedu.ezdo.model.todo.Task;
 
 /**
  * JAXB-friendly version of the Task.
