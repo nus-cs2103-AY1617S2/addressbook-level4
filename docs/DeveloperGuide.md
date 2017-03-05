@@ -347,11 +347,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | user | create a new task |
+`* * *` | user | delete an existing task | remove entries that I no longer need
+`* * *` | user | search a task by keyword | locate details of task without having to go through the entire list
+`* * *` | user | view an existing task |
+`* * *` | user | undo/redo task | easily remove my mistakes
+`* * *` | user | sort all task | list all tasks alphabetically/by date dates/priorities
+`* * *` | user | prioritise task | know which task has a high importance 
+`* *` | user | change save location | allow the files to be saved in another location or a cloud
+`* *` | user | mark task as completed or uncompleted | know which tasks to do next
+`* *` | user | see due dates of task | better plan what tasks I should do
+`* *` | user | block and finalize time slots | allow better timetable planning for the future
+`* *` | user | set reminders | be informed when the next task is due
+`* *` | user | view history | view what tasks have been completed
+`* *` | user | autosave | 
+`*` | user | make task recurring |
+`*` | user | make my own settings | customize ProcrastiNomore to my own liking
+
 
 {More to be added}
 

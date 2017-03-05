@@ -53,13 +53,13 @@ There are 4 forms of task that ProcrastiNomore supports:
 
 #### 2.2.1. Events
 
-Format: `add TASK on DATE/DAY`
-		`add TASK from STARTTIME to ENDTIME`
-		`add TASK on DATE/DAY from STARTTIME to ENDTIME`
+Format: `add TASK on DATE/DAY` <br />
+		`add TASK from STARTTIME to ENDTIME` <br />
+		`add TASK on DATE/DAY from STARTTIME to ENDTIME` <br />
 		
 #### 2.2.2. Deadlines
 
-Format: `add TASK by DATE/TIME/DATE+TIME
+Format: `add TASK by DATE/TIME/DATE+TIME`
 
 #### 2.2.3. Untimed
 
@@ -86,7 +86,7 @@ Examples:
 
 ### 2.3. Update an existing task : `update`
 
-There are 3 types of edit that ProcrastiNomore supports:
+There are 3 types of updates that ProcrastiNomore supports:
 
 #### 2.3.1. Update task name
 
@@ -99,21 +99,21 @@ Format: `update TASK to STARTTIME to ENDTIME`
 		
 #### 2.3.3. Update the entire task index
 
-Format: `update TASKINDEX NEWTASKNAME/DATE/TIME
+Format: `update TASKINDEX NEWTASKNAME/DATE/TIME`
 
 > For 2.3.1. and 2.3.2., ProcrastiNomore will show a list of task with the 
 > same task name and user will be required to put the TASKINDEX of the 
 > TASK user wants to change
 
 Examples:
-*`update eat breakfast to eat lunch`
- `1`
-*`update eat dinner to 730pm`
- `1`
+* `update eat breakfast to eat lunch` <br />
+  `1`
+* `update eat dinner to 730pm` <br />
+  `1`
 
 ### 2.4. Delete an existing task: `delete`
 
-Format: `delete TASKNAME`
+Format: `delete TASKNAME` <br />
 		`delete TASKINDEX`
 		
 > In the event of delete TASKNAME, ProcrastiNomore will show a list of tasks
@@ -121,10 +121,10 @@ Format: `delete TASKNAME`
 > the TASK user wants to delete
 
 Examples:
-*`delete breakfast`
- `1`
-*`list`
- `delete 1`
+* `delete breakfast` <br />
+  `1`
+* `list` <br />
+  `delete 1`
 
 ### 2.5. Wipe out history of all or specified tasks: clear
 
@@ -144,7 +144,7 @@ Format: `clear completed`
 		`clear uncompleted`
 
 Examples:
-*`Clear 03/03/17`
+* `clear 03/03/17`
 
 ### 2.6. Deleting a person : `delete`
 
