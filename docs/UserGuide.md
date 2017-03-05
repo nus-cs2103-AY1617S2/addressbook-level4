@@ -184,25 +184,31 @@ Format : `exit`
 
  Command | Format  | Description
 -------- | -------- | -------- 
-[help](#help) | `help`|
-[add](#add) | `add NAME [PRIORITY] [/t TAG1, TAG2…] `|
- | `add NAME [PRIORITY] [/t TAG1, TAG2…] `|
- | `add NAME [PRIORITY] [/t TAG1, TAG2…] `|
- | `add NAME [PRIORITY] [/t TAG1, TAG2…] `|
- | `add NAME [PRIORITY] [/t TAG1, TAG2…] `|
-
-
-[edit](#edit) | `list [/t|/e] [/a]`
-[delete](#delete) | `edit /t INDEX [/name NEW_NAME] [/desc NEW_DESCRIPTION] [/by NEW_DEADLINE_DATETIME]`
-[view](#view) | `edit /e INDEX [/name NEW_NAME] [/desc NEW_DESCRIPTION] [/from NEW_START_DATETIME /to NEW_END_DATETIME]`
-[done](#done) | `mark INDEX`
-[undo](#undo) |`delete /t|/e INDEX`
-[redo](#redo) |`select /t|/e INDEX`
-[find](#find) | `save FILEPATH`
-[clear](#clear) | `help [COMMAND]`
-[reset](#reset) | `undo`
-[saveto](#saveto) | `find KEYWORD [/ MORE_KEYWORDS][/power]`
-[exit](#exit) |`clear /t|/e [/a]`
+[help](#help) | `help`| Opens a help page
+[add](#add) | `add NAME [PRIORITY] [/t TAG1, TAG2…]`| Adds a floating task with priority and tags
+ | `add NAME at START_DATETIME [PRIORITY] [/t TAG1, TAG2…]`| Adds a pending task with only start time, priority and tags
+ | `add NAME by END_DATETIME [PRIORITY] [/t TAG1, TAG2…]`| Adds a pending task with only deadline, priority and tags
+ | `add NAME by END_DATETIME [PRIORITY] [/t TAG1, TAG2…]`| Adds a pending task with start time, end time, priority and tags
+ | `add [INSTANCES] NAME [at|by|from START_DATETIME] [to END_DATETIME]
+[PRIORITY] every [DAY|MONTH|YEAR] [/t TAG1, TAG2…]`| Adds a recurring number of task instances that spans over a period of time with priority and tags
+[edit](#edit) | `Edit INDEX|NAME [at|by|from START_DATETIME] [to END_DATETIME]
+[PRIORITY] every [DAY|MONTH|YEAR] [/t TAG1, TAG2…]` | Edits a task with the new parameters
+[delete](#delete) | `Delete INDEX|NAME` | Delete a task 
+[view](#view) | `view` | Show all tasks
+[view](#view) | `view t` | Show all today’s tasks
+[view](#view) | `view p` |Show all pending task
+[view](#view) | `view c` | Show all completed task
+[view](#view) | `view f` | Show all floating task
+[view](#view) | `view o` | Show all overdue task
+[view](#view) | `view INDEX|NAME|START_DATETIME|END_DATETIME|PRIORITY|DAY|MONTH|YEAR TAG` | Show a specified task based on its detail 
+[done](#done) | `done INDEX|NAME`| Mark a task as done
+[undo](#undo) | `undo` | Undo the most recent command
+[redo](#redo) | `redo` | Redo the most recent undo
+[find](#find) | `Find KEYWORDS [KEYWORD 1, KEYWORD2,..]`| Find the task associated to the keyword 
+[clear](#clear) | `clear` | Clear all completed tasks
+[reset](#reset) | `reset` | Reset save data
+[saveto](#saveto) | `saveto PATH` | Change the default save directory 
+[exit](#exit) | `exit` | Exit the application
 
 
 
