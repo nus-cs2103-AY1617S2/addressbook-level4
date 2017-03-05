@@ -1,5 +1,6 @@
 package seedu.geekeep.model.person;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 

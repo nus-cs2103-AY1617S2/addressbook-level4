@@ -4,7 +4,6 @@ import java.util.function.Supplier;
 
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import seedu.geekeep.MainApp;
 import seedu.geekeep.commons.core.Config;
 import seedu.geekeep.commons.core.GuiSettings;
 import seedu.geekeep.model.ReadOnlyAddressBook;
