@@ -175,12 +175,12 @@ Format: `priority t/TASK p/RANK`
 
 Examples:
 
-* `Priority t/meeting p/1`
+* `Priority t/meeting p/1`<br>
    Mark the priority of meeting as most important
-* `Priority t/CS3230 assignment p/2`
-   Mark the priority of CS3230 assignment as important.
-* `Priority t/housework p/3`
-   Mark the priority of housework as the least important.
+* `Priority t/CS3230 assignment p/2`<br>
+   Mark the priority of CS3230 assignment as important
+* `Priority t/housework p/3`<br>
+   Mark the priority of housework as the least important
 
 ### 2.13. Exiting the program : `exit`
 
