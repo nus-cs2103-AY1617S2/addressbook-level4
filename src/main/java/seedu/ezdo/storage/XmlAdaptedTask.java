@@ -14,7 +14,6 @@ import seedu.ezdo.model.todo.Name;
 import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.Priority;
 import seedu.ezdo.model.todo.ReadOnlyTask;
-import seedu.ezdo.model.todo.*;
 
 /**
  * JAXB-friendly version of the Task.
