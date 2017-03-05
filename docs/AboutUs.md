@@ -13,10 +13,9 @@ Year 2 Computer Science Major<br>
  * 
  * 
  * 
-
+ 
 -----
 
-## Project Team
 #### [Tan Li Hao](https://github.com/LiHaoTan)
 <img src="" width="150"><br>
 Year 2 Computer Science Major<br>
@@ -30,7 +29,6 @@ Year 2 Computer Science Major<br>
 
 -----
 
-## Project Team
 #### [Liu Yulin](https://github.com/LiuYulin0629)
 <img src="" width="150"><br>
 Year 2 Computer Science Major<br>
