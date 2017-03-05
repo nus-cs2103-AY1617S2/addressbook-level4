@@ -256,7 +256,7 @@ Examples:
 
 ### Editing a task
 
-Edit a task in iManager<br>
+Edit a task in iManager by index or name<br>
 
 Format: `Edit INDEX|NAME [at|on|by|from START_DATETIME to END_DATETIME] [every DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION][t/TAG...]`<br>
 > * INDEX refers to the index number shown in the most recent listing of tasks. 
@@ -268,19 +268,19 @@ Format: `Edit INDEX|NAME [at|on|by|from START_DATETIME to END_DATETIME] [every D
 
 Examples:
 
-* `Edit 1 on 10-22-2017 1500 p/1 d/SR1`
+* `Edit 1 on 10-22-2017 1500 p/1 d/SR1`<br>
    Edit the first task in the task list such that it is a priority 1 pending task named "exam" on 22 October 2017 with description 
    "SR1".
-* `Edit exam on 10-22-2017 1500 p/1 d/SR1`
+* `Edit exam on 10-22-2017 1500 p/1 d/SR1`<br>
    Edit a task named "exam" in the task list such that it is a priority 1 pending task named "exam" on 22 October 2017 with description 
    "SR1".
-* `Edit exam on 10-22-2017 1500 p/1 d/SR1 t/CS2010`
+* `Edit exam on 10-22-2017 1500 p/1 d/SR1 t/CS2010`<br>
    Edit a task named "exam" in the task list such that it is a priority 1 pending task named "exam" on 22 October 2017 with description 
    "SR1" and append tag "CS2010" to "exam".
-* `Edit exam on 10-22-2017 1500 p/1 d/SR1 t/none`
+* `Edit exam on 10-22-2017 1500 p/1 d/SR1 t/none`<br>
    Edit a task named "exam" in the task list such that it is a priority 1 pending task named "exam" on 22 October 2017 with description 
    "SR1" and remove all tags from "exam".
-* `Edit exam from 10-22-2017 1300 to 10-22-2017 1500 every year p/1 d/SR1 t/CS2010`
+* `Edit exam from 10-22-2017 1300 to 10-22-2017 1500 every year p/1 d/SR1 t/CS2010`<br>
    Edit the first task in the task list such that it start on the 22nd October of every year 1300 to 22nd October of every year 1500 
    with description "SR1" and append tag "CS2010" to "exam".
 
@@ -356,17 +356,20 @@ New file will be automatically created as long as given directory is valid.
 
 Format: `reset`
 
-### Changing the save location
-iManager will save data in a file called iManager.txt in the project root folder by dafault or if the file path is not specified. 
-You can change the location by specifying the file path as a command argument.
-New file will be automatically created as long as given directory is valid.
+### Save
+#### Saving the data
+The application data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+#### Changing the save location
+The application data is saved in a file called iManager.txt under the project root folder by dafault or if the file path is not specified. You can change the location by specifying the file path as a command argument. New file will be automatically created as long as given directory is valid.
 
 Format: `saveto FILEPATH`
 
-> FILEPATH (must be valid)
+> * FILEPATH must be valid
+> * `cd` will tell you the current location of the save data. 
 
 Examples:
-* `saveto C:\Users\Computing\Desktop\CS2103` 
+* `saveto C:\Users\Computing\Desktop\CS2103`
 
 ### Exiting the program:`exit`
 Exits the application.
@@ -406,7 +409,4 @@ Format : `exit`
 [redo](#redo-most-recent-command) | `redo` | Redo the most recent undo
 [reset](#reset-data) | `reset` | Reset save data
 [saveto](#changing-the-save-location) | `saveto PATH` | Change the default save directory 
-[exit](#exiting-the-program) | `exit` | Exit the application
-
-
-
+[exit](#exiting-the-program) | `exit`
