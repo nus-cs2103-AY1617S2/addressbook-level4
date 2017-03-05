@@ -346,36 +346,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-
-|`***`|New User|view instructions|keep track of things to do|
-|`***`|User|add task|keep track of things to do|
-|`***`|User|complete task|update my progress|
-|`***`|User|view incomplete tasks|keep track of what I still need to do|
-|`***`|User|view complete tasks|keep track of tasks I have completed|
-|`***`|User|delete a task|remove tasks I no longer want to keep track of|
-|`***`|User|edit task|correct or revise the task name and its details|
-|`***`|User|view task progress|keep track of my progress|
-|`***`|User|sync list with Google Calendar|view my todo list across different platforms|
-|`***`|User|undo previous command|revert accidental changes|
-|`***`|User|search for keyword|search for a task by keywords|
-|`***`|User|view overdue tasks|know which tasks to prioritise finishing|
-|`***`|User|add tags to task|be able to group tasks under a category|
-|`***`|User|choose location to store save data|adjust application according to my needs|
-|`**`|User|view upcoming deadlines|keep track of my deadlines|
-|`**`|User|have a relevant link for my task|keep track of the task details|
-|`**`|User|snooze my tasks|adjust application according to my needs|
-|`**`|User|be reminded of my tasks x minutes before deadline|get reminder to do my task|
-|`**`|User|change UI theme|customise the application|
-|`**`|User|repeat tasks|add a repeating task just once|
-|`**`|User|add notes about a task|keep track of my progress|
-|`**`|User|be alerted of conflicting tasks|avoid duplicates|
-|`*`|User|change font size|adjust application according to my needs|
-|`*`|User|view progress report|have a detailed overview of my current progress|
-|`*`|User|view my tasks in calendar form|have a visual representation of my schedule|
-|`*`|User|use arrow keys to scroll through previously typed commands|save myself the trouble of typing similar words|
-|`*`|User|add a message of the day|customise the application|
-|`*`|User|share my todo list|collaborate with others|
-|`*`|User|view inspirational messages|feel motivated to complete my tasks|
+|`***`|New User|view instructions|keep track of things to do| 
+|`***`|User|add task|keep track of things to do| 
+|`***`|User|complete task|update my progress|  
+|`***`|User|view incomplete tasks|keep track of what I still need to do|  
+|`***`|User|view complete tasks|keep track of tasks I have completed|  
+|`***`|User|delete a task|remove tasks I no longer want to keep track of|  
+|`***`|User|edit task|correct or revise the task name and its details| 
+|`***`|User|view task progress|keep track of my progress| 
+|`***`|User|sync list with Google Calendar|view my todo list across different platforms|  
+|`***`|User|undo previous command|revert accidental changes|  
+|`***`|User|search for keyword|search for a task by keywords|  
+|`***`|User|view overdue tasks|know which tasks to prioritise finishing|  
+|`***`|User|add tags to task|be able to group tasks under a category|  
+|`***`|User|choose location to store save data|adjust application according to my needs|  
+|`**`|User|view upcoming deadlines|keep track of my deadlines|  
+|`**`|User|have a relevant link for my task|keep track of the task details|  
+|`**`|User|snooze my tasks|adjust application according to my needs|  
+|`**`|User|be reminded of my tasks x minutes before deadline|get reminder to do my task|  
+|`**`|User|change UI theme|customise the application|  
+|`**`|User|repeat tasks|add a repeating task just once|   
+|`**`|User|add notes about a task|keep track of my progress| 
+|`**`|User|be alerted of conflicting tasks|avoid duplicates| 
+|`*`|User|change font size|adjust application according to my needs|     
+|`*`|User|view progress report|have a detailed overview of my current progress|  
+|`*`|User|view my tasks in calendar form|have a visual representation of my schedule|  
+|`*`|User|use arrow keys to scroll through previously typed commands|save myself the trouble of typing similar words|  
+|`*`|User|add a message of the day|customise the application|  
+|`*`|User|share my todo list|collaborate with others|  
+|`*`|User|view inspirational messages|feel motivated to complete my tasks|   
 
 
 ## Appendix B : Use Cases
@@ -532,25 +531,25 @@ Priority | As a ... | I want to ... | So that I can...
 
 ### Use case: Search
 #### Main Success Scenario:
-User requests for a list of tasks that have matching keywords typed in.
-System shows a list of tasks that have the matching keywords.  
+1. User requests for a list of tasks that have matching keywords typed in.
+2. System shows a list of tasks that have the matching keywords.  
 	Use case ends. 
 
 
 ### Use case: View overdue tasks
 #### Main Success Scenario:
-User requests for a list of overdue tasks. 
-System shows a list of tasks that are overdue.  
+1. User requests for a list of overdue tasks. 
+2. System shows a list of tasks that are overdue.  
 Use case ends.
 
 
 ### Use case: Undo previous command
 #### Main Success Scenario:
-User requests to undo a previous command that mutates the data. 
-System returns the command that was undone.  
+1. User requests to undo a previous command that mutates the data. 
+2. System returns the command that was undone.  
 Use case ends.
 ##### Extensions
-2. There is nothing to undo.  
+2a. There is nothing to undo.  
 Use case ends. 
 
 ### Use case: Repeat tasks 
@@ -569,7 +568,19 @@ Use case ends.
         Use case resumes at step 2.
 
 ### Use case: Add tags to created task
-I think this should be under edit also what do yall think? (makes sense to separate)
+#### Main Success Scenario:
+1. User requests to list persons.
+2. System shows a list of persons. 
+3. User requests to add tags to a specific task in the list. 
+4. System adds the tags and displays the task. 
+Use case ends. 
+
+#### Extensions
+2a. There is no list.  
+    Use case ends.
+    3a. The given index is invalid.  
+        3a1. System gives an error message.  
+        Use case resumes at step 2.
 
 ### Use case: Customise Message of the Day 
 #### Main Success Scenario:
@@ -593,18 +604,6 @@ I think this should be under edit also what do yall think? (makes sense to separ
     	* 1b1. System shows the command that was submitted next.
         Use case ends.
 
-#Product survey
-
-##### Reminders
-
-> Pros:
-> *  Simple and intuitive interface
-> *  Syncs across Apple devices
-
-> Cons:
-> *  Only available on iOS
-> *  Lacks collaborative features
-> *  Unable to customise
 
 ## Appendix C : Non Functional Requirements
 
@@ -627,17 +626,17 @@ I think this should be under edit also what do yall think? (makes sense to separ
 
 ## Appendix E : Product Survey
 
-**Product Name**
 
-Author: ...
+**Reminders**
 
-Pros:
+> Pros:
+> *  Simple and intuitive interface
+> *  Syncs across Apple devices
 
-* ...
-* ...
+> Cons:
+> *  Only available on iOS
+> *  Lacks collaborative features
+> *  Unable to customise
 
-Cons:
 
-* ...
-* ...
 
