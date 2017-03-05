@@ -43,6 +43,7 @@ By : `Team CS2103JAN2017-T11-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &n
 
 ### 2.1. Viewing help : `help`
 
+Opens a side window that displaying all commands and syntax.<br>
 Format: `help`
 
 > Help is also shown if you enter an incorrect command e.g. `abcd`
@@ -60,12 +61,18 @@ Examples:
 * `add Study for midterm s/02-03-17 d/04-03-17 t/study t/midterm`
 * `add Attend CS2103 tutorial s/02-03-17 d/02-03-17 t/lesson t/school t/tutorial`
 
-### 2.3. Listing all tasks : `list`
+### 2.3. Listing tasks : `list`
 
-Shows a list of all task in the task manager on a particular day.<br>
+Shows a list of all tasks in the task manager on that day.<br>
+Format: `list`<br>
+Shows a list of all tasks in the task manager on a particular day.<br>
 Format: `list d/dd-mm-yy`<br>
-Shows a list of all task in the task manager with a particular tag.<br>
-Format: `list t/TAG`
+Shows a list of all tasks in the task manager with a particular tag.<br>
+Format: `list t/TAG`<br>
+Shows a list of all tasks in the task manager<br>
+Format: `list t/ALL<br>
+
+> The list of tasks will be sorted accoding to priority level from 1 to 5
 
 Examples:
 * `list t/complete`<br>
@@ -126,7 +133,7 @@ Format: `delete INDEX`
 
 Examples:
 
-* `list`<br>
+* `list t/ALL`<br>
   `delete 2`<br>
   Deletes the 2nd task in the task manager.
 * `find t/tutorial`<br>
@@ -138,33 +145,57 @@ Examples:
 Marks the specified task as `Completed`. The task is automatically added with a `complete` tag.<br>
 Format: `complete INDEX`
 
-> Mart the task at the specified `INDEX` as `Completed`.<br>
-> The index refers to the index number shown in the most recent listing.<br>
+> Mark the task at the specified `INDEX` as `Completed`.
+> The index refers to the index number shown in the most recent listing.
 > The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 
-* `list`<br>
+* `list t/ALL`<br>
   `complete 2`<br>
   Selects the 2nd task in the task manager.
 * `find t/tutorial` <br>
   `complete 1`<br>
   Selects the 1st task in the results of the `find` command.
 
-### 2.8. Clearing all entries : `clear`
+### 2.8. Allocate priority to a task: `prioritize`
+
+Puts a priority level to a task.<br>
+Format: `prioritize INDEX PRIORITY_LEVEL`
+
+> Allocates a priority leve of `PRIORITY_LEVEL` to the task at the specified `INDEX`.
+> The index **must be a positive interger** 1, 2, 3,...
+> The priority level **must be a positive integer from 1 to 5**, 1 being the highest priority and 5 being the least.
+
+Examples:
+* `list t/ALL`<br>
+  `prioritize 2 5`
+  Puts a priority level of 5 to the 2nd task in the task manager
+
+### 2.9. Clearing all entries : `clear`
 
 Clears all entries from the task manager.<br>
 Format: `clear`
 
-### 2.9. Exiting the program : `exit`
+### 2.10. Undo the last change : `undo`
+
+Undos the last modification done by the user.
+Format: `undo`
+
+### 2.11. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.10. Saving the data
+### 2.12. Saving the data
 
 Task manager data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
+
+### 2.13. Viewing command history : `history`
+
+Displays the past 10 commands entered by the user.<br>
+Format: `history`,
 
 ## 3. FAQ
 
@@ -174,8 +205,8 @@ There is no need to save manually.
 
 ## 4. Command Summary
 
-* **Add**  `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` <br>
-  e.g. `add James Ho p/22224444 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+* **Add**  `add TASK_NAME s/START_DATE d/DUE_DATE [t/TAG]...` <br>
+  e.g. `add Study for midterm s/02-03-17 d/04-03-17 t/study t/midterm`
 
 * **Clear** : `clear`
 
@@ -184,15 +215,18 @@ There is no need to save manually.
 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
   e.g. `find assignment`
-	   `find t/tutorial`
+	     `find t/tutorial`
 
 * **List** : `list` <br>
-  e.g.
+  e.g. `list`
+       `list t/ALL`
 
 * **Help** : `help` <br>
-  e.g.
 
 * **Complete** : `complete INDEX` <br>
-  e.g.`complete 2`
+  e.g. `complete 2`
+
+* **Prioritze** : `prioritize INDEX PRIORITY_LEVEL` <br>
+  e.g. `priority 2 5`
 
 
