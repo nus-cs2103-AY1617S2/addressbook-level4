@@ -4,30 +4,24 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Damith C. Rajapakse](http://www.comp.nus.edu.sg/~damithch) <br>
-<img src="images/DamithRajapakse.jpg" width="150"><br>
-**Role**: Project Advisor
-
------
-
-#### [Joshua Lee](http://github.com/lejolly)
-<img src="images/JoshuaLee.jpg" width="150"><br>
+#### [Liu Ziyang](http://github.com/VeryLazyBoy)
+<img src="images/LiuZiyang.jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: UI
 
 -----
 
-#### [Leow Yijin](http://github.com/yijinl)
-<img src="images/LeowYijin.jpg" width="150"><br>
+#### [How Si Wei](http://github.com/howsiwei)
+<img src="images/HowSiWei.jpg" width="150"><br>
 Role: Developer <br>
-Responsibilities: Data
+Responsibilities: UI
 
 -----
 
-#### [Martin Choo](http://github.com/m133225)
-<img src="images/MartinChoo.jpg" width="150"><br>
+#### [Goh Yi Rui](http://github.com/yirui94)
+<img src="images/GohYiRui.jpg" width="150"><br>
 Role: Developer <br>
-Responsibilities: Dev Ops
+Responsibilities: Data
 
 -----
 
