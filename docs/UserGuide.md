@@ -1,293 +1,232 @@
-## **1. Quick Start**
+# User Guide
+
+By : `Team CS2103JAN2017-W15-B4`   &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+
+---
+
+* [Quick Start](#1-quick-start)
+* [Features](#2-features)
+* [FAQ](#3-faq)
+* [Command Summary](#4-command-summary)
+
+## 1. Quick Start
 
 1. Ensure you have Java version 1.8.0_60 or later installed in your Computer.
+	> Having any Java 8 version is not enough. <br>
+   This app will not work with earlier versions of Java 8.
 
-2. Having any Java 8 version is not enough.
-
-3. This app will not work with earlier versions of Java 8.
-
-4. Download the latest taskmanager.jar from the [releases](https://github.com/CS2103JAN2017-W15-B4/main/releases) tab.
-
-5. Copy the file to the folder you want to use as the home folder for your task manager.
-
-6. Double-click the file to start the app. The GUI should appear in a few seconds.
-
-7. Type the command in the command box and press Enter to execute it.
-
-8. e.g. typing help and pressing Enter will open the help window.
-
-9. Some example commands you can try:
-
-    * list : lists all events and tasks
-
-    * Add Complete Progress Report ed/20-3-17 et/2359 : adds a task titled Complete Progress Report with deadline on 20 March 2017 2359H to the task manager.
-
-    * Delete 3 : deletes the 3rd event or contact shown in the current list
-
-    * exit : exits the app
+2. Download the latest taskmanager.jar from the [releases](https://github.com/CS2103JAN2017-W15-B4/main/releases) tab.
+3. Copy the file to the folder you want to use as the home folder for your task manager.
+	> <img src="images/GeekKeep.png" width="600">
+4. Double-click the file to start the app. The GUI should appear in a few seconds.
+5. Type the command in the command box and press  <kbd>Enter</kbd> to execute it.<br>
+e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
+6. Some example commands you can try:
+    * **`list`** : lists all events and tasks
+    * **`add Complete Progress Report ed/20-3-17 et/2359`** : adds a task titled Complete Progress Report with deadline on 20 March 2017 2359H to the task manager.
+    * **`delete 3`** : deletes the 3rd event or contact shown in the current list
+    * **`exit`** : exits the app
 
 10. Refer to the [Features](https://github.com/CS2103JAN2017-W15-B4/main/blob/master/docs/UserGuide.md#features) section below for details of each command.
 
-## **2. Features**
+## 2. Features
 
-Command Format
+> **Command Format**
+>
+> * Words in UPPER_CASE are the parameters.
+> * Items in SQUARE_BRACKETS are optional.
+> * Items with ... after them can have multiple instances.
+> * Parameters can be in any order.
 
-* Words in UPPER_CASE are the parameters.
+### 2.1. Viewing help : `help`
 
-* Items in SQUARE_BRACKETS are optional.
+Format: `help`
 
-* Items with ... after them can have multiple instances.
+> Help is also shown if you enter an incorrect command e.g. `abcd`
 
-* Parameters can be in any order.
+### 2.2. Adding a task: `add`
 
-### **2.1. Viewing help : help**
+Adds a task or event to the task manager<br>
+Format: `add TASK_OR_EVENT_NAME [startdate/START_DATE]  [starttime/START_TIME] [enddate/END_DATE]  [endtime/END_TIME]`
 
-Format: help
-
-Help is also shown if you enter an incorrect command e.g. abcd
-
-### **2.2. Adding a task: add**
-
-### Adds a task or event to the task manager
-
-Format: add TASK_OR_EVENT_NAME [startdate/START_DATE] [sd/START_DATE] [starttime/START_TIME] [st/START_TIME] [enddate/END_DATE] [ed/END_DATE] [endtime/END_TIME] [et/END_TIME]
+> Acronyms can be used to represent certain commands e.g. `[sd/START_DATE]` is the same as `[startdate/START_DATE]`. `[st/START_TIME]` is the same as `[starttime/START_TIME]`. `[ed/END_DATE]` is the same as `[enddate/END_DATE]`. `[et/END_TIME]` is the same as `[endtime/END_TIME]`.
 
 Examples:
 
-* add Progress report ed/15-3-17 et/1600
+* `add Progress report ed/15-3-17 et/1600`
+* `add shop groceries`
+* `add Team meeting startdate/15-3-17 st/1500 ed/15-3-17 et/1600`
+* `add celebration sd/1-4-17 ed/1-4-17`
 
-* add shop groceries
+### 2.3. Listing all tasks or events : `list`
 
-* add Team meeting startdate/15-3-17 st/1500 ed/15-3-17 et/1600
+Shows a list of all uncompleted tasks and events in the task manager.<br>
+Format: `list`
 
-* add celebration sd/1-4-17 ed/1-4-17
+### 2.4. Listing all completed tasks or events : `listcompleted`
 
-### **2.3. Listing all tasks or events : list**
+Shows a list of all completed tasks and events in the task manager.<br>
+Format: `listcompleted`
 
-Shows a list of all uncompleted tasks and events in the task manager.
+### 2.5. Listing all tasks : `listtasks`
 
-Format: list
+Shows a list of all undone tasks in the task manager.<br>
+Format: `listtasks`
 
-### **2.4. Listing all completed tasks or events : listcompleted**
-
-Shows a list of all completed tasks and events in the task manager.
-
-Format: listcompleted
-
-### **2.5. Listing all tasks : listtasks**
-
-Shows a list of all undone tasks in the task manager.
-
-Format: listtasks
-
-### **2.6. Listing all events : listevents**
+### 2.6. Listing all events : `listevents`
 
 Shows a list of all uncompleted events in the task manager. Events are tasks with a starting and ending time or date.
+Format: `listevents`
 
-Format: listevents
+### 2.7. Editing a task or event : `update`
 
-### **2.7. Editing a task or event : update**
+Edits an existing task in the task manager.<br>
+Format: `update INDEX [TASK_OR_EVENT_NAME] [ed/END_DATE] [et/END_TIME]`
 
-Edits an existing task in the task manager.
-
-Format: update INDEX [TASK_OR_EVENT_NAME] [ed/END_DATE] [et/END_TIME]
-
-* Edits the task at the specified INDEX. The index refers to the index number shown in the last task listing.
-
-* The index must be a positive integer 1, 2, 3, ...
-
-* At least one of the optional fields must be provided.
-
-* Existing values will be updated to the input values.
+> * Edits the task at the specified INDEX. The index refers to the index number shown in the last task listing.
+> * The index must be a positive integer 1, 2, 3, ...
+> * At least one of the optional fields must be provided.
+> * Existing values will be updated to the input values.
 
 Examples:
 
-* update 1 Summary Report et/2359
+* `update 1 Summary Report et/2359`<br>
+ Edits the title of task 1 and updates its ending time to 2359
+* `update 2 ed/ et/`<br>
+Clears the existing deadlines for task 2
 
-* Edits the title of task 1 and updates its ending time to 2359
+### 2.8. Finding all tasks and events containing any keyword in their name or on a specific date : `find`
 
-* update 2 ed/ et/
+Finds tasks whose names contain any of the given keywords.<br>
+Format: `find KEYWORD [MORE_KEYWORDS] [DATE]`
 
-* Clears the existing deadlines for task 2
-
-### **2.8. Finding all tasks and events containing any keyword in their name or on a specific date : find**
-
-Finds tasks whose names contain any of the given keywords.
-
-Format: find KEYWORD [MORE_KEYWORDS] [DATE]
-
-* The search is case insensitive.
-
-* The order of the keywords does not matter. e.g. progress report will match report progress
-
-* Only the task or event name is searched.
-
-* Substrings will be matched e.g. meet will match meeting
-
-* Tasks matching at least one keyword will be returned (i.e. OR search). e.g. meeting will match team meeting
-
-* Specifying the date will narrow the search space to tasks and events on the day
+> * The search is case insensitive.
+> * The order of the keywords does not matter. e.g. progress report will match report progress
+> * Only the task or event name is searched.
+> * Substrings will be matched e.g. meet will match meeting
+> * Tasks matching at least one keyword will be returned (i.e. OR search). e.g. meeting will match team meeting
+> * Specifying the date will narrow the search space to tasks and events on the day
 
 Examples:
 
-* find report
+* `find report`<br>
+Returns any task or event having the word report
+* `find meet`<br>
+Returns any task or event having the word or substring meet.
+* `find meet 17-3-17`<br>
+Returns any task or event having the word or substring meet on 17-3-17
 
-* Returns any task or event having the word report
+### 2.9. Check the tasks and events current day: `check`
 
-* find meet
+Finds tasks or events which are due on the current day.<br>
+Format: `check`
 
-* Returns any task or event having the word or substring meet.
-
-* find meet 17-3-17
-
-* Returns any task or event having the word or substring meet on 17-3-17
-
-### **2.9. Check the tasks and events current day: check**
-
-Finds tasks or events which are due on the current day.
-
-Format: check
-
-* Iterates through each item on the returned list
-
-* Prompts the user for action
+> * Iterates through each item on the returned list
+> * Prompts the user for action
 
 Examples:
 
-* check
+* `check`<br>
+Returns a list of tasks and events on the current day
+and  prompts user to mark each task and event as done, update or delete
 
-* Returns a list of tasks and events on the current day
+### 2.10. Mark a task as done : `done`
 
-* Task manager prompts user to mark each task and event as done, update or delete
+Mark the specified task from the task manager as done.<br>
+Format: `done INDEX`
 
-### **2.10. Mark a task as done : done**
-
-Mark the specified task from the task manager as done.
-
-Format: done INDEX
-
-Marks the task at the specified INDEX as done.
-
-The index refers to the index number shown in the most recent listing.
-
-The index must be a positive integer 1, 2, 3, ...
+> * Marks the task at the specified INDEX as done.
+> * The index refers to the index number shown in the most recent listing.
+> * The index must be a positive integer 1, 2, 3, ...
 
 Examples:
 
-* listtask
+* `listtask`<br>
+`done 2`<br>
+Marks the 2nd task in the task manager as done.
 
-* done 2
+* `find Report`<br>
+`done 1`<br>
+Marks the 1st task in the results of the find command as done.
 
-* Marks the 2nd task in the task manager as done.
+### 2.11. Deleting a task : `delete`
 
-* find Report
+Deletes the specified task from the task manager. Irreversible.<br>
+Format: `delete INDEX`
 
-* done 1
-
-* Marks the 1st task in the results of the find command as done.
-
-### **2.11. Deleting a task : delete**
-
-Deletes the specified task from the task manager. Irreversible.
-
-Format: delete INDEX
-
-Deletes the task at the specified INDEX.
-
-The index refers to the index number shown in the most recent listing.
-
-The index must be a positive integer 1, 2, 3, ...
+> * Deletes the task at the specified INDEX.
+> * The index refers to the index number shown in the most recent listing.
+> * The index must be a positive integer 1, 2, 3, ...
 
 Examples:
 
-* listtask
+* `listtask`<br>
+`delete 2`<br>
+Deletes the 2nd task in the task manager.
 
-* delete 2
+* `find Report`<br>
+`delete 1`<br>
+Deletes the 1st task in the results of the find command.
 
-* Deletes the 2nd task in the task manager.
+### 2.12. Undo most recent command : `undo`
 
-* find Report
+Undo the most recent command. Can redo with command redo<br>
+Format: `undo`
 
-* delete 1
+### 2.13. Redo most recent undo : `redo`
 
-* Deletes the 1st task in the results of the find command.
+Redo the most recent undo. Can undo with command undo<br>
+Format: `redo`
 
-### **2.12. Undo most recent command : undo**
+### 2.14. Exiting the program : `exit`
 
-Undo the most recent command. Can redo with command redo
+Exits the program.<br>
+Format: `exit`
 
-Format: undo
+### 2.15. Saving the data
 
-### **2.13. Redo most recent undo : redo**
-
-Redo the most recent undo. Can undo with command undo
-
-Format: redo
-
-### **2.14. Exiting the program : exit**
-
-Exits the program.
-
-Format: exit
-
-### **2.15. Saving the data**
-
-task manager data are saved in the hard disk automatically after any command that changes the data.
-
+Task manager data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
-## **3. FAQ**
+## 3. FAQ
 
-Q: How do I transfer my data to another Computer?
+**Q**: How do I transfer my data to another Computer?<br>
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous task manager folder.
 
-A: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous task manager folder.
+## 4. Command Summary
 
-## **4. Command Summary**
+* **Add** `add TASK_OR_EVENT_NAME [sd/START_DATE] [st/START_TIME] [ed/END_DATE] [et/END_TIME]`<br>
+ e.g. `add Team meeting sd/15-3-17 st/1500 ed/15-3-17 et/1600`
 
-* Add add TASK_OR_EVENT_NAME [sd/START_DATE] [st/START_TIME] [ed/END_DATE] [et/END_TIME]
+* **Update** : `update INDEX [TASK_OR_EVENT_NAME] [ed/END_DATE] [et/END_TIME]`<br>
+e.g. : `update 1 Summary Report et/2359`
 
-* e.g. add Team meeting sd/15-3-17 st/1500 ed/15-3-17 et/1600
+* **Delete** : `delete INDEX`<br>
+e.g. `delete 3`
 
-* Update : update INDEX [TASK_OR_EVENT_NAME] [ed/END_DATE] [et/END_TIME]
+* **Done** : `done INDEX`<br>
+e.g. `done 1`
 
-* e.g. : update 1 Summary Report et/2359
+* **Find** : `find KEYWORD [MORE_KEYWORDS] [DATE]`<br>
+e.g. `find report`
 
-* Delete : delete INDEX
+* **Undo** : `undo`<br>
+e.g. `undo`
 
-* e.g. delete 3
+* **Redo** : `redo`<br>
+e.g. `redo`
 
-* Done : done INDEX
+* **Check** : `check`<br>
+e.g. `check`
 
-* e.g. done 1
+* **List uncompleted tasks and events** : `list` <br>
+e.g. `list`
 
-* Find : find KEYWORD [MORE_KEYWORDS] [DATE]
+* **List uncompleted tasks** : `listtasks`<br>
+e.g. `listtasks`
 
-* e.g. find report
+* **List uncompleted events** : `listevents`<br>
+e.g. `listevents`
 
-* Undo : undo
-
-* e.g. undo
-
-* Redo : redo
-
-* e.g. redo
-
-* Check : check
-
-* e.g. check
-
-* List uncompleted tasks and events : list
-
-* e.g. list
-
-* List uncompleted tasks : listtasks
-
-* e.g. listtasks
-
-* List uncompleted events: listevents
-
-* e.g. listevents
-
-* Help : help
-
-* e.g. help
+* **Help** : `help`<br>
+e.g. `help`
