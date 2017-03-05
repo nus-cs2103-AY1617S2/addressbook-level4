@@ -362,7 +362,7 @@ Format : `exit`
  Command | Format  | Description
 -------- | -------- | -------- 
 [help](#viewing-help) | `help`| Opens a help page.
-| `help [COMMAND]`| Help with specific command. 
+ | `help [COMMAND]`| Help with specific command. 
 [add](#adding-a-task) | `add NAME [p/PRIORITY] [d/DESCRIPTION] [/t TAG...]`| Adds a floating task with priority and tags.
  | `add NAME at START_DATETIME [p/PRIORITY] [d/DESCRIPTION] [/t TAG...]`| Adds a pending task with only start date&time, priority and tags.
  | `add NAME by END_DATETIME [p/PRIORITY] [d/DESCRIPTION] [/t TAG...]`| Adds a pending task with only end date&time, priority and tags.
