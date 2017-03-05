@@ -54,7 +54,7 @@ Examples:
 * `add buy groceries r/cabbage and broccoli d/02-03-2017 t/personal`
 
 ### 2.3	Listing of all task: `list`
-Shows a list of all the tasks in to do list. 
+Shows a list of all the tasks in to do list.
 Format: `list`, `l`, `ls`
 
 ### 2.4	Listing of all done task: `listdone`
@@ -68,7 +68,7 @@ Format: `listnotdone`, `lnd`
 ### 2.6	Listing of all task under a tag: `listtag`
 Shows a list of task by the specified tag
 Format: `listtag TAGNAME`, `lt TAGNAME`
-	
+
 ### 2.7	Marking a task as done: `done`
 Marks the task at the specified `INDEX`.
 Format: `done INDEX`
@@ -81,7 +81,7 @@ Deletes the task at the specified `INDEX`.
 Format: delete INDEX
 
 ### 2.9	Undoing last command: `undo`
-Undo the last command. 
+Undo the last command.
 Format: undo
 
 ### 2.10 Editing a task: `edit`
@@ -91,7 +91,7 @@ Format: edit `edit INDEX [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
 > * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
-> * You can remove all the task’s tags by typing `t/` without specifying any tags after it. 
+> * You can remove all the task’s tags by typing `t/` without specifying any tags after it.
 
 Examples:
 
@@ -117,15 +117,15 @@ Examples:
 
 * `find homework`<br>
   Returns `do homework`
-  
+
 * `find homework school`<br>
   Returns Any task having names or remarks with `homework `,  or `school`
 
 ### 2.12 Deleting a task: `delete`
-Deletes the specified task from the to do list. Irreversible. 
+Deletes the specified task from the to do list. Irreversible.
 Format: `delete INDEX`
 
-> * Deletes the task at the specified `INDEX`. 
+> * Deletes the task at the specified `INDEX`.
 > * The index refers to the index number shown in the most recent listing.
 > * The index **must be a positive integer** 1, 2, 3, ...
 
@@ -141,7 +141,7 @@ Examples:
 
 
 ### 2.13 Clearing all task: `clear`
-Clears all entries from the to do list. Will prompt a confirmation. 
+Clears all entries from the to do list. Will prompt a confirmation.
 Format: `clear`
 
 ### 2.14 Exiting the program: `exit`
@@ -181,7 +181,7 @@ There is no need to save manually.
 **A**: You can do so by typing undo if the creation of one of the tasks was the previous command, or list all the tasks and delete one of them. The other task will remain in the to-do list.
 
 **Q**: I accidentally deleted the wrong task. Can I undo it?
-**A**: No. 
+**A**: No.
 
 **Q**: Do you have a mobile version?
 **A**: No.
@@ -202,7 +202,7 @@ There is no need to save manually.
   e.g.  `add do 2103 project r/waiting for john’s reply d/03-03-2017 l/nus soc t/school`
 
 * **List** : `list`, `l`, `ls` <br>
- 
+
 * **List done** : `listnotdone`, `lnd` <br>
 
 * **List not done** : `list`, `l`, `ls` <br>
@@ -218,17 +218,17 @@ There is no need to save manually.
 * **Edit**  `edit NAME [r/REMARKS] [d/DEADLINE] [l/LOCATION] [t/TAG]...`
   e.g.  `edit 1 r/finish up user guide l/home`
 
-* **Find** : `find KEYWORD [MORE_KEYWORDS]` 
+* **Find** : `find KEYWORD [MORE_KEYWORDS]`
   e.g. `find homework`
 
-* **Delete** : `delete INDEX` 
+* **Delete** : `delete INDEX`
    e.g. `delete 3`
 
 * **Clear** : `clear`
 
 * **Exit** : `exit`
 
-* **Save location** : `save PATHNAME` 
+* **Save location** : `save PATHNAME`
    e.g. `save C:\Program Files`
 
 

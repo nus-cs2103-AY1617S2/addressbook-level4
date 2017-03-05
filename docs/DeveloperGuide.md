@@ -356,10 +356,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 | `* * *` | list task by specific tag | only see task that under a certain tag
 | `* * *` | use short form for common commands | have flexibility when i use the app, type faster
 | `* * *` | specify folder for data storage | choose where i want to save my info
-| `* *` | sort persons by name | locate a person easily 
+| `* *` | sort persons by name | locate a person easily
 | `* *` | use hotkeys for commands | do things faster
 | `* *` | get feedback for my commands | know if a command is successful or system has hanged
-| `* *` | save my task to google calendar | see them on google calendar 
+| `* *` | save my task to google calendar | see them on google calendar
 | `* *` | get the app to help me find a slot for a task | find a suitable time easily
 | `* *` | block multiple slots | block slots when timing of a task is uncertain
 | `* *` | list task in sorted order | plan my time
@@ -372,7 +372,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 ## Appendex B : Use Cases
 (For all use cases below, the **System** is the `VeTo` and the **Actor** is the `user`, unless specified otherwise)
 
- 
+
 #### Use case: UC1 - Help
 
 **Main success scenario**
@@ -418,7 +418,7 @@ Use case resumes from step 2.
 		1a2. User enters the correct command.
 	Steps 1a1-1a2 are repeated until the command entered is valid.
 	Use case resumes from step 2.
-	
+
 3a. VeTo detects an error in the command.
 >	3a1. VeTo waits for another valid command..
 		3a2. User enters the valid command.
@@ -441,12 +441,12 @@ Use case resumes from step 2.
 
 1a. VeTo detects an error in command.
 >  1a1. VeTo waits for another valid command..
-    1a2. User enters the correct command. 
-   
+    1a2. User enters the correct command.
+
   2a. VeTo find no task with similar keyword or index
 > 2a1. VeTo show an message that says no similar task
-	2a2. VeTo waits for another valid command..	
- 
+	2a2. VeTo waits for another valid command..
+
 ## Appendex C : Non Functional Requirements
 1. Core functions work without internet.
 2. Can run without installation
@@ -470,7 +470,7 @@ Use case resumes from step 2.
 {More to be added}
 
 ## Appendex E : Product Survey
- 
+
 **Todoist**
 
 Author: Zhang Ying
@@ -491,31 +491,31 @@ Cons:
 
 Author: Walter
 
-Pros: 
+Pros:
 * Search for task by tag, keyword or notebook
-* Available on multiple platform 
-* Able to tag task as well 
-* Able to take a list of task and turn them into checklist instantly 
-* Able to link similar task together 
+* Available on multiple platform
+* Able to tag task as well
+* Able to take a list of task and turn them into checklist instantly
+* Able to link similar task together
 
 Cons:
 * Cannot index, only can tag task
-* Paying for premium services to offer more services 
+* Paying for premium services to offer more services
 
 **Google Keep**
 
 Author: Chan Lup Seng
 
 Pros:
-* Available on multiple platform on both web and mobile with synchronization 
+* Available on multiple platform on both web and mobile with synchronization
 * Able to store pictures, able to grab text from image
 * Time and location based reminders
 * Able to draw on notes
-* Able to archive 
+* Able to archive
 * Able to tag
-	
+
 Cons:
-* Not command line interface 
+* Not command line interface
 
 **Outlook calendar**
 
@@ -525,10 +525,10 @@ Pros:
 * Available on multiple platforms on both web and mobile with synchronization, and performs well with windows products
 * Provides different calendars for different purposes, such as Chinese lunar holiday calendar, Singapore holiday to cater to different individuals’ needs
 * Have different display forms, in weekdays, months or years
-	
+
 Cons:
-* Not command line interface 
+* Not command line interface
 * Time-zone feature is difficult to use
 * Difficult to edit tasks in a group
 * UI is not simple or aesthetic
-https://taskwarrior.org/docs/ 
+https://taskwarrior.org/docs/
