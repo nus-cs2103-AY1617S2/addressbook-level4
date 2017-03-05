@@ -166,8 +166,8 @@ Examples:
 * `add exam from 10-22-2017 1300 to 10-22-2016 1500 p/1`
 * `add exam from 10-22-2017 1300 to 10-22-2016 1500 p/1 d/SR1`
 * `add exam from 10-22-2017 1300 to 10-22-2016 1500 p/1 d/SR1 t/CS2010`<br>
-  Add a priority 1 task named "exam" that starts from 22 October 2017 1300 to 22 October 2017 1500 with description "SR1" and tag   
-  "CS2010" into task list.
+  Add a priority 1 task named "exam" that starts from 22 October 2017 1300 to 22 October 2017 1500 with description "SR1" and 
+  tag "CS2010" into task list.
   
 #### Adding a recurring task 
 
@@ -177,12 +177,13 @@ Format: `add NAME [at|on|by|from START_DATE] [to END_DATE] [every DAY|WEEK|MONTH
 > * Tasks can have any number of tags.
 > * If no priority is specified, the task will be of lowest priority.
 > * Date format is MM-DD-YYYY HHMM (24 hour Format) e.g. 10-22-2017 1500.
-> * It is suffice to use time for every DAY and every WEEK. Date will be ignored
-> * One must include START_DATE and END_DATE for every MONTH and every YEAR. 
 > * If no start time is specified, the time will be the CURRENT time. 
 > * If no end time is specified, the time will 2359. 
 > * Any form of abbreviation can be use for WEEK (e.g Tue, Tues, Tuesday), case insensitve. 
 > * No abbreviation can be use for DAY, MONTH and YEAR
+> * Month (i.e MM) is ignored for every MONTH.
+> * It is suffice to use time for every DAY and every WEEK. Date (i.e MM-DD-YYYY) will be ignored.
+> * One must include START_DATE and END_DATE for every MONTH and every YEAR. 
 
 Examples:
 * `add exam every day p/1 d/SR1 t/CS2010`<br>
