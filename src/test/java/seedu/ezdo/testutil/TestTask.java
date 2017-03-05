@@ -15,7 +15,7 @@ public class TestTask implements ReadOnlyTask {
     private Name name;
     private StartDate startDate;
     private Email email;
-    private Phone phone;
+    private Priority phone;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -45,7 +45,7 @@ public class TestTask implements ReadOnlyTask {
         this.email = email;
     }
 
-    public void setPhone(Phone phone) {
+    public void setPhone(Priority phone) {
         this.phone = phone;
     }
 
@@ -59,7 +59,7 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Phone getPhone() {
+    public Priority getPhone() {
         return phone;
     }
 

@@ -9,7 +9,7 @@ import seedu.ezdo.model.tag.UniqueTagList;
 public interface ReadOnlyTask {
 
     Name getName();
-    Phone getPhone();
+    Priority getPhone();
     Email getEmail();
     StartDate getStartDate();
 

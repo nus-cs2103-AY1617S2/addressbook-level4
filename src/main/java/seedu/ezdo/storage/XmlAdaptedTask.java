@@ -61,7 +61,7 @@ public class XmlAdaptedTask {
             taskTags.add(tag.toModelType());
         }
         final Name name = new Name(this.name);
-        final Phone phone = new Phone(this.phone);
+        final Priority phone = new Priority(this.phone);
         final Email email = new Email(this.email);
         final StartDate startDate = new StartDate(this.startDate);
         final UniqueTagList tags = new UniqueTagList(taskTags);

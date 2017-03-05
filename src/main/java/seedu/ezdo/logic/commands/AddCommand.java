@@ -12,7 +12,7 @@ import seedu.ezdo.model.todo.StartDate;
 import seedu.ezdo.model.todo.Email;
 import seedu.ezdo.model.todo.Name;
 import seedu.ezdo.model.todo.Task;
-import seedu.ezdo.model.todo.Phone;
+import seedu.ezdo.model.todo.Priority;
 import seedu.ezdo.model.todo.UniqueTaskList;
 
 /**
@@ -45,7 +45,7 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Task(
                 new Name(name),
-                new Phone(phone),
+                new Priority(phone),
                 new Email(email),
                 new StartDate(startDate),
                 new UniqueTagList(tagSet)

@@ -72,7 +72,7 @@ public class EditCommand extends Command {
         assert taskToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
-        Phone updatedPhone = editTaskDescriptor.getPhone().orElseGet(taskToEdit::getPhone);
+        Priority updatedPhone = editTaskDescriptor.getPhone().orElseGet(taskToEdit::getPhone);
         Email updatedEmail = editTaskDescriptor.getEmail().orElseGet(taskToEdit::getEmail);
         StartDate updatedStartDate = editTaskDescriptor.getStartDate().orElseGet(taskToEdit::getStartDate);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
@@ -86,7 +86,7 @@ public class EditCommand extends Command {
      */
     public static class EditTaskDescriptor {
         private Optional<Name> name = Optional.empty();
-        private Optional<Phone> phone = Optional.empty();
+        private Optional<Priority> phone = Optional.empty();
         private Optional<Email> email = Optional.empty();
         private Optional<StartDate> startDate = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
@@ -117,12 +117,12 @@ public class EditCommand extends Command {
             return name;
         }
 
-        public void setPhone(Optional<Phone> phone) {
+        public void setPhone(Optional<Priority> phone) {
             assert phone != null;
             this.phone = phone;
         }
 
-        public Optional<Phone> getPhone() {
+        public Optional<Priority> getPhone() {
             return phone;
         }
 

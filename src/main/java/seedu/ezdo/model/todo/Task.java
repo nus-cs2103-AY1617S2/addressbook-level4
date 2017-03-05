@@ -12,7 +12,7 @@ import seedu.ezdo.model.tag.UniqueTagList;
 public class Task implements ReadOnlyTask {
 
     private Name name;
-    private Phone phone;
+    private Priority phone;
     private Email email;
     private StartDate startDate;
 
@@ -21,7 +21,7 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Phone phone, Email email, StartDate startDate, UniqueTagList tags) {
+    public Task(Name name, Priority phone, Email email, StartDate startDate, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, phone, email, startDate, tags);
         this.name = name;
         this.phone = phone;
@@ -47,13 +47,13 @@ public class Task implements ReadOnlyTask {
         return name;
     }
 
-    public void setPhone(Phone phone) {
+    public void setPhone(Priority phone) {
         assert phone != null;
         this.phone = phone;
     }
 
     @Override
-    public Phone getPhone() {
+    public Priority getPhone() {
         return phone;
     }
 
