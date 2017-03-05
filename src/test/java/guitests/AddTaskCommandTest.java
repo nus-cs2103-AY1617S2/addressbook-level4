@@ -1,6 +1,7 @@
 package guitests;
 
 import org.junit.Test;
+
 import seedu.toluist.model.Task;
 
 /**
@@ -11,8 +12,7 @@ public class AddTaskCommandTest extends GuiTest {
     public void addFloatingTask() {
         String taskDescription = "do homework for Melvin";
         String command = "add " + taskDescription;
-        Task task = new Task();
-        task.description = taskDescription;
+        Task task = new Task(taskDescription);
         commandBox.runCommand(command);
         assertTaskIsShown(task);
     }

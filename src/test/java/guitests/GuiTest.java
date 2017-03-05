@@ -3,19 +3,19 @@ package guitests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.Optional;
 import java.util.concurrent.TimeoutException;
 
-import guitests.guihandles.CommandBoxHandle;
-import guitests.guihandles.MainGuiHandle;
-import guitests.guihandles.ResultDisplayHandle;
-import guitests.guihandles.TaskListHandle;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.rules.TestName;
 import org.testfx.api.FxToolkit;
+
+import guitests.guihandles.CommandBoxHandle;
+import guitests.guihandles.MainGuiHandle;
+import guitests.guihandles.ResultDisplayHandle;
+import guitests.guihandles.TaskListHandle;
 
 import javafx.application.Platform;
 import javafx.stage.Stage;

@@ -1,10 +1,10 @@
 package seedu.toluist;
 
+import java.util.function.Supplier;
+
 import seedu.toluist.model.TodoList;
 import seedu.toluist.storage.JsonStorage;
 import seedu.toluist.testutil.TestUtil;
-
-import java.util.function.Supplier;
 
 /**
  * This class is meant to override some properties of MainApp so that it will be suited for
@@ -16,7 +16,7 @@ public class TestApp extends MainApp {
     protected Supplier<TodoList> initialDataSupplier = () -> null;
     protected String saveFileLocation = SAVE_LOCATION_FOR_TESTING;
 
-    public TestApp(Supplier<TodoList> todoListSupplier, String saveFileLocation) {
+    public TestApp(Supplier<TodoList> initialDataSupplier, String saveFileLocation) {
         super();
         this.initialDataSupplier = initialDataSupplier;
         this.saveFileLocation = saveFileLocation;
