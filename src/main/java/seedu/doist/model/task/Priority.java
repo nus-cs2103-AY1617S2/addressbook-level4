@@ -32,11 +32,11 @@ public class Priority {
      * @throws IllegalValueException if given priority string is invalid.
      */
     public Priority(String priority) throws IllegalValueException {
-        priority = priority.toUpperCase();
-        if (!isValidPriority(priority)) {
+        String upperCasePriority = priority.toUpperCase();
+        if (!isValidPriority(upperCasePriority)) {
             throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
         }
-        this.priority = PriorityLevel.valueOf(priority);
+        this.priority = PriorityLevel.valueOf(upperCasePriority);
     }
 
     public PriorityLevel getPriorityLevel() {
