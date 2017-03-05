@@ -59,12 +59,18 @@ The status of a task can be classified as one of the following:
 
 ### Viewing help
 
-## Viewing all commands
-Shows a list of all commands in iManager.<br>
+#### Viewing all commands
+Shows a list of commands available in iManager.<br>
 
 Format: `help`
+> A list of commands available is also shown if you enter the wrong command
 
-## Viewing a specific commands
+Examples: 
+
+* `help`
+  Shows all available commands and examples 
+
+#### Viewing a specific commands
 Show details of a specific command using `[KEYWORD]` flag.
 
 List of available [KEY_WORD] for help: <br>
@@ -81,12 +87,12 @@ List of available [KEY_WORD] for help: <br>
 - saveto <br>
 - exit <br>
 
-Format: `help`
+Format: `help [KEY_WORD]`
 
 Examples:
 
-* `help`  
-  Shows all available commands and examples 
+* `help add`
+  Shows all add command and example
   
 ### Adding a task
 
