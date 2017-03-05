@@ -59,15 +59,15 @@ The status of a task can be classified as one of the following:
 
 ### Viewing help
 
-Shows a list of commands available in iManager.<br>
+Shows a list of commands available in iManager. <br>
 
 Format: `help`
-> A list of commands available is also shown if you enter the wrong command
+> A list of commands available is also shown if you enter the wrong command.
 
 Examples: 
 
 * `help` <br>
-  Shows all available commands with examples
+  Shows all available commands with examples.
 
 #### Viewing a specific commands
 Show details of a specific command using `[KEYWORD]` flag.
@@ -91,11 +91,12 @@ Format: `help [KEY_WORD]`
 Examples:
 
 * `help add` <br>
-  Shows add command with examples
+  Shows add command with examples.
   
 ### Adding a task
 
-Adds a task to the task list<br>
+#### Adding a floating task
+Adds a floating task to the task list. <br>
 
 Format: `add NAME [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` <br>
 > * Tasks can have any number of tags.
@@ -105,10 +106,66 @@ Examples:
 * `add exam`
 * `add exam p/1`
 * `add exam p/1 d/SR1`
-* `add exam p/1 d/SR1 t/2010`<br>
-  Add a priority 1 task named "exam" with description "SR1" and TAG "2010" into task list.
+* `add exam p/1 d/SR1 t/CS2010`<br>
+  Add a priority 1 task named "exam" with description "SR1" and tag "CS2010" into task list.
 
+#### Adding a pending task with START DATE only
 
+Adds a pending task with only start date to the task list. <br>
+
+Format: `add NAME at START_DATE [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` <br>
+> * Tasks can have any number of tags.
+> * If no priority is specified, the task will be added to the bottom of the list.
+> * Date format is MM-DD-YYYY HHMM (24 hour Format) e.g. 10-22-2017 1500.
+> * If no time is specified, the time will be the CURRENT time.
+
+Examples:
+* `add exam on 10-22-2017`
+* `add exam on 10-22-2017 1500`
+* `add exam on 10-22-2017 1500 p/1`
+* `add exam on 10-22-2017 1500 p/1 d/SR1`
+* `add exam on 10-22-2017 1500 p/1 d/SR1 t/CS2010`<br>
+  Add a priority 1 task named "exam" on 22 October 2017 with description "SR1" and tag "CS2010" into task list.
+ 
+ 
+#### Adding a pending task with END DATE only
+
+Adds a pending task with only end date to the task list. <br>
+
+Format: `add NAME by END_DATE [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` <br>
+> * Tasks can have any number of tags.
+> * If no priority is specified, the task will be added to the bottom of the list.
+> * Date format is MM-DD-YYYY HHMM (24 hour Format) e.g. 10-22-2017 1500.
+> * The Start Date is the CURRENT date and time.
+
+Examples: 
+* `add exam by 10-22-2017`
+* `add exam by 10-22-2017 1500`
+* `add exam by-22-2017 1500 p/1`
+* `add exam by 10-22-2017 1500 p/1 d/SR1`
+* `add exam by 10-22-2017 1500 p/1 d/SR1 t/CS2010`<br>
+  Add a priority 1 task named "exam" that starts now and end by 22 October 2017 1500  with description "SR1" and tag "CS2010" into task   list.
+  
+  
+#### Adding a pending task with both START DATE & END DATE 
+
+Adds a pending task with both start date and end date to the task list. <br>
+
+Format: `add NAME by END_DATE [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` <br>
+> * Tasks can have any number of tags.
+> * If no priority is specified, the task will be added to the bottom of the list.
+> * Date format is MM-DD-YYYY HHMM (24 hour Format) e.g. 10-22-2017 1500.
+> * If no time is specified, the time will be the CURRENT time.
+
+Examples:
+* `add exam on 10-22-2017 by 10-22-2016`
+* `add exam on 10-22-2017 1300 by 10-22-2016 1500`
+* `add exam on 10-22-2017 by-22-2016 1500 p/1`
+* `add exam on 10-22-2017 by 10-22-2016 1500 p/1 d/SR1`
+* `add exam on 10-22-2017 by 10-22-2016 1500 p/1 d/SR1 t/CS2010`<br>
+  Add a priority 1 task named "exam" that starts on 22 October 2017 1300 and end by 22 October 2017 1500 with description "SR1" and tag   "CS2010" into task list.
+  
+  
 ### Editing a task
 
 Edit a task in iManager<br>
