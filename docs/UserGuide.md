@@ -58,13 +58,12 @@ The statuses of a task is shown as below:
 
 #### Viewing help : `help`
 
-Shows a list of all commands in iManager.
+Shows a list of all commands in iManager.<br>
 
-List of available [KEY_WORD] for help: 
-- 
-- 
-- 
-- 
+List of available [KEY_WORD] for help: <br>
+- <br>
+- <br>
+- <br>
 
 Format: `help`
 
