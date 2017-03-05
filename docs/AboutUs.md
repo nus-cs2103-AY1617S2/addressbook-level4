@@ -24,8 +24,8 @@ Responsibilities: Logic and Storage
 
 -----
 
-#### [Martin Choo](http://github.com/m133225)
-<img src="images/MartinChoo.jpg" width="150"><br>
+#### [Mou Ziyang](http://github.com/mouziyanglovestudy)
+<img src="images/MouZiyang.jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: Dev Ops
 
