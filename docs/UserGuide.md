@@ -10,16 +10,16 @@ By : `Miao Ling` , `Ian` , `Qi Xiang` and `Dylan` - `[W09-B4]` Since : `Feb 2017
 
 ## 1. Quick Start
 
-0. Ensure you have Java version 1.8.0_60 or later installed in your Computer.
+0. Ensure you have Java version `1.8.0_60` or later installed in your Computer.
 
 1. Download the latest version of `doTASK.jar` from [releases] tab.
 
-2. Copy the file to the folder you want to use as the home folder for your task manager.
+2. Copy the file to the folder you want to use as the home folder for your doTASK.
 
 3. Double-click on the file to start the application. The GUI should appear in a few seconds.<br>
 > <img src="images/startup_screen.jpg" width="600">
 
-4. Get started by adding the first task that you have in mind! Refer to "2. Features" for instructions. <br>
+4. Get started by adding your first task that you have in mind! Refer to the "2. Features" for further instructions. <br>
 > <img src="images/add_screen.jpg" width="600">
 
 
@@ -27,7 +27,7 @@ By : `Miao Ling` , `Ian` , `Qi Xiang` and `Dylan` - `[W09-B4]` Since : `Feb 2017
 
    > **Today/Date**
    >
-   > * Shows you the list of tasks you have for the specified date. Click left/right arrow to navigate between the dates.
+   > * Shows you the list of tasks you have for the specified date. By default, it will show the tasks for today. Click left/right arrow to navigate between the dates.
    > <img src="images/today_screen.jpg" width="600">
    >
    > **Overview**
@@ -37,7 +37,7 @@ By : `Miao Ling` , `Ian` , `Qi Xiang` and `Dylan` - `[W09-B4]` Since : `Feb 2017
    >
    > **Priority**
    >
-   > * Shows you 4 options of priority tabs, from highest to lowest. Selecting the tab allows you to view the list of tasks that is under that priority. Eg. By clicking on â€œHighest Priorityâ€� tab, it will bring you to the list of tasks that you have in it.<br>
+   > * Shows you 4 options of priority tabs, from highest to lowest, which are indicated by different colours. Selecting the tab allows you to view the list of tasks that is under that priority. Eg. By clicking on â€œHighest Priorityâ€� tab, it will bring you to the list of tasks that you have in it.<br>
    > <img src="images/priority_screen.jpg" width="600">
 
 ## 2. Features
@@ -58,13 +58,14 @@ Format: `help`<br>
 ### 2.2. Adding a Task : `add`
 Adds a task to the task manager. <br>
 Format: `add TASK_NAME d/DEADLINE p/PRIORITY_LEVEL [i/ANY_INFO] [t/TAGS]...`
+   > `DEADLINE` will be in the format of "date month (indicated by first three letters) year"
    > `PRIORITY_LEVEL` should be defined by integers 1 (high) to 4(low).<br>
    > `ANY_INFO` allows you to key in details with regards to the task, optional.<br>
-	> `TAGS` allows you to assign tags to the tasks, optional.
+   > `TAGS` allows you to assign tags to the tasks, optional.
 
 Examples:
 * add CS3230 Assignment 1 d/8 Jan 2018 p/1 i/How to do? t/School t/CS3230
-* add Buy Milk d/23 Fev 2017 p/4 t/Chores
+* add Buy Milk d/23 Feb 2017 p/4 t/Chores
 
 ### 2.3. Listing the tasks: `list`
 
@@ -99,6 +100,7 @@ Format: `edit i/INDEX [n/TASK_NAME] [d/DEADLINE] [p/PRIORITY_LEVEL] [i/ANY_INFO]
 
 Examples:
 * `edit i/1 n/Assignment 2 d/25 Feb 2018 p/2`
+* `edit i/4 n/Exercise`
 
 ### 2.5. Shifting tabs: `switch`
 Switch the current tab to the next tab.
@@ -154,13 +156,25 @@ Examples:
 
 [Work in progress]
 ### 2.10. Overdue tasks
-	Under the `Overdue` tab, you can see the list of overdue tasks that you have yet to clear.
-   > Editing the deadline will result in the relocation of the task out of the `Overdue` tab, until it has reached its due date.
+Under the `Overdue` tab, you can see the list of overdue tasks that you have yet to clear.
+> Editing the deadline will result in the relocation of the task out of the `Overdue` tab, until it has reached its due date.
+> In addition, there will be an exclamation mark on the overdue tab to remind the user of any overdue tasks.
 
 [Work in progress]
 ### 2.11. Saving the tasks
-	Upon creation of tasks, the tasks will be automatically saved in the folder where the program is held in.
-   > Do not erase the saved data as it will result in a complete loss of data that cannot be recovered by the application itself.
+Upon creation of tasks, the tasks will be automatically saved in the folder where the program is held in.
+> Do not erase the saved data as it will result in a complete loss of data that cannot be recovered by the application itself.
+   
+### 2.11. Track overall progress
+You are able to see how many task you completed over time, and how many tasks that fails to complete (overdue).
+It gives an general overview on how well you performed in using the task manager in becoming more effecient.
+Format: `progress NUMBER_OF_DAYS`
+
+> NUMBER_OF_DAYS is a interger which indicates the your progress for these past days (excluding today).
+> It will provide an analysis on the number of task that you have completed/overdue.
+
+Examples:
+* `progress 7`
 
 ## 3. FAQ
 
@@ -175,6 +189,9 @@ Examples:
 
 **Q**: How do I clear all the tasks under a certain tag?<br>
 **A**: Navigate to `Priority` tab, click the `Clear All` button. There will be a confirmation prompt upon doing so, click confirm to clear the tasks of the tags.
+
+**Q**: Will I get reminded if the deadline of certain high priority tasks are near?
+**A**: For the tasks that is due in the next 24 hours, it will be distinguished by the colours on its name.
 
 ## 4. Command Summary
 
