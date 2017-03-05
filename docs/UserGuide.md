@@ -40,8 +40,12 @@ Without further ado, let’s get started.
 #### Task Status     
 The statuses of a task is shown as below: 
 
-Command | Format  | Description
--------- | -------- | -------- 
+Avatar  | Status  
+-------- | -------- 
+| <img src="images/Floating.png" width="150"> | Floating 
+| <img src="images/Completed.png" width="150"> | Complete 
+| <img src="images/Pending.png" width="150"> | Pending 
+| <img src="images/Overdue.png" width="150"> | Overdue 
 
 
 ## Features
