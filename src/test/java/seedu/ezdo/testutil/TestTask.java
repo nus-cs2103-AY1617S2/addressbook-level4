@@ -1,19 +1,19 @@
 package seedu.ezdo.testutil;
 
 import seedu.ezdo.model.tag.UniqueTagList;
-import seedu.ezdo.model.todo.Address;
-import seedu.ezdo.model.todo.Email;
-import seedu.ezdo.model.todo.Name;
-import seedu.ezdo.model.todo.Phone;
-import seedu.ezdo.model.todo.ReadOnlyTask;
+import seedu.ezdo.model.todo.*;
 
 /**
  * A mutable task object. For testing only.
  */
 public class TestTask implements ReadOnlyTask {
 
+    private static final String PREFIX_EMAIL = "e/";
+    private static final String PREFIX_PHONE = "p/";
+    private static final String PREFIX_STARTDATE = "s/";
+
     private Name name;
-    private Address address;
+    private StartDate startDate;
     private Email email;
     private Phone phone;
     private UniqueTagList tags;
@@ -29,7 +29,7 @@ public class TestTask implements ReadOnlyTask {
         this.name = taskToCopy.getName();
         this.phone = taskToCopy.getPhone();
         this.email = taskToCopy.getEmail();
-        this.address = taskToCopy.getAddress();
+        this.startDate = taskToCopy.getStartDate();
         this.tags = taskToCopy.getTags();
     }
 
@@ -37,8 +37,8 @@ public class TestTask implements ReadOnlyTask {
         this.name = name;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setStartDate(StartDate startDate) {
+        this.startDate = startDate;
     }
 
     public void setEmail(Email email) {
@@ -69,8 +69,8 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Address getAddress() {
-        return address;
+    public StartDate getStartDate() {
+        return startDate;
     }
 
     @Override
@@ -86,9 +86,9 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
-        sb.append("a/" + this.getAddress().value + " ");
-        sb.append("p/" + this.getPhone().value + " ");
-        sb.append("e/" + this.getEmail().value + " ");
+        sb.append(PREFIX_STARTDATE + this.getStartDate().value + " ");
+        sb.append(PREFIX_PHONE + this.getPhone().value + " ");
+        sb.append(PREFIX_EMAIL + this.getEmail().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }

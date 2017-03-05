@@ -17,7 +17,7 @@ public class StartDate {
      * otherwise " " (a blank string) becomes a valid input.
      */
 //    public static final String STARTDATE_VALIDATION_REGEX = "^\\d\\d\\/\\d\\d\\/\\d\\d\\d\\d$";
-    public static final String STARTDATE_VALIDATION_REGEX = ".*";
+    public static final String STARTDATE_VALIDATION_REGEX = ".+";
 
     public final String value;
 

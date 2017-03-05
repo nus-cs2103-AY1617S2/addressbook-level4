@@ -16,8 +16,8 @@ import seedu.ezdo.model.todo.ReadOnlyTask;
  */
 public class TaskCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
-    private static final String ADDRESS_FIELD_ID = "#address";
     private static final String PRIORITY_FIELD_ID = "#priority";
+    private static final String STARTDATE_FIELD_ID = "#startDate";
     private static final String EMAIL_FIELD_ID = "#email";
     private static final String TAGS_FIELD_ID = "#tags";
 
@@ -36,8 +36,8 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(NAME_FIELD_ID);
     }
 
-    public String getAddress() {
-        return getTextFromLabel(ADDRESS_FIELD_ID);
+    public String getStartDate() {
+        return getTextFromLabel(STARTDATE_FIELD_ID);
     }
 
     public String getPriority() {
@@ -72,21 +72,16 @@ public class TaskCardHandle extends GuiHandle {
         return guiRobot.from(node).lookup(TAGS_FIELD_ID).query();
     }
 
-<<<<<<< HEAD:src/test/java/guitests/guihandles/PersonCardHandle.java
-    public boolean isSamePerson(ReadOnlyPerson person) {
-        return getFullName().equals(person.getName().fullName)
-                && getPriority().equals(person.getPriority().value)
-                && getEmail().equals(person.getEmail().value)
-                && getAddress().equals(person.getAddress().value)
-                && getTags().equals(getTags(person.getTags()));
-=======
     public boolean isSameTask(ReadOnlyTask task) {
+        List<String> taskTags = getTags(task.getTags());
+        List<String> cardTags = getTags();
+        boolean equalTags = taskTags.containsAll(cardTags) && cardTags.containsAll(taskTags);
+
         return getFullName().equals(task.getName().fullName)
-                && getPhone().equals(task.getPhone().value)
+                && getPriority().equals(task.getPriority().value)
                 && getEmail().equals(task.getEmail().value)
-                && getAddress().equals(task.getAddress().value)
-                && getTags().equals(getTags(task.getTags()));
->>>>>>> 6228ae6b03115b0e64fed2b189d86d8b94d2fa7e:src/test/java/guitests/guihandles/TaskCardHandle.java
+                && getStartDate().equals(task.getStartDate().value)
+                && equalTags;
     }
 
     @Override
@@ -96,7 +91,7 @@ public class TaskCardHandle extends GuiHandle {
             return getFullName().equals(handle.getFullName())
                     && getPriority().equals(handle.getPriority())
                     && getEmail().equals(handle.getEmail())
-                    && getAddress().equals(handle.getAddress())
+                    && getStartDate().equals(handle.getStartDate())
                     && getTags().equals(handle.getTags());
         }
         return super.equals(obj);
@@ -104,6 +99,6 @@ public class TaskCardHandle extends GuiHandle {
 
     @Override
     public String toString() {
-        return getFullName() + " " + getAddress();
+        return getFullName() + " " + getStartDate();
     }
 }
