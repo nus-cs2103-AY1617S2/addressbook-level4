@@ -12,7 +12,7 @@ In the hectic world of today, people are constantly bombarded by innumerable tas
 
 Presenting to you, iManager.
 
-iManager is a task manager application that helps you manage all your tasks at one place. With its interactive UI, user can now experience managing their tasks like never before.  Our product incorporates niche features such as FlexiCommands and Google Integration that brings convenient to user in managing their schedules and tasks. iManager remove the need to rely on multiple applications as it manages it all! 
+iManager is a task manager application that helps you manage all your tasks at one place. With its interactive UI, user can now experience managing their tasks like never before.  Our product incorporates niche features such as FlexiCommands and Google Integration that brings convenient to user in managing their schedules. iManager remove the need to rely on multiple applications as it manages it all! 
 
 Without further ado, let’s get started. 
 
@@ -22,7 +22,7 @@ Without further ado, let’s get started.
    > Having any Java 8 version is not enough. <br>
    This app will not work with earlier versions of Java 8.
    
-1.  Download the latest `iManager.jar` from the [releases](../../../releases) tab.
+1. Download the latest `iManager.jar` from the [releases](../../../releases) tab.
 2. Copy the file to the folder you want to use as the home folder for your iManager application.
 3. Double-click the file to start the app. The GUI should appear in a few seconds. Refer to [UI Control](#ui-control) for a more detailed walkthrough of various UI components. 
    > <img src="images/UIOverview.png" width="800">
@@ -30,40 +30,56 @@ Without further ado, let’s get started.
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window. 
 5. Some example commands you can try:
-   * **`NIL`**:    
+   * **`add`**: `SunRise Marathon` adds a reminder to attend SunRise Marathon
+   * **`find`** `Today` searches the task list for all events happening today. 
+   * **`exit`**: exits the application
 6. Refer to the[Features](#features) section below for details of each command.
    
-
 
 ## UI Control
 
 ### Task Status     
-The statuses of a task is shown as below: 
+The status of a task can be classified as one of the following: 
 
 |  Avatar | Status  
 |  :---:  | :---:  
-| <img src="images/Floating.png" width="50"> |         Floating 
-| <img src="images/Completed.png" width="50"> |        Complete 
-| <img src="images/Pending.png" width="50"> |          Pending 
-| <img src="images/Overdue.png" width="50"> |          Overdue 
+| <img src="images/Floating.png" width="50"> | Floating 
+| <img src="images/Completed.png" width="50"> | Complete 
+| <img src="images/Pending.png" width="50"> | Pending 
+| <img src="images/Overdue.png" width="50"> | Overdue 
 
 
 ## Features
 
 > **Command Format**
 > * Words in `UPPER_CASE` are the parameters.
+> * Words in `lower_case` are commands and connectors.
 > * Items in `SQUARE_BRACKETS` are optional.
 > * Items with `...` after them can have multiple instances.
-> * The order of optional parameters are flexible.
 
 ### Viewing help
 
+## Viewing all commands
 Shows a list of all commands in iManager.<br>
 
+Format: `help`
+
+## Viewing a specific commands
+Show details of a specific command using `[KEYWORD]` flag.
+
 List of available [KEY_WORD] for help: <br>
-- <br>
-- <br>
-- <br>
+- add <br>
+- edit <br>
+- delete <br>
+- view <br>
+- done <br>
+- find <br>
+- clear <br>
+- undo <br>
+- redo <br>
+- reset <br>
+- saveto <br>
+- exit <br>
 
 Format: `help`
 
