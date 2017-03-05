@@ -225,7 +225,7 @@ There is no need to save manually.
 | |e.g. `undo` |
 | Clear | `clear` |
 | |e.g. `clear` |
-| Priority | `priority t/TASK p/INDEX` |
+| Priority | `priority t/TASK p/RANK` |
 | |e.g. ` priority t/Project Meeting p/1` |
 | Exit | `exit` |
 | |e.g. `exit` |
