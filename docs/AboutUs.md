@@ -1,11 +1,11 @@
-# About Us
+﻿# About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
 ## Project Team
 
 #### [Lee Yan Hwa](https://github.com/leeyh20)
-<img src="" width="150"><br>
+<img src="images/leeyh20.jpg" width="150"><br><br>
 **Role**: Team Lead <br>
 
 * Components in charge of: Model, Storage
