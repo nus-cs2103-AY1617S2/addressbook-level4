@@ -56,7 +56,7 @@ The statuses of a task is shown as below:
 > * Items with `...` after them can have multiple instances.
 > * The order of optional parameters are flexible.
 
-### Viewing help: `help` 
+### Viewing help
 
 Shows a list of all commands in iManager.<br>
 
@@ -72,7 +72,7 @@ Examples:
 * `help`  
   Shows all available commands and examples 
   
-### Adding a task: `add` 
+### Adding a task
 
 Adds a task to iManager<br>
 
@@ -82,7 +82,7 @@ Examples:
 * 
 * 
 
-### Editing a task: `edit` 
+### Editing a task
 
 Edit a task in iManager<br>
 
@@ -92,7 +92,7 @@ Examples:
 * 
 * 
 
-### Deleting a task: `delete` 
+### Deleting a task
 
 Delete a task from iManager<br>
 
@@ -102,7 +102,7 @@ Examples:
 * 
 * 
 
-### Viewing tasks: `view` 
+### Viewing tasks
 Shows a list of all tasks iManage. Able to filter based on status of task/event.
 
 Format: `view`<br>
@@ -111,7 +111,7 @@ Examples:
 * 
 * 
 
-### Marking a task as completed: `done` 
+### Marking a task as completed
 Mark an existing task as completed in iManager.
 
 Format: `done`
@@ -120,7 +120,7 @@ Examples:
 * 
 * 
  
-### Finding for tasks: `find` 
+### Finding for tasks
 With the find command, you can find for tasks or events which contain some keywords in their **name** as well as in their **descriptions**. 
 
 Format: `find `
@@ -129,7 +129,7 @@ Examples:
 * 
 *  
   
-### Clearing of tasks: `clear` 
+### Clearing of tasks
 Clears all completed tasks. <br>
 
 Format: `clear`
@@ -147,24 +147,24 @@ Examples:
 * 
 * 
 
-### Undo most recent command: `undo` 
+### Undo most recent command
 You can go back to historical versions of iManager with the use of undo commands. Only commands that modify iManager in the same session will be restored. Any versions of current session will not be accessible after restarting iManager.  
 
 Format: `undo`
 
-### Redo most recent command: `redo` 
+### Redo most recent command
 You can go advance to historical versions of Dowat with the use of redo commands. Only commands that modify Dowat in the same session will be restored. Any versions of current session will not be accessible after restarting Dowat.  
 
 Format: `redo`
 
-### reset data: `reset`
+### reset data
 iManager will save data in a file called iManager.txt in the project root folder by dafault or if the file path is not specified. 
 You can change the location by specifying the file path as a command argument.
 New file will be automatically created as long as given directory is valid.
 
 Format: `reset`
 
-### Changing the save location: `saveto`
+### Changing the save location
 iManager will save data in a file called iManager.txt in the project root folder by dafault or if the file path is not specified. 
 You can change the location by specifying the file path as a command argument.
 New file will be automatically created as long as given directory is valid.
@@ -192,28 +192,28 @@ Format : `exit`
  Command | Format  | Description
 -------- | -------- | -------- 
 [help](#viewing-help) | `help`| Opens a help page
-[add](#Adding-a-task:-`add`) | `add NAME [PRIORITY] [/t TAG1, TAG2…]`| Adds a floating task with priority and tags
+[add](#Adding-a-task) | `add NAME [PRIORITY] [/t TAG1, TAG2…]`| Adds a floating task with priority and tags
  | `add NAME at START_DATETIME [PRIORITY] [/t TAG1, TAG2…]`| Adds a pending task with only start time, priority and tags
  | `add NAME by END_DATETIME [PRIORITY] [/t TAG1, TAG2…]`| Adds a pending task with only deadline, priority and tags
  | `add NAME by END_DATETIME [PRIORITY] [/t TAG1, TAG2…]`| Adds a pending task with start time, end time, priority and tags
  | `add [INSTANCES] NAME [at|by|from START_DATETIME] [to END_DATETIME][PRIORITY] every [DAY|MONTH|YEAR] [/t TAG1, TAG2…]` | Adds a recurring number of task instances that spans over a period of time with priority and tags
-[edit](#Editing-a-task:-'edit') | `Edit INDEX|NAME [at|by|from START_DATETIME] [to END_DATETIME][PRIORITY] every [DAY|MONTH|YEAR] [/t TAG1, TAG2…]` | Edits a task with the new parameters
-[delete](#Deleting-a-task:-'delete') | `Delete INDEX|NAME` | Delete a task 
-[view](#Viewing-tasks:-'view') | `view` | Show all tasks
+[edit](#Editing-a-task) | `Edit INDEX|NAME [at|by|from START_DATETIME] [to END_DATETIME][PRIORITY] every [DAY|MONTH|YEAR] [/t TAG1, TAG2…]` | Edits a task with the new parameters
+[delete](#Deleting-a-task) | `Delete INDEX|NAME` | Delete a task 
+[view](#Viewing-tasks) | `view` | Show all tasks
  | `view t` | Show all today’s tasks
  | `view p` |Show all pending task
  | `view c` | Show all completed task
  | `view f` | Show all floating task
  | `view o` | Show all overdue task
  | `view INDEX|NAME|START_DATETIME|END_DATETIME|PRIORITY|DAY|MONTH|YEAR TAG` | Show a specified task based on its detail 
-[done](#Marking-a-task-as-completed:-'done') | `done INDEX|NAME`| Mark a task as done
-[find](#Finding-for-tasks:-`Find`) | `Find KEYWORDS [KEYWORD 1, KEYWORD2,..]`| Find the task associated to the keyword
-[clear](#Clearing-of-tasks:-`clear`) | `clear` | Clear all completed tasks
-[undo](Undo-most-recent-command:-'undo') | `undo` | Undo the most recent command
-[redo](#Redo-most-recent-command:-'redo') | `redo` | Redo the most recent undo
-[reset](#reset-data:-`reset`) | `reset` | Reset save data
-[saveto](#Changing-the-save-location:-`saveto`) | `saveto PATH` | Change the default save directory 
-[exit](#Exiting-the-program:-`exit`) | `exit` | Exit the application
+[done](#Marking-a-task-as-completed) | `done INDEX|NAME`| Mark a task as done
+[find](#Finding-for-tasks) | `Find KEYWORDS [KEYWORD 1, KEYWORD2,..]`| Find the task associated to the keyword
+[clear](#Clearing-of-tasks) | `clear` | Clear all completed tasks
+[undo](Undo-most-recent-command) | `undo` | Undo the most recent command
+[redo](#Redo-most-recent-command) | `redo` | Redo the most recent undo
+[reset](#reset-data) | `reset` | Reset save data
+[saveto](#Changing-the-save-location) | `saveto PATH` | Change the default save directory 
+[exit](#Exiting-the-program) | `exit` | Exit the application
 
 
 
