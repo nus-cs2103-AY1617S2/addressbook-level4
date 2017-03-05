@@ -116,7 +116,7 @@ Switch the current tab to the next tab.
 Format: `switch`
 > There will be 3 tabs, which can be toggled using this command.
 
-### 2.6. Deleting a task
+### 2.6. Deleting a task: `delete`
 Deletes the specified task.
 Format: `delete INDEX_NUMBER`
 
@@ -127,7 +127,7 @@ Examples:
 * `delete 2`
 * `delete 5`
 
-### 2.7. Completion of a task
+### 2.7. Completion of a task: `complete`
 
 Marks the specified task as complete.<br>
 Format: `complete INDEX_NUMBER`
@@ -138,23 +138,23 @@ Examples:
 * `complete 2`
 * `complete 5`
 
-### 2.8. Saving the tasks
-
-Upon creation of tasks, the tasks will be automatically saved in the folder where the program is held in.
-> Do not erase the saved data as it will result in a complete loss of data that cannot be recovered by the application itself.
-   
-### 2.9. Track overall progress
+### 2.8. Track overall progress: `progress`
 
 Shows all the tasks completed over time and also specifying the tasks overdued.<br>
 > A general overview of performance/efficiency based on the usage of the task manager will be shown<br>
 
-Format: `progress NUMBER_OF_DAYS`
+Format: `progress NUMBER_OF_DAYS`:
 > NUMBER_OF_DAYS is a interger which indicates the your progress for these past days (excluding today).
 > It will provide an analysis on the number of task that you have completed/overdue.
 
 Examples:
 * `progress 7`
 
+### 2.9. Saving the tasks
+
+Upon creation of tasks, the tasks will be automatically saved in the folder where the program is held in.
+> Do not erase the saved data as it will result in a complete loss of data that cannot be recovered by the application itself.
+   
 ## 3. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -202,5 +202,5 @@ Examples:
 * **Completion of task** : `complete`<br>
 	e.g. `complete 1`
 
-* **Checking progress/performance** : `progress NUMBER_OF_DAYS`
+* **Checking progress/performance** : `progress NUMBER_OF_DAYS`<br>
 	e.g. `progress 7`
