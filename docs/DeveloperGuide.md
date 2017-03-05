@@ -371,14 +371,33 @@ Priority | As a ... | I want to ... | So that I can...
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: Create task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User requests to create a new task
+2. TaskManager creates the task<br>
+Use case ends.
+
+**Extensions**
+
+2a. The task name is the same as previous task entry name
+
+> 2a1. TaskManager shows a confirmation message<br>
+> 2a2a. User accepts confirmation
+> 2a3a. TaskManager creates task
+> Use case ends
+> 2a2b. User rejects confirmation
+> Use case ends
+
+#### Use case: Read task
+
+**MSS**
+
+1. User requests to list tasks
+2. TaskManager shows a list of tasks
+3. User requests to read a specific task in the list
+4. TaskManager shows more information on the task<br>
 Use case ends.
 
 **Extensions**
@@ -389,8 +408,249 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+> 3a1. TaskManager shows an error message <br>
+> Use case resumes at step 2
+
+#### Use case: Update task
+
+**MSS**
+
+1. User requests to list tasks
+2. TaskManager shows a list of tasks
+3. User requests to update a specific task in the list
+4. TaskManager displays the old details of the task to the user and request for new details.
+5. User inputs new details
+6. TaskManager request for confirmation for new details to replace old details.
+7. User confirms the update of the task
+8. TaskManager updates the task<br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given index is invalid
+
+> 3a1. TaskManager shows an error message <br>
+> Use case resumes at step 2
+
+4a. User rejected the confirmation
+
+> 4a1. TaskManager request to continue updating
+> 4a2a. User confirms to continue updating
+> Use case resumes at step 4
+> 4a2b. User rejects to continue updating
+> Use case ends
+
+#### Use case: Delete task
+
+**MSS**
+
+1. User requests to list tasks
+2. TaskManager shows a list of tasks
+3. User requests to delete a specific task in the list
+4. TaskManager request for confirmation to delete task
+5. User confirms to delete
+6. TaskManager deletes the task<br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given index is invalid
+
+> 3a1. TaskManager shows an error message <br>
+ Use case resumes at step 2
+
+4a. User rejected confirmation
+
+> Use case ends
+
+#### Use case: Undo task
+
+**MSS**
+
+1. User carries out a specific successful command
+2. TaskManager carries out the command successfully
+3. User requests to undo the command
+4. TaskManager returns to the previous state before the command was called<br>
+Use case ends.
+
+**Extensions**
+
+2a. The user just started the programme and did not carry out any command before carrying out the undo function
+
+> Use case ends
+
+#### Use case: Redo task
+
+**MSS**
+
+1. User requests to undo his previous command command
+2. TaskManager undos his previous command
+3. User requests to redo the command
+4. TaskManager redoes the command<br>
+Use case ends.
+
+**Extensions**
+
+2a. The user did not carry out an undo function previously
+
+> Use case ends
+
+#### Use case: Comment on task
+
+**MSS**
+
+1. User requests to list tasks
+2. TaskManager shows a list of tasks
+3. User requests to add a comment on a specific task in the list
+4. TaskManager adds the comment to the specified task<br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given index is invalid
+
+> 3a1. TaskManager shows an error message <br>
+ Use case resumes at step 2
+
+#### Use case: Change save location
+
+**MSS**
+
+1. User requests change the save location
+2. TaskManager changes the save location<br>
+Use case ends.
+
+**Extensions**
+
+2a. The given index is file location is invalid
+
+> 2a1. TaskManager shows an error message <br>
+ Use case ends
+
+#### Use case: Search tasks
+
+**MSS**
+
+1. User requests to search tasks with search term provided
+2. TaskManager lists the tasks to the specified search terms<br>
+Use case ends.
+
+**Extensions**
+
+2a. There are no tasks to search
+
+> Use case ends
+
+2b. The given search terms are invalid
+
+> 2b1. TaskManager shows an error message <br>
+ Use case resumes at step 1
+
+#### Use case: Sort tasks
+
+**MSS**
+
+1. User requests to list tasks
+2. TaskManager shows a list of tasks
+3. User requests to sort tasks in the list
+4. TaskManager sorts the list of tasks<br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given sorting criteria is invalid
+
+> 3a1. TaskManager shows an error message <br>
+ Use case resumes at step 2
+ 
+4a. Tasks is already sorted to given critera
+> Use case ends
+
+#### Use case: Assigning tasks
+
+**MSS**
+
+1. User requests to list tasks
+2. TaskManager shows a list of tasks
+3. User requests to assign an assignee to a task in the list
+4. TaskManager assigns the assignee to the task<br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given assignee and/or task is invalid
+
+> 3a1. TaskManager shows an error message <br>
+ Use case resumes at step 2
+
+#### Use case: Categorise tasks
+
+**MSS**
+
+1. User requests to list tasks
+2. TaskManager shows a list of tasks
+3. User requests to assign a category to a task in the list
+4. TaskManager assigns the category to the task<br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given category and/or task is invalid
+
+> 3a1. TaskManager shows an error message <br>
+ Use case resumes at step 2
+
+#### Use case: View free/blocked time slots
+
+**MSS**
+
+1. User requests to view all free/blocked timeslots
+2. TaskManager lists all free/blocked timeslots<br>
+Use case ends.
+
+**Extensions**
+
+2a. There are no available or blocked timeslots in the user specified time period
+
+> Use case ends
+
+#### Use case: View history
+
+**MSS**
+
+1. User request to view history of completed task
+2. TaskManager lists the history of completed task
+
+**Extensions**
+
+2a. There is no completed task
+
+> 2a1. TaskManager shows error message
+> Use case ends
 
 {More to be added}
 
