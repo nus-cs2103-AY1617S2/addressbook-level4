@@ -18,7 +18,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label priority;
     @FXML
     private Label startDate;
     @FXML
@@ -30,7 +30,7 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
-        phone.setText(task.getPhone().value);
+        priority.setText(task.getPriority().value);
         startDate.setText(task.getStartDate().value);
         email.setText(task.getEmail().value);
         initTags(task);

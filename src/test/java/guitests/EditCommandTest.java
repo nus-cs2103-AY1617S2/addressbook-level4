@@ -25,7 +25,7 @@ public class EditCommandTest extends EzDoGuiTest {
         String detailsToEdit = "Bobby p/91234567 e/bobby@gmail.com s/Block 123, Bobby Street 3 t/husband";
         int ezDoIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withName("Bobby").withPhone("91234567")
+        TestTask editedTask = new TaskBuilder().withName("Bobby").withPriority("91234567")
                 .withEmail("bobby@gmail.com").withStartDate("Block 123, Bobby Street 3").withTags("husband").build();
 
         assertEditSuccess(ezDoIndex, ezDoIndex, detailsToEdit, editedTask);

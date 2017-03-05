@@ -186,7 +186,7 @@ public class LogicManagerTest {
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix s/valid,address", expectedMessage);
+        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPriorityPrefix s/valid,address", expectedMessage);
         assertCommandFailure("add Valid Name p/12345 valid@email.butNoPrefix s/valid, address", expectedMessage);
         assertCommandFailure("add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
     }
@@ -413,13 +413,13 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
-            Priority privatePhone = new Priority("111111");
+            Priority privatePriority = new Priority("111111");
             Email email = new Email("adam@gmail.com");
             StartDate privateStartDate = new StartDate("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, privatePhone, email, privateStartDate, tags);
+            return new Task(name, privatePriority, email, privateStartDate, tags);
         }
 
         /**
@@ -447,7 +447,7 @@ public class LogicManagerTest {
 
             cmd.append(p.getName().toString());
             cmd.append(" e/").append(p.getEmail());
-            cmd.append(" p/").append(p.getPhone());
+            cmd.append(" p/").append(p.getPriority());
             cmd.append(" s/").append(p.getStartDate());
 
             UniqueTagList tags = p.getTags();

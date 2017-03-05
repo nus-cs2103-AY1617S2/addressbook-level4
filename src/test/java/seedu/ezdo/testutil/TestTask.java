@@ -9,13 +9,13 @@ import seedu.ezdo.model.todo.*;
 public class TestTask implements ReadOnlyTask {
 
     private static final String PREFIX_EMAIL = "e/";
-    private static final String PREFIX_PHONE = "p/";
+    private static final String PREFIX_PRIORITY = "p/";
     private static final String PREFIX_STARTDATE = "s/";
 
     private Name name;
     private StartDate startDate;
     private Email email;
-    private Priority phone;
+    private Priority priority;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -27,7 +27,7 @@ public class TestTask implements ReadOnlyTask {
      */
     public TestTask(TestTask taskToCopy) {
         this.name = taskToCopy.getName();
-        this.phone = taskToCopy.getPhone();
+        this.priority = taskToCopy.getPriority();
         this.email = taskToCopy.getEmail();
         this.startDate = taskToCopy.getStartDate();
         this.tags = taskToCopy.getTags();
@@ -45,8 +45,8 @@ public class TestTask implements ReadOnlyTask {
         this.email = email;
     }
 
-    public void setPhone(Priority phone) {
-        this.phone = phone;
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 
     public void setTags(UniqueTagList tags) {
@@ -59,8 +59,8 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Priority getPhone() {
-        return phone;
+    public Priority getPriority() {
+        return priority;
     }
 
     @Override
@@ -87,7 +87,7 @@ public class TestTask implements ReadOnlyTask {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
         sb.append(PREFIX_STARTDATE + this.getStartDate().value + " ");
-        sb.append(PREFIX_PHONE + this.getPhone().value + " ");
+        sb.append(PREFIX_PRIORITY + this.getPriority().value + " ");
         sb.append(PREFIX_EMAIL + this.getEmail().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();

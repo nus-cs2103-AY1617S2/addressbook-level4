@@ -17,7 +17,7 @@ import seedu.ezdo.model.todo.ReadOnlyTask;
 public class TaskCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
     private static final String STARTDATE_FIELD_ID = "#startDate";
-    private static final String PHONE_FIELD_ID = "#phone";
+    private static final String PRIORITY_FIELD_ID = "#priority";
     private static final String EMAIL_FIELD_ID = "#email";
     private static final String TAGS_FIELD_ID = "#tags";
 
@@ -40,8 +40,8 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(STARTDATE_FIELD_ID);
     }
 
-    public String getPhone() {
-        return getTextFromLabel(PHONE_FIELD_ID);
+    public String getPriority() {
+        return getTextFromLabel(PRIORITY_FIELD_ID);
     }
 
     public String getEmail() {
@@ -79,7 +79,7 @@ public class TaskCardHandle extends GuiHandle {
         boolean equalTags = taskTags.containsAll(cardTags) && cardTags.containsAll(taskTags);
 
         return getFullName().equals(task.getName().fullName)
-                && getPhone().equals(task.getPhone().value)
+                && getPriority().equals(task.getPriority().value)
                 && getEmail().equals(task.getEmail().value)
                 && getStartDate().equals(task.getStartDate().value)
                 && equalTags;
@@ -90,7 +90,7 @@ public class TaskCardHandle extends GuiHandle {
         if (obj instanceof TaskCardHandle) {
             TaskCardHandle handle = (TaskCardHandle) obj;
             return getFullName().equals(handle.getFullName())
-                    && getPhone().equals(handle.getPhone())
+                    && getPriority().equals(handle.getPriority())
                     && getEmail().equals(handle.getEmail())
                     && getStartDate().equals(handle.getStartDate())
                     && getTags().equals(handle.getTags());

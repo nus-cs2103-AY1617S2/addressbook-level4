@@ -19,7 +19,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS ] [t/TAG]...\n"
+            + "Parameters: INDEX (must be a positive integer) [NAME] [p/PRIORITY] [e/EMAIL] [a/ADDRESS ] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 p/91234567 e/johndoe@yahoo.com";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
@@ -72,12 +72,12 @@ public class EditCommand extends Command {
         assert taskToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
-        Priority updatedPhone = editTaskDescriptor.getPhone().orElseGet(taskToEdit::getPhone);
+        Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
         Email updatedEmail = editTaskDescriptor.getEmail().orElseGet(taskToEdit::getEmail);
         StartDate updatedStartDate = editTaskDescriptor.getStartDate().orElseGet(taskToEdit::getStartDate);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedName, updatedPhone, updatedEmail, updatedStartDate, updatedTags);
+        return new Task(updatedName, updatedPriority, updatedEmail, updatedStartDate, updatedTags);
     }
 
     /**
@@ -86,7 +86,7 @@ public class EditCommand extends Command {
      */
     public static class EditTaskDescriptor {
         private Optional<Name> name = Optional.empty();
-        private Optional<Priority> phone = Optional.empty();
+        private Optional<Priority> priority = Optional.empty();
         private Optional<Email> email = Optional.empty();
         private Optional<StartDate> startDate = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
@@ -95,7 +95,7 @@ public class EditCommand extends Command {
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.name = toCopy.getName();
-            this.phone = toCopy.getPhone();
+            this.priority = toCopy.getPriority();
             this.email = toCopy.getEmail();
             this.startDate = toCopy.getStartDate();
             this.tags = toCopy.getTags();
@@ -105,7 +105,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.phone, this.email, this.startDate, this.tags);
+            return CollectionUtil.isAnyPresent(this.name, this.priority, this.email, this.startDate, this.tags);
         }
 
         public void setName(Optional<Name> name) {
@@ -117,13 +117,13 @@ public class EditCommand extends Command {
             return name;
         }
 
-        public void setPhone(Optional<Priority> phone) {
-            assert phone != null;
-            this.phone = phone;
+        public void setPriority(Optional<Priority> priority) {
+            assert priority != null;
+            this.priority = priority;
         }
 
-        public Optional<Priority> getPhone() {
-            return phone;
+        public Optional<Priority> getPriority() {
+            return priority;
         }
 
         public void setEmail(Optional<Email> email) {

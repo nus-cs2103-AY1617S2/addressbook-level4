@@ -9,7 +9,7 @@ import seedu.ezdo.model.tag.UniqueTagList;
 public interface ReadOnlyTask {
 
     Name getName();
-    Priority getPhone();
+    Priority getPriority();
     Email getEmail();
     StartDate getStartDate();
 
@@ -26,7 +26,7 @@ public interface ReadOnlyTask {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                 && other.getName().equals(this.getName()) // state checks here onwards
-                && other.getPhone().equals(this.getPhone())
+                && other.getPriority().equals(this.getPriority())
                 && other.getEmail().equals(this.getEmail())
                 && other.getStartDate().equals(this.getStartDate()));
     }
@@ -37,8 +37,8 @@ public interface ReadOnlyTask {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append(" Phone: ")
-                .append(getPhone())
+                .append(" Priority: ")
+                .append(getPriority())
                 .append(" Email: ")
                 .append(getEmail())
                 .append(" StartDate: ")
