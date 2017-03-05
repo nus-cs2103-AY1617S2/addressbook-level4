@@ -31,7 +31,7 @@ Before you setup *Typed*, you should have Java version `1.8.0_60` or later insta
     <img src="images/DefaultHome.png" width="600"> <br>
 
 
-## 2. Features #TODO: fix
+## 2. Features 
 
 > **Command Format**
 >
@@ -45,15 +45,17 @@ Before you setup *Typed*, you should have Java version `1.8.0_60` or later insta
 
 Format: `help [COMMAND]`
 
-> `help [COMMAND]` shows a more detailed explanation of the command e.g. `help add` <br>
-> Help is also shown if you enter an incorrect command e.g. `abcd`
+> `help COMMAND` shows a more detailed explanation of the command e.g. `help add` <br>
+> Help is also shown if you enter an incorrect command e.g. `abcd` 
 
 ### 2.2. Adding a task or event: `add`
 
-Adds a task or event to *Typed*<br>
-Format: `add TASK [by|every|from|now] [DATE] [to] [DATE] [#/TAGS]...`
+Adds a task or event to *Typed*. This action can be undone. <br>
+Format: `add TASK [ on DATE | by DATE | every RECURRENT | from DATE to DATE] [#TAG]...`
 
-> Tasks and events can have any number of tags (including 0)
+> * Adds the task with specified deadline. 
+> * `RECURRENT` accepts 'daily', 'weekly', 'monthly', and 'yearly'. 
+    The day of entry will be taken as the recurring day. 
 
 Examples:
 
@@ -64,6 +66,8 @@ Examples:
 
 Shows a list of the tasks and events in *Typed*.<br>
 Format: `list [TYPE]`
+
+> * Valid formats for `TYPE` include events, done, undone and all.
 
 Examples:
 
@@ -76,27 +80,27 @@ Examples:
 ### 2.4. Editing a task or event : `edit`
 
 Edits an task or event in *Typed*.<br>
-Format: `edit INDEX [DESCRIPTION] [by] DATE | DAY | TIME] [+TAGS | -TAGS]`
+Format: `edit INDEX [DESCRIPTION] [by DATE | TIME] [ #TAG | -#TAG ]`
 
 > * Edits the task or event at the specified `INDEX`.
     The index refers to the index number shown on the screen.<br>
     The index **must be a positive integer** 1, 2, 3, ...
 > * At least one of the optional fields must be provided.
-> * Existing values will be updated to the input values.
-> * When editing tags, the user can remove or add tags.
-> * You can remove all tags by typing `t/` without specifying any tags after it.
+> * Existing values will be updated to the input values except tags.
+> * When editing tags, the user can only remove or add tags.
+> * You can remove all tags by typing `#` without specifying any tags after it.
 
 Examples:
 
 * `edit 1 by following Sunday`<br>
   Edits the deadline of the task to the following Sunday.<br>
-* `edit 5 +#work`<br>
+* `edit 5 #work`<br>
   Adds a tag #work to index 5 of the shown list on the screen.<br>
 
 ### 2.5. Finding all tasks and events containing any keyword in their name : `find`
 
 Finds tasks and events whose names contain any or close to the given keywords.<br>
-Format: `find KEYWORD|TAGS [MORE_KEYWORDS | MORE_TAGS]`
+Format: `find KEYWORD|#TAGS [MORE_KEYWORDS | #MORE_TAGS]`
 
 > * The search is not case sensitive. e.g `boss` will match `Boss`
 > * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -114,8 +118,8 @@ Examples:
 
 ### 2.6. Deleting a task or event : `delete`
 
-Deletes the specified task or event from *Typed*. Undo-able<br>
-Format: `delete INDEX [all | to | ...] [INDEX]`
+Deletes the specified task or event from *Typed*. This action can be undone. <br>
+Format: `delete [all]|INDEX [ to | ,] [INDEX] ...`
 
 > Deletes the task at the specified `INDEX` or range of `INDEX`. <br>
 > The index refers to the index number shown in the most recent listing.<br>
@@ -195,22 +199,21 @@ Examples:
 * `save newTyped.txt`<br>
   Saves data to the new file with file name newTyped.txt.
 
-### 2.11. Quiting the program : `exit`
+### 2.11. Quiting the program : `quit`
 
-Exits *Typed*<br>
+Exits *Typed* <br>
 
-Format: `exit | quit`
+Format: `quit`
 
 Examples:
 
-* `exit`<br>
 * `quit`<br>
 
 ### 2.12. Completing the task : `complete`
 
 Marks the task(s) as completed in *Typed*<br>
 
-Format: `complete INDEX [all | to | ,] [INDEX] ...`
+Format: `complete [all]|INDEX [ to | ,] [INDEX] ...`
 
 > Marks the task at the specified `INDEX` or range of `INDEX` as completed. <br>
 > The index refers to the index number shown in the most recent listing.<br>
@@ -225,7 +228,7 @@ Examples:
 
 ## 3. Command Summary
  
-* **Add**  `add TASK [by|every|from|on] [date] [to] [date] [#/tags]...` #TODO: fix <br> 
+* **Add**  `add TASK [ on DATE | by DATE | every RECURRENT | from DATE to DATE] [#TAG] [#MORE_TAGS]....` <br> 
   e.g. `add read the little prince` <br>
   e.g. `add push git commit by next wednesday` <br>
   e.g. `add write blog post every day #/hobby` <br>
@@ -236,21 +239,21 @@ Examples:
   e.g. `add drinks with client tomorrow from 1PM to 2PM` <br>
   e.g. `add clean room on Sunday` <br>
 
-* **Complete**  `complete INDEX [all|to|,] [INDEX] ...` #TODO: fix <br>
+* **Complete**  `complete [all]|INDEX [ to | ,] [INDEX] ...` <br>
   e.g. `complete 2` <br>
   e.g. `complete 2 to 10` <br>
   e.g. `complete 1,3,5` <br>
   e.g. `complete 1, 3, 5 to 10` <br>
   e.g. `complete all` <br>
 
-* **Delete** : `delete INDEX [all|to|,] [INDEX] ...` #TODO: fix <br>
+* **Delete** : `delete [all]|INDEX [ to | ,] [INDEX] ...` <br>
   e.g. `delete 2` <br>
   e.g. `delete 2 to 10` <br>
   e.g. `delete 1,3,5` <br>
   e.g. `delete 1, 3, 5 to 10` <br>
   e.g. `delete all` <br>
 
-* **Edit** : `edit INDEX ...` #TODO: fix <br>
+* **Edit** : `edit INDEX [DESCRIPTION] [by DATE | TIME] [ #TAG | -#TAG ]` <br>
   e.g. `edit 1 by following Saturday` <br>
   e.g. `edit 2 on 2 May` <br>
   e.g. `edit 4 from 13:00 to 5pm` <br>
@@ -259,7 +262,7 @@ Examples:
   e.g. `edit 5 +#work` <br>
   e.g. `edit 6 -#supplier` <br>
 
-* **Find** : `find KEYWORD|TAG [MORE_KEYWORDS|MORE_TAGS] ...` <br> 
+* **Find** : `find KEYWORD|#TAGS [MORE_KEYWORDS | #MORE_TAGS]...` <br> 
   e.g. `find johnny depp` <br>
   e.g. `find boss #work` <br>
   e.g. `find #forever #alone` <br>
@@ -277,7 +280,7 @@ Examples:
   e.g. `list done` <br>
   e.g. `list events` <br>
 
-* **Redo** : `redo [INDEX|all]` #TODO: fix <br>
+* **Redo** : `redo [INDEX|all]` <br>
   e.g.`redo` <br>
   e.g.`redo 5` <br>
   e.g.`redo all` <br>
@@ -288,7 +291,7 @@ Examples:
 * **Quit** : `quit` <br>
   e.g.`quit` <br>
   
-* **Undo** : `undo [INDEX|all]` #TODO: fix <br>
+* **Undo** : `undo [INDEX|all]` <br>
   e.g.`undo` <br>
   e.g.`undo 5` <br>
   e.g.`undo all` <br>
