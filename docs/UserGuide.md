@@ -40,7 +40,7 @@ and will aid you in organizing all your corresponding tasks and events.
    >d. typing **`help`** and pressing <kbd>Enter</kbd> in the command box and it will
    open the help window.
    > <img src="images/Ui_help.png" width="300">
-   
+
 5. Refer to the [Features](#features) section below for more details on the various
 commands you can use.<br>
 
@@ -235,4 +235,4 @@ There is no need to save manually.
 
 * **Select** : `select INDEX` <br>
   e.g.`select 2`
-  
+
