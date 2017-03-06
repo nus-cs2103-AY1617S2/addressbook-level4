@@ -313,7 +313,7 @@ Examples:
 * `view 1` <br>
   Show the first task in the task list. 
 
-#### Viewing Today's tasks
+#### Viewing all Today's tasks
 Shows a list of all today's task in iManager. Does not show floating and completed tasks. 
 
 Format: `view t`<br>
@@ -328,12 +328,12 @@ Shows a list of all completed task in iManager. Does not show pending, floating 
 
 Format: `view c`<br>
 
-#### Viewing Floating tasks
+#### Viewing all Floating tasks
 Shows a list of all floating tasks in iManage. Does not show pending, completed and Today's tasks. 
 
 Format: `view f`<br>
 
-#### Viewing Overdue tasks
+#### Viewing all Overdue tasks
 Shows a list of all tasks iManage. Able to filter based on status of task/event.
 
 Format: `view`<br>
@@ -459,14 +459,14 @@ Format : `exit`
  | `add NAME from END_DATETIME to START_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]`| Adds a pending task with start date&time, end date&time, priority and tags.
  | `add NAME [at|on|by|from START_DATETIME to END_DATETIME] every [DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Adds a recurring task that spans over a period of time with priority and tags.
 [edit](#editing-a-task) | `Edit INDEX|NAME [at|on|by|from START_DATETIME to END_DATETIME] [every DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Edits a task with the new parameters.
-[delete](#deleting-a-task) | `Delete INDEX|NAME` | Delete a task 
-[view](#viewing-tasks) | `view` | Show all tasks
- | `view t` | Show all today’s tasks
- | `view p` |Show all pending task
- | `view c` | Show all completed task
- | `view f` | Show all floating task
- | `view o` | Show all overdue task
- | `view INDEX|NAME|START_DATETIME|END_DATETIME|PRIORITY|DAY|MONTH|YEAR TAG` | Show a specified task based on its detail.
+[delete](#deleting-a-task) | `Delete INDEX|NAME` | Delete a task.
+[view](#viewing-tasks) | `view` | Show all tasks.
+ | `view INDEX` | Show a specified task by index.
+ | `view t` | Show all Today's task.
+ | `view p` | Show all pending task.
+ | `view c` | Show all completed task.
+ | `view f` | Show all floating task.
+ | `view o` | Show all overdue task.
 [done](#marking-a-task-as-completed) | `done INDEX|NAME`| Mark a task as completed.
 [find](#finding-for-tasks) | `find [KEYWORDS..]`| Search for tasks with details associating with the keywords.
  | `find \yYYYY`| Search for tasks starts or ends on a particular year that matches the input.
