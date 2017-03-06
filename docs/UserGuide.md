@@ -19,7 +19,7 @@ Please refer to the [Setting up](DeveloperGuide.md#setting-up) section to learn 
 2. Download the latest `doordie.jar` from the [releases](../../../releases) tab.
 3. Navigate to the location of the `doordie.jar` and double click the jar.
 4. The GUI should appear in a few seconds.
-<img src="images/TaskManager.jpg" width="600">
+<img src="images/Ui.png" width="600">
 
 5. Refer to the [Features](#features) section below for details of each command.<br />
 6. Pressing the up or down key will allow you to iterate through previous commands executed (if any).
