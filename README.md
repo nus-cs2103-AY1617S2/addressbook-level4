@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/CS2103JAN2017-W09-B3/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-W09-B3/main)
 [![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-W09-B3/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-W09-B3/main?branch=master)
 [![Build status](https://ci.appveyor.com/api/projects/status/7vf90ll03qoahvb4/branch/master?svg=true)](https://ci.appveyor.com/project/mustaqiimuhar/main/branch/master)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/24eeab7e4e534007b9db95e231ee9915)](https://www.codacy.com/app/mustaqiimuhar/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103JAN2017-W09-B3/main&amp;utm_campaign=Badge_Grade)
 
 <img src="docs/images/Ui.png" width="600"><br>
 
