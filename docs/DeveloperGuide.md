@@ -660,18 +660,45 @@ Use case ends.
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-{More to be added}
+4. Able to read inputs from a keyboard
+5. All classes should follow the single responsibility guideline
+6. Codes should be properly commented on to maintain readability
+7. Should come with automated unit tests and open source code
+8. Data should be stored and backup readily available
+9. Should be able to work on any desktop that has Java 8 or higher
+    installed
+10. Response time should be at most 1 second no matter how big the data file
 
 ## Appendix D : Glossary
+
+#### Task
+
+> Event that the user wants to complete
+
+#### Time period
+
+> Start and end time of the event
+
+#### Assignee
+> Person that the person works with the complete the task
+
+#### Category
+
+> Area of user’s life that the task is concerned with
+
+#### Search term
+
+> Specific keywords / time
+
+#### Sorting criteria
+
+#### Unconfirmed events
+
+> Events where timing has not been fixed
 
 ##### Mainstream OS
 
 > Windows, Linux, Unix, OS-X
-
-##### Private contact detail
-
-> A contact detail that is not meant to be shared with others
 
 ## Appendix E : Product Survey
 
