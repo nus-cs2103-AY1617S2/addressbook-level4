@@ -743,3 +743,30 @@ Cons:
 * Many functions only functional for premium users (eg. labels, email/SMS reminders, custom filters)
 * Notifications only possible when application is turned on
 * Although adding task is easy with keyboard, other functionalities like deleting, editing and shifting tasks across projects require a mouse
+
+**Product Name**: Google Calendar
+
+Author: Alvin
+
+Pros:
+
+* Good calendar view of all tasks
+* Able to change view to day, week, month
+* A lot of functions
+* Able to sync multiple calendars from different users and overlap onto your own calendar
+* Able to change layout of viewing to suit users needs
+* Quick add function effective
+* Allow us to find available time in create interface to slot events in
+* Allow us to invite guests to events (Sharing of tasks)
+* Allow us to specify timezone of event for timezone change easily
+
+Cons:
+
+* Complicated interface
+* Difficult to navigate around
+* Unable to block book multiple timeslots for a single event
+* Unable to view yearly calendar
+* Only 1 type of event
+* Does not allow us to specify task as completed
+* No keyboard shortcuts available
+* Does not allot priority setting
