@@ -659,15 +659,15 @@ Use case ends
 
 ##### Task
 
-> TODO
+> A piece of work required to be done.
 
 ##### Command
 
-> TODO
+> An instruction causing computer to perform functions.
 
 ##### Functionality
 
-> TODO
+> The range of operations that can be run within the software.
 
 ## Appendix E : Product Survey
 
@@ -675,14 +675,14 @@ Use case ends
 
 Pros:
 
-* Can easily sign in with Google account
+* Uers can easily sign in with Google account
 * Support team work
 * Settings allow users to change date and time preferences
 * Users can close or open calendar and team when they need to
 
 Cons:
 
-* Ask for too much information when signing in with Google account, might make users feel their privacy are insecure
+* Ask for too much information when signing in with Google account, might make users feel their privacy is insecure
 * Font size is too small, difficult for users to read
 * Too much information in one page
 
@@ -690,31 +690,31 @@ Cons:
 
 Pros:
 
-* Easy to sign in with Google account without asking for too much information
+* Users can easily sign in with Google account without asking for too much information
 * Uses a novel way to display tasks
-* Clear to see the emergency of tasks
-* Easy to add detail information for tasks
+* Users can see the emergency of tasks easily
+* Users can add detail information about tasks easily
 
 Cons:
 
 * Small font size
-* After clicking on close menu button or show menu button, the tasks in the same interface do not become larger or smaller accordingly.
-* There are boards, labels and due dates, which might be too complex and troublesome for some users.
+* The interface might not be good enough. After clicking on close menu button or show menu button, the tasks in the same interface do not become larger or smaller accordingly.
+* Detailed information of tasks includes boards, labels and due dates, which might be too complex and troublesome for some users.
 
 **Wunderlist**
 
 Pros:
 
 * Accessible on many devices.
-* Easy to sign in with Google account without asking for too much information
+* Users can easily sign in with Google account without asking for too much information
 * Lists including not only tasks from work but also movies to watch and familiy etc. Creates a less stressful environment for users.
 * Interface is simple and clear
-* Can make list copies or share lists easily
-* Can start conversations
-* Can set reminders while creating tasks
+* Users can make list copies or share lists easily.
+* Users can start conversations with each other.
+* Due dates of tasks are clearly shown.
 
 Cons:
 
-* Web application is either not well developed or very hard to use (unintuitive).  I could not add a task after trying for 10 minutes. (Difficult to add a task)
-* Android application does not allow due time to be set directly when setting (creating?) new task
-* Tasks cannot be sorted by due date
+* Web application is either not well developed or unintuitive. New users might face difficulties when trying to add new tasks.
+* Users can not set due date and reminder directly when creating new task.
+* Tasks cannot be sorted by due date.
