@@ -5,7 +5,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 /**
  * @author ryuus
  * Represents a Task's priority in the task manager.
- * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidPriority(String)}
  *
  */
 public class Priority {
@@ -24,7 +24,7 @@ public class Priority {
     public Priority(String priority) throws IllegalValueException {
         assert priority != null;
         String trimmedPriority = priority.trim();
-        if (!isValidEmail(trimmedPriority)) {
+        if (!isValidPriority(trimmedPriority)) {
             throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
         }
         this.value = trimmedPriority;
@@ -33,7 +33,7 @@ public class Priority {
     /**
      * Returns if a given string is a valid person email.
      */
-    public static boolean isValidEmail(String test) {
+    public static boolean isValidPriority(String test) {
         return test.matches(PRIORITY_VALIDATION_REGEX);
     }
 

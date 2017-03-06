@@ -15,28 +15,28 @@ public class TypicalTestTasks {
     public TypicalTestTasks() {
         try {
             alice = new TaskBuilder().withTitle("Alice Pauline")
-                    .withInstruction("123, Jurong West Ave 6, #08-111").withPriority("alice@gmail.com")
+                    .withInstruction("123, Jurong West Ave 6, #08-111").withPriority("alicegmail.com")
                     .withDate("85355255")
                     .withTags("friends").build();
             benson = new TaskBuilder().withTitle("Benson Meier").withInstruction("311, Clementi Ave 2, #02-25")
-                    .withPriority("johnd@gmail.com").withDate("98765432")
+                    .withPriority("johndgmail.com").withDate("98765432")
                     .withTags("owesMoney", "friends").build();
             carl = new TaskBuilder().withTitle("Carl Kurz").withDate("95352563")
-                    .withPriority("heinz@yahoo.com").withInstruction("wall street").build();
+                    .withPriority("heinzyahoo.com").withInstruction("wall street").build();
             daniel = new TaskBuilder().withTitle("Daniel Meier").withDate("87652533")
-                    .withPriority("cornelia@google.com").withInstruction("10th street").build();
+                    .withPriority("corneliagoogle.com").withInstruction("10th street").build();
             elle = new TaskBuilder().withTitle("Elle Meyer").withDate("9482224")
-                    .withPriority("werner@gmail.com").withInstruction("michegan ave").build();
+                    .withPriority("wernergmail.com").withInstruction("michegan ave").build();
             fiona = new TaskBuilder().withTitle("Fiona Kunz").withDate("9482427")
-                    .withPriority("lydia@gmail.com").withInstruction("little tokyo").build();
+                    .withPriority("lydiagmail.com").withInstruction("little tokyo").build();
             george = new TaskBuilder().withTitle("George Best").withDate("9482442")
-                    .withPriority("anna@google.com").withInstruction("4th street").build();
+                    .withPriority("annagoogle.com").withInstruction("4th street").build();
 
             // Manually added
             hoon = new TaskBuilder().withTitle("Hoon Meier").withDate("8482424")
-                    .withPriority("stefan@mail.com").withInstruction("little india").build();
+                    .withPriority("stefanmail.com").withInstruction("little india").build();
             ida = new TaskBuilder().withTitle("Ida Mueller").withDate("8482131")
-                    .withPriority("hans@google.com").withInstruction("chicago ave").build();
+                    .withPriority("hansgoogle.com").withInstruction("chicago ave").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";

@@ -26,18 +26,18 @@ public class Instruction {
      *
      * @throws IllegalValueException if given address string is invalid.
      */
-    public Instruction(String address) throws IllegalValueException {
-        assert address != null;
-        if (!isValidAddress(address)) {
+    public Instruction(String instruction) throws IllegalValueException {
+        assert instruction != null;
+        if (!isValidInstruction(instruction)) {
             throw new IllegalValueException(MESSAGE_INSTRUCTION_CONSTRAINTS);
         }
-        this.value = address;
+        this.value = instruction;
     }
 
     /**
      * Returns true if a given string is a valid person email.
      */
-    public static boolean isValidAddress(String test) {
+    public static boolean isValidInstruction(String test) {
         return test.matches(INSTRUCTION_VALIDATION_REGEX);
     }
 

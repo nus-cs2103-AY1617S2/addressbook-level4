@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.ArrayList;
@@ -39,14 +39,14 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.task.Instruction;
-import seedu.address.model.task.Email;
-import seedu.address.model.task.Name;
-import seedu.address.model.task.Task;
-import seedu.address.model.task.Phone;
-import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Date;
+import seedu.address.model.task.Instruction;
+import seedu.address.model.task.Priority;
+import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.Title;
 import seedu.address.storage.StorageManager;
 
 
@@ -189,20 +189,22 @@ public class LogicManagerTest {
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 12345 p/validPriority.butNoDatePrefix i/valid,instruction", expectedMessage);
-        assertCommandFailure("add Valid Name d/12345 validDate.butNoPrefix i/valid, instruction", expectedMessage);
-        assertCommandFailure("add Valid Name d/12345 e/validDate.butNoInstructionPrefix valid, instruction", expectedMessage);
+        assertCommandFailure("add Valid Title 12345 p/validPriority.butNoDatePrefix i/valid,instruction",
+                expectedMessage);
+        assertCommandFailure("add Valid Title d/12345 validDate.butNoPrefix i/valid, instruction", expectedMessage);
+        assertCommandFailure("add Valid Title d/12345 p/validDate.butNoInstructionPrefix valid, instruction",
+                expectedMessage);
     }
 
     @Test
     public void execute_add_invalidTaskData() {
-        assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
-                Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
-                Phone.MESSAGE_PHONE_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
-                Email.MESSAGE_EMAIL_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
+        assertCommandFailure("add []\\[;] d/12345 p/validPriority i/valid, instruction",
+                Title.MESSAGE_TITLE_CONSTRAINTS);
+        assertCommandFailure("add Valid Title d/not_numbers p/validPriority i/valid, instruction",
+                Date.MESSAGE_DATE_CONSTRAINTS);
+        assertCommandFailure("add Valid Title d/12345 p/not@a.Priority i/valid, instruction",
+                Priority.MESSAGE_PRIORITY_CONSTRAINTS);
+        assertCommandFailure("add Valid Title d/12345 p/validPriority i/valid, instruction t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
@@ -233,7 +235,7 @@ public class LogicManagerTest {
         model.addTask(toBeAdded); // task already in internal address book
 
         // execute command and verify result
-        assertCommandFailure(helper.generateAddCommand(toBeAdded),  AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(helper.generateAddCommand(toBeAdded),  AddCommand.MESSAGE_DUPLICATE_TASK);
 
     }
 
@@ -277,7 +279,7 @@ public class LogicManagerTest {
      *                    based on visible index.
      */
     private void assertIndexNotFoundBehaviorForCommand(String commandWord) throws Exception {
-        String expectedMessage = MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+        String expectedMessage = MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
         TestDataHelper helper = new TestDataHelper();
         List<Task> taskList = helper.generateTaskList(2);
 
@@ -339,7 +341,7 @@ public class LogicManagerTest {
         helper.addToModel(model, threeTasks);
 
         assertCommandSuccess("delete 2",
-                String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, threeTasks.get(1)),
+                String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, threeTasks.get(1)),
                 expectedAB,
                 expectedAB.getTaskList());
     }
@@ -352,12 +354,12 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_find_onlyMatchesFullWordsInNames() throws Exception {
+    public void execute_find_onlyMatchesFullWordsInTitles() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
-        Task pTarget2 = helper.generateTaskWithName("bla KEY bla bceofeia");
-        Task p1 = helper.generateTaskWithName("KE Y");
-        Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
+        Task pTarget1 = helper.generateTaskWithTitle("bla bla KEY bla");
+        Task pTarget2 = helper.generateTaskWithTitle("bla KEY bla bceofeia");
+        Task p1 = helper.generateTaskWithTitle("KE Y");
+        Task p2 = helper.generateTaskWithTitle("KEYKEYKEY sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(p1, pTarget1, p2, pTarget2);
         AddressBook expectedAB = helper.generateAddressBook(fourTasks);
@@ -373,10 +375,10 @@ public class LogicManagerTest {
     @Test
     public void execute_find_isNotCaseSensitive() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task p1 = helper.generateTaskWithName("bla bla KEY bla");
-        Task p2 = helper.generateTaskWithName("bla KEY bla bceofeia");
-        Task p3 = helper.generateTaskWithName("key key");
-        Task p4 = helper.generateTaskWithName("KEy sduauo");
+        Task p1 = helper.generateTaskWithTitle("bla bla KEY bla");
+        Task p2 = helper.generateTaskWithTitle("bla KEY bla bceofeia");
+        Task p3 = helper.generateTaskWithTitle("key key");
+        Task p4 = helper.generateTaskWithTitle("KEy sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(p3, p1, p4, p2);
         AddressBook expectedAB = helper.generateAddressBook(fourTasks);
@@ -392,10 +394,10 @@ public class LogicManagerTest {
     @Test
     public void execute_find_matchesIfAnyKeywordPresent() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
-        Task pTarget2 = helper.generateTaskWithName("bla rAnDoM bla bceofeia");
-        Task pTarget3 = helper.generateTaskWithName("key key");
-        Task p1 = helper.generateTaskWithName("sduauo");
+        Task pTarget1 = helper.generateTaskWithTitle("bla bla KEY bla");
+        Task pTarget2 = helper.generateTaskWithTitle("bla rAnDoM bla bceofeia");
+        Task pTarget3 = helper.generateTaskWithTitle("key key");
+        Task p1 = helper.generateTaskWithTitle("sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(pTarget1, p1, pTarget2, pTarget3);
         AddressBook expectedAB = helper.generateAddressBook(fourTasks);
@@ -415,14 +417,14 @@ public class LogicManagerTest {
     class TestDataHelper {
 
         Task adam() throws Exception {
-            Name name = new Name("Adam Brown");
-            Phone privatePhone = new Phone("111111");
-            Email email = new Email("adam@gmail.com");
-            Address privateAddress = new Address("111, alpha street");
+            Title title = new Title("Adam Brown");
+            Date privateDate = new Date("111111");
+            Priority priority = new Priority("adam");
+            Instruction privateInstruction = new Instruction("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, privatePhone, email, privateAddress, tags);
+            return new Task(title, privateDate, priority, privateInstruction, tags);
         }
 
         /**
@@ -434,10 +436,10 @@ public class LogicManagerTest {
          */
         Task generateTask(int seed) throws Exception {
             return new Task(
-                    new Name("Task " + seed),
-                    new Phone("" + Math.abs(seed)),
-                    new Email(seed + "@email"),
-                    new Address("House of " + seed),
+                    new Title("Task " + seed),
+                    new Date("" + Math.abs(seed)),
+                    new Priority(seed + "_urgent"),
+                    new Instruction("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -448,10 +450,10 @@ public class LogicManagerTest {
 
             cmd.append("add ");
 
-            cmd.append(p.getName().toString());
-            cmd.append(" e/").append(p.getEmail());
-            cmd.append(" p/").append(p.getPhone());
-            cmd.append(" a/").append(p.getAddress());
+            cmd.append(p.getTitle().toString());
+            cmd.append(" p/").append(p.getPriority());
+            cmd.append(" d/").append(p.getDate());
+            cmd.append(" i/").append(p.getInstruction());
 
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {
@@ -531,12 +533,12 @@ public class LogicManagerTest {
         /**
          * Generates a Task object with given name. Other fields will have some dummy values.
          */
-        Task generateTaskWithName(String name) throws Exception {
+        Task generateTaskWithTitle(String title) throws Exception {
             return new Task(
-                    new Name(name),
-                    new Phone("1"),
-                    new Email("1@email"),
-                    new Address("House of 1"),
+                    new Title(title),
+                    new Date("1"),
+                    new Priority("1"),
+                    new Instruction("House of 1"),
                     new UniqueTagList(new Tag("tag"))
             );
         }

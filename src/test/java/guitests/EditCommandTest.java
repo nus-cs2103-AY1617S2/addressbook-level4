@@ -8,11 +8,11 @@ import org.junit.Test;
 import guitests.guihandles.TaskCardHandle;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Date;
 import seedu.address.model.task.Instruction;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.Title;
-import seedu.address.model.task.Date;
-import seedu.address.model.tag.Tag;
 import seedu.address.testutil.TaskBuilder;
 import seedu.address.testutil.TestTask;
 
@@ -25,11 +25,12 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby p/91234567 e/bobby@gmail.com a/Block 123, Bobby Street 3 t/husband";
+        String detailsToEdit = "Bobby d/91234567 p/bobbygmail.com i/Block 123, Bobby Street 3 t/husband";
         int addressBookIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withTitle("Bobby").withDate("91234567")
-                .withPriority("urgent").withInstruction("Block 123, Bobby Street 3").withTags("husband").build();
+                .withPriority("bobbygmail.com").withInstruction("Block 123, Bobby Street 3")
+                .withTags("husband").build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
     }
@@ -79,7 +80,7 @@ public class EditCommandTest extends AddressBookGuiTest {
     @Test
     public void edit_invalidTaskIndex_failure() {
         commandBox.runCommand("edit 8 Bobby");
-        assertResultMessage(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     @Test
@@ -93,13 +94,13 @@ public class EditCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("edit 1 *&");
         assertResultMessage(Title.MESSAGE_TITLE_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 p/abcd");
+        commandBox.runCommand("edit 1 d/abcd");
         assertResultMessage(Date.MESSAGE_DATE_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 e/yahoo!!!");
+        commandBox.runCommand("edit 1 p/yahoo!!!");
         assertResultMessage(Priority.MESSAGE_PRIORITY_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 a/");
+        commandBox.runCommand("edit 1 i/");
         assertResultMessage(Instruction.MESSAGE_INSTRUCTION_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 t/*&");
@@ -108,9 +109,9 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_duplicateTask_failure() {
-        commandBox.runCommand("edit 3 Alice Pauline p/85355255 e/alice@gmail.com "
-                                + "a/123, Jurong West Ave 6, #08-111 t/friends");
-        assertResultMessage(EditCommand.MESSAGE_DUPLICATE_PERSON);
+        commandBox.runCommand("edit 3 Alice Pauline d/85355255 p/alicegmail.com "
+                                + "i/123, Jurong West Ave 6, #08-111 t/friends");
+        assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
     /**
