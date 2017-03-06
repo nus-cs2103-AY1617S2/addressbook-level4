@@ -9,6 +9,7 @@ import guitests.guihandles.TaskCardHandle;
 import seedu.ezdo.commons.core.Messages;
 import seedu.ezdo.logic.commands.EditCommand;
 import seedu.ezdo.model.tag.Tag;
+import seedu.ezdo.model.todo.DueDate;
 import seedu.ezdo.model.todo.Email;
 import seedu.ezdo.model.todo.Name;
 import seedu.ezdo.model.todo.Priority;
@@ -25,11 +26,12 @@ public class EditCommandTest extends EzDoGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby p/1 e/bobby@gmail.com s/Block 123, Bobby Street 3 t/husband";
+        String detailsToEdit = "Bobby p/1 e/bobby@gmail.com s/Block 123, Bobby Street 3 d/08/09/2003 t/husband";
         int ezDoIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Bobby").withPriority("1")
-                .withEmail("bobby@gmail.com").withStartDate("Block 123, Bobby Street 3").withTags("husband").build();
+                .withEmail("bobby@gmail.com").withStartDate("Block 123, Bobby Street 3")
+                .withDueDate("08/09/2003").withTags("husband").build();
 
         assertEditSuccess(ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
     }
@@ -101,6 +103,9 @@ public class EditCommandTest extends EzDoGuiTest {
 
         commandBox.runCommand("edit 1 s/");
         assertResultMessage(StartDate.MESSAGE_STARTDATE_CONSTRAINTS);
+        
+        commandBox.runCommand("edit 1 d/");
+        assertResultMessage(DueDate.MESSAGE_DUEDATE_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 t/*&");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
@@ -109,7 +114,7 @@ public class EditCommandTest extends EzDoGuiTest {
     @Test
     public void edit_duplicateTask_failure() {
         commandBox.runCommand("edit 3 Alice Pauline p/1 e/alice@gmail.com "
-                                + "s/123, Jurong West Ave 6, #08-111 t/friends");
+                                + "s/123, Jurong West Ave 6, #08-111 d/25/11/1961 t/friends");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
