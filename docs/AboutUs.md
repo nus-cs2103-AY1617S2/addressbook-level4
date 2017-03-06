@@ -18,7 +18,7 @@ Responsibilities: UI
 -----
 
 #### [Dion Ng](http://github.com/yijinl)
-<img src="images/DionNg.jpg" width="150"><br>
+<img src="images/DionNgWeiJie.jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: Data
 
