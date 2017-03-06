@@ -22,7 +22,6 @@ import seedu.address.logic.commands.SelectCommand;
  * Parses user input.
  */
 public class Parser {
-
     /**
      * Used for initial separation of command word and args.
      */

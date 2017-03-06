@@ -146,6 +146,13 @@ public class ArgumentTokenizer {
 
         return value.trim();
     }
+    
+    /**
+     * Returns the prefixs of the argument
+     */
+    public List<Prefix> getPrefixs() {
+    	return prefixes;
+    }
 
     /**
      * Stores the value of the given prefix in the state of this tokenizer
