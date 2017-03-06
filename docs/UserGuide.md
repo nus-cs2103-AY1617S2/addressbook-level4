@@ -67,9 +67,8 @@ There are 4 forms of task that ProcrastiNomore supports:
 #### 2.2.1. Events
 
 Format: `add TASK on DATE/DAY` <br />
-
-		`add TASK from STARTTIME to ENDTIME` <br />
-		`add TASK on DATE/DAY from STARTTIME to ENDTIME` <br />
+	`add TASK from STARTTIME to ENDTIME` <br />
+	`add TASK on DATE/DAY from STARTTIME to ENDTIME` <br />
 
 #### 2.2.2. Deadlines
 
