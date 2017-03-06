@@ -1,10 +1,10 @@
 package seedu.address.testutil;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.task.Address;
-import seedu.address.model.task.Email;
-import seedu.address.model.task.Name;
-import seedu.address.model.task.Phone;
+import seedu.address.model.task.EndTime;
+import seedu.address.model.task.StartTime;
+import seedu.address.model.task.Title;
+import seedu.address.model.task.Venue;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -26,8 +26,8 @@ public class TaskBuilder {
         this.task = new TestTask(taskToCopy);
     }
 
-    public TaskBuilder withName(String name) throws IllegalValueException {
-        this.task.setName(new Name(name));
+    public TaskBuilder withTitle(String title) throws IllegalValueException {
+        this.task.setTitle(new Title(title));
         return this;
     }
 
@@ -39,18 +39,18 @@ public class TaskBuilder {
         return this;
     }
 
-    public TaskBuilder withAddress(String address) throws IllegalValueException {
-        this.task.setAddress(new Address(address));
+    public TaskBuilder withEndTime(String endtime) throws IllegalValueException {
+        this.task.setEndTime(new EndTime(endtime));
         return this;
     }
 
-    public TaskBuilder withPhone(String phone) throws IllegalValueException {
-        this.task.setPhone(new Phone(phone));
+    public TaskBuilder withVenue(String venue) throws IllegalValueException {
+        this.task.setVenue(new Venue(venue));
         return this;
     }
 
-    public TaskBuilder withEmail(String email) throws IllegalValueException {
-        this.task.setEmail(new Email(email));
+    public TaskBuilder withStartTime(String starttime) throws IllegalValueException {
+        this.task.setStartTime(new StartTime(starttime));
         return this;
     }
 

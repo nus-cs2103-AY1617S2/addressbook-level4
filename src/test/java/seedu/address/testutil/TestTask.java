@@ -1,9 +1,9 @@
 package seedu.address.testutil;
 
-import seedu.address.model.task.Address;
-import seedu.address.model.task.Email;
-import seedu.address.model.task.Name;
-import seedu.address.model.task.Phone;
+import seedu.address.model.task.EndTime;
+import seedu.address.model.task.StartTime;
+import seedu.address.model.task.Title;
+import seedu.address.model.task.Venue;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -12,10 +12,10 @@ import seedu.address.model.tag.UniqueTagList;
  */
 public class TestTask implements ReadOnlyTask {
 
-    private Name name;
-    private Address address;
-    private Email email;
-    private Phone phone;
+    private Title title;
+    private EndTime endtime;
+    private StartTime starttime;
+    private Venue venue;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -26,27 +26,27 @@ public class TestTask implements ReadOnlyTask {
      * Creates a copy of {@code taskToCopy}.
      */
     public TestTask(TestTask taskToCopy) {
-        this.name = taskToCopy.getName();
-        this.phone = taskToCopy.getPhone();
-        this.email = taskToCopy.getEmail();
-        this.address = taskToCopy.getAddress();
+        this.title = taskToCopy.getTitle();
+        this.venue = taskToCopy.getVenue();
+        this.starttime = taskToCopy.getStartTime();
+        this.endtime = taskToCopy.getEndTime();
         this.tags = taskToCopy.getTags();
     }
 
-    public void setName(Name name) {
-        this.name = name;
+    public void setTitle(Title title) {
+        this.title = title;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setEndTime(EndTime endtime) {
+        this.endtime = endtime;
     }
 
-    public void setEmail(Email email) {
-        this.email = email;
+    public void setStartTime(StartTime starttime) {
+        this.starttime = starttime;
     }
 
-    public void setPhone(Phone phone) {
-        this.phone = phone;
+    public void setVenue(Venue venue) {
+        this.venue = venue;
     }
 
     public void setTags(UniqueTagList tags) {
@@ -54,23 +54,23 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Name getName() {
-        return name;
+    public Title getTitle() {
+        return title;
     }
 
     @Override
-    public Phone getPhone() {
-        return phone;
+    public Venue getVenue() {
+        return venue;
     }
 
     @Override
-    public Email getEmail() {
-        return email;
+    public StartTime getStartTime() {
+        return starttime;
     }
 
     @Override
-    public Address getAddress() {
-        return address;
+    public EndTime getEndTime() {
+        return endtime;
     }
 
     @Override
@@ -85,10 +85,10 @@ public class TestTask implements ReadOnlyTask {
 
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
-        sb.append("add " + this.getName().fullName + " ");
-        sb.append("a/" + this.getAddress().value + " ");
-        sb.append("p/" + this.getPhone().value + " ");
-        sb.append("e/" + this.getEmail().value + " ");
+        sb.append("add " + this.getTitle().title + " ");
+        sb.append("a/" + this.getEndTime().value + " ");
+        sb.append("p/" + this.getVenue().value + " ");
+        sb.append("e/" + this.getStartTime().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }

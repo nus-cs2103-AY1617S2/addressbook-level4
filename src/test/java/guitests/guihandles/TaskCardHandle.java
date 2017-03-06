@@ -15,9 +15,9 @@ import seedu.address.model.tag.UniqueTagList;
  * Provides a handle to a task card in the task list panel.
  */
 public class TaskCardHandle extends GuiHandle {
-    private static final String NAME_FIELD_ID = "#name";
+    private static final String TITLE_FIELD_ID = "#title";
     private static final String ADDRESS_FIELD_ID = "#address";
-    private static final String PHONE_FIELD_ID = "#phone";
+    private static final String VENUE_FIELD_ID = "#phone";
     private static final String EMAIL_FIELD_ID = "#email";
     private static final String TAGS_FIELD_ID = "#tags";
 
@@ -32,19 +32,19 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(fieldId, node);
     }
 
-    public String getFullName() {
-        return getTextFromLabel(NAME_FIELD_ID);
+    public String get() {
+        return getTextFromLabel(TITLE_FIELD_ID);
     }
 
-    public String getAddress() {
+    public String getEndTime() {
         return getTextFromLabel(ADDRESS_FIELD_ID);
     }
 
-    public String getPhone() {
-        return getTextFromLabel(PHONE_FIELD_ID);
+    public String getVenue() {
+        return getTextFromLabel(VENUE_FIELD_ID);
     }
 
-    public String getEmail() {
+    public String getStartTime() {
         return getTextFromLabel(EMAIL_FIELD_ID);
     }
 
@@ -73,10 +73,10 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     public boolean isSameTask(ReadOnlyTask task) {
-        return getFullName().equals(task.getName().fullName)
-                && getPhone().equals(task.getPhone().value)
-                && getEmail().equals(task.getEmail().value)
-                && getAddress().equals(task.getAddress().value)
+        return getTitle().equals(task.getTitle().title)
+                && getVenue().equals(task.getTitle().value)
+                && getStartTime().equals(task.getStartTime().value)
+                && getEndTime().equals(task.getEndTime().value)
                 && getTags().equals(getTags(task.getTags()));
     }
 
@@ -84,10 +84,10 @@ public class TaskCardHandle extends GuiHandle {
     public boolean equals(Object obj) {
         if (obj instanceof TaskCardHandle) {
             TaskCardHandle handle = (TaskCardHandle) obj;
-            return getFullName().equals(handle.getFullName())
-                    && getPhone().equals(handle.getPhone())
-                    && getEmail().equals(handle.getEmail())
-                    && getAddress().equals(handle.getAddress())
+            return getTitle().equals(handle.getTitle())
+                    && getStartTime().equals(handle.getStartTime())
+                    && getEndTime().equals(handle.getEndTime())
+                    && getVenue().equals(handle.getVenue())
                     && getTags().equals(handle.getTags());
         }
         return super.equals(obj);
@@ -95,6 +95,6 @@ public class TaskCardHandle extends GuiHandle {
 
     @Override
     public String toString() {
-        return getFullName() + " " + getAddress();
+        return getFullName() + " " + getEndTime();
     }
 }

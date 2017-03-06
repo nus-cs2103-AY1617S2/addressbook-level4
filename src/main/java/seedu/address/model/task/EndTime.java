@@ -10,7 +10,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 public class EndTime {
 
     public static final String MESSAGE_ENDTIME_CONSTRAINTS =
-            "Person addresses can take any values, and it should not be blank";
+            "Task end time can take any values, and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -23,7 +23,7 @@ public class EndTime {
     /**
      * Validates given end time.
      *
-     * @throws IllegalValueException if given address string is invalid.
+     * @throws IllegalValueException if given end time string is invalid.
      */
     public EndTime(String endtime) throws IllegalValueException {
         assert endtime != null;

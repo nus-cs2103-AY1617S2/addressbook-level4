@@ -21,11 +21,11 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(Title title, StartTime starttime, Venue venue, EndTime endtime, UniqueTagList tags) {
+    public Task(Title title, Venue venue, StartTime starttime, EndTime endtime, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(title, starttime, venue, endtime, tags);
         this.title = title;
-        this.starttime = starttime;
         this.venue = venue;
+        this.starttime = starttime;
         this.endtime = endtime;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
@@ -34,7 +34,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getTitle(), source.getStartTime(), source.getVenue(), source.getEndTime(), source.getTags());
+        this(source.getTitle(), source.getVenue(), source.getStartTime(), source.getEndTime(), source.getTags());
     }
 
     public void setTitle(Title name) {
@@ -112,7 +112,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(title, starttime, venue, endtime, tags);
+        return Objects.hash(title, venue, starttime, endtime, tags);
     }
 
     @Override

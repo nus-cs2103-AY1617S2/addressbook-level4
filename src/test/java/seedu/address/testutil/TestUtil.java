@@ -30,11 +30,11 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.ToDoList;
-import seedu.address.model.task.Address;
-import seedu.address.model.task.Email;
-import seedu.address.model.task.Name;
+import seedu.address.model.task.EndTime;
+import seedu.address.model.task.StartTime;
+import seedu.address.model.task.Title;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.Phone;
+import seedu.address.model.task.Venue;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
@@ -75,15 +75,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Name("Ali Muster"), new Phone("9482424"), new Email("hans@google.com"), new Address("4th street"), new UniqueTagList()),
-                new Task(new Name("Boris Mueller"), new Phone("87249245"), new Email("ruth@google.com"), new Address("81th street"), new UniqueTagList()),
-                new Task(new Name("Carl Kurz"), new Phone("95352563"), new Email("heinz@yahoo.com"), new Address("wall street"), new UniqueTagList()),
-                new Task(new Name("Daniel Meier"), new Phone("87652533"), new Email("cornelia@google.com"), new Address("10th street"), new UniqueTagList()),
-                new Task(new Name("Elle Meyer"), new Phone("9482224"), new Email("werner@gmail.com"), new Address("michegan ave"), new UniqueTagList()),
-                new Task(new Name("Fiona Kunz"), new Phone("9482427"), new Email("lydia@gmail.com"), new Address("little tokyo"), new UniqueTagList()),
-                new Task(new Name("George Best"), new Phone("9482442"), new Email("anna@google.com"), new Address("4th street"), new UniqueTagList()),
-                new Task(new Name("Hoon Meier"), new Phone("8482424"), new Email("stefan@mail.com"), new Address("little india"), new UniqueTagList()),
-                new Task(new Name("Ida Mueller"), new Phone("8482131"), new Email("hans@google.com"), new Address("chicago ave"), new UniqueTagList())
+                new Task(new Title("Ali Muster"), new Venue("9482424"), new StartTime("hans@google.com"), new EndTime("4th street"), new UniqueTagList()),
+                new Task(new Title("Boris Mueller"), new Venue("87249245"), new StartTime("ruth@google.com"), new EndTime("81th street"), new UniqueTagList()),
+                new Task(new Title("Carl Kurz"), new Venue("95352563"), new StartTime("heinz@yahoo.com"), new EndTime("wall street"), new UniqueTagList()),
+                new Task(new Title("Daniel Meier"), new Venue("87652533"), new StartTime("cornelia@google.com"), new EndTime("10th street"), new UniqueTagList()),
+                new Task(new Title("Elle Meyer"), new Venue("9482224"), new StartTime("werner@gmail.com"), new EndTime("michegan ave"), new UniqueTagList()),
+                new Task(new Title("Fiona Kunz"), new Venue("9482427"), new StartTime("lydia@gmail.com"), new EndTime("little tokyo"), new UniqueTagList()),
+                new Task(new Title("George Best"), new Venue("9482442"), new StartTime("anna@google.com"), new EndTime("4th street"), new UniqueTagList()),
+                new Task(new Title("Hoon Meier"), new Venue("8482424"), new StartTime("stefan@mail.com"), new EndTime("little india"), new UniqueTagList()),
+                new Task(new Title("Ida Mueller"), new Venue("8482131"), new StartTime("hans@google.com"), new EndTime("chicago ave"), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -114,16 +114,16 @@ public class TestUtil {
     /**
      * Appends the file name to the sandbox folder path.
      * Creates the sandbox folder if it doesn't exist.
-     * @param fileName
+     * @param fileTitle
      * @return
      */
-    public static String getFilePathInSandboxFolder(String fileName) {
+    public static String getFilePathInSandboxFolder(String fileTitle) {
         try {
             FileUtil.createDirs(new File(SANDBOX_FOLDER));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return SANDBOX_FOLDER + fileName;
+        return SANDBOX_FOLDER + fileTitle;
     }
 
     public static void createDataFileWithSampleData(String filePath) {
@@ -175,10 +175,10 @@ public class TestUtil {
         return headlessProperty != null && headlessProperty.equals("true");
     }
 
-    public static void captureScreenShot(String fileName) {
+    public static void captureScreenShot(String fileTitle) {
         File file = GuiTest.captureScreenshot();
         try {
-            Files.copy(file, new File(fileName + ".png"));
+            Files.copy(file, new File(fileTitle + ".png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -218,15 +218,15 @@ public class TestUtil {
      *
      * Caveat: only find method declared in the current Class, not inherited from supertypes
      */
-    public static Method getPrivateMethod(Class<?> objectClass, String methodName) throws NoSuchMethodException {
-        Method method = objectClass.getDeclaredMethod(methodName);
+    public static Method getPrivateMethod(Class<?> objectClass, String methodTitle) throws NoSuchMethodException {
+        Method method = objectClass.getDeclaredMethod(methodTitle);
         method.setAccessible(true);
         return method;
     }
 
-    public static void renameFile(File file, String newFileName) {
+    public static void renameFile(File file, String newFileTitle) {
         try {
-            Files.copy(file, new File(newFileName));
+            Files.copy(file, new File(newFileTitle));
         } catch (IOException e1) {
             e1.printStackTrace();
         }

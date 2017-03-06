@@ -30,7 +30,7 @@ public class Venue {
     }
 
     /**
-     * Returns if a given string is a valid person value.
+     * Returns if a given string is a valid venue value.
      */
     public static boolean isValidVenue(String test) {
         return test.matches(VENUE_VALIDATION_REGEX);

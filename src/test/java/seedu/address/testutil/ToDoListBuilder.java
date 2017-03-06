@@ -7,7 +7,7 @@ import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.tag.Tag;
 
 /**
- * A utility class to help with building Todolist objects.
+ * A utility class to help with building To-do list objects.
  * Example usage: <br>
  *     {@code ToDoList ab = new ToDoListBuilder().withTask("John", "Doe").withTag("Friend").build();}
  */

@@ -6,11 +6,11 @@ import java.util.Optional;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.task.Address;
-import seedu.address.model.task.Email;
-import seedu.address.model.task.Name;
+import seedu.address.model.task.EndTime;
+import seedu.address.model.task.StartTime;
+import seedu.address.model.task.Title;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.Phone;
+import seedu.address.model.task.Venue;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.tag.UniqueTagList;
@@ -54,7 +54,7 @@ public class EditCommand extends Command {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (filteredTaskListIndex >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
@@ -77,13 +77,13 @@ public class EditCommand extends Command {
                                              EditTaskDescriptor editTaskDescriptor) {
         assert taskToEdit != null;
 
-        Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
-        Phone updatedPhone = editTaskDescriptor.getPhone().orElseGet(taskToEdit::getPhone);
-        Email updatedEmail = editTaskDescriptor.getEmail().orElseGet(taskToEdit::getEmail);
-        Address updatedAddress = editTaskDescriptor.getAddress().orElseGet(taskToEdit::getAddress);
+        Title updatedTitle = editTaskDescriptor.getTitle().orElseGet(taskToEdit::getTitle);
+        Venue updatedVenue = editTaskDescriptor.getVenue().orElseGet(taskToEdit::getVenue);
+        StartTime updatedStartTime = editTaskDescriptor.getStartTime().orElseGet(taskToEdit::getStartTime);
+        EndTime updatedEndTime = editTaskDescriptor.getEndTime().orElseGet(taskToEdit::getEndTime);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Task(updatedTitle, updatedVenue, updatedStartTime, updatedEndTime, updatedTags);
     }
 
     /**
@@ -91,19 +91,19 @@ public class EditCommand extends Command {
      * corresponding field value of the task.
      */
     public static class EditTaskDescriptor {
-        private Optional<Name> name = Optional.empty();
-        private Optional<Phone> phone = Optional.empty();
-        private Optional<Email> email = Optional.empty();
-        private Optional<Address> address = Optional.empty();
+        private Optional<Title> name = Optional.empty();
+        private Optional<Venue> phone = Optional.empty();
+        private Optional<StartTime> email = Optional.empty();
+        private Optional<EndTime> address = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditTaskDescriptor() {}
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
-            this.name = toCopy.getName();
-            this.phone = toCopy.getPhone();
-            this.email = toCopy.getEmail();
-            this.address = toCopy.getAddress();
+            this.name = toCopy.getTitle();
+            this.phone = toCopy.getVenue();
+            this.email = toCopy.getStartTime();
+            this.address = toCopy.getEndTime();
             this.tags = toCopy.getTags();
         }
 
@@ -114,39 +114,39 @@ public class EditCommand extends Command {
             return CollectionUtil.isAnyPresent(this.name, this.phone, this.email, this.address, this.tags);
         }
 
-        public void setName(Optional<Name> name) {
+        public void setTitle(Optional<Title> name) {
             assert name != null;
             this.name = name;
         }
 
-        public Optional<Name> getName() {
+        public Optional<Title> getTitle() {
             return name;
         }
 
-        public void setPhone(Optional<Phone> phone) {
+        public void setVenue(Optional<Venue> phone) {
             assert phone != null;
             this.phone = phone;
         }
 
-        public Optional<Phone> getPhone() {
+        public Optional<Venue> getVenue() {
             return phone;
         }
 
-        public void setEmail(Optional<Email> email) {
+        public void setStartTime(Optional<StartTime> email) {
             assert email != null;
             this.email = email;
         }
 
-        public Optional<Email> getEmail() {
+        public Optional<StartTime> getStartTime() {
             return email;
         }
 
-        public void setAddress(Optional<Address> address) {
+        public void setEndTime(Optional<EndTime> address) {
             assert address != null;
             this.address = address;
         }
 
-        public Optional<Address> getAddress() {
+        public Optional<EndTime> getEndTime() {
             return address;
         }
 
