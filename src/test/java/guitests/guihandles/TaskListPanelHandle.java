@@ -131,9 +131,9 @@ public class TaskListPanelHandle extends GuiHandle {
      * Returns the position of the task given, {@code NOT_FOUND} if not found in the list.
      */
     public int getTaskIndex(ReadOnlyTask targetTask) {
-        List<ReadOnlyTask> TasksInList = getListView().getItems();
-        for (int i = 0; i < TasksInList.size(); i++) {
-            if (TasksInList.get(i).getName().equals(targetTask.getName())) {
+        List<ReadOnlyTask> tasksInList = getListView().getItems();
+        for (int i = 0; i < tasksInList.size(); i++) {
+            if (tasksInList.get(i).getName().equals(targetTask.getName())) {
                 return i;
             }
         }
