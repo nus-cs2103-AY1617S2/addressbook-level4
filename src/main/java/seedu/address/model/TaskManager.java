@@ -21,7 +21,7 @@ import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .equals comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class TaskManager implements ReadOnlyTaskManager {
 
     private final UniqueTaskList tasks;
     private final UniqueLabelList labels;
@@ -38,12 +38,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         labels = new UniqueLabelList();
     }
 
-    public AddressBook() {}
+    public TaskManager() {}
 
     /**
      * Creates an AddressBook using the Tasks and Labels in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public TaskManager(ReadOnlyTaskManager toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -59,7 +59,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.labels.setLabels(labels);
     }
 
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyTaskManager newData) {
         assert newData != null;
         try {
             setTasks(newData.getTaskList());
@@ -174,9 +174,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                        && this.tasks.equals(((AddressBook) other).tasks)
-                        && this.labels.equalsOrderInsensitive(((AddressBook) other).labels));
+                || (other instanceof TaskManager // instanceof handles nulls
+                        && this.tasks.equals(((TaskManager) other).tasks)
+                        && this.labels.equalsOrderInsensitive(((TaskManager) other).labels));
     }
 
     @Override

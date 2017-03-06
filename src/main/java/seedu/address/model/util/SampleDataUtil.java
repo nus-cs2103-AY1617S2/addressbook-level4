@@ -1,8 +1,8 @@
 package seedu.address.model.util;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.TaskManager;
+import seedu.address.model.ReadOnlyTaskManager;
 import seedu.address.model.label.UniqueLabelList;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Task;
@@ -14,22 +14,22 @@ public class SampleDataUtil {
         try {
             return new Task[] {
                 new Task(new Title("Alex Yeoh"),
-                    new Deadline("Blk 30 Geylang Street 29, #06-40"),
+                    new Deadline("01-01-2018"),
                     new UniqueLabelList("friends")),
                 new Task(new Title("Bernice Yu"),
-                    new Deadline("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
+                    new Deadline("01-06-2018"),
                     new UniqueLabelList("colleagues", "friends")),
                 new Task(new Title("Charlotte Oliveiro"),
-                    new Deadline("Blk 11 Ang Mo Kio Street 74, #11-04"),
+                    new Deadline("01-05-2018"),
                     new UniqueLabelList("neighbours")),
                 new Task(new Title("David Li"),
-                    new Deadline("Blk 436 Serangoon Gardens Street 26, #16-43"),
+                    new Deadline("01-04-2018"),
                     new UniqueLabelList("family")),
                 new Task(new Title("Irfan Ibrahim"),
-                    new Deadline("Blk 47 Tampines Street 20, #17-35"),
+                    new Deadline("01-03-2018"),
                     new UniqueLabelList("classmates")),
                 new Task(new Title("Roy Balakrishnan"),
-                    new Deadline("Blk 45 Aljunied Street 85, #11-31"),
+                    new Deadline("01-02-2018"),
                     new UniqueLabelList("colleagues"))
             };
         } catch (IllegalValueException e) {
@@ -37,11 +37,11 @@ public class SampleDataUtil {
         }
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
+    public static ReadOnlyTaskManager getSampleTaskManager() {
         try {
-            AddressBook sampleAB = new AddressBook();
-            for (Task samplePerson : getSamplePersons()) {
-                sampleAB.addTask(samplePerson);
+            TaskManager sampleAB = new TaskManager();
+            for (Task sampleTask : getSamplePersons()) {
+                sampleAB.addTask(sampleTask);
             }
             return sampleAB;
         } catch (DuplicateTaskException e) {

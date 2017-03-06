@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.TaskManager;
 import seedu.address.model.label.Label;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
@@ -11,25 +11,25 @@ import seedu.address.model.task.UniqueTaskList;
  * Example usage: <br>
  *     {@code AddressBook ab = new AddressBookBuilder().withPerson("John", "Doe").withTag("Friend").build();}
  */
-public class AddressBookBuilder {
+public class TaskManagerBuilder {
 
-    private AddressBook addressBook;
+    private TaskManager taskManager;
 
-    public AddressBookBuilder(AddressBook addressBook) {
-        this.addressBook = addressBook;
+    public TaskManagerBuilder(TaskManager taskManager) {
+        this.taskManager = taskManager;
     }
 
-    public AddressBookBuilder withTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        addressBook.addTask(task);
+    public TaskManagerBuilder withTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+        taskManager.addTask(task);
         return this;
     }
 
-    public AddressBookBuilder withLabel(String labelName) throws IllegalValueException {
-        addressBook.addLabel(new Label(labelName));
+    public TaskManagerBuilder withLabel(String labelName) throws IllegalValueException {
+        taskManager.addLabel(new Label(labelName));
         return this;
     }
 
-    public AddressBook build() {
-        return addressBook;
+    public TaskManager build() {
+        return taskManager;
     }
 }

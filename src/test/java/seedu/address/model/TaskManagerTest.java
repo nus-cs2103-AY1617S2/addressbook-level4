@@ -19,30 +19,30 @@ import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.TypicalTestPersons;
 
-public class AddressBookTest {
+public class TaskManagerTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final AddressBook addressBook = new AddressBook();
+    private final TaskManager taskManager = new TaskManager();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getTaskList());
-        assertEquals(Collections.emptyList(), addressBook.getLabelList());
+        assertEquals(Collections.emptyList(), taskManager.getTaskList());
+        assertEquals(Collections.emptyList(), taskManager.getLabelList());
     }
 
     @Test
     public void resetData_null_throwsAssertionError() {
         thrown.expect(AssertionError.class);
-        addressBook.resetData(null);
+        taskManager.resetData(null);
     }
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = new TypicalTestPersons().getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+        TaskManager newData = new TypicalTestPersons().getTypicalAddressBook();
+        taskManager.resetData(newData);
+        assertEquals(newData, taskManager);
     }
 
     @Test
@@ -54,12 +54,12 @@ public class AddressBookTest {
         AddressBookStub newData = new AddressBookStub(newPersons, newLabels);
 
         thrown.expect(AssertionError.class);
-        addressBook.resetData(newData);
+        taskManager.resetData(newData);
     }
 
     @Test
     public void resetData_withDuplicateLabels_throwsAssertionError() {
-        AddressBook typicalAddressBook = new TypicalTestPersons().getTypicalAddressBook();
+        TaskManager typicalAddressBook = new TypicalTestPersons().getTypicalAddressBook();
         List<ReadOnlyTask> newPersons = typicalAddressBook.getTaskList();
         List<Label> newLabels = new ArrayList<>(typicalAddressBook.getLabelList());
         // Repeat the first label twice
@@ -67,13 +67,13 @@ public class AddressBookTest {
         AddressBookStub newData = new AddressBookStub(newPersons, newLabels);
 
         thrown.expect(AssertionError.class);
-        addressBook.resetData(newData);
+        taskManager.resetData(newData);
     }
 
     /**
      * A stub ReadOnlyAddressBook whose persons and labels lists can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class AddressBookStub implements ReadOnlyTaskManager {
         private final ObservableList<ReadOnlyTask> persons = FXCollections.observableArrayList();
         private final ObservableList<Label> labels = FXCollections.observableArrayList();
 

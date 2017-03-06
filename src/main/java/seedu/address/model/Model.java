@@ -13,10 +13,10 @@ import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
  */
 public interface Model {
     /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyAddressBook newData);
+    void resetData(ReadOnlyTaskManager newData);
 
     /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyTaskManager getTaskManager();
 
     /** Deletes the given person. */
     void deletePerson(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
@@ -35,7 +35,7 @@ public interface Model {
             throws UniqueTaskList.DuplicateTaskException;
 
     /** Returns the filtered person list as an {@code UnmodifiableObservableList<ReadOnlyPerson>} */
-    UnmodifiableObservableList<ReadOnlyTask> getFilteredPersonList();
+    UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
 
     /** Updates the filter of the filtered person list to show all persons */
     void updateFilteredListToShowAll();
