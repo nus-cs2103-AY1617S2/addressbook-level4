@@ -15,6 +15,7 @@ import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
+import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
  * Wraps all data at the address-book level
@@ -50,7 +51,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 //// list overwrite operations
 
     public void setPersons(List<? extends ReadOnlyTask> persons)
-            throws UniquePersonList.DuplicatePersonException {
+            throws UniqueTaskList.DuplicateTaskException {
         this.persons.setPersons(persons);
     }
 
@@ -62,7 +63,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         assert newData != null;
         try {
             setPersons(newData.getPersonList());
-        } catch (UniquePersonList.DuplicatePersonException e) {
+        } catch (UniqueTaskList.DuplicateTaskException e) {
             assert false : "AddressBooks should not have duplicate persons";
         }
         try {
@@ -80,9 +81,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Also checks the new person's tags and updates {@link #tags} with any new tags found,
      * and updates the Tag objects in the person to point to those in {@link #tags}.
      *
-     * @throws UniquePersonList.DuplicatePersonException if an equivalent person already exists.
+     * @throws UniqueTaskList.DuplicateTaskException if an equivalent person already exists.
      */
-    public void addPerson(Task p) throws UniquePersonList.DuplicatePersonException {
+    public void addPerson(Task p) throws UniqueTaskList.DuplicateTaskException {
         syncMasterTagListWith(p);
         persons.add(p);
     }
@@ -92,12 +93,12 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code AddressBook}'s tag list will be updated with the tags of {@code editedReadOnlyPerson}.
      * @see #syncMasterTagListWith(Task)
      *
-     * @throws DuplicatePersonException if updating the person's details causes the person to be equivalent to
+     * @throws DuplicateTaskException if updating the person's details causes the person to be equivalent to
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
     public void updatePerson(int index, ReadOnlyTask editedReadOnlyPerson)
-            throws UniquePersonList.DuplicatePersonException {
+            throws UniqueTaskList.DuplicateTaskException {
         assert editedReadOnlyPerson != null;
 
         Task editedPerson = new Task(editedReadOnlyPerson);
