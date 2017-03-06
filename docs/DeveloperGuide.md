@@ -1,4 +1,4 @@
-# AddressBook Level 4 - Developer Guide
+# YATS Yet Another Task Scheduler - Developer Guide
 
 By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
@@ -339,6 +339,7 @@ is better than these alternatives.<br>
 a. Include those libraries in the repo (this bloats the repo size)<br>
 b. Require developers to download those libraries manually (this creates extra work for developers)<br>
 
+
 ## Appendix A : User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
@@ -347,40 +348,76 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | user | Add a task with a name and deadline and then schedule it myself | Know when I need to do this task
+`* * *` | user | Add a task with just a title | Add tasks in quick succession and edit the deadlines at a later time
+`* * *` | user | Get a calendar view list of my current blocked out times and what I have to do | Know what else I can add
+`* * *` | user | Schedule a recurring (daily/weekly/monthly..) | Not add the recurring tasks manually
+`* * *` | user | Search for the task that I would want to schedule | Find out whether the task has already been scheduled
+`* * *` | user | Search for information (using any string) about a current task which will display all the relevant info about the task | Find the task without looking through the whole list
+`* * *` | user | Change the deadline, name and schedule of any task | Update any task as required, as well as marking it as done and deleting it
+`* * *` | user | Undo my actions | revert any changes done accidentally.
+`* * *` | user | Mark task as done based on index, name, or any unique identifying string for that task | Clear done tasks if needed
+`* * *` | user | List all tasks based on importance | View which tasks have higher priorities
+`* * *` | user | List all tasks based on deadlines | View which tasks needs to be completed first
+`* * *` | user | List all tasks by deadlines | Plan my schedule on the calendar
+`* * ` | user | Set alarms for certain schedules | Be reminded of deadlines of my tasks
+`* * ` | user | Schedule my tasks with constraints | Avoid scheduling tasks during my works time and leave break time in between tasks
+`* *` | user | Add subtasks into my main task | Have a more structured view of the main task
+`* *` | user | Star my tasks | Mark out the more urgent tasks to be done
+`* *` | user | Ask the task manager to schedule my tasks | Just enter the tasks with a deadline and decide the scheduling later
+`* *` | user | Add descriptions to my task | have additional details of my tasks
+`* *` | user | Mark the task as done/require follow-up | Have an up-to-date record of the my tasks
+`* *` | advanced user | Keep a list of done task, marked as done(strike-out) | Keep track of what I have already done
+`* *` | advance user | Clear all my done tasks | Clear done tasks from scheduler
+`* *` | advanced user | Collapse my tasks into groups in the listed view | Have a clearer overview of all my task groups
+`* *` | user | Group my tasks together with a common tag | Organized my tasks according to their groups in the scheduler
+`* *` | user | Have pop-up notifications of near deadlines | Be reminded of tasks with deadlines approaching
+`* *` | user | Have heads-up display of tasks that are about to due | Be reminded of tasks to be done
+`* *` | advanced user| Sort my tasks according to deadlines, dates or title | Have a better overviews of tasks scheduled
+`* *` | advanced user | Use shorter versions of commands/Flexi-command | Type commands easier and faster
+`* ` | user | Get suggestions when a task should be scheduled | Automatically click on which date and time I would like it scheduled
+`* ` | user | Specify locations that are linked to Google Maps | Know the best way to get there from my current location (Workplace)
+`* ` | user | Automatically reschedule a task I am supposed to do now | No worry about when to schedule the task
+`* ` | user | Have my favourite calendar integrated to the program | Import my existing schedules to the task manager
+`* ` | user | Mark a task as done with one button click | Save time when marking tasks as done
+`* ` | user | Autocomplete my typing | Type commands/descriptions faster
+`* ` | user | Synchronize with multiple devices | Export and import my task list among different devices for easier access
+`* ` | user | Have tasks inferred from email's contents | Add tasks with details more easily
 
-{More to be added}
 
 ## Appendix B : Use Cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: Add Task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User requests to add a task with a title, and an optional description, optional tags and optional periodicity
+2. User specifies if task has a deadline depending on whether he includes deadline as well as possible timings to block out for that task
+3. TaskManager creates a task with a deadline and a list of possible block out timings for the task
+4. TaskManager shows that the task was successfully added <br>
 Use case ends.
 
 **Extensions**
 
-2a. The list is empty
+2a. User doesn't specify a deadline
 
-> Use case ends
+> 2a1. TaskManager creates a Task object with no deadlines but possible timings for that task
+  Use case resumes at step 4
 
-3a. The given index is invalid
+2b. User does not incllude possible timings
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+> 2b1. TaskManager creates a Task object with a deadline but no possible timings for that task
+  Use case resumes at step 4
 
-{More to be added}
+2c. User does not include possible timings or a deadline
+
+> 2c1. TaskManager creates a task object with no deadline and no possible timings
+  Use case resumes at step 4 <br>
+
+#### Use case: Add Event
+
 
 ## Appendix C : Non Functional Requirements
 
