@@ -30,7 +30,7 @@ Year 2 Computer Science Major<br>
 -----
 
 #### [Liu Yulin](https://github.com/LiuYulin0629)
-<img src="" width="150"><br>
+<img src="LiuYulin0629.png" width="150"><br>
 Year 2 Computer Science Major<br>
 **Role**: Developer <br>
 * Components in charge of: 
