@@ -159,6 +159,31 @@ Format: `clear completed`
 Examples:
 * `clear 03/03/17`
 
+### 2.6. Search through all existing task by entering keywords/dates: search
+
+Format: Search KEYWORD
+        Search DATE
+
+> In the event of non-unique KEYWORD, ProcrastiNomore will show a list of tasks
+> with the same KEYWORD
+
+Examples:
+* `search breakfast`
+Returns any tasks with containing breakfast
+
+### 2.7. To sort through the list of task displayed: sort
+
+Format: Sort 
+    Sort DATE
+    Sort TASKNAME
+
+Using the sort command on its own will sort the task in ascending TASKINDEX order
+
+### 2.8. To mark a task with higher importance: prioritise
+
+Format:   Prioritise TASKNAME
+          Prioritise TASKINDEX
+          Prioritise DATE
 
 ### 2.9. To Undo your previous commands: `undo`
 
