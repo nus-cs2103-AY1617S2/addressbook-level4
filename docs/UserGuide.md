@@ -298,13 +298,45 @@ Examples:
 * 
 
 ### Viewing tasks
+
+#### Viewing all tasks
+Shows a list of all task in iManager. 
+Format: `view `<br>
+
+#### Viewing a specified task
+Shows a specified task by index in iManager. 
+
+Format: `view INDEX`<br>
+> * INDEX refers to the index number shown in the most recent listing of tasks. 
+
+Examples:
+* `view 1` <br>
+  Show the first task in the task list. 
+
+#### Viewing Today's tasks
+Shows a list of all today's task in iManager. Does not show floating and completed tasks. 
+
+Format: `view t`<br>
+
+#### Viewing all Pending tasks
+Shows a list of all pending task in iManager. Does not show floating and completed tasks. 
+
+Format: `view p`<br>
+
+#### Viewing all Completed tasks
+Shows a list of all completed task in iManager. Does not show pending, floating and Today's tasks. 
+
+Format: `view c`<br>
+
+#### Viewing Floating tasks
+Shows a list of all floating tasks in iManage. Does not show pending, completed and Today's tasks. 
+
+Format: `view f`<br>
+
+#### Viewing Overdue tasks
 Shows a list of all tasks iManage. Able to filter based on status of task/event.
 
 Format: `view`<br>
-
-Examples: 
-* 
-* 
 
 ### Marking a task as completed
 Mark an existing task as completed in iManager. A completed task gets transferred to the done list. 
@@ -437,6 +469,9 @@ Format : `exit`
  | `view INDEX|NAME|START_DATETIME|END_DATETIME|PRIORITY|DAY|MONTH|YEAR TAG` | Show a specified task based on its detail.
 [done](#marking-a-task-as-completed) | `done INDEX|NAME`| Mark a task as completed.
 [find](#finding-for-tasks) | `find [KEYWORDS..]`| Search for tasks with details associating with the keywords.
+ | `find \yYYYY`| Search for tasks starts or ends on a particular year that matches the input.
+ | `find \mMM`| Search for tasks starts or ends on a particular month that matches the input.
+ | `find\hHHMM`| Search for task whoose starts time or end time matches the input.
 [clear](#clearing-of-completed-tasks) | `clear` | Clear all completed tasks.
 [toggle](#toggle-google-calender) | `toggle` | Toggle Google Calender.
 [undo](#undo-most-recent-command) | `undo` | Undo the most recent command.
