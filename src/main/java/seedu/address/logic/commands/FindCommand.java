@@ -30,10 +30,10 @@ public class FindCommand extends Command {
         if (prefix == PREFIX_NAME) {
             model.updateFilteredPersonList(keywords);
             return new CommandResult(getMessageForPersonListShownSummary(model.getFilteredPersonList().size()));
-    	} else {
+        } else {
             model.updateFilteredPersonList(keywords);
             return new CommandResult(getMessageForPersonListShownSummary(model.getFilteredPersonList().size()));
-    	}
+        }
     }
 
 }

@@ -36,7 +36,7 @@ public class FindCommandParser {
             final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(value.trim());
             if (!matcher.matches()) {
                 return new IncorrectCommand(
-	                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
             }
 	        // keywords delimited by whitespace
             final String[] keywords = matcher.group("keywords").split("\\s+");
