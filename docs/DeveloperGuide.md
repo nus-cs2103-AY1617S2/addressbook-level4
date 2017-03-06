@@ -374,11 +374,45 @@ Priority | As a ... | I want to ... | So that I can...
 
 
 
-{More to be added}
 
 ## Appendix B : Use Cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+
+#### Use case: Add task
+
+**MSS**
+
+1. User enters command with name and description of task
+2. Corresponding index is assigned
+3. Task is created <br>
+Use case ends
+
+#### Use case: Edit task
+
+**MSS**
+
+1. User requests to list tasks
+2. TaskBook shows a list of tasks
+3. User requests to edit a specific task in the list
+4. TaskBook edits the task <br>
+Use case ends
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given index is invalid
+
+> 3a1. TaskBook shows an error message <br>
+  Use case resumes at step 2
+
+3b. The given edits are invalid
+
+ > 3b1. TaskBook shows an error message <br>
+  Use case resumes at step 2
 
 #### Use case: Delete person
 
@@ -388,7 +422,7 @@ Priority | As a ... | I want to ... | So that I can...
 2. AddressBook shows a list of persons
 3. User requests to delete a specific person in the list
 4. AddressBook deletes the person <br>
-Use case ends.
+Use case ends
 
 **Extensions**
 
@@ -400,6 +434,60 @@ Use case ends.
 
 > 3a1. AddressBook shows an error message <br>
   Use case resumes at step 2
+
+#### Use case: Find task
+
+**MSS**
+
+1. User requests to find tasks by keyword
+2. TaskBook shows a list of tasks with keywords that match the exact keyword <br>
+Use case ends
+
+**Extensions**
+2a. The list is empty
+> 2a1. TaskBook shows a notice message <br>
+  Use case ends
+  
+#### Use case: List all tasks
+
+**MSS**
+
+1. User requests to list tasks
+2. TaskBook shows a list of tasks <br>
+Use case ends
+
+**Extensions**
+2a. The list is empty
+> 2a1. TaskBook shows a notice message <br>
+  Use case ends
+  
+#### Use case: Undo action
+
+**MSS**
+
+1. User requests to undo the previous action
+2. TaskBook undos the last action  
+3. TaskBook shows the reflected changes <br>
+Use case ends
+
+**Extensions**
+2a. There exists no valid action that can be undone
+> 2a1. TaskBook shows a notice message <br>
+  Use case ends 
+  
+#### Use case: Redo action
+
+**MSS**
+
+1. User requests to redo the previous undo 
+2. TaskBook redos the previous undo 
+3. TaskBook shows the reflected changes <br>
+Use case ends
+
+**Extensions**
+2a. There exists no valid undo action that can be redone
+> 2a1. TaskBook shows a notice message <br>
+  Use case ends
 
 {More to be added}
 

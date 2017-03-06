@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_esqvgP9XEeaGAZ7d1LgItA" name="RootElement">
+  <packagedElement xmi:type="uml:Component" xmi:id="_ClWqEP9YEeaGAZ7d1LgItA" name="Task List" useCase="_asm98P9YEeaGAZ7d1LgItA _z5onEP9YEeaGAZ7d1LgItA _dXNtkP9ZEeaGAZ7d1LgItA _szdZIP9ZEeaGAZ7d1LgItA _tcwNwP9ZEeaGAZ7d1LgItA _uF87wP9ZEeaGAZ7d1LgItA _ynsooP9ZEeaGAZ7d1LgItA _zdIb0P9ZEeaGAZ7d1LgItA _9uxqwP9ZEeaGAZ7d1LgItA __nuwcP9ZEeaGAZ7d1LgItA _BqEboP9aEeaGAZ7d1LgItA _YGbT8P9aEeaGAZ7d1LgItA _ZB9TYP_vEeaQtJ2BNnfZRg">
+    <ownedUseCase xmi:type="uml:UseCase" xmi:id="_asm98P9YEeaGAZ7d1LgItA" name="Add Floating Task" subject="_ClWqEP9YEeaGAZ7d1LgItA">
+      <ownedUseCase xmi:type="uml:UseCase" xmi:id="_zZB0YP9YEeaGAZ7d1LgItA" name="Add Task"/>
+      <extensionPoint xmi:type="uml:ExtensionPoint" xmi:id="_X6JA4P9ZEeaGAZ7d1LgItA" name="ExtensionPoint1"/>
+      <extensionPoint xmi:type="uml:ExtensionPoint" xmi:id="_homqQP9ZEeaGAZ7d1LgItA" name="ExtensionPoint2"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:type="uml:UseCase" xmi:id="_z5onEP9YEeaGAZ7d1LgItA" name="Add Event" subject="_ClWqEP9YEeaGAZ7d1LgItA">
+      <extend xmi:type="uml:Extend" xmi:id="_ixngwP9ZEeaGAZ7d1LgItA" extendedCase="_dXNtkP9ZEeaGAZ7d1LgItA" extensionLocation="_ixngwf9ZEeaGAZ7d1LgItA"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:type="uml:UseCase" xmi:id="_dXNtkP9ZEeaGAZ7d1LgItA" name="Add Deadlined Task" subject="_ClWqEP9YEeaGAZ7d1LgItA">
+      <extend xmi:type="uml:Extend" xmi:id="_homDMP9ZEeaGAZ7d1LgItA" extendedCase="_asm98P9YEeaGAZ7d1LgItA" extensionLocation="_homqQP9ZEeaGAZ7d1LgItA"/>
+      <extensionPoint xmi:type="uml:ExtensionPoint" xmi:id="_ixngwf9ZEeaGAZ7d1LgItA" name="ExtensionPoint1"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:type="uml:UseCase" xmi:id="_szdZIP9ZEeaGAZ7d1LgItA" name="Edit Task" subject="_ClWqEP9YEeaGAZ7d1LgItA">
+      <include xmi:type="uml:Include" xmi:id="_QbcIwP9bEeaGAZ7d1LgItA" addition="_YGbT8P9aEeaGAZ7d1LgItA"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:type="uml:UseCase" xmi:id="_tcwNwP9ZEeaGAZ7d1LgItA" name="Delete Task" subject="_ClWqEP9YEeaGAZ7d1LgItA">
+      <include xmi:type="uml:Include" xmi:id="_RiWGcP9bEeaGAZ7d1LgItA" addition="_YGbT8P9aEeaGAZ7d1LgItA"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:type="uml:UseCase" xmi:id="_uF87wP9ZEeaGAZ7d1LgItA" name="Mark Task as Completed" subject="_ClWqEP9YEeaGAZ7d1LgItA">
+      <include xmi:type="uml:Include" xmi:id="_cLAHMP9bEeaGAZ7d1LgItA" addition="_YGbT8P9aEeaGAZ7d1LgItA"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:type="uml:UseCase" xmi:id="_ynsooP9ZEeaGAZ7d1LgItA" name="Undo Action" subject="_ClWqEP9YEeaGAZ7d1LgItA"/>
+    <ownedUseCase xmi:type="uml:UseCase" xmi:id="_zdIb0P9ZEeaGAZ7d1LgItA" name="Redo Action" subject="_ClWqEP9YEeaGAZ7d1LgItA"/>
+    <ownedUseCase xmi:type="uml:UseCase" xmi:id="_9uxqwP9ZEeaGAZ7d1LgItA" name="Find Task" subject="_ClWqEP9YEeaGAZ7d1LgItA">
+      <extend xmi:type="uml:Extend" xmi:id="_d9OTgP_vEeaQtJ2BNnfZRg" extendedCase="_YGbT8P9aEeaGAZ7d1LgItA" extensionLocation="_d9OTgf_vEeaQtJ2BNnfZRg"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:type="uml:UseCase" xmi:id="__nuwcP9ZEeaGAZ7d1LgItA" name="Save to File" subject="_ClWqEP9YEeaGAZ7d1LgItA">
+      <include xmi:type="uml:Include" xmi:id="_mmBUkP9bEeaGAZ7d1LgItA" addition="_BqEboP9aEeaGAZ7d1LgItA"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:type="uml:UseCase" xmi:id="_BqEboP9aEeaGAZ7d1LgItA" name="Change File storage" subject="_ClWqEP9YEeaGAZ7d1LgItA"/>
+    <ownedUseCase xmi:type="uml:UseCase" xmi:id="_YGbT8P9aEeaGAZ7d1LgItA" name="List Tasks" subject="_ClWqEP9YEeaGAZ7d1LgItA">
+      <extensionPoint xmi:type="uml:ExtensionPoint" xmi:id="_w_zBQP9aEeaGAZ7d1LgItA" name="ExtensionPoint1"/>
+      <extensionPoint xmi:type="uml:ExtensionPoint" xmi:id="_xVTXMf9aEeaGAZ7d1LgItA" name="ExtensionPoint2"/>
+      <extensionPoint xmi:type="uml:ExtensionPoint" xmi:id="_dZpFUP_vEeaQtJ2BNnfZRg" name="ExtensionPoint3"/>
+      <extensionPoint xmi:type="uml:ExtensionPoint" xmi:id="_d9OTgf_vEeaQtJ2BNnfZRg" name="ExtensionPoint4"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:type="uml:UseCase" xmi:id="_ZB9TYP_vEeaQtJ2BNnfZRg" name="List all Tasks" subject="_ClWqEP9YEeaGAZ7d1LgItA">
+      <extend xmi:type="uml:Extend" xmi:id="_dZn3MP_vEeaQtJ2BNnfZRg" extendedCase="_YGbT8P9aEeaGAZ7d1LgItA" extensionLocation="_dZpFUP_vEeaQtJ2BNnfZRg"/>
+    </ownedUseCase>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Actor" xmi:id="_SeOAMP9YEeaGAZ7d1LgItA" name="User"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_mAuhEP9ZEeaGAZ7d1LgItA" memberEnd="_mA7VYP9ZEeaGAZ7d1LgItA _mA7VYf9ZEeaGAZ7d1LgItA">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_mAvvMP9ZEeaGAZ7d1LgItA" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_mAvvMf9ZEeaGAZ7d1LgItA" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_mA7VYP9ZEeaGAZ7d1LgItA" name="add event" type="_ClWqEP9YEeaGAZ7d1LgItA" association="_mAuhEP9ZEeaGAZ7d1LgItA"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_mA7VYf9ZEeaGAZ7d1LgItA" name="user" type="_SeOAMP9YEeaGAZ7d1LgItA" association="_mAuhEP9ZEeaGAZ7d1LgItA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_mVrdYP9ZEeaGAZ7d1LgItA" memberEnd="_mVsrgf9ZEeaGAZ7d1LgItA _mVsrgv9ZEeaGAZ7d1LgItA">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_mVsEcP9ZEeaGAZ7d1LgItA" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_mVsrgP9ZEeaGAZ7d1LgItA" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_mVsrgf9ZEeaGAZ7d1LgItA" name="add deadline" type="_dXNtkP9ZEeaGAZ7d1LgItA" association="_mVrdYP9ZEeaGAZ7d1LgItA"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_mVsrgv9ZEeaGAZ7d1LgItA" name="user" type="_SeOAMP9YEeaGAZ7d1LgItA" association="_mVrdYP9ZEeaGAZ7d1LgItA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_mqKfoP9ZEeaGAZ7d1LgItA" memberEnd="_mqKfo_9ZEeaGAZ7d1LgItA _mqLGsP9ZEeaGAZ7d1LgItA">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_mqKfof9ZEeaGAZ7d1LgItA" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_mqKfov9ZEeaGAZ7d1LgItA" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_mqKfo_9ZEeaGAZ7d1LgItA" name="add task" type="_asm98P9YEeaGAZ7d1LgItA" association="_mqKfoP9ZEeaGAZ7d1LgItA"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_mqLGsP9ZEeaGAZ7d1LgItA" name="user" type="_SeOAMP9YEeaGAZ7d1LgItA" association="_mqKfoP9ZEeaGAZ7d1LgItA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_rf50oP9bEeaGAZ7d1LgItA" memberEnd="_rf6bsv9bEeaGAZ7d1LgItA _rf6bs_9bEeaGAZ7d1LgItA">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_rf6bsP9bEeaGAZ7d1LgItA" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_rf6bsf9bEeaGAZ7d1LgItA" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_rf6bsv9bEeaGAZ7d1LgItA" name="edit task" type="_szdZIP9ZEeaGAZ7d1LgItA" association="_rf50oP9bEeaGAZ7d1LgItA"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_rf6bs_9bEeaGAZ7d1LgItA" name="user" type="_SeOAMP9YEeaGAZ7d1LgItA" association="_rf50oP9bEeaGAZ7d1LgItA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_r4SfcP9bEeaGAZ7d1LgItA" memberEnd="_r4Sfc_9bEeaGAZ7d1LgItA _r4TGgP9bEeaGAZ7d1LgItA">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_r4Sfcf9bEeaGAZ7d1LgItA" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_r4Sfcv9bEeaGAZ7d1LgItA" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_r4Sfc_9bEeaGAZ7d1LgItA" name="mark task as completed" type="_uF87wP9ZEeaGAZ7d1LgItA" association="_r4SfcP9bEeaGAZ7d1LgItA"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_r4TGgP9bEeaGAZ7d1LgItA" name="user" type="_SeOAMP9YEeaGAZ7d1LgItA" association="_r4SfcP9bEeaGAZ7d1LgItA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_sOex4P9bEeaGAZ7d1LgItA" memberEnd="_sOfY8P9bEeaGAZ7d1LgItA _sOfY8f9bEeaGAZ7d1LgItA">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_sOex4f9bEeaGAZ7d1LgItA" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_sOex4v9bEeaGAZ7d1LgItA" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_sOfY8P9bEeaGAZ7d1LgItA" name="delete task" type="_ClWqEP9YEeaGAZ7d1LgItA" association="_sOex4P9bEeaGAZ7d1LgItA"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_sOfY8f9bEeaGAZ7d1LgItA" name="user" type="_SeOAMP9YEeaGAZ7d1LgItA" association="_sOex4P9bEeaGAZ7d1LgItA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_sr_0UP9bEeaGAZ7d1LgItA" memberEnd="_sr_0U_9bEeaGAZ7d1LgItA _ssAbYP9bEeaGAZ7d1LgItA">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_sr_0Uf9bEeaGAZ7d1LgItA" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_sr_0Uv9bEeaGAZ7d1LgItA" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_sr_0U_9bEeaGAZ7d1LgItA" name="save to file" type="__nuwcP9ZEeaGAZ7d1LgItA" association="_sr_0UP9bEeaGAZ7d1LgItA"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_ssAbYP9bEeaGAZ7d1LgItA" name="user" type="_SeOAMP9YEeaGAZ7d1LgItA" association="_sr_0UP9bEeaGAZ7d1LgItA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_tDdSEP9bEeaGAZ7d1LgItA" memberEnd="_tDd5If9bEeaGAZ7d1LgItA _tDd5Iv9bEeaGAZ7d1LgItA">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_tDdSEf9bEeaGAZ7d1LgItA" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_tDd5IP9bEeaGAZ7d1LgItA" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_tDd5If9bEeaGAZ7d1LgItA" name="find task" type="_ClWqEP9YEeaGAZ7d1LgItA" association="_tDdSEP9bEeaGAZ7d1LgItA"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_tDd5Iv9bEeaGAZ7d1LgItA" name="user" type="_SeOAMP9YEeaGAZ7d1LgItA" association="_tDdSEP9bEeaGAZ7d1LgItA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_taAJ0P9bEeaGAZ7d1LgItA" memberEnd="_taAw4f9bEeaGAZ7d1LgItA _taAw4v9bEeaGAZ7d1LgItA">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_taAJ0f9bEeaGAZ7d1LgItA" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_taAw4P9bEeaGAZ7d1LgItA" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_taAw4f9bEeaGAZ7d1LgItA" name="redo action" type="_zdIb0P9ZEeaGAZ7d1LgItA" association="_taAJ0P9bEeaGAZ7d1LgItA"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_taAw4v9bEeaGAZ7d1LgItA" name="user" type="_SeOAMP9YEeaGAZ7d1LgItA" association="_taAJ0P9bEeaGAZ7d1LgItA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_tvvwUP9bEeaGAZ7d1LgItA" memberEnd="_tvwXYv9bEeaGAZ7d1LgItA _tvwXY_9bEeaGAZ7d1LgItA">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_tvwXYP9bEeaGAZ7d1LgItA" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_tvwXYf9bEeaGAZ7d1LgItA" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_tvwXYv9bEeaGAZ7d1LgItA" name="undo action" type="_ynsooP9ZEeaGAZ7d1LgItA" association="_tvvwUP9bEeaGAZ7d1LgItA"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_tvwXY_9bEeaGAZ7d1LgItA" name="user" type="_SeOAMP9YEeaGAZ7d1LgItA" association="_tvvwUP9bEeaGAZ7d1LgItA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_a5Mh0P_vEeaQtJ2BNnfZRg" memberEnd="_a5PlIP_vEeaQtJ2BNnfZRg _a5QMMP_vEeaQtJ2BNnfZRg">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_a5NI4P_vEeaQtJ2BNnfZRg" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_a5Nv8P_vEeaQtJ2BNnfZRg" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_a5PlIP_vEeaQtJ2BNnfZRg" name="list all tasks" type="_ZB9TYP_vEeaQtJ2BNnfZRg" association="_a5Mh0P_vEeaQtJ2BNnfZRg"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_a5QMMP_vEeaQtJ2BNnfZRg" name="user" type="_SeOAMP9YEeaGAZ7d1LgItA" association="_a5Mh0P_vEeaQtJ2BNnfZRg"/>
+  </packagedElement>
+</uml:Model>
