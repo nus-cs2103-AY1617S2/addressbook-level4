@@ -414,7 +414,7 @@ public class LogicManagerTest {
      */
     class TestDataHelper {
 
-        Task adam() throws Exception {
+        private Task adam() throws Exception {
             Name name = new Name("Adam Brown");
             Priority privatePriority = new Priority("1");
             Email email = new Email("adam@gmail.com");
@@ -432,7 +432,7 @@ public class LogicManagerTest {
          *
          * @param seed used to generate the task data field values
          */
-        Task generateTask(int seed) throws Exception {
+        private Task generateTask(int seed) throws Exception {
             return new Task(
                     new Name("Person " + seed),
                     new Priority("1"),
@@ -443,7 +443,7 @@ public class LogicManagerTest {
         }
 
         /** Generates the correct add command based on the task given */
-        String generateAddCommand(Task p) {
+        private String generateAddCommand(Task p) {
             StringBuffer cmd = new StringBuffer();
 
             cmd.append("add ");
@@ -464,7 +464,7 @@ public class LogicManagerTest {
         /**
          * Generates an EzDo with auto-generated tasks.
          */
-        EzDo generateEzDo(int numGenerated) throws Exception {
+        private EzDo generateEzDo(int numGenerated) throws Exception {
             EzDo ezDo = new EzDo();
             addToEzDo(ezDo, numGenerated);
             return ezDo;
@@ -473,7 +473,7 @@ public class LogicManagerTest {
         /**
          * Generates an EzDo based on the list of Tasks given.
          */
-        EzDo generateEzDo(List<Task> tasks) throws Exception {
+        private EzDo generateEzDo(List<Task> tasks) throws Exception {
             EzDo ezDo = new EzDo();
             addToEzDo(ezDo, tasks);
             return ezDo;
@@ -483,14 +483,14 @@ public class LogicManagerTest {
          * Adds auto-generated Task objects to the given EzDo
          * @param ezDo The EzDo to which the Tasks will be added
          */
-        void addToEzDo(EzDo ezDo, int numGenerated) throws Exception {
+        private void addToEzDo(EzDo ezDo, int numGenerated) throws Exception {
             addToEzDo(ezDo, generateTaskList(numGenerated));
         }
 
         /**
          * Adds the given list of Tasks to the given EzDo
          */
-        void addToEzDo(EzDo ezDo, List<Task> tasksToAdd) throws Exception {
+        private void addToEzDo(EzDo ezDo, List<Task> tasksToAdd) throws Exception {
             for (Task p: tasksToAdd) {
                 ezDo.addTask(p);
             }
@@ -500,14 +500,14 @@ public class LogicManagerTest {
          * Adds auto-generated Task objects to the given model
          * @param model The model to which the Tasks will be added
          */
-        void addToModel(Model model, int numGenerated) throws Exception {
+        private void addToModel(Model model, int numGenerated) throws Exception {
             addToModel(model, generateTaskList(numGenerated));
         }
 
         /**
          * Adds the given list of Tasks to the given model
          */
-        void addToModel(Model model, List<Task> tasksToAdd) throws Exception {
+        private void addToModel(Model model, List<Task> tasksToAdd) throws Exception {
             for (Task p: tasksToAdd) {
                 model.addTask(p);
             }
@@ -516,7 +516,7 @@ public class LogicManagerTest {
         /**
          * Generates a list of Tasks based on the flags.
          */
-        List<Task> generateTaskList(int numGenerated) throws Exception {
+        private List<Task> generateTaskList(int numGenerated) throws Exception {
             List<Task> tasks = new ArrayList<>();
             for (int i = 1; i <= numGenerated; i++) {
                 tasks.add(generateTask(i));
@@ -524,14 +524,14 @@ public class LogicManagerTest {
             return tasks;
         }
 
-        List<Task> generateTaskList(Task... tasks) {
+        private List<Task> generateTaskList(Task... tasks) {
             return Arrays.asList(tasks);
         }
 
         /**
          * Generates a Task object with given name. Other fields will have some dummy values.
          */
-        Task generateTaskWithName(String name) throws Exception {
+        private Task generateTaskWithName(String name) throws Exception {
             return new Task(
                     new Name(name),
                     new Priority("1"),

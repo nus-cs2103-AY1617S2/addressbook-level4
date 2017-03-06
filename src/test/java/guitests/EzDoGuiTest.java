@@ -38,7 +38,7 @@ public abstract class EzDoGuiTest {
     @Rule
     public TestName name = new TestName();
 
-    TestApp testApp;
+    private TestApp testApp;
 
     protected TypicalTestTasks td = new TypicalTestTasks();
 
