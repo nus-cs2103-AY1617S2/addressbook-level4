@@ -1,14 +1,14 @@
-# AddressBook Level 4 - Developer Guide
+# Dueue - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
-1. [Setting Up](#setting-up)
-2. [Design](#design)
-3. [Implementation](#implementation)
-4. [Testing](#testing)
-5. [Dev Ops](#dev-ops)
+1. [Setting Up](#1-setting-up)
+2. [Design](#2-design)
+3. [Implementation](#3-implementation)
+4. [Testing](#4-testing)
+5. [Dev Ops](#5-dev-ops)
 
 * [Appendix A: User Stories](#appendix-a--user-stories)
 * [Appendix B: Use Cases](#appendix-b--use-cases)
@@ -346,27 +346,449 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | user | add a task by specifying a task name together with its other fields (description, due date,...)  | record tasks that need to be done some day
+`* * *` | user | add a task by specifying a task name only | update its description some other day
+`* * *` | user | update its list after adding a task | group tasks that belong to the same category
+`* * *` | user | mark a task as finished | know it's done
+`* * *` | user | view all tasks under a specific list | view my tasks by categories
+`* * *` | user | create a customised list other than the default lists | personalize my categories
+`* * *` | user | delete task(s) | remove task(s) that is/are no longer useful or created by mistake
+`* * *` | user | view the help message for a specific feature | know how to use a command
+`* * *` | first-time user | view the entire help messages | get to know various commands
+`* *` | user | view next n days tasks | know what to do in n days' time
+`* *` | user | update the name/time/due date/description/priority level/... of task | change its content
+`* *` | user | add a task which repeats | save the effort of creating it every week/day
+`* *` | user | view the list of tasks by due date| view the tasks due on that day
+`* *` | user | specify priority level for a task when adding the task| know which task is more urgent
+`* *` | user | undo my latest command| undo when I regret my latest action
+`* *` | user | delete one most recent occurrence of a repeating task | choose not to see the task for one time
+`*` | user | add in the map of the venue | know how to get to a venue
+`*` | user | add the venue of the task | add a venue to the task and link it to the venue on google map
+`*` | user | redo my undone command| redo when I regret my undo command
+`*` | user | view the finished tasks under each list | see what I have already completed
+`*` | user | delete the list and put all the tasks inside into Personal or delete all the tasks | delete the list and delete tasks by lists
+`*` | user | see different colours for different priority levels | know which one is more urgent
+`*` | user | specify priority level for a task after adding the task | know which task is more urgent
+`*` | user | mark a task to be my favourite | view it under list favorite 
+`*` | user | update the name of the list | modify it after creating
+`*` | user | view all the starred tasks using a "favourite" command | view all my favourite tasks
+`*` | user | see the autocomplete messages when I type | know what I can type
+`*` | advanced user | change the appearance of the user interface | personalize the view
+`*` | user | view all the past due tasks | get to know what task is left undone
+`*` | user | specify its list when adding a task | group tasks that belong to the same category
+`*` | user | list all list names | get to know current lists
+`*` | user | view finished tasks under current/another list | view my completed tasks
+`*` | user | view/list all finished and unfinised tasks | manage all tasks
 
 {More to be added}
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Dueue` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: Add task by name only
+
+**MSS**
+1. User requests to add task by specifying the name only
+2. Dueue shows the added task by name
+Use case ends.
+
+**Extensions**
+
+1a. The given add command input is invalid
+
+> 1a1. Dueue shows an error and a help message on how to add a task<br>
+  Use case resumes at step 1
+
+#### Use case: Add task by name and description
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User requests to add task by specifying the name and description
+2. Dueue shows the added task by name and description
+Use case ends.
+
+**Extensions**
+
+1a. The given add command input is invalid
+
+> 1a1. Dueue shows an error and a help message on how to add a task<br>
+  Use case resumes at step 1
+
+#### Use case: Add task with due date and time
+
+**MSS**
+
+1. User requests to add task by specifying the name with due date and time
+2. Dueue shows the added task
+Use case ends.
+
+**Extensions**
+
+1a. The given add command input is invalid
+
+> 1a1. Dueue shows an error and a help message on how to add a task<br>
+  Use case resumes at step 1
+
+#### Use case: Task deletion
+
+**MSS**
+
+1. User requests to delete tasks
+2. Dueue displays all finished and unfinished tasks under current list
+3. User requests to delete tasks by task indices
+4. Dueue shows the remaining tasks in the list
+Use case ends.
+
+**Extensions**
+
+3a. User input task indices contain undefined items.
+>3a1. Dueue shows an error message<br>
+ Use case resumes at step 2.
+
+
+#### Use case: Create repeating task
+
+**MSS**
+
+1. User requests to add task by specifying the name and repeating frequency
+2. Dueue shows the added task
+Use case ends.
+
+**Extensions**
+
+1a. The given add command input is invalid
+
+> 1a1. Dueue shows an error and a help message on how to add a task<br>
+  Use case resumes at step 1
+
+#### Use case: Add a venue to a task
+
+**MSS**
+
+1. User requests to add venue to a specific task
+2. Dueue displays the updated task description with the venue.
+Use case ends.
+
+**Extensions**
+
+1a. The given add command input is invalid
+
+> 1a1. Dueue shows an error and a help message on how to add a task<br>
+  Use case resumes at step 1
+
+
+#### Use case: Add the map to the venue of a task
+
+**MSS**
+
+1. User requests to add a map to the venue of a task
+2. Dueue displays the task updated task description with the map.
+Use case ends.
+
+**Extensions**
+
+1a. The given add command input is invalid
+
+> 1a1. Dueue shows an error and a help message on how to add a task<br>
+  Use case resumes at step 1
+
+#### Use case: Add a task with the list it belongs to
+
+**MSS**
+
+1. User requests to add a task with a list name provided
+2. Dueue displays the added task under the list
+Use case ends.
+
+**Extensions**
+
+1a. Given list does not exist.
+> 3a1. Dueue shows an error message and ask whether the user wants to create a new list
+> 3a2. User indicate yes<br>
+  Use case resume at step 1
+
+1b. The list name does not exist
+
+> 1b1. Dueue shows an error message and ask whether the user wants to create a new list
+> 1b2. User indicate No
+  Use case resumes at step 1
+
+
+#### Use case: View tasks due today
+
+**MSS**
+
+1. User requests to list tasks due today
+2. Dueue shows a list of tasks<br>
+Use case ends.
+
+**Extensions**
+
+2a. There is not task due today
+
+> 2a1. Dueue shows message "You are done for today!"<br>
+  Use case ends.
+
+#### Use case: View tasks by list
+
+**MSS**
+
+1. User requests to display all list names
+2. Dueue shows a list of list names with list indices
+3. User requests to display all tasks of one list specified by list index
+4. Dueue display the tasks of that list <br>
+Use case ends.
+
+**Extensions**
+
+3a. The given list index is invalid
+
+> 3a1. Dueue shows an error message <br>
+  Use case resumes at step 2
+
+4a. The list is empty
+
+> 4a1. Dueue shows message "This list is currently empty."<br>
+  Use case ends.
+
+#### Use case: Create a customized list
+
+**MSS**
+
+1. User requests to create a new list
+2. Dueue asks for the list name
+3. User type in the name of the new list
+4. Dueue displays the new customized list with new name <br>
+Use case ends.
+
+**Extensions**
+
+3a. The name is already used for some other list
+
+> 3a1. Dueue shows the message "This name is already used."<br>
+  Use case resumes at step 2
+
+#### Use case: Update list name
+
+**MSS**
+
+1. User requests to display all list names
+2. Dueue shows a list of list name
+3. User requests to change name of a specific list
+4. Dueue asks for a new name
+5. User types in the new name
+6. Dueue displays the list with new name <br>
+
+**Extensions**
+
+3a. The given index is invalid
+
+> 3a1. Dueue shows an error message <br>
+  Use case resumes at step 2
+
+5a. The name is already used for some other list
+
+> 5a1. Dueue shows the message "This name is already used."<br>
+  Use case resumes at step 4
+
+#### Use case: View help message
+
+1. User requests to view the help message
+2. Dueue displays the help message <br>
+Use case ends.
+
+#### Use case: View finished tasks by list
+
+1. User requests to display all lists name with finished tasks
+2. Dueue displays a list of lists
+3. User requests to view the finished tasks under a list specified with list index
+4. Dueue displays the finished tasks under this list <br>
+
+**Extensions**
+
+2a. The list is empty
+
+> 2a1. Dueue shows the message "There is no finished task."<br>
+  Use case ends.
+
+3a. The given list index is invalid
+
+> 3a1. Dueue shows an error message <br>
+  Use case resumes at step 2
+
+#### Use case: View by due date
+
+**MSS**
+
+1. User requests to view all tasks due by a specified date
+2. Dueue shows a list of tasks due that date<br>
+Use case ends.
+
+**Extensions**
+
+1a. The given date is invalid
+
+> 1a1. Dueue shows an error message<br>
+  1a2. Dueue shows a list of allowed format for specifying dates<br>
+  Use case resumes at step 1
+
+2a. The list is empty
+
+> 2a1. Dueue shows message "You have no task due on that date."<br>
+  Use case ends.
+
+#### Use case: Delete one most recent occurrence of repeating task
+
+**MSS**
+
+1. User requests to list all repeating tasks
+2. Dueue shows a list of repeating tasks
+3. User requests to delete one most recent occurrence of a task in the list
+4. Dueue deletes the occurrence <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> 2a1. Dueue shows message "You have no repeating tasks."<br>
+  Use case ends.
+
+3a. The given task index is invalid
+
+> 3a1. Dueue shows an error message <br>
+  Use case resumes at step 2
+
+#### Use case: Delete list
+
+**MSS**
+
+1. User requests to display all the list names and indices
+2. Dueue shows a list of list names and indices
+3. User requests to delete a specific list
+4. Dueue deletes the list <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> 2a1. Dueue shows message "There are no lists."<br>
+  Use case ends.
+
+3a. The given index is invalid
+
+> 3a1. Dueue shows an error message <br>
+  Use case resumes at step 2
+
+3b. The specified list still has unfinished tasks
+
+> 3b1. Dueue prompts the user to decide whether to move the unfinished tasks to the Personal list<br>
+  3b2. User requests to move to the Personal list or just delete<br>
+  3b3. Dueue moves all unfinished tasks to Personal list or delete all unfinished tasks and deletes the list<br>
+  Use case ends.
+
+#### Use case: View different colors for different priority levels
+
+**MSS**
+
+1. User requests to display different colors for different priority levels
+2. Dueue displays priority levels with different colors <br>
+Use case ends.
+
+#### Use case: View the same colors for different priority levels
+
+**MSS**
+
+1. User requests not to display different colors for diffrent priority levels.
+2. Dueue displays priority levels with same color <br>
+Use case ends.
+
+#### Use case: Set priority level for a task
+
+**MSS**
+
+1. User requests to change priority of a certain task
+2. Dueue asks for new priority level
+3. User types in the new level
+4. Dueue display this tasks with new level <br>
+Use case ends.
+
+**Extensions**
+
+1a. The given index is invalid
+
+> 1a1. Dueue shows an error message <br>
+  Use case resumes at step 1
+
+3a. The priority level is invalid
+
+> 3a1. Dueue shows an error message <br>
+  Use case resums at step 2
+
+#### Use case: "Star" a task to be favorite
+
+**MSS**
+
+1. User requests to "star" a certain task
+2. Dueue displays the task with star <br>
+Use case ends.
+
+**Extension**
+
+1a. The given index is invalid
+
+> 1a1. Dueue shows an error message <br>
+  Use case resumes at step 1
+
+1b. The task is already "starred"
+
+> 1b1. Dueue shows an error message "This task is already starred." <br>
+Use case ends.
+
+#### Use case: View all starred tasks
+
+**MSS**
+
+1. User requests to view all starred tasks
+2. Dueue displays all tasks being starred <br>
+Use case ends
+
+**Extension**
+
+1a. There is no starred task.
+
+> 1a1. Dueue displays an error message "There is no task being starred." <br>
+  Use case ends.
+#### Use case: View all tasks due in the next n days
+
+**MSS**
+
+1. User requests to view all tasks due in the next n days
+2. Dueue shows a list of tasks in chronological order<br>
+Use case ends.
+
+**Extensions**
+
+1a. The given n is invalid
+
+> 1a1. Dueue shows an error message <br>
+Use case resumes at step 1
+
+2a. The list is empty
+
+> 2a1. Dueue shows message "You have no tasks during that period."<br>
+  Use case ends
+
+#### Use case: See autocomplete messages when typing
+
+**MSS**
+
+1. User requests to list all tasks
+2. Dueue shows a list of tasks
+3. User types "finish" and types part of the name of a very long task name
+4. Dueue displays all the possible tasks <br>
 Use case ends.
 
 **Extensions**
@@ -375,10 +797,138 @@ Use case ends.
 
 > Use case ends
 
-3a. The given index is invalid
+3a. The given name is not part of any task name
 
-> 3a1. AddressBook shows an error message <br>
+> 3a1. Dueue shows message "There is no matching task name" <br>
+  3a2. User edits the name<br>
+  Use case resumes at step 3
+
+#### Use case: Change user interface
+
+**MSS**
+
+1. Advanced user requests to go into settings
+2. Dueue shows a menu of settings
+3. Advanced user requests to go into appearance
+4. Dueue shows a list of commands you can use in appearance
+5. Advanced user requests to change background color of UI to blue
+6. Dueue changes the background color to blue <br>
+Use case ends.
+
+**Extensions**
+
+6a. The RGB code of blue entered is invalid
+
+> 6a1. Dueue shows message "RGB code entered is invalid"<br>
+  Use case resumes at step 5
+
+#### Use case: Change the list of a task
+
+**MSS**
+
+1. User requests to change the list of a task
+2. Dueue ask the user for a list
+3. User type in the name of the list
+4. Dueue shows the tasks in the list
+  Use case ends.
+
+**Extension**
+
+1a. The given task is invalid
+
+> 1a1. Dueue shows an error message and ask for a task<br>
   Use case resumes at step 2
+
+3a. The user wants to create a new list for the task
+
+> 3a1. Dueue shows an error message and ask whether the user wants to create a new list<br>
+> 3a2. User indicate yes<br>
+  Use case resume at step 4
+
+3b. The list name does not exist
+
+> 3b1. Dueue shows an error message and ask whether the user wants to create a new list<br>
+> 3b2. User indicate No<br>
+> 3b3. Dueue ask the user for a new list name<br>
+  Use case resume at step 3
+
+#### Use case: Mark task as finished
+
+**MSS**
+
+1. User requests to mark a task as finished
+2. Dueue show the current unfinished task
+Use case ends.
+
+**Extension**
+
+1a. Task does not exist
+> 1a1. Dueue shows an error message<br>
+  Use case resume at step 1
+
+1b. The task had been marked as finished
+> 1b1. Dueue inform the User that the task had been marked<br>
+  Use case ends.
+
+#### Use case: Change details of a task
+
+**MSS**
+
+1. User requests to change details of the task
+2. Dueue ask for the details to be change
+3. User type in the details to be changed
+4. Dueue shows the changes
+Use case ends.
+
+**Extension**
+
+1a. Task does not exist
+> 1a1. Dueue shows an error message<br>
+Use case resume at step 1
+
+#### Use case: View help message when entering the system.
+
+**MSS**
+
+1. User starts the system
+2. Dueue display the help message
+Use case ends
+
+#### Use case: Add a task with priority level
+
+**MSS**
+
+1. User request for to add a task with priority level
+2. Dueue shows the created task
+Use case ends
+
+**Extension**
+
+1a. Priority level does not exist
+> 1a1. Dueue shows an error message<br>
+Use case resume at step 1
+
+#### Use case: Undo previous command
+
+**MSS**
+
+1. User request to undo previous command
+2. Dueue display a successful undo message
+Use case ends
+
+#### Use case: View all past due task
+
+**MSS**
+
+1. User request to view all past due task
+2. Dueue display all the past due task.
+Use case ends
+
+**Extension**
+
+1a. There is no past due task
+> 1a1. Dueue shows an error message<br>
+Use case ends
 
 {More to be added}
 
@@ -388,6 +938,7 @@ Use case ends.
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should be 
 
 {More to be added}
 
@@ -401,19 +952,134 @@ Use case ends.
 
 > A contact detail that is not meant to be shared with others
 
+##### switch
+
+> A functionality of certain `list` commands<br>
+  All the tasks added after switching will be automatically added to the current list (favourite) unless otherwise stated
+
+##### unswitch
+
+> A functionality of certain `list` commands<br>
+  After switching back to main, the tasks added will not be automatically added to this list (favourite)
+
 ## Appendix E : Product Survey
 
-**Product Name**
+**Wunderlist**
 
-Author: ...
+Author: Yan Xiaoxuan
 
 Pros:
 
-* ...
-* ...
+* Can star a task as most important and task will automatically float to top
+* Can customize background for the UI
+* Can organize multiple tasks in lists, lists under folders
+* Finished tasks will be automatically folded below unfinished ones
+* Can restore deleted lists
+* Can export task lists to formatted printable document
+* Overdue tasks will be highlighted as red (relevant lists and folders are also highlighted)
+* Subtask and notes functions are optional under each task 
 
 Cons:
 
-* ...
-* ...
+* Command msg format is a bit rigid (e.g. cannot interpret “due on Feb 14”)
+* No priority feature attached to tasks (only have the “star” function)
+* Cannot add repeated task (e.g. does not understand “everyday” command)
+* Has no “undo” function
+* Sorting by “alphabetical” or “creation date” order has low usability
 
+**Remember the Milk**
+
+Author: Yan Xiaoxuan
+
+Pros:
+
+* Can add repeated tasks (and deletion of repeated tasks is well-facilitated)
+* Repeated task will be indicated with a special icon on the side (i.e. a everyday task will only be displayed for one time with the “repeat icon” in “this week’s list”, instead of repeated for several times)
+* Can undo previous action
+* Task addition function is easy to understand for new users (with a toolbar suggesting different functions)
+* Special characters like ‘~’ and ‘^’ can replace words like “from” and “due on” for fast typing when adding tasks
+* Can customize a lot of things, such as reminder frequency and “daily digest”
+* Can archive a list instead of moving to trash
+* Can add “location” (which is supported by Google Maps) and “tag”s to individual tasks by user defined location and tag lists
+* Has “bulk update” function to process selected tasks together
+* Can postpone task due date
+* Tasks in the trash folder will be removed automatically after 30 days
+* Can view “keyboard shortcuts” conveniently (users can continually learn to use them)
+
+Cons:
+
+* To mark a task as finished takes two steps to complete
+* Cannot customize background
+* Toolbars and sidebar is a bit monotone, with few visual highlights on key functions
+
+
+**Todoist**
+
+Author: Wang Zexin
+
+Pros:
+
+* Can create projects using “#”
+* Can switch to project and add task of this project
+* Can specify date using many different forms
+* Can create repeating tasks (every Sunday)
+* Can finish one occurrence of a repeating task early
+
+Cons:
+
+* Cannot add comment/description for task
+* Cannot differentiate between deleting and finishing tasks
+* Must click in order to navigate to projects
+* Cannot customize background
+
+**Trello**
+
+Author: Mou Ziyang
+
+Pros:
+
+* Has clear 2 levels of hierarchy (Board, List)
+* Has the option to archive and delete for finished tasks
+* Very flexible layout, every object is draggable
+* Can incorporate with many other softwares
+* Can share with teammates
+* Can attach relative files and images to a task
+
+Cons:
+
+* Hard to use without watching tutorial
+* Cannot create repeated tasks
+* Cannot customized background
+* Cannot add priority for tasks (Have to sort tasks manually)
+
+**Mac Calendar**
+
+Author: Mou Ziyang
+
+Pros:
+
+* Can customize notification
+* Can add repeated tasks
+* Can delete one occurrence of the task
+* Can mark festival and holiday out
+
+Cons:
+
+* "Bar graph schedule view" is not very useful
+* Can only sort task in chronological order
+* Ambiguous hierarchy
+* Do not have importance level
+
+**S Planner**
+
+Author: Shermine Jong
+
+Pros:
+* Can set multiple reminders to an event/task
+* Can set different task as different colour to group the tasks
+* Can synchronize from email's calendar
+* Can Specify the venue of the task and is linked to google map
+* Could specify whether to repeat a certain task, the frequency of the repeat, the end date of the repeat or the number of repeat
+
+Cons:
+* There is a default reminder for a task which could be quite irritating
