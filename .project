@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>addressbook-level4</name>
+	<name>main</name>
 	<comment>Project addressbook-level4 created by Buildship.</comment>
 	<projects>
 	</projects>
@@ -15,20 +15,14 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
-		<buildCommand>
-			<name>net.sf.eclipsecs.core.CheckstyleBuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
 	</buildSpec>
 	<natures>
-		<nature>org.eclipse.buildship.core.gradleprojectnature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
-		<nature>net.sf.eclipsecs.core.CheckstyleNature</nature>
+		<nature>org.eclipse.buildship.core.gradleprojectnature</nature>
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1476898072165</id>
+			<id>0</id>
 			<name></name>
 			<type>26</type>
 			<matcher>
@@ -37,7 +31,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1476898072188</id>
+			<id>0</id>
 			<name></name>
 			<type>26</type>
 			<matcher>
