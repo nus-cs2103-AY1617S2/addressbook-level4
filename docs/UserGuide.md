@@ -99,6 +99,7 @@ Examples:
 Adds a floating task to the task list. <br>
 
 Format: `add NAME [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` <br>
+> * Name, description and tag are case insensitive.
 > * Tasks can have any number of tags.
 > * If no priority is specified, the task will be of lowest priority.
 
@@ -114,6 +115,7 @@ Examples:
 Adds a pending task with only start date & time to the task list. <br>
 
 Format: `add NAME on START_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` <br>
+> * Name, description and tag are case insensitive.
 > * Tasks can have any number of tags.
 > * If no priority is specified, the task will be of lowest priority.
 > * Date format is MM-DD-YYYY HHMM (24 hour Format) e.g. 10-22-2017 1500.
@@ -133,6 +135,7 @@ Examples:
 Adds a pending task with only end date & time to the task list. <br>
 
 Format: `add NAME by END_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` <br>
+> * Name, description and tag are case insensitive.
 > * Tasks can have any number of tags.
 > * If no priority is specified, the task will be of lowest priority.
 > * Date format is MM-DD-YYYY HHMM (24 hour Format) e.g. 10-22-2017 1500.
@@ -154,6 +157,7 @@ Examples:
 Adds a pending task with both start date & time and end date & time to the task list. <br>
 
 Format: `add NAME from START_DATETIME to END_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` <br>
+> * Name, description and tag are case insensitive.
 > * Tasks can have any number of tags.
 > * If no priority is specified, the task will be of lowest priority.
 > * Date format is MM-DD-YYYY HHMM (24 hour Format) e.g. 10-22-2017 1500.
@@ -174,6 +178,7 @@ Examples:
 Adds a recurring task that spans over a period of time. <br>
 
 Format: `add NAME [at|on|by|from START_DATETIME to END_DATETIME] every [DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` <br>
+> * Name, description and tag are case insensitive.
 > * Tasks can have any number of tags.
 > * If no priority is specified, the task will be of lowest priority.
 > * Date format is MM-DD-YYYY HHMM (24 hour Format) e.g. 10-22-2017 1500.
@@ -259,6 +264,7 @@ Examples:
 Edit a task in iManager by index or name<br>
 
 Format: `Edit INDEX|NAME [at|on|by|from START_DATETIME to END_DATETIME] [every DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION][t/TAG...]`<br>
+> * Name, description and tag are case insensitive.
 > * INDEX refers to the index number shown in the most recent listing of tasks. 
 > * INDEX must be positive integer e.g 1, 2, 3.
 > * Date format is MM-DD-YYYY HHMM (24 hour Format) e.g. 10-22-2017 1500.
@@ -291,11 +297,19 @@ Examples:
 
 Delete a task from iManager<br>
 
-Format: `delete`<br>
+Format: `del NAME|INDEX|TAG`<br>
+> * Name and tag are case insensitive.
+> * INDEX refers to the index number shown in the most recent listing of tasks.
+> * INDEX must be positive integer e.g 1, 2, 3.
+> * Deleted task can be restored with the `undo` command.
 
 Examples: 
-* 
-* 
+* `delete exam`
+   Edit all tasks named "exam" in the task list.
+* `delete 1`
+   Delete the first task in the task list.
+* `delete CS2010`
+   Delete all tasks containing tag "CS2010" 
 
 ### Viewing tasks
 
@@ -342,9 +356,11 @@ Format: `view`<br>
 Mark an existing task as completed in iManager. A completed task gets transferred to the done list. 
 
 Format: `done INDEX|NAME`
+> * Name is case insensitive.
 > * INDEX refers to the index number shown in the most recent listing of tasks.
 > * INDEX must be positive integer e.g 1, 2, 3.
-> * Marking an uncompleted task will change its status to completed while marking a completed task will change its status to uncompleted. 
+> * Marking an uncompleted task will change its status to completed while marking a completed task will change its status to    
+    uncompleted. 
 > * Marked tasks in the current session can be reverted with the `undo` command.
 
 Examples: 
@@ -363,8 +379,8 @@ PRIORITY | Find a task whoose priority matches the input. | `find \p1`
 DESCRIPTION | Find a task whoose description matches the input. | `find \dSR1`
 TAG | Find all tasks whoose tag matches the input. | `find \tCS2010`
 MM-DD-YYYY | Find all tasks whoose starts date or end date matches the input. | `find 10-22-2017`
+\mMM-YYYY | Find all tasks whoose starts or ends on a particular month and year that matches the input. | `find \m10-2017`
 \yYYYY | Find all tasks whoose starts or ends on a particular year that matches the input. |  `find \y2017`
-\mMM | Find all tasks whoose starts or ends on a particular month that matches the input. | `find \m10`
 \hHHMM | Find all tasks whoose starts time or end time matches the input. | `find \h1500`
 
 Format: `find [KEYWORDS...]`
@@ -384,10 +400,8 @@ Advanced Examples:
    Find all tasks whoose description matches "SR1" or tag matches "2010" or description matches "SR1". 
 * `find 10-22-2017 \h1500`<br>
    Find all tasks whoose start date or end date matches "10-22-2017" or start time or end time matches "1500".
-* `find exam \p1 \dSR1 \tCS2010 10-22-2017 \y2017 \m10 \h1500`<br>
-   Find all tasks whoose name matches "exam" or priority matches "1" or description matches "SR1" or tag matches "2010" or (start date 
-   or end date) matches "10-22-2017" or (starts or ends on "2017") or (starts or ends on October) or (start time or end time matches 
-   "1500").
+* `find exam \p1 \dSR1 \tCS2010 \m10-2017 \h1500`<br>
+   Find all tasks whoose name matches "exam" or priority matches "1" or description matches "SR1" or tag matches "2010" or  (starts or      ends on October 2017") or (start time or end time matches "1500").
    
 ### Clearing of completed tasks
 Clears all completed tasks. <br>
@@ -458,8 +472,8 @@ Format : `exit`
  | `add NAME by END_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]`| Adds a pending task with only end date&time, priority and tags.
  | `add NAME from END_DATETIME to START_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]`| Adds a pending task with start date&time, end date&time, priority and tags.
  | `add NAME [at|on|by|from START_DATETIME to END_DATETIME] every [DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Adds a recurring task that spans over a period of time with priority and tags.
-[edit](#editing-a-task) | `Edit INDEX|NAME [at|on|by|from START_DATETIME to END_DATETIME] [every DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Edits a task with the new parameters.
-[delete](#deleting-a-task) | `Delete INDEX|NAME` | Delete a task.
+[edit](#editing-a-task) | `edit INDEX|NAME [at|on|by|from START_DATETIME to END_DATETIME] [every DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Edits a task with the new parameters.
+[del](#deleting-a-task) | `del INDEX|NAME|TAG` | Delete a task.
 [view](#viewing-tasks) | `view` | Show all tasks.
  | `view INDEX` | Show a specified task by index.
  | `view t` | Show all Today's task.
@@ -469,8 +483,8 @@ Format : `exit`
  | `view o` | Show all overdue task.
 [done](#marking-a-task-as-completed) | `done INDEX|NAME`| Mark a task as completed.
 [find](#finding-for-tasks) | `find [KEYWORDS..]`| Search for tasks with details associating with the keywords.
+ | `find \mMM-YYYY`| Search for tasks belonging to a particular month and year, both start and end.
  | `find \yYYYY`| Search for tasks belonging to a particular year, both start and end.
- | `find \mMM`| Search for tasks belonging to a particular month, both start and end.
  | `find\hHHMM`| Search for tasks belonging to a particular time, both start and end. 
 [clear](#clearing-of-completed-tasks) | `clear` | Clear all completed tasks.
 [toggle](#toggle-google-calender) | `toggle` | Toggle Google Calender.
