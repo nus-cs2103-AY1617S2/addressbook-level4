@@ -358,7 +358,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | select the storage folder/file | store them on a local file controlled by a cloud syncing service
 `* * *` | user | undo my last [mutating operation](#mutating-operation) | reverse any mistake made
 `* * *` | user | let passed events automatically archive themselves | save time checking them off
-`* * *` | user | view all finished event/deadline/task
+`* * *` | user | view all finished event/deadline/task | keep track of my progress in task completion
 `* *` | user | search for event/deadline/task by attribute | find out details on specific event/deadline/task
 `* *` | user | set up recurring event/deadline/task | save time setting them up every day/month/year
 `* *` | user | sync my events/deadlines/tasks with google calendar/tasks | access them online through other applications and devices (mobile)
