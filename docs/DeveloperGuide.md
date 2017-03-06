@@ -1,6 +1,6 @@
-# AddressBook Level 4 - Developer Guide
+# ToLuist - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team ToLuist`  &nbsp;&nbsp;&nbsp;&nbsp;
 
 ---
 
@@ -347,17 +347,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
-
-{More to be added}
+`* * *` | user | add a new task | remind myself of things I have to do
+`* * *` | user | add a new task with completion date | remind myself of things I have to do and the deadlines to meet
+`* * *` | user | add a new [recurring task](#recurring-task) | prevent the need of keying the same cyclical task every period
+`* * *` | user | see all tasks | have an overview of all the things I need to do and decide what I should do first
+`* * *` | user | update a task | change entries that are errorneous or outdated
+`* * *` | user | mark a task as completed/incompleted | focus on the tasks I have still not cleared
+`* * *` | user | delete a task | remove entries that I no longer need
+`* * *` | user | add a new event | remind myself of things I have to attend
+`* * *` | user | see all events | have an overview of all the things I need to events
+`* * *` | user | update an event | change entries that are errorneous or outdated
+`* * *` | user | delete a task | remove entries that I no longer need
+`* * *` | user | find a task by name | locate details of task without having to go through the entire list
+`* * *` | user | find a task by tag | locate details of task without having to go through the entire list
+`* * *` | user | add tag to task | group my tasks to provide more context
+`* * *` | user | update tag in task | change entries that are errorneous or outdated
+`* * *` | user | remove tag from task | remove entries that I no longer need
+`* * *` | user | undo previous command(s) | recover gracefully from making mistakes
+`* * *` | user | redo previously undone command(s) | recover gracefully from  wrongly resolving a mistake
+`* * *` | user | see my [command history](#command-history) | to identify what I have to recover if I accidentally performed some wrong commands.
+`* * *` | user | change my storage file path | decide where I want to save my files for my own use
+`* * *` | user | exit the program | gracefully shut down the program when I don't need to use it 
+`* *` | experienced user | add an [alias](#alias) for a command | customise my own keyboard shortcuts to improve my efficiency
+`* *` | experienced user | update an alias for a command | change entries that are errorneous or outdated
+`* *` | experienced user | view all alias for commands | review the alias in case I forget what I set for them
+`* *` | experienced user | delete an alias for a command | remove entries that I no longer need
+`* *` | experienced user | remove multiple tasks at once | reduce the number of commands I use to get the job done
+`*` | user | clear all tasks | start afresh with a new task list fast
+`*` | user with many tasks | sort task by [priority level](#priority-level) then by end date | figure out which task should be cleared first
+`*` | user with many tasks | see statistics for my number of tasks undone, doing, completed | figure out how much work I have left
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ToLuist` and the **Actor** is the `user`, unless specified otherwise)
 
 #### Use case: Delete person
 
@@ -385,11 +407,21 @@ Use case ends.
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Commands should be reasonably fluid and flexible (i.e. look like written English) so it is more intuitive for users.
+5. When the command entered is errorneous, the system should guess the user's intentions to the best of its ability, and execute the corrected command after the user give his confirmation. 
+6. The stored data should never, ever be destroyed unless that is what the user wants.
+7. Should have nice UI/UX so user have a pleasant experience using this App.
+8. Each command should finish executing in less than 2 seconds.
+9. Should have automated unit tests.
+10. Should use Continuous Integration.
+11. Should be kept open source.
+12. Should be a free software.
+13. Source code should be well-documented.
+14. Application should be easy to set up (i.e. no installer required, no assistance required other than a user guide).
 
-{More to be added}
 
 ## Appendix D : Glossary
 
@@ -397,9 +429,21 @@ Use case ends.
 
 > Windows, Linux, Unix, OS-X
 
-##### Private contact detail
+##### Recurring task
 
-> A contact detail that is not meant to be shared with others
+> A task that has to be done every fixed length of time.
+
+##### Command history
+
+> A list of commands that the user has entered.
+
+##### Alias
+
+> An alternative name to a default command name.
+
+##### Priority level
+
+> The relative importance or urgency of a task compared to other tasks.
 
 ## Appendix E : Product Survey
 
