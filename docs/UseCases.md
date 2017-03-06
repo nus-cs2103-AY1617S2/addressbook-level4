@@ -209,5 +209,3 @@ This use case extends [List all Tasks](#list-all-tasks). It is inserted at exten
 1a. At first startup, an options message will display available directories for the files to be saved to
 > 1a1. Save to desktop by default in the options<br>
   **Use case ends**
-  
-  
