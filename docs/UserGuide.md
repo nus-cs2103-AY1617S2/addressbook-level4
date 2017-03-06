@@ -1,4 +1,4 @@
-# Yet another Task Scheduler - User Guide
+# Yet Another Task Scheduler - User Guide
 
 By : `Team T16-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
