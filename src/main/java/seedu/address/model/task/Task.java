@@ -11,15 +11,17 @@ public class Task implements ReadOnlyTask {
 
     private final String DEFAULT_DESCRIPTION = "";
 
+    private Index index;
     private Name name;
     private Description description;
     private Deadline deadline;
 
     /**
-     * Only name and deadline are required and must not be null
+     * Name, index, deadline are required and must not be null
      */
-    public Task(Name name, Deadline deadline, Object... params) {
+    public Task(Index index, Name name, Deadline deadline, Object... params) {
         assert !CollectionUtil.isAnyNull(name, deadline);
+        this.index = index;
         this.name = name;
         this.deadline = deadline;
         this.description = new Description(DEFAULT_DESCRIPTION);
@@ -36,13 +38,18 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getDeadline(), source.getDescription());
+        this(source.getIndex(), source.getName(), source.getDeadline(), source.getDescription());
     }
 
     
     /**
      * Getters and setters
      */
+    @Override
+    public Index getIndex() {
+        return index;
+    }
+
     public void setName(Name name) {
         assert name != null;
         this.name = name;
