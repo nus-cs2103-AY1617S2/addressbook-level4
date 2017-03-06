@@ -16,7 +16,7 @@ import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.UniqueTaskList;
 
 /**
- * Edits the details of an existing task in the address book.
+ * Edits the details of an existing task in ezDo.
  */
 public class EditCommand extends Command {
 
