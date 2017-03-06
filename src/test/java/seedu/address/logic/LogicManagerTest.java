@@ -364,7 +364,7 @@ public class LogicManagerTest {
         List<Person> expectedList = helper.generatePersonList(pTarget1, pTarget2);
         helper.addToModel(model, fourPersons);
 
-        assertCommandSuccess("find KEY",
+        assertCommandSuccess("find n/KEY",
                 Command.getMessageForPersonListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
@@ -383,7 +383,7 @@ public class LogicManagerTest {
         List<Person> expectedList = fourPersons;
         helper.addToModel(model, fourPersons);
 
-        assertCommandSuccess("find KEY",
+        assertCommandSuccess("find n/KEY",
                 Command.getMessageForPersonListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
@@ -402,7 +402,7 @@ public class LogicManagerTest {
         List<Person> expectedList = helper.generatePersonList(pTarget1, pTarget2, pTarget3);
         helper.addToModel(model, fourPersons);
 
-        assertCommandSuccess("find key rAnDoM",
+        assertCommandSuccess("find n/key rAnDoM",
                 Command.getMessageForPersonListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
