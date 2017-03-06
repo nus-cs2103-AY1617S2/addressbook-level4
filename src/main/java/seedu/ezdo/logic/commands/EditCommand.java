@@ -7,6 +7,7 @@ import seedu.ezdo.commons.core.Messages;
 import seedu.ezdo.commons.util.CollectionUtil;
 import seedu.ezdo.logic.commands.exceptions.CommandException;
 import seedu.ezdo.model.tag.UniqueTagList;
+import seedu.ezdo.model.todo.DueDate;
 import seedu.ezdo.model.todo.Email;
 import seedu.ezdo.model.todo.Name;
 import seedu.ezdo.model.todo.Priority;
@@ -81,9 +82,10 @@ public class EditCommand extends Command {
         Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
         Email updatedEmail = editTaskDescriptor.getEmail().orElseGet(taskToEdit::getEmail);
         StartDate updatedStartDate = editTaskDescriptor.getStartDate().orElseGet(taskToEdit::getStartDate);
+        DueDate updatedDueDate = editTaskDescriptor.getDueDate().orElseGet(taskToEdit::getDueDate);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedName, updatedPriority, updatedEmail, updatedStartDate, updatedTags);
+        return new Task(updatedName, updatedPriority, updatedEmail, updatedStartDate, updatedDueDate, updatedTags);
     }
 
     /**
@@ -95,6 +97,7 @@ public class EditCommand extends Command {
         private Optional<Priority> priority = Optional.empty();
         private Optional<Email> email = Optional.empty();
         private Optional<StartDate> startDate = Optional.empty();
+        private Optional<DueDate> dueDate = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditTaskDescriptor() {}
@@ -104,6 +107,7 @@ public class EditCommand extends Command {
             this.priority = toCopy.getPriority();
             this.email = toCopy.getEmail();
             this.startDate = toCopy.getStartDate();
+            this.dueDate = toCopy.getDueDate();
             this.tags = toCopy.getTags();
         }
 
@@ -148,6 +152,15 @@ public class EditCommand extends Command {
 
         public Optional<StartDate> getStartDate() {
             return startDate;
+        }
+        
+        public void setDueDate(Optional<DueDate> dueDate) {
+            assert dueDate != null;
+            this.dueDate = dueDate;
+        }
+
+        public Optional<DueDate> getDueDate() {
+            return dueDate;
         }
 
         public void setTags(Optional<UniqueTagList> tags) {
