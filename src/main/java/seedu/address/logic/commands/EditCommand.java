@@ -1,162 +1,162 @@
-package seedu.taskboss.logic.commands;
+package seedu.address.logic.commands;
 
 import java.util.List;
 import java.util.Optional;
 
-import seedu.taskboss.commons.core.Messages;
-import seedu.taskboss.commons.util.CollectionUtil;
-import seedu.taskboss.logic.commands.exceptions.CommandException;
-import seedu.taskboss.model.task.Info;
-import seedu.taskboss.model.task.Date;
-import seedu.taskboss.model.task.Time;
-import seedu.taskboss.model.task.Task;
-import seedu.taskboss.model.task.Category;
-import seedu.taskboss.model.task.ReadOnlyTask;
-import seedu.taskboss.model.task.UniqueTaskList;
-import seedu.taskboss.model.task.PriorityLevel;
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.util.CollectionUtil;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Edits the details of an existing task in TaskBoss.
+ * Edits the details of an existing person in the address book.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task "
-            + "by the index number used in the task list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
+            + "by the index number used in the last person listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [i/INFO] [sd/START_DATE] [ed/END_DATE] [st/START_TIME] [et/END_TIME] [c/CATEGORY] [p/PRIORITY_LEVEL]\n"
-            + "Example: " + COMMAND_WORD + " edit 1 i/Use Stack et/23:59";
+            + "Parameters: INDEX (must be a positive integer) [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS ] [t/TAG]...\n"
+            + "Example: " + COMMAND_WORD + " 1 p/91234567 e/johndoe@yahoo.com";
 
-    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in TaskBoss.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
-    private final int filteredTaskListIndex;
-    private final EditTaskDescriptor editTaskDescriptor;
+    private final int filteredPersonListIndex;
+    private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param filteredTaskListIndex the index of the task in the filtered task list to edit
-     * @param editTaskDescriptor details to edit the task with
+     * @param filteredPersonListIndex the index of the person in the filtered person list to edit
+     * @param editPersonDescriptor details to edit the person with
      */
-    public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
-        assert filteredTaskListIndex > 0;
-        assert editTaskDescriptor != null;
+    public EditCommand(int filteredPersonListIndex, EditPersonDescriptor editPersonDescriptor) {
+        assert filteredPersonListIndex > 0;
+        assert editPersonDescriptor != null;
 
-        // converts filteredTaskListIndex from one-based to zero-based.
-        this.filteredTaskListIndex = filteredTaskListIndex - 1;
+        // converts filteredPersonListIndex from one-based to zero-based.
+        this.filteredPersonListIndex = filteredPersonListIndex - 1;
 
-        this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
+        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        List<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
 
-        if (filteredTaskListIndex >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        if (filteredPersonListIndex >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
-        Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        ReadOnlyPerson personToEdit = lastShownList.get(filteredPersonListIndex);
+        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         try {
-            model.updateTask(filteredTaskListIndex, editedTask);
-        } catch (UniqueTaskList.DuplicateTaskException dpe) {
-            throw new CommandException(MESSAGE_DUPLICATE_TASK);
+            model.updatePerson(filteredPersonListIndex, editedPerson);
+        } catch (UniquePersonList.DuplicatePersonException dpe) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
         model.updateFilteredListToShowAll();
-        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, personToEdit));
     }
 
     /**
-     * Creates and returns a {@code Task} with the details of {@code taskToEdit}
-     * edited with {@code editTaskDescriptor}.
+     * Creates and returns a {@code Person} with the details of {@code personToEdit}
+     * edited with {@code editPersonDescriptor}.
      */
-    private static Task createEditedTask(ReadOnlyTask taskToEdit,
-                                             EditTaskDescriptor editTaskDescriptor) {
-        assert taskToEdit != null;
+    private static Person createEditedPerson(ReadOnlyPerson personToEdit,
+                                             EditPersonDescriptor editPersonDescriptor) {
+        assert personToEdit != null;
 
-        Info updatedInfo = editTaskDescriptor.getInfo().orElseGet(taskToEdit::getInfo);
-        Date updatedDate = editTaskDescriptor.getDate().orElseGet(taskToEdit::getDate);
-        Time updatedTime = editTaskDescriptor.getTime().orElseGet(taskToEdit::getTime);
-        Category updatedCategory = editTaskDescriptor.getCategory().orElseGet(taskToEdit::getCategory);
-        PriorityLevel updatedPriorityLevel = editTaskDescriptor.getPriorityLevel().orElseGet(taskToEdit::getPriorityLevel);
+        Name updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
+        Phone updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
+        Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
+        Address updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
+        UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
-        return new Task(updatedInfo, updatedDate, updatedTime, updatedCategory, updatedPriorityLevel);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
 
     /**
-     * Stores the details to edit the task with. Each non-empty field value will replace the
-     * corresponding field value of the task.
+     * Stores the details to edit the person with. Each non-empty field value will replace the
+     * corresponding field value of the person.
      */
-    public static class EditTaskDescriptor {
-        private Optional<Info> info = Optional.empty();
-        private Optional<Date> date = Optional.empty();
-        private Optional<Time> time = Optional.empty();
-        private Optional<Category> category = Optional.empty();
-        private Optional<PriorityLevel> prioritylevel = Optional.empty();
+    public static class EditPersonDescriptor {
+        private Optional<Name> name = Optional.empty();
+        private Optional<Phone> phone = Optional.empty();
+        private Optional<Email> email = Optional.empty();
+        private Optional<Address> address = Optional.empty();
+        private Optional<UniqueTagList> tags = Optional.empty();
 
-        public EditTaskDescriptor() {}
+        public EditPersonDescriptor() {}
 
-        public EditTaskDescriptor(EditTaskDescriptor toCopy) {
-            this.info = toCopy.getInfo();
-            this.date = toCopy.getDate();
-            this.time = toCopy.getTime();
-            this.category = toCopy.getCategory();
-            this.prioritylevel = toCopy.getPriorityLevel();
+        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+            this.name = toCopy.getName();
+            this.phone = toCopy.getPhone();
+            this.email = toCopy.getEmail();
+            this.address = toCopy.getAddress();
+            this.tags = toCopy.getTags();
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.info, this.date, this.time, this.category, this.prioritylevel);
+            return CollectionUtil.isAnyPresent(this.name, this.phone, this.email, this.address, this.tags);
         }
 
-        public void setInfo(Optional<Info> info) {
-            assert info != null;
-            this.info = info;
+        public void setName(Optional<Name> name) {
+            assert name != null;
+            this.name = name;
         }
 
-        public Optional<Info> getInfo() {
-            return info;
+        public Optional<Name> getName() {
+            return name;
         }
 
-        public void setDate(Optional<Date> date) {
-            assert date != null;
-            this.date = date;
+        public void setPhone(Optional<Phone> phone) {
+            assert phone != null;
+            this.phone = phone;
         }
 
-        public Optional<Date> getDate() {
-            return date;
+        public Optional<Phone> getPhone() {
+            return phone;
         }
 
-        public void setTime(Optional<Time> time) {
-            assert time != null;
-            this.time = time;
+        public void setEmail(Optional<Email> email) {
+            assert email != null;
+            this.email = email;
         }
 
-        public Optional<Time> getTime() {
-            return time;
+        public Optional<Email> getEmail() {
+            return email;
         }
 
-        public void setCategory(Optional<Category> category) {
-            assert category != null;
-            this.category = category;
+        public void setAddress(Optional<Address> address) {
+            assert address != null;
+            this.address = address;
         }
 
-        public Optional<Category> getCategory() {
-            return category;
+        public Optional<Address> getAddress() {
+            return address;
         }
 
-        public void setPriorityLevel(Optional<PriorityLevel> prioritylevel) {
-            assert prioritylevel != null;
-            this.prioritylevel = prioritylevel;
+        public void setTags(Optional<UniqueTagList> tags) {
+            assert tags != null;
+            this.tags = tags;
         }
 
-        public Optional<PriorityLevel> getPriorityLevel() {
-            return prioritylevel;
+        public Optional<UniqueTagList> getTags() {
+            return tags;
         }
     }
 }
