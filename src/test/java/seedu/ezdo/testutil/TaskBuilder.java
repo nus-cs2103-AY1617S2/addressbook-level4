@@ -3,6 +3,7 @@ package seedu.ezdo.testutil;
 import seedu.ezdo.commons.exceptions.IllegalValueException;
 import seedu.ezdo.model.tag.Tag;
 import seedu.ezdo.model.tag.UniqueTagList;
+import seedu.ezdo.model.todo.DueDate;
 import seedu.ezdo.model.todo.Email;
 import seedu.ezdo.model.todo.Name;
 import seedu.ezdo.model.todo.Priority;
@@ -41,6 +42,11 @@ public class TaskBuilder {
 
     public TaskBuilder withStartDate(String startDate) throws IllegalValueException {
         this.task.setStartDate(new StartDate(startDate));
+        return this;
+    }
+    
+    public TaskBuilder withDueDate(String dueDate) throws IllegalValueException {
+        this.task.setDueDate(new DueDate(dueDate));
         return this;
     }
 
