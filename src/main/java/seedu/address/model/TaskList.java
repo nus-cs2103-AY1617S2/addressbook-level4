@@ -21,7 +21,7 @@ import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
  * Wraps all data at the task-list level
  * Duplicates are not allowed (by .equals comparison)
  */
-public class TaskList implements ReadOnlyAddressBook {
+public class TaskList implements ReadOnlyTaskList {
 
     private final UniqueTaskList tasks;
     private final UniqueTagList tags;
@@ -43,7 +43,7 @@ public class TaskList implements ReadOnlyAddressBook {
     /**
      * Creates an TaskList using the Tasks and Tags in the {@code toBeCopied}
      */
-    public TaskList(ReadOnlyAddressBook toBeCopied) {
+    public TaskList(ReadOnlyTaskList toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -59,10 +59,10 @@ public class TaskList implements ReadOnlyAddressBook {
         this.tags.setTags(tags);
     }
 
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyTaskList newData) {
         assert newData != null;
         try {
-            setTasks(newData.getPersonList());
+            setTasks(newData.getTaskList());
         } catch (UniqueTaskList.DuplicateTaskException e) {
             assert false : "TaskLists should not have duplicate tasks";
         }
@@ -162,7 +162,7 @@ public class TaskList implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<ReadOnlyTask> getPersonList() {
+    public ObservableList<ReadOnlyTask> getTaskList() {
         return new UnmodifiableObservableList<>(tasks.asObservableList());
     }
 
