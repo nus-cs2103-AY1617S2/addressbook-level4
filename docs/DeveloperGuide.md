@@ -660,18 +660,45 @@ Use case ends.
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-{More to be added}
+4. Able to read inputs from a keyboard
+5. All classes should follow the single responsibility guideline
+6. Codes should be properly commented on to maintain readability
+7. Should come with automated unit tests and open source code
+8. Data should be stored and backup readily available
+9. Should be able to work on any desktop that has Java 8 or higher
+    installed
+10. Response time should be at most 1 second no matter how big the data file
 
 ## Appendix D : Glossary
+
+#### Task
+
+> Event that the user wants to complete
+
+#### Time period
+
+> Start and end time of the event
+
+#### Assignee
+> Person that the person works with the complete the task
+
+#### Category
+
+> Area of user’s life that the task is concerned with
+
+#### Search term
+
+> Specific keywords / time
+
+#### Sorting criteria
+
+#### Unconfirmed events
+
+> Events where timing has not been fixed
 
 ##### Mainstream OS
 
 > Windows, Linux, Unix, OS-X
-
-##### Private contact detail
-
-> A contact detail that is not meant to be shared with others
 
 ## Appendix E : Product Survey
 
@@ -695,3 +722,24 @@ Cons:
 * Very limited keyboard shortcuts
 * No additional features (e.g. reminders/priority listing/tags/search/recurring events/calenders)
 
+**Product Name**: ToDoist
+
+Author: Jun Wei
+
+Pros:
+
+* Organised and simple interface
+* Keyboard shortcuts available (some which work without being on the app)
+* Friendly for keyboard users who do not have a mouse (can even add into specific list with due dates)
+* Can give tasks certain priorities
+* Pre-set filters available (to filter task by due date or priority)
+* Auto-completion and recognition for labels,tags and dates to sort tasks when adding tasks
+* Able to check done tasks and undo in the event that it was accidental
+* Can share projects with others who are also using the app and add/edit tasks within project
+* Synchronizes across different platforms
+
+Cons:
+
+* Many functions only functional for premium users (eg. labels, email/SMS reminders, custom filters)
+* Notifications only possible when application is turned on
+* Although adding task is easy with keyboard, other functionalities like deleting, editing and shifting tasks across projects require a mouse
