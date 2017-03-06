@@ -8,7 +8,7 @@ import seedu.task.commons.exceptions.IllegalValueException;
  */
 public class StartDate {
 
-    public static final String MESSAGE_DATE_CONSTRAINTS = "Task Start Date should be given in dd/mm/yy";
+    public static final String MESSAGE_DATE_CONSTRAINTS = "Task Start Date should be given in ddmmyy";
     public static final String DATE_VALIDATION_REGEX = "\\d+";
 
     public final String value;

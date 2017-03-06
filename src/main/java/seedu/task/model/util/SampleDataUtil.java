@@ -15,22 +15,22 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         try {
             return new Task[] {
-                new Task(new Name("Do CS2103 tutorial"), new StartDate("06/03/17"), new EndDate("08/03/17"),
+                new Task(new Name("Do CS2103 tutorial"), new StartDate("060317"), new EndDate("080317"),
                     new CompletionStatus("Not Done"),
                     new UniqueTagList("CS2103")),
-                new Task(new Name("Study for CS2106 finals"), new StartDate("01/01/17"), new EndDate("04/30/17"),
+                new Task(new Name("Study for CS2106 finals"), new StartDate("010117"), new EndDate("043017"),
                     new CompletionStatus("Not Done"),
                     new UniqueTagList("CS2106", "exams")),
-                new Task(new Name("CS2101 rehearsal"), new StartDate("22/03/17"), new EndDate("01/04/17"),
+                new Task(new Name("CS2101 rehearsal"), new StartDate("220317"), new EndDate("010417"),
                     new CompletionStatus("Not Done"),
                     new UniqueTagList("CS2101")),
-                new Task(new Name("Add new features"), new StartDate("13/03/17"), new EndDate("01/04/17"),
+                new Task(new Name("Add new features"), new StartDate("130317"), new EndDate("010417"),
                     new CompletionStatus("Not Done"),
                     new UniqueTagList("CS2103")),
-                new Task(new Name("Add new unit tests"), new StartDate("10/03/17"), new EndDate("03/04/17"),
+                new Task(new Name("Add new unit tests"), new StartDate("100317"), new EndDate("030417"),
                     new CompletionStatus("Not Done"),
                     new UniqueTagList("CS2103")),
-                new Task(new Name("Write Progress Report"), new StartDate("22/03/17"), new EndDate("01/04/17"),
+                new Task(new Name("Write Progress Report"), new StartDate("220317"), new EndDate("010417"),
                     new CompletionStatus("Not Done"),
                     new UniqueTagList("CS2101"))
             };
