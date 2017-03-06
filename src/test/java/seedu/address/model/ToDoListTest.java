@@ -14,12 +14,12 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Task;
 import seedu.address.model.person.ReadOnlyTask;
+import seedu.address.model.person.Task;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.TypicalTestTasks;
 
-public class AddressBookTest {
+public class ToDoListTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();

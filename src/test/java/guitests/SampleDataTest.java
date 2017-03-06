@@ -9,7 +9,7 @@ import seedu.address.model.person.Task;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.TestUtil;
 
-public class SampleDataTest extends AddressBookGuiTest {
+public class SampleDataTest extends ToDoListGuiTest {
     @Override
     protected ToDoList getInitialData() {
         // return null to force test app to load data from file only

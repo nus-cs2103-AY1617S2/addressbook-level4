@@ -17,8 +17,8 @@ import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainGuiHandle;
 import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.TaskCardHandle;
-import guitests.guihandles.TaskListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
+import guitests.guihandles.TaskListPanelHandle;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import seedu.address.TestApp;
@@ -32,7 +32,7 @@ import seedu.address.testutil.TypicalTestTasks;
 /**
  * A GUI Test class for AddressBook.
  */
-public abstract class AddressBookGuiTest {
+public abstract class ToDoListGuiTest {
 
     /* The TestName Rule makes the current test name available inside test methods */
     @Rule
