@@ -151,7 +151,7 @@ public class ArgumentTokenizer {
      * Returns the prefixs of the argument
      */
     public List<Prefix> getPrefixs() {
-    	return prefixes;
+        return prefixes;
     }
 
     /**
