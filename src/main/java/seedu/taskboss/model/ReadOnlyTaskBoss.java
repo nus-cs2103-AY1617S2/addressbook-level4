@@ -3,18 +3,18 @@ package seedu.taskboss.model;
 
 import javafx.collections.ObservableList;
 import seedu.taskboss.model.category.Tag;
-import seedu.taskboss.model.task.ReadOnlyPerson;
+import seedu.taskboss.model.task.ReadOnlyTask;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of TaskBoss
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyTaskBoss {
 
     /**
      * Returns an unmodifiable view of the persons list.
      * This list will not contain any duplicate persons.
      */
-    ObservableList<ReadOnlyPerson> getPersonList();
+    ObservableList<ReadOnlyTask> getTaskList();
 
     /**
      * Returns an unmodifiable view of the tags list.

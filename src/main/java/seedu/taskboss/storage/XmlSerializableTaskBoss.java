@@ -11,43 +11,43 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.taskboss.commons.core.UnmodifiableObservableList;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
-import seedu.taskboss.model.ReadOnlyAddressBook;
+import seedu.taskboss.model.ReadOnlyTaskBoss;
 import seedu.taskboss.model.category.Tag;
-import seedu.taskboss.model.task.Person;
-import seedu.taskboss.model.task.ReadOnlyPerson;
+import seedu.taskboss.model.task.ReadOnlyTask;
+import seedu.taskboss.model.task.Task;
 
 /**
- * An Immutable AddressBook that is serializable to XML format
+ * An Immutable TaskBoss that is serializable to XML format
  */
-@XmlRootElement(name = "addressbook")
-public class XmlSerializableAddressBook implements ReadOnlyAddressBook {
+@XmlRootElement(name = "taskboss")
+public class XmlSerializableTaskBoss implements ReadOnlyTaskBoss {
 
     @XmlElement
-    private List<XmlAdaptedPerson> persons;
+    private List<XmlAdaptedTask> tasks;
     @XmlElement
     private List<XmlAdaptedTag> tags;
 
     /**
-     * Creates an empty XmlSerializableAddressBook.
+     * Creates an empty XmlSerializableTaskBoss.
      * This empty constructor is required for marshalling.
      */
-    public XmlSerializableAddressBook() {
-        persons = new ArrayList<>();
+    public XmlSerializableTaskBoss() {
+        tasks = new ArrayList<>();
         tags = new ArrayList<>();
     }
 
     /**
      * Conversion
      */
-    public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
+    public XmlSerializableTaskBoss(ReadOnlyTaskBoss src) {
         this();
-        persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        tasks.addAll(src.getTaskList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
     }
 
     @Override
-    public ObservableList<ReadOnlyPerson> getPersonList() {
-        final ObservableList<Person> persons = this.persons.stream().map(p -> {
+    public ObservableList<ReadOnlyTask> getTaskList() {
+        final ObservableList<Task> persons = this.tasks.stream().map(p -> {
             try {
                 return p.toModelType();
             } catch (IllegalValueException e) {

@@ -8,30 +8,30 @@ import com.google.common.eventbus.Subscribe;
 
 import seedu.taskboss.commons.core.ComponentManager;
 import seedu.taskboss.commons.core.LogsCenter;
-import seedu.taskboss.commons.events.model.AddressBookChangedEvent;
+import seedu.taskboss.commons.events.model.TaskBossChangedEvent;
 import seedu.taskboss.commons.events.storage.DataSavingExceptionEvent;
 import seedu.taskboss.commons.exceptions.DataConversionException;
-import seedu.taskboss.model.ReadOnlyAddressBook;
+import seedu.taskboss.model.ReadOnlyTaskBoss;
 import seedu.taskboss.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of TaskBoss data in local storage.
  */
 public class StorageManager extends ComponentManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AddressBookStorage addressBookStorage;
+    private TaskBossStorage taskBossStorage;
     private UserPrefsStorage userPrefsStorage;
 
 
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(TaskBossStorage taskBossStorage, UserPrefsStorage userPrefsStorage) {
         super();
-        this.addressBookStorage = addressBookStorage;
+        this.taskBossStorage = taskBossStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
-    public StorageManager(String addressBookFilePath, String userPrefsFilePath) {
-        this(new XmlAddressBookStorage(addressBookFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
+    public StorageManager(String taskBossFilePath, String userPrefsFilePath) {
+        this(new XmlTaskBossStorage(taskBossFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
     }
 
     // ================ UserPrefs methods ==============================
@@ -47,42 +47,42 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ TaskBoss methods ==============================
 
     @Override
-    public String getAddressBookFilePath() {
-        return addressBookStorage.getAddressBookFilePath();
+    public String getTaskBossFilePath() {
+        return taskBossStorage.getTaskBossFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(addressBookStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyTaskBoss> readTaskBoss() throws DataConversionException, IOException {
+        return readTaskBoss(taskBossStorage.getTaskBossFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook(String filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyTaskBoss> readTaskBoss(String filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return addressBookStorage.readAddressBook(filePath);
+        return taskBossStorage.readTaskBoss(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
+    public void saveTaskBoss(ReadOnlyTaskBoss taskBoss) throws IOException {
+        saveTaskBoss(taskBoss, taskBossStorage.getTaskBossFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, String filePath) throws IOException {
+    public void saveTaskBoss(ReadOnlyTaskBoss taskBoss, String filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveAddressBook(addressBook, filePath);
+        taskBossStorage.saveTaskBoss(taskBoss, filePath);
     }
 
 
     @Override
     @Subscribe
-    public void handleAddressBookChangedEvent(AddressBookChangedEvent event) {
+    public void handleTaskBossChangedEvent(TaskBossChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
-            saveAddressBook(event.data);
+            saveTaskBoss(event.data);
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }

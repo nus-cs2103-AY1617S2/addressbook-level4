@@ -9,28 +9,28 @@ import seedu.taskboss.commons.exceptions.DataConversionException;
 import seedu.taskboss.commons.util.XmlUtil;
 
 /**
- * Stores addressbook data in an XML file
+ * Stores TaskBoss data in an XML file
  */
 public class XmlFileStorage {
     /**
-     * Saves the given addressbook data to the specified file.
+     * Saves the given TaskBoss data to the specified file.
      */
-    public static void saveDataToFile(File file, XmlSerializableAddressBook addressBook)
+    public static void saveDataToFile(File file, XmlSerializableTaskBoss taskBoss)
             throws FileNotFoundException {
         try {
-            XmlUtil.saveDataToFile(file, addressBook);
+            XmlUtil.saveDataToFile(file, taskBoss);
         } catch (JAXBException e) {
             assert false : "Unexpected exception " + e.getMessage();
         }
     }
 
     /**
-     * Returns address book in the file or an empty address book
+     * Returns TaskBoss in the file or an empty TaskBoss
      */
-    public static XmlSerializableAddressBook loadDataFromSaveFile(File file) throws DataConversionException,
+    public static XmlSerializableTaskBoss loadDataFromSaveFile(File file) throws DataConversionException,
                                                                             FileNotFoundException {
         try {
-            return XmlUtil.getDataFromFile(file, XmlSerializableAddressBook.class);
+            return XmlUtil.getDataFromFile(file, XmlSerializableTaskBoss.class);
         } catch (JAXBException e) {
             throw new DataConversionException(e);
         }

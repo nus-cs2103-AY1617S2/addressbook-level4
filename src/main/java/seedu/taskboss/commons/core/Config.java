@@ -11,11 +11,11 @@ public class Config {
     public static final String DEFAULT_CONFIG_FILE = "config.json";
 
     // Config values customizable through config file
-    private String appTitle = "Address App";
+    private String appTitle = "TaskBoss App";
     private Level logLevel = Level.INFO;
     private String userPrefsFilePath = "preferences.json";
-    private String addressBookFilePath = "data/addressbook.xml";
-    private String addressBookName = "MyAddressBook";
+    private String taskBossFilePath = "data/taskboss.xml";
+    private String taskBossName = "MyTaskBoss";
 
 
     public String getAppTitle() {
@@ -42,20 +42,20 @@ public class Config {
         this.userPrefsFilePath = userPrefsFilePath;
     }
 
-    public String getAddressBookFilePath() {
-        return addressBookFilePath;
+    public String getTaskBossFilePath() {
+        return taskBossFilePath;
     }
 
-    public void setAddressBookFilePath(String addressBookFilePath) {
-        this.addressBookFilePath = addressBookFilePath;
+    public void setTaskBossFilePath(String taskBossFilePath) {
+        this.taskBossFilePath = taskBossFilePath;
     }
 
-    public String getAddressBookName() {
-        return addressBookName;
+    public String getTaskBossName() {
+        return taskBossName;
     }
 
-    public void setAddressBookName(String addressBookName) {
-        this.addressBookName = addressBookName;
+    public void setTaskBossName(String taskBossName) {
+        this.taskBossName = taskBossName;
     }
 
 
@@ -73,13 +73,13 @@ public class Config {
         return Objects.equals(appTitle, o.appTitle)
                 && Objects.equals(logLevel, o.logLevel)
                 && Objects.equals(userPrefsFilePath, o.userPrefsFilePath)
-                && Objects.equals(addressBookFilePath, o.addressBookFilePath)
-                && Objects.equals(addressBookName, o.addressBookName);
+                && Objects.equals(taskBossFilePath, o.taskBossFilePath)
+                && Objects.equals(taskBossName, o.taskBossName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(appTitle, logLevel, userPrefsFilePath, addressBookFilePath, addressBookName);
+        return Objects.hash(appTitle, logLevel, userPrefsFilePath, taskBossFilePath, taskBossName);
     }
 
     @Override
@@ -88,8 +88,8 @@ public class Config {
         sb.append("App title : " + appTitle);
         sb.append("\nCurrent log level : " + logLevel);
         sb.append("\nPreference file Location : " + userPrefsFilePath);
-        sb.append("\nLocal data file location : " + addressBookFilePath);
-        sb.append("\nAddressBook name : " + addressBookName);
+        sb.append("\nLocal data file location : " + taskBossFilePath);
+        sb.append("\nTaskBoss name : " + taskBossName);
         return sb.toString();
     }
 

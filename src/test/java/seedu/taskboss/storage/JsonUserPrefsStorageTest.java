@@ -16,7 +16,6 @@ import org.junit.rules.TemporaryFolder;
 import seedu.taskboss.commons.exceptions.DataConversionException;
 import seedu.taskboss.commons.util.FileUtil;
 import seedu.taskboss.model.UserPrefs;
-import seedu.taskboss.storage.JsonUserPrefsStorage;
 
 public class JsonUserPrefsStorageTest {
 

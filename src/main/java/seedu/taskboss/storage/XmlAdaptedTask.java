@@ -11,14 +11,14 @@ import seedu.taskboss.model.category.UniqueTagList;
 import seedu.taskboss.model.task.Address;
 import seedu.taskboss.model.task.Email;
 import seedu.taskboss.model.task.Name;
-import seedu.taskboss.model.task.Person;
 import seedu.taskboss.model.task.Phone;
-import seedu.taskboss.model.task.ReadOnlyPerson;
+import seedu.taskboss.model.task.ReadOnlyTask;
+import seedu.taskboss.model.task.Task;
 
 /**
  * JAXB-friendly version of the Person.
  */
-public class XmlAdaptedPerson {
+public class XmlAdaptedTask {
 
     @XmlElement(required = true)
     private String name;
@@ -36,7 +36,7 @@ public class XmlAdaptedPerson {
      * Constructs an XmlAdaptedPerson.
      * This is the no-arg constructor that is required by JAXB.
      */
-    public XmlAdaptedPerson() {}
+    public XmlAdaptedTask() {}
 
 
     /**
@@ -44,7 +44,7 @@ public class XmlAdaptedPerson {
      *
      * @param source future changes to this will not affect the created XmlAdaptedPerson
      */
-    public XmlAdaptedPerson(ReadOnlyPerson source) {
+    public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
@@ -60,7 +60,7 @@ public class XmlAdaptedPerson {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person
      */
-    public Person toModelType() throws IllegalValueException {
+    public Task toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
@@ -70,6 +70,6 @@ public class XmlAdaptedPerson {
         final Email email = new Email(this.email);
         final Address address = new Address(this.address);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Person(name, phone, email, address, tags);
+        return new Task(name, phone, email, address, tags);
     }
 }

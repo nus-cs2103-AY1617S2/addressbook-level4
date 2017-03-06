@@ -4,12 +4,11 @@ import java.util.function.Supplier;
 
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import seedu.taskboss.MainApp;
 import seedu.taskboss.commons.core.Config;
 import seedu.taskboss.commons.core.GuiSettings;
-import seedu.taskboss.model.ReadOnlyAddressBook;
+import seedu.taskboss.model.ReadOnlyTaskBoss;
 import seedu.taskboss.model.UserPrefs;
-import seedu.taskboss.storage.XmlSerializableAddressBook;
+import seedu.taskboss.storage.XmlSerializableTaskBoss;
 import seedu.taskboss.testutil.TestUtil;
 
 /**
@@ -22,14 +21,14 @@ public class TestApp extends MainApp {
     protected static final String DEFAULT_PREF_FILE_LOCATION_FOR_TESTING =
             TestUtil.getFilePathInSandboxFolder("pref_testing.json");
     public static final String APP_TITLE = "Test App";
-    protected static final String ADDRESS_BOOK_NAME = "Test";
-    protected Supplier<ReadOnlyAddressBook> initialDataSupplier = () -> null;
+    protected static final String TASK_BOSS_NAME = "Test";
+    protected Supplier<ReadOnlyTaskBoss> initialDataSupplier = () -> null;
     protected String saveFileLocation = SAVE_LOCATION_FOR_TESTING;
 
     public TestApp() {
     }
 
-    public TestApp(Supplier<ReadOnlyAddressBook> initialDataSupplier, String saveFileLocation) {
+    public TestApp(Supplier<ReadOnlyTaskBoss> initialDataSupplier, String saveFileLocation) {
         super();
         this.initialDataSupplier = initialDataSupplier;
         this.saveFileLocation = saveFileLocation;
@@ -37,7 +36,7 @@ public class TestApp extends MainApp {
         // If some initial local data has been provided, write those to the file
         if (initialDataSupplier.get() != null) {
             TestUtil.createDataFileWithData(
-                    new XmlSerializableAddressBook(this.initialDataSupplier.get()),
+                    new XmlSerializableTaskBoss(this.initialDataSupplier.get()),
                     this.saveFileLocation);
         }
     }
@@ -46,9 +45,9 @@ public class TestApp extends MainApp {
     protected Config initConfig(String configFilePath) {
         Config config = super.initConfig(configFilePath);
         config.setAppTitle(APP_TITLE);
-        config.setAddressBookFilePath(saveFileLocation);
+        config.setTaskBossFilePath(saveFileLocation);
         config.setUserPrefsFilePath(DEFAULT_PREF_FILE_LOCATION_FOR_TESTING);
-        config.setAddressBookName(ADDRESS_BOOK_NAME);
+        config.setTaskBossName(TASK_BOSS_NAME);
         return config;
     }
 

@@ -4,7 +4,7 @@ package seedu.taskboss.model.category;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Tag in the address book.
+ * Represents a Tag in TaskBoss.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {

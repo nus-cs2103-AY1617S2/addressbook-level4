@@ -12,7 +12,6 @@ import org.junit.rules.TemporaryFolder;
 
 import javafx.fxml.FXML;
 import seedu.taskboss.MainApp;
-import seedu.taskboss.ui.UiPart;
 
 public class UiPartTest {
 

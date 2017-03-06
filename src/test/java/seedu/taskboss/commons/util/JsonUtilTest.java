@@ -7,8 +7,6 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-import seedu.taskboss.commons.util.FileUtil;
-import seedu.taskboss.commons.util.JsonUtil;
 import seedu.taskboss.testutil.SerializableTestClass;
 import seedu.taskboss.testutil.TestUtil;
 

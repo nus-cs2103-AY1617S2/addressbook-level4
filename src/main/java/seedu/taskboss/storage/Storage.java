@@ -3,16 +3,16 @@ package seedu.taskboss.storage;
 import java.io.IOException;
 import java.util.Optional;
 
-import seedu.taskboss.commons.events.model.AddressBookChangedEvent;
+import seedu.taskboss.commons.events.model.TaskBossChangedEvent;
 import seedu.taskboss.commons.events.storage.DataSavingExceptionEvent;
 import seedu.taskboss.commons.exceptions.DataConversionException;
-import seedu.taskboss.model.ReadOnlyAddressBook;
+import seedu.taskboss.model.ReadOnlyTaskBoss;
 import seedu.taskboss.model.UserPrefs;
 
 /**
  * API of the Storage component
  */
-public interface Storage extends AddressBookStorage, UserPrefsStorage {
+public interface Storage extends TaskBossStorage, UserPrefsStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
@@ -21,18 +21,18 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
     void saveUserPrefs(UserPrefs userPrefs) throws IOException;
 
     @Override
-    String getAddressBookFilePath();
+    String getTaskBossFilePath();
 
     @Override
-    Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyTaskBoss> readTaskBoss() throws DataConversionException, IOException;
 
     @Override
-    void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    void saveTaskBoss(ReadOnlyTaskBoss taskBoss) throws IOException;
 
     /**
-     * Saves the current version of the Address Book to the hard disk.
+     * Saves the current version of TaskBoss to the hard disk.
      *   Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
-    void handleAddressBookChangedEvent(AddressBookChangedEvent abce);
+    void handleTaskBossChangedEvent(TaskBossChangedEvent tbce);
 }

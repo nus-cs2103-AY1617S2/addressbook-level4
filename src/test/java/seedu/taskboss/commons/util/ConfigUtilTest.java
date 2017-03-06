@@ -15,8 +15,6 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.taskboss.commons.core.Config;
 import seedu.taskboss.commons.exceptions.DataConversionException;
-import seedu.taskboss.commons.util.ConfigUtil;
-import seedu.taskboss.commons.util.FileUtil;
 
 public class ConfigUtilTest {
 
@@ -78,8 +76,8 @@ public class ConfigUtilTest {
         config.setAppTitle("Typical App Title");
         config.setLogLevel(Level.INFO);
         config.setUserPrefsFilePath("C:\\preferences.json");
-        config.setAddressBookFilePath("addressbook.xml");
-        config.setAddressBookName("TypicalAddressBookName");
+        config.setTaskBossFilePath("taskboss.xml");
+        config.setTaskBossName("TypicalTaskBossName");
         return config;
     }
 

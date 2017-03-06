@@ -3,7 +3,7 @@ package seedu.taskboss.model.task;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's name in the address book.
+ * Represents a Task's name in TaskBoss.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Name {

@@ -20,10 +20,10 @@ import seedu.taskboss.commons.util.ConfigUtil;
 import seedu.taskboss.commons.util.StringUtil;
 import seedu.taskboss.logic.Logic;
 import seedu.taskboss.logic.LogicManager;
-import seedu.taskboss.model.AddressBook;
 import seedu.taskboss.model.Model;
 import seedu.taskboss.model.ModelManager;
-import seedu.taskboss.model.ReadOnlyAddressBook;
+import seedu.taskboss.model.ReadOnlyTaskBoss;
+import seedu.taskboss.model.TaskBoss;
 import seedu.taskboss.model.UserPrefs;
 import seedu.taskboss.model.util.SampleDataUtil;
 import seedu.taskboss.storage.Storage;
@@ -49,11 +49,11 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing TaskBoss ]===========================");
         super.init();
 
         config = initConfig(getApplicationParameter("config"));
-        storage = new StorageManager(config.getAddressBookFilePath(), config.getUserPrefsFilePath());
+        storage = new StorageManager(config.getTaskBossFilePath(), config.getUserPrefsFilePath());
 
         userPrefs = initPrefs(config);
 
@@ -74,20 +74,20 @@ public class MainApp extends Application {
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyTaskBoss> taskBossOptional;
+        ReadOnlyTaskBoss initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+            taskBossOptional = storage.readTaskBoss();
+            if (!taskBossOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample TaskBoss");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = taskBossOptional.orElseGet(SampleDataUtil::getSampleTaskBoss);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Data file not in the correct format. Will be starting with an empty TaskBoss");
+            initialData = new TaskBoss();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Problem while reading from the file. Will be starting with an empty TaskBoss");
+            initialData = new TaskBoss();
         }
 
         return new ModelManager(initialData, userPrefs);
@@ -143,7 +143,7 @@ public class MainApp extends Application {
                     "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty TaskBoss");
             initializedPrefs = new UserPrefs();
         }
 
@@ -163,13 +163,13 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting TaskBoss " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping TaskBoss ] =============================");
         ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);

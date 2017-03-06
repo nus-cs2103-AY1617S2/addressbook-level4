@@ -4,7 +4,7 @@ package seedu.taskboss.model.task;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's phone number in the address book.
+ * Represents a Task's phone number in TaskBoss.
  * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
  */
 public class Email {

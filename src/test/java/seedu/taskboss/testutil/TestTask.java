@@ -5,12 +5,12 @@ import seedu.taskboss.model.task.Address;
 import seedu.taskboss.model.task.Email;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.Phone;
-import seedu.taskboss.model.task.ReadOnlyPerson;
+import seedu.taskboss.model.task.ReadOnlyTask;
 
 /**
  * A mutable person object. For testing only.
  */
-public class TestPerson implements ReadOnlyPerson {
+public class TestTask implements ReadOnlyTask {
 
     private Name name;
     private Address address;
@@ -18,14 +18,14 @@ public class TestPerson implements ReadOnlyPerson {
     private Phone phone;
     private UniqueTagList tags;
 
-    public TestPerson() {
+    public TestTask() {
         tags = new UniqueTagList();
     }
 
     /**
      * Creates a copy of {@code personToCopy}.
      */
-    public TestPerson(TestPerson personToCopy) {
+    public TestTask(TestTask personToCopy) {
         this.name = personToCopy.getName();
         this.phone = personToCopy.getPhone();
         this.email = personToCopy.getEmail();

@@ -4,7 +4,7 @@ import java.util.Set;
 
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
+ * Finds and lists all tasks in TaskBoss whose name contains any of the argument keywords.
  * Keyword matching is case sensitive.
  */
 public class FindCommand extends Command {
@@ -28,11 +28,11 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute() {
         if (prefix.equals(PREFIX_NAME)) {
-            model.updateFilteredPersonList(keywords);
-            return new CommandResult(getMessageForPersonListShownSummary(model.getFilteredPersonList().size()));
+            model.updateFilteredTaskList(keywords);
+            return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
         } else {
-            model.updateFilteredPersonList(keywords);
-            return new CommandResult(getMessageForPersonListShownSummary(model.getFilteredPersonList().size()));
+            model.updateFilteredTaskList(keywords);
+            return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
         }
     }
 
