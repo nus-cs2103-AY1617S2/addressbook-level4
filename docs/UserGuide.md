@@ -165,7 +165,7 @@ Examples:
 
 Upon creation of tasks, the tasks will be automatically saved in the folder where the program is held in.
 > Do not erase the saved data as it will result in a complete loss of data that cannot be recovered by the application itself.
-   
+
 ## 3. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -198,7 +198,7 @@ Upon creation of tasks, the tasks will be automatically saved in the folder wher
 
 * **List by Specific Priority** : `list priority PRIORITY_LEVEL`
 	e.g. `list priority 1`
-	
+
 * **List by Tags** : `list t/TAGS [MORE_TAGS]`<br>
 	e.g. `list t/CS2103 t/Work t/School`
 
@@ -215,6 +215,8 @@ Upon creation of tasks, the tasks will be automatically saved in the folder wher
 
 * **Checking progress/performance** : `progress NUMBER_OF_DAYS`<br>
 	e.g. `progress 7`
-	
+
 * **Search for tasks** : `search KEYWORD`<br>
 	e.g. `search potato`
+
+
