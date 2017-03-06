@@ -1,8 +1,4 @@
-# AddressBook Level 4 - Developer Guide
-
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
-
----
+# iManager - Developer Guide
 
 1. [Setting Up](#setting-up)
 2. [Design](#design)
