@@ -15,18 +15,20 @@ public class Task implements ReadOnlyTask {
     private Priority priority;
     private Email email;
     private StartDate startDate;
+    private DueDate dueDate;
 
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Priority priority, Email email, StartDate startDate, UniqueTagList tags) {
+    public Task(Name name, Priority priority, Email email, StartDate startDate, DueDate dueDate, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, priority, email, startDate, tags);
         this.name = name;
         this.priority = priority;
         this.email = email;
         this.startDate = startDate;
+        this.dueDate = dueDate;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -34,7 +36,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getPriority(), source.getEmail(), source.getStartDate(), source.getTags());
+        this(source.getName(), source.getPriority(), source.getEmail(), source.getStartDate(), source.getDueDate(), source.getTags());
     }
 
     public void setName(Name name) {
@@ -75,6 +77,16 @@ public class Task implements ReadOnlyTask {
     @Override
     public StartDate getStartDate() {
         return startDate;
+    }
+    
+    public void setDueDate(DueDate dueDate) {
+        assert dueDate != null;
+        this.dueDate = dueDate;
+    }
+
+    @Override
+    public DueDate getDueDate() {
+        return dueDate;
     }
 
     @Override
