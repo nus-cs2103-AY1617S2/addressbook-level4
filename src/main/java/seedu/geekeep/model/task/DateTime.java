@@ -9,7 +9,7 @@ import seedu.geekeep.commons.exceptions.InvalidDateTimeException;
  * Represents the starting datetime of a task. Guarantees: immutable; is valid as declared in
  * {@link #isValidDateTime()}
  */
-public class StartDateTime {
+public class DateTime {
 
     /**
      * Validates given dateTime.
@@ -35,7 +35,7 @@ public class StartDateTime {
 
     public final LocalDateTime dateTime;
 
-    public StartDateTime(int year, int month, int day, int hour, int minute) throws InvalidDateTimeException{
+    public DateTime(int year, int month, int day, int hour, int minute) throws InvalidDateTimeException{
         LocalDateTime dateTime = LocalDateTime.of(year, month, day, hour, minute);
         if(!isValidDateTime(dateTime)) {
             throw new InvalidDateTimeException();
@@ -46,8 +46,8 @@ public class StartDateTime {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof StartDateTime // instanceof handles nulls
-                        && this.dateTime.equals(((StartDateTime) other).dateTime)); // state check
+                || (other instanceof DateTime // instanceof handles nulls
+                        && this.dateTime.equals(((DateTime) other).dateTime)); // state check
     }
 
     @Override
