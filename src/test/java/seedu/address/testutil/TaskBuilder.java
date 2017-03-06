@@ -3,8 +3,8 @@ package seedu.address.testutil;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.label.Label;
 import seedu.address.model.label.UniqueLabelList;
-import seedu.address.model.person.Deadline;
-import seedu.address.model.person.Title;
+import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Title;
 
 /**
  *
@@ -18,7 +18,7 @@ public class TaskBuilder {
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the TaskBuilder with the data of {@code taskToCopy}.
      */
     public TaskBuilder(TestTask taskToCopy) {
         this.task = new TestTask(taskToCopy);

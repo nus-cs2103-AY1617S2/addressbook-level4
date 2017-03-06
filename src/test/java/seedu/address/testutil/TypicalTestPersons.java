@@ -2,31 +2,31 @@ package seedu.address.testutil;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
-import seedu.address.model.person.Task;
-import seedu.address.model.person.UniqueTaskList;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.UniqueTaskList;
 
 /**
  *
  */
 public class TypicalTestPersons {
 
-    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
+    public TestTask task1, task2, task3, task4, task5, task6, task7, task8, task9;
 
     public TypicalTestPersons() {
         try {
-            alice = new TaskBuilder().withTitle("Alice Pauline")
+            task1 = new TaskBuilder().withTitle("Complete task 1")
                     .withDeadline("11-11-2017").withLabels("friends").build();
-            benson = new TaskBuilder().withTitle("Benson Meier").withDeadline("11-11-2017")
+            task2 = new TaskBuilder().withTitle("Complete task 2").withDeadline("11-11-2017")
                     .withLabels("owesMoney", "friends").build();
-            carl = new TaskBuilder().withTitle("Carl Kurz").withDeadline("11-11-2017").build();
-            daniel = new TaskBuilder().withTitle("Daniel Meier").withDeadline("11-11-2017").build();
-            elle = new TaskBuilder().withTitle("Elle Meyer").withDeadline("11-11-2017").build();
-            fiona = new TaskBuilder().withTitle("Fiona Kunz").withDeadline("11-11-2017").build();
-            george = new TaskBuilder().withTitle("George Best").withDeadline("11-11-2017").build();
+            task3 = new TaskBuilder().withTitle("Complete task 3").withDeadline("11-11-2017").build();
+            task4 = new TaskBuilder().withTitle("Complete task 4").withDeadline("11-11-2017").build();
+            task5 = new TaskBuilder().withTitle("Complete task 5").withDeadline("11-11-2017").build();
+            task6 = new TaskBuilder().withTitle("Complete task 6").withDeadline("11-11-2017").build();
+            task7 = new TaskBuilder().withTitle("Complete task 7").withDeadline("11-11-2017").build();
 
             // Manually added
-            hoon = new TaskBuilder().withTitle("Hoon Meier").withDeadline("11-11-2017").build();
-            ida = new TaskBuilder().withTitle("Ida Mueller").withDeadline("11-11-2017").build();
+            task8 = new TaskBuilder().withTitle("Complete task 8").withDeadline("11-11-2017").build();
+            task9 = new TaskBuilder().withTitle("Complete task 9").withDeadline("11-11-2017").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -34,7 +34,7 @@ public class TypicalTestPersons {
     }
 
     public static void loadAddressBookWithSampleData(AddressBook ab) {
-        for (TestTask person : new TypicalTestPersons().getTypicalPersons()) {
+        for (TestTask person : new TypicalTestPersons().getTypicalTasks()) {
             try {
                 ab.addTask(new Task(person));
             } catch (UniqueTaskList.DuplicateTaskException e) {
@@ -43,8 +43,8 @@ public class TypicalTestPersons {
         }
     }
 
-    public TestTask[] getTypicalPersons() {
-        return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
+    public TestTask[] getTypicalTasks() {
+        return new TestTask[]{task1, task2, task3, task4, task5, task6, task7};
     }
 
     public AddressBook getTypicalAddressBook() {

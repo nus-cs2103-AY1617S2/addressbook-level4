@@ -1,9 +1,9 @@
 package seedu.address.testutil;
 
 import seedu.address.model.label.UniqueLabelList;
-import seedu.address.model.person.Deadline;
-import seedu.address.model.person.Title;
-import seedu.address.model.person.ReadOnlyTask;
+import seedu.address.model.task.Deadline;
+import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Title;
 
 /**
  * A mutable person object. For testing only.
@@ -31,8 +31,8 @@ public class TestTask implements ReadOnlyTask {
         this.title = name;
     }
 
-    public void setDeadline(Deadline address) {
-        this.deadline = address;
+    public void setDeadline(Deadline deadline) {
+        this.deadline = deadline;
     }
 
     public void setLabels(UniqueLabelList labels) {
@@ -62,7 +62,7 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getTitle().title + " ");
-        sb.append("a/" + this.getDeadline().value.toString() + " ");
+        sb.append("by " + this.getDeadline().value + " ");
         this.getLabels().asObservableList().stream().forEach(s -> sb.append("t/" + s.labelName + " "));
         return sb.toString();
     }

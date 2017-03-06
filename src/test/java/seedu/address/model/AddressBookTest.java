@@ -15,8 +15,8 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.label.Label;
-import seedu.address.model.person.Task;
-import seedu.address.model.person.ReadOnlyTask;
+import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Task;
 import seedu.address.testutil.TypicalTestPersons;
 
 public class AddressBookTest {
@@ -49,8 +49,8 @@ public class AddressBookTest {
     public void resetData_withDuplicatePersons_throwsAssertionError() {
         TypicalTestPersons td = new TypicalTestPersons();
         // Repeat td.alice twice
-        List<Task> newPersons = Arrays.asList(new Task(td.alice), new Task(td.alice));
-        List<Label> newLabels = td.alice.getLabels().asObservableList();
+        List<Task> newPersons = Arrays.asList(new Task(td.task1), new Task(td.task1));
+        List<Label> newLabels = td.task1.getLabels().asObservableList();
         AddressBookStub newData = new AddressBookStub(newPersons, newLabels);
 
         thrown.expect(AssertionError.class);

@@ -5,7 +5,7 @@ import static org.junit.Assert.fail;
 import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Task;
+import seedu.address.model.task.Task;
 import seedu.address.testutil.TaskBuilder;
 import seedu.address.testutil.TestTask;
 
@@ -14,20 +14,20 @@ import seedu.address.testutil.TestTask;
  */
 public class TaskTest {
     @Test
-    public void person_hashCodeShouldMatch_returnTrue() {
+    public void task_hashCodeShouldMatch_returnTrue() {
         TestTask pb;
         try {
             pb = (new TaskBuilder())
                     .withDeadline("07-03-2017")
                     .withLabels("testLabel")
-                    .withTitle("Title")
+                    .withTitle("Do something")
                     .build();
             Task p = new Task(pb);
-            int hashcode = 1027801006;
+            int hashcode = 2118053981;
             assert(p.hashCode() == hashcode);
         } catch (IllegalValueException e) {
             e.printStackTrace();
-            fail("Person fail Illegal value");
+            fail("Task fail Illegal value");
         }
     }
 }

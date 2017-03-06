@@ -4,10 +4,10 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.label.UniqueLabelList;
-import seedu.address.model.person.Deadline;
-import seedu.address.model.person.Title;
-import seedu.address.model.person.Task;
-import seedu.address.model.person.UniqueTaskList.DuplicateTaskException;
+import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.Title;
+import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
     public static Task[] getSamplePersons() {

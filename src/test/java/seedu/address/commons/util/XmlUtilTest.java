@@ -87,7 +87,7 @@ public class XmlUtilTest {
 
         AddressBookBuilder builder = new AddressBookBuilder(new AddressBook());
         dataToWrite = new XmlSerializableAddressBook(
-                builder.withPerson(TestUtil.generateSamplePersonData().get(0)).withLabel("Friends").build());
+                builder.withTask(TestUtil.generateSamplePersonData().get(0)).withLabel("Friends").build());
 
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
         dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableAddressBook.class);

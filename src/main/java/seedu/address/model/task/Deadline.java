@@ -1,10 +1,6 @@
-package seedu.address.model.person;
+package seedu.address.model.task;
 
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 
@@ -18,9 +14,9 @@ public class Deadline {
             "Date should be entered as DD-MM-YYYY";
 
     /*
-     * The deadline must be in the form: dd-MM-yyyy
+     * The deadline must have at least one visible character
      */
-    public static final String DATE_VALIDATION_REGEX = "";
+    public static final String DATE_VALIDATION_REGEX = "\\p{Graph}++";
 
     public String value;
 

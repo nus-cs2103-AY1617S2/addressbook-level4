@@ -15,8 +15,8 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.label.Label;
 import seedu.address.model.label.UniqueLabelList;
-import seedu.address.model.person.Deadline;
-import seedu.address.model.person.Title;
+import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Title;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes

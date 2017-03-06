@@ -3,7 +3,7 @@ package seedu.address.model;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.label.Label;
-import seedu.address.model.person.ReadOnlyTask;
+import seedu.address.model.task.ReadOnlyTask;
 
 /**
  * Unmodifiable view of an address book
