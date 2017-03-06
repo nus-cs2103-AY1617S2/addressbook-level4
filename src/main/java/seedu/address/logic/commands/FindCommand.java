@@ -20,7 +20,7 @@ public class FindCommand extends Command {
 
     private final Set<String> keywords;
     private final Prefix prefix;
-    
+
     public FindCommand(Prefix pre, Set<String> keywords) {
     	this.prefix = pre;
         this.keywords = keywords;

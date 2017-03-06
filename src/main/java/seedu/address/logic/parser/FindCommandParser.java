@@ -28,26 +28,25 @@ public class FindCommandParser {
      * and returns an FindCommand object for execution.
      */
     public Command parse(String args) {
-    	ArgumentTokenizer argsTokenizer = 
+    	ArgumentTokenizer argsTokenizer =
     			new ArgumentTokenizer(PREFIX_NAME);
     	argsTokenizer.tokenize(args);
     	try{
 	    	Prefix prefix = argsTokenizer.getPrefixs().iterator().next();
 	    	String value = argsTokenizer.getValue(PREFIX_NAME).get();
-	    	
+
 	        final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(value.trim());
 	        if (!matcher.matches()) {
 	            return new IncorrectCommand(
 	                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
 	        }
-	
 	        // keywords delimited by whitespace
 	        final String[] keywords = matcher.group("keywords").split("\\s+");
 	        final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
 	        return new FindCommand(prefix, keywordSet);
     	} catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        } 
+        }
     }
 
 }
