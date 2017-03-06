@@ -14,7 +14,7 @@ import seedu.address.model.ReadOnlyTaskList;
 /**
  * A class to access AddressBook data stored as an xml file on the hard disk.
  */
-public class XmlAddressBookStorage implements AddressBookStorage {
+public class XmlAddressBookStorage implements TaskListStorage {
 
     private static final Logger logger = LogsCenter.getLogger(XmlAddressBookStorage.class);
 
@@ -24,21 +24,21 @@ public class XmlAddressBookStorage implements AddressBookStorage {
         this.filePath = filePath;
     }
 
-    public String getAddressBookFilePath() {
+    public String getTaskListFilePath() {
         return filePath;
     }
 
     @Override
-    public Optional<ReadOnlyTaskList> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(filePath);
+    public Optional<ReadOnlyTaskList> readTaskList() throws DataConversionException, IOException {
+        return readTaskList(filePath);
     }
 
     /**
-     * Similar to {@link #readAddressBook()}
+     * Similar to {@link #readTaskList()}
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyTaskList> readAddressBook(String filePath) throws DataConversionException,
+    public Optional<ReadOnlyTaskList> readTaskList(String filePath) throws DataConversionException,
                                                                                  FileNotFoundException {
         assert filePath != null;
 
@@ -55,15 +55,15 @@ public class XmlAddressBookStorage implements AddressBookStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyTaskList addressBook) throws IOException {
-        saveAddressBook(addressBook, filePath);
+    public void saveTaskList(ReadOnlyTaskList addressBook) throws IOException {
+        saveTaskList(addressBook, filePath);
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyTaskList)}
+     * Similar to {@link #saveTaskList(ReadOnlyTaskList)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveAddressBook(ReadOnlyTaskList addressBook, String filePath) throws IOException {
+    public void saveTaskList(ReadOnlyTaskList addressBook, String filePath) throws IOException {
         assert addressBook != null;
         assert filePath != null;
 
