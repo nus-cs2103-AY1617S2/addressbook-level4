@@ -1,14 +1,17 @@
 package seedu.address.model.task;
 
+import seedu.address.model.tag.UniqueTagList;
+
 /**
  * A read-only immutable interface for a Task in the addressbook.
  */
 public interface ReadOnlyTask {
 
-    Index getIndex();
+    IdentificationNumber getID();
     Name getName();
     Deadline getDeadline();
     Description getDescription();
+    UniqueTagList getTags();
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
@@ -19,7 +22,8 @@ public interface ReadOnlyTask {
                 && other.getID().equals(this.getID())
                 && other.getName().equals(this.getName()) // state checks here onwards
                 && other.getDeadline().equals(this.getDeadline())
-                && other.getDescription().equals(this.getDescription()));
+                && other.getDescription().equals(this.getDescription())
+                && other.getTags().equals(this.getTags()));
     }
 
     /**

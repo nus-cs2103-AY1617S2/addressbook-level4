@@ -2,12 +2,9 @@ package seedu.address.model.task;
 
 /**
  * Represents a Task's description in the TaskManager.
- * Guarantees: immutable; is valid as declared in {@link #isValidDescription(String)}
+ * Guarantees: immutable;
  */
 public class Description {
-
-    public static final String MESSAGE_DESCRIPTION_CONSTRAINTS =
-            "No contraints for description";
 
     public final String description;
 

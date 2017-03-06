@@ -3,6 +3,8 @@ package seedu.address.model.task;
 import java.util.Objects;
 
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.UniqueTagList;
 
 /**
  * Represents a Task in Task Manager
@@ -16,20 +18,30 @@ public class Task implements ReadOnlyTask {
     private Description description;
     private Deadline deadline;
 
+    private UniqueTagList tags;
+
     /**
-     * Name, index, deadline are required and must not be null
+     * Name, ID, deadline are required and must not be null
      */
-    public Task(Index index, Name name, Deadline deadline, Object... params) {
+    public Task(IdentificationNumber ID, Name name, Deadline deadline, Object... params) {
         assert !CollectionUtil.isAnyNull(name, deadline);
-        this.index = index;
+
+        this.ID = ID;
         this.name = name;
         this.deadline = deadline;
         this.description = new Description(DEFAULT_DESCRIPTION);
+        this.tags = new UniqueTagList();
 
         // Optional parameters
         for(Object param : params) {
             if (param instanceof Description) {
                 this.description = (Description)param;
+
+            } else if (param instanceof UniqueTagList) {
+                this.tags.mergeFrom((UniqueTagList) param);
+
+            } else if (param instanceof Tag) {
+                this.tags.add((Tag) param);
             }
         }
     }
@@ -81,6 +93,29 @@ public class Task implements ReadOnlyTask {
     @Override
     public Description getDescription() {
         return description;
+    }
+
+    /**
+     * Replaces this task's tags with the tags in the argument tag list.
+     */
+    public void setTags(UniqueTagList replacement) {
+        tags.setTags(replacement);
+    }
+
+    @Override
+    public UniqueTagList getTags() {
+        return new UniqueTagList(tags);
+    }
+
+    /**
+     * Updates this task with the details of {@code replacement}.
+     */
+    public void resetData(ReadOnlyTask replacement) {
+        assert replacement != null;
+
+        this.setName(replacement.getName());
+        this.setDeadline(replacement.getDeadline());
+        this.setDescription(replacement.getDescription());
     }
 
     @Override
