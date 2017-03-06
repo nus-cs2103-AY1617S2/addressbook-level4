@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/CS2103JAN2017-T09-B1/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-T09-B1/main)
 
-<img src="docs/images/Ui.png" width="600"><br>
+<img src="docs/images/ui.png" width="600"><br>
 
 * This is a desktop Address Book application. It has a GUI but most of the user interactions happen using
   a CLI (Command Line Interface).
