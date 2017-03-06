@@ -353,14 +353,14 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | view an existing task |
 `* * *` | user | undo/redo task | easily remove my mistakes
 `* * *` | user | sort all task | list all tasks alphabetically/by date dates/priorities
-`* * *` | user | prioritise task | know which task has a high importance 
+`* * *` | user | prioritise task | know which task has a high importance
 `* *` | user | change save location | allow the files to be saved in another location or a cloud
 `* *` | user | mark task as completed or uncompleted | know which tasks to do next
 `* *` | user | see due dates of task | better plan what tasks I should do
 `* *` | user | block and finalize time slots | allow better timetable planning for the future
 `* *` | user | set reminders | be informed when the next task is due
 `* *` | user | view history | view what tasks have been completed
-`* *` | user | autosave | 
+`* *` | user | autosave |
 `*` | user | make task recurring |
 `*` | user | make my own settings | customize ProcrastiNomore to my own liking
 
@@ -578,7 +578,7 @@ Use case ends.
 
 > 3a1. TaskManager shows an error message <br>
  Use case resumes at step 2
- 
+
 4a. Tasks is already sorted to given critera
 > Use case ends
 

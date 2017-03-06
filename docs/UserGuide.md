@@ -12,11 +12,11 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 
 ## 0. Introduction
 
-This User Guide will aid you in understanding how ProcrastiNomore operates and what are 
+This User Guide will aid you in understanding how ProcrastiNomore operates and what are
 the functionalities this application has.
 
-ProcrastinNomore is a single command line task-management application that is able to 
-store new tasks and edit existing tasks. It is able to store the tasks in Google calendar 
+ProcrastinNomore is a single command line task-management application that is able to
+store new tasks and edit existing tasks. It is able to store the tasks in Google calendar
 and will aid you in organizing all your corresponding tasks and events.
 
 ## 1. Quick Start
@@ -35,13 +35,13 @@ and will aid you in organizing all your corresponding tasks and events.
 
    >a. This application works by entering commands via the keyboard.<br>
    >b. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
-   >c. There are also several keyboard shortcuts found at the bottom of the User Guide for 
+   >c. There are also several keyboard shortcuts found at the bottom of the User Guide for
    quick access of several functions
-   >d. typing **`help`** and pressing <kbd>Enter</kbd> in the command box and it will 
+   >d. typing **`help`** and pressing <kbd>Enter</kbd> in the command box and it will
    open the help window.
    > <img src="images/Ui_help.png" width="300">
    
-5. Refer to the [Features](#features) section below for more details on the various 
+5. Refer to the [Features](#features) section below for more details on the various
 commands you can use.<br>
 
 
@@ -67,9 +67,9 @@ There are 4 forms of task that ProcrastiNomore supports:
 #### 2.2.1. Events
 
 Format: `add TASK on DATE/DAY` <br />
-        `add TASK from STARTTIME to ENDTIME` <br />
-        `add TASK on DATE/DAY from STARTTIME to ENDTIME` <br />
-		
+	`add TASK from STARTTIME to ENDTIME` <br />
+	`add TASK on DATE/DAY from STARTTIME to ENDTIME` <br />
+
 #### 2.2.2. Deadlines
 
 Format: `add TASK by DATE/TIME/DATE+TIME`
@@ -109,13 +109,13 @@ Format: `update TASK to NEWTASK`
 
 Format: `update TASK to STARTTIME to ENDTIME` <br />
 		`update TASK to TIME`
-		
+
 #### 2.3.3. Update the entire task index
 
 Format: `update TASKINDEX NEWTASKNAME/DATE/TIME`
 
-> For 2.3.1. and 2.3.2., ProcrastiNomore will show a list of task with the 
-> same task name and user will be required to put the TASKINDEX of the 
+> For 2.3.1. and 2.3.2., ProcrastiNomore will show a list of task with the
+> same task name and user will be required to put the TASKINDEX of the
 > TASK user wants to change
 
 Examples:
@@ -128,9 +128,9 @@ Examples:
 
 Format: `delete TASKNAME` <br />
 		`delete TASKINDEX`
-		
+
 > In the event of delete TASKNAME, ProcrastiNomore will show a list of tasks
-> with the same TASKNAME and user will be required to input the TASKINDEX of 
+> with the same TASKNAME and user will be required to input the TASKINDEX of
 > the TASK user wants to delete
 
 Examples:
@@ -159,6 +159,31 @@ Format: `clear completed` <br />
 Examples:
 * `clear 03/03/17`
 
+### 2.6. Search through all existing task by entering keywords/dates: search
+
+Format: Search KEYWORD
+        Search DATE
+
+> In the event of non-unique KEYWORD, ProcrastiNomore will show a list of tasks
+> with the same KEYWORD
+
+Examples:
+* `search breakfast`
+Returns any tasks with containing breakfast
+
+### 2.7. To sort through the list of task displayed: sort
+
+Format: Sort
+    Sort DATE
+    Sort TASKNAME
+
+Using the sort command on its own will sort the task in ascending TASKINDEX order
+
+### 2.8. To mark a task with higher importance: prioritise
+
+Format:   Prioritise TASKNAME
+          Prioritise TASKINDEX
+          Prioritise DATE
 
 ### 2.9. To Undo your previous commands: `undo`
 
@@ -210,3 +235,4 @@ There is no need to save manually.
 
 * **Select** : `select INDEX` <br>
   e.g.`select 2`
+  
