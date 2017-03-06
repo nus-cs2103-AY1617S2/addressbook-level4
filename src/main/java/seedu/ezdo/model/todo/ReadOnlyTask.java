@@ -29,7 +29,7 @@ public interface ReadOnlyTask {
                 && other.getName().equals(this.getName()) // state checks here onwards
                 && other.getPriority().equals(this.getPriority())
                 && other.getEmail().equals(this.getEmail())
-                && other.getStartDate().equals(this.getStartDate()));
+                && other.getStartDate().equals(this.getStartDate()))
                 && other.getDueDate().equals(this.getDueDate());
     }
 
