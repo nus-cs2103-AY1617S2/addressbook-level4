@@ -21,7 +21,7 @@ public class IdentificationNumber {
         return new IdentificationNumber(Math.max(i1.value, i2.value));
     }
 
-    public final Integer value;
+    public Integer value;
 
     /**
      * Value just needs to be not null
@@ -39,9 +39,13 @@ public class IdentificationNumber {
         }
     }
 
-    /** Return next index */
-    public IdentificationNumber next() {
-        return new IdentificationNumber(value + 1);
+    public IdentificationNumber(IdentificationNumber ID) {
+        this.value = ID.value;
+    }
+
+    /** Increase value by 1 */
+    public IdentificationNumber inc() {
+        return new IdentificationNumber(++this.value);
     }
 
 

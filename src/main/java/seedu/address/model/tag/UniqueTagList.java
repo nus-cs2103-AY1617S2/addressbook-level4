@@ -51,7 +51,7 @@ public class UniqueTagList implements Iterable<Tag> {
     public UniqueTagList(Tag... tags) {
         assert !CollectionUtil.isAnyNull((Object[]) tags);
         final List<Tag> initialTags = Arrays.asList(tags);
-        addTags(initialTags);
+        setTags(initialTags);
     }
 
     /**
@@ -97,11 +97,8 @@ public class UniqueTagList implements Iterable<Tag> {
 
     public void setTags(Collection<Tag> tags) {
         assert !CollectionUtil.isAnyNull(tags);
-        for(Tag tag : tags) {
-            if (!contains(tag)) {
-                add(tag);
-            }
-        }
+        assert CollectionUtil.elementsAreUnique(tags);
+        this.internalList.setAll(tags);
     }
 
     /**
@@ -132,12 +129,7 @@ public class UniqueTagList implements Iterable<Tag> {
 
     /** Adds a list of Tags to the list.  */
     public void addTags(List<Tag> tags) {
-        assert tags != null;
-        for(Tag tag : tags) {
-            if (!contains(tag)) {
-                internalList.add(tag);
-            }
-        }
+        tags.forEach(this::add);
     }
 
     @Override

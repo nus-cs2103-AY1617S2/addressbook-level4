@@ -11,7 +11,8 @@ import seedu.address.model.tag.UniqueTagList;
  */
 public class Task implements ReadOnlyTask {
 
-    private final String DEFAULT_DESCRIPTION = "";
+    private static final String DEFAULT_DESCRIPTION = "";
+    private static final IdentificationNumber DEFAULT_ID = IdentificationNumber.ZERO;
 
     private IdentificationNumber ID;
     private Name name;
@@ -23,25 +24,30 @@ public class Task implements ReadOnlyTask {
     /**
      * Name, ID, deadline are required and must not be null
      */
-    public Task(IdentificationNumber ID, Name name, Deadline deadline, Object... params) {
+    public Task(Name name, Deadline deadline, Object... params) {
         assert !CollectionUtil.isAnyNull(name, deadline);
 
-        this.ID = ID;
+        this.ID = DEFAULT_ID;
         this.name = name;
         this.deadline = deadline;
         this.description = new Description(DEFAULT_DESCRIPTION);
         this.tags = new UniqueTagList();
 
         // Optional parameters
+        // ID tends to be set after Task creation,
+        // so it is also included in optional params
         for(Object param : params) {
             if (param instanceof Description) {
-                this.description = (Description)param;
+                this.description = (Description) param;
 
             } else if (param instanceof UniqueTagList) {
                 this.tags.mergeFrom((UniqueTagList) param);
 
             } else if (param instanceof Tag) {
                 this.tags.add((Tag) param);
+
+            } else if (param instanceof IdentificationNumber) {
+                this.ID = (IdentificationNumber) param;
             }
         }
     }
@@ -50,13 +56,17 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getID(), source.getName(), source.getDeadline(), source.getDescription());
+        this(source.getName(), source.getDeadline(), source.getID(), source.getDescription());
     }
 
     
     /**
      * Getters and setters
      */
+    public void setID(IdentificationNumber ID) {
+        this.ID = ID;
+    }
+
     @Override
     public IdentificationNumber getID() {
         return ID;
