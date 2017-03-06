@@ -4,7 +4,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Jay Gajendra Kabra](hhttps://github.com/jay500s)
+#### [Jay Gajendra Kabra](https://github.com/jay500s)
 <img src="" width="150"><br>
 **Role**: Developer <br>
 Responsibilities: Model and Code Quality
