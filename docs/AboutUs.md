@@ -10,7 +10,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 -----
 
-#### [Joshua Lee](http://github.com/lejolly)
+#### [Shawn Lin](http://github.com/lejolly)
 <img src="images/JoshuaLee.jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: UI
