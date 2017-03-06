@@ -16,9 +16,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.taskList.model.AddressBook;
 import seedu.taskList.model.ReadOnlyAddressBook;
-import seedu.taskList.model.person.Person;
-import seedu.taskList.model.person.ReadOnlyPerson;
 import seedu.taskList.model.tag.Tag;
+import seedu.taskList.model.task.Person;
+import seedu.taskList.model.task.ReadOnlyTask;
 import seedu.taskList.testutil.TypicalTestPersons;
 
 public class AddressBookTest {
@@ -62,7 +62,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
         AddressBook typicalAddressBook = new TypicalTestPersons().getTypicalAddressBook();
-        List<ReadOnlyPerson> newPersons = typicalAddressBook.getPersonList();
+        List<ReadOnlyTask> newPersons = typicalAddressBook.getPersonList();
         List<Tag> newTags = new ArrayList<>(typicalAddressBook.getTagList());
         // Repeat the first tag twice
         newTags.add(newTags.get(0));
@@ -76,16 +76,16 @@ public class AddressBookTest {
      * A stub ReadOnlyAddressBook whose persons and tags lists can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
-        private final ObservableList<ReadOnlyPerson> persons = FXCollections.observableArrayList();
+        private final ObservableList<ReadOnlyTask> persons = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<? extends ReadOnlyPerson> persons, Collection<? extends Tag> tags) {
+        AddressBookStub(Collection<? extends ReadOnlyTask> persons, Collection<? extends Tag> tags) {
             this.persons.setAll(persons);
             this.tags.setAll(tags);
         }
 
         @Override
-        public ObservableList<ReadOnlyPerson> getPersonList() {
+        public ObservableList<ReadOnlyTask> getPersonList() {
             return persons;
         }
 

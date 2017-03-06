@@ -15,7 +15,7 @@ import seedu.taskList.commons.exceptions.DataConversionException;
 import seedu.taskList.commons.util.FileUtil;
 import seedu.taskList.model.AddressBook;
 import seedu.taskList.model.ReadOnlyAddressBook;
-import seedu.taskList.model.person.Person;
+import seedu.taskList.model.task.Person;
 import seedu.taskList.storage.XmlAddressBookStorage;
 import seedu.taskList.testutil.TypicalTestPersons;
 

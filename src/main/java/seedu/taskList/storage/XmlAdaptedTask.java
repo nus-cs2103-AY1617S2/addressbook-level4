@@ -6,19 +6,19 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.taskList.commons.exceptions.IllegalValueException;
-import seedu.taskList.model.person.Address;
-import seedu.taskList.model.person.Email;
-import seedu.taskList.model.person.Name;
-import seedu.taskList.model.person.Person;
-import seedu.taskList.model.person.Phone;
-import seedu.taskList.model.person.ReadOnlyPerson;
 import seedu.taskList.model.tag.Tag;
 import seedu.taskList.model.tag.UniqueTagList;
+import seedu.taskList.model.task.Address;
+import seedu.taskList.model.task.Email;
+import seedu.taskList.model.task.Name;
+import seedu.taskList.model.task.Task;
+import seedu.taskList.model.task.Phone;
+import seedu.taskList.model.task.ReadOnlyTask;
 
 /**
- * JAXB-friendly version of the Person.
+ * JAXB-friendly version of the Task.
  */
-public class XmlAdaptedPerson {
+public class XmlAdaptedTask {
 
     @XmlElement(required = true)
     private String name;
@@ -33,18 +33,18 @@ public class XmlAdaptedPerson {
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
     /**
-     * Constructs an XmlAdaptedPerson.
+     * Constructs an XmlAdaptedTask.
      * This is the no-arg constructor that is required by JAXB.
      */
-    public XmlAdaptedPerson() {}
+    public XmlAdaptedTask() {}
 
 
     /**
-     * Converts a given Person into this class for JAXB use.
+     * Converts a given Task into this class for JAXB use.
      *
-     * @param source future changes to this will not affect the created XmlAdaptedPerson
+     * @param source future changes to this will not affect the created XmlAdaptedTask
      */
-    public XmlAdaptedPerson(ReadOnlyPerson source) {
+    public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
@@ -56,11 +56,11 @@ public class XmlAdaptedPerson {
     }
 
     /**
-     * Converts this jaxb-friendly adapted person object into the model's Person object.
+     * Converts this jaxb-friendly adapted person object into the model's Task object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person
      */
-    public Person toModelType() throws IllegalValueException {
+    public Task toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
@@ -70,6 +70,6 @@ public class XmlAdaptedPerson {
         final Email email = new Email(this.email);
         final Address address = new Address(this.address);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Person(name, phone, email, address, tags);
+        return new Task(name, phone, email, address, tags);
     }
 }

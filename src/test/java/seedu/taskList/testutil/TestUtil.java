@@ -30,14 +30,14 @@ import seedu.taskList.commons.exceptions.IllegalValueException;
 import seedu.taskList.commons.util.FileUtil;
 import seedu.taskList.commons.util.XmlUtil;
 import seedu.taskList.model.AddressBook;
-import seedu.taskList.model.person.Address;
-import seedu.taskList.model.person.Email;
-import seedu.taskList.model.person.Name;
-import seedu.taskList.model.person.Person;
-import seedu.taskList.model.person.Phone;
-import seedu.taskList.model.person.ReadOnlyPerson;
 import seedu.taskList.model.tag.Tag;
 import seedu.taskList.model.tag.UniqueTagList;
+import seedu.taskList.model.task.Address;
+import seedu.taskList.model.task.Email;
+import seedu.taskList.model.task.Name;
+import seedu.taskList.model.task.Person;
+import seedu.taskList.model.task.Phone;
+import seedu.taskList.model.task.ReadOnlyTask;
 import seedu.taskList.storage.XmlSerializableAddressBook;
 
 /**
@@ -333,7 +333,7 @@ public class TestUtil {
         return list;
     }
 
-    public static boolean compareCardAndPerson(PersonCardHandle card, ReadOnlyPerson person) {
+    public static boolean compareCardAndPerson(PersonCardHandle card, ReadOnlyTask person) {
         return card.isSamePerson(person);
     }
 

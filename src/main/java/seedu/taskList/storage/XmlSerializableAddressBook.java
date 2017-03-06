@@ -12,9 +12,9 @@ import javafx.collections.ObservableList;
 import seedu.taskList.commons.core.UnmodifiableObservableList;
 import seedu.taskList.commons.exceptions.IllegalValueException;
 import seedu.taskList.model.ReadOnlyAddressBook;
-import seedu.taskList.model.person.Person;
-import seedu.taskList.model.person.ReadOnlyPerson;
 import seedu.taskList.model.tag.Tag;
+import seedu.taskList.model.task.Task;
+import seedu.taskList.model.task.ReadOnlyTask;
 
 /**
  * An Immutable AddressBook that is serializable to XML format
@@ -23,7 +23,7 @@ import seedu.taskList.model.tag.Tag;
 public class XmlSerializableAddressBook implements ReadOnlyAddressBook {
 
     @XmlElement
-    private List<XmlAdaptedPerson> persons;
+    private List<XmlAdaptedTask> persons;
     @XmlElement
     private List<XmlAdaptedTag> tags;
 
@@ -41,13 +41,13 @@ public class XmlSerializableAddressBook implements ReadOnlyAddressBook {
      */
     public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
         this();
-        persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        persons.addAll(src.getTaskList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
     }
 
     @Override
-    public ObservableList<ReadOnlyPerson> getPersonList() {
-        final ObservableList<Person> persons = this.persons.stream().map(p -> {
+    public ObservableList<ReadOnlyTask> getTaskList() {
+        final ObservableList<Task> persons = this.persons.stream().map(p -> {
             try {
                 return p.toModelType();
             } catch (IllegalValueException e) {

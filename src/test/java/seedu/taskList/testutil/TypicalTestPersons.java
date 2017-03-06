@@ -2,8 +2,8 @@ package seedu.taskList.testutil;
 
 import seedu.taskList.commons.exceptions.IllegalValueException;
 import seedu.taskList.model.AddressBook;
-import seedu.taskList.model.person.Person;
-import seedu.taskList.model.person.UniquePersonList;
+import seedu.taskList.model.task.Person;
+import seedu.taskList.model.task.UniqueTaskList;
 
 /**
  *
@@ -47,7 +47,7 @@ public class TypicalTestPersons {
         for (TestPerson person : new TypicalTestPersons().getTypicalPersons()) {
             try {
                 ab.addPerson(new Person(person));
-            } catch (UniquePersonList.DuplicatePersonException e) {
+            } catch (UniqueTaskList.DuplicatePersonException e) {
                 assert false : "not possible";
             }
         }

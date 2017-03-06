@@ -25,7 +25,7 @@ import seedu.taskList.TestApp;
 import seedu.taskList.commons.core.EventsCenter;
 import seedu.taskList.commons.events.BaseEvent;
 import seedu.taskList.model.AddressBook;
-import seedu.taskList.model.person.ReadOnlyPerson;
+import seedu.taskList.model.task.ReadOnlyTask;
 import seedu.taskList.testutil.TestUtil;
 import seedu.taskList.testutil.TypicalTestPersons;
 
@@ -107,7 +107,7 @@ public abstract class AddressBookGuiTest {
     /**
      * Asserts the person shown in the card is same as the given person
      */
-    public void assertMatching(ReadOnlyPerson person, PersonCardHandle card) {
+    public void assertMatching(ReadOnlyTask person, PersonCardHandle card) {
         assertTrue(TestUtil.compareCardAndPerson(card, person));
     }
 
