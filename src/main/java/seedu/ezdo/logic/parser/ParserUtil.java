@@ -90,7 +90,7 @@ public class ParserUtil {
         assert startDate != null;
         return startDate.isPresent() ? Optional.of(new StartDate(startDate.get())) : Optional.empty();
     }
-    
+
     /**
      * Parses a {@code Optional<String> dueDate} into an {@code Optional<DueDate>} if {@code dueDate} is present.
      */
