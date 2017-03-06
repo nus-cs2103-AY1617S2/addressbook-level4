@@ -368,7 +368,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user | be able to view my agenda for the day | know what tasks to work on
 `* *` | user | iterate through my command history | re-execute a command that I have previously executed before
 `* *` | user | have words that I am typing to be autocompleted by the system | execute a command at a faster rate
-`* *` | user | delete all labels and its association | remove a label that I no longer need
+`* *` | user | delete a label | remove that label from all tasks that has that label
 `*` | user | launch application using shortcut | not need to find the execution file to run the application
 `*` | user | generate a printable format schedule | refer to the tasks when I have no access to a laptop
 
@@ -756,22 +756,16 @@ Precondition: User has opened the application<br />
 
 **MSS**
 
-1. User requests to list outstanding tasks (UC05)
-2. System shows a list of tasks with its details
-3. User selects the label to delete
-4. System delete the label and display the updated list of tasks<br />
+1. User requests to delete a specific label
+2. System deletes the label and display the updated list of tasks<br />
 Use case ends
 
 **Extensions**
 
-2a. The list is empty
+2a. Label is invalid or does not exist
 
-> Use case ends
-
-3a. The given index is invalid
-
-> 3a1. System shows an error message<br />
-  Use case resumes at step 2
+> 2a1. System notifies the user that such a label is invalid/does not exist<br />
+  Use case ends
 
 #### Use case: Launch application using shortcut
 Use case ID: UC23 Launch application using shortcut<br />
