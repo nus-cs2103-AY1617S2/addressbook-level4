@@ -16,8 +16,7 @@ import seedu.geekeep.model.person.UniquePersonList;
 import seedu.geekeep.model.person.UniquePersonList.PersonNotFoundException;
 
 /**
- * Represents the in-memory model of the address book data.
- * All changes to any model should be synchronized.
+ * Represents the in-memory model of the address book data. All changes to any model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -81,7 +80,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    // =========== Filtered Person List Accessors =============================================================
 
     @Override
     public UnmodifiableObservableList<ReadOnlyPerson> getFilteredPersonList() {
@@ -102,10 +101,11 @@ public class ModelManager extends ComponentManager implements Model {
         filteredPersons.setPredicate(expression::satisfies);
     }
 
-    //========== Inner classes/interfaces used for filtering =================================================
+    // ========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
         boolean satisfies(ReadOnlyPerson person);
+
         String toString();
     }
 
@@ -130,6 +130,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Qualifier {
         boolean run(ReadOnlyPerson person);
+
         String toString();
     }
 
@@ -143,8 +144,7 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyPerson person) {
             return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword))
-                    .findAny()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword)).findAny()
                     .isPresent();
         }
 

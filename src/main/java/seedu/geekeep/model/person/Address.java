@@ -1,20 +1,18 @@
 package seedu.geekeep.model.person;
 
-
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's address in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
+ * Represents a Person's address in the address book. Guarantees: immutable; is valid as declared in
+ * {@link #isValidAddress(String)}
  */
 public class Address {
 
-    public static final String MESSAGE_ADDRESS_CONSTRAINTS =
-            "Person addresses can take any values, and it should not be blank";
+    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses can take any values, and it should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * The first character of the address must not be a whitespace, otherwise " " (a blank string) becomes a valid
+     * input.
      */
     public static final String ADDRESS_VALIDATION_REGEX = "[^\\s].*";
 
@@ -23,7 +21,8 @@ public class Address {
     /**
      * Validates given address.
      *
-     * @throws IllegalValueException if given address string is invalid.
+     * @throws IllegalValueException
+     *             if given address string is invalid.
      */
     public Address(String address) throws IllegalValueException {
         assert address != null;
@@ -49,7 +48,7 @@ public class Address {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Address // instanceof handles nulls
-                && this.value.equals(((Address) other).value)); // state check
+                        && this.value.equals(((Address) other).value)); // state check
     }
 
     @Override

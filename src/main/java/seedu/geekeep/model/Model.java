@@ -27,9 +27,11 @@ public interface Model {
     /**
      * Updates the person located at {@code filteredPersonListIndex} with {@code editedPerson}.
      *
-     * @throws DuplicatePersonException if updating the person's details causes the person to be equivalent to
-     *      another existing person in the list.
-     * @throws IndexOutOfBoundsException if {@code filteredPersonListIndex} < 0 or >= the size of the filtered list.
+     * @throws DuplicatePersonException
+     *             if updating the person's details causes the person to be equivalent to another existing person in the
+     *             list.
+     * @throws IndexOutOfBoundsException
+     *             if {@code filteredPersonListIndex} < 0 or >= the size of the filtered list.
      */
     void updatePerson(int filteredPersonListIndex, ReadOnlyPerson editedPerson)
             throws UniquePersonList.DuplicatePersonException;
@@ -40,7 +42,7 @@ public interface Model {
     /** Updates the filter of the filtered person list to show all persons */
     void updateFilteredListToShowAll();
 
-    /** Updates the filter of the filtered person list to filter by the given keywords*/
+    /** Updates the filter of the filtered person list to filter by the given keywords */
     void updateFilteredPersonList(Set<String> keywords);
 
 }

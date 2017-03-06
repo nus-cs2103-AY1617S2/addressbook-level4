@@ -6,8 +6,7 @@ import seedu.geekeep.commons.util.CollectionUtil;
 import seedu.geekeep.model.tag.UniqueTagList;
 
 /**
- * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated.
+ * Represents a Person in the address book. Guarantees: details are present and not null, field values are validated.
  */
 public class Person implements ReadOnlyPerson {
 
@@ -106,7 +105,7 @@ public class Person implements ReadOnlyPerson {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ReadOnlyPerson // instanceof handles nulls
-                && this.isSameStateAs((ReadOnlyPerson) other));
+                        && this.isSameStateAs((ReadOnlyPerson) other));
     }
 
     @Override

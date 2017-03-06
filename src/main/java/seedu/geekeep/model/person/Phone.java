@@ -3,8 +3,8 @@ package seedu.geekeep.model.person;
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's phone number in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
+ * Represents a Person's phone number in the address book. Guarantees: immutable; is valid as declared in
+ * {@link #isValidPhone(String)}
  */
 public class Phone {
 
@@ -16,7 +16,8 @@ public class Phone {
     /**
      * Validates given phone number.
      *
-     * @throws IllegalValueException if given phone string is invalid.
+     * @throws IllegalValueException
+     *             if given phone string is invalid.
      */
     public Phone(String phone) throws IllegalValueException {
         assert phone != null;
@@ -43,7 +44,7 @@ public class Phone {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Phone // instanceof handles nulls
-                && this.value.equals(((Phone) other).value)); // state check
+                        && this.value.equals(((Phone) other).value)); // state check
     }
 
     @Override

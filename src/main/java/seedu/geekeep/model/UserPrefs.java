@@ -32,7 +32,7 @@ public class UserPrefs {
         if (other == this) {
             return true;
         }
-        if (!(other instanceof UserPrefs)) { //this handles null as well.
+        if (!(other instanceof UserPrefs)) { // this handles null as well.
             return false;
         }
 

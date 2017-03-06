@@ -18,8 +18,7 @@ import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.tag.UniqueTagList;
 
 /**
- * Wraps all data at the address-book level
- * Duplicates are not allowed (by .equals comparison)
+ * Wraps all data at the address-book level Duplicates are not allowed (by .equals comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
@@ -27,18 +26,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     private final UniqueTagList tags;
 
     /*
-     * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
-     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
+     * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication between
+     * constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
      *
-     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
-     *   among constructors.
+     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication among
+     * constructors.
      */
     {
         persons = new UniquePersonList();
         tags = new UniqueTagList();
     }
 
-    public AddressBook() {}
+    public AddressBook() {
+    }
 
     /**
      * Creates an AddressBook using the Persons and Tags in the {@code toBeCopied}
@@ -48,10 +48,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         resetData(toBeCopied);
     }
 
-//// list overwrite operations
+    //// list overwrite operations
 
-    public void setPersons(List<? extends ReadOnlyPerson> persons)
-            throws UniquePersonList.DuplicatePersonException {
+    public void setPersons(List<? extends ReadOnlyPerson> persons) throws UniquePersonList.DuplicatePersonException {
         this.persons.setPersons(persons);
     }
 
@@ -74,14 +73,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         syncMasterTagListWith(persons);
     }
 
-//// person-level operations
+    //// person-level operations
 
     /**
-     * Adds a person to the address book.
-     * Also checks the new person's tags and updates {@link #tags} with any new tags found,
-     * and updates the Tag objects in the person to point to those in {@link #tags}.
+     * Adds a person to the address book. Also checks the new person's tags and updates {@link #tags} with any new tags
+     * found, and updates the Tag objects in the person to point to those in {@link #tags}.
      *
-     * @throws UniquePersonList.DuplicatePersonException if an equivalent person already exists.
+     * @throws UniquePersonList.DuplicatePersonException
+     *             if an equivalent person already exists.
      */
     public void addPerson(Person p) throws UniquePersonList.DuplicatePersonException {
         syncMasterTagListWith(p);
@@ -89,13 +88,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Updates the person in the list at position {@code index} with {@code editedReadOnlyPerson}.
-     * {@code AddressBook}'s tag list will be updated with the tags of {@code editedReadOnlyPerson}.
+     * Updates the person in the list at position {@code index} with {@code editedReadOnlyPerson}. {@code AddressBook}'s
+     * tag list will be updated with the tags of {@code editedReadOnlyPerson}.
+     * 
      * @see #syncMasterTagListWith(Person)
      *
-     * @throws DuplicatePersonException if updating the person's details causes the person to be equivalent to
-     *      another existing person in the list.
-     * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
+     * @throws DuplicatePersonException
+     *             if updating the person's details causes the person to be equivalent to another existing person in the
+     *             list.
+     * @throws IndexOutOfBoundsException
+     *             if {@code index} < 0 or >= the size of the list.
      */
     public void updatePerson(int index, ReadOnlyPerson editedReadOnlyPerson)
             throws UniquePersonList.DuplicatePersonException {
@@ -110,9 +112,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Ensures that every tag in this person:
-     *  - exists in the master list {@link #tags}
-     *  - points to a Tag object in the master list
+     * Ensures that every tag in this person: - exists in the master list {@link #tags} - points to a Tag object in the
+     * master list
      */
     private void syncMasterTagListWith(Person person) {
         final UniqueTagList personTags = person.getTags();
@@ -130,10 +131,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Ensures that every tag in these persons:
-     *  - exists in the master list {@link #tags}
-     *  - points to a Tag object in the master list
-     *  @see #syncMasterTagListWith(Person)
+     * Ensures that every tag in these persons: - exists in the master list {@link #tags} - points to a Tag object in
+     * the master list
+     * 
+     * @see #syncMasterTagListWith(Person)
      */
     private void syncMasterTagListWith(UniquePersonList persons) {
         persons.forEach(this::syncMasterTagListWith);
@@ -147,17 +148,17 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
     }
 
-//// tag-level operations
+    //// tag-level operations
 
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
         tags.add(t);
     }
 
-//// util methods
+    //// util methods
 
     @Override
     public String toString() {
-        return persons.asObservableList().size() + " persons, " + tags.asObservableList().size() +  " tags";
+        return persons.asObservableList().size() + " persons, " + tags.asObservableList().size() + " tags";
         // TODO: refine later
     }
 
@@ -175,8 +176,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && this.persons.equals(((AddressBook) other).persons)
-                && this.tags.equalsOrderInsensitive(((AddressBook) other).tags));
+                        && this.persons.equals(((AddressBook) other).persons)
+                        && this.tags.equalsOrderInsensitive(((AddressBook) other).tags));
     }
 
     @Override
