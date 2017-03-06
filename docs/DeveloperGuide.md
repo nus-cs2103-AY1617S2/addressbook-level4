@@ -19,10 +19,10 @@ Priority | As a ... | I want to ... | So that I can...
  `* * *` | User | Specify a deadline for a task | Keep track of when my tasks are due
  `* * *` | User | Update an existing task | Correct a mistake or indicate a change in the task
  `* * *` | User | Delete a task | Indicate a change in the task
- `* * *` | User | Categorize my tasks | Find the tasks more easily, and make my task manager more organized
- `* * *` | User | Manage (add, delete, rename) the categories | Indicate changes in categories
- `* * *` | User | View all tasks associated to a certain category | Focus on a specific category of tasks
+ `* * *` | User | Tag my tasks | Find the tasks more easily, and make my task manager more organized
+ `* * *` | User | Manage (add, delete, rename) the tags | Indicate changes in tags
  `* * *` | User | Find a specific task by keywords in the description/title | I can view or modify the task
+ `* * *` | User | Find tasks due on a specific day | I can see my workload for that day
  `* * *` | User | View all tasks | Know what tasks I have
  `* * *` | User | Be able to indicate if I have completed a task or not | Keep track of my progress
  `* * *` | User | View all tasks that I have not done | View how much more work is there to be done

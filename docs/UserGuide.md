@@ -13,10 +13,10 @@ By : `T09B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`
 ## 2. Features
 ### Adding tasks
 **Adding a new task**
-Format: `add <task_name> [due <deadline>] [tag <tag1, tag2, ...>]`
+Format: `add <task_name> [due <datetime>] [tag <tag1, tag2, ...>]`
 
 > task_name : Name of your task<br>
-> deadline (optional) :<br>
+> datetime (optional) :<br>
 >   (1) Date only, `02/03/17` or `020317` (ddmmyy)<br>
 >   (2) Time only, `3pm` or `12noon` or `2.30am`<br>
 >   (3) Time and Date, write time before date<br>
@@ -49,23 +49,30 @@ Examples:
 **Listing all ongoing tasks**
 Format: `list`
 
-**Finding tasks**
+**Finding tasks by keyword**
 Format: `find <keyword1 keyword2 ...>`
 > keyword1, keyword2, … : All the parameters you want in the search.
 
 Examples:
 
 * `find completed schoolwork`
-* `find deadline 21042017`
+
+**Finding tasks by datetime**
+Format: `find due <datetime>`
+> datetime : REFER TO ADD TASK
+
+Examples:
+
+* `find due 21042017`
 
 
 ### Managing tasks
 **Updating task**
-Format: `update <id> [<new_task_name>] [due <new_deadline>] [tag <tag1, tag2, ...>] [remove tag <tag1, tag2, ...>]`
+Format: `update <id> [<new_task_name>] [due <new_datetime>] [tag <tag1, tag2, ...>] [remove tag <tag1, tag2, ...>]`
 
 > id : displayed task id<br>
 > new_task_name (optional) : new name to replace the old task name<br>
-> new_deadline (optional) : REFER TO ADD TASK
+> new_datetime (optional) : REFER TO ADD TASK
 
 Examples:
 
@@ -153,11 +160,11 @@ Examples:
 
 ## 4. Command Usage
 
-* **Add Task**: `add <task_name> [due <deadline>] [tag <tag1, tag2, ...>]`
+* **Add Task**: `add <task_name> [due <datetime>] [tag <tag1, tag2, ...>]`
 * **Add Event**: `add <event_name> from <starting_time> to <end_time> [on <date>] [tag <tag1, tag2, ...>]`
 * **View All Tasks**: `list`
 * **Find Task**: `find <keyword1 keyword2 ...>`
-* **Update Task**: `update <id> [<new_task_name>] [due <new_deadline>] [tag <tag1, tag2, ...>] [remove tag <tag1, tag2, ...>]`
+* **Update Task**: `update <id> [<new_task_name>] [due <new_datetime>] [tag <tag1, tag2, ...>] [remove tag <tag1, tag2, ...>]`
 * **Delete Task**: `delete <id1, id2, id3>`
 * **Complete Task**: `complete <id1, id2, ...>`
 * **Rename Tag**: `rename tag from <tag_name> to <new_tag_name>`
