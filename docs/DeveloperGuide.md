@@ -695,3 +695,24 @@ Cons:
 * Very limited keyboard shortcuts
 * No additional features (e.g. reminders/priority listing/tags/search/recurring events/calenders)
 
+**Product Name**: ToDoist
+
+Author: Jun Wei
+
+Pros:
+
+* Organised and simple interface
+* Keyboard shortcuts available (some which work without being on the app)
+* Friendly for keyboard users who do not have a mouse (can even add into specific list with due dates)
+* Can give tasks certain priorities
+* Pre-set filters available (to filter task by due date or priority)
+* Auto-completion and recognition for labels,tags and dates to sort tasks when adding tasks
+* Able to check done tasks and undo in the event that it was accidental
+* Can share projects with others who are also using the app and add/edit tasks within project
+* Synchronizes across different platforms
+
+Cons:
+
+* Many functions only functional for premium users (eg. labels, email/SMS reminders, custom filters)
+* Notifications only possible when application is turned on
+* Although adding task is easy with keyboard, other functionalities like deleting, editing and shifting tasks across projects require a mouse
