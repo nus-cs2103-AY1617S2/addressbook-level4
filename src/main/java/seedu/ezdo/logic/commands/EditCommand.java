@@ -153,7 +153,7 @@ public class EditCommand extends Command {
         public Optional<StartDate> getStartDate() {
             return startDate;
         }
-        
+
         public void setDueDate(Optional<DueDate> dueDate) {
             assert dueDate != null;
             this.dueDate = dueDate;
