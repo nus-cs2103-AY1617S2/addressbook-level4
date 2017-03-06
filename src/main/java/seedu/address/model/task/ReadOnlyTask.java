@@ -32,16 +32,16 @@ public interface ReadOnlyTask {
     }
 
     /**
-     * Formats the task as text, showing all contact details.
+     * Formats the task as text, showing all task's details.
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append(" Phone: ")
+                .append(" Priority: ")
                 .append(getPriority())
-                .append(" Email: ")
+                .append(" Status: ")
                 .append(getStatus())
-                .append(" Address: ")
+                .append(" Note: ")
                 .append(getNote())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
