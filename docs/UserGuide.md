@@ -67,6 +67,7 @@ There are 4 forms of task that ProcrastiNomore supports:
 #### 2.2.1. Events
 
 Format: `add TASK on DATE/DAY` <br />
+
 		`add TASK from STARTTIME to ENDTIME` <br />
 		`add TASK on DATE/DAY from STARTTIME to ENDTIME` <br />
 
@@ -107,7 +108,7 @@ Format: `update TASK to NEWTASK`
 
 #### 2.3.2. Update task time
 
-Format: `update TASK to STARTTIME to ENDTIME`
+Format: `update TASK to STARTTIME to ENDTIME` <br />
 		`update TASK to TIME`
 
 #### 2.3.3. Update the entire task index
@@ -153,7 +154,7 @@ Format: `clear DATE`
 
 #### 2.5.3. Delete all previously marked uncomplete/complete tasks
 
-Format: `clear completed`
+Format: `clear completed` <br />
 		`clear uncompleted`
 
 Examples:
@@ -188,16 +189,19 @@ Format:   Prioritise TASKNAME
 ### 2.9. To Undo your previous commands: `undo`
 
 Shortcut: `Ctrl+Z`<br>
+
 1 command will be undone every time this command is called.
 
 ### 2.10. To Redo your previous commands: `redo`
 
 Shortcut: `Ctrl+Y`<br>
+
 1 command will be redone every time this command is called.
 
 ### 2.11. Exiting the program : `exit`
 
 Exits the program.<br>
+
 Format: `exit`
 
 ### 2.12. Saving the data
@@ -213,8 +217,8 @@ There is no need to save manually.
 
 ## 4. Command Summary
 
-* **Add**  `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` <br>
-  e.g. `add James Ho p/22224444 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+* **Add**  `add TASK on DATE/DAY from STARTTIME to ENDTIME` <br>
+  e.g. `add eat food on 03/03/17 from 0830 to 1030`
 
 * **Clear** : `clear`
 
