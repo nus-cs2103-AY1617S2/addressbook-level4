@@ -9,7 +9,7 @@ We are a team based in the [School of Computing, National University of Singapor
 **Role**: Team lead<br>
 **Responsibilities**: UI
 
-#### [Yanzheng](http://github.com/mynameisyz)
+#### [Yanzhang](http://github.com/mynameisyz)
 <img src="images/mynameisyz.png" width="150"><br>
 **Role**: Testing & QA<br>
 **Responsibilities**: Storage
