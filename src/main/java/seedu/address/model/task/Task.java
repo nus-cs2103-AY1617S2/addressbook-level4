@@ -11,7 +11,7 @@ public class Task implements ReadOnlyTask {
 
     private final String DEFAULT_DESCRIPTION = "";
 
-    private Index index;
+    private IdentificationNumber ID;
     private Name name;
     private Description description;
     private Deadline deadline;
@@ -38,7 +38,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getIndex(), source.getName(), source.getDeadline(), source.getDescription());
+        this(source.getID(), source.getName(), source.getDeadline(), source.getDescription());
     }
 
     
@@ -46,8 +46,8 @@ public class Task implements ReadOnlyTask {
      * Getters and setters
      */
     @Override
-    public Index getIndex() {
-        return index;
+    public IdentificationNumber getID() {
+        return ID;
     }
 
     public void setName(Name name) {
