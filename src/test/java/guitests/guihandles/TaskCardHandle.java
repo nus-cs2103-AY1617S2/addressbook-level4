@@ -32,7 +32,7 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(fieldId, node);
     }
 
-    public String get() {
+    public String getTitle() {
         return getTextFromLabel(TITLE_FIELD_ID);
     }
 
@@ -74,7 +74,7 @@ public class TaskCardHandle extends GuiHandle {
 
     public boolean isSameTask(ReadOnlyTask task) {
         return getTitle().equals(task.getTitle().title)
-                && getVenue().equals(task.getTitle().value)
+                && getVenue().equals(task.getTitle().title)
                 && getStartTime().equals(task.getStartTime().value)
                 && getEndTime().equals(task.getEndTime().value)
                 && getTags().equals(getTags(task.getTags()));
@@ -95,6 +95,6 @@ public class TaskCardHandle extends GuiHandle {
 
     @Override
     public String toString() {
-        return getFullName() + " " + getEndTime();
+        return getTitle() + " " + getEndTime();
     }
 }
