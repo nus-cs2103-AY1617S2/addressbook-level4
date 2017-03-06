@@ -4,14 +4,9 @@ import java.util.Objects;
 
 import seedu.address.model.tag.UniqueTagList;
 
-public class FloatingTask implements Task {
+public class FloatingTask extends Task {
     
-    private Name name;
-    private Description desc;
-    
-    private UniqueTagList tags;
 
-    
     public FloatingTask(Name name, Description desc, UniqueTagList tags) {
         this.name = name;
         this.desc = desc;
@@ -23,38 +18,6 @@ public class FloatingTask implements Task {
      */
     public FloatingTask(Task source) {
         this(source.getName(), source.getDescription(), source.getTags());
-    }
-
-    public void setName(Name name) {
-        assert name != null;
-        this.name = name;
-    }
-
-    @Override
-    public Name getName() {
-        return name;
-    }
-
-    public void setDescription(Description desc) {
-        assert desc != null;
-        this.desc = desc;
-    }
-
-    @Override
-    public Description getDescription() {
-        return desc;
-    }
-
-    @Override
-    public UniqueTagList getTags() {
-        return new UniqueTagList(tags);
-    }
-
-    /**
-     * Replaces this person's tags with the tags in the argument tag list.
-     */
-    public void setTags(UniqueTagList replacement) {
-        tags.setTags(replacement);
     }
 
     /**
