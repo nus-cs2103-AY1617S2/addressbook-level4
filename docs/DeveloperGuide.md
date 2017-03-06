@@ -683,7 +683,7 @@ Pros:
 
 * Very basic user interface
 * Permanently on the desktop
-* Auto start-up 
+* Auto start-up
 * Customizable skins (e.g. colour gradient can fade between 0 - 100%)
 * Text box can be expanded and shorten
 
