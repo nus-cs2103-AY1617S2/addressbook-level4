@@ -146,7 +146,7 @@ public class ArgumentTokenizer {
 
         return value.trim();
     }
-    
+
     /**
      * Returns the prefixs of the argument
      */
