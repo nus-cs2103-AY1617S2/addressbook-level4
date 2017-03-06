@@ -418,6 +418,247 @@ Use case ends.
 
 #### Use case: Add Event
 
+**MSS**
+
+1. User requests to add a task with a title, and an optional description, optional tags and optional periodicity
+2. User specifies the event with a start time and an end time, or whole day event
+3. TaskManager shows that the event was successfully added <br>
+Use case ends.
+
+**Extensions**
+
+2a. User doesn't specify a start time or end time
+> 2a1. TaskManager assumes it is a whole day event
+  Use case resumes at step 3
+  
+2b. User only specifies only one timing
+> 2b1. TaskManager assumes the task lasts for the rest of the day
+  Use case resumes at step 3 <br>
+  
+#### Use case: Mark Task As Done (by finding)
+
+**MSS**
+
+1. User requests to mark task as done by providing specified title/tag/date
+2. TaskManager finds a unique task that is identified by that string using the Search method and marks it as done, and prints the task that was marked as done <br>
+Use case ends.
+
+**Extensions**
+
+1a. User inputs a number
+> 1a1. Task Manager marks that as done, and prints the task out again
+  Use case ends
+
+2a. A list of unique tasks was found
+> 2a1. TaskManager shows a lists of those tasks, and asks the user which task they would like to mark as done
+  Use case ends
+
+2b. No list of unique tasks was found
+> 2b1. TaskManager tells user that no tasks was found, and they can enter another string or use the list function to mark task as done.
+  Use case resumes at step 1 <br>
+
+#### Use case: Mark Task As Done (by index)
+
+**MSS**
+
+1. User request to list task by providing specified title/tag/date
+2. TaskManager shows a list of all tasks added within specified title/tag/date in order of date & time from first to last
+3. User enters Mark Task as Done with index
+4. TaskManager finds the task that is identified by that index and marks it as done <br>
+Use case ends.
+
+**Extensions**
+
+4a. Index is not found in the TaskManager List
+> 4a1. TaskManager reports that no task was found with that index. 
+  Use case resumes at step 3 <br>
+
+#### Use case: Delete person
+
+**MSS**
+
+1. User requests to list persons
+2. AddressBook shows a list of persons
+3. User requests to delete a specific person in the list
+4. AddressBook deletes the person <br> 
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+> Use case ends
+
+3a. The given index is invalid
+> 3a1. AddressBook shows an error message 
+Use case resumes at step 2 <br>
+
+#### Use case: List Task (by finding)
+
+**MSS**
+
+1. User request to list task/event by providing specified title/tag/date/type/completeness
+2. TaskManager shows a list of all tasks/events added within specified title/tag/date/type/completeness in order of date & time from first to last
+3. TaskManager provides options for User to perform commands from there
+4. User chooses exit option <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+> 2a1. TaskManager shows “List is empty” message
+  Use case ends <br>
+
+#### Use case: List Task (Everything)
+
+**MSS**
+
+1. User requests to list tasks/events
+2. TaskManager shows a list of all tasks/events added in order of date from first to last
+3. TaskManager provides options for User to perform commands from there
+4. User chooses exit option <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+> 2a1. TaskManager shows “List is empty” message
+  Use case ends <br>
+
+#### Use case: Edit Task 
+
+**MSS**
+
+1. User request to list tasks/events
+2. TaskManager shows list of added tasks/events in order of date from first to last
+3. TaskManager provides a list of options (one of which is edit) for User to perform commands
+4. User selects edit option
+5. TaskManager request for index of task/event to be edited
+6. User specifies index on list to be edited
+7. TaskManager shows User options of variables that can be edited
+8. TaskManager requests User to input indexes (separated by space) of variables User wants to change
+9. User specifies indexes of variables to edit
+10. TaskManager requests user to specify new variables according in order of the variable indexes
+11. User provides input
+12. TaskManager updates variables of the task/event <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+> 2a1. TaskManager shows “List is empty” message
+  Use case ends
+
+6a. The given index is invalid
+> 6a1. TaskManager shows an error message 
+  Use case resumes at step 3
+
+9a. The given index is invalid
+> 9a1. TaskManager shows an error message 
+  Use case resumes at step 8 <br>
+
+#### Use case: Delete Task/Event
+
+**MSS**
+
+1. User requests to list tasks/events
+2. Taskmanager shows list of added tasks/events in order of date from first to last
+3. TaskManager provides a list of options (one of which is delete) for User to perform commands
+4. User selects delete option
+5. TaskManager request for index of task/event to be deleted
+6. User specifies index on the list to be deleted 
+7. TaskManager deletes the task/event <br>
+Use case ends.
+
+**Extensions**
+
+2a. List is empty
+> 2a1. TaskManager shows “List is empty” message
+  Use case ends
+
+6a. The given index is invalid
+> 6a1. TaskManager shows an error message 
+  Use case resumes at step 3
+
+6b. Task/event to be deleted is recurring
+> 6b1. TaskManager requests if all recurring tasks/events are deleted
+  6b2. User inputs (Y) or (N)
+  6b3. TaskManager deletes all recurring tasks/events if User inputs (Y) else TaskManager only deletes current task/event if User inputs (N)
+  Use case ends. <br>
+
+#### Use case: Clear Done Tasks
+
+**MSS**
+
+1. User requests to clear done tasks
+2. TaskManager goes through list to find done tasks
+3. TaskManager deletes all done tasks
+4. TaskManager shows User the list of deleted done tasks <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+> 2a1. TaskManager shows “No done tasks” message
+  Use case ends. <br>
+
+#### Use case: Clear Done Events
+
+**MSS**
+ 
+1. User requests to clear done events
+2. TaskManager goes through list to find done events
+3. TaskManager deletes all done events
+4. TaskManager shows User the list of deleted done events <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+> 2a1. TaskManager shows “No done events” message
+  Use case ends. <br>
+
+#### Use case: Undo Last Command
+
+**MSS**
+
+1. User requests to undo last command
+2. TaskManager retrieves last saved state from storage <br>
+Use case ends. 
+
+**Extensions**
+
+2a. No last saved state
+> Use case ends. <br>
+
+#### Use case: Redo Last Command
+
+**MSS**
+
+1. User requests to redo last command
+2. TaskManager retrieves next saved state from storage <br>
+Use case ends. 
+
+**Extensions**
+
+2a. No next saved state
+> Use case ends. <br>
+
+#### Use case: Get Help
+
+**MSS**
+
+1. User requests help
+2. TaskManager prints help <br>
+Use case ends.
+
+#### Use case: Exit Programme
+
+**MSS**
+
+1. User requests to exit programme
+2. TaskManager saves files and closes programme <br>
+Use case ends.
+
 
 ## Appendix C : Non Functional Requirements
 
@@ -440,17 +681,99 @@ Use case ends.
 
 ## Appendix E : Product Survey
 
-**Product Name**
+**WunderList**
 
-Author: ...
+Author: 6 Wunderkinder GmbH
 
 Pros:
-
-* ...
-* ...
+* Able to start creating tasks without going through any prompts
+* Able to access task manager offline and tasks will be updated when the program goes online
+* Able to create To-do tasks with or without deadlines
+* Able to mark tasks as done
+* Tasks not completed are shown in a list which is shown in the main window
 
 Cons:
+* To add more details about the tasks such as time/date/description, the user has to right click the task in order to add in more details
+* No calendar view to have an overall sense of the tasks scheduled
+* Not able to look for suitable slots to schedule item
+* Not able to postpone the task listed
+* Not able to “block” multiple slots when the exact timing of a task is uncertain
 
-* ...
-* ...
+**Trello**
 
+Author: Trello, Inc.
+
+Pros:
+* Have basic functions such as adding tasks with title, description, attachments, time, members and many other details. Deadlines are optional.
+* Very adapted to group collaboration on same project
+
+Cons: 
+* Chronological order is not intuitive since calendar view is not available by default
+* Does not show available time blocks for users to schedule his tasks
+* Does not schedule tasks automatically, users have to decide when to do what
+* No block-release of time slots for task scheduling
+* Does not have an offline desktop version
+* Mainly clicking, not command line interface
+
+**Google Tasks - based on Google Mail Task Manager**
+
+Author: Google
+
+Pros:
+* Minimalist GUI, can create new tasks by keying in sentence as task
+* Can edit tasks dynamically on webpage
+* Can specify deadlines for tasks
+* Can mark task as done with one click
+* Can clear all done tasks with one click
+* Can sort tasks according to date added as well as deadline due
+* Able to synchronise with other products
+
+Cons: 
+* No-frills approach means a lot of features, including blocking out dates, specifying event timings and postponing items
+* Chronological order is not intuitive since calendar view is not available by default
+* Does not show available time blocks for users to schedule his tasks
+* Does not schedule tasks automatically, users have to decide when to do what
+* No block-release of time slots for task scheduling
+* Does not have an offline desktop version
+
+**myHomework**
+
+Author: Rodrigo Neri
+
+Pros:
+* Minimalist GUI
+* Listing of tasks are separated clearly and orderly into upcoming, late and done
+* Can specify deadlines for tasks
+* Can mark tasks as done with a single click
+* Able to sync across multiple platforms and devices with the app installed on them
+* One click to access the new event tab and from there able to use keyboard to input the details
+* Option to view in calendar mode if desired
+* Able to add tags to the tasks while adding them
+* Able to set priority level for tasks added
+* Able to set tasks into recurring task
+
+Cons:
+* Input mainly through GUI and mouse instead of keyboard
+* No block release of time slots for task scheduling
+* Required to click quite a few times to navigate through the app in order to get to the buttons to clear all done tasks/events in one shot
+* Allows clashes in time slots of different events
+
+**Mail and Calendar**
+
+Author: Windows
+
+Pros:
+* Able to have a list schedules/tasks for the day in list view
+* Can be switched to week/month view
+* Able to work in an offline environment and can be updated once the program has internet access
+* Can be started up by pressing on the “Windows” key and typing “Calendar”/”Mail”
+* Only for Windows 8/10
+* Able to visualise whether there is a conflict in timeslot
+* Able to postpone the event
+
+Cons:
+* Cannot schedule tasks with deadline
+* Though could be worked around by setting a dummy time slot or marking it as an all day event
+* Not able to mark the item as done
+* Unable to “block” time slots
+* Cannot enter the event in a ‘one shot’ approach
