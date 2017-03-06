@@ -608,7 +608,7 @@ Use case ends.
 **Extensions**
 
 2a. The list is empty
-> 2a1. TaskManager shows “No done tasks” message <br>
+> 2a1. TaskManager shows 'No done tasks' message <br>
 > Use case ends. <br>
 
 
@@ -714,7 +714,7 @@ Cons:
 * No calendar view to have an overall sense of the tasks scheduled
 * Not able to look for suitable slots to schedule item
 * Not able to postpone the task listed
-* Not able to “block” multiple slots when the exact timing of a task is uncertain
+* Not able to 'block' multiple slots when the exact timing of a task is uncertain
 
 **Trello**
 
@@ -783,7 +783,7 @@ Pros:
 * Able to have a list schedules/tasks for the day in list view
 * Can be switched to week/month view
 * Able to work in an offline environment and can be updated once the program has internet access
-* Can be started up by pressing on the “Windows” key and typing “Calendar”/”Mail”
+* Can be started up by pressing on the 'Windows' key and typing 'Calendar'/'Mail'
 * Only for Windows 8/10
 * Able to visualise whether there is a conflict in timeslot
 * Able to postpone the event
@@ -792,5 +792,5 @@ Cons:
 * Cannot schedule tasks with deadline
 * Though could be worked around by setting a dummy time slot or marking it as an all day event
 * Not able to mark the item as done
-* Unable to “block” time slots
-* Cannot enter the event in a ‘one shot’ approach
+* Unable to 'block' time slots
+* Cannot enter the event in a 'one shot' approach
