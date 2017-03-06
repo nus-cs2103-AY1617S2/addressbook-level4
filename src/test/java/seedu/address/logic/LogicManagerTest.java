@@ -24,17 +24,6 @@ import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.SelectCommand;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -48,6 +37,19 @@ import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.storage.StorageManager;
+import seedu.taskmanager.logic.Logic;
+import seedu.taskmanager.logic.LogicManager;
+import seedu.taskmanager.logic.commands.AddCommand;
+import seedu.taskmanager.logic.commands.ClearCommand;
+import seedu.taskmanager.logic.commands.Command;
+import seedu.taskmanager.logic.commands.CommandResult;
+import seedu.taskmanager.logic.commands.DeleteCommand;
+import seedu.taskmanager.logic.commands.ExitCommand;
+import seedu.taskmanager.logic.commands.FindCommand;
+import seedu.taskmanager.logic.commands.HelpCommand;
+import seedu.taskmanager.logic.commands.ListCommand;
+import seedu.taskmanager.logic.commands.SelectCommand;
+import seedu.taskmanager.logic.commands.exceptions.CommandException;
 
 
 public class LogicManagerTest {

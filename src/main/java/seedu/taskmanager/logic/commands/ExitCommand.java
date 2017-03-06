@@ -1,7 +1,7 @@
-package seedu.address.logic.commands;
+package seedu.taskmanager.logic.commands;
 
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.events.ui.ExitAppRequestEvent;
+import seedu.taskmanager.commons.core.EventsCenter;
+import seedu.taskmanager.commons.events.ui.ExitAppRequestEvent;
 
 /**
  * Terminates the program.
@@ -10,7 +10,7 @@ public class ExitCommand extends Command {
 
     public static final String COMMAND_WORD = "exit";
 
-    public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Exiting Address Book as requested ...";
+    public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Exiting Task Manager as requested ...";
 
     @Override
     public CommandResult execute() {
