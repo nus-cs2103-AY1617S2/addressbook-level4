@@ -675,17 +675,23 @@ Use case ends.
 
 ## Appendix E : Product Survey
 
-**Product Name**
+**Product Name**: Desktop Calender
 
-Author: ...
+Author: Joel
 
 Pros:
 
-* ...
-* ...
+* Very basic user interface
+* Permanently on the desktop
+* Auto start-up 
+* Customizable skins (e.g. colour gradient can fade between 0 - 100%)
+* Text box can be expanded and shorten
 
 Cons:
 
-* ...
-* ...
+* Does not have actual timeslots on it
+* Everything is manually input inside
+* Requires mouse to access different dates
+* Very limited keyboard shortcuts
+* No additional features (e.g. reminders/priority listing/tags/search/recurring events/calenders)
 
