@@ -21,7 +21,7 @@ public class EditLabelCommandParser {
 
     /**
      * Parses the given {@code String} of arguments in the context of the
-     * EditLabelCommand and returns an EditLabel object for execution.
+     * EditLabelCommand and returns an EditLabelCommand object for execution.
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer = new ArgumentTokenizer();
