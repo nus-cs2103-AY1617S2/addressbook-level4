@@ -4,43 +4,31 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Damith C. Rajapakse](http://www.comp.nus.edu.sg/~damithch) <br>
-<img src="images/DamithRajapakse.jpg" width="150"><br>
-**Role**: Project Advisor
+#### [Melvin Soh](https://github.com/InfinityFrost) <br>
+<img src="images/infinityfrost.png" width="150"><br>
+Role: <br>
+Responsibilities:
 
 -----
 
-#### [Joshua Lee](http://github.com/lejolly)
-<img src="images/JoshuaLee.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: UI
+#### [Tan Wei](https://github.com/tanwei0319)
+<img src="images/tanwei0319.jpg" width="150"><br>
+Role:  <br>
+Responsibilities:
 
 -----
 
-#### [Leow Yijin](http://github.com/yijinl)
-<img src="images/LeowYijin.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Data
+#### [Xu Ruolan](https://github.com/fiomolv)
+<img src="images/fiomolv.jpg" width="150"><br>
+Role:  <br>
+Responsibilities: 
 
 -----
 
-#### [Martin Choo](http://github.com/m133225)
-<img src="images/MartinChoo.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Dev Ops
-
------
-
-#### [Thien Nguyen](https://github.com/ndt93)
- Role: Developer <br>
- Responsibilities: Threading
-
- -----
-
-#### [You Liang](http://github.com/yl-coder)
-<img src="images/YouLiang.jpg" width="150"><br>
- Role: Developer <br>
- Responsibilities: UI
+#### [Haya Alsharef](https://github.com/hayaz3)
+<img src="images/hayaz3.png" width="150"><br>
+Role:  <br>
+Responsibilities: 
 
  -----
 
