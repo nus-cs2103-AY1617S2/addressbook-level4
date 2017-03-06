@@ -1,8 +1,8 @@
 package seedu.address.model.util;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.ToDoList;
 import seedu.address.model.ReadOnlyToDoList;
+import seedu.address.model.ToDoList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.UniqueTaskList.DuplicateTaskException;
