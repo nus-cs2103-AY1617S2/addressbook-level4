@@ -27,7 +27,7 @@ public class FindCommand extends Command {
 
     @Override
     public CommandResult execute() {
-    	if (prefix == PREFIX_NAME) {
+        if (prefix == PREFIX_NAME) {
             model.updateFilteredPersonList(keywords);
             return new CommandResult(getMessageForPersonListShownSummary(model.getFilteredPersonList().size()));
     	} else {

@@ -27,8 +27,8 @@ public class FindCommandParser {
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer =
                 new ArgumentTokenizer(PREFIX_NAME);
-    	argsTokenizer.tokenize(args);
-    	try {
+        argsTokenizer.tokenize(args);
+        try {
             Prefix prefix = argsTokenizer.getPrefixs().iterator().next();
             String pre = prefix.getPrefix();
             String value = argsTokenizer.getValue(PREFIX_NAME).get();
