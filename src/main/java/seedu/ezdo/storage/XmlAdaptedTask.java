@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.ezdo.commons.exceptions.IllegalValueException;
 import seedu.ezdo.model.tag.Tag;
 import seedu.ezdo.model.tag.UniqueTagList;
+import seedu.ezdo.model.todo.DueDate;
 import seedu.ezdo.model.todo.Email;
 import seedu.ezdo.model.todo.Name;
 import seedu.ezdo.model.todo.Priority;
@@ -28,6 +29,8 @@ public class XmlAdaptedTask {
     private String email;
     @XmlElement(required = true)
     private String startDate;
+    @XmlElement(required = true)
+    private String dueDate;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -69,7 +72,8 @@ public class XmlAdaptedTask {
         final Priority priority = new Priority(this.priority);
         final Email email = new Email(this.email);
         final StartDate startDate = new StartDate(this.startDate);
+        final DueDate dueDate = new DueDate(this.dueDate);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(name, priority, email, startDate, tags);
+        return new Task(name, priority, email, startDate, dueDate, tags);
     }
 }
