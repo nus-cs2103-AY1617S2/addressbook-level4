@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import seedu.address.model.task.Name;
 
-public class NameTest {
+public class DescriptionTest {
 
     @Test
     public void isValidName() {
