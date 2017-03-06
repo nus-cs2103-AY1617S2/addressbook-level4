@@ -50,12 +50,54 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     //// list overwrite operations
 
-    public void setPersons(List<? extends ReadOnlyPerson> persons) throws UniquePersonList.DuplicatePersonException {
-        this.persons.setPersons(persons);
+    /**
+     * Adds a person to the address book. Also checks the new person's tags and updates {@link #tags} with any new tags
+     * found, and updates the Tag objects in the person to point to those in {@link #tags}.
+     *
+     * @throws UniquePersonList.DuplicatePersonException
+     *             if an equivalent person already exists.
+     */
+    public void addPerson(Person p) throws UniquePersonList.DuplicatePersonException {
+        syncMasterTagListWith(p);
+        persons.add(p);
     }
 
-    public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
-        this.tags.setTags(tags);
+    public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
+        tags.add(t);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof AddressBook // instanceof handles nulls
+                        && this.persons.equals(((AddressBook) other).persons)
+                        && this.tags.equalsOrderInsensitive(((AddressBook) other).tags));
+    }
+
+    //// person-level operations
+
+    @Override
+    public ObservableList<ReadOnlyPerson> getPersonList() {
+        return new UnmodifiableObservableList<>(persons.asObservableList());
+    }
+
+    @Override
+    public ObservableList<Tag> getTagList() {
+        return new UnmodifiableObservableList<>(tags.asObservableList());
+    }
+
+    @Override
+    public int hashCode() {
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(persons, tags);
+    }
+
+    public boolean removePerson(ReadOnlyPerson key) throws UniquePersonList.PersonNotFoundException {
+        if (persons.remove(key)) {
+            return true;
+        } else {
+            throw new UniquePersonList.PersonNotFoundException();
+        }
     }
 
     public void resetData(ReadOnlyAddressBook newData) {
@@ -73,42 +115,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         syncMasterTagListWith(persons);
     }
 
-    //// person-level operations
+    //// tag-level operations
 
-    /**
-     * Adds a person to the address book. Also checks the new person's tags and updates {@link #tags} with any new tags
-     * found, and updates the Tag objects in the person to point to those in {@link #tags}.
-     *
-     * @throws UniquePersonList.DuplicatePersonException
-     *             if an equivalent person already exists.
-     */
-    public void addPerson(Person p) throws UniquePersonList.DuplicatePersonException {
-        syncMasterTagListWith(p);
-        persons.add(p);
+    public void setPersons(List<? extends ReadOnlyPerson> persons) throws UniquePersonList.DuplicatePersonException {
+        this.persons.setPersons(persons);
     }
 
-    /**
-     * Updates the person in the list at position {@code index} with {@code editedReadOnlyPerson}. {@code AddressBook}'s
-     * tag list will be updated with the tags of {@code editedReadOnlyPerson}.
-     * 
-     * @see #syncMasterTagListWith(Person)
-     *
-     * @throws DuplicatePersonException
-     *             if updating the person's details causes the person to be equivalent to another existing person in the
-     *             list.
-     * @throws IndexOutOfBoundsException
-     *             if {@code index} < 0 or >= the size of the list.
-     */
-    public void updatePerson(int index, ReadOnlyPerson editedReadOnlyPerson)
-            throws UniquePersonList.DuplicatePersonException {
-        assert editedReadOnlyPerson != null;
+    //// util methods
 
-        Person editedPerson = new Person(editedReadOnlyPerson);
-        syncMasterTagListWith(editedPerson);
-        // TODO: the tags master list will be updated even though the below line fails.
-        // This can cause the tags master list to have additional tags that are not tagged to any person
-        // in the person list.
-        persons.updatePerson(index, editedPerson);
+    public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
+        this.tags.setTags(tags);
     }
 
     /**
@@ -133,28 +149,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Ensures that every tag in these persons: - exists in the master list {@link #tags} - points to a Tag object in
      * the master list
-     * 
+     *
      * @see #syncMasterTagListWith(Person)
      */
     private void syncMasterTagListWith(UniquePersonList persons) {
         persons.forEach(this::syncMasterTagListWith);
     }
-
-    public boolean removePerson(ReadOnlyPerson key) throws UniquePersonList.PersonNotFoundException {
-        if (persons.remove(key)) {
-            return true;
-        } else {
-            throw new UniquePersonList.PersonNotFoundException();
-        }
-    }
-
-    //// tag-level operations
-
-    public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
-        tags.add(t);
-    }
-
-    //// util methods
 
     @Override
     public String toString() {
@@ -162,27 +162,27 @@ public class AddressBook implements ReadOnlyAddressBook {
         // TODO: refine later
     }
 
-    @Override
-    public ObservableList<ReadOnlyPerson> getPersonList() {
-        return new UnmodifiableObservableList<>(persons.asObservableList());
-    }
+    /**
+     * Updates the person in the list at position {@code index} with {@code editedReadOnlyPerson}. {@code AddressBook}'s
+     * tag list will be updated with the tags of {@code editedReadOnlyPerson}.
+     *
+     * @see #syncMasterTagListWith(Person)
+     *
+     * @throws DuplicatePersonException
+     *             if updating the person's details causes the person to be equivalent to another existing person in the
+     *             list.
+     * @throws IndexOutOfBoundsException
+     *             if {@code index} < 0 or >= the size of the list.
+     */
+    public void updatePerson(int index, ReadOnlyPerson editedReadOnlyPerson)
+            throws UniquePersonList.DuplicatePersonException {
+        assert editedReadOnlyPerson != null;
 
-    @Override
-    public ObservableList<Tag> getTagList() {
-        return new UnmodifiableObservableList<>(tags.asObservableList());
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                        && this.persons.equals(((AddressBook) other).persons)
-                        && this.tags.equalsOrderInsensitive(((AddressBook) other).tags));
-    }
-
-    @Override
-    public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(persons, tags);
+        Person editedPerson = new Person(editedReadOnlyPerson);
+        syncMasterTagListWith(editedPerson);
+        // TODO: the tags master list will be updated even though the below line fails.
+        // This can cause the tags master list to have additional tags that are not tagged to any person
+        // in the person list.
+        persons.updatePerson(index, editedPerson);
     }
 }
