@@ -9,13 +9,9 @@ import seedu.ezdo.commons.exceptions.IllegalValueException;
 public class Name {
 
     public static final String MESSAGE_NAME_CONSTRAINTS =
-            "Task names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Task names should contain at least one alphanumeric character.";
 
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String NAME_VALIDATION_REGEX = ".*\\w.*";
 
     public final String fullName;
 
