@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import java.util.Set;
 
-import seedu.address.logic.parser.ArgumentTokenizer.Prefix;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -22,7 +21,7 @@ public class FindCommand extends Command {
     private final String prefix;
 
     public FindCommand(String pre, Set<String> keywords) {
-    	this.prefix = pre;
+        this.prefix = pre;
         this.keywords = keywords;
     }
 
