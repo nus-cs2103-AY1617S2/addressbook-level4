@@ -190,20 +190,20 @@ public class LogicManagerTest {
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPriorityPrefix s/valid,address", expectedMessage);
-        assertCommandFailure("add Valid Name p/1 valid@email.butNoPrefix s/valid, address", expectedMessage);
+        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPriorityPrefix s/valid,address d/23/02/2017", expectedMessage);
+        assertCommandFailure("add Valid Name p/1 valid@email.butNoPrefix s/valid, address d/23/03/2017", expectedMessage);
         assertCommandFailure("add Valid Name p/1 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidPersonData() {
-        assertCommandFailure("add []\\[;] p/3 e/valid@e.mail s/valid, address",
+        assertCommandFailure("add []\\[;] p/3 e/valid@e.mail s/valid, address d/31/05/1999",
                 Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail s/valid, address",
+        assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail s/valid, address d/31/06/1999",
                 Priority.MESSAGE_PRIORITY_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/2 e/notAnEmail s/valid, address",
+        assertCommandFailure("add Valid Name p/2 e/notAnEmail s/valid, address d/31/07/1999",
                 Email.MESSAGE_EMAIL_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/1 e/valid@e.mail s/valid, address t/invalid_-[.tag",
+        assertCommandFailure("add Valid Name p/1 e/valid@e.mail s/valid, address d/31/08/1999 t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
@@ -455,6 +455,7 @@ public class LogicManagerTest {
             cmd.append(" e/").append(p.getEmail());
             cmd.append(" p/").append(p.getPriority());
             cmd.append(" s/").append(p.getStartDate());
+            cmd.append(" d/").append(p.getDueDate());
 
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {
