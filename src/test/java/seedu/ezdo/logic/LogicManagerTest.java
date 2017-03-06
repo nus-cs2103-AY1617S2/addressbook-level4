@@ -41,6 +41,7 @@ import seedu.ezdo.model.ModelManager;
 import seedu.ezdo.model.ReadOnlyEzDo;
 import seedu.ezdo.model.tag.Tag;
 import seedu.ezdo.model.tag.UniqueTagList;
+import seedu.ezdo.model.todo.DueDate;
 import seedu.ezdo.model.todo.Email;
 import seedu.ezdo.model.todo.Name;
 import seedu.ezdo.model.todo.Priority;
@@ -419,10 +420,11 @@ public class LogicManagerTest {
             Priority privatePriority = new Priority("1");
             Email email = new Email("adam@gmail.com");
             StartDate privateStartDate = new StartDate("111, alpha street");
+            DueDate privateDueDate = new DueDate("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, privatePriority, email, privateStartDate, tags);
+            return new Task(name, privatePriority, email, privateStartDate, privateDueDate, tags);
         }
 
         /**
@@ -438,6 +440,7 @@ public class LogicManagerTest {
                     new Priority("1"),
                     new Email(seed + "@email"),
                     new StartDate("House of " + seed),
+                    new DueDate("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -537,6 +540,7 @@ public class LogicManagerTest {
                     new Priority("1"),
                     new Email("1@email"),
                     new StartDate("House of 1"),
+                    new DueDate("House of 1"),
                     new UniqueTagList(new Tag("tag"))
             );
         }
