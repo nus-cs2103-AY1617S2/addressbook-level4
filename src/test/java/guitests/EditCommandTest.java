@@ -123,7 +123,7 @@ public class EditCommandTest extends EzDoGuiTest {
      *
      * @param filteredTaskListIndex index of task to edit in filtered list
      * @param ezDoIndex index of task to edit in ezDo.
-     *      Must refer to the same person as {@code filteredTaskListIndex}
+     *      Must refer to the same task as {@code filteredTaskListIndex}
      * @param detailsToEdit details to edit the task with as input to the edit command
      * @param editedTask the expected task after editing the task's details
      */
