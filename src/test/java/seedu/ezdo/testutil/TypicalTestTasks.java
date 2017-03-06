@@ -16,26 +16,26 @@ public class TypicalTestTasks {
         try {
             alice = new TaskBuilder().withName("Alice Pauline")
                     .withStartDate("123, Jurong West Ave 6, #08-111").withEmail("alice@gmail.com")
-                    .withPriority("85355255")
+                    .withPriority("1")
                     .withTags("friends").build();
             benson = new TaskBuilder().withName("Benson Meier").withStartDate("311, Clementi Ave 2, #02-25")
-                    .withEmail("johnd@gmail.com").withPriority("98765432")
+                    .withEmail("johnd@gmail.com").withPriority("1")
                     .withTags("owesMoney", "friends").build();
-            carl = new TaskBuilder().withName("Carl Kurz").withPriority("95352563")
+            carl = new TaskBuilder().withName("Carl Kurz").withPriority("2")
                     .withEmail("heinz@yahoo.com").withStartDate("wall street").build();
-            daniel = new TaskBuilder().withName("Daniel Meier").withPriority("87652533")
+            daniel = new TaskBuilder().withName("Daniel Meier").withPriority("2")
                     .withEmail("cornelia@google.com").withStartDate("10th street").build();
-            elle = new TaskBuilder().withName("Elle Meyer").withPriority("9482224")
+            elle = new TaskBuilder().withName("Elle Meyer").withPriority("3")
                     .withEmail("werner@gmail.com").withStartDate("michegan ave").build();
-            fiona = new TaskBuilder().withName("Fiona Kunz").withPriority("9482427")
+            fiona = new TaskBuilder().withName("Fiona Kunz").withPriority("2")
                     .withEmail("lydia@gmail.com").withStartDate("little tokyo").build();
-            george = new TaskBuilder().withName("George Best").withPriority("9482442")
+            george = new TaskBuilder().withName("George Best").withPriority("3")
                     .withEmail("anna@google.com").withStartDate("4th street").build();
 
             // Manually added
-            hoon = new TaskBuilder().withName("Hoon Meier").withPriority("8482424")
+            hoon = new TaskBuilder().withName("Hoon Meier").withPriority("1")
                     .withEmail("stefan@mail.com").withStartDate("little india").build();
-            ida = new TaskBuilder().withName("Ida Mueller").withPriority("8482131")
+            ida = new TaskBuilder().withName("Ida Mueller").withPriority("2")
                     .withEmail("hans@google.com").withStartDate("chicago ave").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();

@@ -190,19 +190,19 @@ public class LogicManagerTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add wrong args wrong args", expectedMessage);
         assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPriorityPrefix s/valid,address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 valid@email.butNoPrefix s/valid, address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
+        assertCommandFailure("add Valid Name p/1 valid@email.butNoPrefix s/valid, address", expectedMessage);
+        assertCommandFailure("add Valid Name p/1 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidPersonData() {
-        assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail s/valid, address",
+        assertCommandFailure("add []\\[;] p/3 e/valid@e.mail s/valid, address",
                 Name.MESSAGE_NAME_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail s/valid, address",
                 Priority.MESSAGE_PRIORITY_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/notAnEmail s/valid, address",
+        assertCommandFailure("add Valid Name p/2 e/notAnEmail s/valid, address",
                 Email.MESSAGE_EMAIL_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail s/valid, address t/invalid_-[.tag",
+        assertCommandFailure("add Valid Name p/1 e/valid@e.mail s/valid, address t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
@@ -416,7 +416,7 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
-            Priority privatePriority = new Priority("111111");
+            Priority privatePriority = new Priority("1");
             Email email = new Email("adam@gmail.com");
             StartDate privateStartDate = new StartDate("111, alpha street");
             Tag tag1 = new Tag("tag1");
@@ -435,7 +435,7 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Name("Person " + seed),
-                    new Priority("" + Math.abs(seed)),
+                    new Priority("1"),
                     new Email(seed + "@email"),
                     new StartDate("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
