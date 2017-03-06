@@ -4,3 +4,23 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
+#### [Xu Bili](http://github.com/xbili)
+<img src="images/xbili.png" width="150"><br>
+**Role**: Team lead<br>
+**Responsibilities**:
+
+#### [Yanzheng](http://github.com/mynameisyz)
+<img src="images/mynameisyz.png" width="150"><br>
+**Role**: Testing & QA<br>
+**Responsibilities**:
+
+#### [Lam Guang Jun](http://github.com/gjlam95)
+<img src="images/gjlam95.png" width="150"><br>
+**Role**: Ensures code quality<br>
+**Responsibilities**:
+
+#### [Han Lynn](http://github.com/hlynn93)
+<img src="images/hlynn93.png" width="150"><br>
+**Role**: Integration & architecture<br>
+**Responsibilities**:
+
