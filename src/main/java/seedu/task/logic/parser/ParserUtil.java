@@ -75,27 +75,27 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> phone} into an {@code Optional<Phone>} if {@code phone} is present.
+     * Parses a {@code Optional<String> startDate} into an {@code Optional<StartDate>} if {@code startDate} is present.
      */
-    public static Optional<StartDate> parsePhone(Optional<String> phone) throws IllegalValueException {
-        assert phone != null;
-        return phone.isPresent() ? Optional.of(new StartDate(phone.get())) : Optional.empty();
+    public static Optional<StartDate> parseStartDate(Optional<String> startDate) throws IllegalValueException {
+        assert startDate != null;
+        return startDate.isPresent() ? Optional.of(new StartDate(startDate.get())) : Optional.empty();
     }
 
     /**
-     * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.
+     * Parses a {@code Optional<String> completionStatus} into an {@code Optional<CompletionStatus>} if {@code completionStatus} is present.
      */
-    public static Optional<CompletionStatus> parseAddress(Optional<String> address) throws IllegalValueException {
-        assert address != null;
-        return address.isPresent() ? Optional.of(new CompletionStatus(address.get())) : Optional.empty();
+    public static Optional<CompletionStatus> parseCompletionStatus(Optional<String> completionStatus) throws IllegalValueException {
+        assert completionStatus != null;
+        return completionStatus.isPresent() ? Optional.of(new CompletionStatus(completionStatus.get())) : Optional.empty();
     }
 
     /**
-     * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
+     * Parses a {@code Optional<String> endDate} into an {@code Optional<EndDate>} if {@code endDate} is present.
      */
-    public static Optional<EndDate> parseEmail(Optional<String> email) throws IllegalValueException {
-        assert email != null;
-        return email.isPresent() ? Optional.of(new EndDate(email.get())) : Optional.empty();
+    public static Optional<EndDate> parseEndDate(Optional<String> endDate) throws IllegalValueException {
+        assert endDate != null;
+        return endDate.isPresent() ? Optional.of(new EndDate(endDate.get())) : Optional.empty();
     }
 
     /**

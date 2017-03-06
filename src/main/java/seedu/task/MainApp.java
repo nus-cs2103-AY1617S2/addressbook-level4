@@ -77,11 +77,11 @@ public class MainApp extends Application {
         Optional<ReadOnlyTaskManager> taskManagerOptional;
         ReadOnlyTaskManager initialData;
         try {
-            taskManagerOptional = storage.readAddressBook();
+            taskManagerOptional = storage.readTaskManager();
             if (!taskManagerOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample TaskManager");
             }
-            initialData = taskManagerOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = taskManagerOptional.orElseGet(SampleDataUtil::getSampleTaskManager);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty TaskManager");
             initialData = new TaskManager();
@@ -169,7 +169,7 @@ public class MainApp extends Application {
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping suru ] =============================");
         ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);

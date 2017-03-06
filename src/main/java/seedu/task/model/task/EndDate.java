@@ -9,8 +9,7 @@ import seedu.task.commons.exceptions.IllegalValueException;
  */
 public class EndDate {
 
-    public static final String MESSAGE_DATE_CONSTRAINTS =
-            "Person emails should be 2 alphanumeric/period strings separated by '@'";
+    public static final String MESSAGE_DATE_CONSTRAINTS = "Task End Date should be given in dd/mm/yy";
     public static final String DATE_VALIDATION_REGEX = "\\d+";
 
     public final String value;

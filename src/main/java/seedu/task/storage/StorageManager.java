@@ -8,7 +8,7 @@ import com.google.common.eventbus.Subscribe;
 
 import seedu.task.commons.core.ComponentManager;
 import seedu.task.commons.core.LogsCenter;
-import seedu.task.commons.events.model.AddressBookChangedEvent;
+import seedu.task.commons.events.model.TaskManagerChangedEvent;
 import seedu.task.commons.events.storage.DataSavingExceptionEvent;
 import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.model.ReadOnlyTaskManager;
@@ -31,7 +31,7 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     public StorageManager(String addressBookFilePath, String userPrefsFilePath) {
-        this(new XmlAddressBookStorage(addressBookFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
+        this(new XmlTaskManagerStorage(addressBookFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
     }
 
     // ================ UserPrefs methods ==============================
@@ -50,39 +50,39 @@ public class StorageManager extends ComponentManager implements Storage {
     // ================ TaskManager methods ==============================
 
     @Override
-    public String getAddressBookFilePath() {
-        return taskManagerStorage.getAddressBookFilePath();
+    public String getTaskManagerFilePath() {
+        return taskManagerStorage.getTaskManagerFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyTaskManager> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(taskManagerStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException {
+        return readTaskManager(taskManagerStorage.getTaskManagerFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyTaskManager> readAddressBook(String filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyTaskManager> readTaskManager(String filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return taskManagerStorage.readAddressBook(filePath);
+        return taskManagerStorage.readTaskManager(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyTaskManager addressBook) throws IOException {
-        saveAddressBook(addressBook, taskManagerStorage.getAddressBookFilePath());
+    public void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException {
+        saveTaskManager(taskManager, taskManagerStorage.getTaskManagerFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyTaskManager addressBook, String filePath) throws IOException {
+    public void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        taskManagerStorage.saveAddressBook(addressBook, filePath);
+        taskManagerStorage.saveTaskManager(taskManager, filePath);
     }
 
 
     @Override
     @Subscribe
-    public void handleAddressBookChangedEvent(AddressBookChangedEvent event) {
+    public void handleTaskManagerChangedEvent(TaskManagerChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
-            saveAddressBook(event.data);
+            saveTaskManager(event.data);
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }

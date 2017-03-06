@@ -6,35 +6,35 @@ import seedu.task.commons.util.CollectionUtil;
 import seedu.task.model.tag.UniqueTagList;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Task in the task manager.
  * Guarantees: details are present and not null, field values are validated.
  */
-public class Person implements ReadOnlyTask {
+public class Task implements ReadOnlyTask {
 
     private Name name;
-    private StartDate phone;
-    private EndDate email;
-    private CompletionStatus address;
+    private StartDate startDate;
+    private EndDate endDate;
+    private CompletionStatus completionStatus;
 
     private UniqueTagList tags;
 
     /**
-     * Every field must be present and not null.
+     * Only Name must be present and not null.
      */
-    public Person(Name name, StartDate phone, EndDate email, CompletionStatus address, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, phone, email, address, tags);
+    public Task(Name name, StartDate startDate, EndDate endDate, CompletionStatus completionStatus, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name);
         this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.completionStatus = completionStatus;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
     /**
-     * Creates a copy of the given ReadOnlyPerson.
+     * Creates a copy of the given ReadOnlyTask.
      */
-    public Person(ReadOnlyTask source) {
-        this(source.getName(), source.getStartDate(), source.getEmail(), source.getCompletionStatus(), source.getTags());
+    public Task(ReadOnlyTask source) {
+        this(source.getName(), source.getStartDate(), source.getEndDate(), source.getCompletionStatus(), source.getTags());
     }
 
     public void setName(Name name) {
@@ -47,34 +47,34 @@ public class Person implements ReadOnlyTask {
         return name;
     }
 
-    public void setPhone(StartDate phone) {
-        assert phone != null;
-        this.phone = phone;
+    public void setStartDate(StartDate startDate) {
+        assert startDate != null;
+        this.startDate = startDate;
     }
 
     @Override
     public StartDate getStartDate() {
-        return phone;
+        return startDate;
     }
 
-    public void setEmail(EndDate email) {
-        assert email != null;
-        this.email = email;
+    public void setEndDate(EndDate endDate) {
+        assert endDate != null;
+        this.endDate = endDate;
     }
 
     @Override
-    public EndDate getEmail() {
-        return email;
+    public EndDate getEndDate() {
+        return endDate;
     }
 
-    public void setAddress(CompletionStatus address) {
-        assert address != null;
-        this.address = address;
+    public void setCompletionStatus(CompletionStatus completionStatus) {
+        assert completionStatus != null;
+        this.completionStatus = completionStatus;
     }
 
     @Override
     public CompletionStatus getCompletionStatus() {
-        return address;
+        return completionStatus;
     }
 
     @Override
@@ -83,22 +83,22 @@ public class Person implements ReadOnlyTask {
     }
 
     /**
-     * Replaces this person's tags with the tags in the argument tag list.
+     * Replaces this task's tags with the tags in the argument tag list.
      */
     public void setTags(UniqueTagList replacement) {
         tags.setTags(replacement);
     }
 
     /**
-     * Updates this person with the details of {@code replacement}.
+     * Updates this task with the details of {@code replacement}.
      */
     public void resetData(ReadOnlyTask replacement) {
         assert replacement != null;
 
         this.setName(replacement.getName());
-        this.setPhone(replacement.getStartDate());
-        this.setEmail(replacement.getEmail());
-        this.setAddress(replacement.getCompletionStatus());
+        this.setStartDate(replacement.getStartDate());
+        this.setEndDate(replacement.getEndDate());
+        this.setCompletionStatus(replacement.getCompletionStatus());
         this.setTags(replacement.getTags());
     }
 
@@ -112,7 +112,7 @@ public class Person implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, startDate, endDate, completionStatus, tags);
     }
 
     @Override

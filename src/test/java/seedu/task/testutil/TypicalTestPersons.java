@@ -2,8 +2,8 @@ package seedu.task.testutil;
 
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.TaskManager;
-import seedu.task.model.task.Person;
-import seedu.task.model.task.UniquePersonList;
+import seedu.task.model.task.Task;
+import seedu.task.model.task.UniqueTaskList;
 
 /**
  *
@@ -46,8 +46,8 @@ public class TypicalTestPersons {
     public static void loadTaskManagerWithSampleData(TaskManager ab) {
         for (TestPerson person : new TypicalTestPersons().getTypicalPersons()) {
             try {
-                ab.addPerson(new Person(person));
-            } catch (UniquePersonList.DuplicatePersonException e) {
+                ab.addTask(new Task(person));
+            } catch (UniqueTaskList.DuplicateTaskException e) {
                 assert false : "not possible";
             }
         }

@@ -7,47 +7,47 @@ import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.CompletionStatus;
 import seedu.task.model.task.EndDate;
 import seedu.task.model.task.Name;
-import seedu.task.model.task.Person;
+import seedu.task.model.task.Task;
 import seedu.task.model.task.StartDate;
-import seedu.task.model.task.UniquePersonList.DuplicatePersonException;
+import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
-    public static Person[] getSamplePersons() {
+    public static Task[] getSampleTasks() {
         try {
-            return new Person[] {
-                new Person(new Name("Alex Yeoh"), new StartDate("87438807"), new EndDate("alexyeoh@gmail.com"),
-                    new CompletionStatus("Blk 30 Geylang Street 29, #06-40"),
-                    new UniqueTagList("friends")),
-                new Person(new Name("Bernice Yu"), new StartDate("99272758"), new EndDate("berniceyu@gmail.com"),
-                    new CompletionStatus("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                    new UniqueTagList("colleagues", "friends")),
-                new Person(new Name("Charlotte Oliveiro"), new StartDate("93210283"), new EndDate("charlotte@yahoo.com"),
-                    new CompletionStatus("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                    new UniqueTagList("neighbours")),
-                new Person(new Name("David Li"), new StartDate("91031282"), new EndDate("lidavid@google.com"),
-                    new CompletionStatus("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                    new UniqueTagList("family")),
-                new Person(new Name("Irfan Ibrahim"), new StartDate("92492021"), new EndDate("irfan@outlook.com"),
-                    new CompletionStatus("Blk 47 Tampines Street 20, #17-35"),
-                    new UniqueTagList("classmates")),
-                new Person(new Name("Roy Balakrishnan"), new StartDate("92624417"), new EndDate("royb@gmail.com"),
-                    new CompletionStatus("Blk 45 Aljunied Street 85, #11-31"),
-                    new UniqueTagList("colleagues"))
+            return new Task[] {
+                new Task(new Name("Do CS2103 tutorial"), new StartDate("06/03/17"), new EndDate("08/03/17"),
+                    new CompletionStatus("Not Done"),
+                    new UniqueTagList("CS2103")),
+                new Task(new Name("Study for CS2106 finals"), new StartDate("01/01/17"), new EndDate("04/30/17"),
+                    new CompletionStatus("Not Done"),
+                    new UniqueTagList("CS2106", "exams")),
+                new Task(new Name("CS2101 rehearsal"), new StartDate("22/03/17"), new EndDate("01/04/17"),
+                    new CompletionStatus("Not Done"),
+                    new UniqueTagList("CS2101")),
+                new Task(new Name("Add new features"), new StartDate("13/03/17"), new EndDate("01/04/17"),
+                    new CompletionStatus("Not Done"),
+                    new UniqueTagList("CS2103")),
+                new Task(new Name("Add new unit tests"), new StartDate("10/03/17"), new EndDate("03/04/17"),
+                    new CompletionStatus("Not Done"),
+                    new UniqueTagList("CS2103")),
+                new Task(new Name("Write Progress Report"), new StartDate("22/03/17"), new EndDate("01/04/17"),
+                    new CompletionStatus("Not Done"),
+                    new UniqueTagList("CS2101"))
             };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);
         }
     }
 
-    public static ReadOnlyTaskManager getSampleAddressBook() {
+    public static ReadOnlyTaskManager getSampleTaskManager() {
         try {
-            TaskManager sampleAB = new TaskManager();
-            for (Person samplePerson : getSamplePersons()) {
-                sampleAB.addPerson(samplePerson);
+            TaskManager sampleTM = new TaskManager();
+            for (Task sampleTask : getSampleTasks()) {
+                sampleTM.addTask(sampleTask);
             }
-            return sampleAB;
-        } catch (DuplicatePersonException e) {
-            throw new AssertionError("sample data cannot contain duplicate persons", e);
+            return sampleTM;
+        } catch (DuplicateTaskException e) {
+            throw new AssertionError("sample data cannot contain duplicate tasks", e);
         }
     }
 }
