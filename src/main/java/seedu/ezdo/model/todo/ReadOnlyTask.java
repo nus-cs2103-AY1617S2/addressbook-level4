@@ -12,6 +12,7 @@ public interface ReadOnlyTask {
     Priority getPriority();
     Email getEmail();
     StartDate getStartDate();
+    DueDate getDueDate();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -29,6 +30,7 @@ public interface ReadOnlyTask {
                 && other.getPriority().equals(this.getPriority())
                 && other.getEmail().equals(this.getEmail())
                 && other.getStartDate().equals(this.getStartDate()));
+                && other.getDueDate().equals(this.getDueDate());
     }
 
     /**
@@ -43,6 +45,8 @@ public interface ReadOnlyTask {
                 .append(getEmail())
                 .append(" StartDate: ")
                 .append(getStartDate())
+                .append(" DueDate: ")
+                .append(getDueDate())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
