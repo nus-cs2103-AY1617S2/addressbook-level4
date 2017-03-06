@@ -22,20 +22,20 @@ import seedu.address.model.person.UniqueTaskList.TaskNotFoundException;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final ToDoList addressBook;
-    private final FilteredList<ReadOnlyTask> filteredPersons;
+    private final ToDoList toDoList;
+    private final FilteredList<ReadOnlyTask> filteredTasks;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyToDoList addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyToDoList toDoList, UserPrefs userPrefs) {
         super();
-        assert !CollectionUtil.isAnyNull(addressBook, userPrefs);
+        assert !CollectionUtil.isAnyNull(toDoList, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + toDoList + " and user prefs " + userPrefs);
 
-        this.addressBook = new ToDoList(addressBook);
-        filteredPersons = new FilteredList<>(this.addressBook.getTaskList());
+        this.toDoList = new ToDoList(toDoList);
+        filteredTasks = new FilteredList<>(this.toDoList.getTaskList());
     }
 
     public ModelManager() {
@@ -44,31 +44,31 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyToDoList newData) {
-        addressBook.resetData(newData);
-        indicateAddressBookChanged();
+        toDoList.resetData(newData);
+        indicateToDoListChanged();
     }
 
     @Override
     public ReadOnlyToDoList getToDoList() {
-        return addressBook;
+        return toDoList;
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateAddressBookChanged() {
-        raise(new ToDoListChangedEvent(addressBook));
+    private void indicateToDoListChanged() {
+        raise(new ToDoListChangedEvent(toDoList));
     }
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-        addressBook.removeTask(target);
-        indicateAddressBookChanged();
+        toDoList.removeTask(target);
+        indicateToDoListChanged();
     }
 
     @Override
-    public synchronized void addTask(Task person) throws UniqueTaskList.DuplicateTaskException {
-        addressBook.addTask(person);
+    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+        toDoList.addTask(task);
         updateFilteredListToShowAll();
-        indicateAddressBookChanged();
+        indicateToDoListChanged();
     }
 
     @Override
@@ -76,21 +76,21 @@ public class ModelManager extends ComponentManager implements Model {
             throws UniqueTaskList.DuplicateTaskException {
         assert editedPerson != null;
 
-        int addressBookIndex = filteredPersons.getSourceIndex(filteredPersonListIndex);
-        addressBook.updateTask(addressBookIndex, editedPerson);
-        indicateAddressBookChanged();
+        int addressBookIndex = filteredTasks.getSourceIndex(filteredPersonListIndex);
+        toDoList.updateTask(addressBookIndex, editedPerson);
+        indicateToDoListChanged();
     }
 
     //=========== Filtered Person List Accessors =============================================================
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
-        return new UnmodifiableObservableList<>(filteredPersons);
+        return new UnmodifiableObservableList<>(filteredTasks);
     }
 
     @Override
     public void updateFilteredListToShowAll() {
-        filteredPersons.setPredicate(null);
+        filteredTasks.setPredicate(null);
     }
 
     @Override
@@ -99,7 +99,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     private void updateFilteredPersonList(Expression expression) {
-        filteredPersons.setPredicate(expression::satisfies);
+        filteredTasks.setPredicate(expression::satisfies);
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
