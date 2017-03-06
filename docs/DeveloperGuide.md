@@ -404,17 +404,17 @@ Use case ends.
 
 2a. User doesn't specify a deadline
 
-> 2a1. TaskManager creates a Task object with no deadlines but possible timings for that task
+> 2a1. TaskManager creates a Task object with no deadlines but possible timings for that task <br>
 > Use case resumes at step 4
 
 2b. User does not incllude possible timings
 
-> 2b1. TaskManager creates a Task object with a deadline but no possible timings for that task
+> 2b1. TaskManager creates a Task object with a deadline but no possible timings for that task <br>
 > Use case resumes at step 4
 
 2c. User does not include possible timings or a deadline
 
-> 2c1. TaskManager creates a task object with no deadline and no possible timings
+> 2c1. TaskManager creates a task object with no deadline and no possible timings <br>
 > Use case resumes at step 4 <br>
   
 
@@ -430,11 +430,11 @@ Use case ends.
 **Extensions**
 
 2a. User doesn't specify a start time or end time
-> 2a1. TaskManager assumes it is a whole day event
+> 2a1. TaskManager assumes it is a whole day event <br>
 > Use case resumes at step 3
   
 2b. User only specifies only one timing
-> 2b1. TaskManager assumes the task lasts for the rest of the day
+> 2b1. TaskManager assumes the task lasts for the rest of the day <br>
 > Use case resumes at step 3 <br>
   
   
@@ -449,15 +449,15 @@ Use case ends.
 **Extensions**
 
 1a. User inputs a number
-> 1a1. Task Manager marks that as done, and prints the task out again
+> 1a1. Task Manager marks that as done, and prints the task out again <br>
   Use case ends
 
 2a. A list of unique tasks was found
-> 2a1. TaskManager shows a lists of those tasks, and asks the user which task they would like to mark as done
+> 2a1. TaskManager shows a lists of those tasks, and asks the user which task they would like to mark as done <br>
 > Use case ends
 
 2b. No list of unique tasks was found
-> 2b1. TaskManager tells user that no tasks was found, and they can enter another string or use the list function to mark task as done.
+> 2b1. TaskManager tells user that no tasks was found, and they can enter another string or use the list function to mark task as done. <br>
 > Use case resumes at step 1 <br>
 
 
@@ -474,7 +474,7 @@ Use case ends.
 **Extensions**
 
 4a. Index is not found in the TaskManager List
-> 4a1. TaskManager reports that no task was found with that index. 
+> 4a1. TaskManager reports that no task was found with that index.  <br>
 > Use case resumes at step 3 <br>
 
 
@@ -494,7 +494,7 @@ Use case ends.
 > Use case ends
 
 3a. The given index is invalid
-> 3a1. AddressBook shows an error message 
+> 3a1. AddressBook shows an error message  <br>
 > Use case resumes at step 2 <br>
 
 
@@ -511,7 +511,7 @@ Use case ends.
 **Extensions**
 
 2a. The list is empty
-> 2a1. TaskManager shows “List is empty” message
+> 2a1. TaskManager shows “List is empty” message <br>
 > Use case ends <br>
 
 
@@ -528,7 +528,7 @@ Use case ends.
 **Extensions**
 
 2a. The list is empty
-> 2a1. TaskManager shows List is empty message
+> 2a1. TaskManager shows List is empty message <br>
 > Use case ends <br>
 
 
@@ -553,15 +553,15 @@ Use case ends.
 **Extensions**
 
 2a. The list is empty
-> 2a1. TaskManager shows “List is empty” message
+> 2a1. TaskManager shows 'List is empty' message <br>
 > Use case ends
 
 6a. The given index is invalid
-> 6a1. TaskManager shows an error message 
+> 6a1. TaskManager shows an error message <br>
 > Use case resumes at step 3
 
 9a. The given index is invalid
-> 9a1. TaskManager shows an error message 
+> 9a1. TaskManager shows an error message <br>
 > Use case resumes at step 8 <br>
 
 
@@ -581,7 +581,7 @@ Use case ends.
 **Extensions**
 
 2a. List is empty
-> 2a1. TaskManager shows “List is empty” message
+> 2a1. TaskManager shows 'List is empty' message <br>
 > Use case ends
 
 6a. The given index is invalid
@@ -589,9 +589,9 @@ Use case ends.
 > Use case resumes at step 3
 
 6b. Task/event to be deleted is recurring
-> 6b1. TaskManager requests if all recurring tasks/events are deleted
-> 6b2. User inputs (Y) or (N)
-> 6b3. TaskManager deletes all recurring tasks/events if User inputs (Y) else TaskManager only deletes current task/event if User inputs (N)
+> 6b1. TaskManager requests if all recurring tasks/events are deleted <br>
+> 6b2. User inputs (Y) or (N) <br>
+> 6b3. TaskManager deletes all recurring tasks/events if User inputs (Y) else TaskManager only deletes current task/event if User inputs (N) <br>
 > Use case ends. <br>
 
 
@@ -608,7 +608,7 @@ Use case ends.
 **Extensions**
 
 2a. The list is empty
-> 2a1. TaskManager shows “No done tasks” message
+> 2a1. TaskManager shows “No done tasks” message <br>
 > Use case ends. <br>
 
 
@@ -625,7 +625,7 @@ Use case ends.
 **Extensions**
 
 2a. The list is empty
-> 2a1. TaskManager shows “No done events” message
+> 2a1. TaskManager shows 'No done events' message <br>
 > Use case ends. <br>
 
 
