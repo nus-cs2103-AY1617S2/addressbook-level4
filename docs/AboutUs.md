@@ -34,7 +34,7 @@ Component in charge of:
 -----
 
 #### [Wang Pengcheng](https://github.com/peng229)
-<img src="images/PengCheng.jpg" width="150"><br>
+<img src="images/peng229.jpg" width="150"><br>
  Role: Developer <br>
  Component in charge of:
  
