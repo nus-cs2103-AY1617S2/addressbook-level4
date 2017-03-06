@@ -371,6 +371,13 @@ Priority | As a ... | I want to ... | So that I can...
 `*`| new user | import task data from other TODO products | easily migrate to DoTomorrow
 `*`| user | add subtasks to tasks | break down larger tasks
 `*`| user | have a history of task edits | keep track of when tasks change (or when I make mistakes)
+`**`| user | edit tag labels | update tag labels (or when I make mistakes)
+`**`| user | create folders for my tasks | organize related tasks together
+`*`| user | save my tasks on the cloud | have a backup of my data or view my tasks accross different devices
+`*`| user | print out all tasks for a specific tag | view all tasks of a specific tag
+`*`| user | add subtasks to my tasks | break down major tasks into smaller steps
+`*`| user | add hyperlinks to my task descriptions | click to useful links without having to copy and paste into my browser
+
 
 ## Appendix B : Use Cases
 
