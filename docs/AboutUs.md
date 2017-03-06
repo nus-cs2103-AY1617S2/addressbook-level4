@@ -12,7 +12,7 @@ Responsibilities:
 -----
 
 #### [Tan Wei](https://github.com/tanwei0319)
-<img src="tanwei0319.jpg" width="150"><br>
+<img src="images/tanwei0319.jpg" width="150"><br>
 Role:  <br>
 Responsibilities:
 
