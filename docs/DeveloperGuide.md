@@ -387,7 +387,8 @@ Priority | As a ... | I want to ... | So that I can...
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TaskScheduler` and the **Actor** is the `user`, unless specified otherwise)
+
 
 #### Use case: Add Task
 
@@ -404,17 +405,18 @@ Use case ends.
 2a. User doesn't specify a deadline
 
 > 2a1. TaskManager creates a Task object with no deadlines but possible timings for that task
-  Use case resumes at step 4
+> Use case resumes at step 4
 
 2b. User does not incllude possible timings
 
 > 2b1. TaskManager creates a Task object with a deadline but no possible timings for that task
-  Use case resumes at step 4
+> Use case resumes at step 4
 
 2c. User does not include possible timings or a deadline
 
 > 2c1. TaskManager creates a task object with no deadline and no possible timings
-  Use case resumes at step 4 <br>
+> Use case resumes at step 4 <br>
+  
 
 #### Use case: Add Event
 
@@ -429,11 +431,12 @@ Use case ends.
 
 2a. User doesn't specify a start time or end time
 > 2a1. TaskManager assumes it is a whole day event
-  Use case resumes at step 3
+> Use case resumes at step 3
   
 2b. User only specifies only one timing
 > 2b1. TaskManager assumes the task lasts for the rest of the day
-  Use case resumes at step 3 <br>
+> Use case resumes at step 3 <br>
+  
   
 #### Use case: Mark Task As Done (by finding)
 
@@ -451,11 +454,12 @@ Use case ends.
 
 2a. A list of unique tasks was found
 > 2a1. TaskManager shows a lists of those tasks, and asks the user which task they would like to mark as done
-  Use case ends
+> Use case ends
 
 2b. No list of unique tasks was found
 > 2b1. TaskManager tells user that no tasks was found, and they can enter another string or use the list function to mark task as done.
-  Use case resumes at step 1 <br>
+> Use case resumes at step 1 <br>
+
 
 #### Use case: Mark Task As Done (by index)
 
@@ -471,7 +475,8 @@ Use case ends.
 
 4a. Index is not found in the TaskManager List
 > 4a1. TaskManager reports that no task was found with that index. 
-  Use case resumes at step 3 <br>
+> Use case resumes at step 3 <br>
+
 
 #### Use case: Delete person
 
@@ -490,7 +495,8 @@ Use case ends.
 
 3a. The given index is invalid
 > 3a1. AddressBook shows an error message 
-Use case resumes at step 2 <br>
+> Use case resumes at step 2 <br>
+
 
 #### Use case: List Task (by finding)
 
@@ -506,7 +512,8 @@ Use case ends.
 
 2a. The list is empty
 > 2a1. TaskManager shows “List is empty” message
-  Use case ends <br>
+> Use case ends <br>
+
 
 #### Use case: List Task (Everything)
 
@@ -521,8 +528,9 @@ Use case ends.
 **Extensions**
 
 2a. The list is empty
-> 2a1. TaskManager shows “List is empty” message
-  Use case ends <br>
+> 2a1. TaskManager shows List is empty message
+> Use case ends <br>
+
 
 #### Use case: Edit Task 
 
@@ -546,15 +554,16 @@ Use case ends.
 
 2a. The list is empty
 > 2a1. TaskManager shows “List is empty” message
-  Use case ends
+> Use case ends
 
 6a. The given index is invalid
 > 6a1. TaskManager shows an error message 
-  Use case resumes at step 3
+> Use case resumes at step 3
 
 9a. The given index is invalid
 > 9a1. TaskManager shows an error message 
-  Use case resumes at step 8 <br>
+> Use case resumes at step 8 <br>
+
 
 #### Use case: Delete Task/Event
 
@@ -573,17 +582,18 @@ Use case ends.
 
 2a. List is empty
 > 2a1. TaskManager shows “List is empty” message
-  Use case ends
+> Use case ends
 
 6a. The given index is invalid
 > 6a1. TaskManager shows an error message 
-  Use case resumes at step 3
+> Use case resumes at step 3
 
 6b. Task/event to be deleted is recurring
 > 6b1. TaskManager requests if all recurring tasks/events are deleted
-  6b2. User inputs (Y) or (N)
-  6b3. TaskManager deletes all recurring tasks/events if User inputs (Y) else TaskManager only deletes current task/event if User inputs (N)
-  Use case ends. <br>
+> 6b2. User inputs (Y) or (N)
+> 6b3. TaskManager deletes all recurring tasks/events if User inputs (Y) else TaskManager only deletes current task/event if User inputs (N)
+> Use case ends. <br>
+
 
 #### Use case: Clear Done Tasks
 
@@ -599,7 +609,8 @@ Use case ends.
 
 2a. The list is empty
 > 2a1. TaskManager shows “No done tasks” message
-  Use case ends. <br>
+> Use case ends. <br>
+
 
 #### Use case: Clear Done Events
 
@@ -615,7 +626,8 @@ Use case ends.
 
 2a. The list is empty
 > 2a1. TaskManager shows “No done events” message
-  Use case ends. <br>
+> Use case ends. <br>
+
 
 #### Use case: Undo Last Command
 
@@ -630,6 +642,7 @@ Use case ends.
 2a. No last saved state
 > Use case ends. <br>
 
+
 #### Use case: Redo Last Command
 
 **MSS**
@@ -643,6 +656,7 @@ Use case ends.
 2a. No next saved state
 > Use case ends. <br>
 
+
 #### Use case: Get Help
 
 **MSS**
@@ -650,6 +664,7 @@ Use case ends.
 1. User requests help
 2. TaskManager prints help <br>
 Use case ends.
+
 
 #### Use case: Exit Programme
 
@@ -669,6 +684,7 @@ Use case ends.
 
 {More to be added}
 
+
 ## Appendix D : Glossary
 
 ##### Mainstream OS
@@ -678,6 +694,7 @@ Use case ends.
 ##### Private contact detail
 
 > A contact detail that is not meant to be shared with others
+
 
 ## Appendix E : Product Survey
 
