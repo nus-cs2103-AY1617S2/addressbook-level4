@@ -4,14 +4,15 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/qcfw2kpnoim4tkkp?svg=true)](https://ci.appveyor.com/project/BernardYip/main)
 [![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-T16-B2/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-T16-B2/main?branch=master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7358c2cf354244e6b53bc50d2aaf727b)](https://www.codacy.com/app/bernardyip/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103JAN2017-T16-B2/main/&amp;utm_campaign=Badge_Grade)
-<img src="docs/images/DoOrDie.jpg" width="600"><br>
+<img src="docs/images/UI.png" width="600"><br><br>
+<img src="docs/images/UI_Today.png" width="600"><br><br>
+<img src="docs/images/UI_ViewTaskDetails.png" width="600"><br><br>
 
 * This is a desktop task manager application. It has a GUI but most of the user interactions happen using
   a CLI (Command Line Interface).
-* It is a Java sample application intended for students learning Software Engineering while using Java as
-  the main programming language.
+* It is a Java application intended for users to manage and keep track of tasks on hand.
 * It is **written in OOP fashion**. It provides a **reasonably well-written** code example that is
-  **significantly bigger** (around 6 KLoC)than what students usually write in beginner-level SE modules.
+  **significantly bigger** (around 6 KLoC).
 * Support for *Build Automation* using Gradle and for *Continuous Integration* using Travis CI.
 
 
@@ -27,6 +28,7 @@
 
 * Some parts of this sample application were inspired by the excellent
   [Java FX tutorial](http://code.makery.ch/library/javafx-8-tutorial/) by *Marco Jakob*.
+* The sample project created by [SE-EDU](https://github.com/se-edu/) initiative.
 
 
 #### Licence : [MIT](LICENSE)
