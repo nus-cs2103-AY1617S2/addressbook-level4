@@ -313,20 +313,46 @@ Format: `done INDEX|NAME`
 > * Marked tasks in the current session can be reverted with the `undo` command.
 
 Examples: 
-* `done 1`
+* `done 1`<br>
    Mark the first task in the task list as completed.
-* `done exam`
+* `done exam`<br>
    Mark a task named "exam" in the task list as completed.
  
 ### Finding for tasks
-With the find command, you can find for tasks or events which contain some keywords in their **name** as well as in their **descriptions**. 
+Find tasks with details containing any of the given keywords. Details include name, priority, description, tags, start date&time and end date&time.
 
-Format: `find `
+Keyword Type | Result  | Example
+:--------: | -------- | -------- 
+NAME | find all tasks whoose name matches the input. | `find exam`
+PRIORITY | find a task whoose priority matches the input. | `find \p1`
+DESCRIPTION | find a task whoose description matches the input. | `find \dSR1`
+TAG | find all tasks whoose tag matches the input. | `find \tCS2010`
+MM-DD-YYYY | find all tasks whoose starts date or end date matches the input. | `find 10-22-2017`
+\yYYYY | find all tasks whoose starts or ends on a particular year that matches the input. |  `find \y2017`
+\mMM | find all tasks whoose starts or ends on a particular month that matches the input. | `find \m10`
+\hHHMM | find all tasks whoose starts time or end time matches the input. | `find \h1500`
 
-Examples:
-* 
-*  
-  
+Format: `find [KEYWORDS...]`
+
+> * Keywords are case insensitive. 
+> * The order of the keywords does not matter. 
+> * Partial words will also be matched. (e.g `ex` will match `exam`)
+> * TIME format is HHMM (24 hour Format) e.g. 1300.
+> * Mutiple keywords of varying types is allowed. 
+> * A task is match as long as any of its detail (i.e NAME, PRIORITY, DESCRIPTION etc.) CONTAINS the keyword. 
+
+Advanced Examples: 
+* `find exam \p1 \dSR1`
+   Find all tasks whoose name matches "exam" or priority matches "1" or description matches "SR1".
+* `find \dSR1 \tCS2010 exam`
+   Find all tasks whoose description matches "SR1" or tag matches "2010" or description matches "SR1". 
+* `find 10-22-2017 \h1500`
+   Find all tasks whoose start date or end date matches "10-22-2017" or start time or end time matches "1500".
+* `find exam \p1 \dSR1 \tCS2010 10-22-2017 \y2017 \m10 \h1500`
+   Find all tasks whoose name matches "exam" or priority matches "1" or description matches "SR1" or tag matches "2010" or (start date 
+   or end date) matches "10-22-2017" or (starts or ends on "2017") or (starts or ends on October) or (start time or end time matches 
+   "1500").
+   
 ### Clearing of completed tasks
 Clears all completed tasks. <br>
 
@@ -406,7 +432,7 @@ Format : `exit`
  | `view o` | Show all overdue task
  | `view INDEX|NAME|START_DATETIME|END_DATETIME|PRIORITY|DAY|MONTH|YEAR TAG` | Show a specified task based on its detail.
 [done](#marking-a-task-as-completed) | `done INDEX|NAME`| Mark a task as completed.
-[find](#finding-for-tasks) | `find [KEYWORDS..]`| Search for tasks associated with the keywords.
+[find](#finding-for-tasks) | `find [KEYWORDS..]`| Search for tasks with details associating with the keywords.
 [clear](#clearing-of-completed-tasks) | `clear` | Clear all completed tasks.
 [toggle](#toggle-google-calender) | `toggle` | Toggle Google Calender.
 [undo](#undo-most-recent-command) | `undo` | Undo the most recent command.
