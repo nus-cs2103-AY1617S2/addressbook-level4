@@ -27,6 +27,6 @@ public class NameTest {
         assertTrue(Name.isValidName("$a")); // one symbol and one alphabet
         assertTrue(Name.isValidName("#!@#%!$^!@&#^!*@&#^!&*#^!&^#*!@^#b")); // a lot of symbols and one alphabet
         assertTrue(Name.isValidName("#!@#%!$^!@&#^!*@&#^!&*#^!&^#*!@^#1")); // a lot of symbols and one number
-        
+
     }
 }
