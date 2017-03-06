@@ -1,6 +1,7 @@
 # Suru: The Task Manager
 
 [![Build Status](https://travis-ci.org/CS2103JAN2017-W09-B3/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-W09-B3/main)
+[![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-W09-B3/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-W09-B3/main?branch=master)
 
 <img src="docs/images/Ui.png" width="600"><br>
 
