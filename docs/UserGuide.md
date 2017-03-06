@@ -182,7 +182,7 @@ Format: `add NAME [at|on|by|from START_DATETIME to END_DATETIME] every [DAY|WEEK
 > * Any form of abbreviation can be use for WEEK (e.g Tue, Tues, Tuesday), case insensitve. 
 > * No abbreviation can be use for DAY, MONTH and YEAR
 > * Month (i.e MM) is ignored for every MONTH.
-> * It is suffice to use time for every DAY and every WEEK. Date (i.e MM-DD-YYYY) will be ignored.
+> * It is suffice to use time (i.e HHMM) for every DAY and every WEEK. Date (i.e MM-DD-YYYY) will be ignored.
 > * One must include START_DATETIME and END_DATETIME for every MONTH and every YEAR. 
 
 Examples:
@@ -260,11 +260,14 @@ Edit a task in iManager by index or name<br>
 
 Format: `Edit INDEX|NAME [at|on|by|from START_DATETIME to END_DATETIME] [every DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION][t/TAG...]`<br>
 > * INDEX refers to the index number shown in the most recent listing of tasks. 
-> * INDEX must be positive integer (e.g 1, 2, 3)
-> * All tags of an existing task can be remove by using `t/none`. Case insensitive. 
+> * INDEX must be positive integer e.g 1, 2, 3
+> * Date format is MM-DD-YYYY HHMM (24 hour Format) e.g. 10-22-2017 1500.
 > * Editing `t/TAG` appends to the existing tags of a task 
 > * Editing the same tag name remove the tag itself. 
-   (e.g if task contains tag [friends], edit [/t friends] would remove the 'friends' tag)
+    e.g if task contains tag [friends], edit [/t friends] would remove the 'friends' tag
+> * All tags of an existing task can be remove by using `t/none`. Case insensitive. 
+> * Operation is equivalent to deleting a nold task and adding a new task, however tags will not get overwritten unless specified. 
+    (refer to previous annotation)
 
 Examples:
 
@@ -308,7 +311,7 @@ Mark an existing task as completed in iManager. A completed task gets transferre
 
 Format: `done INDEX|NAME`
 > * INDEX refers to the index number shown in the most recent listing of tasks.
-> * INDEX must be positive integer (e.g 1, 2, 3)
+> * INDEX must be positive integer e.g 1, 2, 3.
 > * Marking an uncompleted task will change its status to completed while marking a completed task will change its status to uncompleted. 
 > * Marked tasks in the current session can be reverted with the `undo` command.
 
@@ -323,32 +326,33 @@ Find tasks with details containing any of the given keywords. Details include na
 
 Keyword Type | Result  | Example
 :--------: | -------- | -------- 
-NAME | find all tasks whoose name matches the input. | `find exam`
-PRIORITY | find a task whoose priority matches the input. | `find \p1`
-DESCRIPTION | find a task whoose description matches the input. | `find \dSR1`
-TAG | find all tasks whoose tag matches the input. | `find \tCS2010`
-MM-DD-YYYY | find all tasks whoose starts date or end date matches the input. | `find 10-22-2017`
-\yYYYY | find all tasks whoose starts or ends on a particular year that matches the input. |  `find \y2017`
-\mMM | find all tasks whoose starts or ends on a particular month that matches the input. | `find \m10`
-\hHHMM | find all tasks whoose starts time or end time matches the input. | `find \h1500`
+NAME | Find all tasks whoose name matches the input. | `find exam`
+PRIORITY | Find a task whoose priority matches the input. | `find \p1`
+DESCRIPTION | Find a task whoose description matches the input. | `find \dSR1`
+TAG | Find all tasks whoose tag matches the input. | `find \tCS2010`
+MM-DD-YYYY | Find all tasks whoose starts date or end date matches the input. | `find 10-22-2017`
+\yYYYY | Find all tasks whoose starts or ends on a particular year that matches the input. |  `find \y2017`
+\mMM | Find all tasks whoose starts or ends on a particular month that matches the input. | `find \m10`
+\hHHMM | Find all tasks whoose starts time or end time matches the input. | `find \h1500`
 
 Format: `find [KEYWORDS...]`
 
 > * Keywords are case insensitive. 
 > * The order of the keywords does not matter. 
-> * Partial words will also be matched. (e.g `ex` will match `exam`)
+> * Partial words will also be matched e.g `ex` will match `exam`.
+> * Date format is MM-DD-YYYY e.g. 10-22-2017.
 > * TIME format is HHMM (24 hour Format) e.g. 1300.
 > * Mutiple keywords of varying types is allowed. 
 > * A task is match as long as any of its detail (i.e NAME, PRIORITY, DESCRIPTION etc.) CONTAINS the keyword. 
 
 Advanced Examples: 
-* `find exam \p1 \dSR1`
+* `find exam \p1 \dSR1`<br>
    Find all tasks whoose name matches "exam" or priority matches "1" or description matches "SR1".
-* `find \dSR1 \tCS2010 exam`
+* `find \dSR1 \tCS2010 exam`<br>
    Find all tasks whoose description matches "SR1" or tag matches "2010" or description matches "SR1". 
-* `find 10-22-2017 \h1500`
+* `find 10-22-2017 \h1500`<br>
    Find all tasks whoose start date or end date matches "10-22-2017" or start time or end time matches "1500".
-* `find exam \p1 \dSR1 \tCS2010 10-22-2017 \y2017 \m10 \h1500`
+* `find exam \p1 \dSR1 \tCS2010 10-22-2017 \y2017 \m10 \h1500`<br>
    Find all tasks whoose name matches "exam" or priority matches "1" or description matches "SR1" or tag matches "2010" or (start date 
    or end date) matches "10-22-2017" or (starts or ends on "2017") or (starts or ends on October) or (start time or end time matches 
    "1500").
