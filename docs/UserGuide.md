@@ -30,9 +30,9 @@ Without further ado, let’s get started.
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window. 
 5. Some example commands you can try:
-   * **`add`**: `SunRise Marathon` adds a reminder to attend SunRise Marathon
+   * **`add`**: `SunRise Marathon` adds a reminder to attend SunRise Marathon.
    * **`find`** `Today` searches the task list for all events happening today. 
-   * **`exit`**: exits the application
+   * **`exit`**: exits the application.
 6. Refer to the[Features](#features) section below for details of each command.
    
 
@@ -180,7 +180,7 @@ Format: `add NAME [at|on|by|from START_DATETIME to END_DATETIME] every [DAY|WEEK
 > * If no start time (i.e HHMM) is specified, the time will be the CURRENT time. 
 > * If no end time (i.e HHMM) is specified, the time will 2359. 
 > * Any form of abbreviation can be use for WEEK (e.g Tue, Tues, Tuesday), case insensitve. 
-> * No abbreviation can be use for DAY, MONTH and YEAR
+> * No abbreviation can be use for DAY, MONTH and YEAR.
 > * Month (i.e MM) is ignored for every MONTH.
 > * It is suffice to use time (i.e HHMM) for every DAY and every WEEK. Date (i.e MM-DD-YYYY) will be ignored.
 > * One must include START_DATETIME and END_DATETIME for every MONTH and every YEAR. 
@@ -260,9 +260,9 @@ Edit a task in iManager by index or name<br>
 
 Format: `Edit INDEX|NAME [at|on|by|from START_DATETIME to END_DATETIME] [every DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION][t/TAG...]`<br>
 > * INDEX refers to the index number shown in the most recent listing of tasks. 
-> * INDEX must be positive integer e.g 1, 2, 3
+> * INDEX must be positive integer e.g 1, 2, 3.
 > * Date format is MM-DD-YYYY HHMM (24 hour Format) e.g. 10-22-2017 1500.
-> * Editing `t/TAG` appends to the existing tags of a task 
+> * Editing `t/TAG` appends to the existing tags of a task.
 > * Editing the same tag name remove the tag itself. 
     e.g if task contains tag [friends], edit [/t friends] would remove the 'friends' tag
 > * All tags of an existing task can be remove by using `t/none`. Case insensitive. 
@@ -314,27 +314,27 @@ Examples:
   Show the first task in the task list. 
 
 #### Viewing all Today's tasks
-Shows a list of all today's task in iManager. Does not show floating and completed tasks. 
+Shows a list of all today's task in iManager. Does not show floating, completed and overdue tasks. 
 
 Format: `view t`<br>
 
 #### Viewing all Pending tasks
-Shows a list of all pending task in iManager. Does not show floating and completed tasks. 
+Shows a list of all pending task in iManager. Does not show floating, completed and overdue tasks. 
 
 Format: `view p`<br>
 
 #### Viewing all Completed tasks
-Shows a list of all completed task in iManager. Does not show pending, floating and Today's tasks. 
+Shows a list of all completed task in iManager. Does not show pending, floating, overdue and Today's tasks. 
 
 Format: `view c`<br>
 
 #### Viewing all Floating tasks
-Shows a list of all floating tasks in iManage. Does not show pending, completed and Today's tasks. 
+Shows a list of all floating tasks in iManage. Does not show pending, completed, overdue and Today's tasks. 
 
 Format: `view f`<br>
 
 #### Viewing all Overdue tasks
-Shows a list of all tasks iManage. Able to filter based on status of task/event.
+Shows a list of all tasks iManage. Does not show pending, completed, floating and Today's tasks. 
 
 Format: `view`<br>
 
@@ -469,9 +469,9 @@ Format : `exit`
  | `view o` | Show all overdue task.
 [done](#marking-a-task-as-completed) | `done INDEX|NAME`| Mark a task as completed.
 [find](#finding-for-tasks) | `find [KEYWORDS..]`| Search for tasks with details associating with the keywords.
- | `find \yYYYY`| Search for tasks starts or ends on a particular year that matches the input.
- | `find \mMM`| Search for tasks starts or ends on a particular month that matches the input.
- | `find\hHHMM`| Search for task whoose starts time or end time matches the input.
+ | `find \yYYYY`| Search for tasks belonging to a particular year, both start and end.
+ | `find \mMM`| Search for tasks belonging to a particular month, both start and end.
+ | `find\hHHMM`| Search for tasks belonging to a particular time, both start and end. 
 [clear](#clearing-of-completed-tasks) | `clear` | Clear all completed tasks.
 [toggle](#toggle-google-calender) | `toggle` | Toggle Google Calender.
 [undo](#undo-most-recent-command) | `undo` | Undo the most recent command.
