@@ -4,7 +4,7 @@ package seedu.address.model.task;
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's phone number in the address book.
+ * Represents a Task's venue number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidVenue(String)}
  */
 public class Venue {

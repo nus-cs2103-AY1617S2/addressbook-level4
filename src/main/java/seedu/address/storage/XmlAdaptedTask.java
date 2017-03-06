@@ -6,11 +6,11 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.task.Address;
-import seedu.address.model.task.Email;
-import seedu.address.model.task.Name;
+import seedu.address.model.task.EndTime;
+import seedu.address.model.task.StartTime;
+import seedu.address.model.task.Title;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.Phone;
+import seedu.address.model.task.Venue;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
@@ -21,13 +21,13 @@ import seedu.address.model.tag.UniqueTagList;
 public class XmlAdaptedTask {
 
     @XmlElement(required = true)
-    private String name;
+    private String title;
     @XmlElement(required = true)
-    private String phone;
+    private String venue;
     @XmlElement(required = true)
-    private String email;
+    private String startTime;
     @XmlElement(required = true)
-    private String address;
+    private String endTime;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -45,10 +45,10 @@ public class XmlAdaptedTask {
      * @param source future changes to this will not affect the created XmlAdaptedTask
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
-        name = source.getName().fullName;
-        phone = source.getPhone().value;
-        email = source.getEmail().value;
-        address = source.getAddress().value;
+        title = source.getTitle().title;
+        venue = source.getVenue().value;
+        startTime = source.getStartTime().value;
+        endTime = source.getEndTime().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -65,11 +65,11 @@ public class XmlAdaptedTask {
         for (XmlAdaptedTag tag : tagged) {
             TaskTags.add(tag.toModelType());
         }
-        final Name name = new Name(this.name);
-        final Phone phone = new Phone(this.phone);
-        final Email email = new Email(this.email);
-        final Address address = new Address(this.address);
+        final Title title = new Title(this.title);
+        final Venue venue = new Venue(this.venue);
+        final StartTime startTime = new StartTime(this.startTime);
+        final EndTime endTime = new EndTime(this.endTime);
         final UniqueTagList tags = new UniqueTagList(TaskTags);
-        return new Task(name, phone, email, address, tags);
+        return new Task(title, venue, startTime, endTime, tags);
     }
 }

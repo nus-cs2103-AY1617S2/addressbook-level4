@@ -91,19 +91,19 @@ public class EditCommand extends Command {
      * corresponding field value of the task.
      */
     public static class EditTaskDescriptor {
-        private Optional<Title> name = Optional.empty();
-        private Optional<Venue> phone = Optional.empty();
-        private Optional<StartTime> email = Optional.empty();
-        private Optional<EndTime> address = Optional.empty();
+        private Optional<Title> title = Optional.empty();
+        private Optional<Venue> venue = Optional.empty();
+        private Optional<StartTime> startTime = Optional.empty();
+        private Optional<EndTime> endTime = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditTaskDescriptor() {}
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
-            this.name = toCopy.getTitle();
-            this.phone = toCopy.getVenue();
-            this.email = toCopy.getStartTime();
-            this.address = toCopy.getEndTime();
+            this.title = toCopy.getTitle();
+            this.venue = toCopy.getVenue();
+            this.startTime = toCopy.getStartTime();
+            this.endTime = toCopy.getEndTime();
             this.tags = toCopy.getTags();
         }
 
@@ -111,43 +111,43 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.phone, this.email, this.address, this.tags);
+            return CollectionUtil.isAnyPresent(this.title, this.venue, this.startTime, this.endTime, this.tags);
         }
 
-        public void setTitle(Optional<Title> name) {
-            assert name != null;
-            this.name = name;
+        public void setTitle(Optional<Title> title) {
+            assert title != null;
+            this.title = title;
         }
 
         public Optional<Title> getTitle() {
-            return name;
+            return title;
         }
 
-        public void setVenue(Optional<Venue> phone) {
-            assert phone != null;
-            this.phone = phone;
+        public void setVenue(Optional<Venue> venue) {
+            assert venue != null;
+            this.venue = venue;
         }
 
         public Optional<Venue> getVenue() {
-            return phone;
+            return venue;
         }
 
-        public void setStartTime(Optional<StartTime> email) {
-            assert email != null;
-            this.email = email;
+        public void setStartTime(Optional<StartTime> startTime) {
+            assert startTime != null;
+            this.startTime = startTime;
         }
 
         public Optional<StartTime> getStartTime() {
-            return email;
+            return startTime;
         }
 
-        public void setEndTime(Optional<EndTime> address) {
-            assert address != null;
-            this.address = address;
+        public void setEndTime(Optional<EndTime> endTime) {
+            assert endTime != null;
+            this.endTime = endTime;
         }
 
         public Optional<EndTime> getEndTime() {
-            return address;
+            return endTime;
         }
 
         public void setTags(Optional<UniqueTagList> tags) {
