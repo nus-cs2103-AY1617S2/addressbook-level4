@@ -8,10 +8,8 @@ import seedu.taskList.logic.commands.exceptions.CommandException;
 import seedu.taskList.model.tag.Tag;
 import seedu.taskList.model.tag.UniqueTagList;
 import seedu.taskList.model.task.Address;
-import seedu.taskList.model.task.Email;
 import seedu.taskList.model.task.Name;
 import seedu.taskList.model.task.Task;
-import seedu.taskList.model.task.Phone;
 import seedu.taskList.model.task.UniqueTaskList;
 
 /**
@@ -36,7 +34,7 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, String phone, String email, String address, Set<String> tags)
+    public AddCommand(String name, String address, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
@@ -44,8 +42,6 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Task(
                 new Name(name),
-                new Phone(phone),
-                new Email(email),
                 new Address(address),
                 new UniqueTagList(tagSet)
         );

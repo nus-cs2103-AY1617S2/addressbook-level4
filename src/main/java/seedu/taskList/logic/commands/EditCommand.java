@@ -8,10 +8,8 @@ import seedu.taskList.commons.util.CollectionUtil;
 import seedu.taskList.logic.commands.exceptions.CommandException;
 import seedu.taskList.model.tag.UniqueTagList;
 import seedu.taskList.model.task.Address;
-import seedu.taskList.model.task.Email;
 import seedu.taskList.model.task.Name;
 import seedu.taskList.model.task.Task;
-import seedu.taskList.model.task.Phone;
 import seedu.taskList.model.task.ReadOnlyTask;
 import seedu.taskList.model.task.UniqueTaskList;
 
@@ -78,12 +76,10 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(personToEdit::getName);
-        Phone updatedPhone = editTaskDescriptor.getPhone().orElseGet(personToEdit::getPhone);
-        Email updatedEmail = editTaskDescriptor.getEmail().orElseGet(personToEdit::getEmail);
         Address updatedAddress = editTaskDescriptor.getAddress().orElseGet(personToEdit::getAddress);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(personToEdit::getTags);
 
-        return new Task(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Task(updatedName, updatedAddress, updatedTags);
     }
 
     /**
@@ -92,8 +88,6 @@ public class EditCommand extends Command {
      */
     public static class EditTaskDescriptor {
         private Optional<Name> name = Optional.empty();
-        private Optional<Phone> phone = Optional.empty();
-        private Optional<Email> email = Optional.empty();
         private Optional<Address> address = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
@@ -101,8 +95,6 @@ public class EditCommand extends Command {
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.name = toCopy.getName();
-            this.phone = toCopy.getPhone();
-            this.email = toCopy.getEmail();
             this.address = toCopy.getAddress();
             this.tags = toCopy.getTags();
         }
@@ -111,7 +103,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.phone, this.email, this.address, this.tags);
+            return CollectionUtil.isAnyPresent(this.name, this.address, this.tags);
         }
 
         public void setName(Optional<Name> name) {
@@ -121,24 +113,6 @@ public class EditCommand extends Command {
 
         public Optional<Name> getName() {
             return name;
-        }
-
-        public void setPhone(Optional<Phone> phone) {
-            assert phone != null;
-            this.phone = phone;
-        }
-
-        public Optional<Phone> getPhone() {
-            return phone;
-        }
-
-        public void setEmail(Optional<Email> email) {
-            assert email != null;
-            this.email = email;
-        }
-
-        public Optional<Email> getEmail() {
-            return email;
         }
 
         public void setAddress(Optional<Address> address) {
