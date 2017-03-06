@@ -52,6 +52,7 @@ public class XmlAdaptedTask {
         priority = source.getPriority().value;
         email = source.getEmail().value;
         startDate = source.getStartDate().value;
+        dueDate = source.getDueDate().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
