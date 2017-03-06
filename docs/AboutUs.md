@@ -4,49 +4,44 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Damith C. Rajapakse](http://www.comp.nus.edu.sg/~damithch) <br>
-<img src="images/DamithRajapakse.jpg" width="150"><br>
-**Role**: Project Advisor
-
 -----
 
-#### [Joshua Lee](http://github.com/lejolly)
+#### [Ellango Vesali](http://github.com/vesaliE)
 <img src="images/JoshuaLee.jpg" width="150"><br>
 Role: Developer <br>
-Responsibilities: UI
+Component in charge of:
+
+Features implemented: 
 
 -----
 
-#### [Leow Yijin](http://github.com/yijinl)
+#### [Lim Jie](http://github.com/limjie)
 <img src="images/LeowYijin.jpg" width="150"><br>
 Role: Developer <br>
-Responsibilities: Data
+Component in charge of:
+
+Features implemented: 
 
 -----
 
-#### [Martin Choo](http://github.com/m133225)
+#### [Sherina Toh Shi Pei](http://github.com/sherinatoh)
 <img src="images/MartinChoo.jpg" width="150"><br>
 Role: Developer <br>
-Responsibilities: Dev Ops
+Component in charge of:
+
+ Features implemented: 
 
 -----
 
-#### [Thien Nguyen](https://github.com/ndt93)
+#### [Wang Pengcheng](https://github.com/peng229)
+<img src="images/PengCheng.jpg" width="150"><br>
  Role: Developer <br>
- Responsibilities: Threading
+ Component in charge of:
+ 
+ Features implemented: 
+ 
 
  -----
 
-#### [You Liang](http://github.com/yl-coder)
-<img src="images/YouLiang.jpg" width="150"><br>
- Role: Developer <br>
- Responsibilities: UI
-
  -----
 
-# Contributors
-
-We welcome contributions. See [Contact Us](ContactUs.md) page for more info.
-
-* [Akshay Narayan](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Aokkhoy)
-* [Sam Yong](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Amauris)
