@@ -1,5 +1,4 @@
-# iManager- Developer Guide
----
+# iManager - Developer Guide
 
 1. [Setting Up](#setting-up)
 2. [Design](#design)
