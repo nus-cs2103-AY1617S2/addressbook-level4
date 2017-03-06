@@ -52,7 +52,7 @@ public class TestUtil {
      */
     public static final String SANDBOX_FOLDER = FileUtil.getPath("./src/test/data/sandbox/");
 
-    public static final Task[] SAMPLE_PERSON_DATA = getSampleTaskData();
+    public static final Task[] SAMPLE_TASK_DATA = getSampleTaskData();
 
     public static final Tag[] SAMPLE_TAG_DATA = getSampleTagData();
 
@@ -75,15 +75,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Title("Ali Muster"), new Date("9482424"), new Priority("hans@google.com"), new Instruction("4th street"), new UniqueTagList()),
-                new Task(new Title("Boris Mueller"), new Date("87249245"), new Priority("ruth@google.com"), new Instruction("81th street"), new UniqueTagList()),
-                new Task(new Title("Carl Kurz"), new Date("95352563"), new Priority("heinz@yahoo.com"), new Instruction("wall street"), new UniqueTagList()),
-                new Task(new Title("Daniel Meier"), new Date("87652533"), new Priority("cornelia@google.com"), new Instruction("10th street"), new UniqueTagList()),
-                new Task(new Title("Elle Meyer"), new Date("9482224"), new Priority("werner@gmail.com"), new Instruction("michegan ave"), new UniqueTagList()),
-                new Task(new Title("Fiona Kunz"), new Date("9482427"), new Priority("lydia@gmail.com"), new Instruction("little tokyo"), new UniqueTagList()),
-                new Task(new Title("George Best"), new Date("9482442"), new Priority("anna@google.com"), new Instruction("4th street"), new UniqueTagList()),
-                new Task(new Title("Hoon Meier"), new Date("8482424"), new Priority("stefan@mail.com"), new Instruction("little india"), new UniqueTagList()),
-                new Task(new Title("Ida Mueller"), new Date("8482131"), new Priority("hans@google.com"), new Instruction("chicago ave"), new UniqueTagList())
+                new Task(new Title("Ali Muster"), new Date("9482424"), new Priority("urgent"), new Instruction("4th street"), new UniqueTagList()),
+                new Task(new Title("Boris Mueller"), new Date("87249245"), new Priority("urgent"), new Instruction("81th street"), new UniqueTagList()),
+                new Task(new Title("Carl Kurz"), new Date("95352563"), new Priority("urgent"), new Instruction("wall street"), new UniqueTagList()),
+                new Task(new Title("Daniel Meier"), new Date("87652533"), new Priority("urgent"), new Instruction("10th street"), new UniqueTagList()),
+                new Task(new Title("Elle Meyer"), new Date("9482224"), new Priority("urgent"), new Instruction("michegan ave"), new UniqueTagList()),
+                new Task(new Title("Fiona Kunz"), new Date("9482427"), new Priority("urgent"), new Instruction("little tokyo"), new UniqueTagList()),
+                new Task(new Title("George Best"), new Date("9482442"), new Priority("urgent"), new Instruction("4th street"), new UniqueTagList()),
+                new Task(new Title("Hoon Meier"), new Date("8482424"), new Priority("urgent"), new Instruction("little india"), new UniqueTagList()),
+                new Task(new Title("Ida Mueller"), new Date("8482131"), new Priority("urgent"), new Instruction("chicago ave"), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -108,7 +108,7 @@ public class TestUtil {
     }
 
     public static List<Task> generateSampleTaskData() {
-        return Arrays.asList(SAMPLE_PERSON_DATA);
+        return Arrays.asList(SAMPLE_TASK_DATA);
     }
 
     /**
