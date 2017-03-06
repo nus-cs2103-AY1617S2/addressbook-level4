@@ -3,7 +3,7 @@ package seedu.taskList.testutil;
 import seedu.taskList.commons.exceptions.IllegalValueException;
 import seedu.taskList.model.tag.Tag;
 import seedu.taskList.model.tag.UniqueTagList;
-import seedu.taskList.model.task.Address;
+import seedu.taskList.model.task.Comment;
 import seedu.taskList.model.task.Email;
 import seedu.taskList.model.task.Name;
 import seedu.taskList.model.task.Phone;
@@ -40,7 +40,7 @@ public class PersonBuilder {
     }
 
     public PersonBuilder withAddress(String address) throws IllegalValueException {
-        this.person.setAddress(new Address(address));
+        this.person.setAddress(new Comment(address));
         return this;
     }
 

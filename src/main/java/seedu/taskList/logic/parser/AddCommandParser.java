@@ -1,7 +1,7 @@
 package seedu.taskList.logic.parser;
 
 import static seedu.taskList.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.taskList.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.taskList.logic.parser.CliSyntax.PREFIX_COMMENT;
 import static seedu.taskList.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.NoSuchElementException;
@@ -22,12 +22,12 @@ public class AddCommandParser {
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_ADDRESS, PREFIX_TAG);
+                new ArgumentTokenizer(PREFIX_COMMENT, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         try {
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
-                    argsTokenizer.getValue(PREFIX_ADDRESS).get(),
+                    argsTokenizer.getValue(PREFIX_COMMENT).get(),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
             );
         } catch (NoSuchElementException nsee) {

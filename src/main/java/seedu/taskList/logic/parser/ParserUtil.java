@@ -15,7 +15,7 @@ import seedu.taskList.commons.exceptions.IllegalValueException;
 import seedu.taskList.commons.util.StringUtil;
 import seedu.taskList.model.tag.Tag;
 import seedu.taskList.model.tag.UniqueTagList;
-import seedu.taskList.model.task.Address;
+import seedu.taskList.model.task.Comment;
 import seedu.taskList.model.task.Name;
 
 /**
@@ -73,11 +73,11 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.
+     * Parses a {@code Optional<String> comment} into an {@code Optional<Comment>} if {@code comment} is present.
      */
-    public static Optional<Address> parseAddress(Optional<String> address) throws IllegalValueException {
-        assert address != null;
-        return address.isPresent() ? Optional.of(new Address(address.get())) : Optional.empty();
+    public static Optional<Comment> parseComment(Optional<String> comment) throws IllegalValueException {
+        assert comment != null;
+        return comment.isPresent() ? Optional.of(new Comment(comment.get())) : Optional.empty();
     }
 
 

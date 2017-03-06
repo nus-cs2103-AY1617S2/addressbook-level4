@@ -43,7 +43,7 @@ import seedu.taskList.model.ModelManager;
 import seedu.taskList.model.ReadOnlyTaskList;
 import seedu.taskList.model.tag.Tag;
 import seedu.taskList.model.tag.UniqueTagList;
-import seedu.taskList.model.task.Address;
+import seedu.taskList.model.task.Comment;
 import seedu.taskList.model.task.Email;
 import seedu.taskList.model.task.Name;
 import seedu.taskList.model.task.Person;
@@ -420,7 +420,7 @@ public class LogicManagerTest {
             Name name = new Name("Adam Brown");
             Phone privatePhone = new Phone("111111");
             Email email = new Email("adam@gmail.com");
-            Address privateAddress = new Address("111, alpha street");
+            Comment privateAddress = new Comment("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
@@ -439,7 +439,7 @@ public class LogicManagerTest {
                     new Name("Person " + seed),
                     new Phone("" + Math.abs(seed)),
                     new Email(seed + "@email"),
-                    new Address("House of " + seed),
+                    new Comment("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -538,7 +538,7 @@ public class LogicManagerTest {
                     new Name(name),
                     new Phone("1"),
                     new Email("1@email"),
-                    new Address("House of 1"),
+                    new Comment("House of 1"),
                     new UniqueTagList(new Tag("tag"))
             );
         }

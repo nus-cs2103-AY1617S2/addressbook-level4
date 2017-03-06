@@ -19,7 +19,7 @@ public class TaskCard extends UiPart<Region> {
     private Label id;
 
     @FXML
-    private Label address;
+    private Label comment;
 
     @FXML
     private FlowPane tags;
@@ -28,7 +28,7 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
-        address.setText(task.getAddress().value);
+        comment.setText(task.getComment().value);
         initTags(task);
     }
 

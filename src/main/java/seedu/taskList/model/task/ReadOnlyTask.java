@@ -9,7 +9,7 @@ import seedu.taskList.model.tag.UniqueTagList;
 public interface ReadOnlyTask {
 
     Name getName();
-    Address getAddress();
+    Comment getComment();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -24,7 +24,7 @@ public interface ReadOnlyTask {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                 && other.getName().equals(this.getName()) // state checks here onwards
-                && other.getAddress().equals(this.getAddress()));
+                && other.getComment().equals(this.getComment()));
     }
 
     /**
@@ -33,8 +33,8 @@ public interface ReadOnlyTask {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append(" Address: ")
-                .append(getAddress())
+                .append(" Comment: ")
+                .append(getComment())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

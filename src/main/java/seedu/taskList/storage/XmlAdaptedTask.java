@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.taskList.commons.exceptions.IllegalValueException;
 import seedu.taskList.model.tag.Tag;
 import seedu.taskList.model.tag.UniqueTagList;
-import seedu.taskList.model.task.Address;
+import seedu.taskList.model.task.Comment;
 import seedu.taskList.model.task.Name;
 import seedu.taskList.model.task.Task;
 import seedu.taskList.model.task.ReadOnlyTask;
@@ -21,7 +21,7 @@ public class XmlAdaptedTask {
     @XmlElement(required = true)
     private String name;
     @XmlElement(required = true)
-    private String address;
+    private String comment;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -40,7 +40,7 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getName().fullName;
-        address = source.getAddress().value;
+        comment = source.getComment().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -58,8 +58,8 @@ public class XmlAdaptedTask {
             personTags.add(tag.toModelType());
         }
         final Name name = new Name(this.name);
-        final Address address = new Address(this.address);
+        final Comment comment = new Comment(this.comment);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Task(name, address, tags);
+        return new Task(name, comment, tags);
     }
 }

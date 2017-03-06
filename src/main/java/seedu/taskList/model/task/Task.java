@@ -12,17 +12,17 @@ import seedu.taskList.model.tag.UniqueTagList;
 public class Task implements ReadOnlyTask {
 
     private Name name;
-    private Address address;
+    private Comment comment;
 
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Address address, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, address, tags);
+    public Task(Name name, Comment comment, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, comment, tags);
         this.name = name;
-        this.address = address;
+        this.comment = comment;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -30,7 +30,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getAddress(), source.getTags());
+        this(source.getName(), source.getComment(), source.getTags());
     }
 
     public void setName(Name name) {
@@ -44,14 +44,14 @@ public class Task implements ReadOnlyTask {
     }
 
 
-    public void setAddress(Address address) {
-        assert address != null;
-        this.address = address;
+    public void setComment(Comment comment) {
+        assert comment != null;
+        this.comment = comment;
     }
 
     @Override
-    public Address getAddress() {
-        return address;
+    public Comment getComment() {
+        return comment;
     }
 
     @Override
@@ -73,7 +73,7 @@ public class Task implements ReadOnlyTask {
         assert replacement != null;
 
         this.setName(replacement.getName());
-        this.setAddress(replacement.getAddress());
+        this.setComment(replacement.getComment());
         this.setTags(replacement.getTags());
     }
 
@@ -87,7 +87,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, address, tags);
+        return Objects.hash(name, comment, tags);
     }
 
     @Override

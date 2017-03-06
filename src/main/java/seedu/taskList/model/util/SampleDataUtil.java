@@ -4,7 +4,7 @@ import seedu.taskList.commons.exceptions.IllegalValueException;
 import seedu.taskList.model.TaskList;
 import seedu.taskList.model.ReadOnlyTaskList;
 import seedu.taskList.model.tag.UniqueTagList;
-import seedu.taskList.model.task.Address;
+import seedu.taskList.model.task.Comment;
 import seedu.taskList.model.task.Name;
 import seedu.taskList.model.task.Task;
 import seedu.taskList.model.task.UniqueTaskList.DuplicateTaskException;
@@ -14,22 +14,22 @@ public class SampleDataUtil {
         try {
             return new Task[] {
                 new Task(new Name("Alex Yeoh"),
-                    new Address("Blk 30 Geylang Street 29, #06-40"),
+                    new Comment("Blk 30 Geylang Street 29, #06-40"),
                     new UniqueTagList("friends")),
                 new Task(new Name("Bernice Yu"),
-                    new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
+                    new Comment("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                     new UniqueTagList("colleagues", "friends")),
                 new Task(new Name("Charlotte Oliveiro"),
-                    new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
+                    new Comment("Blk 11 Ang Mo Kio Street 74, #11-04"),
                     new UniqueTagList("neighbours")),
                 new Task(new Name("David Li"),
-                    new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
+                    new Comment("Blk 436 Serangoon Gardens Street 26, #16-43"),
                     new UniqueTagList("family")),
                 new Task(new Name("Irfan Ibrahim"),
-                    new Address("Blk 47 Tampines Street 20, #17-35"),
+                    new Comment("Blk 47 Tampines Street 20, #17-35"),
                     new UniqueTagList("classmates")),
                 new Task(new Name("Roy Balakrishnan"),
-                    new Address("Blk 45 Aljunied Street 85, #11-31"),
+                    new Comment("Blk 45 Aljunied Street 85, #11-31"),
                     new UniqueTagList("colleagues"))
             };
         } catch (IllegalValueException e) {

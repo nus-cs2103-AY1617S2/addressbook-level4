@@ -1,7 +1,7 @@
 package seedu.taskList.testutil;
 
 import seedu.taskList.model.tag.UniqueTagList;
-import seedu.taskList.model.task.Address;
+import seedu.taskList.model.task.Comment;
 import seedu.taskList.model.task.Email;
 import seedu.taskList.model.task.Name;
 import seedu.taskList.model.task.Phone;
@@ -13,7 +13,7 @@ import seedu.taskList.model.task.ReadOnlyTask;
 public class TestPerson implements ReadOnlyTask {
 
     private Name name;
-    private Address address;
+    private Comment comment;
     private Email email;
     private Phone phone;
     private UniqueTagList tags;
@@ -29,7 +29,7 @@ public class TestPerson implements ReadOnlyTask {
         this.name = personToCopy.getName();
         this.phone = personToCopy.getPhone();
         this.email = personToCopy.getEmail();
-        this.address = personToCopy.getAddress();
+        this.comment = personToCopy.getAddress();
         this.tags = personToCopy.getTags();
     }
 
@@ -37,8 +37,8 @@ public class TestPerson implements ReadOnlyTask {
         this.name = name;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setAddress(Comment comment) {
+        this.comment = comment;
     }
 
     public void setEmail(Email email) {
@@ -69,8 +69,8 @@ public class TestPerson implements ReadOnlyTask {
     }
 
     @Override
-    public Address getAddress() {
-        return address;
+    public Comment getAddress() {
+        return comment;
     }
 
     @Override

@@ -26,15 +26,15 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<ReadOnlyTask> filteredTasks;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given taskList and userPrefs.
      */
-    public ModelManager(ReadOnlyTaskList addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTaskList taskList, UserPrefs userPrefs) {
         super();
-        assert !CollectionUtil.isAnyNull(addressBook, userPrefs);
+        assert !CollectionUtil.isAnyNull(taskList, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + taskList + " and user prefs " + userPrefs);
 
-        this.taskList = new TaskList(addressBook);
+        this.taskList = new TaskList(taskList);
         filteredTasks = new FilteredList<>(this.taskList.getTaskList());
     }
 
@@ -76,8 +76,8 @@ public class ModelManager extends ComponentManager implements Model {
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
 
-        int addressBookIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        taskList.updateTask(addressBookIndex, editedTask);
+        int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
+        taskList.updateTask(taskListIndex, editedTask);
         indicateAddressBookChanged();
     }
 

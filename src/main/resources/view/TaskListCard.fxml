@@ -36,7 +36,7 @@
                             </children>
                         </HBox>
                         <FlowPane fx:id="tags" />
-                        <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
+                        <Label fx:id="comment" styleClass="cell_small_label" text="\$comment" />
                     </children>
                 </VBox>
             </children>
