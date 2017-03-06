@@ -24,7 +24,7 @@ public class AddressBookTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final AddressBook addressBook = new AddressBook();
+    private final TaskList addressBook = new TaskList();
 
     @Test
     public void constructor() {
@@ -40,7 +40,7 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = new TypicalTestPersons().getTypicalAddressBook();
+        TaskList newData = new TypicalTestPersons().getTypicalAddressBook();
         addressBook.resetData(newData);
         assertEquals(newData, addressBook);
     }
@@ -59,7 +59,7 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
-        AddressBook typicalAddressBook = new TypicalTestPersons().getTypicalAddressBook();
+        TaskList typicalAddressBook = new TypicalTestPersons().getTypicalAddressBook();
         List<ReadOnlyTask> newPersons = typicalAddressBook.getPersonList();
         List<Tag> newTags = new ArrayList<>(typicalAddressBook.getTagList());
         // Repeat the first tag twice
