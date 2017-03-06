@@ -29,7 +29,7 @@ import seedu.taskList.TestApp;
 import seedu.taskList.commons.exceptions.IllegalValueException;
 import seedu.taskList.commons.util.FileUtil;
 import seedu.taskList.commons.util.XmlUtil;
-import seedu.taskList.model.AddressBook;
+import seedu.taskList.model.TaskList;
 import seedu.taskList.model.tag.Tag;
 import seedu.taskList.model.tag.UniqueTagList;
 import seedu.taskList.model.task.Address;
@@ -38,7 +38,7 @@ import seedu.taskList.model.task.Name;
 import seedu.taskList.model.task.Person;
 import seedu.taskList.model.task.Phone;
 import seedu.taskList.model.task.ReadOnlyTask;
-import seedu.taskList.storage.XmlSerializableAddressBook;
+import seedu.taskList.storage.XmlSerializableTaskList;
 
 /**
  * A utility class for test cases.
@@ -144,8 +144,8 @@ public class TestUtil {
         createDataFileWithSampleData(TestApp.SAVE_LOCATION_FOR_TESTING);
     }
 
-    public static XmlSerializableAddressBook generateSampleStorageAddressBook() {
-        return new XmlSerializableAddressBook(new AddressBook());
+    public static XmlSerializableTaskList generateSampleStorageAddressBook() {
+        return new XmlSerializableTaskList(new TaskList());
     }
 
     /**

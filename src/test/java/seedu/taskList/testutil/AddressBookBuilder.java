@@ -1,7 +1,7 @@
 package seedu.taskList.testutil;
 
 import seedu.taskList.commons.exceptions.IllegalValueException;
-import seedu.taskList.model.AddressBook;
+import seedu.taskList.model.TaskList;
 import seedu.taskList.model.tag.Tag;
 import seedu.taskList.model.task.Person;
 import seedu.taskList.model.task.UniqueTaskList;
@@ -13,23 +13,23 @@ import seedu.taskList.model.task.UniqueTaskList;
  */
 public class AddressBookBuilder {
 
-    private AddressBook addressBook;
+    private TaskList taskList;
 
-    public AddressBookBuilder(AddressBook addressBook) {
-        this.addressBook = addressBook;
+    public AddressBookBuilder(TaskList taskList) {
+        this.taskList = taskList;
     }
 
     public AddressBookBuilder withPerson(Person person) throws UniqueTaskList.DuplicatePersonException {
-        addressBook.addPerson(person);
+        taskList.addPerson(person);
         return this;
     }
 
     public AddressBookBuilder withTag(String tagName) throws IllegalValueException {
-        addressBook.addTag(new Tag(tagName));
+        taskList.addTag(new Tag(tagName));
         return this;
     }
 
-    public AddressBook build() {
-        return addressBook;
+    public TaskList build() {
+        return taskList;
     }
 }

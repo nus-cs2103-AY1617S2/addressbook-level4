@@ -1,7 +1,7 @@
 package seedu.taskList.testutil;
 
 import seedu.taskList.commons.exceptions.IllegalValueException;
-import seedu.taskList.model.AddressBook;
+import seedu.taskList.model.TaskList;
 import seedu.taskList.model.task.Person;
 import seedu.taskList.model.task.UniqueTaskList;
 
@@ -43,7 +43,7 @@ public class TypicalTestPersons {
         }
     }
 
-    public static void loadAddressBookWithSampleData(AddressBook ab) {
+    public static void loadAddressBookWithSampleData(TaskList ab) {
         for (TestPerson person : new TypicalTestPersons().getTypicalPersons()) {
             try {
                 ab.addPerson(new Person(person));
@@ -57,8 +57,8 @@ public class TypicalTestPersons {
         return new TestPerson[]{alice, benson, carl, daniel, elle, fiona, george};
     }
 
-    public AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public TaskList getTypicalAddressBook() {
+        TaskList ab = new TaskList();
         loadAddressBookWithSampleData(ab);
         return ab;
     }

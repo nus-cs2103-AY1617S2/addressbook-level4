@@ -8,7 +8,7 @@ import seedu.taskList.model.task.ReadOnlyTask;
 /**
  * Unmodifiable view of an address book
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyTaskList {
 
     /**
      * Returns an unmodifiable view of the persons list.
