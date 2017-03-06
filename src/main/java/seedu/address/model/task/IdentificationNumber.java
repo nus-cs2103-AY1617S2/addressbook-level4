@@ -11,6 +11,9 @@ import seedu.address.commons.exceptions.IllegalValueException;
  */
 public class IdentificationNumber {
 
+    public static final ZERO = new IdentificationNumber(0);
+    public static final ONE = new IdentificationNumber(1);
+
     public static final String MESSAGE_ID_CONSTRAINTS =
         "ID has to be a number";
 

@@ -5,6 +5,7 @@ package seedu.address.model.task;
  */
 public interface ReadOnlyTask {
 
+    Index getIndex();
     Name getName();
     Deadline getDeadline();
     Description getDescription();
@@ -15,6 +16,7 @@ public interface ReadOnlyTask {
     default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
+                && other.getID().equals(this.getID())
                 && other.getName().equals(this.getName()) // state checks here onwards
                 && other.getDeadline().equals(this.getDeadline())
                 && other.getDescription().equals(this.getDescription()));
