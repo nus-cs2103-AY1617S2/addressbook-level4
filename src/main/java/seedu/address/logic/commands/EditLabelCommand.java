@@ -20,7 +20,8 @@ public class EditLabelCommand extends Command {
     public static final String COMMAND_WORD = "editlabel";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a label to another label \n"
-            + "Existing label will be overwritten by the new label.\n" + "Parameters: LABEL_TO_EDIT NEW_LABEL"
+            + "Existing label will be overwritten by the new label.\n"
+            + "Parameters: LABEL_TO_EDIT NEW_LABEL \n"
             + "Example: " + COMMAND_WORD + " school schoolwork";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Labels changed from %1$s to %2$s";
