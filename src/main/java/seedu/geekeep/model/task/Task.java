@@ -1,6 +1,6 @@
 package seedu.geekeep.model.task;
 
-public class Task implements ReadOnlyTask{
+public class Task implements ReadOnlyTask {
 
     /**
      * Creates a copy of the given ReadOnlyPerson.

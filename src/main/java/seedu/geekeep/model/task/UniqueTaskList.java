@@ -7,9 +7,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.geekeep.commons.core.UnmodifiableObservableList;
 
-public class UniqueTaskList implements Iterable<Task>{
+public class UniqueTaskList implements Iterable<Task> {
 
-    public static class DuplicateTaskException extends Exception{
+    public static class DuplicateTaskException extends Exception {
         protected DuplicateTaskException() {
             super("Operation would result in duplicate task");
         }
@@ -30,9 +30,9 @@ public class UniqueTaskList implements Iterable<Task>{
      * @throws DuplicateTaskException
      *             if the task to add is a duplicate of an existing task in the list.
      */
-    public void add(Task toAdd) throws DuplicateTaskException{
+    public void add(Task toAdd) throws DuplicateTaskException {
         assert toAdd != null;
-        if(contains(toAdd)){
+        if(contains(toAdd)) {
             throw new DuplicateTaskException();
         }
         internalList.add(toAdd);

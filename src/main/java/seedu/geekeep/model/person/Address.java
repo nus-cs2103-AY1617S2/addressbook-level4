@@ -8,13 +8,21 @@ import seedu.geekeep.commons.exceptions.IllegalValueException;
  */
 public class Address {
 
-    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses can take any values, and it should not be blank";
+    public static final String MESSAGE_ADDRESS_CONSTRAINTS =
+            "Person addresses can take any values, and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace, otherwise " " (a blank string) becomes a valid
      * input.
      */
     public static final String ADDRESS_VALIDATION_REGEX = "[^\\s].*";
+
+    /**
+     * Returns true if a given string is a valid person email.
+     */
+    public static boolean isValidAddress(String test) {
+        return test.matches(ADDRESS_VALIDATION_REGEX);
+    }
 
     public final String value;
 
@@ -32,18 +40,6 @@ public class Address {
         this.value = address;
     }
 
-    /**
-     * Returns true if a given string is a valid person email.
-     */
-    public static boolean isValidAddress(String test) {
-        return test.matches(ADDRESS_VALIDATION_REGEX);
-    }
-
-    @Override
-    public String toString() {
-        return value;
-    }
-
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -54,6 +50,11 @@ public class Address {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return value;
     }
 
 }
