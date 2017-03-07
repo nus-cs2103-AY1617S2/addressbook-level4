@@ -28,11 +28,11 @@ public class PersonCard extends UiPart<Region> {
 
     public PersonCard(ReadOnlyTask person, int displayedIndex) {
         super(FXML);
-        name.setText(person.getName().fullName);
+        name.setText(person.getName().taskName);
         id.setText(displayedIndex + ". ");
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
+        phone.setText("This can be description");
+        address.setText("Start and end time");
+        email.setText("Priority?");
         initTags(person);
     }
 
