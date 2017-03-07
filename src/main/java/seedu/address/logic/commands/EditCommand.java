@@ -6,9 +6,9 @@ import java.util.Optional;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Location;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.ReadOnlyPerson;
@@ -25,7 +25,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be positive int) [DESCRIPTION] [p/PHONE] [e/EMAIL] [a/ADDRESS ] [t/TAG]...\n"
+            + "Parameters: INDEX (must be positive int) [DESCRIPTION] [p/PHONE] [e/EMAIL] [l/LOCATION ] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 p/91234567 e/johndoe@yahoo.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
@@ -80,10 +80,10 @@ public class EditCommand extends Command {
         Description updatedDescription = editPersonDescriptor.getDescription().orElseGet(personToEdit::getDescription);
         Phone updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
         Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
-        Address updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
+        Location updatedLocation = editPersonDescriptor.getLocation().orElseGet(personToEdit::getLocation);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
-        return new Person(updatedDescription, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedDescription, updatedPhone, updatedEmail, updatedLocation, updatedTags);
     }
 
     /**
@@ -94,7 +94,7 @@ public class EditCommand extends Command {
         private Optional<Description> description = Optional.empty();
         private Optional<Phone> phone = Optional.empty();
         private Optional<Email> email = Optional.empty();
-        private Optional<Address> address = Optional.empty();
+        private Optional<Location> location = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditPersonDescriptor() {}
@@ -103,7 +103,7 @@ public class EditCommand extends Command {
             this.description = toCopy.getDescription();
             this.phone = toCopy.getPhone();
             this.email = toCopy.getEmail();
-            this.address = toCopy.getAddress();
+            this.location = toCopy.getLocation();
             this.tags = toCopy.getTags();
         }
 
@@ -111,7 +111,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.description, this.phone, this.email, this.address, this.tags);
+            return CollectionUtil.isAnyPresent(this.description, this.phone, this.email, this.location, this.tags);
         }
 
         public void setDescription(Optional<Description> description) {
@@ -141,13 +141,13 @@ public class EditCommand extends Command {
             return email;
         }
 
-        public void setAddress(Optional<Address> address) {
-            assert address != null;
-            this.address = address;
+        public void setLocation(Optional<Location> location) {
+            assert location != null;
+            this.location = location;
         }
 
-        public Optional<Address> getAddress() {
-            return address;
+        public Optional<Location> getLocation() {
+            return location;
         }
 
         public void setTags(Optional<UniqueTagList> tags) {

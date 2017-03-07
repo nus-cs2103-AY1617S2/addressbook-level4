@@ -11,7 +11,7 @@ public interface ReadOnlyPerson {
     Description getDescription();
     Phone getPhone();
     Email getEmail();
-    Address getAddress();
+    Location getLocation();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -28,7 +28,7 @@ public interface ReadOnlyPerson {
                 && other.getDescription().equals(this.getDescription()) // state checks here onwards
                 && other.getPhone().equals(this.getPhone())
                 && other.getEmail().equals(this.getEmail())
-                && other.getAddress().equals(this.getAddress()));
+                && other.getLocation().equals(this.getLocation()));
     }
 
     /**
@@ -42,7 +42,7 @@ public interface ReadOnlyPerson {
                 .append(" Email: ")
                 .append(getEmail())
                 .append(" Address: ")
-                .append(getAddress())
+                .append(getLocation())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

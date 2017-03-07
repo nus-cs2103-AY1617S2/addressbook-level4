@@ -30,7 +30,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.AddressBook;
-import seedu.address.model.person.Address;
+import seedu.address.model.person.Location;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Description;
 import seedu.address.model.person.Person;
@@ -75,15 +75,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Person[]{
-                new Person(new Description("Ali Muster"), new Phone("9482424"), new Email("hans@google.com"), new Address("4th street"), new UniqueTagList()),
-                new Person(new Description("Boris Mueller"), new Phone("87249245"), new Email("ruth@google.com"), new Address("81th street"), new UniqueTagList()),
-                new Person(new Description("Carl Kurz"), new Phone("95352563"), new Email("heinz@yahoo.com"), new Address("wall street"), new UniqueTagList()),
-                new Person(new Description("Daniel Meier"), new Phone("87652533"), new Email("cornelia@google.com"), new Address("10th street"), new UniqueTagList()),
-                new Person(new Description("Elle Meyer"), new Phone("9482224"), new Email("werner@gmail.com"), new Address("michegan ave"), new UniqueTagList()),
-                new Person(new Description("Fiona Kunz"), new Phone("9482427"), new Email("lydia@gmail.com"), new Address("little tokyo"), new UniqueTagList()),
-                new Person(new Description("George Best"), new Phone("9482442"), new Email("anna@google.com"), new Address("4th street"), new UniqueTagList()),
-                new Person(new Description("Hoon Meier"), new Phone("8482424"), new Email("stefan@mail.com"), new Address("little india"), new UniqueTagList()),
-                new Person(new Description("Ida Mueller"), new Phone("8482131"), new Email("hans@google.com"), new Address("chicago ave"), new UniqueTagList())
+                new Person(new Description("Ali Muster"), new Phone("9482424"), new Email("hans@google.com"), new Location("4th street"), new UniqueTagList()),
+                new Person(new Description("Boris Mueller"), new Phone("87249245"), new Email("ruth@google.com"), new Location("81th street"), new UniqueTagList()),
+                new Person(new Description("Carl Kurz"), new Phone("95352563"), new Email("heinz@yahoo.com"), new Location("wall street"), new UniqueTagList()),
+                new Person(new Description("Daniel Meier"), new Phone("87652533"), new Email("cornelia@google.com"), new Location("10th street"), new UniqueTagList()),
+                new Person(new Description("Elle Meyer"), new Phone("9482224"), new Email("werner@gmail.com"), new Location("michegan ave"), new UniqueTagList()),
+                new Person(new Description("Fiona Kunz"), new Phone("9482427"), new Email("lydia@gmail.com"), new Location("little tokyo"), new UniqueTagList()),
+                new Person(new Description("George Best"), new Phone("9482442"), new Email("anna@google.com"), new Location("4th street"), new UniqueTagList()),
+                new Person(new Description("Hoon Meier"), new Phone("8482424"), new Email("stefan@mail.com"), new Location("little india"), new UniqueTagList()),
+                new Person(new Description("Ida Mueller"), new Phone("8482131"), new Email("hans@google.com"), new Location("chicago ave"), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
