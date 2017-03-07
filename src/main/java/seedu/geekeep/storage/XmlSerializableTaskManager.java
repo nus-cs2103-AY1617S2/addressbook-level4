@@ -13,8 +13,8 @@ import seedu.geekeep.commons.core.UnmodifiableObservableList;
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.model.ReadOnlyTaskManager;
 import seedu.geekeep.model.tag.Tag;
-import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.ReadOnlyTask;
+import seedu.geekeep.model.task.Task;
 
 /**
  * An Immutable AddressBook that is serializable to XML format

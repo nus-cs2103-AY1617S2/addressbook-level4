@@ -10,8 +10,8 @@ import seedu.geekeep.commons.core.UnmodifiableObservableList;
 import seedu.geekeep.commons.events.model.TaskManagerChangedEvent;
 import seedu.geekeep.commons.util.CollectionUtil;
 import seedu.geekeep.commons.util.StringUtil;
-import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.ReadOnlyTask;
+import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.UniqueTaskList;
 import seedu.geekeep.model.task.UniqueTaskList.PersonNotFoundException;
 

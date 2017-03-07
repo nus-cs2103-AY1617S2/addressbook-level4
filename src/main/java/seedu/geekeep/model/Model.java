@@ -3,8 +3,8 @@ package seedu.geekeep.model;
 import java.util.Set;
 
 import seedu.geekeep.commons.core.UnmodifiableObservableList;
-import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.ReadOnlyTask;
+import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.UniqueTaskList;
 import seedu.geekeep.model.task.UniqueTaskList.DuplicatePersonException;
 

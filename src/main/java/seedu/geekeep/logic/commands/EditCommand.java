@@ -10,9 +10,9 @@ import seedu.geekeep.model.tag.UniqueTagList;
 import seedu.geekeep.model.task.Address;
 import seedu.geekeep.model.task.Email;
 import seedu.geekeep.model.task.Name;
-import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.Phone;
 import seedu.geekeep.model.task.ReadOnlyTask;
+import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.UniqueTaskList;
 
 /**
