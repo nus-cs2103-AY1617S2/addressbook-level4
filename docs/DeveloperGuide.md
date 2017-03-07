@@ -360,6 +360,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | view incomplete tasks |
 `* * *` | user | view completed tasks |
 `* * *` | user | undo previous action | revert previous action in case of mistakes
+`* * *` | user | redo | reverse the effects of the last undo
 `* * *` | user | search incomplete tasks by date or date range | check tasks due on a certain day or within a time frame
 `* * *` | user | search for tasks | find a specific task
 `* * *` | user | check off task | track what tasks are done
@@ -513,7 +514,7 @@ Use case ends.
 **MSS**
 
 1. User requests to undo action.
-2. Suru displays list of tasks as according to before previous action.
+2. Suru displays list of tasks according to before previous action.
 Use case ends.
 
 **Extensions**
@@ -523,7 +524,22 @@ Use case ends.
 > 2a1. Suru displays error message.
 > Use case ends.
 
-#### Use case: UC07 - Search for incomplete task by date or date range
+#### Use case: UC07 - Redo previous 'undo'
+
+**MSS**
+
+1. User requests to redo previous 'undo'.
+2. Suru displays list of tasks as according to before previous undo.
+Use case ends.
+
+**Extensions**
+
+2a. Undo is the first command entered by User during current start up.
+
+> 2a1. Suru displays error message.
+> Use case ends.
+
+#### Use case: UC08 - Search for incomplete task by date or date range
 
 **MSS**
 
@@ -543,7 +559,7 @@ Use case ends.
 > 2b1. Suru displays error message.
 > Use case ends.
 
-#### Use case: UC08 - check off task
+#### Use case: UC09 - check off task
 
 **MSS**
 
@@ -570,7 +586,7 @@ Use case ends.
 
 > Use case ends.
 
-#### Use case: UC09 - uncheck a task
+#### Use case: UC10 - uncheck a task
 
 **MSS**
 
@@ -597,7 +613,7 @@ Use case ends.
 
 > Use case ends.
 
-#### Use case: UC10 - add a reminder to a task
+#### Use case: UC11 - add a reminder to a task
 
 **MSS**
 
@@ -635,7 +651,7 @@ Use case ends.
 
 > Use case ends.
 
-#### Use case: UC11 - edit reminder for a task
+#### Use case: UC12 - edit reminder for a task
 
 **MSS**
 
@@ -678,7 +694,7 @@ Use case ends.
 
 > Use case ends.
 
-#### Use case: UC12 - delete reminder for a task
+#### Use case: UC13 - delete reminder for a task
 
 **MSS**
 
@@ -711,7 +727,7 @@ Use case ends.
 
 > Use case ends.
 
-#### Use case: UC13 - add recurring task
+#### Use case: UC14 - add recurring task
 
 **MSS**
 
@@ -739,7 +755,7 @@ Use case ends.
 
 > Use case ends.
 
-#### Use case: UC14 - add tags to a task
+#### Use case: UC15 - add tags to a task
 
 **MSS**
 
@@ -766,7 +782,7 @@ Use case ends.
 
 > Use case ends.
 
-#### Use case: UC15 - edit tags
+#### Use case: UC16 - edit tags
 
 **MSS**
 
@@ -793,7 +809,7 @@ Use case ends.
 
 > Use case ends.
 
-#### Use case: UC16 - delete tags
+#### Use case: UC17 - delete tags
 
 **MSS**
 
@@ -820,7 +836,7 @@ Use case ends.
 
 > Use case ends.
 
-#### Use case: UC17 - filter tasks by tags
+#### Use case: UC18 - filter tasks by tags
 
 **MSS**
 
@@ -838,7 +854,7 @@ Use case ends.
 > 2a1. Suru displays error message.
 > Use case ends.
 
-#### Use case: UC18 - add subtask to task
+#### Use case: UC19 - add subtask to task
 
 **MSS**
 
@@ -867,7 +883,7 @@ Use case ends.
 
 > Use case ends.
 
-#### Use case: UC19 - edit subtask in task 
+#### Use case: UC20 - edit subtask in task 
 
 **MSS**
 
@@ -903,7 +919,7 @@ Use case ends.
 
 > Use case ends.
 
-#### Use case: UC20 - delete subtask in task
+#### Use case: UC21 - delete subtask in task
 
 **MSS**
 
@@ -937,7 +953,7 @@ Use case ends.
 > Use case ends.
 
 
-#### Use case: UC21 - Define save and load database
+#### Use case: UC22 - Define save and load database
 
 **MSS**
 
@@ -954,7 +970,7 @@ Use case ends.
 >2a1. Suru request user to locate database file or create new database file.<br>
  Use case resumes at step 2.
   
-#### Use case: UC22 - Command Shortcut
+#### Use case: UC23 - Command Shortcut
 
 **MSS**
 
@@ -970,7 +986,7 @@ Use case ends.
 > 1a1. Suru displays error message.
 > Use case ends.
 
-#### Use case: UC23 - Add task reminder and due date to Google Calendar
+#### Use case: UC24 - Add task reminder and due date to Google Calendar
 
 **MSS**
 
@@ -999,7 +1015,7 @@ Use case ends.
 
 > Use case ends.
 
-#### Use case: UC24 - Parse email to add task automatically
+#### Use case: UC25 - Parse email to add task automatically
 
 **MSS**
 
@@ -1029,7 +1045,7 @@ Use case ends.
 
 > Use case ends.
 
-#### Use case: UC25 - Hotkey Shortcut
+#### Use case: UC26 - Hotkey Shortcut
 
 **MSS**
 
