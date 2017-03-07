@@ -32,7 +32,7 @@ public class SampleDataUtil {
         }
     }
 
-    public static ReadOnlyTaskManager getSampleProcrastiNomore() {
+    public static ReadOnlyTaskManager getSampleTaskManager() {
         try {
             TaskManager sampleAB = new TaskManager();
             for (Task sampleTask : getSampleTasks()) {

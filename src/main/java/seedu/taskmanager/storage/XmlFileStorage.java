@@ -27,7 +27,7 @@ public class XmlFileStorage {
     /**
      * Returns task manager in the file or an empty task manager
      */
-    public static XmlSerializableaTaskManager loadDataFromSaveFile(File file) throws DataConversionException,
+    public static XmlSerializableTaskManager loadDataFromSaveFile(File file) throws DataConversionException,
                                                                             FileNotFoundException {
         try {
             return XmlUtil.getDataFromFile(file, XmlSerializableTaskManager.class);

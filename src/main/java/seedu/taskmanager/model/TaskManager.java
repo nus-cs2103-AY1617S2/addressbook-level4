@@ -167,18 +167,18 @@ public class TaskManager implements ReadOnlyTaskManager {
     public ObservableList<ReadOnlyTask> getTaskList() {
         return new UnmodifiableObservableList<>(tasks.asObservableList());
     }
-
+/*
     @Override
     public ObservableList<Tag> getTagList() {
         return new UnmodifiableObservableList<>(tags.asObservableList());
     }
-
+*/
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TaskManager // instanceof handles nulls
-                && this.tasks.equals(((TaskManager) other).tasks)
-                && this.tags.equalsOrderInsensitive(((TaskManager) other).tags));
+                && this.tasks.equals(((TaskManager) other).tasks));
+  //              && this.tags.equalsOrderInsensitive(((TaskManager) other).tags));
     }
 
     @Override
