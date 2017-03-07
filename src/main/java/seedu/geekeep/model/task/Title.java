@@ -4,7 +4,7 @@ import seedu.geekeep.commons.exceptions.IllegalValueException;
 
 /**
  * Represents a Task's name in the Task Manager. Guarantees: immutable; is valid as declared in
- * {@link #isValidName(String)}
+ * {@link #isValidTitle(String)}
  */
 public class Title {
 
@@ -20,7 +20,7 @@ public class Title {
     /**
      * Returns true if a given string is a valid task title.
      */
-    public static boolean isValidName(String test) {
+    public static boolean isValidTitle(String test) {
         return test.matches(NAME_VALIDATION_REGEX);
     }
 
@@ -35,7 +35,7 @@ public class Title {
     public Title(String title) throws IllegalValueException {
         assert title != null;
         String trimmedTitle = title.trim();
-        if (!isValidName(trimmedTitle)) {
+        if (!isValidTitle(trimmedTitle)) {
             throw new IllegalValueException(MESSAGE_NAME_CONSTRAINTS);
         }
         this.fullTitle = trimmedTitle;

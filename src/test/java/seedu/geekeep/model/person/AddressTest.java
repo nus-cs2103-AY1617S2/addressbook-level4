@@ -12,12 +12,12 @@ public class AddressTest {
     @Test
     public void isValidAddress() {
         // invalid addresses
-        assertFalse(Location.isValidAddress("")); // empty string
-        assertFalse(Location.isValidAddress(" ")); // spaces only
+        assertFalse(Location.isValidLocation("")); // empty string
+        assertFalse(Location.isValidLocation(" ")); // spaces only
 
         // valid addresses
-        assertTrue(Location.isValidAddress("Blk 456, Den Road, #01-355"));
-        assertTrue(Location.isValidAddress("-")); // one character
-        assertTrue(Location.isValidAddress("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
+        assertTrue(Location.isValidLocation("Blk 456, Den Road, #01-355"));
+        assertTrue(Location.isValidLocation("-")); // one character
+        assertTrue(Location.isValidLocation("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
     }
 }
