@@ -2,6 +2,10 @@ package t16b4.yats.model.item;
 
 import t16b4.yats.model.tag.UniqueTagList;
 
+/**
+ * A read-only immutable interface for an Event in the TaskManager.
+ * Implementations should guarantee: details are present and not null, field values are validated.
+ */
 public interface ReadOnlyEvent {
 
     Title getTitle();

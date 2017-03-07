@@ -10,7 +10,7 @@ import t16b4.yats.commons.exceptions.IllegalValueException;
 public class Periodic {
 
     public static final String MESSAGE_PERIODIC_CONSTRAINTS =
-            "Periodicity must be daily|weekly|monthly";
+            "Periodicity must be none, daily, weekly or monthly";
     public static final String PERIODIC_VALIDATION_REGEX = ".*(none|daily|monthly|weekly).*";
 
     public final String value;
