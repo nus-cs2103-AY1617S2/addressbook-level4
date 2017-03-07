@@ -7,10 +7,10 @@ import javax.xml.bind.annotation.XmlElement;
 
 import t16b4.yats.commons.exceptions.IllegalValueException;
 import t16b4.yats.model.item.Description;
-import t16b4.yats.model.item.Timing;
+import t16b4.yats.model.item.Email;
 import t16b4.yats.model.item.Title;
 import t16b4.yats.model.item.Task;
-import t16b4.yats.model.item.Deadline;
+import t16b4.yats.model.item.Phone;
 import t16b4.yats.model.item.ReadOnlyItem;
 import t16b4.yats.model.tag.Tag;
 import t16b4.yats.model.tag.UniqueTagList;
@@ -46,8 +46,8 @@ public class XmlAdaptedPerson {
      */
     public XmlAdaptedPerson(ReadOnlyItem source) {
         name = source.getTitle().fullName;
-        phone = source.getDeadline().value;
-        email = source.getTiming().value;
+        phone = source.getPhone().value;
+        email = source.getEmail().value;
         address = source.getDescription().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
@@ -66,8 +66,8 @@ public class XmlAdaptedPerson {
             personTags.add(tag.toModelType());
         }
         final Title name = new Title(this.name);
-        final Deadline phone = new Deadline(this.phone);
-        final Timing email = new Timing(this.email);
+        final Phone phone = new Phone(this.phone);
+        final Email email = new Email(this.email);
         final Description address = new Description(this.address);
         final UniqueTagList tags = new UniqueTagList(personTags);
         return new Task(name, phone, email, address, tags);
