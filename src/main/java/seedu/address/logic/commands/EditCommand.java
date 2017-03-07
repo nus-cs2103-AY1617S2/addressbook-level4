@@ -33,20 +33,20 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
     private final int filteredPersonListIndex;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditTaskDescriptor editTaskDescriptor;
 
     /**
      * @param filteredPersonListIndex the index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditCommand(int filteredPersonListIndex, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(int filteredPersonListIndex, EditTaskDescriptor editPersonDescriptor) {
         assert filteredPersonListIndex > 0;
         assert editPersonDescriptor != null;
 
         // converts filteredPersonListIndex from one-based to zero-based.
         this.filteredPersonListIndex = filteredPersonListIndex - 1;
 
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editTaskDescriptor = new EditTaskDescriptor(editPersonDescriptor);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class EditCommand extends Command {
         }
 
         ReadOnlyPerson personToEdit = lastShownList.get(filteredPersonListIndex);
-        Task editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Task editedPerson = createEditedPerson(personToEdit, editTaskDescriptor);
 
         try {
             model.updatePerson(filteredPersonListIndex, editedPerson);
@@ -74,7 +74,7 @@ public class EditCommand extends Command {
      * edited with {@code editPersonDescriptor}.
      */
     private static Task createEditedPerson(ReadOnlyPerson personToEdit,
-                                             EditPersonDescriptor editPersonDescriptor) {
+                                             EditTaskDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
         TaskName updatedTaskName = editPersonDescriptor.getTaskName().orElseGet(personToEdit::getName);
@@ -90,16 +90,16 @@ public class EditCommand extends Command {
      * Stores the details to edit the person with. Each non-empty field value will replace the
      * corresponding field value of the person.
      */
-    public static class EditPersonDescriptor {
+    public static class EditTaskDescriptor {
         private Optional<TaskName> taskName = Optional.empty();
         private Optional<Deadline> deadline = Optional.empty();
         private Optional<PriorityLevel> priorityLevel = Optional.empty();
         private Optional<Information> info = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
-        public EditPersonDescriptor() {}
+        public EditTaskDescriptor() {}
 
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.taskName = toCopy.getTaskName();
             this.deadline = toCopy.getDeadline();
             this.priorityLevel = toCopy.getPriorityLevel();
@@ -123,7 +123,7 @@ public class EditCommand extends Command {
             return taskName;
         }
 
-        public void setPhone(Optional<Deadline> deadline) {
+        public void setDeadline(Optional<Deadline> deadline) {
             assert deadline != null;
             this.deadline = deadline;
         }
@@ -132,7 +132,7 @@ public class EditCommand extends Command {
             return deadline;
         }
 
-        public void setEmail(Optional<PriorityLevel> priorityLevel) {
+        public void setPriorityLevel(Optional<PriorityLevel> priorityLevel) {
             assert priorityLevel != null;
             this.priorityLevel = priorityLevel;
         }
@@ -141,7 +141,7 @@ public class EditCommand extends Command {
             return priorityLevel;
         }
 
-        public void setAddress(Optional<Information> info) {
+        public void setInfo(Optional<Information> info) {
             assert info != null;
             this.info = info;
         }
