@@ -39,7 +39,7 @@ public class SampleDataUtil {
 		}
 	}
 
-	public static ReadOnlyTaskManager getSampleAddressBook() {
+	public static ReadOnlyTaskManager getSampleTaskManager() {
 		try {
 			TaskManager sampleTM = new TaskManager();
 			for (Task sampleTask : getSampleTasks()) {
