@@ -11,7 +11,7 @@ public class Date {
 	// TODO: Update message date constraints and regex
     public static final String MESSAGE_DATE_CONSTRAINTS =
             "Task date should be 2 alphanumeric/period strings separated by '@'";
-    public static final String EMAIL_VALIDATION_REGEX = "[\\w\\.]+@[\\w\\.]+";
+    public static final String DATE_VALIDATION_REGEX = "[\\w\\.]+@[\\w\\.]+";
 
     public final String value;
 
