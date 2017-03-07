@@ -36,7 +36,8 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getPriority(), source.getEmail(), source.getStartDate(), source.getDueDate(), source.getTags());
+        this(source.getName(), source.getPriority(), source.getEmail(), 
+                source.getStartDate(), source.getDueDate(), source.getTags());
     }
 
     public void setName(Name name) {
@@ -78,7 +79,7 @@ public class Task implements ReadOnlyTask {
     public StartDate getStartDate() {
         return startDate;
     }
-    
+
     public void setDueDate(DueDate dueDate) {
         assert dueDate != null;
         this.dueDate = dueDate;
