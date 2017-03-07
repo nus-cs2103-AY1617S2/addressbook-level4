@@ -61,9 +61,8 @@ public class EditCommand extends Command {
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
-        
         model.updateTask(filteredTaskListIndex, editedTask);
-        
+
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
@@ -148,12 +147,12 @@ public class EditCommand extends Command {
         public Optional<IdentificationNumber> getID() {
             return identificationnumber;
         }
-        
+
         public void setTags(Optional<UniqueTagList> tags) {
             assert tags != null;
             this.tags = tags;
         }
-        
+
         public Optional<UniqueTagList> getTags() {
             return tags;
         }

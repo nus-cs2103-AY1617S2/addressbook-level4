@@ -13,9 +13,6 @@ import java.util.stream.Collectors;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Phone;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Description;
 import seedu.address.model.task.Name;
@@ -101,8 +98,6 @@ public class ParserUtil {
         return id.isPresent() ? Optional.of(new IdentificationNumber(id.get())) : Optional.empty();
     }
 
-
-    
     /**
      * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.
      */
