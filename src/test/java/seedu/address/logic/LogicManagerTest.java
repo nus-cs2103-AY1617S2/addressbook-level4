@@ -41,7 +41,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.Description;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.ReadOnlyPerson;
@@ -197,7 +197,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidPersonData() {
         assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
-                Name.MESSAGE_NAME_CONSTRAINTS);
+                Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
                 Phone.MESSAGE_PHONE_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
@@ -415,7 +415,7 @@ public class LogicManagerTest {
     class TestDataHelper {
 
         Person adam() throws Exception {
-            Name name = new Name("Adam Brown");
+            Description name = new Description("Adam Brown");
             Phone privatePhone = new Phone("111111");
             Email email = new Email("adam@gmail.com");
             Address privateAddress = new Address("111, alpha street");
@@ -434,7 +434,7 @@ public class LogicManagerTest {
          */
         Person generatePerson(int seed) throws Exception {
             return new Person(
-                    new Name("Person " + seed),
+                    new Description("Person " + seed),
                     new Phone("" + Math.abs(seed)),
                     new Email(seed + "@email"),
                     new Address("House of " + seed),
@@ -448,7 +448,7 @@ public class LogicManagerTest {
 
             cmd.append("add ");
 
-            cmd.append(p.getName().toString());
+            cmd.append(p.getDescription().toString());
             cmd.append(" e/").append(p.getEmail());
             cmd.append(" p/").append(p.getPhone());
             cmd.append(" a/").append(p.getAddress());
@@ -533,7 +533,7 @@ public class LogicManagerTest {
          */
         Person generatePersonWithName(String name) throws Exception {
             return new Person(
-                    new Name(name),
+                    new Description(name),
                     new Phone("1"),
                     new Email("1@email"),
                     new Address("House of 1"),

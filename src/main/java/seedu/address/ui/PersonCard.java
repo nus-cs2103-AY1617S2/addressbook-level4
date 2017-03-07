@@ -14,7 +14,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
+    private Label description;
     @FXML
     private Label id;
     @FXML
@@ -28,7 +28,7 @@ public class PersonCard extends UiPart<Region> {
 
     public PersonCard(ReadOnlyPerson person, int displayedIndex) {
         super(FXML);
-        name.setText(person.getName().fullName);
+        description.setText(person.getDescription().description);
         id.setText(displayedIndex + ". ");
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);

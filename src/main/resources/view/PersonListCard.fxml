@@ -31,7 +31,7 @@
                             <children>
                                 <HBox>
                                     <Label fx:id="id" styleClass="cell_big_label"></Label>
-                                    <Label fx:id="name" text="\$first" styleClass="cell_big_label"/>
+                                    <Label fx:id="description" text="abc" styleClass="cell_big_label"/>
                                 </HBox>
                             </children>
                         </HBox>
