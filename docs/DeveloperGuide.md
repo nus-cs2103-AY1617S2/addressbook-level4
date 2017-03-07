@@ -350,12 +350,15 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | add a new task | keep track of tasks I need to complete
 `* * *` | user | delete a task | remove tasks that are no longer relevant
 `* * *` | user | find a task by name | locate details of task without having to go through the entire list
-`* * *`| user | edit a parameter of a task | update a task without needing to delete and re-add it
+`* * *` | user | edit a parameter of a task | update a task without needing to delete and re-add it
 `* * *` | user | mark tasks as complete | see what I've already completed (and still have left to do)
 `* * *` | user | undo my last action | easily fix typos and mistakes I make
 `* * *` | user | specify a duration of the task | plan when I will complete the task
+`* * *` | user | task expiry reminder | give a notice when a task is finished or failed to be finished on time
+`* * *` | user | details viewer | see detailed information of a task
 `* *`| user | list tasks in order of due date | prioritize what to do next
 `* *`| user | mark tasks as important | prioritize what to do next
+`* *`| user | place the important tasks on the top | give important tasks more attention
 `* *`| user | have a calendar view of all tasks | see how busy I am
 `* *`| user | have my emails converted to tasks or events automatically | save time on manually entering tasks and events
 `* *`| user | add custom tags to tasks | organize my tasks by category
@@ -377,6 +380,7 @@ Priority | As a ... | I want to ... | So that I can...
 `*`| user | print out all tasks for a specific tag | view all tasks of a specific tag
 `*`| user | add subtasks to my tasks | break down major tasks into smaller steps
 `*`| user | add hyperlinks to my task descriptions | click to useful links without having to copy and paste into my browser
+`*`| user | name vocabulary limits | task name and discriptions should be no longer than 50 words, and shouldn't use words like "%1s" 
 
 
 ## Appendix B : Use Cases
