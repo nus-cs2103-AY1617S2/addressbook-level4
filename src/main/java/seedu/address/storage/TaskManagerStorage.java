@@ -10,7 +10,7 @@ import seedu.address.model.TaskManager;
 /**
  * Represents a storage for {@link TaskManager}.
  */
-public interface AddressBookStorage {
+public interface TaskManagerStorage {
 
     /**
      * Returns the file path of the data file.
