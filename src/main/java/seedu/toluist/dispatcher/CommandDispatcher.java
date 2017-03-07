@@ -104,6 +104,5 @@ public class CommandDispatcher extends Dispatcher {
                 .flatMap(List::stream)
                 .collect(Collectors.toList());
         return new HashSet<>(keywordList);
->>>>>>> master
     }
 }
