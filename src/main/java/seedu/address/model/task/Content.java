@@ -20,17 +20,17 @@ public class Content {
     public final String fullContent;
 
     /**
-     * Validates given name.
+     * Validates given content.
      *
      * @throws IllegalValueException if given name string is invalid.
      */
     public Content(String content) throws IllegalValueException {
         assert content != null;
-        String trimmedName = content.trim();
-        if (!isValidContent(trimmedName)) {
+        String trimmedContent = content.trim();
+        if (!isValidContent(trimmedContent)) {
             throw new IllegalValueException(MESSAGE_CONTENT_CONSTRAINTS);
         }
-        this.fullContent = trimmedName;
+        this.fullContent = trimmedContent;
     }
 
     /**

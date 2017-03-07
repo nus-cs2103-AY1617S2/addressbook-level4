@@ -12,15 +12,17 @@ import seedu.address.model.tag.UniqueTagList;
 public class Task implements ReadOnlyTask {
 
     private Content content;
+    private TaskDateTime dateTime;
 
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Content content, UniqueTagList tags) {
+    public Task(Content content, TaskDateTime dateTime, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(content);
         this.content = content;
+        this.dateTime = dateTime;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -28,7 +30,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getContent(), source.getTags());
+        this(source.getContent(), source.getDateTime(), source.getTags());
     }
 
     public void setContent(Content content) {
@@ -39,6 +41,11 @@ public class Task implements ReadOnlyTask {
     @Override
     public Content getContent() {
         return content;
+    }
+    
+    @Override
+    public TaskDateTime getDateTime() {
+        return dateTime;
     }
 
     @Override

@@ -8,6 +8,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Content;
+import seedu.address.model.task.TaskDateTime;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
@@ -75,9 +76,10 @@ public class EditCommand extends Command {
         assert taskToEdit != null;
 
         Content updatedContent = editTaskDescriptor.getContent().orElseGet(taskToEdit::getContent);
+        TaskDateTime updatedDateTime = editTaskDescriptor.getDateTime().orElseGet(taskToEdit::getDateTime);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedContent, updatedTags);
+        return new Task(updatedContent, updatedDateTime, updatedTags);
     }
 
     /**
@@ -86,6 +88,7 @@ public class EditCommand extends Command {
      */
     public static class EditTaskDescriptor {
         private Optional<Content> content = Optional.empty();
+        private Optional<TaskDateTime> dateTime = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditTaskDescriptor() {}
@@ -109,6 +112,10 @@ public class EditCommand extends Command {
 
         public Optional<Content> getContent() {
             return content;
+        }
+        
+        public Optional<TaskDateTime> getDateTime() {
+            return dateTime;
         }
 
         public void setTags(Optional<UniqueTagList> tags) {
