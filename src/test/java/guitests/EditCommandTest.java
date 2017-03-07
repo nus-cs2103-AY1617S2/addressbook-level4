@@ -114,7 +114,7 @@ public class EditCommandTest extends EzDoGuiTest {
     @Test
     public void edit_duplicateTask_failure() {
         commandBox.runCommand("edit 3 Alice Pauline p/1 e/alice@gmail.com "
-                                + "s/123, Jurong West Ave 6, #08-111 d/25/11/1961 t/friends");
+                                + "s/123, Jurong West Ave 6, #08-113 d/14/03/2015 t/friends");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
