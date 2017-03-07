@@ -89,7 +89,7 @@ public class TaskListPanelHandle extends GuiHandle {
 
         // Return false if any of the persons doesn't match
         for (int i = 0; i < tasks.length; i++) {
-            if (!tasksInList.get(startPosition + i).getName().equals(tasks[i].getName())) {
+            if (!tasksInList.get(startPosition + i).getTitle().equals(tasks[i].getTitle())) {
                 return false;
             }
         }
@@ -100,7 +100,7 @@ public class TaskListPanelHandle extends GuiHandle {
     public TaskCardHandle navigateToTask(String name) {
         guiRobot.sleep(500); //Allow a bit of time for the list to be updated
         final Optional<Task> task = getListView().getItems().stream()
-                                                    .filter(p -> p.getName().equals(name))
+                                                    .filter(p -> p.getTitle().equals(name))
                                                     .findAny();
         if (!task.isPresent()) {
             throw new IllegalStateException("Name not found: " + name);
@@ -131,7 +131,7 @@ public class TaskListPanelHandle extends GuiHandle {
     public int getTaskIndex(Task targetTask) {
         List<Task> tasksInList = getListView().getItems();
         for (int i = 0; i < tasksInList.size(); i++) {
-            if (tasksInList.get(i).getName().equals(targetTask.getName())) {
+            if (tasksInList.get(i).getTitle().equals(targetTask.getTitle())) {
                 return i;
             }
         }
@@ -152,7 +152,7 @@ public class TaskListPanelHandle extends GuiHandle {
     public TaskCardHandle getTaskCardHandle(Task task) {
         Set<Node> nodes = getAllCardNodes();
         Optional<Node> taskCardNode = nodes.stream()
-                .filter(n -> new TaskCardHandle(guiRobot, primaryStage, n).isSamePerson(task))
+                .filter(n -> new TaskCardHandle(guiRobot, primaryStage, n).isSameTask(task))
                 .findFirst();
         if (taskCardNode.isPresent()) {
             return new TaskCardHandle(guiRobot, primaryStage, taskCardNode.get());

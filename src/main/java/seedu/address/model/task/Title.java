@@ -7,7 +7,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
  * Represents a Person's name in the address book. Guarantees: immutable; is
  * valid as declared in {@link #isValidName(String)}
  */
-public class Name {
+public class Title {
 
     public static final String MESSAGE_NAME_CONSTRAINTS = "Task names should only contain alphanumeric characters and spaces, and it should not be blank";
 
@@ -17,7 +17,7 @@ public class Name {
      */
     public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String name;
+    public final String title;
 
     /**
      * Validates given name.
@@ -25,14 +25,14 @@ public class Name {
      * @throws IllegalValueException
      *             if given name string is invalid.
      */
-    public Name(String name) throws IllegalValueException {
-        assert name != null;
-        String trimmedName = name.trim();
+    public Title(String title) throws IllegalValueException {
+        assert title != null;
+        String trimmedTitle= title.trim();
 
         // if (!isValidName(trimmedName)) {
         // throw new IllegalValueException(MESSAGE_NAME_CONSTRAINTS);
         // }
-        this.name = trimmedName;
+        this.title = trimmedTitle;
     }
 
     /**
@@ -44,20 +44,20 @@ public class Name {
 
     @Override
     public String toString() {
-        return name;
+        return title;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Name // instanceof handles nulls
-                        && this.name.equals(((Name) other).name)); // state
+                || (other instanceof Title // instanceof handles nulls
+                        && this.title.equals(((Title) other).title)); // state
                                                                            // check
     }
 
     @Override
     public int hashCode() {
-        return name.hashCode();
+        return title.hashCode();
     }
 
 }

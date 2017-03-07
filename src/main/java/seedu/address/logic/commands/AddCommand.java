@@ -5,8 +5,7 @@ import java.util.Set;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.task.Description;
-import seedu.address.model.task.Name;
+import seedu.address.model.task.Title;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.tag.Tag;
@@ -20,10 +19,9 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the address book. "
-            + "Parameters: NAME d/description [t/TAG]...\n"
+            + "Parameters: TITLE [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " Finish SWE project d/finish implementing adding and deleting a task "
-            + "for Software Engineering t/school";
+            + " Finish SWE project t/school";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in TaskIt";
@@ -35,15 +33,14 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, String desc, Set<String> tags)
+    public AddCommand(String title, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
         this.toAdd = new Task(
-                new Name(name),
-                new Description(desc),
+                new Title(title),
                 new UniqueTagList(tagSet)
         );
     }

@@ -6,15 +6,13 @@ import seedu.address.model.tag.UniqueTagList;
 
 public class Task {
     
-    protected Name name;
-    protected Description desc;
+    protected Title title;
     
     protected UniqueTagList tags;
     
     
-    public Task(Name name, Description desc, UniqueTagList tags) {
-        this.name = name;
-        this.desc = desc;
+    public Task(Title title, UniqueTagList tags) {
+        this.title = title;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
     
@@ -22,25 +20,16 @@ public class Task {
      * Creates a copy of the given Task.
      */
     public Task(Task source) {
-        this(source.getName(), source.getDescription(), source.getTags());
+        this(source.getTitle(), source.getTags());
     }
     
-    public void setName(Name name) {
-        assert name != null;
-        this.name = name;
+    public void setTitle(Title title) {
+        assert title != null;
+        this.title = title;
     }
     
-    public Name getName() {
-        return name;
-    }
-
-    public void setDescription(Description desc) {
-        assert desc != null;
-        this.desc = desc;
-    }
-
-    public Description getDescription() {
-        return desc;
+    public Title getTitle() {
+        return title;
     }
     
     /**
@@ -64,8 +53,7 @@ public class Task {
     public void resetData(Task replacement) {
         assert replacement != null;
 
-        this.setName(replacement.getName());
-        this.setDescription(replacement.getDescription());
+        this.setTitle(replacement.getTitle());
         this.setTags(replacement.getTags());
     }
     
@@ -81,14 +69,13 @@ public class Task {
     public boolean isSameStateAs(Task other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                && other.getName().equals(this.getName()) // state checks here onwards
-                && other.getDescription().equals(this.getDescription()));
+                && other.getTitle().equals(this.getTitle()));
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, desc, tags);
+        return Objects.hash(title, tags);
     }
     
     public String toString() {
@@ -100,9 +87,7 @@ public class Task {
      */
     public String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append(" Description: ")
-                .append(getDescription())
+        builder.append(getTitle())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
