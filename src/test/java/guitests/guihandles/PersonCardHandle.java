@@ -8,7 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
@@ -17,7 +17,7 @@ import seedu.address.model.tag.UniqueTagList;
 public class PersonCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
     private static final String ADDRESS_FIELD_ID = "#address";
-    private static final String PHONE_FIELD_ID = "#date";
+    private static final String PHONE_FIELD_ID = "#phone";
     private static final String EMAIL_FIELD_ID = "#email";
     private static final String TAGS_FIELD_ID = "#tags";
 
@@ -40,7 +40,7 @@ public class PersonCardHandle extends GuiHandle {
         return getTextFromLabel(ADDRESS_FIELD_ID);
     }
 
-    public String getDate() {
+    public String getPhone() {
         return getTextFromLabel(PHONE_FIELD_ID);
     }
 
@@ -72,9 +72,9 @@ public class PersonCardHandle extends GuiHandle {
         return guiRobot.from(node).lookup(TAGS_FIELD_ID).query();
     }
 
-    public boolean isSamePerson(ReadOnlyTask person) {
+    public boolean isSamePerson(ReadOnlyPerson person) {
         return getFullName().equals(person.getName().fullName)
-                && getDate().equals(person.getDate().value)
+                && getPhone().equals(person.getPhone().value)
                 && getEmail().equals(person.getEmail().value)
                 && getAddress().equals(person.getAddress().value)
                 && getTags().equals(getTags(person.getTags()));
@@ -85,7 +85,7 @@ public class PersonCardHandle extends GuiHandle {
         if (obj instanceof PersonCardHandle) {
             PersonCardHandle handle = (PersonCardHandle) obj;
             return getFullName().equals(handle.getFullName())
-                    && getDate().equals(handle.getDate())
+                    && getPhone().equals(handle.getPhone())
                     && getEmail().equals(handle.getEmail())
                     && getAddress().equals(handle.getAddress())
                     && getTags().equals(handle.getTags());

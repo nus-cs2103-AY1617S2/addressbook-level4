@@ -6,12 +6,12 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.task.Address;
-import seedu.address.model.task.Email;
-import seedu.address.model.task.Name;
-import seedu.address.model.task.Task;
-import seedu.address.model.task.Date;
-import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -23,7 +23,7 @@ public class XmlAdaptedPerson {
     @XmlElement(required = true)
     private String name;
     @XmlElement(required = true)
-    private String date;
+    private String phone;
     @XmlElement(required = true)
     private String email;
     @XmlElement(required = true)
@@ -44,9 +44,9 @@ public class XmlAdaptedPerson {
      *
      * @param source future changes to this will not affect the created XmlAdaptedPerson
      */
-    public XmlAdaptedPerson(ReadOnlyTask source) {
+    public XmlAdaptedPerson(ReadOnlyPerson source) {
         name = source.getName().fullName;
-        date = source.getDate().value;
+        phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
         tagged = new ArrayList<>();
@@ -60,16 +60,16 @@ public class XmlAdaptedPerson {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person
      */
-    public Task toModelType() throws IllegalValueException {
+    public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
         }
         final Name name = new Name(this.name);
-        final Date date = new Date(this.date);
+        final Phone phone = new Phone(this.phone);
         final Email email = new Email(this.email);
         final Address address = new Address(this.address);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Task(name, date, email, address, tags);
+        return new Person(name, phone, email, address, tags);
     }
 }
