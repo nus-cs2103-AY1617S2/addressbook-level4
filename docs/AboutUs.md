@@ -11,7 +11,17 @@ Responsibilities: Deliverables and deadlines, Documentation, Integration, Schedu
 
 ----
 
+#### [Lim Huan Hock](http://github.com/huanhock)
+<img src="images/DamithRajapakse.jpg" width="150"><br>
+Role: TODO  <br>
+Responsibilities: TODO 
 
+----
+
+#### [Wong Woon Fui](http://github.com/benwongwf)
+<img src="images/DamithRajapakse.jpg" width="150"><br>
+Role: TODO <br>
+Responsibilities: TODO 
 
 -----
 
