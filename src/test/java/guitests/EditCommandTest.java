@@ -22,7 +22,7 @@ public class EditCommandTest extends ToDoListGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby p/91234567 e/bobby@gmail.com a/Block 123, Bobby Street 3 t/husband";
+        String detailsToEdit = "Bobby t/husband";
         int addressBookIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Bobby").withTags("husband").build();
