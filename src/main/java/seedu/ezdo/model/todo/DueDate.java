@@ -12,7 +12,7 @@ public class DueDate {
     public static final String MESSAGE_DUEDATE_CONSTRAINTS =
             "Due dates should be in the format DD/MM/YYYY, and it should not be blank";
 
-    public static final String DUEDATE_VALIDATION_REGEX = ".+";
+    public static final String DUEDATE_VALIDATION_REGEX = "([12][0-9]|3[01]|0?[1-9])/(0?[1-9]|1[012])/((?:19|20)\\d\\d)";
 
     public final String value;
 
