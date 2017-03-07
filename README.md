@@ -1,4 +1,4 @@
-# Bullet Journal (Level 4)
+# Bullet Journal
 
 [![Build Status](https://travis-ci.org/CS2103JAN2017-F12-B4/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-F12-B4/main)
 [![Build status](https://ci.appveyor.com/api/projects/status/2fgsii7sa8ling2f?svg=true)](https://ci.appveyor.com/project/bryanleejh/main)
