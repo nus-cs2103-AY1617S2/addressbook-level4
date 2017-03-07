@@ -1,4 +1,4 @@
-# VeTo User Guide:
+# KIT User Guide:
 
 1. [Quick Start](#quick-start)
 2. [Features](#features)
@@ -39,13 +39,20 @@
 
 Format: `help`
 
-> Help is also shown if you enter an incorrect command e.g. `abcd`
+> Help brings up user guide in another window 
+
+### 2.1.1 Viewing quick overview of command formats : `helpf`
+
+Format: `helpf`
+
+> Helpf shows a quick summary of command formats
 
 ### 2.2 Adding a task: `add`
 
 Adds a task to the to do list. New tasks are [not done] by default.
 Format: `add NAME [r/REMARKS] [d/DEADLINE] [l/LOCATION] [t/TAG]...`
 
+> If you need to type the character /, put a \ before it to avoid t/ getting picked up as tag. eg. carrot\/cabbage
 > Persons can have any number of tags (including 0)
 
 Examples:
@@ -62,7 +69,7 @@ Shows a list of all the tasks that has been completed.
 Format: `listdone`, `ld`
 
 ### 2.5	Listing of all not done task: `listnotdone`
-Shows a list of all the tasks that has yet to be completed. Sorted by due date?
+Shows a list of all the tasks that has yet to be completed. Sorted by due date.
 Format: `listnotdone`, `lnd`
 
 ### 2.6	Listing of all task under a tag: `listtag`
@@ -190,9 +197,8 @@ There is no need to save manually.
 **A**: No.
 
 **Q**: Can I manually edit the storage file?
-**A**: Yes, it is a text file. It is called ‘addressbook.txt’. It can be found in the project file by default. It is formatted in XML. Be careful in making changes to it if you are unfamiliar with XML, the program might not start properly if the file’s format is invalid.
+**A**: Yes, it is a xml file. It is called KIT.xml . It can be found in the folder data by default. Be careful in making changes to it if you are unfamiliar with XML, the program might not start properly if the file’s format is invalid.
 
-**Q**: think of more questions
 
 ## 4. Command Summary
 
