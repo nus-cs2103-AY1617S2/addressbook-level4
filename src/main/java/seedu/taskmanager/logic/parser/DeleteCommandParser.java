@@ -1,12 +1,12 @@
-package seedu.address.logic.parser;
+package seedu.taskmanager.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Optional;
 
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.IncorrectCommand;
+import seedu.taskmanager.logic.commands.Command;
+import seedu.taskmanager.logic.commands.DeleteCommand;
+import seedu.taskmanager.logic.commands.IncorrectCommand;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object

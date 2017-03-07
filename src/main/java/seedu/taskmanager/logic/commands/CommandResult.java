@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.taskmanager.logic.commands;
 
 /**
  * Represents the result of a command execution.
