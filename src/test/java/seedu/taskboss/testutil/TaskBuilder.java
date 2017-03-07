@@ -3,7 +3,6 @@ package seedu.taskboss.testutil;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.model.category.Tag;
 import seedu.taskboss.model.category.UniqueTagList;
-import seedu.taskboss.model.task.Email;
 import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.Phone;
@@ -46,11 +45,6 @@ public class TaskBuilder {
 
     public TaskBuilder withPhone(String phone) throws IllegalValueException {
         this.task.setPhone(new Phone(phone));
-        return this;
-    }
-
-    public TaskBuilder withEmail(String email) throws IllegalValueException {
-        this.task.setEmail(new Email(email));
         return this;
     }
 

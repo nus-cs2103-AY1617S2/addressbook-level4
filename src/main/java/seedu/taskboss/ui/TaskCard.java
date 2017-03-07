@@ -22,8 +22,6 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label information;
     @FXML
-    private Label email;
-    @FXML
     private FlowPane tags;
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
@@ -32,7 +30,7 @@ public class TaskCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         phone.setText(task.getPhone().value);
         information.setText(task.getInformation().value);
-        email.setText(task.getEmail().value);
+
         initTags(task);
     }
 
