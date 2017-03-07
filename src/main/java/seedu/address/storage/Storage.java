@@ -27,7 +27,7 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
     Optional<ReadOnlyTaskManager> readAddressBook() throws DataConversionException, IOException;
 
     @Override
-    void saveAddressBook(ReadOnlyTaskManager addressBook) throws IOException;
+    void saveAddressBook(ReadOnlyTaskManager taskManager) throws IOException;
 
     /**
      * Saves the current version of the Address Book to the hard disk.
