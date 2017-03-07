@@ -1,8 +1,8 @@
 package seedu.geekeep.model.util;
 
 import seedu.geekeep.commons.exceptions.IllegalValueException;
-import seedu.geekeep.model.TaskManager;
 import seedu.geekeep.model.ReadOnlyTaskManager;
+import seedu.geekeep.model.TaskManager;
 import seedu.geekeep.model.tag.UniqueTagList;
 import seedu.geekeep.model.task.Address;
 import seedu.geekeep.model.task.Email;
