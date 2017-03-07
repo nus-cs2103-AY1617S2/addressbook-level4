@@ -10,101 +10,101 @@ import seedu.address.commons.exceptions.DuplicateDataException;
 import seedu.address.commons.util.CollectionUtil;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
+ * A list of todos that enforces uniqueness between its elements and does not allow nulls.
  *
  * Supports a minimal set of list operations.
  *
- * @see ToDo#equals(Object)
+ * @see Todo#equals(Object)
  * @see CollectionUtil#elementsAreUnique(Collection)
  */
-public class UniquePersonList implements Iterable<ToDo> {
+public class UniqueTodoList implements Iterable<Todo> {
 
-    private final ObservableList<ToDo> internalList = FXCollections.observableArrayList();
+    private final ObservableList<Todo> internalList = FXCollections.observableArrayList();
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent todo as the given argument.
      */
-    public boolean contains(ReadOnlyPerson toCheck) {
-        assert toCheck != null;
-        return internalList.contains(toCheck);
+    public boolean contains(Todo toAdd) {
+        assert toAdd != null;
+        return internalList.contains(toAdd);
     }
 
     /**
-     * Adds a person to the list.
+     * Adds a todo to the list.
      *
-     * @throws DuplicatePersonException if the person to add is a duplicate of an existing person in the list.
+     * @throws DuplicateTodoException if the todo to add is a duplicate of an existing todo in the list.
      */
-    public void add(ToDo toAdd) throws DuplicatePersonException {
+    public void add(Todo toAdd) throws DuplicateTodoException {
         assert toAdd != null;
         if (contains(toAdd)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateTodoException();
         }
         internalList.add(toAdd);
     }
 
     /**
-     * Updates the person in the list at position {@code index} with {@code editedPerson}.
+     * Updates the todo in the list at position {@code index} with {@code editedTodo}.
      *
-     * @throws DuplicatePersonException if updating the person's details causes the person to be equivalent to
-     *      another existing person in the list.
+     * @throws DuplicateTodoException if updating the todo's details causes the todo to be equivalent to
+     *      another existing todo in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updatePerson(int index, ReadOnlyPerson editedPerson) throws DuplicatePersonException {
-        assert editedPerson != null;
+    public void updateTodo(int index, ReadOnlyTodo editedTodo) throws DuplicateTodoException {
+        assert editedTodo != null;
 
-        ToDo personToUpdate = internalList.get(index);
-        if (!personToUpdate.equals(editedPerson) && internalList.contains(editedPerson)) {
-            throw new DuplicatePersonException();
+        Todo todoToUpdate = internalList.get(index);
+        if (!todoToUpdate.equals(editedTodo) && internalList.contains(editedTodo)) {
+            throw new DuplicateTodoException();
         }
 
-        personToUpdate.resetData(editedPerson);
-        // TODO: The code below is just a workaround to notify observers of the updated person.
-        // The right way is to implement observable properties in the Person class.
-        // Then, PersonCard should then bind its text labels to those observable properties.
-        internalList.set(index, personToUpdate);
+        todoToUpdate.resetData(editedTodo);
+        // TODO: The code below is just a workaround to notify observers of the updated todo.
+        // The right way is to implement observable properties in the Todo class.
+        // Then, TodoCard should then bind its text labels to those observable properties.
+        internalList.set(index, todoToUpdate);
     }
 
     /**
-     * Removes the equivalent person from the list.
+     * Removes the equivalent todo from the list.
      *
-     * @throws PersonNotFoundException if no such person could be found in the list.
+     * @throws TodoNotFoundException if no such todo could be found in the list.
      */
-    public boolean remove(ReadOnlyPerson toRemove) throws PersonNotFoundException {
+    public boolean remove(ReadOnlyTodo toRemove) throws TodoNotFoundException {
         assert toRemove != null;
-        final boolean personFoundAndDeleted = internalList.remove(toRemove);
-        if (!personFoundAndDeleted) {
-            throw new PersonNotFoundException();
+        final boolean todoFoundAndDeleted = internalList.remove(toRemove);
+        if (!todoFoundAndDeleted) {
+            throw new TodoNotFoundException();
         }
-        return personFoundAndDeleted;
+        return todoFoundAndDeleted;
     }
 
-    public void setPersons(UniquePersonList replacement) {
+    public void setTodos(UniqueTodoList replacement) {
         this.internalList.setAll(replacement.internalList);
     }
 
-    public void setPersons(List<? extends ReadOnlyPerson> persons) throws DuplicatePersonException {
-        final UniquePersonList replacement = new UniquePersonList();
-        for (final ReadOnlyPerson person : persons) {
-            replacement.add(new ToDo(person));
+    public void setTodos(List<? extends ReadOnlyTodo> todos) throws DuplicateTodoException {
+        final UniqueTodoList replacement = new UniqueTodoList();
+        for (final ReadOnlyTodo todo : todos) {
+            replacement.add(new Todo(todo));
         }
-        setPersons(replacement);
+        setTodos(replacement);
     }
 
-    public UnmodifiableObservableList<ToDo> asObservableList() {
+    public UnmodifiableObservableList<Todo> asObservableList() {
         return new UnmodifiableObservableList<>(internalList);
     }
 
     @Override
-    public Iterator<ToDo> iterator() {
+    public Iterator<Todo> iterator() {
         return internalList.iterator();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniquePersonList // instanceof handles nulls
+                || (other instanceof UniqueTodoList // instanceof handles nulls
                 && this.internalList.equals(
-                ((UniquePersonList) other).internalList));
+                ((UniqueTodoList) other).internalList));
     }
 
     @Override
@@ -115,16 +115,16 @@ public class UniquePersonList implements Iterable<ToDo> {
     /**
      * Signals that an operation would have violated the 'no duplicates' property of the list.
      */
-    public static class DuplicatePersonException extends DuplicateDataException {
-        protected DuplicatePersonException() {
-            super("Operation would result in duplicate persons");
+    public static class DuplicateTodoException extends DuplicateDataException {
+        protected DuplicateTodoException() {
+            super("Operation would result in duplicate todo");
         }
     }
 
     /**
-     * Signals that an operation targeting a specified person in the list would fail because
-     * there is no such matching person in the list.
+     * Signals that an operation targeting a specified todo in the list would fail because
+     * there is no such matching todo in the list.
      */
-    public static class PersonNotFoundException extends Exception {}
+    public static class TodoNotFoundException extends Exception {}
 
 }
