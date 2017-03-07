@@ -11,14 +11,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import seedu.task.commons.exceptions.IllegalValueException;
-import seedu.task.commons.util.StringUtil;
-import seedu.task.model.tag.Tag;
-import seedu.task.model.tag.UniqueTagList;
-import seedu.task.model.task.Date;
-import seedu.task.model.task.Location;
-import seedu.task.model.task.Name;
-import seedu.task.model.task.Remark;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.StringUtil;
+import seedu.address.model.person.Location;
+import seedu.address.model.person.Remark;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Date;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.UniqueTagList;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -77,23 +77,23 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> phone} into an {@code Optional<Phone>} if {@code phone} is present.
      */
-    public static Optional<Date> parsePhone(Optional<String> phone) throws IllegalValueException {
-        assert phone != null;
-        return phone.isPresent() ? Optional.of(new Date(phone.get())) : Optional.empty();
+    public static Optional<Date> parseDate(Optional<String> date) throws IllegalValueException {
+        assert date != null;
+        return date.isPresent() ? Optional.of(new Date(date.get())) : Optional.empty();
     }
 
     /**
      * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.
      */
-    public static Optional<Location> parseAddress(Optional<String> address) throws IllegalValueException {
-        assert address != null;
-        return address.isPresent() ? Optional.of(new Location(address.get())) : Optional.empty();
+    public static Optional<Location> parseLocation(Optional<String> location) throws IllegalValueException {
+        assert location != null;
+        return location.isPresent() ? Optional.of(new Location(location.get())) : Optional.empty();
     }
 
     /**
      * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
      */
-    public static Optional<Remark> parseEmail(Optional<String> email) throws IllegalValueException {
+    public static Optional<Remark> parseRemark(Optional<String> email) throws IllegalValueException {
         assert email != null;
         return email.isPresent() ? Optional.of(new Remark(email.get())) : Optional.empty();
     }

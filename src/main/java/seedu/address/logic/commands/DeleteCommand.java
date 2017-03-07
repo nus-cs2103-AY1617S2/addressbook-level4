@@ -1,15 +1,10 @@
 package seedu.address.logic.commands;
 
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
-<<<<<<< HEAD
-import seedu.address.model.person.ReadOnlyTask;
+import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.UniquePersonList.PersonNotFoundException;
-=======
-import seedu.task.commons.core.Messages;
-import seedu.task.commons.core.UnmodifiableObservableList;
-import seedu.task.model.task.ReadOnlyTask;
-import seedu.task.model.task.UniqueTaskList.PersonNotFoundException;
->>>>>>> 02d6a24595d83597768726a029d5b6a7a4e01285
 
 /**
  * Deletes a person identified using it's last displayed index from the address book.
@@ -35,17 +30,13 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
 
-<<<<<<< HEAD
-        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredPersonList();
-=======
-        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
->>>>>>> 02d6a24595d83597768726a029d5b6a7a4e01285
+        UnmodifiableObservableList<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
 
         if (lastShownList.size() < targetIndex) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask personToDelete = lastShownList.get(targetIndex - 1);
+        ReadOnlyPerson personToDelete = lastShownList.get(targetIndex - 1);
 
         try {
             model.deletePerson(personToDelete);
