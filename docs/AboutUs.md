@@ -16,7 +16,7 @@ We are a team based in the [School of Computing, National University of Singapor
  * Git Integration
 
 #### [Luo Wenhan](http://github.com/FausticSun)
-<img src="images/wenhan.png" width="150"> <br>
+<img src="images/wenhan.jpg" width="150"> <br>
 **Role:** TODO <br>
 **Components in charge of:** Model <br>
 
