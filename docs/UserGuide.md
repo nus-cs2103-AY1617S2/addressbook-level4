@@ -20,7 +20,7 @@
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
    * **`list`** : lists all task
-   * **`add`**`  do 2103 project r/waiting for john's reply d/03-03-2017 l/nus soc t/school` :
+   * **`add`**`  do 2103 project r/waiting for john's reply d/03-03-2017 l/nus soc t/school` : <br>
      adds a task named `do 2103 project` to KIT.
    * **`delete`**` 3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
@@ -49,7 +49,8 @@ Format: `helpf`
 
 ### 2.2 Adding a task: `add`
 
-Adds a task to the to do list. New tasks are [not done] by default.
+Adds a task to the to do list. New tasks are [not done] by default. <br>
+
 Format: `add NAME [r/REMARKS] [d/DEADLINE] [l/LOCATION] [t/TAG]...`
 
 > If you need to type the character /, put a \ before it to avoid t/ getting picked up as tag. eg. carrot\/cabbage <br>
@@ -98,7 +99,8 @@ Undo the last command. <br>
 Format: undo
 
 ### 2.7 Editing a task: `edit`
-Edits an existing task in the to do list
+Edits an existing task in the to do list <br>
+
 Format: edit `edit INDEX [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 > * At least one of the optional fields must be provided.
@@ -114,9 +116,10 @@ Examples:
 * `edit 2 debug add command t/`<br>
   Edits the name of the 2nd task to be `debug add command` and clears all existing tags.
 
-### 2.8 Finding a task:`find`
+### 2.8.1 Finding a task:`find`
 
-Finds task whose names or remark contain any of the given keywords.
+Finds task whose names or remark contain any of the given keywords. <br>
+
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 > * The search is case insensitive. e.g `project` will match `Project`
@@ -134,8 +137,17 @@ Examples:
 * `find homework school`<br>
   Returns Any task having names or remarks with `homework `,  or `school`
 
+### 2.8.2 Finding an exact task:`findexact`
+
+Find task whose name or remark matches the keyword exactly. <br>
+
+Format: `findexact KEYWORD`
+
+> * The search will match exact keywords, except it's case insensitive. e.g `project` will match `Project`
+
 ### 2.9 Deleting a task: `delete`
-Deletes the specified task from the to do list. Irreversible.
+Deletes the specified task from the to do list. **Irreversible**. <br>
+
 Format: `delete INDEX`
 
 > * Deletes the task at the specified `INDEX`.
@@ -227,8 +239,11 @@ There is no need to save manually.
   e.g.  `edit 1 r/finish up user guide l/home`
 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]`
-  e.g. `find homework`
+  e.g. `find home`
 
+* **Find exact** : `findexact KEYWORD`
+  e.g. `findexact homework`
+  
 * **Delete** : `delete INDEX`
    e.g. `delete 3`
 
