@@ -4,41 +4,30 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### 1. Add your profile photo in `docs/images/` and replace the placeholder below
-
-#### 2. Pick your roles from this list and delete it
- * Team lead
- * Documentation
- * Testing
- * Code quality
- * Deliverables and deadlines
- * Scheduling and tracking
- * Git Integration
-
 #### [Luo Wenhan](http://github.com/FausticSun)
 <img src="images/wenhan.jpg" width="150"> <br>
-**Role:** TODO <br>
+**Role:** Team Lead <br>
 **Components in charge of:** Model <br>
 
 -----
 
 #### [Pang Shi Ying](http://github.com/invisidark)
 <img src="images/shiying.png" width="150"> <br>
-**Role:** TODO <br>
+**Role:** Documentation, Scheduling and tracking <br>
 **Components in charge of:** UI <br>
 
 -----
 
 #### [Pang Zheng Yu](http://github.com/pzyu)
 <img src="images/profile.png" width="150"> <br>
-**Role:** TODO <br>
+**Role:** Git Integration, Code quality <br>
 **Components in charge of:** Logic <br>
 
 -----
 
 #### [Wang Ce](https://github.com/wangce94)
 <img src="images/profile.png" width="150"> <br>
-**Role:** TODO <br>
+**Role:** Testing, Deliverables and deadlines <br>
 **Components in charge of:** Storage <br>
 
  -----
