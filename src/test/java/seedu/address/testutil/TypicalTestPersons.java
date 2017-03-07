@@ -10,33 +10,33 @@ import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
  */
 public class TypicalTestPersons {
 
-    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
+    public TestPerson alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
 
     public TypicalTestPersons() {
         try {
-            alice = new TaskBuilder().withName("Alice Pauline")
-                    .withEndDateTime("123, Jurong West Ave 6, #08-111").withStartDateTime("alice@gmail.com")
-                    .withDescription("85355255")
+            alice = new PersonBuilder().withName("Alice Pauline")
+                    .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@gmail.com")
+                    .withPhone("85355255")
                     .withTags("friends").build();
-            benson = new TaskBuilder().withName("Benson Meier").withEndDateTime("311, Clementi Ave 2, #02-25")
-                    .withStartDateTime("johnd@gmail.com").withDescription("98765432")
+            benson = new PersonBuilder().withName("Benson Meier").withAddress("311, Clementi Ave 2, #02-25")
+                    .withEmail("johnd@gmail.com").withPhone("98765432")
                     .withTags("owesMoney", "friends").build();
-            carl = new TaskBuilder().withName("Carl Kurz").withDescription("95352563")
-                    .withStartDateTime("heinz@yahoo.com").withEndDateTime("wall street").build();
-            daniel = new TaskBuilder().withName("Daniel Meier").withDescription("87652533")
-                    .withStartDateTime("cornelia@google.com").withEndDateTime("10th street").build();
-            elle = new TaskBuilder().withName("Elle Meyer").withDescription("9482224")
-                    .withStartDateTime("werner@gmail.com").withEndDateTime("michegan ave").build();
-            fiona = new TaskBuilder().withName("Fiona Kunz").withDescription("9482427")
-                    .withStartDateTime("lydia@gmail.com").withEndDateTime("little tokyo").build();
-            george = new TaskBuilder().withName("George Best").withDescription("9482442")
-                    .withStartDateTime("anna@google.com").withEndDateTime("4th street").build();
+            carl = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
+                    .withEmail("heinz@yahoo.com").withAddress("wall street").build();
+            daniel = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
+                    .withEmail("cornelia@google.com").withAddress("10th street").build();
+            elle = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
+                    .withEmail("werner@gmail.com").withAddress("michegan ave").build();
+            fiona = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
+                    .withEmail("lydia@gmail.com").withAddress("little tokyo").build();
+            george = new PersonBuilder().withName("George Best").withPhone("9482442")
+                    .withEmail("anna@google.com").withAddress("4th street").build();
 
             // Manually added
-            hoon = new TaskBuilder().withName("Hoon Meier").withDescription("8482424")
-                    .withStartDateTime("stefan@mail.com").withEndDateTime("little india").build();
-            ida = new TaskBuilder().withName("Ida Mueller").withDescription("8482131")
-                    .withStartDateTime("hans@google.com").withEndDateTime("chicago ave").build();
+            hoon = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
+                    .withEmail("stefan@mail.com").withAddress("little india").build();
+            ida = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
+                    .withEmail("hans@google.com").withAddress("chicago ave").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -44,7 +44,7 @@ public class TypicalTestPersons {
     }
 
     public static void loadAddressBookWithSampleData(TaskBook ab) {
-        for (TestTask person : new TypicalTestPersons().getTypicalPersons()) {
+        for (TestPerson person : new TypicalTestPersons().getTypicalPersons()) {
             try {
                 ab.addTask(new Task(person));
             } catch (DuplicateTaskException e) {
@@ -53,8 +53,8 @@ public class TypicalTestPersons {
         }
     }
 
-    public TestTask[] getTypicalPersons() {
-        return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
+    public TestPerson[] getTypicalPersons() {
+        return new TestPerson[]{alice, benson, carl, daniel, elle, fiona, george};
     }
 
     public TaskBook getTypicalAddressBook() {
