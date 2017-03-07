@@ -18,7 +18,7 @@
     * [Viewing task] (#viewing-task)
       * [Viewing all tasks] (#viewing-all-tasks)
       * [Viewing a specified task] (#viewing-a-specified-task)
-      * [Viewing all Today's tasks] (#viewing-all-today's-tasks)
+      * [Viewing all Today's tasks] (#viewing-all-todays-tasks)
       * [Viewing all pending tasks] (#viewing-all-pending-tasks)
       * [Viewing all completed tasks] (#viewing-all-completed-tasks)
       * [Viewing all floating tasks] (#viewing-all-floating-tasks)
@@ -83,8 +83,10 @@ The status of a task can be classified as one of the following:
 > **Command Format**
 > * Words in `UPPER_CASE` are the parameters.
 > * Words in `lower_case` are commands and connectors.
+> * `|` means "or".
 > * Items in `SQUARE_BRACKETS` are optional.
 > * Items with `...` after them can have multiple instances.
+
 
 ### Viewing help
 
