@@ -23,7 +23,7 @@ We are a team based in the [School of Computing, National University of Singapor
 -----
 
 #### [Pang Shi Ying](http://github.com/invisidark)
-<img src="images/profile.png" width="150"> <br>
+<img src="images/shiying.png" width="150"> <br>
 **Role:** TODO <br>
 **Components in charge of:** UI <br>
 
