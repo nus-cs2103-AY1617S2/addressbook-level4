@@ -5,7 +5,7 @@ import seedu.ezdo.commons.exceptions.IllegalValueException;
 
 
 /**
- * Represents the due date of a todo.
+ * Represents the due date of a task.
  */
 public class DueDate {
 
