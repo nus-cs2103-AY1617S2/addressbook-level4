@@ -12,7 +12,6 @@ import seedu.ezdo.model.tag.Tag;
 import seedu.ezdo.model.todo.DueDate;
 import seedu.ezdo.model.todo.Name;
 import seedu.ezdo.model.todo.Priority;
-import seedu.ezdo.model.todo.StartDate;
 import seedu.ezdo.testutil.TaskBuilder;
 import seedu.ezdo.testutil.TestTask;
 
@@ -97,10 +96,7 @@ public class EditCommandTest extends EzDoGuiTest {
         commandBox.runCommand("edit 1 p/abcd");
         assertResultMessage(Priority.MESSAGE_PRIORITY_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 s/");
-        assertResultMessage(StartDate.MESSAGE_STARTDATE_CONSTRAINTS);
-
-        commandBox.runCommand("edit 1 d/");
+        commandBox.runCommand("edit 1 d/1234");
         assertResultMessage(DueDate.MESSAGE_DUEDATE_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 t/*&");

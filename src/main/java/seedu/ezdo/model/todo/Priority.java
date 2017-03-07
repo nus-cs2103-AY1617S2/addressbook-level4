@@ -9,7 +9,7 @@ import seedu.ezdo.commons.exceptions.IllegalValueException;
 public class Priority {
 
     public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority should only contain numbers 1-3";
-    public static final String PRIORITY_VALIDATION_REGEX = "[1-3]";
+    public static final String PRIORITY_VALIDATION_REGEX = "^$|[1-3]";
 
     public final String value;
 

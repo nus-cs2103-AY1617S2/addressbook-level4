@@ -6,6 +6,9 @@ import static org.junit.Assert.assertTrue;
 import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.ezdo.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.ezdo.model.todo.DueDate.MESSAGE_DUEDATE_CONSTRAINTS;
+import static seedu.ezdo.model.todo.Priority.MESSAGE_PRIORITY_CONSTRAINTS;
+import static seedu.ezdo.model.todo.StartDate.MESSAGE_STARTDATE_CONSTRAINTS;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -84,7 +87,7 @@ public class LogicManagerTest {
     @Before
     public void setUp() {
         model = new ModelManager();
-        String tempEzDoFile = saveFolder.getRoot().getPath() + "TempAddressBook.xml";
+        String tempEzDoFile = saveFolder.getRoot().getPath() + "TempEzDo.xml";
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
         logic = new LogicManager(model, new StorageManager(tempEzDoFile, tempPreferencesFile));
         EventsCenter.getInstance().registerHandler(this);
@@ -187,23 +190,21 @@ public class LogicManagerTest {
 
     @Test
     public void execute_add_invalidArgsFormat() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPriorityPrefix "
-                + "s/valid,address d/23/02/2017", expectedMessage);
         assertCommandFailure("add Valid Name p/1"
-                + ", address d/s23/03/2017", expectedMessage);
-        assertCommandFailure("add Valid Name p/1 e/valid@email.butNoAddressPrefix "
-                + "valid, address d/24/04/2017", expectedMessage);
+                + ", todo d/s23/03/2017", MESSAGE_PRIORITY_CONSTRAINTS);
+        assertCommandFailure("add Valid Name p/1 "
+                + "s/abcd d/24/04/2017", MESSAGE_STARTDATE_CONSTRAINTS);
+        assertCommandFailure("add Valid Name p/1 "
+                + "s/12/12/2013 d/999", MESSAGE_DUEDATE_CONSTRAINTS);
     }
 
     @Test
     public void execute_add_invalidPersonData() {
-        assertCommandFailure("add []\\[;] p/3 e/valid@e.mail s/valid, address d/31/05/1999",
+        assertCommandFailure("add []\\[;] p/3 e/valid@e.mail s/valid, startDate d/31/05/1999",
                 Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail s/valid, address d/31/06/1999",
-                Priority.MESSAGE_PRIORITY_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/1 e/valid@e.mail s/valid, address d/31/08/1999 t/invalid_-[.tag",
+        assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail s/valid, startDate d/31/06/1999",
+                MESSAGE_PRIORITY_CONSTRAINTS);
+        assertCommandFailure("add Valid Name p/1 e/valid@e.mail s/valid, startDate d/31/08/1999 t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }

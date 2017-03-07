@@ -61,7 +61,7 @@ public class XmlEzDoStorageTest {
 
     @Test
     public void readAndSaveEzDo_allInOrder_success() throws Exception {
-        String filePath = testFolder.getRoot().getPath() + "TempAddressBook.xml";
+        String filePath = testFolder.getRoot().getPath() + "TempEzDo.xml";
         TypicalTestTasks td = new TypicalTestTasks();
         EzDo original = td.getTypicalEzDo();
         XmlEzDoStorage xmlEzDoStorage = new XmlEzDoStorage(filePath);
