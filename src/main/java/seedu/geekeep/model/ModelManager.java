@@ -10,10 +10,10 @@ import seedu.geekeep.commons.core.UnmodifiableObservableList;
 import seedu.geekeep.commons.events.model.TaskManagerChangedEvent;
 import seedu.geekeep.commons.util.CollectionUtil;
 import seedu.geekeep.commons.util.StringUtil;
-import seedu.geekeep.model.task.Person;
-import seedu.geekeep.model.task.ReadOnlyPerson;
-import seedu.geekeep.model.task.UniquePersonList;
-import seedu.geekeep.model.task.UniquePersonList.PersonNotFoundException;
+import seedu.geekeep.model.task.Task;
+import seedu.geekeep.model.task.ReadOnlyTask;
+import seedu.geekeep.model.task.UniqueTaskList;
+import seedu.geekeep.model.task.UniqueTaskList.PersonNotFoundException;
 
 /**
  * Represents the in-memory model of the address book data. All changes to any model should be synchronized.
@@ -22,7 +22,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final TaskManager taskManager;
-    private final FilteredList<ReadOnlyPerson> filteredPersons;
+    private final FilteredList<ReadOnlyTask> filteredPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -58,32 +58,32 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void deletePerson(ReadOnlyPerson target) throws PersonNotFoundException {
+    public synchronized void deletePerson(ReadOnlyTask target) throws PersonNotFoundException {
         taskManager.removePerson(target);
         indicateAddressBookChanged();
     }
 
     @Override
-    public synchronized void addPerson(Person person) throws UniquePersonList.DuplicatePersonException {
-        taskManager.addPerson(person);
+    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicatePersonException {
+        taskManager.addTask(task);
         updateFilteredListToShowAll();
         indicateAddressBookChanged();
     }
 
     @Override
-    public void updatePerson(int filteredPersonListIndex, ReadOnlyPerson editedPerson)
-            throws UniquePersonList.DuplicatePersonException {
+    public void updatePerson(int filteredPersonListIndex, ReadOnlyTask editedPerson)
+            throws UniqueTaskList.DuplicatePersonException {
         assert editedPerson != null;
 
         int addressBookIndex = filteredPersons.getSourceIndex(filteredPersonListIndex);
-        taskManager.updatePerson(addressBookIndex, editedPerson);
+        taskManager.updateTask(addressBookIndex, editedPerson);
         indicateAddressBookChanged();
     }
 
     // =========== Filtered Person List Accessors =============================================================
 
     @Override
-    public UnmodifiableObservableList<ReadOnlyPerson> getFilteredPersonList() {
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredPersonList() {
         return new UnmodifiableObservableList<>(filteredPersons);
     }
 
@@ -104,7 +104,7 @@ public class ModelManager extends ComponentManager implements Model {
     // ========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
-        boolean satisfies(ReadOnlyPerson person);
+        boolean satisfies(ReadOnlyTask person);
 
         String toString();
     }
@@ -118,7 +118,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean satisfies(ReadOnlyPerson person) {
+        public boolean satisfies(ReadOnlyTask person) {
             return qualifier.run(person);
         }
 
@@ -129,7 +129,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     interface Qualifier {
-        boolean run(ReadOnlyPerson person);
+        boolean run(ReadOnlyTask person);
 
         String toString();
     }
@@ -142,7 +142,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean run(ReadOnlyPerson person) {
+        public boolean run(ReadOnlyTask person) {
             return nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword)).findAny()
                     .isPresent();

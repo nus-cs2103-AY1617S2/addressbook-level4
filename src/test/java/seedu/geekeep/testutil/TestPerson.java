@@ -5,12 +5,12 @@ import seedu.geekeep.model.task.Address;
 import seedu.geekeep.model.task.Email;
 import seedu.geekeep.model.task.Name;
 import seedu.geekeep.model.task.Phone;
-import seedu.geekeep.model.task.ReadOnlyPerson;
+import seedu.geekeep.model.task.ReadOnlyTask;
 
 /**
  * A mutable person object. For testing only.
  */
-public class TestPerson implements ReadOnlyPerson {
+public class TestPerson implements ReadOnlyTask {
 
     private Name name;
     private Address address;

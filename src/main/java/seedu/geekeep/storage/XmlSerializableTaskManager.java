@@ -13,8 +13,8 @@ import seedu.geekeep.commons.core.UnmodifiableObservableList;
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.model.ReadOnlyTaskManager;
 import seedu.geekeep.model.tag.Tag;
-import seedu.geekeep.model.task.Person;
-import seedu.geekeep.model.task.ReadOnlyPerson;
+import seedu.geekeep.model.task.Task;
+import seedu.geekeep.model.task.ReadOnlyTask;
 
 /**
  * An Immutable AddressBook that is serializable to XML format
@@ -46,8 +46,8 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
     }
 
     @Override
-    public ObservableList<ReadOnlyPerson> getPersonList() {
-        final ObservableList<Person> persons = this.persons.stream().map(p -> {
+    public ObservableList<ReadOnlyTask> getPersonList() {
+        final ObservableList<Task> tasks = this.persons.stream().map(p -> {
             try {
                 return p.toModelType();
             } catch (IllegalValueException e) {
@@ -56,7 +56,7 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
                 return null;
             }
         }).collect(Collectors.toCollection(FXCollections::observableArrayList));
-        return new UnmodifiableObservableList<>(persons);
+        return new UnmodifiableObservableList<>(tasks);
     }
 
     @Override

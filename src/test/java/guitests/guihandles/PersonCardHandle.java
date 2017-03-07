@@ -9,7 +9,7 @@ import javafx.scene.control.Labeled;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import seedu.geekeep.model.tag.UniqueTagList;
-import seedu.geekeep.model.task.ReadOnlyPerson;
+import seedu.geekeep.model.task.ReadOnlyTask;
 
 /**
  * Provides a handle to a person card in the person list panel.
@@ -72,7 +72,7 @@ public class PersonCardHandle extends GuiHandle {
         return guiRobot.from(node).lookup(TAGS_FIELD_ID).query();
     }
 
-    public boolean isSamePerson(ReadOnlyPerson person) {
+    public boolean isSamePerson(ReadOnlyTask person) {
         return getFullName().equals(person.getName().fullName)
                 && getPhone().equals(person.getPhone().value)
                 && getEmail().equals(person.getEmail().value)

@@ -3,8 +3,8 @@ package seedu.geekeep.testutil;
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.model.TaskManager;
 import seedu.geekeep.model.tag.Tag;
-import seedu.geekeep.model.task.Person;
-import seedu.geekeep.model.task.UniquePersonList;
+import seedu.geekeep.model.task.Task;
+import seedu.geekeep.model.task.UniqueTaskList;
 
 /**
  * A utility class to help with building Addressbook objects.
@@ -19,8 +19,8 @@ public class AddressBookBuilder {
         this.taskManager = taskManager;
     }
 
-    public AddressBookBuilder withPerson(Person person) throws UniquePersonList.DuplicatePersonException {
-        taskManager.addPerson(person);
+    public AddressBookBuilder withTask(Task task) throws UniqueTaskList.DuplicatePersonException {
+        taskManager.addTask(task);
         return this;
     }
 

@@ -16,7 +16,7 @@ import seedu.geekeep.commons.events.ui.ExitAppRequestEvent;
 import seedu.geekeep.commons.util.FxViewUtil;
 import seedu.geekeep.logic.Logic;
 import seedu.geekeep.model.UserPrefs;
-import seedu.geekeep.model.task.ReadOnlyPerson;
+import seedu.geekeep.model.task.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -199,7 +199,7 @@ public class MainWindow extends UiPart<Region> {
         return this.taskListPanel;
     }
 
-    void loadPersonPage(ReadOnlyPerson person) {
+    void loadPersonPage(ReadOnlyTask person) {
         browserPanel.loadPersonPage(person);
     }
 

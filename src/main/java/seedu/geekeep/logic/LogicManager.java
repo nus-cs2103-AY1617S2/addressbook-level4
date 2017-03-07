@@ -10,7 +10,7 @@ import seedu.geekeep.logic.commands.CommandResult;
 import seedu.geekeep.logic.commands.exceptions.CommandException;
 import seedu.geekeep.logic.parser.Parser;
 import seedu.geekeep.model.Model;
-import seedu.geekeep.model.task.ReadOnlyPerson;
+import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.storage.Storage;
 
 /**
@@ -36,7 +36,7 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
-    public ObservableList<ReadOnlyPerson> getFilteredPersonList() {
+    public ObservableList<ReadOnlyTask> getFilteredPersonList() {
         return model.getFilteredPersonList();
     }
 }

@@ -10,10 +10,10 @@ import seedu.geekeep.model.tag.UniqueTagList;
 import seedu.geekeep.model.task.Address;
 import seedu.geekeep.model.task.Email;
 import seedu.geekeep.model.task.Name;
-import seedu.geekeep.model.task.Person;
+import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.Phone;
-import seedu.geekeep.model.task.ReadOnlyPerson;
-import seedu.geekeep.model.task.UniquePersonList;
+import seedu.geekeep.model.task.ReadOnlyTask;
+import seedu.geekeep.model.task.UniqueTaskList;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -51,18 +51,18 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
+        List<ReadOnlyTask> lastShownList = model.getFilteredPersonList();
 
         if (filteredPersonListIndex >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        ReadOnlyPerson personToEdit = lastShownList.get(filteredPersonListIndex);
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        ReadOnlyTask personToEdit = lastShownList.get(filteredPersonListIndex);
+        Task editedTask = createEditedTask(personToEdit, editPersonDescriptor);
 
         try {
-            model.updatePerson(filteredPersonListIndex, editedPerson);
-        } catch (UniquePersonList.DuplicatePersonException dpe) {
+            model.updatePerson(filteredPersonListIndex, editedTask);
+        } catch (UniqueTaskList.DuplicatePersonException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
         model.updateFilteredListToShowAll();
@@ -73,7 +73,7 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(ReadOnlyPerson personToEdit,
+    private static Task createEditedTask(ReadOnlyTask personToEdit,
                                              EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
@@ -83,7 +83,7 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Task(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
 
     /**

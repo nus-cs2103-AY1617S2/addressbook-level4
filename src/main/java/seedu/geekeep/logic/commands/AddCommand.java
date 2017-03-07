@@ -10,9 +10,9 @@ import seedu.geekeep.model.tag.UniqueTagList;
 import seedu.geekeep.model.task.Address;
 import seedu.geekeep.model.task.Email;
 import seedu.geekeep.model.task.Name;
-import seedu.geekeep.model.task.Person;
+import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.Phone;
-import seedu.geekeep.model.task.UniquePersonList;
+import seedu.geekeep.model.task.UniqueTaskList;
 
 /**
  * Adds a person to the address book.
@@ -29,7 +29,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
-    private final Person toAdd;
+    private final Task toAdd;
 
     /**
      * Creates an AddCommand using raw values.
@@ -42,7 +42,7 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        this.toAdd = new Person(
+        this.toAdd = new Task(
                 new Name(name),
                 new Phone(phone),
                 new Email(email),
@@ -55,9 +55,9 @@ public class AddCommand extends Command {
     public CommandResult execute() throws CommandException {
         assert model != null;
         try {
-            model.addPerson(toAdd);
+            model.addTask(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-        } catch (UniquePersonList.DuplicatePersonException e) {
+        } catch (UniqueTaskList.DuplicatePersonException e) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
