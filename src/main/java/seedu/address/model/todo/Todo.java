@@ -1,6 +1,7 @@
 package seedu.address.model.todo;
 
 import java.util.Objects;
+import java.util.Date;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
@@ -9,18 +10,15 @@ import seedu.address.model.tag.UniqueTagList;
  * Represents a ToDo in the address book.
  * Guarantees: details are present and not null, field values are validated.
  */
-public class ToDo implements ReadOnlyToDo {
+public class Todo implements ReadOnlyTodo {
 
     private Name name;
-    private Time starttime;
-    private Time endtime;
+    private Date starttime;
+    private Date endtime;
 
     private UniqueTagList tags;
 
-    /**
-     * Every field must be present and not null.
-     */
-    public ToDo(Name name, Time starttime, Time endtime, UniqueTagList tags) {
+    public Todo(Name name, Date starttime, Date endtime, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, starttime, endtime, tags);
         this.name = name;
         this.starttime = starttime;
@@ -31,7 +29,7 @@ public class ToDo implements ReadOnlyToDo {
     /**
      * Creates a copy of the given ReadOnlyToDo.
      */
-    public ToDo(ReadOnlyToDo source) {
+    public Todo(ReadOnlyTodo source) {
         this(source.getName(), source.getStartTime(), source.getEndTime(), source.getTags());
     }
 
@@ -45,23 +43,23 @@ public class ToDo implements ReadOnlyToDo {
         return name;
     }
 
-    public void setStartTime(Time time) {
-        assert time != null;
+    public void setStartTime(Date starttime) {
+        assert starttime != null;
         this.starttime = starttime;
     }
 
     @Override
-    public Phone getStartTime() {
+    public Date getStartTime() {
         return starttime;
     }
 
-    public void setEndTime(Time endtime) {
+    public void setEndTime(Date endtime) {
         assert endtime != null;
         this.endtime = endtime;
     }
 
     @Override
-    public Email getEndTime() {
+    public Date getEndTime() {
         return endtime;
     }
 
@@ -80,7 +78,7 @@ public class ToDo implements ReadOnlyToDo {
     /**
      * Updates this todo with the details of {@code replacement}.
      */
-    public void resetData(ReadOnlyToDo replacement) {
+    public void resetData(ReadOnlyTodo replacement) {
         assert replacement != null;
 
         this.setName(replacement.getName());
@@ -92,8 +90,8 @@ public class ToDo implements ReadOnlyToDo {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ReadOnlyToDo // instanceof handles nulls
-                && this.isSameStateAs((ReadOnlyToDo) other));
+                || (other instanceof ReadOnlyTodo // instanceof handles nulls
+                && this.isSameStateAs((ReadOnlyTodo) other));
     }
 
     @Override
