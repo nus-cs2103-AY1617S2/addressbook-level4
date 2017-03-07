@@ -7,9 +7,9 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Task;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.UniquePersonList;
@@ -58,7 +58,7 @@ public class EditCommand extends Command {
         }
 
         ReadOnlyPerson personToEdit = lastShownList.get(filteredPersonListIndex);
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Task editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         try {
             model.updatePerson(filteredPersonListIndex, editedPerson);
@@ -73,17 +73,17 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(ReadOnlyPerson personToEdit,
+    private static Task createEditedPerson(ReadOnlyPerson personToEdit,
                                              EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
         Phone updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
-        Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
+        Remark updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
         Address updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Task(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
 
     /**
@@ -93,7 +93,7 @@ public class EditCommand extends Command {
     public static class EditPersonDescriptor {
         private Optional<Name> name = Optional.empty();
         private Optional<Phone> phone = Optional.empty();
-        private Optional<Email> email = Optional.empty();
+        private Optional<Remark> email = Optional.empty();
         private Optional<Address> address = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
@@ -132,12 +132,12 @@ public class EditCommand extends Command {
             return phone;
         }
 
-        public void setEmail(Optional<Email> email) {
+        public void setEmail(Optional<Remark> email) {
             assert email != null;
             this.email = email;
         }
 
-        public Optional<Email> getEmail() {
+        public Optional<Remark> getEmail() {
             return email;
         }
 

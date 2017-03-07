@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -93,9 +93,9 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
      */
-    public static Optional<Email> parseEmail(Optional<String> email) throws IllegalValueException {
+    public static Optional<Remark> parseEmail(Optional<String> email) throws IllegalValueException {
         assert email != null;
-        return email.isPresent() ? Optional.of(new Email(email.get())) : Optional.empty();
+        return email.isPresent() ? Optional.of(new Remark(email.get())) : Optional.empty();
     }
 
     /**
