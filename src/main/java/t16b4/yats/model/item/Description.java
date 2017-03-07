@@ -1,8 +1,5 @@
 package t16b4.yats.model.item;
 
-
-import t16b4.yats.commons.exceptions.IllegalValueException;
-
 /**
  * Represents a Task's description in the task manager.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
