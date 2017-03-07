@@ -36,12 +36,21 @@ public interface ReadOnlyTodo {
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append(" Start: ")
-                .append(getStartTime())
-                .append(" End: ")
-                .append(getEndTime())
-                .append(" Tags: ");
+
+        builder.append(getName());
+
+        if (getStartTime() != null) {
+            builder.append(" Start: ")
+                .append(getStartTime());
+        }
+
+        if (getEndTime() != null) {
+            builder.append(" End: ")
+                .append(getEndTime());
+        }
+
+        builder.append(" Tags: ");
+
         getTags().forEach(builder::append);
         return builder.toString();
     }
