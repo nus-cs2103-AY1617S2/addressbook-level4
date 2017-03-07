@@ -17,10 +17,10 @@ import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 
 /**
- * An Immutable AddressBook that is serializable to XML format
+ * An Immutable TaskList that is serializable to XML format
  */
-@XmlRootElement(name = "addressbook")
-public class XmlSerializableAddressBook implements ReadOnlyTaskList {
+@XmlRootElement(name = "tasklist")
+public class XmlSerializableTaskList implements ReadOnlyTaskList {
 
     @XmlElement
     private List<XmlAdaptedPerson> tasks;
@@ -28,10 +28,10 @@ public class XmlSerializableAddressBook implements ReadOnlyTaskList {
     private List<XmlAdaptedTag> tags;
 
     /**
-     * Creates an empty XmlSerializableAddressBook.
+     * Creates an empty XmlSerializableTaskList.
      * This empty constructor is required for marshalling.
      */
-    public XmlSerializableAddressBook() {
+    public XmlSerializableTaskList() {
         tasks = new ArrayList<>();
         tags = new ArrayList<>();
     }
@@ -39,7 +39,7 @@ public class XmlSerializableAddressBook implements ReadOnlyTaskList {
     /**
      * Conversion
      */
-    public XmlSerializableAddressBook(ReadOnlyTaskList src) {
+    public XmlSerializableTaskList(ReadOnlyTaskList src) {
         this();
         tasks.addAll(src.getTaskList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
@@ -47,7 +47,7 @@ public class XmlSerializableAddressBook implements ReadOnlyTaskList {
 
     @Override
     public ObservableList<ReadOnlyTask> getTaskList() {
-        final ObservableList<Task> persons = this.tasks.stream().map(p -> {
+        final ObservableList<Task> tasks = this.tasks.stream().map(p -> {
             try {
                 return p.toModelType();
             } catch (IllegalValueException e) {
@@ -56,7 +56,7 @@ public class XmlSerializableAddressBook implements ReadOnlyTaskList {
                 return null;
             }
         }).collect(Collectors.toCollection(FXCollections::observableArrayList));
-        return new UnmodifiableObservableList<>(persons);
+        return new UnmodifiableObservableList<>(tasks);
     }
 
     @Override
