@@ -2,7 +2,7 @@ package seedu.taskboss.logic.parser;
 
 import static seedu.taskboss.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_INFORMATION;
-import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -29,8 +29,7 @@ public class EditCommandParser {
     public Command parse(String args) {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_PHONE, PREFIX_INFORMATION, PREFIX_TAG);
-
+                new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_INFORMATION, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
@@ -42,7 +41,8 @@ public class EditCommandParser {
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
             editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
-            editTaskDescriptor.setPhone(ParserUtil.parsePhone(argsTokenizer.getValue(PREFIX_PHONE)));
+            editTaskDescriptor.setPriorityLevel(ParserUtil.
+                    parsePriorityLevel(argsTokenizer.getValue(PREFIX_PRIORITY)));
             editTaskDescriptor.setInformation(ParserUtil.parseInformation(argsTokenizer.getValue(PREFIX_INFORMATION)));
             editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
         } catch (IllegalValueException ive) {

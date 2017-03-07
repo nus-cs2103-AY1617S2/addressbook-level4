@@ -16,26 +16,27 @@ public class TypicalTestTasks {
         try {
             alice = new TaskBuilder().withName("Alice Pauline")
                     .withInformation("123, Jurong West Ave 6, #08-111")
-                    .withPhone("85355255")
+                    .withPriorityLevel("3")
                     .withTags("friends").build();
-            benson = new TaskBuilder().withName("Benson Meier").withInformation("311, Clementi Ave 2, #02-25")
-                    .withPhone("98765432")
+            benson = new TaskBuilder().withName("Benson Meier")
+                    .withInformation("311, Clementi Ave 2, #02-25")
+                    .withPriorityLevel("3")
                     .withTags("owesMoney", "friends").build();
-            carl = new TaskBuilder().withName("Carl Kurz").withPhone("95352563")
+            carl = new TaskBuilder().withName("Carl Kurz").withPriorityLevel("3")
                     .withInformation("wall street").build();
-            daniel = new TaskBuilder().withName("Daniel Meier").withPhone("87652533")
+            daniel = new TaskBuilder().withName("Daniel Meier").withPriorityLevel("2")
                     .withInformation("10th street").build();
-            elle = new TaskBuilder().withName("Elle Meyer").withPhone("9482224")
+            elle = new TaskBuilder().withName("Elle Meyer").withPriorityLevel("2")
                     .withInformation("michegan ave").build();
-            fiona = new TaskBuilder().withName("Fiona Kunz").withPhone("9482427")
+            fiona = new TaskBuilder().withName("Fiona Kunz").withPriorityLevel("2")
                     .withInformation("little tokyo").build();
-            george = new TaskBuilder().withName("George Best").withPhone("9482442")
+            george = new TaskBuilder().withName("George Best").withPriorityLevel("2")
                     .withInformation("4th street").build();
 
             // Manually added
-            hoon = new TaskBuilder().withName("Hoon Meier").withPhone("8482424")
+            hoon = new TaskBuilder().withName("Hoon Meier").withPriorityLevel("2")
                     .withInformation("little india").build();
-            ida = new TaskBuilder().withName("Ida Mueller").withPhone("8482131")
+            ida = new TaskBuilder().withName("Ida Mueller").withPriorityLevel("2")
                     .withInformation("chicago ave").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();

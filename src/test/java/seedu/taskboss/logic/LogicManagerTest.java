@@ -43,7 +43,7 @@ import seedu.taskboss.model.category.Tag;
 import seedu.taskboss.model.category.UniqueTagList;
 import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
-import seedu.taskboss.model.task.Phone;
+import seedu.taskboss.model.task.PriorityLevel;
 import seedu.taskboss.model.task.ReadOnlyTask;
 import seedu.taskboss.model.task.Task;
 import seedu.taskboss.storage.StorageManager;
@@ -194,16 +194,19 @@ public class LogicManagerTest {
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 12345 i/valid,information", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 valid, information", expectedMessage);
+        assertCommandFailure("add Valid Name 12345 i/validInformation.butNoPriorityLevelPrefix",
+                expectedMessage);
+        assertCommandFailure("add Valid Name p/1 validInformation.butNoInformationPrefix",
+                expectedMessage);
     }
 
     @Test
     public void execute_add_invalidTaskData() {
-        assertCommandFailure("add []\\[;] p/12345 i/valid, information", Name.MESSAGE_NAME_CONSTRAINTS);
+        assertCommandFailure("add []\\[;] p/1 i/valid, information",
+                Name.MESSAGE_NAME_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/not_numbers i/valid, information",
-                Phone.MESSAGE_PHONE_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 i/valid, information t/invalid_-[.tag",
+                PriorityLevel.MESSAGE_PRIORITY_CONSTRAINTS);
+        assertCommandFailure("add Valid Name p/1 i/valid, information t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
@@ -407,12 +410,12 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
-            Phone privatePhone = new Phone("111111");
+            PriorityLevel privatePriorityLevel = new PriorityLevel("1");
             Information privateInformation = new Information("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, privatePhone, privateInformation, tags);
+            return new Task(name, privatePriorityLevel, privateInformation, tags);
         }
 
         /**
@@ -426,9 +429,10 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Name("Task " + seed),
-                    new Phone("" + Math.abs(seed)),
+                    new PriorityLevel("" + Math.abs(seed)),
                     new Information("House of " + seed),
-                    new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))));
+                    new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
+            );
         }
 
         /** Generates the correct add command based on the task given */
@@ -438,7 +442,7 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getName().toString());
-            cmd.append(" p/").append(p.getPhone());
+            cmd.append(" p/").append(p.getPriorityLevel());
             cmd.append(" i/").append(p.getInformation());
 
             UniqueTagList tags = p.getTags();
@@ -525,8 +529,12 @@ public class LogicManagerTest {
          * dummy values.
          */
         Task generateTaskWithName(String name) throws Exception {
-            return new Task(new Name(name), new Phone("1"), new Information("House of 1"),
-                    new UniqueTagList(new Tag("tag")));
+            return new Task(
+                    new Name(name),
+                    new PriorityLevel("1"),
+                    new Information("House of 1"),
+                    new UniqueTagList(new Tag("tag"))
+            );
         }
     }
 }

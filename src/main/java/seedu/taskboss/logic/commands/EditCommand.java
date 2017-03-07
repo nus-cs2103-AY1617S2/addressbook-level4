@@ -9,7 +9,7 @@ import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.model.category.UniqueTagList;
 import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
-import seedu.taskboss.model.task.Phone;
+import seedu.taskboss.model.task.PriorityLevel;
 import seedu.taskboss.model.task.ReadOnlyTask;
 import seedu.taskboss.model.task.Task;
 import seedu.taskboss.model.task.UniqueTaskList;
@@ -24,8 +24,9 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [NAME] [p/PHONE] [i/INFORMATION ] [t/TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 p/91234567 ";
+            + "Parameters: INDEX (must be a positive integer) [NAME] [p/PRIORITY_LEVEL]"
+            + " [i/INFORMATION ] [t/TAG]...\n"
+            + "Example: " + COMMAND_WORD + " 1 p/1";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -77,11 +78,12 @@ public class EditCommand extends Command {
         assert taskToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
-        Phone updatedPhone = editTaskDescriptor.getPhone().orElseGet(taskToEdit::getPhone);
+        PriorityLevel updatedPriorityLevel = editTaskDescriptor.getPriorityLevel()
+                .orElseGet(taskToEdit::getPriorityLevel);
         Information updatedInformation = editTaskDescriptor.getInformation().orElseGet(taskToEdit::getInformation);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedName, updatedPhone, updatedInformation, updatedTags);
+        return new Task(updatedName, updatedPriorityLevel, updatedInformation, updatedTags);
     }
 
     /**
@@ -90,7 +92,8 @@ public class EditCommand extends Command {
      */
     public static class EditTaskDescriptor {
         private Optional<Name> name = Optional.empty();
-        private Optional<Phone> phone = Optional.empty();
+
+        private Optional<PriorityLevel> priorityLevel = Optional.empty();
         private Optional<Information> information = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
@@ -98,7 +101,7 @@ public class EditCommand extends Command {
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.name = toCopy.getName();
-            this.phone = toCopy.getPhone();
+            this.priorityLevel = toCopy.getPriorityLevel();
             this.information = toCopy.getInformation();
             this.tags = toCopy.getTags();
         }
@@ -107,7 +110,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.phone, this.information, this.tags);
+            return CollectionUtil.isAnyPresent(this.name, this.priorityLevel, this.information, this.tags);
         }
 
         public void setName(Optional<Name> name) {
@@ -119,13 +122,13 @@ public class EditCommand extends Command {
             return name;
         }
 
-        public void setPhone(Optional<Phone> phone) {
-            assert phone != null;
-            this.phone = phone;
+        public void setPriorityLevel(Optional<PriorityLevel> priorityLevel) {
+            assert priorityLevel != null;
+            this.priorityLevel = priorityLevel;
         }
 
-        public Optional<Phone> getPhone() {
-            return phone;
+        public Optional<PriorityLevel> getPriorityLevel() {
+            return priorityLevel;
         }
 
         public void setInformation(Optional<Information> information) {

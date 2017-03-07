@@ -3,7 +3,7 @@ package seedu.taskboss.testutil;
 import seedu.taskboss.model.category.UniqueTagList;
 import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
-import seedu.taskboss.model.task.Phone;
+import seedu.taskboss.model.task.PriorityLevel;
 import seedu.taskboss.model.task.ReadOnlyTask;
 
 /**
@@ -13,7 +13,7 @@ public class TestTask implements ReadOnlyTask {
 
     private Name name;
     private Information information;
-    private Phone phone;
+    private PriorityLevel priorityLevel;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -25,7 +25,7 @@ public class TestTask implements ReadOnlyTask {
      */
     public TestTask(TestTask taskToCopy) {
         this.name = taskToCopy.getName();
-        this.phone = taskToCopy.getPhone();
+        this.priorityLevel = taskToCopy.getPriorityLevel();
         this.information = taskToCopy.getInformation();
         this.tags = taskToCopy.getTags();
     }
@@ -38,8 +38,8 @@ public class TestTask implements ReadOnlyTask {
         this.information = information;
     }
 
-    public void setPhone(Phone phone) {
-        this.phone = phone;
+    public void setPriorityLevel(PriorityLevel priorityLevel) {
+        this.priorityLevel = priorityLevel;
     }
 
     public void setTags(UniqueTagList tags) {
@@ -52,8 +52,8 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Phone getPhone() {
-        return phone;
+    public PriorityLevel getPriorityLevel() {
+        return priorityLevel;
     }
 
     @Override
@@ -75,7 +75,7 @@ public class TestTask implements ReadOnlyTask {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
         sb.append("i/" + this.getInformation().value + " ");
-        sb.append("p/" + this.getPhone().value + " ");
+        sb.append("p/" + this.getPriorityLevel().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }

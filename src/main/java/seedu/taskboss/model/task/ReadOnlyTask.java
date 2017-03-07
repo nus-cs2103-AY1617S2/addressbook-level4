@@ -9,7 +9,7 @@ import seedu.taskboss.model.category.UniqueTagList;
 public interface ReadOnlyTask {
 
     Name getName();
-    Phone getPhone();
+    PriorityLevel getPriorityLevel();
     Information getInformation();
 
     /**
@@ -25,7 +25,7 @@ public interface ReadOnlyTask {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                 && other.getName().equals(this.getName()) // state checks here onwards
-                && other.getPhone().equals(this.getPhone())
+                && other.getPriorityLevel().equals(this.getPriorityLevel())
                 && other.getInformation().equals(this.getInformation()));
     }
 
@@ -35,8 +35,8 @@ public interface ReadOnlyTask {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append(" Phone: ")
-                .append(getPhone())
+                .append(" Priority Level: ")
+                .append(getPriorityLevel())
                 .append(" Information: ")
                 .append(getInformation())
                 .append(" Tags: ");

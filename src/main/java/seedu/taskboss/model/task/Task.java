@@ -12,7 +12,7 @@ import seedu.taskboss.model.category.UniqueTagList;
 public class Task implements ReadOnlyTask {
 
     private Name name;
-    private Phone phone;
+    private PriorityLevel priorityLevel;
     private Information information;
 
     private UniqueTagList tags;
@@ -20,10 +20,11 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Phone phone, Information information, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, phone, information, tags);
+    public Task(Name name, PriorityLevel priorityLevel, Information information, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, priorityLevel, information, tags);
+
         this.name = name;
-        this.phone = phone;
+        this.priorityLevel = priorityLevel;
         this.information = information;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
@@ -32,7 +33,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyPerson.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getPhone(), source.getInformation(), source.getTags());
+        this(source.getName(), source.getPriorityLevel(), source.getInformation(), source.getTags());
     }
 
     public void setName(Name name) {
@@ -45,14 +46,14 @@ public class Task implements ReadOnlyTask {
         return name;
     }
 
-    public void setPhone(Phone phone) {
-        assert phone != null;
-        this.phone = phone;
+    public void setPriorityLevel(PriorityLevel priorityLevel) {
+        assert priorityLevel != null;
+        this.priorityLevel = priorityLevel;
     }
 
     @Override
-    public Phone getPhone() {
-        return phone;
+    public PriorityLevel getPriorityLevel() {
+        return priorityLevel;
     }
 
     public void setInformation(Information information) {
@@ -84,7 +85,7 @@ public class Task implements ReadOnlyTask {
         assert replacement != null;
 
         this.setName(replacement.getName());
-        this.setPhone(replacement.getPhone());
+        this.setPriorityLevel(replacement.getPriorityLevel());
         this.setInformation(replacement.getInformation());
         this.setTags(replacement.getTags());
     }
@@ -99,7 +100,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, information, tags);
+        return Objects.hash(name, priorityLevel, information, tags);
     }
 
     @Override

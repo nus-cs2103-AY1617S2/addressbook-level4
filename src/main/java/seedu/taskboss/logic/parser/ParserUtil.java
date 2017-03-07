@@ -17,7 +17,7 @@ import seedu.taskboss.model.category.Tag;
 import seedu.taskboss.model.category.UniqueTagList;
 import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
-import seedu.taskboss.model.task.Phone;
+import seedu.taskboss.model.task.PriorityLevel;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -74,11 +74,13 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> phone} into an {@code Optional<Phone>} if {@code phone} is present.
+     * Parses a {@code Optional<String> priorityLevel} into an {@code Optional<PriorityLevel>}
+     * if {@code priorityLevel} is present.
      */
-    public static Optional<Phone> parsePhone(Optional<String> phone) throws IllegalValueException {
-        assert phone != null;
-        return phone.isPresent() ? Optional.of(new Phone(phone.get())) : Optional.empty();
+    public static Optional<PriorityLevel> parsePriorityLevel(Optional<String> priorityLevel)
+            throws IllegalValueException {
+        assert priorityLevel != null;
+        return priorityLevel.isPresent() ? Optional.of(new PriorityLevel(priorityLevel.get())) : Optional.empty();
     }
 
     /**

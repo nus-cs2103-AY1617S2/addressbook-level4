@@ -2,55 +2,55 @@
 <taskboss>
     <tasks>
         <name>Hans Muster</name>
-        <phone isPrivate="false">9482424</phone>
+        <priorityLevel isPrivate="false">2</priorityLevel>
         <email isPrivate="false">hans@google.com</email>
         <information isPrivate="false">4th street</information>
     </tasks>
     <tasks>
         <name>Ruth Mueller</name>
-        <phone isPrivate="false">87249245</phone>
+        <priorityLevel isPrivate="false">2</priorityLevel>
         <email isPrivate="false">ruth@google.com</email>
         <information isPrivate="false">81th street</information>
     </tasks>
     <tasks>
         <name>Heinz Kurz</name>
-        <phone isPrivate="false">95352563</phone>
+        <priorityLevel isPrivate="false">3</priorityLevel>
         <email isPrivate="false">heinz@yahoo.com</email>
         <information isPrivate="false">wall street</information>
     </tasks>
     <tasks>
         <name>Cornelia Meier</name>
-        <phone isPrivate="false">87652533</phone>
+        <priorityLevel isPrivate="false">2</priorityLevel>
         <email isPrivate="false">cornelia@google.com</email>
         <information isPrivate="false">10th street</information>
     </tasks>
     <tasks>
         <name>Werner Meyer</name>
-        <phone isPrivate="false">9482224</phone>
+        <priorityLevel isPrivate="false">2</priorityLevel>
         <email isPrivate="false">werner@gmail.com</email>
         <information isPrivate="false">michegan ave</information>
     </tasks>
     <tasks>
         <name>Lydia Kunz</name>
-        <phone isPrivate="false">9482427</phone>
+        <priorityLevel isPrivate="false">2</priorityLevel>
         <email isPrivate="false">lydia@gmail.com</email>
         <information isPrivate="false">little tokyo</information>
     </tasks>
     <tasks>
         <name>Anna Best</name>
-        <phone isPrivate="false">9482442</phone>
+        <priorityLevel isPrivate="false">2</priorityLevel>
         <email isPrivate="false">anna@google.com</email>
         <information isPrivate="false">4th street</information>
     </tasks>
     <tasks>
         <name>Stefan Meier</name>
-        <phone isPrivate="false">8482424</phone>
+        <priorityLevel isPrivate="false">2</priorityLevel>
         <email isPrivate="false">stefan@mail.com</email>
         <information isPrivate="false">little india</information>
     </tasks>
     <tasks>
         <name>Martin Mueller</name>
-        <phone isPrivate="false">8482131</phone>
+        <priorityLevel isPrivate="false">2</priorityLevel>
         <email isPrivate="false">hans@google.com</email>
         <information isPrivate="false">chicago ave</information>
     </tasks>
