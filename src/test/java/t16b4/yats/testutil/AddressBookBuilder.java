@@ -20,7 +20,7 @@ public class AddressBookBuilder {
     }
 
     public AddressBookBuilder withPerson(Task person) throws UniqueItemList.DuplicatePersonException {
-        addressBook.addPerson(person);
+        addressBook.addTask(person);
         return this;
     }
 

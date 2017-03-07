@@ -215,7 +215,7 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.adam();
         TaskManager expectedAB = new TaskManager();
-        expectedAB.addPerson(toBeAdded);
+        expectedAB.addTask(toBeAdded);
 
         // execute command and verify result
         assertCommandSuccess(helper.generateAddCommand(toBeAdded),
@@ -494,7 +494,7 @@ public class LogicManagerTest {
          */
         void addToAddressBook(TaskManager addressBook, List<Task> personsToAdd) throws Exception {
             for (Task p: personsToAdd) {
-                addressBook.addPerson(p);
+                addressBook.addTask(p);
             }
         }
 

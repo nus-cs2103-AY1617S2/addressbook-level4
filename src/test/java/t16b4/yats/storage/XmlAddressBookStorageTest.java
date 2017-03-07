@@ -73,14 +73,14 @@ public class XmlAddressBookStorageTest {
         assertEquals(original, new TaskManager(readBack));
 
         //Modify data, overwrite exiting file, and read back
-        original.addPerson(new Task(td.hoon));
+        original.addTask(new Task(td.hoon));
         original.removePerson(new Task(td.alice));
         xmlAddressBookStorage.saveAddressBook(original, filePath);
         readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
         assertEquals(original, new TaskManager(readBack));
 
         //Save and read without specifying file path
-        original.addPerson(new Task(td.ida));
+        original.addTask(new Task(td.ida));
         xmlAddressBookStorage.saveAddressBook(original); //file path not specified
         readBack = xmlAddressBookStorage.readTaskManager().get(); //file path not specified
         assertEquals(original, new TaskManager(readBack));

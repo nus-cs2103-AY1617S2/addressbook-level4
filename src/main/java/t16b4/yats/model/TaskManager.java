@@ -83,7 +83,7 @@ public class TaskManager implements ReadOnlyTaskManager {
      *
      * @throws UniqueItemList.DuplicatePersonException if an equivalent person already exists.
      */
-    public void addPerson(Task p) throws UniqueItemList.DuplicatePersonException {
+    public void addTask(Task p) throws UniqueItemList.DuplicatePersonException {
         syncMasterTagListWith(p);
         persons.add(p);
     }
