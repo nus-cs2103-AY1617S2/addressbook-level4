@@ -1,19 +1,19 @@
 package seedu.address.commons.events.model;
 
 import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.ReadOnlyTaskList;
+import seedu.address.model.ReadOnlyTodoList;
 
-/** Indicates the AddressBook in the model has changed*/
-public class AddressBookChangedEvent extends BaseEvent {
+/** Indicates the TodoList in the model has changed*/
+public class TodoListChangedEvent extends BaseEvent {
 
-    public final ReadOnlyTaskList data;
+    public final ReadOnlyTodoList data;
 
-    public AddressBookChangedEvent(ReadOnlyTaskList data) {
+    public TodoListChangedEvent(ReadOnlyTodoList data) {
         this.data = data;
     }
 
     @Override
     public String toString() {
-        return "number of persons " + data.getPersonList().size() + ", number of tags " + data.getTagList().size();
+        return "number of todos " + data.getTodoList().size() + ", number of tags " + data.getTagList().size();
     }
 }
