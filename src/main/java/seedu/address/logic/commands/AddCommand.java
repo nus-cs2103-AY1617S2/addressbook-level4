@@ -12,14 +12,14 @@ import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
- * Adds a task to the address book.
+ * Adds a task to the list.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
-            + "Parameters: NAME [t/TAG]...\n"
+            + "Parameters: CONTENT [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
             + " Project Meeting t/project t/meeting";
 
@@ -33,14 +33,14 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, Set<String> tags)
+    public AddCommand(String content, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
         this.toAdd = new Task(
-                new Content(name),
+                new Content(content),
                 new UniqueTagList(tagSet)
         );
     }
