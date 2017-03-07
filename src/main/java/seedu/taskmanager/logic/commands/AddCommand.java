@@ -9,6 +9,8 @@ import seedu.taskmanager.model.task.Date;
 import seedu.taskmanager.model.task.TaskName;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.Time;
+//import seedu.taskmanager.model.task.EndTime;
+//import seedu.taskmanager.model.task.Deadline;
 import seedu.taskmanager.model.task.UniqueTaskList;
 // import seedu.taskmanager.model.tag.Tag;
 // import seedu.taskmanager.model.tag.UniqueTagList;
@@ -22,9 +24,9 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
-            + "Parameters: TASK on DATE from STARTTIME to ENDTIME\n"
+            + "Parameters: TASK ON DATE FROM TIME TO ENDTIME\n"
             + "Example: " + COMMAND_WORD
-            + " eat lunch on 03/03/17 from 1230 to 1430 ";
+            + " eat lunch ON 03/03/17 FROM 1230 TO 1430 ";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
@@ -36,16 +38,18 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String taskName, String time, String date)
+    public AddCommand(String taskName, String time, String date, String endTime, String deadline)
             throws IllegalValueException {
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagTaskName : tags) {
-            tagSet.add(new Tag(tagTaskName));
-        }
+  //      final Set<Tag> tagSet = new HashSet<>();
+  //      for (String tagTaskName : tags) {
+  //          tagSet.add(new Tag(tagTaskName));
+  //      }
         this.toAdd = new Task(
                 new TaskName(taskName),
                 new Time(time),
                 new Date(date),
+                new EndTime(endTime);
+                new Deadline(deadline);
         );
     }
 

@@ -28,8 +28,8 @@ import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
-import seedu.taskmanager.logic.Logic;
-import seedu.taskmanager.logic.LogicManager;
+import seedu.address.logic.Logic;
+import seedu.address.logic.LogicManager;
 
 /**
  * The main entry point to the application.
