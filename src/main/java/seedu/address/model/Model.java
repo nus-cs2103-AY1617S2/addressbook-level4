@@ -3,7 +3,7 @@ package seedu.address.model;
 import java.util.Set;
 
 import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Task;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.UniquePersonList.DuplicatePersonException;
@@ -22,7 +22,7 @@ public interface Model {
     void deletePerson(ReadOnlyTask target) throws UniquePersonList.PersonNotFoundException;
 
     /** Adds the given person */
-    void addPerson(Person person) throws UniquePersonList.DuplicatePersonException;
+    void addPerson(Task person) throws UniquePersonList.DuplicatePersonException;
 
     /**
      * Updates the person located at {@code filteredPersonListIndex} with {@code editedPerson}.
