@@ -1,4 +1,4 @@
-# taskBook Level 4 - User Guide
+# Task Book Level 4 - User Guide
 
 By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
@@ -75,7 +75,7 @@ Format: `edit INDEX [NAME] [d/DESCRIPTION] [s/START_DATETIME] [e/END_DATETIME] [
 
 Examples:
 
-* `edit 1 d/Get the Fish<br>
+* `edit 1 d/Get the Fish`<br>
   Edits the description of the 1st task to be `Get the Fish`.
 
 ### 2.5. Finding all tasks containing any keyword in their name or description: `find`
