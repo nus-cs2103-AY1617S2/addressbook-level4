@@ -2,6 +2,7 @@ package seedu.toluist.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.TreeSet;
 import java.util.logging.Logger;
 
 import seedu.toluist.commons.core.LogsCenter;
@@ -48,31 +49,31 @@ public class FindController extends Controller {
         String[] keywordList = convertToArray(tokens.get(KEYWORDS_PARAMETER));
 
         //initialize search parameters and variables
-        ArrayList<Task> foundTasks = new ArrayList<Task>();
+        TreeSet<Task> foundTasks = new TreeSet<Task>();
         TodoList todoList = TodoList.load();
 
         for (String keyword : keywordList) {
             if (isSearchByTag) {
-                addTasksIgnoreDuplicate(foundTasks, todoList.getTasksWhosTagsContains(keyword));
+                combineTasks(foundTasks, todoList.getTasksWhosTagsContains(keyword));
             }
 
             if (isSearchByName) {
-                addTasksIgnoreDuplicate(foundTasks, todoList.getTasksWhosDescriptionContains(keyword));
+                combineTasks(foundTasks, todoList.getTasksWhosDescriptionContains(keyword));
             }
         }
 
-        uiStore.setTask(foundTasks);
+        ArrayList<Task> foundTasksList = new ArrayList<Task>();
+        foundTasksList.addAll(foundTasks);
+        uiStore.setTask(foundTasksList);
         renderer.render();
 
         //display formatting
         return formatDisplay(isSearchByTag, isSearchByName, keywordList, foundTasks.size());
     }
 
-    private void addTasksIgnoreDuplicate(ArrayList<Task> originalList, ArrayList<Task> secondaryList) {
-        for (int i = 0; i < secondaryList.size(); i++) {
-            if (!originalList.contains(secondaryList.get(i))) {
-                originalList.add(secondaryList.get(i));
-            }
+    private void combineTasks(TreeSet<Task> originalList, TreeSet<Task> secondaryList) {
+        for (Task task : secondaryList) {
+            originalList.add(task);
         }
     }
 
@@ -82,9 +83,9 @@ public class FindController extends Controller {
         } else {
             String[] keywordList = keywords.split(" ");
             ArrayList<String> replacementList = new ArrayList<String>();
-            for (int i = 0; i < keywordList.length; i++) {
-                if (!keywordList[i].equals("")) {
-                    replacementList.add(keywordList[i]);
+            for (String keyword : keywordList) {
+                if (!keyword.equals("")) {
+                    replacementList.add(keyword);
                 }
             }
             return replacementList.toArray(new String[0]);

@@ -1,6 +1,7 @@
 package seedu.toluist.model;
 
 import java.util.ArrayList;
+import java.util.TreeSet;
 import java.util.Optional;
 
 import seedu.toluist.storage.JsonStorage;
@@ -58,24 +59,24 @@ public class TodoList {
         }
     }
 
-    public ArrayList<Task> getTasksWhosDescriptionContains(String comparison) {
-        ArrayList<Task> foundList = new ArrayList<Task>();
+    public TreeSet<Task> getTasksWhosDescriptionContains(String comparison) {
+        TreeSet<Task> foundList = new TreeSet<Task>();
 
-        for (int i = 0; i < allTasks.size(); i++) {
-            if (allTasks.get(i).isStringContainedInDescriptionIgnoreCase(comparison)) {
-                foundList.add(allTasks.get(i));
+        for (Task task : allTasks) {
+            if (task.isStringContainedInDescriptionIgnoreCase(comparison)) {
+                foundList.add(task);
             }
         }
 
         return foundList;
     }
 
-    public ArrayList<Task> getTasksWhosTagsContains(String comparison) {
-        ArrayList<Task> foundList = new ArrayList<Task>();
+    public TreeSet<Task> getTasksWhosTagsContains(String comparison) {
+        TreeSet<Task> foundList = new TreeSet<Task>();
 
-        for (int i = 0; i < allTasks.size(); i++) {
-            if (allTasks.get(i).isStringContainedInAnyTagIgnoreCase(comparison)) {
-                foundList.add(allTasks.get(i));
+        for (Task task : allTasks) {
+            if (task.isStringContainedInAnyTagIgnoreCase(comparison)) {
+                foundList.add(task);
             }
         }
 
