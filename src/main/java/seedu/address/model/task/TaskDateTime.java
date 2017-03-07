@@ -3,8 +3,11 @@ package seedu.address.model.task;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.ModelManager;
 
 /**
  * Represents a Task's due date in the task manager.
@@ -14,6 +17,8 @@ public class TaskDateTime {
     
     public static final String MESSAGE_DATE_TIME_CONSTRAINTS = "Due date should contain day/month/year hour:minute";
 
+    private static final Logger logger = LogsCenter.getLogger(TaskDateTime.class);
+    
     public final String value;
     public final Integer day;
     public final Integer month;

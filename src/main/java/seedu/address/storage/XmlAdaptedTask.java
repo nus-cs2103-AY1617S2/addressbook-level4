@@ -20,6 +20,7 @@ public class XmlAdaptedTask {
 
     @XmlElement(required = true)
     private String content;
+    @XmlElement(required = true)
     private String dateTime;
 
     @XmlElement
