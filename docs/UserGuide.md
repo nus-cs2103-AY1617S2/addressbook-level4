@@ -1,4 +1,4 @@
-# Awesome ToDo - User Guide
+# Awesome Todo - User Guide
 
 By : `T11-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
@@ -17,14 +17,14 @@ By : `T11-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nb
    > This app will not work with earlier versions of Java 8.
 
 1. Download the latest `awesometodo.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for AwesomeToDo.
+2. Copy the file to the folder you want to use as the home folder for AwesomeTodo.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
-   * **`list`** : lists all ToDos
+   * **`list`** : lists all Todos
    * **`add`**` Take the dog for a walk s/11-11-2017 e/11-11-2017/17:30` :
-   * **`delete`**` 3` : deletes the 3rd ToDo shown in the current list
+   * **`delete`**` 3` : deletes the 3rd Todo shown in the current list
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
@@ -46,20 +46,20 @@ Format: `help`
 
 ### 2.2. Adding a todo: `add`
 
-Adds a task<br>
-Format: `add task TODO`
+Adds a floating task<br>
+Format: `add TODO [t/TAG]`
 
 Adds an event<br>
-Format: `add event TODO s/STARTTIME e/ENDTIME`
+Format: `add TODO s/STARTTIME e/ENDTIME [t/tag]`
 
 Adds a deadline<br>
-Format: `add dl TODO d/DEADLINE`
+Format: `add TODO d/DEADLINE [t/tag]`
 
 Examples:
 
-* `add task Finish math homework`
-* `add event Take the dog for a walk s/11-11-2017/17:00 e/11-11-17/17:30`
-* `add deadline Finish programming project d/11-11-2017/17:00`
+* `add Finish math homework t/school`
+* `add Take the dog for a walk s/11-11-2017/17:00 e/11-11-17/17:30`
+* `add Finish programming project d/11-11-2017/17:00`
 
 ### 2.3. Listing all todos : `list`
 
@@ -72,8 +72,8 @@ Format: `list u`
 Shows a list of all completed todos.<br>
 Format: `list c`
 
-Shows a list of all tasks.<br>
-Format: `list t`
+Shows a list of all floating tasks.<br>
+Format: `list f`
 
 Shows a list of all deadlines.<br>
 Format: `list d`
@@ -83,14 +83,14 @@ Format: `list e`
 
 ### 2.4. Editing a todo : `edit`
 
-Edits an existing event.<br>
-Format: `edit INDEX [TASK] [s/STARTTIME] [e/ENDTIME]`
+Edits an event.<br>
+Format: `edit INDEX [TASK] [s/STARTTIME] [e/ENDTIME] [t/TAG]`
 
-Edits an existing deadline.<br>
-Format: `edit INDEX [TASK] [d/DEADLINE]`
+Edits an deadline.<br>
+Format: `edit INDEX [TASK] [d/DEADLINE] [t/TAG]`
 
-Edits an existing task.<br>
-Format: `edit INDEX [TASK]`
+Edits an task.<br>
+Format: `edit INDEX [TASK] [t/TAG]`
 
 
 > * Edits the todo at the specified `INDEX`.
@@ -182,7 +182,7 @@ Examples:
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
-       the file that contains the data of your previous Awesome ToDo folder.
+       the file that contains the data of your previous Awesome Todo folder.
 
 ## 4. Command Summary
 
