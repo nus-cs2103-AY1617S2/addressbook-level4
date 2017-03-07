@@ -30,6 +30,9 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         name.setText(person.getContent().fullContent);
         id.setText(displayedIndex + ". ");
+        phone.setText("Due by");
+        address.setText("");
+        email.setText("");
         initTags(person);
     }
 
