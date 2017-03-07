@@ -118,10 +118,4 @@ public class UiManager extends ComponentManager implements Ui {
         mainWindow.getTodoListPanel().scrollTo(event.targetIndex);
     }
 
-//    @Subscribe
-//    private void handleTodoPanelSelectionChangedEvent(TodoPanelSelectionChangedEvent event) {
-//        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-//        mainWindow.loadTodoPage(event.getNewSelection());
-//    }
-
 }
