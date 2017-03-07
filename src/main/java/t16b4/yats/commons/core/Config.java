@@ -42,20 +42,20 @@ public class Config {
         this.userPrefsFilePath = userPrefsFilePath;
     }
 
-    public String getItemListFilePath() {
+    public String getTaskListFilePath() {
         return itemListFilePath;
     }
 
-    public void setItemListFilePath(String itemListFilePath) {
-        this.itemListFilePath = itemListFilePath;
+    public void setTaskListFilePath(String addressBookFilePath) {
+        this.itemListFilePath = addressBookFilePath;
     }
 
-    public String getItemListName() {
+    public String getTaskListName() {
         return itemListName;
     }
 
-    public void setItemListName(String itemListName) {
-        this.itemListName = itemListName;
+    public void setTaskListName(String addressBookName) {
+        this.itemListName = addressBookName;
     }
 
 
