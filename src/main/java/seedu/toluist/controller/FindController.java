@@ -38,14 +38,14 @@ public class FindController extends Controller {
     public CommandResult execute(String command) {
         logger.info(getClass() + "will handle command");
 
-        //initialize variables for searching
-        ArrayList<Task> foundTasks = new ArrayList<Task>();
+        //initialize keywords and variables for searching
         HashMap<String, String> tokens = tokenize(command);
         boolean isSearchByTag = tokens.get(SEARCH_BY_TAG).equals(TRUE_COMMAND);
         boolean isSearchByName = tokens.get(SEARCH_BY_NAME).equals(TRUE_COMMAND);
-        String keywords = tokens.get(KEYWORDS);
-        String[] keywordList = keywords.split(" ");
-        keywordList = removeEmptySpaces(keywordList);
+        String[] keywordList = convertToArray(tokens.get(KEYWORDS));
+
+        //initialize search parameters and variables
+        ArrayList<Task> foundTasks = new ArrayList<Task>();
         boolean isFound = false;
         TodoList todoList = TodoList.load();
         ArrayList<Task> taskList = todoList.getTasks();
@@ -84,7 +84,8 @@ public class FindController extends Controller {
         return formatDisplay(isSearchByTag, isSearchByName, keywordList, foundValue);
     }
 
-    private String[] removeEmptySpaces(String[] keywordList) {
+    private String[] convertToArray(String keywords) {
+        String[] keywordList = keywords.split(" ");
         ArrayList<String> replacementList = new ArrayList<String>();
         for (int i = 0; i < keywordList.length; i++) {
             if (!keywordList[i].equals("")) {
