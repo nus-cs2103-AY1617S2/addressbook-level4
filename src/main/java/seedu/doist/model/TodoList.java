@@ -1,6 +1,7 @@
 package seedu.doist.model;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -53,6 +54,10 @@ public class TodoList implements ReadOnlyTodoList {
     public void setTasks(List<? extends ReadOnlyTask> persons)
             throws UniqueTaskList.DuplicateTaskException {
         this.tasks.setTasks(persons);
+    }
+
+    public void sortTasks(Comparator<ReadOnlyTask> comparator) {
+        this.tasks.sort(comparator);
     }
 
     public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {

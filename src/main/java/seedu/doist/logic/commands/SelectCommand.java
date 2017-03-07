@@ -21,7 +21,7 @@ public class SelectCommand extends Command {
     public static ArrayList<String> commandWords = new ArrayList<>(Arrays.asList("select"));
     public static final String DEFAULT_COMMAND_WORD = "select";
 
-    public static final String MESSAGE_USAGE = getUsageTextForCommandWords()
+    public static final String MESSAGE_USAGE = info().getUsageTextForCommandWords()
             + ": Selects the person identified by the index number used in the last person listing.\n"
             + "Parameters: INDEX (must be a positive integer)\n" + "Example: " + DEFAULT_COMMAND_WORD + " 1";
 
@@ -45,24 +45,7 @@ public class SelectCommand extends Command {
 
     }
 
-    /**
-     * @return a string containing all the command words to be shown in the
-     *         usage message, in the format of (word1|word2|...)
-     */
-    protected static String getUsageTextForCommandWords() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("(");
-        if (!commandWords.contains(DEFAULT_COMMAND_WORD)) {
-            sb.append(DEFAULT_COMMAND_WORD + "|");
-        }
-        for (String commandWord : commandWords) {
-            sb.append(commandWord + "|");
-        }
-        sb.setCharAt(sb.length() - 1, ')');
-        return sb.toString();
-    }
-
-    public static boolean canCommandBeTriggeredByWord(String word) {
-        return commandWords.contains(word) || DEFAULT_COMMAND_WORD.equals(word);
+    public static CommandInfo info() {
+        return new CommandInfo(commandWords, DEFAULT_COMMAND_WORD);
     }
 }

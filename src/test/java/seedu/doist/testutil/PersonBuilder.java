@@ -4,6 +4,7 @@ import seedu.doist.commons.exceptions.IllegalValueException;
 import seedu.doist.model.tag.Tag;
 import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.Description;
+import seedu.doist.model.task.Priority;
 
 /**
  *
@@ -25,6 +26,11 @@ public class PersonBuilder {
 
     public PersonBuilder withName(String name) throws IllegalValueException {
         this.person.setName(new Description(name));
+        return this;
+    }
+
+    public PersonBuilder withPriority(String priority) throws IllegalValueException {
+        this.person.setPriority(new Priority(priority));
         return this;
     }
 

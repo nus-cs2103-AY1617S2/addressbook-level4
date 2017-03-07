@@ -12,23 +12,28 @@ import seedu.doist.model.tag.UniqueTagList;
 public class Task implements ReadOnlyTask {
 
     private Description desc;
-
+    private Priority priority;
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Description name, UniqueTagList tags) {
+    public Task(Description name, Priority priority, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, tags);
         this.desc = name;
+        this.priority = priority;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+    }
+
+    public Task(Description name, UniqueTagList tags) {
+        this(name, new Priority(), tags);
     }
 
     /**
      * Creates a copy of the given ReadOnlyPerson.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getDescription(), source.getTags());
+        this(source.getDescription(), source.getPriority(), source.getTags());
     }
 
     public void setDescription(Description desc) {
@@ -39,6 +44,16 @@ public class Task implements ReadOnlyTask {
     @Override
     public Description getDescription() {
         return desc;
+    }
+
+    public void setPriority(Priority priority) {
+        assert priority != null;
+        this.priority = priority;
+    }
+
+    @Override
+    public Priority getPriority() {
+        return priority;
     }
 
     @Override
