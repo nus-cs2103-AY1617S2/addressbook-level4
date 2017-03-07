@@ -24,7 +24,7 @@ public class TimeTest {
         // valid Time
 
         assertTrue(Time.isValidTime("11:25am"));
-        assertTrue(Time.isValidTime("7:30 am")); // with space 
+        assertTrue(Time.isValidTime("7:30 am")); // with space
         assertTrue(Time.isValidTime("11:01pm")); //minute start with 0
     }
 }
