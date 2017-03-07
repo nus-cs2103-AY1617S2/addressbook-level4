@@ -14,11 +14,7 @@ public interface ReadOnlyTaskManager {
      * Returns an unmodifiable view of the persons list.
      * This list will not contain any duplicate persons.
      */
-<<<<<<< HEAD:src/main/java/seedu/address/model/ReadOnlyTaskManager.java
     ObservableList<ReadOnlyTask> getTaskList();
-=======
-    ObservableList<ReadOnlyTask> getPersonList();
->>>>>>> parent of 9b5fb6b... test:src/main/java/seedu/address/model/ReadOnlyAddressBook.java
 
     /**
      * Returns an unmodifiable view of the tags list.
