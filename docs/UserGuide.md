@@ -78,7 +78,7 @@ Format 2: `(add|do) TASK_DESCRIPTION [\by TIME] [\remind_at REMIND_TIME] [\every
 > - Tasks can have any number of tags (including 0)
 > - The start time and remind time must be earlier or equal to the end time
 > - Tasks can have neither start time and end time. They are floating tasks
-> - Tasks with the same start time and end time or is only associated with one timing are deadlines
+> - Tasks with the same start time and end time or are only associated with one timing are deadlines
 > - For format 2, start time and end time will both be set to `TIME`
 > That is, `add ... by 8pm` is equivalent to `add ... from 8pm to 8pm`
 > - Tasks can have different start time and end time. They are events
