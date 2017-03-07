@@ -136,8 +136,11 @@ Format: `add NAME [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` <br>
 
 Examples: 
 * `add exam`
+  Add a floating task named "exam" into task list.
 * `add exam p/1`
+  Add a priority 1 floating task named "exam" into task list.
 * `add exam p/1 d/SR1`
+  Add a priority 1 floating task named "exam" with description "SR1" into task list.
 * `add exam p/1 d/SR1 t/CS2010`<br>
   Add a priority 1 floating task named "exam" with description "SR1" and tag "CS2010" into task list.
 
@@ -155,11 +158,15 @@ Format: `add NAME on START_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` <br>
 
 Examples:
 * `add exam on 10-22-2017`
+  Add a pending task named "exam" on 22 October 2017, current time into task list.
 * `add exam on 10-22-2017 1500`
+  Add a pending task named "exam" on 22 October 2017, 1500 into task list.
 * `add exam on 10-22-2017 1500 p/1`
+  Add a priority 1 pending task named "exam" on 22 October 2017, 1500 into task list.
 * `add exam on 10-22-2017 1500 p/1 d/SR1`
+  Add a priority 1 pending task named "exam" on 22 October 2017, 1500 with description "SR1" into task list.  
 * `add exam on 10-22-2017 1500 p/1 d/SR1 t/CS2010`<br>
-  Add a priority 1 pending task named "exam" on 22 October 2017 with description "SR1" and tag "CS2010" into task list.
+  Add a priority 1 pending task named "exam" on 22 October 2017, 1500 with description "SR1" and tag "CS2010" into task list.
  
  
 ##### Adding a pending task with END DATE & TIME only
@@ -176,11 +183,15 @@ Format: `add NAME by END_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` <br>
 
 Examples: 
 * `add exam by 10-22-2017`
+  Add a pending task named "exam" that starts now and end by 22 October 2017, 2359 into task list.
 * `add exam by 10-22-2017 1500`
+  Add a pending task named "exam" that starts now and end by 22 October 2017, 1500 into task list.
 * `add exam by 10-22-2017 1500 p/1`
+  Add a priority 1 pending task named "exam" that starts now and end by 22 October 2017, 1500 into task list.
 * `add exam by 10-22-2017 1500 p/1 d/SR1`
+  Add a priority 1 pending task named "exam" that starts now and end by 22 October 2017, 1500 with description "SR1" into task list.
 * `add exam by 10-22-2017 1500 p/1 d/SR1 t/CS2010`<br>
-  Add a priority 1 pending task named "exam" that starts now and end by 22 October 2017 1500 with description "SR1" and tag "CS2010" 
+  Add a priority 1 pending task named "exam" that starts now and end by 22 October 2017, 1500 with description "SR1" and tag "CS2010" 
   into task list.
   
   
@@ -198,11 +209,16 @@ Format: `add NAME from START_DATETIME to END_DATETIME [p/PRIORITY] [d/DESCRIPTIO
 
 Examples:
 * `add exam from 10-22-2017 to 10-22-2016`
+  Add a pending task named "exam" that starts from 22 October 2017, current time to 22 October 2017, 2359 into task list.
 * `add exam from 10-22-2017 1300 to 10-22-2016 1500`
+  Add a pending task named "exam" that starts from 22 October 2017, 1300 to 22 October 2017, 1500 into task list.
 * `add exam from 10-22-2017 1300 to 10-22-2016 1500 p/1`
+  Add a priority 1 pending task named "exam" that starts from 22 October 2017, 1300 to 22 October 2017, 1500 into task list.
 * `add exam from 10-22-2017 1300 to 10-22-2016 1500 p/1 d/SR1`
+  Add a priority 1 pending task named "exam" that starts from 22 October 2017, 1300 to 22 October 2017, 1500 with description "SR1" into 
+  task list.
 * `add exam from 10-22-2017 1300 to 10-22-2016 1500 p/1 d/SR1 t/CS2010`<br>
-  Add a priority 1 pending task named "exam" that starts from 22 October 2017 1300 to 22 October 2017 1500 with description "SR1" and 
+  Add a priority 1 pending task named "exam" that starts from 22 October 2017, 1300 to 22 October 2017, 1500 with description "SR1" and 
   tag "CS2010" into task list.
   
 #### Adding a recurring task 
@@ -310,17 +326,17 @@ Format: `Edit INDEX|NAME [at|on|by|from START_DATETIME to END_DATETIME] [every D
 Examples:
 
 * `Edit 1 on 10-22-2017 1500 p/1 d/SR1`<br>
-   Edit the first task in the task list such that it is a priority 1 pending task named "exam" on 22 October 2017 with description 
+   Edit the first task in the task list such that it is a priority 1 pending task named "exam" on 22 October 2017, 1500 with description 
    "SR1".
 * `Edit exam on 10-22-2017 1500 p/1 d/SR1`<br>
-   Edit a task named "exam" in the task list such that it is a priority 1 pending task named "exam" on 22 October 2017 with description 
-   "SR1".
+   Edit a task named "exam" in the task list such that it is a priority 1 pending task named "exam" on 22 October 2017, 1500 with 
+   description "SR1".
 * `Edit exam on 10-22-2017 1500 p/1 d/SR1 t/CS2010`<br>
-   Edit a task named "exam" in the task list such that it is a priority 1 pending task named "exam" on 22 October 2017 with description 
-   "SR1" and append tag "CS2010" to "exam".
+   Edit a task named "exam" in the task list such that it is a priority 1 pending task named "exam" on 22 October 2017, 1500  with 
+   description "SR1" and append tag "CS2010" to "exam".
 * `Edit exam on 10-22-2017 1500 p/1 d/SR1 t/none`<br>
-   Edit a task named "exam" in the task list such that it is a priority 1 pending task named "exam" on 22 October 2017 with description 
-   "SR1" and remove all tags from "exam".
+   Edit a task named "exam" in the task list such that it is a priority 1 pending task named "exam" on 22 October 2017, 1500  with 
+   description "SR1" and remove all tags from "exam".
 * `Edit exam from 10-22-2017 1300 to 10-22-2017 1500 every year p/1 d/SR1 t/CS2010`<br>
    Edit the first task in the task list such that it start on the 22nd October of every year 1300 to 22nd October of every year 1500 
    with description "SR1" and append tag "CS2010" to "exam".
@@ -336,11 +352,11 @@ Format: `del NAME|INDEX|TAG`<br>
 > * Deleted task can be restored with the `undo` command.
 
 Examples: 
-* `delete exam`
+* `delete exam`<br>
    Edit all tasks named "exam" in the task list.
-* `delete 1`
+* `delete 1`<br>
    Delete the first task in the task list.
-* `delete CS2010`
+* `delete CS2010`<br>
    Delete all tasks containing tag "CS2010" 
 
 ### Viewing task
