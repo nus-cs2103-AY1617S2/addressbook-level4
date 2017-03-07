@@ -15,14 +15,14 @@ import t16b4.yats.model.tag.Tag;
 import t16b4.yats.model.tag.UniqueTagList;
 
 /**
- * Adds a task to the taskmanager.
+ * Adds a task to the TaskManager.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the address book. "
-            + "Parameters: NAME p/PHONE e/EMAIL a/ADDRESS  [t/TAG]...\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an task or event to the task manager. "
+            + "Parameters: task name d/PHONE e/EMAIL a/ADDRESS  [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
             + " John Doe p/98765432 e/johnd@gmail.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney";
 
@@ -36,7 +36,7 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, String phone, String email, String address, Set<String> tags)
+    public AddCommand(String name, String deadline, String timing, String description, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
@@ -44,9 +44,9 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Task(
                 new Title(name),
-                new Deadline(phone),
-                new Timing(email),
-                new Description(address),
+                new Deadline(deadline),
+                new Timing(timing),
+                new Description(description),
                 new UniqueTagList(tagSet)
         );
     }

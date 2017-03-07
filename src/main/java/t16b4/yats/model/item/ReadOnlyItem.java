@@ -3,7 +3,7 @@ package t16b4.yats.model.item;
 import t16b4.yats.model.tag.UniqueTagList;
 
 /**
- * A read-only immutable interface for a Person in the addressbook.
+ * A read-only immutable interface for an Item in the TaskManager.
  * Implementations should guarantee: details are present and not null, field values are validated.
  */
 public interface ReadOnlyItem {

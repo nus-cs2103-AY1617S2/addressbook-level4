@@ -11,13 +11,12 @@ public class DescriptionTest {
 
     @Test
     public void isValidDescription() {
-        // invalid addresses
-        assertFalse(Description.isValidDescription("")); // empty string
-        assertFalse(Description.isValidDescription(" ")); // spaces only
-
-        // valid addresses
-        assertTrue(Description.isValidDescription("Blk 456, Den Road, #01-355"));
-        assertTrue(Description.isValidDescription("-")); // one character
-        assertTrue(Description.isValidDescription("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
+        // valid descriptions
+        assertTrue(Description.isValidDescription("")); // empty string
+        assertTrue(Description.isValidDescription(" ")); // spaces only
+        assertTrue(Description.isValidDescription("I have a task that is less than 1000 characters"));
+        
+        // invalid descriptions
+        assertFalse(Description.isValidDescription(new String(new char[101]).replace("\0", "overloaded")));
     }
 }

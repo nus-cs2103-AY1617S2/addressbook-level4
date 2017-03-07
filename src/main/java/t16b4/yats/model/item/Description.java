@@ -7,7 +7,7 @@ package t16b4.yats.model.item;
 public class Description {
 
     public static final String MESSAGE_DESCRIPTION_CONSTRAINTS =
-            "Task description can take any values but must be a string. It can be left blank.";
+            "Task description can take any values, but can only be 1000 characters in length. It can be left blank.";
 
     
     public final String value;
@@ -35,13 +35,15 @@ public class Description {
     }
 
     /**
-     * Returns true if a given string is a valid Description.
+     * Returns true if a given string is a valid Description. String should be blank("") and never null.
      */
     public static boolean isValidDescription(String string) {
-        if (string != null) {
-            return true;
-        } else {
+        if (string == null) {
             return false;
+        } else if (string.length() > 1000) {
+            return false;
+        } else {
+            return true;
         }
     }
 

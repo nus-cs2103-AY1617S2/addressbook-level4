@@ -9,7 +9,7 @@ import t16b4.yats.commons.exceptions.IllegalValueException;
  */
 public class Timing {
 
-    public static final String MESSAGE_EMAIL_CONSTRAINTS =
+    public static final String MESSAGE_TIMING_CONSTRAINTS =
             "Person emails should be 2 alphanumeric/period strings separated by '@'";
     public static final String EMAIL_VALIDATION_REGEX = "[\\w\\.]+@[\\w\\.]+";
 
@@ -24,7 +24,7 @@ public class Timing {
         assert email != null;
         String trimmedEmail = email.trim();
         if (!isValidEmail(trimmedEmail)) {
-            throw new IllegalValueException(MESSAGE_EMAIL_CONSTRAINTS);
+            throw new IllegalValueException(MESSAGE_TIMING_CONSTRAINTS);
         }
         this.value = trimmedEmail;
     }
