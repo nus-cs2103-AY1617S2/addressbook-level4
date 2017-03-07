@@ -16,7 +16,7 @@ public class Location {
     public boolean equals(Object obj) {
         return obj == this
                 || (obj instanceof Location
-                        && this.value.equals(((Location)obj).value));
+                        && this.value.equals(((Location) obj).value));
     }
 
     @Override

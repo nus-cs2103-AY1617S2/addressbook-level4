@@ -32,9 +32,9 @@ public class DateTime {
 
     public final LocalDateTime dateTime;
 
-    public DateTime(int year, int month, int day, int hour, int minute) throws InvalidDateTimeException{
+    public DateTime(int year, int month, int day, int hour, int minute) throws InvalidDateTimeException {
         LocalDateTime dateTime = LocalDateTime.of(year, month, day, hour, minute);
-        if(!isValidDateTime(dateTime)) {
+        if (!isValidDateTime(dateTime)) {
             throw new InvalidDateTimeException();
         }
         this.dateTime = dateTime;
