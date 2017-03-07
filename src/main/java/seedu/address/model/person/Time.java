@@ -3,7 +3,8 @@ package seedu.address.model.person;
 import seedu.address.commons.exceptions.IllegalValueException;
 
 public class Time {
-    public static final String MESSAGE_TIME_CONSTRAINTS = "Time should be in hh:mm am/pm format. hh range from 1 to 12 and mm range from 00 to 59.";
+    public static final String MESSAGE_TIME_CONSTRAINTS = 
+            "Time should be in hh:mm am/pm format. hh range from 1 to 12 and mm range from 00 to 59.";
     public static final String TIME_VALIDATION_REGEX = "(1[012]|[1-9]):[0-5][0-9](\\s)?(?i)(am|pm)";
 
     public final String value;
