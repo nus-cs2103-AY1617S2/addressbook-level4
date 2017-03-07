@@ -2,13 +2,13 @@ package seedu.address.model.util;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyTaskManager;
-import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.TaskManager;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Description;
 import seedu.address.model.task.IdentificationNumber;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Task;
+import seedu.address.model.tag.UniqueTagList;
 
 public class SampleDataUtil {
     public static Task[] getSampleTasks() {
@@ -25,7 +25,7 @@ public class SampleDataUtil {
                 new Task(new Name("Meeting with Charlotte Oliveiro"), new Deadline("02/02/2017"),
                     new Description("Prepare for Meeting with Charlotte"),
                     new IdentificationNumber("3"),
-                    new UniqueTagList("important","meeting")),
+                    new UniqueTagList("important", "meeting")),
                 new Task(new Name("Dinner outing with family"), new Deadline("17/12/2017"),
                     new Description("Going to the zoo with family"),
                     new IdentificationNumber("4"),
