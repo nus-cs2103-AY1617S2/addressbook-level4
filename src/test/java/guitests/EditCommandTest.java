@@ -9,8 +9,8 @@ import guitests.guihandles.TaskCardHandle;
 import seedu.taskboss.commons.core.Messages;
 import seedu.taskboss.logic.commands.EditCommand;
 import seedu.taskboss.model.category.Tag;
-import seedu.taskboss.model.task.Address;
 import seedu.taskboss.model.task.Email;
+import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
 import seedu.taskboss.testutil.TaskBuilder;
@@ -29,7 +29,7 @@ public class EditCommandTest extends TaskBossGuiTest {
         int taskBossIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Bobby").withPriorityLevel("1")
-                .withEmail("bobby@gmail.com").withAddress("Block 123, Bobby Street 3").withTags("husband").build();
+                .withEmail("bobby@gmail.com").withInformation("Block 123, Bobby Street 3").withTags("husband").build();
 
         assertEditSuccess(taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
     }
@@ -99,8 +99,8 @@ public class EditCommandTest extends TaskBossGuiTest {
         commandBox.runCommand("edit 1 e/yahoo!!!");
         assertResultMessage(Email.MESSAGE_EMAIL_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 a/");
-        assertResultMessage(Address.MESSAGE_ADDRESS_CONSTRAINTS);
+        commandBox.runCommand("edit 1 i/");
+        assertResultMessage(Information.MESSAGE_INFORMATION_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 t/*&");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
@@ -109,7 +109,8 @@ public class EditCommandTest extends TaskBossGuiTest {
     @Test
     public void edit_duplicateTask_failure() {
         commandBox.runCommand("edit 3 Alice Pauline p/3 e/alice@gmail.com "
-                                + "a/123, Jurong West Ave 6, #08-111 t/friends");
+                                + "i/123, Jurong West Ave 6, #08-111 t/friends");
+
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 

@@ -4,54 +4,54 @@
         <name>Hans Muster</name>
         <priorityLevel isPrivate="false">2</priorityLevel>
         <email isPrivate="false">hans@google.com</email>
-        <address isPrivate="false">4th street</address>
+        <information isPrivate="false">4th street</information>
     </tasks>
     <tasks>
         <name>Ruth Mueller</name>
         <priorityLevel isPrivate="false">2</priorityLevel>
         <email isPrivate="false">ruth@google.com</email>
-        <address isPrivate="false">81th street</address>
+        <information isPrivate="false">81th street</information>
     </tasks>
     <tasks>
         <name>Heinz Kurz</name>
         <priorityLevel isPrivate="false">3</priorityLevel>
         <email isPrivate="false">heinz@yahoo.com</email>
-        <address isPrivate="false">wall street</address>
+        <information isPrivate="false">wall street</information>
     </tasks>
     <tasks>
         <name>Cornelia Meier</name>
         <priorityLevel isPrivate="false">2</priorityLevel>
         <email isPrivate="false">cornelia@google.com</email>
-        <address isPrivate="false">10th street</address>
+        <information isPrivate="false">10th street</information>
     </tasks>
     <tasks>
         <name>Werner Meyer</name>
         <priorityLevel isPrivate="false">2</priorityLevel>
         <email isPrivate="false">werner@gmail.com</email>
-        <address isPrivate="false">michegan ave</address>
+        <information isPrivate="false">michegan ave</information>
     </tasks>
     <tasks>
         <name>Lydia Kunz</name>
         <priorityLevel isPrivate="false">2</priorityLevel>
         <email isPrivate="false">lydia@gmail.com</email>
-        <address isPrivate="false">little tokyo</address>
+        <information isPrivate="false">little tokyo</information>
     </tasks>
     <tasks>
         <name>Anna Best</name>
         <priorityLevel isPrivate="false">2</priorityLevel>
         <email isPrivate="false">anna@google.com</email>
-        <address isPrivate="false">4th street</address>
+        <information isPrivate="false">4th street</information>
     </tasks>
     <tasks>
         <name>Stefan Meier</name>
         <priorityLevel isPrivate="false">2</priorityLevel>
         <email isPrivate="false">stefan@mail.com</email>
-        <address isPrivate="false">little india</address>
+        <information isPrivate="false">little india</information>
     </tasks>
     <tasks>
         <name>Martin Mueller</name>
         <priorityLevel isPrivate="false">2</priorityLevel>
         <email isPrivate="false">hans@google.com</email>
-        <address isPrivate="false">chicago ave</address>
+        <information isPrivate="false">chicago ave</information>
     </tasks>
 </taskboss>

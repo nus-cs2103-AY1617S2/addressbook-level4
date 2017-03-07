@@ -1,8 +1,8 @@
 package seedu.taskboss.logic.parser;
 
 import static seedu.taskboss.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_INFORMATION;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -24,14 +24,14 @@ public class AddCommandParser {
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_EMAIL, PREFIX_INFORMATION, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         try {
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
                     argsTokenizer.getValue(PREFIX_PRIORITY).get(),
                     argsTokenizer.getValue(PREFIX_EMAIL).get(),
-                    argsTokenizer.getValue(PREFIX_ADDRESS).get(),
+                    argsTokenizer.getValue(PREFIX_INFORMATION).get(),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
             );
         } catch (NoSuchElementException nsee) {

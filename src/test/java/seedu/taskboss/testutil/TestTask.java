@@ -1,8 +1,8 @@
 package seedu.taskboss.testutil;
 
 import seedu.taskboss.model.category.UniqueTagList;
-import seedu.taskboss.model.task.Address;
 import seedu.taskboss.model.task.Email;
+import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
 import seedu.taskboss.model.task.ReadOnlyTask;
@@ -13,7 +13,7 @@ import seedu.taskboss.model.task.ReadOnlyTask;
 public class TestTask implements ReadOnlyTask {
 
     private Name name;
-    private Address address;
+    private Information information;
     private Email email;
     private PriorityLevel priorityLevel;
     private UniqueTagList tags;
@@ -23,22 +23,22 @@ public class TestTask implements ReadOnlyTask {
     }
 
     /**
-     * Creates a copy of {@code personToCopy}.
+     * Creates a copy of {@code taskToCopy}.
      */
-    public TestTask(TestTask personToCopy) {
-        this.name = personToCopy.getName();
-        this.priorityLevel = personToCopy.getPriorityLevel();
-        this.email = personToCopy.getEmail();
-        this.address = personToCopy.getAddress();
-        this.tags = personToCopy.getTags();
+    public TestTask(TestTask taskToCopy) {
+        this.name = taskToCopy.getName();
+        this.priorityLevel = taskToCopy.getPriorityLevel();
+        this.email = taskToCopy.getEmail();
+        this.information = taskToCopy.getInformation();
+        this.tags = taskToCopy.getTags();
     }
 
     public void setName(Name name) {
         this.name = name;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setInformation(Information information) {
+        this.information = information;
     }
 
     public void setEmail(Email email) {
@@ -69,8 +69,8 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Address getAddress() {
-        return address;
+    public Information getInformation() {
+        return information;
     }
 
     @Override
@@ -86,7 +86,7 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
-        sb.append("a/" + this.getAddress().value + " ");
+        sb.append("i/" + this.getInformation().value + " ");
         sb.append("p/" + this.getPriorityLevel().value + " ");
         sb.append("e/" + this.getEmail().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
