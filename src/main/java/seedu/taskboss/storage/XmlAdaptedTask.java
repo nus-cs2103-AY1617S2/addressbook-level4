@@ -11,7 +11,7 @@ import seedu.taskboss.model.category.UniqueTagList;
 import seedu.taskboss.model.task.Address;
 import seedu.taskboss.model.task.Email;
 import seedu.taskboss.model.task.Name;
-import seedu.taskboss.model.task.Phone;
+import seedu.taskboss.model.task.PriorityLevel;
 import seedu.taskboss.model.task.ReadOnlyTask;
 import seedu.taskboss.model.task.Task;
 
@@ -23,7 +23,7 @@ public class XmlAdaptedTask {
     @XmlElement(required = true)
     private String name;
     @XmlElement(required = true)
-    private String phone;
+    private String priorityLevel;
     @XmlElement(required = true)
     private String email;
     @XmlElement(required = true)
@@ -46,7 +46,7 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getName().fullName;
-        phone = source.getPhone().value;
+        priorityLevel = source.getPriorityLevel().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
         tagged = new ArrayList<>();
@@ -66,10 +66,10 @@ public class XmlAdaptedTask {
             personTags.add(tag.toModelType());
         }
         final Name name = new Name(this.name);
-        final Phone phone = new Phone(this.phone);
+        final PriorityLevel priorityLevel = new PriorityLevel(this.priorityLevel);
         final Email email = new Email(this.email);
         final Address address = new Address(this.address);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Task(name, phone, email, address, tags);
+        return new Task(name, priorityLevel, email, address, tags);
     }
 }

@@ -10,7 +10,7 @@ import seedu.taskboss.model.category.UniqueTagList;
 import seedu.taskboss.model.task.Address;
 import seedu.taskboss.model.task.Email;
 import seedu.taskboss.model.task.Name;
-import seedu.taskboss.model.task.Phone;
+import seedu.taskboss.model.task.PriorityLevel;
 import seedu.taskboss.model.task.Task;
 import seedu.taskboss.model.task.UniqueTaskList;
 
@@ -44,7 +44,7 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Task(
                 new Name(name),
-                new Phone(phone),
+                new PriorityLevel(phone),
                 new Email(email),
                 new Address(address),
                 new UniqueTagList(tagSet)

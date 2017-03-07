@@ -4,7 +4,7 @@ import seedu.taskboss.model.category.UniqueTagList;
 import seedu.taskboss.model.task.Address;
 import seedu.taskboss.model.task.Email;
 import seedu.taskboss.model.task.Name;
-import seedu.taskboss.model.task.Phone;
+import seedu.taskboss.model.task.PriorityLevel;
 import seedu.taskboss.model.task.ReadOnlyTask;
 
 /**
@@ -15,7 +15,7 @@ public class TestTask implements ReadOnlyTask {
     private Name name;
     private Address address;
     private Email email;
-    private Phone phone;
+    private PriorityLevel priorityLevel;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -27,7 +27,7 @@ public class TestTask implements ReadOnlyTask {
      */
     public TestTask(TestTask personToCopy) {
         this.name = personToCopy.getName();
-        this.phone = personToCopy.getPhone();
+        this.priorityLevel = personToCopy.getPriorityLevel();
         this.email = personToCopy.getEmail();
         this.address = personToCopy.getAddress();
         this.tags = personToCopy.getTags();
@@ -45,8 +45,8 @@ public class TestTask implements ReadOnlyTask {
         this.email = email;
     }
 
-    public void setPhone(Phone phone) {
-        this.phone = phone;
+    public void setPriorityLevel(PriorityLevel priorityLevel) {
+        this.priorityLevel = priorityLevel;
     }
 
     public void setTags(UniqueTagList tags) {
@@ -59,8 +59,8 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Phone getPhone() {
-        return phone;
+    public PriorityLevel getPriorityLevel() {
+        return priorityLevel;
     }
 
     @Override
@@ -87,7 +87,7 @@ public class TestTask implements ReadOnlyTask {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
         sb.append("a/" + this.getAddress().value + " ");
-        sb.append("p/" + this.getPhone().value + " ");
+        sb.append("p/" + this.getPriorityLevel().value + " ");
         sb.append("e/" + this.getEmail().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();

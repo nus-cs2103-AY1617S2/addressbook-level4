@@ -6,7 +6,7 @@ import seedu.taskboss.model.category.UniqueTagList;
 import seedu.taskboss.model.task.Address;
 import seedu.taskboss.model.task.Email;
 import seedu.taskboss.model.task.Name;
-import seedu.taskboss.model.task.Phone;
+import seedu.taskboss.model.task.PriorityLevel;
 
 /**
  *
@@ -44,8 +44,8 @@ public class TaskBuilder {
         return this;
     }
 
-    public TaskBuilder withPhone(String phone) throws IllegalValueException {
-        this.person.setPhone(new Phone(phone));
+    public TaskBuilder withPriorityLevel(String priorityLevel) throws IllegalValueException {
+        this.person.setPriorityLevel(new PriorityLevel(priorityLevel));
         return this;
     }
 
