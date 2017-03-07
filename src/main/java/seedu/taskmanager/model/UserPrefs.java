@@ -1,8 +1,8 @@
-package seedu.address.model;
+package seedu.taskmanager.model;
 
 import java.util.Objects;
 
-import seedu.address.commons.core.GuiSettings;
+import seedu.taskmanager.commons.core.GuiSettings;
 
 /**
  * Represents User's preferences.

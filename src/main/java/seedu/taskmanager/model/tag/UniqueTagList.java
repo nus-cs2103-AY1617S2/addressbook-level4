@@ -1,4 +1,4 @@
-package seedu.address.model.tag;
+package seedu.taskmanager.model.tag;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,10 +10,10 @@ import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.commons.exceptions.DuplicateDataException;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.CollectionUtil;
+import seedu.taskmanager.commons.core.UnmodifiableObservableList;
+import seedu.taskmanager.commons.exceptions.DuplicateDataException;
+import seedu.taskmanager.commons.exceptions.IllegalValueException;
+import seedu.taskmanager.commons.util.CollectionUtil;
 
 /**
  * A list of tags that enforces no nulls and uniqueness between its elements.
