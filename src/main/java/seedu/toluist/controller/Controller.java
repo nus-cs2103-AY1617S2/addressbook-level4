@@ -59,4 +59,8 @@ public abstract class Controller {
     public boolean matchesCommand(String command) {
         return true;
     }
+
+    public static String[] getCommandWords() {
+        return new String[] {};
+    }
 }
