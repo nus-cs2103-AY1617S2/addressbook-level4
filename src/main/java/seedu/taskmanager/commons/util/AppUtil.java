@@ -1,7 +1,7 @@
 package seedu.taskmanager.commons.util;
 
 import javafx.scene.image.Image;
-import seedu.address.MainApp;
+import seedu.taskmanager.MainApp;
 
 /**
  * A container for App specific utility functions

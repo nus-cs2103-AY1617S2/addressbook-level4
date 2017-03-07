@@ -16,24 +16,24 @@ public class Task implements ReadOnlyTask {
     private Date date;
 
 
-    private UniqueTagList tags;
+//    private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(TaskName taskName, Time time, Date date, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(taskName, time, date, tags);
+    public Task(TaskName taskName, Time time, Date date/*, UniqueTagList tags*/) {
+        assert !CollectionUtil.isAnyNull(taskName, time, date/*, tags*/);
         this.taskName = taskName;
         this.time = time;
         this.date = date;
-        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+//        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getTaskName(), source.getTime(), source.getDate(), source.getTags());
+        this(source.getTaskName(), source.getTime(), source.getDate()/* source.getTags()*/);
     }
 
     public void setTaskName(TaskName taskName) {
@@ -66,17 +66,17 @@ public class Task implements ReadOnlyTask {
         return date;
     }
 
-    @Override
-    public UniqueTagList getTags() {
-        return new UniqueTagList(tags);
-    }
+//    @Override
+//    public UniqueTagList getTags() {
+//        return new UniqueTagList(tags);
+//    }
 
     /**
      * Replaces this person's tags with the tags in the argument tag list.
      */
-    public void setTags(UniqueTagList replacement) {
-        tags.setTags(replacement);
-    }
+//    public void setTags(UniqueTagList replacement) {
+//        tags.setTags(replacement);
+//    }
 
     /**
      * Updates this person with the details of {@code replacement}.
@@ -87,7 +87,7 @@ public class Task implements ReadOnlyTask {
         this.setTaskName(replacement.getTaskName());
         this.setTime(replacement.getTime());
         this.setDate(replacement.getDate());
-        this.setTags(replacement.getTags());
+//        this.setTags(replacement.getTags());
     }
 
     @Override
@@ -100,7 +100,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(taskName, time, date, tags);
+        return Objects.hash(taskName, time, date/*, tags*/);
     }
 
     @Override

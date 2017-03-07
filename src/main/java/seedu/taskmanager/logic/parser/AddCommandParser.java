@@ -32,9 +32,9 @@ public class AddCommandParser {
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
                     argsTokenizer.getValue(PREFIX_TIME).get(),
-                    argsTokenizer.getValue(PREFIX_DATE).get(),
-                    argsTokenizer.getValue(PREFIX_DEADLINE).get(),
-                    argsTokenizer.getValue(PREFIX_ENDTIME).get()
+                    argsTokenizer.getValue(PREFIX_DATE).get()
+//                    argsTokenizer.getValue(PREFIX_DEADLINE).get(),
+//                    argsTokenizer.getValue(PREFIX_ENDTIME).get()
                   /*  argsTokenizer.getValue(PREFIX_ADDRESS).get(),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)) */
             );

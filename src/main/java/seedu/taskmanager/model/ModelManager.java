@@ -22,53 +22,53 @@ import seedu.taskmanager.model.task.UniqueTaskList.TaskNotFoundException;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final ProcrastiNomore procrastiNomore;
+    private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
 
     /**
-     * Initializes a ModelManager with the given ProcrastiNomore and userPrefs.
+     * Initializes a ModelManager with the given taskManager and userPrefs.
      */
-    public ModelManager(ReadOnlyProcrastiNomore procrastiNomore, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTaskManager taskManager, UserPrefs userPrefs) {
         super();
-        assert !CollectionUtil.isAnyNull(procrastiNomore, userPrefs);
+        assert !CollectionUtil.isAnyNull(taskManager, userPrefs);
 
-        logger.fine("Initializing with ProcrastiNomore: " + procrastiNomore + " and user prefs " + userPrefs);
+        logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
 
-        this.procrastiNomore = new ProcrastiNomore(procrastiNomore);
-        filteredTasks = new FilteredList<>(this.procrastiNomore.getTaskList());
+        this.taskManager = new TaskManager(taskManager);
+        filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
     }
 
     public ModelManager() {
-        this(new ProcrastiNomore(), new UserPrefs());
+        this(new TaskManager(), new UserPrefs());
     }
 
     @Override
-    public void resetData(ReadOnlyProcrastiNomore newData) {
-        procrastiNomore.resetData(newData);
-        indicateProcrastiNomoreChanged();
+    public void resetData(ReadOnlyTaskManager newData) {
+        taskManager.resetData(newData);
+        indicateTaskManagerChanged();
     }
 
     @Override
-    public ReadOnlyProcrastiNomore getProcrastiNomore() {
-        return procrastiNomore;
+    public ReadOnlyTaskManager getTaskManager() {
+        return taskManager;
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateProcrastiNomoreChanged() {
-        raise(new ProcrastiNomoreChangedEvent(procrastiNomore));
+    private void indicateTaskManagerChanged() {
+        raise(new TaskManagerChangedEvent(taskManager));
     }
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-        procrastiNomore.removeTask(target);
-        indicateProcrastiNomoreChanged();
+        taskManager.removeTask(target);
+        indicateTaskManagerChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        procrastiNomore.addTask(task);
+        taskManager.addTask(task);
         updateFilteredListToShowAll();
-        indicateProcrastiNomoreChanged();
+        indicateTaskManagerChanged();
     }
 
     @Override
@@ -76,9 +76,9 @@ public class ModelManager extends ComponentManager implements Model {
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
 
-        int procrastiNomoreIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        procrastiNomore.updateTask(procrastiNomoreIndex, editedTask);
-        indicateProcrastiNomoreChanged();
+        int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
+        taskManager.updateTask(taskManagerIndex, editedTask);
+        indicateTaskManagerChanged();
     }
 
     //=========== Filtered Person List Accessors =============================================================
