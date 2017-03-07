@@ -10,10 +10,10 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.person.UniquePersonList.DuplicatePersonException;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.UniqueTaskList;
+import seedu.address.model.task.UniqueTaskList.DuplicatePersonException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -21,9 +21,9 @@ import seedu.address.model.tag.UniqueTagList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .equals comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class TaskManager implements ReadOnlyTaskManager {
 
-    private final UniquePersonList persons;
+    private final UniqueTaskList persons;
     private final UniqueTagList tags;
 
     /*
@@ -34,24 +34,24 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        persons = new UniqueTaskList();
         tags = new UniqueTagList();
     }
 
-    public AddressBook() {}
+    public TaskManager() {}
 
     /**
      * Creates an AddressBook using the Persons and Tags in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public TaskManager(ReadOnlyTaskManager toBeCopied) {
         this();
         resetData(toBeCopied);
     }
 
 //// list overwrite operations
 
-    public void setPersons(List<? extends ReadOnlyPerson> persons)
-            throws UniquePersonList.DuplicatePersonException {
+    public void setPersons(List<? extends ReadOnlyTask> persons)
+            throws UniqueTaskList.DuplicatePersonException {
         this.persons.setPersons(persons);
     }
 
@@ -59,11 +59,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.tags.setTags(tags);
     }
 
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyTaskManager newData) {
         assert newData != null;
         try {
             setPersons(newData.getPersonList());
-        } catch (UniquePersonList.DuplicatePersonException e) {
+        } catch (UniqueTaskList.DuplicatePersonException e) {
             assert false : "AddressBooks should not have duplicate persons";
         }
         try {
@@ -83,7 +83,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *
      * @throws UniquePersonList.DuplicatePersonException if an equivalent person already exists.
      */
-    public void addPerson(Person p) throws UniquePersonList.DuplicatePersonException {
+    public void addTask(Task p) throws UniqueTaskList.DuplicatePersonException {
         syncMasterTagListWith(p);
         persons.add(p);
     }
@@ -97,11 +97,11 @@ public class AddressBook implements ReadOnlyAddressBook {
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updatePerson(int index, ReadOnlyPerson editedReadOnlyPerson)
-            throws UniquePersonList.DuplicatePersonException {
+    public void updatePerson(int index, ReadOnlyTask editedReadOnlyPerson)
+            throws UniqueTaskList.DuplicatePersonException {
         assert editedReadOnlyPerson != null;
 
-        Person editedPerson = new Person(editedReadOnlyPerson);
+        Task editedPerson = new Task(editedReadOnlyPerson);
         syncMasterTagListWith(editedPerson);
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any person
@@ -114,7 +114,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *  - exists in the master list {@link #tags}
      *  - points to a Tag object in the master list
      */
-    private void syncMasterTagListWith(Person person) {
+    private void syncMasterTagListWith(Task person) {
         final UniqueTagList personTags = person.getTags();
         tags.mergeFrom(personTags);
 
@@ -135,15 +135,15 @@ public class AddressBook implements ReadOnlyAddressBook {
      *  - points to a Tag object in the master list
      *  @see #syncMasterTagListWith(Person)
      */
-    private void syncMasterTagListWith(UniquePersonList persons) {
+    private void syncMasterTagListWith(UniqueTaskList persons) {
         persons.forEach(this::syncMasterTagListWith);
     }
 
-    public boolean removePerson(ReadOnlyPerson key) throws UniquePersonList.PersonNotFoundException {
+    public boolean removePerson(ReadOnlyTask key) throws UniqueTaskList.PersonNotFoundException {
         if (persons.remove(key)) {
             return true;
         } else {
-            throw new UniquePersonList.PersonNotFoundException();
+            throw new UniqueTaskList.PersonNotFoundException();
         }
     }
 
@@ -162,7 +162,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<ReadOnlyPerson> getPersonList() {
+    public ObservableList<ReadOnlyTask> getPersonList() {
         return new UnmodifiableObservableList<>(persons.asObservableList());
     }
 
@@ -174,9 +174,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && this.persons.equals(((AddressBook) other).persons)
-                && this.tags.equalsOrderInsensitive(((AddressBook) other).tags));
+                || (other instanceof TaskManager // instanceof handles nulls
+                && this.persons.equals(((TaskManager) other).persons)
+                && this.tags.equalsOrderInsensitive(((TaskManager) other).tags));
     }
 
     @Override

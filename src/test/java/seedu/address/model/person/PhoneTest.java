@@ -5,20 +5,22 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import seedu.address.model.task.Date;
+
 public class PhoneTest {
 
     @Test
-    public void isValidPhone() {
-        // invalid phone numbers
-        assertFalse(Phone.isValidPhone("")); // empty string
-        assertFalse(Phone.isValidPhone(" ")); // spaces only
-        assertFalse(Phone.isValidPhone("phone")); // non-numeric
-        assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
-        assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits
+    public void isValidDate() {
+        // invalid date numbers
+        assertFalse(Date.isValidDate("")); // empty string
+        assertFalse(Date.isValidDate(" ")); // spaces only
+        assertFalse(Date.isValidDate("date")); // non-numeric
+        assertFalse(Date.isValidDate("9011p041")); // alphabets within digits
+        assertFalse(Date.isValidDate("9312 1534")); // spaces within digits
 
-        // valid phone numbers
-        assertTrue(Phone.isValidPhone("93121534"));
-        assertTrue(Phone.isValidPhone("4")); // short phone numbers
-        assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
+        // valid date numbers
+        assertTrue(Date.isValidDate("93121534"));
+        assertTrue(Date.isValidDate("4")); // short date numbers
+        assertTrue(Date.isValidDate("124293842033123")); // long date numbers
     }
 }

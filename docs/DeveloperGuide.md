@@ -192,7 +192,7 @@ The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
 * stores the Address Book data.
-* exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
+* exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
@@ -865,7 +865,7 @@ Pros:
 * Supports setting notification for tasks. Users are able to set notification timing for specific tasks
 * Supports syncing with multiple calendars (Personal + Shared Calendars). Users are able to see tasks/events from multiple calendars in 1 page
 * Supports sharing of calendars. Users are able to share their calendars with other users
-* Supports integration with smartphones. Users are able to view the tasks from any devices
+* Supports integration with smartdates. Users are able to view the tasks from any devices
 * Supports unique holidays calendar, e.g. Holidays in Singapore. Users are able to check on the holidays of the countries they are visiting
 * Supports daily agenda emails. Users are able to enable daily agenda emails to be reminded on the agenda of that day
 * Supports embedding of calendar. Users are able to embed their Google Calendar to their website/blog
@@ -877,7 +877,7 @@ Cons:
 * Requires a Google Account
 * Daily agenda emails are sent only at 5am of that day
 * No tutorial on all features, new users will not be able to use the hidden advanced features, e.g. Daily Agenda Emails, task, reminders (By Google Inbox)
-* Reminders from Google Inbox are shown only on the smartphones
+* Reminders from Google Inbox are shown only on the smartdates
 
 
 **Product #3: to-doist**

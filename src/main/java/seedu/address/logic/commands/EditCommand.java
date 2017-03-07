@@ -6,13 +6,13 @@ import java.util.Optional;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.task.Address;
+import seedu.address.model.task.Email;
+import seedu.address.model.task.Name;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.Date;
+import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
@@ -51,18 +51,18 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
+        List<ReadOnlyTask> lastShownList = model.getFilteredPersonList();
 
         if (filteredPersonListIndex >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        ReadOnlyPerson personToEdit = lastShownList.get(filteredPersonListIndex);
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        ReadOnlyTask personToEdit = lastShownList.get(filteredPersonListIndex);
+        Task editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         try {
             model.updatePerson(filteredPersonListIndex, editedPerson);
-        } catch (UniquePersonList.DuplicatePersonException dpe) {
+        } catch (UniqueTaskList.DuplicatePersonException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
         model.updateFilteredListToShowAll();
@@ -73,17 +73,17 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(ReadOnlyPerson personToEdit,
+    private static Task createEditedPerson(ReadOnlyTask personToEdit,
                                              EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
+        Date updatedDate = editPersonDescriptor.getDate().orElseGet(personToEdit::getDate);
         Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
         Address updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Task(updatedName, updatedDate, updatedEmail, updatedAddress, updatedTags);
     }
 
     /**
@@ -92,7 +92,7 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Optional<Name> name = Optional.empty();
-        private Optional<Phone> phone = Optional.empty();
+        private Optional<Date> date = Optional.empty();
         private Optional<Email> email = Optional.empty();
         private Optional<Address> address = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
@@ -101,7 +101,7 @@ public class EditCommand extends Command {
 
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             this.name = toCopy.getName();
-            this.phone = toCopy.getPhone();
+            this.date = toCopy.getDate();
             this.email = toCopy.getEmail();
             this.address = toCopy.getAddress();
             this.tags = toCopy.getTags();
@@ -111,7 +111,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.phone, this.email, this.address, this.tags);
+            return CollectionUtil.isAnyPresent(this.name, this.date, this.email, this.address, this.tags);
         }
 
         public void setName(Optional<Name> name) {
@@ -123,13 +123,13 @@ public class EditCommand extends Command {
             return name;
         }
 
-        public void setPhone(Optional<Phone> phone) {
-            assert phone != null;
-            this.phone = phone;
+        public void setDate(Optional<Date> date) {
+            assert date != null;
+            this.date = date;
         }
 
-        public Optional<Phone> getPhone() {
-            return phone;
+        public Optional<Date> getDate() {
+            return date;
         }
 
         public void setEmail(Optional<Email> email) {
