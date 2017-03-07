@@ -51,13 +51,13 @@ public class FindController extends Controller {
         ArrayList<Task> foundTasks = new ArrayList<Task>();
         TodoList todoList = TodoList.load();
 
-        for (int j = 0; j < keywordList.length; j++) {
+        for (String keyword : keywordList) {
             if (isSearchByTag) {
-                addTasksIgnoreDuplicate(foundTasks, todoList.getTasksWhosTagsContains(keywordList[j]));
+                addTasksIgnoreDuplicate(foundTasks, todoList.getTasksWhosTagsContains(keyword));
             }
 
             if (isSearchByName) {
-                addTasksIgnoreDuplicate(foundTasks, todoList.getTasksWhosDescriptionContains(keywordList[j]));
+                addTasksIgnoreDuplicate(foundTasks, todoList.getTasksWhosDescriptionContains(keyword));
             }
         }
 
@@ -96,20 +96,13 @@ public class FindController extends Controller {
         String searchParameters;
         if (isSearchByName && isSearchByTag) {
             searchParameters = NAME_AND_TAG_MESSAGE;
-        } else if (isSearchByName){
+        } else if (isSearchByName) {
             searchParameters = NAME_MESSAGE;
-        }
-        else { //isSearchByTag
+        } else { //isSearchByTag
             searchParameters = TAG_MESSAGE;
         }
 
-        String keywords="";
-        if (keywordList.length > 0) {
-            keywords = keywordList[0];
-            for (int k = 1; k < keywordList.length; k++) {
-                keywords += " " + keywordList[k];
-            }
-        }
+        String keywords= String.join(" ", keywordList);
         return new CommandResult(String.format(RESULT_MESSAGE_TEMPLATE, keywords, searchParameters,foundCount));
     }
 
@@ -120,16 +113,14 @@ public class FindController extends Controller {
         //search by tag
         if (command.contains(TAG_PARAMETER)){
             tokens.put(TAG_PARAMETER, TRUE_PARAMETER);
-        }
-        else {
+        } else {
             tokens.put(TAG_PARAMETER, FALSE_PARAMETER);
         }
 
         //search by name
         if (command.contains(NAME_PARAMETER) || !command.contains(TAG_PARAMETER)){
             tokens.put(NAME_PARAMETER, TRUE_PARAMETER);
-        }
-        else {
+        } else {
             tokens.put(NAME_PARAMETER, FALSE_PARAMETER);
         }
 
