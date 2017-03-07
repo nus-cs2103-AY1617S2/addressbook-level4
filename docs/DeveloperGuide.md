@@ -343,7 +343,7 @@ b. Require developers to download those libraries manually (this creates extra w
 
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
 
-Priority | As a ... | I want to ... | So that I can...
+Priority | As a ... | I can ... | So that I can...
 -------- | :----------- | :-------------------- | :-------------------------
 `* * *` | new user |  view an instruction manual | remember the format and syntax of commands when necessary
 `* * *` | user | quit the program from the command line | avoid the trouble of using the GUI when quit
@@ -372,7 +372,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user who have completed one or more tasks | view a reverse chronological log of all completed tasks | see which tasks I have marked as `done` in the past
 `* * *` | user who have completed one or more events | view a reverse chronological log of all completed events | see which events I have marked as `done` in the past
 `* * *` | user who have dismissed a task | reverse chronological log of all dismissed tasks | see which tasks I have dismissed
-`* * *` | user who have completed or dismissed tasks or events | recycle a task or an event kept in the expired list | 
+`* * *` | user who have completed or dismissed tasks or events | recycle a task or an event kept in the expired list | efficiently add back the previous events and tasks to the active list
 `* * *` | user who have completed or dismissed tasks or events | clear all the past tasks and events from the expired list | eliminate no-longer-relevant tasks and events and keep the log clean
 `* * *` | user | see error message when I enter an invalid command | ammend the command appropriately
 `* * *` | user | undo the last command entered |
