@@ -15,20 +15,20 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.todo.ToDo;
-import seedu.address.model.todo.ReadOnlyPerson;
-import seedu.address.testutil.TypicalTestPersons;
+import seedu.address.model.todo.Todo;
+import seedu.address.model.todo.ReadOnlyTodo;
+import seedu.address.testutil.TypicalTestTodos;
 
-public class AddressBookTest {
+public class TodoListTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final AddressBook addressBook = new AddressBook();
+    private final TodoList addressBook = new TodoList();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), addressBook.getTodoList());
         assertEquals(Collections.emptyList(), addressBook.getTagList());
     }
 
@@ -39,19 +39,19 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = new TypicalTestPersons().getTypicalAddressBook();
+    public void resetData_withValidReadOnlyTodoList_replacesData() {
+        TodoList newData = new TypicalTestTodos().getTypicalTodoList();
         addressBook.resetData(newData);
         assertEquals(newData, addressBook);
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsAssertionError() {
-        TypicalTestPersons td = new TypicalTestPersons();
+    public void resetData_withDuplicateTodos_throwsAssertionError() {
+        TypicalTestTodos td = new TypicalTestTodos();
         // Repeat td.alice twice
-        List<ToDo> newPersons = Arrays.asList(new ToDo(td.alice), new ToDo(td.alice));
+        List<Todo> newTodos = Arrays.asList(new Todo(td.alice), new Todo(td.alice));
         List<Tag> newTags = td.alice.getTags().asObservableList();
-        AddressBookStub newData = new AddressBookStub(newPersons, newTags);
+        TodoListStub newData = new TodoListStub(newTodos, newTags);
 
         thrown.expect(AssertionError.class);
         addressBook.resetData(newData);
@@ -59,32 +59,32 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
-        AddressBook typicalAddressBook = new TypicalTestPersons().getTypicalAddressBook();
-        List<ReadOnlyPerson> newPersons = typicalAddressBook.getPersonList();
-        List<Tag> newTags = new ArrayList<>(typicalAddressBook.getTagList());
+        TodoList typicalTodoList = new TypicalTestTodos().getTypicalTodoList();
+        List<ReadOnlyTodo> newTodos = typicalTodoList.getTodoList();
+        List<Tag> newTags = new ArrayList<>(typicalTodoList.getTagList());
         // Repeat the first tag twice
         newTags.add(newTags.get(0));
-        AddressBookStub newData = new AddressBookStub(newPersons, newTags);
+        TodoListStub newData = new TodoListStub(newTodos, newTags);
 
         thrown.expect(AssertionError.class);
         addressBook.resetData(newData);
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons and tags lists can violate interface constraints.
+     * A stub ReadOnlyTodoList whose todos and tags lists can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyTaskList {
-        private final ObservableList<ReadOnlyPerson> persons = FXCollections.observableArrayList();
+    private static class TodoListStub implements ReadOnlyTodoList {
+        private final ObservableList<ReadOnlyTodo> todos = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<? extends ReadOnlyPerson> persons, Collection<? extends Tag> tags) {
-            this.persons.setAll(persons);
+        TodoListStub(Collection<? extends ReadOnlyTodo> todos, Collection<? extends Tag> tags) {
+            this.todos.setAll(todos);
             this.tags.setAll(tags);
         }
 
         @Override
-        public ObservableList<ReadOnlyPerson> getPersonList() {
-            return persons;
+        public ObservableList<ReadOnlyTodo> getTodoList() {
+            return todos;
         }
 
         @Override

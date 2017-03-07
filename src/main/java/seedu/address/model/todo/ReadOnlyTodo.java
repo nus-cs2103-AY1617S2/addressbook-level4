@@ -5,7 +5,7 @@ import java.util.Date;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * A read-only immutable interface for a Person in the addressbook.
+ * A read-only immutable interface for a Todo in the addressbook.
  * Implementations should guarantee: details are present and not null, field values are validated.
  */
 public interface ReadOnlyTodo {
@@ -16,7 +16,7 @@ public interface ReadOnlyTodo {
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
-     * changes on the returned list will not affect the person's internal tags.
+     * changes on the returned list will not affect the todo's internal tags.
      */
     UniqueTagList getTags();
 

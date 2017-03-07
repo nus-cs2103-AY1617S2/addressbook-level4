@@ -7,7 +7,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Represents a ToDo in the address book.
+ * Represents a Todo in the address book.
  * Guarantees: details are present and not null, field values are validated.
  */
 public class Todo implements ReadOnlyTodo {
@@ -39,7 +39,7 @@ public class Todo implements ReadOnlyTodo {
     }
 
     /**
-     * Creates a copy of the given ReadOnlyToDo.
+     * Creates a copy of the given ReadOnlyTodo.
      */
     public Todo(ReadOnlyTodo source) {
         this(source.getName(), source.getStartTime(), source.getEndTime(), source.getTags());

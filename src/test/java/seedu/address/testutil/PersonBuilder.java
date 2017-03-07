@@ -11,51 +11,51 @@ import seedu.address.model.todo.Phone;
 /**
  *
  */
-public class PersonBuilder {
+public class TodoBuilder {
 
-    private TestPerson person;
+    private TestTodo todo;
 
-    public PersonBuilder() {
-        this.person = new TestPerson();
+    public TodoBuilder() {
+        this.todo = new TestTodo();
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the TodoBuilder with the data of {@code todoToCopy}.
      */
-    public PersonBuilder(TestPerson personToCopy) {
-        this.person = new TestPerson(personToCopy);
+    public TodoBuilder(TestTodo todoToCopy) {
+        this.todo = new TestTodo(todoToCopy);
     }
 
-    public PersonBuilder withName(String name) throws IllegalValueException {
-        this.person.setName(new Name(name));
+    public TodoBuilder withName(String name) throws IllegalValueException {
+        this.todo.setName(new Name(name));
         return this;
     }
 
-    public PersonBuilder withTags(String ... tags) throws IllegalValueException {
-        person.setTags(new UniqueTagList());
+    public TodoBuilder withTags(String ... tags) throws IllegalValueException {
+        todo.setTags(new UniqueTagList());
         for (String tag: tags) {
-            person.getTags().add(new Tag(tag));
+            todo.getTags().add(new Tag(tag));
         }
         return this;
     }
 
-    public PersonBuilder withAddress(String address) throws IllegalValueException {
-        this.person.setAddress(new Address(address));
+    public TodoBuilder withAddress(String address) throws IllegalValueException {
+        this.todo.setAddress(new Address(address));
         return this;
     }
 
-    public PersonBuilder withPhone(String phone) throws IllegalValueException {
-        this.person.setPhone(new Phone(phone));
+    public TodoBuilder withPhone(String phone) throws IllegalValueException {
+        this.todo.setPhone(new Phone(phone));
         return this;
     }
 
-    public PersonBuilder withEmail(String email) throws IllegalValueException {
-        this.person.setEmail(new Email(email));
+    public TodoBuilder withEmail(String email) throws IllegalValueException {
+        this.todo.setEmail(new Email(email));
         return this;
     }
 
-    public TestPerson build() {
-        return this.person;
+    public TestTodo build() {
+        return this.todo;
     }
 
 }

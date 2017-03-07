@@ -3,13 +3,13 @@ package seedu.address.model.todo;
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a ToDo's name in the todo list.
+ * Represents a Todo's name in the todo list.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Name {
 
     public static final String MESSAGE_NAME_CONSTRAINTS =
-            "ToDo names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Todo names should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,

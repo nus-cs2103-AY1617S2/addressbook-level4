@@ -106,7 +106,7 @@ public class TodoList implements ReadOnlyTodoList {
         // Todo: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any todo
         // in the todo list.
-        todos.updateTodos(index, editedTodo);
+        todos.updateTodo(index, editedTodo);
     }
 
     /**

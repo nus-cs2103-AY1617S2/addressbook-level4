@@ -4,31 +4,31 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import seedu.address.model.todo.ReadOnlyPerson;
+import seedu.address.model.todo.ReadOnlyTodo;
 
-public class SelectCommandTest extends AddressBookGuiTest {
+public class SelectCommandTest extends TodoListGuiTest {
 
 
     @Test
-    public void selectPerson_nonEmptyList() {
+    public void selectTodo_nonEmptyList() {
 
         assertSelectionInvalid(10); // invalid index
-        assertNoPersonSelected();
+        assertNoTodoSelected();
 
-        assertSelectionSuccess(1); // first person in the list
-        int personCount = td.getTypicalPersons().length;
-        assertSelectionSuccess(personCount); // last person in the list
-        int middleIndex = personCount / 2;
-        assertSelectionSuccess(middleIndex); // a person in the middle of the list
+        assertSelectionSuccess(1); // first todo in the list
+        int todoCount = td.getTypicalTodos().length;
+        assertSelectionSuccess(todoCount); // last todo in the list
+        int middleIndex = todoCount / 2;
+        assertSelectionSuccess(middleIndex); // a todo in the middle of the list
 
-        assertSelectionInvalid(personCount + 1); // invalid index
-        assertPersonSelected(middleIndex); // assert previous selection remains
+        assertSelectionInvalid(todoCount + 1); // invalid index
+        assertTodoSelected(middleIndex); // assert previous selection remains
 
         /* Testing other invalid indexes such as -1 should be done when testing the SelectCommand */
     }
 
     @Test
-    public void selectPerson_emptyList() {
+    public void selectTodo_emptyList() {
         commandBox.runCommand("clear");
         assertListSize(0);
         assertSelectionInvalid(1); //invalid index
@@ -36,24 +36,24 @@ public class SelectCommandTest extends AddressBookGuiTest {
 
     private void assertSelectionInvalid(int index) {
         commandBox.runCommand("select " + index);
-        assertResultMessage("The person index provided is invalid");
+        assertResultMessage("The todo index provided is invalid");
     }
 
     private void assertSelectionSuccess(int index) {
         commandBox.runCommand("select " + index);
-        assertResultMessage("Selected Person: " + index);
-        assertPersonSelected(index);
+        assertResultMessage("Selected Todo: " + index);
+        assertTodoSelected(index);
     }
 
-    private void assertPersonSelected(int index) {
-        assertEquals(personListPanel.getSelectedPersons().size(), 1);
-        ReadOnlyPerson selectedPerson = personListPanel.getSelectedPersons().get(0);
-        assertEquals(personListPanel.getPerson(index - 1), selectedPerson);
+    private void assertTodoSelected(int index) {
+        assertEquals(todoListPanel.getSelectedTodos().size(), 1);
+        ReadOnlyTodo selectedTodo = todoListPanel.getSelectedTodos().get(0);
+        assertEquals(todoListPanel.getTodo(index - 1), selectedTodo);
         //TODO: confirm the correct page is loaded in the Browser Panel
     }
 
-    private void assertNoPersonSelected() {
-        assertEquals(personListPanel.getSelectedPersons().size(), 0);
+    private void assertNoTodoSelected() {
+        assertEquals(todoListPanel.getSelectedTodos().size(), 0);
     }
 
 }
