@@ -5,6 +5,7 @@ import t16b4.yats.commons.core.Messages;
 import t16b4.yats.commons.core.UnmodifiableObservableList;
 import t16b4.yats.commons.events.ui.JumpToListRequestEvent;
 import t16b4.yats.logic.commands.exceptions.CommandException;
+import t16b4.yats.model.item.ReadOnlyEvent;
 import t16b4.yats.model.item.ReadOnlyItem;
 
 /**
@@ -30,7 +31,7 @@ public class SelectCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
 
-        UnmodifiableObservableList<ReadOnlyItem> lastShownList = model.getFilteredPersonList();
+        UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredPersonList();
 
         if (lastShownList.size() < targetIndex) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);

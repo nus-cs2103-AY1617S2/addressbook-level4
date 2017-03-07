@@ -13,6 +13,8 @@ import t16b4.yats.commons.core.UnmodifiableObservableList;
 import t16b4.yats.commons.exceptions.IllegalValueException;
 import t16b4.yats.model.ReadOnlyTaskManager;
 import t16b4.yats.model.item.Task;
+import t16b4.yats.model.item.Event;
+import t16b4.yats.model.item.ReadOnlyEvent;
 import t16b4.yats.model.item.ReadOnlyItem;
 import t16b4.yats.model.tag.Tag;
 
@@ -46,8 +48,8 @@ public class XmlSerializableAddressBook implements ReadOnlyTaskManager {
     }
 
     @Override
-    public ObservableList<ReadOnlyItem> getPersonList() {
-        final ObservableList<Task> persons = this.persons.stream().map(p -> {
+    public ObservableList<ReadOnlyEvent> getPersonList() {
+        final ObservableList<Event> persons = this.persons.stream().map(p -> {
             try {
                 return p.toModelType();
             } catch (IllegalValueException e) {

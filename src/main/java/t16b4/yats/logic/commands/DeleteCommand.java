@@ -3,6 +3,7 @@ package t16b4.yats.logic.commands;
 import t16b4.yats.commons.core.Messages;
 import t16b4.yats.commons.core.UnmodifiableObservableList;
 import t16b4.yats.logic.commands.exceptions.CommandException;
+import t16b4.yats.model.item.ReadOnlyEvent;
 import t16b4.yats.model.item.ReadOnlyItem;
 import t16b4.yats.model.item.UniqueItemList.PersonNotFoundException;
 
@@ -30,13 +31,13 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
 
-        UnmodifiableObservableList<ReadOnlyItem> lastShownList = model.getFilteredPersonList();
+        UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredPersonList();
 
         if (lastShownList.size() < targetIndex) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        ReadOnlyItem personToDelete = lastShownList.get(targetIndex - 1);
+        ReadOnlyEvent personToDelete = lastShownList.get(targetIndex - 1);
 
         try {
             model.deletePerson(personToDelete);

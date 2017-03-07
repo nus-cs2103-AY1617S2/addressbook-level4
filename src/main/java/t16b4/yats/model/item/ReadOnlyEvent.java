@@ -2,16 +2,16 @@ package t16b4.yats.model.item;
 
 import t16b4.yats.model.tag.UniqueTagList;
 
-/**
- * A read-only immutable interface for an Item in the TaskManager.
- * Implementations should guarantee: details are present and not null, field values are validated.
- */
-public interface ReadOnlyItem {
+public interface ReadOnlyEvent {
 
     Title getTitle();
-    Deadline getDeadline();
-    Timing getTiming();
     Description getDescription();
+    Location getLocation();
+    Timing getStartTime();
+    Timing getEndTime();
+    Periodic getPeriod();
+    
+
     /**
      * The returned TagList is a deep copy of the internal TagList,
      * changes on the returned list will not affect the person's internal tags.
@@ -25,8 +25,6 @@ public interface ReadOnlyItem {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                 && other.getTitle().equals(this.getTitle()) // state checks here onwards
-                && other.getDeadline().equals(this.getDeadline())
-                && other.getTiming().equals(this.getTiming())
                 && other.getDescription().equals(this.getDescription()));
     }
 
@@ -36,15 +34,13 @@ public interface ReadOnlyItem {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getTitle())
-                .append(" Title: ")
-                .append(getDeadline())
-                .append(" Email: ")
-                .append(getTiming())
-                .append(" Description: ")
-                .append(getDescription())
-                .append(" Tags: ");
+        .append(" Title: ")
+        .append(" Description: ")
+        .append(getDescription())
+        .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
 
+   
 }

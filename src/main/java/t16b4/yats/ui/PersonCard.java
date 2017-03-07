@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import t16b4.yats.model.item.ReadOnlyEvent;
 import t16b4.yats.model.item.ReadOnlyItem;
 
 public class PersonCard extends UiPart<Region> {
@@ -26,17 +27,17 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    public PersonCard(ReadOnlyItem person, int displayedIndex) {
+    public PersonCard(ReadOnlyEvent person, int displayedIndex) {
         super(FXML);
         name.setText(person.getTitle().fullName);
         id.setText(displayedIndex + ". ");
-        phone.setText(person.getDeadline().value);
+        phone.setText(person.getLocation().value);
         address.setText(person.getDescription().value);
-        email.setText(person.getTiming().value);
+        email.setText(person.getStartTime().value);
         initTags(person);
     }
 
-    private void initTags(ReadOnlyItem person) {
+    private void initTags(ReadOnlyEvent person) {
         person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }

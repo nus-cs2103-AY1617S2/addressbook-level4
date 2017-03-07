@@ -3,6 +3,7 @@ package t16b4.yats.logic;
 import javafx.collections.ObservableList;
 import t16b4.yats.logic.commands.CommandResult;
 import t16b4.yats.logic.commands.exceptions.CommandException;
+import t16b4.yats.model.item.ReadOnlyEvent;
 import t16b4.yats.model.item.ReadOnlyItem;
 
 /**
@@ -18,6 +19,6 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException;
 
     /** Returns the filtered list of persons */
-    ObservableList<ReadOnlyItem> getFilteredPersonList();
+    ObservableList<ReadOnlyEvent> getFilteredPersonList();
 
 }

@@ -16,6 +16,7 @@ import t16b4.yats.commons.events.ui.ExitAppRequestEvent;
 import t16b4.yats.commons.util.FxViewUtil;
 import t16b4.yats.logic.Logic;
 import t16b4.yats.model.UserPrefs;
+import t16b4.yats.model.item.ReadOnlyEvent;
 import t16b4.yats.model.item.ReadOnlyItem;
 
 /**
@@ -199,7 +200,7 @@ public class MainWindow extends UiPart<Region> {
         return this.personListPanel;
     }
 
-    void loadPersonPage(ReadOnlyItem person) {
+    void loadPersonPage(ReadOnlyEvent person) {
         browserPanel.loadPersonPage(person);
     }
 

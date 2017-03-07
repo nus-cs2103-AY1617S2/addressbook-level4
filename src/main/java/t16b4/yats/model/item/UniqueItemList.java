@@ -17,16 +17,16 @@ import t16b4.yats.commons.util.CollectionUtil;
  * @see Task#equals(Object)
  * @see CollectionUtil#elementsAreUnique(Collection)
  */
-public class UniqueItemList implements Iterable<Task> {
+public class UniqueItemList implements Iterable<Event> {
 
-    private final ObservableList<Task> internalList = FXCollections.observableArrayList();
+    private final ObservableList<Event> internalList = FXCollections.observableArrayList();
 
     /**
      * Returns true if the list contains an equivalent person as the given argument.
      */
-    public boolean contains(ReadOnlyItem toCheck) {
-        assert toCheck != null;
-        return internalList.contains(toCheck);
+    public boolean contains(ReadOnlyEvent p) {
+        assert p != null;
+        return internalList.contains(p);
     }
 
     /**
@@ -34,12 +34,12 @@ public class UniqueItemList implements Iterable<Task> {
      *
      * @throws DuplicatePersonException if the person to add is a duplicate of an existing person in the list.
      */
-    public void add(Task toAdd) throws DuplicatePersonException {
-        assert toAdd != null;
-        if (contains(toAdd)) {
+    public void add(Event p) throws DuplicatePersonException {
+        assert p != null;
+        if (contains(p)) {
             throw new DuplicatePersonException();
         }
-        internalList.add(toAdd);
+        internalList.add(p);
     }
 
     /**
@@ -49,15 +49,15 @@ public class UniqueItemList implements Iterable<Task> {
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updatePerson(int index, ReadOnlyItem editedPerson) throws DuplicatePersonException {
-        assert editedPerson != null;
+    public void updatePerson(int index, ReadOnlyEvent editedEvent) throws DuplicatePersonException {
+        assert editedEvent != null;
 
-        Task personToUpdate = internalList.get(index);
-        if (!personToUpdate.equals(editedPerson) && internalList.contains(editedPerson)) {
+        Event personToUpdate = internalList.get(index);
+        if (!personToUpdate.equals(editedEvent) && internalList.contains(editedEvent)) {
             throw new DuplicatePersonException();
         }
 
-        personToUpdate.resetData(editedPerson);
+        personToUpdate.resetData(editedEvent);
         // TODO: The code below is just a workaround to notify observers of the updated person.
         // The right way is to implement observable properties in the Person class.
         // Then, PersonCard should then bind its text labels to those observable properties.
@@ -69,7 +69,7 @@ public class UniqueItemList implements Iterable<Task> {
      *
      * @throws PersonNotFoundException if no such person could be found in the list.
      */
-    public boolean remove(ReadOnlyItem toRemove) throws PersonNotFoundException {
+    public boolean remove(ReadOnlyEvent toRemove) throws PersonNotFoundException {
         assert toRemove != null;
         final boolean personFoundAndDeleted = internalList.remove(toRemove);
         if (!personFoundAndDeleted) {
@@ -82,20 +82,20 @@ public class UniqueItemList implements Iterable<Task> {
         this.internalList.setAll(replacement.internalList);
     }
 
-    public void setPersons(List<? extends ReadOnlyItem> persons) throws DuplicatePersonException {
+    public void setPersons(List<? extends ReadOnlyEvent> persons) throws DuplicatePersonException {
         final UniqueItemList replacement = new UniqueItemList();
-        for (final ReadOnlyItem person : persons) {
-            replacement.add(new Task(person));
+        for (final ReadOnlyEvent person : persons) {
+            replacement.add(new Event(person));
         }
         setPersons(replacement);
     }
 
-    public UnmodifiableObservableList<Task> asObservableList() {
+    public UnmodifiableObservableList<Event> asObservableList() {
         return new UnmodifiableObservableList<>(internalList);
     }
 
     @Override
-    public Iterator<Task> iterator() {
+    public Iterator<Event> iterator() {
         return internalList.iterator();
     }
 

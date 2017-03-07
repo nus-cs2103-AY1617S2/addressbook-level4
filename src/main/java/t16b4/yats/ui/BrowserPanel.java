@@ -6,6 +6,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import t16b4.yats.commons.util.FxViewUtil;
+import t16b4.yats.model.item.ReadOnlyEvent;
 import t16b4.yats.model.item.ReadOnlyItem;
 
 /**
@@ -29,7 +30,7 @@ public class BrowserPanel extends UiPart<Region> {
         placeholder.getChildren().add(browser);
     }
 
-    public void loadPersonPage(ReadOnlyItem person) {
+    public void loadPersonPage(ReadOnlyEvent person) {
         loadPage("https://www.google.com.sg/#safe=off&q=" + person.getTitle().fullName.replaceAll(" ", "+"));
     }
 

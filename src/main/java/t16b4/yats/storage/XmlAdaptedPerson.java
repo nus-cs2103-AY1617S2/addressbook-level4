@@ -8,9 +8,11 @@ import javax.xml.bind.annotation.XmlElement;
 import t16b4.yats.commons.exceptions.IllegalValueException;
 import t16b4.yats.model.item.Description;
 import t16b4.yats.model.item.Email;
+import t16b4.yats.model.item.Event;
 import t16b4.yats.model.item.Title;
 import t16b4.yats.model.item.Task;
 import t16b4.yats.model.item.Phone;
+import t16b4.yats.model.item.ReadOnlyEvent;
 import t16b4.yats.model.item.ReadOnlyItem;
 import t16b4.yats.model.tag.Tag;
 import t16b4.yats.model.tag.UniqueTagList;
@@ -44,10 +46,8 @@ public class XmlAdaptedPerson {
      *
      * @param source future changes to this will not affect the created XmlAdaptedPerson
      */
-    public XmlAdaptedPerson(ReadOnlyItem source) {
+    public XmlAdaptedPerson(ReadOnlyEvent source) {
         name = source.getTitle().fullName;
-        phone = source.getPhone().value;
-        email = source.getEmail().value;
         address = source.getDescription().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
@@ -60,16 +60,13 @@ public class XmlAdaptedPerson {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person
      */
-    public Task toModelType() throws IllegalValueException {
+    public Event toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
         }
-        final Title name = new Title(this.name);
-        final Phone phone = new Phone(this.phone);
-        final Email email = new Email(this.email);
         final Description address = new Description(this.address);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Task(name, phone, email, address, tags);
+        return new Event();
     }
 }

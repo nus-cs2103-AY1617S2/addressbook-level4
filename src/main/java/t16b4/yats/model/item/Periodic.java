@@ -11,7 +11,7 @@ public class Periodic {
 
     public static final String MESSAGE_PERIODIC_CONSTRAINTS =
             "Periodicity must be daily|weekly|monthly";
-    public static final String PERIODIC_VALIDATION_REGEX = "(daily|weekly|monthly)";
+    public static final String PERIODIC_VALIDATION_REGEX = ".*(none|daily|monthly|weekly).*";
 
     public final String value;
 

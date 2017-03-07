@@ -11,6 +11,8 @@ import t16b4.yats.commons.events.model.AddressBookChangedEvent;
 import t16b4.yats.commons.util.CollectionUtil;
 import t16b4.yats.commons.util.StringUtil;
 import t16b4.yats.model.item.Task;
+import t16b4.yats.model.item.Event;
+import t16b4.yats.model.item.ReadOnlyEvent;
 import t16b4.yats.model.item.ReadOnlyItem;
 import t16b4.yats.model.item.UniqueItemList;
 import t16b4.yats.model.item.UniqueItemList.PersonNotFoundException;
@@ -22,8 +24,8 @@ import t16b4.yats.model.item.UniqueItemList.PersonNotFoundException;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final TaskManager addressBook;
-    private final FilteredList<ReadOnlyItem> filteredPersons;
+    private final TaskManager taskManager;
+    private final FilteredList<ReadOnlyEvent> filteredPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,8 +36,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new TaskManager(addressBook);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.taskManager = new TaskManager(addressBook);
+        filteredPersons = new FilteredList<>(this.taskManager.getPersonList());
     }
 
     public ModelManager() {
@@ -44,47 +46,47 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyTaskManager newData) {
-        addressBook.resetData(newData);
+        taskManager.resetData(newData);
         indicateAddressBookChanged();
     }
 
     @Override
     public ReadOnlyTaskManager getAddressBook() {
-        return addressBook;
+        return taskManager;
     }
 
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
-        raise(new AddressBookChangedEvent(addressBook));
+        raise(new AddressBookChangedEvent(taskManager));
     }
 
     @Override
-    public synchronized void deletePerson(ReadOnlyItem target) throws PersonNotFoundException {
-        addressBook.removePerson(target);
+    public synchronized void deletePerson(ReadOnlyEvent target) throws PersonNotFoundException {
+        taskManager.removePerson(target);
         indicateAddressBookChanged();
     }
 
     @Override
-    public synchronized void addPerson(Task person) throws UniqueItemList.DuplicatePersonException {
-        addressBook.addTask(person);
+    public synchronized void addEvent(Event event) throws UniqueItemList.DuplicatePersonException {
+        taskManager.addEvent(event);
         updateFilteredListToShowAll();
         indicateAddressBookChanged();
     }
 
     @Override
-    public void updatePerson(int filteredPersonListIndex, ReadOnlyItem editedPerson)
+    public void updatePerson(int filteredPersonListIndex, ReadOnlyEvent editedPerson)
             throws UniqueItemList.DuplicatePersonException {
         assert editedPerson != null;
 
         int addressBookIndex = filteredPersons.getSourceIndex(filteredPersonListIndex);
-        addressBook.updatePerson(addressBookIndex, editedPerson);
+        taskManager.updatePerson(addressBookIndex, editedPerson);
         indicateAddressBookChanged();
     }
 
     //=========== Filtered Person List Accessors =============================================================
 
     @Override
-    public UnmodifiableObservableList<ReadOnlyItem> getFilteredPersonList() {
+    public UnmodifiableObservableList<ReadOnlyEvent> getFilteredPersonList() {
         return new UnmodifiableObservableList<>(filteredPersons);
     }
 
@@ -105,7 +107,7 @@ public class ModelManager extends ComponentManager implements Model {
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
-        boolean satisfies(ReadOnlyItem person);
+        boolean satisfies(ReadOnlyEvent person);
         String toString();
     }
 
@@ -118,7 +120,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean satisfies(ReadOnlyItem person) {
+        public boolean satisfies(ReadOnlyEvent person) {
             return qualifier.run(person);
         }
 
@@ -129,7 +131,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     interface Qualifier {
-        boolean run(ReadOnlyItem person);
+        boolean run(ReadOnlyEvent person);
         String toString();
     }
 
@@ -141,7 +143,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean run(ReadOnlyItem person) {
+        public boolean run(ReadOnlyEvent person) {
             return nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(person.getTitle().fullName, keyword))
                     .findAny()

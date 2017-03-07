@@ -1,6 +1,7 @@
 package t16b4.yats.commons.events.ui;
 
 import t16b4.yats.commons.events.BaseEvent;
+import t16b4.yats.model.item.ReadOnlyEvent;
 import t16b4.yats.model.item.ReadOnlyItem;
 
 /**
@@ -9,10 +10,10 @@ import t16b4.yats.model.item.ReadOnlyItem;
 public class PersonPanelSelectionChangedEvent extends BaseEvent {
 
 
-    private final ReadOnlyItem newSelection;
+    private final ReadOnlyEvent newSelection;
 
-    public PersonPanelSelectionChangedEvent(ReadOnlyItem newSelection) {
-        this.newSelection = newSelection;
+    public PersonPanelSelectionChangedEvent(ReadOnlyEvent newValue) {
+        this.newSelection = newValue;
     }
 
     @Override
@@ -20,7 +21,7 @@ public class PersonPanelSelectionChangedEvent extends BaseEvent {
         return this.getClass().getSimpleName();
     }
 
-    public ReadOnlyItem getNewSelection() {
+    public ReadOnlyEvent getNewSelection() {
         return newSelection;
     }
 }

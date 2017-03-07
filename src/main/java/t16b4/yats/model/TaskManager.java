@@ -11,6 +11,8 @@ import java.util.Set;
 import javafx.collections.ObservableList;
 import t16b4.yats.commons.core.UnmodifiableObservableList;
 import t16b4.yats.model.item.Task;
+import t16b4.yats.model.item.Event;
+import t16b4.yats.model.item.ReadOnlyEvent;
 import t16b4.yats.model.item.ReadOnlyItem;
 import t16b4.yats.model.item.UniqueItemList;
 import t16b4.yats.model.item.UniqueItemList.DuplicatePersonException;
@@ -23,7 +25,7 @@ import t16b4.yats.model.tag.UniqueTagList;
  */
 public class TaskManager implements ReadOnlyTaskManager {
 
-    private final UniqueItemList persons;
+    private final UniqueItemList events;
     private final UniqueTagList tags;
 
     /*
@@ -34,7 +36,7 @@ public class TaskManager implements ReadOnlyTaskManager {
      *   among constructors.
      */
     {
-        persons = new UniqueItemList();
+        events = new UniqueItemList();
         tags = new UniqueTagList();
     }
 
@@ -50,9 +52,9 @@ public class TaskManager implements ReadOnlyTaskManager {
 
 //// list overwrite operations
 
-    public void setPersons(List<? extends ReadOnlyItem> persons)
+    public void setPersons(List<? extends ReadOnlyEvent> persons)
             throws UniqueItemList.DuplicatePersonException {
-        this.persons.setPersons(persons);
+        this.events.setPersons(persons);
     }
 
     public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
@@ -71,7 +73,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         } catch (UniqueTagList.DuplicateTagException e) {
             assert false : "AddressBooks should not have duplicate tags";
         }
-        syncMasterTagListWith(persons);
+        syncMasterTagListWith(events);
     }
 
 //// person-level operations
@@ -83,9 +85,9 @@ public class TaskManager implements ReadOnlyTaskManager {
      *
      * @throws UniqueItemList.DuplicatePersonException if an equivalent person already exists.
      */
-    public void addTask(Task p) throws UniqueItemList.DuplicatePersonException {
+    public void addEvent(Event p) throws UniqueItemList.DuplicatePersonException {
         syncMasterTagListWith(p);
-        persons.add(p);
+        events.add(p);
     }
 
     /**
@@ -97,16 +99,16 @@ public class TaskManager implements ReadOnlyTaskManager {
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updatePerson(int index, ReadOnlyItem editedReadOnlyPerson)
+    public void updatePerson(int index, ReadOnlyEvent editedReadOnlyPerson)
             throws UniqueItemList.DuplicatePersonException {
         assert editedReadOnlyPerson != null;
 
-        Task editedPerson = new Task(editedReadOnlyPerson);
+        Event editedPerson = new Event(editedReadOnlyPerson);
         syncMasterTagListWith(editedPerson);
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any person
         // in the person list.
-        persons.updatePerson(index, editedPerson);
+        events.updatePerson(index, editedPerson);
     }
 
     /**
@@ -114,8 +116,8 @@ public class TaskManager implements ReadOnlyTaskManager {
      *  - exists in the master list {@link #tags}
      *  - points to a Tag object in the master list
      */
-    private void syncMasterTagListWith(Task person) {
-        final UniqueTagList personTags = person.getTags();
+    private void syncMasterTagListWith(Event p) {
+        final UniqueTagList personTags = p.getTags();
         tags.mergeFrom(personTags);
 
         // Create map with values = tag object references in the master list
@@ -126,7 +128,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         // Rebuild the list of person tags to point to the relevant tags in the master tag list.
         final Set<Tag> correctTagReferences = new HashSet<>();
         personTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
-        person.setTags(new UniqueTagList(correctTagReferences));
+        p.setTags(new UniqueTagList(correctTagReferences));
     }
 
     /**
@@ -139,8 +141,8 @@ public class TaskManager implements ReadOnlyTaskManager {
         persons.forEach(this::syncMasterTagListWith);
     }
 
-    public boolean removePerson(ReadOnlyItem key) throws UniqueItemList.PersonNotFoundException {
-        if (persons.remove(key)) {
+    public boolean removePerson(ReadOnlyEvent key) throws UniqueItemList.PersonNotFoundException {
+        if (events.remove(key)) {
             return true;
         } else {
             throw new UniqueItemList.PersonNotFoundException();
@@ -157,13 +159,13 @@ public class TaskManager implements ReadOnlyTaskManager {
 
     @Override
     public String toString() {
-        return persons.asObservableList().size() + " persons, " + tags.asObservableList().size() +  " tags";
+        return events.asObservableList().size() + " persons, " + tags.asObservableList().size() +  " tags";
         // TODO: refine later
     }
 
     @Override
-    public ObservableList<ReadOnlyItem> getPersonList() {
-        return new UnmodifiableObservableList<>(persons.asObservableList());
+    public ObservableList<ReadOnlyEvent> getPersonList() {
+        return new UnmodifiableObservableList<>(events.asObservableList());
     }
 
     @Override
@@ -175,13 +177,13 @@ public class TaskManager implements ReadOnlyTaskManager {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TaskManager // instanceof handles nulls
-                && this.persons.equals(((TaskManager) other).persons)
+                && this.events.equals(((TaskManager) other).events)
                 && this.tags.equalsOrderInsensitive(((TaskManager) other).tags));
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(persons, tags);
+        return Objects.hash(events, tags);
     }
 }

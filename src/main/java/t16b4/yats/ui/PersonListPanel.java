@@ -13,7 +13,7 @@ import javafx.scene.layout.Region;
 import t16b4.yats.commons.core.LogsCenter;
 import t16b4.yats.commons.events.ui.PersonPanelSelectionChangedEvent;
 import t16b4.yats.commons.util.FxViewUtil;
-import t16b4.yats.model.item.ReadOnlyItem;
+import t16b4.yats.model.item.ReadOnlyEvent;
 
 /**
  * Panel containing the list of persons.
@@ -23,16 +23,16 @@ public class PersonListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
 
     @FXML
-    private ListView<ReadOnlyItem> personListView;
+    private ListView<ReadOnlyEvent> personListView;
 
-    public PersonListPanel(AnchorPane personListPlaceholder, ObservableList<ReadOnlyItem> personList) {
+    public PersonListPanel(AnchorPane personListPlaceholder, ObservableList<ReadOnlyEvent> observableList) {
         super(FXML);
-        setConnections(personList);
+        setConnections(observableList);
         addToPlaceholder(personListPlaceholder);
     }
 
-    private void setConnections(ObservableList<ReadOnlyItem> personList) {
-        personListView.setItems(personList);
+    private void setConnections(ObservableList<ReadOnlyEvent> observableList) {
+        personListView.setItems(observableList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
@@ -60,10 +60,10 @@ public class PersonListPanel extends UiPart<Region> {
         });
     }
 
-    class PersonListViewCell extends ListCell<ReadOnlyItem> {
+    class PersonListViewCell extends ListCell<ReadOnlyEvent> {
 
         @Override
-        protected void updateItem(ReadOnlyItem person, boolean empty) {
+        protected void updateItem(ReadOnlyEvent person, boolean empty) {
             super.updateItem(person, empty);
 
             if (empty || person == null) {

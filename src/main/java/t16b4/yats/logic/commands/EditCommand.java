@@ -7,6 +7,7 @@ import t16b4.yats.commons.core.Messages;
 import t16b4.yats.commons.util.CollectionUtil;
 import t16b4.yats.logic.commands.exceptions.CommandException;
 import t16b4.yats.model.item.Description;
+import t16b4.yats.model.item.ReadOnlyEvent;
 import t16b4.yats.model.item.Timing;
 import t16b4.yats.model.item.Title;
 import t16b4.yats.model.item.Task;
@@ -51,14 +52,14 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyItem> lastShownList = model.getFilteredPersonList();
+        List<ReadOnlyEvent> lastShownList = model.getFilteredPersonList();
 
         if (filteredPersonListIndex >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        ReadOnlyItem personToEdit = lastShownList.get(filteredPersonListIndex);
-        Task editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        ReadOnlyEvent personToEdit = lastShownList.get(filteredPersonListIndex);
+        Event editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         try {
             model.updatePerson(filteredPersonListIndex, editedPerson);
@@ -73,7 +74,7 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Task createEditedPerson(ReadOnlyItem personToEdit,
+    private static Task createEditedPerson(ReadOnlyEvent personToEdit,
                                              EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 

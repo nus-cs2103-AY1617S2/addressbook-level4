@@ -10,6 +10,7 @@ import t16b4.yats.logic.commands.CommandResult;
 import t16b4.yats.logic.commands.exceptions.CommandException;
 import t16b4.yats.logic.parser.Parser;
 import t16b4.yats.model.Model;
+import t16b4.yats.model.item.ReadOnlyEvent;
 import t16b4.yats.model.item.ReadOnlyItem;
 import t16b4.yats.storage.Storage;
 
@@ -36,7 +37,7 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
-    public ObservableList<ReadOnlyItem> getFilteredPersonList() {
+    public ObservableList<ReadOnlyEvent> getFilteredPersonList() {
         return model.getFilteredPersonList();
     }
 }

@@ -4,6 +4,8 @@ import java.util.Set;
 
 import t16b4.yats.commons.core.UnmodifiableObservableList;
 import t16b4.yats.model.item.Task;
+import t16b4.yats.model.item.Event;
+import t16b4.yats.model.item.ReadOnlyEvent;
 import t16b4.yats.model.item.ReadOnlyItem;
 import t16b4.yats.model.item.UniqueItemList;
 import t16b4.yats.model.item.UniqueItemList.DuplicatePersonException;
@@ -19,10 +21,10 @@ public interface Model {
     ReadOnlyTaskManager getAddressBook();
 
     /** Deletes the given person. */
-    void deletePerson(ReadOnlyItem target) throws UniqueItemList.PersonNotFoundException;
+    void deletePerson(ReadOnlyEvent target) throws UniqueItemList.PersonNotFoundException;
 
     /** Adds the given person */
-    void addPerson(Task person) throws UniqueItemList.DuplicatePersonException;
+    void addEvent(Event event) throws UniqueItemList.DuplicatePersonException;
 
     /**
      * Updates the person located at {@code filteredPersonListIndex} with {@code editedPerson}.
@@ -31,11 +33,11 @@ public interface Model {
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code filteredPersonListIndex} < 0 or >= the size of the filtered list.
      */
-    void updatePerson(int filteredPersonListIndex, ReadOnlyItem editedPerson)
+    void updatePerson(int filteredPersonListIndex, ReadOnlyEvent editedPerson)
             throws UniqueItemList.DuplicatePersonException;
 
     /** Returns the filtered person list as an {@code UnmodifiableObservableList<ReadOnlyPerson>} */
-    UnmodifiableObservableList<ReadOnlyItem> getFilteredPersonList();
+    UnmodifiableObservableList<ReadOnlyEvent> getFilteredPersonList();
 
     /** Updates the filter of the filtered person list to show all persons */
     void updateFilteredListToShowAll();
