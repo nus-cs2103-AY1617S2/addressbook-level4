@@ -65,6 +65,6 @@ public class XmlAdaptedTask {
         final PriorityLevel priorityLevel = new PriorityLevel(this.priorityLevel);
         final Information information = new Information(this.information);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(name, priorityLevel, email, information, tags);
+        return new Task(name, priorityLevel, information, tags);
     }
 }

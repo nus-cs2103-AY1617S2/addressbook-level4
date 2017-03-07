@@ -22,7 +22,7 @@ public class Task implements ReadOnlyTask {
      */
     public Task(Name name, PriorityLevel priorityLevel, Information information, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, priorityLevel, information, tags);
-        
+
         this.name = name;
         this.priorityLevel = priorityLevel;
         this.information = information;

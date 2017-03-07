@@ -21,7 +21,7 @@ public class SampleDataUtil {
                     new Information("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                     new UniqueTagList("colleagues", "friends")),
                 new Task(new Name("Charlotte Oliveiro"), new PriorityLevel("3"),
-                        new Email("charlotte@yahoo.com"), new Information("Blk 11 Ang Mo Kio Street 74, #11-04"),
+                        new Information("Blk 11 Ang Mo Kio Street 74, #11-04"),
                         new UniqueTagList("neighbours")),
                 new Task(new Name("David Li"), new PriorityLevel("1"),
                     new Information("Blk 436 Serangoon Gardens Street 26, #16-43"),

@@ -8,6 +8,7 @@ import seedu.taskboss.model.category.UniqueTagList;
  */
 public interface ReadOnlyTask {
 
+    Name getName();
     PriorityLevel getPriorityLevel();
     Information getInformation();
 
