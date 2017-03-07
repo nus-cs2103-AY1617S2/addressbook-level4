@@ -76,7 +76,7 @@ public class EditCommandParser {
     private Optional<String> getOptionalValue(ArgumentTokenizer tokenizer, Prefix prefix) {
         Optional<String> optionalString;
         if (!tokenizer.getValue(prefix).isPresent()) {
-            optionalString = Optional.of("");
+            optionalString = Optional.empty();
         } else {
             optionalString = Optional.of(tokenizer.getValue(prefix).get());
         }
