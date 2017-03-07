@@ -23,7 +23,7 @@ import seedu.address.model.task.Task;
 public class XmlSerializableTaskList implements ReadOnlyTaskList {
 
     @XmlElement
-    private List<XmlAdaptedPerson> tasks;
+    private List<XmlAdaptedTask> tasks;
     @XmlElement
     private List<XmlAdaptedTag> tags;
 
@@ -41,7 +41,7 @@ public class XmlSerializableTaskList implements ReadOnlyTaskList {
      */
     public XmlSerializableTaskList(ReadOnlyTaskList src) {
         this();
-        tasks.addAll(src.getTaskList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        tasks.addAll(src.getTaskList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
     }
 
