@@ -21,7 +21,7 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to TaskBoss. "
-            + "Parameters: NAME p/PRIORITY_LEVEL i/INFORMATION [t/TAG]...\n"
+            + "Parameters: NAME p/PRIORITY_LEVEL i/INFORMATION [t/CATEGORY]...\n"
             + "Example: " + COMMAND_WORD
             + " John Doe p/3 i/my best buddy t/friends t/owesMoney";
 
@@ -36,17 +36,17 @@ public class AddCommand extends Command {
      * @throws IllegalValueException if any of the raw values are invalid
      */
 
-    public AddCommand(String name, String priorityLevel, String information, Set<String> tags)
+    public AddCommand(String name, String priorityLevel, String information, Set<String> categories)
             throws IllegalValueException {
-        final Set<Category> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(new Category(tagName));
+        final Set<Category> categorySet = new HashSet<>();
+        for (String categoryName : categories) {
+            categorySet.add(new Category(categoryName));
         }
         this.toAdd = new Task(
                 new Name(name),
                 new PriorityLevel(priorityLevel),
                 new Information(information),
-                new UniqueCategoryList(tagSet)
+                new UniqueCategoryList(categorySet)
         );
     }
 
