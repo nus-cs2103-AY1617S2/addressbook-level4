@@ -12,8 +12,8 @@ import java.util.Optional;
 import seedu.taskList.commons.exceptions.IllegalValueException;
 import seedu.taskList.logic.commands.Command;
 import seedu.taskList.logic.commands.EditCommand;
-import seedu.taskList.logic.commands.IncorrectCommand;
 import seedu.taskList.logic.commands.EditCommand.EditTaskDescriptor;
+import seedu.taskList.logic.commands.IncorrectCommand;
 import seedu.taskList.model.tag.UniqueTagList;
 
 /**

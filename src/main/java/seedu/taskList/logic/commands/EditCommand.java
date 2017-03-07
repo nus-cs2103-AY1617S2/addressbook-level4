@@ -9,8 +9,8 @@ import seedu.taskList.logic.commands.exceptions.CommandException;
 import seedu.taskList.model.tag.UniqueTagList;
 import seedu.taskList.model.task.Comment;
 import seedu.taskList.model.task.Name;
-import seedu.taskList.model.task.Task;
 import seedu.taskList.model.task.ReadOnlyTask;
+import seedu.taskList.model.task.Task;
 import seedu.taskList.model.task.UniqueTaskList;
 
 /**

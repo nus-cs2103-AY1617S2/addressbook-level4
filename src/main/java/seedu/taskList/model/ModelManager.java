@@ -10,8 +10,8 @@ import seedu.taskList.commons.core.UnmodifiableObservableList;
 import seedu.taskList.commons.events.model.TaskListChangedEvent;
 import seedu.taskList.commons.util.CollectionUtil;
 import seedu.taskList.commons.util.StringUtil;
-import seedu.taskList.model.task.Task;
 import seedu.taskList.model.task.ReadOnlyTask;
+import seedu.taskList.model.task.Task;
 import seedu.taskList.model.task.UniqueTaskList;
 import seedu.taskList.model.task.UniqueTaskList.TaskNotFoundException;
 

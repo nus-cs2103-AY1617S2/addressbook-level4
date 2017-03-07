@@ -13,8 +13,8 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.taskList.commons.exceptions.DataConversionException;
 import seedu.taskList.commons.util.FileUtil;
-import seedu.taskList.model.TaskList;
 import seedu.taskList.model.ReadOnlyTaskList;
+import seedu.taskList.model.TaskList;
 import seedu.taskList.model.task.Task;
 import seedu.taskList.storage.XmlTaskListStorage;
 import seedu.taskList.testutil.TypicalTestTasks;

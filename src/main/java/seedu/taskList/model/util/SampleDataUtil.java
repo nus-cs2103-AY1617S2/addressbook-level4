@@ -1,8 +1,8 @@
 package seedu.taskList.model.util;
 
 import seedu.taskList.commons.exceptions.IllegalValueException;
-import seedu.taskList.model.TaskList;
 import seedu.taskList.model.ReadOnlyTaskList;
+import seedu.taskList.model.TaskList;
 import seedu.taskList.model.tag.UniqueTagList;
 import seedu.taskList.model.task.Comment;
 import seedu.taskList.model.task.Name;

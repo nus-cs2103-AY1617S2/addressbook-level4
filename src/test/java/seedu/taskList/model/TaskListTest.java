@@ -14,11 +14,10 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.taskList.model.TaskList;
 import seedu.taskList.model.ReadOnlyTaskList;
 import seedu.taskList.model.tag.Tag;
-import seedu.taskList.model.task.Task;
 import seedu.taskList.model.task.ReadOnlyTask;
+import seedu.taskList.model.task.Task;
 import seedu.taskList.testutil.TypicalTestTasks;
 
 public class TaskListTest {

@@ -3,8 +3,8 @@ package seedu.taskList.model;
 import java.util.Set;
 
 import seedu.taskList.commons.core.UnmodifiableObservableList;
-import seedu.taskList.model.task.Task;
 import seedu.taskList.model.task.ReadOnlyTask;
+import seedu.taskList.model.task.Task;
 import seedu.taskList.model.task.UniqueTaskList;
 import seedu.taskList.model.task.UniqueTaskList.DuplicateTaskException;
 

@@ -24,8 +24,6 @@ import seedu.taskList.commons.core.EventsCenter;
 import seedu.taskList.commons.events.model.TaskListChangedEvent;
 import seedu.taskList.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskList.commons.events.ui.ShowHelpRequestEvent;
-import seedu.taskList.logic.Logic;
-import seedu.taskList.logic.LogicManager;
 import seedu.taskList.logic.commands.AddCommand;
 import seedu.taskList.logic.commands.ClearCommand;
 import seedu.taskList.logic.commands.Command;
@@ -37,16 +35,16 @@ import seedu.taskList.logic.commands.HelpCommand;
 import seedu.taskList.logic.commands.ListCommand;
 import seedu.taskList.logic.commands.SelectCommand;
 import seedu.taskList.logic.commands.exceptions.CommandException;
-import seedu.taskList.model.TaskList;
 import seedu.taskList.model.Model;
 import seedu.taskList.model.ModelManager;
 import seedu.taskList.model.ReadOnlyTaskList;
+import seedu.taskList.model.TaskList;
 import seedu.taskList.model.tag.Tag;
 import seedu.taskList.model.tag.UniqueTagList;
 import seedu.taskList.model.task.Comment;
 import seedu.taskList.model.task.Name;
-import seedu.taskList.model.task.Task;
 import seedu.taskList.model.task.ReadOnlyTask;
+import seedu.taskList.model.task.Task;
 import seedu.taskList.storage.StorageManager;
 
 

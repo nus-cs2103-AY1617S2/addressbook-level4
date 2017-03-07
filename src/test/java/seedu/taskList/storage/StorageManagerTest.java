@@ -14,8 +14,8 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.taskList.commons.events.model.TaskListChangedEvent;
 import seedu.taskList.commons.events.storage.DataSavingExceptionEvent;
-import seedu.taskList.model.TaskList;
 import seedu.taskList.model.ReadOnlyTaskList;
+import seedu.taskList.model.TaskList;
 import seedu.taskList.model.UserPrefs;
 import seedu.taskList.storage.JsonUserPrefsStorage;
 import seedu.taskList.storage.Storage;
