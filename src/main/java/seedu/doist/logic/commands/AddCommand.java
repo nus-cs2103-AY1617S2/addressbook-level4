@@ -3,6 +3,7 @@ package seedu.doist.logic.commands;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -39,11 +40,11 @@ public class AddCommand extends Command {
      * @throws IllegalValueException
      *             if any of the raw values are invalid
      */
-    public AddCommand(String preamble, Map<String, java.util.List<String>> parameters) throws IllegalValueException {
+    public AddCommand(String preamble, Map<String, List<String>> parameters) throws IllegalValueException {
         if (preamble == null || preamble.trim().isEmpty()) {
             throw new IllegalValueException("You can't add a task without a description!");
         }
-        java.util.List<String> tags = parameters.get(CliSyntax.PREFIX_UNDER.toString());
+        List<String> tags = parameters.get(CliSyntax.PREFIX_UNDER.toString());
         final Set<Tag> tagSet = new HashSet<>();
 
         if (tags != null && tags.size() > 0) {
@@ -55,7 +56,7 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Task(new Description(preamble), new UniqueTagList(tagSet));
 
-        java.util.List<String> priority = parameters.get(CliSyntax.PREFIX_AS.toString());
+        List<String> priority = parameters.get(CliSyntax.PREFIX_AS.toString());
         System.out.println(parameters);
         if (priority != null && priority.size() > 0) {
             String strPriority = priority.get(0).trim();

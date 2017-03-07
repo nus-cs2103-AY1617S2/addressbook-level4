@@ -55,7 +55,7 @@ public class Parser {
         } else if (FindCommand.info().canCommandBeTriggeredByWord(commandWord)) {
             return new FindCommandParser().parse(arguments);
         } else if (ListCommand.info().canCommandBeTriggeredByWord(commandWord)) {
-            return new ListCommand();
+            return new ListCommandParser().parse(arguments);
         } else if (ExitCommand.info().canCommandBeTriggeredByWord(commandWord)) {
             return new ExitCommand();
         } else if (HelpCommand.info().canCommandBeTriggeredByWord(commandWord)) {
