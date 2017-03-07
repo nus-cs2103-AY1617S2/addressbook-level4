@@ -1,4 +1,4 @@
-# Address Book (Level 4)
+# Whatsleft
 
 [![Build Status](https://travis-ci.org/se-edu/addressbook-level4.svg?branch=master)](https://travis-ci.org/se-edu/addressbook-level4)
 [![Build status](https://ci.appveyor.com/api/projects/status/3boko2x2vr5cc3w2?svg=true)](https://ci.appveyor.com/project/damithc/addressbook-level4)
@@ -7,16 +7,8 @@
 
 <img src="docs/images/Ui.png" width="600"><br>
 
-* This is a desktop Address Book application. It has a GUI but most of the user interactions happen using
-  a CLI (Command Line Interface).
-* It is a Java sample application intended for students learning Software Engineering while using Java as
-  the main programming language.
-* It is **written in OOP fashion**. It provides a **reasonably well-written** code example that is
-  **significantly bigger** (around 6 KLoC)than what students usually write in beginner-level SE modules.
-* What's different from [level 3](https://github.com/se-edu/addressbook-level3):
-    * A more sophisticated GUI that includes a list panel and an in-built Browser.
-    * More test cases, including automated GUI testing.
-    * Support for *Build Automation* using Gradle and for *Continuous Integration* using Travis CI.
+* Whatsleft is a text-based task management application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
+* It is developed by a group of passionate NUS undergraduate students from different disciplines.
 
 
 #### Site Map
@@ -31,6 +23,7 @@
 
 * Some parts of this sample application were inspired by the excellent
   [Java FX tutorial](http://code.makery.ch/library/javafx-8-tutorial/) by *Marco Jakob*.
-
+* The project is morphed from [addressbook-level4](https://github.com/nus-cs2103-AY1617S2/addressbook-level4), a sample project prepared by the teaching crew of CS2103 Software Engineering.
+* The original sample project was created by [SE-EDU initiative](http://github.com/se-edu/).
 
 #### Licence : [MIT](LICENSE)
