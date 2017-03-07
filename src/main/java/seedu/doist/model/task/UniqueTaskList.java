@@ -1,5 +1,6 @@
 package seedu.doist.model.task;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -27,6 +28,14 @@ public class UniqueTaskList implements Iterable<Task> {
     public boolean contains(ReadOnlyTask toCheck) {
         assert toCheck != null;
         return internalList.contains(toCheck);
+    }
+
+    /**
+     * Sorts the internal list with comparator
+     */
+    public void sort(Comparator<ReadOnlyTask> comparator) {
+        assert comparator != null;
+        internalList.sort(comparator);
     }
 
     /**

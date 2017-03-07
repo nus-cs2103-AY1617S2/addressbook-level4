@@ -3,13 +3,17 @@ package seedu.doist.logic.commands;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import seedu.doist.commons.exceptions.IllegalValueException;
 import seedu.doist.logic.commands.exceptions.CommandException;
+import seedu.doist.logic.parser.CliSyntax;
 import seedu.doist.model.tag.Tag;
 import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.Description;
+import seedu.doist.model.task.Priority;
 import seedu.doist.model.task.Task;
 import seedu.doist.model.task.UniqueTaskList;
 
@@ -21,9 +25,9 @@ public class AddCommand extends Command {
     public static ArrayList<String> commandWords = new ArrayList<>(Arrays.asList("add", "do"));
     public static final String DEFAULT_COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = getUsageTextForCommandWords() + ": Adds a person to the address book. "
-            + "Parameters: NAME p/PHONE e/EMAIL a/ADDRESS  [t/TAG]...\n" + "Example: " + DEFAULT_COMMAND_WORD
-            + " John Doe p/98765432 e/johnd@gmail.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney";
+    public static final String MESSAGE_USAGE = info().getUsageTextForCommandWords() + ": Adds a task to Doist\n"
+            + "Parameters: TASK_DESCRIPTION  [\\from START_TIME] [\\to END_TIME] [\\as PRIORITY] [\\under TAG...]\n"
+            + "Example: " + DEFAULT_COMMAND_WORD + "Group meeting \\from 1600 \\to 1800 \\as IMPORTANT \\under school ";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the to-do list";
@@ -36,12 +40,28 @@ public class AddCommand extends Command {
      * @throws IllegalValueException
      *             if any of the raw values are invalid
      */
-    public AddCommand(String name, Set<String> tags) throws IllegalValueException {
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(new Tag(tagName));
+    public AddCommand(String preamble, Map<String, List<String>> parameters) throws IllegalValueException {
+        if (preamble == null || preamble.trim().isEmpty()) {
+            throw new IllegalValueException("You can't add a task without a description!");
         }
-        this.toAdd = new Task(new Description(name), new UniqueTagList(tagSet));
+        List<String> tags = parameters.get(CliSyntax.PREFIX_UNDER.toString());
+        final Set<Tag> tagSet = new HashSet<>();
+
+        if (tags != null && tags.size() > 0) {
+            String allTags = tags.get(0).trim();
+            String[] extractedTags = allTags.split(" ");
+            for (String extractedTag : extractedTags) {
+                tagSet.add(new Tag(extractedTag));
+            }
+        }
+        this.toAdd = new Task(new Description(preamble), new UniqueTagList(tagSet));
+
+        List<String> priority = parameters.get(CliSyntax.PREFIX_AS.toString());
+        System.out.println(parameters);
+        if (priority != null && priority.size() > 0) {
+            String strPriority = priority.get(0).trim();
+            this.toAdd.setPriority(new Priority(strPriority));
+        }
     }
 
     @Override
@@ -55,24 +75,7 @@ public class AddCommand extends Command {
         }
     }
 
-    /**
-     * @return a string containing all the command words to be shown in the
-     *         usage message, in the format of (word1|word2|...)
-     */
-    protected static String getUsageTextForCommandWords() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("(");
-        if (!commandWords.contains(DEFAULT_COMMAND_WORD)) {
-            sb.append(DEFAULT_COMMAND_WORD + "|");
-        }
-        for (String commandWord : commandWords) {
-            sb.append(commandWord + "|");
-        }
-        sb.setCharAt(sb.length() - 1, ')');
-        return sb.toString();
-    }
-
-    public static boolean canCommandBeTriggeredByWord(String word) {
-        return commandWords.contains(word) || DEFAULT_COMMAND_WORD.equals(word);
+    public static CommandInfo info() {
+        return new CommandInfo(commandWords, DEFAULT_COMMAND_WORD);
     }
 }

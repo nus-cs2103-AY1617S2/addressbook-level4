@@ -21,6 +21,16 @@ public abstract class Command {
     }
 
     /**
+     * Constructs a feedback message to summarise an operation that sorted a listing of tasks.
+     *
+     * @param displaySize used to generate summary
+     * @return summary message for persons displayed
+     */
+    public static String getMessageForPersonListSortedSummary(SortCommand.SortType sortType) {
+        return String.format(Messages.MESSAGE_PERSONS_SORTED_OVERVIEW, sortType.toString());
+    }
+
+    /**
      * Executes the command and returns the result message.
      *
      * @return feedback message of the operation result for display

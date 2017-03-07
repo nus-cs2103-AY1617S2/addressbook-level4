@@ -17,6 +17,5 @@ public class IncorrectCommand extends Command {
     public CommandResult execute() throws CommandException {
         throw new CommandException(feedbackToUser);
     }
-
 }
 

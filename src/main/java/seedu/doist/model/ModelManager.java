@@ -1,5 +1,6 @@
 package seedu.doist.model;
 
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -10,7 +11,9 @@ import seedu.doist.commons.core.UnmodifiableObservableList;
 import seedu.doist.commons.events.model.TodoListChangedEvent;
 import seedu.doist.commons.util.CollectionUtil;
 import seedu.doist.commons.util.StringUtil;
+import seedu.doist.model.tag.Tag;
 import seedu.doist.model.task.ReadOnlyTask;
+import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskPriorityComparator;
 import seedu.doist.model.task.Task;
 import seedu.doist.model.task.UniqueTaskList;
 import seedu.doist.model.task.UniqueTaskList.TaskNotFoundException;
@@ -81,6 +84,11 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTodoListChanged();
     }
 
+    @Override
+    public void sortTasksByPriority() {
+        todoList.sortTasks(new ReadOnlyTaskPriorityComparator());
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     @Override
@@ -96,6 +104,11 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new DescriptionQualifier(keywords)));
+    }
+
+    @Override
+    public void updateFilteredTaskList(List<Tag> tags) {
+        updateFilteredTaskList(new PredicateExpression(new TagQualifier(tags)));
     }
 
     private void updateFilteredTaskList(Expression expression) {
@@ -154,4 +167,29 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    private class TagQualifier implements Qualifier {
+        private List<Tag> tags;
+
+        public TagQualifier(List<Tag> tags2) {
+            this.tags = tags2;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            for (Tag tag : tags) {
+                if (task.getTags().contains(tag)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
 }
+
+
+
+
+
+
+
+

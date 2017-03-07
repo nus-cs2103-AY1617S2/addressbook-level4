@@ -119,9 +119,9 @@ public class LogicManagerTest {
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTodoList, List)
      */
     private void assertCommandFailure(String inputCommand, String expectedMessage) {
-        TodoList expectedAddressBook = new TodoList(model.getTodoList());
+        TodoList expectedTodoList = new TodoList(model.getTodoList());
         List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredTaskList());
-        assertCommandBehavior(true, inputCommand, expectedMessage, expectedAddressBook, expectedShownList);
+        assertCommandBehavior(true, inputCommand, expectedMessage, expectedTodoList, expectedShownList);
     }
 
     /**
@@ -184,56 +184,53 @@ public class LogicManagerTest {
 
     @Test
     public void execute_add_invalidArgsFormat() {
-        //String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        //assertCommandFailure("add wrong arg wrong args", expectedMessage);
-        //assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid,address", expectedMessage);
-        //assertCommandFailure("add Valid Name p/12345 valid@email.butNoPrefix a/valid, address", expectedMessage);
-        //assertCommandFailure("add Valid Name p/12345"
-        //+ "e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        assertCommandFailure("add ", expectedMessage);
+        assertCommandFailure("add Valid Name but empty argument \\under  ", expectedMessage);
+        assertCommandFailure("add Valid Name \\from345 Invalid Prefix", expectedMessage);
+        assertCommandFailure("add Valid Name \\from 1500 \\to 1600 \\ ", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidPersonData() {
-        assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
-                Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
+        //assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
+              //  Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
         //assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
                 //Phone.MESSAGE_PHONE_CONSTRAINTS);
         //assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
                 //Email.MESSAGE_EMAIL_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
-                Tag.MESSAGE_TAG_CONSTRAINTS);
-
+        //assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
+              //  Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
-    @Test
-    public void execute_add_successful() throws Exception {
-        // setup expectations
-        TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.adam();
-        TodoList expectedAB = new TodoList();
-        expectedAB.addTask(toBeAdded);
+//    @Test
+//    public void execute_add_successful() throws Exception {
+//        // setup expectations
+//        TestDataHelper helper = new TestDataHelper();
+//        Task toBeAdded = helper.doLaundry();
+//        TodoList expectedTodoList = new TodoList();
+//        expectedTodoList.addTask(toBeAdded);
+//
+//        // execute command and verify result
+//        assertCommandSuccess(helper.generateAddCommand(toBeAdded),
+//                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+//                expectedTodoList,
+//                expectedTodoList.getTaskList());
+//
+//    }
 
-        // execute command and verify result
-        assertCommandSuccess(helper.generateAddCommand(toBeAdded),
-                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
-                expectedAB,
-                expectedAB.getTaskList());
-
-    }
-
-    @Test
-    public void execute_addDuplicate_notAllowed() throws Exception {
-        // setup expectations
-        TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.adam();
-
-        // setup starting state
-        model.addTask(toBeAdded); // person already in internal address book
-
-        // execute command and verify result
-        assertCommandFailure(helper.generateAddCommand(toBeAdded),  AddCommand.MESSAGE_DUPLICATE_PERSON);
-
-    }
+//    @Test
+//    public void execute_addDuplicate_notAllowed() throws Exception {
+//        // setup expectations
+//        TestDataHelper helper = new TestDataHelper();
+//        Task toBeAdded = helper.doLaundry();
+//
+//        // setup starting state
+//        model.addTask(toBeAdded); // person already in internal address book
+//
+//        // execute command and verify result
+//        assertCommandFailure(helper.generateAddCommand(toBeAdded),  AddCommand.MESSAGE_DUPLICATE_PERSON);
+//    }
 
 
     @Test
@@ -414,8 +411,8 @@ public class LogicManagerTest {
      */
     protected class TestDataHelper {
 
-        protected Task adam() throws Exception {
-            Description name = new Description("Adam Brown");
+        protected Task doLaundry() throws Exception {
+            Description name = new Description("Do Laundry");
             //Phone privatePhone = new Phone("111111");
             //Email email = new Email("adam@gmail.com");
             //Address privateAddress = new Address("111, alpha street");
@@ -454,8 +451,9 @@ public class LogicManagerTest {
             //cmd.append(" a/").append(p.getAddress());
 
             UniqueTagList tags = p.getTags();
+            cmd.append(" \\under ");
             for (Tag t: tags) {
-                cmd.append(" t/").append(t.tagName);
+                cmd.append(t.tagName);
             }
 
             return cmd.toString();
