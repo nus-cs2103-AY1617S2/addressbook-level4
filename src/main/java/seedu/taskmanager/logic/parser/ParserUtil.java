@@ -64,7 +64,7 @@ public class ParserUtil {
         return Arrays.stream(Arrays.copyOf(preamble.split("\\s+", numFields), numFields))
                 .map(Optional::ofNullable)
                 .collect(Collectors.toList());
-    }	
+    }
 
     /**
      * Parses a {@code Optional<String> taskname} into an {@code Optional<TaskName>} if {@code taskname} is present.
@@ -81,7 +81,7 @@ public class ParserUtil {
         assert time != null;
         return time.isPresent() ? Optional.of(new Time(time.get())) : Optional.empty();
     }
-    
+
     /**
      * Parses a {@code Optional<String> date} into an {@code Optional<Date>} if {@code date} is present.
      */
@@ -97,11 +97,11 @@ public class ParserUtil {
     	assert endtime != null;
     	return endtime.isPresent() ? Optional.of(new EndTime(endtime.get())) : Optional.empty();
     }
-    
-    
+
+
     /**
      * Parses a {@code Optional<String> deadline} into an {@code Optional<Deadline>} if {@code deadline} is present.
-     
+
     public static Optional<Deadline> parseDeadline(Optional<String> deadline) throws IllegalValueException {
     	assert deadline != null;
     	return deadline.isPresent() ? Optional.of(new Deadline(endtime.get())) : Optinal.empty();
