@@ -6,10 +6,14 @@ import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.logic.commands.exceptions.CommandException;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import seedu.address.model.person.ReadOnlyTask;
 =======
 import seedu.address.model.task.ReadOnlyTask;
 >>>>>>> a767941edae67662e99e1bfd4f1f28910f9d385f
+=======
+import seedu.address.model.person.ReadOnlyTask;
+>>>>>>> parent of 9b5fb6b... test
 
 /**
  * Selects a task identified using its last displayed index from the task manager.
@@ -35,10 +39,14 @@ public class SelectCommand extends Command {
     public CommandResult execute() throws CommandException {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredPersonList();
 =======
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 >>>>>>> a767941edae67662e99e1bfd4f1f28910f9d385f
+=======
+        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredPersonList();
+>>>>>>> parent of 9b5fb6b... test
 
         if (lastShownList.size() < targetIndex) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);

@@ -32,12 +32,12 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Adds a person to the list.
      *
-     * @throws DuplicatePersonException if the person to add is a duplicate of an existing person in the list.
+     * @throws DuplicateTaskException if the person to add is a duplicate of an existing person in the list.
      */
-    public void add(Person toAdd) throws DuplicatePersonException {
+    public void add(Person toAdd) throws DuplicateTaskException {
         assert toAdd != null;
         if (contains(toAdd)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateTaskException();
         }
         internalList.add(toAdd);
     }
@@ -45,16 +45,20 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Updates the person in the list at position {@code index} with {@code editedPerson}.
      *
-     * @throws DuplicatePersonException if updating the person's details causes the person to be equivalent to
+     * @throws DuplicateTaskException if updating the person's details causes the person to be equivalent to
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
+<<<<<<< HEAD
     public void updatePerson(int index, ReadOnlyTask editedPerson) throws DuplicatePersonException {
+=======
+    public void updatePerson(int index, ReadOnlyTask editedPerson) throws DuplicateTaskException {
+>>>>>>> parent of 9b5fb6b... test
         assert editedPerson != null;
 
         Person personToUpdate = internalList.get(index);
         if (!personToUpdate.equals(editedPerson) && internalList.contains(editedPerson)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateTaskException();
         }
 
         personToUpdate.resetData(editedPerson);
@@ -82,7 +86,11 @@ public class UniquePersonList implements Iterable<Person> {
         this.internalList.setAll(replacement.internalList);
     }
 
+<<<<<<< HEAD
     public void setPersons(List<? extends ReadOnlyTask> persons) throws DuplicatePersonException {
+=======
+    public void setPersons(List<? extends ReadOnlyTask> persons) throws DuplicateTaskException {
+>>>>>>> parent of 9b5fb6b... test
         final UniquePersonList replacement = new UniquePersonList();
         for (final ReadOnlyTask person : persons) {
             replacement.add(new Person(person));
@@ -115,8 +123,8 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Signals that an operation would have violated the 'no duplicates' property of the list.
      */
-    public static class DuplicatePersonException extends DuplicateDataException {
-        protected DuplicatePersonException() {
+    public static class DuplicateTaskException extends DuplicateDataException {
+        protected DuplicateTaskException() {
             super("Operation would result in duplicate persons");
         }
     }

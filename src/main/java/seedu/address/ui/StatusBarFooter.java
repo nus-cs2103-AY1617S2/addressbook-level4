@@ -48,10 +48,14 @@ public class StatusBarFooter extends UiPart<Region> {
 
     @Subscribe
 <<<<<<< HEAD
+<<<<<<< HEAD
     public void handleAddressBookChangedEvent(TaskManagerChangedEvent abce) {
 =======
     public void handleTaskManagerChangedEvent(TaskManagerChangedEvent tmce) {
 >>>>>>> 52e701e877d7e50931eb3bb6a441c4f8af274322
+=======
+    public void handleAddressBookChangedEvent(TaskManagerChangedEvent abce) {
+>>>>>>> parent of 9b5fb6b... test
         String lastUpdated = (new Date()).toString();
         logger.info(LogsCenter.getEventHandlingLogMessage(tmce, "Setting last updated status to " + lastUpdated));
         setSyncStatus("Last Updated: " + lastUpdated);

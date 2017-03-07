@@ -53,8 +53,13 @@ public class AddCommand extends Command {
         try {
             model.addTask(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+<<<<<<< HEAD
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
+=======
+        } catch (UniquePersonList.DuplicateTaskException e) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+>>>>>>> parent of 9b5fb6b... test
         }
 
     }

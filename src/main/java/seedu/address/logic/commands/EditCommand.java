@@ -60,6 +60,7 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
 <<<<<<< HEAD
+<<<<<<< HEAD
         List<ReadOnlyTask> lastShownList = model.getFilteredPersonList();
 =======
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
@@ -70,6 +71,14 @@ public class EditCommand extends Command {
         }
 
 <<<<<<< HEAD
+=======
+        List<ReadOnlyTask> lastShownList = model.getFilteredPersonList();
+
+        if (filteredPersonListIndex >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+>>>>>>> parent of 9b5fb6b... test
         ReadOnlyTask personToEdit = lastShownList.get(filteredPersonListIndex);
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 =======
@@ -78,9 +87,15 @@ public class EditCommand extends Command {
 >>>>>>> a767941edae67662e99e1bfd4f1f28910f9d385f
 
         try {
+<<<<<<< HEAD
             model.updateTask(filteredTaskListIndex, editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dte) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
+=======
+            model.updatePerson(filteredPersonListIndex, editedPerson);
+        } catch (UniquePersonList.DuplicateTaskException dpe) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+>>>>>>> parent of 9b5fb6b... test
         }
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
@@ -91,6 +106,9 @@ public class EditCommand extends Command {
      * edited with {@code editTaskDescriptor}.
      */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 9b5fb6b... test
     private static Person createEditedPerson(ReadOnlyTask personToEdit,
                                              EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;

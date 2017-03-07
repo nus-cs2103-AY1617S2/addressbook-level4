@@ -65,7 +65,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void addPerson(Person person) throws UniquePersonList.DuplicatePersonException {
+    public synchronized void addPerson(Person person) throws UniquePersonList.DuplicateTaskException {
         addressBook.addPerson(person);
         updateFilteredListToShowAll();
         indicateAddressBookChanged();
@@ -73,7 +73,11 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updatePerson(int filteredPersonListIndex, ReadOnlyTask editedPerson)
+<<<<<<< HEAD
             throws UniquePersonList.DuplicatePersonException {
+=======
+            throws UniquePersonList.DuplicateTaskException {
+>>>>>>> parent of 9b5fb6b... test
         assert editedPerson != null;
 
         int addressBookIndex = filteredPersons.getSourceIndex(filteredPersonListIndex);

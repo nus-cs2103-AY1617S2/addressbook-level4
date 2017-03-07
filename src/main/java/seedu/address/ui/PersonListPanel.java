@@ -15,11 +15,14 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.model.person.ReadOnlyTask;
+<<<<<<< HEAD
 =======
 import seedu.address.commons.events.uiTaskPanelSelectionChangedEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.model.task.ReadOnlyTask;
 >>>>>>> 52e701e877d7e50931eb3bb6a441c4f8af274322
+=======
+>>>>>>> parent of 9b5fb6b... test
 
 /**
  * Panel containing the list of tasks.
@@ -30,6 +33,7 @@ public class TaskListPanel extends UiPart<Region> {
 
     @FXML
 <<<<<<< HEAD
+<<<<<<< HEAD
     private ListView<ReadOnlyTask> personListView;
 
     public PersonListPanel(AnchorPane personListPlaceholder, ObservableList<ReadOnlyTask> personList) {
@@ -38,12 +42,20 @@ public class TaskListPanel extends UiPart<Region> {
 
     public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
 >>>>>>> 52e701e877d7e50931eb3bb6a441c4f8af274322
+=======
+    private ListView<ReadOnlyTask> personListView;
+
+    public PersonListPanel(AnchorPane personListPlaceholder, ObservableList<ReadOnlyTask> personList) {
+>>>>>>> parent of 9b5fb6b... test
         super(FXML);
         setConnections(taskList);
         addToPlaceholder(taskListPlaceholder);
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 9b5fb6b... test
     private void setConnections(ObservableList<ReadOnlyTask> personList) {
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
@@ -83,6 +95,9 @@ public class TaskListPanel extends UiPart<Region> {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 9b5fb6b... test
     class PersonListViewCell extends ListCell<ReadOnlyTask> {
 
         @Override
