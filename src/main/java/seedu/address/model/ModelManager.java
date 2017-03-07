@@ -12,7 +12,6 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.ReadOnlyTask;
-import seedu.address.model.task.TaskList;
 import seedu.address.model.task.TaskList.TaskNotFoundException;
 
 /**
