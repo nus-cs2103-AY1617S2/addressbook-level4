@@ -45,30 +45,30 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void resetData(ReadOnlyTaskList newData) {
         taskList.resetData(newData);
-        indicateAddressBookChanged();
+        indicateTaskListChanged();
     }
 
     @Override
-    public ReadOnlyTaskList getAddressBook() {
+    public ReadOnlyTaskList getTaskList() {
         return taskList;
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateAddressBookChanged() {
+    private void indicateTaskListChanged() {
         raise(new TaskListChangedEvent(taskList));
     }
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskList.removeTask(target);
-        indicateAddressBookChanged();
+        indicateTaskListChanged();
     }
 
     @Override
     public synchronized void addTask(Task person) throws UniqueTaskList.DuplicateTaskException {
         taskList.addTask(person);
         updateFilteredListToShowAll();
-        indicateAddressBookChanged();
+        indicateTaskListChanged();
     }
 
     @Override
@@ -78,7 +78,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskList.updateTask(taskListIndex, editedTask);
-        indicateAddressBookChanged();
+        indicateTaskListChanged();
     }
 
     //=========== Filtered Task List Accessors =============================================================

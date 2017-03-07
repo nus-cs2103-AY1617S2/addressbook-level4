@@ -5,11 +5,11 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.taskList.model.TaskList;
-import seedu.taskList.model.task.Person;
+import seedu.taskList.model.task.Task;
 import seedu.taskList.model.util.SampleDataUtil;
 import seedu.taskList.testutil.TestUtil;
 
-public class SampleDataTest extends AddressBookGuiTest {
+public class SampleDataTest extends TaskListGuiTest {
     @Override
     protected TaskList getInitialData() {
         // return null to force test app to load data from file only
@@ -24,7 +24,7 @@ public class SampleDataTest extends AddressBookGuiTest {
 
     @Test
     public void addressBook_dataFileDoesNotExist_loadSampleData() throws Exception {
-        Person[] expectedList = SampleDataUtil.getSamplePersons();
-        assertTrue(personListPanel.isListMatching(expectedList));
+        Task[] expectedList = SampleDataUtil.getSampleTasks();
+        assertTrue(taskListPanel.isListMatching(expectedList));
     }
 }

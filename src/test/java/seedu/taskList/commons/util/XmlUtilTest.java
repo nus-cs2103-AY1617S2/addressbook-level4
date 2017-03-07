@@ -15,7 +15,7 @@ import seedu.taskList.commons.util.FileUtil;
 import seedu.taskList.commons.util.XmlUtil;
 import seedu.taskList.model.TaskList;
 import seedu.taskList.storage.XmlSerializableTaskList;
-import seedu.taskList.testutil.AddressBookBuilder;
+import seedu.taskList.testutil.TaskListBuilder;
 import seedu.taskList.testutil.TestUtil;
 
 public class XmlUtilTest {
@@ -23,8 +23,8 @@ public class XmlUtilTest {
     private static final String TEST_DATA_FOLDER = FileUtil.getPath("src/test/data/XmlUtilTest/");
     private static final File EMPTY_FILE = new File(TEST_DATA_FOLDER + "empty.xml");
     private static final File MISSING_FILE = new File(TEST_DATA_FOLDER + "missing.xml");
-    private static final File VALID_FILE = new File(TEST_DATA_FOLDER + "validAddressBook.xml");
-    private static final File TEMP_FILE = new File(TestUtil.getFilePathInSandboxFolder("tempAddressBook.xml"));
+    private static final File VALID_FILE = new File(TEST_DATA_FOLDER + "validTaskList.xml");
+    private static final File TEMP_FILE = new File(TestUtil.getFilePathInSandboxFolder("tempTaskList.xml"));
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -56,7 +56,7 @@ public class XmlUtilTest {
     @Test
     public void getDataFromFile_validFile_validResult() throws Exception {
         XmlSerializableTaskList dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableTaskList.class);
-        assertEquals(9, dataFromFile.getPersonList().size());
+        assertEquals(9, dataFromFile.getTaskList().size());
         assertEquals(0, dataFromFile.getTagList().size());
     }
 
@@ -87,9 +87,9 @@ public class XmlUtilTest {
         assertEquals((new TaskList(dataToWrite)).toString(), (new TaskList(dataFromFile)).toString());
         //TODO: use equality instead of string comparisons
 
-        AddressBookBuilder builder = new AddressBookBuilder(new TaskList());
+        TaskListBuilder builder = new TaskListBuilder(new TaskList());
         dataToWrite = new XmlSerializableTaskList(
-                builder.withPerson(TestUtil.generateSamplePersonData().get(0)).withTag("Friends").build());
+                builder.withTask(TestUtil.generateSampleTaskData().get(0)).withTag("Friends").build());
 
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
         dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableTaskList.class);

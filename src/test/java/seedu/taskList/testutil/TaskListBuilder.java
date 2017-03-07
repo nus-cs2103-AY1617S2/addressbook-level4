@@ -3,28 +3,28 @@ package seedu.taskList.testutil;
 import seedu.taskList.commons.exceptions.IllegalValueException;
 import seedu.taskList.model.TaskList;
 import seedu.taskList.model.tag.Tag;
-import seedu.taskList.model.task.Person;
+import seedu.taskList.model.task.Task;
 import seedu.taskList.model.task.UniqueTaskList;
 
 /**
  * A utility class to help with building Addressbook objects.
  * Example usage: <br>
- *     {@code AddressBook ab = new AddressBookBuilder().withPerson("John", "Doe").withTag("Friend").build();}
+ *     {@code AddressBook ab = new AddressBookBuilder().withTask("John", "Doe").withTag("Friend").build();}
  */
-public class AddressBookBuilder {
+public class TaskListBuilder {
 
     private TaskList taskList;
 
-    public AddressBookBuilder(TaskList taskList) {
+    public TaskListBuilder(TaskList taskList) {
         this.taskList = taskList;
     }
 
-    public AddressBookBuilder withPerson(Person person) throws UniqueTaskList.DuplicatePersonException {
-        taskList.addPerson(person);
+    public TaskListBuilder withTask(Task person) throws UniqueTaskList.DuplicateTaskException {
+        taskList.addTask(person);
         return this;
     }
 
-    public AddressBookBuilder withTag(String tagName) throws IllegalValueException {
+    public TaskListBuilder withTag(String tagName) throws IllegalValueException {
         taskList.addTag(new Tag(tagName));
         return this;
     }
