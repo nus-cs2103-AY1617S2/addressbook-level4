@@ -19,8 +19,8 @@ public class TaskListBuilder {
         this.taskList = taskList;
     }
 
-    public TaskListBuilder withTask(Task person) throws UniqueTaskList.DuplicateTaskException {
-        taskList.addTask(person);
+    public TaskListBuilder withTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+        taskList.addTask(task);
         return this;
     }
 
