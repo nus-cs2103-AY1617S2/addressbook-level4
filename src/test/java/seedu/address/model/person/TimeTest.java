@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 public class TimeTest {
-    
+
     @Test
     public void isValidTime() {
         // invalid Time
@@ -22,7 +22,7 @@ public class TimeTest {
         assertFalse(Time.isValidTime("10 : 60 am")); //spaces in between numbers and colon
         assertFalse(Time.isValidTime("10:60")); //no indication of am/pm
         // valid Time
-       
+
         assertTrue(Time.isValidTime("11:25am"));
         assertTrue(Time.isValidTime("7:30 am")); // with space 
         assertTrue(Time.isValidTime("11:01pm")); //minute start with 0
