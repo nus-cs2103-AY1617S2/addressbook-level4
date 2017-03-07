@@ -22,9 +22,9 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to ezDo. "
-            + "Parameters: NAME p/PRIORITY e/EMAIL a/ADDRESS  [t/TAG]...\n"
+            + "Parameters: NAME s/START_DATE d/DUE_DATE [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " John Doe p/1 e/johnd@gmail.com s/12/12/2017 d/01/01/2018 t/friends t/owesMoney";
+            + " John Doe p/1 s/12/12/2017 d/01/01/2018 t/friends t/owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in ezDo";

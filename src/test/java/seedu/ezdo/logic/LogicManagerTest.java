@@ -84,7 +84,7 @@ public class LogicManagerTest {
     @Before
     public void setUp() {
         model = new ModelManager();
-        String tempEzDoFile = saveFolder.getRoot().getPath() + "TempAddressBook.xml";
+        String tempEzDoFile = saveFolder.getRoot().getPath() + "TempEzDo.xml";
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
         logic = new LogicManager(model, new StorageManager(tempEzDoFile, tempPreferencesFile));
         EventsCenter.getInstance().registerHandler(this);
@@ -192,18 +192,18 @@ public class LogicManagerTest {
         assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPriorityPrefix "
                 + "s/valid,address d/23/02/2017", expectedMessage);
         assertCommandFailure("add Valid Name p/1"
-                + ", address d/s23/03/2017", expectedMessage);
-        assertCommandFailure("add Valid Name p/1 e/valid@email.butNoAddressPrefix "
-                + "valid, address d/24/04/2017", expectedMessage);
+                + ", todo d/s23/03/2017", expectedMessage);
+        assertCommandFailure("add Valid Name p/1 e/valid@email.butNoStartDatePrefix "
+                + "valid, 12/12/2013 d/24/04/2017", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidPersonData() {
-        assertCommandFailure("add []\\[;] p/3 e/valid@e.mail s/valid, address d/31/05/1999",
+        assertCommandFailure("add []\\[;] p/3 e/valid@e.mail s/valid, startDate d/31/05/1999",
                 Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail s/valid, address d/31/06/1999",
+        assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail s/valid, startDate d/31/06/1999",
                 Priority.MESSAGE_PRIORITY_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/1 e/valid@e.mail s/valid, address d/31/08/1999 t/invalid_-[.tag",
+        assertCommandFailure("add Valid Name p/1 e/valid@e.mail s/valid, startDate d/31/08/1999 t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
