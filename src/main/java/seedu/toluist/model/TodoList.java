@@ -57,28 +57,28 @@ public class TodoList {
             allTasks.get(index).description = description;
         }
     }
-    
+
     public ArrayList<Task> getTasksWhosDescriptionContains(String comparison) {
         ArrayList<Task> foundList = new ArrayList<Task>();
-        
+
         for (int i = 0; i < allTasks.size(); i++) {
             if (allTasks.get(i).isStringContainedInDescriptionIgnoreCase(comparison)) {
                 foundList.add(allTasks.get(i));
             }
         }
-        
+
         return foundList;
     }
 
     public ArrayList<Task> getTasksWhosTagsContains(String comparison) {
         ArrayList<Task> foundList = new ArrayList<Task>();
-        
+
         for (int i = 0; i < allTasks.size(); i++) {
             if (allTasks.get(i).isStringContainedInAnyTagIgnoreCase(comparison)) {
                 foundList.add(allTasks.get(i));
             }
         }
-        
+
         return foundList;
     }
 }

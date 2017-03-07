@@ -61,11 +61,11 @@ public class Task {
     public boolean isOverdue() {
         return startDateTime != null && startDateTime.isBefore(LocalDateTime.now());
     }
-    
+
     public boolean isStringContainedInDescriptionIgnoreCase(String comparison) {
         return this.description.toLowerCase().contains(comparison.toLowerCase());
     }
-    
+
     public boolean isStringContainedInAnyTagIgnoreCase(String comparison) {
         for (int i = 0; i < this.allTags.size(); i++) {
             if (this.allTags.get(i).tagName.toLowerCase().contains(comparison.toLowerCase())) {
