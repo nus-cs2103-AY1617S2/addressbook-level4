@@ -10,8 +10,8 @@ import seedu.address.commons.exceptions.IllegalValueException;
 public class Date {
 	// TODO: Update message date constraints and regex
     public static final String MESSAGE_DATE_CONSTRAINTS =
-            "Task date should be a number";
-    public static final String DATE_VALIDATION_REGEX = "\\d+";
+            "Task date should be in the format: DD/MM/YY";
+    public static final String DATE_VALIDATION_REGEX = "\\d{2}/\\d{2}/\\d{2}";
 
     public final String value;
 
