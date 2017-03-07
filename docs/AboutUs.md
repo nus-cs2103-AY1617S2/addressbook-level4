@@ -37,7 +37,7 @@ We are a team based in the [School of Computing, National University of Singapor
 -----
 
 #### [Luo Yuyang](https://github.com/R-o-y)
-<img src="" width="150"><br>
+<img src="images/R-o-y.jpg" width="128"><br>
 **Role**: Developer <br>
 
 * Components in charge of: Logic, UI
