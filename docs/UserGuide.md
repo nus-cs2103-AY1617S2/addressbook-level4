@@ -20,12 +20,12 @@
       * [Viewing a specified task] (#viewing-a-specified-task)
       * [Viewing all Today's tasks] (#viewing-all-todays-tasks)
       * [Viewing all pending tasks] (#viewing-all-pending-tasks)
-      * [Viewing all completed tasks] (#viewing-all-completed-tasks)
+      * [Viewing all "done" tasks] (#viewing-all-done-tasks)
       * [Viewing all floating tasks] (#viewing-all-floating-tasks)
       * [Viewing all overdue tasks] (#viewing-all-overdue-tasks)
      * [Marking a task as completed] (#marking-a-task-as-completed)
      * [Finding for tasks] (#finding-for-tasks)
-     * [Clearing of completed tasks] (#clearing-of-completed-tasks)
+     * [Clearing of "done" tasks] (#clearing-of-done-tasks)
      * [Toggle Google Calendar] (#toggle-google-calendar)
      * [Undo most recent command] (#undo-most-recent-command)
      * [Redo most recent undo] (#redo-most-recent-undo)
@@ -376,12 +376,12 @@ Examples:
    Show the first task in the task list. 
 
 #### Viewing all Today's tasks
-View a list of all today's task in iManager. Does not show floating, done and overdue tasks. 
+View a list of all today's task in iManager. Does not show floating, "done" and overdue tasks. 
 
 Format: `view t`<br>
 
 #### Viewing all pending tasks
-View a list of all pending task in iManager. Does not show floating, done and overdue tasks. 
+View a list of all pending task in iManager. Does not show floating, "done" and overdue tasks. 
 
 Format: `view p`<br>
 
@@ -391,17 +391,17 @@ View a list of all "done" task in iManager. Does not show pending, floating, ove
 Format: `view c`<br>
 
 #### Viewing all floating tasks
-View a list of all floating tasks in iManage. Does not show pending, done, overdue and Today's tasks. 
+View a list of all floating tasks in iManage. Does not show pending, "done", overdue and Today's tasks. 
 
 Format: `view f`<br>
 
 #### Viewing all overdue tasks
-View a list of all tasks iManage. Does not show pending, done, floating and Today's tasks. 
+View a list of all tasks iManage. Does not show pending, "done", floating and Today's tasks. 
 
 Format: `view`<br>
 
-### Marking a task as done
-Mark an existing task as "done" in iManager. A "done" task gets transferred to the done list. 
+### Marking a task as "done"
+Mark an existing task as "done" in iManager. A "done" task gets transferred to the "done" list. 
 
 Format: `done INDEX|NAME`
 > * Name is case insensitive.
