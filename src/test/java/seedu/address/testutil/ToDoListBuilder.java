@@ -1,10 +1,10 @@
 package seedu.address.testutil;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.ToDoList;
-import seedu.address.model.person.Task;
-import seedu.address.model.person.UniqueTaskList;
-import seedu.address.model.tag.Tag;
+import seedu.onetwodo.commons.exceptions.IllegalValueException;
+import seedu.onetwodo.model.ToDoList;
+import seedu.onetwodo.model.person.Task;
+import seedu.onetwodo.model.person.UniqueTaskList;
+import seedu.onetwodo.model.tag.Tag;
 
 /**
  * A utility class to help with building ToDoList objects.

@@ -1,11 +1,11 @@
 package seedu.address.testutil;
 
-import seedu.address.model.person.Date;
-import seedu.address.model.person.Description;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.ReadOnlyTask;
-import seedu.address.model.person.Time;
-import seedu.address.model.tag.UniqueTagList;
+import seedu.onetwodo.model.person.Date;
+import seedu.onetwodo.model.person.Description;
+import seedu.onetwodo.model.person.Name;
+import seedu.onetwodo.model.person.ReadOnlyTask;
+import seedu.onetwodo.model.person.Time;
+import seedu.onetwodo.model.tag.UniqueTagList;
 
 /**
  * A mutable task object. For testing only.

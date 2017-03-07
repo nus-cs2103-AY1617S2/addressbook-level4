@@ -13,9 +13,9 @@ import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import seedu.address.TestApp;
-import seedu.address.model.person.ReadOnlyTask;
-import seedu.address.model.person.Task;
 import seedu.address.testutil.TestUtil;
+import seedu.onetwodo.model.person.ReadOnlyTask;
+import seedu.onetwodo.model.person.Task;
 
 /**
  * Provides a handle for the panel containing the task list.

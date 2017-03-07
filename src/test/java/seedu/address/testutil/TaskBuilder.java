@@ -1,12 +1,12 @@
 package seedu.address.testutil;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Date;
-import seedu.address.model.person.Description;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Time;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
+import seedu.onetwodo.commons.exceptions.IllegalValueException;
+import seedu.onetwodo.model.person.Date;
+import seedu.onetwodo.model.person.Description;
+import seedu.onetwodo.model.person.Name;
+import seedu.onetwodo.model.person.Time;
+import seedu.onetwodo.model.tag.Tag;
+import seedu.onetwodo.model.tag.UniqueTagList;
 
 /**
  *

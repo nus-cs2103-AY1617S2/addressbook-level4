@@ -5,6 +5,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import seedu.onetwodo.model.person.Name;
+
 public class NameTest {
 
     @Test
