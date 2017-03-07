@@ -506,8 +506,14 @@ Format : `exit`
 
 ## FAQ
 
-**Q**: <br>
-**A**: <br>
+Q: I can't undo my previous commands after reopening ForgetMeNot <br>
+A: Like most task managers out there, iManager does not support data backup while the application is not running.
+
+Q: Is it possible to set my storage path to a portable drive as I want to use them on different computers? <br>
+A: Yes! Just use the `saveto` command and choose the specified path of the portable drive
+
+Q: The iManager is not showing everything that i have added when i open it up?
+A: Our iManager only shows Today's task on start-up. To view pending, "done", floating or overdue task please refer to [Viewing tasks] (#viewing-task). 
 
 
 ## Command Summary
