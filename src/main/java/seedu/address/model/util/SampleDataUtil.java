@@ -15,15 +15,15 @@ public class SampleDataUtil {
                 new Task(new Name("CS2101"),
                     new UniqueTagList("modules")),
                 new Task(new Name("CS2103"),
-                    new UniqueTagList("Software Engineering")),
+                    new UniqueTagList("SoftwareEngineering")),
                 new Task(new Name("CS2105"),
                     new UniqueTagList("networking")),
                 new Task(new Name("CS2106"),
-                    new UniqueTagList("Operating System")),
+                    new UniqueTagList("OperatingSystem")),
                 new Task(new Name("CS2107"),
                     new UniqueTagList("security")),
                 new Task(new Name("CS2100"),
-                    new UniqueTagList("computer organisation"))
+                    new UniqueTagList("computerOrganisation"))
             };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);

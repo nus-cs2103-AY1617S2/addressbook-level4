@@ -17,7 +17,6 @@ import javafx.collections.ObservableList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
-import seedu.address.testutil.TypicalTestPersons;
 import seedu.address.testutil.TypicalTestTasks;
 
 public class AddressBookTest {
@@ -41,7 +40,7 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = new TypicalTestPersons().getTypicalAddressBook();
+        AddressBook newData = new TypicalTestTasks().getTypicalAddressBook();
         addressBook.resetData(newData);
         assertEquals(newData, addressBook);
     }
@@ -60,7 +59,7 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
-        AddressBook typicalAddressBook = new TypicalTestPersons().getTypicalAddressBook();
+        AddressBook typicalAddressBook = new TypicalTestTasks().getTypicalAddressBook();
         List<ReadOnlyTask> newPersons = typicalAddressBook.getTaskList();
         List<Tag> newTags = new ArrayList<>(typicalAddressBook.getTagList());
         // Repeat the first tag twice
