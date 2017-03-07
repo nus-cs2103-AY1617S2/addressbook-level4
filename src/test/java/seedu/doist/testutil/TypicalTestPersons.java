@@ -16,8 +16,8 @@ public class TypicalTestPersons {
         try {
             alice = new PersonBuilder().withName("Alice Pauline").withTags("friends").build();
             benson = new PersonBuilder().withName("Benson Meier").withTags("owesMoney", "friends").build();
-            carl = new PersonBuilder().withName("Carl Kurz").build();
-            daniel = new PersonBuilder().withName("Daniel Meier").build();
+            carl = new PersonBuilder().withName("Carl Kurz").withPriority("VERYIMPORTANT").build();
+            daniel = new PersonBuilder().withName("Daniel Meier").withPriority("IMPORTANT").build();
             elle = new PersonBuilder().withName("Elle Meyer").build();
             fiona = new PersonBuilder().withName("Fiona Kunz").build();
             george = new PersonBuilder().withName("George Best").build();

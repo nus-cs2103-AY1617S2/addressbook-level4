@@ -42,23 +42,23 @@ public class Parser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
-        if (AddCommand.canCommandBeTriggeredByWord(commandWord)) {
+        if (AddCommand.info().canCommandBeTriggeredByWord(commandWord)) {
             return new AddCommandParser().parse(arguments);
-        } else if (EditCommand.canCommandBeTriggeredByWord(commandWord)) {
+        } else if (EditCommand.info().canCommandBeTriggeredByWord(commandWord)) {
             return new EditCommandParser().parse(arguments);
-        } else if (SelectCommand.canCommandBeTriggeredByWord(commandWord)) {
+        } else if (SelectCommand.info().canCommandBeTriggeredByWord(commandWord)) {
             return new SelectCommandParser().parse(arguments);
-        } else if (DeleteCommand.canCommandBeTriggeredByWord(commandWord)) {
+        } else if (DeleteCommand.info().canCommandBeTriggeredByWord(commandWord)) {
             return new DeleteCommandParser().parse(arguments);
-        } else if (ClearCommand.canCommandBeTriggeredByWord(commandWord)) {
+        } else if (ClearCommand.info().canCommandBeTriggeredByWord(commandWord)) {
             return new ClearCommand();
-        } else if (FindCommand.canCommandBeTriggeredByWord(commandWord)) {
+        } else if (FindCommand.info().canCommandBeTriggeredByWord(commandWord)) {
             return new FindCommandParser().parse(arguments);
-        } else if (ListCommand.canCommandBeTriggeredByWord(commandWord)) {
+        } else if (ListCommand.info().canCommandBeTriggeredByWord(commandWord)) {
             return new ListCommand();
-        } else if (ExitCommand.canCommandBeTriggeredByWord(commandWord)) {
+        } else if (ExitCommand.info().canCommandBeTriggeredByWord(commandWord)) {
             return new ExitCommand();
-        } else if (HelpCommand.canCommandBeTriggeredByWord(commandWord)) {
+        } else if (HelpCommand.info().canCommandBeTriggeredByWord(commandWord)) {
             return new HelpCommand();
         } else {
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

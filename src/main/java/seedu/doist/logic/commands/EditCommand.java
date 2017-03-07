@@ -10,6 +10,7 @@ import seedu.doist.commons.util.CollectionUtil;
 import seedu.doist.logic.commands.exceptions.CommandException;
 import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.Description;
+import seedu.doist.model.task.Priority;
 import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.Task;
 import seedu.doist.model.task.UniqueTaskList;
@@ -22,7 +23,7 @@ public class EditCommand extends Command {
     public static ArrayList<String> commandWords = new ArrayList<>(Arrays.asList("edit"));
     public static final String DEFAULT_COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = getUsageTextForCommandWords()
+    public static final String MESSAGE_USAGE = info().getUsageTextForCommandWords()
             + ": Edits the details of the person identified " + "by the index number used in the last person listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS ] [t/TAG]...\n"
@@ -51,6 +52,11 @@ public class EditCommand extends Command {
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
+    public static CommandInfo info() {
+        return new CommandInfo(commandWords, DEFAULT_COMMAND_WORD);
+    }
+
+
     @Override
     public CommandResult execute() throws CommandException {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
@@ -75,13 +81,14 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of
      * {@code personToEdit} edited with {@code editPersonDescriptor}.
      */
-    private static Task createEditedPerson(ReadOnlyTask personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Task createEditedPerson(ReadOnlyTask taskToEdit, EditPersonDescriptor editTaskDescriptor) {
+        assert taskToEdit != null;
 
-        Description updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getDescription);
-        UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
+        Description updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getDescription);
+        Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
+        UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedName, updatedTags);
+        return new Task(updatedName, updatedPriority, updatedTags);
     }
 
     /**
@@ -89,14 +96,15 @@ public class EditCommand extends Command {
      * will replace the corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
-        private Optional<Description> name = Optional.empty();
+        private Optional<Description> desc = Optional.empty();
+        private Optional<Priority> priority = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditPersonDescriptor() {
         }
 
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
-            this.name = toCopy.getName();
+            this.desc = toCopy.getName();
             this.tags = toCopy.getTags();
         }
 
@@ -104,16 +112,21 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.tags);
+            return CollectionUtil.isAnyPresent(this.desc, this.tags);
+
         }
 
         public void setName(Optional<Description> name) {
             assert name != null;
-            this.name = name;
+            this.desc = name;
         }
 
         public Optional<Description> getName() {
-            return name;
+            return desc;
+        }
+
+        public Optional<Priority> getPriority() {
+            return priority;
         }
 
         public void setTags(Optional<UniqueTagList> tags) {
@@ -124,26 +137,5 @@ public class EditCommand extends Command {
         public Optional<UniqueTagList> getTags() {
             return tags;
         }
-    }
-
-    /**
-     * @return a string containing all the command words to be shown in the
-     *         usage message, in the format of (word1|word2|...)
-     */
-    protected static String getUsageTextForCommandWords() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("(");
-        if (!commandWords.contains(DEFAULT_COMMAND_WORD)) {
-            sb.append(DEFAULT_COMMAND_WORD + "|");
-        }
-        for (String commandWord : commandWords) {
-            sb.append(commandWord + "|");
-        }
-        sb.setCharAt(sb.length() - 1, ')');
-        return sb.toString();
-    }
-
-    public static boolean canCommandBeTriggeredByWord(String word) {
-        return commandWords.contains(word) || DEFAULT_COMMAND_WORD.equals(word);
     }
 }
