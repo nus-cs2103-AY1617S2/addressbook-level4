@@ -7,18 +7,26 @@ import seedu.address.model.task.ReadOnlyPerson;
 import seedu.address.model.task.UniquePersonList.PersonNotFoundException;
 
 /**
+<<<<<<< HEAD
  * Deletes a task identified using it's last displayed index from the address book.
+=======
+ * Deletes a task identified using it's last displayed index from the task manager.
+>>>>>>> master
  */
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
+<<<<<<< HEAD
             + ": Deletes the task identified by the index number used in the last task listing.\n"
+=======
+            + ": Deletes the task identified by the index number used in the task listing.\n"
+>>>>>>> master
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Task: %1$s";
 
     public final int targetIndex;
 
