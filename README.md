@@ -13,7 +13,6 @@ A CLI-based todo list app for Jim.
 #### Site Map
 * [User Guide](docs/UserGuide.md)
 * [Developer Guide](docs/DeveloperGuide.md)
-* [Learning Outcomes](docs/LearningOutcomes.md)
 * [About Us](docs/AboutUs.md)
 * [Contact Us](docs/ContactUs.md)
 
