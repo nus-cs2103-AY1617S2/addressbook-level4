@@ -1,9 +1,11 @@
-package seedu.address.model.person;
+package seedu.taskmanager.model.person;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+
+import seedu.taskmanager.model.task.Address;
 
 public class AddressTest {
 
