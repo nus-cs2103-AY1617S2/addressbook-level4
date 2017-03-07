@@ -1,8 +1,8 @@
 package guitests;
 
-import org.junit.Test;
-
 import static org.junit.Assert.assertFalse;
+
+import org.junit.Test;
 
 import seedu.toluist.model.Task;
 import seedu.toluist.testutil.TypicalTestTodoLists;
