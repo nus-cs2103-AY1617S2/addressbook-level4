@@ -397,8 +397,7 @@ Priority | As a ... | I want to ... | So that I can...
 **MSS**
 
 1. User enters the name of an event to be added, together with its start and end date/time and other options.
-2. TaskCrusher adds the event to the active list
-3. TaskCrusher displays back the details of the add action.
+2. TaskCrusher adds the event to the active list and displays back the details of the add action.
 
 Use case ends.
 
@@ -410,7 +409,7 @@ Use case ends.
   Use case resumes at step 1
 
 2b. The entered time slot is already occupied by another event 
-> 2b1. TaskCrusher notifies the user that the time slot for the event has been already occupied by other event.
+> 2b1. TaskCrusher notifies the user that the time slot for the event has been already occupied by other event, and confirms whether user wants to force the addition. 
   2b2. User decides whether or not to force the addition. 
   
 > Use case ends
@@ -421,7 +420,7 @@ Use case ends.
 **MSS**
 
 1. User requests to list active tasks, active events or both. Additional sort field may be specified.
-2. TaskCrusher displays the active list according to the listing options, assigning each entry an index.
+2. TaskCrusher displays the (filtered) active list according to the listing options, assigning each item in the list an index.
 
 Use case ends
 
@@ -441,8 +440,9 @@ Use case ends
 **MSS**
 
 1. User requests to [display the active list](#list).
-2. User uses the index of the task/event of interest to request to mark it as `done`. Multiple indices can be entered to process more than one entries. 
-3. TaskCrusher moves the task/event from the active list to the expired list.
+2. TaskCrusher displays the (filtered) active list. 
+3. User uses the index of the task/event of interest to request to mark it as `done`. Multiple indexes can be entered to process more than one item at once. 
+4. TaskCrusher moves the item from the active list to the expired list.
 
 Use case ends
 
@@ -458,21 +458,22 @@ Use case ends
 > 3a1. TaskCrusher shows an error message <br>
 Use case resumes at step 2
 <br>
-#### Use case: manage overdue tasks and/or past events
+#### Use case: manage overdue tasks and past events
 
 **MSS**
 
-1. User requests to [display the active list](#list) with the option to list only overdue tasks and/or past events relative to the current time.
-2. For each item in the displayed list, user uses the index to request to mark it as `done`, or dismiss it. Multiple indices may be entered to process more than one items. 
-3. If the user chose to dismiss an item, TaskCrusher prompts the user to enter the reason for it. 
-4. User enters the reason for dismissing a task/event. If user does not need to do so, user does nothing and proceeds.
-5. TaskCrusher moves the task/event from the active list to the expired list.
+1. User requests to [display the active list](#list) with the option to list only overdue tasks and past events relative to the current time.
+2. TaskCrusher displays the filtered list. 
+3. For each item in the displayed list, user uses the index to request to mark it as `done`, or dismiss it. Multiple indexes may be entered to process more than one item at once. 
+4. TaskCrusher prompts the user to enter the reason for dismissing an item, if the user chose to dismiss an item rather than mark as `done`. 
+5. User enters the reason for dismissing a task/event. If user does not wish to do so, user enters nothing and proceeds.
+6. TaskCrusher moves the task/event from the active list to the expired list.
 
 Use case ends
 
 **Extensions**
 
-2a. There are no overdue tasks or past events
+2a. There are no overdue tasks or past events i.e. the filtered list is empty
 > Use case ends
 
 2b. User quits the process
@@ -496,7 +497,7 @@ Use case ends
 8. Must be able to support CLI.
 9. Supports one and only one user.  
 10. A user with an above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-11. Should be able to hold up to 1000 tasks without a noticeable decline in performance.
+11. Should be able to hold up to 1000 tasks without a noticeable decline, say no more than 1.5 seconds, in performance.
 
 
 ## Appendix D : Glossary
