@@ -24,7 +24,7 @@ public class AddCommand extends Command {
     public static final String DEFAULT_COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = getUsageTextForCommandWords() + ": Adds a task to Doist "
-            + "Parameters: TASK_DESCRIPTION  [\\from START_TIME] [\\to END_TIME] [\\as PRIORITY] [\\under TAG...]" 
+            + "Parameters: TASK_DESCRIPTION  [\\from START_TIME] [\\to END_TIME] [\\as PRIORITY] [\\under TAG...]"
             + "Example: " + DEFAULT_COMMAND_WORD + "Group meeting \\from 1600 \\to 1800 \\as IMPORTANT \\under school ";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
@@ -39,25 +39,24 @@ public class AddCommand extends Command {
      *             if any of the raw values are invalid
      */
     public AddCommand(String preamble, Map<String, java.util.List<String>> parameters) throws IllegalValueException {
-        if(preamble == null || preamble.trim().isEmpty()){
+        if (preamble == null || preamble.trim().isEmpty()) {
             throw new IllegalValueException("No arguments passed");
         }
         java.util.List<String> tags = parameters.get("\\under");
         final Set<Tag> tagSet = new HashSet<>();
-        
-        if(tags != null && tags.size() > 0) {
-           String allTags = tags.get(0).trim();
-           String[] extractedTags = allTags.split(" ");
-           for(String extractedTag : extractedTags){
-               tagSet.add(new Tag(extractedTag));
-           }
+
+        if (tags != null && tags.size() > 0) {
+            String allTags = tags.get(0).trim();
+            String[] extractedTags = allTags.split(" ");
+            for (String extractedTag : extractedTags) {
+                tagSet.add(new Tag(extractedTag));
+            }
         }
-        
+
         this.toAdd = new Task(new Description(preamble), new UniqueTagList(tagSet));
-        
+
     }
 
-   
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;

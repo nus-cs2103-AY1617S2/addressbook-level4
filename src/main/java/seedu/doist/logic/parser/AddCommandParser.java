@@ -1,7 +1,14 @@
 package seedu.doist.logic.parser;
 
 import static seedu.doist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.doist.logic.parser.CliSyntax.*;
+
+import static seedu.doist.logic.parser.CliSyntax.PREFIX_AS;
+import static seedu.doist.logic.parser.CliSyntax.PREFIX_BY;
+import static seedu.doist.logic.parser.CliSyntax.PREFIX_EVERY;
+import static seedu.doist.logic.parser.CliSyntax.PREFIX_FROM;
+import static seedu.doist.logic.parser.CliSyntax.PREFIX_REMIND;
+import static seedu.doist.logic.parser.CliSyntax.PREFIX_TO;
+import static seedu.doist.logic.parser.CliSyntax.PREFIX_UNDER;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -17,8 +24,9 @@ import seedu.doist.logic.commands.IncorrectCommand;
  */
 public class AddCommandParser {
 
-    private static final Pattern Add_Command_Regex = Pattern.compile("(?<preamble>[^\\\\]*)(?<parameters>((\\\\)(\\S+)(\\s+)([^\\\\]*))*)");
-    
+    private static final Pattern Add_Command_Regex = Pattern.compile("(?<preamble>[^\\\\]*)" +
+                                                                     "(?<parameters>((\\\\)(\\S+)(\\s+)([^\\\\]*))*)");
+
     ////argsTokenizer.getValue(PREFIX_PHONE).get() is an an example of how to use the tokenizer
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
@@ -33,23 +41,24 @@ public class AddCommandParser {
         final String argument = matcher.group("preamble");
         final String parameters = matcher.group("parameters").trim();
         ArrayList<String> tokens = new ArrayList<String>();
-        for(int i = 0; i < parameters.length(); i ++) {
-            if(parameters.charAt(i) == '\\') {
+        for (int i = 0; i < parameters.length(); i++) {
+            if (parameters.charAt(i) == '\\') {
                 int start = i;
-                while(parameters.charAt(i) != ' '){
-                    i ++;
+                while (parameters.charAt(i) != ' ') {
+                    i++;
                 }
-                tokens.add(parameters.substring(start, i));     
+                tokens.add(parameters.substring(start, i));
             }
         }
-        
+
         ArgumentTokenizer argsTokenizer =
-              new ArgumentTokenizer(PREFIX_FROM, PREFIX_TO, PREFIX_REMIND, PREFIX_EVERY, PREFIX_AS, PREFIX_BY, PREFIX_UNDER);
-        
-        if(!argsTokenizer.validateTokens(tokens)){
+              new ArgumentTokenizer(PREFIX_FROM, PREFIX_TO, PREFIX_REMIND, PREFIX_EVERY,
+                                    PREFIX_AS, PREFIX_BY, PREFIX_UNDER);
+
+        if (!argsTokenizer.validateTokens(tokens)) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
-        argsTokenizer.tokenize(parameters); 
+        argsTokenizer.tokenize(parameters);
 
         try {
             return new AddCommand(argument, argsTokenizer.getTokenizedArguments());
