@@ -3,7 +3,7 @@ package seedu.geekeep.model.task;
 import seedu.geekeep.model.tag.UniqueTagList;
 
 /**
- * A read-only immutable interface for a Person in the addressbook. Implementations should guarantee: details are
+ * A read-only immutable interface for a Task in the Task Manager. Implementations should guarantee: details are
  * present and not null, field values are validated.
  */
 public interface ReadOnlyTask {
@@ -34,12 +34,12 @@ public interface ReadOnlyTask {
     }
 
     /**
-     * Formats the person as text, showing all contact details.
+     * Formats the Task as text, showing all contact details.
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getTitle()).append(" Phone: ").append(getEndDateTime()).append(" Email: ").append(getStartDateTime())
-                .append(" Address: ").append(getLocation()).append(" Tags: ");
+        builder.append(getTitle()).append(" Ending DateTime: ").append(getEndDateTime()).append(" Starting DateTime: ").append(getStartDateTime())
+                .append(" Location: ").append(getLocation()).append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
