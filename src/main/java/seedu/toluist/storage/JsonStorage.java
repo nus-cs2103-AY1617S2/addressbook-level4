@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 import javafx.util.Pair;
+import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.util.FileUtil;
 import seedu.toluist.commons.util.JsonUtil;
 import seedu.toluist.model.TodoList;
@@ -36,11 +38,6 @@ public class JsonStorage implements Storage {
     public Optional<TodoList> load() {
         try {
             String jsonString = getDataJson().get();
-            // addLast this to undo history if there's nothing here yet
-            // This will be the very initial state
-            if (historyStack.isEmpty()) {
-                historyStack.addLast(jsonString);
-            }
             return Optional.of(JsonUtil.fromJsonString(jsonString, TodoList.class));
         } catch (Exception e) {
             return Optional.empty();
@@ -72,6 +69,8 @@ public class JsonStorage implements Storage {
             return false;
         }
         try {
+            // make sure that the history has at least 1 initial state
+            populateFirstHistory();
             historyStack.addLast(JsonUtil.toJsonString(todoList));
             redoHistoryStack.clear();
         } catch (Exception e) {
@@ -143,5 +142,18 @@ public class JsonStorage implements Storage {
 
     private void setStoragePath(String storagePath) {
         this.storagePath = storagePath;
+    }
+
+    /**
+     * Push the latest todo list json string into historyStack if empty
+     */
+    private void populateFirstHistory() {
+        // This will be the very initial state
+        if (historyStack.isEmpty()) {
+            Optional<String> jsonStringOptional = getDataJson();
+            if (jsonStringOptional.isPresent()) {
+                historyStack.addLast(jsonStringOptional.get());
+            }
+        }
     }
 }
