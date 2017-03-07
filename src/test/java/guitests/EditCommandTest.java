@@ -25,7 +25,7 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby p/91234567 e/bobby@gmail.com a/Block 123, Bobby Street 3 t/husband";
+        String detailsToEdit = "Bobby p/91234567 e/bobby@gmail.com d/Block 123, Bobby Street 3 t/husband";
         int addressBookIndex = 1;
 
         TestPerson editedPerson = new PersonBuilder().withName("Bobby").withPhone("91234567")
@@ -96,22 +96,18 @@ public class EditCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("edit 1 p/abcd");
         assertResultMessage(Priority.MESSAGE_PRIORITY_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 e/yahoo!!!");
-        assertResultMessage(Deadline.MESSAGE_DEADLINE_CONSTRAINTS);
-
-        commandBox.runCommand("edit 1 a/");
-        assertResultMessage(Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
-
         commandBox.runCommand("edit 1 t/*&");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
     @Test
     public void edit_duplicatePerson_failure() {
-        commandBox.runCommand("edit 3 Alice Pauline p/85355255 e/alice@gmail.com "
-                                + "a/123, Jurong West Ave 6, #08-111 t/friends");
+        commandBox.runCommand("edit 3 Alice Pauline p/85355255 e/1 "
+                                + "d/123, Jurong West Ave 6, #08-111 t/friends");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_PERSON);
     }
+
+
 
     /**
      * Checks whether the edited task has the correct updated details.

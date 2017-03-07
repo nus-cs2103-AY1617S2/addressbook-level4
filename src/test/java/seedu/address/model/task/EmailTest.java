@@ -13,20 +13,6 @@ public class EmailTest {
         assertFalse(Deadline.isValidDeadline("")); // empty string
         assertFalse(Deadline.isValidDeadline(" ")); // spaces only
 
-        // missing parts
-        assertFalse(Deadline.isValidDeadline("@webmail.com")); // missing local part
-        assertFalse(Deadline.isValidDeadline("peterjackwebmail.com")); // missing '@' symbol
-        assertFalse(Deadline.isValidDeadline("peterjack@")); // missing domain name
-
-        // invalid parts
-        assertFalse(Deadline.isValidDeadline("-@webmail.com")); // invalid local part
-        assertFalse(Deadline.isValidDeadline("peterjack@-")); // invalid domain name
-        assertFalse(Deadline.isValidDeadline("peter jack@webmail.com")); // spaces in local part
-        assertFalse(Deadline.isValidDeadline("peterjack@web mail.com")); // spaces in domain name
-        assertFalse(Deadline.isValidDeadline("peterjack@@webmail.com")); // double '@' symbol
-        assertFalse(Deadline.isValidDeadline("peter@jack@webmail.com")); // '@' symbol in local part
-        assertFalse(Deadline.isValidDeadline("peterjack@webmail@com")); // '@' symbol in domain name
-
         // valid email
         assertTrue(Deadline.isValidDeadline("PeterJack_1190@WEB.Mail.com"));
         assertTrue(Deadline.isValidDeadline("a@b"));  // minimal

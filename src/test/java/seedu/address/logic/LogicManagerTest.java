@@ -195,15 +195,8 @@ public class LogicManagerTest {
 
     @Test
     public void execute_add_invalidPersonData() {
-        assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
+        assertCommandFailure("add []\\[;] p/12 e/15-3-2020 d/valid t/address",
                 Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
-                Priority.MESSAGE_PRIORITY_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
-                Deadline.MESSAGE_DEADLINE_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
-                Tag.MESSAGE_TAG_CONSTRAINTS);
-
     }
 
     @Test
@@ -450,7 +443,7 @@ public class LogicManagerTest {
             cmd.append(p.getName().toString());
             cmd.append(" e/").append(p.getEmail());
             cmd.append(" p/").append(p.getPhone());
-            cmd.append(" a/").append(p.getDescription());
+            cmd.append(" d/").append(p.getDescription());
 
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {
