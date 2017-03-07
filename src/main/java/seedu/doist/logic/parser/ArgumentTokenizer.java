@@ -240,6 +240,11 @@ public class ArgumentTokenizer {
             Prefix otherPrefix = (Prefix) obj;
             return otherPrefix.getPrefix().equals(getPrefix());
         }
+
+        @Override
+        public String toString() {
+            return this.prefix.toString();
+        }
     }
 
     /**
