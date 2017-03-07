@@ -23,7 +23,7 @@ import seedu.geekeep.logic.LogicManager;
 import seedu.geekeep.model.TaskManager;
 import seedu.geekeep.model.Model;
 import seedu.geekeep.model.ModelManager;
-import seedu.geekeep.model.ReadOnlyAddressBook;
+import seedu.geekeep.model.ReadOnlyTaskManager;
 import seedu.geekeep.model.UserPrefs;
 import seedu.geekeep.model.util.SampleDataUtil;
 import seedu.geekeep.storage.Storage;
@@ -74,8 +74,8 @@ public class MainApp extends Application {
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyTaskManager> addressBookOptional;
+        ReadOnlyTaskManager initialData;
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {

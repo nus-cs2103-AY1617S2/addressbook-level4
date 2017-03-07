@@ -1,14 +1,14 @@
 package seedu.geekeep.commons.events.model;
 
 import seedu.geekeep.commons.events.BaseEvent;
-import seedu.geekeep.model.ReadOnlyAddressBook;
+import seedu.geekeep.model.ReadOnlyTaskManager;
 
 /** Indicates the AddressBook in the model has changed*/
 public class AddressBookChangedEvent extends BaseEvent {
 
-    public final ReadOnlyAddressBook data;
+    public final ReadOnlyTaskManager data;
 
-    public AddressBookChangedEvent(ReadOnlyAddressBook data) {
+    public AddressBookChangedEvent(ReadOnlyTaskManager data) {
         this.data = data;
     }
 

@@ -20,7 +20,7 @@ import seedu.geekeep.model.tag.UniqueTagList;
 /**
  * Wraps all data at the address-book level Duplicates are not allowed (by .equals comparison)
  */
-public class TaskManager implements ReadOnlyAddressBook {
+public class TaskManager implements ReadOnlyTaskManager {
 
     private final UniquePersonList persons;
     private final UniqueTagList tags;
@@ -43,7 +43,7 @@ public class TaskManager implements ReadOnlyAddressBook {
     /**
      * Creates an AddressBook using the Persons and Tags in the {@code toBeCopied}
      */
-    public TaskManager(ReadOnlyAddressBook toBeCopied) {
+    public TaskManager(ReadOnlyTaskManager toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -100,7 +100,7 @@ public class TaskManager implements ReadOnlyAddressBook {
         }
     }
 
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyTaskManager newData) {
         assert newData != null;
         try {
             setPersons(newData.getPersonList());
