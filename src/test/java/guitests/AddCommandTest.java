@@ -1,4 +1,4 @@
- package guitests;
+package guitests;
 
 import static org.junit.Assert.assertTrue;
 

@@ -103,7 +103,8 @@ public class LogicManagerTest {
     @Test
     public void execute_invalid() {
         String invalidCommand = "       ";
-        assertCommandFailure(invalidCommand, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+        assertCommandFailure(invalidCommand, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+               HelpCommand.MESSAGE_USAGE));
     }
 
     /**
@@ -114,7 +115,8 @@ public class LogicManagerTest {
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskBoss,
      *      List)
      */
-    private void assertCommandSuccess(String inputCommand, String expectedMessage, ReadOnlyTaskBoss expectedTaskBoss,
+    private void assertCommandSuccess(String inputCommand, String expectedMessage,
+            ReadOnlyTaskBoss expectedTaskBoss,
             List<? extends ReadOnlyTask> expectedShownList) {
         assertCommandBehavior(false, inputCommand, expectedMessage, expectedTaskBoss, expectedShownList);
     }
@@ -143,8 +145,9 @@ public class LogicManagerTest {
      * - the backing list shown by UI matches the {@code shownList} <br>
      * - {@code expectedTaskBoss} was saved to the storage file. <br>
      */
-    private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand, String expectedMessage,
-            ReadOnlyTaskBoss expectedTaskBoss, List<? extends ReadOnlyTask> expectedShownList) {
+    private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand,
+            String expectedMessage, ReadOnlyTaskBoss expectedTaskBoss,
+            List<? extends ReadOnlyTask> expectedShownList) {
 
         try {
             CommandResult result = logic.execute(inputCommand);
@@ -171,13 +174,15 @@ public class LogicManagerTest {
 
     @Test
     public void execute_help() {
-        assertCommandSuccess("help", HelpCommand.SHOWING_HELP_MESSAGE, new TaskBoss(), Collections.emptyList());
+        assertCommandSuccess("help", HelpCommand.SHOWING_HELP_MESSAGE,
+                new TaskBoss(), Collections.emptyList());
         assertTrue(helpShown);
     }
 
     @Test
     public void execute_exit() {
-        assertCommandSuccess("exit", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT, new TaskBoss(), Collections.emptyList());
+        assertCommandSuccess("exit", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
+                new TaskBoss(), Collections.emptyList());
     }
 
     @Test
@@ -220,7 +225,8 @@ public class LogicManagerTest {
         expectedAB.addTask(toBeAdded);
 
         // execute command and verify result
-        assertCommandSuccess(helper.generateAddCommand(toBeAdded), String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+        assertCommandSuccess(helper.generateAddCommand(toBeAdded),
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
                 expectedAB, expectedAB.getTaskList());
 
     }
@@ -342,7 +348,8 @@ public class LogicManagerTest {
         expectedAB.removeTask(threeTasks.get(1));
         helper.addToModel(model, threeTasks);
 
-        assertCommandSuccess("delete 2", String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, threeTasks.get(1)),
+        assertCommandSuccess("delete 2", String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS,
+                threeTasks.get(1)),
                 expectedAB, expectedAB.getTaskList());
     }
 
@@ -365,8 +372,8 @@ public class LogicManagerTest {
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2);
         helper.addToModel(model, fourTasks);
 
-        assertCommandSuccess("find n/KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
-                expectedList);
+        assertCommandSuccess("find n/KEY",
+                Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB, expectedList);
     }
 
     @Test
@@ -382,8 +389,8 @@ public class LogicManagerTest {
         List<Task> expectedList = fourTasks;
         helper.addToModel(model, fourTasks);
 
-        assertCommandSuccess("find n/KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
-                expectedList);
+        assertCommandSuccess("find n/KEY",
+                Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB, expectedList);
     }
 
     @Test
@@ -431,7 +438,8 @@ public class LogicManagerTest {
                     new Name("Task " + seed),
                     new PriorityLevel("" + Math.abs(seed)),
                     new Information("House of " + seed),
-                    new UniqueCategoryList(new Category("category" + Math.abs(seed)), new Category("category" + Math.abs(seed + 1)))
+                    new UniqueCategoryList(new Category("category" + Math.abs(seed)),
+                           new Category("category" + Math.abs(seed + 1)))
             );
         }
 
