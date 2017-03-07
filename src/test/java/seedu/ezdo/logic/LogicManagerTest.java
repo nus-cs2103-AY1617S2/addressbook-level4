@@ -6,6 +6,9 @@ import static org.junit.Assert.assertTrue;
 import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.ezdo.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.ezdo.model.todo.DueDate.MESSAGE_DUEDATE_CONSTRAINTS;
+import static seedu.ezdo.model.todo.Priority.MESSAGE_PRIORITY_CONSTRAINTS;
+import static seedu.ezdo.model.todo.StartDate.MESSAGE_STARTDATE_CONSTRAINTS;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -187,17 +190,18 @@ public class LogicManagerTest {
 
     @Test
     public void execute_add_invalidArgsFormat() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 1 s/21/01/2017 d/23/02/2017 t/missingPriorityPrefix", expectedMessage);
-        assertCommandFailure("add Valid Name p/1 23/03/2017 d/19/03/2017 t/missingStartDatePrefix", expectedMessage);
-        assertCommandFailure("add Valid Name p/1 s/12/12/2013 24/04/2017 t/missingDueDatePrefix", expectedMessage);
+        assertCommandFailure("add Valid Name p/1"
+                + ", todo d/s23/03/2017", MESSAGE_PRIORITY_CONSTRAINTS);
+        assertCommandFailure("add Valid Name p/1 "
+                + "s/abcd d/24/04/2017", MESSAGE_STARTDATE_CONSTRAINTS);
+        assertCommandFailure("add Valid Name p/1 "
+                + "s/12/12/2013 d/999", MESSAGE_DUEDATE_CONSTRAINTS);
     }
 
     @Test
     public void execute_add_invalidPersonData() {
         assertCommandFailure("add []\\[;] p/3 s/30/03/1999 d/31/05/1999 t/invalidName",
-                Name.MESSAGE_NAME_CONSTRAINTS);
+                Name.MESSAGE_NAME_CONSTRAINTS)
         assertCommandFailure("add Valid Name p/not_numbers s/01/08/1998 d/11/08/1998 t/invalidPriority",
                 Priority.MESSAGE_PRIORITY_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/2 s/Invalid_Start.Date d/11/08/1998 t/invalidStartDate",

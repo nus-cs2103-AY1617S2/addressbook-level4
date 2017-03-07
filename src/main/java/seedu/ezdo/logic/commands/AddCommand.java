@@ -22,7 +22,7 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to ezDo. "
-            + "Parameters: NAME p/PRIORITY s/START_DATE d/DUE_DATE [t/TAG]...\n"
+            + "Parameters: NAME [s/START_DATE] [d/DUE_DATE] [p/PRIORITY] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
             + " John Doe p/1 s/12/12/2017 d/01/01/2018 t/friends t/owesMoney";
 

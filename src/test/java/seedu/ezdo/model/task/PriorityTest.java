@@ -12,7 +12,6 @@ public class PriorityTest {
     @Test
     public void isValidPriority() {
         // invalid priority numbers
-        assertFalse(Priority.isValidPriority("")); // empty string
         assertFalse(Priority.isValidPriority(" ")); // spaces only
         assertFalse(Priority.isValidPriority("priority")); // non-numeric
         assertFalse(Priority.isValidPriority("9011p041")); // alphabets within digits
