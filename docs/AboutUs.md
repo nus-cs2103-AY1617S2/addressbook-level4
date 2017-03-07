@@ -5,7 +5,7 @@ We are a team based in the [School of Computing, National University of Singapor
 ## Project Team
 
 #### [Louis Lai](http://github.com/louislai)
-<img src="images/LouisLai.jpg" width="150"><br>
+<img src="images/louislai.png" width="150"><br>
 Role: Team Leader <br>
 
 * Components in charge of: UI, Model, Storage
@@ -14,7 +14,7 @@ Role: Team Leader <br>
 -----
 
 #### [Melvin Tan](http://github.com/Melvin-Tan)
-<img src="images/MelvinTan.jpg" width="150"><br>
+<img src="images/melvin-tan.png" width="150"><br>
 Role: Developer <br>
 
 * Components in charge of: Task, Event
@@ -23,7 +23,7 @@ Role: Developer <br>
 -----
 
 #### [Lewis Koh](http://github.com/Rinder5)
-<img src="images/LewisKoh.png" width="150"><br>
+<img src="images/rinder5.png" width="150"><br>
 Role: Developer <br>
 
 * Components in charge of: Tag, Search/Filter
