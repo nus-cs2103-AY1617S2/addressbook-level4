@@ -4,7 +4,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Akshay Narayan](http://www.comp.nus.edu.sg/~okkhoy) <br>
+#### [Akshay Narayan](http://github.com/~okkhoy) <br>
 <img src="images/AkshayNarayan.jpg" width="150"><br>
 **Role**: Project Advisor
 
