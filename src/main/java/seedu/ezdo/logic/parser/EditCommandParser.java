@@ -17,6 +17,7 @@ import seedu.ezdo.logic.commands.EditCommand;
 import seedu.ezdo.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.ezdo.logic.commands.IncorrectCommand;
 import seedu.ezdo.model.tag.UniqueTagList;
+import seedu.ezdo.logic.parser.ArgumentTokenizer.Prefix;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -42,9 +43,9 @@ public class EditCommandParser {
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
             editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
-            editTaskDescriptor.setPriority(ParserUtil.parsePriority(argsTokenizer.getValue(PREFIX_PRIORITY)));
-            editTaskDescriptor.setStartDate(ParserUtil.parseStartDate(argsTokenizer.getValue(PREFIX_STARTDATE)));
-            editTaskDescriptor.setDueDate(ParserUtil.parseDueDate(argsTokenizer.getValue(PREFIX_DUEDATE)));
+            editTaskDescriptor.setPriority(ParserUtil.parsePriority(getOptionalValue(argsTokenizer, PREFIX_PRIORITY)));
+            editTaskDescriptor.setStartDate(ParserUtil.parseStartDate(getOptionalValue(argsTokenizer, PREFIX_STARTDATE)));
+            editTaskDescriptor.setDueDate(ParserUtil.parseDueDate(getOptionalValue(argsTokenizer, PREFIX_DUEDATE)));
             editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
@@ -70,6 +71,16 @@ public class EditCommandParser {
         }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
+    }
+
+    private Optional<String> getOptionalValue(ArgumentTokenizer tokenizer, Prefix prefix) {
+        Optional<String> optionalString;
+        if (!tokenizer.getValue(prefix).isPresent()) {
+            optionalString = Optional.of("");
+        } else {
+            optionalString = Optional.of(tokenizer.getValue(prefix).get());
+        }
+        return optionalString;
     }
 
 }
