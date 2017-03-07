@@ -6,14 +6,14 @@ import java.util.Optional;
 import seedu.geekeep.commons.core.Messages;
 import seedu.geekeep.commons.util.CollectionUtil;
 import seedu.geekeep.logic.commands.exceptions.CommandException;
-import seedu.geekeep.model.person.Address;
-import seedu.geekeep.model.person.Email;
-import seedu.geekeep.model.person.Name;
-import seedu.geekeep.model.person.Person;
-import seedu.geekeep.model.person.Phone;
-import seedu.geekeep.model.person.ReadOnlyPerson;
-import seedu.geekeep.model.person.UniquePersonList;
 import seedu.geekeep.model.tag.UniqueTagList;
+import seedu.geekeep.model.task.Address;
+import seedu.geekeep.model.task.Email;
+import seedu.geekeep.model.task.Name;
+import seedu.geekeep.model.task.Person;
+import seedu.geekeep.model.task.Phone;
+import seedu.geekeep.model.task.ReadOnlyPerson;
+import seedu.geekeep.model.task.UniquePersonList;
 
 /**
  * Edits the details of an existing person in the address book.

@@ -8,11 +8,11 @@ import org.junit.Test;
 import guitests.guihandles.PersonCardHandle;
 import seedu.geekeep.commons.core.Messages;
 import seedu.geekeep.logic.commands.EditCommand;
-import seedu.geekeep.model.person.Address;
-import seedu.geekeep.model.person.Email;
-import seedu.geekeep.model.person.Name;
-import seedu.geekeep.model.person.Phone;
 import seedu.geekeep.model.tag.Tag;
+import seedu.geekeep.model.task.Address;
+import seedu.geekeep.model.task.Email;
+import seedu.geekeep.model.task.Name;
+import seedu.geekeep.model.task.Phone;
 import seedu.geekeep.testutil.PersonBuilder;
 import seedu.geekeep.testutil.TestPerson;
 

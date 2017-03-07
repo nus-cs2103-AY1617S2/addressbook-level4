@@ -14,8 +14,8 @@ import org.junit.rules.TemporaryFolder;
 import seedu.geekeep.commons.exceptions.DataConversionException;
 import seedu.geekeep.commons.util.FileUtil;
 import seedu.geekeep.model.TaskManager;
+import seedu.geekeep.model.task.Person;
 import seedu.geekeep.model.ReadOnlyTaskManager;
-import seedu.geekeep.model.person.Person;
 import seedu.geekeep.testutil.TypicalTestPersons;
 
 public class XmlAddressBookStorageTest {

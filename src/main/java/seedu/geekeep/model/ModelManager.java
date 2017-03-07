@@ -10,10 +10,10 @@ import seedu.geekeep.commons.core.UnmodifiableObservableList;
 import seedu.geekeep.commons.events.model.AddressBookChangedEvent;
 import seedu.geekeep.commons.util.CollectionUtil;
 import seedu.geekeep.commons.util.StringUtil;
-import seedu.geekeep.model.person.Person;
-import seedu.geekeep.model.person.ReadOnlyPerson;
-import seedu.geekeep.model.person.UniquePersonList;
-import seedu.geekeep.model.person.UniquePersonList.PersonNotFoundException;
+import seedu.geekeep.model.task.Person;
+import seedu.geekeep.model.task.ReadOnlyPerson;
+import seedu.geekeep.model.task.UniquePersonList;
+import seedu.geekeep.model.task.UniquePersonList.PersonNotFoundException;
 
 /**
  * Represents the in-memory model of the address book data. All changes to any model should be synchronized.

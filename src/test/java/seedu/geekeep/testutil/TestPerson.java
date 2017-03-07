@@ -1,11 +1,11 @@
 package seedu.geekeep.testutil;
 
-import seedu.geekeep.model.person.Address;
-import seedu.geekeep.model.person.Email;
-import seedu.geekeep.model.person.Name;
-import seedu.geekeep.model.person.Phone;
-import seedu.geekeep.model.person.ReadOnlyPerson;
 import seedu.geekeep.model.tag.UniqueTagList;
+import seedu.geekeep.model.task.Address;
+import seedu.geekeep.model.task.Email;
+import seedu.geekeep.model.task.Name;
+import seedu.geekeep.model.task.Phone;
+import seedu.geekeep.model.task.ReadOnlyPerson;
 
 /**
  * A mutable person object. For testing only.

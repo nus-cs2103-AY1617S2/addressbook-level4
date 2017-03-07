@@ -12,9 +12,9 @@ import javafx.collections.ObservableList;
 import seedu.geekeep.commons.core.UnmodifiableObservableList;
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.model.ReadOnlyTaskManager;
-import seedu.geekeep.model.person.Person;
-import seedu.geekeep.model.person.ReadOnlyPerson;
 import seedu.geekeep.model.tag.Tag;
+import seedu.geekeep.model.task.Person;
+import seedu.geekeep.model.task.ReadOnlyPerson;
 
 /**
  * An Immutable AddressBook that is serializable to XML format

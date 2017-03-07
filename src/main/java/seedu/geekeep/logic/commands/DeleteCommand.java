@@ -3,8 +3,8 @@ package seedu.geekeep.logic.commands;
 import seedu.geekeep.commons.core.Messages;
 import seedu.geekeep.commons.core.UnmodifiableObservableList;
 import seedu.geekeep.logic.commands.exceptions.CommandException;
-import seedu.geekeep.model.person.ReadOnlyPerson;
-import seedu.geekeep.model.person.UniquePersonList.PersonNotFoundException;
+import seedu.geekeep.model.task.ReadOnlyPerson;
+import seedu.geekeep.model.task.UniquePersonList.PersonNotFoundException;
 
 /**
  * Deletes a person identified using it's last displayed index from the address book.

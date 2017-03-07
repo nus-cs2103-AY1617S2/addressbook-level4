@@ -10,12 +10,12 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.geekeep.commons.core.UnmodifiableObservableList;
-import seedu.geekeep.model.person.Person;
-import seedu.geekeep.model.person.ReadOnlyPerson;
-import seedu.geekeep.model.person.UniquePersonList;
-import seedu.geekeep.model.person.UniquePersonList.DuplicatePersonException;
 import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.tag.UniqueTagList;
+import seedu.geekeep.model.task.Person;
+import seedu.geekeep.model.task.ReadOnlyPerson;
+import seedu.geekeep.model.task.UniquePersonList;
+import seedu.geekeep.model.task.UniquePersonList.DuplicatePersonException;
 
 /**
  * Wraps all data at the address-book level Duplicates are not allowed (by .equals comparison)

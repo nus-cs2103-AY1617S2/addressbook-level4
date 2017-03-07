@@ -13,7 +13,7 @@ import javafx.scene.layout.Region;
 import seedu.geekeep.commons.core.LogsCenter;
 import seedu.geekeep.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.geekeep.commons.util.FxViewUtil;
-import seedu.geekeep.model.person.ReadOnlyPerson;
+import seedu.geekeep.model.task.ReadOnlyPerson;
 
 /**
  * Panel containing the list of persons.

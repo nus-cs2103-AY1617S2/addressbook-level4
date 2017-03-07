@@ -5,7 +5,7 @@ import seedu.geekeep.commons.core.Messages;
 import seedu.geekeep.commons.core.UnmodifiableObservableList;
 import seedu.geekeep.commons.events.ui.JumpToListRequestEvent;
 import seedu.geekeep.logic.commands.exceptions.CommandException;
-import seedu.geekeep.model.person.ReadOnlyPerson;
+import seedu.geekeep.model.task.ReadOnlyPerson;
 
 /**
  * Selects a person identified using it's last displayed index from the address book.

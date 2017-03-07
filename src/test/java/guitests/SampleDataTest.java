@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.geekeep.model.TaskManager;
-import seedu.geekeep.model.person.Person;
+import seedu.geekeep.model.task.Person;
 import seedu.geekeep.model.util.SampleDataUtil;
 import seedu.geekeep.testutil.TestUtil;
 

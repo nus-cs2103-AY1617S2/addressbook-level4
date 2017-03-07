@@ -16,7 +16,7 @@ import seedu.geekeep.commons.events.ui.ExitAppRequestEvent;
 import seedu.geekeep.commons.util.FxViewUtil;
 import seedu.geekeep.logic.Logic;
 import seedu.geekeep.model.UserPrefs;
-import seedu.geekeep.model.person.ReadOnlyPerson;
+import seedu.geekeep.model.task.ReadOnlyPerson;
 
 /**
  * The Main Window. Provides the basic application layout containing

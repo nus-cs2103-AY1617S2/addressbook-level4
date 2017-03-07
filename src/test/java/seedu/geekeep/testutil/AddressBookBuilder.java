@@ -2,9 +2,9 @@ package seedu.geekeep.testutil;
 
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.model.TaskManager;
-import seedu.geekeep.model.person.Person;
-import seedu.geekeep.model.person.UniquePersonList;
 import seedu.geekeep.model.tag.Tag;
+import seedu.geekeep.model.task.Person;
+import seedu.geekeep.model.task.UniquePersonList;
 
 /**
  * A utility class to help with building Addressbook objects.

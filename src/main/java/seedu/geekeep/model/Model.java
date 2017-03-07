@@ -3,10 +3,10 @@ package seedu.geekeep.model;
 import java.util.Set;
 
 import seedu.geekeep.commons.core.UnmodifiableObservableList;
-import seedu.geekeep.model.person.Person;
-import seedu.geekeep.model.person.ReadOnlyPerson;
-import seedu.geekeep.model.person.UniquePersonList;
-import seedu.geekeep.model.person.UniquePersonList.DuplicatePersonException;
+import seedu.geekeep.model.task.Person;
+import seedu.geekeep.model.task.ReadOnlyPerson;
+import seedu.geekeep.model.task.UniquePersonList;
+import seedu.geekeep.model.task.UniquePersonList.DuplicatePersonException;
 
 /**
  * The API of the Model component.

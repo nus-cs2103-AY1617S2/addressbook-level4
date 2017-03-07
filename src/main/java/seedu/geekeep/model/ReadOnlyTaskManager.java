@@ -1,8 +1,8 @@
 package seedu.geekeep.model;
 
 import javafx.collections.ObservableList;
-import seedu.geekeep.model.person.ReadOnlyPerson;
 import seedu.geekeep.model.tag.Tag;
+import seedu.geekeep.model.task.ReadOnlyPerson;
 
 /**
  * Unmodifiable view of an address book

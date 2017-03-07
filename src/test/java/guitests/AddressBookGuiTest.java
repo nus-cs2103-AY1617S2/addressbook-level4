@@ -25,7 +25,7 @@ import seedu.geekeep.TestApp;
 import seedu.geekeep.commons.core.EventsCenter;
 import seedu.geekeep.commons.events.BaseEvent;
 import seedu.geekeep.model.TaskManager;
-import seedu.geekeep.model.person.ReadOnlyPerson;
+import seedu.geekeep.model.task.ReadOnlyPerson;
 import seedu.geekeep.testutil.TestUtil;
 import seedu.geekeep.testutil.TypicalTestPersons;
 

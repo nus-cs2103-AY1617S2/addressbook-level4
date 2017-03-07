@@ -1,4 +1,4 @@
-package seedu.geekeep.model.person;
+package seedu.geekeep.model.task;
 
 import seedu.geekeep.model.tag.UniqueTagList;
 

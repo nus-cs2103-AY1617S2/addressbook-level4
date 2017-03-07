@@ -3,13 +3,13 @@ package seedu.geekeep.model.util;
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.model.TaskManager;
 import seedu.geekeep.model.ReadOnlyTaskManager;
-import seedu.geekeep.model.person.Address;
-import seedu.geekeep.model.person.Email;
-import seedu.geekeep.model.person.Name;
-import seedu.geekeep.model.person.Person;
-import seedu.geekeep.model.person.Phone;
-import seedu.geekeep.model.person.UniquePersonList.DuplicatePersonException;
 import seedu.geekeep.model.tag.UniqueTagList;
+import seedu.geekeep.model.task.Address;
+import seedu.geekeep.model.task.Email;
+import seedu.geekeep.model.task.Name;
+import seedu.geekeep.model.task.Person;
+import seedu.geekeep.model.task.Phone;
+import seedu.geekeep.model.task.UniquePersonList.DuplicatePersonException;
 
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {

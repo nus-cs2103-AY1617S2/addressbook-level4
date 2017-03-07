@@ -1,7 +1,7 @@
 package seedu.geekeep.commons.events.ui;
 
 import seedu.geekeep.commons.events.BaseEvent;
-import seedu.geekeep.model.person.ReadOnlyPerson;
+import seedu.geekeep.model.task.ReadOnlyPerson;
 
 /**
  * Represents a selection change in the Person List Panel

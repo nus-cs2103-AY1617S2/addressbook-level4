@@ -3,7 +3,7 @@ package seedu.geekeep.logic;
 import javafx.collections.ObservableList;
 import seedu.geekeep.logic.commands.CommandResult;
 import seedu.geekeep.logic.commands.exceptions.CommandException;
-import seedu.geekeep.model.person.ReadOnlyPerson;
+import seedu.geekeep.model.task.ReadOnlyPerson;
 
 /**
  * API of the Logic component

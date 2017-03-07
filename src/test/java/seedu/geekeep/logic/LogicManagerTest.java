@@ -39,14 +39,14 @@ import seedu.geekeep.model.TaskManager;
 import seedu.geekeep.model.Model;
 import seedu.geekeep.model.ModelManager;
 import seedu.geekeep.model.ReadOnlyTaskManager;
-import seedu.geekeep.model.person.Address;
-import seedu.geekeep.model.person.Email;
-import seedu.geekeep.model.person.Name;
-import seedu.geekeep.model.person.Person;
-import seedu.geekeep.model.person.Phone;
-import seedu.geekeep.model.person.ReadOnlyPerson;
 import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.tag.UniqueTagList;
+import seedu.geekeep.model.task.Address;
+import seedu.geekeep.model.task.Email;
+import seedu.geekeep.model.task.Name;
+import seedu.geekeep.model.task.Person;
+import seedu.geekeep.model.task.Phone;
+import seedu.geekeep.model.task.ReadOnlyPerson;
 import seedu.geekeep.storage.StorageManager;
 
 

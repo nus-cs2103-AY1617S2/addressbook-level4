@@ -10,7 +10,7 @@ import seedu.geekeep.logic.commands.CommandResult;
 import seedu.geekeep.logic.commands.exceptions.CommandException;
 import seedu.geekeep.logic.parser.Parser;
 import seedu.geekeep.model.Model;
-import seedu.geekeep.model.person.ReadOnlyPerson;
+import seedu.geekeep.model.task.ReadOnlyPerson;
 import seedu.geekeep.storage.Storage;
 
 /**
