@@ -24,8 +24,6 @@ import seedu.onetwodo.commons.core.EventsCenter;
 import seedu.onetwodo.commons.events.model.ToDoListChangedEvent;
 import seedu.onetwodo.commons.events.ui.JumpToListRequestEvent;
 import seedu.onetwodo.commons.events.ui.ShowHelpRequestEvent;
-import seedu.onetwodo.logic.Logic;
-import seedu.onetwodo.logic.LogicManager;
 import seedu.onetwodo.logic.commands.AddCommand;
 import seedu.onetwodo.logic.commands.ClearCommand;
 import seedu.onetwodo.logic.commands.Command;

@@ -14,8 +14,6 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.onetwodo.model.ReadOnlyToDoList;
-import seedu.onetwodo.model.ToDoList;
 import seedu.onetwodo.model.person.ReadOnlyTask;
 import seedu.onetwodo.model.person.Task;
 import seedu.onetwodo.model.tag.Tag;

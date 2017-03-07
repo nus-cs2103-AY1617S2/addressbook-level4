@@ -11,8 +11,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.onetwodo.commons.util.FileUtil;
-import seedu.onetwodo.commons.util.XmlUtil;
 import seedu.onetwodo.model.ToDoList;
 import seedu.onetwodo.storage.XmlSerializableToDoList;
 import seedu.onetwodo.testutil.TestUtil;

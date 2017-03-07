@@ -16,7 +16,6 @@ import seedu.onetwodo.commons.util.FileUtil;
 import seedu.onetwodo.model.ReadOnlyToDoList;
 import seedu.onetwodo.model.ToDoList;
 import seedu.onetwodo.model.person.Task;
-import seedu.onetwodo.storage.XmlToDoListStorage;
 import seedu.onetwodo.testutil.TypicalTestTasks;
 
 public class XmlToDoListStorageTest {

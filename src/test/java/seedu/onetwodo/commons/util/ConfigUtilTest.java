@@ -15,8 +15,6 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.onetwodo.commons.core.Config;
 import seedu.onetwodo.commons.exceptions.DataConversionException;
-import seedu.onetwodo.commons.util.ConfigUtil;
-import seedu.onetwodo.commons.util.FileUtil;
 
 public class ConfigUtilTest {
 

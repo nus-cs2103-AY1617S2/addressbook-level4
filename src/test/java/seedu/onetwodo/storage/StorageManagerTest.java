@@ -17,10 +17,6 @@ import seedu.onetwodo.commons.events.storage.DataSavingExceptionEvent;
 import seedu.onetwodo.model.ReadOnlyToDoList;
 import seedu.onetwodo.model.ToDoList;
 import seedu.onetwodo.model.UserPrefs;
-import seedu.onetwodo.storage.JsonUserPrefsStorage;
-import seedu.onetwodo.storage.Storage;
-import seedu.onetwodo.storage.StorageManager;
-import seedu.onetwodo.storage.XmlToDoListStorage;
 import seedu.onetwodo.testutil.EventsCollector;
 import seedu.onetwodo.testutil.TypicalTestTasks;
 

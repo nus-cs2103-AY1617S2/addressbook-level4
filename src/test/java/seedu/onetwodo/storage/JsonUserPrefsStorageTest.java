@@ -16,7 +16,6 @@ import org.junit.rules.TemporaryFolder;
 import seedu.onetwodo.commons.exceptions.DataConversionException;
 import seedu.onetwodo.commons.util.FileUtil;
 import seedu.onetwodo.model.UserPrefs;
-import seedu.onetwodo.storage.JsonUserPrefsStorage;
 
 public class JsonUserPrefsStorageTest {
 
