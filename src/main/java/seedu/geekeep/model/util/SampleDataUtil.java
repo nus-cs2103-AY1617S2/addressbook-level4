@@ -15,22 +15,28 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         try {
             return new Task[] {
-                new Task(new Title("Alex Yeoh"), new EndDateTime("87438807"), new StartDateTime("alexyeoh@gmail.com"),
+                new Task(new Title("Meeting 1"), new EndDateTime("2017-04-01T10:16:30"), 
+                    new StartDateTime("2017-04-01T10:15:30"),
                     new Location("Blk 30 Geylang Street 29, #06-40"),
                     new UniqueTagList("friends")),
-                new Task(new Title("Bernice Yu"), new EndDateTime("99272758"), new StartDateTime("berniceyu@gmail.com"),
+                new Task(new Title("Meeting 2"), new EndDateTime("2017-04-02T10:16:30"),
+                    new StartDateTime("2017-04-02T10:15:30"),
                     new Location("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                     new UniqueTagList("colleagues", "friends")),
-                new Task(new Title("Charlotte Oliveiro"), new EndDateTime("93210283"), new StartDateTime("charlotte@yahoo.com"),
+                new Task(new Title("Meeting 3"), new EndDateTime("2017-04-03T10:16:30"),
+                    new StartDateTime("2017-04-03T10:15:30"),
                     new Location("Blk 11 Ang Mo Kio Street 74, #11-04"),
                     new UniqueTagList("neighbours")),
-                new Task(new Title("David Li"), new EndDateTime("91031282"), new StartDateTime("lidavid@google.com"),
+                new Task(new Title("Meeting 4"), new EndDateTime("2017-04-04T10:16:30"), 
+                    new StartDateTime("2017-04-04T10:15:30"),
                     new Location("Blk 436 Serangoon Gardens Street 26, #16-43"),
                     new UniqueTagList("family")),
-                new Task(new Title("Irfan Ibrahim"), new EndDateTime("92492021"), new StartDateTime("irfan@outlook.com"),
+                new Task(new Title("Meeting 5"), new EndDateTime("2017-04-05T10:16:30"), 
+                    new StartDateTime("2017-04-05T10:15:30"),
                     new Location("Blk 47 Tampines Street 20, #17-35"),
                     new UniqueTagList("classmates")),
-                new Task(new Title("Roy Balakrishnan"), new EndDateTime("92624417"), new StartDateTime("royb@gmail.com"),
+                new Task(new Title("Meeting 6"), new EndDateTime("2017-04-06T10:16:30"), 
+                    new StartDateTime("2017-04-06T10:15:30"),
                     new Location("Blk 45 Aljunied Street 85, #11-31"),
                     new UniqueTagList("colleagues"))
             };
@@ -47,7 +53,7 @@ public class SampleDataUtil {
             }
             return sampleAB;
         } catch (DuplicateTaskException e) {
-            throw new AssertionError("sample data cannot contain duplicate persons", e);
+            throw new AssertionError("sample data cannot contain duplicate tasks", e);
         }
     }
 }
