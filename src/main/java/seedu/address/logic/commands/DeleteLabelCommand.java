@@ -7,9 +7,9 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.label.Label;
 import seedu.address.model.label.UniqueLabelList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 
 //@@author A0140042A
 /**
@@ -38,7 +38,7 @@ public class DeleteLabelCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
         model.updateFilteredListToShowAll();
-        List<ReadOnlyPerson> allTaskList = model.getFilteredPersonList();
+        List<ReadOnlyTask> allTaskList = model.getFilteredTaskList();
         boolean labelExist = deleteLabelInTasks(allTaskList);
 
         if (!labelExist) {
@@ -54,21 +54,21 @@ public class DeleteLabelCommand extends Command {
      * @param allTaskList
      * @return true if the specified label exists
      */
-    private boolean deleteLabelInTasks(List<ReadOnlyPerson> allTaskList) throws CommandException {
+    private boolean deleteLabelInTasks(List<ReadOnlyTask> allTaskList) throws CommandException {
         boolean labelExist = false;
         for (int i = 0; i < allTaskList.size(); i++) {
-            Person person = new Person(allTaskList.get(i));
-            UniqueLabelList labels = person.getLabels();
+            Task task = new Task(allTaskList.get(i));
+            UniqueLabelList labels = task.getLabels();
             if (labels.contains(labelToDelete)) {
                 Set<Label> labelSet = labels.toSet();
                 labelSet.remove(labelToDelete);
-                person.setLabels(new UniqueLabelList(labelSet));
+                task.setLabels(new UniqueLabelList(labelSet));
 
                 labelExist = true;
 
                 try {
-                    model.updatePerson(i, person);
-                } catch (UniquePersonList.DuplicatePersonException dpe) {
+                    model.updatePerson(i, task);
+                } catch (DuplicateTaskException dpe) {
                     throw new CommandException(MESSAGE_DUPLICATE_PERSON);
                 }
             }
