@@ -41,12 +41,12 @@ public class Task implements ReadOnlyTask {
 	public Name getName() {
 		return name;
 	}
-    
+
     public void setName(Name name) {
         assert name != null;
         this.name = name;
     }
-    
+
     @Override
     public Description getDescription() {
 		return description;

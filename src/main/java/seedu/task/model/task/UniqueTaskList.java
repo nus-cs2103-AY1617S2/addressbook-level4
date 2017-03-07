@@ -117,7 +117,7 @@ public class UniqueTaskList implements Iterable<Task> {
      */
     public static class DuplicateTaskException extends DuplicateDataException {
         /**
-         * 
+         *
          */
         private static final long serialVersionUID = 1L;
 
@@ -133,7 +133,7 @@ public class UniqueTaskList implements Iterable<Task> {
     public static class TaskNotFoundException extends Exception {
 
         /**
-         * 
+         *
          */
         private static final long serialVersionUID = 1L;}
 
