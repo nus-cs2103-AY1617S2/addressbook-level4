@@ -13,7 +13,7 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.commons.util.FxViewUtil;
-import seedu.address.model.person.ReadOnlyTask;
+import seedu.address.model.person.ReadOnlyPerson;
 
 /**
  * Panel containing the list of persons.
@@ -23,15 +23,15 @@ public class PersonListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
 
     @FXML
-    private ListView<ReadOnlyTask> personListView;
+    private ListView<ReadOnlyPerson> personListView;
 
-    public PersonListPanel(AnchorPane personListPlaceholder, ObservableList<ReadOnlyTask> personList) {
+    public PersonListPanel(AnchorPane personListPlaceholder, ObservableList<ReadOnlyPerson> personList) {
         super(FXML);
         setConnections(personList);
         addToPlaceholder(personListPlaceholder);
     }
 
-    private void setConnections(ObservableList<ReadOnlyTask> personList) {
+    private void setConnections(ObservableList<ReadOnlyPerson> personList) {
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
         setEventHandlerForSelectionChangeEvent();
@@ -60,10 +60,10 @@ public class PersonListPanel extends UiPart<Region> {
         });
     }
 
-    class PersonListViewCell extends ListCell<ReadOnlyTask> {
+    class PersonListViewCell extends ListCell<ReadOnlyPerson> {
 
         @Override
-        protected void updateItem(ReadOnlyTask person, boolean empty) {
+        protected void updateItem(ReadOnlyPerson person, boolean empty) {
             super.updateItem(person, empty);
 
             if (empty || person == null) {

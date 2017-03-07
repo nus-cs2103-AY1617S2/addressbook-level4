@@ -47,7 +47,7 @@ public class TypicalTestPersons {
         for (TestPerson person : new TypicalTestPersons().getTypicalPersons()) {
             try {
                 ab.addPerson(new Person(person));
-            } catch (UniquePersonList.DuplicateTaskException e) {
+            } catch (UniquePersonList.DuplicatePersonException e) {
                 assert false : "not possible";
             }
         }

@@ -8,7 +8,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.UniquePersonList.DuplicateTaskException;
+import seedu.address.model.person.UniquePersonList.DuplicatePersonException;
 import seedu.address.model.tag.UniqueTagList;
 
 public class SampleDataUtil {
@@ -46,7 +46,7 @@ public class SampleDataUtil {
                 sampleAB.addPerson(samplePerson);
             }
             return sampleAB;
-        } catch (DuplicateTaskException e) {
+        } catch (DuplicatePersonException e) {
             throw new AssertionError("sample data cannot contain duplicate persons", e);
         }
     }

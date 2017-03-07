@@ -9,7 +9,7 @@ import seedu.address.model.tag.UniqueTagList;
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated.
  */
-public class Person implements ReadOnlyTask {
+public class Person implements ReadOnlyPerson {
 
     private Name name;
     private Phone phone;
@@ -33,7 +33,7 @@ public class Person implements ReadOnlyTask {
     /**
      * Creates a copy of the given ReadOnlyPerson.
      */
-    public Person(ReadOnlyTask source) {
+    public Person(ReadOnlyPerson source) {
         this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(), source.getTags());
     }
 
@@ -92,7 +92,7 @@ public class Person implements ReadOnlyTask {
     /**
      * Updates this person with the details of {@code replacement}.
      */
-    public void resetData(ReadOnlyTask replacement) {
+    public void resetData(ReadOnlyPerson replacement) {
         assert replacement != null;
 
         this.setName(replacement.getName());
@@ -105,8 +105,8 @@ public class Person implements ReadOnlyTask {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ReadOnlyTask // instanceof handles nulls
-                && this.isSameStateAs((ReadOnlyTask) other));
+                || (other instanceof ReadOnlyPerson // instanceof handles nulls
+                && this.isSameStateAs((ReadOnlyPerson) other));
     }
 
     @Override

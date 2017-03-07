@@ -21,7 +21,7 @@ import org.junit.rules.TemporaryFolder;
 import com.google.common.eventbus.Subscribe;
 
 import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.events.model.TaskManagerChangedEvent;
+import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.commands.AddCommand;
@@ -44,7 +44,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.ReadOnlyTask;
+import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.storage.StorageManager;
@@ -67,7 +67,7 @@ public class LogicManagerTest {
     private int targetedJumpIndex;
 
     @Subscribe
-    private void handleLocalModelChangedEvent(TaskManagerChangedEvent abce) {
+    private void handleLocalModelChangedEvent(AddressBookChangedEvent abce) {
         latestSavedAddressBook = new AddressBook(abce.data);
     }
 
@@ -112,7 +112,7 @@ public class LogicManagerTest {
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
                                       ReadOnlyAddressBook expectedAddressBook,
-                                      List<? extends ReadOnlyTask> expectedShownList) {
+                                      List<? extends ReadOnlyPerson> expectedShownList) {
         assertCommandBehavior(false, inputCommand, expectedMessage, expectedAddressBook, expectedShownList);
     }
 
@@ -123,7 +123,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, String expectedMessage) {
         AddressBook expectedAddressBook = new AddressBook(model.getAddressBook());
-        List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredPersonList());
+        List<ReadOnlyPerson> expectedShownList = new ArrayList<>(model.getFilteredPersonList());
         assertCommandBehavior(true, inputCommand, expectedMessage, expectedAddressBook, expectedShownList);
     }
 
@@ -137,7 +137,7 @@ public class LogicManagerTest {
      */
     private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand, String expectedMessage,
                                        ReadOnlyAddressBook expectedAddressBook,
-                                       List<? extends ReadOnlyTask> expectedShownList) {
+                                       List<? extends ReadOnlyPerson> expectedShownList) {
 
         try {
             CommandResult result = logic.execute(inputCommand);
@@ -243,7 +243,7 @@ public class LogicManagerTest {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
         AddressBook expectedAB = helper.generateAddressBook(2);
-        List<? extends ReadOnlyTask> expectedList = expectedAB.getPersonList();
+        List<? extends ReadOnlyPerson> expectedList = expectedAB.getPersonList();
 
         // prepare address book state
         helper.addToModel(model, 2);
