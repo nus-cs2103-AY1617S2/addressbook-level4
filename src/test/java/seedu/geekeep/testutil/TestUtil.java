@@ -38,7 +38,7 @@ import seedu.geekeep.model.task.Name;
 import seedu.geekeep.model.task.Person;
 import seedu.geekeep.model.task.Phone;
 import seedu.geekeep.model.task.ReadOnlyPerson;
-import seedu.geekeep.storage.XmlSerializableAddressBook;
+import seedu.geekeep.storage.XmlSerializableTaskManager;
 
 /**
  * A utility class for test cases.
@@ -144,8 +144,8 @@ public class TestUtil {
         createDataFileWithSampleData(TestApp.SAVE_LOCATION_FOR_TESTING);
     }
 
-    public static XmlSerializableAddressBook generateSampleStorageAddressBook() {
-        return new XmlSerializableAddressBook(new TaskManager());
+    public static XmlSerializableTaskManager generateSampleStorageAddressBook() {
+        return new XmlSerializableTaskManager(new TaskManager());
     }
 
     /**

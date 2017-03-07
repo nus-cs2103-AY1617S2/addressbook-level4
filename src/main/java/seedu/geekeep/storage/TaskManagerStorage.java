@@ -9,7 +9,7 @@ import seedu.geekeep.model.ReadOnlyTaskManager;
 /**
  * Represents a storage for {@link seedu.geekeep.model.TaskManager}.
  */
-public interface AddressBookStorage {
+public interface TaskManagerStorage {
 
     /**
      * Returns the file path of the data file.
