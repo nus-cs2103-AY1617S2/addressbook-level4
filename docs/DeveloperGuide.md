@@ -365,7 +365,7 @@ Priority | As a ... | I want to ... | So that I can...
 ### Essential Functions
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | user |find upcoming tasks | decide what needs to be done soon.
+`* * *` | user | add a task | use the keep track of the tasks to be completed.
 `* * *` | user | delete a task | get rid of tasks that I no longer care to track.
 `* * *` | user | edit a task detail/deadline | change the deadline or the specifics of the tasks.
 `* * *` | user | add comments/notes to a created task | in order to provide extra details that aids in describing the task, without being a subtask.
@@ -375,6 +375,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | clear a subset of tasks | erase a specific category or type of task without deleting them individually.
 `* * *` | user | view the task manager in a calendar mode | have an overall picture of how busy I will be over the next few days/weeks.
 `* * *` | user | save my task list | easily retrieve my tasks.
+`* * *` | user | find upcoming tasks | decide what needs to be done soon.
 
 
 ### Reminders
@@ -388,7 +389,7 @@ Priority | As a ... | I want to ... | So that I can...
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | user | add priority levels to different tasks | identify which tasks are the most urgent.
-`* * *` | user | edit the priority levels of the tasks | change the priority levels to suit my needs. 
+`* * *` | user | edit the priority levels of the tasks | change the priority levels to suit my needs.
 `* * *` | user | sort the tasks by deadline | know which tasks are more urgent and which are less urgent.
 
 
@@ -413,12 +414,12 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user | delete subtasks | get rid of subtasks that are no longer relevant.
 `* *` | user | clear subtasks | keep track of my progress against the big picture.
 
-### Customization 
+### Customization
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* *` | user | set a quote of the day at the frontpage of the task manager | be more motivated in doing my tasks.
 `* *` | user | set a custom/standard background image of the task manager | be more motivated.
-`* *` | user | change the aesthetics (colours/layout) of the task manager | make it feel more personalised. 
+`* *` | user | change the aesthetics (colours/layout) of the task manager | make it feel more personalised.
 
 ### Advanced Features
 Priority | As a ... | I want to ... | So that I can...
