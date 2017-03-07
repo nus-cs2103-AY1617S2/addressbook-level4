@@ -47,35 +47,34 @@ Format: `help`
 
 > Help is also shown if you enter an incorrect command e.g. `abcd`
 
-### 2.2. Adding a person: `add`
+### 2.2. Adding a task: `add`
 
-Adds a person to the address book<br>
-Format: `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Adds a task to the list<br>
+Format: `add TITLE d/DATE p/PRIORITY i/INSTRUCTION [t/TAG]...`
 
-> Persons can have any number of tags (including 0)
+> Tasks can have any number of tags (including 0)
 
 Examples:
+* `add Buy groceries d/05032017 p/urgent i/eggs x10, milk x2, bread x2 t/home t/errand`
+* `add Watch webcast i/cs2103 t/school p/urgent d/07032017`
 
-* `add John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01`
-* `add Betsy Crowe t/friend e/betsycrowe@gmail.com a/Newgate Prison p/1234567 t/criminal`
+### 2.3. Listing all tasks : `list`
 
-### 2.3. Listing all persons : `list`
-
-Shows a list of all persons in the address book.<br>
+Shows a list of all tasks.<br>
 Format: `list`
 
-### 2.4. Editing a person : `edit`
+### 2.4. Editing a task : `edit`
 
-Edits an existing person in the address book.<br>
-Format: `edit INDEX [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Edits an existing task in the list.<br>
+Format: `edit INDEX [TITLE] [d/DATE] [p/PRIORITY] [i/INSTRUCTION] [t/TAG]...`
 
-> * Edits the person at the specified `INDEX`.
-    The index refers to the index number shown in the last person listing.<br>
+> * Edits the task at the specified `INDEX`.
+    The index refers to the index number shown in the last task listing.<br>
     The index **must be a positive integer** 1, 2, 3, ...
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
-> * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-> * You can remove all the person's tags by typing `t/` without specifying any tags after it. 
+> * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
+> * You can remove all the task's tags by typing `t/` without specifying any tags after it. 
 
 Examples:
 
@@ -85,9 +84,9 @@ Examples:
 * `edit 2 Betsy Crower t/`<br>
   Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### 2.5. Finding all persons containing any keyword in their name: `find`
+### 2.5. Finding all tasks containing any keyword in their title: `find`
 
-Finds persons whose names contain any of the given keywords.<br>
+Finds tasks with titles containing any of the given keywords.<br>
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 > * The search is case sensitive. e.g `hans` will not match `Hans`
@@ -99,17 +98,17 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 
-* `find John`<br>
-  Returns `John Doe` but not `john`
-* `find Betsy Tim John`<br>
-  Returns Any person having names `Betsy`, `Tim`, or `John`
+* `find groceries`<br>
+   Returns `Buy groceries` but not `groceries`
+* `find buy webcast`<br>
+   Returns Any tasks having titles `buy` or `webcast`   
 
-### 2.6. Deleting a person : `delete`
+### 2.6. Deleting a task : `delete`
 
-Deletes the specified person from the address book. Irreversible.<br>
+Deletes the task identified by the index number used in the last task listing.<br>
 Format: `delete INDEX`
 
-> Deletes the person at the specified `INDEX`. <br>
+> Deletes the task at the specified `INDEX`. <br>
 > The index refers to the index number shown in the most recent listing.<br>
 > The index **must be a positive integer** 1, 2, 3, ...
 
@@ -122,12 +121,12 @@ Examples:
   `delete 1`<br>
   Deletes the 1st person in the results of the `find` command.
 
-### 2.7. Select a person : `select`
+### 2.7. Select a task : `select`
 
-Selects the person identified by the index number used in the last person listing.<br>
+Selects the task identified by the index number used in the last task listing.<br>
 Format: `select INDEX`
 
-> Selects the person and loads the Google search page the person at the specified `INDEX`.<br>
+> Selects the task and loads the Google search page the title at the specified `INDEX`.<br>
 > The index refers to the index number shown in the most recent listing.<br>
 > The index **must be a positive integer** 1, 2, 3, ...
 
@@ -140,9 +139,9 @@ Examples:
   `select 1`<br>
   Selects the 1st person in the results of the `find` command.
 
-### 2.8. Clearing all entries : `clear`
+### 2.8. Clearing all tasks : `clear`
 
-Clears all entries from the address book.<br>
+Clears all tasks from the list.<br>
 Format: `clear`
 
 ### 2.9. Exiting the program : `exit`
@@ -152,7 +151,7 @@ Format: `exit`
 
 ### 2.10. Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data.<br>
+To-do data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
 ## 3. FAQ
@@ -163,8 +162,8 @@ There is no need to save manually.
 
 ## 4. Command Summary
 
-* **Add**  `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` <br>
-  e.g. `add James Ho p/22224444 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+* **Add**  `add TITLE d/DATE p/PRIORITY i/INSTRUCTION [t/TAG]...` <br>
+  e.g. `add Buy groceries d/05032017 p/urgent i/eggs x10, milk x2, bread x2 t/home t/errand`
 
 * **Clear** : `clear`
 
@@ -172,7 +171,7 @@ There is no need to save manually.
    e.g. `delete 3`
 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
-  e.g. `find James Jake`
+  e.g. `find Play basketball Play basketball`
 
 * **List** : `list` <br>
   e.g.
