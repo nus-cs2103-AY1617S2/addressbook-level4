@@ -21,7 +21,6 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
 
-
 /**
  * The manager of the UI component.
  */
