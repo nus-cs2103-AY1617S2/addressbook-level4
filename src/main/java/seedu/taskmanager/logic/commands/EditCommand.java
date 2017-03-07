@@ -158,7 +158,7 @@ public class EditCommand extends Command {
         public Optional<EndTime> getEndTime() {
         	return endtime;
         }
-        
+
         public void setDeadline(Optional<Deadline> deadline) {
         	assert deadline != null;
         	this.deadline = deadline;
