@@ -8,11 +8,11 @@ import javafx.scene.Node;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.task.ReadOnlyPerson;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Provides a handle to a person card in the person list panel.
+ * Provides a handle to a task card in the task list panel.
  */
 public class PersonCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";

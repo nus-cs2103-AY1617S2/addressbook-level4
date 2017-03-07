@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.task;
 
 import java.util.Objects;
 
@@ -83,14 +83,14 @@ public class Person implements ReadOnlyPerson {
     }
 
     /**
-     * Replaces this person's tags with the tags in the argument tag list.
+     * Replaces this task's tags with the tags in the argument tag list.
      */
     public void setTags(UniqueTagList replacement) {
         tags.setTags(replacement);
     }
 
     /**
-     * Updates this person with the details of {@code replacement}.
+     * Updates this task with the details of {@code replacement}.
      */
     public void resetData(ReadOnlyPerson replacement) {
         assert replacement != null;

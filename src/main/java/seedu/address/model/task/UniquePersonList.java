@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.task;
 
 import java.util.Iterator;
 import java.util.List;
@@ -22,7 +22,7 @@ public class UniquePersonList implements Iterable<Person> {
     private final ObservableList<Person> internalList = FXCollections.observableArrayList();
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent task as the given argument.
      */
     public boolean contains(ReadOnlyPerson toCheck) {
         assert toCheck != null;
@@ -30,9 +30,9 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Adds a person to the list.
+     * Adds a task to the list.
      *
-     * @throws DuplicatePersonException if the person to add is a duplicate of an existing person in the list.
+     * @throws DuplicatePersonException if the task to add is a duplicate of an existing task in the list.
      */
     public void add(Person toAdd) throws DuplicatePersonException {
         assert toAdd != null;
@@ -43,10 +43,10 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Updates the person in the list at position {@code index} with {@code editedPerson}.
+     * Updates the task in the list at position {@code index} with {@code editedPerson}.
      *
-     * @throws DuplicatePersonException if updating the person's details causes the person to be equivalent to
-     *      another existing person in the list.
+     * @throws DuplicatePersonException if updating the task's details causes the task to be equivalent to
+     *      another existing task in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
     public void updatePerson(int index, ReadOnlyPerson editedPerson) throws DuplicatePersonException {
@@ -58,16 +58,16 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         personToUpdate.resetData(editedPerson);
-        // TODO: The code below is just a workaround to notify observers of the updated person.
+        // TODO: The code below is just a workaround to notify observers of the updated task.
         // The right way is to implement observable properties in the Person class.
         // Then, PersonCard should then bind its text labels to those observable properties.
         internalList.set(index, personToUpdate);
     }
 
     /**
-     * Removes the equivalent person from the list.
+     * Removes the equivalent task from the list.
      *
-     * @throws PersonNotFoundException if no such person could be found in the list.
+     * @throws PersonNotFoundException if no such task could be found in the list.
      */
     public boolean remove(ReadOnlyPerson toRemove) throws PersonNotFoundException {
         assert toRemove != null;
@@ -122,8 +122,8 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Signals that an operation targeting a specified person in the list would fail because
-     * there is no such matching person in the list.
+     * Signals that an operation targeting a specified task in the list would fail because
+     * there is no such matching task in the list.
      */
     public static class PersonNotFoundException extends Exception {}
 

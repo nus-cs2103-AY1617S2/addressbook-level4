@@ -3,10 +3,10 @@ package seedu.address.model;
 import java.util.Set;
 
 import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.person.UniquePersonList.DuplicatePersonException;
+import seedu.address.model.task.Person;
+import seedu.address.model.task.ReadOnlyPerson;
+import seedu.address.model.task.UniquePersonList;
+import seedu.address.model.task.UniquePersonList.DuplicatePersonException;
 
 /**
  * The API of the Model component.
@@ -18,29 +18,29 @@ public interface Model {
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 
-    /** Deletes the given person. */
+    /** Deletes the given task. */
     void deletePerson(ReadOnlyPerson target) throws UniquePersonList.PersonNotFoundException;
 
-    /** Adds the given person */
+    /** Adds the given task */
     void addPerson(Person person) throws UniquePersonList.DuplicatePersonException;
 
     /**
-     * Updates the person located at {@code filteredPersonListIndex} with {@code editedPerson}.
+     * Updates the task located at {@code filteredPersonListIndex} with {@code editedPerson}.
      *
-     * @throws DuplicatePersonException if updating the person's details causes the person to be equivalent to
-     *      another existing person in the list.
+     * @throws DuplicatePersonException if updating the task's details causes the task to be equivalent to
+     *      another existing task in the list.
      * @throws IndexOutOfBoundsException if {@code filteredPersonListIndex} < 0 or >= the size of the filtered list.
      */
     void updatePerson(int filteredPersonListIndex, ReadOnlyPerson editedPerson)
             throws UniquePersonList.DuplicatePersonException;
 
-    /** Returns the filtered person list as an {@code UnmodifiableObservableList<ReadOnlyPerson>} */
+    /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyPerson>} */
     UnmodifiableObservableList<ReadOnlyPerson> getFilteredPersonList();
 
-    /** Updates the filter of the filtered person list to show all persons */
+    /** Updates the filter of the filtered task list to show all persons */
     void updateFilteredListToShowAll();
 
-    /** Updates the filter of the filtered person list to filter by the given keywords*/
+    /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredPersonList(Set<String> keywords);
 
 }

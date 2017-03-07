@@ -30,12 +30,12 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.AddressBook;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.task.Address;
+import seedu.address.model.task.Email;
+import seedu.address.model.task.Name;
+import seedu.address.model.task.Person;
+import seedu.address.model.task.Phone;
+import seedu.address.model.task.ReadOnlyPerson;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.storage.XmlSerializableAddressBook;
@@ -293,7 +293,7 @@ public class TestUtil {
 
 
     /**
-     * Returns a copy of the list with the person at specified index removed.
+     * Returns a copy of the list with the task at specified index removed.
      * @param list original list to copy from
      * @param targetIndexInOneIndexedFormat e.g. index 1 if the first element is to be removed
      */
@@ -302,10 +302,10 @@ public class TestUtil {
     }
 
     /**
-     * Replaces persons[i] with a person.
+     * Replaces persons[i] with a task.
      * @param persons The array of persons.
-     * @param person The replacement person
-     * @param index The index of the person to be replaced.
+     * @param person The replacement task
+     * @param index The index of the task to be replaced.
      * @return
      */
     public static TestPerson[] replacePersonFromList(TestPerson[] persons, TestPerson person, int index) {

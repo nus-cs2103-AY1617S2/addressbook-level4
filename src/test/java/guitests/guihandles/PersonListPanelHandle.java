@@ -13,12 +13,12 @@ import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import seedu.address.TestApp;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.task.Person;
+import seedu.address.model.task.ReadOnlyPerson;
 import seedu.address.testutil.TestUtil;
 
 /**
- * Provides a handle for the panel containing the person list.
+ * Provides a handle for the panel containing the task list.
  */
 public class PersonListPanelHandle extends GuiHandle {
 
@@ -41,17 +41,17 @@ public class PersonListPanelHandle extends GuiHandle {
     }
 
     /**
-     * Returns true if the list is showing the person details correctly and in correct order.
-     * @param persons A list of person in the correct order.
+     * Returns true if the list is showing the task details correctly and in correct order.
+     * @param persons A list of task in the correct order.
      */
     public boolean isListMatching(ReadOnlyPerson... persons) {
         return this.isListMatching(0, persons);
     }
 
     /**
-     * Returns true if the list is showing the person details correctly and in correct order.
+     * Returns true if the list is showing the task details correctly and in correct order.
      * @param startPosition The starting position of the sub list.
-     * @param persons A list of person in the correct order.
+     * @param persons A list of task in the correct order.
      */
     public boolean isListMatching(int startPosition, ReadOnlyPerson... persons) throws IllegalArgumentException {
         if (persons.length + startPosition != getListView().getItems().size()) {
@@ -112,7 +112,7 @@ public class PersonListPanelHandle extends GuiHandle {
     }
 
     /**
-     * Navigates the listview to display and select the person.
+     * Navigates the listview to display and select the task.
      */
     public PersonCardHandle navigateToPerson(ReadOnlyPerson person) {
         int index = getPersonIndex(person);
@@ -128,7 +128,7 @@ public class PersonListPanelHandle extends GuiHandle {
 
 
     /**
-     * Returns the position of the person given, {@code NOT_FOUND} if not found in the list.
+     * Returns the position of the task given, {@code NOT_FOUND} if not found in the list.
      */
     public int getPersonIndex(ReadOnlyPerson targetPerson) {
         List<ReadOnlyPerson> personsInList = getListView().getItems();
@@ -141,7 +141,7 @@ public class PersonListPanelHandle extends GuiHandle {
     }
 
     /**
-     * Gets a person from the list by index
+     * Gets a task from the list by index
      */
     public ReadOnlyPerson getPerson(int index) {
         return getListView().getItems().get(index);
