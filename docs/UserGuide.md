@@ -115,7 +115,7 @@ Format: `find 'KEY' ['KEY'...]`
 > * The search is case sensitive. e.g `hans` will not match `Hans`
 > * The order of the search keys does not matter. e.g. `'Hans' 'Bo'` will match `'Bo Hans'`
 > * Only the task description is searched.
-> * Persons matching at least one search key will be returned (i.e. `OR` search).
+> * Tasks matching at least one search key will be returned (i.e. `OR` search).
     e.g. `Hans` will match `Hans Bo`
 
 Examples:
