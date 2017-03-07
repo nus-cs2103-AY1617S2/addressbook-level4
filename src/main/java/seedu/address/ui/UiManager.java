@@ -1,8 +1,8 @@
 package seedu.address.ui;
 
-import java.util.logging.Logger;
-
 import com.google.common.eventbus.Subscribe;
+
+import java.util.logging.Logger;
 
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
@@ -15,8 +15,12 @@ import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
+<<<<<<< HEAD
 import seedu.address.commons.events.ui.TaskPanelSelectionChangedEvent;
+=======
+>>>>>>> 52e701e877d7e50931eb3bb6a441c4f8af274322
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
+import seedu.address.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
@@ -26,7 +30,7 @@ import seedu.address.model.UserPrefs;
  */
 public class UiManager extends ComponentManager implements Ui {
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
-    private static final String ICON_APPLICATION = "/images/address_book_32.png";
+    private static final String ICON_APPLICATION = "/images/task_manager_32.png";
     public static final String ALERT_DIALOG_PANE_FIELD_ID = "alertDialogPane";
 
     private Logic logic;
@@ -116,13 +120,17 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.getPersonListPanel().scrollTo(event.targetIndex);
+        mainWindow.getTaskListPanel().scrollTo(event.targetIndex);
     }
 
     @Subscribe
+<<<<<<< HEAD
     private void handlePersonPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
+=======
+    private void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
+>>>>>>> 52e701e877d7e50931eb3bb6a441c4f8af274322
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.loadPersonPage(event.getNewSelection());
+        mainWindow.loadTaskPage(event.getNewSelection());
     }
 
 }

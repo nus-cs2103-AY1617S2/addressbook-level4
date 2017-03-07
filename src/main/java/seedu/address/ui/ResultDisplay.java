@@ -1,8 +1,8 @@
 package seedu.address.ui;
 
-import java.util.logging.Logger;
-
 import com.google.common.eventbus.Subscribe;
+
+import java.util.logging.Logger;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
