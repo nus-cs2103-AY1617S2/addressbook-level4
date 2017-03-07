@@ -15,7 +15,7 @@
     * [Adding a recurring task] (#adding-a-recurring-task)
     * [Editng a task] (#editing-a-task)
     * [Deleting a task] (#deleting-a-task)
-    * [Viewing task] (#viewing-a-task)
+    * [Viewing task] (#viewing-task)
       * [Viewing all tasks] (#viewing-all-tasks)
       * [Viewing a specified task] (#viewing-a-specified-task)
       * [Viewing all Today's tasks] (#viewing-all-today's-tasks)
@@ -25,13 +25,13 @@
       * [Viewing all overdue tasks] (#viewing-all-overdue-tasks)
      * [Marking a task as completed] (#marking-a-task-as-completed)
      * [Finding for tasks] (#finding-for-tasks)
-     * [Clearing for completed tasks] (#clearing-for-completed-tasks)
+     * [Clearing of completed tasks] (#clearing-of-completed-tasks)
      * [Toggle Google Calendar] (#toggle-google-calendar)
      * [Undo most recent command] (#undo-most-recent-command)
      * [Redo most recent undo] (#redo-most-recent-undo)
      * [Reset data] (#reset-data)
      * [Save] (#saving-the-data)
-       * [Change the save location] (#saving-the-save-location)
+       * [Changing the save location] (#changing-the-save-location)
      * [Exiting the program] (#exiting-the-program)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
@@ -341,7 +341,7 @@ Examples:
 * `delete CS2010`
    Delete all tasks containing tag "CS2010" 
 
-### Viewing tasks
+### Viewing task
 
 #### Viewing all tasks
 Shows a list of all task in iManager. 
@@ -480,7 +480,7 @@ Examples:
 * `cd`
 * `saveto C:\Users\Computing\Desktop\CS2103`
 
-### Exiting the program:`exit`
+### Exiting the program
 Exits the application.
 
 Format : `exit`
