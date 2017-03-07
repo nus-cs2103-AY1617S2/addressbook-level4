@@ -11,6 +11,8 @@ import static seedu.doist.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.doist.logic.parser.CliSyntax.PREFIX_UNDER;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -41,19 +43,17 @@ public class AddCommandParser {
         final String argument = matcher.group("preamble");
         final String parameters = matcher.group("parameters").trim();
         ArrayList<String> tokens = new ArrayList<String>();
-        for (int i = 0; i < parameters.length(); i++) {
-            if (parameters.charAt(i) == '\\') {
-                int start = i;
-                while (parameters.charAt(i) != ' ') {
-                    i++;
-                }
-                tokens.add(parameters.substring(start, i));
-            }
+
+        LinkedList<String> parametersList = new LinkedList<String>(Arrays.asList(parameters.split("\\\\")));
+        parametersList.poll();  // remove the first item, which is an empty string
+        for (String parameterPair : parametersList) {
+            String parameterKey = "\\" + parameterPair.split(" ")[0];
+            System.out.println(parameterKey);
+            tokens.add(parameterKey);
         }
 
-        ArgumentTokenizer argsTokenizer =
-              new ArgumentTokenizer(PREFIX_FROM, PREFIX_TO, PREFIX_REMIND, PREFIX_EVERY,
-                                    PREFIX_AS, PREFIX_BY, PREFIX_UNDER);
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_FROM, PREFIX_TO, PREFIX_REMIND, PREFIX_EVERY,
+                                                                PREFIX_AS, PREFIX_BY, PREFIX_UNDER);
 
         if (!argsTokenizer.validateTokens(tokens)) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
