@@ -20,7 +20,7 @@
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
    * **`list`** : lists all task
-   * **`add`**` add do 2103 project r/waiting for john's reply d/03-03-2017 l/nus soc t/school` :
+   * **`add`**`  do 2103 project r/waiting for john's reply d/03-03-2017 l/nus soc t/school` :
      adds a task named `do 2103 project` to KIT.
    * **`delete`**` 3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
@@ -52,7 +52,7 @@ Format: `helpf`
 Adds a task to the to do list. New tasks are [not done] by default.
 Format: `add NAME [r/REMARKS] [d/DEADLINE] [l/LOCATION] [t/TAG]...`
 
-> If you need to type the character /, put a \ before it to avoid t/ getting picked up as tag. eg. carrot\/cabbage
+> If you need to type the character /, put a \ before it to avoid t/ getting picked up as tag. eg. carrot\/cabbage <br>
 > Persons can have any number of tags (including 0)
 
 Examples:
@@ -62,18 +62,22 @@ Examples:
 
 ### 2.3.1	Listing of all task: `list`
 Shows a list of all the tasks in to do list. <br>
+
 Format: `list`, `l`, `ls`
 
 ### 2.3.2	Listing of all done task: `listdone`
 Shows a list of all the tasks that has been completed. <br>
+
 Format: `listdone`, `ld`
 
 ### 2.3.3	Listing of all not done task: `listnotdone`
 Shows a list of all the tasks that has yet to be completed. Sorted by due date. <br>
+
 Format: `listnotdone`, `lnd`
 
 ### 2.3.4	Listing of all task under a tag: `listtag`
 Shows a list of task by the specified tag <br>
+
 Format: `listtag TAGNAME`, `lt TAGNAME`
 
 ### 2.4	Marking a task as done: `done`
@@ -85,10 +89,12 @@ Format: `done INDEX`
 
 ### 2.5	Deleting a task: `delete`
 Deletes the task at the specified `INDEX`. <br>
+
 Format: delete INDEX
 
 ### 2.6	Undoing last command: `undo`
 Undo the last command. <br>
+
 Format: undo
 
 ### 2.7 Editing a task: `edit`
@@ -149,14 +155,17 @@ Examples:
 
 ### 2.10 Clearing all task: `clear`
 Clears all entries from the to do list. Will prompt a confirmation. <br>
+
 Format: `clear`
 
 ### 2.11 Exiting the program: `exit`
 Exits the program. <br>
+
 Format: `exit`
 
 ### 2.12 Specifying save location: `save`
 Specify location of save file. <br>
+
 Format: `save PATHNAME`
 
 ### 2.13. Saving the data
@@ -194,6 +203,8 @@ There is no need to save manually.
 ## 4. Command Summary
 
 * **Help** : `help` <br>
+
+* **Help** : `helpf` <br>
 
 * **Add**  `add NAME [r/REMARKS] [d/DEADLINE] [l/LOCATION] [t/TAG]...`
   e.g.  `add do 2103 project r/waiting for john’s reply d/03-03-2017 l/nus soc t/school`
