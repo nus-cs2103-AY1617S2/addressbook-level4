@@ -8,7 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
@@ -72,7 +72,7 @@ public class PersonCardHandle extends GuiHandle {
         return guiRobot.from(node).lookup(TAGS_FIELD_ID).query();
     }
 
-    public boolean isSamePerson(ReadOnlyPerson person) {
+    public boolean isSamePerson(ReadOnlyTask person) {
         return getFullName().equals(person.getName().fullName)
                 && getPhone().equals(person.getPhone().value)
                 && getEmail().equals(person.getEmail().value)

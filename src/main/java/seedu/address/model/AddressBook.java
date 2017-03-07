@@ -11,7 +11,7 @@ import java.util.Set;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.UniquePersonList.DuplicatePersonException;
 import seedu.address.model.tag.Tag;
@@ -21,7 +21,7 @@ import seedu.address.model.tag.UniqueTagList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .equals comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class AddressBook implements ReadOnlyTaskManager {
 
     private final UniquePersonList persons;
     private final UniqueTagList tags;
@@ -43,14 +43,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Creates an AddressBook using the Persons and Tags in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public AddressBook(ReadOnlyTaskManager toBeCopied) {
         this();
         resetData(toBeCopied);
     }
 
 //// list overwrite operations
 
-    public void setPersons(List<? extends ReadOnlyPerson> persons)
+    public void setPersons(List<? extends ReadOnlyTask> persons)
             throws UniquePersonList.DuplicatePersonException {
         this.persons.setPersons(persons);
     }
@@ -59,7 +59,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.tags.setTags(tags);
     }
 
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyTaskManager newData) {
         assert newData != null;
         try {
             setPersons(newData.getPersonList());
@@ -97,7 +97,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updatePerson(int index, ReadOnlyPerson editedReadOnlyPerson)
+    public void updatePerson(int index, ReadOnlyTask editedReadOnlyPerson)
             throws UniquePersonList.DuplicatePersonException {
         assert editedReadOnlyPerson != null;
 
@@ -139,7 +139,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.forEach(this::syncMasterTagListWith);
     }
 
-    public boolean removePerson(ReadOnlyPerson key) throws UniquePersonList.PersonNotFoundException {
+    public boolean removePerson(ReadOnlyTask key) throws UniquePersonList.PersonNotFoundException {
         if (persons.remove(key)) {
             return true;
         } else {
@@ -162,7 +162,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<ReadOnlyPerson> getPersonList() {
+    public ObservableList<ReadOnlyTask> getPersonList() {
         return new UnmodifiableObservableList<>(persons.asObservableList());
     }
 

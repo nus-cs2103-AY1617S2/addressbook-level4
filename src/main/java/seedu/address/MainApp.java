@@ -23,7 +23,7 @@ import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTaskManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.Storage;
@@ -53,7 +53,7 @@ public class MainApp extends Application {
         super.init();
 
         config = initConfig(getApplicationParameter("config"));
-        storage = new StorageManager(config.getAddressBookFilePath(), config.getUserPrefsFilePath());
+        storage = new StorageManager(config.getTaskManagerFilePath(), config.getUserPrefsFilePath());
 
         userPrefs = initPrefs(config);
 
@@ -74,8 +74,8 @@ public class MainApp extends Application {
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyTaskManager> addressBookOptional;
+        ReadOnlyTaskManager initialData;
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
