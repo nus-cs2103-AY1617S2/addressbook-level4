@@ -243,7 +243,7 @@ public class ArgumentTokenizer {
 
         @Override
         public String toString() {
-            return this.prefix.toString();
+            return this.prefix;
         }
     }
 

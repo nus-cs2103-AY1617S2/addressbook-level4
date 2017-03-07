@@ -41,7 +41,7 @@ public class AddCommand extends Command {
      */
     public AddCommand(String preamble, Map<String, java.util.List<String>> parameters) throws IllegalValueException {
         if (preamble == null || preamble.trim().isEmpty()) {
-            throw new IllegalValueException("No arguments passed");
+            throw new IllegalValueException("You can't add a task without a description!");
         }
         java.util.List<String> tags = parameters.get(CliSyntax.PREFIX_UNDER.toString());
         final Set<Tag> tagSet = new HashSet<>();
