@@ -3,6 +3,7 @@ package seedu.doist.logic.commands;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -37,11 +38,11 @@ public class AddCommand extends Command {
      * @throws IllegalValueException
      *             if any of the raw values are invalid
      */
-    public AddCommand(String preamble, Map<String, java.util.List<String>> parameters) throws IllegalValueException {
+    public AddCommand(String preamble, Map<String, List<String>> parameters) throws IllegalValueException {
         if (preamble == null || preamble.trim().isEmpty()) {
             throw new IllegalValueException("No arguments passed");
         }
-        java.util.List<String> tags = parameters.get("\\under");
+        List<String> tags = parameters.get("\\under");
         final Set<Tag> tagSet = new HashSet<>();
 
         if (tags != null && tags.size() > 0) {

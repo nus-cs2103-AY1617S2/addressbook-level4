@@ -26,16 +26,16 @@ import seedu.doist.logic.commands.IncorrectCommand;
  */
 public class AddCommandParser {
 
-    private static final Pattern Add_Command_Regex = Pattern.compile("(?<preamble>[^\\\\]*)" +
+    private static final Pattern ADD_COMMAND_REGEX = Pattern.compile("(?<preamble>[^\\\\]*)" +
                                                                      "(?<parameters>((\\\\)(\\S+)(\\s+)([^\\\\]*))*)");
 
-    ////argsTokenizer.getValue(PREFIX_PHONE).get() is an an example of how to use the tokenizer
+    // argsTokenizer.getValue(PREFIX_PHONE).get() is an an example of how to use the tokenizer
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
      */
     public Command parse(String args) {
-        final Matcher matcher = Add_Command_Regex.matcher(args.trim());
+        final Matcher matcher = ADD_COMMAND_REGEX.matcher(args.trim());
         if (!matcher.matches() || args.trim().equals("")) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -48,7 +48,6 @@ public class AddCommandParser {
         parametersList.poll();  // remove the first item, which is an empty string
         for (String parameterPair : parametersList) {
             String parameterKey = "\\" + parameterPair.split(" ")[0];
-            System.out.println(parameterKey);
             tokens.add(parameterKey);
         }
 
