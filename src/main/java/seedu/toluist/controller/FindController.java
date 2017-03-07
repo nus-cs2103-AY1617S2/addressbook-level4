@@ -28,7 +28,7 @@ public class FindController extends Controller {
     private static final String NAME_AND_TAG_PARAMETER = "name and tag";
     private static final String KEYWORDS = "keywords";
     private static final String SPLITTER_COMMAND = " ";
-      
+
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     public FindController(Ui renderer) {
@@ -37,7 +37,7 @@ public class FindController extends Controller {
 
     public CommandResult execute(String command) {
         logger.info(getClass() + "will handle command");
-        
+
         //initialize variables for searching
         ArrayList<Task> foundTasks = new ArrayList<Task>();
         HashMap<String, String> tokens = tokenize(command);
@@ -62,8 +62,8 @@ public class FindController extends Controller {
                             foundTasks.add(currentTask);
                             isFound = true;
                             foundValue++;
-                        }   
-                    }                    
+                        }
+                    }
                 }
                 if (isSearchByName && !isFound) {
                         if (currentTask.description.toLowerCase()
@@ -71,12 +71,12 @@ public class FindController extends Controller {
                         foundTasks.add(currentTask);
                         isFound = true;
                         foundValue++;
-                    }                
+                    }
                 }
             }
             isFound = false;
         }
-        
+
         uiStore.setTask(foundTasks);
         renderer.render();
 
@@ -108,7 +108,7 @@ public class FindController extends Controller {
         else {
             searchParameters = TAG_PARAMETER;
         }
-        
+
         String keywords;
         if (keywordList.length > 0) {
             keywords = keywordList[0];
@@ -121,11 +121,11 @@ public class FindController extends Controller {
         }
         return new CommandResult(String.format(COMMAND_RESULT_TEMPLATE, keywords, searchParameters,foundValue));
     }
-    
+
     @Override
     public HashMap<String, String> tokenize(String command) {
         HashMap<String, String> tokens = new HashMap<>();
-        
+
         //search by tag
         if (command.contains(SEARCH_BY_TAG)){
             tokens.put(SEARCH_BY_TAG, TRUE_COMMAND);
@@ -133,7 +133,7 @@ public class FindController extends Controller {
         else {
             tokens.put(SEARCH_BY_TAG, FALSE_COMMAND);
         }
-        
+
         //search by name
         if (command.contains(SEARCH_BY_NAME) || !command.contains(SEARCH_BY_TAG)){
             tokens.put(SEARCH_BY_NAME, TRUE_COMMAND);
@@ -141,7 +141,7 @@ public class FindController extends Controller {
         else {
             tokens.put(SEARCH_BY_NAME, FALSE_COMMAND);
         }
-        
+
         //keyword for matching
         String keywords = command.replace(SEARCH_BY_TAG, "");
         keywords = keywords.replace(SEARCH_BY_NAME, "");
@@ -152,7 +152,7 @@ public class FindController extends Controller {
         else {
             tokens.put(KEYWORDS, "");
         }
-        
+
         return tokens;
     }
 
