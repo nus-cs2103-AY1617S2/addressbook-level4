@@ -8,6 +8,7 @@ import seedu.toluist.commons.core.EventsCenter;
 import seedu.toluist.commons.events.ui.NewResultAvailableEvent;
 import seedu.toluist.controller.Controller;
 import seedu.toluist.controller.ExitController;
+import seedu.toluist.controller.FindController;
 import seedu.toluist.controller.ListController;
 import seedu.toluist.controller.RedoController;
 import seedu.toluist.controller.StoreController;
@@ -40,7 +41,8 @@ public class CommandDispatcher extends Dispatcher {
             new UndoController(renderer),
             new RedoController(renderer),
             new ExitController(renderer),
-            new ListController(renderer)
+            new ListController(renderer),
+            new FindController(renderer)
         }));
     }
 }
