@@ -18,22 +18,22 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label priority;
     @FXML
-    private Label address;
+    private Label description;
     @FXML
-    private Label email;
+    private Label deadline;
     @FXML
     private FlowPane tags;
 
-    public TaskCard(ReadOnlyTask person, int displayedIndex) {
+    public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
-        name.setText(person.getName().fullName);
+        name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
-        phone.setText(person.getPhone().value);
-        address.setText(person.getDescription().value);
-        email.setText(person.getEmail().value);
-        initTags(person);
+        priority.setText(task.getPriority().value);
+        description.setText(task.getDescription().value);
+        deadline.setText(task.getDeadline().value);
+        initTags(task);
     }
 
     private void initTags(ReadOnlyTask person) {
