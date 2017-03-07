@@ -4,7 +4,7 @@ import t16b4.yats.commons.exceptions.IllegalValueException;
 
 /**
  * Represents a Person's phone number in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidDeadline(String)}
  */
 public class Deadline {
 
@@ -18,19 +18,19 @@ public class Deadline {
      *
      * @throws IllegalValueException if given phone string is invalid.
      */
-    public Deadline(String phone) throws IllegalValueException {
-        assert phone != null;
-        String trimmedPhone = phone.trim();
-        if (!isValidPhone(trimmedPhone)) {
+    public Deadline(String deadline) throws IllegalValueException {
+        assert deadline != null;
+        String trimmedDeadline = deadline.trim();
+        if (!isValidDeadline(trimmedDeadline)) {
             throw new IllegalValueException(MESSAGE_PHONE_CONSTRAINTS);
         }
-        this.value = trimmedPhone;
+        this.value = trimmedDeadline;
     }
 
     /**
      * Returns true if a given string is a valid person phone number.
      */
-    public static boolean isValidPhone(String test) {
+    public static boolean isValidDeadline(String test) {
         return test.matches(PHONE_VALIDATION_REGEX);
     }
 
