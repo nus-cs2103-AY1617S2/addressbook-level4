@@ -6,8 +6,8 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Task;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Task;
 import seedu.address.model.person.UniquePersonList.DuplicatePersonException;
 import seedu.address.model.tag.UniqueTagList;
 
