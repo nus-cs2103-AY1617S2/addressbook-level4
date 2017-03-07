@@ -8,10 +8,10 @@ import seedu.address.model.tag.UniqueTagList;
  */
 public interface ReadOnlyPerson {
 
-    Name getName();
-    Phone getPhone();
-    Email getEmail();
-    Address getAddress();
+    TaskName getName();
+    Deadline getPhone();
+    PriorityLevel getEmail();
+    Information getAddress();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
