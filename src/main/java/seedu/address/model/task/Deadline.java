@@ -11,7 +11,7 @@ public class Deadline {
 
     public static final String MESSAGE_DEADLINE_CONSTRAINTS =
             "Person deadlines should be 2 alphanumeric/period strings separated by '@'";
-    public static final String DEADLINE_VALIDATION_REGEX = "[\\w\\.]+@[\\w\\.]+";
+    public static final String DEADLINE_VALIDATION_REGEX = "[^\\s].*";
 
     public final String value;
 
