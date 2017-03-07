@@ -10,13 +10,13 @@ import seedu.address.commons.exceptions.IllegalValueException;
 public class Note {
 
     public static final String MESSAGE_NOTE_CONSTRAINTS =
-            "Task note can take any values, and it should not be blank";
+            "Task note can take any values";
 
     /*
      * The first character of the note must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String NOTE_VALIDATION_REGEX = "[^\\s].*";
+    public static final String NOTE_VALIDATION_REGEX = ".*";
 
     public final String value;
 

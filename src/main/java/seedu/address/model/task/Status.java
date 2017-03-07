@@ -10,8 +10,8 @@ import seedu.address.commons.exceptions.IllegalValueException;
 public class Status {
 
     public static final String MESSAGE_STATUS_CONSTRAINTS =
-            "Status should be 2 alphanumeric/period strings separated by '@'";
-    public static final String STATUS_VALIDATION_REGEX = "[\\w\\.]+@[\\w\\.]+";
+            "Status can take any values";
+    public static final String STATUS_VALIDATION_REGEX = ".*";
 
     public final String value;
 
