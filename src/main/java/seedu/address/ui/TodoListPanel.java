@@ -38,7 +38,7 @@ public class TodoListPanel extends UiPart<Region> {
     }
 
     private void addToPlaceholder(AnchorPane placeHolderPane) {
-        SplitPane.setResizableWithParent(placeHolderPane, false);
+        // SplitPane.setResizableWithParent(placeHolderPane, false);
         FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
         placeHolderPane.getChildren().add(getRoot());
     }

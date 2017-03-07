@@ -16,7 +16,6 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.todo.ReadOnlyTodo;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -33,12 +32,8 @@ public class MainWindow extends UiPart<Region> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    // private BrowserPanel browserPanel;
     private TodoListPanel todoListPanel;
     private Config config;
-
-    @FXML
-    private AnchorPane browserPlaceholder;
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
@@ -113,7 +108,6 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        // browserPanel = new BrowserPanel(browserPlaceholder);
         todoListPanel = new TodoListPanel(getTodoListPlaceholder(), logic.getFilteredTodoList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTodoListFilePath());
@@ -198,13 +192,5 @@ public class MainWindow extends UiPart<Region> {
     public TodoListPanel getTodoListPanel() {
         return this.todoListPanel;
     }
-
-//    void loadTodoPage(ReadOnlyTodo todo) {
-//        browserPanel.loadTodoPage(todo);
-//    }
-//
-//    void releaseResources() {
-//        browserPanel.freeResources();
-//    }
 
 }
