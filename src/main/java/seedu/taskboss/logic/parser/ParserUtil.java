@@ -83,7 +83,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> information} into an {@code Optional<Information>} 
+     * Parses a {@code Optional<String> information} into an {@code Optional<Information>}
      * if {@code information} is present.
      */
     public static Optional<Information> parseInformation(Optional<String> information) throws IllegalValueException {
