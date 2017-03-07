@@ -13,6 +13,7 @@ Responsibilities:
 * In charge of Integration
 * In charge of Deliverables and Deadlines
 * In charge of Logic Component
+
 -----  
 
 #### [Chew Chia Sin](http://github.com/Fyelight)  
