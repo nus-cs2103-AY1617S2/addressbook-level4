@@ -4,41 +4,26 @@ package t16b4.yats.model.item;
 import t16b4.yats.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's address in the address book.
+ * Represents a Task's description in the task manager.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
 public class Description {
 
-    public static final String MESSAGE_ADDRESS_CONSTRAINTS =
-            "Person addresses can take any values, and it should not be blank";
+    public static final String MESSAGE_DESCRIPTION_CONSTRAINTS =
+            "Task description can take any values, and can be left blank.";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String ADDRESS_VALIDATION_REGEX = "[^\\s].*";
+    public static final String DESCRIPTION_VALIDATION_REGEX = "[^\\s].*";
 
     public final String value;
 
-    /**
-     * Validates given address.
-     *
-     * @throws IllegalValueException if given address string is invalid.
-     */
-    public Description(String address) throws IllegalValueException {
-        assert address != null;
-        if (!isValidAddress(address)) {
-            throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
-        }
-        this.value = address;
+    public Description(String description) {
+        this.value = description;
     }
-
-    /**
-     * Returns true if a given string is a valid person email.
-     */
-    public static boolean isValidAddress(String test) {
-        return test.matches(ADDRESS_VALIDATION_REGEX);
-    }
+    
 
     @Override
     public String toString() {
