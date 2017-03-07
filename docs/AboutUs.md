@@ -26,7 +26,7 @@ Responsibilities:
 -----  
 
 #### [Hon Kean Wai](http://github.com/drtrifle)  
-<img src="images/drtrifle.jpg" width="150"><br>  
+<img src="images/drtrifle.png" width="150"><br>  
 Role: Developer <br>  
 Responsibilities: 
 * In charge of Documentation  
