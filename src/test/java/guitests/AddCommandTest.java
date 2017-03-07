@@ -6,9 +6,9 @@ import org.junit.Test;
 
 import guitests.guihandles.PersonCardHandle;
 import seedu.address.commons.core.Messages;
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.testutil.TestPerson;
 import seedu.address.testutil.TestUtil;
+import seedu.task.logic.commands.AddCommand;
 
 public class AddCommandTest extends AddressBookGuiTest {
 

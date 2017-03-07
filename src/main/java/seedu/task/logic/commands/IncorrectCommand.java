@@ -1,6 +1,6 @@
-package seedu.address.logic.commands;
+package seedu.task.logic.commands;
 
-import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.task.logic.commands.exceptions.CommandException;
 
 /**
  * Represents an incorrect command. Upon execution, throws a CommandException with feedback to the user.

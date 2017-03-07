@@ -7,9 +7,9 @@ import org.junit.Test;
 
 import guitests.guihandles.PersonCardHandle;
 import seedu.address.commons.core.Messages;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TestPerson;
+import seedu.task.logic.commands.EditCommand;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.task.EndDateTime;
 import seedu.task.model.task.StartDateTime;

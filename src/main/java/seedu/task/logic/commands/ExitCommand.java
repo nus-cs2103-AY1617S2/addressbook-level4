@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.task.logic.commands;
 
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
