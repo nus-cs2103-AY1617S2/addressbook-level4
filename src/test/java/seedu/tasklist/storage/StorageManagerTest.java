@@ -17,10 +17,6 @@ import seedu.tasklist.commons.events.storage.DataSavingExceptionEvent;
 import seedu.tasklist.model.ReadOnlyTaskList;
 import seedu.tasklist.model.TaskList;
 import seedu.tasklist.model.UserPrefs;
-import seedu.tasklist.storage.JsonUserPrefsStorage;
-import seedu.tasklist.storage.Storage;
-import seedu.tasklist.storage.StorageManager;
-import seedu.tasklist.storage.XmlTaskListStorage;
 import seedu.tasklist.testutil.EventsCollector;
 import seedu.tasklist.testutil.TypicalTestTasks;
 

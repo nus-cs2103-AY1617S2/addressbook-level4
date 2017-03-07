@@ -26,7 +26,11 @@ public class EditCommandTest extends TaskListGuiTest {
         String detailsToEdit = "Bobby c/Block 123, Bobby Street 3 t/husband";
         int taskListIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withName("Bobby").withComment("Block 123, Bobby Street 3").withTags("husband").build();
+        TestTask editedTask = new TaskBuilder().
+                withName("Bobby").
+                withComment("Block 123, Bobby Street 3").
+                withTags("husband").
+                build();
 
         assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit, editedTask);
     }
