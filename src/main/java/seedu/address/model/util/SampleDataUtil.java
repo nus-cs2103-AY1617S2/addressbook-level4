@@ -2,13 +2,13 @@ package seedu.address.model.util;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyTaskManager;
+import seedu.address.model.TaskManager;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Description;
 import seedu.address.model.task.IdentificationNumber;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Task;
-import seedu.address.model.TaskManager;
 
 public class SampleDataUtil {
     public static Task[] getSampleTasks() {
