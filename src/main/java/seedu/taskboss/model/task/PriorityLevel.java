@@ -8,8 +8,9 @@ import seedu.taskboss.commons.exceptions.IllegalValueException;
  */
 public class PriorityLevel {
 
-    public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority level should only contain numbers 1, 2 or 3";
-    public static final String PRIORITY_VALIDATION_REGEX = "\\d+";
+    public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority level should only contain"
+            + " numbers 1, 2 or 3";
+    public static final String PRIORITY_VALIDATION_REGEX = "[1-3]";
 
     public final String value;
 
