@@ -3,8 +3,8 @@ package seedu.address.model;
 import java.util.Set;
 
 import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.model.task.Task;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskList;
 
 /**
@@ -21,7 +21,7 @@ public interface Model {
     void deleteTask(ReadOnlyTask target) throws TaskList.TaskNotFoundException;
 
     /** Adds the given task */
-    void addTask(Task task) ;
+    void addTask(Task task);
 
     /**
      * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.

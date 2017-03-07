@@ -25,7 +25,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [NAME] [dl/DEADLINE] [ds/DESCRIPTION] [id/IDENTIFICATION NUMBER ] [t/TAG]...\n"
+            + "Parameters: INDEX (must be a positive integer) [NAME] [dl/DEADLINE] "
+            + "[ds/DESCRIPTION] [id/IDENTIFICATION NUMBER ] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 ds/lunch id/335";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
@@ -108,7 +109,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.deadline, this.description, this.identificationnumber, this.tags);
+            return CollectionUtil.isAnyPresent(this.name, this.deadline, this.description, 
+            		this.identificationnumber, this.tags);
         }
 
         public void setName(Optional<Name> name) {
