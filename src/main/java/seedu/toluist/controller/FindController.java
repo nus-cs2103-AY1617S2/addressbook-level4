@@ -24,7 +24,8 @@ public class FindController extends Controller {
     private static final String KEYWORDS_PARAMETER = "keywords";
 
     private static final int NUMBER_OF_SPLITS_FOR_COMMAND_PARSE = 2;
-    private static final String COMMAND_SPLITTER = " ";
+    private static final String COMMAND_SPLITTER_REGEX = " ";
+    private static final int PARAMETER_SECTION = 1;
 
     private static final String RESULT_MESSAGE_TEMPLATE = "Searching for \"%s\" by %s.\n%d results found";
     private static final String NAME_MESSAGE = "name";
@@ -52,27 +53,21 @@ public class FindController extends Controller {
         TodoList todoList = TodoList.load();
         ArrayList<Task> taskList = todoList.getTasks();
         Task currentTask;
-        int foundCount = 0;
 
         for (int i = 0; i < taskList.size(); i++) {
             currentTask = taskList.get(i);
             for (int j = 0; j < keywordList.length; j++) {
                 if (isSearchByTag && !isFound) {
-                    for (int k = 0; k < currentTask.allTags.size(); k++) {
-                        if (currentTask.allTags.get(k).tagName.toLowerCase()
-                                .contains(keywordList[j].toLowerCase())) {
+                    if (currentTask.isStringContainedInAnyTagIgnoreCase(keywordList[j])) {
                             foundTasks.add(currentTask);
                             isFound = true;
-                            foundCount++;
-                        }
                     }
                 }
+
                 if (isSearchByName && !isFound) {
-                        if (currentTask.description.toLowerCase()
-                            .contains(keywordList[j].toLowerCase())) {
+                    if (currentTask.isStringContainedInDescriptionIgnoreCase(keywordList[j])) {
                         foundTasks.add(currentTask);
                         isFound = true;
-                        foundCount++;
                     }
                 }
             }
@@ -83,7 +78,7 @@ public class FindController extends Controller {
         renderer.render();
 
         //display formatting
-        return formatDisplay(isSearchByTag, isSearchByName, keywordList, foundCount);
+        return formatDisplay(isSearchByTag, isSearchByName, keywordList, foundTasks.size());
     }
 
     private String[] convertToArray(String keywords) {
@@ -104,15 +99,12 @@ public class FindController extends Controller {
     private CommandResult formatDisplay(boolean isSearchByTag, boolean isSearchByName,
                                         String[] keywordList, int foundCount) {
         String searchParameters;
-        if (isSearchByName) {
-            if (isSearchByTag) {
-                searchParameters = NAME_AND_TAG_MESSAGE;
-            }
-            else {
-                searchParameters = NAME_MESSAGE;
-            }
+        if (isSearchByName && isSearchByTag) {
+            searchParameters = NAME_AND_TAG_MESSAGE;
+        } else if (isSearchByName){
+            searchParameters = NAME_MESSAGE;
         }
-        else {
+        else { //isSearchByTag
             searchParameters = TAG_MESSAGE;
         }
 
@@ -149,9 +141,9 @@ public class FindController extends Controller {
         //keyword for matching
         String keywords = command.replace(TAG_PARAMETER, "");
         keywords = keywords.replace(NAME_PARAMETER, "");
-        String[] listOfParameters = keywords.split(COMMAND_SPLITTER, NUMBER_OF_SPLITS_FOR_COMMAND_PARSE);
+        String[] listOfParameters = keywords.split(COMMAND_SPLITTER_REGEX, NUMBER_OF_SPLITS_FOR_COMMAND_PARSE);
         if (listOfParameters.length > 1) {
-            tokens.put(KEYWORDS_PARAMETER, listOfParameters[1].trim());
+            tokens.put(KEYWORDS_PARAMETER, listOfParameters[PARAMETER_SECTION].trim());
         }
 
         return tokens;
