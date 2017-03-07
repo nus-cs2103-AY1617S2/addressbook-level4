@@ -12,7 +12,6 @@ import seedu.ezdo.model.tag.Tag;
 import seedu.ezdo.model.todo.DueDate;
 import seedu.ezdo.model.todo.Name;
 import seedu.ezdo.model.todo.Priority;
-import seedu.ezdo.model.todo.StartDate;
 import seedu.ezdo.testutil.TaskBuilder;
 import seedu.ezdo.testutil.TestTask;
 

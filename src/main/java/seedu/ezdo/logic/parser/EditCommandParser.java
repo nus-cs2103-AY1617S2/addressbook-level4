@@ -16,8 +16,8 @@ import seedu.ezdo.logic.commands.Command;
 import seedu.ezdo.logic.commands.EditCommand;
 import seedu.ezdo.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.ezdo.logic.commands.IncorrectCommand;
-import seedu.ezdo.model.tag.UniqueTagList;
 import seedu.ezdo.logic.parser.ArgumentTokenizer.Prefix;
+import seedu.ezdo.model.tag.UniqueTagList;
 
 /**
  * Parses input arguments and creates a new EditCommand object
