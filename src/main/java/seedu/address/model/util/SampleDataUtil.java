@@ -1,8 +1,8 @@
 package seedu.address.model.util;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTaskManager;
+import seedu.address.model.TaskManager;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Note;
@@ -39,13 +39,13 @@ public class SampleDataUtil {
         }
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
+    public static ReadOnlyTaskManager getSampleAddressBook() {
         try {
-            AddressBook sampleAB = new AddressBook();
+            TaskManager sampleTaskManager = new TaskManager();
             for (Task samplePerson : getSamplePersons()) {
-                sampleAB.addPerson(samplePerson);
+                sampleTaskManager.addTask(samplePerson);
             }
-            return sampleAB;
+            return sampleTaskManager;
         } catch (DuplicateTaskException e) {
             throw new AssertionError("sample data cannot contain duplicate persons", e);
         }
