@@ -92,8 +92,8 @@ public class XmlAddressBookStorageTest {
         saveAddressBook(null, "SomeFile.xml");
     }
 
-    private void saveAddressBook(ReadOnlyTaskManager addressBook, String filePath) throws IOException {
-        new XmlAddressBookStorage(filePath).saveAddressBook(addressBook, addToTestDataPathIfNotNull(filePath));
+    private void saveAddressBook(ReadOnlyTaskManager taskManager, String filePath) throws IOException {
+        new XmlAddressBookStorage(filePath).saveAddressBook(taskManager, addToTestDataPathIfNotNull(filePath));
     }
 
     @Test
