@@ -17,7 +17,7 @@ Responsibilities:
 -----
 
 #### [Andy Peng]
-<img src="images/andypeng.png" width="150"><br>
+<img src="images/andypeng.jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: 
  -----
