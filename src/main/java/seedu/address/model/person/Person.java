@@ -9,6 +9,9 @@ import seedu.address.model.tag.UniqueTagList;
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated.
  */
+
+// Refactor this into a TASK instead of a person
+
 public class Person implements ReadOnlyPerson {
 
     private Name name;

@@ -7,6 +7,9 @@ import seedu.address.commons.exceptions.IllegalValueException;
  * Represents a Person's address in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
+
+// Refactor into ANY_INFO
+
 public class Address {
 
     public static final String MESSAGE_ADDRESS_CONSTRAINTS =

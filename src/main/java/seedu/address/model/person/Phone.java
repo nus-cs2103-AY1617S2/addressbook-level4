@@ -6,6 +6,9 @@ import seedu.address.commons.exceptions.IllegalValueException;
  * Represents a Person's phone number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */
+
+// Refactor this into DEADLINE
+
 public class Phone {
 
     public static final String MESSAGE_PHONE_CONSTRAINTS = "Person phone numbers should only contain numbers";

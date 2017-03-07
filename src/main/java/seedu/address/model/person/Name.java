@@ -6,6 +6,9 @@ import seedu.address.commons.exceptions.IllegalValueException;
  * Represents a Person's name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
+
+// Refactor this into TASK_NAME
+
 public class Name {
 
     public static final String MESSAGE_NAME_CONSTRAINTS =

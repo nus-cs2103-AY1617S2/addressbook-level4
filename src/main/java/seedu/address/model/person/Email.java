@@ -6,7 +6,12 @@ import seedu.address.commons.exceptions.IllegalValueException;
 /**
  * Represents a Person's phone number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
+ * 
+ *  
  */
+
+// Refactor into PRIORITY_LEVEL
+
 public class Email {
 
     public static final String MESSAGE_EMAIL_CONSTRAINTS =
@@ -20,6 +25,7 @@ public class Email {
      *
      * @throws IllegalValueException if given email address string is invalid.
      */
+    
     public Email(String email) throws IllegalValueException {
         assert email != null;
         String trimmedEmail = email.trim();
