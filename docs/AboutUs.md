@@ -45,7 +45,7 @@ Year 2 Computer Science Major<br>
 
 -----
 #### [Nirandika Wanigasekara](https://github.com/nirandiw)
-<img src="" width="150"><br>
+<img src="images/nirandw.png" width="150"><br>
 **Role**: Tutor
 
 -----
