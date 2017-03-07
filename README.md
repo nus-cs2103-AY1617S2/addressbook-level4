@@ -1,4 +1,4 @@
-# Burdens (ToDoManager) V0.1
+# Burdens (v0.1)
 
 [![Build Status](https://api.travis-ci.org/CS2103JAN2017-W09-B1/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-W09-B1/main)
 <!---[![Build status](https://ci.appveyor.com/api/projects/status/3boko2x2vr5cc3w2?svg=true)](https://ci.appveyor.com/project/damithc/addressbook-level4)
