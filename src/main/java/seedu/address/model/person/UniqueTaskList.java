@@ -17,7 +17,7 @@ import seedu.address.commons.util.CollectionUtil;
  * @see Task#equals(Object)
  * @see CollectionUtil#elementsAreUnique(Collection)
  */
-public class UniqueTagList implements Iterable<Task> {
+public class UniqueTaskList implements Iterable<Task> {
 
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
 
@@ -78,12 +78,12 @@ public class UniqueTagList implements Iterable<Task> {
         return taskFoundAndDeleted;
     }
 
-    public void setTasks(UniqueTagList replacement) {
+    public void setTasks(UniqueTaskList replacement) {
         this.internalList.setAll(replacement.internalList);
     }
 
     public void setTasks(List<? extends ReadOnlyTask> tasks) throws DuplicateTaskException {
-        final UniqueTagList replacement = new UniqueTagList();
+        final UniqueTaskList replacement = new UniqueTaskList();
         for (final ReadOnlyTask task : tasks) {
             replacement.add(new Task(task));
         }
@@ -102,9 +102,9 @@ public class UniqueTagList implements Iterable<Task> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniqueTagList // instanceof handles nulls
+                || (other instanceof UniqueTaskList // instanceof handles nulls
                 && this.internalList.equals(
-                ((UniqueTagList) other).internalList));
+                ((UniqueTaskList) other).internalList));
     }
 
     @Override

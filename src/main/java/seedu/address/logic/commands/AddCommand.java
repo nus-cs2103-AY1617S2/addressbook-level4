@@ -9,10 +9,10 @@ import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Information;
 import seedu.address.model.person.PriorityLevel;
 import seedu.address.model.person.TaskName;
-import seedu.address.model.person.UniqueTagList;
+import seedu.address.model.person.UniqueTaskList;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.person.Task;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.person.Task;
 
 /**
  * Adds a person to the address book.
@@ -36,18 +36,17 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String taskName, String deadline, String priorityLevel, String information, Set<String> tags)
+    public AddCommand(String taskName, String deadline, String priorityLevel, String info, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        // Ensure Person class is refactored @qi xiang
         this.toAdd = new Task(
                 new TaskName(taskName),
                 new Deadline(deadline),
                 new PriorityLevel(priorityLevel),
-                new Information(information),
+                new Information(info),
                 new UniqueTagList(tagSet)
         );
     }
@@ -58,7 +57,7 @@ public class AddCommand extends Command {
         try {
             model.addTask(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-        } catch (UniqueTagList.DuplicateTaskException e) {
+        } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 

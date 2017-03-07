@@ -4,7 +4,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.ReadOnlyTask;
-import seedu.address.model.person.UniqueTagList.TaskNotFoundException;
+import seedu.address.model.person.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Deletes a task identified using it's last displayed index from the address book.
@@ -39,7 +39,7 @@ public class DeleteCommand extends Command {
         ReadOnlyTask personToDelete = lastShownList.get(targetIndex - 1);
 
         try {
-            model.deletePerson(personToDelete);
+            model.deleteTask(personToDelete);
         } catch (TaskNotFoundException pnfe) {
             assert false : "The target person cannot be missing";
         }

@@ -12,7 +12,7 @@ import seedu.address.model.person.PriorityLevel;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.TaskName;
-import seedu.address.model.person.UniqueTagList;
+import seedu.address.model.person.UniqueTaskList;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
@@ -61,8 +61,8 @@ public class EditCommand extends Command {
         Task editedPerson = createEditedPerson(personToEdit, editTaskDescriptor);
 
         try {
-            model.updatePerson(filteredPersonListIndex, editedPerson);
-        } catch (UniqueTagList.DuplicateTaskException dpe) {
+            model.updateTask(filteredPersonListIndex, editedPerson);
+        } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
         model.updateFilteredListToShowAll();
@@ -73,15 +73,15 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Task createEditedPerson(ReadOnlyTask personToEdit,
-                                             EditTaskDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Task createEditedPerson(ReadOnlyTask taskToEdit,
+                                             EditTaskDescriptor editTaskDescriptor) {
+        assert taskToEdit != null;
 
-        TaskName updatedTaskName = editPersonDescriptor.getTaskName().orElseGet(personToEdit::getName);
-        Deadline updatedDeadline = editPersonDescriptor.getDeadline().orElseGet(personToEdit::getDate);
-        PriorityLevel updatedPriorityLevel = editPersonDescriptor.getPriorityLevel().orElseGet(personToEdit::getPriority);
-        Information updatedInformation = editPersonDescriptor.getInfo().orElseGet(personToEdit::getInfo);
-        UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
+        TaskName updatedTaskName = editTaskDescriptor.getTaskName().orElseGet(taskToEdit::getName);
+        Deadline updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(taskToEdit::getDate);
+        PriorityLevel updatedPriorityLevel = editTaskDescriptor.getPriorityLevel().orElseGet(taskToEdit::getPriority);
+        Information updatedInformation = editTaskDescriptor.getInfo().orElseGet(taskToEdit::getInfo);
+        UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
         return new Task(updatedTaskName, updatedDeadline, updatedPriorityLevel, updatedInformation, updatedTags);
     }
@@ -150,9 +150,9 @@ public class EditCommand extends Command {
             return info;
         }
 
-        public void setTags(Optional<UniqueTagList> tags) {
-            assert tags != null;
-            this.tags = tags;
+        public void setTags(Optional<seedu.address.model.tag.UniqueTagList> optional) {
+            assert optional != null;
+            this.tags = optional;
         }
 
         public Optional<UniqueTagList> getTags() {
