@@ -7,7 +7,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.taskmanager.commons.core.ComponentManager;
 import seedu.taskmanager.commons.core.LogsCenter;
 import seedu.taskmanager.commons.core.UnmodifiableObservableList;
-import seedu.taskmanager.commons.events.model.ProcrastiNomoreChangedEvent;
+import seedu.taskmanager.commons.events.model.TaskManagerChangedEvent;
 import seedu.taskmanager.commons.util.CollectionUtil;
 import seedu.taskmanager.commons.util.StringUtil;
 import seedu.taskmanager.model.task.Task;
