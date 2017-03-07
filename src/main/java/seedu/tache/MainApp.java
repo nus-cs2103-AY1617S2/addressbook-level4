@@ -20,10 +20,10 @@ import seedu.tache.commons.util.ConfigUtil;
 import seedu.tache.commons.util.StringUtil;
 import seedu.tache.logic.Logic;
 import seedu.tache.logic.LogicManager;
-import seedu.tache.model.AddressBook;
+import seedu.tache.model.TaskManager;
 import seedu.tache.model.Model;
 import seedu.tache.model.ModelManager;
-import seedu.tache.model.ReadOnlyAddressBook;
+import seedu.tache.model.ReadOnlyTaskManager;
 import seedu.tache.model.UserPrefs;
 import seedu.tache.model.util.SampleDataUtil;
 import seedu.tache.storage.Storage;
@@ -74,8 +74,8 @@ public class MainApp extends Application {
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyTaskManager> addressBookOptional;
+        ReadOnlyTaskManager initialData;
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
@@ -84,10 +84,10 @@ public class MainApp extends Application {
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            initialData = new TaskManager();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            initialData = new TaskManager();
         }
 
         return new ModelManager(initialData, userPrefs);

@@ -3,7 +3,7 @@ package seedu.tache.logic;
 import javafx.collections.ObservableList;
 import seedu.tache.logic.commands.CommandResult;
 import seedu.tache.logic.commands.exceptions.CommandException;
-import seedu.tache.model.person.ReadOnlyPerson;
+import seedu.tache.model.person.ReadOnlyTask;
 
 /**
  * API of the Logic component
@@ -17,7 +17,7 @@ public interface Logic {
      */
     CommandResult execute(String commandText) throws CommandException;
 
-    /** Returns the filtered list of persons */
-    ObservableList<ReadOnlyPerson> getFilteredPersonList();
+    /** Returns the filtered list of tasks */
+    ObservableList<ReadOnlyTask> getFilteredTaskList();
 
 }

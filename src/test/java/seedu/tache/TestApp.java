@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 import seedu.tache.MainApp;
 import seedu.tache.commons.core.Config;
 import seedu.tache.commons.core.GuiSettings;
-import seedu.tache.model.ReadOnlyAddressBook;
+import seedu.tache.model.ReadOnlyTaskManager;
 import seedu.tache.model.UserPrefs;
 import seedu.tache.storage.XmlSerializableAddressBook;
 import seedu.tache.testutil.TestUtil;
@@ -23,13 +23,13 @@ public class TestApp extends MainApp {
             TestUtil.getFilePathInSandboxFolder("pref_testing.json");
     public static final String APP_TITLE = "Test App";
     protected static final String ADDRESS_BOOK_NAME = "Test";
-    protected Supplier<ReadOnlyAddressBook> initialDataSupplier = () -> null;
+    protected Supplier<ReadOnlyTaskManager> initialDataSupplier = () -> null;
     protected String saveFileLocation = SAVE_LOCATION_FOR_TESTING;
 
     public TestApp() {
     }
 
-    public TestApp(Supplier<ReadOnlyAddressBook> initialDataSupplier, String saveFileLocation) {
+    public TestApp(Supplier<ReadOnlyTaskManager> initialDataSupplier, String saveFileLocation) {
         super();
         this.initialDataSupplier = initialDataSupplier;
         this.saveFileLocation = saveFileLocation;

@@ -3,10 +3,10 @@ package seedu.tache.storage;
 import java.io.IOException;
 import java.util.Optional;
 
-import seedu.tache.commons.events.model.AddressBookChangedEvent;
+import seedu.tache.commons.events.model.TaskManagerChangedEvent;
 import seedu.tache.commons.events.storage.DataSavingExceptionEvent;
 import seedu.tache.commons.exceptions.DataConversionException;
-import seedu.tache.model.ReadOnlyAddressBook;
+import seedu.tache.model.ReadOnlyTaskManager;
 import seedu.tache.model.UserPrefs;
 
 /**
@@ -24,15 +24,15 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
     String getAddressBookFilePath();
 
     @Override
-    Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyTaskManager> readAddressBook() throws DataConversionException, IOException;
 
     @Override
-    void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    void saveAddressBook(ReadOnlyTaskManager addressBook) throws IOException;
 
     /**
      * Saves the current version of the Address Book to the hard disk.
      *   Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
-    void handleAddressBookChangedEvent(AddressBookChangedEvent abce);
+    void handleAddressBookChangedEvent(TaskManagerChangedEvent abce);
 }

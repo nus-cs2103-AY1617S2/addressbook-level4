@@ -24,8 +24,8 @@ import javafx.stage.Stage;
 import seedu.tache.TestApp;
 import seedu.tache.commons.core.EventsCenter;
 import seedu.tache.commons.events.BaseEvent;
-import seedu.tache.model.AddressBook;
-import seedu.tache.model.person.ReadOnlyPerson;
+import seedu.tache.model.TaskManager;
+import seedu.tache.model.person.ReadOnlyTask;
 import seedu.tache.testutil.TestUtil;
 import seedu.tache.testutil.TypicalTestPersons;
 
@@ -86,8 +86,8 @@ public abstract class AddressBookGuiTest {
      * Override this in child classes to set the initial local data.
      * Return null to use the data in the file specified in {@link #getDataFileLocation()}
      */
-    protected AddressBook getInitialData() {
-        AddressBook ab = new AddressBook();
+    protected TaskManager getInitialData() {
+        TaskManager ab = new TaskManager();
         TypicalTestPersons.loadAddressBookWithSampleData(ab);
         return ab;
     }
@@ -107,7 +107,7 @@ public abstract class AddressBookGuiTest {
     /**
      * Asserts the person shown in the card is same as the given person
      */
-    public void assertMatching(ReadOnlyPerson person, PersonCardHandle card) {
+    public void assertMatching(ReadOnlyTask person, PersonCardHandle card) {
         assertTrue(TestUtil.compareCardAndPerson(card, person));
     }
 

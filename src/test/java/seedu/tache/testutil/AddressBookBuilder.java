@@ -1,9 +1,9 @@
 package seedu.tache.testutil;
 
 import seedu.tache.commons.exceptions.IllegalValueException;
-import seedu.tache.model.AddressBook;
-import seedu.tache.model.person.Person;
-import seedu.tache.model.person.UniquePersonList;
+import seedu.tache.model.TaskManager;
+import seedu.tache.model.person.Task;
+import seedu.tache.model.person.UniqueTaskList;
 import seedu.tache.model.tag.Tag;
 
 /**
@@ -13,14 +13,14 @@ import seedu.tache.model.tag.Tag;
  */
 public class AddressBookBuilder {
 
-    private AddressBook addressBook;
+    private TaskManager addressBook;
 
-    public AddressBookBuilder(AddressBook addressBook) {
+    public AddressBookBuilder(TaskManager addressBook) {
         this.addressBook = addressBook;
     }
 
-    public AddressBookBuilder withPerson(Person person) throws UniquePersonList.DuplicatePersonException {
-        addressBook.addPerson(person);
+    public AddressBookBuilder withPerson(Task person) throws UniqueTaskList.DuplicateTaskException {
+        addressBook.addTask(person);
         return this;
     }
 
@@ -29,7 +29,7 @@ public class AddressBookBuilder {
         return this;
     }
 
-    public AddressBook build() {
+    public TaskManager build() {
         return addressBook;
     }
 }
