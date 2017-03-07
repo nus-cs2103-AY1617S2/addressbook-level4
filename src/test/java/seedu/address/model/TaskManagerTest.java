@@ -19,30 +19,30 @@ import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.TypicalTestPersons;
 
-public class AddressBookTest {
+public class TaskManagerTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final TaskManager addressBook = new TaskManager();
+    private final TaskManager taskManager = new TaskManager();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getTaskList());
-        assertEquals(Collections.emptyList(), addressBook.getTagList());
+        assertEquals(Collections.emptyList(), taskManager.getTaskList());
+        assertEquals(Collections.emptyList(), taskManager.getTagList());
     }
 
     @Test
     public void resetData_null_throwsAssertionError() {
         thrown.expect(AssertionError.class);
-        addressBook.resetData(null);
+        taskManager.resetData(null);
     }
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
         TaskManager newData = new TypicalTestPersons().getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+        taskManager.resetData(newData);
+        assertEquals(newData, taskManager);
     }
 
     @Test
@@ -51,33 +51,33 @@ public class AddressBookTest {
         // Repeat td.alice twice
         List<Task> newPersons = Arrays.asList(new Task(td.alice), new Task(td.alice));
         List<Tag> newTags = td.alice.getTags().asObservableList();
-        AddressBookStub newData = new AddressBookStub(newPersons, newTags);
+        TaskManagerStub newData = new TaskManagerStub(newPersons, newTags);
 
         thrown.expect(AssertionError.class);
-        addressBook.resetData(newData);
+        taskManager.resetData(newData);
     }
 
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
-        TaskManager typicalAddressBook = new TypicalTestPersons().getTypicalAddressBook();
-        List<ReadOnlyTask> newPersons = typicalAddressBook.getTaskList();
-        List<Tag> newTags = new ArrayList<>(typicalAddressBook.getTagList());
+        TaskManager typicalTaskManager = new TypicalTestPersons().getTypicalAddressBook();
+        List<ReadOnlyTask> newPersons = typicalTaskManager.getTaskList();
+        List<Tag> newTags = new ArrayList<>(typicalTaskManager.getTagList());
         // Repeat the first tag twice
         newTags.add(newTags.get(0));
-        AddressBookStub newData = new AddressBookStub(newPersons, newTags);
+        TaskManagerStub newData = new TaskManagerStub(newPersons, newTags);
 
         thrown.expect(AssertionError.class);
-        addressBook.resetData(newData);
+        taskManager.resetData(newData);
     }
 
     /**
      * A stub ReadOnlyAddressBook whose persons and tags lists can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyTaskManager {
+    private static class TaskManagerStub implements ReadOnlyTaskManager {
         private final ObservableList<ReadOnlyTask> persons = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<? extends ReadOnlyTask> persons, Collection<? extends Tag> tags) {
+        TaskManagerStub(Collection<? extends ReadOnlyTask> persons, Collection<? extends Tag> tags) {
             this.persons.setAll(persons);
             this.tags.setAll(tags);
         }
