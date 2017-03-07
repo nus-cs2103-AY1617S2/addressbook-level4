@@ -3,38 +3,36 @@ package seedu.address.model.person;
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's phone number in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
+ * Represents the deadline of a task in the task manager.
+ * Guarantees: immutable; is valid as declared in {@link #isValidDeadline(String)}
  */
-
-// Refactor this into Deadline
 
 public class Deadline {
 
-    public static final String MESSAGE_PHONE_CONSTRAINTS = "Person phone numbers should only contain numbers";
-    public static final String PHONE_VALIDATION_REGEX = "\\d+";
+    public static final String MESSAGE_DEADLINE_CONSTRAINTS = "The format of the DEADLINE should be DDMMYY, represented in 6 digits";
+    public static final String DEADLINE_VALIDATION_REGEX = "[^\\s].*";
 
     public final String value;
 
     /**
-     * Validates given phone number.
+     * Validates a given input date.
      *
-     * @throws IllegalValueException if given phone string is invalid.
+     * @throws IllegalValueException if given date string is invalid.
      */
-    public Deadline(String phone) throws IllegalValueException {
-        assert phone != null;
-        String trimmedPhone = phone.trim();
-        if (!isValidPhone(trimmedPhone)) {
-            throw new IllegalValueException(MESSAGE_PHONE_CONSTRAINTS);
+    public Deadline(String date) throws IllegalValueException {
+        assert date != null;
+        String trimmedDate = date.trim();
+        if (!isValidDeadline(trimmedDate)) {
+            throw new IllegalValueException(MESSAGE_DEADLINE_CONSTRAINTS);
         }
-        this.value = trimmedPhone;
+        this.value = trimmedDate;
     }
 
     /**
-     * Returns true if a given string is a valid person phone number.
+     * Returns true if a given string is a valid date.
      */
-    public static boolean isValidPhone(String test) {
-        return test.matches(PHONE_VALIDATION_REGEX);
+    public static boolean isValidDeadline(String test) {
+        return test.matches(DEADLINE_VALIDATION_REGEX);
     }
 
     @Override
@@ -45,8 +43,8 @@ public class Deadline {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Phone // instanceof handles nulls
-                && this.value.equals(((Phone) other).value)); // state check
+                || (other instanceof Deadline // instanceof handles nulls
+                && this.value.equals(((Deadline) other).value)); // state check
     }
 
     @Override

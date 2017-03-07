@@ -9,10 +9,10 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Information;
 import seedu.address.model.person.PriorityLevel;
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.TaskName;
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.UniqueTagList;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
@@ -51,18 +51,18 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
+        List<ReadOnlyTask> lastShownList = model.getFilteredPersonList();
 
         if (filteredPersonListIndex >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        ReadOnlyPerson personToEdit = lastShownList.get(filteredPersonListIndex);
+        ReadOnlyTask personToEdit = lastShownList.get(filteredPersonListIndex);
         Task editedPerson = createEditedPerson(personToEdit, editTaskDescriptor);
 
         try {
             model.updatePerson(filteredPersonListIndex, editedPerson);
-        } catch (UniquePersonList.DuplicatePersonException dpe) {
+        } catch (UniqueTagList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
         model.updateFilteredListToShowAll();
@@ -73,14 +73,14 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Task createEditedPerson(ReadOnlyPerson personToEdit,
+    private static Task createEditedPerson(ReadOnlyTask personToEdit,
                                              EditTaskDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
         TaskName updatedTaskName = editPersonDescriptor.getTaskName().orElseGet(personToEdit::getName);
-        Deadline updatedDeadline = editPersonDescriptor.getDeadline().orElseGet(personToEdit::getPhone);
-        PriorityLevel updatedPriorityLevel = editPersonDescriptor.getPriorityLevel().orElseGet(personToEdit::getEmail);
-        Information updatedInformation = editPersonDescriptor.getInfo().orElseGet(personToEdit::getAddress);
+        Deadline updatedDeadline = editPersonDescriptor.getDeadline().orElseGet(personToEdit::getDate);
+        PriorityLevel updatedPriorityLevel = editPersonDescriptor.getPriorityLevel().orElseGet(personToEdit::getPriority);
+        Information updatedInformation = editPersonDescriptor.getInfo().orElseGet(personToEdit::getInfo);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
         return new Task(updatedTaskName, updatedDeadline, updatedPriorityLevel, updatedInformation, updatedTags);

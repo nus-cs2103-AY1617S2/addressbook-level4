@@ -3,62 +3,60 @@ package seedu.address.model.person;
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's name in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ * Represents a task's name in the task manager.
+ * Guarantees: immutable; is valid as declared in {@link #isValidTaskName(String)}
  */
-
-// Refactor this into TASK_NAME
 
 public class TaskName {
 
-    public static final String MESSAGE_NAME_CONSTRAINTS =
-            "Person names should only contain alphanumeric characters and spaces, and it should not be blank";
+    public static final String MESSAGE_TASKNAME_CONSTRAINTS =
+            "Task names should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String TASKNAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String fullName;
+    public final String taskName;
 
     /**
-     * Validates given name.
+     * Validates given task name.
      *
-     * @throws IllegalValueException if given name string is invalid.
+     * @throws IllegalValueException if given task name string is invalid.
      */
     public TaskName(String name) throws IllegalValueException {
         assert name != null;
         String trimmedName = name.trim();
-        if (!isValidName(trimmedName)) {
-            throw new IllegalValueException(MESSAGE_NAME_CONSTRAINTS);
+        if (!isValidTaskName(trimmedName)) {
+            throw new IllegalValueException(MESSAGE_TASKNAME_CONSTRAINTS);
         }
-        this.fullName = trimmedName;
+        this.taskName = trimmedName;
     }
 
     /**
-     * Returns true if a given string is a valid person name.
+     * Returns true if a given string is a valid task name.
      */
-    public static boolean isValidName(String test) {
-        return test.matches(NAME_VALIDATION_REGEX);
+    public static boolean isValidTaskName(String test) {
+        return test.matches(TASKNAME_VALIDATION_REGEX);
     }
 
 
     @Override
     public String toString() {
-        return fullName;
+        return taskName;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Name // instanceof handles nulls
-                && this.fullName.equals(((Name) other).fullName)); // state check
+                || (other instanceof TaskName // instanceof handles nulls
+                && this.taskName.equals(((TaskName) other).taskName)); // state check
     }
 
     @Override
     public int hashCode() {
-        return fullName.hashCode();
+        return taskName.hashCode();
     }
 
 }

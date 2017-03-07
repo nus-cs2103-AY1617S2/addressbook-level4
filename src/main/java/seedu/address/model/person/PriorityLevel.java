@@ -4,42 +4,38 @@ package seedu.address.model.person;
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's phone number in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
- * 
- *  
+ * Represents priority level of a task in the task manager.
+ * Guarantees: immutable; is valid as declared in {@link #isValidPriorityLevel(String)}
  */
-
-// Refactor into PriorityLevel
 
 public class PriorityLevel{
 
-    public static final String MESSAGE_EMAIL_CONSTRAINTS =
-            "Person emails should be 2 alphanumeric/period strings separated by '@'";
-    public static final String EMAIL_VALIDATION_REGEX = "[\\w\\.]+@[\\w\\.]+";
+    public static final String MESSAGE_PRIORITY_LEVEL_CONSTRAINTS =
+            "Priority Level should be indicated by integers 1 to 4, with 1 being the highest priority and 4 being the lowest priority";
+    public static final String PRIORITY_LEVEL_VALIDATION_REGEX = "[^\\s].*";
 
     public final String value;
 
     /**
-     * Validates given email.
+     * Validates given priority level.
      *
-     * @throws IllegalValueException if given email address string is invalid.
+     * @throws IllegalValueException if given priority level string is invalid.
      */
     
-    public PriorityLevel(String email) throws IllegalValueException {
-        assert email != null;
-        String trimmedEmail = email.trim();
-        if (!isValidEmail(trimmedEmail)) {
-            throw new IllegalValueException(MESSAGE_EMAIL_CONSTRAINTS);
+    public PriorityLevel(String priority) throws IllegalValueException {
+        assert priority != null;
+        String trimmedPriority = priority.trim();
+        if (!isValidPriorityLevel(trimmedPriority)) {
+            throw new IllegalValueException(MESSAGE_PRIORITY_LEVEL_CONSTRAINTS);
         }
-        this.value = trimmedEmail;
+        this.value = trimmedPriority;
     }
 
     /**
-     * Returns if a given string is a valid person email.
+     * Returns if a given string is a valid priority level.
      */
-    public static boolean isValidEmail(String test) {
-        return test.matches(EMAIL_VALIDATION_REGEX);
+    public static boolean isValidPriorityLevel(String test) {
+        return test.matches(PRIORITY_LEVEL_VALIDATION_REGEX);
     }
 
     @Override
@@ -50,8 +46,8 @@ public class PriorityLevel{
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Email // instanceof handles nulls
-                && this.value.equals(((Email) other).value)); // state check
+                || (other instanceof PriorityLevel // instanceof handles nulls
+                && this.value.equals(((PriorityLevel) other).value)); // state check
     }
 
     @Override

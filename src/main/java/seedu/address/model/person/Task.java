@@ -6,16 +6,14 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Task in the task manager.
  * Guarantees: details are present and not null, field values are validated.
  */
 
-// Refactor this into a TASK instead of a person
-
-public class Task implements ReadOnlyPerson {
+public class Task implements ReadOnlyTask {
 
     private TaskName name;
-    private Deadline deadline;
+    private Deadline date;
     private PriorityLevel priority;
     private Information info;
     private UniqueTagList tags;
@@ -23,62 +21,60 @@ public class Task implements ReadOnlyPerson {
     /**
      * Every field must be present and not null.
      */
-    public Task(TaskName name, Deadline deadline, PriorityLevel priority, Information info, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, deadline, priority, info, tags);
+    public Task(TaskName name, Deadline date, PriorityLevel priority, Information info, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, date, priority, info, tags);
         this.name = name;
-        this.deadline = deadline;
+        this.date = date;
         this.priority = priority;
         this.info = info;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
     
-    // @Qixiang : Can help to do up the methods below, thanks!
-    
     /**
-     * Creates a copy of the given ReadOnlyPerson.
+     * Creates a copy of the given ReadOnlyTask.
      */
-    public Person(ReadOnlyPerson source) {
-        this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(), source.getTags());
+    public Task(ReadOnlyTask source) {
+        this(source.getName(), source.getDate(), source.getPriority(), source.getInfo(), source.getTags());
     }
 
-    public void setName(Name name) {
+    public void setName(TaskName name) {
         assert name != null;
         this.name = name;
     }
 
     @Override
-    public Name getName() {
+    public TaskName getName() {
         return name;
     }
 
-    public void setPhone(Phone phone) {
-        assert phone != null;
-        this.phone = phone;
+    public void setDate(Deadline date) {
+        assert date != null;
+        this.date = date;
     }
 
     @Override
-    public Phone getPhone() {
-        return phone;
+    public Deadline getDate() {
+        return date;
     }
 
-    public void setEmail(Email email) {
-        assert email != null;
-        this.email = email;
-    }
-
-    @Override
-    public Email getEmail() {
-        return email;
-    }
-
-    public void setAddress(Address address) {
-        assert address != null;
-        this.address = address;
+    public void setPriority(PriorityLevel priority) {
+        assert priority != null;
+        this.priority = priority;
     }
 
     @Override
-    public Address getAddress() {
-        return address;
+    public PriorityLevel getPriority() {
+        return priority;
+    }
+
+    public void setInformation(Information info) {
+        assert info != null;
+        this.info = info;
+    }
+
+    @Override
+    public Information getInfo() {
+        return info;
     }
 
     @Override
@@ -87,36 +83,36 @@ public class Task implements ReadOnlyPerson {
     }
 
     /**
-     * Replaces this person's tags with the tags in the argument tag list.
+     * Replaces this task's tags with the tags in the argument tag list.
      */
     public void setTags(UniqueTagList replacement) {
         tags.setTags(replacement);
     }
 
     /**
-     * Updates this person with the details of {@code replacement}.
+     * Updates this task with the details of {@code replacement}.
      */
-    public void resetData(ReadOnlyPerson replacement) {
+    public void resetData(ReadOnlyTask replacement) {
         assert replacement != null;
 
         this.setName(replacement.getName());
-        this.setPhone(replacement.getPhone());
-        this.setEmail(replacement.getEmail());
-        this.setAddress(replacement.getAddress());
+        this.setDate(replacement.getDate());
+        this.setPriority(replacement.getPriority());
+        this.setInformation(replacement.getInfo());
         this.setTags(replacement.getTags());
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ReadOnlyPerson // instanceof handles nulls
-                && this.isSameStateAs((ReadOnlyPerson) other));
+                || (other instanceof ReadOnlyTask // instanceof handles nulls
+                && this.isSameStateAs((ReadOnlyTask) other));
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, date, priority, info, tags);
     }
 
     @Override

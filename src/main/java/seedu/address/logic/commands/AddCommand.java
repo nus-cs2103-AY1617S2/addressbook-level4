@@ -9,7 +9,7 @@ import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Information;
 import seedu.address.model.person.PriorityLevel;
 import seedu.address.model.person.TaskName;
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.UniqueTagList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.person.Task;
 import seedu.address.model.tag.UniqueTagList;
@@ -58,7 +58,7 @@ public class AddCommand extends Command {
         try {
             model.addTask(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-        } catch (UniquePersonList.DuplicatePersonException e) {
+        } catch (UniqueTagList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 

@@ -4,43 +4,41 @@ package seedu.address.model.person;
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's address in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
+ * Represents a task information in the task manager.
+ * Guarantees: immutable; is valid as declared in {@link #isValidInformation(String)}
  */
-
-// Refactor into Information
 
 public class Information {
 
-    public static final String MESSAGE_ADDRESS_CONSTRAINTS =
-            "Person addresses can take any values, and it should not be blank";
+    public static final String MESSAGE_INFORMATION_CONSTRAINTS =
+            "Task's information can take any values, and it should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of the information must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String ADDRESS_VALIDATION_REGEX = "[^\\s].*";
+    public static final String INFORMATION_VALIDATION_REGEX = "[^\\s].*";
 
     public final String value;
 
     /**
-     * Validates given address.
+     * Validates a given information.
      *
-     * @throws IllegalValueException if given address string is invalid.
+     * @throws IllegalValueException if given information string is invalid.
      */
-    public Information(String address) throws IllegalValueException {
-        assert address != null;
-        if (!isValidAddress(address)) {
-            throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
+    public Information(String info) throws IllegalValueException {
+        assert info != null;
+        if (!isValidInformation(info)) {
+            throw new IllegalValueException(MESSAGE_INFORMATION_CONSTRAINTS);
         }
-        this.value = address;
+        this.value = info;
     }
 
     /**
-     * Returns true if a given string is a valid person email.
+     * Returns true if a given string is a valid task information.
      */
-    public static boolean isValidAddress(String test) {
-        return test.matches(ADDRESS_VALIDATION_REGEX);
+    public static boolean isValidInformation(String test) {
+        return test.matches(INFORMATION_VALIDATION_REGEX);
     }
 
     @Override
@@ -51,8 +49,8 @@ public class Information {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Address // instanceof handles nulls
-                && this.value.equals(((Address) other).value)); // state check
+                || (other instanceof Information // instanceof handles nulls
+                && this.value.equals(((Information) other).value)); // state check
     }
 
     @Override
