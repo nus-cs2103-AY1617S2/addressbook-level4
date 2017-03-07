@@ -5,7 +5,12 @@ We are a team based in the [School of Computing, National University of Singapor
 ## Project Team
 
 #### [Kelly Li](http://github.com/kellyli)
-<img src="images/kellyli.jpg" width="150"><br>
+<img src="images/kellyli.png" width="150"><br>
+ Role: tbd <br>
+ Responsibilities: tbd
+
+#### [Joshua Ching](http://github.com/joshuaching)
+<img src="images/joshuaching.png" width="150"><br>
  Role: tbd <br>
  Responsibilities: tbd
 
