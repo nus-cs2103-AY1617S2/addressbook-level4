@@ -4,7 +4,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Name;
+import seedu.address.model.task.Content;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 
@@ -12,17 +12,17 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         try {
             return new Task[] {
-                new Task(new Name("CS2101"),
+                new Task(new Content("CS2101"),
                     new UniqueTagList("modules")),
-                new Task(new Name("CS2103"),
+                new Task(new Content("CS2103"),
                     new UniqueTagList("SoftwareEngineering")),
-                new Task(new Name("CS2105"),
+                new Task(new Content("CS2105"),
                     new UniqueTagList("networking")),
-                new Task(new Name("CS2106"),
+                new Task(new Content("CS2106"),
                     new UniqueTagList("OperatingSystem")),
-                new Task(new Name("CS2107"),
+                new Task(new Content("CS2107"),
                     new UniqueTagList("security")),
-                new Task(new Name("CS2100"),
+                new Task(new Content("CS2100"),
                     new UniqueTagList("computerOrganisation"))
             };
         } catch (IllegalValueException e) {

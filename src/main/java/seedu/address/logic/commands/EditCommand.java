@@ -7,7 +7,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Name;
+import seedu.address.model.task.Content;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
@@ -74,7 +74,7 @@ public class EditCommand extends Command {
                                              EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
+        Content updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
         return new Task(updatedName, updatedTags);
@@ -85,7 +85,7 @@ public class EditCommand extends Command {
      * corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
-        private Optional<Name> name = Optional.empty();
+        private Optional<Content> name = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditPersonDescriptor() {}
@@ -102,12 +102,12 @@ public class EditCommand extends Command {
             return CollectionUtil.isAnyPresent(this.name, this.tags);
         }
 
-        public void setName(Optional<Name> name) {
+        public void setName(Optional<Content> name) {
             assert name != null;
             this.name = name;
         }
 
-        public Optional<Name> getName() {
+        public Optional<Content> getName() {
             return name;
         }
 

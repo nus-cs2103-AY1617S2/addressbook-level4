@@ -12,7 +12,7 @@ import seedu.address.model.tag.UniqueTagList;
  */
 public class TestPerson implements ReadOnlyPerson {
 
-    private Name name;
+    private Content name;
     private Address address;
     private Email email;
     private Phone phone;
@@ -33,7 +33,7 @@ public class TestPerson implements ReadOnlyPerson {
         this.tags = personToCopy.getTags();
     }
 
-    public void setName(Name name) {
+    public void setName(Content name) {
         this.name = name;
     }
 
@@ -54,7 +54,7 @@ public class TestPerson implements ReadOnlyPerson {
     }
 
     @Override
-    public Name getName() {
+    public Content getName() {
         return name;
     }
 

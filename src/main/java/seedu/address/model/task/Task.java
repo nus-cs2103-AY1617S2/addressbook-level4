@@ -11,14 +11,14 @@ import seedu.address.model.tag.UniqueTagList;
  */
 public class Task implements ReadOnlyTask {
 
-    private Name name;
+    private Content name;
 
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, UniqueTagList tags) {
+    public Task(Content name, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name);
         this.name = name;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
@@ -31,13 +31,13 @@ public class Task implements ReadOnlyTask {
         this(source.getName(), source.getTags());
     }
 
-    public void setName(Name name) {
+    public void setName(Content name) {
         assert name != null;
         this.name = name;
     }
 
     @Override
-    public Name getName() {
+    public Content getName() {
         return name;
     }
 

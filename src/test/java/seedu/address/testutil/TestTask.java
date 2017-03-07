@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Name;
+import seedu.address.model.task.Content;
 import seedu.address.model.task.ReadOnlyTask;
 
 /**
@@ -9,7 +9,7 @@ import seedu.address.model.task.ReadOnlyTask;
  */
 public class TestTask implements ReadOnlyTask {
 
-    private Name name;
+    private Content name;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -24,7 +24,7 @@ public class TestTask implements ReadOnlyTask {
         this.tags = taskToCopy.getTags();
     }
 
-    public void setName(Name name) {
+    public void setName(Content name) {
         this.name = name;
     }
 
@@ -33,7 +33,7 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Name getName() {
+    public Content getName() {
         return name;
     }
 
