@@ -346,74 +346,269 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | user | obtain a list of tasks due today / this week | plan my time to complete these urgent tasks before they are due
+`* * *` | user | view tasks planned to be completed within a certain time range | easily decide on tasks I should work on during that period
+`* * *` | user | indicate a starting and ending time for my tasks | keep track of events I need to attend
+`* * *` | user | display my tasks in a calendar view | obtain a general overview of the tasks I need to complete
+`* * *` | user  | set tasks as recurring at certain intervals | save time having to add the task repeatedly for different times
+`* * *` | user | add subtasks to existing tasks | keep track of and manage subtasks to be completed as part of bigger tasks
+`* * *` | user | mark a task as completed and filter tasks that are not completed | keep tracks of tasks that I have to complete
+`* * *` | user | view completed tasks | avoid working on tasks that are already completed
+`* * *` | user | set notifications to go off when certain tasks are nearing their deadline | avoid missing those deadlines
+`* * *` | user | set notifications to go off when I have planned to work on certain tasks | remind myself to work on those tasks that need to be completed
+`* * *` | user | undo previous commands | revert back to previous states in case of wrongly entered commands
+`* * *` | user  | activate the application quickly using a keyboard shortcut | access my task manager conveniently and efficiently
+`* * *` | advanced user | autocomplete my command by pressing a key (e.g. enter) | type my commands faster
+`* * *` | user | specify a particular location I want to save the data file of my task manager | sync my task list and access it from other devices
+`* * *` | user | search for names of particular tasks | update or view specific tasks efficiently
+`* *` | advanced user | use shorter versions of commands | type my commands faster
+`* *` | new user | view additional usage information for particular commands | learn how to use specific commands effectively
+`* *` | user | secure my task list | prevent other people from viewing my task list
+`* *` | user | sync my task list to Google or Microsoft | view my tasks through their respective calendars
+`* *` | user | retrieve previously typed commands using the UP and DOWN keys and execute them directly | save time having to retype similar commands repeatedly
+`* *` | user | postpone an existing task via a specific command | save time having to specifically enter the new deadline
+`* *` | user | attach related documents and links to my tasks | conveniently access documents needed for me to work on the tasks
+`* *` | new user | view command hints when typing commands | ensure my commands are correct
+`* *` | user | block off multiple slots for the same task and release the unused slots when the exact timing of a task is confirmed | avoid having to add multiple copies of the same task to multiple potential time slots
+`* *` | user | view the slots at which I have not planned for any task to be completed | find a suitable slot for new tasks easily
+`*` | user sharing this computer with other users | switch between different accounts on this task manager | share this application with the other users of this computer
+`*` | user | backup my entire task list to the cloud or external storage via export | have extra redundancy against system failures
+`*` | user | create shared tasks across different users | track the progress of other users for shared tasks
+`*` | user | import previously exported data back | continue from where I left off
+`*` | user | receive a daily email at a preferred time that contains tasks due that day | plan my schedule for that day effectively
+
 
 {More to be added}
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TaskManager` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: Show possible commands to be executed
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
-Use case ends.
+1. User types a letter or a sequence of letters
+2. System shows a list of commands that contain that letter or sequence of letters
+3. User selects specific command in list
+4. System autocompletes user's command
+Use case ends. 
 
 **Extensions**
 
-2a. The list is empty
+2a. No command contains letter or sequence of letters typed by user
+
+> Use case ends
+
+2b. User makes changes to input
+
+> Use case resumes at step 2
+
+#### Use case: Change save location
+
+**MSS**
+
+1. User clicks on "Change Save Location"
+2. System displays a directory chooser
+3. User selects a directory
+4. System changed the save location to the one selected
+5. System displays a message 
+Use case ends
+
+**Extensions**
+
+1a. User pressed "Alt + S" keys
+
+> Use case resumes at step 2
+
+3a. User clicks on "Cancel"
+
+> Use case ends
+
+#### Use case: Switch to console with hotkeys
+
+**MSS**
+
+1. User presses on predefined hotkey
+2. System displays main window
+Use case ends
+
+#### Use case: Delete task
+
+**MSS**
+
+1. User requests to list tasks
+2. System shows a list of tasks
+3. User requests to delete a specific task in the list
+4. System deletes the task
+Use case ends.
+
+
+**Extensions**
+
+2a. List is empty
 
 > Use case ends
 
 3a. The given index is invalid
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+> 3a1. System informs the user that the given index is invalid<br>
+Use case resumes at step 2
+
+#### Use case: Add task
+
+**MSS**
+
+1. User enters add command 
+2. System displays confirmation of add operation
+Use case ends.
+
+**Extensions**
+
+1a. Parameters are wrong
+
+> 1a1. System informs user that the parameters for the add command are wrong<br>
+Use case ends
+
+#### Use case: Undo task
+
+**MSS**
+
+1. User enters undo command
+2. System undoes last change
+Use case ends.
+
+**Extensions**
+
+2a. No change to undo
+
+> 2a1. System shows nothing to undo<br>
+Use case ends
+
+2a. Error undoing change
+
+> 2a1. System notifies user of failure to undo<br>
+Use case ends
+
 
 {More to be added}
 
 ## Appendix C : Non Functional Requirements
 
-1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
-   should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should be able to hold up to 2 years worth of tasks.
+2. Should process and respond to user commands within 1s. 
+3. Should conform to the Java coding standard.
+4. Should automatically back up data once a week. 
+5. Should detect any intrusion within 10 seconds.
+6. Should work on any mainstream OS as long as it has Java 1.8.0_60 or higher installed.
+7. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+
 
 {More to be added}
 
 ## Appendix D : Glossary
 
-##### Mainstream OS
+#####Parameter: 
 
-> Windows, Linux, Unix, OS-X
+> detail associated with a task (e.g. duration, name, start time)
 
-##### Private contact detail
+#####Recurring task:
 
-> A contact detail that is not meant to be shared with others
+> a task that has to be completed periodically (e.g. daily or monthly)
+
+#####Subtask:
+
+> a component of a task
+
+#####Autocomplete:
+
+> complete words or strings without the user needing to type them in full
+
+#####Sync:
+
+> ensure that data files in two or more locations are updated
+
+#####Hotkey:
+
+> a single or combination of keys that is registered with the system to perform specific activity when pressed
+
+#####Mainstream OS:
+
+> Windows, Linux, Mac
 
 ## Appendix E : Product Survey
 
-**Product Name**
+**Wunderlist (free version)**
 
-Author: ...
+Author: Tan Yu Wei
 
 Pros:
 
-* ...
-* ...
+* Customizable to-do lists for different purposes (e.g. movies to watch, grocery list)
+* Alarm reminders for task when deadline is up AND when user should be working on the task
+* Save links and web pages easily for later by via an Add to Wunderlist browser extension
+* Compatible and syncable across many operating systems and commonly-used devices
+* Transform emails into to-do tasks by simply forwarding them to a specific address
+* Print task lists neatly and easily
+
 
 Cons:
 
-* ...
-* ...
+* Files added to to-do list have a limited size (i.e. 5 MB)
+* Limited number of subtasks per task (i.e. 25)
+* Limited number of backgrounds to personalize Wunderlist (i.e. 20)
+* No support for nested to-do lists
+* Cannot manage events (cannot add start and end time)
+* No calendar view of tasks
 
+**Google Calendar**
+
+Author: Lim Shun Xian
+
+Pros:
+
+* Cross platform
+* Integrated with majority of Google's app such as Gmail
+* Able to compare friends' calendar with yours to find common free slots
+* Able to share calendar to others to view
+* Able to send a daily reminder email of today's agenda (due tasks) at 5AM 
+
+Cons:
+
+* Difficult to migrate over should one be already using Outlook or other calendars 
+* The daily reminder email is fixed at 5AM
+
+**Wunderlist (free version)**
+
+Author: Brandon Tan Jian Sin
+
+Pros:
+
+* Simple layout
+* Intuitive controls
+* Free
+* Syncable across different platforms that wunderlist supports
+* Allows custom categorization of tasks
+* Email, Desktop, Push Notifications
+
+Cons:
+
+* No calendar view
+* Limitations in number of subtasks and file attachments
+* Tasks only scheduled by day not time
+
+**Get it Done**
+Author: Ang Zhi Yuan
+
+Pros:
+
+* Simple, clear layout
+* Widely accessible across multiple platforms
+* Allows cooperation between multiple users
+* Clean email notifications
+* Can sync to other calendars
+
+Cons:
+
+* Subscription based
+* No calendar-view, only list view
