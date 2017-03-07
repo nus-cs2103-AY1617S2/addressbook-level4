@@ -21,7 +21,7 @@ import org.junit.rules.TemporaryFolder;
 import com.google.common.eventbus.Subscribe;
 
 import seedu.geekeep.commons.core.EventsCenter;
-import seedu.geekeep.commons.events.model.AddressBookChangedEvent;
+import seedu.geekeep.commons.events.model.TaskManagerChangedEvent;
 import seedu.geekeep.commons.events.ui.JumpToListRequestEvent;
 import seedu.geekeep.commons.events.ui.ShowHelpRequestEvent;
 import seedu.geekeep.logic.commands.AddCommand;
@@ -67,7 +67,7 @@ public class LogicManagerTest {
     private int targetedJumpIndex;
 
     @Subscribe
-    private void handleLocalModelChangedEvent(AddressBookChangedEvent abce) {
+    private void handleLocalModelChangedEvent(TaskManagerChangedEvent abce) {
         latestSavedAddressBook = new TaskManager(abce.data);
     }
 

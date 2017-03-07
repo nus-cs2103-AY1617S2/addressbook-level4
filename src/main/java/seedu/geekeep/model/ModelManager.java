@@ -7,7 +7,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.geekeep.commons.core.ComponentManager;
 import seedu.geekeep.commons.core.LogsCenter;
 import seedu.geekeep.commons.core.UnmodifiableObservableList;
-import seedu.geekeep.commons.events.model.AddressBookChangedEvent;
+import seedu.geekeep.commons.events.model.TaskManagerChangedEvent;
 import seedu.geekeep.commons.util.CollectionUtil;
 import seedu.geekeep.commons.util.StringUtil;
 import seedu.geekeep.model.task.Person;
@@ -54,7 +54,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
-        raise(new AddressBookChangedEvent(taskManager));
+        raise(new TaskManagerChangedEvent(taskManager));
     }
 
     @Override
