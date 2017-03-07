@@ -17,8 +17,8 @@ import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.tag.UniqueTagList;
 import seedu.geekeep.model.task.Address;
 import seedu.geekeep.model.task.Email;
-import seedu.geekeep.model.task.Name;
 import seedu.geekeep.model.task.Phone;
+import seedu.geekeep.model.task.Title;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -69,9 +69,9 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> name} into an {@code Optional<Name>} if {@code name} is present.
      */
-    public static Optional<Name> parseName(Optional<String> name) throws IllegalValueException {
+    public static Optional<Title> parseTitle(Optional<String> name) throws IllegalValueException {
         assert name != null;
-        return name.isPresent() ? Optional.of(new Name(name.get())) : Optional.empty();
+        return name.isPresent() ? Optional.of(new Title(name.get())) : Optional.empty();
     }
 
     /**

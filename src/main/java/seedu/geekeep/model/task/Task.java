@@ -10,7 +10,7 @@ import seedu.geekeep.model.tag.UniqueTagList;
  */
 public class Task implements ReadOnlyTask {
 
-    private Name name;
+    private Title title;
     private Phone phone;
     private Email email;
     private Address address;
@@ -20,9 +20,9 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Phone phone, Email email, Address address, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, phone, email, address, tags);
-        this.name = name;
+    public Task(Title title, Phone phone, Email email, Address address, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(title, phone, email, address, tags);
+        this.title = title;
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -33,17 +33,17 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyPerson.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(), source.getTags());
+        this(source.getTitle(), source.getPhone(), source.getEmail(), source.getAddress(), source.getTags());
     }
 
-    public void setName(Name name) {
-        assert name != null;
-        this.name = name;
+    public void setTitle(Title title) {
+        assert title != null;
+        this.title = title;
     }
 
     @Override
-    public Name getName() {
-        return name;
+    public Title getTitle() {
+        return title;
     }
 
     public void setPhone(Phone phone) {
@@ -94,7 +94,7 @@ public class Task implements ReadOnlyTask {
     public void resetData(ReadOnlyTask replacement) {
         assert replacement != null;
 
-        this.setName(replacement.getName());
+        this.setTitle(replacement.getTitle());
         this.setPhone(replacement.getPhone());
         this.setEmail(replacement.getEmail());
         this.setAddress(replacement.getAddress());
@@ -111,7 +111,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(title, phone, email, address, tags);
     }
 
     @Override

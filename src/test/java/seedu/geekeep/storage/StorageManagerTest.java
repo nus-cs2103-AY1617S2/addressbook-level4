@@ -14,8 +14,8 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.geekeep.commons.events.model.TaskManagerChangedEvent;
 import seedu.geekeep.commons.events.storage.DataSavingExceptionEvent;
-import seedu.geekeep.model.TaskManager;
 import seedu.geekeep.model.ReadOnlyTaskManager;
+import seedu.geekeep.model.TaskManager;
 import seedu.geekeep.model.UserPrefs;
 import seedu.geekeep.testutil.EventsCollector;
 import seedu.geekeep.testutil.TypicalTestPersons;

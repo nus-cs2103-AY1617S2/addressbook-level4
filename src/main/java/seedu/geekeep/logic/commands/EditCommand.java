@@ -9,10 +9,10 @@ import seedu.geekeep.logic.commands.exceptions.CommandException;
 import seedu.geekeep.model.tag.UniqueTagList;
 import seedu.geekeep.model.task.Address;
 import seedu.geekeep.model.task.Email;
-import seedu.geekeep.model.task.Name;
 import seedu.geekeep.model.task.Phone;
 import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.model.task.Task;
+import seedu.geekeep.model.task.Title;
 import seedu.geekeep.model.task.UniqueTaskList;
 
 /**
@@ -77,13 +77,13 @@ public class EditCommand extends Command {
                                              EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
+        Title updatedTitle = editPersonDescriptor.getTitle().orElseGet(personToEdit::getTitle);
         Phone updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
         Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
         Address updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
-        return new Task(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Task(updatedTitle, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
 
     /**
@@ -91,7 +91,7 @@ public class EditCommand extends Command {
      * corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
-        private Optional<Name> name = Optional.empty();
+        private Optional<Title> title = Optional.empty();
         private Optional<Phone> phone = Optional.empty();
         private Optional<Email> email = Optional.empty();
         private Optional<Address> address = Optional.empty();
@@ -100,7 +100,7 @@ public class EditCommand extends Command {
         public EditPersonDescriptor() {}
 
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
-            this.name = toCopy.getName();
+            this.title = toCopy.getTitle();
             this.phone = toCopy.getPhone();
             this.email = toCopy.getEmail();
             this.address = toCopy.getAddress();
@@ -111,16 +111,16 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.phone, this.email, this.address, this.tags);
+            return CollectionUtil.isAnyPresent(this.title, this.phone, this.email, this.address, this.tags);
         }
 
-        public void setName(Optional<Name> name) {
-            assert name != null;
-            this.name = name;
+        public void setTitle(Optional<Title> title) {
+            assert title != null;
+            this.title = title;
         }
 
-        public Optional<Name> getName() {
-            return name;
+        public Optional<Title> getTitle() {
+            return title;
         }
 
         public void setPhone(Optional<Phone> phone) {

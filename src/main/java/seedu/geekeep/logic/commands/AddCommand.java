@@ -9,9 +9,9 @@ import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.tag.UniqueTagList;
 import seedu.geekeep.model.task.Address;
 import seedu.geekeep.model.task.Email;
-import seedu.geekeep.model.task.Name;
 import seedu.geekeep.model.task.Phone;
 import seedu.geekeep.model.task.Task;
+import seedu.geekeep.model.task.Title;
 import seedu.geekeep.model.task.UniqueTaskList;
 
 /**
@@ -43,7 +43,7 @@ public class AddCommand extends Command {
             tagSet.add(new Tag(tagName));
         }
         this.toAdd = new Task(
-                new Name(name),
+                new Title(name),
                 new Phone(phone),
                 new Email(email),
                 new Address(address),

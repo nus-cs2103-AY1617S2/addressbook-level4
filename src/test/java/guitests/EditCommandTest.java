@@ -11,8 +11,8 @@ import seedu.geekeep.logic.commands.EditCommand;
 import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.task.Address;
 import seedu.geekeep.model.task.Email;
-import seedu.geekeep.model.task.Name;
 import seedu.geekeep.model.task.Phone;
+import seedu.geekeep.model.task.Title;
 import seedu.geekeep.testutil.PersonBuilder;
 import seedu.geekeep.testutil.TestPerson;
 
@@ -91,7 +91,7 @@ public class EditCommandTest extends AddressBookGuiTest {
     @Test
     public void edit_invalidValues_failure() {
         commandBox.runCommand("edit 1 *&");
-        assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
+        assertResultMessage(Title.MESSAGE_NAME_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 p/abcd");
         assertResultMessage(Phone.MESSAGE_PHONE_CONSTRAINTS);
@@ -127,7 +127,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("edit " + filteredPersonListIndex + " " + detailsToEdit);
 
         // confirm the new card contains the right data
-        PersonCardHandle editedCard = personListPanel.navigateToPerson(editedPerson.getName().fullName);
+        PersonCardHandle editedCard = personListPanel.navigateToPerson(editedPerson.getTitle().fullName);
         assertMatching(editedPerson, editedCard);
 
         // confirm the list now contains all previous persons plus the person with updated details

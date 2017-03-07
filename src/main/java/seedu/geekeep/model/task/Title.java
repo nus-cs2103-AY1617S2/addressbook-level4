@@ -6,7 +6,7 @@ import seedu.geekeep.commons.exceptions.IllegalValueException;
  * Represents a Person's name in the address book. Guarantees: immutable; is valid as declared in
  * {@link #isValidName(String)}
  */
-public class Name {
+public class Title {
 
     public static final String MESSAGE_NAME_CONSTRAINTS =
             "Person names should only contain alphanumeric characters and spaces, and it should not be blank";
@@ -32,7 +32,7 @@ public class Name {
      * @throws IllegalValueException
      *             if given name string is invalid.
      */
-    public Name(String name) throws IllegalValueException {
+    public Title(String name) throws IllegalValueException {
         assert name != null;
         String trimmedName = name.trim();
         if (!isValidName(trimmedName)) {
@@ -44,8 +44,8 @@ public class Name {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Name // instanceof handles nulls
-                        && this.fullName.equals(((Name) other).fullName)); // state check
+                || (other instanceof Title // instanceof handles nulls
+                        && this.fullName.equals(((Title) other).fullName)); // state check
     }
 
     @Override
