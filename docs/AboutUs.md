@@ -6,7 +6,8 @@ We are a team based in the [School of Computing, National University of Singapor
 
 #### [Edwin Chan](http://github.com/EdwinChanSingapore)<br>
 <img src="images/EdwinChan.jpg" width="150"><br>
-Role: Team Lead
+Role: Developer <br>
+Responsibilities: Team Lead
 
 -----
 
@@ -20,13 +21,13 @@ Responsibilities: Integration
 #### [Dion Ng](http://github.com/dionngg)
 <img src="images/DionNgWeiJie.jpg" width="150"><br>
 Role: Developer <br>
-Responsibilities: Data
+Responsibilities: Testing
 
 -----
 
 #### [Mengci Wu](http://github.com/wmc0098)
 <img src="images/MengciWu.jpg" width="150"><br>
 Role: Developer <br>
-Responsibilities: Dev Ops
+Responsibilities: Code Quality and Documentation
 
 -----
