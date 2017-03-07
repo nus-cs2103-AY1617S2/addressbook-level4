@@ -32,11 +32,15 @@ public class Priority {
      * @throws IllegalValueException if given priority string is invalid.
      */
     public Priority(String priority) throws IllegalValueException {
-        String upperCasePriority = priority.toUpperCase();
-        if (!isValidPriority(upperCasePriority)) {
+        // Remove trailing whitespace, spaces and change to upper case
+        String processedPriority = priority.trim();
+        processedPriority = processedPriority.replaceAll(" ", "");
+        processedPriority = processedPriority.toUpperCase();
+
+        if (!isValidPriority(processedPriority)) {
             throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
         }
-        this.priority = PriorityLevel.valueOf(upperCasePriority);
+        this.priority = PriorityLevel.valueOf(processedPriority);
     }
 
     public PriorityLevel getPriorityLevel() {
