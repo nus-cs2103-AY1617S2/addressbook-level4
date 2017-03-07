@@ -48,7 +48,7 @@ public class TestTask implements ReadOnlyTask {
     public void setStartDate(StartDate startDate) {
         this.startDate = startDate;
     }
-    
+
     public void setDueDate(DueDate dueDate) {
         this.dueDate = dueDate;
     }
@@ -84,7 +84,7 @@ public class TestTask implements ReadOnlyTask {
     public StartDate getStartDate() {
         return startDate;
     }
-    
+
     @Override
     public DueDate getDueDate() {
         return dueDate;
