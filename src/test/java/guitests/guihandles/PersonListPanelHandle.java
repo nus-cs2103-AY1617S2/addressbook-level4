@@ -62,7 +62,7 @@ public class PersonListPanelHandle extends GuiHandle {
         for (int i = 0; i < persons.length; i++) {
             final int scrollTo = i + startPosition;
             guiRobot.interact(() -> getListView().scrollTo(scrollTo));
-            guiRobot.sleep(200);
+            guiRobot.sleep(GuiHandleSetting.SLEEP_LENGTH);
             if (!TestUtil.compareCardAndPerson(getPersonCardHandle(startPosition + i), persons[i])) {
                 return false;
             }
@@ -99,13 +99,13 @@ public class PersonListPanelHandle extends GuiHandle {
         return true;
     }
 
-    public PersonCardHandle navigateToPerson(String name) {
+    public PersonCardHandle navigateToPerson(String desc) {
         guiRobot.sleep(500); //Allow a bit of time for the list to be updated
         final Optional<ReadOnlyTask> person = getListView().getItems().stream()
-                                                    .filter(p -> p.getDescription().desc.equals(name))
+                                                    .filter(p -> p.getDescription().desc.equals(desc))
                                                     .findAny();
         if (!person.isPresent()) {
-            throw new IllegalStateException("Name not found: " + name);
+            throw new IllegalStateException("Name not found: " + desc);
         }
 
         return navigateToPerson(person.get());

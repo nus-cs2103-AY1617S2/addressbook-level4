@@ -18,7 +18,5 @@ public class ErrorDialogGuiTest extends AddressBookGuiTest {
         AlertDialogHandle alertDialog = mainGui.getAlertDialog("File Op Error");
         assertTrue(alertDialog.isMatching("Could not save data", "Could not save data to file" + ":\n"
                                                                          + "java.io.IOException: Stub"));
-
     }
-
 }
