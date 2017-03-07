@@ -88,18 +88,18 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Adds a task to the TaskBoss<br>
-Format: `add TASK_NAME [i/INFO] [sd/START_DATE] [ed/END_DATE] [st/START_TIME] [et/END_TIME] [c/CATEGORY] [p/PRIORITY_LEVEL]`
+Format: `add TASK_NAME [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIORITY_LEVEL]`
 
-> * Date should be in `DD-MM-YY` format <br>
-> * Time should be in 24-hour clock format, i.e `hr:min` <br>
+> * Date can be written in any format whether using slashes, dashes, or words  <br>
+> * Time should be in 24-hour clock format or 12 hour format with AM or PM next to it, i.e `hr:min <PM/AM>` <br>
 > * Priority level is either `1` (low priority), `2` (medium priority) or `3` (high priority).
 > * Order of optional parameters does not matter.
 
 Examples:
 
 * `add Buy groceries ed/19-02-2017 c/Home p/3`
-* `add Dinner with Jim i/@Orchard v0.0 ed/19-02-2017 c/Leisure p/2`
-* `add Post-exam celebration i/@Zouk sd/10-03-2017 ed/11-03-2017 st/12:00 et/15:00 c/Leisure p/1`
+* `add Dinner with Jim i/@Orchard v0.0 sd/next friday ed/19-02-2017 c/Leisure p/2`
+* `add Post-exam celebration i/@Zouk sd/tomorrow at 3 PM ed/tomorrow 20.30  c/Leisure p/1`
 
 
 ### 2.3. Listing all tasks : `list`
@@ -110,7 +110,7 @@ Format: `list`
 ### 2.4. Editing a task : `edit`
 
 Edits an existing task in the TaskBoss.<br>
-Format: `edit INDEX [i/INFO] [sd/START_DATE] [ed/END_DATE] [st/START_TIME] [et/END_TIME] [c/CATEGORY] [p/PRIORITY_LEVEL]`
+Format: `edit INDEX [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIORITY_LEVEL]`
 
 > * Edits the task at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
@@ -121,16 +121,16 @@ Format: `edit INDEX [i/INFO] [sd/START_DATE] [ed/END_DATE] [st/START_TIME] [et/E
 
 Examples:
 
-* `edit 1 i/Use Stack et/23:59`<br>
+* `edit 1 i/Use Stack ed/23:59`<br>
   Edits the task information and end time of the 1st task to be `Use Stack` and `23:59` respectively.
   
 * `edit 3 p/3`<br>
   Edits the priority level of 3rd task to be 3. 
 
-### 2.5. Finding all tasks by Name/Date/Information: `find`
+### 2.5. Finding all tasks by Name: `find`
 
 Finds tasks whose names contain any of the given keywords.<br>
-Format: `find n/TASK_NAME` `find ed/END_DATE` `find i/information`
+Format: `find n/TASK_NAME` 
 
 > * The search is case-sensitive. e.g `Project` will not match `project`
 > * The order of the keywords does not matter. e.g. `meeting project` will match `project meeting`
@@ -145,6 +145,18 @@ Examples:
 * `find ed/04-02-2017`<br>
   Returns all tasks with the end day `04-02-2017`
 
+### 2.5. Finding all tasks by Deadline: `find`
+
+Finds tasks whose deadlines contain any of the given keywords.<br>
+Format: `find d/date and time` 
+
+> * The date is searched according to the date format user enters.
+> * The date format for find date command is restricted either DD-MM-YYYY or DD/MM/YY formats 
+or MM-DD-YYYY or MM/DD/YYYY, depending on your system's settings.
+
+* `find d/04-02-2017`<br>
+  Returns all tasks with the start or end date `04-02-2017`
+  
 ### 2.6. Deleting a task : `delete`
 
 Deletes the specified task from the TaskBoss.<br>
