@@ -25,11 +25,12 @@ public class EditCommandTest extends EzDoGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby p/1 e/bobby@gmail.com s/01/01/2017 d/08/09/2018 t/husband";
+        String detailsToEdit = "Bobby p/1 s/01/01/2017 d/08/09/2018 t/husband";
         int ezDoIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Bobby").withPriority("1")
-                .withStartDate("01/01/2017").withDueDate("08/09/2018").build();
+                .withStartDate("01/01/2017").withDueDate("08/09/2018")
+                .withTags("husband").build();
 
         assertEditSuccess(ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
     }
@@ -109,7 +110,7 @@ public class EditCommandTest extends EzDoGuiTest {
     @Test
     public void edit_duplicateTask_failure() {
         commandBox.runCommand("edit 3 Alice Pauline p/1 "
-                                + "s/1/6/2017 d/14/03/2015 t/friends");
+                                + "s/12/12/2017 d/14/03/2015 t/friends");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
