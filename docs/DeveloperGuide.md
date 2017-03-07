@@ -346,50 +346,122 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | user | add tasks | keep track of them
+`* * *` | user | be able to edit a task after adding it | make any changes if I need to
+`* * *` | user | be able to delete a task after adding | delete tasks that I no longer need
+`* * *` | user | find specific tasks by keywords | locate my task easily
+`* * *` | user | specify a particular path or folder to store my task lists | retrieve the file easily and conveniently
+`* * *` | user | undo the recent action | revert back in case I decide to change my mind. 
+`* *` | user | add tasks that recur on a consistent basis (e.g. Tutorials and lectures) | add recurring tasks more conveniently, since the item only needs to be added once
+`* *` | user | add some comments for a particular task | store additional information that I will need when handling that task
+`* *` | user | include a tag on the task | retrieve all the tasks that belong to the same tag
+`* *` | user | be able to set how important a task is | know which tasks I should prioritize first
+`* *` | user | sort my tasks according to priority or tags | delegate my time appropriately
+`* *` | user | be able to delete a group of task by keywords | avoid deleting one by one 
+`* *` | user | have a view of my pending tasks for the day/week/month | know what I need to do for that particular period of time
+`* *` | user | see my overdue tasks | know what actions to take on them
+`* *` | advanced user | have the choice of a few preset themes | change it to my liking. 
+`*` | user | sort my tasks according to task names | delegate my time appropriately
+`*` | user | delete all my tasks | hand in my resignation letter afterwards
 
-{More to be added}
 
-## Appendix B : Use Cases
-
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
-
-#### Use case: Delete person
+## Use Cases
+#### Use case: Create a task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
-Use case ends.
+1. User inputs the command with the correct keywords
+2. Task Manager confirms the addition by showing the confirmation message <br>
 
-**Extensions**
+> Use case ends.
 
-2a. The list is empty
+**EXTENSIONS**
+
+2a. The given input is invalid
+
+> 2a1. Task Manager shows an error message <br>
+Use case ends
+
+#### Use case: Find specific tasks
+
+**MSS**
+
+1. User inputs the command with the correct keywords
+2. Task Manager shows the list of tasks that match the input <br>
+
+> Use case ends.
+
+**EXTENSIONS**
+
+2a. The given input is invalid
+
+> 2a1. Task Manager shows an error message <br>
+Use case ends
+
+3a. The list is empty
 
 > Use case ends
 
-3a. The given index is invalid
+4a. The list contains no matching entries
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+> Use case ends
 
-{More to be added}
+#### Use case: Edit/Update a specific task
+
+**MSS**
+
+1. User requests to edit a task and inputs the command with correct keywords
+2. Task Manager shows the updated task on the UI <br>
+
+> Use case ends.
+
+**EXTENSIONS**
+
+2a. The given input is invalid
+
+> 2a1. Task Manager shows an error message for such situation<br>
+Use case ends
+
+3a. The list contains no matching entries for the user to edit
+> 3a1. Task Manager shows an error message for such situation <br>
+
+> Use case ends
+
+#### Use case: Delete a specific task from the task list
+
+**MSS**
+
+1. User requests to delete a task and inputs the command with correct keywords
+2. Task Manager shows a message to ask for confirmation of deletion.
+3. User inputs the command for confirmation.
+4. Task Manager deletes the task <br>
+
+> Use case ends
+
+**EXTENSIONS**
+
+2a. The given input is invalid
+
+> 2a1. Task Manager shows an error message for such situation<br>
+Use case ends
+
+3a. The list contains no matching entries for the user to edit
+> 3a1. Task Manager shows an error message for such situation <br>
+
+> Use case ends
+
+4a. The list is empty
+
+> Use case ends
+
 
 ## Appendix C : Non Functional Requirements
 
-1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
-   should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-{More to be added}
+1. Should work on any mainstream OS as long as it has Java 8 or higher installed.
+2. Should be able to hold up to 1000 tasks.
+3. Should come with automated unit tests and open source code.
+4. Should favor DOS style commands over Unix-style commands.
+5. Should be able to hold up to 100 tags per task.
 
 ## Appendix D : Glossary
 
@@ -397,23 +469,54 @@ Use case ends.
 
 > Windows, Linux, Unix, OS-X
 
-##### Private contact detail
+#### Keywords
+> Task Name, Tag, From Date - To Date, Due Dates
 
-> A contact detail that is not meant to be shared with others
+#### Path 
+> Absolute path or Relative path of the Tasks Storage
+
+####DOS style commands
+
+> commandline commands based on Windows System
+
+####UNIX-style commands
+
+> commandline commands based on UNIX System
+
 
 ## Appendix E : Product Survey
 
-**Product Name**
+**Google Calendar + Google Tasks**
 
-Author: ...
+Author: Wang Pengcheng
 
 Pros:
-
-* ...
-* ...
+* Simplistic and elegant UI
+* Ability to add task items directly from Gmail into Google Task.
+* Not a lot of buttons to click. Convenient and easy to learn.
+* Allow different colour codings for easy references.
+* Able to import other existing calendars (e.g. NUSmods) into the user's calendar.
 
 Cons:
+* Web application (especially for Google Task) that requires Internet connection for usage.
+* UI for Google Tasks needs improvement; The deletion of items is quite a hassle and can be messy.
+* May not cater to Jim who prefers keyboard inputs. 
 
-* ...
-* ...
+**Priority Matrix**
+
+Author: Ellango Vesali
+
+Pros:
+* Simple and easy to use UI 
+* Create multiple task under a main project 
+* Group the list of items based on the different levels of priorities
+* Integrate with Mail to keep track of important mails 
+* Syncs with iOS, Android and Windows 
+* Upload files 
+* Daily reports reminding one of their deadlines 
+* Collaborative aspects for teams 
+
+Cons:
+* Require mouse usage, may not cater Jim who prefers keyboard inputs
+* Monthly subscription fee 
 
