@@ -1,7 +1,7 @@
 package seedu.address.model.todo;
 
-import java.util.Objects;
 import java.util.Date;
+import java.util.Objects;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
