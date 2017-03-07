@@ -79,9 +79,9 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Title updatedTitle = editPersonDescriptor.getTitle().orElseGet(personToEdit::getTitle);
-        EndDateTime updatedEndDateTime 
+        EndDateTime updatedEndDateTime
                 = editPersonDescriptor.getEndDateTime().orElseGet(personToEdit::getEndDateTime);
-        StartDateTime updatedStartDateTime 
+        StartDateTime updatedStartDateTime
                 = editPersonDescriptor.getStartDateTime().orElseGet(personToEdit::getStartDateTime);
         Location updatedLocation = editPersonDescriptor.getLocation().orElseGet(personToEdit::getLocation);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);

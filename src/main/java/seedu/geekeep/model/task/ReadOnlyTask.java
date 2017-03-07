@@ -17,7 +17,7 @@ public interface ReadOnlyTask {
     Location getLocation();
 
     /**
-     * The returned TagList is a deep copy of the internal TagList, 
+     * The returned TagList is a deep copy of the internal TagList,
      * changes on the returned list will not affect the
      * person's internal tags.
      */
@@ -30,7 +30,7 @@ public interface ReadOnlyTask {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                         && other.getTitle().equals(this.getTitle()) // state checks here onwards
-                        && other.getEndDateTime().equals(this.getEndDateTime()) 
+                        && other.getEndDateTime().equals(this.getEndDateTime())
                         && other.getStartDateTime().equals(this.getStartDateTime())
                         && other.getLocation().equals(this.getLocation()));
     }
