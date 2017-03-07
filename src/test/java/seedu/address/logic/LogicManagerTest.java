@@ -39,7 +39,7 @@ import seedu.address.model.*;
 import seedu.address.model.TaskManager;
 import seedu.address.model.ReadOnlyTaskManager;
 import seedu.address.model.task.Description;
-import seedu.address.model.task.Email;
+import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Priority;
@@ -200,7 +200,7 @@ public class LogicManagerTest {
         assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
                 Priority.MESSAGE_PRIORITY_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
-                Email.MESSAGE_EMAIL_CONSTRAINTS);
+                Deadline.MESSAGE_DEADLINE_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
@@ -416,7 +416,7 @@ public class LogicManagerTest {
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
             Priority privatePhone = new Priority("111111");
-            Email email = new Email("adam@gmail.com");
+            Deadline email = new Deadline("adam@gmail.com");
             Description privateAddress = new Description("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
@@ -435,7 +435,7 @@ public class LogicManagerTest {
             return new Task(
                     new Name("Person " + seed),
                     new Priority("" + Math.abs(seed)),
-                    new Email(seed + "@email"),
+                    new Deadline(seed + "@email"),
                     new Description("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
@@ -534,7 +534,7 @@ public class LogicManagerTest {
             return new Task(
                     new Name(name),
                     new Priority("1"),
-                    new Email("1@email"),
+                    new Deadline("1@email"),
                     new Description("House of 1"),
                     new UniqueTagList(new Tag("tag"))
             );

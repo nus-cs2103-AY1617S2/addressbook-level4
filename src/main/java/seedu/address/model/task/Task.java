@@ -13,7 +13,7 @@ public class Task implements ReadOnlyPerson {
 
     private Name name;
     private Priority phone;
-    private Email email;
+    private Deadline email;
     private Description description;
 
     private UniqueTagList tags;
@@ -21,7 +21,7 @@ public class Task implements ReadOnlyPerson {
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Priority phone, Email email, Description description, UniqueTagList tags) {
+    public Task(Name name, Priority phone, Deadline email, Description description, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, phone, email, description, tags);
         this.name = name;
         this.phone = phone;
@@ -57,13 +57,13 @@ public class Task implements ReadOnlyPerson {
         return phone;
     }
 
-    public void setEmail(Email email) {
+    public void setEmail(Deadline email) {
         assert email != null;
         this.email = email;
     }
 
     @Override
-    public Email getEmail() {
+    public Deadline getEmail() {
         return email;
     }
 

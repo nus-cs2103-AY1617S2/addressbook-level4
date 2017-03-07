@@ -10,7 +10,7 @@ public interface ReadOnlyPerson {
 
     Name getName();
     Priority getPhone();
-    Email getEmail();
+    Deadline getEmail();
     Description getDescription();
 
     /**
