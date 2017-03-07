@@ -5,4 +5,4 @@
 
 * **Contributing** : We welcome pull requests. Follow the process described [here](https://github.com/oss-generic/process)
 
-* **Email us** : You can also reach us at ` ljsrockz[at]gmail.com `
+* **Email us** : You can also reach us at ` ljsrockz [at] gmail.com `
