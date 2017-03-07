@@ -103,8 +103,8 @@ public class FindController extends Controller {
             searchParameters = TAG_MESSAGE;
         }
 
-        String keywords= String.join(" ", keywordList);
-        return new CommandResult(String.format(RESULT_MESSAGE_TEMPLATE, keywords, searchParameters,foundCount));
+        String keywords = String.join(" ", keywordList);
+        return new CommandResult(String.format(RESULT_MESSAGE_TEMPLATE, keywords, searchParameters, foundCount));
     }
 
     @Override
@@ -112,14 +112,14 @@ public class FindController extends Controller {
         HashMap<String, String> tokens = new HashMap<>();
 
         //search by tag
-        if (command.contains(TAG_PARAMETER)){
+        if (command.contains(TAG_PARAMETER)) {
             tokens.put(TAG_PARAMETER, TRUE_PARAMETER);
         } else {
             tokens.put(TAG_PARAMETER, FALSE_PARAMETER);
         }
 
         //search by name
-        if (command.contains(NAME_PARAMETER) || !command.contains(TAG_PARAMETER)){
+        if (command.contains(NAME_PARAMETER) || !command.contains(TAG_PARAMETER)) {
             tokens.put(NAME_PARAMETER, TRUE_PARAMETER);
         } else {
             tokens.put(NAME_PARAMETER, FALSE_PARAMETER);

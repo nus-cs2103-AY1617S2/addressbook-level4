@@ -1,8 +1,8 @@
 package seedu.toluist.model;
 
 import java.util.ArrayList;
-import java.util.TreeSet;
 import java.util.Optional;
+import java.util.TreeSet;
 
 import seedu.toluist.storage.JsonStorage;
 import seedu.toluist.storage.Storage;

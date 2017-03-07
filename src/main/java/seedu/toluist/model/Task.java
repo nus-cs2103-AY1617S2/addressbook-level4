@@ -7,7 +7,7 @@ import java.util.Objects;
 /**
  * Represents a Task
  */
-public class Task implements Comparable<Task>{
+public class Task implements Comparable<Task> {
 
     public String description;
     public ArrayList<Tag> allTags = new ArrayList<>();
