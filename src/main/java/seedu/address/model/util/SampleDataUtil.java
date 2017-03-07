@@ -39,7 +39,7 @@ public class SampleDataUtil {
             for (Task samplePerson : getSampleTasks()) {
                 sampleAB.addTask(samplePerson);
             }
-            return sampleAB;
+            return (ReadOnlyAddressBook) sampleAB;
         } catch (DuplicateTaskException e) {
             throw new AssertionError("sample data cannot contain duplicate persons", e);
         }
