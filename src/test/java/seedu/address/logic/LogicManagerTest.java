@@ -201,9 +201,9 @@ public class LogicManagerTest {
         assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
                 Name.MESSAGE_NAME_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
-                Description.MESSAGE_PHONE_CONSTRAINTS);
+                Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
-                StartDateTime.MESSAGE_EMAIL_CONSTRAINTS);
+                StartDateTime.MESSAGE_START_DATETIME_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
@@ -235,7 +235,7 @@ public class LogicManagerTest {
         model.addTask(toBeAdded); // person already in internal address book
 
         // execute command and verify result
-        assertCommandFailure(helper.generateAddCommand(toBeAdded),  AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(helper.generateAddCommand(toBeAdded),  AddCommand.MESSAGE_DUPLICATE_TASK);
 
     }
 
@@ -451,9 +451,9 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getName().toString());
-            cmd.append(" e/").append(p.getEmail());
-            cmd.append(" p/").append(p.getPhone());
-            cmd.append(" a/").append(p.getAddress());
+            cmd.append(" e/").append(p.getDescription().toString());
+            cmd.append(" p/").append(p.getStartDateTime().toString());
+            cmd.append(" a/").append(p.getEndDateTime().toString());
 
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {

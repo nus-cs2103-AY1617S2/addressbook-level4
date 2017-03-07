@@ -79,9 +79,9 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
-        Description updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
-        StartDateTime updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
-        EndDateTime updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
+        Description updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getDescription);
+        StartDateTime updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getStartDateTime);
+        EndDateTime updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getEndDateTime);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
         return new Task(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
@@ -93,18 +93,18 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Optional<Name> name = Optional.empty();
-        private Optional<Description> phone = Optional.empty();
-        private Optional<StartDateTime> email = Optional.empty();
-        private Optional<EndDateTime> address = Optional.empty();
+        private Optional<Description> description = Optional.empty();
+        private Optional<StartDateTime> startDateTime = Optional.empty();
+        private Optional<EndDateTime> endDateTime = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditPersonDescriptor() {}
 
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             this.name = toCopy.getName();
-            this.phone = toCopy.getPhone();
-            this.email = toCopy.getEmail();
-            this.address = toCopy.getAddress();
+            this.description = toCopy.getPhone();
+            this.startDateTime = toCopy.getEmail();
+            this.endDateTime = toCopy.getAddress();
             this.tags = toCopy.getTags();
         }
 
@@ -112,7 +112,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.phone, this.email, this.address, this.tags);
+            return CollectionUtil.isAnyPresent(this.name, this.description, this.startDateTime, this.endDateTime, this.tags);
         }
 
         public void setName(Optional<Name> name) {
@@ -124,31 +124,31 @@ public class EditCommand extends Command {
             return name;
         }
 
-        public void setPhone(Optional<Description> phone) {
-            assert phone != null;
-            this.phone = phone;
+        public void setPhone(Optional<Description> description) {
+            assert description != null;
+            this.description = description;
         }
 
         public Optional<Description> getPhone() {
-            return phone;
+            return description;
         }
 
-        public void setEmail(Optional<StartDateTime> email) {
-            assert email != null;
-            this.email = email;
+        public void setEmail(Optional<StartDateTime> startDateTime) {
+            assert startDateTime != null;
+            this.startDateTime = startDateTime;
         }
 
         public Optional<StartDateTime> getEmail() {
-            return email;
+            return startDateTime;
         }
 
-        public void setAddress(Optional<EndDateTime> address) {
-            assert address != null;
-            this.address = address;
+        public void setAddress(Optional<EndDateTime> endDateTime) {
+            assert endDateTime != null;
+            this.endDateTime = endDateTime;
         }
 
         public Optional<EndDateTime> getAddress() {
-            return address;
+            return endDateTime;
         }
 
         public void setTags(Optional<UniqueTagList> tags) {

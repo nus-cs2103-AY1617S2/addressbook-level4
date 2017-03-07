@@ -4,6 +4,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.task.model.TaskBook;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
+import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
  *
@@ -47,7 +48,7 @@ public class TypicalTestPersons {
         for (TestPerson person : new TypicalTestPersons().getTypicalPersons()) {
             try {
                 ab.addTask(new Task(person));
-            } catch (UniqueTaskList.DuplicatePersonException e) {
+            } catch (DuplicateTaskException e) {
                 assert false : "not possible";
             }
         }

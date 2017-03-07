@@ -27,9 +27,9 @@ public class TestPerson implements ReadOnlyTask {
      */
     public TestPerson(TestPerson personToCopy) {
         this.name = personToCopy.getName();
-        this.phone = personToCopy.getPhone();
-        this.email = personToCopy.getEmail();
-        this.address = personToCopy.getAddress();
+        this.phone = personToCopy.getDescription();
+        this.email = personToCopy.getStartDateTime();
+        this.address = personToCopy.getEndDateTime();
         this.tags = personToCopy.getTags();
     }
 
@@ -59,17 +59,17 @@ public class TestPerson implements ReadOnlyTask {
     }
 
     @Override
-    public Description getPhone() {
+    public Description getDescription() {
         return phone;
     }
 
     @Override
-    public StartDateTime getEmail() {
+    public StartDateTime getStartDateTime() {
         return email;
     }
 
     @Override
-    public EndDateTime getAddress() {
+    public EndDateTime getEndDateTime() {
         return address;
     }
 
@@ -85,10 +85,10 @@ public class TestPerson implements ReadOnlyTask {
 
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
-        sb.append("add " + this.getName().fullName + " ");
-        sb.append("a/" + this.getAddress().value + " ");
-        sb.append("p/" + this.getPhone().value + " ");
-        sb.append("e/" + this.getEmail().value + " ");
+        sb.append("add " + this.getName().taskName + " ");
+        sb.append("d/" + this.getDescription().toString() + " ");
+        sb.append("s/" + this.getStartDateTime().toString() + " ");
+        sb.append("e/" + this.getEndDateTime().toString() + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }

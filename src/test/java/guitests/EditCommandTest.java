@@ -94,13 +94,13 @@ public class EditCommandTest extends AddressBookGuiTest {
         assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 p/abcd");
-        assertResultMessage(Description.MESSAGE_PHONE_CONSTRAINTS);
+        assertResultMessage(Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 e/yahoo!!!");
-        assertResultMessage(StartDateTime.MESSAGE_EMAIL_CONSTRAINTS);
+        assertResultMessage(StartDateTime.MESSAGE_START_DATETIME_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 a/");
-        assertResultMessage(EndDateTime.MESSAGE_ADDRESS_CONSTRAINTS);
+        assertResultMessage(EndDateTime.MESSAGE_END_DATETIME_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 t/*&");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
@@ -127,7 +127,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("edit " + filteredPersonListIndex + " " + detailsToEdit);
 
         // confirm the new card contains the right data
-        PersonCardHandle editedCard = personListPanel.navigateToPerson(editedPerson.getName().fullName);
+        PersonCardHandle editedCard = personListPanel.navigateToPerson(editedPerson.getName().taskName);
         assertMatching(editedPerson, editedCard);
 
         // confirm the list now contains all previous persons plus the person with updated details
