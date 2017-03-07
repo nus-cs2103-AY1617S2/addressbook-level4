@@ -50,7 +50,7 @@ public class AddCommandParser {
         if (!tokenizer.getValue(prefix).isPresent()) {
             return "";
         } else {
-            return tokenizer.getValue(PREFIX_STARTDATE).get();
+            return tokenizer.getValue(prefix).get();
         }
     }
 
