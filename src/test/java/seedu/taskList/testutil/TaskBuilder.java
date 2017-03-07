@@ -37,8 +37,8 @@ public class TaskBuilder {
         return this;
     }
 
-    public TaskBuilder withComment(String address) throws IllegalValueException {
-        this.task.setComment(new Comment(address));
+    public TaskBuilder withComment(String comment) throws IllegalValueException {
+        this.task.setComment(new Comment(comment));
         return this;
     }
 
