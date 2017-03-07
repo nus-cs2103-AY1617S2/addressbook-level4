@@ -27,7 +27,7 @@ public class AddCommand extends Command {
             + " Finish assignment p/HIGH s/INCOMPLETE n/Due 30/02/2017 t/CS1234";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the address book";
 
     private final Task toAdd;
 
