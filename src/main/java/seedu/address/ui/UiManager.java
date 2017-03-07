@@ -18,7 +18,7 @@ import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.Logic;
+import seedu.task.logic.Logic;
 import seedu.task.model.UserPrefs;
 
 /**

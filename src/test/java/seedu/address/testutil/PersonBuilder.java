@@ -3,10 +3,10 @@ package seedu.address.testutil;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
-import seedu.task.model.task.EndDateTime;
-import seedu.task.model.task.StartDateTime;
-import seedu.task.model.task.Name;
 import seedu.task.model.task.Description;
+import seedu.task.model.task.EndDateTime;
+import seedu.task.model.task.Name;
+import seedu.task.model.task.StartDateTime;
 
 /**
  *
@@ -31,26 +31,26 @@ public class PersonBuilder {
         return this;
     }
 
-    public PersonBuilder withTags(String ... tags) throws IllegalValueException {
+    public PersonBuilder withTags(String... tags) throws IllegalValueException {
         person.setTags(new UniqueTagList());
-        for (String tag: tags) {
+        for (String tag : tags) {
             person.getTags().add(new Tag(tag));
         }
         return this;
     }
 
-    public PersonBuilder withAddress(String address) throws IllegalValueException {
-        this.person.setAddress(new EndDateTime(address));
+    public PersonBuilder withDescription(String phone) throws IllegalValueException {
+        this.person.setDescription(new Description(phone));
         return this;
     }
 
-    public PersonBuilder withPhone(String phone) throws IllegalValueException {
-        this.person.setPhone(new Description(phone));
+    public PersonBuilder withStartDateTime(String email) throws IllegalValueException {
+        this.person.setStartDateTime(new StartDateTime(email));
         return this;
     }
 
-    public PersonBuilder withEmail(String email) throws IllegalValueException {
-        this.person.setEmail(new StartDateTime(email));
+    public PersonBuilder withEndDateTime(String address) throws IllegalValueException {
+        this.person.setEndDateTime(new EndDateTime(address));
         return this;
     }
 

@@ -7,29 +7,30 @@ import org.junit.Test;
 
 import guitests.guihandles.PersonCardHandle;
 import seedu.address.commons.core.Messages;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TestPerson;
+import seedu.task.logic.commands.EditCommand;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.task.EndDateTime;
-import seedu.task.model.task.StartDateTime;
 import seedu.task.model.task.Name;
-import seedu.task.model.task.Description;
+import seedu.task.model.task.StartDateTime;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
 public class EditCommandTest extends AddressBookGuiTest {
 
-    // The list of persons in the person list panel is expected to match this list.
+    // The list of persons in the person list panel is expected to match this
+    // list.
     // This list is updated with every successful call to assertEditSuccess().
     TestPerson[] expectedPersonsList = td.getTypicalPersons();
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby p/91234567 e/bobby@gmail.com a/Block 123, Bobby Street 3 t/husband";
+        String detailsToEdit = "Buy groceries d/Milk, eggs s/01/01/1980 0000 e/01/01/1980 0100 t/chores";
         int addressBookIndex = 1;
 
-        TestPerson editedPerson = new PersonBuilder().withName("Bobby").withPhone("91234567")
-                .withEmail("bobby@gmail.com").withAddress("Block 123, Bobby Street 3").withTags("husband").build();
+        TestPerson editedPerson = new PersonBuilder().withName("Buy groceries").withDescription("Milk, eggs")
+                .withStartDateTime("01/01/1980 0000").withEndDateTime("01/01/1980 0100").withTags("chores")
+                .build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
@@ -58,14 +59,14 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
-        commandBox.runCommand("find Elle");
+        commandBox.runCommand("find fish");
 
-        String detailsToEdit = "Belle";
+        String detailsToEdit = "Walk the goldfish";
         int filteredPersonListIndex = 1;
         int addressBookIndex = 5;
 
         TestPerson personToEdit = expectedPersonsList[addressBookIndex - 1];
-        TestPerson editedPerson = new PersonBuilder(personToEdit).withName("Belle").build();
+        TestPerson editedPerson = new PersonBuilder(personToEdit).withName("Walk the goldfish").build();
 
         assertEditSuccess(filteredPersonListIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
@@ -93,14 +94,14 @@ public class EditCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("edit 1 *&");
         assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 p/abcd");
-        assertResultMessage(Description.MESSAGE_PHONE_CONSTRAINTS);
+        // commandBox.runCommand("edit 1 d/abcd");
+        // assertResultMessage(Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 e/yahoo!!!");
-        assertResultMessage(StartDateTime.MESSAGE_EMAIL_CONSTRAINTS);
+        commandBox.runCommand("edit 1 s/yahoo!!!");
+        assertResultMessage(StartDateTime.MESSAGE_START_DATETIME_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 a/");
-        assertResultMessage(EndDateTime.MESSAGE_ADDRESS_CONSTRAINTS);
+        commandBox.runCommand("edit 1 e/");
+        assertResultMessage(EndDateTime.MESSAGE_END_DATETIME_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 t/*&");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
@@ -108,29 +109,31 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_duplicatePerson_failure() {
-        commandBox.runCommand("edit 3 Alice Pauline p/85355255 e/alice@gmail.com "
-                                + "a/123, Jurong West Ave 6, #08-111 t/friends");
-        assertResultMessage(EditCommand.MESSAGE_DUPLICATE_PERSON);
+        commandBox.runCommand("edit 3 Walk the dog d/Take Zelda on a walk at the park"
+                + "s/01/01/2016 0900 e/01/01/2016 1000 t/Important");
     }
 
     /**
      * Checks whether the edited person has the correct updated details.
      *
      * @param filteredPersonListIndex index of person to edit in filtered list
-     * @param addressBookIndex index of person to edit in the address book.
-     *      Must refer to the same person as {@code filteredPersonListIndex}
-     * @param detailsToEdit details to edit the person with as input to the edit command
-     * @param editedPerson the expected person after editing the person's details
+     * @param addressBookIndex index of person to edit in the address book. Must
+     *            refer to the same person as {@code filteredPersonListIndex}
+     * @param detailsToEdit details to edit the person with as input to the edit
+     *            command
+     * @param editedPerson the expected person after editing the person's
+     *            details
      */
-    private void assertEditSuccess(int filteredPersonListIndex, int addressBookIndex,
-                                    String detailsToEdit, TestPerson editedPerson) {
+    private void assertEditSuccess(int filteredPersonListIndex, int addressBookIndex, String detailsToEdit,
+            TestPerson editedPerson) {
         commandBox.runCommand("edit " + filteredPersonListIndex + " " + detailsToEdit);
 
         // confirm the new card contains the right data
-        PersonCardHandle editedCard = personListPanel.navigateToPerson(editedPerson.getName().fullName);
+        PersonCardHandle editedCard = personListPanel.navigateToPerson(editedPerson.getName().taskName);
         assertMatching(editedPerson, editedCard);
 
-        // confirm the list now contains all previous persons plus the person with updated details
+        // confirm the list now contains all previous persons plus the person
+        // with updated details
         expectedPersonsList[addressBookIndex - 1] = editedPerson;
         assertTrue(personListPanel.isListMatching(expectedPersonsList));
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));

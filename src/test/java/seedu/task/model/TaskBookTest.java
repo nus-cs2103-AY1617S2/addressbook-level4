@@ -15,11 +15,9 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.testutil.TypicalTestPersons;
-import seedu.task.model.ReadOnlyTaskBook;
-import seedu.task.model.TaskBook;
 import seedu.task.model.tag.Tag;
-import seedu.task.model.task.Task;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.Task;
 
 public class TaskBookTest {
 

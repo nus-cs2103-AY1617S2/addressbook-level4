@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.logic.parser;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -15,10 +15,10 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
-import seedu.task.model.task.EndDateTime;
-import seedu.task.model.task.StartDateTime;
-import seedu.task.model.task.Name;
 import seedu.task.model.task.Description;
+import seedu.task.model.task.EndDateTime;
+import seedu.task.model.task.Name;
+import seedu.task.model.task.StartDateTime;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes

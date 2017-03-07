@@ -14,8 +14,8 @@ import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import seedu.address.TestApp;
 import seedu.address.testutil.TestUtil;
-import seedu.task.model.task.Task;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.Task;
 
 /**
  * Provides a handle for the panel containing the person list.
@@ -91,7 +91,7 @@ public class PersonListPanelHandle extends GuiHandle {
 
         // Return false if any of the persons doesn't match
         for (int i = 0; i < persons.length; i++) {
-            if (!personsInList.get(startPosition + i).getName().fullName.equals(persons[i].getName().fullName)) {
+            if (!personsInList.get(startPosition + i).getName().taskName.equals(persons[i].getName().taskName)) {
                 return false;
             }
         }
@@ -102,7 +102,7 @@ public class PersonListPanelHandle extends GuiHandle {
     public PersonCardHandle navigateToPerson(String name) {
         guiRobot.sleep(500); //Allow a bit of time for the list to be updated
         final Optional<ReadOnlyTask> person = getListView().getItems().stream()
-                                                    .filter(p -> p.getName().fullName.equals(name))
+                                                    .filter(p -> p.getName().taskName.equals(name))
                                                     .findAny();
         if (!person.isPresent()) {
             throw new IllegalStateException("Name not found: " + name);
@@ -148,7 +148,10 @@ public class PersonListPanelHandle extends GuiHandle {
     }
 
     public PersonCardHandle getPersonCardHandle(int index) {
-        return getPersonCardHandle(new Task(getListView().getItems().get(index)));
+        Task test = new Task(getListView().getItems().get(index));
+        System.out.println(test);
+        return getPersonCardHandle(test);
+        // return getPersonCardHandle(new Task(getListView().getItems().get(index)));
     }
 
     public PersonCardHandle getPersonCardHandle(ReadOnlyTask person) {
@@ -156,6 +159,8 @@ public class PersonListPanelHandle extends GuiHandle {
         Optional<Node> personCardNode = nodes.stream()
                 .filter(n -> new PersonCardHandle(guiRobot, primaryStage, n).isSamePerson(person))
                 .findFirst();
+        System.out.println("Looking here");
+        System.out.println(personCardNode);
         if (personCardNode.isPresent()) {
             return new PersonCardHandle(guiRobot, primaryStage, personCardNode.get());
         } else {

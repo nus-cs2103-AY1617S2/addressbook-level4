@@ -33,12 +33,12 @@ import seedu.address.storage.XmlSerializableAddressBook;
 import seedu.task.model.TaskBook;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
-import seedu.task.model.task.EndDateTime;
-import seedu.task.model.task.StartDateTime;
-import seedu.task.model.task.Name;
-import seedu.task.model.task.Task;
 import seedu.task.model.task.Description;
+import seedu.task.model.task.EndDateTime;
+import seedu.task.model.task.Name;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.StartDateTime;
+import seedu.task.model.task.Task;
 
 /**
  * A utility class for test cases.
@@ -73,19 +73,37 @@ public class TestUtil {
 
     private static Task[] getSamplePersonData() {
         try {
-            //CHECKSTYLE.OFF: LineLength
-            return new Task[]{
-                new Task(new Name("Ali Muster"), new Description("9482424"), new StartDateTime("hans@google.com"), new EndDateTime("4th street"), new UniqueTagList()),
-                new Task(new Name("Boris Mueller"), new Description("87249245"), new StartDateTime("ruth@google.com"), new EndDateTime("81th street"), new UniqueTagList()),
-                new Task(new Name("Carl Kurz"), new Description("95352563"), new StartDateTime("heinz@yahoo.com"), new EndDateTime("wall street"), new UniqueTagList()),
-                new Task(new Name("Daniel Meier"), new Description("87652533"), new StartDateTime("cornelia@google.com"), new EndDateTime("10th street"), new UniqueTagList()),
-                new Task(new Name("Elle Meyer"), new Description("9482224"), new StartDateTime("werner@gmail.com"), new EndDateTime("michegan ave"), new UniqueTagList()),
-                new Task(new Name("Fiona Kunz"), new Description("9482427"), new StartDateTime("lydia@gmail.com"), new EndDateTime("little tokyo"), new UniqueTagList()),
-                new Task(new Name("George Best"), new Description("9482442"), new StartDateTime("anna@google.com"), new EndDateTime("4th street"), new UniqueTagList()),
-                new Task(new Name("Hoon Meier"), new Description("8482424"), new StartDateTime("stefan@mail.com"), new EndDateTime("little india"), new UniqueTagList()),
-                new Task(new Name("Ida Mueller"), new Description("8482131"), new StartDateTime("hans@google.com"), new EndDateTime("chicago ave"), new UniqueTagList())
-            };
-            //CHECKSTYLE.ON: LineLength
+            // CHECKSTYLE.OFF: LineLength
+            return new Task[] {
+                new Task(new Name("Walk the dog"), new Description("Take Zelda on a walk at the park"),
+                        new StartDateTime("01/01/2016 0900"), new EndDateTime("01/01/2016 1000"),
+                        new UniqueTagList()),
+                new Task(new Name("Walk the cat"), new Description("Take Zelda on a walk at the park"),
+                        new StartDateTime("01/01/2016 0900"), new EndDateTime("01/01/2016 1000"),
+                        new UniqueTagList()),
+                new Task(new Name("Walk the cow"), new Description("Take Zelda on a walk at the park"),
+                        new StartDateTime("01/01/2016 0900"), new EndDateTime("01/01/2016 1000"),
+                        new UniqueTagList()),
+                new Task(new Name("Walk the wolf"), new Description("Take Zelda on a walk at the park"),
+                        new StartDateTime("01/01/2016 0900"), new EndDateTime("01/01/2016 1000"),
+                        new UniqueTagList()),
+                new Task(new Name("Walk the fish"), new Description("Take Zelda on a walk at the park"),
+                        new StartDateTime("01/01/2016 0900"), new EndDateTime("01/01/2016 1000"),
+                        new UniqueTagList()),
+                new Task(new Name("Walk the lion"), new Description("Take Zelda on a walk at the park"),
+                        new StartDateTime("01/01/2016 0900"), new EndDateTime("01/01/2016 1000"),
+                        new UniqueTagList()),
+                new Task(new Name("Walk the elephant"),
+                        new Description("Take Zelda on a walk at the park"),
+                        new StartDateTime("01/01/2016 0900"), new EndDateTime("01/01/2016 1000"),
+                        new UniqueTagList()),
+                new Task(new Name("Walk the tiger"), new Description("Take Zelda on a walk at the park"),
+                        new StartDateTime("01/01/2016 0900"), new EndDateTime("01/01/2016 1000"),
+                        new UniqueTagList()),
+                new Task(new Name("Walk the zebra"), new Description("Take Zelda on a walk at the park"),
+                        new StartDateTime("01/01/2016 0900"), new EndDateTime("01/01/2016 1000"),
+                        new UniqueTagList()) };
+            // CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
             assert false;
             // not possible
@@ -93,17 +111,13 @@ public class TestUtil {
         }
     }
 
-
     private static Tag[] getSampleTagData() {
         try {
-            return new Tag[]{
-                new Tag("relatives"),
-                new Tag("friends")
-            };
+            return new Tag[] { new Tag("relatives"), new Tag("friends") };
         } catch (IllegalValueException e) {
             assert false;
             return null;
-            //not possible
+            // not possible
         }
     }
 
@@ -112,8 +126,9 @@ public class TestUtil {
     }
 
     /**
-     * Appends the file name to the sandbox folder path.
-     * Creates the sandbox folder if it doesn't exist.
+     * Appends the file name to the sandbox folder path. Creates the sandbox
+     * folder if it doesn't exist.
+     *
      * @param fileName
      * @return
      */
@@ -149,8 +164,8 @@ public class TestUtil {
     }
 
     /**
-     * Tweaks the {@code keyCodeCombination} to resolve the {@code KeyCode.SHORTCUT} to their
-     * respective platform-specific keycodes
+     * Tweaks the {@code keyCodeCombination} to resolve the
+     * {@code KeyCode.SHORTCUT} to their respective platform-specific keycodes
      */
     public static KeyCode[] scrub(KeyCodeCombination keyCodeCombination) {
         List<KeyCode> keys = new ArrayList<>();
@@ -167,7 +182,7 @@ public class TestUtil {
             keys.add(KeyCode.CONTROL);
         }
         keys.add(keyCodeCombination.getCode());
-        return keys.toArray(new KeyCode[]{});
+        return keys.toArray(new KeyCode[] {});
     }
 
     public static boolean isHeadlessEnvironment() {
@@ -185,19 +200,18 @@ public class TestUtil {
     }
 
     public static String descOnFail(Object... comparedObjects) {
-        return "Comparison failed \n"
-                + Arrays.asList(comparedObjects).stream()
-                .map(Object::toString)
+        return "Comparison failed \n" + Arrays.asList(comparedObjects).stream().map(Object::toString)
                 .collect(Collectors.joining("\n"));
     }
 
-    public static void setFinalStatic(Field field, Object newValue) throws NoSuchFieldException,
-                                                                           IllegalAccessException {
+    public static void setFinalStatic(Field field, Object newValue)
+            throws NoSuchFieldException, IllegalAccessException {
         field.setAccessible(true);
         // remove final modifier from field
         Field modifiersField = Field.class.getDeclaredField("modifiers");
         modifiersField.setAccessible(true);
-        // ~Modifier.FINAL is used to remove the final modifier from field so that its value is no longer
+        // ~Modifier.FINAL is used to remove the final modifier from field so
+        // that its value is no longer
         // final and can be changed
         modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
         field.set(null, newValue);
@@ -213,12 +227,14 @@ public class TestUtil {
     }
 
     /**
-     * Gets private method of a class
-     * Invoke the method using method.invoke(objectInstance, params...)
+     * Gets private method of a class Invoke the method using
+     * method.invoke(objectInstance, params...)
      *
-     * Caveat: only find method declared in the current Class, not inherited from supertypes
+     * Caveat: only find method declared in the current Class, not inherited
+     * from supertypes
      */
-    public static Method getPrivateMethod(Class<?> objectClass, String methodName) throws NoSuchMethodException {
+    public static Method getPrivateMethod(Class<?> objectClass, String methodName)
+            throws NoSuchMethodException {
         Method method = objectClass.getDeclaredMethod(methodName);
         method.setAccessible(true);
         return method;
@@ -234,6 +250,7 @@ public class TestUtil {
 
     /**
      * Gets mid point of a node relative to the screen.
+     *
      * @param node
      * @return
      */
@@ -245,6 +262,7 @@ public class TestUtil {
 
     /**
      * Gets mid point of a node relative to its scene.
+     *
      * @param node
      * @return
      */
@@ -256,6 +274,7 @@ public class TestUtil {
 
     /**
      * Gets the bound of the node relative to the parent scene.
+     *
      * @param node
      * @return
      */
@@ -281,28 +300,33 @@ public class TestUtil {
 
     /**
      * Removes a subset from the list of persons.
+     *
      * @param persons The list of persons
      * @param personsToRemove The subset of persons.
      * @return The modified persons after removal of the subset from persons.
      */
-    public static TestPerson[] removePersonsFromList(final TestPerson[] persons, TestPerson... personsToRemove) {
+    public static TestPerson[] removePersonsFromList(final TestPerson[] persons,
+            TestPerson... personsToRemove) {
         List<TestPerson> listOfPersons = asList(persons);
         listOfPersons.removeAll(asList(personsToRemove));
         return listOfPersons.toArray(new TestPerson[listOfPersons.size()]);
     }
 
-
     /**
      * Returns a copy of the list with the person at specified index removed.
+     *
      * @param list original list to copy from
-     * @param targetIndexInOneIndexedFormat e.g. index 1 if the first element is to be removed
+     * @param targetIndexInOneIndexedFormat e.g. index 1 if the first element is
+     *            to be removed
      */
-    public static TestPerson[] removePersonFromList(final TestPerson[] list, int targetIndexInOneIndexedFormat) {
+    public static TestPerson[] removePersonFromList(final TestPerson[] list,
+            int targetIndexInOneIndexedFormat) {
         return removePersonsFromList(list, list[targetIndexInOneIndexedFormat - 1]);
     }
 
     /**
      * Replaces persons[i] with a person.
+     *
      * @param persons The array of persons.
      * @param person The replacement person
      * @param index The index of the person to be replaced.
@@ -315,8 +339,10 @@ public class TestUtil {
 
     /**
      * Appends persons to the array of persons.
+     *
      * @param persons A array of persons.
-     * @param personsToAdd The persons that are to be appended behind the original array.
+     * @param personsToAdd The persons that are to be appended behind the
+     *            original array.
      * @return The modified array of persons.
      */
     public static TestPerson[] addPersonsToList(final TestPerson[] persons, TestPerson... personsToAdd) {
@@ -339,7 +365,7 @@ public class TestUtil {
 
     public static Tag[] getTagList(String tags) {
         if ("".equals(tags)) {
-            return new Tag[]{};
+            return new Tag[] {};
         }
 
         final String[] split = tags.split(", ");
@@ -348,7 +374,7 @@ public class TestUtil {
             try {
                 return new Tag(e.replaceFirst("Tag: ", ""));
             } catch (IllegalValueException e1) {
-                //not possible
+                // not possible
                 assert false;
                 return null;
             }

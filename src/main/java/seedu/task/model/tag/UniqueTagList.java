@@ -167,6 +167,11 @@ public class UniqueTagList implements Iterable<Tag> {
      * Signals that an operation would have violated the 'no duplicates' property of the list.
      */
     public static class DuplicateTagException extends DuplicateDataException {
+        /**
+         *
+         */
+        private static final long serialVersionUID = 1L;
+
         protected DuplicateTagException() {
             super("Operation would result in duplicate tags");
         }

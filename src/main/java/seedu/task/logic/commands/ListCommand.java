@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.task.logic.commands;
 
 
 /**
@@ -8,7 +8,7 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_SUCCESS = "Listed all persons";
+    public static final String MESSAGE_SUCCESS = "Listed all tasks";
 
 
     @Override

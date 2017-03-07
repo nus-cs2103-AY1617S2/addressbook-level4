@@ -3,12 +3,13 @@ package seedu.task.model.task;
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task description in the task book.
- * Guarantees: immutable; is valid as declared in {@link #isValidDescription(String)}
+ * Represents a Task description in the task book. Guarantees: immutable; is
+ * valid as declared in {@link #isValidDescription(String)}
  */
 public class Description {
 
-    public static final String MESSAGE_DESCRIPTION_CONSTRAINTS = "Description can be empty and can contain any chracters";
+    public static final String MESSAGE_DESCRIPTION_CONSTRAINTS = "Description can be empty and "
+            + "can contain any characters";
     public static final String DESCRIPTION_VALIDATION_REGEX = ".*";
 
     public final String value;
@@ -43,7 +44,8 @@ public class Description {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Description // instanceof handles nulls
-                && this.value.equals(((Description) other).value)); // state check
+                        && this.value.equals(((Description) other).value)); // state
+                                                                            // check
     }
 
     @Override

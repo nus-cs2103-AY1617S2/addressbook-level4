@@ -53,19 +53,12 @@ public class PersonCardHandle extends GuiHandle {
     }
 
     private List<String> getTags(Region tagsContainer) {
-        return tagsContainer
-                .getChildrenUnmodifiable()
-                .stream()
-                .map(node -> ((Labeled) node).getText())
+        return tagsContainer.getChildrenUnmodifiable().stream().map(node -> ((Labeled) node).getText())
                 .collect(Collectors.toList());
     }
 
     private List<String> getTags(UniqueTagList tags) {
-        return tags
-                .asObservableList()
-                .stream()
-                .map(tag -> tag.tagName)
-                .collect(Collectors.toList());
+        return tags.asObservableList().stream().map(tag -> tag.tagName).collect(Collectors.toList());
     }
 
     private Region getTagsContainer() {
@@ -73,10 +66,10 @@ public class PersonCardHandle extends GuiHandle {
     }
 
     public boolean isSamePerson(ReadOnlyTask person) {
-        return getFullName().equals(person.getName().fullName)
-                && getPhone().equals(person.getPhone().value)
-                && getEmail().equals(person.getEmail().value)
-                && getAddress().equals(person.getAddress().value)
+        return getFullName().equals(person.getName().taskName)
+                && getPhone().equals(person.getDescription().toString())
+                && getEmail().equals(person.getEndDateTime().toString())
+                && getAddress().equals(person.getStartDateTime().toString())
                 && getTags().equals(getTags(person.getTags()));
     }
 
@@ -84,10 +77,8 @@ public class PersonCardHandle extends GuiHandle {
     public boolean equals(Object obj) {
         if (obj instanceof PersonCardHandle) {
             PersonCardHandle handle = (PersonCardHandle) obj;
-            return getFullName().equals(handle.getFullName())
-                    && getPhone().equals(handle.getPhone())
-                    && getEmail().equals(handle.getEmail())
-                    && getAddress().equals(handle.getAddress())
+            return getFullName().equals(handle.getFullName()) && getPhone().equals(handle.getPhone())
+                    && getEmail().equals(handle.getEmail()) && getAddress().equals(handle.getAddress())
                     && getTags().equals(handle.getTags());
         }
         return super.equals(obj);

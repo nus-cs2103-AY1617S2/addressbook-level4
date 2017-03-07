@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.logic.parser;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -168,11 +168,11 @@ public class ArgumentTokenizer {
     public static class Prefix {
         final String prefix;
 
-        Prefix(String prefix) {
+        public Prefix(String prefix) {
             this.prefix = prefix;
         }
 
-        String getPrefix() {
+        public String getPrefix() {
             return this.prefix;
         }
 

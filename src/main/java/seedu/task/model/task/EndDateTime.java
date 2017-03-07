@@ -1,6 +1,5 @@
 package seedu.task.model.task;
 
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -8,13 +7,13 @@ import java.util.Date;
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task End DateTime in the task book.
- * Guarantees: immutable; is valid as declared in {@link #isValidDateTime(String)}
+ * Represents a Task End DateTime in the task book. Guarantees: immutable; is
+ * valid as declared in {@link #isValidDateTime(String)}
  */
 public class EndDateTime {
 
-    public static final String MESSAGE_END_DATETIME_CONSTRAINTS =
-            "End Date/Time must be in the format of DD/MM/YYYY HHMM, where time is represented in 24 hours";
+    public static final String MESSAGE_END_DATETIME_CONSTRAINTS = "End Date/Time must be in the format of "
+            + "DD/MM/YYYY HHMM, where time is represented in 24 hours";
     public static final SimpleDateFormat END_DATETIME_FORMATTER = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
     public final Date value;
@@ -28,9 +27,9 @@ public class EndDateTime {
         assert endDateTime != null;
         String trimmedendDateTime = endDateTime.trim();
         try {
-        	this.value = END_DATETIME_FORMATTER.parse(trimmedendDateTime);
+            this.value = END_DATETIME_FORMATTER.parse(trimmedendDateTime);
         } catch (ParseException e) {
-        	throw new IllegalValueException(MESSAGE_END_DATETIME_CONSTRAINTS);
+            throw new IllegalValueException(MESSAGE_END_DATETIME_CONSTRAINTS);
         }
     }
 
@@ -38,25 +37,26 @@ public class EndDateTime {
      * Returns if a given string is a valid end datetime.
      */
     public static boolean isValidEndDateTime(String test) {
-    	END_DATETIME_FORMATTER.setLenient(false);
+        END_DATETIME_FORMATTER.setLenient(false);
         try {
-        	END_DATETIME_FORMATTER.parse(test);
-        } catch(ParseException e) {
-        	return false;
+            END_DATETIME_FORMATTER.parse(test);
+        } catch (ParseException e) {
+            return false;
         }
         return true;
     }
 
     @Override
     public String toString() {
-        return value.toString();
+        return END_DATETIME_FORMATTER.format(value);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof EndDateTime // instanceof handles nulls
-                && this.value.equals(((EndDateTime) other).value)); // state check
+                        && this.value.equals(((EndDateTime) other).value)); // state
+                                                                            // check
     }
 
     @Override

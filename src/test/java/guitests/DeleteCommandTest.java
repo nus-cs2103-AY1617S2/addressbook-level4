@@ -1,7 +1,7 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS;
+import static seedu.task.logic.commands.DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS;
 
 import org.junit.Test;
 
@@ -30,7 +30,7 @@ public class DeleteCommandTest extends AddressBookGuiTest {
 
         //invalid index
         commandBox.runCommand("delete " + currentList.length + 1);
-        assertResultMessage("The person index provided is invalid");
+        assertResultMessage("The task index provided is invalid");
 
     }
 
