@@ -6,12 +6,14 @@ import java.util.Optional;
 import seedu.taskmanager.commons.core.Messages;
 import seedu.taskmanager.commons.util.CollectionUtil;
 // import seedu.taskmanager.model.person.Address;
-import seedu.taskmanager.model.person.Date;
-import seedu.taskmanager.model.person.TaskName;
-import seedu.taskmanager.model.person.Task;
-import seedu.taskmanager.model.person.Time;
-import seedu.taskmanager.model.person.ReadOnlyTask;
-import seedu.taskmanager.model.person.UniqueTaskList;
+import seedu.taskmanager.model.task.Date;
+import seedu.taskmanager.model.task.TaskName;
+import seedu.taskmanager.model.task.Task;
+import seedu.taskmanager.model.task.Time;
+// import seedu.taskmanager.model.task.EndTime;
+// import seedu.taskmanager.model.task.Deadline;
+import seedu.taskmanager.model.task.ReadOnlyTask;
+import seedu.taskmanager.model.task.UniqueTaskList;
 // import seedu.taskmanager.model.tag.UniqueTagList;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
 
@@ -80,10 +82,12 @@ public class EditCommand extends Command {
         TaskName updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
         Time updatedTime = editTaskDescriptor.getTime().orElseGet(taskToEdit::getTime);
         Date updatedDate = editTaskDescriptor.getDate().orElseGet(taskToEdit::getDate);
+        EndTime updatedEndTime = editTaskDescriptor.getEndTime().orElseGet(taskToEdit::getEndTime);
+        Deadline updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(taskToEdit::getDeadline);
 //        Address updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
 //        UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
-        return new Task(updatedName, updatedTime, updatedDate /*, updatedAddress, updatedTags*/);
+        return new Task(updatedName, updatedTime, updatedDate, updatedEndTime, updatedDeadline/*, updatedAddress, updatedTags*/);
     }
 
     /**
@@ -94,6 +98,8 @@ public class EditCommand extends Command {
         private Optional<TaskName> taskname = Optional.empty();
         private Optional<Time> time = Optional.empty();
         private Optional<Date> date = Optional.empty();
+        private Optional<EndTime> endtime = Optional.empty();
+        private Optional<Deadline> deadline = Optional<T>.empty();
  //       private Optional<Address> address = Optional.empty();
  //       private Optional<UniqueTagList> tags = Optional.empty();
 
@@ -103,6 +109,8 @@ public class EditCommand extends Command {
             this.taskname = toCopy.getTaskName();
             this.time = toCopy.getTime();
             this.date = toCopy.getDate();
+            this.endtime = toCopy.getEndTime();
+            this.deadline = toCopy.getDeadline);
  //           this.address = toCopy.getAddress();
  //           this.tags = toCopy.getTags();
         }
@@ -111,7 +119,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.taskname, this.time, this.date /*, this.address, this.tags*/);
+            return CollectionUtil.isAnyPresent(this.taskname, this.time, this.date,
+            		                           this.endtime, this.deadline /*, this.address, this.tags*/);
         }
 
         public void setTaskName(Optional<TaskName> taskname) {
@@ -139,6 +148,24 @@ public class EditCommand extends Command {
 
         public Optional<Date> getDate() {
             return date;
+        }
+        
+        public void setEndTime(Optional<EndTime> endtime) {
+        	assert endtime != null;
+        	this.endtime = endtime;
+        }
+        
+        public Optional<EndTime> getEndTime() {
+        	return endtime;
+        }
+        
+        public void setDeadline(Optional<Deadline> deadline) {
+        	assert deadline != null;
+        	this.deadline = deadline;
+        }
+        
+        public Optional<Deadline> getDeadline() {
+        	return deadline;
         }
 
 /*        public void setAddress(Optional<Address> address) {

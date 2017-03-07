@@ -1,10 +1,12 @@
 package seedu.taskmanager.logic.parser;
 
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_TAG;
+// import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_TIME;
+import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_ENDTIME;
+// import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -12,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
-import seedu.taskmanager.model.tag.UniqueTagList;
+// import seedu.taskmanager.model.tag.UniqueTagList;
 import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.EditCommand;
 import seedu.taskmanager.logic.commands.IncorrectCommand;
@@ -30,7 +32,7 @@ public class EditCommandParser {
     public Command parse(String args) {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_TIME, PREFIX_DATE /*, PREFIX_ADDRESS, PREFIX_TAG*/);
+                new ArgumentTokenizer(PREFIX_TIME, PREFIX_DATE, PREFIX_DEADLINE, PREFIX_ENDTIME/*, PREFIX_ADDRESS, PREFIX_TAG*/);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
@@ -44,6 +46,8 @@ public class EditCommandParser {
             editTaskDescriptor.setTaskName(ParserUtil.parseTaskName(preambleFields.get(1)));
             editTaskDescriptor.setTime(ParserUtil.parseTime(argsTokenizer.getValue(PREFIX_TIME)));
             editTaskDescriptor.setDate(ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_DATE)));
+            editTaskDescriptor.setEndTime(ParserUtil.parseEndTime(argsTokenizer.getValue(PREFIX_ENDTIME))));
+            editTaskDescriptor.setDeadline(ParserUtil.parseDeadline(argsTokenizer.getValue(PREFIX_DEADLINE)));
  //           editTaskDescriptor.setAddress(ParserUtil.parseAddress(argsTokenizer.getValue(PREFIX_ADDRESS)));
  //           editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
         } catch (IllegalValueException ive) {

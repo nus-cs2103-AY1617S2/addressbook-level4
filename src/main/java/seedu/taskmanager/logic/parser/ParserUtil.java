@@ -81,6 +81,31 @@ public class ParserUtil {
         assert time != null;
         return time.isPresent() ? Optional.of(new Time(time.get())) : Optional.empty();
     }
+    
+    /**
+     * Parses a {@code Optional<String> date} into an {@code Optional<Date>} if {@code date} is present.
+     */
+    public static Optional<Date> parseDate(Optional<String> date) throws IllegalValueException {
+        assert date != null;
+        return date.isPresent() ? Optional.of(new Date(date.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code Optional<String> endtime} into an {@code Optional<EndTime>} if {@code endtime} is present.
+     */
+    public static Optional<EndTime> parseEndTime(Optional<String> endtime) throws IllegalValueException {
+    	assert endtime != null;
+    	return endtime.isPresent() ? Optional.of(new EndTime(endtime.get())) : Optional.empty();
+    }
+    
+    
+    /**
+     * Parses a {@code Optional<String> deadline} into an {@code Optional<Deadline>} if {@code deadline} is present.
+     */
+    public static Optional<Deadline> parseDeadline(Optional<String> deadline) throws IllegalValueException {
+    	assert deadline != null;
+    	return deadline.isPresent() ? Optional.of(new Deadline(endtime.get())) : Optinal.empty();
+    }
 
     /**
      * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.
@@ -90,13 +115,6 @@ public class ParserUtil {
         return address.isPresent() ? Optional.of(new Address(address.get())) : Optional.empty();
     } */
 
-    /**
-     * Parses a {@code Optional<String> date} into an {@code Optional<Date>} if {@code date} is present.
-     */
-    public static Optional<Date> parseDate(Optional<String> date) throws IllegalValueException {
-        assert date != null;
-        return date.isPresent() ? Optional.of(new Date(date.get())) : Optional.empty();
-    }
 
     /**
      * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.
