@@ -19,7 +19,7 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /** Deletes the given person. */
-    void deletePerson(ReadOnlyTask target) throws UniquePersonList.PersonNotFoundException;
+    void deleteTask(ReadOnlyTask target) throws UniquePersonList.PersonNotFoundException;
 
     /** Adds the given person */
     void addPerson(Task person) throws UniquePersonList.DuplicatePersonException;
