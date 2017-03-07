@@ -17,7 +17,6 @@ public class InformationTest {
         assertTrue(Information.isValidInformation("Blk 456, Den Road, #01-355"));
         assertTrue(Information.isValidInformation("-")); // one character
         assertTrue(Information.isValidInformation("Leng Inc; 1234 Market St;"
-                + " San Francisco CA 2349879; USA")); // long
-                                                                                                                    // information
+                + " San Francisco CA 2349879; USA")); // long information
     }
 }
