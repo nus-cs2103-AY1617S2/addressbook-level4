@@ -196,7 +196,7 @@ public class LogicManagerTest {
     public void execute_add_invalidTaskData() {
         assertCommandFailure("add []\\[;] c/valid, address",
                 Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
+        assertCommandFailure("add Valid Name c/valid, t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
@@ -236,7 +236,7 @@ public class LogicManagerTest {
     public void execute_list_showsAllTasks() throws Exception {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
-        TaskList expectedAB = helper.generateTaskList(2);
+        TaskList expectedAB = helper.generateTaskManager(2);
         List<? extends ReadOnlyTask> expectedList = expectedAB.getTaskList();
 
         // prepare address book state
@@ -300,7 +300,7 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
 
-        TaskList expectedAB = helper.generateTaskList(threeTasks);
+        TaskList expectedAB = helper.generateTaskManager(threeTasks);
         helper.addToModel(model, threeTasks);
 
         assertCommandSuccess("select 2",
@@ -328,7 +328,7 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
 
-        TaskList expectedAB = helper.generateTaskList(threeTasks);
+        TaskList expectedAB = helper.generateTaskManager(threeTasks);
         expectedAB.removeTask(threeTasks.get(1));
         helper.addToModel(model, threeTasks);
 
@@ -354,7 +354,7 @@ public class LogicManagerTest {
         Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(p1, pTarget1, p2, pTarget2);
-        TaskList expectedAB = helper.generateTaskList(fourTasks);
+        TaskList expectedAB = helper.generateTaskManager(fourTasks);
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2);
         helper.addToModel(model, fourTasks);
 
@@ -373,7 +373,7 @@ public class LogicManagerTest {
         Task p4 = helper.generateTaskWithName("KEy sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(p3, p1, p4, p2);
-        TaskList expectedAB = helper.generateTaskList(fourTasks);
+        TaskList expectedAB = helper.generateTaskManager(fourTasks);
         List<Task> expectedList = fourTasks;
         helper.addToModel(model, fourTasks);
 
@@ -392,7 +392,7 @@ public class LogicManagerTest {
         Task p1 = helper.generateTaskWithName("sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(pTarget1, p1, pTarget2, pTarget3);
-        TaskList expectedAB = helper.generateTaskList(fourTasks);
+        TaskList expectedAB = helper.generateTaskManager(fourTasks);
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
         helper.addToModel(model, fourTasks);
 
@@ -409,8 +409,8 @@ public class LogicManagerTest {
     class TestDataHelper {
 
         Task adam() throws Exception {
-            Name name = new Name("Adam Brown");
-            Comment privateComment = new Comment("111, alpha street");
+            Name name = new Name("Event");
+            Comment privateComment = new Comment("urgent");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
@@ -439,7 +439,7 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getName().toString());
-            cmd.append(" a/").append(p.getComment());
+            cmd.append(" c/").append(p.getComment());
 
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {
@@ -452,7 +452,7 @@ public class LogicManagerTest {
         /**
          * Generates an TaskList with auto-generated tasks.
          */
-        TaskList generateTaskList(int numGenerated) throws Exception {
+        TaskList generateTaskManager(int numGenerated) throws Exception {
             TaskList taskList = new TaskList();
             addToTaskList(taskList, numGenerated);
             return taskList;
@@ -461,7 +461,7 @@ public class LogicManagerTest {
         /**
          * Generates an TaskList based on the list of Tasks given.
          */
-        TaskList generateTaskList(List<Task> tasks) throws Exception {
+        TaskList generateTaskManager(List<Task> tasks) throws Exception {
             TaskList taskList = new TaskList();
             addToTaskList(taskList, tasks);
             return taskList;
