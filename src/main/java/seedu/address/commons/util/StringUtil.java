@@ -31,8 +31,8 @@ public class StringUtil {
         //String preppedSentence = sentence;
         //String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
 
-       // for (String stringQuery: wordsInPreppedSentence) {
-            if (sentence.toLowerCase().contains(preppedWord.toLowerCase())) return true;
+        //for (String stringQuery: wordsInPreppedSentence) {
+        if (sentence.toLowerCase().contains(preppedWord.toLowerCase())) return true;
         //}
         return false;
     }
