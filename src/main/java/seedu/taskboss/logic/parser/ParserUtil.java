@@ -16,7 +16,6 @@ import seedu.taskboss.commons.util.StringUtil;
 import seedu.taskboss.model.category.Tag;
 import seedu.taskboss.model.category.UniqueTagList;
 import seedu.taskboss.model.task.Address;
-import seedu.taskboss.model.task.Email;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.Phone;
 
@@ -88,14 +87,6 @@ public class ParserUtil {
     public static Optional<Address> parseAddress(Optional<String> address) throws IllegalValueException {
         assert address != null;
         return address.isPresent() ? Optional.of(new Address(address.get())) : Optional.empty();
-    }
-
-    /**
-     * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
-     */
-    public static Optional<Email> parseEmail(Optional<String> email) throws IllegalValueException {
-        assert email != null;
-        return email.isPresent() ? Optional.of(new Email(email.get())) : Optional.empty();
     }
 
     /**
