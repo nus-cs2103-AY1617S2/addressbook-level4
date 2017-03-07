@@ -56,7 +56,6 @@ public class AddCommand extends Command {
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         } 
-
     }
 
 }

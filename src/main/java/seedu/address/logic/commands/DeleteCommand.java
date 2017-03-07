@@ -10,7 +10,6 @@ import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
  * Deletes a task identified using its last displayed index from the task manager.
  */
 public class DeleteCommand extends Command {
-
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -29,7 +28,6 @@ public class DeleteCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-    	
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (lastShownList.size() < targetIndex) {
@@ -45,5 +43,4 @@ public class DeleteCommand extends Command {
 
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
     }
-
 }

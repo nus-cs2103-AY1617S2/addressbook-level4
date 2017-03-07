@@ -21,7 +21,6 @@ import seedu.address.model.task.UniqueTaskList;
  * Duplicates are not allowed (by .equals comparison)
  */
 public class TaskManager implements ReadOnlyTaskManager {
-	
 	private final UniqueTaskList tasks;
     private final UniqueTagList tags;
 
