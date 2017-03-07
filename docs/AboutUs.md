@@ -19,7 +19,7 @@ Responsibilities: Testing + Storage + Documentation
 -----
 
 #### [Jeremy Heng](http://github.com/nnamon)
-<img src="images/nnamon.jpeg" width="150"><br>
+<img src="images/nnamon.png" width="150"><br>
 Role: Developer <br>
 Responsibilities:  Integration + Git expert + Parser & Logic
 
