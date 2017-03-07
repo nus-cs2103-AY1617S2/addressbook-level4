@@ -1,8 +1,14 @@
 package seedu.toluist.model;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+<<<<<<< HEAD
 import java.util.TreeSet;
+=======
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+>>>>>>> master
 
 import seedu.toluist.storage.JsonStorage;
 import seedu.toluist.storage.Storage;
@@ -59,27 +65,13 @@ public class TodoList {
         }
     }
 
-    public TreeSet<Task> getTasksWhosDescriptionContains(String comparison) {
-        TreeSet<Task> foundList = new TreeSet<Task>();
-
-        for (Task task : allTasks) {
-            if (task.isStringContainedInDescriptionIgnoreCase(comparison)) {
-                foundList.add(task);
-            }
-        }
-
-        return foundList;
-    }
-
-    public TreeSet<Task> getTasksWhosTagsContains(String comparison) {
-        TreeSet<Task> foundList = new TreeSet<Task>();
-
-        for (Task task : allTasks) {
-            if (task.isStringContainedInAnyTagIgnoreCase(comparison)) {
-                foundList.add(task);
-            }
-        }
-
-        return foundList;
+    /**
+     * Returns list of tasks based on predicate
+     * @param predicate
+     * @return a list of task
+     */
+    public ArrayList<Task> filter(Predicate<Task> predicate) {
+        List<Task> taskList = getTasks().stream().filter(predicate).collect(Collectors.toList());
+        return new ArrayList<>(taskList);
     }
 }

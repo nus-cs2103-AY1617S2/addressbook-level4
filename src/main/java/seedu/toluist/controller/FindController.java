@@ -2,14 +2,22 @@ package seedu.toluist.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+<<<<<<< HEAD
 import java.util.TreeSet;
 import java.util.logging.Logger;
 
 import seedu.toluist.commons.core.LogsCenter;
+=======
+import java.util.function.Predicate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+>>>>>>> master
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.Ui;
+<<<<<<< HEAD
 
 /**
  * Searches the task list for matches in the parameters, and displays the results received
@@ -17,6 +25,9 @@ import seedu.toluist.ui.Ui;
 public class FindController extends Controller {
     private static final String COMMAND_TEMPLATE = "^(?<command>(find|filter|list))"
             + "(\\s+(?<keywords>.+))?\\s*";
+    private static final String COMMAND_FIND_WORD = "find";
+    private static final String COMMAND_FILTER_WORD = "filter";
+    private static final String COMMAND_LIST_WORD = "list";
 
     private static final String TAG_PARAMETER = "tag/";
     private static final String NAME_PARAMETER = "name/";
@@ -42,13 +53,13 @@ public class FindController extends Controller {
     public CommandResult execute(String command) {
         logger.info(getClass() + "will handle command");
 
-        //initialize keywords and variables for searching
+        // initialize keywords and variables for searching
         HashMap<String, String> tokens = tokenize(command);
         boolean isSearchByTag = tokens.get(TAG_PARAMETER).equals(TRUE_PARAMETER);
         boolean isSearchByName = tokens.get(NAME_PARAMETER).equals(TRUE_PARAMETER);
         String[] keywordList = convertToArray(tokens.get(KEYWORDS_PARAMETER));
 
-        //initialize search parameters and variables
+        // initialize search parameters and variables
         TreeSet<Task> foundTasks = new TreeSet<Task>();
         TodoList todoList = TodoList.load();
 
@@ -139,5 +150,9 @@ public class FindController extends Controller {
     @Override
     public boolean matchesCommand(String command) {
         return command.matches(COMMAND_TEMPLATE);
+    }
+
+    public static String[] getCommandWords() {
+        return new String[] { COMMAND_FILTER_WORD, COMMAND_FIND_WORD, COMMAND_LIST_WORD };
     }
 }
