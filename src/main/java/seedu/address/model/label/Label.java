@@ -46,6 +46,13 @@ public class Label {
     public int hashCode() {
         return labelName.hashCode();
     }
+    
+    /**
+     * Returns labelName in String
+     */
+    public String getLabelName() {
+        return labelName;
+    }
 
     /**
      * Format state as text for viewing.
