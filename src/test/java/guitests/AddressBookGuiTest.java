@@ -87,9 +87,9 @@ public abstract class AddressBookGuiTest {
      * Return null to use the data in the file specified in {@link #getDataFileLocation()}
      */
     protected TaskManager getInitialData() {
-        TaskManager ab = new TaskManager();
-        TypicalTestPersons.loadAddressBookWithSampleData(ab);
-        return ab;
+        TaskManager taskManager = new TaskManager();
+        TypicalTestPersons.loadAddressBookWithSampleData(taskManager);
+        return taskManager;
     }
 
     /**
