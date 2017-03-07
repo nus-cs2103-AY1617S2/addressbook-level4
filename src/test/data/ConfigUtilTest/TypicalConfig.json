@@ -2,6 +2,6 @@
   "appTitle" : "Typical App Title",
   "logLevel" : "INFO",
   "userPrefsFilePath" : "C:\\preferences.json",
-  "addressBookFilePath" : "addressbook.xml",
-  "addressBookName" : "TypicalAddressBookName"
+  "ezDoFilePath" : "data/ezDo.xml",
+  "ezDoName" : "ezDo"
 }
