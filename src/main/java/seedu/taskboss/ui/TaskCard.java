@@ -20,7 +20,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label address;
+    private Label information;
     @FXML
     private Label email;
     @FXML
@@ -31,7 +31,7 @@ public class TaskCard extends UiPart<Region> {
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
         phone.setText(task.getPhone().value);
-        address.setText(task.getAddress().value);
+        information.setText(task.getInformation().value);
         email.setText(task.getEmail().value);
         initTags(task);
     }
