@@ -25,7 +25,7 @@ public class EditCommand extends Command {
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) [NAME] [p/PRIORITY_LEVEL]"
-            + " [i/INFORMATION ] [t/CATEGORY]...\n"
+            + " [i/INFORMATION ] [c/CATEGORY]...\n"
             + "Example: " + COMMAND_WORD + " 1 p/1";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";

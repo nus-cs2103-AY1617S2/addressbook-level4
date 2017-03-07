@@ -211,7 +211,7 @@ public class LogicManagerTest {
                 Name.MESSAGE_NAME_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/not_numbers i/valid, information",
                 PriorityLevel.MESSAGE_PRIORITY_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/1 i/valid, information t/invalid_-[.category",
+        assertCommandFailure("add Valid Name p/1 i/valid, information c/invalid_-[.category",
                 Category.MESSAGE_CATEGORY_CONSTRAINTS);
 
     }
@@ -455,7 +455,7 @@ public class LogicManagerTest {
 
             UniqueCategoryList categories = p.getCategories();
             for (Category t : categories) {
-                cmd.append(" t/").append(t.categoryName);
+                cmd.append(" c/").append(t.categoryName);
             }
 
             return cmd.toString();

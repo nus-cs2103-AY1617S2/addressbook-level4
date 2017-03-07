@@ -24,7 +24,7 @@ public class EditCommandTest extends TaskBossGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby p/1 i/Block 123, Bobby Street 3 t/husband";
+        String detailsToEdit = "Bobby p/1 i/Block 123, Bobby Street 3 c/husband";
         int taskBossIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Bobby").withPriorityLevel("1")
@@ -35,7 +35,7 @@ public class EditCommandTest extends TaskBossGuiTest {
 
     @Test
     public void edit_notAllFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "t/sweetie t/bestie";
+        String detailsToEdit = "c/sweetie c/bestie";
         int taskBossIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[taskBossIndex - 1];
@@ -46,7 +46,7 @@ public class EditCommandTest extends TaskBossGuiTest {
 
     @Test
     public void edit_clearCategories_success() throws Exception {
-        String detailsToEdit = "t/";
+        String detailsToEdit = "c/";
         int taskBossIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[taskBossIndex - 1];
@@ -98,14 +98,14 @@ public class EditCommandTest extends TaskBossGuiTest {
         commandBox.runCommand("edit 1 i/");
         assertResultMessage(Information.MESSAGE_INFORMATION_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 t/*&");
+        commandBox.runCommand("edit 1 c/*&");
         assertResultMessage(Category.MESSAGE_CATEGORY_CONSTRAINTS);
     }
 
     @Test
     public void edit_duplicateTask_failure() {
         commandBox.runCommand("edit 3 Alice Pauline p/3 "
-                                + "i/123, Jurong West Ave 6, #08-111 t/friends");
+                                + "i/123, Jurong West Ave 6, #08-111 c/friends");
 
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
