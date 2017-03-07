@@ -21,11 +21,13 @@ public class EndDateTime {
     }
 
     public final LocalDateTime dateTime;
+    public final String value;
 
     public EndDateTime(String dateTimeString) throws IllegalValueException{
         if(!isValidDateTime(dateTimeString)) {
             throw new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS);
         }
+        this.value = dateTimeString;
         this.dateTime = LocalDateTime.parse(dateTimeString);
     }
 
