@@ -10,8 +10,8 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.taskboss.commons.core.UnmodifiableObservableList;
-import seedu.taskboss.model.category.Tag;
-import seedu.taskboss.model.category.UniqueTagList;
+import seedu.taskboss.model.category.Category;
+import seedu.taskboss.model.category.UniqueCategoryList;
 import seedu.taskboss.model.task.ReadOnlyTask;
 import seedu.taskboss.model.task.Task;
 import seedu.taskboss.model.task.UniqueTaskList;
@@ -24,7 +24,7 @@ import seedu.taskboss.model.task.UniqueTaskList.DuplicateTaskException;
 public class TaskBoss implements ReadOnlyTaskBoss {
 
     private final UniqueTaskList tasks;
-    private final UniqueTagList tags;
+    private final UniqueCategoryList categories;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -35,13 +35,13 @@ public class TaskBoss implements ReadOnlyTaskBoss {
      */
     {
         tasks = new UniqueTaskList();
-        tags = new UniqueTagList();
+        categories = new UniqueCategoryList();
     }
 
     public TaskBoss() {}
 
     /**
-     * Creates a TaskBoss using the Tasks and Tags in the {@code toBeCopied}
+     * Creates a TaskBoss using the Tasks and Categories in the {@code toBeCopied}
      */
     public TaskBoss(ReadOnlyTaskBoss toBeCopied) {
         this();
@@ -55,8 +55,8 @@ public class TaskBoss implements ReadOnlyTaskBoss {
         this.tasks.setTasks(tasks);
     }
 
-    public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
-        this.tags.setTags(tags);
+    public void setCategories(Collection<Category> categories) throws UniqueCategoryList.DuplicateCategoryException {
+        this.categories.setCategories(categories);
     }
 
     public void resetData(ReadOnlyTaskBoss newData) {
@@ -67,31 +67,31 @@ public class TaskBoss implements ReadOnlyTaskBoss {
             assert false : "TaskBoss should not have duplicate tasks";
         }
         try {
-            setTags(newData.getTagList());
-        } catch (UniqueTagList.DuplicateTagException e) {
+            setCategories(newData.getCategoryList());
+        } catch (UniqueCategoryList.DuplicateCategoryException e) {
             assert false : "TaskBoss should not have duplicate categories";
         }
-        syncMasterTagListWith(tasks);
+        syncMasterCategoryListWith(tasks);
     }
 
 //// task-level operations
 
     /**
      * Adds a task to the taskboss.
-     * Also checks the new task's tags and updates {@link #tags} with any new tags found,
-     * and updates the Tag objects in the task to point to those in {@link #tags}.
+     * Also checks the new task's categories and updates {@link #categories} with any new categories found,
+     * and updates the Category objects in the task to point to those in {@link #categories}.
      *
      * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
      */
     public void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        syncMasterTagListWith(task);
+        syncMasterCategoryListWith(task);
         tasks.add(task);
     }
 
     /**
      * Updates the task in the list at position {@code index} with {@code editedReadOnlyTask}.
-     * {@code TaskBoss}'s tag list will be updated with the tags of {@code editedReadOnlyTask}.
-     * @see #syncMasterTagListWith(Task)
+     * {@code TaskBoss}'s category list will be updated with the categories of {@code editedReadOnlyTask}.
+     * @see #syncMasterCategoryListWith(Task)
      *
      * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
      *      another existing task in the list.
@@ -102,41 +102,41 @@ public class TaskBoss implements ReadOnlyTaskBoss {
         assert editedReadOnlyTask != null;
 
         Task editedTask = new Task(editedReadOnlyTask);
-        syncMasterTagListWith(editedTask);
-        // TODO: the tags master list will be updated even though the below line fails.
-        // This can cause the tags master list to have additional tags that are not tagged to any task
+        syncMasterCategoryListWith(editedTask);
+        // TODO: the categories master list will be updated even though the below line fails.
+        // This can cause the categories master list to have additional categories that are not tagged to any task
         // in the task list.
         tasks.updateTask(index, editedTask);
     }
 
     /**
-     * Ensures that every tag in this task:
-     *  - exists in the master list {@link #tags}
-     *  - points to a Tag object in the master list
+     * Ensures that every category in this task:
+     *  - exists in the master list {@link #categories}
+     *  - points to a Category object in the master list
      */
-    private void syncMasterTagListWith(Task task) {
-        final UniqueTagList taskTags = task.getTags();
-        tags.mergeFrom(taskTags);
+    private void syncMasterCategoryListWith(Task task) {
+        final UniqueCategoryList taskCategories = task.getCategories();
+        categories.mergeFrom(taskCategories);
 
-        // Create map with values = tag object references in the master list
-        // used for checking task tag references
-        final Map<Tag, Tag> masterTagObjects = new HashMap<>();
-        tags.forEach(tag -> masterTagObjects.put(tag, tag));
+        // Create map with values = category object references in the master list
+        // used for checking task category references
+        final Map<Category, Category> masterCategoryObjects = new HashMap<>();
+        categories.forEach(category -> masterCategoryObjects.put(category, category));
 
-        // Rebuild the list of task tags to point to the relevant tags in the master tag list.
-        final Set<Tag> correctTagReferences = new HashSet<>();
-        taskTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
-        task.setTags(new UniqueTagList(correctTagReferences));
+        // Rebuild the list of task categories to point to the relevant categories in the master category list.
+        final Set<Category> correctCategoryReferences = new HashSet<>();
+        taskCategories.forEach(category -> correctCategoryReferences.add(masterCategoryObjects.get(category)));
+        task.setCategories(new UniqueCategoryList(correctCategoryReferences));
     }
 
     /**
-     * Ensures that every tag in these tasks:
-     *  - exists in the master list {@link #tags}
-     *  - points to a Tag object in the master list
-     *  @see #syncMasterTagListWith(Task)
+     * Ensures that every category in these tasks:
+     *  - exists in the master list {@link #categories}
+     *  - points to a Category object in the master list
+     *  @see #syncMasterCategoryListWith(Task)
      */
-    private void syncMasterTagListWith(UniqueTaskList tasks) {
-        tasks.forEach(this::syncMasterTagListWith);
+    private void syncMasterCategoryListWith(UniqueTaskList tasks) {
+        tasks.forEach(this::syncMasterCategoryListWith);
     }
 
     public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
@@ -147,17 +147,17 @@ public class TaskBoss implements ReadOnlyTaskBoss {
         }
     }
 
-//// tag-level operations
+//// category-level operations
 
-    public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
-        tags.add(t);
+    public void addCategory(Category t) throws UniqueCategoryList.DuplicateCategoryException {
+        categories.add(t);
     }
 
 //// util methods
 
     @Override
     public String toString() {
-        return tasks.asObservableList().size() + " tasks, " + tags.asObservableList().size() +  " tags";
+        return tasks.asObservableList().size() + " tasks, " + categories.asObservableList().size() +  " categories";
         // TODO: refine later
     }
 
@@ -167,8 +167,8 @@ public class TaskBoss implements ReadOnlyTaskBoss {
     }
 
     @Override
-    public ObservableList<Tag> getTagList() {
-        return new UnmodifiableObservableList<>(tags.asObservableList());
+    public ObservableList<Category> getCategoryList() {
+        return new UnmodifiableObservableList<>(categories.asObservableList());
     }
 
     @Override
@@ -176,12 +176,12 @@ public class TaskBoss implements ReadOnlyTaskBoss {
         return other == this // short circuit if same object
                 || (other instanceof TaskBoss // instanceof handles nulls
                 && this.tasks.equals(((TaskBoss) other).tasks)
-                && this.tags.equalsOrderInsensitive(((TaskBoss) other).tags));
+                && this.categories.equalsOrderInsensitive(((TaskBoss) other).categories));
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(tasks, tags);
+        return Objects.hash(tasks, categories);
     }
 }

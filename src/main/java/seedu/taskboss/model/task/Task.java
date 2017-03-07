@@ -3,7 +3,7 @@ package seedu.taskboss.model.task;
 import java.util.Objects;
 
 import seedu.taskboss.commons.util.CollectionUtil;
-import seedu.taskboss.model.category.UniqueTagList;
+import seedu.taskboss.model.category.UniqueCategoryList;
 
 /**
  * Represents a Task in the TaskBoss.
@@ -15,25 +15,26 @@ public class Task implements ReadOnlyTask {
     private PriorityLevel priorityLevel;
     private Information information;
 
-    private UniqueTagList tags;
+    private UniqueCategoryList categories;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, PriorityLevel priorityLevel, Information information, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, priorityLevel, information, tags);
+    public Task(Name name, PriorityLevel priorityLevel, Information information, UniqueCategoryList categories) {
+        assert !CollectionUtil.isAnyNull(name, priorityLevel, information, categories);
 
         this.name = name;
         this.priorityLevel = priorityLevel;
         this.information = information;
-        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        // protect internal categories from changes in the arg list
+        this.categories = new UniqueCategoryList(categories);
     }
 
     /**
      * Creates a copy of the given ReadOnlyPerson.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getPriorityLevel(), source.getInformation(), source.getTags());
+        this(source.getName(), source.getPriorityLevel(), source.getInformation(), source.getCategories());
     }
 
     public void setName(Name name) {
@@ -67,15 +68,15 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
-    public UniqueTagList getTags() {
-        return new UniqueTagList(tags);
+    public UniqueCategoryList getCategories() {
+        return new UniqueCategoryList(categories);
     }
 
     /**
-     * Replaces this person's tags with the tags in the argument tag list.
+     * Replaces this task's categories with the categories in the argument category list.
      */
-    public void setTags(UniqueTagList replacement) {
-        tags.setTags(replacement);
+    public void setCategories(UniqueCategoryList replacement) {
+        categories.setCategories(replacement);
     }
 
     /**
@@ -87,7 +88,7 @@ public class Task implements ReadOnlyTask {
         this.setName(replacement.getName());
         this.setPriorityLevel(replacement.getPriorityLevel());
         this.setInformation(replacement.getInformation());
-        this.setTags(replacement.getTags());
+        this.setCategories(replacement.getCategories());
     }
 
     @Override
@@ -100,7 +101,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, priorityLevel, information, tags);
+        return Objects.hash(name, priorityLevel, information, categories);
     }
 
     @Override

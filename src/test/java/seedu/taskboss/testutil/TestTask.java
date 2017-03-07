@@ -1,6 +1,6 @@
 package seedu.taskboss.testutil;
 
-import seedu.taskboss.model.category.UniqueTagList;
+import seedu.taskboss.model.category.UniqueCategoryList;
 import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
@@ -14,10 +14,10 @@ public class TestTask implements ReadOnlyTask {
     private Name name;
     private Information information;
     private PriorityLevel priorityLevel;
-    private UniqueTagList tags;
+    private UniqueCategoryList categories;
 
     public TestTask() {
-        tags = new UniqueTagList();
+        categories = new UniqueCategoryList();
     }
 
     /**
@@ -27,7 +27,7 @@ public class TestTask implements ReadOnlyTask {
         this.name = taskToCopy.getName();
         this.priorityLevel = taskToCopy.getPriorityLevel();
         this.information = taskToCopy.getInformation();
-        this.tags = taskToCopy.getTags();
+        this.categories = taskToCopy.getCategories();
     }
 
     public void setName(Name name) {
@@ -42,8 +42,8 @@ public class TestTask implements ReadOnlyTask {
         this.priorityLevel = priorityLevel;
     }
 
-    public void setTags(UniqueTagList tags) {
-        this.tags = tags;
+    public void setCategories(UniqueCategoryList categories) {
+        this.categories = categories;
     }
 
     @Override
@@ -62,8 +62,8 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public UniqueTagList getTags() {
-        return tags;
+    public UniqueCategoryList getCategories() {
+        return categories;
     }
 
     @Override
@@ -76,7 +76,7 @@ public class TestTask implements ReadOnlyTask {
         sb.append("add " + this.getName().fullName + " ");
         sb.append("i/" + this.getInformation().value + " ");
         sb.append("p/" + this.getPriorityLevel().value + " ");
-        this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
+        this.getCategories().asObservableList().stream().forEach(s -> sb.append("c/" + s.categoryName + " "));
         return sb.toString();
     }
 }

@@ -22,7 +22,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label information;
     @FXML
-    private FlowPane tags;
+    private FlowPane categories;
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
@@ -31,10 +31,10 @@ public class TaskCard extends UiPart<Region> {
         priorityLevel.setText(task.getPriorityLevel().value);
         information.setText(task.getInformation().value);
 
-        initTags(task);
+        initCategories(task);
     }
 
-    private void initTags(ReadOnlyTask task) {
-        task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    private void initCategories(ReadOnlyTask task) {
+        task.getCategories().forEach(category -> categories.getChildren().add(new Label(category.categoryName)));
     }
 }

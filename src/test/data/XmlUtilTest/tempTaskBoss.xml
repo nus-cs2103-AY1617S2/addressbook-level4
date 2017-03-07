@@ -9,7 +9,7 @@
         <postalCode></postalCode>
         <city></city>
     </tasks>
-    <tags>
+    <categories>
         <name>Friends</name>
-    </tags>
+    </categories>
 </taskboss>

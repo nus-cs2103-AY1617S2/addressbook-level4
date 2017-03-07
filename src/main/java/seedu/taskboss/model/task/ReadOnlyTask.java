@@ -1,6 +1,6 @@
 package seedu.taskboss.model.task;
 
-import seedu.taskboss.model.category.UniqueTagList;
+import seedu.taskboss.model.category.UniqueCategoryList;
 
 /**
  * A read-only immutable interface for a Task in TaskBoss.
@@ -13,10 +13,10 @@ public interface ReadOnlyTask {
     Information getInformation();
 
     /**
-     * The returned TagList is a deep copy of the internal TagList,
-     * changes on the returned list will not affect the task's internal tags.
+     * The returned CategoryList is a deep copy of the internal CategoryList,
+     * changes on the returned list will not affect the task's internal categories.
      */
-    UniqueTagList getTags();
+    UniqueCategoryList getCategories();
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
@@ -39,8 +39,8 @@ public interface ReadOnlyTask {
                 .append(getPriorityLevel())
                 .append(" Information: ")
                 .append(getInformation())
-                .append(" Tags: ");
-        getTags().forEach(builder::append);
+                .append(" Categories: ");
+        getCategories().forEach(builder::append);
         return builder.toString();
     }
 

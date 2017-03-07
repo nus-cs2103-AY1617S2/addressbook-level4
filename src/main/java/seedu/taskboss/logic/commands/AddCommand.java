@@ -5,8 +5,8 @@ import java.util.Set;
 
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
-import seedu.taskboss.model.category.Tag;
-import seedu.taskboss.model.category.UniqueTagList;
+import seedu.taskboss.model.category.Category;
+import seedu.taskboss.model.category.UniqueCategoryList;
 import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
@@ -21,9 +21,9 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to TaskBoss. "
-            + "Parameters: NAME p/PRIORITY_LEVEL i/INFORMATION [t/TAG]...\n"
+            + "Parameters: NAME p/PRIORITY_LEVEL i/INFORMATION [c/CATEGORY]...\n"
             + "Example: " + COMMAND_WORD
-            + " John Doe p/3 i/my best buddy t/friends t/owesMoney";
+            + " Submit report p/3 i/inform partner c/Work c/Project";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in TaskBoss";
@@ -36,17 +36,17 @@ public class AddCommand extends Command {
      * @throws IllegalValueException if any of the raw values are invalid
      */
 
-    public AddCommand(String name, String priorityLevel, String information, Set<String> tags)
+    public AddCommand(String name, String priorityLevel, String information, Set<String> categories)
             throws IllegalValueException {
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(new Tag(tagName));
+        final Set<Category> categorySet = new HashSet<>();
+        for (String categoryName : categories) {
+            categorySet.add(new Category(categoryName));
         }
         this.toAdd = new Task(
                 new Name(name),
                 new PriorityLevel(priorityLevel),
                 new Information(information),
-                new UniqueTagList(tagSet)
+                new UniqueCategoryList(categorySet)
         );
     }
 

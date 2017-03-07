@@ -8,7 +8,7 @@ import org.junit.Test;
 import guitests.guihandles.TaskCardHandle;
 import seedu.taskboss.commons.core.Messages;
 import seedu.taskboss.logic.commands.EditCommand;
-import seedu.taskboss.model.category.Tag;
+import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
@@ -24,33 +24,33 @@ public class EditCommandTest extends TaskBossGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby p/1 i/Block 123, Bobby Street 3 t/husband";
+        String detailsToEdit = "Bobby p/1 i/Block 123, Bobby Street 3 c/husband";
         int taskBossIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Bobby").withPriorityLevel("1")
-               .withInformation("Block 123, Bobby Street 3").withTags("husband").build();
+               .withInformation("Block 123, Bobby Street 3").withCategories("husband").build();
 
         assertEditSuccess(taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
     }
 
     @Test
     public void edit_notAllFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "t/sweetie t/bestie";
+        String detailsToEdit = "c/sweetie c/bestie";
         int taskBossIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[taskBossIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withTags("sweetie", "bestie").build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withCategories("sweetie", "bestie").build();
 
         assertEditSuccess(taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
     }
 
     @Test
-    public void edit_clearTags_success() throws Exception {
-        String detailsToEdit = "t/";
+    public void edit_clearCategories_success() throws Exception {
+        String detailsToEdit = "c/";
         int taskBossIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[taskBossIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withTags().build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withCategories().build();
 
         assertEditSuccess(taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
     }
@@ -98,14 +98,14 @@ public class EditCommandTest extends TaskBossGuiTest {
         commandBox.runCommand("edit 1 i/");
         assertResultMessage(Information.MESSAGE_INFORMATION_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 t/*&");
-        assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
+        commandBox.runCommand("edit 1 c/*&");
+        assertResultMessage(Category.MESSAGE_CATEGORY_CONSTRAINTS);
     }
 
     @Test
     public void edit_duplicateTask_failure() {
         commandBox.runCommand("edit 3 Alice Pauline p/3 "
-                                + "i/123, Jurong West Ave 6, #08-111 t/friends");
+                                + "i/123, Jurong West Ave 6, #08-111 c/friends");
 
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }

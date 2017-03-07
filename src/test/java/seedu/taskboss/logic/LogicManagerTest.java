@@ -39,8 +39,8 @@ import seedu.taskboss.model.Model;
 import seedu.taskboss.model.ModelManager;
 import seedu.taskboss.model.ReadOnlyTaskBoss;
 import seedu.taskboss.model.TaskBoss;
-import seedu.taskboss.model.category.Tag;
-import seedu.taskboss.model.category.UniqueTagList;
+import seedu.taskboss.model.category.Category;
+import seedu.taskboss.model.category.UniqueCategoryList;
 import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
@@ -103,7 +103,8 @@ public class LogicManagerTest {
     @Test
     public void execute_invalid() {
         String invalidCommand = "       ";
-        assertCommandFailure(invalidCommand, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+        assertCommandFailure(invalidCommand, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+               HelpCommand.MESSAGE_USAGE));
     }
 
     /**
@@ -114,7 +115,8 @@ public class LogicManagerTest {
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskBoss,
      *      List)
      */
-    private void assertCommandSuccess(String inputCommand, String expectedMessage, ReadOnlyTaskBoss expectedTaskBoss,
+    private void assertCommandSuccess(String inputCommand, String expectedMessage,
+            ReadOnlyTaskBoss expectedTaskBoss,
             List<? extends ReadOnlyTask> expectedShownList) {
         assertCommandBehavior(false, inputCommand, expectedMessage, expectedTaskBoss, expectedShownList);
     }
@@ -143,8 +145,9 @@ public class LogicManagerTest {
      * - the backing list shown by UI matches the {@code shownList} <br>
      * - {@code expectedTaskBoss} was saved to the storage file. <br>
      */
-    private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand, String expectedMessage,
-            ReadOnlyTaskBoss expectedTaskBoss, List<? extends ReadOnlyTask> expectedShownList) {
+    private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand,
+            String expectedMessage, ReadOnlyTaskBoss expectedTaskBoss,
+            List<? extends ReadOnlyTask> expectedShownList) {
 
         try {
             CommandResult result = logic.execute(inputCommand);
@@ -171,13 +174,15 @@ public class LogicManagerTest {
 
     @Test
     public void execute_help() {
-        assertCommandSuccess("help", HelpCommand.SHOWING_HELP_MESSAGE, new TaskBoss(), Collections.emptyList());
+        assertCommandSuccess("help", HelpCommand.SHOWING_HELP_MESSAGE,
+                new TaskBoss(), Collections.emptyList());
         assertTrue(helpShown);
     }
 
     @Test
     public void execute_exit() {
-        assertCommandSuccess("exit", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT, new TaskBoss(), Collections.emptyList());
+        assertCommandSuccess("exit", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
+                new TaskBoss(), Collections.emptyList());
     }
 
     @Test
@@ -206,8 +211,8 @@ public class LogicManagerTest {
                 Name.MESSAGE_NAME_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/not_numbers i/valid, information",
                 PriorityLevel.MESSAGE_PRIORITY_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/1 i/valid, information t/invalid_-[.tag",
-                Tag.MESSAGE_TAG_CONSTRAINTS);
+        assertCommandFailure("add Valid Name p/1 i/valid, information c/invalid_-[.category",
+                Category.MESSAGE_CATEGORY_CONSTRAINTS);
 
     }
 
@@ -220,7 +225,8 @@ public class LogicManagerTest {
         expectedAB.addTask(toBeAdded);
 
         // execute command and verify result
-        assertCommandSuccess(helper.generateAddCommand(toBeAdded), String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+        assertCommandSuccess(helper.generateAddCommand(toBeAdded),
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
                 expectedAB, expectedAB.getTaskList());
 
     }
@@ -342,7 +348,8 @@ public class LogicManagerTest {
         expectedAB.removeTask(threeTasks.get(1));
         helper.addToModel(model, threeTasks);
 
-        assertCommandSuccess("delete 2", String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, threeTasks.get(1)),
+        assertCommandSuccess("delete 2", String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS,
+                threeTasks.get(1)),
                 expectedAB, expectedAB.getTaskList());
     }
 
@@ -365,8 +372,8 @@ public class LogicManagerTest {
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2);
         helper.addToModel(model, fourTasks);
 
-        assertCommandSuccess("find n/KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
-                expectedList);
+        assertCommandSuccess("find n/KEY",
+                Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB, expectedList);
     }
 
     @Test
@@ -382,8 +389,8 @@ public class LogicManagerTest {
         List<Task> expectedList = fourTasks;
         helper.addToModel(model, fourTasks);
 
-        assertCommandSuccess("find n/KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
-                expectedList);
+        assertCommandSuccess("find n/KEY",
+                Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB, expectedList);
     }
 
     @Test
@@ -412,10 +419,10 @@ public class LogicManagerTest {
             Name name = new Name("Adam Brown");
             PriorityLevel privatePriorityLevel = new PriorityLevel("1");
             Information privateInformation = new Information("111, alpha street");
-            Tag tag1 = new Tag("tag1");
-            Tag tag2 = new Tag("longertag2");
-            UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, privatePriorityLevel, privateInformation, tags);
+            Category category1 = new Category("category1");
+            Category category2 = new Category("longercategory2");
+            UniqueCategoryList categories = new UniqueCategoryList(category1, category2);
+            return new Task(name, privatePriorityLevel, privateInformation, categories);
         }
 
         /**
@@ -431,7 +438,8 @@ public class LogicManagerTest {
                     new Name("Task " + seed),
                     new PriorityLevel("" + Math.abs(seed)),
                     new Information("House of " + seed),
-                    new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
+                    new UniqueCategoryList(new Category("category" + Math.abs(seed)),
+                           new Category("category" + Math.abs(seed + 1)))
             );
         }
 
@@ -445,9 +453,9 @@ public class LogicManagerTest {
             cmd.append(" p/").append(p.getPriorityLevel());
             cmd.append(" i/").append(p.getInformation());
 
-            UniqueTagList tags = p.getTags();
-            for (Tag t : tags) {
-                cmd.append(" t/").append(t.tagName);
+            UniqueCategoryList categories = p.getCategories();
+            for (Category t : categories) {
+                cmd.append(" c/").append(t.categoryName);
             }
 
             return cmd.toString();
@@ -533,7 +541,7 @@ public class LogicManagerTest {
                     new Name(name),
                     new PriorityLevel("1"),
                     new Information("House of 1"),
-                    new UniqueTagList(new Tag("tag"))
+                    new UniqueCategoryList(new Category("category"))
             );
         }
     }

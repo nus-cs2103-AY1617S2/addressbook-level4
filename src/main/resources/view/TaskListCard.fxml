@@ -35,7 +35,7 @@
                                 </HBox>
                             </children>
                         </HBox>
-                        <FlowPane fx:id="tags" />
+                        <FlowPane fx:id="categories" />
                         <Label fx:id="priorityLevel" styleClass="cell_small_label" text="\$priorityLevel" />
                         <Label fx:id="information" styleClass="cell_small_label" text="\$information" />
                     </children>

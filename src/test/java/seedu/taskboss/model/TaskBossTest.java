@@ -14,7 +14,7 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.taskboss.model.category.Tag;
+import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.task.ReadOnlyTask;
 import seedu.taskboss.model.task.Task;
 import seedu.taskboss.testutil.TypicalTestTasks;
@@ -29,7 +29,7 @@ public class TaskBossTest {
     @Test
     public void constructor() {
         assertEquals(Collections.emptyList(), taskBoss.getTaskList());
-        assertEquals(Collections.emptyList(), taskBoss.getTagList());
+        assertEquals(Collections.emptyList(), taskBoss.getCategoryList());
     }
 
     @Test
@@ -50,36 +50,36 @@ public class TaskBossTest {
         TypicalTestTasks td = new TypicalTestTasks();
         // Repeat td.alice twice
         List<Task> newTasks = Arrays.asList(new Task(td.alice), new Task(td.alice));
-        List<Tag> newTags = td.alice.getTags().asObservableList();
-        TaskBossStub newData = new TaskBossStub(newTasks, newTags);
+        List<Category> newCategories = td.alice.getCategories().asObservableList();
+        TaskBossStub newData = new TaskBossStub(newTasks, newCategories);
 
         thrown.expect(AssertionError.class);
         taskBoss.resetData(newData);
     }
 
     @Test
-    public void resetData_withDuplicateTags_throwsAssertionError() {
+    public void resetData_withDuplicateCategories_throwsAssertionError() {
         TaskBoss typicalTaskBoss = new TypicalTestTasks().getTypicalTaskBoss();
         List<ReadOnlyTask> newTasks = typicalTaskBoss.getTaskList();
-        List<Tag> newTags = new ArrayList<>(typicalTaskBoss.getTagList());
-        // Repeat the first tag twice
-        newTags.add(newTags.get(0));
-        TaskBossStub newData = new TaskBossStub(newTasks, newTags);
+        List<Category> newCategories = new ArrayList<>(typicalTaskBoss.getCategoryList());
+        // Repeat the first category twice
+        newCategories.add(newCategories.get(0));
+        TaskBossStub newData = new TaskBossStub(newTasks, newCategories);
 
         thrown.expect(AssertionError.class);
         taskBoss.resetData(newData);
     }
 
     /**
-     * A stub ReadOnlyTaskBoss whose tasks and tags lists can violate interface constraints.
+     * A stub ReadOnlyTaskBoss whose tasks and categories lists can violate interface constraints.
      */
     private static class TaskBossStub implements ReadOnlyTaskBoss {
         private final ObservableList<ReadOnlyTask> tasks = FXCollections.observableArrayList();
-        private final ObservableList<Tag> tags = FXCollections.observableArrayList();
+        private final ObservableList<Category> categories = FXCollections.observableArrayList();
 
-        TaskBossStub(Collection<? extends ReadOnlyTask> tasks, Collection<? extends Tag> tags) {
+        TaskBossStub(Collection<? extends ReadOnlyTask> tasks, Collection<? extends Category> categories) {
             this.tasks.setAll(tasks);
-            this.tags.setAll(tags);
+            this.categories.setAll(categories);
         }
 
         @Override
@@ -88,8 +88,8 @@ public class TaskBossTest {
         }
 
         @Override
-        public ObservableList<Tag> getTagList() {
-            return tags;
+        public ObservableList<Category> getCategoryList() {
+            return categories;
         }
     }
 
