@@ -4,29 +4,29 @@ package seedu.address.model.task;
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's phone number in the address book.
+ * Represents a Task's deadline in the task manager.
  * Guarantees: immutable; is valid as declared in {@link #isValidDeadline(String)}
  */
 public class Deadline {
 
     public static final String MESSAGE_DEADLINE_CONSTRAINTS =
-            "Person emails should be 2 alphanumeric/period strings separated by '@'";
+            "Person deadlines should be 2 alphanumeric/period strings separated by '@'";
     public static final String DEADLINE_VALIDATION_REGEX = "[\\w\\.]+@[\\w\\.]+";
 
     public final String value;
 
     /**
-     * Validates given email.
+     * Validates given deadline.
      *
-     * @throws IllegalValueException if given email address string is invalid.
+     * @throws IllegalValueException if given deadline string is invalid.
      */
     public Deadline(String deadline) throws IllegalValueException {
         assert deadline != null;
-        String trimmedEmail = deadline.trim();
-        if (!isValidDeadline(trimmedEmail)) {
+        String trimmedDeadline = deadline.trim();
+        if (!isValidDeadline(trimmedDeadline)) {
             throw new IllegalValueException(MESSAGE_DEADLINE_CONSTRAINTS);
         }
-        this.value = trimmedEmail;
+        this.value = trimmedDeadline;
     }
 
     /**
