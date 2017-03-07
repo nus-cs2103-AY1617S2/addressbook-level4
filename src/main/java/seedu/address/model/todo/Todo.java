@@ -18,6 +18,18 @@ public class Todo implements ReadOnlyTodo {
 
     private UniqueTagList tags;
 
+    /**
+     * Constructor for a floating task
+     */
+    public Todo(Name name, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, starttime, endtime, tags);
+        this.name = name;
+        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+    }
+
+    /**
+     * Constructor for a scheduled task
+     */
     public Todo(Name name, Date starttime, Date endtime, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, starttime, endtime, tags);
         this.name = name;

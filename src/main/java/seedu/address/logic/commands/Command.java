@@ -16,7 +16,7 @@ public abstract class Command {
      * @param displaySize used to generate summary
      * @return summary message for todos displayed
      */
-    public static String getMessageForToDoListShownSummary(int displaySize) {
+    public static String getMessageForTodoListShownSummary(int displaySize) {
         return String.format(Messages.MESSAGE_TODOS_LISTED_OVERVIEW, displaySize);
     }
 
