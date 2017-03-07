@@ -135,11 +135,11 @@ Format: `add NAME [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` <br>
 > * If no priority is specified, the task will be of lowest priority.
 
 Examples: 
-* `add exam`
+* `add exam` <br>
   Add a floating task named "exam" into task list.
-* `add exam p/1`
+* `add exam p/1` <br>
   Add a priority 1 floating task named "exam" into task list.
-* `add exam p/1 d/SR1`
+* `add exam p/1 d/SR1` <br>
   Add a priority 1 floating task named "exam" with description "SR1" into task list.
 * `add exam p/1 d/SR1 t/CS2010`<br>
   Add a priority 1 floating task named "exam" with description "SR1" and tag "CS2010" into task list.
@@ -157,13 +157,13 @@ Format: `add NAME on START_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` <br>
 > * If no start time (i.e HHMM) is specified, the time will be the CURRENT time.
 
 Examples:
-* `add exam on 10-22-2017`
+* `add exam on 10-22-2017` <br> 
   Add a pending task named "exam" on 22 October 2017, current time into task list.
-* `add exam on 10-22-2017 1500`
+* `add exam on 10-22-2017 1500` <br>
   Add a pending task named "exam" on 22 October 2017, 1500 into task list.
-* `add exam on 10-22-2017 1500 p/1`
+* `add exam on 10-22-2017 1500 p/1` <br>
   Add a priority 1 pending task named "exam" on 22 October 2017, 1500 into task list.
-* `add exam on 10-22-2017 1500 p/1 d/SR1`
+* `add exam on 10-22-2017 1500 p/1 d/SR1` <br>
   Add a priority 1 pending task named "exam" on 22 October 2017, 1500 with description "SR1" into task list.  
 * `add exam on 10-22-2017 1500 p/1 d/SR1 t/CS2010`<br>
   Add a priority 1 pending task named "exam" on 22 October 2017, 1500 with description "SR1" and tag "CS2010" into task list.
@@ -182,13 +182,13 @@ Format: `add NAME by END_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` <br>
 > * The START_DATETIME is the CURRENT date and time by default.
 
 Examples: 
-* `add exam by 10-22-2017`
+* `add exam by 10-22-2017` <br>
   Add a pending task named "exam" that starts now and end by 22 October 2017, 2359 into task list.
-* `add exam by 10-22-2017 1500`
+* `add exam by 10-22-2017 1500` <br>
   Add a pending task named "exam" that starts now and end by 22 October 2017, 1500 into task list.
-* `add exam by 10-22-2017 1500 p/1`
+* `add exam by 10-22-2017 1500 p/1` <br>
   Add a priority 1 pending task named "exam" that starts now and end by 22 October 2017, 1500 into task list.
-* `add exam by 10-22-2017 1500 p/1 d/SR1`
+* `add exam by 10-22-2017 1500 p/1 d/SR1` <br>
   Add a priority 1 pending task named "exam" that starts now and end by 22 October 2017, 1500 with description "SR1" into task list.
 * `add exam by 10-22-2017 1500 p/1 d/SR1 t/CS2010`<br>
   Add a priority 1 pending task named "exam" that starts now and end by 22 October 2017, 1500 with description "SR1" and tag "CS2010" 
@@ -208,13 +208,13 @@ Format: `add NAME from START_DATETIME to END_DATETIME [p/PRIORITY] [d/DESCRIPTIO
 > * If no end time (i.e HHMM) is specified, the time will 2359.
 
 Examples:
-* `add exam from 10-22-2017 to 10-22-2016`
+* `add exam from 10-22-2017 to 10-22-2016` <br>
   Add a pending task named "exam" that starts from 22 October 2017, current time to 22 October 2017, 2359 into task list.
-* `add exam from 10-22-2017 1300 to 10-22-2016 1500`
+* `add exam from 10-22-2017 1300 to 10-22-2016 1500` <br>
   Add a pending task named "exam" that starts from 22 October 2017, 1300 to 22 October 2017, 1500 into task list.
-* `add exam from 10-22-2017 1300 to 10-22-2016 1500 p/1`
+* `add exam from 10-22-2017 1300 to 10-22-2016 1500 p/1` <br>
   Add a priority 1 pending task named "exam" that starts from 22 October 2017, 1300 to 22 October 2017, 1500 into task list.
-* `add exam from 10-22-2017 1300 to 10-22-2016 1500 p/1 d/SR1`
+* `add exam from 10-22-2017 1300 to 10-22-2016 1500 p/1 d/SR1` <br>
   Add a priority 1 pending task named "exam" that starts from 22 October 2017, 1300 to 22 October 2017, 1500 with description "SR1" into 
   task list.
 * `add exam from 10-22-2017 1300 to 10-22-2016 1500 p/1 d/SR1 t/CS2010`<br>
