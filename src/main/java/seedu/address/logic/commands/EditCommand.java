@@ -52,14 +52,14 @@ public class EditCommand extends Command {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (filteredPersonListIndex >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_TASKS_DISPLAYED_INDEX);
         }
 
         ReadOnlyTask personToEdit = lastShownList.get(filteredPersonListIndex);
         Task editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         try {
-            model.updatePerson(filteredPersonListIndex, editedPerson);
+            model.updateTask(filteredPersonListIndex, editedPerson);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
