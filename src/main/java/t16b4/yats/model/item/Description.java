@@ -6,6 +6,9 @@ package t16b4.yats.model.item;
  */
 public class Description {
 
+    private static final int DESCRIPTION_MAXIMUM_LENGTH = 1000;
+
+
     public static final String MESSAGE_DESCRIPTION_CONSTRAINTS =
             "Task description can take any values, but can only be 1000 characters in length. It can be left blank.";
 
@@ -40,7 +43,7 @@ public class Description {
     public static boolean isValidDescription(String string) {
         if (string == null) {
             return false;
-        } else if (string.length() > 1000) {
+        } else if (string.length() > DESCRIPTION_MAXIMUM_LENGTH) {
             return false;
         } else {
             return true;
