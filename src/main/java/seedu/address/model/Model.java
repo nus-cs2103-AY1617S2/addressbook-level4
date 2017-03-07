@@ -5,8 +5,8 @@ import java.util.Set;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.UniquePersonList;
-import seedu.address.model.task.UniquePersonList.DuplicatePersonException;
+import seedu.address.model.task.UniqueTaskList;
+import seedu.address.model.task.UniqueTaskList.DuplicatePersonException;
 
 /**
  * The API of the Model component.
@@ -19,10 +19,10 @@ public interface Model {
     ReadOnlyTaskManager getAddressBook();
 
     /** Deletes the given task. */
-    void deletePerson(ReadOnlyTask target) throws UniquePersonList.PersonNotFoundException;
+    void deletePerson(ReadOnlyTask target) throws UniqueTaskList.PersonNotFoundException;
 
     /** Adds the given task */
-    void addPerson(Task person) throws UniquePersonList.DuplicatePersonException;
+    void addPerson(Task person) throws UniqueTaskList.DuplicatePersonException;
 
     /**
      * Updates the task located at {@code filteredPersonListIndex} with {@code editedPerson}.
@@ -32,7 +32,7 @@ public interface Model {
      * @throws IndexOutOfBoundsException if {@code filteredPersonListIndex} < 0 or >= the size of the filtered list.
      */
     void updatePerson(int filteredPersonListIndex, ReadOnlyTask editedPerson)
-            throws UniquePersonList.DuplicatePersonException;
+            throws UniqueTaskList.DuplicatePersonException;
 
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredPersonList();

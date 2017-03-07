@@ -4,7 +4,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.task.ReadOnlyTask;
-import seedu.address.model.task.UniquePersonList.PersonNotFoundException;
+import seedu.address.model.task.UniqueTaskList.PersonNotFoundException;
 
 /**
  * Deletes a task identified using it's last displayed index from the task manager.

@@ -8,7 +8,7 @@ import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Priority;
-import seedu.address.model.task.UniquePersonList.DuplicatePersonException;
+import seedu.address.model.task.UniqueTaskList.DuplicatePersonException;
 import seedu.address.model.tag.UniqueTagList;
 
 public class SampleDataUtil {

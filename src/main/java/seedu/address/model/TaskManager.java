@@ -12,8 +12,8 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.UniquePersonList;
-import seedu.address.model.task.UniquePersonList.DuplicatePersonException;
+import seedu.address.model.task.UniqueTaskList;
+import seedu.address.model.task.UniqueTaskList.DuplicatePersonException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -23,7 +23,7 @@ import seedu.address.model.tag.UniqueTagList;
  */
 public class TaskManager implements ReadOnlyTaskManager {
 
-    private final UniquePersonList persons;
+    private final UniqueTaskList persons;
     private final UniqueTagList tags;
 
     /*
@@ -34,7 +34,7 @@ public class TaskManager implements ReadOnlyTaskManager {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        persons = new UniqueTaskList();
         tags = new UniqueTagList();
     }
 
@@ -51,7 +51,7 @@ public class TaskManager implements ReadOnlyTaskManager {
 //// list overwrite operations
 
     public void setPersons(List<? extends ReadOnlyTask> persons)
-            throws UniquePersonList.DuplicatePersonException {
+            throws UniqueTaskList.DuplicatePersonException {
         this.persons.setPersons(persons);
     }
 
@@ -63,7 +63,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         assert newData != null;
         try {
             setPersons(newData.getPersonList());
-        } catch (UniquePersonList.DuplicatePersonException e) {
+        } catch (UniqueTaskList.DuplicatePersonException e) {
             assert false : "AddressBooks should not have duplicate persons";
         }
         try {
@@ -81,9 +81,9 @@ public class TaskManager implements ReadOnlyTaskManager {
      * Also checks the new task's tags and updates {@link #tags} with any new tags found,
      * and updates the Tag objects in the task to point to those in {@link #tags}.
      *
-     * @throws UniquePersonList.DuplicatePersonException if an equivalent task already exists.
+     * @throws UniqueTaskList.DuplicatePersonException if an equivalent task already exists.
      */
-    public void addPerson(Task p) throws UniquePersonList.DuplicatePersonException {
+    public void addPerson(Task p) throws UniqueTaskList.DuplicatePersonException {
         syncMasterTagListWith(p);
         persons.add(p);
     }
@@ -98,7 +98,7 @@ public class TaskManager implements ReadOnlyTaskManager {
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
     public void updatePerson(int index, ReadOnlyTask editedReadOnlyTask)
-            throws UniquePersonList.DuplicatePersonException {
+            throws UniqueTaskList.DuplicatePersonException {
         assert editedReadOnlyTask != null;
 
         Task editedPerson = new Task(editedReadOnlyTask);
@@ -135,15 +135,15 @@ public class TaskManager implements ReadOnlyTaskManager {
      *  - points to a Tag object in the master list
      *  @see #syncMasterTagListWith(Task)
      */
-    private void syncMasterTagListWith(UniquePersonList persons) {
+    private void syncMasterTagListWith(UniqueTaskList persons) {
         persons.forEach(this::syncMasterTagListWith);
     }
 
-    public boolean removePerson(ReadOnlyTask key) throws UniquePersonList.PersonNotFoundException {
+    public boolean removePerson(ReadOnlyTask key) throws UniqueTaskList.PersonNotFoundException {
         if (persons.remove(key)) {
             return true;
         } else {
-            throw new UniquePersonList.PersonNotFoundException();
+            throw new UniqueTaskList.PersonNotFoundException();
         }
     }
 
