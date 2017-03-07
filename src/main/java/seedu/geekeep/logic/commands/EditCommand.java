@@ -83,7 +83,7 @@ public class EditCommand extends Command {
         Location updatedLocation = editPersonDescriptor.getLocation().orElseGet(personToEdit::getLocation);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
-        return new Task(updatedTitle, updatedEndDateTime, updatedStartDateTime, updatedLocation, updatedTags);
+        return new Task(updatedTitle, updatedStartDateTime, updatedEndDateTime, updatedLocation, updatedTags);
     }
 
     /**

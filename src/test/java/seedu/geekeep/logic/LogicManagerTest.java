@@ -422,7 +422,7 @@ public class LogicManagerTest {
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(title, privateEndDateTime, startDateTime, privateLocation, tags);
+            return new Task(title, startDateTime, privateEndDateTime, privateLocation, tags);
         }
 
         /**
@@ -435,8 +435,8 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Title("Person " + seed),
-                    new EndDateTime("" + Math.abs(seed)),
                     new StartDateTime(seed + "@email"),
+                    new EndDateTime("" + Math.abs(seed)),
                     new Location("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
@@ -534,8 +534,8 @@ public class LogicManagerTest {
         Task generateTaskWithName(String name) throws Exception {
             return new Task(
                     new Title(name),
-                    new EndDateTime("1"),
                     new StartDateTime("1@email"),
+                    new EndDateTime("1"),
                     new Location("House of 1"),
                     new UniqueTagList(new Tag("tag"))
             );

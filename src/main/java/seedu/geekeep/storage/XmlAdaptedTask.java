@@ -70,6 +70,6 @@ public class XmlAdaptedTask {
         final StartDateTime startDateTime = new StartDateTime(this.email);
         final Location location = new Location(this.address);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Task(title, endDateTime, startDateTime, location, tags);
+        return new Task(title, startDateTime, endDateTime, location, tags);
     }
 }

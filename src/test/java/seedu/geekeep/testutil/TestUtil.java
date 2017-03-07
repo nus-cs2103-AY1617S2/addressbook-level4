@@ -75,15 +75,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Title("Ali Muster"), new EndDateTime("9482424"), new StartDateTime("hans@google.com"), new Location("4th street"), new UniqueTagList()),
-                new Task(new Title("Boris Mueller"), new EndDateTime("87249245"), new StartDateTime("ruth@google.com"), new Location("81th street"), new UniqueTagList()),
-                new Task(new Title("Carl Kurz"), new EndDateTime("95352563"), new StartDateTime("heinz@yahoo.com"), new Location("wall street"), new UniqueTagList()),
-                new Task(new Title("Daniel Meier"), new EndDateTime("87652533"), new StartDateTime("cornelia@google.com"), new Location("10th street"), new UniqueTagList()),
-                new Task(new Title("Elle Meyer"), new EndDateTime("9482224"), new StartDateTime("werner@gmail.com"), new Location("michegan ave"), new UniqueTagList()),
-                new Task(new Title("Fiona Kunz"), new EndDateTime("9482427"), new StartDateTime("lydia@gmail.com"), new Location("little tokyo"), new UniqueTagList()),
-                new Task(new Title("George Best"), new EndDateTime("9482442"), new StartDateTime("anna@google.com"), new Location("4th street"), new UniqueTagList()),
-                new Task(new Title("Hoon Meier"), new EndDateTime("8482424"), new StartDateTime("stefan@mail.com"), new Location("little india"), new UniqueTagList()),
-                new Task(new Title("Ida Mueller"), new EndDateTime("8482131"), new StartDateTime("hans@google.com"), new Location("chicago ave"), new UniqueTagList())
+                new Task(new Title("Ali Muster"), new StartDateTime("hans@google.com"), new EndDateTime("9482424"), new Location("4th street"), new UniqueTagList()),
+                new Task(new Title("Boris Mueller"), new StartDateTime("ruth@google.com"), new EndDateTime("87249245"), new Location("81th street"), new UniqueTagList()),
+                new Task(new Title("Carl Kurz"), new StartDateTime("heinz@yahoo.com"), new EndDateTime("95352563"), new Location("wall street"), new UniqueTagList()),
+                new Task(new Title("Daniel Meier"), new StartDateTime("cornelia@google.com"), new EndDateTime("87652533"), new Location("10th street"), new UniqueTagList()),
+                new Task(new Title("Elle Meyer"), new StartDateTime("werner@gmail.com"), new EndDateTime("9482224"), new Location("michegan ave"), new UniqueTagList()),
+                new Task(new Title("Fiona Kunz"), new StartDateTime("lydia@gmail.com"), new EndDateTime("9482427"), new Location("little tokyo"), new UniqueTagList()),
+                new Task(new Title("George Best"), new StartDateTime("anna@google.com"), new EndDateTime("9482442"), new Location("4th street"), new UniqueTagList()),
+                new Task(new Title("Hoon Meier"), new StartDateTime("stefan@mail.com"), new EndDateTime("8482424"), new Location("little india"), new UniqueTagList()),
+                new Task(new Title("Ida Mueller"), new StartDateTime("hans@google.com"), new EndDateTime("8482131"), new Location("chicago ave"), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {

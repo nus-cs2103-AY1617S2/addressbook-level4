@@ -15,14 +15,14 @@ import seedu.geekeep.model.task.Title;
 import seedu.geekeep.model.task.UniqueTaskList;
 
 /**
- * Adds a person to the address book.
+ * Adds a task to the Task Manager.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
-            + "Parameters: NAME p/PHONE e/EMAIL a/ADDRESS  [t/TAG]...\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the Task Manager. "
+            + "Parameters: TITLE st/STARTING_DATETIME et/EMAIL a/ADDRESS  [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
             + " John Doe p/98765432 e/johnd@gmail.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney";
 
@@ -44,8 +44,8 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Task(
                 new Title(name),
-                new EndDateTime(phone),
-                new StartDateTime(email),
+                new StartDateTime(phone),
+                new EndDateTime(email),
                 new Location(address),
                 new UniqueTagList(tagSet)
         );

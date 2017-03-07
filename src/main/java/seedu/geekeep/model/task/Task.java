@@ -20,7 +20,7 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(Title title, EndDateTime endDateTime, StartDateTime startDateTime, Location location, UniqueTagList tags) {
+    public Task(Title title, StartDateTime startDateTime, EndDateTime endDateTime, Location location, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(title, endDateTime, startDateTime, location, tags);
         this.title = title;
         this.endDateTime = endDateTime;
@@ -33,7 +33,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getTitle(), source.getEndDateTime(), source.getStartDateTime(), source.getLocation(), source.getTags());
+        this(source.getTitle(), source.getStartDateTime(), source.getEndDateTime(), source.getLocation(), source.getTags());
     }
 
     public void setTitle(Title title) {
