@@ -4,6 +4,8 @@ import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_COMMAND_FO
 // import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_TIME;
+import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_ENDTIME;
 // import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.NoSuchElementException;
@@ -31,6 +33,8 @@ public class AddCommandParser {
                     argsTokenizer.getPreamble().get(),
                     argsTokenizer.getValue(PREFIX_TIME).get(),
                     argsTokenizer.getValue(PREFIX_DATE).get(),
+                    argsTokenizer.getValue(PREFIX_DEADLINE).get(),
+                    argsTokenizer.getValue(PREFIX_ENDTIME).get()
                   /*  argsTokenizer.getValue(PREFIX_ADDRESS).get(),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)) */
             );

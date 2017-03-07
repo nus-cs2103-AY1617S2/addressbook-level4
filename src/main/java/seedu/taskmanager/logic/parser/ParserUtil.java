@@ -64,10 +64,10 @@ public class ParserUtil {
         return Arrays.stream(Arrays.copyOf(preamble.split("\\s+", numFields), numFields))
                 .map(Optional::ofNullable)
                 .collect(Collectors.toList());
-    }
+    }	
 
     /**
-     * Parses a {@code Optional<String> name} into an {@code Optional<Name>} if {@code name} is present.
+     * Parses a {@code Optional<String> taskname} into an {@code Optional<TaskName>} if {@code taskname} is present.
      */
     public static Optional<Name> parseTaskName(Optional<String> taskname) throws IllegalValueException {
         assert taskname != null;
@@ -75,7 +75,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> phone} into an {@code Optional<Phone>} if {@code phone} is present.
+     * Parses a {@code Optional<String> time} into an {@code Optional<Time>} if {@code time} is present.
      */
     public static Optional<Time> parseTime(Optional<String> time) throws IllegalValueException {
         assert time != null;
@@ -91,7 +91,7 @@ public class ParserUtil {
     } */
 
     /**
-     * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
+     * Parses a {@code Optional<String> date} into an {@code Optional<Date>} if {@code date} is present.
      */
     public static Optional<Date> parseDate(Optional<String> date) throws IllegalValueException {
         assert date != null;
