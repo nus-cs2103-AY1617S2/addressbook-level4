@@ -10,15 +10,10 @@ import seedu.doist.logic.parser.ArgumentTokenizer.Prefix;
 public class CliSyntax {
 
     /* Prefix definitions */
-    public static final Prefix PREFIX_FROM = new Prefix("\\from");
-    public static final Prefix PREFIX_TO = new Prefix("\\to");
-    public static final Prefix PREFIX_REMIND = new Prefix("\\remind_at");
-    public static final Prefix PREFIX_EVERY = new Prefix("\\every");
-    public static final Prefix PREFIX_AS = new Prefix("\\as");
-    public static final Prefix PREFIX_UNDER = new Prefix("\\under");
-    public static final Prefix PREFIX_BY = new Prefix("\\by");
-    public static final Prefix PREFIX_DESCRIPTION = new Prefix("\\desc");
-    public static final Prefix PREFIX_IN = new Prefix("\\in");
+    public static final Prefix PREFIX_PHONE = new Prefix("p/");
+    public static final Prefix PREFIX_EMAIL = new Prefix("e/");
+    public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
+    public static final Prefix PREFIX_TAG = new Prefix("t/");
 
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT =

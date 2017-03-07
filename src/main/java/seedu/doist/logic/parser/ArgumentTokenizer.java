@@ -20,7 +20,6 @@ public class ArgumentTokenizer {
 
     /** Given prefixes **/
     private final List<Prefix> prefixes;
-    private ArrayList<Prefix> temp;
 
     /** Arguments found after tokenizing **/
     private final Map<Prefix, List<String>> tokenizedArguments = new HashMap<>();
@@ -39,52 +38,6 @@ public class ArgumentTokenizer {
         resetTokenizerState();
         List<PrefixPosition> positions = findAllPrefixPositions(argsString);
         extractArguments(argsString, positions);
-    }
-
-    /**
-     * Returns a HashMap that maps the present prefixes with their arguments
-     * @return
-     */
-    public Map<String, List<String>> getTokenizedArguments() {
-        Map<String, List<String>> arguments = new HashMap<String, List<String>>();
-        for (int i = 0; i < prefixes.size(); i++) {
-            Prefix prefix = prefixes.get(i);
-            List<String> prefixArgs = tokenizedArguments.get(prefix);
-            if (!(prefixArgs == null || prefixArgs.size() == 0)) {
-                arguments.put(prefix.getPrefix(), prefixArgs);
-            }
-        }
-        return arguments;
-    }
-
-    /**
-     * Returns true if all tokens passed are valid prefixes
-     * @param tokens
-     * @return boolean
-     */
-    public boolean validateTokens(ArrayList<String> tokens) {
-        boolean flag = true;
-        this.temp = new ArrayList<Prefix>(this.prefixes);
-        for (String token : tokens) {
-            flag = flag && validateToken(token);
-        }
-        return flag;
-    }
-
-    /**
-     * Returns true if a token is a valid prefix
-     * @param tokens
-     * @return boolean
-     */
-    public boolean validateToken(String token) {
-        boolean flag = false;
-        for (Prefix prefix: temp) {
-            if (prefix.getPrefix().equals(token)) {
-                temp.remove(prefix);
-                return true;
-            }
-        }
-        return flag;
     }
 
     /**
