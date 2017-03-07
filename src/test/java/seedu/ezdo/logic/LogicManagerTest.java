@@ -201,7 +201,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidPersonData() {
         assertCommandFailure("add []\\[;] p/3 s/30/03/1999 d/31/05/1999 t/invalidName",
-                Name.MESSAGE_NAME_CONSTRAINTS)
+                Name.MESSAGE_NAME_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/not_numbers s/01/08/1998 d/11/08/1998 t/invalidPriority",
                 Priority.MESSAGE_PRIORITY_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/2 s/Invalid_Start.Date d/11/08/1998 t/invalidStartDate",
