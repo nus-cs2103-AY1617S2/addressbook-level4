@@ -204,7 +204,7 @@ There is no need to save manually.
 
 * **Help** : `help` <br>
 
-* **Help** : `helpf` <br>
+* **Help format** : `helpf` <br>
 
 * **Add**  `add NAME [r/REMARKS] [d/DEADLINE] [l/LOCATION] [t/TAG]...`
   e.g.  `add do 2103 project r/waiting for john’s reply d/03-03-2017 l/nus soc t/school`
