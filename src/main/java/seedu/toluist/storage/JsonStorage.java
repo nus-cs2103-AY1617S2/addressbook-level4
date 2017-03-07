@@ -4,10 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.Optional;
-import java.util.logging.Logger;
 
 import javafx.util.Pair;
-import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.util.FileUtil;
 import seedu.toluist.commons.util.JsonUtil;
 import seedu.toluist.model.TodoList;

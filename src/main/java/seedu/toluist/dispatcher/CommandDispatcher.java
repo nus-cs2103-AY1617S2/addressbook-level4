@@ -3,10 +3,7 @@ package seedu.toluist.dispatcher;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.logging.Logger;
-
 import seedu.toluist.commons.core.EventsCenter;
-import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.events.ui.NewResultAvailableEvent;
 import seedu.toluist.controller.Controller;
 import seedu.toluist.controller.ExitController;
