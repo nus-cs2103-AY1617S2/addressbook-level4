@@ -15,7 +15,7 @@
     * [Adding a recurring task] (#adding-a-recurring-task)
     * [Editng a task] (#editing-a-task)
     * [Deleting a task] (#deleting-a-task)
-    * [Viewing task] (#viewing-task)
+    * [Viewing tasks] (#viewing-task)
       * [Viewing all tasks] (#viewing-all-tasks)
       * [Viewing a specified task] (#viewing-a-specified-task)
       * [Viewing all Today's tasks] (#viewing-all-todays-tasks)
@@ -32,7 +32,7 @@
      * [Reset data] (#reset-data)
      * [Save] (#saving-the-data)
        * [Changing the save location] (#changing-the-save-location)
-     * [Exiting the program] (#exiting-the-program)
+     * [Exiting the program] (#exiting-the-application)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 
@@ -59,8 +59,8 @@ Without further ado, let us get started.
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window. 
 5. Some example commands you can try:
-   * **`add`**: `SunRise Marathon` adds a reminder to attend SunRise Marathon.
-   * **`find`** `Today` searches the task list for all events happening today. 
+   * **`add SunRiseMarathon`**: adds a reminder to attend SunRise Marathon.
+   * **`find Today`**: searches the task list for all events happening today. 
    * **`exit`**: exits the application.
 6. Refer to the [Features](#features) section below for details of each command.
    
@@ -122,7 +122,7 @@ Format: `help [COMMAND]`
 Examples:
 
 * `help add` <br>
-  Shows add command with examples.
+  Shows "add" command with examples.
   
 ### Adding a task
 
@@ -359,7 +359,7 @@ Examples:
 * `delete CS2010`<br>
    Delete all tasks containing tag "CS2010".
 
-### Viewing task
+### Viewing tasks
 
 #### Viewing all tasks
 View a list of all task in iManager. 
@@ -443,13 +443,14 @@ Format: `find [KEYWORDS...]`
 
 Advanced Examples: 
 * `find exam \p1 \dSR1`<br>
-   Find all tasks whoose name matches "exam" or priority matches "1" or description matches "SR1".
+   Find all tasks whoose name contains "exam" or priority contains "1" or description contains "SR1".
 * `find \dSR1 \tCS2010 exam`<br>
-   Find all tasks whoose description matches "SR1" or tag matches "2010" or description matches "SR1". 
+   Find all tasks whoose description contains "SR1" or tag contains "2010" or description contains "SR1". 
 * `find 10-22-2017 \h1500`<br>
-   Find all tasks whoose start date or end date matches "10-22-2017" or start time or end time matches "1500".
+   Find all tasks whoose start date or end date contains "10-22-2017" or start time or end time contains "1500".
 * `find exam \p1 \dSR1 \tCS2010 \m10-2017 \h1500`<br>
-   Find all tasks whoose name matches "exam" or priority matches "1" or description matches "SR1" or tag matches "2010" or  (starts or      ends on October 2017") or (start time or end time matches "1500").
+   Find all tasks whoose name contains "exam" or priority contains "1" or description contains "SR1" or tag contains "2010" or (starts 
+   or ends on October 2017") or (start time or end time contains "1500").
    
 ### Clearing of "done" tasks
 Clears all "done" tasks. <br>
@@ -498,7 +499,7 @@ Examples:
 * `cd`
 * `saveto C:\Users\Computing\Desktop\CS2103`
 
-### Exiting the program
+### Exiting the application
 Exits the application.
 
 Format : `exit`
@@ -541,4 +542,4 @@ Format : `exit`
 [reset](#reset-saved-data) | `reset` | Reset saved data.
 [saveto](#save) | `saveto PATH` | Change the save directory.
  | `cd` | Show current save directory.
-[exit](#exiting-the-program) | `exit` | Exit the application.
+[exit](#exiting-the-application) | `exit` | Exit the application.
