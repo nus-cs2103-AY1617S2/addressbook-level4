@@ -26,7 +26,8 @@ public class Task implements ReadOnlyTask {
         this.name = name;
         this.priorityLevel = priorityLevel;
         this.information = information;
-        this.categories = new UniqueCategoryList(categories); // protect internal categories from changes in the arg list
+        // protect internal categories from changes in the arg list
+        this.categories = new UniqueCategoryList(categories);
     }
 
     /**
