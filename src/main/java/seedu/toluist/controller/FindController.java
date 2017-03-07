@@ -18,13 +18,17 @@ import seedu.toluist.ui.UiStore;
  * Searches the task list for matches in the parameters, and displays the results received
  */
 public class FindController extends Controller {
-    private static final String COMMAND_TEMPLATE = "^(find|filter|list)";
+    private static final String COMMAND_TEMPLATE = "^(?<command>(find|filter|list))"
+            + "(\\s+(?<keywords>.+))?\\s*";
     private static final String SEARCH_BY_TAG = "tag/";
     private static final String SEARCH_BY_NAME = "name/";
     private static final String COMMAND_RESULT_TEMPLATE = "%d results found";
     private static final String TRUE_COMMAND = "true";
     private static final String FALSE_COMMAND = "false";
-    
+    private static final String KEYWORDS = "keywords";
+//    private static final String SPLITTER_COMMAND = "(?i:)( |tag\\|name\\)(?-i)";
+    private static final String SPLITTER_COMMAND = " ";
+      
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     public FindController(Ui renderer) {
@@ -39,30 +43,35 @@ public class FindController extends Controller {
         HashMap<String, String> tokens = tokenize(command);
         boolean isSearchByTag = tokens.get(SEARCH_BY_TAG).equals(TRUE_COMMAND);
         boolean isSearchByName = tokens.get(SEARCH_BY_NAME).equals(TRUE_COMMAND);
+        String keywords = tokens.get(KEYWORDS);
+        String[] keywordList = keywords.split(" ");
         boolean isFound = false;
         TodoList todoList = TodoList.load();
         ArrayList<Task> taskList = todoList.getTasks();
         Task currentTask;
         int foundValue = 0;
-        String SEARCH_VALUE = "";
         
         for (int i = 0; i < taskList.size(); i++) {
             currentTask = taskList.get(i);
-            if (isSearchByTag && !isFound) {
-                for (int j = 0; j < currentTask.allTags.size(); j++) {
-                    if (currentTask.allTags.get(i).tagName.toLowerCase().contains(SEARCH_VALUE.toLowerCase())) {
+            for (int j = 0; j < keywordList.length; j++) {
+                if (isSearchByTag && !isFound) {
+                    for (int k = 0; k < currentTask.allTags.size(); k++) {
+                        if (currentTask.allTags.get(k).tagName.toLowerCase()
+                                .contains(keywordList[j].toLowerCase())) {
+                            foundTasks.add(currentTask);
+                            isFound = true;
+                            foundValue++;
+                        }   
+                    }                    
+                }
+                if (isSearchByName && !isFound) {
+                        if (currentTask.description.toLowerCase()
+                            .contains(keywordList[j].toLowerCase())) {
                         foundTasks.add(currentTask);
                         isFound = true;
                         foundValue++;
-                    }   
-                }                    
-            }
-            if (isSearchByName && !isFound) {
-                if (currentTask.description.toLowerCase().contains(SEARCH_VALUE.toLowerCase())) {
-                    foundTasks.add(currentTask);
-                    isFound = true;
-                    foundValue++;
-                }                
+                    }                
+                }
             }
             isFound = false;
         }
@@ -92,6 +101,17 @@ public class FindController extends Controller {
         }
         else {
             tokens.put(SEARCH_BY_NAME, FALSE_COMMAND);
+        }
+        
+        //keyword for matching
+        String keywords = command.replace(SEARCH_BY_TAG, "");
+        keywords.replace(SEARCH_BY_NAME, "");
+        String[] listOfParameters = command.split(SPLITTER_COMMAND, 2);
+        if (listOfParameters.length > 1) {
+            tokens.put(KEYWORDS, listOfParameters[1]);
+        }
+        else {
+            tokens.put(KEYWORDS, "");
         }
         
         return tokens;

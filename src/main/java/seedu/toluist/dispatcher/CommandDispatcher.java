@@ -41,8 +41,8 @@ public class CommandDispatcher extends Dispatcher {
             new UndoController(renderer),
             new RedoController(renderer),
             new ExitController(renderer),
-            new ListController(renderer),
-            new FindController(renderer)
+            new FindController(renderer),
+            new ListController(renderer)
         }));
     }
 }
