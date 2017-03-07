@@ -1,6 +1,5 @@
 package seedu.toluist.ui;
 
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -14,7 +13,6 @@ import javafx.stage.Stage;
 
 import seedu.toluist.commons.events.ui.ExitAppRequestEvent;
 import seedu.toluist.dispatcher.Dispatcher;
-import seedu.toluist.model.Task;
 import seedu.toluist.ui.view.CommandBox;
 import seedu.toluist.ui.view.ResultView;
 import seedu.toluist.ui.view.TaskListUiView;
@@ -23,8 +21,7 @@ import seedu.toluist.ui.view.TaskListUiView;
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
  */
-public class
-MainWindow extends UiPart<Region> {
+public class MainWindow extends UiPart<Region> {
 
     private static final String ICON = "/images/address_book_32.png";
     private static final String FXML = "MainWindow.fxml";
