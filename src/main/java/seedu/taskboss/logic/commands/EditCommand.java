@@ -8,7 +8,6 @@ import seedu.taskboss.commons.util.CollectionUtil;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.model.category.UniqueTagList;
 import seedu.taskboss.model.task.Address;
-import seedu.taskboss.model.task.Email;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.Phone;
 import seedu.taskboss.model.task.ReadOnlyTask;
