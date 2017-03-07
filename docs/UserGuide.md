@@ -4,6 +4,35 @@
 * [Quick Start](#quick-start)
 * [UI Control](#ui-control)
 * [Features](#features)
+  * [Viewing help] (#viewing-help)
+    * [Viewing a specific command] (#viewing-a-specific-command)
+  * [Adding a task] (#adding-a-task)
+    * [Adding a floating task] (#adding-a-floating-task)
+    * [Adding a pending task] (#adding-a-pending-task)
+       * [Adding a pending task with START DATE&TIME only] (#adding-a-pending-task-with-start-date&time-only)
+       * [Adding a pending task with END DATE&TIME only] (#adding-a-pending-task-with-end-date&time-only)
+       * [Adding a pending task with both START DATE&TIME and END DATE&TIME](#adding-a-pending-task-with-both-start-date&time-and-end    date&time)
+    * [Adding a recurring task] (#adding-a-recurring-task)
+    * [Editng a task] (#editing-a-task)
+    * [Deleting a task] (#deleting-a-task)
+    * [Viewing task] (#viewing-a-task)
+      * [Viewing all tasks] (#viewing-all-tasks)
+      * [Viewing a specified task] (#viewing-a-specified-task)
+      * [Viewing all Today's tasks] (#viewing-all-today's-tasks)
+      * [Viewing all pending tasks] (#viewing-all-pending-tasks)
+      * [Viewing all completed tasks] (#viewing-all-completed-tasks)
+      * [Viewing all floating tasks] (#viewing-all-floating-tasks)
+      * [Viewing all overdue tasks] (#viewing-all-overdue-tasks)
+     * [Marking a task as completed] (#marking-a-task-as-completed)
+     * [Finding for tasks] (#finding-for-tasks)
+     * [Clearing for completed tasks] (#clearing-for-completed-tasks)
+     * [Toggle Google Calendar] (#toggle-google-calendar)
+     * [Undo most recent command] (#undo-most-recent-command)
+     * [Redo most recent undo] (#redo-most-recent-undo)
+     * [Reset data] (#reset-data)
+     * [Save] (#saving-the-data)
+       * [Change the save location] (#saving-the-save-location)
+     * [Exiting the program] (#exiting-the-program)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 
@@ -69,7 +98,7 @@ Examples:
 * `help` <br>
   Shows all available commands with examples.
 
-#### Viewing a specific commands
+#### Viewing a specific command
 Show details of a specific command using `[COMMAND]` flag.
 
 List of available [COMMAND] for help: <br>
@@ -110,7 +139,8 @@ Examples:
 * `add exam p/1 d/SR1 t/CS2010`<br>
   Add a priority 1 floating task named "exam" with description "SR1" and tag "CS2010" into task list.
 
-#### Adding a pending task with START DATE & TIME only
+#### Adding a pending task
+##### Adding a pending task with START DATE&TIME only
 
 Adds a pending task with only start date & time to the task list. <br>
 
@@ -130,7 +160,7 @@ Examples:
   Add a priority 1 pending task named "exam" on 22 October 2017 with description "SR1" and tag "CS2010" into task list.
  
  
-#### Adding a pending task with END DATE & TIME only
+##### Adding a pending task with END DATE&TIME only
 
 Adds a pending task with only end date & time to the task list. <br>
 
@@ -152,7 +182,7 @@ Examples:
   into task list.
   
   
-#### Adding a pending task with both START DATE & TIME + END DATE & TIME 
+##### Adding a pending task with both START DATE&TIME and END DATE&TIME 
 
 Adds a pending task with both start date & time and end date & time to the task list. <br>
 
@@ -332,22 +362,22 @@ Shows a list of all today's task in iManager. Does not show floating, completed 
 
 Format: `view t`<br>
 
-#### Viewing all Pending tasks
+#### Viewing all pending tasks
 Shows a list of all pending task in iManager. Does not show floating, completed and overdue tasks. 
 
 Format: `view p`<br>
 
-#### Viewing all Completed tasks
+#### Viewing all completed tasks
 Shows a list of all completed task in iManager. Does not show pending, floating, overdue and Today's tasks. 
 
 Format: `view c`<br>
 
-#### Viewing all Floating tasks
+#### Viewing all floating tasks
 Shows a list of all floating tasks in iManage. Does not show pending, completed, overdue and Today's tasks. 
 
 Format: `view f`<br>
 
-#### Viewing all Overdue tasks
+#### Viewing all overdue tasks
 Shows a list of all tasks iManage. Does not show pending, completed, floating and Today's tasks. 
 
 Format: `view`<br>
@@ -410,7 +440,7 @@ Format: `clear`
 
 > * Cleared tasks in the current session can be restored with the `undo` command.
 
-### Toggle Google Calender
+### Toggle Google Calendar
 Toggle the view of Google Calendar. The tasks in iManager will be synchronised with your Google Calendar. You cannot make any modification through the calendar.
 
 Format: `toggle`
@@ -422,7 +452,7 @@ Format: `undo`
 
 > * `undo` only support add, edit, delete, done, clear and redo command. 
 
-### Redo most recent command
+### Redo most recent undo
 Redo the most recent undo.  Only commands that modify iManager in the same session can be redo. Command history will be cleared once iManager exits. 
 
 Format: `redo`
@@ -487,7 +517,7 @@ Format : `exit`
  | `find \yYYYY`| Search for tasks belonging to a particular year, both start and end.
  | `find\hHHMM`| Search for tasks belonging to a particular time, both start and end. 
 [clear](#clearing-of-completed-tasks) | `clear` | Clear all completed tasks.
-[toggle](#toggle-google-calender) | `toggle` | Toggle Google Calender.
+[toggle](#toggle-google-calendar) | `toggle` | Toggle Google Calendar.
 [undo](#undo-most-recent-command) | `undo` | Undo the most recent command.
 [redo](#redo-most-recent-command) | `redo` | Redo the most recent undo.
 [reset](#reset-data) | `reset` | Reset saved data.
