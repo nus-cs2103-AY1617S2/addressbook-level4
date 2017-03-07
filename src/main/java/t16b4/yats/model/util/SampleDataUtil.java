@@ -15,22 +15,22 @@ public class SampleDataUtil {
 	public static Task[] getSampleTasks() {
 		try {
 			return new Task[] {
-					new Task(new Title("Vascular Medicine Research"), new Deadline("87438807"), new Timing("alexyeoh@gmail.com"),
+					new Task(new Title("Vascular Medicine Research"), new Deadline("June 27th, 2039"), new Timing("1800"),
 							new Description("Research to be extended and continued to alleviate carcinogenic vascularity"),
 							new UniqueTagList("research")),
-					new Task(new Title("Vscan Access Mid Term"), new Deadline("99272758"), new Timing("berniceyu@gmail.com"),
+					new Task(new Title("Vscan Access Mid Term"), new Deadline("September 15th, 2017"), new Timing("1430"),
 							new Description("To revise on p value mathematical induction"),
 							new UniqueTagList("midterm", "vscan")),
-					new Task(new Title("Grocery Shopping"), new Deadline("93210283"), new Timing("charlotte@yahoo.com"),
+					new Task(new Title("Grocery Shopping"), new Deadline("September 16th, 2017"), new Timing("0945"),
 							new Description("To buy carrots, celery, chicken"),
 							new UniqueTagList("grocery")),
-					new Task(new Title("Project Milestone Documentation"), new Deadline("91031282"), new Timing("lidavid@google.com"),
+					new Task(new Title("Project Milestone Documentation"), new Deadline("December 16th, 2017"), new Timing("2359"),
 							new Description("Remember to finish up the design aspect of voice synthesiser"),
 							new UniqueTagList("project")),
-					new Task(new Title("Mechanical restructuring of sustainability revision"), new Deadline("92492021"), new Timing("irfan@outlook.com"),
+					new Task(new Title("Mechanical restructuring of sustainability revision"), new Deadline("May 30th, 2030"), new Timing("1700"),
 							new Description("Mid term test is going to be difficult!"),
 							new UniqueTagList("midterm")),
-					new Task(new Title("Japanese particle practice"), new Deadline("92624417"), new Timing("royb@gmail.com"),
+					new Task(new Title("Japanese N1 exam practice"), new Deadline("June 23, 2017"), new Timing("1115"),
 							new Description("To brush up on the usage of particles in certain situations"),
 							new UniqueTagList("japanese"))
 			};
