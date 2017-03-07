@@ -13,21 +13,21 @@ We are a team based in the [School of Computing, National University of Singapor
 
 #### [Pang Shi Ying](http://github.com/invisidark)
 <img src="images/shiying.png" width="150"> <br>
-**Role:** Documentation, Scheduling and tracking <br>
+**Role:** Documentation, Scheduling and Tracking <br>
 **Components in charge of:** UI <br>
 
 -----
 
 #### [Pang Zheng Yu](http://github.com/pzyu)
-<img src="images/profile.png" width="150"> <br>
-**Role:** Git Integration, Code quality <br>
+<img src="images/zhengyu.jpg" width="150"> <br>
+**Role:** Git Integration, Code Quality <br>
 **Components in charge of:** Logic <br>
 
 -----
 
 #### [Wang Ce](https://github.com/wangce94)
 <img src="images/wangce.jpg" width="150"> <br>
-**Role:** Testing, Deliverables and deadlines <br>
+**Role:** Testing, Deliverables and Deadlines <br>
 **Components in charge of:** Storage <br>
 
  -----
