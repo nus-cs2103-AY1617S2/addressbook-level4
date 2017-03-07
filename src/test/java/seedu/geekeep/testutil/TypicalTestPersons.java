@@ -1,9 +1,9 @@
 package seedu.geekeep.testutil;
 
 import seedu.geekeep.commons.exceptions.IllegalValueException;
-import seedu.geekeep.model.AddressBook;
-import seedu.geekeep.model.person.Person;
-import seedu.geekeep.model.person.UniquePersonList;
+import seedu.geekeep.model.TaskManager;
+import seedu.geekeep.model.task.Task;
+import seedu.geekeep.model.task.UniqueTaskList;
 
 /**
  *
@@ -43,11 +43,11 @@ public class TypicalTestPersons {
         }
     }
 
-    public static void loadAddressBookWithSampleData(AddressBook ab) {
+    public static void loadTaskManagerWithSampleData(TaskManager ab) {
         for (TestPerson person : new TypicalTestPersons().getTypicalPersons()) {
             try {
-                ab.addPerson(new Person(person));
-            } catch (UniquePersonList.DuplicatePersonException e) {
+                ab.addTask(new Task(person));
+            } catch (UniqueTaskList.DuplicatePersonException e) {
                 assert false : "not possible";
             }
         }
@@ -57,9 +57,9 @@ public class TypicalTestPersons {
         return new TestPerson[]{alice, benson, carl, daniel, elle, fiona, george};
     }
 
-    public AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
-        loadAddressBookWithSampleData(ab);
+    public TaskManager getTypicalTaskManager() {
+        TaskManager ab = new TaskManager();
+        loadTaskManagerWithSampleData(ab);
         return ab;
     }
 }

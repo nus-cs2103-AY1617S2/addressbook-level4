@@ -1,18 +1,18 @@
 package seedu.geekeep.testutil;
 
-import seedu.geekeep.model.person.Address;
-import seedu.geekeep.model.person.Email;
-import seedu.geekeep.model.person.Name;
-import seedu.geekeep.model.person.Phone;
-import seedu.geekeep.model.person.ReadOnlyPerson;
 import seedu.geekeep.model.tag.UniqueTagList;
+import seedu.geekeep.model.task.Address;
+import seedu.geekeep.model.task.Email;
+import seedu.geekeep.model.task.Phone;
+import seedu.geekeep.model.task.ReadOnlyTask;
+import seedu.geekeep.model.task.Title;
 
 /**
  * A mutable person object. For testing only.
  */
-public class TestPerson implements ReadOnlyPerson {
+public class TestPerson implements ReadOnlyTask {
 
-    private Name name;
+    private Title title;
     private Address address;
     private Email email;
     private Phone phone;
@@ -26,15 +26,15 @@ public class TestPerson implements ReadOnlyPerson {
      * Creates a copy of {@code personToCopy}.
      */
     public TestPerson(TestPerson personToCopy) {
-        this.name = personToCopy.getName();
+        this.title = personToCopy.getTitle();
         this.phone = personToCopy.getPhone();
         this.email = personToCopy.getEmail();
         this.address = personToCopy.getAddress();
         this.tags = personToCopy.getTags();
     }
 
-    public void setName(Name name) {
-        this.name = name;
+    public void setTitle(Title title) {
+        this.title = title;
     }
 
     public void setAddress(Address address) {
@@ -54,8 +54,8 @@ public class TestPerson implements ReadOnlyPerson {
     }
 
     @Override
-    public Name getName() {
-        return name;
+    public Title getTitle() {
+        return title;
     }
 
     @Override
@@ -85,7 +85,7 @@ public class TestPerson implements ReadOnlyPerson {
 
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
-        sb.append("add " + this.getName().fullName + " ");
+        sb.append("add " + this.getTitle().fullName + " ");
         sb.append("a/" + this.getAddress().value + " ");
         sb.append("p/" + this.getPhone().value + " ");
         sb.append("e/" + this.getEmail().value + " ");

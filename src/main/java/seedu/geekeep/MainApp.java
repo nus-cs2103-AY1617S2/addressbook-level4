@@ -20,10 +20,10 @@ import seedu.geekeep.commons.util.ConfigUtil;
 import seedu.geekeep.commons.util.StringUtil;
 import seedu.geekeep.logic.Logic;
 import seedu.geekeep.logic.LogicManager;
-import seedu.geekeep.model.AddressBook;
 import seedu.geekeep.model.Model;
 import seedu.geekeep.model.ModelManager;
-import seedu.geekeep.model.ReadOnlyAddressBook;
+import seedu.geekeep.model.ReadOnlyTaskManager;
+import seedu.geekeep.model.TaskManager;
 import seedu.geekeep.model.UserPrefs;
 import seedu.geekeep.model.util.SampleDataUtil;
 import seedu.geekeep.storage.Storage;
@@ -74,8 +74,8 @@ public class MainApp extends Application {
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyTaskManager> addressBookOptional;
+        ReadOnlyTaskManager initialData;
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
@@ -84,10 +84,10 @@ public class MainApp extends Application {
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            initialData = new TaskManager();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            initialData = new TaskManager();
         }
 
         return new ModelManager(initialData, userPrefs);

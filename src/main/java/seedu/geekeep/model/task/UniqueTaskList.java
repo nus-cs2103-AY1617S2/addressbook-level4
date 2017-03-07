@@ -6,34 +6,47 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.geekeep.commons.core.UnmodifiableObservableList;
+import seedu.geekeep.commons.exceptions.DuplicateDataException;
+import seedu.geekeep.commons.util.CollectionUtil;
 
+/**
+ * A list of persons that enforces uniqueness between its elements and does not allow nulls.
+ *
+ * Supports a minimal set of list operations.
+ *
+ * @see Task#equals(Object)
+ * @see CollectionUtil#elementsAreUnique(Collection)
+ */
 public class UniqueTaskList implements Iterable<Task> {
 
-    public static class DuplicateTaskException extends Exception {
-        protected DuplicateTaskException() {
-            super("Operation would result in duplicate task");
+    /**
+     * Signals that an operation would have violated the 'no duplicates' property of the list.
+     */
+    public static class DuplicatePersonException extends DuplicateDataException {
+        protected DuplicatePersonException() {
+            super("Operation would result in duplicate persons");
         }
     }
 
     /**
-     * Signals that an operation targeting a specified Task in the list would fail because there is no such matching
-     * Task in the list.
+     * Signals that an operation targeting a specified person in the list would fail because there is no such matching
+     * person in the list.
      */
-    public static class TaskNotFoundException extends Exception {
+    public static class PersonNotFoundException extends Exception {
     }
 
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
 
     /**
-     * Adds a task to the list.
+     * Adds a person to the list.
      *
-     * @throws DuplicateTaskException
-     *             if the task to add is a duplicate of an existing task in the list.
+     * @throws DuplicatePersonException
+     *             if the person to add is a duplicate of an existing person in the list.
      */
-    public void add(Task toAdd) throws DuplicateTaskException {
+    public void add(Task toAdd) throws DuplicatePersonException {
         assert toAdd != null;
         if (contains(toAdd)) {
-            throw new DuplicateTaskException();
+            throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
     }
@@ -43,7 +56,7 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
-     * Returns true if the list contains an equivalent Task as the given argument.
+     * Returns true if the list contains an equivalent person as the given argument.
      */
     public boolean contains(ReadOnlyTask toCheck) {
         assert toCheck != null;
@@ -62,60 +75,60 @@ public class UniqueTaskList implements Iterable<Task> {
         return internalList.hashCode();
     }
 
-
     @Override
     public Iterator<Task> iterator() {
         return internalList.iterator();
     }
 
     /**
-     * Removes the equivalent task from the list.
+     * Removes the equivalent person from the list.
      *
-     * @throws TaskNotFoundException
-     *             if no such task could be found in the list.
+     * @throws PersonNotFoundException
+     *             if no such person could be found in the list.
      */
-    public boolean remove(ReadOnlyTask toRemove) throws TaskNotFoundException {
+    public boolean remove(ReadOnlyTask toRemove) throws PersonNotFoundException {
         assert toRemove != null;
-        final boolean taskFoundAndDeleted = internalList.remove(toRemove);
-        if (!taskFoundAndDeleted) {
-            throw new TaskNotFoundException();
+        final boolean personFoundAndDeleted = internalList.remove(toRemove);
+        if (!personFoundAndDeleted) {
+            throw new PersonNotFoundException();
         }
-        return taskFoundAndDeleted;
+        return personFoundAndDeleted;
     }
 
-    public void setTasks(List<? extends ReadOnlyTask> tasks) throws DuplicateTaskException {
+    public void setPersons(List<? extends ReadOnlyTask> persons) throws DuplicatePersonException {
         final UniqueTaskList replacement = new UniqueTaskList();
-        for (final ReadOnlyTask task : tasks) {
-            replacement.add(new Task(task));
+        for (final ReadOnlyTask person : persons) {
+            replacement.add(new Task(person));
         }
-        setTasks(replacement);
+        setPersons(replacement);
     }
 
-    public void setTasks(UniqueTaskList replacement) {
+    public void setPersons(UniqueTaskList replacement) {
         this.internalList.setAll(replacement.internalList);
     }
 
     /**
-     * Updates the task in the list at position {@code index} with {@code editedTask}.
+     * Updates the person in the list at position {@code index} with {@code editedPerson}.
      *
-     * @throws DuplicateTaskException
-     *             if updating the task's details causes the task to be equivalent to another existing task in the
+     * @throws DuplicatePersonException
+     *             if updating the person's details causes the person to be equivalent to another existing person in the
      *             list.
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
      */
-    public void updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException {
-        assert editedTask != null;
+    public void updatePerson(int index, ReadOnlyTask editedPerson) throws DuplicatePersonException {
+        assert editedPerson != null;
 
         Task taskToUpdate = internalList.get(index);
-        if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
-            throw new DuplicateTaskException();
+        if (!taskToUpdate.equals(editedPerson) && internalList.contains(editedPerson)) {
+            throw new DuplicatePersonException();
         }
 
-        taskToUpdate.resetData(editedTask);
-        // TODO: The code below is just a workaround to notify observers of the updated Task.
-        // The right way is to implement observable properties in the Task class.
-        // Then, TaskCard should then bind its text labels to those observable properties.
+        taskToUpdate.resetData(editedPerson);
+        // TODO: The code below is just a workaround to notify observers of the updated person.
+        // The right way is to implement observable properties in the Person class.
+        // Then, PersonCard should then bind its text labels to those observable properties.
         internalList.set(index, taskToUpdate);
     }
+
 }
