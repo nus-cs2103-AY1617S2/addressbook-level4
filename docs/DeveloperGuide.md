@@ -343,7 +343,7 @@ b. Require developers to download those libraries manually (this creates extra w
 
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
 
-Priority | As a ... | I want to ... | So that I can...
+Priority | As a ... | I can ... | So that I can...
 -------- | :----------- | :-------------------- | :-------------------------
 `* * *` | new user |  view an instruction manual | remember the format and syntax of commands when necessary
 `* * *` | user | quit the program from the command line | avoid the trouble of using the GUI when quit
@@ -372,7 +372,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user who have completed one or more tasks | view a reverse chronological log of all completed tasks | see which tasks I have marked as `done` in the past
 `* * *` | user who have completed one or more events | view a reverse chronological log of all completed events | see which events I have marked as `done` in the past
 `* * *` | user who have dismissed a task | reverse chronological log of all dismissed tasks | see which tasks I have dismissed
-`* * *` | user who have completed or dismissed tasks or events | recycle a task or an event kept in the expired list | 
+`* * *` | user who have completed or dismissed tasks or events | recycle a task or an event kept in the expired list | efficiently add back the previous events and tasks to the active list
 `* * *` | user who have completed or dismissed tasks or events | clear all the past tasks and events from the expired list | eliminate no-longer-relevant tasks and events and keep the log clean
 `* * *` | user | see error message when I enter an invalid command | ammend the command appropriately
 `* * *` | user | undo the last command entered |
@@ -397,8 +397,7 @@ Priority | As a ... | I want to ... | So that I can...
 **MSS**
 
 1. User enters the name of an event to be added, together with its start and end date/time and other options.
-2. TaskCrusher adds the event to the active list
-3. TaskCrusher displays back the details of the add action.
+2. TaskCrusher adds the event to the active list and displays back the details of the add action.
 
 Use case ends.
 
@@ -410,7 +409,7 @@ Use case ends.
   Use case resumes at step 1
 
 2b. The entered time slot is already occupied by another event 
-> 2b1. TaskCrusher notifies the user that the time slot for the event has been already occupied by other event.
+> 2b1. TaskCrusher notifies the user that the time slot for the event has been already occupied by other event, and confirms whether user wants to force the addition. 
   2b2. User decides whether or not to force the addition. 
   
 > Use case ends
@@ -421,7 +420,7 @@ Use case ends.
 **MSS**
 
 1. User requests to list active tasks, active events or both. Additional sort field may be specified.
-2. TaskCrusher displays the active list according to the listing options, assigning each entry an index.
+2. TaskCrusher displays the (filtered) active list according to the listing options, assigning each item in the list an index.
 
 Use case ends
 
@@ -441,8 +440,9 @@ Use case ends
 **MSS**
 
 1. User requests to [display the active list](#list).
-2. User uses the index of the task/event of interest to request to mark it as `done`. Multiple indices can be entered to process more than one entries. 
-3. TaskCrusher moves the task/event from the active list to the expired list.
+2. TaskCrusher displays the (filtered) active list. 
+3. User uses the index of the task/event of interest to request to mark it as `done`. Multiple indexes can be entered to process more than one item at once. 
+4. TaskCrusher moves the item from the active list to the expired list.
 
 Use case ends
 
@@ -458,21 +458,22 @@ Use case ends
 > 3a1. TaskCrusher shows an error message <br>
 Use case resumes at step 2
 <br>
-#### Use case: manage overdue tasks and/or past events
+#### Use case: manage overdue tasks and past events
 
 **MSS**
 
-1. User requests to [display the active list](#list) with the option to list only overdue tasks and/or past events relative to the current time.
-2. For each item in the displayed list, user uses the index to request to mark it as `done`, or dismiss it. Multiple indices may be entered to process more than one items. 
-3. If the user chose to dismiss an item, TaskCrusher prompts the user to enter the reason for it. 
-4. User enters the reason for dismissing a task/event. If user does not need to do so, user does nothing and proceeds.
-5. TaskCrusher moves the task/event from the active list to the expired list.
+1. User requests to [display the active list](#list) with the option to list only overdue tasks and past events relative to the current time.
+2. TaskCrusher displays the filtered list. 
+3. For each item in the displayed list, user uses the index to request to mark it as `done`, or dismiss it. Multiple indexes may be entered to process more than one item at once. 
+4. TaskCrusher prompts the user to enter the reason for dismissing an item, if the user chose to dismiss an item rather than mark as `done`. 
+5. User enters the reason for dismissing a task/event. If user does not wish to do so, user enters nothing and proceeds.
+6. TaskCrusher moves the task/event from the active list to the expired list.
 
 Use case ends
 
 **Extensions**
 
-2a. There are no overdue tasks or past events
+2a. There are no overdue tasks or past events i.e. the filtered list is empty
 > Use case ends
 
 2b. User quits the process
@@ -496,7 +497,7 @@ Use case ends
 8. Must be able to support CLI.
 9. Supports one and only one user.  
 10. A user with an above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-11. Should be able to hold up to 1000 tasks without a noticeable decline in performance.
+11. Should be able to hold up to 1000 tasks without a noticeable decline, say no more than 1.5 seconds, in performance.
 
 
 ## Appendix D : Glossary
@@ -547,4 +548,29 @@ Cons:
 * The Web App is browser-based and needs internet connection, at least for free-versions.
 * Only addition of a task can be done from the command line. The rest of user operations rely heavily on GUI.  
 * Does not offer time-slot “block” feature for tentative events whose time is yet to be finalized.
+
+**Product: Wunderlist**
+
+Author: Anshul Aggarwal
+
+Benefits:
+
+* This to-do list app provides the feature of reminders via in-app notification,email etc.
+* The user can set a deadlines for a task 
+* Very user friendly UI and easy to organise things 
+* Allow Multiple device usage like Iphone,Ipad,Mac,windows and Kindlefire
+* This app is cloud based and has the ability to sync task. 
+* Allows to colloborate with friends and colleagues.
+* Data is stored and synced with device when there is internet access,claims to be faster than Google calendar
+* Allow gruping of list into folders
+* Allow #tags to add more context to your to dos 
+* Allow addition of notes to give more clarity
+
+Downsides:
+
+* Unlike what the professor favours this app requires a lot of clicks and fields to save a task
+* Dont allow booking of multiple slots for a particular task
+* The app allows to set deadline for a task on the basis of due date and not time which might be hinder the users work.
+
+
 
