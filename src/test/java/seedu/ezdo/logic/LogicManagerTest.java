@@ -6,7 +6,9 @@ import static org.junit.Assert.assertTrue;
 import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.ezdo.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.ezdo.model.tag.Tag.MESSAGE_TAG_CONSTRAINTS;
 import static seedu.ezdo.model.todo.DueDate.MESSAGE_DUEDATE_CONSTRAINTS;
+import static seedu.ezdo.model.todo.Name.MESSAGE_NAME_CONSTRAINTS;
 import static seedu.ezdo.model.todo.Priority.MESSAGE_PRIORITY_CONSTRAINTS;
 import static seedu.ezdo.model.todo.StartDate.MESSAGE_STARTDATE_CONSTRAINTS;
 
@@ -200,12 +202,16 @@ public class LogicManagerTest {
 
     @Test
     public void execute_add_invalidPersonData() {
-        assertCommandFailure("add []\\[;] p/3 e/valid@e.mail s/valid, startDate d/31/05/1999",
-                Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail s/valid, startDate d/31/06/1999",
+        assertCommandFailure("add []\\[;] p/3 s/30/03/1999 d/31/05/1999 t/invalidName",
+                MESSAGE_NAME_CONSTRAINTS);
+        assertCommandFailure("add Valid Name p/not_numbers s/01/08/1998 d/11/08/1998 t/invalidPriority",
                 MESSAGE_PRIORITY_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/1 e/valid@e.mail s/valid, startDate d/31/08/1999 t/invalid_-[.tag",
-                Tag.MESSAGE_TAG_CONSTRAINTS);
+        assertCommandFailure("add Valid Name p/2 s/Invalid_Start.Date d/11/08/1998 t/invalidStartDate",
+                MESSAGE_STARTDATE_CONSTRAINTS);
+        assertCommandFailure("add Valid Name p/1 s/01/08/1998 d/invalid_DueDate. t/invalidDueDate",
+                MESSAGE_DUEDATE_CONSTRAINTS);
+        assertCommandFailure("add Valid Name p/1 s/01/01/1990 d/01/03/1990 t/invalid_-[.tag",
+                MESSAGE_TAG_CONSTRAINTS);
 
     }
 
