@@ -1,12 +1,12 @@
-package seedu.address.todo;
+package seedu.address.model;
 
 import java.util.Set;
 
 import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.model.todo.ToDo;
-import seedu.address.model.todo.ReadOnlyPerson;
-import seedu.address.model.todo.UniquePersonList;
-import seedu.address.model.todo.UniquePersonList.DuplicatePersonException;
+import seedu.address.model.todo.ReadOnlyTodo;
+import seedu.address.model.todo.Todo;
+import seedu.address.model.todo.UniqueTodoList;
+import seedu.address.model.todo.UniqueTodoList.DuplicateTodoException;
 
 /**
  * The API of the Model component.
@@ -18,29 +18,29 @@ public interface Model {
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 
-    /** Deletes the given person. */
-    void deletePerson(ReadOnlyPerson target) throws UniquePersonList.PersonNotFoundException;
+    /** Deletes the given todo. */
+    void deleteTodo(ReadOnlyTodo target) throws UniqueTodoList.TodoNotFoundException;
 
-    /** Adds the given person */
-    void addPerson(ToDo person) throws UniquePersonList.DuplicatePersonException;
+    /** Adds the given todo */
+    void addTodo(Todo todo) throws UniqueTodoList.DuplicateTodoException;
 
     /**
-     * Updates the person located at {@code filteredPersonListIndex} with {@code editedPerson}.
+     * Updates the todo located at {@code filteredTodoListIndex} with {@code editedTodo}.
      *
-     * @throws DuplicatePersonException if updating the person's details causes the person to be equivalent to
-     *      another existing person in the list.
-     * @throws IndexOutOfBoundsException if {@code filteredPersonListIndex} < 0 or >= the size of the filtered list.
+     * @throws DuplicateTodoException if updating the todo's details causes the todo to be equivalent to
+     *      another existing todo in the list.
+     * @throws IndexOutOfBoundsException if {@code filteredTodoListIndex} < 0 or >= the size of the filtered list.
      */
-    void updatePerson(int filteredPersonListIndex, ReadOnlyPerson editedPerson)
-            throws UniquePersonList.DuplicatePersonException;
+    void updateTodo(int filteredTodoListIndex, ReadOnlyTodo editedTodo)
+            throws UniqueTodoList.DuplicateTodoException;
 
-    /** Returns the filtered person list as an {@code UnmodifiableObservableList<ReadOnlyPerson>} */
-    UnmodifiableObservableList<ReadOnlyPerson> getFilteredPersonList();
+    /** Returns the filtered todo list as an {@code UnmodifiableObservableList<ReadOnlyTodo>} */
+    UnmodifiableObservableList<ReadOnlyTodo> getFilteredTodoList();
 
-    /** Updates the filter of the filtered person list to show all persons */
+    /** Updates the filter of the filtered todo list to show all todos */
     void updateFilteredListToShowAll();
 
-    /** Updates the filter of the filtered person list to filter by the given keywords*/
-    void updateFilteredPersonList(Set<String> keywords);
+    /** Updates the filter of the filtered todo list to filter by the given keywords*/
+    void updateFilteredTodoList(Set<String> keywords);
 
 }
