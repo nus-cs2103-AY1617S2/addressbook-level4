@@ -22,7 +22,7 @@
    * **`list`** : lists all task
    * **`add`**`  do 2103 project r/waiting for john's reply d/03-03-2017 l/nus soc t/school` : <br>
      adds a task named `do 2103 project` to KIT.
-   * **`delete`**` 3` : deletes the 3rd task shown in the current list
+   * **`delete`**` 3` : deletes the task with index 3 shown in the current list
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
@@ -37,6 +37,8 @@
 
 ### 2.1.1 Viewing help : `help`
 
+If you are not sure where to start, take a sneakpeek at the help sheet!
+
 Format: `help`
 
 > Help brings up user guide in another window 
@@ -49,6 +51,8 @@ Format: `helpf`
 
 ### 2.2 Adding a task: `add`
 
+If you are ready to start exploring KIT,do it by adding a task! 
+
 Adds a task to KIT. New tasks are [not done] by default. <br>
 
 Format: `add NAME [r/REMARKS] [d/DEADLINE] [l/LOCATION] [t/TAG]...`
@@ -56,33 +60,46 @@ Format: `add NAME [r/REMARKS] [d/DEADLINE] [l/LOCATION] [t/TAG]...`
 > * If you need to type the character /, put a \ before it to avoid t/ getting recognized as tag. eg. carrot\/cabbage <br>
 > * Persons can have any number of tags (including 0).
 
-Examples:
+Here are some examples:
 
 * `add do 2103 project r/waiting for john’s reply d/03-03-2017 l/nus soc t/school`
 * `add buy groceries r/cabbage and broccoli d/02-03-2017 t/personal`
 
+* `add feed the cat\/dog t/personal t/family d/01-01/2017` 
+
+
 ### 2.3.1	Listing of all task: `list`
-Shows a list of all the tasks in KIT. <br>
+
+If you want to view all the tasks at once, simply use the list function(s).
+
+Description: Shows a list of all the tasks in KIT. <br>
 
 Format: `list`, `l`, `ls`
 
 ### 2.3.2	Listing of all done task: `listdone`
-Shows a list of all the tasks that has been completed. <br>
+Description: Shows a list of all the tasks that has been completed. <br>
 
 Format: `listdone`, `ld`
 
 ### 2.3.3	Listing of all not done task: `listnotdone`
-Shows a list of all the tasks that has yet to be completed. Sorted by due date. <br>
+Description: Shows a list of all the tasks that has yet to be completed. Sorted by due date. <br>
 
 Format: `listnotdone`, `lnd`
 
 ### 2.3.4	Listing of all task under a tag: `listtag`
-Shows a list of task by the specified tag. <br>
+
+KIT understands that you do not wish to mix up personal life with business, so say if you want to see all work-related tasks, just use `listtag` function.
+
+Description: Shows a list of task by the specified tag. <br>
 
 Format: `listtag TAGNAME`, `lt TAGNAME`
 
 ### 2.4	Marking a task as done: `done`
-Marks the task at the specified `INDEX`. <br>
+
+Congratulations!
+Now that you have completed a task and would like to mark it as done, you can do so by using `done` function.
+
+Description: Marks the task at the specified `INDEX`. <br>
 
 Format: `done INDEX`
 
@@ -90,7 +107,10 @@ Format: `done INDEX`
 > * The index **must be a positive integer** 1, 2, 3, ...
 
 ### 2.5	Deleting a task: `delete`
-Deletes the specified task from KIT. **Irreversible**. <br>
+
+If you would like to remove a task from KIT, simply use the `delete` function.
+
+Description: Deletes the specified task from KIT. **Irreversible**. <br>
 
 Format: `delete INDEX`
 
@@ -108,12 +128,18 @@ Examples:
   Deletes the 1st task in the results of the `find` command.
 
 ### 2.6	Undoing last command: `undo`
-Undo the last command. <br>
+
+In case you have executed an unintended command, you can retract it by `undo`.
+
+Description: Undo the last command. <br>
 
 Format: undo
 
 ### 2.7 Editing a task: `edit`
-Edits an existing task in KIT. <br>
+
+If you wish to edit the details of a current task, `edit` function allows you to do that.
+
+Description: Edits an existing task in KIT. <br>
 
 Format: edit `edit INDEX [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
@@ -132,7 +158,9 @@ Examples:
 
 ### 2.8.1 Finding a task:`find`
 
-Finds task whose names or remark contain **at least one** of the given keywords. <br>
+From time to time, you might want to find a task. You can do so using `find` and providing any one keyword.
+
+Description: Finds task whose names or remark contain **at least one** of the given keywords. <br>
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -153,7 +181,7 @@ Examples:
 
 ### 2.8.2 Finding with exact keyword(s):`findexact`
 
-Find task whose name or remark matches **all** the keyword(s). <br>
+Description: Finds task whose name or remark matches **all** the keyword(s). <br>
 
 Format: `findexact KEYWORD...`
 
@@ -161,23 +189,31 @@ Format: `findexact KEYWORD...`
 e.g `do project` will match `do School project` but not `do homework`
 
 ### 2.9 Clearing all task: `clear`
-Clears all entries from KIT. Will prompt a confirmation. <br>
+
+If you would like to remove every task of the manager, just use `clear`.
+
+Description: Clears all entries from KIT. Will prompt a confirmation. <br>
 
 Format: `clear`
 
 ### 2.10 Exiting the program: `exit`
-Exits the program. <br>
+Description: Exits the program. <br>
 
 Format: `exit`
 
 ### 2.11 Specifying save location: `save`
-Specify location of save file. <br>
+
+If you wish to save the file to a custom location, you can do so using the `save` function.
+
+Description: Specify location of save file. <br>
 
 Format: `save PATHNAME`
 
 ### 2.12. Saving the data
-KIT data are saved in the hard disk automatically after any command that changes the data.
-There is no need to save manually.
+
+You do not have to worry about saving changes, because KIT saves it for you!
+
+In KIT, data are saved automatically after a change has been made. There is no need to save manually.
 
 ## 3. FAQ
 
@@ -218,9 +254,9 @@ There is no need to save manually.
 
 * **List** : `list`, `l`, `ls` <br>
 
-* **List done** : `listnotdone`, `lnd` <br>
+* **List done** : `list`, `l`, `ls` <br>
 
-* **List not done** : `list`, `l`, `ls` <br>
+* **List not done** : `listnotdone`, `lnd`<br>
 
 * **List by tag** : `listtag TAGNAME`, `lt TAGNAME`
   E.g.  `lt school`
@@ -248,5 +284,4 @@ There is no need to save manually.
 
 * **Save location** : `save PATHNAME`
    e.g. `save C:\Program Files`
-
 
