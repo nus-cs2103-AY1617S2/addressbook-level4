@@ -135,7 +135,6 @@ public class MainWindow extends UiPart<Region> {
 
         commandBox = new CommandBox(dispatcher);
         commandBox.setParent(getCommandBoxPlaceholder());
-        commandBox.render();
 
         resultView = new ResultView();
         resultView.setParent(getResultDisplayPlaceholder());
