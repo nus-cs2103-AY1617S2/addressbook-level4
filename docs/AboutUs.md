@@ -6,7 +6,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 
 
-#### [Jin Shun](http://github.com/jinshunlee)  
+#### [Lee Jin Shun](http://github.com/jinshunlee)  
 <img src="images/jinshunlee.png" width="150"><br>  
 Role: Project Leader <br>  
 Responsibilities: 
