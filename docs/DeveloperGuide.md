@@ -346,32 +346,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-|`***`|New User|view instructions|keep track of things to do| 
-|`***`|User|add task|keep track of things to do| 
-|`***`|User|complete task|update my progress|  
-|`***`|User|view incomplete tasks|keep track of what I still need to do|  
-|`***`|User|view complete tasks|keep track of tasks I have completed|  
-|`***`|User|delete a task|remove tasks I no longer want to keep track of|  
-|`***`|User|edit task|correct or revise the task name and its details| 
-|`***`|User|view task progress|keep track of my progress| 
-|`***`|User|sync list with Google Calendar|view my todo list across different platforms|  
-|`***`|User|undo previous command|revert accidental changes|  
-|`***`|User|search for keyword|search for a task by keywords|  
-|`***`|User|view overdue tasks|know which tasks to prioritise finishing|  
-|`***`|User|add tags to task|be able to group tasks under a category|  
-|`***`|User|choose location to store save data|adjust application according to my needs|  
-|`**`|User|view upcoming deadlines|keep track of my deadlines|  
-|`**`|User|have a relevant link for my task|keep track of the task details|  
-|`**`|User|snooze my tasks|adjust application according to my needs|  
-|`**`|User|be reminded of my tasks x minutes before deadline|get reminder to do my task|  
-|`**`|User|change UI theme|customise the application|  
-|`**`|User|repeat tasks|add a repeating task just once|   
-|`**`|User|add notes about a task|keep track of my progress| 
-|`**`|User|be alerted of conflicting tasks|avoid duplicates| 
-|`*`|User|change font size|adjust application according to my needs|     
-|`*`|User|view progress report|have a detailed overview of my current progress|  
-|`*`|User|view my tasks in calendar form|have a visual representation of my schedule|  
-|`*`|User|use arrow keys to scroll through previously typed commands|save myself the trouble of typing similar words|  
+|`***`|New User|view instructions|keep track of things to do|
+|`***`|User|add task|keep track of things to do|
+|`***`|User|complete task|update my progress|
+|`***`|User|view incomplete tasks|keep track of what I still need to do|
+|`***`|User|view complete tasks|keep track of tasks I have completed|
+|`***`|User|delete a task|remove tasks I no longer want to keep track of|
+|`***`|User|edit task|correct or revise the task name and its details|
+|`***`|User|view task progress|keep track of my progress|
+|`***`|User|sync list with Google Calendar|view my todo list across different platforms|
+|`***`|User|undo previous command|revert accidental changes|
+|`***`|User|search for keyword|search for a task by keywords|
+|`***`|User|view overdue tasks|know which tasks to prioritise finishing|
+|`***`|User|add tags to task|be able to group tasks under a category|
+|`***`|User|choose location to store save data|adjust application according to my needs|
+|`**`|User|view upcoming deadlines|keep track of my deadlines|
+|`**`|User|have a relevant link for my task|keep track of the task details|
+|`**`|User|snooze my tasks|adjust application according to my needs|
+|`**`|User|be reminded of my tasks x minutes before deadline|get reminder to do my task|
+|`**`|User|change UI theme|customise the application|
+|`**`|User|repeat tasks|add a repeating task just once|
+|`**`|User|add notes about a task|keep track of my progress|
+|`**`|User|be alerted of conflicting tasks|avoid duplicates|
+|`*`|User|change font size|adjust application according to my needs|
+|`*`|User|view progress report|have a detailed overview of my current progress|
+|`*`|User|view my tasks in calendar form|have a visual representation of my schedule|
+|`*`|User|use arrow keys to scroll through previously typed commands|save myself the trouble of typing similar words|
 |`*`|User|add a message of the day|customise the application|
 
 

@@ -25,46 +25,46 @@ By : `Team CS2103-W15-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nb
 
 ## 2. Features
 
-> **Command Format**  
-> `Square brackets [ ]` denote a required field  
-> `Curved brackets ( )` denote an optional field'  
-> `...` denotes that you can have multiple instances  
+> **Command Format**
+> `Square brackets [ ]` denote a required field
+> `Curved brackets ( )` denote an optional field'
+> `...` denotes that you can have multiple instances
 
 ## 2.01 View help: `help`
 View all the available commands and how to use them
 
-_Format:_  
+_Format:_
 `help`
 
 ## 2.02 Add task: `add`
 Adds a task to your todo list
 
-_Format:_  
+_Format:_
 `add [Name-of-Task] [Deadline] (#Tag-1) (#Tag-2) …`
 
-_Example:_  
+_Example:_
 `add send TPS report to Bill by Friday 6pm #TPS #report`
 
 ## 2.03 Delete task: `delete`
 Removes a task from your todo list
 
-_Format:_  
+_Format:_
 `remove [Task-Number]`
 
 
 ## 2.04 Edit task: `edit`
 Edit task details
 
-_Format:_  
+_Format:_
 `edit [Task-Number]`
 
 ## 2.05 Complete task: `complete`
 Marks task as completed
 
-_Format:_  
+_Format:_
 `complete [Task-Number]`
 
-_Example:_  
+_Example:_
 `complete 2`
 
 ## 2.06 Search: `search`
@@ -73,22 +73,22 @@ Search for tasks with matching keywords in their names and tags
 
 > The search is case insensitive.
 
-_Format:_  
+_Format:_
 `search [tag/name]`
 
-_Example:_  
-`search report`  
+_Example:_
+`search report`
 Returns a list of tasks (if any) with the phrase report in its name or tag
 
 ## 2.07 View overdue tasks: `overdue`
 
 View a list of tasks which are overdue
 
-_Format:_  
+_Format:_
 `overdue`
 
-_Example:_  
-`overdue`  
+_Example:_
+`overdue`
 Returns a list of overdue tasks (if any)
 
 
@@ -98,13 +98,13 @@ View a list of tasks due by a certain date
 
 > You can type in the actual date after the command word due or you can just type in relative dates like today, tomorrow until this month.
 
-_Format:_  
-`due 23/1` <br> 
+_Format:_
+`due 23/1` <br>
 `due today` <br>
 `due this week`
 
-_Example:_    
-`due tomorrow` <br> 
+_Example:_
+`due tomorrow` <br>
 Returns a list of tasks due by tomorrow
 
 
@@ -114,22 +114,22 @@ Undo a previous command, like how a Ctrl-Z works.
 
 > This will undo the most previous command that mutated the data for example add, edit, delete.
 
-_Format:_  
+_Format:_
 `undo`
 
-_Example:_  
-`undo` <br> 
-Returns the undoing of the previous command that mutated the data, e.g. “ add send TPS report to Bill by Friday 6pm undone” 
+_Example:_
+`undo` <br>
+Returns the undoing of the previous command that mutated the data, e.g. “ add send TPS report to Bill by Friday 6pm undone”
 
 ## 2.10 Add tags to created task: `tag`
 
 Add a tag to a task
 > Add tags to the task at the specified index. The index refers to the index number shown in the last person listing.
 
-_Format:_  
+_Format:_
 `tag [Task-Number] [#Tag-1] (#Tag-2) ...`
 
-_Example:_  
+_Example:_
 `tag 1 urgent, for mom` <br>
 Returns the task name with the changed tags
 
@@ -137,14 +137,14 @@ Returns the task name with the changed tags
 
 Repeat a task at a fixed periodic time for e.g. weekly
 > * Add tags to the task at the specified index. The index refers to the index number shown in the last person listing.
-> * The periodic time specified must start with the word “every” and must be followed by one of the seven days of the week. 
+> * The periodic time specified must start with the word “every” and must be followed by one of the seven days of the week.
 
-_Format:_  
+_Format:_
 `repeat [Task-Number] [periodic time]`
 
-_Example:_  
-`repeat 2 every friday`    
-Returns the task name that was put on repeat 
+_Example:_
+`repeat 2 every friday`
+Returns the task name that was put on repeat
 
 
 ## 2.12 Attach links: `addlink`
@@ -153,10 +153,10 @@ Attach relevant link(s) to the specified task.
 > The TASK_NUMBER refers to the index number shown in the most recent listing of the task.
 > This command works for all types of tasks: completed, uncompleted, overdue, etc.
 
-_Format:_   
+_Format:_
 `addlink RELEVANT_LINK TASK_NUMBER`
 
-_Examples:_  
+_Examples:_
 
 `addlink https://www.google.com/drive/presentation-to-boss 5`
 Attach the link `https://www.google.com/drive/presentation-to-boss` to task number 5 in the list of task.
@@ -167,7 +167,7 @@ Attach the link `https://mail.google.com/my-mail-box/important-email` to task nu
 ## 2.13 Progress report: `report`
 Report to the user his/her completed tasks in the past 1 week, overdue tasks in the past 1 week, and uncompleted tasks in the coming week.
 
-_Format_: 
+_Format_:
 `report`
 
 ## 2.14 Calendar view: `calendarview`
@@ -175,7 +175,7 @@ Views the current month and upcoming month’s tasks in the form of a calendar
 > The TASK_NUMBER refers to the index number shown in the most recent listing of the task.
 > This command works for all types of tasks: completed, uncompleted, overdue, etc.
 
-Format: 
+Format:
 `calendarview`
 
 
@@ -188,27 +188,27 @@ Format: `up/down arrow key`
 >Enter the command `settings` to access these features
 
 ## 2.21 Change font size
-Change the font size 
+Change the font size
 > You can specify how much you want to increase or decrease the font size by adding a “by” followed by an integer from 1-10.
-> If no integer is specified, the app will change the font size by 1. 
+> If no integer is specified, the app will change the font size by 1.
 
-_Format:_   
-`increase font (by 1)`    
+_Format:_
+`increase font (by 1)`
 `decrease font (by 1)`
 
 _Examples:_
-* `increase font by 3`   
+* `increase font by 3`
   The app will increase the font size by 3.
 
-* `decrease font`   
-  The app will decrease the font size by 1. 
+* `decrease font`
+  The app will decrease the font size by 1.
 
 
 ## 2.22 Message of the Day
 Set/Change a message of the day
 > Display a motivational message or some ascii art which will be shown when the todo list first starts up
 
-_Format:_ 
+_Format:_
 `motd`
 
 _Example:_
@@ -226,7 +226,7 @@ _Format:_ `sync USER_EMAIL`
 ## 2.24 Customize file storing: `store`
 Tell the task manager to store its data at the location specified by the user.
 
-_Format:_ 
+_Format:_
 `store PATH_TO_STORAGE_FILE`
 > Store all the data of the task manager in the file located at PATH_TO_STORAGE_FILE. It is required that this file be a .txt file located in StorageFile/a folder rooted at StorageFile, and that it is created before the command is called.
 
@@ -240,11 +240,11 @@ The task manager will store its data in AnotherStorage.txt located under Storage
 ## 2.25 Reminder mode: `reminder`
 Tell the task manager to/not to remind the user when it is a) 1 hour before the deadline of the most urgent task and b) 30 minutes before the deadline of the most urgent task.
 
-_Format:_ 
-`reminder on TASK_NAME [MORE_TASKS]` to turn **on** the reminder mode for the specified tasks.  
-`reminder off TASK_NAME [MORE_TASKS]` to turn **off** the reminder mode for the specified tasks.  
-`reminder on/off all` to turn **on**/**off** the reminder mode for all tasks.  
-> The task(s) has to be **uncompleted**, **not overdued** task(s).  
+_Format:_
+`reminder on TASK_NAME [MORE_TASKS]` to turn **on** the reminder mode for the specified tasks.
+`reminder off TASK_NAME [MORE_TASKS]` to turn **off** the reminder mode for the specified tasks.
+`reminder on/off all` to turn **on**/**off** the reminder mode for all tasks.
+> The task(s) has to be **uncompleted**, **not overdued** task(s).
 > By **default**, reminder mode is switched **on** for all **uncompleted**, **not overdued** tasks.
 
 _Examples:_
@@ -257,7 +257,7 @@ Tell the task manager to remind the user 1 hour and 30 minutes before the task `
 
 ## 2.26 Collaborate with others: `collaborate`
 Collaborate with other colleagues in managing the user's to-do list.
-_Format:_ 
+_Format:_
 `collaborate EMAIL_1 [MORE EMAILS]`
 _Examples:_
 * `collaborate jane@gmail.com mary@hotmail.com terence@gmail.com`

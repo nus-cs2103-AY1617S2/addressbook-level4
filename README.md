@@ -10,7 +10,7 @@ This picture only serves illustration purpose.
 
 * This is a desktop To-Do List application. It has a GUI but most of the user interactions happen using
   a CLI (Command Line Interface).
-  
+
 * It is a Java application intended as a tool to help **office workers** working in a **highly specialized, email-oriented** environment to keep track of their tasks more efficiently.
 
 * It is **written in OOP fashion**. Basic functionalities include CRUD operations, simple search and the ability to undo commands. More advanced functionalities include sending alerts, synchronizing with Gmail account and collaborative use.
