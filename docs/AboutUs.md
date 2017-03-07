@@ -10,7 +10,6 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/jinshunlee.png" width="150"><br>  
 Role: Project Leader <br>  
 Responsibilities: 
-Responsibilities: 
 * In charge of Deliverables and Deadlines
 * In charge of Integration
 * In charge of Logic Component
@@ -18,7 +17,7 @@ Responsibilities:
 -----  
 
 #### [Chew Chia Sin](http://github.com/Fyelight)  
-<img src="doc/images/fyelight.png" width="150"><br>  
+<img src="images/fyelight.png" width="150"><br>  
 Role: Developer <br>  
 Responsibilities: 
 *  In charge of Scheduling and Tracking
@@ -27,7 +26,7 @@ Responsibilities:
 -----  
 
 #### [Hon Kean Wai](http://github.com/drtrifle)  
-<img src="doc/images/drtrifle.jpg" width="150"><br>  
+<img src="images/drtrifle.jpg" width="150"><br>  
 Role: Developer <br>  
 Responsibilities: 
 * In charge of Documentation  
@@ -37,7 +36,7 @@ Responsibilities:
 -----  
 
 #### [Ye Huanhui](https://github.com/yexiexie)  
-<img src="doc/images/yexiexie.png" width="150"><br>  
+<img src="images/yexiexie.png" width="150"><br>  
 Role: Developer <br>  
 Responsibilities: 
 * In charge of Code Quality
