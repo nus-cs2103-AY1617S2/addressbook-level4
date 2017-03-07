@@ -45,8 +45,8 @@ public class AddCommand extends Command {
         }
         this.toAdd = new ToDo(
                 new Name(name
-                new StartTime(starttime),
-                new EndTime(endtime),
+                new Time(starttime),
+                new Time(endtime),
                 new UniqueTagList(tagSet)
         );
     }

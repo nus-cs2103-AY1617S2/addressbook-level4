@@ -1,12 +1,12 @@
-package seedu.address.model;
+package seedu.address.todo;
 
 import java.util.Set;
 
 import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.person.UniquePersonList.DuplicatePersonException;
+import seedu.address.model.todo.ToDo;
+import seedu.address.model.todo.ReadOnlyPerson;
+import seedu.address.model.todo.UniquePersonList;
+import seedu.address.model.todo.UniquePersonList.DuplicatePersonException;
 
 /**
  * The API of the Model component.
@@ -22,7 +22,7 @@ public interface Model {
     void deletePerson(ReadOnlyPerson target) throws UniquePersonList.PersonNotFoundException;
 
     /** Adds the given person */
-    void addPerson(Person person) throws UniquePersonList.DuplicatePersonException;
+    void addPerson(ToDo person) throws UniquePersonList.DuplicatePersonException;
 
     /**
      * Updates the person located at {@code filteredPersonListIndex} with {@code editedPerson}.

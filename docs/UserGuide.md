@@ -46,20 +46,20 @@ Format: `help`
 
 ### 2.2. Adding a todo: `add`
 
-Adds a task<br>
-Format: `add task TODO`
+Adds a floating task<br>
+Format: `add TODO [t/TAG]`
 
 Adds an event<br>
-Format: `add event TODO s/STARTTIME e/ENDTIME`
+Format: `add TODO s/STARTTIME e/ENDTIME [t/tag]`
 
 Adds a deadline<br>
-Format: `add dl TODO d/DEADLINE`
+Format: `add TODO d/DEADLINE [t/tag]`
 
 Examples:
 
-* `add task Finish math homework`
-* `add event Take the dog for a walk s/11-11-2017/17:00 e/11-11-17/17:30`
-* `add deadline Finish programming project d/11-11-2017/17:00`
+* `add Finish math homework t/school`
+* `add Take the dog for a walk s/11-11-2017/17:00 e/11-11-17/17:30`
+* `add Finish programming project d/11-11-2017/17:00`
 
 ### 2.3. Listing all todos : `list`
 
@@ -72,8 +72,8 @@ Format: `list u`
 Shows a list of all completed todos.<br>
 Format: `list c`
 
-Shows a list of all tasks.<br>
-Format: `list t`
+Shows a list of all floating tasks.<br>
+Format: `list f`
 
 Shows a list of all deadlines.<br>
 Format: `list d`
@@ -83,14 +83,14 @@ Format: `list e`
 
 ### 2.4. Editing a todo : `edit`
 
-Edits an existing event.<br>
-Format: `edit INDEX [TASK] [s/STARTTIME] [e/ENDTIME]`
+Edits an event.<br>
+Format: `edit INDEX [TASK] [s/STARTTIME] [e/ENDTIME] [t/TAG]`
 
-Edits an existing deadline.<br>
-Format: `edit INDEX [TASK] [d/DEADLINE]`
+Edits an deadline.<br>
+Format: `edit INDEX [TASK] [d/DEADLINE] [t/TAG]`
 
-Edits an existing task.<br>
-Format: `edit INDEX [TASK]`
+Edits an task.<br>
+Format: `edit INDEX [TASK] [t/TAG]`
 
 
 > * Edits the todo at the specified `INDEX`.

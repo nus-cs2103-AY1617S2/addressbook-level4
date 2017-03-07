@@ -8,11 +8,11 @@ import org.junit.Test;
 import guitests.guihandles.PersonCardHandle;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.todo.Address;
+import seedu.address.model.todo.Email;
+import seedu.address.model.todo.Name;
+import seedu.address.model.todo.Phone;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TestPerson;
 

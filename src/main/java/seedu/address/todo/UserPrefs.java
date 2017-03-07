@@ -1,4 +1,4 @@
-package seedu.address.model;
+package seedu.address.todo;
 
 import java.util.Objects;
 
