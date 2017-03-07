@@ -44,7 +44,8 @@ public class EditCommandParser {
         try {
             editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
             editTaskDescriptor.setPriority(ParserUtil.parsePriority(getOptionalValue(argsTokenizer, PREFIX_PRIORITY)));
-            editTaskDescriptor.setStartDate(ParserUtil.parseStartDate(getOptionalValue(argsTokenizer, PREFIX_STARTDATE)));
+            editTaskDescriptor.setStartDate(ParserUtil.parseStartDate(getOptionalValue(argsTokenizer,
+                PREFIX_STARTDATE)));
             editTaskDescriptor.setDueDate(ParserUtil.parseDueDate(getOptionalValue(argsTokenizer, PREFIX_DUEDATE)));
             editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
         } catch (IllegalValueException ive) {
