@@ -22,6 +22,7 @@ public class CommandDispatcher extends Dispatcher {
     public void dispatch(Ui renderer, String command) {
         final Controller controller = getBestFitController(renderer, command);
         final CommandResult feedbackToUser = controller.execute(command);
+        System.out.print("dispatch " + command + " with result " + feedbackToUser);
         eventsCenter.post(new NewResultAvailableEvent(feedbackToUser.getFeedbackToUser()));
     }
 

@@ -23,7 +23,8 @@ import seedu.toluist.ui.view.TaskListUiView;
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
  */
-public class MainWindow extends UiPart<Region> {
+public class
+MainWindow extends UiPart<Region> {
 
     private static final String ICON = "/images/address_book_32.png";
     private static final String FXML = "MainWindow.fxml";
@@ -45,6 +46,11 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private AnchorPane resultDisplayPlaceholder;
 
+    private CommandBox commandBox;
+    private TaskListUiView taskListUiView;
+    private ResultView resultView;
+
+
     public MainWindow (Stage primaryStage, Dispatcher dispatcher) {
         super(FXML);
 
@@ -58,6 +64,7 @@ public class MainWindow extends UiPart<Region> {
         Scene scene = new Scene(getRoot());
         primaryStage.setScene(scene);
         setAccelerators();
+        configureChildrenViews();
     }
 
     public Stage getPrimaryStage() {
@@ -65,20 +72,9 @@ public class MainWindow extends UiPart<Region> {
     }
 
     public void render() {
-        UiStore store = UiStore.getInstance();
-        final ObservableList<Task> tasks = store.getUiTasks();
-
-        final TaskListUiView taskList = new TaskListUiView(tasks);
-        taskList.setParent(getTaskListPlaceholder());
-        taskList.render();
-
-        final CommandBox commandBox = new CommandBox(dispatcher);
-        commandBox.setParent(getCommandBoxPlaceholder());
+        taskListUiView.render();
         commandBox.render();
-
-        final ResultView resultDisplay = new ResultView();
-        resultDisplay.setParent(getResultDisplayPlaceholder());
-        resultDisplay.render();
+        resultView.render();
     }
 
     private void setAccelerators() {
@@ -136,11 +132,17 @@ public class MainWindow extends UiPart<Region> {
         primaryStage.setMinWidth(MIN_WIDTH);
     }
 
-//    @FXML
-//    public void handleHelp() {
-//        HelpWindow helpWindow = new HelpWindow();
-//        helpWindow.show();
-//    }
+    private void configureChildrenViews() {
+        taskListUiView = new TaskListUiView();
+        taskListUiView.setParent(getTaskListPlaceholder());
+
+        commandBox = new CommandBox(dispatcher);
+        commandBox.setParent(getCommandBoxPlaceholder());
+        commandBox.render();
+
+        resultView = new ResultView();
+        resultView.setParent(getResultDisplayPlaceholder());
+    }
 
     void show() {
         primaryStage.show();
