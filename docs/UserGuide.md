@@ -9,9 +9,9 @@
   * [Adding a task] (#adding-a-task)
     * [Adding a floating task] (#adding-a-floating-task)
     * [Adding a pending task] (#adding-a-pending-task)
-       * [Adding a pending task with START DATE&TIME only] (#adding-a-pending-task-with-start-date&time-only)
-       * [Adding a pending task with END DATE&TIME only] (#adding-a-pending-task-with-end-date&time-only)
-       * [Adding a pending task with both START DATE&TIME and END DATE&TIME](#adding-a-pending-task-with-both-start-date&time-and-end    date&time)
+       * [Adding a pending task with START DATE&TIME only] (#adding-a-pending-task-with-start-date-time-only)
+       * [Adding a pending task with END DATE&TIME only] (#adding-a-pending-task-with-end-date-time-only)
+       * [Adding a pending task with both START DATE&TIME and END DATE&TIME](#adding-a-pending-task-with-both-start-date-time-and-end    date-time)
     * [Adding a recurring task] (#adding-a-recurring-task)
     * [Editng a task] (#editing-a-task)
     * [Deleting a task] (#deleting-a-task)
@@ -140,7 +140,7 @@ Examples:
   Add a priority 1 floating task named "exam" with description "SR1" and tag "CS2010" into task list.
 
 #### Adding a pending task
-##### Adding a pending task with START DATE&TIME only
+##### Adding a pending task with START DATE & TIME only
 
 Adds a pending task with only start date & time to the task list. <br>
 
@@ -160,7 +160,7 @@ Examples:
   Add a priority 1 pending task named "exam" on 22 October 2017 with description "SR1" and tag "CS2010" into task list.
  
  
-##### Adding a pending task with END DATE&TIME only
+##### Adding a pending task with END DATE & TIME only
 
 Adds a pending task with only end date & time to the task list. <br>
 
@@ -182,7 +182,7 @@ Examples:
   into task list.
   
   
-##### Adding a pending task with both START DATE&TIME and END DATE&TIME 
+##### Adding a pending task with both START DATE & TIME and END DATE & TIME 
 
 Adds a pending task with both start date & time and end date & time to the task list. <br>
 
