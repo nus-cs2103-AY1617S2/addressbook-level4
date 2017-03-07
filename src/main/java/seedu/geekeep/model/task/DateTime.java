@@ -13,9 +13,6 @@ public class DateTime {
 
     /**
      * Validates given dateTime.
-     *
-     * @throws InvalidDateTimeException
-     *             if given datetime is invalid.
      */
     public static boolean isValidDateTime(LocalDateTime dateTime) {
         Calendar cal = Calendar.getInstance();
