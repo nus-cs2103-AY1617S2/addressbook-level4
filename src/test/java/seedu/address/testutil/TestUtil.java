@@ -26,6 +26,7 @@ import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import junit.framework.AssertionFailedError;
 import seedu.address.TestApp;
+<<<<<<< HEAD
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
@@ -39,6 +40,21 @@ import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.storage.XmlSerializableTaskManager;
+=======
+import seedu.address.storage.XmlSerializableAddressBook;
+import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.commons.util.FileUtil;
+import seedu.task.commons.util.XmlUtil;
+import seedu.task.model.TaskManager;
+import seedu.task.model.tag.Tag;
+import seedu.task.model.tag.UniqueTagList;
+import seedu.task.model.task.Date;
+import seedu.task.model.task.Location;
+import seedu.task.model.task.Name;
+import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.Remark;
+import seedu.task.model.task.Task;
+>>>>>>> 02d6a24595d83597768726a029d5b6a7a4e01285
 
 /**
  * A utility class for test cases.
@@ -144,8 +160,13 @@ public class TestUtil {
         createDataFileWithSampleData(TestApp.SAVE_LOCATION_FOR_TESTING);
     }
 
+<<<<<<< HEAD
     public static XmlSerializableTaskManager generateSampleStorageAddressBook() {
         return new XmlSerializableTaskManager(new AddressBook());
+=======
+    public static XmlSerializableAddressBook generateSampleStorageAddressBook() {
+        return new XmlSerializableAddressBook(new TaskManager());
+>>>>>>> 02d6a24595d83597768726a029d5b6a7a4e01285
     }
 
     /**

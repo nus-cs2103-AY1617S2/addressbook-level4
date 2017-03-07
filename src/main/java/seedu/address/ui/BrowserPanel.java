@@ -5,8 +5,13 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
+<<<<<<< HEAD
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.model.person.ReadOnlyTask;
+=======
+import seedu.task.commons.util.FxViewUtil;
+import seedu.task.model.task.ReadOnlyTask;
+>>>>>>> 02d6a24595d83597768726a029d5b6a7a4e01285
 
 /**
  * The Browser Panel of the App.

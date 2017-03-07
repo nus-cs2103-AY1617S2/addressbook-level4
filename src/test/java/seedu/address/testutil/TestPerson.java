@@ -1,11 +1,20 @@
 package seedu.address.testutil;
 
+<<<<<<< HEAD
 import seedu.address.model.person.Location;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Date;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.tag.UniqueTagList;
+=======
+import seedu.task.model.tag.UniqueTagList;
+import seedu.task.model.task.Date;
+import seedu.task.model.task.Location;
+import seedu.task.model.task.Name;
+import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.Remark;
+>>>>>>> 02d6a24595d83597768726a029d5b6a7a4e01285
 
 /**
  * A mutable person object. For testing only.

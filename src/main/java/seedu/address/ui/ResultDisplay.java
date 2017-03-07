@@ -10,9 +10,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ui.NewResultAvailableEvent;
-import seedu.address.commons.util.FxViewUtil;
+import seedu.task.commons.core.LogsCenter;
+import seedu.task.commons.events.ui.NewResultAvailableEvent;
+import seedu.task.commons.util.FxViewUtil;
 
 /**
  * A ui for the status bar that is displayed at the header of the application.

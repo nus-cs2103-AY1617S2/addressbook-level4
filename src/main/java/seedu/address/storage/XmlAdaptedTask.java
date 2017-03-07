@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 
+<<<<<<< HEAD:src/main/java/seedu/address/storage/XmlAdaptedTask.java
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Location;
 import seedu.address.model.person.Remark;
@@ -14,6 +15,17 @@ import seedu.address.model.person.Date;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+=======
+import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.model.tag.Tag;
+import seedu.task.model.tag.UniqueTagList;
+import seedu.task.model.task.Date;
+import seedu.task.model.task.Location;
+import seedu.task.model.task.Name;
+import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.Remark;
+import seedu.task.model.task.Task;
+>>>>>>> 02d6a24595d83597768726a029d5b6a7a4e01285:src/main/java/seedu/address/storage/XmlAdaptedPerson.java
 
 /**
  * JAXB-friendly version of the Person.
@@ -44,7 +56,11 @@ public class XmlAdaptedTask {
      *
      * @param source future changes to this will not affect the created XmlAdaptedPerson
      */
+<<<<<<< HEAD:src/main/java/seedu/address/storage/XmlAdaptedTask.java
     public XmlAdaptedTask(ReadOnlyTask source) {
+=======
+    public XmlAdaptedPerson(ReadOnlyTask source) {
+>>>>>>> 02d6a24595d83597768726a029d5b6a7a4e01285:src/main/java/seedu/address/storage/XmlAdaptedPerson.java
         name = source.getName().fullName;
         date = source.getDate().value;
         remark = source.getRemark().value;

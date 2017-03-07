@@ -3,9 +3,8 @@ package seedu.address.logic.commands;
 import java.util.List;
 import java.util.Optional;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
+<<<<<<< HEAD
 import seedu.address.model.person.Location;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.Name;
@@ -14,6 +13,18 @@ import seedu.address.model.person.Date;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.UniqueTagList;
+=======
+import seedu.task.commons.core.Messages;
+import seedu.task.commons.util.CollectionUtil;
+import seedu.task.model.tag.UniqueTagList;
+import seedu.task.model.task.Date;
+import seedu.task.model.task.Location;
+import seedu.task.model.task.Name;
+import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.Remark;
+import seedu.task.model.task.Task;
+import seedu.task.model.task.UniqueTaskList;
+>>>>>>> 02d6a24595d83597768726a029d5b6a7a4e01285
 
 /**
  * Edits the details of an existing person in the address book.
@@ -51,7 +62,11 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
+<<<<<<< HEAD
         List<ReadOnlyTask> lastShownList = model.getFilteredPersonList();
+=======
+        List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+>>>>>>> 02d6a24595d83597768726a029d5b6a7a4e01285
 
         if (filteredPersonListIndex >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -62,7 +77,7 @@ public class EditCommand extends Command {
 
         try {
             model.updatePerson(filteredPersonListIndex, editedPerson);
-        } catch (UniquePersonList.DuplicatePersonException dpe) {
+        } catch (UniqueTaskList.DuplicatePersonException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
         model.updateFilteredListToShowAll();

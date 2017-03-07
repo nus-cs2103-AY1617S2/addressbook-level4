@@ -6,10 +6,17 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+<<<<<<< HEAD:src/main/java/seedu/address/storage/XmlTaskManagerStorage.java
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.model.ReadOnlyTaskManager;
+=======
+import seedu.task.commons.core.LogsCenter;
+import seedu.task.commons.exceptions.DataConversionException;
+import seedu.task.commons.util.FileUtil;
+import seedu.task.model.ReadOnlyTaskManager;
+>>>>>>> 02d6a24595d83597768726a029d5b6a7a4e01285:src/main/java/seedu/address/storage/XmlAddressBookStorage.java
 
 /**
  * A class to access AddressBook data stored as an xml file on the hard disk.
@@ -29,8 +36,13 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
     }
 
     @Override
+<<<<<<< HEAD:src/main/java/seedu/address/storage/XmlTaskManagerStorage.java
     public Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException {
         return readTaskManager(filePath);
+=======
+    public Optional<ReadOnlyTaskManager> readAddressBook() throws DataConversionException, IOException {
+        return readAddressBook(filePath);
+>>>>>>> 02d6a24595d83597768726a029d5b6a7a4e01285:src/main/java/seedu/address/storage/XmlAddressBookStorage.java
     }
 
     /**
@@ -38,7 +50,11 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
+<<<<<<< HEAD:src/main/java/seedu/address/storage/XmlTaskManagerStorage.java
     public Optional<ReadOnlyTaskManager> readTaskManager(String filePath) throws DataConversionException,
+=======
+    public Optional<ReadOnlyTaskManager> readAddressBook(String filePath) throws DataConversionException,
+>>>>>>> 02d6a24595d83597768726a029d5b6a7a4e01285:src/main/java/seedu/address/storage/XmlAddressBookStorage.java
                                                                                  FileNotFoundException {
         assert filePath != null;
 
@@ -49,12 +65,17 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
             return Optional.empty();
         }
 
+<<<<<<< HEAD:src/main/java/seedu/address/storage/XmlTaskManagerStorage.java
         ReadOnlyTaskManager taskManagerOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
+=======
+        ReadOnlyTaskManager addressBookOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
+>>>>>>> 02d6a24595d83597768726a029d5b6a7a4e01285:src/main/java/seedu/address/storage/XmlAddressBookStorage.java
 
         return Optional.of(taskManagerOptional);
     }
 
     @Override
+<<<<<<< HEAD:src/main/java/seedu/address/storage/XmlTaskManagerStorage.java
     public void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException {
         saveTaskManager(taskManager, filePath);
     }
@@ -65,6 +86,18 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
      */
     public void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException {
         assert taskManager != null;
+=======
+    public void saveAddressBook(ReadOnlyTaskManager addressBook) throws IOException {
+        saveAddressBook(addressBook, filePath);
+    }
+
+    /**
+     * Similar to {@link #saveAddressBook(ReadOnlyTaskManager)}
+     * @param filePath location of the data. Cannot be null
+     */
+    public void saveAddressBook(ReadOnlyTaskManager addressBook, String filePath) throws IOException {
+        assert addressBook != null;
+>>>>>>> 02d6a24595d83597768726a029d5b6a7a4e01285:src/main/java/seedu/address/storage/XmlAddressBookStorage.java
         assert filePath != null;
 
         File file = new File(filePath);

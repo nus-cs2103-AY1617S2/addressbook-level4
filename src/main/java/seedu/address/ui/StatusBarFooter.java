@@ -10,9 +10,15 @@ import com.google.common.eventbus.Subscribe;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
+<<<<<<< HEAD
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.TaskManagerChangedEvent;
 import seedu.address.commons.util.FxViewUtil;
+=======
+import seedu.task.commons.core.LogsCenter;
+import seedu.task.commons.events.model.TaskManagerChangedEvent;
+import seedu.task.commons.util.FxViewUtil;
+>>>>>>> 02d6a24595d83597768726a029d5b6a7a4e01285
 
 /**
  * A ui for the status bar that is displayed at the footer of the application.
