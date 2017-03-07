@@ -141,7 +141,7 @@ If you wish to edit the details of a current task, `edit` function allows you to
 
 Description: Edits an existing task in KIT. <br>
 
-Format: edit `edit INDEX [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Format: `edit INDEX [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
