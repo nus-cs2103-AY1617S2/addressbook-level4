@@ -29,5 +29,6 @@ Responsibilities: TODO
 
 We welcome contributions. See [Contact Us](ContactUs.md) page for more info.
 
-* [Akshay Narayan](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Aokkhoy)
-* [Sam Yong](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Amauris)
+* [Lim Jing Rong](https://github.com/CS2103AUG2016-F12-B2/main/pulls?q=is%3Apr+author%3Ajjingrong)
+* [Lim Huan Hock](https://github.com/CS2103AUG2016-F12-B2/main/pulls?q=is%3Apr+author%3Ahuanhock)
+* [Wong Woon Fui](https://github.com/CS2103AUG2016-F12-B2/main/pulls?q=is%3Apr+author%3Abenwongwf)
