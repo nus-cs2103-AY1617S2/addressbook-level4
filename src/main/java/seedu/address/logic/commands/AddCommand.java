@@ -5,11 +5,11 @@ import java.util.Set;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.Address;
+import seedu.address.model.person.Location;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Task;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.Date;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
@@ -44,9 +44,9 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Task(
                 new Name(name),
-                new Phone(phone),
+                new Date(phone),
                 new Remark(email),
-                new Address(address),
+                new Location(address),
                 new UniqueTagList(tagSet)
         );
     }

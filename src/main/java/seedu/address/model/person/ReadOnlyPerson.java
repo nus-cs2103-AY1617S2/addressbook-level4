@@ -9,9 +9,9 @@ import seedu.address.model.tag.UniqueTagList;
 public interface ReadOnlyPerson {
 
     Name getName();
-    Phone getPhone();
+    Date getPhone();
     Remark getEmail();
-    Address getAddress();
+    Location getAddress();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,

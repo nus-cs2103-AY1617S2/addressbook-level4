@@ -1,9 +1,9 @@
 package seedu.address.testutil;
 
-import seedu.address.model.person.Address;
+import seedu.address.model.person.Location;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.Date;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -13,9 +13,9 @@ import seedu.address.model.tag.UniqueTagList;
 public class TestPerson implements ReadOnlyPerson {
 
     private Name name;
-    private Address address;
+    private Location address;
     private Remark email;
-    private Phone phone;
+    private Date phone;
     private UniqueTagList tags;
 
     public TestPerson() {
@@ -37,7 +37,7 @@ public class TestPerson implements ReadOnlyPerson {
         this.name = name;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(Location address) {
         this.address = address;
     }
 
@@ -45,7 +45,7 @@ public class TestPerson implements ReadOnlyPerson {
         this.email = email;
     }
 
-    public void setPhone(Phone phone) {
+    public void setPhone(Date phone) {
         this.phone = phone;
     }
 
@@ -59,7 +59,7 @@ public class TestPerson implements ReadOnlyPerson {
     }
 
     @Override
-    public Phone getPhone() {
+    public Date getPhone() {
         return phone;
     }
 
@@ -69,7 +69,7 @@ public class TestPerson implements ReadOnlyPerson {
     }
 
     @Override
-    public Address getAddress() {
+    public Location getAddress() {
         return address;
     }
 
