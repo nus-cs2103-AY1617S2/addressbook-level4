@@ -24,6 +24,7 @@ import seedu.toluist.commons.core.EventsCenter;
 import seedu.toluist.commons.events.BaseEvent;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
+import seedu.toluist.testutil.TypicalTestTodoLists;
 
 /**
  * Gui Test class
@@ -75,7 +76,7 @@ public abstract class GuiTest {
      * Return null to use the data in the file specified in {@link #getDataFileLocation()}
      */
     protected TodoList getInitialData() {
-        TodoList todoList = new TodoList();
+        TodoList todoList = new TypicalTestTodoLists().getTypicalTodoList();
         return todoList;
     }
 
@@ -104,13 +105,13 @@ public abstract class GuiTest {
     }
 
     /**
-     * Asserts the task is shown in the TaskList
+     * Check if a task is shown in the TaskList
      */
-    protected void assertTaskIsShown(Task task) {
+    protected boolean isTaskShown(Task task) {
         boolean taskIsPresent = taskList.getTaskList().getItems().stream()
                 .filter(t -> t.equals(task))
                 .findFirst()
                 .isPresent();
-        assertTrue(taskIsPresent);
+        return taskIsPresent;
     }
 }
