@@ -11,10 +11,10 @@ import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TestPerson;
 import seedu.task.logic.commands.EditCommand;
 import seedu.task.model.tag.Tag;
-import seedu.task.model.task.EndDateTime;
-import seedu.task.model.task.StartDateTime;
-import seedu.task.model.task.Name;
 import seedu.task.model.task.Description;
+import seedu.task.model.task.EndDateTime;
+import seedu.task.model.task.Name;
+import seedu.task.model.task.StartDateTime;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
 public class EditCommandTest extends AddressBookGuiTest {

@@ -1,11 +1,11 @@
 package seedu.address.testutil;
 
 import seedu.task.model.tag.UniqueTagList;
-import seedu.task.model.task.EndDateTime;
-import seedu.task.model.task.StartDateTime;
-import seedu.task.model.task.Name;
 import seedu.task.model.task.Description;
+import seedu.task.model.task.EndDateTime;
+import seedu.task.model.task.Name;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.StartDateTime;
 
 /**
  * A mutable person object. For testing only.
@@ -13,9 +13,9 @@ import seedu.task.model.task.ReadOnlyTask;
 public class TestPerson implements ReadOnlyTask {
 
     private Name name;
-    private EndDateTime address;
-    private StartDateTime email;
-    private Description phone;
+    private Description description;
+    private StartDateTime startDateTime;
+    private EndDateTime endDateTime;
     private UniqueTagList tags;
 
     public TestPerson() {
@@ -27,9 +27,9 @@ public class TestPerson implements ReadOnlyTask {
      */
     public TestPerson(TestPerson personToCopy) {
         this.name = personToCopy.getName();
-        this.phone = personToCopy.getDescription();
-        this.email = personToCopy.getStartDateTime();
-        this.address = personToCopy.getEndDateTime();
+        this.description = personToCopy.getDescription();
+        this.startDateTime = personToCopy.getStartDateTime();
+        this.endDateTime = personToCopy.getEndDateTime();
         this.tags = personToCopy.getTags();
     }
 
@@ -37,16 +37,16 @@ public class TestPerson implements ReadOnlyTask {
         this.name = name;
     }
 
-    public void setAddress(EndDateTime address) {
-        this.address = address;
+    public void setDescription(Description description) {
+        this.description = description;
     }
 
-    public void setEmail(StartDateTime email) {
-        this.email = email;
+    public void setStartDateTime(StartDateTime startDateTime) {
+        this.startDateTime = startDateTime;
     }
 
-    public void setPhone(Description phone) {
-        this.phone = phone;
+    public void setEndDateTime(EndDateTime endDateTime) {
+        this.endDateTime = endDateTime;
     }
 
     public void setTags(UniqueTagList tags) {
@@ -60,17 +60,17 @@ public class TestPerson implements ReadOnlyTask {
 
     @Override
     public Description getDescription() {
-        return phone;
+        return description;
     }
 
     @Override
     public StartDateTime getStartDateTime() {
-        return email;
+        return startDateTime;
     }
 
     @Override
     public EndDateTime getEndDateTime() {
-        return address;
+        return endDateTime;
     }
 
     @Override

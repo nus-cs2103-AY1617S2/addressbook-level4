@@ -6,8 +6,8 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.task.model.tag.UniqueTagList;
 
 /**
- * Represents a Task in the task book.
- * Guarantees: name is present and not null, field values are validated.
+ * Represents a Task in the task book. Guarantees: name is present and not null,
+ * field values are validated.
  */
 public class Task implements ReadOnlyTask {
 
@@ -21,26 +21,29 @@ public class Task implements ReadOnlyTask {
     /**
      * Name must be present and not null.
      */
-    public Task(Name name, Description description, StartDateTime startDateTime, EndDateTime endDateTime, UniqueTagList tags) {
+    public Task(Name name, Description description, StartDateTime startDateTime, EndDateTime endDateTime,
+            UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name);
         this.name = name;
         this.description = description;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
-        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.tags = new UniqueTagList(tags); // protect internal tags from
+                                             // changes in the arg list
     }
 
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getDescription(), source.getStartDateTime(), source.getEndDateTime(), source.getTags());
+        this(source.getName(), source.getDescription(), source.getStartDateTime(), source.getEndDateTime(),
+                source.getTags());
     }
 
     @Override
-	public Name getName() {
-		return name;
-	}
+    public Name getName() {
+        return name;
+    }
 
     public void setName(Name name) {
         assert name != null;
@@ -49,36 +52,36 @@ public class Task implements ReadOnlyTask {
 
     @Override
     public Description getDescription() {
-		return description;
-	}
+        return description;
+    }
 
-	public void setDescription(Description description) {
-		this.description = description;
-	}
-
-    @Override
-	public StartDateTime getStartDateTime() {
-		return startDateTime;
-	}
-
-	public void setStartDateTime(StartDateTime startDateTime) {
-		this.startDateTime = startDateTime;
-	}
+    public void setDescription(Description description) {
+        this.description = description;
+    }
 
     @Override
-	public EndDateTime getEndDateTime() {
-		return endDateTime;
-	}
+    public StartDateTime getStartDateTime() {
+        return startDateTime;
+    }
 
-	public void setEndDateTime(EndDateTime endDateTime) {
-		this.endDateTime = endDateTime;
-	}
+    public void setStartDateTime(StartDateTime startDateTime) {
+        this.startDateTime = startDateTime;
+    }
 
-	public UniqueTagList getTags() {
-		return tags;
-	}
+    @Override
+    public EndDateTime getEndDateTime() {
+        return endDateTime;
+    }
 
-	/**
+    public void setEndDateTime(EndDateTime endDateTime) {
+        this.endDateTime = endDateTime;
+    }
+
+    public UniqueTagList getTags() {
+        return tags;
+    }
+
+    /**
      * Replaces this person's tags with the tags in the argument tag list.
      */
     public void setTags(UniqueTagList replacement) {
@@ -102,12 +105,13 @@ public class Task implements ReadOnlyTask {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ReadOnlyTask // instanceof handles nulls
-                && this.isSameStateAs((ReadOnlyTask) other));
+                        && this.isSameStateAs((ReadOnlyTask) other));
     }
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
+        // use this method for custom fields hashing instead of implementing
+        // your own
         return Objects.hash(name, description, startDateTime, endDateTime, tags);
     }
 

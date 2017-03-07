@@ -1,7 +1,5 @@
 package seedu.task.model.task;
 
-
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,13 +7,13 @@ import java.util.Date;
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task Start DateTime in the task book.
- * Guarantees: immutable; is valid as declared in {@link #isValidDateTime(String)}
+ * Represents a Task Start DateTime in the task book. Guarantees: immutable; is
+ * valid as declared in {@link #isValidDateTime(String)}
  */
 public class StartDateTime {
 
-    public static final String MESSAGE_START_DATETIME_CONSTRAINTS =
-            "Start Date/Time must be in the format of DD/MM/YYYY HHMM, where time is represented in 24 hours";
+    public static final String MESSAGE_START_DATETIME_CONSTRAINTS = "Start Date/Time must be in the format of "
+            + "DD/MM/YYYY HHMM, where time is represented in 24 hours";
     public static final SimpleDateFormat START_DATETIME_FORMATTER = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
     public final Date value;
@@ -29,9 +27,9 @@ public class StartDateTime {
         assert startDateTime != null;
         String trimmedStartDateTime = startDateTime.trim();
         try {
-        	this.value = START_DATETIME_FORMATTER.parse(trimmedStartDateTime);
+            this.value = START_DATETIME_FORMATTER.parse(trimmedStartDateTime);
         } catch (ParseException e) {
-        	throw new IllegalValueException(MESSAGE_START_DATETIME_CONSTRAINTS);
+            throw new IllegalValueException(MESSAGE_START_DATETIME_CONSTRAINTS);
         }
     }
 
@@ -39,11 +37,11 @@ public class StartDateTime {
      * Returns if a given string is a valid start datetime.
      */
     public static boolean isValidStartDateTime(String test) {
-    	START_DATETIME_FORMATTER.setLenient(false);
+        START_DATETIME_FORMATTER.setLenient(false);
         try {
-        	START_DATETIME_FORMATTER.parse(test);
-        } catch(ParseException e) {
-        	return false;
+            START_DATETIME_FORMATTER.parse(test);
+        } catch (ParseException e) {
+            return false;
         }
         return true;
     }
@@ -57,7 +55,8 @@ public class StartDateTime {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof StartDateTime // instanceof handles nulls
-                && this.value.equals(((StartDateTime) other).value)); // state check
+                        && this.value.equals(((StartDateTime) other).value)); // state
+                                                                              // check
     }
 
     @Override

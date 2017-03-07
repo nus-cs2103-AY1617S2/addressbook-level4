@@ -37,7 +37,7 @@ public class Name {
      * Returns true if a given string is a valid task name.
      */
     public static boolean isValidName(String test) {
-    	test = test.trim();
+        test = test.trim();
         return test.matches(NAME_VALIDATION_REGEX);
     }
 
