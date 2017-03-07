@@ -11,18 +11,9 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-<<<<<<< HEAD
 import seedu.address.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.address.commons.util.FxViewUtil;
-import seedu.address.model.person.ReadOnlyTask;
-<<<<<<< HEAD
-=======
-import seedu.address.commons.events.uiTaskPanelSelectionChangedEvent;
-import seedu.address.commons.util.FxViewUtil;
 import seedu.address.model.task.ReadOnlyTask;
->>>>>>> 52e701e877d7e50931eb3bb6a441c4f8af274322
-=======
->>>>>>> parent of 9b5fb6b... test
 
 /**
  * Panel containing the list of tasks.
@@ -32,38 +23,19 @@ public class TaskListPanel extends UiPart<Region> {
     private static final String FXML = "TaskListPanel.fxml";
 
     @FXML
-<<<<<<< HEAD
-<<<<<<< HEAD
-    private ListView<ReadOnlyTask> personListView;
 
-    public PersonListPanel(AnchorPane personListPlaceholder, ObservableList<ReadOnlyTask> personList) {
-=======
+
     private ListView<ReadOnlyTask> taskListView;
-
     public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
->>>>>>> 52e701e877d7e50931eb3bb6a441c4f8af274322
-=======
-    private ListView<ReadOnlyTask> personListView;
 
-    public PersonListPanel(AnchorPane personListPlaceholder, ObservableList<ReadOnlyTask> personList) {
->>>>>>> parent of 9b5fb6b... test
         super(FXML);
         setConnections(taskList);
         addToPlaceholder(taskListPlaceholder);
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> parent of 9b5fb6b... test
-    private void setConnections(ObservableList<ReadOnlyTask> personList) {
-        personListView.setItems(personList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
-=======
     private void setConnections(ObservableList<ReadOnlyTask> taskList) {
         taskListView.setItems(taskList);
         taskListView.setCellFactory(listView -> new TaskListViewCell());
->>>>>>> 52e701e877d7e50931eb3bb6a441c4f8af274322
         setEventHandlerForSelectionChangeEvent();
     }
 
@@ -77,11 +49,7 @@ public class TaskListPanel extends UiPart<Region> {
         taskListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
-<<<<<<< HEAD
-                        logger.fine("Selection in person list panel changed to : '" + newValue + "'");
-=======
                         logger.fine("Selection in task list panel changed to : '" + newValue + "'");
->>>>>>> 52e701e877d7e50931eb3bb6a441c4f8af274322
                         raise(new TaskPanelSelectionChangedEvent(newValue));
                     }
                 });
@@ -94,24 +62,13 @@ public class TaskListPanel extends UiPart<Region> {
         });
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> parent of 9b5fb6b... test
-    class PersonListViewCell extends ListCell<ReadOnlyTask> {
-
-        @Override
-        protected void updateItem(ReadOnlyTask person, boolean empty) {
-            super.updateItem(person, empty);
-=======
     class TaskListViewCell extends ListCell<ReadOnlyTask> {
 
         @Override
         protected void updateItem(ReadOnlyTask task, boolean empty) {
             super.updateItem(task, empty);
->>>>>>> 52e701e877d7e50931eb3bb6a441c4f8af274322
 
-            if (empty || person == null) {
+            if (empty || task == null) {
                 setGraphic(null);
                 setText(null);
             } else {

@@ -111,11 +111,7 @@ public class LogicManagerTest {
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager, List)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
-<<<<<<< HEAD
-                                      ReadOnlyTaskManager expectedAddressBook,
-=======
-                                      ReadOnlyAddressBook expectedAddressBook,
->>>>>>> parent of 9b5fb6b... test
+                                      ReadOnlyTaskManager expectedTaskManager,
                                       List<? extends ReadOnlyTask> expectedShownList) {
         assertCommandBehavior(false, inputCommand, expectedMessage, expectedAddressBook, expectedShownList);
     }
@@ -140,11 +136,7 @@ public class LogicManagerTest {
      *      - {@code expectedAddressBook} was saved to the storage file. <br>
      */
     private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand, String expectedMessage,
-<<<<<<< HEAD
-                                       ReadOnlyTaskManager expectedAddressBook,
-=======
-                                       ReadOnlyAddressBook expectedAddressBook,
->>>>>>> parent of 9b5fb6b... test
+                                       ReadOnlyTaskManager expectedTaskManager,
                                        List<? extends ReadOnlyTask> expectedShownList) {
 
         try {

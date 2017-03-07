@@ -73,11 +73,7 @@ public class AddressBookTest {
     /**
      * A stub ReadOnlyAddressBook whose persons and tags lists can violate interface constraints.
      */
-<<<<<<< HEAD
     private static class AddressBookStub implements ReadOnlyTaskManager {
-=======
-    private static class AddressBookStub implements ReadOnlyAddressBook {
->>>>>>> parent of 9b5fb6b... test
         private final ObservableList<ReadOnlyTask> persons = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 

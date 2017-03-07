@@ -16,11 +16,7 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
-<<<<<<< HEAD
 import seedu.address.model.task.ReadOnlyTask;
-=======
-import seedu.address.model.person.ReadOnlyTask;
->>>>>>> parent of 9b5fb6b... test
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -203,13 +199,8 @@ public class MainWindow extends UiPart<Region> {
         return this.taskListPanel;
     }
 
-<<<<<<< HEAD
     void loadTaskPage(ReadOnlyTask task) {
         browserPanel.loadTaskPage(task);
-=======
-    void loadPersonPage(ReadOnlyTask person) {
-        browserPanel.loadPersonPage(person);
->>>>>>> parent of 9b5fb6b... test
     }
 
     void releaseResources() {
