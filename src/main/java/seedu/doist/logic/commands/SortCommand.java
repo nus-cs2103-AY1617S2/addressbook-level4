@@ -38,6 +38,7 @@ public class SortCommand extends Command {
         }
         this.sortType = theSortType;
     }
+
     @Override
     public CommandResult execute() {
         switch(sortType) {
@@ -53,5 +54,9 @@ public class SortCommand extends Command {
 
     public static boolean canCommandBeTriggeredByWord(String word) {
         return commandWords.contains(word) || DEFAULT_COMMAND_WORD.equals(word);
+    }
+
+    public static CommandInfo info() {
+        return new CommandInfo(commandWords, DEFAULT_COMMAND_WORD);
     }
 }

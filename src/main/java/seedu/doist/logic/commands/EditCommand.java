@@ -23,7 +23,7 @@ public class EditCommand extends Command {
     public static ArrayList<String> commandWords = new ArrayList<>(Arrays.asList("edit"));
     public static final String DEFAULT_COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = getUsageTextForCommandWords()
+    public static final String MESSAGE_USAGE = info().getUsageTextForCommandWords()
             + ": Edits the details of the person identified " + "by the index number used in the last person listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS ] [t/TAG]...\n"
@@ -51,6 +51,11 @@ public class EditCommand extends Command {
 
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
+
+    public static CommandInfo info() {
+        return new CommandInfo(commandWords, DEFAULT_COMMAND_WORD);
+    }
+
 
     @Override
     public CommandResult execute() throws CommandException {
@@ -132,26 +137,5 @@ public class EditCommand extends Command {
         public Optional<UniqueTagList> getTags() {
             return tags;
         }
-    }
-
-    /**
-     * @return a string containing all the command words to be shown in the
-     *         usage message, in the format of (word1|word2|...)
-     */
-    protected static String getUsageTextForCommandWords() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("(");
-        if (!commandWords.contains(DEFAULT_COMMAND_WORD)) {
-            sb.append(DEFAULT_COMMAND_WORD + "|");
-        }
-        for (String commandWord : commandWords) {
-            sb.append(commandWord + "|");
-        }
-        sb.setCharAt(sb.length() - 1, ')');
-        return sb.toString();
-    }
-
-    public static boolean canCommandBeTriggeredByWord(String word) {
-        return commandWords.contains(word) || DEFAULT_COMMAND_WORD.equals(word);
     }
 }
