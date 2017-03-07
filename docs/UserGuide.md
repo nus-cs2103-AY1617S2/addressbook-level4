@@ -25,6 +25,8 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 ## 1. Quick Start
 
+Are you ready to be a do-ist?
+
 0. Ensure you have Java version `1.8.0_60` or later installed in your Computer.
 
 >    Having any Java 8 version is not enough.
@@ -39,7 +41,7 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
    * **`list`** : lists all tasks
-   * **`add Buy the milk \from 3pm \to 5pm`**:  
+   * **`add Buy the milk \from 3pm \to 5pm`**:
      adds an event with a description of "Buy the milk" from upcoming 3pm to 5pm
    * **`delete 3`** : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
@@ -49,18 +51,17 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 > **Command Format**
 > * All commands begin with a command word, following by parameters.
-> * All parameters are key-value pairs except the first first parameter, whose key must be omitted.
+> * All parameters are key-value pairs except the first parameter, whose key must be omitted.
 > * All keys start with the backslash `\`.
 > e.g. `\from`, `\every`.
-> * If users want to use backslash in the value, use `\\`.
+> * If you want to use backslash in the value, use `\\`.
 > * Both command word and keys are strings without space. Underscore is used separete different words.
 > e.g. `list_tag`, `\remind_at`
 > * Words in `UPPER_CASE` are the values.
 > * (A|B) means A and B can be used interchangeably.
 > * Items in `[]` are optional.
-> * Items with `...` after them can have multiple instances, seperated by space.
+> * Items with `...` after them can have multiple instances, separated by space.
 > * Key-value pairs can be in any order.
-> * Tags cannot have space.
 
 ### Viewing help : `help`
 
@@ -71,18 +72,19 @@ Format: `help`
 ### Adding a new task : `add`, `do`
 
 Adds a new task into the to-do list<br>
-Format 1: `(add|do) TASK_DESCRIPTION [\from START_TIME] [\to END_TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]`  
+Format 1: `(add|do) TASK_DESCRIPTION [\from START_TIME] [\to END_TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]`
 Format 2: `(add|do) TASK_DESCRIPTION [\by TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]`
 
 > - Tasks can have any number of tags (including 0)
-> - Tasks can have neither start time and end time. They are floating tasks
-> - Tasks can have start time and end time being the same. They are deadlines
-> - Tasks can have start time and end time being different. They are events
-> - If the user does not specified the priority, it will be set to a default value
 > - The start time and remind time must be earlier or equal to the end time
-> - If the user specify the recurrence interval, every time the end time passes, start time, end time and remind time will be updated to the next occurrence.
-> - For format 2, start time and end time will both be set to TIME.
+> - Tasks can have neither start time and end time. They are floating tasks
+> - Tasks with the same start time and end time or are only associated with one timing are deadlines
+> - For format 2, start time and end time will both be set to `TIME`
 > That is, `add ... by 8pm` is equivalent to `add ... from 8pm to 8pm`
+> - Tasks can have different start time and end time. They are events
+> - `Priority` can be `normal`, `important`, `very important`
+> - If you do not specify the `priority` of the task, it will be set to a default value of `normal`!
+> - If you specify a recurrence interval, every time a task ends or is finished, the start time, end time and remind time of the task will be updated to its next occurrence.
 
 Examples:
 
@@ -92,7 +94,7 @@ Examples:
 ### Listing tasks : `list`, `ls`
 
 Displays a list of tasks.<br>
-Format 1: `(list|ls) [TYPE] [\from TIME] [\to TIME] [\under TAG]`  
+Format 1: `(list|ls) [TYPE] [\from TIME] [\to TIME] [\under TAG]`
 Format 2: `(list|ls) [TYPE] [\in STRING_REPRESENTING_TIME_INTERVAL] [\under TAG]`
 
 > - `TYPE` can be `pending`, `overdue`, `finished`
@@ -125,7 +127,8 @@ Examples:
 
 ### Deleting tasks : `delete`
 
-Deletes the specified tasks from to-do list. Irreversible.<br>
+Deletes the specified tasks from to-do list. It is irreversible.<br>
+You can delete more than one task
 Format: `delete INDEX [INDEX...]`
 
 > Deletes the tasks at the specified `INDEX`.<br>
@@ -163,7 +166,7 @@ Examples:
 ### Editing an existing task : `edit`
 
 Edit the specified task.<br>
-Format 1: `edit INDEX [\desc TASK_DESCRIPTION] [\from START_TIME] [\to END_TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]`  
+Format 1: `edit INDEX [\desc TASK_DESCRIPTION] [\from START_TIME] [\to END_TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]`
 Format 2: `edit INDEX [\desc TASK_DESCRIPTION] [\by TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]`
 
 > The rule for `edit` command is the same as `add` command
@@ -179,6 +182,8 @@ Examples:
 
 Displays a list of all tags.<br>
 Format: `(list_tag|ls_tag)`  
+
+> * Tags cannot have space.
 
 ### Undoing the previous commands : `undo`
 
@@ -226,52 +231,52 @@ There is no need to save manually.
 
 ## 4. Command Summary
 
-* **Add** :  
+* **Add** :
   `(add|do) TASK_DESCRIPTION [\from START_TIME] [\to END_TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]` <br>
   `(add|do) TASK_DESCRIPTION [\by TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]` <br>
   e.g. `do group meeting \from 4pm today \to 6pm today \remind_at 3pm \as important \under school_work CS2103T`
 
-* **Alias** :  
+* **Alias** :
   `alias ALIAS \for COMMAND_WORD` <br>
   e.g. `alias set_alias \for alias`
 
-* **Clear** :  
+* **Clear** :
   `clear` <br>
 
-* **Change storage path** :  
+* **Change storage path** :
   `save_at PATH`  
   e.g. `save_at C:\Users\admin\Desktop\todolist.xml`
 
-* **Delete** :  
+* **Delete** :
   `delete INDEX [INDEX...]` <br>
    e.g. `delete 3 4 5`
 
-* **Edit** :  
+* **Edit** :
   `edit INDEX [\desc TASK_DESCRIPTION] [\from START_TIME] [\to END_TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]` <br>
   `edit INDEX [\desc TASK_DESCRIPTION] [\by TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]` <br>
   e.g. `edit 1 \desc watch NBA \remind_at this Sunday 8am`
 
-* **Exit** :  
+* **Exit** :
   `exit`
 
-* **Find** :  
+* **Find** :
   `find KEYWORD [MORE_KEYWORDS]` <br>
   e.g. `find 'test' 'midterm'`
 
-* **List** :  
+* **List** :
   `(list|ls) [TYPE] [\from TIME] [\to TIME] [\under TAG]` <br>
   `(list|ls) [TYPE] [\in STRING_REPRESENTING_TIME_INTERVAL] [\under TAG]` <br>
   e.g. `ls pending \in this month \under internship`
 
-* **List tags** :  
+* **List tags** :
   `(list_tag|ls_tag)`
 
-* **Help** :  
+* **Help** :
   `help`
 
-* **Undo** :  
+* **Undo** :
   `undo`
 
-* **Mark as finished** :  
-  `finish INDEX [INDEX...]`  
+* **Mark as finished** :
+  `finish INDEX [INDEX...]`
   e.g. `finish 1 8`
