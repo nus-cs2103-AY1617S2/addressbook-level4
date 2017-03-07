@@ -36,6 +36,10 @@ public class JsonStorage implements Storage {
     public Optional<TodoList> load() {
         try {
             String jsonString = getDataJson().get();
+            // push todo list json string into historyStack if the stack is empty
+            if (historyStack.isEmpty()) {
+                historyStack.addLast(jsonString);
+            }
             return Optional.of(JsonUtil.fromJsonString(jsonString, TodoList.class));
         } catch (Exception e) {
             return Optional.empty();
@@ -67,8 +71,6 @@ public class JsonStorage implements Storage {
             return false;
         }
         try {
-            // make sure that the history has at least 1 initial state
-            populateFirstHistory();
             historyStack.addLast(JsonUtil.toJsonString(todoList));
             redoHistoryStack.clear();
         } catch (Exception e) {
@@ -140,18 +142,5 @@ public class JsonStorage implements Storage {
 
     private void setStoragePath(String storagePath) {
         this.storagePath = storagePath;
-    }
-
-    /**
-     * Push the latest todo list json string into historyStack if empty
-     */
-    private void populateFirstHistory() {
-        // This will be the very initial state
-        if (historyStack.isEmpty()) {
-            Optional<String> jsonStringOptional = getDataJson();
-            if (jsonStringOptional.isPresent()) {
-                historyStack.addLast(jsonStringOptional.get());
-            }
-        }
     }
 }
