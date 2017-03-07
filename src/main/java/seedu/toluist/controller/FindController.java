@@ -49,29 +49,16 @@ public class FindController extends Controller {
 
         //initialize search parameters and variables
         ArrayList<Task> foundTasks = new ArrayList<Task>();
-        boolean isFound = false;
         TodoList todoList = TodoList.load();
-        ArrayList<Task> taskList = todoList.getTasks();
-        Task currentTask;
 
-        for (int i = 0; i < taskList.size(); i++) {
-            currentTask = taskList.get(i);
-            for (int j = 0; j < keywordList.length; j++) {
-                if (isSearchByTag && !isFound) {
-                    if (currentTask.isStringContainedInAnyTagIgnoreCase(keywordList[j])) {
-                            foundTasks.add(currentTask);
-                            isFound = true;
-                    }
-                }
-
-                if (isSearchByName && !isFound) {
-                    if (currentTask.isStringContainedInDescriptionIgnoreCase(keywordList[j])) {
-                        foundTasks.add(currentTask);
-                        isFound = true;
-                    }
-                }
+        for (int j = 0; j < keywordList.length; j++) {
+            if (isSearchByTag) {
+                addTasksIgnoreDuplicate(foundTasks, todoList.getTasksWhosTagsContains(keywordList[j]));
             }
-            isFound = false;
+
+            if (isSearchByName) {
+                addTasksIgnoreDuplicate(foundTasks, todoList.getTasksWhosDescriptionContains(keywordList[j]));
+            }
         }
 
         uiStore.setTask(foundTasks);
@@ -79,6 +66,14 @@ public class FindController extends Controller {
 
         //display formatting
         return formatDisplay(isSearchByTag, isSearchByName, keywordList, foundTasks.size());
+    }
+
+    private void addTasksIgnoreDuplicate(ArrayList<Task> originalList, ArrayList<Task> secondaryList) {
+        for (int i = 0; i < secondaryList.size(); i++) {
+            if (!originalList.contains(secondaryList.get(i))) {
+                originalList.add(secondaryList.get(i));
+            }
+        }
     }
 
     private String[] convertToArray(String keywords) {
