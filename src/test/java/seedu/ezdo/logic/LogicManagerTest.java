@@ -41,7 +41,7 @@ import seedu.ezdo.model.ModelManager;
 import seedu.ezdo.model.ReadOnlyEzDo;
 import seedu.ezdo.model.tag.Tag;
 import seedu.ezdo.model.tag.UniqueTagList;
-import seedu.ezdo.model.todo.Email;
+import seedu.ezdo.model.todo.DueDate;
 import seedu.ezdo.model.todo.Name;
 import seedu.ezdo.model.todo.Priority;
 import seedu.ezdo.model.todo.ReadOnlyTask;
@@ -189,20 +189,21 @@ public class LogicManagerTest {
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPriorityPrefix s/valid,address", expectedMessage);
-        assertCommandFailure("add Valid Name p/1 valid@email.butNoPrefix s/valid, address", expectedMessage);
-        assertCommandFailure("add Valid Name p/1 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
+        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPriorityPrefix "
+                + "s/valid,address d/23/02/2017", expectedMessage);
+        assertCommandFailure("add Valid Name p/1"
+                + ", address d/s23/03/2017", expectedMessage);
+        assertCommandFailure("add Valid Name p/1 e/valid@email.butNoAddressPrefix "
+                + "valid, address d/24/04/2017", expectedMessage);
     }
 
     @Test
-    public void execute_add_invalidTaskData() {
-        assertCommandFailure("add []\\[;] p/3 e/valid@e.mail s/valid, address",
+    public void execute_add_invalidPersonData() {
+        assertCommandFailure("add []\\[;] p/3 e/valid@e.mail s/valid, address d/31/05/1999",
                 Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail s/valid, address",
+        assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail s/valid, address d/31/06/1999",
                 Priority.MESSAGE_PRIORITY_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/2 e/notAnEmail s/valid, address",
-                Email.MESSAGE_EMAIL_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/1 e/valid@e.mail s/valid, address t/invalid_-[.tag",
+        assertCommandFailure("add Valid Name p/1 e/valid@e.mail s/valid, address d/31/08/1999 t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
@@ -417,12 +418,12 @@ public class LogicManagerTest {
         private Task adam() throws Exception {
             Name name = new Name("Adam Brown");
             Priority privatePriority = new Priority("1");
-            Email email = new Email("adam@gmail.com");
             StartDate privateStartDate = new StartDate("111, alpha street");
+            DueDate privateDueDate = new DueDate("16/06/2016");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, privatePriority, email, privateStartDate, tags);
+            return new Task(name, privatePriority, privateStartDate, privateDueDate, tags);
         }
 
         /**
@@ -436,8 +437,8 @@ public class LogicManagerTest {
             return new Task(
                     new Name("Task " + seed),
                     new Priority("1"),
-                    new Email(seed + "@email"),
                     new StartDate("House of " + seed),
+                    new DueDate("07/07/2007"),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -449,9 +450,9 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getName().toString());
-            cmd.append(" e/").append(p.getEmail());
             cmd.append(" p/").append(p.getPriority());
             cmd.append(" s/").append(p.getStartDate());
+            cmd.append(" d/").append(p.getDueDate());
 
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {
@@ -535,8 +536,8 @@ public class LogicManagerTest {
             return new Task(
                     new Name(name),
                     new Priority("1"),
-                    new Email("1@email"),
                     new StartDate("House of 1"),
+                    new DueDate("09/09/2009"),
                     new UniqueTagList(new Tag("tag"))
             );
         }
