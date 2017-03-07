@@ -19,7 +19,7 @@ public class TypicalTestPersons {
             benson = new TaskBuilder().withName("Benson Meier")
                     .withTags("owesMoney", "friends").build();
             carl = new TaskBuilder().withName("Carl Kurz").build();
-            daniel = new TaskBuilder().withName("Daniel Meier"). build();
+            daniel = new TaskBuilder().withName("Daniel Meier").build();
             elle = new TaskBuilder().withName("Elle Meyer").build();
             fiona = new TaskBuilder().withName("Fiona Kunz").build();
             george = new TaskBuilder().withName("George Best").build();
