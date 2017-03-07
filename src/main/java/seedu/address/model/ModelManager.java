@@ -1,4 +1,4 @@
-package seedu.address.todo;
+package seedu.address.model;
 
 import java.util.Set;
 import java.util.logging.Logger;
@@ -28,7 +28,7 @@ public class ModelManager extends ComponentManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTaskList addressBook, UserPrefs userPrefs) {
         super();
         assert !CollectionUtil.isAnyNull(addressBook, userPrefs);
 
@@ -43,13 +43,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyTaskList newData) {
         addressBook.resetData(newData);
         indicateAddressBookChanged();
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
+    public ReadOnlyTaskList getAddressBook() {
         return addressBook;
     }
 
