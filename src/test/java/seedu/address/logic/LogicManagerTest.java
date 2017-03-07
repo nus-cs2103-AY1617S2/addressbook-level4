@@ -198,13 +198,13 @@ public class LogicManagerTest {
 
     @Test
     public void execute_add_invalidPersonData() {
-        assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
+        assertCommandFailure("add []\\[;] d/12345 s/01/01/1980 0000 e/01/01/1980 0100, address",
                 Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
-                Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
+        // assertCommandFailure("add Valid Name d/not_numbers s/valid@e.mail e/valid, address",
+        //         Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
+        assertCommandFailure("add Valid Name d/12345 s/invaliddate e/01/01/1980 0100, address",
                 StartDateTime.MESSAGE_START_DATETIME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
+        assertCommandFailure("add Valid Name d/12345 s/01/01/1980 0000 e/01/01/1980 0000, address t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
@@ -419,8 +419,8 @@ public class LogicManagerTest {
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
             Description privatePhone = new Description("111111");
-            StartDateTime email = new StartDateTime("adam@gmail.com");
-            EndDateTime privateAddress = new EndDateTime("111, alpha street");
+            StartDateTime email = new StartDateTime("01/01/1980 0000");
+            EndDateTime privateAddress = new EndDateTime("01/01/1980 0500");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
@@ -436,10 +436,12 @@ public class LogicManagerTest {
          */
         Task generatePerson(int seed) throws Exception {
             return new Task(
-                    new Name("Person " + seed),
+                    new Name("Task " + seed),
                     new Description("" + Math.abs(seed)),
-                    new StartDateTime(seed + "@email"),
-                    new EndDateTime("House of " + seed),
+                    new StartDateTime(String.format("%d%d/%d%d/%d%d%d%d %d%d%d%d", seed, seed,
+                            seed, seed, seed, seed, seed, seed, seed, seed, seed, seed)),
+                    new EndDateTime(String.format("%d%d/%d%d/%d%d%d%d %d%d%d%d", seed, seed,
+                            seed, seed, seed, seed, seed, seed, seed, seed, seed, seed)),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -451,9 +453,9 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getName().toString());
-            cmd.append(" e/").append(p.getDescription().toString());
-            cmd.append(" p/").append(p.getStartDateTime().toString());
-            cmd.append(" a/").append(p.getEndDateTime().toString());
+            cmd.append(" d/").append(p.getDescription().toString());
+            cmd.append(" s/").append(p.getStartDateTime().toString());
+            cmd.append(" e/").append(p.getEndDateTime().toString());
 
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {
@@ -537,8 +539,8 @@ public class LogicManagerTest {
             return new Task(
                     new Name(name),
                     new Description("1"),
-                    new StartDateTime("1@email"),
-                    new EndDateTime("House of 1"),
+                    new StartDateTime("01/01/1980 0000"),
+                    new EndDateTime("01/01/1980 0100"),
                     new UniqueTagList(new Tag("tag"))
             );
         }

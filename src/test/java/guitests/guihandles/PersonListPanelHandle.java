@@ -148,7 +148,10 @@ public class PersonListPanelHandle extends GuiHandle {
     }
 
     public PersonCardHandle getPersonCardHandle(int index) {
-        return getPersonCardHandle(new Task(getListView().getItems().get(index)));
+        Task test = new Task(getListView().getItems().get(index));
+        System.out.println(test);
+        return getPersonCardHandle(test);
+        // return getPersonCardHandle(new Task(getListView().getItems().get(index)));
     }
 
     public PersonCardHandle getPersonCardHandle(ReadOnlyTask person) {
@@ -156,6 +159,8 @@ public class PersonListPanelHandle extends GuiHandle {
         Optional<Node> personCardNode = nodes.stream()
                 .filter(n -> new PersonCardHandle(guiRobot, primaryStage, n).isSamePerson(person))
                 .findFirst();
+        System.out.println("Looking here");
+        System.out.println(personCardNode);
         if (personCardNode.isPresent()) {
             return new PersonCardHandle(guiRobot, primaryStage, personCardNode.get());
         } else {
