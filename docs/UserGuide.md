@@ -23,7 +23,7 @@ By : `Team F12-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbs
 2. Copy the file to the folder you want to use as the home folder for your Savvy To-Do.
 
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
-   > <img src="images/Ui.jpg" width="600">
+   > <img src="images/Ui.png" width="600">
    > (Mockup of Savvy To-Do app. Final design subject to changes.)
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>

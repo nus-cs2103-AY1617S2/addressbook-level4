@@ -5,7 +5,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-F12-B1/Main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-F12-B1/Main?branch=master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e4a7af777828437db063e09c823cc8e2)](https://www.codacy.com/app/yeejfe/Main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103JAN2017-F12-B1/Main&amp;utm_campaign=Badge_Grade)
 
-<img src="docs/images/Ui.jpg" width="600"><br>
+<img src="docs/images/Ui.png" width="600"><br>
 
 * This is a desktop Task Manager application. It has a GUI but most of the user interactions happen using
   a CLI (Command Line Interface).
