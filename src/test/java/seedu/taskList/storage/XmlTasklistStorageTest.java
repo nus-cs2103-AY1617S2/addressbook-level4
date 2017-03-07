@@ -19,7 +19,7 @@ import seedu.taskList.model.task.Task;
 import seedu.taskList.storage.XmlTaskListStorage;
 import seedu.taskList.testutil.TypicalTestTasks;
 
-public class XmlAddressBookStorageTest {
+public class XmlTasklistStorageTest {
     private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlTaskListStorageTest/");
 
     @Rule
