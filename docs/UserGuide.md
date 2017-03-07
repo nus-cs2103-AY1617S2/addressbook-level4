@@ -17,14 +17,17 @@ By : `Team CS2103JAN2017-W15-B4`   &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &
 
 2. Download the latest taskmanager.jar from the [releases](https://github.com/CS2103JAN2017-W15-B4/main/releases) tab.
 3. Copy the file to the folder you want to use as the home folder for your task manager.
-	> <img src="images/GeeKeep.png" width="600">
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
+    <br><br>
+    <img src="images/GeeKeep.png" width="600">
+    <br>
+
 5. Type the command in the command box and press  <kbd>Enter</kbd> to execute it.<br>
 e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 6. Some example commands you can try:
-    * **`list`** : lists all events and tasks
+    * **`list`** : lists all tasks
     * **`add Complete Progress Report ed/20-3-17 et/2359`** : adds a task titled Complete Progress Report with deadline on 20 March 2017 2359H to the task manager.
-    * **`delete 3`** : deletes the 3rd event or contact shown in the current list
+    * **`delete 3`** : deletes the 3rd task shown in the current list
     * **`exit`** : exits the app
 
 10. Refer to the [Features](https://github.com/CS2103JAN2017-W15-B4/main/blob/master/docs/UserGuide.md#features) section below for details of each command.
@@ -46,8 +49,8 @@ Format: `help`
 
 ### 2.2. Adding a task: `add`
 
-Adds a task or event to the task manager<br>
-Format: `add TASK_OR_EVENT_NAME [startdate/START_DATE]  [starttime/START_TIME] [enddate/END_DATE]  [endtime/END_TIME]`
+Adds a task  to the task manager<br>
+Format: `add TASK [startdate/START_DATE]  [starttime/START_TIME] [enddate/END_DATE]  [endtime/END_TIME]`
 
 > Acronyms can be used to represent certain commands e.g. `[sd/START_DATE]` is the same as `[startdate/START_DATE]`. `[st/START_TIME]` is the same as `[starttime/START_TIME]`. `[ed/END_DATE]` is the same as `[enddate/END_DATE]`. `[et/END_TIME]` is the same as `[endtime/END_TIME]`.
 
@@ -58,30 +61,20 @@ Examples:
 * `add Team meeting startdate/15-3-17 st/1500 ed/15-3-17 et/1600`
 * `add celebration sd/1-4-17 ed/1-4-17`
 
-### 2.3. Listing all tasks or events : `list`
+### 2.3. Listing all tasks : `list`
 
-Shows a list of all uncompleted tasks and events in the task manager.<br>
+Shows a list of all uncompleted tasks in the task manager.<br>
 Format: `list`
 
-### 2.4. Listing all completed tasks or events : `listcompleted`
+### 2.4. Listing all completed tasks : `listcompleted`
 
-Shows a list of all completed tasks and events in the task manager.<br>
+Shows a list of all completed tasks in the task manager.<br>
 Format: `listcompleted`
 
-### 2.5. Listing all tasks : `listtasks`
-
-Shows a list of all undone tasks in the task manager.<br>
-Format: `listtasks`
-
-### 2.6. Listing all events : `listevents`
-
-Shows a list of all uncompleted events in the task manager. Events are tasks with a starting and ending time or date.
-Format: `listevents`
-
-### 2.7. Editing a task or event : `update`
+### 2.5. Editing a task : `update`
 
 Edits an existing task in the task manager.<br>
-Format: `update INDEX [TASK_OR_EVENT_NAME] [ed/END_DATE] [et/END_TIME]`
+Format: `update INDEX [TASK] [ed/END_DATE] [et/END_TIME]`
 
 > * Edits the task at the specified INDEX. The index refers to the index number shown in the last task listing.
 > * The index must be a positive integer 1, 2, 3, ...
@@ -95,40 +88,36 @@ Examples:
 * `update 2 ed/ et/`<br>
 Clears the existing deadlines for task 2
 
-### 2.8. Finding all tasks and events containing any keyword in their name or on a specific date : `find`
+### 2.8. Finding all tasks containing any keyword in their name or on a specific date : `find`
 
 Finds tasks whose names contain any of the given keywords.<br>
 Format: `find KEYWORD [MORE_KEYWORDS] [DATE]`
 
 > * The search is case insensitive.
 > * The order of the keywords does not matter. e.g. progress report will match report progress
-> * Only the task or event name is searched.
+> * Only the task  name is searched.
 > * Substrings will be matched e.g. meet will match meeting
 > * Tasks matching at least one keyword will be returned (i.e. OR search). e.g. meeting will match team meeting
-> * Specifying the date will narrow the search space to tasks and events on the day
+> * Specifying the date will narrow the search space to tasks on the day
 
 Examples:
 
 * `find report`<br>
-Returns any task or event having the word report
+Returns any task having the word report
 * `find meet`<br>
-Returns any task or event having the word or substring meet.
+Returns any task having the word or substring meet.
 * `find meet 17-3-17`<br>
-Returns any task or event having the word or substring meet on 17-3-17
+Returns any task having the word or substring meet on 17-3-17
 
-### 2.9. Check the tasks and events current day: `check`
+### 2.9. Summary of the tasks for current day: `summary`
 
-Finds tasks or events which are due on the current day.<br>
-Format: `check`
-
-> * Iterates through each item on the returned list
-> * Prompts the user for action
+Displays a summary of tasks which are due on the current day.<br>
+Format: `summary`
 
 Examples:
 
-* `check`<br>
-Returns a list of tasks and events on the current day
-and  prompts user to mark each task and event as done, update or delete
+* `summary`<br>
+Returns a list of tasks on the current day
 
 ### 2.10. Mark a task as done : `done`
 
@@ -141,7 +130,7 @@ Format: `done INDEX`
 
 Examples:
 
-* `listtask`<br>
+* `list`<br>
 `done 2`<br>
 Marks the 2nd task in the task manager as done.
 
@@ -160,7 +149,7 @@ Format: `delete INDEX`
 
 Examples:
 
-* `listtask`<br>
+* `list`<br>
 `delete 2`<br>
 Deletes the 2nd task in the task manager.
 
@@ -195,10 +184,10 @@ There is no need to save manually.
 
 ## 4. Command Summary
 
-* **Add** `add TASK_OR_EVENT_NAME [sd/START_DATE] [st/START_TIME] [ed/END_DATE] [et/END_TIME]`<br>
+* **Add** `add TASK [sd/START_DATE] [st/START_TIME] [ed/END_DATE] [et/END_TIME]`<br>
  e.g. `add Team meeting sd/15-3-17 st/1500 ed/15-3-17 et/1600`
 
-* **Update** : `update INDEX [TASK_OR_EVENT_NAME] [ed/END_DATE] [et/END_TIME]`<br>
+* **Update** : `update INDEX [TASK] [ed/END_DATE] [et/END_TIME]`<br>
 e.g. : `update 1 Summary Report et/2359`
 
 * **Delete** : `delete INDEX`<br>
@@ -216,17 +205,11 @@ e.g. `undo`
 * **Redo** : `redo`<br>
 e.g. `redo`
 
-* **Check** : `check`<br>
-e.g. `check`
+* **Check** : `summary`<br>
+e.g. `summary`
 
-* **List uncompleted tasks and events** : `list` <br>
+* **List uncompleted tasks** : `list` <br>
 e.g. `list`
-
-* **List uncompleted tasks** : `listtasks`<br>
-e.g. `listtasks`
-
-* **List uncompleted events** : `listevents`<br>
-e.g. `listevents`
 
 * **Help** : `help`<br>
 e.g. `help`
