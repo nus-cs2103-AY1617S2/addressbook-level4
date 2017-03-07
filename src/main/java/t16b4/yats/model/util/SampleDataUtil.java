@@ -12,40 +12,40 @@ import t16b4.yats.model.ReadOnlyTaskManager;
 import t16b4.yats.model.tag.UniqueTagList;
 
 public class SampleDataUtil {
-    public static Task[] getSamplePersons() {
+    public static Task[] getSampleTasks() {
         try {
             return new Task[] {
-                new Task(new Title("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@gmail.com"),
-                    new Description("Blk 30 Geylang Street 29, #06-40"),
-                    new UniqueTagList("friends")),
-                new Task(new Title("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@gmail.com"),
-                    new Description("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                    new UniqueTagList("colleagues", "friends")),
-                new Task(new Title("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@yahoo.com"),
-                    new Description("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                    new UniqueTagList("neighbours")),
-                new Task(new Title("David Li"), new Phone("91031282"), new Email("lidavid@google.com"),
-                    new Description("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                    new UniqueTagList("family")),
-                new Task(new Title("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@outlook.com"),
-                    new Description("Blk 47 Tampines Street 20, #17-35"),
-                    new UniqueTagList("classmates")),
-                new Task(new Title("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@gmail.com"),
-                    new Description("Blk 45 Aljunied Street 85, #11-31"),
-                    new UniqueTagList("colleagues"))
+                new Task(new Title("Vascular Medicine Research"), new Phone("87438807"), new Email("alexyeoh@gmail.com"),
+                    new Description("Research to be extended and continued to alleviate carcinogenic vascularity"),
+                    new UniqueTagList("research")),
+                new Task(new Title("Vscan Access Mid Term"), new Phone("99272758"), new Email("berniceyu@gmail.com"),
+                    new Description("To revise on p value mathematical induction"),
+                    new UniqueTagList("midterm", "vscan")),
+                new Task(new Title("Grocery Shopping"), new Phone("93210283"), new Email("charlotte@yahoo.com"),
+                    new Description("To buy carrots, celery, chicken"),
+                    new UniqueTagList("grocery")),
+                new Task(new Title("Project Milestone Documentation"), new Phone("91031282"), new Email("lidavid@google.com"),
+                    new Description("Remember to finish up the design aspect of voice synthesiser"),
+                    new UniqueTagList("project")),
+                new Task(new Title("Mechanical restructuring of sustainability revision"), new Phone("92492021"), new Email("irfan@outlook.com"),
+                    new Description("Mid term test is going to be difficult!"),
+                    new UniqueTagList("midterm")),
+                new Task(new Title("Japanese particle practice"), new Phone("92624417"), new Email("royb@gmail.com"),
+                    new Description("To brush up on the usage of particles in certain situations"),
+                    new UniqueTagList("japanese"))
             };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);
         }
     }
 
-    public static ReadOnlyTaskManager getSampleAddressBook() {
+    public static ReadOnlyTaskManager getSampleTaskList() {
         try {
-            TaskManager sampleAB = new TaskManager();
-            for (Task samplePerson : getSamplePersons()) {
-                sampleAB.addPerson(samplePerson);
+            TaskManager sampleTL = new TaskManager();
+            for (Task sampleTasks : getSampleTasks()) {
+                sampleTL.addPerson(sampleTasks);
             }
-            return sampleAB;
+            return sampleTL;
         } catch (DuplicatePersonException e) {
             throw new AssertionError("sample data cannot contain duplicate persons", e);
         }
