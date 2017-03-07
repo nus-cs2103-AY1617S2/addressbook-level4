@@ -76,7 +76,7 @@ public class PersonCardHandle extends GuiHandle {
         return getFullName().equals(person.getName().fullName)
                 && getPhone().equals(person.getPhone().value)
                 && getEmail().equals(person.getEmail().value)
-                && getAddress().equals(person.getAddress().value)
+                && getAddress().equals(person.getDescription().value)
                 && getTags().equals(getTags(person.getTags()));
     }
 

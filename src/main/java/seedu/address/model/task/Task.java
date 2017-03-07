@@ -9,32 +9,32 @@ import seedu.address.model.tag.UniqueTagList;
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated.
  */
-public class Person implements ReadOnlyPerson {
+public class Task implements ReadOnlyPerson {
 
     private Name name;
     private Phone phone;
     private Email email;
-    private Description address;
+    private Description description;
 
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Description address, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, phone, email, address, tags);
+    public Task(Name name, Phone phone, Email email, Description description, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, phone, email, description, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
+        this.description = description;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
     /**
      * Creates a copy of the given ReadOnlyPerson.
      */
-    public Person(ReadOnlyPerson source) {
-        this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(), source.getTags());
+    public Task(ReadOnlyPerson source) {
+        this(source.getName(), source.getPhone(), source.getEmail(), source.getDescription(), source.getTags());
     }
 
     public void setName(Name name) {
@@ -67,14 +67,14 @@ public class Person implements ReadOnlyPerson {
         return email;
     }
 
-    public void setAddress(Description address) {
-        assert address != null;
-        this.address = address;
+    public void setDescription(Description description) {
+        assert description != null;
+        this.description = description;
     }
 
     @Override
-    public Description getAddress() {
-        return address;
+    public Description getDescription() {
+        return description;
     }
 
     @Override
@@ -98,7 +98,7 @@ public class Person implements ReadOnlyPerson {
         this.setName(replacement.getName());
         this.setPhone(replacement.getPhone());
         this.setEmail(replacement.getEmail());
-        this.setAddress(replacement.getAddress());
+        this.setDescription(replacement.getDescription());
         this.setTags(replacement.getTags());
     }
 
@@ -112,7 +112,7 @@ public class Person implements ReadOnlyPerson {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, description, tags);
     }
 
     @Override

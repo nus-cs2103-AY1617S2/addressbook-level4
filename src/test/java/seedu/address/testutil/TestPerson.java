@@ -29,7 +29,7 @@ public class TestPerson implements ReadOnlyPerson {
         this.name = personToCopy.getName();
         this.phone = personToCopy.getPhone();
         this.email = personToCopy.getEmail();
-        this.address = personToCopy.getAddress();
+        this.address = personToCopy.getDescription();
         this.tags = personToCopy.getTags();
     }
 
@@ -69,7 +69,7 @@ public class TestPerson implements ReadOnlyPerson {
     }
 
     @Override
-    public Description getAddress() {
+    public Description getDescription() {
         return address;
     }
 
@@ -86,7 +86,7 @@ public class TestPerson implements ReadOnlyPerson {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
-        sb.append("a/" + this.getAddress().value + " ");
+        sb.append("a/" + this.getDescription().value + " ");
         sb.append("p/" + this.getPhone().value + " ");
         sb.append("e/" + this.getEmail().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
