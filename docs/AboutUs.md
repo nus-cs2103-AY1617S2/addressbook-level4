@@ -5,7 +5,7 @@ We are a team based in the [School of Computing, National University of Singapor
 ## Project Team
 
 #### [Gng Jia Hui](http://github.com/gngster)
-<img src="images/GngJiaHui.jpg" width="150"><br>
+<img src="images/GngJiaHui.png" width="150"><br>
 Role: Developer <br>
 Responsibilities: Testing. <br>
 Components: UI, Logic.
@@ -21,7 +21,7 @@ Components: Logic, Storage.
 -----
 
 #### [Shao Hui](http://github.com/shinlos)
-<img src="images/LeowYijin.jpg" width="150"><br>
+<img src="images/NgShaoHui.jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: Code Quality, Deliverables and Deadlines. <br>
 Components: Model, Storage.
