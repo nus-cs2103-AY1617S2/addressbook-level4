@@ -184,23 +184,24 @@ public class LogicManagerTest {
 
     @Test
     public void execute_add_invalidArgsFormat() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add ", expectedMessage);
-        assertCommandFailure("add Valid Name but empty argument \\under  ", expectedMessage);
-        assertCommandFailure("add Valid Name \\from345 Invalid Prefix", expectedMessage);
-        assertCommandFailure("add Valid Name \\from 1500 \\to 1600 \\ ", expectedMessage);
+        //String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        //assertCommandFailure("add wrong arg wrong args", expectedMessage);
+        //assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid,address", expectedMessage);
+        //assertCommandFailure("add Valid Name p/12345 valid@email.butNoPrefix a/valid, address", expectedMessage);
+        //assertCommandFailure("add Valid Name p/12345"
+        //+ "e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidPersonData() {
-        //assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
-              //  Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
+        assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
+                Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
         //assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
                 //Phone.MESSAGE_PHONE_CONSTRAINTS);
         //assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
                 //Email.MESSAGE_EMAIL_CONSTRAINTS);
-        //assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
-              //  Tag.MESSAGE_TAG_CONSTRAINTS);
+        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
+                Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
 
@@ -208,7 +209,7 @@ public class LogicManagerTest {
     public void execute_add_successful() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.doLaundry();
+        Task toBeAdded = helper.adam();
         TodoList expectedAB = new TodoList();
         expectedAB.addTask(toBeAdded);
 
@@ -224,7 +225,7 @@ public class LogicManagerTest {
     public void execute_addDuplicate_notAllowed() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.doLaundry();
+        Task toBeAdded = helper.adam();
 
         // setup starting state
         model.addTask(toBeAdded); // person already in internal address book
@@ -413,8 +414,8 @@ public class LogicManagerTest {
      */
     protected class TestDataHelper {
 
-        protected Task doLaundry() throws Exception {
-            Description name = new Description("Do Laundry");
+        protected Task adam() throws Exception {
+            Description name = new Description("Adam Brown");
             //Phone privatePhone = new Phone("111111");
             //Email email = new Email("adam@gmail.com");
             //Address privateAddress = new Address("111, alpha street");
@@ -453,9 +454,8 @@ public class LogicManagerTest {
             //cmd.append(" a/").append(p.getAddress());
 
             UniqueTagList tags = p.getTags();
-            cmd.append("\\under ");
             for (Tag t: tags) {
-                cmd.append(t.tagName);
+                cmd.append(" t/").append(t.tagName);
             }
 
             return cmd.toString();
