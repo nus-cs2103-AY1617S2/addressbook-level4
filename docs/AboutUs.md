@@ -29,7 +29,7 @@ Responsibilities:  Integration + Git expert + Parser & Logic
 <img src="images/e0003823.jpeg" width="150">
 
 Role: Developer
- 
+
 Responsibilities: Team Lead + Deadlines, Deliverables (admin stuff)  + UI
 
  -----

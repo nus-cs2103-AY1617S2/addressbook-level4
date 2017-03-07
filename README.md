@@ -7,7 +7,7 @@
 
 <img src="docs/images/Ui.jpg" width="600"><br>
 
-* Suru is a task manager application. It has a GUI to display user tasks and checklist but most of the user interactions 
+* Suru is a task manager application. It has a GUI to display user tasks and checklist but most of the user interactions
   happen using a CLI (Command Line Interface).
 * It is a Java sample application intended for students learning Software Engineering while using Java as
   the main programming language.
