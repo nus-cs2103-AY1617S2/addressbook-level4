@@ -23,8 +23,6 @@ public class TaskListPanel extends UiPart<Region> {
     private static final String FXML = "TaskListPanel.fxml";
 
     @FXML
-
-
     private ListView<ReadOnlyTask> taskListView;
     public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
 

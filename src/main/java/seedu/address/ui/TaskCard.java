@@ -26,11 +26,11 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
-        date.setText(date.getDate().value);
-        initTags(person);
+        date.setText(task.getDate().value);
+        initTags(task);
     }
 
     private void initTags(ReadOnlyTask task) {
-        person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }

@@ -6,21 +6,11 @@ import java.util.Optional;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
-<<<<<<< HEAD
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.ReadOnlyTask;
-import seedu.address.model.person.UniquePersonList;
-=======
 import seedu.address.model.task.Date;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.UniqueTaskList;
->>>>>>> a767941edae67662e99e1bfd4f1f28910f9d385f
 import seedu.address.model.tag.UniqueTagList;
 
 /**
@@ -59,43 +49,24 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-<<<<<<< HEAD
-<<<<<<< HEAD
-        List<ReadOnlyTask> lastShownList = model.getFilteredPersonList();
-=======
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
->>>>>>> a767941edae67662e99e1bfd4f1f28910f9d385f
 
         if (filteredTaskListIndex >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-<<<<<<< HEAD
-=======
-        List<ReadOnlyTask> lastShownList = model.getFilteredPersonList();
 
-        if (filteredPersonListIndex >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (filteredTaskListIndex >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
->>>>>>> parent of 9b5fb6b... test
-        ReadOnlyTask personToEdit = lastShownList.get(filteredPersonListIndex);
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-=======
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
->>>>>>> a767941edae67662e99e1bfd4f1f28910f9d385f
 
         try {
-<<<<<<< HEAD
             model.updateTask(filteredTaskListIndex, editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dte) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
-=======
-            model.updatePerson(filteredPersonListIndex, editedPerson);
-        } catch (UniquePersonList.DuplicateTaskException dpe) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
->>>>>>> parent of 9b5fb6b... test
         }
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
@@ -105,18 +76,9 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
      */
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> parent of 9b5fb6b... test
-    private static Person createEditedPerson(ReadOnlyTask personToEdit,
-                                             EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
-=======
     private static Task createEditedTask(ReadOnlyTask taskToEdit,
                                              EditTaskDescriptor editTaskDescriptor) {
         assert taskToEdit != null;
->>>>>>> a767941edae67662e99e1bfd4f1f28910f9d385f
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
         Date updatedDate = editTaskDescriptor.getDate().orElseGet(taskToEdit::getDate);

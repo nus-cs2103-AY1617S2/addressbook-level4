@@ -75,7 +75,7 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> date} into an {@code Optional<Date>} if {@code date} is present.
      */
-    public static Optional<Phone> parseDate(Optional<String> date) throws IllegalValueException {
+    public static Optional<Date> parseDate(Optional<String> date) throws IllegalValueException {
         assert date != null;
         return date.isPresent() ? Optional.of(new Date(date.get())) : Optional.empty();
     }
