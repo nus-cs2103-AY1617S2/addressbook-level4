@@ -7,7 +7,7 @@ import seedu.geekeep.commons.exceptions.DataConversionException;
 import seedu.geekeep.model.ReadOnlyAddressBook;
 
 /**
- * Represents a storage for {@link seedu.geekeep.model.AddressBook}.
+ * Represents a storage for {@link seedu.geekeep.model.TaskManager}.
  */
 public interface AddressBookStorage {
 

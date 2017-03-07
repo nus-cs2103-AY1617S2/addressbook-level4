@@ -1,7 +1,7 @@
 package seedu.geekeep.model.util;
 
 import seedu.geekeep.commons.exceptions.IllegalValueException;
-import seedu.geekeep.model.AddressBook;
+import seedu.geekeep.model.TaskManager;
 import seedu.geekeep.model.ReadOnlyAddressBook;
 import seedu.geekeep.model.person.Address;
 import seedu.geekeep.model.person.Email;
@@ -41,7 +41,7 @@ public class SampleDataUtil {
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
         try {
-            AddressBook sampleAB = new AddressBook();
+            TaskManager sampleAB = new TaskManager();
             for (Person samplePerson : getSamplePersons()) {
                 sampleAB.addPerson(samplePerson);
             }

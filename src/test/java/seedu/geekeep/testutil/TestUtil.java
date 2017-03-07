@@ -29,7 +29,7 @@ import seedu.geekeep.TestApp;
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.commons.util.FileUtil;
 import seedu.geekeep.commons.util.XmlUtil;
-import seedu.geekeep.model.AddressBook;
+import seedu.geekeep.model.TaskManager;
 import seedu.geekeep.model.person.Address;
 import seedu.geekeep.model.person.Email;
 import seedu.geekeep.model.person.Name;
@@ -145,7 +145,7 @@ public class TestUtil {
     }
 
     public static XmlSerializableAddressBook generateSampleStorageAddressBook() {
-        return new XmlSerializableAddressBook(new AddressBook());
+        return new XmlSerializableAddressBook(new TaskManager());
     }
 
     /**

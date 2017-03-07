@@ -20,7 +20,7 @@ import seedu.geekeep.model.tag.UniqueTagList;
 /**
  * Wraps all data at the address-book level Duplicates are not allowed (by .equals comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class TaskManager implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final UniqueTagList tags;
@@ -37,13 +37,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         tags = new UniqueTagList();
     }
 
-    public AddressBook() {
+    public TaskManager() {
     }
 
     /**
      * Creates an AddressBook using the Persons and Tags in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public TaskManager(ReadOnlyAddressBook toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -69,9 +69,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                        && this.persons.equals(((AddressBook) other).persons)
-                        && this.tags.equalsOrderInsensitive(((AddressBook) other).tags));
+                || (other instanceof TaskManager // instanceof handles nulls
+                        && this.persons.equals(((TaskManager) other).persons)
+                        && this.tags.equalsOrderInsensitive(((TaskManager) other).tags));
     }
 
     //// person-level operations

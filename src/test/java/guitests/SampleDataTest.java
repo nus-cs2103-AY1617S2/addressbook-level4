@@ -4,14 +4,14 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.geekeep.model.AddressBook;
+import seedu.geekeep.model.TaskManager;
 import seedu.geekeep.model.person.Person;
 import seedu.geekeep.model.util.SampleDataUtil;
 import seedu.geekeep.testutil.TestUtil;
 
 public class SampleDataTest extends AddressBookGuiTest {
     @Override
-    protected AddressBook getInitialData() {
+    protected TaskManager getInitialData() {
         // return null to force test app to load data from file only
         return null;
     }

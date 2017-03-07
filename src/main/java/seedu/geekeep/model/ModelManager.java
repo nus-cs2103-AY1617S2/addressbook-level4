@@ -21,7 +21,7 @@ import seedu.geekeep.model.person.UniquePersonList.PersonNotFoundException;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final TaskManager taskManager;
     private final FilteredList<ReadOnlyPerson> filteredPersons;
 
     /**
@@ -33,39 +33,39 @@ public class ModelManager extends ComponentManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.taskManager = new TaskManager(addressBook);
+        filteredPersons = new FilteredList<>(this.taskManager.getPersonList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new TaskManager(), new UserPrefs());
     }
 
     @Override
     public void resetData(ReadOnlyAddressBook newData) {
-        addressBook.resetData(newData);
+        taskManager.resetData(newData);
         indicateAddressBookChanged();
     }
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+        return taskManager;
     }
 
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
-        raise(new AddressBookChangedEvent(addressBook));
+        raise(new AddressBookChangedEvent(taskManager));
     }
 
     @Override
     public synchronized void deletePerson(ReadOnlyPerson target) throws PersonNotFoundException {
-        addressBook.removePerson(target);
+        taskManager.removePerson(target);
         indicateAddressBookChanged();
     }
 
     @Override
     public synchronized void addPerson(Person person) throws UniquePersonList.DuplicatePersonException {
-        addressBook.addPerson(person);
+        taskManager.addPerson(person);
         updateFilteredListToShowAll();
         indicateAddressBookChanged();
     }
@@ -76,7 +76,7 @@ public class ModelManager extends ComponentManager implements Model {
         assert editedPerson != null;
 
         int addressBookIndex = filteredPersons.getSourceIndex(filteredPersonListIndex);
-        addressBook.updatePerson(addressBookIndex, editedPerson);
+        taskManager.updatePerson(addressBookIndex, editedPerson);
         indicateAddressBookChanged();
     }
 

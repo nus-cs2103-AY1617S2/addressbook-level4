@@ -1,7 +1,7 @@
 package seedu.geekeep.testutil;
 
 import seedu.geekeep.commons.exceptions.IllegalValueException;
-import seedu.geekeep.model.AddressBook;
+import seedu.geekeep.model.TaskManager;
 import seedu.geekeep.model.person.Person;
 import seedu.geekeep.model.person.UniquePersonList;
 import seedu.geekeep.model.tag.Tag;
@@ -13,23 +13,23 @@ import seedu.geekeep.model.tag.Tag;
  */
 public class AddressBookBuilder {
 
-    private AddressBook addressBook;
+    private TaskManager taskManager;
 
-    public AddressBookBuilder(AddressBook addressBook) {
-        this.addressBook = addressBook;
+    public AddressBookBuilder(TaskManager taskManager) {
+        this.taskManager = taskManager;
     }
 
     public AddressBookBuilder withPerson(Person person) throws UniquePersonList.DuplicatePersonException {
-        addressBook.addPerson(person);
+        taskManager.addPerson(person);
         return this;
     }
 
     public AddressBookBuilder withTag(String tagName) throws IllegalValueException {
-        addressBook.addTag(new Tag(tagName));
+        taskManager.addTag(new Tag(tagName));
         return this;
     }
 
-    public AddressBook build() {
-        return addressBook;
+    public TaskManager build() {
+        return taskManager;
     }
 }

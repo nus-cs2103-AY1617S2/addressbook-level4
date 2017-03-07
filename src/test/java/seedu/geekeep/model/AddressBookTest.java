@@ -24,25 +24,25 @@ public class AddressBookTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final AddressBook addressBook = new AddressBook();
+    private final TaskManager taskManager = new TaskManager();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
-        assertEquals(Collections.emptyList(), addressBook.getTagList());
+        assertEquals(Collections.emptyList(), taskManager.getPersonList());
+        assertEquals(Collections.emptyList(), taskManager.getTagList());
     }
 
     @Test
     public void resetData_null_throwsAssertionError() {
         thrown.expect(AssertionError.class);
-        addressBook.resetData(null);
+        taskManager.resetData(null);
     }
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = new TypicalTestPersons().getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+        TaskManager newData = new TypicalTestPersons().getTypicalTaskManager();
+        taskManager.resetData(newData);
+        assertEquals(newData, taskManager);
     }
 
     @Test
@@ -54,20 +54,20 @@ public class AddressBookTest {
         AddressBookStub newData = new AddressBookStub(newPersons, newTags);
 
         thrown.expect(AssertionError.class);
-        addressBook.resetData(newData);
+        taskManager.resetData(newData);
     }
 
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
-        AddressBook typicalAddressBook = new TypicalTestPersons().getTypicalAddressBook();
-        List<ReadOnlyPerson> newPersons = typicalAddressBook.getPersonList();
-        List<Tag> newTags = new ArrayList<>(typicalAddressBook.getTagList());
+        TaskManager typicalTaskManager = new TypicalTestPersons().getTypicalTaskManager();
+        List<ReadOnlyPerson> newPersons = typicalTaskManager.getPersonList();
+        List<Tag> newTags = new ArrayList<>(typicalTaskManager.getTagList());
         // Repeat the first tag twice
         newTags.add(newTags.get(0));
         AddressBookStub newData = new AddressBookStub(newPersons, newTags);
 
         thrown.expect(AssertionError.class);
-        addressBook.resetData(newData);
+        taskManager.resetData(newData);
     }
 
     /**

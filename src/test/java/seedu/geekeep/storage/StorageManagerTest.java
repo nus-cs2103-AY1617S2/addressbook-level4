@@ -14,7 +14,7 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.geekeep.commons.events.model.AddressBookChangedEvent;
 import seedu.geekeep.commons.events.storage.DataSavingExceptionEvent;
-import seedu.geekeep.model.AddressBook;
+import seedu.geekeep.model.TaskManager;
 import seedu.geekeep.model.ReadOnlyAddressBook;
 import seedu.geekeep.model.UserPrefs;
 import seedu.geekeep.testutil.EventsCollector;
@@ -60,10 +60,10 @@ public class StorageManagerTest {
          * {@link XmlAddressBookStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link XmlAddressBookStorageTest} class.
          */
-        AddressBook original = new TypicalTestPersons().getTypicalAddressBook();
+        TaskManager original = new TypicalTestPersons().getTypicalTaskManager();
         storageManager.saveAddressBook(original);
         ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
-        assertEquals(original, new AddressBook(retrieved));
+        assertEquals(original, new TaskManager(retrieved));
     }
 
     @Test
@@ -77,7 +77,7 @@ public class StorageManagerTest {
         Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub("dummy"),
                                              new JsonUserPrefsStorage("dummy"));
         EventsCollector eventCollector = new EventsCollector();
-        storage.handleAddressBookChangedEvent(new AddressBookChangedEvent(new AddressBook()));
+        storage.handleAddressBookChangedEvent(new AddressBookChangedEvent(new TaskManager()));
         assertTrue(eventCollector.get(0) instanceof DataSavingExceptionEvent);
     }
 
