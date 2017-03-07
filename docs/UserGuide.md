@@ -53,8 +53,8 @@ Adds a task to KIT. New tasks are [not done] by default. <br>
 
 Format: `add NAME [r/REMARKS] [d/DEADLINE] [l/LOCATION] [t/TAG]...`
 
-> If you need to type the character /, put a \ before it to avoid t/ getting picked up as tag. eg. carrot\/cabbage <br>
-> Persons can have any number of tags (including 0)
+> * If you need to type the character /, put a \ before it to avoid t/ getting recognized as tag. eg. carrot\/cabbage <br>
+> * Persons can have any number of tags (including 0).
 
 Examples:
 
@@ -77,7 +77,7 @@ Shows a list of all the tasks that has yet to be completed. Sorted by due date. 
 Format: `listnotdone`, `lnd`
 
 ### 2.3.4	Listing of all task under a tag: `listtag`
-Shows a list of task by the specified tag <br>
+Shows a list of task by the specified tag. <br>
 
 Format: `listtag TAGNAME`, `lt TAGNAME`
 
@@ -90,9 +90,22 @@ Format: `done INDEX`
 > * The index **must be a positive integer** 1, 2, 3, ...
 
 ### 2.5	Deleting a task: `delete`
-Deletes the task at the specified `INDEX`. <br>
+Deletes the specified task from KIT. **Irreversible**. <br>
 
-Format: delete INDEX
+Format: `delete INDEX`
+
+> * Deletes the task at the specified `INDEX`.
+> * The index refers to the index number shown in the listing.
+> * The index **must be a positive integer** 1, 2, 3, ...
+
+Examples:
+
+* `delete 2`<br>
+  Deletes the 2nd task in KIT.
+
+* `find homework`
+  `delete 1`<br>
+  Deletes the 1st task in the results of the `find` command.
 
 ### 2.6	Undoing last command: `undo`
 Undo the last command. <br>
@@ -119,16 +132,16 @@ Examples:
 
 ### 2.8.1 Finding a task:`find`
 
-Finds task whose names or remark contain any of the given keywords. <br>
+Finds task whose names or remark contain **at least one** of the given keywords. <br>
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 > * The search is case insensitive. e.g `project` will match `Project`
 > * The order of the keywords does not matter. e.g. `do project` will match `project do`
-> * both the name and remarks are searched.
-> * Substrings will be matched e.g. `project` will match `projects`
-> * task matching at least one keyword will be found (i.e. `OR` search).
-    e.g. `project` will match `do project`
+> * Both the name and remarks are searched.
+> * Substrings will be matched. e.g. `project` will match `projects`
+> * Task matching **at least one** keyword will be found.
+    e.g. `project` will match `do project` and `do homework`
 
 Examples:
 
@@ -140,47 +153,29 @@ Examples:
 
 ### 2.8.2 Finding with exact keyword(s):`findexact`
 
-Find task whose name or remark matches the keyword(s) exactly. <br>
+Find task whose name or remark matches **all** the keyword(s). <br>
 
 Format: `findexact KEYWORD...`
 
-> * The search will match exact keywords, except for case. e.g `project` will match `Project`
+> * The search is the same as to `find` except it only matches tasks that contains **all** keywords. 
+e.g `do project` will match `do School project` but not `do homework`
 
-### 2.9 Deleting a task: `delete`
-Deletes the specified task from KIT. **Irreversible**. <br>
-
-Format: `delete INDEX`
-
-> * Deletes the task at the specified `INDEX`.
-> * The index refers to the index number shown in the listing.
-> * The index **must be a positive integer** 1, 2, 3, ...
-
-Examples:
-
-* `delete 2`<br>
-  Deletes the 2nd task in KIT.
-
-* `find homework`
-  `delete 1`<br>
-  Deletes the 1st task in the results of the `find` command.
-
-
-### 2.10 Clearing all task: `clear`
+### 2.9 Clearing all task: `clear`
 Clears all entries from KIT. Will prompt a confirmation. <br>
 
 Format: `clear`
 
-### 2.11 Exiting the program: `exit`
+### 2.10 Exiting the program: `exit`
 Exits the program. <br>
 
 Format: `exit`
 
-### 2.12 Specifying save location: `save`
+### 2.11 Specifying save location: `save`
 Specify location of save file. <br>
 
 Format: `save PATHNAME`
 
-### 2.13. Saving the data
+### 2.12. Saving the data
 KIT data are saved in the hard disk automatically after any command that changes the data.
 There is no need to save manually.
 
