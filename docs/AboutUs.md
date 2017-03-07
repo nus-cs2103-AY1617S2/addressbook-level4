@@ -26,7 +26,7 @@ We are a team based in the [School of Computing, National University of Singapor
 -----
 
 #### [Wang Ce](https://github.com/wangce94)
-<img src="images/profile.png" width="150"> <br>
+<img src="images/wangce.jpg" width="150"> <br>
 **Role:** Testing, Deliverables and deadlines <br>
 **Components in charge of:** Storage <br>
 
