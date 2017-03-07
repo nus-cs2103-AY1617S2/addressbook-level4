@@ -9,7 +9,6 @@ import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.model.category.Tag;
 import seedu.taskboss.model.category.UniqueTagList;
 import seedu.taskboss.model.task.Address;
-import seedu.taskboss.model.task.Email;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.Phone;
 import seedu.taskboss.model.task.ReadOnlyTask;
@@ -24,8 +23,6 @@ public class XmlAdaptedTask {
     private String name;
     @XmlElement(required = true)
     private String phone;
-    @XmlElement(required = true)
-    private String email;
     @XmlElement(required = true)
     private String address;
 
@@ -47,7 +44,6 @@ public class XmlAdaptedTask {
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
-        email = source.getEmail().value;
         address = source.getAddress().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
@@ -67,9 +63,8 @@ public class XmlAdaptedTask {
         }
         final Name name = new Name(this.name);
         final Phone phone = new Phone(this.phone);
-        final Email email = new Email(this.email);
         final Address address = new Address(this.address);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Task(name, phone, email, address, tags);
+        return new Task(name, phone, address, tags);
     }
 }
