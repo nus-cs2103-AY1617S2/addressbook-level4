@@ -124,7 +124,8 @@ public class LogicManagerTest {
 	private void assertCommandFailure(String inputCommand, String expectedMessage) {
 		TaskBoss expectedTaskBoss = new TaskBoss(model.getTaskBoss());
 		List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredTaskList());
-		assertCommandBehavior(true, inputCommand, expectedMessage, expectedTaskBoss, expectedShownList);
+		assertCommandBehavior(true, inputCommand, expectedMessage,
+				expectedTaskBoss, expectedShownList);
 	}
 
 	/**
@@ -135,7 +136,8 @@ public class LogicManagerTest {
 	 *      - the backing list shown by UI matches the {@code shownList} <br>
 	 *      - {@code expectedTaskBoss} was saved to the storage file. <br>
 	 */
-	private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand, String expectedMessage,
+	private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand,
+			String expectedMessage,
 			ReadOnlyTaskBoss expectedTaskBoss,
 			List<? extends ReadOnlyTask> expectedShownList) {
 
@@ -190,11 +192,11 @@ public class LogicManagerTest {
 		String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 		assertCommandFailure("add wrong args wrong args", expectedMessage);
 		assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix i/valid,information",
-		        expectedMessage);
+				expectedMessage);
 		assertCommandFailure("add Valid Name p/12345 valid@email.butNoPrefix i/valid, information",
-		        expectedMessage);
+				expectedMessage);
 		assertCommandFailure("add Valid Name p/12345 e/valid@email.butNoInformationPrefix valid, information",
-		        expectedMessage);
+				expectedMessage);
 	}
 
 	@Test
