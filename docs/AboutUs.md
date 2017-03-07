@@ -4,13 +4,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Damith C. Rajapakse](http://www.comp.nus.edu.sg/~damithch) <br>
-<img src="images/DamithRajapakse.jpg" width="150"><br>
-**Role**: Project Advisor
-
------
-
-#### [Yee Jian Feng, Eric](http://github.com/qhng) <br>
+#### [Yee Jian Feng, Eric](http://github.com/yeejfe) <br>
 <img src="images/YEEJFE.jpg" width="150"><br>
 **Role**: Developer <br>
 * Components in charge of: [Example: link from Developer Guide]
