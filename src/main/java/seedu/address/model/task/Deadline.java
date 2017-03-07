@@ -27,7 +27,7 @@ public class Deadline {
      */
     public Deadline(String date) throws IllegalValueException {
         assert date != null;
-		this.value = date;
+        this.value = date;
     }
 
     /**

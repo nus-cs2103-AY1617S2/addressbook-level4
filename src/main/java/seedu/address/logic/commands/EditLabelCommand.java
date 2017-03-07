@@ -70,7 +70,7 @@ public class EditLabelCommand extends Command {
                 labelExist = true;
 
                 try {
-                    model.updatePerson(i, task);
+                    model.updateTask(i, task);
                 } catch (DuplicateTaskException dpe) {
                     throw new CommandException(MESSAGE_DUPLICATE_PERSON);
                 }
