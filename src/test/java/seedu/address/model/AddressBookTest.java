@@ -24,7 +24,7 @@ public class AddressBookTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final AddressBook addressBook = new AddressBook();
+    private final TaskManager addressBook = new TaskManager();
 
     @Test
     public void constructor() {
@@ -40,7 +40,7 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = new TypicalTestPersons().getTypicalAddressBook();
+        TaskManager newData = new TypicalTestPersons().getTypicalAddressBook();
         addressBook.resetData(newData);
         assertEquals(newData, addressBook);
     }
@@ -51,7 +51,7 @@ public class AddressBookTest {
         // Repeat td.alice twice
         List<Task> newPersons = Arrays.asList(new Task(td.alice), new Task(td.alice));
         List<Tag> newTags = td.alice.getTags().asObservableList();
-        AddressBookStub newData = new AddressBookStub(newPersons, newTags);
+        TaskManagerStub newData = new TaskManagerStub(newPersons, newTags);
 
         thrown.expect(AssertionError.class);
         addressBook.resetData(newData);
@@ -59,25 +59,25 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
-        AddressBook typicalAddressBook = new TypicalTestPersons().getTypicalAddressBook();
+        TaskManager typicalAddressBook = new TypicalTestPersons().getTypicalAddressBook();
         List<ReadOnlyPerson> newPersons = typicalAddressBook.getPersonList();
         List<Tag> newTags = new ArrayList<>(typicalAddressBook.getTagList());
         // Repeat the first tag twice
         newTags.add(newTags.get(0));
-        AddressBookStub newData = new AddressBookStub(newPersons, newTags);
+        TaskManagerStub newData = new TaskManagerStub(newPersons, newTags);
 
         thrown.expect(AssertionError.class);
         addressBook.resetData(newData);
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons and tags lists can violate interface constraints.
+     * A stub ReadOnlyTaskManager whose persons and tags lists can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class TaskManagerStub implements ReadOnlyTaskManager {
         private final ObservableList<ReadOnlyPerson> persons = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<? extends ReadOnlyPerson> persons, Collection<? extends Tag> tags) {
+        TaskManagerStub(Collection<? extends ReadOnlyPerson> persons, Collection<? extends Tag> tags) {
             this.persons.setAll(persons);
             this.tags.setAll(tags);
         }

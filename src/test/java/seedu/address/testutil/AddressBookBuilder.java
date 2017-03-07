@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.TaskManager;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniquePersonList;
 import seedu.address.model.tag.Tag;
@@ -9,13 +9,13 @@ import seedu.address.model.tag.Tag;
 /**
  * A utility class to help with building Addressbook objects.
  * Example usage: <br>
- *     {@code AddressBook ab = new AddressBookBuilder().withPerson("John", "Doe").withTag("Friend").build();}
+ *     {@code TaskManager ab = new AddressBookBuilder().withPerson("John", "Doe").withTag("Friend").build();}
  */
 public class AddressBookBuilder {
 
-    private AddressBook addressBook;
+    private TaskManager addressBook;
 
-    public AddressBookBuilder(AddressBook addressBook) {
+    public AddressBookBuilder(TaskManager addressBook) {
         this.addressBook = addressBook;
     }
 
@@ -29,7 +29,7 @@ public class AddressBookBuilder {
         return this;
     }
 
-    public AddressBook build() {
+    public TaskManager build() {
         return addressBook;
     }
 }

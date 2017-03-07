@@ -21,7 +21,7 @@ import seedu.address.model.tag.UniqueTagList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .equals comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class TaskManager implements ReadOnlyTaskManager {
 
     private final UniquePersonList persons;
     private final UniqueTagList tags;
@@ -38,12 +38,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         tags = new UniqueTagList();
     }
 
-    public AddressBook() {}
+    public TaskManager() {}
 
     /**
-     * Creates an AddressBook using the Persons and Tags in the {@code toBeCopied}
+     * Creates an TaskManager using the Persons and Tags in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public TaskManager(ReadOnlyTaskManager toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -59,7 +59,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.tags.setTags(tags);
     }
 
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyTaskManager newData) {
         assert newData != null;
         try {
             setPersons(newData.getPersonList());
@@ -90,7 +90,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Updates the task in the list at position {@code index} with {@code editedReadOnlyPerson}.
-     * {@code AddressBook}'s tag list will be updated with the tags of {@code editedReadOnlyPerson}.
+     * {@code TaskManager}'s tag list will be updated with the tags of {@code editedReadOnlyPerson}.
      * @see #syncMasterTagListWith(Task)
      *
      * @throws DuplicatePersonException if updating the task's details causes the task to be equivalent to
@@ -174,9 +174,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && this.persons.equals(((AddressBook) other).persons)
-                && this.tags.equalsOrderInsensitive(((AddressBook) other).tags));
+                || (other instanceof TaskManager // instanceof handles nulls
+                && this.persons.equals(((TaskManager) other).persons)
+                && this.tags.equalsOrderInsensitive(((TaskManager) other).tags));
     }
 
     @Override
