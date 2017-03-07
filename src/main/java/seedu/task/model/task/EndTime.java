@@ -11,6 +11,7 @@ public class EndTime {
 
     public static final String MESSAGE_TIME_CONSTRAINTS = "Task End Time should be given in ddmmyy tttt(24hour format)";
     public static final String TIME_VALIDATION_REGEX = "\\d{6} \\d{4}";
+    public static final String EMPTY_TIME_VALIDATION_REGEX = "";
 
     public final String value;
 
@@ -32,7 +33,7 @@ public class EndTime {
      * Returns if a given string is a valid task end time.
      */
     public static boolean isValidTime(String test) {
-        return test.matches(TIME_VALIDATION_REGEX);
+        return (test.matches(TIME_VALIDATION_REGEX)  || test.matches(EMPTY_TIME_VALIDATION_REGEX));
     }
 
     @Override

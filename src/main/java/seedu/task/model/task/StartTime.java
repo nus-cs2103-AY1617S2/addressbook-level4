@@ -10,6 +10,7 @@ public class StartTime {
 
     public static final String MESSAGE_TIME_CONSTRAINTS = "Task Start Time should be given in ddmmyy tttt(24hour format)";
     public static final String TIME_VALIDATION_REGEX = "\\d{6} \\d{4}";
+    public static final String EMPTY_TIME_VALIDATION_REGEX = "";
 
     public final String value;
 
@@ -31,7 +32,7 @@ public class StartTime {
      * Returns true if a given string is a valid task start time.
      */
     public static boolean isValidTime(String test) {
-        return test.matches(TIME_VALIDATION_REGEX);
+        return (test.matches(TIME_VALIDATION_REGEX) || test.matches(EMPTY_TIME_VALIDATION_REGEX));
     }
 
     @Override
