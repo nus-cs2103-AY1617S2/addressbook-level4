@@ -3,8 +3,8 @@ package seedu.address.storage;
 import java.io.IOException;
 import java.util.Optional;
 
-import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.commons.util.JsonUtil;
+import seedu.task.commons.exceptions.DataConversionException;
+import seedu.task.commons.util.JsonUtil;
 import seedu.task.model.UserPrefs;
 
 /**

@@ -1,10 +1,10 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.task.commons.core.EventsCenter;
+import seedu.task.commons.core.Messages;
+import seedu.task.commons.core.UnmodifiableObservableList;
+import seedu.task.commons.events.ui.JumpToListRequestEvent;
 import seedu.task.model.task.ReadOnlyTask;
 
 /**
@@ -30,7 +30,7 @@ public class SelectCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
 
-        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredPersonList();
+        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (lastShownList.size() < targetIndex) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);

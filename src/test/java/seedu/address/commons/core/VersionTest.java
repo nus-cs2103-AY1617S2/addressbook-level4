@@ -7,6 +7,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.task.commons.core.Version;
+
 public class VersionTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();

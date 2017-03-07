@@ -5,9 +5,9 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.commons.exceptions.DuplicateDataException;
-import seedu.address.commons.util.CollectionUtil;
+import seedu.task.commons.core.UnmodifiableObservableList;
+import seedu.task.commons.exceptions.DuplicateDataException;
+import seedu.task.commons.util.CollectionUtil;
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not allow nulls.

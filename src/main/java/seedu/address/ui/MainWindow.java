@@ -10,11 +10,11 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import seedu.address.commons.core.Config;
-import seedu.address.commons.core.GuiSettings;
-import seedu.address.commons.events.ui.ExitAppRequestEvent;
-import seedu.address.commons.util.FxViewUtil;
-import seedu.address.logic.Logic;
+import seedu.task.commons.core.Config;
+import seedu.task.commons.core.GuiSettings;
+import seedu.task.commons.events.ui.ExitAppRequestEvent;
+import seedu.task.commons.util.FxViewUtil;
+import seedu.task.logic.Logic;
 import seedu.task.model.UserPrefs;
 import seedu.task.model.task.ReadOnlyTask;
 
@@ -114,7 +114,7 @@ public class MainWindow extends UiPart<Region> {
 
     void fillInnerParts() {
         browserPanel = new BrowserPanel(browserPlaceholder);
-        personListPanel = new PersonListPanel(getPersonListPlaceholder(), logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(getPersonListPlaceholder(), logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);

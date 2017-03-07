@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
-import seedu.address.commons.util.FxViewUtil;
+import seedu.task.commons.util.FxViewUtil;
 import seedu.task.model.task.ReadOnlyTask;
 
 /**

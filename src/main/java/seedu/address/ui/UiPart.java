@@ -7,9 +7,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import seedu.address.MainApp;
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.events.BaseEvent;
+import seedu.task.MainApp;
+import seedu.task.commons.core.EventsCenter;
+import seedu.task.commons.events.BaseEvent;
 
 /**
  * Represents a distinct part of the UI. e.g. Windows, dialogs, panels, status bars, etc.

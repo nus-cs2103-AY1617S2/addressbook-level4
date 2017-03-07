@@ -9,8 +9,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.task.commons.core.UnmodifiableObservableList;
+import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.ReadOnlyTaskManager;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.task.ReadOnlyTask;

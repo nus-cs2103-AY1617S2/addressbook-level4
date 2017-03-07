@@ -3,8 +3,8 @@ package seedu.address.logic.commands;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Date;

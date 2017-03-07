@@ -3,9 +3,9 @@ package seedu.address.logic;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.task.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.task.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,10 +20,6 @@ import org.junit.rules.TemporaryFolder;
 
 import com.google.common.eventbus.Subscribe;
 
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.events.model.TaskManagerChangedEvent;
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
-import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
@@ -37,6 +33,12 @@ import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.storage.StorageManager;
 import seedu.task.model.TaskManager;
+import seedu.task.commons.core.EventsCenter;
+import seedu.task.commons.events.model.TaskManagerChangedEvent;
+import seedu.task.commons.events.ui.JumpToListRequestEvent;
+import seedu.task.commons.events.ui.ShowHelpRequestEvent;
+import seedu.task.logic.Logic;
+import seedu.task.logic.LogicManager;
 import seedu.task.model.Model;
 import seedu.task.model.ModelManager;
 import seedu.task.model.ReadOnlyTaskManager;
@@ -123,7 +125,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, String expectedMessage) {
         TaskManager expectedAddressBook = new TaskManager(model.getAddressBook());
-        List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredPersonList());
+        List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredTaskList());
         assertCommandBehavior(true, inputCommand, expectedMessage, expectedAddressBook, expectedShownList);
     }
 
@@ -149,7 +151,7 @@ public class LogicManagerTest {
         }
 
         //Confirm the ui display elements should contain the right data
-        assertEquals(expectedShownList, model.getFilteredPersonList());
+        assertEquals(expectedShownList, model.getFilteredTaskList());
 
         //Confirm the state of data (saved and in-memory) is as expected
         assertEquals(expectedAddressBook, model.getAddressBook());
@@ -314,7 +316,7 @@ public class LogicManagerTest {
                 expectedAB,
                 expectedAB.getPersonList());
         assertEquals(1, targetedJumpIndex);
-        assertEquals(model.getFilteredPersonList().get(1), threePersons.get(1));
+        assertEquals(model.getFilteredTaskList().get(1), threePersons.get(1));
     }
 
 

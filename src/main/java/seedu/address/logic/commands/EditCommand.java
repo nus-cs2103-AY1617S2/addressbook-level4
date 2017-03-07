@@ -3,9 +3,9 @@ package seedu.address.logic.commands;
 import java.util.List;
 import java.util.Optional;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.task.commons.core.Messages;
+import seedu.task.commons.util.CollectionUtil;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Date;
 import seedu.task.model.task.Location;
@@ -51,7 +51,7 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyTask> lastShownList = model.getFilteredPersonList();
+        List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (filteredPersonListIndex >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
