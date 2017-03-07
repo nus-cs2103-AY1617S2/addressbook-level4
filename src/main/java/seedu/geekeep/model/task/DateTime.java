@@ -1,56 +1,50 @@
 package seedu.geekeep.model.task;
 
+
+import java.time.LocalDateTime;
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's phone number in the address book. Guarantees: immutable; is valid as declared in
- * {@link #isValidEmail(String)}
+ * Represents the starting date and time of a task. Guarantees: immutable; is valid as declared in
+ * {@link #isValidDateTime()}
  */
 public class DateTime {
-
-    public static final String MESSAGE_EMAIL_CONSTRAINTS =
-            "Person emails should be 2 alphanumeric/period strings separated by '@'";
-    public static final String EMAIL_VALIDATION_REGEX = "[\\w\\.]+@[\\w\\.]+";
+    
+    public static final String MESSAGE_DATETIME_CONSTRAINTS =
+            "Date and time format should be in this format: YYYY-MM-DDTHH:MM:SS";
+    public static final String DATETIME_VALIDATION_REGEX = "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}";
 
     /**
-     * Returns if a given string is a valid person email.
+     *  Validates given dateTime.
      */
-    public static boolean isValidEmail(String test) {
-        return test.matches(EMAIL_VALIDATION_REGEX);
+    public static boolean isValidDateTime(String test) {
+        return test.matches(DATETIME_VALIDATION_REGEX);
     }
 
-    public final String value;
+    public final LocalDateTime dateTime;
 
-    /**
-     * Validates given email.
-     *
-     * @throws IllegalValueException
-     *             if given email address string is invalid.
-     */
-    public DateTime(String email) throws IllegalValueException {
-        assert email != null;
-        String trimmedEmail = email.trim();
-        if (!isValidEmail(trimmedEmail)) {
-            throw new IllegalValueException(MESSAGE_EMAIL_CONSTRAINTS);
+    public DateTime(String dateTimeString) throws IllegalValueException{
+        if(!isValidDateTime(dateTimeString)) {
+            throw new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS);
         }
-        this.value = trimmedEmail;
+        this.dateTime = LocalDateTime.parse(dateTimeString);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DateTime // instanceof handles nulls
-                        && this.value.equals(((DateTime) other).value)); // state check
+                        && this.dateTime.equals(((DateTime) other).dateTime)); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return dateTime.hashCode();
     }
 
     @Override
     public String toString() {
-        return value;
+        return dateTime.toString();
     }
 
 }
