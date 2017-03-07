@@ -8,7 +8,7 @@ import org.junit.Test;
 import seedu.toluist.model.Task;
 
 /**
- * Gui tests for delete task command
+ * Gui tests for undo command
  */
 public class UndoCommandTest extends GuiTest {
     @Test
@@ -22,5 +22,25 @@ public class UndoCommandTest extends GuiTest {
         String undoCommand = "undo";
         commandBox.runCommand(undoCommand);
         assertFalse(isTaskShown(task));
+    }
+
+    @Test
+    public void undoMultipleCommand() {
+        String taskDescription = "build a rocket";
+        String addCommand = "add " + taskDescription;
+        Task task = new Task(taskDescription);
+        commandBox.runCommand(addCommand);
+        assertTrue(isTaskShown(task));
+
+        String taskDescription2 = "ride a unicorn";
+        String addCommand2 = "add " + taskDescription;
+        Task task2 = new Task(taskDescription2);
+        commandBox.runCommand(addCommand2);
+        assertTrue(isTaskShown(task2));
+
+        String undoCommand = "undo 2";
+        commandBox.runCommand(undoCommand);
+        assertFalse(isTaskShown(task));
+        assertFalse(isTaskShown(task2));
     }
 }
