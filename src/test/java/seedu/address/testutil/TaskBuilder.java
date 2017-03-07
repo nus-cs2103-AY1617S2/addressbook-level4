@@ -1,61 +1,49 @@
 package seedu.address.testutil;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Name;
+import seedu.address.model.task.Date;
 
 /**
  *
  */
-public class PersonBuilder {
+public class TaskBuilder {
 
-    private TestPerson person;
+    private TestTask task;
 
-    public PersonBuilder() {
-        this.person = new TestPerson();
+    public TaskBuilder() {
+        this.task = new TestTask();
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the TaskBuilder with the data of {@code taskToCopy}.
      */
-    public PersonBuilder(TestPerson personToCopy) {
-        this.person = new TestPerson(personToCopy);
+    public TaskBuilder(TestTask taskToCopy) {
+        this.task = new TestTask(taskToCopy);
     }
 
-    public PersonBuilder withName(String name) throws IllegalValueException {
-        this.person.setName(new Name(name));
+    public TaskBuilder withName(String name) throws IllegalValueException {
+        this.task.setName(new Name(name));
         return this;
     }
 
-    public PersonBuilder withTags(String ... tags) throws IllegalValueException {
-        person.setTags(new UniqueTagList());
+    public TaskBuilder withTags(String ... tags) throws IllegalValueException {
+        task.setTags(new UniqueTagList());
         for (String tag: tags) {
-            person.getTags().add(new Tag(tag));
+            task.getTags().add(new Tag(tag));
         }
         return this;
     }
 
-    public PersonBuilder withAddress(String address) throws IllegalValueException {
-        this.person.setAddress(new Address(address));
+    public TaskBuilder withDate(String date) throws IllegalValueException {
+        this.task.setDate(new Date(date));
         return this;
     }
 
-    public PersonBuilder withPhone(String phone) throws IllegalValueException {
-        this.person.setPhone(new Phone(phone));
-        return this;
-    }
-
-    public PersonBuilder withEmail(String email) throws IllegalValueException {
-        this.person.setEmail(new Email(email));
-        return this;
-    }
-
-    public TestPerson build() {
-        return this.person;
+    public TestTask build() {
+        return this.task;
     }
 
 }

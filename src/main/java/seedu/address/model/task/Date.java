@@ -4,21 +4,20 @@ package seedu.address.model.task;
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's phone number in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
+ * Represents a Task's date number in the task manager.
+ * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
 public class Date {
 	// TODO: Update message date constraints and regex
-    public static final String MESSAGE_DATE_CONSTRAINTS =
-            "Task date should be a number";
+    public static final String MESSAGE_DATE_CONSTRAINTS = "Task date should only contain numbers";
     public static final String DATE_VALIDATION_REGEX = "\\d+";
 
     public final String value;
 
     /**
-     * Validates given email.
+     * Validates given date.
      *
-     * @throws IllegalValueException if given email address string is invalid.
+     * @throws IllegalValueException if given date string is invalid.
      */
     public Date(String date) throws IllegalValueException {
         assert date != null;

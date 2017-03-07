@@ -11,11 +11,11 @@ public class Config {
     public static final String DEFAULT_CONFIG_FILE = "config.json";
 
     // Config values customizable through config file
-    private String appTitle = "Typed";
+    private String appTitle = "Typical App Title";
     private Level logLevel = Level.INFO;
     private String userPrefsFilePath = "preferences.json";
-    private String taskManagerFilePath = "data/addressbook.xml";
-    private String taskManagerName = "MyTaskManager";
+    private String taskManagerFilePath = "taskmanager.xml";
+    private String taskManagerName = "TypicalTaskManagerName";
 
 
     public String getAppTitle() {
@@ -89,7 +89,7 @@ public class Config {
         sb.append("\nCurrent log level : " + logLevel);
         sb.append("\nPreference file Location : " + userPrefsFilePath);
         sb.append("\nLocal data file location : " + taskManagerFilePath);
-        sb.append("\nAddressBook name : " + taskManagerName);
+        sb.append("\nTaskManager name : " + taskManagerName);
         return sb.toString();
     }
 
