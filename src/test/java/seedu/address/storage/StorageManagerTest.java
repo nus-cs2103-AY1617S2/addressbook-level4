@@ -92,7 +92,7 @@ public class StorageManagerTest {
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyTaskManager addressBook, String filePath) throws IOException {
+        public void saveAddressBook(ReadOnlyTaskManager taskManager, String filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }
