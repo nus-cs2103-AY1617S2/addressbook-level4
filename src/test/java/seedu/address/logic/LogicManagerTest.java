@@ -41,11 +41,8 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyTodoList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.todo.Address;
-import seedu.address.model.todo.Email;
 import seedu.address.model.todo.Name;
 import seedu.address.model.todo.Todo;
-import seedu.address.model.todo.Phone;
 import seedu.address.model.todo.ReadOnlyTodo;
 import seedu.address.storage.StorageManager;
 
@@ -198,9 +195,9 @@ public class LogicManagerTest {
         assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
                 Name.MESSAGE_NAME_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
-                Phone.MESSAGE_PHONE_CONSTRAINTS);
+                Name.MESSAGE_NAME_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
-                Email.MESSAGE_EMAIL_CONSTRAINTS);
+        		Name.MESSAGE_NAME_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
@@ -241,7 +238,7 @@ public class LogicManagerTest {
     public void execute_list_showsAllTodos() throws Exception {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
-        TodoList expectedAB = helper.generateTodoList(2);
+        TodoList expectedAB = helper.generateTodoListReturnTodoList(2);
         List<? extends ReadOnlyTodo> expectedList = expectedAB.getTodoList();
 
         // prepare address book state
@@ -415,13 +412,10 @@ public class LogicManagerTest {
 
         Todo adam() throws Exception {
             Name name = new Name("Adam Brown");
-            Phone privatePhone = new Phone("111111");
-            Email email = new Email("adam@gmail.com");
-            Address privateAddress = new Address("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Todo(name, privatePhone, email, privateAddress, tags);
+            return new Todo(name, tags);
         }
 
         /**
@@ -434,9 +428,6 @@ public class LogicManagerTest {
         Todo generateTodo(int seed) throws Exception {
             return new Todo(
                     new Name("Todo " + seed),
-                    new Phone("" + Math.abs(seed)),
-                    new Email(seed + "@email"),
-                    new Address("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -448,9 +439,6 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getName().toString());
-            cmd.append(" e/").append(p.getEmail());
-            cmd.append(" p/").append(p.getPhone());
-            cmd.append(" a/").append(p.getAddress());
 
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {
@@ -463,12 +451,25 @@ public class LogicManagerTest {
         /**
          * Generates an TodoList with auto-generated todos.
          */
-        TodoList generateTodoList(int numGenerated) throws Exception {
+        
+        TodoList generateTodoListReturnTodoList(int numGenerated) throws Exception {
             TodoList addressBook = new TodoList();
             addToTodoList(addressBook, numGenerated);
             return addressBook;
+        }  
+             
+        /**
+         * Generates a list of Todos based on the flags.
+         */
+        
+        List<Todo> generateTodoList(int numGenerated) throws Exception {
+            List<Todo> todos = new ArrayList<>();
+            for (int i = 1; i <= numGenerated; i++) {
+                todos.add(generateTodo(i));
+            }
+            return todos;
         }
-
+        
         /**
          * Generates an TodoList based on the list of Todos given.
          */
@@ -512,16 +513,7 @@ public class LogicManagerTest {
             }
         }
 
-        /**
-         * Generates a list of Todos based on the flags.
-         */
-        List<Todo> generateTodoList(int numGenerated) throws Exception {
-            List<Todo> todos = new ArrayList<>();
-            for (int i = 1; i <= numGenerated; i++) {
-                todos.add(generateTodo(i));
-            }
-            return todos;
-        }
+      
 
         List<Todo> generateTodoList(Todo... todos) {
             return Arrays.asList(todos);
@@ -533,9 +525,6 @@ public class LogicManagerTest {
         Todo generateTodoWithName(String name) throws Exception {
             return new Todo(
                     new Name(name),
-                    new Phone("1"),
-                    new Email("1@email"),
-                    new Address("House of 1"),
                     new UniqueTagList(new Tag("tag"))
             );
         }

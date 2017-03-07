@@ -17,6 +17,7 @@ public class AddCommandTest extends TodoListGuiTest {
         //add one todo
         TestTodo[] currentList = td.getTypicalTodos();
         TestTodo todoToAdd = td.hoon;
+        
         assertAddSuccess(todoToAdd, currentList);
         currentList = TestUtil.addTodosToList(currentList, todoToAdd);
 
