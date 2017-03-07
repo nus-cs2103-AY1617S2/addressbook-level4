@@ -39,17 +39,17 @@ public class PersonBuilder {
         return this;
     }
 
-    public PersonBuilder withAddress(String address) throws IllegalValueException {
+    public PersonBuilder withDescription(String address) throws IllegalValueException {
         this.person.setAddress(new Description(address));
         return this;
     }
 
-    public PersonBuilder withPhone(String phone) throws IllegalValueException {
+    public PersonBuilder withPriority(String phone) throws IllegalValueException {
         this.person.setPhone(new Priority(phone));
         return this;
     }
 
-    public PersonBuilder withEmail(String email) throws IllegalValueException {
+    public PersonBuilder withDeadline(String email) throws IllegalValueException {
         this.person.setEmail(new Deadline(email));
         return this;
     }
