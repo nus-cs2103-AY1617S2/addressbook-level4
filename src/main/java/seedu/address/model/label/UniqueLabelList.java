@@ -121,9 +121,22 @@ public class UniqueLabelList implements Iterable<Label> {
         assert toCheck != null;
         return internalList.contains(toCheck);
     }
+    
+    /**
+     * Returns true if the list contains an equivalent Label as the given argument.
+     */
+    public boolean containsStringLabel(String labelToCheck) {
+        assert labelToCheck != null;
+        //return internalList.contains(toCheck);
+        for (Label label : internalList) {
+            if (label.getLabelName().equalsIgnoreCase(labelToCheck))
+                return true;
+        }
+        return false;
+    }
 
     /**
-     * Adds a LAbel to the list.
+     * Adds a Label to the list.
      *
      * @throws DuplicateLabelException if the Label to add is a duplicate of an existing Label in the list.
      */
