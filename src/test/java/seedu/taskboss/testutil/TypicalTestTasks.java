@@ -10,33 +10,33 @@ import seedu.taskboss.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask alice, groceries, jim, meeting, lunch, celebration, photoshoot, hoon, ida;
+    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
 
     public TypicalTestTasks() {
         try {
-            alice = new TaskBuilder().withName("Contact Alice Pauline")
+            alice = new TaskBuilder().withName("Alice Pauline")
                     .withInformation("123, Jurong West Ave 6, #08-111")
                     .withPriorityLevel("3")
-                    .withCategories("Friends").build();
-            groceries = new TaskBuilder().withName("Buy groceries")
-                    .withInformation("Clementi MRT")
+                    .withCategories("friends").build();
+            benson = new TaskBuilder().withName("Benson Meier")
+                    .withInformation("311, Clementi Ave 2, #02-25")
                     .withPriorityLevel("3")
-                    .withCategories("Home", "Family").build();
-            jim = new TaskBuilder().withName("Dinner with Jim").withPriorityLevel("1")
-                    .withInformation("at Orchard").build();
-            meeting = new TaskBuilder().withName("Hall Meeting").withPriorityLevel("2")
-                    .withInformation("meeting room 1").build();
-            lunch = new TaskBuilder().withName("Family lunch").withPriorityLevel("2")
-                    .withInformation("Dad will fetch me").build();
-            celebration = new TaskBuilder().withName("Postexam celebration").withPriorityLevel("2")
+                    .withCategories("owesMoney", "friends").build();
+            carl = new TaskBuilder().withName("Carl Kurz").withPriorityLevel("3")
+                    .withInformation("wall street").build();
+            daniel = new TaskBuilder().withName("Daniel Meier").withPriorityLevel("2")
+                    .withInformation("10th street").build();
+            elle = new TaskBuilder().withName("Elle Meyer").withPriorityLevel("2")
+                    .withInformation("michegan ave").build();
+            fiona = new TaskBuilder().withName("Fiona Kunz").withPriorityLevel("2")
                     .withInformation("little tokyo").build();
-            photoshoot = new TaskBuilder().withName("Hall Photoshoot").withPriorityLevel("2")
+            george = new TaskBuilder().withName("George Best").withPriorityLevel("2")
                     .withInformation("4th street").build();
 
             // Manually added
-            hoon = new TaskBuilder().withName("Meet Hoon Meier").withPriorityLevel("2")
+            hoon = new TaskBuilder().withName("Hoon Meier").withPriorityLevel("2")
                     .withInformation("little india").build();
-            ida = new TaskBuilder().withName("Meet Ida Mueller").withPriorityLevel("2")
+            ida = new TaskBuilder().withName("Ida Mueller").withPriorityLevel("2")
                     .withInformation("chicago ave").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
@@ -55,7 +55,7 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{alice, groceries, jim, meeting, lunch, celebration, photoshoot};
+        return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
     }
 
     public TaskBoss getTypicalTaskBoss() {
