@@ -1,9 +1,7 @@
 package seedu.toluist.controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.logging.Logger;
 
 import seedu.toluist.commons.core.LogsCenter;
@@ -50,7 +48,7 @@ public class FindController extends Controller {
         TodoList todoList = TodoList.load();
         ArrayList<Task> taskList = todoList.getTasks();
         Task currentTask;
-        int foundValue = 0;
+        int foundCount = 0;
 
         for (int i = 0; i < taskList.size(); i++) {
             currentTask = taskList.get(i);
@@ -61,7 +59,7 @@ public class FindController extends Controller {
                                 .contains(keywordList[j].toLowerCase())) {
                             foundTasks.add(currentTask);
                             isFound = true;
-                            foundValue++;
+                            foundCount++;
                         }
                     }
                 }
@@ -70,7 +68,7 @@ public class FindController extends Controller {
                             .contains(keywordList[j].toLowerCase())) {
                         foundTasks.add(currentTask);
                         isFound = true;
-                        foundValue++;
+                        foundCount++;
                     }
                 }
             }
@@ -81,22 +79,26 @@ public class FindController extends Controller {
         renderer.render();
 
         //display formatting
-        return formatDisplay(isSearchByTag, isSearchByName, keywordList, foundValue);
+        return formatDisplay(isSearchByTag, isSearchByName, keywordList, foundCount);
     }
 
     private String[] convertToArray(String keywords) {
-        String[] keywordList = keywords.split(" ");
-        ArrayList<String> replacementList = new ArrayList<String>();
-        for (int i = 0; i < keywordList.length; i++) {
-            if (!keywordList[i].equals("")) {
-                replacementList.add(keywordList[i]);
+        if (keywords == null) {
+            return new String[]{""};
+        } else {
+            String[] keywordList = keywords.split(" ");
+            ArrayList<String> replacementList = new ArrayList<String>();
+            for (int i = 0; i < keywordList.length; i++) {
+                if (!keywordList[i].equals("")) {
+                    replacementList.add(keywordList[i]);
+                }
             }
+            return replacementList.toArray(new String[0]);
         }
-        return replacementList.toArray(new String[0]);
     }
 
     private CommandResult formatDisplay(boolean isSearchByTag, boolean isSearchByName,
-                                        String[] keywordList, int foundValue) {
+                                        String[] keywordList, int foundCount) {
         String searchParameters;
         if (isSearchByName) {
             if (isSearchByTag) {
@@ -110,17 +112,14 @@ public class FindController extends Controller {
             searchParameters = TAG_PARAMETER;
         }
 
-        String keywords;
+        String keywords="";
         if (keywordList.length > 0) {
             keywords = keywordList[0];
             for (int k = 1; k < keywordList.length; k++) {
                 keywords += " " + keywordList[k];
             }
         }
-        else {
-            keywords = "";
-        }
-        return new CommandResult(String.format(COMMAND_RESULT_TEMPLATE, keywords, searchParameters,foundValue));
+        return new CommandResult(String.format(COMMAND_RESULT_TEMPLATE, keywords, searchParameters,foundCount));
     }
 
     @Override
@@ -149,9 +148,6 @@ public class FindController extends Controller {
         String[] listOfParameters = keywords.split(SPLITTER_COMMAND, 2);
         if (listOfParameters.length > 1) {
             tokens.put(KEYWORDS, listOfParameters[1].trim());
-        }
-        else {
-            tokens.put(KEYWORDS, "");
         }
 
         return tokens;
