@@ -4,7 +4,6 @@ import seedu.ezdo.commons.exceptions.IllegalValueException;
 import seedu.ezdo.model.tag.Tag;
 import seedu.ezdo.model.tag.UniqueTagList;
 import seedu.ezdo.model.todo.DueDate;
-import seedu.ezdo.model.todo.Email;
 import seedu.ezdo.model.todo.Name;
 import seedu.ezdo.model.todo.Priority;
 import seedu.ezdo.model.todo.StartDate;
@@ -52,11 +51,6 @@ public class TaskBuilder {
 
     public TaskBuilder withPriority(String priority) throws IllegalValueException {
         this.task.setPriority(new Priority(priority));
-        return this;
-    }
-
-    public TaskBuilder withEmail(String email) throws IllegalValueException {
-        this.task.setEmail(new Email(email));
         return this;
     }
 

@@ -13,7 +13,6 @@ public class Task implements ReadOnlyTask {
 
     private Name name;
     private Priority priority;
-    private Email email;
     private StartDate startDate;
     private DueDate dueDate;
 
@@ -22,11 +21,10 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Priority priority, Email email, StartDate startDate, DueDate dueDate, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, priority, email, startDate, tags);
+    public Task(Name name, Priority priority, StartDate startDate, DueDate dueDate, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, priority, startDate, tags);
         this.name = name;
         this.priority = priority;
-        this.email = email;
         this.startDate = startDate;
         this.dueDate = dueDate;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
@@ -36,7 +34,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getPriority(), source.getEmail(),
+        this(source.getName(), source.getPriority(),
                 source.getStartDate(), source.getDueDate(), source.getTags());
     }
 
@@ -58,16 +56,6 @@ public class Task implements ReadOnlyTask {
     @Override
     public Priority getPriority() {
         return priority;
-    }
-
-    public void setEmail(Email email) {
-        assert email != null;
-        this.email = email;
-    }
-
-    @Override
-    public Email getEmail() {
-        return email;
     }
 
     public void setStartDate(StartDate startDate) {
@@ -110,7 +98,6 @@ public class Task implements ReadOnlyTask {
 
         this.setName(replacement.getName());
         this.setPriority(replacement.getPriority());
-        this.setEmail(replacement.getEmail());
         this.setStartDate(replacement.getStartDate());
         this.setDueDate(replacement.getDueDate());
         this.setTags(replacement.getTags());
@@ -126,7 +113,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, priority, email, startDate, tags);
+        return Objects.hash(name, priority, startDate, tags);
     }
 
     @Override

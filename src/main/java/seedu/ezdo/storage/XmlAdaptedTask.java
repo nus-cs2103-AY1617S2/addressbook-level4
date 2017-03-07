@@ -9,7 +9,6 @@ import seedu.ezdo.commons.exceptions.IllegalValueException;
 import seedu.ezdo.model.tag.Tag;
 import seedu.ezdo.model.tag.UniqueTagList;
 import seedu.ezdo.model.todo.DueDate;
-import seedu.ezdo.model.todo.Email;
 import seedu.ezdo.model.todo.Name;
 import seedu.ezdo.model.todo.Priority;
 import seedu.ezdo.model.todo.ReadOnlyTask;
@@ -50,7 +49,6 @@ public class XmlAdaptedTask {
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getName().fullName;
         priority = source.getPriority().value;
-        email = source.getEmail().value;
         startDate = source.getStartDate().value;
         dueDate = source.getDueDate().value;
         tagged = new ArrayList<>();
@@ -71,10 +69,9 @@ public class XmlAdaptedTask {
         }
         final Name name = new Name(this.name);
         final Priority priority = new Priority(this.priority);
-        final Email email = new Email(this.email);
         final StartDate startDate = new StartDate(this.startDate);
         final DueDate dueDate = new DueDate(this.dueDate);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(name, priority, email, startDate, dueDate, tags);
+        return new Task(name, priority, startDate, dueDate, tags);
     }
 }

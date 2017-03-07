@@ -8,7 +8,6 @@ import seedu.ezdo.commons.util.CollectionUtil;
 import seedu.ezdo.logic.commands.exceptions.CommandException;
 import seedu.ezdo.model.tag.UniqueTagList;
 import seedu.ezdo.model.todo.DueDate;
-import seedu.ezdo.model.todo.Email;
 import seedu.ezdo.model.todo.Name;
 import seedu.ezdo.model.todo.Priority;
 import seedu.ezdo.model.todo.ReadOnlyTask;
@@ -80,12 +79,11 @@ public class EditCommand extends Command {
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
         Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
-        Email updatedEmail = editTaskDescriptor.getEmail().orElseGet(taskToEdit::getEmail);
         StartDate updatedStartDate = editTaskDescriptor.getStartDate().orElseGet(taskToEdit::getStartDate);
         DueDate updatedDueDate = editTaskDescriptor.getDueDate().orElseGet(taskToEdit::getDueDate);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedName, updatedPriority, updatedEmail, updatedStartDate, updatedDueDate, updatedTags);
+        return new Task(updatedName, updatedPriority, updatedStartDate, updatedDueDate, updatedTags);
     }
 
     /**
@@ -95,7 +93,6 @@ public class EditCommand extends Command {
     public static class EditTaskDescriptor {
         private Optional<Name> name = Optional.empty();
         private Optional<Priority> priority = Optional.empty();
-        private Optional<Email> email = Optional.empty();
         private Optional<StartDate> startDate = Optional.empty();
         private Optional<DueDate> dueDate = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
@@ -105,7 +102,6 @@ public class EditCommand extends Command {
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.name = toCopy.getName();
             this.priority = toCopy.getPriority();
-            this.email = toCopy.getEmail();
             this.startDate = toCopy.getStartDate();
             this.dueDate = toCopy.getDueDate();
             this.tags = toCopy.getTags();
@@ -115,7 +111,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.priority, this.email, this.startDate, this.tags);
+            return CollectionUtil.isAnyPresent(this.name, this.priority, this.startDate, this.tags);
         }
 
         public void setName(Optional<Name> name) {
@@ -134,15 +130,6 @@ public class EditCommand extends Command {
 
         public Optional<Priority> getPriority() {
             return priority;
-        }
-
-        public void setEmail(Optional<Email> email) {
-            assert email != null;
-            this.email = email;
-        }
-
-        public Optional<Email> getEmail() {
-            return email;
         }
 
         public void setStartDate(Optional<StartDate> startDate) {

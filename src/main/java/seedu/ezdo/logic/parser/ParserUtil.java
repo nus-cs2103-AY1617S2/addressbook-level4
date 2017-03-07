@@ -16,7 +16,6 @@ import seedu.ezdo.commons.util.StringUtil;
 import seedu.ezdo.model.tag.Tag;
 import seedu.ezdo.model.tag.UniqueTagList;
 import seedu.ezdo.model.todo.DueDate;
-import seedu.ezdo.model.todo.Email;
 import seedu.ezdo.model.todo.Name;
 import seedu.ezdo.model.todo.Priority;
 import seedu.ezdo.model.todo.StartDate;
@@ -97,14 +96,6 @@ public class ParserUtil {
     public static Optional<DueDate> parseDueDate(Optional<String> dueDate) throws IllegalValueException {
         assert dueDate != null;
         return dueDate.isPresent() ? Optional.of(new DueDate(dueDate.get())) : Optional.empty();
-    }
-
-    /**
-     * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
-     */
-    public static Optional<Email> parseEmail(Optional<String> email) throws IllegalValueException {
-        assert email != null;
-        return email.isPresent() ? Optional.of(new Email(email.get())) : Optional.empty();
     }
 
     /**

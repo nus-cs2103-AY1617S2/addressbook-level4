@@ -10,7 +10,6 @@ public interface ReadOnlyTask {
 
     Name getName();
     Priority getPriority();
-    Email getEmail();
     StartDate getStartDate();
     DueDate getDueDate();
 
@@ -28,7 +27,6 @@ public interface ReadOnlyTask {
                 || (other != null // this is first to avoid NPE below
                 && other.getName().equals(this.getName()) // state checks here onwards
                 && other.getPriority().equals(this.getPriority())
-                && other.getEmail().equals(this.getEmail())
                 && other.getStartDate().equals(this.getStartDate()))
                 && other.getDueDate().equals(this.getDueDate());
     }
@@ -41,8 +39,6 @@ public interface ReadOnlyTask {
         builder.append(getName())
                 .append(" Priority: ")
                 .append(getPriority())
-                .append(" Email: ")
-                .append(getEmail())
                 .append(" StartDate: ")
                 .append(getStartDate())
                 .append(" DueDate: ")

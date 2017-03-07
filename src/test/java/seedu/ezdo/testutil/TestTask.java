@@ -2,7 +2,6 @@ package seedu.ezdo.testutil;
 
 import seedu.ezdo.model.tag.UniqueTagList;
 import seedu.ezdo.model.todo.DueDate;
-import seedu.ezdo.model.todo.Email;
 import seedu.ezdo.model.todo.Name;
 import seedu.ezdo.model.todo.Priority;
 import seedu.ezdo.model.todo.ReadOnlyTask;
@@ -21,7 +20,6 @@ public class TestTask implements ReadOnlyTask {
     private Name name;
     private StartDate startDate;
     private DueDate dueDate;
-    private Email email;
     private Priority priority;
     private UniqueTagList tags;
 
@@ -35,7 +33,6 @@ public class TestTask implements ReadOnlyTask {
     public TestTask(TestTask taskToCopy) {
         this.name = taskToCopy.getName();
         this.priority = taskToCopy.getPriority();
-        this.email = taskToCopy.getEmail();
         this.startDate = taskToCopy.getStartDate();
         this.dueDate = taskToCopy.getDueDate();
         this.tags = taskToCopy.getTags();
@@ -51,10 +48,6 @@ public class TestTask implements ReadOnlyTask {
 
     public void setDueDate(DueDate dueDate) {
         this.dueDate = dueDate;
-    }
-
-    public void setEmail(Email email) {
-        this.email = email;
     }
 
     public void setPriority(Priority priority) {
@@ -73,11 +66,6 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public Priority getPriority() {
         return priority;
-    }
-
-    @Override
-    public Email getEmail() {
-        return email;
     }
 
     @Override
@@ -103,10 +91,9 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
-        sb.append(PREFIX_DUEDATE + this.getDueDate().value + " ");
         sb.append(PREFIX_STARTDATE + this.getStartDate().value + " ");
+        sb.append(PREFIX_DUEDATE + this.getDueDate().value + " ");
         sb.append(PREFIX_PRIORITY + this.getPriority().value + " ");
-        sb.append(PREFIX_EMAIL + this.getEmail().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
