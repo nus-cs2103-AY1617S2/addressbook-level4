@@ -21,7 +21,7 @@ Components: Logic, Storage.
 -----
 
 #### [Shao Hui](http://github.com/shinlos)
-<img src="images/NgShaoHui.jpg" width="150"><br>
+<img src="images/NgShaoHui.JPG" width="150"><br>
 Role: Developer <br>
 Responsibilities: Code Quality, Deliverables and Deadlines. <br>
 Components: Model, Storage.
