@@ -16,7 +16,7 @@ import seedu.taskmanager.commons.util.StringUtil;
 // import seedu.taskmanager.model.person.Address;
 import seedu.taskmanager.model.task.Date;
 import seedu.taskmanager.model.task.TaskName;
-import seedu.taskmanager.model.task.Time;
+import seedu.taskmanager.model.task.Deadline;
 // import seedu.taskmanager.model.tag.Tag;
 // import seedu.taskmanager.model.tag.UniqueTagList;
 
@@ -77,9 +77,9 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> time} into an {@code Optional<Time>} if {@code time} is present.
      */
-    public static Optional<Time> parseTime(Optional<String> time) throws IllegalValueException {
+    public static Optional<Deadline> parseTime(Optional<String> time) throws IllegalValueException {
         assert time != null;
-        return time.isPresent() ? Optional.of(new Time(time.get())) : Optional.empty();
+        return time.isPresent() ? Optional.of(new Deadline(time.get())) : Optional.empty();
     }
 
     /**

@@ -9,7 +9,7 @@ import seedu.taskmanager.commons.util.CollectionUtil;
 import seedu.taskmanager.model.task.Date;
 import seedu.taskmanager.model.task.TaskName;
 import seedu.taskmanager.model.task.Task;
-import seedu.taskmanager.model.task.Time;
+import seedu.taskmanager.model.task.Deadline;
 // import seedu.taskmanager.model.task.EndTime;
 // import seedu.taskmanager.model.task.Deadline;
 import seedu.taskmanager.model.task.ReadOnlyTask;
@@ -80,7 +80,7 @@ public class EditCommand extends Command {
         assert taskToEdit != null;
 
         TaskName updatedName = editTaskDescriptor.getTaskName().orElseGet(taskToEdit::getTaskName);
-        Time updatedTime = editTaskDescriptor.getTime().orElseGet(taskToEdit::getTime);
+        Deadline updatedTime = editTaskDescriptor.getTime().orElseGet(taskToEdit::getTime);
         Date updatedDate = editTaskDescriptor.getDate().orElseGet(taskToEdit::getDate);
 //        EndTime updatedEndTime = editTaskDescriptor.getEndTime().orElseGet(taskToEdit::getEndTime);
 //        Deadline updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(taskToEdit::getDeadline);
@@ -96,7 +96,7 @@ public class EditCommand extends Command {
      */
     public static class EditTaskDescriptor {
         private Optional<TaskName> taskname = Optional.empty();
-        private Optional<Time> time = Optional.empty();
+        private Optional<Deadline> deadline = Optional.empty();
         private Optional<Date> date = Optional.empty();
 //        private Optional<EndTime> endtime = Optional.empty();
  //       private Optional<Deadline> deadline = Optional<T>.empty();
@@ -107,7 +107,7 @@ public class EditCommand extends Command {
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.taskname = toCopy.getTaskName();
-            this.time = toCopy.getTime();
+            this.deadline = toCopy.getTime();
             this.date = toCopy.getDate();
 //            this.endtime = toCopy.getEndTime();
 //            this.deadline = toCopy.getDeadline);
@@ -119,7 +119,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.taskname, this.time, this.date
+            return CollectionUtil.isAnyPresent(this.taskname, this.deadline, this.date
             		                           /*this.endtime, this.deadline , this.address, this.tags*/);
         }
 
@@ -132,13 +132,13 @@ public class EditCommand extends Command {
             return taskname;
         }
 
-        public void setTime(Optional<Time> time) {
-            assert time != null;
-            this.time = time;
+        public void setTime(Optional<Deadline> deadline) {
+            assert deadline != null;
+            this.deadline = deadline;
         }
 
-        public Optional<Time> getTime() {
-            return time;
+        public Optional<Deadline> getTime() {
+            return deadline;
         }
 
         public void setDate(Optional<Date> date) {

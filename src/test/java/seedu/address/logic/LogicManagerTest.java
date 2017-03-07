@@ -205,7 +205,7 @@ public class LogicManagerTest {
         assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
                 Email.MESSAGE_EMAIL_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
-                Tag.MESSAGE_TAG_CONSTRAINTS);
+                Category.MESSAGE_TAG_CONSTRAINTS);
 
     }
 
@@ -421,9 +421,9 @@ public class LogicManagerTest {
             Phone privatePhone = new Phone("111111");
             Email email = new Email("adam@gmail.com");
             Address privateAddress = new Address("111, alpha street");
-            Tag tag1 = new Tag("tag1");
-            Tag tag2 = new Tag("longertag2");
-            UniqueTagList tags = new UniqueTagList(tag1, tag2);
+            Category tag1 = new Category("tag1");
+            Category tag2 = new Category("longertag2");
+            UniqueCategoryList tags = new UniqueCategoryList(tag1, tag2);
             return new Person(name, privatePhone, email, privateAddress, tags);
         }
 
@@ -440,7 +440,7 @@ public class LogicManagerTest {
                     new Phone("" + Math.abs(seed)),
                     new Email(seed + "@email"),
                     new Address("House of " + seed),
-                    new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
+                    new UniqueCategoryList(new Category("tag" + Math.abs(seed)), new Category("tag" + Math.abs(seed + 1)))
             );
         }
 
@@ -455,8 +455,8 @@ public class LogicManagerTest {
             cmd.append(" p/").append(p.getPhone());
             cmd.append(" a/").append(p.getAddress());
 
-            UniqueTagList tags = p.getTags();
-            for (Tag t: tags) {
+            UniqueCategoryList tags = p.getTags();
+            for (Category t: tags) {
                 cmd.append(" t/").append(t.tagName);
             }
 
@@ -539,7 +539,7 @@ public class LogicManagerTest {
                     new Phone("1"),
                     new Email("1@email"),
                     new Address("House of 1"),
-                    new UniqueTagList(new Tag("tag"))
+                    new UniqueCategoryList(new Category("tag"))
             );
         }
     }
