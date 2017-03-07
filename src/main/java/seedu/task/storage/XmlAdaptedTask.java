@@ -9,10 +9,10 @@ import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.CompletionStatus;
-import seedu.task.model.task.EndDate;
+import seedu.task.model.task.EndTime;
 import seedu.task.model.task.Name;
 import seedu.task.model.task.Task;
-import seedu.task.model.task.StartDate;
+import seedu.task.model.task.StartTime;
 import seedu.task.model.task.ReadOnlyTask;
 
 /**
@@ -46,8 +46,8 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getName().fullName;
-        startDate = source.getStartDate().value;
-        endDate = source.getEndDate().value;
+        startDate = source.getStartTime().value;
+        endDate = source.getEndTime().value;
         completionStatus = source.getCompletionStatus().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
@@ -66,10 +66,10 @@ public class XmlAdaptedTask {
             taskTags.add(tag.toModelType());
         }
         final Name name = new Name(this.name);
-        final StartDate startDate = new StartDate(this.startDate);
-        final EndDate endDate = new EndDate(this.endDate);
+        final StartTime startTime = new StartTime(this.startDate);
+        final EndTime endTime = new EndTime(this.endDate);
         final CompletionStatus completionStatus = new CompletionStatus(this.completionStatus);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(name, startDate, endDate, completionStatus, tags);
+        return new Task(name, startTime, endTime, completionStatus, tags);
     }
 }

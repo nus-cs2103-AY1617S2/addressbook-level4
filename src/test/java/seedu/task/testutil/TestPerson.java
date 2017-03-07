@@ -2,9 +2,9 @@ package seedu.task.testutil;
 
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.CompletionStatus;
-import seedu.task.model.task.EndDate;
+import seedu.task.model.task.EndTime;
 import seedu.task.model.task.Name;
-import seedu.task.model.task.StartDate;
+import seedu.task.model.task.StartTime;
 import seedu.task.model.task.ReadOnlyTask;
 
 /**
@@ -14,8 +14,8 @@ public class TestPerson implements ReadOnlyTask {
 
     private Name name;
     private CompletionStatus address;
-    private EndDate email;
-    private StartDate phone;
+    private EndTime email;
+    private StartTime phone;
     private UniqueTagList tags;
 
     public TestPerson() {
@@ -27,8 +27,8 @@ public class TestPerson implements ReadOnlyTask {
      */
     public TestPerson(TestPerson personToCopy) {
         this.name = personToCopy.getName();
-        this.phone = personToCopy.getStartDate();
-        this.email = personToCopy.getEndDate();
+        this.phone = personToCopy.getStartTime();
+        this.email = personToCopy.getEndTime();
         this.address = personToCopy.getCompletionStatus();
         this.tags = personToCopy.getTags();
     }
@@ -41,11 +41,11 @@ public class TestPerson implements ReadOnlyTask {
         this.address = address;
     }
 
-    public void setEmail(EndDate email) {
+    public void setEmail(EndTime email) {
         this.email = email;
     }
 
-    public void setPhone(StartDate phone) {
+    public void setPhone(StartTime phone) {
         this.phone = phone;
     }
 
@@ -59,12 +59,12 @@ public class TestPerson implements ReadOnlyTask {
     }
 
     @Override
-    public StartDate getStartDate() {
+    public StartTime getStartTime() {
         return phone;
     }
 
     @Override
-    public EndDate getEndDate() {
+    public EndTime getEndTime() {
         return email;
     }
 
@@ -87,8 +87,8 @@ public class TestPerson implements ReadOnlyTask {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
         sb.append("a/" + this.getCompletionStatus().value + " ");
-        sb.append("p/" + this.getStartDate().value + " ");
-        sb.append("e/" + this.getEndDate().value + " ");
+        sb.append("p/" + this.getStartTime().value + " ");
+        sb.append("e/" + this.getEndTime().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }

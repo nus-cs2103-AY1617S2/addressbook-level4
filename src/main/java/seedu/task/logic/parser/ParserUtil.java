@@ -16,9 +16,9 @@ import seedu.task.commons.util.StringUtil;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.CompletionStatus;
-import seedu.task.model.task.EndDate;
+import seedu.task.model.task.EndTime;
 import seedu.task.model.task.Name;
-import seedu.task.model.task.StartDate;
+import seedu.task.model.task.StartTime;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -75,11 +75,11 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> startDate} into an {@code Optional<StartDate>} if {@code startDate} is present.
+     * Parses a {@code Optional<String> startDate} into an {@code Optional<StartTime>} if {@code startDate} is present.
      */
-    public static Optional<StartDate> parseStartDate(Optional<String> startDate) throws IllegalValueException {
+    public static Optional<StartTime> parseStartTime(Optional<String> startDate) throws IllegalValueException {
         assert startDate != null;
-        return startDate.isPresent() ? Optional.of(new StartDate(startDate.get())) : Optional.empty();
+        return startDate.isPresent() ? Optional.of(new StartTime(startDate.get())) : Optional.empty();
     }
 
     /**
@@ -91,11 +91,11 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> endDate} into an {@code Optional<EndDate>} if {@code endDate} is present.
+     * Parses a {@code Optional<String> endDate} into an {@code Optional<EndTime>} if {@code endDate} is present.
      */
-    public static Optional<EndDate> parseEndDate(Optional<String> endDate) throws IllegalValueException {
+    public static Optional<EndTime> parseEndTime(Optional<String> endDate) throws IllegalValueException {
         assert endDate != null;
-        return endDate.isPresent() ? Optional.of(new EndDate(endDate.get())) : Optional.empty();
+        return endDate.isPresent() ? Optional.of(new EndTime(endDate.get())) : Optional.empty();
     }
 
     /**

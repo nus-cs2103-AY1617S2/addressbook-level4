@@ -8,10 +8,10 @@ import seedu.task.commons.util.CollectionUtil;
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.CompletionStatus;
-import seedu.task.model.task.EndDate;
+import seedu.task.model.task.EndTime;
 import seedu.task.model.task.Name;
 import seedu.task.model.task.Task;
-import seedu.task.model.task.StartDate;
+import seedu.task.model.task.StartTime;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.UniqueTaskList;
 
@@ -78,12 +78,12 @@ public class EditCommand extends Command {
         assert taskToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
-        StartDate updatedStartDate = editTaskDescriptor.getStartDate().orElseGet(taskToEdit::getStartDate);
-        EndDate updatedEndDate = editTaskDescriptor.getEndDate().orElseGet(taskToEdit::getEndDate);
+        StartTime updatedStartTime = editTaskDescriptor.getStartTime().orElseGet(taskToEdit::getStartTime);
+        EndTime updatedEndTime = editTaskDescriptor.getEndTime().orElseGet(taskToEdit::getEndTime);
         CompletionStatus updatedCompletionStatus = editTaskDescriptor.getCompletionStatus().orElseGet(taskToEdit::getCompletionStatus);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedName, updatedStartDate, updatedEndDate, updatedCompletionStatus, updatedTags);
+        return new Task(updatedName, updatedStartTime, updatedEndTime, updatedCompletionStatus, updatedTags);
     }
 
     /**
@@ -92,8 +92,8 @@ public class EditCommand extends Command {
      */
     public static class EditTaskDescriptor {
         private Optional<Name> name = Optional.empty();
-        private Optional<StartDate> startDate = Optional.empty();
-        private Optional<EndDate> endDate = Optional.empty();
+        private Optional<StartTime> startTime = Optional.empty();
+        private Optional<EndTime> endTime = Optional.empty();
         private Optional<CompletionStatus> completionStatus = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
@@ -101,8 +101,8 @@ public class EditCommand extends Command {
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.name = toCopy.getName();
-            this.startDate = toCopy.getStartDate();
-            this.endDate = toCopy.getEndDate();
+            this.startTime = toCopy.getStartTime();
+            this.endTime = toCopy.getEndTime();
             this.completionStatus = toCopy.getCompletionStatus();
             this.tags = toCopy.getTags();
         }
@@ -111,7 +111,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.startDate, this.endDate, this.completionStatus, this.tags);
+            return CollectionUtil.isAnyPresent(this.name, this.startTime, this.endTime, this.completionStatus, this.tags);
         }
 
         public void setName(Optional<Name> name) {
@@ -123,22 +123,22 @@ public class EditCommand extends Command {
             return name;
         }
 
-        public void setStartDate(Optional<StartDate> startDate) {
-            assert startDate != null;
-            this.startDate = startDate;
+        public void setStartTime(Optional<StartTime> startTime) {
+            assert startTime != null;
+            this.startTime = startTime;
         }
 
-        public Optional<StartDate> getStartDate() {
-            return startDate;
+        public Optional<StartTime> getStartTime() {
+            return startTime;
         }
 
-        public void setEndDate(Optional<EndDate> endDate) {
-            assert endDate != null;
-            this.endDate = endDate;
+        public void setEndTime(Optional<EndTime> endTime) {
+            assert endTime != null;
+            this.endTime = endTime;
         }
 
-        public Optional<EndDate> getEndDate() {
-            return endDate;
+        public Optional<EndTime> getEndTime() {
+            return endTime;
         }
 
         public void setCompletionStatus(Optional<CompletionStatus> completionStatus) {

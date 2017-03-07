@@ -10,9 +10,9 @@ import seedu.task.commons.core.Messages;
 import seedu.task.logic.commands.EditCommand;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.task.CompletionStatus;
-import seedu.task.model.task.EndDate;
+import seedu.task.model.task.EndTime;
 import seedu.task.model.task.Name;
-import seedu.task.model.task.StartDate;
+import seedu.task.model.task.StartTime;
 import seedu.task.testutil.PersonBuilder;
 import seedu.task.testutil.TestPerson;
 
@@ -94,10 +94,10 @@ public class EditCommandTest extends AddressBookGuiTest {
         assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 p/abcd");
-        assertResultMessage(StartDate.MESSAGE_DATE_CONSTRAINTS);
+        assertResultMessage(StartTime.MESSAGE_TIME_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 e/yahoo!!!");
-        assertResultMessage(EndDate.MESSAGE_DATE_CONSTRAINTS);
+        assertResultMessage(EndTime.MESSAGE_TIME_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 a/");
         assertResultMessage(CompletionStatus.MESSAGE_COMPLETION_STATUS_CONSTRAINTS);

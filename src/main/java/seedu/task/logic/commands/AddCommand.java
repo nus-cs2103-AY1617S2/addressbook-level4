@@ -8,10 +8,10 @@ import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.CompletionStatus;
-import seedu.task.model.task.EndDate;
+import seedu.task.model.task.EndTime;
 import seedu.task.model.task.Name;
 import seedu.task.model.task.Task;
-import seedu.task.model.task.StartDate;
+import seedu.task.model.task.StartTime;
 import seedu.task.model.task.UniqueTaskList;
 
 /**
@@ -44,8 +44,8 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Task(
                 new Name(name),
-                new StartDate(startDate),
-                new EndDate(endDate),
+                new StartTime(startDate),
+                new EndTime(endDate),
                 new CompletionStatus(completionStatus),
                 new UniqueTagList(tagSet)
         );

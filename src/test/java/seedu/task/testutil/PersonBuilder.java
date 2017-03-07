@@ -4,9 +4,9 @@ import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.CompletionStatus;
-import seedu.task.model.task.EndDate;
+import seedu.task.model.task.EndTime;
 import seedu.task.model.task.Name;
-import seedu.task.model.task.StartDate;
+import seedu.task.model.task.StartTime;
 
 /**
  *
@@ -45,12 +45,12 @@ public class PersonBuilder {
     }
 
     public PersonBuilder withPhone(String phone) throws IllegalValueException {
-        this.person.setPhone(new StartDate(phone));
+        this.person.setPhone(new StartTime(phone));
         return this;
     }
 
     public PersonBuilder withEmail(String email) throws IllegalValueException {
-        this.person.setEmail(new EndDate(email));
+        this.person.setEmail(new EndTime(email));
         return this;
     }
 
