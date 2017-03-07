@@ -549,3 +549,28 @@ Cons:
 * Only addition of a task can be done from the command line. The rest of user operations rely heavily on GUI.  
 * Does not offer time-slot “block” feature for tentative events whose time is yet to be finalized.
 
+**Product: Wunderlist**
+
+Author: Anshul Aggarwal
+
+Benefits:
+
+* This to-do list app provides the feature of reminders via in-app notification,email etc.
+* The user can set a deadlines for a task 
+* Very user friendly UI and easy to organise things 
+* Allow Multiple device usage like Iphone,Ipad,Mac,windows and Kindlefire
+* This app is cloud based and has the ability to sync task. 
+* Allows to colloborate with friends and colleagues.
+* Data is stored and synced with device when there is internet access,claims to be faster than Google calendar
+* Allow gruping of list into folders
+* Allow #tags to add more context to your to dos 
+* Allow addition of notes to give more clarity
+
+Downsides:
+
+* Unlike what the professor favours this app requires a lot of clicks and fields to save a task
+* Dont allow booking of multiple slots for a particular task
+* The app allows to set deadline for a task on the basis of due date and not time which might be hinder the users work.
+
+
+

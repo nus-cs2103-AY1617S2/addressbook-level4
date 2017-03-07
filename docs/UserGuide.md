@@ -5,8 +5,9 @@ By : `Team T15B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp
 1. [Introduction](#introduction)
 2. [Quick Start](#quick-start)
 3. [Features](#features)
-4. [FAQ](#faq)
-5. [Storage file format](#storage-file-format)
+4. [Command Summary](#command-summary)
+5. [FAQ](#faq)
+6. [Storage file format](#storage-file-format)
 
 ## 1. Introduction 
 Welcome. We will take you for an enthralling journey as we bring forward our task manager `TaskCrusher`.
@@ -25,12 +26,10 @@ It can help you manage events, deadlines, add tasks with or without deadlines or
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
-   
 5. Some example commands you can try:
    * **`help`** : displays help documentation
-   * **`adde`:**  `add "Cs2103 meeting" 3 Mar 17:00 to 18:00` adds an event called "Cs2103 meeting" on 3 March from 17:00 to 18:00
+   * **`add e`:**  `add "Cs2103 meeting" 3 Mar 17:00 to 18:00` adds an event called "Cs2103 meeting" on 3 March from 17:00 to 18:00
    * **`view`**: `view calendar` displays the calendar with tasks and events you have added
-
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
 ## 3. Features
@@ -49,62 +48,71 @@ Format: `help`
 
 > Help is also shown if you enter an incorrect command e.g. `abcd`
 
-### 3.2. Adding an item: `adde` or `addt`
+### 3.2. Adding an item: `add e` or `add t`
 
-Format (event):
+> * DATE format: DD-MM-YY
+> * TIME format: 00:00 (24 hour)
+> * User will be prompted for events that clash
 
-`adde "event name" START_DATE START_TIME to [END_DATE] END_TIME [t/TAG]... [//DESCRIPTION]`<br>
+**Add event**:
 
-Format (tentative event. blocks multiple time slots): 
+Format: `add e event name dt/START_DATE START_TIME to [END_DATE] END_TIME [t/TAG]... [//DESCRIPTION]`<br>
 
-`adde "event name" START_DATE START_TIME to [END_DATE] END_TIME or ... [t/TAG]... [//DESCRIPTION]`<br>
+**Add tentative event, blocks multiple time slots**:
 
-Format (task with deadline): 
+Format: `add e event name dt/START_DATE START_TIME to [END_DATE] END_TIME or [dt/START_DATE] ... [t/TAG]... [//DESCRIPTION]`<br>
 
-`addt "task name" DEADLINE [t/TAG] [p/PRIORITY] [//DESCRIPTION]`  <br>
+**Add task with deadline**:
 
-Format (task without deadline): 
+Format: `add t task name dt/DEADLINE [t/TAG] [p/PRIORITY] [//DESCRIPTION]`<br>
 
-`addt "task name" [t/TAG] [p/PRIORITY] [//DESCRIPTION] `<br>
+**Add task without deadline**:
+
+Format: `add t task name [t/TAG] [p/PRIORITY] [//DESCRIPTION] `<br>
 
 Examples:
 
-* `adde "Cs2103 meeting" 3 Mar 17:00 to 18:00`
-* `addt "Buy tickets" 3 mar 17:00`
-* `addt "Take GF for dinner"`
+* `add e CS2103 Meeting dt/03-03-17 17:00 to 19:00 t/school`
+* `add t Buy tickets dt/03-05-17 //ensure it's front row`
+* `add t Go out for dinner`
 
 ### 3.3 Viewing the active/expired list: `list`
 
 **View the entire active list**: 
 
-Format: `list`
+Format: `list`<br>
 
-**View tasks with/without deadline**: 
+**View active task list**: 
 
-Format: `listd [DEADLINE] [SORT_FIELD]`
+Format: `list t`<br>
 
-Example:
+**View active event list**: 
 
-* `listd 3 March`
+Format: `list e`<br>
 
-**View events within a time frame, or with no time frame specified** : 
+**View active list within specific time frame**: 
 
-Format: `liste [START_DATE START_TIME to END_DATE END TIME] [SORT_FIELD]`
+> All tasks and events that have times that overlap in part or whole with this time frame will be displayed
 
-Example:
+Format: `list dt/START_DATE START_TIME to [END_DATE] END_TIME`<br>
 
-* `liste today 17:00 to tomorrow 18:00`
+**View active task or event list within specific time frame**: 
 
-**View overdue task** : 
+Format: `list [t or e] dt/START_DATE START_TIME to [END_DATE] END_TIME`<br>
 
-Format: `listo`
+**View overdue tasks** : 
+
+Format: `list o`<br>
 
 **View tasks and events in the expired list**: 
 
-Format: `listc`
+Format: `list c`<br>
 
-NOTE:
-> note that tasks and events have different fields, and therefore the parameter SORT_FIELD may vary between events and tasks.
+Examples:
+
+* `list c`
+* `list e dt/5-5-18 00:00 to 15:00`
+* `list t dt/5-7-17 00:00 to 8-7-17 16:00`
 
 ### 3.4 Updating a field of a task/event in the active list : `edit`
 
@@ -115,32 +123,31 @@ NOTE:
 
 **Updating the fields**:
 
-Format: `edit INDEX FIELD_NAME NEW_VALUE`
+> Use the appropriate prefix for the field
+
+Format: `edit INDEX [NEW_NAME] prefix/NEW_VALUE [prefix/NEW_VALUE]...`<br>
 
 Examples: 
 
-`edit 1 priority 3`, assuming that the item with index 1 is a task.
+`edit 1 Read Harry Potter p/3`, assuming that the item with index 1 is a task.
 
-### 3.5 Mark as `done` or dimiss tasks and events: `done` and `dis`
+### 3.5 Mark as `done` tasks and events:
+
 > Just like the `edit` command, the user makes use of the index provided by the `list`-type commands. Either way, the task/event gets stored in the expired list.
 
 **Marking a task or event as done**:
 
-Format: `done INDEX`
-
-**Dismissing a task or event, without actually completing**:
-
-Format: `dis INDEX [\\REASON]`
+Format: `done INDEX`<br>
 
 Example:
 
-`dis 2 \\dropped the module so no longer need to complete this assignment`
+`done 2`
 
 ### 3.6. Finding event or task by keyword: `find`
 
 > Finds tasks or events whose field(s) contain any of the given keywords.<br>
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD [MORE_KEYWORDS]`<br>
 
 Examples:
 
@@ -151,46 +158,71 @@ Examples:
 
 > Just like edit, user can delete tasks and events in the active list by using their indexes specified in the most recent list. This option can also be used for tasks or events already in the expired list from which the user wants to get rid of.
 
-Format: `delete INDEX`
+Format: `delete INDEX`<br>
 
 ### 3.8. Clearing all expired tasks and events : `clear`
 
-Format: `clear`
+Format: `clear`<br>
 
-### 3.9 Viewing other material: `view`
+### 3.9 Exiting the program : `exit`
 
-**View command history**: 
+Format: `exit`<br>
 
-Format: `view history`
+### 3.10 Undoing the last command: `undo`
 
-**View the calendar**: 
+Format: `undo`<br>
 
-Format: `view calendar`
+### 3.11 Recycle 
 
-**View free time during the day/week/month** : 
+Brings back the expired tasks/events back to active list, with the deadline/event date altered. The index is as shown by `list c` command.
 
-Format: `view free day | week | month`
+Format : `recycle INDEX DEADLINE | START_DATE START_TIME to [END_DATE] END_TIME`<br>
 
-### 3.10 Exiting the program : `exit`
+### 3.12 Changing storage files : `load`
 
-Format: `exit`
+Format: `load FILEPATH`<br>
 
-### 3.11 Undoing the last command: `undo`
+> If the file given by FILEPATH does not exist, `TaskCrusher` creates a new file
 
-Format: `undo`
+### 3.13 History
 
-### 3.12 Recycle 
+**View entire command history for the current session**:
 
-Brings back the expired tasks/events back to active list, with the deadline/event date altered.The index is as shown by `listc` command.
+> Includes invalid commands
 
-Format : `Recycle INDEX DEADLINE | START_DATE START_TIME to [END_DATE] END_TIME`
+Format: `history`<br>
 
-### 3.13 Files
+## 4. Command Summary
 
-**Switch between files**: `switchf FILEPATH`
-> if the file given by FILEPATH does not exist, `TaskCrusher` creates a new file
+* **Help** : `help`<br>
 
-## 4. FAQ
+* **Add event** : `add e event name dt/START_DATE START_TIME to [END_DATE] END_TIME [or dt/START_DATE...] ... [t/TAG]... [//DESCRIPTION]`<br>
+
+* **Add task** : `add t task name [dt/DEADLINE] [t/TAG] [p/PRIORITY] [//DESCRIPTION]`<br>
+
+* **List active tasks/events/all** : `list [t or e] dt/START_DATE START_TIME to [END_DATE] END_TIME`<br> 
+
+* **List overdue** : `list o`<br> 
+
+* **List completed** : `list c`<br> 
+
+* **Edit** : `edit INDEX [NEW_NAME] prefix/NEW_VALUE [prefix/NEW_VALUE]...`<br>
+
+* **Done** : `done INDEX`<br>
+
+* **Find** : `find KEYWORD [MORE_KEYWORDS]`<br>
+
+* **Delete** : `delete INDEX`<br>
+
+* **Clear** : `clear`<br>
+
+* **Exit** : `exit`<br>
+
+* **Undo** : `undo`<br>
+
+* **Recycle** : `recycle INDEX DEADLINE | START_DATE START_TIME to [END_DATE] END_TIME`<br>
+
+## 5. FAQ
 
 **Q**: How do I create my own storage file to import into the app?<br>
 **A**: Refer to [Storage file format](#storage-file-format) for instructions
@@ -203,3 +235,4 @@ Format : `Recycle INDEX DEADLINE | START_DATE START_TIME to [END_DATE] END_TIME`
 
 ## 6. Storage File Format
 
+**TODO**
