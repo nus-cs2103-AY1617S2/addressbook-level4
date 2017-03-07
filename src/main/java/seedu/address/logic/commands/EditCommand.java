@@ -11,7 +11,7 @@ import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Edits the details of an existing task in the address book.
+ * Edits the details of an existing task in the task manager.
  */
 public class EditCommand extends Command {
 
