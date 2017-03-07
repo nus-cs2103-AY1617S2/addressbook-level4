@@ -13,10 +13,10 @@ import seedu.taskmanager.model.task.UniqueTaskList.DuplicateTaskException;
  */
 public interface Model {
     /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyProcrastiNomore newData);
+    void resetData(ReadOnlyTaskManager newData);
 
-    /** Returns the AddressBook */
-    ReadOnlyProcrastiNomore getProcrastiNomore();
+    /** Returns the TaskManager */
+    ReadOnlyTaskManager getTaskManager();
 
     /** Deletes the given person. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;

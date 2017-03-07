@@ -16,7 +16,7 @@ public interface ReadOnlyTask {
      * The returned TagList is a deep copy of the internal TagList,
      * changes on the returned list will not affect the person's internal tags.
      */
-    UniqueTagList getTags();
+//    UniqueTagList getTags();
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
@@ -38,9 +38,9 @@ public interface ReadOnlyTask {
                 .append(" Time: ")
                 .append(getTime())
                 .append(" Date: ")
-                .append(getDate())
-                .append(" Tags: ");
-        getTags().forEach(builder::append);
+                .append(getDate());
+ //               .append(" Tags: ");
+ //       getTags().forEach(builder::append);
         return builder.toString();
     }
 

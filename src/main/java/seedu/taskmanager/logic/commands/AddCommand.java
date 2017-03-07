@@ -38,7 +38,7 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String taskName, String time, String date, String endTime, String deadline)
+    public AddCommand(String taskName, String time, String date /* String endTime, String deadline */)
             throws IllegalValueException {
   //      final Set<Tag> tagSet = new HashSet<>();
   //      for (String tagTaskName : tags) {
@@ -47,17 +47,17 @@ public class AddCommand extends Command {
         this.toAdd = new Task(
                 new TaskName(taskName),
                 new Time(time),
-                new Date(date),
-                new EndTime(endTime);
-                new Deadline(deadline);
-        );
+                new Date(date)
+//                new EndTime(endTime),
+  //              new Deadline(deadline)
+                );
     }
 
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
         try {
-            model.addPerson(toAdd);
+            model.addTask(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);

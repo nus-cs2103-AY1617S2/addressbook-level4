@@ -60,7 +60,7 @@ public class EditCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
-        Person editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
         try {
             model.updateTask(filteredTaskListIndex, editedTask);
@@ -79,15 +79,15 @@ public class EditCommand extends Command {
                                              EditTaskDescriptor editTaskDescriptor) {
         assert taskToEdit != null;
 
-        TaskName updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
+        TaskName updatedName = editTaskDescriptor.getTaskName().orElseGet(taskToEdit::getTaskName);
         Time updatedTime = editTaskDescriptor.getTime().orElseGet(taskToEdit::getTime);
         Date updatedDate = editTaskDescriptor.getDate().orElseGet(taskToEdit::getDate);
-        EndTime updatedEndTime = editTaskDescriptor.getEndTime().orElseGet(taskToEdit::getEndTime);
-        Deadline updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(taskToEdit::getDeadline);
+//        EndTime updatedEndTime = editTaskDescriptor.getEndTime().orElseGet(taskToEdit::getEndTime);
+//        Deadline updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(taskToEdit::getDeadline);
 //        Address updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
 //        UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
-        return new Task(updatedName, updatedTime, updatedDate, updatedEndTime, updatedDeadline/*, updatedAddress, updatedTags*/);
+        return new Task(updatedName, updatedTime, updatedDate/*, updatedEndTime, updatedDeadline, updatedAddress, updatedTags*/);
     }
 
     /**
@@ -98,8 +98,8 @@ public class EditCommand extends Command {
         private Optional<TaskName> taskname = Optional.empty();
         private Optional<Time> time = Optional.empty();
         private Optional<Date> date = Optional.empty();
-        private Optional<EndTime> endtime = Optional.empty();
-        private Optional<Deadline> deadline = Optional<T>.empty();
+//        private Optional<EndTime> endtime = Optional.empty();
+ //       private Optional<Deadline> deadline = Optional<T>.empty();
  //       private Optional<Address> address = Optional.empty();
  //       private Optional<UniqueTagList> tags = Optional.empty();
 
@@ -109,8 +109,8 @@ public class EditCommand extends Command {
             this.taskname = toCopy.getTaskName();
             this.time = toCopy.getTime();
             this.date = toCopy.getDate();
-            this.endtime = toCopy.getEndTime();
-            this.deadline = toCopy.getDeadline);
+//            this.endtime = toCopy.getEndTime();
+//            this.deadline = toCopy.getDeadline);
  //           this.address = toCopy.getAddress();
  //           this.tags = toCopy.getTags();
         }
@@ -119,8 +119,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.taskname, this.time, this.date,
-            		                           this.endtime, this.deadline /*, this.address, this.tags*/);
+            return CollectionUtil.isAnyPresent(this.taskname, this.time, this.date
+            		                           /*this.endtime, this.deadline , this.address, this.tags*/);
         }
 
         public void setTaskName(Optional<TaskName> taskname) {
@@ -150,7 +150,7 @@ public class EditCommand extends Command {
             return date;
         }
         
-        public void setEndTime(Optional<EndTime> endtime) {
+/*        public void setEndTime(Optional<EndTime> endtime) {
         	assert endtime != null;
         	this.endtime = endtime;
         }
@@ -167,7 +167,7 @@ public class EditCommand extends Command {
         public Optional<Deadline> getDeadline() {
         	return deadline;
         }
-
+*/
 /*        public void setAddress(Optional<Address> address) {
             assert address != null;
             this.address = address;

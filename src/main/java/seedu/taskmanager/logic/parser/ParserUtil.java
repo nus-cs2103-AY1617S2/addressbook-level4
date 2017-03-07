@@ -14,9 +14,9 @@ import java.util.stream.Collectors;
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.commons.util.StringUtil;
 // import seedu.taskmanager.model.person.Address;
-import seedu.taskmanager.model.person.Date;
-import seedu.taskmanager.model.person.TaskName;
-import seedu.taskmanager.model.person.Time;
+import seedu.taskmanager.model.task.Date;
+import seedu.taskmanager.model.task.TaskName;
+import seedu.taskmanager.model.task.Time;
 // import seedu.taskmanager.model.tag.Tag;
 // import seedu.taskmanager.model.tag.UniqueTagList;
 
@@ -69,7 +69,7 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> taskname} into an {@code Optional<TaskName>} if {@code taskname} is present.
      */
-    public static Optional<Name> parseTaskName(Optional<String> taskname) throws IllegalValueException {
+    public static Optional<TaskName> parseTaskName(Optional<String> taskname) throws IllegalValueException {
         assert taskname != null;
         return taskname.isPresent() ? Optional.of(new TaskName(taskname.get())) : Optional.empty();
     }
@@ -93,7 +93,7 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> endtime} into an {@code Optional<EndTime>} if {@code endtime} is present.
      */
-    public static Optional<EndTime> parseEndTime(Optional<String> endtime) throws IllegalValueException {
+/*    public static Optional<EndTime> parseEndTime(Optional<String> endtime) throws IllegalValueException {
     	assert endtime != null;
     	return endtime.isPresent() ? Optional.of(new EndTime(endtime.get())) : Optional.empty();
     }
@@ -101,11 +101,11 @@ public class ParserUtil {
     
     /**
      * Parses a {@code Optional<String> deadline} into an {@code Optional<Deadline>} if {@code deadline} is present.
-     */
+     
     public static Optional<Deadline> parseDeadline(Optional<String> deadline) throws IllegalValueException {
     	assert deadline != null;
     	return deadline.isPresent() ? Optional.of(new Deadline(endtime.get())) : Optinal.empty();
-    }
+    } */
 
     /**
      * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.

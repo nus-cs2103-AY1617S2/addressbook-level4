@@ -21,7 +21,7 @@ import seedu.taskmanager.model.task.UniqueTaskList.DuplicateTaskException;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .equals comparison)
  */
-public class ProcrastiNomore implements ReadOnlyProcrastiNomore {
+public class TaskManager implements ReadOnlyTaskManager {
 
     private final UniqueTaskList tasks;
     private final UniqueTagList tags;
@@ -38,12 +38,12 @@ public class ProcrastiNomore implements ReadOnlyProcrastiNomore {
         tags = new UniqueTagList();
     }
 
-    public ProcrastiNomore() {}
+    public TaskManager() {}
 
     /**
      * Creates ProcrastiNomore using the Tasks and Tags in the {@code toBeCopied}
      */
-    public ProcrastiNomore(ReadOnlyProcrastiNomore toBeCopied) {
+    public TaskManager(ReadOnlyTaskManager toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -54,24 +54,25 @@ public class ProcrastiNomore implements ReadOnlyProcrastiNomore {
             throws UniqueTaskList.DuplicateTaskException {
         this.tasks.setTasks(tasks);
     }
-
+/*
     public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
         this.tags.setTags(tags);
     }
-
-    public void resetData(ReadOnlyProcrastiNomore newData) {
+*/
+    public void resetData(ReadOnlyTaskManager newData) {
         assert newData != null;
         try {
             setTasks(newData.getTaskList());
         } catch (UniqueTaskList.DuplicateTaskException e) {
             assert false : "ProcrastiNomores should not have duplicate tasks";
         }
-        try {
+/*        try {
             setTags(newData.getTagList());
         } catch (UniqueTagList.DuplicateTagException e) {
             assert false : "ProcrastiNomores should not have duplicate tags";
         }
         syncMasterTagListWith(tasks);
+        */
     }
 
 //// task-level operations
@@ -84,7 +85,7 @@ public class ProcrastiNomore implements ReadOnlyProcrastiNomore {
      * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
      */
     public void addTask(Task t) throws UniqueTaskList.DuplicateTaskException {
-        syncMasterTagListWith(t);
+ //       syncMasterTagListWith(t);
         tasks.add(t);
     }
 
@@ -102,7 +103,7 @@ public class ProcrastiNomore implements ReadOnlyProcrastiNomore {
         assert editedReadOnlyTask != null;
 
         Task editedTask = new Task(editedReadOnlyTask);
-        syncMasterTagListWith(editedTask);
+ //       syncMasterTagListWith(editedTask);
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any task
         // in the task list.
@@ -114,7 +115,7 @@ public class ProcrastiNomore implements ReadOnlyProcrastiNomore {
      *  - exists in the master list {@link #tags}
      *  - points to a Tag object in the master list
      */
-    private void syncMasterTagListWith(Task task) {
+/*    private void syncMasterTagListWith(Task task) {
         final UniqueTagList taskTags = task.getTags();
         tags.mergeFrom(taskTags);
 
@@ -128,17 +129,18 @@ public class ProcrastiNomore implements ReadOnlyProcrastiNomore {
         taskTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
         task.setTags(new UniqueTagList(correctTagReferences));
     }
-
+*/
     /**
      * Ensures that every tag in these tasks:
      *  - exists in the master list {@link #tags}
      *  - points to a Tag object in the master list
      *  @see #syncMasterTagListWith(Task)
      */
+/*
     private void syncMasterTagListWith(UniqueTaskList tasks) {
         tasks.forEach(this::syncMasterTagListWith);
     }
-
+*/
     public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
         if (tasks.remove(key)) {
             return true;
@@ -174,9 +176,9 @@ public class ProcrastiNomore implements ReadOnlyProcrastiNomore {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ProcrastiNomore // instanceof handles nulls
-                && this.tasks.equals(((ProcrastiNomore) other).tasks)
-                && this.tags.equalsOrderInsensitive(((ProcrastiNomore) other).tags));
+                || (other instanceof TaskManager // instanceof handles nulls
+                && this.tasks.equals(((TaskManager) other).tasks)
+                && this.tags.equalsOrderInsensitive(((TaskManager) other).tags));
     }
 
     @Override
