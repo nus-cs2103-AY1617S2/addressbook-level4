@@ -39,7 +39,7 @@ Features implemented:
 -----
 
 #### [Wang Pengcheng](https://github.com/peng229)
-<img src="images/peng229.jpg" width="150"><br>
+<img src="images/peng229.png" width="150"><br>
  Role: Developer <br>
  Responsibilities: Integration<br>
  Component in charge of: [Model] (https://github.com/CS2103JAN2017-W14-B1/main/blob/master/docs/DeveloperGuide.md#24-model-component)<br>
