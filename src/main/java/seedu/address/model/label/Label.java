@@ -46,7 +46,7 @@ public class Label {
     public int hashCode() {
         return labelName.hashCode();
     }
-    
+
     /**
      * Returns labelName in String
      */

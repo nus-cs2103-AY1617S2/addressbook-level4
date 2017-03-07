@@ -121,7 +121,7 @@ public class UniqueLabelList implements Iterable<Label> {
         assert toCheck != null;
         return internalList.contains(toCheck);
     }
-    
+
     /**
      * Returns true if the list contains an equivalent Label as the given argument.
      */
@@ -129,8 +129,9 @@ public class UniqueLabelList implements Iterable<Label> {
         assert labelToCheck != null;
         //return internalList.contains(toCheck);
         for (Label label : internalList) {
-            if (label.getLabelName().equalsIgnoreCase(labelToCheck))
+            if (label.getLabelName().equalsIgnoreCase(labelToCheck)) {
                 return true;
+            }
         }
         return false;
     }

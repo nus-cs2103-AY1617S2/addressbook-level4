@@ -19,7 +19,7 @@ Please refer to the [Setting up](DeveloperGuide.md#setting-up) section to learn 
 2. Download the latest `doordie.jar` from the [releases](../../../releases) tab.
 3. Navigate to the location of the `doordie.jar` and double click the jar.
 4. The GUI should appear in a few seconds.
-<img src="images/TaskManager.jpg" width="600">
+<img src="images/Ui.png" width="600">
 
 5. Refer to the [Features](#features) section below for details of each command.<br />
 6. Pressing the up or down key will allow you to iterate through previous commands executed (if any).
@@ -230,27 +230,39 @@ Examples:
   `confirm 1 1`<br />
   Confirms the task CS2103 Meeting for 1st January 2017 4pm and releases 2nd January 2017 8pm slot for other tasks
 
-### 2.10. Undo the previously executed command : `undo`
+### 2.10. Edit a label : `editlabel`
+
+Renames a specific label to another label<br />
+Format: `editlabel OLD_LABEL NEW_LABEL`
+
+> * Label names must be alphanumberic
+
+Examples:
+
+* `editlabel friends oldfriends`<br />
+  Renames all task with the tag `friends` to `oldfriends`.
+
+### 2.11. Undo the previously executed command : `undo`
 
 Revert results of a previously executed command. If the previously executed command does not modify the data of DoOrDie, nothing will be reverted.<br />
 Format: `undo`
 
-### 2.11. Clearing all entries : `clear`
+### 2.12. Clearing all entries : `clear`
 
 Clears all entries from DoOrDie.<br />
 Format: `clear`
 
-### 2.12. Push task changes to Google Calendar : `push`
+### 2.13. Push task changes to Google Calendar : `push`
 
 Updates `Google Calendar` with newly added/modified tasks. Priority goes to `DoOrDie` if there is a conflict.<br />
 Format: `push`
 
-### 2.13. Pull task changes from Google Calendar : `pull`
+### 2.14. Pull task changes from Google Calendar : `pull`
 
 Downloads data from Google Calendar. Priority goes to `Google Calendar` if there is a conflict.<br />
 Format: `pull`
 
-### 2.14. Export agenda to PDF file : `export`
+### 2.15. Export agenda to PDF file : `export`
 
 Saves a PDF format with all tasks and details to the same directory as `doordie.jar`.<br />
 Format: `export [DATE|START_DATE to END_DATE]`
@@ -271,12 +283,12 @@ Examples:
 * `export 2nd Feb to 9th Feb`<br />
   Saves a PDF with tasks and details from 2nd February to 9th February of the current year
 
-### 2.15. Exiting the program : `exit`
+### 2.16. Exiting the program : `exit`
 
 Exits DoOrDie<br />
 Format: `exit`
 
-### 2.16. Saving the data
+### 2.17. Saving the data
 
 DoOrDie data are saved in the hard disk automatically after any command that changes the data.<br />
 There is no need to save manually.
@@ -311,8 +323,11 @@ There is no need to save manually.
 * **Book** `book TASKNAME [label LABEL] , DATE, [MORE_DATES]...`<br />
   e.g. `book CS2103 Meeting 1/1/2017 4pm, 2/1/2017 8pm`
 
-* **Confirm** ` confirm TASK_ID (SLOT_NUMBER|DATE) `<br />
+* **Confirm** `confirm TASK_ID (SLOT_NUMBER|DATE)`<br />
   e.g. `book CS2103 Meeting 1/1/2017 4pm, 2/1/2017 8pm`
+
+* **Edit Label** `editlabel OLD_LABEL NEW_LABEL`<br />
+  e.g. `editlabel friends oldFriends`
 
 * **Undo** `undo`
 
