@@ -1,4 +1,5 @@
-# AddressBook Level 4 - Developer Guide
+# Bullet Journal - Developer Guide
+
 
 By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 

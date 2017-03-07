@@ -1,4 +1,4 @@
-# Main - User Guide
+# Bullet Journal - User Guide
 
 By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
