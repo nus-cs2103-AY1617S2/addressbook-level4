@@ -8,7 +8,7 @@ import org.junit.Test;
 import guitests.guihandles.PersonCardHandle;
 import seedu.doist.commons.core.Messages;
 import seedu.doist.logic.commands.EditCommand;
-import seedu.doist.model.tag.Tag;
+//import seedu.doist.model.tag.Tag;
 import seedu.doist.model.task.Description;
 import seedu.doist.testutil.PersonBuilder;
 import seedu.doist.testutil.TestPerson;
@@ -22,35 +22,35 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby p/91234567 e/bobby@gmail.com a/Block 123, Bobby Street 3 t/husband";
+        String detailsToEdit = "Bobby";  // p/91234567 e/bobby@gmail.com a/Block 123, Bobby Street 3 t/husband";
         int addressBookIndex = 1;
 
-        TestPerson editedPerson = new PersonBuilder().withName("Bobby").withTags("husband").build();
+        TestPerson editedPerson = new PersonBuilder().withName("Bobby").build();  //.withTags("husband").build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
 
-    @Test
-    public void edit_notAllFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "t/sweetie t/bestie";
-        int addressBookIndex = 2;
+//    @Test
+//    public void edit_notAllFieldsSpecified_success() throws Exception {
+//        String detailsToEdit = "t/sweetie t/bestie";
+//        int addressBookIndex = 2;
+//
+//        TestPerson personToEdit = expectedPersonsList[addressBookIndex - 1];
+//        TestPerson editedPerson = new PersonBuilder(personToEdit).withTags("sweetie", "bestie").build();
+//
+//        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
+//    }
 
-        TestPerson personToEdit = expectedPersonsList[addressBookIndex - 1];
-        TestPerson editedPerson = new PersonBuilder(personToEdit).withTags("sweetie", "bestie").build();
-
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
-    }
-
-    @Test
-    public void edit_clearTags_success() throws Exception {
-        String detailsToEdit = "t/";
-        int addressBookIndex = 2;
-
-        TestPerson personToEdit = expectedPersonsList[addressBookIndex - 1];
-        TestPerson editedPerson = new PersonBuilder(personToEdit).withTags().build();
-
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
-    }
+//    @Test
+//    public void edit_clearTags_success() throws Exception {
+//        String detailsToEdit = "t/";
+//        int addressBookIndex = 2;
+//
+//        TestPerson personToEdit = expectedPersonsList[addressBookIndex - 1];
+//        TestPerson editedPerson = new PersonBuilder(personToEdit).withTags().build();
+//
+//        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
+//    }
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
@@ -88,17 +88,17 @@ public class EditCommandTest extends AddressBookGuiTest {
     public void edit_invalidValues_failure() {
         commandBox.runCommand("edit 1 *&");
         assertResultMessage(Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
-
-        commandBox.runCommand("edit 1 t/*&");
-        assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
+//
+//        commandBox.runCommand("edit 1 t/*&");
+//        assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
-    @Test
-    public void edit_duplicatePerson_failure() {
-        commandBox.runCommand("edit 3 Alice Pauline p/85355255 e/alice@gmail.com "
-                                + "a/123, Jurong West Ave 6, #08-111 t/friends");
-        assertResultMessage(EditCommand.MESSAGE_DUPLICATE_PERSON);
-    }
+//    @Test
+//    public void edit_duplicatePerson_failure() {
+//        commandBox.runCommand("edit 3 Alice Pauline p/85355255 e/alice@gmail.com "
+//                                + "a/123, Jurong West Ave 6, #08-111 t/friends");
+//        assertResultMessage(EditCommand.MESSAGE_DUPLICATE_PERSON);
+//    }
 
     /**
      * Checks whether the edited person has the correct updated details.

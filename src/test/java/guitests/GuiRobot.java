@@ -10,9 +10,7 @@ import seedu.doist.testutil.TestUtil;
  * Extends {@link FxRobot} by adding some customized functionality and workarounds.
  */
 public class GuiRobot extends FxRobot {
-
     public GuiRobot push(KeyCodeCombination keyCodeCombination) {
         return (GuiRobot) super.push(TestUtil.scrub(keyCodeCombination));
     }
-
 }
