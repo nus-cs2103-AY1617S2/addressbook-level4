@@ -9,7 +9,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 public class Time {
 
     public static final String MESSAGE_TIME_CONSTRAINTS = "Task time should only contain numbers";
-    public static final String TIME_VALIDATION_REGEX = "\\d+";
+    public static final String TIME_VALIDATION_REGEX = ".*";
 
     public final String value;
 
