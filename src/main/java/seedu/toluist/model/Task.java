@@ -77,6 +77,13 @@ public class Task implements Comparable<Task> {
 
     @Override
     public int compareTo(Task comparison) {
-        return this.description.compareToIgnoreCase(comparison.description);
+        if (startDateTime.compareTo(comparison.startDateTime) != 0) {
+            return startDateTime.compareTo(comparison.startDateTime);
+        } else if (false) {
+            //TODO add priority comparison with variable
+            return -1;
+        } else {
+            return this.description.compareToIgnoreCase(comparison.description);
+        }
     }
 }
