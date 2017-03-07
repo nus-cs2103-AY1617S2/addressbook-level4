@@ -7,7 +7,7 @@ import seedu.taskboss.commons.core.Messages;
 import seedu.taskboss.commons.util.CollectionUtil;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.model.category.UniqueTagList;
-import seedu.taskboss.model.task.Address;
+import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.Phone;
 import seedu.taskboss.model.task.ReadOnlyTask;
@@ -24,7 +24,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [NAME] [p/PHONE] [a/ADDRESS ] [t/TAG]...\n"
+            + "Parameters: INDEX (must be a positive integer) [NAME] [p/PHONE] [i/INFORMATION ] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 p/91234567 ";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
@@ -78,10 +78,10 @@ public class EditCommand extends Command {
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
         Phone updatedPhone = editTaskDescriptor.getPhone().orElseGet(taskToEdit::getPhone);
-        Address updatedAddress = editTaskDescriptor.getAddress().orElseGet(taskToEdit::getAddress);
+        Information updatedInformation = editTaskDescriptor.getInformation().orElseGet(taskToEdit::getInformation);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedName, updatedPhone, updatedAddress, updatedTags);
+        return new Task(updatedName, updatedPhone, updatedInformation, updatedTags);
     }
 
     /**
@@ -91,7 +91,7 @@ public class EditCommand extends Command {
     public static class EditTaskDescriptor {
         private Optional<Name> name = Optional.empty();
         private Optional<Phone> phone = Optional.empty();
-        private Optional<Address> address = Optional.empty();
+        private Optional<Information> information = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditTaskDescriptor() {}
@@ -99,7 +99,7 @@ public class EditCommand extends Command {
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.name = toCopy.getName();
             this.phone = toCopy.getPhone();
-            this.address = toCopy.getAddress();
+            this.information = toCopy.getInformation();
             this.tags = toCopy.getTags();
         }
 
@@ -107,7 +107,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.phone, this.address, this.tags);
+            return CollectionUtil.isAnyPresent(this.name, this.phone, this.information, this.tags);
         }
 
         public void setName(Optional<Name> name) {
@@ -128,13 +128,13 @@ public class EditCommand extends Command {
             return phone;
         }
 
-        public void setAddress(Optional<Address> address) {
-            assert address != null;
-            this.address = address;
+        public void setInformation(Optional<Information> information) {
+            assert information != null;
+            this.information = information;
         }
 
-        public Optional<Address> getAddress() {
-            return address;
+        public Optional<Information> getInformation() {
+            return information;
         }
 
         public void setTags(Optional<UniqueTagList> tags) {

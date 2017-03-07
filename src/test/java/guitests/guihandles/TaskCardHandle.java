@@ -16,7 +16,7 @@ import seedu.taskboss.model.task.ReadOnlyTask;
  */
 public class TaskCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
-    private static final String ADDRESS_FIELD_ID = "#address";
+    private static final String INFORMATION_FIELD_ID = "#information";
     private static final String PHONE_FIELD_ID = "#phone";
     private static final String TAGS_FIELD_ID = "#tags";
 
@@ -35,8 +35,8 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(NAME_FIELD_ID);
     }
 
-    public String getAddress() {
-        return getTextFromLabel(ADDRESS_FIELD_ID);
+    public String getInformation() {
+        return getTextFromLabel(INFORMATION_FIELD_ID);
     }
 
     public String getPhone() {
@@ -70,7 +70,7 @@ public class TaskCardHandle extends GuiHandle {
     public boolean isSameTask(ReadOnlyTask task) {
         return getFullName().equals(task.getName().fullName)
                 && getPhone().equals(task.getPhone().value)
-                && getAddress().equals(task.getAddress().value)
+                && getInformation().equals(task.getInformation().value)
                 && getTags().equals(getTags(task.getTags()));
     }
 
@@ -80,7 +80,7 @@ public class TaskCardHandle extends GuiHandle {
             TaskCardHandle handle = (TaskCardHandle) obj;
             return getFullName().equals(handle.getFullName())
                     && getPhone().equals(handle.getPhone())
-                    && getAddress().equals(handle.getAddress())
+                    && getInformation().equals(handle.getInformation())
                     && getTags().equals(handle.getTags());
         }
         return super.equals(obj);
@@ -88,6 +88,6 @@ public class TaskCardHandle extends GuiHandle {
 
     @Override
     public String toString() {
-        return getFullName() + " " + getAddress();
+        return getFullName() + " " + getInformation();
     }
 }
