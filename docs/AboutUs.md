@@ -5,7 +5,7 @@ We are a team based in the [School of Computing, National University of Singapor
 ## Project Team
 
 #### [Lim Jing Rong](http://github.com/jjingrong)
-<img src="images/LimJingRong.jpg" width="150"><br>
+<img src="images/jjingrong.png" width="150"><br>
 Role: Team Lead, Developer <br>
 Responsibilities: Deliverables and deadlines, Documentation, Integration, Scheduling and tracking.
 
