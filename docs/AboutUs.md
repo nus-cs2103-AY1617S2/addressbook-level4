@@ -15,7 +15,7 @@ Responsibilities:
 -----  
 
 #### [Chew Chia Sin](http://github.com/Fyelight)  
-<img src="images/Fyelight.png" width="150"><br>  
+<img src="images/fyelight.png" width="150"><br>  
 Role: Developer <br>  
 Responsibilities: 
 * In charge of Storage  
