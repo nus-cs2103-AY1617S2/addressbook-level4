@@ -78,8 +78,8 @@ public class ConfigUtilTest {
         config.setAppTitle("Typical App Title");
         config.setLogLevel(Level.INFO);
         config.setUserPrefsFilePath("C:\\preferences.json");
-        config.setTaskListFilePath("addressbook.xml");
-        config.setTaskistName("TypicalAddressBookName");
+        config.setItemListFilePath("addressbook.xml");
+        config.setItemListName("TypicalAddressBookName");
         return config;
     }
 
