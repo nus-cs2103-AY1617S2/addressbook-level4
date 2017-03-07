@@ -161,7 +161,20 @@ Format: `search KEYWORD`
 Examples:
 * `search potato`
 
-### 2.10. Saving the tasks
+### 2.10. Undo previous action : `undo`
+
+Undos previous action that user made.<br>
+Format : `undo`
+> Any previous valid input will be reversed.
+> Only 1 input will be reversed at a time.
+
+### 2.11. Redo previous action : `redo`
+
+Redos previous `undo` that user made.<br>
+Format : `redo`
+> Any previous `undo` will be reversed.
+
+### 2.12. Saving the tasks
 
 Upon creation of tasks, the tasks will be automatically saved in the folder where the program is held in.
 > Do not erase the saved data as it will result in a complete loss of data that cannot be recovered by the application itself.
@@ -218,3 +231,9 @@ Upon creation of tasks, the tasks will be automatically saved in the folder wher
 	
 * **Search for tasks** : `search KEYWORD`<br>
 	e.g. `search potato`
+	
+* **Undo previous action** : `undo`<br>
+
+* **Redo previous action** : `redo`<br>
+
+
