@@ -13,10 +13,10 @@ import seedu.address.model.todo.UniqueTodoList.DuplicateTodoException;
  */
 public interface Model {
     /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyAddressBook newData);
+    void resetData(ReadOnlyTodoList newData);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the TodoList */
+    ReadOnlyTodoList getTodoList();
 
     /** Deletes the given todo. */
     void deleteTodo(ReadOnlyTodo target) throws UniqueTodoList.TodoNotFoundException;
