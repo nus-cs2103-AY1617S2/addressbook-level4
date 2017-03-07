@@ -85,7 +85,7 @@ allprojects {
     }
 
     shadowJar {
-        archiveName = "ezdo.jar"
+        archiveName = "ezDo.jar"
 
         destinationDir = file("${buildDir}/jar/")
     }
