@@ -5,13 +5,13 @@ import t16b4.yats.commons.exceptions.IllegalValueException;
 
 /**
  * Represents a Person's phone number in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidTiming(String)}
  */
 public class Timing {
 
-    public static final String MESSAGE_EMAIL_CONSTRAINTS =
-            "Person emails should be 2 alphanumeric/period strings separated by '@'";
-    public static final String EMAIL_VALIDATION_REGEX = "[\\w\\.]+@[\\w\\.]+";
+    public static final String MESSAGE_TIMING_CONSTRAINTS =
+            "Task timing should be in the 12 hour format, followed by am|pm and the hour and minutes should be separated by ':'";
+    public static final String TIMING_VALIDATION_REGEX = "(1[012]|[1-9]):[0-5][0-9](\\s)?(?i)(am|pm)";
 
     public final String value;
 
@@ -20,20 +20,20 @@ public class Timing {
      *
      * @throws IllegalValueException if given email address string is invalid.
      */
-    public Timing(String email) throws IllegalValueException {
-        assert email != null;
-        String trimmedEmail = email.trim();
-        if (!isValidEmail(trimmedEmail)) {
-            throw new IllegalValueException(MESSAGE_EMAIL_CONSTRAINTS);
+    public Timing(String timing) throws IllegalValueException {
+        assert timing != null;
+        String trimmedTiming = timing.trim();
+        if (!isValidTiming(trimmedTiming)) {
+            throw new IllegalValueException(MESSAGE_TIMING_CONSTRAINTS);
         }
-        this.value = trimmedEmail;
+        this.value = trimmedTiming;
     }
 
     /**
      * Returns if a given string is a valid person email.
      */
-    public static boolean isValidEmail(String test) {
-        return test.matches(EMAIL_VALIDATION_REGEX);
+    public static boolean isValidTiming(String test) {
+        return test.matches(TIMING_VALIDATION_REGEX);
     }
 
     @Override

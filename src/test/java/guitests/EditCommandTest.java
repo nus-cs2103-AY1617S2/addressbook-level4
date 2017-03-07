@@ -97,7 +97,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         assertResultMessage(Deadline.MESSAGE_DEADLINE_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 e/yahoo!!!");
-        assertResultMessage(Timing.MESSAGE_EMAIL_CONSTRAINTS);
+        assertResultMessage(Timing.MESSAGE_TIMING_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 a/");
         // assertResultMessage(Description.MESSAGE_ADDRESS_CONSTRAINTS);
