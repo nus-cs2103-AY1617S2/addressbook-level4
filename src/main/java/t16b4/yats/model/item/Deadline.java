@@ -8,8 +8,8 @@ import t16b4.yats.commons.exceptions.IllegalValueException;
  */
 public class Deadline {
 
-    public static final String MESSAGE_PHONE_CONSTRAINTS = "Person phone numbers should only contain numbers";
-    public static final String PHONE_VALIDATION_REGEX = "\\d+";
+    public static final String MESSAGE_DEADLINE_CONSTRAINTS = "Task deadline should only be in the format dd/mm/yyyy";
+    public static final String DEADLINE_VALIDATION_REGEX = "^[0-3][0-9]/[0-3][0-9]/(?:[0-9][0-9])?[0-9][0-9]$";
 
     public final String value;
 
@@ -22,7 +22,7 @@ public class Deadline {
         assert deadline != null;
         String trimmedDeadline = deadline.trim();
         if (!isValidDeadline(trimmedDeadline)) {
-            throw new IllegalValueException(MESSAGE_PHONE_CONSTRAINTS);
+            throw new IllegalValueException(MESSAGE_DEADLINE_CONSTRAINTS);
         }
         this.value = trimmedDeadline;
     }
@@ -31,7 +31,7 @@ public class Deadline {
      * Returns true if a given string is a valid person phone number.
      */
     public static boolean isValidDeadline(String test) {
-        return test.matches(PHONE_VALIDATION_REGEX);
+        return test.matches(DEADLINE_VALIDATION_REGEX);
     }
 
     @Override
