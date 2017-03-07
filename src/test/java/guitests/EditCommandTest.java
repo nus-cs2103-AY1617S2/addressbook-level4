@@ -29,7 +29,7 @@ public class EditCommandTest extends TaskBossGuiTest {
 
         TestTask editedTask = new TaskBuilder().withName("Bobby").withPriorityLevel("1")
                .withInformation("Block 123, Bobby Street 3").withTags("husband").build();
-      
+
         assertEditSuccess(taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
     }
 
