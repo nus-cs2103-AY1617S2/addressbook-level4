@@ -541,7 +541,7 @@ Cons:
 * Does not support marking task as complete/incomplete.
 * Certain operations requires clicking (e.g. update task), which is not what Jim wants.
 
-**Google Calendar**
+**Trello**
 
 Pros:
 
