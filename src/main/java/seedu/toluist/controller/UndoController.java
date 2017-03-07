@@ -18,7 +18,7 @@ public class UndoController extends Controller {
     private static final String COMMAND_TEMPLATE = "^undo(\\s+(?<number>\\d+))?\\s*";
     private static final String COMMAND_WORD = "undo";
     private static final String UNDO_TIMES = "number";
-    private static final String COMMAND_RESULT_TEMPLATE = "List undo-ed %d times";
+    private static final String RESULT_MESSAGE_TEMPLATE = "List undo-ed %d times";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -40,7 +40,7 @@ public class UndoController extends Controller {
         uiStore.setTask(todoList.getTasks());
         renderer.render();
 
-        return new CommandResult(String.format(COMMAND_RESULT_TEMPLATE, actualUndoTimes));
+        return new CommandResult(String.format(RESULT_MESSAGE_TEMPLATE, actualUndoTimes));
     }
 
     @Override

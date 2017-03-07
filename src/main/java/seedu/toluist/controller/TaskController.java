@@ -25,13 +25,13 @@ public class TaskController extends Controller {
     private static final String TASK_VIEW_INDEX = "index";
     private static final String TASK_DESCRIPTION = "description";
 
-    private static final String ADD_TASK_COMMAND = "add";
-    private static final String UPDATE_TASK_COMMAND = "update";
-    private static final String DELETE_TASK_COMMAND = "delete";
+    private static final String COMMAND_ADD_TASK = "add";
+    private static final String COMMAND_UPDATE_TASK = "update";
+    private static final String COMMAND_DELETE_TASK = "delete";
 
-    private static final String ADD_TASK_RESULT = "New task added";
-    private static final String UPDATE_TASK_RESULT = "Task updated";
-    private static final String DELETE_TASK_RESULT = "Task deleted";
+    private static final String RESULT_MESSAGE_ADD_TASK = "New task added";
+    private static final String RESULT_MESSAGE_UPDATE_TASK = "Task updated";
+    private static final String RESULT_MESSAGE_DELETE_TASK = "Task deleted";
 
     private Logger logger = LogsCenter.getLogger(getClass());
 
@@ -56,13 +56,13 @@ public class TaskController extends Controller {
                 : null;
 
         switch (taskCommand) {
-        case ADD_TASK_COMMAND:
+        case COMMAND_ADD_TASK:
             commandResult = add(todoList, description);
             break;
-        case UPDATE_TASK_COMMAND:
+        case COMMAND_UPDATE_TASK:
             commandResult = update(todoList, task, description);
             break;
-        case DELETE_TASK_COMMAND:
+        case COMMAND_DELETE_TASK:
             commandResult = delete(todoList, task);
             break;
         default:
@@ -98,20 +98,20 @@ public class TaskController extends Controller {
     private CommandResult update(TodoList todoList, Task task, String description) {
         int taskIndex = todoList.getTasks().indexOf(task);
         todoList.update(taskIndex, description);
-        return new CommandResult(UPDATE_TASK_RESULT);
+        return new CommandResult(RESULT_MESSAGE_UPDATE_TASK);
     }
 
     private CommandResult add(TodoList todoList, String description) {
         todoList.add(new Task(description));
-        return new CommandResult(ADD_TASK_RESULT);
+        return new CommandResult(RESULT_MESSAGE_ADD_TASK);
     }
 
     private CommandResult delete(TodoList todoList, Task task) {
         todoList.remove(task);
-        return new CommandResult(DELETE_TASK_RESULT);
+        return new CommandResult(RESULT_MESSAGE_DELETE_TASK);
     }
 
     public static String[] getCommandWords() {
-        return new String[] { UPDATE_TASK_COMMAND, DELETE_TASK_COMMAND, ADD_TASK_COMMAND };
+        return new String[] { COMMAND_UPDATE_TASK, COMMAND_DELETE_TASK, COMMAND_ADD_TASK };
     }
 }
