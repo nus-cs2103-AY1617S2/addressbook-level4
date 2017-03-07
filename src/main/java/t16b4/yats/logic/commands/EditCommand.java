@@ -7,10 +7,10 @@ import t16b4.yats.commons.core.Messages;
 import t16b4.yats.commons.util.CollectionUtil;
 import t16b4.yats.logic.commands.exceptions.CommandException;
 import t16b4.yats.model.item.Description;
-import t16b4.yats.model.item.Email;
+import t16b4.yats.model.item.Timing;
 import t16b4.yats.model.item.Title;
 import t16b4.yats.model.item.Task;
-import t16b4.yats.model.item.Phone;
+import t16b4.yats.model.item.Deadline;
 import t16b4.yats.model.item.ReadOnlyItem;
 import t16b4.yats.model.item.UniqueItemList;
 import t16b4.yats.model.tag.UniqueTagList;
@@ -78,8 +78,8 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Title updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getTitle);
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
-        Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
+        Deadline updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getDeadline);
+        Timing updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getTiming);
         Description updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getDescription);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
@@ -92,8 +92,8 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Optional<Title> name = Optional.empty();
-        private Optional<Phone> phone = Optional.empty();
-        private Optional<Email> email = Optional.empty();
+        private Optional<Deadline> phone = Optional.empty();
+        private Optional<Timing> email = Optional.empty();
         private Optional<Description> address = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
@@ -123,21 +123,21 @@ public class EditCommand extends Command {
             return name;
         }
 
-        public void setPhone(Optional<Phone> phone) {
+        public void setPhone(Optional<Deadline> phone) {
             assert phone != null;
             this.phone = phone;
         }
 
-        public Optional<Phone> getPhone() {
+        public Optional<Deadline> getPhone() {
             return phone;
         }
 
-        public void setEmail(Optional<Email> email) {
+        public void setEmail(Optional<Timing> email) {
             assert email != null;
             this.email = email;
         }
 
-        public Optional<Email> getEmail() {
+        public Optional<Timing> getEmail() {
             return email;
         }
 

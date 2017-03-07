@@ -11,13 +11,13 @@ public class Event implements ReadOnlyItem {
     }
 
     @Override
-    public Phone getPhone() {
+    public Deadline getDeadline() {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public Email getEmail() {
+    public Timing getTiming() {
         // TODO Auto-generated method stub
         return null;
     }

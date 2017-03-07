@@ -31,10 +31,10 @@ import t16b4.yats.commons.util.FileUtil;
 import t16b4.yats.commons.util.XmlUtil;
 import t16b4.yats.model.TaskManager;
 import t16b4.yats.model.item.Description;
-import t16b4.yats.model.item.Email;
+import t16b4.yats.model.item.Timing;
 import t16b4.yats.model.item.Title;
 import t16b4.yats.model.item.Task;
-import t16b4.yats.model.item.Phone;
+import t16b4.yats.model.item.Deadline;
 import t16b4.yats.model.item.ReadOnlyItem;
 import t16b4.yats.model.tag.Tag;
 import t16b4.yats.model.tag.UniqueTagList;
@@ -75,15 +75,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Title("Ali Muster"), new Phone("9482424"), new Email("hans@google.com"), new Description("4th street"), new UniqueTagList()),
-                new Task(new Title("Boris Mueller"), new Phone("87249245"), new Email("ruth@google.com"), new Description("81th street"), new UniqueTagList()),
-                new Task(new Title("Carl Kurz"), new Phone("95352563"), new Email("heinz@yahoo.com"), new Description("wall street"), new UniqueTagList()),
-                new Task(new Title("Daniel Meier"), new Phone("87652533"), new Email("cornelia@google.com"), new Description("10th street"), new UniqueTagList()),
-                new Task(new Title("Elle Meyer"), new Phone("9482224"), new Email("werner@gmail.com"), new Description("michegan ave"), new UniqueTagList()),
-                new Task(new Title("Fiona Kunz"), new Phone("9482427"), new Email("lydia@gmail.com"), new Description("little tokyo"), new UniqueTagList()),
-                new Task(new Title("George Best"), new Phone("9482442"), new Email("anna@google.com"), new Description("4th street"), new UniqueTagList()),
-                new Task(new Title("Hoon Meier"), new Phone("8482424"), new Email("stefan@mail.com"), new Description("little india"), new UniqueTagList()),
-                new Task(new Title("Ida Mueller"), new Phone("8482131"), new Email("hans@google.com"), new Description("chicago ave"), new UniqueTagList())
+                new Task(new Title("Ali Muster"), new Deadline("9482424"), new Timing("hans@google.com"), new Description("4th street"), new UniqueTagList()),
+                new Task(new Title("Boris Mueller"), new Deadline("87249245"), new Timing("ruth@google.com"), new Description("81th street"), new UniqueTagList()),
+                new Task(new Title("Carl Kurz"), new Deadline("95352563"), new Timing("heinz@yahoo.com"), new Description("wall street"), new UniqueTagList()),
+                new Task(new Title("Daniel Meier"), new Deadline("87652533"), new Timing("cornelia@google.com"), new Description("10th street"), new UniqueTagList()),
+                new Task(new Title("Elle Meyer"), new Deadline("9482224"), new Timing("werner@gmail.com"), new Description("michegan ave"), new UniqueTagList()),
+                new Task(new Title("Fiona Kunz"), new Deadline("9482427"), new Timing("lydia@gmail.com"), new Description("little tokyo"), new UniqueTagList()),
+                new Task(new Title("George Best"), new Deadline("9482442"), new Timing("anna@google.com"), new Description("4th street"), new UniqueTagList()),
+                new Task(new Title("Hoon Meier"), new Deadline("8482424"), new Timing("stefan@mail.com"), new Description("little india"), new UniqueTagList()),
+                new Task(new Title("Ida Mueller"), new Deadline("8482131"), new Timing("hans@google.com"), new Description("chicago ave"), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {

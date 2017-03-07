@@ -12,21 +12,21 @@ import t16b4.yats.model.tag.UniqueTagList;
 public class Task implements ReadOnlyItem {
 
     private Title name;
-    private Phone phone;
-    private Email email;
-    private Description address;
+    private Deadline deadline;
+    private Timing timing;
+    private Description description;
 
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Title name, Phone phone, Email email, Description address, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, phone, email, address, tags);
+    public Task(Title name, Deadline deadline, Timing timing, Description description, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, deadline, timing, description, tags);
         this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
+        this.deadline = deadline;
+        this.timing = timing;
+        this.description = description;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -34,10 +34,10 @@ public class Task implements ReadOnlyItem {
      * Creates a copy of the given ReadOnlyPerson.
      */
     public Task(ReadOnlyItem source) {
-        this(source.getTitle(), source.getPhone(), source.getEmail(), source.getDescription(), source.getTags());
+        this(source.getTitle(), source.getDeadline(), source.getTiming(), source.getDescription(), source.getTags());
     }
 
-    public void setName(Title name) {
+    public void setTitle(Title name) {
         assert name != null;
         this.name = name;
     }
@@ -47,34 +47,34 @@ public class Task implements ReadOnlyItem {
         return name;
     }
 
-    public void setPhone(Phone phone) {
-        assert phone != null;
-        this.phone = phone;
+    public void setDeadline(Deadline deadline) {
+        assert deadline != null;
+        this.deadline = deadline;
     }
 
     @Override
-    public Phone getPhone() {
-        return phone;
+    public Deadline getDeadline() {
+        return deadline;
     }
 
-    public void setEmail(Email email) {
-        assert email != null;
-        this.email = email;
+    public void setTiming(Timing timing) {
+        assert timing != null;
+        this.timing = timing;
     }
 
     @Override
-    public Email getEmail() {
-        return email;
+    public Timing getTiming() {
+        return timing;
     }
 
-    public void setAddress(Description address) {
-        assert address != null;
-        this.address = address;
+    public void setDescription(Description description) {
+        assert description != null;
+        this.description = description;
     }
 
     @Override
     public Description getDescription() {
-        return address;
+        return description;
     }
 
     @Override
@@ -95,14 +95,15 @@ public class Task implements ReadOnlyItem {
     public void resetData(ReadOnlyItem replacement) {
         assert replacement != null;
 
-        this.setName(replacement.getTitle());
-        this.setPhone(replacement.getPhone());
-        this.setEmail(replacement.getEmail());
-        this.setAddress(replacement.getDescription());
+        this.setTitle(replacement.getTitle());
+        this.setDeadline(replacement.getDeadline());
+        this.setTiming(replacement.getTiming());
+        this.setDescription(replacement.getDescription());
         this.setTags(replacement.getTags());
     }
+    
 
-    @Override
+	@Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ReadOnlyItem // instanceof handles nulls
@@ -112,7 +113,7 @@ public class Task implements ReadOnlyItem {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, deadline, timing, description, tags);
     }
 
     @Override

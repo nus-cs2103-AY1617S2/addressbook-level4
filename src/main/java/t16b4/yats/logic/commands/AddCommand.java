@@ -6,10 +6,10 @@ import java.util.Set;
 import t16b4.yats.commons.exceptions.IllegalValueException;
 import t16b4.yats.logic.commands.exceptions.CommandException;
 import t16b4.yats.model.item.Description;
-import t16b4.yats.model.item.Email;
+import t16b4.yats.model.item.Timing;
 import t16b4.yats.model.item.Title;
 import t16b4.yats.model.item.Task;
-import t16b4.yats.model.item.Phone;
+import t16b4.yats.model.item.Deadline;
 import t16b4.yats.model.item.UniqueItemList;
 import t16b4.yats.model.tag.Tag;
 import t16b4.yats.model.tag.UniqueTagList;
@@ -44,8 +44,8 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Task(
                 new Title(name),
-                new Phone(phone),
-                new Email(email),
+                new Deadline(phone),
+                new Timing(email),
                 new Description(address),
                 new UniqueTagList(tagSet)
         );

@@ -2,9 +2,9 @@ package t16b4.yats.testutil;
 
 import t16b4.yats.commons.exceptions.IllegalValueException;
 import t16b4.yats.model.item.Description;
-import t16b4.yats.model.item.Email;
+import t16b4.yats.model.item.Timing;
 import t16b4.yats.model.item.Title;
-import t16b4.yats.model.item.Phone;
+import t16b4.yats.model.item.Deadline;
 import t16b4.yats.model.tag.Tag;
 import t16b4.yats.model.tag.UniqueTagList;
 
@@ -45,12 +45,12 @@ public class PersonBuilder {
     }
 
     public PersonBuilder withPhone(String phone) throws IllegalValueException {
-        this.person.setPhone(new Phone(phone));
+        this.person.setPhone(new Deadline(phone));
         return this;
     }
 
     public PersonBuilder withEmail(String email) throws IllegalValueException {
-        this.person.setEmail(new Email(email));
+        this.person.setEmail(new Timing(email));
         return this;
     }
 

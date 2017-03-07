@@ -1,9 +1,9 @@
 package t16b4.yats.testutil;
 
 import t16b4.yats.model.item.Description;
-import t16b4.yats.model.item.Email;
+import t16b4.yats.model.item.Timing;
 import t16b4.yats.model.item.Title;
-import t16b4.yats.model.item.Phone;
+import t16b4.yats.model.item.Deadline;
 import t16b4.yats.model.item.ReadOnlyItem;
 import t16b4.yats.model.tag.UniqueTagList;
 
@@ -14,8 +14,8 @@ public class TestPerson implements ReadOnlyItem {
 
     private Title name;
     private Description address;
-    private Email email;
-    private Phone phone;
+    private Timing email;
+    private Deadline phone;
     private UniqueTagList tags;
 
     public TestPerson() {
@@ -27,8 +27,8 @@ public class TestPerson implements ReadOnlyItem {
      */
     public TestPerson(TestPerson personToCopy) {
         this.name = personToCopy.getTitle();
-        this.phone = personToCopy.getPhone();
-        this.email = personToCopy.getEmail();
+        this.phone = personToCopy.getDeadline();
+        this.email = personToCopy.getTiming();
         this.address = personToCopy.getDescription();
         this.tags = personToCopy.getTags();
     }
@@ -41,11 +41,11 @@ public class TestPerson implements ReadOnlyItem {
         this.address = address;
     }
 
-    public void setEmail(Email email) {
+    public void setEmail(Timing email) {
         this.email = email;
     }
 
-    public void setPhone(Phone phone) {
+    public void setPhone(Deadline phone) {
         this.phone = phone;
     }
 
@@ -59,12 +59,12 @@ public class TestPerson implements ReadOnlyItem {
     }
 
     @Override
-    public Phone getPhone() {
+    public Deadline getDeadline() {
         return phone;
     }
 
     @Override
-    public Email getEmail() {
+    public Timing getTiming() {
         return email;
     }
 
@@ -87,8 +87,8 @@ public class TestPerson implements ReadOnlyItem {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getTitle().fullName + " ");
         sb.append("a/" + this.getDescription().value + " ");
-        sb.append("p/" + this.getPhone().value + " ");
-        sb.append("e/" + this.getEmail().value + " ");
+        sb.append("p/" + this.getDeadline().value + " ");
+        sb.append("e/" + this.getTiming().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }

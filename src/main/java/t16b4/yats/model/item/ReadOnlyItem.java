@@ -9,8 +9,8 @@ import t16b4.yats.model.tag.UniqueTagList;
 public interface ReadOnlyItem {
 
     Title getTitle();
-    Phone getPhone();
-    Email getEmail();
+    Deadline getDeadline();
+    Timing getTiming();
     Description getDescription();
 
     /**
@@ -26,8 +26,8 @@ public interface ReadOnlyItem {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                 && other.getTitle().equals(this.getTitle()) // state checks here onwards
-                && other.getPhone().equals(this.getPhone())
-                && other.getEmail().equals(this.getEmail())
+                && other.getDeadline().equals(this.getDeadline())
+                && other.getTiming().equals(this.getTiming())
                 && other.getDescription().equals(this.getDescription()));
     }
 
@@ -38,9 +38,9 @@ public interface ReadOnlyItem {
         final StringBuilder builder = new StringBuilder();
         builder.append(getTitle())
                 .append(" Title: ")
-                .append(getPhone())
+                .append(getDeadline())
                 .append(" Email: ")
-                .append(getEmail())
+                .append(getTiming())
                 .append(" Description: ")
                 .append(getDescription())
                 .append(" Tags: ");
