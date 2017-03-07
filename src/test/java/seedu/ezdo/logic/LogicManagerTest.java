@@ -423,7 +423,7 @@ public class LogicManagerTest {
             Priority privatePriority = new Priority("1");
             Email email = new Email("adam@gmail.com");
             StartDate privateStartDate = new StartDate("111, alpha street");
-            DueDate privateDueDate = new DueDate("111, alpha street");
+            DueDate privateDueDate = new DueDate("16/06/2016");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
@@ -443,7 +443,7 @@ public class LogicManagerTest {
                     new Priority("1"),
                     new Email(seed + "@email"),
                     new StartDate("House of " + seed),
-                    new DueDate("House of " + seed),
+                    new DueDate("07/07/2007"),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -544,7 +544,7 @@ public class LogicManagerTest {
                     new Priority("1"),
                     new Email("1@email"),
                     new StartDate("House of 1"),
-                    new DueDate("House of 1"),
+                    new DueDate("09/09/2009"),
                     new UniqueTagList(new Tag("tag"))
             );
         }
