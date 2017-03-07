@@ -16,7 +16,7 @@ public abstract class Command {
      * @param displaySize used to generate summary
      * @return summary message for persons displayed
      */
-    public static String getMessageForTaskListShownSummary(int displaySize) {
+    public static String getMessageForPersonListShownSummary(int displaySize) {
         return String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, displaySize);
     }
 
