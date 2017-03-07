@@ -86,24 +86,10 @@ public class EditCommandTest extends AddressBookGuiTest {
     public void edit_noFieldsSpecified_failure() {
         commandBox.runCommand("edit 1");
         assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
-    }
 
-    @Test
-    public void edit_invalidValues_failure() {
-        commandBox.runCommand("edit 1 *&");
-        assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
-
-        commandBox.runCommand("edit 1 p/abcd");
-        assertResultMessage(Priority.MESSAGE_PRIORITY_CONSTRAINTS);
-
-        commandBox.runCommand("edit 1 e/yahoo!!!");
-        assertResultMessage(Status.MESSAGE_STATUS_CONSTRAINTS);
-
-        commandBox.runCommand("edit 1 a/");
-        assertResultMessage(Note.MESSAGE_NOTE_CONSTRAINTS);
-
-        commandBox.runCommand("edit 1 t/*&");
-        assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
+        // trailing whitespace after command should be considered as a invalid command
+        commandBox.runCommand("edit 1    ");
+        assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
     }
 
     @Test
