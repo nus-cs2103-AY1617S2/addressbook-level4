@@ -21,7 +21,7 @@ We are a team based in the [School of Computing, National University of Singapor
 -----
 
 #### [Ram Janarthan](https://github.com/ramjanarthan)
-<img src="" width="150"><br>
+<img src="images/ramjanarthan.png" width="150"><br>
 **Role**: Developer <br>
 
 * Components in charge of: Logic, UI
