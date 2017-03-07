@@ -41,11 +41,11 @@ public class SampleDataUtil {
 
     public static ReadOnlyTaskManager getSampleAddressBook() {
         try {
-            TaskManager sampleAB = new TaskManager();
+            TaskManager sampleTaskManager = new TaskManager();
             for (Task samplePerson : getSamplePersons()) {
-                sampleAB.addTask(samplePerson);
+                sampleTaskManager.addTask(samplePerson);
             }
-            return sampleAB;
+            return sampleTaskManager;
         } catch (DuplicateTaskException e) {
             throw new AssertionError("sample data cannot contain duplicate persons", e);
         }
