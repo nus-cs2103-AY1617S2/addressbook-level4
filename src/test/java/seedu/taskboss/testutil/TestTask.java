@@ -2,7 +2,6 @@ package seedu.taskboss.testutil;
 
 import seedu.taskboss.model.category.UniqueTagList;
 import seedu.taskboss.model.task.Address;
-import seedu.taskboss.model.task.Email;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.Phone;
 import seedu.taskboss.model.task.ReadOnlyTask;
@@ -14,7 +13,6 @@ public class TestTask implements ReadOnlyTask {
 
     private Name name;
     private Address address;
-    private Email email;
     private Phone phone;
     private UniqueTagList tags;
 
@@ -28,7 +26,6 @@ public class TestTask implements ReadOnlyTask {
     public TestTask(TestTask personToCopy) {
         this.name = personToCopy.getName();
         this.phone = personToCopy.getPhone();
-        this.email = personToCopy.getEmail();
         this.address = personToCopy.getAddress();
         this.tags = personToCopy.getTags();
     }
@@ -39,10 +36,6 @@ public class TestTask implements ReadOnlyTask {
 
     public void setAddress(Address address) {
         this.address = address;
-    }
-
-    public void setEmail(Email email) {
-        this.email = email;
     }
 
     public void setPhone(Phone phone) {
@@ -61,11 +54,6 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public Phone getPhone() {
         return phone;
-    }
-
-    @Override
-    public Email getEmail() {
-        return email;
     }
 
     @Override
@@ -88,7 +76,6 @@ public class TestTask implements ReadOnlyTask {
         sb.append("add " + this.getName().fullName + " ");
         sb.append("a/" + this.getAddress().value + " ");
         sb.append("p/" + this.getPhone().value + " ");
-        sb.append("e/" + this.getEmail().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
