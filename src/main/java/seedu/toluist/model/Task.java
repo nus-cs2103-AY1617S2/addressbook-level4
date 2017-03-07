@@ -7,7 +7,7 @@ import java.util.Objects;
 /**
  * Represents a Task
  */
-public class Task {
+public class Task implements Comparable<Task>{
 
     public String description;
     public ArrayList<Tag> allTags = new ArrayList<>();
@@ -67,11 +67,16 @@ public class Task {
     }
 
     public boolean isStringContainedInAnyTagIgnoreCase(String comparison) {
-        for (int i = 0; i < this.allTags.size(); i++) {
-            if (this.allTags.get(i).tagName.toLowerCase().contains(comparison.toLowerCase())) {
+        for (Tag tag : allTags) {
+            if (tag.tagName.toLowerCase().contains(comparison.toLowerCase())) {
                 return true;
             }
         }
         return false;
+    }
+
+    @Override
+    public int compareTo(Task comparison) {
+        return this.description.compareToIgnoreCase(comparison.description);
     }
 }
