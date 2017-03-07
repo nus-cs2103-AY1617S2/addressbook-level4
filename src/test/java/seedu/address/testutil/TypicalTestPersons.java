@@ -58,8 +58,8 @@ public class TypicalTestPersons {
     }
 
     public TaskManager getTypicalAddressBook() {
-        TaskManager ab = new TaskManager();
-        loadAddressBookWithSampleData(ab);
-        return ab;
+        TaskManager taskManager = new TaskManager();
+        loadAddressBookWithSampleData(taskManager);
+        return taskManager;
     }
 }
