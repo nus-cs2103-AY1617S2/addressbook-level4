@@ -9,8 +9,8 @@ import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.tag.UniqueTagList;
 import seedu.geekeep.model.task.Location;
-import seedu.geekeep.model.task.DateTime;
-import seedu.geekeep.model.task.Phone;
+import seedu.geekeep.model.task.StartDateTime;
+import seedu.geekeep.model.task.EndDateTime;
 import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.Title;
@@ -46,8 +46,8 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getTitle().fullTitle;
-        phone = source.getPhone().value;
-        email = source.getDateTime().value;
+        phone = source.getEndDateTime().value;
+        email = source.getStartDateTime().value;
         address = source.getLocation().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
@@ -66,10 +66,10 @@ public class XmlAdaptedTask {
             personTags.add(tag.toModelType());
         }
         final Title title = new Title(this.name);
-        final Phone phone = new Phone(this.phone);
-        final DateTime dateTime = new DateTime(this.email);
+        final EndDateTime endDateTime = new EndDateTime(this.phone);
+        final StartDateTime startDateTime = new StartDateTime(this.email);
         final Location location = new Location(this.address);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Task(title, phone, dateTime, location, tags);
+        return new Task(title, endDateTime, startDateTime, location, tags);
     }
 }

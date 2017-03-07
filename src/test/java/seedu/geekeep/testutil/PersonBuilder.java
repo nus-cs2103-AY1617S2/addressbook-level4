@@ -4,8 +4,8 @@ import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.tag.UniqueTagList;
 import seedu.geekeep.model.task.Location;
-import seedu.geekeep.model.task.DateTime;
-import seedu.geekeep.model.task.Phone;
+import seedu.geekeep.model.task.StartDateTime;
+import seedu.geekeep.model.task.EndDateTime;
 import seedu.geekeep.model.task.Title;
 
 /**
@@ -45,12 +45,12 @@ public class PersonBuilder {
     }
 
     public PersonBuilder withPhone(String phone) throws IllegalValueException {
-        this.person.setPhone(new Phone(phone));
+        this.person.setEndDateTime(new EndDateTime(phone));
         return this;
     }
 
     public PersonBuilder withEmail(String email) throws IllegalValueException {
-        this.person.setDateTime(new DateTime(email));
+        this.person.setStartDateTime(new StartDateTime(email));
         return this;
     }
 

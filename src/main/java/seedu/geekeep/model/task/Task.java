@@ -11,8 +11,8 @@ import seedu.geekeep.model.tag.UniqueTagList;
 public class Task implements ReadOnlyTask {
 
     private Title title;
-    private Phone phone;
-    private DateTime dateTime;
+    private EndDateTime endDateTime;
+    private StartDateTime startDateTime;
     private Location location;
 
     private UniqueTagList tags;
@@ -20,11 +20,11 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(Title title, Phone phone, DateTime dateTime, Location location, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(title, phone, dateTime, location, tags);
+    public Task(Title title, EndDateTime endDateTime, StartDateTime startDateTime, Location location, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(title, endDateTime, startDateTime, location, tags);
         this.title = title;
-        this.phone = phone;
-        this.dateTime = dateTime;
+        this.endDateTime = endDateTime;
+        this.startDateTime = startDateTime;
         this.location = location;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
@@ -33,7 +33,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyPerson.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getTitle(), source.getPhone(), source.getDateTime(), source.getLocation(), source.getTags());
+        this(source.getTitle(), source.getEndDateTime(), source.getStartDateTime(), source.getLocation(), source.getTags());
     }
 
     public void setTitle(Title title) {
@@ -46,24 +46,24 @@ public class Task implements ReadOnlyTask {
         return title;
     }
 
-    public void setPhone(Phone phone) {
-        assert phone != null;
-        this.phone = phone;
+    public void setEndDateTime(EndDateTime endDateTime) {
+        assert endDateTime != null;
+        this.endDateTime = endDateTime;
     }
 
     @Override
-    public Phone getPhone() {
-        return phone;
+    public EndDateTime getEndDateTime() {
+        return endDateTime;
     }
 
-    public void setDateTime(DateTime dateTime) {
-        assert dateTime != null;
-        this.dateTime = dateTime;
+    public void setStartDateTime(StartDateTime startDateTime) {
+        assert startDateTime != null;
+        this.startDateTime = startDateTime;
     }
 
     @Override
-    public DateTime getDateTime() {
-        return dateTime;
+    public StartDateTime getStartDateTime() {
+        return startDateTime;
     }
 
     public void setLocation(Location location) {
@@ -95,8 +95,8 @@ public class Task implements ReadOnlyTask {
         assert replacement != null;
 
         this.setTitle(replacement.getTitle());
-        this.setPhone(replacement.getPhone());
-        this.setDateTime(replacement.getDateTime());
+        this.setEndDateTime(replacement.getEndDateTime());
+        this.setStartDateTime(replacement.getStartDateTime());
         this.setLocation(replacement.getLocation());
         this.setTags(replacement.getTags());
     }
@@ -111,7 +111,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(title, phone, dateTime, location, tags);
+        return Objects.hash(title, endDateTime, startDateTime, location, tags);
     }
 
     @Override

@@ -8,8 +8,8 @@ import seedu.geekeep.commons.util.CollectionUtil;
 import seedu.geekeep.logic.commands.exceptions.CommandException;
 import seedu.geekeep.model.tag.UniqueTagList;
 import seedu.geekeep.model.task.Location;
-import seedu.geekeep.model.task.DateTime;
-import seedu.geekeep.model.task.Phone;
+import seedu.geekeep.model.task.StartDateTime;
+import seedu.geekeep.model.task.EndDateTime;
 import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.Title;
@@ -78,12 +78,12 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Title updatedTitle = editPersonDescriptor.getTitle().orElseGet(personToEdit::getTitle);
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
-        DateTime updatedDateTime = editPersonDescriptor.getDateTime().orElseGet(personToEdit::getDateTime);
+        EndDateTime updatedEndDateTime = editPersonDescriptor.getEndDateTime().orElseGet(personToEdit::getEndDateTime);
+        StartDateTime updatedStartDateTime = editPersonDescriptor.getStartDateTime().orElseGet(personToEdit::getStartDateTime);
         Location updatedLocation = editPersonDescriptor.getLocation().orElseGet(personToEdit::getLocation);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
-        return new Task(updatedTitle, updatedPhone, updatedDateTime, updatedLocation, updatedTags);
+        return new Task(updatedTitle, updatedEndDateTime, updatedStartDateTime, updatedLocation, updatedTags);
     }
 
     /**
@@ -92,8 +92,8 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Optional<Title> title = Optional.empty();
-        private Optional<Phone> phone = Optional.empty();
-        private Optional<DateTime> dateTime = Optional.empty();
+        private Optional<EndDateTime> endDateTime = Optional.empty();
+        private Optional<StartDateTime> startDateTime = Optional.empty();
         private Optional<Location> location = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
@@ -101,8 +101,8 @@ public class EditCommand extends Command {
 
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             this.title = toCopy.getTitle();
-            this.phone = toCopy.getPhone();
-            this.dateTime = toCopy.getDateTime();
+            this.endDateTime = toCopy.getEndDateTime();
+            this.startDateTime = toCopy.getStartDateTime();
             this.location = toCopy.getLocation();
             this.tags = toCopy.getTags();
         }
@@ -111,7 +111,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.title, this.phone, this.dateTime, this.location, this.tags);
+            return CollectionUtil.isAnyPresent(this.title, this.endDateTime, this.startDateTime, this.location, this.tags);
         }
 
         public void setTitle(Optional<Title> title) {
@@ -123,22 +123,22 @@ public class EditCommand extends Command {
             return title;
         }
 
-        public void setPhone(Optional<Phone> phone) {
-            assert phone != null;
-            this.phone = phone;
+        public void setEndDateTime(Optional<EndDateTime> endDateTime) {
+            assert endDateTime != null;
+            this.endDateTime = endDateTime;
         }
 
-        public Optional<Phone> getPhone() {
-            return phone;
+        public Optional<EndDateTime> getEndDateTime() {
+            return endDateTime;
         }
 
-        public void setDateTime(Optional<DateTime> dateTime) {
-            assert dateTime != null;
-            this.dateTime = dateTime;
+        public void setStartDateTime(Optional<StartDateTime> startDateTime) {
+            assert startDateTime != null;
+            this.startDateTime = startDateTime;
         }
 
-        public Optional<DateTime> getDateTime() {
-            return dateTime;
+        public Optional<StartDateTime> getStartDateTime() {
+            return startDateTime;
         }
 
         public void setLocation(Optional<Location> location) {

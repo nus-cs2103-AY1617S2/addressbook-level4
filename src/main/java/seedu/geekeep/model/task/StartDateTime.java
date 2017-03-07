@@ -8,7 +8,7 @@ import seedu.geekeep.commons.exceptions.IllegalValueException;
  * Represents the starting date and time of a task. Guarantees: immutable; is valid as declared in
  * {@link #isValidDateTime()}
  */
-public class DateTime {
+public class StartDateTime {
     
     public static final String MESSAGE_DATETIME_CONSTRAINTS =
             "Date and time format should be in this format: YYYY-MM-DDTHH:MM:SS";
@@ -23,7 +23,7 @@ public class DateTime {
 
     public final LocalDateTime dateTime;
 
-    public DateTime(String dateTimeString) throws IllegalValueException{
+    public StartDateTime(String dateTimeString) throws IllegalValueException{
         if(!isValidDateTime(dateTimeString)) {
             throw new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS);
         }
@@ -33,8 +33,8 @@ public class DateTime {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DateTime // instanceof handles nulls
-                        && this.dateTime.equals(((DateTime) other).dateTime)); // state check
+                || (other instanceof StartDateTime // instanceof handles nulls
+                        && this.dateTime.equals(((StartDateTime) other).dateTime)); // state check
     }
 
     @Override

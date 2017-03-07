@@ -10,9 +10,9 @@ public interface ReadOnlyTask {
 
     Title getTitle();
 
-    Phone getPhone();
+    EndDateTime getEndDateTime();
 
-    DateTime getDateTime();
+    StartDateTime getStartDateTime();
 
     Location getLocation();
 
@@ -29,7 +29,7 @@ public interface ReadOnlyTask {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                         && other.getTitle().equals(this.getTitle()) // state checks here onwards
-                        && other.getPhone().equals(this.getPhone()) && other.getDateTime().equals(this.getDateTime())
+                        && other.getEndDateTime().equals(this.getEndDateTime()) && other.getStartDateTime().equals(this.getStartDateTime())
                         && other.getLocation().equals(this.getLocation()));
     }
 
@@ -38,7 +38,7 @@ public interface ReadOnlyTask {
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getTitle()).append(" Phone: ").append(getPhone()).append(" Email: ").append(getDateTime())
+        builder.append(getTitle()).append(" Phone: ").append(getEndDateTime()).append(" Email: ").append(getStartDateTime())
                 .append(" Address: ").append(getLocation()).append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

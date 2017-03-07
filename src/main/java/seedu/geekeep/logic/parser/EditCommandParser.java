@@ -42,8 +42,8 @@ public class EditCommandParser {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         try {
             editPersonDescriptor.setTitle(ParserUtil.parseTitle(preambleFields.get(1)));
-            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argsTokenizer.getValue(PREFIX_PHONE)));
-            editPersonDescriptor.setDateTime(ParserUtil.parseDateTime(argsTokenizer.getValue(PREFIX_EMAIL)));
+            editPersonDescriptor.setEndDateTime(ParserUtil.parseEndDateTime(argsTokenizer.getValue(PREFIX_PHONE)));
+            editPersonDescriptor.setStartDateTime(ParserUtil.parseStartDateTime(argsTokenizer.getValue(PREFIX_EMAIL)));
             editPersonDescriptor.setLocation(ParserUtil.parseLocation(argsTokenizer.getValue(PREFIX_ADDRESS)));
             editPersonDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
         } catch (IllegalValueException ive) {

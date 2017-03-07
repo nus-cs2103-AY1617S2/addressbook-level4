@@ -16,8 +16,8 @@ import seedu.geekeep.commons.util.StringUtil;
 import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.tag.UniqueTagList;
 import seedu.geekeep.model.task.Location;
-import seedu.geekeep.model.task.DateTime;
-import seedu.geekeep.model.task.Phone;
+import seedu.geekeep.model.task.StartDateTime;
+import seedu.geekeep.model.task.EndDateTime;
 import seedu.geekeep.model.task.Title;
 
 /**
@@ -77,9 +77,9 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> phone} into an {@code Optional<Phone>} if {@code phone} is present.
      */
-    public static Optional<Phone> parsePhone(Optional<String> phone) throws IllegalValueException {
+    public static Optional<EndDateTime> parseEndDateTime(Optional<String> phone) throws IllegalValueException {
         assert phone != null;
-        return phone.isPresent() ? Optional.of(new Phone(phone.get())) : Optional.empty();
+        return phone.isPresent() ? Optional.of(new EndDateTime(phone.get())) : Optional.empty();
     }
 
     /**
@@ -93,9 +93,9 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
      */
-    public static Optional<DateTime> parseDateTime(Optional<String> email) throws IllegalValueException {
+    public static Optional<StartDateTime> parseStartDateTime(Optional<String> email) throws IllegalValueException {
         assert email != null;
-        return email.isPresent() ? Optional.of(new DateTime(email.get())) : Optional.empty();
+        return email.isPresent() ? Optional.of(new StartDateTime(email.get())) : Optional.empty();
     }
 
     /**

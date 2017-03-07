@@ -2,8 +2,8 @@ package seedu.geekeep.testutil;
 
 import seedu.geekeep.model.tag.UniqueTagList;
 import seedu.geekeep.model.task.Location;
-import seedu.geekeep.model.task.DateTime;
-import seedu.geekeep.model.task.Phone;
+import seedu.geekeep.model.task.StartDateTime;
+import seedu.geekeep.model.task.EndDateTime;
 import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.model.task.Title;
 
@@ -14,8 +14,8 @@ public class TestPerson implements ReadOnlyTask {
 
     private Title title;
     private Location location;
-    private DateTime dateTime;
-    private Phone phone;
+    private StartDateTime startDateTime;
+    private EndDateTime endDateTime;
     private UniqueTagList tags;
 
     public TestPerson() {
@@ -27,8 +27,8 @@ public class TestPerson implements ReadOnlyTask {
      */
     public TestPerson(TestPerson personToCopy) {
         this.title = personToCopy.getTitle();
-        this.phone = personToCopy.getPhone();
-        this.dateTime = personToCopy.getDateTime();
+        this.endDateTime = personToCopy.getEndDateTime();
+        this.startDateTime = personToCopy.getStartDateTime();
         this.location = personToCopy.getLocation();
         this.tags = personToCopy.getTags();
     }
@@ -41,12 +41,12 @@ public class TestPerson implements ReadOnlyTask {
         this.location = location;
     }
 
-    public void setDateTime(DateTime dateTime) {
-        this.dateTime = dateTime;
+    public void setStartDateTime(StartDateTime startDateTime) {
+        this.startDateTime = startDateTime;
     }
 
-    public void setPhone(Phone phone) {
-        this.phone = phone;
+    public void setEndDateTime(EndDateTime endDateTime) {
+        this.endDateTime = endDateTime;
     }
 
     public void setTags(UniqueTagList tags) {
@@ -59,13 +59,13 @@ public class TestPerson implements ReadOnlyTask {
     }
 
     @Override
-    public Phone getPhone() {
-        return phone;
+    public EndDateTime getEndDateTime() {
+        return endDateTime;
     }
 
     @Override
-    public DateTime getDateTime() {
-        return dateTime;
+    public StartDateTime getStartDateTime() {
+        return startDateTime;
     }
 
     @Override
@@ -87,8 +87,8 @@ public class TestPerson implements ReadOnlyTask {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getTitle().fullTitle + " ");
         sb.append("a/" + this.getLocation().value + " ");
-        sb.append("p/" + this.getPhone().value + " ");
-        sb.append("e/" + this.getDateTime().value + " ");
+        sb.append("p/" + this.getEndDateTime().value + " ");
+        sb.append("e/" + this.getStartDateTime().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }

@@ -42,8 +42,8 @@ import seedu.geekeep.model.TaskManager;
 import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.tag.UniqueTagList;
 import seedu.geekeep.model.task.Location;
-import seedu.geekeep.model.task.DateTime;
-import seedu.geekeep.model.task.Phone;
+import seedu.geekeep.model.task.StartDateTime;
+import seedu.geekeep.model.task.EndDateTime;
 import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.Title;
@@ -199,9 +199,9 @@ public class LogicManagerTest {
         assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
                 Title.MESSAGE_NAME_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
-                Phone.MESSAGE_PHONE_CONSTRAINTS);
+                EndDateTime.MESSAGE_PHONE_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
-                DateTime.MESSAGE_EMAIL_CONSTRAINTS);
+                StartDateTime.MESSAGE_EMAIL_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
@@ -416,13 +416,13 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Title title = new Title("Adam Brown");
-            Phone privatePhone = new Phone("111111");
-            DateTime dateTime = new DateTime("adam@gmail.com");
+            EndDateTime privateEndDateTime = new EndDateTime("111111");
+            StartDateTime startDateTime = new StartDateTime("adam@gmail.com");
             Location privateLocation = new Location("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(title, privatePhone, dateTime, privateLocation, tags);
+            return new Task(title, privateEndDateTime, startDateTime, privateLocation, tags);
         }
 
         /**
@@ -435,8 +435,8 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Title("Person " + seed),
-                    new Phone("" + Math.abs(seed)),
-                    new DateTime(seed + "@email"),
+                    new EndDateTime("" + Math.abs(seed)),
+                    new StartDateTime(seed + "@email"),
                     new Location("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
@@ -449,8 +449,8 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getTitle().toString());
-            cmd.append(" e/").append(p.getDateTime());
-            cmd.append(" p/").append(p.getPhone());
+            cmd.append(" e/").append(p.getStartDateTime());
+            cmd.append(" p/").append(p.getEndDateTime());
             cmd.append(" a/").append(p.getLocation());
 
             UniqueTagList tags = p.getTags();
@@ -534,8 +534,8 @@ public class LogicManagerTest {
         Task generateTaskWithName(String name) throws Exception {
             return new Task(
                     new Title(name),
-                    new Phone("1"),
-                    new DateTime("1@email"),
+                    new EndDateTime("1"),
+                    new StartDateTime("1@email"),
                     new Location("House of 1"),
                     new UniqueTagList(new Tag("tag"))
             );
