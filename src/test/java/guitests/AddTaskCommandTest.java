@@ -2,9 +2,9 @@ package guitests;
 
 import org.junit.Test;
 
-import seedu.toluist.model.Task;
-
 import static org.junit.Assert.assertTrue;
+
+import seedu.toluist.model.Task;
 
 /**
  * Gui tests for add task command
