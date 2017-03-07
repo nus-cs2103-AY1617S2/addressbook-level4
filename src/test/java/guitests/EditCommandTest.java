@@ -8,7 +8,7 @@ import org.junit.Test;
 import guitests.guihandles.TaskCardHandle;
 import seedu.taskboss.commons.core.Messages;
 import seedu.taskboss.logic.commands.EditCommand;
-import seedu.taskboss.model.category.Tag;
+import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
@@ -28,7 +28,7 @@ public class EditCommandTest extends TaskBossGuiTest {
         int taskBossIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Bobby").withPriorityLevel("1")
-               .withInformation("Block 123, Bobby Street 3").withTags("husband").build();
+               .withInformation("Block 123, Bobby Street 3").withCategories("husband").build();
 
         assertEditSuccess(taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
     }
@@ -39,18 +39,18 @@ public class EditCommandTest extends TaskBossGuiTest {
         int taskBossIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[taskBossIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withTags("sweetie", "bestie").build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withCategories("sweetie", "bestie").build();
 
         assertEditSuccess(taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
     }
 
     @Test
-    public void edit_clearTags_success() throws Exception {
+    public void edit_clearCategories_success() throws Exception {
         String detailsToEdit = "t/";
         int taskBossIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[taskBossIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withTags().build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withCategories().build();
 
         assertEditSuccess(taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
     }
@@ -99,7 +99,7 @@ public class EditCommandTest extends TaskBossGuiTest {
         assertResultMessage(Information.MESSAGE_INFORMATION_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 t/*&");
-        assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
+        assertResultMessage(Category.MESSAGE_CATEGORY_CONSTRAINTS);
     }
 
     @Test

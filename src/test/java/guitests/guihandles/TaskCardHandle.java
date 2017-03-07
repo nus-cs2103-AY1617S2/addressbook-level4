@@ -8,7 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import seedu.taskboss.model.category.UniqueTagList;
+import seedu.taskboss.model.category.UniqueCategoryList;
 import seedu.taskboss.model.task.ReadOnlyTask;
 
 /**
@@ -18,7 +18,7 @@ public class TaskCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
     private static final String INFORMATION_FIELD_ID = "#information";
     private static final String PRIORITY_FIELD_ID = "#priorityLevel";
-    private static final String TAGS_FIELD_ID = "#tags";
+    private static final String CATEGORIES_FIELD_ID = "#categories";
 
     private Node node;
 
@@ -43,35 +43,35 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(PRIORITY_FIELD_ID);
     }
 
-    public List<String> getTags() {
-        return getTags(getTagsContainer());
+    public List<String> getCategories() {
+        return getCategories(getCategoriesContainer());
     }
 
-    private List<String> getTags(Region tagsContainer) {
-        return tagsContainer
+    private List<String> getCategories(Region categoriesContainer) {
+        return categoriesContainer
                 .getChildrenUnmodifiable()
                 .stream()
                 .map(node -> ((Labeled) node).getText())
                 .collect(Collectors.toList());
     }
 
-    private List<String> getTags(UniqueTagList tags) {
-        return tags
+    private List<String> getCategories(UniqueCategoryList categories) {
+        return categories
                 .asObservableList()
                 .stream()
-                .map(tag -> tag.tagName)
+                .map(category -> category.categoryName)
                 .collect(Collectors.toList());
     }
 
-    private Region getTagsContainer() {
-        return guiRobot.from(node).lookup(TAGS_FIELD_ID).query();
+    private Region getCategoriesContainer() {
+        return guiRobot.from(node).lookup(CATEGORIES_FIELD_ID).query();
     }
 
     public boolean isSameTask(ReadOnlyTask task) {
         return getFullName().equals(task.getName().fullName)
                 && getPriority().equals(task.getPriorityLevel().value)
                 && getInformation().equals(task.getInformation().value)
-                && getTags().equals(getTags(task.getTags()));
+                && getCategories().equals(getCategories(task.getCategories()));
     }
 
     @Override
@@ -81,7 +81,7 @@ public class TaskCardHandle extends GuiHandle {
             return getFullName().equals(handle.getFullName())
                     && getPriority().equals(handle.getPriority())
                     && getInformation().equals(handle.getInformation())
-                    && getTags().equals(handle.getTags());
+                    && getCategories().equals(handle.getCategories());
         }
         return super.equals(obj);
     }

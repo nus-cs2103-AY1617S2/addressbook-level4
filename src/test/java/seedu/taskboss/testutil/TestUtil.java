@@ -30,8 +30,8 @@ import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.commons.util.FileUtil;
 import seedu.taskboss.commons.util.XmlUtil;
 import seedu.taskboss.model.TaskBoss;
-import seedu.taskboss.model.category.Tag;
-import seedu.taskboss.model.category.UniqueTagList;
+import seedu.taskboss.model.category.Category;
+import seedu.taskboss.model.category.UniqueCategoryList;
 import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
@@ -53,7 +53,7 @@ public class TestUtil {
 
     public static final Task[] SAMPLE_TASK_DATA = getSampleTaskData();
 
-    public static final Tag[] SAMPLE_TAG_DATA = getSampleTagData();
+    public static final Category[] SAMPLE_CATEGORY_DATA = getSampleCategoryData();
 
     public static void assertThrows(Class<? extends Throwable> expected, Runnable executable) {
         try {
@@ -74,15 +74,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Name("Ali Muster"), new PriorityLevel("2"), new Information("4th street"), new UniqueTagList()),
-                new Task(new Name("Boris Mueller"), new PriorityLevel("2"), new Information("81th street"), new UniqueTagList()),
-                new Task(new Name("Carl Kurz"), new PriorityLevel("3"), new Information("wall street"), new UniqueTagList()),
-                new Task(new Name("Daniel Meier"), new PriorityLevel("2"), new Information("10th street"), new UniqueTagList()),
-                new Task(new Name("Elle Meyer"), new PriorityLevel("2"), new Information("michegan ave"), new UniqueTagList()),
-                new Task(new Name("Fiona Kunz"), new PriorityLevel("2"), new Information("little tokyo"), new UniqueTagList()),
-                new Task(new Name("George Best"), new PriorityLevel("2"), new Information("4th street"), new UniqueTagList()),
-                new Task(new Name("Hoon Meier"), new PriorityLevel("2"), new Information("little india"), new UniqueTagList()),
-                new Task(new Name("Ida Mueller"), new PriorityLevel("2"), new Information("chicago ave"), new UniqueTagList())
+                new Task(new Name("Ali Muster"), new PriorityLevel("2"), new Information("4th street"), new UniqueCategoryList()),
+                new Task(new Name("Boris Mueller"), new PriorityLevel("2"), new Information("81th street"), new UniqueCategoryList()),
+                new Task(new Name("Carl Kurz"), new PriorityLevel("3"), new Information("wall street"), new UniqueCategoryList()),
+                new Task(new Name("Daniel Meier"), new PriorityLevel("2"), new Information("10th street"), new UniqueCategoryList()),
+                new Task(new Name("Elle Meyer"), new PriorityLevel("2"), new Information("michegan ave"), new UniqueCategoryList()),
+                new Task(new Name("Fiona Kunz"), new PriorityLevel("2"), new Information("little tokyo"), new UniqueCategoryList()),
+                new Task(new Name("George Best"), new PriorityLevel("2"), new Information("4th street"), new UniqueCategoryList()),
+                new Task(new Name("Hoon Meier"), new PriorityLevel("2"), new Information("little india"), new UniqueCategoryList()),
+                new Task(new Name("Ida Mueller"), new PriorityLevel("2"), new Information("chicago ave"), new UniqueCategoryList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -93,11 +93,11 @@ public class TestUtil {
     }
 
 
-    private static Tag[] getSampleTagData() {
+    private static Category[] getSampleCategoryData() {
         try {
-            return new Tag[]{
-                new Tag("relatives"),
-                new Tag("friends")
+            return new Category[]{
+                new Category("relatives"),
+                new Category("friends")
             };
         } catch (IllegalValueException e) {
             assert false;
@@ -336,16 +336,16 @@ public class TestUtil {
         return card.isSameTask(task);
     }
 
-    public static Tag[] getTagList(String tags) {
-        if ("".equals(tags)) {
-            return new Tag[]{};
+    public static Category[] getCategoryList(String categories) {
+        if ("".equals(categories)) {
+            return new Category[]{};
         }
 
-        final String[] split = tags.split(", ");
+        final String[] split = categories.split(", ");
 
-        final List<Tag> collect = Arrays.asList(split).stream().map(e -> {
+        final List<Category> collect = Arrays.asList(split).stream().map(e -> {
             try {
-                return new Tag(e.replaceFirst("Tag: ", ""));
+                return new Category(e.replaceFirst("Category: ", ""));
             } catch (IllegalValueException e1) {
                 //not possible
                 assert false;
@@ -353,7 +353,7 @@ public class TestUtil {
             }
         }).collect(Collectors.toList());
 
-        return collect.toArray(new Tag[split.length]);
+        return collect.toArray(new Category[split.length]);
     }
 
 }

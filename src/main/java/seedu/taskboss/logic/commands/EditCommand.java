@@ -6,7 +6,7 @@ import java.util.Optional;
 import seedu.taskboss.commons.core.Messages;
 import seedu.taskboss.commons.util.CollectionUtil;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
-import seedu.taskboss.model.category.UniqueTagList;
+import seedu.taskboss.model.category.UniqueCategoryList;
 import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
@@ -25,7 +25,7 @@ public class EditCommand extends Command {
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) [NAME] [p/PRIORITY_LEVEL]"
-            + " [i/INFORMATION ] [t/TAG]...\n"
+            + " [i/INFORMATION ] [t/CATEGORY]...\n"
             + "Example: " + COMMAND_WORD + " 1 p/1";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
@@ -81,9 +81,9 @@ public class EditCommand extends Command {
         PriorityLevel updatedPriorityLevel = editTaskDescriptor.getPriorityLevel()
                 .orElseGet(taskToEdit::getPriorityLevel);
         Information updatedInformation = editTaskDescriptor.getInformation().orElseGet(taskToEdit::getInformation);
-        UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
+        UniqueCategoryList updatedCategories = editTaskDescriptor.getCategories().orElseGet(taskToEdit::getCategories);
 
-        return new Task(updatedName, updatedPriorityLevel, updatedInformation, updatedTags);
+        return new Task(updatedName, updatedPriorityLevel, updatedInformation, updatedCategories);
     }
 
     /**
@@ -95,7 +95,7 @@ public class EditCommand extends Command {
 
         private Optional<PriorityLevel> priorityLevel = Optional.empty();
         private Optional<Information> information = Optional.empty();
-        private Optional<UniqueTagList> tags = Optional.empty();
+        private Optional<UniqueCategoryList> categories = Optional.empty();
 
         public EditTaskDescriptor() {}
 
@@ -103,14 +103,14 @@ public class EditCommand extends Command {
             this.name = toCopy.getName();
             this.priorityLevel = toCopy.getPriorityLevel();
             this.information = toCopy.getInformation();
-            this.tags = toCopy.getTags();
+            this.categories = toCopy.getCategories();
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.priorityLevel, this.information, this.tags);
+            return CollectionUtil.isAnyPresent(this.name, this.priorityLevel, this.information, this.categories);
         }
 
         public void setName(Optional<Name> name) {
@@ -140,13 +140,13 @@ public class EditCommand extends Command {
             return information;
         }
 
-        public void setTags(Optional<UniqueTagList> tags) {
-            assert tags != null;
-            this.tags = tags;
+        public void setCategories(Optional<UniqueCategoryList> categories) {
+            assert categories != null;
+            this.categories = categories;
         }
 
-        public Optional<UniqueTagList> getTags() {
-            return tags;
+        public Optional<UniqueCategoryList> getCategories() {
+            return categories;
         }
     }
 }

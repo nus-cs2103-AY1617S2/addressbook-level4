@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.commons.util.StringUtil;
-import seedu.taskboss.model.category.Tag;
-import seedu.taskboss.model.category.UniqueTagList;
+import seedu.taskboss.model.category.Category;
+import seedu.taskboss.model.category.UniqueCategoryList;
 import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
@@ -93,14 +93,14 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.
+     * Parses {@code Collection<String> categories} into an {@code UniqueCategoryList}.
      */
-    public static UniqueTagList parseTags(Collection<String> tags) throws IllegalValueException {
-        assert tags != null;
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(new Tag(tagName));
+    public static UniqueCategoryList parseCategories(Collection<String> categories) throws IllegalValueException {
+        assert categories != null;
+        final Set<Category> categorySet = new HashSet<>();
+        for (String categoryName : categories) {
+            categorySet.add(new Category(categoryName));
         }
-        return new UniqueTagList(tagSet);
+        return new UniqueCategoryList(categorySet);
     }
 }

@@ -6,8 +6,8 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.taskboss.commons.exceptions.IllegalValueException;
-import seedu.taskboss.model.category.Tag;
-import seedu.taskboss.model.category.UniqueTagList;
+import seedu.taskboss.model.category.Category;
+import seedu.taskboss.model.category.UniqueCategoryList;
 import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
@@ -27,7 +27,7 @@ public class XmlAdaptedTask {
     private String information;
 
     @XmlElement
-    private List<XmlAdaptedTag> tagged = new ArrayList<>();
+    private List<XmlAdaptedCategory> addedToCategory = new ArrayList<>();
 
     /**
      * Constructs an XmlAdaptedTask.
@@ -45,9 +45,9 @@ public class XmlAdaptedTask {
         name = source.getName().fullName;
         priorityLevel = source.getPriorityLevel().value;
         information = source.getInformation().value;
-        tagged = new ArrayList<>();
-        for (Tag tag : source.getTags()) {
-            tagged.add(new XmlAdaptedTag(tag));
+        addedToCategory = new ArrayList<>();
+        for (Category category : source.getCategories()) {
+            addedToCategory.add(new XmlAdaptedCategory(category));
         }
     }
 
@@ -57,14 +57,14 @@ public class XmlAdaptedTask {
      * @throws IllegalValueException if there were any data constraints violated in the adapted task
      */
     public Task toModelType() throws IllegalValueException {
-        final List<Tag> taskTags = new ArrayList<>();
-        for (XmlAdaptedTag tag : tagged) {
-            taskTags.add(tag.toModelType());
+        final List<Category> taskCategories = new ArrayList<>();
+        for (XmlAdaptedCategory category : addedToCategory) {
+            taskCategories.add(category.toModelType());
         }
         final Name name = new Name(this.name);
         final PriorityLevel priorityLevel = new PriorityLevel(this.priorityLevel);
         final Information information = new Information(this.information);
-        final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(name, priorityLevel, information, tags);
+        final UniqueCategoryList categories = new UniqueCategoryList(taskCategories);
+        return new Task(name, priorityLevel, information, categories);
     }
 }

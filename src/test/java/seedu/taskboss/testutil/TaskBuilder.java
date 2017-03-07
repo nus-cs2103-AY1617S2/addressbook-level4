@@ -1,8 +1,8 @@
 package seedu.taskboss.testutil;
 
 import seedu.taskboss.commons.exceptions.IllegalValueException;
-import seedu.taskboss.model.category.Tag;
-import seedu.taskboss.model.category.UniqueTagList;
+import seedu.taskboss.model.category.Category;
+import seedu.taskboss.model.category.UniqueCategoryList;
 import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
@@ -30,10 +30,10 @@ public class TaskBuilder {
         return this;
     }
 
-    public TaskBuilder withTags(String ... tags) throws IllegalValueException {
-        task.setTags(new UniqueTagList());
-        for (String tag: tags) {
-            task.getTags().add(new Tag(tag));
+    public TaskBuilder withCategories(String ... categories) throws IllegalValueException {
+        task.setCategories(new UniqueCategoryList());
+        for (String category: categories) {
+            task.getCategories().add(new Category(category));
         }
         return this;
     }

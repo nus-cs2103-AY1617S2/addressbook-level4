@@ -5,8 +5,8 @@ import java.util.Set;
 
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
-import seedu.taskboss.model.category.Tag;
-import seedu.taskboss.model.category.UniqueTagList;
+import seedu.taskboss.model.category.Category;
+import seedu.taskboss.model.category.UniqueCategoryList;
 import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
@@ -38,15 +38,15 @@ public class AddCommand extends Command {
 
     public AddCommand(String name, String priorityLevel, String information, Set<String> tags)
             throws IllegalValueException {
-        final Set<Tag> tagSet = new HashSet<>();
+        final Set<Category> tagSet = new HashSet<>();
         for (String tagName : tags) {
-            tagSet.add(new Tag(tagName));
+            tagSet.add(new Category(tagName));
         }
         this.toAdd = new Task(
                 new Name(name),
                 new PriorityLevel(priorityLevel),
                 new Information(information),
-                new UniqueTagList(tagSet)
+                new UniqueCategoryList(tagSet)
         );
     }
 
