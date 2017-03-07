@@ -14,6 +14,7 @@ import seedu.task.model.task.Task;
 import seedu.task.model.task.Description;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.UniqueTaskList;
+import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -22,15 +23,15 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the last person listing. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
+            + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS ] [t/TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 p/91234567 e/johndoe@yahoo.com";
+            + "Parameters: INDEX (must be a positive integer) [NAME] [d/Description] [s/Start date and time] [e/End date and time] [t/Tag]...\n"
+            + "Example: " + COMMAND_WORD + " 1 d/Walk the cat e/08/03/2017 0300";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the address book.";
 
     private final int filteredPersonListIndex;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -62,7 +63,7 @@ public class EditCommand extends Command {
 
         try {
             model.updateTask(filteredPersonListIndex, editedPerson);
-        } catch (UniqueTaskList.DuplicatePersonException dpe) {
+        } catch (DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
         model.updateFilteredListToShowAll();

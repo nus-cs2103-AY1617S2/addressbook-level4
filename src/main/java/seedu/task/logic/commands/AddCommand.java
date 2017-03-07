@@ -23,12 +23,12 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task book. "
-            + "Parameters: Task name p/Description e/Start date and time a/End date and time  [t/Tag]...\n"
+            + "Parameters: Task name d/Description s/Start date and time e/End date and time  [t/Tag]...\n"
             + "Example: " + COMMAND_WORD
-            + " Walk the dog p/Take Zelda on a walk around the park e/01/01/2017 1000 a/01/01/2017 1200 t/Important";
+            + " Walk the dog d/Take Zelda on a walk around the park s/01/01/2017 1000 e/01/01/2017 1200 t/Important";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book";
 
     private final Task toAdd;
 
@@ -59,7 +59,7 @@ public class AddCommand extends Command {
             model.addTask(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (DuplicateTaskException e) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
     }
