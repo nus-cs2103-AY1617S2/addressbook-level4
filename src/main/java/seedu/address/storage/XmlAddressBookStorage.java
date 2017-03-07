@@ -69,7 +69,7 @@ public class XmlAddressBookStorage implements TaskListStorage {
 
         File file = new File(filePath);
         FileUtil.createIfMissing(file);
-        XmlFileStorage.saveDataToFile(file, new XmlSerializableAddressBook(addressBook));
+        XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskList(addressBook));
     }
 
 }
