@@ -10,8 +10,8 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.ReadOnlyPerson;
 import seedu.address.model.task.UniquePersonList;
 import seedu.address.model.task.UniquePersonList.DuplicatePersonException;
 import seedu.address.model.tag.Tag;
@@ -50,7 +50,7 @@ public class TaskManager implements ReadOnlyTaskManager {
 
 //// list overwrite operations
 
-    public void setPersons(List<? extends ReadOnlyPerson> persons)
+    public void setPersons(List<? extends ReadOnlyTask> persons)
             throws UniquePersonList.DuplicatePersonException {
         this.persons.setPersons(persons);
     }
@@ -89,19 +89,19 @@ public class TaskManager implements ReadOnlyTaskManager {
     }
 
     /**
-     * Updates the task in the list at position {@code index} with {@code editedReadOnlyPerson}.
-     * {@code TaskManager}'s tag list will be updated with the tags of {@code editedReadOnlyPerson}.
+     * Updates the task in the list at position {@code index} with {@code editedReadOnlyTask}.
+     * {@code TaskManager}'s tag list will be updated with the tags of {@code editedReadOnlyTask}.
      * @see #syncMasterTagListWith(Task)
      *
      * @throws DuplicatePersonException if updating the task's details causes the task to be equivalent to
      *      another existing task in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updatePerson(int index, ReadOnlyPerson editedReadOnlyPerson)
+    public void updatePerson(int index, ReadOnlyTask editedReadOnlyTask)
             throws UniquePersonList.DuplicatePersonException {
-        assert editedReadOnlyPerson != null;
+        assert editedReadOnlyTask != null;
 
-        Task editedPerson = new Task(editedReadOnlyPerson);
+        Task editedPerson = new Task(editedReadOnlyTask);
         syncMasterTagListWith(editedPerson);
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any task
@@ -139,7 +139,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         persons.forEach(this::syncMasterTagListWith);
     }
 
-    public boolean removePerson(ReadOnlyPerson key) throws UniquePersonList.PersonNotFoundException {
+    public boolean removePerson(ReadOnlyTask key) throws UniquePersonList.PersonNotFoundException {
         if (persons.remove(key)) {
             return true;
         } else {
@@ -162,7 +162,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     }
 
     @Override
-    public ObservableList<ReadOnlyPerson> getPersonList() {
+    public ObservableList<ReadOnlyTask> getPersonList() {
         return new UnmodifiableObservableList<>(persons.asObservableList());
     }
 

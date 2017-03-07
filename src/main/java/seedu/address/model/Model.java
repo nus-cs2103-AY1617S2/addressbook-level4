@@ -3,8 +3,8 @@ package seedu.address.model;
 import java.util.Set;
 
 import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.ReadOnlyPerson;
 import seedu.address.model.task.UniquePersonList;
 import seedu.address.model.task.UniquePersonList.DuplicatePersonException;
 
@@ -19,7 +19,7 @@ public interface Model {
     ReadOnlyTaskManager getAddressBook();
 
     /** Deletes the given task. */
-    void deletePerson(ReadOnlyPerson target) throws UniquePersonList.PersonNotFoundException;
+    void deletePerson(ReadOnlyTask target) throws UniquePersonList.PersonNotFoundException;
 
     /** Adds the given task */
     void addPerson(Task person) throws UniquePersonList.DuplicatePersonException;
@@ -31,11 +31,11 @@ public interface Model {
      *      another existing task in the list.
      * @throws IndexOutOfBoundsException if {@code filteredPersonListIndex} < 0 or >= the size of the filtered list.
      */
-    void updatePerson(int filteredPersonListIndex, ReadOnlyPerson editedPerson)
+    void updatePerson(int filteredPersonListIndex, ReadOnlyTask editedPerson)
             throws UniquePersonList.DuplicatePersonException;
 
-    /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyPerson>} */
-    UnmodifiableObservableList<ReadOnlyPerson> getFilteredPersonList();
+    /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    UnmodifiableObservableList<ReadOnlyTask> getFilteredPersonList();
 
     /** Updates the filter of the filtered task list to show all persons */
     void updateFilteredListToShowAll();
