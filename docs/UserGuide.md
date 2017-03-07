@@ -11,22 +11,22 @@ By : `W09-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 ## 1. Quick Start
 
-0. Ensure you have Java version `1.8.0_60` or later installed in your Computer. 
+0. Ensure you have Java version `1.8.0_60` or later installed in your Computer.
 
-   > Having any Java 8 version is not enough.  
+   > Having any Java 8 version is not enough.
    > This app will not work with earlier versions of Java 8.
 
 1. Download the latest `suru.jar` from the [releases](../../../releases) tab.
 2. Copy the file to the folder you want to use as the home folder for your Task Manager.
 3. Double-click the file to start the app. The GUI should appear in a few seconds. <img src="images/Ui.jpg" width="600">
-3. Type the command in the command box and press <kbd>Enter</kbd> to execute it.  
+3. Type the command in the command box and press <kbd>Enter</kbd> to execute it.
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 4. Some example commands you can try:
    * **`list`** : lists all tasks
    * **`add`**` write essay `**by**` 13/3/17` : Adds a task "write essay" with a due date "13/3/17"
    * **`delete`**` 3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
-5. Refer to the [Features](#features) section below for details of each command. 
+5. Refer to the [Features](#features) section below for details of each command.
 
 
 ## 2. Features
@@ -40,7 +40,7 @@ By : `W09-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 ### 2.1. Saving the data
 
-By default, task manager data is saved in the hard disk automatically after any command that changes the data. 
+By default, task manager data is saved in the hard disk automatically after any command that changes the data.
 There is no need to save manually.
 
 ### 2.2. Viewing usage instructions : `help`
@@ -51,7 +51,7 @@ Format: `help`
 
 ### 2.3. Adding a task with no specified completion date: `add`
 
-Adds a task to the task manager 
+Adds a task to the task manager
 
 Format: `add DESCRIPTION`
 
@@ -63,7 +63,7 @@ Examples:
 
 ### 2.4. Adding a task with a due date: `add ... by ...`
 
-Adds a task with a due date to the task manager 
+Adds a task with a due date to the task manager
 
 Format: `add DESCRIPTION by DUE_DATE`
 
@@ -75,7 +75,7 @@ Examples:
 
 ### 2.5. Adding a task with a start date: `add ... from ...`
 
-Adds a task with a start date to the task manager 
+Adds a task with a start date to the task manager
 
 Format: `add DESCRIPTION from START_DATE`
 
@@ -87,7 +87,7 @@ Examples:
 
 ### 2.6. Adding a task with a duration: `add ... from ... to ...`
 
-Adds a task to the task manager 
+Adds a task to the task manager
 
 Format: `add DESCRIPTION from START_DATE to END_DATE`
 
@@ -99,7 +99,7 @@ Examples:
 
 ### 2.7. Adding a task with tags: `add ... #TAGNAME ...`
 
-Adds tags to the task  
+Adds tags to the task
 
 Format: `add DESCRIPTION #TAGNAME`
 
@@ -115,19 +115,19 @@ Examples:
 
 ### 2.8. Listing all tasks : `list`
 
-Shows a list of all tasks in the task manager. 
+Shows a list of all tasks in the task manager.
 
 Format: `list`
 
 ### 2.9. Listing undone tasks : `list undone`
 
-Shows a list of all undone tasks in the task manager. 
+Shows a list of all undone tasks in the task manager.
 
 Format: `list`
 
 ### 2.10. Listing done tasks : `list done`
 
-Shows a list of all done tasks in the task manager. 
+Shows a list of all done tasks in the task manager.
 
 Format: `list`
 
@@ -138,37 +138,37 @@ Format: `list`
 > * At least one of the optional fields of the task must be provided.
 > * Existing values will be updated to the input values.
 > * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
-> * You can remove all the task's tags by editing the tag to an empty value. 
+> * You can remove all the task's tags by editing the tag to an empty value.
 
 Examples:
 
-* `edit 1 buy groceries by 13/5/17` 
+* `edit 1 buy groceries by 13/5/17`
   Edits the description of the task to `buy groceries` and due date to `13/5/17` respectively.
 
-* `edit 2 buy groceries` 
+* `edit 2 buy groceries`
   Edits the description of the 2nd task to be `buy groceries`.
 
 ### 2.12. Deleting a task : `delete`
 
-Deletes the specified task from the task manager. 
+Deletes the specified task from the task manager.
 Format: `delete INDEX`
 
-> Deletes the task at the specified `INDEX`.  
-> The index refers to the index number shown in the most recent listing. 
+> Deletes the task at the specified `INDEX`.
+> The index refers to the index number shown in the most recent listing.
 > The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 
-* `list` 
-  `delete 2` 
+* `list`
+  `delete 2`
   Deletes the 2nd task in the list.
-* `find Essay` 
-  `delete 1` 
+* `find Essay`
+  `delete 1`
   Deletes the 1st task in the results of the `find` command.
 
 ### 2.13. Undo : `undo`
 
-Reverses the previous action done by the user 
+Reverses the previous action done by the user
 
 Format: `undo`
 
@@ -177,7 +177,7 @@ Format: `undo`
 
 ### 2.14. Redo : `redo`
 
-Reverses the previous undo operation 
+Reverses the previous undo operation
 
 Format: `redo`
 
@@ -185,7 +185,7 @@ Format: `redo`
 
 ### 2.15. Finding all tasks containing the keyword in any of their properties: `find`
 
-Finds tasks whose properties contain any of the given keywords. 
+Finds tasks whose properties contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -198,56 +198,56 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 
-* `find Essay` 
+* `find Essay`
   Returns `Write Essay` and `essay writing`
-* `find Essay Writing Competition` 
+* `find Essay Writing Competition`
   Returns any task having keywords `Essay`, `Writing`, or `Competition`
-* `find 17/7/17`  
+* `find 17/7/17`
   Returns any task having the date `17/7/17`
-  
+
 ### 2.16. Find undone tasks : `find undone`
 
-Finds undone tasks whose properties contain any of the given keywords. 
+Finds undone tasks whose properties contain any of the given keywords.
 
 Format: `find undone KEYWORD [MORE_KEYWORDS]`
 
 > * Similar to regular `find` feature, but only searches through `undone` tasks
 
 ### 2.17. Find done tasks: `find done`
-Finds done tasks whose properties contain any of the given keywords. 
+Finds done tasks whose properties contain any of the given keywords.
 
 Format: `find done KEYWORD [MORE_KEYWORDS]`
 
 > * Similar to regular `find` feature, but only searches through `done` tasks
 
 ### 2.18. Check off task to mark as done: `check`
-Checks off a task to mark as done.  
-> Checks off the task at the specified `INDEX`.  
-> The index refers to the index number shown in the most recent listing. 
+Checks off a task to mark as done.
+> Checks off the task at the specified `INDEX`.
+> The index refers to the index number shown in the most recent listing.
 > The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 
-* `list` 
-  `check 2` 
+* `list`
+  `check 2`
   Checks off the 2nd task in the listing as done.
-* `find Essay` 
-  `check 1` 
+* `find Essay`
+  `check 1`
   Checks off the 1st task in the results of the `find` command.
 
 ### 2.19. Uncheck task to mark as undone: `uncheck`
-Uncheck a task to mark as undone.  
-> Unchecks the task at the specified `INDEX`.  
-> The index refers to the index number shown in the most recent listing. 
+Uncheck a task to mark as undone.
+> Unchecks the task at the specified `INDEX`.
+> The index refers to the index number shown in the most recent listing.
 > The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 
-* `list` 
-  `uncheck 2` 
+* `list`
+  `uncheck 2`
   Unchecks the 2nd task in the listing marking it as undone.
-* `find Essay` 
-  `uncheck 1` 
+* `find Essay`
+  `uncheck 1`
   Unchecks the 1st task in the results of the `find` command.
 
 ### 2.20. See usage instructions: `help`
@@ -276,7 +276,7 @@ Examples:
 * `loadfrom` `FILE_PATH`
 
 ### 2.24. Add reminders to task: `add DESCRIPTION reminders: ...`
-Adds reminders to the task  
+Adds reminders to the task
 
 Format: `add DESCRIPTION reminders:`
 
@@ -291,13 +291,13 @@ Use the `edit` command to edit reminders.
 
 Examples:
 
-* `edit 2 buy groceries reminders: 18/7/17` 
+* `edit 2 buy groceries reminders: 18/7/17`
   Edits the description of the 2nd task to be `buy groceries` and changes reminders to `18/7/17`
 
 ### 2.26. Removing reminders from a task: `edit`
 Use the `edit` command to edit reminders.
 
-* `edit 2 buy groceries reminders:` 
+* `edit 2 buy groceries reminders:`
   Edits the description of the 2nd task to be `buy groceries` and clears all existing reminders.
 
 ### 2.27. Add a recurring task: `add DESCRIPTION recurring:`
@@ -347,7 +347,7 @@ Format: `add subtask ...`
     The index **must be a positive integer** 1, 2, 3, ...
 > * Subtask can be added to selected task
 
-Examples: 
+Examples:
 > * `add subtask write first draft by 18/7/17 #pre-production`
 > * `add subtask write first draft`
 
@@ -407,13 +407,13 @@ Format: `google-cal`
 
 ## 3. FAQ
 
-**Q**: How do I transfer my data to another Computer? 
+**Q**: How do I transfer my data to another Computer?
 
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Task Manager folder.
 
 ## 4. Command Summary
 
-* **Add**  `add DESCRIPTION from START_DATE to END_DATE #TAGNAME... recurring:... reminders:...`  
+* **Add**  `add DESCRIPTION from START_DATE to END_DATE #TAGNAME... recurring:... reminders:...`
 Examples:
 > * `add Write essay`
 > * `add Write essay by 24/12/17`
@@ -428,19 +428,19 @@ Examples:
 > * `edit 2 buy groceries`
 > * `edit 1 buy groceries by 13/5/17`
 
-* **Delete** : `delete INDEX`  
+* **Delete** : `delete INDEX`
 Examples:
 > * `delete 3`
 
-* **Find** : `find KEYWORD [MORE_KEYWORDS]`  
+* **Find** : `find KEYWORD [MORE_KEYWORDS]`
 > * `find Essay`
 
-* **List** : `list`  
+* **List** : `list`
 Examples:
 > * `list undone`
 > * `list done`
 
-* **Help** : `help`  
+* **Help** : `help`
 
 * **Select** : `select INDEX`
 Examples:

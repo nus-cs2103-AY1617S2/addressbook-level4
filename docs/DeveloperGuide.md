@@ -420,8 +420,8 @@ Use case ends.
 
 > 1d1. Suru displays error message.
 > Use case ends.
-  
-  
+
+
 #### Use case: UC02 - view tasks
 
 **MSS**
@@ -637,12 +637,12 @@ Use case ends.
 > 2b1. Suru displays error message.
 > Use case ends.
 
-2c. The date for reminder is after due date of task. 
+2c. The date for reminder is after due date of task.
 
 > 2c1. Suru displays error message.
 > Use case ends.
 
-2d. The date is in invalid format. 
+2d. The date is in invalid format.
 
 > 2d1. Suru displays error message.
 > Use case ends.
@@ -679,13 +679,13 @@ Use case ends.
 
 > 2c1. Suru displays error message.
 > Use case ends.
-> 
-2d. The date for reminder is after due date of task. 
+>
+2d. The date for reminder is after due date of task.
 
 > 2d1. Suru displays error message.
 > Use case ends.
 
-2e. The date is in invalid format. 
+2e. The date is in invalid format.
 
 > 2e1. Suru displays error message.
 > Use case ends.
@@ -718,7 +718,7 @@ Use case ends.
 > 2b1. Suru displays error message.
 > Use case ends.
 
-2c. The date is in invalid format. 
+2c. The date is in invalid format.
 
 > 2c1. Suru displays error message.
 > Use case ends.
@@ -735,7 +735,7 @@ Use case ends.
 2. User requests to repeat a task by index.
 3. Suru requests user for confirmation together with number of times to be repeated.
 4. User confirms changes.
-5. Suru GUI is refreshed to show updated list of tasks. 
+5. Suru GUI is refreshed to show updated list of tasks.
 
 Use case ends.
 
@@ -843,7 +843,7 @@ Use case ends.
 1. User **view all tasks (_UC02_).**
 2. User requests to filter tasks by tags.
 3. Suru requests user for name of tags to filter the task by.
-4. Suru GUI is refreshed to show updated list of tasks by tags. 
+4. Suru GUI is refreshed to show updated list of tasks by tags.
 
 Use case ends.
 
@@ -883,7 +883,7 @@ Use case ends.
 
 > Use case ends.
 
-#### Use case: UC20 - edit subtask in task 
+#### Use case: UC20 - edit subtask in task
 
 **MSS**
 
@@ -969,7 +969,7 @@ Use case ends.
 
 >2a1. Suru request user to locate database file or create new database file.<br>
  Use case resumes at step 2.
-  
+
 #### Use case: UC23 - Command Shortcut
 
 **MSS**
@@ -1102,7 +1102,7 @@ Author: Muhammad Mustaqiim Bin Muhar
 
 Pros:
 
-* Able to share group tasks easily with teammates 
+* Able to share group tasks easily with teammates
 * Cross platform support on most devices and Operating Systems.
 * Able to auto add reminders and due dates using rss link to a calendar of your choice
 
