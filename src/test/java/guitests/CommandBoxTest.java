@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import seedu.taskList.ui.CommandBox;
+import seedu.tasklist.ui.CommandBox;
 
 public class CommandBoxTest extends TaskListGuiTest {
 

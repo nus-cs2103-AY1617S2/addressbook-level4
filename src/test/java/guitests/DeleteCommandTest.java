@@ -1,12 +1,12 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.taskList.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS;
+import static seedu.tasklist.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS;
 
 import org.junit.Test;
 
-import seedu.taskList.testutil.TestTask;
-import seedu.taskList.testutil.TestUtil;
+import seedu.tasklist.testutil.TestTask;
+import seedu.tasklist.testutil.TestUtil;
 
 public class DeleteCommandTest extends TaskListGuiTest {
 
