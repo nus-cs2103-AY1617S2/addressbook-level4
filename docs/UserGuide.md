@@ -15,7 +15,7 @@
 2. Download the latest `YOLOLOL.jar` from the [releases](../../../releases) tab.
 3. Copy the file to the folder you want to use as the home folder for your task manager.
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
-    > <img src="docs/images/Ui.png" width="600"><br>
+    > <img src="images/Ui.png" width="600">
 
  
 
