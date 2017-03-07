@@ -3,27 +3,27 @@
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
 ## Project Team
-#### [Johann Wong Jun Guo](https://github.com/Jslyfer) <br>
-<img src="images/jslyfer.jpg" width="150"><br>
-**Role**: Project Advisor
-
------
-
-#### [Gerald Wong Wei Chuen](https://github.com/geraldwong) <br>
-<img src="images/geraldwong.jpg" width="150"><br>
-**Role**: Project Advisor
+#### [Nguyen Quoc Bao](https://github.com/bqnguyen94) <br>
+<img src="images/bqnguyen94.jpg" width="150"><br>
+**Role**: Team Lead, Testing, Eclipse and Java expert
 
 -----
 
 #### [Lee Wan Qing](https://github.com/wanqingg) <br>
 <img src="images/wanqing.jpg" width="150"><br>
-**Role**: Project Advisor
+**Role**: Code Quality, Timekeeper, Scheduling and tracking, Design expert
 
 -----
 
-#### [Nguyen Quoc Bao](https://github.com/bqnguyen94) <br>
-<img src="images/bqnguyen94.jpg" width="150"><br>
-**Role**: Project Advisor
+#### [Gerald Wong Wei Chuen](https://github.com/geraldwong) <br>
+<img src="images/geraldwong.jpg" width="150"><br>
+**Role**: In charge of GUI, Deliverables and deadlines, In charge of Model and Storage
+
+-----
+
+#### [Johann Wong Jun Guo](https://github.com/Jslyfer) <br>
+<img src="images/jslyfer.jpg" width="150"><br>
+**Role**: Documentation, Integration, Git expert
 
 -----
 
