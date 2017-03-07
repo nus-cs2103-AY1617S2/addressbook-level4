@@ -23,7 +23,7 @@ public class TypicalTestPersons {
             carl = new PersonBuilder().withName("Walk the cow")
                     .withDescription("Take Zelda on a walk at the park").withStartDateTime("01/01/2016 0900")
                     .withEndDateTime("01/01/2016 1000").withTags("Important").build();
-            daniel = new PersonBuilder().withName("Walk the wolf")
+            daniel = new PersonBuilder().withName("Walk the nyan cat")
                     .withDescription("Take Zelda on a walk at the park").withStartDateTime("01/01/2016 0900")
                     .withEndDateTime("01/01/2016 1000").withTags("Important").build();
             elle = new PersonBuilder().withName("Walk the fish")

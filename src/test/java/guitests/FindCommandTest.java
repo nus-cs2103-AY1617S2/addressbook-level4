@@ -12,11 +12,11 @@ public class FindCommandTest extends AddressBookGuiTest {
     @Test
     public void find_nonEmptyList() {
         assertFindResult("find Mark"); // no results
-        assertFindResult("find Meier", td.benson, td.daniel); // multiple results
+        assertFindResult("find cat", td.benson, td.daniel); // multiple results
 
         //find after deleting one result
         commandBox.runCommand("delete 1");
-        assertFindResult("find Meier", td.daniel);
+        assertFindResult("find cat", td.daniel);
     }
 
     @Test
@@ -34,7 +34,7 @@ public class FindCommandTest extends AddressBookGuiTest {
     private void assertFindResult(String command, TestPerson... expectedHits) {
         commandBox.runCommand(command);
         assertListSize(expectedHits.length);
-        assertResultMessage(expectedHits.length + " persons listed!");
+        assertResultMessage(expectedHits.length + " tasks listed!");
         assertTrue(personListPanel.isListMatching(expectedHits));
     }
 }
