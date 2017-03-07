@@ -1,20 +1,20 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static savvytodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
 
 import guitests.guihandles.PersonCardHandle;
-import seedu.address.commons.core.Messages;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.TestPerson;
+import savvytodo.commons.core.Messages;
+import savvytodo.logic.commands.EditCommand;
+import savvytodo.model.tag.Tag;
+import savvytodo.model.task.Address;
+import savvytodo.model.task.Email;
+import savvytodo.model.task.Name;
+import savvytodo.model.task.Phone;
+import savvytodo.testutil.PersonBuilder;
+import savvytodo.testutil.TestPerson;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
 public class EditCommandTest extends AddressBookGuiTest {
