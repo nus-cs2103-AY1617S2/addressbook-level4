@@ -4,14 +4,14 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.address.model.ToDoList;
-import seedu.address.model.person.Task;
+import seedu.address.model.AddressBook;
+import seedu.address.model.person.Person;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.TestUtil;
 
-public class SampleDataTest extends ToDoListGuiTest {
+public class SampleDataTest extends AddressBookGuiTest {
     @Override
-    protected ToDoList getInitialData() {
+    protected AddressBook getInitialData() {
         // return null to force test app to load data from file only
         return null;
     }
@@ -23,8 +23,8 @@ public class SampleDataTest extends ToDoListGuiTest {
     }
 
     @Test
-    public void toDoList_dataFileDoesNotExist_loadSampleData() throws Exception {
-        Task[] expectedList = SampleDataUtil.getSampleTasks();
-        assertTrue(taskListPanel.isListMatching(expectedList));
+    public void addressBook_dataFileDoesNotExist_loadSampleData() throws Exception {
+        Person[] expectedList = SampleDataUtil.getSamplePersons();
+        assertTrue(personListPanel.isListMatching(expectedList));
     }
 }

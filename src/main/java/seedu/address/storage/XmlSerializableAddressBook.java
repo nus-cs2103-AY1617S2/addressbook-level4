@@ -11,43 +11,43 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.ReadOnlyToDoList;
-import seedu.address.model.person.ReadOnlyTask;
-import seedu.address.model.person.Task;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.tag.Tag;
 
 /**
- * An Immutable ToDoList that is serializable to XML format
+ * An Immutable AddressBook that is serializable to XML format
  */
-@XmlRootElement(name = "toDoList")
-public class XmlSerializableToDoList implements ReadOnlyToDoList {
+@XmlRootElement(name = "addressbook")
+public class XmlSerializableAddressBook implements ReadOnlyAddressBook {
 
     @XmlElement
-    private List<XmlAdaptedTask> tasks;
+    private List<XmlAdaptedPerson> persons;
     @XmlElement
     private List<XmlAdaptedTag> tags;
 
     /**
-     * Creates an empty XmlSerializableToDoList.
+     * Creates an empty XmlSerializableAddressBook.
      * This empty constructor is required for marshalling.
      */
-    public XmlSerializableToDoList() {
-        tasks = new ArrayList<>();
+    public XmlSerializableAddressBook() {
+        persons = new ArrayList<>();
         tags = new ArrayList<>();
     }
 
     /**
      * Conversion
      */
-    public XmlSerializableToDoList(ReadOnlyToDoList src) {
+    public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
         this();
-        tasks.addAll(src.getTaskList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
+        persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
     }
 
     @Override
-    public ObservableList<ReadOnlyTask> getTaskList() {
-        final ObservableList<Task> tasks = this.tasks.stream().map(p -> {
+    public ObservableList<ReadOnlyPerson> getPersonList() {
+        final ObservableList<Person> persons = this.persons.stream().map(p -> {
             try {
                 return p.toModelType();
             } catch (IllegalValueException e) {
@@ -56,7 +56,7 @@ public class XmlSerializableToDoList implements ReadOnlyToDoList {
                 return null;
             }
         }).collect(Collectors.toCollection(FXCollections::observableArrayList));
-        return new UnmodifiableObservableList<>(tasks);
+        return new UnmodifiableObservableList<>(persons);
     }
 
     @Override

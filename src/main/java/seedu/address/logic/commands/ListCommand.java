@@ -2,13 +2,13 @@ package seedu.address.logic.commands;
 
 
 /**
- * Lists all tasks in the todo list to the user.
+ * Lists all persons in the address book to the user.
  */
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_SUCCESS = "Listed all tasks";
+    public static final String MESSAGE_SUCCESS = "Listed all persons";
 
 
     @Override

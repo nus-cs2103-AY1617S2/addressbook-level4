@@ -5,9 +5,9 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.testutil.TestTask;
+import seedu.address.testutil.TestPerson;
 
-public class FindCommandTest extends ToDoListGuiTest {
+public class FindCommandTest extends AddressBookGuiTest {
 
     @Test
     public void find_nonEmptyList() {
@@ -31,10 +31,10 @@ public class FindCommandTest extends ToDoListGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
-    private void assertFindResult(String command, TestTask... expectedHits) {
+    private void assertFindResult(String command, TestPerson... expectedHits) {
         commandBox.runCommand(command);
         assertListSize(expectedHits.length);
-        assertResultMessage(expectedHits.length + " tasks listed!");
-        assertTrue(taskListPanel.isListMatching(expectedHits));
+        assertResultMessage(expectedHits.length + " persons listed!");
+        assertTrue(personListPanel.isListMatching(expectedHits));
     }
 }

@@ -13,10 +13,10 @@ import java.util.stream.Collectors;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.model.person.Date;
-import seedu.address.model.person.Description;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Time;
+import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -75,28 +75,27 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> time} into an {@code Optional<Time>} if {@code time} is present.
+     * Parses a {@code Optional<String> phone} into an {@code Optional<Phone>} if {@code phone} is present.
      */
-    public static Optional<Time> parseTime(Optional<String> time) throws IllegalValueException {
-        assert time != null;
-        return time.isPresent() ? Optional.of(new Time(time.get())) : Optional.empty();
+    public static Optional<Phone> parsePhone(Optional<String> phone) throws IllegalValueException {
+        assert phone != null;
+        return phone.isPresent() ? Optional.of(new Phone(phone.get())) : Optional.empty();
     }
 
     /**
-     * Parses a {@code Optional<String> description} into an {@code Optional<Description>}
-     * if {@code description} is present.
+     * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.
      */
-    public static Optional<Description> parseDescription(Optional<String> description) throws IllegalValueException {
-        assert description != null;
-        return description.isPresent() ? Optional.of(new Description(description.get())) : Optional.empty();
+    public static Optional<Address> parseAddress(Optional<String> address) throws IllegalValueException {
+        assert address != null;
+        return address.isPresent() ? Optional.of(new Address(address.get())) : Optional.empty();
     }
 
     /**
-     * Parses a {@code Optional<String> date} into an {@code Optional<Date>} if {@code date} is present.
+     * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
      */
-    public static Optional<Date> parseDate(Optional<String> date) throws IllegalValueException {
-        assert date != null;
-        return date.isPresent() ? Optional.of(new Date(date.get())) : Optional.empty();
+    public static Optional<Email> parseEmail(Optional<String> email) throws IllegalValueException {
+        assert email != null;
+        return email.isPresent() ? Optional.of(new Email(email.get())) : Optional.empty();
     }
 
     /**

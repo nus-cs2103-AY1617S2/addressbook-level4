@@ -11,19 +11,18 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.ToDoList;
-import seedu.address.storage.XmlSerializableToDoList;
+import seedu.address.model.AddressBook;
+import seedu.address.storage.XmlSerializableAddressBook;
+import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.TestUtil;
-import seedu.address.testutil.ToDoListBuilder;
-
 
 public class XmlUtilTest {
 
     private static final String TEST_DATA_FOLDER = FileUtil.getPath("src/test/data/XmlUtilTest/");
     private static final File EMPTY_FILE = new File(TEST_DATA_FOLDER + "empty.xml");
     private static final File MISSING_FILE = new File(TEST_DATA_FOLDER + "missing.xml");
-    private static final File VALID_FILE = new File(TEST_DATA_FOLDER + "validToDoList.xml");
-    private static final File TEMP_FILE = new File(TestUtil.getFilePathInSandboxFolder("tempToDoList.xml"));
+    private static final File VALID_FILE = new File(TEST_DATA_FOLDER + "validAddressBook.xml");
+    private static final File TEMP_FILE = new File(TestUtil.getFilePathInSandboxFolder("tempAddressBook.xml"));
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -31,7 +30,7 @@ public class XmlUtilTest {
     @Test
     public void getDataFromFile_nullFile_AssertionError() throws Exception {
         thrown.expect(AssertionError.class);
-        XmlUtil.getDataFromFile(null, ToDoList.class);
+        XmlUtil.getDataFromFile(null, AddressBook.class);
     }
 
     @Test
@@ -43,26 +42,26 @@ public class XmlUtilTest {
     @Test
     public void getDataFromFile_missingFile_FileNotFoundException() throws Exception {
         thrown.expect(FileNotFoundException.class);
-        XmlUtil.getDataFromFile(MISSING_FILE, ToDoList.class);
+        XmlUtil.getDataFromFile(MISSING_FILE, AddressBook.class);
     }
 
     @Test
     public void getDataFromFile_emptyFile_DataFormatMismatchException() throws Exception {
         thrown.expect(JAXBException.class);
-        XmlUtil.getDataFromFile(EMPTY_FILE, ToDoList.class);
+        XmlUtil.getDataFromFile(EMPTY_FILE, AddressBook.class);
     }
 
-/*    @Test
+    @Test
     public void getDataFromFile_validFile_validResult() throws Exception {
-        XmlSerializableToDoList dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableToDoList.class);
-        assertEquals(9, dataFromFile.getTaskList().size());
+        XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableAddressBook.class);
+        assertEquals(9, dataFromFile.getPersonList().size());
         assertEquals(0, dataFromFile.getTagList().size());
-    }*/
+    }
 
     @Test
     public void saveDataToFile_nullFile_AssertionError() throws Exception {
         thrown.expect(AssertionError.class);
-        XmlUtil.saveDataToFile(null, new ToDoList());
+        XmlUtil.saveDataToFile(null, new AddressBook());
     }
 
     @Test
@@ -74,24 +73,24 @@ public class XmlUtilTest {
     @Test
     public void saveDataToFile_missingFile_FileNotFoundException() throws Exception {
         thrown.expect(FileNotFoundException.class);
-        XmlUtil.saveDataToFile(MISSING_FILE, new ToDoList());
+        XmlUtil.saveDataToFile(MISSING_FILE, new AddressBook());
     }
 
     @Test
     public void saveDataToFile_validFile_dataSaved() throws Exception {
         TEMP_FILE.createNewFile();
-        XmlSerializableToDoList dataToWrite = new XmlSerializableToDoList(new ToDoList());
+        XmlSerializableAddressBook dataToWrite = new XmlSerializableAddressBook(new AddressBook());
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
-        XmlSerializableToDoList dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableToDoList.class);
-        assertEquals((new ToDoList(dataToWrite)).toString(), (new ToDoList(dataFromFile)).toString());
+        XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableAddressBook.class);
+        assertEquals((new AddressBook(dataToWrite)).toString(), (new AddressBook(dataFromFile)).toString());
         //TODO: use equality instead of string comparisons
 
-        ToDoListBuilder builder = new ToDoListBuilder(new ToDoList());
-        dataToWrite = new XmlSerializableToDoList(
-                builder.withTask(TestUtil.generateSampleTaskData().get(0)).withTag("Friends").build());
+        AddressBookBuilder builder = new AddressBookBuilder(new AddressBook());
+        dataToWrite = new XmlSerializableAddressBook(
+                builder.withPerson(TestUtil.generateSamplePersonData().get(0)).withTag("Friends").build());
 
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
-        dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableToDoList.class);
-        assertEquals((new ToDoList(dataToWrite)).toString(), (new ToDoList(dataFromFile)).toString());
+        dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableAddressBook.class);
+        assertEquals((new AddressBook(dataToWrite)).toString(), (new AddressBook(dataFromFile)).toString());
     }
 }

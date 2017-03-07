@@ -12,13 +12,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import seedu.address.commons.events.model.ToDoListChangedEvent;
+import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
-import seedu.address.model.ReadOnlyToDoList;
-import seedu.address.model.ToDoList;
+import seedu.address.model.AddressBook;
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.testutil.EventsCollector;
-import seedu.address.testutil.TypicalTestTasks;
+import seedu.address.testutil.TypicalTestPersons;
 
 public class StorageManagerTest {
 
@@ -54,30 +54,30 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void toDoListReadSave() throws Exception {
+    public void addressBookReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link XmlToDoListStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link XmlToDoListStorageTest} class.
+         * {@link XmlAddressBookStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link XmlAddressBookStorageTest} class.
          */
-        ToDoList original = new TypicalTestTasks().getTypicalToDoList();
-        storageManager.saveToDoList(original);
-        ReadOnlyToDoList retrieved = storageManager.readToDoList().get();
-        assertEquals(original, new ToDoList(retrieved));
+        AddressBook original = new TypicalTestPersons().getTypicalAddressBook();
+        storageManager.saveAddressBook(original);
+        ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
+        assertEquals(original, new AddressBook(retrieved));
     }
 
     @Test
-    public void getToDoListFilePath() {
-        assertNotNull(storageManager.getToDoListFilePath());
+    public void getAddressBookFilePath() {
+        assertNotNull(storageManager.getAddressBookFilePath());
     }
 
     @Test
-    public void handleToDoListChangedEvent_exceptionThrown_eventRaised() throws IOException {
+    public void handleAddressBookChangedEvent_exceptionThrown_eventRaised() throws IOException {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
-        Storage storage = new StorageManager(new XmlToDoListStorageExceptionThrowingStub("dummy"),
+        Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub("dummy"),
                                              new JsonUserPrefsStorage("dummy"));
         EventsCollector eventCollector = new EventsCollector();
-        storage.handleToDoListChangedEvent(new ToDoListChangedEvent(new ToDoList()));
+        storage.handleAddressBookChangedEvent(new AddressBookChangedEvent(new AddressBook()));
         assertTrue(eventCollector.get(0) instanceof DataSavingExceptionEvent);
     }
 
@@ -85,14 +85,14 @@ public class StorageManagerTest {
     /**
      * A Stub class to throw an exception when the save method is called
      */
-    class XmlToDoListStorageExceptionThrowingStub extends XmlToDoListStorage {
+    class XmlAddressBookStorageExceptionThrowingStub extends XmlAddressBookStorage {
 
-        public XmlToDoListStorageExceptionThrowingStub(String filePath) {
+        public XmlAddressBookStorageExceptionThrowingStub(String filePath) {
             super(filePath);
         }
 
         @Override
-        public void saveToDoList(ReadOnlyToDoList toDoList, String filePath) throws IOException {
+        public void saveAddressBook(ReadOnlyAddressBook addressBook, String filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }

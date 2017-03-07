@@ -16,23 +16,23 @@ import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainGuiHandle;
 import guitests.guihandles.MainMenuHandle;
+import guitests.guihandles.PersonCardHandle;
+import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
-import guitests.guihandles.TaskCardHandle;
-import guitests.guihandles.TaskListPanelHandle;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import seedu.address.TestApp;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.ToDoList;
-import seedu.address.model.person.ReadOnlyTask;
+import seedu.address.model.AddressBook;
+import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.testutil.TestUtil;
-import seedu.address.testutil.TypicalTestTasks;
+import seedu.address.testutil.TypicalTestPersons;
 
 /**
- * A GUI Test class for ToDoList.
+ * A GUI Test class for AddressBook.
  */
-public abstract class ToDoListGuiTest {
+public abstract class AddressBookGuiTest {
 
     /* The TestName Rule makes the current test name available inside test methods */
     @Rule
@@ -40,7 +40,7 @@ public abstract class ToDoListGuiTest {
 
     TestApp testApp;
 
-    protected TypicalTestTasks td = new TypicalTestTasks();
+    protected TypicalTestPersons td = new TypicalTestPersons();
 
     /*
      *   Handles to GUI elements present at the start up are created in advance
@@ -48,7 +48,7 @@ public abstract class ToDoListGuiTest {
      */
     protected MainGuiHandle mainGui;
     protected MainMenuHandle mainMenu;
-    protected TaskListPanelHandle taskListPanel;
+    protected PersonListPanelHandle personListPanel;
     protected ResultDisplayHandle resultDisplay;
     protected CommandBoxHandle commandBox;
     protected BrowserPanelHandle browserPanel;
@@ -69,7 +69,7 @@ public abstract class ToDoListGuiTest {
         FxToolkit.setupStage((stage) -> {
             mainGui = new MainGuiHandle(new GuiRobot(), stage);
             mainMenu = mainGui.getMainMenu();
-            taskListPanel = mainGui.getTaskListPanel();
+            personListPanel = mainGui.getPersonListPanel();
             resultDisplay = mainGui.getResultDisplay();
             commandBox = mainGui.getCommandBox();
             browserPanel = mainGui.getBrowserPanel();
@@ -86,9 +86,9 @@ public abstract class ToDoListGuiTest {
      * Override this in child classes to set the initial local data.
      * Return null to use the data in the file specified in {@link #getDataFileLocation()}
      */
-    protected ToDoList getInitialData() {
-        ToDoList ab = new ToDoList();
-        TypicalTestTasks.loadToDoListWithSampleData(ab);
+    protected AddressBook getInitialData() {
+        AddressBook ab = new AddressBook();
+        TypicalTestPersons.loadAddressBookWithSampleData(ab);
         return ab;
     }
 
@@ -105,18 +105,18 @@ public abstract class ToDoListGuiTest {
     }
 
     /**
-     * Asserts the task shown in the card is same as the given task
+     * Asserts the person shown in the card is same as the given person
      */
-    public void assertMatching(ReadOnlyTask task, TaskCardHandle card) {
-        assertTrue(TestUtil.compareCardAndTask(card, task));
+    public void assertMatching(ReadOnlyPerson person, PersonCardHandle card) {
+        assertTrue(TestUtil.compareCardAndPerson(card, person));
     }
 
     /**
-     * Asserts the size of the task list is equal to the given number.
+     * Asserts the size of the person list is equal to the given number.
      */
     protected void assertListSize(int size) {
-        int numberOfTask = taskListPanel.getNumberOfTask();
-        assertEquals(size, numberOfTask);
+        int numberOfPeople = personListPanel.getNumberOfPeople();
+        assertEquals(size, numberOfPeople);
     }
 
     /**
