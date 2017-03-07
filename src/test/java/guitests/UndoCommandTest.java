@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.toluist.model.Task;
-import seedu.toluist.testutil.TypicalTestTodoLists;
 
 /**
  * Gui tests for delete task command
