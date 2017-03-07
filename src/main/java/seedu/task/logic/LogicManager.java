@@ -1,22 +1,17 @@
-package seedu.address.logic;
+package seedu.task.logic;
 
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.ComponentManager;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.Parser;
-<<<<<<< HEAD:src/main/java/seedu/address/logic/LogicManager.java
-import seedu.address.model.Model;
-import seedu.address.model.person.ReadOnlyTask;
-=======
->>>>>>> 02d6a24595d83597768726a029d5b6a7a4e01285:src/main/java/seedu/task/logic/LogicManager.java
-import seedu.address.storage.Storage;
+import seedu.task.commons.core.ComponentManager;
+import seedu.task.commons.core.LogsCenter;
+import seedu.task.logic.commands.Command;
+import seedu.task.logic.commands.CommandResult;
+import seedu.task.logic.commands.exceptions.CommandException;
+import seedu.task.logic.parser.Parser;
 import seedu.task.model.Model;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.storage.Storage;
 
 /**
  * The main LogicManager of the app.
@@ -41,7 +36,7 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
-    public ObservableList<ReadOnlyTask> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<ReadOnlyTask> getFilteredTaskList() {
+        return model.getFilteredTaskList();
     }
 }

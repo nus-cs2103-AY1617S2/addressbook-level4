@@ -20,40 +20,7 @@ import org.junit.rules.TemporaryFolder;
 
 import com.google.common.eventbus.Subscribe;
 
-<<<<<<< HEAD
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.events.model.TaskManagerChangedEvent;
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
-import seedu.address.commons.events.ui.ShowHelpRequestEvent;
-=======
->>>>>>> 02d6a24595d83597768726a029d5b6a7a4e01285
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.SelectCommand;
-import seedu.address.logic.commands.exceptions.CommandException;
-<<<<<<< HEAD
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyTaskManager;
-import seedu.address.model.person.Location;
-import seedu.address.model.person.Remark;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Task;
-import seedu.address.model.person.Date;
-import seedu.address.model.person.ReadOnlyTask;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
-=======
->>>>>>> 02d6a24595d83597768726a029d5b6a7a4e01285
-import seedu.address.storage.StorageManager;
+
 import seedu.task.model.TaskManager;
 import seedu.task.commons.core.EventsCenter;
 import seedu.task.commons.events.model.TaskManagerChangedEvent;
@@ -61,6 +28,17 @@ import seedu.task.commons.events.ui.JumpToListRequestEvent;
 import seedu.task.commons.events.ui.ShowHelpRequestEvent;
 import seedu.task.logic.Logic;
 import seedu.task.logic.LogicManager;
+import seedu.task.logic.commands.AddCommand;
+import seedu.task.logic.commands.ClearCommand;
+import seedu.task.logic.commands.Command;
+import seedu.task.logic.commands.CommandResult;
+import seedu.task.logic.commands.DeleteCommand;
+import seedu.task.logic.commands.ExitCommand;
+import seedu.task.logic.commands.FindCommand;
+import seedu.task.logic.commands.HelpCommand;
+import seedu.task.logic.commands.ListCommand;
+import seedu.task.logic.commands.SelectCommand;
+import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.Model;
 import seedu.task.model.ModelManager;
 import seedu.task.model.ReadOnlyTaskManager;
@@ -72,6 +50,7 @@ import seedu.task.model.task.Name;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Remark;
 import seedu.task.model.task.Task;
+import seedu.task.storage.StorageManager;
 
 
 public class LogicManagerTest {
@@ -92,11 +71,7 @@ public class LogicManagerTest {
 
     @Subscribe
     private void handleLocalModelChangedEvent(TaskManagerChangedEvent abce) {
-<<<<<<< HEAD
-        latestSavedAddressBook = new AddressBook(abce.data);
-=======
         latestSavedAddressBook = new TaskManager(abce.data);
->>>>>>> 02d6a24595d83597768726a029d5b6a7a4e01285
     }
 
     @Subscribe
@@ -117,7 +92,7 @@ public class LogicManagerTest {
         logic = new LogicManager(model, new StorageManager(tempAddressBookFile, tempPreferencesFile));
         EventsCenter.getInstance().registerHandler(this);
 
-        latestSavedAddressBook = new TaskManager(model.getAddressBook()); // last saved assumed to be up to date
+        latestSavedAddressBook = new TaskManager(model.getTaskManager()); // last saved assumed to be up to date
         helpShown = false;
         targetedJumpIndex = -1; // non yet
     }
@@ -150,13 +125,9 @@ public class LogicManagerTest {
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager, List)
      */
     private void assertCommandFailure(String inputCommand, String expectedMessage) {
-<<<<<<< HEAD
-        AddressBook expectedAddressBook = new AddressBook(model.getAddressBook());
-        List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredPersonList());
-=======
-        TaskManager expectedAddressBook = new TaskManager(model.getAddressBook());
+
+        TaskManager expectedAddressBook = new TaskManager(model.getTaskManager());
         List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredTaskList());
->>>>>>> 02d6a24595d83597768726a029d5b6a7a4e01285
         assertCommandBehavior(true, inputCommand, expectedMessage, expectedAddressBook, expectedShownList);
     }
 
@@ -185,7 +156,7 @@ public class LogicManagerTest {
         assertEquals(expectedShownList, model.getFilteredTaskList());
 
         //Confirm the state of data (saved and in-memory) is as expected
-        assertEquals(expectedAddressBook, model.getAddressBook());
+        assertEquals(expectedAddressBook, model.getTaskManager());
         assertEquals(expectedAddressBook, latestSavedAddressBook);
     }
 
@@ -210,9 +181,9 @@ public class LogicManagerTest {
     @Test
     public void execute_clear() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        model.addPerson(helper.generatePerson(1));
-        model.addPerson(helper.generatePerson(2));
-        model.addPerson(helper.generatePerson(3));
+        model.addTask(helper.generatePerson(1));
+        model.addTask(helper.generatePerson(2));
+        model.addTask(helper.generatePerson(3));
 
         assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
     }
@@ -232,9 +203,9 @@ public class LogicManagerTest {
         assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
                 Name.MESSAGE_NAME_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
-                Date.MESSAGE_PHONE_CONSTRAINTS);
+                Date.MESSAGE_DATE_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
-                Remark.MESSAGE_EMAIL_CONSTRAINTS);
+                Remark.MESSAGE_REMARK_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
@@ -246,7 +217,7 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.adam();
         TaskManager expectedAB = new TaskManager();
-        expectedAB.addPerson(toBeAdded);
+        expectedAB.addTask(toBeAdded);
 
         // execute command and verify result
         assertCommandSuccess(helper.generateAddCommand(toBeAdded),
@@ -263,10 +234,10 @@ public class LogicManagerTest {
         Task toBeAdded = helper.adam();
 
         // setup starting state
-        model.addPerson(toBeAdded); // person already in internal address book
+        model.addTask(toBeAdded); // person already in internal address book
 
         // execute command and verify result
-        assertCommandFailure(helper.generateAddCommand(toBeAdded),  AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(helper.generateAddCommand(toBeAdded),  AddCommand.MESSAGE_DUPLICATE_TASK);
 
     }
 
@@ -275,13 +246,8 @@ public class LogicManagerTest {
     public void execute_list_showsAllPersons() throws Exception {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
-<<<<<<< HEAD
-        AddressBook expectedAB = helper.generateAddressBook(2);
-        List<? extends ReadOnlyTask> expectedList = expectedAB.getTaskList();
-=======
         TaskManager expectedAB = helper.generateAddressBook(2);
-        List<? extends ReadOnlyTask> expectedList = expectedAB.getPersonList();
->>>>>>> 02d6a24595d83597768726a029d5b6a7a4e01285
+        List<? extends ReadOnlyTask> expectedList = expectedAB.getTaskList();
 
         // prepare address book state
         helper.addToModel(model, 2);
@@ -315,14 +281,14 @@ public class LogicManagerTest {
      *                    based on visible index.
      */
     private void assertIndexNotFoundBehaviorForCommand(String commandWord) throws Exception {
-        String expectedMessage = MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+        String expectedMessage = MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
         TestDataHelper helper = new TestDataHelper();
         List<Task> personList = helper.generatePersonList(2);
 
         // set AB state to 2 persons
         model.resetData(new TaskManager());
         for (Task p : personList) {
-            model.addPerson(p);
+            model.addTask(p);
         }
 
         assertCommandFailure(commandWord + " 3", expectedMessage);
@@ -348,7 +314,7 @@ public class LogicManagerTest {
         helper.addToModel(model, threePersons);
 
         assertCommandSuccess("select 2",
-                String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, 2),
+                String.format(SelectCommand.MESSAGE_SELECT_TASK_SUCCESS, 2),
                 expectedAB,
                 expectedAB.getTaskList());
         assertEquals(1, targetedJumpIndex);
@@ -373,7 +339,7 @@ public class LogicManagerTest {
         List<Task> threePersons = helper.generatePersonList(3);
 
         TaskManager expectedAB = helper.generateAddressBook(threePersons);
-        expectedAB.removePerson(threePersons.get(1));
+        expectedAB.removeTask(threePersons.get(1));
         helper.addToModel(model, threePersons);
 
         assertCommandSuccess("delete 2",
@@ -403,7 +369,7 @@ public class LogicManagerTest {
         helper.addToModel(model, fourPersons);
 
         assertCommandSuccess("find KEY",
-                Command.getMessageForPersonListShownSummary(expectedList.size()),
+                Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
     }
@@ -422,7 +388,7 @@ public class LogicManagerTest {
         helper.addToModel(model, fourPersons);
 
         assertCommandSuccess("find KEY",
-                Command.getMessageForPersonListShownSummary(expectedList.size()),
+                Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
     }
@@ -441,7 +407,7 @@ public class LogicManagerTest {
         helper.addToModel(model, fourPersons);
 
         assertCommandSuccess("find key rAnDoM",
-                Command.getMessageForPersonListShownSummary(expectedList.size()),
+                Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
     }
@@ -530,7 +496,7 @@ public class LogicManagerTest {
          */
         void addToAddressBook(TaskManager addressBook, List<Task> personsToAdd) throws Exception {
             for (Task p: personsToAdd) {
-                addressBook.addPerson(p);
+                addressBook.addTask(p);
             }
         }
 
@@ -547,7 +513,7 @@ public class LogicManagerTest {
          */
         void addToModel(Model model, List<Task> personsToAdd) throws Exception {
             for (Task p: personsToAdd) {
-                model.addPerson(p);
+                model.addTask(p);
             }
         }
 

@@ -1,17 +1,5 @@
 package seedu.task.model.util;
 
-<<<<<<< HEAD:src/main/java/seedu/address/model/util/SampleDataUtil.java
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyTaskManager;
-import seedu.address.model.person.Location;
-import seedu.address.model.person.Remark;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Task;
-import seedu.address.model.person.Date;
-import seedu.address.model.person.UniquePersonList.DuplicatePersonException;
-import seedu.address.model.tag.UniqueTagList;
-=======
 import seedu.task.model.TaskManager;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.ReadOnlyTaskManager;
@@ -22,7 +10,6 @@ import seedu.task.model.task.Name;
 import seedu.task.model.task.Remark;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
->>>>>>> 02d6a24595d83597768726a029d5b6a7a4e01285:src/main/java/seedu/task/model/util/SampleDataUtil.java
 
 public class SampleDataUtil {
     public static Task[] getSampleTasks() {
@@ -52,11 +39,7 @@ public class SampleDataUtil {
         }
     }
 
-<<<<<<< HEAD:src/main/java/seedu/address/model/util/SampleDataUtil.java
-    public static ReadOnlyTaskManager getSampleAddressBook() {
-=======
     public static ReadOnlyTaskManager getSampleTaskManager() {
->>>>>>> 02d6a24595d83597768726a029d5b6a7a4e01285:src/main/java/seedu/task/model/util/SampleDataUtil.java
         try {
             TaskManager sampleAB = new TaskManager();
             for (Task sampleTask : getSampleTasks()) {

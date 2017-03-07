@@ -6,10 +6,10 @@ import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import org.junit.Test;
 
 import guitests.guihandles.PersonCardHandle;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TestPerson;
 import seedu.task.commons.core.Messages;
+import seedu.task.logic.commands.EditCommand;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.task.Date;
 import seedu.task.model.task.Location;
@@ -79,7 +79,7 @@ public class EditCommandTest extends AddressBookGuiTest {
     @Test
     public void edit_invalidPersonIndex_failure() {
         commandBox.runCommand("edit 8 Bobby");
-        assertResultMessage(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     @Test
@@ -94,13 +94,13 @@ public class EditCommandTest extends AddressBookGuiTest {
         assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 p/abcd");
-        assertResultMessage(Date.MESSAGE_PHONE_CONSTRAINTS);
+        assertResultMessage(Date.MESSAGE_DATE_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 e/yahoo!!!");
-        assertResultMessage(Remark.MESSAGE_EMAIL_CONSTRAINTS);
+        assertResultMessage(Remark.MESSAGE_REMARK_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 a/");
-        assertResultMessage(Location.MESSAGE_ADDRESS_CONSTRAINTS);
+        assertResultMessage(Location.MESSAGE_LOCATION_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 t/*&");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
@@ -110,7 +110,7 @@ public class EditCommandTest extends AddressBookGuiTest {
     public void edit_duplicatePerson_failure() {
         commandBox.runCommand("edit 3 Alice Pauline p/85355255 e/alice@gmail.com "
                                 + "a/123, Jurong West Ave 6, #08-111 t/friends");
-        assertResultMessage(EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
     /**
@@ -133,6 +133,6 @@ public class EditCommandTest extends AddressBookGuiTest {
         // confirm the list now contains all previous persons plus the person with updated details
         expectedPersonsList[addressBookIndex - 1] = editedPerson;
         assertTrue(personListPanel.isListMatching(expectedPersonsList));
-        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedPerson));
     }
 }
