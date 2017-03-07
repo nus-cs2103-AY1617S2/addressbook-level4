@@ -13,7 +13,7 @@ import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 
 //@@author A0140042A
 /**
- * Edits a label in all tasks that exists in AddressBook
+ * Edits a label in all tasks that exists in task manager
  */
 public class DeleteLabelCommand extends Command {
 

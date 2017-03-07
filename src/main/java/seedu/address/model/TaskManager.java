@@ -41,7 +41,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     public TaskManager() {}
 
     /**
-     * Creates an AddressBook using the Tasks and Labels in the {@code toBeCopied}
+     * Creates an TaskManager using the Tasks and Labels in the {@code toBeCopied}
      */
     public TaskManager(ReadOnlyTaskManager toBeCopied) {
         this();
@@ -64,12 +64,12 @@ public class TaskManager implements ReadOnlyTaskManager {
         try {
             setTasks(newData.getTaskList());
         } catch (UniqueTaskList.DuplicateTaskException e) {
-            assert false : "AddressBooks should not have duplicate persons";
+            assert false : "Task manager should not have duplicate tasks";
         }
         try {
             setLabels(newData.getLabelList());
         } catch (UniqueLabelList.DuplicateLabelException e) {
-            assert false : "AddressBooks should not have duplicate labels";
+            assert false : "Task manager should not have duplicate tasks";
         }
         syncMasterLabelListWith(tasks);
     }

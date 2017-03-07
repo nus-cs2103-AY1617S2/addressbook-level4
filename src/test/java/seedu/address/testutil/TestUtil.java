@@ -50,9 +50,9 @@ public class TestUtil {
      */
     public static final String SANDBOX_FOLDER = FileUtil.getPath("./src/test/data/sandbox/");
 
-    public static final Task[] SAMPLE_PERSON_DATA = getSamplePersonData();
+    public static final Task[] SAMPLE_TASK_DATA = getSampleTaskData();
 
-    public static final Label[] SAMPLE_TAG_DATA = getSampleLabelData();
+    public static final Label[] SAMPLE_LABEL_DATA = getSampleLabelData();
 
     public static void assertThrows(Class<? extends Throwable> expected, Runnable executable) {
         try {
@@ -69,7 +69,7 @@ public class TestUtil {
                 String.format("Expected %s to be thrown, but nothing was thrown.", expected.getName()));
     }
 
-    private static Task[] getSamplePersonData() {
+    private static Task[] getSampleTaskData() {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
@@ -106,7 +106,7 @@ public class TestUtil {
     }
 
     public static List<Task> generateSamplePersonData() {
-        return Arrays.asList(SAMPLE_PERSON_DATA);
+        return Arrays.asList(SAMPLE_TASK_DATA);
     }
 
     /**
@@ -278,10 +278,10 @@ public class TestUtil {
     }
 
     /**
-     * Removes a subset from the list of persons.
-     * @param tasks The list of persons
-     * @param tasksToRemove The subset of persons.
-     * @return The modified persons after removal of the subset from persons.
+     * Removes a subset from the list of tasks.
+     * @param tasks The list of tasks
+     * @param tasksToRemove The subset of tasks.
+     * @return The modified tasks after removal of the subset from tasks.
      */
     public static TestTask[] removeTasksFromList(final TestTask[] tasks, TestTask... tasksToRemove) {
         List<TestTask> listOfTasks = asList(tasks);
@@ -300,10 +300,10 @@ public class TestUtil {
     }
 
     /**
-     * Replaces persons[i] with a person.
-     * @param tasks The array of persons.
-     * @param task The replacement person
-     * @param index The index of the person to be replaced.
+     * Replaces tasks[i] with a task.
+     * @param tasks The array of tasks.
+     * @param task The replacement tasks
+     * @param index The index of the tasks to be replaced.
      * @return
      */
     public static TestTask[] replaceTaskFromList(TestTask[] tasks, TestTask task, int index) {
@@ -312,10 +312,10 @@ public class TestUtil {
     }
 
     /**
-     * Appends persons to the array of persons.
-     * @param tasks A array of persons.
-     * @param tasksToAdd The persons that are to be appended behind the original array.
-     * @return The modified array of persons.
+     * Appends persons to the array of tasks.
+     * @param tasks A array of tasks.
+     * @param tasksToAdd The tasks that are to be appended behind the original array.
+     * @return The modified array of tasks.
      */
     public static TestTask[] addTasksToList(final TestTask[] tasks, TestTask... tasksToAdd) {
         List<TestTask> listOfTasks = asList(tasks);

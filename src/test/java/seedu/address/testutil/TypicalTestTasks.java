@@ -8,11 +8,11 @@ import seedu.address.model.task.UniqueTaskList;
 /**
  *
  */
-public class TypicalTestPersons {
+public class TypicalTestTasks {
 
     public TestTask task1, task2, task3, task4, task5, task6, task7, task8, task9;
 
-    public TypicalTestPersons() {
+    public TypicalTestTasks() {
         try {
             task1 = new TaskBuilder().withTitle("Complete task 1")
                     .withDeadline("11-11-2017").withLabels("friends").build();
@@ -34,7 +34,7 @@ public class TypicalTestPersons {
     }
 
     public static void loadAddressBookWithSampleData(TaskManager ab) {
-        for (TestTask person : new TypicalTestPersons().getTypicalTasks()) {
+        for (TestTask person : new TypicalTestTasks().getTypicalTasks()) {
             try {
                 ab.addTask(new Task(person));
             } catch (UniqueTaskList.DuplicateTaskException e) {

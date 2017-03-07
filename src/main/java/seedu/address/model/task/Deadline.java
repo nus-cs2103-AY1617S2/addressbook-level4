@@ -6,40 +6,46 @@ import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
  * Represents a Task's deadline in the task manager.
- * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidDeadline(String)}
  */
 public class Deadline {
 
-    public static final String MESSAGE_DATE_CONSTRAINTS =
-            "Date should be entered as DD-MM-YYYY";
+    public static final String MESSAGE_DEADLINE_CONSTRAINTS =
+            "Deadline can have zero or more characters";
 
     /*
      * The deadline must have at least one visible character
+     * TODO: change regex once deadline can be translated to a date
      */
-    public static final String DATE_VALIDATION_REGEX = "\\p{Graph}++";
+    public static final String DEADLINE_VALIDATION_REGEX = ".*";
 
+    //TODO: change from String to Date
     public String value;
 
     /**
-     * Validates given date.
+     * Validates given deadline.
      *
-     * @throws IllegalValueException if given date string is invalid.
+     * @throws IllegalValueException if given deadline string is invalid.
      */
-    public Deadline(String date) throws IllegalValueException {
-        assert date != null;
-        this.value = date;
+    public Deadline(String deadline) throws IllegalValueException {
+        assert deadline != null;
+        String trimmedDeadline = deadline.trim();
+        if (!isValidDeadline(trimmedDeadline)) {
+            throw new IllegalValueException(MESSAGE_DEADLINE_CONSTRAINTS);
+        }
+        this.value = deadline;
     }
 
     /**
-     * Returns true if a given string is a valid date.
+     * Returns true if a given string is a valid deadline.
      */
-    public static boolean isValidDate(String test) {
-        return test.matches(DATE_VALIDATION_REGEX);
+    public static boolean isValidDeadline(String test) {
+        return test.matches(DEADLINE_VALIDATION_REGEX);
     }
 
     @Override
     public String toString() {
-        return value.toString();
+        return value;
     }
 
     @Override

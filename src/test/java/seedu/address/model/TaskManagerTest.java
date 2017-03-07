@@ -17,7 +17,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.label.Label;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
-import seedu.address.testutil.TypicalTestPersons;
+import seedu.address.testutil.TypicalTestTasks;
 
 public class TaskManagerTest {
 
@@ -40,14 +40,14 @@ public class TaskManagerTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        TaskManager newData = new TypicalTestPersons().getTypicalAddressBook();
+        TaskManager newData = new TypicalTestTasks().getTypicalAddressBook();
         taskManager.resetData(newData);
         assertEquals(newData, taskManager);
     }
 
     @Test
     public void resetData_withDuplicatePersons_throwsAssertionError() {
-        TypicalTestPersons td = new TypicalTestPersons();
+        TypicalTestTasks td = new TypicalTestTasks();
         // Repeat td.alice twice
         List<Task> newPersons = Arrays.asList(new Task(td.task1), new Task(td.task1));
         List<Label> newLabels = td.task1.getLabels().asObservableList();
@@ -59,7 +59,7 @@ public class TaskManagerTest {
 
     @Test
     public void resetData_withDuplicateLabels_throwsAssertionError() {
-        TaskManager typicalAddressBook = new TypicalTestPersons().getTypicalAddressBook();
+        TaskManager typicalAddressBook = new TypicalTestTasks().getTypicalAddressBook();
         List<ReadOnlyTask> newPersons = typicalAddressBook.getTaskList();
         List<Label> newLabels = new ArrayList<>(typicalAddressBook.getLabelList());
         // Repeat the first label twice
