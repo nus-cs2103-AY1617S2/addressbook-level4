@@ -4,9 +4,10 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Clement](http://www.comp.nus.edu.sg/clementtan) <br>
-<img src="CLEMENT IMAGE" width="150"><br>
-**Role**: 
+#### [Clement Tan](https://github.com/clementtan) <br>
+<img src="images/clementtan.png" width="150"><br>
+Role:  <br>
+Responsibilities: 
 
 -----
 
