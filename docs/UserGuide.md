@@ -24,11 +24,11 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
-   * **`list`** : lists all tasks
-   * **`add`**` Get groceries d/Get the milk` :
-     adds a task named `Get groceries` to the task Book.
-   * **`delete`**` 3` : deletes the 3rd task shown in the current list
-   * **`exit`** : exits the app
+   * **`list`** : Lists all tasks
+   * **`add`**` : Walk the dog d/Take Zelda on a walk around the park s/01/01/2017 1000 e/01/01/2017 1200 t/Important` <br>
+     Adds a task named `Walk the dog` into taskBook.
+   * **`delete`**` 3` : Deletes the 3rd task shown in the current list
+   * **`exit`** : Exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
 
@@ -50,11 +50,12 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Adds a task to the task book<br>
-Format: `add TASK_NAME d/DESCRIPTION sd/START_DATETIME ed/END_DATETIME`
+Date and time must be formatted as DD/MM/YYYY HHMM<br>
+Format: `add NAME d/DESCRIPTION s/START_DATETIME e/END_DATETIME [t/TAG]`
 
 Examples:
 
-* `add Get the groceries d/Specifically the milk et/01-MAR-2016`
+* `Walk the dog d/Take Zelda on a walk around the park s/01/01/2017 1000 e/01/01/2017 1200 t/Important`
 
 ### 2.3. Listing all tasks : `list`
 
@@ -64,7 +65,7 @@ Format: `list`
 ### 2.4. Editing a task : `edit`
 
 Edits a task in the task book.<br>
-Format: `edit INDEX [NAME] [p/PHONE] [e/EMAIL] [a/task] [t/TAG]...`
+Format: `edit INDEX [NAME] [d/DESCRIPTION] [s/START_DATETIME] [e/END_DATETIME] [t/TAG]...`
 
 > * Edits the task at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
@@ -168,8 +169,8 @@ There is no need to save manually.
 
 ## 4. Command Summary
 
-* **Add**  `add TASK_NAME d/DESCRIPTION sd/START_DATETIME ed/END_DATETIME` <br>
-  e.g. `add Get groceries d/Get the milk`
+* **Add**  `add NAME d/DESCRIPTION s/START_DATETIME e/END_DATETIME [t/TAG]` <br>
+  e.g. `Walk the dog d/Take Zelda on a walk around the park s/01/01/2017 1000 e/01/01/2017 1200 t/Important`
 
 * **Clear** : `clear`
 

@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.JsonUtil;
-import seedu.address.model.UserPrefs;
+import seedu.task.model.UserPrefs;
 
 /**
  * A class to access UserPrefs stored in the hard disk as a json file

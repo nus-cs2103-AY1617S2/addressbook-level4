@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.UserPrefs;
+import seedu.task.model.UserPrefs;
 
 /**
- * Represents a storage for {@link seedu.address.model.UserPrefs}.
+ * Represents a storage for {@link seedu.task.model.UserPrefs}.
  */
 public interface UserPrefsStorage {
 
@@ -20,7 +20,7 @@ public interface UserPrefsStorage {
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
 
     /**
-     * Saves the given {@link seedu.address.model.UserPrefs} to the storage.
+     * Saves the given {@link seedu.task.model.UserPrefs} to the storage.
      * @param userPrefs cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
