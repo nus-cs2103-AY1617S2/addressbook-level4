@@ -43,8 +43,10 @@ public class EditCommandParser {
             editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
             editTaskDescriptor.setPriorityLevel(ParserUtil.
                     parsePriorityLevel(argsTokenizer.getValue(PREFIX_PRIORITY)));
-            editTaskDescriptor.setInformation(ParserUtil.parseInformation(argsTokenizer.getValue(PREFIX_INFORMATION)));
-            editTaskDescriptor.setCategories(parseCategoriesForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_CATEGORY))));
+            editTaskDescriptor.setInformation(ParserUtil.parseInformation
+                    (argsTokenizer.getValue(PREFIX_INFORMATION)));
+            editTaskDescriptor.setCategories(parseCategoriesForEdit
+                    (ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_CATEGORY))));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
