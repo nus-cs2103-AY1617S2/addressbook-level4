@@ -9,7 +9,7 @@ import seedu.task.model.task.ReadOnlyTask;
 
 public class TaskCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "TaskListCard.fxml";
 
     @FXML
     private HBox cardPane;
@@ -18,25 +18,25 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label date;
     @FXML
-    private Label address;
+    private Label loc;
     @FXML
-    private Label email;
+    private Label remark;
     @FXML
     private FlowPane tags;
 
-    public TaskCard(ReadOnlyTask person, int displayedIndex) {
+    public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
-        name.setText(person.getName().fullName);
+        name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
-        phone.setText(person.getDate().value);
-        address.setText(person.getLocation().value);
-        email.setText(person.getRemark().value);
-        initTags(person);
+        date.setText(task.getDate().value);
+        loc.setText(task.getLocation().value);
+        remark.setText(task.getRemark().value);
+        initTags(task);
     }
 
-    private void initTags(ReadOnlyTask person) {
-        person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    private void initTags(ReadOnlyTask task) {
+        task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }

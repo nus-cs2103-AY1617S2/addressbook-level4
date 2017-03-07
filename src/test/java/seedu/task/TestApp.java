@@ -11,10 +11,6 @@ import seedu.task.model.UserPrefs;
 import seedu.task.storage.XmlSerializableTaskManager;
 import seedu.address.testutil.TestUtil;
 import seedu.task.MainApp;
-import seedu.task.commons.core.Config;
-import seedu.task.commons.core.GuiSettings;
-import seedu.task.model.ReadOnlyTaskManager;
-import seedu.task.model.UserPrefs;
 
 /**
  * This class is meant to override some properties of MainApp so that it will be suited for
