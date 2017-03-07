@@ -469,6 +469,112 @@ Use case ends.
 > 2a1. DoTomorrow shows an error message indicating the user's error
 > Use case resumes at step 1
 
+#### Use case: Set task completed
+
+**MSS**
+
+1. User requests to list all tasks
+2. DoTomorrow shows a list of tasks
+3. User requests to set a task completed
+4. DoTomorrow confirms the action
+5. DoTomorrow set the task as completed <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given index is invalid
+
+> 3a1. DoTomorrow shows an error message <br>
+  Use case resumes at step 2
+  
+4a. User cancelled to confirm the request
+
+> Use case ends
+
+        
+        
+#### Use case: Edit task parameters
+
+**MSS**
+
+1. User requests to list all tasks
+2. DoTomorrow shows a list of tasks
+3. User requests to edit a parameter
+4. DoTomorrow edits the parameter of the task <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given index is invalid
+
+> 3a1. DoTomorrow shows an error message <br>
+  Use case resumes at step 2
+  
+4a. The task doesn't have the parameter to edit
+
+> DoTomorrow shows a message indicating the parameter doesn't exist and confirm creation of the parameter<br>
+  >4a1. User confirms to create the parameter<br>
+        DoTomorrow creates the parameter and edit it<br>   
+   4a2. User declined to create the parameter<br>
+        Use case ends
+
+
+#### Use case: Set task importance
+
+**MSS**
+
+1. User requests to list all tasks
+2. DoTomorrow shows a list of tasks
+3. User requests to set a specific task important/unimportant
+4. DoTomorrow changes the importance of task 
+5. DoTomorrow reset the list of impotant tasks <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given index is invalid
+
+> 3a1. DoTomorrow shows an error message <br>
+  Use case resumes at step 2
+  
+4a. The task has already of the same importance as to be set
+
+> DoTomorrow shows a message saying importance has already been set
+
+#### Use case: Specify the duation of task
+
+**MSS**
+
+1. User requests to list all tasks
+2. DoTomorrow shows a list of tasks
+3. User requests to specify the duation of a task in the list
+4. DoTomorrow sets the end time of the task <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given time is invalid
+
+> 3a1. DoTomorrow shows an error message <br>
+  Use case resumes at step 2
+
+
 
 ## Appendix C : Non Functional Requirements
 
