@@ -1,13 +1,29 @@
 package seedu.address.model.task;
 
+import java.util.Objects;
+
 import seedu.address.model.tag.UniqueTagList;
 
-public abstract class Task {
+public class Task {
     
     protected Name name;
     protected Description desc;
     
     protected UniqueTagList tags;
+    
+    
+    public Task(Name name, Description desc, UniqueTagList tags) {
+        this.name = name;
+        this.desc = desc;
+        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+    }
+    
+    /**
+     * Creates a copy of the given Task.
+     */
+    public Task(Task source) {
+        this(source.getName(), source.getDescription(), source.getTags());
+    }
     
     public void setName(Name name) {
         assert name != null;
@@ -43,6 +59,23 @@ public abstract class Task {
     }
     
     /**
+     * Updates this task with the details of {@code replacement}.
+     */
+    public void resetData(Task replacement) {
+        assert replacement != null;
+
+        this.setName(replacement.getName());
+        this.setDescription(replacement.getDescription());
+        this.setTags(replacement.getTags());
+    }
+    
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Task // instanceof handles nulls
+                && this.isSameStateAs((Task) other));
+    }
+    
+    /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
      */
     public boolean isSameStateAs(Task other) {
@@ -52,6 +85,16 @@ public abstract class Task {
                 && other.getDescription().equals(this.getDescription()));
     }
 
+    @Override
+    public int hashCode() {
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(name, desc, tags);
+    }
+    
+    public String toString() {
+        return getAsText();
+    }
+    
     /**
      * Formats the person as text, showing all contact details.
      */

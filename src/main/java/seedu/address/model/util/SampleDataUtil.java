@@ -6,7 +6,6 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.task.Description;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.FloatingTask;
 import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -14,11 +13,11 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         try {
             return new Task[] {
-                new FloatingTask(new Name("HW"), new Description("finish HW"),
+                new Task(new Name("HW"), new Description("finish HW"),
                     new UniqueTagList("school")),
-                new FloatingTask(new Name("Meet with friend"), new Description("Get lunch with Jim"),
+                new Task(new Name("Meet with friend"), new Description("Get lunch with Jim"),
                     new UniqueTagList("leisure", "friends")),
-                new FloatingTask(new Name("clean room"), new Description("take out trash, dust, mop, laundry"),
+                new Task(new Name("clean room"), new Description("take out trash, dust, mop, laundry"),
                     new UniqueTagList("household"))
             };
         } catch (IllegalValueException e) {

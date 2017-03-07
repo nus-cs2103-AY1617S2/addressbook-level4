@@ -11,7 +11,6 @@ import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.FloatingTask;
 
 /**
  * Adds a person to the address book.
@@ -42,7 +41,7 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        this.toAdd = new FloatingTask(
+        this.toAdd = new Task(
                 new Name(name),
                 new Description(desc),
                 new UniqueTagList(tagSet)

@@ -8,7 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.DuplicateDataException;
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.model.task.FloatingTask;
+import seedu.address.model.task.Task;
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
@@ -86,7 +86,7 @@ public class UniqueTaskList implements Iterable<Task> {
     public void setTasks(List<? extends Task> tasks) throws DuplicateTaskException {
         final UniqueTaskList replacement = new UniqueTaskList();
         for (final Task task : tasks) {
-            replacement.add(new FloatingTask(task));
+            replacement.add(new Task(task));
         }
         setTasks(replacement);
     }
