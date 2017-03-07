@@ -36,7 +36,7 @@ public class Task implements ReadOnlyTask {
         // Optional parameters
         // ID tends to be set after Task creation,
         // so it is also included in optional params
-        for(Object param : params) {
+        for (Object param : params) {
             if (param instanceof Description) {
                 this.description = (Description) param;
 

@@ -19,7 +19,7 @@ public class TaskList implements Iterable<Task> {
 
     /** Get the task with given ID */
     public Optional<Task> getTaskByID(IdentificationNumber ID) {
-        for(Task task : internalList) {
+        for (Task task : internalList) {
             if (task.getID().equals(ID)) {
                 return Optional.of(task);
             }

@@ -1,8 +1,5 @@
 package seedu.address.model.task;
 
-import java.lang.Math;
-import java.lang.NumberFormatException;
-
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
