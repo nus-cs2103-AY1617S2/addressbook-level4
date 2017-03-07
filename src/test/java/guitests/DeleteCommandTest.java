@@ -5,8 +5,8 @@ import static seedu.onetwodo.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SU
 
 import org.junit.Test;
 
-import seedu.address.testutil.TestTask;
-import seedu.address.testutil.TestUtil;
+import seedu.onetwodo.testutil.TestTask;
+import seedu.onetwodo.testutil.TestUtil;
 
 public class DeleteCommandTest extends ToDoListGuiTest {
 

@@ -5,10 +5,10 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
-import seedu.address.testutil.TestTask;
-import seedu.address.testutil.TestUtil;
 import seedu.onetwodo.commons.core.Messages;
 import seedu.onetwodo.logic.commands.AddCommand;
+import seedu.onetwodo.testutil.TestTask;
+import seedu.onetwodo.testutil.TestUtil;
 
 public class AddCommandTest extends ToDoListGuiTest {
 

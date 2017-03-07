@@ -6,8 +6,6 @@ import static seedu.onetwodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMA
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
-import seedu.address.testutil.TaskBuilder;
-import seedu.address.testutil.TestTask;
 import seedu.onetwodo.commons.core.Messages;
 import seedu.onetwodo.logic.commands.EditCommand;
 import seedu.onetwodo.model.person.Date;
@@ -15,6 +13,8 @@ import seedu.onetwodo.model.person.Description;
 import seedu.onetwodo.model.person.Name;
 import seedu.onetwodo.model.person.Time;
 import seedu.onetwodo.model.tag.Tag;
+import seedu.onetwodo.testutil.TaskBuilder;
+import seedu.onetwodo.testutil.TestTask;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
 public class EditCommandTest extends ToDoListGuiTest {
