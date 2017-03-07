@@ -62,7 +62,7 @@ public class EditCommand extends Command {
 
         try {
             model.updatePerson(filteredPersonListIndex, editedTask);
-        } catch (UniqueTaskList.DuplicatePersonException dpe) {
+        } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
         model.updateFilteredListToShowAll();

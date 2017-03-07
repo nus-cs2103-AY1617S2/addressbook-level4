@@ -15,7 +15,7 @@ import seedu.geekeep.model.tag.UniqueTagList;
 import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.UniqueTaskList;
-import seedu.geekeep.model.task.UniqueTaskList.DuplicatePersonException;
+import seedu.geekeep.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
  * Wraps all data at the address-book level Duplicates are not allowed (by .equals comparison)
@@ -54,10 +54,10 @@ public class TaskManager implements ReadOnlyTaskManager {
      * Adds a person to the address book. Also checks the new person's tags and updates {@link #tags} with any new tags
      * found, and updates the Tag objects in the person to point to those in {@link #tags}.
      *
-     * @throws UniqueTaskList.DuplicatePersonException
+     * @throws UniqueTaskList.DuplicateTaskException
      *             if an equivalent person already exists.
      */
-    public void addTask(Task p) throws UniqueTaskList.DuplicatePersonException {
+    public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
         syncMasterTagListWith(p);
         persons.add(p);
     }
@@ -92,11 +92,11 @@ public class TaskManager implements ReadOnlyTaskManager {
         return Objects.hash(persons, tags);
     }
 
-    public boolean removePerson(ReadOnlyTask key) throws UniqueTaskList.PersonNotFoundException {
+    public boolean removePerson(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
         if (persons.remove(key)) {
             return true;
         } else {
-            throw new UniqueTaskList.PersonNotFoundException();
+            throw new UniqueTaskList.TaskNotFoundException();
         }
     }
 
@@ -104,7 +104,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         assert newData != null;
         try {
             setPersons(newData.getPersonList());
-        } catch (UniqueTaskList.DuplicatePersonException e) {
+        } catch (UniqueTaskList.DuplicateTaskException e) {
             assert false : "AddressBooks should not have duplicate persons";
         }
         try {
@@ -117,7 +117,7 @@ public class TaskManager implements ReadOnlyTaskManager {
 
     //// tag-level operations
 
-    public void setPersons(List<? extends ReadOnlyTask> persons) throws UniqueTaskList.DuplicatePersonException {
+    public void setPersons(List<? extends ReadOnlyTask> persons) throws UniqueTaskList.DuplicateTaskException {
         this.persons.setPersons(persons);
     }
 
@@ -168,14 +168,14 @@ public class TaskManager implements ReadOnlyTaskManager {
      *
      * @see #syncMasterTagListWith(Task)
      *
-     * @throws DuplicatePersonException
+     * @throws DuplicateTaskException
      *             if updating the person's details causes the person to be equivalent to another existing person in the
      *             list.
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
      */
     public void updateTask(int index, ReadOnlyTask editedReadOnlyTask)
-            throws UniqueTaskList.DuplicatePersonException {
+            throws UniqueTaskList.DuplicateTaskException {
         assert editedReadOnlyTask != null;
 
         Task editedTask = new Task(editedReadOnlyTask);
@@ -183,6 +183,6 @@ public class TaskManager implements ReadOnlyTaskManager {
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any person
         // in the person list.
-        persons.updatePerson(index, editedTask);
+        persons.updateTask(index, editedTask);
     }
 }

@@ -9,7 +9,7 @@ import seedu.geekeep.model.task.StartDateTime;
 import seedu.geekeep.model.task.EndDateTime;
 import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.Title;
-import seedu.geekeep.model.task.UniqueTaskList.DuplicatePersonException;
+import seedu.geekeep.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
     public static Task[] getSampleTasks() {
@@ -46,7 +46,7 @@ public class SampleDataUtil {
                 sampleAB.addTask(sampleTask);
             }
             return sampleAB;
-        } catch (DuplicatePersonException e) {
+        } catch (DuplicateTaskException e) {
             throw new AssertionError("sample data cannot contain duplicate persons", e);
         }
     }

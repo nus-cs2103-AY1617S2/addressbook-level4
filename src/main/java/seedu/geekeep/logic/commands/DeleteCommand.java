@@ -4,7 +4,7 @@ import seedu.geekeep.commons.core.Messages;
 import seedu.geekeep.commons.core.UnmodifiableObservableList;
 import seedu.geekeep.logic.commands.exceptions.CommandException;
 import seedu.geekeep.model.task.ReadOnlyTask;
-import seedu.geekeep.model.task.UniqueTaskList.PersonNotFoundException;
+import seedu.geekeep.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Deletes a person identified using it's last displayed index from the address book.
@@ -40,7 +40,7 @@ public class DeleteCommand extends Command {
 
         try {
             model.deletePerson(personToDelete);
-        } catch (PersonNotFoundException pnfe) {
+        } catch (TaskNotFoundException pnfe) {
             assert false : "The target person cannot be missing";
         }
 
