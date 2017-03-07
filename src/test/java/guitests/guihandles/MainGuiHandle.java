@@ -2,7 +2,7 @@ package guitests.guihandles;
 
 import guitests.GuiRobot;
 import javafx.stage.Stage;
-import seedu.address.TestApp;
+import t16b4.yats.TestApp;
 
 /**
  * Provides a handle for the main GUI.
