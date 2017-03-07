@@ -8,8 +8,8 @@ import seedu.address.commons.exceptions.IllegalValueException;
  */
 public class Priority {
 
-    public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority should only contain numbers";
-    public static final String PRIORITY_VALIDATION_REGEX = "\\d+";
+    public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority can take any values, and it should not be blank";
+    public static final String PRIORITY_VALIDATION_REGEX = ".*";
 
     public final String value;
 
