@@ -1,11 +1,13 @@
-package seedu.address.model.person;
+package seedu.task.model.task;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-public class PhoneTest {
+import seedu.task.model.task.Date;
+
+public class DateTest {
 
     @Test
     public void isValidPhone() {

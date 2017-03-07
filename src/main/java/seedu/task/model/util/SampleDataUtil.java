@@ -1,18 +1,18 @@
-package seedu.address.model.util;
+package seedu.task.model.util;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Location;
-import seedu.address.model.person.Remark;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Task;
-import seedu.address.model.person.Date;
-import seedu.address.model.person.UniquePersonList.DuplicatePersonException;
-import seedu.address.model.tag.UniqueTagList;
+import seedu.task.model.TaskManager;
+import seedu.task.model.ReadOnlyTaskManager;
+import seedu.task.model.tag.UniqueTagList;
+import seedu.task.model.task.Date;
+import seedu.task.model.task.Location;
+import seedu.task.model.task.Name;
+import seedu.task.model.task.Remark;
+import seedu.task.model.task.Task;
+import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
-    public static Task[] getSamplePersons() {
+    public static Task[] getSampleTasks() {
         try {
             return new Task[] {
                 new Task(new Name("Alex Yeoh"), new Date("87438807"), new Remark("alexyeoh@gmail.com"),
@@ -39,15 +39,15 @@ public class SampleDataUtil {
         }
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
+    public static ReadOnlyTaskManager getSampleTaskManager() {
         try {
-            AddressBook sampleAB = new AddressBook();
-            for (Task samplePerson : getSamplePersons()) {
-                sampleAB.addPerson(samplePerson);
+            TaskManager sampleAB = new TaskManager();
+            for (Task sampleTask : getSampleTasks()) {
+                sampleAB.addTask(sampleTask);
             }
             return sampleAB;
-        } catch (DuplicatePersonException e) {
-            throw new AssertionError("sample data cannot contain duplicate persons", e);
+        } catch (DuplicateTaskException e) {
+            throw new AssertionError("sample data cannot contain duplicate tasks", e);
         }
     }
 }
