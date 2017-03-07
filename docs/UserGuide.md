@@ -78,11 +78,11 @@ Format: `edit INDEX [TITLE] [d/DATE] [p/PRIORITY] [i/INSTRUCTION] [t/TAG]...`
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@yahoo.com`<br>
-  Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@yahoo.com` respectively.
+* `edit 1 p/relax d/07032017`<br>
+  Edits the priority and date of the 1st task to be `relax` and `07032017` respectively.
 
-* `edit 2 Betsy Crower t/`<br>
-  Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `edit 2 Drink Coffee t/`<br>
+  Edits the title of the 2nd task to be `Drink Coffee` and clears all existing tags.
 
 ### 2.5. Finding all tasks containing any keyword in their title: `find`
 
@@ -91,15 +91,15 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 > * The search is case sensitive. e.g `hans` will not match `Hans`
 > * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-> * Only the name is searched.
+> * Only the title is searched.
 > * Only full words will be matched e.g. `Han` will not match `Hans`
-> * Persons matching at least one keyword will be returned (i.e. `OR` search).
+> * Tasks matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `Hans` will match `Hans Bo`
 
 Examples:
 
-* `find groceries`<br>
-   Returns `Buy groceries` but not `groceries`
+* `find groceries Buy`<br>
+   Returns `Buy groceries` but not `Groceries`
 * `find buy webcast`<br>
    Returns Any tasks having titles `buy` or `webcast`   
 
@@ -116,10 +116,10 @@ Examples:
 
 * `list`<br>
   `delete 2`<br>
-  Deletes the 2nd person in the address book.
-* `find Betsy`<br>
+  Deletes the 2nd task in the list.
+* `find 2103T`<br>
   `delete 1`<br>
-  Deletes the 1st person in the results of the `find` command.
+  Deletes the 1st task in the results of the `find` command.
 
 ### 2.7. Select a task : `select`
 
@@ -134,10 +134,10 @@ Examples:
 
 * `list`<br>
   `select 2`<br>
-  Selects the 2nd person in the address book.
-* `find Betsy` <br>
+  Selects the 2nd task in the list.
+* `find Eat Chips and Pizza` <br>
   `select 1`<br>
-  Selects the 1st person in the results of the `find` command.
+  Selects the 1st task in the results of the `find` command.
 
 ### 2.8. Clearing all tasks : `clear`
 
@@ -171,13 +171,11 @@ There is no need to save manually.
    e.g. `delete 3`
 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
-  e.g. `find Play basketball Play basketball`
+  e.g. `find Play basketball`
 
 * **List** : `list` <br>
-  e.g.
 
 * **Help** : `help` <br>
-  e.g.
 
 * **Select** : `select INDEX` <br>
   e.g.`select 2`
