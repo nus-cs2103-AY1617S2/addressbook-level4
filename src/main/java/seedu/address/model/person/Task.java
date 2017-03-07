@@ -9,7 +9,7 @@ import seedu.address.model.tag.UniqueTagList;
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated.
  */
-public class Task implements ReadOnlyPerson {
+public class Task implements ReadOnlyTask {
 
     private Name name;
     private Date phone;
@@ -33,8 +33,8 @@ public class Task implements ReadOnlyPerson {
     /**
      * Creates a copy of the given ReadOnlyPerson.
      */
-    public Task(ReadOnlyPerson source) {
-        this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(), source.getTags());
+    public Task(ReadOnlyTask source) {
+        this(source.getName(), source.getDate(), source.getRemark(), source.getLocation(), source.getTags());
     }
 
     public void setName(Name name) {
@@ -53,7 +53,7 @@ public class Task implements ReadOnlyPerson {
     }
 
     @Override
-    public Date getPhone() {
+    public Date getDate() {
         return phone;
     }
 
@@ -63,7 +63,7 @@ public class Task implements ReadOnlyPerson {
     }
 
     @Override
-    public Remark getEmail() {
+    public Remark getRemark() {
         return email;
     }
 
@@ -73,7 +73,7 @@ public class Task implements ReadOnlyPerson {
     }
 
     @Override
-    public Location getAddress() {
+    public Location getLocation() {
         return address;
     }
 
@@ -92,21 +92,21 @@ public class Task implements ReadOnlyPerson {
     /**
      * Updates this person with the details of {@code replacement}.
      */
-    public void resetData(ReadOnlyPerson replacement) {
+    public void resetData(ReadOnlyTask replacement) {
         assert replacement != null;
 
         this.setName(replacement.getName());
-        this.setPhone(replacement.getPhone());
-        this.setEmail(replacement.getEmail());
-        this.setAddress(replacement.getAddress());
+        this.setPhone(replacement.getDate());
+        this.setEmail(replacement.getRemark());
+        this.setAddress(replacement.getLocation());
         this.setTags(replacement.getTags());
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ReadOnlyPerson // instanceof handles nulls
-                && this.isSameStateAs((ReadOnlyPerson) other));
+                || (other instanceof ReadOnlyTask // instanceof handles nulls
+                && this.isSameStateAs((ReadOnlyTask) other));
     }
 
     @Override

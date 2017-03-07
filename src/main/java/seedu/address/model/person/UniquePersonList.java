@@ -24,7 +24,7 @@ public class UniquePersonList implements Iterable<Task> {
     /**
      * Returns true if the list contains an equivalent person as the given argument.
      */
-    public boolean contains(ReadOnlyPerson toCheck) {
+    public boolean contains(ReadOnlyTask toCheck) {
         assert toCheck != null;
         return internalList.contains(toCheck);
     }
@@ -49,7 +49,7 @@ public class UniquePersonList implements Iterable<Task> {
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updatePerson(int index, ReadOnlyPerson editedPerson) throws DuplicatePersonException {
+    public void updatePerson(int index, ReadOnlyTask editedPerson) throws DuplicatePersonException {
         assert editedPerson != null;
 
         Task personToUpdate = internalList.get(index);
@@ -69,7 +69,7 @@ public class UniquePersonList implements Iterable<Task> {
      *
      * @throws PersonNotFoundException if no such person could be found in the list.
      */
-    public boolean remove(ReadOnlyPerson toRemove) throws PersonNotFoundException {
+    public boolean remove(ReadOnlyTask toRemove) throws PersonNotFoundException {
         assert toRemove != null;
         final boolean personFoundAndDeleted = internalList.remove(toRemove);
         if (!personFoundAndDeleted) {
@@ -82,9 +82,9 @@ public class UniquePersonList implements Iterable<Task> {
         this.internalList.setAll(replacement.internalList);
     }
 
-    public void setPersons(List<? extends ReadOnlyPerson> persons) throws DuplicatePersonException {
+    public void setPersons(List<? extends ReadOnlyTask> persons) throws DuplicatePersonException {
         final UniquePersonList replacement = new UniquePersonList();
-        for (final ReadOnlyPerson person : persons) {
+        for (final ReadOnlyTask person : persons) {
             replacement.add(new Task(person));
         }
         setPersons(replacement);

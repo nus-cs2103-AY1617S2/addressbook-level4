@@ -15,7 +15,7 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Task;
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.TypicalTestPersons;
 
@@ -28,7 +28,7 @@ public class AddressBookTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), addressBook.getTaskList());
         assertEquals(Collections.emptyList(), addressBook.getTagList());
     }
 
@@ -60,7 +60,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
         AddressBook typicalAddressBook = new TypicalTestPersons().getTypicalAddressBook();
-        List<ReadOnlyPerson> newPersons = typicalAddressBook.getPersonList();
+        List<ReadOnlyTask> newPersons = typicalAddressBook.getTaskList();
         List<Tag> newTags = new ArrayList<>(typicalAddressBook.getTagList());
         // Repeat the first tag twice
         newTags.add(newTags.get(0));
@@ -73,17 +73,17 @@ public class AddressBookTest {
     /**
      * A stub ReadOnlyAddressBook whose persons and tags lists can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
-        private final ObservableList<ReadOnlyPerson> persons = FXCollections.observableArrayList();
+    private static class AddressBookStub implements ReadOnlyTaskManager {
+        private final ObservableList<ReadOnlyTask> persons = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<? extends ReadOnlyPerson> persons, Collection<? extends Tag> tags) {
+        AddressBookStub(Collection<? extends ReadOnlyTask> persons, Collection<? extends Tag> tags) {
             this.persons.setAll(persons);
             this.tags.setAll(tags);
         }
 
         @Override
-        public ObservableList<ReadOnlyPerson> getPersonList() {
+        public ObservableList<ReadOnlyTask> getTaskList() {
             return persons;
         }
 

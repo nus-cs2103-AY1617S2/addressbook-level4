@@ -6,12 +6,12 @@ import seedu.address.model.tag.UniqueTagList;
  * A read-only immutable interface for a Person in the addressbook.
  * Implementations should guarantee: details are present and not null, field values are validated.
  */
-public interface ReadOnlyPerson {
+public interface ReadOnlyTask {
 
     Name getName();
-    Date getPhone();
-    Remark getEmail();
-    Location getAddress();
+    Date getDate();
+    Remark getRemark();
+    Location getLocation();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -22,13 +22,13 @@ public interface ReadOnlyPerson {
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
      */
-    default boolean isSameStateAs(ReadOnlyPerson other) {
+    default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                 && other.getName().equals(this.getName()) // state checks here onwards
-                && other.getPhone().equals(this.getPhone())
-                && other.getEmail().equals(this.getEmail())
-                && other.getAddress().equals(this.getAddress()));
+                && other.getDate().equals(this.getDate())
+                && other.getRemark().equals(this.getRemark())
+                && other.getLocation().equals(this.getLocation()));
     }
 
     /**
@@ -38,11 +38,11 @@ public interface ReadOnlyPerson {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
                 .append(" Phone: ")
-                .append(getPhone())
+                .append(getDate())
                 .append(" Email: ")
-                .append(getEmail())
+                .append(getRemark())
                 .append(" Address: ")
-                .append(getAddress())
+                .append(getLocation())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

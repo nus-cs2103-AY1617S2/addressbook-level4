@@ -4,13 +4,13 @@ import seedu.address.model.person.Location;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Date;
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
  * A mutable person object. For testing only.
  */
-public class TestPerson implements ReadOnlyPerson {
+public class TestPerson implements ReadOnlyTask {
 
     private Name name;
     private Location address;
@@ -27,9 +27,9 @@ public class TestPerson implements ReadOnlyPerson {
      */
     public TestPerson(TestPerson personToCopy) {
         this.name = personToCopy.getName();
-        this.phone = personToCopy.getPhone();
-        this.email = personToCopy.getEmail();
-        this.address = personToCopy.getAddress();
+        this.phone = personToCopy.getDate();
+        this.email = personToCopy.getRemark();
+        this.address = personToCopy.getLocation();
         this.tags = personToCopy.getTags();
     }
 
@@ -59,17 +59,17 @@ public class TestPerson implements ReadOnlyPerson {
     }
 
     @Override
-    public Date getPhone() {
+    public Date getDate() {
         return phone;
     }
 
     @Override
-    public Remark getEmail() {
+    public Remark getRemark() {
         return email;
     }
 
     @Override
-    public Location getAddress() {
+    public Location getLocation() {
         return address;
     }
 
@@ -86,9 +86,9 @@ public class TestPerson implements ReadOnlyPerson {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
-        sb.append("a/" + this.getAddress().value + " ");
-        sb.append("p/" + this.getPhone().value + " ");
-        sb.append("e/" + this.getEmail().value + " ");
+        sb.append("a/" + this.getLocation().value + " ");
+        sb.append("p/" + this.getDate().value + " ");
+        sb.append("e/" + this.getRemark().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
