@@ -12,7 +12,6 @@ public class DueDateTest {
     @Test
     public void isValidDueDate() {
         // invalid dates
-        assertFalse(DueDate.isValidDueDate("")); // empty string
         assertFalse(DueDate.isValidDueDate(" ")); // spaces only
         assertFalse(DueDate.isValidDueDate("priority")); // non-numeric
         assertFalse(DueDate.isValidDueDate("23 04 1995")); // spaces within digits
