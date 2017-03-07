@@ -16,16 +16,20 @@ import seedu.toluist.ui.Ui;
 public class FindController extends Controller {
     private static final String COMMAND_TEMPLATE = "^(?<command>(find|filter|list))"
             + "(\\s+(?<keywords>.+))?\\s*";
-    private static final String SEARCH_BY_TAG = "tag/";
-    private static final String SEARCH_BY_NAME = "name/";
-    private static final String COMMAND_RESULT_TEMPLATE = "Searching for \"%s\" by %s.\n%d results found";
-    private static final String TRUE_COMMAND = "true";
-    private static final String FALSE_COMMAND = "false";
-    private static final String NAME_PARAMETER = "name";
-    private static final String TAG_PARAMETER = "tag";
-    private static final String NAME_AND_TAG_PARAMETER = "name and tag";
-    private static final String KEYWORDS = "keywords";
-    private static final String SPLITTER_COMMAND = " ";
+
+    private static final String TAG_PARAMETER = "tag/";
+    private static final String NAME_PARAMETER = "name/";
+    private static final String TRUE_PARAMETER = "true";
+    private static final String FALSE_PARAMETER = "false";
+    private static final String KEYWORDS_PARAMETER = "keywords";
+
+    private static final int NUMBER_OF_SPLITS_FOR_COMMAND_PARSE = 2;
+    private static final String COMMAND_SPLITTER = " ";
+
+    private static final String RESULT_MESSAGE_TEMPLATE = "Searching for \"%s\" by %s.\n%d results found";
+    private static final String NAME_MESSAGE = "name";
+    private static final String TAG_MESSAGE = "tag";
+    private static final String NAME_AND_TAG_MESSAGE = "name and tag";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -38,9 +42,9 @@ public class FindController extends Controller {
 
         //initialize keywords and variables for searching
         HashMap<String, String> tokens = tokenize(command);
-        boolean isSearchByTag = tokens.get(SEARCH_BY_TAG).equals(TRUE_COMMAND);
-        boolean isSearchByName = tokens.get(SEARCH_BY_NAME).equals(TRUE_COMMAND);
-        String[] keywordList = convertToArray(tokens.get(KEYWORDS));
+        boolean isSearchByTag = tokens.get(TAG_PARAMETER).equals(TRUE_PARAMETER);
+        boolean isSearchByName = tokens.get(NAME_PARAMETER).equals(TRUE_PARAMETER);
+        String[] keywordList = convertToArray(tokens.get(KEYWORDS_PARAMETER));
 
         //initialize search parameters and variables
         ArrayList<Task> foundTasks = new ArrayList<Task>();
@@ -102,14 +106,14 @@ public class FindController extends Controller {
         String searchParameters;
         if (isSearchByName) {
             if (isSearchByTag) {
-                searchParameters = NAME_AND_TAG_PARAMETER;
+                searchParameters = NAME_AND_TAG_MESSAGE;
             }
             else {
-                searchParameters = NAME_PARAMETER;
+                searchParameters = NAME_MESSAGE;
             }
         }
         else {
-            searchParameters = TAG_PARAMETER;
+            searchParameters = TAG_MESSAGE;
         }
 
         String keywords="";
@@ -119,7 +123,7 @@ public class FindController extends Controller {
                 keywords += " " + keywordList[k];
             }
         }
-        return new CommandResult(String.format(COMMAND_RESULT_TEMPLATE, keywords, searchParameters,foundCount));
+        return new CommandResult(String.format(RESULT_MESSAGE_TEMPLATE, keywords, searchParameters,foundCount));
     }
 
     @Override
@@ -127,27 +131,27 @@ public class FindController extends Controller {
         HashMap<String, String> tokens = new HashMap<>();
 
         //search by tag
-        if (command.contains(SEARCH_BY_TAG)){
-            tokens.put(SEARCH_BY_TAG, TRUE_COMMAND);
+        if (command.contains(TAG_PARAMETER)){
+            tokens.put(TAG_PARAMETER, TRUE_PARAMETER);
         }
         else {
-            tokens.put(SEARCH_BY_TAG, FALSE_COMMAND);
+            tokens.put(TAG_PARAMETER, FALSE_PARAMETER);
         }
 
         //search by name
-        if (command.contains(SEARCH_BY_NAME) || !command.contains(SEARCH_BY_TAG)){
-            tokens.put(SEARCH_BY_NAME, TRUE_COMMAND);
+        if (command.contains(NAME_PARAMETER) || !command.contains(TAG_PARAMETER)){
+            tokens.put(NAME_PARAMETER, TRUE_PARAMETER);
         }
         else {
-            tokens.put(SEARCH_BY_NAME, FALSE_COMMAND);
+            tokens.put(NAME_PARAMETER, FALSE_PARAMETER);
         }
 
         //keyword for matching
-        String keywords = command.replace(SEARCH_BY_TAG, "");
-        keywords = keywords.replace(SEARCH_BY_NAME, "");
-        String[] listOfParameters = keywords.split(SPLITTER_COMMAND, 2);
+        String keywords = command.replace(TAG_PARAMETER, "");
+        keywords = keywords.replace(NAME_PARAMETER, "");
+        String[] listOfParameters = keywords.split(COMMAND_SPLITTER, NUMBER_OF_SPLITS_FOR_COMMAND_PARSE);
         if (listOfParameters.length > 1) {
-            tokens.put(KEYWORDS, listOfParameters[1].trim());
+            tokens.put(KEYWORDS_PARAMETER, listOfParameters[1].trim());
         }
 
         return tokens;
