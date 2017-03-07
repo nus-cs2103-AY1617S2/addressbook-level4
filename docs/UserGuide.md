@@ -49,7 +49,7 @@ Format: `helpf`
 
 ### 2.2 Adding a task: `add`
 
-Adds a task to the to do list. New tasks are [not done] by default. <br>
+Adds a task to KIT. New tasks are [not done] by default. <br>
 
 Format: `add NAME [r/REMARKS] [d/DEADLINE] [l/LOCATION] [t/TAG]...`
 
@@ -62,7 +62,7 @@ Examples:
 * `add buy groceries r/cabbage and broccoli d/02-03-2017 t/personal`
 
 ### 2.3.1	Listing of all task: `list`
-Shows a list of all the tasks in to do list. <br>
+Shows a list of all the tasks in KIT. <br>
 
 Format: `list`, `l`, `ls`
 
@@ -86,7 +86,7 @@ Marks the task at the specified `INDEX`. <br>
 
 Format: `done INDEX`
 
-> * The index refers to the index number shown in the last person listing.
+> * The index refers to the index number shown in the listing.
 > * The index **must be a positive integer** 1, 2, 3, ...
 
 ### 2.5	Deleting a task: `delete`
@@ -100,7 +100,7 @@ Undo the last command. <br>
 Format: undo
 
 ### 2.7 Editing a task: `edit`
-Edits an existing task in the to do list <br>
+Edits an existing task in KIT. <br>
 
 Format: edit `edit INDEX [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
@@ -127,16 +127,16 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 > * The order of the keywords does not matter. e.g. `do project` will match `project do`
 > * both the name and remarks are searched.
 > * Substrings will be matched e.g. `project` will match `projects`
-> * task matching at least one keyword will be returned (i.e. `OR` search).
+> * task matching at least one keyword will be found (i.e. `OR` search).
     e.g. `project` will match `do project`
 
 Examples:
 
 * `find homework`<br>
-  Returns `do homework`
+  Finds `do homework`
 
 * `find homework school`<br>
-  Returns Any task having names or remarks with `homework`,  or `school`
+  Finds any task having names or remarks with `homework`,  or `school`
 
 ### 2.8.2 Finding with exact keyword(s):`findexact`
 
@@ -147,19 +147,18 @@ Format: `findexact KEYWORD...`
 > * The search will match exact keywords, except for case. e.g `project` will match `Project`
 
 ### 2.9 Deleting a task: `delete`
-Deletes the specified task from the to do list. **Irreversible**. <br>
+Deletes the specified task from KIT. **Irreversible**. <br>
 
 Format: `delete INDEX`
 
 > * Deletes the task at the specified `INDEX`.
-> * The index refers to the index number shown in the most recent listing.
+> * The index refers to the index number shown in the listing.
 > * The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 
-* `list`
-  `delete 2`<br>
-  Deletes the 2nd task in the to do list.
+* `delete 2`<br>
+  Deletes the 2nd task in KIT.
 
 * `find homework`
   `delete 1`<br>
@@ -167,7 +166,7 @@ Examples:
 
 
 ### 2.10 Clearing all task: `clear`
-Clears all entries from the to do list. Will prompt a confirmation. <br>
+Clears all entries from KIT. Will prompt a confirmation. <br>
 
 Format: `clear`
 
@@ -182,14 +181,14 @@ Specify location of save file. <br>
 Format: `save PATHNAME`
 
 ### 2.13. Saving the data
-To do list data are saved in the hard disk automatically after any command that changes the data.
+KIT data are saved in the hard disk automatically after any command that changes the data.
 There is no need to save manually.
 
 ## 3. FAQ
 
 **Q**: How do I transfer my data to another Computer? <br>
 **A**: Copy the files to the other computer and overwrite the empty data file it creates with
-       the file that contains the data of your previous ‘to do list’ folder.
+       the file that contains the data of your previous KIT folder. The data file is called KIT.xml .
 
 **Q**: Is it a desktop or web application? <br>
 **A**: It’s a desktop application.
@@ -207,7 +206,7 @@ There is no need to save manually.
 **A**: Yes, task with duplicate names are accepted.
 
 **Q**: I accidentally created two exact same tasks, how do I remove just one of them? <br>
-**A**: You can do so by typing undo if the creation of one of the tasks was the previous command, or list all the tasks and delete one of them. The other task will remain in the to-do list.
+**A**: You can do so by typing undo if the creation of one of the tasks was the previous command, or list all the tasks and delete one of them. The other task will remain in KIT.
 
 **Q**: Can I manually edit the storage file? <br>
 **A**: Yes, it is a xml file. It is called KIT.xml . It can be found in the folder data by default. Be careful in making changes to it if you are unfamiliar with XML, the program might not start properly if the file’s format is invalid.
