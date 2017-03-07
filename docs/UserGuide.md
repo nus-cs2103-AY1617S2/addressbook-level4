@@ -43,7 +43,7 @@ Presenting to you, iManager.
 
 iManager is a task manager application that helps you manage all your tasks at one place. With its interactive UI, user can now experience managing their tasks like never before.  Our product incorporates niche features such as FlexiCommands and Google Integration that brings convenient to user in managing their schedules. iManager remove the need to rely on multiple applications as it manages it all! 
 
-Without further ado, let’s get started. 
+Without further ado, let us get started. 
 
    
 ## Quick Start
@@ -62,7 +62,7 @@ Without further ado, let’s get started.
    * **`add`**: `SunRise Marathon` adds a reminder to attend SunRise Marathon.
    * **`find`** `Today` searches the task list for all events happening today. 
    * **`exit`**: exits the application.
-6. Refer to the[Features](#features) section below for details of each command.
+6. Refer to the [Features](#features) section below for details of each command.
    
 
 ## UI Control
@@ -136,13 +136,13 @@ Format: `add NAME [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` <br>
 
 Examples: 
 * `add exam` <br>
-  Add a floating task named "exam" into task list.
+   Add a floating task named "exam" to the task list.
 * `add exam p/1` <br>
-  Add a priority 1 floating task named "exam" into task list.
+   Add a priority 1 floating task named "exam" to the task list.
 * `add exam p/1 d/SR1` <br>
-  Add a priority 1 floating task named "exam" with description "SR1" into task list.
+   Add a priority 1 floating task named "exam" with description "SR1" to the task list.
 * `add exam p/1 d/SR1 t/CS2010`<br>
-  Add a priority 1 floating task named "exam" with description "SR1" and tag "CS2010" into task list.
+   Add a priority 1 floating task named "exam" with description "SR1" and tag "CS2010" to the task list.
 
 #### Adding a pending task
 ##### Adding a pending task with START DATE & TIME only
@@ -158,15 +158,15 @@ Format: `add NAME on START_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` <br>
 
 Examples:
 * `add exam on 10-22-2017` <br> 
-  Add a pending task named "exam" on 22 October 2017, current time into task list.
+   Add a pending task named "exam" on 22 October 2017, current time to the task list.
 * `add exam on 10-22-2017 1500` <br>
-  Add a pending task named "exam" on 22 October 2017, 1500 into task list.
+   Add a pending task named "exam" on 22 October 2017, 1500 to the task list.
 * `add exam on 10-22-2017 1500 p/1` <br>
-  Add a priority 1 pending task named "exam" on 22 October 2017, 1500 into task list.
+   Add a priority 1 pending task named "exam" on 22 October 2017, 1500 to the task list.
 * `add exam on 10-22-2017 1500 p/1 d/SR1` <br>
-  Add a priority 1 pending task named "exam" on 22 October 2017, 1500 with description "SR1" into task list.  
+   Add a priority 1 pending task named "exam" on 22 October 2017, 1500 with description "SR1" to the task list.
 * `add exam on 10-22-2017 1500 p/1 d/SR1 t/CS2010`<br>
-  Add a priority 1 pending task named "exam" on 22 October 2017, 1500 with description "SR1" and tag "CS2010" into task list.
+   Add a priority 1 pending task named "exam" on 22 October 2017, 1500 with description "SR1" and tag "CS2010" to the task list.
  
  
 ##### Adding a pending task with END DATE & TIME only
@@ -183,16 +183,16 @@ Format: `add NAME by END_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` <br>
 
 Examples: 
 * `add exam by 10-22-2017` <br>
-  Add a pending task named "exam" that starts now and end by 22 October 2017, 2359 into task list.
+   Add a pending task named "exam" that starts now and end by 22 October 2017, 2359 to the task list.
 * `add exam by 10-22-2017 1500` <br>
-  Add a pending task named "exam" that starts now and end by 22 October 2017, 1500 into task list.
+   Add a pending task named "exam" that starts now and end by 22 October 2017, 1500 to the task list.
 * `add exam by 10-22-2017 1500 p/1` <br>
-  Add a priority 1 pending task named "exam" that starts now and end by 22 October 2017, 1500 into task list.
+   Add a priority 1 pending task named "exam" that starts now and end by 22 October 2017, 1500 to the task list.
 * `add exam by 10-22-2017 1500 p/1 d/SR1` <br>
-  Add a priority 1 pending task named "exam" that starts now and end by 22 October 2017, 1500 with description "SR1" into task list.
+   Add a priority 1 pending task named "exam" that starts now and end by 22 October 2017, 1500 with description "SR1" to the task list.
 * `add exam by 10-22-2017 1500 p/1 d/SR1 t/CS2010`<br>
-  Add a priority 1 pending task named "exam" that starts now and end by 22 October 2017, 1500 with description "SR1" and tag "CS2010" 
-  into task list.
+   Add a priority 1 pending task named "exam" that starts now and end by 22 October 2017, 1500 with description "SR1" and tag "CS2010" 
+   to the task list.
   
   
 ##### Adding a pending task with both START DATE & TIME and END DATE & TIME 
@@ -209,21 +209,21 @@ Format: `add NAME from START_DATETIME to END_DATETIME [p/PRIORITY] [d/DESCRIPTIO
 
 Examples:
 * `add exam from 10-22-2017 to 10-22-2016` <br>
-  Add a pending task named "exam" that starts from 22 October 2017, current time to 22 October 2017, 2359 into task list.
+   Add a pending task named "exam" that starts from 22 October 2017, current time to 22 October 2017, 2359 to the task list.
 * `add exam from 10-22-2017 1300 to 10-22-2016 1500` <br>
-  Add a pending task named "exam" that starts from 22 October 2017, 1300 to 22 October 2017, 1500 into task list.
+   Add a pending task named "exam" that starts from 22 October 2017, 1300 to 22 October 2017, 1500 to the task list.
 * `add exam from 10-22-2017 1300 to 10-22-2016 1500 p/1` <br>
-  Add a priority 1 pending task named "exam" that starts from 22 October 2017, 1300 to 22 October 2017, 1500 into task list.
+   Add a priority 1 pending task named "exam" that starts from 22 October 2017, 1300 to 22 October 2017, 1500 to the task list.
 * `add exam from 10-22-2017 1300 to 10-22-2016 1500 p/1 d/SR1` <br>
-  Add a priority 1 pending task named "exam" that starts from 22 October 2017, 1300 to 22 October 2017, 1500 with description "SR1" into 
-  task list.
+   Add a priority 1 pending task named "exam" that starts from 22 October 2017, 1300 to 22 October 2017, 1500 with description "SR1" to 
+   the task list.
 * `add exam from 10-22-2017 1300 to 10-22-2016 1500 p/1 d/SR1 t/CS2010`<br>
-  Add a priority 1 pending task named "exam" that starts from 22 October 2017, 1300 to 22 October 2017, 1500 with description "SR1" and 
-  tag "CS2010" into task list.
+   Add a priority 1 pending task named "exam" that starts from 22 October 2017, 1300 to 22 October 2017, 1500 with description "SR1" and 
+   tag "CS2010" to the task list.
   
 #### Adding a recurring task 
 
-Adds a recurring task that spans over a period of time. <br>
+Adds a recurring task that spans over a period of time to the task list. <br>
 
 Format: `add NAME [at|on|by|from START_DATETIME to END_DATETIME] every [DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` <br>
 > * Name, description and tag are case insensitive.
@@ -240,76 +240,76 @@ Format: `add NAME [at|on|by|from START_DATETIME to END_DATETIME] every [DAY|WEEK
 
 Examples:
 * `add exam every day p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" that starts at the current time everyday with description "SR1" and tag "CS2010" into task 
-   list.
+   Add a priority 1 pending task named "exam" that starts at the current time everyday with description "SR1" and tag "CS2010" to the 
+   task list.
    
 * `add exam at 1300 every day p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" that starts at 1300 everyday with description "SR1" and tag "CS2010" into task list.
+   Add a priority 1 pending task named "exam" that starts at 1300 everyday with description "SR1" and tag "CS2010" to the task list.
    
 * `add exam by 1500 every day p/1 d/SR1 t/CS2010`<br>
    Add a priority 1 pending task named "exam" that starts at the current time and end by 1500 everyday with description "SR1" and tag 
-   "CS2010" into task list.
+   "CS2010" to the task list.
    
 * `add exam from 1300 to 1500 every day p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" that starts from 1300 to 1500 everyday with description "SR1" and tag "CS2010" into task 
+   Add a priority 1 pending task named "exam" that starts from 1300 to 1500 everyday with description "SR1" and tag "CS2010" to the task 
    list.
    
    
    
 * `add exam every Tue p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" that starts at the current time every Tuesday with description "SR1" and tag "CS2010" into 
-   task list.
+   Add a priority 1 pending task named "exam" that starts at the current time every Tuesday with description "SR1" and tag "CS2010" to 
+   the task list.
    
 * `add exam at 1300 every Tue p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" that starts at 1300 every Tuesday with description "SR1" and tag "CS2010" into task list.
-   
+   Add a priority 1 pending task named "exam" that starts at 1300 every Tuesday with description "SR1" and tag "CS2010" to the task 
+   list.
 * `add exam by 1500 every Tue p/1 d/SR1 t/CS2010`<br>
    Add a priority 1 pending task named "exam" that starts at the current time and end by 1500 every Tuesday with description "SR1" and 
-   tag "CS2010" into task list.
+   tag "CS2010" to the task list.
    
 * `add exam from 1300 to 1500 every Tue p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" that starts from 1300 to 1500 every Tuesday with description "SR1" and tag "CS2010" into 
+   Add a priority 1 pending task named "exam" that starts from 1300 to 1500 every Tuesday with description "SR1" and tag "CS2010" to the 
    task list.
 
 
 
 * `add exam on 10-22-2017 every month p/1 d/SR1 t/CS2010`<br>
    Add a priority 1 pending task named "exam" that starts on the 22nd of every month, current time, with description "SR1" and tag 
-   "CS2010" into task list.
+   "CS2010" to the task list.
    
 * `add exam on 10-22-2017 1300 every month p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" that starts on 22nd of every month 1300 with description "SR1" and tag "CS2010" into task 
-   list.
+   Add a priority 1 pending task named "exam" that starts on 22nd of every month 1300 with description "SR1" and tag "CS2010" to the 
+   task list.
    
 * `add exam from 10-22-2017 to 10-22-2017 every month p/1 d/SR1 t/CS2010`<br>
    Add a priority 1 pending task named "exam" that starts from the 22nd of every month, current time, to 22nd of every month 2359 with
-   description "SR1" and tag "CS2010" into task list.
+   description "SR1" and tag "CS2010" to the task list.
    
 * `add exam from 10-22-2017 1300 to 10-22-2017 1500 every month p/1 d/SR1 t/CS2010`<br>
    Add a priority 1 pending task named "exam" that starts from the 22nd of every month 1300 to 22nd of every month 1500 with description 
-   "SR1" and tag "CS2010" into task list.
+   "SR1" and tag "CS2010" to the task list.
    
    
    
 * `add exam on 10-22-2017 every year p/1 d/SR1 t/CS2010`<br>
    Add a priority 1 pending task named "exam" that starts on the 22nd October of every year, current time,  with description "SR1" and 
-   tag "CS2010" into task list.
+   tag "CS2010" to the task list.
    
 * `add exam on 10-22-2017 1300 every year p/1 d/SR1 t/CS2010`<br>
    Add a priority 1 pending task named "exam" that starts on the 22nd October of every year 1300 with description "SR1" and tag "CS2010" 
-   into task list.
+   to the task list.
    
 * `add exam from 10-22-2017 to 10-22-2017 every year p/1 d/SR1 t/CS2010`<br>
    Add a priority 1 pending task named "exam" that starts on the 22nd October of every year, current time, to 22nd October of every year 
-   2359 with description "SR1" and tag "CS2010" into task list.
+   2359 with description "SR1" and tag "CS2010" to the task list.
    
 * `add exam from 10-22-2017 1300 to 10-22-2017 1500 every year p/1 d/SR1 t/CS2010`<br>
    Add a priority 1 pending task named "exam" that starts on the 22nd October of every year 1300 to 22nd October of every year 1500 with 
-   description "SR1" and tag "CS2010" into task list.
+   description "SR1" and tag "CS2010" to the task list.
 
 ### Editing a task
 
-Edit a task in iManager by index or name<br>
+Edit a task in task list by index or name<br>
 
 Format: `Edit INDEX|NAME [at|on|by|from START_DATETIME to END_DATETIME] [every DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION][t/TAG...]`<br>
 > * Name, description and tag are case insensitive.
@@ -343,7 +343,7 @@ Examples:
 
 ### Deleting a task
 
-Delete a task from iManager<br>
+Delete a task from the task list. <br>
 
 Format: `del NAME|INDEX|TAG`<br>
 > * Name and tag are case insensitive.
@@ -357,65 +357,65 @@ Examples:
 * `delete 1`<br>
    Delete the first task in the task list.
 * `delete CS2010`<br>
-   Delete all tasks containing tag "CS2010" 
+   Delete all tasks containing tag "CS2010".
 
 ### Viewing task
 
 #### Viewing all tasks
-Shows a list of all task in iManager. 
+View a list of all task in iManager. 
 Format: `view `<br>
 
 #### Viewing a specified task
-Shows a specified task by index in iManager. 
+View a specified task by index in iManager. 
 
 Format: `view INDEX`<br>
 > * INDEX refers to the index number shown in the most recent listing of tasks. 
 
 Examples:
 * `view 1` <br>
-  Show the first task in the task list. 
+   Show the first task in the task list. 
 
 #### Viewing all Today's tasks
-Shows a list of all today's task in iManager. Does not show floating, completed and overdue tasks. 
+View a list of all today's task in iManager. Does not show floating, done and overdue tasks. 
 
 Format: `view t`<br>
 
 #### Viewing all pending tasks
-Shows a list of all pending task in iManager. Does not show floating, completed and overdue tasks. 
+View a list of all pending task in iManager. Does not show floating, done and overdue tasks. 
 
 Format: `view p`<br>
 
-#### Viewing all completed tasks
-Shows a list of all completed task in iManager. Does not show pending, floating, overdue and Today's tasks. 
+#### Viewing all "done" tasks
+View a list of all "done" task in iManager. Does not show pending, floating, overdue and Today's tasks. 
 
 Format: `view c`<br>
 
 #### Viewing all floating tasks
-Shows a list of all floating tasks in iManage. Does not show pending, completed, overdue and Today's tasks. 
+View a list of all floating tasks in iManage. Does not show pending, done, overdue and Today's tasks. 
 
 Format: `view f`<br>
 
 #### Viewing all overdue tasks
-Shows a list of all tasks iManage. Does not show pending, completed, floating and Today's tasks. 
+View a list of all tasks iManage. Does not show pending, done, floating and Today's tasks. 
 
 Format: `view`<br>
 
-### Marking a task as completed
-Mark an existing task as completed in iManager. A completed task gets transferred to the done list. 
+### Marking a task as done
+Mark an existing task as "done" in iManager. A "done" task gets transferred to the done list. 
 
 Format: `done INDEX|NAME`
 > * Name is case insensitive.
 > * INDEX refers to the index number shown in the most recent listing of tasks.
 > * INDEX must be positive integer e.g 1, 2, 3.
-> * Marking an uncompleted task will change its status to completed while marking a completed task will change its status to    
-    uncompleted. 
+> * Marking an "undone" task will change its status to "done" while marking a "done" task will change its status to 
+    "undone". 
 > * Marked tasks in the current session can be reverted with the `undo` command.
 
 Examples: 
 * `done 1`<br>
-   Mark the first task in the task list as completed.
+   Mark the first task in the task list as "done".
 * `done exam`<br>
-   Mark a task named "exam" in the task list as completed.
+   Mark a task named "exam" in the task list as "done".
  
 ### Finding for tasks
 Find tasks with details containing any of the given keywords. Details include name, priority, description, tags, start date&time and end date&time.
@@ -451,8 +451,8 @@ Advanced Examples:
 * `find exam \p1 \dSR1 \tCS2010 \m10-2017 \h1500`<br>
    Find all tasks whoose name matches "exam" or priority matches "1" or description matches "SR1" or tag matches "2010" or  (starts or      ends on October 2017") or (start time or end time matches "1500").
    
-### Clearing of completed tasks
-Clears all completed tasks. <br>
+### Clearing of "done" tasks
+Clears all "done" tasks. <br>
 
 Format: `clear`
 
@@ -477,7 +477,7 @@ Format: `redo`
 
 > * `redo` only support add, edit, delete, done, clear and undo command. 
 
-### Reset data
+### Reset saved data
 Reset the applcation data. iManager can completely erase the saved data and start with a "clean" state. Application data will be save in the default save directory. (under project root folder) Once application data gets resetted, it CANNOT be restored. 
 
 Format: `reset`
@@ -515,30 +515,30 @@ Format : `exit`
 :--------: | -------- | -------- 
 [help](#viewing-help) | `help`| Opens a help page.
  | `help [COMMAND]`| Help with specific command. 
-[add](#adding-a-task) | `add NAME [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]`| Adds a floating task with priority and tags.
- | `add NAME at START_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]`| Adds a pending task with only start date&time, priority and tags.
- | `add NAME by END_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]`| Adds a pending task with only end date&time, priority and tags.
- | `add NAME from END_DATETIME to START_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]`| Adds a pending task with start date&time, end date&time, priority and tags.
- | `add NAME [at|on|by|from START_DATETIME to END_DATETIME] every [DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Adds a recurring task that spans over a period of time with priority and tags.
-[edit](#editing-a-task) | `edit INDEX|NAME [at|on|by|from START_DATETIME to END_DATETIME] [every DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Edits a task with the new parameters.
-[del](#deleting-a-task) | `del INDEX|NAME|TAG` | Delete a task.
-[view](#viewing-tasks) | `view` | Show all tasks.
- | `view INDEX` | Show a specified task by index.
- | `view t` | Show all Today's task.
- | `view p` | Show all pending task.
- | `view c` | Show all completed task.
- | `view f` | Show all floating task.
- | `view o` | Show all overdue task.
-[done](#marking-a-task-as-completed) | `done INDEX|NAME`| Mark a task as completed.
-[find](#finding-for-tasks) | `find [KEYWORDS..]`| Search for tasks with details associating with the keywords.
+[add](#adding-a-task) | `add NAME [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]`| Adds a floating task to the task list.
+ | `add NAME at START_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]`| Adds a pending task with only start date&time to the task list.
+ | `add NAME by END_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]`| Adds a pending task with only end date&time to the task list.
+ | `add NAME from END_DATETIME to START_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]`| Adds a pending task with start date & time and end date & time to the task list.
+ | `add NAME [at|on|by|from START_DATETIME to END_DATETIME] every [DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Adds a recurring task that spans over a period of time to the task list.
+[edit](#editing-a-task) | `edit INDEX|NAME [at|on|by|from START_DATETIME to END_DATETIME] [every DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Edit a task with the new parameters.
+[del](#deleting-a-task) | `del INDEX|NAME|TAG` | Delete a task from the task list.
+[view](#viewing-tasks) | `view` | View all tasks.
+ | `view INDEX` | View a specified task by index.
+ | `view t` | View all Today's task.
+ | `view p` | View all pending task.
+ | `view c` | View all "done" task.
+ | `view f` | View all floating task.
+ | `view o` | View all overdue task.
+[done](#marking-a-task-as-done) | `done INDEX|NAME`| Mark a task as "done".
+[find](#finding-for-tasks) | `find [KEYWORDS..]`| Find tasks with details containing any of the given keywords.
  | `find \mMM-YYYY`| Search for tasks belonging to a particular month and year, both start and end.
  | `find \yYYYY`| Search for tasks belonging to a particular year, both start and end.
  | `find\hHHMM`| Search for tasks belonging to a particular time, both start and end. 
-[clear](#clearing-of-completed-tasks) | `clear` | Clear all completed tasks.
+[clear](#clearing-of-done-tasks) | `clear` | Clear all "done" tasks.
 [toggle](#toggle-google-calendar) | `toggle` | Toggle Google Calendar.
 [undo](#undo-most-recent-command) | `undo` | Undo the most recent command.
 [redo](#redo-most-recent-command) | `redo` | Redo the most recent undo.
-[reset](#reset-data) | `reset` | Reset saved data.
-[saveto](#save) | `saveto PATH` | Change the default save directory.
+[reset](#reset-saved-data) | `reset` | Reset saved data.
+[saveto](#save) | `saveto PATH` | Change the save directory.
  | `cd` | Show current save directory.
 [exit](#exiting-the-program) | `exit` | Exit the application.
