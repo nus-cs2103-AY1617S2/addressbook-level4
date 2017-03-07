@@ -5,7 +5,7 @@ import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.tag.Tag;
 
 public interface ReadOnlyTaskManager {
-    
+
     /**
      * Returns an unmodifiable view of the tasks list.
      */

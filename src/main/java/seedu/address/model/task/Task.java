@@ -59,7 +59,6 @@ public class Task implements ReadOnlyTask {
         this(source.getName(), source.getDeadline(), source.getID(), source.getDescription());
     }
 
-    
     /**
      * Getters and setters
      */
