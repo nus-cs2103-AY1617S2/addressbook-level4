@@ -7,7 +7,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 
 #### [Jin Shun](http://github.com/jinshunlee)  
-<img src="doc/images/jinshunlee.png" width="150"><br>  
+<img src="images/jinshunlee.png" width="150"><br>  
 Role: Project Leader <br>  
 Responsibilities: 
 * In charge of   
@@ -15,7 +15,7 @@ Responsibilities:
 -----  
 
 #### [Chew Chia Sin](http://github.com/Fyelight)  
-<img src="doc/images/Fyelight.png" width="150"><br>  
+<img src="images/Fyelight.png" width="150"><br>  
 Role: Developer <br>  
 Responsibilities: 
 * In charge of Storage  
@@ -23,7 +23,7 @@ Responsibilities:
 -----  
 
 #### [Hon Kean Wai](http://github.com/drtrifle)  
-<img src="doc/images/drtrifle.jpg" width="150"><br>  
+<img src="images/drtrifle.jpg" width="150"><br>  
 Role: Developer <br>  
 Responsibilities: 
 * In charge of Documentation  
@@ -32,7 +32,7 @@ Responsibilities:
 -----  
 
 #### [Ye Huanhui](https://github.com/yexiexie)  
-<img src="doc/images/yexiexie.png" width="150"><br>  
+<img src="images/yexiexie.png" width="150"><br>  
 Role: Developer <br>  
 Responsibilities: 
 * In charge of UI 
