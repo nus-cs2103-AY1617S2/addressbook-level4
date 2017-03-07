@@ -7,8 +7,8 @@ import seedu.geekeep.commons.core.Messages;
 import seedu.geekeep.commons.util.CollectionUtil;
 import seedu.geekeep.logic.commands.exceptions.CommandException;
 import seedu.geekeep.model.tag.UniqueTagList;
-import seedu.geekeep.model.task.Address;
-import seedu.geekeep.model.task.Email;
+import seedu.geekeep.model.task.Location;
+import seedu.geekeep.model.task.DateTime;
 import seedu.geekeep.model.task.Phone;
 import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.model.task.Task;
@@ -79,11 +79,11 @@ public class EditCommand extends Command {
 
         Title updatedTitle = editPersonDescriptor.getTitle().orElseGet(personToEdit::getTitle);
         Phone updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
-        Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
-        Address updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
+        DateTime updatedDateTime = editPersonDescriptor.getDateTime().orElseGet(personToEdit::getDateTime);
+        Location updatedLocation = editPersonDescriptor.getLocation().orElseGet(personToEdit::getLocation);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
-        return new Task(updatedTitle, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Task(updatedTitle, updatedPhone, updatedDateTime, updatedLocation, updatedTags);
     }
 
     /**
@@ -93,8 +93,8 @@ public class EditCommand extends Command {
     public static class EditPersonDescriptor {
         private Optional<Title> title = Optional.empty();
         private Optional<Phone> phone = Optional.empty();
-        private Optional<Email> email = Optional.empty();
-        private Optional<Address> address = Optional.empty();
+        private Optional<DateTime> dateTime = Optional.empty();
+        private Optional<Location> location = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditPersonDescriptor() {}
@@ -102,8 +102,8 @@ public class EditCommand extends Command {
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             this.title = toCopy.getTitle();
             this.phone = toCopy.getPhone();
-            this.email = toCopy.getEmail();
-            this.address = toCopy.getAddress();
+            this.dateTime = toCopy.getDateTime();
+            this.location = toCopy.getLocation();
             this.tags = toCopy.getTags();
         }
 
@@ -111,7 +111,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.title, this.phone, this.email, this.address, this.tags);
+            return CollectionUtil.isAnyPresent(this.title, this.phone, this.dateTime, this.location, this.tags);
         }
 
         public void setTitle(Optional<Title> title) {
@@ -132,22 +132,22 @@ public class EditCommand extends Command {
             return phone;
         }
 
-        public void setEmail(Optional<Email> email) {
-            assert email != null;
-            this.email = email;
+        public void setDateTime(Optional<DateTime> dateTime) {
+            assert dateTime != null;
+            this.dateTime = dateTime;
         }
 
-        public Optional<Email> getEmail() {
-            return email;
+        public Optional<DateTime> getDateTime() {
+            return dateTime;
         }
 
-        public void setAddress(Optional<Address> address) {
-            assert address != null;
-            this.address = address;
+        public void setLocation(Optional<Location> location) {
+            assert location != null;
+            this.location = location;
         }
 
-        public Optional<Address> getAddress() {
-            return address;
+        public Optional<Location> getLocation() {
+            return location;
         }
 
         public void setTags(Optional<UniqueTagList> tags) {

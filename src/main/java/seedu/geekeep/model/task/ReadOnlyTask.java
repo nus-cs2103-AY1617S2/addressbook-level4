@@ -12,9 +12,9 @@ public interface ReadOnlyTask {
 
     Phone getPhone();
 
-    Email getEmail();
+    DateTime getDateTime();
 
-    Address getAddress();
+    Location getLocation();
 
     /**
      * The returned TagList is a deep copy of the internal TagList, changes on the returned list will not affect the
@@ -29,8 +29,8 @@ public interface ReadOnlyTask {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                         && other.getTitle().equals(this.getTitle()) // state checks here onwards
-                        && other.getPhone().equals(this.getPhone()) && other.getEmail().equals(this.getEmail())
-                        && other.getAddress().equals(this.getAddress()));
+                        && other.getPhone().equals(this.getPhone()) && other.getDateTime().equals(this.getDateTime())
+                        && other.getLocation().equals(this.getLocation()));
     }
 
     /**
@@ -38,8 +38,8 @@ public interface ReadOnlyTask {
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getTitle()).append(" Phone: ").append(getPhone()).append(" Email: ").append(getEmail())
-                .append(" Address: ").append(getAddress()).append(" Tags: ");
+        builder.append(getTitle()).append(" Phone: ").append(getPhone()).append(" Email: ").append(getDateTime())
+                .append(" Address: ").append(getLocation()).append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }

@@ -12,20 +12,20 @@ public class Task implements ReadOnlyTask {
 
     private Title title;
     private Phone phone;
-    private Email email;
-    private Address address;
+    private DateTime dateTime;
+    private Location location;
 
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Title title, Phone phone, Email email, Address address, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(title, phone, email, address, tags);
+    public Task(Title title, Phone phone, DateTime dateTime, Location location, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(title, phone, dateTime, location, tags);
         this.title = title;
         this.phone = phone;
-        this.email = email;
-        this.address = address;
+        this.dateTime = dateTime;
+        this.location = location;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -33,7 +33,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyPerson.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getTitle(), source.getPhone(), source.getEmail(), source.getAddress(), source.getTags());
+        this(source.getTitle(), source.getPhone(), source.getDateTime(), source.getLocation(), source.getTags());
     }
 
     public void setTitle(Title title) {
@@ -56,24 +56,24 @@ public class Task implements ReadOnlyTask {
         return phone;
     }
 
-    public void setEmail(Email email) {
-        assert email != null;
-        this.email = email;
+    public void setDateTime(DateTime dateTime) {
+        assert dateTime != null;
+        this.dateTime = dateTime;
     }
 
     @Override
-    public Email getEmail() {
-        return email;
+    public DateTime getDateTime() {
+        return dateTime;
     }
 
-    public void setAddress(Address address) {
-        assert address != null;
-        this.address = address;
+    public void setLocation(Location location) {
+        assert location != null;
+        this.location = location;
     }
 
     @Override
-    public Address getAddress() {
-        return address;
+    public Location getLocation() {
+        return location;
     }
 
     @Override
@@ -96,8 +96,8 @@ public class Task implements ReadOnlyTask {
 
         this.setTitle(replacement.getTitle());
         this.setPhone(replacement.getPhone());
-        this.setEmail(replacement.getEmail());
-        this.setAddress(replacement.getAddress());
+        this.setDateTime(replacement.getDateTime());
+        this.setLocation(replacement.getLocation());
         this.setTags(replacement.getTags());
     }
 
@@ -111,7 +111,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(title, phone, email, address, tags);
+        return Objects.hash(title, phone, dateTime, location, tags);
     }
 
     @Override

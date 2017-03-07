@@ -31,8 +31,8 @@ public class TaskCard extends UiPart<Region> {
         name.setText(person.getTitle().fullName);
         id.setText(displayedIndex + ". ");
         phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
+        address.setText(person.getLocation().value);
+        email.setText(person.getDateTime().value);
         initTags(person);
     }
 

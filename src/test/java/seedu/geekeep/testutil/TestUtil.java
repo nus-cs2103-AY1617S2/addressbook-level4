@@ -32,8 +32,8 @@ import seedu.geekeep.commons.util.XmlUtil;
 import seedu.geekeep.model.TaskManager;
 import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.tag.UniqueTagList;
-import seedu.geekeep.model.task.Address;
-import seedu.geekeep.model.task.Email;
+import seedu.geekeep.model.task.Location;
+import seedu.geekeep.model.task.DateTime;
 import seedu.geekeep.model.task.Phone;
 import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.model.task.Task;
@@ -75,15 +75,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Title("Ali Muster"), new Phone("9482424"), new Email("hans@google.com"), new Address("4th street"), new UniqueTagList()),
-                new Task(new Title("Boris Mueller"), new Phone("87249245"), new Email("ruth@google.com"), new Address("81th street"), new UniqueTagList()),
-                new Task(new Title("Carl Kurz"), new Phone("95352563"), new Email("heinz@yahoo.com"), new Address("wall street"), new UniqueTagList()),
-                new Task(new Title("Daniel Meier"), new Phone("87652533"), new Email("cornelia@google.com"), new Address("10th street"), new UniqueTagList()),
-                new Task(new Title("Elle Meyer"), new Phone("9482224"), new Email("werner@gmail.com"), new Address("michegan ave"), new UniqueTagList()),
-                new Task(new Title("Fiona Kunz"), new Phone("9482427"), new Email("lydia@gmail.com"), new Address("little tokyo"), new UniqueTagList()),
-                new Task(new Title("George Best"), new Phone("9482442"), new Email("anna@google.com"), new Address("4th street"), new UniqueTagList()),
-                new Task(new Title("Hoon Meier"), new Phone("8482424"), new Email("stefan@mail.com"), new Address("little india"), new UniqueTagList()),
-                new Task(new Title("Ida Mueller"), new Phone("8482131"), new Email("hans@google.com"), new Address("chicago ave"), new UniqueTagList())
+                new Task(new Title("Ali Muster"), new Phone("9482424"), new DateTime("hans@google.com"), new Location("4th street"), new UniqueTagList()),
+                new Task(new Title("Boris Mueller"), new Phone("87249245"), new DateTime("ruth@google.com"), new Location("81th street"), new UniqueTagList()),
+                new Task(new Title("Carl Kurz"), new Phone("95352563"), new DateTime("heinz@yahoo.com"), new Location("wall street"), new UniqueTagList()),
+                new Task(new Title("Daniel Meier"), new Phone("87652533"), new DateTime("cornelia@google.com"), new Location("10th street"), new UniqueTagList()),
+                new Task(new Title("Elle Meyer"), new Phone("9482224"), new DateTime("werner@gmail.com"), new Location("michegan ave"), new UniqueTagList()),
+                new Task(new Title("Fiona Kunz"), new Phone("9482427"), new DateTime("lydia@gmail.com"), new Location("little tokyo"), new UniqueTagList()),
+                new Task(new Title("George Best"), new Phone("9482442"), new DateTime("anna@google.com"), new Location("4th street"), new UniqueTagList()),
+                new Task(new Title("Hoon Meier"), new Phone("8482424"), new DateTime("stefan@mail.com"), new Location("little india"), new UniqueTagList()),
+                new Task(new Title("Ida Mueller"), new Phone("8482131"), new DateTime("hans@google.com"), new Location("chicago ave"), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {

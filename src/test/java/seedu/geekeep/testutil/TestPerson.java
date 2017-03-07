@@ -1,8 +1,8 @@
 package seedu.geekeep.testutil;
 
 import seedu.geekeep.model.tag.UniqueTagList;
-import seedu.geekeep.model.task.Address;
-import seedu.geekeep.model.task.Email;
+import seedu.geekeep.model.task.Location;
+import seedu.geekeep.model.task.DateTime;
 import seedu.geekeep.model.task.Phone;
 import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.model.task.Title;
@@ -13,8 +13,8 @@ import seedu.geekeep.model.task.Title;
 public class TestPerson implements ReadOnlyTask {
 
     private Title title;
-    private Address address;
-    private Email email;
+    private Location location;
+    private DateTime dateTime;
     private Phone phone;
     private UniqueTagList tags;
 
@@ -28,8 +28,8 @@ public class TestPerson implements ReadOnlyTask {
     public TestPerson(TestPerson personToCopy) {
         this.title = personToCopy.getTitle();
         this.phone = personToCopy.getPhone();
-        this.email = personToCopy.getEmail();
-        this.address = personToCopy.getAddress();
+        this.dateTime = personToCopy.getDateTime();
+        this.location = personToCopy.getLocation();
         this.tags = personToCopy.getTags();
     }
 
@@ -37,12 +37,12 @@ public class TestPerson implements ReadOnlyTask {
         this.title = title;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
-    public void setEmail(Email email) {
-        this.email = email;
+    public void setDateTime(DateTime dateTime) {
+        this.dateTime = dateTime;
     }
 
     public void setPhone(Phone phone) {
@@ -64,13 +64,13 @@ public class TestPerson implements ReadOnlyTask {
     }
 
     @Override
-    public Email getEmail() {
-        return email;
+    public DateTime getDateTime() {
+        return dateTime;
     }
 
     @Override
-    public Address getAddress() {
-        return address;
+    public Location getLocation() {
+        return location;
     }
 
     @Override
@@ -86,9 +86,9 @@ public class TestPerson implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getTitle().fullName + " ");
-        sb.append("a/" + this.getAddress().value + " ");
+        sb.append("a/" + this.getLocation().value + " ");
         sb.append("p/" + this.getPhone().value + " ");
-        sb.append("e/" + this.getEmail().value + " ");
+        sb.append("e/" + this.getDateTime().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }

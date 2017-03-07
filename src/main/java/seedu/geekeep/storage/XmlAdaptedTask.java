@@ -8,8 +8,8 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.tag.UniqueTagList;
-import seedu.geekeep.model.task.Address;
-import seedu.geekeep.model.task.Email;
+import seedu.geekeep.model.task.Location;
+import seedu.geekeep.model.task.DateTime;
 import seedu.geekeep.model.task.Phone;
 import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.model.task.Task;
@@ -47,8 +47,8 @@ public class XmlAdaptedTask {
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getTitle().fullName;
         phone = source.getPhone().value;
-        email = source.getEmail().value;
-        address = source.getAddress().value;
+        email = source.getDateTime().value;
+        address = source.getLocation().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -67,9 +67,9 @@ public class XmlAdaptedTask {
         }
         final Title title = new Title(this.name);
         final Phone phone = new Phone(this.phone);
-        final Email email = new Email(this.email);
-        final Address address = new Address(this.address);
+        final DateTime dateTime = new DateTime(this.email);
+        final Location location = new Location(this.address);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Task(title, phone, email, address, tags);
+        return new Task(title, phone, dateTime, location, tags);
     }
 }

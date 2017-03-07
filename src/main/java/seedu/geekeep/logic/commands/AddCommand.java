@@ -7,8 +7,8 @@ import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.logic.commands.exceptions.CommandException;
 import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.tag.UniqueTagList;
-import seedu.geekeep.model.task.Address;
-import seedu.geekeep.model.task.Email;
+import seedu.geekeep.model.task.Location;
+import seedu.geekeep.model.task.DateTime;
 import seedu.geekeep.model.task.Phone;
 import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.Title;
@@ -45,8 +45,8 @@ public class AddCommand extends Command {
         this.toAdd = new Task(
                 new Title(name),
                 new Phone(phone),
-                new Email(email),
-                new Address(address),
+                new DateTime(email),
+                new Location(address),
                 new UniqueTagList(tagSet)
         );
     }

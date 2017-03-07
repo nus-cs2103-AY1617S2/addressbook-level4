@@ -3,8 +3,8 @@ package seedu.geekeep.testutil;
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.tag.UniqueTagList;
-import seedu.geekeep.model.task.Address;
-import seedu.geekeep.model.task.Email;
+import seedu.geekeep.model.task.Location;
+import seedu.geekeep.model.task.DateTime;
 import seedu.geekeep.model.task.Phone;
 import seedu.geekeep.model.task.Title;
 
@@ -40,7 +40,7 @@ public class PersonBuilder {
     }
 
     public PersonBuilder withAddress(String address) throws IllegalValueException {
-        this.person.setAddress(new Address(address));
+        this.person.setLocation(new Location(address));
         return this;
     }
 
@@ -50,7 +50,7 @@ public class PersonBuilder {
     }
 
     public PersonBuilder withEmail(String email) throws IllegalValueException {
-        this.person.setEmail(new Email(email));
+        this.person.setDateTime(new DateTime(email));
         return this;
     }
 
