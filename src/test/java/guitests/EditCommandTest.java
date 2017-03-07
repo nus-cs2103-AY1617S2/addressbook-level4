@@ -103,7 +103,7 @@ public class EditCommandTest extends EzDoGuiTest {
 
         commandBox.runCommand("edit 1 s/");
         assertResultMessage(StartDate.MESSAGE_STARTDATE_CONSTRAINTS);
-        
+
         commandBox.runCommand("edit 1 d/");
         assertResultMessage(DueDate.MESSAGE_DUEDATE_CONSTRAINTS);
 

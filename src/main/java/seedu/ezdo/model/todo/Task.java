@@ -36,7 +36,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getPriority(), source.getEmail(), 
+        this(source.getName(), source.getPriority(), source.getEmail(),
                 source.getStartDate(), source.getDueDate(), source.getTags());
     }
 
