@@ -69,8 +69,7 @@ Format: `update INDEX [NAME] [startdate/STARTDATE] [enddate/ENDDATE] [recurring/
 > * If no optional fields are added, task will be set to completed if not completed.
 > * Otherwise, if task is completed, the task will be set to not completed.
 > * Existing values will be updated to the input values.
-> * When editing tags, the existing tags of the task will be removed if it already exists.
-> * Otherwise, if the tag does not exist, the tag will be added.
+> * When editing tags, the existing tags of the task will be set to contain the new tags; the old tags will be removed.
 
 Examples:
 
@@ -83,17 +82,15 @@ Examples:
 ### 2.4. Filter all tasks containing any keyword in their name or tag or date: `filter`
 
 Finds tasks whose names contain any of the given keywords.<br>
-Format: `filter/list/find [KEYWORDS] [tag/] [startdate/] [enddate/] [name/]`
+Format: `filter/list/find [KEYWORDS] [tag/] [name/]`
 
 > * The search is case insensitive. e.g `hans` will match `Hans`
 > * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 > * By default only the name is searched.
 > * Adding 'tag/' will search by tag instead.
-> * Adding 'startdate/' will search by end date instead.
-> * Adding 'enddate/' will search by end date instead.
 > * Adding 'name/' will still search by name.
 > * If no keyword is entered, the list of all tasks is displayed.
-> * 'tag/', 'startdate/', 'enddate/' and 'name/' can be combined to search by multiple fields.
+> * 'tag/' and 'name/' can be combined to search by multiple fields.
 > * Partial words will be matched e.g. `Han` will match `Hans`.
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `Hans` will match `Hans Bo`
@@ -269,7 +266,7 @@ Format: `switch WINDOWIDENTIFIER`
 > * If a letter is given, it will be the underlined letter in the window list name.
 > * If a word is given, it will be the word with the underlined letter in the window list name.
 
-### 2.18. Complete or Make Uncomplete a Task : `mark [complete/uncomplete] INDEX`
+### 2.18. Complete or Make Uncomplete a Task : `mark`
 
 Marks a task to be complete or incomplete.
 Format: `mark [complete/uncomplete] INDEX`
@@ -277,6 +274,34 @@ Format: `mark [complete/uncomplete] INDEX`
 > * Using complete as a parameter will mark the selected task as complete.
 > * Using incomplete as a parameter will mark the selected task as incomplete.
 > * Using neither will default the command to mark as complete.
+
+### 2.19. Add a Tag to a Task : `tag`
+
+Adds a tag or multiple tags to an existing task.
+Format: `tag INDEX TAG...`
+
+> * If the tag already exists, the command will notify you and do nothing.
+> * If multiple tags are used in the command, you will be notified of each one.
+
+Example:
+* `tag 1 school` <br>
+  Adds the tag 'school' to task 1.
+* `tag 2 work home` <br>
+  Adds the tags 'work' and 'home' to task 2.
+
+### 2.20. Remove a Tag from a Task : `untag`
+
+Removes a tag or multiple tags from an existing task.
+Format: `untag INDEX TAG...`
+
+> * If the tag already does not exist, the command will notify you and do nothing.
+> * If multiple tags are used in the command, you will be notified of each one.
+
+Example:
+* `untag 1 school` <br>
+  Removes the tag 'school' from task 1.
+* `untag 2 work home` <br>
+  Removes the tags 'work' and 'home' from task 2.
 
 ## 3. Command Summary
 
@@ -288,7 +313,7 @@ Format: `mark [complete/uncomplete] INDEX`
 * **Delete** : `delete INDEX` <br>
    e.g. `delete 3`
 
-* **Filter** : `filter/list/find [KEYWORDS] [tag/] [startdate/] [enddate/] [name/]` <br>
+* **Filter** : `filter/list/find [KEYWORDS] [tag/] [name/]` <br>
   e.g. `find school tag/`
 
 * **Help** : `help`
@@ -299,10 +324,12 @@ Format: `mark [complete/uncomplete] INDEX`
 * **Exit** : `exit/quit`
 
 * **Undo** : `undo [NUMBER]` <br>
-  e.g. `undo 5`
+  e.g. `undo 5` <br>
+  e.g. `undo`
 
 * **Redo** : `redo [NUMBER]` <br>
-  e.g. `redo 5`
+  e.g. `redo 5` <br>
+  e.g. `redo`
 
 * **History** : `history`
 
@@ -321,4 +348,14 @@ Format: `mark [complete/uncomplete] INDEX`
 
 * **Switch Display Task Window** : `switch WINDOWIDENTIFIER`
 
-* **Complete or Make Uncomplete a Task : `mark [complete/uncomplete] INDEX`
+* **Complete or Make Uncomplete a Task : `mark [complete/uncomplete] INDEX` <br>
+  e.g. `mark complete 1` <br>
+  e.g. `mark 1`
+
+* **Add a Tag to a Task : `tag INDEX TAG...` <br>
+  e.g. `tag 1 school` <br>
+  e.g. `tag 1 work home`
+
+* **Remove a Tag from a Task : `untag INDEX TAG...` <br>
+  e.g. `untag 1 school` <br>
+  e.g. `untag 1 work home`
