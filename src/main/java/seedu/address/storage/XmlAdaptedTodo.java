@@ -19,12 +19,6 @@ public class XmlAdaptedTodo {
 
     @XmlElement(required = true)
     private String name;
-    @XmlElement(required = true)
-    private String phone;
-    @XmlElement(required = true)
-    private String email;
-    @XmlElement(required = true)
-    private String address;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();

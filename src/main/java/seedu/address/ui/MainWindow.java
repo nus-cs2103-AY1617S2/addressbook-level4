@@ -33,7 +33,7 @@ public class MainWindow extends UiPart<Region> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
+    // private BrowserPanel browserPanel;
     private TodoListPanel todoListPanel;
     private Config config;
 
@@ -113,7 +113,7 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        browserPanel = new BrowserPanel(browserPlaceholder);
+        // browserPanel = new BrowserPanel(browserPlaceholder);
         todoListPanel = new TodoListPanel(getTodoListPlaceholder(), logic.getFilteredTodoList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTodoListFilePath());
@@ -199,12 +199,12 @@ public class MainWindow extends UiPart<Region> {
         return this.todoListPanel;
     }
 
-    void loadTodoPage(ReadOnlyTodo todo) {
-        browserPanel.loadTodoPage(todo);
-    }
-
-    void releaseResources() {
-        browserPanel.freeResources();
-    }
+//    void loadTodoPage(ReadOnlyTodo todo) {
+//        browserPanel.loadTodoPage(todo);
+//    }
+//
+//    void releaseResources() {
+//        browserPanel.freeResources();
+//    }
 
 }

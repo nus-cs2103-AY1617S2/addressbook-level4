@@ -22,8 +22,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the todo identified "
             + "by the index number used in the last todo listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS ] [t/TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 p/91234567 e/johndoe@yahoo.com";
+            + "Parameters: INDEX (must be a positive integer) [t/TAG]...\n"
+            + "Example: " + COMMAND_WORD + " 1 Take Dog for a walk";
 
     public static final String MESSAGE_EDIT_TODO_SUCCESS = "Edited Todo: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
