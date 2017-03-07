@@ -14,7 +14,7 @@ Responsibilities: Code Quality + Eclipse expert + Model
 #### [Mustaqiim Muhar](http://github.com/mustaqiimuhar)
 <img src="images/mustaqiimuhar.png" width="150"><br>
 Role: Developer <br>
-Responsibilities: Testing + Storage
+Responsibilities: Testing + Storage + Documentation
 
 -----
 
@@ -30,6 +30,6 @@ Responsibilities:  Integration + Git expert + Parser & Logic
 
 Role: Developer
  
-Responsibilities: Team Lead + Documentation, Deadlines, Deliverables (admin stuff)  + UI
+Responsibilities: Team Lead + Deadlines, Deliverables (admin stuff)  + UI
 
  -----
