@@ -9,7 +9,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 
 // Refactor this into TASK_NAME
 
-public class Name {
+public class TaskName {
 
     public static final String MESSAGE_NAME_CONSTRAINTS =
             "Person names should only contain alphanumeric characters and spaces, and it should not be blank";
@@ -27,7 +27,7 @@ public class Name {
      *
      * @throws IllegalValueException if given name string is invalid.
      */
-    public Name(String name) throws IllegalValueException {
+    public TaskName(String name) throws IllegalValueException {
         assert name != null;
         String trimmedName = name.trim();
         if (!isValidName(trimmedName)) {

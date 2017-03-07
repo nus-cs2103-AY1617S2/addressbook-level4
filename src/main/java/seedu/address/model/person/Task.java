@@ -12,27 +12,28 @@ import seedu.address.model.tag.UniqueTagList;
 
 // Refactor this into a TASK instead of a person
 
-public class Person implements ReadOnlyPerson {
+public class Task implements ReadOnlyPerson {
 
-    private Name name;
-    private Phone phone;
-    private Email email;
-    private Address address;
-
+    private TaskName name;
+    private Deadline deadline;
+    private PriorityLevel priority;
+    private Information info;
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, phone, email, address, tags);
+    public Task(TaskName name, Deadline deadline, PriorityLevel priority, Information info, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, deadline, priority, info, tags);
         this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
+        this.deadline = deadline;
+        this.priority = priority;
+        this.info = info;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
-
+    
+    // @Qixiang : Can help to do up the methods below, thanks!
+    
     /**
      * Creates a copy of the given ReadOnlyPerson.
      */

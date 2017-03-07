@@ -7,9 +7,9 @@ import seedu.address.commons.exceptions.IllegalValueException;
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */
 
-// Refactor this into DEADLINE
+// Refactor this into Deadline
 
-public class Phone {
+public class Deadline {
 
     public static final String MESSAGE_PHONE_CONSTRAINTS = "Person phone numbers should only contain numbers";
     public static final String PHONE_VALIDATION_REGEX = "\\d+";
@@ -21,7 +21,7 @@ public class Phone {
      *
      * @throws IllegalValueException if given phone string is invalid.
      */
-    public Phone(String phone) throws IllegalValueException {
+    public Deadline(String phone) throws IllegalValueException {
         assert phone != null;
         String trimmedPhone = phone.trim();
         if (!isValidPhone(trimmedPhone)) {

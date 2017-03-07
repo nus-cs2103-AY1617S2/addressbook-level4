@@ -10,9 +10,9 @@ import seedu.address.commons.exceptions.IllegalValueException;
  *  
  */
 
-// Refactor into PRIORITY_LEVEL
+// Refactor into PriorityLevel
 
-public class Email {
+public class PriorityLevel{
 
     public static final String MESSAGE_EMAIL_CONSTRAINTS =
             "Person emails should be 2 alphanumeric/period strings separated by '@'";
@@ -26,7 +26,7 @@ public class Email {
      * @throws IllegalValueException if given email address string is invalid.
      */
     
-    public Email(String email) throws IllegalValueException {
+    public PriorityLevel(String email) throws IllegalValueException {
         assert email != null;
         String trimmedEmail = email.trim();
         if (!isValidEmail(trimmedEmail)) {

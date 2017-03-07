@@ -8,9 +8,9 @@ import seedu.address.commons.exceptions.IllegalValueException;
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
 
-// Refactor into ANY_INFO
+// Refactor into Information
 
-public class Address {
+public class Information {
 
     public static final String MESSAGE_ADDRESS_CONSTRAINTS =
             "Person addresses can take any values, and it should not be blank";
@@ -28,7 +28,7 @@ public class Address {
      *
      * @throws IllegalValueException if given address string is invalid.
      */
-    public Address(String address) throws IllegalValueException {
+    public Information(String address) throws IllegalValueException {
         assert address != null;
         if (!isValidAddress(address)) {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
