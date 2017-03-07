@@ -5,7 +5,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-W13-B4/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-W13-B4/main?branch=master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/9865250c389f4e9fa8b0cf7405595544)](https://www.codacy.com/app/leeyh20/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103JAN2017-W13-B4/main&amp;utm_campaign=Badge_Grade)
 
-<img src="docs/images/Ui.png" width="600"><br>
+<img src="docs/images/Ui.png" width="450"><br>
 
 * Doist, rediscover your love for doing things! Be a Doist and organise your life right now because life does not wait for you!
 * This is a desktop To-do list application. It has a GUI but most of the user interactions happen using
