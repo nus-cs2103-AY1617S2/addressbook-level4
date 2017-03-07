@@ -1,4 +1,4 @@
-# Address Book (Level 4)
+# OneTwoDo
 
 [![Build Status](https://travis-ci.org/CS2103JAN2017-F14-B1/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-F14-B1/main)
 [![Build status](https://ci.appveyor.com/api/projects/status/3boko2x2vr5cc3w2?svg=true)](https://ci.appveyor.com/project/damithc/addressbook-level4)
@@ -7,17 +7,20 @@
 
 <img src="docs/images/Ui.png" width="600"><br>
 
-* This is a desktop Address Book application. It has a GUI but most of the user interactions happen using
-  a CLI (Command Line Interface).
-* It is a Java sample application intended for students learning Software Engineering while using Java as
-  the main programming language.
-* It is **written in OOP fashion**. It provides a **reasonably well-written** code example that is
-  **significantly bigger** (around 6 KLoC)than what students usually write in beginner-level SE modules.
-* What's different from [level 3](https://github.com/se-edu/addressbook-level3):
-    * A more sophisticated GUI that includes a list panel and an in-built Browser.
-    * More test cases, including automated GUI testing.
-    * Support for *Build Automation* using Gradle and for *Continuous Integration* using Travis CI.
+OneTwoDo is the only desktop application you need for managing your tasks.
 
+The interface is simple and the clean GUI separates tasks into 3 categories:
+    * Deadline - a task with an end date but no start dat
+    * Event - a task with a start and end date
+    * To do - a task without a start or end date
+
+Its CLI interface is intended for users who are skilled at typing, and most commands are given through the command line.
+
+Want to manage your ToDos? Get OneTwoDo today!
+
+OneTwoDo also supports the following for developers:
+    * Automated GUI testing.
+    * Support for *Build Automation* using Gradle and for *Continuous Integration* using Travis CI.
 
 #### Site Map
 * [User Guide](docs/UserGuide.md)
@@ -31,6 +34,6 @@
 
 * Some parts of this sample application were inspired by the excellent
   [Java FX tutorial](http://code.makery.ch/library/javafx-8-tutorial/) by *Marco Jakob*.
-
+* This application is based on [AddressBook Level 4's](https://github.com/nus-cs2103-AY1617S2/addressbook-level4/) sample code.
 
 #### Licence : [MIT](LICENSE)
