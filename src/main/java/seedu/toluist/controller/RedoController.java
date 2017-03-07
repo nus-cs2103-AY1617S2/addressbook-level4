@@ -16,8 +16,9 @@ import seedu.toluist.ui.Ui;
  */
 public class RedoController extends Controller {
     private static final String COMMAND_TEMPLATE = "^redo(\\s+(?<number>\\d+))?\\s*";
+    private static final String COMMAND_WORD = "redo";
     private static final String REDO_TIMES = "number";
-    private static final String COMMAND_RESULT_TEMPLATE = "List redo-ed %d times";
+    private static final String RESULT_MESSAGE_TEMPLATE = "List redo-ed %d times";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -39,7 +40,7 @@ public class RedoController extends Controller {
         uiStore.setTask(todoList.getTasks());
         renderer.render();
 
-        return new CommandResult(String.format(COMMAND_RESULT_TEMPLATE, actualRedoTimes));
+        return new CommandResult(String.format(RESULT_MESSAGE_TEMPLATE, actualRedoTimes));
     }
 
     @Override
@@ -55,5 +56,9 @@ public class RedoController extends Controller {
     @Override
     public boolean matchesCommand(String command) {
         return command.matches(COMMAND_TEMPLATE);
+    }
+
+    public static String[] getCommandWords() {
+        return new String[] { COMMAND_WORD };
     }
 }
