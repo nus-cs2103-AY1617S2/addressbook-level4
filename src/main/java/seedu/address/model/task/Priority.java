@@ -3,12 +3,12 @@ package seedu.address.model.task;
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Priority's priority in the address book.
+ * Represents a Task's priority in the task manager.
  * Guarantees: immutable; is valid as declared in {@link #isValidPriority(String)}
  */
 public class Priority {
 
-    public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Person phone numbers should only contain numbers";
+    public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority should only contain numbers";
     public static final String PRIORITY_VALIDATION_REGEX = "\\d+";
 
     public final String value;
@@ -16,7 +16,7 @@ public class Priority {
     /**
      * Validates given priority.
      *
-     * @throws IllegalValueException if given phone string is invalid.
+     * @throws IllegalValueException if given priority string is invalid.
      */
     public Priority(String priority) throws IllegalValueException {
         assert priority != null;
