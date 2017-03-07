@@ -44,7 +44,7 @@ public class TaskBuilder {
         this.task.setStartDate(new StartDate(startDate));
         return this;
     }
-    
+
     public TaskBuilder withDueDate(String dueDate) throws IllegalValueException {
         this.task.setDueDate(new DueDate(dueDate));
         return this;
