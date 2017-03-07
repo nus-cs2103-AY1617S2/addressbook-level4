@@ -1,5 +1,5 @@
 package seedu.tache.model.task;
 
-public class FloatingTask {
+public interface FloatingTask {
 
 }
