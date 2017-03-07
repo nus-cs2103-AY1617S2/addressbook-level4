@@ -4,13 +4,13 @@ import seedu.address.model.task.Description;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Priority;
-import seedu.address.model.task.ReadOnlyPerson;
+import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
  * A mutable task object. For testing only.
  */
-public class TestPerson implements ReadOnlyPerson {
+public class TestPerson implements ReadOnlyTask {
 
     private Name name;
     private Description address;
