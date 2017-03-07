@@ -517,27 +517,25 @@ Extensions
 
 ##### **Mainstream OS**
 
-Windows, Linux, Unix, OS-X
+> Windows, Linux, Unix, OS-X
 
 ##### **CLI**
 
-Command Line Interface
+> Command Line Interface
 
 ##### **GUI**
 
-Graphical User Interface
+> Graphical User Interface
 
 ##### **Task**
 
-A task may or may not have a specific ending time
-
-E.g. Complete Progress Report
+> A task may or may not have a specific ending time
+> E.g. Complete Progress Report
 
 ##### **Deadline**
 
-A task with a specified ending time is a deadline
-
-E.g. Complete Progress Report by 20 March 2017 2359H
+> A task with a specified ending time is a deadline
+> E.g. Complete Progress Report by 20 March 2017 2359H
 
 ## **Appendix E : Product Survey**
 
