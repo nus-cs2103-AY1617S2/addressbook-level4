@@ -1,18 +1,16 @@
 package seedu.toluist.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import javafx.util.Pair;
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.Ui;
-import seedu.toluist.ui.UiStore;
 
 /**
  * Searches the task list for matches in the parameters, and displays the results received
@@ -22,11 +20,13 @@ public class FindController extends Controller {
             + "(\\s+(?<keywords>.+))?\\s*";
     private static final String SEARCH_BY_TAG = "tag/";
     private static final String SEARCH_BY_NAME = "name/";
-    private static final String COMMAND_RESULT_TEMPLATE = "%d results found";
+    private static final String COMMAND_RESULT_TEMPLATE = "Searching for \"%s\" by %s.\n%d results found";
     private static final String TRUE_COMMAND = "true";
     private static final String FALSE_COMMAND = "false";
+    private static final String NAME_PARAMETER = "name";
+    private static final String TAG_PARAMETER = "tag";
+    private static final String NAME_AND_TAG_PARAMETER = "name and tag";
     private static final String KEYWORDS = "keywords";
-//    private static final String SPLITTER_COMMAND = "(?i:)( |tag\\|name\\)(?-i)";
     private static final String SPLITTER_COMMAND = " ";
       
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -45,12 +45,13 @@ public class FindController extends Controller {
         boolean isSearchByName = tokens.get(SEARCH_BY_NAME).equals(TRUE_COMMAND);
         String keywords = tokens.get(KEYWORDS);
         String[] keywordList = keywords.split(" ");
+        keywordList = removeEmptySpaces(keywordList);
         boolean isFound = false;
         TodoList todoList = TodoList.load();
         ArrayList<Task> taskList = todoList.getTasks();
         Task currentTask;
         int foundValue = 0;
-        
+
         for (int i = 0; i < taskList.size(); i++) {
             currentTask = taskList.get(i);
             for (int j = 0; j < keywordList.length; j++) {
@@ -76,11 +77,49 @@ public class FindController extends Controller {
             isFound = false;
         }
         
-    
         uiStore.setTask(foundTasks);
         renderer.render();
 
-        return new CommandResult(String.format(COMMAND_RESULT_TEMPLATE, foundValue));
+        //display formatting
+        return formatDisplay(isSearchByTag, isSearchByName, keywordList, foundValue);
+    }
+
+    private String[] removeEmptySpaces(String[] keywordList) {
+        ArrayList<String> replacementList = new ArrayList<String>();
+        for (int i = 0; i < keywordList.length; i++) {
+            if (!keywordList[i].equals("")) {
+                replacementList.add(keywordList[i]);
+            }
+        }
+        return replacementList.toArray(new String[0]);
+    }
+
+    private CommandResult formatDisplay(boolean isSearchByTag, boolean isSearchByName,
+                                        String[] keywordList, int foundValue) {
+        String searchParameters;
+        if (isSearchByName) {
+            if (isSearchByTag) {
+                searchParameters = NAME_AND_TAG_PARAMETER;
+            }
+            else {
+                searchParameters = NAME_PARAMETER;
+            }
+        }
+        else {
+            searchParameters = TAG_PARAMETER;
+        }
+        
+        String keywords;
+        if (keywordList.length > 0) {
+            keywords = keywordList[0];
+            for (int k = 1; k < keywordList.length; k++) {
+                keywords += " " + keywordList[k];
+            }
+        }
+        else {
+            keywords = "";
+        }
+        return new CommandResult(String.format(COMMAND_RESULT_TEMPLATE, keywords, searchParameters,foundValue));
     }
     
     @Override
@@ -105,10 +144,10 @@ public class FindController extends Controller {
         
         //keyword for matching
         String keywords = command.replace(SEARCH_BY_TAG, "");
-        keywords.replace(SEARCH_BY_NAME, "");
-        String[] listOfParameters = command.split(SPLITTER_COMMAND, 2);
+        keywords = keywords.replace(SEARCH_BY_NAME, "");
+        String[] listOfParameters = keywords.split(SPLITTER_COMMAND, 2);
         if (listOfParameters.length > 1) {
-            tokens.put(KEYWORDS, listOfParameters[1]);
+            tokens.put(KEYWORDS, listOfParameters[1].trim());
         }
         else {
             tokens.put(KEYWORDS, "");
