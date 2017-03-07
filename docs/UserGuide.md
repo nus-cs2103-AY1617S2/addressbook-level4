@@ -229,11 +229,11 @@ There is no need to save manually.
 * **Add** :  
   `(add|do) TASK_DESCRIPTION [\from START_TIME] [\to END_TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]` <br>
   `(add|do) TASK_DESCRIPTION [\by TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]` <br>
-  e.g. `add James Ho p/22224444 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+  e.g. `do group meeting \from 4pm today \to 6pm today \remind_at 3pm \as important \under school_work CS2103T`
 
 * **Alias** :  
   `alias ALIAS \for COMMAND_WORD` <br>
-  e.g. `alias alias \for set_alias`
+  e.g. `alias set_alias \for alias`
 
 * **Clear** :  
   `clear` <br>
