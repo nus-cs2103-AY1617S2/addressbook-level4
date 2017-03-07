@@ -197,11 +197,11 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidPersonData() {
         assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
-                Title.MESSAGE_NAME_CONSTRAINTS);
+                Title.MESSAGE_TITLE_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
-                EndDateTime.MESSAGE_PHONE_CONSTRAINTS);
+                EndDateTime.MESSAGE_DATETIME_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
-                StartDateTime.MESSAGE_EMAIL_CONSTRAINTS);
+                StartDateTime.MESSAGE_DATETIME_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 

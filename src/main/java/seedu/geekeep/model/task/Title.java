@@ -8,7 +8,7 @@ import seedu.geekeep.commons.exceptions.IllegalValueException;
  */
 public class Title {
 
-    public static final String MESSAGE_NAME_CONSTRAINTS =
+    public static final String MESSAGE_TITLE_CONSTRAINTS =
             "Task titles should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
@@ -36,7 +36,7 @@ public class Title {
         assert title != null;
         String trimmedTitle = title.trim();
         if (!isValidTitle(trimmedTitle)) {
-            throw new IllegalValueException(MESSAGE_NAME_CONSTRAINTS);
+            throw new IllegalValueException(MESSAGE_TITLE_CONSTRAINTS);
         }
         this.fullTitle = trimmedTitle;
     }

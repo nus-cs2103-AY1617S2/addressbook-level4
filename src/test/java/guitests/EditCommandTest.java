@@ -91,13 +91,13 @@ public class EditCommandTest extends AddressBookGuiTest {
     @Test
     public void edit_invalidValues_failure() {
         commandBox.runCommand("edit 1 *&");
-        assertResultMessage(Title.MESSAGE_NAME_CONSTRAINTS);
+        assertResultMessage(Title.MESSAGE_TITLE_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 p/abcd");
-        assertResultMessage(EndDateTime.MESSAGE_PHONE_CONSTRAINTS);
+        assertResultMessage(EndDateTime.MESSAGE_DATETIME_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 e/yahoo!!!");
-        assertResultMessage(StartDateTime.MESSAGE_EMAIL_CONSTRAINTS);
+        assertResultMessage(StartDateTime.MESSAGE_DATETIME_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 a/");
         assertResultMessage(Location.MESSAGE_LOCATION_CONSTRAINTS);
