@@ -15,7 +15,7 @@
     * [Adding a recurring task] (#adding-a-recurring-task)
     * [Editng a task] (#editing-a-task)
     * [Deleting a task] (#deleting-a-task)
-    * [Viewing tasks] (#viewing-task)
+    * [Viewing tasks] (#viewing-tasks)
       * [Viewing all tasks] (#viewing-all-tasks)
       * [Viewing a specified task] (#viewing-a-specified-task)
       * [Viewing all Today's tasks] (#viewing-all-todays-tasks)
@@ -513,7 +513,8 @@ Q: Is it possible to set my storage path to a portable drive as I want to use th
 A: Yes! Just use the `saveto` command and choose the specified path of the portable drive
 
 Q: The iManager is not showing everything that i have added when i open it up?
-A: Our iManager only shows Today's task on start-up. To view pending, "done", floating or overdue task please refer to [Viewing tasks] (#viewing-task). 
+A: Our iManager only shows Today's task on start-up. To view pending, "done", floating or overdue task please refer to [Viewing tasks] 
+   (#viewing-tasks). 
 
 
 ## Command Summary
