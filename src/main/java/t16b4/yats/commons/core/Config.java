@@ -14,8 +14,8 @@ public class Config {
     private String appTitle = "Yet Another Task Scheduler";
     private Level logLevel = Level.INFO;
     private String userPrefsFilePath = "preferences.json";
-    private String taskListFilePath = "data/tasklist.xml";
-    private String taskListName = "MyTaskList";
+    private String itemListFilePath = "data/itemlist.xml";
+    private String itemListName = "MyItemList";
 
 
     public String getAppTitle() {
@@ -43,19 +43,19 @@ public class Config {
     }
 
     public String getTaskListFilePath() {
-        return taskListFilePath;
+        return itemListFilePath;
     }
 
     public void setTaskListFilePath(String addressBookFilePath) {
-        this.taskListFilePath = addressBookFilePath;
+        this.itemListFilePath = addressBookFilePath;
     }
 
     public String getTaskListName() {
-        return taskListName;
+        return itemListName;
     }
 
     public void setTaskListName(String addressBookName) {
-        this.taskListName = addressBookName;
+        this.itemListName = addressBookName;
     }
 
 
@@ -73,13 +73,13 @@ public class Config {
         return Objects.equals(appTitle, o.appTitle)
                 && Objects.equals(logLevel, o.logLevel)
                 && Objects.equals(userPrefsFilePath, o.userPrefsFilePath)
-                && Objects.equals(taskListFilePath, o.taskListFilePath)
-                && Objects.equals(taskListName, o.taskListName);
+                && Objects.equals(itemListFilePath, o.itemListFilePath)
+                && Objects.equals(itemListName, o.itemListName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(appTitle, logLevel, userPrefsFilePath, taskListFilePath, taskListName);
+        return Objects.hash(appTitle, logLevel, userPrefsFilePath, itemListFilePath, itemListName);
     }
 
     @Override
@@ -88,8 +88,8 @@ public class Config {
         sb.append("App title : " + appTitle);
         sb.append("\nCurrent log level : " + logLevel);
         sb.append("\nPreference file Location : " + userPrefsFilePath);
-        sb.append("\nLocal data file location : " + taskListFilePath);
-        sb.append("\nTaskList name : " + taskListName);
+        sb.append("\nLocal data file location : " + itemListFilePath);
+        sb.append("\nItemList name : " + itemListName);
         return sb.toString();
     }
 
