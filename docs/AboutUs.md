@@ -4,8 +4,8 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Jia Hui](http://github.com/gngster)
-<img src="images/JoshuaLee.jpg" width="150"><br>
+#### [Gng Jia Hui](http://github.com/gngster)
+<img src="images/GngJiaHui.jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: Testing. <br>
 Components: UI, Logic.
