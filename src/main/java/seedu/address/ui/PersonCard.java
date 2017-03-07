@@ -31,8 +31,8 @@ public class PersonCard extends UiPart<Region> {
         name.setText(task.getName().taskName);
         id.setText(displayedIndex + ". ");
         phone.setText(task.getDescription().value);
-        address.setText(task.getStartDateTime().value.toString());
-        email.setText(task.getEndDateTime().value.toString());
+        address.setText(task.getStartDateTime().toString());
+        email.setText(task.getEndDateTime().toString());
         initTags(task);
     }
 

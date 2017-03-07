@@ -49,7 +49,7 @@ public class EndDateTime {
 
     @Override
     public String toString() {
-        return value.toString();
+        return END_DATETIME_FORMATTER.format(value);
     }
 
     @Override

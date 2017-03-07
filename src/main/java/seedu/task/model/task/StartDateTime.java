@@ -1,6 +1,7 @@
 package seedu.task.model.task;
 
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -49,7 +50,7 @@ public class StartDateTime {
 
     @Override
     public String toString() {
-        return value.toString();
+        return START_DATETIME_FORMATTER.format(value);
     }
 
     @Override
