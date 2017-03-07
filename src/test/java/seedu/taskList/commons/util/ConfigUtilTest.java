@@ -54,7 +54,6 @@ public class ConfigUtilTest {
     public void read_fileInOrder_successfullyRead() throws DataConversionException {
 
         Config expected = getTypicalConfig();
-
         Config actual = read("TypicalConfig.json").get();
         assertEquals(expected, actual);
     }
@@ -75,11 +74,11 @@ public class ConfigUtilTest {
 
     private Config getTypicalConfig() {
         Config config = new Config();
-        config.setAppTitle("Typical App Title");
+        config.setAppTitle("FlexiTask");
         config.setLogLevel(Level.INFO);
         config.setUserPrefsFilePath("C:\\preferences.json");
-        config.setTaskListFilePath("addressbook.xml");
-        config.setTaskListName("TypicalTaskListName");
+        config.setTaskListFilePath("tasklist.xml");
+        config.setTaskListName("MyTaskList");
         return config;
     }
 
