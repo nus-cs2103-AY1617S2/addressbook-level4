@@ -29,7 +29,7 @@ public class RedoCommandTest extends ToLuistGuiTest {
     }
 
     @Test
-    public void undoMultipleCommand() {
+    public void redoMultipleCommand() {
         String taskDescription = "build a rocket";
         String addCommand = "add " + taskDescription;
         Task task = new Task(taskDescription);
@@ -37,7 +37,7 @@ public class RedoCommandTest extends ToLuistGuiTest {
         assertTrue(isTaskShown(task));
 
         String taskDescription2 = "ride a unicorn";
-        String addCommand2 = "add " + taskDescription;
+        String addCommand2 = "add " + taskDescription2;
         Task task2 = new Task(taskDescription2);
         commandBox.runCommand(addCommand2);
         assertTrue(isTaskShown(task2));

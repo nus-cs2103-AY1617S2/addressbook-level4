@@ -33,7 +33,7 @@ public class UndoCommandTest extends ToLuistGuiTest {
         assertTrue(isTaskShown(task));
 
         String taskDescription2 = "ride a unicorn";
-        String addCommand2 = "add " + taskDescription;
+        String addCommand2 = "add " + taskDescription2;
         Task task2 = new Task(taskDescription2);
         commandBox.runCommand(addCommand2);
         assertTrue(isTaskShown(task2));
