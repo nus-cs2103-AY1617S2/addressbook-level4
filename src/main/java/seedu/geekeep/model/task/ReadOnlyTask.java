@@ -17,7 +17,8 @@ public interface ReadOnlyTask {
     Location getLocation();
 
     /**
-     * The returned TagList is a deep copy of the internal TagList, changes on the returned list will not affect the
+     * The returned TagList is a deep copy of the internal TagList, 
+     * changes on the returned list will not affect the
      * person's internal tags.
      */
     UniqueTagList getTags();
@@ -29,7 +30,8 @@ public interface ReadOnlyTask {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                         && other.getTitle().equals(this.getTitle()) // state checks here onwards
-                        && other.getEndDateTime().equals(this.getEndDateTime()) && other.getStartDateTime().equals(this.getStartDateTime())
+                        && other.getEndDateTime().equals(this.getEndDateTime()) 
+                        && other.getStartDateTime().equals(this.getStartDateTime())
                         && other.getLocation().equals(this.getLocation()));
     }
 
@@ -38,8 +40,9 @@ public interface ReadOnlyTask {
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getTitle()).append(" Ending DateTime: ").append(getEndDateTime()).append(" Starting DateTime: ").append(getStartDateTime())
-                .append(" Location: ").append(getLocation()).append(" Tags: ");
+        builder.append(getTitle()).append(" Ending DateTime: ").append(getEndDateTime())
+               .append(" Starting DateTime: ").append(getStartDateTime())
+               .append(" Location: ").append(getLocation()).append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }

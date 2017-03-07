@@ -1,10 +1,10 @@
 package seedu.geekeep.testutil;
 
 import seedu.geekeep.model.tag.UniqueTagList;
-import seedu.geekeep.model.task.Location;
-import seedu.geekeep.model.task.StartDateTime;
 import seedu.geekeep.model.task.EndDateTime;
+import seedu.geekeep.model.task.Location;
 import seedu.geekeep.model.task.ReadOnlyTask;
+import seedu.geekeep.model.task.StartDateTime;
 import seedu.geekeep.model.task.Title;
 
 /**

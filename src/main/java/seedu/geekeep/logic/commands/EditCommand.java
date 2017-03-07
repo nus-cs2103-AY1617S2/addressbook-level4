@@ -7,10 +7,10 @@ import seedu.geekeep.commons.core.Messages;
 import seedu.geekeep.commons.util.CollectionUtil;
 import seedu.geekeep.logic.commands.exceptions.CommandException;
 import seedu.geekeep.model.tag.UniqueTagList;
-import seedu.geekeep.model.task.Location;
-import seedu.geekeep.model.task.StartDateTime;
 import seedu.geekeep.model.task.EndDateTime;
+import seedu.geekeep.model.task.Location;
 import seedu.geekeep.model.task.ReadOnlyTask;
+import seedu.geekeep.model.task.StartDateTime;
 import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.Title;
 import seedu.geekeep.model.task.UniqueTaskList;
@@ -25,7 +25,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the last person listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS ] [t/TAG]...\n"
+            + "Parameters: INDEX (must be a positive integer) "
+            + "[NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS ] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 p/91234567 e/johndoe@yahoo.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
@@ -78,8 +79,10 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Title updatedTitle = editPersonDescriptor.getTitle().orElseGet(personToEdit::getTitle);
-        EndDateTime updatedEndDateTime = editPersonDescriptor.getEndDateTime().orElseGet(personToEdit::getEndDateTime);
-        StartDateTime updatedStartDateTime = editPersonDescriptor.getStartDateTime().orElseGet(personToEdit::getStartDateTime);
+        EndDateTime updatedEndDateTime 
+                = editPersonDescriptor.getEndDateTime().orElseGet(personToEdit::getEndDateTime);
+        StartDateTime updatedStartDateTime 
+                = editPersonDescriptor.getStartDateTime().orElseGet(personToEdit::getStartDateTime);
         Location updatedLocation = editPersonDescriptor.getLocation().orElseGet(personToEdit::getLocation);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
@@ -111,7 +114,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.title, this.endDateTime, this.startDateTime, this.location, this.tags);
+            return CollectionUtil.isAnyPresent(this.title, this.endDateTime, this.startDateTime,
+                                               this.location, this.tags);
         }
 
         public void setTitle(Optional<Title> title) {

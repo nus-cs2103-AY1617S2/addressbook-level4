@@ -1,8 +1,8 @@
 package seedu.geekeep.logic.parser;
 
 import static seedu.geekeep.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.geekeep.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.geekeep.logic.parser.CliSyntax.PREFIX_ENDING_DATETIME;
+import static seedu.geekeep.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.geekeep.logic.parser.CliSyntax.PREFIX_STARTING_DATETIME;
 import static seedu.geekeep.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -42,8 +42,10 @@ public class EditCommandParser {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         try {
             editPersonDescriptor.setTitle(ParserUtil.parseTitle(preambleFields.get(1)));
-            editPersonDescriptor.setEndDateTime(ParserUtil.parseEndDateTime(argsTokenizer.getValue(PREFIX_STARTING_DATETIME)));
-            editPersonDescriptor.setStartDateTime(ParserUtil.parseStartDateTime(argsTokenizer.getValue(PREFIX_ENDING_DATETIME)));
+            editPersonDescriptor.setEndDateTime(
+                    ParserUtil.parseEndDateTime(argsTokenizer.getValue(PREFIX_STARTING_DATETIME)));
+            editPersonDescriptor.setStartDateTime(
+                    ParserUtil.parseStartDateTime(argsTokenizer.getValue(PREFIX_ENDING_DATETIME)));
             editPersonDescriptor.setLocation(ParserUtil.parseLocation(argsTokenizer.getValue(PREFIX_LOCATION)));
             editPersonDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
         } catch (IllegalValueException ive) {
