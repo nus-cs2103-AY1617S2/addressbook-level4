@@ -1,4 +1,4 @@
-# Address Book (Level 4)
+# Burdens (ToDoManager) V0.1
 
 [![Build Status](https://api.travis-ci.org/CS2103JAN2017-W09-B1/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-W09-B1/main)
 <!---[![Build status](https://ci.appveyor.com/api/projects/status/3boko2x2vr5cc3w2?svg=true)](https://ci.appveyor.com/project/damithc/addressbook-level4)
@@ -9,13 +9,12 @@
 
 <img src="docs/images/Ui.png" width="600"><br>
 
-* This is a desktop Address Book application. It has a GUI but most of the user interactions happen using
+* This is a desktop To Do Manager application called Burdens. It has a GUI but most of the user interactions happen using
   a CLI (Command Line Interface).
-* It is a Java sample application intended for students learning Software Engineering while using Java as
-  the main programming language.
+* It is a Java application intended for users who are experienced with CLI to keep track of their daily tasks.
 * It is **written in OOP fashion**. It provides a **reasonably well-written** code example that is
   **significantly bigger** (around 6 KLoC)than what students usually write in beginner-level SE modules.
-* What's different from [level 3](https://github.com/se-edu/addressbook-level3):
+* It includes:
     * A more sophisticated GUI that includes a list panel and an in-built Browser.
     * More test cases, including automated GUI testing.
     * Support for *Build Automation* using Gradle and for *Continuous Integration* using Travis CI.
