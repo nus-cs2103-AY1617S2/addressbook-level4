@@ -189,21 +189,22 @@ public class LogicManagerTest {
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPriorityPrefix "
-                + "s/valid,address d/23/02/2017", expectedMessage);
-        assertCommandFailure("add Valid Name p/1"
-                + ", todo d/s23/03/2017", expectedMessage);
-        assertCommandFailure("add Valid Name p/1 e/valid@email.butNoStartDatePrefix "
-                + "valid, 12/12/2013 d/24/04/2017", expectedMessage);
+        assertCommandFailure("add Valid Name 1 s/21/01/2017 d/23/02/2017 t/missingPriorityPrefix", expectedMessage);
+        assertCommandFailure("add Valid Name p/1 23/03/2017 d/19/03/2017 t/missingStartDatePrefix", expectedMessage);
+        assertCommandFailure("add Valid Name p/1 s/12/12/2013 24/04/2017 t/missingDueDatePrefix", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidPersonData() {
-        assertCommandFailure("add []\\[;] p/3 e/valid@e.mail s/valid, startDate d/31/05/1999",
+        assertCommandFailure("add []\\[;] p/3 s/30/03/1999 d/31/05/1999 t/invalidName",
                 Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail s/valid, startDate d/31/06/1999",
+        assertCommandFailure("add Valid Name p/not_numbers s/01/08/1998 d/11/08/1998 t/invalidPriority",
                 Priority.MESSAGE_PRIORITY_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/1 e/valid@e.mail s/valid, startDate d/31/08/1999 t/invalid_-[.tag",
+        assertCommandFailure("add Valid Name p/2 s/Invalid_Start.Date d/11/08/1998 t/invalidStartDate",
+                StartDate.MESSAGE_STARTDATE_CONSTRAINTS);
+        assertCommandFailure("add Valid Name p/1 s/01/08/1998 d/invalid_DueDate. t/invalidDueDate",
+                DueDate.MESSAGE_DUEDATE_CONSTRAINTS);
+        assertCommandFailure("add Valid Name p/1 s/01/01/1990 d/01/03/1990 t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
