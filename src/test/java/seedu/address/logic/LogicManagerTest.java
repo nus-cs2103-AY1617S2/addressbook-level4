@@ -194,7 +194,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidPersonData() {
         assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
-                Content.MESSAGE_NAME_CONSTRAINTS);
+                Content.MESSAGE_CONTENT_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
@@ -435,7 +435,7 @@ public class LogicManagerTest {
 
             cmd.append("add ");
 
-            cmd.append(p.getName().toString());
+            cmd.append(p.getContent().toString());
 
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {

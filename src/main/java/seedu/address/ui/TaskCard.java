@@ -28,7 +28,7 @@ public class TaskCard extends UiPart<Region> {
 
     public TaskCard(ReadOnlyTask person, int displayedIndex) {
         super(FXML);
-        name.setText(person.getName().fullName);
+        name.setText(person.getContent().fullContent);
         id.setText(displayedIndex + ". ");
         initTags(person);
     }

@@ -20,7 +20,7 @@ public class TestTask implements ReadOnlyTask {
      * Creates a copy of {@code taskToCopy}.
      */
     public TestTask(TestTask taskToCopy) {
-        this.name = taskToCopy.getName();
+        this.name = taskToCopy.getContent();
         this.tags = taskToCopy.getTags();
     }
 
@@ -33,7 +33,7 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Content getName() {
+    public Content getContent() {
         return name;
     }
 
@@ -49,7 +49,7 @@ public class TestTask implements ReadOnlyTask {
 
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
-        sb.append("add " + this.getName().fullName + " ");
+        sb.append("add " + this.getContent().fullContent + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }

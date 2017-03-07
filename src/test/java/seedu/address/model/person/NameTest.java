@@ -10,16 +10,16 @@ public class NameTest {
     @Test
     public void isValidName() {
         // invalid name
-        assertFalse(Content.isValidName("")); // empty string
-        assertFalse(Content.isValidName(" ")); // spaces only
-        assertFalse(Content.isValidName("^")); // only non-alphanumeric characters
-        assertFalse(Content.isValidName("peter*")); // contains non-alphanumeric characters
+        assertFalse(Content.isValidContent("")); // empty string
+        assertFalse(Content.isValidContent(" ")); // spaces only
+        assertFalse(Content.isValidContent("^")); // only non-alphanumeric characters
+        assertFalse(Content.isValidContent("peter*")); // contains non-alphanumeric characters
 
         // valid name
-        assertTrue(Content.isValidName("peter jack")); // alphabets only
-        assertTrue(Content.isValidName("12345")); // numbers only
-        assertTrue(Content.isValidName("peter the 2nd")); // alphanumeric characters
-        assertTrue(Content.isValidName("Capital Tan")); // with capital letters
-        assertTrue(Content.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(Content.isValidContent("peter jack")); // alphabets only
+        assertTrue(Content.isValidContent("12345")); // numbers only
+        assertTrue(Content.isValidContent("peter the 2nd")); // alphanumeric characters
+        assertTrue(Content.isValidContent("Capital Tan")); // with capital letters
+        assertTrue(Content.isValidContent("David Roger Jackson Ray Jr 2nd")); // long names
     }
 }

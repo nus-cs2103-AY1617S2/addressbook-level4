@@ -4,58 +4,58 @@ import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
  * Represents a Task's name in the task manager.
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidContent(String)}
  */
 public class Content {
 
-    public static final String MESSAGE_NAME_CONSTRAINTS =
+    public static final String MESSAGE_CONTENT_CONSTRAINTS =
             "Task names should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
      * The first character of the task must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String CONTENT_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String fullName;
+    public final String fullContent;
 
     /**
      * Validates given name.
      *
      * @throws IllegalValueException if given name string is invalid.
      */
-    public Content(String name) throws IllegalValueException {
-        assert name != null;
-        String trimmedName = name.trim();
-        if (!isValidName(trimmedName)) {
-            throw new IllegalValueException(MESSAGE_NAME_CONSTRAINTS);
+    public Content(String content) throws IllegalValueException {
+        assert content != null;
+        String trimmedName = content.trim();
+        if (!isValidContent(trimmedName)) {
+            throw new IllegalValueException(MESSAGE_CONTENT_CONSTRAINTS);
         }
-        this.fullName = trimmedName;
+        this.fullContent = trimmedName;
     }
 
     /**
      * Returns true if a given string is a valid person name.
      */
-    public static boolean isValidName(String test) {
-        return test.matches(NAME_VALIDATION_REGEX);
+    public static boolean isValidContent(String test) {
+        return test.matches(CONTENT_VALIDATION_REGEX);
     }
 
 
     @Override
     public String toString() {
-        return fullName;
+        return fullContent;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Content // instanceof handles nulls
-                && this.fullName.equals(((Content) other).fullName)); // state check
+                && this.fullContent.equals(((Content) other).fullContent)); // state check
     }
 
     @Override
     public int hashCode() {
-        return fullName.hashCode();
+        return fullContent.hashCode();
     }
 
 }

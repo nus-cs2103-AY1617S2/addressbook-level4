@@ -27,7 +27,7 @@ public class PersonBuilder {
     }
 
     public PersonBuilder withName(String name) throws IllegalValueException {
-        this.person.setName(new Content(name));
+        this.person.setContent(new Content(name));
         return this;
     }
 

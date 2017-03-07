@@ -11,16 +11,16 @@ import seedu.address.model.tag.UniqueTagList;
  */
 public class Task implements ReadOnlyTask {
 
-    private Content name;
+    private Content content;
 
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Content name, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name);
-        this.name = name;
+    public Task(Content content, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(content);
+        this.content = content;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -28,17 +28,17 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getTags());
+        this(source.getContent(), source.getTags());
     }
 
-    public void setName(Content name) {
-        assert name != null;
-        this.name = name;
+    public void setContent(Content content) {
+        assert content != null;
+        this.content = content;
     }
 
     @Override
-    public Content getName() {
-        return name;
+    public Content getContent() {
+        return content;
     }
 
     @Override
@@ -47,7 +47,7 @@ public class Task implements ReadOnlyTask {
     }
 
     /**
-     * Replaces this person's tags with the tags in the argument tag list.
+     * Replaces this task's tags with the tags in the argument tag list.
      */
     public void setTags(UniqueTagList replacement) {
         tags.setTags(replacement);
@@ -59,7 +59,7 @@ public class Task implements ReadOnlyTask {
     public void resetData(ReadOnlyTask replacement) {
         assert replacement != null;
 
-        this.setName(replacement.getName());
+        this.setContent(replacement.getContent());
         this.setTags(replacement.getTags());
     }
 
@@ -73,7 +73,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, tags);
+        return Objects.hash(content, tags);
     }
 
     @Override
