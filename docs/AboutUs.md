@@ -9,21 +9,18 @@ We are a team based in the [School of Computing, National University of Singapor
 #### [Lee Jin Shun](http://github.com/jinshunlee)  
 <img src="images/jinshunlee.png" width="150"><br>  
 Role: Project Leader <br>  
-Responsibilities: 
-<<<<<<< HEAD
-* In charge of   
-=======
+Responsibilities:
 * In charge of Integration
+* In charge of Deliverables and Deadlines
 * In charge of Logic Component
->>>>>>> 36505ba04c4fb5bfaddfdad7fb0e7c55f04c5691
-
 -----  
 
 #### [Chew Chia Sin](http://github.com/Fyelight)  
 <img src="images/fyelight.png" width="150"><br>  
 Role: Developer <br>  
 Responsibilities: 
-* In charge of Storage  
+* In charge of Scheduling and Tracking
+* In charge of Storage Component
 
 -----  
 
@@ -32,7 +29,8 @@ Responsibilities:
 Role: Developer <br>  
 Responsibilities: 
 * In charge of Documentation  
-* In charge of Model component
+* In charge of Testing
+* In charge of Model Component
 
 -----  
 
@@ -40,6 +38,7 @@ Responsibilities:
 <img src="images/yexiexie.png" width="150"><br>  
 Role: Developer <br>  
 Responsibilities: 
+* In charge of Code Quality
 * In charge of UI 
 
 -----  
