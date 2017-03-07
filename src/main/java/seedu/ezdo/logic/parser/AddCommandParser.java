@@ -29,9 +29,6 @@ public class AddCommandParser {
                 new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_STARTDATE, PREFIX_DUEDATE, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         try {
-            if(!argsTokenizer.getValue(PREFIX_PRIORITY).isPresent()) {
-
-            }
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
                     getOptionalValue(argsTokenizer, PREFIX_PRIORITY),
