@@ -45,4 +45,16 @@ public class CollectionUtil {
         }
         return true;
     }
+
+    /**
+     * Returns true if any of the elements are common between 2 collections
+     */
+    public static <T> boolean areIntersecting(Collection<T> items1, Collection<T> items2) {
+        for (T item1: items1) {
+            if (items2.contains(item1)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

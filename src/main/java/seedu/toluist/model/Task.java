@@ -2,15 +2,19 @@ package seedu.toluist.model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
+import java.util.stream.Collectors;
+
+import seedu.toluist.commons.util.CollectionUtil;
 
 /**
  * Represents a Task
  */
 public class Task implements Comparable<Task> {
 
+    private ArrayList<Tag> allTags = new ArrayList<>();
     public String description;
-    public ArrayList<Tag> allTags = new ArrayList<>();
     public LocalDateTime endDateTime;
     public LocalDateTime startDateTime;
     public boolean isCompleted = false;
@@ -58,21 +62,27 @@ public class Task implements Comparable<Task> {
         this.allTags = tags;
     }
 
+    public ArrayList<Tag> getAllTags() {
+        return allTags;
+    }
+
     public boolean isOverdue() {
         return startDateTime != null && startDateTime.isBefore(LocalDateTime.now());
     }
 
-    public boolean isStringContainedInDescriptionIgnoreCase(String comparison) {
-        return this.description.toLowerCase().contains(comparison.toLowerCase());
-    }
-
-    public boolean isStringContainedInAnyTagIgnoreCase(String comparison) {
-        for (Tag tag : allTags) {
-            if (tag.tagName.toLowerCase().contains(comparison.toLowerCase())) {
+    public boolean isAnyKeywordsContainedInDescriptionIgnoreCase(String[] keywords) {
+        for (String keyword: keywords) {
+            if (description.toLowerCase().contains(keyword.toLowerCase())) {
                 return true;
             }
         }
         return false;
+    }
+
+    public boolean isAnyKeywordsContainedInAnyTagIgnoreCase(String[] keywords) {
+        return CollectionUtil.areIntersecting(
+                allTags.stream().map(tag -> tag.tagName.toLowerCase()).collect(Collectors.toList()),
+                Arrays.stream(keywords).map(keyword -> keyword.toLowerCase()).collect(Collectors.toList()));
     }
 
     @Override

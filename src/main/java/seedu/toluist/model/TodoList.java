@@ -3,12 +3,8 @@ package seedu.toluist.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-<<<<<<< HEAD
-import java.util.TreeSet;
-=======
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
->>>>>>> master
 
 import seedu.toluist.storage.JsonStorage;
 import seedu.toluist.storage.Storage;
@@ -67,10 +63,10 @@ public class TodoList {
 
     /**
      * Returns list of tasks based on predicate
-     * @param predicate
+     * @param predicate a predicate
      * @return a list of task
      */
-    public ArrayList<Task> filter(Predicate<Task> predicate) {
+    public ArrayList<Task> getFilterTasks(Predicate<Task> predicate) {
         List<Task> taskList = getTasks().stream().filter(predicate).collect(Collectors.toList());
         return new ArrayList<>(taskList);
     }

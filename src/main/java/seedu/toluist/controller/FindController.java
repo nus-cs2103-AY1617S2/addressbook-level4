@@ -2,22 +2,15 @@ package seedu.toluist.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-<<<<<<< HEAD
-import java.util.TreeSet;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import seedu.toluist.commons.core.LogsCenter;
-=======
-import java.util.function.Predicate;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
->>>>>>> master
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.Ui;
-<<<<<<< HEAD
 
 /**
  * Searches the task list for matches in the parameters, and displays the results received
@@ -59,48 +52,32 @@ public class FindController extends Controller {
         boolean isSearchByName = tokens.get(NAME_PARAMETER).equals(TRUE_PARAMETER);
         String[] keywordList = convertToArray(tokens.get(KEYWORDS_PARAMETER));
 
-        // initialize search parameters and variables
-        TreeSet<Task> foundTasks = new TreeSet<Task>();
-        TodoList todoList = TodoList.load();
+        Predicate<Task> taskPredicate = task ->
+                (isSearchByTag && task.isAnyKeywordsContainedInAnyTagIgnoreCase(keywordList)
+                || (isSearchByName && task.isAnyKeywordsContainedInDescriptionIgnoreCase(keywordList)));
 
-        for (String keyword : keywordList) {
-            if (isSearchByTag) {
-                combineTasks(foundTasks, todoList.getTasksWhosTagsContains(keyword));
-            }
 
-            if (isSearchByName) {
-                combineTasks(foundTasks, todoList.getTasksWhosDescriptionContains(keyword));
-            }
-        }
-
-        ArrayList<Task> foundTasksList = new ArrayList<Task>();
-        foundTasksList.addAll(foundTasks);
+        ArrayList<Task> foundTasksList = TodoList.load().getFilterTasks(taskPredicate);
         uiStore.setTask(foundTasksList);
         renderer.render();
 
-        //display formatting
-        return formatDisplay(isSearchByTag, isSearchByName, keywordList, foundTasks.size());
-    }
-
-    private void combineTasks(TreeSet<Task> originalList, TreeSet<Task> secondaryList) {
-        for (Task task : secondaryList) {
-            originalList.add(task);
-        }
+        // display formatting
+        return formatDisplay(isSearchByTag, isSearchByName, keywordList, foundTasksList.size());
     }
 
     private String[] convertToArray(String keywords) {
         if (keywords == null) {
-            return new String[]{""};
-        } else {
-            String[] keywordList = keywords.split(" ");
-            ArrayList<String> replacementList = new ArrayList<String>();
-            for (String keyword : keywordList) {
-                if (!keyword.equals("")) {
-                    replacementList.add(keyword);
-                }
-            }
-            return replacementList.toArray(new String[0]);
+            return new String[] { "" };
         }
+
+        String[] keywordList = keywords.split(" ");
+        ArrayList<String> replacementList = new ArrayList<>();
+        for (String keyword : keywordList) {
+            if (!keyword.equals("")) {
+                replacementList.add(keyword);
+            }
+        }
+        return replacementList.toArray(new String[0]);
     }
 
     private CommandResult formatDisplay(boolean isSearchByTag, boolean isSearchByName,
@@ -122,21 +99,21 @@ public class FindController extends Controller {
     public HashMap<String, String> tokenize(String command) {
         HashMap<String, String> tokens = new HashMap<>();
 
-        //search by tag
+        // search by tag
         if (command.contains(TAG_PARAMETER)) {
             tokens.put(TAG_PARAMETER, TRUE_PARAMETER);
         } else {
             tokens.put(TAG_PARAMETER, FALSE_PARAMETER);
         }
 
-        //search by name
+        // search by name
         if (command.contains(NAME_PARAMETER) || !command.contains(TAG_PARAMETER)) {
             tokens.put(NAME_PARAMETER, TRUE_PARAMETER);
         } else {
             tokens.put(NAME_PARAMETER, FALSE_PARAMETER);
         }
 
-        //keyword for matching
+        // keyword for matching
         String keywords = command.replace(TAG_PARAMETER, "");
         keywords = keywords.replace(NAME_PARAMETER, "");
         String[] listOfParameters = keywords.split(COMMAND_SPLITTER_REGEX, NUMBER_OF_SPLITS_FOR_COMMAND_PARSE);
