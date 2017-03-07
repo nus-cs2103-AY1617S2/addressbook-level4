@@ -10,7 +10,8 @@
 
 * This is a desktop Task Manager application. It has a GUI but most of the user interactions happen using
   a CLI (Command Line Interface).
-* It is a Java application intended for workplace professionals to 
+* It is a Java application intended for working professionals to track and manage tasks efficiently.
+* It is **written in OOP fashion**. It samples the **Address Book (Level 4)** code provided as part of the module.
 
 
 #### Site Map

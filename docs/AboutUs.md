@@ -13,7 +13,6 @@ Responsibilities:
 <<<<<<< HEAD
 * In charge of   
 =======
-* In charge of Deliverables and Deadlines
 * In charge of Integration
 * In charge of Logic Component
 >>>>>>> 36505ba04c4fb5bfaddfdad7fb0e7c55f04c5691
