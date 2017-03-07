@@ -1,23 +1,38 @@
-# AddressBook Level 4 - User Guide
-
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+# User Guide
 
 ---
+- [About] (#about)
+- [Quick Start](#quick-start)
+- [Features](#features)
+- [FAQ](#faq)
+- [Command Summary](#command-summary)
 
-1. [Quick Start](#quick-start)
-2. [Features](#features)
-3. [FAQ](#faq)
-4. [Command Summary](#command-summary)
+## About
 
-## 1. Quick Start
+Having trouble keeping up with the tasks you have to complete? OneTwoDo is the only task manager you need to plan your day with effectively.
+
+The interface is simple and the clean GUI helps you separate tasks into 3 categories:
+    * Deadline - a task with an end date but no start date
+    * Event - a task with a start and end date
+    * To do - a task without a start or end date
+
+The interface is simple and the clean GUI helps you separate tasks into 3  categories depending on their start and end dates, if any. OneTwoDo helps you visualize and keep track of how many tasks you have completed.
+
+The Command Line Interface (CLI) is designed for users who are skilled at typing, and most commands are given through the command line, so that those who can type fast are able to manage their tasks using the least number of steps.
+
+Beginners need not be intimidated by the CLI as the interface is intuitive enough for anyone to get started immediately and get good with some practice. 
+
+Get started with OneTwoDo today!
+
+## Quick Start
 
 0. Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
 
    > Having any Java 8 version is not enough. <br>
    > This app will not work with earlier versions of Java 8.
 
-1. Download the latest `addressbook.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for your Address Book.
+1. Download the latest `OneTwoDo.jar` from the [releases](../../../releases) tab.
+2. Copy the file to the folder you want to use as the home folder for your OneToDo.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
    > <img src="images/Ui.png" width="600">
 
@@ -25,14 +40,14 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
    * **`list`** : lists all contacts
-   * **`add`**` John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01` :
-     adds a contact named `John Doe` to the Address Book.
-   * **`delete`**` 3` : deletes the 3rd contact shown in the current list
+   * **`add`**` Meeting John Doe s/tmrw 1pm e/tmrw 2pm` :
+     adds a task named `Meeting John Doe` to the OneTwoDo.
+   * **`delete`**` E3` : deletes the 3rd Event shown in the current list of Events
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
 
-## 2. Features
+## Features
 
 > **Command Format**
 >
@@ -196,13 +211,13 @@ Examples:
 Exits the program.<br>
 Format: `exit`
 
-## 3. FAQ
+## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
-       the file that contains the data of your previous Address Book folder.
+       the file that contains the data of your previous OneTwoDo folder.
 
-## 4. Command Summary
+## Command Summary
 
 * **Help**  `help` <br>
 
