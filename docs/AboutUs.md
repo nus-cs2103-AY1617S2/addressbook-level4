@@ -4,49 +4,46 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Damith C. Rajapakse](http://www.comp.nus.edu.sg/~damithch) <br>
-<img src="images/DamithRajapakse.jpg" width="150"><br>
-**Role**: Project Advisor
+#### [Lee Jun Han Bryan](https://github.com/bryanleejh) <br>
+<img src="https://avatars3.githubusercontent.com/u/12642495?v=3&s=460" width="150"><br>
+Role: Team lead, Deliverables and deadlines, Scheduling and tracking <br>
+* Components in charge of: 
+* Aspects/tools in charge of:
+* Features implemented:
+* Code written: 
+* Other major contributions:
+   * Set up Travis, Appveyor, Coveralls and Codacy
+   * Set up team organisation, labels and milestones
 
 -----
 
-#### [Joshua Lee](http://github.com/lejolly)
-<img src="images/JoshuaLee.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: UI
+#### [Aris Huynh](xxx)
+<img src="xxx" width="150"><br>
+Role: Developer, Testing, Integration  <br>  
+* Components in charge of: 
+* Aspects/tools in charge of:
+* Features implemented:
+* Code written: 
+* Other major contributions:
 
 -----
 
-#### [Leow Yijin](http://github.com/yijinl)
-<img src="images/LeowYijin.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Data
+#### [Wang Yu](xxx)
+<img src="xxx" width="150"><br>
+Role: Developer, Documentation, Code Quality <br>  
+* Components in charge of: 
+* Aspects/tools in charge of:
+* Features implemented:
+* Code written: 
+* Other major contributions:
 
 -----
 
-#### [Martin Choo](http://github.com/m133225)
-<img src="images/MartinChoo.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Dev Ops
-
------
-
-#### [Thien Nguyen](https://github.com/ndt93)
- Role: Developer <br>
- Responsibilities: Threading
-
- -----
-
-#### [You Liang](http://github.com/yl-coder)
-<img src="images/YouLiang.jpg" width="150"><br>
- Role: Developer <br>
- Responsibilities: UI
-
- -----
-
-# Contributors
-
-We welcome contributions. See [Contact Us](ContactUs.md) page for more info.
-
-* [Akshay Narayan](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Aokkhoy)
-* [Sam Yong](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Amauris)
+#### [He Yang](xxx)
+<img src="xxx" width="150"><br>
+Role: Developer, Code Quality <br>  
+* Components in charge of: 
+* Aspects/tools in charge of:
+* Features implemented:
+* Code written: 
+* Other major contributions:
