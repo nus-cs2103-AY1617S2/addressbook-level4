@@ -189,7 +189,6 @@ public class LogicManagerTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add wrong args wrong args", expectedMessage);
         assertCommandFailure("add Valid Name 12345 a/valid,address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 a/valid, address", expectedMessage);
         assertCommandFailure("add Valid Name p/12345 valid, address", expectedMessage);
     }
 
