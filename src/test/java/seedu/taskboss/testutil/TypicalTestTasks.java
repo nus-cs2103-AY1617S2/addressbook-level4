@@ -15,29 +15,29 @@ public class TypicalTestTasks {
     public TypicalTestTasks() {
         try {
             alice = new TaskBuilder().withName("Alice Pauline")
-                    .withInformation("123, Jurong West Ave 6, #08-111").withEmail("alice@gmail.com")
+                    .withInformation("123, Jurong West Ave 6, #08-111")
                     .withPriorityLevel("3")
                     .withTags("friends").build();
             benson = new TaskBuilder().withName("Benson Meier")
                     .withInformation("311, Clementi Ave 2, #02-25")
-                    .withEmail("johnd@gmail.com").withPriorityLevel("3")
+                    .withPriorityLevel("3")
                     .withTags("owesMoney", "friends").build();
             carl = new TaskBuilder().withName("Carl Kurz").withPriorityLevel("3")
-                    .withEmail("heinz@yahoo.com").withInformation("wall street").build();
+                    .withInformation("wall street").build();
             daniel = new TaskBuilder().withName("Daniel Meier").withPriorityLevel("2")
-                    .withEmail("cornelia@google.com").withInformation("10th street").build();
+                    .withInformation("10th street").build();
             elle = new TaskBuilder().withName("Elle Meyer").withPriorityLevel("2")
-                    .withEmail("werner@gmail.com").withInformation("michegan ave").build();
+                    .withInformation("michegan ave").build();
             fiona = new TaskBuilder().withName("Fiona Kunz").withPriorityLevel("2")
-                    .withEmail("lydia@gmail.com").withInformation("little tokyo").build();
+                    .withInformation("little tokyo").build();
             george = new TaskBuilder().withName("George Best").withPriorityLevel("2")
-                    .withEmail("anna@google.com").withInformation("4th street").build();
+                    .withInformation("4th street").build();
 
             // Manually added
             hoon = new TaskBuilder().withName("Hoon Meier").withPriorityLevel("2")
-                    .withEmail("stefan@mail.com").withInformation("little india").build();
+                    .withInformation("little india").build();
             ida = new TaskBuilder().withName("Ida Mueller").withPriorityLevel("2")
-                    .withEmail("hans@google.com").withInformation("chicago ave").build();
+                    .withInformation("chicago ave").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";

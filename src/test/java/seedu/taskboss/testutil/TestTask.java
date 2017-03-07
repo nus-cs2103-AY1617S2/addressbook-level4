@@ -1,7 +1,6 @@
 package seedu.taskboss.testutil;
 
 import seedu.taskboss.model.category.UniqueTagList;
-import seedu.taskboss.model.task.Email;
 import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
@@ -14,7 +13,6 @@ public class TestTask implements ReadOnlyTask {
 
     private Name name;
     private Information information;
-    private Email email;
     private PriorityLevel priorityLevel;
     private UniqueTagList tags;
 
@@ -28,7 +26,6 @@ public class TestTask implements ReadOnlyTask {
     public TestTask(TestTask taskToCopy) {
         this.name = taskToCopy.getName();
         this.priorityLevel = taskToCopy.getPriorityLevel();
-        this.email = taskToCopy.getEmail();
         this.information = taskToCopy.getInformation();
         this.tags = taskToCopy.getTags();
     }
@@ -39,10 +36,6 @@ public class TestTask implements ReadOnlyTask {
 
     public void setInformation(Information information) {
         this.information = information;
-    }
-
-    public void setEmail(Email email) {
-        this.email = email;
     }
 
     public void setPriorityLevel(PriorityLevel priorityLevel) {
@@ -61,11 +54,6 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public PriorityLevel getPriorityLevel() {
         return priorityLevel;
-    }
-
-    @Override
-    public Email getEmail() {
-        return email;
     }
 
     @Override
@@ -88,7 +76,6 @@ public class TestTask implements ReadOnlyTask {
         sb.append("add " + this.getName().fullName + " ");
         sb.append("i/" + this.getInformation().value + " ");
         sb.append("p/" + this.getPriorityLevel().value + " ");
-        sb.append("e/" + this.getEmail().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }

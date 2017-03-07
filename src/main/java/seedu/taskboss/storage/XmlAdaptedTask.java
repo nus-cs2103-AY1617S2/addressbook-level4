@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.model.category.Tag;
 import seedu.taskboss.model.category.UniqueTagList;
-import seedu.taskboss.model.task.Email;
 import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
@@ -24,8 +23,6 @@ public class XmlAdaptedTask {
     private String name;
     @XmlElement(required = true)
     private String priorityLevel;
-    @XmlElement(required = true)
-    private String email;
     @XmlElement(required = true)
     private String information;
 
@@ -47,7 +44,6 @@ public class XmlAdaptedTask {
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getName().fullName;
         priorityLevel = source.getPriorityLevel().value;
-        email = source.getEmail().value;
         information = source.getInformation().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
@@ -67,7 +63,6 @@ public class XmlAdaptedTask {
         }
         final Name name = new Name(this.name);
         final PriorityLevel priorityLevel = new PriorityLevel(this.priorityLevel);
-        final Email email = new Email(this.email);
         final Information information = new Information(this.information);
         final UniqueTagList tags = new UniqueTagList(taskTags);
         return new Task(name, priorityLevel, email, information, tags);

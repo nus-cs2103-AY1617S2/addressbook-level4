@@ -32,7 +32,6 @@ import seedu.taskboss.commons.util.XmlUtil;
 import seedu.taskboss.model.TaskBoss;
 import seedu.taskboss.model.category.Tag;
 import seedu.taskboss.model.category.UniqueTagList;
-import seedu.taskboss.model.task.Email;
 import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
@@ -75,15 +74,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Name("Ali Muster"), new PriorityLevel("2"), new Email("hans@google.com"), new Information("4th street"), new UniqueTagList()),
-                new Task(new Name("Boris Mueller"), new PriorityLevel("2"), new Email("ruth@google.com"), new Information("81th street"), new UniqueTagList()),
-                new Task(new Name("Carl Kurz"), new PriorityLevel("3"), new Email("heinz@yahoo.com"), new Information("wall street"), new UniqueTagList()),
-                new Task(new Name("Daniel Meier"), new PriorityLevel("2"), new Email("cornelia@google.com"), new Information("10th street"), new UniqueTagList()),
-                new Task(new Name("Elle Meyer"), new PriorityLevel("2"), new Email("werner@gmail.com"), new Information("michegan ave"), new UniqueTagList()),
-                new Task(new Name("Fiona Kunz"), new PriorityLevel("2"), new Email("lydia@gmail.com"), new Information("little tokyo"), new UniqueTagList()),
-                new Task(new Name("George Best"), new PriorityLevel("2"), new Email("anna@google.com"), new Information("4th street"), new UniqueTagList()),
-                new Task(new Name("Hoon Meier"), new PriorityLevel("2"), new Email("stefan@mail.com"), new Information("little india"), new UniqueTagList()),
-                new Task(new Name("Ida Mueller"), new PriorityLevel("2"), new Email("hans@google.com"), new Information("chicago ave"), new UniqueTagList())
+                new Task(new Name("Ali Muster"), new PriorityLevel("2"), new Information("4th street"), new UniqueTagList()),
+                new Task(new Name("Boris Mueller"), new PriorityLevel("2"), new Information("81th street"), new UniqueTagList()),
+                new Task(new Name("Carl Kurz"), new PriorityLevel("3"), new Information("wall street"), new UniqueTagList()),
+                new Task(new Name("Daniel Meier"), new PriorityLevel("2"), new Information("10th street"), new UniqueTagList()),
+                new Task(new Name("Elle Meyer"), new PriorityLevel("2"), new Information("michegan ave"), new UniqueTagList()),
+                new Task(new Name("Fiona Kunz"), new PriorityLevel("2"), new Information("little tokyo"), new UniqueTagList()),
+                new Task(new Name("George Best"), new PriorityLevel("2"), new Information("4th street"), new UniqueTagList()),
+                new Task(new Name("Hoon Meier"), new PriorityLevel("2"), new Information("little india"), new UniqueTagList()),
+                new Task(new Name("Ida Mueller"), new PriorityLevel("2"), new Information("chicago ave"), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {

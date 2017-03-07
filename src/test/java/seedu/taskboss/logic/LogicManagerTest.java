@@ -41,7 +41,6 @@ import seedu.taskboss.model.ReadOnlyTaskBoss;
 import seedu.taskboss.model.TaskBoss;
 import seedu.taskboss.model.category.Tag;
 import seedu.taskboss.model.category.UniqueTagList;
-import seedu.taskboss.model.task.Email;
 import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
@@ -195,22 +194,19 @@ public class LogicManagerTest {
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPriorityLevelPrefix i/valid,information",
+        assertCommandFailure("add Valid Name 12345 i/validInformation.butNoPriorityLevelPrefix",
                 expectedMessage);
-        assertCommandFailure("add Valid Name p/1 valid@email.butNoPrefix i/valid, information", expectedMessage);
-        assertCommandFailure("add Valid Name p/1 e/valid@email.butNoInformationPrefix valid, information",
+        assertCommandFailure("add Valid Name p/1 validInformation.butNoInformationPrefix",
                 expectedMessage);
     }
 
     @Test
     public void execute_add_invalidTaskData() {
-        assertCommandFailure("add []\\[;] p/1 e/valid@e.mail i/valid, information",
+        assertCommandFailure("add []\\[;] p/1 i/valid, information",
                 Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail i/valid, information",
+        assertCommandFailure("add Valid Name p/not_numbers i/valid, information",
                 PriorityLevel.MESSAGE_PRIORITY_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/1 e/notAnEmail i/valid, information",
-                Email.MESSAGE_EMAIL_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/1 e/valid@e.mail i/valid, information t/invalid_-[.tag",
+        assertCommandFailure("add Valid Name p/1 i/valid, information t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
@@ -415,12 +411,11 @@ public class LogicManagerTest {
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
             PriorityLevel privatePriorityLevel = new PriorityLevel("1");
-            Email email = new Email("adam@gmail.com");
             Information privateInformation = new Information("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, privatePriorityLevel, email, privateInformation, tags);
+            return new Task(name, privatePriorityLevel, privateInformation, tags);
         }
 
         /**
@@ -435,7 +430,6 @@ public class LogicManagerTest {
             return new Task(
                     new Name("Task " + seed),
                     new PriorityLevel("" + Math.abs(seed)),
-                    new Email(seed + "@email"),
                     new Information("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
@@ -448,7 +442,6 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getName().toString());
-            cmd.append(" e/").append(p.getEmail());
             cmd.append(" p/").append(p.getPriorityLevel());
             cmd.append(" i/").append(p.getInformation());
 
@@ -539,7 +532,6 @@ public class LogicManagerTest {
             return new Task(
                     new Name(name),
                     new PriorityLevel("1"),
-                    new Email("1@email"),
                     new Information("House of 1"),
                     new UniqueTagList(new Tag("tag"))
             );

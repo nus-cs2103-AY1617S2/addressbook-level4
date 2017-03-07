@@ -8,9 +8,7 @@ import seedu.taskboss.model.category.UniqueTagList;
  */
 public interface ReadOnlyTask {
 
-    Name getName();
     PriorityLevel getPriorityLevel();
-    Email getEmail();
     Information getInformation();
 
     /**
@@ -27,7 +25,6 @@ public interface ReadOnlyTask {
                 || (other != null // this is first to avoid NPE below
                 && other.getName().equals(this.getName()) // state checks here onwards
                 && other.getPriorityLevel().equals(this.getPriorityLevel())
-                && other.getEmail().equals(this.getEmail())
                 && other.getInformation().equals(this.getInformation()));
     }
 
@@ -39,8 +36,6 @@ public interface ReadOnlyTask {
         builder.append(getName())
                 .append(" Priority Level: ")
                 .append(getPriorityLevel())
-                .append(" Email: ")
-                .append(getEmail())
                 .append(" Information: ")
                 .append(getInformation())
                 .append(" Tags: ");

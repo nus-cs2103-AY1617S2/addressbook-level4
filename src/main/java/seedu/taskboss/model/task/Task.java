@@ -13,7 +13,6 @@ public class Task implements ReadOnlyTask {
 
     private Name name;
     private PriorityLevel priorityLevel;
-    private Email email;
     private Information information;
 
     private UniqueTagList tags;
@@ -21,12 +20,11 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, PriorityLevel priorityLevel, Email email, Information information, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, priorityLevel, email, information, tags);
+    public Task(Name name, PriorityLevel priorityLevel, Information information, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, priorityLevel, information, tags);
         
         this.name = name;
         this.priorityLevel = priorityLevel;
-        this.email = email;
         this.information = information;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
@@ -35,7 +33,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyPerson.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getPriorityLevel(), source.getEmail(), source.getInformation(), source.getTags());
+        this(source.getName(), source.getPriorityLevel(), source.getInformation(), source.getTags());
     }
 
     public void setName(Name name) {
@@ -56,16 +54,6 @@ public class Task implements ReadOnlyTask {
     @Override
     public PriorityLevel getPriorityLevel() {
         return priorityLevel;
-    }
-
-    public void setEmail(Email email) {
-        assert email != null;
-        this.email = email;
-    }
-
-    @Override
-    public Email getEmail() {
-        return email;
     }
 
     public void setInformation(Information information) {
@@ -98,7 +86,6 @@ public class Task implements ReadOnlyTask {
 
         this.setName(replacement.getName());
         this.setPriorityLevel(replacement.getPriorityLevel());
-        this.setEmail(replacement.getEmail());
         this.setInformation(replacement.getInformation());
         this.setTags(replacement.getTags());
     }
@@ -113,7 +100,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, priorityLevel, email, information, tags);
+        return Objects.hash(name, priorityLevel, information, tags);
     }
 
     @Override
