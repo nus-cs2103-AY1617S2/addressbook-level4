@@ -12,18 +12,18 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.todo.ToDo;
-import seedu.address.model.todo.ReadOnlyPerson;
-import seedu.address.model.todo.UniquePersonList;
-import seedu.address.model.todo.UniquePersonList.DuplicatePersonException;
+import seedu.address.model.todo.ReadOnlyTodo;
+import seedu.address.model.todo.Todo;
+import seedu.address.model.todo.UniqueTodoList;
+import seedu.address.model.todo.UniqueTodoList.DuplicateTodoException;
 
 /**
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .equals comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class TodoList implements ReadOnlyTodoList {
 
-    private final UniquePersonList persons;
+    private final UniqueTodoList persons;
     private final UniqueTagList tags;
 
     /*
@@ -34,36 +34,36 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        persons = new UniqueTodoList();
         tags = new UniqueTagList();
     }
 
-    public AddressBook() {}
+    public TodoList() {}
 
     /**
      * Creates an AddressBook using the Persons and Tags in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public TodoList(ReadOnlyTodoList toBeCopied) {
         this();
         resetData(toBeCopied);
     }
 
 //// list overwrite operations
 
-    public void setPersons(List<? extends ReadOnlyPerson> persons)
-            throws UniquePersonList.DuplicatePersonException {
-        this.persons.setPersons(persons);
+    public void setTodos(List<? extends ReadOnlyTodo> persons)
+            throws UniqueTodoList.DuplicateTodoException {
+        this.persons.setTodos(persons);
     }
 
     public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
         this.tags.setTags(tags);
     }
 
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyTodoList newData) {
         assert newData != null;
         try {
-            setPersons(newData.getPersonList());
-        } catch (UniquePersonList.DuplicatePersonException e) {
+            setTodos(newData.getPersonList());
+        } catch (UniqueTodoList.DuplicateTodoException e) {
             assert false : "AddressBooks should not have duplicate persons";
         }
         try {
@@ -81,32 +81,32 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Also checks the new person's tags and updates {@link #tags} with any new tags found,
      * and updates the Tag objects in the person to point to those in {@link #tags}.
      *
-     * @throws UniquePersonList.DuplicatePersonException if an equivalent person already exists.
+     * @throws UniqueTodoList.DuplicateTodoException if an equivalent person already exists.
      */
-    public void addPerson(ToDo p) throws UniquePersonList.DuplicatePersonException {
+    public void addTodo(Todo p) throws UniqueTodoList.DuplicateTodoException {
         syncMasterTagListWith(p);
         persons.add(p);
     }
 
     /**
-     * Updates the person in the list at position {@code index} with {@code editedReadOnlyPerson}.
-     * {@code AddressBook}'s tag list will be updated with the tags of {@code editedReadOnlyPerson}.
-     * @see #syncMasterTagListWith(ToDo)
+     * Updates the person in the list at position {@code index} with {@code editedReadOnlyTodo}.
+     * {@code AddressBook}'s tag list will be updated with the tags of {@code editedReadOnlyTodo}.
+     * @see #syncMasterTagListWith(Todo)
      *
-     * @throws DuplicatePersonException if updating the person's details causes the person to be equivalent to
+     * @throws DuplicateTodoException if updating the person's details causes the person to be equivalent to
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updatePerson(int index, ReadOnlyPerson editedReadOnlyPerson)
-            throws UniquePersonList.DuplicatePersonException {
-        assert editedReadOnlyPerson != null;
+    public void updateTodo(int index, ReadOnlyTodo editedReadOnlyTodo)
+            throws UniqueTodoList.DuplicateTodoException {
+        assert editedReadOnlyTodo != null;
 
-        ToDo editedPerson = new ToDo(editedReadOnlyPerson);
+        Todo editedPerson = new Todo(editedReadOnlyTodo);
         syncMasterTagListWith(editedPerson);
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any person
         // in the person list.
-        persons.updatePerson(index, editedPerson);
+        persons.updateTodo(index, editedPerson);
     }
 
     /**
@@ -114,7 +114,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *  - exists in the master list {@link #tags}
      *  - points to a Tag object in the master list
      */
-    private void syncMasterTagListWith(ToDo person) {
+    private void syncMasterTagListWith(Todo person) {
         final UniqueTagList personTags = person.getTags();
         tags.mergeFrom(personTags);
 
@@ -133,17 +133,17 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Ensures that every tag in these persons:
      *  - exists in the master list {@link #tags}
      *  - points to a Tag object in the master list
-     *  @see #syncMasterTagListWith(ToDo)
+     *  @see #syncMasterTagListWith(Todo)
      */
-    private void syncMasterTagListWith(UniquePersonList persons) {
+    private void syncMasterTagListWith(UniqueTodoList persons) {
         persons.forEach(this::syncMasterTagListWith);
     }
 
-    public boolean removePerson(ReadOnlyPerson key) throws UniquePersonList.PersonNotFoundException {
+    public boolean removePerson(ReadOnlyTodo key) throws UniqueTodoList.TodoNotFoundException {
         if (persons.remove(key)) {
             return true;
         } else {
-            throw new UniquePersonList.PersonNotFoundException();
+            throw new UniqueTodoList.TodoNotFoundException();
         }
     }
 
@@ -162,7 +162,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<ReadOnlyPerson> getPersonList() {
+    public ObservableList<ReadOnlyTodo> getPersonList() {
         return new UnmodifiableObservableList<>(persons.asObservableList());
     }
 
@@ -174,9 +174,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && this.persons.equals(((AddressBook) other).persons)
-                && this.tags.equalsOrderInsensitive(((AddressBook) other).tags));
+                || (other instanceof TodoList // instanceof handles nulls
+                && this.persons.equals(((TodoList) other).persons)
+                && this.tags.equalsOrderInsensitive(((TodoList) other).tags));
     }
 
     @Override
