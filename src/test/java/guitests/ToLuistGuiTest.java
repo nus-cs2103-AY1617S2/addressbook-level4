@@ -28,7 +28,7 @@ import seedu.toluist.testutil.TypicalTestTodoLists;
 /**
  * Gui Test class
  */
-public abstract class GuiTest {
+public abstract class ToLuistGuiTest {
 
     // The TestName Rule makes the current test name available inside test methods.
     @Rule

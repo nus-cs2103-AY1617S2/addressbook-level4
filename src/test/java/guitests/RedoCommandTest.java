@@ -8,11 +8,11 @@ import org.junit.Test;
 import seedu.toluist.model.Task;
 
 /**
- * Gui tests for undo command
+ * Gui tests for redo command
  */
-public class UndoCommandTest extends ToLuistGuiTest {
+public class RedoCommandTest extends ToLuistGuiTest {
     @Test
-    public void undoSingleCommand() {
+    public void redoSingleCommand() {
         String taskDescription = "build a rocket";
         String addCommand = "add " + taskDescription;
         Task task = new Task(taskDescription);
@@ -22,6 +22,10 @@ public class UndoCommandTest extends ToLuistGuiTest {
         String undoCommand = "undo";
         commandBox.runCommand(undoCommand);
         assertFalse(isTaskShown(task));
+
+        String redoCommand = "redo";
+        commandBox.runCommand(redoCommand);
+        assertTrue(isTaskShown(task));
     }
 
     @Test
@@ -42,5 +46,10 @@ public class UndoCommandTest extends ToLuistGuiTest {
         commandBox.runCommand(undoCommand);
         assertFalse(isTaskShown(task));
         assertFalse(isTaskShown(task2));
+
+        String redoCommand = "redo 2";
+        commandBox.runCommand(redoCommand);
+        assertTrue(isTaskShown(task));
+        assertTrue(isTaskShown(task2));
     }
 }

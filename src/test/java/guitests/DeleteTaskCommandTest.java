@@ -10,7 +10,7 @@ import seedu.toluist.testutil.TypicalTestTodoLists;
 /**
  * Gui tests for delete task command
  */
-public class DeleteTaskCommandTest extends GuiTest {
+public class DeleteTaskCommandTest extends ToLuistGuiTest {
     @Test
     public void deleteTask() {
         Task task = new TypicalTestTodoLists().getTypicalTasks()[0];

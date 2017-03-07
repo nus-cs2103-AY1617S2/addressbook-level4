@@ -9,7 +9,7 @@ import seedu.toluist.model.Task;
 /**
  * Gui tests for add task command
  */
-public class AddTaskCommandTest extends GuiTest {
+public class AddTaskCommandTest extends ToLuistGuiTest {
     @Test
     public void addFloatingTask() {
         // add one task

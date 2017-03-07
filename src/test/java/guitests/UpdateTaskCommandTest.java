@@ -11,7 +11,7 @@ import seedu.toluist.testutil.TypicalTestTodoLists;
 /**
  * Gui tests for update task command
  */
-public class UpdateTaskCommandTest extends GuiTest {
+public class UpdateTaskCommandTest extends ToLuistGuiTest {
     @Test
     public void updateTaskDescription() {
         Task task = new TypicalTestTodoLists().getTypicalTasks()[0];
