@@ -174,7 +174,7 @@ Format: `undo`<br>
 
 ### 3.11 Recycle 
 
-Brings back the expired tasks/events back to active list, with the deadline/event date altered.The index is as shown by `listc` command.
+Brings back the expired tasks/events back to active list, with the deadline/event date altered. The index is as shown by `list c` command.
 
 Format : `recycle INDEX DEADLINE | START_DATE START_TIME to [END_DATE] END_TIME`<br>
 
