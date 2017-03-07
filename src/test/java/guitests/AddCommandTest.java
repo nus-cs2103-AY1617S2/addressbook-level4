@@ -1,6 +1,7 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
+import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
 
@@ -37,6 +38,10 @@ public class AddCommandTest extends EzDoGuiTest {
         //invalid command
         commandBox.runCommand("adds Johnny");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
+
+        //invalid command
+        commandBox.runCommand("add s/12/12/2016 d/01/01/2017 p/1");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
