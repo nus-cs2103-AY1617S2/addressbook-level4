@@ -3,7 +3,7 @@ package seedu.address.testutil;
 import seedu.address.model.task.Description;
 import seedu.address.model.task.Email;
 import seedu.address.model.task.Name;
-import seedu.address.model.task.Phone;
+import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyPerson;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -15,7 +15,7 @@ public class TestPerson implements ReadOnlyPerson {
     private Name name;
     private Description address;
     private Email email;
-    private Phone phone;
+    private Priority phone;
     private UniqueTagList tags;
 
     public TestPerson() {
@@ -45,7 +45,7 @@ public class TestPerson implements ReadOnlyPerson {
         this.email = email;
     }
 
-    public void setPhone(Phone phone) {
+    public void setPhone(Priority phone) {
         this.phone = phone;
     }
 
@@ -59,7 +59,7 @@ public class TestPerson implements ReadOnlyPerson {
     }
 
     @Override
-    public Phone getPhone() {
+    public Priority getPhone() {
         return phone;
     }
 

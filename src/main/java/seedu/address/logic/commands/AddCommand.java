@@ -9,7 +9,7 @@ import seedu.address.model.task.Description;
 import seedu.address.model.task.Email;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.Phone;
+import seedu.address.model.task.Priority;
 import seedu.address.model.task.UniquePersonList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
@@ -44,7 +44,7 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Task(
                 new Name(name),
-                new Phone(phone),
+                new Priority(phone),
                 new Email(email),
                 new Description(address),
                 new UniqueTagList(tagSet)

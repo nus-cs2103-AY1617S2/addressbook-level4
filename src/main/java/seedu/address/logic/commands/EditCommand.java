@@ -10,7 +10,7 @@ import seedu.address.model.task.Description;
 import seedu.address.model.task.Email;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.Phone;
+import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyPerson;
 import seedu.address.model.task.UniquePersonList;
 import seedu.address.model.tag.UniqueTagList;
@@ -78,7 +78,7 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
+        Priority updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
         Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
         Description updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getDescription);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
@@ -92,7 +92,7 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Optional<Name> name = Optional.empty();
-        private Optional<Phone> phone = Optional.empty();
+        private Optional<Priority> phone = Optional.empty();
         private Optional<Email> email = Optional.empty();
         private Optional<Description> address = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
@@ -123,12 +123,12 @@ public class EditCommand extends Command {
             return name;
         }
 
-        public void setPhone(Optional<Phone> phone) {
+        public void setPhone(Optional<Priority> phone) {
             assert phone != null;
             this.phone = phone;
         }
 
-        public Optional<Phone> getPhone() {
+        public Optional<Priority> getPhone() {
             return phone;
         }
 

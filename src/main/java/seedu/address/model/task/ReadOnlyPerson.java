@@ -9,7 +9,7 @@ import seedu.address.model.tag.UniqueTagList;
 public interface ReadOnlyPerson {
 
     Name getName();
-    Phone getPhone();
+    Priority getPhone();
     Email getEmail();
     Description getDescription();
 
