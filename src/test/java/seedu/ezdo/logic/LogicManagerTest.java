@@ -33,7 +33,7 @@ import seedu.ezdo.logic.commands.AddCommand;
 import seedu.ezdo.logic.commands.ClearCommand;
 import seedu.ezdo.logic.commands.Command;
 import seedu.ezdo.logic.commands.CommandResult;
-import seedu.ezdo.logic.commands.DeleteCommand;
+import seedu.ezdo.logic.commands.KillCommand;
 import seedu.ezdo.logic.commands.ExitCommand;
 import seedu.ezdo.logic.commands.FindCommand;
 import seedu.ezdo.logic.commands.HelpCommand;
@@ -327,18 +327,18 @@ public class LogicManagerTest {
 
 
     @Test
-    public void execute_deleteInvalidArgsFormat_errorMessageShown() throws Exception {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
-        assertIncorrectIndexFormatBehaviorForCommand("delete", expectedMessage);
+    public void execute_killInvalidArgsFormat_errorMessageShown() throws Exception {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, KillCommand.MESSAGE_USAGE);
+        assertIncorrectIndexFormatBehaviorForCommand("kill", expectedMessage);
     }
 
     @Test
-    public void execute_deleteIndexNotFound_errorMessageShown() throws Exception {
-        assertIndexNotFoundBehaviorForCommand("delete");
+    public void execute_killIndexNotFound_errorMessageShown() throws Exception {
+        assertIndexNotFoundBehaviorForCommand("kill");
     }
 
     @Test
-    public void execute_delete_removesCorrectTask() throws Exception {
+    public void execute_kill_removesCorrectTask() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
 
@@ -346,8 +346,8 @@ public class LogicManagerTest {
         expectedEZ.removeTask(threeTasks.get(1));
         helper.addToModel(model, threeTasks);
 
-        assertCommandSuccess("delete 2",
-                String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, threeTasks.get(1)),
+        assertCommandSuccess("kill 2",
+                String.format(KillCommand.MESSAGE_KILL_TASK_SUCCESS, threeTasks.get(1)),
                 expectedEZ,
                 expectedEZ.getTaskList());
     }
