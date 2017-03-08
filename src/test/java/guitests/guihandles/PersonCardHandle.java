@@ -18,7 +18,7 @@ public class PersonCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
     private static final String NOTE_FIELD_ID = "#note";
     private static final String PRIORITY_FIELD_ID = "#priority";
-    private static final String EMAIL_FIELD_ID = "#email";
+    private static final String STATUS_FIELD_ID = "#status";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private Node node;
@@ -45,7 +45,7 @@ public class PersonCardHandle extends GuiHandle {
     }
 
     public String getStatus() {
-        return getTextFromLabel(EMAIL_FIELD_ID);
+        return getTextFromLabel(STATUS_FIELD_ID);
     }
 
     public List<String> getTags() {
