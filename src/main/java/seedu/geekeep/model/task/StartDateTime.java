@@ -36,7 +36,7 @@ public class StartDateTime {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof StartDateTime // instanceof handles nulls
-                        && this.dateTime.equals(((StartDateTime) other).dateTime)); // state check
+                        && this.value.equals(((StartDateTime) other).value)); // state check
     }
 
     @Override
@@ -46,7 +46,7 @@ public class StartDateTime {
 
     @Override
     public String toString() {
-        return dateTime.toString();
+        return value;
     }
 
 }
