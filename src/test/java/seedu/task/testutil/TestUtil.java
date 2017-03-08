@@ -26,7 +26,6 @@ import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import junit.framework.AssertionFailedError;
 import seedu.task.TestApp;
-import seedu.task.storage.XmlSerializableTaskManager;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.FileUtil;
 import seedu.task.commons.util.XmlUtil;
@@ -39,6 +38,7 @@ import seedu.task.model.task.Name;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Remark;
 import seedu.task.model.task.Task;
+import seedu.task.storage.XmlSerializableTaskManager;
 
 /**
  * A utility class for test cases.

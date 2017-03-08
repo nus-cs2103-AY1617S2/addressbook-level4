@@ -20,14 +20,10 @@ import org.junit.rules.TemporaryFolder;
 
 import com.google.common.eventbus.Subscribe;
 
-
-import seedu.task.model.TaskManager;
 import seedu.task.commons.core.EventsCenter;
 import seedu.task.commons.events.model.TaskManagerChangedEvent;
 import seedu.task.commons.events.ui.JumpToListRequestEvent;
 import seedu.task.commons.events.ui.ShowHelpRequestEvent;
-import seedu.task.logic.Logic;
-import seedu.task.logic.LogicManager;
 import seedu.task.logic.commands.AddCommand;
 import seedu.task.logic.commands.ClearCommand;
 import seedu.task.logic.commands.Command;
@@ -42,6 +38,7 @@ import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.Model;
 import seedu.task.model.ModelManager;
 import seedu.task.model.ReadOnlyTaskManager;
+import seedu.task.model.TaskManager;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Date;

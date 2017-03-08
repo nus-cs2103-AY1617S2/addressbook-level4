@@ -15,8 +15,6 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.task.commons.core.Config;
 import seedu.task.commons.exceptions.DataConversionException;
-import seedu.task.commons.util.ConfigUtil;
-import seedu.task.commons.util.FileUtil;
 
 public class ConfigUtilTest {
 
