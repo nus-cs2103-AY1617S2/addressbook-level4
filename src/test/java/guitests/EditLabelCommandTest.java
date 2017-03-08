@@ -15,7 +15,7 @@ import seedu.address.testutil.TestTask;
 /**
  * Test cases for editing of a label
  */
-public class EditLabelCommandTest extends AddressBookGuiTest {
+public class EditLabelCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void editLabel_LabelDoesNotExist_ReturnTrue() {

@@ -12,7 +12,7 @@ import seedu.address.commons.util.FileUtil;
 import seedu.address.model.ReadOnlyTaskManager;
 
 /**
- * A class to access AddressBook data stored as an xml file on the hard disk.
+ * A class to access TaskManager data stored as an xml file on the hard disk.
  */
 public class XmlTaskManagerStorage implements TaskManagerStorage {
 
@@ -63,13 +63,13 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
      * Similar to {@link #saveTaskManager(ReadOnlyTaskManager)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveTaskManager(ReadOnlyTaskManager addressBook, String filePath) throws IOException {
-        assert addressBook != null;
+    public void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException {
+        assert taskManager != null;
         assert filePath != null;
 
         File file = new File(filePath);
         FileUtil.createIfMissing(file);
-        XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskManager(addressBook));
+        XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskManager(taskManager));
     }
 
 }

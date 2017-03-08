@@ -15,7 +15,7 @@ import seedu.address.testutil.TestTask;
 /**
  * Test cases for deletion of a label in tasks
  */
-public class DeleteLabelCommandTest extends AddressBookGuiTest {
+public class DeleteLabelCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void editLabel_LabelDoesNotExist_ReturnTrue() {
