@@ -9,7 +9,7 @@ import seedu.tache.model.task.Task;
 import seedu.tache.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
-    public static Task[] getSamplePersons() {
+    public static Task[] getSampleTasks() {
         try {
             return new Task[] {
                 new Task(new Name("Buy Eggs and Bread"),new UniqueTagList("HighPriority")),
@@ -24,11 +24,11 @@ public class SampleDataUtil {
         }
     }
 
-    public static ReadOnlyTaskManager getSampleAddressBook() {
+    public static ReadOnlyTaskManager getSampleTaskManager() {
         try {
             TaskManager sampleAB = new TaskManager();
-            for (Task samplePerson : getSamplePersons()) {
-                sampleAB.addTask(samplePerson);
+            for (Task sampleTask : getSampleTasks()) {
+                sampleAB.addTask(sampleTask);
             }
             return sampleAB;
         } catch (DuplicateTaskException e) {
