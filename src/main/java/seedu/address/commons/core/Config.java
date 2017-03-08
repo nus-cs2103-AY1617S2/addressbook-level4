@@ -14,7 +14,7 @@ public class Config {
     private String appTitle = "Doit";
     private Level logLevel = Level.INFO;
     private String userPrefsFilePath = "preferences.json";
-    private String taskManagerFilePath = "data/addressbook.xml";
+    private String taskManagerFilePath = "data/taskManager.xml";
     private String taskManagerName = "MyTaskManager";
 
 
@@ -42,20 +42,20 @@ public class Config {
         this.userPrefsFilePath = userPrefsFilePath;
     }
 
-    public String getAddressBookFilePath() {
+    public String getTaskManagerFilePath() {
         return taskManagerFilePath;
     }
 
-    public void setAddressBookFilePath(String addressBookFilePath) {
-        this.taskManagerFilePath = addressBookFilePath;
+    public void setTaskManagerFilePath(String taskManagerFilePath) {
+        this.taskManagerFilePath = taskManagerFilePath;
     }
 
-    public String getAddressBookName() {
+    public String getTaskManagerName() {
         return taskManagerName;
     }
 
-    public void setAddressBookName(String addressBookName) {
-        this.taskManagerName = addressBookName;
+    public void setTaskManagerName(String taskManagerName) {
+        this.taskManagerName = taskManagerName;
     }
 
 

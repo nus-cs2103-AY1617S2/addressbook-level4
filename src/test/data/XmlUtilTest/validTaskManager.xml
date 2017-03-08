@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addressbook>
+<taskmanager>
     <tasks>
         <name>Hans Muster</name>
         <priority isPrivate="false">9482424</priority>
@@ -54,4 +54,4 @@
         <deadline isPrivate="false">4</deadline>
         <description isPrivate="false">chicago ave</description>
     </tasks>
-</addressbook>
+</taskmanager>

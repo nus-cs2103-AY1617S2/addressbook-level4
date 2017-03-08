@@ -12,7 +12,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * JAXB-friendly version of the Person.
+ * JAXB-friendly version of the Task.
  */
 public class XmlAdaptedTask {
 
@@ -36,7 +36,7 @@ public class XmlAdaptedTask {
 
 
     /**
-     * Converts a given Person into this class for JAXB use.
+     * Converts a given Task into this class for JAXB use.
      *
      * @param source future changes to this will not affect the created XmlAdaptedTask
      */
@@ -52,7 +52,7 @@ public class XmlAdaptedTask {
     }
 
     /**
-     * Converts this jaxb-friendly adapted task object into the model's Person object.
+     * Converts this jaxb-friendly adapted task object into the model's Task object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted task
      */

@@ -39,15 +39,15 @@ public class SampleDataUtil {
         }
     }
 
-    public static ReadOnlyTaskManager getSampleAddressBook() {
+    public static ReadOnlyTaskManager getSampleTaskManager() {
         try {
             TaskManager sampleAB = new TaskManager();
-            for (Task samplePerson : getSampleTasks()) {
-                sampleAB.addTask(samplePerson);
+            for (Task sampleTask : getSampleTasks()) {
+                sampleAB.addTask(sampleTask);
             }
             return sampleAB;
         } catch (DuplicateTaskException e) {
-            throw new AssertionError("sample data cannot contain duplicate persons", e);
+            throw new AssertionError("sample data cannot contain duplicate tasks", e);
         }
     }
 }
