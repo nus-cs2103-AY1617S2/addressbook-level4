@@ -14,21 +14,21 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Task;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.TypicalTestPersons;
+import seedu.address.testutil.TypicalTestTasks;
 
 public class AddressBookTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final AddressBook addressBook = new AddressBook();
+    private final TaskManager addressBook = new TaskManager();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), addressBook.getTaskList());
         assertEquals(Collections.emptyList(), addressBook.getTagList());
     }
 
@@ -40,18 +40,18 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = new TypicalTestPersons().getTypicalAddressBook();
+        TaskManager newData = new TypicalTestTasks().getTypicalTaskManager();
         addressBook.resetData(newData);
         assertEquals(newData, addressBook);
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsAssertionError() {
-        TypicalTestPersons td = new TypicalTestPersons();
+    public void resetData_withDuplicateTasks_throwsAssertionError() {
+        TypicalTestTasks td = new TypicalTestTasks();
         // Repeat td.alice twice
-        List<Person> newPersons = Arrays.asList(new Person(td.alice), new Person(td.alice));
+        List<Task> newTasks = Arrays.asList(new Task(td.alice), new Task(td.alice));
         List<Tag> newTags = td.alice.getTags().asObservableList();
-        AddressBookStub newData = new AddressBookStub(newPersons, newTags);
+        TaskManagerStub newData = new TaskManagerStub(newTasks, newTags);
 
         thrown.expect(AssertionError.class);
         addressBook.resetData(newData);
@@ -59,32 +59,32 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
-        AddressBook typicalAddressBook = new TypicalTestPersons().getTypicalAddressBook();
-        List<ReadOnlyPerson> newPersons = typicalAddressBook.getPersonList();
+        TaskManager typicalAddressBook = new TypicalTestTasks().getTypicalTaskManager();
+        List<ReadOnlyTask> newTasks = typicalAddressBook.getTaskList();
         List<Tag> newTags = new ArrayList<>(typicalAddressBook.getTagList());
         // Repeat the first tag twice
         newTags.add(newTags.get(0));
-        AddressBookStub newData = new AddressBookStub(newPersons, newTags);
+        TaskManagerStub newData = new TaskManagerStub(newTasks, newTags);
 
         thrown.expect(AssertionError.class);
         addressBook.resetData(newData);
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons and tags lists can violate interface constraints.
+     * A stub ReadOnlyTaskManager whose tasks and tags lists can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
-        private final ObservableList<ReadOnlyPerson> persons = FXCollections.observableArrayList();
+    private static class TaskManagerStub implements ReadOnlyTaskManager {
+        private final ObservableList<ReadOnlyTask> tasks = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<? extends ReadOnlyPerson> persons, Collection<? extends Tag> tags) {
-            this.persons.setAll(persons);
+        TaskManagerStub(Collection<? extends ReadOnlyTask> tasks, Collection<? extends Tag> tags) {
+            this.tasks.setAll(tasks);
             this.tags.setAll(tags);
         }
 
         @Override
-        public ObservableList<ReadOnlyPerson> getPersonList() {
-            return persons;
+        public ObservableList<ReadOnlyTask> getTaskList() {
+            return tasks;
         }
 
         @Override
