@@ -649,6 +649,21 @@ Use case resumes at step 2.
 > 1b2. Use case ends.
 
 ---
+
+### Use case: See A List Of Completed Tasks
+#### Main Success Scenario:
+1. User requests for list of completed tasks.
+2. System display list of completed task.
+3. Use case ends.
+
+##### Extensions
+1a. No completed tasks
+> 1a1. System displays no completed tasks.
+> 1a2. Use case ends.
+
+---
+
+
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
