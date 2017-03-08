@@ -4,8 +4,7 @@ import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 import org.teamstbf.yats.model.TaskManager;
 import org.teamstbf.yats.model.item.Task;
 import org.teamstbf.yats.model.item.UniqueItemList;
-
-import t16b4.yats.testutil.TestEvent;
+import org.teamstbf.yats.model.item.UniqueItemList.DuplicatePersonException;
 
 /**
  *
@@ -45,13 +44,10 @@ public class TypicalTestPersons {
         }
     }
 
-    public static void loadAddressBookWithSampleData(TaskManager ab) {
+    public static void loadAddressBookWithSampleData(TaskManager ab)
+    		throws UniqueItemList.DuplicatePersonException {
         for (TestEvent person : new TypicalTestPersons().getTypicalPersons()) {
-            try {
-                ab.addTask(new Task(person));
-            } catch (UniqueItemList.DuplicatePersonException e) {
-                assert false : "not possible";
-            }
+            ab.addTask(new Task(person));
         }
     }
 
@@ -59,7 +55,7 @@ public class TypicalTestPersons {
         return new TestEvent[]{alice, benson, carl, daniel, elle, fiona, george};
     }
 
-    public TaskManager getTypicalAddressBook() {
+    public TaskManager getTypicalAddressBook() throws DuplicatePersonException {
         TaskManager ab = new TaskManager();
         loadAddressBookWithSampleData(ab);
         return ab;

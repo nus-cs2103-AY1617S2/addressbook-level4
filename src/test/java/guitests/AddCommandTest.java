@@ -5,15 +5,11 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.teamstbf.yats.commons.core.Messages;
 import org.teamstbf.yats.logic.commands.AddCommand;
+import org.teamstbf.yats.testutil.TestEvent;
 import org.teamstbf.yats.testutil.TestPerson;
 import org.teamstbf.yats.testutil.TestUtil;
 
 import guitests.guihandles.PersonCardHandle;
-<<<<<<< HEAD
-=======
-import t16b4.yats.testutil.TestEvent;
-import t16b4.yats.testutil.TestUtil;
->>>>>>> origin/v0.1.2-Class-Variable-Refactor-Update
 
 public class AddCommandTest extends AddressBookGuiTest {
 

@@ -8,8 +8,6 @@ import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.tag.Tag;
 import org.teamstbf.yats.model.tag.UniqueTagList;
 
-import t16b4.yats.testutil.TestEvent;
-
 /**
  *
  */

@@ -15,6 +15,7 @@ import org.teamstbf.yats.model.ReadOnlyTaskManager;
 import org.teamstbf.yats.model.TaskManager;
 import org.teamstbf.yats.model.item.ReadOnlyItem;
 import org.teamstbf.yats.model.item.Task;
+import org.teamstbf.yats.model.item.UniqueItemList.DuplicatePersonException;
 import org.teamstbf.yats.model.tag.Tag;
 import org.teamstbf.yats.testutil.TypicalTestPersons;
 
@@ -41,7 +42,7 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
+    public void resetData_withValidReadOnlyAddressBook_replacesData() throws DuplicatePersonException {
         TaskManager newData = new TypicalTestPersons().getTypicalAddressBook();
         addressBook.resetData(newData);
         assertEquals(newData, addressBook);
