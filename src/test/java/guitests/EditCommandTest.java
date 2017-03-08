@@ -48,7 +48,7 @@ public class EditCommandTest extends TodoListGuiTest {
         //commandBox.runCommand("edit " + "1" + " t/aaa" );
         TestTodo todoToEdit = expectedTodosList[addressBookIndex - 1];
         TestTodo editedTodo = new TodoBuilder(todoToEdit).withTags().build();
-     
+
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTodo);
     }
 
@@ -122,6 +122,6 @@ public class EditCommandTest extends TodoListGuiTest {
         assertTrue(todoListPanel.isListMatching(expectedTodosList));
 
         //edit result didn't show in display
-        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TODO_SUCCESS, editedTodo));        
+        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TODO_SUCCESS, editedTodo));
     }
 }

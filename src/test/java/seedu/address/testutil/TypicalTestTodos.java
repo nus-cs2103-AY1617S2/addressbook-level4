@@ -13,7 +13,7 @@ public class TypicalTestTodos {
     public TestTodo alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
 
     public TypicalTestTodos() {
-        try {        	
+        try {
             alice = new TodoBuilder().withName("Alice Pauline")
                     .withTags("friends").build();
             benson = new TodoBuilder().withName("Benson Meier")

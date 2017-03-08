@@ -35,7 +35,7 @@ public class TodoBuilder {
         todo.setTags(tempList);
         return this;
     }
-    
+
     public TestTodo build() {
         return this.todo;
     }

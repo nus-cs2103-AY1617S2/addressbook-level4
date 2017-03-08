@@ -442,17 +442,17 @@ public class LogicManagerTest {
         /**
          * Generates an TodoList with auto-generated todos.
          */
-        
+
         TodoList generateTodoListReturnTodoList(int numGenerated) throws Exception {
             TodoList addressBook = new TodoList();
             addToTodoList(addressBook, numGenerated);
             return addressBook;
-        }  
-             
+        }
+
         /**
          * Generates a list of Todos based on the flags.
          */
-        
+
         List<Todo> generateTodoList(int numGenerated) throws Exception {
             List<Todo> todos = new ArrayList<>();
             for (int i = 1; i <= numGenerated; i++) {
@@ -460,7 +460,7 @@ public class LogicManagerTest {
             }
             return todos;
         }
-        
+
         /**
          * Generates an TodoList based on the list of Todos given.
          */
@@ -504,7 +504,7 @@ public class LogicManagerTest {
             }
         }
 
-      
+
 
         List<Todo> generateTodoList(Todo... todos) {
             return Arrays.asList(todos);

@@ -26,7 +26,7 @@ public class Todo implements ReadOnlyTodo {
         this.name = name;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
-    
+
     public Todo(Todo todo) {
         assert !CollectionUtil.isAnyNull(todo);
         this.name = todo.getName();
@@ -35,7 +35,7 @@ public class Todo implements ReadOnlyTodo {
     /** for unit-test
      * Constructor for a scheduled task
      */
-    
+
     public Todo(Name name, Date starttime, Date endtime, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, starttime, endtime, tags);
         this.name = name;
@@ -43,14 +43,14 @@ public class Todo implements ReadOnlyTodo {
         this.endtime = endtime;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
-    
+
     /**
      * Creates a copy of the given ReadOnlyTodo.
      */
     public Todo(ReadOnlyTodo source) {
         this(source.getName(), source.getTags());
     }
-    
+
     public void setName(Name name) {
         assert name != null;
         this.name = name;

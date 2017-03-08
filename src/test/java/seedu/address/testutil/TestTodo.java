@@ -52,11 +52,11 @@ public class TestTodo implements ReadOnlyTodo {
     /**
      * Creates a copy of the given ReadOnlyTodo.
      */
-    
-    public TestTodo(ReadOnlyTodo source) {    	
+
+    public TestTodo(ReadOnlyTodo source) {
     		this(source.getName(), source.getStartTime(), source.getEndTime(), source.getTags());
     }
-    
+
     public void setName(Name name) {
         assert name != null;
         this.name = name;
