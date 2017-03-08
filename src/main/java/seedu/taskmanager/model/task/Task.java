@@ -20,12 +20,12 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(TaskName taskName, /*Date date, EndTime endTime,*/ Deadline deadline /*, UniqueCategoryList categories*/) {
-        assert !CollectionUtil.isAnyNull(taskName, /*, date, endTime, */deadline /*categories*/);
+    public Task(TaskName taskName, Date date /*EndTime endTime, Deadline deadline, UniqueCategoryList categories*/) {
+        assert !CollectionUtil.isAnyNull(taskName, date /*, endTime, deadline, categories*/);
         this.taskName = taskName;
-//        this.date = date;
+        this.date = date;
 //        this.endTime = endTime;
-        this.deadline = deadline;        
+//        this.deadline = deadline;        
 //        this.categories = new UniqueCategoryList(categories); // protect internal tags from changes in the arg list
     }
 
@@ -33,7 +33,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getTaskName(), /*source.getDate(), source.getEndTime(),*/ source.getDeadline()/*, source.getCategories()*/);
+        this(source.getTaskName(), source.getDate() /* ,source.getEndTime(), source.getDeadline(), source.getCategories()*/);
     }
 
     public void setTaskName(TaskName taskName) {
