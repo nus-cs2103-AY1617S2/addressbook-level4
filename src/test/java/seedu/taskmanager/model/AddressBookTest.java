@@ -16,7 +16,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.taskmanager.model.ProcrastiNomore;
 import seedu.taskmanager.model.ReadOnlyProcrastiNomore;
-import seedu.taskmanager.model.tag.Tag;
+import seedu.taskmanager.model.category.Category;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.testutil.TypicalTestPersons;
@@ -52,7 +52,7 @@ public class AddressBookTest {
         TypicalTestPersons td = new TypicalTestPersons();
         // Repeat td.alice twice
         List<Task> newPersons = Arrays.asList(new Task(td.alice), new Task(td.alice));
-        List<Tag> newTags = td.alice.getTags().asObservableList();
+        List<Category> newTags = td.alice.getTags().asObservableList();
         AddressBookStub newData = new AddressBookStub(newPersons, newTags);
 
         thrown.expect(AssertionError.class);
@@ -63,7 +63,7 @@ public class AddressBookTest {
     public void resetData_withDuplicateTags_throwsAssertionError() {
         ProcrastiNomore typicalAddressBook = new TypicalTestPersons().getTypicalAddressBook();
         List<ReadOnlyTask> newPersons = typicalAddressBook.getTaskList();
-        List<Tag> newTags = new ArrayList<>(typicalAddressBook.getTagList());
+        List<Category> newTags = new ArrayList<>(typicalAddressBook.getTagList());
         // Repeat the first tag twice
         newTags.add(newTags.get(0));
         AddressBookStub newData = new AddressBookStub(newPersons, newTags);
@@ -77,11 +77,11 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyProcrastiNomore {
         private final ObservableList<ReadOnlyTask> persons = FXCollections.observableArrayList();
-        private final ObservableList<Tag> tags = FXCollections.observableArrayList();
+        private final ObservableList<Category> categories = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<? extends ReadOnlyTask> persons, Collection<? extends Tag> tags) {
+        AddressBookStub(Collection<? extends ReadOnlyTask> persons, Collection<? extends Category> categories) {
             this.persons.setAll(persons);
-            this.tags.setAll(tags);
+            this.categories.setAll(categories);
         }
 
         @Override
@@ -90,8 +90,8 @@ public class AddressBookTest {
         }
 
         @Override
-        public ObservableList<Tag> getTagList() {
-            return tags;
+        public ObservableList<Category> getTagList() {
+            return categories;
         }
     }
 

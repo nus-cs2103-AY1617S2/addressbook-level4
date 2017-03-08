@@ -1,6 +1,6 @@
 package seedu.taskmanager.model.task;
 
-import seedu.taskmanager.model.tag.UniqueTagList;
+import seedu.taskmanager.model.category.UniqueCategoryList;
 
 /**
  * A read-only immutable interface for a Task in ProcrastiNomore.
@@ -9,14 +9,15 @@ import seedu.taskmanager.model.tag.UniqueTagList;
 public interface ReadOnlyTask {
 
     TaskName getTaskName();
-    Time getTime();
+    Deadline getDeadline();
     Date getDate();
+    EndTime getEndTime();
 
     /**
-     * The returned TagList is a deep copy of the internal TagList,
-     * changes on the returned list will not affect the person's internal tags.
+     * The returned CategoryList is a deep copy of the internal CategoryList,
+     * changes on the returned list will not affect the task's internal categories.
      */
-//    UniqueTagList getTags();
+//    UniqueCategoryList getCategories();
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
@@ -25,7 +26,8 @@ public interface ReadOnlyTask {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                 && other.getTaskName().equals(this.getTaskName()) // state checks here onwards
-                && other.getTime().equals(this.getTime())
+                && other.getDeadline().equals(this.getDeadline())
+                && other.getEndTime().equals(this.getEndTime())
                 && other.getDate().equals(this.getDate()));
     }
 
@@ -35,12 +37,14 @@ public interface ReadOnlyTask {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getTaskName())
-                .append(" Time: ")
-                .append(getTime())
+                .append(" Endtime: ")
+                .append(getEndTime())
+                .append(" Deadline: ")
+                .append(getDeadline())
                 .append(" Date: ")
                 .append(getDate());
- //               .append(" Tags: ");
- //       getTags().forEach(builder::append);
+ //               .append(" Categories: ");
+ //       getCategories().forEach(builder::append);
         return builder.toString();
     }
 

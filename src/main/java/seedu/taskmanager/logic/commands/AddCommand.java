@@ -8,7 +8,7 @@ import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.model.task.Date;
 import seedu.taskmanager.model.task.TaskName;
 import seedu.taskmanager.model.task.Task;
-import seedu.taskmanager.model.task.Time;
+import seedu.taskmanager.model.task.Deadline;
 //import seedu.taskmanager.model.task.EndTime;
 //import seedu.taskmanager.model.task.Deadline;
 import seedu.taskmanager.model.task.UniqueTaskList;
@@ -46,7 +46,7 @@ public class AddCommand extends Command {
   //      }
         this.toAdd = new Task(
                 new TaskName(taskName),
-                new Time(time),
+                new Deadline(time),
                 new Date(date)
 //                new EndTime(endTime),
   //              new Deadline(deadline)

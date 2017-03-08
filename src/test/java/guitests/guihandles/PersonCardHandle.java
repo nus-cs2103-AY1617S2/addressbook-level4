@@ -60,7 +60,7 @@ public class PersonCardHandle extends GuiHandle {
                 .collect(Collectors.toList());
     }
 
-    private List<String> getTags(UniqueTagList tags) {
+    private List<String> getTags(UniqueCategoryList tags) {
         return tags
                 .asObservableList()
                 .stream()

@@ -16,10 +16,10 @@ public class TestPerson implements ReadOnlyPerson {
     private Address address;
     private Email email;
     private Phone phone;
-    private UniqueTagList tags;
+    private UniqueCategoryList tags;
 
     public TestPerson() {
-        tags = new UniqueTagList();
+        tags = new UniqueCategoryList();
     }
 
     /**
@@ -49,7 +49,7 @@ public class TestPerson implements ReadOnlyPerson {
         this.phone = phone;
     }
 
-    public void setTags(UniqueTagList tags) {
+    public void setTags(UniqueCategoryList tags) {
         this.tags = tags;
     }
 
@@ -74,7 +74,7 @@ public class TestPerson implements ReadOnlyPerson {
     }
 
     @Override
-    public UniqueTagList getTags() {
+    public UniqueCategoryList getTags() {
         return tags;
     }
 

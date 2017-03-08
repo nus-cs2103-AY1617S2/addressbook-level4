@@ -10,7 +10,7 @@ import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.model.task.Date;
 import seedu.taskmanager.model.task.TaskName;
 import seedu.taskmanager.model.task.Task;
-import seedu.taskmanager.model.task.Time;
+import seedu.taskmanager.model.task.Deadline;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 //import seedu.taskmanager.model.tag.Tag;
 //import seedu.taskmanager.model.tag.UniqueTagList;
@@ -66,10 +66,10 @@ public class XmlAdaptedTask {
 //            personTags.add(tag.toModelType());
 //        }
         final TaskName taskname = new TaskName(this.taskname);
-        final Time time = new Time(this.time);
+        final Deadline deadline = new Deadline(this.time);
         final Date date = new Date(this.date);
 //        final Address address = new Address(this.address);
 //        final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Task(taskname, time, date);
+        return new Task(taskname, deadline, date);
     }
 }
