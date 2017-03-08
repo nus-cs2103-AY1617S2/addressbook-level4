@@ -24,7 +24,7 @@ Responsibilities: Testing, Model, Code Quality, Integration
 -----
 
 #### [Tang Shenqi](http://github.com/tangshenqi)
-<img src="images/shenqit.jpg" width="150"><br>
+<img src="images/shenqit.png" width="150"><br>
 Role: Developer <br>
 Responsibilities: UI, Eclipse expert
 
