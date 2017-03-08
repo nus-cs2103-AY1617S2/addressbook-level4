@@ -16,7 +16,7 @@ public class Note {
      * The first character of the note must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String NOTE_VALIDATION_REGEX = ".*";
+    public static final String NOTE_VALIDATION_REGEX = "[^\\s].*";
 
     public final String value;
 

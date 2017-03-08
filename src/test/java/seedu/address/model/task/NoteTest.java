@@ -1,13 +1,11 @@
-package seedu.address.model.person;
+package seedu.address.model.task;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.address.model.task.Note;
-
-public class AddressTest {
+public class NoteTest {
 
     @Test
     public void isValidNote() {

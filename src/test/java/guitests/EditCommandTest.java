@@ -8,11 +8,6 @@ import org.junit.Test;
 import guitests.guihandles.PersonCardHandle;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.task.Name;
-import seedu.address.model.task.Note;
-import seedu.address.model.task.Priority;
-import seedu.address.model.task.Status;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TestPerson;
 
@@ -25,7 +20,7 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby p/91234567 e/bobby@gmail.com a/Block 123, Bobby Street 3 t/husband";
+        String detailsToEdit = "Bobby p/91234567 s/bobby@gmail.com n/Block 123, Bobby Street 3 t/husband";
         int addressBookIndex = 1;
 
         TestPerson editedPerson = new PersonBuilder().withName("Bobby").withPhone("91234567")
@@ -86,30 +81,16 @@ public class EditCommandTest extends AddressBookGuiTest {
     public void edit_noFieldsSpecified_failure() {
         commandBox.runCommand("edit 1");
         assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
-    }
 
-    @Test
-    public void edit_invalidValues_failure() {
-        commandBox.runCommand("edit 1 *&");
-        assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
-
-        commandBox.runCommand("edit 1 p/abcd");
-        assertResultMessage(Priority.MESSAGE_PRIORITY_CONSTRAINTS);
-
-        commandBox.runCommand("edit 1 e/yahoo!!!");
-        assertResultMessage(Status.MESSAGE_STATUS_CONSTRAINTS);
-
-        commandBox.runCommand("edit 1 a/");
-        assertResultMessage(Note.MESSAGE_NOTE_CONSTRAINTS);
-
-        commandBox.runCommand("edit 1 t/*&");
-        assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
+        // trailing whitespace after command should be considered as a invalid command
+        commandBox.runCommand("edit 1    ");
+        assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
     }
 
     @Test
     public void edit_duplicatePerson_failure() {
-        commandBox.runCommand("edit 3 Alice Pauline p/85355255 e/alice@gmail.com "
-                                + "a/123, Jurong West Ave 6, #08-111 t/friends");
+        commandBox.runCommand("edit 3 Alice Pauline p/85355255 s/alice@gmail.com "
+                                + "n/123, Jurong West Ave 6, #08-111 t/friends");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_PERSON);
     }
 

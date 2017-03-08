@@ -1,33 +1,17 @@
-package seedu.address.model.person;
+package seedu.address.model.task;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.address.model.task.Status;
-
-public class EmailTest {
+public class StatusTest {
 
     @Test
     public void isValidStatus() {
         // blank email
         assertFalse(Status.isValidStatus("")); // empty string
         assertFalse(Status.isValidStatus(" ")); // spaces only
-
-        // missing parts
-        assertFalse(Status.isValidStatus("@webmail.com")); // missing local part
-        assertFalse(Status.isValidStatus("peterjackwebmail.com")); // missing '@' symbol
-        assertFalse(Status.isValidStatus("peterjack@")); // missing domain name
-
-        // invalid parts
-        assertFalse(Status.isValidStatus("-@webmail.com")); // invalid local part
-        assertFalse(Status.isValidStatus("peterjack@-")); // invalid domain name
-        assertFalse(Status.isValidStatus("peter jack@webmail.com")); // spaces in local part
-        assertFalse(Status.isValidStatus("peterjack@web mail.com")); // spaces in domain name
-        assertFalse(Status.isValidStatus("peterjack@@webmail.com")); // double '@' symbol
-        assertFalse(Status.isValidStatus("peter@jack@webmail.com")); // '@' symbol in local part
-        assertFalse(Status.isValidStatus("peterjack@webmail@com")); // '@' symbol in domain name
 
         // valid email
         assertTrue(Status.isValidStatus("PeterJack_1190@WEB.Mail.com"));
