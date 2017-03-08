@@ -3,6 +3,7 @@ package seedu.toluist.model;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import seedu.toluist.commons.util.CollectionUtil;
 import seedu.toluist.storage.JsonStorage;
 import seedu.toluist.storage.Storage;
 
@@ -17,12 +18,22 @@ public class TodoList {
 
     private ArrayList<Task> allTasks = new ArrayList<>();
 
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof TodoList // instanceof handles nulls
+                && CollectionUtil.elementsAreSimilar(allTasks, ((TodoList) other).getTasks()));
+    }
+
     public ArrayList<Task> getTasks() {
         return allTasks;
     }
 
     public static void setStorage(Storage storage) {
         TodoList.storage = storage;
+    }
+
+    public static Storage getStorage() {
+        return storage;
     }
 
     public static TodoList load() {
