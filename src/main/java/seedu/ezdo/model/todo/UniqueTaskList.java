@@ -71,11 +71,11 @@ public class UniqueTaskList implements Iterable<Task> {
      */
     public boolean remove(ReadOnlyTask toRemove) throws TaskNotFoundException {
         assert toRemove != null;
-        final boolean taskFoundAndDeleted = internalList.remove(toRemove);
-        if (!taskFoundAndDeleted) {
+        final boolean taskFoundAndKilled = internalList.remove(toRemove);
+        if (!taskFoundAndKilled) {
             throw new TaskNotFoundException();
         }
-        return taskFoundAndDeleted;
+        return taskFoundAndKilled;
     }
 
     public void setTasks(UniqueTaskList replacement) {
