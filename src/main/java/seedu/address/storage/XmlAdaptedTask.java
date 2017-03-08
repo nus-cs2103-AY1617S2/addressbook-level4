@@ -45,10 +45,10 @@ public class XmlAdaptedTask {
      * @param source future changes to this will not affect the created XmlAdaptedTask
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
-        name = source.getName().name;
-        deadline = source.getDeadline().date.toString();
-        description = source.getDescription().description;
-        id = Integer.toString(source.getID().value);
+        name = source.getName().toString();
+        deadline = source.getDeadline().toString();
+        description = source.getDescription().toString();
+        id = source.getID().toString();
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
