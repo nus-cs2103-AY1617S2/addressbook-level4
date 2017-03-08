@@ -346,87 +346,77 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | user | I can add tasks/events that may or may not have deadlines/dates | so that i can keep track of what i need to do
-`* * *` | user | I can delete tasks/events| get rid of tasks that need not be done anymore 
+`* * *` | user | tasks/events that may or may not have deadlines/dates | so that i can keep track of what i need to do
+`* * *` | user | delete tasks/events| get rid of tasks that need not be done anymore 
 `* * *` | user | reschedule a task/event | accommodate changes in my schedule 
 `* * *` | user | mark a task/event as done | so that i can reduce clutter in my todo list
 `* * *` | user | add tasks/events that have multiple dates/times | accomodate events that span over multiple days
 `* * *` | user | have a scheduler that automatically syncs my schedulers | so that i can reduce clutter in my todo list
-`* * *` | user | I will be given confirmation whether i enter a command | so that i know when the command has been executed
-`* * *` | user | I can edit the task/event's description' and name | so that i can accomodate any changes
-`* * *` | user | I can view my to-do list of undone tasks with and sorted by deadlines | so that I can find out what I have to do
-`* * *` | new user | I can view more information about a particular command | so that i can learn how to use the task manager easily.	
-`* *` | user | I can tag my tasks | so that I can easily categorise my tasks
-`* *` | user | I am able to undo my last action | so that i can rectify my mistakes quickly
-`* *` | user | I am able to add reminder alarms to tasks | to prompt follow up action	
-`* *` | user | I can get prompted on yesterday’s tasks that have yet to be completed | so that I can reschedule the task or flag as cannot be done. 
-`* *` | user | I can search my tasks by keyword | so that I can quickly access the desired task in mind
-`* *` | user | I can flag a task/events | so as to highlight the importance	
-`* *` | user | I can easily see an overview of my schedule and todo list | so that i can keep track of things that need to be done	
-`* *` | user | I can access a list of previously completed tasks | so as to keep track of things i have done	
-`* *` | user | I can search my tasks according to categories | so that I can easily visualize my tasks in a particular category
-`* *` | user | I can add tasks that repeat according to a stipulated number of days | So that i can reduce the amount of redundant work i need to do
-`* *` | user | I can change the folder to store my data | so that I can easily copy my data/program and work in another computer.	
-`* *` | user | I am able to manually sync my scheduler | so that I can back it up on my cloud/local folder
-`* *` | advanced user | System will recognise incomplete command words | so as to save time typing	
-`* *` | user | I can stipulate ranges of time for my tasks to be slotted into | so that i neednt consider my schedule directly	
-`*` | user | I can have a shortcut key | to quickly access the program.	
-`*` | user | I will be prompted for my password to enter the Task Manager |  prevent unauthorised users from using my Task Manager	
-`*` | user | I can place a tasks that was previously marked as done back into my todo list | so that i can save time	
-`*` | user | I can change the text size in the GUI | in case i have bad eyesight	
-`*` | user | I will be notified of all the commands i have given when i exit the program | to keep track of what i did	
-`*` | user | I can use the Task Manager across time zones | so that i can travel while using the Task Manager	
+`* * *` | user | be given confirmation whether i enter a command | so that i know when the command has been executed
+`* * *` | user | edit the task/event's description' and name | so that i can accomodate any changes
+`* * *` | user | view my to-do list of undone tasks with and sorted by deadlines | so that I can find out what I have to do
+`* * *` | new user | view more information about a particular command | so that i can learn how to use the task manager easily.	
+`* *` | user | tag my tasks | so that I can easily categorise my tasks
+`* *` | user | undo my last action | so that i can rectify my mistakes quickly
+`* *` | user | add reminder alarms to tasks | to prompt follow up action	
+`* *` | user | get prompted on yesterday’s tasks that have yet to be completed | so that I can reschedule the task or flag as cannot be done. 
+`* *` | user | search my tasks by keyword | so that I can quickly access the desired task in mind
+`* *` | user | flag a task/events | so as to highlight the importance	
+`* *` | user | easily see an overview of my schedule and todo list | so that i can keep track of things that need to be done	
+`* *` | user | access a list of previously completed tasks | so as to keep track of things i have done	
+`* *` | user | search my tasks according to categories | so that I can easily visualize my tasks in a particular category
+`* *` | user | add tasks that repeat according to a stipulated number of days | So that i can reduce the amount of redundant work i need to do
+`* *` | user | change the folder to store my data | so that I can easily copy my data/program and work in another computer.	
+`* *` | user | to manually sync my scheduler | so that I can back it up on my cloud/local folder
+`* *` | advanced user | use shorter command words | so as to save time typing	
+`* *` | user | stipulate ranges of time for my tasks to be slotted into | so that i neednt consider my schedule directly	
+`*` | user | have a shortcut key | to quickly access the program.	
+`*` | user | be prompted for my password to enter the Task Manager |  prevent unauthorised users from using my Task Manager	
+`*` | user | place a tasks that was previously marked as done back into my todo list | so that i can save time	
+`*` | user | change the text size in the GUI | in case i have bad eyesight	
+`*` | user | be notified of all the commands i have given when i exit the program | to keep track of what i did	
+`*` | user | use the Task Manager across time zones | so that i can travel while using the Task Manager	
 
 ## Appendix B : Use Cases
 
 (For all use cases below, the **System** is the `TaskManager` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Add task/event
+#### Use case: UC01 - Add task
 
 **MSS**
 
-1. User requests to Add task/event
-2. TaskManager feedbacks and verifies that task/event is added
-3. Use case ends.
+1. User requests to Add task
+2. TaskManager adds the task
+3. TaskManager feedbacks task is added
+4. Use case ends.
 
-Use case ends.
 
 **Extensions**
 
-1a. Task/event is given in an invalid format error
+1a. Task is given in an invalid format
 
+> 1a1. TaskManager feedbacks that the format is wrong and shows an example of the right format
 > Use case ends
 
-#### Use case: Delete task/event
+#### Use case: UC02 - Delete task
 
 **MSS**
 
-1. User requests to list tasks or search tasks by keyword 
-2. TaskManager shows a list of tasks or shows a list of tasks with the keyword
-3. User requests to delete a specific task in the list
-4. TaskManager deletes the task 
+1. User requests to list tasks (UC04) or search tasks by keyword (UC03)
+2. User requests to delete the task(s) in the list
+3. TaskManager deletes the task(s) 
+4. TaskManager feedbacks that task(s) is deleted
 5. Use case ends.
 
-Use case ends.
 
 **Extensions**
 
-2a. The list is empty
+2a. The given index is invalid
 
-> Use case ends
-
-2b. The keyword does not match any of the tasks
-
-> 2b1. TaskManager shows an error message
-
-> Use case ends 
-
-3a. The given index is invalid
-
-> 3a1. AddressBook shows an error message 
+> 2a1. AddressBook feedbacks that the index is invalid 
 > Use case resumes at step 2
 
-#### Use case: Find Task by keyword
+#### Use case: UC03 - Find Task by keyword
 
 **MSS**
 
@@ -441,22 +431,23 @@ Use case ends.
 
 > Use case ends
 
-#### Use case: List all task
+#### Use case: UC04 - List all tasks
 
 **MSS**
 
-1. User requests to list all task
-2. Taskmanager shows a list of all task 
+1. User requests to list all tasks
+2. Taskmanager shows a list of all tasks 
 3. Use case ends.
 
 
 **Extensions**
 
-2a.  Task list is empty, Taskmanager shows a Task list is empty message.
+2a.  Task list is empty
 
+> 2a1. AddressBook feedbacks that the task list is empty 
 > Use case ends
 
-#### Use case: Show list of tasks that is done or event that has passed
+#### Use case: UC05 - Show list of tasks that is done or event that has passed
 
 **MSS**
 
@@ -472,66 +463,48 @@ Use case ends.
 
 > Use case ends
 
-#### Use case:  edit task/event
+#### Use case: UC06 - edit task
 
 **MSS**
 
-1. User requests to list or find tasks/events
-2. TaskManager shows a list of tasks/events
-3. User requests to edit a specific task/event in the list
-4. TaskManager edits the task/event
+1. User requests to list tasks (UC04) or search tasks by keyword (UC03)
+2. User requests to edit a specific task/event in the list
+3. TaskManager edits the task/event
+4. TaskManager feedbacks that the changes have been made
 5. Use case ends.
 
 **Extensions**
 
-2a. The list is empty
+2a. The given index is invalid
 
-> Use case ends
-
-3a. The given index is invalid
-
-> 3a1.TaskManager shows an error message
-
+> 2a1. AddressBook feedbacks that the index is invalid 
 > Use case resumes at step 2
 
-3b. The user gives index but no other input
+2b. The user gives index but no other input
 
-> 3b1. TaskManager shows an error message
-
+> 2b1. TaskManager feedbacks that that changes should be included
 > Use case resumes at step 2
 
-3c. The user enters input that is invalid (i.e. edit start time when it is a task)
+2c. The user enters input that is invalid (i.e. edit start time when it is a task)
 
-> 3c1. TaskManager shows an error message
-
+> 2c1. TaskManager feedbacks that the input is invalid
 > Use case resumes at step 2
 
-#### Use case:  Mark task as done
+#### Use case: UC07 - Mark task as done
 
 **MSS**
 
-1. User requests to list tasks or search tasks by keyword 
-2. TaskManager shows a list of tasks or shows a list of tasks with the keyword
-3. User requests to mark specific task(s) in the list as done
-4. TaskManager marks the specified task(s) as done
-5. Use case ends.
+1. User requests to list tasks (UC04) or search tasks by keyword (UC03)
+2. User requests to mark specific task(s) in the list as done
+3. TaskManager marks the specified task(s) as done
+4. Use case ends.
 
 **Extensions**
 
-2a. The list is empty
 
-> Use case ends
+2a. The given index is invalid
 
-2b. The keyword does not match any of the tasks
-
-> 2b1. TaskManager shows an error message
-
-> Use case ends 
-
-3a. The given index is invalid
-
-> 3a1. AddressBook shows an error message 
-
+> 2a1. AddressBook shows an error message 
 > Use case resumes at step 2
 
 ## Appendix C : Non Functional Requirements
@@ -629,4 +602,21 @@ Cons:
 > * Unable to set multiple reminders
 > * Priority lists not very useful
 
+**Todoist**
+
+Pros:
+
+> * Able to organise tasks
+> * Can set due dates and reminders that are separate 
+> * Has smart date entries
+> * Has short-cut keys
+> * Able to set reccurring tasks
+> * Able to filter tasks by many different ways 
+> * Able to set task priority
+
+Cons: 
+
+> * Unable to create a task without a project
+> * Unable to set multiple reminders
+> * Unable to set start date/time for task
 
