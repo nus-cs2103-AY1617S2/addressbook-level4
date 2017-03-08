@@ -42,8 +42,8 @@ Responsibilities: Documentation, Code Quality <br>
 
 -----
 
-#### [He Yang](xxx)
-<img src="xxx" width="150"><br>
+#### [Zhang HeYang](https://github.com/zhypaul)
+<img src="https://avatars2.githubusercontent.com/u/25544025?v=3&s=460" width="150"><br>
 Role: Developer
 Responsibilities: Code Quality <br>  
 * Components in charge of: Storage
