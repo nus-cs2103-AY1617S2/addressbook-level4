@@ -44,14 +44,14 @@ A command guide will be shown in the window
 ### 2.2. Adding a task: `add`
 
 Adds a task to the task manager<br>
-Format: `add TASK by DEADLINE`
+Format: `add TASK from DATE by DEADLINE`
 
 > Tasks can have any number of tags (including 0)
 
 Examples:
 
 * `add submit report by Friday #academic`
-* `add read Harry Potter by Saturday #personal`
+* `add read Harry Potter from Monday by Saturday #personal`
 
 ### 2.3. Listing all tasks : `list`
 
@@ -130,6 +130,7 @@ There is no need to save manually.
 
 * **Add**  `add TASK` <br>
            `add TASK by DEADLINE` <br>
+           `add TASK from DATE by DEADLINE` <br>
   e.g. `add submit report by Friday`
 
 * **List** : `list` <br>
