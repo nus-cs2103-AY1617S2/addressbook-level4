@@ -7,9 +7,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import savvytodo.model.task.ReadOnlyTask;
 
-public class PersonCard extends UiPart<Region> {
+public class TaskCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "TaskListCard.fxml";
 
     @FXML
     private HBox cardPane;
@@ -26,17 +26,17 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    public PersonCard(ReadOnlyTask person, int displayedIndex) {
+    public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
-        name.setText(person.getName().fullName);
+        name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        initTags(person);
+        phone.setText(task.getPhone().value);
+        address.setText(task.getAddress().value);
+        email.setText(task.getEmail().value);
+        initTags(task);
     }
 
-    private void initTags(ReadOnlyTask person) {
-        person.getCategories().forEach(tag -> tags.getChildren().add(new Label(tag.categoryName)));
+    private void initTags(ReadOnlyTask task) {
+        task.getCategories().forEach(tag -> tags.getChildren().add(new Label(tag.categoryName)));
     }
 }

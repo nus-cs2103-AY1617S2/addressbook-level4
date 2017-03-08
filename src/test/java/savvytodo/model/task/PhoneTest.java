@@ -1,4 +1,4 @@
-package savvytodo.model.person;
+package savvytodo.model.task;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

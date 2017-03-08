@@ -12,7 +12,7 @@ import savvytodo.model.task.Phone;
 import savvytodo.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
-    public static Task[] getSamplePersons() {
+    public static Task[] getSampleTasks() {
         try {
             return new Task[] {
                 new Task(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@gmail.com"),
@@ -42,12 +42,12 @@ public class SampleDataUtil {
     public static ReadOnlyTaskManager getSampleTaskManager() {
         try {
             TaskManager sampleAB = new TaskManager();
-            for (Task samplePerson : getSamplePersons()) {
-                sampleAB.addCategory(samplePerson);
+            for (Task sampleTask : getSampleTasks()) {
+                sampleAB.addCategory(sampleTask);
             }
             return sampleAB;
         } catch (DuplicateTaskException e) {
-            throw new AssertionError("sample data cannot contain duplicate persons", e);
+            throw new AssertionError("sample data cannot contain duplicate tasks", e);
         }
     }
 }

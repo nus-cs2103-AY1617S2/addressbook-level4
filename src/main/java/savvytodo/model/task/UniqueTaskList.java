@@ -52,42 +52,42 @@ public class UniqueTaskList implements Iterable<Task> {
     public void updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException {
         assert editedTask != null;
 
-        Task personToUpdate = internalList.get(index);
-        if (!personToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
+        Task taskToUpdate = internalList.get(index);
+        if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
             throw new DuplicateTaskException();
         }
 
-        personToUpdate.resetData(editedTask);
-        // TODO: The code below is just a workaround to notify observers of the updated person.
-        // The right way is to implement observable properties in the Person class.
-        // Then, PersonCard should then bind its text labels to those observable properties.
-        internalList.set(index, personToUpdate);
+        taskToUpdate.resetData(editedTask);
+        // TODO: The code below is just a workaround to notify observers of the updated task.
+        // The right way is to implement observable properties in the Task class.
+        // Then, TaskCard should then bind its text labels to those observable properties.
+        internalList.set(index, taskToUpdate);
     }
 
     /**
-     * Removes the equivalent person from the list.
+     * Removes the equivalent task from the list.
      *
-     * @throws TaskNotFoundException if no such person could be found in the list.
+     * @throws TaskNotFoundException if no such task could be found in the list.
      */
     public boolean remove(ReadOnlyTask toRemove) throws TaskNotFoundException {
         assert toRemove != null;
-        final boolean personFoundAndDeleted = internalList.remove(toRemove);
-        if (!personFoundAndDeleted) {
+        final boolean taskFoundAndDeleted = internalList.remove(toRemove);
+        if (!taskFoundAndDeleted) {
             throw new TaskNotFoundException();
         }
-        return personFoundAndDeleted;
+        return taskFoundAndDeleted;
     }
 
-    public void setPersons(UniqueTaskList replacement) {
+    public void setTasks(UniqueTaskList replacement) {
         this.internalList.setAll(replacement.internalList);
     }
 
-    public void setTasks(List<? extends ReadOnlyTask> persons) throws DuplicateTaskException {
+    public void setTasks(List<? extends ReadOnlyTask> tasks) throws DuplicateTaskException {
         final UniqueTaskList replacement = new UniqueTaskList();
-        for (final ReadOnlyTask person : persons) {
-            replacement.add(new Task(person));
+        for (final ReadOnlyTask task : tasks) {
+            replacement.add(new Task(task));
         }
-        setPersons(replacement);
+        setTasks(replacement);
     }
 
     public UnmodifiableObservableList<Task> asObservableList() {
@@ -117,13 +117,13 @@ public class UniqueTaskList implements Iterable<Task> {
      */
     public static class DuplicateTaskException extends DuplicateDataException {
         protected DuplicateTaskException() {
-            super("Operation would result in duplicate persons");
+            super("Operation would result in duplicate tasks");
         }
     }
 
     /**
-     * Signals that an operation targeting a specified person in the list would fail because
-     * there is no such matching person in the list.
+     * Signals that an operation targeting a specified task in the list would fail because
+     * there is no such matching task in the list.
      */
     public static class TaskNotFoundException extends Exception {}
 

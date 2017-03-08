@@ -15,7 +15,7 @@ import savvytodo.commons.core.Config;
 import savvytodo.commons.core.LogsCenter;
 import savvytodo.commons.events.storage.DataSavingExceptionEvent;
 import savvytodo.commons.events.ui.JumpToListRequestEvent;
-import savvytodo.commons.events.ui.PersonPanelSelectionChangedEvent;
+import savvytodo.commons.events.ui.TaskPanelSelectionChangedEvent;
 import savvytodo.commons.events.ui.ShowHelpRequestEvent;
 import savvytodo.commons.util.StringUtil;
 import savvytodo.logic.Logic;
@@ -116,13 +116,13 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.getPersonListPanel().scrollTo(event.targetIndex);
+        mainWindow.getTaskListPanel().scrollTo(event.targetIndex);
     }
 
     @Subscribe
-    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
+    private void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.loadPersonPage(event.getNewSelection());
+        mainWindow.loadTaskPage(event.getNewSelection());
     }
 
 }

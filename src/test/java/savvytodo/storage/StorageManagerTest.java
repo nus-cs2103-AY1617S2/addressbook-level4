@@ -22,7 +22,7 @@ import savvytodo.storage.Storage;
 import savvytodo.storage.StorageManager;
 import savvytodo.storage.XmlTaskManagerStorage;
 import savvytodo.testutil.EventsCollector;
-import savvytodo.testutil.TypicalTestPersons;
+import savvytodo.testutil.TypicalTestTasks;
 
 public class StorageManagerTest {
 
@@ -64,7 +64,7 @@ public class StorageManagerTest {
          * {@link XmlAddressBookStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link XmlAddressBookStorageTest} class.
          */
-        TaskManager original = new TypicalTestPersons().getTypicalAddressBook();
+        TaskManager original = new TypicalTestTasks().getTypicalAddressBook();
         storageManager.saveTaskManager(original);
         ReadOnlyTaskManager retrieved = storageManager.readTaskManaager().get();
         assertEquals(original, new TaskManager(retrieved));

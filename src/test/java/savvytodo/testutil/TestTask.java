@@ -8,9 +8,9 @@ import savvytodo.model.task.Phone;
 import savvytodo.model.task.ReadOnlyTask;
 
 /**
- * A mutable person object. For testing only.
+ * A mutable task object. For testing only.
  */
-public class TestPerson implements ReadOnlyTask {
+public class TestTask implements ReadOnlyTask {
 
     private Name name;
     private Address address;
@@ -18,19 +18,19 @@ public class TestPerson implements ReadOnlyTask {
     private Phone phone;
     private UniqueCategoryList tags;
 
-    public TestPerson() {
+    public TestTask() {
         tags = new UniqueCategoryList();
     }
 
     /**
-     * Creates a copy of {@code personToCopy}.
+     * Creates a copy of {@code taskToCopy}.
      */
-    public TestPerson(TestPerson personToCopy) {
-        this.name = personToCopy.getName();
-        this.phone = personToCopy.getPhone();
-        this.email = personToCopy.getEmail();
-        this.address = personToCopy.getAddress();
-        this.tags = personToCopy.getCategories();
+    public TestTask(TestTask taskToCopy) {
+        this.name = taskToCopy.getName();
+        this.phone = taskToCopy.getPhone();
+        this.email = taskToCopy.getEmail();
+        this.address = taskToCopy.getAddress();
+        this.tags = taskToCopy.getCategories();
     }
 
     public void setName(Name name) {

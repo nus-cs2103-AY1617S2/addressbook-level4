@@ -17,7 +17,7 @@ import savvytodo.model.TaskManager;
 import savvytodo.model.ReadOnlyTaskManager;
 import savvytodo.model.task.Task;
 import savvytodo.storage.XmlTaskManagerStorage;
-import savvytodo.testutil.TypicalTestPersons;
+import savvytodo.testutil.TypicalTestTasks;
 
 public class XmlAddressBookStorageTest {
     private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlAddressBookStorageTest/");
@@ -63,7 +63,7 @@ public class XmlAddressBookStorageTest {
     @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         String filePath = testFolder.getRoot().getPath() + "TempAddressBook.xml";
-        TypicalTestPersons td = new TypicalTestPersons();
+        TypicalTestTasks td = new TypicalTestTasks();
         TaskManager original = td.getTypicalAddressBook();
         XmlTaskManagerStorage xmlAddressBookStorage = new XmlTaskManagerStorage(filePath);
 
