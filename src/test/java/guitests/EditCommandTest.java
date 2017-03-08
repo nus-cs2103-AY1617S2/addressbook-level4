@@ -35,6 +35,46 @@ public class EditCommandTest extends EzDoGuiTest {
     }
 
     @Test
+    public void edit_eachFieldSpecified_success() throws Exception {
+
+        commandBox.runCommand("edit 1 Bobby p/1 s/01/01/2017 d/08/09/2018 t/husband");
+
+        int ezDoIndex = 1;
+
+        String detailsToEdit = "p/3";
+
+        TestTask editedTask = new TaskBuilder().withName("Bobby").withPriority("3")
+                .withStartDate("01/01/2017").withDueDate("08/09/2018")
+                .withTags("husband").build();
+
+        assertEditSuccess(ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
+
+        detailsToEdit = "Bobby s/11/11/2017";
+
+        editedTask = new TaskBuilder().withName("Bobby").withPriority("3")
+                .withStartDate("11/11/2017").withDueDate("08/09/2018")
+                .withTags("husband").build();
+
+        assertEditSuccess(ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
+
+        detailsToEdit = "Bobby d/01/01/2018";
+
+        editedTask = new TaskBuilder().withName("Bobby").withPriority("3")
+                .withStartDate("11/11/2017").withDueDate("01/01/2018")
+                .withTags("husband").build();
+
+        assertEditSuccess(ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
+
+        detailsToEdit = "Bobby t/brother";
+
+        editedTask = new TaskBuilder().withName("Bobby").withPriority("3")
+                .withStartDate("11/11/2017").withDueDate("01/01/2018")
+                .withTags("brother").build();
+
+        assertEditSuccess(ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
+    }
+
+    @Test
     public void edit_notAllFieldsSpecified_success() throws Exception {
         String detailsToEdit = "t/sweetie t/bestie";
         int ezDoIndex = 2;
