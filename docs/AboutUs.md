@@ -19,7 +19,7 @@ Responsibilities:
 -----
 
 #### [Quang Dong](http://github.com/nqdung14)
-<img src="QUANG DONG IMAGE" width="150"><br>
+<img src="images/quangdung.jpg" width="150"><br>
 Role:  <br>
 Responsibilities: 
 
