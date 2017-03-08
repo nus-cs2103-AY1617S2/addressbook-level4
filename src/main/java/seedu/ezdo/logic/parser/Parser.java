@@ -17,6 +17,7 @@ import seedu.ezdo.logic.commands.IncorrectCommand;
 import seedu.ezdo.logic.commands.KillCommand;
 import seedu.ezdo.logic.commands.ListCommand;
 import seedu.ezdo.logic.commands.SelectCommand;
+import seedu.ezdo.logic.commands.DoneCommand;
 
 /**
  * Parses user input.
@@ -64,6 +65,9 @@ public class Parser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+            
+        case DoneCommand.COMMAND_WORD:
+            return new DoneCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
