@@ -39,11 +39,6 @@ public class PersonBuilder {
         return this;
     }
 
-    public PersonBuilder withAddress(String address) throws IllegalValueException {
-        this.person.setAddress(new Address(address));
-        return this;
-    }
-
     public PersonBuilder withPhone(String phone) throws IllegalValueException {
         this.person.setPhone(new Phone(phone));
         return this;

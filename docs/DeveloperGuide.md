@@ -385,14 +385,27 @@ Priority | As a ... | I want to ... | So that I can...
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: Create task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User requests to create a task with a name
+2. AddressBook create the task <br>
+Use case ends.
+
+**Extensions**
+
+2a. The taske with the name given by the user already exist
+> Use case ends
+
+#### Use case: Delete task
+
+**MSS**
+
+1. User requests to list tasks
+2. AddressBook shows a list of tasks
+3. User requests to delete a specific task in the list
+4. AddressBook deletes the task <br>
 Use case ends.
 
 **Extensions**
