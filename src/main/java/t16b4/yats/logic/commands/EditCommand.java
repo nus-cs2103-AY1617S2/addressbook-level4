@@ -75,17 +75,17 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Task createEditedPerson(ReadOnlyEvent personToEdit,
+    private static Event createEditedPerson(ReadOnlyEvent personToEdit,
                                              EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
         Title updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getTitle);
-        Deadline updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getDeadline);
-        Timing updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getTiming);
+        // Deadline updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getDeadline);
+        // Timing updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getTiming);
         Description updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getDescription);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
-        return new Task(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Event();
     }
 
     /**
