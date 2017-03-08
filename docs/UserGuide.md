@@ -133,33 +133,11 @@ Add     | add TASK                        | add submit report by Friday
         |  add TASK by DEADLINE           | 
         |  add TASK from DATE by DEADLINE |
 List    | list
-        
-
-* **Help** : `help` <br>
-
-* **Add**  `add TASK` <br>
-           `add TASK by DEADLINE` <br>
-           `add TASK from DATE by DEADLINE` <br>
-  e.g. `add submit report by Friday`
-
-* **List** : `list` <br>
-
-* **Select** : `select INDEX` <br>
-  e.g. `select 3`
-
-* **Edit**  `edit INDEX` <br>
-  e.g. `edit 3`
-
-* **Find** : `find KEYWORD` <br>
-  e.g. `find report`
-  e.g. `find Friday`
-
-* **Delete** : `delete INDEX` <br>
-  e.g. `delete 3`
-
-* **Clear** : `clear` <br>
-
-* **History** : `history` <br>
-
-* **Exit** : `exit` <br>
+Select  | select INDEX                    | select 3
+Edit    | edit INDEX                      | edit 3
+Find    | find KEYWORD                    | find report
+Delete  | delete INDEX                    | delete 3
+Clear   | clear
+History | history
+Exit    | exit
 <br>
