@@ -34,10 +34,3 @@ Responsibilities: Dev Ops
 # Source
 
 The source of this project derives from a sample project created by SE-EDU initiative at https://github.com/se-edu/
-
-# Contributors
-
-We welcome contributions. See [Contact Us](ContactUs.md) page for more info.
-
-* [Akshay Narayan](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Aokkhoy)
-* [Sam Yong](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Amauris)
