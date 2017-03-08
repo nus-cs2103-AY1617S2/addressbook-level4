@@ -22,10 +22,10 @@ public class EditCommandTest extends TaskListGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Buy milk and eggs t/hi-pri";
+        String detailsToEdit = "Buy milk and eggs t/p1";
         int taskListIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withName("Buy milk and eggs").withTags("hi-pri").build();
+        TestTask editedTask = new TaskBuilder().withName("Buy milk and eggs").withTags("p1").build();
 
         assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit, editedTask);
     }
