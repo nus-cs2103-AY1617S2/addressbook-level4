@@ -1,9 +1,6 @@
 package seedu.task.logic.parser;
 
 import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.task.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.task.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.task.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.task.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -30,7 +27,7 @@ public class EditCommandParser {
     public Command parse(String args) {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                new ArgumentTokenizer(PREFIX_TAG);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
