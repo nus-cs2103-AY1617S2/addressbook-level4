@@ -416,7 +416,7 @@ Use case ends.
 
 > 2c1. TaskManager creates a task object with no deadline and no possible timings <br>
 > Use case resumes at step 4 <br>
-  
+
 
 #### Use case: Add Event
 
@@ -432,12 +432,12 @@ Use case ends.
 2a. User doesn't specify a start time or end time
 > 2a1. TaskManager assumes it is a whole day event <br>
 > Use case resumes at step 3
-  
+
 2b. User only specifies only one timing
 > 2b1. TaskManager assumes the task lasts for the rest of the day <br>
 > Use case resumes at step 3 <br>
-  
-  
+
+
 #### Use case: Mark Task As Done (by finding)
 
 **MSS**
@@ -485,7 +485,7 @@ Use case ends.
 1. User requests to list persons
 2. AddressBook shows a list of persons
 3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br> 
+4. AddressBook deletes the person <br>
 Use case ends.
 
 **Extensions**
@@ -532,7 +532,7 @@ Use case ends.
 > Use case ends <br>
 
 
-#### Use case: Edit Task 
+#### Use case: Edit Task
 
 **MSS**
 
@@ -574,7 +574,7 @@ Use case ends.
 3. TaskManager provides a list of options (one of which is delete) for User to perform commands
 4. User selects delete option
 5. TaskManager request for index of task/event to be deleted
-6. User specifies index on the list to be deleted 
+6. User specifies index on the list to be deleted
 7. TaskManager deletes the task/event <br>
 Use case ends.
 
@@ -585,7 +585,7 @@ Use case ends.
 > Use case ends
 
 6a. The given index is invalid
-> 6a1. TaskManager shows an error message 
+> 6a1. TaskManager shows an error message
 > Use case resumes at step 3
 
 6b. Task/event to be deleted is recurring
@@ -615,7 +615,7 @@ Use case ends.
 #### Use case: Clear Done Events
 
 **MSS**
- 
+
 1. User requests to clear done events
 2. TaskManager goes through list to find done events
 3. TaskManager deletes all done events
@@ -635,7 +635,7 @@ Use case ends.
 
 1. User requests to undo last command
 2. TaskManager retrieves last saved state from storage <br>
-Use case ends. 
+Use case ends.
 
 **Extensions**
 
@@ -649,7 +649,7 @@ Use case ends.
 
 1. User requests to redo last command
 2. TaskManager retrieves next saved state from storage <br>
-Use case ends. 
+Use case ends.
 
 **Extensions**
 
@@ -724,7 +724,7 @@ Pros:
 * Have basic functions such as adding tasks with title, description, attachments, time, members and many other details. Deadlines are optional.
 * Very adapted to group collaboration on same project
 
-Cons: 
+Cons:
 * Chronological order is not intuitive since calendar view is not available by default
 * Does not show available time blocks for users to schedule his tasks
 * Does not schedule tasks automatically, users have to decide when to do what
@@ -745,7 +745,7 @@ Pros:
 * Can sort tasks according to date added as well as deadline due
 * Able to synchronise with other products
 
-Cons: 
+Cons:
 * No-frills approach means a lot of features, including blocking out dates, specifying event timings and postponing items
 * Chronological order is not intuitive since calendar view is not available by default
 * Does not show available time blocks for users to schedule his tasks
