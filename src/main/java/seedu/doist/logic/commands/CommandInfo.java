@@ -28,7 +28,7 @@ public class CommandInfo {
         return sb.toString();
     }
 
-    public boolean canCommandBeTriggeredByWord(String word) {
+    public boolean canBeTriggeredByWord(String word) {
         return commandWords.contains(word) || defaultCommandWord.equals(word);
     }
 }

@@ -2,14 +2,12 @@ package seedu.doist.logic.commands;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import seedu.doist.commons.exceptions.IllegalValueException;
 import seedu.doist.logic.commands.exceptions.CommandException;
-import seedu.doist.model.tag.Tag;
+import seedu.doist.logic.parser.ParserUtil;
 import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.Description;
 import seedu.doist.model.task.Task;
@@ -31,6 +29,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the to-do list";
 
     private final Task toAdd;
+    private UniqueTagList tagList = new UniqueTagList();
 
     /**
      * Creates an AddCommand using raw values.
@@ -42,17 +41,11 @@ public class AddCommand extends Command {
         if (preamble == null || preamble.trim().isEmpty()) {
             throw new IllegalValueException("No arguments passed");
         }
-        List<String> tags = parameters.get("\\under");
-        final Set<Tag> tagSet = new HashSet<>();
-
-        if (tags != null && tags.size() > 0) {
-            String allTags = tags.get(0).trim();
-            String[] extractedTags = allTags.split(" ");
-            for (String extractedTag : extractedTags) {
-                tagSet.add(new Tag(extractedTag));
-            }
+        List<String> tagsParameterStringList = parameters.get("\\under");
+        if (tagsParameterStringList != null && !tagsParameterStringList.isEmpty()) {
+            tagList = ParserUtil.parseTagsFromString(tagsParameterStringList.get(0));
         }
-        this.toAdd = new Task(new Description(preamble), new UniqueTagList(tagSet));
+        this.toAdd = new Task(new Description(preamble), tagList);
     }
 
     @Override

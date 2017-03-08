@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import seedu.doist.commons.exceptions.IllegalValueException;
-import seedu.doist.model.tag.Tag;
+import seedu.doist.logic.parser.ParserUtil;
+import seedu.doist.model.tag.UniqueTagList;
 
 /**
  * Lists all persons in the address book to the user.
@@ -22,16 +23,12 @@ public class ListCommand extends Command {
             + "Example: " + DEFAULT_COMMAND_WORD + "pending \\under school ";
     public static final String MESSAGE_SUCCESS = "Listed all tasks";
 
-    private final List<Tag> tagList = new ArrayList<>();
+    private UniqueTagList tagList = new UniqueTagList();
 
     public ListCommand(String preamble, Map<String, List<String>> parameters) throws IllegalValueException {
-        List<String> tags = parameters.get("\\under");
-        if (tags != null && tags.size() > 0) {
-            String allTags = tags.get(0).trim();
-            String[] extractedTags = allTags.split(" ");
-            for (String extractedTag : extractedTags) {
-                tagList.add(new Tag(extractedTag));
-            }
+        List<String> tagsParameterStringList = parameters.get("\\under");
+        if (tagsParameterStringList != null && !tagsParameterStringList.isEmpty()) {
+            tagList = ParserUtil.parseTagsFromString(tagsParameterStringList.get(0));
         }
     }
 

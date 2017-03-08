@@ -42,58 +42,26 @@ public class Parser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
-        if (AddCommand.info().canCommandBeTriggeredByWord(commandWord)) {
+        if (AddCommand.info().canBeTriggeredByWord(commandWord)) {
             return new AddCommandParser().parse(arguments);
-        } else if (EditCommand.info().canCommandBeTriggeredByWord(commandWord)) {
+        } else if (EditCommand.info().canBeTriggeredByWord(commandWord)) {
             return new EditCommandParser().parse(arguments);
-        } else if (SelectCommand.info().canCommandBeTriggeredByWord(commandWord)) {
+        } else if (SelectCommand.info().canBeTriggeredByWord(commandWord)) {
             return new SelectCommandParser().parse(arguments);
-        } else if (DeleteCommand.info().canCommandBeTriggeredByWord(commandWord)) {
+        } else if (DeleteCommand.info().canBeTriggeredByWord(commandWord)) {
             return new DeleteCommandParser().parse(arguments);
-        } else if (ClearCommand.info().canCommandBeTriggeredByWord(commandWord)) {
+        } else if (ClearCommand.info().canBeTriggeredByWord(commandWord)) {
             return new ClearCommand();
-        } else if (FindCommand.info().canCommandBeTriggeredByWord(commandWord)) {
+        } else if (FindCommand.info().canBeTriggeredByWord(commandWord)) {
             return new FindCommandParser().parse(arguments);
-        } else if (ListCommand.info().canCommandBeTriggeredByWord(commandWord)) {
+        } else if (ListCommand.info().canBeTriggeredByWord(commandWord)) {
             return new ListCommandParser().parse(arguments);
-        } else if (ExitCommand.info().canCommandBeTriggeredByWord(commandWord)) {
+        } else if (ExitCommand.info().canBeTriggeredByWord(commandWord)) {
             return new ExitCommand();
-        } else if (HelpCommand.info().canCommandBeTriggeredByWord(commandWord)) {
+        } else if (HelpCommand.info().canBeTriggeredByWord(commandWord)) {
             return new HelpCommand();
         } else {
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
-//        switch (commandWord) {
-//
-//        case AddCommand.COMMAND_WORD:
-//            return new AddCommandParser().parse(arguments);
-//
-//        case EditCommand.COMMAND_WORD:
-//            return new EditCommandParser().parse(arguments);
-//
-//        case SelectCommand.COMMAND_WORD:
-//            return new SelectCommandParser().parse(arguments);
-//
-//        case DeleteCommand.COMMAND_WORD:
-//            return new DeleteCommandParser().parse(arguments);
-//
-//        case ClearCommand.COMMAND_WORD:
-//            return new ClearCommand();
-//
-//        case FindCommand.COMMAND_WORD:
-//            return new FindCommandParser().parse(arguments);
-//
-//        case ListCommand.COMMAND_WORD:
-//            return new ListCommand();
-//
-//        case ExitCommand.COMMAND_WORD:
-//            return new ExitCommand();
-//
-//        case HelpCommand.COMMAND_WORD:
-//            return new HelpCommand();
-//
-//        default:
-//            return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
-//        }
     }
 }
