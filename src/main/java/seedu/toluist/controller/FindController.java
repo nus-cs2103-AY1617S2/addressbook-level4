@@ -66,12 +66,12 @@ public class FindController extends Controller {
     }
 
     private String[] convertToArray(String keywords) {
-        String trimmedKeywords = keywords.trim();
-        if (keywords == null || trimmedKeywords.isEmpty()) {
+        if (keywords == null || keywords.trim().isEmpty()) {
             return new String[] { "" };
         }
 
-        String[] keywordList = keywords.split(" ");
+        String trimmedKeywords = keywords.trim();
+        String[] keywordList = trimmedKeywords.split(" ");
         ArrayList<String> replacementList = new ArrayList<>();
         for (String keyword : keywordList) {
             if (!keyword.equals("")) {
