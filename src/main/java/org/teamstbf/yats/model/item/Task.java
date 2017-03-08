@@ -77,12 +77,12 @@ public class Task implements ReadOnlyItem {
 	public Description getDescription() {
 		return description;
 	}
-	
+
 	public void setPeriodic(Periodic periodic) {
 		assert periodic != null;
 		this.periodic = periodic;
 	}
-	
+
 	@Override
 	public Periodic getPeriodic() {
 		return periodic;
