@@ -17,7 +17,7 @@
 ### Prerequisites
 
 1. **JDK `1.8.0_60`**  or later<br>
-    > Having any Java 8 version is not enough. 
+    > Having any Java 8 version is not enough.
     This app will not work with earlier versions of Java 8.
 
 2. **Eclipse** IDE
@@ -612,7 +612,7 @@ Use case ends.
 **Items** : Refers to tasks, floating tasks and events
 
 **UI**: User interface is the means by which the user  and the system interact with each other
-    
+
 **Sync**: Synchronize / adjust data on multiple files to be the same as each other
 
 **CRUD**: Create, Read, Update and Delete.
@@ -643,7 +643,7 @@ Use case ends.
 * Tells you what to do
 * Able to set default so minimal adjustment is needed
 * Able to type commands
- 
+
 ### Disadvantages:
 * Need too many clicks for settings and other features other than task
 * Need to click to delete and update
@@ -674,7 +674,7 @@ Use case ends.
 * Requires internet connection
 * Unable to set deadline for tasks
 * Minimal features
- 
+
 ### Author: Huanhui
 ### Product: Wunderlist
 ### Advantages:
