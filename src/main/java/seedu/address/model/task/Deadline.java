@@ -3,6 +3,7 @@ package seedu.address.model.task;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -13,16 +14,50 @@ import seedu.address.commons.exceptions.IllegalValueException;
  */
 public class Deadline {
 
+    public enum DEADLINE_TYPES {
+        DATEONLY, DATETIME
+    };
+
     public static final String MESSAGE_DEADLINE_CONSTRAINTS =
         "Task deadline should strictly follow this format DD/MM/YYYY";
 
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String DATE_FORMAT = "dd-MM-yyyy";
+    public static final String[] DATE_VALIDATION_REGEX = {
+        "dd-MM-yy",
+        "dd/MM/yy",
+        "dd-MM-yyyy",
+        "dd/MM/yyyy",
+        "E, MM d yyyy",
+        "E, d MM yyyy"
+    };
 
-    public final Date date;
+    public static final String[] TIME_VALIDATION_REGEX = {
+        "HH:mm",
+        "hh:mm aa"
+    };
+
+    // Separators used to combine date and time
+    public static final String[] DATE_TIME_SEPARATORS = {
+        ", ",
+        " at ",
+        " "
+    };
+
+    /**
+     * Output format used to display deadline with both date and time.
+     * Day, Month Date Year at Hour:Minute
+     * Example: Tuesday, April 1 2013 at 23:59
+     */
+    public static final String READABLE_DATETIME_OUTPUT_FORMAT = "%s, %s %s %s at %s:%s";
+
+    /**
+     * Output format used to display deadline with only date.
+     * Day, Month Date Year
+     * Example: Tuesday, April 1 2013
+     */
+    public static final String READABLE_DATEONLY_OUTPUT_FORMAT = "%s, %s %s %s";
+
+    private Date date;
+    private DEADLINE_TYPES type;
 
     /**
      * Validates given date.
@@ -31,33 +66,127 @@ public class Deadline {
      */
     public Deadline(String dateString) throws IllegalValueException {
         assert dateString != null;
-        String trimmedDateString = dateString.trim();
-        try {
-            DateFormat df = new SimpleDateFormat(DATE_FORMAT);
-            this.date = df.parse(trimmedDateString);
-        } catch (ParseException e) {
-            throw new IllegalValueException(MESSAGE_DEADLINE_CONSTRAINTS);
-        }
+        // Trim and remove continuous whitespace
+        String trimmedDateString = dateString.trim().replace(" +", " ");
+        updateValue(trimmedDateString);
     }
 
     /**
      * Returns true if a given string is a valid date.
      */
     public static boolean isValidDate(String test) {
-        try {
-            DateFormat df = new SimpleDateFormat(DATE_FORMAT);
-            df.setLenient(false);
-            df.parse(test);
-            return true;
-        } catch (ParseException e) {
-            return false;
+        return isValidDate(test, DATE_VALIDATION_REGEX) 
+                || isValidDate(test, TIME_VALIDATION_REGEX)
+                || isValidDate(test, getAllPossibleDateTimeFormats());
+    }
+
+    /** Validate given string with given set of date formats */
+    public static boolean isValidDate(String test, String[] dateFormats) {
+        for(String dateFormat : dateFormats) {
+            try {
+                DateFormat df = new SimpleDateFormat(dateFormat);
+                df.setLenient(false);
+                df.parse(test);
+                return true;
+            } catch (ParseException e) {
+                // Do nothing
+            }
         }
+        return true;
+    }
+
+    /** Update object's values */
+    public void updateValue(String dateString) throws IllegalValueException {
+
+        String[] completeDateFormats = getAllPossibleDateTimeFormats();
+
+        // Try date-only format
+        if (isValidDate(dateString, DATE_VALIDATION_REGEX)) {
+            date = parseDateString(dateString, DATE_VALIDATION_REGEX);
+            type = DEADLINE_TYPES.DATEONLY;
+
+        // Try time-only format
+        } else if (isValidDate(dateString, TIME_VALIDATION_REGEX)) {
+            date = parseDateString(dateString, TIME_VALIDATION_REGEX);
+
+            // Date is missing so we provide one
+            Date today = new Date();
+            date.setDate(today.getDate());
+            date.setMonth(today.getMonth());
+            date.setYear(today.getYear());
+
+            type = DEADLINE_TYPES.DATETIME;
+
+        // Try complete date-time formats
+        } else if (isValidDate(dateString, completeDateFormats)) {
+            date = parseDateString(dateString, completeDateFormats);
+            type = DEADLINE_TYPES.DATETIME;
+
+        } else {
+            throw new IllegalValueException(MESSAGE_DEADLINE_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Parses date string with given set of date formats.
+     */
+    public Date parseDateString(String dateString, String[] dateFormats) {
+        for(String dateFormat : dateFormats) {
+            try {
+                DateFormat df = new SimpleDateFormat(dateFormat);
+                return df.parse(dateString);
+            } catch (ParseException e) {
+                // Do nothing
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Returns all combinations of date, time and separator
+     */
+    public static String[] getAllPossibleDateTimeFormats() {
+        // Init date formats
+        int dateFormatsCount = DATE_VALIDATION_REGEX.length
+                                * DATE_TIME_SEPARATORS.length
+                                * TIME_VALIDATION_REGEX.length;
+        String[] dateFormats = new String[dateFormatsCount];
+
+        // Add all combinations of time and date
+        int index = 0;
+        for(String dateRegex : DATE_VALIDATION_REGEX) {
+            for(String separator : DATE_TIME_SEPARATORS) {
+                for(String timeRegex : TIME_VALIDATION_REGEX) {
+                    dateFormats[index++] = dateRegex + separator + timeRegex;
+                }
+            }
+        }
+        return dateFormats;
     }
 
 
     @Override
     public String toString() {
-        return date.toString();
+        switch (type) {
+            case DATETIME:
+                return String.format(READABLE_DATETIME_OUTPUT_FORMAT,
+                                        date.getDay(),
+                                        date.getMonth(),
+                                        date.getDate(),
+                                        date.getYear(),
+                                        date.getHours(),
+                                        date.getMinutes());
+
+            case DATEONLY:
+                return String.format(READABLE_DATEONLY_OUTPUT_FORMAT,
+                                        date.getDay(),
+                                        date.getMonth(),
+                                        date.getDate(),
+                                        date.getYear());
+
+            default:
+                return date.toString();
+        }
     }
 
     @Override
