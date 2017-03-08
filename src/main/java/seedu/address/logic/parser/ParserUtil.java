@@ -13,12 +13,12 @@ import java.util.stream.Collectors;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Information;
+import seedu.address.model.task.PriorityLevel;
+import seedu.address.model.task.TaskName;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -69,38 +69,42 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> name} into an {@code Optional<Name>} if {@code name} is present.
      */
-    public static Optional<Name> parseName(Optional<String> name) throws IllegalValueException {
+    public static Optional<TaskName> parseTaskName(Optional<String> name) throws IllegalValueException {
         assert name != null;
-        return name.isPresent() ? Optional.of(new Name(name.get())) : Optional.empty();
+        return name.isPresent() ? Optional.of(new TaskName(name.get())) : Optional.empty();
     }
 
     /**
      * Parses a {@code Optional<String> phone} into an {@code Optional<Phone>} if {@code phone} is present.
      */
-    public static Optional<Phone> parsePhone(Optional<String> phone) throws IllegalValueException {
-        assert phone != null;
-        return phone.isPresent() ? Optional.of(new Phone(phone.get())) : Optional.empty();
+    public static Optional<Deadline> parseDeadline(Optional<String> deadline) throws IllegalValueException {
+        assert deadline != null;
+        return deadline.isPresent() ? Optional.of(new Deadline(deadline.get())) : Optional.empty();
     }
 
     /**
      * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.
      */
-    public static Optional<Address> parseAddress(Optional<String> address) throws IllegalValueException {
-        assert address != null;
-        return address.isPresent() ? Optional.of(new Address(address.get())) : Optional.empty();
+    // Keep, just rename
+    public static Optional<Information> parseInfo(Optional<String> information) throws IllegalValueException {
+        assert information != null;
+        return information.isPresent() ? Optional.of(new Information(information.get())) : Optional.empty();
     }
 
     /**
      * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
      */
-    public static Optional<Email> parseEmail(Optional<String> email) throws IllegalValueException {
-        assert email != null;
-        return email.isPresent() ? Optional.of(new Email(email.get())) : Optional.empty();
+    // Convert to ANY_INFO
+    public static Optional<PriorityLevel> parsePriorityLevel(Optional<String> priorityLevel)
+            throws IllegalValueException {
+        assert priorityLevel != null;
+        return priorityLevel.isPresent() ? Optional.of(new PriorityLevel(priorityLevel.get())) : Optional.empty();
     }
 
     /**
      * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.
      */
+    // keep
     public static UniqueTagList parseTags(Collection<String> tags) throws IllegalValueException {
         assert tags != null;
         final Set<Tag> tagSet = new HashSet<>();
