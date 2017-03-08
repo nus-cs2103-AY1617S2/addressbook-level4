@@ -442,11 +442,6 @@ Examples:
 
 * **Help** : `help`
 
-* **Select** : `select INDEX`
-Examples:
-> * `list`, `select 2`
-> * `find Essay`, `select 1`
-
 * **Clear** : `clear`
 
 * **Exit** : `exit`
