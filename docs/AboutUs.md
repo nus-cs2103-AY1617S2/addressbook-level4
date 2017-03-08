@@ -5,7 +5,7 @@ We are a team based in the [School of Computing, National University of Singapor
 ## Project Team
 
 #### [Amro Shohoud](https://github.com/AmroShohoud) <br>
-<img src="images/AmroShohoud.jpg" width="150"><br>
+<img src="images/AmroShohoud.png" width="150"><br>
 **Role**: Developer <br>
 Responsibilities: Data, Scheduling and tracking
 
