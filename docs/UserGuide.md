@@ -2,66 +2,101 @@
 
 This product is a tool to accept natural language commands via keyboards to manage the user's schedule and todo tasks.
 
+* [Start the program](#start-the-program)
+* [Commands](#Commands)
+	* [help](#view-help--help)
+	* [add](#add-a-task--add)
+	* [delete](#delete-a-task--delete)
+	* [find](#find-a-task--find)
+	* [list](#list-tasks--list)
+	* [update](#update-a-task--update)
+	* [exit](#exit-the-program--exit)
+	* [save](#save-the-data)
+* [Command Summary](#command-summary)
+
+
+
 ## Start the program
 
-1. Find the project in the `Project Explorer` or `Package Explorer` (usually located at the left side)
-2. Right click on the project
-3. Click `Run As` > `Java Application` and choose the `Main` class.
-4. The GUI should appear in a few seconds.
+1. Double click the JOBS.jar file to start the program.
+2. The application will be launched in few seconds.
 
-## View help : `help`
+## Commands
+
+### View help : `help`
 Format: `help`
 
 1. Help will show the command list with brief descriptions.
 2. Help is also shown if you enter an incorrect command e.g. `abcd`
 
-## Add a task: `add`
+### Add a task: `add`
 Add is the command word to add a task to the task handler application.
-Format: `add "<task_name>" ,<optional/deadline> ,<optional/task type>`
->The following format is expected when user is adding a specific task to the task handler:
+Format: `add name/TASK_NAME [start/START_TIME end/END_TIME recur/PERIOD desc/DESCRIPTION tag/TAGS]`
+1. The commands inside square brackets are optional.
+2. The time format follows `DD-MM-YY HH:mm`
+3. If no deadline and task-type supplied, the task will be considered a **floating task**
+4. If only one time supplied, the task will be considered a **task with deadline**
+5. The recur specifies the recurrence period **in days**.
 
 Example :
-* `add "do laundry" ,2012-12-02 20:00, recurring`
->If no deadline and task-type supplied, the task will be considered a floating task
+* `add name/tutorial start/13-01-17 11:00 end/13-01-17 12:00 recur/7 desc/"Tutorial of CS2103" tag/CS2103`
+* `add name/v0.0 end/03-03-17 11:00 desc/"Project version 0.0 deadline tag/CS2103 Project"`
+* `add name/swim desc/"Remember to swim"`
 
-## Delete a task: `delete`
-Delete, Del or Remove are the command words that can be used to delete a task.
-Format: `delete <optional/index>, <optional/keywords>, <optional/tag>`
-> Specify the task number or the task description in the command bar along with the deleting keyword.
+### Delete a task: `delete`
+Delete is the command word that can be used to delete a task.
+Format: `delete index/INDEX`
 
 Example:
-* `Delete Meeting for CS2103`
 * `Delete 1`
 
-## List tasks : `list`
+### Find a task: `find`
+Find is the command word that can be used to find a task.
+Format: `find name/Name`
+>The command finds tasks which have names containing any of the given keywords including substring.
+
+Example:
+* `find cs2103`
+* `find cs`
+
+### List tasks : `list`
 List is the command word to list down all the existing tasks
-Formats: `list [optional\tag] [optional\name]`
-> Specify the filter after the keyword in the command line to filter the task based on the tags
+Formats: `list * | completed | pending | overdue`
+1. \* will list all tasks
+2. completed will list all completed tasks
+3. pending will list all pending tasks
+4. overdue will list all overdue tasks
 
 Example:
-* `list floating (List down all tasks with “floating” tag)`
-* `list (List down all existing tasks irrespective of their tags)`
-* `list cs2103 (List down a task with a task name cs2103) `
+* `list *`
+* `list completed`
+* `list pending`
+* `list overdue`
 
-## Edit a task: `edit`
-Edit is the command word to edit a specific tasks
-Format : `edit <task name> {<optional/attribute> : value}+`
->User edits a specific task by specifying the new entry they wish to be reflected on the existing task list
+### Update a task: `update`
+Update is the command word to edit a specific tasks
+Format : `update index/INDEX [name/NAME start/START	end/END	recur/PERIOD desc/DESCRIPTION tag/TAG]`
+1. The commands inside square bracket are optional.
+>User updates a specific task by specifying the new entry they wish to be reflected on the existing task list
 
 Example:
-* `edit cs2103 deadline : 2/3/2017 , name : cs2103rocks`
-> (This will change the deadline of task cs2103 to 2/3/2017 and change the task name of cs2103 to cs2103rocks)
+* `update index/1 desc/"The venue has been changed"`
+* `update index/2 start/02-04-17 17:20`
 
-## Clear all entries : `clear`
-Clears all entries from the address book.
-Format: `clear`  
-
-## Exit the program : `exit`
+### Exit the program : `exit`
 Exits the program.
 Format: `exit`  
 
-## Save the data 
+### Save the data 
 Task data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-
-
+## Command Summary
+Command | Format  
+-------- | :--------
+help | `help`
+add | `add name/TASK_NAME [start/START_TIME end/END_TIME recur/PERIOD desc/DESCRIPTION tag/TAGS]`
+delete | `delete index\INDEX`
+find | `find name/Name`
+list | `list * | completed | pending | overdue`
+update | `update index/INDEX [name/NAME start/START	end/END	recur/PERIOD desc/DESCRIPTION tag/TAG]`
+exit | `exit`
