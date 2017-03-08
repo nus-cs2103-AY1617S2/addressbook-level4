@@ -21,13 +21,13 @@ import guitests.guihandles.TaskListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-import seedu.address.TestApp;
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.TaskManager;
-import seedu.address.model.task.ReadOnlyTask;
-import seedu.address.testutil.TestUtil;
-import seedu.address.testutil.TypicalTestTasks;
+import seedu.doit.TestApp;
+import seedu.doit.commons.core.EventsCenter;
+import seedu.doit.commons.events.BaseEvent;
+import seedu.doit.model.TaskManager;
+import seedu.doit.model.task.ReadOnlyTask;
+import seedu.doit.testutil.TestUtil;
+import seedu.doit.testutil.TypicalTestTasks;
 
 /**
  * A GUI Test class for TaskManager.
