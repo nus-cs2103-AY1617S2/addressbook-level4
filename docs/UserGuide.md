@@ -44,14 +44,14 @@ A command guide will be shown in the window
 ### 2.2. Adding a task: `add`
 
 Adds a task to the task manager<br>
-Format: `add TASK from DATE by DEADLINE`
+Format: `add TASK from STARTING TIME by FINISHING TIME`
 
 > Tasks can have any number of tags (including 0)
 
 Examples:
 
-* `add submit report by Friday #academic`
-* `add read Harry Potter from Monday by Saturday #personal`
+* `add t/submit report by f/Friday #academic`
+* `add t/read Harry Potter from s/Monday by f/Saturday #personal`
 
 ### 2.3. Listing all tasks : `list`
 
@@ -77,8 +77,12 @@ Examples:
 
 Edits an existing task in the task manager.<br>
 The tasks can be edited through the index from a list
-Format: `edit INDEX`
-Follow subsequent instructions to edit the respective items such as timing, tag, etc.
+Format: `edit INDEX COMPONENT`
+
+Examples:
+
+* `edit 3 f/Saturday`<br>
+  Changes the finishing time of task 3 to Saturday
 
 ### 2.6. Finding all tasks containing any keyword in their task description: `find`
 
@@ -129,12 +133,12 @@ There is no need to save manually.
 Command | Syntax | Example
 ------- | ------ | -------
 Help    | help
-Add     | add TASK                        | add submit report by Friday
-        |  add TASK by DEADLINE           | 
-        |  add TASK from DATE by DEADLINE |
+Add     | add TASK                                      | add t/submit report by f/Friday
+        | add TASK by FINISHING TIME                    | 
+        | add TASK from STARTING TIME by FINISHING TIME |
 List    | list
 Select  | select INDEX                    | select 3
-Edit    | edit INDEX                      | edit 3
+Edit    | edit INDEX COMPONENT            | edit 3 f/Saturday
 Find    | find KEYWORD                    | find report
 Delete  | delete INDEX                    | delete 3
 Clear   | clear
