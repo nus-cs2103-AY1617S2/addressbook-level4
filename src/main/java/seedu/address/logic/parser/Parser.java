@@ -73,8 +73,6 @@ public class Parser {
             return new FindCommandParser().parse(arguments);
         case FindCommand.COMMAND_WORD3:
             return new FindCommandParser().parse(arguments);
-        case FindCommand.COMMAND_WORD4:
-            return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
