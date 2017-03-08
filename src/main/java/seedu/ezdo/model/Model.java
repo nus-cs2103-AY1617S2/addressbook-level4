@@ -19,7 +19,7 @@ public interface Model {
     ReadOnlyEzDo getEzDo();
 
     /** Deletes the given task. */
-    void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
+    void killTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
     /** Adds the given task. */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
