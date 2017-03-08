@@ -46,7 +46,7 @@ public class XmlAdaptedPerson {
     public XmlAdaptedPerson(ReadOnlyTask source) {
         name = source.getDescription().description;
         phone = source.getPriority().value;
-        email = source.getEmail().value;
+        email = source.getDate().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));

@@ -51,15 +51,15 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Adds a task to the task manager<br>
-Format: `add TASK_NAME s/START_DATE d/DUE_DATE [t/TAG]...`
-Date Format: dd-mm-yy
+Format: `add TASK_NAME p/PRIORITY_LEVEL d/DATE [t/TAG]...`
+Date Format: ddmmyyyy
 
 > Task can have any number of tags (including 0)
 
 Examples:
 
-* `add Study for midterm s/02-03-17 d/04-03-17 t/study t/midterm`
-* `add Attend CS2103 tutorial s/02-03-17 d/02-03-17 t/lesson t/school t/tutorial`
+* `add Study for midterm p/1 d/04032017 t/study t/midterm`
+* `add Attend CS2103 tutorial p/1 d/02032017 t/lesson t/school t/tutorial`
 
 ### 2.3. Listing tasks : `list`
 
@@ -206,7 +206,7 @@ Format: `history`,
 ## 4. Command Summary
 
 * **Add**  `add TASK_NAME s/START_DATE d/DUE_DATE [t/TAG]...` <br>
-   e.g. `add Study for midterm s/02-03-17 d/04-03-17 t/study t/midterm`
+   e.g. `add Study for midterm p/1 d/04032017 t/study t/midterm`
 
 * **Clear** : `clear`
 
@@ -214,7 +214,7 @@ Format: `history`,
    e.g. `delete 3`
 
 * **Edit** : `edit INDEX` <br>
-   e.g. `edit 1 s/03-03-17`
+   e.g. `edit 1 d/03032017`
 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
    e.g. `find assignment`

@@ -10,7 +10,7 @@ public interface ReadOnlyTask {
 
     Description getDescription();
     Priority getPriority();
-    Email getEmail();
+    Email getDate();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -26,7 +26,7 @@ public interface ReadOnlyTask {
                 || (other != null // this is first to avoid NPE below
                 && other.getDescription().equals(this.getDescription()) // state checks here onwards
                 && other.getPriority().equals(this.getPriority())
-                && other.getEmail().equals(this.getEmail()));
+                && other.getDate().equals(this.getDate()));
     }
 
     /**
@@ -37,8 +37,8 @@ public interface ReadOnlyTask {
         builder.append(getDescription())
                 .append(" Priority: ")
                 .append(getPriority())
-                .append(" Email: ")
-                .append(getEmail())
+                .append(" Date: ")
+                .append(getDate())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
