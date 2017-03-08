@@ -26,7 +26,7 @@ Responsibilities: Logic and Scheduling and Tracking
 -----
 
 #### [Yu Cheng-Liang](https://github.com/nuslarry)
-<img src="" width="150"><br>
+<img src="images/chengliang.jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: UI, Testing and Integeration
 
