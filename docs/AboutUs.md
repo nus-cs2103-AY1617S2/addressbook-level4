@@ -12,7 +12,7 @@ Responsibilities: Team Lead, Version Control
 -----
 
 #### [Loh Zi Bin, Robin](http://github.com/robinloh)
-<img src="images/robinloh.jpg" width="150"><br>
+<img src="images/robinloh.png" width="150"><br>
 Role: Developer <br>
 Responsibilities: Deliverables and Deadlines, Scheduling and Tracking
 
