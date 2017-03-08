@@ -92,8 +92,8 @@ public class TaskManager implements ReadOnlyTaskManager {
         Task editedTask = new Task(editedReadOnlyTask);
         syncMasterTagListWith(editedTask);
         // TODO: the tags master list will be updated even though the below line fails.
-        // This can cause the tags master list to have additional tags that are not tagged to any person
-        // in the person list.
+        // This can cause the tags master list to have additional tags that are not tagged to any task
+        // in the task list.
         tasks.updateTask(index, editedTask);
     }
 

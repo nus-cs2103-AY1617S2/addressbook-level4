@@ -26,7 +26,7 @@ public class AddCommand extends Command {
             + " John Doe dl/11/01/2017 ds/buy eggs id/311 t/lunch t/no eggs";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
 
     private final Task toAdd;
 
