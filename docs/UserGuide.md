@@ -157,45 +157,41 @@ Examples:
   Moves the save file of ezDo to C:\Desktop.
 
 #### Saving the data
-Todo list data are saved in the hard disk automatically after any command that changes the data.<br>
+ezDo data is saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ezDo folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ezDo.
 
 ## Command Summary
 
-* **Add**  `add TASK [d/DATELINE p/PRIORITY t/TAG]...` <br>
-  e.g. `add Get rich d/2019 p/high t/impossible`
+* **Add** :  **`add TASKNAME [p/PRIORITY] [s/STARTDATE] [d/DUEDATE] [t/TAGNAME]...`** <br>
+  e.g. **`add Get rich p/3 t/impossible`**
 
-* **Clear** : `clear`
+* **Clear** : **`clear`**
 
-* **Kill** : `kill INDEX` <br>
-   e.g. `kill 3`
+* **Kill** : **`kill INDEX`** <br>
+   e.g. **`kill 3`**
 
-* **Done** : `done INDEX` <br>
-   e.g. `done 3`
+* **Done** : **`done INDEX`** <br>
+   e.g. **`done 3`**
 
-* **Edit** : `edit INDEX [TASK NAME] [d/DEADLINE] [p/PRIORITY] [t/TAGNAME]` <br>
-   e.g. `edit 3 Buy the milk p/high`
+* **Edit** : **`edit INDEX [NEWTASKNAME] [p/NEWPRIORITY] [s/NEWSTARTDATE] [d/NEWDUEDATE] [t/NEWTAGNAME...]`** <br>
+   e.g. **`edit 3 Buy the milk p/1`**
 
-* **Find** : `find KEYWORD [MORE_KEYWORDS] [t/TAGNAME] [d/DEADLINE]` <br>
-  e.g. `find buy milk t/groceries`
+* **Find** : **`find [KEYWORD] [MORE_KEYWORDS] [p/PRIORITY] [s/STARTDATE] [d/DUEDATE] [t/TAGNAME]`** <br>
+  e.g. **`find buy milk t/groceries`**
 
-* **Sort** : `sort ORDERTYPE` <br>
-  e.g. `sort d`
+* **Sort** : **`sort ORDERTYPE`** <br>
+  e.g. **`sort p`**
 
+* **Help** : **`help`** <br>
 
-* **Help** : `help` <br>
-  e.g.
+* **Undo** : **`undo`** <br>
 
-* **Undo** : `undo` <br>
-  e.g.`undo`
+* **Save** : **`save DIRECTORY`** <br>
+  e.g. **`save C:\Users\BestKorea\Documents`**
 
-* **Save** : `save PATH` <br>
-  e.g. `save C:\Users\BestKorea\Documents\tasks.txt`
-
-* **Quit** : `quit` <br>
-  e.g. `quit`
+* **Quit** : **`quit`** <br>
