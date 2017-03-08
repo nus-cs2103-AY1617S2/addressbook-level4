@@ -187,7 +187,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         return Objects.hash(events, tags);
     }
 
-	public void addTask(Task task) {
+	public void addTask(Event event) {
 		// TODO Auto-generated method stub
 	}
 }

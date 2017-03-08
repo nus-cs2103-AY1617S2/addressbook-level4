@@ -101,4 +101,8 @@ public class TestEvent implements ReadOnlyEvent {
     public Periodic getPeriod() {
         return period;
     }
+
+    public void setDescription(Description description) {
+        this.description = description;
+    }
 }
