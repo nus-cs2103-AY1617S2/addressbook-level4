@@ -44,17 +44,18 @@ public class AddCommand extends Command {
             throw new IllegalValueException("You can't add a task without a description!");
         }
 
-        List<String> tagsParameterStringList = parameters.get("\\under");
+        // create task with specified tags
+        List<String> tagsParameterStringList = parameters.get(CliSyntax.PREFIX_UNDER.toString());
         if (tagsParameterStringList != null && !tagsParameterStringList.isEmpty()) {
             tagList = ParserUtil.parseTagsFromString(tagsParameterStringList.get(0));
         }
         this.toAdd = new Task(new Description(preamble), tagList);
 
+        // set priority
         List<String> priority = parameters.get(CliSyntax.PREFIX_AS.toString());
-        System.out.println(parameters);
-        if (priority != null && priority.size() > 0) {
-            String strPriority = priority.get(0).trim();
-            this.toAdd.setPriority(new Priority(strPriority));
+        if (priority != null && !priority.isEmpty()) {
+            String priorityStr = priority.get(0).trim();
+            this.toAdd.setPriority(new Priority(priorityStr));
         }
     }
 

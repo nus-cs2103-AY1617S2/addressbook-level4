@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import seedu.doist.commons.exceptions.IllegalValueException;
+import seedu.doist.logic.parser.CliSyntax;
 import seedu.doist.logic.parser.ParserUtil;
+import seedu.doist.model.tag.Tag;
 import seedu.doist.model.tag.UniqueTagList;
 
 /**
@@ -27,7 +29,7 @@ public class ListCommand extends Command {
     private UniqueTagList tagList = new UniqueTagList();
 
     public ListCommand(String preamble, Map<String, List<String>> parameters) throws IllegalValueException {
-        List<String> tagsParameterStringList = parameters.get("\\under");
+        List<String> tagsParameterStringList = parameters.get(CliSyntax.PREFIX_UNDER.toString());
         if (tagsParameterStringList != null && !tagsParameterStringList.isEmpty()) {
             tagList = ParserUtil.parseTagsFromString(tagsParameterStringList.get(0));
         }
