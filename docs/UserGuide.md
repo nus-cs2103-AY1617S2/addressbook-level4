@@ -2,7 +2,6 @@
 
 By : `Team F12-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
-[//]: # (@@author jingloon)
 ---
 
 1. [Quick Start](#1-quick-start)
@@ -40,7 +39,7 @@ By : `Team F12-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbs
 
 
 ## 2. Features
-
+[//]: # (@@author jingloon,yeejfe)
 > **Command Format**
 >
 > * Words in `UPPER_CASE` are the parameters.
@@ -190,9 +189,9 @@ There is no need to save manually.
 * **Clear** : `clear`
 
 * **Delete** : `delete INDEX` <br>
-  
+
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
- 
+
 * **List** : `list` <br>
 
 * **Help** : `help` <br>
