@@ -46,7 +46,7 @@ public class StartDateTime {
 
     @Override
     public String toString() {
-        return dateTime.toString();
+        return value;
     }
 
 }
