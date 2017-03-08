@@ -9,6 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import seedu.task.MainApp;
 import seedu.task.commons.core.ComponentManager;
 import seedu.task.commons.core.Config;
 import seedu.task.commons.core.LogsCenter;
@@ -18,7 +19,6 @@ import seedu.task.commons.events.ui.ShowHelpRequestEvent;
 import seedu.task.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.task.commons.util.StringUtil;
 import seedu.task.logic.Logic;
-import seedu.task.MainApp;
 import seedu.task.model.UserPrefs;
 
 /**
