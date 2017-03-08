@@ -76,7 +76,7 @@ Examples:
 ### 2.5. Editing a task : `edit`
 
 Edits an existing task in the task manager.<br>
-The tasks can be edited through the index from a list
+The tasks can be edited through the index from a list.<br>
 Format: `edit INDEX COMPONENT`
 
 Examples:
