@@ -15,7 +15,7 @@ public class AddCommandTest extends AddressBookGuiTest {
     @Test
     public void add() {
         //add one task
-        TestTask[] currentList = td.getTypicalPersons();
+        TestTask[] currentList = td.getTypicalTasks();
         TestTask personToAdd = td.hoon;
         assertAddSuccess(personToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, personToAdd);

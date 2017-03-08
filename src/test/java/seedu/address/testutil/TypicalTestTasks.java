@@ -45,7 +45,7 @@ public class TypicalTestTasks {
     }
 
     public static void loadAddressBookWithSampleData(TaskManager ab) {
-        for (TestTask person : new TypicalTestTasks().getTypicalPersons()) {
+        for (TestTask person : new TypicalTestTasks().getTypicalTasks()) {
             try {
                 ab.addTask(new Task(person));
             } catch (UniqueTaskList.DuplicateTaskException e) {
@@ -54,7 +54,7 @@ public class TypicalTestTasks {
         }
     }
 
-    public TestTask[] getTypicalPersons() {
+    public TestTask[] getTypicalTasks() {
         return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
     }
 
