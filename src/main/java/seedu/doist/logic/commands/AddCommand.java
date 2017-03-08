@@ -2,15 +2,13 @@ package seedu.doist.logic.commands;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import seedu.doist.commons.exceptions.IllegalValueException;
 import seedu.doist.logic.commands.exceptions.CommandException;
 import seedu.doist.logic.parser.CliSyntax;
-import seedu.doist.model.tag.Tag;
+import seedu.doist.logic.parser.ParserUtil;
 import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.Description;
 import seedu.doist.model.task.Priority;
@@ -33,6 +31,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the to-do list";
 
     private final Task toAdd;
+    private UniqueTagList tagList = new UniqueTagList();
 
     /**
      * Creates an AddCommand using raw values.
@@ -44,23 +43,19 @@ public class AddCommand extends Command {
         if (preamble == null || preamble.trim().isEmpty()) {
             throw new IllegalValueException("You can't add a task without a description!");
         }
-        List<String> tags = parameters.get(CliSyntax.PREFIX_UNDER.toString());
-        final Set<Tag> tagSet = new HashSet<>();
 
-        if (tags != null && tags.size() > 0) {
-            String allTags = tags.get(0).trim();
-            String[] extractedTags = allTags.split(" ");
-            for (String extractedTag : extractedTags) {
-                tagSet.add(new Tag(extractedTag));
-            }
+        // create task with specified tags
+        List<String> tagsParameterStringList = parameters.get(CliSyntax.PREFIX_UNDER.toString());
+        if (tagsParameterStringList != null && !tagsParameterStringList.isEmpty()) {
+            tagList = ParserUtil.parseTagsFromString(tagsParameterStringList.get(0));
         }
-        this.toAdd = new Task(new Description(preamble), new UniqueTagList(tagSet));
+        this.toAdd = new Task(new Description(preamble), tagList);
 
+        // set priority
         List<String> priority = parameters.get(CliSyntax.PREFIX_AS.toString());
-        System.out.println(parameters);
-        if (priority != null && priority.size() > 0) {
-            String strPriority = priority.get(0).trim();
-            this.toAdd.setPriority(new Priority(strPriority));
+        if (priority != null && !priority.isEmpty()) {
+            String priorityStr = priority.get(0).trim();
+            this.toAdd.setPriority(new Priority(priorityStr));
         }
     }
 

@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -94,4 +95,25 @@ public class ParserUtil {
         }
         return new UniqueTagList(tagSet);
     }
+
+    public static UniqueTagList parseTagsFromString(String tagsParameterString) throws IllegalValueException {
+        String[] extractedTags = tagsParameterString.trim().split(" ");
+        return ParserUtil.parseTags(Arrays.asList(extractedTags));
+    }
+
+    public static ArrayList<String> getParameterKeysFromString(String parameterString) {
+        ArrayList<String> parameterKeys = new ArrayList<String>();
+        LinkedList<String> parametersList = new LinkedList<String>(Arrays.asList(parameterString.split("\\\\")));
+        parametersList.poll();  // remove the first item, which is an empty string
+        for (String parameterPair : parametersList) {
+            String parameterKey = "\\" + parameterPair.split(" ")[0];
+            parameterKeys.add(parameterKey);
+        }
+        return parameterKeys;
+    }
 }
+
+
+
+
+

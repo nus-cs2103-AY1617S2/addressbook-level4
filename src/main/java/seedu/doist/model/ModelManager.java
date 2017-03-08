@@ -1,6 +1,5 @@
 package seedu.doist.model;
 
-import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -12,6 +11,7 @@ import seedu.doist.commons.events.model.TodoListChangedEvent;
 import seedu.doist.commons.util.CollectionUtil;
 import seedu.doist.commons.util.StringUtil;
 import seedu.doist.model.tag.Tag;
+import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskPriorityComparator;
 import seedu.doist.model.task.Task;
@@ -107,7 +107,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskList(List<Tag> tags) {
+    public void updateFilteredTaskList(UniqueTagList tags) {
         updateFilteredTaskList(new PredicateExpression(new TagQualifier(tags)));
     }
 
@@ -168,9 +168,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     private class TagQualifier implements Qualifier {
-        private List<Tag> tags;
+        private UniqueTagList tags;
 
-        public TagQualifier(List<Tag> tags2) {
+        public TagQualifier(UniqueTagList tags2) {
             this.tags = tags2;
         }
 

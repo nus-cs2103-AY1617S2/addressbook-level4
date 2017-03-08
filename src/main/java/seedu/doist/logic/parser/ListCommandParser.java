@@ -4,8 +4,6 @@ import static seedu.doist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.doist.logic.parser.CliSyntax.PREFIX_UNDER;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,14 +28,7 @@ public class ListCommandParser {
         }
         final String argument = matcher.group("preamble");
         final String parameters = matcher.group("parameters").trim();
-        ArrayList<String> tokens = new ArrayList<String>();
-
-        LinkedList<String> parametersList = new LinkedList<String>(Arrays.asList(parameters.split("\\\\")));
-        parametersList.poll();  // remove the first item, which is an empty string
-        for (String parameterPair : parametersList) {
-            String parameterKey = "\\" + parameterPair.split(" ")[0];
-            tokens.add(parameterKey);
-        }
+        ArrayList<String> tokens = ParserUtil.getParameterKeysFromString(parameters);
 
         ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_UNDER);
 
