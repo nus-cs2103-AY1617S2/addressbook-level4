@@ -346,7 +346,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
+`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the Application
 `* * *` | user | add a floating task  | add tasks without date or time
 `* * *` | user | add a task with date and time | add tasks with a specified time and date
 `* * *` | user | delete a task  | remove entries that I no longer need
@@ -367,15 +367,14 @@ Priority | As a ... | I want to ... | So that I can...
 `* * ` | user | remove the priority of task | remove task from priority list
 `* * ` | user | list priority tasks | See all the urgent tasks I have to do
 `* * ` | Advanced user | use shortcut commands | type in the tasks quickly
-`* * ` | user | block a date and time for an unconfirmed event
- | deal with the confirmed task/event when I am certain about date and time
+`* * ` | user | block a date and time for an unconfirmed event temporary but still able to add task with the same date and time | remind myself of an unconfirmed event when i add a new task with the same date and time
 `* * ` | user | list block tasks | See all the block tasks in task manager 
 `* * ` | user | delete a blocked date and time event | remove an unconfirmed event when the event is confirmed to be cancelled
 `* * ` | user | delete multiple to-do items at one go | I can quickly delete multiple items
-`*` | user | see my google calendar | view my tasks in a calender format
+`*` | user | see my google calendar | view my tasks in a calendar format
 `*` | user | get a reminder to do a certain task | remind to do a task without having to forget
 `*` | user | view a list of to-do items that are done | I know what tasks I have completed
-`*` | user with many tasks in the task manager | sort taks by name | locate a task easily
+`*` | user with many tasks in the task manager | sort task by name | locate a task easily
 `*` | user | clear all tasks | start fresh by clearing all the tasks in the task manager 
 
 ## Appendix B : Use Cases
@@ -399,16 +398,12 @@ Use case ends.
 
 > Use case ends
 
-2b. Exact duplicate task with date and time is found
+2b. Task’s date and time clashes with a blocked date and time
 
-  > 2b1. System shows an error message
-
-2c. Task’s date and time clashes with a blocked date and time
-
-  > 2c1. A window popup warning will be shown to confirm user’s request
-  > 2c2. User click ok
+  > 2b1. A window pop up warning will be shown to confirm user’s request
+  > 2b2. User click ok
   > Use case ends
-   > 2c2.1 User click no
+   > 2b2.1 User click no
   > Use case ends.
 
 
@@ -477,7 +472,7 @@ Use case ends
 > 4a1. System shows an error message
 > Use case resumes at step 3
 
-4b. Task does not exist in one of the multiple ids
+4b. Task does not exist in one of the multiple id
   > 4b1. System shows an error message
 > Use case resumes at step 3
 

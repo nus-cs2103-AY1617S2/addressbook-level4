@@ -50,7 +50,7 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Adds a person to the address book<br>
-Format: `add TASK d/DATE t/TIME [f/TAG]...`
+Format: `add TASK d/DATE t/TIME `
 
 > Tasks can have any number of tags (including 0)
 
@@ -82,7 +82,7 @@ Format: `listdone`
 ### 2.7. Editing a task : `edit`
 
 Edits an existing task in the address book.<br>
-Format: `edit INDEX [TASK] [d/DATE] [t/TIME] [f/TAG]...`
+Format: `edit INDEX [TASK] [d/DATE] [t/TIME]
 
 > * Edits the task at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
@@ -247,7 +247,7 @@ There is no need to save manually.
 ## 4. Command Summary
 Command | Shortcuts | Format | Example
 -------- | :-------- | :--------- | :-----------
-add | a, + | add TASK d/DATE t/TIME [f/TAG]...| add Shop Shoes d/20082017 t/4:30pm t/Shopping t/Party
+add | a, + | add TASK d/DATE t/TIME | add Shop Shoes d/20082017 t/4:30pm
 find | find, search, f | find KEYWORD [MORE_KEYWORDS] | find Study Math
 delete | d, remove, rm, - | delete INDEX | delete 10
 done | complete, finish | done INDEX | done 2
