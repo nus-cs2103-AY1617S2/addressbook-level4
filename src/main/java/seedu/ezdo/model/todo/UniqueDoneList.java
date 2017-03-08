@@ -1,22 +1,24 @@
 package seedu.ezdo.model.todo;
 
 import java.util.Iterator;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.ezdo.commons.util.CollectionUtil;
+import seedu.ezdo.model.todo.UniqueTaskList.DuplicateTaskException;
 
 /**
- * A list of done tasks whose tasks are guaranteed to be unique and does not allow nulls.
+ * A list of done tasks and does not allow nulls.
  *
  * Supports a minimal set of list operations.
  *
  * @see Task#equals(Object)
  * @see CollectionUtil#elementsAreUnique(Collection)
  */
-public class UniqueDoneList implements Iterable<Task> {
+public class UniqueDoneList implements Iterable<ReadOnlyTask> {
 
-    private final ObservableList<Task> internalList = FXCollections.observableArrayList();
+    private final ObservableList<ReadOnlyTask> internalList = FXCollections.observableArrayList();
 
     /**
      * Returns true if the list contains an equivalent task as the given argument.
@@ -31,13 +33,25 @@ public class UniqueDoneList implements Iterable<Task> {
      *
      * @throws DuplicateTaskException if the task to add is a duplicate of an existing task in the list.
      */
-    public void add(Task toAdd) {
+    public void add(ReadOnlyTask toAdd) {
         assert toAdd != null;
         internalList.add(toAdd);
     }
     
+    public void setDone(UniqueDoneList replacement) {
+        this.internalList.setAll(replacement.internalList);
+    }
+
+    public void setDone(List<? extends ReadOnlyTask> tasks) {
+        final UniqueDoneList replacement = new UniqueDoneList();
+        for (final ReadOnlyTask task : tasks) {
+            replacement.add(new Task(task));
+        }
+        setDone(replacement);
+    }
+    
     @Override
-    public Iterator<Task> iterator() {
+    public Iterator<ReadOnlyTask> iterator() {
         return internalList.iterator();
     }
 
