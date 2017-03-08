@@ -1,11 +1,11 @@
 package seedu.address.testutil;
 
-import seedu.address.model.task.Description;
+import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Description;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
-import seedu.address.model.tag.UniqueTagList;
 
 /**
  * A mutable task object. For testing only.
@@ -23,14 +23,15 @@ public class TestTask implements ReadOnlyTask {
 	}
 
 	/**
-     * Creates a copy of {@code taskToCopy}.
-     */
-    public TestTask(TestTask taskToCopy) {
-        this.name = taskToCopy.getName();
-        this.priority = taskToCopy.getPriority();
-        this.deadline = taskToCopy.getDeadline();
-        this.description = taskToCopy.getDescription();
-        this.tags = taskToCopy.getTags();
+	 * Creates a copy of {@code taskToCopy}.
+	 */
+	public TestTask(TestTask taskToCopy) {
+		this.name = taskToCopy.getName();
+		this.priority = taskToCopy.getPriority();
+		this.deadline = taskToCopy.getDeadline();
+		this.description = taskToCopy.getDescription();
+		this.tags = taskToCopy.getTags();
+	}
 
 	public void setName(Name name) {
 		this.name = name;
