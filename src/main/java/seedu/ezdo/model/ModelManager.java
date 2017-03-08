@@ -70,6 +70,13 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowAll();
         indicateEzDoChanged();
     }
+    
+    @Override
+    public synchronized void doneTask(ReadOnlyTask task) {
+        ezDo.doneTask(task);
+        updateFilteredListToShowAll();
+        indicateEzDoChanged();
+    }
 
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)

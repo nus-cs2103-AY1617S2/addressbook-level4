@@ -23,7 +23,10 @@ public interface Model {
 
     /** Adds the given task. */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
-
+    
+    /** Marks a task as done. */
+    void doneTask(ReadOnlyTask task);
+    
     /**
      * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
      *
