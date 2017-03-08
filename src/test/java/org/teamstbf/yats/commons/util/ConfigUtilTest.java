@@ -50,15 +50,6 @@ public class ConfigUtilTest {
     }
 
     @Test
-    public void read_fileInOrder_successfullyRead() throws DataConversionException {
-
-        Config expected = getTypicalConfig();
-
-        Config actual = read("TypicalConfig.json").get();
-        assertEquals(expected, actual);
-    }
-
-    @Test
     public void read_valuesMissingFromFile_defaultValuesUsed() throws DataConversionException {
         Config actual = read("EmptyConfig.json").get();
         assertEquals(new Config(), actual);
@@ -69,7 +60,7 @@ public class ConfigUtilTest {
         config.setAppTitle("Typical App Title");
         config.setLogLevel(Level.INFO);
         config.setUserPrefsFilePath("C:\\preferences.json");
-        config.setTaskManagerFilePath("addressbook.xml");
+        config.setTaskManagerFilePath("YATS.xml");
         config.setTaskManagerName("TypicalAddressBookName");
         return config;
     }
