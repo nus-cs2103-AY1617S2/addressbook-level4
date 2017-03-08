@@ -98,7 +98,8 @@ public class EditCommand extends Command {
      */
     public static class EditTaskDescriptor {
         private Optional<Name> name = Optional.empty();
-        private Optional<Date> date = Optional.empty();
+        private Optional<Date> startDate = Optional.empty();
+        private Optional<Date> endDate = Optional.empty();
         private Optional<Time> time = Optional.empty();
         private Optional<Duration> duration = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
@@ -107,7 +108,8 @@ public class EditCommand extends Command {
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.name = toCopy.getName();
-            this.date = toCopy.getDate();
+            this.startDate = toCopy.getStartDate();
+            this.endDate = toCopy.getEndDate();
             this.time = toCopy.getTime();
             this.duration = toCopy.getDuration();
             this.tags = toCopy.getTags();
@@ -117,7 +119,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.date, this.time, this.duration, this.tags);
+            return CollectionUtil.isAnyPresent(this.name, this.startDate, this.endDate, this.time, this.duration, this.tags);
         }
 
         public void setName(Optional<Name> name) {
@@ -129,16 +131,25 @@ public class EditCommand extends Command {
             return name;
         }
 
-        public void setPhone(Optional<Date> date) {
+        public void setStartDate(Optional<Date> date) {
             assert date != null;
-            this.date = date;
+            this.startDate = date;
         }
 
-        public Optional<Date> getDate() {
-            return date;
+        public Optional<Date> getStartDate() {
+            return startDate;
+        }
+        
+        public void setEndDate(Optional<Date> date) {
+            assert date != null;
+            this.endDate = date;
         }
 
-        public void setEmail(Optional<Time> time) {
+        public Optional<Date> getEndDate() {
+            return endDate;
+        }
+
+        public void setTime(Optional<Time> time) {
             assert time != null;
             this.time = time;
         }
@@ -147,7 +158,7 @@ public class EditCommand extends Command {
             return time;
         }
 
-        public void setAddress(Optional<Duration> duration) {
+        public void setDuration(Optional<Duration> duration) {
             assert duration != null;
             this.duration = duration;
         }

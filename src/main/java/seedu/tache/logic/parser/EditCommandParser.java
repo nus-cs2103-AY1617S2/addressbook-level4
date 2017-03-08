@@ -43,17 +43,29 @@ public class EditCommandParser {
 
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         
+        int numOfDates = ParserUtil.numOfDates(args);
+        int currentDateCount = 0;
         for(int i=0;i<preambleFields.length;i++){
             try {
                 Object fieldType = ParserUtil.determineType(preambleFields[i]);
                 if(fieldType instanceof Name) {
-                    editTaskDescriptor.setName(preambleFields[i]);
+                    editTaskDescriptor.setName(Optional.of((Name)fieldType));
                 } else if(fieldType instanceof Date) {
-                    editTaskDescriptor.setDate(preambleFields[i]);
+                    if(numOfDates == 2) {
+                        if(currentDateCount == 0) {
+                            editTaskDescriptor.setStartDate(Optional.of((Date)fieldType));
+                            currentDateCount++;
+                        } else {
+                            editTaskDescriptor.setEndDate(Optional.of((Date)fieldType));
+                        }
+                    } else {
+                        //Incomplete implementation, might need to prompt
+                        editTaskDescriptor.setEndDate(Optional.of((Date)fieldType));
+                    }
                 } else if(fieldType instanceof Time) {
-                    editTaskDescriptor.setTime(preambleFields[i]);
+                    editTaskDescriptor.setTime(Optional.of((Time)fieldType));
                 } else if(fieldType instanceof Duration) {
-                    editTaskDescriptor.setDuration(preambleFields[i]);
+                    editTaskDescriptor.setDuration(Optional.of((Duration)fieldType);
                 }
             } catch (IllegalValueException ive) {
                 return new IncorrectCommand(ive.getMessage());
