@@ -25,7 +25,7 @@ Responsibilities: Logic
 -----
 
 #### [Cindra](http://github.com/cindratan)
-<img src="images/MartinChoo.jpg" width="150"><br>
+<img src="images/Cindra.jpg" width="150"><br>
 Role: Developer, Code quality, Scheduling and tracking <br>
 Responsibilities: UI
 
