@@ -1,43 +1,42 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addressbook>
-    <persons>
-        <desc>Alex Yeoh</desc>
+<todolist>
+    <tasks>
+        <desc>Buy milk</desc>
         <priority>VERYIMPORTANT</priority>
-        <tagged>friends</tagged>
-    </persons>
-    <persons>
-        <desc>Bernice Yu</desc>
+        <tagged>health</tagged>
+    </tasks>
+    <tasks>
+        <desc>Do CS2103 tutorial</desc>
         <priority>IMPORTANT</priority>
-        <tagged>colleagues</tagged>
-        <tagged>friends</tagged>
-    </persons>
-    <persons>
-        <desc>Charlotte Oliveiro</desc>
+        <tagged>tutorial</tagged>
+        <tagged>NUS</tagged>
+    </tasks>
+    <tasks>
+        <desc>Exercise at home</desc>
         <priority>NORMAL</priority>
-        <tagged>neighbours</tagged>
-    </persons>
-    <persons>
-        <desc>David Li</desc>
+        <tagged>health</tagged>
+    </tasks>
+    <tasks>
+        <desc>Have some beauty sleep</desc>
         <priority>NORMAL</priority>
-        <tagged>family</tagged>
-    </persons>
-    <persons>
-        <desc>Irfan Ibrahim</desc>
+        <tagged>health</tagged>
+    </tasks>
+    <tasks>
+        <desc>Do more tutorials</desc>
         <priority>IMPORTANT</priority>
-        <tagged>classmates</tagged>
-    </persons>
-    <persons>
-        <desc>Roy Balakrishnan</desc>
+        <tagged>tutorial</tagged>
+    </tasks>
+    <tasks>
+        <desc>Talk to people</desc>
         <priority>NORMAL</priority>
-        <tagged>colleagues</tagged>
-    </persons>
-    <persons>
-        <desc>hello</desc>
+        <tagged>interests</tagged>
+    </tasks>
+    <tasks>
+        <desc>Download Doist</desc>
         <priority>NORMAL</priority>
-    </persons>
-    <tags>friends</tags>
-    <tags>colleagues</tags>
-    <tags>neighbours</tags>
-    <tags>family</tags>
-    <tags>classmates</tags>
-</addressbook>
+    </tasks>
+    <tags>health</tags>
+    <tags>NUS</tags>
+    <tags>tutorial</tags>
+    <tags>interests</tags>
+</todolist>

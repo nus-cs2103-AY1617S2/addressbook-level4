@@ -16,7 +16,7 @@ public class DeleteCommandTest extends AddressBookGuiTest {
     public void delete() {
 
         //delete the first in the list
-        TestPerson[] currentList = td.getTypicalPersons();
+        TestPerson[] currentList = td.getTypicalTasks();
         int targetIndex = 1;
         assertDeleteSuccess(targetIndex, currentList);
 
@@ -32,7 +32,7 @@ public class DeleteCommandTest extends AddressBookGuiTest {
 
         //invalid index
         commandBox.runCommand("delete " + currentList.length + 1);
-        assertResultMessage("The person index provided is invalid");
+        assertResultMessage("The task index provided is invalid");
 
     }
 

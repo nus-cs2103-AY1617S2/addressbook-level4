@@ -23,7 +23,7 @@ import seedu.doist.model.task.Task;
 public class XmlSerializableTodoList implements ReadOnlyTodoList {
 
     @XmlElement
-    private List<XmlAdaptedTask> persons;
+    private List<XmlAdaptedTask> tasks;
     @XmlElement
     private List<XmlAdaptedTag> tags;
 
@@ -32,7 +32,7 @@ public class XmlSerializableTodoList implements ReadOnlyTodoList {
      * This empty constructor is required for marshalling.
      */
     public XmlSerializableTodoList() {
-        persons = new ArrayList<>();
+        tasks = new ArrayList<>();
         tags = new ArrayList<>();
     }
 
@@ -41,13 +41,13 @@ public class XmlSerializableTodoList implements ReadOnlyTodoList {
      */
     public XmlSerializableTodoList(ReadOnlyTodoList src) {
         this();
-        persons.addAll(src.getTaskList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
+        tasks.addAll(src.getTaskList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
     }
 
     @Override
     public ObservableList<ReadOnlyTask> getTaskList() {
-        final ObservableList<Task> persons = this.persons.stream().map(p -> {
+        final ObservableList<Task> persons = this.tasks.stream().map(p -> {
             try {
                 return p.toModelType();
             } catch (IllegalValueException e) {
