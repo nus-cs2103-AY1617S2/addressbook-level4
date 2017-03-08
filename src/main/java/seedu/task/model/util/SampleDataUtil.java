@@ -12,19 +12,19 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         try {
             return new Task[] {
-                new Task(new Name("Alex Yeoh"), new UniqueTagList("friends")),
-                new Task(new Name("Bernice Yu"), new UniqueTagList("colleagues", "friends")),
-                new Task(new Name("Charlotte Oliveiro"), new UniqueTagList("neighbours")),
-                new Task(new Name("David Li"), new UniqueTagList("family")),
-                new Task(new Name("Irfan Ibrahim"), new UniqueTagList("classmates")),
-                new Task(new Name("Roy Balakrishnan"), new UniqueTagList("colleagues"))
+                new Task(new Name("Buy milk and egss"), new UniqueTagList("home")),
+                new Task(new Name("Hand in CS assignment"), new UniqueTagList("school", "hi-pri")),
+                new Task(new Name("Send resume to recruiter"), new UniqueTagList("hi-pri")),
+                new Task(new Name("Plan vacation after exams"), new UniqueTagList("friends")),
+                new Task(new Name("Call contractor for new flooring"), new UniqueTagList("home")),
+                new Task(new Name("File taxes"), new UniqueTagList("hi-pri"))
             };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);
         }
     }
 
-    public static ReadOnlyTaskList getSampleAddressBook() {
+    public static ReadOnlyTaskList getSampleTaskList() {
         try {
             TaskList sampleAB = new TaskList();
             for (Task sampleTask : getSampleTasks()) {
@@ -32,7 +32,7 @@ public class SampleDataUtil {
             }
             return sampleAB;
         } catch (DuplicateTaskException e) {
-            throw new AssertionError("sample data cannot contain duplicate persons", e);
+            throw new AssertionError("sample data cannot contain duplicate tasks", e);
         }
     }
 }
