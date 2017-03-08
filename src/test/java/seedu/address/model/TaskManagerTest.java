@@ -43,7 +43,7 @@ public class TaskManagerTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        TaskManager newData = new TypicalTestTasks().getTypicalAddressBook();
+        TaskManager newData = new TypicalTestTasks().getTypicalTaskManager();
         taskManager.resetData(newData);
         assertEquals(newData, taskManager);
     }
@@ -62,7 +62,7 @@ public class TaskManagerTest {
 
     @Test
     public void resetData_withDuplicateLabels_throwsAssertionError() {
-        TaskManager typicalTaskManager = new TypicalTestTasks().getTypicalAddressBook();
+        TaskManager typicalTaskManager = new TypicalTestTasks().getTypicalTaskManager();
         List<ReadOnlyTask> newTasks = typicalTaskManager.getTaskList();
         List<Label> newLabels = new ArrayList<>(typicalTaskManager.getLabelList());
         // Repeat the first label twice
@@ -75,14 +75,14 @@ public class TaskManagerTest {
 
     @Test
     public void taskManager_TestHashCode() {
-        TaskManager typicalTaskManager = new TypicalTestTasks().getTypicalAddressBook();
+        TaskManager typicalTaskManager = new TypicalTestTasks().getTypicalTaskManager();
         assertTrue(typicalTaskManager.hashCode() == typicalTaskManager.hashCode());
     }
 
     @Test
     public void taskManager_TestEquals() throws TaskNotFoundException {
-        TaskManager typicalTaskManager1 = new TypicalTestTasks().getTypicalAddressBook();
-        TaskManager typicalTaskManager2 = new TypicalTestTasks().getTypicalAddressBook();
+        TaskManager typicalTaskManager1 = new TypicalTestTasks().getTypicalTaskManager();
+        TaskManager typicalTaskManager2 = new TypicalTestTasks().getTypicalTaskManager();
 
         //Test equal if contain the same stuff
         assertTrue(typicalTaskManager1.equals(typicalTaskManager1));

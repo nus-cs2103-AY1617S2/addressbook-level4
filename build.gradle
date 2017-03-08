@@ -155,7 +155,7 @@ task guiTests(type: TaskManagerTest) {
 }
 
 
-task nonGuiTests(type: AddressBookTest) {
+task nonGuiTests(type: TaskManagerTest) {
     include 'seedu/address/**'
 
     jacoco {
@@ -164,7 +164,7 @@ task nonGuiTests(type: AddressBookTest) {
 }
 
 // Test mode depends on whether headless task has been run
-task allTests(type: AddressBookTest) {
+task allTests(type: TaskManagerTest) {
     jacoco {
         destinationFile = new File("${buildDir}/jacoco/test.exec")
     }
