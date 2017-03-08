@@ -29,14 +29,6 @@ public class BrowserPanel extends UiPart<Region> {
         placeholder.getChildren().add(browser);
     }
 
-    public void loadPersonPage(ReadOnlyTask person) {
-        loadPage("https://www.google.com.sg/#safe=off&q=" + person.getName().fullName.replaceAll(" ", "+"));
-    }
-
-    public void loadPage(String url) {
-        browser.getEngine().load(url);
-    }
-
     /**
      * Frees resources allocated to the browser.
      */
