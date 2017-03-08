@@ -27,7 +27,7 @@ public class AddCommand extends Command {
             + " add Task A p/1 e/15-3-2020 23:59 d/secret mission A t/secret";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the Task Manager";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the Task Manager";
 
     private final Task toAdd;
 
@@ -58,7 +58,7 @@ public class AddCommand extends Command {
             model.addTask(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
     }

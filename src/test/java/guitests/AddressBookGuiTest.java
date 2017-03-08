@@ -108,7 +108,7 @@ public abstract class AddressBookGuiTest {
      * Asserts the task shown in the card is same as the given task
      */
     public void assertMatching(ReadOnlyTask person, taskCardHandle card) {
-        assertTrue(TestUtil.compareCardAndPerson(card, person));
+        assertTrue(TestUtil.compareCardAndTask(card, person));
     }
 
     /**

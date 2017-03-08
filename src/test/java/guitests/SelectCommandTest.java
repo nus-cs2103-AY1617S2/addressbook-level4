@@ -46,14 +46,14 @@ public class SelectCommandTest extends AddressBookGuiTest {
     }
 
     private void assertPersonSelected(int index) {
-        assertEquals(taskListPanel.getSelectedPersons().size(), 1);
-        ReadOnlyTask selectedPerson = taskListPanel.getSelectedPersons().get(0);
+        assertEquals(taskListPanel.getSelectedTasks().size(), 1);
+        ReadOnlyTask selectedPerson = taskListPanel.getSelectedTasks().get(0);
         assertEquals(taskListPanel.getTask(index - 1), selectedPerson);
         //TODO: confirm the correct page is loaded in the Browser Panel
     }
 
     private void assertNoPersonSelected() {
-        assertEquals(taskListPanel.getSelectedPersons().size(), 0);
+        assertEquals(taskListPanel.getSelectedTasks().size(), 0);
     }
 
 }
