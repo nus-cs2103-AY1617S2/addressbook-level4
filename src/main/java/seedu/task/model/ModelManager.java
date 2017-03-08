@@ -49,7 +49,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public ReadOnlyTaskList getAddressBook() {
+    public ReadOnlyTaskList getTaskList() {
         return taskList;
     }
 
