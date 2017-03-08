@@ -13,7 +13,6 @@ import javafx.scene.layout.Region;
 import seedu.tache.commons.core.LogsCenter;
 import seedu.tache.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.tache.commons.util.FxViewUtil;
-import seedu.tache.model.task.DetailedTask;
 import seedu.tache.model.task.ReadOnlyTask;
 
 /**
@@ -24,16 +23,16 @@ public class TaskListPanel extends UiPart<Region> {
     private static final String FXML = "TaskListPanel.fxml";
 
     @FXML
-    private ListView<DetailedTask> taskListView;
+    private ListView<ReadOnlyTask> taskListView;
 
-    public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<DetailedTask> taskList) {
+    public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
         super(FXML);
         setConnections(taskList);
         addToPlaceholder(taskListPlaceholder);
     }
 
-    private void setConnections(ObservableList<DetailedTask> taskList) {
-        taskListView.setItems(taskList);
+    private void setConnections(ObservableList<ReadOnlyTask> taskList) {
+         taskListView.setItems(taskList);
         taskListView.setCellFactory(listView -> new TaskListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
@@ -61,9 +60,10 @@ public class TaskListPanel extends UiPart<Region> {
         });
     }
 
-    class TaskListViewCell extends ListCell<DetailedTask> {
+    class TaskListViewCell extends ListCell<ReadOnlyTask> {
 
-        protected void updateItem(DetailedTask task, boolean empty) {
+        @Override
+        protected void updateItem(ReadOnlyTask task, boolean empty) {
             super.updateItem(task, empty);
 
             if (empty || task == null) {

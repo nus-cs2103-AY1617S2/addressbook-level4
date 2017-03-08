@@ -12,7 +12,6 @@ import javafx.collections.ObservableList;
 import seedu.tache.commons.core.UnmodifiableObservableList;
 import seedu.tache.model.tag.Tag;
 import seedu.tache.model.tag.UniqueTagList;
-import seedu.tache.model.task.DetailedTask;
 import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.model.task.Task;
 import seedu.tache.model.task.UniqueTaskList;
@@ -50,7 +49,7 @@ public class TaskManager implements ReadOnlyTaskManager {
 
     // list overwrite operations
 
-    public void setTasks(List<? extends DetailedTask> tasks)
+    public void setTasks(List<? extends ReadOnlyTask> tasks)
             throws UniqueTaskList.DuplicateTaskException {
         this.tasks.setTasks(tasks);
     }
@@ -83,7 +82,7 @@ public class TaskManager implements ReadOnlyTaskManager {
      *
      * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
      */
-    public void addTask(DetailedTask p) throws UniqueTaskList.DuplicateTaskException {
+    public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
         syncMasterTagListWith(p);
         tasks.add(p);
     }
