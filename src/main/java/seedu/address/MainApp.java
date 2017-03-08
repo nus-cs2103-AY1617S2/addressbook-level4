@@ -49,7 +49,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing Watodo ]===========================");
         super.init();
 
         config = initConfig(getApplicationParameter("config"));
@@ -169,7 +169,7 @@ public class MainApp extends Application {
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping Watodo ] =============================");
         ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);
