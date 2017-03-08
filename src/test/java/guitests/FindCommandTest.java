@@ -7,7 +7,7 @@ import org.junit.Test;
 import seedu.task.commons.core.Messages;
 import seedu.task.testutil.TestTask;
 
-public class FindCommandTest extends AddressBookGuiTest {
+public class FindCommandTest extends TaskListGuiTest {
 
     @Test
     public void find_nonEmptyList() {
