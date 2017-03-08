@@ -1,21 +1,21 @@
 package seedu.address.testutil;
 
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.tag.UniqueTagList;
+import seedu.task.model.tag.UniqueTagList;
+import seedu.task.model.task.Date;
+import seedu.task.model.task.Location;
+import seedu.task.model.task.Name;
+import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.Remark;
 
 /**
  * A mutable person object. For testing only.
  */
-public class TestPerson implements ReadOnlyPerson {
+public class TestPerson implements ReadOnlyTask {
 
     private Name name;
-    private Address address;
-    private Email email;
-    private Phone phone;
+    private Location address;
+    private Remark email;
+    private Date phone;
     private UniqueTagList tags;
 
     public TestPerson() {
@@ -27,9 +27,9 @@ public class TestPerson implements ReadOnlyPerson {
      */
     public TestPerson(TestPerson personToCopy) {
         this.name = personToCopy.getName();
-        this.phone = personToCopy.getPhone();
-        this.email = personToCopy.getEmail();
-        this.address = personToCopy.getAddress();
+        this.phone = personToCopy.getDate();
+        this.email = personToCopy.getRemark();
+        this.address = personToCopy.getLocation();
         this.tags = personToCopy.getTags();
     }
 
@@ -37,15 +37,15 @@ public class TestPerson implements ReadOnlyPerson {
         this.name = name;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(Location address) {
         this.address = address;
     }
 
-    public void setEmail(Email email) {
+    public void setEmail(Remark email) {
         this.email = email;
     }
 
-    public void setPhone(Phone phone) {
+    public void setPhone(Date phone) {
         this.phone = phone;
     }
 
@@ -59,17 +59,17 @@ public class TestPerson implements ReadOnlyPerson {
     }
 
     @Override
-    public Phone getPhone() {
+    public Date getDate() {
         return phone;
     }
 
     @Override
-    public Email getEmail() {
+    public Remark getRemark() {
         return email;
     }
 
     @Override
-    public Address getAddress() {
+    public Location getLocation() {
         return address;
     }
 
@@ -86,9 +86,9 @@ public class TestPerson implements ReadOnlyPerson {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
-        sb.append("a/" + this.getAddress().value + " ");
-        sb.append("p/" + this.getPhone().value + " ");
-        sb.append("e/" + this.getEmail().value + " ");
+        sb.append("a/" + this.getLocation().value + " ");
+        sb.append("p/" + this.getDate().value + " ");
+        sb.append("e/" + this.getRemark().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }

@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
+<<<<<<< HEAD
 	<name>Address Book sample application (Level 4)</name>
 	<comment>Project addressbook-level4 created by Buildship.</comment>
+=======
+	<name>main</name>
+	<comment>Project main created by Buildship.</comment>
+>>>>>>> 1bc848dd976ad2f08025612f1b19a2736d4f26d5
 	<projects>
 	</projects>
 	<buildSpec>
@@ -10,9 +15,18 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+<<<<<<< HEAD
+=======
+		<buildCommand>
+			<name>org.eclipse.buildship.core.gradleprojectbuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+>>>>>>> 1bc848dd976ad2f08025612f1b19a2736d4f26d5
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
+<<<<<<< HEAD
 		<nature>org.eclipse.buildship.core.gradleprojectnature</nature>
 	</natures>
 	<filteredResources>
@@ -35,4 +49,14 @@
 			</matcher>
 		</filter>
 	</filteredResources>
+=======
+	</natures>
+	<linkedResources>
+		<link>
+			<name>data</name>
+			<type>2</type>
+			<locationURI>PROJECT_LOC/src/test/data</locationURI>
+		</link>
+	</linkedResources>
+>>>>>>> 1bc848dd976ad2f08025612f1b19a2736d4f26d5
 </projectDescription>

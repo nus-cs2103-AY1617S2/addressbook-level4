@@ -16,18 +16,22 @@ import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainGuiHandle;
 import guitests.guihandles.MainMenuHandle;
-import guitests.guihandles.PersonCardHandle;
-import guitests.guihandles.PersonListPanelHandle;
+import guitests.guihandles.TaskCardHandle;
+import guitests.guihandles.TaskListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-import seedu.address.TestApp;
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.AddressBook;
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.task.TestApp;
+import seedu.task.commons.core.EventsCenter;
+import seedu.task.commons.events.BaseEvent;
+import seedu.task.model.TaskManager;
+import seedu.task.model.task.ReadOnlyTask;
 import seedu.address.testutil.TestUtil;
 import seedu.address.testutil.TypicalTestPersons;
+import seedu.task.commons.core.EventsCenter;
+import seedu.task.commons.events.BaseEvent;
+import seedu.task.model.TaskManager;
+import seedu.task.model.task.ReadOnlyTask;
 
 /**
  * A GUI Test class for AddressBook.
@@ -48,7 +52,7 @@ public abstract class AddressBookGuiTest {
      */
     protected MainGuiHandle mainGui;
     protected MainMenuHandle mainMenu;
-    protected PersonListPanelHandle personListPanel;
+    protected TaskListPanelHandle personListPanel;
     protected ResultDisplayHandle resultDisplay;
     protected CommandBoxHandle commandBox;
     protected BrowserPanelHandle browserPanel;
@@ -86,8 +90,8 @@ public abstract class AddressBookGuiTest {
      * Override this in child classes to set the initial local data.
      * Return null to use the data in the file specified in {@link #getDataFileLocation()}
      */
-    protected AddressBook getInitialData() {
-        AddressBook ab = new AddressBook();
+    protected TaskManager getInitialData() {
+        TaskManager ab = new TaskManager();
         TypicalTestPersons.loadAddressBookWithSampleData(ab);
         return ab;
     }
@@ -107,7 +111,7 @@ public abstract class AddressBookGuiTest {
     /**
      * Asserts the person shown in the card is same as the given person
      */
-    public void assertMatching(ReadOnlyPerson person, PersonCardHandle card) {
+    public void assertMatching(ReadOnlyTask person, TaskCardHandle card) {
         assertTrue(TestUtil.compareCardAndPerson(card, person));
     }
 

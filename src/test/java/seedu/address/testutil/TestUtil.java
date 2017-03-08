@@ -16,7 +16,7 @@ import org.testfx.api.FxToolkit;
 
 import com.google.common.io.Files;
 
-import guitests.guihandles.PersonCardHandle;
+import guitests.guihandles.TaskCardHandle;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -25,20 +25,20 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import junit.framework.AssertionFailedError;
-import seedu.address.TestApp;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.FileUtil;
-import seedu.address.commons.util.XmlUtil;
-import seedu.address.model.AddressBook;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
-import seedu.address.storage.XmlSerializableAddressBook;
+import seedu.task.TestApp;
+import seedu.task.storage.XmlSerializableTaskManager;
+import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.commons.util.FileUtil;
+import seedu.task.commons.util.XmlUtil;
+import seedu.task.model.TaskManager;
+import seedu.task.model.tag.Tag;
+import seedu.task.model.tag.UniqueTagList;
+import seedu.task.model.task.Date;
+import seedu.task.model.task.Location;
+import seedu.task.model.task.Name;
+import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.Remark;
+import seedu.task.model.task.Task;
 
 /**
  * A utility class for test cases.
@@ -52,7 +52,7 @@ public class TestUtil {
      */
     public static final String SANDBOX_FOLDER = FileUtil.getPath("./src/test/data/sandbox/");
 
-    public static final Person[] SAMPLE_PERSON_DATA = getSamplePersonData();
+    public static final Task[] SAMPLE_PERSON_DATA = getSamplePersonData();
 
     public static final Tag[] SAMPLE_TAG_DATA = getSampleTagData();
 
@@ -71,19 +71,19 @@ public class TestUtil {
                 String.format("Expected %s to be thrown, but nothing was thrown.", expected.getName()));
     }
 
-    private static Person[] getSamplePersonData() {
+    private static Task[] getSamplePersonData() {
         try {
             //CHECKSTYLE.OFF: LineLength
-            return new Person[]{
-                new Person(new Name("Ali Muster"), new Phone("9482424"), new Email("hans@google.com"), new Address("4th street"), new UniqueTagList()),
-                new Person(new Name("Boris Mueller"), new Phone("87249245"), new Email("ruth@google.com"), new Address("81th street"), new UniqueTagList()),
-                new Person(new Name("Carl Kurz"), new Phone("95352563"), new Email("heinz@yahoo.com"), new Address("wall street"), new UniqueTagList()),
-                new Person(new Name("Daniel Meier"), new Phone("87652533"), new Email("cornelia@google.com"), new Address("10th street"), new UniqueTagList()),
-                new Person(new Name("Elle Meyer"), new Phone("9482224"), new Email("werner@gmail.com"), new Address("michegan ave"), new UniqueTagList()),
-                new Person(new Name("Fiona Kunz"), new Phone("9482427"), new Email("lydia@gmail.com"), new Address("little tokyo"), new UniqueTagList()),
-                new Person(new Name("George Best"), new Phone("9482442"), new Email("anna@google.com"), new Address("4th street"), new UniqueTagList()),
-                new Person(new Name("Hoon Meier"), new Phone("8482424"), new Email("stefan@mail.com"), new Address("little india"), new UniqueTagList()),
-                new Person(new Name("Ida Mueller"), new Phone("8482131"), new Email("hans@google.com"), new Address("chicago ave"), new UniqueTagList())
+            return new Task[]{
+                new Task(new Name("Ali Muster"), new Date("9482424"), new Remark("hans@google.com"), new Location("4th street"), new UniqueTagList()),
+                new Task(new Name("Boris Mueller"), new Date("87249245"), new Remark("ruth@google.com"), new Location("81th street"), new UniqueTagList()),
+                new Task(new Name("Carl Kurz"), new Date("95352563"), new Remark("heinz@yahoo.com"), new Location("wall street"), new UniqueTagList()),
+                new Task(new Name("Daniel Meier"), new Date("87652533"), new Remark("cornelia@google.com"), new Location("10th street"), new UniqueTagList()),
+                new Task(new Name("Elle Meyer"), new Date("9482224"), new Remark("werner@gmail.com"), new Location("michegan ave"), new UniqueTagList()),
+                new Task(new Name("Fiona Kunz"), new Date("9482427"), new Remark("lydia@gmail.com"), new Location("little tokyo"), new UniqueTagList()),
+                new Task(new Name("George Best"), new Date("9482442"), new Remark("anna@google.com"), new Location("4th street"), new UniqueTagList()),
+                new Task(new Name("Hoon Meier"), new Date("8482424"), new Remark("stefan@mail.com"), new Location("little india"), new UniqueTagList()),
+                new Task(new Name("Ida Mueller"), new Date("8482131"), new Remark("hans@google.com"), new Location("chicago ave"), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -107,7 +107,7 @@ public class TestUtil {
         }
     }
 
-    public static List<Person> generateSamplePersonData() {
+    public static List<Task> generateSamplePersonData() {
         return Arrays.asList(SAMPLE_PERSON_DATA);
     }
 
@@ -144,8 +144,10 @@ public class TestUtil {
         createDataFileWithSampleData(TestApp.SAVE_LOCATION_FOR_TESTING);
     }
 
-    public static XmlSerializableAddressBook generateSampleStorageAddressBook() {
-        return new XmlSerializableAddressBook(new AddressBook());
+
+    public static XmlSerializableTaskManager generateSampleStorageAddressBook() {
+        return new XmlSerializableTaskManager(new TaskManager());
+
     }
 
     /**
@@ -333,8 +335,8 @@ public class TestUtil {
         return list;
     }
 
-    public static boolean compareCardAndPerson(PersonCardHandle card, ReadOnlyPerson person) {
-        return card.isSamePerson(person);
+    public static boolean compareCardAndPerson(TaskCardHandle card, ReadOnlyTask person) {
+        return card.isSameTask(person);
     }
 
     public static Tag[] getTagList(String tags) {
