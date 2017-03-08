@@ -13,7 +13,7 @@ import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 
 //@@author A0140042A
 /**
- * Edits a label in all tasks that exists in AddressBook
+ * Edits a label in all tasks that exists in Task Manager
  */
 public class EditLabelCommand extends Command {
 
@@ -24,9 +24,9 @@ public class EditLabelCommand extends Command {
             + "Parameters: LABEL_TO_EDIT NEW_LABEL \n"
             + "Example: " + COMMAND_WORD + " school schoolwork";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Labels changed from %1$s to %2$s";
+    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Labels changed from %1$s to %2$s";
     public static final String MESSAGE_LABEL_NOT_EXIST = "Specified label does not exist in any task saved";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
     public static final String MESSAGE_LABEL_INVALID = "Label name is invalid";
 
     private Label labelToChange;
@@ -48,7 +48,7 @@ public class EditLabelCommand extends Command {
         }
 
         model.updateFilteredListToShowAll();
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, labelToChange, newLabel));
+        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, labelToChange, newLabel));
     }
 
     /**
@@ -72,7 +72,7 @@ public class EditLabelCommand extends Command {
                 try {
                     model.updateTask(i, task);
                 } catch (DuplicateTaskException dpe) {
-                    throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+                    throw new CommandException(MESSAGE_DUPLICATE_TASK);
                 }
             }
         }

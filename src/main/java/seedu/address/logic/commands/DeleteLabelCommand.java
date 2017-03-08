@@ -24,9 +24,9 @@ public class DeleteLabelCommand extends Command {
             + "Parameters: LABEL_TO_DELETE\n"
             + "Example: " + COMMAND_WORD + " friends";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Label %1$s deleted from all tasks";
+    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Label %1$s deleted from all tasks";
     public static final String MESSAGE_LABEL_NOT_EXIST = "Specified label does not exist in any task saved";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
     public static final String MESSAGE_LABEL_INVALID = "Label name is invalid";
 
     private Label labelToDelete;
@@ -46,7 +46,7 @@ public class DeleteLabelCommand extends Command {
         }
 
         model.updateFilteredListToShowAll();
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, labelToDelete));
+        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, labelToDelete));
     }
 
     /**
@@ -69,7 +69,7 @@ public class DeleteLabelCommand extends Command {
                 try {
                     model.updateTask(i, task);
                 } catch (DuplicateTaskException dpe) {
-                    throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+                    throw new CommandException(MESSAGE_DUPLICATE_TASK);
                 }
             }
         }

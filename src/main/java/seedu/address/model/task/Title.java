@@ -3,7 +3,7 @@ package seedu.address.model.task;
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's title in the address book.
+ * Represents a Task's title in the task manager.
  * Guarantees: immutable; is valid as declared in {@link #isValidTitle(String)}
  */
 public class Title {
@@ -34,7 +34,7 @@ public class Title {
     }
 
     /**
-     * Returns true if a given string is a valid person name.
+     * Returns true if a given string is a valid  name.
      */
     public static boolean isValidTitle(String test) {
         return test.matches(TITLE_VALIDATION_REGEX);
