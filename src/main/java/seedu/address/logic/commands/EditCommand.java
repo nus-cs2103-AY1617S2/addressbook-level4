@@ -78,7 +78,7 @@ public class EditCommand extends Command {
 
         Description updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getDescription);
         Priority updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPriority);
-        Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
+        Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getDate);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
         return new Task(updatedName, updatedPhone, updatedEmail, updatedTags);
