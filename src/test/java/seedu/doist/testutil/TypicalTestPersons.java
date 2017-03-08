@@ -14,17 +14,17 @@ public class TypicalTestPersons {
 
     public TypicalTestPersons() {
         try {
-            alice = new PersonBuilder().withName("Alice Pauline").build();  //.withTags("friends").build();
-            benson = new PersonBuilder().withName("Benson Meier").withTags("owesMoney", "friends").build();
-            carl = new PersonBuilder().withName("Carl Kurz").withPriority("VERYIMPORTANT").build();
-            daniel = new PersonBuilder().withName("Daniel Meier").withPriority("IMPORTANT").build();
-            elle = new PersonBuilder().withName("Elle Meyer").build();
-            fiona = new PersonBuilder().withName("Fiona Kunz").build();
-            george = new PersonBuilder().withName("George Best").build();
+            alice = new TaskBuilder().withName("Alice Pauline").build();  //.withTags("friends").build();
+            benson = new TaskBuilder().withName("Benson Meier").withTags("owesMoney", "friends").build();
+            carl = new TaskBuilder().withName("Carl Kurz").withPriority("VERYIMPORTANT").build();
+            daniel = new TaskBuilder().withName("Daniel Meier").withPriority("IMPORTANT").build();
+            elle = new TaskBuilder().withName("Elle Meyer").build();
+            fiona = new TaskBuilder().withName("Fiona Kunz").build();
+            george = new TaskBuilder().withName("George Best").build();
 
             // Manually added
-            hoon = new PersonBuilder().withName("Hoon Meier").build();
-            ida = new PersonBuilder().withName("Ida Mueller").build();
+            hoon = new TaskBuilder().withName("Hoon Meier").build();
+            ida = new TaskBuilder().withName("Ida Mueller").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -32,7 +32,7 @@ public class TypicalTestPersons {
     }
 
     public static void loadAddressBookWithSampleData(TodoList ab) {
-        for (TestPerson person : new TypicalTestPersons().getTypicalPersons()) {
+        for (TestPerson person : new TypicalTestPersons().getTypicalTasks()) {
             try {
                 ab.addTask(new Task(person));
             } catch (UniqueTaskList.DuplicateTaskException e) {
@@ -41,7 +41,7 @@ public class TypicalTestPersons {
         }
     }
 
-    public TestPerson[] getTypicalPersons() {
+    public TestPerson[] getTypicalTasks() {
         return new TestPerson[]{alice, benson, carl, daniel, elle, fiona, george};
     }
 

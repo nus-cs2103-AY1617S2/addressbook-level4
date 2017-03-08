@@ -9,32 +9,32 @@ import seedu.doist.model.task.Priority;
 /**
  *
  */
-public class PersonBuilder {
+public class TaskBuilder {
 
     private TestPerson person;
 
-    public PersonBuilder() {
+    public TaskBuilder() {
         this.person = new TestPerson();
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the TaskBuilder with the data of {@code personToCopy}.
      */
-    public PersonBuilder(TestPerson personToCopy) {
+    public TaskBuilder(TestPerson personToCopy) {
         this.person = new TestPerson(personToCopy);
     }
 
-    public PersonBuilder withName(String name) throws IllegalValueException {
+    public TaskBuilder withName(String name) throws IllegalValueException {
         this.person.setName(new Description(name));
         return this;
     }
 
-    public PersonBuilder withPriority(String priority) throws IllegalValueException {
+    public TaskBuilder withPriority(String priority) throws IllegalValueException {
         this.person.setPriority(new Priority(priority));
         return this;
     }
 
-    public PersonBuilder withTags(String ... tags) throws IllegalValueException {
+    public TaskBuilder withTags(String ... tags) throws IllegalValueException {
         person.setTags(new UniqueTagList());
         for (String tag: tags) {
             person.getTags().add(new Tag(tag));

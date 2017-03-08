@@ -9,11 +9,11 @@ import seedu.doist.commons.exceptions.DataConversionException;
 import seedu.doist.commons.util.XmlUtil;
 
 /**
- * Stores addressbook data in an XML file
+ * Stores TodoList data in an XML file
  */
 public class XmlFileStorage {
     /**
-     * Saves the given addressbook data to the specified file.
+     * Saves the given to-do list data to the specified file.
      */
     public static void saveDataToFile(File file, XmlSerializableTodoList addressBook)
             throws FileNotFoundException {
@@ -25,7 +25,7 @@ public class XmlFileStorage {
     }
 
     /**
-     * Returns address book in the file or an empty address book
+     * Returns todoList in the file or an empty todoList list
      */
     public static XmlSerializableTodoList loadDataFromSaveFile(File file) throws DataConversionException,
                                                                             FileNotFoundException {

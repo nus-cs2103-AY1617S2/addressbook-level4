@@ -14,7 +14,7 @@ public class ExitCommand extends Command {
     public static ArrayList<String> commandWords = new ArrayList<>(Arrays.asList("exit"));
     public static final String DEFAULT_COMMAND_WORD = "exit";
 
-    public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Exiting Address Book as requested ...";
+    public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Exiting Doist as requested ...";
 
     @Override
     public CommandResult execute() {

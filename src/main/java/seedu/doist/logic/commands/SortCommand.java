@@ -7,7 +7,7 @@ import seedu.doist.commons.exceptions.IllegalValueException;
 
 
 /**
- * Lists all persons in the address book to the user.
+ * Sorts all persons in the to-do list by the specified parameter and shows it to the user.
  */
 public class SortCommand extends Command {
 
@@ -22,7 +22,7 @@ public class SortCommand extends Command {
     public static ArrayList<String> commandWords =
             new ArrayList<>(Arrays.asList(DEFAULT_COMMAND_WORD, "sorted", "sort_by"));
 
-    public static final String MESSAGE_USAGE = DEFAULT_COMMAND_WORD + ":\n" + "Sorts previously listed people." + "\n"
+    public static final String MESSAGE_USAGE = DEFAULT_COMMAND_WORD + ":\n" + "Sorts previously listed tasks." + "\n"
             + "Can sort by priority for now. \n\t"
             + "Parameters: SORTTYPE " + "\n\t"
             + "Example: " + DEFAULT_COMMAND_WORD
