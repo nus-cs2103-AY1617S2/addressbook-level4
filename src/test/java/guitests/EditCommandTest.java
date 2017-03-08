@@ -112,7 +112,7 @@ public class EditCommandTest extends TodoListGuiTest {
                                     String detailsToEdit, TestTodo editedTodo) {
 
     	commandBox.runCommand("edit " + filteredTodoListIndex + " " + detailsToEdit);
-
+    	//new java.util.Scanner(System.in).nextLine();
         // confirm the new card contains the right data
         TodoCardHandle editedCard = todoListPanel.navigateToTodo(editedTodo.getName().fullName);
         assertMatching(editedTodo, editedCard);
@@ -120,9 +120,8 @@ public class EditCommandTest extends TodoListGuiTest {
         // confirm the list now contains all previous todos plus the todo with updated details
         expectedTodosList[addressBookIndex - 1] = editedTodo;
         assertTrue(todoListPanel.isListMatching(expectedTodosList));
-        
+
         //edit result didn't show in display
-        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TODO_SUCCESS, editedTodo));
-        
+        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TODO_SUCCESS, editedTodo));        
     }
 }

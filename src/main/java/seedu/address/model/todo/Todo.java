@@ -63,8 +63,8 @@ public class Todo implements ReadOnlyTodo {
     }
 
     public void setStartTime(Date starttime) {
-        assert starttime != null;
-        this.starttime = starttime;
+        if(starttime != null)
+        	this.starttime = starttime;
     }
 
     @Override
@@ -73,8 +73,8 @@ public class Todo implements ReadOnlyTodo {
     }
 
     public void setEndTime(Date endtime) {
-        assert endtime != null;
-        this.endtime = endtime;
+    	if(endtime != null)
+    		this.endtime = endtime;
     }
 
     @Override

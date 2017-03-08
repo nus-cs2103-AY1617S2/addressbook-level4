@@ -40,7 +40,7 @@ public class TestTodo implements ReadOnlyTodo {
      * Constructor for a scheduled task
      */
     public TestTodo(Name name, Date starttime, Date endtime, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, tags);
+        assert !CollectionUtil.isAnyNull(name);
         this.name = name;
         if(starttime != null && endtime != null) {
         	this.starttime = starttime;
