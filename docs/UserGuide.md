@@ -19,7 +19,7 @@ By : `Team T16-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbs
 1. Download the latest `TaskSceduler.jar` from the [releases](../../../releases) tab.
 2. Copy the file to the folder you want to use as the home folder for your Task Scheduler.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
-   > <img src="images/Ui.png" width="600"> 
+   > <img src="images/Ui.png" width="600">
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
@@ -51,7 +51,7 @@ Format: `help`
 
 Adds a task to the task scheduler <br>
 
-Format: `add TASK_NAME b/DEADLINE [t/TAG d/DESCRIPTION s/POSSIBLE TIMING 1, POSSIBLE TIMING 2 p/PERIODICITY]...` 
+Format: `add TASK_NAME b/DEADLINE [t/TAG d/DESCRIPTION s/POSSIBLE TIMING 1, POSSIBLE TIMING 2 p/PERIODICITY]...`
 > Tasks can have any number of tags (including 0)
 
 Examples:
@@ -63,13 +63,13 @@ Examples:
 
 Adds an event to the task scheduler <br>
 
-Format: `add event EVENT_NAME [s/START_TIME,END_TIME t/TAG d/DESCRIPTION p/PERIODICITY]...`
+Format: `add  EVENT_NAME l/LOCATION p/PERIOD s/START_TIME e/END_TIME d/ DESCRIPTION t/ TAGS`
 > Events can have any number of tags (including 0)
 
 Examples:
 
-* `add event meeting with john s/mon 11.30, mon 13.30 t/work, important  d/meeting about work where I won’t fall asleep`
-* `add event wife monthly staff meeting p/M`
+* `add meeting with boss l/work p/daily s/7:00pm  e/9:00pm  d/ get scolded for being lazy t/kthxbye`
+
 
 ### 2.4. Listing all tasks : `list`
 
@@ -106,7 +106,7 @@ Format: `edit INDEX [b/DEADLINE s/TIME d/DESCRIPTION t/TAGS]`
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
 > * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-> * You can remove all the task's tags by typing `t/` without specifying any tags after it. 
+> * You can remove all the task's tags by typing `t/` without specifying any tags after it.
 
 Examples:
 
@@ -115,7 +115,7 @@ Examples:
 
 * `edit 2 Math Homework t/`<br>
   Edits the name of the 2nd task to be Math Homework and clears all existing tags.
-  
+
 ### 2.7. Deleting a task : `delete`
 
 Deletes the specified task from the task scheduler.<br>
@@ -168,7 +168,7 @@ Example:
    Deletes the second task in the task scheduler
 * `undo`
    Undoes the delete that was just done
-   
+
 ### 2.12. Redo : `redo`
 
 Redo an undone command in the task scheduler
@@ -218,6 +218,6 @@ Example:
 
 * **Undo** : `undo` <br>
    e.g. `undo`
-   
+
 * **Redo** : `redo` <br>
    e.g. `redo`
