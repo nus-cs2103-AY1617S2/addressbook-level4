@@ -66,7 +66,8 @@ public class FindController extends Controller {
     }
 
     private String[] convertToArray(String keywords) {
-        if (keywords == null) {
+        String trimmedKeywords = keywords.trim();
+        if (keywords == null || trimmedKeywords.isEmpty()) {
             return new String[] { "" };
         }
 
