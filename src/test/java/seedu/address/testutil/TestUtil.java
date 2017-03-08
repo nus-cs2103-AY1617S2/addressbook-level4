@@ -73,14 +73,14 @@ public class TestUtil {
         try {
             // CHECKSTYLE.OFF: LineLength
             return new Task[] { new Task(new Name("Ali Muster"), new Date("9482424"), new UniqueTagList()),
-                    new Task(new Name("Boris Mueller"), new Date("87249245"), new UniqueTagList()),
-                    new Task(new Name("Carl Kurz"), new Date("95352563"), new UniqueTagList()),
-                    new Task(new Name("Daniel Meier"), new Date("87652533"), new UniqueTagList()),
-                    new Task(new Name("Elle Meyer"), new Date("9482224"), new UniqueTagList()),
-                    new Task(new Name("Fiona Kunz"), new Date("9482427"), new UniqueTagList()),
-                    new Task(new Name("George Best"), new Date("9482442"), new UniqueTagList()),
-                    new Task(new Name("Hoon Meier"), new Date("8482424"), new UniqueTagList()),
-                    new Task(new Name("Ida Mueller"), new Date("8482131"), new UniqueTagList()) };
+                new Task(new Name("Boris Mueller"), new Date("87249245"), new UniqueTagList()),
+                new Task(new Name("Carl Kurz"), new Date("95352563"), new UniqueTagList()),
+                new Task(new Name("Daniel Meier"), new Date("87652533"), new UniqueTagList()),
+                new Task(new Name("Elle Meyer"), new Date("9482224"), new UniqueTagList()),
+                new Task(new Name("Fiona Kunz"), new Date("9482427"), new UniqueTagList()),
+                new Task(new Name("George Best"), new Date("9482442"), new UniqueTagList()),
+                new Task(new Name("Hoon Meier"), new Date("8482424"), new UniqueTagList()),
+                new Task(new Name("Ida Mueller"), new Date("8482131"), new UniqueTagList()) };
             // CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
             assert false;
