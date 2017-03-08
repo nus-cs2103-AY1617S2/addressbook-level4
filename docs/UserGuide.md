@@ -28,7 +28,7 @@ Before you setup *Typed*, you should have Java version `1.8.0_60` or later insta
 2. Let *Typed* know when you are ready to start work by pressing <kbd>Enter</kbd>. 
     <img src="images/TodayScreen.png" width="600"> <br>
 3. This will bring you to the default view. 
-    <img src="images/UIDesktop.png" width="600"> <br>
+    <img src="images/justscreen.png" width="600"> <br>
     <img src="images/Ui.png" width="600"> <br>
 
 ## 2. Features 
