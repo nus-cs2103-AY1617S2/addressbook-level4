@@ -6,20 +6,20 @@ import seedu.ezdo.model.todo.Name;
 import seedu.ezdo.model.todo.Priority;
 import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.model.todo.StartDate;
+import seedu.ezdo.model.todo.TaskDate;
 
 /**
  * A mutable task object. For testing only.
  */
 public class TestTask implements ReadOnlyTask {
 
-    private static final String PREFIX_EMAIL = "e/";
     private static final String PREFIX_PRIORITY = "p/";
     private static final String PREFIX_STARTDATE = "s/";
     private static final String PREFIX_DUEDATE = "d/";
 
     private Name name;
-    private StartDate startDate;
-    private DueDate dueDate;
+    private TaskDate startDate;
+    private TaskDate dueDate;
     private Priority priority;
     private UniqueTagList tags;
 
@@ -42,11 +42,11 @@ public class TestTask implements ReadOnlyTask {
         this.name = name;
     }
 
-    public void setStartDate(StartDate startDate) {
+    public void setStartDate(TaskDate startDate) {
         this.startDate = startDate;
     }
 
-    public void setDueDate(DueDate dueDate) {
+    public void setDueDate(TaskDate dueDate) {
         this.dueDate = dueDate;
     }
 
@@ -69,12 +69,12 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public StartDate getStartDate() {
+    public TaskDate getStartDate() {
         return startDate;
     }
 
     @Override
-    public DueDate getDueDate() {
+    public TaskDate getDueDate() {
         return dueDate;
     }
 

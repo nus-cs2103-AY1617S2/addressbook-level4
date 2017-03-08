@@ -13,6 +13,7 @@ import seedu.ezdo.model.todo.Priority;
 import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.model.todo.StartDate;
 import seedu.ezdo.model.todo.Task;
+import seedu.ezdo.model.todo.TaskDate;
 import seedu.ezdo.model.todo.UniqueTaskList;
 
 /**
@@ -80,8 +81,8 @@ public class EditCommand extends Command {
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
         Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
-        StartDate updatedStartDate = editTaskDescriptor.getStartDate().orElseGet(taskToEdit::getStartDate);
-        DueDate updatedDueDate = editTaskDescriptor.getDueDate().orElseGet(taskToEdit::getDueDate);
+        TaskDate updatedStartDate = editTaskDescriptor.getStartDate().orElseGet(taskToEdit::getStartDate);
+        TaskDate updatedDueDate = editTaskDescriptor.getDueDate().orElseGet(taskToEdit::getDueDate);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
         return new Task(updatedName, updatedPriority, updatedStartDate, updatedDueDate, updatedTags);

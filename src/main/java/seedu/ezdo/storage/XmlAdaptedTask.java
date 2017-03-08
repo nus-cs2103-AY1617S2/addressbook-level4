@@ -14,6 +14,7 @@ import seedu.ezdo.model.todo.Priority;
 import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.model.todo.StartDate;
 import seedu.ezdo.model.todo.Task;
+import seedu.ezdo.model.todo.TaskDate;
 
 /**
  * JAXB-friendly version of the Task.
@@ -69,8 +70,8 @@ public class XmlAdaptedTask {
         }
         final Name name = new Name(this.name);
         final Priority priority = new Priority(this.priority);
-        final StartDate startDate = new StartDate(this.startDate);
-        final DueDate dueDate = new DueDate(this.dueDate);
+        final TaskDate startDate = new StartDate(this.startDate);
+        final TaskDate dueDate = new DueDate(this.dueDate);
         final UniqueTagList tags = new UniqueTagList(taskTags);
         return new Task(name, priority, startDate, dueDate, tags);
     }
