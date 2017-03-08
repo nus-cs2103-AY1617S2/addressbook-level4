@@ -126,6 +126,15 @@ There is no need to save manually.
 
 ## 4. Command Summary
 
+Command | Syntax | Example
+------- | ------ | -------
+Help    | help
+Add     | add TASK                       | add submit report by Friday
+          add TASK by DEADLINE
+          add TASK from DATE by DEADLINE 
+List    | list
+        
+
 * **Help** : `help` <br>
 
 * **Add**  `add TASK` <br>
