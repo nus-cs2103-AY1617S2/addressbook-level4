@@ -56,5 +56,4 @@ public class Name {
 	public int hashCode() {
 		return this.fullName.hashCode();
 	}
-
 }

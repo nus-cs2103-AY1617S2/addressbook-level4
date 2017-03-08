@@ -16,8 +16,6 @@
 3. Copy the file to the folder you want to use as the home folder for your task manager.
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
     > <img src="images/Ui.png" width="600">
-
-
 5. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 6. Some example commands you can try:
@@ -196,7 +194,7 @@ There is no need to save manually.
 
 * **Filter** : `filter DATE` <br>
   e.g. `filter 01-Mar-2017`
-   
+
 * **Help** : `help` <br>
   e.g. `help`
 

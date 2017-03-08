@@ -160,8 +160,7 @@ public class TaskManager implements ReadOnlyTaskManager {
 		this.tags.add(t);
 	}
 
-	//// util methods
-
+	//// util
 	@Override
 	public String toString() {
 		return this.tasks.asObservableList().size() + " tasks, " + this.tags.asObservableList().size() + " tags";
@@ -179,7 +178,7 @@ public class TaskManager implements ReadOnlyTaskManager {
 	}
 
 	@Override
-	public boolean equals(Object other) {
+	public boolean equals(Object othe
 		return (other == this // short circuit if same object
 		) || ((other instanceof TaskManager // instanceof handles nulls
 		) && this.tasks.equals(((TaskManager) other).tasks)

@@ -121,5 +121,4 @@ public class Task implements ReadOnlyTask {
 	public String toString() {
 		return getAsText();
 	}
-
 }

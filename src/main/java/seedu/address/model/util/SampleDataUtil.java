@@ -34,16 +34,15 @@ public class SampleDataUtil {
 			throw new AssertionError("sample data cannot be invalid", e);
 		}
 	}
-
-	public static ReadOnlyTaskManager getSampleAddressBook() {
-		try {
-			TaskManager sampleAB = new TaskManager();
-			for (Task sampleTask : getSampleTasks()) {
-				sampleAB.addTask(sampleTask);
-			}
-			return sampleAB;
-		} catch (DuplicateTaskException e) {
-			throw new AssertionError("sample data cannot contain duplicate tasks", e);
-		}
-	}
+  public static ReadOnlyTaskManager getSampleTaskManager() {
+    try {
+        TaskManager sampleAB = new TaskManager();
+        for (Task sampleTask : getSampleTasks()) {
+            sampleAB.addTask(sampleTask);
+        }
+        return sampleAB;
+    } catch (DuplicateTaskException e) {
+        throw new AssertionError("sample data cannot contain duplicate tasks", e);
+    }
+  }
 }

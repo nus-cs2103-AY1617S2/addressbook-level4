@@ -51,5 +51,4 @@ public class AddCommandTest extends TaskManagerGuiTest {
 		TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
 		assertTrue(this.taskListPanel.isListMatching(expectedList));
 	}
-
 }

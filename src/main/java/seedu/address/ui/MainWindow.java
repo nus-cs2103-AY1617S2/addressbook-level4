@@ -210,5 +210,4 @@ public class MainWindow extends UiPart<Region> {
 	void releaseResources() {
 		this.browserPanel.freeResources();
 	}
-
 }
