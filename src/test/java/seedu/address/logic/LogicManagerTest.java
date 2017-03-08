@@ -422,7 +422,7 @@ public class LogicManagerTest {
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Person(name, privatePhone, email, privateAddress, tags);
+            return new Person(name, privatePhone, email, tags);
         }
 
         /**
@@ -437,7 +437,6 @@ public class LogicManagerTest {
                     new Name("Person " + seed),
                     new Phone("" + Math.abs(seed)),
                     new Email(seed + "@email"),
-                    new Address("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -451,7 +450,6 @@ public class LogicManagerTest {
             cmd.append(p.getName().toString());
             cmd.append(" e/").append(p.getEmail());
             cmd.append(" p/").append(p.getPhone());
-            cmd.append(" a/").append(p.getAddress());
 
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {
@@ -536,7 +534,6 @@ public class LogicManagerTest {
                     new Name(name),
                     new Phone("1"),
                     new Email("1@email"),
-                    new Address("House of 1"),
                     new UniqueTagList(new Tag("tag"))
             );
         }
