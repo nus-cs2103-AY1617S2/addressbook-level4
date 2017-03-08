@@ -6,7 +6,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.tache.commons.util.FxViewUtil;
-import seedu.tache.model.person.ReadOnlyPerson;
+import seedu.tache.model.task.FloatingTask;
 
 /**
  * The Browser Panel of the App.
@@ -29,8 +29,8 @@ public class BrowserPanel extends UiPart<Region> {
         placeholder.getChildren().add(browser);
     }
 
-    public void loadPersonPage(ReadOnlyPerson person) {
-        loadPage("https://www.google.com.sg/#safe=off&q=" + person.getName().fullName.replaceAll(" ", "+"));
+    public void loadTaskPage(FloatingTask task) {
+        loadPage("https://www.google.com.sg/#safe=off&q=" + task.getName().toString().replaceAll(" ", "+"));
     }
 
     public void loadPage(String url) {

@@ -14,6 +14,7 @@ import seedu.tache.model.person.Person;
 import seedu.tache.model.person.ReadOnlyPerson;
 import seedu.tache.model.person.UniquePersonList;
 import seedu.tache.model.person.UniquePersonList.PersonNotFoundException;
+import seedu.tache.model.task.FloatingTask;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -59,7 +60,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void deletePerson(ReadOnlyPerson target) throws PersonNotFoundException {
+    public synchronized void deleteTask(FloatingTask target) throws TaskNotFoundException {
         addressBook.removePerson(target);
         indicateAddressBookChanged();
     }
@@ -84,8 +85,8 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Filtered Person List Accessors =============================================================
 
     @Override
-    public UnmodifiableObservableList<ReadOnlyPerson> getFilteredPersonList() {
-        return new UnmodifiableObservableList<>(filteredPersons);
+    public UnmodifiableObservableList<FloatingTask> getFilteredTaskList() {
+        return new UnmodifiableObservableList<>(filteredTasks);
     }
 
     @Override
