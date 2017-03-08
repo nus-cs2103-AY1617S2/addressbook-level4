@@ -440,7 +440,7 @@ public class LogicManagerTest {
 
             cmd.append(p.getTitle().toString());
 
-            cmd.append("by ");
+            cmd.append(" by ");
 
             cmd.append(p.getDeadline());
 
