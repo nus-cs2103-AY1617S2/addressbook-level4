@@ -8,7 +8,7 @@ import org.junit.Test;
 import guitests.guihandles.PersonCardHandle;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.model.person.Name;
+import seedu.address.model.task.Content;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.TaskBuilder;
 import seedu.address.testutil.TestTask;
@@ -88,7 +88,7 @@ public class EditCommandTest extends AddressBookGuiTest {
     @Test
     public void edit_invalidValues_failure() {
         commandBox.runCommand("edit 1 *&");
-        assertResultMessage(Content.MESSAGE_NAME_CONSTRAINTS);
+        assertResultMessage(Content.MESSAGE_CONTENT_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 t/*&");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);

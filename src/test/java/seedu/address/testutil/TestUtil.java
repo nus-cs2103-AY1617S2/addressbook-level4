@@ -35,6 +35,7 @@ import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Content;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskDateTime;
 import seedu.address.storage.XmlSerializableAddressBook;
 
 /**
@@ -72,15 +73,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Content("Ali Muster"), new UniqueTagList()),
-                new Task(new Content("Boris Mueller"), new UniqueTagList()),
-                new Task(new Content("Carl Kurz"), new UniqueTagList()),
-                new Task(new Content("Daniel Meier"), new UniqueTagList()),
-                new Task(new Content("Elle Meyer"), new UniqueTagList()),
-                new Task(new Content("Fiona Kunz"), new UniqueTagList()),
-                new Task(new Content("George Best"), new UniqueTagList()),
-                new Task(new Content("Hoon Meier"), new UniqueTagList()),
-                new Task(new Content("Ida Mueller"), new UniqueTagList())
+                new Task(new Content("Ali Muster"), new TaskDateTime(""), new UniqueTagList()),
+                new Task(new Content("Boris Mueller"), new TaskDateTime(""), new UniqueTagList()),
+                new Task(new Content("Carl Kurz"), new TaskDateTime(""), new UniqueTagList()),
+                new Task(new Content("Daniel Meier"), new TaskDateTime(""), new UniqueTagList()),
+                new Task(new Content("Elle Meyer"), new TaskDateTime(""), new UniqueTagList()),
+                new Task(new Content("Fiona Kunz"), new TaskDateTime(""), new UniqueTagList()),
+                new Task(new Content("George Best"), new TaskDateTime(""), new UniqueTagList()),
+                new Task(new Content("Hoon Meier"), new TaskDateTime(""), new UniqueTagList()),
+                new Task(new Content("Ida Mueller"), new TaskDateTime(""), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -300,14 +301,14 @@ public class TestUtil {
 
     /**
      * Replaces persons[i] with a person.
-     * @param persons The array of persons.
-     * @param person The replacement person
+     * @param tasks The array of persons.
+     * @param task The replacement person
      * @param index The index of the person to be replaced.
      * @return
      */
-    public static TestPerson[] replaceTaskFromList(TestPerson[] persons, TestPerson person, int index) {
-        persons[index] = person;
-        return persons;
+    public static TestTask[] replaceTaskFromList(TestTask[] tasks, TestTask task, int index) {
+        tasks[index] = task;
+        return tasks;
     }
 
     /**

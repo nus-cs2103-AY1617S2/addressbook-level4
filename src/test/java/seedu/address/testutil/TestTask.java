@@ -3,13 +3,15 @@ package seedu.address.testutil;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Content;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.TaskDateTime;
 
 /**
  * A mutable person object. For testing only.
  */
 public class TestTask implements ReadOnlyTask {
 
-    private Content name;
+    private Content content;
+    private TaskDateTime dateTime;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -20,12 +22,16 @@ public class TestTask implements ReadOnlyTask {
      * Creates a copy of {@code taskToCopy}.
      */
     public TestTask(TestTask taskToCopy) {
-        this.name = taskToCopy.getContent();
+        this.content = taskToCopy.getContent();
         this.tags = taskToCopy.getTags();
     }
 
-    public void setName(Content name) {
-        this.name = name;
+    public void setContent(Content name) {
+        this.content = name;
+    }
+    
+    public void setTaskDateTime(TaskDateTime dateTime) {
+        this.dateTime = dateTime;
     }
 
     public void setTags(UniqueTagList tags) {
@@ -34,7 +40,7 @@ public class TestTask implements ReadOnlyTask {
 
     @Override
     public Content getContent() {
-        return name;
+        return content;
     }
 
     @Override
@@ -52,6 +58,11 @@ public class TestTask implements ReadOnlyTask {
         sb.append("add " + this.getContent().fullContent + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
+    }
+
+    @Override
+    public TaskDateTime getDateTime() {
+        return dateTime;
     }
 }
 
