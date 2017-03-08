@@ -7,7 +7,7 @@ import javafx.collections.transformation.FilteredList;
 import t16b4.yats.commons.core.ComponentManager;
 import t16b4.yats.commons.core.LogsCenter;
 import t16b4.yats.commons.core.UnmodifiableObservableList;
-import t16b4.yats.commons.events.model.AddressBookChangedEvent;
+import t16b4.yats.commons.events.model.TaskManagerChangedEvent;
 import t16b4.yats.commons.util.CollectionUtil;
 import t16b4.yats.commons.util.StringUtil;
 import t16b4.yats.model.item.Task;
@@ -57,7 +57,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
-        raise(new AddressBookChangedEvent(taskManager));
+        raise(new TaskManagerChangedEvent(taskManager));
     }
 
     @Override

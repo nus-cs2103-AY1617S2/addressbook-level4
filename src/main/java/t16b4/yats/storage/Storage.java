@@ -3,7 +3,7 @@ package t16b4.yats.storage;
 import java.io.IOException;
 import java.util.Optional;
 
-import t16b4.yats.commons.events.model.AddressBookChangedEvent;
+import t16b4.yats.commons.events.model.TaskManagerChangedEvent;
 import t16b4.yats.commons.events.storage.DataSavingExceptionEvent;
 import t16b4.yats.commons.exceptions.DataConversionException;
 import t16b4.yats.model.ReadOnlyTaskManager;
@@ -34,5 +34,5 @@ public interface Storage extends TaskManagerStorage, UserPrefsStorage {
      *   Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
-    void handleAddressBookChangedEvent(AddressBookChangedEvent abce);
+    void handleAddressBookChangedEvent(TaskManagerChangedEvent abce);
 }
