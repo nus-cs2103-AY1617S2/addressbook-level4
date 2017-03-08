@@ -25,7 +25,6 @@ public class UserInbox implements ReadOnlyUserInbox {
 
     private final UniqueTaskList tasks;
     private final UniqueTagList tags;
-
     {
         tasks = new UniqueTaskList();
         tags = new UniqueTagList();
