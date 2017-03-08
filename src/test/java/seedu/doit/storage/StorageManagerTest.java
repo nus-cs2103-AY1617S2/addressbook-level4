@@ -17,10 +17,6 @@ import seedu.doit.commons.events.storage.DataSavingExceptionEvent;
 import seedu.doit.model.ReadOnlyTaskManager;
 import seedu.doit.model.TaskManager;
 import seedu.doit.model.UserPrefs;
-import seedu.doit.storage.JsonUserPrefsStorage;
-import seedu.doit.storage.Storage;
-import seedu.doit.storage.StorageManager;
-import seedu.doit.storage.XmlTaskManagerStorage;
 import seedu.doit.testutil.EventsCollector;
 import seedu.doit.testutil.TypicalTestTasks;
 
@@ -64,7 +60,7 @@ public class StorageManagerTest {
          * {@link XmlTaskManagerStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link XmlTaskManagerStorageTest} class.
          */
-        TaskManager original = new TypicalTestTasks().getTypicalAddressBook();
+        TaskManager original = new TypicalTestTasks().getTypicalTaskManager();
         storageManager.saveTaskManager(original);
         ReadOnlyTaskManager retrieved = storageManager.readTaskManager().get();
         assertEquals(original, new TaskManager(retrieved));
@@ -76,7 +72,7 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void handleAddressBookChangedEvent_exceptionThrown_eventRaised() throws IOException {
+    public void handleTaskManagerChangedEvent_exceptionThrown_eventRaised() throws IOException {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
         Storage storage = new StorageManager(new XmlTaskManagerStorageExceptionThrowingStub("dummy"),
                                              new JsonUserPrefsStorage("dummy"));

@@ -58,7 +58,7 @@ public class TypicalTestTasks {
         return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
     }
 
-    public TaskManager getTypicalAddressBook() {
+    public TaskManager getTypicalTaskManager() {
         TaskManager ab = new TaskManager();
         loadAddressBookWithSampleData(ab);
         return ab;

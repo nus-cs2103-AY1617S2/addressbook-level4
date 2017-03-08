@@ -16,7 +16,6 @@ import seedu.doit.commons.util.FileUtil;
 import seedu.doit.model.ReadOnlyTaskManager;
 import seedu.doit.model.TaskManager;
 import seedu.doit.model.task.Task;
-import seedu.doit.storage.XmlTaskManagerStorage;
 import seedu.doit.testutil.TypicalTestTasks;
 
 public class XmlTaskManagerStorageTest {
@@ -64,7 +63,7 @@ public class XmlTaskManagerStorageTest {
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         String filePath = testFolder.getRoot().getPath() + "TempAddressBook.xml";
         TypicalTestTasks td = new TypicalTestTasks();
-        TaskManager original = td.getTypicalAddressBook();
+        TaskManager original = td.getTypicalTaskManager();
         XmlTaskManagerStorage xmlAddressBookStorage = new XmlTaskManagerStorage(filePath);
 
         //Save in new file and read back
