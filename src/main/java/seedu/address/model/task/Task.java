@@ -59,6 +59,11 @@ public class Task implements ReadOnlyTask {
         this(source.getName(), source.getDeadline(), source.getID(), source.getDescription());
     }
 
+    public Task(Name name2, IdentificationNumber identificationNumber, Description description2, Deadline deadline2,
+        UniqueTagList uniqueTagList) {
+        // TODO Auto-generated constructor stub
+    }
+
     /**
      * Getters and setters
      */
