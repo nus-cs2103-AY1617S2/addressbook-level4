@@ -18,7 +18,7 @@ public class Description {
     public Description(String description) {
         this.value = description;
     }
-    
+
 
     @Override
     public String toString() {

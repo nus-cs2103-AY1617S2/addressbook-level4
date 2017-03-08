@@ -15,6 +15,7 @@ import t16b4.yats.model.item.Event;
 import t16b4.yats.model.item.ReadOnlyEvent;
 import t16b4.yats.model.item.ReadOnlyItem;
 import t16b4.yats.model.item.UniqueItemList;
+import t16b4.yats.model.item.UniqueItemList.DuplicatePersonException;
 import t16b4.yats.model.item.UniqueItemList.PersonNotFoundException;
 
 /**
@@ -155,5 +156,11 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
+
+	@Override
+	public void updatePerson(int filteredPersonListIndex, Event editedPerson) throws DuplicatePersonException {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

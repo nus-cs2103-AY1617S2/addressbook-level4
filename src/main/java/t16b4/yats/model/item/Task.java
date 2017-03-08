@@ -101,7 +101,7 @@ public class Task implements ReadOnlyItem {
         this.setDescription(replacement.getDescription());
         this.setTags(replacement.getTags());
     }
-    
+
 
 	@Override
     public boolean equals(Object other) {

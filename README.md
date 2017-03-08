@@ -14,8 +14,8 @@ Coadacy test missing
     * A simple GUI that includes CLI and a built-in calendar.
     * More test cases, including automated GUI testing.
     * Support for *Build Automation* using Gradle and for *Continuous Integration* using Travis CI.
-
-
+    
+    
 #### Site Map
 * [User Guide](docs/UserGuide.md)
 * [Developer Guide](docs/DeveloperGuide.md)

@@ -37,7 +37,7 @@ public class Event implements ReadOnlyEvent {
     }
 
     public Event() {
-        
+
     }
 
     public void setTitle(Title name) {
@@ -67,7 +67,7 @@ public class Event implements ReadOnlyEvent {
     public Timing getStartTime() {
         return startTime;
     }
-    
+
     public void setEndTime(Timing timing) {
         assert endTiming != null;
         this.endTiming = timing;
@@ -85,12 +85,12 @@ public class Event implements ReadOnlyEvent {
     public Description getDescription() {
         return description;
     }
-    
+
     public void setLocation(Location location){
         assert location != null;
-        this.location = location;   
+        this.location = location;
     }
-    
+
     public Location getLocation() {
         return location;
     }

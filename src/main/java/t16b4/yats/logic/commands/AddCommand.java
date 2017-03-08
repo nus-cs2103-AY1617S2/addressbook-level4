@@ -36,8 +36,8 @@ public class AddCommand extends Command {
 
     /**
      * Creates an AddCommand using raw values.
-     * @param string2 
-     * @param string 
+     * @param string2
+     * @param string
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */

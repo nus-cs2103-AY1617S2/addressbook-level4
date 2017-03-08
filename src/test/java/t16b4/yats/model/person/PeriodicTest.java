@@ -17,8 +17,8 @@ public class PeriodicTest {
         assertFalse(Periodic.isValidPeriod("peter*")); // contains non-alphanumeric characters
 
         // valid period
-        assertTrue(Periodic.isValidPeriod(" daily ")); 
-        assertTrue(Periodic.isValidPeriod(" monthly ")); 
+        assertTrue(Periodic.isValidPeriod(" daily "));
+        assertTrue(Periodic.isValidPeriod(" monthly "));
         assertTrue(Periodic.isValidPeriod(" weekly "));
 
     }

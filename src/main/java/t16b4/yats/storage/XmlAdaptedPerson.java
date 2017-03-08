@@ -37,7 +37,7 @@ public class XmlAdaptedPerson {
     private String endTime;
     @XmlElement(required = true)
     private String description;
-    
+
 
     /**
      * The returned TagList is a deep copy of the internal TagList,

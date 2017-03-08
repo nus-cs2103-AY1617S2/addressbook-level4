@@ -15,7 +15,7 @@ public class DescriptionTest {
         assertTrue(Description.isValidDescription("")); // empty string
         assertTrue(Description.isValidDescription(" ")); // spaces only
         assertTrue(Description.isValidDescription("I have a task that is less than 1000 characters"));
-        
+
         // invalid descriptions
         assertFalse(Description.isValidDescription(new String(new char[101]).replace("\0", "overloaded")));
     }
