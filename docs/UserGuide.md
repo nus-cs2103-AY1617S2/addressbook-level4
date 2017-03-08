@@ -96,7 +96,7 @@ Format: `edit INDEX [NAME] s/START_DATE d/DUE_DATE [t/TAG]...`
 
 Examples:
 
-* `edit 1 s/03-03-17`<br>
+* `edit 1 s/03-03-17` <br>
   Edits the start date of task 1 as 03-03-17.
 
 * `edit 2 Do Algorithm Assignment t/`<br>
@@ -206,27 +206,34 @@ Format: `history`,
 ## 4. Command Summary
 
 * **Add**  `add TASK_NAME s/START_DATE d/DUE_DATE [t/TAG]...` <br>
-  e.g. `add Study for midterm s/02-03-17 d/04-03-17 t/study t/midterm`
+   e.g. `add Study for midterm s/02-03-17 d/04-03-17 t/study t/midterm`
 
 * **Clear** : `clear`
 
 * **Delete** : `delete INDEX` <br>
    e.g. `delete 3`
 
+* **Edit** : `edit INDEX` <br>
+   e.g. `edit 1 s/03-03-17`
+
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
-  e.g. `find assignment`
-	     `find t/tutorial`
+   e.g. `find assignment`
+	      `find t/tutorial`
 
 * **List** : `list` <br>
-  e.g. `list`
-       `list t/ALL`
+   e.g. `list`
+        `list t/ALL`
 
 * **Help** : `help` <br>
 
 * **Complete** : `complete INDEX` <br>
-  e.g. `complete 2`
+   e.g. `complete 2`
 
 * **Prioritze** : `prioritize INDEX PRIORITY_LEVEL` <br>
-  e.g. `priority 2 5`
+   e.g. `priority 2 5`
 
+* **Undo** : `undo` <br>
 
+* **Command History** : `history` <br>
+
+* **Exit ** : `exit` <br>
