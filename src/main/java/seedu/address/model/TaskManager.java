@@ -135,8 +135,8 @@ public class TaskManager implements ReadOnlyTaskManager {
      *  - points to a Tag object in the master list
      *  @see #syncMasterTagListWith(Task)
      */
-    private void syncMasterTagListWith(UniqueTaskList persons) {
-        persons.forEach(this::syncMasterTagListWith);
+    private void syncMasterTagListWith(UniqueTaskList tasks) {
+        tasks.forEach(this::syncMasterTagListWith);
     }
 
     public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
