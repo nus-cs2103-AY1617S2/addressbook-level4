@@ -7,7 +7,7 @@ import seedu.ezdo.commons.exceptions.IllegalValueException;
 /**
  * Represents the start date of a task.
  */
-public class StartDate extends TaskDate{
+public class StartDate extends TaskDate {
 
     public static final String MESSAGE_STARTDATE_CONSTRAINTS =
             "Start dates should be in the format DD/MM/YYYY, and it should not be blank";

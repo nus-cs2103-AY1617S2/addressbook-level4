@@ -22,8 +22,8 @@ public abstract class TaskDate {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DueDate // instanceof handles nulls
-                && this.value.equals(((DueDate) other).value)); // state check
+                || (other instanceof TaskDate // instanceof handles nulls
+                && this.value.equals(((TaskDate) other).value)); // state check
     }
 
     @Override
