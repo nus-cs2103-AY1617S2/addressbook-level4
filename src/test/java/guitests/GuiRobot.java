@@ -11,9 +11,9 @@ import seedu.address.testutil.TestUtil;
  */
 public class GuiRobot extends FxRobot {
 
-  @Override
-  public GuiRobot push(KeyCodeCombination keyCodeCombination) {
-    return (GuiRobot) super.push(TestUtil.scrub(keyCodeCombination));
-  }
+    @Override
+    public GuiRobot push(KeyCodeCombination keyCodeCombination) {
+        return (GuiRobot) super.push(TestUtil.scrub(keyCodeCombination));
+    }
 
 }

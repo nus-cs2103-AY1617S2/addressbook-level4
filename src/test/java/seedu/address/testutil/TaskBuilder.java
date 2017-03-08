@@ -11,39 +11,39 @@ import seedu.address.model.task.Date;
  */
 public class TaskBuilder {
 
-  private TestTask task;
+    private TestTask task;
 
-  public TaskBuilder() {
-    this.task = new TestTask();
-  }
-
-  /**
-   * Initializes the TaskBuilder with the data of {@code taskToCopy}.
-   */
-  public TaskBuilder(TestTask taskToCopy) {
-    this.task = new TestTask(taskToCopy);
-  }
-
-  public TaskBuilder withName(String name) throws IllegalValueException {
-    this.task.setName(new Name(name));
-    return this;
-  }
-
-  public TaskBuilder withTags(String... tags) throws IllegalValueException {
-    task.setTags(new UniqueTagList());
-    for (String tag : tags) {
-      task.getTags().add(new Tag(tag));
+    public TaskBuilder() {
+        this.task = new TestTask();
     }
-    return this;
-  }
 
-  public TaskBuilder withDate(String date) throws IllegalValueException {
-    this.task.setDate(new Date(date));
-    return this;
-  }
+    /**
+     * Initializes the TaskBuilder with the data of {@code taskToCopy}.
+     */
+    public TaskBuilder(TestTask taskToCopy) {
+        this.task = new TestTask(taskToCopy);
+    }
 
-  public TestTask build() {
-    return this.task;
-  }
+    public TaskBuilder withName(String name) throws IllegalValueException {
+        this.task.setName(new Name(name));
+        return this;
+    }
+
+    public TaskBuilder withTags(String... tags) throws IllegalValueException {
+        task.setTags(new UniqueTagList());
+        for (String tag : tags) {
+            task.getTags().add(new Tag(tag));
+        }
+        return this;
+    }
+
+    public TaskBuilder withDate(String date) throws IllegalValueException {
+        this.task.setDate(new Date(date));
+        return this;
+    }
+
+    public TestTask build() {
+        return this.task;
+    }
 
 }

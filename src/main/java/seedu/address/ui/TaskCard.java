@@ -9,28 +9,28 @@ import seedu.address.model.task.ReadOnlyTask;
 
 public class TaskCard extends UiPart<Region> {
 
-  private static final String FXML = "TaskListCard.fxml";
+    private static final String FXML = "TaskListCard.fxml";
 
-  @FXML
-  private HBox cardPane;
-  @FXML
-  private Label name;
-  @FXML
-  private Label id;
-  @FXML
-  private Label date;
-  @FXML
-  private FlowPane tags;
+    @FXML
+    private HBox cardPane;
+    @FXML
+    private Label name;
+    @FXML
+    private Label id;
+    @FXML
+    private Label date;
+    @FXML
+    private FlowPane tags;
 
-  public TaskCard(ReadOnlyTask task, int displayedIndex) {
-    super(FXML);
-    name.setText(task.getName().fullName);
-    id.setText(displayedIndex + ". ");
-    date.setText(task.getDate().value);
-    initTags(task);
-  }
+    public TaskCard(ReadOnlyTask task, int displayedIndex) {
+        super(FXML);
+        name.setText(task.getName().fullName);
+        id.setText(displayedIndex + ". ");
+        date.setText(task.getDate().value);
+        initTags(task);
+    }
 
-  private void initTags(ReadOnlyTask task) {
-    task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-  }
+    private void initTags(ReadOnlyTask task) {
+        task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
 }

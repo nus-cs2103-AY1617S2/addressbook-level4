@@ -10,60 +10,60 @@ import seedu.address.model.task.ReadOnlyTask;
  */
 public class TestTask implements ReadOnlyTask {
 
-  private Name name;
-  private Date date;
-  private UniqueTagList tags;
+    private Name name;
+    private Date date;
+    private UniqueTagList tags;
 
-  public TestTask() {
-    tags = new UniqueTagList();
-  }
+    public TestTask() {
+        tags = new UniqueTagList();
+    }
 
-  /**
-   * Creates a copy of {@code taskToCopy}.
-   */
-  public TestTask(TestTask taskToCopy) {
-    this.name = taskToCopy.getName();
-    this.date = taskToCopy.getDate();
-    this.tags = taskToCopy.getTags();
-  }
+    /**
+     * Creates a copy of {@code taskToCopy}.
+     */
+    public TestTask(TestTask taskToCopy) {
+        this.name = taskToCopy.getName();
+        this.date = taskToCopy.getDate();
+        this.tags = taskToCopy.getTags();
+    }
 
-  public void setName(Name name) {
-    this.name = name;
-  }
+    public void setName(Name name) {
+        this.name = name;
+    }
 
-  public void setDate(Date date) {
-    this.date = date;
-  }
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
-  public void setTags(UniqueTagList tags) {
-    this.tags = tags;
-  }
+    public void setTags(UniqueTagList tags) {
+        this.tags = tags;
+    }
 
-  @Override
-  public Name getName() {
-    return name;
-  }
+    @Override
+    public Name getName() {
+        return name;
+    }
 
-  @Override
-  public Date getDate() {
-    return date;
-  }
+    @Override
+    public Date getDate() {
+        return date;
+    }
 
-  @Override
-  public UniqueTagList getTags() {
-    return tags;
-  }
+    @Override
+    public UniqueTagList getTags() {
+        return tags;
+    }
 
-  @Override
-  public String toString() {
-    return getAsText();
-  }
+    @Override
+    public String toString() {
+        return getAsText();
+    }
 
-  public String getAddCommand() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("add " + this.getName().fullName + " ");
-    sb.append("d/" + this.getDate().value + " ");
-    this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
-    return sb.toString();
-  }
+    public String getAddCommand() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("add " + this.getName().fullName + " ");
+        sb.append("d/" + this.getDate().value + " ");
+        this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
+        return sb.toString();
+    }
 }
