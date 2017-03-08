@@ -95,8 +95,8 @@ public class EditCommand extends Command {
     public static class EditTaskDescriptor {
         private Optional<Name> name = Optional.empty();
         private Optional<Priority> priority = Optional.empty();
-        private Optional<StartDate> startDate = Optional.empty();
-        private Optional<DueDate> dueDate = Optional.empty();
+        private Optional<TaskDate> startDate = Optional.empty();
+        private Optional<TaskDate> dueDate = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditTaskDescriptor() {}
@@ -135,21 +135,21 @@ public class EditCommand extends Command {
             return priority;
         }
 
-        public void setStartDate(Optional<StartDate> startDate) {
+        public void setStartDate(Optional<TaskDate> startDate) {
             assert startDate != null;
             this.startDate = startDate;
         }
 
-        public Optional<StartDate> getStartDate() {
+        public Optional<TaskDate> getStartDate() {
             return startDate;
         }
 
-        public void setDueDate(Optional<DueDate> dueDate) {
+        public void setDueDate(Optional<TaskDate> dueDate) {
             assert dueDate != null;
             this.dueDate = dueDate;
         }
 
-        public Optional<DueDate> getDueDate() {
+        public Optional<TaskDate> getDueDate() {
             return dueDate;
         }
 
