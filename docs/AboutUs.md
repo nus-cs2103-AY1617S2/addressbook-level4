@@ -9,6 +9,7 @@ We are a team based in the [School of Computing, National University of Singapor
 Role: Developer<br>
 Responsibilities: Documentation and Testing
 Component: Logic
+
 -----
 
 #### [Tan Wei](https://github.com/tanwei0319)
@@ -16,6 +17,7 @@ Component: Logic
 Role: Developer<br>
 Responsibilities: Code Quality, Deliverables and Deadlines
 Component: User Interface
+
 -----
 
 #### [Xu Ruolan](https://github.com/fiomolv)
@@ -23,6 +25,7 @@ Component: User Interface
 Role: Developer<br>
 Responsibilities: Code Quality and Integration
 Component: Model
+
 -----
 
 #### [Haya Alsharef](https://github.com/hayaz3)
@@ -30,4 +33,5 @@ Component: Model
 Role: Developer<br>
 Responsibilities: Team Lead, Scheduling and Tracking
 Component: Storage
+
 -----
