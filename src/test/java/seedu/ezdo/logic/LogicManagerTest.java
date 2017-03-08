@@ -52,6 +52,7 @@ import seedu.ezdo.model.todo.Priority;
 import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.model.todo.StartDate;
 import seedu.ezdo.model.todo.Task;
+import seedu.ezdo.model.todo.TaskDate;
 import seedu.ezdo.storage.StorageManager;
 
 
@@ -425,8 +426,8 @@ public class LogicManagerTest {
         private Task adam() throws Exception {
             Name name = new Name("Adam Brown");
             Priority privatePriority = new Priority("1");
-            StartDate privateStartDate = new StartDate("3/3/2017");
-            DueDate privateDueDate = new DueDate("16/06/2016");
+            TaskDate privateStartDate = new StartDate("3/3/2017");
+            TaskDate privateDueDate = new DueDate("16/06/2016");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
