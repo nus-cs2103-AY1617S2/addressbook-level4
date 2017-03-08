@@ -552,11 +552,11 @@ Use case ends.
 **Extensions**
 
 1a. The alias keyword contains only 1 character
-> 1a1. System shows a error message 
+> 1a1. System shows a error message
 > Use case resumes at step 1 <br>
 
 1b. The alias keyword has already been associated with other keywords
-> 1b1. System shows a error message and the alias keyword's original associated keyword 
+> 1b1. System shows a error message and the alias keyword's original associated keyword
 > Use case resumes at step 1 <br>
 
 ### Use case: Unalias keyword
@@ -570,7 +570,7 @@ Use case ends.
 **Extensions**
 
 1a. The shorten keyword could not be found in System database
-> 1a1. System shows a 'not found' error message 
+> 1a1. System shows a 'not found' error message
 > Use case resumes at step 1 <br>
 
 ### Use case: Undo previous command
