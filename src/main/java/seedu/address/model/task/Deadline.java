@@ -31,8 +31,9 @@ public class Deadline {
     };
 
     public static final String[] TIME_VALIDATION_REGEX = {
-        "HH:mm",
-        "hh:mm aa"
+        "KK:mm aaa",
+        "hh:mm aaa",
+        "HH:mm"
     };
 
     // Separators used to combine date and time
@@ -46,14 +47,14 @@ public class Deadline {
      * Day, Month Date Year at Hour:Minute
      * Example: Tuesday, April 1 2013 at 23:59
      */
-    public static final String READABLE_DATETIME_OUTPUT_FORMAT = "%s, %s %s %s %s:%s";
+    public static final String READABLE_DATETIME_OUTPUT_FORMAT = "EEE, MMM dd yyyy, hh:mm aaa";
 
     /**
      * Output format used to display deadline with only date.
      * Day, Month Date Year
      * Example: Tuesday, April 1 2013
      */
-    public static final String READABLE_DATEONLY_OUTPUT_FORMAT = "%s, %s %s %s";
+    public static final String READABLE_DATEONLY_OUTPUT_FORMAT = "EEE, MMM dd yyyy";
 
     private Date date;
     private DEADLINE_TYPES type;
@@ -168,20 +169,10 @@ public class Deadline {
     public String toString() {
         switch (type) {
             case DATETIME:
-                return String.format(READABLE_DATETIME_OUTPUT_FORMAT,
-                                        date.getDay(),
-                                        date.getMonth(),
-                                        date.getDate(),
-                                        date.getYear(),
-                                        date.getHours(),
-                                        date.getMinutes());
+                return new SimpleDateFormat(READABLE_DATETIME_OUTPUT_FORMAT).format(date);
 
             case DATEONLY:
-                return String.format(READABLE_DATEONLY_OUTPUT_FORMAT,
-                                        date.getDay(),
-                                        date.getMonth(),
-                                        date.getDate(),
-                                        date.getYear());
+                return new SimpleDateFormat(READABLE_DATEONLY_OUTPUT_FORMAT).format(date);
 
             default:
                 return date.toString();
