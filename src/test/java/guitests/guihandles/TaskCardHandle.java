@@ -81,7 +81,7 @@ public class TaskCardHandle extends GuiHandle {
         List<String> taskTags = getTags(task.getTags());
         List<String> cardTags = getTags();
         boolean equalTags = taskTags.containsAll(cardTags) && cardTags.containsAll(taskTags);
-        
+
         return getFullName().equals(task.getName().fullName)
                 && getPriority().equals(task.getPriority().value)
                 && getStartDate().equals(task.getStartDate().value)
