@@ -16,7 +16,6 @@ import org.junit.rules.TemporaryFolder;
 import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.commons.util.FileUtil;
 import seedu.task.model.UserPrefs;
-import seedu.task.storage.JsonUserPrefsStorage;
 
 public class JsonUserPrefsStorageTest {
 
@@ -57,7 +56,7 @@ public class JsonUserPrefsStorageTest {
     private String addToTestDataPathIfNotNull(String userPrefsFileInTestDataFolder) {
         return userPrefsFileInTestDataFolder != null
                 ? TEST_DATA_FOLDER + userPrefsFileInTestDataFolder
-                : null;
+                        : null;
     }
 
     @Test
@@ -96,8 +95,7 @@ public class JsonUserPrefsStorageTest {
     }
 
     private void saveUserPrefs(UserPrefs userPrefs, String prefsFileInTestDataFolder) throws IOException {
-        new JsonUserPrefsStorage(addToTestDataPathIfNotNull(prefsFileInTestDataFolder))
-                .saveUserPrefs(userPrefs);
+        new JsonUserPrefsStorage(addToTestDataPathIfNotNull(prefsFileInTestDataFolder)).saveUserPrefs(userPrefs);
     }
 
     @Test

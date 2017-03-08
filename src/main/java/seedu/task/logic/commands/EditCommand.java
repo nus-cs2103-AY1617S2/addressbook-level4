@@ -10,9 +10,9 @@ import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.CompletionStatus;
 import seedu.task.model.task.EndTime;
 import seedu.task.model.task.Name;
-import seedu.task.model.task.Task;
-import seedu.task.model.task.StartTime;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.StartTime;
+import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
 
 /**
@@ -25,7 +25,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [NAME] [s/STARTDATE] [e/ENDDATE] [c/COMPLETIONSTATUS]  [t/TAG]...\n"
+            + "Parameters: INDEX (must be a positive integer) [NAME] [s/STARTDATE] [e/ENDDATE]"
+            + " [c/COMPLETIONSTATUS]  [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 e/090617 c/Done";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
@@ -74,13 +75,14 @@ public class EditCommand extends Command {
      * edited with {@code editTaskDescriptor}.
      */
     private static Task createEditedTask(ReadOnlyTask taskToEdit,
-                                             EditTaskDescriptor editTaskDescriptor) {
+            EditTaskDescriptor editTaskDescriptor) {
         assert taskToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
         StartTime updatedStartTime = editTaskDescriptor.getStartTime().orElseGet(taskToEdit::getStartTime);
         EndTime updatedEndTime = editTaskDescriptor.getEndTime().orElseGet(taskToEdit::getEndTime);
-        CompletionStatus updatedCompletionStatus = editTaskDescriptor.getCompletionStatus().orElseGet(taskToEdit::getCompletionStatus);
+        CompletionStatus updatedCompletionStatus =
+                editTaskDescriptor.getCompletionStatus().orElseGet(taskToEdit::getCompletionStatus);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
         return new Task(updatedName, updatedStartTime, updatedEndTime, updatedCompletionStatus, updatedTags);
@@ -111,7 +113,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.startTime, this.endTime, this.completionStatus, this.tags);
+            return CollectionUtil.isAnyPresent(this.name,
+                    this.startTime, this.endTime, this.completionStatus, this.tags);
         }
 
         public void setName(Optional<Name> name) {

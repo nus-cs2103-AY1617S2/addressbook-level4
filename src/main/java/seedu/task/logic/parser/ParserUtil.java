@@ -56,10 +56,10 @@ public class ParserUtil {
     }
 
     /**
-    * Splits a preamble string into ordered fields.
-    * @return A list of size {@code numFields} where the ith element is the ith field value if specified in
-    *         the input, {@code Optional.empty()} otherwise.
-    */
+     * Splits a preamble string into ordered fields.
+     * @return A list of size {@code numFields} where the ith element is the ith field value if specified in
+     *         the input, {@code Optional.empty()} otherwise.
+     */
     public static List<Optional<String>> splitPreamble(String preamble, int numFields) {
         return Arrays.stream(Arrays.copyOf(preamble.split("\\s+", numFields), numFields))
                 .map(Optional::ofNullable)
@@ -83,11 +83,14 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> completionStatus} into an {@code Optional<CompletionStatus>} if {@code completionStatus} is present.
+     * Parses a {@code Optional<String> completionStatus} into an
+     * {@code Optional<CompletionStatus>} if {@code completionStatus} is present.
      */
-    public static Optional<CompletionStatus> parseCompletionStatus(Optional<String> completionStatus) throws IllegalValueException {
+    public static Optional<CompletionStatus> parseCompletionStatus(Optional<String> completionStatus)
+            throws IllegalValueException {
         assert completionStatus != null;
-        return completionStatus.isPresent() ? Optional.of(new CompletionStatus(completionStatus.get())) : Optional.empty();
+        return completionStatus.isPresent() ?
+                Optional.of(new CompletionStatus(completionStatus.get())) : Optional.empty();
     }
 
     /**

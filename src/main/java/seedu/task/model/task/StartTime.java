@@ -8,7 +8,8 @@ import seedu.task.commons.exceptions.IllegalValueException;
  */
 public class StartTime {
 
-    public static final String MESSAGE_TIME_CONSTRAINTS = "Task Start Time should be given in ddmmyy tttt(24hour format)";
+    public static final String MESSAGE_TIME_CONSTRAINTS =
+            "Task Start Time should be given in ddmmyy tttt(24hour format)";
     public static final String TIME_VALIDATION_REGEX = "\\d{6} \\d{4}";
     public static final String EMPTY_TIME_VALIDATION_REGEX = "";
 
@@ -44,7 +45,7 @@ public class StartTime {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof StartTime // instanceof handles nulls
-                && this.value.equals(((StartTime) other).value)); // state check
+                        && this.value.equals(((StartTime) other).value)); // state check
     }
 
     @Override

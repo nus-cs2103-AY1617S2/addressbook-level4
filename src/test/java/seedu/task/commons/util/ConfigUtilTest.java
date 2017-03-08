@@ -15,8 +15,6 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.task.commons.core.Config;
 import seedu.task.commons.exceptions.DataConversionException;
-import seedu.task.commons.util.ConfigUtil;
-import seedu.task.commons.util.FileUtil;
 
 public class ConfigUtilTest {
 
@@ -126,8 +124,8 @@ public class ConfigUtilTest {
 
     private String addToTestDataPathIfNotNull(String configFileInTestDataFolder) {
         return configFileInTestDataFolder != null
-                                  ? TEST_DATA_FOLDER + configFileInTestDataFolder
-                                  : null;
+                ? TEST_DATA_FOLDER + configFileInTestDataFolder
+                        : null;
     }
 
 

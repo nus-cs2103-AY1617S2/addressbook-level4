@@ -14,8 +14,8 @@ import java.util.Optional;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.EditCommand;
-import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.logic.commands.EditCommand.EditTaskDescriptor;
+import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.model.tag.UniqueTagList;
 
 /**
@@ -44,7 +44,8 @@ public class EditCommandParser {
             editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
             editTaskDescriptor.setStartTime(ParserUtil.parseStartTime(argsTokenizer.getValue(PREFIX_STARTDATE)));
             editTaskDescriptor.setEndTime(ParserUtil.parseEndTime(argsTokenizer.getValue(PREFIX_ENDDATE)));
-            editTaskDescriptor.setCompletionStatus(ParserUtil.parseCompletionStatus(argsTokenizer.getValue(PREFIX_COMPLETIONSTATUS)));
+            editTaskDescriptor.setCompletionStatus(ParserUtil.parseCompletionStatus
+                    (argsTokenizer.getValue(PREFIX_COMPLETIONSTATUS)));
             editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());

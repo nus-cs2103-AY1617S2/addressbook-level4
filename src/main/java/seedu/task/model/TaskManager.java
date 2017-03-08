@@ -12,8 +12,8 @@ import javafx.collections.ObservableList;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
-import seedu.task.model.task.Task;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 
@@ -48,7 +48,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         resetData(toBeCopied);
     }
 
-//// list overwrite operations
+    //// list overwrite operations
 
     public void setTasks(List<? extends ReadOnlyTask> tasks)
             throws UniqueTaskList.DuplicateTaskException {
@@ -74,7 +74,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         syncMasterTagListWith(tasks);
     }
 
-//// task-level operations
+    //// task-level operations
 
     /**
      * Adds a task to the task manager.
@@ -147,13 +147,13 @@ public class TaskManager implements ReadOnlyTaskManager {
         }
     }
 
-//// tag-level operations
+    //// tag-level operations
 
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
         tags.add(t);
     }
 
-//// util methods
+    //// util methods
 
     @Override
     public String toString() {
@@ -175,8 +175,8 @@ public class TaskManager implements ReadOnlyTaskManager {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TaskManager // instanceof handles nulls
-                && this.tasks.equals(((TaskManager) other).tasks)
-                && this.tags.equalsOrderInsensitive(((TaskManager) other).tags));
+                        && this.tasks.equals(((TaskManager) other).tasks)
+                        && this.tags.equalsOrderInsensitive(((TaskManager) other).tags));
     }
 
     @Override

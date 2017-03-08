@@ -15,8 +15,8 @@ import seedu.task.commons.core.Config;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.events.storage.DataSavingExceptionEvent;
 import seedu.task.commons.events.ui.JumpToListRequestEvent;
-import seedu.task.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.task.commons.events.ui.ShowHelpRequestEvent;
+import seedu.task.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.task.commons.util.StringUtil;
 import seedu.task.logic.Logic;
 import seedu.task.model.UserPrefs;
@@ -81,7 +81,7 @@ public class UiManager extends ComponentManager implements Ui {
     }
 
     private static void showAlertDialogAndWait(Stage owner, AlertType type, String title, String headerText,
-                                               String contentText) {
+            String contentText) {
         final Alert alert = new Alert(type);
         alert.getDialogPane().getStylesheets().add("view/DarkTheme.css");
         alert.initOwner(owner);

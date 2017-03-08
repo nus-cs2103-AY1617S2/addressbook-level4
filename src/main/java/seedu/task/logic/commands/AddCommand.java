@@ -10,8 +10,8 @@ import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.CompletionStatus;
 import seedu.task.model.task.EndTime;
 import seedu.task.model.task.Name;
-import seedu.task.model.task.Task;
 import seedu.task.model.task.StartTime;
+import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
 
 /**
@@ -48,7 +48,7 @@ public class AddCommand extends Command {
                 new EndTime(endDate),
                 new CompletionStatus(completionStatus),
                 new UniqueTagList(tagSet)
-        );
+                );
     }
 
     @Override

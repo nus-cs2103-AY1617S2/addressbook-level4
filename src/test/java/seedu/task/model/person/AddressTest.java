@@ -18,6 +18,7 @@ public class AddressTest {
         // valid addresses
         assertTrue(CompletionStatus.isValidCompletionStatus("Blk 456, Den Road, #01-355"));
         assertTrue(CompletionStatus.isValidCompletionStatus("-")); // one character
-        assertTrue(CompletionStatus.isValidCompletionStatus("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
+        assertTrue(CompletionStatus.isValidCompletionStatus("Leng Inc; 1234 Market St; "
+                + "San Francisco CA 2349879; USA")); // long address
     }
 }

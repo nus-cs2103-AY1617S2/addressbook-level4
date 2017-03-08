@@ -21,7 +21,8 @@ public class Task implements ReadOnlyTask {
     /**
      * Only Name must be present and not null.
      */
-    public Task(Name name, StartTime startTime, EndTime endTime, CompletionStatus completionStatus, UniqueTagList tags) {
+    public Task(Name name, StartTime startTime, EndTime endTime,
+            CompletionStatus completionStatus, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name);
         this.name = name;
         this.startTime = startTime;
@@ -34,7 +35,8 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getStartTime(), source.getEndTime(), source.getCompletionStatus(), source.getTags());
+        this(source.getName(), source.getStartTime(), source.getEndTime(),
+                source.getCompletionStatus(), source.getTags());
     }
 
     public void setName(Name name) {
@@ -106,7 +108,7 @@ public class Task implements ReadOnlyTask {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ReadOnlyTask // instanceof handles nulls
-                && this.isSameStateAs((ReadOnlyTask) other));
+                        && this.isSameStateAs((ReadOnlyTask) other));
     }
 
     @Override
