@@ -12,6 +12,9 @@ By : `Team ToLuist`  &nbsp;&nbsp;&nbsp;&nbsp;
 
 1. Double-click the file to start the app. The GUI should appear in a few seconds.
 
+    <img src="images/Ui.png" width="600"><br>
+    **Figure 1.** Initial launch screen of ToLuist
+
 2. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 3. Some example commands you can try:
@@ -66,8 +69,6 @@ Format: `update INDEX [NAME] [startdate/STARTDATE] [enddate/ENDDATE] [recurring/
 > * Updates the task at the specified `INDEX`. <br>
     The index refers to the index number shown in the last task listing.<br>
     The index **must be a positive integer** 1, 2, 3, ...
-> * If no optional fields are added, task will be set to completed if not completed.
-> * Otherwise, if task is completed, the task will be set to not completed.
 > * Existing values will be updated to the input values.
 > * When editing tags, the existing tags of the task will be set to contain the new tags; the old tags will be removed.
 

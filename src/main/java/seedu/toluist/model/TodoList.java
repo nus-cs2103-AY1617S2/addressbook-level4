@@ -1,7 +1,10 @@
 package seedu.toluist.model;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import seedu.toluist.commons.util.CollectionUtil;
 import seedu.toluist.storage.JsonStorage;
@@ -21,6 +24,7 @@ public class TodoList {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TodoList // instanceof handles nulls
+                // As long as the all the tasks are the same, treat other as the same todolist. Order does not matter
                 && CollectionUtil.elementsAreSimilar(allTasks, ((TodoList) other).getTasks()));
     }
 
@@ -71,5 +75,15 @@ public class TodoList {
         if (index >= 0 && index < allTasks.size()) {
             allTasks.get(index).description = description;
         }
+    }
+
+    /**
+     * Returns list of tasks based on predicate
+     * @param predicate a predicate
+     * @return a list of task
+     */
+    public ArrayList<Task> getFilterTasks(Predicate<Task> predicate) {
+        List<Task> taskList = getTasks().stream().filter(predicate).collect(Collectors.toList());
+        return new ArrayList<>(taskList);
     }
 }

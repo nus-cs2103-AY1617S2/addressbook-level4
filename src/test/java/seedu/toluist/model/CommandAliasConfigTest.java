@@ -1,4 +1,4 @@
-package seedu.toluist.testutil;
+package seedu.toluist.model;
 
 import static org.junit.Assert.assertEquals;
 
@@ -9,8 +9,6 @@ import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import seedu.toluist.model.CommandAliasConfig;
 
 /**
  * Tests for CommandAliasConfig

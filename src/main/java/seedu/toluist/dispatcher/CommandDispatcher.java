@@ -18,6 +18,7 @@ import seedu.toluist.commons.events.ui.NewResultAvailableEvent;
 import seedu.toluist.controller.AliasController;
 import seedu.toluist.controller.Controller;
 import seedu.toluist.controller.ExitController;
+import seedu.toluist.controller.FindController;
 import seedu.toluist.controller.ListController;
 import seedu.toluist.controller.RedoController;
 import seedu.toluist.controller.StoreController;
@@ -67,6 +68,7 @@ public class CommandDispatcher extends Dispatcher {
                 AliasController.class,
                 UnaliasController.class,
                 ViewAliasController.class,
+                FindController.class,
                 ListController.class
         ));
     }
