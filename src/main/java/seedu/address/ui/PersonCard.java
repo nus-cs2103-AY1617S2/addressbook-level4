@@ -20,7 +20,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label priority;
     @FXML
-    private Label address;
+    private Label note;
     @FXML
     private Label email;
     @FXML
@@ -31,7 +31,7 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         id.setText(displayedIndex + ". ");
         priority.setText(person.getPriority().value);
-        address.setText(person.getNote().value);
+        note.setText(person.getNote().value);
         email.setText(person.getStatus().value);
         initTags(person);
     }
