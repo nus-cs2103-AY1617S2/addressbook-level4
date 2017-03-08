@@ -5,7 +5,7 @@ import seedu.ezdo.commons.exceptions.IllegalValueException;
 
 
 /**
- * Represents the start date of a todo.
+ * Represents the start date of a task.
  */
 public class StartDate {
 
