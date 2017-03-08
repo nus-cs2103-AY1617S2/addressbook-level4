@@ -33,7 +33,7 @@ public interface Model {
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code filteredPersonListIndex} < 0 or >= the size of the filtered list.
      */
-    void updatePerson(int filteredPersonListIndex, Event editedPerson)
+    void updatePerson(int filteredPersonListIndex, ReadOnlyEvent editedPerson)
             throws UniqueItemList.DuplicatePersonException;
 
     /** Returns the filtered person list as an {@code UnmodifiableObservableList<ReadOnlyPerson>} */
