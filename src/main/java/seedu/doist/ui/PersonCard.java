@@ -26,14 +26,14 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    public PersonCard(ReadOnlyTask person, int displayedIndex) {
+    public PersonCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
-        name.setText(person.getDescription().desc);
+        name.setText(task.getDescription().desc);
         id.setText(displayedIndex + ". ");
-        phone.setText(" no more phone");
-        address.setText(" n o m ore address");
-        email.setText(" no more email");
-        initTags(person);
+        phone.setText(task.getPriority().toString());
+        address.setText(" no more start time");
+        email.setText(" no more end time");
+        initTags(task);
     }
 
     private void initTags(ReadOnlyTask person) {
