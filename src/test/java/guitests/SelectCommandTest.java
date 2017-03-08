@@ -48,7 +48,7 @@ public class SelectCommandTest extends ToDoListGuiTest {
     private void assertPersonSelected(int index) {
         assertEquals(taskListPanel.getSelectedTasks().size(), 1);
         ReadOnlyTask selectedPerson = taskListPanel.getSelectedTasks().get(0);
-        assertEquals(taskListPanel.getPerson(index - 1), selectedPerson);
+        assertEquals(taskListPanel.getTask(index - 1), selectedPerson);
         //TODO: confirm the correct page is loaded in the Browser Panel
     }
 
