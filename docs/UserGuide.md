@@ -33,10 +33,12 @@
 > * Items with `...` after them can have multiple instances.
 > * Parameters can be in any order.
 
-#### Viewing help : `help / h`
-Format: `help`
 
-> Help is also shown if you enter an incorrect command e.g. `abcd`
+#### Viewing help : `help / h`
+Brings up the help guide.<br>
+Format: **`help`**
+
+> Help is also shown if you enter an incorrect command e.g. **`abcd`**
 
 #### Adding a task: `add / a`
 Adds a task to the todo list<br>
