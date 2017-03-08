@@ -12,7 +12,7 @@ Responsibilities: UI
 -----
 
 #### [Ang Zhi Yuan](http://github.com/ang-zy)
-<img src="images/ang-zy.png" width="150"><br>
+<img src="images/ang-zy.jpg" width="150"><br>
 Role: Documentation, Markdown Expert <br>
 Responsibilities: Logic
 
