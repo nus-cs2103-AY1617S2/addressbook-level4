@@ -390,7 +390,7 @@ Priority | As a ... | I want to ... | So that I can...
 **MSS**
 
 1. User requests to create a task with a name
-2. AddressBook create the task <br>
+2. TaskManager create the task <br>
 Use case ends.
 
 **Extensions**
@@ -403,9 +403,9 @@ Use case ends.
 **MSS**
 
 1. User requests to list tasks
-2. AddressBook shows a list of tasks
+2. TaskManager shows a list of tasks
 3. User requests to delete a specific task in the list
-4. AddressBook deletes the task <br>
+4. TaskManager deletes the task <br>
 Use case ends.
 
 **Extensions**
@@ -416,8 +416,45 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. AddressBook shows an error message <br>
+> 3a1. TaskManager shows an error message <br>
   Use case resumes at step 2
+
+#### Use case: Edit/Update task
+
+**MSS**
+
+1. User requests to search for a task with a given name
+2. TaskManager shows the task
+3. User type in the change
+4. User requests to update/edit the task
+5. TaskManager change the content of the task
+Use case ends.
+
+**Extensions**
+
+2a. The task does not exist
+
+> Use case ends
+
+4a. The given index is invalid
+
+> 3a1. AddressBook shows an error message <br>
+  Use case resumes at step 3
+
+#### Use case: Read task
+
+**MSS**
+
+1. User requests to search for a task with a given name
+2. TaskManager shows the task
+Use case ends.
+
+**Extensions**
+
+2a. The task does not exist
+
+> Use case ends
+
 
 {More to be added}
 
