@@ -55,15 +55,20 @@ Examples:
 * **`add Buy milk d/12/12/2017 p/3 t/calories`**
 * **`add Read a book p/1 s/05/05/2017 t/knowledge t/bookworm`**
 
-#### Edit a task: `edit / e`
-> Edit a particular task according to the index.
-> Format: `edit INDEX [TASK NAME] [d/DEADLINE] [p/PRIORITY] [t/TAGNAME]`
+#### Editing a task: `edit / e`
+Edits a particular task according to the index.<br>
+Format: **`edit INDEX [NEWTASKNAME] [p/NEWPRIORITY] [s/NEWSTARTDATE] [d/NEWDUEDATE] [t/NEWTAGNAME...]`**
+
+> Tasks only need a task name. The other fields are optional, and can be typed in any order as long as the prefix is there.<br>
+> The task name MUST come first.<br>
+> The format for the date should be DD/MM/YY <br>
+> Priority takes in a value from 1-3, with 3 being the highest priority.<br>
+> To clear a field (except task name which cannot be cleared), type out the prefix but leave it blank.<br>
 
 Examples:
-* `edit 5 Sell drugs d/Saturday p/high t/gang streets kids`
-* `edit 5 Buy drugs`
-* `edit 5 t/Exercise Personal d/31/12/2013`
-
+* **`edit 1 Sell donuts p/3 t/money s/12/12/2017`**
+* **`edit 1 p/ t/ s/`**
+* **`edit 1 Buy more donuts p/3 t/nomoney s/15/12/2017`**
 
 #### Finding all tasks containing any keyword in their name or deadline: `find / f`
 Finds tasks whose names contain any of the given keywords.<br>
