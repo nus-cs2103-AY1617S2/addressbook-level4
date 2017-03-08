@@ -6,27 +6,27 @@ We are a team based in the [School of Computing, National University of Singapor
 
 #### [MY DUY HOANG LONG](https://github.com/myduyhoanglong) <br>
 <img src="images/myduyhoanglong.png" width="150"><br>
-**Role**: 
+**Role**: Testing
 Responsibilities: UI
 -----
 
 #### [IVAN KOH](https://github.com/ivankws)
 <img src="images/ivankws.png" width="150"><br>
-Role: 
+Role: Code quality
 Responsibilities: Documentation
 
 -----
 
 #### [TANG DI FENG](https://github.com/e0011840)
 <img src="images/e0011840.png" width="150"><br>
-Role: 
+Role: Integration
 Responsibilities: Storage
 
 -----
 
 #### [ZHANG YAN HAO](https://github.com/vane1992)
 <img src="images/vane1992.png" width="150"><br>
-Role: 
+Role: Scheduling and deadlines, Code quality
 Responsibilities: Model
 
 -----
