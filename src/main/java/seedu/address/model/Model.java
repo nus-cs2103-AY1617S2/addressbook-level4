@@ -38,8 +38,11 @@ public interface Model {
 
     /** Returns the filtered person list as an {@code UnmodifiableObservableList<ReadOnlyPerson>} */
     UnmodifiableObservableList<ReadOnlyPerson> getFilteredPersonList();
+    
+    /** Returns the filtered task list as an {@code UnmodifiableObservableList<Task>} */
+    UnmodifiableObservableList<Task> getFilteredTaskList();
 
-    /** Updates the filter of the filtered person list to show all persons */
+    /** Updates the filter of the filtered person list to show all tasks */
     void updateFilteredListToShowAll();
 
     /** Updates the filter of the filtered person list to filter by the given keywords*/
