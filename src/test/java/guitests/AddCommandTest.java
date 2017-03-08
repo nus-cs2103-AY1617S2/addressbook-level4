@@ -43,7 +43,7 @@ public class AddCommandTest extends AddressBookGuiTest {
         commandBox.runCommand(personToAdd.getAddCommand());
 
         //confirm the new card contains the right data
-        taskCardHandle addedCard = taskListPanel.navigateToPerson(personToAdd.getName().fullName);
+        taskCardHandle addedCard = taskListPanel.navigateToTask(personToAdd.getName().fullName);
         assertMatching(personToAdd, addedCard);
 
         //confirm the list now contains all previous persons plus the new task
