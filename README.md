@@ -31,6 +31,7 @@
 
 * Some parts of this sample application were inspired by the excellent
   [Java FX tutorial](http://code.makery.ch/library/javafx-8-tutorial/) by *Marco Jakob*.
+* This project is based on the sample created by SE-EDU (`https://github.com/se-edu/`). 
 
 
 #### Licence : [MIT](LICENSE)
