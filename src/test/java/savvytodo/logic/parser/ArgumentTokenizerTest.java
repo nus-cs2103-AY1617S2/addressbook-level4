@@ -62,7 +62,7 @@ public class ArgumentTokenizerTest {
     @Test
     public void tokenize_noPrefixes_allTakenAsPreamble() {
         ArgumentTokenizer tokenizer = new ArgumentTokenizer();
-        String argsString = "  some random string /t tag with leading and trailing spaces ";
+        String argsString = "  some random string /t category with leading and trailing spaces ";
         tokenizer.tokenize(argsString);
 
         // Same string expected as preamble, but leading/trailing spaces should be trimmed

@@ -9,7 +9,7 @@ import savvytodo.model.task.UniqueTaskList;
 /**
  * A utility class to help with building Addressbook objects.
  * Example usage: <br>
- *     {@code AddressBook ab = new AddressBookBuilder().withTask("John", "Doe").withTag("Friend").build();}
+ *     {@code AddressBook ab = new AddressBookBuilder().withTask("John", "Doe").withCategory("Friend").build();}
  */
 public class AddressBookBuilder {
 
@@ -24,8 +24,8 @@ public class AddressBookBuilder {
         return this;
     }
 
-    public AddressBookBuilder withTag(String tagName) throws IllegalValueException {
-        addressBook.addCategory(new Category(tagName));
+    public AddressBookBuilder withCategory(String categoryName) throws IllegalValueException {
+        addressBook.addCategory(new Category(categoryName));
         return this;
     }
 

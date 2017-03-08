@@ -24,7 +24,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private FlowPane categories;
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
@@ -33,10 +33,10 @@ public class TaskCard extends UiPart<Region> {
         phone.setText(task.getPhone().value);
         address.setText(task.getAddress().value);
         email.setText(task.getEmail().value);
-        initTags(task);
+        initCategories(task);
     }
 
-    private void initTags(ReadOnlyTask task) {
-        task.getCategories().forEach(tag -> tags.getChildren().add(new Label(tag.categoryName)));
+    private void initCategories(ReadOnlyTask task) {
+        task.getCategories().forEach(category -> categories.getChildren().add(new Label(category.categoryName)));
     }
 }

@@ -30,7 +30,7 @@ public class XmlAdaptedTask {
     private String address;
 
     @XmlElement
-    private List<XmlAdaptedTag> tagged = new ArrayList<>();
+    private List<XmlAdaptedCategory> categorized = new ArrayList<>();
 
     /**
      * Constructs an XmlAdaptedTask.
@@ -49,9 +49,9 @@ public class XmlAdaptedTask {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        tagged = new ArrayList<>();
-        for (Category tag : source.getCategories()) {
-            tagged.add(new XmlAdaptedTag(tag));
+        categorized = new ArrayList<>();
+        for (Category category : source.getCategories()) {
+            categorized.add(new XmlAdaptedCategory(category));
         }
     }
 
@@ -61,15 +61,15 @@ public class XmlAdaptedTask {
      * @throws IllegalValueException if there were any data constraints violated in the adapted task
      */
     public Task toModelType() throws IllegalValueException {
-        final List<Category> taskTags = new ArrayList<>();
-        for (XmlAdaptedTag tag : tagged) {
-            taskTags.add(tag.toModelType());
+        final List<Category> taskCategories = new ArrayList<>();
+        for (XmlAdaptedCategory category : categorized) {
+            taskCategories.add(category.toModelType());
         }
         final Name name = new Name(this.name);
         final Phone phone = new Phone(this.phone);
         final Email email = new Email(this.email);
         final Address address = new Address(this.address);
-        final UniqueCategoryList tags = new UniqueCategoryList(taskTags);
-        return new Task(name, phone, email, address, tags);
+        final UniqueCategoryList categories = new UniqueCategoryList(taskCategories);
+        return new Task(name, phone, email, address, categories);
     }
 }

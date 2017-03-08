@@ -6,35 +6,35 @@ import savvytodo.commons.exceptions.IllegalValueException;
 import savvytodo.model.category.Category;
 
 /**
- * JAXB-friendly adapted version of the Tag.
+ * JAXB-friendly adapted version of the Category.
  */
-public class XmlAdaptedTag {
+public class XmlAdaptedCategory {
 
     @XmlValue
-    public String tagName;
+    public String categoryName;
 
     /**
-     * Constructs an XmlAdaptedTag.
+     * Constructs an XmlAdaptedCategory.
      * This is the no-arg constructor that is required by JAXB.
      */
-    public XmlAdaptedTag() {}
+    public XmlAdaptedCategory() {}
 
     /**
-     * Converts a given Tag into this class for JAXB use.
+     * Converts a given Category into this class for JAXB use.
      *
      * @param source future changes to this will not affect the created
      */
-    public XmlAdaptedTag(Category source) {
-        tagName = source.categoryName;
+    public XmlAdaptedCategory(Category source) {
+        categoryName = source.categoryName;
     }
 
     /**
-     * Converts this jaxb-friendly adapted tag object into the model's Tag object.
+     * Converts this jaxb-friendly adapted category object into the model's Category object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted task
      */
     public Category toModelType() throws IllegalValueException {
-        return new Category(tagName);
+        return new Category(categoryName);
     }
 
 }

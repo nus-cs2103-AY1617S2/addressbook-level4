@@ -17,10 +17,10 @@ public class TypicalTestTasks {
             alice = new TaskBuilder().withName("Alice Pauline")
                     .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@gmail.com")
                     .withPhone("85355255")
-                    .withTags("friends").build();
+                    .withCategories("friends").build();
             benson = new TaskBuilder().withName("Benson Meier").withAddress("311, Clementi Ave 2, #02-25")
                     .withEmail("johnd@gmail.com").withPhone("98765432")
-                    .withTags("owesMoney", "friends").build();
+                    .withCategories("owesMoney", "friends").build();
             carl = new TaskBuilder().withName("Carl Kurz").withPhone("95352563")
                     .withEmail("heinz@yahoo.com").withAddress("wall street").build();
             daniel = new TaskBuilder().withName("Daniel Meier").withPhone("87652533")

@@ -14,8 +14,8 @@ public interface ReadOnlyTask {
     Address getAddress();
 
     /**
-     * The returned TagList is a deep copy of the internal TagList,
-     * changes on the returned list will not affect the task's internal tags.
+     * The returned CategoryList is a deep copy of the internal CategoryList,
+     * changes on the returned list will not affect the task's internal categories.
      */
     UniqueCategoryList getCategories();
 
@@ -43,7 +43,7 @@ public interface ReadOnlyTask {
                 .append(getEmail())
                 .append(" Address: ")
                 .append(getAddress())
-                .append(" Tags: ");
+                .append(" Categries: ");
         getCategories().forEach(builder::append);
         return builder.toString();
     }

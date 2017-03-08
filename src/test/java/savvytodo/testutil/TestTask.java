@@ -16,10 +16,10 @@ public class TestTask implements ReadOnlyTask {
     private Address address;
     private Email email;
     private Phone phone;
-    private UniqueCategoryList tags;
+    private UniqueCategoryList categories;
 
     public TestTask() {
-        tags = new UniqueCategoryList();
+        categories = new UniqueCategoryList();
     }
 
     /**
@@ -30,7 +30,7 @@ public class TestTask implements ReadOnlyTask {
         this.phone = taskToCopy.getPhone();
         this.email = taskToCopy.getEmail();
         this.address = taskToCopy.getAddress();
-        this.tags = taskToCopy.getCategories();
+        this.categories = taskToCopy.getCategories();
     }
 
     public void setName(Name name) {
@@ -49,8 +49,8 @@ public class TestTask implements ReadOnlyTask {
         this.phone = phone;
     }
 
-    public void setTags(UniqueCategoryList tags) {
-        this.tags = tags;
+    public void setCategories(UniqueCategoryList categories) {
+        this.categories = categories;
     }
 
     @Override
@@ -75,7 +75,7 @@ public class TestTask implements ReadOnlyTask {
 
     @Override
     public UniqueCategoryList getCategories() {
-        return tags;
+        return categories;
     }
 
     @Override

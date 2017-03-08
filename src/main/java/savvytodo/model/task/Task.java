@@ -16,18 +16,18 @@ public class Task implements ReadOnlyTask {
     private Email email;
     private Address address;
 
-    private UniqueCategoryList tags;
+    private UniqueCategoryList categories;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Phone phone, Email email, Address address, UniqueCategoryList tags) {
-        assert !CollectionUtil.isAnyNull(name, phone, email, address, tags);
+    public Task(Name name, Phone phone, Email email, Address address, UniqueCategoryList categories) {
+        assert !CollectionUtil.isAnyNull(name, phone, email, address, categories);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.tags = new UniqueCategoryList(tags); // protect internal tags from changes in the arg list
+        this.categories = new UniqueCategoryList(categories); // protect internal categories from changes in the arg list
     }
 
     /**
@@ -79,14 +79,14 @@ public class Task implements ReadOnlyTask {
 
     @Override
     public UniqueCategoryList getCategories() {
-        return new UniqueCategoryList(tags);
+        return new UniqueCategoryList(categories);
     }
 
     /**
-     * Replaces this task's tags with the tags in the argument tag list.
+     * Replaces this task's categories with the categories in the argument category list.
      */
     public void setCategories(UniqueCategoryList replacement) {
-        tags.setTags(replacement);
+        categories.setCategories(replacement);
     }
 
     /**
@@ -112,7 +112,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, categories);
     }
 
     @Override

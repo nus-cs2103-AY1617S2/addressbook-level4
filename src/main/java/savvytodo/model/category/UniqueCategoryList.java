@@ -16,7 +16,7 @@ import savvytodo.commons.exceptions.IllegalValueException;
 import savvytodo.commons.util.CollectionUtil;
 
 /**
- * A list of tags that enforces no nulls and uniqueness between its elements.
+ * A list of categories that enforces no nulls and uniqueness between its elements.
  *
  * Supports minimal set of list operations for the app's features.
  *
@@ -28,51 +28,51 @@ public class UniqueCategoryList implements Iterable<Category> {
     private final ObservableList<Category> internalList = FXCollections.observableArrayList();
 
     /**
-     * Constructs empty TagList.
+     * Constructs empty CategoryList.
      */
     public UniqueCategoryList() {}
 
     /**
-     * Creates a UniqueTagList using given String tags.
+     * Creates a UniqueCategoryList using given String categories.
      * Enforces no nulls or duplicates.
      */
-    public UniqueCategoryList(String... tags) throws DuplicateCategoryException, IllegalValueException {
-        final List<Category> tagList = new ArrayList<Category>();
-        for (String tag : tags) {
-            tagList.add(new Category(tag));
+    public UniqueCategoryList(String... categories) throws DuplicateCategoryException, IllegalValueException {
+        final List<Category> categoryList = new ArrayList<Category>();
+        for (String category : categories) {
+            categoryList.add(new Category(category));
         }
-        setCategories(tagList);
+        setCategories(categoryList);
     }
 
     /**
-     * Creates a UniqueTagList using given tags.
+     * Creates a UniqueCategoryList using given categories.
      * Enforces no nulls or duplicates.
      */
-    public UniqueCategoryList(Category... tags) throws DuplicateCategoryException {
-        assert !CollectionUtil.isAnyNull((Object[]) tags);
-        final List<Category> initialTags = Arrays.asList(tags);
-        if (!CollectionUtil.elementsAreUnique(initialTags)) {
+    public UniqueCategoryList(Category... categories) throws DuplicateCategoryException {
+        assert !CollectionUtil.isAnyNull((Object[]) categories);
+        final List<Category> initialCategories = Arrays.asList(categories);
+        if (!CollectionUtil.elementsAreUnique(initialCategories)) {
             throw new DuplicateCategoryException();
         }
-        internalList.addAll(initialTags);
+        internalList.addAll(initialCategories);
     }
 
     /**
-     * Creates a UniqueTagList using given tags.
+     * Creates a UniqueCategoryList using given categories.
      * Enforces no null or duplicate elements.
      */
-    public UniqueCategoryList(Collection<Category> tags) throws DuplicateCategoryException {
+    public UniqueCategoryList(Collection<Category> categories) throws DuplicateCategoryException {
         this();
-        setCategories(tags);
+        setCategories(categories);
     }
 
     /**
-     * Creates a UniqueTagList using given tags.
+     * Creates a UniqueCategoryList using given categories.
      * Enforces no nulls.
      */
-    public UniqueCategoryList(Set<Category> tags) {
-        assert !CollectionUtil.isAnyNull(tags);
-        internalList.addAll(tags);
+    public UniqueCategoryList(Set<Category> categories) {
+        assert !CollectionUtil.isAnyNull(categories);
+        internalList.addAll(categories);
     }
 
     /**
@@ -84,7 +84,7 @@ public class UniqueCategoryList implements Iterable<Category> {
     }
 
     /**
-     * Returns all tags in this list as a Set.
+     * Returns all categories in this list as a Set.
      * This set is mutable and change-insulated against the internal list.
      */
     public Set<Category> toSet() {
@@ -92,32 +92,32 @@ public class UniqueCategoryList implements Iterable<Category> {
     }
 
     /**
-     * Replaces the Tags in this list with those in the argument tag list.
+     * Replaces the Categories in this list with those in the argument category list.
      */
-    public void setTags(UniqueCategoryList replacement) {
+    public void setCategories(UniqueCategoryList replacement) {
         this.internalList.setAll(replacement.internalList);
     }
 
-    public void setCategories(Collection<Category> tags) throws DuplicateCategoryException {
-        assert !CollectionUtil.isAnyNull(tags);
-        if (!CollectionUtil.elementsAreUnique(tags)) {
+    public void setCategories(Collection<Category> categories) throws DuplicateCategoryException {
+        assert !CollectionUtil.isAnyNull(categories);
+        if (!CollectionUtil.elementsAreUnique(categories)) {
             throw new DuplicateCategoryException();
         }
-        internalList.setAll(tags);
+        internalList.setAll(categories);
     }
 
     /**
-     * Ensures every tag in the argument list exists in this object.
+     * Ensures every category in the argument list exists in this object.
      */
     public void mergeFrom(UniqueCategoryList from) {
         final Set<Category> alreadyInside = this.toSet();
         from.internalList.stream()
-                .filter(tag -> !alreadyInside.contains(tag))
+                .filter(category -> !alreadyInside.contains(category))
                 .forEach(internalList::add);
     }
 
     /**
-     * Returns true if the list contains an equivalent Tag as the given argument.
+     * Returns true if the list contains an equivalent Category as the given argument.
      */
     public boolean contains(Category toCheck) {
         assert toCheck != null;
@@ -125,9 +125,9 @@ public class UniqueCategoryList implements Iterable<Category> {
     }
 
     /**
-     * Adds a Tag to the list.
+     * Adds a Category to the list.
      *
-     * @throws DuplicateCategoryException if the Tag to add is a duplicate of an existing Tag in the list.
+     * @throws DuplicateCategoryException if the Category to add is a duplicate of an existing Category in the list.
      */
     public void add(Category toAdd) throws DuplicateCategoryException {
         assert toAdd != null;
@@ -168,7 +168,7 @@ public class UniqueCategoryList implements Iterable<Category> {
      */
     public static class DuplicateCategoryException extends DuplicateDataException {
         protected DuplicateCategoryException() {
-            super("Operation would result in duplicate tags");
+            super("Operation would result in duplicate categories");
         }
     }
 

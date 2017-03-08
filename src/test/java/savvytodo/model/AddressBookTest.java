@@ -52,36 +52,36 @@ public class AddressBookTest {
         TypicalTestTasks td = new TypicalTestTasks();
         // Repeat td.alice twice
         List<Task> newTasks = Arrays.asList(new Task(td.alice), new Task(td.alice));
-        List<Category> newTags = td.alice.getCategories().asObservableList();
-        AddressBookStub newData = new AddressBookStub(newTasks, newTags);
+        List<Category> newCategories = td.alice.getCategories().asObservableList();
+        AddressBookStub newData = new AddressBookStub(newTasks, newCategories);
 
         thrown.expect(AssertionError.class);
         addressBook.resetData(newData);
     }
 
     @Test
-    public void resetData_withDuplicateTags_throwsAssertionError() {
+    public void resetData_withDuplicateCategories_throwsAssertionError() {
         TaskManager typicalAddressBook = new TypicalTestTasks().getTypicalAddressBook();
         List<ReadOnlyTask> newTasks = typicalAddressBook.getTaskList();
-        List<Category> newTags = new ArrayList<>(typicalAddressBook.getCategoryList());
-        // Repeat the first tag twice
-        newTags.add(newTags.get(0));
-        AddressBookStub newData = new AddressBookStub(newTasks, newTags);
+        List<Category> newCategories = new ArrayList<>(typicalAddressBook.getCategoryList());
+        // Repeat the first category twice
+        newCategories.add(newCategories.get(0));
+        AddressBookStub newData = new AddressBookStub(newTasks, newCategories);
 
         thrown.expect(AssertionError.class);
         addressBook.resetData(newData);
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose tasks and tags lists can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose tasks and categories lists can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyTaskManager {
         private final ObservableList<ReadOnlyTask> tasks = FXCollections.observableArrayList();
-        private final ObservableList<Category> tags = FXCollections.observableArrayList();
+        private final ObservableList<Category> categories = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<? extends ReadOnlyTask> tasks, Collection<? extends Category> tags) {
+        AddressBookStub(Collection<? extends ReadOnlyTask> tasks, Collection<? extends Category> categories) {
             this.tasks.setAll(tasks);
-            this.tags.setAll(tags);
+            this.categories.setAll(categories);
         }
 
         @Override
@@ -91,7 +91,7 @@ public class AddressBookTest {
 
         @Override
         public ObservableList<Category> getCategoryList() {
-            return tags;
+            return categories;
         }
     }
 

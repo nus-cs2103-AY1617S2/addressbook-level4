@@ -22,7 +22,7 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the address book. "
-            + "Parameters: NAME p/PHONE e/EMAIL a/ADDRESS  [t/TAG]...\n"
+            + "Parameters: NAME p/PHONE e/EMAIL a/ADDRESS  [c/CATEGORY]...\n"
             + "Example: " + COMMAND_WORD
             + " John Doe p/98765432 e/johnd@gmail.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney";
 
@@ -36,18 +36,18 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, String phone, String email, String address, Set<String> tags)
+    public AddCommand(String name, String phone, String email, String address, Set<String> categories)
             throws IllegalValueException {
-        final Set<Category> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(new Category(tagName));
+        final Set<Category> categorySet = new HashSet<>();
+        for (String categoryName : categories) {
+            categorySet.add(new Category(categoryName));
         }
         this.toAdd = new Task(
                 new Name(name),
                 new Phone(phone),
                 new Email(email),
                 new Address(address),
-                new UniqueCategoryList(tagSet)
+                new UniqueCategoryList(categorySet)
         );
     }
 

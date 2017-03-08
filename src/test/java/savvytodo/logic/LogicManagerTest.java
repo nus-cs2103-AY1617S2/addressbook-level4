@@ -204,7 +204,7 @@ public class LogicManagerTest {
                 Phone.MESSAGE_PHONE_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
                 Email.MESSAGE_EMAIL_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
+        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.category",
                 Category.MESSAGE_CATEGORY_CONSTRAINTS);
 
     }
@@ -421,10 +421,10 @@ public class LogicManagerTest {
             Phone privatePhone = new Phone("111111");
             Email email = new Email("adam@gmail.com");
             Address privateAddress = new Address("111, alpha street");
-            Category tag1 = new Category("tag1");
-            Category tag2 = new Category("longertag2");
-            UniqueCategoryList tags = new UniqueCategoryList(tag1, tag2);
-            return new Task(name, privatePhone, email, privateAddress, tags);
+            Category category1 = new Category("category1");
+            Category category2 = new Category("longercategory2");
+            UniqueCategoryList categories = new UniqueCategoryList(category1, category2);
+            return new Task(name, privatePhone, email, privateAddress, categories);
         }
 
         /**
@@ -440,7 +440,7 @@ public class LogicManagerTest {
                     new Phone("" + Math.abs(seed)),
                     new Email(seed + "@email"),
                     new Address("House of " + seed),
-                    new UniqueCategoryList(new Category("tag" + Math.abs(seed)), new Category("tag" + Math.abs(seed + 1)))
+                    new UniqueCategoryList(new Category("category" + Math.abs(seed)), new Category("category" + Math.abs(seed + 1)))
             );
         }
 
@@ -455,8 +455,8 @@ public class LogicManagerTest {
             cmd.append(" p/").append(p.getPhone());
             cmd.append(" a/").append(p.getAddress());
 
-            UniqueCategoryList tags = p.getCategories();
-            for (Category t: tags) {
+            UniqueCategoryList categories = p.getCategories();
+            for (Category t: categories) {
                 cmd.append(" t/").append(t.categoryName);
             }
 
@@ -539,7 +539,7 @@ public class LogicManagerTest {
                     new Phone("1"),
                     new Email("1@email"),
                     new Address("House of 1"),
-                    new UniqueCategoryList(new Category("tag"))
+                    new UniqueCategoryList(new Category("category"))
             );
         }
     }

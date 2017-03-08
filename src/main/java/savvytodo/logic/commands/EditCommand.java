@@ -25,7 +25,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS ] [t/TAG]...\n"
+            + "Parameters: INDEX (must be a positive integer) [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS ] [c/CATEGORIES]...\n"
             + "Example: " + COMMAND_WORD + " 1 p/91234567 e/johndoe@yahoo.com";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
@@ -81,9 +81,9 @@ public class EditCommand extends Command {
         Phone updatedPhone = editTaskDescriptor.getPhone().orElseGet(taskToEdit::getPhone);
         Email updatedEmail = editTaskDescriptor.getEmail().orElseGet(taskToEdit::getEmail);
         Address updatedAddress = editTaskDescriptor.getAddress().orElseGet(taskToEdit::getAddress);
-        UniqueCategoryList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getCategories);
+        UniqueCategoryList updatedCategories = editTaskDescriptor.getCategories().orElseGet(taskToEdit::getCategories);
 
-        return new Task(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Task(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCategories);
     }
 
     /**
@@ -95,7 +95,7 @@ public class EditCommand extends Command {
         private Optional<Phone> phone = Optional.empty();
         private Optional<Email> email = Optional.empty();
         private Optional<Address> address = Optional.empty();
-        private Optional<UniqueCategoryList> tags = Optional.empty();
+        private Optional<UniqueCategoryList> categories = Optional.empty();
 
         public EditTaskDescriptor() {}
 
@@ -104,14 +104,14 @@ public class EditCommand extends Command {
             this.phone = toCopy.getPhone();
             this.email = toCopy.getEmail();
             this.address = toCopy.getAddress();
-            this.tags = toCopy.getTags();
+            this.categories = toCopy.getCategories();
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.phone, this.email, this.address, this.tags);
+            return CollectionUtil.isAnyPresent(this.name, this.phone, this.email, this.address, this.categories);
         }
 
         public void setName(Optional<Name> name) {
@@ -150,13 +150,13 @@ public class EditCommand extends Command {
             return address;
         }
 
-        public void setTags(Optional<UniqueCategoryList> tags) {
-            assert tags != null;
-            this.tags = tags;
+        public void setCategories(Optional<UniqueCategoryList> categories) {
+            assert categories != null;
+            this.categories = categories;
         }
 
-        public Optional<UniqueCategoryList> getTags() {
-            return tags;
+        public Optional<UniqueCategoryList> getCategories() {
+            return categories;
         }
     }
 }

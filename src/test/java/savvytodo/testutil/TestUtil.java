@@ -54,7 +54,7 @@ public class TestUtil {
 
     public static final Task[] SAMPLE_TASK_DATA = getSampleTaskData();
 
-    public static final Category[] SAMPLE_TAG_DATA = getSampleTagData();
+    public static final Category[] SAMPLE_CATEGORY_DATA = getSampleCategoryData();
 
     public static void assertThrows(Class<? extends Throwable> expected, Runnable executable) {
         try {
@@ -94,7 +94,7 @@ public class TestUtil {
     }
 
 
-    private static Category[] getSampleTagData() {
+    private static Category[] getSampleCategoryData() {
         try {
             return new Category[]{
                 new Category("relatives"),
@@ -337,16 +337,16 @@ public class TestUtil {
         return card.isSameTask(task);
     }
 
-    public static Category[] getTagList(String tags) {
-        if ("".equals(tags)) {
+    public static Category[] getCategoryList(String categories) {
+        if ("".equals(categories)) {
             return new Category[]{};
         }
 
-        final String[] split = tags.split(", ");
+        final String[] split = categories.split(", ");
 
         final List<Category> collect = Arrays.asList(split).stream().map(e -> {
             try {
-                return new Category(e.replaceFirst("Tag: ", ""));
+                return new Category(e.replaceFirst("Category: ", ""));
             } catch (IllegalValueException e1) {
                 //not possible
                 assert false;

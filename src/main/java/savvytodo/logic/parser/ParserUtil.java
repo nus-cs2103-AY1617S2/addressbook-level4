@@ -99,14 +99,14 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.
+     * Parses {@code Collection<String> categories} into an {@code UniqueCategoryList}.
      */
-    public static UniqueCategoryList parseTags(Collection<String> tags) throws IllegalValueException {
-        assert tags != null;
-        final Set<Category> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(new Category(tagName));
+    public static UniqueCategoryList parseCategories(Collection<String> categories) throws IllegalValueException {
+        assert categories != null;
+        final Set<Category> categorySet = new HashSet<>();
+        for (String categoryName : categories) {
+            categorySet.add(new Category(categoryName));
         }
-        return new UniqueCategoryList(tagSet);
+        return new UniqueCategoryList(categorySet);
     }
 }

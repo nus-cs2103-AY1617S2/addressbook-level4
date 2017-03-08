@@ -31,10 +31,10 @@ public class TaskBuilder {
         return this;
     }
 
-    public TaskBuilder withTags(String ... tags) throws IllegalValueException {
-        task.setTags(new UniqueCategoryList());
-        for (String tag: tags) {
-            task.getCategories().add(new Category(tag));
+    public TaskBuilder withCategories(String ... categories) throws IllegalValueException {
+        task.setCategories(new UniqueCategoryList());
+        for (String category: categories) {
+            task.getCategories().add(new Category(category));
         }
         return this;
     }

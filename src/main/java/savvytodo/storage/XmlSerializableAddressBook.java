@@ -25,7 +25,7 @@ public class XmlSerializableAddressBook implements ReadOnlyTaskManager {
     @XmlElement
     private List<XmlAdaptedTask> tasks;
     @XmlElement
-    private List<XmlAdaptedTag> tags;
+    private List<XmlAdaptedCategory> categories;
 
     /**
      * Creates an empty XmlSerializableAddressBook.
@@ -33,7 +33,7 @@ public class XmlSerializableAddressBook implements ReadOnlyTaskManager {
      */
     public XmlSerializableAddressBook() {
         tasks = new ArrayList<>();
-        tags = new ArrayList<>();
+        categories = new ArrayList<>();
     }
 
     /**
@@ -42,7 +42,7 @@ public class XmlSerializableAddressBook implements ReadOnlyTaskManager {
     public XmlSerializableAddressBook(ReadOnlyTaskManager src) {
         this();
         tasks.addAll(src.getTaskList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
-        tags.addAll(src.getCategoryList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
+        categories.addAll(src.getCategoryList().stream().map(XmlAdaptedCategory::new).collect(Collectors.toList()));
     }
 
     @Override
@@ -61,7 +61,7 @@ public class XmlSerializableAddressBook implements ReadOnlyTaskManager {
 
     @Override
     public ObservableList<Category> getCategoryList() {
-        final ObservableList<Category> tags = this.tags.stream().map(t -> {
+        final ObservableList<Category> categories = this.categories.stream().map(t -> {
             try {
                 return t.toModelType();
             } catch (IllegalValueException e) {
@@ -70,7 +70,7 @@ public class XmlSerializableAddressBook implements ReadOnlyTaskManager {
                 return null;
             }
         }).collect(Collectors.toCollection(FXCollections::observableArrayList));
-        return new UnmodifiableObservableList<>(tags);
+        return new UnmodifiableObservableList<>(categories);
     }
 
 }
