@@ -21,12 +21,12 @@ public class Task implements ReadOnlyTask {
     /**
      * left for the sake of leaving.
      */
-    public Task(Name name, Phone phone, Email email, Description address, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, phone, email, address, tags);
+    public Task(Name name, Phone phone, Email email, Description description, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, phone, email, description, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.description = address;
+        this.description = description;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -43,19 +43,19 @@ public class Task implements ReadOnlyTask {
     }
     
     /**
-     * Creates a copy of the given ReadOnlyPerson.
+     * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(), source.getTags());
+        this(source.getTaskName(), source.getPhone(), source.getEmail(), source.getDescription(), source.getTags());
     }
 
-    public void setName(Name name) {
+    public void setTaskName(Name name) {
         assert name != null;
         this.name = name;
     }
 
     @Override
-    public Name getName() {
+    public Name getTaskName() {
         return name;
     }
 
@@ -79,13 +79,13 @@ public class Task implements ReadOnlyTask {
         return email;
     }
 
-    public void setAddress(Description address) {
+    public void setDescription(Description address) {
         assert address != null;
         this.description = address;
     }
 
     @Override
-    public Description getAddress() {
+    public Description getDescription() {
         return description;
     }
 
@@ -107,10 +107,10 @@ public class Task implements ReadOnlyTask {
     public void resetData(ReadOnlyTask replacement) {
         assert replacement != null;
 
-        this.setName(replacement.getName());
+        this.setTaskName(replacement.getTaskName());
         this.setPhone(replacement.getPhone());
         this.setEmail(replacement.getEmail());
-        this.setAddress(replacement.getAddress());
+        this.setDescription(replacement.getDescription());
         this.setTags(replacement.getTags());
     }
 

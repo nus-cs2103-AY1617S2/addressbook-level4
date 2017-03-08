@@ -32,7 +32,7 @@ public class ModelManager extends ComponentManager implements Model {
         super();
         assert !CollectionUtil.isAnyNull(userInbox, userPrefs);
 
-        logger.fine("Initializing with address book: " + userInbox + " and user prefs " + userPrefs);
+        logger.fine("Initializing with user inbox: " + userInbox + " and user prefs " + userPrefs);
 
         this.userInbox = new UserInbox(userInbox);
         filteredTasks = new FilteredList<>(this.userInbox.getTaskList());
@@ -45,7 +45,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void resetData(ReadOnlyUserInbox newData) {
         userInbox.resetData(newData);
-        indicateAddressBookChanged();
+        indicateUserInboxChanged();
     }
 
     @Override
@@ -54,21 +54,21 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateAddressBookChanged() {
+    private void indicateUserInboxChanged() {
         raise(new AddressBookChangedEvent(userInbox));
     }
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         userInbox.removeTask(target);
-        indicateAddressBookChanged();
+        indicateUserInboxChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         userInbox.addTask(task);
         updateFilteredListToShowAll();
-        indicateAddressBookChanged();
+        indicateUserInboxChanged();
     }
 
     @Override
@@ -78,7 +78,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         int addressBookIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         userInbox.updateTask(addressBookIndex, editedTask);
-        indicateAddressBookChanged();
+        indicateUserInboxChanged();
     }
 
     //=========== Filtered Task List Accessors =============================================================
@@ -143,7 +143,7 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().taskName, keyword))
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getTaskName().taskName, keyword))
                     .findAny()
                     .isPresent();
         }

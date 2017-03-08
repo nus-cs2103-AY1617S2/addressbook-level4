@@ -26,10 +26,10 @@ public class TestPerson implements ReadOnlyTask {
      * Creates a copy of {@code personToCopy}.
      */
     public TestPerson(TestPerson personToCopy) {
-        this.name = personToCopy.getName();
+        this.name = personToCopy.getTaskName();
         this.phone = personToCopy.getPhone();
         this.email = personToCopy.getEmail();
-        this.address = personToCopy.getAddress();
+        this.address = personToCopy.getDescription();
         this.tags = personToCopy.getTags();
     }
 
@@ -54,7 +54,7 @@ public class TestPerson implements ReadOnlyTask {
     }
 
     @Override
-    public Name getName() {
+    public Name getTaskName() {
         return name;
     }
 
@@ -69,7 +69,7 @@ public class TestPerson implements ReadOnlyTask {
     }
 
     @Override
-    public Description getAddress() {
+    public Description getDescription() {
         return address;
     }
 
@@ -85,8 +85,8 @@ public class TestPerson implements ReadOnlyTask {
 
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
-        sb.append("add " + this.getName().taskName + " ");
-        sb.append("a/" + this.getAddress().value + " ");
+        sb.append("add " + this.getTaskName().taskName + " ");
+        sb.append("a/" + this.getDescription().value + " ");
         sb.append("p/" + this.getPhone().value + " ");
         sb.append("e/" + this.getEmail().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));

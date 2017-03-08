@@ -77,10 +77,10 @@ public class EditCommand extends Command {
                                              EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
+        Name updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getTaskName);
         Phone updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
         Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
-        Description updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
+        Description updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getDescription);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
         return new Task(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
