@@ -19,6 +19,7 @@ import org.teamstbf.yats.commons.util.XmlUtil;
 import org.teamstbf.yats.model.TaskManager;
 import org.teamstbf.yats.model.item.Deadline;
 import org.teamstbf.yats.model.item.Description;
+import org.teamstbf.yats.model.item.ReadOnlyEvent;
 import org.teamstbf.yats.model.item.ReadOnlyItem;
 import org.teamstbf.yats.model.item.Task;
 import org.teamstbf.yats.model.item.Timing;
@@ -333,7 +334,7 @@ public class TestUtil {
         return list;
     }
 
-    public static boolean compareCardAndPerson(PersonCardHandle card, ReadOnlyItem person) {
+    public static boolean compareCardAndPerson(PersonCardHandle card, ReadOnlyEvent person) {
         return card.isSamePerson(person);
     }
 

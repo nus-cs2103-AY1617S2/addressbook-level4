@@ -1,4 +1,4 @@
-package t16b4.yats.testutil;
+package org.teamstbf.yats.testutil;
 
 import org.teamstbf.yats.model.item.Deadline;
 import org.teamstbf.yats.model.item.Description;
@@ -100,5 +100,9 @@ public class TestEvent implements ReadOnlyEvent {
     @Override
     public Periodic getPeriod() {
         return period;
+    }
+
+    public void setDescription(Description description) {
+        this.description = description;
     }
 }

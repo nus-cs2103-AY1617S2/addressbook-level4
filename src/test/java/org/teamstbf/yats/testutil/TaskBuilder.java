@@ -3,12 +3,11 @@ package org.teamstbf.yats.testutil;
 import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 import org.teamstbf.yats.model.item.Deadline;
 import org.teamstbf.yats.model.item.Description;
+import org.teamstbf.yats.model.item.Location;
 import org.teamstbf.yats.model.item.Timing;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.tag.Tag;
 import org.teamstbf.yats.model.tag.UniqueTagList;
-
-import t16b4.yats.testutil.TestEvent;
 
 /**
  *
@@ -42,17 +41,17 @@ public class TaskBuilder {
     }
 
     public TaskBuilder withDescription(String address) throws IllegalValueException {
-        this.task.setAddress(new Description(address));
+        this.task.setDescription(new Description(address));
         return this;
     }
 
     public TaskBuilder withPhone(String phone) throws IllegalValueException {
-        this.task.setPhone(new Deadline(phone));
+        this.task.setLocation(new Location(phone));
         return this;
     }
 
     public TaskBuilder withEmail(String email) throws IllegalValueException {
-        this.task.setEmail(new Timing(email));
+        this.task.setPeriod(new Periodic(email));
         return this;
     }
 

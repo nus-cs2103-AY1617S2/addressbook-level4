@@ -4,12 +4,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.teamstbf.yats.commons.core.Messages;
-<<<<<<< HEAD
+import org.teamstbf.yats.testutil.TestEvent;
 import org.teamstbf.yats.testutil.TestPerson;
-=======
-
-import t16b4.yats.testutil.TestEvent;
->>>>>>> origin/v0.1.2-Class-Variable-Refactor-Update
 
 public class FindCommandTest extends AddressBookGuiTest {
 

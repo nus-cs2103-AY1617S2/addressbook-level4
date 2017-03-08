@@ -14,6 +14,7 @@ import org.teamstbf.yats.TestApp;
 import org.teamstbf.yats.commons.core.EventsCenter;
 import org.teamstbf.yats.commons.events.BaseEvent;
 import org.teamstbf.yats.model.TaskManager;
+import org.teamstbf.yats.model.item.ReadOnlyEvent;
 import org.teamstbf.yats.model.item.ReadOnlyItem;
 import org.teamstbf.yats.testutil.TestUtil;
 import org.teamstbf.yats.testutil.TypicalTestPersons;
@@ -107,7 +108,7 @@ public abstract class AddressBookGuiTest {
     /**
      * Asserts the person shown in the card is same as the given person
      */
-    public void assertMatching(ReadOnlyItem person, PersonCardHandle card) {
+    public void assertMatching(ReadOnlyEvent person, PersonCardHandle card) {
         assertTrue(TestUtil.compareCardAndPerson(card, person));
     }
 

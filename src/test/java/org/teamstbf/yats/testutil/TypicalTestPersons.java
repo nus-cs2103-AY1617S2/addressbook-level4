@@ -2,10 +2,9 @@ package org.teamstbf.yats.testutil;
 
 import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 import org.teamstbf.yats.model.TaskManager;
+import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.Task;
 import org.teamstbf.yats.model.item.UniqueItemList;
-
-import t16b4.yats.testutil.TestEvent;
 
 /**
  *
@@ -48,7 +47,7 @@ public class TypicalTestPersons {
     public static void loadAddressBookWithSampleData(TaskManager ab) {
         for (TestEvent person : new TypicalTestPersons().getTypicalPersons()) {
             try {
-                ab.addTask(new Task(person));
+                ab.addTask(new Event(person));
             } catch (UniqueItemList.DuplicatePersonException e) {
                 assert false : "not possible";
             }
