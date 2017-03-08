@@ -1,61 +1,61 @@
-package seedu.address.model.person;
+package seedu.address.model.task;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's name in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ * Represents a Task's description in the ToDo list.
+ * Guarantees: immutable; is valid as declared in {@link #isValidDescription(String)}
  */
-public class Name {
+public class Description {
 
-    public static final String MESSAGE_NAME_CONSTRAINTS =
-            "Person names should only contain alphanumeric characters and spaces, and it should not be blank";
+    public static final String MESSAGE_DESCRIPTION_CONSTRAINTS =
+            "Task descriptions should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of the task must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String DESCRIPTION_VALIDATION_REGEX = "^[A-Za-z, ]++$";
 
-    public final String fullName;
+    public final String description;
 
     /**
-     * Validates given name.
+     * Validates given description.
      *
-     * @throws IllegalValueException if given name string is invalid.
+     * @throws IllegalValueException if given description string is invalid.
      */
-    public Name(String name) throws IllegalValueException {
-        assert name != null;
-        String trimmedName = name.trim();
-        if (!isValidName(trimmedName)) {
-            throw new IllegalValueException(MESSAGE_NAME_CONSTRAINTS);
+    public Description(String description) throws IllegalValueException {
+        assert description != null;
+        String trimmedDescription = description.trim();
+        if (!isValidDescription(trimmedDescription)) {
+            throw new IllegalValueException(MESSAGE_DESCRIPTION_CONSTRAINTS);
         }
-        this.fullName = trimmedName;
+        this.description = trimmedDescription;
     }
 
     /**
-     * Returns true if a given string is a valid person name.
+     * Returns true if a given string is a valid description.
      */
-    public static boolean isValidName(String test) {
-        return test.matches(NAME_VALIDATION_REGEX);
+    public static boolean isValidDescription(String test) {
+        return test.matches(DESCRIPTION_VALIDATION_REGEX);
     }
 
 
     @Override
     public String toString() {
-        return fullName;
+        return description;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Name // instanceof handles nulls
-                && this.fullName.equals(((Name) other).fullName)); // state check
+                || (other instanceof Description // instanceof handles nulls
+                && this.description.equals(((Description) other).description)); // state check
     }
 
     @Override
     public int hashCode() {
-        return fullName.hashCode();
+        return description.hashCode();
     }
 
 }

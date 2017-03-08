@@ -1,30 +1,30 @@
 package seedu.address.model.util;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.UniquePersonList.DuplicatePersonException;
+import seedu.address.model.TaskList;
+import seedu.address.model.ReadOnlyTaskList;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Email;
+import seedu.address.model.task.Description;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.Priority;
+import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
-    public static Person[] getSamplePersons() {
+    public static Task[] getSamplePersons() {
         try {
-            return new Person[] {
-                new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@gmail.com"),
+            return new Task[] {
+                new Task(new Description("Alex Yeoh"), new Priority("87438807"), new Email("alexyeoh@gmail.com"),
                     new UniqueTagList("friends")),
-                new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@gmail.com"),
+                new Task(new Description("Bernice Yu"), new Priority("99272758"), new Email("berniceyu@gmail.com"),
                     new UniqueTagList("colleagues", "friends")),
-                new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@yahoo.com"),
+                new Task(new Description("Charlotte Oliveiro"), new Priority("93210283"), new Email("charlotte@yahoo.com"),
                     new UniqueTagList("neighbours")),
-                new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@google.com"),
+                new Task(new Description("David Li"), new Priority("91031282"), new Email("lidavid@google.com"),
                     new UniqueTagList("family")),
-                new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@outlook.com"),
+                new Task(new Description("Irfan Ibrahim"), new Priority("92492021"), new Email("irfan@outlook.com"),
                     new UniqueTagList("classmates")),
-                new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@gmail.com"),
+                new Task(new Description("Roy Balakrishnan"), new Priority("92624417"), new Email("royb@gmail.com"),
                     new UniqueTagList("colleagues"))
             };
         } catch (IllegalValueException e) {
@@ -32,14 +32,14 @@ public class SampleDataUtil {
         }
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
+    public static ReadOnlyTaskList getSampleAddressBook() {
         try {
-            AddressBook sampleAB = new AddressBook();
-            for (Person samplePerson : getSamplePersons()) {
-                sampleAB.addPerson(samplePerson);
+            TaskList sampleAB = new TaskList();
+            for (Task samplePerson : getSamplePersons()) {
+                sampleAB.addTask(samplePerson);
             }
             return sampleAB;
-        } catch (DuplicatePersonException e) {
+        } catch (DuplicateTaskException e) {
             throw new AssertionError("sample data cannot contain duplicate persons", e);
         }
     }
