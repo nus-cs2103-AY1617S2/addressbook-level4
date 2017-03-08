@@ -31,7 +31,7 @@ Component: Storage
 #### [Yim Chia Hui](http://github.com/sharkey1314)
 <img src="images/sharkey1314.jpg" width="150"><br>
 Role: Director of Unrequited Love<br>
-Responsibilities: Code Quality, Scheduling & TrackinSceneg <br>
+Responsibilities: Code Quality, Scheduling & Tracking <br>
 Component: Model
 
 -----
