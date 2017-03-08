@@ -26,8 +26,8 @@ public class EditCommandTest extends AddressBookGuiTest {
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
         String detailsToEdit
-        = "Bobby s/2017-04-01T10:16:30 e/2017-04-01T10:16:30 l/Block 123, Bobby Street 3 t/husband";
-        int addressBookIndex= 1;
+            = "Bobby s/2017-04-01T10:16:30 e/2017-04-01T10:16:30 l/Block 123, Bobby Street 3 t/husband";
+        int addressBookIndex = 1;
 
         TestPerson editedPerson = new PersonBuilder().withName("Bobby")
                 .withEndDateTime("2017-04-01T10:16:30")
