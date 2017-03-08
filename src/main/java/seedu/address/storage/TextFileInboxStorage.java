@@ -45,7 +45,7 @@ public class TextFileInboxStorage implements AddressBookStorage {
         return Optional.of(userInboxOptional);
     }
 
-    public void saveAddressBook(ReadOnlyUserInbox userInbox) throws IOException {
+    public void saveUserInbox(ReadOnlyUserInbox userInbox) throws IOException {
         saveUserInbox(userInbox, filePath);
 
     }

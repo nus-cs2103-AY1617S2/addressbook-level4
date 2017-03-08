@@ -34,10 +34,10 @@ public interface AddressBookStorage {
      * @param addressBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyUserInbox addressBook) throws IOException;
+    void saveUserInbox(ReadOnlyUserInbox addressBook) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlyUserInbox)
+     * @see #saveUserInbox(ReadOnlyUserInbox)
      */
     void saveUserInbox(ReadOnlyUserInbox addressBook, String filePath) throws IOException;
 

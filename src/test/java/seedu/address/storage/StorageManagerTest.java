@@ -61,7 +61,7 @@ public class StorageManagerTest {
          * More extensive testing of UserPref saving/reading is done in {@link XmlAddressBookStorageTest} class.
          */
         UserInbox original = new TypicalTestPersons().getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
+        storageManager.saveUserInbox(original);
         ReadOnlyUserInbox retrieved = storageManager.readUserInbox().get();
         assertEquals(original, new UserInbox(retrieved));
     }

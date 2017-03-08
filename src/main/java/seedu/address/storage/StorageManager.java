@@ -70,7 +70,7 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyUserInbox addressBook) throws IOException {
+    public void saveUserInbox(ReadOnlyUserInbox addressBook) throws IOException {
         saveUserInbox(addressBook, addressBookStorage.getUserInboxFilePath());
     }
 
@@ -86,7 +86,7 @@ public class StorageManager extends ComponentManager implements Storage {
     public void handleAddressBookChangedEvent(AddressBookChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
-            saveAddressBook(event.data);
+            saveUserInbox(event.data);
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }

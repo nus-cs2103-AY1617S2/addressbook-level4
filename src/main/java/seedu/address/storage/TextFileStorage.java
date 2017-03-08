@@ -28,11 +28,11 @@ import seedu.address.model.person.UniqueTaskList;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Stores addressbook data in an XML file
+ * Stores User inbox data in a Text file. 
  */
 public class TextFileStorage {
     /**
-     * Saves the given addressbook data to the specified file.
+     * Saves the given User inbox data to the specified file.
      */
     public static void saveDataToFile(File file, ReadOnlyUserInbox userInbox)
             throws FileNotFoundException {

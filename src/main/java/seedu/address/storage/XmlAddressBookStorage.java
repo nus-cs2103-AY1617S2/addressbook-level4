@@ -55,12 +55,12 @@ public class XmlAddressBookStorage implements AddressBookStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyUserInbox addressBook) throws IOException {
+    public void saveUserInbox(ReadOnlyUserInbox addressBook) throws IOException {
         saveUserInbox(addressBook, filePath);
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyUserInbox)}
+     * Similar to {@link #saveUserInbox(ReadOnlyUserInbox)}
      * @param filePath location of the data. Cannot be null
      */
     public void saveUserInbox(ReadOnlyUserInbox addressBook, String filePath) throws IOException {
