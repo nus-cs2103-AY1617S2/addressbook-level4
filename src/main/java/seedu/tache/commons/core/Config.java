@@ -14,7 +14,7 @@ public class Config {
     private String appTitle = "Address App";
     private Level logLevel = Level.INFO;
     private String userPrefsFilePath = "preferences.json";
-    private String addressBookFilePath = "data/addressbook.xml";
+    private String addressBookFilePath = "data/tache.xml";
     private String addressBookName = "MyAddressBook";
 
 

@@ -11,6 +11,7 @@ import seedu.tache.logic.commands.exceptions.CommandException;
 import seedu.tache.logic.parser.Parser;
 import seedu.tache.model.Model;
 import seedu.tache.model.person.ReadOnlyPerson;
+import seedu.tache.model.task.FloatingTask;
 import seedu.tache.storage.Storage;
 
 /**
@@ -36,7 +37,8 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
-    public ObservableList<ReadOnlyPerson> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<FloatingTask> getFilteredTaskList() {
+        return model.getFilteredTaskList();
     }
+
 }
