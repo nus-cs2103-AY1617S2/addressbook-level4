@@ -23,7 +23,7 @@ By : `Miao Ling` , `Ian` , `Qi Xiang` and `Dylan` - `[W09-B4]` Since : `Feb 2017
 > <img src="images/add_screen.jpg" width="600">
 
 
-5. After step 6, you can view your task in 3 different tabs.
+5. After step 5, you can view your task in 3 different tabs.
 
    > **Today/Date**
    >
