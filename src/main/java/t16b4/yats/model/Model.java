@@ -37,7 +37,7 @@ public interface Model {
             throws UniqueItemList.DuplicatePersonException;
 
     /** Returns the filtered person list as an {@code UnmodifiableObservableList<ReadOnlyPerson>} */
-    UnmodifiableObservableList<ReadOnlyEvent> getFilteredPersonList();
+    UnmodifiableObservableList<ReadOnlyEvent> getFilteredTaskList();
 
     /** Updates the filter of the filtered person list to show all persons */
     void updateFilteredListToShowAll();
