@@ -24,8 +24,6 @@ import seedu.task.commons.core.EventsCenter;
 import seedu.task.commons.events.model.TaskListChangedEvent;
 import seedu.task.commons.events.ui.JumpToListRequestEvent;
 import seedu.task.commons.events.ui.ShowHelpRequestEvent;
-import seedu.task.logic.Logic;
-import seedu.task.logic.LogicManager;
 import seedu.task.logic.commands.AddCommand;
 import seedu.task.logic.commands.ClearCommand;
 import seedu.task.logic.commands.Command;
