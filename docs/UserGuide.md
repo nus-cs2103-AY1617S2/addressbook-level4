@@ -69,8 +69,6 @@ Format: `update INDEX [NAME] [startdate/STARTDATE] [enddate/ENDDATE] [recurring/
 > * Updates the task at the specified `INDEX`. <br>
     The index refers to the index number shown in the last task listing.<br>
     The index **must be a positive integer** 1, 2, 3, ...
-> * If no optional fields are added, task will be set to completed if not completed.
-> * Otherwise, if task is completed, the task will be set to not completed.
 > * Existing values will be updated to the input values.
 > * When editing tags, the existing tags of the task will be set to contain the new tags; the old tags will be removed.
 
