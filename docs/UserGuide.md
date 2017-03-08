@@ -92,19 +92,19 @@ Examples:
   Returns only tasks containing `School` with a priority of 1.
 
 #### Deleting a task : `kill / k`
-Deletes the specified task from the todo list.<br>
-Format: `kill INDEX`
+Deletes the specified task from ezDo.<br>
+Format: **`kill INDEX`**
 
-> Deletes the todo at the specified `INDEX`.
+> Deletes the task at the specified `INDEX`.<br>
   The index refers to the index number shown in the most recent listing.<br>
   The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
-* `kill 2`
-  Deletes the 2nd task in the most recent view of the todo list.
+* **`kill 2`**
+  Deletes the 2nd task in the most recent view of ezDo.
 
-* `kill 1`
-  Deletes the 1st task in the most recent view of the todo list.
+* **`kill 1`**
+  Deletes the 1st task in the most recent view of ezDo.
 
 #### Sort a list of task `sort / s`
 > Sort the list of tasks in a certain order (p - priority, d - deadline)
