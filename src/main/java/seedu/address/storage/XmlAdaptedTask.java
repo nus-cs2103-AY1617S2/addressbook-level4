@@ -8,7 +8,8 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Name;
+import seedu.address.model.task.Content;
+import seedu.address.model.task.TaskDateTime;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 
@@ -18,7 +19,9 @@ import seedu.address.model.task.Task;
 public class XmlAdaptedTask {
 
     @XmlElement(required = true)
-    private String name;
+    private String content;
+    @XmlElement(required = true)
+    private String dateTime;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -36,7 +39,8 @@ public class XmlAdaptedTask {
      * @param source future changes to this will not affect the created XmlAdaptedPerson
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
-        name = source.getName().fullName;
+        content = source.getContent().fullContent;
+        dateTime = source.getDateTime().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -44,17 +48,18 @@ public class XmlAdaptedTask {
     }
 
     /**
-     * Converts this jaxb-friendly adapted person object into the model's Person object.
+     * Converts this jaxb-friendly adapted task object into the model's Task object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person
      */
     public Task toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<Tag> taskTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+            taskTags.add(tag.toModelType());
         }
-        final Name name = new Name(this.name);
-        final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Task(name, tags);
+        final Content content = new Content(this.content);
+        final TaskDateTime dateTime = new TaskDateTime(this.dateTime);
+        final UniqueTagList tags = new UniqueTagList(taskTags);
+        return new Task(content, dateTime, tags);
     }
 }
