@@ -1,53 +1,53 @@
 package seedu.address.model.util;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.TaskManager;
 import seedu.address.model.ReadOnlyTaskManager;
-import seedu.address.model.task.Description;
-import seedu.address.model.task.Deadline;
-import seedu.address.model.task.Name;
-import seedu.address.model.task.Task;
-import seedu.address.model.task.Priority;
-import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.address.model.TaskManager;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Description;
+import seedu.address.model.task.Name;
+import seedu.address.model.task.Priority;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
-    public static Task[] getSampleTasks() {
-        try {
-            return new Task[] {
-                new Task(new Name("Alex Yeoh"), new Priority("87438807"), new Deadline("alexyeoh@gmail.com"),
-                    new Description("Blk 30 Geylang Street 29, #06-40"),
-                    new UniqueTagList("friends")),
-                new Task(new Name("Bernice Yu"), new Priority("99272758"), new Deadline("berniceyu@gmail.com"),
-                    new Description("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                    new UniqueTagList("colleagues", "friends")),
-                new Task(new Name("Charlotte Oliveiro"), new Priority("93210283"), new Deadline("charlotte@yahoo.com"),
-                    new Description("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                    new UniqueTagList("neighbours")),
-                new Task(new Name("David Li"), new Priority("91031282"), new Deadline("lidavid@google.com"),
-                    new Description("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                    new UniqueTagList("family")),
-                new Task(new Name("Irfan Ibrahim"), new Priority("92492021"), new Deadline("irfan@outlook.com"),
-                    new Description("Blk 47 Tampines Street 20, #17-35"),
-                    new UniqueTagList("classmates")),
-                new Task(new Name("Roy Balakrishnan"), new Priority("92624417"), new Deadline("royb@gmail.com"),
-                    new Description("Blk 45 Aljunied Street 85, #11-31"),
-                    new UniqueTagList("colleagues"))
-            };
-        } catch (IllegalValueException e) {
-            throw new AssertionError("sample data cannot be invalid", e);
-        }
-    }
+	public static Task[] getSampleTasks() {
+		try {
+			return new Task[] {
+					new Task(new Name("Refactor"), new Priority("1"), new Deadline("today"),
+							new Description("Refactor all mentions of person / addressbook"),
+							new UniqueTagList("Huanhui")),
+					new Task(new Name("pass Travis"), new Priority("1"), new Deadline("today"),
+							new Description("Remove trailing whitespaces in md files for Travis to pass"),
+							new UniqueTagList("keanwai", "z")),
+					new Task(new Name("help"), new Priority("1"), new Deadline("today"),
+							new Description("Update help command"),
+							new UniqueTagList("ChiaSin")),
+					new Task(new Name("merge"), new Priority("1"), new Deadline("today"),
+							new Description("Fix the master branch merge conflicts"),
+							new UniqueTagList("JinShun")),
+					new Task(new Name("help botton"), new Priority("2"), new Deadline("next week"),
+							new Description("Update Help button to our user guide"),
+							new UniqueTagList("ChiaSin")),
+					new Task(new Name("UI interface"), new Priority("3"), new Deadline("next week"),
+							new Description("have 3 lists"),
+							new UniqueTagList("Huanhui"))
+			};
+		} catch (IllegalValueException e) {
+			throw new AssertionError("sample data cannot be invalid", e);
+		}
+	}
 
-    public static ReadOnlyTaskManager getSampleTaskManager() {
-        try {
-            TaskManager sampleAB = new TaskManager();
-            for (Task sampleTask : getSampleTasks()) {
-                sampleAB.addTask(sampleTask);
-            }
-            return sampleAB;
-        } catch (DuplicateTaskException e) {
-            throw new AssertionError("sample data cannot contain duplicate tasks", e);
-        }
-    }
+	public static ReadOnlyTaskManager getSampleTaskManager() {
+		try {
+			TaskManager sampleAB = new TaskManager();
+			for (Task sampleTask : getSampleTasks()) {
+				sampleAB.addTask(sampleTask);
+			}
+			return sampleAB;
+		} catch (DuplicateTaskException e) {
+			throw new AssertionError("sample data cannot contain duplicate tasks", e);
+		}
+	}
 }
