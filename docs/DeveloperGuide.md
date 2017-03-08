@@ -657,12 +657,96 @@ Use case resumes at step 2.
 3. Use case ends.
 
 ##### Extensions
-1a. No completed tasks
-> 1a1. System displays no completed tasks.
-> 1a2. Use case ends.
+2a. No completed tasks
+> 2a1. System displays no completed tasks.
+> 2a2. Use case ends.
 
 ---
 
+### Use case: Edit Tasks
+#### Main Success Scenario:
+1. User requests to list uncompleted tasks.
+2. System displays uncompleted tasks.
+3. User edits a task.
+4. System saves the edits.
+5. Use case ends.
+
+##### Extensions
+2. There is nothing uncompleted.  
+> 2a1. Use case ends. 
+
+---
+
+### Use case: See A List Of Uncompleted Tasks
+#### Main Success Scenario:
+1. User requests for list of uncompleted tasks.
+2. System display list of uncompleted task.
+3. Use case ends.
+
+##### Extensions
+2a. No uncompleted tasks
+> 2a1. System displays no uncompleted tasks.
+> 2a2. Use case ends.
+
+---
+
+### Use case: Delete Tasks
+#### Main Success Scenario:
+1. User requests to list tasks.
+2. System displays tasks.
+3. User deletes a task.
+4. System displays new list without the deleted task.
+5. Use case ends.
+
+##### Extensions
+3. There is no such task.  
+> 3a1. Use case ends.
+
+---
+
+### Use case: Snooze Tasks
+#### Main Success Scenario:
+1. User requests to list tasks.
+2. System displays tasks.
+3. User snoozes a task.
+4. System saves the edits.
+5. Use case ends.
+
+##### Extensions
+3a. There is no such task.  
+> 3a1. Use case ends.
+
+3b. Task not completed.
+> 3b2. Use case ends.
+
+---
+### Use case: View My Task Progress
+#### Main Success Scenario:
+1. User requests to list uncompleted tasks.
+2. System displays uncompleted tasks.
+3. User requests to view a task's progress.
+4. System displays the task progress.
+5. Use case ends.
+
+##### Extensions
+2. There is no such task.  
+> 2a1. Use case ends.
+
+---
+
+### Use case: Same Name Detection
+#### Main Success Scenario:
+1. User requests to add a new task.
+2. System detects same name and display message.
+3. User changes the task name.
+4. System adds task.
+5. Use case ends.
+
+##### Extensions
+3. Same name detected again.  
+> 3a1. Go back to 2.
+
+---
 
 ## Appendix C : Non Functional Requirements
 
