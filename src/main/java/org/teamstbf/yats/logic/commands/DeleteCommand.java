@@ -4,7 +4,6 @@ import org.teamstbf.yats.commons.core.Messages;
 import org.teamstbf.yats.commons.core.UnmodifiableObservableList;
 import org.teamstbf.yats.logic.commands.exceptions.CommandException;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
-import org.teamstbf.yats.model.item.ReadOnlyItem;
 import org.teamstbf.yats.model.item.UniqueItemList.PersonNotFoundException;
 
 /**

@@ -2,7 +2,6 @@ package org.teamstbf.yats.model;
 
 
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
-import org.teamstbf.yats.model.item.ReadOnlyItem;
 import org.teamstbf.yats.model.tag.Tag;
 
 import javafx.collections.ObservableList;

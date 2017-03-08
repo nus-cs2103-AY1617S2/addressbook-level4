@@ -10,7 +10,6 @@ import org.teamstbf.yats.logic.commands.exceptions.CommandException;
 import org.teamstbf.yats.logic.parser.Parser;
 import org.teamstbf.yats.model.Model;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
-import org.teamstbf.yats.model.item.ReadOnlyItem;
 import org.teamstbf.yats.storage.Storage;
 
 import javafx.collections.ObservableList;

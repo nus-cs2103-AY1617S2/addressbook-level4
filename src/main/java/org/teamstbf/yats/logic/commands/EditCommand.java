@@ -10,8 +10,6 @@ import org.teamstbf.yats.model.item.Deadline;
 import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
-import org.teamstbf.yats.model.item.ReadOnlyItem;
-import org.teamstbf.yats.model.item.Task;
 import org.teamstbf.yats.model.item.Timing;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.item.UniqueItemList;
@@ -79,11 +77,11 @@ public class EditCommand extends Command {
                                              EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
-        Title updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getTitle);
+        // Title updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getTitle);
         // Deadline updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getDeadline);
         // Timing updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getTiming);
-        Description updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getDescription);
-        UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
+        // Description updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getDescription);
+        // UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
         return new Event();
     }

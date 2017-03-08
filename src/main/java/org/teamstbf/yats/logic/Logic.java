@@ -3,8 +3,6 @@ package org.teamstbf.yats.logic;
 import org.teamstbf.yats.logic.commands.CommandResult;
 import org.teamstbf.yats.logic.commands.exceptions.CommandException;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
-import org.teamstbf.yats.model.item.ReadOnlyItem;
-
 import javafx.collections.ObservableList;
 
 /**

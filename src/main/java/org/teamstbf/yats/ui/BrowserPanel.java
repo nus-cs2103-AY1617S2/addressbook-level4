@@ -2,8 +2,6 @@ package org.teamstbf.yats.ui;
 
 import org.teamstbf.yats.commons.util.FxViewUtil;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
-import org.teamstbf.yats.model.item.ReadOnlyItem;
-
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;

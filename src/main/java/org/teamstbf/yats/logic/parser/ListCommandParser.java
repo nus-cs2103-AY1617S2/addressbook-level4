@@ -13,14 +13,12 @@ public class ListCommandParser {
 	 * and returns a ListCommand object for execution.
 	 */
 	public Command parse(String args) {
-		if (args.contains(ListCommand.COMMAND_WORD_EXTENTION)) {
-			switch(args) {
-			case (ListCommand.COMMAND_WORD_SUFFIX_TITLE):
-			case (ListCommand.COMMAND_WORD_SUFFIX_DEADLINE):
-			case (ListCommand.COMMAND_WORD_SUFFIX_TIMING):
-			case (ListCommand.COMMAND_WORD_SUFFIX_TAG):
-			}
-		}
+		// if (args.contains(ListCommand.COMMAND_WORD_EXTENTION)) {
+		//	switch(args) {
+		//	case (ListCommand.COMMAND_WORD_SUFFIX_TITLE):
+		//	case (ListCommand.COMMAND_WORD_SUFFIX_DEADLINE):
+		//	case (ListCommand.COMMAND_WORD_SUFFIX_TIMING):
+		//	case (ListCommand.COMMAND_WORD_SUFFIX_TAG):
 		return new ListCommand();
 	}
 }
