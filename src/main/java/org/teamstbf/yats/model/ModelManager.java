@@ -82,7 +82,7 @@ public class ModelManager extends ComponentManager implements Model {
 		taskManager.updatePerson(addressBookIndex, editedPerson);
 		indicateAddressBookChanged();
 	}
-	
+
 	@Override
 	public void updatePerson(int filteredPersonListIndex, Event editedPerson) throws DuplicatePersonException {
 		// TODO Auto-generated method stub

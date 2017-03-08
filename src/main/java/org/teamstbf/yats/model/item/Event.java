@@ -19,7 +19,7 @@ public class Event implements ReadOnlyEvent {
     /**
      * Every field must be present and not null.
      */
-    public Event(Title name, Location location, Periodic periodic, Timing startTime, 
+    public Event(Title name, Location location, Periodic periodic, Timing startTime,
     		Timing endTime, Description description, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name);
         this.name = name;
@@ -33,9 +33,9 @@ public class Event implements ReadOnlyEvent {
     }
 
     public Event(ReadOnlyEvent editedReadOnlyPerson) {
-        this(editedReadOnlyPerson.getTitle(), editedReadOnlyPerson.getLocation(), 
+        this(editedReadOnlyPerson.getTitle(), editedReadOnlyPerson.getLocation(),
         		editedReadOnlyPerson.getPeriod(), editedReadOnlyPerson.getStartTime(),
-                editedReadOnlyPerson.getEndTime(), editedReadOnlyPerson.getDescription(), 
+                editedReadOnlyPerson.getEndTime(), editedReadOnlyPerson.getDescription(),
                 editedReadOnlyPerson.getTags());
     }
 

@@ -64,7 +64,7 @@ public class SampleDataUtil {
 		}
 	}
 	/*
-	new Event(new Title("Restructuring of sustainability revision"), 
+	new Event(new Title("Restructuring of sustainability revision"),
 	new Deadline("30/05/2030"), new Timing("5:00pm"),
 	new Description("Mid term test is going to be difficult!"),
 	new UniqueTagList("midterm")),
