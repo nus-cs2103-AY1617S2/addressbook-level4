@@ -6,6 +6,7 @@ import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
+import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
  * The API of the Model component.

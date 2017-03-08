@@ -11,8 +11,8 @@ import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
 import seedu.address.commons.util.FileUtil;
-import seedu.address.model.TaskManager;
 import seedu.address.model.ReadOnlyTaskManager;
+import seedu.address.model.TaskManager;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.TypicalTestTasks;
 

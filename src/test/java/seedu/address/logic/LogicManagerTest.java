@@ -35,16 +35,16 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.TaskManager;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyTaskManager;
+import seedu.address.model.TaskManager;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Name;
-import seedu.address.model.task.Task;
 import seedu.address.model.task.Date;
+import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Task;
 import seedu.address.storage.StorageManager;
 
 public class LogicManagerTest {
@@ -113,6 +113,7 @@ public class LogicManagerTest {
      * Executes the command, confirms that a CommandException is not thrown and
      * that the result message is correct. Also confirms that both the 'task
      * manager' and the 'last shown list' are as specified.
+     * 
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager,
      *      List)
      */
@@ -125,7 +126,9 @@ public class LogicManagerTest {
      * Executes the command, confirms that a CommandException is thrown and that
      * the result message is correct. Both the 'task manager' and the 'last
      * shown list' are verified to be unchanged.
-     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager, List)
+     * 
+     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager,
+     *      List)
      */
     private void assertCommandFailure(String inputCommand, String expectedMessage) {
         TaskManager expectedTaskManager = new TaskManager(model.getTaskManager());
@@ -251,6 +254,7 @@ public class LogicManagerTest {
     /**
      * Confirms the 'invalid argument index number behaviour' for the given
      * command targeting a single task in the shown list, using visible index.
+     * 
      * @param commandWord
      *            to test assuming it targets a single task in the last shown
      *            list based on visible index.
@@ -464,6 +468,7 @@ public class LogicManagerTest {
 
         /**
          * Adds auto-generated Task objects to the given TaskManager
+         * 
          * @param taskManager
          *            The TaskManager to which the Tasks will be added
          */
@@ -482,6 +487,7 @@ public class LogicManagerTest {
 
         /**
          * Adds auto-generated Task objects to the given model
+         * 
          * @param model
          *            The model to which the Tasks will be added
          */

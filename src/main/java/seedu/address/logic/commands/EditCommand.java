@@ -6,12 +6,12 @@ import java.util.Optional;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Date;
 import seedu.address.model.task.Name;
-import seedu.address.model.task.Task;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
-import seedu.address.model.tag.UniqueTagList;
 
 /**
  * Edits the details of an existing task in the task manager.

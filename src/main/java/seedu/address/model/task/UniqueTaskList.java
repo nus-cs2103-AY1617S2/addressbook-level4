@@ -1,5 +1,6 @@
 package seedu.address.model.task;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -11,9 +12,7 @@ import seedu.address.commons.util.CollectionUtil;
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not
- * allow nulls.
- *
- * Supports a minimal set of list operations.
+ * allow nulls. Supports a minimal set of list operations.
  *
  * @see Task#equals(Object)
  * @see CollectionUtil#elementsAreUnique(Collection)

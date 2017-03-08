@@ -12,8 +12,8 @@ import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import seedu.address.TestApp;
-import seedu.address.model.task.Task;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Task;
 import seedu.address.testutil.TestUtil;
 
 /**
@@ -42,6 +42,7 @@ public class TaskListPanelHandle extends GuiHandle {
     /**
      * Returns true if the list is showing the task details correctly and in
      * correct order.
+     * 
      * @param tasks
      *            A list of task in the correct order.
      */
@@ -52,6 +53,7 @@ public class TaskListPanelHandle extends GuiHandle {
     /**
      * Returns true if the list is showing the task details correctly and in
      * correct order.
+     * 
      * @param startPosition
      *            The starting position of the sub list.
      * @param tasks

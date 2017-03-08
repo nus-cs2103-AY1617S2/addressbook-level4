@@ -32,10 +32,10 @@ import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.TaskManager;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Name;
-import seedu.address.model.task.Task;
 import seedu.address.model.task.Date;
+import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Task;
 import seedu.address.storage.XmlSerializableTaskManager;
 
 /**
@@ -106,6 +106,7 @@ public class TestUtil {
     /**
      * Appends the file name to the sandbox folder path. Creates the sandbox
      * folder if it doesn't exist.
+     * 
      * @param fileName
      * @return
      */
@@ -206,10 +207,8 @@ public class TestUtil {
 
     /**
      * Gets private method of a class Invoke the method using
-     * method.invoke(objectInstance, params...)
-     *
-     * Caveat: only find method declared in the current Class, not inherited
-     * from supertypes
+     * method.invoke(objectInstance, params...) Caveat: only find method
+     * declared in the current Class, not inherited from supertypes
      */
     public static Method getPrivateMethod(Class<?> objectClass, String methodName) throws NoSuchMethodException {
         Method method = objectClass.getDeclaredMethod(methodName);
@@ -239,6 +238,7 @@ public class TestUtil {
 
     /**
      * Gets mid point of a node relative to its scene.
+     * 
      * @param node
      * @return
      */
@@ -250,6 +250,7 @@ public class TestUtil {
 
     /**
      * Gets the bound of the node relative to the parent scene.
+     * 
      * @param node
      * @return
      */
@@ -275,6 +276,7 @@ public class TestUtil {
 
     /**
      * Removes a subset from the list of tasks.
+     * 
      * @param tasks
      *            The list of tasks
      * @param tasksToRemove
@@ -289,6 +291,7 @@ public class TestUtil {
 
     /**
      * Returns a copy of the list with the task at specified index removed.
+     * 
      * @param list
      *            original list to copy from
      * @param targetIndexInOneIndexedFormat
@@ -300,6 +303,7 @@ public class TestUtil {
 
     /**
      * Replaces tasks[i] with a task.
+     * 
      * @param tasks
      *            The array of tasks.
      * @param task
@@ -315,6 +319,7 @@ public class TestUtil {
 
     /**
      * Appends tasks to the array of tasks.
+     * 
      * @param tasks
      *            A array of tasks.
      * @param tasksToAdd

@@ -13,10 +13,10 @@ import java.util.stream.Collectors;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.model.task.Date;
-import seedu.address.model.task.Name;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Date;
+import seedu.address.model.task.Name;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser
@@ -55,8 +55,7 @@ public class ParserUtil {
     }
 
     /**
-     * Splits a preamble string into ordered fields.
-     *         otherwise.
+     * Splits a preamble string into ordered fields. otherwise.
      */
     public static List<Optional<String>> splitPreamble(String preamble, int numFields) {
         return Arrays.stream(Arrays.copyOf(preamble.split("\\s+", numFields), numFields)).map(Optional::ofNullable)

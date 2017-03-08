@@ -17,7 +17,6 @@ import seedu.address.commons.util.CollectionUtil;
 
 /**
  * A list of tags that enforces no nulls and uniqueness between its elements.
- *
  * Supports minimal set of list operations for the app's features.
  *
  * @see Tag#equals(Object)
