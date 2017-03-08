@@ -3,7 +3,6 @@ package seedu.address.model.person;
 import java.util.Objects;
 
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.model.tag.UniqueTagList;
 
 /**
  * Represents a Person in the address book.
@@ -12,7 +11,6 @@ import seedu.address.model.tag.UniqueTagList;
 public class Task implements ReadOnlyTask {
 
     private Name name;
-    private boolean isTaskDone;
 
 
     /**

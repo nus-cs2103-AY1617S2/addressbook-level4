@@ -14,7 +14,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.Task;
-import seedu.address.model.tag.Tag;
 
 /**
  * An Immutable AddressBook that is serializable to XML format

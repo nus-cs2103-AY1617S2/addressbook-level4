@@ -1,12 +1,7 @@
 package seedu.address.model;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
@@ -14,8 +9,6 @@ import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.UniquePersonList.DuplicatePersonException;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
 
 /**
  * Wraps all data at the address-book level
