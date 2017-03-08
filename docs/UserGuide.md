@@ -107,10 +107,17 @@ Examples:
   Deletes the 1st task in the most recent view of ezDo.
 
 #### Sort a list of task `sort / s`
-> Sort the list of tasks in a certain order (p - priority, d - deadline)
-> Format: `sort ORDERTYPE`
+Sort the list of tasks in a certain order.<br>
+Format: **`sort ORDERTYPE`**
 
-Examples: `sort p'
+> Sorts the list of tasks according to the ORDERTYPE (p - priority, d - due date, s - start date)
+
+Examples: 
+* **`sort p`**
+  Sorts the list of tasks according to priority.
+  
+* **`sort d`**
+  Sorts the list of tasks according to the due date.
 
 #### Marking a task as done : `done / d`
 Marks the specified task from the todo list as done. <br>
