@@ -14,7 +14,7 @@ import seedu.address.model.task.Task;
 import seedu.address.model.task.Title;
 
 /**
- * JAXB-friendly version of the Person.
+ * JAXB-friendly version of the Task.
  */
 public class XmlAdaptedTask {
 

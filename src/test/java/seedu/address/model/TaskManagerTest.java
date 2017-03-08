@@ -54,7 +54,7 @@ public class TaskManagerTest {
         // Repeat td.alice twice
         List<Task> newTasks = Arrays.asList(new Task(td.task1), new Task(td.task1));
         List<Label> newLabels = td.task1.getLabels().asObservableList();
-        AddressBookStub newData = new AddressBookStub(newTasks, newLabels);
+        TaskManagerStub newData = new TaskManagerStub(newTasks, newLabels);
 
         thrown.expect(AssertionError.class);
         taskManager.resetData(newData);
@@ -67,7 +67,7 @@ public class TaskManagerTest {
         List<Label> newLabels = new ArrayList<>(typicalTaskManager.getLabelList());
         // Repeat the first label twice
         newLabels.add(newLabels.get(0));
-        AddressBookStub newData = new AddressBookStub(newTasks, newLabels);
+        TaskManagerStub newData = new TaskManagerStub(newTasks, newLabels);
 
         thrown.expect(AssertionError.class);
         taskManager.resetData(newData);
@@ -98,13 +98,13 @@ public class TaskManagerTest {
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose tasks and labels lists can violate interface constraints.
+     * A stub ReadOnlyTaskManager whose tasks and labels lists can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyTaskManager {
+    private static class TaskManagerStub implements ReadOnlyTaskManager {
         private final ObservableList<ReadOnlyTask> tasks = FXCollections.observableArrayList();
         private final ObservableList<Label> labels = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<? extends ReadOnlyTask> tasks, Collection<? extends Label> labels) {
+        TaskManagerStub(Collection<? extends ReadOnlyTask> tasks, Collection<? extends Label> labels) {
             this.tasks.setAll(tasks);
             this.labels.setAll(labels);
         }

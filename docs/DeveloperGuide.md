@@ -351,7 +351,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | delete a task | remove task that I no longer need
 `* * *` | user | update a task | update task details so that my task is update to date
 `* * *` | user | view an existing task | view the details of the task
-`* * *` | user | list outstanding task chronologically | know what tasks I need to complete and in which order
+`* * *` | user | list outstanding tasks in a chronological order | know what tasks I need to complete and in which order
 `* * *` | user | add attachments and links to a task | find all the resources and information I need to complete the task in one place
 `* * *` | user | undo my previous operation | can undo any mistakes executed in the previous command
 `* * *` | user | find task based on keywords | find out what are the tasks with the same nature
@@ -362,10 +362,10 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | book multiple time slots for a task | not need to wait till a time slot is confirmed to be able to add the task
 `* * *` | user | other slots to be freed when I confirm a particular slot | better allocate my time for other tasks
 `* * *` | user | add a recurring task | not need to create the same task every time
-`* * *` | user | mark the completion of a task | better organise outstanding task
-`* * *` | user | view my completed task | keep track of what task I have completed
-`* *` | user | add location to a task | attach location for events type of tasks
-`* *` | user | be able to view my agenda for the day | know what tasks to work on
+`* * *` | user | mark the completion of a task | differentiate it from other outstanding tasks I need to complete
+`* * *` | user | view my completed tasks | keep track of what tasks I have completed
+`* *` | user | add location to a task | attach location for event type of tasks
+`* *` | user | be able to view my agenda for the day | know what tasks to work on for the day
 `* *` | user | iterate through my command history | re-execute a command that I have previously executed before
 `* *` | user | have words that I am typing to be autocompleted by the system | execute a command at a faster rate
 `* *` | user | delete a label | remove that label from all tasks that has that label

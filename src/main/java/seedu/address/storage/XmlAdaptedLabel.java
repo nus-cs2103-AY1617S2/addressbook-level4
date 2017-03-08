@@ -6,7 +6,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.label.Label;
 
 /**
- * JAXB-friendly adapted version of the Tag.
+ * JAXB-friendly adapted version of the Label.
  */
 public class XmlAdaptedLabel {
 

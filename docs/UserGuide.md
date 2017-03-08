@@ -161,10 +161,10 @@ Returns all tasks having name or label name containing `project`, `Project`,  `g
 
 Deletes the specified task from the task manager. Reversible via undo command.
 
-Format: `delete [TASK_ID|LABEL]`
+Format: `delete [INDEX|LABEL]`
 
-> * Deletes the task at the specified `TASK_ID` or all task with `LABEL`. <br />
-> * The index refers to the id of the task.
+> * Deletes the task at the specified `INDEX` or all task with `LABEL`. <br />
+> * The index refers to the index of the task in the display list.
 > * The index **must be a positive integer** 1, 2, 3, ...
 > * If the label does not exist, command will still be executed but no change will occur
 
