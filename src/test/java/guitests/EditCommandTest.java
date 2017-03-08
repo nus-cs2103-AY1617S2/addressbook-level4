@@ -22,21 +22,21 @@ public class EditCommandTest extends TaskListGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Buy milk and eggs t/p1";
+        String detailsToEdit = "Bobby t/husband";
         int taskListIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withName("Buy milk and eggs").withTags("p1").build();
+        TestTask editedTask = new TaskBuilder().withName("Bobby").withTags("husband").build();
 
         assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit, editedTask);
     }
 
     @Test
     public void edit_notAllFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "t/home";
+        String detailsToEdit = "t/sweetie t/bestie";
         int taskListIndex = 2;
 
         TestTask taskToEdit = expectedTaskList[taskListIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withTags("home").build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withTags("sweetie", "bestie").build();
 
         assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit, editedTask);
     }
