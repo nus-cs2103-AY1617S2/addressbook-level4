@@ -5,13 +5,13 @@ We are a team based in the [School of Computing, National University of Singapor
 ## Project Team
 
 #### [Amro Shohoud](https://github.com/AmroShohoud) <br>
-
+<img src="images/AmroShohoud.jpg" width="150"><br>
 **Role**: Developer <br>
-Responsibilities: Data?
+Responsibilities: Data, Scheduling and tracking
 
 -----
 
-#### [FOO CHUAN WEN](http://github.com/lejolly)
+#### [FOO CHUAN WEN](https://github.com/fcw6323)
 <img src="images/JoshuaLee.jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: UI
@@ -25,22 +25,9 @@ Responsibilities: UI
 
 -----
 
-#### [Zhou Fanyi](http://github.com/m133225)
+#### [Zhou Fanyi](https://github.com/fanyiii)
 <img src="images/MartinChoo.jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: Dev Ops
-
------
-
-#### [Thien Nguyen](https://github.com/ndt93)
- Role: Developer <br>
- Responsibilities: Threading
-
- -----
-
-#### [You Liang](http://github.com/yl-coder)
-<img src="images/YouLiang.jpg" width="150"><br>
- Role: Developer <br>
- Responsibilities: UI
 
  -----
