@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import seedu.task.model.task.ReadOnlyTask;
 
-public class SelectCommandTest extends AddressBookGuiTest {
+public class SelectCommandTest extends TaskListGuiTest {
 
 
     @Test
