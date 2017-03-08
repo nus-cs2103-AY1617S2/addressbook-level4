@@ -11,7 +11,7 @@
    > Having any Java 8 version is not enough. <br>
    This app will not work with earlier versions of Java 8.
 
-1. Download the latest `todolist.jar` from the [releases](../../../releases) tab.
+1. Download the latest `ezDo.jar` from the [releases](../../../releases) tab.
 2. Copy the file to the folder you want to use as the home folder for your ToDo List.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
    > <img src="images/Ui.png" width="600">
@@ -19,12 +19,11 @@
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will display help.
 5. Some example commands you can try:
-   * **`add`** : adds a task (e.g. `add buy some milk  d/tomorrow p/high`)
-   * **`edit`** : edits an existing task (e.g. `edit 1 buy some milk and cheese p/low`)
+   * **`add`** : adds a task (e.g. `add buy some milk  d/12/12/2015 p/1`)
+   * **`edit`** : edits an existing task (e.g. `edit 1 buy some milk and cheese p/2`)
    * **`kill`** : deletes a task in the current list (e.g. `kill 1`)
    * **`quit`** : quits the app (e.g. `quit`)
 6. Refer to the [Features](#features) section below for details of each command.<br>
-
 
 ## Features
 
@@ -34,142 +33,165 @@
 > * Items with `...` after them can have multiple instances.
 > * Parameters can be in any order.
 
-#### Viewing help : `help / h`
-Format: `help`
 
-> Help is also shown if you enter an incorrect command e.g. `abcd`
+#### Viewing help : `help / h`
+Brings up the help guide.<br>
+Format: **`help`**
+
+> Help is also shown if you enter an incorrect command e.g. **`abcd`**
 
 #### Adding a task: `add / a`
-Adds a task to the todo list<br>
-Format: `add TASK [d/DEADLINE] [p/PRIORITY] [t/TAGNAME]`
+Adds a task to ezDo.<br>
+Format: **`add TASKNAME [p/PRIORITY] [s/STARTDATE] [d/DUEDATE] [t/TAGNAME]...`**
 
-> Tasks can have any number of tags (including 0)
-
-Examples:
-* `add Buy donuts d/tomorrow p/high t/work`
-* `add Buy milk d/Friday p/low t/home`
-
-#### Edit a task: `edit / e`
-> Edit a particular task according to the index.
-> Format: `edit INDEX [TASK NAME] [d/DEADLINE] [p/PRIORITY] [t/TAGNAME]`
+> Tasks can have any number of tags (including 0).<br>
+> Tasks only need a task name. The other fields are optional, and can be typed in any order as long as the prefix is there.<br>
+> The task name MUST come first.<br>
+> The format for the date should be DD/MM/YY <br>
+> Priority takes in a value from 1-3, with 3 being the highest priority.
 
 Examples:
-* `edit 5 Sell drugs d/Saturday p/high t/gang streets kids`
-* `edit 5 Buy drugs`
-* `edit 5 t/Exercise Personal d/31/12/2013`
+* **`add Buy donuts`**
+* **`add Buy milk d/12/12/2017 p/3 t/calories`**
+* **`add Read a book p/1 s/05/05/2017 t/knowledge t/bookworm`**
 
+#### Editing a task: `edit / e`
+Edits a particular task according to the index.<br>
+Format: **`edit INDEX [NEWTASKNAME] [p/NEWPRIORITY] [s/NEWSTARTDATE] [d/NEWDUEDATE] [t/NEWTAGNAME...]`**
 
-#### Finding all tasks containing any keyword in their name or deadline: `find / f`
+> Tasks only need a task name. The other fields are optional, and can be typed in any order as long as the prefix is there.<br>
+> The task name MUST come first.<br>
+> The format for the date should be DD/MM/YY <br>
+> Priority takes in a value from 1-3, with 3 being the highest priority.<br>
+> To clear a field (except task name which cannot be cleared), type out the prefix but leave it blank.<br>
+
+Examples:
+* **`edit 1 Sell donuts p/3 t/money s/12/12/2017`**
+* **`edit 1 p/ t/ s/`**
+* **`edit 1 Buy more donuts p/3 t/nomoney s/15/12/2017`**
+
+#### Finding all tasks containing any keyword in their name or by dates/priority/tags: `find / f`
 Finds tasks whose names contain any of the given keywords.<br>
-Format: `find KEYWORD [MORE_KEYWORDS] [d/DEADLINE] [p/PRIORITY] [t/TAGNAME]`
+Format: **`find [KEYWORD] [MORE_KEYWORDS] [p/PRIORITY] [s/STARTDATE] [d/DUEDATE] [t/TAGNAME]`**
 
-> * The search is case insensitive. e.g `milk` will match `Milk`
-> * The order of the keywords does not matter. e.g. `Buy Milk` will match `Milk Buy`
-> * Only the name is searched.
-> * Only full words will be matched e.g. `Milk` will not match `Milks`
-> * Tasks matching all keywords will be returned (i.e. `AND` search).
-    e.g. `Milk` will not match `Buy Milk`
-    e.g. `donuts milk` will match `Buy donuts and milk`
-> * Tasks will be matched only if its information matches all the keywords given
+> At least one field is needed to search.<br>
+> The search is case insensitive. e.g `milk` will match `Milk`<br>
+> The order of the keywords does not matter. e.g. `Buy Milk` will match `Milk Buy`<br>
+> Only full words will be matched e.g. `Milk` will not match `Milks`<br>
+> Tasks matching all keywords will be returned (i.e. `AND` search).
+    e.g. `Sell Milk` will not match `Buy Milk`
+    e.g. `donuts milk` will match `Buy donuts and milk`<br>
+> To go back to the default view after having found your task, type **list**
 
 Examples:
-* `find d/20/03/2017`<br>
-  Returns all tasks that have deadline due on `20/03/2017`
-* `find Buy The Milk`<br>
+* **`find d/20/03/2017`**<br>
+  Returns all tasks that have a due date on `20/03/2017`
+* **`find Buy The Milk`**<br>
   Returns only tasks containing `Buy`, `The`, and `Milk`
+* **`find School p/1`**<br>
+  Returns only tasks containing `School` with a priority of 1.
 
 #### Deleting a task : `kill / k`
-Deletes the specified task from the todo list.<br>
-Format: `kill INDEX`
+Deletes the specified task from ezDo.<br>
+Format: **`kill INDEX`**
 
-> Deletes the todo at the specified `INDEX`.
+> Deletes the task at the specified `INDEX`.<br>
   The index refers to the index number shown in the most recent listing.<br>
   The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
-* `kill 2`
-  Deletes the 2nd task in the most recent view of the todo list.
+* **`kill 2`**
+  Deletes the 2nd task in the most recent view of ezDo.
 
-* `kill 1`
-  Deletes the 1st task in the most recent view of the todo list.
+* **`kill 1`**
+  Deletes the 1st task in the most recent view of ezDo.
 
 #### Sort a list of task `sort / s`
-> Sort the list of tasks in a certain order (p - priority, d - deadline)
-> Format: `sort ORDERTYPE`
+Sort the list of tasks in a certain order.<br>
+Format: **`sort ORDERTYPE`**
 
-Examples: `sort p'
+> Sorts the list of tasks according to the ORDERTYPE (p - priority, d - due date, s - start date)
+
+Examples: 
+* **`sort p`**
+  Sorts the list of tasks according to priority.
+  
+* **`sort d`**
+  Sorts the list of tasks according to the due date.
 
 #### Marking a task as done : `done / d`
-Marks the specified task from the todo list as done. <br>
-Format: `done INDEX`
+Marks the specified task from ezDo as done.<br>
+Format: **`done INDEX`**
 
-> Marks the todo at the specified `INDEX` as done.
- The index refers to the index number shown in the most recent listing.<br>
-  The index **must be a positive integer** 1, 2, 3, ...
+> Marks the task at the specified `INDEX` as done.<br>
+> Done tasks are removed from view.<br>
+> The index refers to the index number shown in the most recent listing.<br>
+> The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
-* `done 3`<br>
+* **`done 3`**<br>
+  Marks the task at index 3 as done.
 
 #### Clearing all entries : `clear / c`
-Clears all entries from the todo list.<br>
-Format: `clear`
-* user will be prompted with clear confirmation
+Clears all entries from ezDo.<br>
+Format: **`clear`**
 
-
+> User will be prompted with clear confirmation.
 
 #### Undoing the last action : `undo / u`
 Undos the last action.<br>
-Format: `undo`
+Format: **`undo`**
+
+> Undos the previous `<add/edit/kill/clear/done>` command.
 
 #### Exiting the program : `quit / q`
 Quits the program.<br>
-Format: `quit`
+Format: **`quit`**
 
 #### Moving the save file : `save`
 Moves the save file of ezDo.<br>
-Format: `save PATH`
-* `save C:\Desktop\savefile.txt`
+Format: **`save DIRECTORY`**
+
+Examples:
+* **`save C:\Desktop`**<br>
+  Moves the save file of ezDo to C:\Desktop.
 
 #### Saving the data
-Todo list data are saved in the hard disk automatically after any command that changes the data.<br>
+ezDo data is saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ezDo folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ezDo.
 
 ## Command Summary
 
-* **Add**  `add TASK [d/DATELINE p/PRIORITY t/TAG]...` <br>
-  e.g. `add Get rich d/2019 p/high t/impossible`
+* **Add** :  **`add TASKNAME [p/PRIORITY] [s/STARTDATE] [d/DUEDATE] [t/TAGNAME]...`** <br>
+  e.g. **`add Get rich p/3 t/impossible`**
 
-* **Clear** : `clear`
+* **Clear** : **`clear`**
 
-* **Kill** : `kill INDEX` <br>
-   e.g. `kill 3`
+* **Kill** : **`kill INDEX`** <br>
+   e.g. **`kill 3`**
 
-* **Done** : `done INDEX` <br>
-   e.g. `done 3`
+* **Done** : **`done INDEX`** <br>
+   e.g. **`done 3`**
 
-* **Edit** : `edit INDEX [TASK NAME] [d/DEADLINE] [p/PRIORITY] [t/TAGNAME]` <br>
-   e.g. `edit 3 Buy the milk p/high`
+* **Edit** : **`edit INDEX [NEWTASKNAME] [p/NEWPRIORITY] [s/NEWSTARTDATE] [d/NEWDUEDATE] [t/NEWTAGNAME...]`** <br>
+   e.g. **`edit 3 Buy the milk p/1`**
 
-* **Find** : `find KEYWORD [MORE_KEYWORDS] [t/TAGNAME] [d/DEADLINE]` <br>
-  e.g. `find buy milk t/groceries`
+* **Find** : **`find [KEYWORD] [MORE_KEYWORDS] [p/PRIORITY] [s/STARTDATE] [d/DUEDATE] [t/TAGNAME]`** <br>
+  e.g. **`find buy milk t/groceries`**
 
-* **Sort** : `sort ORDERTYPE` <br>
-  e.g. `sort d`
+* **Sort** : **`sort ORDERTYPE`** <br>
+  e.g. **`sort p`**
 
+* **Help** : **`help`** <br>
 
-* **Help** : `help` <br>
-  e.g.
+* **Undo** : **`undo`** <br>
 
-* **Undo** : `undo` <br>
-  e.g.`undo`
+* **Save** : **`save DIRECTORY`** <br>
+  e.g. **`save C:\Users\BestKorea\Documents`**
 
-* **Save** : `save PATH` <br>
-  e.g. `save C:\Users\BestKorea\Documents\tasks.txt`
-
-* **Quit** : `quit` <br>
-  e.g. `quit`
+* **Quit** : **`quit`** <br>
