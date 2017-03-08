@@ -7,10 +7,10 @@ import org.junit.Test;
 
 import seedu.doit.model.task.Priority;
 
-public class PhoneTest {
+public class PriorityTest {
 
     @Test
-    public void isValidPhone() {
+    public void isValidPriority() {
         // invalid phone numbers
         assertFalse(Priority.isValidPriority("")); // empty string
         assertFalse(Priority.isValidPriority(" ")); // spaces only
