@@ -9,12 +9,12 @@ import java.util.regex.Pattern;
 import seedu.ezdo.logic.commands.AddCommand;
 import seedu.ezdo.logic.commands.ClearCommand;
 import seedu.ezdo.logic.commands.Command;
-import seedu.ezdo.logic.commands.KillCommand;
 import seedu.ezdo.logic.commands.EditCommand;
 import seedu.ezdo.logic.commands.ExitCommand;
 import seedu.ezdo.logic.commands.FindCommand;
 import seedu.ezdo.logic.commands.HelpCommand;
 import seedu.ezdo.logic.commands.IncorrectCommand;
+import seedu.ezdo.logic.commands.KillCommand;
 import seedu.ezdo.logic.commands.ListCommand;
 import seedu.ezdo.logic.commands.SelectCommand;
 
