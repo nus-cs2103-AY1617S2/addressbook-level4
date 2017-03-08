@@ -8,15 +8,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.junit.Before;
 import org.junit.Test;
 
 /**
  * Tests for Tag model
  */
 public class TagTest {
-    @Before
-    public void setUp() {
+
+    @Test
+    public void testConstruct() {
         String tagName = "I am a tag";
         Tag tag = new Tag(tagName);
         assertEquals(tag.tagName, tagName);
