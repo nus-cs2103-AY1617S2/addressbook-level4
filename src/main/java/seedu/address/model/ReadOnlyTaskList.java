@@ -6,7 +6,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.task.ReadOnlyTask;
 
 /**
- * Unmodifiable view of an entire ToDo list  
+ * Unmodifiable view of an entire ToDo list
  */
 public interface ReadOnlyTaskList {
 

@@ -19,7 +19,7 @@ Responsibilities: Storage, Git Expert
 -----
 
 #### [Wu Heyang](https://github.com/whyCaiJi)
-<img src="i" width="150"><br>
+<img src="images/whycaiji/jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: Logic and Scheduling and Tracking
 

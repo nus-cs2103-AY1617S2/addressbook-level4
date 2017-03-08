@@ -9,12 +9,11 @@ import seedu.address.commons.exceptions.IllegalValueException;
 public class Priority {
 
     public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority should be between 1-3";
-    
 
     public final String value;
 
     /**
-     * Validates given phone number.
+     * Validates given priority number.
      *
      * @throws IllegalValueException if given phone string is invalid.
      */
@@ -31,7 +30,7 @@ public class Priority {
      * Returns true if a given string is a valid task priority.
      */
     public static boolean isValidPriority(String test) {
-        return (test == "1" || test == "2" || test == "3");
+        return (test.equals("1") || test.equals("2") || test.equals("3"));
     }
 
     @Override

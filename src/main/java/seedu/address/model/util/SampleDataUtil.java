@@ -14,17 +14,17 @@ public class SampleDataUtil {
     public static Task[] getSamplePersons() {
         try {
             return new Task[] {
-                new Task(new Description("Alex Yeoh"), new Priority("87438807"), new Email("alexyeoh@gmail.com"),
+                new Task(new Description("Alex Yeoh"), new Priority("1"), new Email("alexyeoh@gmail.com"),
                     new UniqueTagList("friends")),
-                new Task(new Description("Bernice Yu"), new Priority("99272758"), new Email("berniceyu@gmail.com"),
+                new Task(new Description("Bernice Yu"), new Priority("1"), new Email("berniceyu@gmail.com"),
                     new UniqueTagList("colleagues", "friends")),
-                new Task(new Description("Charlotte Oliveiro"), new Priority("93210283"), new Email("charlotte@yahoo.com"),
+                new Task(new Description("Charlotte Oliveiro"), new Priority("1"), new Email("charlotte@yahoo.com"),
                     new UniqueTagList("neighbours")),
-                new Task(new Description("David Li"), new Priority("91031282"), new Email("lidavid@google.com"),
+                new Task(new Description("David Li"), new Priority("1"), new Email("lidavid@google.com"),
                     new UniqueTagList("family")),
-                new Task(new Description("Irfan Ibrahim"), new Priority("92492021"), new Email("irfan@outlook.com"),
+                new Task(new Description("Irfan Ibrahim"), new Priority("1"), new Email("irfan@outlook.com"),
                     new UniqueTagList("classmates")),
-                new Task(new Description("Roy Balakrishnan"), new Priority("92624417"), new Email("royb@gmail.com"),
+                new Task(new Description("Roy Balakrishnan"), new Priority("1"), new Email("royb@gmail.com"),
                     new UniqueTagList("colleagues"))
             };
         } catch (IllegalValueException e) {
