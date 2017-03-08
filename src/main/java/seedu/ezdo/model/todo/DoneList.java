@@ -16,7 +16,7 @@ import seedu.ezdo.model.todo.UniqueTaskList.DuplicateTaskException;
  * @see Task#equals(Object)
  * @see CollectionUtil#elementsAreUnique(Collection)
  */
-public class UniqueDoneList implements Iterable<ReadOnlyTask> {
+public class DoneList implements Iterable<ReadOnlyTask> {
 
     private final ObservableList<ReadOnlyTask> internalList = FXCollections.observableArrayList();
 
@@ -38,12 +38,12 @@ public class UniqueDoneList implements Iterable<ReadOnlyTask> {
         internalList.add(toAdd);
     }
     
-    public void setDone(UniqueDoneList replacement) {
+    public void setDone(DoneList replacement) {
         this.internalList.setAll(replacement.internalList);
     }
 
     public void setDone(List<? extends ReadOnlyTask> tasks) {
-        final UniqueDoneList replacement = new UniqueDoneList();
+        final DoneList replacement = new DoneList();
         for (final ReadOnlyTask task : tasks) {
             replacement.add(new Task(task));
         }
@@ -60,7 +60,7 @@ public class UniqueDoneList implements Iterable<ReadOnlyTask> {
         return other == this // short circuit if same object
                 || (other instanceof UniqueTaskList // instanceof handles nulls
                 && this.internalList.equals(
-                ((UniqueDoneList) other).internalList));
+                ((DoneList) other).internalList));
     }
 
     @Override
