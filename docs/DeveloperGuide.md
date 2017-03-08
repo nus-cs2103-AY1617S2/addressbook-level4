@@ -375,22 +375,22 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | view the list of tasks that I have completed | unmark completed tasks if necessary.
 
 `* *` | user | search better with auto complete | search better.
-`* *` | user | enable auto spell checker to correct any spelling mistakes I might make when typing commands.
+`* *` | user | enable auto spell checker | correct any spelling mistakes I might make when typing commands.
 `* *` | advanced user | add default keywords to my interface | customize it according to the vocabulary that I am most comfortable with.
-`* *` | advanced user | be able to use shortcut keys to execute commands that I commonly use (Eg. Ctrl+z for undoing)| do things faster and more efficiently. 
+`* *` | advanced user | be able to use shortcut keys to execute commands that I commonly use (Eg. Ctrl+z for undoing) | do things faster and more efficiently. 
 `* *` | advanced user | change the layout of my UI (eg. background colour, font size) | customize it according to my preference.
-`* *` | user | receive flavour text when I mark a task as complete such as ¡°Good job!¡± And ¡°Another one off the list!¡±
+`* *` | user | receive flavour text when I mark a task as complete such as ¡°Good job!¡± And ¡°Another one off the list!¡±  | give myself more motivation to complete my tasks.
 `* *` | user | receive sound effects when I mark a task as completed | give myself more motivation to complete my tasks.
 `* *` | advanced user | view a log of my history | track all the commands I have entered since the start of time.
-`* *` | user | export the tasks to a calendar file for use with other apps.
+`* *` | user | export the tasks to a calendar file | use with other apps.
 
 `*` | user | add location details to events | I know where the event is taking place
-`*` | user | colour code my tasks | I can differentiate tasks better`*` | user | search for empty time periods | schedule my tasks with minimal overlap or clashes in deadlines.
+`*` | user | colour code my tasks | I can differentiate tasks better
+`*` | user | search for empty time periods | schedule my tasks with minimal overlap or clashes in deadlines.
 `*` | user | add icons to my tasks | quickly tell what kind of tasks I have
 `*` | user | reorder my tasks | reorder floating tasks.
 `*` | user | organise my tasks into different sections | view only the tasks that are relevant to the situation
-`*` | user | pin tasks such that they automatically go to the top of the list and stay there
-`*` | user | add a "VERY IMPORTANT" Task to be shown whenever I open up the task list
+`*` | user | pin tasks to the top of the list | see them straight away when I open the application
 `*` | user | expand or collapse the additional details or subtasks of a task | prevent the task list from becoming very cluttered
 `*` | user | sync my task list with my other devices | access my task list easily.
 `*` | user | sync the tasks with my email | create tasks automatically from incoming emails.
