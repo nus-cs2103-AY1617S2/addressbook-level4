@@ -461,12 +461,20 @@ Use case ends.
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 100 tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. should be able to store at least 100 tasks
-5. should be open source
-6. should open the app in less than 3 sec
+4. Should be open source.
+6. Should open the app in less than 5 sec.
+7. The GUI should not be overcrowded.
+8. If the input data's format changes, the developers should be able to make needed adjustments in <20 hours. 
+9. A user can install and operate the program without assistance of any kind (except consulting the User Guide Documentation).
+10. The level of security will be minimal for this product since it is only accessed by a single user. 
+11. To extend the software, proper security measures can be put into place in <100 hours.
+12. Aesthetics of the calendar GUI should be sleek and appealing to 90% of users.
+13. Should be scalable so that a user can change the layout of the GUI based on personal preference.
+14. Should not overload the CPU so that other running process start to lag.
+15. Should not have seperate administrative functions as there is one user who is the Admin by default.  
 
 {More to be added}
 
