@@ -12,9 +12,9 @@ Responsibilities: Deliverables and deadlines, Documentation, Integration, Schedu
 ----
 
 #### [Lim Huan Hock](http://github.com/huanhock)
-<img src="images/DamithRajapakse.jpg" width="150"><br>
-Role: TODO  <br>
-Responsibilities: TODO 
+<img src="images/huanhock.png" width="150"><br>
+Role: Developer, Tester, Eclipse Expert <br>
+Responsibilities: In charge of GUI, Model and Logic, Testing, Help team members with Eclipse
 
 ----
 
