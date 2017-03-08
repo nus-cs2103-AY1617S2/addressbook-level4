@@ -133,15 +133,16 @@ Examples:
   Marks the task at index 3 as done.
 
 #### Clearing all entries : `clear / c`
-Clears all entries from the todo list.<br>
-Format: `clear`
-* user will be prompted with clear confirmation
+Clears all entries from ezDo.<br>
+Format: **`clear`**
 
-
+> User will be prompted with clear confirmation.
 
 #### Undoing the last action : `undo / u`
 Undos the last action.<br>
-Format: `undo`
+Format: **`undo`**
+
+> Undos the previous `<add/edit/kill/clear/done>` command.
 
 #### Exiting the program : `quit / q`
 Quits the program.<br>
