@@ -5,7 +5,11 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 
 import org.junit.Test;
 
+<<<<<<< HEAD
 import guitests.guihandles.taskCardHandle;
+=======
+import guitests.guihandles.TaskCardHandle;
+>>>>>>> Ken
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.task.Name;
@@ -121,8 +125,13 @@ public class EditCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("edit " + filteredPersonListIndex + " " + detailsToEdit);
 
         // confirm the new card contains the right data
+<<<<<<< HEAD
         taskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getName().fullName);
         assertMatching(editedTask, editedCard);
+=======
+        TaskCardHandle editedCard = personListPanel.navigateToTask(editedPerson.getName().fullName);
+        assertMatching(editedPerson, editedCard);
+>>>>>>> Ken
 
         // confirm the list now contains all previous tasks plus the task with updated details
         expectedTasksList[addressBookIndex - 1] = editedTask;

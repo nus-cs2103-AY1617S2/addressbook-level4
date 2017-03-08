@@ -63,7 +63,11 @@ public class TaskListPanelHandle extends GuiHandle {
             final int scrollTo = i + startPosition;
             guiRobot.interact(() -> getListView().scrollTo(scrollTo));
             guiRobot.sleep(200);
+<<<<<<< HEAD:src/test/java/guitests/guihandles/TaskListPanelHandle.java
             if (!TestUtil.compareCardAndTask(getTaskCardHandle(startPosition + i), tasks[i])) {
+=======
+            if (!TestUtil.compareCardAndPerson(getTaskCardHandle(startPosition + i), tasks[i])) {
+>>>>>>> Ken:src/test/java/guitests/guihandles/TaskListPanelHandle.java
                 return false;
             }
         }
@@ -89,7 +93,11 @@ public class TaskListPanelHandle extends GuiHandle {
             return false;
         }
 
+<<<<<<< HEAD:src/test/java/guitests/guihandles/TaskListPanelHandle.java
         // Return false if any of the tasks doesn't match
+=======
+        // Return false if any of the persons doesn't match
+>>>>>>> Ken:src/test/java/guitests/guihandles/TaskListPanelHandle.java
         for (int i = 0; i < tasks.length; i++) {
             if (!tasksInList.get(startPosition + i).getName().fullName.equals(tasks[i].getName().fullName)) {
                 return false;
@@ -99,7 +107,11 @@ public class TaskListPanelHandle extends GuiHandle {
         return true;
     }
 
+<<<<<<< HEAD:src/test/java/guitests/guihandles/TaskListPanelHandle.java
     public taskCardHandle navigateToTask(String name) {
+=======
+    public TaskCardHandle navigateToTask(String name) {
+>>>>>>> Ken:src/test/java/guitests/guihandles/TaskListPanelHandle.java
         guiRobot.sleep(500); //Allow a bit of time for the list to be updated
         final Optional<ReadOnlyTask> task = getListView().getItems().stream()
                                                     .filter(p -> p.getName().fullName.equals(name))
@@ -114,7 +126,11 @@ public class TaskListPanelHandle extends GuiHandle {
     /**
      * Navigates the listview to display and select the task.
      */
+<<<<<<< HEAD:src/test/java/guitests/guihandles/TaskListPanelHandle.java
     public taskCardHandle navigateToTask(ReadOnlyTask task) {
+=======
+    public TaskCardHandle navigateToTask(ReadOnlyTask task) {
+>>>>>>> Ken:src/test/java/guitests/guihandles/TaskListPanelHandle.java
         int index = getTaskIndex(task);
 
         guiRobot.interact(() -> {
@@ -147,6 +163,7 @@ public class TaskListPanelHandle extends GuiHandle {
         return getListView().getItems().get(index);
     }
 
+<<<<<<< HEAD:src/test/java/guitests/guihandles/TaskListPanelHandle.java
     public taskCardHandle getTaskCardHandle(int index) {
         return getTaskCardHandle(new Task(getListView().getItems().get(index)));
     }
@@ -158,6 +175,19 @@ public class TaskListPanelHandle extends GuiHandle {
                 .findFirst();
         if (taskCardNode.isPresent()) {
             return new taskCardHandle(guiRobot, primaryStage, taskCardNode.get());
+=======
+    public TaskCardHandle getTaskCardHandle(int index) {
+        return getTaskCardHandle(new Task(getListView().getItems().get(index)));
+    }
+
+    public TaskCardHandle getTaskCardHandle(ReadOnlyTask task) {
+        Set<Node> nodes = getAllCardNodes();
+        Optional<Node> taskCardNode = nodes.stream()
+                .filter(n -> new TaskCardHandle(guiRobot, primaryStage, n).isSameTask(task))
+                .findFirst();
+        if (taskCardNode.isPresent()) {
+            return new TaskCardHandle(guiRobot, primaryStage, taskCardNode.get());
+>>>>>>> Ken:src/test/java/guitests/guihandles/TaskListPanelHandle.java
         } else {
             return null;
         }

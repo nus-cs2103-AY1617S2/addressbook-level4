@@ -42,9 +42,15 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getName().fullName;
+<<<<<<< HEAD:src/main/java/seedu/address/storage/XmlAdaptedTask.java
         priority = source.getPriority().value;
         deadline = source.getDeadline().value;
         description = source.getDescription().value;
+=======
+        phone = source.getPriority().value;
+        email = source.getDeadline().value;
+        address = source.getDescription().value;
+>>>>>>> Ken:src/main/java/seedu/address/storage/XmlAdaptedPerson.java
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));

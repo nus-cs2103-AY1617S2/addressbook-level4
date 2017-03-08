@@ -16,7 +16,11 @@ import org.testfx.api.FxToolkit;
 
 import com.google.common.io.Files;
 
+<<<<<<< HEAD
 import guitests.guihandles.taskCardHandle;
+=======
+import guitests.guihandles.TaskCardHandle;
+>>>>>>> Ken
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -329,8 +333,13 @@ public class TestUtil {
         return list;
     }
 
+<<<<<<< HEAD
     public static boolean compareCardAndTask(taskCardHandle card, ReadOnlyTask task) {
         return card.isSameTask(task);
+=======
+    public static boolean compareCardAndPerson(TaskCardHandle card, ReadOnlyTask person) {
+        return card.isSameTask(person);
+>>>>>>> Ken
     }
 
     public static Tag[] getTagList(String tags) {

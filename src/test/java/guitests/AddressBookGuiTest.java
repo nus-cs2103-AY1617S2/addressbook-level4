@@ -16,7 +16,11 @@ import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainGuiHandle;
 import guitests.guihandles.MainMenuHandle;
+<<<<<<< HEAD
 import guitests.guihandles.taskCardHandle;
+=======
+import guitests.guihandles.TaskCardHandle;
+>>>>>>> Ken
 import guitests.guihandles.TaskListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import javafx.application.Platform;
@@ -48,7 +52,11 @@ public abstract class AddressBookGuiTest {
      */
     protected MainGuiHandle mainGui;
     protected MainMenuHandle mainMenu;
+<<<<<<< HEAD
     protected TaskListPanelHandle taskListPanel;
+=======
+    protected TaskListPanelHandle personListPanel;
+>>>>>>> Ken
     protected ResultDisplayHandle resultDisplay;
     protected CommandBoxHandle commandBox;
     protected BrowserPanelHandle browserPanel;
@@ -107,15 +115,24 @@ public abstract class AddressBookGuiTest {
     /**
      * Asserts the task shown in the card is same as the given task
      */
+<<<<<<< HEAD
     public void assertMatching(ReadOnlyTask person, taskCardHandle card) {
         assertTrue(TestUtil.compareCardAndTask(card, person));
+=======
+    public void assertMatching(ReadOnlyTask person, TaskCardHandle card) {
+        assertTrue(TestUtil.compareCardAndPerson(card, person));
+>>>>>>> Ken
     }
 
     /**
      * Asserts the size of the task list is equal to the given number.
      */
     protected void assertListSize(int size) {
+<<<<<<< HEAD
         int numberOfPeople = taskListPanel.getNumberOfTasks();
+=======
+        int numberOfPeople = personListPanel.getNumberOfTasks();
+>>>>>>> Ken
         assertEquals(size, numberOfPeople);
     }
 

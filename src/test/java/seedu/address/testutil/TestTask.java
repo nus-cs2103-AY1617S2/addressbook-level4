@@ -25,12 +25,21 @@ public class TestTask implements ReadOnlyTask {
     /**
      * Creates a copy of {@code taskToCopy}.
      */
+<<<<<<< HEAD:src/test/java/seedu/address/testutil/TestTask.java
     public TestTask(TestTask taskToCopy) {
         this.name = taskToCopy.getName();
         this.priority = taskToCopy.getPriority();
         this.deadline = taskToCopy.getDeadline();
         this.description = taskToCopy.getDescription();
         this.tags = taskToCopy.getTags();
+=======
+    public TestPerson(TestPerson personToCopy) {
+        this.name = personToCopy.getName();
+        this.phone = personToCopy.getPriority();
+        this.email = personToCopy.getDeadline();
+        this.address = personToCopy.getDescription();
+        this.tags = personToCopy.getTags();
+>>>>>>> Ken:src/test/java/seedu/address/testutil/TestPerson.java
     }
 
     public void setName(Name name) {
@@ -60,11 +69,20 @@ public class TestTask implements ReadOnlyTask {
 
     @Override
     public Priority getPriority() {
+<<<<<<< HEAD:src/test/java/seedu/address/testutil/TestTask.java
         return priority;
     }
 
     public Deadline getDeadline() {
         return deadline;
+=======
+        return phone;
+    }
+
+    @Override
+    public Deadline getDeadline() {
+        return email;
+>>>>>>> Ken:src/test/java/seedu/address/testutil/TestPerson.java
     }
 
     @Override

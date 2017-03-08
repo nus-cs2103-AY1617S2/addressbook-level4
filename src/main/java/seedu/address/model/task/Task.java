@@ -62,6 +62,10 @@ public class Task implements ReadOnlyTask {
         this.email = email;
     }
 
+<<<<<<< HEAD
+=======
+    @Override
+>>>>>>> Ken
     public Deadline getDeadline() {
         return email;
     }
