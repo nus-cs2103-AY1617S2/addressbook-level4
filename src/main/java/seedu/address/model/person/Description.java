@@ -4,7 +4,7 @@ package seedu.address.model.person;
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's address in the address book.
+ * Represents a Task's description. 
  * Guarantees: immutable; is valid as declared in {@link #isValidDescription(String)}
  */
 public class Description {
@@ -13,7 +13,7 @@ public class Description {
             "Descriptions can take any values, and it should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of the description must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String DESCRIPTION_VALIDATION_REGEX = "[^\\s].*";
