@@ -4,14 +4,14 @@ By : `Team W14-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbs
 
 ---
 
-1. [Setting Up](#setting-up)
-2. [Design](#design)
-3. [Implementation](#implementation)
-4. [Testing](#testing)
-5. [Dev Ops](#dev-ops)
+1. [Setting Up](#1-setting-up)
+2. [Design](#2-design)
+3. [Implementation](#3-implementation)
+4. [Testing](#4-testing)
+5. [Dev Ops](#5-dev-ops)
 
 * [Appendix A: User Stories](#appendix-a--user-stories)
-* [Appendix B: Use Cases](#appendix-b--use-cases)
+* [Appendix B: Use Cases](#appendix-b-use-cases)
 * [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
 * [Appendix D: Glossary](#appendix-d--glossary)
 * [Appendix E : Product Survey](#appendix-e--product-survey)
@@ -35,13 +35,13 @@ By : `Team W14-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbs
 
 ### 1.2. Importing the project into Eclipse
 
-0. Fork this repo, and clone the fork to your computer
-1. Open Eclipse (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
+1. Fork this repo, and clone the fork to your computer
+2. Open Eclipse (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
    in the prerequisites above)
-2. Click `File` > `Import`
-3. Click `Gradle` > `Gradle Project` > `Next` > `Next`
-4. Click `Browse`, then locate the project's directory
-5. Click `Finish`
+3. Click `File` > `Import`
+4. Click `Gradle` > `Gradle Project` > `Next` > `Next`
+5. Click `Browse`, then locate the project's directory
+6. Click `Finish`
 
   > * If you are asked whether to 'keep' or 'overwrite' config files, choose to 'keep'.
   > * Depending on your connection speed and server load, it can even take up to 30 minutes for the set up to finish
@@ -91,7 +91,7 @@ Given below is a quick overview of each component.
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+[**`Commons`**](#26-common-classes) represents a collection of classes used by multiple other components.
 Two of those classes play important roles at the architecture level.
 
 * `EventsCenter` : This class (written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained))
@@ -100,10 +100,10 @@ Two of those classes play important roles at the architecture level.
 
 The rest of the App consists of four components.
 
-* [**`UI`**](#ui-component) : The UI of the App.
-* [**`Logic`**](#logic-component) : The command executor.
-* [**`Model`**](#model-component) : Holds the data of the App in-memory.
-* [**`Storage`**](#storage-component) : Reads data from, and writes data to, the hard disk.
+* [**`UI`**](#22-ui-component) : The UI of the App.
+* [**`Logic`**](#23-logic-component) : The command executor.
+* [**`Model`**](#24-model-component) : Holds the data of the App in-memory.
+* [**`Storage`**](#25-storage-component) : Reads data from, and writes data to, the hard disk.
 
 Each of the four components
 
@@ -222,7 +222,7 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 and logging destinations.
 
 * The logging level can be controlled using the `logLevel` setting in the configuration file
-  (See [Configuration](#configuration))
+  (See [Configuration](#32-configuration))
 * The `Logger` for a class can be obtained using `LogsCenter.getLogger(Class)` which will log messages according to
   the specified logging level
 * Currently log messages are output through: `Console` and to a `.log` file.
@@ -365,7 +365,7 @@ Priority | As a ... | I want to ... | So that I can...
 `*` | user | delete all my tasks | hand in my resignation letter afterwards
 
 
-## Use Cases
+## Appendix B: Use Cases
 #### Use case: Create a task
 
 **MSS**

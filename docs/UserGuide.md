@@ -4,10 +4,10 @@ By : `Team W14-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `February 2017`  &nbsp;&nbsp
 
 ---
 
-1. [Quick Start](#quick-start)
-2. [Features](#features)
-3. [FAQ](#faq)
-4. [Command Summary](#command-summary)
+1. [Quick Start](#1-quick-start)
+2. [Features](#2-features)
+3. [FAQ](#3-faq)
+4. [Command Summary](#4-command-summary)
 
 ## 1. Quick Start
 
@@ -29,7 +29,7 @@ By : `Team W14-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `February 2017`  &nbsp;&nbsp
      adds a contact named `John Doe` to the Address Book.
    * **`delete`**` 3` : deletes the 3rd contact shown in the current list
    * **`exit`** : exits the app
-6. Refer to the [Features](#features) section below for details of each command.<br>
+6. Refer to the [Features](#2-features) section below for details of each command.<br>
 
 
 ## 2. Features
