@@ -13,7 +13,7 @@ import seedu.geekeep.commons.util.StringUtil;
 import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.UniqueTaskList;
-import seedu.geekeep.model.task.UniqueTaskList.PersonNotFoundException;
+import seedu.geekeep.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Represents the in-memory model of the address book data. All changes to any model should be synchronized.
@@ -58,13 +58,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void deletePerson(ReadOnlyTask target) throws PersonNotFoundException {
+    public synchronized void deletePerson(ReadOnlyTask target) throws TaskNotFoundException {
         taskManager.removePerson(target);
         indicateAddressBookChanged();
     }
 
     @Override
-    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicatePersonException {
+    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTask(task);
         updateFilteredListToShowAll();
         indicateAddressBookChanged();
@@ -72,7 +72,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updatePerson(int filteredPersonListIndex, ReadOnlyTask editedPerson)
-            throws UniqueTaskList.DuplicatePersonException {
+            throws UniqueTaskList.DuplicateTaskException {
         assert editedPerson != null;
 
         int addressBookIndex = filteredPersons.getSourceIndex(filteredPersonListIndex);
@@ -144,8 +144,8 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask person) {
             return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(person.getTitle().fullName, keyword)).findAny()
-                    .isPresent();
+                    .filter(keyword-> StringUtil.containsWordIgnoreCase(person.getTitle().fullTitle, keyword))
+                    .findAny().isPresent();
         }
 
         @Override

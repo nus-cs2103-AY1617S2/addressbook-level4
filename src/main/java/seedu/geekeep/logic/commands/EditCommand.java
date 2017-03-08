@@ -7,10 +7,10 @@ import seedu.geekeep.commons.core.Messages;
 import seedu.geekeep.commons.util.CollectionUtil;
 import seedu.geekeep.logic.commands.exceptions.CommandException;
 import seedu.geekeep.model.tag.UniqueTagList;
-import seedu.geekeep.model.task.Address;
-import seedu.geekeep.model.task.Email;
-import seedu.geekeep.model.task.Phone;
+import seedu.geekeep.model.task.EndDateTime;
+import seedu.geekeep.model.task.Location;
 import seedu.geekeep.model.task.ReadOnlyTask;
+import seedu.geekeep.model.task.StartDateTime;
 import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.Title;
 import seedu.geekeep.model.task.UniqueTaskList;
@@ -25,7 +25,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the last person listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS ] [t/TAG]...\n"
+            + "Parameters: INDEX (must be a positive integer) "
+            + "[NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS ] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 p/91234567 e/johndoe@yahoo.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
@@ -62,7 +63,7 @@ public class EditCommand extends Command {
 
         try {
             model.updatePerson(filteredPersonListIndex, editedTask);
-        } catch (UniqueTaskList.DuplicatePersonException dpe) {
+        } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
         model.updateFilteredListToShowAll();
@@ -78,12 +79,14 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Title updatedTitle = editPersonDescriptor.getTitle().orElseGet(personToEdit::getTitle);
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
-        Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
-        Address updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
+        EndDateTime updatedEndDateTime
+                = editPersonDescriptor.getEndDateTime().orElseGet(personToEdit::getEndDateTime);
+        StartDateTime updatedStartDateTime
+                = editPersonDescriptor.getStartDateTime().orElseGet(personToEdit::getStartDateTime);
+        Location updatedLocation = editPersonDescriptor.getLocation().orElseGet(personToEdit::getLocation);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
-        return new Task(updatedTitle, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Task(updatedTitle, updatedStartDateTime, updatedEndDateTime, updatedLocation, updatedTags);
     }
 
     /**
@@ -92,18 +95,18 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Optional<Title> title = Optional.empty();
-        private Optional<Phone> phone = Optional.empty();
-        private Optional<Email> email = Optional.empty();
-        private Optional<Address> address = Optional.empty();
+        private Optional<EndDateTime> endDateTime = Optional.empty();
+        private Optional<StartDateTime> startDateTime = Optional.empty();
+        private Optional<Location> location = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditPersonDescriptor() {}
 
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             this.title = toCopy.getTitle();
-            this.phone = toCopy.getPhone();
-            this.email = toCopy.getEmail();
-            this.address = toCopy.getAddress();
+            this.endDateTime = toCopy.getEndDateTime();
+            this.startDateTime = toCopy.getStartDateTime();
+            this.location = toCopy.getLocation();
             this.tags = toCopy.getTags();
         }
 
@@ -111,7 +114,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.title, this.phone, this.email, this.address, this.tags);
+            return CollectionUtil.isAnyPresent(this.title, this.endDateTime, this.startDateTime,
+                                               this.location, this.tags);
         }
 
         public void setTitle(Optional<Title> title) {
@@ -123,31 +127,31 @@ public class EditCommand extends Command {
             return title;
         }
 
-        public void setPhone(Optional<Phone> phone) {
-            assert phone != null;
-            this.phone = phone;
+        public void setEndDateTime(Optional<EndDateTime> endDateTime) {
+            assert endDateTime != null;
+            this.endDateTime = endDateTime;
         }
 
-        public Optional<Phone> getPhone() {
-            return phone;
+        public Optional<EndDateTime> getEndDateTime() {
+            return endDateTime;
         }
 
-        public void setEmail(Optional<Email> email) {
-            assert email != null;
-            this.email = email;
+        public void setStartDateTime(Optional<StartDateTime> startDateTime) {
+            assert startDateTime != null;
+            this.startDateTime = startDateTime;
         }
 
-        public Optional<Email> getEmail() {
-            return email;
+        public Optional<StartDateTime> getStartDateTime() {
+            return startDateTime;
         }
 
-        public void setAddress(Optional<Address> address) {
-            assert address != null;
-            this.address = address;
+        public void setLocation(Optional<Location> location) {
+            assert location != null;
+            this.location = location;
         }
 
-        public Optional<Address> getAddress() {
-            return address;
+        public Optional<Location> getLocation() {
+            return location;
         }
 
         public void setTags(Optional<UniqueTagList> tags) {

@@ -8,10 +8,10 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.tag.UniqueTagList;
-import seedu.geekeep.model.task.Address;
-import seedu.geekeep.model.task.Email;
-import seedu.geekeep.model.task.Phone;
+import seedu.geekeep.model.task.EndDateTime;
+import seedu.geekeep.model.task.Location;
 import seedu.geekeep.model.task.ReadOnlyTask;
+import seedu.geekeep.model.task.StartDateTime;
 import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.Title;
 
@@ -45,10 +45,10 @@ public class XmlAdaptedTask {
      * @param source future changes to this will not affect the created XmlAdaptedPerson
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
-        name = source.getTitle().fullName;
-        phone = source.getPhone().value;
-        email = source.getEmail().value;
-        address = source.getAddress().value;
+        name = source.getTitle().fullTitle;
+        phone = source.getEndDateTime().value;
+        email = source.getStartDateTime().value;
+        address = source.getLocation().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -66,10 +66,10 @@ public class XmlAdaptedTask {
             personTags.add(tag.toModelType());
         }
         final Title title = new Title(this.name);
-        final Phone phone = new Phone(this.phone);
-        final Email email = new Email(this.email);
-        final Address address = new Address(this.address);
+        final EndDateTime endDateTime = new EndDateTime(this.phone);
+        final StartDateTime startDateTime = new StartDateTime(this.email);
+        final Location location = new Location(this.address);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Task(title, phone, email, address, tags);
+        return new Task(title, startDateTime, endDateTime, location, tags);
     }
 }

@@ -3,21 +3,22 @@ package seedu.geekeep.model.task;
 import seedu.geekeep.model.tag.UniqueTagList;
 
 /**
- * A read-only immutable interface for a Person in the addressbook. Implementations should guarantee: details are
+ * A read-only immutable interface for a Task in the Task Manager. Implementations should guarantee: details are
  * present and not null, field values are validated.
  */
 public interface ReadOnlyTask {
 
     Title getTitle();
 
-    Phone getPhone();
+    EndDateTime getEndDateTime();
 
-    Email getEmail();
+    StartDateTime getStartDateTime();
 
-    Address getAddress();
+    Location getLocation();
 
     /**
-     * The returned TagList is a deep copy of the internal TagList, changes on the returned list will not affect the
+     * The returned TagList is a deep copy of the internal TagList,
+     * changes on the returned list will not affect the
      * person's internal tags.
      */
     UniqueTagList getTags();
@@ -29,17 +30,19 @@ public interface ReadOnlyTask {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                         && other.getTitle().equals(this.getTitle()) // state checks here onwards
-                        && other.getPhone().equals(this.getPhone()) && other.getEmail().equals(this.getEmail())
-                        && other.getAddress().equals(this.getAddress()));
+                        && other.getEndDateTime().equals(this.getEndDateTime())
+                        && other.getStartDateTime().equals(this.getStartDateTime())
+                        && other.getLocation().equals(this.getLocation()));
     }
 
     /**
-     * Formats the person as text, showing all contact details.
+     * Formats the Task as text, showing all contact details.
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getTitle()).append(" Phone: ").append(getPhone()).append(" Email: ").append(getEmail())
-                .append(" Address: ").append(getAddress()).append(" Tags: ");
+        builder.append(getTitle()).append(" Ending DateTime: ").append(getEndDateTime())
+               .append(" Starting DateTime: ").append(getStartDateTime())
+               .append(" Location: ").append(getLocation()).append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }

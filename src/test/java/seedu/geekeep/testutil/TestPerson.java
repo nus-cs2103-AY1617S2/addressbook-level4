@@ -1,10 +1,10 @@
 package seedu.geekeep.testutil;
 
 import seedu.geekeep.model.tag.UniqueTagList;
-import seedu.geekeep.model.task.Address;
-import seedu.geekeep.model.task.Email;
-import seedu.geekeep.model.task.Phone;
+import seedu.geekeep.model.task.EndDateTime;
+import seedu.geekeep.model.task.Location;
 import seedu.geekeep.model.task.ReadOnlyTask;
+import seedu.geekeep.model.task.StartDateTime;
 import seedu.geekeep.model.task.Title;
 
 /**
@@ -13,9 +13,9 @@ import seedu.geekeep.model.task.Title;
 public class TestPerson implements ReadOnlyTask {
 
     private Title title;
-    private Address address;
-    private Email email;
-    private Phone phone;
+    private Location location;
+    private StartDateTime startDateTime;
+    private EndDateTime endDateTime;
     private UniqueTagList tags;
 
     public TestPerson() {
@@ -27,9 +27,9 @@ public class TestPerson implements ReadOnlyTask {
      */
     public TestPerson(TestPerson personToCopy) {
         this.title = personToCopy.getTitle();
-        this.phone = personToCopy.getPhone();
-        this.email = personToCopy.getEmail();
-        this.address = personToCopy.getAddress();
+        this.endDateTime = personToCopy.getEndDateTime();
+        this.startDateTime = personToCopy.getStartDateTime();
+        this.location = personToCopy.getLocation();
         this.tags = personToCopy.getTags();
     }
 
@@ -37,16 +37,16 @@ public class TestPerson implements ReadOnlyTask {
         this.title = title;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
-    public void setEmail(Email email) {
-        this.email = email;
+    public void setStartDateTime(StartDateTime startDateTime) {
+        this.startDateTime = startDateTime;
     }
 
-    public void setPhone(Phone phone) {
-        this.phone = phone;
+    public void setEndDateTime(EndDateTime endDateTime) {
+        this.endDateTime = endDateTime;
     }
 
     public void setTags(UniqueTagList tags) {
@@ -59,18 +59,18 @@ public class TestPerson implements ReadOnlyTask {
     }
 
     @Override
-    public Phone getPhone() {
-        return phone;
+    public EndDateTime getEndDateTime() {
+        return endDateTime;
     }
 
     @Override
-    public Email getEmail() {
-        return email;
+    public StartDateTime getStartDateTime() {
+        return startDateTime;
     }
 
     @Override
-    public Address getAddress() {
-        return address;
+    public Location getLocation() {
+        return location;
     }
 
     @Override
@@ -85,10 +85,10 @@ public class TestPerson implements ReadOnlyTask {
 
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
-        sb.append("add " + this.getTitle().fullName + " ");
-        sb.append("a/" + this.getAddress().value + " ");
-        sb.append("p/" + this.getPhone().value + " ");
-        sb.append("e/" + this.getEmail().value + " ");
+        sb.append("add " + this.getTitle().fullTitle + " ");
+        sb.append("a/" + this.getLocation().value + " ");
+        sb.append("p/" + this.getEndDateTime().value + " ");
+        sb.append("e/" + this.getStartDateTime().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
