@@ -24,13 +24,14 @@ Responsibilities: Testing, Model, Code Quality, Integration
 -----
 
 #### [Tang Shenqi](http://github.com/tangshenqi)
-<img src="images/tangshenqi.jpg" width="150"><br>
+<img src="images/shenqit.jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: UI, Eclipse expert
 
 -----
 
 #### [Aditya Hendraatmaja](https://github.com/ahendraatmaja)
+<img src="images/aditya.jpg" width="150"><br>
  Role: Developer <br>
  Responsibilities: Documentation, Data
 
