@@ -346,50 +346,175 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
-
-{More to be added}
+`* * *` | user | tasks/events that may or may not have deadlines/dates | so that i can keep track of what i need to do
+`* * *` | user | delete tasks/events| get rid of tasks that need not be done anymore 
+`* * *` | user | reschedule a task/event | accommodate changes in my schedule 
+`* * *` | user | mark a task/event as done | so that i can reduce clutter in my todo list
+`* * *` | user | add tasks/events that have multiple dates/times | accomodate events that span over multiple days
+`* * *` | user | have a scheduler that automatically syncs my schedulers | so that i can reduce clutter in my todo list
+`* * *` | user | be given confirmation whether i enter a command | so that i know when the command has been executed
+`* * *` | user | edit the task/event's description' and name | so that i can accomodate any changes
+`* * *` | user | view my to-do list of undone tasks with and sorted by deadlines | so that I can find out what I have to do
+`* * *` | new user | view more information about a particular command | so that i can learn how to use the task manager easily.	
+`* *` | user | tag my tasks | so that I can easily categorise my tasks
+`* *` | user | undo my last action | so that i can rectify my mistakes quickly
+`* *` | user | add reminder alarms to tasks | to prompt follow up action	
+`* *` | user | get prompted on yesterday’s tasks that have yet to be completed | so that I can reschedule the task or flag as cannot be done. 
+`* *` | user | search my tasks by keyword | so that I can quickly access the desired task in mind
+`* *` | user | flag a task/events | so as to highlight the importance	
+`* *` | user | easily see an overview of my schedule and todo list | so that i can keep track of things that need to be done	
+`* *` | user | access a list of previously completed tasks | so as to keep track of things i have done	
+`* *` | user | search my tasks according to categories | so that I can easily visualize my tasks in a particular category
+`* *` | user | add tasks that repeat according to a stipulated number of days | So that i can reduce the amount of redundant work i need to do
+`* *` | user | change the folder to store my data | so that I can easily copy my data/program and work in another computer.	
+`* *` | user | to manually sync my scheduler | so that I can back it up on my cloud/local folder
+`* *` | advanced user | use shorter command words | so as to save time typing	
+`* *` | user | stipulate ranges of time for my tasks to be slotted into | so that i neednt consider my schedule directly	
+`*` | user | have a shortcut key | to quickly access the program.	
+`*` | user | be prompted for my password to enter the Task Manager |  prevent unauthorised users from using my Task Manager	
+`*` | user | place a tasks that was previously marked as done back into my todo list | so that i can save time	
+`*` | user | change the text size in the GUI | in case i have bad eyesight	
+`*` | user | be notified of all the commands i have given when i exit the program | to keep track of what i did	
+`*` | user | use the Task Manager across time zones | so that i can travel while using the Task Manager	
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TaskManager` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: UC01 - Add task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
-Use case ends.
+1. User requests to Add task
+2. TaskManager adds the task
+3. TaskManager feedbacks task is added
+4. Use case ends.
+
 
 **Extensions**
 
-2a. The list is empty
+1a. Task is given in an invalid format
+
+> 1a1. TaskManager feedbacks that the format is wrong and shows an example of the right format
+> Use case ends
+
+#### Use case: UC02 - Delete task
+
+**MSS**
+
+1. User requests to list tasks (UC04) or search tasks by keyword (UC03)
+2. User requests to delete the task(s) in the list
+3. TaskManager deletes the task(s) 
+4. TaskManager feedbacks that task(s) is deleted
+5. Use case ends.
+
+
+**Extensions**
+
+2a. The given index is invalid
+
+> 2a1. AddressBook feedbacks that the index is invalid 
+> Use case resumes at step 2
+
+#### Use case: UC03 - Find Task by keyword
+
+**MSS**
+
+1. User requests to find task with specific Keyword
+2. Taskmanager shows details of list of Tasks with said Keyword
+3. Use case ends.
+
+
+**Extensions**
+
+2a.  Keyword is not found, Taskmanager shows a Keyword not found message.
 
 > Use case ends
 
-3a. The given index is invalid
+#### Use case: UC04 - List all tasks
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+**MSS**
 
-{More to be added}
+1. User requests to list all tasks
+2. Taskmanager shows a list of all tasks 
+3. Use case ends.
+
+
+**Extensions**
+
+2a.  Task list is empty
+
+> 2a1. AddressBook feedbacks that the task list is empty 
+> Use case ends
+
+#### Use case: UC05 - Show list of tasks that is done or event that has passed
+
+**MSS**
+
+1. User requests to show archive
+2. TaskManager feedbacks and generates the list of task/event that is done/passed
+3. Use case ends.
+
+**Extensions**
+
+1a. There is no tasks/events that is done/passed
+
+> 1a1. TaskManager feedbacks that there are no past event/task
+
+> Use case ends
+
+#### Use case: UC06 - edit task
+
+**MSS**
+
+1. User requests to list tasks (UC04) or search tasks by keyword (UC03)
+2. User requests to edit a specific task/event in the list
+3. TaskManager edits the task/event
+4. TaskManager feedbacks that the changes have been made
+5. Use case ends.
+
+**Extensions**
+
+2a. The given index is invalid
+
+> 2a1. AddressBook feedbacks that the index is invalid 
+> Use case resumes at step 2
+
+2b. The user gives index but no other input
+
+> 2b1. TaskManager feedbacks that that changes should be included
+> Use case resumes at step 2
+
+2c. The user enters input that is invalid (i.e. edit start time when it is a task)
+
+> 2c1. TaskManager feedbacks that the input is invalid
+> Use case resumes at step 2
+
+#### Use case: UC07 - Mark task as done
+
+**MSS**
+
+1. User requests to list tasks (UC04) or search tasks by keyword (UC03)
+2. User requests to mark specific task(s) in the list as done
+3. TaskManager marks the specified task(s) as done
+4. Use case ends.
+
+**Extensions**
+
+
+2a. The given index is invalid
+
+> 2a1. AddressBook shows an error message 
+> Use case resumes at step 2
 
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
-   should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-{More to be added}
+2. Should be able to hold up to 2000 tasks without a noticeable sluggishness in performance for typical usage.
+3. A user should be able to complete certain action in less than 3 step.
+4. A user should be able to search for task/events within 3seconds.
+5. Should automatically sync with online cloud when internet connection is available
+6. Should automatically save its data locally after every edit
 
 ## Appendix D : Glossary
 
@@ -403,17 +528,95 @@ Use case ends.
 
 ## Appendix E : Product Survey
 
-**Product Name**
-
-Author: ...
+**Sticky Notes**
 
 Pros:
 
-* ...
-* ...
+> * Can create multiple notes for items of different category, providing easy visual based on category
+> * Can have multiple items under one category
+> * Can edit the space it takes on the screen as compared to the rest of the notes to allow the more important ones to stand out
+> * Easy to delete task by just erasing them
+> * Color code different categories to help visualize them better
+> * Can easily edit the tasks
 
 Cons:
 
-* ...
-* ...
+> * Hard to sort out which items are more important by deadline
+> * No deadline function to remind me of important dates
+> * There is no calendar view to look at a snapshot of events/tasks by time
+> * Requires multiple use of the mouse with the GUI
+> * Unable to search for a particular tasks by keyword
+> * Unable to find out what was previously done (list of completed items)
+> * Cannot sync/connect to a cloud network
+
+**S Planner**
+
+Pros:
+
+> * Shows a calendar of events/tasks that is upcoming for the month
+> * Can create tasks/events with description
+> * Can create repetitive tasks
+> * Can color code tasks for better visualization of different categories
+> * Can notify user when the tasks is upcoming
+> * Can include more details about an event/tasks which is shown only upon detail reading of the event/task itself
+
+Cons: 
+
+> * Cannot search by keyword
+> * Cannot mark an item as done
+> * Unable to undo a previous input
+
+**Google Calendar**
+
+Pros:
+
+> * Separate task as different “calendars” as oppose to category
+> * Able to specify task down to half hourly
+> * Able to share said calendar to other user (Useful for secretary or coordinating among user)
+> * Able to sync across multiple platform
+> * Able to color code tasks of different calendar
+> * Able to remind user of tasks
+> * Able to specify Location of said task
+> * Able to search for task by keyword
+
+Cons: 
+
+> * Unable to sort Task by importance (Only in chronological timeline)
+> * Unable to identify task as done/undone
+> * Complicated control and Learning curve are quite steep
+
+**WunderList**
+
+Pros:
+
+> * Can sync with ical 
+> * Able to organise tasks
+> * Can set due dates and reminders that are separate 
+> * Can work with friends/teammates
+> * Shows tasks based on due dates
+
+Cons: 
+
+> * Does not differentiate between tasks and events
+> * No inbuilt calendar
+> * Unable to set multiple reminders
+> * Priority lists not very useful
+
+**Todoist**
+
+Pros:
+
+> * Able to organise tasks
+> * Can set due dates and reminders that are separate 
+> * Has smart date entries
+> * Has short-cut keys
+> * Able to set reccurring tasks
+> * Able to filter tasks by many different ways 
+> * Able to set task priority
+
+Cons: 
+
+> * Unable to create a task without a project
+> * Unable to set multiple reminders
+> * Unable to set start date/time for task
 

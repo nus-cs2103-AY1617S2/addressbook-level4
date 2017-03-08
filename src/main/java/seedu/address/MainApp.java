@@ -36,7 +36,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
-
+    private String name;
     public static final Version VERSION = new Version(1, 0, 0, true);
 
     protected Ui ui;
