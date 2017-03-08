@@ -1,9 +1,10 @@
 package guitests;
 
+import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import org.junit.Test;
 
 import seedu.ezdo.logic.commands.SaveCommand;
-import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 public class SaveCommandTest extends EzDoGuiTest {
 
