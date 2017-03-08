@@ -26,8 +26,8 @@ public class Deadline {
         "dd/MM/yy",
         "dd-MM-yyyy",
         "dd/MM/yyyy",
-        "E, MM d yyyy",
-        "E, d MM yyyy"
+        "EEE, MMM dd yyyy",
+        "EEE, dd MMM yyyy"
     };
 
     public static final String[] TIME_VALIDATION_REGEX = {
@@ -38,7 +38,6 @@ public class Deadline {
     // Separators used to combine date and time
     public static final String[] DATE_TIME_SEPARATORS = {
         ", ",
-        " at ",
         " "
     };
 
@@ -47,7 +46,7 @@ public class Deadline {
      * Day, Month Date Year at Hour:Minute
      * Example: Tuesday, April 1 2013 at 23:59
      */
-    public static final String READABLE_DATETIME_OUTPUT_FORMAT = "%s, %s %s %s at %s:%s";
+    public static final String READABLE_DATETIME_OUTPUT_FORMAT = "%s, %s %s %s %s:%s";
 
     /**
      * Output format used to display deadline with only date.
@@ -75,7 +74,7 @@ public class Deadline {
      * Returns true if a given string is a valid date.
      */
     public static boolean isValidDeadline(String test) {
-        return isValidDeadline(test, DATE_VALIDATION_REGEX) 
+        return isValidDeadline(test, DATE_VALIDATION_REGEX)
                 || isValidDeadline(test, TIME_VALIDATION_REGEX)
                 || isValidDeadline(test, getAllPossibleDateTimeFormats());
     }
@@ -92,7 +91,7 @@ public class Deadline {
                 // Do nothing
             }
         }
-        return true;
+        return false;
     }
 
     /** Update object's values */
@@ -101,12 +100,12 @@ public class Deadline {
         String[] completeDateFormats = getAllPossibleDateTimeFormats();
 
         // Try date-only format
-        if (isValidDate(dateString, DATE_VALIDATION_REGEX)) {
+        if (isValidDeadline(dateString, DATE_VALIDATION_REGEX)) {
             date = parseDateString(dateString, DATE_VALIDATION_REGEX);
             type = DEADLINE_TYPES.DATEONLY;
 
         // Try time-only format
-        } else if (isValidDate(dateString, TIME_VALIDATION_REGEX)) {
+        } else if (isValidDeadline(dateString, TIME_VALIDATION_REGEX)) {
             date = parseDateString(dateString, TIME_VALIDATION_REGEX);
 
             // Date is missing so we provide one
@@ -118,7 +117,7 @@ public class Deadline {
             type = DEADLINE_TYPES.DATETIME;
 
         // Try complete date-time formats
-        } else if (isValidDate(dateString, completeDateFormats)) {
+        } else if (isValidDeadline(dateString, completeDateFormats)) {
             date = parseDateString(dateString, completeDateFormats);
             type = DEADLINE_TYPES.DATETIME;
 
