@@ -91,7 +91,8 @@ public class PersonListPanelHandle extends GuiHandle {
 
         // Return false if any of the persons doesn't match
         for (int i = 0; i < persons.length; i++) {
-            if (!personsInList.get(startPosition + i).getDescription().description.equals(persons[i].getDescription().description)) {
+            int x=startPosition + i;
+            if (!personsInList.get(x).getDescription().description.equals(persons[i].getDescription().description)) {
                 return false;
             }
         }
