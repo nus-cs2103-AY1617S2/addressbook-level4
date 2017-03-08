@@ -22,7 +22,7 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX [INDEX...] (must be a positive integer)\n"
             + "Example: " + DEFAULT_COMMAND_WORD + " 1 8";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
 
     public final int[] targetIndices;
 
@@ -48,10 +48,10 @@ public class DeleteCommand extends Command {
             try {
                 model.deleteTask(task);
             } catch (TaskNotFoundException pnfe) {
-                assert false : "The target person cannot be missing";
+                assert false : "The target task cannot be missing";
             }
         }
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, tasksToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, tasksToDelete));
     }
 
     public static CommandInfo info() {
