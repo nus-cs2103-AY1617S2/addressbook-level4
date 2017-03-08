@@ -54,8 +54,8 @@ public class AddCommand extends Command {
         assert model != null;
         try {
             model.addTodo(toAdd);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-        } catch (UniqueTodoList.DuplicateTodoException e) {
+            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));            
+        } catch (UniqueTodoList.DuplicateTodoException e) {        	
             throw new CommandException(MESSAGE_DUPLICATE_TODO);
         }
 

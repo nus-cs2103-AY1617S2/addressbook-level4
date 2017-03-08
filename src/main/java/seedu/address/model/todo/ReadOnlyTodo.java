@@ -22,13 +22,14 @@ public interface ReadOnlyTodo {
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
+     * didn't check startTime and endTime
      */
     default boolean isSameStateAs(ReadOnlyTodo other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                && other.getName().equals(this.getName()) // state checks here onwards
-                && other.getStartTime().equals(this.getStartTime())
-                && other.getEndTime().equals(this.getEndTime()));
+                && other.getName().equals(this.getName())); // state checks here onwards
+                //&& other.getStartTime().equals(this.getStartTime())
+                //&& other.getEndTime().equals(this.getEndTime()));
     }
 
     /**
