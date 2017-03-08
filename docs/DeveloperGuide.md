@@ -399,16 +399,12 @@ Use case ends.
 
 > Use case ends
 
-2b. Exact duplicate task with date and time is found
+2b. Task’s date and time clashes with a blocked date and time
 
-  > 2b1. System shows an error message
-
-2c. Task’s date and time clashes with a blocked date and time
-
-  > 2c1. A window popup warning will be shown to confirm user’s request
-  > 2c2. User click ok
+  > 2b1. A window popup warning will be shown to confirm user’s request
+  > 2b2. User click ok
   > Use case ends
-   > 2c2.1 User click no
+   > 2b2.1 User click no
   > Use case ends.
 
 
