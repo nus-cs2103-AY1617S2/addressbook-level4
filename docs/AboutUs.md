@@ -29,7 +29,7 @@ Components: Model, Storage.
 -----
 
 #### [Low Tian Wei](http://github.com/tianweiweizx)
-<img src="images/abcxyz.jpg" width="150"><br>
+<img src="images/LowTianWei.jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: Scheduling and Tracking <br>
 Components: Events Center, Log Center.
