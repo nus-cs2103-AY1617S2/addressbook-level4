@@ -383,7 +383,7 @@ Priority | As a ... | I want to ... | So that I can...
 `*` | user | color scheme of overdue tasks | to make it obvious
 `*` | user | I want to import task data from a file | sync
 `*` | user | be able to sync tasks with deadline | add task automatically
-`*` | user | be able to delete all items based on date/category at one go | so that I do not need to delete one by one when there are changes to the plan of the whole day 
+`*` | user | be able to delete all items based on date/category at one go | so that I do not need to delete one by one when there are changes to the plan of the whole day
 `*` | user | be able to set progress of task. Eg pending, postpone, waiting for reply etc.
 
 
@@ -454,14 +454,14 @@ Use case ends.
 
 > 3a1. System shows an error message <br>
   Use case resumes at step 2
-  
+
 4a. User undos task delete command
 
 > System adds the deleted task back and shows feedback to user
 > Use case ends
 
 
-### User Case : Marking a task as done 
+### User Case : Marking a task as done
 
 **MSS**
 1. User enters command to mark task as done
@@ -551,7 +551,7 @@ Use case ends.
 
 **MSS**
 1. User enters command to update priority of task
-2. System updates priority to user specified priority 
+2. System updates priority to user specified priority
 3. Use case ends
 
 **Extensions**
@@ -591,7 +591,7 @@ Use case ends.
 2. Should be able to hold up to 1000 items without a noticeable sluggishness in performance for typical usage.
 
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-   
+
 4. Enter an event/tasks in one command instead of multiple clicks
 
 5. Be able to access the program offline access tasks in areas without internet
@@ -638,53 +638,53 @@ Use case ends.
 ### Author: Chia Sin
 ### Product: Toodledo
 ### Advantages:
-* Has many features to use 
-* Email Sync 
-* Tells you what to do 
-* Able to set default so minimal adjustment is needed 
+* Has many features to use
+* Email Sync
+* Tells you what to do
+* Able to set default so minimal adjustment is needed
 * Able to type commands
  
-### Disadvantages: 
-* Need too many clicks for settings and other features other than task 
-* Need to click to delete and update 
-* Need internet for desktop version to use. 
+### Disadvantages:
+* Need too many clicks for settings and other features other than task
+* Need to click to delete and update
+* Need internet for desktop version to use.
 
 ### Author: Kean Wai
 ### Product: Sticky Notes
 ### Advantages:
 * Simple and easy to use (functions like text document)
-* Can be navigated using keyboard only 
-* Starts up automatically on entering desktop 
+* Can be navigated using keyboard only
+* Starts up automatically on entering desktop
 * Works offline
 * Comes preinstalled on windows so no need for special IT permissions
 ### Disadvantages:
-* Unable to sync with deadline 
-* Lack of functionality (No reminders, calendar view, etc.) 
+* Unable to sync with deadline
+* Lack of functionality (No reminders, calendar view, etc.)
 * Requires windows to be installed
 
 ### Author: Jin Shun
-### Product: Momentum 
+### Product: Momentum
 ### Advantages:
-* Simple to use 
-* Nice background 
+* Simple to use
+* Nice background
 * Helpful way of reminding users of pending tasks, every time user opens new tab in chrome
-* Has integration with full fledged task managers like trello 
-### Disadvantages: 
-* Only works with chrome browser 
-* Requires internet connection 
-* Unable to set deadline for tasks 
-* Minimal features 
+* Has integration with full fledged task managers like trello
+### Disadvantages:
+* Only works with chrome browser
+* Requires internet connection
+* Unable to set deadline for tasks
+* Minimal features
  
 ### Author: Huanhui
-### Product: Wunderlist 
+### Product: Wunderlist
 ### Advantages:
-* Some shortcut keys available, good user flexibility 
-* CRUD can function offline 
-* Many features such as the ability to set reminders, due dates, recurring tasks 
-* Tasks are automatically sorted by due date 
-* Able to display completed tasks 
+* Some shortcut keys available, good user flexibility
+* CRUD can function offline
+* Many features such as the ability to set reminders, due dates, recurring tasks
+* Tasks are automatically sorted by due date
+* Able to display completed tasks
 * Well designed UI
 ### Disadvantages:
-* Not fully functional on keyboard, still need to use mouse to do operations such as select task 
-* Do not have an undo function 
+* Not fully functional on keyboard, still need to use mouse to do operations such as select task
+* Do not have an undo function
 * Requires installation
