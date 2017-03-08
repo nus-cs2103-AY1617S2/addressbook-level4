@@ -1,7 +1,7 @@
-# Address Book (Level 4)
+# Tâche
 
 [![Build Status](https://travis-ci.org/CS2103JAN2017-T09-B4/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-T09-B4/main.svg?branch=master)
-[![Build status](https://ci.appveyor.com/api/projects/status/3boko2x2vr5cc3w2?svg=true)](https://ci.appveyor.com/project/loveandbejoyful/main.svg?branch=master)
+[![Build status](https://ci.appveyor.com/api/projects/status/uro4shn2404er9kr/branch/master?svg=true)](https://ci.appveyor.com/project/loveandbejoyful/main/branch/master)
 [![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-T09-B4/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-T09-B4/main?branch=master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b24c010f9a51421eb5ce0d4bfda1b54b)](https://www.codacy.com/app/loveandbejoyful/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103JAN2017-T09-B4/main&amp;utm_campaign=Badge_Grade)
 
