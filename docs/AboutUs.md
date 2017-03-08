@@ -31,7 +31,7 @@ Responsibilities: Testing, Integration  <br>
 -----
 
 #### [Wang Yu](xxx)
-<img src="xxx" width="150"><br>
+<img src="docs/images/WangYu-g.png" width="150"><br>
 Role: Developer
 Responsibilities: Documentation, Code Quality <br>  
 * Components in charge of: Model, Storage
