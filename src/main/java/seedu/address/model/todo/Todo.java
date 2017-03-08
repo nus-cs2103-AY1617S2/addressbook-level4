@@ -73,8 +73,8 @@ public class Todo implements ReadOnlyTodo {
     }
 
     public void setEndTime(Date endtime) {
-    	if (endtime != null){
-    		this.endtime = endtime;
+        if (endtime != null) {
+            this.endtime = endtime;
     	}
     }
 
