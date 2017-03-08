@@ -10,37 +10,31 @@ We are a team based in the [School of Computing, National University of Singapor
 
 -----
 
-#### [Joshua Lee](http://github.com/lejolly)
-<img src="images/JoshuaLee.jpg" width="150"><br>
+#### [Gabriel Sim](http://github.com/gabrielsim1993)
+<img src="images/gabriel.jpg" width="150"><br>
 Role: Developer <br>
-Responsibilities: UI
+Responsibilities: Team Leader, Logic, Deliverables, Git expert
 
 -----
 
-#### [Leow Yijin](http://github.com/yijinl)
-<img src="images/LeowYijin.jpg" width="150"><br>
+#### [Maggie Li Yundi](http://github.com/maggiemeow)
+<img src="images/maggiemeow.png" width="150"><br>
 Role: Developer <br>
-Responsibilities: Data
+Responsibilities: Testing, Model, Code Quality, Integration
 
 -----
 
-#### [Martin Choo](http://github.com/m133225)
-<img src="images/MartinChoo.jpg" width="150"><br>
+#### [Tang Shenqi](http://github.com/tangshenqi)
+<img src="images/shenqit.jpg" width="150"><br>
 Role: Developer <br>
-Responsibilities: Dev Ops
+Responsibilities: UI, Eclipse expert
 
 -----
 
-#### [Thien Nguyen](https://github.com/ndt93)
+#### [Aditya Hendraatmaja](https://github.com/ahendraatmaja)
+<img src="images/aditya.jpg" width="150"><br>
  Role: Developer <br>
- Responsibilities: Threading
-
- -----
-
-#### [You Liang](http://github.com/yl-coder)
-<img src="images/YouLiang.jpg" width="150"><br>
- Role: Developer <br>
- Responsibilities: UI
+ Responsibilities: Documentation, Data
 
  -----
 
