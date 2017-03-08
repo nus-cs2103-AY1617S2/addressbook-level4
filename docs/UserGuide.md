@@ -19,6 +19,9 @@ By : `T09-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nb
 1. Download the latest `taskmanager.jar` from the [releases](../../../releases) tab.
 2. Copy the file to the folder you want to use as the home folder for your Task Manager.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
+
+<img src="images/Ui.png" width="600"><br>
+
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
@@ -42,7 +45,9 @@ By : `T09-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nb
 ### 2.1. Adding a task: `add`
 
 Adds a task to the task manager<br>
-Formats:
+Formats: 
+(Type parameters in the corresponding order)
+
 > * `add <task>`
 > * `add <task>; <duration>`
 > * `add <task>; <due date and time>`
@@ -61,6 +66,7 @@ Examples:
 
 Deletes the specified task from the task manager.<br>
 Formats:
+
 > * `delete <task>`
 > delete /all (delete all activity)
 
@@ -72,6 +78,7 @@ Examples:
 
 Finds task(s) whose names contain any of the given keywords.<br>
 Formats:
+
 > * `find <task>`
 > * `find <task>; <due date>` (`show tasks before the due date and also tasks without any due date`)
 
@@ -84,19 +91,24 @@ Examples:
 
 Shows a list of all tasks in the task manager.<br>
 Format:
+
 > * `list`
 
 ### 2.5. Viewing help : `help`
 
+Shows a list of all commands and their usage instructions.<br>
 Formats:
+
 > * `help <command>` (provides specific information about the usage of the command)
 > * `help /all`
 
-> Help is also shown if you enter an incorrect command e.g. `abcd`
+> Help is also shown if you enter an incorrect command. e.g. `abcd`
 
 ### 2.6. Select a task : `select`
 
+Selects a task for user to view its details and make changes to it if needed.<br>
 Formats:
+
 > * `select <task>` (display all tasks with the same name for user to choose one)
 > * `unselect`
 
@@ -104,13 +116,18 @@ Examples:
 
 * `select presentation`
 
+> Task successfully selected will be highlighted for the user to see. 
+
 ### 2.7. Update a task : `update`
 
+Edits the value(s) of parameter(s) of a task.<br>
 Formats:
-> * `update <parameter> <new_value>` (when task to be updated has already been selected)
+
+> * `update <parameter> <new_value>` (when task has already been selected using the 'select' command)
 > * `update <task>; <parameter1> <new_value1>; <parameter2> <new_value2>`
 
 Examples:
+
 * `update start time 10am`
 * `update project proposal; name app development project proposal; end time 11.59pm`
 
@@ -119,15 +136,18 @@ Examples:
 
 Exits the program.<br>
 Format:
+
 > * `exit`
 
 ### 2.9. Change save file location
 
 Formats:
+
 > * `save`
 > * `save <new_save_location_directory>`
 
 Examples:
+
 * `save C:\Users\Jim\Desktop`
 
 ## 3. FAQ
@@ -138,24 +158,14 @@ Examples:
 
 ## 4. Command Summary
 
-* **Add**  `add <task>; <due date and time>` <br>
-  e.g. `add sushi restaurant promotion; 040117 10am;`
-
-* **Clear** : `clear`
-
-* **Delete** : `delete <task>` <br>
-   e.g. `delete watch tv with the children`
-
-* **Find** : `find <task>` <br>
-  e.g. `find project`
-
-* **List** : `list` <br>
-  e.g.
-
-* **Help** : `help` <br>
-  e.g.
-
-* **Select** : `select <task>` <br>
-  e.g.`select presentation`
+| **Command** | **Usage**                       | **Example**                                  |
+|:-----------:|:-------------------------------:|:--------------------------------------------:|
+|Add          |`add <task>; <due date and time>`|`add sushi restaurant promotion; 040117 10am;`|
+|Clear        |`clear`                          |                                              |
+|Delete       |`delete <task>`                  |`delete watch tv with the children`           |
+|Find         |`find <task>`                    |`find project`                                |
+|List         |`list`                           |                                              |
+|Help         |`help`                           |                                              |
+|Select       |`select <task>`                  |`select presentation`                         |
 
 
