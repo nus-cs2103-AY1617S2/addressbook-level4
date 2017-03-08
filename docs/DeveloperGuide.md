@@ -361,14 +361,14 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | do task operations offline | remove the restriction of connecting to the internet to do operations
 `* * *` | user | list all my to-do items in chronological order  | I can easily see all my tasks in chronological order
 `* * *` | user | Use an existing data file | reuse my data file from another device
-`* * *` | user | input a deadline | keep track of my deadline
+`* * ` | user | input a personal deadline | keep track of my given deadline
 `* * ` | user | list my today tasks | view what tasks I have to do today
 `* * ` | user | prioritize my task | know this task is more important to do
 `* * ` | user | remove the priority of task | remove task from priority list
 `* * ` | user | list priority tasks | See all the urgent tasks I have to do
 `* * ` | Advanced user | use shortcut commands | type in the tasks quickly
 `* * ` | user | block a date and time for an unconfirmed event
- | deal with the confirmed task/event when I am certain
+ | deal with the confirmed task/event when I am certain about date and time
 `* * ` | user | list block tasks | See all the block tasks in task manager 
 `* * ` | user | delete a blocked date and time event | remove an unconfirmed event when the event is confirmed to be cancelled
 `* * ` | user | delete multiple to-do items at one go | I can quickly delete multiple items
