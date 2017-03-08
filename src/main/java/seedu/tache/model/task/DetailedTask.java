@@ -4,21 +4,45 @@ import seedu.tache.model.tag.UniqueTagList;
 
 public class DetailedTask extends Task{
     
-    private Date date;
+    private Date startDate;
+    private Date endDate;
     private Time time;
+    private Duration duration;
     
-    public DetailedTask(Name name, Date date, Time time, UniqueTagList tags) {
+    public DetailedTask(Name name, UniqueTagList tags){
         super(name, tags);
-        this.date = date;
+    }
+    
+    public DetailedTask(Name name, Date startDate, Date endDate, Time time, Duration duration, UniqueTagList tags) {
+        super(name, tags);
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.time = time;
+        this.duration = duration;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public Duration getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Duration duration) {
+        this.duration = duration;
     }
 
     public Time getTime() {

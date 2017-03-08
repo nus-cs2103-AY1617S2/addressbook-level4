@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.tache.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.tache.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.tache.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.tache.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.ArrayList;
@@ -43,16 +43,12 @@ import seedu.tache.model.ModelManager;
 import seedu.tache.model.ReadOnlyTaskManager;
 import seedu.tache.model.tag.Tag;
 import seedu.tache.model.tag.UniqueTagList;
-<<<<<<< HEAD
-import seedu.tache.model.task.FloatingTask;
-=======
-import seedu.tache.model.task.Address;
+import seedu.tache.model.task.DetailedTask;
 import seedu.tache.model.task.Email;
 import seedu.tache.model.task.Name;
 import seedu.tache.model.task.Phone;
 import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.model.task.Task;
->>>>>>> ImplementTaskModels
 import seedu.tache.storage.StorageManager;
 
 
@@ -128,13 +124,8 @@ public class LogicManagerTest {
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager, List)
      */
     private void assertCommandFailure(String inputCommand, String expectedMessage) {
-<<<<<<< HEAD
-        AddressBook expectedAddressBook = new AddressBook(model.getAddressBook());
-        List<FloatingTask> expectedShownList = new ArrayList<>(model.getFilteredTaskList());
-=======
         TaskManager expectedAddressBook = new TaskManager(model.getTaskManager());
         List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredTaskList());
->>>>>>> ImplementTaskModels
         assertCommandBehavior(true, inputCommand, expectedMessage, expectedAddressBook, expectedShownList);
     }
 
@@ -147,13 +138,8 @@ public class LogicManagerTest {
      *      - {@code expectedAddressBook} was saved to the storage file. <br>
      */
     private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand, String expectedMessage,
-<<<<<<< HEAD
-                                       ReadOnlyAddressBook expectedAddressBook,
-                                       List<? extends FloatingTask> expectedShownList) {
-=======
                                        ReadOnlyTaskManager expectedAddressBook,
                                        List<? extends ReadOnlyTask> expectedShownList) {
->>>>>>> ImplementTaskModels
 
         try {
             CommandResult result = logic.execute(inputCommand);
@@ -293,7 +279,7 @@ public class LogicManagerTest {
      *                    based on visible index.
      */
     private void assertIndexNotFoundBehaviorForCommand(String commandWord) throws Exception {
-        String expectedMessage = MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+        String expectedMessage = MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
         TestDataHelper helper = new TestDataHelper();
         List<Task> personList = helper.generatePersonList(2);
 
@@ -355,7 +341,7 @@ public class LogicManagerTest {
         helper.addToModel(model, threePersons);
 
         assertCommandSuccess("delete 2",
-                String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, threePersons.get(1)),
+                String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, threePersons.get(1)),
                 expectedAB,
                 expectedAB.getTaskList());
     }
@@ -435,7 +421,7 @@ public class LogicManagerTest {
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, tags);
+            return new DetailedTask(name, tags);
         }
 
         /**
@@ -446,7 +432,7 @@ public class LogicManagerTest {
          * @param seed used to generate the person data field values
          */
         Task generatePerson(int seed) throws Exception {
-            return new Task(
+            return new DetailedTask(
                     new Name("Person " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );

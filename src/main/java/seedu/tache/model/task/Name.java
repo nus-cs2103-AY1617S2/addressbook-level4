@@ -7,12 +7,6 @@ import seedu.tache.commons.exceptions.IllegalValueException;
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Name {
-	
-	String name;
-	
-	public String toString() {
-		return name;
-	}
 
     public static final String MESSAGE_NAME_CONSTRAINTS =
             "Task names should only contain alphanumeric characters and spaces, and it should not be blank";

@@ -10,17 +10,11 @@ import seedu.tache.commons.core.UnmodifiableObservableList;
 import seedu.tache.commons.events.model.TaskManagerChangedEvent;
 import seedu.tache.commons.util.CollectionUtil;
 import seedu.tache.commons.util.StringUtil;
-<<<<<<< HEAD
-import seedu.tache.model.person.Task;
-import seedu.tache.model.person.ReadOnlyTask;
-import seedu.tache.model.person.UniqueTaskList;
-import seedu.tache.model.person.UniqueTaskList.TaskNotFoundException;
-=======
+import seedu.tache.model.task.DetailedTask;
 import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.model.task.Task;
 import seedu.tache.model.task.UniqueTaskList;
 import seedu.tache.model.task.UniqueTaskList.TaskNotFoundException;
->>>>>>> ImplementTaskModels
 
 /**
  * Represents the in-memory model of the address book data.
@@ -29,13 +23,8 @@ import seedu.tache.model.task.UniqueTaskList.TaskNotFoundException;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-<<<<<<< HEAD
-    private final AddressBook addressBook;
-    private final FilteredList<ReadOnlyTask> filteredPersons;
-=======
     private final TaskManager taskManager;
-    private final FilteredList<ReadOnlyTask> filteredTasks;
->>>>>>> ImplementTaskModels
+    private final FilteredList<DetailedTask> filteredTasks;
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -72,37 +61,21 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-<<<<<<< HEAD
-        addressBook.removePerson(target);
-        indicateAddressBookChanged();
-    }
-
-    @Override
-    public synchronized void addPerson(Task person) throws UniqueTaskList.DuplicateTaskException {
-        addressBook.addPerson(person);
-=======
         taskManager.removeTask(target);
         indicateTaskManagerChanged();
     }
 
     @Override
-    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+    public synchronized void addTask(DetailedTask task) throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTask(task);
->>>>>>> ImplementTaskModels
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
     }
 
     @Override
-<<<<<<< HEAD
-    public void updateTask(int filteredPersonListIndex, ReadOnlyTask editedPerson)
-            throws UniqueTaskList.DuplicateTaskException {
-        assert editedPerson != null;
-=======
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
->>>>>>> ImplementTaskModels
 
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
@@ -112,12 +85,8 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Filtered Task List Accessors =============================================================
 
     @Override
-    public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
-<<<<<<< HEAD
-        return new UnmodifiableObservableList<>(filteredPersons);
-=======
+    public UnmodifiableObservableList<DetailedTask> getFilteredTaskList() {
         return new UnmodifiableObservableList<>(filteredTasks);
->>>>>>> ImplementTaskModels
     }
 
     @Override
@@ -137,11 +106,7 @@ public class ModelManager extends ComponentManager implements Model {
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
-<<<<<<< HEAD
-        boolean satisfies(ReadOnlyTask person);
-=======
         boolean satisfies(ReadOnlyTask task);
->>>>>>> ImplementTaskModels
         String toString();
     }
 
@@ -154,13 +119,8 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-<<<<<<< HEAD
-        public boolean satisfies(ReadOnlyTask person) {
-            return qualifier.run(person);
-=======
         public boolean satisfies(ReadOnlyTask task) {
             return qualifier.run(task);
->>>>>>> ImplementTaskModels
         }
 
         @Override
@@ -170,11 +130,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     interface Qualifier {
-<<<<<<< HEAD
-        boolean run(ReadOnlyTask person);
-=======
         boolean run(ReadOnlyTask task);
->>>>>>> ImplementTaskModels
         String toString();
     }
 
@@ -186,11 +142,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-<<<<<<< HEAD
-        public boolean run(ReadOnlyTask person) {
-=======
         public boolean run(ReadOnlyTask task) {
->>>>>>> ImplementTaskModels
             return nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword))
                     .findAny()

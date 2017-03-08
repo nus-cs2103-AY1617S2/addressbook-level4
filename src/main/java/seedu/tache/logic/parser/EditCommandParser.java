@@ -65,7 +65,7 @@ public class EditCommandParser {
                 } else if(fieldType instanceof Time) {
                     editTaskDescriptor.setTime(Optional.of((Time)fieldType));
                 } else if(fieldType instanceof Duration) {
-                    editTaskDescriptor.setDuration(Optional.of((Duration)fieldType);
+                    editTaskDescriptor.setDuration(Optional.of((Duration)fieldType));
                 }
             } catch (IllegalValueException ive) {
                 return new IncorrectCommand(ive.getMessage());

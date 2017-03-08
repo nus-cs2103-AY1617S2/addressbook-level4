@@ -7,28 +7,20 @@ public class Date {
     public static final String MESSAGE_DATE_CONSTRAINTS =
             "Task date should only contain <CONSTRAINT>";
     
-    public final String startDate;
-    public final String endDate;
+    public final String date;
     
     /**
      * Validates given date.
      *
      * @throws IllegalValueException if given date string is invalid.
      */
-    public Date(String startDate, String endDate) throws IllegalValueException {
-        assert startDate != null;
-        String trimmedStartDate = startDate.trim();
+    public Date(String date) throws IllegalValueException {
+        assert date != null;
+        String trimmedStartDate = date.trim();
         /*if (!isValidDate(trimmedStartDate)) {
             throw new IllegalValueException(MESSAGE_TIME_CONSTRAINTS);
         }*/
-        this.startDate = trimmedStartDate;
-        
-        assert endDate != null;
-        String trimmedEndDate = endDate.trim();
-        /*if (!isValidDate(trimmedEndDate)) {
-            throw new IllegalValueException(MESSAGE_TIME_CONSTRAINTS);
-        }*/
-        this.endDate = trimmedEndDate;
+        this.date = trimmedStartDate;
     }
 
     /**
@@ -40,7 +32,7 @@ public class Date {
 
     @Override
     public String toString() {
-        return "Start: "+startDate + " End: " + endDate;
+        return date;
     }
 
    /* @Override

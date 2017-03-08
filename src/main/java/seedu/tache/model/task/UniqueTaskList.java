@@ -17,9 +17,9 @@ import seedu.tache.commons.util.CollectionUtil;
  * @see Task#equals(Object)
  * @see CollectionUtil#elementsAreUnique(Collection)
  */
-public class UniqueTaskList implements Iterable<Task> {
+public class UniqueTaskList implements Iterable<DetailedTask> {
 
-    private final ObservableList<Task> internalList = FXCollections.observableArrayList();
+    private final ObservableList<DetailedTask> internalList = FXCollections.observableArrayList();
 
     /**
      * Returns true if the list contains an equivalent task as the given argument.
@@ -34,7 +34,7 @@ public class UniqueTaskList implements Iterable<Task> {
      *
      * @throws DuplicateTaskException if the task to add is a duplicate of an existing task in the list.
      */
-    public void add(Task toAdd) throws DuplicateTaskException {
+    public void add(DetailedTask toAdd) throws DuplicateTaskException {
         assert toAdd != null;
         if (contains(toAdd)) {
             throw new DuplicateTaskException();
@@ -52,7 +52,7 @@ public class UniqueTaskList implements Iterable<Task> {
     public void updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException {
         assert editedTask != null;
 
-        Task taskToUpdate = internalList.get(index);
+        DetailedTask taskToUpdate = internalList.get(index);
         if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
             throw new DuplicateTaskException();
         }
@@ -82,20 +82,20 @@ public class UniqueTaskList implements Iterable<Task> {
         this.internalList.setAll(replacement.internalList);
     }
 
-    public void setTasks(List<? extends ReadOnlyTask> tasks) throws DuplicateTaskException {
+    public void setTasks(List<? extends DetailedTask> tasks) throws DuplicateTaskException {
         final UniqueTaskList replacement = new UniqueTaskList();
-        for (final ReadOnlyTask task : tasks) {
-            replacement.add(new Task(task));
+        for (final DetailedTask task : tasks) {
+            replacement.add(task);
         }
         setTasks(replacement);
     }
 
-    public UnmodifiableObservableList<Task> asObservableList() {
+    public UnmodifiableObservableList<DetailedTask> asObservableList() {
         return new UnmodifiableObservableList<>(internalList);
     }
 
     @Override
-    public Iterator<Task> iterator() {
+    public Iterator<DetailedTask> iterator() {
         return internalList.iterator();
     }
 

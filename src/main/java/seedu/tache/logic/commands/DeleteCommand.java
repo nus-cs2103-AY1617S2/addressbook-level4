@@ -3,6 +3,7 @@ package seedu.tache.logic.commands;
 import seedu.tache.commons.core.Messages;
 import seedu.tache.commons.core.UnmodifiableObservableList;
 import seedu.tache.logic.commands.exceptions.CommandException;
+import seedu.tache.model.task.DetailedTask;
 import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.model.task.UniqueTaskList.TaskNotFoundException;
 
@@ -30,27 +31,19 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
 
-        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        UnmodifiableObservableList<DetailedTask> lastShownList = model.getFilteredTaskList();
 
         if (lastShownList.size() < targetIndex) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-<<<<<<< HEAD
         ReadOnlyTask taskToDelete = lastShownList.get(targetIndex - 1);
 
         try {
             model.deleteTask(taskToDelete);
         } catch (TaskNotFoundException tnfe) {
             assert false : "The target task cannot be missing";
-=======
-        ReadOnlyTask personToDelete = lastShownList.get(targetIndex - 1);
 
-        try {
-            model.deleteTask(personToDelete);
-        } catch (TaskNotFoundException pnfe) {
-            assert false : "The target person cannot be missing";
->>>>>>> ImplementTaskModels
         }
 
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));

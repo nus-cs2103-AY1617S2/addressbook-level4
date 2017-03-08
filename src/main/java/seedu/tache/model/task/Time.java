@@ -7,28 +7,20 @@ public class Time {
     public static final String MESSAGE_TIME_CONSTRAINTS =
             "Task time should only contain <CONSTRAINT>";
     
-    public final String startTime;
-    public final String endTime;
+    public final String time;
     
     /**
      * Validates given time.
      *
      * @throws IllegalValueException if given time string is invalid.
      */
-    public Time(String startTime, String endTime) throws IllegalValueException {
-        assert startTime != null;
-        String trimmedStartTime = startTime.trim();
+    public Time(String time) throws IllegalValueException {
+        assert time != null;
+        String trimmedStartTime = time.trim();
         /*if (!isValidTime(trimmedStartTime)) {
             throw new IllegalValueException(MESSAGE_TIME_CONSTRAINTS);
         }*/
-        this.startTime = trimmedStartTime;
-        
-        assert endTime != null;
-        String trimmedEndTime = endTime.trim();
-        /*if (!isValidTime(trimmedEndTime)) {
-            throw new IllegalValueException(MESSAGE_TIME_CONSTRAINTS);
-        }*/
-        this.endTime = trimmedEndTime;
+        this.time = trimmedStartTime;
     }
 
     /**
@@ -40,7 +32,7 @@ public class Time {
 
     @Override
     public String toString() {
-        return "Start: "+startTime + " End: " + endTime;
+        return time;
     }
 
    /* @Override

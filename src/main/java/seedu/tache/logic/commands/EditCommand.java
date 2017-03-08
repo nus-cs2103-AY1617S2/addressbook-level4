@@ -6,24 +6,17 @@ import java.util.Optional;
 import seedu.tache.commons.core.Messages;
 import seedu.tache.commons.util.CollectionUtil;
 import seedu.tache.logic.commands.exceptions.CommandException;
-<<<<<<< HEAD
-import seedu.tache.logic.parser.ParserUtil;
-import seedu.tache.model.task.Name;
-import seedu.tache.model.task.Date;
-import seedu.tache.model.task.Duration;
-import seedu.tache.model.task.Time;
-import seedu.tache.model.task.Task;
-import seedu.tache.model.task.ReadOnlyTask;
-import seedu.tache.model.task.UniqueTaskList;
-=======
->>>>>>> ImplementTaskModels
 import seedu.tache.model.tag.UniqueTagList;
 import seedu.tache.model.task.Address;
+import seedu.tache.model.task.Date;
+import seedu.tache.model.task.DetailedTask;
+import seedu.tache.model.task.Duration;
 import seedu.tache.model.task.Email;
 import seedu.tache.model.task.Name;
 import seedu.tache.model.task.Phone;
 import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.model.task.Task;
+import seedu.tache.model.task.Time;
 import seedu.tache.model.task.UniqueTaskList;
 
 /**
@@ -62,34 +55,17 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-<<<<<<< HEAD
-=======
-        List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
->>>>>>> ImplementTaskModels
-
-        List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
-
+        List<DetailedTask> lastShownList = model.getFilteredTaskList();
         if (filteredTaskListIndex >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-<<<<<<< HEAD
-        ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
+        DetailedTask taskToEdit = lastShownList.get(filteredTaskListIndex);
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
-
         try {
             model.updateTask(filteredTaskListIndex, editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
-=======
-        ReadOnlyTask personToEdit = lastShownList.get(filteredPersonListIndex);
-        Task editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-
-        try {
-            model.updateTask(filteredPersonListIndex, editedPerson);
-        } catch (UniqueTaskList.DuplicateTaskException dpe) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
->>>>>>> ImplementTaskModels
         }
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
@@ -99,33 +75,23 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
      */
-<<<<<<< HEAD
-    private static Task createEditedTask(ReadOnlyTask taskToEdit,
+    private static Task createEditedTask(DetailedTask taskToEdit,
                                              EditTaskDescriptor editTaskDescriptor) {
         assert taskToEdit != null;
         
         if(taskToEdit instanceof DetailedTask){
             Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
-            Date updateStartDate = editTaskDescriptor.getStartDate().orElseGet(taskToEdit::getName);
-            Date updatedEndDate = editTaskDescriptor.getEndDate().orElseGet(taskToEdit::getName);
-            Time updateTime = editTaskDescriptor.getTime().orElseGet(taskToEdit::getName);
-            Duration updatedDuration = editTaskDescriptor.getDuration().orElseGet(taskToEdit::getName);
+            Date updatedStartDate = editTaskDescriptor.getStartDate().orElseGet(taskToEdit::getStartDate);
+            Date updateEndDate = editTaskDescriptor.getEndDate().orElseGet(taskToEdit::getEndDate);
+            Time updateTime = editTaskDescriptor.getTime().orElseGet(taskToEdit::getTime);
+            Duration updatedDuration = editTaskDescriptor.getDuration().orElseGet(taskToEdit::getDuration);
             UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
             return new DetailedTask(updatedName, updatedStartDate, updateEndDate, updateTime, updatedDuration, updatedTags);
         }else{
             Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
-            return new Task(updatedName);
+            UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
+            return new Task(updatedName, updatedTags);
         }
-=======
-    private static Task createEditedPerson(ReadOnlyTask personToEdit,
-                                             EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
-
-        Name updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
-        UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
-
-        return new Task(updatedName, updatedTags);
->>>>>>> ImplementTaskModels
     }
 
     /**

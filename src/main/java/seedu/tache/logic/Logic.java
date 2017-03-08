@@ -3,6 +3,7 @@ package seedu.tache.logic;
 import javafx.collections.ObservableList;
 import seedu.tache.logic.commands.CommandResult;
 import seedu.tache.logic.commands.exceptions.CommandException;
+import seedu.tache.model.task.DetailedTask;
 import seedu.tache.model.task.ReadOnlyTask;
 
 /**
@@ -18,9 +19,6 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException;
 
     /** Returns the filtered list of tasks */
-    ObservableList<ReadOnlyTask> getFilteredTaskList();
-<<<<<<< HEAD
-=======
+    ObservableList<DetailedTask> getFilteredTaskList();
 
->>>>>>> ImplementTaskModels
 }

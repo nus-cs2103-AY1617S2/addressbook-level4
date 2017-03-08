@@ -1,7 +1,7 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.tache.logic.commands.DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS;
+import static seedu.tache.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS;
 
 import org.junit.Test;
 
@@ -40,7 +40,7 @@ public class DeleteCommandTest extends AddressBookGuiTest {
      * @param currentList A copy of the current list of persons (before deletion).
      */
     private void assertDeleteSuccess(int targetIndexOneIndexed, final TestPerson[] currentList) {
-        TestPerson personToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
+        TestPerson taskToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
         TestPerson[] expectedRemainder = TestUtil.removePersonFromList(currentList, targetIndexOneIndexed);
 
         commandBox.runCommand("delete " + targetIndexOneIndexed);
@@ -49,7 +49,7 @@ public class DeleteCommandTest extends AddressBookGuiTest {
         assertTrue(personListPanel.isListMatching(expectedRemainder));
 
         //confirm the result message is correct
-        assertResultMessage(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+        assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
     }
 
 }
