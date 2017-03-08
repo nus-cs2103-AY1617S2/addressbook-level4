@@ -367,8 +367,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * ` | user | remove the priority of task | remove task from priority list
 `* * ` | user | list priority tasks | See all the urgent tasks I have to do
 `* * ` | Advanced user | use shortcut commands | type in the tasks quickly
-`* * ` | user | block a date and time for an unconfirmed event
- | deal with the confirmed task/event when I am certain about date and time
+`* * ` | user | block a date and time for an unconfirmed event temporary but still able to add task with the same date and time | remind myself of an unconfirmed event when i add a new task with the same date and time
 `* * ` | user | list block tasks | See all the block tasks in task manager 
 `* * ` | user | delete a blocked date and time event | remove an unconfirmed event when the event is confirmed to be cancelled
 `* * ` | user | delete multiple to-do items at one go | I can quickly delete multiple items
