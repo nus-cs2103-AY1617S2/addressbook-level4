@@ -49,4 +49,6 @@ Responsibilities: Dev Ops
 We welcome contributions. See [Contact Us](ContactUs.md) page for more info.
 
 * [Tang Di Feng](https://github.com/CS2103JAN2017-T09-B3/main/pulls)
-* [Sam Yong](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Amauris)
+* [MY DUY HOANG LONG](https://github.com/myduyhoanglong)
+* [Ivan Koh] (https://github.com/ivankws)
+* [Zhang Yan Hao] (https://github.com/vane1992)
