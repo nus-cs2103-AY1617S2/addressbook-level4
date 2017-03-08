@@ -4,23 +4,23 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Justin Wong]
-<img src="images/justinwong.jpg" width="150"><br>
-Role: Team Leader <br>
-Responsibilities: 
-Development, Testing, Documentation
-
 #### [Jordan May] <br>
 <img src="images/jordanmay.jpg" width="150"><br>
 **Role**: Developer
 Responsibilities: 
-Development, Testing, Documentation
+-----
+
+#### [Justin Wong]
+<img src="images/justinwong.jpg" width="150"><br>
+Role: Developer <br>
+Responsibilities: 
+-----
 
 #### [Andy Peng]
 <img src="images/andypeng.jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: 
-Development, Testing, Documentation
+ -----
 
 # Contributors
 

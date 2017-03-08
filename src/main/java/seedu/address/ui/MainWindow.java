@@ -108,7 +108,7 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        todoListPanel = new TodoListPanel(getTodoListPlaceholder(), logic.getFilteredTodoList());
+        new TodoListPanel(getTodoListPlaceholder(), logic.getFilteredTodoList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTodoListFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
@@ -187,10 +187,6 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private void handleExit() {
         raise(new ExitAppRequestEvent());
-    }
-
-    public TodoListPanel getTodoListPanel() {
-        return todoListPanel;
     }
 
 }

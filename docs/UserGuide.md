@@ -47,13 +47,13 @@ Format: `help`
 ### 2.2. Adding a todo: `add`
 
 Adds a floating task<br>
-Format: `add TASK [t/TAG]`
+Format: `add TODO [t/TAG]`
 
 Adds an event<br>
-Format: `add EVENT s/STARTTIME e/ENDTIME [t/tag]`
+Format: `add TODO s/STARTTIME e/ENDTIME [t/tag]`
 
 Adds a deadline<br>
-Format: `add DEADLINE d/DEADLINE [t/tag]`
+Format: `add TODO d/DEADLINE [t/tag]`
 
 Examples:
 
@@ -165,10 +165,10 @@ Format: `exit`
 Todo data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
-### 2.12 Setting the data save location : `savefile`
+### 2.12 Setting the data save location : `save`
 
-Sets the save file location containing todo data.<br>
-Format: `savefile PATH_TO_FILE`
+Sets the save location file containing todo data.<br>
+Format: `save PATH_TO_FILE`
 
 > Changes the file save location to specified `PATH_TO_FILE`. <br>
 
@@ -186,43 +186,30 @@ Examples:
 
 ## 4. Command Summary
 
-* **Add Task** : `add TASK` <br>
-  e.g. `add Finish math homework`
+* **Add Task**  `add task TODO` <br>
+  e.g. `add taskFinish math homework`
 
-* **Add Event** : `add TODO s/STARTTIME e/ENDTIME` <br>
-  e.g. `add Take the dog for a walk s/11-11-2017/17:00 e/11-11-17/17:30`
+* **Add Event**  `add event TODO s/STARTTIME e/ENDTIME`
+  e.g. `add event Take the dog for a walk s/11-11-2017/17:00 e/11-11-17/17:30`
 
-* **Add Deadline** : `add TODO d/DEADLINE` <br>
-  e.g. `add Finish programming project d/11-11-2017/17:00`
+* **Add Deadline**  `add deadline TODO d/DEADLINE`
+  e.g. `add deadline Finish programming project d/11-11-2017/17:00`
 
-* **Edit** : `edit INDEX [TASK]` <br>
-  e.g. `edit 1 Take cat for a walk`
-
-* **Clear** : `clear` <br>
-  e.g. `clear`
+* **Clear** : `clear`
 
 * **Delete** : `delete INDEX` <br>
-  e.g. `delete 3`
+   e.g. `delete 3`
 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
   e.g. `find Dog`
 
-* **Complete** : `complete INDEX` <br>
-  e.g. `complete INDEX`
-
-* **Undo** : `undo` <br>
-  e.g. `undo`
-
 * **List** : `list` <br>
-  e.g. `list`
-
-* **Set Save File Location** : `savefile FILE_PATH` <br>
-  e.g. `savefile ~/User/Documents/todolist.xml`
+  e.g.
 
 * **Help** : `help` <br>
-  e.g. `help`
+  e.g.
 
-* **Exit** : `exit` <br>
-  e.g. `exit`
+* **Select** : `select INDEX` <br>
+  e.g.`select 2`
 
 
