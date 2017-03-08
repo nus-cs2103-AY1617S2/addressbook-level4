@@ -348,16 +348,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add events | help myself make tasks more manageable
-`* * *` | user | add tasks | help myself make tasks more manageable
-`* * *` | user | add deadlines | help myself make tasks more manageable
+`* * *` | user | add events | remind myself what i need to do
+`* * *` | user | add tasks | finish them before deadline
+`* * *` | user | add deadlines | prioritize my tasks
 `* * *` | user | CRUD events, tasks, deadlines | help myself make tasks more manageable
-`* * *` | user | undo last operation | help myself make tasks more manageable
-`* * *` | user | have some flexiblity in commands | help myself make tasks more manageable
-`* * *` | user | simple search for finding an item | help myself make tasks more manageable
-`* * *` | user | view uncompleted/completed tasks | help myself make tasks more manageable
-`* * *` | user | specify which folder data is stored | help myself make tasks more manageable
-`* *` | user | break my tasks into subtasks | help myself make tasks more manageable
+`* * *` | user | undo last operation | easily correct my mistake
+`* * *` | user | have some flexiblity in commands | use the task manager more comfortably
+`* * *` | user | simple search for finding an item | navigate to certain tasks more conveniently
+`* * *` | user | view uncompleted/completed tasks | feel sense of achievement and stress
+`* * *` | user | specify which folder data is stored | manipulate the data more directly
+`* *` | user | break my tasks into subtasks | be clear of the individual steps of the task
 `* *` | user | have a bullet journal workflow | use my favourite workflow more effectively
 `* *` | user | group my todos | arrange them by projects, assignments, classes, etc.
 `* *` | user | retrieve my todos by groups | determine my focus when needed
@@ -370,7 +370,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user | receive a weekly, monthly or annually report of my done tasks and remaining todos | regularly review my efficiency
 `* *` | user | view my done tasks of up to a month | stay accountable and be proud of myself once in a while
 `* *` | user | check if event falls on a local PH | to avoid inconvenience
-`* *` | user | merge multiple events to become subtasks under one event | help myself make tasks more manageable
+`* *` | user | merge multiple events to become subtasks under one event | clean up the space
 `* *` | user | display tasks by date | clearly know what to do at which day
 `* *` | user | add periodic tasks | need not to add one task for many times
 `* *` | user | have short yet clear command words | need not to try very hard to remember them
