@@ -20,7 +20,7 @@ public class SampleDataUtil {
                         new Location("Blk 30 Geylang Street 29, #06-40"),
                         new UniqueTagList("friends")),
                 new Task(new Title("Bernice Yu"), new StartDateTime("2017-04-01T10:16:30"),
-                        new EndDateTime("2017-04-02T10:16:30"),
+                        new EndDateTime("2017-04-01T10:16:30"),
                         new Location("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                         new UniqueTagList("colleagues", "friends")),
                 new Task(new Title("Charlotte Oliveiro"), new StartDateTime("2017-04-01T10:16:30"),
