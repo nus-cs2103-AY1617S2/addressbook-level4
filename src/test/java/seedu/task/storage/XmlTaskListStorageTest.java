@@ -16,7 +16,6 @@ import seedu.task.commons.util.FileUtil;
 import seedu.task.model.ReadOnlyTaskList;
 import seedu.task.model.TaskList;
 import seedu.task.model.task.Task;
-import seedu.task.storage.XmlTaskListStorage;
 import seedu.task.testutil.TypicalTestPersons;
 
 public class XmlTaskListStorageTest {
