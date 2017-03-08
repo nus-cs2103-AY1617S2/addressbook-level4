@@ -4,28 +4,22 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Akshay Narayan](http://github.com/~okkhoy) <br>
-<img src="images/AkshayNarayan.jpg" width="150"><br>
-**Role**: Project Advisor
-
------
-
 #### [Yoshiaki Nishimura](http://github.com/yoshi-1224)
-<img src="images/YoshiakiNishimura.jpg" width="150"><br>
+<img src="images/yoshi-1224.jpg" width="150"><br>
 **Role**: Team lead, in charge of Model & Storage <br>
 **Responsibilities**: Documentation, Deliverables and deadlines, Scheduling and tracking
 
 -----
 
 #### [Brea Dionisio](http://github.com/bdioni)
-<img src="images/BreaDionisio.jpg" width="150"><br>
+<img src="images/bdioni.jpg" width="150"><br>
 **Role**: Developer, in charge of Logic <br>
 **Responsibilities**: Code Quality, Integration, Eclipse expert, Git expert
 
 -----
 
 #### [Anshul Aggarwal](http://github.com/aanshul20)
-<img src="images/AnshulAggarwal.jpg" width="150"><br>
+<img src="images/aanshul20.jpg" width="150"><br>
 **Role**: Developer, in charge of GUI <br>
 **Responsibilities**: Testing
 
