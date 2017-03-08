@@ -4,17 +4,17 @@ By : `CS2103JAN2017-T11-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&
 
 ---
 
-1. [Setting Up](#setting-up)
-2. [Design](#design)
-3. [Implementation](#implementation)
-4. [Testing](#testing)
-5. [Dev Ops](#dev-ops)
+1. [Setting Up](setting-up)
+2. [Design](design)
+3. [Implementation](implementation)
+4. [Testing](testing)
+5. [Dev Ops](dev-ops)
 
-* [Appendix A: User Stories](#appendix-a--user-stories)
-* [Appendix B: Use Cases](#appendix-b--use-cases)
-* [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
-* [Appendix D: Glossary](#appendix-d--glossary)
-* [Appendix E : Product Survey](#appendix-e--product-survey)
+* [Appendix A: User Stories](appendix-a--user-stories)
+* [Appendix B: Use Cases](appendix-b--use-cases)
+* [Appendix C: Non Functional Requirements](appendix-c--non-functional-requirements)
+* [Appendix D: Glossary](appendix-d--glossary)
+* [Appendix E : Product Survey](appendix-e--product-survey)
 
 
 ## 1. Setting up
@@ -91,7 +91,7 @@ Given below is a quick overview of each component.
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+[**`Commons`**](common-classes) represents a collection of classes used by multiple other components.
 Two of those classes play important roles at the architecture level.
 
 * `EventsCenter` : This class (written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained))
@@ -100,10 +100,10 @@ Two of those classes play important roles at the architecture level.
 
 The rest of the App consists of four components.
 
-* [**`UI`**](#ui-component) : The UI of the App.
-* [**`Logic`**](#logic-component) : The command executor.
-* [**`Model`**](#model-component) : Holds the data of the App in-memory.
-* [**`Storage`**](#storage-component) : Reads data from, and writes data to, the hard disk.
+* [**`UI`**](ui-component) : The UI of the App.
+* [**`Logic`**](logic-component) : The command executor.
+* [**`Model`**](model-component) : Holds the data of the App in-memory.
+* [**`Storage`**](storage-component) : Reads data from, and writes data to, the hard disk.
 
 Each of the four components
 
@@ -222,7 +222,7 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 and logging destinations.
 
 * The logging level can be controlled using the `logLevel` setting in the configuration file
-  (See [Configuration](#configuration))
+  (See [Configuration](configuration))
 * The `Logger` for a class can be obtained using `LogsCenter.getLogger(Class)` which will log messages according to
   the specified logging level
 * Currently log messages are output through: `Console` and to a `.log` file.
@@ -455,8 +455,58 @@ Use case ends.
 
 > Use case ends
 
+#### Use case: Complete a task
 
+**MSS**
+
+1. User requests to search for a task with a given name
+2. TaskManager shows the task
+3. User type in the index of the task he/she wants to mark as complete
+3. User request to complete a task
+4. TaskManager marks the task as completed
+Use case ends.
+
+**Extensions**
+
+2a. The task does not exist
+
+> Use case ends
+
+3a. The given index is invalid
+
+> 3a1. TaskManager shows an error message <br>
+  Use case resumes at step 3
+
+#### Use case: List all task
+
+**MSS**
+
+1. User requests to list all tasks
+2. TaskManager shows all the tasks
+Use case ends.
+
+**Extensions**
+
+2a. no tasks exist
+>  2a1. TaskManager shows an error message
+   Use case ends
+
+#### Use case: List a task
+
+**MSS**
+
+1. User type in the index of the task
+2. User request to see the content of the task
+3. TaskManager shows the content of the task
+Use case ends.
+
+**Extensions**
+
+2a. The task does not exist
+> 2a1. TaskManager shows an error message 
+  Use case resumes at step 1
 {More to be added}
+
 
 ## Appendix C : Non Functional Requirements
 
