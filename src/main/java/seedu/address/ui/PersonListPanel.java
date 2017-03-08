@@ -31,8 +31,8 @@ public class PersonListPanel extends UiPart<Region> {
         addToPlaceholder(taskListPlaceholder);
     }
 
-    private void setConnections(ObservableList<ReadOnlyTask> personList) {
-        taskListView.setItems(personList);
+    private void setConnections(ObservableList<ReadOnlyTask> taskList) {
+        taskListView.setItems(taskList);
         taskListView.setCellFactory(listView -> new PersonListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
