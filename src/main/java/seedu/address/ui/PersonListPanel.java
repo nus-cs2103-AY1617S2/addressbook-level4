@@ -25,10 +25,10 @@ public class PersonListPanel extends UiPart<Region> {
     @FXML
     private ListView<ReadOnlyTask> taskListView;
 
-    public PersonListPanel(AnchorPane personListPlaceholder, ObservableList<ReadOnlyTask> personList) {
+    public PersonListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
         super(FXML);
-        setConnections(personList);
-        addToPlaceholder(personListPlaceholder);
+        setConnections(taskList);
+        addToPlaceholder(taskListPlaceholder);
     }
 
     private void setConnections(ObservableList<ReadOnlyTask> personList) {
