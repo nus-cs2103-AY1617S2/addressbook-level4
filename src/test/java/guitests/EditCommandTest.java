@@ -8,8 +8,6 @@ import org.junit.Test;
 import guitests.guihandles.PersonCardHandle;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.task.Address;
 import seedu.address.model.task.Email;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Phone;
@@ -25,7 +23,7 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby p/91234567 e/bobby@gmail.com a/Block 123, Bobby Street 3 t/husband";
+        String detailsToEdit = "Bobby p/91234567 e/bobby@gmail.com d/Block 123, Bobby Street 3 t/husband";
         int addressBookIndex = 1;
 
         TestPerson editedPerson = new PersonBuilder().withName("Bobby").build();
@@ -89,18 +87,6 @@ public class EditCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("edit 1 e/yahoo!!!");
         assertResultMessage(Email.MESSAGE_EMAIL_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 a/");
-        assertResultMessage(Address.MESSAGE_ADDRESS_CONSTRAINTS);
-
-        commandBox.runCommand("edit 1 t/*&");
-        assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
-    }
-
-    @Test
-    public void edit_duplicatePerson_failure() {
-        commandBox.runCommand("edit 3 Alice Pauline p/85355255 e/alice@gmail.com "
-                                + "a/123, Jurong West Ave 6, #08-111 t/friends");
-        assertResultMessage(EditCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
     /**
