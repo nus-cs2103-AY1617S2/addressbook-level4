@@ -203,34 +203,34 @@ public class LogicManagerTest {
               //  Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
-//    @Test
-//    public void execute_add_successful() throws Exception {
-//        // setup expectations
-//        TestDataHelper helper = new TestDataHelper();
-//        Task toBeAdded = helper.doLaundry();
-//        TodoList expectedTodoList = new TodoList();
-//        expectedTodoList.addTask(toBeAdded);
-//
-//        // execute command and verify result
-//        assertCommandSuccess(helper.generateAddCommand(toBeAdded),
-//                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
-//                expectedTodoList,
-//                expectedTodoList.getTaskList());
-//
-//    }
+    @Test
+    public void execute_add_successful() throws Exception {
+        // setup expectations
+        TestDataHelper helper = new TestDataHelper();
+        Task toBeAdded = helper.doLaundry();
+        TodoList expectedTodoList = new TodoList();
+        expectedTodoList.addTask(toBeAdded);
 
-//    @Test
-//    public void execute_addDuplicate_notAllowed() throws Exception {
-//        // setup expectations
-//        TestDataHelper helper = new TestDataHelper();
-//        Task toBeAdded = helper.doLaundry();
-//
-//        // setup starting state
-//        model.addTask(toBeAdded); // person already in internal address book
-//
-//        // execute command and verify result
-//        assertCommandFailure(helper.generateAddCommand(toBeAdded),  AddCommand.MESSAGE_DUPLICATE_PERSON);
-//    }
+        // execute command and verify result
+        assertCommandSuccess(helper.generateAddCommand(toBeAdded),
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedTodoList,
+                expectedTodoList.getTaskList());
+
+    }
+
+    @Test
+    public void execute_addDuplicate_notAllowed() throws Exception {
+        // setup expectations
+        TestDataHelper helper = new TestDataHelper();
+        Task toBeAdded = helper.doLaundry();
+
+        // setup starting state
+        model.addTask(toBeAdded); // person already in internal address book
+
+        // execute command and verify result
+        assertCommandFailure(helper.generateAddCommand(toBeAdded),  AddCommand.MESSAGE_DUPLICATE_PERSON);
+    }
 
 
     @Test
@@ -454,9 +454,10 @@ public class LogicManagerTest {
             cmd.append(" \\under ");
             for (Tag t: tags) {
                 cmd.append(t.tagName);
+                cmd.append(" ");
             }
-
-            return cmd.toString();
+            String trimmedCmd = cmd.toString().trim();
+            return trimmedCmd;
         }
 
         /**
