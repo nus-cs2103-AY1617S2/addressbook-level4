@@ -77,11 +77,11 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> name} into an {@code Optional<Name>} if {@code name} is present.
+     * Parses a {@code Optional<String> desc} into an {@code Optional<Description>} if {@code desc} is present.
      */
-    public static Optional<Description> parseName(Optional<String> name) throws IllegalValueException {
-        assert name != null;
-        return name.isPresent() ? Optional.of(new Description(name.get())) : Optional.empty();
+    public static Optional<Description> parseDesc(Optional<String> desc) throws IllegalValueException {
+        assert desc != null;
+        return desc.isPresent() ? Optional.of(new Description(desc.get())) : Optional.empty();
     }
 
     /**
@@ -96,11 +96,18 @@ public class ParserUtil {
         return new UniqueTagList(tagSet);
     }
 
+    /**
+     * Parses {@code <String> tagsParameterString} into an {@code UniqueTagList}.
+     */
     public static UniqueTagList parseTagsFromString(String tagsParameterString) throws IllegalValueException {
+        assert tagsParameterString != null;
         String[] extractedTags = tagsParameterString.trim().split(" ");
         return ParserUtil.parseTags(Arrays.asList(extractedTags));
     }
 
+    /**
+     * Parses {@code <String> parameterString} into an {@code ArrayList<String>}.
+     */
     public static ArrayList<String> getParameterKeysFromString(String parameterString) {
         ArrayList<String> parameterKeys = new ArrayList<String>();
         LinkedList<String> parametersList = new LinkedList<String>(Arrays.asList(parameterString.split("\\\\")));

@@ -17,9 +17,9 @@ import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.Task;
 
 /**
- * An Immutable AddressBook that is serializable to XML format
+ * An Immutable TodoList that is serializable to XML format
  */
-@XmlRootElement(name = "addressbook")
+@XmlRootElement(name = "todolist")
 public class XmlSerializableTodoList implements ReadOnlyTodoList {
 
     @XmlElement

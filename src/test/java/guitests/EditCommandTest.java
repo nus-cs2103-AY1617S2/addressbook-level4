@@ -75,7 +75,7 @@ public class EditCommandTest extends AddressBookGuiTest {
     @Test
     public void edit_invalidPersonIndex_failure() {
         commandBox.runCommand("edit 8 Bobby");
-        assertResultMessage(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     @Test
@@ -120,6 +120,6 @@ public class EditCommandTest extends AddressBookGuiTest {
         // confirm the list now contains all previous persons plus the person with updated details
         expectedPersonsList[addressBookIndex - 1] = editedPerson;
         assertTrue(personListPanel.isListMatching(expectedPersonsList));
-        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedPerson));
     }
 }

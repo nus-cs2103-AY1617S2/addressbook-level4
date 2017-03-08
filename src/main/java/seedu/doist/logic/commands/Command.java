@@ -16,8 +16,8 @@ public abstract class Command {
      * @param displaySize used to generate summary
      * @return summary message for persons displayed
      */
-    public static String getMessageForPersonListShownSummary(int displaySize) {
-        return String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, displaySize);
+    public static String getMessageForTaskListShownSummary(int displaySize) {
+        return String.format(Messages.MESSAGE_TASKS_LISTED_OVERVIEW, displaySize);
     }
 
     /**
@@ -27,7 +27,7 @@ public abstract class Command {
      * @return summary message for persons displayed
      */
     public static String getMessageForPersonListSortedSummary(SortCommand.SortType sortType) {
-        return String.format(Messages.MESSAGE_PERSONS_SORTED_OVERVIEW, sortType.toString());
+        return String.format(Messages.MESSAGE_TASKS_SORTED_OVERVIEW, sortType.toString());
     }
 
     /**

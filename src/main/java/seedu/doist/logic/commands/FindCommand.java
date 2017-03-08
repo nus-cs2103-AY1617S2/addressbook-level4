@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Set;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the
+ * Finds and lists all tasks in to-do list whose description contains any of the
  * argument keywords. Keyword matching is case sensitive.
  */
 public class FindCommand extends Command {
@@ -14,9 +14,9 @@ public class FindCommand extends Command {
     public static final String DEFAULT_COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = info().getUsageTextForCommandWords()
-            + ": Finds all persons whose names contain any of "
+            + ": Finds all tasks whose names contain any of "
             + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n" + "Example: " + DEFAULT_COMMAND_WORD + " alice bob charlie";
+            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n" + "Example: " + DEFAULT_COMMAND_WORD + " go NUS";
 
     private final Set<String> keywords;
 
@@ -27,7 +27,7 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute() {
         model.updateFilteredTaskList(keywords);
-        return new CommandResult(getMessageForPersonListShownSummary(model.getFilteredTaskList().size()));
+        return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
     }
 
     public static CommandInfo info() {

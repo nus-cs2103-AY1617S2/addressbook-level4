@@ -19,7 +19,7 @@ import seedu.doist.model.task.UniqueTaskList;
 import seedu.doist.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the to-do list data.
  * All changes to any model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
@@ -29,7 +29,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<ReadOnlyTask> filteredTasks;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given to-do list and userPrefs.
      */
     public ModelManager(ReadOnlyTodoList todoList, UserPrefs userPrefs) {
         super();

@@ -10,8 +10,7 @@ import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
- * Deletes a person identified using it's last displayed index from the address
- * book.
+ * Deletes a task identified using it's last displayed index from the to-do list.
  */
 public class DeleteCommand extends Command {
 
@@ -39,7 +38,7 @@ public class DeleteCommand extends Command {
 
         for (int targetIndex : targetIndices) {
             if (lastShownList.size() < targetIndex) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
             }
             ReadOnlyTask taskToDelete = lastShownList.get(targetIndex - 1);
             tasksToDelete.add(taskToDelete);
@@ -52,10 +51,8 @@ public class DeleteCommand extends Command {
                 assert false : "The target person cannot be missing";
             }
         }
-
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, tasksToDelete));
     }
-
 
     public static CommandInfo info() {
         return new CommandInfo(commandWords, DEFAULT_COMMAND_WORD);
