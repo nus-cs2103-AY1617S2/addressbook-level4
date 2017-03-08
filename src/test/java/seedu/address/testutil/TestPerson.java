@@ -29,16 +29,11 @@ public class TestPerson implements ReadOnlyPerson {
         this.name = personToCopy.getName();
         this.phone = personToCopy.getPhone();
         this.email = personToCopy.getEmail();
-        this.address = personToCopy.getAddress();
         this.tags = personToCopy.getTags();
     }
 
     public void setName(Name name) {
         this.name = name;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 
     public void setEmail(Email email) {
@@ -69,11 +64,6 @@ public class TestPerson implements ReadOnlyPerson {
     }
 
     @Override
-    public Address getAddress() {
-        return address;
-    }
-
-    @Override
     public UniqueTagList getTags() {
         return tags;
     }
@@ -86,7 +76,6 @@ public class TestPerson implements ReadOnlyPerson {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
-        sb.append("a/" + this.getAddress().value + " ");
         sb.append("p/" + this.getPhone().value + " ");
         sb.append("e/" + this.getEmail().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
