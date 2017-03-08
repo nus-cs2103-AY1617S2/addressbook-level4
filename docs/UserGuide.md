@@ -191,7 +191,7 @@ There is no need to save manually.
 * **Clear** : `clear`
 
 * **Delete** : `delete INDEX` <br>
- 
+
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
 
 * **List** : `list` <br>
