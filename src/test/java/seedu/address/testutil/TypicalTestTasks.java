@@ -14,18 +14,18 @@ public class TypicalTestTasks {
 
     public TypicalTestTasks() {
         try {
-            alice = new TaskBuilder().withName("Alice Pauline").withDate("85355255").withTags("friends").build();
-            benson = new TaskBuilder().withName("Benson Meier").withDate("98765432").withTags("owesMoney", "friends")
+            alice = new TaskBuilder().withName("Meet Alice Pauline").withDate("01/01/2018").withTags("friends").build();
+            benson = new TaskBuilder().withName("Meet Benson Meier").withDate("02/01/2018").withTags("owesMoney", "friends")
                     .build();
-            carl = new TaskBuilder().withName("Carl Kurz").withDate("95352563").build();
-            daniel = new TaskBuilder().withName("Daniel Meier").withDate("87652533").build();
-            elle = new TaskBuilder().withName("Elle Meyer").withDate("9482224").build();
-            fiona = new TaskBuilder().withName("Fiona Kunz").withDate("9482427").build();
-            george = new TaskBuilder().withName("George Best").withDate("9482442").build();
+            carl = new TaskBuilder().withName("Meet Carl Kurz").withDate("03/01/2018").build();
+            daniel = new TaskBuilder().withName("Meet Daniel Meier").withDate("04/01/2018").build();
+            elle = new TaskBuilder().withName("Meet Elle Meyer").withDate("05/01/2018").build();
+            fiona = new TaskBuilder().withName("Meet Fiona Kunz").withDate("06/01/2018").build();
+            george = new TaskBuilder().withName("Meet George Best").withDate("07/01/2018").build();
 
             // Manually added
-            hoon = new TaskBuilder().withName("Hoon Meier").withDate("8482424").build();
-            ida = new TaskBuilder().withName("Ida Mueller").withDate("8482131").build();
+            hoon = new TaskBuilder().withName("Meet Hoon Meier").withDate("08/02/2018").build();
+            ida = new TaskBuilder().withName("Meet Ida Mueller").withDate("09/02/2018").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";

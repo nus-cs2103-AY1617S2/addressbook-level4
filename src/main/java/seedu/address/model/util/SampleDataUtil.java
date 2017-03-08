@@ -12,12 +12,12 @@ import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         try {
-            return new Task[] { new Task(new Name("Alex Yeoh"), new Date("87438807"), new UniqueTagList("friends")),
-                new Task(new Name("Bernice Yu"), new Date("99272758"), new UniqueTagList("colleagues", "friends")),
-                new Task(new Name("Charlotte Oliveiro"), new Date("93210283"), new UniqueTagList("neighbours")),
-                new Task(new Name("David Li"), new Date("91031282"), new UniqueTagList("family")),
-                new Task(new Name("Irfan Ibrahim"), new Date("92492021"), new UniqueTagList("classmates")),
-                new Task(new Name("Roy Balakrishnan"), new Date("92624417"), new UniqueTagList("colleagues")) };
+            return new Task[] { new Task(new Name("Alex Yeoh"), new Date("87/43/8807"), new UniqueTagList("friends")),
+                    new Task(new Name("Bernice Yu"), new Date("99/27/2758"), new UniqueTagList("colleagues", "friends")),
+                    new Task(new Name("Charlotte Oliveiro"), new Date("93/21/0283"), new UniqueTagList("neighbours")),
+                    new Task(new Name("David Li"), new Date("91/03/1282"), new UniqueTagList("family")),
+                    new Task(new Name("Irfan Ibrahim"), new Date("92/49/2021"), new UniqueTagList("classmates")),
+                    new Task(new Name("Roy Balakrishnan"), new Date("92/62/4417"), new UniqueTagList("colleagues")) };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);
         }

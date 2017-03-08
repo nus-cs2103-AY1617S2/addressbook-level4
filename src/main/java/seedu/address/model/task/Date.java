@@ -1,5 +1,4 @@
 package seedu.address.model.task;
-
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
@@ -8,8 +7,8 @@ import seedu.address.commons.exceptions.IllegalValueException;
  */
 public class Date {
     // TODO: Update message date constraints and regex
-    public static final String MESSAGE_DATE_CONSTRAINTS = "Task date should only contain numbers";
-    public static final String DATE_VALIDATION_REGEX = "\\d+";
+    public static final String MESSAGE_DATE_CONSTRAINTS = "Task date should be in the format DD/MM/YYYY";
+    public static final String DATE_VALIDATION_REGEX = "\\d{2}\\/\\d{2}\\/\\d{4}";
 
     public final String value;
 
@@ -23,13 +22,14 @@ public class Date {
         assert date != null;
         String trimmedDate = date.trim();
         if (!isValidDate(trimmedDate)) {
+            System.out.println("i got stuck here: " + trimmedDate);
             throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
         }
         this.value = trimmedDate;
     }
 
     /**
-     * Returns if a given string is a valid person email.
+     * Returns if a given string is a valid task date.
      */
     public static boolean isValidDate(String test) {
         return test.matches(DATE_VALIDATION_REGEX);
@@ -45,7 +45,7 @@ public class Date {
         return other == this // short circuit if same object
                 || (other instanceof Date // instanceof handles nulls
                         && this.value.equals(((Date) other).value)); // state
-                                                                     // check
+        // check
     }
 
     @Override

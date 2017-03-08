@@ -72,15 +72,15 @@ public class TestUtil {
     private static Task[] getSampleTaskData() {
         try {
             // CHECKSTYLE.OFF: LineLength
-            return new Task[] { new Task(new Name("Ali Muster"), new Date("9482424"), new UniqueTagList()),
-                new Task(new Name("Boris Mueller"), new Date("87249245"), new UniqueTagList()),
-                new Task(new Name("Carl Kurz"), new Date("95352563"), new UniqueTagList()),
-                new Task(new Name("Daniel Meier"), new Date("87652533"), new UniqueTagList()),
-                new Task(new Name("Elle Meyer"), new Date("9482224"), new UniqueTagList()),
-                new Task(new Name("Fiona Kunz"), new Date("9482427"), new UniqueTagList()),
-                new Task(new Name("George Best"), new Date("9482442"), new UniqueTagList()),
-                new Task(new Name("Hoon Meier"), new Date("8482424"), new UniqueTagList()),
-                new Task(new Name("Ida Mueller"), new Date("8482131"), new UniqueTagList()) };
+            return new Task[] { new Task(new Name("Meet Ali Muster"), new Date("30/01/2018"), new UniqueTagList()),
+                    new Task(new Name("Meet Boris Mueller"), new Date("31/01/2018"), new UniqueTagList()),
+                    new Task(new Name("Meet Carl Kurz"), new Date("03/01/2018"), new UniqueTagList()),
+                    new Task(new Name("Meet Daniel Meier"), new Date("04/01/2018"), new UniqueTagList()),
+                    new Task(new Name("Meet Elle Meyer"), new Date("05/01/2018"), new UniqueTagList()),
+                    new Task(new Name("Meet Fiona Kunz"), new Date("06/01/2018"), new UniqueTagList()),
+                    new Task(new Name("Meet George Best"), new Date("07/01/2018"), new UniqueTagList()),
+                    new Task(new Name("Meet Hoon Meier"), new Date("08/02/2018"), new UniqueTagList()),
+                    new Task(new Name("Meet Ida Mueller"), new Date("09/02/2018"), new UniqueTagList()) };
             // CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
             assert false;

@@ -87,13 +87,13 @@ public class LogicManagerTest {
         EventsCenter.getInstance().registerHandler(this);
 
         latestSavedTaskManager = new TaskManager(model.getTaskManager()); // last
-                                                                          // saved
-                                                                          // assumed
-                                                                          // to
-                                                                          // be
-                                                                          // up
-                                                                          // to
-                                                                          // date
+        // saved
+        // assumed
+        // to
+        // be
+        // up
+        // to
+        // date
         helpShown = false;
         targetedJumpIndex = -1; // non yet
     }
@@ -198,15 +198,15 @@ public class LogicManagerTest {
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 12345 t/validTagWithPrefix.butNoDatePrefix", expectedMessage);
-        assertCommandFailure("add Valid Name x/12345 t/invalidDatePrefix", expectedMessage);
+        assertCommandFailure("add Valid Name 12/34/5678 t/validTagWithPrefix.butNoDatePrefix", expectedMessage);
+        assertCommandFailure("add Valid Name x/12/34/4556 t/invalidDatePrefix", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidTaskData() {
-        assertCommandFailure("add []\\[;] d/12345", Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name d/not_numbers", Date.MESSAGE_DATE_CONSTRAINTS);
-        assertCommandFailure("add Valid Name d/12345 t/invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
+        assertCommandFailure("add []\\[;] d/12/34/5678", Name.MESSAGE_NAME_CONSTRAINTS);
+        assertCommandFailure("add Valid Name d/12345678", Date.MESSAGE_DATE_CONSTRAINTS);
+        assertCommandFailure("add Valid Name d/12/34/5678 t/invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
 
@@ -263,16 +263,16 @@ public class LogicManagerTest {
             throws Exception {
         assertCommandFailure(commandWord, expectedMessage); // index missing
         assertCommandFailure(commandWord + " +1", expectedMessage); // index
-                                                                    // should
-                                                                    // be
-                                                                    // unsigned
+        // should
+        // be
+        // unsigned
         assertCommandFailure(commandWord + " -1", expectedMessage); // index
-                                                                    // should
-                                                                    // be
-                                                                    // unsigned
+        // should
+        // be
+        // unsigned
         assertCommandFailure(commandWord + " 0", expectedMessage); // index
-                                                                   // cannot
-                                                                   // be 0
+        // cannot
+        // be 0
         assertCommandFailure(commandWord + " not_a_number", expectedMessage);
     }
 
@@ -411,7 +411,7 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
-            Date privateDate = new Date("111111");
+            Date privateDate = new Date("11/11/1111");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
@@ -524,7 +524,7 @@ public class LogicManagerTest {
          * dummy values.
          */
         Task generateTaskWithName(String name) throws Exception {
-            return new Task(new Name(name), new Date("1"), new UniqueTagList(new Tag("tag")));
+            return new Task(new Name(name), new Date("00/00/0000"), new UniqueTagList(new Tag("tag")));
         }
     }
 }
