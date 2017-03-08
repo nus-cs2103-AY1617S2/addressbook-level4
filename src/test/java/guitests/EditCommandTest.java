@@ -25,29 +25,29 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby p/91234567 e/bobby@gmail.com a/Block 123, Bobby Street 3 t/husband";
+        String detailsToEdit = "Bobby s/121112 0000 e/131112 0000 c/Block 123, Bobby Street 3 #husband";
         int addressBookIndex = 1;
 
-        TestPerson editedPerson = new PersonBuilder().withName("Bobby").withPhone("91234567")
-                .withEmail("bobby@gmail.com").withAddress("Block 123, Bobby Street 3").withTags("husband").build();
+        TestPerson editedPerson = new PersonBuilder().withName("Bobby").withPhone("121112 0000")
+                .withEmail("131112 0000").withAddress("Block 123, Bobby Street 3").withTags("husband").build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
 
     @Test
     public void edit_notAllFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "t/sweetie t/bestie";
+        String detailsToEdit = "#bestie";
         int addressBookIndex = 2;
 
         TestPerson personToEdit = expectedPersonsList[addressBookIndex - 1];
-        TestPerson editedPerson = new PersonBuilder(personToEdit).withTags("sweetie", "bestie").build();
+        TestPerson editedPerson = new PersonBuilder(personToEdit).withTags("bestie").build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
 
     @Test
     public void edit_clearTags_success() throws Exception {
-        String detailsToEdit = "t/";
+        String detailsToEdit = "#";
         int addressBookIndex = 2;
 
         TestPerson personToEdit = expectedPersonsList[addressBookIndex - 1];
@@ -93,23 +93,23 @@ public class EditCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("edit 1 *&");
         assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 p/abcd");
+        commandBox.runCommand("edit 1 s/abcd");
         assertResultMessage(StartTime.MESSAGE_TIME_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 e/yahoo!!!");
         assertResultMessage(EndTime.MESSAGE_TIME_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 a/");
+        commandBox.runCommand("edit 1 c/");
         assertResultMessage(CompletionStatus.MESSAGE_COMPLETION_STATUS_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 t/*&");
+        commandBox.runCommand("edit 1 #*&");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
     @Test
     public void edit_duplicatePerson_failure() {
-        commandBox.runCommand("edit 3 Alice Pauline p/85355255 e/alice@gmail.com "
-                                + "a/123, Jurong West Ave 6, #08-111 t/friends");
+        commandBox.runCommand("edit 3 Alice Pauline s/130613 0909 e/130613 0909"
+                                + "c/123, Jurong West Ave 6, #friends");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 

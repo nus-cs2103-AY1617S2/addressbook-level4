@@ -15,28 +15,28 @@ public class TypicalTestPersons {
     public TypicalTestPersons() {
         try {
             alice = new PersonBuilder().withName("Alice Pauline")
-                    .withAddress("123, Jurong West Ave 6, #08-111").withEmail("130613 0909")
-                    .withPhone("130613 0909")
+                    .withAddress("123, Jurong West Ave 6,").withEmail("060317 0000")
+                    .withPhone("060317 0000")
                     .withTags("friends").build();
-            benson = new PersonBuilder().withName("Benson Meier").withAddress("311, Clementi Ave 2, #02-25")
-                    .withEmail("130613 0909").withPhone("130613 0909")
+            benson = new PersonBuilder().withName("Benson Meier").withAddress("311, Clementi Ave 2,")
+                    .withEmail("060317 0000").withPhone("060317 0000")
                     .withTags("owesMoney", "friends").build();
-            carl = new PersonBuilder().withName("Carl Kurz").withPhone("130613 0909")
-                    .withEmail("130613 0909").withAddress("wall street").build();
-            daniel = new PersonBuilder().withName("Daniel Meier").withPhone("130613 0909")
-                    .withEmail("130613 0909").withAddress("10th street").build();
-            elle = new PersonBuilder().withName("Elle Meyer").withPhone("130613 0909")
-                    .withEmail("130613 0909").withAddress("michegan ave").build();
-            fiona = new PersonBuilder().withName("Fiona Kunz").withPhone("130613 0909")
-                    .withEmail("130613 0909").withAddress("little tokyo").build();
-            george = new PersonBuilder().withName("George Best").withPhone("130613 0909")
-                    .withEmail("130613 0909").withAddress("4th street").build();
+            carl = new PersonBuilder().withName("Carl Kurz").withPhone("060317 0000")
+                    .withEmail("060317 0000").withAddress("wall street").withTags("test").build();
+            daniel = new PersonBuilder().withName("Daniel Meier").withPhone("060317 0000")
+                    .withEmail("060317 0000").withAddress("10th street").withTags("test").build();
+            elle = new PersonBuilder().withName("Elle Meyer").withPhone("060317 0000")
+                    .withEmail("060317 0000").withAddress("michegan ave").withTags("test").build();
+            fiona = new PersonBuilder().withName("Fiona Kunz").withPhone("060317 0000")
+                    .withEmail("060317 0000").withAddress("little tokyo").withTags("test").build();
+            george = new PersonBuilder().withName("George Best").withPhone("060317 0000")
+                    .withEmail("060317 0000").withAddress("4th street").withTags("test").build();
 
             // Manually added
-            hoon = new PersonBuilder().withName("Hoon Meier").withPhone("130613 0909")
-                    .withEmail("130613 0909").withAddress("little india").build();
-            ida = new PersonBuilder().withName("Ida Mueller").withPhone("130613 0909")
-                    .withEmail("130613 0909").withAddress("chicago ave").build();
+            hoon = new PersonBuilder().withName("Hoon Meier").withPhone("060317 0000")
+                    .withEmail("060317 0000").withAddress("little india").withTags("test").build();
+            ida = new PersonBuilder().withName("Ida Mueller").withPhone("060317 0000")
+                    .withEmail("060317 0000").withAddress("chicago ave").withTags("test").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";

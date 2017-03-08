@@ -4,8 +4,8 @@ import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.CompletionStatus;
 import seedu.task.model.task.EndTime;
 import seedu.task.model.task.Name;
-import seedu.task.model.task.StartTime;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.StartTime;
 
 /**
  * A mutable person object. For testing only.
@@ -86,10 +86,10 @@ public class TestPerson implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
-        sb.append("a/" + this.getCompletionStatus().value + " ");
-        sb.append("p/" + this.getStartTime().value + " ");
+        sb.append("c/" + this.getCompletionStatus().value + " ");
+        sb.append("s/" + this.getStartTime().value + " ");
         sb.append("e/" + this.getEndTime().value + " ");
-        this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
+        this.getTags().asObservableList().stream().forEach(s -> sb.append("#" + s.tagName + " "));
         return sb.toString();
     }
 }

@@ -11,9 +11,9 @@ import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.CompletionStatus;
 import seedu.task.model.task.EndTime;
 import seedu.task.model.task.Name;
-import seedu.task.model.task.Task;
-import seedu.task.model.task.StartTime;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.StartTime;
+import seedu.task.model.task.Task;
 
 /**
  * JAXB-friendly version of the Task.
