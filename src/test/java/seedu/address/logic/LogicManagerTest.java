@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Name;
+import seedu.address.model.task.Content;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.storage.StorageManager;
@@ -194,7 +194,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidPersonData() {
         assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
-                Name.MESSAGE_NAME_CONSTRAINTS);
+                Content.MESSAGE_CONTENT_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
@@ -270,7 +270,7 @@ public class LogicManagerTest {
      *                    based on visible index.
      */
     private void assertIndexNotFoundBehaviorForCommand(String commandWord) throws Exception {
-        String expectedMessage = MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+        String expectedMessage = MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
         TestDataHelper helper = new TestDataHelper();
         List<Task> taskList = helper.generateTaskList(2);
 
@@ -332,7 +332,7 @@ public class LogicManagerTest {
         helper.addToModel(model, threePersons);
 
         assertCommandSuccess("delete 2",
-                String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, threePersons.get(1)),
+                String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, threePersons.get(1)),
                 expectedAB,
                 expectedAB.getTaskList());
     }
@@ -358,7 +358,7 @@ public class LogicManagerTest {
         helper.addToModel(model, fourPersons);
 
         assertCommandSuccess("find KEY",
-                Command.getMessageForPersonListShownSummary(expectedList.size()),
+                Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
     }
@@ -377,7 +377,7 @@ public class LogicManagerTest {
         helper.addToModel(model, fourPersons);
 
         assertCommandSuccess("find KEY",
-                Command.getMessageForPersonListShownSummary(expectedList.size()),
+                Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
     }
@@ -396,7 +396,7 @@ public class LogicManagerTest {
         helper.addToModel(model, fourPersons);
 
         assertCommandSuccess("find key rAnDoM",
-                Command.getMessageForPersonListShownSummary(expectedList.size()),
+                Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
     }
@@ -408,7 +408,7 @@ public class LogicManagerTest {
     class TestDataHelper {
 
         Task adam() throws Exception {
-            Name name = new Name("Project Meeting");
+            Content name = new Content("Project Meeting");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
@@ -424,7 +424,7 @@ public class LogicManagerTest {
          */
         Task generateTask(int seed) throws Exception {
             return new Task(
-                    new Name("Task " + seed),
+                    new Content("Task " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -435,7 +435,7 @@ public class LogicManagerTest {
 
             cmd.append("add ");
 
-            cmd.append(p.getName().toString());
+            cmd.append(p.getContent().toString());
 
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {
@@ -517,7 +517,7 @@ public class LogicManagerTest {
          */
         Task generateTaskWithName(String name) throws Exception {
             return new Task(
-                    new Name(name),
+                    new Content(name),
                     new UniqueTagList(new Tag("tag"))
             );
         }

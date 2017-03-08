@@ -12,7 +12,7 @@ import seedu.address.model.tag.UniqueTagList;
  */
 public class TestPerson implements ReadOnlyPerson {
 
-    private Name name;
+    private Content name;
     private Address address;
     private Email email;
     private Phone phone;
@@ -26,14 +26,14 @@ public class TestPerson implements ReadOnlyPerson {
      * Creates a copy of {@code personToCopy}.
      */
     public TestPerson(TestPerson personToCopy) {
-        this.name = personToCopy.getName();
+        this.name = personToCopy.getContent();
         this.phone = personToCopy.getPhone();
         this.email = personToCopy.getEmail();
         this.address = personToCopy.getAddress();
         this.tags = personToCopy.getTags();
     }
 
-    public void setName(Name name) {
+    public void setName(Content name) {
         this.name = name;
     }
 
@@ -54,7 +54,7 @@ public class TestPerson implements ReadOnlyPerson {
     }
 
     @Override
-    public Name getName() {
+    public Content getContent() {
         return name;
     }
 
@@ -85,10 +85,10 @@ public class TestPerson implements ReadOnlyPerson {
 
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
-        sb.append("add " + this.getName().fullName + " ");
-        sb.append("a/" + this.getAddress().value + " ");
-        sb.append("p/" + this.getPhone().value + " ");
-        sb.append("e/" + this.getEmail().value + " ");
+        sb.append("add " + this.getContent().fullContent + " ");
+        sb.append("a/" + this.getAddress().fullContent + " ");
+        sb.append("p/" + this.getPhone().fullContent + " ");
+        sb.append("e/" + this.getEmail().fullContent + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }

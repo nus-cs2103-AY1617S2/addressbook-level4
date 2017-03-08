@@ -3,7 +3,7 @@ package seedu.address.testutil;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Name;
+import seedu.address.model.task.Content;
 
 /**
  *
@@ -24,7 +24,7 @@ public class TaskBuilder {
     }
 
     public TaskBuilder withName(String name) throws IllegalValueException {
-        this.task.setName(new Name(name));
+        this.task.setName(new Content(name));
         return this;
     }
 

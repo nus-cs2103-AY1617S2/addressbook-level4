@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>myPotato</name>
+	<name>mypotato</name>
 	<comment>myPotato created by T09-B3.</comment>
 	<projects>
 	</projects>
@@ -28,7 +28,7 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1476898072165</id>
+			<id>0</id>
 			<name></name>
 			<type>26</type>
 			<matcher>
@@ -37,7 +37,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1476898072188</id>
+			<id>0</id>
 			<name></name>
 			<type>26</type>
 			<matcher>

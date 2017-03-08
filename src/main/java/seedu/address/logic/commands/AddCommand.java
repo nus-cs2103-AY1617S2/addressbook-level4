@@ -7,21 +7,22 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Name;
+import seedu.address.model.task.Content;
+import seedu.address.model.task.TaskDateTime;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
- * Adds a task to the address book.
+ * Adds a task to the list.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
-            + "Parameters: NAME [t/TAG]...\n"
+            + "Parameters: CONTENT DATE_TIME [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " Project Meeting t/project t/meeting";
+            + " Project Meeting 12/12/2017 11:00 t/project t/meeting";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
@@ -33,14 +34,15 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, Set<String> tags)
+    public AddCommand(String content, String dateTime, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
         this.toAdd = new Task(
-                new Name(name),
+                new Content(content),
+                new TaskDateTime(dateTime),
                 new UniqueTagList(tagSet)
         );
     }

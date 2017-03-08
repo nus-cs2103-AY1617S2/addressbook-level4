@@ -32,7 +32,7 @@ import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.AddressBook;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Name;
+import seedu.address.model.task.Content;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.storage.XmlSerializableAddressBook;
@@ -72,15 +72,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Name("Ali Muster"), new UniqueTagList()),
-                new Task(new Name("Boris Mueller"), new UniqueTagList()),
-                new Task(new Name("Carl Kurz"), new UniqueTagList()),
-                new Task(new Name("Daniel Meier"), new UniqueTagList()),
-                new Task(new Name("Elle Meyer"), new UniqueTagList()),
-                new Task(new Name("Fiona Kunz"), new UniqueTagList()),
-                new Task(new Name("George Best"), new UniqueTagList()),
-                new Task(new Name("Hoon Meier"), new UniqueTagList()),
-                new Task(new Name("Ida Mueller"), new UniqueTagList())
+                new Task(new Content("Ali Muster"), new UniqueTagList()),
+                new Task(new Content("Boris Mueller"), new UniqueTagList()),
+                new Task(new Content("Carl Kurz"), new UniqueTagList()),
+                new Task(new Content("Daniel Meier"), new UniqueTagList()),
+                new Task(new Content("Elle Meyer"), new UniqueTagList()),
+                new Task(new Content("Fiona Kunz"), new UniqueTagList()),
+                new Task(new Content("George Best"), new UniqueTagList()),
+                new Task(new Content("Hoon Meier"), new UniqueTagList()),
+                new Task(new Content("Ida Mueller"), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
