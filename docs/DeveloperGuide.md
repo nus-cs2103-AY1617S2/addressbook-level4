@@ -347,10 +347,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new task  |
+`* * *` | user | add a floating task  | add tasks without date or time
+`* * *` | user | add a task with date and time | add tasks with a specified time and date
 `* * *` | user | delete a task  | remove entries that I no longer need
 `* * *` | user | edit a task  | update my tasks whenever I want to change some information
-`* * *` | user | Mark task as 'Done' | remove entries that I have finished
+`* * *` | user | mark task as completed | remove entries that I have finished
 `* * *` | user | list all my tasks  | see all the tasks I have to do
 `* * *` | user | exit the application safely  | exit the application when I am done
 `* * *` | user | find a task by name  | locate details of tasks without having to go through the entire list
@@ -360,7 +361,6 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | do task operations offline | remove the restriction of connecting to the internet to do operations
 `* * *` | user | list all my to-do items in chronological order  | I can easily see all my tasks in chronological order
 `* * *` | user | Use an existing data file | reuse my data file from another device
-`* * *` | Advanced user | use shortcut commands | type in the tasks quickly
 `* * *` | user | input a deadline | keep track of my deadline
 `* * ` | user | list my today tasks | view what tasks I have to do today
 `* * ` | user | prioritize my task | know this task is more important to do
@@ -372,38 +372,16 @@ Priority | As a ... | I want to ... | So that I can...
 `* * ` | user | list block tasks | See all the block tasks in task manager 
 `* * ` | user | delete a blocked date and time event | remove an unconfirmed event when the event is confirmed to be cancelled
 `* * ` | user | delete multiple to-do items at one go | I can quickly delete multiple items
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
 `*` | user | see my google calendar | view my tasks in a calender format
 `*` | user | get a reminder to do a certain task | remind to do a task without having to forget
 `*` | user | view a list of to-do items that are done | I know what tasks I have completed
 `*` | user with many tasks in the task manager | sort taks by name | locate a task easily
 `*` | user | clear all tasks | start fresh by clearing all the tasks in the task manager 
-{More to be added}
 
 ## Appendix B : Use Cases
 
 (For all use cases below, the **System** is the `Task Manager` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
-
-**MSS**
-
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
-Use case ends.
-
-**Extensions**
-
-2a. The list is empty
-
-> Use case ends
-
-3a. The given index is invalid
-
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
 
 #### Use Case: Add task
 
@@ -784,29 +762,9 @@ Use case ends
 
 > Windows, Linux, Unix, OS-X
 
-##### Private contact detail
-
-> A contact detail that is not meant to be shared with others
-
-##### Supported Commands
-
-> Commands that are available and functional with the application
-
 ##### Floating Task
 
 > A task that does not need to be completed by a certain date or time
-
-##### Deadline Task
-
-> A task that has to be completed by a certain date or time
-
-##### Prioritised Task
-
-> A task that is important and has to be completed first
-
-##### Completed Task
-
-> A task that has been marked as done
 
 ##### Block
 
@@ -815,14 +773,6 @@ Use case ends
 ##### Storage folder
 
 > The directory in a computer where the application stores the data
-
-##### Undo
-
-> A command to reverse a wrongly issued command
-
-##### Redo
-
-> A command to do an “undo” command
 
 
 ## Appendix E : Product Survey
