@@ -10,11 +10,11 @@ By : `Team W14-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbs
 4. [Testing](#testing)
 5. [Dev Ops](#dev-ops)
 
-* [Appendix A: User Stories](#appendix-a--user-stories)
-* [Appendix B: Use Cases](#appendix-b--use-cases)
-* [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
-* [Appendix D: Glossary](#appendix-d--glossary)
-* [Appendix E : Product Survey](#appendix-e--product-survey)
+* [Appendix A: User Stories](#appendix-a-user-stories)
+* [Appendix B: Use Cases](#appendix-b-use-cases)
+* [Appendix C: Non Functional Requirements](#appendix-c-non-functional-requirements)
+* [Appendix D: Glossary](#appendix-d-glossary)
+* [Appendix E : Product Survey](#appendix-e-product-survey)
 
 
 ## 1. Setting up
@@ -365,7 +365,7 @@ Priority | As a ... | I want to ... | So that I can...
 `*` | user | delete all my tasks | hand in my resignation letter afterwards
 
 
-## Use Cases
+## Appendix B: Use Cases
 #### Use case: Create a task
 
 **MSS**
