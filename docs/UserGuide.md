@@ -63,13 +63,13 @@ Examples:
 
 Adds an event to the task scheduler <br>
 
-Format: `add event EVENT_NAME [s/START_TIME,END_TIME t/TAG d/DESCRIPTION p/PERIODICITY]...`
+Format: `add  EVENT_NAME l/LOCATION p/PERIOD s/START_TIME e/END_TIME d/ DESCRIPTION t/ TAGS`
 > Events can have any number of tags (including 0)
 
 Examples:
 
-* `add event meeting with john s/mon 11.30, mon 13.30 t/work, important  d/meeting about work where I won’t fall asleep`
-* `add event wife monthly staff meeting p/M`
+* `add meeting with boss l/work p/daily s/7:00pm  e/9:00pm  d/ get scolded for being lazy t/kthxbye`
+
 
 ### 2.4. Listing all tasks : `list`
 
