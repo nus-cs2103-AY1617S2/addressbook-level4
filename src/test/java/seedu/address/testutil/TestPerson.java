@@ -1,6 +1,5 @@
 package seedu.address.testutil;
 
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -13,7 +12,6 @@ import seedu.address.model.tag.UniqueTagList;
 public class TestPerson implements ReadOnlyPerson {
 
     private Name name;
-    private Address address;
     private Email email;
     private Phone phone;
     private UniqueTagList tags;

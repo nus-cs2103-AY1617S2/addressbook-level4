@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -80,14 +79,6 @@ public class ParserUtil {
     public static Optional<Phone> parsePhone(Optional<String> phone) throws IllegalValueException {
         assert phone != null;
         return phone.isPresent() ? Optional.of(new Phone(phone.get())) : Optional.empty();
-    }
-
-    /**
-     * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.
-     */
-    public static Optional<Address> parseAddress(Optional<String> address) throws IllegalValueException {
-        assert address != null;
-        return address.isPresent() ? Optional.of(new Address(address.get())) : Optional.empty();
     }
 
     /**
