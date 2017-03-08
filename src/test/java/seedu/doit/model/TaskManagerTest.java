@@ -14,37 +14,35 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.doit.model.ReadOnlyTaskManager;
-import seedu.doit.model.TaskManager;
 import seedu.doit.model.tag.Tag;
 import seedu.doit.model.task.ReadOnlyTask;
 import seedu.doit.model.task.Task;
 import seedu.doit.testutil.TypicalTestTasks;
 
-public class AddressBookTest {
+public class TaskManagerTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final TaskManager addressBook = new TaskManager();
+    private final TaskManager taskManager = new TaskManager();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getTaskList());
-        assertEquals(Collections.emptyList(), addressBook.getTagList());
+        assertEquals(Collections.emptyList(), taskManager.getTaskList());
+        assertEquals(Collections.emptyList(), taskManager.getTagList());
     }
 
     @Test
     public void resetData_null_throwsAssertionError() {
         thrown.expect(AssertionError.class);
-        addressBook.resetData(null);
+        taskManager.resetData(null);
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        TaskManager newData = new TypicalTestTasks().getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+    public void resetData_withValidReadOnlyTaskManager_replacesData() {
+        TaskManager newData = new TypicalTestTasks().getTypicalTaskManager();
+        taskManager.resetData(newData);
+        assertEquals(newData, taskManager);
     }
 
     @Test
@@ -56,12 +54,12 @@ public class AddressBookTest {
         TaskManagerStub newData = new TaskManagerStub(newPersons, newTags);
 
         thrown.expect(AssertionError.class);
-        addressBook.resetData(newData);
+        taskManager.resetData(newData);
     }
 
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
-        TaskManager typicalAddressBook = new TypicalTestTasks().getTypicalAddressBook();
+        TaskManager typicalAddressBook = new TypicalTestTasks().getTypicalTaskManager();
         List<ReadOnlyTask> newPersons = typicalAddressBook.getTaskList();
         List<Tag> newTags = new ArrayList<>(typicalAddressBook.getTagList());
         // Repeat the first tag twice
@@ -69,7 +67,7 @@ public class AddressBookTest {
         TaskManagerStub newData = new TaskManagerStub(newPersons, newTags);
 
         thrown.expect(AssertionError.class);
-        addressBook.resetData(newData);
+        taskManager.resetData(newData);
     }
 
     /**

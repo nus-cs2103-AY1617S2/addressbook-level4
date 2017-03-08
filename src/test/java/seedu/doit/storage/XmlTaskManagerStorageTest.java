@@ -16,7 +16,6 @@ import seedu.doit.commons.util.FileUtil;
 import seedu.doit.model.ReadOnlyTaskManager;
 import seedu.doit.model.TaskManager;
 import seedu.doit.model.task.Task;
-import seedu.doit.storage.XmlTaskManagerStorage;
 import seedu.doit.testutil.TypicalTestTasks;
 
 public class XmlTaskManagerStorageTest {
@@ -29,12 +28,12 @@ public class XmlTaskManagerStorageTest {
     public TemporaryFolder testFolder = new TemporaryFolder();
 
     @Test
-    public void readAddressBook_nullFilePath_assertionFailure() throws Exception {
+    public void readTaskManager_nullFilePath_assertionFailure() throws Exception {
         thrown.expect(AssertionError.class);
-        readAddressBook(null);
+        readTaskManager(null);
     }
 
-    private java.util.Optional<ReadOnlyTaskManager> readAddressBook(String filePath) throws Exception {
+    private java.util.Optional<ReadOnlyTaskManager> readTaskManager(String filePath) throws Exception {
         return new XmlTaskManagerStorage(filePath).readTaskManager(addToTestDataPathIfNotNull(filePath));
     }
 
@@ -46,14 +45,14 @@ public class XmlTaskManagerStorageTest {
 
     @Test
     public void read_missingFile_emptyResult() throws Exception {
-        assertFalse(readAddressBook("NonExistentFile.xml").isPresent());
+        assertFalse(readTaskManager("NonExistentFile.xml").isPresent());
     }
 
     @Test
     public void read_notXmlFormat_exceptionThrown() throws Exception {
 
         thrown.expect(DataConversionException.class);
-        readAddressBook("NotXmlFormatTaskManager.xml");
+        readTaskManager("NotXmlFormatTaskManager.xml");
 
         /* IMPORTANT: Any code below an exception-throwing line (like the one above) will be ignored.
          * That means you should not have more than one exception test in one method
@@ -61,10 +60,10 @@ public class XmlTaskManagerStorageTest {
     }
 
     @Test
-    public void readAndSaveAddressBook_allInOrder_success() throws Exception {
+    public void readAndSaveTaskManager_allInOrder_success() throws Exception {
         String filePath = testFolder.getRoot().getPath() + "TempAddressBook.xml";
         TypicalTestTasks td = new TypicalTestTasks();
-        TaskManager original = td.getTypicalAddressBook();
+        TaskManager original = td.getTypicalTaskManager();
         XmlTaskManagerStorage xmlAddressBookStorage = new XmlTaskManagerStorage(filePath);
 
         //Save in new file and read back
@@ -88,19 +87,19 @@ public class XmlTaskManagerStorageTest {
     }
 
     @Test
-    public void saveAddressBook_nullAddressBook_assertionFailure() throws IOException {
+    public void saveTaskManager_nullTaskManager_assertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
-        saveAddressBook(null, "SomeFile.xml");
+        saveTaskManager(null, "SomeFile.xml");
     }
 
-    private void saveAddressBook(ReadOnlyTaskManager addressBook, String filePath) throws IOException {
+    private void saveTaskManager(ReadOnlyTaskManager addressBook, String filePath) throws IOException {
         new XmlTaskManagerStorage(filePath).saveTaskManager(addressBook, addToTestDataPathIfNotNull(filePath));
     }
 
     @Test
-    public void saveAddressBook_nullFilePath_assertionFailure() throws IOException {
+    public void saveTaskManager_nullFilePath_assertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
-        saveAddressBook(new TaskManager(), null);
+        saveTaskManager(new TaskManager(), null);
     }
 
 

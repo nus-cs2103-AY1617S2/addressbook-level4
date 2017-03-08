@@ -7,10 +7,10 @@ import org.junit.Test;
 
 import seedu.doit.model.task.Description;
 
-public class AddressTest {
+public class DescriptionTest {
 
     @Test
-    public void isValidAddress() {
+    public void isValidDescription() {
         // invalid addresses
         assertFalse(Description.isValidDescription("")); // empty string
         assertFalse(Description.isValidDescription(" ")); // spaces only
