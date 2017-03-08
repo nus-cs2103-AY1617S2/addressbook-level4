@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import java.util.Objects;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -32,12 +33,13 @@ public class Task implements ReadOnlyTask {
 
     /**
      * Modified for Task. 
+     * @throws IllegalValueException 
      */
-    public Task(Name name, Description description, UniqueTagList tags) {
+    public Task(Name name, Description description, UniqueTagList tags) throws IllegalValueException {
         assert !CollectionUtil.isAnyNull(name, description, tags);
         this.name = name;
-        this.phone = null;
-        this.email = null;
+        this.phone = new Phone("");
+        this.email = new Email("");
         this.description = description;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
