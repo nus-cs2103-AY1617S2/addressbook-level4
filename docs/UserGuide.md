@@ -55,7 +55,7 @@ Examples:
 
 ### 2.3. Listing all tasks : `list`
 
-Shows a list of all tasks in the task manager.<br>
+Shows a list of all currently ongoing tasks in the task manager.<br>
 Format: `list`
 A list of tasks with index number will be shown in the column
 
@@ -105,7 +105,7 @@ Format: `clear`
 
 ### 2.9. Viewing history of task : `history`
 
-A list of history of tasks will be shown in the column sorted in reverse-chronological order
+A list of history of tasks that have been completed will be shown in the column sorted in reverse-chronological order
 Format: `history`
 
 ### 2.10. Exiting the program : `exit`
