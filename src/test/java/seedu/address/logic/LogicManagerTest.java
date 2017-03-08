@@ -409,7 +409,7 @@ public class LogicManagerTest {
     class TestDataHelper {
 
         Task adam() throws Exception {
-            Name name = new Name("Adam Brown");
+            Name name = new Name("Meet Adam Brown");
             Date privateDate = new Date("11/11/1111");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");

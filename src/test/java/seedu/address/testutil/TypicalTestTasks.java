@@ -15,8 +15,8 @@ public class TypicalTestTasks {
     public TypicalTestTasks() {
         try {
             alice = new TaskBuilder().withName("Meet Alice Pauline").withDate("01/01/2018").withTags("friends").build();
-            benson = new TaskBuilder().withName("Meet Benson Meier").withDate("02/01/2018").withTags("owesMoney", "friends")
-                    .build();
+            benson = new TaskBuilder().withName("Meet Benson Meier").withDate("02/01/2018").
+                    withTags("owesMoney", "friends").build();
             carl = new TaskBuilder().withName("Meet Carl Kurz").withDate("03/01/2018").build();
             daniel = new TaskBuilder().withName("Meet Daniel Meier").withDate("04/01/2018").build();
             elle = new TaskBuilder().withName("Meet Elle Meyer").withDate("05/01/2018").build();
