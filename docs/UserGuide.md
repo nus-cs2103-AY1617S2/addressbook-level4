@@ -19,7 +19,7 @@ By : `Team CS2103JAN2017-W15-B4`   &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &
 3. Copy the file to the folder you want to use as the home folder for your task manager.
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
     <br><br>
-    <img src="images/GeeKeep.png" width="600">
+    <img src="images/Ui.png" width="600">
     <br>
 
 5. Type the command in the command box and press  <kbd>Enter</kbd> to execute it.<br>
