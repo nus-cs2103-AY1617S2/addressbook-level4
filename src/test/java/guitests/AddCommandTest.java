@@ -7,7 +7,7 @@ import org.teamstbf.yats.commons.core.Messages;
 import org.teamstbf.yats.logic.commands.AddCommand;
 
 import guitests.guihandles.PersonCardHandle;
-import t16b4.yats.testutil.TestPerson;
+import t16b4.yats.testutil.TestEvent;
 import t16b4.yats.testutil.TestUtil;
 
 public class AddCommandTest extends AddressBookGuiTest {
@@ -15,8 +15,8 @@ public class AddCommandTest extends AddressBookGuiTest {
     @Test
     public void add() {
         //add one person
-        TestPerson[] currentList = td.getTypicalPersons();
-        TestPerson personToAdd = td.hoon;
+        TestEvent[] currentList = td.getTypicalPersons();
+        TestEvent personToAdd = td.hoon;
         assertAddSuccess(personToAdd, currentList);
         currentList = TestUtil.addPersonsToList(currentList, personToAdd);
 
@@ -39,7 +39,7 @@ public class AddCommandTest extends AddressBookGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
-    private void assertAddSuccess(TestPerson personToAdd, TestPerson... currentList) {
+    private void assertAddSuccess(TestEvent personToAdd, TestEvent... currentList) {
         commandBox.runCommand(personToAdd.getAddCommand());
 
         //confirm the new card contains the right data
@@ -47,7 +47,7 @@ public class AddCommandTest extends AddressBookGuiTest {
         assertMatching(personToAdd, addedCard);
 
         //confirm the list now contains all previous persons plus the new person
-        TestPerson[] expectedList = TestUtil.addPersonsToList(currentList, personToAdd);
+        TestEvent[] expectedList = TestUtil.addPersonsToList(currentList, personToAdd);
         assertTrue(personListPanel.isListMatching(expectedList));
     }
 

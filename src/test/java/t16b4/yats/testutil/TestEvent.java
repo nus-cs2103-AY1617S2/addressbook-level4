@@ -2,6 +2,9 @@ package t16b4.yats.testutil;
 
 import org.teamstbf.yats.model.item.Deadline;
 import org.teamstbf.yats.model.item.Description;
+import org.teamstbf.yats.model.item.Location;
+import org.teamstbf.yats.model.item.Periodic;
+import org.teamstbf.yats.model.item.ReadOnlyEvent;
 import org.teamstbf.yats.model.item.ReadOnlyItem;
 import org.teamstbf.yats.model.item.Timing;
 import org.teamstbf.yats.model.item.Title;
@@ -10,43 +13,36 @@ import org.teamstbf.yats.model.tag.UniqueTagList;
 /**
  * A mutable person object. For testing only.
  */
-public class TestPerson implements ReadOnlyItem {
+public class TestEvent implements ReadOnlyEvent {
 
     private Title name;
-    private Description address;
-    private Timing email;
-    private Deadline phone;
+    private Periodic period;
+    private Timing startTime;
+    private Timing endTime;
+    private Description description;
+    private boolean isDone;
+    private Location location;
     private UniqueTagList tags;
 
-    public TestPerson() {
+    public TestEvent() {
         tags = new UniqueTagList();
     }
 
     /**
      * Creates a copy of {@code personToCopy}.
      */
-    public TestPerson(TestPerson personToCopy) {
+    public TestEvent(TestEvent personToCopy) {
         this.name = personToCopy.getTitle();
-        this.phone = personToCopy.getDeadline();
-        this.email = personToCopy.getTiming();
-        this.address = personToCopy.getDescription();
+        this.period = personToCopy.getPeriod();
+        this.location = personToCopy.getLocation();
+        this.startTime = personToCopy.getStartTime();
+        this.endTime = personToCopy.getEndTime();
+        this.description = personToCopy.getDescription();
         this.tags = personToCopy.getTags();
     }
 
     public void setName(Title name) {
         this.name = name;
-    }
-
-    public void setAddress(Description address) {
-        this.address = address;
-    }
-
-    public void setEmail(Timing email) {
-        this.email = email;
-    }
-
-    public void setPhone(Deadline phone) {
-        this.phone = phone;
     }
 
     public void setTags(UniqueTagList tags) {
@@ -59,18 +55,8 @@ public class TestPerson implements ReadOnlyItem {
     }
 
     @Override
-    public Deadline getDeadline() {
-        return phone;
-    }
-
-    @Override
-    public Timing getTiming() {
-        return email;
-    }
-
-    @Override
     public Description getDescription() {
-        return address;
+        return description;
     }
 
     @Override
@@ -87,9 +73,32 @@ public class TestPerson implements ReadOnlyItem {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getTitle().fullName + " ");
         sb.append("a/" + this.getDescription().value + " ");
-        sb.append("p/" + this.getDeadline().value + " ");
-        sb.append("e/" + this.getTiming().value + " ");
+        sb.append("l/" + this.getLocation().value + " ");
+        sb.append("p/" + this.getPeriod().value + " ");
+        sb.append("s/" + this.getStartTime().value + " ");
+        sb.append("e/" + this.getEndTime().value + " ");
+        sb.append("d/" + this.getDescription().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
+    }
+
+    @Override
+    public Location getLocation() {
+        return location;
+    }
+
+    @Override
+    public Timing getStartTime() {
+        return startTime;
+    }
+
+    @Override
+    public Timing getEndTime() {
+        return endTime;
+    }
+
+    @Override
+    public Periodic getPeriod() {
+        return period;
     }
 }

@@ -10,7 +10,7 @@ public class Event implements ReadOnlyEvent {
     private Title name;
     private Periodic period;
     private Timing startTime;
-    private Timing endTiming;
+    private Timing endTime;
     private Description description;
     private boolean isDone;
     private Location location;
@@ -25,7 +25,7 @@ public class Event implements ReadOnlyEvent {
         this.period = periodic;
         this.location = location;
         this.startTime = startTime;
-        this.endTiming = endTime;
+        this.endTime = endTime;
         this.description = description;
         this.isDone = false;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
@@ -69,12 +69,12 @@ public class Event implements ReadOnlyEvent {
     }
 
     public void setEndTime(Timing timing) {
-        assert endTiming != null;
-        this.endTiming = timing;
+        assert endTime != null;
+        this.endTime = timing;
     }
 
     public Timing getEndTime() {
-        return endTiming;
+        return endTime;
     }
     public void setDescription(Description description) {
         assert description != null;
@@ -133,7 +133,7 @@ public class Event implements ReadOnlyEvent {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, location, period, startTime, endTiming, description, tags);
+        return Objects.hash(name, location, period, startTime, endTime, description, tags);
     }
 
     @Override

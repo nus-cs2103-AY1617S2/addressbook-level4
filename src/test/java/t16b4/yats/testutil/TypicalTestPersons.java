@@ -10,7 +10,7 @@ import org.teamstbf.yats.model.item.UniqueItemList;
  */
 public class TypicalTestPersons {
 
-    public TestPerson alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
+    public TestEvent alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
 
     public TypicalTestPersons() {
         try {
@@ -44,7 +44,7 @@ public class TypicalTestPersons {
     }
 
     public static void loadAddressBookWithSampleData(TaskManager ab) {
-        for (TestPerson person : new TypicalTestPersons().getTypicalPersons()) {
+        for (TestEvent person : new TypicalTestPersons().getTypicalPersons()) {
             try {
                 ab.addTask(new Task(person));
             } catch (UniqueItemList.DuplicatePersonException e) {
@@ -53,8 +53,8 @@ public class TypicalTestPersons {
         }
     }
 
-    public TestPerson[] getTypicalPersons() {
-        return new TestPerson[]{alice, benson, carl, daniel, elle, fiona, george};
+    public TestEvent[] getTypicalPersons() {
+        return new TestEvent[]{alice, benson, carl, daniel, elle, fiona, george};
     }
 
     public TaskManager getTypicalAddressBook() {
