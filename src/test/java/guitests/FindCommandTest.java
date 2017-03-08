@@ -4,7 +4,12 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.teamstbf.yats.commons.core.Messages;
+<<<<<<< HEAD
 import org.teamstbf.yats.testutil.TestPerson;
+=======
+
+import t16b4.yats.testutil.TestEvent;
+>>>>>>> origin/v0.1.2-Class-Variable-Refactor-Update
 
 public class FindCommandTest extends AddressBookGuiTest {
 
@@ -30,7 +35,7 @@ public class FindCommandTest extends AddressBookGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
-    private void assertFindResult(String command, TestPerson... expectedHits) {
+    private void assertFindResult(String command, TestEvent... expectedHits) {
         commandBox.runCommand(command);
         assertListSize(expectedHits.length);
         assertResultMessage(expectedHits.length + " persons listed!");

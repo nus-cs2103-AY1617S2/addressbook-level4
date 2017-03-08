@@ -3,6 +3,7 @@ package guitests.guihandles;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.teamstbf.yats.model.item.ReadOnlyEvent;
 import org.teamstbf.yats.model.item.ReadOnlyItem;
 import org.teamstbf.yats.model.tag.UniqueTagList;
 
@@ -73,7 +74,7 @@ public class PersonCardHandle extends GuiHandle {
         return guiRobot.from(node).lookup(TAGS_FIELD_ID).query();
     }
 
-    public boolean isSamePerson(ReadOnlyItem person) {
+    public boolean isSamePerson(ReadOnlyEvent person) {
         return getFullName().equals(person.getTitle().fullName)
                 && getPhone().equals(person.getDeadline().value)
                 && getEmail().equals(person.getTiming().value)

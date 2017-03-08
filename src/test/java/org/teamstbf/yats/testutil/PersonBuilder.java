@@ -13,17 +13,17 @@ import org.teamstbf.yats.model.tag.UniqueTagList;
  */
 public class PersonBuilder {
 
-    private TestPerson person;
+    private TestEvent person;
 
     public PersonBuilder() {
-        this.person = new TestPerson();
+        this.person = new TestEvent();
     }
 
     /**
      * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
-    public PersonBuilder(TestPerson personToCopy) {
-        this.person = new TestPerson(personToCopy);
+    public PersonBuilder(TestEvent personToCopy) {
+        this.person = new TestEvent(personToCopy);
     }
 
     public PersonBuilder withName(String name) throws IllegalValueException {
@@ -54,7 +54,7 @@ public class PersonBuilder {
         return this;
     }
 
-    public TestPerson build() {
+    public TestEvent build() {
         return this.person;
     }
 

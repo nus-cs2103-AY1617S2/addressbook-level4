@@ -1,22 +1,27 @@
-package org.teamstbf.yats.logic.parser;
+package t16b4.yats.logic.parser;
 
-import static org.teamstbf.yats.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_PHONE;
-import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_TAG;
+import static t16b4.yats.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static t16b4.yats.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static t16b4.yats.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static t16b4.yats.logic.parser.CliSyntax.PREFIX_PHONE;
+import static t16b4.yats.logic.parser.CliSyntax.PREFIX_TAG;
+import static t16b4.yats.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static t16b4.yats.logic.parser.CliSyntax.PREFIX_START_TIME;
+import static t16b4.yats.logic.parser.CliSyntax.PREFIX_END_TIME;
+import static t16b4.yats.logic.parser.CliSyntax.PREFIX_PERIOD;
+import static t16b4.yats.logic.parser.CliSyntax.PREFIX_LOCATION;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import org.teamstbf.yats.commons.exceptions.IllegalValueException;
-import org.teamstbf.yats.logic.commands.Command;
-import org.teamstbf.yats.logic.commands.EditCommand;
-import org.teamstbf.yats.logic.commands.EditCommand.EditPersonDescriptor;
-import org.teamstbf.yats.logic.commands.IncorrectCommand;
-import org.teamstbf.yats.model.tag.UniqueTagList;
+import t16b4.yats.commons.exceptions.IllegalValueException;
+import t16b4.yats.logic.commands.Command;
+import t16b4.yats.logic.commands.EditCommand;
+import t16b4.yats.logic.commands.IncorrectCommand;
+import t16b4.yats.logic.commands.EditCommand.EditTaskDescriptor;
+import t16b4.yats.model.tag.UniqueTagList;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -39,12 +44,12 @@ public class EditCommandParser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        EditTaskDescriptor editPersonDescriptor = new EditTaskDescriptor();
         try {
             editPersonDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
-            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argsTokenizer.getValue(PREFIX_PHONE)));
-            editPersonDescriptor.setEmail(ParserUtil.parseEmail(argsTokenizer.getValue(PREFIX_EMAIL)));
-            editPersonDescriptor.setAddress(ParserUtil.parseAddress(argsTokenizer.getValue(PREFIX_ADDRESS)));
+            editPersonDescriptor.setDeadline(ParserUtil.parseDeadline(argsTokenizer.getValue(PREFIX_PHONE)));
+            editPersonDescriptor.setTiming(ParserUtil.parseTiming(argsTokenizer.getValue(PREFIX_EMAIL)));
+            editPersonDescriptor.setDescription(ParserUtil.parseDescription(argsTokenizer.getValue(PREFIX_DESCRIPTION)));
             editPersonDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());

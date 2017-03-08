@@ -4,8 +4,14 @@ import static org.junit.Assert.assertTrue;
 import static org.teamstbf.yats.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS;
 
 import org.junit.Test;
+<<<<<<< HEAD
 import org.teamstbf.yats.testutil.TestPerson;
 import org.teamstbf.yats.testutil.TestUtil;
+=======
+
+import t16b4.yats.testutil.TestEvent;
+import t16b4.yats.testutil.TestUtil;
+>>>>>>> origin/v0.1.2-Class-Variable-Refactor-Update
 
 public class DeleteCommandTest extends AddressBookGuiTest {
 
@@ -13,7 +19,7 @@ public class DeleteCommandTest extends AddressBookGuiTest {
     public void delete() {
 
         //delete the first in the list
-        TestPerson[] currentList = td.getTypicalPersons();
+        TestEvent[] currentList = td.getTypicalPersons();
         int targetIndex = 1;
         assertDeleteSuccess(targetIndex, currentList);
 
@@ -38,9 +44,9 @@ public class DeleteCommandTest extends AddressBookGuiTest {
      * @param targetIndexOneIndexed e.g. index 1 to delete the first person in the list,
      * @param currentList A copy of the current list of persons (before deletion).
      */
-    private void assertDeleteSuccess(int targetIndexOneIndexed, final TestPerson[] currentList) {
-        TestPerson personToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
-        TestPerson[] expectedRemainder = TestUtil.removePersonFromList(currentList, targetIndexOneIndexed);
+    private void assertDeleteSuccess(int targetIndexOneIndexed, final TestEvent[] currentList) {
+        TestEvent personToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
+        TestEvent[] expectedRemainder = TestUtil.removePersonFromList(currentList, targetIndexOneIndexed);
 
         commandBox.runCommand("delete " + targetIndexOneIndexed);
 

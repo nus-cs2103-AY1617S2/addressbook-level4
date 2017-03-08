@@ -12,6 +12,8 @@ public interface ReadOnlyItem {
     Deadline getDeadline();
     Timing getTiming();
     Description getDescription();
+    Periodic getPeriodic(); 
+    
     /**
      * The returned TagList is a deep copy of the internal TagList,
      * changes on the returned list will not affect the person's internal tags.
@@ -27,7 +29,8 @@ public interface ReadOnlyItem {
                 && other.getTitle().equals(this.getTitle()) // state checks here onwards
                 && other.getDeadline().equals(this.getDeadline())
                 && other.getTiming().equals(this.getTiming())
-                && other.getDescription().equals(this.getDescription()));
+                && other.getDescription().equals(this.getDescription()))
+        		&& other.getPeriodic().equals(this.getPeriodic());
     }
 
     /**
