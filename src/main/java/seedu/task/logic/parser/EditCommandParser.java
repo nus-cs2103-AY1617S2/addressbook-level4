@@ -12,11 +12,11 @@ import java.util.List;
 import java.util.Optional;
 
 import seedu.task.commons.exceptions.IllegalValueException;
-import seedu.task.model.tag.UniqueTagList;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.EditCommand;
-import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.logic.commands.EditCommand.EditTaskDescriptor;
+import seedu.task.logic.commands.IncorrectCommand;
+import seedu.task.model.tag.UniqueTagList;
 
 /**
  * Parses input arguments and creates a new EditCommand object

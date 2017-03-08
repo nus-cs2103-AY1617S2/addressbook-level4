@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Date;
@@ -12,7 +13,6 @@ import seedu.task.model.task.Name;
 import seedu.task.model.task.Remark;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
-import seedu.task.logic.commands.exceptions.CommandException;
 
 /**
  * Adds a person to the address book.

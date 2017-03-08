@@ -1,8 +1,8 @@
 package seedu.task.logic.commands;
 
 import seedu.task.commons.core.Messages;
-import seedu.task.model.Model;
 import seedu.task.logic.commands.exceptions.CommandException;
+import seedu.task.model.Model;
 
 /**
  * Represents a command with hidden internal logic and the ability to be executed.

@@ -5,15 +5,15 @@ import java.util.Optional;
 
 import seedu.task.commons.core.Messages;
 import seedu.task.commons.util.CollectionUtil;
-import seedu.task.model.task.Location;
-import seedu.task.model.task.Remark;
-import seedu.task.model.task.Name;
-import seedu.task.model.task.Task;
-import seedu.task.model.task.Date;
-import seedu.task.model.task.ReadOnlyTask;
-import seedu.task.model.task.UniqueTaskList;
-import seedu.task.model.tag.UniqueTagList;
 import seedu.task.logic.commands.exceptions.CommandException;
+import seedu.task.model.tag.UniqueTagList;
+import seedu.task.model.task.Date;
+import seedu.task.model.task.Location;
+import seedu.task.model.task.Name;
+import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.Remark;
+import seedu.task.model.task.Task;
+import seedu.task.model.task.UniqueTaskList;
 
 /**
  * Edits the details of an existing task in the task book.
