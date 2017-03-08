@@ -62,13 +62,13 @@ public class StorageManagerTest {
          */
         UserInbox original = new TypicalTestPersons().getTypicalAddressBook();
         storageManager.saveAddressBook(original);
-        ReadOnlyUserInbox retrieved = storageManager.readAddressBook().get();
+        ReadOnlyUserInbox retrieved = storageManager.readUserInbox().get();
         assertEquals(original, new UserInbox(retrieved));
     }
 
     @Test
     public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+        assertNotNull(storageManager.getUserInboxFilePath());
     }
 
     @Test
@@ -92,7 +92,7 @@ public class StorageManagerTest {
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyUserInbox addressBook, String filePath) throws IOException {
+        public void saveUserInbox(ReadOnlyUserInbox addressBook, String filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }

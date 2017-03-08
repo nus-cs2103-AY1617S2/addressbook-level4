@@ -21,46 +21,44 @@ public class TextFileInboxStorage implements AddressBookStorage {
         this.filePath = filePath;
     }
     
-    public String getAddressBookFilePath() {
+    public String getUserInboxFilePath() {
         return this.filePath;
     }
 
     @Override
-    public Optional<ReadOnlyUserInbox> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(filePath);
+    public Optional<ReadOnlyUserInbox> readUserInbox() throws DataConversionException, IOException {
+        return readUserInbox(filePath);
     }
 
-    public Optional<ReadOnlyUserInbox> readAddressBook(String filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyUserInbox> readUserInbox(String filePath) throws DataConversionException, IOException {
         assert filePath != null;
 
-        File addressBookFile = new File(filePath);
+        File userInboxFile = new File(filePath);
 
-        if (!addressBookFile.exists()) {
-            logger.info("AddressBook file "  + addressBookFile + " not found");
+        if (!userInboxFile.exists()) {
+            logger.info("UserInbox file "  + userInboxFile + " not found");
             return Optional.empty();
         }
         
-        //TODO Update this so that it parses data from text file
-        ReadOnlyUserInbox addressBookOptional = TextFileStorage.loadDataFromSaveFile(new File(filePath));
+        ReadOnlyUserInbox userInboxOptional = TextFileStorage.loadDataFromSaveFile(new File(filePath));
 
-        return Optional.of(addressBookOptional);
+        return Optional.of(userInboxOptional);
     }
 
-    public void saveAddressBook(ReadOnlyUserInbox addressBook) throws IOException {
-        saveAddressBook(addressBook, filePath);
+    public void saveAddressBook(ReadOnlyUserInbox userInbox) throws IOException {
+        saveUserInbox(userInbox, filePath);
 
     }
 
-    public void saveAddressBook(ReadOnlyUserInbox addressBook, String filePath) throws IOException {
-        assert addressBook != null;
+    public void saveUserInbox(ReadOnlyUserInbox userInbox, String filePath) throws IOException {
+        assert userInbox != null;
         assert filePath != null;
 
       
         File file = new File(filePath);
         FileUtil.createIfMissing(file);
         
-        //TODO Update this so that it saves data to text file
-        TextFileStorage.saveDataToFile(file, new UserInbox(addressBook));
+        TextFileStorage.saveDataToFile(file, new UserInbox(userInbox));
 
     }
 

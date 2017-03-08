@@ -54,30 +54,30 @@ public class StorageManager extends ComponentManager implements Storage {
     // ================ AddressBook methods ==============================
 
     @Override
-    public String getAddressBookFilePath() {
-        return addressBookStorage.getAddressBookFilePath();
+    public String getUserInboxFilePath() {
+        return addressBookStorage.getUserInboxFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyUserInbox> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(addressBookStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyUserInbox> readUserInbox() throws DataConversionException, IOException {
+        return readUserInbox(addressBookStorage.getUserInboxFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyUserInbox> readAddressBook(String filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyUserInbox> readUserInbox(String filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return addressBookStorage.readAddressBook(filePath);
+        return addressBookStorage.readUserInbox(filePath);
     }
 
     @Override
     public void saveAddressBook(ReadOnlyUserInbox addressBook) throws IOException {
-        saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
+        saveUserInbox(addressBook, addressBookStorage.getUserInboxFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyUserInbox addressBook, String filePath) throws IOException {
+    public void saveUserInbox(ReadOnlyUserInbox addressBook, String filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveAddressBook(addressBook, filePath);
+        addressBookStorage.saveUserInbox(addressBook, filePath);
     }
 
 

@@ -36,15 +36,6 @@ public class TextFileStorage {
      */
     public static void saveDataToFile(File file, ReadOnlyUserInbox userInbox)
             throws FileNotFoundException {
-//        try {
-//        	//TODO changethis
-//            XmlUtil.saveDataToFile(file, addressBook)
-//        } catch (JAXBException e) {
-//            assert false : "Unexpected exception " + e.getMessage();
-//        }
-    	
-    	//TODO file I/O
-    	
     	//read every single task from the userinbox and store it into file
     	
     	System.out.println("starting???");
@@ -117,13 +108,6 @@ public class TextFileStorage {
     	read.close();
     	
     	return inboxToReturn;
-    	
-//        try {
-//        	//TODO change this
-//            return XmlUtil.getDataFromFile(file, XmlSerializableAddressBook.class);
-//        } catch (JAXBException e) {
-//            throw new DataConversionException(e);
-//        }
     }
 
 }

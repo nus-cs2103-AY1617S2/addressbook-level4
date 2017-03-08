@@ -38,7 +38,7 @@ public class Task implements ReadOnlyTask {
     public Task(Name name, Description description, UniqueTagList tags) throws IllegalValueException {
         assert !CollectionUtil.isAnyNull(name, description, tags);
         this.name = name;
-        this.phone = (Priority) null;
+        this.phone = null;
         this.email = null;
         this.description = description;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list

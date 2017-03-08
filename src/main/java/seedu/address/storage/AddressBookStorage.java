@@ -14,7 +14,7 @@ public interface AddressBookStorage {
     /**
      * Returns the file path of the data file.
      */
-    String getAddressBookFilePath();
+    String getUserInboxFilePath();
 
     /**
      * Returns AddressBook data as a {@link ReadOnlyUserInbox}.
@@ -22,12 +22,12 @@ public interface AddressBookStorage {
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyUserInbox> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyUserInbox> readUserInbox() throws DataConversionException, IOException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getUserInboxFilePath()
      */
-    Optional<ReadOnlyUserInbox> readAddressBook(String filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyUserInbox> readUserInbox(String filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyUserInbox} to the storage.
@@ -39,6 +39,6 @@ public interface AddressBookStorage {
     /**
      * @see #saveAddressBook(ReadOnlyUserInbox)
      */
-    void saveAddressBook(ReadOnlyUserInbox addressBook, String filePath) throws IOException;
+    void saveUserInbox(ReadOnlyUserInbox addressBook, String filePath) throws IOException;
 
 }

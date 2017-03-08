@@ -21,10 +21,10 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
     void saveUserPrefs(UserPrefs userPrefs) throws IOException;
 
     @Override
-    String getAddressBookFilePath();
+    String getUserInboxFilePath();
 
     @Override
-    Optional<ReadOnlyUserInbox> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyUserInbox> readUserInbox() throws DataConversionException, IOException;
 
     @Override
     void saveAddressBook(ReadOnlyUserInbox addressBook) throws IOException;
