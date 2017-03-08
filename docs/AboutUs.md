@@ -19,7 +19,7 @@ Responsibilities: Logic
 -----
 
 #### [Lim Shun Xian](http://github.com/Crsytral)
-<img src="images/crsytral.png" width="150"><br>
+<img src="images/crsytral.jpg" width="150"><br>
 Role: Documentation, Markdown Expert <br>
 Responsibilities: Storage, Model
 
