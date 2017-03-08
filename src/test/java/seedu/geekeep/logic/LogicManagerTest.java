@@ -188,10 +188,14 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 2017-04-01T10:16:30 e/2017-04-01T10:16:30 l/valid,address", expectedMessage);
-        assertCommandFailure("add Valid Name s/2017-04-01T10:16:30 2017-04-01T10:16:30 l/valid, address", expectedMessage);
-        assertCommandFailure("add Valid Name s/2017-04-01T10:16:30 e/2017-04-01T10:16:30 valid, address", expectedMessage);
+        assertCommandFailure("add wrong args wrong args",
+                expectedMessage);
+        assertCommandFailure("add Valid Name 2017-04-01T10:16:30 e/2017-04-01T10:16:30 l/valid,address",
+                expectedMessage);
+        assertCommandFailure("add Valid Name s/2017-04-01T10:16:30 2017-04-01T10:16:30 l/valid, address",
+                expectedMessage);
+        assertCommandFailure("add Valid Name s/2017-04-01T10:16:30 e/2017-04-01T10:16:30 valid, address",
+                expectedMessage);
     }
 
     @Test
@@ -202,7 +206,8 @@ public class LogicManagerTest {
                 EndDateTime.MESSAGE_DATETIME_CONSTRAINTS);
         assertCommandFailure("add Valid Name s/2017-04-01T10:16:30 e/notAnEmail l/valid, address",
                 StartDateTime.MESSAGE_DATETIME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name s/2017-04-01T10:16:30 e/2017-04-01T10:16:30 l/valid, address t/invalid_-[.tag",
+        assertCommandFailure(
+                "add Valid Name s/2017-04-01T10:16:30 e/2017-04-01T10:16:30 l/valid, address t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
