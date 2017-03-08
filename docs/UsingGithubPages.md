@@ -13,7 +13,7 @@ Since we are using GitHub Pages to showcase the documentation for our project, w
  1. Under the GitHub Pages section, click `Choose a theme` in `Theme chooser`. Pick a theme for the
     project site and click `Select theme` when done.
  1. You can now view the site at `https://<username-or-organization-name>.github.io/<repo-name>`. <br>
-    e.g. `https://se-edu.github.io/addressbook-level4`
+    e.g. `https://cs2103jan2017-f12-b1.github.io/Main/`
 
 Note that the publishing source has been automatically set to `master branch`.
 This means that the GitHub Pages site will be published using source files in the `master` branch.
@@ -23,7 +23,7 @@ Jekyll, a static site generator integrated with GitHub Pages, automatically rend
 ## Viewing the Project Site
 
 The project site URL follows the format `https://<username-or-organization-name>.github.io/<repo-name>`,
-e.g. `https://se-edu.github.io/addressbook-level4`.
+e.g. `https://cs2103jan2017-f12-b1.github.io/Main/`.
 By default, the [README](../README.md) file is displayed on this page.
 
 For the other pages, the structure of the site follows the structure of the repository. <br>
