@@ -5,7 +5,7 @@ import savvytodo.commons.core.Messages;
 import savvytodo.commons.core.UnmodifiableObservableList;
 import savvytodo.commons.events.ui.JumpToListRequestEvent;
 import savvytodo.logic.commands.exceptions.CommandException;
-import savvytodo.model.task.ReadOnlyPerson;
+import savvytodo.model.task.ReadOnlyTask;
 
 /**
  * Selects a person identified using it's last displayed index from the address book.
@@ -30,10 +30,10 @@ public class SelectCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
 
-        UnmodifiableObservableList<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
+        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (lastShownList.size() < targetIndex) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex - 1));

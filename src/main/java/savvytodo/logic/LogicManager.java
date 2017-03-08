@@ -10,7 +10,7 @@ import savvytodo.logic.commands.CommandResult;
 import savvytodo.logic.commands.exceptions.CommandException;
 import savvytodo.logic.parser.Parser;
 import savvytodo.model.Model;
-import savvytodo.model.task.ReadOnlyPerson;
+import savvytodo.model.task.ReadOnlyTask;
 import savvytodo.storage.Storage;
 
 /**
@@ -36,7 +36,7 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
-    public ObservableList<ReadOnlyPerson> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<ReadOnlyTask> getFilteredTaskList() {
+        return model.getFilteredTaskList();
     }
 }

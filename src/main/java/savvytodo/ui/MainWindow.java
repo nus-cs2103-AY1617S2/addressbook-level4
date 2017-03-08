@@ -16,7 +16,7 @@ import savvytodo.commons.events.ui.ExitAppRequestEvent;
 import savvytodo.commons.util.FxViewUtil;
 import savvytodo.logic.Logic;
 import savvytodo.model.UserPrefs;
-import savvytodo.model.task.ReadOnlyPerson;
+import savvytodo.model.task.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -114,9 +114,9 @@ public class MainWindow extends UiPart<Region> {
 
     void fillInnerParts() {
         browserPanel = new BrowserPanel(browserPlaceholder);
-        personListPanel = new PersonListPanel(getPersonListPlaceholder(), logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(getPersonListPlaceholder(), logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
-        new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
+        new StatusBarFooter(getStatusbarPlaceholder(), config.gettaskManagerFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
     }
 
@@ -199,7 +199,7 @@ public class MainWindow extends UiPart<Region> {
         return this.personListPanel;
     }
 
-    void loadPersonPage(ReadOnlyPerson person) {
+    void loadPersonPage(ReadOnlyTask person) {
         browserPanel.loadPersonPage(person);
     }
 

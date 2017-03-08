@@ -1,25 +1,25 @@
 package savvytodo.testutil;
 
-import savvytodo.model.tag.UniqueTagList;
+import savvytodo.model.category.UniqueCategoryList;
 import savvytodo.model.task.Address;
 import savvytodo.model.task.Email;
 import savvytodo.model.task.Name;
 import savvytodo.model.task.Phone;
-import savvytodo.model.task.ReadOnlyPerson;
+import savvytodo.model.task.ReadOnlyTask;
 
 /**
  * A mutable person object. For testing only.
  */
-public class TestPerson implements ReadOnlyPerson {
+public class TestPerson implements ReadOnlyTask {
 
     private Name name;
     private Address address;
     private Email email;
     private Phone phone;
-    private UniqueTagList tags;
+    private UniqueCategoryList tags;
 
     public TestPerson() {
-        tags = new UniqueTagList();
+        tags = new UniqueCategoryList();
     }
 
     /**
@@ -30,7 +30,7 @@ public class TestPerson implements ReadOnlyPerson {
         this.phone = personToCopy.getPhone();
         this.email = personToCopy.getEmail();
         this.address = personToCopy.getAddress();
-        this.tags = personToCopy.getTags();
+        this.tags = personToCopy.getCategories();
     }
 
     public void setName(Name name) {
@@ -49,7 +49,7 @@ public class TestPerson implements ReadOnlyPerson {
         this.phone = phone;
     }
 
-    public void setTags(UniqueTagList tags) {
+    public void setTags(UniqueCategoryList tags) {
         this.tags = tags;
     }
 
@@ -74,7 +74,7 @@ public class TestPerson implements ReadOnlyPerson {
     }
 
     @Override
-    public UniqueTagList getTags() {
+    public UniqueCategoryList getCategories() {
         return tags;
     }
 
@@ -89,7 +89,7 @@ public class TestPerson implements ReadOnlyPerson {
         sb.append("a/" + this.getAddress().value + " ");
         sb.append("p/" + this.getPhone().value + " ");
         sb.append("e/" + this.getEmail().value + " ");
-        this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
+        this.getCategories().asObservableList().stream().forEach(s -> sb.append("t/" + s.categoryName + " "));
         return sb.toString();
     }
 }

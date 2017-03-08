@@ -24,8 +24,8 @@ import javafx.stage.Stage;
 import savvytodo.TestApp;
 import savvytodo.commons.core.EventsCenter;
 import savvytodo.commons.events.BaseEvent;
-import savvytodo.model.AddressBook;
-import savvytodo.model.task.ReadOnlyPerson;
+import savvytodo.model.TaskManager;
+import savvytodo.model.task.ReadOnlyTask;
 import savvytodo.testutil.TestUtil;
 import savvytodo.testutil.TypicalTestPersons;
 
@@ -86,8 +86,8 @@ public abstract class AddressBookGuiTest {
      * Override this in child classes to set the initial local data.
      * Return null to use the data in the file specified in {@link #getDataFileLocation()}
      */
-    protected AddressBook getInitialData() {
-        AddressBook ab = new AddressBook();
+    protected TaskManager getInitialData() {
+        TaskManager ab = new TaskManager();
         TypicalTestPersons.loadAddressBookWithSampleData(ab);
         return ab;
     }
@@ -107,7 +107,7 @@ public abstract class AddressBookGuiTest {
     /**
      * Asserts the person shown in the card is same as the given person
      */
-    public void assertMatching(ReadOnlyPerson person, PersonCardHandle card) {
+    public void assertMatching(ReadOnlyTask person, PersonCardHandle card) {
         assertTrue(TestUtil.compareCardAndPerson(card, person));
     }
 

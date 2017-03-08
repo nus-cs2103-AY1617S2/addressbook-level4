@@ -6,14 +6,14 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 
 import savvytodo.commons.exceptions.IllegalValueException;
-import savvytodo.model.tag.Tag;
-import savvytodo.model.tag.UniqueTagList;
+import savvytodo.model.category.Category;
+import savvytodo.model.category.UniqueCategoryList;
 import savvytodo.model.task.Address;
 import savvytodo.model.task.Email;
 import savvytodo.model.task.Name;
-import savvytodo.model.task.Person;
+import savvytodo.model.task.Task;
 import savvytodo.model.task.Phone;
-import savvytodo.model.task.ReadOnlyPerson;
+import savvytodo.model.task.ReadOnlyTask;
 
 /**
  * JAXB-friendly version of the Person.
@@ -44,13 +44,13 @@ public class XmlAdaptedPerson {
      *
      * @param source future changes to this will not affect the created XmlAdaptedPerson
      */
-    public XmlAdaptedPerson(ReadOnlyPerson source) {
+    public XmlAdaptedPerson(ReadOnlyTask source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
         tagged = new ArrayList<>();
-        for (Tag tag : source.getTags()) {
+        for (Category tag : source.getCategories()) {
             tagged.add(new XmlAdaptedTag(tag));
         }
     }
@@ -60,8 +60,8 @@ public class XmlAdaptedPerson {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person
      */
-    public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+    public Task toModelType() throws IllegalValueException {
+        final List<Category> personTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
         }
@@ -69,7 +69,7 @@ public class XmlAdaptedPerson {
         final Phone phone = new Phone(this.phone);
         final Email email = new Email(this.email);
         final Address address = new Address(this.address);
-        final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Person(name, phone, email, address, tags);
+        final UniqueCategoryList tags = new UniqueCategoryList(personTags);
+        return new Task(name, phone, email, address, tags);
     }
 }

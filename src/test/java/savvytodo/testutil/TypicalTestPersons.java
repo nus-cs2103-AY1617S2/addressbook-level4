@@ -1,9 +1,9 @@
 package savvytodo.testutil;
 
 import savvytodo.commons.exceptions.IllegalValueException;
-import savvytodo.model.AddressBook;
-import savvytodo.model.task.Person;
-import savvytodo.model.task.UniquePersonList;
+import savvytodo.model.TaskManager;
+import savvytodo.model.task.Task;
+import savvytodo.model.task.UniqueTaskList;
 
 /**
  *
@@ -43,11 +43,11 @@ public class TypicalTestPersons {
         }
     }
 
-    public static void loadAddressBookWithSampleData(AddressBook ab) {
+    public static void loadAddressBookWithSampleData(TaskManager ab) {
         for (TestPerson person : new TypicalTestPersons().getTypicalPersons()) {
             try {
-                ab.addPerson(new Person(person));
-            } catch (UniquePersonList.DuplicatePersonException e) {
+                ab.addCategory(new Task(person));
+            } catch (UniqueTaskList.DuplicateTaskException e) {
                 assert false : "not possible";
             }
         }
@@ -57,8 +57,8 @@ public class TypicalTestPersons {
         return new TestPerson[]{alice, benson, carl, daniel, elle, fiona, george};
     }
 
-    public AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public TaskManager getTypicalAddressBook() {
+        TaskManager ab = new TaskManager();
         loadAddressBookWithSampleData(ab);
         return ab;
     }

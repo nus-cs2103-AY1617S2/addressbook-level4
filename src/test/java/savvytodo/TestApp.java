@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 import savvytodo.MainApp;
 import savvytodo.commons.core.Config;
 import savvytodo.commons.core.GuiSettings;
-import savvytodo.model.ReadOnlyAddressBook;
+import savvytodo.model.ReadOnlyTaskManager;
 import savvytodo.model.UserPrefs;
 import savvytodo.storage.XmlSerializableAddressBook;
 import savvytodo.testutil.TestUtil;
@@ -23,13 +23,13 @@ public class TestApp extends MainApp {
             TestUtil.getFilePathInSandboxFolder("pref_testing.json");
     public static final String APP_TITLE = "Test App";
     protected static final String ADDRESS_BOOK_NAME = "Test";
-    protected Supplier<ReadOnlyAddressBook> initialDataSupplier = () -> null;
+    protected Supplier<ReadOnlyTaskManager> initialDataSupplier = () -> null;
     protected String saveFileLocation = SAVE_LOCATION_FOR_TESTING;
 
     public TestApp() {
     }
 
-    public TestApp(Supplier<ReadOnlyAddressBook> initialDataSupplier, String saveFileLocation) {
+    public TestApp(Supplier<ReadOnlyTaskManager> initialDataSupplier, String saveFileLocation) {
         super();
         this.initialDataSupplier = initialDataSupplier;
         this.saveFileLocation = saveFileLocation;
@@ -46,9 +46,9 @@ public class TestApp extends MainApp {
     protected Config initConfig(String configFilePath) {
         Config config = super.initConfig(configFilePath);
         config.setAppTitle(APP_TITLE);
-        config.setAddressBookFilePath(saveFileLocation);
+        config.settaskManagerFilePath(saveFileLocation);
         config.setUserPrefsFilePath(DEFAULT_PREF_FILE_LOCATION_FOR_TESTING);
-        config.setAddressBookName(ADDRESS_BOOK_NAME);
+        config.settaskManagerName(ADDRESS_BOOK_NAME);
         return config;
     }
 

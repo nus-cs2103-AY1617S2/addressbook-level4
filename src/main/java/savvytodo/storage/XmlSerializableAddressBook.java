@@ -11,16 +11,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import savvytodo.commons.core.UnmodifiableObservableList;
 import savvytodo.commons.exceptions.IllegalValueException;
-import savvytodo.model.ReadOnlyAddressBook;
-import savvytodo.model.tag.Tag;
-import savvytodo.model.task.Person;
-import savvytodo.model.task.ReadOnlyPerson;
+import savvytodo.model.ReadOnlyTaskManager;
+import savvytodo.model.category.Category;
+import savvytodo.model.task.Task;
+import savvytodo.model.task.ReadOnlyTask;
 
 /**
  * An Immutable AddressBook that is serializable to XML format
  */
 @XmlRootElement(name = "addressbook")
-public class XmlSerializableAddressBook implements ReadOnlyAddressBook {
+public class XmlSerializableAddressBook implements ReadOnlyTaskManager {
 
     @XmlElement
     private List<XmlAdaptedPerson> persons;
@@ -39,15 +39,15 @@ public class XmlSerializableAddressBook implements ReadOnlyAddressBook {
     /**
      * Conversion
      */
-    public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
+    public XmlSerializableAddressBook(ReadOnlyTaskManager src) {
         this();
-        persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
-        tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
+        persons.addAll(src.getTaskList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        tags.addAll(src.getCategoryList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
     }
 
     @Override
-    public ObservableList<ReadOnlyPerson> getPersonList() {
-        final ObservableList<Person> persons = this.persons.stream().map(p -> {
+    public ObservableList<ReadOnlyTask> getTaskList() {
+        final ObservableList<Task> persons = this.persons.stream().map(p -> {
             try {
                 return p.toModelType();
             } catch (IllegalValueException e) {
@@ -60,8 +60,8 @@ public class XmlSerializableAddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<Tag> getTagList() {
-        final ObservableList<Tag> tags = this.tags.stream().map(t -> {
+    public ObservableList<Category> getCategoryList() {
+        final ObservableList<Category> tags = this.tags.stream().map(t -> {
             try {
                 return t.toModelType();
             } catch (IllegalValueException e) {

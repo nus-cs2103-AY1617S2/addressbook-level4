@@ -6,14 +6,14 @@ import java.util.Optional;
 import savvytodo.commons.core.Messages;
 import savvytodo.commons.util.CollectionUtil;
 import savvytodo.logic.commands.exceptions.CommandException;
-import savvytodo.model.tag.UniqueTagList;
+import savvytodo.model.category.UniqueCategoryList;
 import savvytodo.model.task.Address;
 import savvytodo.model.task.Email;
 import savvytodo.model.task.Name;
-import savvytodo.model.task.Person;
+import savvytodo.model.task.Task;
 import savvytodo.model.task.Phone;
-import savvytodo.model.task.ReadOnlyPerson;
-import savvytodo.model.task.UniquePersonList;
+import savvytodo.model.task.ReadOnlyTask;
+import savvytodo.model.task.UniqueTaskList;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -51,18 +51,18 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
+        List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (filteredPersonListIndex >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyPerson personToEdit = lastShownList.get(filteredPersonListIndex);
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        ReadOnlyTask personToEdit = lastShownList.get(filteredPersonListIndex);
+        Task editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         try {
-            model.updatePerson(filteredPersonListIndex, editedPerson);
-        } catch (UniquePersonList.DuplicatePersonException dpe) {
+            model.updateTask(filteredPersonListIndex, editedPerson);
+        } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
         model.updateFilteredListToShowAll();
@@ -73,7 +73,7 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(ReadOnlyPerson personToEdit,
+    private static Task createEditedPerson(ReadOnlyTask personToEdit,
                                              EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
@@ -81,9 +81,9 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
         Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
         Address updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
-        UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
+        UniqueCategoryList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getCategories);
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Task(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
 
     /**
@@ -95,7 +95,7 @@ public class EditCommand extends Command {
         private Optional<Phone> phone = Optional.empty();
         private Optional<Email> email = Optional.empty();
         private Optional<Address> address = Optional.empty();
-        private Optional<UniqueTagList> tags = Optional.empty();
+        private Optional<UniqueCategoryList> tags = Optional.empty();
 
         public EditPersonDescriptor() {}
 
@@ -150,12 +150,12 @@ public class EditCommand extends Command {
             return address;
         }
 
-        public void setTags(Optional<UniqueTagList> tags) {
+        public void setTags(Optional<UniqueCategoryList> tags) {
             assert tags != null;
             this.tags = tags;
         }
 
-        public Optional<UniqueTagList> getTags() {
+        public Optional<UniqueCategoryList> getTags() {
             return tags;
         }
     }

@@ -1,6 +1,6 @@
 package savvytodo.logic.commands;
 
-import savvytodo.model.AddressBook;
+import savvytodo.model.TaskManager;
 
 /**
  * Clears the address book.
@@ -14,7 +14,7 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute() {
         assert model != null;
-        model.resetData(new AddressBook());
+        model.resetData(new TaskManager());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

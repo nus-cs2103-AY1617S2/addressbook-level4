@@ -3,7 +3,7 @@ package savvytodo.storage;
 import javax.xml.bind.annotation.XmlValue;
 
 import savvytodo.commons.exceptions.IllegalValueException;
-import savvytodo.model.tag.Tag;
+import savvytodo.model.category.Category;
 
 /**
  * JAXB-friendly adapted version of the Tag.
@@ -24,8 +24,8 @@ public class XmlAdaptedTag {
      *
      * @param source future changes to this will not affect the created
      */
-    public XmlAdaptedTag(Tag source) {
-        tagName = source.tagName;
+    public XmlAdaptedTag(Category source) {
+        tagName = source.categoryName;
     }
 
     /**
@@ -33,8 +33,8 @@ public class XmlAdaptedTag {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person
      */
-    public Tag toModelType() throws IllegalValueException {
-        return new Tag(tagName);
+    public Category toModelType() throws IllegalValueException {
+        return new Category(tagName);
     }
 
 }

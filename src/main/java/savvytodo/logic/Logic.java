@@ -3,7 +3,7 @@ package savvytodo.logic;
 import javafx.collections.ObservableList;
 import savvytodo.logic.commands.CommandResult;
 import savvytodo.logic.commands.exceptions.CommandException;
-import savvytodo.model.task.ReadOnlyPerson;
+import savvytodo.model.task.ReadOnlyTask;
 
 /**
  * API of the Logic component
@@ -18,6 +18,6 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException;
 
     /** Returns the filtered list of persons */
-    ObservableList<ReadOnlyPerson> getFilteredPersonList();
+    ObservableList<ReadOnlyTask> getFilteredTaskList();
 
 }

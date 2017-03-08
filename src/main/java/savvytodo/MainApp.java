@@ -20,10 +20,10 @@ import savvytodo.commons.util.ConfigUtil;
 import savvytodo.commons.util.StringUtil;
 import savvytodo.logic.Logic;
 import savvytodo.logic.LogicManager;
-import savvytodo.model.AddressBook;
+import savvytodo.model.TaskManager;
 import savvytodo.model.Model;
 import savvytodo.model.ModelManager;
-import savvytodo.model.ReadOnlyAddressBook;
+import savvytodo.model.ReadOnlyTaskManager;
 import savvytodo.model.UserPrefs;
 import savvytodo.model.util.SampleDataUtil;
 import savvytodo.storage.Storage;
@@ -49,11 +49,11 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing Task Manager ]===========================");
         super.init();
 
         config = initConfig(getApplicationParameter("config"));
-        storage = new StorageManager(config.getAddressBookFilePath(), config.getUserPrefsFilePath());
+        storage = new StorageManager(config.gettaskManagerFilePath(), config.getUserPrefsFilePath());
 
         userPrefs = initPrefs(config);
 
@@ -74,20 +74,20 @@ public class MainApp extends Application {
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyTaskManager> taskManagerOptional;
+        ReadOnlyTaskManager initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+            taskManagerOptional = storage.readTaskManaager();
+            if (!taskManagerOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample TaskManager");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = taskManagerOptional.orElseGet(SampleDataUtil::getSampleTaskManager);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Data file not in the correct format. Will be starting with an empty TaskManager");
+            initialData = new TaskManager();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Problem while reading from the file. Will be starting with an empty TaskManager");
+            initialData = new TaskManager();
         }
 
         return new ModelManager(initialData, userPrefs);
@@ -143,7 +143,7 @@ public class MainApp extends Application {
                     "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty TaskManager");
             initializedPrefs = new UserPrefs();
         }
 
@@ -163,13 +163,13 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting TaskManager " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping Task Manager ] =============================");
         ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);

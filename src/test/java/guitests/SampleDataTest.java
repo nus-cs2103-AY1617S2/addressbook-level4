@@ -4,14 +4,14 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import savvytodo.model.AddressBook;
-import savvytodo.model.task.Person;
+import savvytodo.model.TaskManager;
+import savvytodo.model.task.Task;
 import savvytodo.model.util.SampleDataUtil;
 import savvytodo.testutil.TestUtil;
 
 public class SampleDataTest extends AddressBookGuiTest {
     @Override
-    protected AddressBook getInitialData() {
+    protected TaskManager getInitialData() {
         // return null to force test app to load data from file only
         return null;
     }
@@ -24,7 +24,7 @@ public class SampleDataTest extends AddressBookGuiTest {
 
     @Test
     public void addressBook_dataFileDoesNotExist_loadSampleData() throws Exception {
-        Person[] expectedList = SampleDataUtil.getSamplePersons();
+        Task[] expectedList = SampleDataUtil.getSamplePersons();
         assertTrue(personListPanel.isListMatching(expectedList));
     }
 }

@@ -1,4 +1,4 @@
-package savvytodo.model.tag;
+package savvytodo.model.category;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,39 +20,39 @@ import savvytodo.commons.util.CollectionUtil;
  *
  * Supports minimal set of list operations for the app's features.
  *
- * @see Tag#equals(Object)
+ * @see Category#equals(Object)
  * @see CollectionUtil#elementsAreUnique(Collection)
  */
-public class UniqueTagList implements Iterable<Tag> {
+public class UniqueCategoryList implements Iterable<Category> {
 
-    private final ObservableList<Tag> internalList = FXCollections.observableArrayList();
+    private final ObservableList<Category> internalList = FXCollections.observableArrayList();
 
     /**
      * Constructs empty TagList.
      */
-    public UniqueTagList() {}
+    public UniqueCategoryList() {}
 
     /**
      * Creates a UniqueTagList using given String tags.
      * Enforces no nulls or duplicates.
      */
-    public UniqueTagList(String... tags) throws DuplicateTagException, IllegalValueException {
-        final List<Tag> tagList = new ArrayList<Tag>();
+    public UniqueCategoryList(String... tags) throws DuplicateCategoryException, IllegalValueException {
+        final List<Category> tagList = new ArrayList<Category>();
         for (String tag : tags) {
-            tagList.add(new Tag(tag));
+            tagList.add(new Category(tag));
         }
-        setTags(tagList);
+        setCategories(tagList);
     }
 
     /**
      * Creates a UniqueTagList using given tags.
      * Enforces no nulls or duplicates.
      */
-    public UniqueTagList(Tag... tags) throws DuplicateTagException {
+    public UniqueCategoryList(Category... tags) throws DuplicateCategoryException {
         assert !CollectionUtil.isAnyNull((Object[]) tags);
-        final List<Tag> initialTags = Arrays.asList(tags);
+        final List<Category> initialTags = Arrays.asList(tags);
         if (!CollectionUtil.elementsAreUnique(initialTags)) {
-            throw new DuplicateTagException();
+            throw new DuplicateCategoryException();
         }
         internalList.addAll(initialTags);
     }
@@ -61,16 +61,16 @@ public class UniqueTagList implements Iterable<Tag> {
      * Creates a UniqueTagList using given tags.
      * Enforces no null or duplicate elements.
      */
-    public UniqueTagList(Collection<Tag> tags) throws DuplicateTagException {
+    public UniqueCategoryList(Collection<Category> tags) throws DuplicateCategoryException {
         this();
-        setTags(tags);
+        setCategories(tags);
     }
 
     /**
      * Creates a UniqueTagList using given tags.
      * Enforces no nulls.
      */
-    public UniqueTagList(Set<Tag> tags) {
+    public UniqueCategoryList(Set<Category> tags) {
         assert !CollectionUtil.isAnyNull(tags);
         internalList.addAll(tags);
     }
@@ -79,7 +79,7 @@ public class UniqueTagList implements Iterable<Tag> {
      * Creates a copy of the given list.
      * Insulates from changes in source.
      */
-    public UniqueTagList(UniqueTagList source) {
+    public UniqueCategoryList(UniqueCategoryList source) {
         internalList.addAll(source.internalList); // insulate internal list from changes in argument
     }
 
@@ -87,21 +87,21 @@ public class UniqueTagList implements Iterable<Tag> {
      * Returns all tags in this list as a Set.
      * This set is mutable and change-insulated against the internal list.
      */
-    public Set<Tag> toSet() {
+    public Set<Category> toSet() {
         return new HashSet<>(internalList);
     }
 
     /**
      * Replaces the Tags in this list with those in the argument tag list.
      */
-    public void setTags(UniqueTagList replacement) {
+    public void setTags(UniqueCategoryList replacement) {
         this.internalList.setAll(replacement.internalList);
     }
 
-    public void setTags(Collection<Tag> tags) throws DuplicateTagException {
+    public void setCategories(Collection<Category> tags) throws DuplicateCategoryException {
         assert !CollectionUtil.isAnyNull(tags);
         if (!CollectionUtil.elementsAreUnique(tags)) {
-            throw new DuplicateTagException();
+            throw new DuplicateCategoryException();
         }
         internalList.setAll(tags);
     }
@@ -109,8 +109,8 @@ public class UniqueTagList implements Iterable<Tag> {
     /**
      * Ensures every tag in the argument list exists in this object.
      */
-    public void mergeFrom(UniqueTagList from) {
-        final Set<Tag> alreadyInside = this.toSet();
+    public void mergeFrom(UniqueCategoryList from) {
+        final Set<Category> alreadyInside = this.toSet();
         from.internalList.stream()
                 .filter(tag -> !alreadyInside.contains(tag))
                 .forEach(internalList::add);
@@ -119,7 +119,7 @@ public class UniqueTagList implements Iterable<Tag> {
     /**
      * Returns true if the list contains an equivalent Tag as the given argument.
      */
-    public boolean contains(Tag toCheck) {
+    public boolean contains(Category toCheck) {
         assert toCheck != null;
         return internalList.contains(toCheck);
     }
@@ -127,34 +127,34 @@ public class UniqueTagList implements Iterable<Tag> {
     /**
      * Adds a Tag to the list.
      *
-     * @throws DuplicateTagException if the Tag to add is a duplicate of an existing Tag in the list.
+     * @throws DuplicateCategoryException if the Tag to add is a duplicate of an existing Tag in the list.
      */
-    public void add(Tag toAdd) throws DuplicateTagException {
+    public void add(Category toAdd) throws DuplicateCategoryException {
         assert toAdd != null;
         if (contains(toAdd)) {
-            throw new DuplicateTagException();
+            throw new DuplicateCategoryException();
         }
         internalList.add(toAdd);
     }
 
     @Override
-    public Iterator<Tag> iterator() {
+    public Iterator<Category> iterator() {
         return internalList.iterator();
     }
 
-    public UnmodifiableObservableList<Tag> asObservableList() {
+    public UnmodifiableObservableList<Category> asObservableList() {
         return new UnmodifiableObservableList<>(internalList);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniqueTagList // instanceof handles nulls
+                || (other instanceof UniqueCategoryList // instanceof handles nulls
                 && this.internalList.equals(
-                ((UniqueTagList) other).internalList));
+                ((UniqueCategoryList) other).internalList));
     }
 
-    public boolean equalsOrderInsensitive(UniqueTagList other) {
+    public boolean equalsOrderInsensitive(UniqueCategoryList other) {
         return this == other || new HashSet<>(this.internalList).equals(new HashSet<>(other.internalList));
     }
 
@@ -166,8 +166,8 @@ public class UniqueTagList implements Iterable<Tag> {
     /**
      * Signals that an operation would have violated the 'no duplicates' property of the list.
      */
-    public static class DuplicateTagException extends DuplicateDataException {
-        protected DuplicateTagException() {
+    public static class DuplicateCategoryException extends DuplicateDataException {
+        protected DuplicateCategoryException() {
             super("Operation would result in duplicate tags");
         }
     }

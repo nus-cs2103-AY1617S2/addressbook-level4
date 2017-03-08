@@ -1,12 +1,12 @@
 package savvytodo.model.task;
 
-import savvytodo.model.tag.UniqueTagList;
+import savvytodo.model.category.UniqueCategoryList;
 
 /**
  * A read-only immutable interface for a Person in the addressbook.
  * Implementations should guarantee: details are present and not null, field values are validated.
  */
-public interface ReadOnlyPerson {
+public interface ReadOnlyTask {
 
     Name getName();
     Phone getPhone();
@@ -17,12 +17,12 @@ public interface ReadOnlyPerson {
      * The returned TagList is a deep copy of the internal TagList,
      * changes on the returned list will not affect the person's internal tags.
      */
-    UniqueTagList getTags();
+    UniqueCategoryList getCategories();
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
      */
-    default boolean isSameStateAs(ReadOnlyPerson other) {
+    default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                 && other.getName().equals(this.getName()) // state checks here onwards
@@ -44,7 +44,7 @@ public interface ReadOnlyPerson {
                 .append(" Address: ")
                 .append(getAddress())
                 .append(" Tags: ");
-        getTags().forEach(builder::append);
+        getCategories().forEach(builder::append);
         return builder.toString();
     }
 

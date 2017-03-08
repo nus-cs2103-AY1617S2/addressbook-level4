@@ -3,8 +3,8 @@ package savvytodo.logic.commands;
 import savvytodo.commons.core.Messages;
 import savvytodo.commons.core.UnmodifiableObservableList;
 import savvytodo.logic.commands.exceptions.CommandException;
-import savvytodo.model.task.ReadOnlyPerson;
-import savvytodo.model.task.UniquePersonList.PersonNotFoundException;
+import savvytodo.model.task.ReadOnlyTask;
+import savvytodo.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Deletes a person identified using it's last displayed index from the address book.
@@ -30,17 +30,17 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
 
-        UnmodifiableObservableList<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
+        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (lastShownList.size() < targetIndex) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyPerson personToDelete = lastShownList.get(targetIndex - 1);
+        ReadOnlyTask personToDelete = lastShownList.get(targetIndex - 1);
 
         try {
-            model.deletePerson(personToDelete);
-        } catch (PersonNotFoundException pnfe) {
+            model.deleteTask(personToDelete);
+        } catch (TaskNotFoundException pnfe) {
             assert false : "The target person cannot be missing";
         }
 

@@ -1,8 +1,8 @@
 package savvytodo.testutil;
 
 import savvytodo.commons.exceptions.IllegalValueException;
-import savvytodo.model.tag.Tag;
-import savvytodo.model.tag.UniqueTagList;
+import savvytodo.model.category.Category;
+import savvytodo.model.category.UniqueCategoryList;
 import savvytodo.model.task.Address;
 import savvytodo.model.task.Email;
 import savvytodo.model.task.Name;
@@ -32,9 +32,9 @@ public class PersonBuilder {
     }
 
     public PersonBuilder withTags(String ... tags) throws IllegalValueException {
-        person.setTags(new UniqueTagList());
+        person.setTags(new UniqueCategoryList());
         for (String tag: tags) {
-            person.getTags().add(new Tag(tag));
+            person.getCategories().add(new Category(tag));
         }
         return this;
     }

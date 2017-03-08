@@ -1,10 +1,10 @@
 package savvytodo.testutil;
 
 import savvytodo.commons.exceptions.IllegalValueException;
-import savvytodo.model.AddressBook;
-import savvytodo.model.tag.Tag;
-import savvytodo.model.task.Person;
-import savvytodo.model.task.UniquePersonList;
+import savvytodo.model.TaskManager;
+import savvytodo.model.category.Category;
+import savvytodo.model.task.Task;
+import savvytodo.model.task.UniqueTaskList;
 
 /**
  * A utility class to help with building Addressbook objects.
@@ -13,23 +13,23 @@ import savvytodo.model.task.UniquePersonList;
  */
 public class AddressBookBuilder {
 
-    private AddressBook addressBook;
+    private TaskManager addressBook;
 
-    public AddressBookBuilder(AddressBook addressBook) {
+    public AddressBookBuilder(TaskManager addressBook) {
         this.addressBook = addressBook;
     }
 
-    public AddressBookBuilder withPerson(Person person) throws UniquePersonList.DuplicatePersonException {
-        addressBook.addPerson(person);
+    public AddressBookBuilder withPerson(Task person) throws UniqueTaskList.DuplicateTaskException {
+        addressBook.addCategory(person);
         return this;
     }
 
     public AddressBookBuilder withTag(String tagName) throws IllegalValueException {
-        addressBook.addTag(new Tag(tagName));
+        addressBook.addCategory(new Category(tagName));
         return this;
     }
 
-    public AddressBook build() {
+    public TaskManager build() {
         return addressBook;
     }
 }

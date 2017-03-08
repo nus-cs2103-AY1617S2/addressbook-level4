@@ -1,7 +1,7 @@
 package savvytodo.commons.events.ui;
 
 import savvytodo.commons.events.BaseEvent;
-import savvytodo.model.task.ReadOnlyPerson;
+import savvytodo.model.task.ReadOnlyTask;
 
 /**
  * Represents a selection change in the Person List Panel
@@ -9,9 +9,9 @@ import savvytodo.model.task.ReadOnlyPerson;
 public class PersonPanelSelectionChangedEvent extends BaseEvent {
 
 
-    private final ReadOnlyPerson newSelection;
+    private final ReadOnlyTask newSelection;
 
-    public PersonPanelSelectionChangedEvent(ReadOnlyPerson newSelection) {
+    public PersonPanelSelectionChangedEvent(ReadOnlyTask newSelection) {
         this.newSelection = newSelection;
     }
 
@@ -20,7 +20,7 @@ public class PersonPanelSelectionChangedEvent extends BaseEvent {
         return this.getClass().getSimpleName();
     }
 
-    public ReadOnlyPerson getNewSelection() {
+    public ReadOnlyTask getNewSelection() {
         return newSelection;
     }
 }

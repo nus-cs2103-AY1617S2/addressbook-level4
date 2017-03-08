@@ -29,15 +29,15 @@ import savvytodo.TestApp;
 import savvytodo.commons.exceptions.IllegalValueException;
 import savvytodo.commons.util.FileUtil;
 import savvytodo.commons.util.XmlUtil;
-import savvytodo.model.AddressBook;
-import savvytodo.model.tag.Tag;
-import savvytodo.model.tag.UniqueTagList;
+import savvytodo.model.TaskManager;
+import savvytodo.model.category.Category;
+import savvytodo.model.category.UniqueCategoryList;
 import savvytodo.model.task.Address;
 import savvytodo.model.task.Email;
 import savvytodo.model.task.Name;
-import savvytodo.model.task.Person;
+import savvytodo.model.task.Task;
 import savvytodo.model.task.Phone;
-import savvytodo.model.task.ReadOnlyPerson;
+import savvytodo.model.task.ReadOnlyTask;
 import savvytodo.storage.XmlSerializableAddressBook;
 
 /**
@@ -52,9 +52,9 @@ public class TestUtil {
      */
     public static final String SANDBOX_FOLDER = FileUtil.getPath("./src/test/data/sandbox/");
 
-    public static final Person[] SAMPLE_PERSON_DATA = getSamplePersonData();
+    public static final Task[] SAMPLE_PERSON_DATA = getSamplePersonData();
 
-    public static final Tag[] SAMPLE_TAG_DATA = getSampleTagData();
+    public static final Category[] SAMPLE_TAG_DATA = getSampleTagData();
 
     public static void assertThrows(Class<? extends Throwable> expected, Runnable executable) {
         try {
@@ -71,19 +71,19 @@ public class TestUtil {
                 String.format("Expected %s to be thrown, but nothing was thrown.", expected.getName()));
     }
 
-    private static Person[] getSamplePersonData() {
+    private static Task[] getSamplePersonData() {
         try {
             //CHECKSTYLE.OFF: LineLength
-            return new Person[]{
-                new Person(new Name("Ali Muster"), new Phone("9482424"), new Email("hans@google.com"), new Address("4th street"), new UniqueTagList()),
-                new Person(new Name("Boris Mueller"), new Phone("87249245"), new Email("ruth@google.com"), new Address("81th street"), new UniqueTagList()),
-                new Person(new Name("Carl Kurz"), new Phone("95352563"), new Email("heinz@yahoo.com"), new Address("wall street"), new UniqueTagList()),
-                new Person(new Name("Daniel Meier"), new Phone("87652533"), new Email("cornelia@google.com"), new Address("10th street"), new UniqueTagList()),
-                new Person(new Name("Elle Meyer"), new Phone("9482224"), new Email("werner@gmail.com"), new Address("michegan ave"), new UniqueTagList()),
-                new Person(new Name("Fiona Kunz"), new Phone("9482427"), new Email("lydia@gmail.com"), new Address("little tokyo"), new UniqueTagList()),
-                new Person(new Name("George Best"), new Phone("9482442"), new Email("anna@google.com"), new Address("4th street"), new UniqueTagList()),
-                new Person(new Name("Hoon Meier"), new Phone("8482424"), new Email("stefan@mail.com"), new Address("little india"), new UniqueTagList()),
-                new Person(new Name("Ida Mueller"), new Phone("8482131"), new Email("hans@google.com"), new Address("chicago ave"), new UniqueTagList())
+            return new Task[]{
+                new Task(new Name("Ali Muster"), new Phone("9482424"), new Email("hans@google.com"), new Address("4th street"), new UniqueCategoryList()),
+                new Task(new Name("Boris Mueller"), new Phone("87249245"), new Email("ruth@google.com"), new Address("81th street"), new UniqueCategoryList()),
+                new Task(new Name("Carl Kurz"), new Phone("95352563"), new Email("heinz@yahoo.com"), new Address("wall street"), new UniqueCategoryList()),
+                new Task(new Name("Daniel Meier"), new Phone("87652533"), new Email("cornelia@google.com"), new Address("10th street"), new UniqueCategoryList()),
+                new Task(new Name("Elle Meyer"), new Phone("9482224"), new Email("werner@gmail.com"), new Address("michegan ave"), new UniqueCategoryList()),
+                new Task(new Name("Fiona Kunz"), new Phone("9482427"), new Email("lydia@gmail.com"), new Address("little tokyo"), new UniqueCategoryList()),
+                new Task(new Name("George Best"), new Phone("9482442"), new Email("anna@google.com"), new Address("4th street"), new UniqueCategoryList()),
+                new Task(new Name("Hoon Meier"), new Phone("8482424"), new Email("stefan@mail.com"), new Address("little india"), new UniqueCategoryList()),
+                new Task(new Name("Ida Mueller"), new Phone("8482131"), new Email("hans@google.com"), new Address("chicago ave"), new UniqueCategoryList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -94,11 +94,11 @@ public class TestUtil {
     }
 
 
-    private static Tag[] getSampleTagData() {
+    private static Category[] getSampleTagData() {
         try {
-            return new Tag[]{
-                new Tag("relatives"),
-                new Tag("friends")
+            return new Category[]{
+                new Category("relatives"),
+                new Category("friends")
             };
         } catch (IllegalValueException e) {
             assert false;
@@ -107,7 +107,7 @@ public class TestUtil {
         }
     }
 
-    public static List<Person> generateSamplePersonData() {
+    public static List<Task> generateSamplePersonData() {
         return Arrays.asList(SAMPLE_PERSON_DATA);
     }
 
@@ -145,7 +145,7 @@ public class TestUtil {
     }
 
     public static XmlSerializableAddressBook generateSampleStorageAddressBook() {
-        return new XmlSerializableAddressBook(new AddressBook());
+        return new XmlSerializableAddressBook(new TaskManager());
     }
 
     /**
@@ -333,20 +333,20 @@ public class TestUtil {
         return list;
     }
 
-    public static boolean compareCardAndPerson(PersonCardHandle card, ReadOnlyPerson person) {
+    public static boolean compareCardAndPerson(PersonCardHandle card, ReadOnlyTask person) {
         return card.isSamePerson(person);
     }
 
-    public static Tag[] getTagList(String tags) {
+    public static Category[] getTagList(String tags) {
         if ("".equals(tags)) {
-            return new Tag[]{};
+            return new Category[]{};
         }
 
         final String[] split = tags.split(", ");
 
-        final List<Tag> collect = Arrays.asList(split).stream().map(e -> {
+        final List<Category> collect = Arrays.asList(split).stream().map(e -> {
             try {
-                return new Tag(e.replaceFirst("Tag: ", ""));
+                return new Category(e.replaceFirst("Tag: ", ""));
             } catch (IllegalValueException e1) {
                 //not possible
                 assert false;
@@ -354,7 +354,7 @@ public class TestUtil {
             }
         }).collect(Collectors.toList());
 
-        return collect.toArray(new Tag[split.length]);
+        return collect.toArray(new Category[split.length]);
     }
 
 }

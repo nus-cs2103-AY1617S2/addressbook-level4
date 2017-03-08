@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 
 import savvytodo.commons.exceptions.IllegalValueException;
 import savvytodo.commons.util.StringUtil;
-import savvytodo.model.tag.Tag;
-import savvytodo.model.tag.UniqueTagList;
+import savvytodo.model.category.Category;
+import savvytodo.model.category.UniqueCategoryList;
 import savvytodo.model.task.Address;
 import savvytodo.model.task.Email;
 import savvytodo.model.task.Name;
@@ -101,12 +101,12 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.
      */
-    public static UniqueTagList parseTags(Collection<String> tags) throws IllegalValueException {
+    public static UniqueCategoryList parseTags(Collection<String> tags) throws IllegalValueException {
         assert tags != null;
-        final Set<Tag> tagSet = new HashSet<>();
+        final Set<Category> tagSet = new HashSet<>();
         for (String tagName : tags) {
-            tagSet.add(new Tag(tagName));
+            tagSet.add(new Category(tagName));
         }
-        return new UniqueTagList(tagSet);
+        return new UniqueCategoryList(tagSet);
     }
 }

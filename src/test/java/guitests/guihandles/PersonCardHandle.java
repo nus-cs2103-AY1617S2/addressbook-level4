@@ -8,8 +8,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import savvytodo.model.tag.UniqueTagList;
-import savvytodo.model.task.ReadOnlyPerson;
+import savvytodo.model.category.UniqueCategoryList;
+import savvytodo.model.task.ReadOnlyTask;
 
 /**
  * Provides a handle to a person card in the person list panel.
@@ -60,11 +60,11 @@ public class PersonCardHandle extends GuiHandle {
                 .collect(Collectors.toList());
     }
 
-    private List<String> getTags(UniqueTagList tags) {
+    private List<String> getTags(UniqueCategoryList tags) {
         return tags
                 .asObservableList()
                 .stream()
-                .map(tag -> tag.tagName)
+                .map(tag -> tag.categoryName)
                 .collect(Collectors.toList());
     }
 
@@ -72,12 +72,12 @@ public class PersonCardHandle extends GuiHandle {
         return guiRobot.from(node).lookup(TAGS_FIELD_ID).query();
     }
 
-    public boolean isSamePerson(ReadOnlyPerson person) {
+    public boolean isSamePerson(ReadOnlyTask person) {
         return getFullName().equals(person.getName().fullName)
                 && getPhone().equals(person.getPhone().value)
                 && getEmail().equals(person.getEmail().value)
                 && getAddress().equals(person.getAddress().value)
-                && getTags().equals(getTags(person.getTags()));
+                && getTags().equals(getTags(person.getCategories()));
     }
 
     @Override

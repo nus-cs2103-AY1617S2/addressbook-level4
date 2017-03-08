@@ -8,7 +8,7 @@ import org.junit.Test;
 import guitests.guihandles.PersonCardHandle;
 import savvytodo.commons.core.Messages;
 import savvytodo.logic.commands.EditCommand;
-import savvytodo.model.tag.Tag;
+import savvytodo.model.category.Category;
 import savvytodo.model.task.Address;
 import savvytodo.model.task.Email;
 import savvytodo.model.task.Name;
@@ -79,7 +79,7 @@ public class EditCommandTest extends AddressBookGuiTest {
     @Test
     public void edit_invalidPersonIndex_failure() {
         commandBox.runCommand("edit 8 Bobby");
-        assertResultMessage(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     @Test
@@ -103,7 +103,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         assertResultMessage(Address.MESSAGE_ADDRESS_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 t/*&");
-        assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
+        assertResultMessage(Category.MESSAGE_CATEGORY_CONSTRAINTS);
     }
 
     @Test

@@ -12,15 +12,15 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import savvytodo.commons.events.model.AddressBookChangedEvent;
+import savvytodo.commons.events.model.TaskManagerChangedEvent;
 import savvytodo.commons.events.storage.DataSavingExceptionEvent;
-import savvytodo.model.AddressBook;
-import savvytodo.model.ReadOnlyAddressBook;
+import savvytodo.model.TaskManager;
+import savvytodo.model.ReadOnlyTaskManager;
 import savvytodo.model.UserPrefs;
 import savvytodo.storage.JsonUserPrefsStorage;
 import savvytodo.storage.Storage;
 import savvytodo.storage.StorageManager;
-import savvytodo.storage.XmlAddressBookStorage;
+import savvytodo.storage.XmlTaskManagerStorage;
 import savvytodo.testutil.EventsCollector;
 import savvytodo.testutil.TypicalTestPersons;
 
@@ -64,15 +64,15 @@ public class StorageManagerTest {
          * {@link XmlAddressBookStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link XmlAddressBookStorageTest} class.
          */
-        AddressBook original = new TypicalTestPersons().getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
-        assertEquals(original, new AddressBook(retrieved));
+        TaskManager original = new TypicalTestPersons().getTypicalAddressBook();
+        storageManager.saveTaskManager(original);
+        ReadOnlyTaskManager retrieved = storageManager.readTaskManaager().get();
+        assertEquals(original, new TaskManager(retrieved));
     }
 
     @Test
-    public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+    public void gettaskManagerFilePath() {
+        assertNotNull(storageManager.gettaskManagerFilePath());
     }
 
     @Test
@@ -81,7 +81,7 @@ public class StorageManagerTest {
         Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub("dummy"),
                                              new JsonUserPrefsStorage("dummy"));
         EventsCollector eventCollector = new EventsCollector();
-        storage.handleAddressBookChangedEvent(new AddressBookChangedEvent(new AddressBook()));
+        storage.handleTaskManagerChangedEvent(new TaskManagerChangedEvent(new TaskManager()));
         assertTrue(eventCollector.get(0) instanceof DataSavingExceptionEvent);
     }
 
@@ -89,14 +89,14 @@ public class StorageManagerTest {
     /**
      * A Stub class to throw an exception when the save method is called
      */
-    class XmlAddressBookStorageExceptionThrowingStub extends XmlAddressBookStorage {
+    class XmlAddressBookStorageExceptionThrowingStub extends XmlTaskManagerStorage {
 
         public XmlAddressBookStorageExceptionThrowingStub(String filePath) {
             super(filePath);
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyAddressBook addressBook, String filePath) throws IOException {
+        public void saveTaskManager(ReadOnlyTaskManager addressBook, String filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }
