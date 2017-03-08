@@ -23,12 +23,12 @@ public class AddCommand extends Command {
 
     //TODO these messages
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the active list. "
-            + "Parameters: TASK_NAME //DESCRIPTION  [t/TAG]...\n"
+            + "Parameters: TASK_NAME dt/DEADLINE p/PRIORITY //DESCRIPTION  [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " Greet Akshay //this is a must t/friends t/owesMoney";
+            + " Greet Akshay dt/today p/3 //this is a must t/friends t/owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the active list";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the active list";
 
     private final Task toAdd;
 
@@ -57,7 +57,7 @@ public class AddCommand extends Command {
             model.addTask(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
     }
