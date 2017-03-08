@@ -5,7 +5,7 @@ import java.util.Objects;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.todo.*;
+import seedu.address.model.todo.Name;
 import seedu.address.model.todo.ReadOnlyTodo;
 
 /**
