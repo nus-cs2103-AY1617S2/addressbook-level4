@@ -47,7 +47,7 @@ public class TaskManagerTest {
 
     @Test
     public void resetData_withDuplicateTasks_throwsAssertionError() {
-    	TypicalTestPersons td = new TypicalTestPersons();
+        TypicalTestPersons td = new TypicalTestPersons();
         // Repeat td.alice twice
         List<Task> newTasks = Arrays.asList(new Task(td.alice), new Task(td.alice));
         List<Tag> newTags = td.alice.getTags().asObservableList();
