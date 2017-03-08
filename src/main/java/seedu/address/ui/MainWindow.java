@@ -77,7 +77,7 @@ public class MainWindow extends UiPart<Region> {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
     }
     public TodoListPanel getTodoListPanel() {
-    	return todoListPanel;
+        return todoListPanel;
     }
     /**
      * Sets the accelerator of a MenuItem.
