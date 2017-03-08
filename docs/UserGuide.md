@@ -146,12 +146,15 @@ Format: **`undo`**
 
 #### Exiting the program : `quit / q`
 Quits the program.<br>
-Format: `quit`
+Format: **`quit`**
 
 #### Moving the save file : `save`
 Moves the save file of ezDo.<br>
-Format: `save PATH`
-* `save C:\Desktop\savefile.txt`
+Format: **`save DIRECTORY`**
+
+Examples:
+* **`save C:\Desktop`**<br>
+  Moves the save file of ezDo to C:\Desktop.
 
 #### Saving the data
 Todo list data are saved in the hard disk automatically after any command that changes the data.<br>
