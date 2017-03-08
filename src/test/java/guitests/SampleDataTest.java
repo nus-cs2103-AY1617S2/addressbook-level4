@@ -4,10 +4,10 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.address.model.TaskList;
-import seedu.address.model.task.Task;
-import seedu.address.model.util.SampleDataUtil;
-import seedu.address.testutil.TestUtil;
+import seedu.task.model.TaskList;
+import seedu.task.model.task.Task;
+import seedu.task.model.util.SampleDataUtil;
+import seedu.task.testutil.TestUtil;
 
 public class SampleDataTest extends AddressBookGuiTest {
     @Override
