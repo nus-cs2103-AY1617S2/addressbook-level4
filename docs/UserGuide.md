@@ -54,7 +54,7 @@ Format: `help`
 > Help is also shown if you enter an incorrect command e.g. `abcd`
 
 ### 2.2. Adding a task: `add`
-
+[//]: # (@@author yeejfe)
 Adds a task to the Savvy To-Do<br>
 Format: `add TASK_NAME [s/START_DATE] [e/END_DATE] [l/LOCATION] [p/PRIORITY_LEVEL] [r/RECURRING_TYPE] [n/NUMBER_OF_RECURRENCE] [c/CATEGORY] [d/DESCRIPTION]`
 
@@ -79,6 +79,8 @@ Examples:
   Add task named, Project Meeting, under CS2103 category. The task is schedule to take place on 5th and 6th of October 2016 from 2pm to 6pm each day.
 * `add NUSSU Leadership Camp s/05-10-2016 2pm e/08-10-2016 6pm c/NUSSU`
   Add task named, NUSSU Leadership Camp, under NUSSU category. The 4 day 3 night is schedule to take place from 5th October, 2pm to 8th of October 2016, 6pm.
+
+[//]: # (@@author jingloon)
 
 ### 2.3. Listing all tasks : `list`
 

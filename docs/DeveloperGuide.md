@@ -556,7 +556,7 @@ Use case ends.
 > Use case resumes at step 1 <br>
 
 1b. The alias keyword has already been associated with other keywords
-> 1b1. System shows a error message and the alias keyword's original associated keyword 
+> 1b1. System shows a error message and the alias keyword's original associated keyword
 > Use case resumes at step 1 <br>
 
 ### Use case: Unalias keyword
