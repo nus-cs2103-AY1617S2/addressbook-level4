@@ -216,7 +216,7 @@ Examples:
 * **List** : `list` <br>
   e.g. `list`
 
-* **Set Save File Location** : `savefile` <br>
+* **Set Save File Location** : `savefile FILE_PATH` <br>
   e.g. `savefile ~/User/Documents/todolist.xml`
 
 * **Help** : `help` <br>
