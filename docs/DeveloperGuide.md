@@ -489,7 +489,7 @@ Use case ends.
 User enters a keyword to find any matching to do in Typed.
 Typed displays all the todos with matching keywords.
 
-**Extensions** 
+**Extensions**
 1a. Typed is empty
 	| User search his todos using keywords
 	| Typed displays that there are no todo with the any matching keywords.
@@ -529,7 +529,7 @@ Use case ends.
 User keys in a series of command(s) changing information stored in Typed.
 User requests to undo the last action done.
 User requests to redo the previously undone action.
-Typed redoes the last action undone by Typed. 
+Typed redoes the last action undone by Typed.
 Typed displays text informing user that the last undone action has been successfully redone.
 Use case ends.
 
@@ -592,8 +592,8 @@ Pros:
 * Stamp tasks that you have worked on but not completed each day
 
 Cons:
-* Typed navigation is not available 
-* No offline functionality 
+* Typed navigation is not available
+* No offline functionality
 * Only available on Windows 10 computers
 
 ### **Reminder**
@@ -607,7 +607,7 @@ Pros:
 * Offline functionality, and will sync across devices when internet connection is available.
 * Able to add priority to each task (3 levels in total).
 * Clean and intuitive user interface.
-* Able to add comments and notes to a to do which helps to organise thoughts on the specific task. 
+* Able to add comments and notes to a to do which helps to organise thoughts on the specific task.
 * Able to color code todo, for organization.
 
 Cons:
@@ -641,7 +641,7 @@ Cons:
 
 ### **Any.do**
 
-Author: Yim Chia Hui 
+Author: Yim Chia Hui
 
 Pros:
 * Minimalist design reduces the clutter on the screen
