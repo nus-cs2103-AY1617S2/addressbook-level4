@@ -42,8 +42,8 @@ import seedu.address.model.TodoList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.todo.Name;
-import seedu.address.model.todo.Todo;
 import seedu.address.model.todo.ReadOnlyTodo;
+import seedu.address.model.todo.Todo;
 import seedu.address.storage.StorageManager;
 
 
