@@ -5,4 +5,4 @@
 
 * **Contributing** : We welcome pull requests. Follow the process described [here](https://github.com/oss-generic/process)
 
-* **Email us** : You can also reach us at `damith [at] comp.nus.edu.sg`
+* **Email us** If you have any feedback, you contact any of the team members as follow: [Long](mailto:myduyhoanglong@gmail.com) / [Di Feng](mailto:innovation_16@hotmail.com / [Zhang Yanhao](mailto:salvotore1992@gmail.com)/ [Ivan](mailto:a0125221@u.nus.edu)
