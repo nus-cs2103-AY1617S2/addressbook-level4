@@ -25,8 +25,8 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
    * **`list`** : lists all contacts
-   * **`add`**` John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01` :
-     adds a contact named `John Doe` to the Address Book.
+   * **`add`**` do SWE project t/school t/CS` :
+     adds a task titled `do SWE project` to the TaskIt.
    * **`delete`**` 3` : deletes the 3rd contact shown in the current list
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
@@ -50,12 +50,12 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Add a new task to TaskIt<br>
-Format: `add <name> [t/TIME] [tag/TAG] [p/PRIORITY] [d/DESCRIPTION]`
+Format: `add <title> [t/TAG]`
 
 Examples:
 
-* `add Group Meeting t/this Wednesday 8pm tag/Study p/Urgent d/Software engineering project	meeting`
-* `add Interview t/this Friday 3pm`
+* `add Group Meeting t/study t/school by Wednesday 8 pm`
+* `add Interview t/work`
 
 > Persons can have any number of tags (including 0)
 
@@ -171,8 +171,8 @@ There is no need to save manually.
 
 ## 4. Command Summary
 
-* **Add**  `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` <br>
-  e.g. `add James Ho p/22224444 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+* **Add**  `add TITLE [t/TAG]...` <br>
+  e.g. `add Lunch with Bob t/friend t/leisure`
 
 * **Clear** : `clear`
 
