@@ -5,11 +5,11 @@
 
 <img src="docs/images/Ui.png" width="600"><br>
 
-Having trouble keeping up with the tasks you have to complete? OneTwoDo is the only task manager you need to plan your day with effectively.
+Having trouble keeping track with the tasks you have to complete? Looking for a simple yet effective task manager to help you organise your day? OneTwoDo is what you are looking for.
 
-The interface is simple and the clean GUI helps you separate tasks into 3  categories depending on their start and end dates, if any. OneTwoDo helps you visualize and keep track of how many tasks you have completed.
+OneTwoDo has a simple and clean interface. It clearly displays 3 categories of tasks, namely events, deadlines and to-do's. 
 
-The Command Line Interface is designed for users who are skilled at typing, and most commands are given through the command line, so that those who can type fast are able to manage their tasks using the least number of steps.
+OneTwoDo is specially designed to be keyboard-friendly. By just typing one line of command, OneTwoDo will faithfully execute your wish. No extra buttons needed to click!
 
 Get started with OneTwoDo today!
 
