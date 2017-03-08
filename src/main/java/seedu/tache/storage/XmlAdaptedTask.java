@@ -8,17 +8,14 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.model.tag.Tag;
 import seedu.tache.model.tag.UniqueTagList;
-import seedu.tache.model.task.Address;
-import seedu.tache.model.task.Email;
 import seedu.tache.model.task.Name;
-import seedu.tache.model.task.Phone;
 import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.model.task.Task;
 
 /**
  * JAXB-friendly version of the Person.
  */
-public class XmlAdaptedPerson {
+public class XmlAdaptedTask {
 
     @XmlElement(required = true)
     private String name;
@@ -30,7 +27,7 @@ public class XmlAdaptedPerson {
      * Constructs an XmlAdaptedPerson.
      * This is the no-arg constructor that is required by JAXB.
      */
-    public XmlAdaptedPerson() {}
+    public XmlAdaptedTask() {}
 
 
     /**
@@ -38,7 +35,7 @@ public class XmlAdaptedPerson {
      *
      * @param source future changes to this will not affect the created XmlAdaptedPerson
      */
-    public XmlAdaptedPerson(ReadOnlyTask source) {
+    public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getName().fullName;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {

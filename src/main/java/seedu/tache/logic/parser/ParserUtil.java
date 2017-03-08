@@ -19,9 +19,6 @@ import seedu.tache.model.task.Name;
 import seedu.tache.model.task.Duration;
 import seedu.tache.model.tag.Tag;
 import seedu.tache.model.tag.UniqueTagList;
-import seedu.tache.model.task.Address;
-import seedu.tache.model.task.Email;
-import seedu.tache.model.task.Phone;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
