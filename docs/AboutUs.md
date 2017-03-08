@@ -33,6 +33,7 @@ Responsibilities: Logic
  Role: Developer <br>
  Responsibilities: Model
                    Team Leader
+                   Coordination of Team
 
 
  -----
