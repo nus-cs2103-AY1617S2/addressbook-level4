@@ -8,7 +8,7 @@ import com.google.common.eventbus.Subscribe;
 
 import t16b4.yats.commons.core.ComponentManager;
 import t16b4.yats.commons.core.LogsCenter;
-import t16b4.yats.commons.events.model.AddressBookChangedEvent;
+import t16b4.yats.commons.events.model.TaskManagerChangedEvent;
 import t16b4.yats.commons.events.storage.DataSavingExceptionEvent;
 import t16b4.yats.commons.exceptions.DataConversionException;
 import t16b4.yats.model.ReadOnlyTaskManager;
@@ -79,7 +79,7 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Override
     @Subscribe
-    public void handleAddressBookChangedEvent(AddressBookChangedEvent event) {
+    public void handleAddressBookChangedEvent(TaskManagerChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
             saveTaskManager(event.data);

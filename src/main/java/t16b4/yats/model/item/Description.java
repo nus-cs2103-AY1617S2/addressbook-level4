@@ -12,13 +12,13 @@ public class Description {
     public static final String MESSAGE_DESCRIPTION_CONSTRAINTS =
             "Task description can take any values, but can only be 1000 characters in length. It can be left blank.";
 
-    
+
     public final String value;
 
     public Description(String description) {
         this.value = description;
     }
-    
+
 
     @Override
     public String toString() {

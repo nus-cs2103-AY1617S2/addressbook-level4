@@ -7,7 +7,7 @@ import javafx.collections.transformation.FilteredList;
 import t16b4.yats.commons.core.ComponentManager;
 import t16b4.yats.commons.core.LogsCenter;
 import t16b4.yats.commons.core.UnmodifiableObservableList;
-import t16b4.yats.commons.events.model.AddressBookChangedEvent;
+import t16b4.yats.commons.events.model.TaskManagerChangedEvent;
 import t16b4.yats.commons.util.CollectionUtil;
 import t16b4.yats.commons.util.StringUtil;
 import t16b4.yats.model.item.Task;
@@ -15,6 +15,7 @@ import t16b4.yats.model.item.Event;
 import t16b4.yats.model.item.ReadOnlyEvent;
 import t16b4.yats.model.item.ReadOnlyItem;
 import t16b4.yats.model.item.UniqueItemList;
+import t16b4.yats.model.item.UniqueItemList.DuplicatePersonException;
 import t16b4.yats.model.item.UniqueItemList.PersonNotFoundException;
 
 /**
@@ -57,7 +58,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
-        raise(new AddressBookChangedEvent(taskManager));
+        raise(new TaskManagerChangedEvent(taskManager));
     }
 
     @Override
@@ -86,7 +87,7 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Filtered Person List Accessors =============================================================
 
     @Override
-    public UnmodifiableObservableList<ReadOnlyEvent> getFilteredPersonList() {
+    public UnmodifiableObservableList<ReadOnlyEvent> getFilteredTaskList() {
         return new UnmodifiableObservableList<>(filteredPersons);
     }
 
@@ -155,5 +156,11 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
+
+	@Override
+	public void updatePerson(int filteredPersonListIndex, Event editedPerson) throws DuplicatePersonException {
+		// TODO Auto-generated method stub
+
+	}
 
 }

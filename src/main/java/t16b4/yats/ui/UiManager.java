@@ -15,7 +15,7 @@ import t16b4.yats.commons.core.Config;
 import t16b4.yats.commons.core.LogsCenter;
 import t16b4.yats.commons.events.storage.DataSavingExceptionEvent;
 import t16b4.yats.commons.events.ui.JumpToListRequestEvent;
-import t16b4.yats.commons.events.ui.PersonPanelSelectionChangedEvent;
+import t16b4.yats.commons.events.ui.EventPanelSelectionChangedEvent;
 import t16b4.yats.commons.events.ui.ShowHelpRequestEvent;
 import t16b4.yats.commons.util.StringUtil;
 import t16b4.yats.logic.Logic;
@@ -120,7 +120,7 @@ public class UiManager extends ComponentManager implements Ui {
     }
 
     @Subscribe
-    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
+    private void handlePersonPanelSelectionChangedEvent(EventPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.loadPersonPage(event.getNewSelection());
     }

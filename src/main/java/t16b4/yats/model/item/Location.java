@@ -10,7 +10,7 @@ public class Location {
     public static final String MESSAGE_LOCATION_CONSTRAINTS =
             "Location can take any values, but can only be 400 characters in length. It can be left blank.";
 
-    
+
     public final String value;
 
     /**
@@ -26,7 +26,7 @@ public class Location {
         }
         this.value = trimmedLocation;
     }
-    
+
 
     @Override
     public String toString() {

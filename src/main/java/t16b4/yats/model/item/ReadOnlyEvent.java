@@ -14,7 +14,7 @@ public interface ReadOnlyEvent {
     Timing getStartTime();
     Timing getEndTime();
     Periodic getPeriod();
-    
+
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -46,5 +46,5 @@ public interface ReadOnlyEvent {
         return builder.toString();
     }
 
-   
+
 }
