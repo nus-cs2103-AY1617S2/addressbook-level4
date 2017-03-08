@@ -30,7 +30,7 @@ public class SaveCommand extends Command {
     public SaveCommand(String path) throws IllegalValueException {
         directoryPath = path;
         File directory = new File(path);
-        if (directory.exists() == false && !directory.isDirectory()) { // THIS PART SEEMS TO NOT WORK VERY WELL. C:\\// works. TODO
+        if (directory.exists() == false && !directory.isDirectory()) { // TODO
             System.out.println("file.exists has error and not directory");
             throw new IllegalValueException(MESSAGE_DIRECTORY_PATH_INVALID);
         }

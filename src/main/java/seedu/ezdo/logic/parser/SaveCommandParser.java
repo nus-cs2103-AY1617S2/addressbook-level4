@@ -1,10 +1,6 @@
 package seedu.ezdo.logic.parser;
 
 import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_DUEDATE;
-import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_PRIORITY;
-import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_STARTDATE;
-import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.NoSuchElementException;
 
