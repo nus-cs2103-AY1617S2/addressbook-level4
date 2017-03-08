@@ -10,26 +10,26 @@ import seedu.address.model.task.Title;
 import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
-    public static Task[] getSamplePersons() {
+    public static Task[] getSampleTasks() {
         try {
             return new Task[] {
-                new Task(new Title("Alex Yeoh"),
-                    new Deadline("01-01-2018"),
-                    new UniqueLabelList("friends")),
-                new Task(new Title("Bernice Yu"),
-                    new Deadline("01-06-2018"),
-                    new UniqueLabelList("colleagues", "friends")),
-                new Task(new Title("Charlotte Oliveiro"),
-                    new Deadline("01-05-2018"),
-                    new UniqueLabelList("neighbours")),
-                new Task(new Title("David Li"),
-                    new Deadline("01-04-2018"),
+                new Task(new Title("Meet Prof Alex Yeoh"),
+                    new Deadline("Tomorrow"),
+                    new UniqueLabelList("school")),
+                new Task(new Title("Dinner with family"),
+                    new Deadline("Sunday"),
                     new UniqueLabelList("family")),
-                new Task(new Title("Irfan Ibrahim"),
-                    new Deadline("01-03-2018"),
+                new Task(new Title("CS2103 Project Meeting"),
+                    new Deadline("Saturday"),
+                    new UniqueLabelList("school")),
+                new Task(new Title("Birthday Party for David"),
+                    new Deadline("01-04-2017"),
+                    new UniqueLabelList("family")),
+                new Task(new Title("Catch up with Irfan Ibrahim"),
+                    new Deadline("27-03-2017"),
                     new UniqueLabelList("classmates")),
-                new Task(new Title("Roy Balakrishnan"),
-                    new Deadline("01-02-2018"),
+                new Task(new Title("Meet Roy Balakrishnan for coffee"),
+                    new Deadline("sometime next month"),
                     new UniqueLabelList("colleagues"))
             };
         } catch (IllegalValueException e) {
@@ -40,12 +40,12 @@ public class SampleDataUtil {
     public static ReadOnlyTaskManager getSampleTaskManager() {
         try {
             TaskManager sampleAB = new TaskManager();
-            for (Task sampleTask : getSamplePersons()) {
+            for (Task sampleTask : getSampleTasks()) {
                 sampleAB.addTask(sampleTask);
             }
             return sampleAB;
         } catch (DuplicateTaskException e) {
-            throw new AssertionError("sample data cannot contain duplicate persons", e);
+            throw new AssertionError("sample data cannot contain duplicate tasks", e);
         }
     }
 }

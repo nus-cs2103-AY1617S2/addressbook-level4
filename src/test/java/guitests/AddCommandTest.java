@@ -14,18 +14,18 @@ public class AddCommandTest extends AddressBookGuiTest {
 
     @Test
     public void add() {
-        //add one person
+        //add one task
         TestTask[] currentList = td.getTypicalTasks();
         TestTask taskToAdd = td.task8;
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
-        //add another person
+        //add another task
         taskToAdd = td.task9;
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
-        //add duplicate person
+        //add duplicate task
         commandBox.runCommand(td.task8.getAddCommand());
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
         assertTrue(taskListPanel.isListMatching(currentList));
@@ -35,7 +35,7 @@ public class AddCommandTest extends AddressBookGuiTest {
         assertAddSuccess(td.task1);
 
         //invalid command
-        commandBox.runCommand("addso Johnny");
+        commandBox.runCommand("addso do something");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
@@ -46,7 +46,7 @@ public class AddCommandTest extends AddressBookGuiTest {
         TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToAdd.getTitle().title);
         assertMatching(taskToAdd, addedCard);
 
-        //confirm the list now contains all previous persons plus the new person
+        //confirm the list now contains all previous tasks plus the new tasks
         TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
         assertTrue(taskListPanel.isListMatching(expectedList));
     }
