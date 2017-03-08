@@ -12,101 +12,83 @@ import seedu.address.model.tag.UniqueTagList;
  */
 public class TestTask implements ReadOnlyTask {
 
-    private Name name;
-    private Description description;
-    private Deadline deadline;
-    private Priority priority;
-    private UniqueTagList tags;
+	private Name name;
+	private Description description;
+	private Deadline deadline;
+	private Priority priority;
+	private UniqueTagList tags;
 
-    public TestTask() {
-        tags = new UniqueTagList();
-    }
+	public TestTask() {
+		this.tags = new UniqueTagList();
+	}
 
-    /**
+	/**
      * Creates a copy of {@code taskToCopy}.
      */
-<<<<<<< HEAD:src/test/java/seedu/address/testutil/TestTask.java
     public TestTask(TestTask taskToCopy) {
         this.name = taskToCopy.getName();
         this.priority = taskToCopy.getPriority();
         this.deadline = taskToCopy.getDeadline();
         this.description = taskToCopy.getDescription();
         this.tags = taskToCopy.getTags();
-=======
-    public TestPerson(TestPerson personToCopy) {
-        this.name = personToCopy.getName();
-        this.phone = personToCopy.getPriority();
-        this.email = personToCopy.getDeadline();
-        this.address = personToCopy.getDescription();
-        this.tags = personToCopy.getTags();
->>>>>>> Ken:src/test/java/seedu/address/testutil/TestPerson.java
-    }
 
-    public void setName(Name name) {
-        this.name = name;
-    }
+	public void setName(Name name) {
+		this.name = name;
+	}
 
-    public void setDescription(Description description) {
-        this.description = description;
-    }
+	public void setDescription(Description description) {
+		this.description = description;
+	}
 
-    public void setDeadline(Deadline deadline) {
-        this.deadline = deadline;
-    }
+	public void setDeadline(Deadline deadline) {
+		this.deadline = deadline;
+	}
 
-    public void setPriority(Priority priority) {
-        this.priority = priority;
-    }
+	public void setPriority(Priority priority) {
+		this.priority = priority;
+	}
 
-    public void setTags(UniqueTagList tags) {
-        this.tags = tags;
-    }
+	public void setTags(UniqueTagList tags) {
+		this.tags = tags;
+	}
 
-    @Override
-    public Name getName() {
-        return name;
-    }
+	@Override
+	public Name getName() {
+		return this.name;
+	}
 
-    @Override
-    public Priority getPriority() {
-<<<<<<< HEAD:src/test/java/seedu/address/testutil/TestTask.java
-        return priority;
-    }
+	@Override
+	public Priority getPriority() {
+		return this.priority;
+	}
 
-    public Deadline getDeadline() {
-        return deadline;
-=======
-        return phone;
-    }
+	@Override
+	public Deadline getDeadline() {
+		return this.deadline;
+	}
 
-    @Override
-    public Deadline getDeadline() {
-        return email;
->>>>>>> Ken:src/test/java/seedu/address/testutil/TestPerson.java
-    }
+	@Override
+	public Description getDescription() {
+		return this.description;
+	}
 
-    @Override
-    public Description getDescription() {
-        return description;
-    }
+	@Override
+	public UniqueTagList getTags() {
+		return this.tags;
+	}
 
-    @Override
-    public UniqueTagList getTags() {
-        return tags;
-    }
+	@Override
+	public String toString() {
+		return getAsText();
+	}
 
-    @Override
-    public String toString() {
-        return getAsText();
-    }
-
-    public String getAddCommand() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("add " + this.getName().fullName + " ");
-        sb.append("d/" + this.getDescription().value + " ");
-        sb.append("p/" + this.getPriority().value + " ");
-        sb.append("e/" + this.getDeadline().value + " ");
-        this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
-        return sb.toString();
-    }
+	public String getAddCommand() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("add " + this.getName().fullName + " ");
+		sb.append("d/" + this.getDescription().value + " ");
+		sb.append("p/" + this.getPriority().value + " ");
+		sb.append("e/" + this.getDeadline().value + " ");
+		this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
+		return sb.toString();
+	}
 }

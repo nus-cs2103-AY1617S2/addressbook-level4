@@ -63,7 +63,7 @@ public class XmlTaskManagerStorageTest {
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         String filePath = testFolder.getRoot().getPath() + "TempAddressBook.xml";
         TypicalTestTasks td = new TypicalTestTasks();
-        TaskManager original = td.getTypicalAddressBook();
+        TaskManager original = td.getTypicalTaskManager();
         XmlTaskManagerStorage xmlAddressBookStorage = new XmlTaskManagerStorage(filePath);
 
         //Save in new file and read back

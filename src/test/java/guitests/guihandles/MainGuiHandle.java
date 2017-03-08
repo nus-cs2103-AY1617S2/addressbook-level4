@@ -9,36 +9,32 @@ import seedu.address.TestApp;
  */
 public class MainGuiHandle extends GuiHandle {
 
-    public MainGuiHandle(GuiRobot guiRobot, Stage primaryStage) {
-        super(guiRobot, primaryStage, TestApp.APP_TITLE);
-    }
+	public MainGuiHandle(GuiRobot guiRobot, Stage primaryStage) {
+		super(guiRobot, primaryStage, TestApp.APP_TITLE);
+	}
 
-<<<<<<< HEAD
-    public TaskListPanelHandle getTaskListPanel() {
-=======
-    public TaskListPanelHandle getPersonListPanel() {
->>>>>>> Ken
-        return new TaskListPanelHandle(guiRobot, primaryStage);
-    }
+	public TaskListPanelHandle getTaskListPanel() {
+		return new TaskListPanelHandle(this.guiRobot, this.primaryStage);
+	}
 
-    public ResultDisplayHandle getResultDisplay() {
-        return new ResultDisplayHandle(guiRobot, primaryStage);
-    }
+	public ResultDisplayHandle getResultDisplay() {
+		return new ResultDisplayHandle(this.guiRobot, this.primaryStage);
+	}
 
-    public CommandBoxHandle getCommandBox() {
-        return new CommandBoxHandle(guiRobot, primaryStage, TestApp.APP_TITLE);
-    }
+	public CommandBoxHandle getCommandBox() {
+		return new CommandBoxHandle(this.guiRobot, this.primaryStage, TestApp.APP_TITLE);
+	}
 
-    public MainMenuHandle getMainMenu() {
-        return new MainMenuHandle(guiRobot, primaryStage);
-    }
+	public MainMenuHandle getMainMenu() {
+		return new MainMenuHandle(this.guiRobot, this.primaryStage);
+	}
 
-    public BrowserPanelHandle getBrowserPanel() {
-        return new BrowserPanelHandle(guiRobot, primaryStage);
-    }
+	public BrowserPanelHandle getBrowserPanel() {
+		return new BrowserPanelHandle(this.guiRobot, this.primaryStage);
+	}
 
-    public AlertDialogHandle getAlertDialog(String title) {
-        guiRobot.sleep(1000);
-        return new AlertDialogHandle(guiRobot, primaryStage, title);
-    }
+	public AlertDialogHandle getAlertDialog(String title) {
+		this.guiRobot.sleep(1000);
+		return new AlertDialogHandle(this.guiRobot, this.primaryStage, title);
+	}
 }

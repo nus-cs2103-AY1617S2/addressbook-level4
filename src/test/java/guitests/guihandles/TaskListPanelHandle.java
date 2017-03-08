@@ -1,6 +1,5 @@
 package guitests.guihandles;
 
-
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
@@ -22,182 +21,161 @@ import seedu.address.testutil.TestUtil;
  */
 public class TaskListPanelHandle extends GuiHandle {
 
-    public static final int NOT_FOUND = -1;
-    public static final String CARD_PANE_ID = "#cardPane";
+	public static final int NOT_FOUND = -1;
+	public static final String CARD_PANE_ID = "#cardPane";
 
-    private static final String TASK_LIST_VIEW_ID = "#taskListView";
+	private static final String TASK_LIST_VIEW_ID = "#taskListView";
 
-    public TaskListPanelHandle(GuiRobot guiRobot, Stage primaryStage) {
-        super(guiRobot, primaryStage, TestApp.APP_TITLE);
-    }
+	public TaskListPanelHandle(GuiRobot guiRobot, Stage primaryStage) {
+		super(guiRobot, primaryStage, TestApp.APP_TITLE);
+	}
 
-    public List<ReadOnlyTask> getSelectedTasks() {
-        ListView<ReadOnlyTask> taskList = getListView();
-        return taskList.getSelectionModel().getSelectedItems();
-    }
+	public List<ReadOnlyTask> getSelectedTasks() {
+		ListView<ReadOnlyTask> taskList = getListView();
+		return taskList.getSelectionModel().getSelectedItems();
+	}
 
-    public ListView<ReadOnlyTask> getListView() {
-        return getNode(TASK_LIST_VIEW_ID);
-    }
+	public ListView<ReadOnlyTask> getListView() {
+		return getNode(TASK_LIST_VIEW_ID);
+	}
 
-    /**
-     * Returns true if the list is showing the task details correctly and in correct order.
-     * @param tasks A list of task in the correct order.
-     */
-    public boolean isListMatching(ReadOnlyTask... tasks) {
-        return this.isListMatching(0, tasks);
-    }
+	/**
+	 * Returns true if the list is showing the task details correctly and in
+	 * correct order.
+	 *
+	 * @param tasks
+	 *            A list of task in the correct order.
+	 */
+	public boolean isListMatching(ReadOnlyTask... tasks) {
+		return this.isListMatching(0, tasks);
+	}
 
-    /**
-     * Returns true if the list is showing the task details correctly and in correct order.
-     * @param startPosition The starting position of the sub list.
-     * @param tasks A list of task in the correct order.
-     */
-    public boolean isListMatching(int startPosition, ReadOnlyTask... tasks) throws IllegalArgumentException {
-        if (tasks.length + startPosition != getListView().getItems().size()) {
-            throw new IllegalArgumentException("List size mismatched\n" +
-                    "Expected " + (getListView().getItems().size() - 1) + " tasks");
-        }
-        assertTrue(this.containsInOrder(startPosition, tasks));
-        for (int i = 0; i < tasks.length; i++) {
-            final int scrollTo = i + startPosition;
-            guiRobot.interact(() -> getListView().scrollTo(scrollTo));
-            guiRobot.sleep(200);
-<<<<<<< HEAD:src/test/java/guitests/guihandles/TaskListPanelHandle.java
-            if (!TestUtil.compareCardAndTask(getTaskCardHandle(startPosition + i), tasks[i])) {
-=======
-            if (!TestUtil.compareCardAndPerson(getTaskCardHandle(startPosition + i), tasks[i])) {
->>>>>>> Ken:src/test/java/guitests/guihandles/TaskListPanelHandle.java
-                return false;
-            }
-        }
-        return true;
-    }
+	/**
+	 * Returns true if the list is showing the task details correctly and in
+	 * correct order.
+	 *
+	 * @param startPosition
+	 *            The starting position of the sub list.
+	 * @param tasks
+	 *            A list of task in the correct order.
+	 */
+	public boolean isListMatching(int startPosition, ReadOnlyTask... tasks) throws IllegalArgumentException {
+		if ((tasks.length + startPosition) != getListView().getItems().size()) {
+			throw new IllegalArgumentException(
+					"List size mismatched\n" + "Expected " + (getListView().getItems().size() - 1) + " tasks");
+		}
+		assertTrue(this.containsInOrder(startPosition, tasks));
+		for (int i = 0; i < tasks.length; i++) {
+			final int scrollTo = i + startPosition;
+			this.guiRobot.interact(() -> getListView().scrollTo(scrollTo));
+			this.guiRobot.sleep(200);
+			if (!TestUtil.compareCardAndTask(getTaskCardHandle(startPosition + i), tasks[i])) {
+				return false;
+			}
+		}
+		return true;
+	}
 
-    /**
-     * Clicks on the ListView.
-     */
-    public void clickOnListView() {
-        Point2D point = TestUtil.getScreenMidPoint(getListView());
-        guiRobot.clickOn(point.getX(), point.getY());
-    }
+	/**
+	 * Clicks on the ListView.
+	 */
+	public void clickOnListView() {
+		Point2D point = TestUtil.getScreenMidPoint(getListView());
+		this.guiRobot.clickOn(point.getX(), point.getY());
+	}
 
-    /**
-     * Returns true if the {@code tasks} appear as the sub list (in that order) at position {@code startPosition}.
-     */
-    public boolean containsInOrder(int startPosition, ReadOnlyTask... tasks) {
-        List<ReadOnlyTask> tasksInList = getListView().getItems();
+	/**
+	 * Returns true if the {@code tasks} appear as the sub list (in that order)
+	 * at position {@code startPosition}.
+	 */
+	public boolean containsInOrder(int startPosition, ReadOnlyTask... tasks) {
+		List<ReadOnlyTask> tasksInList = getListView().getItems();
 
-        // Return false if the list in panel is too short to contain the given list
-        if (startPosition + tasks.length > tasksInList.size()) {
-            return false;
-        }
+		// Return false if the list in panel is too short to contain the given
+		// list
+		if ((startPosition + tasks.length) > tasksInList.size()) {
+			return false;
+		}
 
-<<<<<<< HEAD:src/test/java/guitests/guihandles/TaskListPanelHandle.java
-        // Return false if any of the tasks doesn't match
-=======
-        // Return false if any of the persons doesn't match
->>>>>>> Ken:src/test/java/guitests/guihandles/TaskListPanelHandle.java
-        for (int i = 0; i < tasks.length; i++) {
-            if (!tasksInList.get(startPosition + i).getName().fullName.equals(tasks[i].getName().fullName)) {
-                return false;
-            }
-        }
+		// Return false if any of the tasks doesn't match
+		for (int i = 0; i < tasks.length; i++) {
+			if (!tasksInList.get(startPosition + i).getName().fullName.equals(tasks[i].getName().fullName)) {
+				return false;
+			}
+		}
 
-        return true;
-    }
+		return true;
+	}
 
-<<<<<<< HEAD:src/test/java/guitests/guihandles/TaskListPanelHandle.java
-    public taskCardHandle navigateToTask(String name) {
-=======
-    public TaskCardHandle navigateToTask(String name) {
->>>>>>> Ken:src/test/java/guitests/guihandles/TaskListPanelHandle.java
-        guiRobot.sleep(500); //Allow a bit of time for the list to be updated
-        final Optional<ReadOnlyTask> task = getListView().getItems().stream()
-                                                    .filter(p -> p.getName().fullName.equals(name))
-                                                    .findAny();
-        if (!task.isPresent()) {
-            throw new IllegalStateException("Name not found: " + name);
-        }
+	public TaskCardHandle navigateToTask(String name) {
+		this.guiRobot.sleep(500); // Allow a bit of time for the list to be
+									// updated
+		final Optional<ReadOnlyTask> task = getListView().getItems().stream()
+				.filter(p -> p.getName().fullName.equals(name)).findAny();
+		if (!task.isPresent()) {
+			throw new IllegalStateException("Name not found: " + name);
+		}
 
-        return navigateToTask(task.get());
-    }
+		return navigateToTask(task.get());
+	}
 
-    /**
-     * Navigates the listview to display and select the task.
-     */
-<<<<<<< HEAD:src/test/java/guitests/guihandles/TaskListPanelHandle.java
-    public taskCardHandle navigateToTask(ReadOnlyTask task) {
-=======
-    public TaskCardHandle navigateToTask(ReadOnlyTask task) {
->>>>>>> Ken:src/test/java/guitests/guihandles/TaskListPanelHandle.java
-        int index = getTaskIndex(task);
+	/**
+	 * Navigates the listview to display and select the task.
+	 */
 
-        guiRobot.interact(() -> {
-            getListView().scrollTo(index);
-            guiRobot.sleep(150);
-            getListView().getSelectionModel().select(index);
-        });
-        guiRobot.sleep(100);
-        return getTaskCardHandle(task);
-    }
+	public TaskCardHandle navigateToTask(ReadOnlyTask task) {
+		int index = getTaskIndex(task);
 
+		this.guiRobot.interact(() -> {
+			getListView().scrollTo(index);
+			this.guiRobot.sleep(150);
+			getListView().getSelectionModel().select(index);
+		});
+		this.guiRobot.sleep(100);
+		return getTaskCardHandle(task);
+	}
 
-    /**
-     * Returns the position of the task given, {@code NOT_FOUND} if not found in the list.
-     */
-    public int getTaskIndex(ReadOnlyTask targetTask) {
-        List<ReadOnlyTask> tasksInList = getListView().getItems();
-        for (int i = 0; i < tasksInList.size(); i++) {
-            if (tasksInList.get(i).getName().equals(targetTask.getName())) {
-                return i;
-            }
-        }
-        return NOT_FOUND;
-    }
+	/**
+	 * Returns the position of the task given, {@code NOT_FOUND} if not found in
+	 * the list.
+	 */
+	public int getTaskIndex(ReadOnlyTask targetTask) {
+		List<ReadOnlyTask> tasksInList = getListView().getItems();
+		for (int i = 0; i < tasksInList.size(); i++) {
+			if (tasksInList.get(i).getName().equals(targetTask.getName())) {
+				return i;
+			}
+		}
+		return NOT_FOUND;
+	}
 
-    /**
-     * Gets a task from the list by index
-     */
-    public ReadOnlyTask getTask(int index) {
-        return getListView().getItems().get(index);
-    }
+	/**
+	 * Gets a task from the list by index
+	 */
+	public ReadOnlyTask getTask(int index) {
+		return getListView().getItems().get(index);
+	}
 
-<<<<<<< HEAD:src/test/java/guitests/guihandles/TaskListPanelHandle.java
-    public taskCardHandle getTaskCardHandle(int index) {
-        return getTaskCardHandle(new Task(getListView().getItems().get(index)));
-    }
+	public TaskCardHandle getTaskCardHandle(int index) {
+		return getTaskCardHandle(new Task(getListView().getItems().get(index)));
+	}
 
-    public taskCardHandle getTaskCardHandle(ReadOnlyTask task) {
-        Set<Node> nodes = getAllCardNodes();
-        Optional<Node> taskCardNode = nodes.stream()
-                .filter(n -> new taskCardHandle(guiRobot, primaryStage, n).isSameTask(task))
-                .findFirst();
-        if (taskCardNode.isPresent()) {
-            return new taskCardHandle(guiRobot, primaryStage, taskCardNode.get());
-=======
-    public TaskCardHandle getTaskCardHandle(int index) {
-        return getTaskCardHandle(new Task(getListView().getItems().get(index)));
-    }
+	public TaskCardHandle getTaskCardHandle(ReadOnlyTask task) {
+		Set<Node> nodes = getAllCardNodes();
+		Optional<Node> taskCardNode = nodes.stream()
+				.filter(n -> new TaskCardHandle(this.guiRobot, this.primaryStage, n).isSameTask(task)).findFirst();
+		if (taskCardNode.isPresent()) {
+			return new TaskCardHandle(this.guiRobot, this.primaryStage, taskCardNode.get());
+		} else {
+			return null;
+		}
+	}
 
-    public TaskCardHandle getTaskCardHandle(ReadOnlyTask task) {
-        Set<Node> nodes = getAllCardNodes();
-        Optional<Node> taskCardNode = nodes.stream()
-                .filter(n -> new TaskCardHandle(guiRobot, primaryStage, n).isSameTask(task))
-                .findFirst();
-        if (taskCardNode.isPresent()) {
-            return new TaskCardHandle(guiRobot, primaryStage, taskCardNode.get());
->>>>>>> Ken:src/test/java/guitests/guihandles/TaskListPanelHandle.java
-        } else {
-            return null;
-        }
-    }
+	protected Set<Node> getAllCardNodes() {
+		return this.guiRobot.lookup(CARD_PANE_ID).queryAll();
+	}
 
-    protected Set<Node> getAllCardNodes() {
-        return guiRobot.lookup(CARD_PANE_ID).queryAll();
-    }
-
-    public int getNumberOfTasks() {
-        return getListView().getItems().size();
-    }
+	public int getNumberOfTasks() {
+		return getListView().getItems().size();
+	}
 }
