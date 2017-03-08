@@ -298,6 +298,8 @@ Format: `done PREFIX_INDEX`
 Marks a task as uncompleted.
 
 Format: `undone PREFIX_INDEX`
+
+**Notes**
 > * Marks a task at the specified PREFIX_INDEX as not done
 
 **Examples:**
