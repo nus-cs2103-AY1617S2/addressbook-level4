@@ -7,14 +7,10 @@ import javax.xml.bind.annotation.XmlElement;
 
 import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 import org.teamstbf.yats.model.item.Description;
-import org.teamstbf.yats.model.item.Email;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.Location;
 import org.teamstbf.yats.model.item.Periodic;
-import org.teamstbf.yats.model.item.Phone;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
-import org.teamstbf.yats.model.item.ReadOnlyItem;
-import org.teamstbf.yats.model.item.Task;
 import org.teamstbf.yats.model.item.Timing;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.tag.Tag;
@@ -88,6 +84,6 @@ public class XmlAdaptedPerson {
         final Timing endTime = new Timing(this.endTime);
         final Description description = new Description(this.description);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Event(title,location,period,startTime,endTime,description,tags);
+        return new Event(title, location, period, startTime, endTime, description, tags);
     }
 }

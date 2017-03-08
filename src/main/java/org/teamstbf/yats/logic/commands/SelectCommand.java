@@ -6,7 +6,6 @@ import org.teamstbf.yats.commons.core.UnmodifiableObservableList;
 import org.teamstbf.yats.commons.events.ui.JumpToListRequestEvent;
 import org.teamstbf.yats.logic.commands.exceptions.CommandException;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
-import org.teamstbf.yats.model.item.ReadOnlyItem;
 
 /**
  * Selects a person identified using it's last displayed index from the address book.

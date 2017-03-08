@@ -2,7 +2,6 @@ package org.teamstbf.yats.commons.events.ui;
 
 import org.teamstbf.yats.commons.events.BaseEvent;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
-import org.teamstbf.yats.model.item.ReadOnlyItem;
 
 /**
  * Represents a selection change in the Event List Panel

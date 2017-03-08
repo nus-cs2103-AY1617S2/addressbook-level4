@@ -7,8 +7,6 @@ import org.teamstbf.yats.commons.util.FxViewUtil;
 import org.teamstbf.yats.logic.Logic;
 import org.teamstbf.yats.model.UserPrefs;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
-import org.teamstbf.yats.model.item.ReadOnlyItem;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;

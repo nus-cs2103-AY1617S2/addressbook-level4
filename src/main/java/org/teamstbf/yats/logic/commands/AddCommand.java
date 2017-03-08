@@ -5,12 +5,10 @@ import java.util.Set;
 
 import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 import org.teamstbf.yats.logic.commands.exceptions.CommandException;
-import org.teamstbf.yats.model.item.Deadline;
 import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.Location;
 import org.teamstbf.yats.model.item.Periodic;
-import org.teamstbf.yats.model.item.Task;
 import org.teamstbf.yats.model.item.Timing;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.item.UniqueItemList;
@@ -27,7 +25,8 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an task or event to the task manager. "
             + "Parameters: task name l/location p/period(none/daily/weekly/monthly) s/START TIME  e/END TIME  d/ description [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " meeting with boss l/work p/daily s/7:00pm  e/9:00pm  d/ get scolded for being lazy t/kthxbye";
+            + " meeting with boss l/work p/daily s/7:00pm  e/9:00pm  "
+            + "d/get scolded for being lazy t/kthxbye";
 
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book";
@@ -41,7 +40,8 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, String location, String period, String startTime, String endTime, String description, Set<String> tags)
+    public AddCommand(String name, String location, String period, String startTime, 
+    		String endTime, String description, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {

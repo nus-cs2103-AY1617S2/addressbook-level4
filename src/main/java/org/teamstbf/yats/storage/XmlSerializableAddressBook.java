@@ -12,8 +12,6 @@ import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 import org.teamstbf.yats.model.ReadOnlyTaskManager;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
-import org.teamstbf.yats.model.item.ReadOnlyItem;
-import org.teamstbf.yats.model.item.Task;
 import org.teamstbf.yats.model.tag.Tag;
 
 import javafx.collections.FXCollections;

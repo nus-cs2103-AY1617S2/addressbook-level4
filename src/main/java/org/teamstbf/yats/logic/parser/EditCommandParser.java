@@ -14,8 +14,8 @@ import java.util.Optional;
 import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 import org.teamstbf.yats.logic.commands.Command;
 import org.teamstbf.yats.logic.commands.EditCommand;
-import org.teamstbf.yats.logic.commands.IncorrectCommand;
 import org.teamstbf.yats.logic.commands.EditCommand.EditPersonDescriptor;
+import org.teamstbf.yats.logic.commands.IncorrectCommand;
 import org.teamstbf.yats.model.tag.UniqueTagList;
 
 /**
