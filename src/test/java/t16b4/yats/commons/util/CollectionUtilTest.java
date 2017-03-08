@@ -11,8 +11,7 @@ import java.util.List;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import t16b4.yats.commons.util.CollectionUtil;
+import org.teamstbf.yats.commons.util.CollectionUtil;
 
 public class CollectionUtilTest {
     @Rule

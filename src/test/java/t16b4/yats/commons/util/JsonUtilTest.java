@@ -6,9 +6,9 @@ import java.io.File;
 import java.io.IOException;
 
 import org.junit.Test;
+import org.teamstbf.yats.commons.util.FileUtil;
+import org.teamstbf.yats.commons.util.JsonUtil;
 
-import t16b4.yats.commons.util.FileUtil;
-import t16b4.yats.commons.util.JsonUtil;
 import t16b4.yats.testutil.SerializableTestClass;
 import t16b4.yats.testutil.TestUtil;
 

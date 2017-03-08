@@ -8,8 +8,7 @@ import java.io.File;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import t16b4.yats.commons.util.FileUtil;
+import org.teamstbf.yats.commons.util.FileUtil;
 
 public class FileUtilTest {
 

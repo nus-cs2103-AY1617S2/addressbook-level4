@@ -1,9 +1,10 @@
 package guitests.guihandles;
 
+import org.teamstbf.yats.ui.UiManager;
+
 import guitests.GuiRobot;
 import javafx.scene.control.DialogPane;
 import javafx.stage.Stage;
-import t16b4.yats.ui.UiManager;
 
 /**
  * A handle for the AlertDialog of the UI

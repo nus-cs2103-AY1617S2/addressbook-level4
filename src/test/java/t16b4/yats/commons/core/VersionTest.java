@@ -6,8 +6,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import t16b4.yats.commons.core.Version;
+import org.teamstbf.yats.commons.core.Version;
 
 public class VersionTest {
     @Rule

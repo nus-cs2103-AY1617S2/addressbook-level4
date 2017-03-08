@@ -12,11 +12,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
-
-import t16b4.yats.commons.exceptions.DataConversionException;
-import t16b4.yats.commons.util.FileUtil;
-import t16b4.yats.model.UserPrefs;
-import t16b4.yats.storage.JsonUserPrefsStorage;
+import org.teamstbf.yats.commons.exceptions.DataConversionException;
+import org.teamstbf.yats.commons.util.FileUtil;
+import org.teamstbf.yats.model.UserPrefs;
+import org.teamstbf.yats.storage.JsonUserPrefsStorage;
 
 public class JsonUserPrefsStorageTest {
 

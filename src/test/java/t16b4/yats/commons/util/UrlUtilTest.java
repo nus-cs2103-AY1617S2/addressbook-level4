@@ -7,8 +7,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.junit.Test;
-
-import t16b4.yats.commons.util.UrlUtil;
+import org.teamstbf.yats.commons.util.UrlUtil;
 
 /**
  * Tests the UrlUtil methods.

@@ -11,16 +11,16 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.teamstbf.yats.commons.events.model.TaskManagerChangedEvent;
+import org.teamstbf.yats.commons.events.storage.DataSavingExceptionEvent;
+import org.teamstbf.yats.model.ReadOnlyTaskManager;
+import org.teamstbf.yats.model.TaskManager;
+import org.teamstbf.yats.model.UserPrefs;
+import org.teamstbf.yats.storage.JsonUserPrefsStorage;
+import org.teamstbf.yats.storage.Storage;
+import org.teamstbf.yats.storage.StorageManager;
+import org.teamstbf.yats.storage.XmlAddressBookStorage;
 
-import t16b4.yats.commons.events.model.TaskManagerChangedEvent;
-import t16b4.yats.commons.events.storage.DataSavingExceptionEvent;
-import t16b4.yats.model.TaskManager;
-import t16b4.yats.model.ReadOnlyTaskManager;
-import t16b4.yats.model.UserPrefs;
-import t16b4.yats.storage.JsonUserPrefsStorage;
-import t16b4.yats.storage.Storage;
-import t16b4.yats.storage.StorageManager;
-import t16b4.yats.storage.XmlAddressBookStorage;
 import t16b4.yats.testutil.EventsCollector;
 import t16b4.yats.testutil.TypicalTestPersons;
 

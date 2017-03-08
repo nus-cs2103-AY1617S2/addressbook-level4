@@ -11,14 +11,14 @@ import java.util.List;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.teamstbf.yats.model.ReadOnlyTaskManager;
+import org.teamstbf.yats.model.TaskManager;
+import org.teamstbf.yats.model.item.ReadOnlyItem;
+import org.teamstbf.yats.model.item.Task;
+import org.teamstbf.yats.model.tag.Tag;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import t16b4.yats.model.TaskManager;
-import t16b4.yats.model.item.Task;
-import t16b4.yats.model.item.ReadOnlyItem;
-import t16b4.yats.model.ReadOnlyTaskManager;
-import t16b4.yats.model.tag.Tag;
 import t16b4.yats.testutil.TypicalTestPersons;
 
 public class AddressBookTest {

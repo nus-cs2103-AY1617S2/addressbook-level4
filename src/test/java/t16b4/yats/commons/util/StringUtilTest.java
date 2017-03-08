@@ -10,8 +10,7 @@ import java.io.FileNotFoundException;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import t16b4.yats.commons.util.StringUtil;
+import org.teamstbf.yats.commons.util.StringUtil;
 
 public class StringUtilTest {
 

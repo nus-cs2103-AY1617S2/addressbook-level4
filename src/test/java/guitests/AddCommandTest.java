@@ -3,10 +3,10 @@ package guitests;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+import org.teamstbf.yats.commons.core.Messages;
+import org.teamstbf.yats.logic.commands.AddCommand;
 
 import guitests.guihandles.PersonCardHandle;
-import t16b4.yats.commons.core.Messages;
-import t16b4.yats.logic.commands.AddCommand;
 import t16b4.yats.testutil.TestPerson;
 import t16b4.yats.testutil.TestUtil;
 

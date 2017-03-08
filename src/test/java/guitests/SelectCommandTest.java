@@ -3,8 +3,7 @@ package guitests;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-
-import t16b4.yats.model.item.ReadOnlyItem;
+import org.teamstbf.yats.model.item.ReadOnlyItem;
 
 public class SelectCommandTest extends AddressBookGuiTest {
 

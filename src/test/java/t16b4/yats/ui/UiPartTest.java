@@ -9,10 +9,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
+import org.teamstbf.yats.MainApp;
+import org.teamstbf.yats.ui.UiPart;
 
 import javafx.fxml.FXML;
-import t16b4.yats.MainApp;
-import t16b4.yats.ui.UiPart;
 
 public class UiPartTest {
 

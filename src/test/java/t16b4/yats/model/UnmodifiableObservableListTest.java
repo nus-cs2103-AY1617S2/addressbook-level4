@@ -13,9 +13,9 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.teamstbf.yats.commons.core.UnmodifiableObservableList;
 
 import javafx.collections.FXCollections;
-import t16b4.yats.commons.core.UnmodifiableObservableList;
 
 public class UnmodifiableObservableListTest {
 

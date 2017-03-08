@@ -5,9 +5,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Test;
-
-import t16b4.yats.logic.parser.ArgumentTokenizer;
-import t16b4.yats.logic.parser.ArgumentTokenizer.Prefix;
+import org.teamstbf.yats.logic.parser.ArgumentTokenizer;
+import org.teamstbf.yats.logic.parser.ArgumentTokenizer.Prefix;
 
 public class ArgumentTokenizerTest {
 

@@ -3,10 +3,10 @@ package guitests;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+import org.teamstbf.yats.model.TaskManager;
+import org.teamstbf.yats.model.item.Task;
+import org.teamstbf.yats.model.util.SampleDataUtil;
 
-import t16b4.yats.model.TaskManager;
-import t16b4.yats.model.item.Task;
-import t16b4.yats.model.util.SampleDataUtil;
 import t16b4.yats.testutil.TestUtil;
 
 public class SampleDataTest extends AddressBookGuiTest {

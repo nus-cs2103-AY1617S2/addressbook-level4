@@ -5,8 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import t16b4.yats.commons.util.AppUtil;
+import org.teamstbf.yats.commons.util.AppUtil;
 
 public class AppUtilTest {
 

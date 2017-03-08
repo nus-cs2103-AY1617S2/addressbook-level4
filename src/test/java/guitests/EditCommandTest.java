@@ -1,18 +1,18 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
-import static t16b4.yats.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static org.teamstbf.yats.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
+import org.teamstbf.yats.commons.core.Messages;
+import org.teamstbf.yats.logic.commands.EditCommand;
+import org.teamstbf.yats.model.item.Deadline;
+import org.teamstbf.yats.model.item.Description;
+import org.teamstbf.yats.model.item.Timing;
+import org.teamstbf.yats.model.item.Title;
+import org.teamstbf.yats.model.tag.Tag;
 
 import guitests.guihandles.PersonCardHandle;
-import t16b4.yats.commons.core.Messages;
-import t16b4.yats.logic.commands.EditCommand;
-import t16b4.yats.model.item.Description;
-import t16b4.yats.model.item.Timing;
-import t16b4.yats.model.item.Title;
-import t16b4.yats.model.item.Deadline;
-import t16b4.yats.model.tag.Tag;
 import t16b4.yats.testutil.PersonBuilder;
 import t16b4.yats.testutil.TestPerson;
 

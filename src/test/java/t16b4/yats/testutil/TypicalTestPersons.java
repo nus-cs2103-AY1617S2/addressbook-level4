@@ -1,9 +1,9 @@
 package t16b4.yats.testutil;
 
-import t16b4.yats.commons.exceptions.IllegalValueException;
-import t16b4.yats.model.TaskManager;
-import t16b4.yats.model.item.Task;
-import t16b4.yats.model.item.UniqueItemList;
+import org.teamstbf.yats.commons.exceptions.IllegalValueException;
+import org.teamstbf.yats.model.TaskManager;
+import org.teamstbf.yats.model.item.Task;
+import org.teamstbf.yats.model.item.UniqueItemList;
 
 /**
  *

@@ -1,7 +1,7 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
-import static t16b4.yats.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS;
+import static org.teamstbf.yats.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS;
 
 import org.junit.Test;
 

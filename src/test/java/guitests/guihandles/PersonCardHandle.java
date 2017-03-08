@@ -3,13 +3,14 @@ package guitests.guihandles;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.teamstbf.yats.model.item.ReadOnlyItem;
+import org.teamstbf.yats.model.tag.UniqueTagList;
+
 import guitests.GuiRobot;
 import javafx.scene.Node;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import t16b4.yats.model.item.ReadOnlyItem;
-import t16b4.yats.model.tag.UniqueTagList;
 
 /**
  * Provides a handle to a person card in the person list panel.

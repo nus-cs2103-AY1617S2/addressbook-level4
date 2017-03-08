@@ -5,9 +5,9 @@ import static junit.framework.TestCase.assertTrue;
 import java.io.IOException;
 
 import org.junit.Test;
+import org.teamstbf.yats.commons.events.storage.DataSavingExceptionEvent;
 
 import guitests.guihandles.AlertDialogHandle;
-import t16b4.yats.commons.events.storage.DataSavingExceptionEvent;
 
 public class ErrorDialogGuiTest extends AddressBookGuiTest {
 

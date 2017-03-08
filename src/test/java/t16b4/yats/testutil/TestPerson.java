@@ -1,11 +1,11 @@
 package t16b4.yats.testutil;
 
-import t16b4.yats.model.item.Description;
-import t16b4.yats.model.item.Timing;
-import t16b4.yats.model.item.Title;
-import t16b4.yats.model.item.Deadline;
-import t16b4.yats.model.item.ReadOnlyItem;
-import t16b4.yats.model.tag.UniqueTagList;
+import org.teamstbf.yats.model.item.Deadline;
+import org.teamstbf.yats.model.item.Description;
+import org.teamstbf.yats.model.item.ReadOnlyItem;
+import org.teamstbf.yats.model.item.Timing;
+import org.teamstbf.yats.model.item.Title;
+import org.teamstbf.yats.model.tag.UniqueTagList;
 
 /**
  * A mutable person object. For testing only.

@@ -3,8 +3,7 @@ package t16b4.yats.model.person;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-
-import t16b4.yats.model.item.Periodic;
+import org.teamstbf.yats.model.item.Periodic;
 
 public class PeriodicTest {
 

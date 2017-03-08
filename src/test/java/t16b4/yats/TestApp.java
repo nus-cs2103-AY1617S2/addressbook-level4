@@ -2,14 +2,15 @@ package t16b4.yats;
 
 import java.util.function.Supplier;
 
+import org.teamstbf.yats.MainApp;
+import org.teamstbf.yats.commons.core.Config;
+import org.teamstbf.yats.commons.core.GuiSettings;
+import org.teamstbf.yats.model.ReadOnlyTaskManager;
+import org.teamstbf.yats.model.UserPrefs;
+import org.teamstbf.yats.storage.XmlSerializableAddressBook;
+
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import t16b4.yats.MainApp;
-import t16b4.yats.commons.core.Config;
-import t16b4.yats.commons.core.GuiSettings;
-import t16b4.yats.model.ReadOnlyTaskManager;
-import t16b4.yats.model.UserPrefs;
-import t16b4.yats.storage.XmlSerializableAddressBook;
 import t16b4.yats.testutil.TestUtil;
 
 /**

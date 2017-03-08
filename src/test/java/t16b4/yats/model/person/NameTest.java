@@ -4,8 +4,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
-
-import t16b4.yats.model.item.Title;
+import org.teamstbf.yats.model.item.Title;
 
 public class NameTest {
 

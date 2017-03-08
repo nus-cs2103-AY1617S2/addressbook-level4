@@ -12,6 +12,19 @@ import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
 
 import org.loadui.testfx.GuiTest;
+import org.teamstbf.yats.commons.exceptions.IllegalValueException;
+import org.teamstbf.yats.commons.util.FileUtil;
+import org.teamstbf.yats.commons.util.XmlUtil;
+import org.teamstbf.yats.model.TaskManager;
+import org.teamstbf.yats.model.item.Deadline;
+import org.teamstbf.yats.model.item.Description;
+import org.teamstbf.yats.model.item.ReadOnlyItem;
+import org.teamstbf.yats.model.item.Task;
+import org.teamstbf.yats.model.item.Timing;
+import org.teamstbf.yats.model.item.Title;
+import org.teamstbf.yats.model.tag.Tag;
+import org.teamstbf.yats.model.tag.UniqueTagList;
+import org.teamstbf.yats.storage.XmlSerializableAddressBook;
 import org.testfx.api.FxToolkit;
 
 import com.google.common.io.Files;
@@ -26,19 +39,6 @@ import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import junit.framework.AssertionFailedError;
 import t16b4.yats.TestApp;
-import t16b4.yats.commons.exceptions.IllegalValueException;
-import t16b4.yats.commons.util.FileUtil;
-import t16b4.yats.commons.util.XmlUtil;
-import t16b4.yats.model.TaskManager;
-import t16b4.yats.model.item.Description;
-import t16b4.yats.model.item.Timing;
-import t16b4.yats.model.item.Title;
-import t16b4.yats.model.item.Task;
-import t16b4.yats.model.item.Deadline;
-import t16b4.yats.model.item.ReadOnlyItem;
-import t16b4.yats.model.tag.Tag;
-import t16b4.yats.model.tag.UniqueTagList;
-import t16b4.yats.storage.XmlSerializableAddressBook;
 
 /**
  * A utility class for test cases.

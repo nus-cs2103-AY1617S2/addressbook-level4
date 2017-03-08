@@ -7,8 +7,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import t16b4.yats.commons.core.Config;
+import org.teamstbf.yats.commons.core.Config;
 
 public class ConfigTest {
     @Rule

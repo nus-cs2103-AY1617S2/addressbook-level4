@@ -12,11 +12,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
-
-import t16b4.yats.commons.core.Config;
-import t16b4.yats.commons.exceptions.DataConversionException;
-import t16b4.yats.commons.util.ConfigUtil;
-import t16b4.yats.commons.util.FileUtil;
+import org.teamstbf.yats.commons.core.Config;
+import org.teamstbf.yats.commons.exceptions.DataConversionException;
+import org.teamstbf.yats.commons.util.ConfigUtil;
+import org.teamstbf.yats.commons.util.FileUtil;
 
 public class ConfigUtilTest {
 

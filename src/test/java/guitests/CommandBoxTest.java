@@ -7,8 +7,7 @@ import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import t16b4.yats.ui.CommandBox;
+import org.teamstbf.yats.ui.CommandBox;
 
 public class CommandBoxTest extends AddressBookGuiTest {
 

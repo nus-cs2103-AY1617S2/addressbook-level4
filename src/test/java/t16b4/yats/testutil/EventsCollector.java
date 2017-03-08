@@ -3,10 +3,10 @@ package t16b4.yats.testutil;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.eventbus.Subscribe;
+import org.teamstbf.yats.commons.core.EventsCenter;
+import org.teamstbf.yats.commons.events.BaseEvent;
 
-import t16b4.yats.commons.core.EventsCenter;
-import t16b4.yats.commons.events.BaseEvent;
+import com.google.common.eventbus.Subscribe;
 
 /**
  * A class that collects events raised by other classes.

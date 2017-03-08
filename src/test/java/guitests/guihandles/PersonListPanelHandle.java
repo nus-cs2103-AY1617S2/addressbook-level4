@@ -7,14 +7,15 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import org.teamstbf.yats.model.item.ReadOnlyItem;
+import org.teamstbf.yats.model.item.Task;
+
 import guitests.GuiRobot;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import t16b4.yats.TestApp;
-import t16b4.yats.model.item.Task;
-import t16b4.yats.model.item.ReadOnlyItem;
 import t16b4.yats.testutil.TestUtil;
 
 /**

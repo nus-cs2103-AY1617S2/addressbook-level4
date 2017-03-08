@@ -3,8 +3,8 @@ package guitests;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+import org.teamstbf.yats.commons.core.Messages;
 
-import t16b4.yats.commons.core.Messages;
 import t16b4.yats.testutil.TestPerson;
 
 public class FindCommandTest extends AddressBookGuiTest {
