@@ -74,14 +74,14 @@ public class Deadline {
     /**
      * Returns true if a given string is a valid date.
      */
-    public static boolean isValidDate(String test) {
-        return isValidDate(test, DATE_VALIDATION_REGEX) 
-                || isValidDate(test, TIME_VALIDATION_REGEX)
-                || isValidDate(test, getAllPossibleDateTimeFormats());
+    public static boolean isValidDeadline(String test) {
+        return isValidDeadline(test, DATE_VALIDATION_REGEX) 
+                || isValidDeadline(test, TIME_VALIDATION_REGEX)
+                || isValidDeadline(test, getAllPossibleDateTimeFormats());
     }
 
     /** Validate given string with given set of date formats */
-    public static boolean isValidDate(String test, String[] dateFormats) {
+    public static boolean isValidDeadline(String test, String[] dateFormats) {
         for(String dateFormat : dateFormats) {
             try {
                 DateFormat df = new SimpleDateFormat(dateFormat);
