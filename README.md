@@ -1,4 +1,4 @@
-# Address Book (Level 4)
+# GeeKeep
 
 [![Build Status](https://travis-ci.org/CS2103JAN2017-W15-B4/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-W15-B4/main)
 [![Build status](https://ci.appveyor.com/api/projects/status/sh3iswuhfor7us5n?svg=true)](https://ci.appveyor.com/project/yirui94/main)
