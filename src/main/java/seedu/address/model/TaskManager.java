@@ -18,12 +18,12 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the task manager level
  * Duplicates are not allowed (by .equals comparison)
  */
 public class TaskManager implements ReadOnlyTaskManager {
 
-    private final UniqueTaskList persons;
+    private final UniqueTaskList tasks;
     private final UniqueTagList tags;
 
     /*
@@ -34,7 +34,7 @@ public class TaskManager implements ReadOnlyTaskManager {
      *   among constructors.
      */
     {
-        persons = new UniqueTaskList();
+        tasks = new UniqueTaskList();
         tags = new UniqueTagList();
     }
 
@@ -50,9 +50,9 @@ public class TaskManager implements ReadOnlyTaskManager {
 
 //// list overwrite operations
 
-    public void setPersons(List<? extends ReadOnlyTask> persons)
+    public void setTasks(List<? extends ReadOnlyTask> tasks)
             throws UniqueTaskList.DuplicateTaskException {
-        this.persons.setTasks(persons);
+        this.tasks.setTasks(tasks);
     }
 
     public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
@@ -62,22 +62,22 @@ public class TaskManager implements ReadOnlyTaskManager {
     public void resetData(ReadOnlyTaskManager newData) {
         assert newData != null;
         try {
-            setPersons(newData.getTaskList());
+            setTasks(newData.getTaskList());
         } catch (UniqueTaskList.DuplicateTaskException e) {
-            assert false : "AddressBooks should not have duplicate persons";
+            assert false : "AddressBooks should not have duplicate tasks";
         }
         try {
             setTags(newData.getTagList());
         } catch (UniqueTagList.DuplicateTagException e) {
             assert false : "AddressBooks should not have duplicate tags";
         }
-        syncMasterTagListWith(persons);
+        syncMasterTagListWith(tasks);
     }
 
 //// task-level operations
 
     /**
-     * Adds a task to the address book.
+     * Adds a task to the task manager.
      * Also checks the new task's tags and updates {@link #tags} with any new tags found,
      * and updates the Tag objects in the task to point to those in {@link #tags}.
      *
@@ -85,7 +85,7 @@ public class TaskManager implements ReadOnlyTaskManager {
      */
     public void addPerson(Task p) throws UniqueTaskList.DuplicateTaskException {
         syncMasterTagListWith(p);
-        persons.add(p);
+        tasks.add(p);
     }
 
     /**
@@ -106,7 +106,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any task
         // in the task list.
-        persons.updateTask(index, editedPerson);
+        tasks.updateTask(index, editedPerson);
     }
 
     /**
@@ -130,7 +130,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     }
 
     /**
-     * Ensures that every tag in these persons:
+     * Ensures that every tag in these tasks:
      *  - exists in the master list {@link #tags}
      *  - points to a Tag object in the master list
      *  @see #syncMasterTagListWith(Task)
@@ -140,7 +140,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     }
 
     public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
-        if (persons.remove(key)) {
+        if (tasks.remove(key)) {
             return true;
         } else {
             throw new UniqueTaskList.TaskNotFoundException();
@@ -157,13 +157,13 @@ public class TaskManager implements ReadOnlyTaskManager {
 
     @Override
     public String toString() {
-        return persons.asObservableList().size() + " persons, " + tags.asObservableList().size() +  " tags";
+        return tasks.asObservableList().size() + " tasks, " + tags.asObservableList().size() +  " tags";
         // TODO: refine later
     }
 
     @Override
     public ObservableList<ReadOnlyTask> getTaskList() {
-        return new UnmodifiableObservableList<>(persons.asObservableList());
+        return new UnmodifiableObservableList<>(tasks.asObservableList());
     }
 
     @Override
@@ -175,13 +175,13 @@ public class TaskManager implements ReadOnlyTaskManager {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TaskManager // instanceof handles nulls
-                && this.persons.equals(((TaskManager) other).persons)
+                && this.tasks.equals(((TaskManager) other).tasks)
                 && this.tags.equalsOrderInsensitive(((TaskManager) other).tags));
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(persons, tags);
+        return Objects.hash(tasks, tags);
     }
 }
