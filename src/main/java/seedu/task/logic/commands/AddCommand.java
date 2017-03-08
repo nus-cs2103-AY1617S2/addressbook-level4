@@ -12,19 +12,19 @@ import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
 
 /**
- * Adds a task to the address book.
+ * Adds a task to the task list.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task list. "
             + "Parameters: NAME [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
             + " Buy milk and eggs t/home t/important";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task list";
 
     private final Task toAdd;
 

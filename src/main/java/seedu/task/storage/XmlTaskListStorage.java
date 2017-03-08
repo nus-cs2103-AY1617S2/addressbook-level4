@@ -12,7 +12,7 @@ import seedu.task.commons.util.FileUtil;
 import seedu.task.model.ReadOnlyTaskList;
 
 /**
- * A class to access AddressBook data stored as an xml file on the hard disk.
+ * A class to access TaskList data stored as an xml file on the hard disk.
  */
 public class XmlTaskListStorage implements TaskListStorage {
 
@@ -42,34 +42,34 @@ public class XmlTaskListStorage implements TaskListStorage {
                                                                                  FileNotFoundException {
         assert filePath != null;
 
-        File addressBookFile = new File(filePath);
+        File taskListFile = new File(filePath);
 
-        if (!addressBookFile.exists()) {
-            logger.info("AddressBook file "  + addressBookFile + " not found");
+        if (!taskListFile.exists()) {
+            logger.info("DoTomorrow file "  + taskListFile + " not found");
             return Optional.empty();
         }
 
-        ReadOnlyTaskList addressBookOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
+        ReadOnlyTaskList taskListOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
 
-        return Optional.of(addressBookOptional);
+        return Optional.of(taskListOptional);
     }
 
     @Override
-    public void saveTaskList(ReadOnlyTaskList addressBook) throws IOException {
-        saveTaskList(addressBook, filePath);
+    public void saveTaskList(ReadOnlyTaskList taskList) throws IOException {
+        saveTaskList(taskList, filePath);
     }
 
     /**
      * Similar to {@link #saveTaskList(ReadOnlyTaskList)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveTaskList(ReadOnlyTaskList addressBook, String filePath) throws IOException {
-        assert addressBook != null;
+    public void saveTaskList(ReadOnlyTaskList taskList, String filePath) throws IOException {
+        assert taskList != null;
         assert filePath != null;
 
         File file = new File(filePath);
         FileUtil.createIfMissing(file);
-        XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskList(addressBook));
+        XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskList(taskList));
     }
 
 }

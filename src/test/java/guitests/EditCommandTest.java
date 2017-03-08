@@ -103,11 +103,11 @@ public class EditCommandTest extends TaskListGuiTest {
     /**
      * Checks whether the edited tasks has the correct updated details.
      *
-     * @param filteredTaskListIndex index of person to edit in filtered list
-     * @param taskListIndex index of person to edit in the address book.
-     *      Must refer to the same person as {@code filteredPersonListIndex}
-     * @param detailsToEdit details to edit the person with as input to the edit command
-     * @param editedTask the expected person after editing the person's details
+     * @param filteredTaskListIndex index of task to edit in filtered list
+     * @param taskListIndex index of task to edit in the task list.
+     *      Must refer to the same task as {@code filteredPersonListIndex}
+     * @param detailsToEdit details to edit the task with as input to the edit command
+     * @param editedTask the expected task after editing the task's details
      */
     private void assertEditSuccess(int filteredTaskListIndex, int taskListIndex,
                                     String detailsToEdit, TestTask editedTask) {
