@@ -17,8 +17,8 @@ Responsibilities: Team Leader, Logic, Deliverables, Git expert
 
 -----
 
-#### [Maggie Li Yundi(http://github.com/yijinl)
-<img src="images/LeowYijin.jpg" width="150"><br>
+#### [Maggie Li Yundi](http://github.com/maggiemeow)
+<img src="images/maggiemeow.jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: Testing, Model, Code Quality, Integration
 
