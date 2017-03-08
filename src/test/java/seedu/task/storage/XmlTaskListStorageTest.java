@@ -92,8 +92,8 @@ public class XmlTaskListStorageTest {
         saveAddressBook(null, "SomeFile.xml");
     }
 
-    private void saveAddressBook(ReadOnlyTaskList addressBook, String filePath) throws IOException {
-        new XmlTaskListStorage(filePath).saveTaskList(addressBook, addToTestDataPathIfNotNull(filePath));
+    private void saveAddressBook(ReadOnlyTaskList taskList, String filePath) throws IOException {
+        new XmlTaskListStorage(filePath).saveTaskList(taskList, addToTestDataPathIfNotNull(filePath));
     }
 
     @Test

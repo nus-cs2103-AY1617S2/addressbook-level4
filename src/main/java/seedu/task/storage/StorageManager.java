@@ -15,7 +15,7 @@ import seedu.task.model.ReadOnlyTaskList;
 import seedu.task.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of TaskList data in local storage.
  */
 public class StorageManager extends ComponentManager implements Storage {
 
@@ -47,7 +47,7 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ TaskList methods ==============================
 
     @Override
     public String getTaskListFilePath() {

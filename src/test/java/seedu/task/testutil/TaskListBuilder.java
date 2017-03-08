@@ -7,7 +7,7 @@ import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
 
 /**
- * A utility class to help with building Addressbook objects.
+ * A utility class to help with building TaskList objects.
  * Example usage: <br>
  *     {@code TaskList ab = new TaskListBuilder().withTask("Buy milk and eggs").withTag("important").build();}
  */
@@ -15,8 +15,8 @@ public class TaskListBuilder {
 
     private TaskList taskList;
 
-    public TaskListBuilder(TaskList addressBook) {
-        this.taskList = addressBook;
+    public TaskListBuilder(TaskList taskList) {
+        this.taskList = taskList;
     }
 
     public TaskListBuilder withPerson(Task task) throws UniqueTaskList.DuplicateTaskException {
