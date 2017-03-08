@@ -2,6 +2,6 @@
   "appTitle" : "DoOrDie",
   "logLevel" : "INFO",
   "userPrefsFilePath" : "preferences.json",
-  "addressBookFilePath" : "data/addressbook.xml",
+  "addressBookFilePath" : "data/taskmanager.xml",
   "addressBookName" : "DoOrDie"
 }

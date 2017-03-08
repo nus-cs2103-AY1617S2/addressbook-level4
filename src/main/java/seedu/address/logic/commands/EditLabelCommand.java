@@ -26,7 +26,7 @@ public class EditLabelCommand extends Command {
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Labels changed from %1$s to %2$s";
     public static final String MESSAGE_LABEL_NOT_EXIST = "Specified label does not exist in any task saved";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
     public static final String MESSAGE_LABEL_INVALID = "Label name is invalid";
 
     private Label labelToChange;

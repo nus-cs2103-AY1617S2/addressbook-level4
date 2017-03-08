@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addressbook>
+<taskmanager>
     <tasks>
         <title>Hans Muster</title>
         <deadline isPrivate="false">01-01-2018</deadline>
@@ -8,4 +8,4 @@
     <labels>
         <name>Friends</name>
     </labels>
-</addressbook>
+</taskmanager>

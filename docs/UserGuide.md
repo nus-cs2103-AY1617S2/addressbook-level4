@@ -159,7 +159,7 @@ Returns all tasks having name or label name containing `project`, `Project`,  `g
 
 ### 2.6. Deleting a task : `delete`
 
-Deletes the specified task from the address book. Reversible via undo command.
+Deletes the specified task from the task manager. Reversible via undo command.
 
 Format: `delete [TASK_ID|LABEL]`
 

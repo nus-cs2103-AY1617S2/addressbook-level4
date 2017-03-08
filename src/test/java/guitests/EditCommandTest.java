@@ -105,7 +105,7 @@ public class EditCommandTest extends AddressBookGuiTest {
      * Checks whether the edited task has the correct updated details.
      *
      * @param (int filteredTaskListIndex index of task to edit in filtered list
-     * @param addressBookIndex index of task to edit in the address book.
+     * @param addressBookIndex index of task to edit in the task manager.
      *      Must refer to the same task as {@code filteredTaskListIndex}
      * @param detailsToEdit details to edit the task with as input to the edit command
      * @param editedTask the expected task after editing the task's details
