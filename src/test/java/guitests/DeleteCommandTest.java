@@ -4,9 +4,8 @@ import static org.junit.Assert.assertTrue;
 import static org.teamstbf.yats.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS;
 
 import org.junit.Test;
-
-import t16b4.yats.testutil.TestPerson;
-import t16b4.yats.testutil.TestUtil;
+import org.teamstbf.yats.testutil.TestPerson;
+import org.teamstbf.yats.testutil.TestUtil;
 
 public class DeleteCommandTest extends AddressBookGuiTest {
 

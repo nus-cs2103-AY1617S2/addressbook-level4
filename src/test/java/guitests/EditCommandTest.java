@@ -11,10 +11,10 @@ import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.Timing;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.tag.Tag;
+import org.teamstbf.yats.testutil.PersonBuilder;
+import org.teamstbf.yats.testutil.TestPerson;
 
 import guitests.guihandles.PersonCardHandle;
-import t16b4.yats.testutil.PersonBuilder;
-import t16b4.yats.testutil.TestPerson;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
 public class EditCommandTest extends AddressBookGuiTest {

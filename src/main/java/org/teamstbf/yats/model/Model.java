@@ -5,6 +5,7 @@ import java.util.Set;
 import org.teamstbf.yats.commons.core.UnmodifiableObservableList;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
+import org.teamstbf.yats.model.item.Task;
 import org.teamstbf.yats.model.item.UniqueItemList;
 import org.teamstbf.yats.model.item.UniqueItemList.DuplicatePersonException;
 
@@ -22,8 +23,10 @@ public interface Model {
 	void deletePerson(ReadOnlyEvent target) throws UniqueItemList.PersonNotFoundException;
 
 	/** Adds the given person */
-	void addEvent(Event event) throws UniqueItemList.DuplicatePersonException;
+	void addEvent(Task task) throws UniqueItemList.DuplicatePersonException;
 
+	void addEvent(Event event) throws DuplicatePersonException;
+	
 	/**
 	 * Updates the person located at {@code filteredPersonListIndex} with {@code editedPerson}.
 	 *
@@ -45,5 +48,6 @@ public interface Model {
 
 	/** Updates the filter of the filtered person list to filter by the given keywords*/
 	void updateFilteredPersonList(Set<String> keywords);
+
 
 }

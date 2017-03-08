@@ -4,10 +4,9 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.teamstbf.yats.model.TaskManager;
-import org.teamstbf.yats.model.item.Task;
+import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.util.SampleDataUtil;
-
-import t16b4.yats.testutil.TestUtil;
+import org.teamstbf.yats.testutil.TestUtil;
 
 public class SampleDataTest extends AddressBookGuiTest {
     @Override
@@ -24,7 +23,7 @@ public class SampleDataTest extends AddressBookGuiTest {
 
     @Test
     public void addressBook_dataFileDoesNotExist_loadSampleData() throws Exception {
-        Task[] expectedList = SampleDataUtil.getSampleTasks();
+        Event[] expectedList = SampleDataUtil.getSampleEvents();
         assertTrue(personListPanel.isListMatching(expectedList));
     }
 }

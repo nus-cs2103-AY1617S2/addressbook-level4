@@ -2,10 +2,11 @@ package guitests.guihandles;
 
 import java.util.Arrays;
 
+import org.teamstbf.yats.TestApp;
+
 import guitests.GuiRobot;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
-import t16b4.yats.TestApp;
 
 /**
  * Provides a handle to the main menu of the app.

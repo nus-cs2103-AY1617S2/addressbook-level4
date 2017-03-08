@@ -1,8 +1,9 @@
 package guitests.guihandles;
 
+import org.teamstbf.yats.TestApp;
+
 import guitests.GuiRobot;
 import javafx.stage.Stage;
-import t16b4.yats.TestApp;
 
 /**
  * Provides a handle for the main GUI.

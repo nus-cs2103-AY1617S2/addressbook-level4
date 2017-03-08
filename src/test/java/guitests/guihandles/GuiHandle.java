@@ -3,6 +3,7 @@ package guitests.guihandles;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+import org.teamstbf.yats.TestApp;
 import org.teamstbf.yats.commons.core.LogsCenter;
 
 import guitests.GuiRobot;
@@ -12,7 +13,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import t16b4.yats.TestApp;
 
 /**
  * Base class for all GUI Handles used in testing.

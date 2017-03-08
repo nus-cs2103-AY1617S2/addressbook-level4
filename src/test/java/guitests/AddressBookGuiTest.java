@@ -10,10 +10,13 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.rules.TestName;
+import org.teamstbf.yats.TestApp;
 import org.teamstbf.yats.commons.core.EventsCenter;
 import org.teamstbf.yats.commons.events.BaseEvent;
 import org.teamstbf.yats.model.TaskManager;
 import org.teamstbf.yats.model.item.ReadOnlyItem;
+import org.teamstbf.yats.testutil.TestUtil;
+import org.teamstbf.yats.testutil.TypicalTestPersons;
 import org.testfx.api.FxToolkit;
 
 import guitests.guihandles.BrowserPanelHandle;
@@ -25,9 +28,6 @@ import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-import t16b4.yats.TestApp;
-import t16b4.yats.testutil.TestUtil;
-import t16b4.yats.testutil.TypicalTestPersons;
 
 /**
  * A GUI Test class for AddressBook.

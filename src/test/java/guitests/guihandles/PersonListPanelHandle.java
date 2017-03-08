@@ -7,16 +7,17 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import org.teamstbf.yats.TestApp;
+import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.ReadOnlyItem;
 import org.teamstbf.yats.model.item.Task;
+import org.teamstbf.yats.testutil.TestUtil;
 
 import guitests.GuiRobot;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-import t16b4.yats.TestApp;
-import t16b4.yats.testutil.TestUtil;
 
 /**
  * Provides a handle for the panel containing the person list.
@@ -43,10 +44,10 @@ public class PersonListPanelHandle extends GuiHandle {
 
     /**
      * Returns true if the list is showing the person details correctly and in correct order.
-     * @param persons A list of person in the correct order.
+     * @param expectedList A list of person in the correct order.
      */
-    public boolean isListMatching(ReadOnlyItem... persons) {
-        return this.isListMatching(0, persons);
+    public boolean isListMatching(Event[]... expectedList) {
+        return this.isListMatching(expectedList);
     }
 
     /**

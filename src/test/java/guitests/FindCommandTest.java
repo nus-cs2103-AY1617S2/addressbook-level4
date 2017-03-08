@@ -4,8 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.teamstbf.yats.commons.core.Messages;
-
-import t16b4.yats.testutil.TestPerson;
+import org.teamstbf.yats.testutil.TestPerson;
 
 public class FindCommandTest extends AddressBookGuiTest {
 

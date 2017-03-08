@@ -1,9 +1,10 @@
 package guitests.guihandles;
 
+import org.teamstbf.yats.TestApp;
+
 import guitests.GuiRobot;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
-import t16b4.yats.TestApp;
 
 /**
  * A handler for the ResultDisplay of the UI
