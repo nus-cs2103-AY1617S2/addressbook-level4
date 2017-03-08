@@ -12,8 +12,8 @@ public interface ReadOnlyItem {
     Deadline getDeadline();
     Timing getTiming();
     Description getDescription();
-    Periodic getPeriodic(); 
-    
+    Periodic getPeriodic();
+
     /**
      * The returned TagList is a deep copy of the internal TagList,
      * changes on the returned list will not affect the person's internal tags.

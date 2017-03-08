@@ -41,7 +41,7 @@ public class TestEvent implements ReadOnlyEvent {
         this.tags = personToCopy.getTags();
     }
 
-    public void setName(Title name) {
+    public void setTitle(Title name) {
         this.name = name;
     }
 

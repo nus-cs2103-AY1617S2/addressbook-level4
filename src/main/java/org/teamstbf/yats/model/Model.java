@@ -26,7 +26,7 @@ public interface Model {
 	void addEvent(Task task) throws UniqueItemList.DuplicatePersonException;
 
 	void addEvent(Event event) throws DuplicatePersonException;
-	
+
 	/**
 	 * Updates the person located at {@code filteredPersonListIndex} with {@code editedPerson}.
 	 *

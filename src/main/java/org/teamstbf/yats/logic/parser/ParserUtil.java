@@ -97,8 +97,8 @@ public class ParserUtil {
         assert timing != null;
         return timing.isPresent() ? Optional.of(new Timing(timing.get())) : Optional.empty();
     }
-    
-    
+
+
     /**
      * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.
      */
