@@ -8,27 +8,32 @@ We are CS2103JAN2017-W15-B4 based in the [School of Computing, National Universi
 <img src="images/verylazyboy.png" width="150"><br>
 Role: Developer <br>
 Responsibilities: UI
+                  Managing Issues
 
 -----
 
 #### [How Si Wei](http://github.com/howsiwei)
 <img src="images/howsiwei.png" width="150"><br>
 Role: Developer <br>
-Responsibilities: UI
+Responsibilities: Storage
+                  Tests
 
 -----
 
 #### [Goh Yi Rui](http://github.com/yirui94)
 <img src="images/yirui94.png" width="150"><br>
 Role: Developer <br>
-Responsibilities: Data
+Responsibilities: Logic
+                  Integration
 
 -----
 
 #### [Zhang Hanming](https://github.com/ZhangHanming)
 <img src="images/zhanghanming.png" width="150"><br>
  Role: Developer <br>
- Responsibilities: Data
+ Responsibilities: Model
+                   Team Leader
+
 
  -----
 
