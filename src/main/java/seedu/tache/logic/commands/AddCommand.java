@@ -8,9 +8,9 @@ import seedu.tache.logic.commands.exceptions.CommandException;
 import seedu.tache.model.person.Address;
 import seedu.tache.model.person.Email;
 import seedu.tache.model.person.Name;
-import seedu.tache.model.person.Person;
+import seedu.tache.model.person.Task;
 import seedu.tache.model.person.Phone;
-import seedu.tache.model.person.UniquePersonList;
+import seedu.tache.model.person.UniqueTaskList;
 import seedu.tache.model.tag.Tag;
 import seedu.tache.model.tag.UniqueTagList;
 
@@ -29,7 +29,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
-    private final Person toAdd;
+    private final Task toAdd;
 
     /**
      * Creates an AddCommand using raw values.
@@ -42,7 +42,7 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        this.toAdd = new Person(
+        this.toAdd = new Task(
                 new Name(name),
                 new Phone(phone),
                 new Email(email),
@@ -57,7 +57,7 @@ public class AddCommand extends Command {
         try {
             model.addPerson(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-        } catch (UniquePersonList.DuplicatePersonException e) {
+        } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
