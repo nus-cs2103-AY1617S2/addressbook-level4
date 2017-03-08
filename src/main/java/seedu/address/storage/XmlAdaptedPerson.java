@@ -8,12 +8,11 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Email;
 import seedu.address.model.task.Description;
-import seedu.address.model.task.Task;
+import seedu.address.model.task.Email;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
-
+import seedu.address.model.task.Task;
 /**
  * JAXB-friendly version of the Task.
  */
