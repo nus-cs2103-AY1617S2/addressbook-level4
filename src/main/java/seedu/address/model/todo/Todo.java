@@ -5,7 +5,6 @@ import java.util.Objects;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.testutil.TestTodo;
 
 /**
  * Represents a Todo in the address book.
@@ -28,7 +27,7 @@ public class Todo implements ReadOnlyTodo {
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
     
-    public Todo(TestTodo todo) {
+    public Todo(Todo todo) {
         assert !CollectionUtil.isAnyNull(todo);
         this.name = todo.getName();
         this.tags = new UniqueTagList(todo.getTags()); // protect internal tags from changes in the arg list
