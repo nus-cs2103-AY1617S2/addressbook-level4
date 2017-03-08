@@ -4,6 +4,14 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
+#### [Haya Alsharef](https://github.com/hayaz3)
+<img src="images/hayaz3.png" width="150"><br>
+Role: Developer<br>
+Responsibilities: Team Lead, Scheduling and Tracking<br>
+Component: Storage
+
+-----
+
 #### [Melvin Soh](https://github.com/InfinityFrost) <br>
 <img src="images/infinityfrost.png" width="150"><br>
 Role: Developer<br>
@@ -28,10 +36,4 @@ Component: Model
 
 -----
 
-#### [Haya Alsharef](https://github.com/hayaz3)
-<img src="images/hayaz3.png" width="150"><br>
-Role: Developer<br>
-Responsibilities: Team Lead, Scheduling and Tracking<br>
-Component: Storage
 
------
