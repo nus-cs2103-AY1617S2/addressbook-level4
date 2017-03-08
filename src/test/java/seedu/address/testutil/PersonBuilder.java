@@ -31,13 +31,6 @@ public class PersonBuilder {
         return this;
     }
 
-    public PersonBuilder withTags(String ... tags) throws IllegalValueException {
-        person.setTags(new UniqueTagList());
-        for (String tag: tags) {
-            person.getTags().add(new Tag(tag));
-        }
-        return this;
-    }
 
     public PersonBuilder withAddress(String address) throws IllegalValueException {
         this.person.setAddress(new Address(address));

@@ -422,7 +422,7 @@ public class LogicManagerTest {
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, privatePhone, email, privateAddress, tags);
+            return new Task(name);
         }
 
         /**
@@ -434,12 +434,7 @@ public class LogicManagerTest {
          */
         Task generatePerson(int seed) throws Exception {
             return new Task(
-                    new Name("Person " + seed),
-                    new Phone("" + Math.abs(seed)),
-                    new Email(seed + "@email"),
-                    new Address("House of " + seed),
-                    new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
-            );
+                    new Name("Person " + seed));
         }
 
         /** Generates the correct add command based on the person given */
@@ -449,14 +444,6 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getName().toString());
-            cmd.append(" e/").append(p.getEmail());
-            cmd.append(" p/").append(p.getPhone());
-            cmd.append(" a/").append(p.getAddress());
-
-            UniqueTagList tags = p.getTags();
-            for (Tag t: tags) {
-                cmd.append(" t/").append(t.tagName);
-            }
 
             return cmd.toString();
         }
@@ -532,13 +519,7 @@ public class LogicManagerTest {
          * Generates a Person object with given name. Other fields will have some dummy values.
          */
         Task generatePersonWithName(String name) throws Exception {
-            return new Task(
-                    new Name(name),
-                    new Phone("1"),
-                    new Email("1@email"),
-                    new Address("House of 1"),
-                    new UniqueTagList(new Tag("tag"))
-            );
+            return new Task(new Name(name));
         }
     }
 }

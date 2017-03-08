@@ -24,7 +24,6 @@ import seedu.address.model.tag.UniqueTagList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-    private final UniqueTagList tags;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -35,7 +34,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
-        tags = new UniqueTagList();
     }
 
     public AddressBook() {}
@@ -55,10 +53,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
 
-    public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
-        this.tags.setTags(tags);
-    }
-
     public void resetData(ReadOnlyAddressBook newData) {
         assert newData != null;
         try {
@@ -66,12 +60,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         } catch (UniquePersonList.DuplicatePersonException e) {
             assert false : "AddressBooks should not have duplicate persons";
         }
-        try {
-            setTags(newData.getTagList());
-        } catch (UniqueTagList.DuplicateTagException e) {
-            assert false : "AddressBooks should not have duplicate tags";
-        }
-        syncMasterTagListWith(persons);
     }
 
 //// person-level operations
@@ -84,7 +72,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @throws UniquePersonList.DuplicatePersonException if an equivalent person already exists.
      */
     public void addPerson(Task p) throws UniquePersonList.DuplicatePersonException {
-        syncMasterTagListWith(p);
         persons.add(p);
     }
 
@@ -102,7 +89,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         assert editedReadOnlyPerson != null;
 
         Task editedPerson = new Task(editedReadOnlyPerson);
-        syncMasterTagListWith(editedPerson);
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any person
         // in the person list.
@@ -114,20 +100,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      *  - exists in the master list {@link #tags}
      *  - points to a Tag object in the master list
      */
-    private void syncMasterTagListWith(Task person) {
-        final UniqueTagList personTags = person.getTags();
-        tags.mergeFrom(personTags);
-
-        // Create map with values = tag object references in the master list
-        // used for checking person tag references
-        final Map<Tag, Tag> masterTagObjects = new HashMap<>();
-        tags.forEach(tag -> masterTagObjects.put(tag, tag));
-
-        // Rebuild the list of person tags to point to the relevant tags in the master tag list.
-        final Set<Tag> correctTagReferences = new HashSet<>();
-        personTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
-        person.setTags(new UniqueTagList(correctTagReferences));
-    }
 
     /**
      * Ensures that every tag in these persons:
@@ -135,10 +107,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      *  - points to a Tag object in the master list
      *  @see #syncMasterTagListWith(Task)
      */
-    private void syncMasterTagListWith(UniquePersonList persons) {
-        persons.forEach(this::syncMasterTagListWith);
-    }
-
     public boolean removePerson(ReadOnlyTask key) throws UniquePersonList.PersonNotFoundException {
         if (persons.remove(key)) {
             return true;
@@ -147,17 +115,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
     }
 
-//// tag-level operations
-
-    public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
-        tags.add(t);
-    }
 
 //// util methods
 
     @Override
     public String toString() {
-        return persons.asObservableList().size() + " persons, " + tags.asObservableList().size() +  " tags";
+        return persons.asObservableList().size() + " persons, ";
         // TODO: refine later
     }
 
@@ -167,21 +130,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<Tag> getTagList() {
-        return new UnmodifiableObservableList<>(tags.asObservableList());
-    }
-
-    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && this.persons.equals(((AddressBook) other).persons)
-                && this.tags.equalsOrderInsensitive(((AddressBook) other).tags));
+                && this.persons.equals(((AddressBook) other).persons));
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(persons, tags);
+        return Objects.hash(persons);
     }
 }
