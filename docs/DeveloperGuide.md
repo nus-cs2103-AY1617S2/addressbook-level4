@@ -781,5 +781,16 @@ Use case resumes at step 2.
 > *  Lacks collaborative features
 > *  Unable to customise
 
+**Todoist**
 
+> Pros:
+> * Ubiquitous, available in many platforms
+> * Relatively cheap compared to other devices
+> * Extremely user-friendly
+> * Sends motivational messages
+
+> Cons:
+> * Good functions are premium and user has to pay
+> * Search function limited in free plan
+> * Not available in Windows except for Windows 10
 
