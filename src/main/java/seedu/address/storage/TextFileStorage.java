@@ -1,66 +1,129 @@
 package seedu.address.storage;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Optional;
+import java.util.Iterator;
+import java.util.Observable;
+import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
+import javax.xml.bind.JAXBException;
+
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.commons.util.FileUtil;
+import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.ReadOnlyUserInbox;
+import seedu.address.model.UserInbox;
+import seedu.address.model.person.Description;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.ReadOnlyTask;
+import seedu.address.model.person.Task;
+import seedu.address.model.person.UniqueTaskList;
+import seedu.address.model.tag.UniqueTagList;
 
-public class TextFileStorage implements AddressBookStorage {
-    
-    private static final Logger logger = LogsCenter.getLogger(TextFileStorage.class);
-
-    private String filePath;
-    
-    public TextFileStorage(String filePath){
-        this.filePath = filePath;
+/**
+ * Stores addressbook data in an XML file
+ */
+public class TextFileStorage {
+    /**
+     * Saves the given addressbook data to the specified file.
+     */
+    public static void saveDataToFile(File file, ReadOnlyUserInbox userInbox)
+            throws FileNotFoundException {
+//        try {
+//        	//TODO changethis
+//            XmlUtil.saveDataToFile(file, addressBook)
+//        } catch (JAXBException e) {
+//            assert false : "Unexpected exception " + e.getMessage();
+//        }
+    	
+    	//TODO file I/O
+    	
+    	//read every single task from the userinbox and store it into file
+    	
+    	System.out.println("starting???");
+    	System.out.println(file.getName());
+    	
+    	Logger myLog= LogsCenter.getLogger(TextFileStorage.class);
+    	myLog.fine("starting to write");
+    	
+    	
+    	try {
+        	BufferedWriter write = new BufferedWriter(new FileWriter(file));
+        	
+        	ObservableList<ReadOnlyTask> listToRead = userInbox.getTaskList();
+        	Iterator<ReadOnlyTask> taskIterator = listToRead.iterator();
+        	while (taskIterator.hasNext()) {
+        		ReadOnlyTask taskToSave = taskIterator.next(); 		   		  		
+        		String toWriteToFile = "";
+        		toWriteToFile += taskToSave.getName();
+        		toWriteToFile += " ";
+        		toWriteToFile += "//" + taskToSave.getDescription();
+        		write.write(toWriteToFile);
+        		write.newLine();
+        		write.flush();
+        	}
+    		
+    	} catch (Exception e) {
+    		
+    	}
+    	
+    	//need to use iterator to read tasks?
+    	
+    	//overwrite the file, I'm guessing
+    	
     }
-    
-    public String getAddressBookFilePath() {
-        return this.filePath;
-    }
 
-    @Override
-    public Optional<ReadOnlyUserInbox> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(filePath);
-    }
+    /**
+     * Returns address book in the file or an empty address book
+     * @throws IOException 
+     */
+    public static ReadOnlyUserInbox loadDataFromSaveFile(File file) throws DataConversionException,
+                                                                            IOException {
+    	
+    	System.out.println("load??");
+    	
+    	Logger myLog= LogsCenter.getLogger(TextFileStorage.class);
+    	myLog.fine("starting to read");
+    	
+    	//TODO construct tasks, create ReadOnlyUserInbox
 
-    public Optional<ReadOnlyUserInbox> readAddressBook(String filePath) throws DataConversionException, IOException {
-        assert filePath != null;
-
-        File addressBookFile = new File(filePath);
-
-        if (!addressBookFile.exists()) {
-            logger.info("AddressBook file "  + addressBookFile + " not found");
-            return Optional.empty();
-        }
-        
-        //TODO Update this so that it parses data from text file
-        ReadOnlyUserInbox addressBookOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
-
-        return Optional.of(addressBookOptional);
-    }
-
-    public void saveAddressBook(ReadOnlyUserInbox addressBook) throws IOException {
-        saveAddressBook(addressBook, filePath);
-
-    }
-
-    public void saveAddressBook(ReadOnlyUserInbox addressBook, String filePath) throws IOException {
-        assert addressBook != null;
-        assert filePath != null;
-
-      
-        File file = new File(filePath);
-        FileUtil.createIfMissing(file);
-        
-        //TODO Update this so that it saves data to text file
-        XmlFileStorage.saveDataToFile(file, new XmlSerializableAddressBook(addressBook));
-
+    	BufferedReader read = new BufferedReader(new FileReader(file));
+    	String line;
+    	UniqueTaskList tasksRead = new UniqueTaskList();
+    	UserInbox inboxToReturn = new UserInbox();
+    	
+    	try {
+        	while ((line = read.readLine()) != null) {
+        		StringTokenizer str = new StringTokenizer(line);
+        		System.out.println(line);
+        		Name taskName = new Name(str.nextToken());
+        		Description description = new Description(str.nextToken().replaceAll("/", ""));
+        		UniqueTagList tagList = new UniqueTagList();
+        		tasksRead.add(new Task(taskName, description, tagList));
+        		inboxToReturn.setTasks(tasksRead);
+        	}    		
+    	} catch (Exception e) {
+    		//whatever
+    		e.printStackTrace();
+    	}
+    	
+    	read.close();
+    	
+    	return inboxToReturn;
+    	
+//        try {
+//        	//TODO change this
+//            return XmlUtil.getDataFromFile(file, XmlSerializableAddressBook.class);
+//        } catch (JAXBException e) {
+//            throw new DataConversionException(e);
+//        }
     }
 
 }
