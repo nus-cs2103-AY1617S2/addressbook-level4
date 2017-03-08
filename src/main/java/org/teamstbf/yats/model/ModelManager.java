@@ -11,6 +11,7 @@ import org.teamstbf.yats.commons.util.CollectionUtil;
 import org.teamstbf.yats.commons.util.StringUtil;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
+import org.teamstbf.yats.model.item.Task;
 import org.teamstbf.yats.model.item.UniqueItemList;
 import org.teamstbf.yats.model.item.UniqueItemList.DuplicatePersonException;
 import org.teamstbf.yats.model.item.UniqueItemList.PersonNotFoundException;
@@ -159,6 +160,12 @@ public class ModelManager extends ComponentManager implements Model {
 		public String toString() {
 			return "name=" + String.join(", ", nameKeyWords);
 		}
+	}
+
+	@Override
+	public void addEvent(Task task) throws DuplicatePersonException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

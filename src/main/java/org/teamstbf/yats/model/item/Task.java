@@ -120,4 +120,10 @@ public class Task implements ReadOnlyItem {
 		return getAsText();
 	}
 
+	@Override
+	public Periodic getPeriodic() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

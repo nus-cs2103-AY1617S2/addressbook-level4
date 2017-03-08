@@ -1,22 +1,20 @@
-package t16b4.yats.logic.commands;
+package org.teamstbf.yats.logic.commands;
 
 import java.util.List;
 import java.util.Optional;
 
-import t16b4.yats.commons.core.Messages;
-import t16b4.yats.commons.util.CollectionUtil;
-import t16b4.yats.logic.commands.exceptions.CommandException;
-import t16b4.yats.model.item.Description;
-import t16b4.yats.model.item.Event;
-import t16b4.yats.model.item.Periodic;
-import t16b4.yats.model.item.ReadOnlyEvent;
-import t16b4.yats.model.item.Timing;
-import t16b4.yats.model.item.Title;
-import t16b4.yats.model.item.Task;
-import t16b4.yats.model.item.Deadline;
-import t16b4.yats.model.item.ReadOnlyItem;
-import t16b4.yats.model.item.UniqueItemList;
-import t16b4.yats.model.tag.UniqueTagList;
+import org.teamstbf.yats.commons.core.Messages;
+import org.teamstbf.yats.commons.util.CollectionUtil;
+import org.teamstbf.yats.logic.commands.exceptions.CommandException;
+import org.teamstbf.yats.model.item.Description;
+import org.teamstbf.yats.model.item.Event;
+import org.teamstbf.yats.model.item.Periodic;
+import org.teamstbf.yats.model.item.ReadOnlyEvent;
+import org.teamstbf.yats.model.item.Timing;
+import org.teamstbf.yats.model.item.Title;
+import org.teamstbf.yats.model.item.Deadline;
+import org.teamstbf.yats.model.item.UniqueItemList;
+import org.teamstbf.yats.model.tag.UniqueTagList;
 
 /**
  * Edits the details of an existing task in the task scheduler.

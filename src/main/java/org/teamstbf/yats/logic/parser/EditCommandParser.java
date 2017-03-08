@@ -1,27 +1,27 @@
-package t16b4.yats.logic.parser;
+package org.teamstbf.yats.logic.parser;
 
-import static t16b4.yats.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static t16b4.yats.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static t16b4.yats.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static t16b4.yats.logic.parser.CliSyntax.PREFIX_PHONE;
-import static t16b4.yats.logic.parser.CliSyntax.PREFIX_TAG;
-import static t16b4.yats.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static t16b4.yats.logic.parser.CliSyntax.PREFIX_START_TIME;
-import static t16b4.yats.logic.parser.CliSyntax.PREFIX_END_TIME;
-import static t16b4.yats.logic.parser.CliSyntax.PREFIX_PERIOD;
-import static t16b4.yats.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static org.teamstbf.yats.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_PHONE;
+import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_TAG;
+import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_START_TIME;
+import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_END_TIME;
+import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_PERIOD;
+import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_LOCATION;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import t16b4.yats.commons.exceptions.IllegalValueException;
-import t16b4.yats.logic.commands.Command;
-import t16b4.yats.logic.commands.EditCommand;
-import t16b4.yats.logic.commands.IncorrectCommand;
-import t16b4.yats.logic.commands.EditCommand.EditTaskDescriptor;
-import t16b4.yats.model.tag.UniqueTagList;
+import org.teamstbf.yats.commons.exceptions.IllegalValueException;
+import org.teamstbf.yats.logic.commands.Command;
+import org.teamstbf.yats.logic.commands.EditCommand;
+import org.teamstbf.yats.logic.commands.IncorrectCommand;
+import org.teamstbf.yats.logic.commands.EditCommand.EditTaskDescriptor;
+import org.teamstbf.yats.model.tag.UniqueTagList;
 
 /**
  * Parses input arguments and creates a new EditCommand object
