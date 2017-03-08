@@ -105,7 +105,7 @@ public class TestUtil {
         }
     }
 
-    public static List<Task> generateSamplePersonData() {
+    public static List<Task> generateSampleTaskData() {
         return Arrays.asList(SAMPLE_TASK_DATA);
     }
 
@@ -291,7 +291,7 @@ public class TestUtil {
 
 
     /**
-     * Returns a copy of the list with the person at specified index removed.
+     * Returns a copy of the list with the task at specified index removed.
      * @param list original list to copy from
      * @param targetIndexInOneIndexedFormat e.g. index 1 if the first element is to be removed
      */
@@ -312,7 +312,7 @@ public class TestUtil {
     }
 
     /**
-     * Appends persons to the array of tasks.
+     * Appends tasks to the array of tasks.
      * @param tasks A array of tasks.
      * @param tasksToAdd The tasks that are to be appended behind the original array.
      * @return The modified array of tasks.

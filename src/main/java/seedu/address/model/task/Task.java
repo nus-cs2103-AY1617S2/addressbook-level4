@@ -6,7 +6,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.label.UniqueLabelList;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Task in the address book.
  * Guarantees: details are present and not null, field values are validated.
  */
 public class Task implements ReadOnlyTask {
@@ -27,7 +27,7 @@ public class Task implements ReadOnlyTask {
     }
 
     /**
-     * Creates a copy of the given ReadOnlyPerson.
+     * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
         this(source.getTitle(), source.getDeadline(), source.getLabels());
@@ -59,14 +59,14 @@ public class Task implements ReadOnlyTask {
     }
 
     /**
-     * Replaces this person's labels with the labels in the argument label list.
+     * Replaces this 's labels with the labels in the argument label list.
      */
     public void setLabels(UniqueLabelList replacement) {
         labels.setLabels(replacement);
     }
 
     /**
-     * Updates this person with the details of {@code replacement}.
+     * Updates this  with the details of {@code replacement}.
      */
     public void resetData(ReadOnlyTask replacement) {
         assert replacement != null;

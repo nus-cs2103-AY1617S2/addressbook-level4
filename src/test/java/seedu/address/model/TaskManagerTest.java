@@ -46,12 +46,12 @@ public class TaskManagerTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsAssertionError() {
+    public void resetData_withDuplicateTasks_throwsAssertionError() {
         TypicalTestTasks td = new TypicalTestTasks();
         // Repeat td.alice twice
-        List<Task> newPersons = Arrays.asList(new Task(td.task1), new Task(td.task1));
+        List<Task> newTasks = Arrays.asList(new Task(td.task1), new Task(td.task1));
         List<Label> newLabels = td.task1.getLabels().asObservableList();
-        AddressBookStub newData = new AddressBookStub(newPersons, newLabels);
+        AddressBookStub newData = new AddressBookStub(newTasks, newLabels);
 
         thrown.expect(AssertionError.class);
         taskManager.resetData(newData);
@@ -60,31 +60,31 @@ public class TaskManagerTest {
     @Test
     public void resetData_withDuplicateLabels_throwsAssertionError() {
         TaskManager typicalAddressBook = new TypicalTestTasks().getTypicalAddressBook();
-        List<ReadOnlyTask> newPersons = typicalAddressBook.getTaskList();
+        List<ReadOnlyTask> newTasks = typicalAddressBook.getTaskList();
         List<Label> newLabels = new ArrayList<>(typicalAddressBook.getLabelList());
         // Repeat the first label twice
         newLabels.add(newLabels.get(0));
-        AddressBookStub newData = new AddressBookStub(newPersons, newLabels);
+        AddressBookStub newData = new AddressBookStub(newTasks, newLabels);
 
         thrown.expect(AssertionError.class);
         taskManager.resetData(newData);
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons and labels lists can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose tasks and labels lists can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyTaskManager {
-        private final ObservableList<ReadOnlyTask> persons = FXCollections.observableArrayList();
+        private final ObservableList<ReadOnlyTask> tasks = FXCollections.observableArrayList();
         private final ObservableList<Label> labels = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<? extends ReadOnlyTask> persons, Collection<? extends Label> labels) {
-            this.persons.setAll(persons);
+        AddressBookStub(Collection<? extends ReadOnlyTask> tasks, Collection<? extends Label> labels) {
+            this.tasks.setAll(tasks);
             this.labels.setAll(labels);
         }
 
         @Override
         public ObservableList<ReadOnlyTask> getTaskList() {
-            return persons;
+            return tasks;
         }
 
         @Override

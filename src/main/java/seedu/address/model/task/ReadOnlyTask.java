@@ -13,7 +13,7 @@ public interface ReadOnlyTask {
 
     /**
      * The returned LabelList is a deep copy of the internal LabelList,
-     * changes on the returned list will not affect the person's internal labels.
+     * changes on the returned list will not affect the task's internal labels.
      */
     UniqueLabelList getLabels();
 

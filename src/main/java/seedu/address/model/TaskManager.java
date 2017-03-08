@@ -81,7 +81,7 @@ public class TaskManager implements ReadOnlyTaskManager {
      * Also checks the new task's labels and updates {@link #labels} with any new labels found,
      * and updates the Label objects in the tasks to point to those in {@link #labels}.
      *
-     * @throws UniqueTaskList.DuplicateTaskException if an equivalent person already exists.
+     * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
      */
     public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
         syncMasterLabelListWith(p);
@@ -104,8 +104,8 @@ public class TaskManager implements ReadOnlyTaskManager {
         Task editedTask = new Task(editedReadOnlyTask);
         syncMasterLabelListWith(editedTask);
         // TODO: the labels master list will be updated even though the below line fails.
-        // This can cause the labels master list to have additional labels that are not labeled to any person
-        // in the person list.
+        // This can cause the labels master list to have additional labels that are not labeled to any task
+        // in the task list.
         tasks.updateTask(index, editedTask);
     }
 
@@ -135,8 +135,8 @@ public class TaskManager implements ReadOnlyTaskManager {
      *  - points to a Label object in the master list
      *  @see #syncMasterLabelListWith(Task)
      */
-    private void syncMasterLabelListWith(UniqueTaskList persons) {
-        persons.forEach(this::syncMasterLabelListWith);
+    private void syncMasterLabelListWith(UniqueTaskList tasks) {
+        tasks.forEach(this::syncMasterLabelListWith);
     }
 
     public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {

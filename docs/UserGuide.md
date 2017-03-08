@@ -114,8 +114,8 @@ Format:`update [TASK_ID] [TASKNAME] [label LABEL] ([(by|on) DATE] | [from START_
     The index **must be a positive integer** 1, 2, 3, ...
 > * At least one of the optional fields excluding `TASK_ID` must be provided.
 > * Existing values will be updated to the input values.
-> * When editing labels, the existing labels of the person will be removed i.e adding of labels is not cumulative.
-> * You can remove all the person's tags by typing `label` without specifying any tags after it.
+> * When editing labels, the existing labels of the task will be removed i.e adding of labels is not cumulative.
+> * You can remove all the task's tags by typing `label` without specifying any tags after it.
 > * Marking a task as `done` will indicate that the task is completed
 
 Examples:

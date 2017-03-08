@@ -10,7 +10,7 @@ import seedu.address.testutil.TaskBuilder;
 import seedu.address.testutil.TestTask;
 
 /**
- * Test classes for Person
+ * Test classes for Task
  */
 public class TaskTest {
     @Test

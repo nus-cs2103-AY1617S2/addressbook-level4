@@ -6,7 +6,7 @@ import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Title;
 
 /**
- * A mutable person object. For testing only.
+ * A mutable task object. For testing only.
  */
 public class TestTask implements ReadOnlyTask {
 
