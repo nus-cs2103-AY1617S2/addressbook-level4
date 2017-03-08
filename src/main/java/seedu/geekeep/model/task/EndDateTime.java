@@ -35,8 +35,8 @@ public class EndDateTime {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof StartDateTime // instanceof handles nulls
-                        && this.dateTime.equals(((StartDateTime) other).dateTime)); // state check
+                || (other instanceof EndDateTime // instanceof handles nulls
+                        && this.value.equals(((EndDateTime) other).value)); // state check
     }
 
     @Override

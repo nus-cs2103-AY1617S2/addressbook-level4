@@ -189,20 +189,20 @@ public class LogicManagerTest {
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid,address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 valid@email.butNoPrefix a/valid, address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
+        assertCommandFailure("add Valid Name 2017-04-01T10:16:30 e/2017-04-01T10:16:30 l/valid,address", expectedMessage);
+        assertCommandFailure("add Valid Name s/2017-04-01T10:16:30 2017-04-01T10:16:30 l/valid, address", expectedMessage);
+        assertCommandFailure("add Valid Name s/2017-04-01T10:16:30 e/2017-04-01T10:16:30 valid, address", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidPersonData() {
-        assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
+        assertCommandFailure("add []\\[;] s/2017-04-01T10:16:30 e/2017-04-01T10:16:30 l/valid, address",
                 Title.MESSAGE_TITLE_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
+        assertCommandFailure("add Valid Name s/not_numbers e/2017-04-01T10:16:30 l/valid, address",
                 EndDateTime.MESSAGE_DATETIME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
+        assertCommandFailure("add Valid Name s/2017-04-01T10:16:30 e/notAnEmail l/valid, address",
                 StartDateTime.MESSAGE_DATETIME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
+        assertCommandFailure("add Valid Name s/2017-04-01T10:16:30 e/2017-04-01T10:16:30 l/valid, address t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
@@ -416,8 +416,8 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Title title = new Title("Adam Brown");
-            EndDateTime privateEndDateTime = new EndDateTime("111111");
-            StartDateTime startDateTime = new StartDateTime("adam@gmail.com");
+            EndDateTime privateEndDateTime = new EndDateTime("2017-04-01T10:16:30");
+            StartDateTime startDateTime = new StartDateTime("2017-04-01T10:16:30");
             Location privateLocation = new Location("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
@@ -435,8 +435,8 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Title("Person " + seed),
-                    new StartDateTime(seed + "@email"),
-                    new EndDateTime("" + Math.abs(seed)),
+                    new StartDateTime("2017-04-01T10:16:30"),
+                    new EndDateTime("2017-04-01T10:16:30"),
                     new Location("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
@@ -449,9 +449,9 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getTitle().toString());
-            cmd.append(" e/").append(p.getStartDateTime());
-            cmd.append(" p/").append(p.getEndDateTime());
-            cmd.append(" a/").append(p.getLocation());
+            cmd.append(" s/").append(p.getStartDateTime());
+            cmd.append(" e/").append(p.getEndDateTime());
+            cmd.append(" l/").append(p.getLocation());
 
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {
@@ -534,8 +534,8 @@ public class LogicManagerTest {
         Task generateTaskWithName(String name) throws Exception {
             return new Task(
                     new Title(name),
-                    new StartDateTime("1@email"),
-                    new EndDateTime("1"),
+                    new StartDateTime("2017-04-01T10:16:30"),
+                    new EndDateTime("2017-04-01T10:16:30"),
                     new Location("House of 1"),
                     new UniqueTagList(new Tag("tag"))
             );
