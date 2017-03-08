@@ -28,6 +28,7 @@ Coadacy test missing
 
 * This application was based on the Address Book application created by School of Computing in National University of Singapore
   [Address Book Level 4](https://github.com/nus-cs2103-AY1617S2/addressbook-level4) by *SE-EDU*.
+* Some parts of this sample application were inspired by the excellent [Java FX tutorial](http://code.makery.ch/library/javafx-8-tutorial/) by _Marco Jakob_.
 
 
 #### Licence : [MIT](LICENSE)
