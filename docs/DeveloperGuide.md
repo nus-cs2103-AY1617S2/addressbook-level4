@@ -425,134 +425,41 @@ Use case ends.
 > 2a1. TaskManager shows that undo is successful <br>
   Use case ends
 
-#### Use case: UC03 - Edit task description
+#### Use case: UC03 - Edit task
 
 **MSS**
 
-1. User requests to list tasks
-2. TaskManager shows a list of tasks
-3. User requests to edit a specific task in the list
-4. TaskManager asks user which section of the task needs changes (description, date/time, or tags)
-5. User selects the description to be changed
-6. TaskManager prompts user to enter changes needed
-7. User writes the change to be made
-8. TaskManager applies the change <br>
+1. User requests to edit task from a previously given list of tasks
+2. TaskManager prompts user for the change needed
+3. User enters the change needed (allows partial change of the task, ie. only task description)
+4. TaskManager confirms and applies the change <br>
 Use case ends.
 
 **Extensions**
 
-2a. The list is empty
+1a. The given index is invalid
 
-> Use case ends
+> 1a1. TaskManager shows an error message <br>
+  Use case resumes at step 1
 
-3a. The given index is invalid
-
-> 3a1. TaskManager shows an error message <br>
-  Use case resumes at step 2
-
-5a. The given index is invalid
-
-> 5a1. TaskManager shows an error message <br>
-  Use case resumes at step 4
-
-7a. The edit is invalid
-
-> 7a1. TaskManager shows an error message <br>
-  Use case resumes at step 6
-
-8a. User requests to undo the action
-
-> 8a1. TaskManager shows that undo is successful <br>
-  Use case ends
-
-#### Use case: UC04 - Edit tags of a task
-
-**MSS**
-
-1. User requests to list tasks
-2. TaskManager shows a list of tasks
-3. User requests to edit a specific task in the list
-4. TaskManager asks user which section of the task needs changes (description, date/time, or tags)
-5. User selects the tags to be changed
-6. TaskManager shows user list of current tags with extra option to add new one
-7. User selects the index and writes the change to be made
-8. TaskManager applies the change <br>
-Use case ends.
-
-**Extensions**
-
-2a. The list is empty
-
-> Use case ends
-
-3a. The given index is invalid
+3a. The edit is invalid
 
 > 3a1. TaskManager shows an error message <br>
   Use case resumes at step 2
 
-5a. The given index is invalid
+4a. User requests to undo the action
 
-> 5a1. TaskManager shows an error message <br>
-  Use case resumes at step 4
-
-7a. The edit entry is invalid
-
-> 7a1. TaskManager shows an error message <br>
-  Use case resumes at step 6
-
-8a. User requests to undo the action
-
-> 8a1. TaskManager shows that undo is successful <br>
+> 4a1. TaskManager shows that undo is successful <br>
   Use case ends
 
-#### Use case: UC05 - Edit task timing(s)
-
-**MSS**
-
-1. User requests to list tasks
-2. TaskManager shows a list of tasks
-3. User requests to edit a specific task in the list
-4. TaskManager asks user which section of the task needs changes (description, date/time, or tags)
-5. User selects the date/time to be changed
-6. TaskManager prompts user to enter changes needed
-7. User writes the change to be made
-8. TaskManager applies the change <br>
-Use case ends.
-
-**Extensions**
-
-2a. The list is empty
-
-> Use case ends
-
-3a. The given index is invalid
-
-> 3a1. TaskManager shows an error message <br>
-  Use case resumes at step 2
-
-5a. The given index is invalid
-
-> 5a1. TaskManager shows an error message <br>
-  Use case resumes at step 4
-
-7a. The edit is invalid
-
-> 7a1. TaskManager shows an error message <br>
-  Use case resumes at step 6
-
-8a. User requests to undo the action
-
-> 8a1. TaskManager shows that undo is successful <br>
-  Use case ends
-
-#### Use case: UC06 - Find a task with a keyword
+#### Use case: UC04 - Find a task with a keyword
 
 **MSS**
 
 1. User requests to find task by keyword(s)
 2. TaskManager shows a list of tasks containing given keyword
 3. User selects a task to view in detail.
-4. User can request to make an edit of the task (UC03, UC04, UC05, or UC09)
+4. TaskManager shows details of the selected task. <br>
 Use case ends.
 
 **Extensions**
@@ -572,14 +479,14 @@ Use case ends.
 > TaskManager shows an error message <br>
   Use case resumes at step 2
 
-#### Use case: UC07 - Find a task by a tag
+#### Use case: UC05 - Find a task by a tag
 
 **MSS**
 
 1. User requests to find task by a tag
 2. TaskManager shows a list of tasks containing given tag
 3. User selects a task to view in detail.
-4. User can request to make an edit of the task (UC03, UC04, UC05, or UC09)
+4. TaskManager shows details of the selected task. <br>
 Use case ends.
 
 **Extensions**
@@ -599,14 +506,14 @@ Use case ends.
 > TaskManager shows an error message <br>
   Use case resumes at step 2
 
-#### Use case: UC08 - Find a task to do today
+#### Use case: UC06 - Find a task to do today
 
 **MSS**
 
 1. User requests to find task to do today
 2. TaskManager shows a list of tasks with deadlines/reminder scheduled today
 3. User selects a task to view in detail
-4. User can request to make a further action with of the task (UC03, UC04, UC05, or UC09)
+4. TaskManager shows details of the selected task. <br>
 Use case ends.
 
 **Extensions**
@@ -626,7 +533,7 @@ Use case ends.
 > TaskManager shows an error message <br>
   Use case resumes at step 2
 
-#### Use case: UC09 - Mark a task as done
+#### Use case: UC07 - Mark a task as done
 
 **MSS**
 
