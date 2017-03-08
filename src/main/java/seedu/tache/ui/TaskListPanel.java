@@ -13,7 +13,8 @@ import javafx.scene.layout.Region;
 import seedu.tache.commons.core.LogsCenter;
 import seedu.tache.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.tache.commons.util.FxViewUtil;
-import seedu.tache.model.task.FloatingTask;
+import seedu.tache.model.task.DetailedTask;
+import seedu.tache.model.task.ReadOnlyTask;
 
 /**
  * Panel containing the list of tasks.
@@ -23,15 +24,15 @@ public class TaskListPanel extends UiPart<Region> {
     private static final String FXML = "TaskListPanel.fxml";
 
     @FXML
-    private ListView<FloatingTask> taskListView;
+    private ListView<DetailedTask> taskListView;
 
-    public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<FloatingTask> taskList) {
+    public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<DetailedTask> taskList) {
         super(FXML);
         setConnections(taskList);
         addToPlaceholder(taskListPlaceholder);
     }
 
-    private void setConnections(ObservableList<FloatingTask> taskList) {
+    private void setConnections(ObservableList<DetailedTask> taskList) {
         taskListView.setItems(taskList);
         taskListView.setCellFactory(listView -> new TaskListViewCell());
         setEventHandlerForSelectionChangeEvent();
@@ -60,10 +61,9 @@ public class TaskListPanel extends UiPart<Region> {
         });
     }
 
-    class TaskListViewCell extends ListCell<FloatingTask> {
+    class TaskListViewCell extends ListCell<DetailedTask> {
 
-        @Override
-        protected void updateItem(FloatingTask task, boolean empty) {
+        protected void updateItem(DetailedTask task, boolean empty) {
             super.updateItem(task, empty);
 
             if (empty || task == null) {

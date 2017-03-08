@@ -5,11 +5,8 @@ import seedu.tache.commons.core.Messages;
 import seedu.tache.commons.core.UnmodifiableObservableList;
 import seedu.tache.commons.events.ui.JumpToListRequestEvent;
 import seedu.tache.logic.commands.exceptions.CommandException;
-<<<<<<< HEAD
-import seedu.tache.model.person.ReadOnlyTask;
-=======
+import seedu.tache.model.task.DetailedTask;
 import seedu.tache.model.task.ReadOnlyTask;
->>>>>>> ImplementTaskModels
 
 /**
  * Selects a person identified using it's last displayed index from the address book.
@@ -34,7 +31,7 @@ public class SelectCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
 
-        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        UnmodifiableObservableList<DetailedTask> lastShownList = model.getFilteredTaskList();
 
         if (lastShownList.size() < targetIndex) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);

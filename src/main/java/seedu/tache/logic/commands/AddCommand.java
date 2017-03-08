@@ -5,17 +5,9 @@ import java.util.Set;
 
 import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.logic.commands.exceptions.CommandException;
-<<<<<<< HEAD
-import seedu.tache.model.person.Address;
-import seedu.tache.model.person.Email;
-import seedu.tache.model.person.Name;
-import seedu.tache.model.person.Task;
-import seedu.tache.model.person.Phone;
-import seedu.tache.model.person.UniqueTaskList;
-=======
->>>>>>> ImplementTaskModels
 import seedu.tache.model.tag.Tag;
 import seedu.tache.model.tag.UniqueTagList;
+import seedu.tache.model.task.DetailedTask;
 import seedu.tache.model.task.Name;
 import seedu.tache.model.task.Task;
 import seedu.tache.model.task.UniqueTaskList;
@@ -35,7 +27,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
 
-    private final Task toAdd;
+    private final DetailedTask toAdd;
 
     /**
      * Creates an AddCommand using raw values.
@@ -48,17 +40,10 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-<<<<<<< HEAD
-        this.toAdd = new Task(
+        this.toAdd = new DetailedTask(
                 new Name(name),
-                new Phone(phone),
-                new Email(email),
-                new Address(address),
                 new UniqueTagList(tagSet)
         );
-=======
-        this.toAdd = new Task(new Name(name), new UniqueTagList(tagSet));
->>>>>>> ImplementTaskModels
     }
 
     @Override
@@ -68,13 +53,9 @@ public class AddCommand extends Command {
             model.addTask(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
-<<<<<<< HEAD
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-=======
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
->>>>>>> ImplementTaskModels
         }
 
     }
-
+}
 
