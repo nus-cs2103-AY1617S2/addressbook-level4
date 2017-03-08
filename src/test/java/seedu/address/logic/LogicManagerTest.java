@@ -199,13 +199,13 @@ public class LogicManagerTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add wrong args wrong args", expectedMessage);
         assertCommandFailure("add Valid Name 12/34/5678 t/validTagWithPrefix.butNoDatePrefix", expectedMessage);
-        assertCommandFailure("add Valid Name x/12/34/4556 t/invalidDatePrefix", expectedMessage);
+        assertCommandFailure("add Valid Name t/12/34/4556 t/invalidDatePrefix", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidTaskData() {
         assertCommandFailure("add []\\[;] d/12/34/5678", Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name d/12345678", Date.MESSAGE_DATE_CONSTRAINTS);
+        assertCommandFailure("add Valid Name d/not_nums", Date.MESSAGE_DATE_CONSTRAINTS);
         assertCommandFailure("add Valid Name d/12/34/5678 t/invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
@@ -273,7 +273,7 @@ public class LogicManagerTest {
         assertCommandFailure(commandWord + " 0", expectedMessage); // index
         // cannot
         // be 0
-        assertCommandFailure(commandWord + " not_a_number", expectedMessage);
+        assertCommandFailure(commandWord + " not_nums", expectedMessage);
     }
 
     /**
@@ -288,8 +288,7 @@ public class LogicManagerTest {
         String expectedMessage = MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
         TestDataHelper helper = new TestDataHelper();
         List<Task> taskList = helper.generateTaskList(2);
-
-        // set AB state to 2 tasks
+        // set TM state to 2 tasks
         model.resetData(new TaskManager());
         for (Task t : taskList) {
             model.addTask(t);
@@ -423,12 +422,15 @@ public class LogicManagerTest {
          * with the same parameter values guarantees the returned task will have
          * the same state. Each unique seed will generate a unique Task object.
          *
+         * Assumes maximally 9 Tasks are generated. //TODO: extend support for >9 Tasks
+         *
          * @param seed
          *            used to generate the task data field values
          */
         Task generateTask(int seed) throws Exception {
-            return new Task(new Name("Task " + seed), new Date("" + Math.abs(seed)),
-                    new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))));
+            String seedDate = "00/00/000" + String.valueOf(seed);
+            return new Task(new Name("Task " + seed), new Date("" + seedDate),
+                    new UniqueTagList(new Tag("tag" + seed), new Tag("tag" + (seed + 1))));
         }
 
         /** Generates the correct add command based on the task given */
@@ -524,7 +526,7 @@ public class LogicManagerTest {
          * dummy values.
          */
         Task generateTaskWithName(String name) throws Exception {
-            return new Task(new Name(name), new Date("00/00/0000"), new UniqueTagList(new Tag("tag")));
+            return new Task(new Name(name), new Date("11/11/1111"), new UniqueTagList(new Tag("tag")));
         }
     }
 }
