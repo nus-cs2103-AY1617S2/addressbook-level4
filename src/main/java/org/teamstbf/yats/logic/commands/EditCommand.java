@@ -12,7 +12,9 @@ import org.teamstbf.yats.model.item.Periodic;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
 import org.teamstbf.yats.model.item.Timing;
 import org.teamstbf.yats.model.item.Title;
+import org.teamstbf.yats.model.item.Task;
 import org.teamstbf.yats.model.item.Deadline;
+import org.teamstbf.yats.model.item.ReadOnlyItem;
 import org.teamstbf.yats.model.item.UniqueItemList;
 import org.teamstbf.yats.model.tag.UniqueTagList;
 
