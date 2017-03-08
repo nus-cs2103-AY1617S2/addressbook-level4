@@ -372,6 +372,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* ` | user | set task reminders | remind myself of certain tasks
 `* ` | user | sync the  to my google calendar | sync the tasks with the calendar and get notified
 `* ` | user | specify the location of the storage file | save the data to the location of my preference
+`* ` | international user | specify the timezone of task | keep track of tasks due across different timezones
 
 {More to be added}
 
