@@ -9,8 +9,11 @@ import t16b4.yats.commons.exceptions.IllegalValueException;
 import t16b4.yats.model.item.Description;
 import t16b4.yats.model.item.Email;
 import t16b4.yats.model.item.Event;
+import t16b4.yats.model.item.Location;
+import t16b4.yats.model.item.Periodic;
 import t16b4.yats.model.item.Title;
 import t16b4.yats.model.item.Task;
+import t16b4.yats.model.item.Timing;
 import t16b4.yats.model.item.Phone;
 import t16b4.yats.model.item.ReadOnlyEvent;
 import t16b4.yats.model.item.ReadOnlyItem;
@@ -23,14 +26,24 @@ import t16b4.yats.model.tag.UniqueTagList;
 public class XmlAdaptedPerson {
 
     @XmlElement(required = true)
-    private String name;
+    private String title;
     @XmlElement(required = true)
-    private String phone;
+    private String location;
     @XmlElement(required = true)
-    private String email;
+    private String period;
     @XmlElement(required = true)
-    private String address;
+    private String startTime;
+    @XmlElement(required = true)
+    private String endTime;
+    @XmlElement(required = true)
+    private String description;
+    
 
+    /**
+     * The returned TagList is a deep copy of the internal TagList,
+     * changes on the returned list will not affect the person's internal tags.
+     */
+    UniqueTagList getTags();
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
@@ -47,8 +60,12 @@ public class XmlAdaptedPerson {
      * @param source future changes to this will not affect the created XmlAdaptedPerson
      */
     public XmlAdaptedPerson(ReadOnlyEvent source) {
-        name = source.getTitle().fullName;
-        address = source.getDescription().value;
+        title = source.getTitle().fullName;
+        location = source.getLocation().value;
+        period = source.getPeriod().value;
+        startTime = source.getStartTime().value;
+        endTime = source.getEndTime().value;
+        description = source.getDescription().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -65,8 +82,13 @@ public class XmlAdaptedPerson {
         for (XmlAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
         }
-        final Description address = new Description(this.address);
+        final Title title = new Title(this.title);
+        final Location location = new Location(this.location);
+        final Periodic period = new Periodic(this.period);
+        final Timing startTime = new Timing(this.startTime);
+        final Timing endTime = new Timing(this.endTime);
+        final Description description = new Description(this.description);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Event();
+        return new Event(title,location,period,startTime,endTime,description,tags);
     }
 }

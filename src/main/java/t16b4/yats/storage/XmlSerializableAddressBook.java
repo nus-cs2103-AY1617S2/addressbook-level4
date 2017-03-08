@@ -19,13 +19,13 @@ import t16b4.yats.model.item.ReadOnlyItem;
 import t16b4.yats.model.tag.Tag;
 
 /**
- * An Immutable AddressBook that is serializable to XML format
+ * An Immutable TaskManager that is serializable to XML format
  */
-@XmlRootElement(name = "addressbook")
+@XmlRootElement(name = "YATS")
 public class XmlSerializableAddressBook implements ReadOnlyTaskManager {
 
     @XmlElement
-    private List<XmlAdaptedPerson> persons;
+    private List<XmlAdaptedPerson> tasks;
     @XmlElement
     private List<XmlAdaptedTag> tags;
 
@@ -34,7 +34,7 @@ public class XmlSerializableAddressBook implements ReadOnlyTaskManager {
      * This empty constructor is required for marshalling.
      */
     public XmlSerializableAddressBook() {
-        persons = new ArrayList<>();
+        tasks = new ArrayList<>();
         tags = new ArrayList<>();
     }
 
@@ -43,13 +43,13 @@ public class XmlSerializableAddressBook implements ReadOnlyTaskManager {
      */
     public XmlSerializableAddressBook(ReadOnlyTaskManager src) {
         this();
-        persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        tasks.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
     }
 
     @Override
     public ObservableList<ReadOnlyEvent> getPersonList() {
-        final ObservableList<Event> persons = this.persons.stream().map(p -> {
+        final ObservableList<Event> persons = this.tasks.stream().map(p -> {
             try {
                 return p.toModelType();
             } catch (IllegalValueException e) {
