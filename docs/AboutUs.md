@@ -6,7 +6,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 #### [Lee Jun Han Bryan](https://github.com/bryanleejh) <br>
 <img src="https://avatars3.githubusercontent.com/u/12642495?v=3&s=460" width="150"><br>
-Role: Team lead 
+Role: Team lead <br>
 Responsibilities: Deliverables and deadlines, Scheduling and tracking <br>
 * Components in charge of: Model, Logic
 * Aspects/tools in charge of:
@@ -20,7 +20,7 @@ Responsibilities: Deliverables and deadlines, Scheduling and tracking <br>
 
 #### [Aris Huynh](xxx)
 <img src="xxx" width="150"><br>
-Role: Developer
+Role: Developer <br>
 Responsibilities: Testing, Integration  <br>  
 * Components in charge of: GUI, Logic
 * Aspects/tools in charge of:
@@ -32,7 +32,7 @@ Responsibilities: Testing, Integration  <br>
 
 #### [Wang Yu](xxx)
 <img src="https://avatars2.githubusercontent.com/u/25194446?v=3&s=460" width="150"><br>
-Role: Developer
+Role: Developer <br>
 Responsibilities: Documentation, Code Quality <br>  
 * Components in charge of: Model, Storage
 * Aspects/tools in charge of:
@@ -42,9 +42,9 @@ Responsibilities: Documentation, Code Quality <br>
 
 -----
 
-#### [He Yang](xxx)
-<img src="xxx" width="150"><br>
-Role: Developer
+#### [Zhang HeYang](https://github.com/zhypaul)
+<img src="https://avatars2.githubusercontent.com/u/25544025?v=3&s=460" width="150"><br>
+Role: Developer <br>
 Responsibilities: Code Quality <br>  
 * Components in charge of: Storage
 * Aspects/tools in charge of:
