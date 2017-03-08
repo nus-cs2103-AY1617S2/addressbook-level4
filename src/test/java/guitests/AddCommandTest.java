@@ -23,7 +23,7 @@ public class AddCommandTest extends ToDoListGuiTest {
         //add another person
         personToAdd = td.ida;
         assertAddSuccess(personToAdd, currentList);
-        currentList = TestUtil.addPersonsToList(currentList, personToAdd);
+        currentList = TestUtil.addPersonsToLit(currentList, personToAdd);
 
         //add duplicate person
         commandBox.runCommand(td.hoon.getAddCommand());
