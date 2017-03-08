@@ -31,7 +31,7 @@ public class TestTodo implements ReadOnlyTodo {
      * Constructor for a floating task
      */
     public TestTodo(Name name, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, starttime, endtime, tags);
+        assert !CollectionUtil.isAnyNull(name, tags);
         this.name = name;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
@@ -40,20 +40,23 @@ public class TestTodo implements ReadOnlyTodo {
      * Constructor for a scheduled task
      */
     public TestTodo(Name name, Date starttime, Date endtime, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, starttime, endtime, tags);
+        assert !CollectionUtil.isAnyNull(name, tags);
         this.name = name;
-        this.starttime = starttime;
-        this.endtime = endtime;
+        if(starttime != null && endtime != null) {
+        	this.starttime = starttime;
+        	this.endtime = endtime;
+        }
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
     /**
      * Creates a copy of the given ReadOnlyTodo.
      */
-    public TestTodo(ReadOnlyTodo source) {
-        this(source.getName(), source.getStartTime(), source.getEndTime(), source.getTags());
+    
+    public TestTodo(ReadOnlyTodo source) {    	
+    		this(source.getName(), source.getStartTime(), source.getEndTime(), source.getTags());
     }
-
+    
     public void setName(Name name) {
         assert name != null;
         this.name = name;

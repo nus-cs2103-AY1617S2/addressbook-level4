@@ -22,7 +22,7 @@ public class EditCommandTest extends TodoListGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby p/91234567 e/bobby@gmail.com a/Block 123, Bobby Street 3 t/husband";
+        String detailsToEdit = "Bobby t/husband";
         int addressBookIndex = 1;
 
         TestTodo editedTodo = new TodoBuilder().withName("Bobby").withTags("husband").build();
@@ -45,10 +45,10 @@ public class EditCommandTest extends TodoListGuiTest {
     public void edit_clearTags_success() throws Exception {
         String detailsToEdit = "t/";
         int addressBookIndex = 2;
-
+        //commandBox.runCommand("edit " + "1" + " t/aaa" );
         TestTodo todoToEdit = expectedTodosList[addressBookIndex - 1];
         TestTodo editedTodo = new TodoBuilder(todoToEdit).withTags().build();
-
+     
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTodo);
     }
 
@@ -95,8 +95,7 @@ public class EditCommandTest extends TodoListGuiTest {
 
     @Test
     public void edit_duplicateTodo_failure() {
-        commandBox.runCommand("edit 3 Alice Pauline p/85355255 e/alice@gmail.com "
-                                + "a/123, Jurong West Ave 6, #08-111 t/friends");
+        commandBox.runCommand("edit 3 Alice Pauline t/friends");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TODO);
     }
 
@@ -111,7 +110,8 @@ public class EditCommandTest extends TodoListGuiTest {
      */
     private void assertEditSuccess(int filteredTodoListIndex, int addressBookIndex,
                                     String detailsToEdit, TestTodo editedTodo) {
-        commandBox.runCommand("edit " + filteredTodoListIndex + " " + detailsToEdit);
+
+    	commandBox.runCommand("edit " + filteredTodoListIndex + " " + detailsToEdit);
 
         // confirm the new card contains the right data
         TodoCardHandle editedCard = todoListPanel.navigateToTodo(editedTodo.getName().fullName);
@@ -120,6 +120,9 @@ public class EditCommandTest extends TodoListGuiTest {
         // confirm the list now contains all previous todos plus the todo with updated details
         expectedTodosList[addressBookIndex - 1] = editedTodo;
         assertTrue(todoListPanel.isListMatching(expectedTodosList));
+        
+        //edit result didn't show in display
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TODO_SUCCESS, editedTodo));
+        
     }
 }

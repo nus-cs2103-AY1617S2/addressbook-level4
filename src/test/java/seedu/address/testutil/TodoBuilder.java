@@ -28,10 +28,11 @@ public class TodoBuilder {
     }
 
     public TodoBuilder withTags(String ... tags) throws IllegalValueException {
-        todo.setTags(new UniqueTagList());
+        UniqueTagList tempList = new UniqueTagList();
         for (String tag: tags) {
-            todo.getTags().add(new Tag(tag));
+            tempList.add(new Tag(tag));
         }
+        todo.setTags(tempList);
         return this;
     }
     

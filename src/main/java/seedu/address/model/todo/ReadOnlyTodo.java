@@ -22,7 +22,7 @@ public interface ReadOnlyTodo {
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
-     * didn't check startTime and endTime
+     * didn't check for startTime and endTime
      */
     default boolean isSameStateAs(ReadOnlyTodo other) {
         return other == this // short circuit if same object
