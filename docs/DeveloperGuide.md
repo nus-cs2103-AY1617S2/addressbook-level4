@@ -341,86 +341,175 @@ b. Require developers to download those libraries manually (this creates extra w
 
 ## Appendix A : User Stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
+Priorities: Highest (must have) - `* * * * *` to Lowest (unlikely to have) - `*`
 
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | new user | view more information about a particular command | so that I can learn how to use various commands
-`* * *` | user | set a task by specifying a deadline | know when the task is due
-`* * *` | user | add a task with a start time and end time | record tasks that are events
-`* * *` | user | add a task by specifying a task description only | record tasks that need to be done ¡®some day¡¯
-`* * *` | user | delete a task | get rid of tasks that I no longer care to track
-`* * *` | user | mark a task as done so that the task will not appear in my to-do list anymore
-`* * *` | user | unmark tasks previously marked as done to edit the task status
-`* * *` | user | edit the deadline of a specific task when the deadline of a task changes
-`* * *` | user | edit the task descriptions | change the descriptions when I get new information
-`* * *` | user | list tasks that are due within the day, week or month | have an overview of my schedule and decide what needs to be done soon
-`* * *` | user | search and list out all the tasks containing the keyword(s)
-`* * *` | user | undo my most recent action so that my mistakes are not permanent
-`* * *` | advanced user | use shorter versions of a command | type a command faster
-`* * *` | advanced user | specify which folder I want to save the files in | have easy access to the tasks just by sharing the files
-`* *` | user | set tasks to repeat over a specified interval | manage recurring tasks
-`* *` | user | add additional details or subtasks to a task | record tasks in detail
-`* *` | user | expand or collapse the additional details or subtasks of a task | prevent the task list from becoming very cluttered
-`* *` | user | add location details to events | I know where the event is taking place
-`* *` | user | be notified if the time period an event I am adding clashes or overlaps with another event already added | reschedule the event to another free time slot if needed
-`* *` | user | assign tags to the tasks | organise them properly
-`* *` | user | indicate the priority of a task | see which tasks are more urgent or important
-`* *` | user | add a ¡°VERY IMPORTANT¡± Task to be shown whenever I open up the task list
-`* *` | user | colour code my tasks | I can differentiate tasks better
-`* *` | user | add icons to my tasks | quickly tell what kind of tasks I have
-`* *` | user | organise my tasks into different sections | view only the tasks that are relevant to the situation
-`* *` | user | pin tasks such that they automatically go to the top of the list and stay there
-`* *` | user | list the deadline tasks by date | know which are the most urgent.
-`* *` | user | list tasks by tags | see what are the tasks under a specific category. 
-`* *` | user | list tasks by priority | know which are the most urgent tasks. 
-`* *` | user | view the list of tasks that I have completed | unmark completed tasks if necessary.
-`* *` | user | reorder my tasks | reorder floating tasks.
+
+`* * * * *` | user | add a task by specifying task description only | record tasks that need to be done some day
+`* * * * *` | user | add a task with a specific deadline | know when the task is due
+`* * * * *` | user | add an event with a start and end time | record tasks that are events
+`* * * * *` | user | list tasks that are due within the day, week or month | have an overview of my schedule and decide what needs to be done soon
+`* * * * *` | user | edit the deadline of a specific task | keep my task manager up to date with any changes
+`* * * * *` | user | edit the task descriptions | make corrections or updates to the task description
+`* * * * *` | user | delete a task | get rid of tasks that I no longer care to track
+`* * * * *` | user with many tasks | search keyword(s) | find all the tasks that are similar or relevant to the keyword
+
+`* * * *` | user | mark a task as done | remove the task from my to-do list
+`* * * *` | user | unmark tasks previously marked as done | edit the task status
+`* * * *` | user | undo my most recent action | reverse any mistake made in the previous step
+`* * * *` | advanced user | use shorter versions of a command | type a command faster
+`* * * *` | advanced user | specify which folder I want to save the files in | have easy access to the tasks just by sharing the files
+`* * * *` | new user | see usage instructions | refer to instructions when I forget how to use the programme
+`* * * *` | new user | view more information about a particular command | so that I can learn how to use various commands
+
+`* * *` | user | set tasks to repeat over a specified interval | manage recurring tasks
+`* * *` | user | add additional details or subtasks to a task | record tasks in detail
+`* * *` | user | be notified if the time period an event I am adding clashes or overlaps with another event already added | reschedule the event to another free time slot if needed
+`* * *` | user | assign tags to the tasks | organise them properly
+`* * *` | user | indicate the priority of a task | see which tasks are more urgent or important
+`* * *` | user | list the deadline tasks by date | know which are the most urgent.
+`* * *` | user | list tasks by tags | see what are the tasks under a specific category. 
+`* * *` | user | list tasks by priority | know which are the most urgent tasks. 
+`* * *` | user | view the list of tasks that I have completed | unmark completed tasks if necessary.
+
 `* *` | user | search better with auto complete | search better.
-`* *` | user | search for empty time periods | schedule my tasks with minimal overlap or clashes in deadlines.
+`* *` | user | enable auto spell checker to correct any spelling mistakes I might make when typing commands.
+`* *` | advanced user | add default keywords to my interface | customize it according to the vocabulary that I am most comfortable with.
+`* *` | advanced user | be able to use shortcut keys to execute commands that I commonly use (Eg. Ctrl+z for undoing)| do things faster and more efficiently. 
+`* *` | advanced user | change the layout of my UI (eg. background colour, font size) | customize it according to my preference.
 `* *` | user | receive flavour text when I mark a task as complete such as ¡°Good job!¡± And ¡°Another one off the list!¡±
 `* *` | user | receive sound effects when I mark a task as completed | give myself more motivation to complete my tasks.
-`* *` | user | share my completed task on social media | let my friends know if I have accomplished something I'm proud of. 
+`* *` | advanced user | view a log of my history | track all the commands I have entered since the start of time.
 `* *` | user | export the tasks to a calendar file for use with other apps.
-`* *` | user | sync my task list with my other devices | access my task list easily.
-`* *` | user | sync the tasks with my email | create tasks automatically from incoming emails.
-`* *` | user | set up email notifications for specific tasks | get email reminders for when a task is due soon. 
-`* *` | user | enable auto spell checker to correct any spelling mistakes I might make when typing commands.
-`* *` | advanced user | change the layout of my UI (eg. background colour, font size) | customize it according to my preference.
-`* *` | advanced user | add default keywords to my interface | customize it according to the vocabulary that I am most comfortable with. 
-`* *` | advanced user | be able to use shortcut keys to execute commands that I commonly use so that I can do things faster and more efficiently. (Eg. Ctrl+z for undoing)
-`* *` | advanced user | view a log of my history so that I can track all the commands I have entered since the start of time.
-`*` | user that works with a lot of other people | share my task list with other people | view and work on the tasks as a group.
+
+`*` | user | add location details to events | I know where the event is taking place
+`*` | user | colour code my tasks | I can differentiate tasks better`*` | user | search for empty time periods | schedule my tasks with minimal overlap or clashes in deadlines.
+`*` | user | add icons to my tasks | quickly tell what kind of tasks I have
+`*` | user | reorder my tasks | reorder floating tasks.
+`*` | user | organise my tasks into different sections | view only the tasks that are relevant to the situation
+`*` | user | pin tasks such that they automatically go to the top of the list and stay there
+`*` | user | add a "VERY IMPORTANT" Task to be shown whenever I open up the task list
+`*` | user | expand or collapse the additional details or subtasks of a task | prevent the task list from becoming very cluttered
+`*` | user | sync my task list with my other devices | access my task list easily.
+`*` | user | sync the tasks with my email | create tasks automatically from incoming emails.
+`*` | user | set up email notifications for specific tasks | get email reminders for when a task is due soon. 
+`*` | user who collaborates with many people | share my task list with other people | view and work on the tasks as a group.
+`*` | user | share my completed task on social media | let my friends know if I have accomplished something I'm proud of. 
 
 
 ## Appendix B : Use Cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: Add task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User inputs task details
+2. TaskList shows updated task list <br>
 Use case ends.
 
 **Extensions**
 
-2a. The list is empty
+1a. User adds time period for event which overlaps with time period of existing event
 
-> Use case ends
-
-3a. The given index is invalid
-
-> 3a1. AddressBook shows an error message <br>
+> 1a1. TaskList shows an error message and prompts user to edit time period of event
+> 1a2. User inputs task details <br>
+Steps 1a1-1a2 are repeated until the time period of event entered is valid
   Use case resumes at step 2
 
-{More to be added}
+#### Use case: Delete task
+
+**MSS**
+
+1. User selects task to delete
+2. TaskList asks for user confirmation
+3. User confirms deletion
+4. TaskList deletes task and shows updated task list <br>
+Use case ends.
+
+**Extensions**
+
+3a. User cancels deletion
+> Use case ends
+
+#### Use case: Mark task
+
+**MSS**
+
+1. User marks a task
+2. TaskList moves task from task list to list of completed tasks and shows updated task list <br>
+Use case ends.
+
+#### Use case: Unmark task
+
+**MSS**
+
+1. User unmarks a task
+2. TaskList moves task from list of completed tasks back to current task list and shows updated task list <br>
+Use case ends.
+
+#### Use case: Edit task details (includes deadline)
+
+**MSS**
+
+1. User selects task to edit
+2. TaskList shows task details
+3. User edits task details
+4. TaskList shows updated task details <br>
+Use case ends.
+
+**Extensions**
+
+3a. New time period of event added overlaps with time period of existing event
+
+> 3a1. TaskList shows an error message and prompts user to edit time period of event
+> 3a2. User inputs task details <br>
+Steps 3a1-3a2 are repeated until the time period of event entered is valid
+  Use case resumes at step 4	
+
+#### Use case: View by deadlines
+
+**MSS**
+
+1. User selects time filter to filter the deadlines of the task list by 
+2. TaskList displays tasks that are due within the timeline specified by the filter <br>
+  Use case ends.
+
+#### Use case: Change UI layout
+
+**MSS**
+
+1. User requests to change UI layout
+2. TaskList shows UI layout features that can be customised
+3. User edits UI layout features
+4. TaskList shows a preview and asks for confirmation
+5. User confirms changes to UI layout
+6. TaskList returns to user’s previous screen <br>
+Use case ends.
+
+#### Use case: Add default keywords
+
+**MSS**
+
+1. User requests to add default keywords
+2. TaskList displays a list of TaskList functions and their keywords
+3. User selects function to add a keyword to
+4. TaskList asks for keyword
+5. User inputs keyword
+6. TaskList shows updated list of TaskList functions and their keywords <br>
+Use case ends.
+
+**Extensions**
+
+5a. Keyword already in use
+
+> 5a1. TaskList shows an error message and asks users for keyword again
+> 5a2. User inputs keyword
+Steps 5a1-5a2 are repeated until the keyword entered is valid
+  Use case resumes at step 6
 
 ## Appendix C : Non Functional Requirements
 
@@ -508,4 +597,28 @@ Pros:
 Cons:
 
 * Requires internet connection to use.
+
+**Wunderlist**
+
+Pros:
+
+* Able to repeat tasks with customisable frequency (days, weeks, months, years)
+* Able to add subtasks, notes and files
+* Can star a task with the option of making it automatically go to the top of the list
+* List can be subsumed under folders
+* Can enable sound effects for notifications or upon completion of a task
+* User is able to make a Feature Request to Wunderlist
+* Able to snooze reminders for a customisable time
+* Able to have email, push and desktop notifications
+* Able to sync due dates with any calendar that supports the iCalendar format
+* Has both a mobile and desktop application that can work offline
+* Able to duplicate list
+* Able to customise shortcuts 
+* Able to specify preferred formats for the data, time and start of the week
+* Able to restore deleted lists
+* Able to print list
+
+Cons:
+* Priority is based on due dates only, tasks cannot be sorted into broad priority categories
+* Lacks colour coding of tasks
 
