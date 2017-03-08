@@ -21,7 +21,7 @@ public class ListCommandParser {
 			case (ListCommand.COMMAND_WORD_SUFFIX_TAG): 
 			}
 		}
-		return null;
+		return new ListCommand();
 	}
 }
 
