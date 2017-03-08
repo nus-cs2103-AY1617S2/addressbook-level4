@@ -175,11 +175,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         tasks.forEach(this::syncMasterTagListWith);
     }
     
-    public boolean removePerson(ReadOnlyPerson key) throws UniquePersonList.PersonNotFoundException {
-        if (persons.remove(key)) {
+    public boolean removeTask(Task key) throws UniqueTaskList.TaskNotFoundException {
+        if (tasks.remove(key)) {
             return true;
         } else {
-            throw new UniquePersonList.PersonNotFoundException();
+            throw new UniqueTaskList.TaskNotFoundException();
         }
     }
 
@@ -205,6 +205,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Tag> getTagList() {
         return new UnmodifiableObservableList<>(tags.asObservableList());
+    }
+    
+    @Override
+    public ObservableList<Task> getTaskList() {
+        return new UnmodifiableObservableList<>(tasks.asObservableList());
     }
 
     @Override

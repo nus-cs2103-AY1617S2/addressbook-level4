@@ -26,6 +26,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final AddressBook addressBook;
     private final FilteredList<ReadOnlyPerson> filteredPersons;
+    private final FilteredList<Task> filteredTasks;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -61,8 +62,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void deletePerson(ReadOnlyPerson target) throws PersonNotFoundException {
-        addressBook.removePerson(target);
+    public synchronized void deleteTask(Task target) throws UniqueTaskList.TaskNotFoundException {
+        addressBook.removeTask(target);
         indicateAddressBookChanged();
     }
     

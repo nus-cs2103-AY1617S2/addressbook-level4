@@ -4,6 +4,7 @@ package seedu.address.model;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
 
 /**
  * Unmodifiable view of an address book

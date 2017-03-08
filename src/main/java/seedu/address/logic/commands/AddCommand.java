@@ -18,7 +18,7 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to TaskIt. "
             + "Parameters: TITLE [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
             + " Finish SWE project t/school";
