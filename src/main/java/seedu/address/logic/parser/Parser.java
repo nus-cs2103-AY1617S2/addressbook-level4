@@ -46,7 +46,10 @@ public class Parser {
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
-
+        case AddCommand.COMMAND_WORD2:
+            return new AddCommandParser().parse(arguments);
+        case AddCommand.COMMAND_WORD3:
+            return new AddCommandParser().parse(arguments);
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
