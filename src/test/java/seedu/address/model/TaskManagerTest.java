@@ -1,6 +1,8 @@
 package seedu.address.model;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +19,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.label.Label;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 import seedu.address.testutil.TypicalTestTasks;
 
 public class TaskManagerTest {
@@ -59,15 +62,39 @@ public class TaskManagerTest {
 
     @Test
     public void resetData_withDuplicateLabels_throwsAssertionError() {
-        TaskManager typicalAddressBook = new TypicalTestTasks().getTypicalAddressBook();
-        List<ReadOnlyTask> newTasks = typicalAddressBook.getTaskList();
-        List<Label> newLabels = new ArrayList<>(typicalAddressBook.getLabelList());
+        TaskManager typicalTaskManager = new TypicalTestTasks().getTypicalAddressBook();
+        List<ReadOnlyTask> newTasks = typicalTaskManager.getTaskList();
+        List<Label> newLabels = new ArrayList<>(typicalTaskManager.getLabelList());
         // Repeat the first label twice
         newLabels.add(newLabels.get(0));
         AddressBookStub newData = new AddressBookStub(newTasks, newLabels);
 
         thrown.expect(AssertionError.class);
         taskManager.resetData(newData);
+    }
+
+    @Test
+    public void taskManager_TestHashCode() {
+        TaskManager typicalTaskManager = new TypicalTestTasks().getTypicalAddressBook();
+        assertTrue(typicalTaskManager.hashCode() == typicalTaskManager.hashCode());
+    }
+
+    @Test
+    public void taskManager_TestEquals() throws TaskNotFoundException {
+        TaskManager typicalTaskManager1 = new TypicalTestTasks().getTypicalAddressBook();
+        TaskManager typicalTaskManager2 = new TypicalTestTasks().getTypicalAddressBook();
+
+        //Test equal if contain the same stuff
+        assertTrue(typicalTaskManager1.equals(typicalTaskManager1));
+        assertTrue(typicalTaskManager1.equals(typicalTaskManager2));
+
+        //Test different
+        //remove first element in typicalTaskManager2
+        typicalTaskManager2.removeTask(typicalTaskManager2.getTaskList().get(0));
+        assertFalse(typicalTaskManager1.equals(typicalTaskManager2));
+
+        //Test null
+        assertFalse(typicalTaskManager1.equals(null));
     }
 
     /**
