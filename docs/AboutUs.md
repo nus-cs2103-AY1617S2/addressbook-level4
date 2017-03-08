@@ -5,28 +5,28 @@ We are a team based in the [School of Computing, National University of Singapor
 ## Project Team
 
 #### [Dana Baghabrah](http://github.com/danab101)
-<img src="images/danab101.jpg" width="150"><br>
+<img src="images/danab101.png" width="150"><br>
 Role: Developer <br>
 Responsibilities: 
 
 -----
 
 #### [Francis Cheng](http://github.com/francischeng070)
-<img src="images/francischeng070.jpg" width="150"><br>
+<img src="images/francischeng070.png" width="150"><br>
 Role: Developer <br>
 Responsibilities: 
 
 -----
 
 #### [Wong Jun Wei](http://github.com/wjunwei94)
-<img src="images/wjunwei94.jpg" width="150"><br>
+<img src="images/wjunwei94.png" width="150"><br>
 Role: Developer <br>
 Responsibilities: 
 
 -----
 
-#### [LEONG WEI WEN](https://github.com/lwwenz)
-<img src="images/lwwenz.jpg" width="150"><br>
+#### [Leong Wei Wen](https://github.com/lwwenz)
+<img src="images/lwwenz.png" width="150"><br>
  Role: Developer <br>
  Responsibilities: 
 
