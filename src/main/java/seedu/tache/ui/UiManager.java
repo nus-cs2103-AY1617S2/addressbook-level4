@@ -15,7 +15,7 @@ import seedu.tache.commons.core.Config;
 import seedu.tache.commons.core.LogsCenter;
 import seedu.tache.commons.events.storage.DataSavingExceptionEvent;
 import seedu.tache.commons.events.ui.JumpToListRequestEvent;
-import seedu.tache.commons.events.ui.PersonPanelSelectionChangedEvent;
+import seedu.tache.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.tache.commons.events.ui.ShowHelpRequestEvent;
 import seedu.tache.commons.util.StringUtil;
 import seedu.tache.logic.Logic;
@@ -26,7 +26,7 @@ import seedu.tache.model.UserPrefs;
  */
 public class UiManager extends ComponentManager implements Ui {
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
-    private static final String ICON_APPLICATION = "/images/address_book_32.png";
+    private static final String ICON_APPLICATION = "/images/tache.png";
     public static final String ALERT_DIALOG_PANE_FIELD_ID = "alertDialogPane";
 
     private Logic logic;
@@ -116,13 +116,13 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.getPersonListPanel().scrollTo(event.targetIndex);
+        mainWindow.getTaskListPanel().scrollTo(event.targetIndex);
     }
 
     @Subscribe
-    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
+    private void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.loadPersonPage(event.getNewSelection());
+        mainWindow.loadTaskPage(event.getNewSelection());
     }
 
 }
