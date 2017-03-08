@@ -43,6 +43,6 @@ public interface Model {
     void updateFilteredListToShowAll();
 
     /** Updates the filter of the filtered person list to filter by the given keywords*/
-    void updateFilteredPersonList(Set<String> keywords);
+    void updateFilteredTaskList(Set<String> keywords);
 
 }
