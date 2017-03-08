@@ -3,13 +3,13 @@
 This product is a tool to accept natural language commands via keyboards to manage the user's schedule and todo tasks.
 
 * [Start the program](#start-the-program)
-* [Commands](#Commands)
+* [Commands](#commands)
 	* [help](#view-help--help)
-	* [add](#add-a-task--add)
-	* [delete](#delete-a-task--delete)
-	* [find](#find-a-task--find)
+	* [add](#add-a-task-add)
+	* [delete](#delete-a-task-delete)
+	* [find](#find-a-task-find)
 	* [list](#list-tasks--list)
-	* [update](#update-a-task--update)
+	* [update](#update-a-task-update)
 	* [exit](#exit-the-program--exit)
 	* [save](#save-the-data)
 * [Command Summary](#command-summary)
