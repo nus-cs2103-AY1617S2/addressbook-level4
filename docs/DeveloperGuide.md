@@ -283,158 +283,40 @@ b. Require developers to download those libraries manually (this creates extra w
 
 Priorities: High (must have) - \* \* \*, Medium (nice to have) - \* \*, Low (unlikely to have) - \*
 
-<table>
-  <tr>
-    <td>Priority</td>
-    <td>As a ...</td>
-    <td>I want to ...</td>
-    <td>So that I can...</td>
-  </tr>
-  <tr>
-    <td>* * *</td>
-    <td>new user</td>
-    <td>see usage instructions</td>
-    <td>refer to instructions when I forget how to use the App</td>
-  </tr>
-  <tr>
-    <td>* * *</td>
-    <td>new user</td>
-    <td>specify file location for the data storage</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>* * *</td>
-    <td>user</td>
-    <td>add a new task</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>* * *</td>
-    <td>user</td>
-    <td>list unfinished tasks</td>
-    <td>see all the tasks I have yet to complete</td>
-  </tr>
-  <tr>
-    <td>* * *</td>
-    <td>user</td>
-    <td>update a task</td>
-    <td>change the task name, start and end time in case of a mistake or change of plans</td>
-  </tr>
-  <tr>
-    <td>* * *</td>
-    <td>user</td>
-    <td>add a ending time to a task</td>
-    <td>dynamically change a task into a deadline</td>
-  </tr>
-  <tr>
-    <td>* * *</td>
-    <td>user</td>
-    <td>update the ending time for a task</td>
-    <td>postpone an unfinished task</td>
-  </tr>
-  <tr>
-    <td>* * *</td>
-    <td>user</td>
-    <td>mark a task as done or undone</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>* * *</td>
-    <td>user</td>
-    <td>delete a task</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>* * *</td>
-    <td>user</td>
-    <td>undo previous command</td>
-    <td>revert the most recent command</td>
-  </tr>
-  <td>* * *</td>
-    <td>user with many tasks</td>
-    <td>search the tasks by name</td>
-    <td>find a specific task without listing all of them</td>
-  </tr>
-  <tr>
-    <td>* * *</td>
-    <td>user</td>
-    <td>change file location for the data storage</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>* * *</td>
-    <td>advanced user</td>
-    <td>use short versions of commands</td>
-    <td>type a command faster</td>
-  </tr>
-  <tr>
-    <tr>
-    <td>* *</td>
-    <td>user</td>
-    <td>redo last undo command</td>
-    <td>revert the most recent undo command</td>
-  </tr>
-  <tr>
-    <td>* * </td>
-    <td>user</td>
-    <td>make a task recurring</td>
-    <td>have the same task repeat itself over a specified duration without manually adding all of them</td>
-  </tr>
-  <tr>
-    <td>* * </td>
-    <td>user with many tasks</td>
-    <td>list all tasks within a time period</td>
-    <td>find tasks within a time period without listing all of them</td>
-  </tr>
-  <tr>
-    <td>* * </td>
-    <td>user </td>
-    <td>see summary of all tasks for the day</td>
-    <td>see an overview of tasks for the day</td>
-  </tr>
-  <tr>
-    <td>* * </td>
-    <td>user</td>
-    <td>list upcoming tasks for the week</td>
-    <td>see all the upcoming tasks from now till the end of the week</td>
-  </tr>
-  <tr>
-    <td>* *</td>
-    <td>user</td>
-    <td>add description to a task</td>
-    <td>have miscellaneous details not clutter the task title</td>
-  </tr>
-  <tr>
-    <td>* *</td>
-    <td>user</td>
-    <td>add venue to a task</td>
-    <td>see location that task takes place</td>
-  </tr>
-  <tr>
-    <td>* *</td>
-    <td>user</td>
-    <td>automatically mark a task as overdue</td>
-    <td>mark an task as overdue when deadline is past</td>
-  </tr>
-  <tr>
-    <td>* </td>
-    <td>user</td>
-    <td>add multiple time periods to a task</td>
-    <td>confirm the exact start and end time for the task later</td>
-  </tr>v
-  <tr>
-    <td>* </td>
-    <td>user with many tasks</td>
-    <td>list all upcoming tasks at a particular location</td>
-    <td>see tasks to be completed at a particular location</td>
-  </tr>
-  <tr>
-    <td>* </td>
-    <td>user who also uses Google Calendar</td>
-    <td>sync tasks to Google Calendar</td>
-    <td>see existing tasks and add local tasks to Google Calendar</td>
-  </tr>
-</table>
+| Priority | As a ... | I want to ... | So that I can... |
+|--- | :--- | :--- | :--- |
+| `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App |
+| `* * *` | user | add a new task with tile | add a floating task | 
+| `* * *` | user | add a new task with tile and ending time| set a deadline for the task |
+| `* * *` | user | add a new task with tile, starting time and ending time| add an event | 
+| `* * *` | user | list tasks| have a look at all my tasks |
+| `* * *` | user | list unfinished tasks | see all the tasks I have yet to complete |
+| `* * *` | user | update title, starting time or ending time of a task | change the task title, starting and ending time in case of a mistake or change of plans |
+| `* * *` | user | mark a task as done or undone | keep track of completeness of the task |
+| `* * *` | user | delete a task | forget about it |
+| `* * *` | user | undo previous command | revert the most recent command |
+| `* * *` | user | search the tasks by title | find a specific task without listing all of them |
+| `* * *` | user | change file location for the data storage |
+| `* * *` | user | type command parameters in arbitory order | have flexibility in typing commands |
+| `* * *` | advanced user | use short versions of commands | type a command faster |
+| `* *` | user | redo last undo command | revert the most recent undo command |
+| `* *` | user | redo last command | repeat the most recent command |
+| `* *` | user | add a recurring task | have the same task repeat itself over a specified duration without manually adding all of them |
+| `* *` | user | add a task with description | have miscellaneous details not clutter the task title |
+| `* *` | user | add a task with a venue | see location that task takes place |
+| `* *` | user | add a task with a tag | categorize the task |
+| `* *` | user | list upcoming tasks for the week | see all the upcoming tasks from now till the end of the week |
+| `* *` | user | list all tasks for the day | see an summary of tasks for the day |
+| `* *` | user | list all tasks having the same tags | see an summary of tasks for the category |
+| `* *` | user | search the tasks by descirption | find a specific task without listing all of them |
+| `* *` | user | search the tasks by venue | find a specific task without listing all of them |
+| `* *` | user | search tasks within a time period | find tasks within a time period without listing all of them |
+| `* *` | user | filter the listed or search results by title, description, time or tag | find a specific task without looking through all of them |
+| `* *` | user | set more than one filter for searching tasks | find desired tasks more easily |
+| `*` | user | add a task with multiple time periods | confirm the exact start and end time for the task later |
+| `*` | user | delete or update one of the multiple time periods of a task | update the exact start and end time for the task |
+| `*` | user | create an alias for a long command | save time typing |
+| `*` | user who also uses Google Calendar | sync tasks to Google Calendar | see existing tasks and add local tasks to Google Calendar |
 
 
 ## **Appendix B : Use Cases**
