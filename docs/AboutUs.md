@@ -6,7 +6,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 #### [Tan Yu Wei](http://github.com/loveandbejoyful) <br>
 <img src="images/TanYuWei.jpg" width="150"><br>
-**Role**: Team Lead, Testing, Deliverables and Deadlines, Scheduling and Tracking
+Role: Team Lead, Testing, Deliverables and Deadlines, Scheduling and Tracking
 Responsibilities: UI
 
 -----
