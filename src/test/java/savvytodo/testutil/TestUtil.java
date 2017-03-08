@@ -38,7 +38,7 @@ import savvytodo.model.task.Name;
 import savvytodo.model.task.Task;
 import savvytodo.model.task.Phone;
 import savvytodo.model.task.ReadOnlyTask;
-import savvytodo.storage.XmlSerializableAddressBook;
+import savvytodo.storage.XmlSerializableTaskManager;
 
 /**
  * A utility class for test cases.
@@ -127,7 +127,7 @@ public class TestUtil {
     }
 
     public static void createDataFileWithSampleData(String filePath) {
-        createDataFileWithData(generateSampleStorageAddressBook(), filePath);
+        createDataFileWithData(generateSampleStorageTaskManager(), filePath);
     }
 
     public static <T> void createDataFileWithData(T data, String filePath) {
@@ -144,8 +144,8 @@ public class TestUtil {
         createDataFileWithSampleData(TestApp.SAVE_LOCATION_FOR_TESTING);
     }
 
-    public static XmlSerializableAddressBook generateSampleStorageAddressBook() {
-        return new XmlSerializableAddressBook(new TaskManager());
+    public static XmlSerializableTaskManager generateSampleStorageTaskManager() {
+        return new XmlSerializableTaskManager(new TaskManager());
     }
 
     /**

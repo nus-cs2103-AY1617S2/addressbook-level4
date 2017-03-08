@@ -3,7 +3,7 @@ package savvytodo.model.task;
 import savvytodo.model.category.UniqueCategoryList;
 
 /**
- * A read-only immutable interface for a Task in the addressbook.
+ * A read-only immutable interface for a Task in the taskManager.
  * Implementations should guarantee: details are present and not null, field values are validated.
  */
 public interface ReadOnlyTask {

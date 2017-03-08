@@ -7,7 +7,7 @@ import org.junit.Test;
 import savvytodo.commons.core.Messages;
 import savvytodo.testutil.TestTask;
 
-public class FindCommandTest extends AddressBookGuiTest {
+public class FindCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void find_nonEmptyList() {

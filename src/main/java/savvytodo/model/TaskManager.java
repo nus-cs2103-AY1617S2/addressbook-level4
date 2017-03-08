@@ -90,7 +90,7 @@ public class TaskManager implements ReadOnlyTaskManager {
 
     /**
      * Updates the task in the list at position {@code index} with {@code editedReadOnlyTask}.
-     * {@code AddressBook}'s category list will be updated with the categorys of {@code editedReadOnlyTask}.
+     * {@code TaskManager}'s category list will be updated with the categorys of {@code editedReadOnlyTask}.
      * @see #syncMasterCategoryListWith(Task)
      *
      * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to

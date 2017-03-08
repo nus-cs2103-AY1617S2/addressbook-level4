@@ -21,30 +21,30 @@ import savvytodo.model.task.Task;
 import savvytodo.model.task.ReadOnlyTask;
 import savvytodo.testutil.TypicalTestTasks;
 
-public class AddressBookTest {
+public class TaskManagerTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final TaskManager addressBook = new TaskManager();
+    private final TaskManager taskManager = new TaskManager();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getTaskList());
-        assertEquals(Collections.emptyList(), addressBook.getCategoryList());
+        assertEquals(Collections.emptyList(), taskManager.getTaskList());
+        assertEquals(Collections.emptyList(), taskManager.getCategoryList());
     }
 
     @Test
     public void resetData_null_throwsAssertionError() {
         thrown.expect(AssertionError.class);
-        addressBook.resetData(null);
+        taskManager.resetData(null);
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        TaskManager newData = new TypicalTestTasks().getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+    public void resetData_withValidReadOnlyTaskManager_replacesData() {
+        TaskManager newData = new TypicalTestTasks().getTypicalTaskManager();
+        taskManager.resetData(newData);
+        assertEquals(newData, taskManager);
     }
 
     @Test
@@ -53,33 +53,33 @@ public class AddressBookTest {
         // Repeat td.alice twice
         List<Task> newTasks = Arrays.asList(new Task(td.alice), new Task(td.alice));
         List<Category> newCategories = td.alice.getCategories().asObservableList();
-        AddressBookStub newData = new AddressBookStub(newTasks, newCategories);
+        TaskManagerStub newData = new TaskManagerStub(newTasks, newCategories);
 
         thrown.expect(AssertionError.class);
-        addressBook.resetData(newData);
+        taskManager.resetData(newData);
     }
 
     @Test
     public void resetData_withDuplicateCategories_throwsAssertionError() {
-        TaskManager typicalAddressBook = new TypicalTestTasks().getTypicalAddressBook();
-        List<ReadOnlyTask> newTasks = typicalAddressBook.getTaskList();
-        List<Category> newCategories = new ArrayList<>(typicalAddressBook.getCategoryList());
+        TaskManager typicalTaskManager = new TypicalTestTasks().getTypicalTaskManager();
+        List<ReadOnlyTask> newTasks = typicalTaskManager.getTaskList();
+        List<Category> newCategories = new ArrayList<>(typicalTaskManager.getCategoryList());
         // Repeat the first category twice
         newCategories.add(newCategories.get(0));
-        AddressBookStub newData = new AddressBookStub(newTasks, newCategories);
+        TaskManagerStub newData = new TaskManagerStub(newTasks, newCategories);
 
         thrown.expect(AssertionError.class);
-        addressBook.resetData(newData);
+        taskManager.resetData(newData);
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose tasks and categories lists can violate interface constraints.
+     * A stub ReadOnlyTaskManager whose tasks and categories lists can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyTaskManager {
+    private static class TaskManagerStub implements ReadOnlyTaskManager {
         private final ObservableList<ReadOnlyTask> tasks = FXCollections.observableArrayList();
         private final ObservableList<Category> categories = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<? extends ReadOnlyTask> tasks, Collection<? extends Category> categories) {
+        TaskManagerStub(Collection<? extends ReadOnlyTask> tasks, Collection<? extends Category> categories) {
             this.tasks.setAll(tasks);
             this.categories.setAll(categories);
         }

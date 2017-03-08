@@ -27,7 +27,7 @@ public interface Storage extends TaskManagerStorage, UserPrefsStorage {
     Optional<ReadOnlyTaskManager> readTaskManaager() throws DataConversionException, IOException;
 
     @Override
-    void saveTaskManager(ReadOnlyTaskManager addressBook) throws IOException;
+    void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException;
 
     /**
      * Saves the current version of the Task Manager to the hard disk.

@@ -9,7 +9,7 @@ import savvytodo.commons.core.Config;
 import savvytodo.commons.core.GuiSettings;
 import savvytodo.model.ReadOnlyTaskManager;
 import savvytodo.model.UserPrefs;
-import savvytodo.storage.XmlSerializableAddressBook;
+import savvytodo.storage.XmlSerializableTaskManager;
 import savvytodo.testutil.TestUtil;
 
 /**
@@ -37,7 +37,7 @@ public class TestApp extends MainApp {
         // If some initial local data has been provided, write those to the file
         if (initialDataSupplier.get() != null) {
             TestUtil.createDataFileWithData(
-                    new XmlSerializableAddressBook(this.initialDataSupplier.get()),
+                    new XmlSerializableTaskManager(this.initialDataSupplier.get()),
                     this.saveFileLocation);
         }
     }

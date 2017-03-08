@@ -8,7 +8,7 @@ import org.junit.Test;
 import savvytodo.testutil.TestTask;
 import savvytodo.testutil.TestUtil;
 
-public class DeleteCommandTest extends AddressBookGuiTest {
+public class DeleteCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void delete() {

@@ -10,7 +10,7 @@ import savvytodo.logic.commands.AddCommand;
 import savvytodo.testutil.TestTask;
 import savvytodo.testutil.TestUtil;
 
-public class AddCommandTest extends AddressBookGuiTest {
+public class AddCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void add() {
