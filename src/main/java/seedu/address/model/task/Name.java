@@ -8,7 +8,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
  */
 public class Name {
 
-    public static final String MESSAGE_NAME_CONSTRAINTS = "Person names should only contain alphanumeric characters and spaces, and it should not be blank";
+    public static final String MESSAGE_NAME_CONSTRAINTS = "A task name should only contain alphanumeric characters.";
 
     /*
      * The first character of the address must not be a whitespace, otherwise
