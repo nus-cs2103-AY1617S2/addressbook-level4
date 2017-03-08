@@ -52,8 +52,8 @@ public class ConfigUtilTest {
     public void read_fileInOrder_successfullyRead() throws DataConversionException {
 
         Config expected = getTypicalConfig();
-
         Config actual = read("TypicalConfig.json").get();
+
         assertEquals(expected, actual);
     }
 
@@ -77,7 +77,7 @@ public class ConfigUtilTest {
         config.setLogLevel(Level.INFO);
         config.setUserPrefsFilePath("C:\\preferences.json");
         config.setTaskManagerFilePath("addressbook.xml");
-        config.setTaskManagerName("TypicalAddressBookName");
+        config.setTaskManagerName("TypicalTaskManagerName");
         return config;
     }
 

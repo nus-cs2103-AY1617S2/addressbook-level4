@@ -1,15 +1,15 @@
 package seedu.address.model.util;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Task;
-import seedu.address.model.person.Deadline;
-import seedu.address.model.person.TaskName;
-import seedu.address.model.person.PriorityLevel;
-import seedu.address.model.person.Information;
-import seedu.address.model.person.UniqueTaskList.DuplicateTaskException;
+import seedu.address.model.ReadOnlyTaskManager;
+import seedu.address.model.TaskManager;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Information;
+import seedu.address.model.task.PriorityLevel;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskName;
+import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
     public static Task[] getSampleTasks() {
@@ -33,15 +33,15 @@ public class SampleDataUtil {
         }
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
+    public static ReadOnlyTaskManager getSampleAddressBook() {
         try {
-            AddressBook sampleAB = new AddressBook();
+            TaskManager sampleAB = new TaskManager();
             for (Task samplePerson : getSampleTasks()) {
                 sampleAB.addTask(samplePerson);
             }
-            return (ReadOnlyAddressBook) sampleAB;
+            return sampleAB;
         } catch (DuplicateTaskException e) {
-            throw new AssertionError("sample data cannot contain duplicate persons", e);
+            throw new AssertionError("sample data cannot contain duplicate tasks", e);
         }
     }
 }

@@ -5,23 +5,23 @@ import java.util.Set;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.Deadline;
-import seedu.address.model.person.Information;
-import seedu.address.model.person.PriorityLevel;
-import seedu.address.model.person.TaskName;
-import seedu.address.model.person.UniqueTaskList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.person.Task;
+import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Information;
+import seedu.address.model.task.PriorityLevel;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskName;
+import seedu.address.model.task.UniqueTaskList;
 
 /**
- * Adds a person to the address book.
+ * Adds a task to the task manager.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the address book. "
             + "Parameters: TASK_NAME d/DEADLINE p/PRIORITY_LEVEL [i/ANY_INFO] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
             + " Walk the dog d/07032017 p/1 i/Also makes sure he shits t/owesMoney";

@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.task;
 
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -8,11 +8,12 @@ import seedu.address.commons.exceptions.IllegalValueException;
  * Guarantees: immutable; is valid as declared in {@link #isValidPriorityLevel(String)}
  */
 
-public class PriorityLevel{
+public class PriorityLevel {
 
     public static final String MESSAGE_PRIORITY_LEVEL_CONSTRAINTS =
-            "Priority Level should be indicated by integers 1 to 4, with 1 being the highest priority and 4 being the lowest priority";
-    public static final String PRIORITY_LEVEL_VALIDATION_REGEX = "[^\\s].*";
+            "Priority Level should be indicated by integers 1 to 4"
+            + ", with 1 being the highest priority and 4 being the lowest priority";
+    public static final String PRIORITY_LEVEL_VALIDATION_REGEX = "[1-4]";
 
     public final String value;
 
@@ -21,7 +22,7 @@ public class PriorityLevel{
      *
      * @throws IllegalValueException if given priority level string is invalid.
      */
-    
+
     public PriorityLevel(String priority) throws IllegalValueException {
         assert priority != null;
         String trimmedPriority = priority.trim();

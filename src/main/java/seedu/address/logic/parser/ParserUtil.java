@@ -13,12 +13,12 @@ import java.util.stream.Collectors;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.model.person.Deadline;
-import seedu.address.model.person.Information;
-import seedu.address.model.person.PriorityLevel;
-import seedu.address.model.person.TaskName;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Information;
+import seedu.address.model.task.PriorityLevel;
+import seedu.address.model.task.TaskName;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -77,7 +77,6 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> phone} into an {@code Optional<Phone>} if {@code phone} is present.
      */
-    // 
     public static Optional<Deadline> parseDeadline(Optional<String> deadline) throws IllegalValueException {
         assert deadline != null;
         return deadline.isPresent() ? Optional.of(new Deadline(deadline.get())) : Optional.empty();
@@ -96,7 +95,8 @@ public class ParserUtil {
      * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
      */
     // Convert to ANY_INFO
-    public static Optional<PriorityLevel> parsePriorityLevel(Optional<String> priorityLevel) throws IllegalValueException {
+    public static Optional<PriorityLevel> parsePriorityLevel(Optional<String> priorityLevel)
+            throws IllegalValueException {
         assert priorityLevel != null;
         return priorityLevel.isPresent() ? Optional.of(new PriorityLevel(priorityLevel.get())) : Optional.empty();
     }

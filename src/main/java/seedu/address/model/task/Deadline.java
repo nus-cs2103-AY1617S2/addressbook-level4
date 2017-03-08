@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.task;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 
@@ -9,8 +9,9 @@ import seedu.address.commons.exceptions.IllegalValueException;
 
 public class Deadline {
 
-    public static final String MESSAGE_DEADLINE_CONSTRAINTS = "The format of the DEADLINE should be DDMMYY, represented in 6 digits";
-    public static final String DEADLINE_VALIDATION_REGEX = "[^\\s].*";
+    public static final String MESSAGE_DEADLINE_CONSTRAINTS = "The format of the DEADLINE should be DDMMYY"
+            + ", represented in 6 digits";
+    public static final String DEADLINE_VALIDATION_REGEX = "^[0-9]{6}$"; //TODO: update regex for better matching
 
     public final String value;
 

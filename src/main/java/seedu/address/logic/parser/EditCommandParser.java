@@ -1,9 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ANY_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY_LEVEL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ANY_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -43,7 +43,8 @@ public class EditCommandParser {
         try {
             editTaskDescriptor.setName(ParserUtil.parseTaskName(preambleFields.get(1)));
             editTaskDescriptor.setDeadline(ParserUtil.parseDeadline(argsTokenizer.getValue(PREFIX_DEADLINE)));
-            editTaskDescriptor.setPriorityLevel(ParserUtil.parsePriorityLevel(argsTokenizer.getValue(PREFIX_PRIORITY_LEVEL)));
+            editTaskDescriptor.setPriorityLevel(
+                    ParserUtil.parsePriorityLevel(argsTokenizer.getValue(PREFIX_PRIORITY_LEVEL)));
             editTaskDescriptor.setInfo(ParserUtil.parseInfo(argsTokenizer.getValue(PREFIX_ANY_INFO)));
             editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
         } catch (IllegalValueException ive) {

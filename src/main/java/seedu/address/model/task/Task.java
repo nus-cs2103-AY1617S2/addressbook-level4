@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.task;
 
 import java.util.Objects;
 
@@ -29,12 +29,12 @@ public class Task implements ReadOnlyTask {
         this.info = info;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
-    
+
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getDate(), source.getPriority(), source.getInfo(), source.getTags());
+        this(source.getTaskName(), source.getDate(), source.getPriority(), source.getInfo(), source.getTags());
     }
 
     public void setName(TaskName name) {
@@ -43,7 +43,7 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
-    public TaskName getName() {
+    public TaskName getTaskName() {
         return name;
     }
 
@@ -95,7 +95,7 @@ public class Task implements ReadOnlyTask {
     public void resetData(ReadOnlyTask replacement) {
         assert replacement != null;
 
-        this.setName(replacement.getName());
+        this.setName(replacement.getTaskName());
         this.setDate(replacement.getDate());
         this.setPriority(replacement.getPriority());
         this.setInformation(replacement.getInfo());
