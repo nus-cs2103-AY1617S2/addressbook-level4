@@ -189,7 +189,7 @@ public class MainWindow extends UiPart<Region> {
         raise(new ExitAppRequestEvent());
     }
 
-    public PersonListPanel getPersonListPanel() {
+    public PersonListPanel getTaskListPanel() {
         return this.taskListPanel;
     }
 
