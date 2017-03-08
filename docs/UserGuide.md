@@ -1,4 +1,4 @@
-# Task Manager - User Guide
+# Tâche - User Guide
 
 By : `T09-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
@@ -16,8 +16,8 @@ By : `T09-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nb
    > Having any Java 8 version is not enough. <br>
    > This app will not work with earlier versions of Java 8.
 
-1. Download the latest `taskmanager.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for your Task Manager.
+1. Download the latest `tache.jar` from the [releases](../../../releases) tab.
+2. Copy the file to the folder you want to use as the home folder for your Tâche task manager.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
 
 <img src="images/Ui.png" width="600"><br>
