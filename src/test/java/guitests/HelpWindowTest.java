@@ -33,8 +33,4 @@ public class HelpWindowTest extends AddressBookGuiTest {
         helpWindowHandle.closeWindow();
     }
 
-    private void assertHelpWindowNotOpen(HelpWindowHandle helpWindowHandle) {
-        assertFalse(helpWindowHandle.isWindowOpen());
-    }
-
 }
