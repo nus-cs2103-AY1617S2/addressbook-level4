@@ -268,7 +268,7 @@ public class LogicManagerTest {
   /**
    * Confirms the 'invalid argument index number behaviour' for the given
    * command targeting a single task in the shown list, using visible index.
-   * 
+   *
    * @param commandWord
    *          to test assuming it targets a single task in the last shown list
    *          based on visible index.

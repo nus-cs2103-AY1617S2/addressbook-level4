@@ -225,7 +225,7 @@ public class TestUtil {
 
   /**
    * Gets mid point of a node relative to the screen.
-   * 
+   *
    * @param node
    * @return
    */

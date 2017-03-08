@@ -25,7 +25,7 @@ Before you setup *Typed*, you should have Java version `1.8.0_60` or later insta
 *Typed* is always happy to see you again. <br>
 
 1. Forget the tutorial, *Typed* is ready for a productive day! You will be greeted with a view of today's focus. This view includes events happening today, overdue tasks and tasks due today.
-2. Let *Typed* know when you are ready to start work by pressing <kbd>Enter</kbd>. 
+2. Let *Typed* know when you are ready to start work by pressing <kbd>Enter</kbd>.
     <img src="images/TodayScreen.png" width="600"> <br>
 3. This will bring you to the default view.
     <img src="images/justscreen.png" width="600"> <br>
@@ -54,7 +54,7 @@ Adds a task or event to *Typed*. This action can be undone. <br>
 Format: `add TASK [ on DATE | by DATE | every RECURRENT | from DATE to DATE] [#TAG]...`
 
 > * Adds the task with specified deadline.
-> * `RECURRENT` accepts 'daily', 'weekly', 'monthly', and 'yearly'. 
+> * `RECURRENT` accepts 'daily', 'weekly', 'monthly', and 'yearly'.
     The day of entry will be taken as the recurring day.
 
 Examples:
@@ -185,7 +185,7 @@ Examples:
   Undo the previous 2 command, leaving only read the little prince as the only task.<br>
   `redo 2`<br>
   Redo 2 undos i.e. push git commit and write blog post is added back to *Typed*.
- 
+
 ### 2.10. Saving the data : `save`
 
 *Typed* data are saved in the hard disk automatically after any command that changes the data.<br>
@@ -305,6 +305,6 @@ Examples:
 **Q**: How do I backup my data to another location?<br>
 **A**: Copy the saved Typed file to any desired location of your choice. Alternatively,
        use our in-built backup feature as described in the [Features](#features) section above.<br>
- 
+
 **Q**: Is my personal data and information kept secure from the eyes of others (including the dev team)?<br>
 **A**: Yes! Everything you enter into Typed is only stored on your local machine in your specified storage file.<br>
