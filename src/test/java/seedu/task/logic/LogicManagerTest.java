@@ -87,7 +87,7 @@ public class LogicManagerTest {
         logic = new LogicManager(model, new StorageManager(tempAddressBookFile, tempPreferencesFile));
         EventsCenter.getInstance().registerHandler(this);
 
-        latestSavedAddressBook = new TaskList(model.getAddressBook()); // last saved assumed to be up to date
+        latestSavedAddressBook = new TaskList(model.getTaskList()); // last saved assumed to be up to date
         helpShown = false;
         targetedJumpIndex = -1; // non yet
     }
@@ -120,7 +120,7 @@ public class LogicManagerTest {
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskList, List)
      */
     private void assertCommandFailure(String inputCommand, String expectedMessage) {
-        TaskList expectedAddressBook = new TaskList(model.getAddressBook());
+        TaskList expectedAddressBook = new TaskList(model.getTaskList());
         List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredPersonList());
         assertCommandBehavior(true, inputCommand, expectedMessage, expectedAddressBook, expectedShownList);
     }
@@ -150,7 +150,7 @@ public class LogicManagerTest {
         assertEquals(expectedShownList, model.getFilteredPersonList());
 
         //Confirm the state of data (saved and in-memory) is as expected
-        assertEquals(expectedAddressBook, model.getAddressBook());
+        assertEquals(expectedAddressBook, model.getTaskList());
         assertEquals(expectedAddressBook, latestSavedAddressBook);
     }
 
