@@ -108,7 +108,7 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        taskListPanel = new PersonListPanel(getPersonListPlaceholder(), logic.getFilteredPersonList());
+        taskListPanel = new PersonListPanel(getTaskListPlaceholder(), logic.getFilteredPersonList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
@@ -126,7 +126,7 @@ public class MainWindow extends UiPart<Region> {
         return resultDisplayPlaceholder;
     }
 
-    private AnchorPane getPersonListPlaceholder() {
+    private AnchorPane getTaskListPlaceholder() {
         return taskListPanelPlaceholder;
     }
 
