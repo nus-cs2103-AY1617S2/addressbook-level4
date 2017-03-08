@@ -15,7 +15,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Adds a person to the address book.
+ * Adds a task to user inbox.
  */
 public class AddCommand extends Command {
 

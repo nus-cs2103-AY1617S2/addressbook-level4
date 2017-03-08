@@ -62,7 +62,7 @@ public class TextFileStorage {
         	while (taskIterator.hasNext()) {
         		ReadOnlyTask taskToSave = taskIterator.next(); 		   		  		
         		String toWriteToFile = "";
-        		toWriteToFile += taskToSave.getName();
+        		toWriteToFile += taskToSave.getTaskName();
         		toWriteToFile += " ";
         		toWriteToFile += "//" + taskToSave.getDescription();
         		write.write(toWriteToFile);

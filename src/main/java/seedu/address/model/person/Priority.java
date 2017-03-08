@@ -14,9 +14,9 @@ public class Priority {
     public final String value;
 
     /**
-     * Validates given phone number.
+     * Validates given priority value.
      *
-     * @throws IllegalValueException if given phone string is invalid.
+     * @throws IllegalValueException if given priority value is invalid.
      */
     public Priority(String priority) throws IllegalValueException {
         assert priority != null;
@@ -28,7 +28,7 @@ public class Priority {
     }
 
     /**
-     * Returns true if a given string is a valid person phone number.
+     * Returns true if a given string is a valid priority value
      */
     public static boolean isValidPriority(String test) {
         return test.matches(PRIORITY_VALIDATION_REGEX);

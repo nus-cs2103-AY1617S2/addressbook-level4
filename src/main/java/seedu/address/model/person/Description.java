@@ -21,9 +21,9 @@ public class Description {
     public final String value;
 
     /**
-     * Validates given address.
+     * Validates given description.
      *
-     * @throws IllegalValueException if given address string is invalid.
+     * @throws IllegalValueException if given description string is invalid.
      */
     public Description(String description) throws IllegalValueException {
         assert description != null;
@@ -34,7 +34,7 @@ public class Description {
     }
 
     /**
-     * Returns true if a given string is a valid person email.
+     * Returns true if a given string is a valid task description.
      */
     public static boolean isValidDescription(String test) {
         return test.matches(DESCRIPTION_VALIDATION_REGEX);
