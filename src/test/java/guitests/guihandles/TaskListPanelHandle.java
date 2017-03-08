@@ -42,7 +42,7 @@ public class TaskListPanelHandle extends GuiHandle {
     /**
      * Returns true if the list is showing the task details correctly and in
      * correct order.
-     * 
+     *
      * @param tasks
      *            A list of task in the correct order.
      */
@@ -53,7 +53,7 @@ public class TaskListPanelHandle extends GuiHandle {
     /**
      * Returns true if the list is showing the task details correctly and in
      * correct order.
-     * 
+     *
      * @param startPosition
      *            The starting position of the sub list.
      * @param tasks

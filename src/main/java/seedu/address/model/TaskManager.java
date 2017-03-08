@@ -94,7 +94,7 @@ public class TaskManager implements ReadOnlyTaskManager {
      * Updates the task in the list at position {@code index} with
      * {@code editedReadOnlyTask}. {@code TaskManager}'s tag list will be
      * updated with the tags of {@code editedReadOnlyTask}.
-     * 
+     *
      * @see #syncMasterTagListWith(Task)
      * @throws DuplicateTaskException
      *             if updating the task's details causes the task to be
@@ -140,7 +140,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     /**
      * Ensures that every tag in these tasks: - exists in the master list
      * {@link #tags} - points to a Tag object in the master list
-     * 
+     *
      * @see #syncMasterTagListWith(Task)
      */
     private void syncMasterTagListWith(UniqueTaskList tasks) {

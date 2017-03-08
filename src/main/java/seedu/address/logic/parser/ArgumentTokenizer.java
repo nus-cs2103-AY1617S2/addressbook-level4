@@ -119,7 +119,7 @@ public class ArgumentTokenizer {
 
     /**
      * Extracts the preamble/arguments and stores them in local variables.
-     * 
+     *
      * @param prefixPositions
      *            must contain all prefixes in the {@code argsString}
      */
