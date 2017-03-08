@@ -55,7 +55,7 @@ Examples:
 
 ### 2.3. Listing all tasks : `list`
 
-Shows a list of all tasks in the task manager.<br>
+Shows a list of all currently ongoing tasks in the task manager.<br>
 Format: `list`
 A list of tasks with index number will be shown in the column
 
@@ -105,7 +105,7 @@ Format: `clear`
 
 ### 2.9. Viewing history of task : `history`
 
-A list of history of tasks will be shown in the column sorted in reverse-chronological order
+A list of history of tasks that have been completed will be shown in the column sorted in reverse-chronological order
 Format: `history`
 
 ### 2.10. Exiting the program : `exit`
@@ -126,31 +126,18 @@ There is no need to save manually.
 
 ## 4. Command Summary
 
-* **Help** : `help` <br>
-
-* **Add**  `add TASK` <br>
-           `add TASK by DEADLINE` <br>
-           `add TASK from DATE by DEADLINE` <br>
-  e.g. `add submit report by Friday`
-
-* **List** : `list` <br>
-
-* **Select** : `select INDEX` <br>
-  e.g. `select 3`
-
-* **Edit**  `edit INDEX` <br>
-  e.g. `edit 3`
-
-* **Find** : `find KEYWORD` <br>
-  e.g. `find report`
-  e.g. `find Friday`
-
-* **Delete** : `delete INDEX` <br>
-  e.g. `delete 3`
-
-* **Clear** : `clear` <br>
-
-* **History** : `history` <br>
-
-* **Exit** : `exit` <br>
+Command | Syntax | Example
+------- | ------ | -------
+Help    | help
+Add     | add TASK                        | add submit report by Friday
+        |  add TASK by DEADLINE           | 
+        |  add TASK from DATE by DEADLINE |
+List    | list
+Select  | select INDEX                    | select 3
+Edit    | edit INDEX                      | edit 3
+Find    | find KEYWORD                    | find report
+Delete  | delete INDEX                    | delete 3
+Clear   | clear
+History | history
+Exit    | exit
 <br>
