@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.testutil.TestTodo;
 
 /**
  * Represents a Todo in the address book.
@@ -22,14 +23,20 @@ public class Todo implements ReadOnlyTodo {
      * Constructor for a floating task
      */
     public Todo(Name name, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, starttime, endtime, tags);
+        assert !CollectionUtil.isAnyNull(name, tags);
         this.name = name;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
-
-    /**
+    
+    public Todo(TestTodo todo) {
+        assert !CollectionUtil.isAnyNull(todo);
+        this.name = todo.getName();
+        this.tags = new UniqueTagList(todo.getTags()); // protect internal tags from changes in the arg list
+    }
+    /** for unit-test
      * Constructor for a scheduled task
      */
+    /*
     public Todo(Name name, Date starttime, Date endtime, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, starttime, endtime, tags);
         this.name = name;
@@ -37,14 +44,14 @@ public class Todo implements ReadOnlyTodo {
         this.endtime = endtime;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
-
+     */
     /**
      * Creates a copy of the given ReadOnlyTodo.
      */
     public Todo(ReadOnlyTodo source) {
-        this(source.getName(), source.getStartTime(), source.getEndTime(), source.getTags());
+        this(source.getName(), source.getTags());
     }
-
+    
     public void setName(Name name) {
         assert name != null;
         this.name = name;

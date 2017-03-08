@@ -79,6 +79,7 @@ public abstract class TodoListGuiTest {
         testApp = (TestApp) FxToolkit.setupApplication(() -> new TestApp(this::getInitialData, getDataFileLocation()));
         FxToolkit.showStage();
         while (!stage.isShowing());
+
         mainGui.focusOnMainApp();
     }
 
