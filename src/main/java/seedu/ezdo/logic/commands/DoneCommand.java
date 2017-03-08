@@ -40,7 +40,7 @@ public class DoneCommand extends Command {
 
         try {
             model.killTask(taskToDone);
-            
+            model.doneTask(taskToDone);
         } catch (TaskNotFoundException tnfe) {
             assert false : "The target task cannot be missing";
         }

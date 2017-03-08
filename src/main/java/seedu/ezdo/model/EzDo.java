@@ -16,6 +16,7 @@ import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.UniqueTaskList;
 import seedu.ezdo.model.todo.UniqueTaskList.DuplicateTaskException;
+import seedu.ezdo.model.todo.DoneList;
 
 /**
  * Wraps all data at the ezDo level
@@ -25,6 +26,7 @@ public class EzDo implements ReadOnlyEzDo {
 
     private final UniqueTaskList tasks;
     private final UniqueTagList tags;
+    private final DoneList done;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -36,6 +38,7 @@ public class EzDo implements ReadOnlyEzDo {
     {
         tasks = new UniqueTaskList();
         tags = new UniqueTagList();
+        done = new DoneList();
     }
 
     public EzDo() {}
@@ -58,7 +61,11 @@ public class EzDo implements ReadOnlyEzDo {
     public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
         this.tags.setTags(tags);
     }
-
+    
+    public void setDone(DoneList done) {
+        this.done.setDone(done);
+    }
+    
     public void resetData(ReadOnlyEzDo newData) {
         assert newData != null;
         try {
@@ -108,7 +115,7 @@ public class EzDo implements ReadOnlyEzDo {
         // in the task list.
         tasks.updateTask(index, editedTask);
     }
-
+    
     /**
      * Ensures that every tag in this task:
      *  - exists in the master list {@link #tags}
@@ -145,6 +152,10 @@ public class EzDo implements ReadOnlyEzDo {
         } else {
             throw new UniqueTaskList.TaskNotFoundException();
         }
+    }
+    
+    public void doneTask(ReadOnlyTask p) {
+        done.add(p);
     }
 
 //// tag-level operations
