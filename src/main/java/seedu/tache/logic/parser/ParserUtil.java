@@ -13,10 +13,10 @@ import java.util.stream.Collectors;
 
 import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.commons.util.StringUtil;
-import seedu.tache.model.person.Address;
-import seedu.tache.model.person.Email;
-import seedu.tache.model.person.Name;
-import seedu.tache.model.person.Phone;
+import seedu.tache.model.task.Date;
+import seedu.tache.model.task.Time;
+import seedu.tache.model.task.Name;
+import seedu.tache.model.task.Duration;
 import seedu.tache.model.tag.Tag;
 import seedu.tache.model.tag.UniqueTagList;
 
@@ -26,6 +26,7 @@ import seedu.tache.model.tag.UniqueTagList;
 public class ParserUtil {
 
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
+    private static final Pattern NAME_FORMAT = Pattern.compile("^\".+\"");
     private static final Pattern DATE_FORMAT = Pattern.compile("^[0-3]?[0-9]/[0-1]?[0-9]/(?:[0-9]{2})?[0-9]{2}$|^[0-3]?[0-9]-[0-1]?[0-9]-(?:[0-9]{2})?[0-9]{2}$|^[0-3]{1}[0-9]{1}[0-1]{1}[0-9]{1}(?:[0-9]{2})?[0-9]{2}$");
     private static final Pattern TIME_FORMAT = Pattern.compile("^[0-2][0-9][0-5][0-9]|^([0-1][0-2]|[0-9])([.][0-5][0-9])?\\s?(am|pm){1}");
     private static final Pattern DURATION_FORMAT = Pattern.compile("^\\d+\\s?((h|hr|hrs)|(m|min|mins))");
@@ -78,30 +79,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> phone} into an {@code Optional<Phone>} if {@code phone} is present.
-     */
-    public static Optional<Phone> parsePhone(Optional<String> phone) throws IllegalValueException {
-        assert phone != null;
-        return phone.isPresent() ? Optional.of(new Phone(phone.get())) : Optional.empty();
-    }
-
-    /**
-     * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.
-     */
-    public static Optional<Address> parseAddress(Optional<String> address) throws IllegalValueException {
-        assert address != null;
-        return address.isPresent() ? Optional.of(new Address(address.get())) : Optional.empty();
-    }
-
-    /**
-     * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
-     */
-    public static Optional<Email> parseEmail(Optional<String> email) throws IllegalValueException {
-        assert email != null;
-        return email.isPresent() ? Optional.of(new Email(email.get())) : Optional.empty();
-    }
-
-    /**
      * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.
      */
     public static UniqueTagList parseTags(Collection<String> tags) throws IllegalValueException {
@@ -112,6 +89,7 @@ public class ParserUtil {
         }
         return new UniqueTagList(tagSet);
     }
+    
     /**
      * Returns True if input is a valid date
      * Returns False otherwise.
@@ -123,6 +101,7 @@ public class ParserUtil {
         }
         return false;
     }
+    
     /**
      * Returns True if input is a valid time
      * Returns False otherwise.
@@ -134,6 +113,7 @@ public class ParserUtil {
         }
         return false;
     }
+    
     /**
      * Returns True if input is a valid duration
      * Returns False otherwise.
@@ -145,4 +125,44 @@ public class ParserUtil {
         }
         return false;
     }
+    
+    /**
+     * Returns True if input is a valid name
+     * Returns False otherwise.
+     */
+    public static boolean isValidName(String input) {
+        final Matcher matcher = NAME_FORMAT.matcher(input.trim());
+        if (matcher.matches()) {
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+     * Returns number of date parameters in input.
+     */
+    public static int numOfDates(String input) {
+        final Matcher matcher = DATE_FORMAT.matcher(input.trim());
+        int count = 0;
+        while (matcher.find()) {
+            count++;
+        }
+        return count;
+    }
+    
+    /**
+     * Returns data type based on the input
+     */
+    public static Object determineType(String input) throws IllegalValueException{
+        if(isValidDate(input)) {
+            return new Date(input);
+        } else if(isValidTime(input)) {
+            return new Time(input);
+        } else if(isValidDuration(input)) {
+            return new Duration(input);
+        }else if(isValidName(input)) {
+            return new Name(input);
+        }
+        throw new IllegalValueException("Invalid Input");
+    }    
 }
