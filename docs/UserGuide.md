@@ -120,15 +120,17 @@ Examples:
   Sorts the list of tasks according to the due date.
 
 #### Marking a task as done : `done / d`
-Marks the specified task from the todo list as done. <br>
-Format: `done INDEX`
+Marks the specified task from ezDo as done.<br>
+Format: **`done INDEX`**
 
-> Marks the todo at the specified `INDEX` as done.
- The index refers to the index number shown in the most recent listing.<br>
-  The index **must be a positive integer** 1, 2, 3, ...
+> Marks the task at the specified `INDEX` as done.<br>
+> Done tasks are removed from view.<br>
+> The index refers to the index number shown in the most recent listing.<br>
+> The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
-* `done 3`<br>
+* **`done 3`**<br>
+  Marks the task at index 3 as done.
 
 #### Clearing all entries : `clear / c`
 Clears all entries from the todo list.<br>
