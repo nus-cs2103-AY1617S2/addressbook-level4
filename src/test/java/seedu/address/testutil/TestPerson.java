@@ -1,8 +1,8 @@
 package seedu.address.testutil;
 
-import seedu.address.model.person.Address;
+import seedu.address.model.person.Location;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.Description;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.tag.UniqueTagList;
@@ -12,8 +12,8 @@ import seedu.address.model.tag.UniqueTagList;
  */
 public class TestPerson implements ReadOnlyPerson {
 
-    private Name name;
-    private Address address;
+    private Description name;
+    private Location address;
     private Email email;
     private Phone phone;
     private UniqueTagList tags;
@@ -26,18 +26,18 @@ public class TestPerson implements ReadOnlyPerson {
      * Creates a copy of {@code personToCopy}.
      */
     public TestPerson(TestPerson personToCopy) {
-        this.name = personToCopy.getName();
+        this.name = personToCopy.getDescription();
         this.phone = personToCopy.getPhone();
         this.email = personToCopy.getEmail();
-        this.address = personToCopy.getAddress();
+        this.address = personToCopy.getLocation();
         this.tags = personToCopy.getTags();
     }
 
-    public void setName(Name name) {
+    public void setName(Description name) {
         this.name = name;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(Location address) {
         this.address = address;
     }
 
@@ -54,7 +54,7 @@ public class TestPerson implements ReadOnlyPerson {
     }
 
     @Override
-    public Name getName() {
+    public Description getDescription() {
         return name;
     }
 
@@ -69,7 +69,7 @@ public class TestPerson implements ReadOnlyPerson {
     }
 
     @Override
-    public Address getAddress() {
+    public Location getLocation() {
         return address;
     }
 
@@ -85,8 +85,8 @@ public class TestPerson implements ReadOnlyPerson {
 
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
-        sb.append("add " + this.getName().fullName + " ");
-        sb.append("a/" + this.getAddress().value + " ");
+        sb.append("add " + this.getDescription().description + " ");
+        sb.append("a/" + this.getLocation().value + " ");
         sb.append("p/" + this.getPhone().value + " ");
         sb.append("e/" + this.getEmail().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
