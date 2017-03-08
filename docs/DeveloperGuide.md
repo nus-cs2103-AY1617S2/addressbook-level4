@@ -361,6 +361,8 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | advanced user | autocomplete my command by pressing a key (e.g. enter) | type my commands faster
 `* * *` | user | specify a particular location I want to save the data file of my task manager | sync my task list and access it from other devices
 `* * *` | user | search for names of particular tasks | update or view specific tasks efficiently
+`* * *` | user | add new tasks | track what i need to do
+`* * *` | user | delete tasks | delete task that was inaccurately entered
 `* *` | advanced user | use shorter versions of commands | type my commands faster
 `* *` | new user | view additional usage information for particular commands | learn how to use specific commands effectively
 `* *` | user | secure my task list | prevent other people from viewing my task list
