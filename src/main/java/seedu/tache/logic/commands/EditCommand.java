@@ -6,6 +6,7 @@ import java.util.Optional;
 import seedu.tache.commons.core.Messages;
 import seedu.tache.commons.util.CollectionUtil;
 import seedu.tache.logic.commands.exceptions.CommandException;
+<<<<<<< HEAD
 import seedu.tache.logic.parser.ParserUtil;
 import seedu.tache.model.task.Name;
 import seedu.tache.model.task.Date;
@@ -14,7 +15,16 @@ import seedu.tache.model.task.Time;
 import seedu.tache.model.task.Task;
 import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.model.task.UniqueTaskList;
+=======
+>>>>>>> ImplementTaskModels
 import seedu.tache.model.tag.UniqueTagList;
+import seedu.tache.model.task.Address;
+import seedu.tache.model.task.Email;
+import seedu.tache.model.task.Name;
+import seedu.tache.model.task.Phone;
+import seedu.tache.model.task.ReadOnlyTask;
+import seedu.tache.model.task.Task;
+import seedu.tache.model.task.UniqueTaskList;
 
 /**
  * Edits the details of an existing task in the task manager.
@@ -52,6 +62,10 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
+<<<<<<< HEAD
+=======
+        List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+>>>>>>> ImplementTaskModels
 
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
@@ -59,6 +73,7 @@ public class EditCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
+<<<<<<< HEAD
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
@@ -66,6 +81,15 @@ public class EditCommand extends Command {
             model.updateTask(filteredTaskListIndex, editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
+=======
+        ReadOnlyTask personToEdit = lastShownList.get(filteredPersonListIndex);
+        Task editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+
+        try {
+            model.updateTask(filteredPersonListIndex, editedPerson);
+        } catch (UniqueTaskList.DuplicateTaskException dpe) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+>>>>>>> ImplementTaskModels
         }
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
@@ -75,6 +99,7 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
      */
+<<<<<<< HEAD
     private static Task createEditedTask(ReadOnlyTask taskToEdit,
                                              EditTaskDescriptor editTaskDescriptor) {
         assert taskToEdit != null;
@@ -91,6 +116,16 @@ public class EditCommand extends Command {
             Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
             return new Task(updatedName);
         }
+=======
+    private static Task createEditedPerson(ReadOnlyTask personToEdit,
+                                             EditPersonDescriptor editPersonDescriptor) {
+        assert personToEdit != null;
+
+        Name updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
+        UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
+
+        return new Task(updatedName, updatedTags);
+>>>>>>> ImplementTaskModels
     }
 
     /**

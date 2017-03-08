@@ -8,11 +8,11 @@ import org.junit.Test;
 import guitests.guihandles.PersonCardHandle;
 import seedu.tache.commons.core.Messages;
 import seedu.tache.logic.commands.EditCommand;
-import seedu.tache.model.person.Address;
-import seedu.tache.model.person.Email;
-import seedu.tache.model.person.Name;
-import seedu.tache.model.person.Phone;
 import seedu.tache.model.tag.Tag;
+import seedu.tache.model.task.Address;
+import seedu.tache.model.task.Email;
+import seedu.tache.model.task.Name;
+import seedu.tache.model.task.Phone;
 import seedu.tache.testutil.PersonBuilder;
 import seedu.tache.testutil.TestPerson;
 
@@ -28,8 +28,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         String detailsToEdit = "Bobby p/91234567 e/bobby@gmail.com a/Block 123, Bobby Street 3 t/husband";
         int addressBookIndex = 1;
 
-        TestPerson editedPerson = new PersonBuilder().withName("Bobby").withPhone("91234567")
-                .withEmail("bobby@gmail.com").withAddress("Block 123, Bobby Street 3").withTags("husband").build();
+        TestPerson editedPerson = new PersonBuilder().withName("Bobby").withTags("husband").build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
     }

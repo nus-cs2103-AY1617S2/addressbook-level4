@@ -6,7 +6,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.tache.commons.util.FxViewUtil;
+<<<<<<< HEAD
 import seedu.tache.model.person.ReadOnlyTask;
+=======
+import seedu.tache.model.task.ReadOnlyTask;
+>>>>>>> ImplementTaskModels
 
 /**
  * The Browser Panel of the App.

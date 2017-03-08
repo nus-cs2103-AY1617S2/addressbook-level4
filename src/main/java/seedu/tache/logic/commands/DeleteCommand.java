@@ -36,12 +36,21 @@ public class DeleteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
+<<<<<<< HEAD
         ReadOnlyTask taskToDelete = lastShownList.get(targetIndex - 1);
 
         try {
             model.deleteTask(taskToDelete);
         } catch (TaskNotFoundException tnfe) {
             assert false : "The target task cannot be missing";
+=======
+        ReadOnlyTask personToDelete = lastShownList.get(targetIndex - 1);
+
+        try {
+            model.deleteTask(personToDelete);
+        } catch (TaskNotFoundException pnfe) {
+            assert false : "The target person cannot be missing";
+>>>>>>> ImplementTaskModels
         }
 
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));

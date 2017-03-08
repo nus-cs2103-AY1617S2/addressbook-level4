@@ -1,12 +1,9 @@
 package seedu.tache.testutil;
 
 import seedu.tache.commons.exceptions.IllegalValueException;
-import seedu.tache.model.person.Address;
-import seedu.tache.model.person.Email;
-import seedu.tache.model.person.Name;
-import seedu.tache.model.person.Phone;
 import seedu.tache.model.tag.Tag;
 import seedu.tache.model.tag.UniqueTagList;
+import seedu.tache.model.task.Name;
 
 /**
  *
@@ -36,21 +33,6 @@ public class PersonBuilder {
         for (String tag: tags) {
             person.getTags().add(new Tag(tag));
         }
-        return this;
-    }
-
-    public PersonBuilder withAddress(String address) throws IllegalValueException {
-        this.person.setAddress(new Address(address));
-        return this;
-    }
-
-    public PersonBuilder withPhone(String phone) throws IllegalValueException {
-        this.person.setPhone(new Phone(phone));
-        return this;
-    }
-
-    public PersonBuilder withEmail(String email) throws IllegalValueException {
-        this.person.setEmail(new Email(email));
         return this;
     }
 

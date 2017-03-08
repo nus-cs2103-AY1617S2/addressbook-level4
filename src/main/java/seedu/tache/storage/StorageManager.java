@@ -8,10 +8,10 @@ import com.google.common.eventbus.Subscribe;
 
 import seedu.tache.commons.core.ComponentManager;
 import seedu.tache.commons.core.LogsCenter;
-import seedu.tache.commons.events.model.AddressBookChangedEvent;
+import seedu.tache.commons.events.model.TaskManagerChangedEvent;
 import seedu.tache.commons.events.storage.DataSavingExceptionEvent;
 import seedu.tache.commons.exceptions.DataConversionException;
-import seedu.tache.model.ReadOnlyAddressBook;
+import seedu.tache.model.ReadOnlyTaskManager;
 import seedu.tache.model.UserPrefs;
 
 /**
@@ -55,23 +55,23 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException {
+    public Optional<ReadOnlyTaskManager> readAddressBook() throws DataConversionException, IOException {
         return readAddressBook(addressBookStorage.getAddressBookFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook(String filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyTaskManager> readAddressBook(String filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
         return addressBookStorage.readAddressBook(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
+    public void saveAddressBook(ReadOnlyTaskManager addressBook) throws IOException {
         saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, String filePath) throws IOException {
+    public void saveAddressBook(ReadOnlyTaskManager addressBook, String filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
@@ -79,7 +79,7 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Override
     @Subscribe
-    public void handleAddressBookChangedEvent(AddressBookChangedEvent event) {
+    public void handleAddressBookChangedEvent(TaskManagerChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
             saveAddressBook(event.data);
