@@ -19,7 +19,7 @@ public class SampleDataUtil {
                 new Task(new Name("Eat Lunch")),
                 new Task(new Name("Eat Dinner")),
                 new Task(new Name("Read Harry Potter book 3")),
-                new Task(new Name("Wash shoe")),                  
+                new Task(new Name("Wash shoe")),
                 new Task(new Name("Sweep floor")),
             };
         } catch (IllegalValueException e) {

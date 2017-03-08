@@ -22,7 +22,6 @@ public class Task implements ReadOnlyTask {
     public Task(Name name) {
         assert !CollectionUtil.isAnyNull(name);
         this.name = name;
-      
     }
 
     /**
