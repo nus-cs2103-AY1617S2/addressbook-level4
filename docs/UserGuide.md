@@ -41,14 +41,19 @@ Format: **`help`**
 > Help is also shown if you enter an incorrect command e.g. **`abcd`**
 
 #### Adding a task: `add / a`
-Adds a task to the todo list<br>
-Format: `add TASK [d/DEADLINE] [p/PRIORITY] [t/TAGNAME]`
+Adds a task to ezDo.<br>
+Format: **`add TASKNAME [p/PRIORITY] [s/STARTDATE] [d/DUEDATE] [t/TAGNAME]...`**
 
-> Tasks can have any number of tags (including 0)
+> Tasks can have any number of tags (including 0).<br>
+> Tasks only need a task name. The other fields are optional, and can be typed in any order as long as the prefix is there.<br>
+> The task name MUST come first.<br>
+> The format for the date should be DD/MM/YY <br>
+> Priority takes in a value from 1-3, with 3 being the highest priority.
 
 Examples:
-* `add Buy donuts d/tomorrow p/high t/work`
-* `add Buy milk d/Friday p/low t/home`
+* **`add Buy donuts`**
+* **`add Buy milk d/12/12/2017 p/3 t/calories`**
+* **`add Read a book p/1 s/05/05/2017 t/knowledge t/bookworm`**
 
 #### Edit a task: `edit / e`
 > Edit a particular task according to the index.
