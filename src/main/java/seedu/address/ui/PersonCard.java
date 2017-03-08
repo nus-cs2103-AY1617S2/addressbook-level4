@@ -22,7 +22,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label note;
     @FXML
-    private Label email;
+    private Label status;
     @FXML
     private FlowPane tags;
 
@@ -32,7 +32,7 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         priority.setText(person.getPriority().value);
         note.setText(person.getNote().value);
-        email.setText(person.getStatus().value);
+        status.setText(person.getStatus().value);
         initTags(person);
     }
 
