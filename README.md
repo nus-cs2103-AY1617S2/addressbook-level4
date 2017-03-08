@@ -1,4 +1,4 @@
-# Address Book (Level 4)
+# FlexiTask
 
 [![Build Status](https://travis-ci.org/CS2103JAN2017-W14-B1/main.svg?branch=master)](https://travis-ci.org/se-edu/addressbook-level4)
 [![Build status](https://ci.appveyor.com/api/projects/status/96vfp4xr44d222kb?svg=true)](https://ci.appveyor.com/project/limjie/main)
