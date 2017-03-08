@@ -19,12 +19,11 @@
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will display help.
 5. Some example commands you can try:
-   * **`add`** : adds a task (e.g. `add buy some milk  d/tomorrow p/high`)
-   * **`edit`** : edits an existing task (e.g. `edit 1 buy some milk and cheese p/low`)
+   * **`add`** : adds a task (e.g. `add buy some milk  d/12/12/2015 p/1`)
+   * **`edit`** : edits an existing task (e.g. `edit 1 buy some milk and cheese p/2`)
    * **`kill`** : deletes a task in the current list (e.g. `kill 1`)
    * **`quit`** : quits the app (e.g. `quit`)
 6. Refer to the [Features](#features) section below for details of each command.<br>
-
 
 ## Features
 
