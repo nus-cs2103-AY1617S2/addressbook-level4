@@ -10,43 +10,43 @@ import seedu.address.model.tag.UniqueTagList;
 /**
  * A mutable task object. For testing only.
  */
-public class TestPerson implements ReadOnlyTask {
+public class TestTask implements ReadOnlyTask {
 
     private Name name;
-    private Description address;
-    private Deadline email;
-    private Priority phone;
+    private Description description;
+    private Deadline deadline;
+    private Priority priority;
     private UniqueTagList tags;
 
-    public TestPerson() {
+    public TestTask() {
         tags = new UniqueTagList();
     }
 
     /**
-     * Creates a copy of {@code personToCopy}.
+     * Creates a copy of {@code taskToCopy}.
      */
-    public TestPerson(TestPerson personToCopy) {
-        this.name = personToCopy.getName();
-        this.phone = personToCopy.getPhone();
-        this.email = personToCopy.getEmail();
-        this.address = personToCopy.getDescription();
-        this.tags = personToCopy.getTags();
+    public TestTask(TestTask taskToCopy) {
+        this.name = taskToCopy.getName();
+        this.priority = taskToCopy.getPriority();
+        this.deadline = taskToCopy.getDeadline();
+        this.description = taskToCopy.getDescription();
+        this.tags = taskToCopy.getTags();
     }
 
     public void setName(Name name) {
         this.name = name;
     }
 
-    public void setAddress(Description address) {
-        this.address = address;
+    public void setDescription(Description description) {
+        this.description = description;
     }
 
-    public void setEmail(Deadline email) {
-        this.email = email;
+    public void setDeadline(Deadline deadline) {
+        this.deadline = deadline;
     }
 
-    public void setPhone(Priority phone) {
-        this.phone = phone;
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 
     public void setTags(UniqueTagList tags) {
@@ -59,18 +59,17 @@ public class TestPerson implements ReadOnlyTask {
     }
 
     @Override
-    public Priority getPhone() {
-        return phone;
+    public Priority getPriority() {
+        return priority;
     }
 
-    @Override
-    public Deadline getEmail() {
-        return email;
+    public Deadline getDeadline() {
+        return deadline;
     }
 
     @Override
     public Description getDescription() {
-        return address;
+        return description;
     }
 
     @Override
@@ -87,8 +86,8 @@ public class TestPerson implements ReadOnlyTask {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
         sb.append("d/" + this.getDescription().value + " ");
-        sb.append("p/" + this.getPhone().value + " ");
-        sb.append("e/" + this.getEmail().value + " ");
+        sb.append("p/" + this.getPriority().value + " ");
+        sb.append("e/" + this.getDeadline().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }

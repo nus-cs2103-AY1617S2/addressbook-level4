@@ -2,56 +2,56 @@
 <addressbook>
     <tasks>
         <name>Hans Muster</name>
-        <phone isPrivate="false">9482424</phone>
-        <email isPrivate="false">4</email>
-        <address isPrivate="false">4th street</address>
+        <priority isPrivate="false">9482424</priority>
+        <deadline isPrivate="false">4</deadline>
+        <description isPrivate="false">4th street</description>
     </tasks>
     <tasks>
         <name>Ruth Mueller</name>
-        <phone isPrivate="false">87249245</phone>
-        <email isPrivate="false">4</email>
-        <address isPrivate="false">81th street</address>
+        <priority isPrivate="false">87249245</priority>
+        <deadline isPrivate="false">4</deadline>
+        <description isPrivate="false">81th street</description>
     </tasks>
     <tasks>
         <name>Heinz Kurz</name>
-        <phone isPrivate="false">95352563</phone>
-        <email isPrivate="false">4</email>
-        <address isPrivate="false">wall street</address>
+        <priority isPrivate="false">95352563</priority>
+        <deadline isPrivate="false">4</deadline>
+        <description isPrivate="false">wall street</description>
     </tasks>
     <tasks>
         <name>Cornelia Meier</name>
-        <phone isPrivate="false">87652533</phone>
-        <email isPrivate="false">4m</email>
-        <address isPrivate="false">10th street</address>
+        <priority isPrivate="false">87652533</priority>
+        <deadline isPrivate="false">4m</deadline>
+        <description isPrivate="false">10th street</description>
     </tasks>
     <tasks>
         <name>Werner Meyer</name>
-        <phone isPrivate="false">9482224</phone>
-        <email isPrivate="false">4m</email>
-        <address isPrivate="false">michegan ave</address>
+        <priority isPrivate="false">9482224</priority>
+        <deadline isPrivate="false">4m</deadline>
+        <description isPrivate="false">michegan ave</description>
     </tasks>
     <tasks>
         <name>Lydia Kunz</name>
-        <phone isPrivate="false">9482427</phone>
-        <email isPrivate="false">4</email>
-        <address isPrivate="false">little tokyo</address>
+        <priority isPrivate="false">9482427</priority>
+        <deadline isPrivate="false">4</deadline>
+        <description isPrivate="false">little tokyo</description>
     </tasks>
     <tasks>
         <name>Anna Best</name>
-        <phone isPrivate="false">9482442</phone>
-        <email isPrivate="false">4</email>
-        <address isPrivate="false">4th street</address>
+        <priority isPrivate="false">9482442</priority>
+        <deadline isPrivate="false">4</deadline>
+        <description isPrivate="false">4th street</description>
     </tasks>
     <tasks>
         <name>Stefan Meier</name>
-        <phone isPrivate="false">8482424</phone>
-        <email isPrivate="false">4</email>
-        <address isPrivate="false">little india</address>
+        <priority isPrivate="false">8482424</priority>
+        <deadline isPrivate="false">4</deadline>
+        <description isPrivate="false">little india</description>
     </tasks>
     <tasks>
         <name>Martin Mueller</name>
-        <phone isPrivate="false">8482131</phone>
-        <email isPrivate="false">4</email>
-        <address isPrivate="false">chicago ave</address>
+        <priority isPrivate="false">8482131</priority>
+        <deadline isPrivate="false">4</deadline>
+        <description isPrivate="false">chicago ave</description>
     </tasks>
 </addressbook>

@@ -10,7 +10,7 @@ import seedu.address.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestPerson alice
+    public TestTask alice
             , benson, carl, daniel, elle, fiona, george, hoon, ida;
 
     public TypicalTestTasks() {
@@ -45,7 +45,7 @@ public class TypicalTestTasks {
     }
 
     public static void loadAddressBookWithSampleData(TaskManager ab) {
-        for (TestPerson person : new TypicalTestTasks().getTypicalPersons()) {
+        for (TestTask person : new TypicalTestTasks().getTypicalPersons()) {
             try {
                 ab.addPerson(new Task(person));
             } catch (UniqueTaskList.DuplicateTaskException e) {
@@ -54,8 +54,8 @@ public class TypicalTestTasks {
         }
     }
 
-    public TestPerson[] getTypicalPersons() {
-        return new TestPerson[]{alice, benson, carl, daniel, elle, fiona, george};
+    public TestTask[] getTypicalPersons() {
+        return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
     }
 
     public TaskManager getTypicalAddressBook() {

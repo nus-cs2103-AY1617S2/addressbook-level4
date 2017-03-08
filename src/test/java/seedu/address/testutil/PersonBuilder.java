@@ -13,17 +13,17 @@ import seedu.address.model.tag.UniqueTagList;
  */
 public class PersonBuilder {
 
-    private TestPerson person;
+    private TestTask person;
 
     public PersonBuilder() {
-        this.person = new TestPerson();
+        this.person = new TestTask();
     }
 
     /**
      * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
-    public PersonBuilder(TestPerson personToCopy) {
-        this.person = new TestPerson(personToCopy);
+    public PersonBuilder(TestTask personToCopy) {
+        this.person = new TestTask(personToCopy);
     }
 
     public PersonBuilder withName(String name) throws IllegalValueException {
@@ -40,21 +40,21 @@ public class PersonBuilder {
     }
 
     public PersonBuilder withDescription(String address) throws IllegalValueException {
-        this.person.setAddress(new Description(address));
+        this.person.setDescription(new Description(address));
         return this;
     }
 
     public PersonBuilder withPriority(String phone) throws IllegalValueException {
-        this.person.setPhone(new Priority(phone));
+        this.person.setPriority(new Priority(phone));
         return this;
     }
 
     public PersonBuilder withDeadline(String email) throws IllegalValueException {
-        this.person.setEmail(new Deadline(email));
+        this.person.setDeadline(new Deadline(email));
         return this;
     }
 
-    public TestPerson build() {
+    public TestTask build() {
         return this.person;
     }
 
