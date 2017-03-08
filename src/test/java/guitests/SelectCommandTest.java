@@ -8,25 +8,6 @@ import seedu.address.model.todo.ReadOnlyTodo;
 
 public class SelectCommandTest extends TodoListGuiTest {
 
-
-    @Test
-    public void selectTodo_nonEmptyList() {
-
-        assertSelectionInvalid(10); // invalid index
-        assertNoTodoSelected();
-
-        assertSelectionSuccess(1); // first todo in the list
-        int todoCount = td.getTypicalTodos().length;
-        assertSelectionSuccess(todoCount); // last todo in the list
-        int middleIndex = todoCount / 2;
-        assertSelectionSuccess(middleIndex); // a todo in the middle of the list
-
-        assertSelectionInvalid(todoCount + 1); // invalid index
-        assertTodoSelected(middleIndex); // assert previous selection remains
-
-        /* Testing other invalid indexes such as -1 should be done when testing the SelectCommand */
-    }
-
     @Test
     public void selectTodo_emptyList() {
         commandBox.runCommand("clear");

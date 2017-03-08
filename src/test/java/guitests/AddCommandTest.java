@@ -17,6 +17,7 @@ public class AddCommandTest extends TodoListGuiTest {
         //add one todo
         TestTodo[] currentList = td.getTypicalTodos();
         TestTodo todoToAdd = td.hoon;
+
         assertAddSuccess(todoToAdd, currentList);
         currentList = TestUtil.addTodosToList(currentList, todoToAdd);
 
@@ -37,9 +38,11 @@ public class AddCommandTest extends TodoListGuiTest {
         //invalid command
         commandBox.runCommand("adds Johnny");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
+
     }
 
     private void assertAddSuccess(TestTodo todoToAdd, TestTodo... currentList) {
+
         commandBox.runCommand(todoToAdd.getAddCommand());
 
         //confirm the new card contains the right data

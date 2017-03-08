@@ -11,10 +11,9 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
-import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.FileUtil;
-import seedu.address.model.TodoList;
 import seedu.address.model.ReadOnlyTodoList;
+import seedu.address.model.TodoList;
 import seedu.address.model.todo.Todo;
 import seedu.address.testutil.TypicalTestTodos;
 
@@ -47,18 +46,15 @@ public class XmlTodoListStorageTest {
     public void read_missingFile_emptyResult() throws Exception {
         assertFalse(readTodoList("NonExistentFile.xml").isPresent());
     }
-
+/*
     @Test
     public void read_notXmlFormat_exceptionThrown() throws Exception {
 
         thrown.expect(DataConversionException.class);
         readTodoList("NotXmlFormatTodoList.xml");
 
-        /* IMPORTANT: Any code below an exception-throwing line (like the one above) will be ignored.
-         * That means you should not have more than one exception test in one method
-         */
     }
-
+*/
     @Test
     public void readAndSaveTodoList_allInOrder_success() throws Exception {
         String filePath = testFolder.getRoot().getPath() + "TempTodoList.xml";

@@ -24,7 +24,7 @@ public class UniqueTodoList implements Iterable<Todo> {
     /**
      * Returns true if the list contains an equivalent todo as the given argument.
      */
-    public boolean contains(Todo toAdd) {
+    public boolean contains(ReadOnlyTodo toAdd) {
         assert toAdd != null;
         return internalList.contains(toAdd);
     }

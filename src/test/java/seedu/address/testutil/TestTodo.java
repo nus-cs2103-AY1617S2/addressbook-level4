@@ -1,54 +1,60 @@
-package seedu.address.model.todo;
+package seedu.address.testutil;
 
 import java.util.Date;
 import java.util.Objects;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.todo.Name;
+import seedu.address.model.todo.ReadOnlyTodo;
 
 /**
- * Represents a Todo in the address book.
- * Guarantees: details are present and not null, field values are validated.
+ * A mutable todo object. For testing only.
  */
-public class Todo implements ReadOnlyTodo {
+public class TestTodo implements ReadOnlyTodo {
+
 
     private Name name;
     private Date starttime;
     private Date endtime;
 
     private UniqueTagList tags;
+    /**
+     * Constructor for a empty floating task
+     */
+    public TestTodo() {
+        this.name = null;
+        this.tags = new UniqueTagList(); // protect internal tags from changes in the arg list
+    }
 
     /**
      * Constructor for a floating task
      */
-    public Todo(Name name, UniqueTagList tags) {
+    public TestTodo(Name name, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, tags);
         this.name = name;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
-    public Todo(Todo todo) {
-        assert !CollectionUtil.isAnyNull(todo);
-        this.name = todo.getName();
-        this.tags = new UniqueTagList(todo.getTags()); // protect internal tags from changes in the arg list
-    }
-    /** for unit-test
+    /**
      * Constructor for a scheduled task
      */
-
-    public Todo(Name name, Date starttime, Date endtime, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, starttime, endtime, tags);
+    public TestTodo(Name name, Date starttime, Date endtime, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name);
         this.name = name;
-        this.starttime = starttime;
-        this.endtime = endtime;
+        if (starttime != null && endtime != null) {
+            this.starttime = starttime;
+            this.endtime = endtime;
+        }
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
     /**
      * Creates a copy of the given ReadOnlyTodo.
      */
-    public Todo(ReadOnlyTodo source) {
-        this(source.getName(), source.getTags());
+
+    public TestTodo(ReadOnlyTodo source) {
+            this(source.getName(), source.getStartTime(), source.getEndTime(), source.getTags());
     }
 
     public void setName(Name name) {
@@ -62,9 +68,8 @@ public class Todo implements ReadOnlyTodo {
     }
 
     public void setStartTime(Date starttime) {
-        if (starttime != null) {
-            this.starttime = starttime;
-        }
+        assert starttime != null;
+        this.starttime = starttime;
     }
 
     @Override
@@ -73,9 +78,8 @@ public class Todo implements ReadOnlyTodo {
     }
 
     public void setEndTime(Date endtime) {
-        if (endtime != null) {
-            this.endtime = endtime;
-        }
+        assert endtime != null;
+        this.endtime = endtime;
     }
 
     @Override
@@ -125,4 +129,10 @@ public class Todo implements ReadOnlyTodo {
         return getAsText();
     }
 
+    public String getAddCommand() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("add " + this.getName().fullName + " ");
+        this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
+        return sb.toString();
+    }
 }
