@@ -16,9 +16,9 @@ import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainGuiHandle;
 import guitests.guihandles.MainMenuHandle;
+import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.TaskCardHandle;
 import guitests.guihandles.TaskListPanelHandle;
-import guitests.guihandles.ResultDisplayHandle;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import seedu.task.TestApp;
@@ -28,10 +28,6 @@ import seedu.task.model.TaskManager;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.testutil.TestUtil;
 import seedu.task.testutil.TypicalTestPersons;
-import seedu.task.commons.core.EventsCenter;
-import seedu.task.commons.events.BaseEvent;
-import seedu.task.model.TaskManager;
-import seedu.task.model.task.ReadOnlyTask;
 
 /**
  * A GUI Test class for AddressBook.
