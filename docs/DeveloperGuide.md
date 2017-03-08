@@ -696,7 +696,7 @@ Use case ends.
 
 > Events where timing has not been fixed
 
-##### Mainstream OS
+#### Mainstream OS
 
 > Windows, Linux, Unix, OS-X
 
@@ -722,6 +722,8 @@ Cons:
 * Very limited keyboard shortcuts
 * No additional features (e.g. reminders/priority listing/tags/search/recurring events/calenders)
 
+---
+
 **Product Name**: ToDoist
 
 Author: Jun Wei
@@ -743,6 +745,8 @@ Cons:
 * Many functions only functional for premium users (eg. labels, email/SMS reminders, custom filters)
 * Notifications only possible when application is turned on
 * Although adding task is easy with keyboard, other functionalities like deleting, editing and shifting tasks across projects require a mouse
+
+---
 
 **Product Name**: Google Calendar
 

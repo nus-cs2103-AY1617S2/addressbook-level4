@@ -54,150 +54,156 @@ commands you can use.<br>
 > * Items with `...` after them can have multiple instances.
 > * Parameters can be in any order.
 
-### 3.1. Viewing help : `help`
+### 3.1. Viewing help : `HELP`
 
-Format: `help`
+Format: `HELP`
 
 > Help is also shown if you enter an incorrect command e.g. `abcd`
 
-### 3.2. Adding a new Task: `add`
+### 3.2. Adding a new Task: `ADD`
 
 There are 4 forms of task that ProcrastiNomore supports:
 
 #### 3.2.1. Events
 
-Format: `add TASK on DATE/DAY` <br />
-        `add TASK from STARTTIME to ENDTIME` <br />
-        `add TASK on DATE/DAY from STARTTIME to ENDTIME` <br />
+Format: `ADD TASK ON DATE/DAY` <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ADD TASK FROM STARTTIME TO ENDTIME` <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ADD TASK ON DATE/DAY FROMSTARTTIME TO ENDTIME` <br />
 
 #### 3.2.2. Deadlines
 
-Format: `add TASK by DATE/TIME/DATE+TIME`
+Format: `ADD TASK BY DATE/TIME/DATE+TIME`
 
 #### 3.2.3. Untimed
 
-Format:	`add TASK`
+Format:	`ADD TASK`
 
 #### 3.2.4. Unconfirmed events
 
-Format: `add TASK on DATE1 or DATE2 or DATE3`
+Format: `ADD TASK ON DATE1 OR DATE2 OR DATE3`
 
 > TIME input can be in 24hrs format or 12hrs format with am/pm
 
 Examples:
 
-* `add eat breakfast on 3/3/17`
-* `add eat lunch on THURSDAY`
-* `add eat dinner from 530pm to 730pm`
-* `add eat breakfast from 1730 to 1930`
-* `add eat lunch on 3/3/17 from 530pm to 730pm`
-* `add eat dinner by 3/3/17`
-* `add eat breakfast by 730pm`
-* `add eat lunch by 3/3/17 by 330pm`
-* `add eat dinner on 3/3/17 or 4/3/17 or 5/3/17`
-* `add eat breakfast`
+* `ADD eat breakfast ON 3/3/17`
+* `ADD eat lunch ON thursday`
+* `ADD eat dinner FROM 530pm TO 730pm`
+* `ADD eat breakfast FROM 1730 TO 1930`
+* `ADD eat lunch ON 3/3/17 FROM 530pm TO 730pm`
+* `ADD eat dinner BY 3/3/17`
+* `ADD eat breakfast BY 730pm`
+* `ADD eat lunch BY 3/3/17 330pm`
+* `ADD eat dinner ON 3/3/17 OR 4/3/17 OR 5/3/17`
+* `ADD eat breakfast`
 
-### 3.3. Update an existing task : `update`
+### 3.3. Update an existing task : `UPDATE`
 
 There are 3 types of updates that ProcrastiNomore supports:
 
 #### 3.3.1. Update task name
 
-Format: `update TASK to NEWTASK`
+Format: `UPDATE TASK`
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select task index `1/2/3...`
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`new TASK`
 
 #### 3.3.2. Update task time
 
-Format: `update TASK to STARTTIME to ENDTIME` <br />
-		`update TASK to TIME`
+Format: `UPDATE TASK TO STARTTIME ENDTIME` <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`update TASK to TIME`
 
 #### 3.3.3. Update the entire task index
 
-Format: `update TASKINDEX NEWTASKNAME/DATE/TIME`
+Format: `UPDATE TASKINDEX NEWTASKNAME/DATE/TIME`
 
 > For 3.3.1. and 3.3.2., ProcrastiNomore will show a list of task with the
 > same task name and user will be required to put the TASKINDEX of the
 > TASK user wants to change
 
 Examples:
-* `update eat breakfast to eat lunch` <br />
+* `UPDATE eat breakfast TO eat lunch` <br />
   `1`
-* `update eat dinner to 730pm` <br />
+* `UPDATE eat dinner TO 730pm` <br />
   `1`
+* `UPDATE eat dinner TO 730pm 830pm`
+  `2`
+* `LIST`
+  `UPDATE 1 eat dinner 730pm`
 
-### 3.4. Delete an existing task: `delete`
+### 3.4. Delete an existing task: `DELETE`
 
-Format: `delete TASKNAME` <br />
-        `delete TASKINDEX`
+Format: `DELETE TASKNAME` <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`DELETE TASKINDEX`
 
-> In the event of delete TASKNAME, ProcrastiNomore will show a list of tasks
+> In the event of DELETE TASKNAME, ProcrastiNomore will show a list of tasks
 > with the same TASKNAME and user will be required to input the TASKINDEX of
 > the TASK user wants to delete
 
 Examples:
-* `delete breakfast` <br />
+* `DELETE breakfast` <br />
   `1`
 * `list` <br />
-  `delete 1`
+  `DELETE 1`
 
-### 3.5. Wipe out history of all or specified tasks: `clear`
+### 3.5. Wipe out history of all or specified tasks: `CLEAR`
 
 There are 3 types of clear commands.
 
 #### 3.5.1. Delete all tasks
 
-Format: `clear all`
+Format: `CLEAR all`
 
 #### 3.5.2. Delete all tasks on date specified
 
-Format: `clear DATE`
+Format: `CLEAR DATE`
 
 #### 3.5.3. Delete all previously marked uncomplete/complete tasks
 
-Format: `clear completed` <br />
-		`clear uncompleted`
+Format: `CLEAR completed` <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`CLEAR uncompleted`
 
 Examples:
-* `clear 03/03/17`
+* `CLEAR 03/03/17`
 
-### 3.6. Search through all existing task by entering keywords/dates: `search`
+### 3.6. Search through all existing task by entering keywords/dates: `SEARCH`
 
-Format: Search KEYWORD<br>
-        Search DATE
+Format: `SEARCH KEYWORD` <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`SEARCH DATE`
 
 > In the event of non-unique KEYWORD, ProcrastiNomore will show a list of tasks
 > with the same KEYWORD
 
 Examples:
-* `search breakfast`
-Returns any tasks with containing breakfast
+* `SEARCH breakfast` <br>
+  Returns any tasks with containing breakfast
 
-### 3.7. To sort through the list of task displayed: `sort`
+### 3.7. To sort through the list of task displayed: `SORT`
 
-Format: Sort<br>
-        Sort DATE<br>
-        Sort TASKNAME
+Format: `SORT` <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`SORT DATE` <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`SORT TASKNAME`
 
 Using the sort command on its own will sort the task in ascending TASKINDEX order
 
-### 3.8. To mark a task with higher importance: `prioritise`
+### 3.8. To mark a task with higher importance: `PRIOR`
 
-Format: Prioritise TASKNAME<br>
-        Prioritise TASKINDEX<br>
-        Prioritise DATE
+Format: `PRIOR TASKNAME` <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`PRIOR TASKINDEX` <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`PRIOR DATE`
 
-### 3.9. To Undo your previous commands: `undo`
+### 3.9. To Undo your previous commands: `UNDO`
 
 Shortcut: `Ctrl+Z`<br>
 
 1 command will be undone every time this command is called.
 
-### 3.10. To Redo your previous commands: `redo`
+### 3.10. To Redo your previous commands: `REDO`
 
 Shortcut: `Ctrl+Y`<br>
 
 1 command will be redone every time this command is called.
 
-### 3.11. Exiting the program : `exit`
+### 3.11. Exiting the program : `EXIT`
 
 Exits the program.<br>
 
@@ -216,22 +222,22 @@ There is no need to save manually.
 
 ## 5. Command Summary
 
-* **Add**  `add TASK on DATE/DAY from STARTTIME to ENDTIME` <br>
-  e.g. `add eat food on 03/03/17 from 0830 to 1030`
+* **Add**  `ADD TASK ON DATE/DAY FROM STARTTIME TO ENDTIME` <br>
+  &nbsp;e.g. `ADD eat food ON 03/03/17 FROM 0830 TO 1030`
 
-* **Clear** : `clear`
+* **Clear** : `CLEAR`
 
-* **Delete** : `delete INDEX` <br>
+* **Delete** : `DELETE INDEX` <br>
    e.g. `delete 3`
 
-* **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
-  e.g. `find James Jake`
+* **Search** : `SEARCH KEYWORD [MORE_KEYWORDS]` <br>
+  e.g. `find more food`
 
-* **List** : `list` <br>
+* **List** : `LIST` <br>
   e.g.
 
-* **Help** : `help` <br>
+* **Help** : `HELP` <br>
   e.g.
 
-* **Select** : `select INDEX` <br>
+* **Select** : `SELECT INDEX` <br>
   e.g.`select 2`
