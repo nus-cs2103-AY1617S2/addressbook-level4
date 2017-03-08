@@ -11,7 +11,6 @@ public class Remark {
 
     public static final String MESSAGE_REMARK_CONSTRAINTS =
             "Task remarks should only contain alphanumeric characters and spaces, and it should not be blank";
-    
     // to be changed to fit remarks constraints
     public static final String REMARK_VALIDATION_REGEX = "[\\w\\.]+@[\\w\\.]+";
 
