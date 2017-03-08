@@ -43,7 +43,7 @@ public class AddCommandTest extends TodoListGuiTest {
 
     private void assertAddSuccess(TestTodo todoToAdd, TestTodo... currentList) {
 
-    	commandBox.runCommand(todoToAdd.getAddCommand());
+        commandBox.runCommand(todoToAdd.getAddCommand());
 
         //confirm the new card contains the right data
         TodoCardHandle addedCard = todoListPanel.navigateToTodo(todoToAdd.getName().fullName);

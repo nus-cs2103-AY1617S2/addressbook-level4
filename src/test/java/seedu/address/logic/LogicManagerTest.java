@@ -35,10 +35,10 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.TodoList;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyTodoList;
+import seedu.address.model.TodoList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.todo.Name;
@@ -188,7 +188,7 @@ public class LogicManagerTest {
         assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
                 Name.MESSAGE_NAME_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
-        		Name.MESSAGE_NAME_CONSTRAINTS);
+        	    Name.MESSAGE_NAME_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
@@ -461,6 +461,10 @@ public class LogicManagerTest {
             return todos;
         }
 
+        List<Todo> generateTodoList(Todo... todos) {
+            return Arrays.asList(todos);
+        }
+
         /**
          * Generates an TodoList based on the list of Todos given.
          */
@@ -502,12 +506,6 @@ public class LogicManagerTest {
             for (Todo p: todosToAdd) {
                 model.addTodo(p);
             }
-        }
-
-
-
-        List<Todo> generateTodoList(Todo... todos) {
-            return Arrays.asList(todos);
         }
 
         /**

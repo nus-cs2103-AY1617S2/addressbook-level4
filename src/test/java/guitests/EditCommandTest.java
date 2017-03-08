@@ -111,8 +111,8 @@ public class EditCommandTest extends TodoListGuiTest {
     private void assertEditSuccess(int filteredTodoListIndex, int addressBookIndex,
                                     String detailsToEdit, TestTodo editedTodo) {
 
-    	commandBox.runCommand("edit " + filteredTodoListIndex + " " + detailsToEdit);
-    	//new java.util.Scanner(System.in).nextLine();
+        commandBox.runCommand("edit " + filteredTodoListIndex + " " + detailsToEdit);
+        //new java.util.Scanner(System.in).nextLine();
         // confirm the new card contains the right data
         TodoCardHandle editedCard = todoListPanel.navigateToTodo(editedTodo.getName().fullName);
         assertMatching(editedTodo, editedCard);

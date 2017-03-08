@@ -8,7 +8,7 @@ import seedu.address.model.todo.ReadOnlyTodo;
 
 public class SelectCommandTest extends TodoListGuiTest {
 
-	/*
+    /*
     @Test
     public void selectTodo_nonEmptyList() {
 
