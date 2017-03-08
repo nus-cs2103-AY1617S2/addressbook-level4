@@ -16,7 +16,7 @@ import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 
 /**
- * JAXB-friendly version of the Person.
+ * JAXB-friendly version of the Task.
  */
 public class XmlAdaptedTask {
 
@@ -40,7 +40,7 @@ public class XmlAdaptedTask {
 	}
 
 	/**
-	 * Converts a given Person into this class for JAXB use.
+	 * Converts a given Task into this class for JAXB use.
 	 *
 	 * @param source
 	 *            future changes to this will not affect the created
@@ -58,7 +58,7 @@ public class XmlAdaptedTask {
 	}
 
 	/**
-	 * Converts this jaxb-friendly adapted task object into the model's Person
+	 * Converts this jaxb-friendly adapted task object into the model's Task
 	 * object.
 	 *
 	 * @throws IllegalValueException
@@ -66,15 +66,15 @@ public class XmlAdaptedTask {
 	 *             task
 	 */
 	public Task toModelType() throws IllegalValueException {
-		final List<Tag> personTags = new ArrayList<>();
+		final List<Tag> taskTags = new ArrayList<>();
 		for (XmlAdaptedTag tag : this.tagged) {
-			personTags.add(tag.toModelType());
+			taskTags.add(tag.toModelType());
 		}
 		final Name name = new Name(this.name);
 		final Priority priority = new Priority(this.priority);
 		final Deadline deadline = new Deadline(this.deadline);
 		final Description description = new Description(this.description);
-		final UniqueTagList tags = new UniqueTagList(personTags);
+		final UniqueTagList tags = new UniqueTagList(taskTags);
 		return new Task(name, priority, deadline, description, tags);
 	}
 }

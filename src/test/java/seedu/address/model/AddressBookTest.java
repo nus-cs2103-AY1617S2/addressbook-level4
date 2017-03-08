@@ -49,9 +49,9 @@ public class AddressBookTest {
     public void resetData_withDuplicateTasks_throwsAssertionError() {
         TypicalTestTasks td = new TypicalTestTasks();
         // Repeat td.alice twice
-        List<Task> newPersons = Arrays.asList(new Task(td.alice), new Task(td.alice));
+        List<Task> newTasks = Arrays.asList(new Task(td.alice), new Task(td.alice));
         List<Tag> newTags = td.alice.getTags().asObservableList();
-        TaskManagerStub newData = new TaskManagerStub(newPersons, newTags);
+        TaskManagerStub newData = new TaskManagerStub(newTasks, newTags);
 
         thrown.expect(AssertionError.class);
         addressBook.resetData(newData);
@@ -60,11 +60,11 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
         TaskManager typicalAddressBook = new TypicalTestTasks().getTypicalTaskManager();
-        List<ReadOnlyTask> newPersons = typicalAddressBook.getTaskList();
+        List<ReadOnlyTask> newTasks = typicalAddressBook.getTaskList();
         List<Tag> newTags = new ArrayList<>(typicalAddressBook.getTagList());
         // Repeat the first tag twice
         newTags.add(newTags.get(0));
-        TaskManagerStub newData = new TaskManagerStub(newPersons, newTags);
+        TaskManagerStub newData = new TaskManagerStub(newTasks, newTags);
 
         thrown.expect(AssertionError.class);
         addressBook.resetData(newData);

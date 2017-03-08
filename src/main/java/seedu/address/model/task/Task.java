@@ -6,14 +6,14 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Represents a Person in the address book. Guarantees: details are present and
+ * Represents a Task in the Task Manager. Guarantees: details are present and
  * not null, field values are validated.
  */
 public class Task implements ReadOnlyTask {
 
 	private Name name;
-	private Priority phone;
-	private Deadline email;
+	private Priority priority;
+	private Deadline deadline;
 	private Description description;
 
 	private UniqueTagList tags;
@@ -21,11 +21,11 @@ public class Task implements ReadOnlyTask {
 	/**
 	 * Every field must be present and not null.
 	 */
-	public Task(Name name, Priority phone, Deadline email, Description description, UniqueTagList tags) {
-		assert !CollectionUtil.isAnyNull(name, phone, email, description, tags);
+	public Task(Name name, Priority priority, Deadline deadline, Description description, UniqueTagList tags) {
+		assert !CollectionUtil.isAnyNull(name, priority, deadline, description, tags);
 		this.name = name;
-		this.phone = phone;
-		this.email = email;
+		this.priority = priority;
+		this.deadline = deadline;
 		this.description = description;
 		this.tags = new UniqueTagList(tags); // protect internal tags from
 												// changes in the arg list
@@ -48,24 +48,24 @@ public class Task implements ReadOnlyTask {
 		return this.name;
 	}
 
-	public void setPhone(Priority phone) {
-		assert phone != null;
-		this.phone = phone;
+	public void setPriority(Priority priority) {
+		assert priority != null;
+		this.priority = priority;
 	}
 
 	@Override
 	public Priority getPriority() {
-		return this.phone;
+		return this.priority;
 	}
 
-	public void setEmail(Deadline email) {
-		assert email != null;
-		this.email = email;
+	public void setDeadline(Deadline deadline) {
+		assert deadline != null;
+		this.deadline = deadline;
 	}
 
 	@Override
 	public Deadline getDeadline() {
-		return this.email;
+		return this.deadline;
 	}
 
 	public void setDescription(Description description) {
@@ -97,8 +97,8 @@ public class Task implements ReadOnlyTask {
 		assert replacement != null;
 
 		this.setName(replacement.getName());
-		this.setPhone(replacement.getPriority());
-		this.setEmail(replacement.getDeadline());
+		this.setPriority(replacement.getPriority());
+		this.setDeadline(replacement.getDeadline());
 		this.setDescription(replacement.getDescription());
 		this.setTags(replacement.getTags());
 	}
@@ -114,7 +114,7 @@ public class Task implements ReadOnlyTask {
 	public int hashCode() {
 		// use this method for custom fields hashing instead of implementing
 		// your own
-		return Objects.hash(this.name, this.phone, this.email, this.description, this.tags);
+		return Objects.hash(this.name, this.priority, this.deadline, this.description, this.tags);
 	}
 
 	@Override
