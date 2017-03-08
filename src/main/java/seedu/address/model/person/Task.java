@@ -14,22 +14,34 @@ public class Task implements ReadOnlyTask {
     private Name name;
     private Phone phone;
     private Email email;
-    private Description address;
+    private Description description;
 
     private UniqueTagList tags;
 
     /**
-     * Every field must be present and not null.
+     * left for the sake of leaving.
      */
     public Task(Name name, Phone phone, Email email, Description address, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
+        this.description = address;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
+    /**
+     * Modified for Task. 
+     */
+    public Task(Name name, Description address, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = null;
+        this.email = null;
+        this.description = address;
+        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+    }
+    
     /**
      * Creates a copy of the given ReadOnlyPerson.
      */
@@ -69,12 +81,12 @@ public class Task implements ReadOnlyTask {
 
     public void setAddress(Description address) {
         assert address != null;
-        this.address = address;
+        this.description = address;
     }
 
     @Override
     public Description getAddress() {
-        return address;
+        return description;
     }
 
     @Override
@@ -112,7 +124,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, description, tags);
     }
 
     @Override
