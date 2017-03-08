@@ -7,6 +7,7 @@ import t16b4.yats.commons.core.Messages;
 import t16b4.yats.commons.util.CollectionUtil;
 import t16b4.yats.logic.commands.exceptions.CommandException;
 import t16b4.yats.model.item.Description;
+import t16b4.yats.model.item.Event;
 import t16b4.yats.model.item.ReadOnlyEvent;
 import t16b4.yats.model.item.Timing;
 import t16b4.yats.model.item.Title;
