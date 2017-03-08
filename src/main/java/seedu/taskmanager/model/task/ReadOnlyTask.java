@@ -17,7 +17,7 @@ public interface ReadOnlyTask {
      * The returned CategoryList is a deep copy of the internal CategoryList,
      * changes on the returned list will not affect the task's internal categories.
      */
-//    UniqueCategoryList getCategories();
+    UniqueCategoryList getCategories();
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)

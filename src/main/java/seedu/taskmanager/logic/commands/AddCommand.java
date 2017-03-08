@@ -4,16 +4,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
-// import seedu.taskmanager.model.task.Address;
 import seedu.taskmanager.model.task.Date;
 import seedu.taskmanager.model.task.TaskName;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.Deadline;
-//import seedu.taskmanager.model.task.EndTime;
-//import seedu.taskmanager.model.task.Deadline;
+import seedu.taskmanager.model.task.EndTime;
 import seedu.taskmanager.model.task.UniqueTaskList;
-// import seedu.taskmanager.model.tag.Tag;
-// import seedu.taskmanager.model.tag.UniqueTagList;
+import seedu.taskmanager.model.category.Category;
+import seedu.taskmanager.model.category.UniqueCategoryList;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
 
 /**
@@ -21,12 +19,12 @@ import seedu.taskmanager.logic.commands.exceptions.CommandException;
  */
 public class AddCommand extends Command {
 
-    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD = "ADD";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
-            + "Parameters: TASK ON DATE FROM TIME TO ENDTIME\n"
+            + "Parameters: TASK ON DATE"
             + "Example: " + COMMAND_WORD
-            + " eat lunch ON 03/03/17 FROM 1230 TO 1430 ";
+            + " eat lunch ON thursday ";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
@@ -38,19 +36,18 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String taskName, String time, String date /* String endTime, String deadline */)
+    public AddCommand(String taskName, /*String date, String endTime,*/ String deadline /* Set<String> categories */)
             throws IllegalValueException {
-  //      final Set<Tag> tagSet = new HashSet<>();
-  //      for (String tagTaskName : tags) {
-  //          tagSet.add(new Tag(tagTaskName));
-  //      }
+//        final Set<Category> categorySet = new HashSet<>();
+//        for (String tagCategoryName : categories) {
+//            categorySet.add(new Category(tagCategoryName));
+//        }
         this.toAdd = new Task(
                 new TaskName(taskName),
-                new Deadline(time),
-                new Date(date)
-//                new EndTime(endTime),
-  //              new Deadline(deadline)
-                );
+/*                new Date(date),
+                new EndTime(endTime), */
+                new Deadline(deadline)
+/*                new UniqueCategoryList(categorySet)*/);
     }
 
     @Override

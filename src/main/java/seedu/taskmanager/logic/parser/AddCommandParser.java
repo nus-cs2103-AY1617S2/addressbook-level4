@@ -1,12 +1,11 @@
 package seedu.taskmanager.logic.parser;
 
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-// import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_ENDTIME;
-// import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_CATEGORY;
 
 import java.util.NoSuchElementException;
 
@@ -26,17 +25,15 @@ public class AddCommandParser {
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_TIME, PREFIX_DATE /*, PREFIX_ADDRESS, PREFIX_TAG*/);
+                new ArgumentTokenizer(/*PREFIX_TIME, PREFIX_DATE, */PREFIX_ENDTIME/*, PREFIX_DEADLINE , PREFIX_CATEGORY*/);
         argsTokenizer.tokenize(args);
         try {
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
-                    argsTokenizer.getValue(PREFIX_TIME).get(),
-                    argsTokenizer.getValue(PREFIX_DATE).get()
-//                    argsTokenizer.getValue(PREFIX_DEADLINE).get(),
-//                    argsTokenizer.getValue(PREFIX_ENDTIME).get()
-                  /*  argsTokenizer.getValue(PREFIX_ADDRESS).get(),
-                    ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)) */
+/*                    argsTokenizer.getValue(PREFIX_DATE).get(),
+                    argsTokenizer.getValue(PREFIX_ENDTIME).get(), */
+                    argsTokenizer.getValue(PREFIX_DEADLINE).get()
+/*                    ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_CATEGORY)*/
             );
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));

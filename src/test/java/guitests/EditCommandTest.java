@@ -14,7 +14,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TestPerson;
-import seedu.taskmanager.logic.commands.EditCommand;
+import seedu.taskmanager.logic.commands.UpdateCommand;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
 public class EditCommandTest extends AddressBookGuiTest {
@@ -73,7 +73,7 @@ public class EditCommandTest extends AddressBookGuiTest {
     @Test
     public void edit_missingPersonIndex_failure() {
         commandBox.runCommand("edit Bobby");
-        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -85,7 +85,7 @@ public class EditCommandTest extends AddressBookGuiTest {
     @Test
     public void edit_noFieldsSpecified_failure() {
         commandBox.runCommand("edit 1");
-        assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
+        assertResultMessage(UpdateCommand.MESSAGE_NOT_EDITED);
     }
 
     @Test
@@ -110,7 +110,7 @@ public class EditCommandTest extends AddressBookGuiTest {
     public void edit_duplicatePerson_failure() {
         commandBox.runCommand("edit 3 Alice Pauline p/85355255 e/alice@gmail.com "
                                 + "a/123, Jurong West Ave 6, #08-111 t/friends");
-        assertResultMessage(EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertResultMessage(UpdateCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
     /**
@@ -133,6 +133,6 @@ public class EditCommandTest extends AddressBookGuiTest {
         // confirm the list now contains all previous persons plus the person with updated details
         expectedPersonsList[addressBookIndex - 1] = editedPerson;
         assertTrue(personListPanel.isListMatching(expectedPersonsList));
-        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        assertResultMessage(String.format(UpdateCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
 }
