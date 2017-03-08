@@ -1,52 +1,52 @@
-# About Us  
+# About Us
 
-We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).  
+We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-## Project Team  
-
-
+## Project Team
 
 
-#### [Lee Jin Shun](http://github.com/jinshunlee)  
-<img src="images/jinshunlee.png" width="150"><br>  
-Role: Project Leader <br>  
+
+
+#### [Lee Jin Shun](http://github.com/jinshunlee)
+<img src="images/jinshunlee.png" width="150"><br>
+Role: Project Leader <br>
 Responsibilities:
 * In charge of Integration
 * In charge of Deliverables and Deadlines
 * In charge of Logic Component
 
 
------  
+-----
 
-#### [Chew Chia Sin](http://github.com/Fyelight)  
-<img src="images/fyelight.png" width="150"><br>  
-Role: Developer <br>  
-Responsibilities: 
+#### [Chew Chia Sin](http://github.com/Fyelight)
+<img src="images/fyelight.png" width="150"><br>
+Role: Developer <br>
+Responsibilities:
 * In charge of Scheduling and Tracking
 * In charge of Storage Component
 
 
------  
+-----
 
-#### [Hon Kean Wai](http://github.com/drtrifle)  
-<img src="images/drtrifle.png" width="150"><br>  
-Role: Developer <br>  
-Responsibilities: 
-* In charge of Documentation  
+#### [Hon Kean Wai](http://github.com/drtrifle)
+<img src="images/drtrifle.png" width="150"><br>
+Role: Developer <br>
+Responsibilities:
+* In charge of Documentation
 * In charge of Testing
 * In charge of Model Component
 
 
------  
+-----
 
-#### [Ye Huanhui](https://github.com/yexiexie)  
-<img src="images/yexiexie.png" width="150"><br>  
-Role: Developer <br>  
-Responsibilities: 
+#### [Ye Huanhui](https://github.com/yexiexie)
+<img src="images/yexiexie.png" width="150"><br>
+Role: Developer <br>
+Responsibilities:
 * In charge of Code Quality
-* In charge of UI 
+* In charge of UI
 
------  
+-----
 
 
 # Contributors
