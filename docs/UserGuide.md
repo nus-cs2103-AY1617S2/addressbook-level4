@@ -17,7 +17,7 @@
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
     > <img src="images/Ui.png" width="600">
 
- 
+
 
 5. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
@@ -64,7 +64,7 @@ Format: `addFTask FLOATINGTASKNAME [p/PRIORITY] [#TAG]...`
 
 > Floating Tasks can have any number of tags (including 0)
 > Floating Tasks can only have one priority
-> Floating Tasks cannot have any deadlines 
+> Floating Tasks cannot have any deadlines
 
 Examples:
 
@@ -95,7 +95,7 @@ Format: `edit INDEX [t/DEADLINE TIME] [p/PRIORITY] [#TAG]...`
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
 > * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
-> * You can remove all the task's tags by typing `#` without specifying any tags after it. 
+> * You can remove all the task's tags by typing `#` without specifying any tags after it.
 
 Examples:
 
@@ -120,10 +120,10 @@ Examples:
 
 * `find OP` <br>
   Returns `OP1`
-  
+
 * `find OP1 OP2 Lab1`<br>
-  Returns Any task having names `Lab1`, `OP1`, or `OP2` 
- 
+  Returns Any task having names `Lab1`, `OP1`, or `OP2`
+
 ### Deleting specified items from the task manager: `delete`
 Deletes the specified task from the task manager.<br>
 Format: `delete INDEX`
@@ -140,8 +140,8 @@ Examples:
 * `find MA1521 Tutorial 1`<br>
   `delete 1`<br>
   Deletes the 1st task in the results of the `find` command.
-  
-  
+
+
 ###  Listing all tasks: `filter`
 Shows tasks and events that take place on specified date and hide others
 Floating Task list remain unchanged
@@ -177,16 +177,16 @@ There is no need to save manually.
 
 * **Add Task** : `addTask TASKNAME d/DEADLINE DATE [t/DEADLINE TIME] [p/PRIORITY] [#TAG]...`<br>
   e.g. `addTask completeUserGuide d/28-Feb-2017 t/2400 p/high #Important`
-  
+
 * **Add Floating Task** : `addFTask FLOATINGTASKNAME [p/PRIORITY] [#TAG]...`<br>
   e.g. `addFTask reachDiamondRank p/low #Overwatch`
 
 * **Add Event** : `addEvent EVENTNAME sd/START DATE ed/END DATE [st/START TIME] [et/END TIME] [p/PRIORITY]  [#TAG]...`<br>
   e.g. `addEvent finishCS3230Lab sd/01-Mar-17 ed/01-Mar-17 st/2000 et/2200 p/med #CS3230`
-  
+
 * **Edit**  `edit INDEX [t/DEADLINE TIME] [p/PRIORITY] [#TAG]...`<br>
 * e.g. `edit 1 t/9pm p/high #CS1010`
- 
+
 * **Clear** : `clear`
 
 * **Delete** : `delete INDEX` <br>
@@ -197,7 +197,7 @@ There is no need to save manually.
 
 * **Filter** : `filter DATE` <br>
   e.g. `filter 01-Mar-2017`
-   
+
 * **Help** : `help` <br>
   e.g. `help`
 
