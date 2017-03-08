@@ -336,7 +336,7 @@ public class LogicManagerTest {
         ArrayList<Task> tasksDeleted = new ArrayList<Task>();
         tasksDeleted.add(threePersons.get(1));
         assertCommandSuccess("delete 2",
-                String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, tasksDeleted),
+                String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, tasksDeleted),
                 expectedAB,
                 expectedAB.getTaskList());
     }
