@@ -5,9 +5,9 @@ Please refer to the [Setting up](DeveloperGuide.md#setting-up) section to learn 
 
 ## Starting the program
 
-1. Find the project in the `Project Explorer` or `Package Explorer` (usually located at the left side)
+1. Locate the .jar file
 2. Right click on the project
-3. Click `Run As` > `Java Application` and choose the `Main` class.
+3. Click `Run As` > `Java Application`
 4. The GUI should appear in a few seconds.
 
 ## Viewing help : `help`
@@ -20,7 +20,7 @@ Adds a task to the task manager<br>
 Format: `add TASKNAME DATE [STARTTIME] [ENDTIME] VENUE DESCRIPTION` 
  
 > Words in `UPPER_CASE` are the parameters, items in `SQUARE_BRACKETS` are optional, 
-> 
+> A format hint will be added to the command line so users know how to input the correct format
 
 Examples: 
 * `add groceries shopping 030117 0900 1200 Cold Storage Buy Extra milk`
@@ -45,7 +45,8 @@ Deletes a specified tasks from the task manager. Irreversible.<br>
 Format: `delete TASKNAME`
 
 > Deletes the name of the tasks at the specified `TASKNAME`. 
-  The name refers to the task name shown in the list.
+  The name refers to the task name shown in the list. 
+  `TASKNAME` must be an exact match in order for the function to work.
 
 Examples: 
 * `list`<br>
@@ -58,14 +59,15 @@ Format: `view TASKNAME`
 
 > Views the task at the specified `TASKNAME`. 
   The TASKNAME refers to the name shown in the list.
+  Fast Task will show all tasks that match with `TASKNAME`.
 
 Examples: 
 * `list groceries shopping`<br>
   Views the desrciption in the task manager.
 
-## Clearing all entries : `delete`
+## Clearing all entries : `clear`
 Clears all tasks from the task manager.<br>
-Format: `delete TASKNAME`  
+Format: `clear`  
 
 ## Exiting the program : `exit`
 Exits the program.<br>
