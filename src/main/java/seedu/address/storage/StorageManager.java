@@ -31,7 +31,7 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     public StorageManager(String taskListFilePath, String userPrefsFilePath) {
-        this(new XmlAddressBookStorage(taskListFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
+        this(new XmlTaskListStorage(taskListFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
     }
 
     // ================ UserPrefs methods ==============================
