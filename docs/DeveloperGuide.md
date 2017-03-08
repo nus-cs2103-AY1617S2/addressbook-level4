@@ -1,6 +1,6 @@
-# AddressBook Level 4 - Developer Guide
+# Tâche - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `CS2103JAN2017-T09-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -400,7 +400,8 @@ Use case ends.
 
 2a. No command contains letter or sequence of letters typed by user
 
-> Use case ends
+> 2a1. System informs user that there is no such command
+  Use case ends
 
 2b. User makes changes to input
 
@@ -410,11 +411,10 @@ Use case ends.
 
 **MSS**
 
-1. User clicks on "Change Save Location"
+1. User requests to change data file location
 2. System displays a directory chooser
 3. User selects a directory
-4. System changed the save location to the one selected
-5. System displays a message 
+4. System changes the save location to the one selected
 Use case ends
 
 **Extensions**
@@ -431,8 +431,10 @@ Use case ends
 
 **MSS**
 
-1. User presses on predefined hotkey
+1. User types in predefined keyboard shortcut
 2. System displays main window
+3. User types in keyboard shortcut again
+4. System minimizes main window
 Use case ends
 
 #### Use case: Delete task
@@ -477,7 +479,7 @@ Use case ends
 **MSS**
 
 1. User enters undo command
-2. System undoes last change
+2. System reverts back to previous state before last change
 Use case ends.
 
 **Extensions**
@@ -501,7 +503,7 @@ Use case ends
 2. Should process and respond to user commands within 1s. 
 3. Should conform to the Java coding standard.
 4. Should automatically back up data once a week. 
-5. Should detect any intrusion within 10 seconds.
+5. Should detect any intrusion within 5 seconds.
 6. Should work on any mainstream OS as long as it has Java 1.8.0_60 or higher installed.
 7. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
