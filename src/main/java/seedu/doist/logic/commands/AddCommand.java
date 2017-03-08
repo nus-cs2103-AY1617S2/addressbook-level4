@@ -7,9 +7,11 @@ import java.util.Map;
 
 import seedu.doist.commons.exceptions.IllegalValueException;
 import seedu.doist.logic.commands.exceptions.CommandException;
+import seedu.doist.logic.parser.CliSyntax;
 import seedu.doist.logic.parser.ParserUtil;
 import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.Description;
+import seedu.doist.model.task.Priority;
 import seedu.doist.model.task.Task;
 import seedu.doist.model.task.UniqueTaskList;
 
@@ -39,13 +41,21 @@ public class AddCommand extends Command {
      */
     public AddCommand(String preamble, Map<String, List<String>> parameters) throws IllegalValueException {
         if (preamble == null || preamble.trim().isEmpty()) {
-            throw new IllegalValueException("No arguments passed");
+            throw new IllegalValueException("You can't add a task without a description!");
         }
+
         List<String> tagsParameterStringList = parameters.get("\\under");
         if (tagsParameterStringList != null && !tagsParameterStringList.isEmpty()) {
             tagList = ParserUtil.parseTagsFromString(tagsParameterStringList.get(0));
         }
         this.toAdd = new Task(new Description(preamble), tagList);
+
+        List<String> priority = parameters.get(CliSyntax.PREFIX_AS.toString());
+        System.out.println(parameters);
+        if (priority != null && priority.size() > 0) {
+            String strPriority = priority.get(0).trim();
+            this.toAdd.setPriority(new Priority(strPriority));
+        }
     }
 
     @Override

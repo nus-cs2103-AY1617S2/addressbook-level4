@@ -19,8 +19,9 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_USAGE = info().getUsageTextForCommandWords()
             + ": List tasks satisfying the requirements specified by the parameters\n"
+            + "TYPE could be pending, overdue, finished\n"
             + "Parameters: TYPE [\\from START_TIME] [\\to END_TIME] [\\as PRIORITY] [\\under TAG...]\n"
-            + "Example: " + DEFAULT_COMMAND_WORD + "pending \\under school ";
+            + "Example: " + DEFAULT_COMMAND_WORD + " pending \\under school ";
     public static final String MESSAGE_SUCCESS = "Listed all tasks";
 
     private UniqueTagList tagList = new UniqueTagList();
@@ -36,10 +37,16 @@ public class ListCommand extends Command {
     public CommandResult execute() {
         if (tagList.isEmpty()) {
             model.updateFilteredListToShowAll();
+            return new CommandResult(MESSAGE_SUCCESS);
         } else {
             model.updateFilteredTaskList(tagList);
+            String message = MESSAGE_SUCCESS + " under: ";
+            for (Tag tag : tagList) {
+                message += tag.tagName + " ";
+            }
+            message = message.trim();
+            return new CommandResult(message);
         }
-        return new CommandResult(MESSAGE_SUCCESS);
     }
 
     public static CommandInfo info() {

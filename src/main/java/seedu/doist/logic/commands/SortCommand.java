@@ -32,11 +32,23 @@ public class SortCommand extends Command {
             "You can only " + DEFAULT_COMMAND_WORD + "\n"
             + SortType.PRIORITY.toString();
 
-    public SortCommand(SortType theSortType) throws IllegalValueException {
-        if (theSortType == null) {
+    public SortCommand(String argument) throws IllegalValueException {
+        // Remove trailing whitespace, spaces and change to upper case
+        String processedArgument = argument.trim();
+        processedArgument = processedArgument.replaceAll(" ", "");
+        processedArgument = processedArgument.toUpperCase();
+
+        if (!isValidSortArgument(processedArgument)) {
             throw new IllegalValueException(MESSAGE_SORT_CONSTRAINTS);
         }
-        this.sortType = theSortType;
+        this.sortType = SortType.valueOf(processedArgument);
+    }
+    /**
+     * Returns true if a given string is a valid sort argument
+     */
+    public static boolean isValidSortArgument(String argument) {
+        // Only priority for now
+        return argument.equals(SortType.PRIORITY.toString());
     }
 
     @Override
