@@ -43,7 +43,7 @@ By : `Team W14-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `February 2017`  &nbsp;&nbsp
 > * Parameters can be in any order.
 
 ### 2.1. Viewing help: help
-	
+
 Format: help
 
 > Help is also shown after an incorrect command
@@ -57,7 +57,7 @@ Format: add TASK_DETAILS [priority/ PRIORITY_LEVEL] [comment/ COMMENTS] [tag/ TA
 > Add a task with deadline<br>
 > Add a floating task
 
-TASK_DETAILS include task name, date and time, which can be written in any order as it is processed by an inbuilt natural language processor<br> 
+TASK_DETAILS include task name, date and time, which can be written in any order as it is processed by an inbuilt natural language processor<br>
 PRIORITY_LEVEL: high, medium, low
 Each task can have any number of tags (including 0)
 
@@ -81,7 +81,7 @@ Example:
 
 * find tutorial<br>
 delete 1
-		
+
 > Deletes 1st task in the results of the find command
 
 ### 2.4. Completing a task: done
@@ -125,11 +125,11 @@ Example:
 
 ### 2.7. Listing all tasks: list
 Shows a list of all tasks or groups of tasks<br>
-Format: list 
+Format: list
 
 > List shows uncompleted tasks first before completed tasks
 
-### 2.8. Sorting the tasks: sort 
+### 2.8. Sorting the tasks: sort
 Sorts command based on task name, starting date, ending date or priority level.<br>
 Format: sort {TASK}{FROM}{TO}{PRIORITY}
 
@@ -149,7 +149,7 @@ Format: undo
 
 Example:
 * delete 1<br>
-undo 
+undo
 
 > Delete action will be reversed
 
@@ -163,7 +163,7 @@ Format: clear [TAG]...
 Example:
 * clear completed
 * clear completed 2103
- 
+
 ### 2.11. Exiting the program: exit
 Exits the program<br>
 Format: exit
@@ -181,10 +181,10 @@ Format: exit
 
 * **Delete** : `delete INDEX` <br>
    e.g. `delete 3`
-   
+
 * **Done** : `done INDEX` <br>
 	e.g. `done 2`
-	
+
 * **Edit** : `edit INDEX TASK_DETAILS [priority/ PRIORITY_LEVEL] [comment/ COMMENTS] [tag/ TAG]...`<br>
 	e.g. `edit 1 2103 Lecture from 2-4 priority/high comment/ICube tag/2103
 
@@ -199,7 +199,7 @@ Format: exit
 
 * **Sort** : `sort {TASK}{FROM}{TO}{PRIORITY}` <br>
   	e.g.`sort high`
-  
+
 * **Undo** : `undo` <br>
 	e.g. `undo`
 

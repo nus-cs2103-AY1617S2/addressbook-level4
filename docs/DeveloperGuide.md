@@ -351,16 +351,16 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | be able to delete a task after adding | delete tasks that I no longer need
 `* * *` | user | find specific tasks by keywords | locate my task easily
 `* * *` | user | specify a particular path or folder to store my task lists | retrieve the file easily and conveniently
-`* * *` | user | undo the recent action | revert back in case I decide to change my mind. 
+`* * *` | user | undo the recent action | revert back in case I decide to change my mind.
 `* *` | user | add tasks that recur on a consistent basis (e.g. Tutorials and lectures) | add recurring tasks more conveniently, since the item only needs to be added once
 `* *` | user | add some comments for a particular task | store additional information that I will need when handling that task
 `* *` | user | include a tag on the task | retrieve all the tasks that belong to the same tag
 `* *` | user | be able to set how important a task is | know which tasks I should prioritize first
 `* *` | user | sort my tasks according to priority or tags | delegate my time appropriately
-`* *` | user | be able to delete a group of task by keywords | avoid deleting one by one 
+`* *` | user | be able to delete a group of task by keywords | avoid deleting one by one
 `* *` | user | have a view of my pending tasks for the day/week/month | know what I need to do for that particular period of time
 `* *` | user | see my overdue tasks | know what actions to take on them
-`* *` | advanced user | have the choice of a few preset themes | change it to my liking. 
+`* *` | advanced user | have the choice of a few preset themes | change it to my liking.
 `*` | user | sort my tasks according to task names | delegate my time appropriately
 `*` | user | delete all my tasks | hand in my resignation letter afterwards
 
@@ -472,7 +472,7 @@ Use case ends
 #### Keywords
 > Task Name, Tag, From Date - To Date, Due Dates
 
-#### Path 
+#### Path
 > Absolute path or Relative path of the Tasks Storage
 
 ####DOS style commands
@@ -500,23 +500,23 @@ Pros:
 Cons:
 * Web application (especially for Google Task) that requires Internet connection for usage.
 * UI for Google Tasks needs improvement; The deletion of items is quite a hassle and can be messy.
-* May not cater to Jim who prefers keyboard inputs. 
+* May not cater to Jim who prefers keyboard inputs.
 
 **Priority Matrix**
 
 Author: Ellango Vesali
 
 Pros:
-* Simple and easy to use UI 
-* Create multiple task under a main project 
+* Simple and easy to use UI
+* Create multiple task under a main project
 * Group the list of items based on the different levels of priorities
-* Integrate with Mail to keep track of important mails 
-* Syncs with iOS, Android and Windows 
-* Upload files 
-* Daily reports reminding one of their deadlines 
-* Collaborative aspects for teams 
+* Integrate with Mail to keep track of important mails
+* Syncs with iOS, Android and Windows
+* Upload files
+* Daily reports reminding one of their deadlines
+* Collaborative aspects for teams
 
 Cons:
 * Require mouse usage, may not cater Jim who prefers keyboard inputs
-* Monthly subscription fee 
+* Monthly subscription fee
 
