@@ -45,7 +45,7 @@ public class Parser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-            case AddCommand.COMMAND_WORD:
+        case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
             case EditCommand.COMMAND_WORD:
