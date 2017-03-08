@@ -339,15 +339,15 @@ Format: `exit`
 | Command       | Format        | 
 | ------------- |:-------------| 
 |  Help         |  `help` | 
-|  Add          |  `add NAME [s/START_DATE] [e/END_DATE] [t/TAG]...` | 
+|  Add          |  `add NAME [s/START_DATE e/END_DATE d/DURATION] [r/RECUR] [p/PRIORITY] [i/INFORMATION] [t/TAG]...` | 
+|  Find         |  `find KEYWORD [MORE_KEYWORDS] [s/SPECIFICITY] [f/FIELDS]...` | 
+|  List         |  `list [s/START_DATE e/END_DATE d/DURATION] [o/ORDER] [rev/] [done/]` | 
+|  Edit         |  `edit PREFIX_INDEX [NAME] [s/START_DATE e/END_DATE d/DURATION] [r/RECUR] [p/PRIORITY] [i/INFORMATION] [t/TAG]...` | 
 |  Delete       |  `delete PREFIX_INDEX` | 
-|  Edit         |  `edit PREFIX_INDEX [NAME] [s/START_DATE] [e/END_DATE] [t/TAG]...` | 
 |  Clear        |  `clear` | 
-|  Find         |  `find KEYWORD [MORE_KEYWORDS]` | 
-|  List         |  `list CATEGORY` | 
-|  Done         |  `done PREFIX_INDEX` | 
-|  Undone       |  `undone PREFIX_INDEX` | 
 |  Undo         |  `undo`  | 
 |  Redo         |  `redo` | 
+|  Done         |  `done PREFIX_INDEX` | 
+|  Undone       |  `undone PREFIX_INDEX` | 
 |  Save         |  `save` | 
 |  Exit         |  `exit`  | 
