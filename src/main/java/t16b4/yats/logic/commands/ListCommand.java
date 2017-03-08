@@ -7,9 +7,11 @@ package t16b4.yats.logic.commands;
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
-    public static final String COMMAND_WORD_SUFFIX_TITLE = "list title";
-    public static final String COMMAND_WORD_SUFFIX_DATE = "list date";
-    public static final String COMMAND_WORD_SUFFIX_TAG = "list tag";
+    public static final String COMMAND_WORD_EXTENTION = "by";
+    public static final String COMMAND_WORD_SUFFIX_TITLE = "title";
+    public static final String COMMAND_WORD_SUFFIX_DEADLINE = "deadline";
+    public static final String COMMAND_WORD_SUFFIX_TIMING = "timing";
+    public static final String COMMAND_WORD_SUFFIX_TAG = "tag";
 
     public static final String MESSAGE_SUCCESS = "Listed all items";
 
