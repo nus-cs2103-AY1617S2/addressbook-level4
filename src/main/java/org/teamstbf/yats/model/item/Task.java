@@ -15,6 +15,7 @@ public class Task implements ReadOnlyItem {
 	private Deadline deadline;
 	private Timing timing;
 	private Description description;
+	private Periodic periodic;
 
 	private UniqueTagList tags;
 
@@ -76,6 +77,16 @@ public class Task implements ReadOnlyItem {
 	public Description getDescription() {
 		return description;
 	}
+	
+	public void setPeriodic(Periodic periodic) {
+		assert periodic != null;
+		this.periodic = periodic;
+	}
+	
+	@Override
+	public Periodic getPeriodic() {
+		return periodic;
+	}
 
 	@Override
 	public UniqueTagList getTags() {
@@ -119,5 +130,6 @@ public class Task implements ReadOnlyItem {
 	public String toString() {
 		return getAsText();
 	}
+
 
 }
