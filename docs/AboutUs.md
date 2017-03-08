@@ -11,7 +11,7 @@ We are a team based in the [School of Computing, National University of Singapor
 -----
 
 #### [Gabriel Sim](http://github.com/gabrielsim1993)
-<img src="images/JoshuaLee.jpg" width="150"><br>
+<img src="images/gabriel.jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: Team Leader, Logic, Deliverables, Git expert
 
