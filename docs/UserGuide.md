@@ -295,7 +295,7 @@ Format: `done PREFIX_INDEX`
 
 ---
 ### Marking a task as uncompleted: `undone`
-Marks a task as uncompleted.
+The `undone` command updates a task to mark it as uncompleted.
 
 Format: `undone PREFIX_INDEX`
 
@@ -310,22 +310,23 @@ Format: `undone PREFIX_INDEX`
 ---
 ### Saving the data: `save`
 
-By default, OneTwoDo data is saved in a file called `todo.txt` in the data folder. You can 
-change the file location by provideing a new file name as the parameter.
+By default, OneTwoDo data is saved in a file called `todo.txt` in the data folder. You can change the file location by provideing a new file name as the parameter.
 
-Note that changes made to the to-do list is automatically saved. You do not need to manually save it each time. 
+Note that changes made to OneTwoDo are automatically saved. You do not need to manually save them each time using the`save` command.
 
 Format: `save NEW_FILE_NAME`
 
 **Examples**
 
 > * `save newFile.txt`
->    Save the to-do list in a new file entitled newFile.txt. 
+> 
+>    Save the OneTwoDo data in a new file entitled `newFile.txt`. 
 
 ---
 ### Exiting the program : `exit`
 
 Exits the program.
+
 Format: `exit`
 
 
