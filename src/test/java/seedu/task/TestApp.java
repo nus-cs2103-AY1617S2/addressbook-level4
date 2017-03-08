@@ -9,7 +9,7 @@ import seedu.task.commons.core.GuiSettings;
 import seedu.task.model.ReadOnlyTaskManager;
 import seedu.task.model.UserPrefs;
 import seedu.task.storage.XmlSerializableTaskManager;
-import seedu.address.testutil.TestUtil;
+import seedu.task.testutil.TestUtil;
 import seedu.task.MainApp;
 
 /**

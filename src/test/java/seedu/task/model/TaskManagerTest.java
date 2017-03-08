@@ -19,7 +19,7 @@ import seedu.task.model.ReadOnlyTaskManager;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
-import seedu.address.testutil.TypicalTestPersons;
+import seedu.task.testutil.TypicalTestPersons;
 
 public class TaskManagerTest {
 

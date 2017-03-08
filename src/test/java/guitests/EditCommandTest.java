@@ -6,8 +6,6 @@ import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.TestPerson;
 import seedu.task.commons.core.Messages;
 import seedu.task.logic.commands.EditCommand;
 import seedu.task.model.tag.Tag;
@@ -15,6 +13,8 @@ import seedu.task.model.task.Date;
 import seedu.task.model.task.Location;
 import seedu.task.model.task.Name;
 import seedu.task.model.task.Remark;
+import seedu.task.testutil.PersonBuilder;
+import seedu.task.testutil.TestPerson;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
 public class EditCommandTest extends AddressBookGuiTest {
