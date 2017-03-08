@@ -6,7 +6,6 @@ import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_STARTDATE;
 import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_TAG;
 
-
 import java.util.NoSuchElementException;
 
 import seedu.ezdo.commons.exceptions.IllegalValueException;
