@@ -3,7 +3,6 @@ package seedu.tache.model;
 
 import javafx.collections.ObservableList;
 import seedu.tache.model.tag.Tag;
-import seedu.tache.model.task.DetailedTask;
 import seedu.tache.model.task.ReadOnlyTask;
 
 /**

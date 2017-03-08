@@ -55,12 +55,12 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<DetailedTask> lastShownList = model.getFilteredTaskList();
+        List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
         if (filteredTaskListIndex >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        DetailedTask taskToEdit = lastShownList.get(filteredTaskListIndex);
+        ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
         try {
             model.updateTask(filteredTaskListIndex, editedTask);
@@ -75,16 +75,17 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
      */
-    private static Task createEditedTask(DetailedTask taskToEdit,
+    private static Task createEditedTask(ReadOnlyTask taskToEdit,
                                              EditTaskDescriptor editTaskDescriptor) {
         assert taskToEdit != null;
         
         if(taskToEdit instanceof DetailedTask){
-            Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
-            Date updatedStartDate = editTaskDescriptor.getStartDate().orElseGet(taskToEdit::getStartDate);
-            Date updateEndDate = editTaskDescriptor.getEndDate().orElseGet(taskToEdit::getEndDate);
-            Time updateTime = editTaskDescriptor.getTime().orElseGet(taskToEdit::getTime);
-            Duration updatedDuration = editTaskDescriptor.getDuration().orElseGet(taskToEdit::getDuration);
+            DetailedTask temp = (DetailedTask)taskToEdit;
+            Name updatedName = editTaskDescriptor.getName().orElseGet(temp::getName);
+            Date updatedStartDate = editTaskDescriptor.getStartDate().orElseGet(temp::getStartDate);
+            Date updateEndDate = editTaskDescriptor.getEndDate().orElseGet(temp::getEndDate);
+            Time updateTime = editTaskDescriptor.getTime().orElseGet(temp::getTime);
+            Duration updatedDuration = editTaskDescriptor.getDuration().orElseGet(temp::getDuration);
             UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
             return new DetailedTask(updatedName, updatedStartDate, updateEndDate, updateTime, updatedDuration, updatedTags);
         }else{

@@ -1,11 +1,12 @@
 package seedu.tache.model;
 
 import java.util.Set;
+
 import seedu.tache.commons.core.UnmodifiableObservableList;
-import seedu.tache.model.task.DetailedTask;
-import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.model.task.Task;
+import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.model.task.UniqueTaskList;
+import seedu.tache.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
  * The API of the Model component.
@@ -21,7 +22,7 @@ public interface Model {
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
     /** Adds the given task */
-    void addTask(DetailedTask task) throws UniqueTaskList.DuplicateTaskException;
+    void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
     /**
      * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
@@ -34,14 +35,12 @@ public interface Model {
             throws UniqueTaskList.DuplicateTaskException;
 
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
-
-    UnmodifiableObservableList<DetailedTask> getFilteredTaskList();
+    UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
 
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
-
     void updateFilteredTaskList(Set<String> keywords);
 
 }
