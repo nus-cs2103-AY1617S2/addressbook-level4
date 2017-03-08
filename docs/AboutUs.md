@@ -1,52 +1,41 @@
 # About Us
 
-We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
+Hello from the creators of **Typed**! We like to call ourselves Typedwriters. We are a software engineering team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
 ## Project Team
 
-#### [Damith C. Rajapakse](http://www.comp.nus.edu.sg/~damithch) <br>
-<img src="images/DamithRajapakse.jpg" width="150"><br>
-**Role**: Project Advisor
+#### [Lee Pei Xuan](http://github.com/pyxyyy) <br>
+<img src="images/pyxyyy.jpg" width="150"><br>
+Role: Chief Technical(ly Not An) Officer (CTO), aka Chief **Typed** Officer <br>
+Responsibilities: Team Lead, Deliverables & Deadlines, Testing <br>
+Component: Logic
 
 -----
 
-#### [Joshua Lee](http://github.com/lejolly)
-<img src="images/JoshuaLee.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: UI
+#### [Low Yong Siang](http://github.com/YongSiang94)
+<img src="images/yongsiang94.jpg" width="150"><br>
+Role: Director of First Impressions <br>
+Responsibilities: Documentation, Design <br>
+Component: GUI
 
 -----
 
-#### [Leow Yijin](http://github.com/yijinl)
-<img src="images/LeowYijin.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Data
+#### [Mun Le Yuan](http://github.com/Ley94)
+<img src="images/ley94.jpg" width="150"><br>
+Role: Director of Back Side <br>
+Responsibilities: Integration <br>
+Component: Storage
 
 -----
 
-#### [Martin Choo](http://github.com/m133225)
-<img src="images/MartinChoo.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Dev Ops
+#### [Yim Chia Hui](http://github.com/sharkey1314)
+<img src="images/sharkey1314.jpg" width="150"><br>
+Role: Director of Unrequited Love<br>
+Responsibilities: Code Quality, Scheduling & TrackinSceneg <br>
+Component: Model
 
 -----
-
-#### [Thien Nguyen](https://github.com/ndt93)
- Role: Developer <br>
- Responsibilities: Threading
-
- -----
-
-#### [You Liang](http://github.com/yl-coder)
-<img src="images/YouLiang.jpg" width="150"><br>
- Role: Developer <br>
- Responsibilities: UI
-
- -----
 
 # Contributors
 
 We welcome contributions. See [Contact Us](ContactUs.md) page for more info.
-
-* [Akshay Narayan](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Aokkhoy)
-* [Sam Yong](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Amauris)
