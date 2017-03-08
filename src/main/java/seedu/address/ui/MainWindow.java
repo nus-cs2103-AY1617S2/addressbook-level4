@@ -24,7 +24,7 @@ import seedu.address.model.person.ReadOnlyPerson;
  */
 public class MainWindow extends UiPart<Region> {
 
-    private static final String ICON = "/images/address_book_32.png";
+    private static final String ICON = "/images/task_manager_32.png";
     private static final String FXML = "MainWindow.fxml";
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 450;
@@ -47,7 +47,7 @@ public class MainWindow extends UiPart<Region> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private AnchorPane personListPanelPlaceholder;
+    private AnchorPane taskListPanelPlaceholder;
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
@@ -114,7 +114,7 @@ public class MainWindow extends UiPart<Region> {
 
     void fillInnerParts() {
         browserPanel = new BrowserPanel(browserPlaceholder);
-        personListPanel = new PersonListPanel(getPersonListPlaceholder(), logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(getTaskListPlaceholder(), logic.getFilteredPersonList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
@@ -132,8 +132,8 @@ public class MainWindow extends UiPart<Region> {
         return resultDisplayPlaceholder;
     }
 
-    private AnchorPane getPersonListPlaceholder() {
-        return personListPanelPlaceholder;
+    private AnchorPane getTaskListPlaceholder() {
+        return taskListPanelPlaceholder;
     }
 
     void hide() {
