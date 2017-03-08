@@ -10,7 +10,9 @@ import seedu.task.commons.exceptions.IllegalValueException;
 public class Remark {
 
     public static final String MESSAGE_REMARK_CONSTRAINTS =
-            "Task remarks should be 2 alphanumeric/period strings separated by '@'";
+            "Task remarks should only contain alphanumeric characters and spaces, and it should not be blank";
+   
+    // to be changed to fit remarks constraints
     public static final String REMARK_VALIDATION_REGEX = "[\\w\\.]+@[\\w\\.]+";
 
     public final String value;
@@ -18,7 +20,7 @@ public class Remark {
     /**
      * Validates given remark.
      *
-     * @throws IllegalValueException if given remark address string is invalid.
+     * @throws IllegalValueException if given remark string is invalid.
      */
     public Remark(String remark) throws IllegalValueException {
         assert remark != null;

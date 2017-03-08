@@ -26,7 +26,7 @@ public class EditCommand extends Command {
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) [NAME] [p/DATE] [e/REMARK] [a/LOCATION ] [t/TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 p/91234567 e/johndoe@yahoo.com";
+            + "Example: " + COMMAND_WORD + " 1 p/03-04-2017 e/walk the dog";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -141,7 +141,7 @@ public class EditCommand extends Command {
             return remark;
         }
 
-        public void setAddress(Optional<Location> location) {
+        public void setLocation(Optional<Location> location) {
             assert location != null;
             this.location = location;
         }
