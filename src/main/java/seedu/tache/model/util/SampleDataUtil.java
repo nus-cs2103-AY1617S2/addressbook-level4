@@ -3,10 +3,10 @@ package seedu.tache.model.util;
 import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.model.TaskManager;
 import seedu.tache.model.ReadOnlyTaskManager;
-import seedu.tache.model.person.Name;
-import seedu.tache.model.person.Task;
-import seedu.tache.model.person.UniqueTaskList.DuplicateTaskException;
 import seedu.tache.model.tag.UniqueTagList;
+import seedu.tache.model.task.Name;
+import seedu.tache.model.task.Task;
+import seedu.tache.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
     public static Task[] getSamplePersons() {

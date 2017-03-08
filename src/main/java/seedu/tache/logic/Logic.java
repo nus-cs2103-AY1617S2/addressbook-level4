@@ -3,7 +3,7 @@ package seedu.tache.logic;
 import javafx.collections.ObservableList;
 import seedu.tache.logic.commands.CommandResult;
 import seedu.tache.logic.commands.exceptions.CommandException;
-import seedu.tache.model.person.ReadOnlyTask;
+import seedu.tache.model.task.ReadOnlyTask;
 
 /**
  * API of the Logic component

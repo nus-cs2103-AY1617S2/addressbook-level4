@@ -30,14 +30,14 @@ import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.commons.util.FileUtil;
 import seedu.tache.commons.util.XmlUtil;
 import seedu.tache.model.TaskManager;
-import seedu.tache.model.person.Address;
-import seedu.tache.model.person.Email;
-import seedu.tache.model.person.Name;
-import seedu.tache.model.person.Task;
-import seedu.tache.model.person.Phone;
-import seedu.tache.model.person.ReadOnlyTask;
 import seedu.tache.model.tag.Tag;
 import seedu.tache.model.tag.UniqueTagList;
+import seedu.tache.model.task.Address;
+import seedu.tache.model.task.Email;
+import seedu.tache.model.task.Name;
+import seedu.tache.model.task.Phone;
+import seedu.tache.model.task.ReadOnlyTask;
+import seedu.tache.model.task.Task;
 import seedu.tache.storage.XmlSerializableAddressBook;
 
 /**

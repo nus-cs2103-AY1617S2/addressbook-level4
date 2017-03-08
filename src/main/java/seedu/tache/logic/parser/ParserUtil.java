@@ -13,12 +13,12 @@ import java.util.stream.Collectors;
 
 import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.commons.util.StringUtil;
-import seedu.tache.model.person.Address;
-import seedu.tache.model.person.Email;
-import seedu.tache.model.person.Name;
-import seedu.tache.model.person.Phone;
 import seedu.tache.model.tag.Tag;
 import seedu.tache.model.tag.UniqueTagList;
+import seedu.tache.model.task.Address;
+import seedu.tache.model.task.Email;
+import seedu.tache.model.task.Name;
+import seedu.tache.model.task.Phone;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes

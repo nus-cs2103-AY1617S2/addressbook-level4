@@ -1,7 +1,7 @@
 package seedu.tache.commons.events.ui;
 
 import seedu.tache.commons.events.BaseEvent;
-import seedu.tache.model.person.ReadOnlyTask;
+import seedu.tache.model.task.ReadOnlyTask;
 
 /**
  * Represents a selection change in the Person List Panel

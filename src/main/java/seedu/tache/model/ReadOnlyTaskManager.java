@@ -2,8 +2,8 @@ package seedu.tache.model;
 
 
 import javafx.collections.ObservableList;
-import seedu.tache.model.person.ReadOnlyTask;
 import seedu.tache.model.tag.Tag;
+import seedu.tache.model.task.ReadOnlyTask;
 
 /**
  * Unmodifiable view of an task manager

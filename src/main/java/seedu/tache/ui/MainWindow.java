@@ -16,7 +16,7 @@ import seedu.tache.commons.events.ui.ExitAppRequestEvent;
 import seedu.tache.commons.util.FxViewUtil;
 import seedu.tache.logic.Logic;
 import seedu.tache.model.UserPrefs;
-import seedu.tache.model.person.ReadOnlyTask;
+import seedu.tache.model.task.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing

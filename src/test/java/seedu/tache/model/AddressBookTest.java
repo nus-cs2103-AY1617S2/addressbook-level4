@@ -16,9 +16,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.tache.model.TaskManager;
 import seedu.tache.model.ReadOnlyTaskManager;
-import seedu.tache.model.person.Task;
-import seedu.tache.model.person.ReadOnlyTask;
 import seedu.tache.model.tag.Tag;
+import seedu.tache.model.task.ReadOnlyTask;
+import seedu.tache.model.task.Task;
 import seedu.tache.testutil.TypicalTestPersons;
 
 public class AddressBookTest {

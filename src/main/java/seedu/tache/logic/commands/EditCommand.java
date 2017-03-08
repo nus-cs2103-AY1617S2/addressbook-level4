@@ -6,14 +6,14 @@ import java.util.Optional;
 import seedu.tache.commons.core.Messages;
 import seedu.tache.commons.util.CollectionUtil;
 import seedu.tache.logic.commands.exceptions.CommandException;
-import seedu.tache.model.person.Address;
-import seedu.tache.model.person.Email;
-import seedu.tache.model.person.Name;
-import seedu.tache.model.person.Task;
-import seedu.tache.model.person.Phone;
-import seedu.tache.model.person.ReadOnlyTask;
-import seedu.tache.model.person.UniqueTaskList;
 import seedu.tache.model.tag.UniqueTagList;
+import seedu.tache.model.task.Address;
+import seedu.tache.model.task.Email;
+import seedu.tache.model.task.Name;
+import seedu.tache.model.task.Phone;
+import seedu.tache.model.task.ReadOnlyTask;
+import seedu.tache.model.task.Task;
+import seedu.tache.model.task.UniqueTaskList;
 
 /**
  * Edits the details of an existing person in the address book.

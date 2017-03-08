@@ -3,9 +3,9 @@ package seedu.tache.model;
 import java.util.Set;
 
 import seedu.tache.commons.core.UnmodifiableObservableList;
-import seedu.tache.model.person.Task;
-import seedu.tache.model.person.ReadOnlyTask;
-import seedu.tache.model.person.UniqueTaskList;
+import seedu.tache.model.task.ReadOnlyTask;
+import seedu.tache.model.task.Task;
+import seedu.tache.model.task.UniqueTaskList;
 
 /**
  * The API of the Model component.

@@ -5,7 +5,7 @@ import seedu.tache.commons.core.Messages;
 import seedu.tache.commons.core.UnmodifiableObservableList;
 import seedu.tache.commons.events.ui.JumpToListRequestEvent;
 import seedu.tache.logic.commands.exceptions.CommandException;
-import seedu.tache.model.person.ReadOnlyTask;
+import seedu.tache.model.task.ReadOnlyTask;
 
 /**
  * Selects a person identified using it's last displayed index from the address book.

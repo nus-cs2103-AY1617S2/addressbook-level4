@@ -8,11 +8,11 @@ import org.junit.Test;
 import guitests.guihandles.PersonCardHandle;
 import seedu.tache.commons.core.Messages;
 import seedu.tache.logic.commands.EditCommand;
-import seedu.tache.model.person.Address;
-import seedu.tache.model.person.Email;
-import seedu.tache.model.person.Name;
-import seedu.tache.model.person.Phone;
 import seedu.tache.model.tag.Tag;
+import seedu.tache.model.task.Address;
+import seedu.tache.model.task.Email;
+import seedu.tache.model.task.Name;
+import seedu.tache.model.task.Phone;
 import seedu.tache.testutil.PersonBuilder;
 import seedu.tache.testutil.TestPerson;
 

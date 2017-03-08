@@ -1,9 +1,9 @@
 package seedu.tache.testutil;
 
 import seedu.tache.commons.exceptions.IllegalValueException;
-import seedu.tache.model.person.Name;
 import seedu.tache.model.tag.Tag;
 import seedu.tache.model.tag.UniqueTagList;
+import seedu.tache.model.task.Name;
 
 /**
  *

@@ -8,8 +8,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import seedu.tache.model.person.ReadOnlyTask;
 import seedu.tache.model.tag.UniqueTagList;
+import seedu.tache.model.task.ReadOnlyTask;
 
 /**
  * Provides a handle to a person card in the person list panel.

@@ -10,11 +10,11 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.tache.commons.core.UnmodifiableObservableList;
-import seedu.tache.model.person.Task;
-import seedu.tache.model.person.ReadOnlyTask;
-import seedu.tache.model.person.UniqueTaskList;
 import seedu.tache.model.tag.Tag;
 import seedu.tache.model.tag.UniqueTagList;
+import seedu.tache.model.task.ReadOnlyTask;
+import seedu.tache.model.task.Task;
+import seedu.tache.model.task.UniqueTaskList;
 
 /**
  * Wraps all data at the task-manager level

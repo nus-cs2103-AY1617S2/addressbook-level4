@@ -5,11 +5,11 @@ import java.util.Set;
 
 import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.logic.commands.exceptions.CommandException;
-import seedu.tache.model.person.Name;
-import seedu.tache.model.person.Task;
-import seedu.tache.model.person.UniqueTaskList;
 import seedu.tache.model.tag.Tag;
 import seedu.tache.model.tag.UniqueTagList;
+import seedu.tache.model.task.Name;
+import seedu.tache.model.task.Task;
+import seedu.tache.model.task.UniqueTaskList;
 
 /**
  * Adds a task to the task manager.

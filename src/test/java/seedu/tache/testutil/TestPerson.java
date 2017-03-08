@@ -1,8 +1,8 @@
 package seedu.tache.testutil;
 
-import seedu.tache.model.person.Name;
-import seedu.tache.model.person.ReadOnlyTask;
 import seedu.tache.model.tag.UniqueTagList;
+import seedu.tache.model.task.Name;
+import seedu.tache.model.task.ReadOnlyTask;
 
 /**
  * A mutable person object. For testing only.

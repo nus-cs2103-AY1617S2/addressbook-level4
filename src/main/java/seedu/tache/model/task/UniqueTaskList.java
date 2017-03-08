@@ -1,4 +1,4 @@
-package seedu.tache.model.person;
+package seedu.tache.model.task;
 
 import java.util.Iterator;
 import java.util.List;

@@ -1,11 +1,11 @@
-package seedu.tache.model.person;
+package seedu.tache.model.task;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.tache.model.person.Address;
+import seedu.tache.model.task.Address;
 
 public class AddressTest {
 

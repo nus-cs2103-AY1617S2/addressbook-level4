@@ -25,7 +25,7 @@ import seedu.tache.TestApp;
 import seedu.tache.commons.core.EventsCenter;
 import seedu.tache.commons.events.BaseEvent;
 import seedu.tache.model.TaskManager;
-import seedu.tache.model.person.ReadOnlyTask;
+import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.testutil.TestUtil;
 import seedu.tache.testutil.TypicalTestPersons;
 
