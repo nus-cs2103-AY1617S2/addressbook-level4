@@ -13,9 +13,7 @@ import seedu.tache.commons.core.UnmodifiableObservableList;
 import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.model.ReadOnlyTaskManager;
 import seedu.tache.model.tag.Tag;
-import seedu.tache.model.task.DetailedTask;
 import seedu.tache.model.task.ReadOnlyTask;
-import seedu.tache.model.task.Task;
 
 /**
  * An Immutable AddressBook that is serializable to XML format

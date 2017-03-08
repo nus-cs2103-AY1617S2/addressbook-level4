@@ -3,12 +3,12 @@ package seedu.tache.model.task;
 import seedu.tache.commons.exceptions.IllegalValueException;
 
 public class Date {
-    
+
     public static final String MESSAGE_DATE_CONSTRAINTS =
             "Task date should only contain <CONSTRAINT>";
-    
+
     public final String date;
-    
+
     /**
      * Validates given date.
      *

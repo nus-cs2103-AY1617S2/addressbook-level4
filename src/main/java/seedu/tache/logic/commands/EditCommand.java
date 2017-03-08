@@ -75,17 +75,18 @@ public class EditCommand extends Command {
     private static Task createEditedTask(ReadOnlyTask taskToEdit,
                                              EditTaskDescriptor editTaskDescriptor) {
         assert taskToEdit != null;
-        
-        if(taskToEdit instanceof DetailedTask){
-            DetailedTask temp = (DetailedTask)taskToEdit;
+
+        if (taskToEdit instanceof DetailedTask) {
+            DetailedTask temp = (DetailedTask) taskToEdit;
             Name updatedName = editTaskDescriptor.getName().orElseGet(temp::getName);
             Date updatedStartDate = editTaskDescriptor.getStartDate().orElseGet(temp::getStartDate);
             Date updateEndDate = editTaskDescriptor.getEndDate().orElseGet(temp::getEndDate);
             Time updateTime = editTaskDescriptor.getTime().orElseGet(temp::getTime);
             Duration updatedDuration = editTaskDescriptor.getDuration().orElseGet(temp::getDuration);
             UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
-            return new DetailedTask(updatedName, updatedStartDate, updateEndDate, updateTime, updatedDuration, updatedTags);
-        }else{
+            return new DetailedTask(updatedName, updatedStartDate, updateEndDate, updateTime,
+                                    updatedDuration, updatedTags);
+        } else {
             Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
             UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
             return new Task(updatedName, updatedTags);
@@ -119,7 +120,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.startDate, this.endDate, this.time, this.duration, this.tags);
+            return CollectionUtil.isAnyPresent(this.name, this.startDate, this.endDate,
+                                               this.time, this.duration, this.tags);
         }
 
         public void setName(Optional<Name> name) {
@@ -139,7 +141,7 @@ public class EditCommand extends Command {
         public Optional<Date> getStartDate() {
             return startDate;
         }
-        
+
         public void setEndDate(Optional<Date> date) {
             assert date != null;
             this.endDate = date;

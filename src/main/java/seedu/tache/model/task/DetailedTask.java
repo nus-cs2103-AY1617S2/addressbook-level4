@@ -2,17 +2,17 @@ package seedu.tache.model.task;
 
 import seedu.tache.model.tag.UniqueTagList;
 
-public class DetailedTask extends Task{
-    
+public class DetailedTask extends Task {
+
     private Date startDate;
     private Date endDate;
     private Time time;
     private Duration duration;
-    
-    public DetailedTask(Name name, UniqueTagList tags){
+
+    public DetailedTask(Name name, UniqueTagList tags) {
         super(name, tags);
     }
-    
+
     public DetailedTask(Name name, Date startDate, Date endDate, Time time, Duration duration, UniqueTagList tags) {
         super(name, tags);
         this.startDate = startDate;
@@ -52,5 +52,5 @@ public class DetailedTask extends Task{
     public void setTime(Time time) {
         this.time = time;
     }
-    
+
 }

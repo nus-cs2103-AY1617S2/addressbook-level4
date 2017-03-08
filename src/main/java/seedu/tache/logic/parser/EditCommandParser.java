@@ -1,28 +1,23 @@
 package seedu.tache.logic.parser;
 
 import static seedu.tache.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.tache.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.tache.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.tache.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.tache.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_DELIMITER;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
 import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.logic.commands.Command;
 import seedu.tache.logic.commands.EditCommand;
-import seedu.tache.logic.commands.IncorrectCommand;
 import seedu.tache.logic.commands.EditCommand.EditTaskDescriptor;
+import seedu.tache.logic.commands.IncorrectCommand;
 import seedu.tache.model.tag.UniqueTagList;
-
-import seedu.tache.model.task.Name;
 import seedu.tache.model.task.Date;
-import seedu.tache.model.task.Time;
 import seedu.tache.model.task.Duration;
+import seedu.tache.model.task.Name;
+import seedu.tache.model.task.Time;
+
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -42,30 +37,30 @@ public class EditCommandParser {
         }
 
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
-        
+
         int numOfDates = ParserUtil.numOfDates(args);
         int currentDateCount = 0;
-        for(int i=0;i<preambleFields.length;i++){
+        for (int i = 0; i < preambleFields.length; i++) {
             try {
                 Object fieldType = ParserUtil.determineType(preambleFields[i]);
-                if(fieldType instanceof Name) {
-                    editTaskDescriptor.setName(Optional.of((Name)fieldType));
-                } else if(fieldType instanceof Date) {
-                    if(numOfDates == 2) {
-                        if(currentDateCount == 0) {
-                            editTaskDescriptor.setStartDate(Optional.of((Date)fieldType));
+                if (fieldType instanceof Name) {
+                    editTaskDescriptor.setName(Optional.of((Name) fieldType));
+                } else if (fieldType instanceof Date) {
+                    if (numOfDates == 2) {
+                        if (currentDateCount == 0) {
+                            editTaskDescriptor.setStartDate(Optional.of((Date) fieldType));
                             currentDateCount++;
                         } else {
-                            editTaskDescriptor.setEndDate(Optional.of((Date)fieldType));
+                            editTaskDescriptor.setEndDate(Optional.of((Date) fieldType));
                         }
                     } else {
                         //Incomplete implementation, might need to prompt
-                        editTaskDescriptor.setEndDate(Optional.of((Date)fieldType));
+                        editTaskDescriptor.setEndDate(Optional.of((Date) fieldType));
                     }
-                } else if(fieldType instanceof Time) {
-                    editTaskDescriptor.setTime(Optional.of((Time)fieldType));
-                } else if(fieldType instanceof Duration) {
-                    editTaskDescriptor.setDuration(Optional.of((Duration)fieldType));
+                } else if (fieldType instanceof Time) {
+                    editTaskDescriptor.setTime(Optional.of((Time) fieldType));
+                } else if (fieldType instanceof Duration) {
+                    editTaskDescriptor.setDuration(Optional.of((Duration) fieldType));
                 }
             } catch (IllegalValueException ive) {
                 return new IncorrectCommand(ive.getMessage());

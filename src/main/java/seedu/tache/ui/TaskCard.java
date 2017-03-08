@@ -13,7 +13,7 @@ public class TaskCard extends UiPart<Region> {
 
     @FXML
     private HBox cardPane;
-    
+
     @FXML
     private Label name;
     /*

@@ -3,12 +3,12 @@ package seedu.tache.model.task;
 import seedu.tache.commons.exceptions.IllegalValueException;
 
 public class Time {
-    
+
     public static final String MESSAGE_TIME_CONSTRAINTS =
             "Task time should only contain <CONSTRAINT>";
-    
+
     public final String time;
-    
+
     /**
      * Validates given time.
      *

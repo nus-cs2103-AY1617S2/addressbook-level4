@@ -14,13 +14,9 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.tache.commons.events.model.TaskManagerChangedEvent;
 import seedu.tache.commons.events.storage.DataSavingExceptionEvent;
-import seedu.tache.model.TaskManager;
 import seedu.tache.model.ReadOnlyTaskManager;
+import seedu.tache.model.TaskManager;
 import seedu.tache.model.UserPrefs;
-import seedu.tache.storage.JsonUserPrefsStorage;
-import seedu.tache.storage.Storage;
-import seedu.tache.storage.StorageManager;
-import seedu.tache.storage.XmlTaskManagerStorage;
 import seedu.tache.testutil.EventsCollector;
 import seedu.tache.testutil.TypicalTestTasks;
 

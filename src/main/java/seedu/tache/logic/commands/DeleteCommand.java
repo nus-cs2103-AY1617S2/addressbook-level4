@@ -3,7 +3,6 @@ package seedu.tache.logic.commands;
 import seedu.tache.commons.core.Messages;
 import seedu.tache.commons.core.UnmodifiableObservableList;
 import seedu.tache.logic.commands.exceptions.CommandException;
-import seedu.tache.model.task.DetailedTask;
 import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.model.task.UniqueTaskList.TaskNotFoundException;
 

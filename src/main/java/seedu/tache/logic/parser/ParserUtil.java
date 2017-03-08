@@ -13,12 +13,12 @@ import java.util.stream.Collectors;
 
 import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.commons.util.StringUtil;
-import seedu.tache.model.task.Date;
-import seedu.tache.model.task.Time;
-import seedu.tache.model.task.Name;
-import seedu.tache.model.task.Duration;
 import seedu.tache.model.tag.Tag;
 import seedu.tache.model.tag.UniqueTagList;
+import seedu.tache.model.task.Date;
+import seedu.tache.model.task.Duration;
+import seedu.tache.model.task.Name;
+import seedu.tache.model.task.Time;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -27,8 +27,12 @@ public class ParserUtil {
 
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
     private static final Pattern NAME_FORMAT = Pattern.compile("^\".+\"");
-    private static final Pattern DATE_FORMAT = Pattern.compile("^[0-3]?[0-9]/[0-1]?[0-9]/(?:[0-9]{2})?[0-9]{2}$|^[0-3]?[0-9]-[0-1]?[0-9]-(?:[0-9]{2})?[0-9]{2}$|^[0-3]{1}[0-9]{1}[0-1]{1}[0-9]{1}(?:[0-9]{2})?[0-9]{2}$");
-    private static final Pattern TIME_FORMAT = Pattern.compile("^[0-2][0-9][0-5][0-9]|^([0-1][0-2]|[0-9])([.][0-5][0-9])?\\s?(am|pm){1}");
+    private static final Pattern DATE_FORMAT = Pattern.compile("^[0-3]?[0-9]/[0-1]?[0-9]/"
+                                                               + "(?:[0-9]{2})?[0-9]{2}$|^[0-3]?[0-9]-[0-1]?[0-9]-"
+                                                               + "(?:[0-9]{2})?[0-9]{2}$|^[0-3]{1}[0-9]{1}[0-1]{1}"
+                                                               + "[0-9]{1}(?:[0-9]{2})?[0-9]{2}$");
+    private static final Pattern TIME_FORMAT = Pattern.compile("^[0-2][0-9][0-5][0-9]|^([0-1][0-2]|[0-9])"
+                                                               + "([.][0-5][0-9])?\\s?(am|pm){1}");
     private static final Pattern DURATION_FORMAT = Pattern.compile("^\\d+\\s?((h|hr|hrs)|(m|min|mins))");
 
     /**
@@ -89,7 +93,7 @@ public class ParserUtil {
         }
         return new UniqueTagList(tagSet);
     }
-    
+
     /**
      * Returns True if input is a valid date
      * Returns False otherwise.
@@ -101,7 +105,7 @@ public class ParserUtil {
         }
         return false;
     }
-    
+
     /**
      * Returns True if input is a valid time
      * Returns False otherwise.
@@ -113,7 +117,7 @@ public class ParserUtil {
         }
         return false;
     }
-    
+
     /**
      * Returns True if input is a valid duration
      * Returns False otherwise.
@@ -125,7 +129,7 @@ public class ParserUtil {
         }
         return false;
     }
-    
+
     /**
      * Returns True if input is a valid name
      * Returns False otherwise.
@@ -137,7 +141,7 @@ public class ParserUtil {
         }
         return false;
     }
-    
+
     /**
      * Returns number of date parameters in input.
      */
@@ -149,20 +153,20 @@ public class ParserUtil {
         }
         return count;
     }
-    
+
     /**
      * Returns data type based on the input
      */
-    public static Object determineType(String input) throws IllegalValueException{
-        if(isValidDate(input)) {
+    public static Object determineType(String input) throws IllegalValueException {
+        if (isValidDate(input)) {
             return new Date(input);
-        } else if(isValidTime(input)) {
+        } else if (isValidTime(input)) {
             return new Time(input);
-        } else if(isValidDuration(input)) {
+        } else if (isValidDuration(input)) {
             return new Duration(input);
-        }else if(isValidName(input)) {
+        } else if (isValidName(input)) {
             return new Name(input);
         }
         throw new IllegalValueException("Invalid Input");
-    }    
+    }
 }

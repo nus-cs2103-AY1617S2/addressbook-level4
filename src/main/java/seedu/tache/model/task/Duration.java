@@ -3,7 +3,7 @@ package seedu.tache.model.task;
 import seedu.tache.commons.exceptions.IllegalValueException;
 
 public class Duration {
-    
+
     public static final String MESSAGE_DURATION_CONSTRAINTS =
             "Task duration should only contain alphanumeric characters and spaces";
 
