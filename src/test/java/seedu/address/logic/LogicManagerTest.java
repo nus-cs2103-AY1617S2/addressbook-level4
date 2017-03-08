@@ -41,7 +41,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Date;
+import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Instruction;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
@@ -201,7 +201,7 @@ public class LogicManagerTest {
         assertCommandFailure("add []\\[;] d/12345 p/validPriority i/valid, instruction",
                 Title.MESSAGE_TITLE_CONSTRAINTS);
         assertCommandFailure("add Valid Title d/not_numbers p/validPriority i/valid, instruction",
-                Date.MESSAGE_DATE_CONSTRAINTS);
+                Deadline.MESSAGE_DATE_CONSTRAINTS);
         assertCommandFailure("add Valid Title d/12345 p/not@a.Priority i/valid, instruction",
                 Priority.MESSAGE_PRIORITY_CONSTRAINTS);
         assertCommandFailure("add Valid Title d/12345 p/validPriority i/valid, instruction t/invalid_-[.tag",
@@ -418,7 +418,7 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Title title = new Title("Adam Brown");
-            Date privateDate = new Date("111111");
+            Deadline privateDate = new Deadline("111111");
             Priority priority = new Priority("adam");
             Instruction privateInstruction = new Instruction("111, alpha street");
             Tag tag1 = new Tag("tag1");
@@ -437,7 +437,7 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Title("Task " + seed),
-                    new Date("" + Math.abs(seed)),
+                    new Deadline("" + Math.abs(seed)),
                     new Priority(seed + "_urgent"),
                     new Instruction("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
@@ -452,7 +452,7 @@ public class LogicManagerTest {
 
             cmd.append(p.getTitle().toString());
             cmd.append(" p/").append(p.getPriority());
-            cmd.append(" d/").append(p.getDate());
+            cmd.append(" d/").append(p.getDeadline());
             cmd.append(" i/").append(p.getInstruction());
 
             UniqueTagList tags = p.getTags();
@@ -536,7 +536,7 @@ public class LogicManagerTest {
         Task generateTaskWithTitle(String title) throws Exception {
             return new Task(
                     new Title(title),
-                    new Date("1"),
+                    new Deadline("1"),
                     new Priority("1"),
                     new Instruction("House of 1"),
                     new UniqueTagList(new Tag("tag"))

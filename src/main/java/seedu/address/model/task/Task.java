@@ -14,7 +14,7 @@ import seedu.address.model.tag.UniqueTagList;
 public class Task implements ReadOnlyTask {
 
     private Title title;
-    private Date date;
+    private Deadline date;
     private Priority priority;
     private Instruction instruction;
 
@@ -23,7 +23,7 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(Title title, Date date, Priority priority, Instruction instruction, UniqueTagList tags) {
+    public Task(Title title, Deadline date, Priority priority, Instruction instruction, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(title, date, priority, instruction, tags);
         this.title = title;
         this.date = date;
@@ -36,7 +36,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getTitle(), source.getDate(), source.getPriority(), source.getInstruction(), source.getTags());
+        this(source.getTitle(), source.getDeadline(), source.getPriority(), source.getInstruction(), source.getTags());
     }
 
     public void setTitle(Title title) {
@@ -49,13 +49,13 @@ public class Task implements ReadOnlyTask {
         return title;
     }
 
-    public void setDate(Date date) {
+    public void setDeadline(Deadline date) {
         assert date != null;
         this.date = date;
     }
 
     @Override
-    public Date getDate() {
+    public Deadline getDeadline() {
         return date;
     }
 
@@ -98,7 +98,7 @@ public class Task implements ReadOnlyTask {
         assert replacement != null;
 
         this.setTitle(replacement.getTitle());
-        this.setDate(replacement.getDate());
+        this.setDeadline(replacement.getDeadline());
         this.setPriority(replacement.getPriority());
         this.setInstruction(replacement.getInstruction());
         this.setTags(replacement.getTags());

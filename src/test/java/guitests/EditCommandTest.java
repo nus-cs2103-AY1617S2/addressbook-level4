@@ -9,7 +9,7 @@ import guitests.guihandles.TaskCardHandle;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.Date;
+import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Instruction;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.Title;
@@ -95,7 +95,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         assertResultMessage(Title.MESSAGE_TITLE_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 d/abcd");
-        assertResultMessage(Date.MESSAGE_DATE_CONSTRAINTS);
+        assertResultMessage(Deadline.MESSAGE_DATE_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 p/yahoo!!!");
         assertResultMessage(Priority.MESSAGE_PRIORITY_CONSTRAINTS);
