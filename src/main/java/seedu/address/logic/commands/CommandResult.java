@@ -5,11 +5,11 @@ package seedu.address.logic.commands;
  */
 public class CommandResult {
 
-    public final String feedbackToUser;
+  public final String feedbackToUser;
 
-    public CommandResult(String feedbackToUser) {
-        assert feedbackToUser != null;
-        this.feedbackToUser = feedbackToUser;
-    }
+  public CommandResult(String feedbackToUser) {
+    assert feedbackToUser != null;
+    this.feedbackToUser = feedbackToUser;
+  }
 
 }
