@@ -11,7 +11,7 @@ public interface ReadOnlyTask {
     Name getName();
     Phone getPhone();
     Email getEmail();
-    Description getAddress();
+    Description getDescription();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -28,7 +28,7 @@ public interface ReadOnlyTask {
                 && other.getName().equals(this.getName()) // state checks here onwards
                 && other.getPhone().equals(this.getPhone())
                 && other.getEmail().equals(this.getEmail())
-                && other.getAddress().equals(this.getAddress()));
+                && other.getDescription().equals(this.getDescription()));
     }
 
     /**
@@ -42,7 +42,7 @@ public interface ReadOnlyTask {
                 .append(" Email: ")
                 .append(getEmail())
                 .append(" Address: ")
-                .append(getAddress())
+                .append(getDescription())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

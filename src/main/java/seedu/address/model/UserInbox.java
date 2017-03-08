@@ -47,6 +47,12 @@ public class UserInbox implements ReadOnlyUserInbox {
             throws UniqueTaskList.DuplicateTaskException {
         this.tasks.setTasks(tasks);
     }
+    
+    //TODO added this
+    public void setTasks(UniqueTaskList tasks)
+            throws UniqueTaskList.DuplicateTaskException {
+        this.tasks.setTasks(tasks);
+    }
 
     public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
         this.tags.setTags(tags);
