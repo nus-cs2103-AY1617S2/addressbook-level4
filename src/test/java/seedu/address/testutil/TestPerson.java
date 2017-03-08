@@ -1,8 +1,8 @@
 package seedu.address.testutil;
 
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Email;
 import seedu.address.model.task.Description;
+import seedu.address.model.task.Email;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
 
