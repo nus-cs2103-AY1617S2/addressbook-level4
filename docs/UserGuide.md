@@ -129,9 +129,9 @@ There is no need to save manually.
 Command | Syntax | Example
 ------- | ------ | -------
 Help    | help
-Add     | add TASK                       | add submit report by Friday
-          add TASK by DEADLINE
-          add TASK from DATE by DEADLINE 
+Add     | add TASK                        | add submit report by Friday
+        |  add TASK by DEADLINE           | 
+        |  add TASK from DATE by DEADLINE |
 List    | list
         
 
