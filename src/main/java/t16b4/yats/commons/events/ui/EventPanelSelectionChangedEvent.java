@@ -5,14 +5,14 @@ import t16b4.yats.model.item.ReadOnlyEvent;
 import t16b4.yats.model.item.ReadOnlyItem;
 
 /**
- * Represents a selection change in the Person List Panel
+ * Represents a selection change in the Event List Panel
  */
-public class PersonPanelSelectionChangedEvent extends BaseEvent {
+public class EventPanelSelectionChangedEvent extends BaseEvent {
 
 
     private final ReadOnlyEvent newSelection;
 
-    public PersonPanelSelectionChangedEvent(ReadOnlyEvent newValue) {
+    public EventPanelSelectionChangedEvent(ReadOnlyEvent newValue) {
         this.newSelection = newValue;
     }
 

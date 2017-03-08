@@ -11,7 +11,7 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import t16b4.yats.commons.core.LogsCenter;
-import t16b4.yats.commons.events.ui.PersonPanelSelectionChangedEvent;
+import t16b4.yats.commons.events.ui.EventPanelSelectionChangedEvent;
 import t16b4.yats.commons.util.FxViewUtil;
 import t16b4.yats.model.item.ReadOnlyEvent;
 
@@ -48,7 +48,7 @@ public class PersonListPanel extends UiPart<Region> {
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         logger.fine("Selection in person list panel changed to : '" + newValue + "'");
-                        raise(new PersonPanelSelectionChangedEvent(newValue));
+                        raise(new EventPanelSelectionChangedEvent(newValue));
                     }
                 });
     }
