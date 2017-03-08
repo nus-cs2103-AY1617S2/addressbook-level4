@@ -111,12 +111,12 @@ public class EditCommandTest extends TaskManagerGuiTest {
      * Checks whether the edited task has the correct updated details.
      *
      * @param filteredPersonListIndex index of task to edit in filtered list
-     * @param addressBookIndex index of task to edit in the address book.
+     * @param taskManagerIndex index of task to edit in the task manager.
      *      Must refer to the same task as {@code filteredPersonListIndex}
      * @param detailsToEdit details to edit the task with as input to the edit command
      * @param editedTask the expected task after editing the task's details
      */
-    private void assertEditSuccess(int filteredPersonListIndex, int addressBookIndex,
+    private void assertEditSuccess(int filteredPersonListIndex, int taskManagerIndex,
                                     String detailsToEdit, TestTask editedTask) {
         commandBox.runCommand("edit " + filteredPersonListIndex + " " + detailsToEdit);
 
@@ -125,7 +125,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         assertMatching(editedTask, editedCard);
 
         // confirm the list now contains all previous tasks plus the task with updated details
-        expectedTasksList[addressBookIndex - 1] = editedTask;
+        expectedTasksList[taskManagerIndex - 1] = editedTask;
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
