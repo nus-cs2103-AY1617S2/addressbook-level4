@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import seedu.geekeep.model.task.Title;
 
-public class NameTest {
+public class TitleTest {
 
     @Test
     public void isValidName() {
