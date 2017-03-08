@@ -70,24 +70,26 @@ Examples:
 * **`edit 1 p/ t/ s/`**
 * **`edit 1 Buy more donuts p/3 t/nomoney s/15/12/2017`**
 
-#### Finding all tasks containing any keyword in their name or deadline: `find / f`
+#### Finding all tasks containing any keyword in their name or by dates/priority/tags: `find / f`
 Finds tasks whose names contain any of the given keywords.<br>
-Format: `find KEYWORD [MORE_KEYWORDS] [d/DEADLINE] [p/PRIORITY] [t/TAGNAME]`
+Format: **`find [KEYWORD] [MORE_KEYWORDS] [p/PRIORITY] [s/STARTDATE] [d/DUEDATE] [t/TAGNAME]`**
 
-> * The search is case insensitive. e.g `milk` will match `Milk`
-> * The order of the keywords does not matter. e.g. `Buy Milk` will match `Milk Buy`
-> * Only the name is searched.
-> * Only full words will be matched e.g. `Milk` will not match `Milks`
-> * Tasks matching all keywords will be returned (i.e. `AND` search).
-    e.g. `Milk` will not match `Buy Milk`
-    e.g. `donuts milk` will match `Buy donuts and milk`
-> * Tasks will be matched only if its information matches all the keywords given
+> At least one field is needed to search.<br>
+> The search is case insensitive. e.g `milk` will match `Milk`<br>
+> The order of the keywords does not matter. e.g. `Buy Milk` will match `Milk Buy`<br>
+> Only full words will be matched e.g. `Milk` will not match `Milks`<br>
+> Tasks matching all keywords will be returned (i.e. `AND` search).
+    e.g. `Sell Milk` will not match `Buy Milk`
+    e.g. `donuts milk` will match `Buy donuts and milk`<br>
+> To go back to the default view after having found your task, type **list**
 
 Examples:
-* `find d/20/03/2017`<br>
-  Returns all tasks that have deadline due on `20/03/2017`
-* `find Buy The Milk`<br>
+* **`find d/20/03/2017`**<br>
+  Returns all tasks that have a due date on `20/03/2017`
+* **`find Buy The Milk`**<br>
   Returns only tasks containing `Buy`, `The`, and `Milk`
+* **`find School p/1`**<br>
+  Returns only tasks containing `School` with a priority of 1.
 
 #### Deleting a task : `kill / k`
 Deletes the specified task from the todo list.<br>
