@@ -12,6 +12,9 @@ By : `Team ToLuist`  &nbsp;&nbsp;&nbsp;&nbsp;
 
 1. Double-click the file to start the app. The GUI should appear in a few seconds.
 
+<img src="images/Ui.png" width="600"><br>
+**Figure 1.** Initial launch screen of ToLuist
+
 2. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 3. Some example commands you can try:
