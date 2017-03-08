@@ -191,7 +191,7 @@ public class LogicManagerTest {
 	    assertCommandFailure("add Valid Description 12345 e/valid@email.butNoPhonePrefix a/valid,address",
 				expectedMessage);
 	    assertCommandFailure("add Valid Description p/1234 valid@email.butNoPrefix a/valid, address", 
-	    		expectedMessage);
+				expectedMessage);
 	    assertCommandFailure("add Valid Description p/12345 e/valid@email.butNoAddressPrefix valid, address",
 				expectedMessage);
 	}
