@@ -10,7 +10,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 -----
 
-#### [Gabriel Sim](http://github.com/lejolly)
+#### [Gabriel Sim](http://github.com/gabrielsim1993)
 <img src="images/JoshuaLee.jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: Team Leader, Logic, Deliverables, Git expert
@@ -24,14 +24,14 @@ Responsibilities: Testing, Model, Code Quality, Integration
 
 -----
 
-#### [Tang Shenqi](http://github.com/m133225)
+#### [Tang Shenqi](http://github.com/tangshenqi)
 <img src="images/MartinChoo.jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: UI, Eclipse expert
 
 -----
 
-#### [Aditya Hendraatmaja](https://github.com/ndt93)
+#### [Aditya Hendraatmaja](https://github.com/ahendraatmaja)
  Role: Developer <br>
  Responsibilities: Documentation, Data
 
