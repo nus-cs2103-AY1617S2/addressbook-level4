@@ -116,4 +116,16 @@ public abstract class ToLuistGuiTest {
                 .isPresent();
         return taskIsPresent;
     }
+
+    /**
+     * Check if tasks are shown in the TaskList. Returns true only if all tasks are shown.
+     */
+    protected boolean areTasksShown(Task... tasks) {
+        for (Task task : tasks) {
+            if (!isTaskShown(task)) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

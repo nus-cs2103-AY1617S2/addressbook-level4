@@ -1,13 +1,9 @@
 package seedu.toluist.model;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
-import java.util.stream.Collectors;
-
-import seedu.toluist.commons.util.CollectionUtil;
 
 /**
  * Represents a Task
@@ -82,9 +78,14 @@ public class Task implements Comparable<Task> {
     }
 
     public boolean isAnyKeywordsContainedInAnyTagIgnoreCase(String[] keywords) {
-        return CollectionUtil.areIntersecting(
-                allTags.stream().map(tag -> tag.tagName.toLowerCase()).collect(Collectors.toList()),
-                Arrays.stream(keywords).map(keyword -> keyword.toLowerCase()).collect(Collectors.toList()));
+        for (String keyword: keywords) {
+            for (Tag tag : allTags) {
+                if (tag.tagName.toLowerCase().contains(keyword.toLowerCase())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
