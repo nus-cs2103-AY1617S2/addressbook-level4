@@ -1,5 +1,5 @@
 # YATS - Yet Another Task Scheduler
-[!Build Status](https://travis-ci.org/CS2103JAN2017-T16-B4/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-T16-B4/main)
+[![Build Status](https://travis-ci.org/CS2103JAN2017-T16-B4/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-T16-B4/main)
 <!---
 Appveyor test missing
 Coveralls test missing
