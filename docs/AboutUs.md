@@ -4,49 +4,34 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Damith C. Rajapakse](http://www.comp.nus.edu.sg/~damithch) <br>
-<img src="images/DamithRajapakse.jpg" width="150"><br>
-**Role**: Project Advisor
+#### [Jay Gajendra Kabra](https://github.com/jay500s)
+<img src="images/jay500s.PNG" width="150"><br>
+**Role**: Developer <br>
+Responsibilities: Model and Code Quality
 
 -----
 
-#### [Joshua Lee](http://github.com/lejolly)
-<img src="images/JoshuaLee.jpg" width="150"><br>
+#### [Tyler Austin Rocha](https://github.com/tylerrocha)
+<img src="images/tylerrocha.jpg" width="150"><br>
 Role: Developer <br>
-Responsibilities: UI
+Responsibilities: Storage, Git Expert
 
 -----
 
-#### [Leow Yijin](http://github.com/yijinl)
-<img src="images/LeowYijin.jpg" width="150"><br>
+#### [Wu Heyang](https://github.com/whyCaiJi)
+<img src="images/whycaiji.jpg" width="150"><br>
 Role: Developer <br>
-Responsibilities: Data
+Responsibilities: Logic and Scheduling and Tracking
 
 -----
 
-#### [Martin Choo](http://github.com/m133225)
-<img src="images/MartinChoo.jpg" width="150"><br>
+#### [Yu Cheng-Liang](https://github.com/nuslarry)
+<img src="images/chengliang.jpg" width="150"><br>
 Role: Developer <br>
-Responsibilities: Dev Ops
+Responsibilities: UI, Testing and Integeration
 
 -----
-
-#### [Thien Nguyen](https://github.com/ndt93)
- Role: Developer <br>
- Responsibilities: Threading
-
- -----
-
-#### [You Liang](http://github.com/yl-coder)
-<img src="images/YouLiang.jpg" width="150"><br>
- Role: Developer <br>
- Responsibilities: UI
-
- -----
 
 # Contributors
 
 We welcome contributions. See [Contact Us](ContactUs.md) page for more info.
-
-* [Akshay Narayan](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Aokkhoy)
-* [Sam Yong](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Amauris)
