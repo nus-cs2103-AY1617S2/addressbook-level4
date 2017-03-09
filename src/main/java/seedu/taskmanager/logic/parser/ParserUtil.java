@@ -13,12 +13,12 @@ import java.util.stream.Collectors;
 
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.commons.util.StringUtil;
-// import seedu.taskmanager.model.person.Address;
 import seedu.taskmanager.model.task.Date;
 import seedu.taskmanager.model.task.TaskName;
 import seedu.taskmanager.model.task.Deadline;
-// import seedu.taskmanager.model.tag.Tag;
-// import seedu.taskmanager.model.tag.UniqueTagList;
+import seedu.taskmanager.model.task.EndTime;
+import seedu.taskmanager.model.category.Category;
+import seedu.taskmanager.model.category.UniqueCategoryList;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -74,13 +74,13 @@ public class ParserUtil {
         return taskname.isPresent() ? Optional.of(new TaskName(taskname.get())) : Optional.empty();
     }
 
-    /**
+/*   /**
      * Parses a {@code Optional<String> time} into an {@code Optional<Time>} if {@code time} is present.
-     */
+     
     public static Optional<Deadline> parseTime(Optional<String> time) throws IllegalValueException {
         assert time != null;
         return time.isPresent() ? Optional.of(new Deadline(time.get())) : Optional.empty();
-    }
+    }*/
 
     /**
      * Parses a {@code Optional<String> date} into an {@code Optional<Date>} if {@code date} is present.
@@ -93,38 +93,28 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> endtime} into an {@code Optional<EndTime>} if {@code endtime} is present.
      */
-/*    public static Optional<EndTime> parseEndTime(Optional<String> endtime) throws IllegalValueException {
+    public static Optional<EndTime> parseEndTime(Optional<String> endtime) throws IllegalValueException {
     	assert endtime != null;
     	return endtime.isPresent() ? Optional.of(new EndTime(endtime.get())) : Optional.empty();
     }
 
-
     /**
      * Parses a {@code Optional<String> deadline} into an {@code Optional<Deadline>} if {@code deadline} is present.
-
+     */
     public static Optional<Deadline> parseDeadline(Optional<String> deadline) throws IllegalValueException {
     	assert deadline != null;
-    	return deadline.isPresent() ? Optional.of(new Deadline(endtime.get())) : Optinal.empty();
-    } */
-
-    /**
-     * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.
-     */
-   /* public static Optional<Address> parseAddress(Optional<String> address) throws IllegalValueException {
-        assert address != null;
-        return address.isPresent() ? Optional.of(new Address(address.get())) : Optional.empty();
-    } */
-
+    	return deadline.isPresent() ? Optional.of(new Deadline(deadline.get())) : Optional.empty();
+    } 
 
     /**
      * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.
      */
-  /*  public static UniqueTagList parseTags(Collection<String> tags) throws IllegalValueException {
-        assert tags != null;
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(new Tag(tagName));
+    public static UniqueCategoryList parseCategories(Collection<String> categories) throws IllegalValueException {
+        assert categories != null;
+        final Set<Category> categorySet = new HashSet<>();
+        for (String categoryName : categories) {
+            categorySet.add(new Category(categoryName));
         }
-        return new UniqueTagList(tagSet);
-    } */
+        return new UniqueCategoryList(categorySet);
+    } 
 }

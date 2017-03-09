@@ -14,9 +14,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_ENDTIME = new Prefix("TO");
     public static final Prefix PREFIX_DATE = new Prefix("ON");
     public static final Prefix PREFIX_DEADLINE = new Prefix("BY");
-
-//    public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
-//    public static final Prefix PREFIX_TAG = new Prefix("t/");
+    public static final Prefix PREFIX_CATEGORY = new Prefix("CATEGORY");
 
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT =

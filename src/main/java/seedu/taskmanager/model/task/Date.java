@@ -10,8 +10,9 @@ import seedu.taskmanager.commons.exceptions.IllegalValueException;
 public class Date {
 
     public static final String MESSAGE_DATE_CONSTRAINTS =
-            "Person emails should be 2 alphanumeric/period strings separated by '@'";
-    public static final String DATE_VALIDATION_REGEX = "[\\w\\.]+@[\\w\\.]+";
+            "Task date should be either a day (e.g. thursday) or a date with the format: DD/MM/YY (e.g. 03/03/17)";
+    public static final String DATE_VALIDATION_REGEX1 = "[\\d{2}]+/[\\d{2}]+/[\\d{2}]+";
+    public static final String DATE_VALIDATION_REGEX2 = "[a-zA-Z]+";
 
     public final String value;
 
@@ -33,7 +34,7 @@ public class Date {
      * Returns if a given string is a valid task date.
      */
     public static boolean isValidDate(String test) {
-        return test.matches(DATE_VALIDATION_REGEX);
+        return test.matches(DATE_VALIDATION_REGEX1) || test.matches(DATE_VALIDATION_REGEX2);
     }
 
     @Override

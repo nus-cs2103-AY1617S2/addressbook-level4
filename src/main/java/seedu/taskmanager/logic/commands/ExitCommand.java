@@ -8,7 +8,7 @@ import seedu.taskmanager.commons.events.ui.ExitAppRequestEvent;
  */
 public class ExitCommand extends Command {
 
-    public static final String COMMAND_WORD = "exit";
+    public static final String COMMAND_WORD = "EXIT";
 
     public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Exiting Task Manager as requested ...";
 

@@ -10,6 +10,7 @@ import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.model.task.Date;
 import seedu.taskmanager.model.task.TaskName;
 import seedu.taskmanager.model.task.Task;
+import seedu.taskmanager.model.task.EndTime;
 import seedu.taskmanager.model.task.Deadline;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.model.category.Category;
@@ -23,9 +24,11 @@ public class XmlAdaptedTask {
     @XmlElement(required = true)
     private String taskname;
     @XmlElement(required = true)
-    private String time;
+    private String endtime;
     @XmlElement(required = true)
     private String date;
+    @XmlElement(required = true)
+    private String deadline; 
 //    @XmlElement(required = true)
 //    private String address;
 
@@ -46,9 +49,10 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         taskname = source.getTaskName().fullTaskName;
+
         time = source.getEndTime().value;
         date = source.getDate().value;
-//        address = source.getAddress().value;
+        deadline = source.getDeadline().value;
         categorised = new ArrayList<>();
         for (Category category : source.getCategories()) {
         	categorised.add(new XmlAdaptedCategory(category));
@@ -66,10 +70,12 @@ public class XmlAdaptedTask {
             taskCategories.add(category.toModelType());
         }
         final TaskName taskname = new TaskName(this.taskname);
-        final Deadline deadline = new Deadline(this.time);
         final Date date = new Date(this.date);
+        final EndTime endtime = new EndTime(this.endtime);
+        final Deadline deadline = new Deadline(this.deadline);
 //        final Address address = new Address(this.address);
         final UniqueCategoryList categories = new UniqueCategoryList(taskCategories);
         return new Task(taskname, deadline, date, categories);
+
     }
 }
