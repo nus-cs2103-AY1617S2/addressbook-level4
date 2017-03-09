@@ -1,10 +1,10 @@
-# Address Book (Level 5)
+# Task Manager  (Level 5)
 
 
 [![Build Status](https://travis-ci.org/CS2103JAN2017-T09-B1/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-T09-B1/main)
 
 <img src="docs/images/ui.png" width="600"><br>
-Best address book EVER!
+Best task manager EVER!
 
 
 #### Site Map
