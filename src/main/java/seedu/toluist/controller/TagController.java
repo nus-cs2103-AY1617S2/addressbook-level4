@@ -2,7 +2,6 @@ package seedu.toluist.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import seedu.toluist.commons.core.LogsCenter;
@@ -87,14 +86,14 @@ public class TagController extends Controller {
         String successWords = String.join("\", \"", successfulList);
         String failWords = String.join("\", \"", failedList);
         String resultMessage = "";
-        
+
         if (successfulList.length > 0) {
             resultMessage += String.format(SUCCESS_MESSAGE_TEMPLATE, successWords);
         }
         if (failedList.length > 0) {
             resultMessage += String.format(FAIL_MESSAGE_TEMPLATE, failWords);
         }
-        
+
         return new CommandResult(String.format(RESULT_MESSAGE_TEMPLATE, resultMessage, successCount));
     }
 

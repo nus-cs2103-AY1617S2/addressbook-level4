@@ -59,11 +59,11 @@ public class Task implements Comparable<Task> {
                 isDifferent = false;
             }
         }
-        
+
         if (isDifferent) {
             this.allTags.add(tag);
         }
-        
+
         return isDifferent;
     }
 
