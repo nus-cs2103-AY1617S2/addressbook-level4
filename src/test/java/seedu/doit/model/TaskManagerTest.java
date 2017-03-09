@@ -59,9 +59,9 @@ public class TaskManagerTest {
 
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
-        TaskManager typicalAddressBook = new TypicalTestTasks().getTypicalTaskManager();
-        List<ReadOnlyTask> newPersons = typicalAddressBook.getTaskList();
-        List<Tag> newTags = new ArrayList<>(typicalAddressBook.getTagList());
+        TaskManager typicalTaskManager = new TypicalTestTasks().getTypicalTaskManager();
+        List<ReadOnlyTask> newPersons = typicalTaskManager.getTaskList();
+        List<Tag> newTags = new ArrayList<>(typicalTaskManager.getTagList());
         // Repeat the first tag twice
         newTags.add(newTags.get(0));
         TaskManagerStub newData = new TaskManagerStub(newPersons, newTags);
