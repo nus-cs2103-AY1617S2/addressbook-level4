@@ -23,7 +23,7 @@ public class Deadline {
     public static final String MESSAGE_DATE_NOT_FOUND = 
     		  "The date entered is either not recognized or not a future date.\n"
     		+ "Please paraphrase it or choose another date.";
-    public static final String DATE_VALIDATION_REGEX = "[\\s | [a-zA-Z0-9,/-]]+";
+    public static final String DATE_VALIDATION_REGEX = "[\\s | [a-zA-Z0-9,/-:]]+";
     public static final String DATE_FORMAT = "EEE, MMM d yyyy HH:mm";
 
     public final String value;
@@ -54,7 +54,7 @@ public class Deadline {
      */
     public static boolean isValidDate(String deadline) {
         boolean isRegexMatched = deadline.matches(DATE_VALIDATION_REGEX);
-        boolean isDeadlineFound = parser.parse(deadline).size() != 0;
+        boolean isDeadlineFound = parser.parse(deadline).size() != 0 || deadline.equals("floating");
     	return isRegexMatched && isDeadlineFound;
     }
     
@@ -75,6 +75,9 @@ public class Deadline {
 
     @Override
     public String toString() {
+    	if (parsedDeadline.size() == 0) {
+    		return "floating";
+    	}
         return formatter.format(parsedDeadline.get(0).getDates().get(0));
     }
 

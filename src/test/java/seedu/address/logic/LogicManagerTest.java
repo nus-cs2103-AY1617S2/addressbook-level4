@@ -191,20 +191,20 @@ public class LogicManagerTest {
         assertCommandFailure("add wrong args wrong args", expectedMessage);
         assertCommandFailure("add Valid Title 12345 p/validPriority.butNoDatePrefix i/valid,instruction",
                 expectedMessage);
-        assertCommandFailure("add Valid Title d/12345 validDate.butNoPrefix i/valid, instruction", expectedMessage);
-        assertCommandFailure("add Valid Title d/12345 p/validDate.butNoInstructionPrefix valid, instruction",
+        assertCommandFailure("add Valid Title tomorrow validDate.butNoPrefix i/valid, instruction", expectedMessage);
+        assertCommandFailure("add Valid Title d/tomorrow p/validDate.butNoInstructionPrefix valid, instruction",
                 expectedMessage);
     }
 
     @Test
     public void execute_add_invalidTaskData() {
-        assertCommandFailure("add []\\[;] d/12345 p/validPriority i/valid, instruction",
+        assertCommandFailure("add []\\[;] d/tomorrow p/validPriority i/valid, instruction",
                 Title.MESSAGE_TITLE_CONSTRAINTS);
-        assertCommandFailure("add Valid Title d/not_numbers p/validPriority i/valid, instruction",
+        assertCommandFailure("add Valid Title d/not_valid_date p/validPriority i/valid, instruction",
                 Deadline.MESSAGE_DATE_CONSTRAINTS);
-        assertCommandFailure("add Valid Title d/12345 p/not@a.Priority i/valid, instruction",
+        assertCommandFailure("add Valid Title d/tomorrow p/not@a.Priority i/valid, instruction",
                 Priority.MESSAGE_PRIORITY_CONSTRAINTS);
-        assertCommandFailure("add Valid Title d/12345 p/validPriority i/valid, instruction t/invalid_-[.tag",
+        assertCommandFailure("add Valid Title d/tomorrow p/validPriority i/valid, instruction t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
@@ -418,7 +418,7 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Title title = new Title("Adam Brown");
-            Deadline privateDate = new Deadline("111111");
+            Deadline privateDate = new Deadline("tomorrow");
             Priority priority = new Priority("adam");
             Instruction privateInstruction = new Instruction("111, alpha street");
             Tag tag1 = new Tag("tag1");
@@ -437,7 +437,7 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Title("Task " + seed),
-                    new Deadline("" + Math.abs(seed)),
+                    new Deadline("tomorrow"),
                     new Priority(seed + "_urgent"),
                     new Instruction("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
@@ -452,7 +452,7 @@ public class LogicManagerTest {
 
             cmd.append(p.getTitle().toString());
             cmd.append(" p/").append(p.getPriority());
-            cmd.append(" d/").append(p.getDeadline());
+            cmd.append(" d/").append(p.getDeadline().toString());
             cmd.append(" i/").append(p.getInstruction());
 
             UniqueTagList tags = p.getTags();
@@ -536,7 +536,7 @@ public class LogicManagerTest {
         Task generateTaskWithTitle(String title) throws Exception {
             return new Task(
                     new Title(title),
-                    new Deadline("1"),
+                    new Deadline("tomorrow"),
                     new Priority("1"),
                     new Instruction("House of 1"),
                     new UniqueTagList(new Tag("tag"))
