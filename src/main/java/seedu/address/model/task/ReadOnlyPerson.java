@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.task;
 
 import seedu.address.model.tag.UniqueTagList;
 
@@ -9,7 +9,7 @@ import seedu.address.model.tag.UniqueTagList;
 public interface ReadOnlyPerson {
 
     Name getName();
-    Phone getPhone();
+    Time getPhone();
     Email getEmail();
     Address getAddress();
 
