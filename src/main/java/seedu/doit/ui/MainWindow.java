@@ -16,7 +16,6 @@ import seedu.doit.commons.events.ui.ExitAppRequestEvent;
 import seedu.doit.commons.util.FxViewUtil;
 import seedu.doit.logic.Logic;
 import seedu.doit.model.UserPrefs;
-import seedu.doit.model.task.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -24,187 +23,194 @@ import seedu.doit.model.task.ReadOnlyTask;
  */
 public class MainWindow extends UiPart<Region> {
 
-    private static final String ICON = "/images/task_manager.png";
-    private static final String FXML = "MainWindow.fxml";
-    private static final int MIN_HEIGHT = 600;
-    private static final int MIN_WIDTH = 450;
+	private static final String ICON = "/images/task_manager.png";
+	private static final String FXML = "MainWindow.fxml";
+	private static final int MIN_HEIGHT = 600;
+	private static final int MIN_WIDTH = 450;
 
-    private Stage primaryStage;
-    private Logic logic;
+	private Stage primaryStage;
+	private Logic logic;
 
-    // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
-    private TaskListPanel taskListPanel;
-    private Config config;
+	// Independent Ui parts residing in this Ui container
 
-    @FXML
-    private AnchorPane browserPlaceholder;
+	private TaskListPanel taskListPanel;
+	private TaskListPanel eventListPanel;
+	private TaskListPanel floatingListPanel;
+	private Config config;
 
-    @FXML
-    private AnchorPane commandBoxPlaceholder;
 
-    @FXML
-    private MenuItem helpMenuItem;
+	@FXML
+	private AnchorPane commandBoxPlaceholder;
 
-    @FXML
-    private AnchorPane taskListPanelPlaceholder;
+	@FXML
+	private MenuItem helpMenuItem;
 
-    @FXML
-    private AnchorPane resultDisplayPlaceholder;
+	@FXML
+	private AnchorPane taskListPanelPlaceholder;
 
-    @FXML
-    private AnchorPane statusbarPlaceholder;
+	@FXML
+	private AnchorPane eventListPanelPlaceholder;
 
-    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
-        super(FXML);
+	@FXML
+	private AnchorPane floatingListPanelPlaceholder;
 
-        // Set dependencies
-        this.primaryStage = primaryStage;
-        this.logic = logic;
-        this.config = config;
+	@FXML
+	private AnchorPane resultDisplayPlaceholder;
 
-        // Configure the UI
-        setTitle(config.getAppTitle());
-        setIcon(ICON);
-        setWindowMinSize();
-        setWindowDefaultSize(prefs);
-        Scene scene = new Scene(getRoot());
-        primaryStage.setScene(scene);
+	@FXML
+	private AnchorPane statusbarPlaceholder;
 
-        setAccelerators();
-    }
+	public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
+		super(FXML);
 
-    public Stage getPrimaryStage() {
-        return primaryStage;
-    }
+		// Set dependencies
+		this.primaryStage = primaryStage;
+		this.logic = logic;
+		this.config = config;
 
-    private void setAccelerators() {
-        setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
-    }
+		// Configure the UI
+		setTitle(config.getAppTitle());
+		setIcon(ICON);
+		setWindowMinSize();
+		setWindowDefaultSize(prefs);
+		Scene scene = new Scene(getRoot());
+		primaryStage.setScene(scene);
 
-    /**
-     * Sets the accelerator of a MenuItem.
-     * @param keyCombination the KeyCombination value of the accelerator
-     */
-    private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
-        menuItem.setAccelerator(keyCombination);
+		setAccelerators();
+	}
 
-        /*
-         * TODO: the code below can be removed once the bug reported here
-         * https://bugs.openjdk.java.net/browse/JDK-8131666
-         * is fixed in later version of SDK.
-         *
-         * According to the bug report, TextInputControl (TextField, TextArea) will
-         * consume function-key events. Because CommandBox contains a TextField, and
-         * ResultDisplay contains a TextArea, thus some accelerators (e.g F1) will
-         * not work when the focus is in them because the key event is consumed by
-         * the TextInputControl(s).
-         *
-         * For now, we add following event filter to capture such key events and open
-         * help window purposely so to support accelerators even when focus is
-         * in CommandBox or ResultDisplay.
-         */
-        getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
-                menuItem.getOnAction().handle(new ActionEvent());
-                event.consume();
-            }
-        });
-    }
+	public Stage getPrimaryStage() {
+		return this.primaryStage;
+	}
 
-    void fillInnerParts() {
-        browserPanel = new BrowserPanel(browserPlaceholder);
-        taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
-        new ResultDisplay(getResultDisplayPlaceholder());
-        new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
-        new CommandBox(getCommandBoxPlaceholder(), logic);
-    }
+	private void setAccelerators() {
+		setAccelerator(this.helpMenuItem, KeyCombination.valueOf("F1"));
+	}
 
-    private AnchorPane getCommandBoxPlaceholder() {
-        return commandBoxPlaceholder;
-    }
+	/**
+	 * Sets the accelerator of a MenuItem.
+	 * @param keyCombination the KeyCombination value of the accelerator
+	 */
+	private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
+		menuItem.setAccelerator(keyCombination);
 
-    private AnchorPane getStatusbarPlaceholder() {
-        return statusbarPlaceholder;
-    }
+		/*
+		 * TODO: the code below can be removed once the bug reported here
+		 * https://bugs.openjdk.java.net/browse/JDK-8131666
+		 * is fixed in later version of SDK.
+		 *
+		 * According to the bug report, TextInputControl (TextField, TextArea) will
+		 * consume function-key events. Because CommandBox contains a TextField, and
+		 * ResultDisplay contains a TextArea, thus some accelerators (e.g F1) will
+		 * not work when the focus is in them because the key event is consumed by
+		 * the TextInputControl(s).
+		 *
+		 * For now, we add following event filter to capture such key events and open
+		 * help window purposely so to support accelerators even when focus is
+		 * in CommandBox or ResultDisplay.
+		 */
+		getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+			if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
+				menuItem.getOnAction().handle(new ActionEvent());
+				event.consume();
+			}
+		});
+	}
 
-    private AnchorPane getResultDisplayPlaceholder() {
-        return resultDisplayPlaceholder;
-    }
+	void fillInnerParts() {
+		this.taskListPanel = new TaskListPanel(getTaskListPlaceholder(), this.logic.getFilteredTaskList());
+		this.eventListPanel = new TaskListPanel(getEventListPlaceholder(), this.logic.getFilteredTaskList());
+		this.floatingListPanel = new TaskListPanel(getFloatingListPlaceholder(), this.logic.getFilteredTaskList());
+		new ResultDisplay(getResultDisplayPlaceholder());
+		new StatusBarFooter(getStatusbarPlaceholder(), this.config.getTaskManagerFilePath());
+		new CommandBox(getCommandBoxPlaceholder(), this.logic);
+	}
 
-    private AnchorPane getTaskListPlaceholder() {
-        return taskListPanelPlaceholder;
-    }
+	private AnchorPane getCommandBoxPlaceholder() {
+		return this.commandBoxPlaceholder;
+	}
 
-    void hide() {
-        primaryStage.hide();
-    }
+	private AnchorPane getStatusbarPlaceholder() {
+		return this.statusbarPlaceholder;
+	}
 
-    private void setTitle(String appTitle) {
-        primaryStage.setTitle(appTitle);
-    }
+	private AnchorPane getResultDisplayPlaceholder() {
+		return this.resultDisplayPlaceholder;
+	}
 
-    /**
-     * Sets the given image as the icon of the main window.
-     * @param iconSource e.g. {@code "/images/help_icon.png"}
-     */
-    private void setIcon(String iconSource) {
-        FxViewUtil.setStageIcon(primaryStage, iconSource);
-    }
+	private AnchorPane getTaskListPlaceholder() {
+		return this.taskListPanelPlaceholder;
+	}
 
-    /**
-     * Sets the default size based on user preferences.
-     */
-    private void setWindowDefaultSize(UserPrefs prefs) {
-        primaryStage.setHeight(prefs.getGuiSettings().getWindowHeight());
-        primaryStage.setWidth(prefs.getGuiSettings().getWindowWidth());
-        if (prefs.getGuiSettings().getWindowCoordinates() != null) {
-            primaryStage.setX(prefs.getGuiSettings().getWindowCoordinates().getX());
-            primaryStage.setY(prefs.getGuiSettings().getWindowCoordinates().getY());
-        }
-    }
+	private AnchorPane getEventListPlaceholder() {
+		return this.eventListPanelPlaceholder;
+	}
 
-    private void setWindowMinSize() {
-        primaryStage.setMinHeight(MIN_HEIGHT);
-        primaryStage.setMinWidth(MIN_WIDTH);
-    }
+	private AnchorPane getFloatingListPlaceholder() {
+		return this.floatingListPanelPlaceholder;
+	}
 
-    /**
-     * Returns the current size and the position of the main Window.
-     */
-    GuiSettings getCurrentGuiSetting() {
-        return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
-    }
+	void hide() {
+		this.primaryStage.hide();
+	}
 
-    @FXML
-    public void handleHelp() {
-        HelpWindow helpWindow = new HelpWindow();
-        helpWindow.show();
-    }
+	private void setTitle(String appTitle) {
+		this.primaryStage.setTitle(appTitle);
+	}
 
-    void show() {
-        primaryStage.show();
-    }
+	/**
+	 * Sets the given image as the icon of the main window.
+	 * @param iconSource e.g. {@code "/images/help_icon.png"}
+	 */
+	private void setIcon(String iconSource) {
+		FxViewUtil.setStageIcon(this.primaryStage, iconSource);
+	}
 
-    /**
-     * Closes the application.
-     */
-    @FXML
-    private void handleExit() {
-        raise(new ExitAppRequestEvent());
-    }
+	/**
+	 * Sets the default size based on user preferences.
+	 */
+	private void setWindowDefaultSize(UserPrefs prefs) {
+		this.primaryStage.setHeight(prefs.getGuiSettings().getWindowHeight());
+		this.primaryStage.setWidth(prefs.getGuiSettings().getWindowWidth());
+		if (prefs.getGuiSettings().getWindowCoordinates() != null) {
+			this.primaryStage.setX(prefs.getGuiSettings().getWindowCoordinates().getX());
+			this.primaryStage.setY(prefs.getGuiSettings().getWindowCoordinates().getY());
+		}
+	}
 
-    public TaskListPanel getTaskListPanel() {
-        return this.taskListPanel;
-    }
+	private void setWindowMinSize() {
+		this.primaryStage.setMinHeight(MIN_HEIGHT);
+		this.primaryStage.setMinWidth(MIN_WIDTH);
+	}
 
-    void loadTaskPage(ReadOnlyTask task) {
-        browserPanel.loadTaskPage(task);
-    }
+	/**
+	 * Returns the current size and the position of the main Window.
+	 */
+	GuiSettings getCurrentGuiSetting() {
+		return new GuiSettings(this.primaryStage.getWidth(), this.primaryStage.getHeight(),
+				(int) this.primaryStage.getX(), (int) this.primaryStage.getY());
+	}
 
-    void releaseResources() {
-        browserPanel.freeResources();
-    }
+	@FXML
+	public void handleHelp() {
+		HelpWindow helpWindow = new HelpWindow();
+		helpWindow.show();
+	}
+
+	void show() {
+		this.primaryStage.show();
+	}
+
+	/**
+	 * Closes the application.
+	 */
+	@FXML
+	private void handleExit() {
+		raise(new ExitAppRequestEvent());
+	}
+
+	public TaskListPanel getTaskListPanel() {
+		return this.taskListPanel;
+	}
 
 }
