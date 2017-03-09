@@ -20,7 +20,7 @@ Role: Developer <br>
 
 In Charge of: Commons <br>
 Responsibilities: Testing
-Features implemented: 
+Features implemented:
 
 -----
 
