@@ -61,6 +61,16 @@ public class TestTask implements ReadOnlyTask {
     public UniqueTagList getTags() {
         return tags;
     }
+    
+    @Override
+    public Priority getPriority() {
+        return priority;
+    }
+
+    @Override
+    public Status getStatus() {
+        return status;
+    }
 
     @Override
     public String toString() {
@@ -75,13 +85,23 @@ public class TestTask implements ReadOnlyTask {
         return sb.toString();
     }
 
-    @Override
-    public Priority getPriority() {
-        return priority;
-    }
 
     @Override
-    public Status getStatus() {
-        return status;
+    public String getAsText() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getName())
+                .append(" Comment: ")
+                .append(getComment())
+                .append(" Tags: ");
+        getTags().forEach(builder::append);
+        return builder.toString();
+    }
+    
+    @Override
+    public boolean isSameStateAs(ReadOnlyTask other) {
+        return other == this // short circuit if same object
+                || (other != null // this is first to avoid NPE below
+                && other.getName().equals(this.getName()) // state checks here onwards
+                && other.getComment().equals(this.getComment()));
     }
 }
