@@ -10,8 +10,8 @@ import seedu.onetwodo.commons.exceptions.IllegalValueException;
 public class Date {
 
     public static final String MESSAGE_DATE_CONSTRAINTS =
-            "Task dates should be 2 alphanumeric/period strings separated by '@'";
-    public static final String DATE_VALIDATION_REGEX = ".*";
+            "If task date exists, it must be a valid date";
+    public static final String DATE_VALIDATION_REGEX = ".+";
 
     public final String value;
 
