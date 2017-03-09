@@ -80,7 +80,7 @@ public class TaskListPanelHandle extends GuiHandle {
      * Returns true if the {@code persons} appear as the sub list (in that order) at position {@code startPosition}.
      */
     public boolean containsInOrder(int startPosition, Task... tasks) {
-        List<Task> personsInList = getListView().getItems();
+        List<Task> tasksInList = getListView().getItems();
 
         // Return false if the list in panel is too short to contain the given list
         if (startPosition + tasks.length > tasksInList.size()) {

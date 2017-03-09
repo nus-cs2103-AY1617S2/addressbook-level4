@@ -15,7 +15,7 @@ import seedu.address.model.tag.UniqueTagList;
  * Provides a handle to a task card in the task list panel.
  */
 public class TaskCardHandle  extends GuiHandle {
-    private static final String NAME_FIELD_ID = "#name";
+    private static final String TITLE_FIELD_ID = "#title";
     private static final String DESCRIPTION_FIELD_ID = "#description";
     private static final String TAGS_FIELD_ID = "#tags";
 
@@ -30,8 +30,8 @@ public class TaskCardHandle  extends GuiHandle {
         return getTextFromLabel(fieldId, node);
     }
 
-    public String getName() {
-        return getTextFromLabel(NAME_FIELD_ID);
+    public String getTitle() {
+        return getTextFromLabel(TITLE_FIELD_ID);
     }
 
     public String getDescription() {
@@ -63,8 +63,7 @@ public class TaskCardHandle  extends GuiHandle {
     }
 
     public boolean isSameTask(Task task) {
-        return getName().equals(task.getName().name)
-                && getDescription().equals(task.getDescription().desc)
+        return getTitle().equals(task.getTitle().title)
                 && getTags().equals(getTags(task.getTags()));
     }
 
@@ -72,8 +71,7 @@ public class TaskCardHandle  extends GuiHandle {
     public boolean equals(Object obj) {
         if (obj instanceof PersonCardHandle) {
             TaskCardHandle handle = (TaskCardHandle) obj;
-            return getName().equals(handle.getName())
-                    && getDescription().equals(handle.getDescription())
+            return getTitle().equals(handle.getTitle())
                     && getTags().equals(handle.getTags());
         }
         return super.equals(obj);
@@ -81,6 +79,6 @@ public class TaskCardHandle  extends GuiHandle {
 
     @Override
     public String toString() {
-        return getName() + " " + getDescription();
+        return getTitle() + " " + getDescription();
     }
 }

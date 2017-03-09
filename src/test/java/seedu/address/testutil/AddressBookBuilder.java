@@ -5,6 +5,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.UniqueTaskList;
 
 /**
  * A utility class to help with building Addressbook objects.
@@ -19,8 +21,8 @@ public class AddressBookBuilder {
         this.addressBook = addressBook;
     }
 
-    public AddressBookBuilder withPerson(Person person) throws UniquePersonList.DuplicatePersonException {
-        addressBook.addPerson(person);
+    public AddressBookBuilder withTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+        addressBook.addTask(task);
         return this;
     }
 
