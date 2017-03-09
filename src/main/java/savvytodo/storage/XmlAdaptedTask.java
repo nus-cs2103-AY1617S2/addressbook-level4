@@ -9,9 +9,9 @@ import savvytodo.commons.exceptions.IllegalValueException;
 import savvytodo.model.category.Category;
 import savvytodo.model.category.UniqueCategoryList;
 import savvytodo.model.task.Address;
-import savvytodo.model.task.Email;
+import savvytodo.model.task.Description;
 import savvytodo.model.task.Name;
-import savvytodo.model.task.Phone;
+import savvytodo.model.task.Priority;
 import savvytodo.model.task.ReadOnlyTask;
 import savvytodo.model.task.Task;
 
@@ -66,8 +66,8 @@ public class XmlAdaptedTask {
             taskCategories.add(category.toModelType());
         }
         final Name name = new Name(this.name);
-        final Phone phone = new Phone(this.phone);
-        final Email email = new Email(this.email);
+        final Priority phone = new Priority(this.phone);
+        final Description email = new Description(this.email);
         final Address address = new Address(this.address);
         final UniqueCategoryList categories = new UniqueCategoryList(taskCategories);
         return new Task(name, phone, email, address, categories);

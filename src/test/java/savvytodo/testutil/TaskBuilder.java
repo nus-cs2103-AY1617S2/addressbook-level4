@@ -4,9 +4,9 @@ import savvytodo.commons.exceptions.IllegalValueException;
 import savvytodo.model.category.Category;
 import savvytodo.model.category.UniqueCategoryList;
 import savvytodo.model.task.Address;
-import savvytodo.model.task.Email;
+import savvytodo.model.task.Description;
 import savvytodo.model.task.Name;
-import savvytodo.model.task.Phone;
+import savvytodo.model.task.Priority;
 
 /**
  *
@@ -45,12 +45,12 @@ public class TaskBuilder {
     }
 
     public TaskBuilder withPhone(String phone) throws IllegalValueException {
-        this.task.setPhone(new Phone(phone));
+        this.task.setPhone(new Priority(phone));
         return this;
     }
 
     public TaskBuilder withEmail(String email) throws IllegalValueException {
-        this.task.setEmail(new Email(email));
+        this.task.setEmail(new Description(email));
         return this;
     }
 

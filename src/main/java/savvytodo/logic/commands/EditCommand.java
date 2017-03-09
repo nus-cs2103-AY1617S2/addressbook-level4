@@ -8,9 +8,9 @@ import savvytodo.commons.util.CollectionUtil;
 import savvytodo.logic.commands.exceptions.CommandException;
 import savvytodo.model.category.UniqueCategoryList;
 import savvytodo.model.task.Address;
-import savvytodo.model.task.Email;
+import savvytodo.model.task.Description;
 import savvytodo.model.task.Name;
-import savvytodo.model.task.Phone;
+import savvytodo.model.task.Priority;
 import savvytodo.model.task.ReadOnlyTask;
 import savvytodo.model.task.Task;
 import savvytodo.model.task.UniqueTaskList;
@@ -79,8 +79,8 @@ public class EditCommand extends Command {
         assert taskToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
-        Phone updatedPhone = editTaskDescriptor.getPhone().orElseGet(taskToEdit::getPhone);
-        Email updatedEmail = editTaskDescriptor.getEmail().orElseGet(taskToEdit::getEmail);
+        Priority updatedPhone = editTaskDescriptor.getPhone().orElseGet(taskToEdit::getPhone);
+        Description updatedEmail = editTaskDescriptor.getEmail().orElseGet(taskToEdit::getEmail);
         Address updatedAddress = editTaskDescriptor.getAddress().orElseGet(taskToEdit::getAddress);
         UniqueCategoryList updatedCategories = editTaskDescriptor.getCategories().orElseGet(taskToEdit::getCategories);
 
@@ -93,8 +93,8 @@ public class EditCommand extends Command {
      */
     public static class EditTaskDescriptor {
         private Optional<Name> name = Optional.empty();
-        private Optional<Phone> phone = Optional.empty();
-        private Optional<Email> email = Optional.empty();
+        private Optional<Priority> phone = Optional.empty();
+        private Optional<Description> email = Optional.empty();
         private Optional<Address> address = Optional.empty();
         private Optional<UniqueCategoryList> categories = Optional.empty();
 
@@ -124,21 +124,21 @@ public class EditCommand extends Command {
             return name;
         }
 
-        public void setPhone(Optional<Phone> phone) {
+        public void setPhone(Optional<Priority> phone) {
             assert phone != null;
             this.phone = phone;
         }
 
-        public Optional<Phone> getPhone() {
+        public Optional<Priority> getPhone() {
             return phone;
         }
 
-        public void setEmail(Optional<Email> email) {
+        public void setEmail(Optional<Description> email) {
             assert email != null;
             this.email = email;
         }
 
-        public Optional<Email> getEmail() {
+        public Optional<Description> getEmail() {
             return email;
         }
 

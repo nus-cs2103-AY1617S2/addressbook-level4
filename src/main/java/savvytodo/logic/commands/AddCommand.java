@@ -8,9 +8,9 @@ import savvytodo.logic.commands.exceptions.CommandException;
 import savvytodo.model.category.Category;
 import savvytodo.model.category.UniqueCategoryList;
 import savvytodo.model.task.Address;
-import savvytodo.model.task.Email;
+import savvytodo.model.task.Description;
 import savvytodo.model.task.Name;
-import savvytodo.model.task.Phone;
+import savvytodo.model.task.Priority;
 import savvytodo.model.task.Task;
 import savvytodo.model.task.UniqueTaskList;
 
@@ -44,8 +44,8 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Task(
                 new Name(name),
-                new Phone(phone),
-                new Email(email),
+                new Priority(phone),
+                new Description(email),
                 new Address(address),
                 new UniqueCategoryList(categorySet)
         );

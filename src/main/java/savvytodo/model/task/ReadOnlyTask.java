@@ -9,8 +9,8 @@ import savvytodo.model.category.UniqueCategoryList;
 public interface ReadOnlyTask {
 
     Name getName();
-    Phone getPhone();
-    Email getEmail();
+    Priority getPhone();
+    Description getEmail();
     Address getAddress();
 
     /**

@@ -10,9 +10,9 @@ import savvytodo.commons.core.Messages;
 import savvytodo.logic.commands.EditCommand;
 import savvytodo.model.category.Category;
 import savvytodo.model.task.Address;
-import savvytodo.model.task.Email;
+import savvytodo.model.task.Description;
 import savvytodo.model.task.Name;
-import savvytodo.model.task.Phone;
+import savvytodo.model.task.Priority;
 import savvytodo.testutil.TaskBuilder;
 import savvytodo.testutil.TestTask;
 
@@ -94,10 +94,10 @@ public class EditCommandTest extends TaskManagerGuiTest {
         assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 p/abcd");
-        assertResultMessage(Phone.MESSAGE_PHONE_CONSTRAINTS);
+        assertResultMessage(Priority.MESSAGE_PHONE_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 e/yahoo!!!");
-        assertResultMessage(Email.MESSAGE_EMAIL_CONSTRAINTS);
+        assertResultMessage(Description.MESSAGE_EMAIL_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 a/");
         assertResultMessage(Address.MESSAGE_ADDRESS_CONSTRAINTS);

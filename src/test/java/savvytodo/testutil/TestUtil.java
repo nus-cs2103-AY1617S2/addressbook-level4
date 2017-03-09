@@ -33,9 +33,9 @@ import savvytodo.model.TaskManager;
 import savvytodo.model.category.Category;
 import savvytodo.model.category.UniqueCategoryList;
 import savvytodo.model.task.Address;
-import savvytodo.model.task.Email;
+import savvytodo.model.task.Description;
 import savvytodo.model.task.Name;
-import savvytodo.model.task.Phone;
+import savvytodo.model.task.Priority;
 import savvytodo.model.task.ReadOnlyTask;
 import savvytodo.model.task.Task;
 import savvytodo.storage.XmlSerializableTaskManager;
@@ -75,15 +75,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Name("Ali Muster"), new Phone("9482424"), new Email("hans@google.com"), new Address("4th street"), new UniqueCategoryList()),
-                new Task(new Name("Boris Mueller"), new Phone("87249245"), new Email("ruth@google.com"), new Address("81th street"), new UniqueCategoryList()),
-                new Task(new Name("Carl Kurz"), new Phone("95352563"), new Email("heinz@yahoo.com"), new Address("wall street"), new UniqueCategoryList()),
-                new Task(new Name("Daniel Meier"), new Phone("87652533"), new Email("cornelia@google.com"), new Address("10th street"), new UniqueCategoryList()),
-                new Task(new Name("Elle Meyer"), new Phone("9482224"), new Email("werner@gmail.com"), new Address("michegan ave"), new UniqueCategoryList()),
-                new Task(new Name("Fiona Kunz"), new Phone("9482427"), new Email("lydia@gmail.com"), new Address("little tokyo"), new UniqueCategoryList()),
-                new Task(new Name("George Best"), new Phone("9482442"), new Email("anna@google.com"), new Address("4th street"), new UniqueCategoryList()),
-                new Task(new Name("Hoon Meier"), new Phone("8482424"), new Email("stefan@mail.com"), new Address("little india"), new UniqueCategoryList()),
-                new Task(new Name("Ida Mueller"), new Phone("8482131"), new Email("hans@google.com"), new Address("chicago ave"), new UniqueCategoryList())
+                new Task(new Name("Ali Muster"), new Priority("9482424"), new Description("hans@google.com"), new Address("4th street"), new UniqueCategoryList()),
+                new Task(new Name("Boris Mueller"), new Priority("87249245"), new Description("ruth@google.com"), new Address("81th street"), new UniqueCategoryList()),
+                new Task(new Name("Carl Kurz"), new Priority("95352563"), new Description("heinz@yahoo.com"), new Address("wall street"), new UniqueCategoryList()),
+                new Task(new Name("Daniel Meier"), new Priority("87652533"), new Description("cornelia@google.com"), new Address("10th street"), new UniqueCategoryList()),
+                new Task(new Name("Elle Meyer"), new Priority("9482224"), new Description("werner@gmail.com"), new Address("michegan ave"), new UniqueCategoryList()),
+                new Task(new Name("Fiona Kunz"), new Priority("9482427"), new Description("lydia@gmail.com"), new Address("little tokyo"), new UniqueCategoryList()),
+                new Task(new Name("George Best"), new Priority("9482442"), new Description("anna@google.com"), new Address("4th street"), new UniqueCategoryList()),
+                new Task(new Name("Hoon Meier"), new Priority("8482424"), new Description("stefan@mail.com"), new Address("little india"), new UniqueCategoryList()),
+                new Task(new Name("Ida Mueller"), new Priority("8482131"), new Description("hans@google.com"), new Address("chicago ave"), new UniqueCategoryList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {

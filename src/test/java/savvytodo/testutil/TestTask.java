@@ -2,9 +2,9 @@ package savvytodo.testutil;
 
 import savvytodo.model.category.UniqueCategoryList;
 import savvytodo.model.task.Address;
-import savvytodo.model.task.Email;
+import savvytodo.model.task.Description;
 import savvytodo.model.task.Name;
-import savvytodo.model.task.Phone;
+import savvytodo.model.task.Priority;
 import savvytodo.model.task.ReadOnlyTask;
 
 /**
@@ -14,8 +14,8 @@ public class TestTask implements ReadOnlyTask {
 
     private Name name;
     private Address address;
-    private Email email;
-    private Phone phone;
+    private Description email;
+    private Priority phone;
     private UniqueCategoryList categories;
 
     public TestTask() {
@@ -41,11 +41,11 @@ public class TestTask implements ReadOnlyTask {
         this.address = address;
     }
 
-    public void setEmail(Email email) {
+    public void setEmail(Description email) {
         this.email = email;
     }
 
-    public void setPhone(Phone phone) {
+    public void setPhone(Priority phone) {
         this.phone = phone;
     }
 
@@ -59,12 +59,12 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Phone getPhone() {
+    public Priority getPhone() {
         return phone;
     }
 
     @Override
-    public Email getEmail() {
+    public Description getEmail() {
         return email;
     }
 

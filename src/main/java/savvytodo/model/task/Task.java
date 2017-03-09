@@ -12,8 +12,8 @@ import savvytodo.model.category.UniqueCategoryList;
 public class Task implements ReadOnlyTask {
 
     private Name name;
-    private Phone phone;
-    private Email email;
+    private Priority priority;
+    private Description description;
     private Address address;
 
     private UniqueCategoryList categories;
@@ -21,11 +21,11 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Phone phone, Email email, Address address, UniqueCategoryList categories) {
+    public Task(Name name, Priority phone, Description email, Address address, UniqueCategoryList categories) {
         assert !CollectionUtil.isAnyNull(name, phone, email, address, categories);
         this.name = name;
-        this.phone = phone;
-        this.email = email;
+        this.priority = phone;
+        this.description = email;
         this.address = address;
         this.categories = new UniqueCategoryList(categories); //protect internal categories from changes in the arg list
     }
@@ -47,24 +47,24 @@ public class Task implements ReadOnlyTask {
         return name;
     }
 
-    public void setPhone(Phone phone) {
+    public void setPhone(Priority phone) {
         assert phone != null;
-        this.phone = phone;
+        this.priority = phone;
     }
 
     @Override
-    public Phone getPhone() {
-        return phone;
+    public Priority getPhone() {
+        return priority;
     }
 
-    public void setEmail(Email email) {
+    public void setEmail(Description email) {
         assert email != null;
-        this.email = email;
+        this.description = email;
     }
 
     @Override
-    public Email getEmail() {
-        return email;
+    public Description getEmail() {
+        return description;
     }
 
     public void setAddress(Address address) {
@@ -112,7 +112,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, categories);
+        return Objects.hash(name, priority, description, address, categories);
     }
 
     @Override
