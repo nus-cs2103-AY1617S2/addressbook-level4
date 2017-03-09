@@ -90,7 +90,7 @@ public class TestUtil {
                 new Task(new Name("George Best"), new PriorityLevel("2"), new DateTime("Feb 19, 2017"),
                         new DateTime("Feb 20, 2017"), new Information("4th street"), new UniqueCategoryList()),
                 new Task(new Name("Hoon Meier"), new PriorityLevel("2"), new DateTime("Feb 19, 2017"),
-                        new DateTime("Feb 20, 2017"), new Information("little india"), new UniqueCategoryList()),
+                        new DateTime("Feb 28, 2017"), new Information("little india"), new UniqueCategoryList()),
                 new Task(new Name("Ida Mueller"), new PriorityLevel("2"), new DateTime("Feb 19, 2017"),
                         new DateTime("Feb 20, 2017"), new Information("chicago ave"), new UniqueCategoryList())
             };
