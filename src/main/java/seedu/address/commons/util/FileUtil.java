@@ -9,6 +9,7 @@ import java.nio.file.Files;
  */
 public class FileUtil {
 
+    private static final String FILE_NEWLINE = "\n";
     private static final String CHARSET = "UTF-8";
 
     public static boolean isFileExists(File file) {
@@ -71,7 +72,8 @@ public class FileUtil {
      * Will create the file if it does not exist yet.
      */
     public static void writeToFile(File file, String content) throws IOException {
-        Files.write(file.toPath(), content.getBytes(CHARSET));
+        String contentAppendedNewline = content.concat(FILE_NEWLINE);
+        Files.write(file.toPath(), contentAppendedNewline.getBytes(CHARSET));
     }
 
     /**
