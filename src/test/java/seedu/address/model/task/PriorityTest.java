@@ -9,11 +9,10 @@ public class PriorityTest {
 
     @Test
     public void isValidPriority() {
-        // invalid phone numbers
-        assertFalse(Priority.isValidPriority("")); // empty string
+        // invalid priorities
         assertFalse(Priority.isValidPriority(" ")); // spaces only
 
-        // valid phone numbers
+        // valid priorities
         assertTrue(Priority.isValidPriority("93121534"));
         assertTrue(Priority.isValidPriority("4")); // short phone numbers
         assertTrue(Priority.isValidPriority("124293842033123")); // long phone numbers

@@ -9,11 +9,10 @@ public class StatusTest {
 
     @Test
     public void isValidStatus() {
-        // blank email
-        assertFalse(Status.isValidStatus("")); // empty string
+        // invalid status
         assertFalse(Status.isValidStatus(" ")); // spaces only
 
-        // valid email
+        // valid status
         assertTrue(Status.isValidStatus("PeterJack_1190@WEB.Mail.com"));
         assertTrue(Status.isValidStatus("a@b"));  // minimal
         assertTrue(Status.isValidStatus("test@localhost"));   // alphabets only
