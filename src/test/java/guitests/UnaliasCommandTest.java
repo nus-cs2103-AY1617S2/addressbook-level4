@@ -2,14 +2,21 @@ package guitests;
 
 import static org.junit.Assert.assertFalse;
 
+import org.junit.Before;
 import org.junit.Test;
 
+import seedu.toluist.model.CommandAliasConfig;
 import seedu.toluist.model.Task;
 
 /**
  * Gui tests for unalias command
  */
 public class UnaliasCommandTest extends ToLuistGuiTest {
+    @Before
+    public void setUp() {
+        CommandAliasConfig.getInstance().clearAliases();
+    }
+
     @Test
     public void aliasAddCommandThenUnaliasIt() {
         String aliasCommand = "alias d add";

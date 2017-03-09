@@ -52,6 +52,13 @@ public class CommandAliasConfig {
     }
 
     /**
+     * Remove all aliases.
+     */
+    public void clearAliases() {
+        aliasMapping.clear();;
+    }
+
+    /**
      * Returns the matching command for an alias
      * Returns Option.empty if no such alias exists
      * @param alias
