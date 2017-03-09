@@ -5,7 +5,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Task;
-import seedu.address.model.person.UniquePersonList.DuplicatePersonException;
+import seedu.address.model.person.UniquePersonList.DuplicateTaskException;
 import seedu.address.model.tag.UniqueTagList;
 
 public class SampleDataUtil {
@@ -31,7 +31,7 @@ public class SampleDataUtil {
                 sampleAB.addPerson(samplePerson);
             }
             return sampleAB;
-        } catch (DuplicatePersonException e) {
+        } catch (DuplicateTaskException e) {
             throw new AssertionError("sample data cannot contain duplicate persons", e);
         }
     }
