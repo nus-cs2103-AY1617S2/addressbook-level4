@@ -51,7 +51,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 ### 1.3. Configuring Checkstyle
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
-3. Enter an arbitrary configuration name e.g. addressbook
+3. Enter an arbitrary configuration name e.g. TaskIt
 4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
 5. Click OK once, go to the `Main` tab, use the newly imported check configuration.
 6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
@@ -123,7 +123,7 @@ command `delete 1`.
 <img src="images\SDforDeleteTask.png" width="800"><br>
 _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 
->Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed,
+>Note how the `Model` simply raises a `TaskItChangedEvent` when the Address Book data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
@@ -212,7 +212,7 @@ The `Storage` component,
 
 ### 2.6. Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 ## 3. Implementation
 
@@ -381,27 +381,25 @@ Priority | As a ... | I want to ... | So that I can...
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TaskIt` and the **Actor** is the `user`, unless specified otherwise)
 
 #### Use case 1: Add a task
 
 **MSS**
 
 1. User requests to add a task
-2. TaskIt asks user to confirm
-3. User confirms
-4. TaskIt adds the task <br>
+2. TaskIt adds the task <br>
 Use case ends.
 
 **Extensions**
 
-2a. The given format is invalid
-> 2a1. TaskIt requests a valid command and suggests valid format to users
+1a. The given format is invalid
+> 1a1. TaskIt requests a valid command and suggests valid format to users
 > Use case resumes at step 1 <br>
 Use case ends.
 
-2b. The end time of an event is before the start time
-> 2b1. TaskIt notifies the user of this error
+1b. The end time of an event is before the start time
+> 1b1. TaskIt notifies the user of this error
 > Use case resumes at step 1 <br>
 Use case ends.
 
@@ -462,9 +460,7 @@ Use case ends.
 1. User searches a task
 2. TaskIt returns the requested list of tasks (UC2)
 3. User specifies the task to modify and the new task details (name, dates etc.)
-4. TaskIt asks for confirmation from user
-5. User confirms
-6. TaskIt changes the task specifications and notifies user <br>
+4. TaskIt changes the task specifications and notifies user <br>
 Use case ends.
 
 **Extensions**
@@ -556,7 +552,7 @@ Use case ends
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should come with automated unit tests and open source code.

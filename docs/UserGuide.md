@@ -51,7 +51,7 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Add a new task to TaskIt<br>
-Format: `add <title> [t/TAG]`
+Format: `add <title> [t/TAG|Deadline]`
 
 Examples:
 
@@ -97,7 +97,7 @@ Examples:
 Finds tasks which matched name/description/deadline/tag.<br>
 Format: ` search <name|description|deadline|tag>`
 
-> * The search is not case sensitive. e.g `do HW` will match `do hw`
+> * The search is case insensitive. e.g `do HW` will match `do hw`
 > * The order of the keywords does not matter. e.g. `HW do` will match `do HW`
 > * Substrings will be matched e.g. `HW` will match `HWs`
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).
@@ -132,7 +132,7 @@ Examples:
 Selects the task identified by the index number used in the last task listing.<br>
 Format: `select INDEX`
 
-> Selects the task and loads the Google search page the task at the specified `INDEX`.<br>
+> Selects the task at the specified `INDEX`.<br>
 > The index refers to the index number shown in the most recent listing.<br>
 > The index **must be a positive integer** 1, 2, 3, ...
 
