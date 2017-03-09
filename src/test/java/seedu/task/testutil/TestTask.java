@@ -10,27 +10,27 @@ import seedu.task.model.task.Remark;
 /**
  * A mutable person object. For testing only.
  */
-public class TestPerson implements ReadOnlyTask {
+public class TestTask implements ReadOnlyTask {
 
     private Name name;
-    private Location address;
-    private Remark email;
-    private Date phone;
+    private Location location;
+    private Remark remark;
+    private Date date;
     private UniqueTagList tags;
 
-    public TestPerson() {
+    public TestTask() {
         tags = new UniqueTagList();
     }
 
     /**
      * Creates a copy of {@code personToCopy}.
      */
-    public TestPerson(TestPerson personToCopy) {
-        this.name = personToCopy.getName();
-        this.phone = personToCopy.getDate();
-        this.email = personToCopy.getRemark();
-        this.address = personToCopy.getLocation();
-        this.tags = personToCopy.getTags();
+    public TestTask(TestTask taskToCopy) {
+        this.name = taskToCopy.getName();
+        this.date = taskToCopy.getDate();
+        this.remark = taskToCopy.getRemark();
+        this.location = taskToCopy.getLocation();
+        this.tags = taskToCopy.getTags();
     }
 
     public void setName(Name name) {
@@ -38,15 +38,15 @@ public class TestPerson implements ReadOnlyTask {
     }
 
     public void setAddress(Location address) {
-        this.address = address;
+        this.location = address;
     }
 
     public void setEmail(Remark email) {
-        this.email = email;
+        this.remark = email;
     }
 
     public void setPhone(Date phone) {
-        this.phone = phone;
+        this.date = phone;
     }
 
     public void setTags(UniqueTagList tags) {
@@ -60,17 +60,17 @@ public class TestPerson implements ReadOnlyTask {
 
     @Override
     public Date getDate() {
-        return phone;
+        return date;
     }
 
     @Override
     public Remark getRemark() {
-        return email;
+        return remark;
     }
 
     @Override
     public Location getLocation() {
-        return address;
+        return location;
     }
 
     @Override
