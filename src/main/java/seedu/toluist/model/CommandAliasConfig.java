@@ -59,22 +59,6 @@ public class CommandAliasConfig {
     }
 
     /**
-     * Returns the matching command for an alias
-     * Returns Option.empty if no such alias exists
-     * @param alias
-     * @return optional string
-     */
-    public Optional<String> getCommand(String alias) {
-        String command = aliasMapping.get(alias);
-
-        if (command == null) {
-            return Optional.empty();
-        } else {
-            return Optional.of(command);
-        }
-    }
-
-    /**
      * Set reserved keywords
      * @param reservedKeywords
      */
