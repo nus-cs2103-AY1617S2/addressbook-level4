@@ -4,12 +4,13 @@ import java.util.function.Supplier;
 
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import seedu.address.commons.core.Config;
-import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.UserPrefs;
-import seedu.address.storage.XmlSerializableAddressBook;
 import seedu.address.testutil.TestUtil;
+import seedu.taskmanager.MainApp;
+import seedu.taskmanager.commons.core.Config;
+import seedu.taskmanager.commons.core.GuiSettings;
+import seedu.taskmanager.model.ReadOnlyAddressBook;
+import seedu.taskmanager.model.UserPrefs;
+import seedu.taskmanager.storage.XmlSerializableAddressBook;
 
 /**
  * This class is meant to override some properties of MainApp so that it will be suited for

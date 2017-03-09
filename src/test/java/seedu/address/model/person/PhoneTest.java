@@ -5,6 +5,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import seedu.taskmanager.model.person.Phone;
+
 public class PhoneTest {
 
     @Test

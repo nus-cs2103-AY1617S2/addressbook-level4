@@ -11,7 +11,8 @@ import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
 import javafx.fxml.FXML;
-import seedu.address.MainApp;
+import seedu.taskmanager.MainApp;
+import seedu.taskmanager.ui.UiPart;
 
 public class UiPartTest {
 

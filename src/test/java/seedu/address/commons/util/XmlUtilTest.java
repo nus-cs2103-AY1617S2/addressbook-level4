@@ -11,10 +11,12 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.AddressBook;
-import seedu.address.storage.XmlSerializableAddressBook;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.TestUtil;
+import seedu.taskmanager.commons.util.FileUtil;
+import seedu.taskmanager.commons.util.XmlUtil;
+import seedu.taskmanager.model.AddressBook;
+import seedu.taskmanager.storage.XmlSerializableAddressBook;
 
 public class XmlUtilTest {
 

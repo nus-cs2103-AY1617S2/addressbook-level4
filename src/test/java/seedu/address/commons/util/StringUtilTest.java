@@ -11,6 +11,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.taskmanager.commons.util.StringUtil;
+
 public class StringUtilTest {
 
     @Rule
