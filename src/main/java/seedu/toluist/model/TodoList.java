@@ -54,6 +54,10 @@ public class TodoList {
     public void remove(Task task) {
         allTasks.remove(task);
     }
+    
+    public Task get(Task task) {
+        return allTasks.get(allTasks.indexOf(task));
+    }    
 
     public void update(int index, String description) {
         if (index >= 0 && index < allTasks.size()) {

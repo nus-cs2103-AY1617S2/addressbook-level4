@@ -44,8 +44,9 @@ public class TagController extends Controller {
         HashMap<String, String> tokens = tokenize(command);
         String[] keywordList = convertToArray(tokens.get(KEYWORDS_PARAMETER));
         int index = Integer.parseInt(tokens.get(INDEX_PARAMETER));
-        Task task = UiStore.getInstance().getTasks().get(index);
         TodoList todoList = TodoList.load();
+        Task task = UiStore.getInstance().getTasks().get(index);
+        task = todoList.get(task);
         ArrayList<String> successfulList = new ArrayList<String>();
         ArrayList<String> failedList = new ArrayList<String>();
 
