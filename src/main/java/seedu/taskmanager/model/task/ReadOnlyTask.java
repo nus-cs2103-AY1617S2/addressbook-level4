@@ -17,7 +17,7 @@ public interface ReadOnlyTask {
      * The returned CategoryList is a deep copy of the internal CategoryList,
      * changes on the returned list will not affect the task's internal categories.
      */
-//    UniqueCategoryList getCategories();
+    UniqueCategoryList getCategories();
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
@@ -42,9 +42,9 @@ public interface ReadOnlyTask {
                 .append(" Deadline: ")
                 .append(getDeadline())
                 .append(" Date: ")
-                .append(getDate());
- //               .append(" Categories: ");
- //       getCategories().forEach(builder::append);
+                .append(getDate())
+                .append(" Categories: ");
+        getCategories().forEach(builder::append);
         return builder.toString();
     }
 

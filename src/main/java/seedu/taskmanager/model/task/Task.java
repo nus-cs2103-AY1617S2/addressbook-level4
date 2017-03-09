@@ -17,7 +17,7 @@ public class Task implements ReadOnlyTask {
     private Date date;
 
 
-//    private UniqueCategoryList categories;
+    private UniqueCategoryList categories;
 
     /**
      * Every field must be present and not null.
@@ -28,7 +28,7 @@ public class Task implements ReadOnlyTask {
         this.deadline = deadline;
         this.endTime = endTime;
         this.date = date;
-//        this.categories = new UniqueCategoryList(categories); // protect internal tags from changes in the arg list
+        this.categories = new UniqueCategoryList(categories); // protect internal tags from changes in the arg list
     }
 
     /**
@@ -78,17 +78,17 @@ public class Task implements ReadOnlyTask {
         return date;
     }
 
-//    @Override
-//    public UniqueCategoryList getCategories() {
-//        return new UniqueCategoryList(categories);
-//    }
+    @Override
+    public UniqueCategoryList getCategories() {
+        return new UniqueCategoryList(categories);
+    }
 
     /**
      * Replaces this task's categories with the categories in the argument category list.
      */
-//    public void setCategories(UniqueCategoryList replacement) {
-//        tags.setCategories(replacement);
-//    }
+    public void setCategories(UniqueCategoryList replacement) {
+    	categories.setCategories(replacement);
+    }
 
     /**
      * Updates this person with the details of {@code replacement}.
@@ -100,7 +100,7 @@ public class Task implements ReadOnlyTask {
         this.setDeadline(replacement.getDeadline());
         this.setEndTime(replacement.getEndTime());
         this.setDate(replacement.getDate());
-//        this.setCategories(replacement.getCategories());
+        this.setCategories(replacement.getCategories());
     }
 
     @Override
@@ -113,7 +113,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(taskName, deadline, endTime, date/*, categories*/);
+        return Objects.hash(taskName, deadline, endTime, date, categories);
     }
 
     @Override

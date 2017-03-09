@@ -24,8 +24,8 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
 
     @XmlElement
     private List<XmlAdaptedTask> tasks;
-//    @XmlElement
-//    private List<XmlAdaptedTag> tags;
+    @XmlElement
+    private List<XmlAdaptedCategory> categories;
 
     /**
      * Creates an empty XmlSerializableTaskManager.
@@ -33,7 +33,7 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
      */
     public XmlSerializableTaskManager() {
         tasks = new ArrayList<>();
-//        tags = new ArrayList<>();
+        categories = new ArrayList<>();
     }
 
     /**
@@ -42,7 +42,7 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
     public XmlSerializableTaskManager(ReadOnlyTaskManager src) {
         this();
         tasks.addAll(src.getTaskList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
-//        tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
+        categories.addAll(src.getCategoryList().stream().map(XmlAdaptedCategory::new).collect(Collectors.toList()));
     }
 
     @Override
@@ -58,10 +58,10 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
         }).collect(Collectors.toCollection(FXCollections::observableArrayList));
         return new UnmodifiableObservableList<>(tasks);
     }
-/*
+
     @Override
-    public ObservableList<Tag> getTagList() {
-        final ObservableList<Tag> tags = this.tags.stream().map(t -> {
+    public ObservableList<Category> getCategoryList() {
+        final ObservableList<Category> categories = this.categories.stream().map(t -> {
             try {
                 return t.toModelType();
             } catch (IllegalValueException e) {
@@ -70,7 +70,7 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
                 return null;
             }
         }).collect(Collectors.toCollection(FXCollections::observableArrayList));
-        return new UnmodifiableObservableList<>(tags);
+        return new UnmodifiableObservableList<>(categories);
     }
-*/
+
 }
