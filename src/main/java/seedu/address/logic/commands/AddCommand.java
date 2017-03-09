@@ -33,12 +33,39 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, Set<String> tags)
+    public AddCommand(String name, String... inputs)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(new Tag(tagName));
+        String deadline;
+        int priority;
+        String notes;
+        boolean tagging = false;
+        boolean noting = false;
+        
+        for (String input : inputs) {
+            if(input.startsWith("d/")){
+                deadline = input.substring(2);
+            }else if(input.startsWith("p/")){
+                priority = Integer.parseInt(input.substring(2));
+            }else if(input.startsWith("t/")){
+                noting = false;
+                tagSet.add(new Tag(input.substring(2)));
+                tagging = true;
+            }else if(input.startsWith("n/")){
+                tagging = false;
+                notes.concat(input.substring(2) + " ");
+                noting = true;
+            }else{
+                if(tagging == true) {
+                    tagSet.add(input);
+                }else if(noting == true) {
+                    notes.concat(input + " ");
+                }
+            }
         }
+        
+        notes.trim();
+        
         this.toAdd = new Task(
                 new Name(name),
                 new UniqueTagList(tagSet)
