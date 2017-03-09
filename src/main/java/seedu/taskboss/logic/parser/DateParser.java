@@ -18,7 +18,7 @@ public class DateParser {
     private static final String END_DATE = "END DATE: ";
     private static final String ERROR_INVALID_DATE = "Failed to understand given date.";
     private static final String ERROR_MULTIPLE_DATES = "Please only enter a single date.";
-    
+
     private com.joestelmach.natty.Parser nattyParser;
 
     public DateParser() {

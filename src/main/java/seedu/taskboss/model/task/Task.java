@@ -63,7 +63,7 @@ public class Task implements ReadOnlyTask {
     public PriorityLevel getPriorityLevel() {
         return priorityLevel;
     }
-    
+
     public void setStartDateTime(DateTime startDateTime) {
         assert startDateTime != null;
         this.startDateTime = startDateTime;
@@ -73,7 +73,7 @@ public class Task implements ReadOnlyTask {
     public DateTime getStartDateTime() {
         return startDateTime;
     }
-    
+
     public void setEndDateTime(DateTime endDateTime) {
         assert endDateTime != null;
         this.endDateTime = endDateTime;

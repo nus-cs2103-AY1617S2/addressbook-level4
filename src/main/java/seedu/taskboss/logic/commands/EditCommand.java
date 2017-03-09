@@ -144,7 +144,7 @@ public class EditCommand extends Command {
         public Optional<PriorityLevel> getPriorityLevel() {
             return priorityLevel;
         }
-        
+
         public void setStartDateTime(Optional<DateTime> startDateTime) {
             assert startDateTime != null;
             this.startDateTime = startDateTime;
@@ -153,7 +153,7 @@ public class EditCommand extends Command {
         public Optional<DateTime> getStartDateTime() {
             return startDateTime;
         }
-        
+
         public void setEndDateTime(Optional<DateTime> endDateTime) {
             assert endDateTime != null;
             this.endDateTime = endDateTime;
