@@ -27,7 +27,7 @@ public class XmlTaskManagerStorageTest {
     @Rule
     public TemporaryFolder testFolder = new TemporaryFolder();
 
-    @Test(expected=AssertionError.class)
+    @Test(expected = AssertionError.class)
     public void readTaskManager_nullFilePath_assertionFailure() throws Exception {
         readTaskManager(null);
     }
@@ -85,7 +85,7 @@ public class XmlTaskManagerStorageTest {
 
     }
 
-    @Test(expected=AssertionError.class)
+    @Test(expected = AssertionError.class)
     public void saveTaskManager_nullTaskManager_assertionFailure() throws IOException {
         saveTaskManager(null, "SomeFile.xml");
     }
@@ -94,7 +94,7 @@ public class XmlTaskManagerStorageTest {
         new XmlAddressBookStorage(filePath).saveAddressBook(taskManager, addToTestDataPathIfNotNull(filePath));
     }
 
-    @Test(expected=AssertionError.class)
+    @Test(expected = AssertionError.class)
     public void saveTaskManager_nullFilePath_assertionFailure() throws IOException {
         saveTaskManager(new TaskManager(), null);
     }
