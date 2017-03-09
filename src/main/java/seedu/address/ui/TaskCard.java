@@ -26,7 +26,7 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         title.setText(task.getTitle().title);
         id.setText(displayedIndex + ". ");
-        deadline.setText(task.getDeadline().value);
+        deadline.setText(task.getDeadline().toString());
         initLabels(task);
     }
 

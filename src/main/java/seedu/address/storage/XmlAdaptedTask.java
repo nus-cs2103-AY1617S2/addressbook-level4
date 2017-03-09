@@ -40,7 +40,7 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         title = source.getTitle().title;
-        deadline = source.getDeadline().value.toString();
+        deadline = source.getDeadline().toString();
         labeled = new ArrayList<>();
         for (Label label : source.getLabels()) {
             labeled.add(new XmlAdaptedLabel(label));
