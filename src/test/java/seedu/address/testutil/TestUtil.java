@@ -29,7 +29,7 @@ import seedu.address.TestApp;
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.commons.util.FileUtil;
 import seedu.taskmanager.commons.util.XmlUtil;
-import seedu.taskmanager.model.AddressBook;
+import seedu.taskmanager.model.TaskManager;
 import seedu.taskmanager.model.tag.Tag;
 import seedu.taskmanager.model.tag.UniqueTagList;
 import seedu.taskmanager.model.task.Description;
@@ -145,7 +145,7 @@ public class TestUtil {
     }
 
     public static XmlSerializableTaskManager generateSampleStorageTaskManager() {
-        return new XmlSerializableTaskManager(new AddressBook());
+        return new XmlSerializableTaskManager(new TaskManager());
     }
 
     /**
