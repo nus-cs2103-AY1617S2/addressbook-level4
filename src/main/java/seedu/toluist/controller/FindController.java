@@ -16,8 +16,6 @@ import seedu.toluist.ui.Ui;
  * Searches the task list for matches in the parameters, and displays the results received
  */
 public class FindController extends Controller {
-    private static final String COMMAND_TEMPLATE = "^(?<command>(find|filter|list))"
-            + "(\\s+(?<keywords>.+))?\\s*";
     private static final String COMMAND_FIND_WORD = "find";
     private static final String COMMAND_FILTER_WORD = "filter";
     private static final String COMMAND_LIST_WORD = "list";
@@ -66,11 +64,12 @@ public class FindController extends Controller {
     }
 
     private String[] convertToArray(String keywords) {
-        if (keywords == null) {
+        if (keywords == null || keywords.trim().isEmpty()) {
             return new String[] { "" };
         }
 
-        String[] keywordList = keywords.split(" ");
+        String trimmedKeywords = keywords.trim();
+        String[] keywordList = trimmedKeywords.split(" ");
         ArrayList<String> replacementList = new ArrayList<>();
         for (String keyword : keywordList) {
             if (!keyword.equals("")) {
@@ -126,7 +125,9 @@ public class FindController extends Controller {
 
     @Override
     public boolean matchesCommand(String command) {
-        return command.matches(COMMAND_TEMPLATE);
+        return (command.startsWith(COMMAND_FILTER_WORD)
+                || command.startsWith(COMMAND_FIND_WORD)
+                || command.startsWith(COMMAND_LIST_WORD));
     }
 
     public static String[] getCommandWords() {

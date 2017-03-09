@@ -21,7 +21,11 @@ public abstract class Controller {
     /**
      * Persistent storage to interact with the models
      */
-    protected final Storage storage = JsonStorage.getInstance();
+    protected static Storage storage = JsonStorage.getInstance();
+
+    public static void setStorage(Storage storage) {
+        Controller.storage = storage;
+    }
 
     /**
      * UiStore to store data to be used by Ui

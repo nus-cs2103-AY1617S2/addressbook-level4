@@ -41,7 +41,7 @@ public class CommandDispatcher extends Dispatcher {
 
     public void dispatch(Ui renderer, String command) {
         String deAliasedCommand = aliasConfig.dealias(command);
-        logger.info("De-aliased command to be dispatched: " + deAliasedCommand);
+        logger.info("De-aliased command to be dispatched: " + deAliasedCommand + " original command " + command);
 
         Controller controller = getBestFitController(renderer, deAliasedCommand);
         CommandResult feedbackToUser = controller.execute(deAliasedCommand);

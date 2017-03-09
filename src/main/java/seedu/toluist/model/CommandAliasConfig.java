@@ -3,7 +3,6 @@ package seedu.toluist.model;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -52,19 +51,10 @@ public class CommandAliasConfig {
     }
 
     /**
-     * Returns the matching command for an alias
-     * Returns Option.empty if no such alias exists
-     * @param alias
-     * @return optional string
+     * Remove all aliases.
      */
-    public Optional<String> getCommand(String alias) {
-        String command = aliasMapping.get(alias);
-
-        if (command == null) {
-            return Optional.empty();
-        } else {
-            return Optional.of(command);
-        }
+    public void clearAliases() {
+        aliasMapping.clear();;
     }
 
     /**

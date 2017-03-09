@@ -2,7 +2,6 @@ package seedu.toluist.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -14,27 +13,37 @@ import seedu.toluist.storage.Storage;
  */
 public class TodoList {
 
-    protected static Storage storage = JsonStorage.getInstance();
+    private static Storage storage = JsonStorage.getInstance();
 
-    private static TodoList currentTodoList = new TodoList();
+    private static TodoList currentTodoList;
 
     private ArrayList<Task> allTasks = new ArrayList<>();
+
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof TodoList // instanceof handles nulls
+                && allTasks.equals(((TodoList) other).getTasks()));
+    }
 
     public ArrayList<Task> getTasks() {
         return allTasks;
     }
 
-    public static TodoList load() {
-        Optional<TodoList> todoListOptional = storage.load();
+    public static void setStorage(Storage storage) {
+        TodoList.storage = storage;
+    }
 
-        // Save data to file again if data is not found on disk
-        if (!todoListOptional.isPresent()) {
-            currentTodoList.save();
-        } else {
-            currentTodoList = todoListOptional.get();
+    public static Storage getStorage() {
+        return storage;
+    }
+
+    public static TodoList load() {
+        // Initialize currentTodoList if not done
+        if (currentTodoList == null) {
+            currentTodoList = storage.load().orElse(new TodoList());
         }
 
-        return storage.load().orElse(currentTodoList);
+        return currentTodoList;
     }
 
     public boolean save() {
@@ -53,12 +62,6 @@ public class TodoList {
 
     public void remove(Task task) {
         allTasks.remove(task);
-    }
-
-    public void update(int index, String description) {
-        if (index >= 0 && index < allTasks.size()) {
-            allTasks.get(index).description = description;
-        }
     }
 
     /**

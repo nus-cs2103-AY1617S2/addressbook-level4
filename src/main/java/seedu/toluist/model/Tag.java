@@ -3,7 +3,7 @@ package seedu.toluist.model;
 /**
  * Tag model
  */
-public class Tag {
+public class Tag implements Comparable<Tag> {
 
     public String tagName;
 
@@ -23,5 +23,15 @@ public class Tag {
         return other == this // short circuit if same object
                 || (other instanceof Tag // instanceof handles nulls
                 && this.tagName.equals(((Tag) other).tagName)); // state check
+    }
+
+    @Override
+    public int hashCode() {
+        return tagName.hashCode();
+    }
+
+    @Override
+    public int compareTo(Tag other) {
+        return tagName.compareTo(other.tagName);
     }
 }

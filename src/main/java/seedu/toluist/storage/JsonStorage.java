@@ -20,6 +20,12 @@ public class JsonStorage implements Storage {
     private ArrayDeque<String> historyStack = new ArrayDeque<>();
     private ArrayDeque<String> redoHistoryStack = new ArrayDeque<>();
 
+    public JsonStorage() {}
+
+    public JsonStorage(String storagePath) {
+        this.storagePath = storagePath;
+    }
+
     public static JsonStorage getInstance() {
         if (instance == null) {
             instance = new JsonStorage();
@@ -30,8 +36,7 @@ public class JsonStorage implements Storage {
     public Optional<TodoList> load() {
         try {
             String jsonString = getDataJson().get();
-            // addLast this to undo history if there's nothing here yet
-            // This will be the very initial state
+            // push todo list json string into historyStack if the stack is empty
             if (historyStack.isEmpty()) {
                 historyStack.addLast(jsonString);
             }
