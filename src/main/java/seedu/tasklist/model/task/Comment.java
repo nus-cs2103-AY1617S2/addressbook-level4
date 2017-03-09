@@ -4,13 +4,13 @@ package seedu.tasklist.model.task;
 import seedu.tasklist.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's comment in the task list.
+ * Represents a Task's comment in the task list.
  * Guarantees: immutable; is valid as declared in {@link #isValidComment(String)}
  */
 public class Comment {
 
     public static final String MESSAGE_COMMENT_CONSTRAINTS =
-            "Person commentes can take any values, and it should not be blank";
+            "Task commentes can take any values, and it should not be blank";
 
     /*
      * The first character of the comment must not be a whitespace,
@@ -34,7 +34,7 @@ public class Comment {
     }
 
     /**
-     * Returns true if a given string is a valid person email.
+     * Returns true if a given string is a valid Task email.
      */
     public static boolean isValidComment(String test) {
         return test.matches(COMMENT_VALIDATION_REGEX);
