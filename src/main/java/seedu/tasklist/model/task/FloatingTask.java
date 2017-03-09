@@ -30,7 +30,7 @@ public class FloatingTask extends Task implements ReadOnlyFloatingTask {
     }
 
     /**
-     * Creates a copy of the given ReadOnlyTask.
+     * Creates a copy of the given ReadOnlyFloatingTask.
      */
     public FloatingTask(ReadOnlyFloatingTask source) {
         this(source.getName(), source.getComment(), source.getPriority(), source.getStatus(), source.getTags());
