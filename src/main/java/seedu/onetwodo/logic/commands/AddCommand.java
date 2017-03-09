@@ -5,14 +5,14 @@ import java.util.Set;
 
 import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
-import seedu.onetwodo.model.person.Date;
-import seedu.onetwodo.model.person.Description;
-import seedu.onetwodo.model.person.Name;
-import seedu.onetwodo.model.person.Task;
-import seedu.onetwodo.model.person.Time;
-import seedu.onetwodo.model.person.UniqueTaskList;
 import seedu.onetwodo.model.tag.Tag;
 import seedu.onetwodo.model.tag.UniqueTagList;
+import seedu.onetwodo.model.task.Date;
+import seedu.onetwodo.model.task.Description;
+import seedu.onetwodo.model.task.Name;
+import seedu.onetwodo.model.task.Task;
+import seedu.onetwodo.model.task.Time;
+import seedu.onetwodo.model.task.UniqueTaskList;
 
 /**
  * Adds a person to the todo list.

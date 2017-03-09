@@ -1,7 +1,7 @@
 package seedu.onetwodo.commons.events.ui;
 
 import seedu.onetwodo.commons.events.BaseEvent;
-import seedu.onetwodo.model.person.ReadOnlyTask;
+import seedu.onetwodo.model.task.ReadOnlyTask;
 
 /**
  * Represents a selection change in the Person List Panel

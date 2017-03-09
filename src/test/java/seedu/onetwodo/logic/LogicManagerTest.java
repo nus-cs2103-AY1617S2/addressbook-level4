@@ -39,14 +39,14 @@ import seedu.onetwodo.model.Model;
 import seedu.onetwodo.model.ModelManager;
 import seedu.onetwodo.model.ReadOnlyToDoList;
 import seedu.onetwodo.model.ToDoList;
-import seedu.onetwodo.model.person.Date;
-import seedu.onetwodo.model.person.Description;
-import seedu.onetwodo.model.person.Name;
-import seedu.onetwodo.model.person.ReadOnlyTask;
-import seedu.onetwodo.model.person.Task;
-import seedu.onetwodo.model.person.Time;
 import seedu.onetwodo.model.tag.Tag;
 import seedu.onetwodo.model.tag.UniqueTagList;
+import seedu.onetwodo.model.task.Date;
+import seedu.onetwodo.model.task.Description;
+import seedu.onetwodo.model.task.Name;
+import seedu.onetwodo.model.task.ReadOnlyTask;
+import seedu.onetwodo.model.task.Task;
+import seedu.onetwodo.model.task.Time;
 import seedu.onetwodo.storage.StorageManager;
 
 
@@ -189,20 +189,20 @@ public class LogicManagerTest {
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         //assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid,address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 valid@email.butNoPrefix a/valid, address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
+        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix d/valid,address", expectedMessage);
+        assertCommandFailure("add Valid Name s/12345 valid@email.butNoPrefix d/valid, address", expectedMessage);
+        assertCommandFailure("add Valid Name s/12345 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidTaskData() {
-        assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
+        assertCommandFailure("add []\\[;] s/12345 e/valid@e.mail d/valid, address",
                 Name.MESSAGE_NAME_CONSTRAINTS);
-        //assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
+        //assertCommandFailure("add Valid Name s/not_numbers e/valid@e.mail d/valid, address",
                 //Time.MESSAGE_TIME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
+        assertCommandFailure("add Valid Name s/12345 e/notAnEmail d/valid, address",
                 Date.MESSAGE_DATE_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
+        assertCommandFailure("add Valid Name s/12345 e/valid@e.mail d/valid, address t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
@@ -450,8 +450,8 @@ public class LogicManagerTest {
 
             cmd.append(p.getName().toString());
             cmd.append(" e/").append(p.getDate());
-            cmd.append(" p/").append(p.getTime());
-            cmd.append(" a/").append(p.getDescription());
+            cmd.append(" s/").append(p.getTime());
+            cmd.append(" d/").append(p.getDescription());
 
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {

@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.onetwodo.model.ToDoList;
-import seedu.onetwodo.model.person.Task;
+import seedu.onetwodo.model.task.Task;
 import seedu.onetwodo.model.util.SampleDataUtil;
 import seedu.onetwodo.testutil.TestUtil;
 

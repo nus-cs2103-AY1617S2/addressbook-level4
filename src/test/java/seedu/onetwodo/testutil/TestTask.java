@@ -1,11 +1,11 @@
 package seedu.onetwodo.testutil;
 
-import seedu.onetwodo.model.person.Date;
-import seedu.onetwodo.model.person.Description;
-import seedu.onetwodo.model.person.Name;
-import seedu.onetwodo.model.person.ReadOnlyTask;
-import seedu.onetwodo.model.person.Time;
 import seedu.onetwodo.model.tag.UniqueTagList;
+import seedu.onetwodo.model.task.Date;
+import seedu.onetwodo.model.task.Description;
+import seedu.onetwodo.model.task.Name;
+import seedu.onetwodo.model.task.ReadOnlyTask;
+import seedu.onetwodo.model.task.Time;
 
 /**
  * A mutable task object. For testing only.
@@ -86,8 +86,8 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
-        sb.append("a/" + this.getDescription().value + " ");
-        sb.append("p/" + this.getTime().value + " ");
+        sb.append("d/" + this.getDescription().value + " ");
+        sb.append("s/" + this.getTime().value + " ");
         sb.append("e/" + this.getDate().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();

@@ -2,8 +2,8 @@ package seedu.onetwodo.testutil;
 
 import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.model.ToDoList;
-import seedu.onetwodo.model.person.Task;
-import seedu.onetwodo.model.person.UniqueTaskList;
+import seedu.onetwodo.model.task.Task;
+import seedu.onetwodo.model.task.UniqueTaskList;
 
 /**
  *

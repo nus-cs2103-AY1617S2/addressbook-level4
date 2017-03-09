@@ -13,12 +13,12 @@ import java.util.stream.Collectors;
 
 import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.commons.util.StringUtil;
-import seedu.onetwodo.model.person.Date;
-import seedu.onetwodo.model.person.Description;
-import seedu.onetwodo.model.person.Name;
-import seedu.onetwodo.model.person.Time;
 import seedu.onetwodo.model.tag.Tag;
 import seedu.onetwodo.model.tag.UniqueTagList;
+import seedu.onetwodo.model.task.Date;
+import seedu.onetwodo.model.task.Description;
+import seedu.onetwodo.model.task.Name;
+import seedu.onetwodo.model.task.Time;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes

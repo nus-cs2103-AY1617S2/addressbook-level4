@@ -1,10 +1,10 @@
 package seedu.onetwodo.logic.parser;
 
 import static seedu.onetwodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.onetwodo.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.onetwodo.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.onetwodo.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.onetwodo.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.onetwodo.logic.parser.CliSyntax.PREFIX_TIME;
+import static seedu.onetwodo.logic.parser.CliSyntax.PREFIX_START_DATE;
 
 import java.util.NoSuchElementException;
 
@@ -24,13 +24,13 @@ public class AddCommandParser {
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_TIME, PREFIX_DATE, PREFIX_DESCRIPTION, PREFIX_TAG);
+                new ArgumentTokenizer(PREFIX_START_DATE, PREFIX_END_DATE, PREFIX_DESCRIPTION, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         try {
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
-                    argsTokenizer.getValue(PREFIX_TIME).orElse(""),
-                    argsTokenizer.getValue(PREFIX_DATE).orElse(""),
+                    argsTokenizer.getValue(PREFIX_START_DATE).orElse(""),
+                    argsTokenizer.getValue(PREFIX_END_DATE).orElse(""),
                     argsTokenizer.getValue(PREFIX_DESCRIPTION).orElse(""),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
             );

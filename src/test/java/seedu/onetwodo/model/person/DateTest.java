@@ -5,6 +5,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import seedu.onetwodo.model.task.Date;
+
 public class DateTest {
 
     @Test

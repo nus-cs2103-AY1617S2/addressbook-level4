@@ -5,7 +5,7 @@ import seedu.onetwodo.commons.core.Messages;
 import seedu.onetwodo.commons.core.UnmodifiableObservableList;
 import seedu.onetwodo.commons.events.ui.JumpToListRequestEvent;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
-import seedu.onetwodo.model.person.ReadOnlyTask;
+import seedu.onetwodo.model.task.ReadOnlyTask;
 
 /**
  * Selects a task identified using it's last displayed index from the todo list.

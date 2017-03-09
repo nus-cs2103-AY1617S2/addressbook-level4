@@ -3,13 +3,13 @@ package seedu.onetwodo.model.util;
 import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.model.ReadOnlyToDoList;
 import seedu.onetwodo.model.ToDoList;
-import seedu.onetwodo.model.person.Date;
-import seedu.onetwodo.model.person.Description;
-import seedu.onetwodo.model.person.Name;
-import seedu.onetwodo.model.person.Task;
-import seedu.onetwodo.model.person.Time;
-import seedu.onetwodo.model.person.UniqueTaskList.DuplicateTaskException;
 import seedu.onetwodo.model.tag.UniqueTagList;
+import seedu.onetwodo.model.task.Date;
+import seedu.onetwodo.model.task.Description;
+import seedu.onetwodo.model.task.Name;
+import seedu.onetwodo.model.task.Task;
+import seedu.onetwodo.model.task.Time;
+import seedu.onetwodo.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
     public static Task[] getSampleTasks() {

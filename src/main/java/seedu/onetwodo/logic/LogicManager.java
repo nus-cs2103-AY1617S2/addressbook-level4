@@ -10,7 +10,7 @@ import seedu.onetwodo.logic.commands.CommandResult;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
 import seedu.onetwodo.logic.parser.Parser;
 import seedu.onetwodo.model.Model;
-import seedu.onetwodo.model.person.ReadOnlyTask;
+import seedu.onetwodo.model.task.ReadOnlyTask;
 import seedu.onetwodo.storage.Storage;
 
 /**

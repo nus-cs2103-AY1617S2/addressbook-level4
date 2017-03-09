@@ -6,14 +6,14 @@ import java.util.Optional;
 import seedu.onetwodo.commons.core.Messages;
 import seedu.onetwodo.commons.util.CollectionUtil;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
-import seedu.onetwodo.model.person.Date;
-import seedu.onetwodo.model.person.Description;
-import seedu.onetwodo.model.person.Name;
-import seedu.onetwodo.model.person.ReadOnlyTask;
-import seedu.onetwodo.model.person.Task;
-import seedu.onetwodo.model.person.Time;
-import seedu.onetwodo.model.person.UniqueTaskList;
 import seedu.onetwodo.model.tag.UniqueTagList;
+import seedu.onetwodo.model.task.Date;
+import seedu.onetwodo.model.task.Description;
+import seedu.onetwodo.model.task.Name;
+import seedu.onetwodo.model.task.ReadOnlyTask;
+import seedu.onetwodo.model.task.Task;
+import seedu.onetwodo.model.task.Time;
+import seedu.onetwodo.model.task.UniqueTaskList;
 
 /**
  * Edits the details of an existing task in the todo task.

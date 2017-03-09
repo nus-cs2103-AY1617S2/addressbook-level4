@@ -10,12 +10,12 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.onetwodo.commons.core.UnmodifiableObservableList;
-import seedu.onetwodo.model.person.ReadOnlyTask;
-import seedu.onetwodo.model.person.Task;
-import seedu.onetwodo.model.person.UniqueTaskList;
-import seedu.onetwodo.model.person.UniqueTaskList.DuplicateTaskException;
 import seedu.onetwodo.model.tag.Tag;
 import seedu.onetwodo.model.tag.UniqueTagList;
+import seedu.onetwodo.model.task.ReadOnlyTask;
+import seedu.onetwodo.model.task.Task;
+import seedu.onetwodo.model.task.UniqueTaskList;
+import seedu.onetwodo.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
  * Wraps all data at the address-book level

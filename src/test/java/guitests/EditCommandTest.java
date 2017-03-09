@@ -8,11 +8,11 @@ import org.junit.Test;
 import guitests.guihandles.TaskCardHandle;
 import seedu.onetwodo.commons.core.Messages;
 import seedu.onetwodo.logic.commands.EditCommand;
-import seedu.onetwodo.model.person.Date;
-import seedu.onetwodo.model.person.Description;
-import seedu.onetwodo.model.person.Name;
-import seedu.onetwodo.model.person.Time;
 import seedu.onetwodo.model.tag.Tag;
+import seedu.onetwodo.model.task.Date;
+import seedu.onetwodo.model.task.Description;
+import seedu.onetwodo.model.task.Name;
+import seedu.onetwodo.model.task.Time;
 import seedu.onetwodo.testutil.TaskBuilder;
 import seedu.onetwodo.testutil.TestTask;
 
@@ -25,7 +25,7 @@ public class EditCommandTest extends ToDoListGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby p/91234567 e/bobby@gmail.com a/Block 123, Bobby Street 3 t/husband";
+        String detailsToEdit = "Bobby s/91234567 e/bobby@gmail.com d/Block 123, Bobby Street 3 t/husband";
         int toDoListIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Bobby").withTime("91234567")
@@ -93,13 +93,13 @@ public class EditCommandTest extends ToDoListGuiTest {
         commandBox.runCommand("edit 1 *&");
         assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 p/abcd");
+        commandBox.runCommand("edit 1 s/abcd");
         assertResultMessage(Time.MESSAGE_TIME_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 e/yahoo!!!");
         assertResultMessage(Date.MESSAGE_DATE_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 a/");
+        commandBox.runCommand("edit 1 d/");
         assertResultMessage(Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 t/*&");
@@ -108,8 +108,8 @@ public class EditCommandTest extends ToDoListGuiTest {
 
     @Test
     public void edit_duplicateTask_failure() {
-        commandBox.runCommand("edit 3 Alice Pauline p/85355255 e/alice@gmail.com "
-                                + "a/123, Jurong West Ave 6, #08-111 t/friends");
+        commandBox.runCommand("edit 3 Alice Pauline s/85355255 e/alice@gmail.com "
+                                + "d/123, Jurong West Ave 6, #08-111 t/friends");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 

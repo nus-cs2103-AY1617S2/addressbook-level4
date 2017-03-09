@@ -5,7 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.onetwodo.model.person.ReadOnlyTask;
+import seedu.onetwodo.model.task.ReadOnlyTask;
 
 public class TaskCard extends UiPart<Region> {
 
