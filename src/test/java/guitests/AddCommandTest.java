@@ -5,10 +5,10 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
-import seedu.address.commons.core.Messages;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.testutil.TestTask;
-import seedu.address.testutil.TestUtil;
+import seedu.watodo.commons.core.Messages;
+import seedu.watodo.logic.commands.AddCommand;
+import seedu.watodo.testutil.TestTask;
+import seedu.watodo.testutil.TestUtil;
 
 public class AddCommandTest extends AddressBookGuiTest {
 

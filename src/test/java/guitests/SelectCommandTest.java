@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import seedu.address.model.task.ReadOnlyFloatingTask;
+import seedu.watodo.model.task.ReadOnlyFloatingTask;
 
 public class SelectCommandTest extends AddressBookGuiTest {
 
