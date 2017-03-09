@@ -3,7 +3,9 @@ package seedu.tasklist.testutil;
 import seedu.tasklist.model.tag.UniqueTagList;
 import seedu.tasklist.model.task.Comment;
 import seedu.tasklist.model.task.Name;
+import seedu.tasklist.model.task.Priority;
 import seedu.tasklist.model.task.ReadOnlyTask;
+import seedu.tasklist.model.task.Status;
 
 /**
  * A mutable task object. For testing only.
@@ -12,6 +14,8 @@ public class TestTask implements ReadOnlyTask {
 
     private Name name;
     private Comment comment;
+    private Priority priority;
+    private Status status;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -24,6 +28,8 @@ public class TestTask implements ReadOnlyTask {
     public TestTask(TestTask taskToCopy) {
         this.name = taskToCopy.getName();
         this.comment = taskToCopy.getComment();
+        this.priority = taskToCopy.getPriority();
+        this.status = taskToCopy.getStatus();
         this.tags = taskToCopy.getTags();
     }
 
@@ -67,5 +73,15 @@ public class TestTask implements ReadOnlyTask {
         sb.append("c/" + this.getComment().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
+    }
+
+    @Override
+    public Priority getPriority() {
+        return priority;
+    }
+
+    @Override
+    public Status getStatus() {
+        return status;
     }
 }
