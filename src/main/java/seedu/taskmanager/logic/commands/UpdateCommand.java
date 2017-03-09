@@ -79,8 +79,8 @@ public class UpdateCommand extends Command {
 
         TaskName updatedTaskName = updateTaskDescriptor.getTaskName().orElseGet(taskToUpdate::getTaskName);
         Date updatedDate = updateTaskDescriptor.getDate().orElseGet(taskToUpdate::getDate);
-        EndTime updatedEndTime = updateTaskDescriptor.getEndTime().orElseGet(taskToUpdate::getEndTime);
-        Deadline updatedDeadline = updateTaskDescriptor.getDeadline().orElseGet(taskToUpdate::getDeadline);
+//        EndTime updatedEndTime = updateTaskDescriptor.getEndTime().orElseGet(taskToUpdate::getEndTime);
+//        Deadline updatedDeadline = updateTaskDescriptor.getDeadline().orElseGet(taskToUpdate::getDeadline);
         UniqueCategoryList updatedCategories = updateTaskDescriptor.getCategories().orElseGet(taskToUpdate::getCategories);
 
         return new Task(updatedTaskName, updatedDate /*, updatedEndTime, updatedDeadline, updatedCategories*/);

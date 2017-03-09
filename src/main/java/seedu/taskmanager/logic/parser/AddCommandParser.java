@@ -25,15 +25,15 @@ public class AddCommandParser {
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(/*PREFIX_TIME, PREFIX_DATE, */PREFIX_ENDTIME/*, PREFIX_DEADLINE , PREFIX_CATEGORY*/);
+                new ArgumentTokenizer(/*PREFIX_TIME,*/ PREFIX_DATE/*, PREFIX_ENDTIME, PREFIX_DEADLINE , PREFIX_CATEGORY*/);
         argsTokenizer.tokenize(args);
         try {
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
-/*                    argsTokenizer.getValue(PREFIX_DATE).get(),
-                    argsTokenizer.getValue(PREFIX_ENDTIME).get(), */
-                    argsTokenizer.getValue(PREFIX_DEADLINE).get()
-/*                    ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_CATEGORY)*/
+                    argsTokenizer.getValue(PREFIX_DATE).get()
+//                    argsTokenizer.getValue(PREFIX_ENDTIME).get()
+//                    argsTokenizer.getValue(PREFIX_DEADLINE).get()
+//                    ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_CATEGORY)
             );
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));

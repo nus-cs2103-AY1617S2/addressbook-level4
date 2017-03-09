@@ -30,14 +30,14 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         taskname.setText(task.getTaskName().fullTaskName);
         id.setText(displayedIndex + ". ");
-        time.setText(task.getEndTime().value);
+//        time.setText(task.getEndTime().value);
 //        address.setText(person.getAddress().value);
         date.setText(task.getDate().value);
-        initCategory(task);
+//        initCategory(task);
     }
-
+/*
     private void initCategory(ReadOnlyTask task) {
         task.getCategories().forEach(category -> categories.getChildren().add(new Label(category.categoryName)));
     }
-
+*/
 }
