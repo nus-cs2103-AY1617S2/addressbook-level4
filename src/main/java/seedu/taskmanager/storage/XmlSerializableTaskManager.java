@@ -24,8 +24,8 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
 
     @XmlElement
     private List<XmlAdaptedTask> tasks;
-    @XmlElement
-    private List<XmlAdaptedCategory> categories;
+//    @XmlElement
+//    private List<XmlAdaptedCategory> categories;
 
     /**
      * Creates an empty XmlSerializableTaskManager.
@@ -33,7 +33,7 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
      */
     public XmlSerializableTaskManager() {
         tasks = new ArrayList<>();
-        categories = new ArrayList<>();
+//        categories = new ArrayList<>();
     }
 
     /**
@@ -42,7 +42,7 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
     public XmlSerializableTaskManager(ReadOnlyTaskManager src) {
         this();
         tasks.addAll(src.getTaskList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
-        categories.addAll(src.getCategoryList().stream().map(XmlAdaptedCategory::new).collect(Collectors.toList()));
+//        categories.addAll(src.getCategoryList().stream().map(XmlAdaptedCategory::new).collect(Collectors.toList()));
     }
 
     @Override
@@ -58,7 +58,7 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
         }).collect(Collectors.toCollection(FXCollections::observableArrayList));
         return new UnmodifiableObservableList<>(tasks);
     }
-
+/*
     @Override
     public ObservableList<Category> getCategoryList() {
         final ObservableList<Category> categories = this.categories.stream().map(t -> {
@@ -72,5 +72,5 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
         }).collect(Collectors.toCollection(FXCollections::observableArrayList));
         return new UnmodifiableObservableList<>(categories);
     }
-
+*/
 }

@@ -44,9 +44,9 @@ public class UpdateCommandParser {
         try {
             updateTaskDescriptor.setTaskName(ParserUtil.parseTaskName(preambleFields.get(1)));
             updateTaskDescriptor.setDate(ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_DATE)));
-            updateTaskDescriptor.setEndTime(ParserUtil.parseEndTime(argsTokenizer.getValue(PREFIX_ENDTIME)));
-            updateTaskDescriptor.setDeadline(ParserUtil.parseDeadline(argsTokenizer.getValue(PREFIX_DEADLINE)));
-            updateTaskDescriptor.setCategories(parseCategoriesForUpdate(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_CATEGORY))));
+//            updateTaskDescriptor.setEndTime(ParserUtil.parseEndTime(argsTokenizer.getValue(PREFIX_ENDTIME)));
+//            updateTaskDescriptor.setDeadline(ParserUtil.parseDeadline(argsTokenizer.getValue(PREFIX_DEADLINE)));
+//            updateTaskDescriptor.setCategories(parseCategoriesForUpdate(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_CATEGORY))));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
@@ -63,7 +63,7 @@ public class UpdateCommandParser {
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a
      * {@code Optional<UniqueTagList>} containing zero tags.
      */
-    private Optional<UniqueCategoryList> parseCategoriesForUpdate(Collection<String> categories) throws IllegalValueException {
+/*    private Optional<UniqueCategoryList> parseCategoriesForUpdate(Collection<String> categories) throws IllegalValueException {
         assert categories != null;
 
         if (categories.isEmpty()) {
@@ -72,5 +72,5 @@ public class UpdateCommandParser {
         Collection<String> categorySet = categories.size() == 1 && categories.contains("") ? Collections.emptySet() : categories;
         return Optional.of(ParserUtil.parseCategories(categorySet));
     } 
-
+*/
 }

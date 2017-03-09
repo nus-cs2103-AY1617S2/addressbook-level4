@@ -81,7 +81,7 @@ public class UpdateCommand extends Command {
         Date updatedDate = updateTaskDescriptor.getDate().orElseGet(taskToUpdate::getDate);
 //        EndTime updatedEndTime = updateTaskDescriptor.getEndTime().orElseGet(taskToUpdate::getEndTime);
 //        Deadline updatedDeadline = updateTaskDescriptor.getDeadline().orElseGet(taskToUpdate::getDeadline);
-        UniqueCategoryList updatedCategories = updateTaskDescriptor.getCategories().orElseGet(taskToUpdate::getCategories);
+//        UniqueCategoryList updatedCategories = updateTaskDescriptor.getCategories().orElseGet(taskToUpdate::getCategories);
 
         return new Task(updatedTaskName, updatedDate /*, updatedEndTime, updatedDeadline, updatedCategories*/);
     }
@@ -93,26 +93,26 @@ public class UpdateCommand extends Command {
     public static class UpdateTaskDescriptor {
         private Optional<TaskName> taskname = Optional.empty();
         private Optional<Date> date = Optional.empty();
-        private Optional<EndTime> endtime = Optional.empty();
-        private Optional<Deadline> deadline = Optional.empty();
-        private Optional<UniqueCategoryList> categories = Optional.empty();
+//        private Optional<EndTime> endtime = Optional.empty();
+//       private Optional<Deadline> deadline = Optional.empty();
+//        private Optional<UniqueCategoryList> categories = Optional.empty();
 
         public UpdateTaskDescriptor() {}
 
         public UpdateTaskDescriptor(UpdateTaskDescriptor toCopy) {
             this.taskname = toCopy.getTaskName();
             this.date = toCopy.getDate();
-            this.endtime = toCopy.getEndTime();
-            this.deadline = toCopy.getDeadline();
-            this.categories = toCopy.getCategories();
+//            this.endtime = toCopy.getEndTime();
+//            this.deadline = toCopy.getDeadline();
+//            this.categories = toCopy.getCategories();
         }
 
         /**
          * Returns true if at least one field is updated.
          */
         public boolean isAnyFieldUpdated() {
-            return CollectionUtil.isAnyPresent(this.taskname, this.deadline, this.date,
-            		                           this.endtime, this.categories);
+            return CollectionUtil.isAnyPresent(this.taskname/*, this.deadline*/, this.date/*,
+            		                           this.endtime, this.categories*/);
         }
 
         public void setTaskName(Optional<TaskName> taskname) {
@@ -132,7 +132,7 @@ public class UpdateCommand extends Command {
         public Optional<Date> getDate() {
             return date;
         }
-
+/*
         public void setEndTime(Optional<EndTime> endtime) {
         	assert endtime != null;
         	this.endtime = endtime;
@@ -158,6 +158,7 @@ public class UpdateCommand extends Command {
 
         public Optional<UniqueCategoryList> getCategories() {
             return categories;
-        } 
+        }
+*/ 
     }
 }
