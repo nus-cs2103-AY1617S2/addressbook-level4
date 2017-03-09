@@ -3,6 +3,9 @@ package seedu.address.model;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import me.xdrop.fuzzywuzzy.FuzzySearch;
+import me.xdrop.fuzzywuzzy.ratios.SimpleRatio;
+
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
@@ -24,7 +27,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final AddressBook addressBook;
     private final FilteredList<ReadOnlyTask> filteredTasks;
-
+    private static final int MATCHING_INDEX = 35;
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -143,9 +146,13 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getTitle().title, keyword))
+                    .filter(keyword -> fuzzyFind(task.getTitle().title.toLowerCase(), keyword))
                     .findAny()
                     .isPresent();
+        }
+        
+        public boolean fuzzyFind(String title, String keyword) {
+            return FuzzySearch.ratio(title, keyword) > MATCHING_INDEX;
         }
 
         @Override

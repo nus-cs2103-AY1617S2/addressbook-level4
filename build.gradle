@@ -63,7 +63,8 @@ allprojects {
         compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
         compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonDataTypeVersion"
         compile "com.google.guava:guava:$guavaVersion"
-
+		compile 'me.xdrop:fuzzywuzzy:1.1.6'
+		
         testCompile "junit:junit:$junitVersion"
         testCompile "org.testfx:testfx-core:$testFxVersion"
         testCompile "org.testfx:testfx-junit:$testFxVersion"
