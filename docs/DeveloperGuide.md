@@ -4,7 +4,7 @@ By : `Team myPotato`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&n
 
 ---
 
-1. [Setting Up](#1--setting-up)
+1. [Setting Up](#setting-up)
 2. [Design](#design)
 3. [Implementation](#implementation)
 4. [Testing](#testing)
