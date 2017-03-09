@@ -1,5 +1,7 @@
 package seedu.address.model.task;
 
+import java.util.HashMap;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
@@ -13,8 +15,22 @@ public class Priority {
     public static final String MESSAGE_PRIORITY_CONSTRAINTS =
             "Task priority should be 1 alphanumeric string";
     public static final String PRIORITY_VALIDATION_REGEX = "[\\w\\.]+";
+    
+    public static final String PRIORITY_LEVEL_ONE = "lame";
+    public static final String PRIORITY_LEVEL_TWO = "decent";
+    public static final String PRIORITY_LEVEL_THREE = "moderate";
+    public static final String PRIORITY_LEVEL_FOUR = "forreal";
+    public static final String PRIORITY_LEVEL_FIVE = "urgent";
+    public static final String PRIORITY_LEVEL_DONE = "completed";
+    
+    public static final String PRIORITY_LEVEL_1 = "1";
+    public static final String PRIORITY_LEVEL_2 = "2";
+    public static final String PRIORITY_LEVEL_3 = "3";
+    public static final String PRIORITY_LEVEL_4 = "4";
+    public static final String PRIORITY_LEVEL_5 = "5";
 
-    public final String value;
+    public String value;
+    
 
     /**
      * Validates given email.
@@ -22,12 +38,31 @@ public class Priority {
      * @throws IllegalValueException if given email address string is invalid.
      */
     public Priority(String priority) throws IllegalValueException {
-        assert priority != null;
+    	HashMap<String, String> priorityMap = new HashMap<String, String>();
+        priorityMap.put(PRIORITY_LEVEL_1, PRIORITY_LEVEL_ONE);
+        priorityMap.put(PRIORITY_LEVEL_2, PRIORITY_LEVEL_TWO);
+        priorityMap.put(PRIORITY_LEVEL_3, PRIORITY_LEVEL_THREE);
+        priorityMap.put(PRIORITY_LEVEL_4, PRIORITY_LEVEL_FOUR);
+        priorityMap.put(PRIORITY_LEVEL_5, PRIORITY_LEVEL_FIVE);
+    	
+    	
+    	assert priority != null;
         String trimmedPriority = priority.trim();
         if (!isValidPriority(trimmedPriority)) {
             throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
         }
-        this.value = trimmedPriority;
+  
+        try {
+        	int tempInt = -1;
+        	tempInt = Integer.parseInt(trimmedPriority);
+        	this.value = priorityMap.get(trimmedPriority);
+        	
+        } catch (NumberFormatException nfe) {
+        	this.value = trimmedPriority;
+        }
+
+        
+        
     }
 
     /**
