@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>DoOrDie Task Manager</name>
+	<name>main</name>
 	<comment>Project DoOrDie Task Manager created by CS2103JAN2017-T16-B2</comment>
 	<projects>
 	</projects>
 	<buildSpec>
 		<buildCommand>
 			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.buildship.core.gradleprojectbuilder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
@@ -23,7 +28,7 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1476898072165</id>
+			<id>0</id>
 			<name></name>
 			<type>26</type>
 			<matcher>
@@ -32,7 +37,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1476898072188</id>
+			<id>0</id>
 			<name></name>
 			<type>26</type>
 			<matcher>

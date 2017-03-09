@@ -21,10 +21,10 @@ public class DeadlineTest {
         new Deadline(null);
 
         // test equals
-        Deadline deadline1 = new Deadline("Tomorrow");
-        Deadline deadline2 = new Deadline("Tomorrow");
+        Deadline deadline1 = new Deadline("Tomorrow 1000");
+        Deadline deadline2 = new Deadline("Tomorrow 1000");
         Deadline deadline3 = new Deadline("Today"); // a different deadline
-        assertTrue("Tomorrow".equals(deadline1.toString()));
+
         assertTrue(deadline1.equals(deadline2));
         assertTrue(deadline1.equals(deadline1));
         assertFalse(deadline1.equals(null));
@@ -34,10 +34,33 @@ public class DeadlineTest {
         assertTrue(deadline1.hashCode() == deadline2.hashCode());
 
         // valid deadlines
+        assertTrue(Deadline.isValidDeadline("christmas"));
+        assertTrue(Deadline.isValidDeadline("next wed"));
         assertTrue(Deadline.isValidDeadline("11-12-2106")); // date
         assertTrue(Deadline.isValidDeadline("Tomorrow"));
         assertTrue(Deadline.isValidDeadline("9pm")); // two characters only
         assertTrue(Deadline.isValidDeadline("")); // empty string
         assertTrue(Deadline.isValidDeadline(" ")); // spaces only
+    }
+
+    @Test
+    public void deadline_Parse_Date() throws IllegalValueException {
+        // invalid deadlines
+        exception.expect(AssertionError.class);
+        new Deadline(null);
+
+        // test parse correctly equals
+        Deadline deadline = new Deadline("01-01-2017 2359");
+        Deadline deadline1 = new Deadline("2359 01-01-2017");
+        Deadline deadline2 = new Deadline("2359 tmr");
+        Deadline deadline3 = new Deadline("tmr 2359");
+        Deadline deadline4 = new Deadline("new year");
+        Deadline deadline5 = new Deadline("christmas");
+        Deadline deadline6 = new Deadline("now");
+        Deadline deadline7 = new Deadline("tmr");
+        assertTrue(deadline.equals(deadline1));
+        assertTrue(deadline2.equals(deadline3));
+        assertFalse(deadline4.equals(deadline5));
+        assertFalse(deadline6.equals(deadline7));
     }
 }

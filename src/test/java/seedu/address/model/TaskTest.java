@@ -18,12 +18,12 @@ public class TaskTest {
         TestTask pb;
         try {
             pb = (new TaskBuilder())
-                    .withDeadline("07-03-2017")
+                    .withDeadline("07-03-2017 2300")
                     .withLabels("testLabel")
                     .withTitle("Do something")
                     .build();
             Task p = new Task(pb);
-            int hashcode = 2118053981;
+            int hashcode = -909892920;
             assert(p.hashCode() == hashcode);
         } catch (IllegalValueException e) {
             e.printStackTrace();

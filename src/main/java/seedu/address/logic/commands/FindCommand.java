@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -16,14 +17,28 @@ public class FindCommand extends Command {
             + "Example: " + COMMAND_WORD + " meet alice";
 
     private final Set<String> keywords;
+    private final Date startDate;
+    private final Date endDate;
 
     public FindCommand(Set<String> keywords) {
         this.keywords = keywords;
+        this.startDate = null;
+        this.endDate = null;
+    }
+
+    public FindCommand(Date startDate, Date endDate) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.keywords = null;
     }
 
     @Override
     public CommandResult execute() {
-        model.updateFilteredTaskList(keywords);
+        if (keywords == null) {
+            model.updateFilteredTaskList(startDate, endDate);
+        } else {
+            model.updateFilteredTaskList(keywords);
+        }
         return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
     }
 

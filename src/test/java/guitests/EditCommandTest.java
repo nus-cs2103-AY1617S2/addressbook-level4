@@ -22,11 +22,11 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Meet Bob by Sunday t/husband";
+        String detailsToEdit = "Meet Bob by Sunday 2359 t/husband";
         int addressBookIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withTitle("Meet Bob")
-                .withDeadline("Sunday").withLabels("husband").build();
+                .withDeadline("Sunday 2359").withLabels("husband").build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
     }
@@ -97,7 +97,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
     @Test
     public void edit_duplicateTask_failure() {
         commandBox.runCommand("edit 3 Complete task 4"
-                                + " by 11-11-2017 t/friends");
+                                + " by 11-11-2017 2300 t/friends");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 

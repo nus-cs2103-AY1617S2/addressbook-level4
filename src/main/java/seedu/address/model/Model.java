@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.util.Date;
 import java.util.Set;
 
 import seedu.address.commons.core.UnmodifiableObservableList;
@@ -42,5 +43,8 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
+
+    /** Updates the filter of the filtered task list to filter by the given keywords*/
+    void updateFilteredTaskList(Date startDate, Date endDate);
 
 }

@@ -1,8 +1,10 @@
 package seedu.address.model.task;
 
-
+import java.util.Date;
+import java.util.List;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.parser.DateTimeParser;
 
 /**
  * Represents a Task's deadline in the task manager.
@@ -19,21 +21,20 @@ public class Deadline {
      */
     public static final String DEADLINE_VALIDATION_REGEX = ".*";
 
-    //TODO: change from String to Date
-    public String value;
+    private Date deadline;
 
     /**
      * Validates given deadline.
      *
      * @throws IllegalValueException if given deadline string is invalid.
      */
-    public Deadline(String deadline) throws IllegalValueException {
-        assert deadline != null;
-        String trimmedDeadline = deadline.trim();
-        if (!isValidDeadline(trimmedDeadline)) {
+    public Deadline(String strDeadline) throws IllegalValueException {
+        assert strDeadline != null;
+        List<Date> dateList = new DateTimeParser().parse(strDeadline).get(0).getDates();
+        if (!isValidDeadline(strDeadline) && dateList.size() == 0) {
             throw new IllegalValueException(MESSAGE_DEADLINE_CONSTRAINTS);
         }
-        this.value = deadline;
+        this.deadline = dateList.get(0);
     }
 
     /**
@@ -43,21 +44,25 @@ public class Deadline {
         return test.matches(DEADLINE_VALIDATION_REGEX);
     }
 
+    public Date getDateTime() {
+        return deadline;
+    }
+
     @Override
     public String toString() {
-        return value;
+        return deadline.toString();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Deadline // instanceof handles nulls
-                && this.value.equals(((Deadline) other).value)); // state check
+                && this.deadline.equals(((Deadline) other).deadline)); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return deadline.hashCode();
     }
 
 }

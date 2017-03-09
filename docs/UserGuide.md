@@ -148,10 +148,10 @@ Examples:
 * `find CS2103`<br />
 Returns all task containing the keyword or label containing `CS2103` & `cs2103`.
 
-* `find task project`<br />
+* `find project`<br />
 Returns all task with the name containing `project` & `Project`.
 
-* `find label glocery`<br />
+* `find glocery`<br />
 Returns all task with the label name containing `glocery` & `Glocery`.
 
 * `find project glocery`<br />
