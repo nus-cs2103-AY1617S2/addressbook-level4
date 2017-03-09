@@ -9,7 +9,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Description;
-import seedu.address.model.task.Email;
+import seedu.address.model.task.TaskDate;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
@@ -64,8 +64,8 @@ public class XmlAdaptedPerson {
         }
         final Description description = new Description(this.name);
         final Priority priority = new Priority(this.phone);
-        final Email email = new Email(this.email);
+        final TaskDate taskDate = new TaskDate(this.email);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Task(description, priority, email, tags);
+        return new Task(description, priority, taskDate, tags);
     }
 }

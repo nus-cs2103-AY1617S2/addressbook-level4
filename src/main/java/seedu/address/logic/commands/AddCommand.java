@@ -8,7 +8,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Description;
-import seedu.address.model.task.Email;
+import seedu.address.model.task.TaskDate;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
@@ -44,7 +44,7 @@ public class AddCommand extends Command {
         this.toAdd = new Task(
                 new Description(name),
                 new Priority(priority),
-                new Email(email),
+                new TaskDate(email),
                 new UniqueTagList(tagSet)
         );
     }

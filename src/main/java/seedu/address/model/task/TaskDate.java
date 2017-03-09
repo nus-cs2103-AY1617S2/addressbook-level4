@@ -1,39 +1,53 @@
 package seedu.address.model.task;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's phone number in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
+ * Represents a Task's date in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
-public class Email {
+public class TaskDate {
 
-    public static final String MESSAGE_EMAIL_CONSTRAINTS =
-            "Task date should be an 8-digit number with format ddmmyyyy";
-    public static final String EMAIL_VALIDATION_REGEX = "\\d+";
+    public static final String MESSAGE_DATE_CONSTRAINTS =
+            "Task date should be in the format dd/MM/yyyy";
+//    public static final String EMAIL_VALIDATION_REGEX = "\\d+";
+    public static final String dateFormat = "dd/MM/yyyy";
 
     public final String value;
 
     /**
-     * Validates given email.
+     * Validates given date.
      *
-     * @throws IllegalValueException if given email address string is invalid.
+     * @throws IllegalValueException if given date string is invalid.
      */
-    public Email(String email) throws IllegalValueException {
-        assert email != null;
-        String trimmedEmail = email.trim();
-        if (!isValidEmail(trimmedEmail)) {
-            throw new IllegalValueException(MESSAGE_EMAIL_CONSTRAINTS);
+    public TaskDate(String date) throws IllegalValueException {
+        assert date != null;
+        String trimmedDate = date.trim();
+        if (!isValidDate(trimmedDate)) {
+            throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
         }
-        this.value = trimmedEmail;
+        this.value = trimmedDate;
     }
 
     /**
-     * Returns if a given string is a valid person email.
+     * Returns if a given string is a valid date.
      */
-    public static boolean isValidEmail(String test) {
-        return test.matches(EMAIL_VALIDATION_REGEX);
+    public static boolean isValidDate(String test) {
+    	SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+    	sdf.setLenient(false);
+    	try{
+    		//throws ParseException if date is not valid
+    		Date date = sdf.parse(test);
+    	} catch (ParseException e){
+    		e.printStackTrace();
+    		return false;
+    	}
+        return true;
     }
 
     @Override
@@ -44,8 +58,8 @@ public class Email {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Email // instanceof handles nulls
-                && this.value.equals(((Email) other).value)); // state check
+                || (other instanceof TaskDate // instanceof handles nulls
+                && this.value.equals(((TaskDate) other).value)); // state check
     }
 
     @Override

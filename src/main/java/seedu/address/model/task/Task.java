@@ -13,14 +13,14 @@ public class Task implements ReadOnlyTask {
 
     private Description description;
     private Priority priority;
-    private Email date;
+    private TaskDate date;
 
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Description description, Priority priority, Email date, UniqueTagList tags) {
+    public Task(Description description, Priority priority, TaskDate date, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(description, priority, date, tags);
         this.description = description;
         this.priority = priority;
@@ -56,13 +56,13 @@ public class Task implements ReadOnlyTask {
         return priority;
     }
 
-    public void setEmail(Email date) {
+    public void setEmail(TaskDate date) {
         assert date != null;
         this.date = date;
     }
 
     @Override
-    public Email getDate() {
+    public TaskDate getDate() {
         return date;
     }
 
