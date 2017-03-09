@@ -56,8 +56,9 @@ public class Task implements Comparable<Task> {
         this.allTags.add(tag);
     }
 
-    public void removeTag(Tag tag) {
+    public boolean removeTag(Tag tag) {
         this.allTags.remove(tag);
+        return true;
     }
 
     public void replaceTags(Collection<Tag> tags) {

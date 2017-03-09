@@ -46,12 +46,12 @@ public class UntagController extends Controller {
         int index = Integer.parseInt(tokens.get(INDEX_PARAMETER));
         TodoList todoList = TodoList.load();
         Task task = UiStore.getInstance().getTasks().get(index);
-        task = todoList.get(task);
+        task = todoList.getTask(task);
         ArrayList<String> successfulList = new ArrayList<String>();
         ArrayList<String> failedList = new ArrayList<String>();
 
         for (String keyword : keywordList) {
-            if (task.addTag(new Tag(keyword))) {
+            if (task.removeTag(new Tag(keyword))) {
                 successfulList.add(keyword);
             } else {
                 failedList.add(keyword);
