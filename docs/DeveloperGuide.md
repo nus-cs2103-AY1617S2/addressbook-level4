@@ -358,8 +358,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | Undo my actions | revert any changes done accidentally.
 `* * *` | user | Mark task as done based on index, name, or any unique identifying string for that task | Clear done tasks if needed
 `* * *` | user | List all tasks based on importance | View which tasks have higher priorities
-`* * *` | user | List all tasks based on deadlines | View which tasks needs to be completed first
-`* * *` | user | List all tasks by deadlines | Plan my schedule on the calendar
+`* * *` | user | List all tasks by deadlines | View which tasks needs to be completed first
 `* * ` | user | Set alarms for certain schedules | Be reminded of deadlines of my tasks
 `* * ` | user | Schedule my tasks with constraints | Avoid scheduling tasks during my works time and leave break time in between tasks
 `* *` | user | Add subtasks into my main task | Have a more structured view of the main task
@@ -511,7 +510,7 @@ Use case ends.
 **Extensions**
 
 2a. The list is empty
-> 2a1. TaskManager shows “List is empty” message <br>
+> 2a1. TaskManager shows Â“List is emptyÂ” message <br>
 > Use case ends <br>
 
 
