@@ -23,8 +23,8 @@ public class Deadline {
     public static final String MESSAGE_DATE_NOT_FOUND = 
     		  "The date entered is either not recognized or not a future date.\n"
     		+ "Please paraphrase it or choose another date.";
-    public static final String DATE_VALIDATION_REGEX = "[\\s | [a-zA-Z0-9,/-:]]+";
-    public static final String DATE_FORMAT = "EEE, MMM d yyyy HH:mm";
+    public static final String DATE_VALIDATION_REGEX = "[\\s | [a-zA-Z0-9,/:-]]+";
+    public static final String DATE_FORMAT = "EEE, MMM d yyyy";
 
     public final String value;
     private final List<DateGroup> parsedDeadline;
