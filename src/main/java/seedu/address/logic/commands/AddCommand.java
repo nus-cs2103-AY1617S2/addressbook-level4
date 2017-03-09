@@ -9,9 +9,9 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Address;
 import seedu.address.model.task.Email;
-import seedu.address.model.task.Name;
+import seedu.address.model.task.Description;
 import seedu.address.model.task.Phone;
-import seedu.address.model.task.Task;
+import seedu.address.model.task.FloatingTask;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
@@ -21,7 +21,7 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a floating task to the task manager. "
             + "Parameters: TASK [#TAG]...\n"
             + "Example: " + COMMAND_WORD
             + " read Lord of the Rings #personal";
@@ -29,24 +29,21 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
 
-    private final Task toAdd;
+    private final FloatingTask toAdd;
 
     /**
      * Creates an AddCommand using raw values.
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, String phone, String email, String address, Set<String> tags)
+    public AddCommand(String description, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        this.toAdd = new Task(
-                new Name(name),
-                new Phone(phone),
-                new Email(email),
-                new Address(address),
+        this.toAdd = new FloatingTask(
+                new Description(description),
                 new UniqueTagList(tagSet)
         );
     }

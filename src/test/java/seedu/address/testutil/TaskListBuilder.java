@@ -3,7 +3,7 @@ package seedu.address.testutil;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.TaskList;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.Task;
+import seedu.address.model.task.FloatingTask;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
@@ -19,7 +19,7 @@ public class TaskListBuilder {
         this.taskList = taskList;
     }
 
-    public TaskListBuilder withPerson(Task person) throws UniqueTaskList.DuplicateTaskException {
+    public TaskListBuilder withPerson(FloatingTask person) throws UniqueTaskList.DuplicateTaskException {
         taskList.addTask(person);
         return this;
     }

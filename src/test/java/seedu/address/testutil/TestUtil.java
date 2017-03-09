@@ -34,10 +34,10 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Address;
 import seedu.address.model.task.Email;
-import seedu.address.model.task.Name;
+import seedu.address.model.task.Description;
 import seedu.address.model.task.Phone;
-import seedu.address.model.task.ReadOnlyTask;
-import seedu.address.model.task.Task;
+import seedu.address.model.task.ReadOnlyFloatingTask;
+import seedu.address.model.task.FloatingTask;
 import seedu.address.storage.XmlSerializableTaskList;
 
 /**
@@ -52,7 +52,7 @@ public class TestUtil {
      */
     public static final String SANDBOX_FOLDER = FileUtil.getPath("./src/test/data/sandbox/");
 
-    public static final Task[] SAMPLE_TASK_DATA = getSampleTaskData();
+    public static final FloatingTask[] SAMPLE_TASK_DATA = getSampleTaskData();
 
     public static final Tag[] SAMPLE_TAG_DATA = getSampleTagData();
 
@@ -71,19 +71,18 @@ public class TestUtil {
                 String.format("Expected %s to be thrown, but nothing was thrown.", expected.getName()));
     }
 
-    private static Task[] getSampleTaskData() {
+    private static FloatingTask[] getSampleTaskData() {
         try {
             //CHECKSTYLE.OFF: LineLength
-            return new Task[]{
-                new Task(new Name("Ali Muster"), new Phone("9482424"), new Email("hans@google.com"), new Address("4th street"), new UniqueTagList()),
-                new Task(new Name("Boris Mueller"), new Phone("87249245"), new Email("ruth@google.com"), new Address("81th street"), new UniqueTagList()),
-                new Task(new Name("Carl Kurz"), new Phone("95352563"), new Email("heinz@yahoo.com"), new Address("wall street"), new UniqueTagList()),
-                new Task(new Name("Daniel Meier"), new Phone("87652533"), new Email("cornelia@google.com"), new Address("10th street"), new UniqueTagList()),
-                new Task(new Name("Elle Meyer"), new Phone("9482224"), new Email("werner@gmail.com"), new Address("michegan ave"), new UniqueTagList()),
-                new Task(new Name("Fiona Kunz"), new Phone("9482427"), new Email("lydia@gmail.com"), new Address("little tokyo"), new UniqueTagList()),
-                new Task(new Name("George Best"), new Phone("9482442"), new Email("anna@google.com"), new Address("4th street"), new UniqueTagList()),
-                new Task(new Name("Hoon Meier"), new Phone("8482424"), new Email("stefan@mail.com"), new Address("little india"), new UniqueTagList()),
-                new Task(new Name("Ida Mueller"), new Phone("8482131"), new Email("hans@google.com"), new Address("chicago ave"), new UniqueTagList())
+            return new FloatingTask[]{
+                    new FloatingTask(new Description("Read Lord of The Rings"),
+                            new UniqueTagList("reading")),
+                        new FloatingTask(new Description("Do CS2103 V0.1"),
+                            new UniqueTagList("school", "homework")),
+                        new FloatingTask(new Description("Learn airflares"),
+                            new UniqueTagList("dance")),
+                        new FloatingTask(new Description("Design RPG using RPG Maker VX Ace"),
+                            new UniqueTagList("gamedesign"))
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -107,7 +106,7 @@ public class TestUtil {
         }
     }
 
-    public static List<Task> generateSampleTaskData() {
+    public static List<FloatingTask> generateSampleTaskData() {
         return Arrays.asList(SAMPLE_TASK_DATA);
     }
 
@@ -333,7 +332,7 @@ public class TestUtil {
         return list;
     }
 
-    public static boolean compareCardAndPerson(TaskCardHandle card, ReadOnlyTask person) {
+    public static boolean compareCardAndPerson(TaskCardHandle card, ReadOnlyFloatingTask person) {
         return card.isSamePerson(person);
     }
 

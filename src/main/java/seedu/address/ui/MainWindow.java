@@ -16,7 +16,7 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.ReadOnlyFloatingTask;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -199,7 +199,7 @@ public class MainWindow extends UiPart<Region> {
         return this.personListPanel;
     }
 
-    void loadPersonPage(ReadOnlyTask person) {
+    void loadPersonPage(ReadOnlyFloatingTask person) {
         browserPanel.loadPersonPage(person);
     }
 

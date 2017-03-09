@@ -9,10 +9,10 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Address;
 import seedu.address.model.task.Email;
-import seedu.address.model.task.Name;
+import seedu.address.model.task.Description;
 import seedu.address.model.task.Phone;
-import seedu.address.model.task.ReadOnlyTask;
-import seedu.address.model.task.Task;
+import seedu.address.model.task.ReadOnlyFloatingTask;
+import seedu.address.model.task.FloatingTask;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
@@ -51,14 +51,14 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        List<ReadOnlyFloatingTask> lastShownList = model.getFilteredTaskList();
 
         if (filteredTaskListIndex >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
-        Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        ReadOnlyFloatingTask taskToEdit = lastShownList.get(filteredTaskListIndex);
+        FloatingTask editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
         try {
             model.updateTask(filteredTaskListIndex, editedTask);
@@ -73,16 +73,13 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
      */
-    private static Task createEditedTask(ReadOnlyTask taskToEdit, EditTaskDescriptor editTaskDescriptor) {
+    private static FloatingTask createEditedTask(ReadOnlyFloatingTask taskToEdit, EditTaskDescriptor editTaskDescriptor) {
         assert taskToEdit != null;
 
-        Name updatedName = editTaskDescriptor.getTaskName().orElseGet(taskToEdit::getName);
-        Phone updatedPhone = editTaskDescriptor.getPhone().orElseGet(taskToEdit::getPhone);
-        Email updatedEmail = editTaskDescriptor.getEmail().orElseGet(taskToEdit::getEmail);
-        Address updatedAddress = editTaskDescriptor.getAddress().orElseGet(taskToEdit::getAddress);
+        Description updatedName = editTaskDescriptor.getTaskName().orElseGet(taskToEdit::getDescription);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new FloatingTask(updatedName, updatedTags);
     }
 
     /**
@@ -90,7 +87,7 @@ public class EditCommand extends Command {
      * corresponding field value of the task.
      */
     public static class EditTaskDescriptor {
-        private Optional<Name> name = Optional.empty();
+        private Optional<Description> name = Optional.empty();
         private Optional<Phone> phone = Optional.empty();
         private Optional<Email> email = Optional.empty();
         private Optional<Address> address = Optional.empty();
@@ -113,12 +110,12 @@ public class EditCommand extends Command {
             return CollectionUtil.isAnyPresent(this.name, this.phone, this.email, this.address, this.tags);
         }
 
-        public void setTaskName(Optional<Name> name) {
+        public void setTaskName(Optional<Description> name) {
             assert name != null;
             this.name = name;
         }
 
-        public Optional<Name> getTaskName() {
+        public Optional<Description> getTaskName() {
             return name;
         }
 

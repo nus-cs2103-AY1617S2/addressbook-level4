@@ -15,8 +15,8 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.ReadOnlyTask;
-import seedu.address.model.task.Task;
+import seedu.address.model.task.ReadOnlyFloatingTask;
+import seedu.address.model.task.FloatingTask;
 import seedu.address.testutil.TypicalTestTasks;
 
 public class TaskListTest {
@@ -49,7 +49,7 @@ public class TaskListTest {
     public void resetData_withDuplicatePersons_throwsAssertionError() {
         TypicalTestTasks td = new TypicalTestTasks();
         // Repeat td.alice twice
-        List<Task> newPersons = Arrays.asList(new Task(td.alice), new Task(td.alice));
+        List<FloatingTask> newPersons = Arrays.asList(new FloatingTask(td.alice), new FloatingTask(td.alice));
         List<Tag> newTags = td.alice.getTags().asObservableList();
         AddressBookStub newData = new AddressBookStub(newPersons, newTags);
 
@@ -60,7 +60,7 @@ public class TaskListTest {
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
         TaskList typicalAddressBook = new TypicalTestTasks().getTypicalTaskManager();
-        List<ReadOnlyTask> newPersons = typicalAddressBook.getTaskList();
+        List<ReadOnlyFloatingTask> newPersons = typicalAddressBook.getTaskList();
         List<Tag> newTags = new ArrayList<>(typicalAddressBook.getTagList());
         // Repeat the first tag twice
         newTags.add(newTags.get(0));
@@ -74,16 +74,16 @@ public class TaskListTest {
      * A stub ReadOnlyAddressBook whose persons and tags lists can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyTaskList {
-        private final ObservableList<ReadOnlyTask> persons = FXCollections.observableArrayList();
+        private final ObservableList<ReadOnlyFloatingTask> persons = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<? extends ReadOnlyTask> persons, Collection<? extends Tag> tags) {
+        AddressBookStub(Collection<? extends ReadOnlyFloatingTask> persons, Collection<? extends Tag> tags) {
             this.persons.setAll(persons);
             this.tags.setAll(tags);
         }
 
         @Override
-        public ObservableList<ReadOnlyTask> getTaskList() {
+        public ObservableList<ReadOnlyFloatingTask> getTaskList() {
             return persons;
         }
 
