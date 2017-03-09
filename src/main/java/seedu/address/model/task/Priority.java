@@ -13,8 +13,8 @@ import seedu.address.commons.exceptions.IllegalValueException;
 public class Priority {
 
     public static final String MESSAGE_PRIORITY_CONSTRAINTS =
-            "Task priority should be 1 alphanumeric string";
-    public static final String PRIORITY_VALIDATION_REGEX = "[\\w\\.]+";
+            "Priority Levels are only 1-5 or lame, decent, moderate, forreal, urgent,completed";
+    public static final String PRIORITY_VALIDATION_REGEX = "(lame|decent|moderate|forreal|urgent|completed|1|2|3|4|5)";
     
     public static final String PRIORITY_LEVEL_ONE = "lame";
     public static final String PRIORITY_LEVEL_TWO = "decent";
