@@ -17,3 +17,11 @@ Responsibilities:
 
 -----
 
+#### [Oguz Yuksek](http://github.com/yuksek) <br>
+<img src="images/OguzYuksek.png" width="150"><br>
+Role: Developer, Integration, Scheduling and tracking, Final version software, some documentation <br>
+Responsibilities: 
+
+-----
+
+
