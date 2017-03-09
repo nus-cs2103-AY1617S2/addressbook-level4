@@ -4,7 +4,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Lee Jun Han Bryan](https://github.com/bryanleejh) <br>
+#### [Lee Jun Han Bryan](https://github.com/bryanleejh)<br>
 <img src="https://avatars3.githubusercontent.com/u/12642495?v=3&s=460" width="150"><br>
 Role: Team lead <br>
 Responsibilities: Deliverables and deadlines, Scheduling and tracking <br>
@@ -18,9 +18,7 @@ Responsibilities: Deliverables and deadlines, Scheduling and tracking <br>
 
 -----
 
-#### [Huynh Van Tu An](https://github.com/arishuynhvan)
-
-<br>
+#### [Huynh Van Tu An](https://github.com/arishuynhvan)<br>
 <img src="images/arishuynhvan.png" width="150"><br>
 Role: Developer <br>
 Responsibilities: Testing, Integration  <br>  
@@ -32,7 +30,7 @@ Responsibilities: Testing, Integration  <br>
 
 -----
 
-#### [Wang Yu](xxx)
+#### [Wang Yu](https://github.com/WangYu-g)<br>
 <img src="images/WangYu-g.png" width="150"><br>
 Role: Developer <br>
 Responsibilities: Documentation, Code Quality <br>  
@@ -44,7 +42,7 @@ Responsibilities: Documentation, Code Quality <br>
 
 -----
 
-#### [Zhang HeYang](https://github.com/zhypaul)
+#### [Zhang HeYang](https://github.com/zhypaul)<br>
 <img src="https://avatars2.githubusercontent.com/u/25544025?v=3&s=460" width="150"><br>
 Role: Developer <br>
 Responsibilities: Code Quality <br>  
