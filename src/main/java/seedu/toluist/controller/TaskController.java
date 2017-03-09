@@ -17,7 +17,7 @@ import seedu.toluist.ui.UiStore;
  */
 public class TaskController extends Controller {
 
-    private static final String COMMAND_TEMPLATE = "^(?<command>(add|delete|update))"
+    private static final String COMMAND_TEMPLATE = "^(?<command>(delete|update))\\s*"
                 + "(\\s+(?<index>\\d+))?"
                 + "(\\s+(?<description>.+))?\\s*";
 
@@ -25,15 +25,13 @@ public class TaskController extends Controller {
     private static final String TASK_VIEW_INDEX = "index";
     private static final String TASK_DESCRIPTION = "description";
 
-    private static final String COMMAND_ADD_TASK = "add";
     private static final String COMMAND_UPDATE_TASK = "update";
     private static final String COMMAND_DELETE_TASK = "delete";
 
-    private static final String RESULT_MESSAGE_ADD_TASK = "New task added";
     private static final String RESULT_MESSAGE_UPDATE_TASK = "Task updated";
     private static final String RESULT_MESSAGE_DELETE_TASK = "Task deleted";
 
-    private Logger logger = LogsCenter.getLogger(getClass());
+    protected Logger logger = LogsCenter.getLogger(getClass());
 
     public TaskController(Ui renderer) {
         super(renderer);
@@ -56,9 +54,6 @@ public class TaskController extends Controller {
                 : null;
 
         switch (taskCommand) {
-        case COMMAND_ADD_TASK:
-            commandResult = add(todoList, description);
-            break;
         case COMMAND_UPDATE_TASK:
             commandResult = update(todoList, task, description);
             break;
@@ -100,17 +95,8 @@ public class TaskController extends Controller {
         return new CommandResult(RESULT_MESSAGE_UPDATE_TASK);
     }
 
-    private CommandResult add(TodoList todoList, String description) {
-        todoList.add(new Task(description));
-        return new CommandResult(RESULT_MESSAGE_ADD_TASK);
-    }
-
     private CommandResult delete(TodoList todoList, Task task) {
         todoList.remove(task);
         return new CommandResult(RESULT_MESSAGE_DELETE_TASK);
-    }
-
-    public static String[] getCommandWords() {
-        return new String[] { COMMAND_UPDATE_TASK, COMMAND_DELETE_TASK, COMMAND_ADD_TASK };
     }
 }

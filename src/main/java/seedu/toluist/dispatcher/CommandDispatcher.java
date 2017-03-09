@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 import seedu.toluist.commons.core.EventsCenter;
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.events.ui.NewResultAvailableEvent;
+import seedu.toluist.controller.AddTaskController;
 import seedu.toluist.controller.AliasController;
 import seedu.toluist.controller.Controller;
 import seedu.toluist.controller.ExitController;
@@ -44,6 +45,7 @@ public class CommandDispatcher extends Dispatcher {
         logger.info("De-aliased command to be dispatched: " + deAliasedCommand + " original command " + command);
 
         Controller controller = getBestFitController(renderer, deAliasedCommand);
+        logger.info("Controller class to be executed: " + controller.getClass());
         CommandResult feedbackToUser = controller.execute(deAliasedCommand);
         eventsCenter.post(new NewResultAvailableEvent(feedbackToUser.getFeedbackToUser()));
     }
@@ -60,6 +62,7 @@ public class CommandDispatcher extends Dispatcher {
 
     private Collection<Class <? extends Controller>> getAllControllerClasses() {
         return new ArrayList<>(Arrays.asList(
+                AddTaskController.class,
                 TaskController.class,
                 StoreController.class,
                 UndoController.class,
