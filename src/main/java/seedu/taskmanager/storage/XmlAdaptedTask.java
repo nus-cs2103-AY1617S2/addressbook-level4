@@ -28,7 +28,7 @@ public class XmlAdaptedTask {
     @XmlElement(required = true)
     private String date;
     @XmlElement(required = true)
-    private String deadline; 
+    private String deadline;
 //    @XmlElement(required = true)
 //    private String address;
 

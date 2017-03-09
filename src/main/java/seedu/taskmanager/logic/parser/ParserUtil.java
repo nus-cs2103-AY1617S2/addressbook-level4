@@ -76,7 +76,7 @@ public class ParserUtil {
 
 /*   /**
      * Parses a {@code Optional<String> time} into an {@code Optional<Time>} if {@code time} is present.
-     
+
     public static Optional<Deadline> parseTime(Optional<String> time) throws IllegalValueException {
         assert time != null;
         return time.isPresent() ? Optional.of(new Deadline(time.get())) : Optional.empty();
@@ -104,7 +104,7 @@ public class ParserUtil {
     public static Optional<Deadline> parseDeadline(Optional<String> deadline) throws IllegalValueException {
     	assert deadline != null;
     	return deadline.isPresent() ? Optional.of(new Deadline(deadline.get())) : Optional.empty();
-    } 
+    }
 
     /**
      * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.
@@ -116,5 +116,5 @@ public class ParserUtil {
             categorySet.add(new Category(categoryName));
         }
         return new UniqueCategoryList(categorySet);
-    } 
+    }
 }
