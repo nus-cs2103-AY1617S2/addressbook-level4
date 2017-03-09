@@ -127,7 +127,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
 
         // confirm the new card contains the right data
-        TaskCardHandle editedCard = taskListPanel.navigateToPerson(editedTask.getName().fullName);
+        TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getName().fullName);
         assertMatching(editedTask, editedCard);
 
         // confirm the list now contains all previous persons plus the person with updated details
