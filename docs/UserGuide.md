@@ -50,7 +50,7 @@ Format: `help`
 
 Format: `help COMMAND`
 
-> Different type of commands relating to COMMAND is shown 
+> Different type of commands relating to COMMAND is shown
 > e.g. `help help`
 
 ### 2.2.1. Adding a task: `add`
@@ -115,7 +115,8 @@ Format: `edit INDEX [DESCRIPTION] [d/DATE] [t/TIME] [bt/TIMERANGE] [f/FREQUENCY]
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
 > * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
-> * You can remove all the task's tags by typing `t/` without specifying any tags after it. 
+> * You can remove all the task's tags by typing `t/` without
+specifying any tags after it.
 
 Examples:
 
@@ -138,7 +139,7 @@ Examples:
 * `listtag`
 `edittag 3 CS2103`
 Edits the 3rd tag to be `CS2103`
-    
+
 ### 2.5.1. Finding all tasks containing any keyword in their description and tags: `find`
 
 Finds tasks whose description contain any of the given keywords.<br>
@@ -272,7 +273,7 @@ e.g. `edit 7 buy calculator`
 e.g. `edittag 2 CS2103`
 
 * **Exit** : `exit`
-e.g. 
+e.g.
 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
   e.g. `find tutorial quiz`

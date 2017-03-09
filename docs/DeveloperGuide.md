@@ -389,7 +389,7 @@ Priority | As a ... | I want to ... | So that...
 
 {More to be added}
 ## Appendix B : Use Cases
-   	        	
+	
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
 #### Use case #1: add task
@@ -499,7 +499,8 @@ Use case ends
 **MSS**
 
 1. User requests to delete a task or tag
-2. To-do list delete the task and prompts message on UI to show success  
+2. To-do list delete the task and prompts message on UI to show
+success
 Use case ends
 
 **Extensions**
@@ -653,7 +654,7 @@ Use case ends
 
 <br>
 
-#### Use case #11: Select a task or a tag        	
+#### Use case #11: Select a task or a tag 	
 
 **MSS**
 
@@ -678,7 +679,7 @@ Use case ends
 
 <br>
 
-#### Use case #12: Exit                  	
+#### Use case #12: Exit      	
 
 **MSS**
 
@@ -713,7 +714,7 @@ Use case ends
 
 <br>
 
-#### Use case #14: Set reminder      	
+#### Use case #14: Set reminder  	
 
 **MSS**
 
@@ -729,7 +730,7 @@ Use case ends
 
 <br>
 
-#### Use case #15: Tag                  	
+#### Use case #15: Tag   	
 
 **MSS**
 
@@ -754,7 +755,7 @@ Use case ends
 **MSS**
 
 1. User requests help message
-2. To-do list prompts help message on the UI 
+2. To-do list prompts help message on the UI
 Use case ends
 
 **Extensions**
@@ -785,7 +786,7 @@ Use case ends
 
 <br>
 
-#### Use case #18: Undo an operation	
+#### Use case #18: Undo an operation
 
 **MSS**
 
