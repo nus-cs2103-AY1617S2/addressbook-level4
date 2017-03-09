@@ -54,14 +54,14 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
-        commandBox.runCommand("find Elle");
+        commandBox.runCommand("find CS2106");
 
-        String detailsToEdit = "Belle";
+        String detailsToEdit = "Complete CS2103 Lab Assignment";
         int filteredTaskListIndex = 1;
         int addressBookIndex = 5;
 
         TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withName("Belle").build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withName("Complete CS2103 Lab Assignment").build();
 
         assertEditSuccess(filteredTaskListIndex, addressBookIndex, detailsToEdit, editedTask);
     }
@@ -95,7 +95,7 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_duplicateTask_failure() {
-        commandBox.runCommand("edit 3 Alice Pauline t/friends");
+        commandBox.runCommand("edit 3 Do math assignment t/math");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
