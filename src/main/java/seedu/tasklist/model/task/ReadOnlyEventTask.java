@@ -9,19 +9,19 @@ import seedu.tasklist.model.tag.UniqueTagList;
  * Implementations should guarantee: details are present and not null, field values are validated.
  *
  */
-public interface ReadOnlyEventTask extends ReadOnlyTask{
-	Name getName();
-	Comment getComment();
-	Date getStartDate();
-	Date getEndDate();
-	
-	/**
+public interface ReadOnlyEventTask extends ReadOnlyTask {
+    Name getName();
+    Comment getComment();
+    Date getStartDate();
+    Date getEndDate();
+
+    /**
      * The returned TagList is a deep copy of the internal TagList,
      * changes on the returned list will not affect the person's internal tags.
      */
-	UniqueTagList getTags();
-	
-	/**
+    UniqueTagList getTags();
+
+    /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
      */
     default boolean isSameStateAs(ReadOnlyTask other) {
@@ -30,7 +30,7 @@ public interface ReadOnlyEventTask extends ReadOnlyTask{
                 && other.getName().equals(this.getName()) // state checks here onwards
                 && other.getComment().equals(this.getComment()));
     }
-    
+
     /**
      * Formats the person as text, showing all contact details.
      */
