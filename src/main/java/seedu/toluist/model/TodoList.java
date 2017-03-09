@@ -14,14 +14,28 @@ import seedu.toluist.storage.Storage;
  */
 public class TodoList {
 
-    protected static Storage storage = JsonStorage.getInstance();
+    private static Storage storage = JsonStorage.getInstance();
 
     private static TodoList currentTodoList = new TodoList();
 
     private ArrayList<Task> allTasks = new ArrayList<>();
 
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof TodoList // instanceof handles nulls
+                && allTasks.equals(((TodoList) other).getTasks()));
+    }
+
     public ArrayList<Task> getTasks() {
         return allTasks;
+    }
+
+    public static void setStorage(Storage storage) {
+        TodoList.storage = storage;
+    }
+
+    public static Storage getStorage() {
+        return storage;
     }
 
     public static TodoList load() {

@@ -2,19 +2,9 @@ package seedu.toluist.testutil;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.TimeoutException;
-import java.util.stream.Collectors;
-
-import org.loadui.testfx.GuiTest;
-import org.testfx.api.FxToolkit;
-
-import com.google.common.io.Files;
 
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
@@ -23,9 +13,12 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
+import seedu.toluist.commons.util.CollectionUtil;
 import seedu.toluist.commons.util.FileUtil;
-import seedu.toluist.commons.util.XmlUtil;
-import seedu.toluist.model.Tag;
+import seedu.toluist.controller.Controller;
+import seedu.toluist.model.TodoList;
+import seedu.toluist.storage.JsonStorage;
+import seedu.toluist.storage.Storage;
 
 /**
  * A utility class for test cases.
@@ -38,15 +31,6 @@ public class TestUtil {
      * Folder used for temp files created during testing. Ignored by Git.
      */
     public static final String SANDBOX_FOLDER = FileUtil.getPath("./src/test/data/sandbox/");
-
-    public static final Tag[] SAMPLE_TAG_DATA = getSampleTagData();
-
-    private static Tag[] getSampleTagData() {
-        return new Tag[] {
-            new Tag("relatives"),
-            new Tag("friends")
-        };
-    }
 
     /**
      * Appends the file name to the sandbox folder path.
@@ -63,14 +47,26 @@ public class TestUtil {
         return SANDBOX_FOLDER + fileName;
     }
 
-    public static <T> void createDataFileWithData(T data, String filePath) {
-        try {
-            File saveFileForTesting = new File(filePath);
-            FileUtil.createIfMissing(saveFileForTesting);
-            XmlUtil.saveDataToFile(saveFileForTesting, data);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    /**
+     * Do the necessary configuration so that todolist data can be used for testing
+     * @param todoList todo list data
+     * @param filePath storagePath
+     */
+    public static void setTodoListTestData(TodoList todoList, String filePath) {
+        Storage storage = new JsonStorage(filePath);
+        TodoList.setStorage(storage);
+        Controller.setStorage(storage);
+        todoList.save();
+    }
+
+    /**
+     * Check that the tasks of the two todolists are the same. Order does not matter.
+     * @param todoList1
+     * @param todoList2
+     * @return true / false
+     */
+    public static boolean compareTasksOfTodoLists(TodoList todoList1, TodoList todoList2) {
+        return CollectionUtil.elementsAreSimilar(todoList1.getTasks(), todoList2.getTasks());
     }
 
     /**
@@ -95,47 +91,6 @@ public class TestUtil {
         return keys.toArray(new KeyCode[]{});
     }
 
-    public static boolean isHeadlessEnvironment() {
-        String headlessProperty = System.getProperty("testfx.headless");
-        return headlessProperty != null && headlessProperty.equals("true");
-    }
-
-    public static void captureScreenShot(String fileName) {
-        File file = GuiTest.captureScreenshot();
-        try {
-            Files.copy(file, new File(fileName + ".png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static String descOnFail(Object... comparedObjects) {
-        return "Comparison failed \n"
-                + Arrays.asList(comparedObjects).stream()
-                .map(Object::toString)
-                .collect(Collectors.joining("\n"));
-    }
-
-    public static void setFinalStatic(Field field, Object newValue) throws NoSuchFieldException,
-                                                                           IllegalAccessException {
-        field.setAccessible(true);
-        // remove final modifier from field
-        Field modifiersField = Field.class.getDeclaredField("modifiers");
-        modifiersField.setAccessible(true);
-        // ~Modifier.FINAL is used to remove the final modifier from field so that its value is no longer
-        // final and can be changed
-        modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
-        field.set(null, newValue);
-    }
-
-    public static void initRuntime() throws TimeoutException {
-        FxToolkit.registerPrimaryStage();
-        FxToolkit.hideStage();
-    }
-
-    public static void tearDownRuntime() throws Exception {
-        FxToolkit.cleanupStages();
-    }
 
     /**
      * Gets private method of a class
@@ -147,14 +102,6 @@ public class TestUtil {
         Method method = objectClass.getDeclaredMethod(methodName);
         method.setAccessible(true);
         return method;
-    }
-
-    public static void renameFile(File file, String newFileName) {
-        try {
-            Files.copy(file, new File(newFileName));
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
     }
 
     /**
@@ -199,31 +146,4 @@ public class TestUtil {
     public static double getSceneMaxY(Scene scene) {
         return scene.getX() + scene.getHeight();
     }
-
-    public static Object getLastElement(List<?> list) {
-        return list.get(list.size() - 1);
-    }
-
-    private static <T> List<T> asList(T[] objs) {
-        List<T> list = new ArrayList<>();
-        for (T obj : objs) {
-            list.add(obj);
-        }
-        return list;
-    }
-
-    public static Tag[] getTagList(String tags) {
-        if ("".equals(tags)) {
-            return new Tag[]{};
-        }
-
-        final String[] split = tags.split(", ");
-
-        final List<Tag> collect = Arrays.asList(split).stream().map(e -> {
-            return new Tag(e.replaceFirst("Tag: ", ""));
-        }).collect(Collectors.toList());
-
-        return collect.toArray(new Tag[split.length]);
-    }
-
 }
