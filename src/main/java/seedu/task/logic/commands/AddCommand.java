@@ -22,9 +22,9 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
-            + "Parameters: NAME p/DATE e/REMARK a/LOCATION  [t/TAG]...\n"
+            + "Parameters: NAME d/DATE r/REMARK l/LOCATION  [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " John owes money p/03-03-2017 e/john owes me $100 t/friends t/owesMoney";
+            + " John owes money d/03-03-2017 r/john owes me l/john's house $100 t/friends t/owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";

@@ -4,15 +4,15 @@ package seedu.task.model.task;
 import seedu.task.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's phone number in the address book.
+ * Represents a Task's phone number in KIT.
  * Guarantees: immutable; is valid as declared in {@link #isValidRemark(String)}
  */
 public class Remark {
 
     public static final String MESSAGE_REMARK_CONSTRAINTS =
-            "Task remarks should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Task remarks can contain any character";
     // to be changed to fit remarks constraints
-    public static final String REMARK_VALIDATION_REGEX = "[\\w\\.]+@[\\w\\.]+";
+    public static final String REMARK_VALIDATION_REGEX = ".*";
 
     public final String value;
 

@@ -25,11 +25,11 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby p/91234567 e/bobby@gmail.com a/Block 123, Bobby Street 3 t/husband";
+        String detailsToEdit = "Buy milk d/12-03-2017 r/remark l/Block 123, Bobby Street 3 t/shopping";
         int taskManagerIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withName("Bobby").withDate("91234567")
-                .withRemark("bobby@gmail.com").withLocation("Block 123, Bobby Street 3").withTags("husband").build();
+        TestTask editedTask = new TaskBuilder().withName("Buy milk").withDate("12-03-2017")
+                .withRemark("remark").withLocation("Block 123, Bobby Street 3").withTags("shopping").build();
 
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
@@ -58,14 +58,14 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
-        commandBox.runCommand("find Elle");
+        commandBox.runCommand("find Eat");
 
-        String detailsToEdit = "Belle";
+        String detailsToEdit = "Buy";
         int filteredTaskListIndex = 1;
         int taskManagerIndex = 5;
 
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withName("Belle").build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withName("Buy").build();
 
         assertEditSuccess(filteredTaskListIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
@@ -93,23 +93,25 @@ public class EditCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("edit 1 *&");
         assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 p/abcd");
+        commandBox.runCommand("edit 1 d/abcd");
         assertResultMessage(Date.MESSAGE_DATE_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 e/yahoo!!!");
-        assertResultMessage(Remark.MESSAGE_REMARK_CONSTRAINTS);
+        //allow remark to be any characters
+        //commandBox.runCommand("edit 1 r/yahoo!!!");
+        //assertResultMessage(Remark.MESSAGE_REMARK_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 a/");
-        assertResultMessage(Location.MESSAGE_LOCATION_CONSTRAINTS);
-
+        //allow location to be empty
+        //commandBox.runCommand("edit 1 l/");
+        //assertResultMessage(Location.MESSAGE_LOCATION_CONSTRAINTS);
+        
         commandBox.runCommand("edit 1 t/*&");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
     }
-
+   
     @Test
     public void edit_duplicateTask_failure() {
-        commandBox.runCommand("edit 3 Alice Pauline p/85355255 e/alice@gmail.com "
-                                + "a/123, Jurong West Ave 6, #08-111 t/friends");
+        commandBox.runCommand("edit 3 Apply for internship d/08-03-1989 r/checkout career fair "
+                                + "l/123, Jurong West Ave 6 t/personal");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
@@ -118,7 +120,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
      *
      * @param filteredTaskListIndex index of task to edit in filtered list
      * @param taskManagerIndex index of task to edit in the task manager.
-     *      Must refer to the task person as {@code filteredTaskListIndex}
+     *      Must refer to the task task as {@code filteredTaskListIndex}
      * @param detailsToEdit details to edit the task with as input to the edit command
      * @param editedTask the expected task after editing the task's details
      */
@@ -130,7 +132,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getName().fullName);
         assertMatching(editedTask, editedCard);
 
-        // confirm the list now contains all previous persons plus the person with updated details
+        // confirm the list now contains all previous tasks plus the task with updated details
         expectedTasksList[taskManagerIndex - 1] = editedTask;
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));

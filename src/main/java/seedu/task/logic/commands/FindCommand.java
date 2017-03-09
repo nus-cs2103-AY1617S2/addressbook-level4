@@ -3,7 +3,7 @@ package seedu.task.logic.commands;
 import java.util.Set;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
+ * Finds and lists all task in KIT whose name contains any of the argument keywords.
  * Keyword matching is case sensitive.
  */
 public class FindCommand extends Command {

@@ -17,7 +17,7 @@ public interface TaskManagerStorage {
     String getTaskManagerFilePath();
 
     /**
-     * Returns AddressBook data as a {@link ReadOnlyTaskManager}.
+     * Returns TaskManager data as a {@link ReadOnlyTaskManager}.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.

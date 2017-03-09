@@ -17,7 +17,7 @@ import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 
 /**
- * An Immutable AddressBook that is serializable to XML format
+ * An Immutable TaskManager that is serializable to XML format
  */
 @XmlRootElement(name = "taskmanager")
 public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
@@ -29,7 +29,7 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
     private List<XmlAdaptedTag> tags;
 
     /**
-     * Creates an empty XmlSerializableAddressBook.
+     * Creates an empty XmlSerializableTaskManager.
      * This empty constructor is required for marshalling.
      */
     public XmlSerializableTaskManager() {

@@ -75,7 +75,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> phone} into an {@code Optional<Phone>} if {@code phone} is present.
+     * Parses a {@code Optional<String> date} into an {@code Optional<Date>} if {@code date} is present.
      */
     public static Optional<Date> parseDate(Optional<String> date) throws IllegalValueException {
         assert date != null;
@@ -83,7 +83,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.
+     * Parses a {@code Optional<String> location} into an {@code Optional<Location>} if {@code location} is present.
      */
     public static Optional<Location> parseLocation(Optional<String> location) throws IllegalValueException {
         assert location != null;
@@ -91,11 +91,11 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
+     * Parses a {@code Optional<String> remark} into an {@code Optional<Remark>} if {@code remark} is present.
      */
-    public static Optional<Remark> parseRemark(Optional<String> email) throws IllegalValueException {
-        assert email != null;
-        return email.isPresent() ? Optional.of(new Remark(email.get())) : Optional.empty();
+    public static Optional<Remark> parseRemark(Optional<String> remark) throws IllegalValueException {
+        assert remark != null;
+        return remark.isPresent() ? Optional.of(new Remark(remark.get())) : Optional.empty();
     }
 
     /**

@@ -2,7 +2,7 @@ package seedu.task.logic.commands;
 
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all task in KIT to the user.
  */
 public class ListCommand extends Command {
 

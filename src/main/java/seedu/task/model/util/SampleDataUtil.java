@@ -15,22 +15,22 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         try {
             return new Task[] {
-                new Task(new Name("Alex Yeoh"), new Date("87438807"), new Remark("alexyeoh@gmail.com"),
+                new Task(new Name("Alex Yeoh"), new Date("07-03-2007"), new Remark("alexyeoh@gmail.com"),
                     new Location("Blk 30 Geylang Street 29, #06-40"),
                     new UniqueTagList("friends")),
-                new Task(new Name("Bernice Yu"), new Date("99272758"), new Remark("berniceyu@gmail.com"),
+                new Task(new Name("Bernice Yu"), new Date("12-12-2017"), new Remark("berniceyu@gmail.com"),
                     new Location("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                     new UniqueTagList("colleagues", "friends")),
-                new Task(new Name("Charlotte Oliveiro"), new Date("93210283"), new Remark("charlotte@yahoo.com"),
+                new Task(new Name("Charlotte Oliveiro"), new Date("07-08-2015"), new Remark("charlotte@yahoo.com"),
                     new Location("Blk 11 Ang Mo Kio Street 74, #11-04"),
                     new UniqueTagList("neighbours")),
-                new Task(new Name("David Li"), new Date("91031282"), new Remark("lidavid@google.com"),
+                new Task(new Name("David Li"), new Date("23-08-2017"), new Remark("lidavid@google.com"),
                     new Location("Blk 436 Serangoon Gardens Street 26, #16-43"),
                     new UniqueTagList("family")),
-                new Task(new Name("Irfan Ibrahim"), new Date("92492021"), new Remark("irfan@outlook.com"),
+                new Task(new Name("Irfan Ibrahim"), new Date("09-03-2017"), new Remark("irfan@outlook.com"),
                     new Location("Blk 47 Tampines Street 20, #17-35"),
                     new UniqueTagList("classmates")),
-                new Task(new Name("Roy Balakrishnan"), new Date("92624417"), new Remark("royb@gmail.com"),
+                new Task(new Name("Roy Balakrishnan"), new Date("17-03-2017"), new Remark("royb@gmail.com"),
                     new Location("Blk 45 Aljunied Street 85, #11-31"),
                     new UniqueTagList("colleagues"))
             };

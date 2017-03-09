@@ -16,6 +16,6 @@ public class LocationTest {
         // valid locations
         assertTrue(Location.isValidLocation("Blk 456, Den Road, #01-355"));
         assertTrue(Location.isValidLocation("-")); // one character
-        assertTrue(Location.isValidLocation("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
+        assertTrue(Location.isValidLocation("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long location
     }
 }

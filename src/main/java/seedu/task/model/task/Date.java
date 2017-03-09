@@ -1,20 +1,22 @@
 package seedu.task.model.task;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import seedu.task.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's date number in the address book.
+ * Represents a Task's date in KIT.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
 public class Date {
 
-    public static final String MESSAGE_DATE_CONSTRAINTS = "Task date numbers should only contain numbers";
-    public static final String DATE_VALIDATION_REGEX = "\\d+";
-
+    public static final String MESSAGE_DATE_CONSTRAINTS = "Task date should be in this format: DD-MM-YYYY";
+    public static final SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
     public final String value;
 
     /**
-     * Validates given date number.
+     * Validates given date.
      *
      * @throws IllegalValueException if given date string is invalid.
      */
@@ -28,10 +30,16 @@ public class Date {
     }
 
     /**
-     * Returns true if a given string is a valid task date number.
+     * Returns true if a given string is a valid date.
      */
-    public static boolean isValidDate(String test) {
-        return test.matches(DATE_VALIDATION_REGEX);
+    public static boolean isValidDate(String input) {
+    	 try {
+             format.parse(input);
+             return true;
+        }
+        catch(ParseException e){
+             return false;
+        }
     }
 
     @Override

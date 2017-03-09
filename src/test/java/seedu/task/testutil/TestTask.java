@@ -8,7 +8,7 @@ import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Remark;
 
 /**
- * A mutable person object. For testing only.
+ * A mutable task object. For testing only.
  */
 public class TestTask implements ReadOnlyTask {
 
@@ -86,9 +86,9 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
-        sb.append("a/" + this.getLocation().value + " ");
-        sb.append("p/" + this.getDate().value + " ");
-        sb.append("e/" + this.getRemark().value + " ");
+        sb.append("l/" + this.getLocation().value + " ");
+        sb.append("d/" + this.getDate().value + " ");
+        sb.append("r/" + this.getRemark().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }

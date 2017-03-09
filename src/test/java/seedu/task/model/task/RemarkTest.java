@@ -10,22 +10,22 @@ public class RemarkTest {
     @Test
     public void isValidRemark() {
         // blank remark
-        assertFalse(Remark.isValidRemark("")); // empty string
-        assertFalse(Remark.isValidRemark(" ")); // spaces only
+    	assertTrue(Remark.isValidRemark("")); // empty string
+        assertTrue(Remark.isValidRemark(" ")); // spaces only
 
         // missing parts
-        assertFalse(Remark.isValidRemark("@webmail.com")); // missing local part
-        assertFalse(Remark.isValidRemark("peterjackwebmail.com")); // missing '@' symbol
-        assertFalse(Remark.isValidRemark("peterjack@")); // missing domain name
+        assertTrue(Remark.isValidRemark("@webmail.com")); // missing local part
+        assertTrue(Remark.isValidRemark("peterjackwebmail.com")); // missing '@' symbol
+        assertTrue(Remark.isValidRemark("peterjack@")); // missing domain name
 
         // invalid parts
-        assertFalse(Remark.isValidRemark("-@webmail.com")); // invalid local part
-        assertFalse(Remark.isValidRemark("peterjack@-")); // invalid domain name
-        assertFalse(Remark.isValidRemark("peter jack@webmail.com")); // spaces in local part
-        assertFalse(Remark.isValidRemark("peterjack@web mail.com")); // spaces in domain name
-        assertFalse(Remark.isValidRemark("peterjack@@webmail.com")); // double '@' symbol
-        assertFalse(Remark.isValidRemark("peter@jack@webmail.com")); // '@' symbol in local part
-        assertFalse(Remark.isValidRemark("peterjack@webmail@com")); // '@' symbol in domain name
+        assertTrue(Remark.isValidRemark("-@webmail.com")); // invalid local part
+        assertTrue(Remark.isValidRemark("peterjack@-")); // invalid domain name
+        assertTrue(Remark.isValidRemark("peter jack@webmail.com")); // spaces in local part
+        assertTrue(Remark.isValidRemark("peterjack@web mail.com")); // spaces in domain name
+        assertTrue(Remark.isValidRemark("peterjack@@webmail.com")); // double '@' symbol
+        assertTrue(Remark.isValidRemark("peter@jack@webmail.com")); // '@' symbol in local part
+        assertTrue(Remark.isValidRemark("peterjack@webmail@com")); // '@' symbol in domain name
 
         // valid remark
         assertTrue(Remark.isValidRemark("PeterJack_1190@WEB.Mail.com"));

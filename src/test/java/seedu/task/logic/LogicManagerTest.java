@@ -107,7 +107,7 @@ public class LogicManagerTest {
 
     /**
      * Executes the command, confirms that a CommandException is not thrown and that the result message is correct.
-     * Also confirms that both the 'address book' and the 'last shown list' are as specified.
+     * Also confirms that both the 'task manager' and the 'last shown list' are as specified.
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager, List)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
@@ -134,7 +134,7 @@ public class LogicManagerTest {
      * and also confirms that the following three parts of the LogicManager object's state are as expected:<br>
      *      - the internal task manager data are same as those in the {@code expectedTaskManager} <br>
      *      - the backing list shown by UI matches the {@code shownList} <br>
-     *      - {@code expectedAddressBook} was saved to the storage file. <br>
+     *      - {@code expectedTaskManager} was saved to the storage file. <br>
      */
     private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand, String expectedMessage,
                                        ReadOnlyTaskManager expectedTaskManager,
@@ -190,20 +190,20 @@ public class LogicManagerTest {
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid,address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 valid@email.butNoPrefix a/valid, address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
+        //assertCommandFailure("add Valid Name 12345 r/valid@remark.butNodatePrefix l/valid, location", expectedMessage);
+        assertCommandFailure("add Valid Name d/05-05-2015 validRemark.butNoPrefix l/valid, location", expectedMessage);
+        //assertCommandFailure("add Valid Name d/05-05-2015 r/valid@email.butNoAddressPrefix valid, address", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidTaskData() {
-        assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
+        assertCommandFailure("add []\\[;] d/12345 r/validRemark l/valid, address",
                 Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
+        assertCommandFailure("add Valid Name d/not_numbers r/validRemark l/valid, address",
                 Date.MESSAGE_DATE_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
-                Remark.MESSAGE_REMARK_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
+        //assertCommandFailure("add Valid Name p/12345 r/notAnEmail a/valid, address",
+        //        Remark.MESSAGE_REMARK_CONSTRAINTS);
+        assertCommandFailure("add Valid Name d/05-05-2015 r/validRemark l/valid, address t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
@@ -212,7 +212,7 @@ public class LogicManagerTest {
     public void execute_add_successful() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.adam();
+        Task toBeAdded = helper.allocate();
         TaskManager expectedTM = new TaskManager();
         expectedTM.addTask(toBeAdded);
 
@@ -228,10 +228,10 @@ public class LogicManagerTest {
     public void execute_addDuplicate_notAllowed() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.adam();
+        Task toBeAdded = helper.allocate();
 
         // setup starting state
-        model.addTask(toBeAdded); // person already in internal address book
+        model.addTask(toBeAdded); // task already in internal task manager
 
         // execute command and verify result
         assertCommandFailure(helper.generateAddCommand(toBeAdded),  AddCommand.MESSAGE_DUPLICATE_TASK);
@@ -246,7 +246,7 @@ public class LogicManagerTest {
         TaskManager expectedTM = helper.generateTaskManager(2);
         List<? extends ReadOnlyTask> expectedList = expectedTM.getTaskList();
 
-        // prepare address book state
+        // prepare task manager state
         helper.addToModel(model, 2);
 
         assertCommandSuccess("list",
@@ -258,7 +258,7 @@ public class LogicManagerTest {
 
     /**
      * Confirms the 'invalid argument index number behavior' for the given command
-     * targeting a single person in the shown list, using visible index.
+     * targeting a single task in the shown list, using visible index.
      * @param commandWord to test assuming it targets a single task in the last shown list
      *                    based on visible index.
      */
@@ -282,7 +282,7 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         List<Task> taskList = helper.generateTaskList(2);
 
-        // set AB state to 2 persons
+        // set AB state to 2 tasks
         model.resetData(new TaskManager());
         for (Task p : taskList) {
             model.addTask(p);
@@ -303,7 +303,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_select_jumpsToCorrectPerson() throws Exception {
+    public void execute_select_jumpsToCorrectTask() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
 
@@ -415,10 +415,10 @@ public class LogicManagerTest {
      */
     class TestDataHelper {
 
-        Task adam() throws Exception {
-            Name name = new Name("Adam Brown");
-            Date privateDate = new Date("111111");
-            Remark remark = new Remark("adam@gmail.com");
+        Task allocate() throws Exception {
+            Name name = new Name("Allocate time for exercise");
+            Date privateDate = new Date("10-03-2017");
+            Remark remark = new Remark("Just do it");
             Location privateLocation = new Location("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
@@ -428,15 +428,15 @@ public class LogicManagerTest {
 
         /**
          * Generates a valid task using the given seed.
-         * Running this function with the same parameter values guarantees the returned person will have the same state.
+         * Running this function with the same parameter values guarantees the returned task will have the same state.
          * Each unique seed will generate a unique Task object.
          *
          * @param seed used to generate the task data field values
          */
         Task generateTask(int seed) throws Exception {
             return new Task(
-                    new Name("Person " + seed),
-                    new Date("" + Math.abs(seed)),
+                    new Name("Task " + seed),
+                    new Date("05-05-2015"), //not random for now
                     new Remark(seed + "@email"),
                     new Location("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
@@ -450,9 +450,9 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getName().toString());
-            cmd.append(" e/").append(p.getRemark());
-            cmd.append(" p/").append(p.getDate());
-            cmd.append(" a/").append(p.getLocation());
+            cmd.append(" r/").append(p.getRemark());
+            cmd.append(" d/").append(p.getDate());
+            cmd.append(" l/").append(p.getLocation());
 
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {
@@ -463,7 +463,7 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates an TaskManager with auto-generated persons.
+         * Generates an TaskManager with auto-generated tasks.
          */
         TaskManager generateTaskManager(int numGenerated) throws Exception {
             TaskManager taskManager = new TaskManager();
@@ -506,7 +506,7 @@ public class LogicManagerTest {
         }
 
         /**
-         * Adds the given list of Persons to the given model
+         * Adds the given list of Tasks to the given model
          */
         void addToModel(Model model, List<Task> tasksToAdd) throws Exception {
             for (Task p: tasksToAdd) {
@@ -535,7 +535,7 @@ public class LogicManagerTest {
         Task generateTaskWithName(String name) throws Exception {
             return new Task(
                     new Name(name),
-                    new Date("1"),
+                    new Date("05-05-2015"),
                     new Remark("1@email"),
                     new Location("House of 1"),
                     new UniqueTagList(new Tag("tag"))

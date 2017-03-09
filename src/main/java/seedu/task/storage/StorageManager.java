@@ -15,7 +15,7 @@ import seedu.task.model.ReadOnlyTaskManager;
 import seedu.task.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of TaskManager data in local storage.
  */
 public class StorageManager extends ComponentManager implements Storage {
 
@@ -24,9 +24,9 @@ public class StorageManager extends ComponentManager implements Storage {
     private UserPrefsStorage userPrefsStorage;
 
 
-    public StorageManager(TaskManagerStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(TaskManagerStorage taskManagerStorage, UserPrefsStorage userPrefsStorage) {
         super();
-        this.taskManagerStorage = addressBookStorage;
+        this.taskManagerStorage = taskManagerStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -47,7 +47,7 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ TaskManager methods ==============================
 
     @Override
     public String getTaskManagerFilePath() {

@@ -60,7 +60,7 @@ public class XmlTaskManagerStorageTest {
     }
 
     @Test
-    public void readAndSaveAddressBook_allInOrder_success() throws Exception {
+    public void readAndSaveTaskManager_allInOrder_success() throws Exception {
         String filePath = testFolder.getRoot().getPath() + "TempTaskManager.xml";
         TypicalTestTasks td = new TypicalTestTasks();
         TaskManager original = td.getTypicalTaskManager();
@@ -76,7 +76,7 @@ public class XmlTaskManagerStorageTest {
         assertEquals(original, new TaskManager(readBack));
 
         //Save and read without specifying file path
-        original.addTask(new Task(td.ida));
+        original.addTask(new Task(td.identify));
         xmlTaskManagerStorage.saveTaskManager(original); //file path not specified
         readBack = xmlTaskManagerStorage.readTaskManager().get(); //file path not specified
         assertEquals(original, new TaskManager(readBack));
@@ -85,7 +85,7 @@ public class XmlTaskManagerStorageTest {
     }
 
     @Test
-    public void saveTaskManager_nullAddressBook_assertionFailure() throws IOException {
+    public void saveTaskManager_nullTaskManager_assertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
         saveTaskManager(null, "SomeFile.xml");
     }

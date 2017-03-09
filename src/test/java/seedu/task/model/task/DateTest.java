@@ -17,8 +17,8 @@ public class DateTest {
         assertFalse(Date.isValidDate("9312 1534")); // spaces within digits
 
         // valid dates
-        assertTrue(Date.isValidDate("93121534"));
-        assertTrue(Date.isValidDate("4")); // short phone numbers
-        assertTrue(Date.isValidDate("124293842033123")); // long phone numbers
+        assertTrue(Date.isValidDate("23-12-1934"));
+        assertTrue(Date.isValidDate("03-01-1000")); 
+        assertTrue(Date.isValidDate("31-12-2999")); 
     }
 }
