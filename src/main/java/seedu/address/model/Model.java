@@ -20,10 +20,10 @@ public interface Model {
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 
-    /** Deletes the given person. */
+    /** Deletes the given task. */
     void deleteTask(Task target) throws UniqueTaskList.TaskNotFoundException;
 
-    /** Adds the given person */
+    /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
     /**
