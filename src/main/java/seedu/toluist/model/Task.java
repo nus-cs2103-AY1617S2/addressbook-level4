@@ -13,9 +13,9 @@ public class Task implements Comparable<Task> {
     // List of tags is unique
     private HashSet<Tag> allTags = new HashSet<>();
     public String description;
-    public LocalDateTime endDateTime;
-    public LocalDateTime startDateTime;
-    public boolean isCompleted = false;
+    private LocalDateTime endDateTime;
+    private LocalDateTime startDateTime;
+    private LocalDateTime completionDateTime;
 
     /**
      * To be used with json deserialisation
@@ -45,7 +45,26 @@ public class Task implements Comparable<Task> {
                 && this.allTags.equals(((Task) other).allTags)
                 && Objects.equals(this.startDateTime, ((Task) other).startDateTime) // handles null
                 && Objects.equals(this.endDateTime, ((Task) other).endDateTime) // handles null
-                && this.isCompleted == ((Task) other).isCompleted;
+                && Objects.equals(this.completionDateTime, ((Task) other).completionDateTime); // handles null
+    }
+
+    public void setCompleted(boolean isCompleted) {
+        if (isCompleted) {
+            completionDateTime = LocalDateTime.now();
+        } else {
+            completionDateTime = null;
+        }
+    }
+
+    public void setDeadLine(LocalDateTime deadLine) {
+        endDateTime = null;
+        startDateTime = deadLine;
+    }
+
+    public void setFromTo(LocalDateTime from, LocalDateTime to) {
+        assert from.isBefore(to);
+        startDateTime = from;
+        endDateTime = to;
     }
 
     public void addTag(Tag tag) {
@@ -65,7 +84,11 @@ public class Task implements Comparable<Task> {
     }
 
     public boolean isOverdue() {
-        return startDateTime != null && startDateTime.isBefore(LocalDateTime.now());
+        return !isCompleted() && (startDateTime != null && startDateTime.isBefore(LocalDateTime.now()));
+    }
+
+    public boolean isCompleted() {
+        return completionDateTime != null && completionDateTime.isBefore(LocalDateTime.now());
     }
 
     public boolean isAnyKeywordsContainedInDescriptionIgnoreCase(String[] keywords) {
