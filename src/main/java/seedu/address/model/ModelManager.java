@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.util.Date;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -87,15 +88,24 @@ public class ModelManager extends ComponentManager implements Model {
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
         return new UnmodifiableObservableList<>(filteredTasks);
     }
-
+    
     @Override
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
+    }
+    
+    @Override
+    public void updateFilteredTaskList(Date startDate, Date endDate) {
+        updateFilteredTaskListByDate(new DateFilter(startDate, endDate));
     }
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
+    }
+    
+    private void updateFilteredTaskListByDate(DateFilter dateFilter) {
+        filteredTasks.setPredicate(dateFilter::run);
     }
 
     private void updateFilteredTaskList(Expression expression) {
@@ -116,7 +126,7 @@ public class ModelManager extends ComponentManager implements Model {
         PredicateExpression(Qualifier qualifier) {
             this.qualifier = qualifier;
         }
-
+        
         @Override
         public boolean satisfies(ReadOnlyTask task) {
             return qualifier.run(task);
@@ -147,7 +157,7 @@ public class ModelManager extends ComponentManager implements Model {
                     .findAny()
                     .isPresent() ||
                     nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDeadline().value, keyword))
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDeadline().toString(), keyword))
                     .findAny()
                     .isPresent() ||
                     nameKeyWords.stream()
@@ -159,6 +169,20 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
+        }
+    }
+    
+    private class DateFilter {
+        private Date startTime;
+        private Date endTime;
+        
+        DateFilter(Date startTime, Date endTime) {
+            this.startTime = startTime;
+            this.endTime = endTime;
+        }
+        
+        public boolean run(ReadOnlyTask task) {
+            return task.getDeadline().getDateTime().before(endTime) && task.getDeadline().getDateTime().after(startTime);
         }
     }
 
