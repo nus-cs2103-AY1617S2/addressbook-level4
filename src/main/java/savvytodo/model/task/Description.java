@@ -4,36 +4,36 @@ package savvytodo.model.task;
 import savvytodo.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's phone number in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
+ * Represents a Task's description in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidDescription(String)}
  */
 public class Description {
 
-    public static final String MESSAGE_EMAIL_CONSTRAINTS =
-            "Task emails should be 2 alphanumeric/period strings separated by '@'";
-    public static final String EMAIL_VALIDATION_REGEX = "[\\w\\.]+@[\\w\\.]+";
+    public static final String MESSAGE_DESCRIPTION_CONSTRAINTS =
+            "There are no constraints";
+    public static final String DESCRIPTION_VALIDATION_REGEX = ".*";
 
     public final String value;
 
     /**
-     * Validates given email.
+     * Validates given description.
      *
-     * @throws IllegalValueException if given email address string is invalid.
+     * @throws IllegalValueException if given description address string is invalid.
      */
-    public Description(String email) throws IllegalValueException {
-        assert email != null;
-        String trimmedEmail = email.trim();
-        if (!isValidEmail(trimmedEmail)) {
-            throw new IllegalValueException(MESSAGE_EMAIL_CONSTRAINTS);
+    public Description(String description) throws IllegalValueException {
+        assert description != null;
+        String trimmedDescription = description.trim();
+        if (!isValidDescription(trimmedDescription)) {
+            throw new IllegalValueException(MESSAGE_DESCRIPTION_CONSTRAINTS);
         }
-        this.value = trimmedEmail;
+        this.value = trimmedDescription;
     }
 
     /**
-     * Returns if a given string is a valid task email.
+     * Returns if a given string is a valid task description.
      */
-    public static boolean isValidEmail(String test) {
-        return test.matches(EMAIL_VALIDATION_REGEX);
+    public static boolean isValidDescription(String test) {
+        return test.matches(DESCRIPTION_VALIDATION_REGEX);
     }
 
     @Override

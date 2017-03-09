@@ -201,7 +201,7 @@ public class LogicManagerTest {
         assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
                 Priority.MESSAGE_PRIORITY_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
-                Description.MESSAGE_EMAIL_CONSTRAINTS);
+                Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.category",
                 Category.MESSAGE_CATEGORY_CONSTRAINTS);
 
