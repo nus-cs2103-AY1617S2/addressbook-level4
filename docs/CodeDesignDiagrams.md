@@ -32,4 +32,4 @@ After finishing the design, paste its code from [yuml.me](https://yuml.me/diagra
 [Task]->[note:<<interface>> ReadOnlyTask{bg:wheat}]
 ```
 
-![Model Design v0.1](images/ModelClassDiagram-v0.1.png)
+![Model Design v0.1](images/ModelClassDiagram-v0_1.png)
