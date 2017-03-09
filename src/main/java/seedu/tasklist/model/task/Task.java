@@ -22,10 +22,12 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Comment comment, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, comment, tags);
+    public Task(Name name, Comment comment, Priority priority, Status status, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, comment, priority, status, tags);
         this.name = name;
         this.comment = comment;
+        this.priority = priority;
+        this.status = status;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -33,7 +35,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getComment(), source.getTags());
+        this(source.getName(), source.getComment(), source.getPriority(), source.getStatus(), source.getTags());
     }
 
     public void setName(Name name) {
@@ -60,6 +62,26 @@ public class Task implements ReadOnlyTask {
     @Override
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
+    }
+    
+    public void setPriority(Priority priority){
+        assert priority != null;
+        this.priority = priority;
+    }
+    
+    @Override
+    public Priority getPriority() {
+        return priority;
+    }
+    
+    public void setStatus(Status status){
+        assert status != null;
+        this.status = status;
+    }
+
+    @Override
+    public Status getStatus() {
+        return status;
     }
 
     /**
@@ -96,16 +118,6 @@ public class Task implements ReadOnlyTask {
     @Override
     public String toString() {
         return getAsText();
-    }
-
-    @Override
-    public Priority getPriority() {
-        return priority;
-    }
-
-    @Override
-    public Status getStatus() {
-        return status;
     }
 
 }
