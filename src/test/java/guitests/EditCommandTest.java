@@ -28,7 +28,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         String detailsToEdit = "Bobby p/91234567 e/bobby@gmail.com a/Block 123, Bobby Street 3 t/husband";
         int taskManagerIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withName("Bobby").withPhone("91234567").withEmail("bobby@gmail.com")
+        TestTask editedTask = new TaskBuilder().withName("Bobby").withPriority("91234567").withEmail("bobby@gmail.com")
                 .withAddress("Block 123, Bobby Street 3").withCategories("husband").build();
 
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);

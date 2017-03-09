@@ -75,15 +75,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Name("Ali Muster"), new Priority("9482424"), new Description("hans@google.com"), new Address("4th street"), new UniqueCategoryList()),
-                new Task(new Name("Boris Mueller"), new Priority("87249245"), new Description("ruth@google.com"), new Address("81th street"), new UniqueCategoryList()),
-                new Task(new Name("Carl Kurz"), new Priority("95352563"), new Description("heinz@yahoo.com"), new Address("wall street"), new UniqueCategoryList()),
-                new Task(new Name("Daniel Meier"), new Priority("87652533"), new Description("cornelia@google.com"), new Address("10th street"), new UniqueCategoryList()),
-                new Task(new Name("Elle Meyer"), new Priority("9482224"), new Description("werner@gmail.com"), new Address("michegan ave"), new UniqueCategoryList()),
-                new Task(new Name("Fiona Kunz"), new Priority("9482427"), new Description("lydia@gmail.com"), new Address("little tokyo"), new UniqueCategoryList()),
-                new Task(new Name("George Best"), new Priority("9482442"), new Description("anna@google.com"), new Address("4th street"), new UniqueCategoryList()),
-                new Task(new Name("Hoon Meier"), new Priority("8482424"), new Description("stefan@mail.com"), new Address("little india"), new UniqueCategoryList()),
-                new Task(new Name("Ida Mueller"), new Priority("8482131"), new Description("hans@google.com"), new Address("chicago ave"), new UniqueCategoryList())
+                new Task(new Name("Ali Muster"), new Priority("low"), new Description("hans@google.com"), new Address("4th street"), new UniqueCategoryList()),
+                new Task(new Name("Boris Mueller"), new Priority("low"), new Description("ruth@google.com"), new Address("81th street"), new UniqueCategoryList()),
+                new Task(new Name("Carl Kurz"), new Priority("low"), new Description("heinz@yahoo.com"), new Address("wall street"), new UniqueCategoryList()),
+                new Task(new Name("Daniel Meier"), new Priority("low"), new Description("cornelia@google.com"), new Address("10th street"), new UniqueCategoryList()),
+                new Task(new Name("Elle Meyer"), new Priority("low"), new Description("werner@gmail.com"), new Address("michegan ave"), new UniqueCategoryList()),
+                new Task(new Name("Fiona Kunz"), new Priority("low"), new Description("lydia@gmail.com"), new Address("little tokyo"), new UniqueCategoryList()),
+                new Task(new Name("George Best"), new Priority("low"), new Description("anna@google.com"), new Address("4th street"), new UniqueCategoryList()),
+                new Task(new Name("Hoon Meier"), new Priority("low"), new Description("stefan@mail.com"), new Address("little india"), new UniqueCategoryList()),
+                new Task(new Name("Ida Mueller"), new Priority("low"), new Description("hans@google.com"), new Address("chicago ave"), new UniqueCategoryList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {

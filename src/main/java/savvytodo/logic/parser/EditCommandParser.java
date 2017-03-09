@@ -3,8 +3,8 @@ package savvytodo.logic.parser;
 import static savvytodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static savvytodo.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static savvytodo.logic.parser.CliSyntax.PREFIX_CATEGORY;
-import static savvytodo.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static savvytodo.logic.parser.CliSyntax.PREFIX_PHONE;
+import static savvytodo.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static savvytodo.logic.parser.CliSyntax.PREFIX_PRIORITY;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -30,7 +30,7 @@ public class EditCommandParser {
     public Command parse(String args) {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_CATEGORY);
+                new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_DESCRIPTION, PREFIX_ADDRESS, PREFIX_CATEGORY);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
@@ -42,8 +42,8 @@ public class EditCommandParser {
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
             editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
-            editTaskDescriptor.setPhone(ParserUtil.parsePhone(argsTokenizer.getValue(PREFIX_PHONE)));
-            editTaskDescriptor.setEmail(ParserUtil.parseEmail(argsTokenizer.getValue(PREFIX_EMAIL)));
+            editTaskDescriptor.setPhone(ParserUtil.parsePhone(argsTokenizer.getValue(PREFIX_PRIORITY)));
+            editTaskDescriptor.setEmail(ParserUtil.parseEmail(argsTokenizer.getValue(PREFIX_DESCRIPTION)));
             editTaskDescriptor.setAddress(ParserUtil.parseAddress(argsTokenizer.getValue(PREFIX_ADDRESS)));
             editTaskDescriptor.setCategories(
                     parseCategoriesForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_CATEGORY))));
