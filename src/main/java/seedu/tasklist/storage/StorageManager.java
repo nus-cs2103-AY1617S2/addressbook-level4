@@ -66,14 +66,14 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public void saveTaskList(ReadOnlyTaskList addressBook) throws IOException {
-        saveTaskList(addressBook, taskListStorage.getTaskListFilePath());
+    public void saveTaskList(ReadOnlyTaskList flexiTask) throws IOException {
+        saveTaskList(flexiTask, taskListStorage.getTaskListFilePath());
     }
 
     @Override
-    public void saveTaskList(ReadOnlyTaskList addressBook, String filePath) throws IOException {
+    public void saveTaskList(ReadOnlyTaskList flexiTask, String filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        taskListStorage.saveTaskList(addressBook, filePath);
+        taskListStorage.saveTaskList(flexiTask, filePath);
     }
 
 
