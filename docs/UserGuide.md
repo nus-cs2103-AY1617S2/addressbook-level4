@@ -1,6 +1,6 @@
 # TaskIt - User Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `February 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -16,18 +16,18 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
    > Having any Java 8 version is not enough. <br>
    > This app will not work with earlier versions of Java 8.
 
-1. Download the latest `addressbook.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for your Address Book.
+1. Download the latest `TaskIt.jar` from the [releases](../../../releases) tab.
+2. Copy the file to the folder you want to use as the home folder for your Task Manager.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
    > <img src="images/Ui.png" width="600">
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
-   * **`list`** : lists all contacts
+   * **`list`** : lists all tasks
    * **`add`**` do SWE project t/school t/CS` :
      adds a task titled `do SWE project` to the TaskIt.
-   * **`delete`**` 3` : deletes the 3rd contact shown in the current list
+   * **`delete`**` 3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
@@ -46,6 +46,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 Format: `help`
 
 > Help is also shown if you enter an incorrect command e.g. `abcd`
+> Help is also shown for specific command if command is entered with incorrect arguments e.g.  `delete asdf`
 
 ### 2.2. Adding a task: `add`
 
@@ -57,7 +58,7 @@ Examples:
 * `add Group Meeting t/study t/school by Wednesday 8 pm`
 * `add Interview t/work`
 
-> Persons can have any number of tags (including 0)
+> Tasks can have any number of tags (including 0)
 
 
 ### 2.3. Listing all tasks : `list`
@@ -71,15 +72,14 @@ Format: `list undone`
 ### 2.4. Updating an existing task : `update`
 
 Edits an existing task in TaskIt.<br>
-Format: `update index  <name|description|deadline> new`
+Format: `update <index>  <name|description|deadline|tag> <new>`
 
-> * Edits the person at the specified `INDEX`.
-    The index refers to the index number shown in the last person listing.<br>
+> * Edits the task at the specified `INDEX`.
+    The index refers to the index number shown in the last task listing.<br>
     The index **must be a positive integer** 1, 2, 3, ...
-> * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
-> * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-> * You can remove all the person's tags by typing `t/` without specifying any tags after it. 
+> * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
+> * You can remove all the task's tags by typing `t/` without specifying any tags after it. 
 
 Examples:
 
@@ -99,7 +99,7 @@ Format: ` search <name|description|deadline|tag>`
 
 > * The search is not case sensitive. e.g `do HW` will match `do hw`
 > * The order of the keywords does not matter. e.g. `HW do` will match `do HW`
-> * Only full words will be matched e.g. `HW` will not match `HWs`
+> * Substrings will be matched e.g. `HW` will match `HWs`
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `HW` will match `do HW`
 
@@ -122,14 +122,14 @@ Examples:
 
 * `list`<br>
   `delete 2`<br>
-  Deletes the 2nd task in the address book.
+  Deletes the 2nd task in the task manager.
 * `find do HW`<br>
   `delete 1`<br>
   Deletes the 1st task in the results of the `find` command.
 
 ### 2.7. Select a task : `select`
 
-Selects the task identified by the index number used in the last person listing.<br>
+Selects the task identified by the index number used in the last task listing.<br>
 Format: `select INDEX`
 
 > Selects the task and loads the Google search page the task at the specified `INDEX`.<br>
@@ -140,19 +140,19 @@ Examples:
 
 * `list`<br>
   `select 2`<br>
-  Selects the 2nd task in the address book.
+  Selects the 2nd task in the task manager.
 * `find do HW` <br>
   `select 1`<br>
   Selects the 1st task in the results of the `find` command.
 
 ### 2.8. Clearing all entries : `clear`
 
-Clears all entries from the address book.<br>
+Clears all entries from the task manager.<br>
 Format: `clear`
 
-### 2.9 Undo previous action: `clear`
+### 2.9 Undo previous action: `undo`
 
-Undo the prevous actions
+Undo the prevous actions.<br>
 Format: `undo`
 
 ### 2.10. Exiting the program : `exit`
@@ -160,7 +160,7 @@ Format: `undo`
 Exits the program.<br>
 Format: `exit`
 
-### 2.10. Saving the data
+### 2.11. Saving the data
 
 TaskIt data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
@@ -169,7 +169,7 @@ There is no need to save manually.
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
-       the file that contains the data of your previous Address Book folder.
+       the file that contains the data of your previous TaskIt folder.
 
 ## 4. Command Summary
 
