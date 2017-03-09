@@ -6,12 +6,12 @@ import java.util.Optional;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.EndTime;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.StartTime;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Title;
-import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.task.Venue;
 
