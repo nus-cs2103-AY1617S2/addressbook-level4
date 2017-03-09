@@ -30,7 +30,6 @@ public class CommandBox extends UiPart<Region> {
     }
 
     private void addToPlaceholder(AnchorPane placeHolderPane) {
-        // SplitPane.setResizableWithParent(placeHolderPane, false);
         placeHolderPane.getChildren().add(commandTextField);
         FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
         FxViewUtil.applyAnchorBoundaryParameters(commandTextField, 0.0, 0.0, 0.0, 0.0);

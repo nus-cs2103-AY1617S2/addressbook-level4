@@ -110,7 +110,7 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        new TodoListPanel(getTodoListPlaceholder(), logic.getFilteredTodoList());
+        todoListPanel = new TodoListPanel(getTodoListPlaceholder(), logic.getFilteredTodoList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTodoListFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
