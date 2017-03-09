@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 
 /**
  * Tokenizes arguments string of the form: {@code preamble <prefix>value <prefix>value ...}<br>
@@ -36,6 +39,9 @@ public class ArgumentTokenizer {
      */
     public void tokenize(String argsString) {
         resetTokenizerState();
+        saveArgument(PREFIX_NOTE, "");
+        saveArgument(PREFIX_PRIORITY, "");
+        saveArgument(PREFIX_STATUS, "");
         List<PrefixPosition> positions = findAllPrefixPositions(argsString);
         extractArguments(argsString, positions);
     }
