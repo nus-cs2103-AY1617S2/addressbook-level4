@@ -386,13 +386,15 @@ Priority | As a ... | I want to ... | So that I can...
 |[Add task](#use-case-add-task)|Adds a task to the todo list. The task may have a concrete or floating time. Including tags at the end of the task is optional|
 |[Delete task](#use-case-delete-task)|Removes a task from the todo list|
 |[Mark task as complete](#use-case-complete-task)|Marks a task done by its name|
-|[List Upcoming Deadlines](#use-case-view-upcoming-deadlines)|Lists the tasks with upcoming deadlines within the next 2 weeks|
+|[List Upcoming Deadlines](#use-case-list-upcoming-deadlines)|Lists the tasks with upcoming deadlines within the next 2 weeks|
+|[List uncompleted tasks](#use-case-list-uncompleted-tasks)| Lists all uncompleted tasks|
+|[List completed tasks](#use-case-list-completed-tasks)| Lists all completed tasks|
 |[Calendar View](#use-case-calendar-view)|View the todo list as a calendar|
 |[Sync with Google Calendar](#use-case-sync-with-google-calendar)|Synchronise the todo list with a Google Calendar|
 |[Customize File Storing](#use-case-customize-file-storing)|Set a custom location for where to save the data|
 |[Reminder mode](#use-case-reminder-mode)|Sets whether the application will send a reminder as a task's deadline draws near|
 |[Attach Links](#use-case-attach-links)|Attaches links to a task|
-|[Show Progress Report](#use-case-show-progress-report)|Displays the current statistics on how many tasks have been added, completed, and pending completion|
+|[Show Progress Report](#use-case-show-task-progress-report)|Displays the current statistics on how many tasks have been added, completed, and pending completion|
 |[Search](#use-case-search)|Displays a list of tasks with matching keywords as queried|
 |[View Overdue Tasks](#use-case-view-overdue-tasks)|Displays a list of tasks that are overdue|
 |[Undo Previous Command](#use-case-undo-previous-command)|Undo the previous command|
@@ -446,11 +448,11 @@ Priority | As a ... | I want to ... | So that I can...
 5. Use case ends.
 
 ##### Extensions
-2a. There is no list.  
+2a. There is no list.
 > Use case ends.
 
-3a. The given index is invalid.  
-> 3a1. System gives an error message.  
+3a. The given index is invalid.
+> 3a1. System gives an error message.
 Use case resumes at step 2.
 
 ---
@@ -465,7 +467,7 @@ Use case resumes at step 2.
 5. Use case ends.
 
 #### Extension
-2a. There is no list.  
+2a. There is no list.
 > Use case ends.
 
 3a. The task has already been completed.
@@ -487,11 +489,11 @@ Use case resumes at step 2.
 5. Use case ends.
 
 ##### Extensions
-2a. There is no list.  
+2a. There is no list.
 > 2a1. Use case ends.
 
-3a. The given index is invalid.  
-> 3a1. System gives an error message.  
+3a. The given index is invalid.
+> 3a1. System gives an error message.
 > 3a2. Use case resumes at step 2.
 
 ---
@@ -504,11 +506,11 @@ Use case resumes at step 2.
 5. Use case ends.
 
 ##### Extensions
-2a. There is no list.  
+2a. There is no list.
 > 2a1. Use case ends.
 
-3a. The given index is invalid.  
-> 3a1. System gives an error message.  
+3a. The given index is invalid.
+> 3a1. System gives an error message.
 > 3a2. Use case resumes at step 2.
 
 ---
@@ -521,7 +523,7 @@ Use case resumes at step 2.
 
 ---
 
-### Use case: See A List Of Uncompleted Tasks
+### Use case: List Uncompleted Tasks
 #### Main Success Scenario:
 1. User requests for list of uncompleted tasks.
 2. System display list of uncompleted task.
@@ -534,7 +536,7 @@ Use case resumes at step 2.
 
 ---
 
-### Use case: See A List Of Completed Tasks
+### Use case: List Completed Tasks
 #### Main Success Scenario:
 1. User requests for list of completed tasks.
 2. System display list of completed task.
@@ -555,7 +557,7 @@ Use case resumes at step 2.
 
 ---
 
-### Use case: Show Task Progress
+### Use case: Show Task Progress Report
 
 #### Main Success Scenario:
 1. User requests for a report of his/her completed tasks, overdue tasks and upcoming tasks.
@@ -587,11 +589,11 @@ Use case resumes at step 2.
 ### Use case: Undo Previous Command
 #### Main Success Scenario:
 1. User requests to undo a previous command that mutates the data. 
-2. System returns the command that was undone.  
+2. System returns the command that was undone.
 3. Use case ends.
 
 ##### Extensions
-2. There is nothing to undo.  
+2. There is nothing to undo.
 > 2a1. Use case ends. 
 
 ---
@@ -661,7 +663,7 @@ Use case resumes at step 2.
 5. Use case ends.
 
 ##### Extensions
-3a. There is no such task.  
+3a. There is no such task.
 > 3a1. Use case ends.
 
 3b. Task not completed.
@@ -688,33 +690,20 @@ Use case resumes at step 2.
 
 ---
 
-### Use case: Collaborate with Others
-
-#### Main Success Scenario:
-1. User requests for a report of his/her completed tasks, overdue tasks and upcoming tasks.
-2. System shows a report of the user's completed tasks, overdue tasks and upcoming tasks.
-3. Use case ends.
-
-#### Extension
-2a. The list is empty.
-> 2a1. Use case ends.
-
----
-
 ### Use case: Repeat Task
 #### Main Success Scenario:
 1. User requests to list persons.
 2. System shows a list of persons. 
 3. User requests to repeat a specific task in the list. 
-4. System puts the task that was put on repeat and displays the task.   
+4. System puts the task that was put on repeat and displays the task.
 5. Use case ends.
 
 ##### Extensions
-2a. There is no list.  
+2a. There is no list.
 > Use case ends.
 
-3a. The given index is invalid.  
-> 3a1. System gives an error message.  
+3a. The given index is invalid.
+> 3a1. System gives an error message.
 Use case resumes at step 2.
 
 ---
@@ -745,7 +734,7 @@ Use case resumes at step 2.
 
 ---
 
-### Use case: View My Task Progress
+### Use case: View A Task Progress
 #### Main Success Scenario:
 1. User requests to list uncompleted tasks.
 2. System displays uncompleted tasks.
@@ -754,7 +743,7 @@ Use case resumes at step 2.
 5. Use case ends.
 
 ##### Extensions
-2. There is no such task.  
+2. There is no such task.
 > 2a1. Use case ends.
 
 ---
@@ -768,7 +757,7 @@ Use case resumes at step 2.
 5. Use case ends.
 
 ##### Extensions
-3. Same name detected again.  
+3. Same name detected again.
 > 3a1. Go back to 2.
 
 ---
@@ -817,16 +806,14 @@ Use case resumes at step 2.
 **Cozi Family Organiser**
 
 > Pros:
-> * Many relevant categories like Upcoming Events, 
-> Groceries and Calendar
+> * Many relevant categories like Upcoming Events, Groceries and Calendar
 > * Easy to collaborate with other family members
 > * Easily updated from mobile phone or computer
 > * Available in iTunes and Google Play
 
 > Cons:
 > * Requires a working internet connection
-> * Some categories like Birthdays are only 
-> available in the premium version
+> * Some categories like Birthdays are only available in the premium version
 > * Calendar cannot be synced to Google Calendar
 
 **Evernote**
@@ -851,3 +838,4 @@ Use case resumes at step 2.
 > Cons:
 > * Unable to repeat tasks
 > * Unable to add subtasks
+
