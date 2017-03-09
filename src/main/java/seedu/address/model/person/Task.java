@@ -9,7 +9,7 @@ import seedu.address.model.tag.UniqueTagList;
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated.
  */
-public class Person implements ReadOnlyTask {
+public class Task implements ReadOnlyTask {
 
     private Name name;
 
@@ -18,7 +18,7 @@ public class Person implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, UniqueTagList tags) {
+    public Task(Name name, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, tags);
         this.name = name;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
@@ -27,7 +27,7 @@ public class Person implements ReadOnlyTask {
     /**
      * Creates a copy of the given ReadOnlyPerson.
      */
-    public Person(ReadOnlyTask source) {
+    public Task(ReadOnlyTask source) {
         this(source.getName(), source.getTags());
     }
 

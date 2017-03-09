@@ -31,8 +31,8 @@ import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyTask;
+import seedu.address.model.person.Task;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.storage.XmlSerializableAddressBook;
@@ -49,7 +49,7 @@ public class TestUtil {
      */
     public static final String SANDBOX_FOLDER = FileUtil.getPath("./src/test/data/sandbox/");
 
-    public static final Person[] SAMPLE_PERSON_DATA = getSamplePersonData();
+    public static final Task[] SAMPLE_PERSON_DATA = getSamplePersonData();
 
     public static final Tag[] SAMPLE_TAG_DATA = getSampleTagData();
 
@@ -68,19 +68,19 @@ public class TestUtil {
                 String.format("Expected %s to be thrown, but nothing was thrown.", expected.getName()));
     }
 
-    private static Person[] getSamplePersonData() {
+    private static Task[] getSamplePersonData() {
         try {
             //CHECKSTYLE.OFF: LineLength
-            return new Person[]{
-                new Person(new Name("Allocate Work"), new UniqueTagList()),
-                new Person(new Name("Buy Groceries"), new UniqueTagList()),
-                new Person(new Name("Count doomsday"), new UniqueTagList()),
-                new Person(new Name("Die tomorrow"), new UniqueTagList()),
-                new Person(new Name("Elicit crap"), new UniqueTagList()),
-                new Person(new Name("Fool around"), new UniqueTagList()),
-                new Person(new Name("Goof around"), new UniqueTagList()),
-                new Person(new Name("Help someone"), new UniqueTagList()),
-                new Person(new Name("Improve tasks"), new UniqueTagList())
+            return new Task[]{
+                new Task(new Name("Allocate Work"), new UniqueTagList()),
+                new Task(new Name("Buy Groceries"), new UniqueTagList()),
+                new Task(new Name("Count doomsday"), new UniqueTagList()),
+                new Task(new Name("Die tomorrow"), new UniqueTagList()),
+                new Task(new Name("Elicit crap"), new UniqueTagList()),
+                new Task(new Name("Fool around"), new UniqueTagList()),
+                new Task(new Name("Goof around"), new UniqueTagList()),
+                new Task(new Name("Help someone"), new UniqueTagList()),
+                new Task(new Name("Improve tasks"), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -104,7 +104,7 @@ public class TestUtil {
         }
     }
 
-    public static List<Person> generateSamplePersonData() {
+    public static List<Task> generateSamplePersonData() {
         return Arrays.asList(SAMPLE_PERSON_DATA);
     }
 
