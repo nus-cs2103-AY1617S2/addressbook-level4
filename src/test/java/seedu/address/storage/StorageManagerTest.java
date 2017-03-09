@@ -22,7 +22,7 @@ import seedu.taskmanager.model.UserPrefs;
 import seedu.taskmanager.storage.JsonUserPrefsStorage;
 import seedu.taskmanager.storage.Storage;
 import seedu.taskmanager.storage.StorageManager;
-import seedu.taskmanager.storage.XmlAddressBookStorage;
+import seedu.taskmanager.storage.XmlTaskManagerStorage;
 
 public class StorageManagerTest {
 
@@ -89,7 +89,7 @@ public class StorageManagerTest {
     /**
      * A Stub class to throw an exception when the save method is called
      */
-    class XmlAddressBookStorageExceptionThrowingStub extends XmlAddressBookStorage {
+    class XmlAddressBookStorageExceptionThrowingStub extends XmlTaskManagerStorage {
 
         public XmlAddressBookStorageExceptionThrowingStub(String filePath) {
             super(filePath);
