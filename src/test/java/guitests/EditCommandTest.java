@@ -94,7 +94,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 p/abcd");
-        assertResultMessage(Priority.MESSAGE_PHONE_CONSTRAINTS);
+        assertResultMessage(Priority.MESSAGE_PRIORITY_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 e/yahoo!!!");
         assertResultMessage(Description.MESSAGE_EMAIL_CONSTRAINTS);

@@ -3,35 +3,35 @@ package savvytodo.model.task;
 import savvytodo.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's phone number in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
+ * Represents a Task's priority in the task manager
+ * Guarantees: immutable; is valid as declared in {@link #isValidPriority(String)}
  */
 public class Priority {
 
-    public static final String MESSAGE_PHONE_CONSTRAINTS = "Task phone numbers should only contain numbers";
-    public static final String PHONE_VALIDATION_REGEX = "\\d+";
-
+    public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority should be 'low', 'medium' or 'high'";
+    public static final String PRIORITY_VALIDATION_REGEX = "(^low$)|(^medium$)|(^high$)";
+ 
     public final String value;
 
     /**
-     * Validates given phone number.
+     * Validates given priority.
      *
-     * @throws IllegalValueException if given phone string is invalid.
+     * @throws IllegalValueException if given priority string is invalid.
      */
-    public Priority(String phone) throws IllegalValueException {
-        assert phone != null;
-        String trimmedPhone = phone.trim();
-        if (!isValidPhone(trimmedPhone)) {
-            throw new IllegalValueException(MESSAGE_PHONE_CONSTRAINTS);
+    public Priority(String priority) throws IllegalValueException {
+        assert priority != null;
+        String trimmedPriority = priority.trim();
+        if (!isValidPriority(trimmedPriority)) {
+            throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
         }
-        this.value = trimmedPhone;
+        this.value = trimmedPriority;
     }
 
     /**
-     * Returns true if a given string is a valid task phone number.
+     * Returns true if a given string is a valid task priority.
      */
-    public static boolean isValidPhone(String test) {
-        return test.matches(PHONE_VALIDATION_REGEX);
+    public static boolean isValidPriority(String test) {
+        return test.matches(PRIORITY_VALIDATION_REGEX);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class Priority {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Priority // instanceof handles nulls
-                && this.value.equals(((Priority) other).value)); // state check
+                        && this.value.equals(((Priority) other).value)); // state check
     }
 
     @Override
