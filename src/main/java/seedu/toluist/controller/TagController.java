@@ -43,7 +43,7 @@ public class TagController extends Controller {
         // initialize keywords and variables for searching
         HashMap<String, String> tokens = tokenize(command);
         String[] keywordList = convertToArray(tokens.get(KEYWORDS_PARAMETER));
-        int index = Integer.parseInt(tokens.get(INDEX_PARAMETER));
+        int index = Integer.parseInt(tokens.get(INDEX_PARAMETER))-1;
         TodoList todoList = TodoList.load();
         Task task = UiStore.getInstance().getTasks().get(index);
         ArrayList<String> successfulList = new ArrayList<String>();

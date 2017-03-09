@@ -3,6 +3,7 @@ package seedu.toluist.ui.view;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import seedu.toluist.commons.util.FxViewUtil;
+import seedu.toluist.model.Tag;
 import seedu.toluist.model.Task;
 
 /**
@@ -29,7 +30,11 @@ public class TaskUiView extends UiView {
 
     @Override
     protected void viewDidMount() {
-        name.setText(task.description);
+        String tags = "";
+        for (Tag tag : task.getAllTags()) {
+            tags += tag.tagName + " ";
+        }
+        name.setText(task.description + " TAGS/" + tags);
         id.setText(displayedIndex + ". ");
         FxViewUtil.makeFullWidth(getRoot());
     }
