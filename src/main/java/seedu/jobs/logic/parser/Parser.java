@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.jobs.logic.commands.AddCommand;
+import seedu.jobs.logic.commands.AddTaskCommand;
 import seedu.jobs.logic.commands.ClearCommand;
 import seedu.jobs.logic.commands.Command;
 import seedu.jobs.logic.commands.DeleteCommand;
@@ -46,7 +47,10 @@ public class Parser {
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
-
+        
+        case AddTaskCommand.COMMAND_WORD:
+        	return new AddTaskParser().parse(arguments);
+        	
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 

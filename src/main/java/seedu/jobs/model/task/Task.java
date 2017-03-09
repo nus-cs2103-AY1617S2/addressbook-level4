@@ -2,6 +2,7 @@ package seedu.jobs.model.task;
 
 import java.util.Objects;
 
+import seedu.jobs.commons.exceptions.IllegalValueException;
 import seedu.jobs.commons.util.CollectionUtil;
 import seedu.jobs.model.tag.UniqueTagList;
 
@@ -29,7 +30,15 @@ public class Task implements ReadOnlyTask {
         this.description = description;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
-
+    
+    public Task(Name name) throws IllegalValueException{
+    	assert !CollectionUtil.isAnyNull(name);
+    	this.name = name;
+    	this.phone = new Phone("42");
+    	this.email = new Email("thisIsForTest@gmail.com");
+    	this.description = new Description("Just a test to show that our group can at least pass the first milestone");
+    	this.tags = new UniqueTagList("123456789");
+    }
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
