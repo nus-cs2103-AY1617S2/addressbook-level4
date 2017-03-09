@@ -29,7 +29,7 @@ public class TaskUiView extends UiView {
 
     @Override
     protected void viewDidMount() {
-        name.setText(task.description + " TAGS/" + task.getAllTags().toString());
+        name.setText(task.description);
         id.setText(displayedIndex + ". ");
         FxViewUtil.makeFullWidth(getRoot());
     }
