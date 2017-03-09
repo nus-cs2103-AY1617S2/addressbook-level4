@@ -1,4 +1,4 @@
-# TaskManager Level 4 - Developer Guide
+# TaskManager - Developer Guide
 
 By : `Team W15-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
