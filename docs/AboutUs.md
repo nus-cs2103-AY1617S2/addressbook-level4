@@ -4,45 +4,71 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Damith C. Rajapakse](http://www.comp.nus.edu.sg/~damithch) <br>
-<img src="images/DamithRajapakse.jpg" width="150"><br>
-**Role**: Project Advisor
+#### [Andrew Sugiarto](http://www.comp.nus.edu.sg/~damithch) <br>
+<img src="images/azraelos.png" width="150"><br>
+* **Role:** UI <br>
+* **Responsibilities:** <br>
+* **Features implemented:** <br>
+* **Code written:** <br>
+* **Other major contributions:** <br>
 
 -----
 
-#### [Joshua Lee](http://github.com/lejolly)
-<img src="images/JoshuaLee.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: UI
+#### [Ching Hui Qi](http://github.com/hqching)
+<img src="images/hqching.png" width="150"><br>
+* **Role:** Logic <br>
+* **Responsibilities:** <br>
+* **Features implemented:** <br>
+* **Code written:** <br>
+* **Other major contributions:** <br>
 
 -----
 
-#### [Leow Yijin](http://github.com/yijinl)
-<img src="images/LeowYijin.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Data
+#### [Megan Quek](http://github.com/megan-quek)
+<img src="images/megan-quek.png" width="150"><br>
+* **Role:** Storage <br>
+* **Responsibilities:** <br>
+* **Features implemented:** <br>
+* **Code written:** <br>
+* **Other major contributions:** <br>
 
 -----
 
-#### [Martin Choo](http://github.com/m133225)
-<img src="images/MartinChoo.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Dev Ops
+#### [Mervyn Yee](http://github.com/mervynyeezl)
+<img src="images/mervynyeezl.png" width="150"><br>
+* **Role:** Model <br>
+* **Responsibilities:** <br>
+* **Features implemented:** <br>
+* **Code written:** <br>
+* **Other major contributions:** <br>
 
 -----
 
-#### [Thien Nguyen](https://github.com/ndt93)
- Role: Developer <br>
- Responsibilities: Threading
+# Other Major Contributors
+#### [Henry Chia](http://github.com/hwkchia)
+Role: Lecturer <br>
 
- -----
+-----
 
-#### [You Liang](http://github.com/yl-coder)
-<img src="images/YouLiang.jpg" width="150"><br>
- Role: Developer <br>
- Responsibilities: UI
+#### [Soo Yuen Jien](http://github.com/sooyj)
+Role: Lecturer and tutor <br>
 
- -----
+-----
+
+#### [Akshay Narayan](http://github.com/okkhoy)
+Role: Tutor <br>
+
+-----
+
+#### [Brandon Yeo](http://github.com/brandonyeoxg)
+Role: Tutor <br>
+
+-----
+
+#### [Joel Tan](http://github.com/JoelT-92)
+Role: Tutor <br>
+
+-----
 
 # Contributors
 
