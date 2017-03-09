@@ -39,12 +39,9 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.storage.StorageManager;
@@ -112,7 +109,7 @@ public class LogicManagerTest {
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
                                       ReadOnlyAddressBook expectedAddressBook,
-                                      List<? extends ReadOnlyPerson> expectedShownList) {
+                                      List<? extends ReadOnlyTask> expectedShownList) {
         assertCommandBehavior(false, inputCommand, expectedMessage, expectedAddressBook, expectedShownList);
     }
 
@@ -123,7 +120,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, String expectedMessage) {
         AddressBook expectedAddressBook = new AddressBook(model.getAddressBook());
-        List<ReadOnlyPerson> expectedShownList = new ArrayList<>(model.getFilteredPersonList());
+        List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredPersonList());
         assertCommandBehavior(true, inputCommand, expectedMessage, expectedAddressBook, expectedShownList);
     }
 
@@ -137,7 +134,7 @@ public class LogicManagerTest {
      */
     private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand, String expectedMessage,
                                        ReadOnlyAddressBook expectedAddressBook,
-                                       List<? extends ReadOnlyPerson> expectedShownList) {
+                                       List<? extends ReadOnlyTask> expectedShownList) {
 
         try {
             CommandResult result = logic.execute(inputCommand);
@@ -187,21 +184,25 @@ public class LogicManagerTest {
 
     @Test
     public void execute_add_invalidArgsFormat() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid,address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 valid@email.butNoPrefix a/valid, address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
+        // TODO no way to have invalid arguments currently
+        // ArgumentTokenizer to understand, along with execute_add_invalidArgsFormat in LogicManagerTest why should fail
+        //String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        //assertCommandFailure("add wrong args wrong args", expectedMessage);
+        //assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid,address", expectedMessage);
+        //assertCommandFailure("add Valid Name p/12345 valid@email.butNoPrefix a/valid, address", expectedMessage);
+        // assertCommandFailure("add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid,
+        // address", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidPersonData() {
         assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
                 Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
-                Phone.MESSAGE_PHONE_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
-                Email.MESSAGE_EMAIL_CONSTRAINTS);
+        // TODO floating tasks don't have much to check at the moment
+        //assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
+        //        Phone.MESSAGE_PHONE_CONSTRAINTS);
+        //assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
+        //        Email.MESSAGE_EMAIL_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
@@ -243,7 +244,7 @@ public class LogicManagerTest {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
         AddressBook expectedAB = helper.generateAddressBook(2);
-        List<? extends ReadOnlyPerson> expectedList = expectedAB.getPersonList();
+        List<? extends ReadOnlyTask> expectedList = expectedAB.getPersonList();
 
         // prepare address book state
         helper.addToModel(model, 2);
@@ -416,42 +417,33 @@ public class LogicManagerTest {
 
         Person adam() throws Exception {
             Name name = new Name("Adam Brown");
-            Phone privatePhone = new Phone("111111");
-            Email email = new Email("adam@gmail.com");
-            Address privateAddress = new Address("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Person(name, privatePhone, email, privateAddress, tags);
+            return new Person(name, tags);
         }
 
         /**
-         * Generates a valid person using the given seed.
-         * Running this function with the same parameter values guarantees the returned person will have the same state.
-         * Each unique seed will generate a unique Person object.
+         * Generates a valid task using the given seed.
+         * Running this function with the same parameter values guarantees the returned task will have the same state.
+         * Each unique seed will generate a unique task object.
          *
-         * @param seed used to generate the person data field values
+         * @param seed used to generate the task data field values
          */
         Person generatePerson(int seed) throws Exception {
             return new Person(
-                    new Name("Person " + seed),
-                    new Phone("" + Math.abs(seed)),
-                    new Email(seed + "@email"),
-                    new Address("House of " + seed),
+                    new Name("Task" + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
 
-        /** Generates the correct add command based on the person given */
+        /** Generates the correct add command based on the task given */
         String generateAddCommand(Person p) {
             StringBuffer cmd = new StringBuffer();
 
             cmd.append("add ");
 
             cmd.append(p.getName().toString());
-            cmd.append(" e/").append(p.getEmail());
-            cmd.append(" p/").append(p.getPhone());
-            cmd.append(" a/").append(p.getAddress());
 
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {
@@ -529,14 +521,11 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates a Person object with given name. Other fields will have some dummy values.
+         * Generates a Task object with given name. Other fields will have some dummy values.
          */
         Person generatePersonWithName(String name) throws Exception {
             return new Person(
                     new Name(name),
-                    new Phone("1"),
-                    new Email("1@email"),
-                    new Address("House of 1"),
                     new UniqueTagList(new Tag("tag"))
             );
         }
