@@ -1,7 +1,7 @@
 package seedu.address.model.util;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.TaskManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Address;
@@ -9,7 +9,7 @@ import seedu.address.model.task.Email;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Time;
-import seedu.address.model.task.UniquePersonList.DuplicatePersonException;
+import seedu.address.model.task.UniqueTaskList.DuplicatePersonException;
 
 public class SampleDataUtil {
     public static Task[] getSamplePersons() {
@@ -41,7 +41,7 @@ public class SampleDataUtil {
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
         try {
-            AddressBook sampleAB = new AddressBook();
+            TaskManager sampleAB = new TaskManager();
             for (Task samplePerson : getSamplePersons()) {
                 sampleAB.addPerson(samplePerson);
             }
