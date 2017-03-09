@@ -14,19 +14,19 @@ public class TypicalTestPersons {
 
     public TypicalTestPersons() {
         try {
-            alice = new TaskBuilder().withName("Alice Pauline")
+            alice = new TaskBuilder().withDescription("Alice Pauline")
                     .withTags("friends").build();
-            benson = new TaskBuilder().withName("Benson Meier")
+            benson = new TaskBuilder().withDescription("Benson Meier")
                     .withTags("owesMoney", "friends").build();
-            carl = new TaskBuilder().withName("Carl Kurz").build();
-            daniel = new TaskBuilder().withName("Daniel Meier").build();
-            elle = new TaskBuilder().withName("Elle Meyer").build();
-            fiona = new TaskBuilder().withName("Fiona Kunz").build();
-            george = new TaskBuilder().withName("George Best").build();
+            carl = new TaskBuilder().withDescription("Carl Kurz").build();
+            daniel = new TaskBuilder().withDescription("Daniel Meier").build();
+            elle = new TaskBuilder().withDescription("Elle Meyer").build();
+            fiona = new TaskBuilder().withDescription("Fiona Kunz").build();
+            george = new TaskBuilder().withDescription("George Best").build();
 
             // Manually added
-            hoon = new TaskBuilder().withName("Hoon Meier").build();
-            ida = new TaskBuilder().withName("Ida Mueller").build();
+            hoon = new TaskBuilder().withDescription("Hoon Meier").build();
+            ida = new TaskBuilder().withDescription("Ida Mueller").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";

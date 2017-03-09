@@ -11,16 +11,16 @@ import seedu.task.model.tag.UniqueTagList;
  */
 public class Task implements ReadOnlyTask {
 
-    private Name name;
+    private Description description;
 
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, tags);
-        this.name = name;
+    public Task(Description description, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(description, tags);
+        this.description = description;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -28,17 +28,17 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getTags());
+        this(source.getDescription(), source.getTags());
     }
 
-    public void setName(Name name) {
-        assert name != null;
-        this.name = name;
+    public void setDescription(Description description) {
+        assert description != null;
+        this.description = description;
     }
 
     @Override
-    public Name getName() {
-        return name;
+    public Description getDescription() {
+        return description;
     }
 
     @Override
@@ -59,7 +59,7 @@ public class Task implements ReadOnlyTask {
     public void resetData(ReadOnlyTask replacement) {
         assert replacement != null;
 
-        this.setName(replacement.getName());
+        this.setDescription(replacement.getDescription());
         this.setTags(replacement.getTags());
     }
 
@@ -73,7 +73,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, tags);
+        return Objects.hash(description, tags);
     }
 
     @Override

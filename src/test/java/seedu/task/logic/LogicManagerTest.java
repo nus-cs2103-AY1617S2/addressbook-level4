@@ -40,7 +40,7 @@ import seedu.task.model.ReadOnlyTaskList;
 import seedu.task.model.TaskList;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
-import seedu.task.model.task.Name;
+import seedu.task.model.task.Description;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.storage.StorageManager;
@@ -185,7 +185,7 @@ public class LogicManagerTest {
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add", expectedMessage);
-        expectedMessage = Name.MESSAGE_DESCRIPTION_CONSTRAINTS;
+        expectedMessage = Description.MESSAGE_DESCRIPTION_CONSTRAINTS;
         assertCommandFailure("add invalid character/", expectedMessage);
         assertCommandFailure("add invalid character@", expectedMessage);
         assertCommandFailure("add invalid character.", expectedMessage);
@@ -194,7 +194,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidPersonData() {
         assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
-                Name.MESSAGE_DESCRIPTION_CONSTRAINTS);
+                Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
@@ -380,7 +380,7 @@ public class LogicManagerTest {
     class TestDataHelper {
 
         Task adam() throws Exception {
-            Name name = new Name("Adam Brown");
+            Description name = new Description("Adam Brown");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
@@ -396,7 +396,7 @@ public class LogicManagerTest {
          */
         Task generatePerson(int seed) throws Exception {
             return new Task(
-                    new Name("Person " + seed),
+                    new Description("Person " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -407,7 +407,7 @@ public class LogicManagerTest {
 
             cmd.append("add ");
 
-            cmd.append(p.getName().toString());
+            cmd.append(p.getDescription().toString());
 
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {
@@ -487,9 +487,9 @@ public class LogicManagerTest {
         /**
          * Generates a Person object with given name. Other fields will have some dummy values.
          */
-        Task generatePersonWithName(String name) throws Exception {
+        Task generatePersonWithName(String description) throws Exception {
             return new Task(
-                    new Name(name),
+                    new Description(description),
                     new UniqueTagList(new Tag("tag"))
             );
         }
