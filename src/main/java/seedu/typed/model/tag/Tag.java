@@ -3,7 +3,7 @@ package seedu.typed.model.tag;
 import seedu.typed.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Tag in the address book. Guarantees: immutable; name is valid as
+ * Represents a Tag in the task manager. Guarantees: immutable; name is valid as
  * declared in {@link #isValidTagName(String)}
  */
 public class Tag {

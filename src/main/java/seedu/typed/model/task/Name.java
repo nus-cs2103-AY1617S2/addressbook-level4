@@ -1,44 +1,18 @@
 package seedu.typed.model.task;
 
-import seedu.typed.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's name in the task manager. Guarantees: immutable; is valid
- * as declared in {@link #isValidName(String)}
+ * Represents a Task's name in the task manager. Guarantees: immutable; 
  */
 public class Name {
 
-    public static final String MESSAGE_NAME_CONSTRAINTS = "A task name should only contain alphanumeric characters.";
-
-    /*
-     * The first character of the task must not be a whitespace, otherwise
-     * " " (a blank string) becomes a valid input.
-     */
-    public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
-
     public final String fullName;
 
-    /**
-     * Validates given name.
-     *
-     * @throws IllegalValueException
-     *             if given name string is invalid.
-     */
-    public Name(String name) throws IllegalValueException {
+    public Name(String name) {
         assert name != null;
-        String trimmedName = name.trim();
-        if (!isValidName(trimmedName)) {
-            throw new IllegalValueException(MESSAGE_NAME_CONSTRAINTS);
-        }
-        this.fullName = trimmedName;
+        this.fullName = name;
     }
 
-    /**
-     * Returns true if a given string is a valid task name.
-     */
-    public static boolean isValidName(String test) {
-        return test.matches(NAME_VALIDATION_REGEX);
-    }
 
     @Override
     public String toString() {

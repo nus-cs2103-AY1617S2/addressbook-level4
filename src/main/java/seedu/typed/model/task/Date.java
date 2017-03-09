@@ -1,15 +1,14 @@
 package seedu.typed.model.task;
-import seedu.typed.commons.exceptions.IllegalValueException;
+import java.util.Optional;
+
 
 /**
  * Represents a Task's date number in the task manager. Guarantees: immutable;
- * is valid as declared in {@link #isValidDate(String)}
+ * A task date is optional.
  */
 public class Date {
-    public static final String MESSAGE_DATE_CONSTRAINTS = "Task date should be in the format DD/MM/YYYY";
-    public static final String DATE_VALIDATION_REGEX = "\\d{2}\\/\\d{2}\\/\\d{4}";
 
-    public final String value;
+    public final Optional<String> value;
 
     /**
      * Validates given date.
@@ -17,25 +16,16 @@ public class Date {
      * @throws IllegalValueException
      *             if given date string is invalid.
      */
-    public Date(String date) throws IllegalValueException {
-        assert date != null;
-        String trimmedDate = date.trim();
-        if (!isValidDate(trimmedDate)) {
-            throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
-        }
-        this.value = trimmedDate;
+    public Date(Optional<String> date) {
+        this.value = date;
     }
-
     /**
-     * Returns if a given string is a valid task date.
+     * Returns the date if exists
+     * else returns an empty string
      */
-    public static boolean isValidDate(String test) {
-        return test.matches(DATE_VALIDATION_REGEX);
-    }
-
     @Override
     public String toString() {
-        return value;
+        return value.orElse("");
     }
 
     @Override
