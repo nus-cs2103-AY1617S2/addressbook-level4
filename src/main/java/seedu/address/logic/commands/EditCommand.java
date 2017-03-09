@@ -8,9 +8,9 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Content;
-import seedu.address.model.task.TaskDateTime;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskDateTime;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
@@ -21,14 +21,14 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
-            + "by the index number used in the last person listing. "
+            + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) CONTENT [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 pay bill";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in myPotato.";
 
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
@@ -113,7 +113,7 @@ public class EditCommand extends Command {
         public Optional<Content> getContent() {
             return content;
         }
-        
+
         public Optional<TaskDateTime> getDateTime() {
             return dateTime;
         }
