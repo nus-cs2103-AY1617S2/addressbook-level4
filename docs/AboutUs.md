@@ -22,6 +22,8 @@ Role: Developer <br>
 Responsibilities: 
 Development, Testing, Documentation
 
+#### [Reshmi Sinhahajari]
+
 # Contributors
 
 We welcome contributions. See [Contact Us](ContactUs.md) page for more info.
