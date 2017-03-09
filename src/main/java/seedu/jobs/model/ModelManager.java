@@ -10,8 +10,8 @@ import seedu.jobs.commons.core.UnmodifiableObservableList;
 import seedu.jobs.commons.events.model.AddressBookChangedEvent;
 import seedu.jobs.commons.util.CollectionUtil;
 import seedu.jobs.commons.util.StringUtil;
-import seedu.jobs.model.task.Person;
 import seedu.jobs.model.task.ReadOnlyPerson;
+import seedu.jobs.model.task.Task;
 import seedu.jobs.model.task.UniquePersonList;
 import seedu.jobs.model.task.UniquePersonList.PersonNotFoundException;
 
@@ -65,8 +65,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void addPerson(Person person) throws UniquePersonList.DuplicatePersonException {
-        addressBook.addPerson(person);
+    public synchronized void addPerson(Task task) throws UniquePersonList.DuplicatePersonException {
+        addressBook.addPerson(task);
         updateFilteredListToShowAll();
         indicateAddressBookChanged();
     }
@@ -81,7 +81,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Task List Accessors =============================================================
 
     @Override
     public UnmodifiableObservableList<ReadOnlyPerson> getFilteredPersonList() {

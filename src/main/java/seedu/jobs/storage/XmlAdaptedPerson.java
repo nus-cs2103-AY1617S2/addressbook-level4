@@ -11,12 +11,12 @@ import seedu.jobs.model.tag.UniqueTagList;
 import seedu.jobs.model.task.Address;
 import seedu.jobs.model.task.Email;
 import seedu.jobs.model.task.Name;
-import seedu.jobs.model.task.Person;
 import seedu.jobs.model.task.Phone;
 import seedu.jobs.model.task.ReadOnlyPerson;
+import seedu.jobs.model.task.Task;
 
 /**
- * JAXB-friendly version of the Person.
+ * JAXB-friendly version of the Task.
  */
 public class XmlAdaptedPerson {
 
@@ -40,7 +40,7 @@ public class XmlAdaptedPerson {
 
 
     /**
-     * Converts a given Person into this class for JAXB use.
+     * Converts a given Task into this class for JAXB use.
      *
      * @param source future changes to this will not affect the created XmlAdaptedPerson
      */
@@ -56,11 +56,11 @@ public class XmlAdaptedPerson {
     }
 
     /**
-     * Converts this jaxb-friendly adapted person object into the model's Person object.
+     * Converts this jaxb-friendly adapted person object into the model's Task object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person
      */
-    public Person toModelType() throws IllegalValueException {
+    public Task toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
@@ -70,6 +70,6 @@ public class XmlAdaptedPerson {
         final Email email = new Email(this.email);
         final Address address = new Address(this.address);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Person(name, phone, email, address, tags);
+        return new Task(name, phone, email, address, tags);
     }
 }

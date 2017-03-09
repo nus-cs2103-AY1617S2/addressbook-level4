@@ -3,7 +3,7 @@ package seedu.jobs.testutil;
 import seedu.jobs.commons.exceptions.IllegalValueException;
 import seedu.jobs.model.AddressBook;
 import seedu.jobs.model.tag.Tag;
-import seedu.jobs.model.task.Person;
+import seedu.jobs.model.task.Task;
 import seedu.jobs.model.task.UniquePersonList;
 
 /**
@@ -19,8 +19,8 @@ public class AddressBookBuilder {
         this.addressBook = addressBook;
     }
 
-    public AddressBookBuilder withPerson(Person person) throws UniquePersonList.DuplicatePersonException {
-        addressBook.addPerson(person);
+    public AddressBookBuilder withPerson(Task task) throws UniquePersonList.DuplicatePersonException {
+        addressBook.addPerson(task);
         return this;
     }
 

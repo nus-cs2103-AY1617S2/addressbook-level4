@@ -13,8 +13,8 @@ import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import seedu.jobs.TestApp;
-import seedu.jobs.model.task.Person;
 import seedu.jobs.model.task.ReadOnlyPerson;
+import seedu.jobs.model.task.Task;
 import seedu.jobs.testutil.TestUtil;
 
 /**
@@ -148,7 +148,7 @@ public class PersonListPanelHandle extends GuiHandle {
     }
 
     public PersonCardHandle getPersonCardHandle(int index) {
-        return getPersonCardHandle(new Person(getListView().getItems().get(index)));
+        return getPersonCardHandle(new Task(getListView().getItems().get(index)));
     }
 
     public PersonCardHandle getPersonCardHandle(ReadOnlyPerson person) {

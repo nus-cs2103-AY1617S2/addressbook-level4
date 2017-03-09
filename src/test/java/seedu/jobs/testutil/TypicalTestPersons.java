@@ -2,7 +2,7 @@ package seedu.jobs.testutil;
 
 import seedu.jobs.commons.exceptions.IllegalValueException;
 import seedu.jobs.model.AddressBook;
-import seedu.jobs.model.task.Person;
+import seedu.jobs.model.task.Task;
 import seedu.jobs.model.task.UniquePersonList;
 
 /**
@@ -46,7 +46,7 @@ public class TypicalTestPersons {
     public static void loadAddressBookWithSampleData(AddressBook ab) {
         for (TestPerson person : new TypicalTestPersons().getTypicalPersons()) {
             try {
-                ab.addPerson(new Person(person));
+                ab.addPerson(new Task(person));
             } catch (UniquePersonList.DuplicatePersonException e) {
                 assert false : "not possible";
             }

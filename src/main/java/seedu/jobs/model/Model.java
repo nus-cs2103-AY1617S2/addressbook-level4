@@ -3,8 +3,8 @@ package seedu.jobs.model;
 import java.util.Set;
 
 import seedu.jobs.commons.core.UnmodifiableObservableList;
-import seedu.jobs.model.task.Person;
 import seedu.jobs.model.task.ReadOnlyPerson;
+import seedu.jobs.model.task.Task;
 import seedu.jobs.model.task.UniquePersonList;
 import seedu.jobs.model.task.UniquePersonList.DuplicatePersonException;
 
@@ -22,7 +22,7 @@ public interface Model {
     void deletePerson(ReadOnlyPerson target) throws UniquePersonList.PersonNotFoundException;
 
     /** Adds the given person */
-    void addPerson(Person person) throws UniquePersonList.DuplicatePersonException;
+    void addPerson(Task task) throws UniquePersonList.DuplicatePersonException;
 
     /**
      * Updates the person located at {@code filteredPersonListIndex} with {@code editedPerson}.
