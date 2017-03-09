@@ -28,11 +28,11 @@ public class TaskCard extends UiPart<Region> {
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
-        name.setText(task.getName().name);
+        name.setText(task.getName().toString());
         id.setText(displayedIndex + ". ");
-        deadline.setText(task.getDeadline().date.toString());
-        description.setText(task.getDescription().description);
-        identificationnumber.setText(task.getID().value.toString());
+        deadline.setText(task.getDeadline().toString());
+        description.setText(task.getDescription().toString());
+        identificationnumber.setText(task.getID().toString());
         initTags(task);
     }
 
