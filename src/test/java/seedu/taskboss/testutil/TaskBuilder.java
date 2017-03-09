@@ -3,6 +3,7 @@ package seedu.taskboss.testutil;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.category.UniqueCategoryList;
+import seedu.taskboss.model.task.DateTime;
 import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
@@ -45,6 +46,16 @@ public class TaskBuilder {
 
     public TaskBuilder withPriorityLevel(String priorityLevel) throws IllegalValueException {
         this.task.setPriorityLevel(new PriorityLevel(priorityLevel));
+        return this;
+    }
+
+    public TaskBuilder withStartDateTime(String startDateTime) throws IllegalValueException {
+        this.task.setStartDateTime(new DateTime(startDateTime));
+        return this;
+    }
+
+    public TaskBuilder withEndDateTime(String endDateTime) throws IllegalValueException {
+        this.task.setEndDateTime(new DateTime(endDateTime));
         return this;
     }
 
