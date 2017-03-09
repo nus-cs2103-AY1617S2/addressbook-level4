@@ -15,6 +15,10 @@ public class Status {
         status = UNCOMPLETED;
     }
     
+    public Status(boolean status){
+        this.status = status;
+    }
+    
     public void setStatus(boolean status){
         this.status = status;
     }
