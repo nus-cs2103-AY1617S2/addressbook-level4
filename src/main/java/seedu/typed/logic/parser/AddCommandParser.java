@@ -5,6 +5,7 @@ import static seedu.typed.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.typed.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.commands.AddCommand;
@@ -24,8 +25,13 @@ public class AddCommandParser {
         ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_DATE, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         try {
-            return new AddCommand(argsTokenizer.getPreamble().get(), argsTokenizer.getValue(PREFIX_DATE).get(),
-                    ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)));
+        	if (argsTokenizer.getValue(PREFIX_DATE).equals(Optional.empty())) {
+        		return new AddCommand(argsTokenizer.getPreamble().get(), null,
+        				ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)));
+        	} else {
+        		return new AddCommand(argsTokenizer.getPreamble().get(), argsTokenizer.getValue(PREFIX_DATE).get(),
+        				ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)));
+        	}
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         } catch (IllegalValueException ive) {
