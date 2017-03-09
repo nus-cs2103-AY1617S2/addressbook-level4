@@ -36,8 +36,8 @@ public class DeadlineParser {
 
     /** Validate given string with all sets of date formats. */
     public static boolean isParsable(String dateString) {
-        return isParsableDate(dateString) 
-                || isParsableTime(dateString) 
+        return isParsableDate(dateString)
+                || isParsableTime(dateString)
                 || isParsableDateTime(dateString);
     }
 
