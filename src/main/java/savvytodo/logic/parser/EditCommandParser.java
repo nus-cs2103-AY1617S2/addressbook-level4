@@ -45,7 +45,8 @@ public class EditCommandParser {
             editTaskDescriptor.setPhone(ParserUtil.parsePhone(argsTokenizer.getValue(PREFIX_PHONE)));
             editTaskDescriptor.setEmail(ParserUtil.parseEmail(argsTokenizer.getValue(PREFIX_EMAIL)));
             editTaskDescriptor.setAddress(ParserUtil.parseAddress(argsTokenizer.getValue(PREFIX_ADDRESS)));
-            editTaskDescriptor.setCategories(parseCategoriesForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_CATEGORY))));
+            editTaskDescriptor.setCategories(
+                    parseCategoriesForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_CATEGORY))));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
@@ -58,17 +59,21 @@ public class EditCommandParser {
     }
 
     /**
-     * Parses {@code Collection<String> categories} into an {@code Optional<UniqueCategoryList>} if {@code categories} is non-empty.
-     * If {@code categories} contain only one element which is an empty string, it will be parsed into a
-     * {@code Optional<UniqueCategoryList>} containing zero categories.
+     * Parses {@code Collection<String> categories} into an
+     * {@code Optional<UniqueCategoryList>} if {@code categories} is non-empty.
+     * If {@code categories} contain only one element which is an empty string,
+     * it will be parsed into a {@code Optional<UniqueCategoryList>} containing
+     * zero categories.
      */
-    private Optional<UniqueCategoryList> parseCategoriesForEdit(Collection<String> categories) throws IllegalValueException {
+    private Optional<UniqueCategoryList> parseCategoriesForEdit(Collection<String> categories)
+            throws IllegalValueException {
         assert categories != null;
 
         if (categories.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> categorySet = categories.size() == 1 && categories.contains("") ? Collections.emptySet() : categories;
+        Collection<String> categorySet = categories.size() == 1 && categories.contains("") ? Collections.emptySet()
+                : categories;
         return Optional.of(ParserUtil.parseCategories(categorySet));
     }
 

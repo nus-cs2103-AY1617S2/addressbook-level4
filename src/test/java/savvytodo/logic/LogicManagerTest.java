@@ -433,13 +433,9 @@ public class LogicManagerTest {
          * @param seed used to generate the task data field values
          */
         Task generateTask(int seed) throws Exception {
-            return new Task(
-                    new Name("Task " + seed),
-                    new Phone("" + Math.abs(seed)),
-                    new Email(seed + "@email"),
-                    new Address("House of " + seed),
-                    new UniqueCategoryList(new Category("category" + Math.abs(seed)), new Category("category" + Math.abs(seed + 1)))
-            );
+            return new Task(new Name("Task " + seed), new Phone("" + Math.abs(seed)), new Email(seed + "@email"),
+                    new Address("House of " + seed), new UniqueCategoryList(new Category("category" + Math.abs(seed)),
+                            new Category("category" + Math.abs(seed + 1))));
         }
 
         /** Generates the correct add command based on the task given */

@@ -74,8 +74,6 @@ public class TaskManager implements ReadOnlyTaskManager {
         syncMasterCategoryListWith(tasks);
     }
 
-//// task-level operations
-
     /**
      * Adds a task to the address book.
      * Also checks the new task's categories and updates {@link #categories} with any new categoies found,
@@ -87,6 +85,12 @@ public class TaskManager implements ReadOnlyTaskManager {
         syncMasterCategoryListWith(p);
         tasks.add(p);
     }
+
+    public void addCategory(Category t) throws UniqueCategoryList.DuplicateCategoryException {
+        categories.add(t);
+    }
+
+////task-level operations
 
     /**
      * Updates the task in the list at position {@code index} with {@code editedReadOnlyTask}.
@@ -108,6 +112,8 @@ public class TaskManager implements ReadOnlyTaskManager {
         // in the task list.
         tasks.updateTask(index, editedTask);
     }
+
+////category-level operations
 
     /**
      * Ensures that every category in this task:
@@ -145,12 +151,6 @@ public class TaskManager implements ReadOnlyTaskManager {
         } else {
             throw new UniqueTaskList.TaskNotFoundException();
         }
-    }
-
-//// category-level operations
-
-    public void addCategory(Category t) throws UniqueCategoryList.DuplicateCategoryException {
-        categories.add(t);
     }
 
 //// util methods
