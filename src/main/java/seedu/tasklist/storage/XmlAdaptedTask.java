@@ -10,7 +10,9 @@ import seedu.tasklist.model.tag.Tag;
 import seedu.tasklist.model.tag.UniqueTagList;
 import seedu.tasklist.model.task.Comment;
 import seedu.tasklist.model.task.Name;
+import seedu.tasklist.model.task.Priority;
 import seedu.tasklist.model.task.ReadOnlyTask;
+import seedu.tasklist.model.task.Status;
 import seedu.tasklist.model.task.Task;
 
 
@@ -23,7 +25,11 @@ public class XmlAdaptedTask {
     private String name;
     @XmlElement(required = true)
     private String comment;
-
+    @XmlElement(required = false)
+    private String priority;
+    @XmlElement(required = false)
+    private boolean status;
+    
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
@@ -60,7 +66,9 @@ public class XmlAdaptedTask {
         }
         final Name name = new Name(this.name);
         final Comment comment = new Comment(this.comment);
+        final Priority priority = new Priority(this.priority);
+        final Status status = new Status(this.status);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(name, comment, tags);
+        return new Task(name, comment, priority, status, tags);
     }
 }
