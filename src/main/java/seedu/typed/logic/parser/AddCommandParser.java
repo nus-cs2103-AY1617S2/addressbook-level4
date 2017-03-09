@@ -25,13 +25,13 @@ public class AddCommandParser {
         ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_DATE, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         try {
-        	if (argsTokenizer.getValue(PREFIX_DATE).equals(Optional.empty())) {
-        		return new AddCommand(argsTokenizer.getPreamble().get(), null,
-        				ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)));
-        	} else {
-        		return new AddCommand(argsTokenizer.getPreamble().get(), argsTokenizer.getValue(PREFIX_DATE).get(),
-        				ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)));
-        	}
+            if (argsTokenizer.getValue(PREFIX_DATE).equals(Optional.empty())) {
+                return new AddCommand(argsTokenizer.getPreamble().get(), null,
+                    ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)));
+            } else {
+                return new AddCommand(argsTokenizer.getPreamble().get(), argsTokenizer.getValue(PREFIX_DATE).get(),
+                    ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)));
+            }
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         } catch (IllegalValueException ive) {
