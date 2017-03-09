@@ -100,19 +100,19 @@ Two of those classes play important roles at the architecture level.
 
 The rest of the App consists of four components.
 
-* [**`UI`**](#ui-component) : The UI of the App.
-* [**`Logic`**](#logic-component) : The command executor.
-* [**`Model`**](#model-component) : Holds the data of the App in-memory.
-* [**`Storage`**](#storage-component) : Reads data from, and writes data to, the hard disk.
+* [**`UI`**](#ui-component) : The UI is the interaction between the user and the application.
+* [**`Logic`**](#logic-component) : The Logic contains the command executor.
+* [**`Model`**](#model-component) : The model Holds the data of the App in-memory.
+* [**`Storage`**](#storage-component) : The storage Reads data from, and writes data to, the hard disk.
 
 Each of the four components
 
 * Defines its _API_ in an `interface` with the same name as the Component.
 * Exposes its functionality using a `{Component Name}Manager` class.
 
-For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java`
+For example, the `Logic` component (see the class diagram given below) defines its API in the `Logic.java`
 interface and exposes its functionality using the `LogicManager.java` class.<br>
-see Figure 2.1.2 : Class Diagram of the Logic Component <br>
+see [Figure 2.1.2](#logic) : Class Diagram of the Logic Component <br>
 
 #### Events-Driven nature of the design
 
