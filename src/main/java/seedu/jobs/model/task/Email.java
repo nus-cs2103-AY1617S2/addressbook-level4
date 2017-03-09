@@ -14,6 +14,12 @@ public class Email {
     public static final String EMAIL_VALIDATION_REGEX = "[\\w\\.]+@[\\w\\.]+";
 
     public final String value;
+    public boolean isTask = false;
+    
+    public Email(boolean flag) {
+        this.value = "";
+        this.isTask = flag;
+    }
 
     /**
      * Validates given email.
@@ -21,12 +27,16 @@ public class Email {
      * @throws IllegalValueException if given email address string is invalid.
      */
     public Email(String email) throws IllegalValueException {
-        assert email != null;
-        String trimmedEmail = email.trim();
-        if (!isValidEmail(trimmedEmail)) {
-            throw new IllegalValueException(MESSAGE_EMAIL_CONSTRAINTS);
+        if (!isTask) {
+            assert email != null;
+            String trimmedEmail = email.trim();
+            if (!isValidEmail(trimmedEmail)) {
+                throw new IllegalValueException(MESSAGE_EMAIL_CONSTRAINTS);
+            }
+            this.value = trimmedEmail;
+        } else {
+            this.value = "";
         }
-        this.value = trimmedEmail;
     }
 
     /**

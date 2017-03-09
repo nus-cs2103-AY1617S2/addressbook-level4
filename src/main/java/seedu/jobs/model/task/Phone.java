@@ -12,26 +12,35 @@ public class Phone {
     public static final String PHONE_VALIDATION_REGEX = "\\d+";
 
     public final String value;
+    public boolean isTask = false;
 
+    public Phone(boolean flag) {
+        this.value = ""; 
+        this.isTask = flag;
+    }
     /**
      * Validates given phone number.
      *
      * @throws IllegalValueException if given phone string is invalid.
      */
     public Phone(String phone) throws IllegalValueException {
-        assert phone != null;
-        String trimmedPhone = phone.trim();
-        if (!isValidPhone(trimmedPhone)) {
-            throw new IllegalValueException(MESSAGE_PHONE_CONSTRAINTS);
+        if (!isTask) {
+            assert phone != null;
+            String trimmedPhone = phone.trim();
+            if (!isValidPhone(trimmedPhone)) {
+                throw new IllegalValueException(MESSAGE_PHONE_CONSTRAINTS);
+            }
+            this.value = trimmedPhone;
+        } else {
+            this.value = "";
         }
-        this.value = trimmedPhone;
     }
 
     /**
      * Returns true if a given string is a valid person phone number.
      */
     public static boolean isValidPhone(String test) {
-        return test.matches(PHONE_VALIDATION_REGEX);
+            return test.matches(PHONE_VALIDATION_REGEX);
     }
 
     @Override

@@ -34,10 +34,10 @@ public class Task implements ReadOnlyTask {
     public Task(Name name) throws IllegalValueException{
     	assert !CollectionUtil.isAnyNull(name);
     	this.name = name;
-    	this.phone = new Phone("42");
-    	this.email = new Email("thisIsForTest@gmail.com");
+    	this.phone = new Phone(true);
+    	this.email = new Email(true);
     	this.description = new Description("Just a test to show that our group can at least pass the first milestone");
-    	this.tags = new UniqueTagList("123456789");
+    	this.tags = new UniqueTagList("pending");
     }
     /**
      * Creates a copy of the given ReadOnlyTask.
