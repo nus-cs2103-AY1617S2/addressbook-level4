@@ -8,11 +8,6 @@ import org.junit.Test;
 import guitests.guihandles.TaskCardHandle;
 import seedu.onetwodo.commons.core.Messages;
 import seedu.onetwodo.logic.commands.EditCommand;
-import seedu.onetwodo.model.person.Date;
-import seedu.onetwodo.model.person.Description;
-import seedu.onetwodo.model.person.Name;
-import seedu.onetwodo.model.person.Time;
-import seedu.onetwodo.model.tag.Tag;
 import seedu.onetwodo.testutil.TaskBuilder;
 import seedu.onetwodo.testutil.TestTask;
 

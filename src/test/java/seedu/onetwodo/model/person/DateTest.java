@@ -1,6 +1,5 @@
 package seedu.onetwodo.model.person;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -9,9 +8,7 @@ public class DateTest {
 
     @Test
     public void isValidDate() {
-        
         assertTrue(Date.isValidDate(""));
-        
         /*// blank email
         assertFalse(Date.isValidDate("")); // empty string
         assertFalse(Date.isValidDate(" ")); // spaces only
