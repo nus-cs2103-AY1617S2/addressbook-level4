@@ -6,7 +6,7 @@ import seedu.toluist.commons.util.FxViewUtil;
 import seedu.toluist.model.Task;
 
 /**
- * Created by louis on 21/2/17.
+ * View to display task row
  */
 public class TaskUiView extends UiView {
 

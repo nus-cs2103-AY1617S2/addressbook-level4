@@ -47,6 +47,19 @@ public class CollectionUtil {
     }
 
     /**
+
+     * Returns true if the two collections holds exactly the same set of items
+     */
+    public static <T> boolean elementsAreSimilar(Collection<T> items1, Collection<T> items2) {
+        for (T item1 : items1) {
+            if (!items2.contains(item1)) {
+                return false;
+            }
+        }
+        return items1.size() == items2.size();
+    }
+
+    /**
      * Returns true if any of the elements are common between 2 collections
      */
     public static <T> boolean areIntersecting(Collection<T> items1, Collection<T> items2) {

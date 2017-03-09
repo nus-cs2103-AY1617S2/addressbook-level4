@@ -17,7 +17,7 @@ public class ViewAliasController extends Controller {
     private static final String COMMAND_WORD = "viewalias";
     private static final String ALIAS_COMMAND_SEPARATOR = ":";
     private static final String NEW_LINE = "\n";
-    private static final String NO_ALIAS_MESSAGE = "No aliases found";
+    public static final String NO_ALIAS_MESSAGE = "No aliases found";
 
     private final CommandAliasConfig aliasConfig = CommandAliasConfig.getInstance();
 

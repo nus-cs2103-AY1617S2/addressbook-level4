@@ -6,6 +6,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import seedu.toluist.commons.util.FxViewUtil;
 import seedu.toluist.model.Task;
+import seedu.toluist.ui.UiStore;
 
 /**
  * TaskListUiView to display the list of tasks
@@ -17,16 +18,13 @@ public class TaskListUiView extends UiView {
     @FXML
     private ListView<Task> taskListView;
 
-    private ObservableList<Task> taskList;
-
-
-    public TaskListUiView (ObservableList<Task> taskList) {
+    public TaskListUiView () {
         super(FXML);
-        this.taskList = taskList;
     }
 
     @Override
     protected void viewDidMount () {
+        ObservableList<Task> taskList = UiStore.getInstance().getUiTasks();
         setConnections(taskList);
         FxViewUtil.makeFullWidth(getRoot());
     }
@@ -46,7 +44,7 @@ public class TaskListUiView extends UiView {
                 setGraphic(null);
                 setText(null);
             } else {
-                final UiView taskRow = new TaskUiView(task, getIndex() + 1);
+                TaskUiView taskRow = new TaskUiView(task, getIndex() + 1);
                 setGraphic(taskRow.getRoot());
                 taskRow.render();
             }

@@ -11,12 +11,11 @@ import seedu.toluist.ui.UiPart;
 abstract class UiView extends UiPart<Pane> {
     private Pane parent;
 
-    public UiView (String fxmlFileName) {
+    public UiView(String fxmlFileName) {
         super(fxmlFileName);
     }
 
     public void render() {
-        reset();
         viewDidMount();
     }
 
@@ -24,8 +23,6 @@ abstract class UiView extends UiPart<Pane> {
         if (parent == newParent) {
             return;
         }
-
-        reset();
 
         parent = newParent;
         newParent.getChildren().add(getRoot());
@@ -36,11 +33,4 @@ abstract class UiView extends UiPart<Pane> {
     }
 
     protected void viewDidMount() {} // do nothing by default
-
-    private void reset() {
-        if (parent != null) {
-            parent.getChildren().remove(getRoot());
-            parent.getChildren().add(getRoot());
-        }
-    }
 }
