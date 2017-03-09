@@ -16,7 +16,7 @@ public class TodoList {
 
     private static Storage storage = JsonStorage.getInstance();
 
-    private static TodoList currentTodoList = new TodoList();
+    private static TodoList currentTodoList;
 
     private ArrayList<Task> allTasks = new ArrayList<>();
 
@@ -39,16 +39,12 @@ public class TodoList {
     }
 
     public static TodoList load() {
-        Optional<TodoList> todoListOptional = storage.load();
-
-        // Save data to file again if data is not found on disk
-        if (!todoListOptional.isPresent()) {
-            currentTodoList.save();
-        } else {
-            currentTodoList = todoListOptional.get();
+        // Initialize currentTodoList if not done
+        if (currentTodoList == null) {
+            currentTodoList = storage.load().orElse(new TodoList());
         }
 
-        return storage.load().orElse(currentTodoList);
+        return currentTodoList;
     }
 
     public boolean save() {
@@ -67,12 +63,6 @@ public class TodoList {
 
     public void remove(Task task) {
         allTasks.remove(task);
-    }
-
-    public void update(int index, String description) {
-        if (index >= 0 && index < allTasks.size()) {
-            allTasks.get(index).description = description;
-        }
     }
 
     /**

@@ -96,8 +96,7 @@ public class TaskController extends Controller {
     }
 
     private CommandResult update(TodoList todoList, Task task, String description) {
-        int taskIndex = todoList.getTasks().indexOf(task);
-        todoList.update(taskIndex, description);
+        task.description = description;
         return new CommandResult(RESULT_MESSAGE_UPDATE_TASK);
     }
 
