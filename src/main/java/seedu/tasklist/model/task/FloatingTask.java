@@ -99,7 +99,12 @@ public class FloatingTask extends Task implements ReadOnlyFloatingTask {
         this.setStatus(replacement.getStatus());
         this.setTags(replacement.getTags());
     }
-
-
+    
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ReadOnlyFloatingTask // instanceof handles nulls
+                && this.isSameStateAs((ReadOnlyFloatingTask) other));
+    }
 
 }
