@@ -1,12 +1,12 @@
 package seedu.address.testutil;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.EndTime;
 import seedu.address.model.task.StartTime;
 import seedu.address.model.task.Title;
 import seedu.address.model.task.Venue;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
 
 /**
  *
@@ -31,9 +31,9 @@ public class TaskBuilder {
         return this;
     }
 
-    public TaskBuilder withTags(String ... tags) throws IllegalValueException {
+    public TaskBuilder withTags(String... tags) throws IllegalValueException {
         task.setTags(new UniqueTagList());
-        for (String tag: tags) {
+        for (String tag : tags) {
             task.getTags().add(new Tag(tag));
         }
         return this;

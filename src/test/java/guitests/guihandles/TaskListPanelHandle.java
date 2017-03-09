@@ -1,6 +1,5 @@
 package guitests.guihandles;
 
-
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
@@ -13,8 +12,8 @@ import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import seedu.address.TestApp;
-import seedu.address.model.task.Task;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Task;
 import seedu.address.testutil.TestUtil;
 
 /**
@@ -41,17 +40,24 @@ public class TaskListPanelHandle extends GuiHandle {
     }
 
     /**
-     * Returns true if the list is showing the task details correctly and in correct order.
-     * @param tasks A list of task in the correct order.
+     * Returns true if the list is showing the task details correctly and in
+     * correct order.
+     *
+     * @param tasks
+     *            A list of task in the correct order.
      */
     public boolean isListMatching(ReadOnlyTask... tasks) {
         return this.isListMatching(0, tasks);
     }
 
     /**
-     * Returns true if the list is showing the task details correctly and in correct order.
-     * @param startPosition The starting position of the sub list.
-     * @param tasks A list of task in the correct order.
+     * Returns true if the list is showing the task details correctly and in
+     * correct order.
+     *
+     * @param startPosition
+     *            The starting position of the sub list.
+     * @param tasks
+     *            A list of task in the correct order.
      */
     public boolean isListMatching(int startPosition, ReadOnlyTask... tasks) throws IllegalArgumentException {
         if (tasks.length + startPosition != getListView().getItems().size()) {
@@ -79,12 +85,14 @@ public class TaskListPanelHandle extends GuiHandle {
     }
 
     /**
-     * Returns true if the {@code tasks} appear as the sub list (in that order) at position {@code startPosition}.
+     * Returns true if the {@code tasks} appear as the sub list (in that order)
+     * at position {@code startPosition}.
      */
     public boolean containsInOrder(int startPosition, ReadOnlyTask... tasks) {
         List<ReadOnlyTask> tasksInList = getListView().getItems();
 
-        // Return false if the list in panel is too short to contain the given list
+        // Return false if the list in panel is too short to contain the given
+        // list
         if (startPosition + tasks.length > tasksInList.size()) {
             return false;
         }
@@ -100,10 +108,10 @@ public class TaskListPanelHandle extends GuiHandle {
     }
 
     public TaskCardHandle navigateToTask(String title) {
-        guiRobot.sleep(500); //Allow a bit of time for the list to be updated
+        guiRobot.sleep(500); // Allow a bit of time for the list to be updated
         final Optional<ReadOnlyTask> task = getListView().getItems().stream()
-                                                    .filter(p -> p.getTitle().title.equals(title))
-                                                    .findAny();
+                .filter(p -> p.getTitle().title.equals(title))
+                .findAny();
         if (!task.isPresent()) {
             throw new IllegalStateException("Title not found: " + title);
         }
@@ -126,9 +134,9 @@ public class TaskListPanelHandle extends GuiHandle {
         return getTaskCardHandle(task);
     }
 
-
     /**
-     * Returns the position of the task given, {@code NOT_FOUND} if not found in the list.
+     * Returns the position of the task given, {@code NOT_FOUND} if not found in
+     * the list.
      */
     public int getTaskIndex(ReadOnlyTask targetTask) {
         List<ReadOnlyTask> tasksInList = getListView().getItems();
