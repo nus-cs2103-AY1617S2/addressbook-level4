@@ -14,6 +14,11 @@ We are a team based in the [School of Computing, National University of Singapor
  Role: tbd <br>
  Responsibilities: tbd
 
+#### [Evan Yeung](http://github.com/evanyeung)
+<img src="images/evanyeung.jpg" width="150"><br>
+ Role: tbd <br>
+ Responsibilities: tbd
+
  -----
 
 # Contributors
