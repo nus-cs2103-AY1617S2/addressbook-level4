@@ -8,8 +8,10 @@ import seedu.taskmanager.commons.exceptions.IllegalValueException;
  */
 public class StartTime {
 
-    public static final String MESSAGE_STARTTIME_CONSTRAINTS = "Start time for task should only contain numbers";
-    public static final String STARTTIME_VALIDATION_REGEX = "\\d+";
+    public static final String MESSAGE_STARTTIME_CONSTRAINTS = "Start time for task should only contain contain a day (e.g. thursday) or a date with the format: DD/MM/YY (e.g. 03/03/17) or time (e.g. 1200)";
+    public static final String STARTTIME_VALIDATION_REGEX1 = "\\d+";
+    public static final String STARTTIME_VALIDATION_REGEX2 = "[a-zA-Z]+";
+    public static final String STARTTIME_VALIDATION_REGEX3 = "\\d{2}/\\d{2}/\\d{2}";
 
     public final String value;
 
@@ -31,7 +33,7 @@ public class StartTime {
      * Returns true if a given string is a valid Task start time.
      */
     public static boolean isValidStartTime(String test) {
-        return test.matches(STARTTIME_VALIDATION_REGEX);
+        return test.matches(STARTTIME_VALIDATION_REGEX1) || test.matches(STARTTIME_VALIDATION_REGEX1) || test.matches(STARTTIME_VALIDATION_REGEX3);
     }
 
     @Override
