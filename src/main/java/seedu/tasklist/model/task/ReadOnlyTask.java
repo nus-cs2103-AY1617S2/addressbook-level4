@@ -10,6 +10,8 @@ public interface ReadOnlyTask {
 
     Name getName();
     Comment getComment();
+    Priority getPriority();
+    Status getStatus();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -39,5 +41,6 @@ public interface ReadOnlyTask {
         getTags().forEach(builder::append);
         return builder.toString();
     }
+
 
 }

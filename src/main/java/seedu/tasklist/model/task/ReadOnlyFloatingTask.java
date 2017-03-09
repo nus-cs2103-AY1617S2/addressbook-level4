@@ -26,7 +26,9 @@ public interface ReadOnlyFloatingTask extends ReadOnlyTask {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                 && other.getName().equals(this.getName()) // state checks here onwards
-                && other.getComment().equals(this.getComment()));
+                && other.getComment().equals(this.getComment()))
+                && other.getPriority().equals(this.getPriority())
+                && other.getStatus().equals(this.getStatus());
     }
 
     /**
@@ -37,6 +39,10 @@ public interface ReadOnlyFloatingTask extends ReadOnlyTask {
         builder.append(getName())
                 .append(" Comment: ")
                 .append(getComment())
+                .append("Priority: ")
+                .append(getPriority())
+                .append("Status: ")
+                .append(getStatus())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
