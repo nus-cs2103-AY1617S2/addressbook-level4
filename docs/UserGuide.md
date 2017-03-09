@@ -25,8 +25,8 @@ Before you setup *Typed*, you should have Java version `1.8.0_60` or later insta
 *Typed* is always happy to see you again. <br>
 
 1. Forget the tutorial, *Typed* is ready for a productive day! You will be greeted with a view of today's focus. This view includes events happening today, overdue tasks and tasks due today.
-2. Let *Typed* know when you are ready to start work by pressing <kbd>Enter</kbd>.
     <img src="images/TodayScreen.png" width="600"> <br>
+2. Let *Typed* know when you are ready to start work by pressing <kbd>Enter</kbd>.
 3. This will bring you to the default view.
     <img src="images/DefaultUi.png" width="600"> <br>
 
