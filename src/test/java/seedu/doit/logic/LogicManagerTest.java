@@ -186,14 +186,14 @@ public class LogicManagerTest {
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid,address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 valid@email.butNoPrefix a/valid, address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
+        assertCommandFailure("add Valid Name 5 e/valid,deadline.butNoPriorityPrefix d/valid,description", expectedMessage);
+        assertCommandFailure("add Valid Name p/4 valid,deadline.butNoPrefix d/valid, description", expectedMessage);
+        assertCommandFailure("add Valid Name p/2 e/valid,deadline.butNoDescriptionPrefix valid, description", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidTaskData() {
-        assertCommandFailure("add []\\[;] p/12 e/15-3-2020 d/valid t/address",
+        assertCommandFailure("add []\\[;] p/12 e/15-3-2020 d/valid t/description",
                 Name.MESSAGE_NAME_CONSTRAINTS);
     }
 
@@ -406,13 +406,13 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
-            Priority privatePhone = new Priority("111111");
-            Deadline email = new Deadline("adam@gmail.com");
-            Description privateAddress = new Description("111, alpha street");
+            Priority privatePriority = new Priority("111111");
+            Deadline deadline = new Deadline("adam@gmail.com");
+            Description description = new Description("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, privatePhone, email, privateAddress, tags);
+            return new Task(name, privatePriority, deadline, description, tags);
         }
 
         /**
@@ -455,18 +455,18 @@ public class LogicManagerTest {
          * Generates an TaskManager with auto-generated tasks.
          */
         TaskManager generateTaskManager(int numGenerated) throws Exception {
-            TaskManager addressBook = new TaskManager();
-            addToTaskManager(addressBook, numGenerated);
-            return addressBook;
+            TaskManager taskManager = new TaskManager();
+            addToTaskManager(taskManager, numGenerated);
+            return taskManager;
         }
 
         /**
          * Generates an TaskManager based on the list of Tasks given.
          */
         TaskManager generateTaskManager(List<Task> tasks) throws Exception {
-            TaskManager addressBook = new TaskManager();
-            addToTaskManager(addressBook, tasks);
-            return addressBook;
+            TaskManager taskManager = new TaskManager();
+            addToTaskManager(taskManager, tasks);
+            return taskManager;
         }
 
         /**
@@ -480,9 +480,9 @@ public class LogicManagerTest {
         /**
          * Adds the given list of Tasks to the given TaskManager
          */
-        void addToTaskManager(TaskManager addressBook, List<Task> tasksToAdd) throws Exception {
+        void addToTaskManager(TaskManager taskManager, List<Task> tasksToAdd) throws Exception {
             for (Task p: tasksToAdd) {
-                addressBook.addTask(p);
+                taskManager.addTask(p);
             }
         }
 
@@ -525,7 +525,7 @@ public class LogicManagerTest {
             return new Task(
                     new Name(name),
                     new Priority("1"),
-                    new Deadline("1@email"),
+                    new Deadline("today"),
                     new Description("House of 1"),
                     new UniqueTagList(new Tag("tag"))
             );
