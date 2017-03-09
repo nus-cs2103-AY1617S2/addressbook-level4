@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import seedu.address.model.person.ReadOnlyTask;
+import seedu.watodo.model.task.ReadOnlyFloatingTask;
 
 public class SelectCommandTest extends AddressBookGuiTest {
 
@@ -47,7 +47,7 @@ public class SelectCommandTest extends AddressBookGuiTest {
 
     private void assertTaskSelected(int index) {
         assertEquals(taskListPanel.getSelectedTasks().size(), 1);
-        ReadOnlyTask selectedTask = taskListPanel.getSelectedTasks().get(0);
+        ReadOnlyFloatingTask selectedTask = taskListPanel.getSelectedTasks().get(0);
         assertEquals(taskListPanel.getTask(index - 1), selectedTask);
         //TODO: confirm the correct page is loaded in the Browser Panel
     }

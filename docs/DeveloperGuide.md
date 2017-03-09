@@ -346,7 +346,6 @@ Priorities: Highest (must have) - `* * * * *` to Lowest (unlikely to have) - `*`
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-
 `* * * * *` | user | add a task by specifying task description only | record tasks that need to be done some day
 `* * * * *` | user | add a task with a specific deadline | know when the task is due
 `* * * * *` | user | add an event with a start and end time | record tasks that are events
@@ -355,7 +354,6 @@ Priority | As a ... | I want to ... | So that I can...
 `* * * * *` | user | edit the task descriptions | make corrections or updates to the task description
 `* * * * *` | user | delete a task | get rid of tasks that I no longer care to track
 `* * * * *` | user with many tasks | search keyword(s) | find all the tasks that are similar or relevant to the keyword
-
 `* * * *` | user | mark a task as done | remove the task from my to-do list
 `* * * *` | user | unmark tasks previously marked as done | edit the task status
 `* * * *` | user | undo my most recent action | reverse any mistake made in the previous step
@@ -363,27 +361,24 @@ Priority | As a ... | I want to ... | So that I can...
 `* * * *` | advanced user | specify which folder I want to save the files in | have easy access to the tasks just by sharing the files
 `* * * *` | new user | see usage instructions | refer to instructions when I forget how to use the programme
 `* * * *` | new user | view more information about a particular command | so that I can learn how to use various commands
-
 `* * *` | user | set tasks to repeat over a specified interval | manage recurring tasks
 `* * *` | user | add additional details or subtasks to a task | record tasks in detail
 `* * *` | user | be notified if the time period an event I am adding clashes or overlaps with another event already added | reschedule the event to another free time slot if needed
 `* * *` | user | assign tags to the tasks | organise them properly
 `* * *` | user | indicate the priority of a task | see which tasks are more urgent or important
 `* * *` | user | list the deadline tasks by date | know which are the most urgent.
-`* * *` | user | list tasks by tags | see what are the tasks under a specific category. 
-`* * *` | user | list tasks by priority | know which are the most urgent tasks. 
+`* * *` | user | list tasks by tags | see what are the tasks under a specific category.
+`* * *` | user | list tasks by priority | know which are the most urgent tasks.
 `* * *` | user | view the list of tasks that I have completed | unmark completed tasks if necessary.
-
 `* *` | user | search better with auto complete | search better.
 `* *` | user | enable auto spell checker | correct any spelling mistakes I might make when typing commands.
 `* *` | advanced user | add default keywords to my interface | customize it according to the vocabulary that I am most comfortable with.
-`* *` | advanced user | be able to use shortcut keys to execute commands that I commonly use (Eg. Ctrl+z for undoing) | do things faster and more efficiently. 
+`* *` | advanced user | be able to use shortcut keys to execute commands that I commonly use (Eg. Ctrl+z for undoing) | do things faster and more efficiently.
 `* *` | advanced user | change the layout of my UI (eg. background colour, font size) | customize it according to my preference.
 `* *` | user | receive flavour text when I mark a task as complete such as ¡°Good job!¡± And ¡°Another one off the list!¡±  | give myself more motivation to complete my tasks.
 `* *` | user | receive sound effects when I mark a task as completed | give myself more motivation to complete my tasks.
 `* *` | advanced user | view a log of my history | track all the commands I have entered since the start of time.
 `* *` | user | export the tasks to a calendar file | use with other apps.
-
 `*` | user | add location details to events | I know where the event is taking place
 `*` | user | colour code my tasks | I can differentiate tasks better
 `*` | user | search for empty time periods | schedule my tasks with minimal overlap or clashes in deadlines.
@@ -394,9 +389,9 @@ Priority | As a ... | I want to ... | So that I can...
 `*` | user | expand or collapse the additional details or subtasks of a task | prevent the task list from becoming very cluttered
 `*` | user | sync my task list with my other devices | access my task list easily.
 `*` | user | sync the tasks with my email | create tasks automatically from incoming emails.
-`*` | user | set up email notifications for specific tasks | get email reminders for when a task is due soon. 
+`*` | user | set up email notifications for specific tasks | get email reminders for when a task is due soon.
 `*` | user who collaborates with many people | share my task list with other people | view and work on the tasks as a group.
-`*` | user | share my completed task on social media | let my friends know if I have accomplished something I'm proud of. 
+`*` | user | share my completed task on social media | let my friends know if I have accomplished something I'm proud of.
 
 
 ## Appendix B : Use Cases
@@ -468,13 +463,13 @@ Use case ends.
 > 3a1. TaskList shows an error message and prompts user to edit time period of event
 > 3a2. User inputs task details <br>
 Steps 3a1-3a2 are repeated until the time period of event entered is valid
-  Use case resumes at step 4	
+  Use case resumes at step 4
 
 #### Use case: View by deadlines
 
 **MSS**
 
-1. User selects time filter to filter the deadlines of the task list by 
+1. User selects time filter to filter the deadlines of the task list by
 2. TaskList displays tasks that are due within the timeline specified by the filter <br>
   Use case ends.
 
@@ -537,21 +532,21 @@ Steps 5a1-5a2 are repeated until the keyword entered is valid
 Pros:
 
 * Supports many variations of keywords for time and dates (eg. next week, 3 days, everyday etc.)
-* Shortcut keys such as for adding and finding allow use of mouse clicks to be minimized 
+* Shortcut keys such as for adding and finding allow use of mouse clicks to be minimized
 * Auto-complete when adding tags helps to increase efficiency of usage
-* Can add a variety of tags (category, priority) to tasks to organize them better 
-* Powerful search feature that can find tasks given minimal keywords, and also find tasks by their deadlines 
+* Can add a variety of tags (category, priority) to tasks to organize them better
+* Powerful search feature that can find tasks given minimal keywords, and also find tasks by their deadlines
 * Good visual feedback through colour coding for tasks with different priorities and categories
-* Karma trend and goals enable user to track productivity and stay motivated to complete tasks on time 
+* Karma trend and goals enable user to track productivity and stay motivated to complete tasks on time
 
 Cons:
 
 * Requires Internet connection and web browser to use
-* Requires logging in to account which means there is an extra step to launch the software 
+* Requires logging in to account which means there is an extra step to launch the software
 * Certain features (eg. sync with calendar, customize theme) are only available with paid subscription
 * Most other functions are not command line interface friendly (Eg. edit, mark as complete require mouse clicks)
 * No help feature to guide new users to keywords like date and time. Need to refer to the user guide.
-* If user backspaces after typing a keyword but retypes it again for the same task, the date will not be registered anymore, which gives little allowance if users type wrongly. 
+* If user backspaces after typing a keyword but retypes it again for the same task, the date will not be registered anymore, which gives little allowance if users type wrongly.
 
 **HiTask**
 
@@ -613,7 +608,7 @@ Pros:
 * Able to sync due dates with any calendar that supports the iCalendar format
 * Has both a mobile and desktop application that can work offline
 * Able to duplicate list
-* Able to customise shortcuts 
+* Able to customise shortcuts
 * Able to specify preferred formats for the data, time and start of the week
 * Able to restore deleted lists
 * Able to print list
