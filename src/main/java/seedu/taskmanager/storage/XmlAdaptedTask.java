@@ -49,14 +49,13 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         taskname = source.getTaskName().fullTaskName;
-
-        time = source.getEndTime().value;
+//        time = source.getEndTime().value;
         date = source.getDate().value;
-        deadline = source.getDeadline().value;
-        categorised = new ArrayList<>();
-        for (Category category : source.getCategories()) {
-        	categorised.add(new XmlAdaptedCategory(category));
-        }
+//        deadline = source.getDeadline().value;
+//        categorised = new ArrayList<>();
+//        for (Category category : source.getCategories()) {
+//        	categorised.add(new XmlAdaptedCategory(category));
+//        }
     }
 
     /**
@@ -65,17 +64,17 @@ public class XmlAdaptedTask {
      * @throws IllegalValueException if there were any data constraints violated in the adapted task
      */
     public Task toModelType() throws IllegalValueException {
-        final List<Category> taskCategories = new ArrayList<>();
-        for (XmlAdaptedCategory category : categorised) {
-            taskCategories.add(category.toModelType());
-        }
+//        final List<Category> taskCategories = new ArrayList<>();
+//        for (XmlAdaptedCategory category : categorised) {
+//            taskCategories.add(category.toModelType());
+//        }
         final TaskName taskname = new TaskName(this.taskname);
         final Date date = new Date(this.date);
-        final EndTime endtime = new EndTime(this.endtime);
-        final Deadline deadline = new Deadline(this.deadline);
+//        final EndTime endtime = new EndTime(this.endtime);
+//        final Deadline deadline = new Deadline(this.deadline);
 //        final Address address = new Address(this.address);
-        final UniqueCategoryList categories = new UniqueCategoryList(taskCategories);
-        return new Task(taskname, deadline, date, categories);
+//        final UniqueCategoryList categories = new UniqueCategoryList(taskCategories);
+        return new Task(taskname/*, deadline*/, date/*, categories*/);
 
     }
 }

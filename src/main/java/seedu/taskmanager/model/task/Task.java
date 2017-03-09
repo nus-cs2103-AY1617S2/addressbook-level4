@@ -26,7 +26,7 @@ public class Task implements ReadOnlyTask {
         this.date = date;
 //        this.endTime = endTime;
 //        this.deadline = deadline;        
-        this.categories = new UniqueCategoryList(categories); // protect internal tags from changes in the arg list
+//        this.categories = new UniqueCategoryList(categories); // protect internal tags from changes in the arg list
 
     }
 
@@ -46,17 +46,19 @@ public class Task implements ReadOnlyTask {
     public TaskName getTaskName() {
         return taskName;
     }
-
+/*
     public void setDeadline(Deadline deadline) {
         assert deadline != null;
         this.deadline = deadline;
     }
-
+*/
+/*    
     @Override
     public Deadline getDeadline() {
         return deadline;
     }
-
+*/
+/*    
     public void setEndTime(EndTime endTime) {
         assert endTime != null;
         this.endTime = endTime;
@@ -66,7 +68,7 @@ public class Task implements ReadOnlyTask {
     public EndTime getEndTime() {
         return endTime;
     }
-    
+*/    
     public void setDate(Date date) {
         assert date != null;
         this.date = date;
@@ -96,10 +98,10 @@ public class Task implements ReadOnlyTask {
         assert replacement != null;
 
         this.setTaskName(replacement.getTaskName());
-        this.setDeadline(replacement.getDeadline());
-        this.setEndTime(replacement.getEndTime());
+//        this.setDeadline(replacement.getDeadline());
+//        this.setEndTime(replacement.getEndTime());
         this.setDate(replacement.getDate());
-        this.setCategories(replacement.getCategories());
+//        this.setCategories(replacement.getCategories());
     }
 
     @Override
@@ -112,7 +114,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(taskName, deadline, endTime, date, categories);
+        return Objects.hash(taskName,/* deadline, endTime,*/ date/*, categories*/);
     }
 
     @Override
