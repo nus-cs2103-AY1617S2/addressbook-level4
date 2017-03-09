@@ -9,7 +9,7 @@ We are a team based in the [School of Computing, National University of Singapor
 **Roles**: Team Lead, Integration, Scheduling <br>
 **Responsibilities**:
 * Aspects/tools in charge of: Managing GitHub organization page
-* Components in charge of: 
+* Components in charge of:
 * Features implemented:
 * Code written:
 * Other major contributions:
@@ -24,7 +24,7 @@ We are a team based in the [School of Computing, National University of Singapor
 **Role**: Documentation, UI Expert <br>
 **Responsibilities**:
 * Aspects/tools in charge of: UI Element designs
-* Components in charge of: 
+* Components in charge of:
 * Features implemented:
 * Code written:
 * Other major contributions:
@@ -37,7 +37,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/aljorhythm.png" width="150"><br>
 **Role**: Code Quality, Git Expert <br>
 **Responsibilities**:
-* Aspects/tools in charge of: 
+* Aspects/tools in charge of:
 * Components in charge of: JUnit testings
 * Features implemented:
 * Code written:
@@ -49,9 +49,9 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/coyotestarrkwsq.png" width="150"><br>
 **Role**: Testing, Deliverables and Deadlines <br>
 **Responsibilities**:
-* Aspects/tools in charge of: 
-* Components in charge of: 
-* Features implemented: 
+* Aspects/tools in charge of:
+* Components in charge of:
+* Features implemented:
 * Code written:
 * Other major contributions:
     * Initial refactoring from AddressBook-Level-4 to SavvyTo-Do
