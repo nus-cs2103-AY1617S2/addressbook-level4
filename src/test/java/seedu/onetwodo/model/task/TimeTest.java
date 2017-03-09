@@ -1,4 +1,4 @@
-package seedu.onetwodo.model.person;
+package seedu.onetwodo.model.task;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

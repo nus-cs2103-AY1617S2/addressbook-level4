@@ -11,7 +11,7 @@ public class Date {
 
     public static final String MESSAGE_DATE_CONSTRAINTS =
             "If task date exists, it must be a valid date";
-    public static final String DATE_VALIDATION_REGEX = ".+";
+    public static final String DATE_VALIDATION_REGEX = ".*";
 
     public final String value;
 
@@ -22,11 +22,21 @@ public class Date {
      */
     public Date(String date) throws IllegalValueException {
         assert date != null;
-        String trimmerDate = date.trim();
-        if (!isValidDate(trimmerDate)) {
-            throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
+        String trimmedDate = date.trim();
+        
+        if(trimmedDate.isEmpty()) {
+            this.value = trimmedDate;
+        } else {
+            // if user has input some date, use Natty to parse it
+            
+            // parse input into Natty
+            String displayableDate = "";
+            
+            if (!isValidDate(trimmedDate)) {
+                throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
+            }
+            this.value = displayableDate;
         }
-        this.value = trimmerDate;
     }
 
     /**
