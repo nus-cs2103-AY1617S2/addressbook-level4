@@ -42,7 +42,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     }
 
     /**
-     * Creates an AddressBook using the Persons and Tags in the
+     * Creates a TaskManager using the Tasks and Tags in the
      * {@code toBeCopied}
      */
     public TaskManager(ReadOnlyTaskManager toBeCopied) {
@@ -83,7 +83,7 @@ public class TaskManager implements ReadOnlyTaskManager {
      * objects in the task to point to those in {@link #tags}.
      *
      * @throws UniqueTaskList.DuplicateTaskException
-     *             if an equivalent person already exists.
+     *             if an equivalent task already exists.
      */
     public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
         syncMasterTagListWith(p);

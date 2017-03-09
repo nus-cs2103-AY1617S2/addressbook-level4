@@ -11,7 +11,7 @@ public class Name {
     public static final String MESSAGE_NAME_CONSTRAINTS = "A task name should only contain alphanumeric characters.";
 
     /*
-     * The first character of the address must not be a whitespace, otherwise
+     * The first character of the task must not be a whitespace, otherwise
      * " " (a blank string) becomes a valid input.
      */
     public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
@@ -34,7 +34,7 @@ public class Name {
     }
 
     /**
-     * Returns true if a given string is a valid person name.
+     * Returns true if a given string is a valid task name.
      */
     public static boolean isValidName(String test) {
         return test.matches(NAME_VALIDATION_REGEX);

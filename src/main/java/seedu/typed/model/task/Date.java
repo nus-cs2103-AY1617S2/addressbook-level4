@@ -6,7 +6,6 @@ import seedu.typed.commons.exceptions.IllegalValueException;
  * is valid as declared in {@link #isValidDate(String)}
  */
 public class Date {
-    // TODO: Update message date constraints and regex
     public static final String MESSAGE_DATE_CONSTRAINTS = "Task date should be in the format DD/MM/YYYY";
     public static final String DATE_VALIDATION_REGEX = "\\d{2}\\/\\d{2}\\/\\d{4}";
 
@@ -22,7 +21,6 @@ public class Date {
         assert date != null;
         String trimmedDate = date.trim();
         if (!isValidDate(trimmedDate)) {
-            System.out.println("i got stuck here: " + trimmedDate);
             throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
         }
         this.value = trimmedDate;

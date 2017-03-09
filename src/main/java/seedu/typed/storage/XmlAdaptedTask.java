@@ -50,7 +50,7 @@ public class XmlAdaptedTask {
     }
 
     /**
-     * Converts this jaxb-friendly adapted person object into the model's Task
+     * Converts this jaxb-friendly adapted task object into the model's Task
      * object.
      *
      * @throws IllegalValueException

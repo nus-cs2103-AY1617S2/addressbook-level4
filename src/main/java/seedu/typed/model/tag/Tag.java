@@ -8,6 +8,8 @@ import seedu.typed.commons.exceptions.IllegalValueException;
  */
 public class Tag {
 
+    private static final char CLOSE_SQUARE_BRACKET = ']';
+    private static final char OPEN_SQUARE_BRACKET = '[';
     public static final String MESSAGE_TAG_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String TAG_VALIDATION_REGEX = "\\p{Alnum}+";
 
@@ -53,7 +55,7 @@ public class Tag {
      */
     @Override
     public String toString() {
-        return '[' + tagName + ']';
+        return OPEN_SQUARE_BRACKET + tagName + CLOSE_SQUARE_BRACKET;
     }
 
 }
