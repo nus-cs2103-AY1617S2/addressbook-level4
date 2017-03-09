@@ -366,14 +366,14 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user | Ask the task manager to schedule my tasks | Just enter the tasks with a deadline and decide the scheduling later
 `* *` | user | Add descriptions to my task | have additional details of my tasks
 `* *` | user | Mark the task as done/require follow-up | Have an up-to-date record of the my tasks
-`* *` | advanced user | Keep a list of done task, marked as done(strike-out) | Keep track of what I have already done
-`* *` | advance user | Clear all my done tasks | Clear done tasks from scheduler
-`* *` | advanced user | Collapse my tasks into groups in the listed view | Have a clearer overview of all my task groups
 `* *` | user | Group my tasks together with a common tag | Organized my tasks according to their groups in the scheduler
 `* *` | user | Have pop-up notifications of near deadlines | Be reminded of tasks with deadlines approaching
 `* *` | user | Have heads-up display of tasks that are about to due | Be reminded of tasks to be done
 `* *` | advanced user| Sort my tasks according to deadlines, dates or title | Have a better overviews of tasks scheduled
 `* *` | advanced user | Use shorter versions of commands/Flexi-command | Type commands easier and faster
+`* *` | advanced user | Keep a list of done task, marked as done(strike-out) | Keep track of what I have already done
+`* *` | advance user | Clear all my done tasks | Clear done tasks from scheduler
+`* *` | advanced user | Collapse my tasks into groups in the listed view | Have a clearer overview of all my task groups
 `* ` | user | Get suggestions when a task should be scheduled | Automatically click on which date and time I would like it scheduled
 `* ` | user | Specify locations that are linked to Google Maps | Know the best way to get there from my current location (Workplace)
 `* ` | user | Automatically reschedule a task I am supposed to do now | No worry about when to schedule the task
