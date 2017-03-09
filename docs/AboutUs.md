@@ -21,7 +21,7 @@ Responsibilities: Deliverables and deadlines, Scheduling and tracking <br>
 #### [Huynh Van Tu An](https://github.com/arishuynhvan)
 
 <br>
-<img src="images/TuAn.jpg" width="150"><br>
+<img src="images/arishuynhvan.jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: Testing, Integration  <br>  
 * Components in charge of: GUI, Logic
