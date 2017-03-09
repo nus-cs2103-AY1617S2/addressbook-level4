@@ -13,12 +13,12 @@ By : `T09B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`
 ## 2. Features
 ### Adding tasks
 **Adding a new task**
-Format: `add <task_name> [due <datetime>] [tag <tag1, tag2, ...>]`
+Format: `add <task_name> [due <deadline>] [tag <tag1, tag2, ...>]`
 
 > task_name : Name of your task<br>
-> datetime (optional) :<br>
+> deadline (optional) :<br>
 >   (1) Date only, `02/03/17` or `020317` (ddmmyy)<br>
->   (2) Time only, `3pm` or `12noon` or `2.30am`<br>
+>   (2) Time only which means today, `3pm` or `12noon` or `2.30am`<br>
 >   (3) Time and Date, write time before date<br>
 > tag1, tag2, … : tags of this task
 
@@ -30,6 +30,7 @@ Examples:
 * `add Study for CS2106 due 3pm today`
 * `add Study for CS2106 due 02/03/17`
 
+> !! Do not use the keywords like `due` in your `<task_name>` or the Task Manager might misunderstand you
 
 **Adding a new event**
 Format: `add <event_name> from <starting_time> to <end_time> [on <date>] [tag <tag1, tag2, ...>]`
@@ -109,6 +110,16 @@ Format: `rename tag from <tag_name> to <new_tag_name>`
 
 > tag_name : existing tag name<br>
 > new_tag_name : new tag name
+
+### Undo/Redo Commands
+
+**Undo Command**
+Undo up to 5 commands that have been made by the user<br>
+Format: `undo`
+
+**Redo Command**
+Redo a command that a user has previously undone<br>
+Format: `redo`
 
 ### Help
 Format: `help [<command>]`

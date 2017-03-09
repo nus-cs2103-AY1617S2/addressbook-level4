@@ -1,10 +1,10 @@
-# Address Book (Level 5)
+# Task Manager  (Level 5)
 
 
 [![Build Status](https://travis-ci.org/CS2103JAN2017-T09-B1/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-T09-B1/main)
 
 <img src="docs/images/ui.png" width="600"><br>
-Best address book EVER!
+Best task manager EVER!
 
 
 #### Site Map
@@ -17,6 +17,9 @@ Best address book EVER!
 
 #### Acknowledgements
 
+* The project is developed based on FOSS's Software Engineering Education Resource.
+  [se-edu-addressbook-level4](https://github.com/se-edu/addressbook-level4)
+  
 * Some parts of this sample application were inspired by the excellent
   [Java FX tutorial](http://code.makery.ch/library/javafx-8-tutorial/) by *Marco Jakob*.
 

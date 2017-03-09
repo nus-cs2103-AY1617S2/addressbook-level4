@@ -27,10 +27,13 @@ Priority | As a ... | I want to ... | So that I can...
  `* * *` | User | Be able to indicate if I have completed a task or not | Keep track of my progress
  `* * *` | User | View all tasks that I have not done | View how much more work is there to be done
  `* * *` | User | View completed tasks (hidden by default) | Know what tasks I have completed
+ `* * *` | User | Undo my previous commands | undo any mistakes that I have made
+ `* * *` | User | Redo my undo command | undo my undo
  `* * *` | User | Specify a location to save the storage file | Choose where to save the file to
  `* * *` | User | Specify a storage file to open | Access a task list from another computer
  `* * *` | User | Enter commands using natural language and in an intuitive manner | Easily use the task manager without having to memorize command formats
  `* * *` | User | Exit the task manager | Have a peace of mind that the program exits safely
+ `* *` | User | See if the commands that I typed are valid while I am typing them | Check that my command is valid before I press enter
  `* *` | User | Export all tasks to an external file | Backup the list of tasks
  `* *` | User | Restore tasks from an external file | Access tasks from one computer on another computer
  `*` | User | Add recurring tasks | Avoid duplicate work and adding daily/weekly/monthly tasks multiple times
