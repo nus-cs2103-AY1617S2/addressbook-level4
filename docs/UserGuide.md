@@ -60,7 +60,6 @@ Examples:
 > Persons can have any number of tags (including 0)
 
 
-
 ### 2.3. Listing all tasks : `list`
 
 List all the existing tasks in TaskIt.<br>
@@ -93,17 +92,16 @@ Examples:
 * `Update 1 deadline this Friday 3 pm`<br>
   Update the first task deadline to this Friday 3pm.
 
-### 2.5. Searching all tasks containing any keyword in their name: `search`
+### 2.5. Searching all tasks containing any keyword in their name: `find`
 
 Finds tasks which matched name/description/deadline/tag.<br>
 Format: ` search <name|description|deadline|tag>`
 
-> * The search is case sensitive. e.g `hans` will not match `Hans`
-> * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-> * Only the name is searched.
-> * Only full words will be matched e.g. `Han` will not match `Hans`
+> * The search is not case sensitive. e.g `do HW` will match `do hw`
+> * The order of the keywords does not matter. e.g. `HW do` will match `do HW`
+> * Only full words will be matched e.g. `HW` will not match `HWs`
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).
-    e.g. `Hans` will match `Hans Bo`
+    e.g. `HW` will match `do HW`
 
 Examples:
 
@@ -152,7 +150,12 @@ Examples:
 Clears all entries from the address book.<br>
 Format: `clear`
 
-### 2.9. Exiting the program : `exit`
+### 2.9 Undo previous action: `clear`
+
+Undo the prevous actions
+Format: `undo`
+
+### 2.10. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
