@@ -17,7 +17,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 * [Appendix E : Product Survey](#appendix-e--product-survey)
 
 
-## 1. Setting up
+## Setting up
 
 ### 1.1. Prerequisites
 
