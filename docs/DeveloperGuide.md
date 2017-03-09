@@ -1,6 +1,6 @@
-# AddressBook Level 4 - Developer Guide
+# FlexiTask - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team W14-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -51,7 +51,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 ### 1.3. Configuring Checkstyle
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
-3. Enter an arbitrary configuration name e.g. addressbook
+3. Enter an arbitrary configuration name e.g. flexiTask
 4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
 5. Click OK once, go to the `Main` tab, use the newly imported check configuration.
 6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
@@ -86,7 +86,7 @@ Given below is a quick overview of each component.
 > Tip: The `.pptx` files used to create diagrams in this document can be found in the [diagrams](diagrams/) folder.
 > To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
 
-`Main` has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java). It is responsible for,
+`Main` has only one class called [`MainApp`](../src/main/java/seedu/tasklist/MainApp.java). It is responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
@@ -123,7 +123,7 @@ command `delete 1`.
 <img src="images\SDforDeletePerson.png" width="800"><br>
 _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 
->Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed,
+>Note how the `Model` simply raises a `TaskListChangedEvent` when the FlexiTask data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
@@ -144,14 +144,14 @@ Author: Alice Bee
 <img src="images/UiClassDiagram.png" width="800"><br>
 _Figure 2.2.1 : Structure of the UI Component_
 
-**API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
+**API** : [`Ui.java`](../src/main/java/seedu/tasklist/ui/Ui.java)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
 `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
- For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
+ For example, the layout of the [`MainWindow`](../src/main/java/seedu/tasklist/ui/MainWindow.java) is specified in
  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
@@ -167,7 +167,7 @@ Author: Bernard Choo
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
 
-**API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](../src/main/java/seedu/tasklist/logic/Logic.java)
 
 1. `Logic` uses the `Parser` class to parse the user command.
 2. This results in a `Command` object which is executed by the `LogicManager`.
@@ -186,12 +186,12 @@ Author: Cynthia Dharman
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 2.4.1 : Structure of the Model Component_
 
-**API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](../src/main/java/seedu/tasklist/model/Model.java)
 
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
+* stores the FlexiTask data.
 * exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
@@ -203,16 +203,16 @@ Author: Darius Foong
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
 
-**API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](../src/main/java/seedu/tasklist/storage/Storage.java)
 
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the FlexiTask data in xml format and read it back.
 
 ### 2.6. Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.tasklist.commons` package.
 
 ## 3. Implementation
 
@@ -263,13 +263,13 @@ We have two types of tests:
 
 2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
    1. _Unit tests_ targeting the lowest level methods/classes. <br>
-      e.g. `seedu.address.commons.UrlUtilTest`
+      e.g. `seedu.tasklist.commons.UrlUtilTest`
    2. _Integration tests_ that are checking the integration of multiple code units
      (those code units are assumed to be working).<br>
-      e.g. `seedu.address.storage.StorageManagerTest`
+      e.g. `seedu.tasklist.storage.StorageManagerTest`
    3. Hybrids of unit and integration tests. These test are checking multiple code units as well as
       how the are connected together.<br>
-      e.g. `seedu.address.logic.LogicManagerTest`
+      e.g. `seedu.tasklist.logic.LogicManagerTest`
 
 #### Headless GUI Testing
 Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
@@ -332,7 +332,7 @@ Here are the steps to convert the project documentation files to PDF format.
 
 ### 5.6. Managing Dependencies
 
-A project often depends on third-party libraries. For example, Address Book depends on the
+A project often depends on third-party libraries. For example, FlexiTask depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
 can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
 is better than these alternatives.<br>
@@ -346,50 +346,122 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | user | add tasks | keep track of them
+`* * *` | user | be able to edit a task after adding it | make any changes if I need to
+`* * *` | user | be able to delete a task after adding | delete tasks that I no longer need
+`* * *` | user | find specific tasks by keywords | locate my task easily
+`* * *` | user | specify a particular path or folder to store my task lists | retrieve the file easily and conveniently
+`* * *` | user | undo the recent action | revert back in case I decide to change my mind.
+`* *` | user | add tasks that recur on a consistent basis (e.g. Tutorials and lectures) | add recurring tasks more conveniently, since the item only needs to be added once
+`* *` | user | add some comments for a particular task | store additional information that I will need when handling that task
+`* *` | user | include a tag on the task | retrieve all the tasks that belong to the same tag
+`* *` | user | be able to set how important a task is | know which tasks I should prioritize first
+`* *` | user | sort my tasks according to priority or tags | delegate my time appropriately
+`* *` | user | be able to delete a group of task by keywords | avoid deleting one by one
+`* *` | user | have a view of my pending tasks for the day/week/month | know what I need to do for that particular period of time
+`* *` | user | see my overdue tasks | know what actions to take on them
+`* *` | advanced user | have the choice of a few preset themes | change it to my liking.
+`*` | user | sort my tasks according to task names | delegate my time appropriately
+`*` | user | delete all my tasks | hand in my resignation letter afterwards
 
-{More to be added}
 
-## Appendix B : Use Cases
-
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
-
-#### Use case: Delete person
+## Use Cases
+#### Use case: Create a task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
-Use case ends.
+1. User inputs the command with the correct keywords
+2. Task Manager confirms the addition by showing the confirmation message <br>
 
-**Extensions**
+> Use case ends.
 
-2a. The list is empty
+**EXTENSIONS**
+
+2a. The given input is invalid
+
+> 2a1. Task Manager shows an error message <br>
+Use case ends
+
+#### Use case: Find specific tasks
+
+**MSS**
+
+1. User inputs the command with the correct keywords
+2. Task Manager shows the list of tasks that match the input <br>
+
+> Use case ends.
+
+**EXTENSIONS**
+
+2a. The given input is invalid
+
+> 2a1. Task Manager shows an error message <br>
+Use case ends
+
+3a. The list is empty
 
 > Use case ends
 
-3a. The given index is invalid
+4a. The list contains no matching entries
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+> Use case ends
 
-{More to be added}
+#### Use case: Edit/Update a specific task
+
+**MSS**
+
+1. User requests to edit a task and inputs the command with correct keywords
+2. Task Manager shows the updated task on the UI <br>
+
+> Use case ends.
+
+**EXTENSIONS**
+
+2a. The given input is invalid
+
+> 2a1. Task Manager shows an error message for such situation<br>
+Use case ends
+
+3a. The list contains no matching entries for the user to edit
+> 3a1. Task Manager shows an error message for such situation <br>
+
+> Use case ends
+
+#### Use case: Delete a specific task from the task list
+
+**MSS**
+
+1. User requests to delete a task and inputs the command with correct keywords
+2. Task Manager shows a message to ask for confirmation of deletion.
+3. User inputs the command for confirmation.
+4. Task Manager deletes the task <br>
+
+> Use case ends
+
+**EXTENSIONS**
+
+2a. The given input is invalid
+
+> 2a1. Task Manager shows an error message for such situation<br>
+Use case ends
+
+3a. The list contains no matching entries for the user to edit
+> 3a1. Task Manager shows an error message for such situation <br>
+
+> Use case ends
+
+4a. The list is empty
+
+> Use case ends
+
 
 ## Appendix C : Non Functional Requirements
 
-1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
-   should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-{More to be added}
+1. Should work on any mainstream OS as long as it has Java 8 or higher installed.
+2. Should be able to hold up to 1000 tasks.
+3. Should come with automated unit tests and open source code.
+4. Should favor DOS style commands over Unix-style commands.
+5. Should be able to hold up to 100 tags per task.
 
 ## Appendix D : Glossary
 
@@ -397,23 +469,54 @@ Use case ends.
 
 > Windows, Linux, Unix, OS-X
 
-##### Private contact detail
+#### Keywords
+> Task Name, Tag, From Date - To Date, Due Dates
 
-> A contact detail that is not meant to be shared with others
+#### Path
+> Absolute path or Relative path of the Tasks Storage
+
+####DOS style commands
+
+> commandline commands based on Windows System
+
+####UNIX-style commands
+
+> commandline commands based on UNIX System
+
 
 ## Appendix E : Product Survey
 
-**Product Name**
+**Google Calendar + Google Tasks**
 
-Author: ...
+Author: Wang Pengcheng
 
 Pros:
-
-* ...
-* ...
+* Simplistic and elegant UI
+* Ability to add task items directly from Gmail into Google Task.
+* Not a lot of buttons to click. Convenient and easy to learn.
+* Allow different colour codings for easy references.
+* Able to import other existing calendars (e.g. NUSmods) into the user's calendar.
 
 Cons:
+* Web application (especially for Google Task) that requires Internet connection for usage.
+* UI for Google Tasks needs improvement; The deletion of items is quite a hassle and can be messy.
+* May not cater to Jim who prefers keyboard inputs.
 
-* ...
-* ...
+**Priority Matrix**
+
+Author: Ellango Vesali
+
+Pros:
+* Simple and easy to use UI
+* Create multiple task under a main project
+* Group the list of items based on the different levels of priorities
+* Integrate with Mail to keep track of important mails
+* Syncs with iOS, Android and Windows
+* Upload files
+* Daily reports reminding one of their deadlines
+* Collaborative aspects for teams
+
+Cons:
+* Require mouse usage, may not cater Jim who prefers keyboard inputs
+* Monthly subscription fee
 
