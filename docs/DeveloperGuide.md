@@ -5,7 +5,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 ---
 
 1. [Setting Up](#setting-up)
-2. [Design](#design)
+2. [Design](#2.-design)
 3. [Implementation](#implementation)
 4. [Testing](#testing)
 5. [Dev Ops](#dev-ops)
