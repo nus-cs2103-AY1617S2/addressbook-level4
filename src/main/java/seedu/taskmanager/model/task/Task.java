@@ -13,20 +13,23 @@ public class Task implements ReadOnlyTask {
 
     private TaskName taskName;
     private Date date;
-//    private EndTime endTime;
-//    private Deadline deadline;
+    private StartTime startTime;
+    private EndTime endTime;
+    private Deadline deadline;
 //    private UniqueCategoryList categories;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(TaskName taskName, Date date /*EndTime endTime, Deadline deadline, UniqueCategoryList categories*/) {
-        assert !CollectionUtil.isAnyNull(taskName, date /*, endTime, deadline, categories*/);
+    public Task(TaskName taskName, Date date , Deadline deadline, StartTime startTime, EndTime endTime /*,UniqueCategoryList categories*/) {
+        assert !CollectionUtil.isAnyNull(taskName, date , deadline, startTime, endTime/*, categories*/);
         this.taskName = taskName;
         this.date = date;
-//        this.endTime = endTime;
-//        this.deadline = deadline;        
-//        this.categories = new UniqueCategoryList(categories); // protect internal tags from changes in the arg list
+        this.endTime = endTime;
+        this.startTime = startTime;
+        this.deadline = deadline;        
+
+        //        this.categories = new UniqueCategoryList(categories); // protect internal tags from changes in the arg list
 
     }
 
@@ -34,7 +37,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getTaskName(), source.getDate() /* ,source.getEndTime(), source.getDeadline(), source.getCategories()*/);
+        this(source.getTaskName(), source.getDate(), source.getDeadline(), source.getStartTime() ,source.getEndTime() /*,source.getCategories()*/);
     }
 
     public void setTaskName(TaskName taskName) {
@@ -46,19 +49,38 @@ public class Task implements ReadOnlyTask {
     public TaskName getTaskName() {
         return taskName;
     }
-/*
+    
+    public void setDate(Date date) {
+        assert date != null;
+        this.date = date;
+    }
+
+    @Override
+    public Date getDate() {
+        return date;
+    }  
+    
     public void setDeadline(Deadline deadline) {
         assert deadline != null;
         this.deadline = deadline;
     }
-*/
-/*    
+
+    
     @Override
     public Deadline getDeadline() {
         return deadline;
     }
-*/
-/*    
+
+    public void setStartTime(StartTime startTime) {
+        assert startTime != null;
+        this.startTime = startTime;
+    }
+
+    @Override
+    public StartTime getStartTime() {
+        return startTime;
+    }
+    
     public void setEndTime(EndTime endTime) {
         assert endTime != null;
         this.endTime = endTime;
@@ -68,17 +90,8 @@ public class Task implements ReadOnlyTask {
     public EndTime getEndTime() {
         return endTime;
     }
-*/    
-    public void setDate(Date date) {
-        assert date != null;
-        this.date = date;
-    }
-
-    @Override
-    public Date getDate() {
-        return date;
-    }
-/*
+    
+    /*
     @Override
     public UniqueCategoryList getCategories() {
         return new UniqueCategoryList(categories);
@@ -98,8 +111,9 @@ public class Task implements ReadOnlyTask {
         assert replacement != null;
 
         this.setTaskName(replacement.getTaskName());
-//        this.setDeadline(replacement.getDeadline());
-//        this.setEndTime(replacement.getEndTime());
+        this.setDeadline(replacement.getDeadline());
+        this.setStartTime(replacement.getStartTime());
+        this.setEndTime(replacement.getEndTime());
         this.setDate(replacement.getDate());
 //        this.setCategories(replacement.getCategories());
     }
@@ -114,7 +128,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(taskName,/* deadline, endTime,*/ date/*, categories*/);
+        return Objects.hash(taskName, date, deadline, startTime, endTime/*, categories*/);
     }
 
     @Override

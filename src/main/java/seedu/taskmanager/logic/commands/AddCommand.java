@@ -8,6 +8,7 @@ import seedu.taskmanager.model.task.Date;
 import seedu.taskmanager.model.task.TaskName;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.Deadline;
+import seedu.taskmanager.model.task.StartTime;
 import seedu.taskmanager.model.task.EndTime;
 import seedu.taskmanager.model.task.UniqueTaskList;
 import seedu.taskmanager.model.category.Category;
@@ -36,7 +37,7 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String taskName, String date /*, String endTime, String deadline  Set<String> categories */)
+    public AddCommand(String taskName, String date , String deadline, String startTime, String endTime /*,Set<String> categories */)
             throws IllegalValueException {
 //        final Set<Category> categorySet = new HashSet<>();
 //        for (String tagCategoryName : categories) {
@@ -44,10 +45,11 @@ public class AddCommand extends Command {
 //        }
         this.toAdd = new Task(
                 new TaskName(taskName),
-                new Date(date)
-/*                new EndTime(endTime), 
-                new Deadline(deadline)
-                new UniqueCategoryList(categorySet)*/);
+                new Date(date),
+                new Deadline(deadline), 
+                new StartTime(startTime),
+                new EndTime(endTime)
+        		/*new UniqueCategoryList(categorySet)*/);
     }
 
     @Override

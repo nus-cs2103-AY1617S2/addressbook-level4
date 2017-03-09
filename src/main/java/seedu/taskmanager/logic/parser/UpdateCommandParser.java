@@ -2,7 +2,7 @@ package seedu.taskmanager.logic.parser;
 
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_TIME;
+import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_STARTTIME;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_ENDTIME;
  import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_CATEGORY;
@@ -31,7 +31,7 @@ public class UpdateCommandParser {
     public Command parse(String args) {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_DATE, PREFIX_ENDTIME, PREFIX_DEADLINE, PREFIX_CATEGORY);
+                new ArgumentTokenizer(PREFIX_DATE, PREFIX_DEADLINE, PREFIX_STARTTIME, PREFIX_ENDTIME/*, PREFIX_CATEGORY*/);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
@@ -44,8 +44,9 @@ public class UpdateCommandParser {
         try {
             updateTaskDescriptor.setTaskName(ParserUtil.parseTaskName(preambleFields.get(1)));
             updateTaskDescriptor.setDate(ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_DATE)));
-//            updateTaskDescriptor.setEndTime(ParserUtil.parseEndTime(argsTokenizer.getValue(PREFIX_ENDTIME)));
-//            updateTaskDescriptor.setDeadline(ParserUtil.parseDeadline(argsTokenizer.getValue(PREFIX_DEADLINE)));
+            updateTaskDescriptor.setDeadline(ParserUtil.parseDeadline(argsTokenizer.getValue(PREFIX_DEADLINE)));
+            updateTaskDescriptor.setStartTime(ParserUtil.parseStartTime(argsTokenizer.getValue(PREFIX_STARTTIME)));
+            updateTaskDescriptor.setEndTime(ParserUtil.parseEndTime(argsTokenizer.getValue(PREFIX_ENDTIME)));
 //            updateTaskDescriptor.setCategories(parseCategoriesForUpdate(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_CATEGORY))));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());

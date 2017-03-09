@@ -11,7 +11,7 @@ public class Date {
 
     public static final String MESSAGE_DATE_CONSTRAINTS =
             "Task date should be either a day (e.g. thursday) or a date with the format: DD/MM/YY (e.g. 03/03/17)";
-    public static final String DATE_VALIDATION_REGEX1 = "[\\d{2}]+/[\\d{2}]+/[\\d{2}]+";
+    public static final String DATE_VALIDATION_REGEX1 = "\\d{2}/\\d{2}/\\d{2}";
     public static final String DATE_VALIDATION_REGEX2 = "[a-zA-Z]+";
 
     public final String value;
