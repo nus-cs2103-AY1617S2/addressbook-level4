@@ -102,22 +102,21 @@ Format: ` search <name|description|deadline|tag>`
 > * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 > * Only the name is searched.
 > * Only full words will be matched e.g. `Han` will not match `Hans`
-> * Persons matching at least one keyword will be returned (i.e. `OR` search).
+> * Tasks matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `Hans` will match `Hans Bo`
 
 Examples:
 
-* `find John`<br>
-  Returns `John Doe` but not `john`
-* `find Betsy Tim John`<br>
-  Returns Any person having names `Betsy`, `Tim`, or `John`
+* `find do HW`<br>
+  Returns tasks with 'do' or 'HW' or both
+
 
 ### 2.6. Deleting a task : `delete`
 
 Deletes the specified task from the TaskIt. 
 Format: `delete index <name|description|deadline|tag>`
 
-> Deletes the person at the specified `INDEX`. <br>
+> Deletes the task at the specified `INDEX`. <br>
 > The index refers to the index number shown in the most recent listing.<br>
 > The index **must be a positive integer** 1, 2, 3, ...
 
@@ -125,17 +124,17 @@ Examples:
 
 * `list`<br>
   `delete 2`<br>
-  Deletes the 2nd person in the address book.
-* `find Betsy`<br>
+  Deletes the 2nd task in the address book.
+* `find do HW`<br>
   `delete 1`<br>
-  Deletes the 1st person in the results of the `find` command.
+  Deletes the 1st task in the results of the `find` command.
 
-### 2.7. Select a person : `select`
+### 2.7. Select a task : `select`
 
-Selects the person identified by the index number used in the last person listing.<br>
+Selects the task identified by the index number used in the last person listing.<br>
 Format: `select INDEX`
 
-> Selects the person and loads the Google search page the person at the specified `INDEX`.<br>
+> Selects the task and loads the Google search page the task at the specified `INDEX`.<br>
 > The index refers to the index number shown in the most recent listing.<br>
 > The index **must be a positive integer** 1, 2, 3, ...
 
@@ -143,10 +142,10 @@ Examples:
 
 * `list`<br>
   `select 2`<br>
-  Selects the 2nd person in the address book.
-* `find Betsy` <br>
+  Selects the 2nd task in the address book.
+* `find do HW` <br>
   `select 1`<br>
-  Selects the 1st person in the results of the `find` command.
+  Selects the 1st task in the results of the `find` command.
 
 ### 2.8. Clearing all entries : `clear`
 
@@ -180,7 +179,7 @@ There is no need to save manually.
    e.g. `delete 3`
 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
-  e.g. `find James Jake`
+  e.g. `find do HW SWE`
 
 * **List** : `list` <br>
   e.g.
