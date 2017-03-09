@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import seedu.address.model.task.ReadOnlyTask;
-import seedu.address.ui.TaskListPanel;
 
 public class SelectCommandTest extends ToDoListGuiTest {
 

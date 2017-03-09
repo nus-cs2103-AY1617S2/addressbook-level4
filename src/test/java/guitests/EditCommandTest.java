@@ -8,11 +8,11 @@ import org.junit.Test;
 import guitests.guihandles.TaskCardHandle;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.task.EndTime;
 import seedu.address.model.task.StartTime;
 import seedu.address.model.task.Title;
 import seedu.address.model.task.Venue;
-import seedu.address.model.tag.Tag;
 import seedu.address.testutil.TaskBuilder;
 import seedu.address.testutil.TestTask;
 

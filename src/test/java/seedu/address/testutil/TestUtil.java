@@ -75,24 +75,24 @@ public class TestUtil {
         try {
             // CHECKSTYLE.OFF: LineLength
             return new Task[] {
-                    new Task(new Title("Ali Muster"), new Venue("9482424"), new StartTime("hans@google.com"),
-                            new EndTime("4th street"), new UniqueTagList()),
-                    new Task(new Title("Boris Mueller"), new Venue("87249245"), new StartTime("ruth@google.com"),
-                            new EndTime("81th street"), new UniqueTagList()),
-                    new Task(new Title("Carl Kurz"), new Venue("95352563"), new StartTime("heinz@yahoo.com"),
-                            new EndTime("wall street"), new UniqueTagList()),
-                    new Task(new Title("Daniel Meier"), new Venue("87652533"), new StartTime("cornelia@google.com"),
-                            new EndTime("10th street"), new UniqueTagList()),
-                    new Task(new Title("Elle Meyer"), new Venue("9482224"), new StartTime("werner@gmail.com"),
-                            new EndTime("michegan ave"), new UniqueTagList()),
-                    new Task(new Title("Fiona Kunz"), new Venue("9482427"), new StartTime("lydia@gmail.com"),
-                            new EndTime("little tokyo"), new UniqueTagList()),
-                    new Task(new Title("George Best"), new Venue("9482442"), new StartTime("anna@google.com"),
-                            new EndTime("4th street"), new UniqueTagList()),
-                    new Task(new Title("Hoon Meier"), new Venue("8482424"), new StartTime("stefan@mail.com"),
-                            new EndTime("little india"), new UniqueTagList()),
-                    new Task(new Title("Ida Mueller"), new Venue("8482131"), new StartTime("hans@google.com"),
-                            new EndTime("chicago ave"), new UniqueTagList()) };
+                new Task(new Title("Ali Muster"), new Venue("9482424"), new StartTime("hans@google.com"),
+                        new EndTime("4th street"), new UniqueTagList()),
+                new Task(new Title("Boris Mueller"), new Venue("87249245"), new StartTime("ruth@google.com"),
+                        new EndTime("81th street"), new UniqueTagList()),
+                new Task(new Title("Carl Kurz"), new Venue("95352563"), new StartTime("heinz@yahoo.com"),
+                        new EndTime("wall street"), new UniqueTagList()),
+                new Task(new Title("Daniel Meier"), new Venue("87652533"), new StartTime("cornelia@google.com"),
+                        new EndTime("10th street"), new UniqueTagList()),
+                new Task(new Title("Elle Meyer"), new Venue("9482224"), new StartTime("werner@gmail.com"),
+                        new EndTime("michegan ave"), new UniqueTagList()),
+                new Task(new Title("Fiona Kunz"), new Venue("9482427"), new StartTime("lydia@gmail.com"),
+                        new EndTime("little tokyo"), new UniqueTagList()),
+                new Task(new Title("George Best"), new Venue("9482442"), new StartTime("anna@google.com"),
+                        new EndTime("4th street"), new UniqueTagList()),
+                new Task(new Title("Hoon Meier"), new Venue("8482424"), new StartTime("stefan@mail.com"),
+                        new EndTime("little india"), new UniqueTagList()),
+                new Task(new Title("Ida Mueller"), new Venue("8482131"), new StartTime("hans@google.com"),
+                        new EndTime("chicago ave"), new UniqueTagList()) };
             // CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
             assert false;
