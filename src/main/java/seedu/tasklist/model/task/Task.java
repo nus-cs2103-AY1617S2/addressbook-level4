@@ -13,9 +13,12 @@ public class Task implements ReadOnlyTask {
 
     private Name name;
     private Comment comment;
+    private Priority priority;
+    private Status status; 
 
     private UniqueTagList tags;
-
+    
+   
     /**
      * Every field must be present and not null.
      */
@@ -93,6 +96,16 @@ public class Task implements ReadOnlyTask {
     @Override
     public String toString() {
         return getAsText();
+    }
+
+    @Override
+    public Priority getPriority() {
+        return priority;
+    }
+
+    @Override
+    public Status getStatus() {
+        return status;
     }
 
 }
