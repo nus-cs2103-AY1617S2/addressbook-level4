@@ -16,8 +16,8 @@ We are a team based in the [School of Computing, National University of Singapor
 
 #### [Evan Yeung](http://github.com/evanyeung)
 <img src="images/evanyeung.jpg" width="150"><br>
- Role: tbd <br>
- Responsibilities: tbd
+ Role: Integration <br>
+ Responsibilities: In charge of versioning of the code, maintaining the code repository, integrating various parts of the software to create a whole.
 
  -----
 
