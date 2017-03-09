@@ -26,11 +26,11 @@ public class Information {
      *
      * @throws IllegalValueException if given information string is invalid.
      */
-    public Information(String info) throws IllegalValueException {
-        assert info != null;
+    public Information(String info){
+        /*assert info != null;
         if (!isValidInformation(info)) {
             throw new IllegalValueException(MESSAGE_INFORMATION_CONSTRAINTS);
-        }
+        }*/
         this.value = info;
     }
 

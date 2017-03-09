@@ -23,12 +23,12 @@ public class PriorityLevel {
      * @throws IllegalValueException if given priority level string is invalid.
      */
 
-    public PriorityLevel(String priority) throws IllegalValueException {
-        assert priority != null;
+    public PriorityLevel(String priority){
+        //assert priority != null;
         String trimmedPriority = priority.trim();
-        if (!isValidPriorityLevel(trimmedPriority)) {
+        /*if (!isValidPriorityLevel(trimmedPriority)) {
             throw new IllegalValueException(MESSAGE_PRIORITY_LEVEL_CONSTRAINTS);
-        }
+        }*/
         this.value = trimmedPriority;
     }
 

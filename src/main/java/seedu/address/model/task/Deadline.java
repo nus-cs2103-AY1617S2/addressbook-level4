@@ -21,11 +21,11 @@ public class Deadline {
      * @throws IllegalValueException if given date string is invalid.
      */
     public Deadline(String date) throws IllegalValueException {
-        assert date != null;
+        //assert date != null;
         String trimmedDate = date.trim();
-        if (!isValidDeadline(trimmedDate)) {
+        /*if (!isValidDeadline(trimmedDate)) {
             throw new IllegalValueException(MESSAGE_DEADLINE_CONSTRAINTS);
-        }
+        }*/
         this.value = trimmedDate;
     }
 
