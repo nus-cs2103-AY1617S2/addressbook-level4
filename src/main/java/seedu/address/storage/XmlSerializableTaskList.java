@@ -12,8 +12,8 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyTaskList;
-import seedu.address.model.task.Task;
-import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.FloatingTask;
+import seedu.address.model.task.ReadOnlyFloatingTask;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -46,8 +46,8 @@ public class XmlSerializableTaskList implements ReadOnlyTaskList {
     }
 
     @Override
-    public ObservableList<ReadOnlyTask> getTaskList() {
-        final ObservableList<Task> tasks = this.tasks.stream().map(p -> {
+    public ObservableList<ReadOnlyFloatingTask> getTaskList() {
+        final ObservableList<FloatingTask> tasks = this.tasks.stream().map(p -> {
             try {
                 return p.toModelType();
             } catch (IllegalValueException e) {

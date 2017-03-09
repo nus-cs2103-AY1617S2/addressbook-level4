@@ -3,8 +3,8 @@ package seedu.address.model;
 import java.util.Set;
 
 import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.model.task.ReadOnlyTask;
-import seedu.address.model.task.Task;
+import seedu.address.model.task.ReadOnlyFloatingTask;
+import seedu.address.model.task.FloatingTask;
 import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 
@@ -19,10 +19,10 @@ public interface Model {
     ReadOnlyTaskList getAddressBook();
 
     /** Deletes the given person. */
-    void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
+    void deleteTask(ReadOnlyFloatingTask target) throws UniqueTaskList.TaskNotFoundException;
 
     /** Adds the given person */
-    void addTask(Task person) throws UniqueTaskList.DuplicateTaskException;
+    void addTask(FloatingTask task) throws UniqueTaskList.DuplicateTaskException;
 
     /**
      * Updates the person located at {@code filteredPersonListIndex} with {@code editedPerson}.
@@ -31,11 +31,11 @@ public interface Model {
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code filteredPersonListIndex} < 0 or >= the size of the filtered list.
      */
-    void updateTask(int filteredPersonListIndex, ReadOnlyTask editedPerson)
+    void updateTask(int filteredPersonListIndex, ReadOnlyFloatingTask editedPerson)
             throws UniqueTaskList.DuplicateTaskException;
 
     /** Returns the filtered person list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
-    UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
+    UnmodifiableObservableList<ReadOnlyFloatingTask> getFilteredTaskList();
 
     /** Updates the filter of the filtered person list to show all persons */
     void updateFilteredListToShowAll();

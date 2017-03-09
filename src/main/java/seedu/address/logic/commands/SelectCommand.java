@@ -5,7 +5,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.ReadOnlyFloatingTask;
 
 /**
  * Selects a task identified using it's last displayed index from the task manager.
@@ -30,7 +30,7 @@ public class SelectCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
 
-        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        UnmodifiableObservableList<ReadOnlyFloatingTask> lastShownList = model.getFilteredTaskList();
 
         if (lastShownList.size() < targetIndex) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);

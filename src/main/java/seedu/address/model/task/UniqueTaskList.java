@@ -14,17 +14,17 @@ import seedu.address.commons.util.CollectionUtil;
  *
  * Supports a minimal set of list operations.
  *
- * @see Task#equals(Object)
+ * @see FloatingTask#equals(Object)
  * @see CollectionUtil#elementsAreUnique(Collection)
  */
-public class UniqueTaskList implements Iterable<Task> {
+public class UniqueTaskList implements Iterable<FloatingTask> {
 
-    private final ObservableList<Task> internalList = FXCollections.observableArrayList();
+    private final ObservableList<FloatingTask> internalList = FXCollections.observableArrayList();
 
     /**
      * Returns true if the list contains an equivalent person as the given argument.
      */
-    public boolean contains(ReadOnlyTask toCheck) {
+    public boolean contains(ReadOnlyFloatingTask toCheck) {
         assert toCheck != null;
         return internalList.contains(toCheck);
     }
@@ -34,7 +34,7 @@ public class UniqueTaskList implements Iterable<Task> {
      *
      * @throws DuplicateTaskException if the person to add is a duplicate of an existing person in the list.
      */
-    public void add(Task toAdd) throws DuplicateTaskException {
+    public void add(FloatingTask toAdd) throws DuplicateTaskException {
         assert toAdd != null;
         if (contains(toAdd)) {
             throw new DuplicateTaskException();
@@ -49,10 +49,10 @@ public class UniqueTaskList implements Iterable<Task> {
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updatePerson(int index, ReadOnlyTask editedPerson) throws DuplicateTaskException {
+    public void updatePerson(int index, ReadOnlyFloatingTask editedPerson) throws DuplicateTaskException {
         assert editedPerson != null;
 
-        Task personToUpdate = internalList.get(index);
+        FloatingTask personToUpdate = internalList.get(index);
         if (!personToUpdate.equals(editedPerson) && internalList.contains(editedPerson)) {
             throw new DuplicateTaskException();
         }
@@ -69,7 +69,7 @@ public class UniqueTaskList implements Iterable<Task> {
      *
      * @throws TaskNotFoundException if no such person could be found in the list.
      */
-    public boolean remove(ReadOnlyTask toRemove) throws TaskNotFoundException {
+    public boolean remove(ReadOnlyFloatingTask toRemove) throws TaskNotFoundException {
         assert toRemove != null;
         final boolean personFoundAndDeleted = internalList.remove(toRemove);
         if (!personFoundAndDeleted) {
@@ -82,20 +82,20 @@ public class UniqueTaskList implements Iterable<Task> {
         this.internalList.setAll(replacement.internalList);
     }
 
-    public void setPersons(List<? extends ReadOnlyTask> persons) throws DuplicateTaskException {
+    public void setPersons(List<? extends ReadOnlyFloatingTask> persons) throws DuplicateTaskException {
         final UniqueTaskList replacement = new UniqueTaskList();
-        for (final ReadOnlyTask person : persons) {
-            replacement.add(new Task(person));
+        for (final ReadOnlyFloatingTask person : persons) {
+            replacement.add(new FloatingTask(person));
         }
         setPersons(replacement);
     }
 
-    public UnmodifiableObservableList<Task> asObservableList() {
+    public UnmodifiableObservableList<FloatingTask> asObservableList() {
         return new UnmodifiableObservableList<>(internalList);
     }
 
     @Override
-    public Iterator<Task> iterator() {
+    public Iterator<FloatingTask> iterator() {
         return internalList.iterator();
     }
 

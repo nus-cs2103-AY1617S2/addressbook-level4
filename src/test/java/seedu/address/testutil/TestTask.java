@@ -3,16 +3,16 @@ package seedu.address.testutil;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Address;
 import seedu.address.model.task.Email;
-import seedu.address.model.task.Name;
+import seedu.address.model.task.Description;
 import seedu.address.model.task.Phone;
-import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.ReadOnlyFloatingTask;
 
 /**
  * A mutable person object. For testing only.
  */
-public class TestTask implements ReadOnlyTask {
+public class TestTask implements ReadOnlyFloatingTask {
 
-    private Name name;
+    private Description name;
     private Address address;
     private Email email;
     private Phone phone;
@@ -26,14 +26,11 @@ public class TestTask implements ReadOnlyTask {
      * Creates a copy of {@code personToCopy}.
      */
     public TestTask(TestTask personToCopy) {
-        this.name = personToCopy.getName();
-        this.phone = personToCopy.getPhone();
-        this.email = personToCopy.getEmail();
-        this.address = personToCopy.getAddress();
+        this.name = personToCopy.getDescription();
         this.tags = personToCopy.getTags();
     }
 
-    public void setName(Name name) {
+    public void setName(Description name) {
         this.name = name;
     }
 
@@ -54,23 +51,8 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Name getName() {
+    public Description getDescription() {
         return name;
-    }
-
-    @Override
-    public Phone getPhone() {
-        return phone;
-    }
-
-    @Override
-    public Email getEmail() {
-        return email;
-    }
-
-    @Override
-    public Address getAddress() {
-        return address;
     }
 
     @Override
@@ -85,10 +67,7 @@ public class TestTask implements ReadOnlyTask {
 
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
-        sb.append("add " + this.getName().fullName + " ");
-        sb.append("a/" + this.getAddress().value + " ");
-        sb.append("p/" + this.getPhone().value + " ");
-        sb.append("e/" + this.getEmail().value + " ");
+        sb.append("add " + this.getDescription().fullDescription + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
