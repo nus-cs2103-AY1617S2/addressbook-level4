@@ -29,7 +29,7 @@ public class FindCommandParser {
         }
 
         // keywords delimited by whitespace
-        final String[] keywords = matcher.group("keywords").split("\\s+");
+        final String[] keywords = matcher.group("keywords").split("\\s+"); 
         final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
         return new FindCommand(keywordSet);
     }

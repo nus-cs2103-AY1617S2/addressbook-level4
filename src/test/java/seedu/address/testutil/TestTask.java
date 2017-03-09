@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Date;
+import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Instruction;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
@@ -15,7 +15,7 @@ public class TestTask implements ReadOnlyTask {
     private Title title;
     private Instruction instruction;
     private Priority priority;
-    private Date date;
+    private Deadline date;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -27,7 +27,7 @@ public class TestTask implements ReadOnlyTask {
      */
     public TestTask(TestTask taskToCopy) {
         this.title = taskToCopy.getTitle();
-        this.date = taskToCopy.getDate();
+        this.date = taskToCopy.getDeadline();
         this.priority = taskToCopy.getPriority();
         this.instruction = taskToCopy.getInstruction();
         this.tags = taskToCopy.getTags();
@@ -45,7 +45,7 @@ public class TestTask implements ReadOnlyTask {
         this.priority = priority;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Deadline date) {
         this.date = date;
     }
 
@@ -59,7 +59,7 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Date getDate() {
+    public Deadline getDeadline() {
         return date;
     }
 
@@ -87,7 +87,7 @@ public class TestTask implements ReadOnlyTask {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getTitle().title + " ");
         sb.append("i/" + this.getInstruction().value + " ");
-        sb.append("d/" + this.getDate().value + " ");
+        sb.append("d/" + this.getDeadline().toString() + " ");
         sb.append("p/" + this.getPriority().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();

@@ -2,12 +2,13 @@ package seedu.address.logic.commands;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Optional;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Date;
+import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Instruction;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.Task;
@@ -45,7 +46,7 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Task(
                 new Title(title),
-                new Date(date),
+                new Deadline(date),
                 new Priority(priority),
                 new Instruction(instruction),
                 new UniqueTagList(tagSet)

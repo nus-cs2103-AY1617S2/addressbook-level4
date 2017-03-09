@@ -7,7 +7,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Date;
+import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Instruction;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
@@ -79,7 +79,7 @@ public class EditCommand extends Command {
         assert taskToEdit != null;
 
         Title updatedTitle = editTaskDescriptor.getTitle().orElseGet(taskToEdit::getTitle);
-        Date updatedDate = editTaskDescriptor.getDate().orElseGet(taskToEdit::getDate);
+        Deadline updatedDate = editTaskDescriptor.getDate().orElseGet(taskToEdit::getDeadline);
         Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
         Instruction updatedInstruction = editTaskDescriptor.getInstruction().orElseGet(taskToEdit::getInstruction);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
@@ -93,7 +93,7 @@ public class EditCommand extends Command {
      */
     public static class EditTaskDescriptor {
         private Optional<Title> title = Optional.empty();
-        private Optional<Date> date = Optional.empty();
+        private Optional<Deadline> date = Optional.empty();
         private Optional<Priority> priority = Optional.empty();
         private Optional<Instruction> instruction = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
@@ -124,12 +124,12 @@ public class EditCommand extends Command {
             return title;
         }
 
-        public void setDate(Optional<Date> date) {
+        public void setDate(Optional<Deadline> date) {
             assert date != null;
             this.date = date;
         }
 
-        public Optional<Date> getDate() {
+        public Optional<Deadline> getDate() {
             return date;
         }
 
