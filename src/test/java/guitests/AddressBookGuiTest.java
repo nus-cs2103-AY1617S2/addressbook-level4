@@ -8,6 +8,7 @@ import java.util.concurrent.TimeoutException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.rules.TestName;
 import org.testfx.api.FxToolkit;
@@ -28,7 +29,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.testutil.TestUtil;
 import seedu.address.testutil.TypicalTestPersons;
-
+@Ignore
 /**
  * A GUI Test class for AddressBook.
  */
