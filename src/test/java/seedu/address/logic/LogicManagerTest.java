@@ -194,9 +194,9 @@ public class LogicManagerTest {
 
     @Test
     public void execute_add_invalidTaskData() {
-        assertCommandFailure("add []\\[;] by valid, address",
+        assertCommandFailure("add []\\[;] by sunday 0900",
                 Title.MESSAGE_TITLE_CONSTRAINTS);
-        assertCommandFailure("add Valid Name by valid, address t/invalid_-[.label",
+        assertCommandFailure("add Valid Name by friday t/invalid_-[.label",
                 Label.MESSAGE_LABEL_CONSTRAINTS);
 
     }
@@ -410,7 +410,7 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Title name = new Title("Adam Brown");
-            Deadline deadline = new Deadline("Monday");
+            Deadline deadline = new Deadline("today 2100");
             Label label1 = new Label("label1");
             Label label2 = new Label("longerlabel2");
             UniqueLabelList labels = new UniqueLabelList(label1, label2);
@@ -427,7 +427,7 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Title("Task " + seed),
-                    new Deadline("House of " + seed),
+                    new Deadline("tomorrow 2359"),
                     new UniqueLabelList(new Label("label" + Math.abs(seed)), new Label("label" + Math.abs(seed + 1)))
                     );
         }
@@ -525,7 +525,7 @@ public class LogicManagerTest {
         Task generateTaskWithName(String name) throws Exception {
             return new Task(
                     new Title(name),
-                    new Deadline("House of 1"),
+                    new Deadline("next wed 2359"),
                     new UniqueLabelList(new Label("label"))
                     );
         }
