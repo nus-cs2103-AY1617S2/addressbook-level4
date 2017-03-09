@@ -1,6 +1,6 @@
 # To-do List - Developer Guide
 
-By : `CS2103JAN2017-W10-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `NUS`
+By : `CS2103JAN2017-W10-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; License: `NUS`
 
 ---
 
@@ -389,7 +389,7 @@ Priority | As a ... | I want to ... | So that...
 
 {More to be added}
 ## Appendix B : Use Cases
-	
+
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
 #### Use case #1: add task
@@ -654,7 +654,7 @@ Use case ends
 
 <br>
 
-#### Use case #11: Select a task or a tag 	
+#### Use case #11: Select a task or a tag
 
 **MSS**
 
@@ -679,7 +679,7 @@ Use case ends
 
 <br>
 
-#### Use case #12: Exit      	
+#### Use case #12: Exit
 
 **MSS**
 
@@ -694,7 +694,7 @@ Use case ends
 
 <br>
 
-#### Use case #13: Storage             	
+#### Use case #13: Storage
 
 **MSS**
 
@@ -714,7 +714,7 @@ Use case ends
 
 <br>
 
-#### Use case #14: Set reminder  	
+#### Use case #14: Set reminder
 
 **MSS**
 
@@ -730,7 +730,7 @@ Use case ends
 
 <br>
 
-#### Use case #15: Tag   	
+#### Use case #15: Tag
 
 **MSS**
 
