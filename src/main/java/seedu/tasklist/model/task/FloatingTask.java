@@ -7,7 +7,7 @@ import seedu.tasklist.model.tag.UniqueTagList;
  * Represents a Floating Task in the task list.
  * Guarantees: details are present and not null, field values are validated.
  */
-public class FloatingTask implements ReadOnlyFloatingTask {
+public class FloatingTask extends Task implements ReadOnlyFloatingTask {
 
     private Name name;
     private Comment comment;
@@ -20,6 +20,7 @@ public class FloatingTask implements ReadOnlyFloatingTask {
      * Every field must be present and not null.
      */
     public FloatingTask(Name name, Comment comment, Priority priority, Status status, UniqueTagList tags) {
+        super(name, comment, priority, status, tags);
         assert !CollectionUtil.isAnyNull(name, comment, priority,status, tags);
         this.name = name;
         this.comment = comment;

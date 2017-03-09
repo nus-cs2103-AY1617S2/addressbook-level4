@@ -9,7 +9,7 @@ import seedu.tasklist.model.tag.UniqueTagList;
  * Represents a Task in the task list.
  * Guarantees: details are present and not null, field values are validated.
  */
-public class Task implements ReadOnlyTask {
+public abstract class Task implements ReadOnlyTask {
 
     private Name name;
     private Comment comment;
