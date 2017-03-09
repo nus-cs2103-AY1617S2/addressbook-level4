@@ -32,7 +32,7 @@ public class DeadlineTask extends Task implements ReadOnlyDeadlineTask{
     }
     
     /**
-     * Creates a copy of the given ReadOnlyFloatingTask.
+     * Creates a copy of the given ReadOnlyDeadlineTask.
      */
     public DeadlineTask(ReadOnlyDeadlineTask source) {
         this(source.getName(), source.getComment(), source.getPriority(), source.getStatus(), source.getDeadline(), source.getTags());
