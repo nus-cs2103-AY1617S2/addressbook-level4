@@ -16,7 +16,7 @@ public class SampleDataUtil {
 		try {
 			return new Task[] {
 					new Task(new Name("Refactor"), new Priority("1"), new Deadline("today"),
-							new Description("Refactor all mentions of task / addressbook"),
+							new Description("Refactor all mentions of task / taskManager"),
 							new UniqueTagList("Huanhui")),
 					new Task(new Name("pass Travis"), new Priority("1"), new Deadline("today"),
 							new Description("Remove trailing whitespaces in md files for Travis to pass"),
