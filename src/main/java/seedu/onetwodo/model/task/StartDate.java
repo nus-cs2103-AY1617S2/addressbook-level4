@@ -21,7 +21,7 @@ public class StartDate extends EndDate {
         super(input);
         defaultDateTime.withHour(0).withMinute(0);
         String trimmedInput = input.trim();
-        this.localDateTime = DateTimeParser.parse(trimmedInput, defaultDateTime);
+        this.localDateTime = DateTimeParser.parseDateTime(trimmedInput, defaultDateTime);
         this.value = createDisplayValue(localDateTime);
     }
     

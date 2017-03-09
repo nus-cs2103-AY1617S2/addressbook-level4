@@ -11,8 +11,8 @@ import seedu.onetwodo.testutil.TestTask;
 import seedu.onetwodo.testutil.TestUtil;
 
 public class AddCommandTest extends ToDoListGuiTest {
-
-/*    @Test
+/*
+    @Test
     public void add() {
         //add one task
         TestTask[] currentList = td.getTypicalTasks();
@@ -50,5 +50,5 @@ public class AddCommandTest extends ToDoListGuiTest {
         TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
         assertTrue(taskListPanel.isListMatching(expectedList));
     }
-
-}*/
+*/
+}

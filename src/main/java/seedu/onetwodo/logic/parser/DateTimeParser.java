@@ -20,6 +20,8 @@ public class DateTimeParser {
 
     
     public DateTimeParser() {}
+    
+    //private static Parser parser = new Parser();
 
     /**
      * Parse user input using Natty library.
@@ -28,20 +30,21 @@ public class DateTimeParser {
      * @param defaultDateTime if no date OR time is stated, use this value.
      * @return LocalDateTime if Natty parses successfully. Else, return empty Optional.
      */
-    public static Optional<LocalDateTime> parse(String input, LocalDateTime defaultDateTime) 
+    public static Optional<LocalDateTime> parseDateTime(String input, LocalDateTime defaultDateTime) 
                 throws IllegalValueException {
         
         if(input.isEmpty()) {
             return Optional.empty();
         }
-        LocalDateTime formatDateTime = defaultDateTime.withSecond(0).withNano(0);
-        
-        return Optional.of(formatDateTime);
+        //LocalDateTime formatDateTime = defaultDateTime.withSecond(0).withNano(0);
+        //return Optional.of(formatDateTime);
 
         // Input exist. Try to parse it using Natty.
-        /*Parser parser = new Parser();
+        
+        System.out.println("done! before parse");
+        Parser parser = new Parser();
         List<DateGroup> dateGroups = parser.parse(input);
-
+        System.out.println("done! after parse");
         if(dateGroups.isEmpty()) {
             throw new IllegalValueException(MESSAGE_DATE_PARSE_FAILURE);
         }
@@ -53,10 +56,11 @@ public class DateTimeParser {
         }
         Date parsedDateTime = dates.get(0);
         LocalDateTime localDateTime = toLocalDateTime(parsedDateTime);
-        LocalDateTime finalisedDateTime = toFinalDateTime(localDateTime, formatDateTime, dateGroup);
-        LocalDateTime formattedFinalisedDateTime = finalisedDateTime.withSecond(0).withNano(0);
+       // LocalDateTime finalisedDateTime = toFinalDateTime(localDateTime, defaultDateTime, dateGroup);
+        //LocalDateTime formattedFinalisedDateTime = finalisedDateTime.withSecond(0).withNano(0);
 
-        return Optional.of(formattedFinalisedDateTime);*/
+        //return Optional.of(formattedFinalisedDateTime);
+        return Optional.of(localDateTime);
     }
     
     /**
