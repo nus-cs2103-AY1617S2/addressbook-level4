@@ -1,11 +1,11 @@
-package seedu.address.logic;
+package seedu.watodo.logic;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.watodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.watodo.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
+import static seedu.watodo.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,34 +20,36 @@ import org.junit.rules.TemporaryFolder;
 
 import com.google.common.eventbus.Subscribe;
 
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.events.model.TaskListChangedEvent;
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
-import seedu.address.commons.events.ui.ShowHelpRequestEvent;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.SelectCommand;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.TaskList;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyTaskList;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Address;
-import seedu.address.model.task.Email;
-import seedu.address.model.task.Description;
-import seedu.address.model.task.Phone;
-import seedu.address.model.task.ReadOnlyFloatingTask;
-import seedu.address.model.task.FloatingTask;
-import seedu.address.storage.StorageManager;
+import seedu.watodo.commons.core.EventsCenter;
+import seedu.watodo.commons.events.model.TaskListChangedEvent;
+import seedu.watodo.commons.events.ui.JumpToListRequestEvent;
+import seedu.watodo.commons.events.ui.ShowHelpRequestEvent;
+import seedu.watodo.logic.Logic;
+import seedu.watodo.logic.LogicManager;
+import seedu.watodo.logic.commands.AddCommand;
+import seedu.watodo.logic.commands.ClearCommand;
+import seedu.watodo.logic.commands.Command;
+import seedu.watodo.logic.commands.CommandResult;
+import seedu.watodo.logic.commands.DeleteCommand;
+import seedu.watodo.logic.commands.ExitCommand;
+import seedu.watodo.logic.commands.FindCommand;
+import seedu.watodo.logic.commands.HelpCommand;
+import seedu.watodo.logic.commands.ListCommand;
+import seedu.watodo.logic.commands.SelectCommand;
+import seedu.watodo.logic.commands.exceptions.CommandException;
+import seedu.watodo.model.Model;
+import seedu.watodo.model.ModelManager;
+import seedu.watodo.model.ReadOnlyTaskList;
+import seedu.watodo.model.TaskList;
+import seedu.watodo.model.tag.Tag;
+import seedu.watodo.model.tag.UniqueTagList;
+import seedu.watodo.model.task.Address;
+import seedu.watodo.model.task.Description;
+import seedu.watodo.model.task.Email;
+import seedu.watodo.model.task.FloatingTask;
+import seedu.watodo.model.task.Phone;
+import seedu.watodo.model.task.ReadOnlyFloatingTask;
+import seedu.watodo.storage.StorageManager;
 
 
 public class LogicManagerTest {

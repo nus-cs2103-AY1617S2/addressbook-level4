@@ -1,4 +1,4 @@
-package seedu.address.model;
+package seedu.watodo.model;
 
 import static org.junit.Assert.assertEquals;
 
@@ -14,10 +14,12 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.task.ReadOnlyFloatingTask;
-import seedu.address.model.task.FloatingTask;
-import seedu.address.testutil.TypicalTestTasks;
+import seedu.watodo.model.ReadOnlyTaskList;
+import seedu.watodo.model.TaskList;
+import seedu.watodo.model.tag.Tag;
+import seedu.watodo.model.task.FloatingTask;
+import seedu.watodo.model.task.ReadOnlyFloatingTask;
+import seedu.watodo.testutil.TypicalTestTasks;
 
 public class TaskListTest {
 

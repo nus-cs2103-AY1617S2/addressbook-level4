@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.watodo.logic.parser;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -6,7 +6,8 @@ import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Test;
 
-import seedu.address.logic.parser.ArgumentTokenizer.Prefix;
+import seedu.watodo.logic.parser.ArgumentTokenizer;
+import seedu.watodo.logic.parser.ArgumentTokenizer.Prefix;
 
 public class ArgumentTokenizerTest {
 

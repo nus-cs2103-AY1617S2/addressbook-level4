@@ -1,9 +1,9 @@
-package seedu.address.logic;
+package seedu.watodo.logic;
 
 import javafx.collections.ObservableList;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.task.ReadOnlyFloatingTask;
+import seedu.watodo.logic.commands.CommandResult;
+import seedu.watodo.logic.commands.exceptions.CommandException;
+import seedu.watodo.model.task.ReadOnlyFloatingTask;
 
 /**
  * API of the Logic component

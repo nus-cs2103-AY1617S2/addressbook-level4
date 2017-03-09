@@ -1,12 +1,12 @@
-package seedu.address.logic.parser;
+package seedu.watodo.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.watodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Optional;
 
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.IncorrectCommand;
-import seedu.address.logic.commands.SelectCommand;
+import seedu.watodo.logic.commands.Command;
+import seedu.watodo.logic.commands.IncorrectCommand;
+import seedu.watodo.logic.commands.SelectCommand;
 
 /**
  * Parses input arguments and creates a new SelectCommand object

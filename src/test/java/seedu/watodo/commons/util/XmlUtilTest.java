@@ -1,4 +1,4 @@
-package seedu.address.commons.util;
+package seedu.watodo.commons.util;
 
 import static org.junit.Assert.assertEquals;
 
@@ -11,10 +11,12 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.TaskList;
-import seedu.address.storage.XmlSerializableTaskList;
-import seedu.address.testutil.TaskListBuilder;
-import seedu.address.testutil.TestUtil;
+import seedu.watodo.commons.util.FileUtil;
+import seedu.watodo.commons.util.XmlUtil;
+import seedu.watodo.model.TaskList;
+import seedu.watodo.storage.XmlSerializableTaskList;
+import seedu.watodo.testutil.TaskListBuilder;
+import seedu.watodo.testutil.TestUtil;
 
 public class XmlUtilTest {
 

@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.watodo.ui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,13 +10,13 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import seedu.address.commons.core.Config;
-import seedu.address.commons.core.GuiSettings;
-import seedu.address.commons.events.ui.ExitAppRequestEvent;
-import seedu.address.commons.util.FxViewUtil;
-import seedu.address.logic.Logic;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.task.ReadOnlyFloatingTask;
+import seedu.watodo.commons.core.Config;
+import seedu.watodo.commons.core.GuiSettings;
+import seedu.watodo.commons.events.ui.ExitAppRequestEvent;
+import seedu.watodo.commons.util.FxViewUtil;
+import seedu.watodo.logic.Logic;
+import seedu.watodo.model.UserPrefs;
+import seedu.watodo.model.task.ReadOnlyFloatingTask;
 
 /**
  * The Main Window. Provides the basic application layout containing

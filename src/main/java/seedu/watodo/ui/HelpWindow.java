@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.watodo.ui;
 
 import java.util.logging.Logger;
 
@@ -7,8 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.util.FxViewUtil;
+import seedu.watodo.commons.core.LogsCenter;
+import seedu.watodo.commons.util.FxViewUtil;
 
 /**
  * Controller for a help page

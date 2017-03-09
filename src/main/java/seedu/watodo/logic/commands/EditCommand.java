@@ -1,19 +1,19 @@
-package seedu.address.logic.commands;
+package seedu.watodo.logic.commands;
 
 import java.util.List;
 import java.util.Optional;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.util.CollectionUtil;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Address;
-import seedu.address.model.task.Email;
-import seedu.address.model.task.Description;
-import seedu.address.model.task.Phone;
-import seedu.address.model.task.ReadOnlyFloatingTask;
-import seedu.address.model.task.FloatingTask;
-import seedu.address.model.task.UniqueTaskList;
+import seedu.watodo.commons.core.Messages;
+import seedu.watodo.commons.util.CollectionUtil;
+import seedu.watodo.logic.commands.exceptions.CommandException;
+import seedu.watodo.model.tag.UniqueTagList;
+import seedu.watodo.model.task.Address;
+import seedu.watodo.model.task.Description;
+import seedu.watodo.model.task.Email;
+import seedu.watodo.model.task.FloatingTask;
+import seedu.watodo.model.task.Phone;
+import seedu.watodo.model.task.ReadOnlyFloatingTask;
+import seedu.watodo.model.task.UniqueTaskList;
 
 /**
  * Edits the details of an existing task in the task manager.

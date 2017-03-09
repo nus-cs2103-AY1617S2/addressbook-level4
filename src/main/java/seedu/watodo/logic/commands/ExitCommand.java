@@ -1,7 +1,7 @@
-package seedu.address.logic.commands;
+package seedu.watodo.logic.commands;
 
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.events.ui.ExitAppRequestEvent;
+import seedu.watodo.commons.core.EventsCenter;
+import seedu.watodo.commons.events.ui.ExitAppRequestEvent;
 
 /**
  * Terminates the program.

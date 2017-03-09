@@ -1,22 +1,22 @@
-package seedu.address.logic.parser;
+package seedu.watodo.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.watodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.watodo.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.watodo.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.watodo.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.watodo.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditTaskDescriptor;
-import seedu.address.logic.commands.IncorrectCommand;
-import seedu.address.model.tag.UniqueTagList;
+import seedu.watodo.commons.exceptions.IllegalValueException;
+import seedu.watodo.logic.commands.Command;
+import seedu.watodo.logic.commands.EditCommand;
+import seedu.watodo.logic.commands.IncorrectCommand;
+import seedu.watodo.logic.commands.EditCommand.EditTaskDescriptor;
+import seedu.watodo.model.tag.UniqueTagList;
 
 /**
  * Parses input arguments and creates a new EditCommand object

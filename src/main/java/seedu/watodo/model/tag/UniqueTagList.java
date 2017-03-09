@@ -1,4 +1,4 @@
-package seedu.address.model.tag;
+package seedu.watodo.model.tag;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,10 +10,10 @@ import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.commons.exceptions.DuplicateDataException;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.CollectionUtil;
+import seedu.watodo.commons.core.UnmodifiableObservableList;
+import seedu.watodo.commons.exceptions.DuplicateDataException;
+import seedu.watodo.commons.exceptions.IllegalValueException;
+import seedu.watodo.commons.util.CollectionUtil;
 
 /**
  * A list of tags that enforces no nulls and uniqueness between its elements.

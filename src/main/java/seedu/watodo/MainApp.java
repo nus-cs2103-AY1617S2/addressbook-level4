@@ -1,4 +1,4 @@
-package seedu.address;
+package seedu.watodo;
 
 import java.io.IOException;
 import java.util.Map;
@@ -10,26 +10,26 @@ import com.google.common.eventbus.Subscribe;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-import seedu.address.commons.core.Config;
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.core.Version;
-import seedu.address.commons.events.ui.ExitAppRequestEvent;
-import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.commons.util.ConfigUtil;
-import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.Logic;
-import seedu.address.logic.LogicManager;
-import seedu.address.model.TaskList;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyTaskList;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.Storage;
-import seedu.address.storage.StorageManager;
-import seedu.address.ui.Ui;
-import seedu.address.ui.UiManager;
+import seedu.watodo.commons.core.Config;
+import seedu.watodo.commons.core.EventsCenter;
+import seedu.watodo.commons.core.LogsCenter;
+import seedu.watodo.commons.core.Version;
+import seedu.watodo.commons.events.ui.ExitAppRequestEvent;
+import seedu.watodo.commons.exceptions.DataConversionException;
+import seedu.watodo.commons.util.ConfigUtil;
+import seedu.watodo.commons.util.StringUtil;
+import seedu.watodo.logic.Logic;
+import seedu.watodo.logic.LogicManager;
+import seedu.watodo.model.Model;
+import seedu.watodo.model.ModelManager;
+import seedu.watodo.model.ReadOnlyTaskList;
+import seedu.watodo.model.TaskList;
+import seedu.watodo.model.UserPrefs;
+import seedu.watodo.model.util.SampleDataUtil;
+import seedu.watodo.storage.Storage;
+import seedu.watodo.storage.StorageManager;
+import seedu.watodo.ui.Ui;
+import seedu.watodo.ui.UiManager;
 
 /**
  * The main entry point to the application.
@@ -81,7 +81,7 @@ public class MainApp extends Application {
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleWatodo);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
             initialData = new TaskList();

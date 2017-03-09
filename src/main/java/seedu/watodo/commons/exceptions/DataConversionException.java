@@ -1,4 +1,4 @@
-package seedu.address.commons.exceptions;
+package seedu.watodo.commons.exceptions;
 
 /**
  * Represents an error during conversion of data from one format to another

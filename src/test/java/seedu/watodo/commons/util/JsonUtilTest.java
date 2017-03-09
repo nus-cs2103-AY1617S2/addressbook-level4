@@ -1,4 +1,4 @@
-package seedu.address.commons.util;
+package seedu.watodo.commons.util;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,8 +7,10 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-import seedu.address.testutil.SerializableTestClass;
-import seedu.address.testutil.TestUtil;
+import seedu.watodo.commons.util.FileUtil;
+import seedu.watodo.commons.util.JsonUtil;
+import seedu.watodo.testutil.SerializableTestClass;
+import seedu.watodo.testutil.TestUtil;
 
 /**
  * Tests JSON Read and Write

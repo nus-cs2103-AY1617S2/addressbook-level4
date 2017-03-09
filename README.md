@@ -9,7 +9,7 @@
 
 Watodo is a task management application designed to help you sort out what you have to do. Be it deadlines, events or tasks to be done ‘some day’, Watodo can help you keep track of your tasks in an organised manner and takes the clutter off your mind.
 
-Watodo is a desktop application. It has a GUI but it favours users who prefer using the keyboard as most user interactions happen using a CLI (Command Line Interface). 
+Watodo is a desktop application. It has a GUI but it favours users who prefer using the keyboard as most user interactions happen using a CLI (Command Line Interface).
 
 
 #### Site Map

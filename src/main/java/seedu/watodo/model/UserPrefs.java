@@ -1,8 +1,8 @@
-package seedu.address.model;
+package seedu.watodo.model;
 
 import java.util.Objects;
 
-import seedu.address.commons.core.GuiSettings;
+import seedu.watodo.commons.core.GuiSettings;
 
 /**
  * Represents User's preferences.

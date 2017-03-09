@@ -1,6 +1,6 @@
-package seedu.address.model.task;
+package seedu.watodo.model.task;
 
-import seedu.address.model.tag.UniqueTagList;
+import seedu.watodo.model.tag.UniqueTagList;
 
 /**
  * A read-only immutable interface for a Task in the addressbook.

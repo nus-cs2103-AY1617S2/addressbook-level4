@@ -1,22 +1,22 @@
-package seedu.address.logic.parser;
+package seedu.watodo.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.watodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.watodo.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.IncorrectCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.SelectCommand;
+import seedu.watodo.logic.commands.AddCommand;
+import seedu.watodo.logic.commands.ClearCommand;
+import seedu.watodo.logic.commands.Command;
+import seedu.watodo.logic.commands.DeleteCommand;
+import seedu.watodo.logic.commands.EditCommand;
+import seedu.watodo.logic.commands.ExitCommand;
+import seedu.watodo.logic.commands.FindCommand;
+import seedu.watodo.logic.commands.HelpCommand;
+import seedu.watodo.logic.commands.IncorrectCommand;
+import seedu.watodo.logic.commands.ListCommand;
+import seedu.watodo.logic.commands.SelectCommand;
 
 /**
  * Parses user input.

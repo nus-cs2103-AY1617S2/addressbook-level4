@@ -1,4 +1,4 @@
-package seedu.address.testutil;
+package seedu.watodo.testutil;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,20 +25,20 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import junit.framework.AssertionFailedError;
-import seedu.address.TestApp;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.FileUtil;
-import seedu.address.commons.util.XmlUtil;
-import seedu.address.model.TaskList;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Address;
-import seedu.address.model.task.Email;
-import seedu.address.model.task.Description;
-import seedu.address.model.task.Phone;
-import seedu.address.model.task.ReadOnlyFloatingTask;
-import seedu.address.model.task.FloatingTask;
-import seedu.address.storage.XmlSerializableTaskList;
+import seedu.watodo.TestApp;
+import seedu.watodo.commons.exceptions.IllegalValueException;
+import seedu.watodo.commons.util.FileUtil;
+import seedu.watodo.commons.util.XmlUtil;
+import seedu.watodo.model.TaskList;
+import seedu.watodo.model.tag.Tag;
+import seedu.watodo.model.tag.UniqueTagList;
+import seedu.watodo.model.task.Address;
+import seedu.watodo.model.task.Description;
+import seedu.watodo.model.task.Email;
+import seedu.watodo.model.task.FloatingTask;
+import seedu.watodo.model.task.Phone;
+import seedu.watodo.model.task.ReadOnlyFloatingTask;
+import seedu.watodo.storage.XmlSerializableTaskList;
 
 /**
  * A utility class for test cases.

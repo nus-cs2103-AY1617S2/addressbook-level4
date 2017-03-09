@@ -1,19 +1,19 @@
-package seedu.address.model;
+package seedu.watodo.model;
 
 import java.util.Set;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
-import seedu.address.commons.core.ComponentManager;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.commons.events.model.TaskListChangedEvent;
-import seedu.address.commons.util.CollectionUtil;
-import seedu.address.commons.util.StringUtil;
-import seedu.address.model.task.ReadOnlyFloatingTask;
-import seedu.address.model.task.FloatingTask;
-import seedu.address.model.task.UniqueTaskList;
-import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
+import seedu.watodo.commons.core.ComponentManager;
+import seedu.watodo.commons.core.LogsCenter;
+import seedu.watodo.commons.core.UnmodifiableObservableList;
+import seedu.watodo.commons.events.model.TaskListChangedEvent;
+import seedu.watodo.commons.util.CollectionUtil;
+import seedu.watodo.commons.util.StringUtil;
+import seedu.watodo.model.task.FloatingTask;
+import seedu.watodo.model.task.ReadOnlyFloatingTask;
+import seedu.watodo.model.task.UniqueTaskList;
+import seedu.watodo.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Represents the in-memory model of the address book data.

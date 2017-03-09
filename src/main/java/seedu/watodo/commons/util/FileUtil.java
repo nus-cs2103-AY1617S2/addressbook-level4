@@ -1,4 +1,4 @@
-package seedu.address.commons.util;
+package seedu.watodo.commons.util;
 
 import java.io.File;
 import java.io.IOException;

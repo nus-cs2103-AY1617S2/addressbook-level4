@@ -1,6 +1,6 @@
-package seedu.address.logic.commands;
+package seedu.watodo.logic.commands;
 
-import seedu.address.model.TaskList;
+import seedu.watodo.model.TaskList;
 
 /**
  * Clears the task manager.

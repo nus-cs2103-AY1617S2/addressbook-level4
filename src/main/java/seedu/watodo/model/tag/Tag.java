@@ -1,7 +1,7 @@
-package seedu.address.model.tag;
+package seedu.watodo.model.tag;
 
 
-import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.watodo.commons.exceptions.IllegalValueException;
 
 /**
  * Represents a Tag in the address book.

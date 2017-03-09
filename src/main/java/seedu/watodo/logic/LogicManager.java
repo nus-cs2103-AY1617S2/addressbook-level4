@@ -1,17 +1,17 @@
-package seedu.address.logic;
+package seedu.watodo.logic;
 
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.ComponentManager;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.Parser;
-import seedu.address.model.Model;
-import seedu.address.model.task.ReadOnlyFloatingTask;
-import seedu.address.storage.Storage;
+import seedu.watodo.commons.core.ComponentManager;
+import seedu.watodo.commons.core.LogsCenter;
+import seedu.watodo.logic.commands.Command;
+import seedu.watodo.logic.commands.CommandResult;
+import seedu.watodo.logic.commands.exceptions.CommandException;
+import seedu.watodo.logic.parser.Parser;
+import seedu.watodo.model.Model;
+import seedu.watodo.model.task.ReadOnlyFloatingTask;
+import seedu.watodo.storage.Storage;
 
 /**
  * The main LogicManager of the app.

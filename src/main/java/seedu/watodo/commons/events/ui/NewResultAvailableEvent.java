@@ -1,6 +1,6 @@
-package seedu.address.commons.events.ui;
+package seedu.watodo.commons.events.ui;
 
-import seedu.address.commons.events.BaseEvent;
+import seedu.watodo.commons.events.BaseEvent;
 
 /**
  * Indicates that a new result is available.

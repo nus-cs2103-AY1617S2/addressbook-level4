@@ -1,7 +1,7 @@
-package seedu.address.commons.events.ui;
+package seedu.watodo.commons.events.ui;
 
-import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.task.ReadOnlyFloatingTask;
+import seedu.watodo.commons.events.BaseEvent;
+import seedu.watodo.model.task.ReadOnlyFloatingTask;
 
 /**
  * Represents a selection change in the Task List Panel

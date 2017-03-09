@@ -1,17 +1,17 @@
-package seedu.address.logic.parser;
+package seedu.watodo.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.watodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.watodo.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.watodo.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.watodo.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.watodo.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.NoSuchElementException;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.IncorrectCommand;
+import seedu.watodo.commons.exceptions.IllegalValueException;
+import seedu.watodo.logic.commands.AddCommand;
+import seedu.watodo.logic.commands.Command;
+import seedu.watodo.logic.commands.IncorrectCommand;
 
 /**
  * Parses input arguments and creates a new AddCommand object

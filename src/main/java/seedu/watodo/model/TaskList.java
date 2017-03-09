@@ -1,4 +1,4 @@
-package seedu.address.model;
+package seedu.watodo.model;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -9,13 +9,13 @@ import java.util.Objects;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.ReadOnlyFloatingTask;
-import seedu.address.model.task.FloatingTask;
-import seedu.address.model.task.UniqueTaskList;
-import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.watodo.commons.core.UnmodifiableObservableList;
+import seedu.watodo.model.tag.Tag;
+import seedu.watodo.model.tag.UniqueTagList;
+import seedu.watodo.model.task.FloatingTask;
+import seedu.watodo.model.task.ReadOnlyFloatingTask;
+import seedu.watodo.model.task.UniqueTaskList;
+import seedu.watodo.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
  * Wraps all data at the address-book level

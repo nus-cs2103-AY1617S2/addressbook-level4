@@ -370,14 +370,14 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | assign tags to the tasks | organise them properly
 `* * *` | user | indicate the priority of a task | see which tasks are more urgent or important
 `* * *` | user | list the deadline tasks by date | know which are the most urgent.
-`* * *` | user | list tasks by tags | see what are the tasks under a specific category. 
-`* * *` | user | list tasks by priority | know which are the most urgent tasks. 
+`* * *` | user | list tasks by tags | see what are the tasks under a specific category.
+`* * *` | user | list tasks by priority | know which are the most urgent tasks.
 `* * *` | user | view the list of tasks that I have completed | unmark completed tasks if necessary.
 
 `* *` | user | search better with auto complete | search better.
 `* *` | user | enable auto spell checker | correct any spelling mistakes I might make when typing commands.
 `* *` | advanced user | add default keywords to my interface | customize it according to the vocabulary that I am most comfortable with.
-`* *` | advanced user | be able to use shortcut keys to execute commands that I commonly use (Eg. Ctrl+z for undoing) | do things faster and more efficiently. 
+`* *` | advanced user | be able to use shortcut keys to execute commands that I commonly use (Eg. Ctrl+z for undoing) | do things faster and more efficiently.
 `* *` | advanced user | change the layout of my UI (eg. background colour, font size) | customize it according to my preference.
 `* *` | user | receive flavour text when I mark a task as complete such as ¡°Good job!¡± And ¡°Another one off the list!¡±  | give myself more motivation to complete my tasks.
 `* *` | user | receive sound effects when I mark a task as completed | give myself more motivation to complete my tasks.
@@ -394,9 +394,9 @@ Priority | As a ... | I want to ... | So that I can...
 `*` | user | expand or collapse the additional details or subtasks of a task | prevent the task list from becoming very cluttered
 `*` | user | sync my task list with my other devices | access my task list easily.
 `*` | user | sync the tasks with my email | create tasks automatically from incoming emails.
-`*` | user | set up email notifications for specific tasks | get email reminders for when a task is due soon. 
+`*` | user | set up email notifications for specific tasks | get email reminders for when a task is due soon.
 `*` | user who collaborates with many people | share my task list with other people | view and work on the tasks as a group.
-`*` | user | share my completed task on social media | let my friends know if I have accomplished something I'm proud of. 
+`*` | user | share my completed task on social media | let my friends know if I have accomplished something I'm proud of.
 
 
 ## Appendix B : Use Cases
@@ -468,13 +468,13 @@ Use case ends.
 > 3a1. TaskList shows an error message and prompts user to edit time period of event
 > 3a2. User inputs task details <br>
 Steps 3a1-3a2 are repeated until the time period of event entered is valid
-  Use case resumes at step 4	
+  Use case resumes at step 4
 
 #### Use case: View by deadlines
 
 **MSS**
 
-1. User selects time filter to filter the deadlines of the task list by 
+1. User selects time filter to filter the deadlines of the task list by
 2. TaskList displays tasks that are due within the timeline specified by the filter <br>
   Use case ends.
 
@@ -537,21 +537,21 @@ Steps 5a1-5a2 are repeated until the keyword entered is valid
 Pros:
 
 * Supports many variations of keywords for time and dates (eg. next week, 3 days, everyday etc.)
-* Shortcut keys such as for adding and finding allow use of mouse clicks to be minimized 
+* Shortcut keys such as for adding and finding allow use of mouse clicks to be minimized
 * Auto-complete when adding tags helps to increase efficiency of usage
-* Can add a variety of tags (category, priority) to tasks to organize them better 
-* Powerful search feature that can find tasks given minimal keywords, and also find tasks by their deadlines 
+* Can add a variety of tags (category, priority) to tasks to organize them better
+* Powerful search feature that can find tasks given minimal keywords, and also find tasks by their deadlines
 * Good visual feedback through colour coding for tasks with different priorities and categories
-* Karma trend and goals enable user to track productivity and stay motivated to complete tasks on time 
+* Karma trend and goals enable user to track productivity and stay motivated to complete tasks on time
 
 Cons:
 
 * Requires Internet connection and web browser to use
-* Requires logging in to account which means there is an extra step to launch the software 
+* Requires logging in to account which means there is an extra step to launch the software
 * Certain features (eg. sync with calendar, customize theme) are only available with paid subscription
 * Most other functions are not command line interface friendly (Eg. edit, mark as complete require mouse clicks)
 * No help feature to guide new users to keywords like date and time. Need to refer to the user guide.
-* If user backspaces after typing a keyword but retypes it again for the same task, the date will not be registered anymore, which gives little allowance if users type wrongly. 
+* If user backspaces after typing a keyword but retypes it again for the same task, the date will not be registered anymore, which gives little allowance if users type wrongly.
 
 **HiTask**
 
@@ -613,7 +613,7 @@ Pros:
 * Able to sync due dates with any calendar that supports the iCalendar format
 * Has both a mobile and desktop application that can work offline
 * Able to duplicate list
-* Able to customise shortcuts 
+* Able to customise shortcuts
 * Able to specify preferred formats for the data, time and start of the week
 * Able to restore deleted lists
 * Able to print list

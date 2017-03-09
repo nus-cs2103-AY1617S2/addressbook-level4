@@ -1,8 +1,8 @@
-package seedu.address.logic.commands;
+package seedu.watodo.logic.commands;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
+import seedu.watodo.commons.core.Messages;
+import seedu.watodo.logic.commands.exceptions.CommandException;
+import seedu.watodo.model.Model;
 
 /**
  * Represents a command with hidden internal logic and the ability to be executed.

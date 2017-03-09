@@ -1,12 +1,12 @@
-package seedu.address.ui;
+package seedu.watodo.ui;
 
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
-import seedu.address.commons.util.FxViewUtil;
-import seedu.address.model.task.ReadOnlyFloatingTask;
+import seedu.watodo.commons.util.FxViewUtil;
+import seedu.watodo.model.task.ReadOnlyFloatingTask;
 
 /**
  * The Browser Panel of the App.

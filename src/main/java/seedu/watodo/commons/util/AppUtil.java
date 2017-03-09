@@ -1,7 +1,7 @@
-package seedu.address.commons.util;
+package seedu.watodo.commons.util;
 
 import javafx.scene.image.Image;
-import seedu.address.MainApp;
+import seedu.watodo.MainApp;
 
 /**
  * A container for App specific utility functions

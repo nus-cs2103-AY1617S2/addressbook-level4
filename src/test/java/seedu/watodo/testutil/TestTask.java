@@ -1,11 +1,11 @@
-package seedu.address.testutil;
+package seedu.watodo.testutil;
 
-import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Address;
-import seedu.address.model.task.Email;
-import seedu.address.model.task.Description;
-import seedu.address.model.task.Phone;
-import seedu.address.model.task.ReadOnlyFloatingTask;
+import seedu.watodo.model.tag.UniqueTagList;
+import seedu.watodo.model.task.Address;
+import seedu.watodo.model.task.Description;
+import seedu.watodo.model.task.Email;
+import seedu.watodo.model.task.Phone;
+import seedu.watodo.model.task.ReadOnlyFloatingTask;
 
 /**
  * A mutable person object. For testing only.

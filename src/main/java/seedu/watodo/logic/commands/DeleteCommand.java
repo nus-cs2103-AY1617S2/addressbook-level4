@@ -1,10 +1,10 @@
-package seedu.address.logic.commands;
+package seedu.watodo.logic.commands;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.task.ReadOnlyFloatingTask;
-import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
+import seedu.watodo.commons.core.Messages;
+import seedu.watodo.commons.core.UnmodifiableObservableList;
+import seedu.watodo.logic.commands.exceptions.CommandException;
+import seedu.watodo.model.task.ReadOnlyFloatingTask;
+import seedu.watodo.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Deletes a task identified using it's last displayed index from the task manager.

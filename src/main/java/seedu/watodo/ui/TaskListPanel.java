@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.watodo.ui;
 
 import java.util.logging.Logger;
 
@@ -10,10 +10,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ui.TaskPanelSelectionChangedEvent;
-import seedu.address.commons.util.FxViewUtil;
-import seedu.address.model.task.ReadOnlyFloatingTask;
+import seedu.watodo.commons.core.LogsCenter;
+import seedu.watodo.commons.events.ui.TaskPanelSelectionChangedEvent;
+import seedu.watodo.commons.util.FxViewUtil;
+import seedu.watodo.model.task.ReadOnlyFloatingTask;
 
 /**
  * Panel containing the list of persons.

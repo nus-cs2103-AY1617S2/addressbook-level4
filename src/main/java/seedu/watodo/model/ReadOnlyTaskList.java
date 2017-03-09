@@ -1,9 +1,9 @@
-package seedu.address.model;
+package seedu.watodo.model;
 
 
 import javafx.collections.ObservableList;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.task.ReadOnlyFloatingTask;
+import seedu.watodo.model.tag.Tag;
+import seedu.watodo.model.task.ReadOnlyFloatingTask;
 
 /**
  * Unmodifiable view of an address book

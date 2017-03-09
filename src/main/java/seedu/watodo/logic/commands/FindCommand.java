@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.watodo.logic.commands;
 
 import java.util.Set;
 

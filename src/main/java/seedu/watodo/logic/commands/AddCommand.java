@@ -1,18 +1,18 @@
-package seedu.address.logic.commands;
+package seedu.watodo.logic.commands;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Address;
-import seedu.address.model.task.Email;
-import seedu.address.model.task.Description;
-import seedu.address.model.task.Phone;
-import seedu.address.model.task.FloatingTask;
-import seedu.address.model.task.UniqueTaskList;
+import seedu.watodo.commons.exceptions.IllegalValueException;
+import seedu.watodo.logic.commands.exceptions.CommandException;
+import seedu.watodo.model.tag.Tag;
+import seedu.watodo.model.tag.UniqueTagList;
+import seedu.watodo.model.task.Address;
+import seedu.watodo.model.task.Description;
+import seedu.watodo.model.task.Email;
+import seedu.watodo.model.task.FloatingTask;
+import seedu.watodo.model.task.Phone;
+import seedu.watodo.model.task.UniqueTaskList;
 
 /**
  * Adds a task to the task manager.

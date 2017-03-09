@@ -1,15 +1,15 @@
-package seedu.address.model.util;
+package seedu.watodo.model.util;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.TaskList;
-import seedu.address.model.ReadOnlyTaskList;
-import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Address;
-import seedu.address.model.task.Email;
-import seedu.address.model.task.Description;
-import seedu.address.model.task.Phone;
-import seedu.address.model.task.FloatingTask;
-import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.watodo.commons.exceptions.IllegalValueException;
+import seedu.watodo.model.ReadOnlyTaskList;
+import seedu.watodo.model.TaskList;
+import seedu.watodo.model.tag.UniqueTagList;
+import seedu.watodo.model.task.Address;
+import seedu.watodo.model.task.Description;
+import seedu.watodo.model.task.Email;
+import seedu.watodo.model.task.FloatingTask;
+import seedu.watodo.model.task.Phone;
+import seedu.watodo.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
     public static FloatingTask[] getSampleTasks() {
@@ -29,15 +29,15 @@ public class SampleDataUtil {
         }
     }
 
-    public static ReadOnlyTaskList getSampleAddressBook() {
+    public static ReadOnlyTaskList getSampleWatodo() {
         try {
             TaskList sampleAB = new TaskList();
-            for (FloatingTask samplePerson : getSampleTasks()) {
-                sampleAB.addTask(samplePerson);
+            for (FloatingTask sampleTask : getSampleTasks()) {
+                sampleAB.addTask(sampleTask);
             }
             return sampleAB;
         } catch (DuplicateTaskException e) {
-            throw new AssertionError("sample data cannot contain duplicate persons", e);
+            throw new AssertionError("sample data cannot contain duplicate tasks", e);
         }
     }
 }

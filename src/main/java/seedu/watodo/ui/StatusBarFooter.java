@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.watodo.ui;
 
 import java.util.Date;
 import java.util.logging.Logger;
@@ -10,9 +10,9 @@ import com.google.common.eventbus.Subscribe;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.TaskListChangedEvent;
-import seedu.address.commons.util.FxViewUtil;
+import seedu.watodo.commons.core.LogsCenter;
+import seedu.watodo.commons.events.model.TaskListChangedEvent;
+import seedu.watodo.commons.util.FxViewUtil;
 
 /**
  * A ui for the status bar that is displayed at the footer of the application.

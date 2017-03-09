@@ -1,12 +1,12 @@
-package seedu.address.testutil;
+package seedu.watodo.testutil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.eventbus.Subscribe;
 
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.events.BaseEvent;
+import seedu.watodo.commons.core.EventsCenter;
+import seedu.watodo.commons.events.BaseEvent;
 
 /**
  * A class that collects events raised by other classes.

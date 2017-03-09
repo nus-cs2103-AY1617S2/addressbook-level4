@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package seedu.watodo.storage;
 
 
 import static junit.framework.TestCase.assertNotNull;
@@ -12,13 +12,17 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import seedu.address.commons.events.model.TaskListChangedEvent;
-import seedu.address.commons.events.storage.DataSavingExceptionEvent;
-import seedu.address.model.TaskList;
-import seedu.address.model.ReadOnlyTaskList;
-import seedu.address.model.UserPrefs;
-import seedu.address.testutil.EventsCollector;
-import seedu.address.testutil.TypicalTestTasks;
+import seedu.watodo.commons.events.model.TaskListChangedEvent;
+import seedu.watodo.commons.events.storage.DataSavingExceptionEvent;
+import seedu.watodo.model.ReadOnlyTaskList;
+import seedu.watodo.model.TaskList;
+import seedu.watodo.model.UserPrefs;
+import seedu.watodo.storage.JsonUserPrefsStorage;
+import seedu.watodo.storage.Storage;
+import seedu.watodo.storage.StorageManager;
+import seedu.watodo.storage.XmlTaskListStorage;
+import seedu.watodo.testutil.EventsCollector;
+import seedu.watodo.testutil.TypicalTestTasks;
 
 public class StorageManagerTest {
 

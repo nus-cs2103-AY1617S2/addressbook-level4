@@ -1,16 +1,16 @@
-package seedu.address.logic.parser;
+package seedu.watodo.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.KEYWORDS_ARGS_FORMAT;
+import static seedu.watodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.watodo.logic.parser.CliSyntax.KEYWORDS_ARGS_FORMAT;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.IncorrectCommand;
+import seedu.watodo.logic.commands.Command;
+import seedu.watodo.logic.commands.FindCommand;
+import seedu.watodo.logic.commands.IncorrectCommand;
 
 /**
  * Parses input arguments and creates a new FindCommand object

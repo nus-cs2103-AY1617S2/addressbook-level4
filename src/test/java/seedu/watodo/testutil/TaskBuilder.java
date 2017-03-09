@@ -1,12 +1,12 @@
-package seedu.address.testutil;
+package seedu.watodo.testutil;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Address;
-import seedu.address.model.task.Email;
-import seedu.address.model.task.Description;
-import seedu.address.model.task.Phone;
+import seedu.watodo.commons.exceptions.IllegalValueException;
+import seedu.watodo.model.tag.Tag;
+import seedu.watodo.model.tag.UniqueTagList;
+import seedu.watodo.model.task.Address;
+import seedu.watodo.model.task.Description;
+import seedu.watodo.model.task.Email;
+import seedu.watodo.model.task.Phone;
 
 /**
  *

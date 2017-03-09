@@ -1,15 +1,16 @@
-package seedu.address;
+package seedu.watodo;
 
 import java.util.function.Supplier;
 
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import seedu.address.commons.core.Config;
-import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.ReadOnlyTaskList;
-import seedu.address.model.UserPrefs;
-import seedu.address.storage.XmlSerializableTaskList;
-import seedu.address.testutil.TestUtil;
+import seedu.watodo.MainApp;
+import seedu.watodo.commons.core.Config;
+import seedu.watodo.commons.core.GuiSettings;
+import seedu.watodo.model.ReadOnlyTaskList;
+import seedu.watodo.model.UserPrefs;
+import seedu.watodo.storage.XmlSerializableTaskList;
+import seedu.watodo.testutil.TestUtil;
 
 /**
  * This class is meant to override some properties of MainApp so that it will be suited for

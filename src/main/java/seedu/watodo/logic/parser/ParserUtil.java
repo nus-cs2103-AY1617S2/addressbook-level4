@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.watodo.logic.parser;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -11,14 +11,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.StringUtil;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Address;
-import seedu.address.model.task.Email;
-import seedu.address.model.task.Description;
-import seedu.address.model.task.Phone;
+import seedu.watodo.commons.exceptions.IllegalValueException;
+import seedu.watodo.commons.util.StringUtil;
+import seedu.watodo.model.tag.Tag;
+import seedu.watodo.model.tag.UniqueTagList;
+import seedu.watodo.model.task.Address;
+import seedu.watodo.model.task.Description;
+import seedu.watodo.model.task.Email;
+import seedu.watodo.model.task.Phone;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
