@@ -1,7 +1,7 @@
 package seedu.address.model.task;
 
 public class Priority {
-	
+
 	private boolean priority;
 
 	public static final String MESSAGE_PRIORITY_CONSTRAINTS =
