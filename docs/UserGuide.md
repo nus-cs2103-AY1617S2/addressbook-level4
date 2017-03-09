@@ -17,7 +17,7 @@ Before you setup *Typed*, you should have Java version `1.8.0_60` or later insta
 1. Download the latest `typed.jar` from the [releases](../../../releases) tab.
 2. Copy the file to the folder you want to use as *Typed*'s new home.
 3. Press the Ctrl+Shift+T key to launch the app. *Typed* will welcome you in a few seconds.
-    <img src="images/StartingUI.png" width="600"> <br>
+    <img src="images/startOfUi.png" width="600"> <br>
 4. Walk through the tutorial to try out basic features, or experiment with **[Features](#features)** below.
 
 ## 2. Returning to *Typed*
@@ -28,8 +28,7 @@ Before you setup *Typed*, you should have Java version `1.8.0_60` or later insta
 2. Let *Typed* know when you are ready to start work by pressing <kbd>Enter</kbd>.
     <img src="images/TodayScreen.png" width="600"> <br>
 3. This will bring you to the default view.
-    <img src="images/justscreen.png" width="600"> <br>
-    <img src="images/Ui.png" width="600"> <br>
+    <img src="images/DefaultUi.png" width="600"> <br>
 
 ## 2. Features
 
