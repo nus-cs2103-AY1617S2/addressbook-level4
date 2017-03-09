@@ -11,7 +11,7 @@ Role: Team Lead, Deliverables and deadlines, Developer
 -----
 
 #### [Li Wentong](http://github.com/Wentong-DST) <br>
-<img src="images/wentong.jpg" width="150"><br>
+<img src="images/wentong.png" width="150"><br>
 Role: Developer, Integration, Scheduling and tracking, Final version software, some documentation <br>
 Responsibilities: 
 
@@ -24,4 +24,8 @@ Responsibilities:
 
 -----
 
+#### [Lin Minhui](http://github.com/lmh1234) <br>
+<img src="images/minhui.png" width="150"><br>
+Role: Developer<br>
+Responsibilities: 
 
