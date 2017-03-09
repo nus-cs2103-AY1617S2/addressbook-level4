@@ -9,7 +9,7 @@ public class RemarkTest {
 
     @Test
     public void isValidRemark() {
-        // blank email
+        // blank remark
         assertFalse(Remark.isValidRemark("")); // empty string
         assertFalse(Remark.isValidRemark(" ")); // spaces only
 
@@ -27,7 +27,7 @@ public class RemarkTest {
         assertFalse(Remark.isValidRemark("peter@jack@webmail.com")); // '@' symbol in local part
         assertFalse(Remark.isValidRemark("peterjack@webmail@com")); // '@' symbol in domain name
 
-        // valid email
+        // valid remark
         assertTrue(Remark.isValidRemark("PeterJack_1190@WEB.Mail.com"));
         assertTrue(Remark.isValidRemark("a@b"));  // minimal
         assertTrue(Remark.isValidRemark("test@localhost"));   // alphabets only

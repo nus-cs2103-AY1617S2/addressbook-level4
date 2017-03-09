@@ -23,7 +23,7 @@ public class TestTask implements ReadOnlyTask {
     }
 
     /**
-     * Creates a copy of {@code personToCopy}.
+     * Creates a copy of {@code taskToCopy}.
      */
     public TestTask(TestTask taskToCopy) {
         this.name = taskToCopy.getName();
@@ -37,16 +37,16 @@ public class TestTask implements ReadOnlyTask {
         this.name = name;
     }
 
-    public void setAddress(Location address) {
-        this.location = address;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
-    public void setEmail(Remark email) {
-        this.remark = email;
+    public void setRemark(Remark remark) {
+        this.remark = remark;
     }
 
-    public void setPhone(Date phone) {
-        this.date = phone;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public void setTags(UniqueTagList tags) {

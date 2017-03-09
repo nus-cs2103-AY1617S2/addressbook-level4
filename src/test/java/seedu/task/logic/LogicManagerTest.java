@@ -84,7 +84,7 @@ public class LogicManagerTest {
     @Before
     public void setUp() {
         model = new ModelManager();
-        String tempTaskManagerFile = saveFolder.getRoot().getPath() + "TempAddressBook.xml";
+        String tempTaskManagerFile = saveFolder.getRoot().getPath() + "TempTaskManager.xml";
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
         logic = new LogicManager(model, new StorageManager(tempTaskManagerFile, tempPreferencesFile));
         EventsCenter.getInstance().registerHandler(this);
@@ -118,7 +118,7 @@ public class LogicManagerTest {
 
     /**
      * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
-     * Both the 'address book' and the 'last shown list' are verified to be unchanged.
+     * Both the 'task manager' and the 'last shown list' are verified to be unchanged.
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager, List)
      */
     private void assertCommandFailure(String inputCommand, String expectedMessage) {
@@ -132,7 +132,7 @@ public class LogicManagerTest {
      * Executes the command, confirms that the result message is correct
      * and that a CommandException is thrown if expected
      * and also confirms that the following three parts of the LogicManager object's state are as expected:<br>
-     *      - the internal address book data are same as those in the {@code expectedAddressBook} <br>
+     *      - the internal task manager data are same as those in the {@code expectedTaskManager} <br>
      *      - the backing list shown by UI matches the {@code shownList} <br>
      *      - {@code expectedAddressBook} was saved to the storage file. <br>
      */
@@ -257,9 +257,9 @@ public class LogicManagerTest {
 
 
     /**
-     * Confirms the 'invalid argument index number behaviour' for the given command
+     * Confirms the 'invalid argument index number behavior' for the given command
      * targeting a single person in the shown list, using visible index.
-     * @param commandWord to test assuming it targets a single person in the last shown list
+     * @param commandWord to test assuming it targets a single task in the last shown list
      *                    based on visible index.
      */
     private void assertIncorrectIndexFormatBehaviorForCommand(String commandWord, String expectedMessage)
@@ -272,9 +272,9 @@ public class LogicManagerTest {
     }
 
     /**
-     * Confirms the 'invalid argument index number behaviour' for the given command
-     * targeting a single person in the shown list, using visible index.
-     * @param commandWord to test assuming it targets a single person in the last shown list
+     * Confirms the 'invalid argument index number behavior' for the given command
+     * targeting a single task in the shown list, using visible index.
+     * @param commandWord to test assuming it targets a single task in the last shown list
      *                    based on visible index.
      */
     private void assertIndexNotFoundBehaviorForCommand(String commandWord) throws Exception {
@@ -331,7 +331,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_delete_removesCorrectPerson() throws Exception {
+    public void execute_delete_removesCorrectTask() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
 
@@ -355,38 +355,38 @@ public class LogicManagerTest {
     @Test
     public void execute_find_onlyMatchesFullWordsInNames() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
-        Task pTarget2 = helper.generateTaskWithName("bla KEY bla bceofeia");
-        Task p1 = helper.generateTaskWithName("KE Y");
-        Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
+        Task tTarget1 = helper.generateTaskWithName("bla bla KEY bla");
+        Task tTarget2 = helper.generateTaskWithName("bla KEY bla bceofeia");
+        Task t1 = helper.generateTaskWithName("KE Y");
+        Task t2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
 
-        List<Task> fourTasks = helper.generateTaskList(p1, pTarget1, p2, pTarget2);
-        TaskManager expectedAB = helper.generateTaskManager(fourTasks);
-        List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2);
+        List<Task> fourTasks = helper.generateTaskList(t1, tTarget1, t2, tTarget2);
+        TaskManager expectedTM = helper.generateTaskManager(fourTasks);
+        List<Task> expectedList = helper.generateTaskList(tTarget1, tTarget2);
         helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find KEY",
                 Command.getMessageForTaskListShownSummary(expectedList.size()),
-                expectedAB,
+                expectedTM,
                 expectedList);
     }
 
     @Test
     public void execute_find_isNotCaseSensitive() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task p1 = helper.generateTaskWithName("bla bla KEY bla");
-        Task p2 = helper.generateTaskWithName("bla KEY bla bceofeia");
-        Task p3 = helper.generateTaskWithName("key key");
-        Task p4 = helper.generateTaskWithName("KEy sduauo");
+        Task t1 = helper.generateTaskWithName("bla bla KEY bla");
+        Task t2 = helper.generateTaskWithName("bla KEY bla bceofeia");
+        Task t3 = helper.generateTaskWithName("key key");
+        Task t4 = helper.generateTaskWithName("KEy sduauo");
 
-        List<Task> fourPersons = helper.generateTaskList(p3, p1, p4, p2);
-        TaskManager expectedAB = helper.generateTaskManager(fourPersons);
-        List<Task> expectedList = fourPersons;
-        helper.addToModel(model, fourPersons);
+        List<Task> fourTasks = helper.generateTaskList(t3, t1, t4, t2);
+        TaskManager expectedTM = helper.generateTaskManager(fourTasks);
+        List<Task> expectedList = fourTasks;
+        helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find KEY",
                 Command.getMessageForTaskListShownSummary(expectedList.size()),
-                expectedAB,
+                expectedTM,
                 expectedList);
     }
 
@@ -427,11 +427,11 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates a valid person using the given seed.
+         * Generates a valid task using the given seed.
          * Running this function with the same parameter values guarantees the returned person will have the same state.
-         * Each unique seed will generate a unique Person object.
+         * Each unique seed will generate a unique Task object.
          *
-         * @param seed used to generate the person data field values
+         * @param seed used to generate the task data field values
          */
         Task generateTask(int seed) throws Exception {
             return new Task(
@@ -443,7 +443,7 @@ public class LogicManagerTest {
             );
         }
 
-        /** Generates the correct add command based on the person given */
+        /** Generates the correct add command based on the task given */
         String generateAddCommand(Task p) {
             StringBuffer cmd = new StringBuffer();
 
@@ -463,7 +463,7 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates an AddressBook with auto-generated persons.
+         * Generates an TaskManager with auto-generated persons.
          */
         TaskManager generateTaskManager(int numGenerated) throws Exception {
             TaskManager taskManager = new TaskManager();
@@ -472,34 +472,34 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates an AddressBook based on the list of Persons given.
+         * Generates an TaskManager based on the list of Tasks given.
          */
         TaskManager generateTaskManager(List<Task> tasks) throws Exception {
             TaskManager taskManager = new TaskManager();
-            addToAddressBook(taskManager, tasks);
+            addToTaskManager(taskManager, tasks);
             return taskManager;
         }
 
         /**
-         * Adds auto-generated Person objects to the given AddressBook
-         * @param taskManager The AddressBook to which the Persons will be added
+         * Adds auto-generated Task objects to the given TaskManager
+         * @param taskManager The TaskManager to which the Tasks will be added
          */
         void addToTaskManager(TaskManager taskManager, int numGenerated) throws Exception {
-            addToAddressBook(taskManager, generateTaskList(numGenerated));
+            addToTaskManager(taskManager, generateTaskList(numGenerated));
         }
 
         /**
-         * Adds the given list of Persons to the given AddressBook
+         * Adds the given list of Tasks to the given TaskManager
          */
-        void addToAddressBook(TaskManager taskManager, List<Task> tasksToAdd) throws Exception {
+        void addToTaskManager(TaskManager taskManager, List<Task> tasksToAdd) throws Exception {
             for (Task p: tasksToAdd) {
                 taskManager.addTask(p);
             }
         }
 
         /**
-         * Adds auto-generated Person objects to the given model
-         * @param model The model to which the Persons will be added
+         * Adds auto-generated Task objects to the given model
+         * @param model The model to which the Tasks will be added
          */
         void addToModel(Model model, int numGenerated) throws Exception {
             addToModel(model, generateTaskList(numGenerated));
@@ -508,14 +508,14 @@ public class LogicManagerTest {
         /**
          * Adds the given list of Persons to the given model
          */
-        void addToModel(Model model, List<Task> personsToAdd) throws Exception {
-            for (Task p: personsToAdd) {
+        void addToModel(Model model, List<Task> tasksToAdd) throws Exception {
+            for (Task p: tasksToAdd) {
                 model.addTask(p);
             }
         }
 
         /**
-         * Generates a list of Persons based on the flags.
+         * Generates a list of Tasks based on the flags.
          */
         List<Task> generateTaskList(int numGenerated) throws Exception {
             List<Task> tasks = new ArrayList<>();
@@ -530,7 +530,7 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates a Person object with given name. Other fields will have some dummy values.
+         * Generates a Task object with given name. Other fields will have some dummy values.
          */
         Task generateTaskWithName(String name) throws Exception {
             return new Task(

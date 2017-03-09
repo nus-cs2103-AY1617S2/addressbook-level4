@@ -20,10 +20,10 @@ public class TaskBuilder {
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the TaskBuilder with the data of {@code taskToCopy}.
      */
-    public TaskBuilder(TestTask personToCopy) {
-        this.task = new TestTask(personToCopy);
+    public TaskBuilder(TestTask taskToCopy) {
+        this.task = new TestTask(taskToCopy);
     }
 
     public TaskBuilder withName(String name) throws IllegalValueException {
@@ -39,18 +39,18 @@ public class TaskBuilder {
         return this;
     }
 
-    public TaskBuilder withLocation(String address) throws IllegalValueException {
-        this.task.setAddress(new Location(address));
+    public TaskBuilder withLocation(String location) throws IllegalValueException {
+        this.task.setLocation(new Location(location));
         return this;
     }
 
-    public TaskBuilder withDate(String phone) throws IllegalValueException {
-        this.task.setPhone(new Date(phone));
+    public TaskBuilder withDate(String date) throws IllegalValueException {
+        this.task.setDate(new Date(date));
         return this;
     }
 
-    public TaskBuilder withRemark(String email) throws IllegalValueException {
-        this.task.setEmail(new Remark(email));
+    public TaskBuilder withRemark(String remark) throws IllegalValueException {
+        this.task.setRemark(new Remark(remark));
         return this;
     }
 
