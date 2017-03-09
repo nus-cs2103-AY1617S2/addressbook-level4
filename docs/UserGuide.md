@@ -222,7 +222,7 @@ Format: `viewalias`
 
 Example:
 * `alias hs history` <br>
-  `viewaliases` <br>
+  `viewalias` <br>
   Shows `hs:history` in the list.
 
 ### 2.15. Change storage location for save data: `save`
