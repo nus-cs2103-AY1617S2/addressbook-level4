@@ -42,34 +42,34 @@ public class XmlTaskListStorage implements TaskListStorage {
                                                                                  FileNotFoundException {
         assert filePath != null;
 
-        File addressBookFile = new File(filePath);
+        File flexiTaskFile = new File(filePath);
 
-        if (!addressBookFile.exists()) {
-            logger.info("TaskList file "  + addressBookFile + " not found");
+        if (!flexiTaskFile.exists()) {
+            logger.info("TaskList file "  + flexiTaskFile + " not found");
             return Optional.empty();
         }
 
-        ReadOnlyTaskList addressBookOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
+        ReadOnlyTaskList flexiTaskOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
 
-        return Optional.of(addressBookOptional);
+        return Optional.of(flexiTaskOptional);
     }
 
     @Override
-    public void saveTaskList(ReadOnlyTaskList addressBook) throws IOException {
-        saveTaskList(addressBook, filePath);
+    public void saveTaskList(ReadOnlyTaskList flexiTask) throws IOException {
+        saveTaskList(flexiTask, filePath);
     }
 
     /**
      * Similar to {@link #saveTaskList(ReadOnlyTaskList)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveTaskList(ReadOnlyTaskList addressBook, String filePath) throws IOException {
-        assert addressBook != null;
+    public void saveTaskList(ReadOnlyTaskList flexiTask, String filePath) throws IOException {
+        assert flexiTask != null;
         assert filePath != null;
 
         File file = new File(filePath);
         FileUtil.createIfMissing(file);
-        XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskList(addressBook));
+        XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskList(flexiTask));
     }
 
 }

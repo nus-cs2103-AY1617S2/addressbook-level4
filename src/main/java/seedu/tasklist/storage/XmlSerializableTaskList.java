@@ -18,9 +18,9 @@ import seedu.tasklist.model.task.Task;
 
 
 /**
- * An Immutable AddressBook that is serializable to XML format
+ * An Immutable FlexiTask that is serializable to XML format
  */
-@XmlRootElement(name = "addressbook")
+@XmlRootElement(name = "flexitask")
 public class XmlSerializableTaskList implements ReadOnlyTaskList {
 
     @XmlElement
@@ -29,7 +29,7 @@ public class XmlSerializableTaskList implements ReadOnlyTaskList {
     private List<XmlAdaptedTag> tags;
 
     /**
-     * Creates an empty XmlSerializableAddressBook.
+     * Creates an empty XmlSerializableTaskList.
      * This empty constructor is required for marshalling.
      */
     public XmlSerializableTaskList() {
