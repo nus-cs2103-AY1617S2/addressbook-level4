@@ -10,7 +10,6 @@ public class NoteTest {
     @Test
     public void isValidNote() {
         // invalid notes
-        assertFalse(Note.isValidNote(" ")); // spaces only
 
         // valid notes
         assertTrue(Note.isValidNote("Blk 456, Den Road, #01-355"));

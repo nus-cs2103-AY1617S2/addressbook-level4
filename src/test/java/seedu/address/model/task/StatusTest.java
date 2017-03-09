@@ -10,7 +10,6 @@ public class StatusTest {
     @Test
     public void isValidStatus() {
         // invalid status
-        assertFalse(Status.isValidStatus(" ")); // spaces only
 
         // valid status
         assertTrue(Status.isValidStatus("PeterJack_1190@WEB.Mail.com"));

@@ -10,7 +10,6 @@ public class PriorityTest {
     @Test
     public void isValidPriority() {
         // invalid priorities
-        assertFalse(Priority.isValidPriority(" ")); // spaces only
 
         // valid priorities
         assertTrue(Priority.isValidPriority("93121534"));
