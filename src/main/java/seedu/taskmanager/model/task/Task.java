@@ -15,7 +15,7 @@ public class Task implements ReadOnlyTask {
     private Date date;
 //    private EndTime endTime;
 //    private Deadline deadline;
-    private UniqueCategoryList categories;
+//    private UniqueCategoryList categories;
 
     /**
      * Every field must be present and not null.
@@ -78,7 +78,7 @@ public class Task implements ReadOnlyTask {
     public Date getDate() {
         return date;
     }
-
+/*
     @Override
     public UniqueCategoryList getCategories() {
         return new UniqueCategoryList(categories);
@@ -86,11 +86,11 @@ public class Task implements ReadOnlyTask {
 
     /**
      * Replaces this task's categories with the categories in the argument category list.
-     */
+     
     public void setCategories(UniqueCategoryList replacement) {
         categories.setCategories(replacement);
     }
-
+*/
     /**
      * Updates this person with the details of {@code replacement}.
      */
