@@ -43,7 +43,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 > **Date and Time Format**
 >
 > A wide variety of date and time format is accepted.
-> Some examples are: 
+> Some examples are:
 > * `2017-02-23` (yyyy-mm-dd) <br>
 > * `04/05` (mm/dd) <br>
 > * `today` <br>
@@ -64,7 +64,7 @@ Format: `help`
 Adds a task to the task manager<br>
 > Task can have any number of tags (including 0)
 
-### 2.2.1. Floating task 
+### 2.2.1. Floating task
 
 Format: `add TASK [#TAG]...`
 
@@ -81,7 +81,7 @@ Examples:
 * `add prepare meeting slides by tomorrow 9am #impt #work`
 * `add send budget proposal by next Thurs noon to boss #project A`
 
-### 2.2.3. Adding an event 
+### 2.2.3. Adding an event
 
 Format: `add TASK from START_DATETIME to END_DATETIME [#TAG]...`
 
@@ -142,7 +142,7 @@ Format: `edit INDEX [TASK] [by DATETIME] [from START_DATETIME to END_DATETIME] [
 > * If changing the DATETIME, format must match the chosen task type (either deadline or event)
 > * Existing values will be updated to the input values.
 > * When editing tags, the existing tags of the tasks will be removed i.e adding of tags is not cumulative.
-> * You can remove all the task's tags by typing `#` without specifying any tags after it. 
+> * You can remove all the task's tags by typing `#` without specifying any tags after it.
 
 Examples:
 
@@ -233,7 +233,7 @@ There is no need to save manually.
 
 ## 4. Command Summary
 
-* **Add**  
+* **Add**
 > * `add TASK [#TAG]...` <br>
 > * `add TASK by DATETIME [#TAG]...`
 > * `add TASK from START_DATETIME to END_DATETIME [#TAG]...`
