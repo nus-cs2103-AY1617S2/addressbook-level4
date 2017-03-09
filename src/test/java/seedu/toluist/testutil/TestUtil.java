@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
+import seedu.toluist.commons.util.CollectionUtil;
 import seedu.toluist.commons.util.FileUtil;
 import seedu.toluist.controller.Controller;
 import seedu.toluist.model.TodoList;
@@ -56,6 +57,16 @@ public class TestUtil {
         TodoList.setStorage(storage);
         Controller.setStorage(storage);
         todoList.save();
+    }
+
+    /**
+     * Check that the tasks of the two todolists are the same. Order does not matter.
+     * @param todoList1
+     * @param todoList2
+     * @return true / false
+     */
+    public static boolean compareTasksOfTodoLists(TodoList todoList1, TodoList todoList2) {
+        return CollectionUtil.elementsAreSimilar(todoList1.getTasks(), todoList2.getTasks());
     }
 
     /**

@@ -1,6 +1,7 @@
 package guitests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -23,7 +24,8 @@ public class SaveCommandTest extends ToLuistGuiTest {
 
         // Check that todo list loaded is the same as previous todo list
         TodoList todoListAtSavedLocation = TodoList.load();
-        assertEquals(todoListAtSavedLocation, new TypicalTestTodoLists().getTypicalTodoList());
+        assertTrue(TestUtil.compareTasksOfTodoLists(todoListAtSavedLocation,
+                                                    new TypicalTestTodoLists().getTypicalTodoList()));
 
     }
 }
