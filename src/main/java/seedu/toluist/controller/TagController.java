@@ -45,6 +45,7 @@ public class TagController extends Controller {
         String[] keywordList = convertToArray(tokens.get(KEYWORDS_PARAMETER));
         int index = Integer.parseInt(tokens.get(INDEX_PARAMETER));
         Task task = UiStore.getInstance().getTasks().get(index);
+        TodoList todoList = TodoList.load();
         ArrayList<String> successfulList = new ArrayList<String>();
         ArrayList<String> failedList = new ArrayList<String>();
 
@@ -56,8 +57,10 @@ public class TagController extends Controller {
             }
         }
 
-        uiStore.setTask(TodoList.load().getTasks());
-        renderer.render();
+        if (todoList.save()) {
+            uiStore.setTask(todoList.getTasks());
+            renderer.render();
+        }
 
         // display formatting
         return formatDisplay(successfulList.toArray(new String[successfulList.size()]),
