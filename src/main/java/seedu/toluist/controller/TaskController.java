@@ -52,15 +52,16 @@ public abstract class TaskController extends Controller {
             String startDate = null;
             String endDate = null;
             if (endDateIndex != INVALID_INDEX) {
-                // Is task with deadline
+                // This is a task with deadline
                 endDate = description.substring(endDateIndex + TASK_END_DATE_KEYWORD.length());
                 description = description.substring(START_INDEX, endDateIndex);
                 if (startDateIndex != INVALID_INDEX) {
-                    // Is event
+                    // This is an event
                     startDate = description.substring(startDateIndex + TASK_START_DATE_KEYWORD.length());
                     description = description.substring(START_INDEX, startDateIndex);
                 }
-            } // Else it is a floating task (and we are not dealing with task with only start date and no end date)
+            } // Else this is a floating task
+            // Note: We are not dealing with tasks that have only a start date.
 
             tokens.put(TASK_DESCRIPTION, description);
             tokens.put(TASK_START_DATE_KEYWORD, startDate);

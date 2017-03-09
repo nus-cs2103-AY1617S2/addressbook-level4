@@ -14,12 +14,12 @@ import com.joestelmach.natty.Parser;
  */
 public class DateTimeUtil {
 
-    public static LocalDateTime toDate(String dateString) {
-        if (dateString == null) {
+    public static LocalDateTime toDate(String stringDate) {
+        if (stringDate == null) {
             return null;
         } else {
             Parser parser = new Parser();
-            List<DateGroup> dateGroups = parser.parse(dateString);
+            List<DateGroup> dateGroups = parser.parse(stringDate);
             if (dateGroups.isEmpty()) {
                 return null;
             } else {
