@@ -25,7 +25,7 @@ public class FindCommand extends Command {
         this.startDate = null;
         this.endDate = null;
     }
-    
+
     public FindCommand(Date startDate, Date endDate) {
         this.startDate = startDate;
         this.endDate = endDate;
@@ -35,7 +35,7 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute() {
         if (keywords == null) {
-            model.updateFilteredTaskList(startDate, endDate);  
+            model.updateFilteredTaskList(startDate, endDate);
         } else {
             model.updateFilteredTaskList(keywords);
         }

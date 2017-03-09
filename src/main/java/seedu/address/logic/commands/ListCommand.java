@@ -17,7 +17,7 @@ public class ListCommand extends Command {
         endTime = null;
         startTime = null;
     }
-    
+
     public ListCommand(Date startTime, Date dateTime) {
         this.endTime = dateTime;
         this.startTime = startTime;

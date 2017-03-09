@@ -21,7 +21,8 @@ public class ListCommandParser {
             if (!args.isEmpty() && args.contains("by ")) {
                 ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_DEADLINE);
                 argsTokenizer.tokenize(args);
-                List<Date> endDateList = new DateTimeParser().parse(argsTokenizer.getValue(PREFIX_DEADLINE).get()).get(0).getDates();
+                List<Date> endDateList = new DateTimeParser().parse(
+                        argsTokenizer.getValue(PREFIX_DEADLINE).get()).get(0).getDates();
                 List<Date> startDateList = new DateTimeParser().parse("now").get(0).getDates();
                 return new ListCommand(startDateList.get(0), endDateList.get(0));
             }

@@ -24,7 +24,7 @@ public class DeadlineTest {
         Deadline deadline1 = new Deadline("Tomorrow 1000");
         Deadline deadline2 = new Deadline("Tomorrow 1000");
         Deadline deadline3 = new Deadline("Today"); // a different deadline
-        
+
         assertTrue(deadline1.equals(deadline2));
         assertTrue(deadline1.equals(deadline1));
         assertFalse(deadline1.equals(null));
@@ -42,7 +42,7 @@ public class DeadlineTest {
         assertTrue(Deadline.isValidDeadline("")); // empty string
         assertTrue(Deadline.isValidDeadline(" ")); // spaces only
     }
-    
+
     @Test
     public void deadline_Parse_Date() throws IllegalValueException {
         // invalid deadlines

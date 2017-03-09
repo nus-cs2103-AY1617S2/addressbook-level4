@@ -43,7 +43,7 @@ public class Deadline {
     public static boolean isValidDeadline(String test) {
         return test.matches(DEADLINE_VALIDATION_REGEX);
     }
-    
+
     public Date getDateTime() {
         return deadline;
     }

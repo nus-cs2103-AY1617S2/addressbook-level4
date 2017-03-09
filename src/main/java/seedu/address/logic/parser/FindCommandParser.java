@@ -30,7 +30,7 @@ public class FindCommandParser {
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-        
+
         try {
             if (args.trim().contains("from ")) {
                 ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_TIMEINTERVAL);

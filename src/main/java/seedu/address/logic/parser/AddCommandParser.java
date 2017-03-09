@@ -29,7 +29,8 @@ public class AddCommandParser {
         argsTokenizer.tokenize(args);
         try {
             if (args.contains("by ")) {
-                List<Date> dateList = new DateTimeParser().parse(argsTokenizer.getValue(PREFIX_DEADLINE).get()).get(0).getDates();
+                List<Date> dateList = new DateTimeParser().parse(
+                        argsTokenizer.getValue(PREFIX_DEADLINE).get()).get(0).getDates();
                 return new AddCommand(
                         argsTokenizer.getPreamble().get(),
                         dateList.get(0).toString(),

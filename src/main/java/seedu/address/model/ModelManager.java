@@ -88,28 +88,28 @@ public class ModelManager extends ComponentManager implements Model {
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
         return new UnmodifiableObservableList<>(filteredTasks);
     }
-    
+
     @Override
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
     }
-    
+
     @Override
     public void updateFilteredTaskList(Date startDate, Date endDate) {
         updateFilteredTaskListByDate(new DateFilter(startDate, endDate));
+    }
+
+    private void updateFilteredTaskList(Expression expression) {
+        filteredTasks.setPredicate(expression::satisfies);
     }
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
-    
+
     private void updateFilteredTaskListByDate(DateFilter dateFilter) {
         filteredTasks.setPredicate(dateFilter::run);
-    }
-
-    private void updateFilteredTaskList(Expression expression) {
-        filteredTasks.setPredicate(expression::satisfies);
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
@@ -126,7 +126,7 @@ public class ModelManager extends ComponentManager implements Model {
         PredicateExpression(Qualifier qualifier) {
             this.qualifier = qualifier;
         }
-        
+
         @Override
         public boolean satisfies(ReadOnlyTask task) {
             return qualifier.run(task);
@@ -171,18 +171,19 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
-    
+
     private class DateFilter {
         private Date startTime;
         private Date endTime;
-        
+
         DateFilter(Date startTime, Date endTime) {
             this.startTime = startTime;
             this.endTime = endTime;
         }
-        
+
         public boolean run(ReadOnlyTask task) {
-            return task.getDeadline().getDateTime().before(endTime) && task.getDeadline().getDateTime().after(startTime);
+            return task.getDeadline().getDateTime().before(endTime)
+                    && task.getDeadline().getDateTime().after(startTime);
         }
     }
 
