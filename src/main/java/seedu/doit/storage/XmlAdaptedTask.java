@@ -56,15 +56,15 @@ public class XmlAdaptedTask {
      * @throws IllegalValueException if there were any data constraints violated in the adapted task
      */
     public Task toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<Tag> taskTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+            taskTags.add(tag.toModelType());
         }
         final Name name = new Name(this.name);
         final Priority priority = new Priority(this.priority);
         final Deadline deadline = new Deadline(this.deadline);
         final Description description = new Description(this.description);
-        final UniqueTagList tags = new UniqueTagList(personTags);
+        final UniqueTagList tags = new UniqueTagList(taskTags);
         return new Task(name, priority, deadline, description, tags);
     }
 }

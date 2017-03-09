@@ -26,10 +26,10 @@ public class EditCommandTest extends TaskManagerGuiTest {
         String detailsToEdit = "Bobby p/91234567 e/bobby@gmail.com d/Block 123, Bobby Street 3 t/husband";
         int addressBookIndex = 1;
 
-        TestTask editedPerson = new TaskBuilder().withName("Bobby").withPriority("91234567")
+        TestTask editedTask = new TaskBuilder().withName("Bobby").withPriority("91234567")
                 .withDeadline("bobby@gmail.com").withDescription("Block 123, Bobby Street 3").withTags("husband").build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
     }
 
     @Test
@@ -63,9 +63,9 @@ public class EditCommandTest extends TaskManagerGuiTest {
         int addressBookIndex = 5;
 
         TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
-        TestTask editedPerson = new TaskBuilder(taskToEdit).withName("Belle").build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withName("Belle").build();
 
-        assertEditSuccess(filteredTaskListIndex, addressBookIndex, detailsToEdit, editedPerson);
+        assertEditSuccess(filteredTaskListIndex, addressBookIndex, detailsToEdit, editedTask);
     }
 
     @Test
@@ -110,15 +110,15 @@ public class EditCommandTest extends TaskManagerGuiTest {
     /**
      * Checks whether the edited task has the correct updated details.
      *
-     * @param filteredPersonListIndex index of task to edit in filtered list
+     * @param filteredTaskListIndex index of task to edit in filtered list
      * @param taskManagerIndex index of task to edit in the task manager.
-     *      Must refer to the same task as {@code filteredPersonListIndex}
+     *      Must refer to the same task as {@code filteredTaskListIndex}
      * @param detailsToEdit details to edit the task with as input to the edit command
      * @param editedTask the expected task after editing the task's details
      */
-    private void assertEditSuccess(int filteredPersonListIndex, int taskManagerIndex,
+    private void assertEditSuccess(int filteredTaskListIndex, int taskManagerIndex,
                                     String detailsToEdit, TestTask editedTask) {
-        commandBox.runCommand("edit " + filteredPersonListIndex + " " + detailsToEdit);
+        commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
 
         // confirm the new card contains the right data
         taskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getName().fullName);
