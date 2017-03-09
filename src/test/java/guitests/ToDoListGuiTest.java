@@ -108,14 +108,14 @@ public abstract class ToDoListGuiTest {
      * Asserts the person shown in the card is same as the given person
      */
     public void assertMatching(ReadOnlyTask person, TaskCardHandle card) {
-        assertTrue(TestUtil.compareCardAndPerson(card, person));
+        assertTrue(TestUtil.compareCardAndTask(card, person));
     }
 
     /**
      * Asserts the size of the person list is equal to the given number.
      */
     protected void assertListSize(int size) {
-        int numberOfPeople = taskListPanel.getNumberOfPeople();
+        int numberOfPeople = taskListPanel.getNumberOfTasks();
         assertEquals(size, numberOfPeople);
     }
 
