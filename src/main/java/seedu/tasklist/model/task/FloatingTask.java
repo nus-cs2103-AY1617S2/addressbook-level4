@@ -1,5 +1,7 @@
 package seedu.tasklist.model.task;
 
+import java.util.Objects;
+
 import seedu.tasklist.commons.util.CollectionUtil;
 import seedu.tasklist.model.tag.UniqueTagList;
 
@@ -105,6 +107,17 @@ public class FloatingTask extends Task implements ReadOnlyFloatingTask {
         return other == this // short circuit if same object
                 || (other instanceof ReadOnlyFloatingTask // instanceof handles nulls
                 && this.isSameStateAs((ReadOnlyFloatingTask) other));
+    }
+    
+    @Override
+    public int hashCode() {
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(name, comment, tags);
+    }
+
+    @Override
+    public String toString() {
+        return getAsText();
     }
 
 }
