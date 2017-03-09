@@ -11,6 +11,20 @@ Not specifically a task manager, just a calendar
 
 ## Momentum
 
+**Pros:**
+
+- Central focus task visibly displayed in the center of the site.
+- Accessible from Chrome
+- Local Storage of tasks in browser
+- Simple to-do list with checkboxes as done indicator.
+
+**Cons:**
+
+- Lack of data persistence when Chrome cache is cleared
+- Poor sync for the same account across browsers and devices
+- Poor responsiveness on small screen size
+- Tasks can only be text-based for free version.
+
 ## Apple's Notes App
 Apple's built-in Notes App is nothing different from a paper notebook except that it is electronic which makes it capable of storing more than enough notes and deleting notes that are no longer needed. Due to its sustainability, Notes is very suitable for traditional notes takers who are not comfortable with being restricted by commands and forms. With the Notes App on iCloud.com, users can easily get to see their notes on different platforms if Internet connection is available.
 
