@@ -366,7 +366,7 @@ Example:
   e.g. `load data/savefile.txt`
 
 * **Switch Display Task Window** : `switch WINDOWIDENTIFIER` <br>
-  e.g. `switch 2`
+  e.g. `switch 2` <br>
   e.g. `switch T`
 
 * **Complete or Make Uncomplete a Task** : `mark [complete/uncomplete] INDEX` <br>
