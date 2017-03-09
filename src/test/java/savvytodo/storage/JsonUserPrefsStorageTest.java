@@ -16,7 +16,6 @@ import org.junit.rules.TemporaryFolder;
 import savvytodo.commons.exceptions.DataConversionException;
 import savvytodo.commons.util.FileUtil;
 import savvytodo.model.UserPrefs;
-import savvytodo.storage.JsonUserPrefsStorage;
 
 public class JsonUserPrefsStorageTest {
 

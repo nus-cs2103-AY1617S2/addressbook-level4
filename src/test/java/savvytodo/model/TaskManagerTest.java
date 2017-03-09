@@ -14,11 +14,9 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import savvytodo.model.TaskManager;
 import savvytodo.model.category.Category;
-import savvytodo.model.ReadOnlyTaskManager;
-import savvytodo.model.task.Task;
 import savvytodo.model.task.ReadOnlyTask;
+import savvytodo.model.task.Task;
 import savvytodo.testutil.TypicalTestTasks;
 
 public class TaskManagerTest {

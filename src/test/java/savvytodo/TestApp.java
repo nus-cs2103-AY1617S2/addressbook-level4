@@ -4,7 +4,6 @@ import java.util.function.Supplier;
 
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import savvytodo.MainApp;
 import savvytodo.commons.core.Config;
 import savvytodo.commons.core.GuiSettings;
 import savvytodo.model.ReadOnlyTaskManager;

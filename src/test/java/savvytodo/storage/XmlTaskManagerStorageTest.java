@@ -13,10 +13,9 @@ import org.junit.rules.TemporaryFolder;
 
 import savvytodo.commons.exceptions.DataConversionException;
 import savvytodo.commons.util.FileUtil;
-import savvytodo.model.TaskManager;
 import savvytodo.model.ReadOnlyTaskManager;
+import savvytodo.model.TaskManager;
 import savvytodo.model.task.Task;
-import savvytodo.storage.XmlTaskManagerStorage;
 import savvytodo.testutil.TypicalTestTasks;
 
 public class XmlTaskManagerStorageTest {

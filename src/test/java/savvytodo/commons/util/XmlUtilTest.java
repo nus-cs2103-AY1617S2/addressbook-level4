@@ -11,8 +11,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import savvytodo.commons.util.FileUtil;
-import savvytodo.commons.util.XmlUtil;
 import savvytodo.model.TaskManager;
 import savvytodo.storage.XmlSerializableTaskManager;
 import savvytodo.testutil.TaskManagerBuilder;

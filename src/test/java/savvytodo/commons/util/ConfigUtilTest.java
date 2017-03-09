@@ -15,8 +15,7 @@ import org.junit.rules.TemporaryFolder;
 
 import savvytodo.commons.core.Config;
 import savvytodo.commons.exceptions.DataConversionException;
-import savvytodo.commons.util.ConfigUtil;
-import savvytodo.commons.util.FileUtil;
+
 
 public class ConfigUtilTest {
 

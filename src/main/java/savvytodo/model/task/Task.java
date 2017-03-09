@@ -27,7 +27,7 @@ public class Task implements ReadOnlyTask {
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.categories = new UniqueCategoryList(categories); // protect internal categories from changes in the arg list
+        this.categories = new UniqueCategoryList(categories); //protect internal categories from changes in the arg list
     }
 
     /**

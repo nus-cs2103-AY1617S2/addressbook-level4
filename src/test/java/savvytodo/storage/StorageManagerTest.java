@@ -14,13 +14,9 @@ import org.junit.rules.TemporaryFolder;
 
 import savvytodo.commons.events.model.TaskManagerChangedEvent;
 import savvytodo.commons.events.storage.DataSavingExceptionEvent;
-import savvytodo.model.TaskManager;
 import savvytodo.model.ReadOnlyTaskManager;
+import savvytodo.model.TaskManager;
 import savvytodo.model.UserPrefs;
-import savvytodo.storage.JsonUserPrefsStorage;
-import savvytodo.storage.Storage;
-import savvytodo.storage.StorageManager;
-import savvytodo.storage.XmlTaskManagerStorage;
 import savvytodo.testutil.EventsCollector;
 import savvytodo.testutil.TypicalTestTasks;
 

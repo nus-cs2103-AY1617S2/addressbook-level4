@@ -13,8 +13,8 @@ import savvytodo.commons.core.UnmodifiableObservableList;
 import savvytodo.commons.exceptions.IllegalValueException;
 import savvytodo.model.ReadOnlyTaskManager;
 import savvytodo.model.category.Category;
-import savvytodo.model.task.Task;
 import savvytodo.model.task.ReadOnlyTask;
+import savvytodo.model.task.Task;
 
 /**
  * An Immutable TaskManager that is serializable to XML format

@@ -10,8 +10,8 @@ import savvytodo.commons.core.UnmodifiableObservableList;
 import savvytodo.commons.events.model.TaskManagerChangedEvent;
 import savvytodo.commons.util.CollectionUtil;
 import savvytodo.commons.util.StringUtil;
-import savvytodo.model.task.Task;
 import savvytodo.model.task.ReadOnlyTask;
+import savvytodo.model.task.Task;
 import savvytodo.model.task.UniqueTaskList;
 import savvytodo.model.task.UniqueTaskList.TaskNotFoundException;
 

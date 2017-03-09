@@ -13,8 +13,8 @@ import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import savvytodo.TestApp;
-import savvytodo.model.task.Task;
 import savvytodo.model.task.ReadOnlyTask;
+import savvytodo.model.task.Task;
 import savvytodo.testutil.TestUtil;
 
 /**

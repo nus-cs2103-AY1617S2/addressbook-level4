@@ -12,7 +12,6 @@ import org.junit.rules.TemporaryFolder;
 
 import javafx.fxml.FXML;
 import savvytodo.MainApp;
-import savvytodo.ui.UiPart;
 
 public class UiPartTest {
 

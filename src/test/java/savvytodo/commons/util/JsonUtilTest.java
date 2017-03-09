@@ -7,8 +7,6 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-import savvytodo.commons.util.FileUtil;
-import savvytodo.commons.util.JsonUtil;
 import savvytodo.testutil.SerializableTestClass;
 import savvytodo.testutil.TestUtil;
 

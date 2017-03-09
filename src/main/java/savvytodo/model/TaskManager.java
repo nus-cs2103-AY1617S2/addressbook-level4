@@ -12,8 +12,8 @@ import javafx.collections.ObservableList;
 import savvytodo.commons.core.UnmodifiableObservableList;
 import savvytodo.model.category.Category;
 import savvytodo.model.category.UniqueCategoryList;
-import savvytodo.model.task.Task;
 import savvytodo.model.task.ReadOnlyTask;
+import savvytodo.model.task.Task;
 import savvytodo.model.task.UniqueTaskList;
 import savvytodo.model.task.UniqueTaskList.DuplicateTaskException;
 

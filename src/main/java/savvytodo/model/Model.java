@@ -3,8 +3,8 @@ package savvytodo.model;
 import java.util.Set;
 
 import savvytodo.commons.core.UnmodifiableObservableList;
-import savvytodo.model.task.Task;
 import savvytodo.model.task.ReadOnlyTask;
+import savvytodo.model.task.Task;
 import savvytodo.model.task.UniqueTaskList;
 import savvytodo.model.task.UniqueTaskList.DuplicateTaskException;
 

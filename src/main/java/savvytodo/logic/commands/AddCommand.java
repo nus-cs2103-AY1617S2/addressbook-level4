@@ -10,8 +10,8 @@ import savvytodo.model.category.UniqueCategoryList;
 import savvytodo.model.task.Address;
 import savvytodo.model.task.Email;
 import savvytodo.model.task.Name;
-import savvytodo.model.task.Task;
 import savvytodo.model.task.Phone;
+import savvytodo.model.task.Task;
 import savvytodo.model.task.UniqueTaskList;
 
 /**

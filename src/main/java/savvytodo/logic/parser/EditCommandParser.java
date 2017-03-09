@@ -2,9 +2,9 @@ package savvytodo.logic.parser;
 
 import static savvytodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static savvytodo.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static savvytodo.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static savvytodo.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static savvytodo.logic.parser.CliSyntax.PREFIX_PHONE;
-import static savvytodo.logic.parser.CliSyntax.PREFIX_CATEGORY;
 
 import java.util.Collection;
 import java.util.Collections;
