@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class DateTimeUtil {
     public static String toString(LocalDateTime dateTime) {
-        String stringDateTime = dateTime.format(DateTimeFormatter.ofPattern("d MMM uuuu, h:m a"));
+        String stringDateTime = dateTime.format(DateTimeFormatter.ofPattern("d MMM uuuu, h:mm a"));
         return stringDateTime;
     }
 }

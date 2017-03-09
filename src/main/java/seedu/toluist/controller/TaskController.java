@@ -21,13 +21,8 @@ public class TaskController extends Controller {
                 + "(\\s+(?<index>\\d+))?"
                 + "(\\s+(?<description>.+))?\\s*";
 
-    private static final String TASK_COMMAND = "command";
     private static final String TASK_VIEW_INDEX = "index";
     private static final String TASK_DESCRIPTION = "description";
-
-    private static final String COMMAND_UPDATE_TASK = "update";
-
-    private static final String RESULT_MESSAGE_UPDATE_TASK = "Task updated";
 
     protected Logger logger = LogsCenter.getLogger(getClass());
 
@@ -43,7 +38,6 @@ public class TaskController extends Controller {
 
         HashMap<String, String> tokens = tokenize(command);
 
-        String taskCommand = tokens.get(TASK_COMMAND);
         String description = tokens.get(TASK_DESCRIPTION);
         String indexToken = tokens.get(TASK_VIEW_INDEX);
         int index = indexToken != null ? Integer.parseInt(indexToken) - 1 : -1;
@@ -51,13 +45,6 @@ public class TaskController extends Controller {
                 ? UiStore.getInstance().getTasks().get(index)
                 : null;
 
-        switch (taskCommand) {
-        case COMMAND_UPDATE_TASK:
-            commandResult = update(todoList, task, description);
-            break;
-        default:
-            break;
-        }
 
         if (todoList.save()) {
             uiStore.setTask(todoList.getTasks());
@@ -74,7 +61,6 @@ public class TaskController extends Controller {
         Matcher matcher = pattern.matcher(commandArgs.trim());
         matcher.find();
         HashMap<String, String> tokens = new HashMap<>();
-        tokens.put(TASK_COMMAND, matcher.group(TASK_COMMAND));
         tokens.put(TASK_DESCRIPTION, matcher.group(TASK_DESCRIPTION));
         tokens.put(TASK_VIEW_INDEX, matcher.group(TASK_VIEW_INDEX));
         return tokens;
@@ -83,10 +69,5 @@ public class TaskController extends Controller {
     @Override
     public boolean matchesCommand(String command) {
         return command.matches(COMMAND_TEMPLATE);
-    }
-
-    private CommandResult update(TodoList todoList, Task task, String description) {
-        task.description = description;
-        return new CommandResult(RESULT_MESSAGE_UPDATE_TASK);
     }
 }
