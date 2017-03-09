@@ -3,20 +3,20 @@ package seedu.address.model;
 import java.util.Set;
 
 import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.model.person.Task;
-import seedu.address.model.person.ReadOnlyTask;
-import seedu.address.model.person.UniqueTaskList;
-import seedu.address.model.person.UniqueTaskList.DuplicateTaskException;
+import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.UniqueTaskList;
+import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyAddressBook newData);
+    void resetData(ReadOnlyTaskList newData);
 
     /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyTaskList getAddressBook();
 
     /** Deletes the given person. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
