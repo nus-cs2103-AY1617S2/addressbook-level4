@@ -12,22 +12,20 @@ import seedu.taskmanager.model.category.UniqueCategoryList;
 public class Task implements ReadOnlyTask {
 
     private TaskName taskName;
-    private Deadline deadline;
-    private EndTime endTime;
     private Date date;
-
-
-//    private UniqueCategoryList categories;
+    private EndTime endTime;
+    private Deadline deadline;
+    private UniqueCategoryList categories;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(TaskName taskName, Deadline deadline, EndTime endTime, Date date/*, UniqueCategoryList categories*/) {
-        assert !CollectionUtil.isAnyNull(taskName, deadline, endTime, date/*, categories*/);
+    public Task(TaskName taskName, Date date /*EndTime endTime, Deadline deadline, UniqueCategoryList categories*/) {
+        assert !CollectionUtil.isAnyNull(taskName, date /*, endTime, deadline, categories*/);
         this.taskName = taskName;
-        this.deadline = deadline;
-        this.endTime = endTime;
         this.date = date;
+//        this.endTime = endTime;
+//        this.deadline = deadline;        
 //        this.categories = new UniqueCategoryList(categories); // protect internal tags from changes in the arg list
     }
 
@@ -35,7 +33,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getTaskName(), source.getDeadline(), source.getEndTime(), source.getDate()/* source.getCategories()*/);
+        this(source.getTaskName(), source.getDate() /* ,source.getEndTime(), source.getDeadline(), source.getCategories()*/);
     }
 
     public void setTaskName(TaskName taskName) {
@@ -78,17 +76,17 @@ public class Task implements ReadOnlyTask {
         return date;
     }
 
-//    @Override
-//    public UniqueCategoryList getCategories() {
-//        return new UniqueCategoryList(categories);
-//    }
+    @Override
+    public UniqueCategoryList getCategories() {
+        return new UniqueCategoryList(categories);
+    }
 
     /**
      * Replaces this task's categories with the categories in the argument category list.
      */
-//    public void setCategories(UniqueCategoryList replacement) {
-//        tags.setCategories(replacement);
-//    }
+    public void setCategories(UniqueCategoryList replacement) {
+        categories.setCategories(replacement);
+    }
 
     /**
      * Updates this person with the details of {@code replacement}.
