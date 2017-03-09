@@ -23,11 +23,14 @@
 
 #### Acknowledgements
 
+* The base of the code was taken from the sample project created by SE-EDU initiative
+  [Website](https://github.com/se-edu/)
+
+* This application was inspired on the CS2103T sample application, [AddressBook-Level 4](https://github.com/nus-cs2103-AY1617S2/addressbook-level4) that was designed and built by *Assoc. Prof Damith C. Rajapakse* and his teaching team.
+
+* This application was designed and built under the guidance of our tutor, *[nirandiw](https://github.com/nirandiw)*.
+
 * Some parts of this sample application were inspired by the excellent
   [Java FX tutorial](http://code.makery.ch/library/javafx-8-tutorial/) by *Marco Jakob*.
-  
-* Parts of this sample application were inspired by AddressBook4 
-[AddressBook4](https://github.com/nus-cs2103-AY1617S2/addressbook-level4)
-
 
 #### Licence : [MIT](LICENSE)
