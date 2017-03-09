@@ -11,6 +11,7 @@ public class CliSyntax {
 
     /* Prefix definitions */
     public static final Prefix PREFIX_DEADLINE = new Prefix(" by ");
+    public static final Prefix PREFIX_TIMEINTERVAL = new Prefix(" from ");
     public static final Prefix PREFIX_LABEL = new Prefix("t/");
 
     /* Patterns definitions */
