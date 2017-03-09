@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.category.UniqueCategoryList;
+import seedu.taskboss.model.task.DateTime;
 import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
@@ -23,6 +24,10 @@ public class XmlAdaptedTask {
     private String name;
     @XmlElement(required = true)
     private String priorityLevel;
+    @XmlElement(required = true)
+    private String startDateTime;
+    @XmlElement(required = true)
+    private String endDateTime;
     @XmlElement(required = true)
     private String information;
 
@@ -44,6 +49,8 @@ public class XmlAdaptedTask {
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getName().fullName;
         priorityLevel = source.getPriorityLevel().value;
+        startDateTime = source.getStartDateTime().value;
+        endDateTime = source.getEndDateTime().value;
         information = source.getInformation().value;
         addedToCategory = new ArrayList<>();
         for (Category category : source.getCategories()) {
@@ -63,8 +70,10 @@ public class XmlAdaptedTask {
         }
         final Name name = new Name(this.name);
         final PriorityLevel priorityLevel = new PriorityLevel(this.priorityLevel);
+        final DateTime startDateTime = new DateTime(this.startDateTime);
+        final DateTime endDateTime = new DateTime(this.endDateTime);
         final Information information = new Information(this.information);
         final UniqueCategoryList categories = new UniqueCategoryList(taskCategories);
-        return new Task(name, priorityLevel, information, categories);
+        return new Task(name, priorityLevel, startDateTime, endDateTime, information, categories);
     }
 }
