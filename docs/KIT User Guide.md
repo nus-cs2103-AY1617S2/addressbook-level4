@@ -58,7 +58,7 @@ Adds a task to KIT. New tasks are [not done] by default. <br>
 Format: `add NAME [r/REMARKS] [d/DEADLINE] [l/LOCATION] [t/TAG]...`
 
 > * If you need to type the character /, put a \ before it to avoid t/ getting recognized as tag. eg. carrot\/cabbage <br>
-> * Persons can have any number of tags (including 0).
+> * Tasks can have any number of tags (including 0).
 
 Here are some examples:
 
@@ -141,7 +141,7 @@ If you wish to edit the details of a current task, `edit` function allows you to
 
 Description: Edits an existing task in KIT. <br>
 
-Format: `edit INDEX [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Format: `edit INDEX [NAME] [r/REMARKS] [d/DEADLINE] [l/LOCATION] [t/TAG]...`
 
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
