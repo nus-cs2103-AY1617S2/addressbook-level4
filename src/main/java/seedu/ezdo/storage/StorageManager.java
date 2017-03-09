@@ -7,10 +7,13 @@ import java.util.logging.Logger;
 import com.google.common.eventbus.Subscribe;
 
 import seedu.ezdo.commons.core.ComponentManager;
+import seedu.ezdo.commons.core.Config;
 import seedu.ezdo.commons.core.LogsCenter;
 import seedu.ezdo.commons.events.model.EzDoChangedEvent;
 import seedu.ezdo.commons.events.storage.DataSavingExceptionEvent;
+import seedu.ezdo.commons.events.storage.EzDoDirectoryChangedEvent;
 import seedu.ezdo.commons.exceptions.DataConversionException;
+import seedu.ezdo.commons.util.ConfigUtil;
 import seedu.ezdo.model.ReadOnlyEzDo;
 import seedu.ezdo.model.UserPrefs;
 
@@ -20,19 +23,35 @@ import seedu.ezdo.model.UserPrefs;
 public class StorageManager extends ComponentManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
+//    private ConfigStorage configStorage;
     private EzDoStorage ezDoStorage;
     private UserPrefsStorage userPrefsStorage;
+    private Config config;
 
+//    public StorageManager(EzDoStorage ezDoStorage, UserPrefsStorage userPrefsStorage, ConfigStorage configStorage) {
+//        super();
+//        this.configStorage = configStorage;
+//        this.ezDoStorage = ezDoStorage;
+//        this.userPrefsStorage = userPrefsStorage;
+//    }
 
-    public StorageManager(EzDoStorage ezDoStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(EzDoStorage ezDoStorage, UserPrefsStorage userPrefsStorage, Config config) {
         super();
+        this.config = config;
         this.ezDoStorage = ezDoStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
-    public StorageManager(String ezDoFilePath, String userPrefsFilePath) {
-        this(new XmlEzDoStorage(ezDoFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
+    public StorageManager(String ezDoFilePath, String userPrefsFilePath, Config config) {
+        this(new XmlEzDoStorage(ezDoFilePath), new JsonUserPrefsStorage(userPrefsFilePath), config);
     }
+
+//    public StorageManager(String ezDoFilePath, String userPrefsFilePath, String configFilePath) {
+//        this(new XmlEzDoStorage(ezDoFilePath), new JsonUserPrefsStorage(userPrefsFilePath), new JsonConfigStorage(configFilePath));
+//    }
+
+    // ================ UserPrefs methods ==============================
+
 
     // ================ UserPrefs methods ==============================
 
@@ -52,6 +71,11 @@ public class StorageManager extends ComponentManager implements Storage {
     @Override
     public String getEzDoFilePath() {
         return ezDoStorage.getEzDoFilePath();
+    }
+
+    @Override
+    public void setEzDoFilePath(String path) {
+        ezDoStorage.setEzDoFilePath(path);
     }
 
     @Override
@@ -85,6 +109,22 @@ public class StorageManager extends ComponentManager implements Storage {
             saveEzDo(event.data);
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
+        }
+    }
+
+    @Override
+    @Subscribe
+    public void handleEzDoDirectoryChangedEvent(EzDoDirectoryChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Directory changed, saving to new directory at: "
+                + event.getPath()));
+        setEzDoFilePath(event.getPath());
+        try {
+            saveEzDo(event.getData());
+            config.setEzDoFilePath(event.getPath());
+            System.out.println("file path for config is: " + config.getEzDoFilePath());
+            ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
+        } catch (IOException e) { // we checked for this in SaveCommand alr so it shouldn't happen
+            System.out.println("siao liao la");
         }
     }
 
