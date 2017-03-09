@@ -6,14 +6,14 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.task.EndTime;
-import seedu.address.model.task.StartTime;
-import seedu.address.model.task.Title;
-import seedu.address.model.task.Task;
-import seedu.address.model.task.Venue;
-import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.EndTime;
+import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.StartTime;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.Title;
+import seedu.address.model.task.Venue;
 
 /**
  * JAXB-friendly version of the Task.

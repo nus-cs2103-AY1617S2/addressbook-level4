@@ -5,12 +5,12 @@ import java.util.Set;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.EndTime;
 import seedu.address.model.task.StartTime;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Title;
-import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.task.Venue;
 
