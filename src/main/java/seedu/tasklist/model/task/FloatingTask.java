@@ -21,6 +21,12 @@ public class FloatingTask extends Task implements ReadOnlyFloatingTask {
      */
     public FloatingTask(Name name, Comment comment, Priority priority, Status status, UniqueTagList tags) {
         super(name, comment, priority, status, tags);
+        assert !CollectionUtil.isAnyNull(name, comment, priority, status, tags);
+        this.name = name;
+        this.comment = comment;
+        this.priority = priority;
+        this.status = status;
+        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
     /**
