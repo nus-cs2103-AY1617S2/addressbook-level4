@@ -15,8 +15,8 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks whose title contain any of "
             + "the specified keywords (minimally 3-letter substrings) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + "groceries or groc";
+            + "Parameters: find [KEYWORDS]...\n"
+            + "Example: " + COMMAND_WORD + " groceries or groc";
 
     private final Set<String> keywords;
 
