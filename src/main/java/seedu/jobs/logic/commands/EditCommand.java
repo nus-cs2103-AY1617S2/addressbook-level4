@@ -7,7 +7,7 @@ import seedu.jobs.commons.core.Messages;
 import seedu.jobs.commons.util.CollectionUtil;
 import seedu.jobs.logic.commands.exceptions.CommandException;
 import seedu.jobs.model.tag.UniqueTagList;
-import seedu.jobs.model.task.Address;
+import seedu.jobs.model.task.Description;
 import seedu.jobs.model.task.Email;
 import seedu.jobs.model.task.Name;
 import seedu.jobs.model.task.Phone;
@@ -16,7 +16,7 @@ import seedu.jobs.model.task.Task;
 import seedu.jobs.model.task.UniqueTaskList;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing person in the description book.
  */
 public class EditCommand extends Command {
 
@@ -30,7 +30,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the description book.";
 
     private final int filteredPersonListIndex;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -80,7 +80,7 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
         Phone updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
         Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
-        Address updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
+        Description updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
         return new Task(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
@@ -94,7 +94,7 @@ public class EditCommand extends Command {
         private Optional<Name> name = Optional.empty();
         private Optional<Phone> phone = Optional.empty();
         private Optional<Email> email = Optional.empty();
-        private Optional<Address> address = Optional.empty();
+        private Optional<Description> description = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditPersonDescriptor() {}
@@ -103,7 +103,7 @@ public class EditCommand extends Command {
             this.name = toCopy.getName();
             this.phone = toCopy.getPhone();
             this.email = toCopy.getEmail();
-            this.address = toCopy.getAddress();
+            this.description = toCopy.getAddress();
             this.tags = toCopy.getTags();
         }
 
@@ -111,7 +111,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.phone, this.email, this.address, this.tags);
+            return CollectionUtil.isAnyPresent(this.name, this.phone, this.email, this.description, this.tags);
         }
 
         public void setName(Optional<Name> name) {
@@ -141,13 +141,13 @@ public class EditCommand extends Command {
             return email;
         }
 
-        public void setAddress(Optional<Address> address) {
-            assert address != null;
-            this.address = address;
+        public void setAddress(Optional<Description> description) {
+            assert description != null;
+            this.description = description;
         }
 
-        public Optional<Address> getAddress() {
-            return address;
+        public Optional<Description> getAddress() {
+            return description;
         }
 
         public void setTags(Optional<UniqueTagList> tags) {

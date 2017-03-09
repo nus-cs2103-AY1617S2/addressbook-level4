@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.jobs.commons.exceptions.IllegalValueException;
 import seedu.jobs.model.tag.Tag;
 import seedu.jobs.model.tag.UniqueTagList;
-import seedu.jobs.model.task.Address;
+import seedu.jobs.model.task.Description;
 import seedu.jobs.model.task.Email;
 import seedu.jobs.model.task.Name;
 import seedu.jobs.model.task.Phone;
@@ -68,8 +68,8 @@ public class XmlAdaptedPerson {
         final Name name = new Name(this.name);
         final Phone phone = new Phone(this.phone);
         final Email email = new Email(this.email);
-        final Address address = new Address(this.address);
+        final Description description = new Description(this.address);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Task(name, phone, email, address, tags);
+        return new Task(name, phone, email, description, tags);
     }
 }
