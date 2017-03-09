@@ -9,7 +9,7 @@ We are a team based in the [School of Computing, National University of Singapor
 Role: Team Lead
 
 In Charge of: Model <br>
-Responsibilities: Scheduling
+Responsibilities: Scheduling <br>
 Features implemented:
 
 -----
@@ -19,7 +19,7 @@ Features implemented:
 Role: Developer <br>
 
 In Charge of: Commons <br>
-Responsibilities: Testing
+Responsibilities: Testing <br>
 Features implemented:
 
 -----
@@ -28,7 +28,7 @@ Features implemented:
 <img src="images/WangChi.png" width="150"><br>
 Role: Developer <br>
 
-In Charge of: Storage & Logic
+In Charge of: Storage & Logic <br>
 Responsibilities: Integration <br>
 Features implemented:
 
@@ -39,7 +39,7 @@ Features implemented:
 Role: Developer <br>
 
 In Charge of: UI <br>
-Responsibilities: Documentation
+Responsibilities: Documentation <br>
 Features implemented:
 
 -----
