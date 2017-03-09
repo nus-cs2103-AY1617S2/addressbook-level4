@@ -3,8 +3,8 @@ package seedu.jobs.logic.commands;
 import seedu.jobs.commons.core.Messages;
 import seedu.jobs.commons.core.UnmodifiableObservableList;
 import seedu.jobs.logic.commands.exceptions.CommandException;
-import seedu.jobs.model.task.ReadOnlyPerson;
-import seedu.jobs.model.task.UniquePersonList.PersonNotFoundException;
+import seedu.jobs.model.task.ReadOnlyTask;
+import seedu.jobs.model.task.UniqueTaskList.PersonNotFoundException;
 
 /**
  * Deletes a person identified using it's last displayed index from the address book.
@@ -30,13 +30,13 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
 
-        UnmodifiableObservableList<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
+        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredPersonList();
 
         if (lastShownList.size() < targetIndex) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        ReadOnlyPerson personToDelete = lastShownList.get(targetIndex - 1);
+        ReadOnlyTask personToDelete = lastShownList.get(targetIndex - 1);
 
         try {
             model.deletePerson(personToDelete);

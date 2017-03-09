@@ -16,7 +16,7 @@ import seedu.jobs.commons.events.ui.ExitAppRequestEvent;
 import seedu.jobs.commons.util.FxViewUtil;
 import seedu.jobs.logic.Logic;
 import seedu.jobs.model.UserPrefs;
-import seedu.jobs.model.task.ReadOnlyPerson;
+import seedu.jobs.model.task.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -199,7 +199,7 @@ public class MainWindow extends UiPart<Region> {
         return this.personListPanel;
     }
 
-    void loadPersonPage(ReadOnlyPerson person) {
+    void loadPersonPage(ReadOnlyTask person) {
         browserPanel.loadPersonPage(person);
     }
 

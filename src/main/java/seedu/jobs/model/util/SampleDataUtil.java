@@ -9,7 +9,7 @@ import seedu.jobs.model.task.Email;
 import seedu.jobs.model.task.Name;
 import seedu.jobs.model.task.Phone;
 import seedu.jobs.model.task.Task;
-import seedu.jobs.model.task.UniquePersonList.DuplicatePersonException;
+import seedu.jobs.model.task.UniqueTaskList.DuplicatePersonException;
 
 public class SampleDataUtil {
     public static Task[] getSamplePersons() {
