@@ -3,8 +3,8 @@ package savvytodo.logic.parser;
 import static savvytodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static savvytodo.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static savvytodo.logic.parser.CliSyntax.PREFIX_CATEGORY;
-import static savvytodo.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static savvytodo.logic.parser.CliSyntax.PREFIX_PHONE;
+import static savvytodo.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static savvytodo.logic.parser.CliSyntax.PREFIX_PRIORITY;
 
 import java.util.NoSuchElementException;
 
@@ -24,13 +24,13 @@ public class AddCommandParser {
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_CATEGORY);
+                new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_DESCRIPTION, PREFIX_ADDRESS, PREFIX_CATEGORY);
         argsTokenizer.tokenize(args);
         try {
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
-                    argsTokenizer.getValue(PREFIX_PHONE).get(),
-                    argsTokenizer.getValue(PREFIX_EMAIL).get(),
+                    argsTokenizer.getValue(PREFIX_PRIORITY).get(),
+                    argsTokenizer.getValue(PREFIX_DESCRIPTION).get(),
                     argsTokenizer.getValue(PREFIX_ADDRESS).get(),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_CATEGORY))
             );

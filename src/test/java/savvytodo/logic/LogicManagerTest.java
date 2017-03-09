@@ -42,9 +42,9 @@ import savvytodo.model.TaskManager;
 import savvytodo.model.category.Category;
 import savvytodo.model.category.UniqueCategoryList;
 import savvytodo.model.task.Address;
-import savvytodo.model.task.Email;
+import savvytodo.model.task.Description;
 import savvytodo.model.task.Name;
-import savvytodo.model.task.Phone;
+import savvytodo.model.task.Priority;
 import savvytodo.model.task.ReadOnlyTask;
 import savvytodo.model.task.Task;
 import savvytodo.storage.StorageManager;
@@ -199,9 +199,9 @@ public class LogicManagerTest {
         assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
                 Name.MESSAGE_NAME_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
-                Phone.MESSAGE_PHONE_CONSTRAINTS);
+                Priority.MESSAGE_PRIORITY_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
-                Email.MESSAGE_EMAIL_CONSTRAINTS);
+                Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.category",
                 Category.MESSAGE_CATEGORY_CONSTRAINTS);
 
@@ -416,8 +416,8 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
-            Phone privatePhone = new Phone("111111");
-            Email email = new Email("adam@gmail.com");
+            Priority privatePhone = new Priority("111111");
+            Description email = new Description("adam@gmail.com");
             Address privateAddress = new Address("111, alpha street");
             Category category1 = new Category("category1");
             Category category2 = new Category("longercategory2");
@@ -433,7 +433,7 @@ public class LogicManagerTest {
          * @param seed used to generate the task data field values
          */
         Task generateTask(int seed) throws Exception {
-            return new Task(new Name("Task " + seed), new Phone("" + Math.abs(seed)), new Email(seed + "@email"),
+            return new Task(new Name("Task " + seed), new Priority("" + Math.abs(seed)), new Description(seed + "@email"),
                     new Address("House of " + seed), new UniqueCategoryList(new Category("category" + Math.abs(seed)),
                             new Category("category" + Math.abs(seed + 1))));
         }
@@ -530,8 +530,8 @@ public class LogicManagerTest {
         Task generateTaskWithName(String name) throws Exception {
             return new Task(
                     new Name(name),
-                    new Phone("1"),
-                    new Email("1@email"),
+                    new Priority("1"),
+                    new Description("1@email"),
                     new Address("House of 1"),
                     new UniqueCategoryList(new Category("category"))
             );
