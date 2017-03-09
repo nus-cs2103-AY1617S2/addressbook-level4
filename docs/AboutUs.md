@@ -4,49 +4,38 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Damith C. Rajapakse](http://www.comp.nus.edu.sg/~damithch) <br>
-<img src="images/DamithRajapakse.jpg" width="150"><br>
-**Role**: Project Advisor
-
------
-
-#### [Joshua Lee](http://github.com/lejolly)
-<img src="images/JoshuaLee.jpg" width="150"><br>
-Role: Developer <br>
+#### [MY DUY HOANG LONG](https://github.com/myduyhoanglong) <br>
+<img src="images/myduyhoanglong.png" width="150"><br>
+**Role**: Testing
 Responsibilities: UI
+-----
+
+#### [IVAN KOH](https://github.com/ivankws)
+<img src="images/ivankws.png" width="150"><br>
+Role: Code quality
+Responsibilities: Documentation
 
 -----
 
-#### [Leow Yijin](http://github.com/yijinl)
-<img src="images/LeowYijin.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Data
+#### [TANG DI FENG](https://github.com/e0011840)
+<img src="images/e0011840.png" width="150"><br>
+Role: Integration
+Responsibilities: Storage
 
 -----
 
-#### [Martin Choo](http://github.com/m133225)
-<img src="images/MartinChoo.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Dev Ops
+#### [ZHANG YAN HAO](https://github.com/vane1992)
+<img src="images/vane1992.png" width="150"><br>
+Role: Scheduling and deadlines, Code quality
+Responsibilities: Model
 
 -----
-
-#### [Thien Nguyen](https://github.com/ndt93)
- Role: Developer <br>
- Responsibilities: Threading
-
- -----
-
-#### [You Liang](http://github.com/yl-coder)
-<img src="images/YouLiang.jpg" width="150"><br>
- Role: Developer <br>
- Responsibilities: UI
-
- -----
 
 # Contributors
 
 We welcome contributions. See [Contact Us](ContactUs.md) page for more info.
 
-* [Akshay Narayan](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Aokkhoy)
-* [Sam Yong](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Amauris)
+* [Tang Di Feng](https://github.com/CS2103JAN2017-T09-B3/main/pulls)
+* [MY DUY HOANG LONG](https://github.com/myduyhoanglong)
+* [Ivan Koh] (https://github.com/ivankws)
+* [Zhang Yan Hao] (https://github.com/vane1992)
