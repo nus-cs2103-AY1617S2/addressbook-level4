@@ -16,9 +16,12 @@ import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.Ui;
 
+/**
+ * Add floating tasks, tasks with deadlines and events into the todo list.
+ */
 public class AddTaskController extends TaskController {
 
-    private static final String COMMAND_TEMPLATE = "add"
+    private static final String COMMAND_TEMPLATE = "^add"
             + "(\\s+(?<fullDescription>.+))?\\s*";
 
     private static final String TASK_FULL_DESCRIPTION = "fullDescription";
@@ -35,7 +38,7 @@ public class AddTaskController extends TaskController {
     }
 
     public CommandResult execute(String command) {
-        logger.info(getClass().getName() + "will handle command");
+        logger.info(getClass().getName() + " will handle command");
 
         TodoList todoList = TodoList.load();
         CommandResult commandResult = new CommandResult("");
