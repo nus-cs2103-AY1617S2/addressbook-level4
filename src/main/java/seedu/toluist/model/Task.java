@@ -54,10 +54,8 @@ public class Task implements Comparable<Task> {
 
     public boolean addTag(Tag tag) {
         boolean isDifferent = true;
-        for (Tag t : this.allTags) {
-            if (tag.equals(t)) {
-                isDifferent = false;
-            }
+        if (allTags.contains(tag)) {
+            isDifferent = false;
         }
 
         if (isDifferent) {
