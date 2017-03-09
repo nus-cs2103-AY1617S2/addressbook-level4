@@ -19,7 +19,7 @@ Please refer to the [Setting up](DeveloperGuide.md#setting-up) section to learn 
 2. Download the latest `doordie.jar` from the [releases](../../../releases) tab.
 3. Navigate to the location of the `doordie.jar` and double click the jar.
 4. The GUI should appear in a few seconds.
-<img src="images/TaskManager.jpg" width="600">
+<img src="images/Ui.png" width="600">
 
 5. Refer to the [Features](#features) section below for details of each command.<br />
 6. Pressing the up or down key will allow you to iterate through previous commands executed (if any).
@@ -114,8 +114,8 @@ Format:`update [TASK_ID] [TASKNAME] [label LABEL] ([(by|on) DATE] | [from START_
     The index **must be a positive integer** 1, 2, 3, ...
 > * At least one of the optional fields excluding `TASK_ID` must be provided.
 > * Existing values will be updated to the input values.
-> * When editing labels, the existing labels of the person will be removed i.e adding of labels is not cumulative.
-> * You can remove all the person's tags by typing `label` without specifying any tags after it.
+> * When editing labels, the existing labels of the task will be removed i.e adding of labels is not cumulative.
+> * You can remove all the task's tags by typing `label` without specifying any tags after it.
 > * Marking a task as `done` will indicate that the task is completed
 
 Examples:
@@ -148,10 +148,10 @@ Examples:
 * `find CS2103`<br />
 Returns all task containing the keyword or label containing `CS2103` & `cs2103`.
 
-* `find task project`<br />
+* `find project`<br />
 Returns all task with the name containing `project` & `Project`.
 
-* `find label glocery`<br />
+* `find glocery`<br />
 Returns all task with the label name containing `glocery` & `Glocery`.
 
 * `find project glocery`<br />
@@ -159,12 +159,12 @@ Returns all tasks having name or label name containing `project`, `Project`,  `g
 
 ### 2.6. Deleting a task : `delete`
 
-Deletes the specified task from the address book. Reversible via undo command.
+Deletes the specified task from the task manager. Reversible via undo command.
 
-Format: `delete [TASK_ID|LABEL]`
+Format: `delete [INDEX|LABEL]`
 
-> * Deletes the task at the specified `TASK_ID` or all task with `LABEL`. <br />
-> * The index refers to the id of the task.
+> * Deletes the task at the specified `INDEX` or all task with `LABEL`. <br />
+> * The index refers to the index of the task in the display list.
 > * The index **must be a positive integer** 1, 2, 3, ...
 > * If the label does not exist, command will still be executed but no change will occur
 
@@ -230,27 +230,39 @@ Examples:
   `confirm 1 1`<br />
   Confirms the task CS2103 Meeting for 1st January 2017 4pm and releases 2nd January 2017 8pm slot for other tasks
 
-### 2.10. Undo the previously executed command : `undo`
+### 2.10. Edit a label : `editlabel`
+
+Renames a specific label to another label<br />
+Format: `editlabel OLD_LABEL NEW_LABEL`
+
+> * Label names must be alphanumberic
+
+Examples:
+
+* `editlabel friends oldfriends`<br />
+  Renames all task with the tag `friends` to `oldfriends`.
+
+### 2.11. Undo the previously executed command : `undo`
 
 Revert results of a previously executed command. If the previously executed command does not modify the data of DoOrDie, nothing will be reverted.<br />
 Format: `undo`
 
-### 2.11. Clearing all entries : `clear`
+### 2.12. Clearing all entries : `clear`
 
 Clears all entries from DoOrDie.<br />
 Format: `clear`
 
-### 2.12. Push task changes to Google Calendar : `push`
+### 2.13. Push task changes to Google Calendar : `push`
 
 Updates `Google Calendar` with newly added/modified tasks. Priority goes to `DoOrDie` if there is a conflict.<br />
 Format: `push`
 
-### 2.13. Pull task changes from Google Calendar : `pull`
+### 2.14. Pull task changes from Google Calendar : `pull`
 
 Downloads data from Google Calendar. Priority goes to `Google Calendar` if there is a conflict.<br />
 Format: `pull`
 
-### 2.14. Export agenda to PDF file : `export`
+### 2.15. Export agenda to PDF file : `export`
 
 Saves a PDF format with all tasks and details to the same directory as `doordie.jar`.<br />
 Format: `export [DATE|START_DATE to END_DATE]`
@@ -271,12 +283,12 @@ Examples:
 * `export 2nd Feb to 9th Feb`<br />
   Saves a PDF with tasks and details from 2nd February to 9th February of the current year
 
-### 2.15. Exiting the program : `exit`
+### 2.16. Exiting the program : `exit`
 
 Exits DoOrDie<br />
 Format: `exit`
 
-### 2.16. Saving the data
+### 2.17. Saving the data
 
 DoOrDie data are saved in the hard disk automatically after any command that changes the data.<br />
 There is no need to save manually.
@@ -311,8 +323,11 @@ There is no need to save manually.
 * **Book** `book TASKNAME [label LABEL] , DATE, [MORE_DATES]...`<br />
   e.g. `book CS2103 Meeting 1/1/2017 4pm, 2/1/2017 8pm`
 
-* **Confirm** ` confirm TASK_ID (SLOT_NUMBER|DATE) `<br />
+* **Confirm** `confirm TASK_ID (SLOT_NUMBER|DATE)`<br />
   e.g. `book CS2103 Meeting 1/1/2017 4pm, 2/1/2017 8pm`
+
+* **Edit Label** `editlabel OLD_LABEL NEW_LABEL`<br />
+  e.g. `editlabel friends oldFriends`
 
 * **Undo** `undo`
 
