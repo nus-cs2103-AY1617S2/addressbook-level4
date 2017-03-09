@@ -87,19 +87,13 @@ public class EditCommand extends Command {
      * corresponding field value of the task.
      */
     public static class EditTaskDescriptor {
-        private Optional<Description> name = Optional.empty();
-        private Optional<Phone> phone = Optional.empty();
-        private Optional<Email> email = Optional.empty();
-        private Optional<Address> address = Optional.empty();
+        private Optional<Description> description = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditTaskDescriptor() {}
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
-            this.name = toCopy.getTaskName();
-            this.phone = toCopy.getPhone();
-            this.email = toCopy.getEmail();
-            this.address = toCopy.getAddress();
+            this.description = toCopy.getTaskName();
             this.tags = toCopy.getTags();
         }
 
@@ -107,43 +101,16 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.phone, this.email, this.address, this.tags);
+            return CollectionUtil.isAnyPresent(this.description, this.tags);
         }
 
-        public void setTaskName(Optional<Description> name) {
-            assert name != null;
-            this.name = name;
+        public void setTaskName(Optional<Description> description) {
+            assert description != null;
+            this.description = description;
         }
 
         public Optional<Description> getTaskName() {
-            return name;
-        }
-
-        public void setPhone(Optional<Phone> phone) {
-            assert phone != null;
-            this.phone = phone;
-        }
-
-        public Optional<Phone> getPhone() {
-            return phone;
-        }
-
-        public void setEmail(Optional<Email> email) {
-            assert email != null;
-            this.email = email;
-        }
-
-        public Optional<Email> getEmail() {
-            return email;
-        }
-
-        public void setAddress(Optional<Address> address) {
-            assert address != null;
-            this.address = address;
-        }
-
-        public Optional<Address> getAddress() {
-            return address;
+            return description;
         }
 
         public void setTags(Optional<UniqueTagList> tags) {

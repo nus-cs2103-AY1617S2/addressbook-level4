@@ -346,7 +346,6 @@ Priorities: Highest (must have) - `* * * * *` to Lowest (unlikely to have) - `*`
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-
 `* * * * *` | user | add a task by specifying task description only | record tasks that need to be done some day
 `* * * * *` | user | add a task with a specific deadline | know when the task is due
 `* * * * *` | user | add an event with a start and end time | record tasks that are events
@@ -355,7 +354,6 @@ Priority | As a ... | I want to ... | So that I can...
 `* * * * *` | user | edit the task descriptions | make corrections or updates to the task description
 `* * * * *` | user | delete a task | get rid of tasks that I no longer care to track
 `* * * * *` | user with many tasks | search keyword(s) | find all the tasks that are similar or relevant to the keyword
-
 `* * * *` | user | mark a task as done | remove the task from my to-do list
 `* * * *` | user | unmark tasks previously marked as done | edit the task status
 `* * * *` | user | undo my most recent action | reverse any mistake made in the previous step
@@ -363,7 +361,6 @@ Priority | As a ... | I want to ... | So that I can...
 `* * * *` | advanced user | specify which folder I want to save the files in | have easy access to the tasks just by sharing the files
 `* * * *` | new user | see usage instructions | refer to instructions when I forget how to use the programme
 `* * * *` | new user | view more information about a particular command | so that I can learn how to use various commands
-
 `* * *` | user | set tasks to repeat over a specified interval | manage recurring tasks
 `* * *` | user | add additional details or subtasks to a task | record tasks in detail
 `* * *` | user | be notified if the time period an event I am adding clashes or overlaps with another event already added | reschedule the event to another free time slot if needed
@@ -373,7 +370,6 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | list tasks by tags | see what are the tasks under a specific category.
 `* * *` | user | list tasks by priority | know which are the most urgent tasks.
 `* * *` | user | view the list of tasks that I have completed | unmark completed tasks if necessary.
-
 `* *` | user | search better with auto complete | search better.
 `* *` | user | enable auto spell checker | correct any spelling mistakes I might make when typing commands.
 `* *` | advanced user | add default keywords to my interface | customize it according to the vocabulary that I am most comfortable with.
@@ -383,7 +379,6 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user | receive sound effects when I mark a task as completed | give myself more motivation to complete my tasks.
 `* *` | advanced user | view a log of my history | track all the commands I have entered since the start of time.
 `* *` | user | export the tasks to a calendar file | use with other apps.
-
 `*` | user | add location details to events | I know where the event is taking place
 `*` | user | colour code my tasks | I can differentiate tasks better
 `*` | user | search for empty time periods | schedule my tasks with minimal overlap or clashes in deadlines.
