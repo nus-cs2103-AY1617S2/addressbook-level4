@@ -14,6 +14,11 @@ import seedu.taskboss.model.task.DateTime;
  */
 public class DateParser {
 
+    private static final String START_DATE = "START DATE: ";
+    private static final String END_DATE = "END DATE: ";
+    private static final String ERROR_INVALID_DATE = "Failed to understand given date.";
+    private static final String ERROR_MULTIPLE_DATES = "Please only enter a single date.";
+    
     private com.joestelmach.natty.Parser nattyParser;
 
     public DateParser() {
@@ -28,14 +33,13 @@ public class DateParser {
 
         List<DateGroup> dateGroupList = this.nattyParser.parse(date);
         int numDates = countDates(dateGroupList);
-        System.out.println(numDates + "HELLO " + date);
 
         if (numDates == 0) {
-            throw new IllegalValueException("START DATE: Failed to understand give date.");
+            throw new IllegalValueException(START_DATE + ERROR_INVALID_DATE);
         }
 
         if (numDates > 1) {
-            throw new IllegalValueException("START DATE: Please only enter a single date.");
+            throw new IllegalValueException(START_DATE + ERROR_MULTIPLE_DATES);
         }
 
         DateGroup dateGroup = dateGroupList.get(0);
@@ -52,14 +56,13 @@ public class DateParser {
 
         List<DateGroup> dateGroupList = this.nattyParser.parse(date);
         int numDates = countDates(dateGroupList);
-        System.out.println(numDates + "HELLO " + date);
 
         if (numDates == 0) {
-            throw new IllegalValueException("END DATE: Failed to understand given date.");
+            throw new IllegalValueException(END_DATE + ERROR_INVALID_DATE);
         }
 
         if (numDates > 1) {
-            throw new IllegalValueException("END DATE: Please only enter a single date.");
+            throw new IllegalValueException(END_DATE + ERROR_MULTIPLE_DATES);
         }
 
         DateGroup dateGroup = dateGroupList.get(0);
@@ -78,5 +81,21 @@ public class DateParser {
             numTotalDates += dateGroup.getDates().size();
         }
         return numTotalDates;
+    }
+
+    public static String getStartDateInvalidDateError() {
+        return START_DATE + ERROR_INVALID_DATE;
+    }
+
+    public static String getStartDateMultipleDatesError() {
+        return START_DATE + ERROR_MULTIPLE_DATES;
+    }
+
+    public static String getEndDateInvalidDateError() {
+        return END_DATE + ERROR_INVALID_DATE;
+    }
+
+    public static String getEndDateMultipleDatesError() {
+        return END_DATE + ERROR_MULTIPLE_DATES;
     }
 }

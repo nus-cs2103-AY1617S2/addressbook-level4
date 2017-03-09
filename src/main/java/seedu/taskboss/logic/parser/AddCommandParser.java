@@ -2,8 +2,10 @@ package seedu.taskboss.logic.parser;
 
 import static seedu.taskboss.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_INFORMATION;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_START_DATE;
 
 import java.util.NoSuchElementException;
 
@@ -23,12 +25,15 @@ public class AddCommandParser {
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_INFORMATION, PREFIX_CATEGORY);
+                new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_START_DATE,
+                        PREFIX_END_DATE, PREFIX_INFORMATION, PREFIX_CATEGORY);
         argsTokenizer.tokenize(args);
         try {
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
                     argsTokenizer.getValue(PREFIX_PRIORITY).get(),
+                    ParserUtil.parseStartDate(argsTokenizer.getValue(PREFIX_START_DATE).get()),
+                    ParserUtil.parseEndDate(argsTokenizer.getValue(PREFIX_END_DATE).get()),
                     argsTokenizer.getValue(PREFIX_INFORMATION).get(),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_CATEGORY))
             );
