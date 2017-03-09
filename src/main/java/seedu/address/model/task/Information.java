@@ -11,7 +11,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 public class Information {
 
     public static final String MESSAGE_INFORMATION_CONSTRAINTS =
-            "Task's information can take any values, and it should not be blank";
+            "Task's information can take any values";
 
     /*
      * The first character of the information must not be a whitespace,
