@@ -34,7 +34,7 @@ public class MainWindow extends UiPart<Region> {
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
-    private PersonListPanel personListPanel;
+    private TaskListPanel taskListPanel;
     private Config config;
 
     @FXML
@@ -114,7 +114,7 @@ public class MainWindow extends UiPart<Region> {
 
     void fillInnerParts() {
         browserPanel = new BrowserPanel(browserPlaceholder);
-        personListPanel = new PersonListPanel(getPersonListPlaceholder(), logic.getFilteredTaskList());
+        taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getWatodoFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
@@ -132,7 +132,7 @@ public class MainWindow extends UiPart<Region> {
         return resultDisplayPlaceholder;
     }
 
-    private AnchorPane getPersonListPlaceholder() {
+    private AnchorPane getTaskListPlaceholder() {
         return taskListPanelPlaceholder;
     }
 
@@ -195,8 +195,8 @@ public class MainWindow extends UiPart<Region> {
         raise(new ExitAppRequestEvent());
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return this.personListPanel;
+    public TaskListPanel getPersonListPanel() {
+        return this.taskListPanel;
     }
 
     void loadPersonPage(ReadOnlyFloatingTask person) {
