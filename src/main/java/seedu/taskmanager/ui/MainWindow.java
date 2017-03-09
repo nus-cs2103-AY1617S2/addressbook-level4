@@ -16,7 +16,7 @@ import seedu.taskmanager.commons.events.ui.ExitAppRequestEvent;
 import seedu.taskmanager.commons.util.FxViewUtil;
 import seedu.taskmanager.logic.Logic;
 import seedu.taskmanager.model.UserPrefs;
-import seedu.taskmanager.model.person.ReadOnlyPerson;
+import seedu.taskmanager.model.person.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -199,7 +199,7 @@ public class MainWindow extends UiPart<Region> {
         return this.taskListPanel;
     }
 
-    void loadPersonPage(ReadOnlyPerson person) {
+    void loadPersonPage(ReadOnlyTask person) {
         browserPanel.loadPersonPage(person);
     }
 

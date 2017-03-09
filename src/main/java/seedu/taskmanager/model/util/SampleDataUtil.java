@@ -8,7 +8,7 @@ import seedu.taskmanager.model.person.Email;
 import seedu.taskmanager.model.person.Name;
 import seedu.taskmanager.model.person.Person;
 import seedu.taskmanager.model.person.Phone;
-import seedu.taskmanager.model.person.UniquePersonList.DuplicatePersonException;
+import seedu.taskmanager.model.person.UniqueTaskList.DuplicatePersonException;
 import seedu.taskmanager.model.tag.UniqueTagList;
 
 public class SampleDataUtil {

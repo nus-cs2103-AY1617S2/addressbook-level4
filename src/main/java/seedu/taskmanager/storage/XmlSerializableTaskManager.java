@@ -13,7 +13,7 @@ import seedu.taskmanager.commons.core.UnmodifiableObservableList;
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.model.ReadOnlyAddressBook;
 import seedu.taskmanager.model.person.Person;
-import seedu.taskmanager.model.person.ReadOnlyPerson;
+import seedu.taskmanager.model.person.ReadOnlyTask;
 import seedu.taskmanager.model.tag.Tag;
 
 /**
@@ -46,7 +46,7 @@ public class XmlSerializableTaskManager implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<ReadOnlyPerson> getPersonList() {
+    public ObservableList<ReadOnlyTask> getPersonList() {
         final ObservableList<Person> persons = this.tasks.stream().map(p -> {
             try {
                 return p.toModelType();

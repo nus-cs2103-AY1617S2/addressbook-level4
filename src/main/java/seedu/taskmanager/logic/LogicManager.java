@@ -10,7 +10,7 @@ import seedu.taskmanager.logic.commands.CommandResult;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
 import seedu.taskmanager.logic.parser.Parser;
 import seedu.taskmanager.model.Model;
-import seedu.taskmanager.model.person.ReadOnlyPerson;
+import seedu.taskmanager.model.person.ReadOnlyTask;
 import seedu.taskmanager.storage.Storage;
 
 /**
@@ -36,7 +36,7 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
-    public ObservableList<ReadOnlyPerson> getFilteredPersonList() {
+    public ObservableList<ReadOnlyTask> getFilteredPersonList() {
         return model.getFilteredPersonList();
     }
 }

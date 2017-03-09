@@ -35,7 +35,7 @@ import seedu.taskmanager.model.person.Email;
 import seedu.taskmanager.model.person.Name;
 import seedu.taskmanager.model.person.Person;
 import seedu.taskmanager.model.person.Phone;
-import seedu.taskmanager.model.person.ReadOnlyPerson;
+import seedu.taskmanager.model.person.ReadOnlyTask;
 import seedu.taskmanager.model.tag.Tag;
 import seedu.taskmanager.model.tag.UniqueTagList;
 import seedu.taskmanager.storage.XmlSerializableTaskManager;
@@ -333,7 +333,7 @@ public class TestUtil {
         return list;
     }
 
-    public static boolean compareCardAndPerson(PersonCardHandle card, ReadOnlyPerson person) {
+    public static boolean compareCardAndPerson(PersonCardHandle card, ReadOnlyTask person) {
         return card.isSamePerson(person);
     }
 

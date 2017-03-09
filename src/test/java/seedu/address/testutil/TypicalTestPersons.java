@@ -3,7 +3,7 @@ package seedu.address.testutil;
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.model.AddressBook;
 import seedu.taskmanager.model.person.Person;
-import seedu.taskmanager.model.person.UniquePersonList;
+import seedu.taskmanager.model.person.UniqueTaskList;
 
 /**
  *
@@ -47,7 +47,7 @@ public class TypicalTestPersons {
         for (TestPerson person : new TypicalTestPersons().getTypicalPersons()) {
             try {
                 ab.addPerson(new Person(person));
-            } catch (UniquePersonList.DuplicatePersonException e) {
+            } catch (UniqueTaskList.DuplicatePersonException e) {
                 assert false : "not possible";
             }
         }

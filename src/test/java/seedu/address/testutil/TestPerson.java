@@ -4,13 +4,13 @@ import seedu.taskmanager.model.person.Address;
 import seedu.taskmanager.model.person.Email;
 import seedu.taskmanager.model.person.Name;
 import seedu.taskmanager.model.person.Phone;
-import seedu.taskmanager.model.person.ReadOnlyPerson;
+import seedu.taskmanager.model.person.ReadOnlyTask;
 import seedu.taskmanager.model.tag.UniqueTagList;
 
 /**
  * A mutable person object. For testing only.
  */
-public class TestPerson implements ReadOnlyPerson {
+public class TestPerson implements ReadOnlyTask {
 
     private Name name;
     private Address address;
