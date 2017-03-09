@@ -10,7 +10,7 @@ import seedu.taskmanager.logic.commands.CommandResult;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
 import seedu.taskmanager.logic.parser.Parser;
 import seedu.taskmanager.model.Model;
-import seedu.taskmanager.model.person.ReadOnlyTask;
+import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.storage.Storage;
 
 /**

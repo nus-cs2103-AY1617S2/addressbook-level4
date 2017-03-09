@@ -3,10 +3,10 @@ package seedu.taskmanager.model;
 import java.util.Set;
 
 import seedu.taskmanager.commons.core.UnmodifiableObservableList;
-import seedu.taskmanager.model.person.Person;
-import seedu.taskmanager.model.person.ReadOnlyTask;
-import seedu.taskmanager.model.person.UniqueTaskList;
-import seedu.taskmanager.model.person.UniqueTaskList.DuplicatePersonException;
+import seedu.taskmanager.model.task.Task;
+import seedu.taskmanager.model.task.ReadOnlyTask;
+import seedu.taskmanager.model.task.UniqueTaskList;
+import seedu.taskmanager.model.task.UniqueTaskList.DuplicatePersonException;
 
 /**
  * The API of the Model component.
@@ -22,7 +22,7 @@ public interface Model {
     void deletePerson(ReadOnlyTask target) throws UniqueTaskList.PersonNotFoundException;
 
     /** Adds the given person */
-    void addPerson(Person person) throws UniqueTaskList.DuplicatePersonException;
+    void addTask(Task task) throws UniqueTaskList.DuplicatePersonException;
 
     /**
      * Updates the person located at {@code filteredPersonListIndex} with {@code editedPerson}.

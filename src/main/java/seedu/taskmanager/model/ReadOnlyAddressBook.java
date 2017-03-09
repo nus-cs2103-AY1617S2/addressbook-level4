@@ -2,8 +2,8 @@ package seedu.taskmanager.model;
 
 
 import javafx.collections.ObservableList;
-import seedu.taskmanager.model.person.ReadOnlyTask;
 import seedu.taskmanager.model.tag.Tag;
+import seedu.taskmanager.model.task.ReadOnlyTask;
 
 /**
  * Unmodifiable view of an address book

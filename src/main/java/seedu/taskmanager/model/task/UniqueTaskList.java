@@ -1,4 +1,4 @@
-package seedu.taskmanager.model.person;
+package seedu.taskmanager.model.task;
 
 import java.util.Iterator;
 import java.util.List;
@@ -14,12 +14,12 @@ import seedu.taskmanager.commons.util.CollectionUtil;
  *
  * Supports a minimal set of list operations.
  *
- * @see Person#equals(Object)
+ * @see Task#equals(Object)
  * @see CollectionUtil#elementsAreUnique(Collection)
  */
-public class UniqueTaskList implements Iterable<Person> {
+public class UniqueTaskList implements Iterable<Task> {
 
-    private final ObservableList<Person> internalList = FXCollections.observableArrayList();
+    private final ObservableList<Task> internalList = FXCollections.observableArrayList();
 
     /**
      * Returns true if the list contains an equivalent person as the given argument.
@@ -34,7 +34,7 @@ public class UniqueTaskList implements Iterable<Person> {
      *
      * @throws DuplicatePersonException if the person to add is a duplicate of an existing person in the list.
      */
-    public void add(Person toAdd) throws DuplicatePersonException {
+    public void add(Task toAdd) throws DuplicatePersonException {
         assert toAdd != null;
         if (contains(toAdd)) {
             throw new DuplicatePersonException();
@@ -52,16 +52,16 @@ public class UniqueTaskList implements Iterable<Person> {
     public void updatePerson(int index, ReadOnlyTask editedPerson) throws DuplicatePersonException {
         assert editedPerson != null;
 
-        Person personToUpdate = internalList.get(index);
-        if (!personToUpdate.equals(editedPerson) && internalList.contains(editedPerson)) {
+        Task taskToUpdate = internalList.get(index);
+        if (!taskToUpdate.equals(editedPerson) && internalList.contains(editedPerson)) {
             throw new DuplicatePersonException();
         }
 
-        personToUpdate.resetData(editedPerson);
+        taskToUpdate.resetData(editedPerson);
         // TODO: The code below is just a workaround to notify observers of the updated person.
         // The right way is to implement observable properties in the Person class.
         // Then, TaskCard should then bind its text labels to those observable properties.
-        internalList.set(index, personToUpdate);
+        internalList.set(index, taskToUpdate);
     }
 
     /**
@@ -85,17 +85,17 @@ public class UniqueTaskList implements Iterable<Person> {
     public void setPersons(List<? extends ReadOnlyTask> persons) throws DuplicatePersonException {
         final UniqueTaskList replacement = new UniqueTaskList();
         for (final ReadOnlyTask person : persons) {
-            replacement.add(new Person(person));
+            replacement.add(new Task(person));
         }
         setPersons(replacement);
     }
 
-    public UnmodifiableObservableList<Person> asObservableList() {
+    public UnmodifiableObservableList<Task> asObservableList() {
         return new UnmodifiableObservableList<>(internalList);
     }
 
     @Override
-    public Iterator<Person> iterator() {
+    public Iterator<Task> iterator() {
         return internalList.iterator();
     }
 

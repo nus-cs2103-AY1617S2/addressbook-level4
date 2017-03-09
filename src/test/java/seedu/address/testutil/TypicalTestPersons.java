@@ -2,8 +2,8 @@ package seedu.address.testutil;
 
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.model.AddressBook;
-import seedu.taskmanager.model.person.Person;
-import seedu.taskmanager.model.person.UniqueTaskList;
+import seedu.taskmanager.model.task.Task;
+import seedu.taskmanager.model.task.UniqueTaskList;
 
 /**
  *
@@ -46,7 +46,7 @@ public class TypicalTestPersons {
     public static void loadAddressBookWithSampleData(AddressBook ab) {
         for (TestPerson person : new TypicalTestPersons().getTypicalPersons()) {
             try {
-                ab.addPerson(new Person(person));
+                ab.addTask(new Task(person));
             } catch (UniqueTaskList.DuplicatePersonException e) {
                 assert false : "not possible";
             }

@@ -10,10 +10,10 @@ import seedu.taskmanager.commons.core.UnmodifiableObservableList;
 import seedu.taskmanager.commons.events.model.AddressBookChangedEvent;
 import seedu.taskmanager.commons.util.CollectionUtil;
 import seedu.taskmanager.commons.util.StringUtil;
-import seedu.taskmanager.model.person.Person;
-import seedu.taskmanager.model.person.ReadOnlyTask;
-import seedu.taskmanager.model.person.UniqueTaskList;
-import seedu.taskmanager.model.person.UniqueTaskList.PersonNotFoundException;
+import seedu.taskmanager.model.task.Task;
+import seedu.taskmanager.model.task.ReadOnlyTask;
+import seedu.taskmanager.model.task.UniqueTaskList;
+import seedu.taskmanager.model.task.UniqueTaskList.PersonNotFoundException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -65,8 +65,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void addPerson(Person person) throws UniqueTaskList.DuplicatePersonException {
-        addressBook.addPerson(person);
+    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicatePersonException {
+        addressBook.addTask(task);
         updateFilteredListToShowAll();
         indicateAddressBookChanged();
     }
@@ -77,7 +77,7 @@ public class ModelManager extends ComponentManager implements Model {
         assert editedPerson != null;
 
         int addressBookIndex = filteredPersons.getSourceIndex(filteredPersonListIndex);
-        addressBook.updatePerson(addressBookIndex, editedPerson);
+        addressBook.updateTask(addressBookIndex, editedPerson);
         indicateAddressBookChanged();
     }
 
@@ -143,7 +143,7 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask person) {
             return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword))
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(person.getTitle().fullName, keyword))
                     .findAny()
                     .isPresent();
         }

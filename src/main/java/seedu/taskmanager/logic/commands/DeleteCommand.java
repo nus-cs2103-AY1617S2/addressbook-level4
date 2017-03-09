@@ -3,8 +3,8 @@ package seedu.taskmanager.logic.commands;
 import seedu.taskmanager.commons.core.Messages;
 import seedu.taskmanager.commons.core.UnmodifiableObservableList;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
-import seedu.taskmanager.model.person.ReadOnlyTask;
-import seedu.taskmanager.model.person.UniqueTaskList.PersonNotFoundException;
+import seedu.taskmanager.model.task.ReadOnlyTask;
+import seedu.taskmanager.model.task.UniqueTaskList.PersonNotFoundException;
 
 /**
  * Deletes a person identified using it's last displayed index from the address book.

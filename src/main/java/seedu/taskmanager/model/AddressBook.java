@@ -10,12 +10,12 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.taskmanager.commons.core.UnmodifiableObservableList;
-import seedu.taskmanager.model.person.Person;
-import seedu.taskmanager.model.person.ReadOnlyTask;
-import seedu.taskmanager.model.person.UniqueTaskList;
-import seedu.taskmanager.model.person.UniqueTaskList.DuplicatePersonException;
 import seedu.taskmanager.model.tag.Tag;
 import seedu.taskmanager.model.tag.UniqueTagList;
+import seedu.taskmanager.model.task.Task;
+import seedu.taskmanager.model.task.ReadOnlyTask;
+import seedu.taskmanager.model.task.UniqueTaskList;
+import seedu.taskmanager.model.task.UniqueTaskList.DuplicatePersonException;
 
 /**
  * Wraps all data at the address-book level
@@ -83,7 +83,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *
      * @throws UniqueTaskList.DuplicatePersonException if an equivalent person already exists.
      */
-    public void addPerson(Person p) throws UniqueTaskList.DuplicatePersonException {
+    public void addTask(Task p) throws UniqueTaskList.DuplicatePersonException {
         syncMasterTagListWith(p);
         persons.add(p);
     }
@@ -91,22 +91,22 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Updates the person in the list at position {@code index} with {@code editedReadOnlyPerson}.
      * {@code AddressBook}'s tag list will be updated with the tags of {@code editedReadOnlyPerson}.
-     * @see #syncMasterTagListWith(Person)
+     * @see #syncMasterTagListWith(Task)
      *
      * @throws DuplicatePersonException if updating the person's details causes the person to be equivalent to
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updatePerson(int index, ReadOnlyTask editedReadOnlyPerson)
+    public void updateTask(int index, ReadOnlyTask editedReadOnlyPerson)
             throws UniqueTaskList.DuplicatePersonException {
         assert editedReadOnlyPerson != null;
 
-        Person editedPerson = new Person(editedReadOnlyPerson);
-        syncMasterTagListWith(editedPerson);
+        Task editedTask = new Task(editedReadOnlyPerson);
+        syncMasterTagListWith(editedTask);
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any person
         // in the person list.
-        persons.updatePerson(index, editedPerson);
+        persons.updatePerson(index, editedTask);
     }
 
     /**
@@ -114,8 +114,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      *  - exists in the master list {@link #tags}
      *  - points to a Tag object in the master list
      */
-    private void syncMasterTagListWith(Person person) {
-        final UniqueTagList personTags = person.getTags();
+    private void syncMasterTagListWith(Task task) {
+        final UniqueTagList personTags = task.getTags();
         tags.mergeFrom(personTags);
 
         // Create map with values = tag object references in the master list
@@ -126,14 +126,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         // Rebuild the list of person tags to point to the relevant tags in the master tag list.
         final Set<Tag> correctTagReferences = new HashSet<>();
         personTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
-        person.setTags(new UniqueTagList(correctTagReferences));
+        task.setTags(new UniqueTagList(correctTagReferences));
     }
 
     /**
      * Ensures that every tag in these persons:
      *  - exists in the master list {@link #tags}
      *  - points to a Tag object in the master list
-     *  @see #syncMasterTagListWith(Person)
+     *  @see #syncMasterTagListWith(Task)
      */
     private void syncMasterTagListWith(UniqueTaskList persons) {
         persons.forEach(this::syncMasterTagListWith);

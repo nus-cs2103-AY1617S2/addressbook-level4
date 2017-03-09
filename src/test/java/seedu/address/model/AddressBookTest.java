@@ -17,9 +17,9 @@ import javafx.collections.ObservableList;
 import seedu.address.testutil.TypicalTestPersons;
 import seedu.taskmanager.model.AddressBook;
 import seedu.taskmanager.model.ReadOnlyAddressBook;
-import seedu.taskmanager.model.person.Person;
-import seedu.taskmanager.model.person.ReadOnlyTask;
 import seedu.taskmanager.model.tag.Tag;
+import seedu.taskmanager.model.task.Task;
+import seedu.taskmanager.model.task.ReadOnlyTask;
 
 public class AddressBookTest {
 
@@ -51,9 +51,9 @@ public class AddressBookTest {
     public void resetData_withDuplicatePersons_throwsAssertionError() {
         TypicalTestPersons td = new TypicalTestPersons();
         // Repeat td.alice twice
-        List<Person> newPersons = Arrays.asList(new Person(td.alice), new Person(td.alice));
+        List<Task> newTasks = Arrays.asList(new Task(td.alice), new Task(td.alice));
         List<Tag> newTags = td.alice.getTags().asObservableList();
-        AddressBookStub newData = new AddressBookStub(newPersons, newTags);
+        AddressBookStub newData = new AddressBookStub(newTasks, newTags);
 
         thrown.expect(AssertionError.class);
         addressBook.resetData(newData);

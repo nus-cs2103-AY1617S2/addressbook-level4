@@ -6,14 +6,14 @@ import java.util.Optional;
 import seedu.taskmanager.commons.core.Messages;
 import seedu.taskmanager.commons.util.CollectionUtil;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
-import seedu.taskmanager.model.person.Address;
-import seedu.taskmanager.model.person.Email;
-import seedu.taskmanager.model.person.Name;
-import seedu.taskmanager.model.person.Person;
-import seedu.taskmanager.model.person.Phone;
-import seedu.taskmanager.model.person.ReadOnlyTask;
-import seedu.taskmanager.model.person.UniqueTaskList;
 import seedu.taskmanager.model.tag.UniqueTagList;
+import seedu.taskmanager.model.task.Description;
+import seedu.taskmanager.model.task.EndDate;
+import seedu.taskmanager.model.task.Title;
+import seedu.taskmanager.model.task.Task;
+import seedu.taskmanager.model.task.StartDate;
+import seedu.taskmanager.model.task.ReadOnlyTask;
+import seedu.taskmanager.model.task.UniqueTaskList;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -58,10 +58,10 @@ public class EditCommand extends Command {
         }
 
         ReadOnlyTask personToEdit = lastShownList.get(filteredPersonListIndex);
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Task editedTask = createEditedTask(personToEdit, editPersonDescriptor);
 
         try {
-            model.updatePerson(filteredPersonListIndex, editedPerson);
+            model.updatePerson(filteredPersonListIndex, editedTask);
         } catch (UniqueTaskList.DuplicatePersonException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
@@ -73,17 +73,17 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(ReadOnlyTask personToEdit,
+    private static Task createEditedTask(ReadOnlyTask personToEdit,
                                              EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
-        Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
-        Address updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
+        Title updatedTitle = editPersonDescriptor.getTitle().orElseGet(personToEdit::getTitle);
+        StartDate updatedStartDate = editPersonDescriptor.getStartDate().orElseGet(personToEdit::getStartDate);
+        EndDate updatedEndDate = editPersonDescriptor.getEndDate().orElseGet(personToEdit::getEndDate);
+        Description updatedDescription = editPersonDescriptor.getDescription().orElseGet(personToEdit::getDescription);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Task(updatedTitle, updatedStartDate, updatedEndDate, updatedDescription, updatedTags);
     }
 
     /**
@@ -91,19 +91,19 @@ public class EditCommand extends Command {
      * corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
-        private Optional<Name> name = Optional.empty();
-        private Optional<Phone> phone = Optional.empty();
-        private Optional<Email> email = Optional.empty();
-        private Optional<Address> address = Optional.empty();
+        private Optional<Title> title = Optional.empty();
+        private Optional<StartDate> startDate = Optional.empty();
+        private Optional<EndDate> endDate = Optional.empty();
+        private Optional<Description> description = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditPersonDescriptor() {}
 
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
-            this.name = toCopy.getName();
-            this.phone = toCopy.getPhone();
-            this.email = toCopy.getEmail();
-            this.address = toCopy.getAddress();
+            this.title = toCopy.getTitle();
+            this.startDate = toCopy.getStartDate();
+            this.endDate = toCopy.getEndDate();
+            this.description = toCopy.getDescription();
             this.tags = toCopy.getTags();
         }
 
@@ -111,43 +111,43 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.phone, this.email, this.address, this.tags);
+            return CollectionUtil.isAnyPresent(this.title, this.startDate, this.endDate, this.description, this.tags);
         }
 
-        public void setName(Optional<Name> name) {
-            assert name != null;
-            this.name = name;
+        public void setTitle(Optional<Title> title) {
+            assert title != null;
+            this.title = title;
         }
 
-        public Optional<Name> getName() {
-            return name;
+        public Optional<Title> getTitle() {
+            return title;
         }
 
-        public void setPhone(Optional<Phone> phone) {
-            assert phone != null;
-            this.phone = phone;
+        public void setStartDate(Optional<StartDate> startDate) {
+            assert startDate != null;
+            this.startDate = startDate;
         }
 
-        public Optional<Phone> getPhone() {
-            return phone;
+        public Optional<StartDate> getStartDate() {
+            return startDate;
         }
 
-        public void setEmail(Optional<Email> email) {
-            assert email != null;
-            this.email = email;
+        public void setEndDate(Optional<EndDate> endDate) {
+            assert endDate != null;
+            this.endDate = endDate;
         }
 
-        public Optional<Email> getEmail() {
-            return email;
+        public Optional<EndDate> getEndDate() {
+            return endDate;
         }
 
-        public void setAddress(Optional<Address> address) {
-            assert address != null;
-            this.address = address;
+        public void setDescription(Optional<Description> description) {
+            assert description != null;
+            this.description = description;
         }
 
-        public Optional<Address> getAddress() {
-            return address;
+        public Optional<Description> getDescription() {
+            return description;
         }
 
         public void setTags(Optional<UniqueTagList> tags) {

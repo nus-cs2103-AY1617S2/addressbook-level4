@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import seedu.address.testutil.TestUtil;
 import seedu.taskmanager.model.AddressBook;
-import seedu.taskmanager.model.person.Person;
+import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.util.SampleDataUtil;
 
 public class SampleDataTest extends AddressBookGuiTest {
@@ -24,7 +24,7 @@ public class SampleDataTest extends AddressBookGuiTest {
 
     @Test
     public void addressBook_dataFileDoesNotExist_loadSampleData() throws Exception {
-        Person[] expectedList = SampleDataUtil.getSamplePersons();
+        Task[] expectedList = SampleDataUtil.getSampleTasks();
         assertTrue(personListPanel.isListMatching(expectedList));
     }
 }

@@ -27,7 +27,7 @@ import seedu.address.testutil.TypicalTestPersons;
 import seedu.taskmanager.commons.core.EventsCenter;
 import seedu.taskmanager.commons.events.BaseEvent;
 import seedu.taskmanager.model.AddressBook;
-import seedu.taskmanager.model.person.ReadOnlyTask;
+import seedu.taskmanager.model.task.ReadOnlyTask;
 
 /**
  * A GUI Test class for AddressBook.

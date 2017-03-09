@@ -1,12 +1,12 @@
 package seedu.address.testutil;
 
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
-import seedu.taskmanager.model.person.Address;
-import seedu.taskmanager.model.person.Email;
-import seedu.taskmanager.model.person.Name;
-import seedu.taskmanager.model.person.Phone;
 import seedu.taskmanager.model.tag.Tag;
 import seedu.taskmanager.model.tag.UniqueTagList;
+import seedu.taskmanager.model.task.Description;
+import seedu.taskmanager.model.task.EndDate;
+import seedu.taskmanager.model.task.Title;
+import seedu.taskmanager.model.task.StartDate;
 
 /**
  *
@@ -27,7 +27,7 @@ public class PersonBuilder {
     }
 
     public PersonBuilder withName(String name) throws IllegalValueException {
-        this.person.setName(new Name(name));
+        this.person.setTitle(new Title(name));
         return this;
     }
 
@@ -40,17 +40,17 @@ public class PersonBuilder {
     }
 
     public PersonBuilder withAddress(String address) throws IllegalValueException {
-        this.person.setAddress(new Address(address));
+        this.person.setDescription(new Description(address));
         return this;
     }
 
     public PersonBuilder withPhone(String phone) throws IllegalValueException {
-        this.person.setPhone(new Phone(phone));
+        this.person.setStartDate(new StartDate(phone));
         return this;
     }
 
     public PersonBuilder withEmail(String email) throws IllegalValueException {
-        this.person.setEmail(new Email(email));
+        this.person.setEndDate(new EndDate(email));
         return this;
     }
 

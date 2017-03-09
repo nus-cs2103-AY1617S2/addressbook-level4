@@ -1,7 +1,7 @@
 package seedu.taskmanager.commons.events.ui;
 
 import seedu.taskmanager.commons.events.BaseEvent;
-import seedu.taskmanager.model.person.ReadOnlyTask;
+import seedu.taskmanager.model.task.ReadOnlyTask;
 
 /**
  * Represents a selection change in the Person List Panel

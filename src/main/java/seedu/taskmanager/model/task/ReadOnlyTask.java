@@ -1,4 +1,4 @@
-package seedu.taskmanager.model.person;
+package seedu.taskmanager.model.task;
 
 import seedu.taskmanager.model.tag.UniqueTagList;
 
@@ -8,10 +8,10 @@ import seedu.taskmanager.model.tag.UniqueTagList;
  */
 public interface ReadOnlyTask {
 
-    Name getName();
-    Phone getPhone();
-    Email getEmail();
-    Address getAddress();
+    Title getTitle();
+    StartDate getStartDate();
+    EndDate getEndDate();
+    Description getDescription();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -25,10 +25,10 @@ public interface ReadOnlyTask {
     default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                && other.getName().equals(this.getName()) // state checks here onwards
-                && other.getPhone().equals(this.getPhone())
-                && other.getEmail().equals(this.getEmail())
-                && other.getAddress().equals(this.getAddress()));
+                && other.getTitle().equals(this.getTitle()) // state checks here onwards
+                && other.getStartDate().equals(this.getStartDate())
+                && other.getEndDate().equals(this.getEndDate())
+                && other.getDescription().equals(this.getDescription()));
     }
 
     /**
@@ -36,13 +36,13 @@ public interface ReadOnlyTask {
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
+        builder.append(getTitle())
                 .append(" Phone: ")
-                .append(getPhone())
+                .append(getStartDate())
                 .append(" Email: ")
-                .append(getEmail())
+                .append(getEndDate())
                 .append(" Address: ")
-                .append(getAddress())
+                .append(getDescription())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

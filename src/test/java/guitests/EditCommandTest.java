@@ -10,11 +10,11 @@ import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TestPerson;
 import seedu.taskmanager.commons.core.Messages;
 import seedu.taskmanager.logic.commands.EditCommand;
-import seedu.taskmanager.model.person.Address;
-import seedu.taskmanager.model.person.Email;
-import seedu.taskmanager.model.person.Name;
-import seedu.taskmanager.model.person.Phone;
 import seedu.taskmanager.model.tag.Tag;
+import seedu.taskmanager.model.task.Description;
+import seedu.taskmanager.model.task.EndDate;
+import seedu.taskmanager.model.task.Title;
+import seedu.taskmanager.model.task.StartDate;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
 public class EditCommandTest extends AddressBookGuiTest {
@@ -91,16 +91,16 @@ public class EditCommandTest extends AddressBookGuiTest {
     @Test
     public void edit_invalidValues_failure() {
         commandBox.runCommand("edit 1 *&");
-        assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
+        assertResultMessage(Title.MESSAGE_NAME_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 p/abcd");
-        assertResultMessage(Phone.MESSAGE_PHONE_CONSTRAINTS);
+        assertResultMessage(StartDate.MESSAGE_PHONE_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 e/yahoo!!!");
-        assertResultMessage(Email.MESSAGE_EMAIL_CONSTRAINTS);
+        assertResultMessage(EndDate.MESSAGE_EMAIL_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 a/");
-        assertResultMessage(Address.MESSAGE_ADDRESS_CONSTRAINTS);
+        assertResultMessage(Description.MESSAGE_ADDRESS_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 t/*&");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
@@ -127,7 +127,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("edit " + filteredPersonListIndex + " " + detailsToEdit);
 
         // confirm the new card contains the right data
-        PersonCardHandle editedCard = personListPanel.navigateToPerson(editedPerson.getName().fullName);
+        PersonCardHandle editedCard = personListPanel.navigateToPerson(editedPerson.getTitle().fullName);
         assertMatching(editedPerson, editedCard);
 
         // confirm the list now contains all previous persons plus the person with updated details

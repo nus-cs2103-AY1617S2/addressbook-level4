@@ -12,9 +12,9 @@ import javafx.collections.ObservableList;
 import seedu.taskmanager.commons.core.UnmodifiableObservableList;
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.model.ReadOnlyAddressBook;
-import seedu.taskmanager.model.person.Person;
-import seedu.taskmanager.model.person.ReadOnlyTask;
 import seedu.taskmanager.model.tag.Tag;
+import seedu.taskmanager.model.task.Task;
+import seedu.taskmanager.model.task.ReadOnlyTask;
 
 /**
  * An Immutable AddressBook that is serializable to XML format
@@ -47,7 +47,7 @@ public class XmlSerializableTaskManager implements ReadOnlyAddressBook {
 
     @Override
     public ObservableList<ReadOnlyTask> getPersonList() {
-        final ObservableList<Person> persons = this.tasks.stream().map(p -> {
+        final ObservableList<Task> tasks = this.tasks.stream().map(p -> {
             try {
                 return p.toModelType();
             } catch (IllegalValueException e) {
@@ -56,7 +56,7 @@ public class XmlSerializableTaskManager implements ReadOnlyAddressBook {
                 return null;
             }
         }).collect(Collectors.toCollection(FXCollections::observableArrayList));
-        return new UnmodifiableObservableList<>(persons);
+        return new UnmodifiableObservableList<>(tasks);
     }
 
     @Override
