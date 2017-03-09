@@ -24,10 +24,9 @@ public class Deadline {
     		  "The date entered is either not recognized or not a future date.\n"
     		+ "Please paraphrase it or choose another date.";
     public static final String DATE_VALIDATION_REGEX = "[\\s | [a-zA-Z0-9,/:-]]+";
-    public static final String DATE_FORMAT = "EEE, MMM d yyyy";
+    public static final String DATE_FORMAT = "EEE, MMM d yyyy HH:mm";
 
     public final String value;
-    private final List<DateGroup> parsedDeadline;
     
     private static PrettyTimeParser parser = new PrettyTimeParser();
     private static SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
@@ -44,9 +43,8 @@ public class Deadline {
         if (!isValidDate(trimmedDeadline)) {
             throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
         }
-        parsedDeadline = parseDeadline(trimmedDeadline);
+        this.value = trimmedDeadline;
         
-        this.value = toString();
     }
 
     /**
@@ -70,14 +68,19 @@ public class Deadline {
      * Returns true if the given deadline is recurring.
      */
     public boolean isRecurring() {
-    	return parsedDeadline.get(0).isRecurring();
+    	List<DateGroup> parsedDeadline = parseDeadline(value);
+    	if (parsedDeadline.size() != 0) {
+    		return parsedDeadline.get(0).isRecurring();
+    	}
+    	return false;
     }
 
     @Override
     public String toString() {
-    	if (parsedDeadline.size() == 0) {
-    		return "floating";
+    	if (value.equals("floating")) {
+    		return value;
     	}
+    	List<DateGroup> parsedDeadline = parseDeadline(value);
         return formatter.format(parsedDeadline.get(0).getDates().get(0));
     }
 

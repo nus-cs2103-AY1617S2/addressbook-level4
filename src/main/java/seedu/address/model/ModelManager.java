@@ -36,6 +36,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
+        filteredTasks.setPredicate(new PredicateExpression(new DateFloatingQualifier())::satisfies);
     }
 
     public ModelManager() {
@@ -90,7 +91,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredListToShowAll() {
-        filteredTasks.setPredicate(null);
+        //filteredTasks.setPredicate(new PredicateExpression(new DateFloatingQualifier())::satisfies);
+    	filteredTasks.setPredicate(new PredicateExpression(new DateNotFloatingQualifier())::satisfies);
+    	//filteredTasks.setPredicate(null);
     }
 
     @Override
@@ -153,5 +156,22 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
+    
+    private class DateFloatingQualifier implements Qualifier {
+    	
+    	@Override
+    	public boolean run(ReadOnlyTask task) {
+    		return task.getDeadline().toString().equals("floating");
+    	}
 
+    }
+    
+    private class DateNotFloatingQualifier implements Qualifier {
+    	
+    	@Override
+    	public boolean run(ReadOnlyTask task) {
+    		return !task.getDeadline().toString().equals("floating");
+    	}
+
+    }
 }
