@@ -25,14 +25,14 @@ public class PersonListPanel extends UiPart<Region> {
     @FXML
     private ListView<ReadOnlyTask> personListView;
 
-    public PersonListPanel(AnchorPane personListPlaceholder, ObservableList<ReadOnlyTask> personList) {
+    public PersonListPanel(AnchorPane personListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
         super(FXML);
-        setConnections(personList);
+        setConnections(taskList);
         addToPlaceholder(personListPlaceholder);
     }
 
-    private void setConnections(ObservableList<ReadOnlyTask> personList) {
-        personListView.setItems(personList);
+    private void setConnections(ObservableList<ReadOnlyTask> taskList) {
+        personListView.setItems(taskList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
@@ -63,14 +63,14 @@ public class PersonListPanel extends UiPart<Region> {
     class PersonListViewCell extends ListCell<ReadOnlyTask> {
 
         @Override
-        protected void updateItem(ReadOnlyTask person, boolean empty) {
-            super.updateItem(person, empty);
+        protected void updateItem(ReadOnlyTask task, boolean empty) {
+            super.updateItem(task, empty);
 
-            if (empty || person == null) {
+            if (empty || task == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+                setGraphic(new PersonCard(task, getIndex() + 1).getRoot());
             }
         }
     }

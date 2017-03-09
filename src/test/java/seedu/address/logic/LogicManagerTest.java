@@ -413,11 +413,12 @@ public class LogicManagerTest {
         Task adam() throws Exception {
             Description description = new Description("Adam Brown");
             Priority privatePhone = new Priority("111111");
-            TaskDate taskDate = new TaskDate("adam@gmail.com");
+            TaskDate startDate = new TaskDate("03/21/2017");
+            TaskDate endDate = new TaskDate("03/25/2017");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(description, privatePhone, taskDate, tags);
+            return new Task(description, privatePhone, startDate, endDate, tags);
         }
 
         /**
@@ -432,6 +433,7 @@ public class LogicManagerTest {
                     new Description("Task " + seed),
                     new Priority("" + Math.abs(seed)),
                     new TaskDate(seed + "@email"),
+                    new TaskDate(seed + "@email"),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -443,7 +445,7 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getDescription().toString());
-            cmd.append(" e/").append(p.getDate());
+            cmd.append(" e/").append(p.getStartDate());
             cmd.append(" p/").append(p.getPriority());
 
             UniqueTagList tags = p.getTags();
@@ -528,6 +530,7 @@ public class LogicManagerTest {
             return new Task(
                     new Description(name),
                     new Priority("1"),
+                    new TaskDate("1@email"),
                     new TaskDate("1@email"),
                     new UniqueTagList(new Tag("tag"))
             );

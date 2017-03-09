@@ -30,9 +30,9 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
-     * Adds a person to the list.
+     * Adds a task to the list.
      *
-     * @throws DuplicateTaskException if the person to add is a duplicate of an existing person in the list.
+     * @throws DuplicateTaskException if the task to add is a duplicate of an existing task in the list.
      */
     public void add(Task toAdd) throws DuplicateTaskException {
         assert toAdd != null;
@@ -43,10 +43,10 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
-     * Updates the person in the list at position {@code index} with {@code editedPerson}.
+     * Updates the task in the list at position {@code index} with {@code editedPerson}.
      *
-     * @throws DuplicateTaskException if updating the person's details causes the person to be equivalent to
-     *      another existing person in the list.
+     * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
+     *      another existing task in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
     public void updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException {
@@ -58,16 +58,16 @@ public class UniqueTaskList implements Iterable<Task> {
         }
 
         taskToUpdate.resetData(editedTask);
-        // TODO: The code below is just a workaround to notify observers of the updated person.
+        // TODO: The code below is just a workaround to notify observers of the updated task.
         // The right way is to implement observable properties in the Task class.
         // Then, PersonCard should then bind its text labels to those observable properties.
         internalList.set(index, taskToUpdate);
     }
 
     /**
-     * Removes the equivalent person from the list.
+     * Removes the equivalent task from the list.
      *
-     * @throws TaskNotFoundException if no such person could be found in the list.
+     * @throws TaskNotFoundException if no such task could be found in the list.
      */
     public boolean remove(ReadOnlyTask toRemove) throws TaskNotFoundException {
         assert toRemove != null;

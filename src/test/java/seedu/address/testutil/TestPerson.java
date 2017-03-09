@@ -12,7 +12,8 @@ import seedu.address.model.task.ReadOnlyTask;
 public class TestPerson implements ReadOnlyTask {
 
     private Description description;
-    private TaskDate taskDate;
+    private TaskDate startDate;
+    private TaskDate endDate;
     private Priority priority;
     private UniqueTagList tags;
 
@@ -26,19 +27,24 @@ public class TestPerson implements ReadOnlyTask {
     public TestPerson(TestPerson personToCopy) {
         this.description = personToCopy.getDescription();
         this.priority = personToCopy.getPriority();
-        this.taskDate = personToCopy.getDate();
+        this.startDate = personToCopy.getStartDate();
+        this.endDate = personToCopy.getEndDate();
         this.tags = personToCopy.getTags();
     }
 
-    public void setName(Description description) {
+    public void setDescription(Description description) {
         this.description = description;
     }
 
-    public void setEmail(TaskDate taskDate) {
-        this.taskDate = taskDate;
+    public void setStartDate(TaskDate taskDate) {
+        this.startDate = taskDate;
+    }
+    
+    public void setEndDate(TaskDate taskDate) {
+        this.endDate = taskDate;
     }
 
-    public void setPhone(Priority priority) {
+    public void setPriority(Priority priority) {
         this.priority = priority;
     }
 
@@ -57,9 +63,14 @@ public class TestPerson implements ReadOnlyTask {
     }
 
     @Override
-    public TaskDate getDate() {
-        return taskDate;
+    public TaskDate getStartDate() {
+        return startDate;
     }
+    
+	@Override
+	public TaskDate getEndDate() {
+		return endDate;
+	}
 
     @Override
     public UniqueTagList getTags() {
@@ -75,8 +86,11 @@ public class TestPerson implements ReadOnlyTask {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getDescription().description + " ");
         sb.append("p/" + this.getPriority().value + " ");
-        sb.append("e/" + this.getDate().value + " ");
+        sb.append("sd/" + this.getStartDate().value + " ");
+        sb.append("ed/" + this.getEndDate().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
+
+
 }
