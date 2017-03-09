@@ -1,38 +1,32 @@
 package seedu.toluist.controller;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.joestelmach.natty.DateGroup;
-import com.joestelmach.natty.Parser;
 
+import seedu.toluist.commons.util.DateTimeUtil;
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.Ui;
 import seedu.toluist.ui.UiStore;
 
+/**
+ * UpdateTaskController is responsible for updating a task
+ */
 public class UpdateTaskController extends TaskController {
 
     private static final String COMMAND_TEMPLATE = "^update"
             + "(\\s+(?<index>\\d+))?"
             + "(\\s+(?<description>.+))?\\s*";
 
-    private static final String TASK_VIEW_INDEX = "index";
-    private static final String TASK_DESCRIPTION = "description";
-    private static final String TASK_START_DATE_KEYWORD = "startdate/";
-    private static final String TASK_END_DATE_KEYWORD = "enddate/";
-
     private static final String COMMAND_UPDATE_TASK = "update";
 
     private static final String RESULT_MESSAGE_UPDATE_TASK = "Task updated";
 
     public UpdateTaskController(Ui renderer) {
-        super(renderer);
+        super(renderer, COMMAND_TEMPLATE);
     }
 
     public CommandResult execute(String command) {
@@ -47,8 +41,8 @@ public class UpdateTaskController extends TaskController {
         String indexToken = tokens.get(TASK_VIEW_INDEX);
         String startDateToken = tokens.get(TASK_START_DATE_KEYWORD);
         String endDateToken = tokens.get(TASK_END_DATE_KEYWORD);
-        LocalDateTime startDateTime = toDate(startDateToken);
-        LocalDateTime endDateTime = toDate(endDateToken);
+        LocalDateTime startDateTime = DateTimeUtil.toDate(startDateToken);
+        LocalDateTime endDateTime = DateTimeUtil.toDate(endDateToken);
         int index = indexToken != null ? Integer.parseInt(indexToken) - 1 : -1;
         Task task = indexToken != null
                 ? UiStore.getInstance().getTasks().get(index)
@@ -96,11 +90,6 @@ public class UpdateTaskController extends TaskController {
         return tokens;
     }
 
-    @Override
-    public boolean matchesCommand(String command) {
-        return command.matches(COMMAND_TEMPLATE);
-    }
-
     private CommandResult update(TodoList todoList, Task task, String description,
             LocalDateTime startDateTime, LocalDateTime endDateTime) {
         if (!description.isEmpty()) {
@@ -114,27 +103,6 @@ public class UpdateTaskController extends TaskController {
         }
         // Save in model, validate that it is either floating, event or deadline task.
         return new CommandResult(RESULT_MESSAGE_UPDATE_TASK);
-    }
-
-    private LocalDateTime toDate(String dateString) {
-        if (dateString == null) {
-            return null;
-        } else {
-            Parser parser = new Parser();
-            List<DateGroup> dateGroups = parser.parse(dateString);
-            if (dateGroups.isEmpty()) {
-                return null;
-            } else {
-                DateGroup dateGroup = dateGroups.get(0);
-                List<Date> dates = dateGroup.getDates();
-                if (dates.isEmpty()) {
-                    return null;
-                } else {
-                    Date date = dates.get(0);
-                    return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
-                }
-            }
-        }
     }
 
     public static String[] getCommandWords() {

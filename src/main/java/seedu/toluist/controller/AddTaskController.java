@@ -1,39 +1,30 @@
 package seedu.toluist.controller;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.joestelmach.natty.DateGroup;
-import com.joestelmach.natty.Parser;
-
+import seedu.toluist.commons.util.DateTimeUtil;
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.Ui;
 
 /**
- * Add floating tasks, tasks with deadlines and events into the todo list.
+ * AddTaskController is responsible for adding a task (and event)
  */
 public class AddTaskController extends TaskController {
 
     private static final String COMMAND_TEMPLATE = "^add"
             + "(\\s+(?<description>.+))?";
 
-    private static final String TASK_DESCRIPTION = "description";
-    private static final String TASK_START_DATE_KEYWORD = "startdate/";
-    private static final String TASK_END_DATE_KEYWORD = "enddate/";
-
     private static final String COMMAND_ADD_TASK = "add";
 
     private static final String RESULT_MESSAGE_ADD_TASK = "New task added";
 
     public AddTaskController(Ui renderer) {
-        super(renderer);
+        super(renderer, COMMAND_TEMPLATE);
     }
 
     public CommandResult execute(String command) {
@@ -51,8 +42,8 @@ public class AddTaskController extends TaskController {
         System.out.println("Start Date Token: " + startDateToken);
         System.out.println("End Date Token: " + endDateToken);
 
-        LocalDateTime startDateTime = toDate(startDateToken);
-        LocalDateTime endDateTime = toDate(endDateToken);
+        LocalDateTime startDateTime = DateTimeUtil.toDate(startDateToken);
+        LocalDateTime endDateTime = DateTimeUtil.toDate(endDateToken);
 
         commandResult = add(todoList, description, startDateTime, endDateTime);
 
@@ -91,36 +82,10 @@ public class AddTaskController extends TaskController {
         return tokens;
     }
 
-    @Override
-    public boolean matchesCommand(String command) {
-        return command.matches(COMMAND_TEMPLATE);
-    }
-
     private CommandResult add(TodoList todoList, String description,
             LocalDateTime startDateTime, LocalDateTime endDateTime) {
         todoList.add(new Task(description, startDateTime, endDateTime));
         return new CommandResult(RESULT_MESSAGE_ADD_TASK);
-    }
-
-    private LocalDateTime toDate(String dateString) {
-        if (dateString == null) {
-            return null;
-        } else {
-            Parser parser = new Parser();
-            List<DateGroup> dateGroups = parser.parse(dateString);
-            if (dateGroups.isEmpty()) {
-                return null;
-            } else {
-                DateGroup dateGroup = dateGroups.get(0);
-                List<Date> dates = dateGroup.getDates();
-                if (dates.isEmpty()) {
-                    return null;
-                } else {
-                    Date date = dates.get(0);
-                    return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
-                }
-            }
-        }
     }
 
     public static String[] getCommandWords() {

@@ -9,19 +9,20 @@ import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.Ui;
 import seedu.toluist.ui.UiStore;
 
+/**
+ * DeleteTaskController is responsible for deleting a task
+ */
 public class DeleteTaskController extends TaskController {
 
     private static final String COMMAND_TEMPLATE = "^delete"
             + "(\\s+(?<index>\\d+))?\\s*";
-
-    private static final String TASK_VIEW_INDEX = "index";
 
     private static final String COMMAND_DELETE_TASK = "delete";
 
     private static final String RESULT_MESSAGE_DELETE_TASK = "Task deleted";
 
     public DeleteTaskController(Ui renderer) {
-        super(renderer);
+        super(renderer, COMMAND_TEMPLATE);
     }
 
     public CommandResult execute(String command) {
@@ -56,11 +57,6 @@ public class DeleteTaskController extends TaskController {
         HashMap<String, String> tokens = new HashMap<>();
         tokens.put(TASK_VIEW_INDEX, matcher.group(TASK_VIEW_INDEX));
         return tokens;
-    }
-
-    @Override
-    public boolean matchesCommand(String command) {
-        return command.matches(COMMAND_TEMPLATE);
     }
 
     private CommandResult delete(TodoList todoList, Task task) {
