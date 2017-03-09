@@ -13,8 +13,8 @@ import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.EndTime;
 import seedu.taskmanager.model.task.Deadline;
 import seedu.taskmanager.model.task.ReadOnlyTask;
-//import seedu.taskmanager.model.tag.Tag;
-//import seedu.taskmanager.model.tag.UniqueTagList;
+import seedu.taskmanager.model.category.Category;
+import seedu.taskmanager.model.category.UniqueCategoryList;
 
 /**
  * JAXB-friendly version of the Task.
@@ -32,8 +32,8 @@ public class XmlAdaptedTask {
 //    @XmlElement(required = true)
 //    private String address;
 
-//    @XmlElement
-//    private List<XmlAdaptedTag> tagged = new ArrayList<>();
+    @XmlElement
+    private List<XmlAdaptedCategory> categorised = new ArrayList<>();
 
     /**
      * Constructs an XmlAdaptedTask.
@@ -49,13 +49,14 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         taskname = source.getTaskName().fullTaskName;
+
+        time = source.getEndTime().value;
         date = source.getDate().value;
-        endtime = source.getEndTime().value;
         deadline = source.getDeadline().value;
-//        tagged = new ArrayList<>();
-//        for (Tag tag : source.getTags()) {
-//            tagged.add(new XmlAdaptedTag(tag));
-//        }
+        categorised = new ArrayList<>();
+        for (Category category : source.getCategories()) {
+        	categorised.add(new XmlAdaptedCategory(category));
+        }
     }
 
     /**
@@ -64,17 +65,17 @@ public class XmlAdaptedTask {
      * @throws IllegalValueException if there were any data constraints violated in the adapted task
      */
     public Task toModelType() throws IllegalValueException {
-//        final List<Tag> personTags = new ArrayList<>();
-//        for (XmlAdaptedTag tag : tagged) {
-//            personTags.add(tag.toModelType());
-//        }
+        final List<Category> taskCategories = new ArrayList<>();
+        for (XmlAdaptedCategory category : categorised) {
+            taskCategories.add(category.toModelType());
+        }
         final TaskName taskname = new TaskName(this.taskname);
         final Date date = new Date(this.date);
         final EndTime endtime = new EndTime(this.endtime);
         final Deadline deadline = new Deadline(this.deadline);
-        
 //        final Address address = new Address(this.address);
-//        final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Task(taskname, date, endtime, deadline);
+        final UniqueCategoryList categories = new UniqueCategoryList(taskCategories);
+        return new Task(taskname, deadline, date, categories);
+
     }
 }

@@ -42,9 +42,9 @@ public interface ReadOnlyTask {
                 .append(" Deadline: ")
                 .append(getDeadline())
                 .append(" Date: ")
-                .append(getDate());
- //               .append(" Categories: ");
- //       getCategories().forEach(builder::append);
+                .append(getDate())
+                .append(" Categories: ");
+        getCategories().forEach(builder::append);
         return builder.toString();
     }
 

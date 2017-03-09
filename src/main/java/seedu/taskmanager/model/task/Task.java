@@ -13,8 +13,8 @@ public class Task implements ReadOnlyTask {
 
     private TaskName taskName;
     private Date date;
-    private EndTime endTime;
-    private Deadline deadline;
+//    private EndTime endTime;
+//    private Deadline deadline;
     private UniqueCategoryList categories;
 
     /**
@@ -26,7 +26,8 @@ public class Task implements ReadOnlyTask {
         this.date = date;
 //        this.endTime = endTime;
 //        this.deadline = deadline;        
-//        this.categories = new UniqueCategoryList(categories); // protect internal tags from changes in the arg list
+        this.categories = new UniqueCategoryList(categories); // protect internal tags from changes in the arg list
+
     }
 
     /**
@@ -98,7 +99,7 @@ public class Task implements ReadOnlyTask {
         this.setDeadline(replacement.getDeadline());
         this.setEndTime(replacement.getEndTime());
         this.setDate(replacement.getDate());
-//        this.setCategories(replacement.getCategories());
+        this.setCategories(replacement.getCategories());
     }
 
     @Override
@@ -111,7 +112,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(taskName, deadline, endTime, date/*, categories*/);
+        return Objects.hash(taskName, deadline, endTime, date, categories);
     }
 
     @Override
