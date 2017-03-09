@@ -290,7 +290,7 @@ Example:
   Marks task 1 as complete.
 * `mark uncomplete 2` <br>
   Marks task 2 as incomplete.
-* `mark 3`
+* `mark 3` <br>
   Marks task 3 as complete.
 
 ### 2.19. Add a Tag to a Task : `tag`
