@@ -1,8 +1,12 @@
 package seedu.ezdo.logic.commands;
 
 import java.io.File;
+import java.io.IOException;
 
+import seedu.ezdo.commons.core.EventsCenter;
+import seedu.ezdo.commons.events.storage.EzDoDirectoryChangedEvent;
 import seedu.ezdo.commons.exceptions.IllegalValueException;
+import seedu.ezdo.commons.util.FileUtil;
 import seedu.ezdo.logic.commands.exceptions.CommandException;
 
 /**
@@ -24,23 +28,27 @@ public class SaveCommand extends Command {
 
     /**
      * Creates a SaveCommand using raw values.
-     *
      * @throws IllegalValueException if the directory path is invalid
      */
     public SaveCommand(String path) throws IllegalValueException {
-        directoryPath = path;
+        assert path != null;
         File directory = new File(path);
-        if (directory.exists() == false && !directory.isDirectory()) { // TODO
-            System.out.println("file.exists has error and not directory");
-            throw new IllegalValueException(MESSAGE_DIRECTORY_PATH_INVALID);
-        }
+//        if (!FileUtil.isDirectoryExists(directory)) {
+//            throw new IllegalValueException(MESSAGE_DIRECTORY_PATH_INVALID);
+//        }
+        directoryPath = path;
     }
 
-    // TODO
     @Override
     public CommandResult execute() throws CommandException {
         assert directoryPath != null;
+        try {
+            File file = new File(directoryPath);
+            FileUtil.createIfMissing(file);
+            EventsCenter.getInstance().post(new EzDoDirectoryChangedEvent(model.getEzDo(), directoryPath));
         return new CommandResult(String.format(MESSAGE_SAVE_TASK_SUCCESS, directoryPath));
+        } catch (IOException e) {
+            return new CommandResult(MESSAGE_DIRECTORY_PATH_INVALID);
+        }
     }
-
 }
