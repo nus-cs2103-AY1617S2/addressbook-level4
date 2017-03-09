@@ -8,12 +8,12 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.model.tag.Tag;
 import seedu.onetwodo.model.tag.UniqueTagList;
-import seedu.onetwodo.model.task.Date;
+import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Description;
 import seedu.onetwodo.model.task.Name;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 import seedu.onetwodo.model.task.Task;
-import seedu.onetwodo.model.task.Time;
+import seedu.onetwodo.model.task.StartDate;
 
 /**
  * JAXB-friendly version of the Task.
@@ -23,9 +23,9 @@ public class XmlAdaptedTask {
     @XmlElement(required = true)
     private String name;
     @XmlElement(required = true)
-    private String time;
+    private String startDate;
     @XmlElement(required = true)
-    private String date;
+    private String endDate;
     @XmlElement(required = true)
     private String description;
 
@@ -46,8 +46,8 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getName().fullName;
-        time = source.getTime().value;
-        date = source.getDate().value;
+        startDate = source.getStartDate().value;
+        endDate = source.getEndDate().value;
         description = source.getDescription().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
@@ -66,10 +66,10 @@ public class XmlAdaptedTask {
             taskTags.add(tag.toModelType());
         }
         final Name name = new Name(this.name);
-        final Time time = new Time(this.time);
-        final Date date = new Date(this.date);
+        final StartDate startDate = new StartDate(this.startDate);
+        final EndDate endDate = new EndDate(this.endDate);
         final Description description = new Description(this.description);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(name, time, date, description, tags);
+        return new Task(name, startDate, endDate, description, tags);
     }
 }

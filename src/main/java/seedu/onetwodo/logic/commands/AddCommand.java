@@ -7,11 +7,11 @@ import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
 import seedu.onetwodo.model.tag.Tag;
 import seedu.onetwodo.model.tag.UniqueTagList;
-import seedu.onetwodo.model.task.Date;
+import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Description;
 import seedu.onetwodo.model.task.Name;
 import seedu.onetwodo.model.task.Task;
-import seedu.onetwodo.model.task.Time;
+import seedu.onetwodo.model.task.StartDate;
 import seedu.onetwodo.model.task.UniqueTaskList;
 
 /**
@@ -44,8 +44,8 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Task(
                 new Name(name),
-                new Time(startDate),
-                new Date(endDate),
+                new StartDate(startDate),
+                new EndDate(endDate),
                 new Description(description),
                 new UniqueTagList(tagSet)
         );

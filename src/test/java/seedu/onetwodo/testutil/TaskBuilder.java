@@ -3,10 +3,10 @@ package seedu.onetwodo.testutil;
 import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.model.tag.Tag;
 import seedu.onetwodo.model.tag.UniqueTagList;
-import seedu.onetwodo.model.task.Date;
+import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Description;
 import seedu.onetwodo.model.task.Name;
-import seedu.onetwodo.model.task.Time;
+import seedu.onetwodo.model.task.StartDate;
 
 /**
  *
@@ -44,13 +44,13 @@ public class TaskBuilder {
         return this;
     }
 
-    public TaskBuilder withTime(String time) throws IllegalValueException {
-        this.task.setTime(new Time(time));
+    public TaskBuilder withStartDate(String startDate) throws IllegalValueException {
+        this.task.setStartDate(new StartDate(startDate));
         return this;
     }
 
-    public TaskBuilder withDate(String date) throws IllegalValueException {
-        this.task.setDate(new Date(date));
+    public TaskBuilder withEndDate(String endDate) throws IllegalValueException {
+        this.task.setEndDate(new EndDate(endDate));
         return this;
     }
 

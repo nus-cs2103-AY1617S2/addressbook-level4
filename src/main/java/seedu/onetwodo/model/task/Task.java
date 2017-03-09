@@ -12,8 +12,8 @@ import seedu.onetwodo.model.tag.UniqueTagList;
 public class Task implements ReadOnlyTask {
 
     private Name name;
-    private Time time;
-    private Date date;
+    private StartDate startDate;
+    private EndDate endDate;
     private Description description;
 
     private UniqueTagList tags;
@@ -21,11 +21,11 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Time time, Date date, Description description, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, time, date, description, tags);
+    public Task(Name name, StartDate startDate, EndDate endDate, Description description, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, startDate, endDate, description, tags);
         this.name = name;
-        this.time = time;
-        this.date = date;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.description = description;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
@@ -34,7 +34,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getTime(), source.getDate(), source.getDescription(), source.getTags());
+        this(source.getName(), source.getStartDate(), source.getEndDate(), source.getDescription(), source.getTags());
     }
 
     public void setName(Name name) {
@@ -47,24 +47,24 @@ public class Task implements ReadOnlyTask {
         return name;
     }
 
-    public void setTime(Time time) {
-        assert time != null;
-        this.time = time;
+    public void setStartDate(StartDate startDate) {
+        assert startDate != null;
+        this.startDate = startDate;
     }
 
     @Override
-    public Time getTime() {
-        return time;
+    public StartDate getStartDate() {
+        return startDate;
     }
 
-    public void setDate(Date date) {
-        assert date != null;
-        this.date = date;
+    public void setEndDate(EndDate endDate) {
+        assert endDate != null;
+        this.endDate = endDate;
     }
 
     @Override
-    public Date getDate() {
-        return date;
+    public EndDate getEndDate() {
+        return endDate;
     }
 
     public void setDescription(Description description) {
@@ -96,8 +96,8 @@ public class Task implements ReadOnlyTask {
         assert replacement != null;
 
         this.setName(replacement.getName());
-        this.setTime(replacement.getTime());
-        this.setDate(replacement.getDate());
+        this.setStartDate(replacement.getStartDate());
+        this.setEndDate(replacement.getEndDate());
         this.setDescription(replacement.getDescription());
         this.setTags(replacement.getTags());
     }
@@ -112,7 +112,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, time, date, description, tags);
+        return Objects.hash(name, startDate, endDate, description, tags);
     }
 
     @Override

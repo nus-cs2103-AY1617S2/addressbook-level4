@@ -34,29 +34,33 @@ public class DateTimeParser {
         if(input.isEmpty()) {
             return Optional.empty();
         }
+        LocalDateTime formatDateTime = defaultDateTime.withSecond(0).withNano(0);
         
+        return Optional.of(formatDateTime);
+
         // Input exist. Try to parse it using Natty.
-        Parser parser = new Parser();
+        /*Parser parser = new Parser();
         List<DateGroup> dateGroups = parser.parse(input);
-        
+
         if(dateGroups.isEmpty()) {
             throw new IllegalValueException(MESSAGE_DATE_PARSE_FAILURE);
         }
         DateGroup dateGroup = dateGroups.get(0);
         List<Date> dates = dateGroup.getDates();
-        
+
         if(dates.isEmpty()) {
             throw new IllegalValueException(MESSAGE_DATE_PARSE_FAILURE);
         }
         Date parsedDateTime = dates.get(0);
         LocalDateTime localDateTime = toLocalDateTime(parsedDateTime);
-        LocalDateTime finalisedDateTime = toFinalDateTime(localDateTime, defaultDateTime, dateGroup);
-        
-        return Optional.of(finalisedDateTime);
+        LocalDateTime finalisedDateTime = toFinalDateTime(localDateTime, formatDateTime, dateGroup);
+        LocalDateTime formattedFinalisedDateTime = finalisedDateTime.withSecond(0).withNano(0);
+
+        return Optional.of(formattedFinalisedDateTime);*/
     }
     
     /**
-     * Convert a Date represented in UTC to local machine representation.
+     * Convert a EndDate represented in UTC to local machine representation.
      * 
      * @param dateTime the date and time that Natty uses. 
      * @return local machine date and time.
@@ -72,6 +76,7 @@ public class DateTimeParser {
      * Fill in the missing information that user missed out. It can be date OR time input.
      * 
      * @param localDateTime the local date and time that Natty thinks the user might want. 
+     * @param defaultDateTime to be used to replace missing date/time
      * @param dateGroup Natty parsed output.
      * @return final version of LocalDateTime that user might want specifically.
      */

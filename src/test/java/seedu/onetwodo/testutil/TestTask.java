@@ -1,11 +1,11 @@
 package seedu.onetwodo.testutil;
 
 import seedu.onetwodo.model.tag.UniqueTagList;
-import seedu.onetwodo.model.task.Date;
+import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Description;
 import seedu.onetwodo.model.task.Name;
 import seedu.onetwodo.model.task.ReadOnlyTask;
-import seedu.onetwodo.model.task.Time;
+import seedu.onetwodo.model.task.StartDate;
 
 /**
  * A mutable task object. For testing only.
@@ -14,8 +14,8 @@ public class TestTask implements ReadOnlyTask {
 
     private Name name;
     private Description description;
-    private Date date;
-    private Time time;
+    private EndDate endDate;
+    private StartDate startDate;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -27,8 +27,8 @@ public class TestTask implements ReadOnlyTask {
      */
     public TestTask(TestTask taskToCopy) {
         this.name = taskToCopy.getName();
-        this.time = taskToCopy.getTime();
-        this.date = taskToCopy.getDate();
+        this.startDate = taskToCopy.getStartDate();
+        this.endDate = taskToCopy.getEndDate();
         this.description = taskToCopy.getDescription();
         this.tags = taskToCopy.getTags();
     }
@@ -41,12 +41,12 @@ public class TestTask implements ReadOnlyTask {
         this.description = description;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setEndDate(EndDate endDate) {
+        this.endDate = endDate;
     }
 
-    public void setTime(Time time) {
-        this.time = time;
+    public void setStartDate(StartDate startDate) {
+        this.startDate = startDate;
     }
 
     public void setTags(UniqueTagList tags) {
@@ -59,13 +59,13 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Time getTime() {
-        return time;
+    public StartDate getStartDate() {
+        return startDate;
     }
 
     @Override
-    public Date getDate() {
-        return date;
+    public EndDate getEndDate() {
+        return endDate;
     }
 
     @Override
@@ -87,8 +87,8 @@ public class TestTask implements ReadOnlyTask {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
         sb.append("d/" + this.getDescription().value + " ");
-        sb.append("s/" + this.getTime().value + " ");
-        sb.append("e/" + this.getDate().value + " ");
+        sb.append("s/" + this.getStartDate().value + " ");
+        sb.append("e/" + this.getEndDate().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
