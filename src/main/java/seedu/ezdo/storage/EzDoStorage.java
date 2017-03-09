@@ -17,6 +17,11 @@ public interface EzDoStorage {
     String getEzDoFilePath();
 
     /**
+     * Sets the file path of the data file.
+     */
+    void setEzDoFilePath(String path);
+
+    /**
      * Returns EzDo data as a {@link ReadOnlyEzDo}.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.

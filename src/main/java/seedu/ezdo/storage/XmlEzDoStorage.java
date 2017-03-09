@@ -24,8 +24,13 @@ public class XmlEzDoStorage implements EzDoStorage {
         this.filePath = filePath;
     }
 
+    @Override
     public String getEzDoFilePath() {
         return filePath;
+    }
+
+    public void setEzDoFilePath(String filePath) {
+        this.filePath = filePath;
     }
 
     @Override
@@ -38,6 +43,7 @@ public class XmlEzDoStorage implements EzDoStorage {
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
+    @Override
     public Optional<ReadOnlyEzDo> readEzDo(String filePath) throws DataConversionException,
                                                                                  FileNotFoundException {
         assert filePath != null;
@@ -63,6 +69,7 @@ public class XmlEzDoStorage implements EzDoStorage {
      * Similar to {@link #saveEzDo(ReadOnlyEzDo)}
      * @param filePath location of the data. Cannot be null
      */
+    @Override
     public void saveEzDo(ReadOnlyEzDo ezDo, String filePath) throws IOException {
         assert ezDo != null;
         assert filePath != null;
