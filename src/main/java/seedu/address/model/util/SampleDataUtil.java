@@ -14,11 +14,11 @@ public class SampleDataUtil {
     public static Task[] getSamplePersons() {
         try {
             return new Task[] {
-                new Task(new Description("Visit Alex"), new Priority("3"), new Email("alexyeoh@gmail.com"),
+                new Task(new Description("Visit Alex"), new Priority("3"), new Email("2"),
                     new UniqueTagList("visit")),
-                new Task(new Description("CS2010 Midterm"), new Priority("1"), new Email("berniceyu@gmail.com"),
+                new Task(new Description("CS Midterm"), new Priority("1"), new Email("12"),
                     new UniqueTagList("study", "exams")),
-                new Task(new Description("Buy grocery"), new Priority("2"), new Email("charlotte@yahoo.com"),
+                new Task(new Description("Buy grocery"), new Priority("2"), new Email("21"),
                     new UniqueTagList("misc")),
             };
         } catch (IllegalValueException e) {
