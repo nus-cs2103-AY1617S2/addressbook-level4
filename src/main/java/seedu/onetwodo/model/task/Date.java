@@ -3,49 +3,47 @@ package seedu.onetwodo.model.task;
 
 import seedu.onetwodo.commons.exceptions.IllegalValueException;
 
+import java.time.*;
+import java.util.Optional;
+
+
 /**
- * Represents a Task's time in the toDo list.
- * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
+ * Represents a Task's date in the toDo list.
+ * Guarantees: immutable.
  */
 public class Date {
 
-    public static final String MESSAGE_DATE_CONSTRAINTS =
-            "If task date exists, it must be a valid date";
-    public static final String DATE_VALIDATION_REGEX = ".*";
+    public static final String MESSAGE_DATE_CONSTRAINTS = "If task date exists, it must be a valid date";
 
-    public final String value;
+    public String value;  // value to be displayed to user
+    protected Optional<LocalDateTime> localDateTime;
+    
+    // to be used if no date OR time is specified.
+    protected LocalDateTime defaultDateTime = LocalDateTime.now(); 
 
     /**
-     * Validates given date.
+     * Create a date.
      *
      * @throws IllegalValueException if given date toDo string is invalid.
      */
-    public Date(String date) throws IllegalValueException {
-        assert date != null;
-        String trimmedDate = date.trim();
-        
-        if(trimmedDate.isEmpty()) {
-            this.value = trimmedDate;
-        } else {
-            // if user has input some date, use Natty to parse it
-            
-            // parse input into Natty
-            String displayableDate = "";
-            
-            if (!isValidDate(trimmedDate)) {
-                throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
-            }
-            this.value = displayableDate;
-        }
+    public Date(String input) throws IllegalValueException {
+        assert input != null;
+        this.value = input;
     }
 
     /**
-     * Returns if a given string is a valid task date.
+     * 
+     * @param localDateTime input optional LocalDateTime
+     * @return String to be displayed to user.
      */
-    public static boolean isValidDate(String test) {
-        return test.matches(DATE_VALIDATION_REGEX);
+    public String createDisplayValue(Optional<LocalDateTime> localDateTime) {
+        if(!localDateTime.isPresent()) {
+            return "";
+        } else {
+            return localDateTime.get().toString();
+        }
     }
-
+    
     @Override
     public String toString() {
         return value;
