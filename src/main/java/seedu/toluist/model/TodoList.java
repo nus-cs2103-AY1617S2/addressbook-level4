@@ -55,7 +55,7 @@ public class TodoList {
         allTasks.remove(task);
     }
     
-    public Task get(Task task) {
+    public Task getTask(Task task) {
         return allTasks.get(allTasks.indexOf(task));
     }    
 

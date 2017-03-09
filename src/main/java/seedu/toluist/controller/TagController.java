@@ -46,7 +46,7 @@ public class TagController extends Controller {
         int index = Integer.parseInt(tokens.get(INDEX_PARAMETER));
         TodoList todoList = TodoList.load();
         Task task = UiStore.getInstance().getTasks().get(index);
-        task = todoList.get(task);
+        task = todoList.getTask(task);
         ArrayList<String> successfulList = new ArrayList<String>();
         ArrayList<String> failedList = new ArrayList<String>();
 
