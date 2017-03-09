@@ -55,7 +55,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
 
-    public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
+    public void setTags(Collection<Tag> tags) {
         this.tags.setTags(tags);
     }
 
@@ -66,11 +66,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         } catch (UniquePersonList.DuplicatePersonException e) {
             assert false : "AddressBooks should not have duplicate persons";
         }
-        try {
-            setTags(newData.getTagList());
-        } catch (UniqueTagList.DuplicateTagException e) {
-            assert false : "AddressBooks should not have duplicate tags";
-        }
+        setTags(newData.getTagList());
         syncMasterTagListWith(persons);
     }
 
@@ -149,7 +145,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
 //// tag-level operations
 
-    public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
+    public void addTag(Tag t) {
         tags.add(t);
     }
 
