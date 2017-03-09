@@ -1,7 +1,7 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS;
+import static seedu.taskmanager.logic.commands.DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS;
 
 import org.junit.Test;
 

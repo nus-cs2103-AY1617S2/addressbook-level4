@@ -24,17 +24,6 @@ import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.SelectCommand;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -48,6 +37,19 @@ import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.storage.StorageManager;
+import seedu.taskmanager.logic.Logic;
+import seedu.taskmanager.logic.LogicManager;
+import seedu.taskmanager.logic.commands.AddCommand;
+import seedu.taskmanager.logic.commands.ClearCommand;
+import seedu.taskmanager.logic.commands.Command;
+import seedu.taskmanager.logic.commands.CommandResult;
+import seedu.taskmanager.logic.commands.DeleteCommand;
+import seedu.taskmanager.logic.commands.ExitCommand;
+import seedu.taskmanager.logic.commands.FindCommand;
+import seedu.taskmanager.logic.commands.HelpCommand;
+import seedu.taskmanager.logic.commands.ListCommand;
+import seedu.taskmanager.logic.commands.SelectCommand;
+import seedu.taskmanager.logic.commands.exceptions.CommandException;
 
 
 public class LogicManagerTest {
@@ -203,7 +205,7 @@ public class LogicManagerTest {
         assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
                 Email.MESSAGE_EMAIL_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
-                Tag.MESSAGE_TAG_CONSTRAINTS);
+                Category.MESSAGE_TAG_CONSTRAINTS);
 
     }
 
@@ -419,9 +421,9 @@ public class LogicManagerTest {
             Phone privatePhone = new Phone("111111");
             Email email = new Email("adam@gmail.com");
             Address privateAddress = new Address("111, alpha street");
-            Tag tag1 = new Tag("tag1");
-            Tag tag2 = new Tag("longertag2");
-            UniqueTagList tags = new UniqueTagList(tag1, tag2);
+            Category tag1 = new Category("tag1");
+            Category tag2 = new Category("longertag2");
+            UniqueCategoryList tags = new UniqueCategoryList(tag1, tag2);
             return new Person(name, privatePhone, email, privateAddress, tags);
         }
 
@@ -438,7 +440,7 @@ public class LogicManagerTest {
                     new Phone("" + Math.abs(seed)),
                     new Email(seed + "@email"),
                     new Address("House of " + seed),
-                    new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
+                    new UniqueCategoryList(new Category("tag" + Math.abs(seed)), new Category("tag" + Math.abs(seed + 1)))
             );
         }
 
@@ -453,8 +455,8 @@ public class LogicManagerTest {
             cmd.append(" p/").append(p.getPhone());
             cmd.append(" a/").append(p.getAddress());
 
-            UniqueTagList tags = p.getTags();
-            for (Tag t: tags) {
+            UniqueCategoryList tags = p.getTags();
+            for (Category t: tags) {
                 cmd.append(" t/").append(t.tagName);
             }
 
@@ -537,7 +539,7 @@ public class LogicManagerTest {
                     new Phone("1"),
                     new Email("1@email"),
                     new Address("House of 1"),
-                    new UniqueTagList(new Tag("tag"))
+                    new UniqueCategoryList(new Category("tag"))
             );
         }
     }
