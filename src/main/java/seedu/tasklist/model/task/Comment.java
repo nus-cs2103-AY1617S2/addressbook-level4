@@ -10,7 +10,7 @@ import seedu.tasklist.commons.exceptions.IllegalValueException;
 public class Comment {
 
     public static final String MESSAGE_COMMENT_CONSTRAINTS =
-            "Task commentes can take any values, and it should not be blank";
+            "Task comments can take any values, and it should not be blank";
 
     /*
      * The first character of the comment must not be a whitespace,
