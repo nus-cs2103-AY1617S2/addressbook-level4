@@ -12,7 +12,7 @@ import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
-    public static Task[] getSampleTasks() {
+    public static Task[] getSamplePersons() {
         try {
             return new Task[] {
                 new Task(new Name("Finalise CS2101 Report"), new Priority("2"), new Status("incomplete"),
@@ -30,7 +30,6 @@ public class SampleDataUtil {
                 new Task(new Name("Do CS2103 Tutorial"), new Priority("1"), new Status("incomplete"),
                     new Note("You need it to pass the module, trust me."),
                     new UniqueTagList("classmates")),
-           
             };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);
@@ -40,7 +39,7 @@ public class SampleDataUtil {
     public static ReadOnlyTaskManager getSampleAddressBook() {
         try {
             TaskManager sampleTaskManager = new TaskManager();
-            for (Task sampleTask : getSampleTasks()) {
+            for (Task sampleTask : getSamplePersons()) {
                 sampleTaskManager.addTask(sampleTask);
             }
             return sampleTaskManager;
