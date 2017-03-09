@@ -3,10 +3,10 @@ package seedu.jobs.model;
 import java.util.Set;
 
 import seedu.jobs.commons.core.UnmodifiableObservableList;
-import seedu.jobs.model.person.Person;
-import seedu.jobs.model.person.ReadOnlyPerson;
-import seedu.jobs.model.person.UniquePersonList;
-import seedu.jobs.model.person.UniquePersonList.DuplicatePersonException;
+import seedu.jobs.model.task.Person;
+import seedu.jobs.model.task.ReadOnlyPerson;
+import seedu.jobs.model.task.UniquePersonList;
+import seedu.jobs.model.task.UniquePersonList.DuplicatePersonException;
 
 /**
  * The API of the Model component.

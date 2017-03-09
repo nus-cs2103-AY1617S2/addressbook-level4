@@ -6,14 +6,14 @@ import java.util.Optional;
 import seedu.jobs.commons.core.Messages;
 import seedu.jobs.commons.util.CollectionUtil;
 import seedu.jobs.logic.commands.exceptions.CommandException;
-import seedu.jobs.model.person.Address;
-import seedu.jobs.model.person.Email;
-import seedu.jobs.model.person.Name;
-import seedu.jobs.model.person.Person;
-import seedu.jobs.model.person.Phone;
-import seedu.jobs.model.person.ReadOnlyPerson;
-import seedu.jobs.model.person.UniquePersonList;
 import seedu.jobs.model.tag.UniqueTagList;
+import seedu.jobs.model.task.Address;
+import seedu.jobs.model.task.Email;
+import seedu.jobs.model.task.Name;
+import seedu.jobs.model.task.Person;
+import seedu.jobs.model.task.Phone;
+import seedu.jobs.model.task.ReadOnlyPerson;
+import seedu.jobs.model.task.UniquePersonList;
 
 /**
  * Edits the details of an existing person in the address book.

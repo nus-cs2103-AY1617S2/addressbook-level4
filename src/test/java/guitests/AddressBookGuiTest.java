@@ -25,7 +25,7 @@ import seedu.jobs.TestApp;
 import seedu.jobs.commons.core.EventsCenter;
 import seedu.jobs.commons.events.BaseEvent;
 import seedu.jobs.model.AddressBook;
-import seedu.jobs.model.person.ReadOnlyPerson;
+import seedu.jobs.model.task.ReadOnlyPerson;
 import seedu.jobs.testutil.TestUtil;
 import seedu.jobs.testutil.TypicalTestPersons;
 

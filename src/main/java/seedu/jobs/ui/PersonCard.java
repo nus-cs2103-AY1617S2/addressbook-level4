@@ -5,7 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.jobs.model.person.ReadOnlyPerson;
+import seedu.jobs.model.task.ReadOnlyPerson;
 
 public class PersonCard extends UiPart<Region> {
 

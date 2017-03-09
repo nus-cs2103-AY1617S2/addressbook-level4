@@ -13,7 +13,7 @@ import javafx.scene.layout.Region;
 import seedu.jobs.commons.core.LogsCenter;
 import seedu.jobs.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.jobs.commons.util.FxViewUtil;
-import seedu.jobs.model.person.ReadOnlyPerson;
+import seedu.jobs.model.task.ReadOnlyPerson;
 
 /**
  * Panel containing the list of persons.

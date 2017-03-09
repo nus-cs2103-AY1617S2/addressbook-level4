@@ -2,8 +2,8 @@ package seedu.jobs.testutil;
 
 import seedu.jobs.commons.exceptions.IllegalValueException;
 import seedu.jobs.model.AddressBook;
-import seedu.jobs.model.person.Person;
-import seedu.jobs.model.person.UniquePersonList;
+import seedu.jobs.model.task.Person;
+import seedu.jobs.model.task.UniquePersonList;
 
 /**
  *

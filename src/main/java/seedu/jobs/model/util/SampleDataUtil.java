@@ -3,13 +3,13 @@ package seedu.jobs.model.util;
 import seedu.jobs.commons.exceptions.IllegalValueException;
 import seedu.jobs.model.AddressBook;
 import seedu.jobs.model.ReadOnlyAddressBook;
-import seedu.jobs.model.person.Address;
-import seedu.jobs.model.person.Email;
-import seedu.jobs.model.person.Name;
-import seedu.jobs.model.person.Person;
-import seedu.jobs.model.person.Phone;
-import seedu.jobs.model.person.UniquePersonList.DuplicatePersonException;
 import seedu.jobs.model.tag.UniqueTagList;
+import seedu.jobs.model.task.Address;
+import seedu.jobs.model.task.Email;
+import seedu.jobs.model.task.Name;
+import seedu.jobs.model.task.Person;
+import seedu.jobs.model.task.Phone;
+import seedu.jobs.model.task.UniquePersonList.DuplicatePersonException;
 
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {

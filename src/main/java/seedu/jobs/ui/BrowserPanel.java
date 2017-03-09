@@ -6,7 +6,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.jobs.commons.util.FxViewUtil;
-import seedu.jobs.model.person.ReadOnlyPerson;
+import seedu.jobs.model.task.ReadOnlyPerson;
 
 /**
  * The Browser Panel of the App.

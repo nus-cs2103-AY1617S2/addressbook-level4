@@ -3,7 +3,7 @@ package seedu.jobs.logic;
 import javafx.collections.ObservableList;
 import seedu.jobs.logic.commands.CommandResult;
 import seedu.jobs.logic.commands.exceptions.CommandException;
-import seedu.jobs.model.person.ReadOnlyPerson;
+import seedu.jobs.model.task.ReadOnlyPerson;
 
 /**
  * API of the Logic component

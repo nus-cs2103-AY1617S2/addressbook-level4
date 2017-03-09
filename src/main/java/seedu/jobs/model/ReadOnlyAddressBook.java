@@ -2,8 +2,8 @@ package seedu.jobs.model;
 
 
 import javafx.collections.ObservableList;
-import seedu.jobs.model.person.ReadOnlyPerson;
 import seedu.jobs.model.tag.Tag;
+import seedu.jobs.model.task.ReadOnlyPerson;
 
 /**
  * Unmodifiable view of an address book

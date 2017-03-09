@@ -30,14 +30,14 @@ import seedu.jobs.commons.exceptions.IllegalValueException;
 import seedu.jobs.commons.util.FileUtil;
 import seedu.jobs.commons.util.XmlUtil;
 import seedu.jobs.model.AddressBook;
-import seedu.jobs.model.person.Address;
-import seedu.jobs.model.person.Email;
-import seedu.jobs.model.person.Name;
-import seedu.jobs.model.person.Person;
-import seedu.jobs.model.person.Phone;
-import seedu.jobs.model.person.ReadOnlyPerson;
 import seedu.jobs.model.tag.Tag;
 import seedu.jobs.model.tag.UniqueTagList;
+import seedu.jobs.model.task.Address;
+import seedu.jobs.model.task.Email;
+import seedu.jobs.model.task.Name;
+import seedu.jobs.model.task.Person;
+import seedu.jobs.model.task.Phone;
+import seedu.jobs.model.task.ReadOnlyPerson;
 import seedu.jobs.storage.XmlSerializableAddressBook;
 
 /**

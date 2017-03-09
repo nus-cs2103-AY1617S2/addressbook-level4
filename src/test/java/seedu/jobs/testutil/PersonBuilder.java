@@ -1,12 +1,12 @@
 package seedu.jobs.testutil;
 
 import seedu.jobs.commons.exceptions.IllegalValueException;
-import seedu.jobs.model.person.Address;
-import seedu.jobs.model.person.Email;
-import seedu.jobs.model.person.Name;
-import seedu.jobs.model.person.Phone;
 import seedu.jobs.model.tag.Tag;
 import seedu.jobs.model.tag.UniqueTagList;
+import seedu.jobs.model.task.Address;
+import seedu.jobs.model.task.Email;
+import seedu.jobs.model.task.Name;
+import seedu.jobs.model.task.Phone;
 
 /**
  *

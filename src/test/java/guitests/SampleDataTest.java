@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.jobs.model.AddressBook;
-import seedu.jobs.model.person.Person;
+import seedu.jobs.model.task.Person;
 import seedu.jobs.model.util.SampleDataUtil;
 import seedu.jobs.testutil.TestUtil;
 

@@ -3,8 +3,8 @@ package seedu.jobs.logic.commands;
 import seedu.jobs.commons.core.Messages;
 import seedu.jobs.commons.core.UnmodifiableObservableList;
 import seedu.jobs.logic.commands.exceptions.CommandException;
-import seedu.jobs.model.person.ReadOnlyPerson;
-import seedu.jobs.model.person.UniquePersonList.PersonNotFoundException;
+import seedu.jobs.model.task.ReadOnlyPerson;
+import seedu.jobs.model.task.UniquePersonList.PersonNotFoundException;
 
 /**
  * Deletes a person identified using it's last displayed index from the address book.

@@ -1,4 +1,4 @@
-package seedu.jobs.model.person;
+package seedu.jobs.model.task;
 
 import seedu.jobs.commons.exceptions.IllegalValueException;
 

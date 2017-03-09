@@ -12,9 +12,9 @@ import javafx.collections.ObservableList;
 import seedu.jobs.commons.core.UnmodifiableObservableList;
 import seedu.jobs.commons.exceptions.IllegalValueException;
 import seedu.jobs.model.ReadOnlyAddressBook;
-import seedu.jobs.model.person.Person;
-import seedu.jobs.model.person.ReadOnlyPerson;
 import seedu.jobs.model.tag.Tag;
+import seedu.jobs.model.task.Person;
+import seedu.jobs.model.task.ReadOnlyPerson;
 
 /**
  * An Immutable AddressBook that is serializable to XML format

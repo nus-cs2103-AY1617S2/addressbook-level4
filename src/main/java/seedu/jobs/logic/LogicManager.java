@@ -10,7 +10,7 @@ import seedu.jobs.logic.commands.CommandResult;
 import seedu.jobs.logic.commands.exceptions.CommandException;
 import seedu.jobs.logic.parser.Parser;
 import seedu.jobs.model.Model;
-import seedu.jobs.model.person.ReadOnlyPerson;
+import seedu.jobs.model.task.ReadOnlyPerson;
 import seedu.jobs.storage.Storage;
 
 /**

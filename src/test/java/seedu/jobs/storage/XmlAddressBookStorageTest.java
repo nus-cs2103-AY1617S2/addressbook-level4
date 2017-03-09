@@ -15,7 +15,7 @@ import seedu.jobs.commons.exceptions.DataConversionException;
 import seedu.jobs.commons.util.FileUtil;
 import seedu.jobs.model.AddressBook;
 import seedu.jobs.model.ReadOnlyAddressBook;
-import seedu.jobs.model.person.Person;
+import seedu.jobs.model.task.Person;
 import seedu.jobs.testutil.TypicalTestPersons;
 
 public class XmlAddressBookStorageTest {

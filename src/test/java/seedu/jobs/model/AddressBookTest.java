@@ -14,9 +14,9 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.jobs.model.person.Person;
-import seedu.jobs.model.person.ReadOnlyPerson;
 import seedu.jobs.model.tag.Tag;
+import seedu.jobs.model.task.Person;
+import seedu.jobs.model.task.ReadOnlyPerson;
 import seedu.jobs.testutil.TypicalTestPersons;
 
 public class AddressBookTest {
