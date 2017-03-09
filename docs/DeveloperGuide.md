@@ -382,7 +382,7 @@ Priority | As a ... | I want to ... | So that I can...
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `task manager` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `OneTwoDo` task manager and the **Actor** is the `user`, unless specified otherwise)
 
 #### Use case : Add task
 
