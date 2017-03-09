@@ -6,8 +6,8 @@ We are a team based in the [School of Computing, National University of Singapor
 
 #### [Kelly Li](http://github.com/kellyli)
 <img src="images/kellyli.png" width="150"><br>
- Role: tbd <br>
- Responsibilities: tbd
+ Role: Deliverables and deadlines <br>
+ Responsibilities: Ensure project deliverables are done on time and in the right forma
 
 #### [Joshua Ching](http://github.com/joshuaching)
 <img src="images/joshuaching.png" width="150"><br>
