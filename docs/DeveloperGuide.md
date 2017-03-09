@@ -572,5 +572,27 @@ Downsides:
 * Dont allow booking of multiple slots for a particular task
 * The app allows to set deadline for a task on the basis of due date and not time which might be hinder the users work.
 
+**Product Name: Google Calendar**
 
+Author: Brea Dionisio
 
+Pros:
+* Free
+* "Quick add" function allows you to type add commands in natural language
+* "Quick add" accessed by a keyboard shortcut (q)
+* Search function that searches through events as well as emails
+* Options to set recurring events
+* Undo option available for some time after action taken
+* Reminders can be set; users can be notified through the web app, phone app or email
+* Elapsed events automatically displayed as such in GUI-- allows one to focus on what is current or in the future
+* Concept of separate calendars to segregate items into appropriate categories
+* Color coding for events of separate calendars
+* Option to turn on and off viewing of calendars in order to focus on the most relevant information
+
+Cons:
+* Undo option not available after a short period of time
+* Event-focused; functionalities specific to tasks aren't supported
+* No concept of tentative timeslots that are released as events are confirmed; such blockings must be deleted manually
+* Can't set your own keyboard shortcuts
+* No command line-style input accepted other than for adds
+* Browser-based only, internet connection required
