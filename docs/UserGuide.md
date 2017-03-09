@@ -53,9 +53,12 @@ Format: `add NAME [startdate/STARTDATE] [enddate/ENDDATE] [recurring/PERIOD(day/
 
 Examples:
 
-* `add Do Homework`
-* `add Meeting With Boss enddate/11-11-2011 19:30 startdate/11-11-2011 17:30`
-* `add Check Email startdate/today recurring/day`
+* `add Do Homework` <br>
+  Adds a task called 'Do Homework'.
+* `add Meeting With Boss enddate/11-11-2011 19:30 startdate/11-11-2011 17:30` <br>
+  Adds a task called 'Meeting With Boss', sets the end date to be 11-11-2011 19:30, set to begin 11-11-2011 17:30.
+* `add Check Email enddate/today recurring/day` <br>
+  Adds a task called 'Check Email', sets the end date to be today's date, set to recur every day.
 
 ### 2.3. Updating a task : `update`
 
@@ -95,7 +98,7 @@ Format: `filter/list/find [KEYWORDS] [tag/] [name/]`
 Examples:
 
 * `find Assignment`<br>
-  Returns `Assignment 1` and also `assignment 2`
+  Returns `Assignment 1` and also `assignment 2`.
 * `find Assignment Project Tutorial`<br>
   Returns any task having `Assignment`, `Project`, or `Tutorial` in their names.
 * `find school tag/` <br>
@@ -197,7 +200,7 @@ Adds an alias for a phrase. <br>
 Format: `alias ALIAS PHRASE`
 
 > * Once added, alias can be used instead of the phrase to perform operations.
-> * The phrase can be multiple words long
+> * The phrase can be multiple words long.
 
 Example:
 * `alias hs history` <br>
@@ -212,6 +215,11 @@ Example:
 
 Removes an alias for a command. <br>
 Format: `unalias ALIAS`
+
+Example:
+* `alias hs history` <br>
+  `unalias hs` <br>
+  Removes the alias 'hs'.
 
 ### 2.14. View aliases for commands: `viewalias`
 
@@ -237,7 +245,7 @@ Format: `save NEWFILELOCATION`
 
 Example:
 * `save data/savefile.txt` <br>
-  Sets the save storage location to `data/savefile.txt` 
+  Sets the save storage location to `data/savefile.txt`.
 
 ### 2.16. Change storage location for load data: `load`
 
@@ -251,7 +259,7 @@ Format: `load NEWFILELOCATION`
 
 Example:
 * `load data/savefile.txt` <br>
-  Sets the load storage location to `data/savefile.txt` 
+  Sets the load storage location to `data/savefile.txt`.
 
 ### 2.17. Switch Display Task Window : `switch`
 
@@ -262,6 +270,12 @@ Format: `switch WINDOWIDENTIFIER`
 > * If a letter is given, it will be the underlined letter in the window list name.
 > * If a word is given, it will be the word with the underlined letter in the window list name.
 
+Example:
+* `switch 2` <br>
+  Switches the displayed view to 'Today'.
+* `switch T` <br>
+  Switches the displayed view to 'Today'.
+
 ### 2.18. Complete or Make Uncomplete a Task : `mark`
 
 Marks a task to be complete or incomplete.
@@ -270,6 +284,14 @@ Format: `mark [complete/uncomplete] INDEX`
 > * Using complete as a parameter will mark the selected task as complete.
 > * Using incomplete as a parameter will mark the selected task as incomplete.
 > * Using neither will default the command to mark as complete.
+
+Example:
+* `mark complete 1` <br>
+  Marks task 1 as complete.
+* `mark uncomplete 2` <br>
+  Marks task 2 as incomplete.
+* `mark 3`
+  Marks task 3 as complete.
 
 ### 2.19. Add a Tag to a Task : `tag`
 
@@ -301,7 +323,7 @@ Example:
 
 ## 3. Command Summary
 
-* **Add**  `add NAME [enddate/ENDDATE] [startdate/STARTDATE] [recurring/PERIOD(day/week/month)] [priority/PRIORITY] [tag/TAG]...` <br>
+* **Add** : `add NAME [enddate/ENDDATE] [startdate/STARTDATE] [recurring/PERIOD(day/week/month)] [priority/PRIORITY] [tag/TAG]...` <br>
   e.g. `add Assigment 1 enddate/Friday tag/school`
 
 * **Clear** : `clear`
@@ -314,7 +336,7 @@ Example:
 
 * **Help** : `help`
 
-* **Update** : '`update INDEX [name/NAME] [enddate/ENDDATE] [startdate/STARTDATE] [recurring/PERIOD(day/week/month)] [priority/PRIORITY] [tag/TAG]...` <br>
+* **Update** : `update INDEX [name/NAME] [enddate/ENDDATE] [startdate/STARTDATE] [recurring/PERIOD(day/week/month)] [priority/PRIORITY] [tag/TAG]...` <br>
   e.g. `update 1 enddate/11/12/2011`
 
 * **Exit** : `exit/quit`
@@ -335,23 +357,27 @@ Example:
 * **Delete Alias** : `unalias ALIAS` <br>
   e.g. `unalias hs`
 
-* **View Aliases** : `viewalias` <br>
-  e.g. `viewalias`
+* **View Aliases** : `viewalias`
 
-* **Change Save Storage Location** : `save FILELOCATION`
+* **Change Save Storage Location** : `save FILELOCATION` <br>
+  e.g. `save data/savefile.txt`
 
-* **Change Load Storage Location** : `load FILELOCATION`
+* **Change Load Storage Location** : `load FILELOCATION` <br>
+  e.g. `load data/savefile.txt`
 
-* **Switch Display Task Window** : `switch WINDOWIDENTIFIER`
+* **Switch Display Task Window** : `switch WINDOWIDENTIFIER` <br>
+  e.g. `switch 2`
+  e.g. `switch T`
 
-* **Complete or Make Uncomplete a Task : `mark [complete/uncomplete] INDEX` <br>
+* **Complete or Make Uncomplete a Task** : `mark [complete/uncomplete] INDEX` <br>
   e.g. `mark complete 1` <br>
-  e.g. `mark 1`
+  e.g. `mark uncomplete 2` <br>
+  e.g. `mark 3`
 
-* **Add a Tag to a Task : `tag INDEX TAG...` <br>
+* **Add a Tag to a Task** : `tag INDEX TAG...` <br>
   e.g. `tag 1 school` <br>
-  e.g. `tag 1 work home`
+  e.g. `tag 3 work home`
 
-* **Remove a Tag from a Task : `untag INDEX TAG...` <br>
+* **Remove a Tag from a Task** : `untag INDEX TAG...` <br>
   e.g. `untag 1 school` <br>
-  e.g. `untag 1 work home`
+  e.g. `untag 3 work home`
