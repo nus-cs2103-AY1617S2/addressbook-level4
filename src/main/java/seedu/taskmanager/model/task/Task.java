@@ -25,7 +25,7 @@ public class Task implements ReadOnlyTask {
         this.taskName = taskName;
         this.date = date;
 //        this.endTime = endTime;
-//        this.deadline = deadline;        
+//        this.deadline = deadline;
 //        this.categories = new UniqueCategoryList(categories); // protect internal tags from changes in the arg list
 
     }
@@ -52,13 +52,13 @@ public class Task implements ReadOnlyTask {
         this.deadline = deadline;
     }
 */
-/*    
+/*
     @Override
     public Deadline getDeadline() {
         return deadline;
     }
 */
-/*    
+/*
     public void setEndTime(EndTime endTime) {
         assert endTime != null;
         this.endTime = endTime;
@@ -68,7 +68,7 @@ public class Task implements ReadOnlyTask {
     public EndTime getEndTime() {
         return endTime;
     }
-*/    
+*/
     public void setDate(Date date) {
         assert date != null;
         this.date = date;
@@ -86,7 +86,7 @@ public class Task implements ReadOnlyTask {
 
     /**
      * Replaces this task's categories with the categories in the argument category list.
-     
+
     public void setCategories(UniqueCategoryList replacement) {
         categories.setCategories(replacement);
     }
