@@ -31,6 +31,9 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         name.setText(person.getName().fullName);
         id.setText(displayedIndex + ". ");
+        phone.setText(""); // TODO
+        address.setText(""); // TODO
+        email.setText(""); // TODO
         initTags(person);
     }
 
