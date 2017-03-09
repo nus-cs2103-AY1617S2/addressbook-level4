@@ -9,7 +9,7 @@ import guitests.guihandles.PersonCardHandle;
 import seedu.task.commons.core.Messages;
 import seedu.task.logic.commands.EditCommand;
 import seedu.task.model.tag.Tag;
-import seedu.task.model.task.Name;
+import seedu.task.model.task.Description;
 import seedu.task.testutil.TaskBuilder;
 import seedu.task.testutil.TestTask;
 
@@ -25,7 +25,7 @@ public class EditCommandTest extends TaskListGuiTest {
         String detailsToEdit = "Bobby t/husband";
         int taskListIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withName("Bobby").withTags("husband").build();
+        TestTask editedTask = new TaskBuilder().withDescription("Bobby").withTags("husband").build();
 
         assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit, editedTask);
     }
@@ -61,7 +61,7 @@ public class EditCommandTest extends TaskListGuiTest {
         int taskListIndex = 5;
 
         TestTask taskToEdit = expectedTaskList[taskListIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withName("Belle").build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withDescription("Belle").build();
 
         assertEditSuccess(filteredTaskListIndex, taskListIndex, detailsToEdit, editedTask);
     }
@@ -87,7 +87,7 @@ public class EditCommandTest extends TaskListGuiTest {
     @Test
     public void edit_invalidValues_failure() {
         commandBox.runCommand("edit 1 *&");
-        assertResultMessage(Name.MESSAGE_DESCRIPTION_CONSTRAINTS);
+        assertResultMessage(Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 t/*&");
 
@@ -114,7 +114,7 @@ public class EditCommandTest extends TaskListGuiTest {
         commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
 
         // confirm the new card contains the right data
-        PersonCardHandle editedCard = personListPanel.navigateToPerson(editedTask.getName().fullName);
+        PersonCardHandle editedCard = personListPanel.navigateToPerson(editedTask.getDescription().description);
         assertMatching(editedTask, editedCard);
 
         // confirm the list now contains all previous persons plus the person with updated details

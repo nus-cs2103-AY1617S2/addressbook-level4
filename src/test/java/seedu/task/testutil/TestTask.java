@@ -1,7 +1,7 @@
 package seedu.task.testutil;
 
 import seedu.task.model.tag.UniqueTagList;
-import seedu.task.model.task.Name;
+import seedu.task.model.task.Description;
 import seedu.task.model.task.ReadOnlyTask;
 
 /**
@@ -9,7 +9,7 @@ import seedu.task.model.task.ReadOnlyTask;
  */
 public class TestTask implements ReadOnlyTask {
 
-    private Name name;
+    private Description description;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -20,12 +20,12 @@ public class TestTask implements ReadOnlyTask {
      * Creates a copy of {@code taskToCopy}.
      */
     public TestTask(TestTask taskToCopy) {
-        this.name = taskToCopy.getName();
+        this.description = taskToCopy.getDescription();
         this.tags = taskToCopy.getTags();
     }
 
-    public void setName(Name name) {
-        this.name = name;
+    public void setDescription(Description description) {
+        this.description = description;
     }
 
     public void setTags(UniqueTagList tags) {
@@ -33,8 +33,8 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Name getName() {
-        return name;
+    public Description getDescription() {
+        return description;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class TestTask implements ReadOnlyTask {
 
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
-        sb.append("add " + this.getName().fullName + " ");
+        sb.append("add " + this.getDescription().description + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }

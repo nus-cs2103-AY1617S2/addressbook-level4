@@ -3,7 +3,7 @@ package seedu.task.testutil;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
-import seedu.task.model.task.Name;
+import seedu.task.model.task.Description;
 /**
  *
  */
@@ -22,8 +22,8 @@ public class TaskBuilder {
         this.task = new TestTask(taskToCopy);
     }
 
-    public TaskBuilder withName(String name) throws IllegalValueException {
-        this.task.setName(new Name(name));
+    public TaskBuilder withDescription(String description) throws IllegalValueException {
+        this.task.setDescription(new Description(description));
         return this;
     }
 
