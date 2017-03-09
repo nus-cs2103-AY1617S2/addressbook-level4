@@ -10,6 +10,8 @@ import seedu.tasklist.model.tag.UniqueTagList;
 public interface ReadOnlyFloatingTask extends ReadOnlyTask {
     Name getName();
     Comment getComment();
+    Priority getPriority();
+    Status getStatus();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -39,4 +41,5 @@ public interface ReadOnlyFloatingTask extends ReadOnlyTask {
         getTags().forEach(builder::append);
         return builder.toString();
     }
+
 }
