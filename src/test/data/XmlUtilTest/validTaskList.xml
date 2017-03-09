@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addressbook>
+<flexitask>
     <tasks>
         <name>Hans Muster</name>
         <comment isPrivate="false">4th street</comment>
@@ -36,4 +36,4 @@
         <name>Martin Mueller</name>
         <comment isPrivate="false">chicago ave</comment>
     </tasks>
-</addressbook>
+</flexitask>
