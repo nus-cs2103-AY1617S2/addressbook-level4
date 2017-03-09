@@ -557,7 +557,7 @@ Cons:
 * Only available for iPhone users
 * Only for a single user (cannot collaborate)
 
-**Reminder**
+**To Do Reminder**
 
 Author: App Innovation
 
@@ -578,12 +578,9 @@ Pros:
 
 Cons:
 
-* Only 1 dimension of lists (cannot create lists within lists)
-* Can only filter by dates (cannot filter by categories, due dates, etc)
-* Very limited application, low customizability
-* Cannot integrate with other technologies
-* Only available for iPhone users
-* Only for a single user (cannot collaborate)
+* When a reminder pops up, each time the reminder must be clicked, which then opens the app so it can be marked as complete. This is a long process for the user.
+* It does not vibrate with the default notification sound settings, even when the default setting of the phone is set to vibrate.
+* You cannot set the notification level of a task. For example, a user may want to use sound for more important notifications while use a silent notification for others.
 
 **Just Reminder**
 
@@ -592,8 +589,8 @@ Author: AppHouze Co.
 Pros:
 
 * Can set ToDo / Task Reminders, Phone Call Reminders, Birthday Reminders, Anniversary Reminders and Bills Reminders with just few clicks.
-* With Speech-to-Text, no need to type to create an Reminder.
-* Customisable Repeat Intervals like repeat every few minutes, hours, day, specific week days, weeks, months, years and many more.
+* With Speech-to-Text, there is no need to type to create an Reminder.
+* Customisable repeat intervals like repeat every few minutes, hours, day, specific week days, weeks, months, years and more.
 * Customise each reminder with image, specific ring tone or Talking Alarm tone.
 * Can set in-advance alerts for Reminders.
 * Can customise Date & Time Formats.
@@ -604,10 +601,10 @@ Pros:
 
 Cons:
 
-* It's skipping several reminders near end of the year.
+* It has skipping several reminders near end of the year.
 * It does not alert user 5 days in advance of coming bills
 * It doesn't have a pass button when user want to keep something still on your notes but do it at sometime user is not sure in the coming hours or days.
-* Alarms would for some strange reason repeat themselves.
+* Alarms, for some strange reason, repeat themselves.
 * It should have some options more, e.g. make a copy of the existing reminder.
 
 
