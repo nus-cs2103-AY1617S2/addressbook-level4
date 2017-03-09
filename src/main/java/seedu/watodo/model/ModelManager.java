@@ -22,20 +22,20 @@ import seedu.watodo.model.task.UniqueTaskList.TaskNotFoundException;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final TaskList addressBook;
-    private final FilteredList<ReadOnlyFloatingTask> filteredPersons;
+    private final TaskList watodo;
+    private final FilteredList<ReadOnlyFloatingTask> filteredTasks;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given taskList and userPrefs.
      */
-    public ModelManager(ReadOnlyTaskList addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTaskList taskList, UserPrefs userPrefs) {
         super();
-        assert !CollectionUtil.isAnyNull(addressBook, userPrefs);
+        assert !CollectionUtil.isAnyNull(taskList, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with Watodo: " + taskList + " and user prefs " + userPrefs);
 
-        this.addressBook = new TaskList(addressBook);
-        filteredPersons = new FilteredList<>(this.addressBook.getTaskList());
+        this.watodo = new TaskList(taskList);
+        filteredTasks = new FilteredList<>(this.watodo.getTaskList());
     }
 
     public ModelManager() {
@@ -44,68 +44,68 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyTaskList newData) {
-        addressBook.resetData(newData);
-        indicateAddressBookChanged();
+        watodo.resetData(newData);
+        indicateWatodoChanged();
     }
 
     @Override
-    public ReadOnlyTaskList getAddressBook() {
-        return addressBook;
+    public ReadOnlyTaskList getWatodo() {
+        return watodo;
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateAddressBookChanged() {
-        raise(new TaskListChangedEvent(addressBook));
+    private void indicateWatodoChanged() {
+        raise(new TaskListChangedEvent(watodo));
     }
 
     @Override
     public synchronized void deleteTask(ReadOnlyFloatingTask target) throws TaskNotFoundException {
-        addressBook.removePerson(target);
-        indicateAddressBookChanged();
+        watodo.removeTask(target);
+        indicateWatodoChanged();
     }
 
     @Override
-    public synchronized void addTask(FloatingTask person) throws UniqueTaskList.DuplicateTaskException {
-        addressBook.addTask(person);
+    public synchronized void addTask(FloatingTask task) throws UniqueTaskList.DuplicateTaskException {
+        watodo.addTask(task);
         updateFilteredListToShowAll();
-        indicateAddressBookChanged();
+        indicateWatodoChanged();
     }
 
     @Override
-    public void updateTask(int filteredPersonListIndex, ReadOnlyFloatingTask editedPerson)
+    public void updateTask(int filteredTaskListIndex, ReadOnlyFloatingTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
-        assert editedPerson != null;
+        assert editedTask != null;
 
-        int addressBookIndex = filteredPersons.getSourceIndex(filteredPersonListIndex);
-        addressBook.updateTask(addressBookIndex, editedPerson);
-        indicateAddressBookChanged();
+        int addressBookIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
+        watodo.updateTask(addressBookIndex, editedTask);
+        indicateWatodoChanged();
     }
 
     //=========== Filtered Task List Accessors =============================================================
 
     @Override
     public UnmodifiableObservableList<ReadOnlyFloatingTask> getFilteredTaskList() {
-        return new UnmodifiableObservableList<>(filteredPersons);
+        return new UnmodifiableObservableList<>(filteredTasks);
     }
 
     @Override
     public void updateFilteredListToShowAll() {
-        filteredPersons.setPredicate(null);
+        filteredTasks.setPredicate(null);
     }
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredPersonList(new PredicateExpression(new NameQualifier(keywords)));
+        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
 
-    private void updateFilteredPersonList(Expression expression) {
-        filteredPersons.setPredicate(expression::satisfies);
+    private void updateFilteredTaskList(Expression expression) {
+        filteredTasks.setPredicate(expression::satisfies);
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
-        boolean satisfies(ReadOnlyFloatingTask person);
+        boolean satisfies(ReadOnlyFloatingTask task);
         String toString();
     }
 
@@ -118,8 +118,8 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean satisfies(ReadOnlyFloatingTask person) {
-            return qualifier.run(person);
+        public boolean satisfies(ReadOnlyFloatingTask task) {
+            return qualifier.run(task);
         }
 
         @Override
@@ -129,7 +129,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     interface Qualifier {
-        boolean run(ReadOnlyFloatingTask person);
+        boolean run(ReadOnlyFloatingTask task);
         String toString();
     }
 
@@ -141,9 +141,9 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean run(ReadOnlyFloatingTask person) {
+        public boolean run(ReadOnlyFloatingTask task) {
             return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(person.getDescription().fullDescription, keyword))
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().fullDescription, keyword))
                     .findAny()
                     .isPresent();
         }

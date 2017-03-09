@@ -6,13 +6,13 @@ import seedu.watodo.model.tag.Tag;
 import seedu.watodo.model.task.ReadOnlyFloatingTask;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of a task list
  */
 public interface ReadOnlyTaskList {
 
     /**
-     * Returns an unmodifiable view of the persons list.
-     * This list will not contain any duplicate persons.
+     * Returns an unmodifiable view of the tasks list.
+     * This list will not contain any duplicate tasks.
      */
     ObservableList<ReadOnlyFloatingTask> getTaskList();
 

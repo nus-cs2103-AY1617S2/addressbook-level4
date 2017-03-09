@@ -139,7 +139,7 @@ public class TaskList implements ReadOnlyTaskList {
         persons.forEach(this::syncMasterTagListWith);
     }
 
-    public boolean removePerson(ReadOnlyFloatingTask key) throws UniqueTaskList.TaskNotFoundException {
+    public boolean removeTask(ReadOnlyFloatingTask key) throws UniqueTaskList.TaskNotFoundException {
         if (tasks.remove(key)) {
             return true;
         } else {
