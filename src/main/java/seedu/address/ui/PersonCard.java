@@ -29,7 +29,7 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getDescription().description);
         id.setText(displayedIndex + ". ");
         phone.setText(person.getPriority().value);
-        email.setText(person.getEmail().value);
+        email.setText(person.getDate().value);
         initTags(person);
     }
 

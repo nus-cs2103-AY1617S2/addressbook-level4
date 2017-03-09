@@ -10,8 +10,8 @@ import seedu.address.commons.exceptions.IllegalValueException;
 public class Email {
 
     public static final String MESSAGE_EMAIL_CONSTRAINTS =
-            "Task emails should be 2 alphanumeric/period strings separated by '@'";
-    public static final String EMAIL_VALIDATION_REGEX = "[\\w\\.]+@[\\w\\.]+";
+            "Task date should be an 8-digit number with format ddmmyyyy";
+    public static final String EMAIL_VALIDATION_REGEX = "\\d+";
 
     public final String value;
 

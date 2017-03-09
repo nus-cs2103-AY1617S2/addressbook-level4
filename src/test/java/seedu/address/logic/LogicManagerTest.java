@@ -35,17 +35,17 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.TaskList;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyTaskList;
+import seedu.address.model.TaskList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Email;
 import seedu.address.model.task.Description;
-import seedu.address.model.task.Task;
+import seedu.address.model.task.Email;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Task;
 import seedu.address.storage.StorageManager;
 
 
@@ -188,9 +188,6 @@ public class LogicManagerTest {
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Description 12345 e/valid@email.butNoPhonePrefix a/valid,address", expectedMessage);
-        assertCommandFailure("add Valid Description p/12345 valid@email.butNoPrefix a/valid, address", expectedMessage);
-        assertCommandFailure("add Valid Description p/12345 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
     }
 
     @Test
@@ -446,7 +443,7 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getDescription().toString());
-            cmd.append(" e/").append(p.getEmail());
+            cmd.append(" e/").append(p.getDate());
             cmd.append(" p/").append(p.getPriority());
 
             UniqueTagList tags = p.getTags();

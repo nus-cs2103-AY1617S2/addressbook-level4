@@ -7,10 +7,10 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Email;
 import seedu.address.model.task.Description;
-import seedu.address.model.task.Task;
+import seedu.address.model.task.Email;
 import seedu.address.model.task.Priority;
+import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
@@ -21,9 +21,9 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
-            + "Parameters: TASK_NAME s/START_DATE d/DUE_DATE [t/TAG]...\n"
+            + "Parameters: TASK_NAME p/PRIORITY_LEVEL d/DATE [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " Study for midterm s/02-03-17 d/04-03-17 t/study t/midterm";
+            + " Study for midterm p/1 d/04032017 t/study t/midterm";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the task manager";

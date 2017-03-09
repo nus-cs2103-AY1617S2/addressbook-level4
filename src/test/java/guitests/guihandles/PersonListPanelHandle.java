@@ -13,8 +13,8 @@ import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import seedu.address.TestApp;
-import seedu.address.model.task.Task;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Task;
 import seedu.address.testutil.TestUtil;
 
 /**
@@ -91,7 +91,8 @@ public class PersonListPanelHandle extends GuiHandle {
 
         // Return false if any of the persons doesn't match
         for (int i = 0; i < persons.length; i++) {
-            if (!personsInList.get(startPosition + i).getDescription().description.equals(persons[i].getDescription().description)) {
+            int x = startPosition + i;
+            if (!personsInList.get(x).getDescription().description.equals(persons[i].getDescription().description)) {
                 return false;
             }
         }

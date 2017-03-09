@@ -8,12 +8,11 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Email;
 import seedu.address.model.task.Description;
-import seedu.address.model.task.Task;
+import seedu.address.model.task.Email;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
-
+import seedu.address.model.task.Task;
 /**
  * JAXB-friendly version of the Task.
  */
@@ -46,7 +45,7 @@ public class XmlAdaptedPerson {
     public XmlAdaptedPerson(ReadOnlyTask source) {
         name = source.getDescription().description;
         phone = source.getPriority().value;
-        email = source.getEmail().value;
+        email = source.getDate().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));

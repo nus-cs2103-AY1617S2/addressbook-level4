@@ -7,11 +7,11 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Email;
 import seedu.address.model.task.Description;
-import seedu.address.model.task.Task;
+import seedu.address.model.task.Email;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
@@ -78,7 +78,7 @@ public class EditCommand extends Command {
 
         Description updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getDescription);
         Priority updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPriority);
-        Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
+        Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getDate);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
         return new Task(updatedName, updatedPhone, updatedEmail, updatedTags);
