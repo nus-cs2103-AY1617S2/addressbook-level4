@@ -353,9 +353,9 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | find a task by keyword | search for specific task especially when the list is huge
 `* * *` | user | change the due time of a task | set the due time of a task to a new one
 `* *` | user | edit a task | edit a task if there are any changes
-`* *` | user | clear all tasks | when I want to stop using the app
+`* *` | user | clear all tasks | start from a clean slate
 `* *` | user | list all tasks | see all tasks at one glance and consider if I want to make any adjustment
-`* *` | user | undo most recent changes | revert back to original state(ie if i remove something, it will be unremoved; if i added something, it will be removed.
+`* *` | user | undo most recent changes | revert back to original state(ie if i remove something, it will be unremoved; if i added something, it will be removed.)
 `*` | user | categorise my tasks(eg deadlines, events, floating tasks) | easily search for the specific task type
 `*` | user | prioritize my tasks | be reminded about the importance of a certain task among other tasks
 
