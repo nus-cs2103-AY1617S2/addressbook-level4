@@ -46,11 +46,11 @@ public class TestTask implements ReadOnlyTask {
     public void setPriorityLevel(PriorityLevel priorityLevel) {
         this.priorityLevel = priorityLevel;
     }
-    
+
     public void setStartDateTime(DateTime startDateTime) {
         this.startDateTime = startDateTime;
     }
-    
+
     public void setEndDateTime(DateTime endDateTime) {
         this.endDateTime = endDateTime;
     }
@@ -73,12 +73,12 @@ public class TestTask implements ReadOnlyTask {
     public DateTime getStartDateTime() {
         return startDateTime;
     }
-    
+
     @Override
     public DateTime getEndDateTime() {
         return endDateTime;
     }
-    
+
     @Override
     public Information getInformation() {
         return information;
