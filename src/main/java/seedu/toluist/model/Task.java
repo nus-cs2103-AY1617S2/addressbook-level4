@@ -52,8 +52,19 @@ public class Task implements Comparable<Task> {
                 && this.isCompleted == ((Task) other).isCompleted;
     }
 
-    public void addTag(Tag tag) {
-        this.allTags.add(tag);
+    public boolean addTag(Tag tag) {
+        boolean isDifferent = true;
+        for (Tag t : this.allTags) {
+            if (tag.equals(t)) {
+                isDifferent = false;
+            }
+        }
+        
+        if (isDifferent) {
+            this.allTags.add(tag);
+        }
+        
+        return isDifferent;
     }
 
     public void removeTag(Tag tag) {
