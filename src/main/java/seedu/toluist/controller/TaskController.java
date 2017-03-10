@@ -37,7 +37,7 @@ public abstract class TaskController extends Controller {
         this.commandTemplate = commandTemplate;
     }
 
-    public HashMap<String, String> tokenize(String commandArgs, Boolean hasIndex, Boolean hasDescription) {
+    public HashMap<String, String> tokenize(String commandArgs, boolean hasIndex, boolean hasDescription) {
         Pattern pattern = Pattern.compile(commandTemplate);
         Matcher matcher = pattern.matcher(commandArgs.trim());
         matcher.find();

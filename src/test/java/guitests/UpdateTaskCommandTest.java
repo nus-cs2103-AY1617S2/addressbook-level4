@@ -20,7 +20,7 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
         Task task = new TypicalTestTodoLists().getTypicalTasks()[0];
         String newDescription = "do homework for Melvin";
         String command = "update 1 " + newDescription;
-        task.description = newDescription;
+        task.setDescription(newDescription);
         commandBox.runCommand(command);
         assertFalse(isTaskShown(new TypicalTestTodoLists().getTypicalTasks()[0]));
         assertTrue(isTaskShown(task));

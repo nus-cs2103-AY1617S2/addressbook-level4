@@ -24,7 +24,7 @@ public class DeleteTaskCommandTest extends ToLuistGuiTest {
     }
 
     @Test
-    public void deleteManyTasksIndivudally() {
+    public void deleteManyTasksIndividually() {
         // Start with empty list
         commandBox.runCommand("delete 2");
         commandBox.runCommand("delete 1");

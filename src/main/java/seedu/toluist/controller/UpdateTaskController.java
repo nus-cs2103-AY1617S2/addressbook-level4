@@ -57,12 +57,12 @@ public class UpdateTaskController extends TaskController {
     private CommandResult update(Task task, String description,
             LocalDateTime startDateTime, LocalDateTime endDateTime) {
         if (!description.isEmpty()) {
-            task.description = description;
+            task.setDescription(description);
         }
         if (endDateTime != null) {
-            task.endDateTime = endDateTime;
+            task.setEndDateTime(endDateTime);
             if (startDateTime != null) {
-                task.startDateTime = startDateTime;
+                task.setStartDateTime(startDateTime);
             }
         }
         return new CommandResult(RESULT_MESSAGE_UPDATE_TASK);
