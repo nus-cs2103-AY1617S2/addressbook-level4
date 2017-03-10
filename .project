@@ -22,11 +22,6 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>docs/images/UserInterface.png</name>
-			<type>1</type>
-			<location>C:/Users/admin/Documents/GithubRepo/main/docs/images/UserInterface.png</location>
-		</link>
-		<link>
 			<name>src/main/resources/images/task_manager.png</name>
 			<type>1</type>
 			<location>C:/Users/admin/Documents/GithubRepo/main/src/main/resources/images/task_manager.png</location>
