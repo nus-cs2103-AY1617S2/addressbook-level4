@@ -15,10 +15,9 @@ import seedu.doit.logic.commands.CommandResult;
 import seedu.doit.logic.commands.exceptions.CommandException;
 
 public class CommandBox extends UiPart<Region> {
-    private final Logger logger = LogsCenter.getLogger(CommandBox.class);
-    private static final String FXML = "CommandBox.fxml";
     public static final String ERROR_STYLE_CLASS = "error";
-
+    private static final String FXML = "CommandBox.fxml";
+    private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private final Logic logic;
 
     @FXML

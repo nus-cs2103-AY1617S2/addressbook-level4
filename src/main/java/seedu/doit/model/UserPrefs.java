@@ -11,16 +11,16 @@ public class UserPrefs {
 
     public GuiSettings guiSettings;
 
+    public UserPrefs() {
+        this.setGuiSettings(500, 500, 0, 0);
+    }
+
     public GuiSettings getGuiSettings() {
         return guiSettings == null ? new GuiSettings() : guiSettings;
     }
 
     public void updateLastUsedGuiSetting(GuiSettings guiSettings) {
         this.guiSettings = guiSettings;
-    }
-
-    public UserPrefs() {
-        this.setGuiSettings(500, 500, 0, 0);
     }
 
     public void setGuiSettings(double width, double height, int x, int y) {

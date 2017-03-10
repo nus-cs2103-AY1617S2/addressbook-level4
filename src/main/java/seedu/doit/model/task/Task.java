@@ -36,19 +36,14 @@ public class Task implements ReadOnlyTask {
         this(source.getName(), source.getPriority(), source.getDeadline(), source.getDescription(), source.getTags());
     }
 
-    public void setName(Name name) {
-        assert name != null;
-        this.name = name;
-    }
-
     @Override
     public Name getName() {
         return name;
     }
 
-    public void setPriority(Priority priority) {
-        assert priority != null;
-        this.priority = priority;
+    public void setName(Name name) {
+        assert name != null;
+        this.name = name;
     }
 
     @Override
@@ -56,23 +51,28 @@ public class Task implements ReadOnlyTask {
         return priority;
     }
 
-    public void setDeadline(Deadline deadline) {
-        assert deadline != null;
-        this.deadline = deadline;
+    public void setPriority(Priority priority) {
+        assert priority != null;
+        this.priority = priority;
     }
 
     public Deadline getDeadline() {
         return deadline;
     }
 
-    public void setDescription(Description description) {
-        assert description != null;
-        this.description = description;
+    public void setDeadline(Deadline deadline) {
+        assert deadline != null;
+        this.deadline = deadline;
     }
 
     @Override
     public Description getDescription() {
         return description;
+    }
+
+    public void setDescription(Description description) {
+        assert description != null;
+        this.description = description;
     }
 
     @Override
@@ -103,8 +103,8 @@ public class Task implements ReadOnlyTask {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ReadOnlyTask // instanceof handles nulls
-                && this.isSameStateAs((ReadOnlyTask) other));
+            || (other instanceof ReadOnlyTask // instanceof handles nulls
+            && this.isSameStateAs((ReadOnlyTask) other));
     }
 
     @Override

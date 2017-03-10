@@ -9,19 +9,23 @@ import java.util.Optional;
 
 /**
  * Tokenizes arguments string of the form: {@code preamble <prefix>value <prefix>value ...}<br>
- *     e.g. {@code some preamble text /t 11.00/dToday /t 12.00 /k /m July}  where prefixes are {@code /t /d /k /m}.<br>
+ * e.g. {@code some preamble text /t 11.00/dToday /t 12.00 /k /m July}  where prefixes are {@code /t /d /k /m}.<br>
  * 1. An argument's value can be an empty string e.g. the value of {@code /k} in the above example.<br>
  * 2. Leading and trailing whitespaces of an argument value will be discarded.<br>
  * 3. A prefix need not have leading and trailing spaces e.g. the {@code /d in 11.00/dToday} in the above example<br>
  * 4. An argument may be repeated and all its values will be accumulated e.g. the value of {@code /t}
- *    in the above example.<br>
+ * in the above example.<br>
  */
 public class ArgumentTokenizer {
 
-    /** Given prefixes **/
+    /**
+     * Given prefixes
+     **/
     private final List<Prefix> prefixes;
 
-    /** Arguments found after tokenizing **/
+    /**
+     * Arguments found after tokenizing
+     **/
     private final Map<Prefix, List<String>> tokenizedArguments = new HashMap<>();
 
     /**
@@ -60,7 +64,7 @@ public class ArgumentTokenizer {
 
     /**
      * Returns the preamble (text before the first valid prefix), if any. Leading/trailing spaces will be trimmed.
-     *     If the string before the first prefix is empty, Optional.empty() will be returned.
+     * If the string before the first prefix is empty, Optional.empty() will be returned.
      */
     public Optional<String> getPreamble() {
 
@@ -109,6 +113,7 @@ public class ArgumentTokenizer {
 
     /**
      * Extracts the preamble/arguments and stores them in local variables.
+     *
      * @param prefixPositions must contain all prefixes in the {@code argsString}
      */
     private void extractArguments(String argsString, List<PrefixPosition> prefixPositions) {
@@ -134,7 +139,7 @@ public class ArgumentTokenizer {
 
     /**
      * Returns the trimmed value of the argument specified by {@code currentPrefixPosition}.
-     *    The end position of the value is determined by {@code nextPrefixPosition}
+     * The end position of the value is determined by {@code nextPrefixPosition}
      */
     private String extractArgumentValue(String argsString,
                                         PrefixPosition currentPrefixPosition,
@@ -199,8 +204,8 @@ public class ArgumentTokenizer {
      * Represents a prefix's position in an arguments string
      */
     private class PrefixPosition {
-        private int startPosition;
         private final Prefix prefix;
+        private int startPosition;
 
         PrefixPosition(Prefix prefix, int startPosition) {
             this.prefix = prefix;

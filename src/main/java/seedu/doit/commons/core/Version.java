@@ -29,6 +29,26 @@ public class Version implements Comparable<Version> {
         this.isEarlyAccess = isEarlyAccess;
     }
 
+    /**
+     * Parses a version number string in the format V1.2.3.
+     *
+     * @param versionString version number string
+     * @return a Version object
+     */
+    @JsonCreator
+    public static Version fromString(String versionString) throws IllegalArgumentException {
+        Matcher versionMatcher = VERSION_PATTERN.matcher(versionString);
+
+        if (!versionMatcher.find()) {
+            throw new IllegalArgumentException(String.format(EXCEPTION_STRING_NOT_VERSION, versionString));
+        }
+
+        return new Version(Integer.parseInt(versionMatcher.group(1)),
+            Integer.parseInt(versionMatcher.group(2)),
+            Integer.parseInt(versionMatcher.group(3)),
+            versionMatcher.group(4) == null ? false : true);
+    }
+
     public int getMajor() {
         return major;
     }
@@ -45,25 +65,6 @@ public class Version implements Comparable<Version> {
         return isEarlyAccess;
     }
 
-    /**
-     * Parses a version number string in the format V1.2.3.
-     * @param versionString version number string
-     * @return a Version object
-     */
-    @JsonCreator
-    public static Version fromString(String versionString) throws IllegalArgumentException {
-        Matcher versionMatcher = VERSION_PATTERN.matcher(versionString);
-
-        if (!versionMatcher.find()) {
-            throw new IllegalArgumentException(String.format(EXCEPTION_STRING_NOT_VERSION, versionString));
-        }
-
-        return new Version(Integer.parseInt(versionMatcher.group(1)),
-                Integer.parseInt(versionMatcher.group(2)),
-                Integer.parseInt(versionMatcher.group(3)),
-                versionMatcher.group(4) == null ? false : true);
-    }
-
     @JsonValue
     public String toString() {
         return String.format("V%d.%d.%d%s", major, minor, patch, isEarlyAccess ? "ea" : "");
@@ -72,10 +73,10 @@ public class Version implements Comparable<Version> {
     @Override
     public int compareTo(Version other) {
         return this.major != other.major ? this.major - other.major :
-               this.minor != other.minor ? this.minor - other.minor :
-               this.patch != other.patch ? this.patch - other.patch :
-               this.isEarlyAccess == other.isEarlyAccess() ? 0 :
-               this.isEarlyAccess ? -1 : 1;
+            this.minor != other.minor ? this.minor - other.minor :
+                this.patch != other.patch ? this.patch - other.patch :
+                    this.isEarlyAccess == other.isEarlyAccess() ? 0 :
+                        this.isEarlyAccess ? -1 : 1;
     }
 
     @Override

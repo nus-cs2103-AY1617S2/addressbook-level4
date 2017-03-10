@@ -16,7 +16,7 @@ import org.testfx.api.FxToolkit;
 
 import com.google.common.io.Files;
 
-import guitests.guihandles.taskCardHandle;
+import guitests.guihandles.TaskCardHandle;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -32,7 +32,12 @@ import seedu.doit.commons.util.XmlUtil;
 import seedu.doit.model.TaskManager;
 import seedu.doit.model.tag.Tag;
 import seedu.doit.model.tag.UniqueTagList;
-import seedu.doit.model.task.*;
+import seedu.doit.model.task.Deadline;
+import seedu.doit.model.task.Description;
+import seedu.doit.model.task.Name;
+import seedu.doit.model.task.Priority;
+import seedu.doit.model.task.ReadOnlyTask;
+import seedu.doit.model.task.Task;
 import seedu.doit.storage.XmlSerializableTaskManager;
 
 /**
@@ -59,17 +64,17 @@ public class TestUtil {
                 return;
             }
             String message = String.format("Expected thrown: %s, actual: %s", expected.getName(),
-                    actualException.getClass().getName());
+                actualException.getClass().getName());
             throw new AssertionFailedError(message);
         }
         throw new AssertionFailedError(
-                String.format("Expected %s to be thrown, but nothing was thrown.", expected.getName()));
+            String.format("Expected %s to be thrown, but nothing was thrown.", expected.getName()));
     }
 
     private static Task[] getSampleTaskData() {
         try {
             //CHECKSTYLE.OFF: LineLength
-            return new Task[]{
+            return new Task[] {
                 new Task(new Name("Ali Muster"), new Priority("9482424"), new Deadline("hans@google.com"), new Description("4th street"), new UniqueTagList()),
                 new Task(new Name("Boris Mueller"), new Priority("87249245"), new Deadline("ruth@google.com"), new Description("81th street"), new UniqueTagList()),
                 new Task(new Name("Carl Kurz"), new Priority("95352563"), new Deadline("heinz@yahoo.com"), new Description("wall street"), new UniqueTagList()),
@@ -91,7 +96,7 @@ public class TestUtil {
 
     private static Tag[] getSampleTagData() {
         try {
-            return new Tag[]{
+            return new Tag[] {
                 new Tag("relatives"),
                 new Tag("friends")
             };
@@ -109,6 +114,7 @@ public class TestUtil {
     /**
      * Appends the file name to the sandbox folder path.
      * Creates the sandbox folder if it doesn't exist.
+     *
      * @param fileName
      * @return
      */
@@ -162,7 +168,7 @@ public class TestUtil {
             keys.add(KeyCode.CONTROL);
         }
         keys.add(keyCodeCombination.getCode());
-        return keys.toArray(new KeyCode[]{});
+        return keys.toArray(new KeyCode[] {});
     }
 
     public static boolean isHeadlessEnvironment() {
@@ -181,13 +187,13 @@ public class TestUtil {
 
     public static String descOnFail(Object... comparedObjects) {
         return "Comparison failed \n"
-                + Arrays.asList(comparedObjects).stream()
-                .map(Object::toString)
-                .collect(Collectors.joining("\n"));
+            + Arrays.asList(comparedObjects).stream()
+            .map(Object::toString)
+            .collect(Collectors.joining("\n"));
     }
 
     public static void setFinalStatic(Field field, Object newValue) throws NoSuchFieldException,
-                                                                           IllegalAccessException {
+        IllegalAccessException {
         field.setAccessible(true);
         // remove final modifier from field
         Field modifiersField = Field.class.getDeclaredField("modifiers");
@@ -210,7 +216,7 @@ public class TestUtil {
     /**
      * Gets private method of a class
      * Invoke the method using method.invoke(objectInstance, params...)
-     *
+     * <p>
      * Caveat: only find method declared in the current Class, not inherited from supertypes
      */
     public static Method getPrivateMethod(Class<?> objectClass, String methodName) throws NoSuchMethodException {
@@ -229,6 +235,7 @@ public class TestUtil {
 
     /**
      * Gets mid point of a node relative to the screen.
+     *
      * @param node
      * @return
      */
@@ -240,6 +247,7 @@ public class TestUtil {
 
     /**
      * Gets mid point of a node relative to its scene.
+     *
      * @param node
      * @return
      */
@@ -251,6 +259,7 @@ public class TestUtil {
 
     /**
      * Gets the bound of the node relative to the parent scene.
+     *
      * @param node
      * @return
      */
@@ -276,7 +285,8 @@ public class TestUtil {
 
     /**
      * Removes a subset from the list of tasks.
-     * @param tasks The list of tasks
+     *
+     * @param tasks         The list of tasks
      * @param tasksToRemove The subset of tasks.
      * @return The modified tasks after removal of the subset from tasks.
      */
@@ -289,7 +299,8 @@ public class TestUtil {
 
     /**
      * Returns a copy of the list with the task at specified index removed.
-     * @param list original list to copy from
+     *
+     * @param list                          original list to copy from
      * @param targetIndexInOneIndexedFormat e.g. index 1 if the first element is to be removed
      */
     public static TestTask[] removeTaskFromList(final TestTask[] list, int targetIndexInOneIndexedFormat) {
@@ -298,8 +309,9 @@ public class TestUtil {
 
     /**
      * Replaces tasks[i] with a task.
+     *
      * @param tasks The array of tasks.
-     * @param task The replacement task
+     * @param task  The replacement task
      * @param index The index of the task to be replaced.
      * @return
      */
@@ -310,7 +322,8 @@ public class TestUtil {
 
     /**
      * Appends tasks to the array of tasks.
-     * @param tasks A array of tasks.
+     *
+     * @param tasks      A array of tasks.
      * @param tasksToAdd The tasks that are to be appended behind the original array.
      * @return The modified array of tasks.
      */
@@ -328,13 +341,13 @@ public class TestUtil {
         return list;
     }
 
-    public static boolean compareCardAndTask(taskCardHandle card, ReadOnlyTask task) {
+    public static boolean compareCardAndTask(TaskCardHandle card, ReadOnlyTask task) {
         return card.isSameTask(task);
     }
 
     public static Tag[] getTagList(String tags) {
         if ("".equals(tags)) {
-            return new Tag[]{};
+            return new Tag[] {};
         }
 
         final String[] split = tags.split(", ");

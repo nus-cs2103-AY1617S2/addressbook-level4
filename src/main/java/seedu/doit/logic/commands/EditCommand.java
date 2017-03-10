@@ -7,7 +7,13 @@ import seedu.doit.commons.core.Messages;
 import seedu.doit.commons.util.CollectionUtil;
 import seedu.doit.logic.commands.exceptions.CommandException;
 import seedu.doit.model.tag.UniqueTagList;
-import seedu.doit.model.task.*;
+import seedu.doit.model.task.Deadline;
+import seedu.doit.model.task.Description;
+import seedu.doit.model.task.Name;
+import seedu.doit.model.task.Priority;
+import seedu.doit.model.task.ReadOnlyTask;
+import seedu.doit.model.task.Task;
+import seedu.doit.model.task.UniqueTaskList;
 
 /**
  * Edits the details of an existing task in the task manager.
@@ -17,10 +23,11 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
-            + "by the index number used in the last task list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer)  [TASK NAME] [p/PRIORITY]  [e/END DATE]  [d/ADDITIONAL DESCRIPTION] [t/TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 p/1 e/15-3-2020 23:59";
+        + "by the index number used in the last task list. "
+        + "Existing values will be overwritten by the input values.\n"
+        + "Parameters: INDEX (must be a positive integer) [TASK NAME] [p/PRIORITY] [e/END DATE] "
+        + "[d/ADDITIONAL DESCRIPTION] [t/TAG]...\n"
+        + "Example: " + COMMAND_WORD + " 1 p/1 e/15-3-2020 23:59";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -31,7 +38,7 @@ public class EditCommand extends Command {
 
     /**
      * @param filteredTaskListIndex the index of the task in the filtered task list to edit
-     * @param editTaskDescriptor details to edit the task with
+     * @param editTaskDescriptor    details to edit the task with
      */
     public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
         assert filteredTaskListIndex > 0;
@@ -41,6 +48,23 @@ public class EditCommand extends Command {
         this.filteredTaskListIndex = filteredTaskListIndex - 1;
 
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
+    }
+
+    /**
+     * Creates and returns a {@code Task} with the details of {@code taskToEdit}
+     * edited with {@code editTaskDescriptor}.
+     */
+    private static Task createEditedTask(ReadOnlyTask taskToEdit,
+                                         EditTaskDescriptor editTaskDescriptor) {
+        assert taskToEdit != null;
+
+        Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
+        Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
+        Deadline updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(taskToEdit::getDeadline);
+        Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
+        UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
+
+        return new Task(updatedName, updatedPriority, updatedDeadline, updatedDescription, updatedTags);
     }
 
     @Override
@@ -64,23 +88,6 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Task} with the details of {@code taskToEdit}
-     * edited with {@code editTaskDescriptor}.
-     */
-    private static Task createEditedTask(ReadOnlyTask taskToEdit,
-                                         EditTaskDescriptor editTaskDescriptor) {
-        assert taskToEdit != null;
-
-        Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
-        Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
-        Deadline updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(taskToEdit::getDeadline);
-        Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
-        UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
-
-        return new Task(updatedName, updatedPriority, updatedDeadline, updatedDescription, updatedTags);
-    }
-
-    /**
      * Stores the details to edit the task with. Each non-empty field value will replace the
      * corresponding field value of the task.
      */
@@ -91,7 +98,8 @@ public class EditCommand extends Command {
         private Optional<Description> description = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
-        public EditTaskDescriptor() {}
+        public EditTaskDescriptor() {
+        }
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.name = toCopy.getName();
@@ -108,13 +116,17 @@ public class EditCommand extends Command {
             return CollectionUtil.isAnyPresent(this.name, this.priority, this.deadline, this.description, this.tags);
         }
 
+        public Optional<Name> getName() {
+            return name;
+        }
+
         public void setName(Optional<Name> name) {
             assert name != null;
             this.name = name;
         }
 
-        public Optional<Name> getName() {
-            return name;
+        public Optional<Priority> getPriority() {
+            return priority;
         }
 
         public void setPriority(Optional<Priority> priority) {
@@ -122,8 +134,8 @@ public class EditCommand extends Command {
             this.priority = priority;
         }
 
-        public Optional<Priority> getPriority() {
-            return priority;
+        public Optional<Deadline> getDeadline() {
+            return deadline;
         }
 
         public void setDeadline(Optional<Deadline> deadline) {
@@ -131,8 +143,8 @@ public class EditCommand extends Command {
             this.deadline = deadline;
         }
 
-        public Optional<Deadline> getDeadline() {
-            return deadline;
+        public Optional<Description> getDescription() {
+            return description;
         }
 
         public void setDescription(Optional<Description> description) {
@@ -140,17 +152,13 @@ public class EditCommand extends Command {
             this.description = description;
         }
 
-        public Optional<Description> getDescription() {
-            return description;
+        public Optional<UniqueTagList> getTags() {
+            return tags;
         }
 
         public void setTags(Optional<UniqueTagList> tags) {
             assert tags != null;
             this.tags = tags;
-        }
-
-        public Optional<UniqueTagList> getTags() {
-            return tags;
         }
     }
 }

@@ -12,13 +12,16 @@ import java.util.stream.Stream;
  */
 public class CollectionUtil {
 
-    /** @see #isAnyNull(Collection) */
+    /**
+     * @see #isAnyNull(Collection)
+     */
     public static boolean isAnyNull(Object... items) {
         return Stream.of(items).anyMatch(Objects::isNull);
     }
 
     /**
      * Returns true if any element of {@code items} is null.
+     *
      * @throws NullPointerException if {@code items} itself is null.
      */
     public static boolean isAnyNull(Collection<?> items) {

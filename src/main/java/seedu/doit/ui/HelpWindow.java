@@ -15,32 +15,30 @@ import seedu.doit.commons.util.FxViewUtil;
  */
 public class HelpWindow extends UiPart<Region> {
 
-	private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
-	private static final String ICON = "/images/help_icon.png";
-	private static final String FXML = "HelpWindow.fxml";
-	private static final String TITLE = "Help";
-	private static final String USERGUIDE_URL =
-			"https://github.com/CS2103JAN2017-W14-B3/main/blob/master/docs/UserGuide.md";
+    private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
+    private static final String ICON = "/images/help_icon.png";
+    private static final String FXML = "HelpWindow.fxml";
+    private static final String TITLE = "Help";
+    private static final String USERGUIDE_URL =
+        "https://github.com/CS2103JAN2017-W14-B3/main/blob/master/docs/UserGuide.md";
+    private final Stage dialogStage;
+    @FXML
+    private WebView browser;
 
-	@FXML
-	private WebView browser;
+    public HelpWindow() {
+        super(FXML);
+        Scene scene = new Scene(getRoot());
+        //Null passed as the parent stage to make it non-modal.
+        this.dialogStage = createDialogStage(TITLE, null, scene);
+        this.dialogStage.setMaximized(true); //TODO: set a more appropriate initial size
+        FxViewUtil.setStageIcon(this.dialogStage, ICON);
 
-	private final Stage dialogStage;
+        this.browser.getEngine().load(USERGUIDE_URL);
+        FxViewUtil.applyAnchorBoundaryParameters(this.browser, 0.0, 0.0, 0.0, 0.0);
+    }
 
-	public HelpWindow() {
-		super(FXML);
-		Scene scene = new Scene(getRoot());
-		//Null passed as the parent stage to make it non-modal.
-		this.dialogStage = createDialogStage(TITLE, null, scene);
-		this.dialogStage.setMaximized(true); //TODO: set a more appropriate initial size
-		FxViewUtil.setStageIcon(this.dialogStage, ICON);
-
-		this.browser.getEngine().load(USERGUIDE_URL);
-		FxViewUtil.applyAnchorBoundaryParameters(this.browser, 0.0, 0.0, 0.0, 0.0);
-	}
-
-	public void show() {
-		logger.fine("Showing help page about the application.");
-		this.dialogStage.showAndWait();
-	}
+    public void show() {
+        logger.fine("Showing help page about the application.");
+        this.dialogStage.showAndWait();
+    }
 }

@@ -33,29 +33,13 @@ public class TestTask implements ReadOnlyTask {
         this.tags = taskToCopy.getTags();
     }
 
-    public void setName(Name name) {
-        this.name = name;
-    }
-
-    public void setDescription(Description description) {
-        this.description = description;
-    }
-
-    public void setDeadline(Deadline deadline) {
-        this.deadline = deadline;
-    }
-
-    public void setPriority(Priority priority) {
-        this.priority = priority;
-    }
-
-    public void setTags(UniqueTagList tags) {
-        this.tags = tags;
-    }
-
     @Override
     public Name getName() {
         return name;
+    }
+
+    public void setName(Name name) {
+        this.name = name;
     }
 
     @Override
@@ -63,8 +47,16 @@ public class TestTask implements ReadOnlyTask {
         return priority;
     }
 
+    public void setPriority(Priority priority) {
+        this.priority = priority;
+    }
+
     public Deadline getDeadline() {
         return deadline;
+    }
+
+    public void setDeadline(Deadline deadline) {
+        this.deadline = deadline;
     }
 
     @Override
@@ -72,9 +64,17 @@ public class TestTask implements ReadOnlyTask {
         return description;
     }
 
+    public void setDescription(Description description) {
+        this.description = description;
+    }
+
     @Override
     public UniqueTagList getTags() {
         return tags;
+    }
+
+    public void setTags(UniqueTagList tags) {
+        this.tags = tags;
     }
 
     @Override

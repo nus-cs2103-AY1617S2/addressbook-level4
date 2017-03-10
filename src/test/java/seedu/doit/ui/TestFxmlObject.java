@@ -11,7 +11,8 @@ public class TestFxmlObject {
 
     private String text;
 
-    public TestFxmlObject() {}
+    public TestFxmlObject() {
+    }
 
     public TestFxmlObject(String text) {
         setText(text);
@@ -28,8 +29,8 @@ public class TestFxmlObject {
     @Override
     public boolean equals(Object other) {
         return other == this ||
-                (other instanceof TestFxmlObject
-                        && this.text.equals(((TestFxmlObject) other).getText()));
+            (other instanceof TestFxmlObject
+                && this.text.equals(((TestFxmlObject) other).getText()));
     }
 
 }

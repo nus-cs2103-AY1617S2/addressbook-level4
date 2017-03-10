@@ -16,9 +16,10 @@ import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainGuiHandle;
 import guitests.guihandles.MainMenuHandle;
-import guitests.guihandles.taskCardHandle;
-import guitests.guihandles.TaskListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
+import guitests.guihandles.TaskCardHandle;
+import guitests.guihandles.TaskListPanelHandle;
+
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import seedu.doit.TestApp;
@@ -37,11 +38,7 @@ public abstract class TaskManagerGuiTest {
     /* The TestName Rule makes the current test name available inside test methods */
     @Rule
     public TestName name = new TestName();
-
-    TestApp testApp;
-
     protected TypicalTestTasks td = new TypicalTestTasks();
-
     /*
      *   Handles to GUI elements present at the start up are created in advance
      *   for easy access from child classes.
@@ -52,6 +49,7 @@ public abstract class TaskManagerGuiTest {
     protected ResultDisplayHandle resultDisplay;
     protected CommandBoxHandle commandBox;
     protected BrowserPanelHandle browserPanel;
+    TestApp testApp;
     private Stage stage;
 
     @BeforeClass
@@ -78,7 +76,7 @@ public abstract class TaskManagerGuiTest {
         EventsCenter.clearSubscribers();
         testApp = (TestApp) FxToolkit.setupApplication(() -> new TestApp(this::getInitialData, getDataFileLocation()));
         FxToolkit.showStage();
-        while (!stage.isShowing());
+        while (!stage.isShowing()) ;
         mainGui.focusOnMainApp();
     }
 
@@ -107,7 +105,7 @@ public abstract class TaskManagerGuiTest {
     /**
      * Asserts the task shown in the card is same as the given task
      */
-    public void assertMatching(ReadOnlyTask task, taskCardHandle card) {
+    public void assertMatching(ReadOnlyTask task, TaskCardHandle card) {
         assertTrue(TestUtil.compareCardAndTask(card, task));
     }
 

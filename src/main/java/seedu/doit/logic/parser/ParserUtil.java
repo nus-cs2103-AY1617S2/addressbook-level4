@@ -56,18 +56,20 @@ public class ParserUtil {
     }
 
     /**
-    * Splits a preamble string into ordered fields.
-    * @return A list of size {@code numFields} where the ith element is the ith field value if specified in
-    *         the input, {@code Optional.empty()} otherwise.
-    */
+     * Splits a preamble string into ordered fields.
+     *
+     * @return A list of size {@code numFields} where the ith element is the ith field value if specified in
+     * the input, {@code Optional.empty()} otherwise.
+     */
     public static List<Optional<String>> splitPreamble(String preamble, int numFields) {
         return Arrays.stream(Arrays.copyOf(preamble.split("\\s+", numFields), numFields))
-                .map(Optional::ofNullable)
-                .collect(Collectors.toList());
+            .map(Optional::ofNullable)
+            .collect(Collectors.toList());
     }
 
     /**
-     * Parses a {@code Optional<String> name} into an {@code Optional<Name>} if {@code name} is present.
+     * Parses a {@code Optional<String> name} into an {@code Optional<Name>}
+     * if {@code name} is present.
      */
     public static Optional<Name> parseName(Optional<String> name) throws IllegalValueException {
         assert name != null;
@@ -75,7 +77,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> priority} into an {@code Optional<Priority>} if {@code priority} is present.
+     * Parses a {@code Optional<String> priority} into an {@code Optional<Priority>}
+     * if {@code priority} is present.
      */
     public static Optional<Priority> parsePriority(Optional<String> priority) throws IllegalValueException {
         assert priority != null;
@@ -83,7 +86,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> description} into an {@code Optional<Description>} if {@code description} is present.
+     * Parses a {@code Optional<String> description} into an {@code Optional<Description>}
+     * if {@code description} is present.
      */
     public static Optional<Description> parseDescription(Optional<String> description) throws IllegalValueException {
         assert description != null;
@@ -91,7 +95,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> deadline} into an {@code Optional<Deadline>} if {@code deadline} is present.
+     * Parses a {@code Optional<String> deadline} into an {@code Optional<Deadline>}
+     * if {@code deadline} is present.
      */
     public static Optional<Deadline> parseDeadline(Optional<String> deadline) throws IllegalValueException {
         assert deadline != null;

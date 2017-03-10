@@ -1,6 +1,5 @@
 package seedu.doit.storage;
 
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
@@ -16,7 +15,6 @@ import org.junit.rules.TemporaryFolder;
 import seedu.doit.commons.exceptions.DataConversionException;
 import seedu.doit.commons.util.FileUtil;
 import seedu.doit.model.UserPrefs;
-import seedu.doit.storage.JsonUserPrefsStorage;
 
 public class JsonUserPrefsStorageTest {
 
@@ -56,8 +54,8 @@ public class JsonUserPrefsStorageTest {
 
     private String addToTestDataPathIfNotNull(String userPrefsFileInTestDataFolder) {
         return userPrefsFileInTestDataFolder != null
-                ? TEST_DATA_FOLDER + userPrefsFileInTestDataFolder
-                : null;
+            ? TEST_DATA_FOLDER + userPrefsFileInTestDataFolder
+            : null;
     }
 
     @Test
@@ -97,7 +95,7 @@ public class JsonUserPrefsStorageTest {
 
     private void saveUserPrefs(UserPrefs userPrefs, String prefsFileInTestDataFolder) throws IOException {
         new JsonUserPrefsStorage(addToTestDataPathIfNotNull(prefsFileInTestDataFolder))
-                .saveUserPrefs(userPrefs);
+            .saveUserPrefs(userPrefs);
     }
 
     @Test

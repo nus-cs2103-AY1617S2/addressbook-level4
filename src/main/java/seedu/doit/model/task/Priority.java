@@ -42,8 +42,8 @@ public class Priority {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Priority // instanceof handles nulls
-                && this.value.equals(((Priority) other).value)); // state check
+            || (other instanceof Priority // instanceof handles nulls
+            && this.value.equals(((Priority) other).value)); // state check
     }
 
     @Override

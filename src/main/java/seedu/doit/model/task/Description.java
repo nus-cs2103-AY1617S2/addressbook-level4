@@ -10,7 +10,7 @@ import seedu.doit.commons.exceptions.IllegalValueException;
 public class Description {
 
     public static final String MESSAGE_DESCRIPTION_CONSTRAINTS =
-            "Task description can take any values, and it should not be blank";
+        "Task description can take any values, and it should not be blank";
 
     /*
      * The first character of the description must not be a whitespace,
@@ -48,8 +48,8 @@ public class Description {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Description // instanceof handles nulls
-                && this.value.equals(((Description) other).value)); // state check
+            || (other instanceof Description // instanceof handles nulls
+            && this.value.equals(((Description) other).value)); // state check
     }
 
     @Override

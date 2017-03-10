@@ -39,8 +39,8 @@ public class XmlTaskManagerStorageTest {
 
     private String addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
         return prefsFileInTestDataFolder != null
-                ? TEST_DATA_FOLDER + prefsFileInTestDataFolder
-                : null;
+            ? TEST_DATA_FOLDER + prefsFileInTestDataFolder
+            : null;
     }
 
     @Test

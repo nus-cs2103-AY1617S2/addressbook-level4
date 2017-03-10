@@ -25,10 +25,9 @@ import seedu.doit.model.UserPrefs;
  * The manager of the UI component.
  */
 public class UiManager extends ComponentManager implements Ui {
+    public static final String ALERT_DIALOG_PANE_FIELD_ID = "alertDialogPane";
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
     private static final String ICON_APPLICATION = "/images/task_manager.png";
-    public static final String ALERT_DIALOG_PANE_FIELD_ID = "alertDialogPane";
-
     private Logic logic;
     private Config config;
     private UserPrefs prefs;
@@ -39,6 +38,22 @@ public class UiManager extends ComponentManager implements Ui {
         this.logic = logic;
         this.config = config;
         this.prefs = prefs;
+    }
+
+    private static void showAlertDialogAndWait(Stage owner, AlertType type, String title, String headerText,
+                                               String contentText) {
+        final Alert alert = new Alert(type);
+        alert.getDialogPane().getStylesheets().add("view/DarkTheme.css");
+        alert.initOwner(owner);
+        alert.setTitle(title);
+        alert.setHeaderText(headerText);
+        alert.setContentText(contentText);
+        alert.getDialogPane().setId(ALERT_DIALOG_PANE_FIELD_ID);
+        alert.showAndWait();
+    }
+
+    void showAlertDialogAndWait(Alert.AlertType type, String title, String headerText, String contentText) {
+        showAlertDialogAndWait(mainWindow.getPrimaryStage(), type, title, headerText, contentText);
     }
 
     @Override
@@ -76,21 +91,6 @@ public class UiManager extends ComponentManager implements Ui {
         return new Image(MainApp.class.getResourceAsStream(imagePath));
     }
 
-    void showAlertDialogAndWait(Alert.AlertType type, String title, String headerText, String contentText) {
-        showAlertDialogAndWait(mainWindow.getPrimaryStage(), type, title, headerText, contentText);
-    }
-
-    private static void showAlertDialogAndWait(Stage owner, AlertType type, String title, String headerText,
-                                               String contentText) {
-        final Alert alert = new Alert(type);
-        alert.getDialogPane().getStylesheets().add("view/DarkTheme.css");
-        alert.initOwner(owner);
-        alert.setTitle(title);
-        alert.setHeaderText(headerText);
-        alert.setContentText(contentText);
-        alert.getDialogPane().setId(ALERT_DIALOG_PANE_FIELD_ID);
-        alert.showAndWait();
-    }
 
     private void showFatalErrorDialogAndShutdown(String title, Throwable e) {
         logger.severe(title + " " + e.getMessage() + StringUtil.getDetails(e));

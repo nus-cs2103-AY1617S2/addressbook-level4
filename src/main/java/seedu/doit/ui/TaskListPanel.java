@@ -19,9 +19,8 @@ import seedu.doit.model.task.ReadOnlyTask;
  * Panel containing the list of tasks.
  */
 public class TaskListPanel extends UiPart<Region> {
-    private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
     private static final String FXML = "TaskListPanel.fxml";
-
+    private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
     @FXML
     private ListView<ReadOnlyTask> taskListView;
 
@@ -45,12 +44,12 @@ public class TaskListPanel extends UiPart<Region> {
 
     private void setEventHandlerForSelectionChangeEvent() {
         taskListView.getSelectionModel().selectedItemProperty()
-                .addListener((observable, oldValue, newValue) -> {
-                    if (newValue != null) {
-                        logger.fine("Selection in task list panel changed to : '" + newValue + "'");
-                        raise(new TaskPanelSelectionChangedEvent(newValue));
-                    }
-                });
+            .addListener((observable, oldValue, newValue) -> {
+                if (newValue != null) {
+                    logger.fine("Selection in task list panel changed to : '" + newValue + "'");
+                    raise(new TaskPanelSelectionChangedEvent(newValue));
+                }
+            });
     }
 
     public void scrollTo(int index) {
