@@ -80,20 +80,20 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();
     }
-    
-    public TaskManager getCopy(){
+
+    public TaskManager getCopy() {
         return taskManagerCopy;
     }
-    
-    public void updateCopy(ReadOnlyTaskManager newData){
+
+    public void updateCopy(ReadOnlyTaskManager newData) {
         taskManagerCopy = new TaskManager(newData);
     }
-    
-    public void clearCopy(){
+
+    public void clearCopy() {
         taskManagerCopy = new TaskManager(); // can change to delete all tasks once implemented
     }
-    
-    public boolean checkChanges(){
+
+    public boolean checkChanges() {
         return taskManagerCopy.isEmpty();
     }
 

@@ -14,14 +14,12 @@ public class UndoCommand extends Command {
     }
 
     public CommandResult execute() {
-        if(model.checkChanges()) {
-            return new CommandResult(MESSAGE_NO_CHANGE);            
-        }
-        else {
+        if (model.checkChanges()) {
+            return new CommandResult(MESSAGE_NO_CHANGE);
+        } else {
             model.resetData(model.getCopy());
             model.clearCopy();
-            return new CommandResult(MESSAGE_SUCCESS);            
+            return new CommandResult(MESSAGE_SUCCESS);
         }
-
     }
 }

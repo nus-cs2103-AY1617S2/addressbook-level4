@@ -118,9 +118,9 @@ public class TaskList implements Iterable<Task> {
      */
     public static class TaskNotFoundException extends Exception {}
 
-    // Checks if list is empty 
+    // Checks if list is empty
     public boolean isEmpty() {
-        if(internalList.isEmpty()){
+        if (internalList.isEmpty()) {
             return true;
         }
         return false;

@@ -175,10 +175,10 @@ public class TaskManager implements ReadOnlyTaskManager {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(tasks, tags);
     }
-    
+
     // Checks if task list is empty
-    public boolean isEmpty(){
-        if(this.tasks.isEmpty()){
+    public boolean isEmpty() {
+        if (this.tasks.isEmpty()) {
             return true;
         }
         return false;
