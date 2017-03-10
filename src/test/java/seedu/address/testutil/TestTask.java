@@ -32,15 +32,15 @@ public class TestTask implements ReadOnlyTask {
         this.tags = TaskToCopy.getTags();
     }
 
-    public void setName(Description description) {
+    public void setDescription(Description description) {
         this.description = description;
     }
 
-    public void setEmail(Email date) {
+    public void setDate(Email date) {
         this.date = date;
     }
 
-    public void setPhone(Priority priority) {
+    public void setPriority(Priority priority) {
         this.priority = priority;
     }
 
