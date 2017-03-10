@@ -2,12 +2,13 @@ package seedu.toluist.ui.view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import seedu.toluist.commons.util.DateFormatterUtil;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import seedu.toluist.commons.util.AppUtil;
+import seedu.toluist.commons.util.DateTimeFormatterUtil;
+import seedu.toluist.commons.util.DateTimeUtil;
 import seedu.toluist.commons.util.FxViewUtil;
-import seedu.toluist.model.Tag;
 import seedu.toluist.model.Task;
-
-import java.time.LocalDateTime;
 
 /**
  * View to display task row
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 public class TaskUiView extends UiView {
 
     private static final String FXML = "TaskView.fxml";
+    private static final String CLOCK_ICON_IMAGE_PATH = "/images/clock.png";
 
     @FXML
     private Label name;
@@ -22,6 +24,8 @@ public class TaskUiView extends UiView {
     private Label id;
     @FXML
     private Label date;
+    @FXML
+    private ImageView clockIcon;
 
     private Task task;
     private int displayedIndex;
@@ -36,12 +40,15 @@ public class TaskUiView extends UiView {
     @Override
     protected void viewDidMount() {
         FxViewUtil.makeFullWidth(getRoot());
-        name.setText(task.description);
+        name.setText(task.getDescription());
         id.setText(displayedIndex + ". ");
         if (task.isTask()) {
-            date.setText(DateFormatterUtil.formatTaskDeadline(task.getStartDateTime()));
+            date.setText(DateTimeFormatterUtil.formatTaskDeadline(task.getEndDateTime()));
         } else if (task.isEvent()) {
-            date.setText(DateFormatterUtil.formatEventRange(task.getStartDateTime(), task.getEndDateTime()));
+            date.setText(DateTimeFormatterUtil.formatEventRange(task.getStartDateTime(), task.getEndDateTime()));
+        }
+        if (task.isTask() || task.isEvent()) {
+            clockIcon.setImage(AppUtil.getImage(CLOCK_ICON_IMAGE_PATH));
         }
     }
 }

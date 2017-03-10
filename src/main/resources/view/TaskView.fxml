@@ -2,48 +2,45 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="60.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <GridPane alignment="CENTER_LEFT" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
-         <HBox.margin>
-            <Insets />
-         </HBox.margin>
-         <columnConstraints>
-            <ColumnConstraints hgrow="ALWAYS" />
-            <ColumnConstraints hgrow="ALWAYS" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-         </rowConstraints>
+      <FlowPane>
          <children>
-            <Label fx:id="id" minWidth="40.0" wrapText="true">
+            <Label fx:id="id" text="Label">
+               <FlowPane.margin>
+                  <Insets />
+               </FlowPane.margin>
                <font>
-                  <Font name="System Bold" size="20.0" />
-               </font></Label>
-            <VBox alignment="CENTER" GridPane.columnIndex="1">
-               <children>
-                  <Label fx:id="name" styleClass="cell_big_label" wrapText="true">
-                     <padding>
-                        <Insets right="20.0" />
-                     </padding>
-                     <font>
-                        <Font name="System Bold" size="20.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="name" maxWidth="450.0" text="Label" wrapText="true">
+               <FlowPane.margin>
+                  <Insets left="5.0" />
+               </FlowPane.margin>
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
          </children>
-      </GridPane>
+      </FlowPane>
       <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0">
          <children>
-            <Label fx:id="date" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0" />
+            <ImageView fx:id="clockIcon" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="date">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+            </Label>
          </children>
       </HBox>
    </children>

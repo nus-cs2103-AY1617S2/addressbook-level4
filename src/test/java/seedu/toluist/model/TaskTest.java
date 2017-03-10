@@ -29,7 +29,7 @@ public class TaskTest {
 
     @Test
     public void testConstruct_floatingTask() {
-        assertEquals(floatingTask.description, floatingTaskDescripion);
+        assertEquals(floatingTask.getDescription(), floatingTaskDescripion);
         assertSimilarTags(floatingTask, tag1);
     }
 

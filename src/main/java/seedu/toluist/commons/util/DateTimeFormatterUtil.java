@@ -6,13 +6,13 @@ import java.time.format.DateTimeFormatter;
 /**
  * A class to assist in formatting date
  */
-public class DateFormatterUtil {
+public class DateTimeFormatterUtil {
     public static final String TASK_DEADLINE = "by ";
     public static final String EVENT_TO = " to ";
     public static final String YESTERDAY = "yesterday";
     public static final String TODAY = "today";
     public static final String TOMORROW = "tomorrow";
-    public static final String FORMAT_DATE = "dd MMM";
+    public static final String FORMAT_DATE = "dd MMM yyy";
     public static final String FORMAT_TIME = "hh:mm a";
     public static final String DATE_TIME_SEPARATOR = ", ";
 
@@ -40,11 +40,11 @@ public class DateFormatterUtil {
     }
 
     public static String formatDate(LocalDateTime dateTime) {
-        if (DateUtil.isToday(dateTime)) {
+        if (DateTimeUtil.isToday(dateTime)) {
             return TODAY;
-        } else if (DateUtil.isTomorrow(dateTime)) {
+        } else if (DateTimeUtil.isTomorrow(dateTime)) {
             return TOMORROW;
-        } else if (DateUtil.isYesterday(dateTime)) {
+        } else if (DateTimeUtil.isYesterday(dateTime)) {
             return YESTERDAY;
         }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(FORMAT_DATE);
