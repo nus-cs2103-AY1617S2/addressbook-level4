@@ -77,8 +77,8 @@ public class TaskManager implements ReadOnlyTaskManager {
         if (t.isIDUnassigned()) {
             t.setID(new IdentificationNumber(nextAvailableID));
             nextAvailableID.inc();
-            syncMasterTagListWith(t);
         }
+        syncMasterTagListWith(t);
         tasks.add(t);
     }
 
