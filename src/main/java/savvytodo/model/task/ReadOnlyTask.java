@@ -37,9 +37,9 @@ public interface ReadOnlyTask {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append(" Phone: ")
+                .append(" Priority: ")
                 .append(getPhone())
-                .append(" Email: ")
+                .append(" Description: ")
                 .append(getEmail())
                 .append(" Address: ")
                 .append(getAddress())
