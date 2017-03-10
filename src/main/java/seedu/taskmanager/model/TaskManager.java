@@ -62,7 +62,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     public void resetData(ReadOnlyTaskManager newData) {
         assert newData != null;
         try {
-            setPersons(newData.getPersonList());
+            setPersons(newData.getTaskList());
         } catch (UniqueTaskList.DuplicateTaskException e) {
             assert false : "AddressBooks should not have duplicate persons";
         }
@@ -162,7 +162,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     }
 
     @Override
-    public ObservableList<ReadOnlyTask> getPersonList() {
+    public ObservableList<ReadOnlyTask> getTaskList() {
         return new UnmodifiableObservableList<>(persons.asObservableList());
     }
 
