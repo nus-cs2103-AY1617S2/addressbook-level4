@@ -136,9 +136,11 @@ public class Task implements ReadOnlyTask {
     public Task resetData(ReadOnlyTask replacement) {
         assert replacement != null;
 
+        this.setID(replacement.getID());
         this.setName(replacement.getName());
         this.setDeadline(replacement.getDeadline());
         this.setDescription(replacement.getDescription());
+        this.setTags(replacement.getTags());
         return this;
     }
 
