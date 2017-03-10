@@ -15,6 +15,8 @@ public class DateTest {
         assertFalse(Date.isValidDate("phone")); // non-numeric
         assertFalse(Date.isValidDate("9011p041")); // alphabets within digits
         assertFalse(Date.isValidDate("9312 1534")); // spaces within digits
+        assertFalse(Date.isValidDate("00-00-0000")); // invalid record
+        assertFalse(Date.isValidDate("16-16-1993")); // invalid month
 
         // valid dates
         assertTrue(Date.isValidDate("23-12-1934"));
