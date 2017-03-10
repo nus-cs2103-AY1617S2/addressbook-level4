@@ -18,7 +18,7 @@ Responsibilities: UI
 -----
 
 #### [Edwin Yeap](http://github.com/edwinyeap)
-<img src="images/LeowYijin.jpg" width="150"><br>
+<img src="images/aboutus_edwin.jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: Data
 
