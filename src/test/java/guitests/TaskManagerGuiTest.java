@@ -30,7 +30,7 @@ import seedu.address.testutil.TestUtil;
 import seedu.address.testutil.TypicalTestPersons;
 
 /**
- * A GUI Test class for AddressBook.
+ * A GUI Test class for TaskManager.
  */
 public abstract class TaskManagerGuiTest {
 
