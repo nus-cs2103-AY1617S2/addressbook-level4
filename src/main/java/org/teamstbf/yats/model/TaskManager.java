@@ -11,7 +11,6 @@ import java.util.Set;
 import org.teamstbf.yats.commons.core.UnmodifiableObservableList;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
-import org.teamstbf.yats.model.item.Task;
 import org.teamstbf.yats.model.item.UniqueItemList;
 import org.teamstbf.yats.model.item.UniqueItemList.DuplicatePersonException;
 import org.teamstbf.yats.model.tag.Tag;
@@ -187,7 +186,4 @@ public class TaskManager implements ReadOnlyTaskManager {
         return Objects.hash(events, tags);
     }
 
-	public void addTask(Event event) {
-		// TODO Auto-generated method stub
-	}
 }
