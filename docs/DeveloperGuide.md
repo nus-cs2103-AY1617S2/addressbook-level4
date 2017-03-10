@@ -402,7 +402,7 @@ Use case ends.
 
 > 3a1. KoolToDoManager shows an error message <br>
   Use case resumes at step 2
-  
+
 #### Use case: Export task files
 
 **MSS**
@@ -582,7 +582,7 @@ Use case ends.
 
 **Extensions**
 
-3a. Shortcut does not exist 
+3a. Shortcut does not exist
 
 > Use case resumes at step 1
 
