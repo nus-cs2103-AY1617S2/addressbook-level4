@@ -4,13 +4,13 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import guitests.guihandles.PersonCardHandle;
+import guitests.guihandles.TaskCardHandle;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.testutil.TestPerson;
 import seedu.address.testutil.TestUtil;
 
-public class AddCommandTest extends AddressBookGuiTest {
+public class AddCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void add() {
@@ -43,11 +43,12 @@ public class AddCommandTest extends AddressBookGuiTest {
         commandBox.runCommand(taskToAdd.getAddCommand());
 
         //confirm the new card contains the right data
-        PersonCardHandle addedCard = taskListPanel.navigateToPerson(taskToAdd.getName().fullName);
+        TaskCardHandle addedCard = taskListPanel.navigateToPerson(taskToAdd.getName().fullName);
         assertMatching(taskToAdd, addedCard);
 
         //confirm the list now contains all previous tasks plus the new task
         TestPerson[] expectedList = TestUtil.addPersonsToList(currentList, taskToAdd);
+
         assertTrue(taskListPanel.isListMatching(expectedList));
     }
 

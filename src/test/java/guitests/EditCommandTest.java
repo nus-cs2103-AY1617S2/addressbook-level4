@@ -5,14 +5,14 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 
 import org.junit.Test;
 
-import guitests.guihandles.PersonCardHandle;
+import guitests.guihandles.TaskCardHandle;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TestPerson;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
-public class EditCommandTest extends AddressBookGuiTest {
+public class EditCommandTest extends TaskManagerGuiTest {
 
     // The list of tasks in the task list panel is expected to match this list.
     // This list is updated with every successful call to assertEditSuccess().
@@ -108,7 +108,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
 
         // confirm the new card contains the right data
-        PersonCardHandle editedCard = taskListPanel.navigateToPerson(editedTask.getName().fullName);
+        TaskCardHandle editedCard = taskListPanel.navigateToPerson(editedTask.getName().fullName);
         assertMatching(editedTask, editedCard);
 
         // confirm the list now contains all previous tasks plus the task with updated details
