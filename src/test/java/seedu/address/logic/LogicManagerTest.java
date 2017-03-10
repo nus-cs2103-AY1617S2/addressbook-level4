@@ -414,19 +414,11 @@ public class LogicManagerTest {
      */
     class TestDataHelper {
 
-<<<<<<< HEAD
-        Person adam() throws Exception {
-            Description name = new Description("Adam Brown");
-            Phone privatePhone = new Phone("111111");
-            Email email = new Email("adam@gmail.com");
-            Location privateAddress = new Location("111, alpha street");
-=======
         Activity adam() throws Exception {
             Description name = new Description("Adam Brown");
             Phone privatePhone = new Phone("111111");
             Email email = new Email("adam@gmail.com");
             Location privateLocation = new Location("111, alpha street");
->>>>>>> [v0.2][test][logic]update LogicManagerTest
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
@@ -441,15 +433,9 @@ public class LogicManagerTest {
          *
          * @param seed used to generate the activity data field values
          */
-<<<<<<< HEAD
-        Person generatePerson(int seed) throws Exception {
-            return new Person(
-                    new Description("Person " + seed),
-=======
         Activity generateActivity(int seed) throws Exception {
             return new Activity(
                     new Description("Activity " + seed),
->>>>>>> [v0.2][test][logic]update LogicManagerTest
                     new Phone("" + Math.abs(seed)),
                     new Email(seed + "@email"),
                     new Location("House of " + seed),
@@ -466,12 +452,7 @@ public class LogicManagerTest {
             cmd.append(p.getDescription().toString());
             cmd.append(" e/").append(p.getEmail());
             cmd.append(" p/").append(p.getPhone());
-<<<<<<< HEAD
-            cmd.append(" a/").append(p.getLocation());
-=======
             cmd.append(" l/").append(p.getLocation());
->>>>>>> [v0.2][test][logic]update LogicManagerTest
-
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {
                 cmd.append(" t/").append(t.tagName);
@@ -550,15 +531,9 @@ public class LogicManagerTest {
         /**
          * Generates an Activity object with given name. Other fields will have some dummy values.
          */
-<<<<<<< HEAD
-        Person generatePersonWithName(String name) throws Exception {
-            return new Person(
-                    new Description(name),
-=======
         Activity generateActivityWithName(String description) throws Exception {
             return new Activity(
                     new Description(description),
->>>>>>> [v0.2][test][logic]update LogicManagerTest
                     new Phone("1"),
                     new Email("1@email"),
                     new Location("House of 1"),
