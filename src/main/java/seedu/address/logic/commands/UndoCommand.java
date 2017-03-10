@@ -5,7 +5,6 @@ public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
     public static final String MESSAGE_USAGE = COMMAND_WORD;
     public static final String MESSAGE_SUCCESS = "Successfully undo previous change";
-    public static final String MESSAGE_ERROR = "Cannot undo previous change";
     public static final String MESSAGE_NO_CHANGE = "No change to be undone";
 
     /**
@@ -15,8 +14,14 @@ public class UndoCommand extends Command {
     }
 
     public CommandResult execute() {
-        model.resetData(model.getCopy());
-        model.updateCopy(model.getTaskManager());
-        return new CommandResult(MESSAGE_SUCCESS);
+        if(model.checkChanges()) {
+            return new CommandResult(MESSAGE_NO_CHANGE);            
+        }
+        else {
+            model.resetData(model.getCopy());
+            model.clearCopy();
+            return new CommandResult(MESSAGE_SUCCESS);            
+        }
+
     }
 }
