@@ -512,6 +512,7 @@ Pros:
 Cons:
 
 * No calendar view to schedule tasks
+
 **Trello**
 
 Author: Fog Creek Software
