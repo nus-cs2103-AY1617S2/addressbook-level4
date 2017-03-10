@@ -67,6 +67,14 @@ public class Task implements Comparable<Task> {
         endDateTime = to;
     }
 
+    public LocalDateTime getStartDateTime() {
+        return startDateTime;
+    }
+
+    public LocalDateTime getEndDateTime() {
+        return endDateTime;
+    }
+
     public void addTag(Tag tag) {
         this.allTags.add(tag);
     }
@@ -85,6 +93,14 @@ public class Task implements Comparable<Task> {
 
     public boolean isOverdue() {
         return !isCompleted() && (startDateTime != null && startDateTime.isBefore(LocalDateTime.now()));
+    }
+
+    public boolean isTask() {
+        return startDateTime != null && endDateTime == null;
+    }
+
+    public boolean isEvent() {
+        return startDateTime != null && endDateTime != null;
     }
 
     public boolean isCompleted() {
