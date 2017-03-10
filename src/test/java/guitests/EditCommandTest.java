@@ -109,7 +109,7 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_duplicateTask_failure() {
-        commandBox.runCommand("edit 3 Alice Pauline d/85355255 p/alicegmail.com "
+        commandBox.runCommand("edit 3 Alice Pauline d/floating p/alicegmail.com "
                                 + "i/123, Jurong West Ave 6, #08-111 t/friends");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
@@ -134,6 +134,6 @@ public class EditCommandTest extends AddressBookGuiTest {
         // confirm the list now contains all previous tasks plus the task with updated details
         expectedTasksList[addressBookIndex - 1] = editedTask;
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
-        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedTask));
+        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
 }

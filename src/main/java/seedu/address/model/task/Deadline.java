@@ -1,13 +1,13 @@
 package seedu.address.model.task;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.ocpsoft.prettytime.nlp.PrettyTimeParser;
 import org.ocpsoft.prettytime.nlp.parse.DateGroup;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-
 
 /**
  * @author ryuus
@@ -22,9 +22,9 @@ public class Deadline {
             + "dashes(-), and/or "
             + "coma(,).\n";
     public static final String MESSAGE_DATE_NOT_FOUND =
-            "The date entered is either not recognized or not a future date.\n"
+              "The date entered is either not recognized or not a future date.\n"
             + "Please paraphrase it or choose another date.";
-    public static final String DATE_VALIDATION_REGEX = "[\\s | [a-zA-Z0-9,/-:]]+";
+    public static final String DATE_VALIDATION_REGEX = "[\\s | [a-zA-Z0-9,/:-]]+";
     public static final String DATE_FORMAT = "EEE, MMM d yyyy HH:mm";
 
     public final String value;
@@ -42,12 +42,15 @@ public class Deadline {
     public Deadline(String deadline) throws IllegalValueException {
         assert deadline != null;
         String trimmedDeadline = deadline.trim();
+        this.parsedDeadline = parseDeadline(trimmedDeadline);
         if (!isValidDate(trimmedDeadline)) {
             throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
         }
-        parsedDeadline = parseDeadline(trimmedDeadline);
-
-        this.value = toString();
+        if (trimmedDeadline.equals("floating") || parsedDeadline.get(0).isRecurring()) {
+            this.value = trimmedDeadline;
+        } else {
+            this.value = format(nextDeadline());
+        }
     }
 
     /**
@@ -68,16 +71,39 @@ public class Deadline {
     }
 
     /**
+     * Returns a formatted String of the given Date object.
+     */
+    public static String format(Date date) {
+        if (date != null) {
+            return formatter.format(date);
+        }
+        return "";
+    }
+
+    /**
      * Returns true if the given deadline is recurring.
      */
     public boolean isRecurring() {
-        return parsedDeadline.get(0).isRecurring();
+        if (parsedDeadline.size() != 0) {
+            return parsedDeadline.get(0).isRecurring();
+        }
+        return false;
+    }
+
+    /**
+     * Returns the next Deadline.
+     */
+    public Date nextDeadline() {
+        if (parsedDeadline.size() != 0) {
+            return parsedDeadline.get(0).getDates().get(0);
+        }
+        return null;
     }
 
     @Override
     public String toString() {
-        if (parsedDeadline.size() == 0) {
-            return "floating";
+        if (value.equals("floating")) {
+            return value;
         }
         return formatter.format(parsedDeadline.get(0).getDates().get(0));
     }

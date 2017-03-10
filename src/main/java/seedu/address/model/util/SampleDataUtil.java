@@ -15,22 +15,22 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         try {
             return new Task[] {
-                new Task(new Title("Alex Yeoh"), new Deadline("87438807"), new Priority("urgent"),
+                new Task(new Title("Alex Yeoh"), new Deadline("tomorrow"), new Priority("urgent"),
                     new Instruction("Blk 30 Geylang Street 29, #06-40"),
                     new UniqueTagList("friends")),
-                new Task(new Title("Bernice Yu"), new Deadline("99272758"), new Priority("urgent"),
+                new Task(new Title("Bernice Yu"), new Deadline("tomorrow"), new Priority("urgent"),
                     new Instruction("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                     new UniqueTagList("colleagues", "friends")),
-                new Task(new Title("Charlotte Oliveiro"), new Deadline("93210283"), new Priority("urgent"),
+                new Task(new Title("Charlotte Oliveiro"), new Deadline("tomorrow"), new Priority("urgent"),
                     new Instruction("Blk 11 Ang Mo Kio Street 74, #11-04"),
                     new UniqueTagList("neighbours")),
-                new Task(new Title("David Li"), new Deadline("91031282"), new Priority("urgent"),
+                new Task(new Title("David Li"), new Deadline("tomorrow"), new Priority("urgent"),
                     new Instruction("Blk 436 Serangoon Gardens Street 26, #16-43"),
                     new UniqueTagList("family")),
-                new Task(new Title("Irfan Ibrahim"), new Deadline("92492021"), new Priority("urgent"),
+                new Task(new Title("Irfan Ibrahim"), new Deadline("tomorrow"), new Priority("urgent"),
                     new Instruction("Blk 47 Tampines Street 20, #17-35"),
                     new UniqueTagList("classmates")),
-                new Task(new Title("Roy Balakrishnan"), new Deadline("92624417"), new Priority("urgent"),
+                new Task(new Title("Roy Balakrishnan"), new Deadline("tomorrow"), new Priority("urgent"),
                     new Instruction("Blk 45 Aljunied Street 85, #11-31"),
                     new UniqueTagList("colleagues"))
             };
