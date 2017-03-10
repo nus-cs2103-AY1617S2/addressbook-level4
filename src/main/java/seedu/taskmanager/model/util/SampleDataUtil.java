@@ -17,7 +17,7 @@ public class SampleDataUtil {
             return new Task[] {
                 new Task(new Title("Visit Alex Yeoh"), new StartDate("01/11/2017"), new EndDate("02/11/2017"),
                     new Description("His address is Blk 30 Geylang Street 29, #06-40"),
-                    new UniqueTagList("social event")),
+                    new UniqueTagList("social")),
                 new Task(new Title("Collect files from Bernice Yu"), new StartDate("05/11/2017"), new EndDate("08/11/2017"),
                     new Description("Important business files"),
                     new UniqueTagList("colleagues", "business")),
@@ -44,7 +44,7 @@ public class SampleDataUtil {
             }
             return sampleAB;
         } catch (DuplicateTaskException e) {
-            throw new AssertionError("sample data cannot contain duplicate persons", e);
+            throw new AssertionError("sample data cannot contain duplicate tasks", e);
         }
     }
 }
