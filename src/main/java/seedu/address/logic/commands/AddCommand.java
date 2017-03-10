@@ -45,8 +45,6 @@ public class AddCommand extends Command {
         this.toAdd = new Task(
                 new Name(name),
                 new Time(phone),
-                new Email(email),
-                new Address(address),
                 new UniqueTagList(tagSet)
         );
     }
@@ -55,9 +53,9 @@ public class AddCommand extends Command {
     public CommandResult execute() throws CommandException {
         assert model != null;
         try {
-            model.addPerson(toAdd);
+            model.addTask(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-        } catch (UniqueTaskList.DuplicatePersonException e) {
+        } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 

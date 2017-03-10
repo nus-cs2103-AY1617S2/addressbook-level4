@@ -75,9 +75,9 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> phone} into an {@code Optional<Phone>} if {@code phone} is present.
+     * Parses a {@code Optional<String> phone} into an {@code Optional<Time>} if {@code phone} is present.
      */
-    public static Optional<Time> parsePhone(Optional<String> phone) throws IllegalValueException {
+    public static Optional<Time> parseTime(Optional<String> phone) throws IllegalValueException {
         assert phone != null;
         return phone.isPresent() ? Optional.of(new Time(phone.get())) : Optional.empty();
     }
