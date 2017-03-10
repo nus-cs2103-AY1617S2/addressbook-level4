@@ -13,17 +13,17 @@ import seedu.taskmanager.model.task.StartDate;
  */
 public class TaskBuilder {
 
-    private TestPerson person;
+    private TestTask person;
 
     public TaskBuilder() {
-        this.person = new TestPerson();
+        this.person = new TestTask();
     }
 
     /**
      * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
-    public TaskBuilder(TestPerson personToCopy) {
-        this.person = new TestPerson(personToCopy);
+    public TaskBuilder(TestTask personToCopy) {
+        this.person = new TestTask(personToCopy);
     }
 
     public TaskBuilder withName(String name) throws IllegalValueException {
@@ -54,7 +54,7 @@ public class TaskBuilder {
         return this;
     }
 
-    public TestPerson build() {
+    public TestTask build() {
         return this.person;
     }
 

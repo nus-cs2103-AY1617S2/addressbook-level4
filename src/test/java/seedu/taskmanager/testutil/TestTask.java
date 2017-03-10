@@ -10,7 +10,7 @@ import seedu.taskmanager.model.task.ReadOnlyTask;
 /**
  * A mutable person object. For testing only.
  */
-public class TestPerson implements ReadOnlyTask {
+public class TestTask implements ReadOnlyTask {
 
     private Title title;
     private Description description;
@@ -18,14 +18,14 @@ public class TestPerson implements ReadOnlyTask {
     private StartDate startDate;
     private UniqueTagList tags;
 
-    public TestPerson() {
+    public TestTask() {
         tags = new UniqueTagList();
     }
 
     /**
      * Creates a copy of {@code personToCopy}.
      */
-    public TestPerson(TestPerson personToCopy) {
+    public TestTask(TestTask personToCopy) {
         this.title = personToCopy.getTitle();
         this.startDate = personToCopy.getStartDate();
         this.endDate = personToCopy.getEndDate();
