@@ -3,6 +3,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 
 import seedu.toluist.commons.util.DateTimeUtil;
+import seedu.toluist.controller.commons.TaskTokenizer;
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
@@ -31,17 +32,18 @@ public class UpdateTaskController extends TaskController {
         TodoList todoList = TodoList.load();
         CommandResult commandResult = new CommandResult("");
 
-        HashMap<String, String> tokens = tokenize(command, true, true);
+        TaskTokenizer taskTokenizer = new TaskTokenizer(COMMAND_TEMPLATE);
+        HashMap<String, String> tokens = taskTokenizer.tokenize(command, true, true);
 
-        String description = tokens.get(TASK_DESCRIPTION);
+        String description = tokens.get(TaskTokenizer.TASK_DESCRIPTION);
 
-        String indexToken = tokens.get(TASK_VIEW_INDEX);
-        Task task = getTask(indexToken);
+        String indexToken = tokens.get(TaskTokenizer.TASK_VIEW_INDEX);
+        Task task = taskTokenizer.getTask(indexToken);
 
-        String startDateToken = tokens.get(TASK_START_DATE_KEYWORD);
+        String startDateToken = tokens.get(TaskTokenizer.TASK_START_DATE_KEYWORD);
         LocalDateTime startDateTime = DateTimeUtil.toDate(startDateToken);
 
-        String endDateToken = tokens.get(TASK_END_DATE_KEYWORD);
+        String endDateToken = tokens.get(TaskTokenizer.TASK_END_DATE_KEYWORD);
         LocalDateTime endDateTime = DateTimeUtil.toDate(endDateToken);
 
         commandResult = update(task, description, startDateTime, endDateTime);

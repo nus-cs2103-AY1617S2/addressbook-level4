@@ -1,6 +1,7 @@
 package seedu.toluist.controller;
 import java.util.HashMap;
 
+import seedu.toluist.controller.commons.TaskTokenizer;
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
@@ -28,10 +29,11 @@ public class DeleteTaskController extends TaskController {
         TodoList todoList = TodoList.load();
         CommandResult commandResult = new CommandResult("");
 
-        HashMap<String, String> tokens = tokenize(command, true, false);
+        TaskTokenizer taskTokenizer = new TaskTokenizer(COMMAND_TEMPLATE);
+        HashMap<String, String> tokens = taskTokenizer.tokenize(command, true, false);
 
-        String indexToken = tokens.get(TASK_VIEW_INDEX);
-        Task task = getTask(indexToken);
+        String indexToken = tokens.get(TaskTokenizer.TASK_VIEW_INDEX);
+        Task task = taskTokenizer.getTask(indexToken);
 
         commandResult = delete(todoList, task);
 

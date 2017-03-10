@@ -4,7 +4,9 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 
 import seedu.toluist.commons.util.DateTimeUtil;
+import seedu.toluist.controller.commons.TaskTokenizer;
 import seedu.toluist.dispatcher.CommandResult;
+import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.Ui;
 
@@ -30,14 +32,15 @@ public class AddTaskController extends TaskController {
         TodoList todoList = TodoList.load();
         CommandResult commandResult = new CommandResult("");
 
-        HashMap<String, String> tokens = tokenize(command, false, true);
+        TaskTokenizer taskTokenizer = new TaskTokenizer(COMMAND_TEMPLATE);
+        HashMap<String, String> tokens = taskTokenizer.tokenize(command, false, true);
 
-        String description = tokens.get(TASK_DESCRIPTION);
+        String description = tokens.get(TaskTokenizer.TASK_DESCRIPTION);
 
-        String startDateToken = tokens.get(TASK_START_DATE_KEYWORD);
+        String startDateToken = tokens.get(TaskTokenizer.TASK_START_DATE_KEYWORD);
         LocalDateTime startDateTime = DateTimeUtil.toDate(startDateToken);
 
-        String endDateToken = tokens.get(TASK_END_DATE_KEYWORD);
+        String endDateToken = tokens.get(TaskTokenizer.TASK_END_DATE_KEYWORD);
         LocalDateTime endDateTime = DateTimeUtil.toDate(endDateToken);
 
         commandResult = add(todoList, description, startDateTime, endDateTime);
@@ -52,8 +55,7 @@ public class AddTaskController extends TaskController {
 
     private CommandResult add(TodoList todoList, String description,
             LocalDateTime startDateTime, LocalDateTime endDateTime) {
-
-
+        todoList.add(new Task(description, startDateTime, endDateTime));
         return new CommandResult(RESULT_MESSAGE_ADD_TASK);
     }
 
