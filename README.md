@@ -1,4 +1,4 @@
-# Address Book (Level 4)
+# myPotato
 
 [![Build Status](https://travis-ci.org/CS2103JAN2017-T09-B3/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-T09-B3/main)
 [![Build status](https://ci.appveyor.com/api/projects/status/fnkngh2185gqoml8?svg=true)](https://ci.appveyor.com/project/e0011840/main)
@@ -6,10 +6,8 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6faaace319294f89ad0578a0bfdcbbca)](https://www.codacy.com/app/e0011840/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103JAN2017-T09-B3/main&amp;utm_campaign=Badge_Grade)
 
 
-* This is a desktop task manager application. It has a GUI but most of the user interactions happen using
 <img src="docs/images/UIss.png" width="600"><br>
 * This is a desktop Address Book application. It has a GUI but most of the user interactions happen using
-
   a CLI (Command Line Interface).
 * It is a Java application intended for people to organize their tasks.
 * Find out how to install and use myPotato by reading the UserGuide file, docs/UserGuide.md.  
