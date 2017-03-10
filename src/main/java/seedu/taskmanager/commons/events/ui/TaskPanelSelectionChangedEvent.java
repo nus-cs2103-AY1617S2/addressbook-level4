@@ -4,7 +4,7 @@ import seedu.taskmanager.commons.events.BaseEvent;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 
 /**
- * Represents a selection change in the Person List Panel
+ * Represents a selection change in the Task List Panel
  */
 public class TaskPanelSelectionChangedEvent extends BaseEvent {
 
