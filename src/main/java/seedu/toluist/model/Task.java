@@ -167,8 +167,11 @@ public class Task implements Comparable<Task> {
     }
 
     @Override
+    /**
+     * Compare by end date -> start date -> priority -> description
+     * Floating tasks are put to the end
+     */
     public int compareTo(Task comparison) {
-        // Put floating task at bottom;
         if (endDateTime == null && comparison.endDateTime != null) {
             return 1;
         }
@@ -178,6 +181,9 @@ public class Task implements Comparable<Task> {
         if (endDateTime != null && comparison.endDateTime != null
             && endDateTime.compareTo(comparison.endDateTime) != 0) {
             return endDateTime.compareTo(comparison.endDateTime);
+        } else if (startDateTime != null && comparison.startDateTime != null
+            && startDateTime.compareTo(comparison.startDateTime) != 0) {
+            return startDateTime.compareTo(comparison.startDateTime);
         } else if (priority.compareTo(comparison.priority) != 0) {
             return priority.compareTo(comparison.priority);
         } else {
