@@ -8,7 +8,7 @@ import seedu.bulletjournal.commons.util.CollectionUtil;
 import seedu.bulletjournal.logic.commands.exceptions.CommandException;
 import seedu.bulletjournal.model.tag.UniqueTagList;
 import seedu.bulletjournal.model.task.Deadline;
-import seedu.bulletjournal.model.task.Description;
+import seedu.bulletjournal.model.task.TaskName;
 import seedu.bulletjournal.model.task.Detail;
 import seedu.bulletjournal.model.task.ReadOnlyTask;
 import seedu.bulletjournal.model.task.Status;
@@ -77,7 +77,7 @@ public class EditCommand extends Command {
                                              EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
-        Description updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
+        TaskName updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
         Deadline updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
         Status updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
         Detail updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
@@ -91,7 +91,7 @@ public class EditCommand extends Command {
      * corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
-        private Optional<Description> description = Optional.empty();
+        private Optional<TaskName> taskName = Optional.empty();
         private Optional<Deadline> deadline = Optional.empty();
         private Optional<Status> status = Optional.empty();
         private Optional<Detail> detail = Optional.empty();
@@ -100,7 +100,7 @@ public class EditCommand extends Command {
         public EditPersonDescriptor() {}
 
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
-            this.description = toCopy.getName();
+            this.taskName = toCopy.getName();
             this.deadline = toCopy.getPhone();
             this.status = toCopy.getEmail();
             this.detail = toCopy.getAddress();
@@ -111,16 +111,16 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.description, this.deadline, this.status, this.detail, this.tags);
+            return CollectionUtil.isAnyPresent(this.taskName, this.deadline, this.status, this.detail, this.tags);
         }
 
-        public void setName(Optional<Description> description) {
-            assert description != null;
-            this.description = description;
+        public void setName(Optional<TaskName> taskName) {
+            assert taskName != null;
+            this.taskName = taskName;
         }
 
-        public Optional<Description> getName() {
-            return description;
+        public Optional<TaskName> getName() {
+            return taskName;
         }
 
         public void setPhone(Optional<Deadline> deadline) {

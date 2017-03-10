@@ -4,7 +4,7 @@ import seedu.bulletjournal.commons.exceptions.IllegalValueException;
 import seedu.bulletjournal.model.tag.Tag;
 import seedu.bulletjournal.model.tag.UniqueTagList;
 import seedu.bulletjournal.model.task.Deadline;
-import seedu.bulletjournal.model.task.Description;
+import seedu.bulletjournal.model.task.TaskName;
 import seedu.bulletjournal.model.task.Detail;
 import seedu.bulletjournal.model.task.Status;
 
@@ -13,49 +13,49 @@ import seedu.bulletjournal.model.task.Status;
  */
 public class TaskBuilder {
 
-    private TestTask person;
+    private TestTask task;
 
     public TaskBuilder() {
-        this.person = new TestTask();
+        this.task = new TestTask();
     }
 
     /**
      * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
     public TaskBuilder(TestTask personToCopy) {
-        this.person = new TestTask(personToCopy);
+        this.task = new TestTask(personToCopy);
     }
 
-    public TaskBuilder withName(String name) throws IllegalValueException {
-        this.person.setName(new Description(name));
+    public TaskBuilder withTaskName(String taskName) throws IllegalValueException {
+        this.task.setName(new TaskName(taskName));
         return this;
     }
 
     public TaskBuilder withTags(String ... tags) throws IllegalValueException {
-        person.setTags(new UniqueTagList());
+        task.setTags(new UniqueTagList());
         for (String tag: tags) {
-            person.getTags().add(new Tag(tag));
+            task.getTags().add(new Tag(tag));
         }
         return this;
     }
 
-    public TaskBuilder withAddress(String address) throws IllegalValueException {
-        this.person.setAddress(new Detail(address));
+    public TaskBuilder withDetail(String address) throws IllegalValueException {
+        this.task.setAddress(new Detail(address));
         return this;
     }
 
-    public TaskBuilder withPhone(String phone) throws IllegalValueException {
-        this.person.setPhone(new Deadline(phone));
+    public TaskBuilder withDeadline(String deadline) throws IllegalValueException {
+        this.task.setPhone(new Deadline(deadline));
         return this;
     }
 
-    public TaskBuilder withEmail(String email) throws IllegalValueException {
-        this.person.setEmail(new Status(email));
+    public TaskBuilder withStatus(String email) throws IllegalValueException {
+        this.task.setEmail(new Status(email));
         return this;
     }
 
     public TestTask build() {
-        return this.person;
+        return this.task;
     }
 
 }

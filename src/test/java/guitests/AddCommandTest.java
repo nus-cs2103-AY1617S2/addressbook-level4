@@ -32,7 +32,7 @@ public class AddCommandTest extends AddressBookGuiTest {
 
         //add to empty list
         commandBox.runCommand("clear");
-        assertAddSuccess(td.alice);
+        assertAddSuccess(td.assignment);
 
         //invalid command
         commandBox.runCommand("adds Johnny");

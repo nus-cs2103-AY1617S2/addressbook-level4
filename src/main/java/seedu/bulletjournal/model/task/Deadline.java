@@ -3,6 +3,7 @@ package seedu.bulletjournal.model.task;
 import seedu.bulletjournal.commons.exceptions.IllegalValueException;
 
 /**
+ * Phone number morphed into deadline
  * Represents a Person's phone number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */

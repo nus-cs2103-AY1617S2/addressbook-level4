@@ -44,7 +44,7 @@ import seedu.bulletjournal.model.TodoList;
 import seedu.bulletjournal.model.tag.Tag;
 import seedu.bulletjournal.model.tag.UniqueTagList;
 import seedu.bulletjournal.model.task.Deadline;
-import seedu.bulletjournal.model.task.Description;
+import seedu.bulletjournal.model.task.TaskName;
 import seedu.bulletjournal.model.task.Detail;
 import seedu.bulletjournal.model.task.ReadOnlyTask;
 import seedu.bulletjournal.model.task.Status;
@@ -199,7 +199,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidPersonData() {
         assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
-                Description.MESSAGE_NAME_CONSTRAINTS);
+                TaskName.MESSAGE_NAME_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
                 Deadline.MESSAGE_PHONE_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
@@ -417,14 +417,14 @@ public class LogicManagerTest {
     class TestDataHelper {
 
         private Task adam() throws Exception {
-            Description description = new Description("Adam Brown");
+            TaskName taskName = new TaskName("Adam Brown");
             Deadline privatePhone = new Deadline("111111");
             Status status = new Status("adam@gmail.com");
             Detail privateAddress = new Detail("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(description, privatePhone, status, privateAddress, tags);
+            return new Task(taskName, privatePhone, status, privateAddress, tags);
         }
 
         /**
@@ -436,7 +436,7 @@ public class LogicManagerTest {
          */
         private Task generatePerson(int seed) throws Exception {
             return new Task(
-                    new Description("Person " + seed),
+                    new TaskName("Person " + seed),
                     new Deadline("" + Math.abs(seed)),
                     new Status(seed + "@email"),
                     new Detail("House of " + seed),
@@ -535,7 +535,7 @@ public class LogicManagerTest {
          */
         private Task generatePersonWithName(String name) throws Exception {
             return new Task(
-                    new Description(name),
+                    new TaskName(name),
                     new Deadline("1"),
                     new Status("1@email"),
                     new Detail("House of 1"),

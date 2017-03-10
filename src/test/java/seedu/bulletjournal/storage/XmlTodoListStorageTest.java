@@ -74,7 +74,7 @@ public class XmlTodoListStorageTest {
 
         //Modify data, overwrite exiting file, and read back
         original.addPerson(new Task(td.hoon));
-        original.removePerson(new Task(td.alice));
+        original.removePerson(new Task(td.assignment));
         xmlAddressBookStorage.saveAddressBook(original, filePath);
         readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
         assertEquals(original, new TodoList(readBack));

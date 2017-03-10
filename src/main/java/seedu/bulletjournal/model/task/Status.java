@@ -4,7 +4,8 @@ package seedu.bulletjournal.model.task;
 import seedu.bulletjournal.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's phone number in the address book.
+ * Email morphed into completion status of task
+ * Represents a Person's email in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
  */
 public class Status {

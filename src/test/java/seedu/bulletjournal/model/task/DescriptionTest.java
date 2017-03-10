@@ -5,23 +5,23 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.bulletjournal.model.task.Description;
+import seedu.bulletjournal.model.task.TaskName;
 
 public class DescriptionTest {
 
     @Test
     public void isValidName() {
         // invalid name
-        assertFalse(Description.isValidName("")); // empty string
-        assertFalse(Description.isValidName(" ")); // spaces only
-        assertFalse(Description.isValidName("^")); // only non-alphanumeric characters
-        assertFalse(Description.isValidName("peter*")); // contains non-alphanumeric characters
+        assertFalse(TaskName.isValidName("")); // empty string
+        assertFalse(TaskName.isValidName(" ")); // spaces only
+        assertFalse(TaskName.isValidName("^")); // only non-alphanumeric characters
+        assertFalse(TaskName.isValidName("peter*")); // contains non-alphanumeric characters
 
         // valid name
-        assertTrue(Description.isValidName("peter jack")); // alphabets only
-        assertTrue(Description.isValidName("12345")); // numbers only
-        assertTrue(Description.isValidName("peter the 2nd")); // alphanumeric characters
-        assertTrue(Description.isValidName("Capital Tan")); // with capital letters
-        assertTrue(Description.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(TaskName.isValidName("peter jack")); // alphabets only
+        assertTrue(TaskName.isValidName("12345")); // numbers only
+        assertTrue(TaskName.isValidName("peter the 2nd")); // alphanumeric characters
+        assertTrue(TaskName.isValidName("Capital Tan")); // with capital letters
+        assertTrue(TaskName.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
     }
 }

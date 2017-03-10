@@ -16,7 +16,7 @@ import seedu.bulletjournal.commons.util.StringUtil;
 import seedu.bulletjournal.model.tag.Tag;
 import seedu.bulletjournal.model.tag.UniqueTagList;
 import seedu.bulletjournal.model.task.Deadline;
-import seedu.bulletjournal.model.task.Description;
+import seedu.bulletjournal.model.task.TaskName;
 import seedu.bulletjournal.model.task.Detail;
 import seedu.bulletjournal.model.task.Status;
 
@@ -69,9 +69,9 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> name} into an {@code Optional<Name>} if {@code name} is present.
      */
-    public static Optional<Description> parseName(Optional<String> name) throws IllegalValueException {
+    public static Optional<TaskName> parseName(Optional<String> name) throws IllegalValueException {
         assert name != null;
-        return name.isPresent() ? Optional.of(new Description(name.get())) : Optional.empty();
+        return name.isPresent() ? Optional.of(new TaskName(name.get())) : Optional.empty();
     }
 
     /**

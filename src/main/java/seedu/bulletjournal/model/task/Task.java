@@ -11,7 +11,7 @@ import seedu.bulletjournal.model.tag.UniqueTagList;
  */
 public class Task implements ReadOnlyTask {
 
-    private Description description;
+    private TaskName taskName;
     private Deadline deadline;
     private Status status;
     private Detail detail;
@@ -21,9 +21,9 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(Description description, Deadline deadline, Status status, Detail detail, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(description, deadline, status, detail, tags);
-        this.description = description;
+    public Task(TaskName taskName, Deadline deadline, Status status, Detail detail, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(taskName, deadline, status, detail, tags);
+        this.taskName = taskName;
         this.deadline = deadline;
         this.status = status;
         this.detail = detail;
@@ -37,14 +37,14 @@ public class Task implements ReadOnlyTask {
         this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(), source.getTags());
     }
 
-    public void setName(Description description) {
-        assert description != null;
-        this.description = description;
+    public void setName(TaskName taskName) {
+        assert taskName != null;
+        this.taskName = taskName;
     }
 
     @Override
-    public Description getName() {
-        return description;
+    public TaskName getName() {
+        return taskName;
     }
 
     public void setPhone(Deadline deadline) {
@@ -112,7 +112,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(description, deadline, status, detail, tags);
+        return Objects.hash(taskName, deadline, status, detail, tags);
     }
 
     @Override

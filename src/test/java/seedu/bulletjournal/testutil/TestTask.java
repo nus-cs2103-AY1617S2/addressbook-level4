@@ -2,7 +2,7 @@ package seedu.bulletjournal.testutil;
 
 import seedu.bulletjournal.model.tag.UniqueTagList;
 import seedu.bulletjournal.model.task.Deadline;
-import seedu.bulletjournal.model.task.Description;
+import seedu.bulletjournal.model.task.TaskName;
 import seedu.bulletjournal.model.task.Detail;
 import seedu.bulletjournal.model.task.ReadOnlyTask;
 import seedu.bulletjournal.model.task.Status;
@@ -12,7 +12,7 @@ import seedu.bulletjournal.model.task.Status;
  */
 public class TestTask implements ReadOnlyTask {
 
-    private Description description;
+    private TaskName taskName;
     private Detail detail;
     private Status status;
     private Deadline deadline;
@@ -26,15 +26,15 @@ public class TestTask implements ReadOnlyTask {
      * Creates a copy of {@code personToCopy}.
      */
     public TestTask(TestTask personToCopy) {
-        this.description = personToCopy.getName();
+        this.taskName = personToCopy.getName();
         this.deadline = personToCopy.getPhone();
         this.status = personToCopy.getEmail();
         this.detail = personToCopy.getAddress();
         this.tags = personToCopy.getTags();
     }
 
-    public void setName(Description description) {
-        this.description = description;
+    public void setName(TaskName taskName) {
+        this.taskName = taskName;
     }
 
     public void setAddress(Detail detail) {
@@ -54,8 +54,8 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Description getName() {
-        return description;
+    public TaskName getName() {
+        return taskName;
     }
 
     @Override
