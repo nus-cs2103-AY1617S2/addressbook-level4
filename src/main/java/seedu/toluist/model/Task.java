@@ -13,8 +13,8 @@ public class Task implements Comparable<Task> {
     // List of tags is unique
     private HashSet<Tag> allTags = new HashSet<>();
     private String description;
-    private LocalDateTime endDateTime;
     private LocalDateTime startDateTime;
+    private LocalDateTime endDateTime;
     private LocalDateTime completionDateTime;
 
     /**

@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 import seedu.toluist.commons.util.DateTimeUtil;
 import seedu.toluist.dispatcher.CommandResult;
-import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.Ui;
 
@@ -53,7 +52,8 @@ public class AddTaskController extends TaskController {
 
     private CommandResult add(TodoList todoList, String description,
             LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        todoList.add(new Task(description, startDateTime, endDateTime));
+
+
         return new CommandResult(RESULT_MESSAGE_ADD_TASK);
     }
 
