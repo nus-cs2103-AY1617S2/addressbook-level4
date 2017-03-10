@@ -207,7 +207,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_add_invalidTaskData() {
-        assertCommandFailure("add []\\[;] p/1 i/valid, information",
+        assertCommandFailure("add n/[]\\[;] p/1 i/valid, information",
                 Name.MESSAGE_NAME_CONSTRAINTS);
         assertCommandFailure("add n/Valid Name p/not_numbers i/valid, information",
                 PriorityLevel.MESSAGE_PRIORITY_CONSTRAINTS);

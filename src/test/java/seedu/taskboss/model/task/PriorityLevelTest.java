@@ -16,7 +16,7 @@ public class PriorityLevelTest {
         assertFalse(PriorityLevel.isValidPriorityLevel("0")); // invalid range
 
         // valid priority level
-        assertFalse(PriorityLevel.isValidPriorityLevel("")); // empty string
+        assertTrue(PriorityLevel.isValidPriorityLevel(""));
         assertTrue(PriorityLevel.isValidPriorityLevel("1"));
         assertTrue(PriorityLevel.isValidPriorityLevel("2"));
         assertTrue(PriorityLevel.isValidPriorityLevel("3"));
