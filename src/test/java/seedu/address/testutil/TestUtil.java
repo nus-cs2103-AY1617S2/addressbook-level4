@@ -38,7 +38,7 @@ import seedu.address.model.task.Name;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Time;
 import seedu.address.model.task.ReadOnlyTask;
-import seedu.address.storage.XmlSerializableAddressBook;
+import seedu.address.storage.XmlSerializableTaskManager;
 
 /**
  * A utility class for test cases.
@@ -52,7 +52,7 @@ public class TestUtil {
      */
     public static final String SANDBOX_FOLDER = FileUtil.getPath("./src/test/data/sandbox/");
 
-    public static final Task[] SAMPLE_PERSON_DATA = getSampleTaskData();
+    public static final Task[] SAMPLE_TASK_DATA = getSampleTaskData();
 
     public static final Tag[] SAMPLE_TAG_DATA = getSampleTagData();
 
@@ -101,7 +101,7 @@ public class TestUtil {
     }
 
     public static List<Task> generateSampleTaskData() {
-        return Arrays.asList(SAMPLE_PERSON_DATA);
+        return Arrays.asList(SAMPLE_TASK_DATA);
     }
 
     /**
@@ -120,7 +120,7 @@ public class TestUtil {
     }
 
     public static void createDataFileWithSampleData(String filePath) {
-        createDataFileWithData(generateSampleStorageAddressBook(), filePath);
+        createDataFileWithData(generateSampleStorageTaskManager(), filePath);
     }
 
     public static <T> void createDataFileWithData(T data, String filePath) {
@@ -137,8 +137,8 @@ public class TestUtil {
         createDataFileWithSampleData(TestApp.SAVE_LOCATION_FOR_TESTING);
     }
 
-    public static XmlSerializableAddressBook generateSampleStorageAddressBook() {
-        return new XmlSerializableAddressBook(new TaskManager());
+    public static XmlSerializableTaskManager generateSampleStorageTaskManager() {
+        return new XmlSerializableTaskManager(new TaskManager());
     }
 
     /**
