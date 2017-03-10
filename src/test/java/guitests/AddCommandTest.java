@@ -10,7 +10,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.testutil.TestPerson;
 import seedu.address.testutil.TestUtil;
 
-public class AddCommandTest extends AddressBookGuiTest {
+public class AddCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void add() {

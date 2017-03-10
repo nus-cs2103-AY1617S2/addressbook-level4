@@ -8,7 +8,7 @@ import org.junit.Test;
 import seedu.address.testutil.TestPerson;
 import seedu.address.testutil.TestUtil;
 
-public class DeleteCommandTest extends AddressBookGuiTest {
+public class DeleteCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void delete() {
