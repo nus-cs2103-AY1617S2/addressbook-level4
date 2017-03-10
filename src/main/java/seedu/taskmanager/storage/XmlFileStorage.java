@@ -9,7 +9,7 @@ import seedu.taskmanager.commons.exceptions.DataConversionException;
 import seedu.taskmanager.commons.util.XmlUtil;
 
 /**
- * Stores addressbook data in an XML file
+ * Stores task manager data in an XML file
  */
 public class XmlFileStorage {
     /**
@@ -25,7 +25,7 @@ public class XmlFileStorage {
     }
 
     /**
-     * Returns address book in the file or an empty address book
+     * Returns task manager in the file or an empty task manager
      */
     public static XmlSerializableTaskManager loadDataFromSaveFile(File file) throws DataConversionException,
                                                                             FileNotFoundException {
