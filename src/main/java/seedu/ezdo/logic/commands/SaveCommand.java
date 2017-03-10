@@ -46,7 +46,7 @@ public class SaveCommand extends Command {
             File file = new File(directoryPath);
             FileUtil.createIfMissing(file);
             EventsCenter.getInstance().post(new EzDoDirectoryChangedEvent(model.getEzDo(), directoryPath));
-        return new CommandResult(String.format(MESSAGE_SAVE_TASK_SUCCESS, directoryPath));
+            return new CommandResult(String.format(MESSAGE_SAVE_TASK_SUCCESS, directoryPath));
         } catch (IOException e) {
             throw new CommandException(MESSAGE_DIRECTORY_PATH_INVALID);
         }
