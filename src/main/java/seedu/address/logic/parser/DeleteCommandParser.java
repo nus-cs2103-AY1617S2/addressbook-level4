@@ -20,12 +20,13 @@ public class DeleteCommandParser {
     public Command parse(String args) {
 
         Optional<Integer> index = ParserUtil.parseIndex(args);
-        if (!index.isPresent()) {
+        Optional<String> listName = ParserUtil.parseListName(args);
+        if (!index.isPresent() || !listName.isPresent()) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
-        return new DeleteCommand(index.get());
+        return new DeleteCommand(listName.get(), index.get());
     }
 
 }

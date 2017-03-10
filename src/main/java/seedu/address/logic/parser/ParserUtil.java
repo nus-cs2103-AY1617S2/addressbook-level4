@@ -25,14 +25,14 @@ import seedu.address.model.task.Title;
  */
 public class ParserUtil {
 
-    private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
+    private static final Pattern LISTNAME_INDEX_ARGS_FORMAT = Pattern.compile("(?<listName>(floating|non-floating)?)(\\s?)(?<targetIndex>[1-9]+)");
 
     /**
      * Returns the specified index in the {@code command} if it is a positive unsigned integer
      * Returns an {@code Optional.empty()} otherwise.
      */
     public static Optional<Integer> parseIndex(String command) {
-        final Matcher matcher = INDEX_ARGS_FORMAT.matcher(command.trim());
+        final Matcher matcher = LISTNAME_INDEX_ARGS_FORMAT.matcher(command.trim());
         if (!matcher.matches()) {
             return Optional.empty();
         }
@@ -42,6 +42,22 @@ public class ParserUtil {
             return Optional.empty();
         }
         return Optional.of(Integer.parseInt(index));
+
+    }
+    
+    /**
+     * Returns the specified task list name in the {@code command} if it is an alpha-non-numeric string
+     * that corresponds to a valid task list name.
+     * Returns "invalid" otherwise.
+     */
+    public static Optional<String> parseListName(String command) {
+        final Matcher matcher = LISTNAME_INDEX_ARGS_FORMAT.matcher(command.trim());
+        if (!matcher.matches()) {
+            return Optional.empty();
+        }
+
+        String listName = matcher.group("listName") == null ? "non-floating" : matcher.group("listName");
+        return Optional.of(listName);
 
     }
 
