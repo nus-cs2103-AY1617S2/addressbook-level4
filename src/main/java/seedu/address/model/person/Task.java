@@ -13,7 +13,7 @@ import seedu.address.model.tag.UniqueTagList;
 public class Task implements ReadOnlyTask {
 
     private Name name;
-    private Priority phone;
+    private Priority priority;
     private Email email;
     private Description description;
 
@@ -25,7 +25,7 @@ public class Task implements ReadOnlyTask {
     public Task(Name name, Priority phone, Email email, Description description, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, phone, email, description, tags);
         this.name = name;
-        this.phone = phone;
+        this.priority = phone;
         this.email = email;
         this.description = description;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
@@ -38,7 +38,7 @@ public class Task implements ReadOnlyTask {
     public Task(Name name, Description description, UniqueTagList tags) throws IllegalValueException {
         assert !CollectionUtil.isAnyNull(name, description, tags);
         this.name = name;
-        this.phone = null;
+        this.priority = null;
         this.email = null;
         this.description = description;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
@@ -63,12 +63,12 @@ public class Task implements ReadOnlyTask {
 
     public void setPhone(Priority phone) {
         assert phone != null;
-        this.phone = phone;
+        this.priority = phone;
     }
 
     @Override
     public Priority getPhone() {
-        return phone;
+        return priority;
     }
 
     public void setEmail(Email email) {
@@ -126,7 +126,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, description, tags);
+        return Objects.hash(name, priority, email, description, tags);
     }
 
     @Override
