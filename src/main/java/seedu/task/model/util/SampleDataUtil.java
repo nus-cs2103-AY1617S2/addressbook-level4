@@ -15,24 +15,24 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         try {
             return new Task[] {
-                new Task(new Name("Alex Yeoh"), new Date("07-03-2007"), new Remark("alexyeoh@gmail.com"),
+                new Task(new Name("Add tutor to github"), new Date("07-03-2007"), new Remark("For CS2103T V0.1"),
                     new Location("Blk 30 Geylang Street 29, #06-40"),
-                    new UniqueTagList("friends")),
-                new Task(new Name("Bernice Yu"), new Date("12-12-2017"), new Remark("berniceyu@gmail.com"),
+                    new UniqueTagList("project")),
+                new Task(new Name("Bridge competition"), new Date("12-12-2017"), new Remark("Match 3, table A"),
                     new Location("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                    new UniqueTagList("colleagues", "friends")),
-                new Task(new Name("Charlotte Oliveiro"), new Date("07-08-2015"), new Remark("charlotte@yahoo.com"),
+                    new UniqueTagList("CCA", "friends")),
+                new Task(new Name("Change USD to SGD"), new Date("07-08-2015"), new Remark("Too much change from trip"),
                     new Location("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                    new UniqueTagList("neighbours")),
-                new Task(new Name("David Li"), new Date("23-08-2017"), new Remark("lidavid@google.com"),
+                    new UniqueTagList("money")),
+                new Task(new Name("Download lecture notes"), new Date("23-08-2017"), new Remark("For open-book finals"),
                     new Location("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                    new UniqueTagList("family")),
-                new Task(new Name("Irfan Ibrahim"), new Date("09-03-2017"), new Remark("irfan@outlook.com"),
+                    new UniqueTagList("finals")),
+                new Task(new Name("Invite friends over for housewarming"), new Date("09-03-2017"), new Remark("prepare food as well"),
                     new Location("Blk 47 Tampines Street 20, #17-35"),
-                    new UniqueTagList("classmates")),
-                new Task(new Name("Roy Balakrishnan"), new Date("17-03-2017"), new Remark("royb@gmail.com"),
+                    new UniqueTagList("friends", "house")),
+                new Task(new Name("Rewatch lecture 4 webcast"), new Date("17-03-2017"), new Remark("on algebraic query"),
                     new Location("Blk 45 Aljunied Street 85, #11-31"),
-                    new UniqueTagList("colleagues"))
+                    new UniqueTagList("finals"))
             };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);
