@@ -68,15 +68,6 @@ Without further ado, let us get started.
 ## UI Control
 
 ### Task Status     
-The status of a task can be classified as one of the following: 
-
-|  Avatar | Status  
-|  :---:  | :---:  
-| <img src="images/Floating.png" width="50"> | Floating 
-| <img src="images/Completed.png" width="50"> | Complete 
-| <img src="images/Pending.png" width="50"> | Pending 
-| <img src="images/Overdue.png" width="50"> | Overdue 
-
 
 ## Features
 
