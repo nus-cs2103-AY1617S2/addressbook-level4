@@ -14,8 +14,8 @@ OneTwoDo is specially designed to be keyboard-friendly. By just typing one line 
 Get started with OneTwoDo today!
 
 OneTwoDo also supports the following for developers:
-    * Automated GUI testing.
-    * Support for *Build Automation* using Gradle and for *Continuous Integration* using Travis CI.
+* Automated GUI testing.
+* Support for *Build Automation* using Gradle and for *Continuous Integration* using Travis CI.
 
 #### Site Map
 * [User Guide](docs/UserGuide.md)
