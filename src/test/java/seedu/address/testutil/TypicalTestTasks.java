@@ -10,7 +10,7 @@ import seedu.address.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
+    public TestTask alice, benson, carl, daniel, elle, fiona, george, ida, hoon;
 
     public TypicalTestTasks() {
         try {
@@ -43,6 +43,14 @@ public class TypicalTestTasks {
             george = new TaskBuilder().withDescription("Say greetings to George Best")
                     .withStartDate("01/02/2017")
                     .withEndDate("02/03/2100")
+                    .withPriority("3").build();
+            ida = new TaskBuilder().withDescription("Say greetings to Ida Noasdergen")
+                    .withStartDate("01/02/2020")
+                    .withEndDate("02/10/2100")
+                    .withPriority("1").build();
+            hoon = new TaskBuilder().withDescription("Say greetings to Hoon Loffschringer")
+                    .withStartDate("01/02/2020")
+                    .withEndDate("12/10/2100")
                     .withPriority("3").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
