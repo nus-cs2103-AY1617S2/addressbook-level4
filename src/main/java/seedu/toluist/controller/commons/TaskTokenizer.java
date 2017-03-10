@@ -59,6 +59,7 @@ public class TaskTokenizer {
         return tokens;
     }
 
+    // TODO Move this somewhere else
     public Task getTask(String indexToken) {
         int index = indexToken == null ? INVALID_INDEX : Integer.parseInt(indexToken) - 1;
         Task task = indexToken == null ? null : UiStore.getInstance().getTasks().get(index);
