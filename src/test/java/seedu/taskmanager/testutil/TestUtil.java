@@ -16,7 +16,7 @@ import org.testfx.api.FxToolkit;
 
 import com.google.common.io.Files;
 
-import guitests.guihandles.PersonCardHandle;
+import guitests.guihandles.TaskCardHandle;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -281,13 +281,13 @@ public class TestUtil {
 
     /**
      * Removes a subset from the list of persons.
-     * @param persons The list of persons
-     * @param personsToRemove The subset of persons.
+     * @param tasks The list of persons
+     * @param tasksToRemove The subset of persons.
      * @return The modified persons after removal of the subset from persons.
      */
-    public static TestPerson[] removePersonsFromList(final TestPerson[] persons, TestPerson... personsToRemove) {
-        List<TestPerson> listOfPersons = asList(persons);
-        listOfPersons.removeAll(asList(personsToRemove));
+    public static TestPerson[] removeTasksFromList(final TestPerson[] tasks, TestPerson... tasksToRemove) {
+        List<TestPerson> listOfPersons = asList(tasks);
+        listOfPersons.removeAll(asList(tasksToRemove));
         return listOfPersons.toArray(new TestPerson[listOfPersons.size()]);
     }
 
@@ -297,31 +297,31 @@ public class TestUtil {
      * @param list original list to copy from
      * @param targetIndexInOneIndexedFormat e.g. index 1 if the first element is to be removed
      */
-    public static TestPerson[] removePersonFromList(final TestPerson[] list, int targetIndexInOneIndexedFormat) {
-        return removePersonsFromList(list, list[targetIndexInOneIndexedFormat - 1]);
+    public static TestPerson[] removeTaskFromList(final TestPerson[] list, int targetIndexInOneIndexedFormat) {
+        return removeTasksFromList(list, list[targetIndexInOneIndexedFormat - 1]);
     }
 
     /**
      * Replaces persons[i] with a person.
-     * @param persons The array of persons.
-     * @param person The replacement person
+     * @param tasks The array of persons.
+     * @param task The replacement person
      * @param index The index of the person to be replaced.
      * @return
      */
-    public static TestPerson[] replacePersonFromList(TestPerson[] persons, TestPerson person, int index) {
-        persons[index] = person;
-        return persons;
+    public static TestPerson[] replaceTaskFromList(TestPerson[] tasks, TestPerson task, int index) {
+        tasks[index] = task;
+        return tasks;
     }
 
     /**
      * Appends persons to the array of persons.
-     * @param persons A array of persons.
-     * @param personsToAdd The persons that are to be appended behind the original array.
+     * @param tasks A array of persons.
+     * @param tasksToAdd The persons that are to be appended behind the original array.
      * @return The modified array of persons.
      */
-    public static TestPerson[] addPersonsToList(final TestPerson[] persons, TestPerson... personsToAdd) {
-        List<TestPerson> listOfPersons = asList(persons);
-        listOfPersons.addAll(asList(personsToAdd));
+    public static TestPerson[] addTasksToList(final TestPerson[] tasks, TestPerson... tasksToAdd) {
+        List<TestPerson> listOfPersons = asList(tasks);
+        listOfPersons.addAll(asList(tasksToAdd));
         return listOfPersons.toArray(new TestPerson[listOfPersons.size()]);
     }
 
@@ -333,8 +333,8 @@ public class TestUtil {
         return list;
     }
 
-    public static boolean compareCardAndPerson(PersonCardHandle card, ReadOnlyTask person) {
-        return card.isSamePerson(person);
+    public static boolean compareCardAndTask(TaskCardHandle card, ReadOnlyTask task) {
+        return card.isSameTask(task);
     }
 
     public static Tag[] getTagList(String tags) {
