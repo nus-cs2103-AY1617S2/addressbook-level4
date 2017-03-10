@@ -538,8 +538,7 @@ public class LogicManagerTest {
                     new Name(name),
                     new Deadline("11/11/1111"),
                     new Description("some desceiption"),
-                    new IdentificationNumber("123"),
-                    new UniqueTagList(new Tag("tag"))
+                    new IdentificationNumber("123")
             );
         }
     }
