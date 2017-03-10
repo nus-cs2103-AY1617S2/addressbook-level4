@@ -23,7 +23,7 @@ public class TypicalTestTasks {
                     .withID("2")
                     .withDescription("johnd@gmail.com")
                     .withTags("owesMoney", "friends").build();
-            carl = new TaskBuilder() .withName("Carl Kurz")
+            carl = new TaskBuilder().withName("Carl Kurz")
                     .withDescription("heinz@yahoo.com")
                     .withID("3")
                     .withDeadline("11/11/2011").build();
