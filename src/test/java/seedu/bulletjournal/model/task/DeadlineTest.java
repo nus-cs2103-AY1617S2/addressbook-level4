@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import seedu.bullletjournal.model.task.Deadline;
 
-public class PhoneTest {
+public class DeadlineTest {
 
     @Test
     public void isValidPhone() {

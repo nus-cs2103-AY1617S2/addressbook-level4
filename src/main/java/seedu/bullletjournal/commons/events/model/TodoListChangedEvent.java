@@ -1,14 +1,14 @@
 package seedu.bullletjournal.commons.events.model;
 
 import seedu.bullletjournal.commons.events.BaseEvent;
-import seedu.bullletjournal.model.ReadOnlyAddressBook;
+import seedu.bullletjournal.model.ReadOnlyTodoList;
 
 /** Indicates the AddressBook in the model has changed*/
-public class AddressBookChangedEvent extends BaseEvent {
+public class TodoListChangedEvent extends BaseEvent {
 
-    public final ReadOnlyAddressBook data;
+    public final ReadOnlyTodoList data;
 
-    public AddressBookChangedEvent(ReadOnlyAddressBook data) {
+    public TodoListChangedEvent(ReadOnlyTodoList data) {
         this.data = data;
     }
 

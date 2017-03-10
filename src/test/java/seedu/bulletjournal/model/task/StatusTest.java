@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import seedu.bullletjournal.model.task.Status;
 
-public class EmailTest {
+public class StatusTest {
 
     @Test
     public void isValidEmail() {

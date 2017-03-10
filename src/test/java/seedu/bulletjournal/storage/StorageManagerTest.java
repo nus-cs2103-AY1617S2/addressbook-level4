@@ -13,11 +13,11 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import seedu.bulletjournal.testutil.EventsCollector;
-import seedu.bulletjournal.testutil.TypicalTestPersons;
-import seedu.bullletjournal.commons.events.model.AddressBookChangedEvent;
+import seedu.bulletjournal.testutil.TypicalTestTasks;
+import seedu.bullletjournal.commons.events.model.TodoListChangedEvent;
 import seedu.bullletjournal.commons.events.storage.DataSavingExceptionEvent;
-import seedu.bullletjournal.model.AddressBook;
-import seedu.bullletjournal.model.ReadOnlyAddressBook;
+import seedu.bullletjournal.model.ReadOnlyTodoList;
+import seedu.bullletjournal.model.TodoList;
 import seedu.bullletjournal.model.UserPrefs;
 import seedu.bullletjournal.storage.JsonUserPrefsStorage;
 import seedu.bullletjournal.storage.Storage;
@@ -64,10 +64,10 @@ public class StorageManagerTest {
          * {@link XmlAddressBookStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link XmlAddressBookStorageTest} class.
          */
-        AddressBook original = new TypicalTestPersons().getTypicalAddressBook();
+        TodoList original = new TypicalTestTasks().getTypicalAddressBook();
         storageManager.saveAddressBook(original);
-        ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
-        assertEquals(original, new AddressBook(retrieved));
+        ReadOnlyTodoList retrieved = storageManager.readAddressBook().get();
+        assertEquals(original, new TodoList(retrieved));
     }
 
     @Test
@@ -81,7 +81,7 @@ public class StorageManagerTest {
         Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub("dummy"),
                                              new JsonUserPrefsStorage("dummy"));
         EventsCollector eventCollector = new EventsCollector();
-        storage.handleAddressBookChangedEvent(new AddressBookChangedEvent(new AddressBook()));
+        storage.handleAddressBookChangedEvent(new TodoListChangedEvent(new TodoList()));
         assertTrue(eventCollector.get(0) instanceof DataSavingExceptionEvent);
     }
 
@@ -96,7 +96,7 @@ public class StorageManagerTest {
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyAddressBook addressBook, String filePath) throws IOException {
+        public void saveAddressBook(ReadOnlyTodoList addressBook, String filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }

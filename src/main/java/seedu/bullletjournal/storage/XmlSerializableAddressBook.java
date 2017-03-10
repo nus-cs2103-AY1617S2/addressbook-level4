@@ -11,16 +11,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.bullletjournal.commons.core.UnmodifiableObservableList;
 import seedu.bullletjournal.commons.exceptions.IllegalValueException;
-import seedu.bullletjournal.model.ReadOnlyAddressBook;
+import seedu.bullletjournal.model.ReadOnlyTodoList;
 import seedu.bullletjournal.model.tag.Tag;
-import seedu.bullletjournal.model.task.Task;
 import seedu.bullletjournal.model.task.ReadOnlyTask;
+import seedu.bullletjournal.model.task.Task;
 
 /**
  * An Immutable AddressBook that is serializable to XML format
  */
 @XmlRootElement(name = "addressbook")
-public class XmlSerializableAddressBook implements ReadOnlyAddressBook {
+public class XmlSerializableAddressBook implements ReadOnlyTodoList {
 
     @XmlElement
     private List<XmlAdaptedPerson> persons;
@@ -39,7 +39,7 @@ public class XmlSerializableAddressBook implements ReadOnlyAddressBook {
     /**
      * Conversion
      */
-    public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
+    public XmlSerializableAddressBook(ReadOnlyTodoList src) {
         this();
         persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));

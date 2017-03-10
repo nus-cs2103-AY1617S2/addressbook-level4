@@ -7,11 +7,11 @@ import javafx.collections.transformation.FilteredList;
 import seedu.bullletjournal.commons.core.ComponentManager;
 import seedu.bullletjournal.commons.core.LogsCenter;
 import seedu.bullletjournal.commons.core.UnmodifiableObservableList;
-import seedu.bullletjournal.commons.events.model.AddressBookChangedEvent;
+import seedu.bullletjournal.commons.events.model.TodoListChangedEvent;
 import seedu.bullletjournal.commons.util.CollectionUtil;
 import seedu.bullletjournal.commons.util.StringUtil;
-import seedu.bullletjournal.model.task.Task;
 import seedu.bullletjournal.model.task.ReadOnlyTask;
+import seedu.bullletjournal.model.task.Task;
 import seedu.bullletjournal.model.task.UniqueTaskList;
 import seedu.bullletjournal.model.task.UniqueTaskList.PersonNotFoundException;
 
@@ -22,51 +22,51 @@ import seedu.bullletjournal.model.task.UniqueTaskList.PersonNotFoundException;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final TodoList todoList;
     private final FilteredList<ReadOnlyTask> filteredPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTodoList addressBook, UserPrefs userPrefs) {
         super();
         assert !CollectionUtil.isAnyNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.todoList = new TodoList(addressBook);
+        filteredPersons = new FilteredList<>(this.todoList.getPersonList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new TodoList(), new UserPrefs());
     }
 
     @Override
-    public void resetData(ReadOnlyAddressBook newData) {
-        addressBook.resetData(newData);
+    public void resetData(ReadOnlyTodoList newData) {
+        todoList.resetData(newData);
         indicateAddressBookChanged();
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyTodoList getAddressBook() {
+        return todoList;
     }
 
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
-        raise(new AddressBookChangedEvent(addressBook));
+        raise(new TodoListChangedEvent(todoList));
     }
 
     @Override
     public synchronized void deletePerson(ReadOnlyTask target) throws PersonNotFoundException {
-        addressBook.removePerson(target);
+        todoList.removePerson(target);
         indicateAddressBookChanged();
     }
 
     @Override
     public synchronized void addPerson(Task task) throws UniqueTaskList.DuplicatePersonException {
-        addressBook.addPerson(task);
+        todoList.addPerson(task);
         updateFilteredListToShowAll();
         indicateAddressBookChanged();
     }
@@ -77,7 +77,7 @@ public class ModelManager extends ComponentManager implements Model {
         assert editedPerson != null;
 
         int addressBookIndex = filteredPersons.getSourceIndex(filteredPersonListIndex);
-        addressBook.updatePerson(addressBookIndex, editedPerson);
+        todoList.updatePerson(addressBookIndex, editedPerson);
         indicateAddressBookChanged();
     }
 

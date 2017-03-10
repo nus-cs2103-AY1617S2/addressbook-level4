@@ -3,8 +3,8 @@ package seedu.bullletjournal.model;
 import java.util.Set;
 
 import seedu.bullletjournal.commons.core.UnmodifiableObservableList;
-import seedu.bullletjournal.model.task.Task;
 import seedu.bullletjournal.model.task.ReadOnlyTask;
+import seedu.bullletjournal.model.task.Task;
 import seedu.bullletjournal.model.task.UniqueTaskList;
 import seedu.bullletjournal.model.task.UniqueTaskList.DuplicatePersonException;
 
@@ -13,10 +13,10 @@ import seedu.bullletjournal.model.task.UniqueTaskList.DuplicatePersonException;
  */
 public interface Model {
     /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyAddressBook newData);
+    void resetData(ReadOnlyTodoList newData);
 
     /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyTodoList getAddressBook();
 
     /** Deletes the given person. */
     void deletePerson(ReadOnlyTask target) throws UniqueTaskList.PersonNotFoundException;

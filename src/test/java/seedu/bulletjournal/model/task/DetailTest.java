@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import seedu.bullletjournal.model.task.Detail;
 
-public class AddressTest {
+public class DetailTest {
 
     @Test
     public void isValidAddress() {

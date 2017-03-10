@@ -5,13 +5,13 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.bulletjournal.testutil.TestUtil;
-import seedu.bullletjournal.model.AddressBook;
+import seedu.bullletjournal.model.TodoList;
 import seedu.bullletjournal.model.task.Task;
 import seedu.bullletjournal.model.util.SampleDataUtil;
 
 public class SampleDataTest extends AddressBookGuiTest {
     @Override
-    protected AddressBook getInitialData() {
+    protected TodoList getInitialData() {
         // return null to force test app to load data from file only
         return null;
     }

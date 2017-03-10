@@ -1,16 +1,16 @@
 package seedu.bulletjournal.testutil;
 
 import seedu.bullletjournal.model.tag.UniqueTagList;
-import seedu.bullletjournal.model.task.Detail;
-import seedu.bullletjournal.model.task.Status;
-import seedu.bullletjournal.model.task.Description;
 import seedu.bullletjournal.model.task.Deadline;
+import seedu.bullletjournal.model.task.Description;
+import seedu.bullletjournal.model.task.Detail;
 import seedu.bullletjournal.model.task.ReadOnlyTask;
+import seedu.bullletjournal.model.task.Status;
 
 /**
  * A mutable person object. For testing only.
  */
-public class TestPerson implements ReadOnlyTask {
+public class TestTask implements ReadOnlyTask {
 
     private Description description;
     private Detail detail;
@@ -18,14 +18,14 @@ public class TestPerson implements ReadOnlyTask {
     private Deadline deadline;
     private UniqueTagList tags;
 
-    public TestPerson() {
+    public TestTask() {
         tags = new UniqueTagList();
     }
 
     /**
      * Creates a copy of {@code personToCopy}.
      */
-    public TestPerson(TestPerson personToCopy) {
+    public TestTask(TestTask personToCopy) {
         this.description = personToCopy.getName();
         this.deadline = personToCopy.getPhone();
         this.status = personToCopy.getEmail();

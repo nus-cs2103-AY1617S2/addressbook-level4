@@ -15,10 +15,10 @@ import seedu.bullletjournal.commons.exceptions.IllegalValueException;
 import seedu.bullletjournal.commons.util.StringUtil;
 import seedu.bullletjournal.model.tag.Tag;
 import seedu.bullletjournal.model.tag.UniqueTagList;
+import seedu.bullletjournal.model.task.Deadline;
+import seedu.bullletjournal.model.task.Description;
 import seedu.bullletjournal.model.task.Detail;
 import seedu.bullletjournal.model.task.Status;
-import seedu.bullletjournal.model.task.Description;
-import seedu.bullletjournal.model.task.Deadline;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes

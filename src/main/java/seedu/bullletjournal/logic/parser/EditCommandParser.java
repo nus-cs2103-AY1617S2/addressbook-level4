@@ -14,8 +14,8 @@ import java.util.Optional;
 import seedu.bullletjournal.commons.exceptions.IllegalValueException;
 import seedu.bullletjournal.logic.commands.Command;
 import seedu.bullletjournal.logic.commands.EditCommand;
-import seedu.bullletjournal.logic.commands.IncorrectCommand;
 import seedu.bullletjournal.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.bullletjournal.logic.commands.IncorrectCommand;
 import seedu.bullletjournal.model.tag.UniqueTagList;
 
 /**

@@ -8,12 +8,12 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.bullletjournal.commons.exceptions.IllegalValueException;
 import seedu.bullletjournal.model.tag.Tag;
 import seedu.bullletjournal.model.tag.UniqueTagList;
-import seedu.bullletjournal.model.task.Detail;
-import seedu.bullletjournal.model.task.Status;
-import seedu.bullletjournal.model.task.Description;
-import seedu.bullletjournal.model.task.Task;
 import seedu.bullletjournal.model.task.Deadline;
+import seedu.bullletjournal.model.task.Description;
+import seedu.bullletjournal.model.task.Detail;
 import seedu.bullletjournal.model.task.ReadOnlyTask;
+import seedu.bullletjournal.model.task.Status;
+import seedu.bullletjournal.model.task.Task;
 
 /**
  * JAXB-friendly version of the Person.

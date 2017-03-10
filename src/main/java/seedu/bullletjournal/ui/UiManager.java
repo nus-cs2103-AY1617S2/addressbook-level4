@@ -15,8 +15,8 @@ import seedu.bullletjournal.commons.core.Config;
 import seedu.bullletjournal.commons.core.LogsCenter;
 import seedu.bullletjournal.commons.events.storage.DataSavingExceptionEvent;
 import seedu.bullletjournal.commons.events.ui.JumpToListRequestEvent;
-import seedu.bullletjournal.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.bullletjournal.commons.events.ui.ShowHelpRequestEvent;
+import seedu.bullletjournal.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.bullletjournal.commons.util.StringUtil;
 import seedu.bullletjournal.logic.Logic;
 import seedu.bullletjournal.model.UserPrefs;
@@ -120,7 +120,7 @@ public class UiManager extends ComponentManager implements Ui {
     }
 
     @Subscribe
-    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
+    private void handlePersonPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.loadPersonPage(event.getNewSelection());
     }

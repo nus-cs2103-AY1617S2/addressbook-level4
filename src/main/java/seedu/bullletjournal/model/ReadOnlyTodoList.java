@@ -8,7 +8,7 @@ import seedu.bullletjournal.model.task.ReadOnlyTask;
 /**
  * Unmodifiable view of an address book
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyTodoList {
 
     /**
      * Returns an unmodifiable view of the persons list.

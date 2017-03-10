@@ -7,12 +7,12 @@ import seedu.bullletjournal.commons.core.Messages;
 import seedu.bullletjournal.commons.util.CollectionUtil;
 import seedu.bullletjournal.logic.commands.exceptions.CommandException;
 import seedu.bullletjournal.model.tag.UniqueTagList;
-import seedu.bullletjournal.model.task.Detail;
-import seedu.bullletjournal.model.task.Status;
-import seedu.bullletjournal.model.task.Description;
-import seedu.bullletjournal.model.task.Task;
 import seedu.bullletjournal.model.task.Deadline;
+import seedu.bullletjournal.model.task.Description;
+import seedu.bullletjournal.model.task.Detail;
 import seedu.bullletjournal.model.task.ReadOnlyTask;
+import seedu.bullletjournal.model.task.Status;
+import seedu.bullletjournal.model.task.Task;
 import seedu.bullletjournal.model.task.UniqueTaskList;
 
 /**

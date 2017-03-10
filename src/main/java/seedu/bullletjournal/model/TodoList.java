@@ -12,8 +12,8 @@ import javafx.collections.ObservableList;
 import seedu.bullletjournal.commons.core.UnmodifiableObservableList;
 import seedu.bullletjournal.model.tag.Tag;
 import seedu.bullletjournal.model.tag.UniqueTagList;
-import seedu.bullletjournal.model.task.Task;
 import seedu.bullletjournal.model.task.ReadOnlyTask;
+import seedu.bullletjournal.model.task.Task;
 import seedu.bullletjournal.model.task.UniqueTaskList;
 import seedu.bullletjournal.model.task.UniqueTaskList.DuplicatePersonException;
 
@@ -21,7 +21,7 @@ import seedu.bullletjournal.model.task.UniqueTaskList.DuplicatePersonException;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .equals comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class TodoList implements ReadOnlyTodoList {
 
     private final UniqueTaskList persons;
     private final UniqueTagList tags;
@@ -38,12 +38,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         tags = new UniqueTagList();
     }
 
-    public AddressBook() {}
+    public TodoList() {}
 
     /**
      * Creates an AddressBook using the Persons and Tags in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public TodoList(ReadOnlyTodoList toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -59,7 +59,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.tags.setTags(tags);
     }
 
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyTodoList newData) {
         assert newData != null;
         try {
             setPersons(newData.getPersonList());
@@ -174,9 +174,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && this.persons.equals(((AddressBook) other).persons)
-                && this.tags.equalsOrderInsensitive(((AddressBook) other).tags));
+                || (other instanceof TodoList // instanceof handles nulls
+                && this.persons.equals(((TodoList) other).persons)
+                && this.tags.equalsOrderInsensitive(((TodoList) other).tags));
     }
 
     @Override

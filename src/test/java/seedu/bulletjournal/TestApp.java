@@ -8,7 +8,7 @@ import seedu.bulletjournal.testutil.TestUtil;
 import seedu.bullletjournal.MainApp;
 import seedu.bullletjournal.commons.core.Config;
 import seedu.bullletjournal.commons.core.GuiSettings;
-import seedu.bullletjournal.model.ReadOnlyAddressBook;
+import seedu.bullletjournal.model.ReadOnlyTodoList;
 import seedu.bullletjournal.model.UserPrefs;
 import seedu.bullletjournal.storage.XmlSerializableAddressBook;
 
@@ -23,13 +23,13 @@ public class TestApp extends MainApp {
             TestUtil.getFilePathInSandboxFolder("pref_testing.json");
     public static final String APP_TITLE = "Test App";
     protected static final String ADDRESS_BOOK_NAME = "Test";
-    protected Supplier<ReadOnlyAddressBook> initialDataSupplier = () -> null;
+    protected Supplier<ReadOnlyTodoList> initialDataSupplier = () -> null;
     protected String saveFileLocation = SAVE_LOCATION_FOR_TESTING;
 
     public TestApp() {
     }
 
-    public TestApp(Supplier<ReadOnlyAddressBook> initialDataSupplier, String saveFileLocation) {
+    public TestApp(Supplier<ReadOnlyTodoList> initialDataSupplier, String saveFileLocation) {
         super();
         this.initialDataSupplier = initialDataSupplier;
         this.saveFileLocation = saveFileLocation;

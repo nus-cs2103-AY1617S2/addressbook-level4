@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import seedu.bullletjournal.model.task.Description;
 
-public class NameTest {
+public class DescriptionTest {
 
     @Test
     public void isValidName() {

@@ -1,14 +1,14 @@
 package seedu.bullletjournal.model.util;
 
 import seedu.bullletjournal.commons.exceptions.IllegalValueException;
-import seedu.bullletjournal.model.AddressBook;
-import seedu.bullletjournal.model.ReadOnlyAddressBook;
+import seedu.bullletjournal.model.ReadOnlyTodoList;
+import seedu.bullletjournal.model.TodoList;
 import seedu.bullletjournal.model.tag.UniqueTagList;
+import seedu.bullletjournal.model.task.Deadline;
+import seedu.bullletjournal.model.task.Description;
 import seedu.bullletjournal.model.task.Detail;
 import seedu.bullletjournal.model.task.Status;
-import seedu.bullletjournal.model.task.Description;
 import seedu.bullletjournal.model.task.Task;
-import seedu.bullletjournal.model.task.Deadline;
 import seedu.bullletjournal.model.task.UniqueTaskList.DuplicatePersonException;
 
 public class SampleDataUtil {
@@ -21,7 +21,8 @@ public class SampleDataUtil {
                 new Task(new Description("Bernice Yu"), new Deadline("99272758"), new Status("berniceyu@gmail.com"),
                     new Detail("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                     new UniqueTagList("colleagues", "friends")),
-                new Task(new Description("Charlotte Oliveiro"), new Deadline("93210283"), new Status("charlotte@yahoo.com"),
+                new Task(new Description("Charlotte Oliveiro"), new Deadline("93210283"),
+                    new Status("charlotte@yahoo.com"),
                     new Detail("Blk 11 Ang Mo Kio Street 74, #11-04"),
                     new UniqueTagList("neighbours")),
                 new Task(new Description("David Li"), new Deadline("91031282"), new Status("lidavid@google.com"),
@@ -39,9 +40,9 @@ public class SampleDataUtil {
         }
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
+    public static ReadOnlyTodoList getSampleAddressBook() {
         try {
-            AddressBook sampleAB = new AddressBook();
+            TodoList sampleAB = new TodoList();
             for (Task samplePerson : getSamplePersons()) {
                 sampleAB.addPerson(samplePerson);
             }
