@@ -11,6 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import seedu.address.commons.exceptions.IllegalDateTimeValueException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.label.Label;
@@ -76,7 +77,8 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.
      */
-    public static Optional<Deadline> parseAddress(Optional<String> address) throws IllegalValueException {
+    public static Optional<Deadline> parseAddress(Optional<String> address)
+            throws IllegalValueException, IllegalDateTimeValueException {
         assert address != null;
         return address.isPresent() ? Optional.of(new Deadline(address.get())) : Optional.empty();
     }

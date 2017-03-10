@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 
+import seedu.address.commons.exceptions.IllegalDateTimeValueException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.label.Label;
 import seedu.address.model.label.UniqueLabelList;
@@ -52,7 +53,7 @@ public class XmlAdaptedTask {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted task
      */
-    public Task toModelType() throws IllegalValueException {
+    public Task toModelType() throws IllegalValueException, IllegalDateTimeValueException {
         final List<Label> taskLabels = new ArrayList<>();
         for (XmlAdaptedLabel label : labeled) {
             taskLabels.add(label.toModelType());

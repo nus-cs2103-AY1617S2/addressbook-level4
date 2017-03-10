@@ -33,12 +33,12 @@ public class FindCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void find_nonEmptyListStartEndDate_singleResult() {
-        assertFindResult("find from today 11-11-2017 0000", td.task6); // 1 result
+        assertFindResult("find from today to 11-11-2017 0000", td.task6); // 1 result
     }
 
     @Test
     public void find_nonEmptyListStartEndDate_pass() {
-        assertFindResult("find from today christmas",
+        assertFindResult("find from today to christmas",
                 td.task1, td.task2, td.task3, td.task4, td.task5, td.task6, td.task7); // 7 result
     }
 

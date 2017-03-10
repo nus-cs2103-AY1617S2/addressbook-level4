@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import seedu.address.commons.exceptions.IllegalDateTimeValueException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.EditCommand;
@@ -40,11 +41,13 @@ public class EditCommandParser {
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
             editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
-            editTaskDescriptor.setAddress(ParserUtil.parseAddress(argsTokenizer.getValue(PREFIX_DEADLINE)));
+            editTaskDescriptor.setDeadline(ParserUtil.parseAddress(argsTokenizer.getValue(PREFIX_DEADLINE)));
             editTaskDescriptor.setLabels(parseLabelsForEdit(ParserUtil.toSet(
                     argsTokenizer.getAllValues(PREFIX_LABEL))));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
+        } catch (IllegalDateTimeValueException ipve) {
+            return new IncorrectCommand(ipve.getMessage());
         }
 
         if (!editTaskDescriptor.isAnyFieldEdited()) {

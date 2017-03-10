@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import seedu.address.commons.exceptions.IllegalDateTimeValueException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.TaskManager;
 import seedu.address.model.task.Task;
@@ -27,7 +28,7 @@ public class TypicalTestTasks {
             // Manually added
             task8 = new TaskBuilder().withTitle("Complete task 8").withDeadline("11-11-2017 2300").build();
             task9 = new TaskBuilder().withTitle("Complete task 9").withDeadline("11-11-2017 2300").build();
-        } catch (IllegalValueException e) {
+        } catch (IllegalValueException | IllegalDateTimeValueException e) {
             e.printStackTrace();
             assert false : "not possible";
         }
