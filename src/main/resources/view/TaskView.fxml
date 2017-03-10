@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<VBox xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <FlowPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="200.0">
+      <FlowPane>
          <children>
             <Label fx:id="id" text="Label">
                <FlowPane.margin>
@@ -19,7 +19,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label fx:id="name" text="Label">
+            <Label fx:id="name" text="Label" wrapText="true">
                <FlowPane.margin>
                   <Insets left="5.0" />
                </FlowPane.margin>

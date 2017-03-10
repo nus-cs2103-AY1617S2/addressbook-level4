@@ -34,10 +34,10 @@ public class TaskUiView extends UiView {
 
     @Override
     protected void viewDidMount() {
-        name.setText(task.description);
+        FxViewUtil.makeFullWidth(getRoot());
+        name.setText("The default font to use for text in the Labeled. If the Label's text is rich text then this font may or may not be used depending on the font information embedded in the rich text, but in any case where a default font is required, this font will be used.");
         id.setText(displayedIndex + ". ");
         setDate();
-        FxViewUtil.makeFullWidth(getRoot());
     }
 
     private void setDate() {
