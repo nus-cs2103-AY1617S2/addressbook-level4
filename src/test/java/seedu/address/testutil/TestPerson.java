@@ -33,7 +33,7 @@ public class TestPerson implements ReadOnlyPerson {
         this.tags = personToCopy.getTags();
     }
 
-    public void setName(Content name) {
+    public void setContent(Content name) {
         this.name = name;
     }
 

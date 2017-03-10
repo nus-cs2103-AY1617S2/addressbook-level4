@@ -42,6 +42,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Content;
+import seedu.address.model.task.TaskDateTime;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.storage.StorageManager;
@@ -408,11 +409,12 @@ public class LogicManagerTest {
     class TestDataHelper {
 
         Task adam() throws Exception {
-            Content name = new Content("Project Meeting");
+            Content content = new Content("Project Meeting");
+            TaskDateTime dateTime = new TaskDateTime("");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, tags);
+            return new Task(content, dateTime, tags);
         }
 
         /**
@@ -425,6 +427,7 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Content("Task " + seed),
+                    new TaskDateTime("DateTime " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -518,6 +521,7 @@ public class LogicManagerTest {
         Task generateTaskWithName(String name) throws Exception {
             return new Task(
                     new Content(name),
+                    new TaskDateTime("22/2/2017 11:00"),
                     new UniqueTagList(new Tag("tag"))
             );
         }
