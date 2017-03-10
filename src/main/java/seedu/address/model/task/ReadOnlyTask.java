@@ -32,7 +32,7 @@ public interface ReadOnlyTask {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getContent())
-               .append(" " + getDateTime().value)
+               .append(" due by " + getDateTime().value)
                .append(" Tags: ");
                getTags().forEach(builder::append);
         return builder.toString();

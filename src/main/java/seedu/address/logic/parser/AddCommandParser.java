@@ -27,7 +27,7 @@ public class AddCommandParser {
         try {
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
-                    argsTokenizer.getValue(PREFIX_DATE_TIME).isPresent() ? argsTokenizer.getValue(PREFIX_DATE_TIME).get() : "",
+                    argsTokenizer.getValue(PREFIX_DATE_TIME).orElse(""),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
             );
         } catch (NoSuchElementException nsee) {

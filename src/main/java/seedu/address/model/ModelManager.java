@@ -76,8 +76,8 @@ public class ModelManager extends ComponentManager implements Model {
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
 
-        int addressBookIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        addressBook.updateTask(addressBookIndex, editedTask);
+        int taskIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
+        addressBook.updateTask(taskIndex, editedTask);
         indicateAddressBookChanged();
     }
 
