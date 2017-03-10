@@ -4,8 +4,9 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 ---
 
-1. [Quick Start](#1-quick-start)
-2. [Features](#2-features)
+1. [Introduction](#1-introduction)
+2. [Quick Start](#2-quick-start)
+3. [Features](#3-features)
     - [Viewing help](#viewing-help--help)
     - [Adding a new task](#adding-a-new-task--add-do)
     - [Listing tasks](#listing-tasks--list-ls)
@@ -20,26 +21,37 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
     - [Exiting the program](#exiting-the-program--exit)
     - [Changing the storage destination](#changing-the-storage-destination--save-at)
     - [Saving the data](#saving-the-data)
-3. [FAQ](#3-faq)
-4. [Command Summary](#4-command-summary)
+4. [FAQ](#4-faq)
+5. [Command Summary](#5-command-summary)
 
-## 1. Quick Start
+## 1. Introduction
+We all love that adrenaline rush when we place a tick on our checklist, mark our tasks as done and actually accomplish what we sought to do. But as our to-do tasks pile up, we tend to forget about them. Everyone barely has time to write our tasks down in a list.
+
+Be a Doist today, one line at a time! Your hands don't even have to leave the keyboard with our command-line input interface.
+Doist allows you to key in, sort, tag, search and even set reminders for your tasks and events so that you can focus on actually doing things.
+
+Doist, rediscover your love for doing things.
+
+
+## 2. Quick Start
 
 Are you ready to be a do-ist?
 
-0. Ensure you have Java version `1.8.0_60` or later installed in your Computer.
+0. Ensure you have Java version `1.8.0_60` or later installed in your computer.
 
 >    Having any Java 8 version is not enough.
 >    This app will not work with earlier versions of Java 8.
 
 1. Download the latest `.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for Doist.
+2. Copy the file to the folder you want to use as the home folder for Doist. Note that you would be able to edit Doist's storage location of its data later.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
-   > <img>
+<br> <br>
+ <img src="images/Ui.png" width="450">
+ Figure 1: Doist Application Window <br>
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
-5. Some example commands you can try:
+5. You could try these example commands:
    * **`list`** : lists all tasks
    * **`add Buy the milk \from 3pm \to 5pm`**:
      adds an event with a description of "Buy the milk" from upcoming 3pm to 5pm
@@ -47,33 +59,53 @@ Are you ready to be a do-ist?
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
-## 2. Features
+## 3. Features
 
 > **Command Format**
-> * All commands begin with a command word, following by parameters.
+> * All commands begin with a command word, followed by parameters.
 > * All parameters are key-value pairs except the first parameter, whose key must be omitted.
 > * All keys start with the backslash `\`.
 > e.g. `\from`, `\every`.
 > * If you want to use backslash in the value, use `\\`.
-> * Both command word and keys are strings without space. Underscore is used separete different words.
+> * Command words and keys will not contain spaces. Underscores are used instead for multiple words.
 > e.g. `list_tag`, `\remind_at`
 > * Words in `UPPER_CASE` are the values.
 > * (A|B) means A and B can be used interchangeably.
 > * Items in `[]` are optional.
 > * Items with `...` after them can have multiple instances, separated by space.
-> * Key-value pairs can be in any order.
+> * Key-value pairs can be entered in any order.
 
 ### Viewing help : `help`
 
-Format: `help`
+Simply type "help" to view the help page! <br>
+`help`
 
 > Help is also shown if the command format is invalid. e.g. `abcd`
 
 ### Adding a new task : `add`, `do`
 
-Adds a new task into the to-do list<br>
-Format 1: `(add|do) TASK_DESCRIPTION [\from START_TIME] [\to END_TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]`
-Format 2: `(add|do) TASK_DESCRIPTION [\by TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]`
+Add a new task with a description using just the `add` command word. <br>
+`(add|do) TASK_DESCRIPTION`
+> **Examples:** <br>
+> add buy milk <br>
+> **Tips:** <br>
+> To use \ in your description, type \\\
+
+Add a task with a start time and end time for events that occur over a period of time with `\from` and `\to` keys. <br>
+`(add|do) TASK_DESCRIPTION [\from START_TIME] [\to END_TIME]`
+> add buy milk \from 3pm \to 4pm <br>
+> add buy milk \from 12 Oct 3pm \to 4pm
+
+Add a task that has a deadline with the `\by` key. If a day is specified but a time is not, current time of the day will be used. <br>
+`(add|do) TASK_DESCRIPTION [\by TIME]`
+
+> add buy milk \by 3pm <br>
+> add buy milk \by 28th Feb
+
+You could set reminders with the `\remind_at` key. A pop-up would appear to remind you about the task. <br>
+` [\remind_at REMIND_TIME]`
+
+` [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]`
 
 > - Tasks can have any number of tags (including 0)
 > - The start time and remind time must be earlier or equal to the end time
@@ -223,13 +255,13 @@ Examples:
 Address book data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
-## 3. FAQ
+## 4. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
        the file that contains the data of your previous Doist folder.
 
-## 4. Command Summary
+## 5. Command Summary
 
 * **Add** :
   `(add|do) TASK_DESCRIPTION [\from START_TIME] [\to END_TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]` <br>
