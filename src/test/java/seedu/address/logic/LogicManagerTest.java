@@ -42,7 +42,7 @@ import seedu.address.model.TaskList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Description;
-import seedu.address.model.task.Email;
+import seedu.address.model.task.TaskDate;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
@@ -197,7 +197,7 @@ public class LogicManagerTest {
         assertCommandFailure("add Valid Description p/not_numbers e/valid@e.mail a/valid, address",
                 Priority.MESSAGE_PRIORITY_CONSTRAINTS);
         assertCommandFailure("add Valid Description p/12345 e/notAnEmail a/valid, address",
-                Email.MESSAGE_EMAIL_CONSTRAINTS);
+                TaskDate.MESSAGE_DATE_CONSTRAINTS);
         assertCommandFailure("add Valid Description p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
@@ -413,11 +413,12 @@ public class LogicManagerTest {
         Task adam() throws Exception {
             Description description = new Description("Adam Brown");
             Priority privatePhone = new Priority("111111");
-            Email email = new Email("adam@gmail.com");
+            TaskDate startDate = new TaskDate("03/21/2017");
+            TaskDate endDate = new TaskDate("03/25/2017");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(description, privatePhone, email, tags);
+            return new Task(description, privatePhone, startDate, endDate, tags);
         }
 
         /**
@@ -431,7 +432,8 @@ public class LogicManagerTest {
             return new Task(
                     new Description("Task " + seed),
                     new Priority("" + Math.abs(seed)),
-                    new Email(seed + "@email"),
+                    new TaskDate(seed + "@email"),
+                    new TaskDate(seed + "@email"),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -443,7 +445,7 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getDescription().toString());
-            cmd.append(" e/").append(p.getDate());
+            cmd.append(" e/").append(p.getStartDate());
             cmd.append(" p/").append(p.getPriority());
 
             UniqueTagList tags = p.getTags();
@@ -528,7 +530,8 @@ public class LogicManagerTest {
             return new Task(
                     new Description(name),
                     new Priority("1"),
-                    new Email("1@email"),
+                    new TaskDate("1@email"),
+                    new TaskDate("1@email"),
                     new UniqueTagList(new Tag("tag"))
             );
         }

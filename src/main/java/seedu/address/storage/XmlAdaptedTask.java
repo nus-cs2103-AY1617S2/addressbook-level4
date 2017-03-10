@@ -9,7 +9,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Description;
-import seedu.address.model.task.Email;
+import seedu.address.model.task.TaskDate;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
@@ -19,11 +19,13 @@ import seedu.address.model.task.Task;
 public class XmlAdaptedTask {
 
     @XmlElement(required = true)
-    private String name;
+    private String description;
     @XmlElement(required = true)
-    private String phone;
+    private String priority;
     @XmlElement(required = true)
-    private String email;
+    private String startDate;
+    @XmlElement(required = true)
+    private String endDate;
     @XmlElement(required = true)
     private String address;
 
@@ -43,9 +45,10 @@ public class XmlAdaptedTask {
      * @param source future changes to this will not affect the created XmlAdaptedTask
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
-        name = source.getDescription().description;
-        phone = source.getPriority().value;
-        email = source.getDate().value;
+        description = source.getDescription().description;
+        priority = source.getPriority().value;
+        startDate = source.getStartDate().value;
+        endDate = source.getEndDate().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -53,19 +56,20 @@ public class XmlAdaptedTask {
     }
 
     /**
-     * Converts this jaxb-friendly adapted Task object into the model's Task object.
+     * Converts this jaxb-friendly adapted person object into the model's Task object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted Task
+     * @throws IllegalValueException if there were any data constraints violated in the adapted person
      */
     public Task toModelType() throws IllegalValueException {
-        final List<Tag> TaskTags = new ArrayList<>();
+        final List<Tag> taskTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
-            TaskTags.add(tag.toModelType());
+            taskTags.add(tag.toModelType());
         }
-        final Description description = new Description(this.name);
-        final Priority priority = new Priority(this.phone);
-        final Email email = new Email(this.email);
-        final UniqueTagList tags = new UniqueTagList(TaskTags);
-        return new Task(description, priority, email, tags);
+        final Description description = new Description(this.description);
+        final Priority priority = new Priority(this.priority);
+        final TaskDate startDate = new TaskDate(this.startDate);
+        final TaskDate endDate = new TaskDate(this.endDate);
+        final UniqueTagList tags = new UniqueTagList(taskTags);
+        return new Task(description, priority, startDate, endDate, tags);
     }
 }

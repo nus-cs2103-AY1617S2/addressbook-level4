@@ -8,7 +8,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Description;
-import seedu.address.model.task.Email;
+import seedu.address.model.task.TaskDate;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
@@ -78,10 +78,11 @@ public class EditCommand extends Command {
 
         Description updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getDescription);
         Priority updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPriority);
-        Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getDate);
+        TaskDate startDate = editPersonDescriptor.getEmail().orElseGet(personToEdit::getStartDate);
+        TaskDate endDate = editPersonDescriptor.getEmail().orElseGet(personToEdit::getStartDate);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
-        return new Task(updatedName, updatedPhone, updatedEmail, updatedTags);
+        return new Task(updatedName, updatedPhone, startDate, endDate, updatedTags);
     }
 
     /**
@@ -91,7 +92,7 @@ public class EditCommand extends Command {
     public static class EditPersonDescriptor {
         private Optional<Description> description = Optional.empty();
         private Optional<Priority> priority = Optional.empty();
-        private Optional<Email> email = Optional.empty();
+        private Optional<TaskDate> taskDate = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditPersonDescriptor() {}
@@ -99,7 +100,7 @@ public class EditCommand extends Command {
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             this.description = toCopy.getName();
             this.priority = toCopy.getPhone();
-            this.email = toCopy.getEmail();
+            this.taskDate = toCopy.getEmail();
             this.tags = toCopy.getTags();
         }
 
@@ -107,7 +108,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.description, this.priority, this.email, this.tags);
+            return CollectionUtil.isAnyPresent(this.description, this.priority, this.taskDate, this.tags);
         }
 
         public void setName(Optional<Description> description) {
@@ -128,13 +129,13 @@ public class EditCommand extends Command {
             return priority;
         }
 
-        public void setEmail(Optional<Email> email) {
-            assert email != null;
-            this.email = email;
+        public void setEmail(Optional<TaskDate> taskDate) {
+            assert taskDate != null;
+            this.taskDate = taskDate;
         }
 
-        public Optional<Email> getEmail() {
-            return email;
+        public Optional<TaskDate> getEmail() {
+            return taskDate;
         }
 
 

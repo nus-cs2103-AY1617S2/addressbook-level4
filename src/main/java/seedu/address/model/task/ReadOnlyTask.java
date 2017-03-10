@@ -10,7 +10,8 @@ public interface ReadOnlyTask {
 
     Description getDescription();
     Priority getPriority();
-    Email getDate();
+    TaskDate getStartDate();
+    TaskDate getEndDate();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -26,19 +27,22 @@ public interface ReadOnlyTask {
                 || (other != null // this is first to avoid NPE below
                 && other.getDescription().equals(this.getDescription()) // state checks here onwards
                 && other.getPriority().equals(this.getPriority())
-                && other.getDate().equals(this.getDate()));
+                && other.getStartDate().equals(this.getStartDate()))
+                && other.getEndDate().equals(this.getEndDate());
     }
 
     /**
-     * Formats the person as text, showing all contact details.
+     * Formats the task as text, showing all task details.
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getDescription())
                 .append(" Priority: ")
                 .append(getPriority())
-                .append(" Date: ")
-                .append(getDate())
+                .append(" Start Date: ")
+                .append(getStartDate())
+                .append(" End Date: ")
+                .append(getEndDate())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
