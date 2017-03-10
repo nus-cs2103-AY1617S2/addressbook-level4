@@ -32,14 +32,14 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
 
         // add task with deadline
         String taskDescription = "get v0.2 ready";
-        LocalDateTime endDate = DateTimeUtil.toDate("15 Mar 2017, 12pm");
+        LocalDateTime endDate = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
         String command = "add " + taskDescription + " enddate/" + endDate;
         commandBox.runCommand(command);
         Task task = new Task(taskDescription, endDate);
         assertTrue(isTaskShown(task));
 
         // update task deadline
-        LocalDateTime newEndDate = DateTimeUtil.toDate("22 Mar 2017, 11am");
+        LocalDateTime newEndDate = DateTimeUtil.parseDateString("22 Mar 2017, 11am");
         command = "update " + eventIndex + " enddate/" + newEndDate;
         commandBox.runCommand(command);
         Task task2 = new Task(taskDescription, newEndDate);
@@ -57,7 +57,7 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
 
         // update all parameters for task with deadline
         String newerTaskDescription = "get v0.2 ready";
-        LocalDateTime newerEndDate = DateTimeUtil.toDate("15 Mar 2017, 12pm");
+        LocalDateTime newerEndDate = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
         command = "update " + eventIndex + " " + newerTaskDescription + " enddate/" + newerEndDate;
         commandBox.runCommand(command);
         Task task4 = new Task(newerTaskDescription, newerEndDate);
@@ -73,16 +73,16 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
 
         // add event
         String taskDescription = "attend CS2103T tutorial";
-        LocalDateTime startDate = DateTimeUtil.toDate("15 Mar 2017, 12pm");
-        LocalDateTime endDate = DateTimeUtil.toDate("15 Mar 2017, 1pm");
+        LocalDateTime startDate = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
+        LocalDateTime endDate = DateTimeUtil.parseDateString("15 Mar 2017, 1pm");
         String command = "add " + taskDescription + " startdate/" + startDate + " enddate/" + endDate;
         commandBox.runCommand(command);
         Task task = new Task(taskDescription, startDate, endDate);
         assertTrue(isTaskShown(task));
 
         // update event start date and end date
-        LocalDateTime newStartDate = DateTimeUtil.toDate("22 Mar 2017, 12pm");
-        LocalDateTime newEndDate = DateTimeUtil.toDate("22 Mar 2017, 1pm");
+        LocalDateTime newStartDate = DateTimeUtil.parseDateString("22 Mar 2017, 12pm");
+        LocalDateTime newEndDate = DateTimeUtil.parseDateString("22 Mar 2017, 1pm");
         command = "update " + eventIndex + " startdate/" + newStartDate + " enddate/" + newEndDate;
         commandBox.runCommand(command);
         Task task2 = new Task(taskDescription, newStartDate, newEndDate);
@@ -100,8 +100,8 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
 
         // update all parameters for event
         String newerTaskDescription = "attend CS2103T tutorial";
-        LocalDateTime newerStartDate = DateTimeUtil.toDate("15 Mar 2017, 12pm");
-        LocalDateTime newerEndDate = DateTimeUtil.toDate("15 Mar 2017, 1pm");
+        LocalDateTime newerStartDate = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
+        LocalDateTime newerEndDate = DateTimeUtil.parseDateString("15 Mar 2017, 1pm");
         command = "update " + eventIndex + " " + newerTaskDescription +
                 " startdate/" + newerStartDate + " enddate/" + newerEndDate;
         commandBox.runCommand(command);

@@ -37,15 +37,15 @@ public class DeleteTaskCommandTest extends ToLuistGuiTest {
 
         // add task with deadline
         String taskDescription2 = "get v0.2 ready";
-        LocalDateTime endDate2 = DateTimeUtil.toDate("15 Mar 2017, 12pm");
+        LocalDateTime endDate2 = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
         String command2 = "add " + taskDescription2 + " enddate/" + endDate2;
         commandBox.runCommand(command2);
         Task task2 = new Task(taskDescription2, endDate2);
 
         // add event
         String taskDescription3 = "attend CS2103T tutorial";
-        LocalDateTime startDate3 = DateTimeUtil.toDate("15 Mar 2017, 12pm");
-        LocalDateTime endDate3 = DateTimeUtil.toDate("15 Mar 2017, 1pm");
+        LocalDateTime startDate3 = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
+        LocalDateTime endDate3 = DateTimeUtil.parseDateString("15 Mar 2017, 1pm");
         String command3 = "add " + taskDescription3 + " startdate/" + startDate3 + " enddate/" + endDate3;
         commandBox.runCommand(command3);
         Task task3 = new Task(taskDescription3, startDate3, endDate3);

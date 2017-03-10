@@ -15,7 +15,7 @@ import com.joestelmach.natty.Parser;
 public class DateTimeUtil {
     public static final String DATE_TIME_FORMATTER_PATTERN = "E, d MMM uuuu h:mm a";
 
-    public static LocalDateTime toDate(String stringDate) {
+    public static LocalDateTime parseDateString(String stringDate) {
         if (stringDate == null) {
             return null;
         }
