@@ -120,9 +120,9 @@ public class TaskList implements Iterable<Task> {
 
     public boolean isEmpty() {
         if(internalList.isEmpty()){
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
 }

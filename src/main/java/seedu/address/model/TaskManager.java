@@ -178,9 +178,9 @@ public class TaskManager implements ReadOnlyTaskManager {
     
     public boolean isEmpty(){
         if(this.tasks.isEmpty()){
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
 }
