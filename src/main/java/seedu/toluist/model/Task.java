@@ -52,7 +52,7 @@ public class Task implements Comparable<Task> {
     }
 
     public boolean validateDescriptionMustNotBeEmpty() {
-        return description != null;
+        return description != null && !description.isEmpty();
     }
 
     public boolean validateStartDateMustBeBeforeEndDate() {
