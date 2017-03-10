@@ -46,8 +46,8 @@ public class TagController extends Controller {
         int index = Integer.parseInt(tokens.get(INDEX_PARAMETER)) - 1;
         TodoList todoList = TodoList.load();
         Task task = UiStore.getInstance().getTasks().get(index);
-        ArrayList<String> successfulList = new ArrayList<String>();
-        ArrayList<String> failedList = new ArrayList<String>();
+        ArrayList<String> successfulList = new ArrayList<>();
+        ArrayList<String> failedList = new ArrayList<>();
 
         for (String keyword : keywordList) {
             if (task.addTag(new Tag(keyword))) {
