@@ -30,7 +30,7 @@ public class EndDate {
     }
 
     /**
-     * Returns if a given string is a valid person email.
+     * Returns if a given string is a valid task end date.
      */
     public static boolean isValidEndDate(String test) {
         return test.matches(ENDDATE_VALIDATION_REGEX);

@@ -34,7 +34,7 @@ public interface TaskManagerStorage {
      * @param taskManager cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveTaskManager(ReadOnlyTaskManager addressBook) throws IOException;
+    void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException;
 
     /**
      * @see #saveTaskManager(ReadOnlyTaskManager)
