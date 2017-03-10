@@ -35,9 +35,9 @@ public class Date {
     public static boolean isValidDate(String input) {
         try {
             format.parse(input);
-             return true;
+            return true;
         } catch (ParseException e) {
-             return false;
+            return false;
         }
     }
 
