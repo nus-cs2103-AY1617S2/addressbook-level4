@@ -58,7 +58,7 @@ public class MainApp extends Application {
         userPrefs = initPrefs(config);
 
         initLogging(config);
-   
+
         model = initModelManager(storage, userPrefs);
         logic = new LogicManager(model, storage);
         ui = new UiManager(logic, config, userPrefs);
