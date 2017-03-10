@@ -11,6 +11,10 @@ import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.person.Task;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.ReadOnlyEvent;
+import seedu.address.model.event.UniqueEventList.DuplicateEventException;
+import seedu.address.model.event.UniqueEventList.EventNotFoundException;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.UniqueTaskList;
 import seedu.address.model.person.UniqueTaskList.TaskNotFoundException;
@@ -49,7 +53,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public ReadOnlyUserInbox getAddressBook() {
+    public ReadOnlyUserInbox getUserInbox() {
         return userInbox;
     }
 
@@ -152,6 +156,24 @@ public class ModelManager extends ComponentManager implements Model {
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
         }
+    }
+
+    @Override
+    public void deleteEvent(ReadOnlyEvent target) throws EventNotFoundException {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void updateEvent(int fileteredEventListIndex, ReadOnlyEvent editedEvent) throws DuplicateEventException {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void addEvent(Event event) throws EventNotFoundException {
+        // TODO Auto-generated method stub
+        
     }
 
 }
