@@ -9,7 +9,7 @@ import seedu.taskmanager.model.task.EndDate;
 import seedu.taskmanager.model.task.Title;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.StartDate;
-import seedu.taskmanager.model.task.UniqueTaskList.DuplicatePersonException;
+import seedu.taskmanager.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
     public static Task[] getSampleTasks() {
@@ -46,7 +46,7 @@ public class SampleDataUtil {
                 sampleAB.addTask(sampleTask);
             }
             return sampleAB;
-        } catch (DuplicatePersonException e) {
+        } catch (DuplicateTaskException e) {
             throw new AssertionError("sample data cannot contain duplicate persons", e);
         }
     }

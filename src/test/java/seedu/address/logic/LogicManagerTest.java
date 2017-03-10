@@ -125,7 +125,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, String expectedMessage) {
         TaskManager expectedTaskManager = new TaskManager(model.getAddressBook());
-        List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredPersonList());
+        List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredTaskList());
         assertCommandBehavior(true, inputCommand, expectedMessage, expectedTaskManager, expectedShownList);
     }
 
@@ -151,7 +151,7 @@ public class LogicManagerTest {
         }
 
         //Confirm the ui display elements should contain the right data
-        assertEquals(expectedShownList, model.getFilteredPersonList());
+        assertEquals(expectedShownList, model.getFilteredTaskList());
 
         //Confirm the state of data (saved and in-memory) is as expected
         assertEquals(expectedAddressBook, model.getAddressBook());
@@ -316,7 +316,7 @@ public class LogicManagerTest {
                 expectedAB,
                 expectedAB.getPersonList());
         assertEquals(1, targetedJumpIndex);
-        assertEquals(model.getFilteredPersonList().get(1), threeTasks.get(1));
+        assertEquals(model.getFilteredTaskList().get(1), threeTasks.get(1));
     }
 
 
@@ -341,7 +341,7 @@ public class LogicManagerTest {
         helper.addToModel(model, threeTasks);
 
         assertCommandSuccess("delete 2",
-                String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, threeTasks.get(1)),
+                String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, threeTasks.get(1)),
                 expectedAB,
                 expectedAB.getPersonList());
     }
@@ -367,7 +367,7 @@ public class LogicManagerTest {
         helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find KEY",
-                Command.getMessageForPersonListShownSummary(expectedList.size()),
+                Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
     }
@@ -386,7 +386,7 @@ public class LogicManagerTest {
         helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find KEY",
-                Command.getMessageForPersonListShownSummary(expectedList.size()),
+                Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
     }
@@ -405,7 +405,7 @@ public class LogicManagerTest {
         helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find key rAnDoM",
-                Command.getMessageForPersonListShownSummary(expectedList.size()),
+                Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
     }

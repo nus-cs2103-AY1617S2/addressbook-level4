@@ -15,7 +15,7 @@ import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.EditCommand;
 import seedu.taskmanager.logic.commands.IncorrectCommand;
-import seedu.taskmanager.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.taskmanager.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.taskmanager.model.tag.UniqueTagList;
 
 /**
@@ -39,22 +39,22 @@ public class EditCommandParser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
-            editPersonDescriptor.setTitle(ParserUtil.parseTitle(preambleFields.get(1)));
-            editPersonDescriptor.setStartDate(ParserUtil.parseStartDate(argsTokenizer.getValue(PREFIX_PHONE)));
-            editPersonDescriptor.setEndDate(ParserUtil.parseEndDate(argsTokenizer.getValue(PREFIX_EMAIL)));
-            editPersonDescriptor.setDescription(ParserUtil.parseDescription(argsTokenizer.getValue(PREFIX_ADDRESS)));
-            editPersonDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
+            editTaskDescriptor.setTitle(ParserUtil.parseTitle(preambleFields.get(1)));
+            editTaskDescriptor.setStartDate(ParserUtil.parseStartDate(argsTokenizer.getValue(PREFIX_PHONE)));
+            editTaskDescriptor.setEndDate(ParserUtil.parseEndDate(argsTokenizer.getValue(PREFIX_EMAIL)));
+            editTaskDescriptor.setDescription(ParserUtil.parseDescription(argsTokenizer.getValue(PREFIX_ADDRESS)));
+            editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
 
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
+        if (!editTaskDescriptor.isAnyFieldEdited()) {
             return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index.get(), editPersonDescriptor);
+        return new EditCommand(index.get(), editTaskDescriptor);
     }
 
     /**

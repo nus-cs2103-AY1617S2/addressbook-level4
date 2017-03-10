@@ -13,7 +13,7 @@ import seedu.taskmanager.commons.util.StringUtil;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.model.task.UniqueTaskList;
-import seedu.taskmanager.model.task.UniqueTaskList.PersonNotFoundException;
+import seedu.taskmanager.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -59,13 +59,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void deletePerson(ReadOnlyTask target) throws PersonNotFoundException {
+    public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskManager.removePerson(target);
         indicateAddressBookChanged();
     }
 
     @Override
-    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicatePersonException {
+    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTask(task);
         updateFilteredListToShowAll();
         indicateAddressBookChanged();
@@ -73,7 +73,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updatePerson(int filteredPersonListIndex, ReadOnlyTask editedPerson)
-            throws UniqueTaskList.DuplicatePersonException {
+            throws UniqueTaskList.DuplicateTaskException {
         assert editedPerson != null;
 
         int addressBookIndex = filteredPersons.getSourceIndex(filteredPersonListIndex);
@@ -84,7 +84,7 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Filtered Person List Accessors =============================================================
 
     @Override
-    public UnmodifiableObservableList<ReadOnlyTask> getFilteredPersonList() {
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
         return new UnmodifiableObservableList<>(filteredPersons);
     }
 
@@ -94,7 +94,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredPersonList(Set<String> keywords) {
+    public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredPersonList(new PredicateExpression(new NameQualifier(keywords)));
     }
 
