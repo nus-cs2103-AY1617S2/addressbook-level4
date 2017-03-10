@@ -20,9 +20,9 @@ public class Title {
     public final String value;
 
     /**
-     * Validates given name.
+     * Validates given title.
      *
-     * @throws IllegalValueException if given name string is invalid.
+     * @throws IllegalValueException if given title string is invalid.
      */
     public Title(String title) throws IllegalValueException {
         assert title != null;

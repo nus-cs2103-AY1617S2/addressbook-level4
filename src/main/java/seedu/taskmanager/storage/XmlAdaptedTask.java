@@ -16,39 +16,39 @@ import seedu.taskmanager.model.task.StartDate;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 
 /**
- * JAXB-friendly version of the Person.
+ * JAXB-friendly version of the Task.
  */
 public class XmlAdaptedTask {
 
     @XmlElement(required = true)
-    private String name;
+    private String title;
     @XmlElement(required = true)
-    private String phone;
+    private String startDate;
     @XmlElement(required = true)
-    private String email;
+    private String endDate;
     @XmlElement(required = true)
-    private String address;
+    private String description;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
     /**
-     * Constructs an XmlAdaptedPerson.
+     * Constructs an XmlAdaptedTask.
      * This is the no-arg constructor that is required by JAXB.
      */
     public XmlAdaptedTask() {}
 
 
     /**
-     * Converts a given Person into this class for JAXB use.
+     * Converts a given Task into this class for JAXB use.
      *
-     * @param source future changes to this will not affect the created XmlAdaptedPerson
+     * @param source future changes to this will not affect the created XmlAdaptedTask
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
-        name = source.getTitle().value;
-        phone = source.getStartDate().value;
-        email = source.getEndDate().value;
-        address = source.getDescription().value;
+        title = source.getTitle().fullName;
+        startDate = source.getStartDate().value;
+        endDate = source.getEndDate().value;
+        description = source.getDescription().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -56,19 +56,19 @@ public class XmlAdaptedTask {
     }
 
     /**
-     * Converts this jaxb-friendly adapted person object into the model's Person object.
+     * Converts this jaxb-friendly adapted task object into the model's Task object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person
+     * @throws IllegalValueException if there were any data constraints violated in the adapted task
      */
     public Task toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
         }
-        final Title title = new Title(this.name);
-        final StartDate startDate = new StartDate(this.phone);
-        final EndDate endDate = new EndDate(this.email);
-        final Description description = new Description(this.address);
+        final Title title = new Title(this.title);
+        final StartDate startDate = new StartDate(this.startDate);
+        final EndDate endDate = new EndDate(this.endDate);
+        final Description description = new Description(this.description);
         final UniqueTagList tags = new UniqueTagList(personTags);
         return new Task(title, startDate, endDate, description, tags);
     }
