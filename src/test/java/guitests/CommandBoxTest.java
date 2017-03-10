@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import seedu.address.ui.CommandBox;
+import seedu.doit.ui.CommandBox;
 
-public class CommandBoxTest extends AddressBookGuiTest {
+public class CommandBoxTest extends TaskManagerGuiTest {
 
     private static final String COMMAND_THAT_SUCCEEDS = "select 3";
     private static final String COMMAND_THAT_FAILS = "invalid command";
@@ -22,7 +22,7 @@ public class CommandBoxTest extends AddressBookGuiTest {
     public void setUp() {
         defaultStyleOfCommandBox = new ArrayList<>(commandBox.getStyleClass());
         assertFalse("CommandBox default style classes should not contain error style class.",
-                    defaultStyleOfCommandBox.contains(CommandBox.ERROR_STYLE_CLASS));
+            defaultStyleOfCommandBox.contains(CommandBox.ERROR_STYLE_CLASS));
 
         // build style class for error
         errorStyleOfCommandBox = new ArrayList<>(defaultStyleOfCommandBox);
