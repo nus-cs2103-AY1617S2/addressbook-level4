@@ -2,6 +2,7 @@ package seedu.toluist.ui.view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import seedu.toluist.commons.util.DateTimeUtil;
 import seedu.toluist.commons.util.FxViewUtil;
 import seedu.toluist.model.Task;
 
@@ -29,7 +30,14 @@ public class TaskUiView extends UiView {
 
     @Override
     protected void viewDidMount() {
-        name.setText(task.description);
+        String fullDescription = task.getDescription();
+        if (task.getStartDateTime() != null) {
+            fullDescription += "\nStart: " + DateTimeUtil.toString(task.getStartDateTime());
+        }
+        if (task.getEndDateTime() != null) {
+            fullDescription += "\nEnd: " + DateTimeUtil.toString(task.getEndDateTime());
+        }
+        name.setText(fullDescription);
         id.setText(displayedIndex + ". ");
         FxViewUtil.makeFullWidth(getRoot());
     }

@@ -12,9 +12,9 @@ public class Task implements Comparable<Task> {
 
     // List of tags is unique
     private HashSet<Tag> allTags = new HashSet<>();
-    public String description;
-    private LocalDateTime endDateTime;
+    private String description;
     private LocalDateTime startDateTime;
+    private LocalDateTime endDateTime;
     private LocalDateTime completionDateTime;
 
     /**
@@ -26,15 +26,42 @@ public class Task implements Comparable<Task> {
         this(description, null, null);
     }
 
-    public Task(String description, LocalDateTime startDateTime) {
-        this(description, startDateTime, null);
+    public Task(String description, LocalDateTime endDateTime) {
+        this(description, null, endDateTime);
     }
 
     public Task(String description, LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        assert description != null;
-        this.description = description.trim();
-        this.startDateTime = startDateTime;
-        this.endDateTime = endDateTime;
+        this.setDescription(description.trim());
+        this.setStartDateTime(startDateTime);
+        this.setEndDateTime(endDateTime);
+        validate();
+    }
+
+    public void validate() {
+        if (!validateDescriptionMustNotBeEmpty()) {
+            throw new IllegalArgumentException("Description must not be empty.");
+        }
+        if (!validateStartDateMustBeBeforeEndDate()) {
+            throw new IllegalArgumentException("Start date must be before end date.");
+        }
+        if (!validateTaskIsFloatingIsEventOrHasDeadline()) {
+            throw new IllegalArgumentException("Task must be floating, must be an event, or has deadline,");
+        }
+    }
+
+    public boolean validateDescriptionMustNotBeEmpty() {
+        return description != null && !description.isEmpty();
+    }
+
+    public boolean validateStartDateMustBeBeforeEndDate() {
+        if (startDateTime != null && endDateTime != null) {
+            return startDateTime.isBefore(endDateTime);
+        }
+        return true;
+    }
+
+    public boolean validateTaskIsFloatingIsEventOrHasDeadline() {
+        return startDateTime == null || endDateTime != null;
     }
 
     @Override
@@ -57,14 +84,14 @@ public class Task implements Comparable<Task> {
     }
 
     public void setDeadLine(LocalDateTime deadLine) {
-        endDateTime = null;
-        startDateTime = deadLine;
+        setEndDateTime(null);
+        setStartDateTime(deadLine);
     }
 
     public void setFromTo(LocalDateTime from, LocalDateTime to) {
         assert from.isBefore(to);
-        startDateTime = from;
-        endDateTime = to;
+        setStartDateTime(from);
+        setEndDateTime(to);
     }
 
     public void addTag(Tag tag) {
@@ -84,7 +111,7 @@ public class Task implements Comparable<Task> {
     }
 
     public boolean isOverdue() {
-        return !isCompleted() && (startDateTime != null && startDateTime.isBefore(LocalDateTime.now()));
+        return !isCompleted() && (endDateTime != null && endDateTime.isBefore(LocalDateTime.now()));
     }
 
     public boolean isCompleted() {
@@ -113,13 +140,37 @@ public class Task implements Comparable<Task> {
 
     @Override
     public int compareTo(Task comparison) {
-        if (startDateTime.compareTo(comparison.startDateTime) != 0) {
-            return startDateTime.compareTo(comparison.startDateTime);
+        if (endDateTime.compareTo(comparison.endDateTime) != 0) {
+            return endDateTime.compareTo(comparison.endDateTime);
         } else if (false) {
             //TODO add priority comparison with variable
             return -1;
         } else {
             return this.description.compareToIgnoreCase(comparison.description);
         }
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public LocalDateTime getEndDateTime() {
+        return endDateTime;
+    }
+
+    public void setEndDateTime(LocalDateTime endDateTime) {
+        this.endDateTime = endDateTime;
+    }
+
+    public LocalDateTime getStartDateTime() {
+        return startDateTime;
+    }
+
+    public void setStartDateTime(LocalDateTime startDateTime) {
+        this.startDateTime = startDateTime;
     }
 }
