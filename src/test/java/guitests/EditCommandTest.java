@@ -103,11 +103,10 @@ public class EditCommandTest extends TaskManagerGuiTest {
         //allow location to be empty
         //commandBox.runCommand("edit 1 l/");
         //assertResultMessage(Location.MESSAGE_LOCATION_CONSTRAINTS);
-        
         commandBox.runCommand("edit 1 t/*&");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
     }
-   
+
     @Test
     public void edit_duplicateTask_failure() {
         commandBox.runCommand("edit 3 Apply for internship d/08-03-1989 r/checkout career fair "

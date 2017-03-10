@@ -18,7 +18,7 @@ public class DateTest {
 
         // valid dates
         assertTrue(Date.isValidDate("23-12-1934"));
-        assertTrue(Date.isValidDate("03-01-1000")); 
-        assertTrue(Date.isValidDate("31-12-2999")); 
+        assertTrue(Date.isValidDate("03-01-1000"));
+        assertTrue(Date.isValidDate("31-12-2999"));
     }
 }

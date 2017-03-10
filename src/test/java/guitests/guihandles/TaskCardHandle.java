@@ -78,7 +78,6 @@ public class TaskCardHandle extends GuiHandle {
     	List<String> taskTag = getTags(task.getTags());
     	Collections.sort(testTag);
     	Collections.sort(taskTag);
-    	
         return getName().equals(task.getName().fullName)
                 && getDate().equals(task.getDate().value)
                 && getRemark().equals(task.getRemark().value)
