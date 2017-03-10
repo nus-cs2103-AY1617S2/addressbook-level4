@@ -75,11 +75,11 @@ public class ConfigUtilTest {
 
     private Config getTypicalConfig() {
         Config config = new Config();
-        config.setAppTitle("Typical App Title");
+        config.setAppTitle("Typed App");
         config.setLogLevel(Level.INFO);
         config.setUserPrefsFilePath("C:\\preferences.json");
         config.setTaskManagerFilePath("taskmanager.xml");
-        config.setTaskManagerName("TypicalTaskManagerName");
+        config.setTaskManagerName("Typed");
         return config;
     }
 

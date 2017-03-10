@@ -18,10 +18,11 @@ import seedu.typed.model.task.UniqueTaskList;
 import seedu.typed.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
- * Wraps all data at the address-book level Duplicates are not allowed (by
+ * Wraps all data at the task-manager level. Duplicates are not allowed (by
  * .equals comparison)
  */
 public class TaskManager implements ReadOnlyTaskManager {
+    private static final String DUPLICATE_TASK_WARNING = "Task Manager should not have duplicate tasks";
     private final UniqueTaskList tasks;
     private final UniqueTagList tags;
 
@@ -65,12 +66,12 @@ public class TaskManager implements ReadOnlyTaskManager {
         try {
             setTasks(newData.getTaskList());
         } catch (UniqueTaskList.DuplicateTaskException e) {
-            assert false : "Task Manager should not have duplicate tasks";
+            assert false : DUPLICATE_TASK_WARNING;
         }
         try {
             setTags(newData.getTagList());
         } catch (UniqueTagList.DuplicateTagException e) {
-            assert false : "Task Manager should not have duplicate tags";
+            assert false : DUPLICATE_TASK_WARNING;
         }
         syncMasterTagListWith(tasks);
     }

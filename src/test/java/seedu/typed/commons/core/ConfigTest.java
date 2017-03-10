@@ -14,9 +14,9 @@ public class ConfigTest {
 
     @Test
     public void toString_defaultObject_stringReturned() {
-        String defaultConfigAsString = "App title : Typical App Title\n" + "Current log level : INFO\n"
+        String defaultConfigAsString = "App title : Typed App\n" + "Current log level : INFO\n"
                 + "Preference file Location : preferences.json\n" + "Local data file location : taskmanager.xml\n"
-                + "TaskManager name : TypicalTaskManagerName";
+                + "TaskManager name : Typed";
 
         assertEquals(defaultConfigAsString, new Config().toString());
     }
