@@ -13,7 +13,7 @@ import seedu.taskmanager.commons.util.XmlUtil;
  */
 public class XmlFileStorage {
     /**
-     * Saves the given addressbook data to the specified file.
+     * Saves the given taskmanager data to the specified file.
      */
     public static void saveDataToFile(File file, XmlSerializableTaskManager taskManager)
             throws FileNotFoundException {
