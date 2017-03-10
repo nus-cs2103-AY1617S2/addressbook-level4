@@ -60,7 +60,7 @@ public class TestTask implements ReadOnlyTask {
 
     @Override
     public Email getDate() {
-        return email;
+        return date;
     }
 
     @Override
