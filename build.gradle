@@ -12,7 +12,7 @@ plugins {
 }
 
 // Specifies the entry point of the application
-mainClassName = 'seedu.address.MainApp'
+mainClassName = 'seedu.doit.MainApp'
 
 allprojects {
     apply plugin: 'idea'
@@ -156,7 +156,7 @@ task guiTests(type: TaskManagerTest) {
 
 
 task nonGuiTests(type: TaskManagerTest) {
-    include 'seedu/address/**'
+    include 'seedu/doit/**'
 
     jacoco {
         destinationFile = new File("${buildDir}/jacoco/test.exec")

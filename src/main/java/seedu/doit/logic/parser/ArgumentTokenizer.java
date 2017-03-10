@@ -171,13 +171,13 @@ public class ArgumentTokenizer {
      * e.g. '/t' in 'add James /t friend'
      */
     public static class Prefix {
-        final String prefix;
+        private final String prefix;
 
         Prefix(String prefix) {
             this.prefix = prefix;
         }
 
-        String getPrefix() {
+        protected String getPrefix() {
             return this.prefix;
         }
 
@@ -212,11 +212,11 @@ public class ArgumentTokenizer {
             this.startPosition = startPosition;
         }
 
-        int getStartPosition() {
+        private int getStartPosition() {
             return this.startPosition;
         }
 
-        Prefix getPrefix() {
+        private Prefix getPrefix() {
             return this.prefix;
         }
     }

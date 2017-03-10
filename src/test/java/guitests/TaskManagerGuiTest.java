@@ -49,7 +49,7 @@ public abstract class TaskManagerGuiTest {
     protected ResultDisplayHandle resultDisplay;
     protected CommandBoxHandle commandBox;
     protected BrowserPanelHandle browserPanel;
-    TestApp testApp;
+    protected TestApp testApp;
     private Stage stage;
 
     @BeforeClass
