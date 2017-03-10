@@ -291,11 +291,47 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
 
 ## 5. Dev Ops
 
-### 5.1. Build Automation
+### 5.1. Version Control Workflow
+
+#### 5.1.1. General Guidelines
+
+All members should work on their individual branches for **code implementation**. Please avoid committing code changes directly into master. Instead, push your local branch to our central remote repo, create a new PR of your branch, and assign another member to review. Since we have 2 people in charge of each component, please assign the relevant member as your reviewer.    
+
+For new pull request (PR), code changes should be **reviewed by at least one other member** before merging PR. The reviewer should at least comment that the PR is ok to merge so the team may know PR has been reviewed.
+
+##### Component Delegation
+
+1. Model: @bryan , @arishuynhvan
+2. GUI: @WangYu-g, @zhypaul
+3. Logic: @bryan, @arishuynhvan
+4. Storage: @WangYu-g, @zhypaul
+
+#### 5.1.2. Merge Branches
+
+1. After you have made necessary changes on your local feature branch and decided to merge into our remote master branch, try to pull the remote master into your local master first. 
+2. Merge the local master into your local feature branch with **rebase** (*not merge*). 
+3. Push your local feature branch to remote feature branch.
+4. Create a new pull request and assign a reviewer (as described in 5.1.1)
+
+#### 5.1.3. Roll back Commits after Pushed
+
+1. Open terminal from SourceTree (the icon could be found on the top right corner of SourceTree window)
+2. Use `git log` to find the code number of the commit which you  want to revert your branch to. E.g. 82ad6ad8e3410ade014e4b9ecec94a57c2df51bb
+2. `git rebase -i <commit number>` . E.g. `git rebase -i 82ad6ad8e3410ade014e4b9ecec94a57c2df51bb` . You will see an editor where you can pick (keep) or drop (delete/remove) commits. There are other commands as well, which are displayed as instruction in the editor. To start making changes to your commit, press `i` key and edit the changes.
+3. When you have finished making the changes, press `Esc` key and type `:wq` to save changes and quit editor. (This is Vim-based editor so commands very similar to Vim)
+4. `git push -f` to overwrite your remote branch
+
+You can refer to [this article](http://christoph.ruegg.name/blog/git-howto-revert-a-commit-already-pushed-to-a-remote-reposit.html) for more explanations
+
+For **documentation changes**, it is ok to make direct changes in the master branch.
+
+
+
+### 5.2. Build Automation
 
 See [UsingGradle.md](UsingGradle.md) to learn how to use Gradle for build automation.
 
-### 5.2. Continuous Integration
+### 5.3. Continuous Integration
 
 We use [Travis CI](https://travis-ci.org/) and [AppVeyor](https://www.appveyor.com/) to perform _Continuous Integration_ on our projects.
 See [UsingTravis.md](UsingTravis.md) and [UsingAppVeyor.md](UsingAppVeyor.md) for more details.
