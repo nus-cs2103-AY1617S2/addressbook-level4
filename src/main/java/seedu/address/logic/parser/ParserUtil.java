@@ -71,7 +71,7 @@ public class ParserUtil {
         assert content != null;
         return content.isPresent() ? Optional.of(new Content(content.get())) : Optional.empty();
     }
-    
+
     /**
      * Parses a {@code Optional<String> dateTime} into an {@code Optional<TaskDateTime>} if {@code dateTime} is present.
      */

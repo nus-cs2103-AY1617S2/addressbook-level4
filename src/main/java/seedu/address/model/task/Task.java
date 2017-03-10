@@ -42,13 +42,13 @@ public class Task implements ReadOnlyTask {
     public Content getContent() {
         return content;
     }
-    
-    
+
+
     public void setDateTime(TaskDateTime dateTime) {
         assert dateTime != null;
         this.dateTime = dateTime;
     }
-    
+
     @Override
     public TaskDateTime getDateTime() {
         return dateTime;

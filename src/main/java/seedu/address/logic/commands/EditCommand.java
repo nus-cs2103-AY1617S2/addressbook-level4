@@ -119,7 +119,7 @@ public class EditCommand extends Command {
             assert dateTime != null;
             this.dateTime = dateTime;
         }
-        
+
         public Optional<TaskDateTime> getDateTime() {
             return dateTime;
         }

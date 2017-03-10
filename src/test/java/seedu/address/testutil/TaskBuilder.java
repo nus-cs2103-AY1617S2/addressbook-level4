@@ -28,7 +28,7 @@ public class TaskBuilder {
         this.task.setContent(new Content(name));
         return this;
     }
-    
+
     public TaskBuilder withTaskDateTime(String dateTime) throws IllegalValueException {
         this.task.setTaskDateTime(new TaskDateTime(dateTime));
         return this;

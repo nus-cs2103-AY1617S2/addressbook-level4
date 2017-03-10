@@ -34,7 +34,7 @@ public interface ReadOnlyTask {
         builder.append(getContent())
                .append(" due by " + getDateTime().value)
                .append(" Tags: ");
-               getTags().forEach(builder::append);
+        getTags().forEach(builder::append);
         return builder.toString();
     }
 

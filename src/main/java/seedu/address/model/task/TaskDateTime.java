@@ -3,11 +3,8 @@ package seedu.address.model.task;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Logger;
 
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.ModelManager;
 
 /**
  * Represents a Task's due date in the task manager. Guarantees: immutable; is
@@ -15,7 +12,8 @@ import seedu.address.model.ModelManager;
  */
 public class TaskDateTime {
 
-    public static final String MESSAGE_DATE_TIME_CONSTRAINTS = "Due date should contain valid date in format day/month/year hour:minute";
+    public static final String MESSAGE_DATE_TIME_CONSTRAINTS = "Due date should contain valid date in format "
+            + "day/month/year hour:minute";
 
     public final String value;
     public final Date date;
@@ -64,7 +62,6 @@ public class TaskDateTime {
 
     /**
      * Returns object containing date and time given by string value
-     * 
      * @param value
      * @return
      */
