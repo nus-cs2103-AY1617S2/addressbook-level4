@@ -5,14 +5,14 @@ public abstract class Task {
 	Name name;
 	Time startTime;
 	Time endTime;
-	Address description;
+	Description description;
 	boolean completed;
 
 	
 	abstract Name getName();
 	abstract Time getStartTime();
 	abstract Time getEndTime();
-	abstract Address getDescription();
+	abstract Description getDescription();
 	abstract boolean isCompleted();
 	
 	
