@@ -72,7 +72,6 @@ allprojects {
         compile group: 'com.itextpdf', name: 'forms', version: '7.0.2'
         compile group: 'com.itextpdf', name: 'pdfa', version: '7.0.2'
         compile group: 'com.itextpdf', name: 'pdftest', version: '7.0.2'
-        compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.18'
 
         testCompile "junit:junit:$junitVersion"
         testCompile "org.testfx:testfx-core:$testFxVersion"
