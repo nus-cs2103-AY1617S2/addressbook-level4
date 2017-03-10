@@ -24,17 +24,58 @@ public class Task implements Comparable<Task> {
 
     public Task(String description) {
         this(description, null, null);
+        validate();
     }
 
     public Task(String description, LocalDateTime endDateTime) {
         this(description, null, endDateTime);
+        validate();
     }
 
     public Task(String description, LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        assert description != null;
         this.description = description.trim();
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
+        validate();
+    }
+
+    public void validate() {
+        if (!validateDescriptionMustNotBeEmpty()) {
+            throw new IllegalArgumentException("Description must not be empty.");
+        }
+        if (!validateStartDateMustBeBeforeEndDate()) {
+            throw new IllegalArgumentException("Start date must be before end date.");
+        }
+        if (!validateTaskIsFloatingIsEventOrHasDeadline()) {
+            throw new IllegalArgumentException("Task must be floating, must be an event, or has deadline,");
+        }
+    }
+
+    public boolean validateDescriptionMustNotBeEmpty() {
+        return description != null;
+    }
+
+    public boolean validateStartDateMustBeBeforeEndDate() {
+        if (startDateTime != null && endDateTime != null) {
+            return startDateTime.isBefore(endDateTime);
+        }
+        return true;
+    }
+
+    public boolean validateTaskIsFloatingIsEventOrHasDeadline() {
+        if (startDateTime == null && endDateTime == null) {
+            // Task is floating task
+            return true;
+        } else if (startDateTime != null && endDateTime != null) {
+            // Task is event
+            return true;
+        } else if (startDateTime == null && endDateTime != null) {
+            // Task has deadline
+            return true;
+        } else {
+            // Invalid task
+            return false;
+        }
     }
 
     @Override

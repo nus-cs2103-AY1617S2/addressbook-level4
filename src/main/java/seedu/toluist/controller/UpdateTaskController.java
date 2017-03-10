@@ -70,7 +70,6 @@ public class UpdateTaskController extends TaskController {
                 task.startDateTime = startDateTime;
             }
         }
-        // TODO: Save in model, validate that it is either floating, event or deadline task.
         return new CommandResult(RESULT_MESSAGE_UPDATE_TASK);
     }
 
