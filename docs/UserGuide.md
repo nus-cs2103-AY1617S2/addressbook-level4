@@ -2,7 +2,6 @@
 
 * [Introduction](#introduction)
 * [Quick Start](#quick-start)
-* [UI Control](#ui-control)
 * [Features](#features)
   * [Viewing help] (#viewing-help)
     * [Viewing a specific command] (#viewing-a-specific-command)
@@ -63,9 +62,6 @@ Without further ado, let us get started.
    * **`find Today`**: searches the task list for all events happening today. 
    * **`exit`**: exits the application.
 6. Refer to the [Features](#features) section below for details of each command.
-   
-
-## UI Control
 
 ### Task Status     
 
