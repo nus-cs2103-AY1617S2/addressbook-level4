@@ -11,16 +11,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTaskManager;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 
 /**
- * An Immutable AddressBook that is serializable to XML format
+ * An Immutable TaskManager that is serializable to XML format
  */
-@XmlRootElement(name = "addressbook")
-public class XmlSerializableAddressBook implements ReadOnlyAddressBook {
+@XmlRootElement(name = "taskmanager")
+public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
 
     @XmlElement
     private List<XmlAdaptedTask> tasks;
@@ -28,10 +28,10 @@ public class XmlSerializableAddressBook implements ReadOnlyAddressBook {
     private List<XmlAdaptedTag> tags;
 
     /**
-     * Creates an empty XmlSerializableAddressBook.
+     * Creates an empty XmlSerializableTaskManager.
      * This empty constructor is required for marshalling.
      */
-    public XmlSerializableAddressBook() {
+    public XmlSerializableTaskManager() {
         tasks = new ArrayList<>();
         tags = new ArrayList<>();
     }
@@ -39,7 +39,7 @@ public class XmlSerializableAddressBook implements ReadOnlyAddressBook {
     /**
      * Conversion
      */
-    public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
+    public XmlSerializableTaskManager(ReadOnlyTaskManager src) {
         this();
         tasks.addAll(src.getTaskList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));

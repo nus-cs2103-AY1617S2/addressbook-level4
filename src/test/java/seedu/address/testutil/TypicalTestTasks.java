@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.TaskManager;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 
@@ -31,7 +31,7 @@ public class TypicalTestTasks {
         }
     }
 
-    public static void loadAddressBookWithSampleData(AddressBook ab) {
+    public static void loadTaskManagerWithSampleData(TaskManager ab) {
         for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
             try {
                 ab.addTask(new Task(task));
@@ -45,9 +45,9 @@ public class TypicalTestTasks {
         return new TestTask[]{mathAssgn, buyStove, writeEssay, buyRiceCooker, finishLab, markCode, nightRun};
     }
 
-    public AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
-        loadAddressBookWithSampleData(ab);
+    public TaskManager getTypicalTaskManager() {
+        TaskManager ab = new TaskManager();
+        loadTaskManagerWithSampleData(ab);
         return ab;
     }
 }
