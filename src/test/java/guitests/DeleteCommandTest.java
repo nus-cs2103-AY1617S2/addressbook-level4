@@ -5,8 +5,8 @@ import static seedu.taskmanager.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK
 
 import org.junit.Test;
 
-import seedu.address.testutil.TestPerson;
-import seedu.address.testutil.TestUtil;
+import seedu.taskmanager.testutil.TestPerson;
+import seedu.taskmanager.testutil.TestUtil;
 
 public class DeleteCommandTest extends AddressBookGuiTest {
 

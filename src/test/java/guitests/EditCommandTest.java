@@ -6,14 +6,14 @@ import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_COMMAND_FO
 import org.junit.Test;
 
 import guitests.guihandles.PersonCardHandle;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.TestPerson;
 import seedu.taskmanager.commons.core.Messages;
 import seedu.taskmanager.logic.commands.EditCommand;
 import seedu.taskmanager.model.tag.Tag;
 import seedu.taskmanager.model.task.Description;
 import seedu.taskmanager.model.task.EndDate;
 import seedu.taskmanager.model.task.Title;
+import seedu.taskmanager.testutil.PersonBuilder;
+import seedu.taskmanager.testutil.TestPerson;
 import seedu.taskmanager.model.task.StartDate;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
