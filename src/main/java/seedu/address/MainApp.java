@@ -77,7 +77,7 @@ public class MainApp extends Application {
         Optional<ReadOnlyTaskList> addressBookOptional;
         ReadOnlyTaskList initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
+            addressBookOptional = storage.readTaskList();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample TaskList");
             }
