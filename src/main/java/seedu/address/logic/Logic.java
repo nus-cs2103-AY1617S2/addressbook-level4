@@ -17,7 +17,10 @@ public interface Logic {
      */
     CommandResult execute(String commandText) throws CommandException;
 
-    /** Returns the filtered list of persons */
-    ObservableList<ReadOnlyTask> getFilteredTaskList();
+    /** Returns the filtered list of non-floating tasks */
+    ObservableList<ReadOnlyTask> getFilteredNonFloatingTaskList();
+
+    /** Returns the filtered list of floating tasks */
+    ObservableList<ReadOnlyTask> getFilteredFloatingTaskList();
 
 }

@@ -34,8 +34,12 @@ public interface Model {
     void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException;
 
-    /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    /** Returns the filtered non-floating task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getNonFloatingTaskList();
+
+    /** Returns the filtered floating task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    UnmodifiableObservableList<ReadOnlyTask> getFloatingTaskList();
+
 
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();

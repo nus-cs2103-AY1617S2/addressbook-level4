@@ -96,15 +96,15 @@ public class ModelManager extends ComponentManager implements Model {
     public UnmodifiableObservableList<ReadOnlyTask> getFloatingTaskList() {
         return new UnmodifiableObservableList<>(floatingTasks);
     }
-    
+
     @Override
     public void updateFilteredListToShowAll() {
         //filteredTasks.setPredicate(new PredicateExpression(new DateFloatingQualifier())::satisfies);
-    	nonFloatingTasks.setPredicate(new PredicateExpression(new DateNotFloatingQualifier())::satisfies);
-    	//filteredTasks.setPredicate(null);
+        nonFloatingTasks.setPredicate(new PredicateExpression(new DateNotFloatingQualifier())::satisfies);
+        //filteredTasks.setPredicate(null);
     }
 
-    public void updateFilteredListToShowAllFloatingTasks(){
+    public void updateFilteredListToShowAllFloatingTasks() {
         floatingTasks.setPredicate(new PredicateExpression(new DateFloatingQualifier())::satisfies);
     }
 
@@ -168,22 +168,22 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
-    
+
     private class DateFloatingQualifier implements Qualifier {
-    	
-    	@Override
-    	public boolean run(ReadOnlyTask task) {
-    		return task.getDeadline().toString().equals("floating");
-    	}
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return task.getDeadline().toString().equals("floating");
+        }
 
     }
-    
+
     private class DateNotFloatingQualifier implements Qualifier {
-    	
-    	@Override
-    	public boolean run(ReadOnlyTask task) {
-    		return !task.getDeadline().toString().equals("floating");
-    	}
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return !task.getDeadline().toString().equals("floating");
+        }
 
     }
 }
