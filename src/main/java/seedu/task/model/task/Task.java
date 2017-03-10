@@ -15,7 +15,7 @@ public class Task implements ReadOnlyTask {
     private Date date;
     private Remark remark;
     private Location location;
-
+    private boolean isDone;
     private UniqueTagList tags;
 
     /**
@@ -27,6 +27,7 @@ public class Task implements ReadOnlyTask {
         this.date = date;
         this.remark = remark;
         this.location = location;
+        this.isDone = false;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -77,6 +78,15 @@ public class Task implements ReadOnlyTask {
         return location;
     }
 
+    public void setIsDone(boolean isDone) {
+        this.isDone = isDone;
+    }
+
+    @Override
+    public boolean isDone() {
+        return isDone;
+    }
+    
     @Override
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
