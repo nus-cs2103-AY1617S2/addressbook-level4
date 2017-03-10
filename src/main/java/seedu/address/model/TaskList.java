@@ -52,7 +52,7 @@ public class TaskList implements ReadOnlyTaskList {
 
     public void setTasks(List<? extends ReadOnlyTask> tasks)
             throws UniqueTaskList.DuplicateTaskException {
-    	this.tasks.setTasks(tasks);
+        this.tasks.setTasks(tasks);
     }
 
     public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {

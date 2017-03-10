@@ -16,7 +16,7 @@ public class TaskDate {
     public static final String MESSAGE_DATE_CONSTRAINTS =
             "Task date should be in the format dd/MM/yyyy";
 //    public static final String EMAIL_VALIDATION_REGEX = "\\d+";
-    public static final String dateFormat = "dd/MM/yyyy";
+    public static final String DATE_FORMAT = "dd/MM/yyyy";
 
     public final String value;
 
@@ -38,15 +38,15 @@ public class TaskDate {
      * Returns if a given string is a valid date.
      */
     public static boolean isValidDate(String test) {
-    	SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
-    	sdf.setLenient(false);
-    	try{
-    		//throws ParseException if date is not valid
-    		Date date = sdf.parse(test);
-    	} catch (ParseException e){
-    		e.printStackTrace();
-    		return false;
-    	}
+        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+        sdf.setLenient(false);
+        try {
+            //throws ParseException if date is not valid
+            Date date = sdf.parse(test);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return false;
+        }
         return true;
     }
 
