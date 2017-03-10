@@ -17,7 +17,7 @@ public class TestTask implements ReadOnlyTask {
     private TaskDate endDate;
 
     private UniqueTagList tags;
-    
+
     public TestTask() {
         tags = new UniqueTagList();
     }
@@ -40,7 +40,7 @@ public class TestTask implements ReadOnlyTask {
     public void setStartDate(TaskDate startDate) {
         this.startDate = startDate;
     }
-    
+
     public void setEndDate(TaskDate endDate) {
         this.endDate = endDate;
     }
@@ -67,12 +67,12 @@ public class TestTask implements ReadOnlyTask {
     public TaskDate getStartDate() {
         return startDate;
     }
-    
+
     @Override
     public TaskDate getEndDate() {
         return endDate;
     }
-    
+
     @Override
     public UniqueTagList getTags() {
         return tags;

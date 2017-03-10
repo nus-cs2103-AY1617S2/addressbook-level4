@@ -39,7 +39,7 @@ public class TestPerson implements ReadOnlyTask {
     public void setStartDate(TaskDate taskDate) {
         this.startDate = taskDate;
     }
-    
+
     public void setEndDate(TaskDate taskDate) {
         this.endDate = taskDate;
     }
@@ -66,7 +66,7 @@ public class TestPerson implements ReadOnlyTask {
     public TaskDate getStartDate() {
         return startDate;
     }
-    
+
 	@Override
 	public TaskDate getEndDate() {
 		return endDate;

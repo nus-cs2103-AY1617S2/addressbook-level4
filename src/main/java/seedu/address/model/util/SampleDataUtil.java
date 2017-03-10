@@ -14,7 +14,7 @@ public class SampleDataUtil {
     public static Task[] getSamplePersons() {
         try {
             return new Task[] {
-                new Task(new Description("Visit Alex"), new Priority("3"), new TaskDate("26/03/2017"), 
+                new Task(new Description("Visit Alex"), new Priority("3"), new TaskDate("26/03/2017"),
                 	new TaskDate("27/03/2017"), new UniqueTagList("visit")),
                 new Task(new Description("CS Midterm"), new Priority("1"), new TaskDate("15/03/2017"),
                 	new TaskDate("19/03/2017"), new UniqueTagList("study", "exams")),

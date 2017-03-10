@@ -44,7 +44,7 @@ public class TaskBuilder {
         this.Task.setEndDate(new TaskDate(endDate));
         return this;
     }
-    
+
     public TaskBuilder withTags(String ... tags) throws IllegalValueException {
         Task.setTags(new UniqueTagList());
         for (String tag: tags) {

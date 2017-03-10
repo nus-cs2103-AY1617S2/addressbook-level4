@@ -67,12 +67,12 @@ public class Task implements ReadOnlyTask {
     public TaskDate getStartDate() {
         return startDate;
     }
-    
+
     public void setEndDate(TaskDate date) {
         assert date != null;
         this.endDate = date;
     }
-    
+
     @Override
     public TaskDate getEndDate() {
         return endDate;
