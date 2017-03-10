@@ -16,6 +16,11 @@ public class Task implements Comparable<Task> {
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
     private LocalDateTime completionDateTime;
+    private TaskPriority priority = TaskPriority.LOW;
+
+    public enum TaskPriority {
+        LOW, HIGH
+    }
 
     /**
      * To be used with json deserialisation
@@ -69,6 +74,7 @@ public class Task implements Comparable<Task> {
         return other == this // short circuit if same object
                 || (other instanceof Task // instanceof handles nulls
                 && this.description.equals(((Task) other).description)) // state check
+                && this.priority.equals(((Task) other).priority)
                 && this.allTags.equals(((Task) other).allTags)
                 && Objects.equals(this.startDateTime, ((Task) other).startDateTime) // handles null
                 && Objects.equals(this.endDateTime, ((Task) other).endDateTime) // handles null
@@ -158,15 +164,18 @@ public class Task implements Comparable<Task> {
 
     @Override
     public int compareTo(Task comparison) {
-        if (endDateTime == null) {
-            // Put floating task on top
+        // Put floating task at bottom;
+        if (endDateTime == null && comparison.endDateTime != null) {
             return 1;
         }
-        if (endDateTime.compareTo(comparison.endDateTime) != 0) {
-            return endDateTime.compareTo(comparison.endDateTime);
-        } else if (false) {
-            //TODO add priority comparison with variable
+        if (endDateTime != null && comparison.endDateTime == null) {
             return -1;
+        }
+        if (endDateTime != null && comparison.endDateTime != null
+            && endDateTime.compareTo(comparison.endDateTime) != 0) {
+            return endDateTime.compareTo(comparison.endDateTime);
+        } else if (priority.compareTo(comparison.priority) != 0) {
+            return priority.compareTo(comparison.priority);
         } else {
             return this.description.compareToIgnoreCase(comparison.description);
         }
@@ -194,5 +203,13 @@ public class Task implements Comparable<Task> {
 
     public void setStartDateTime(LocalDateTime startDateTime) {
         this.startDateTime = startDateTime;
+    }
+
+    public TaskPriority getTaskPriority() {
+        return priority;
+    }
+
+    public void setTaskPriority(TaskPriority priority) {
+        this.priority = priority;
     }
 }
