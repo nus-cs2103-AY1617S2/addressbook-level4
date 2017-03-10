@@ -6,6 +6,7 @@ import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_INFORMATION;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_START_DATE;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -33,7 +34,7 @@ public class EditCommandParser {
                 new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_INFORMATION,
                         PREFIX_START_DATE, PREFIX_END_DATE, PREFIX_CATEGORY);
         argsTokenizer.tokenize(args);
-        List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer. getPreamble().orElse(""), 2);
+        List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
         Optional<Integer> index = preambleFields.get(0).flatMap(ParserUtil::parseIndex);
         if (!index.isPresent()) {
