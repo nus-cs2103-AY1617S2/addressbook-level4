@@ -45,7 +45,7 @@ public class XmlAdaptedTask {
      * @param source future changes to this will not affect the created XmlAdaptedTask
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
-        title = source.getTitle().fullName;
+        title = source.getTitle().value;
         startDate = source.getStartDate().value;
         endDate = source.getEndDate().value;
         description = source.getDescription().value;
