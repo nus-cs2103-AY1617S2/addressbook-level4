@@ -10,8 +10,8 @@ import seedu.taskmanager.commons.exceptions.IllegalValueException;
 public class EndDate {
 
     public static final String MESSAGE_ENDDATE_CONSTRAINTS =
-            "Person emails should be 2 alphanumeric/period strings separated by '@'";
-    public static final String ENDDATE_VALIDATION_REGEX = "[\\w\\.]+@[\\w\\.]+";
+            "Start date should be of dd/mm/yyyy format";
+    public static final String ENDDATE_VALIDATION_REGEX = "^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$";
 
     public final String value;
 
