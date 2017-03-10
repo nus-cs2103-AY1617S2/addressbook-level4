@@ -16,12 +16,12 @@ public class SelectCommandTest extends ToDoListGuiTest {
         assertNoTaskSelected();
 
         assertSelectionSuccess(1); // first Task in the list
-        int TaskCount = td.getTypicalTasks().length;
-        assertSelectionSuccess(TaskCount); // last Task in the list
-        int middleIndex = TaskCount / 2;
+        int taskCount = td.getTypicalTasks().length;
+        assertSelectionSuccess(taskCount); // last Task in the list
+        int middleIndex = taskCount / 2;
         assertSelectionSuccess(middleIndex); // a Task in the middle of the list
 
-        assertSelectionInvalid(TaskCount + 1); // invalid index
+        assertSelectionInvalid(taskCount + 1); // invalid index
         assertTaskSelected(middleIndex); // assert previous selection remains
 
         /* Testing other invalid indexes such as -1 should be done when testing the SelectCommand */

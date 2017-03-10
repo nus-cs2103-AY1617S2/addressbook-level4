@@ -34,11 +34,11 @@ public interface ToDoListStorage {
      * @param ToDoList cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveToDoList(ReadOnlyToDoList ToDoList) throws IOException;
+    void saveToDoList(ReadOnlyToDoList todoList) throws IOException;
 
     /**
      * @see #saveToDoList(ReadOnlyToDoList)
      */
-    void saveToDoList(ReadOnlyToDoList ToDoList, String filePath) throws IOException;
+    void saveToDoList(ReadOnlyToDoList todoList, String filePath) throws IOException;
 
 }

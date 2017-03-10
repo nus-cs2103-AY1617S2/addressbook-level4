@@ -21,34 +21,34 @@ public class EditCommandTest extends ToDoListGuiTest {
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
         String detailsToEdit = "Bobby p/91234567 e/bobby@gmail.com a/Block 123, Bobby Street 3 t/husband";
-        int ToDoListIndex = 1;
+        int todoListIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withTitle("Bobby").withVenue("91234567")
                 .withStartTime("bobby@gmail.com").withEndTime("Block 123, Bobby Street 3").withTags("husband").build();
 
-        assertEditSuccess(ToDoListIndex, ToDoListIndex, detailsToEdit, editedTask);
+        assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTask);
     }
 
     @Test
     public void edit_notAllFieldsSpecified_success() throws Exception {
         String detailsToEdit = "t/sweetie t/bestie";
-        int ToDoListIndex = 2;
+        int todoListIndex = 2;
 
-        TestTask taskToEdit = expectedTasksList[ToDoListIndex - 1];
+        TestTask taskToEdit = expectedTasksList[todoListIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withTags("sweetie", "bestie").build();
 
-        assertEditSuccess(ToDoListIndex, ToDoListIndex, detailsToEdit, editedTask);
+        assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTask);
     }
 
     @Test
     public void edit_clearTags_success() throws Exception {
         String detailsToEdit = "t/";
-        int ToDoListIndex = 2;
+        int todoListIndex = 2;
 
-        TestTask taskToEdit = expectedTasksList[ToDoListIndex - 1];
+        TestTask taskToEdit = expectedTasksList[todoListIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withTags().build();
 
-        assertEditSuccess(ToDoListIndex, ToDoListIndex, detailsToEdit, editedTask);
+        assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTask);
     }
 
     @Test
@@ -57,12 +57,12 @@ public class EditCommandTest extends ToDoListGuiTest {
 
         String detailsToEdit = "Belle";
         int filteredTaskListIndex = 1;
-        int ToDoListIndex = 5;
+        int todoListIndex = 5;
 
-        TestTask taskToEdit = expectedTasksList[ToDoListIndex - 1];
+        TestTask taskToEdit = expectedTasksList[todoListIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withTitle("Belle").build();
 
-        assertEditSuccess(filteredTaskListIndex, ToDoListIndex, detailsToEdit, editedTask);
+        assertEditSuccess(filteredTaskListIndex, todoListIndex, detailsToEdit, editedTask);
     }
 
     @Test
@@ -117,7 +117,7 @@ public class EditCommandTest extends ToDoListGuiTest {
      * @param detailsToEdit details to edit the task with as input to the edit command
      * @param editedTask the expected task after editing the task's details
      */
-    private void assertEditSuccess(int filteredTaskListIndex, int ToDoListIndex,
+    private void assertEditSuccess(int filteredTaskListIndex, int todoListIndex,
                                     String detailsToEdit, TestTask editedTask) {
         commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
 
@@ -126,7 +126,7 @@ public class EditCommandTest extends ToDoListGuiTest {
         assertMatching(editedTask, editedCard);
 
         // confirm the list now contains all previous tasks plus the task with updated details
-        expectedTasksList[ToDoListIndex - 1] = editedTask;
+        expectedTasksList[todoListIndex - 1] = editedTask;
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedTask));
     }
