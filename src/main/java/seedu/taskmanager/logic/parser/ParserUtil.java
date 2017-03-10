@@ -17,6 +17,7 @@ import seedu.taskmanager.model.task.Date;
 import seedu.taskmanager.model.task.TaskName;
 import seedu.taskmanager.model.task.Deadline;
 import seedu.taskmanager.model.task.EndTime;
+import seedu.taskmanager.model.task.StartTime;
 import seedu.taskmanager.model.category.Category;
 import seedu.taskmanager.model.category.UniqueCategoryList;
 
@@ -90,6 +91,14 @@ public class ParserUtil {
         return date.isPresent() ? Optional.of(new Date(date.get())) : Optional.empty();
     }
 
+    /**
+     * Parses a {@code Optional<String> starttime} into an {@code Optional<StartTime>} if {@code starttime} is present.
+     */
+    public static Optional<StartTime> parseStartTime(Optional<String> starttime) throws IllegalValueException {
+    	assert starttime != null;
+    	return starttime.isPresent() ? Optional.of(new StartTime(starttime.get())) : Optional.empty();
+    }
+    
     /**
      * Parses a {@code Optional<String> endtime} into an {@code Optional<EndTime>} if {@code endtime} is present.
      */

@@ -9,9 +9,10 @@ import seedu.taskmanager.model.category.UniqueCategoryList;
 public interface ReadOnlyTask {
 
     TaskName getTaskName();
-//    Deadline getDeadline();
     Date getDate();
-//    EndTime getEndTime();
+    Deadline getDeadline();
+    StartTime getStartTime();
+    EndTime getEndTime();
 
     /**
      * The returned CategoryList is a deep copy of the internal CategoryList,
@@ -26,8 +27,9 @@ public interface ReadOnlyTask {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                 && other.getTaskName().equals(this.getTaskName()) // state checks here onwards
-//                && other.getDeadline().equals(this.getDeadline())
-//                && other.getEndTime().equals(this.getEndTime())
+                && other.getDeadline().equals(this.getDeadline())
+                && other.getStartTime().equals(this.getStartTime())
+                && other.getEndTime().equals(this.getEndTime())
                 && other.getDate().equals(this.getDate()));
     }
 
@@ -37,12 +39,14 @@ public interface ReadOnlyTask {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getTaskName())
-//                .append(" Endtime: ")
-//                .append(getEndTime())
-//                .append(" Deadline: ")
-//                .append(getDeadline())
                 .append(" Date: ")
-                .append(getDate());
+                .append(getDate())
+                .append(" Deadline: ")
+                .append(getDeadline())
+                .append(" Start Time: ")
+                .append(getStartTime())
+                .append(" End Time: ")
+                .append(getEndTime());
 //                .append(" Categories: ");
 //        getCategories().forEach(builder::append);
         return builder.toString();
