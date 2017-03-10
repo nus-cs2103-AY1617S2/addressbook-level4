@@ -158,6 +158,10 @@ public class Task implements Comparable<Task> {
 
     @Override
     public int compareTo(Task comparison) {
+        if (endDateTime == null) {
+            // Put floating task on top
+            return 1;
+        }
         if (endDateTime.compareTo(comparison.endDateTime) != 0) {
             return endDateTime.compareTo(comparison.endDateTime);
         } else if (false) {
