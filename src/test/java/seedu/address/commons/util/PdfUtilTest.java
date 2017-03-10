@@ -16,7 +16,7 @@ public class PdfUtilTest {
 
     @Test
     public void testPDFExport() throws FileNotFoundException {
-        PdfWriter writer = new PdfWriter("C:\\Desktop\\Test.pdf");
+        PdfWriter writer = new PdfWriter("test.pdf");
         PdfDocument pdf = new PdfDocument(writer);
         Document document = new Document(pdf);
         document.add(new Paragraph("Hello World!"));
