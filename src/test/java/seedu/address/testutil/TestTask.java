@@ -33,24 +33,29 @@ public class TestTask implements ReadOnlyTask {
         this.tags = taskToCopy.getTags();
     }
 
-    public void setName(Name name) {
+    public TestTask setName(Name name) {
         this.name = name;
+        return this;
     }
 
-    public void setDeadline(Deadline deadline) {
+    public TestTask setDeadline(Deadline deadline) {
         this.deadline = deadline;
+        return this;
     }
 
-    public void setDescription(Description description) {
+    public TestTask setDescription(Description description) {
         this.description = description;
+        return this;
     }
 
-    public void setID(IdentificationNumber id) {
+    public TestTask setID(IdentificationNumber id) {
         this.id = id;
+        return this;
     }
 
-    public void setTags(UniqueTagList tags) {
+    public TestTask setTags(UniqueTagList tags) {
         this.tags = tags;
+        return this;
     }
 
     @Override
