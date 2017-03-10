@@ -7,8 +7,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import java.net.URL?>
 
 <VBox maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="60.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <stylesheets>
+      <URL value="@DarkTheme.css" />
+   </stylesheets>
    <children>
       <FlowPane>
          <children>

@@ -130,7 +130,11 @@ public class Task implements Comparable<Task> {
         return !isCompleted() && (endDateTime != null && endDateTime.isBefore(LocalDateTime.now()));
     }
 
-    public boolean isTask() {
+    public boolean isFloatingTask() {
+        return startDateTime == null && endDateTime == null;
+    }
+
+    public boolean isTaskWithDeadline() {
         return startDateTime == null && endDateTime != null;
     }
 

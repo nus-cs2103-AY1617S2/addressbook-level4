@@ -17,6 +17,7 @@ public class TaskUiView extends UiView {
 
     private static final String FXML = "TaskView.fxml";
     private static final String CLOCK_ICON_IMAGE_PATH = "/images/clock.png";
+    private static final String COMPLETED_STYLE_CLASS = "completed";
 
     @FXML
     private Label name;
@@ -40,17 +41,26 @@ public class TaskUiView extends UiView {
     @Override
     protected void viewDidMount() {
         FxViewUtil.makeFullWidth(getRoot());
-        String tagText = " " + String.join(", ", task.getAllTags().stream()
+        boolean isFloatingTask = task.isFloatingTask();
+        boolean isTaskWithDeadline = task.isTaskWithDeadline();
+        boolean isTask = isFloatingTask || isTaskWithDeadline;
+        boolean isEvent = task.isEvent();
+
+        String tagText = " " + String.join(" ", task.getAllTags().stream()
                 .map(tag -> "#" + tag.tagName).collect(Collectors.toList()));
-        name.setText(task.getDescription() + tagText);
+        String taskTypeText = isTask ? " (Task)" : " (Event)";
+        name.setText(task.getDescription() + taskTypeText + tagText);
         id.setText(displayedIndex + ". ");
-        if (task.isTask()) {
+        if (isTaskWithDeadline) {
             date.setText(DateTimeFormatterUtil.formatTaskDeadline(task.getEndDateTime()));
-        } else if (task.isEvent()) {
+        } else if (isEvent) {
             date.setText(DateTimeFormatterUtil.formatEventRange(task.getStartDateTime(), task.getEndDateTime()));
         }
-        if (task.isTask() || task.isEvent()) {
+        if (isTaskWithDeadline || task.isEvent()) {
             clockIcon.setImage(AppUtil.getImage(CLOCK_ICON_IMAGE_PATH));
+        }
+        if (task.isCompleted()) {
+            FxViewUtil.addStyleClass(name, COMPLETED_STYLE_CLASS);
         }
     }
 }
