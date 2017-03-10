@@ -7,7 +7,7 @@ import savvytodo.model.task.ReadOnlyTask;
 import savvytodo.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
- * Deletes a task identified using it's last displayed index from the address book.
+ * Deletes a task identified using it's last displayed index from the task manger.
  */
 public class DeleteCommand extends Command {
 

@@ -7,7 +7,7 @@ import savvytodo.commons.exceptions.IllegalValueException;
 import savvytodo.logic.commands.exceptions.CommandException;
 import savvytodo.model.category.Category;
 import savvytodo.model.category.UniqueCategoryList;
-import savvytodo.model.task.Address;
+import savvytodo.model.task.Location;
 import savvytodo.model.task.Description;
 import savvytodo.model.task.Name;
 import savvytodo.model.task.Priority;
@@ -27,7 +27,7 @@ public class AddCommand extends Command {
             + "Dinner p/low d/with family a/311, Clementi Ave 2, #02-25 c/friends c/owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
 
     private final Task toAdd;
 
@@ -36,7 +36,7 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, String priority, String description, String address, Set<String> categories)
+    public AddCommand(String name, String priority, String description, String location, Set<String> categories)
             throws IllegalValueException {
         final Set<Category> categorySet = new HashSet<>();
         for (String categoryName : categories) {
@@ -46,7 +46,7 @@ public class AddCommand extends Command {
                 new Name(name),
                 new Priority(priority),
                 new Description(description),
-                new Address(address),
+                new Location(location),
                 new UniqueCategoryList(categorySet)
         );
     }
