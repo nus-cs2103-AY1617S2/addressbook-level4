@@ -18,7 +18,7 @@ Role: Team lead <br>
 <img src="images/WalterTay.png" width="150"><br>
 Role: Developer <br>
 - Components in charge of: [Storage](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/docs/DeveloperGuide.md#storage-component)
-- Aspects/tools in charge of: Code quality, Git expert and deadlines
+- Aspects/tools in charge of: Code quality, Git expert and deadlines. 
 - Features implemented: 
 - Other major contributions: 
 
