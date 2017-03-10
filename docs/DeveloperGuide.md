@@ -1,4 +1,4 @@
-# Task Manager - Developer Guide
+# Yesterday's Tomorrow - Developer Guide
 
 By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
