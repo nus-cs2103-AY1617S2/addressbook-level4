@@ -14,33 +14,33 @@ public class TypicalTestTasks {
 
     public TypicalTestTasks() {
         try {
-            alice = new TaskBuilder().withDescription("Alice Pauline's big task")
+            alice = new TaskBuilder().withDescription("Say hello to Alice Pauline")
                     .withStartDate("01/02/2017")
                     .withEndDate("02/03/2100")
                     .withPriority("3")
                     .withTags("friends").build();
-            benson = new TaskBuilder().withDescription("Benson Meier's big task")
+            benson = new TaskBuilder().withDescription("Say goodbye to Benson Meier")
                     .withStartDate("01/02/2017")
                     .withEndDate("02/12/2110")
                     .withPriority("2")
                     .withTags("owesMoney", "friends").build();
-            carl = new TaskBuilder().withDescription("Carl Kurz's big task")
+            carl = new TaskBuilder().withDescription("Say hi to Carl Kurz")
                     .withStartDate("01/02/2017")
                     .withEndDate("02/12/2110")
                     .withPriority("2").build();
-            daniel = new TaskBuilder().withDescription("Daniel Meier's big task")
+            daniel = new TaskBuilder().withDescription("Say farewell to Daniel Meier")
                     .withStartDate("01/02/1017")
                     .withEndDate("02/03/2100")
                     .withPriority("3").build();
-            elle = new TaskBuilder().withDescription("Elle Meyer's big task")
+            elle = new TaskBuilder().withDescription("Say howdy to Elle Meyer")
                     .withStartDate("01/02/2017")
                     .withEndDate("02/03/2110")
                     .withPriority("1").build();
-            fiona = new TaskBuilder().withDescription("Fiona Kunz's big task")
+            fiona = new TaskBuilder().withDescription("Say so long to Fiona Kunz")
                     .withStartDate("01/02/2017")
                     .withEndDate("02/03/2100")
                     .withPriority("1").build();
-            george = new TaskBuilder().withDescription("George Best's big task")
+            george = new TaskBuilder().withDescription("Say greetings to George Best")
                     .withStartDate("01/02/2017")
                     .withEndDate("02/03/2100")
                     .withPriority("3").build();
