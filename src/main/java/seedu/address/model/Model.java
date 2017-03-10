@@ -47,4 +47,6 @@ public interface Model {
 
     void clearCopy();
 
+    boolean checkChanges();
+
 }
