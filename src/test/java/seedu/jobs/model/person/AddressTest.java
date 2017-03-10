@@ -10,7 +10,7 @@ import seedu.jobs.model.task.Description;
 public class AddressTest {
 
     @Test
-    public void isValidAddress() {
+    public void isValidTime() {
         // invalid addresses
         assertFalse(Description.isValidAddress("")); // empty string
         assertFalse(Description.isValidAddress(" ")); // spaces only
