@@ -2,11 +2,9 @@ package seedu.toluist.ui.view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import seedu.toluist.commons.util.AppUtil;
 import seedu.toluist.commons.util.DateTimeFormatterUtil;
-import seedu.toluist.commons.util.DateTimeUtil;
 import seedu.toluist.commons.util.FxViewUtil;
 import seedu.toluist.model.Task;
 
