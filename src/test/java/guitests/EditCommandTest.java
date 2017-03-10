@@ -1,20 +1,20 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.taskcrusher.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static t15b1.taskcrusher.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
 
 import guitests.guihandles.PersonCardHandle;
-import seedu.taskcrusher.commons.core.Messages;
-import seedu.taskcrusher.logic.commands.EditCommand;
-import seedu.taskcrusher.model.shared.Description;
-import seedu.taskcrusher.model.shared.Name;
-import seedu.taskcrusher.model.tag.Tag;
-import seedu.taskcrusher.model.task.Email;
-import seedu.taskcrusher.model.task.Priority;
-import seedu.taskcrusher.testutil.PersonBuilder;
-import seedu.taskcrusher.testutil.TestPerson;
+import t15b1.taskcrusher.commons.core.Messages;
+import t15b1.taskcrusher.logic.commands.EditCommand;
+import t15b1.taskcrusher.model.shared.Description;
+import t15b1.taskcrusher.model.shared.Name;
+import t15b1.taskcrusher.model.tag.Tag;
+import t15b1.taskcrusher.model.task.Email;
+import t15b1.taskcrusher.model.task.Priority;
+import t15b1.taskcrusher.testutil.PersonBuilder;
+import t15b1.taskcrusher.testutil.TestPerson;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
 public class EditCommandTest extends AddressBookGuiTest {

@@ -8,8 +8,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import seedu.taskcrusher.model.tag.UniqueTagList;
-import seedu.taskcrusher.model.task.ReadOnlyTask;
+import t15b1.taskcrusher.model.tag.UniqueTagList;
+import t15b1.taskcrusher.model.task.ReadOnlyTask;
 
 /**
  * Provides a handle to a person card in the person list panel.
@@ -74,7 +74,7 @@ public class PersonCardHandle extends GuiHandle {
 
     public boolean isSamePerson(ReadOnlyTask person) {
         return getFullName().equals(person.getTaskName().taskName)
-                && getPhone().equals(person.getPhone().value)
+                && getPhone().equals(person.getPriority().value)
                 && getEmail().equals(person.getEmail().value)
                 && getAddress().equals(person.getDescription().value)
                 && getTags().equals(getTags(person.getTags()));

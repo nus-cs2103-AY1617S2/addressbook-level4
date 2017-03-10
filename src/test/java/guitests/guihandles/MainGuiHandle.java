@@ -2,7 +2,7 @@ package guitests.guihandles;
 
 import guitests.GuiRobot;
 import javafx.stage.Stage;
-import seedu.taskcrusher.TestApp;
+import t15b1.taskcrusher.TestApp;
 
 /**
  * Provides a handle for the main GUI.

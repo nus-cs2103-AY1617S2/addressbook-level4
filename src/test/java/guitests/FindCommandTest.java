@@ -4,8 +4,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.taskcrusher.commons.core.Messages;
-import seedu.taskcrusher.testutil.TestPerson;
+import t15b1.taskcrusher.commons.core.Messages;
+import t15b1.taskcrusher.testutil.TestPerson;
 
 public class FindCommandTest extends AddressBookGuiTest {
 

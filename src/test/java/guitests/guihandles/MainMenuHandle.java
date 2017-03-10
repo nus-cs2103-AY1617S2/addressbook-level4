@@ -5,7 +5,7 @@ import java.util.Arrays;
 import guitests.GuiRobot;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
-import seedu.taskcrusher.TestApp;
+import t15b1.taskcrusher.TestApp;
 
 /**
  * Provides a handle to the main menu of the app.

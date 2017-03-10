@@ -21,13 +21,13 @@ import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-import seedu.taskcrusher.TestApp;
-import seedu.taskcrusher.commons.core.EventsCenter;
-import seedu.taskcrusher.commons.events.BaseEvent;
-import seedu.taskcrusher.model.UserInbox;
-import seedu.taskcrusher.model.task.ReadOnlyTask;
-import seedu.taskcrusher.testutil.TestUtil;
-import seedu.taskcrusher.testutil.TypicalTestPersons;
+import t15b1.taskcrusher.TestApp;
+import t15b1.taskcrusher.commons.core.EventsCenter;
+import t15b1.taskcrusher.commons.events.BaseEvent;
+import t15b1.taskcrusher.model.UserInbox;
+import t15b1.taskcrusher.model.task.ReadOnlyTask;
+import t15b1.taskcrusher.testutil.TestUtil;
+import t15b1.taskcrusher.testutil.TypicalTestPersons;
 
 /**
  * A GUI Test class for AddressBook.

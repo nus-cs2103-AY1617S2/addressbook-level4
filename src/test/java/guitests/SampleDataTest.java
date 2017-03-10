@@ -4,10 +4,10 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.taskcrusher.model.UserInbox;
-import seedu.taskcrusher.model.task.Task;
-import seedu.taskcrusher.model.util.SampleDataUtil;
-import seedu.taskcrusher.testutil.TestUtil;
+import t15b1.taskcrusher.model.UserInbox;
+import t15b1.taskcrusher.model.task.Task;
+import t15b1.taskcrusher.model.util.SampleDataUtil;
+import t15b1.taskcrusher.testutil.TestUtil;
 
 public class SampleDataTest extends AddressBookGuiTest {
     @Override

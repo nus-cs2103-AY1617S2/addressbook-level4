@@ -5,10 +5,10 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import guitests.guihandles.PersonCardHandle;
-import seedu.taskcrusher.commons.core.Messages;
-import seedu.taskcrusher.logic.commands.AddCommand;
-import seedu.taskcrusher.testutil.TestPerson;
-import seedu.taskcrusher.testutil.TestUtil;
+import t15b1.taskcrusher.commons.core.Messages;
+import t15b1.taskcrusher.logic.commands.AddCommand;
+import t15b1.taskcrusher.testutil.TestPerson;
+import t15b1.taskcrusher.testutil.TestUtil;
 
 public class AddCommandTest extends AddressBookGuiTest {
 

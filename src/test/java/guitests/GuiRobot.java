@@ -3,7 +3,7 @@ package guitests;
 import org.testfx.api.FxRobot;
 
 import javafx.scene.input.KeyCodeCombination;
-import seedu.taskcrusher.testutil.TestUtil;
+import t15b1.taskcrusher.testutil.TestUtil;
 
 /**
  * Robot used to simulate user actions on the GUI.
