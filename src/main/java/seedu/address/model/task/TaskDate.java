@@ -42,7 +42,8 @@ public class TaskDate {
         sdf.setLenient(false);
         try {
             //throws ParseException if date is not valid
-            Date date = sdf.parse(test);
+            /*Date date = */
+            sdf.parse(test);
         } catch (ParseException e) {
             e.printStackTrace();
             return false;
