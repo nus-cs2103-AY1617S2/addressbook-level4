@@ -13,7 +13,8 @@ public class DateTimeUtilTest {
     @Test
     public void isSameLocalDateTime() {
         String stringDate;
-        LocalDateTime localDateTime1, localDateTime2;
+        LocalDateTime localDateTime1;
+        LocalDateTime localDateTime2;
 
         // convert a fully specified date time to local date time
         stringDate = "31 Mar 2017, 5:24pm";

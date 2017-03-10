@@ -16,9 +16,9 @@ import seedu.toluist.model.Task;
  */
 public class AddTaskCommandTest extends ToLuistGuiTest {
 
-    IllegalArgumentException illegalArgumentException1 =
+    private static IllegalArgumentException illegalArgumentException1 =
             new IllegalArgumentException("Description must not be empty.");
-    IllegalArgumentException illegalArgumentException2 =
+    private static IllegalArgumentException illegalArgumentException2 =
             new IllegalArgumentException("Start date must be before end date.");
 
     @Test

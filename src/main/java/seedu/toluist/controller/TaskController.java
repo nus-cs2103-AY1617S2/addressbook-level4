@@ -71,10 +71,8 @@ public abstract class TaskController extends Controller {
     }
 
     public Task getTask(String indexToken) {
-        int index = indexToken != null ? Integer.parseInt(indexToken) - 1 : INVALID_INDEX;
-        Task task = indexToken != null
-                ? UiStore.getInstance().getTasks().get(index)
-                : null;
+        int index = indexToken == null ? INVALID_INDEX : Integer.parseInt(indexToken) - 1;
+        Task task = indexToken == null ? null : UiStore.getInstance().getTasks().get(index);
         return task;
     }
 

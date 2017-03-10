@@ -44,7 +44,7 @@ public class UpdateTaskController extends TaskController {
         String endDateToken = tokens.get(TASK_END_DATE_KEYWORD);
         LocalDateTime endDateTime = DateTimeUtil.toDate(endDateToken);
 
-        commandResult = update(todoList, task, description, startDateTime, endDateTime);
+        commandResult = update(task, description, startDateTime, endDateTime);
 
         if (todoList.save()) {
             uiStore.setTask(todoList.getTasks());
@@ -54,7 +54,7 @@ public class UpdateTaskController extends TaskController {
         return commandResult;
     }
 
-    private CommandResult update(TodoList todoList, Task task, String description,
+    private CommandResult update(Task task, String description,
             LocalDateTime startDateTime, LocalDateTime endDateTime) {
         if (!description.isEmpty()) {
             task.description = description;

@@ -63,19 +63,7 @@ public class Task implements Comparable<Task> {
     }
 
     public boolean validateTaskIsFloatingIsEventOrHasDeadline() {
-        if (startDateTime == null && endDateTime == null) {
-            // Task is floating task
-            return true;
-        } else if (startDateTime != null && endDateTime != null) {
-            // Task is event
-            return true;
-        } else if (startDateTime == null && endDateTime != null) {
-            // Task has deadline
-            return true;
-        } else {
-            // Invalid task
-            return false;
-        }
+        return startDateTime == null || endDateTime != null;
     }
 
     @Override
