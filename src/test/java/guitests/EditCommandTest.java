@@ -71,13 +71,13 @@ public class EditCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void edit_missingPersonIndex_failure() {
+    public void edit_missingTaskIndex_failure() {
         commandBox.runCommand("edit Bobby");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void edit_invalidPersonIndex_failure() {
+    public void edit_invalidTaskIndex_failure() {
         commandBox.runCommand("edit 8 Bobby");
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
@@ -94,7 +94,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         assertResultMessage(Title.MESSAGE_TITLE_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 p/abcd");
-        assertResultMessage(StartDate.MESSAGE_PHONE_CONSTRAINTS);
+        assertResultMessage(StartDate.MESSAGE_STARTDATE_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 e/yahoo!!!");
         assertResultMessage(EndDate.MESSAGE_ENDDATE_CONSTRAINTS);
@@ -107,7 +107,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void edit_duplicatePerson_failure() {
+    public void edit_duplicateTask_failure() {
         commandBox.runCommand("edit 3 Alice Pauline p/85355255 e/alice@gmail.com "
                                 + "a/123, Jurong West Ave 6, #08-111 t/friends");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
@@ -116,23 +116,23 @@ public class EditCommandTest extends TaskManagerGuiTest {
     /**
      * Checks whether the edited person has the correct updated details.
      *
-     * @param filteredPersonListIndex index of person to edit in filtered list
-     * @param addressBookIndex index of person to edit in the address book.
+     * @param filteredTaskListIndex index of person to edit in filtered list
+     * @param taskManagerIndex index of person to edit in the address book.
      *      Must refer to the same person as {@code filteredPersonListIndex}
      * @param detailsToEdit details to edit the person with as input to the edit command
-     * @param editedPerson the expected person after editing the person's details
+     * @param editedTask the expected person after editing the person's details
      */
-    private void assertEditSuccess(int filteredPersonListIndex, int addressBookIndex,
-                                    String detailsToEdit, TestPerson editedPerson) {
-        commandBox.runCommand("edit " + filteredPersonListIndex + " " + detailsToEdit);
+    private void assertEditSuccess(int filteredTaskListIndex, int taskManagerIndex,
+                                    String detailsToEdit, TestPerson editedTask) {
+        commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
 
         // confirm the new card contains the right data
-        TaskCardHandle editedCard = taskListPanel.navigateToTask(editedPerson.getTitle().value);
-        assertMatching(editedPerson, editedCard);
+        TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getTitle().value);
+        assertMatching(editedTask, editedCard);
 
         // confirm the list now contains all previous persons plus the person with updated details
-        expectedTasksList[addressBookIndex - 1] = editedPerson;
+        expectedTasksList[taskManagerIndex - 1] = editedTask;
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
-        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedPerson));
+        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
 }
