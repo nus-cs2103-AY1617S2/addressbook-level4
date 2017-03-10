@@ -6,7 +6,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 #### [Jacob Levy](http://github.com/levyjr) <br>
 <img src="images/PhotoJacobLevy.jpg" width="150"><br>
-Role: Developer
+Role: Developer <br>
 Responsibilities: Documentation, Deliverables and Deadlines, Scheduling and tracking
 
 -----
