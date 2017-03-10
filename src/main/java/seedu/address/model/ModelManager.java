@@ -56,6 +56,10 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateCopy(ReadOnlyTaskManager newData){
         taskManagerCopy = new TaskManager(newData);
     }
+    
+    public void clearCopy(){
+        taskManagerCopy = new TaskManager(); // can change to delete all tasks once implemented
+    }
 
     @Override
     public ReadOnlyTaskManager getTaskManager() {

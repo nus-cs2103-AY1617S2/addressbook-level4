@@ -45,4 +45,6 @@ public interface Model {
 
     ReadOnlyTaskManager getCopy();
 
+    void clearCopy();
+
 }
