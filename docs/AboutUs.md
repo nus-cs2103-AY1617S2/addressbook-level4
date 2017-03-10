@@ -14,7 +14,7 @@ Responsibilities: Ensure project deliverables are done on time and in the right 
 -----
 
 #### [Hsieh Hsin Han](https://github.com/Tony-Hsieh)
-<img src="images/IMG_0159.jpg" width="150"><br>
+<img src="images/IMG_0159.png" width="150"><br>
 Role: Developer <br>
 Responsibilities: UI
 
