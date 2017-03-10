@@ -42,12 +42,12 @@ public class XmlSerializableAddressBook implements ReadOnlyTaskManager {
      */
     public XmlSerializableAddressBook(ReadOnlyTaskManager src) {
         this();
-        tasks.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        tasks.addAll(src.getTaskList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
     }
 
     @Override
-    public ObservableList<ReadOnlyEvent> getPersonList() {
+    public ObservableList<ReadOnlyEvent> getTaskList() {
         final ObservableList<Event> persons = this.tasks.stream().map(p -> {
             try {
                 return p.toModelType();
