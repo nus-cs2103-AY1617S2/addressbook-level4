@@ -35,6 +35,7 @@ public class TaskTokenizer {
         }
         if (hasDescription) {
             String description = matcher.group(TASK_DESCRIPTION);
+            // TODO: Allow any ordering to still work, by extracting tokens more generally.
             int startDateIndex = description.lastIndexOf(TASK_START_DATE_KEYWORD);
             int endDateIndex = description.lastIndexOf(TASK_END_DATE_KEYWORD);
             String startDate = null;
