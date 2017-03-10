@@ -30,9 +30,9 @@ import seedu.address.testutil.TestUtil;
 import seedu.address.testutil.TypicalTestTasks;
 
 /**
- * A GUI Test class for AddressBook.
+ * A GUI Test class for TaskList.
  */
-public abstract class AddressBookGuiTest {
+public abstract class TaskListGuiTest {
 
     /* The TestName Rule makes the current test name available inside test methods */
     @Rule
@@ -87,9 +87,9 @@ public abstract class AddressBookGuiTest {
      * Return null to use the data in the file specified in {@link #getDataFileLocation()}
      */
     protected TaskList getInitialData() {
-        TaskList ab = new TaskList();
-        TypicalTestTasks.loadAddressBookWithSampleData(ab);
-        return ab;
+        TaskList taskList = new TaskList();
+        TypicalTestTasks.loadTaskListWithSampleData(taskList);
+        return taskList;
     }
 
     /**
@@ -105,14 +105,14 @@ public abstract class AddressBookGuiTest {
     }
 
     /**
-     * Asserts the person shown in the card is same as the given person
+     * Asserts the task shown in the card is same as the given task
      */
-    public void assertMatching(ReadOnlyTask person, PersonCardHandle card) {
-        assertTrue(TestUtil.compareCardAndPerson(card, person));
+    public void assertMatching(ReadOnlyTask task, PersonCardHandle card) {
+        assertTrue(TestUtil.compareCardAndPerson(card, task)); // TODO UI renaming
     }
 
     /**
-     * Asserts the size of the person list is equal to the given number.
+     * Asserts the size of the person list is equal to the given number. // TODO UI renaming
      */
     protected void assertListSize(int size) {
         int numberOfPeople = personListPanel.getNumberOfPeople();

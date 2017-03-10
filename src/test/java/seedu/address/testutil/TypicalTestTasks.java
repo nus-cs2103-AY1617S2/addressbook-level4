@@ -6,35 +6,37 @@ import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
- *
+ * TODO
  */
 public class TypicalTestTasks {
 
-    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
+    public TestTask amuseFriend, bet, count, dog, elephant, flipTable, goondu, helpMe, iAmCode;
 
     public TypicalTestTasks() {
         try {
-            alice = new TaskBuilder().withName("Alice Pauline").withTags("friends").build(); // TODO update tasks
-            benson = new TaskBuilder().withName("Benson Meier").withTags("owesMoney", "friends").build();
-            carl = new TaskBuilder().withName("Carl Kurz").build();
-            daniel = new TaskBuilder().withName("Daniel Meier").build();
-            elle = new TaskBuilder().withName("Elle Meyer").build();
-            fiona = new TaskBuilder().withName("Fiona Kunz").build();
-            george = new TaskBuilder().withName("George Best").build();
+            amuseFriend = new TaskBuilder().withName("Amuse friend").withTags("friends").build();
+            // TODO flip the order of tags and test cases can fail, see TestUtil::compareCardAndPerson
+            // using list compare instead of set compare
+            bet = new TaskBuilder().withName("Bet dog race").withTags("luck", "money").build();
+            count = new TaskBuilder().withName("Count chickens before they hatch").build();
+            dog = new TaskBuilder().withName("Dog naming").build();
+            elephant = new TaskBuilder().withName("Elephant riding").build();
+            flipTable = new TaskBuilder().withName("Flip table").build();
+            goondu = new TaskBuilder().withName("Goondu goon").build();
 
             // Manually added
-            hoon = new TaskBuilder().withName("Hoon Meier").build();
-            ida = new TaskBuilder().withName("Ida Mueller").build();
+            helpMe = new TaskBuilder().withName("Help me").build();
+            iAmCode = new TaskBuilder().withName("I am code").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
         }
     }
 
-    public static void loadAddressBookWithSampleData(TaskList ab) {
-        for (TestTask person : new TypicalTestTasks().getTypicalTasks()) {
+    public static void loadTaskListWithSampleData(TaskList taskList) {
+        for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
             try {
-                ab.addTask(new Task(person));
+                taskList.addTask(new Task(task));
             } catch (UniqueTaskList.DuplicateTaskException e) {
                 assert false : "not possible";
             }
@@ -42,12 +44,12 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
+        return new TestTask[]{amuseFriend, bet, count, dog, elephant, flipTable, goondu};
     }
 
-    public TaskList getTypicalAddressBook() {
-        TaskList ab = new TaskList();
-        loadAddressBookWithSampleData(ab);
-        return ab;
+    public TaskList getTypicalTaskList() {
+        TaskList taskList = new TaskList();
+        loadTaskListWithSampleData(taskList);
+        return taskList;
     }
 }

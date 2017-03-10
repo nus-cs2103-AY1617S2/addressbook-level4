@@ -14,7 +14,7 @@ import seedu.address.testutil.TaskBuilder;
 import seedu.address.testutil.TestTask;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
-public class EditCommandTest extends AddressBookGuiTest {
+public class EditCommandTest extends TaskListGuiTest {
 
     // The list of persons in the person list panel is expected to match this list.
     // This list is updated with every successful call to assertEditSuccess().
@@ -54,14 +54,14 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
-        commandBox.runCommand("find Elle");
+        commandBox.runCommand("find Elephant");
 
-        String detailsToEdit = "Belle";
+        String detailsToEdit = "Bellyphant";
         int filteredPersonListIndex = 1;
         int addressBookIndex = 5;
 
         TestTask personToEdit = expectedPersonsList[addressBookIndex - 1];
-        TestTask editedPerson = new TaskBuilder(personToEdit).withName("Belle").build();
+        TestTask editedPerson = new TaskBuilder(personToEdit).withName("Bellyphant").build();
 
         assertEditSuccess(filteredPersonListIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
@@ -104,7 +104,7 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_duplicatePerson_failure() {
-        commandBox.runCommand("edit 3 Alice Pauline t/friends");
+        commandBox.runCommand("edit 3 Amuse friend t/friends");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
