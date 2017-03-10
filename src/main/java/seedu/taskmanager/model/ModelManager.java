@@ -143,7 +143,7 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask person) {
             return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(person.getTitle().fullName, keyword))
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(person.getTitle().value, keyword))
                     .findAny()
                     .isPresent();
         }

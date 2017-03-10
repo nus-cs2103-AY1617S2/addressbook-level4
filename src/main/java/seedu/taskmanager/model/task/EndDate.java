@@ -4,8 +4,8 @@ package seedu.taskmanager.model.task;
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's phone number in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
+ * Represents a Task's start date in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidEndDate(String)}
  */
 public class EndDate {
 
@@ -20,10 +20,10 @@ public class EndDate {
      *
      * @throws IllegalValueException if given email address string is invalid.
      */
-    public EndDate(String email) throws IllegalValueException {
-        assert email != null;
-        String trimmedEmail = email.trim();
-        if (!isValidEmail(trimmedEmail)) {
+    public EndDate(String endDate) throws IllegalValueException {
+        assert endDate != null;
+        String trimmedEmail = endDate.trim();
+        if (!isValidEndDate(trimmedEmail)) {
             throw new IllegalValueException(MESSAGE_EMAIL_CONSTRAINTS);
         }
         this.value = trimmedEmail;
@@ -32,7 +32,7 @@ public class EndDate {
     /**
      * Returns if a given string is a valid person email.
      */
-    public static boolean isValidEmail(String test) {
+    public static boolean isValidEndDate(String test) {
         return test.matches(EMAIL_VALIDATION_REGEX);
     }
 
