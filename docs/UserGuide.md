@@ -1,186 +1,186 @@
-# AddressBook Level 4 - User Guide
+# Task Manager - User Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `T09B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`
 
 ---
 
-1. [Quick Start](#quick-start)
-2. [Features](#features)
-3. [FAQ](#faq)
-4. [Command Summary](#command-summary)
-
 ## 1. Quick Start
 
-0. Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
-
-   > Having any Java 8 version is not enough. <br>
-   > This app will not work with earlier versions of Java 8.
-
-1. Download the latest `addressbook.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for your Address Book.
-3. Double-click the file to start the app. The GUI should appear in a few seconds.
-   > <img src="images/Ui.png" width="600">
-
-4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
-   e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
-5. Some example commands you can try:
-   * **`list`** : lists all contacts
-   * **`add`**` John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01` :
-     adds a contact named `John Doe` to the Address Book.
-   * **`delete`**` 3` : deletes the 3rd contact shown in the current list
-   * **`exit`** : exits the app
-6. Refer to the [Features](#features) section below for details of each command.<br>
-
+- Please ensure the host has JRE 1.8 or higher installed.
+(Download: http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+- Unzip the zip file and run the .exe file.
 
 ## 2. Features
+### Adding tasks
+**Adding a new task**
+Format: `add <task_name> [due <deadline>] [tag <tag1, tag2, ...>]`
 
-> **Command Format**
->
-> * Words in `UPPER_CASE` are the parameters.
-> * Items in `SQUARE_BRACKETS` are optional.
-> * Items with `...` after them can have multiple instances.
-> * Parameters can be in any order.
-
-### 2.1. Viewing help : `help`
-
-Format: `help`
-
-> Help is also shown if you enter an incorrect command e.g. `abcd`
-
-### 2.2. Adding a person: `add`
-
-Adds a person to the address book<br>
-Format: `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
-
-> Persons can have any number of tags (including 0)
+> task_name : Name of your task<br>
+> deadline (optional) :<br>
+>   (1) Date only, `02/03/17` or `020317` (ddmmyy)<br>
+>   (2) Time only which means today, `3pm` or `12noon` or `2.30am`<br>
+>   (3) Time and Date, write time before date<br>
+> tag1, tag2, … : tags of this task
 
 Examples:
 
-* `add John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01`
-* `add Betsy Crowe t/friend e/betsycrowe@gmail.com a/Newgate Prison p/1234567 t/criminal`
+* `add Study for CS2106`
+* `add Study for CS2106 due 3pm`
+* `add Study for CS2106 due today`
+* `add Study for CS2106 due 3pm today`
+* `add Study for CS2106 due 02/03/17`
 
-### 2.3. Listing all persons : `list`
+> !! Do not use the keywords like `due` in your `<task_name>` or the Task Manager might misunderstand you
 
-Shows a list of all persons in the address book.<br>
+**Adding a new event**
+Format: `add <event_name> from <starting_time> to <end_time> [on <date>] [tag <tag1, tag2, ...>]`
+
+> event_name : name of the event<br>
+> starting_time : time of start of the event<br>
+> end_time : time of end of the event<br>
+> date: date of the event<br>
+> tag1, tag2, … : tags of this event
+
+Examples:
+
+* `add dinner from 5pm to 5.30pm`
+* `add meeting from 10am to 11am on Wednesday`
+
+### Viewing tasks
+**Listing all ongoing tasks**
 Format: `list`
 
-### 2.4. Editing a person : `edit`
-
-Edits an existing person in the address book.<br>
-Format: `edit INDEX [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
-
-> * Edits the person at the specified `INDEX`.
-    The index refers to the index number shown in the last person listing.<br>
-    The index **must be a positive integer** 1, 2, 3, ...
-> * At least one of the optional fields must be provided.
-> * Existing values will be updated to the input values.
-> * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-> * You can remove all the person's tags by typing `t/` without specifying any tags after it. 
+**Finding tasks by keyword**
+Format: `find <keyword1 keyword2 ...>`
+> keyword1, keyword2, … : All the parameters you want in the search.
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@yahoo.com`<br>
-  Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@yahoo.com` respectively.
+* `find completed schoolwork`
 
-* `edit 2 Betsy Crower t/`<br>
-  Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-
-### 2.5. Finding all persons containing any keyword in their name: `find`
-
-Finds persons whose names contain any of the given keywords.<br>
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-> * The search is case sensitive. e.g `hans` will not match `Hans`
-> * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-> * Only the name is searched.
-> * Only full words will be matched e.g. `Han` will not match `Hans`
-> * Persons matching at least one keyword will be returned (i.e. `OR` search).
-    e.g. `Hans` will match `Hans Bo`
+**Finding tasks by datetime**
+Format: `find due <datetime>`
+> datetime : REFER TO ADD TASK
 
 Examples:
 
-* `find John`<br>
-  Returns `John Doe` but not `john`
-* `find Betsy Tim John`<br>
-  Returns Any person having names `Betsy`, `Tim`, or `John`
+* `find due 21042017`
 
-### 2.6. Deleting a person : `delete`
 
-Deletes the specified person from the address book. Irreversible.<br>
-Format: `delete INDEX`
+### Managing tasks
+**Updating task**
+Format: `update <id> [<new_task_name>] [due <new_datetime>] [tag <tag1, tag2, ...>] [remove tag <tag1, tag2, ...>]`
 
-> Deletes the person at the specified `INDEX`. <br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+> id : displayed task id<br>
+> new_task_name (optional) : new name to replace the old task name<br>
+> new_datetime (optional) : REFER TO ADD TASK
 
 Examples:
 
-* `list`<br>
-  `delete 2`<br>
-  Deletes the 2nd person in the address book.
-* `find Betsy`<br>
-  `delete 1`<br>
-  Deletes the 1st person in the results of the `find` command.
+* `update 7 clean house`
+* `update 7 due 05/06/17`
+* `update 7 tag schoolwork, CS2103`
+* `update 7 clean house due 04/05/17 tag schoolwork, CS2103`
 
-### 2.7. Select a person : `select`
+**Deleting task**
+Format: `delete <id1, id2, id3>`
 
-Selects the person identified by the index number used in the last person listing.<br>
-Format: `select INDEX`
-
-> Selects the person and loads the Google search page the person at the specified `INDEX`.<br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+> id : displayed task id
 
 Examples:
 
-* `list`<br>
-  `select 2`<br>
-  Selects the 2nd person in the address book.
-* `find Betsy` <br>
-  `select 1`<br>
-  Selects the 1st person in the results of the `find` command.
+* `delete 3`
+* `delete 3,4,5,6`
 
-### 2.8. Clearing all entries : `clear`
+**Marking task as complete**
+Format: `complete <id1, id2, ...>`
 
-Clears all entries from the address book.<br>
-Format: `clear`
+> id : displayed task id
 
-### 2.9. Exiting the program : `exit`
+Examples:
 
-Exits the program.<br>
+* `complete 3`
+* `complete 3,4,5,6`
+
+### Managing Tags
+
+**Renaming tag**
+Rename an existing tag<br>
+Format: `rename tag from <tag_name> to <new_tag_name>`
+
+> tag_name : existing tag name<br>
+> new_tag_name : new tag name
+
+### Undo/Redo Commands
+
+**Undo Command**
+Undo up to 5 commands that have been made by the user<br>
+Format: `undo`
+
+**Redo Command**
+Redo a command that a user has previously undone<br>
+Format: `redo`
+
+### Help
+Format: `help [<command>]`
+
+
+### Exit
 Format: `exit`
 
-### 2.10. Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data.<br>
-There is no need to save manually.
+### Advanced Usage
+**Export file**
+Export storage file to specified directory
+Format: `export to <dir_location>`
+
+> dir_location: path to store exported file
+
+Examples:
+
+* `export to C:\Desktop`
+* `export to ..\mySecretFolder`
+
+**Import file**
+Add tasks from file to exported task list
+Format: `import from <path_to_file>`
+
+> path_to_location: path to the exported task list
+
+Examples:
+
+* `import from C:\Desktop\exported.txt`
+* `import from ..\mySecretFolder\exported.txt`
+
+**Change storage location**
+Set a new storage location
+Format: `save to <dir_location>`
+
+> dir_location : path to new save location
+
+Examples:
+
+* `save to C:\Desktop`
+* `save to ..\mySecretFolder`
 
 ## 3. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
-       the file that contains the data of your previous Address Book folder.
+       the file that contains the data of your previous Task Manager folder.
 
-## 4. Command Summary
+## 4. Command Usage
 
-* **Add**  `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` <br>
-  e.g. `add James Ho p/22224444 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-
-* **Clear** : `clear`
-
-* **Delete** : `delete INDEX` <br>
-   e.g. `delete 3`
-
-* **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
-  e.g. `find James Jake`
-
-* **List** : `list` <br>
-  e.g.
-
-* **Help** : `help` <br>
-  e.g.
-
-* **Select** : `select INDEX` <br>
-  e.g.`select 2`
-
-
+* **Add Task**: `add <task_name> [due <datetime>] [tag <tag1, tag2, ...>]`
+* **Add Event**: `add <event_name> from <starting_time> to <end_time> [on <date>] [tag <tag1, tag2, ...>]`
+* **View All Tasks**: `list`
+* **Find Task**: `find <keyword1 keyword2 ...>`
+* **Update Task**: `update <id> [<new_task_name>] [due <new_datetime>] [tag <tag1, tag2, ...>] [remove tag <tag1, tag2, ...>]`
+* **Delete Task**: `delete <id1, id2, id3>`
+* **Complete Task**: `complete <id1, id2, ...>`
+* **Rename Tag**: `rename tag from <tag_name> to <new_tag_name>`
+* **Help**: `help [<command>]`
+* **Exit**: `exit`
+* **Export**: `export to <dir_location>`
+* **Import**: `import from <path_to_file>`
+* **Change Storage Location**: `save to <dir_location>`
