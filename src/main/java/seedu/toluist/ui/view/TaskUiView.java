@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import seedu.toluist.commons.util.DateFormatterUtil;
 import seedu.toluist.commons.util.FxViewUtil;
+import seedu.toluist.model.Tag;
 import seedu.toluist.model.Task;
 
 import java.time.LocalDateTime;
@@ -35,12 +36,8 @@ public class TaskUiView extends UiView {
     @Override
     protected void viewDidMount() {
         FxViewUtil.makeFullWidth(getRoot());
-        name.setText("The default font to use for text in the Labeled. If the Label's text is rich text then this font may or may not be used depending on the font information embedded in the rich text, but in any case where a default font is required, this font will be used.");
+        name.setText(task.description);
         id.setText(displayedIndex + ". ");
-        setDate();
-    }
-
-    private void setDate() {
         if (task.isTask()) {
             date.setText(DateFormatterUtil.formatTaskDeadline(task.getStartDateTime()));
         } else if (task.isEvent()) {
