@@ -32,7 +32,7 @@ Responsibilities: Data
 -----
 
 #### [Ali Rizvi](https://github.com/EntitySK)
-<img src="images/MartinChoo.jpg" width="150"><br>
+<img src="images/MuhammadAliRizvi.jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: Dev Ops
 
