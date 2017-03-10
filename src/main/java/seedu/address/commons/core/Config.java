@@ -11,10 +11,10 @@ public class Config {
     public static final String DEFAULT_CONFIG_FILE = "config.json";
 
     // Config values customizable through config file
-    private String appTitle = "To-do list App";
+    private String appTitle = "To-Do List App";
     private Level logLevel = Level.INFO;
     private String userPrefsFilePath = "preferences.json";
-    private String todoListFilePath = "data/todoList.xml";
+    private String todoListFilePath = "data/todolist.xml";
     private String todoListName = "MyToDoList";
 
 
@@ -89,7 +89,7 @@ public class Config {
         sb.append("\nCurrent log level : " + logLevel);
         sb.append("\nPreference file Location : " + userPrefsFilePath);
         sb.append("\nLocal data file location : " + todoListFilePath);
-        sb.append("\nAddressBook name : " + todoListName);
+        sb.append("\nToDoList name : " + todoListName);
         return sb.toString();
     }
 

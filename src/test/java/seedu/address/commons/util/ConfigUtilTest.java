@@ -76,8 +76,8 @@ public class ConfigUtilTest {
         config.setAppTitle("Typical App Title");
         config.setLogLevel(Level.INFO);
         config.setUserPrefsFilePath("C:\\preferences.json");
-        config.setToDoListFilePath("addressbook.xml");
-        config.setToDoListName("TypicalAddressBookName");
+        config.setToDoListFilePath("data/todolist.xml");
+        config.setToDoListName("TypicalToDoListName");
         return config;
     }
 
