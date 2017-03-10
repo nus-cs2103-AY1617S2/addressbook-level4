@@ -9,9 +9,9 @@ import seedu.taskmanager.model.category.UniqueCategoryList;
 public interface ReadOnlyTask {
 
     TaskName getTaskName();
-//    Deadline getDeadline();
+    Deadline getDeadline();
     Date getDate();
-//    EndTime getEndTime();
+    EndTime getEndTime();
 
     /**
      * The returned CategoryList is a deep copy of the internal CategoryList,

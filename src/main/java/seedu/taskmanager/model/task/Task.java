@@ -13,8 +13,8 @@ public class Task implements ReadOnlyTask {
 
     private TaskName taskName;
     private Date date;
-//    private EndTime endTime;
-//    private Deadline deadline;
+    private EndTime endTime;
+    private Deadline deadline;
 //    private UniqueCategoryList categories;
 
     /**
