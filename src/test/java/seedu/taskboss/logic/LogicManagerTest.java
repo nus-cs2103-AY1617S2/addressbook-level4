@@ -443,8 +443,8 @@ public class LogicManagerTest {
             return new Task(
                     new Name("Task " + seed),
                     new PriorityLevel("" + Math.abs(seed)),
-                    new DateTime("Feb 19, 2017"),
-                    new DateTime("Feb 20, 2017"),
+                    new DateTime("Feb 19 10am, 2017"),
+                    new DateTime("Feb 20 10am, 2017"),
                     new Information("House of " + seed),
                     new UniqueCategoryList(new Category("category" + Math.abs(seed)),
                            new Category("category" + Math.abs(seed + 1)))
@@ -552,8 +552,8 @@ public class LogicManagerTest {
             return new Task(
                     new Name(name),
                     new PriorityLevel("1"),
-                    new DateTime("Feb 19, 2017"),
-                    new DateTime("Feb 20, 2017"),
+                    new DateTime("Feb 19 10am, 2017"),
+                    new DateTime("Feb 20 10am, 2017"),
                     new Information("House of 1"),
                     new UniqueCategoryList(new Category("category"))
             );
