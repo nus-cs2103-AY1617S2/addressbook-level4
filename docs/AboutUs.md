@@ -22,7 +22,7 @@ Responsibilities: Deliverables and deadlines, Scheduling and tracking <br>
 <img src="images/Arishuynhvan.png" width="150"><br>
 Role: Developer <br>
 Responsibilities: Testing, Integration  <br>  
-* Components in charge of: GUI, Logic
+* Components in charge of: Model, Logic
 * Aspects/tools in charge of:
 * Features implemented:
 * Code written: 
@@ -34,7 +34,7 @@ Responsibilities: Testing, Integration  <br>
 <img src="images/WangYu-g.png" width="150"><br>
 Role: Developer <br>
 Responsibilities: Documentation, Code Quality <br>  
-* Components in charge of: Model, Storage
+* Components in charge of: GUI, Storage
 * Aspects/tools in charge of:
 * Features implemented:
 * Code written: 
@@ -46,7 +46,7 @@ Responsibilities: Documentation, Code Quality <br>
 <img src="https://avatars2.githubusercontent.com/u/25544025?v=3&s=460" width="150"><br>
 Role: Developer <br>
 Responsibilities: Code Quality <br>  
-* Components in charge of: Storage
+* Components in charge of: Storage, GUI
 * Aspects/tools in charge of:
 * Features implemented:
 * Code written: 
