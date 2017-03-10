@@ -15,8 +15,8 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.model.TaskManager;
 import seedu.address.model.ReadOnlyTaskManager;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.TypicalTestPersons;
+import seedu.address.model.task.Task;
+import seedu.address.testutil.TypicalTestTasks;
 
 public class XmlTaskManagerStorageTest {
     private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlTaskManagerStorageTest/");
