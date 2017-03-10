@@ -46,8 +46,8 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getName().fullName;
-        phone = source.getPhone().value;
-        email = source.getEmail().value;
+        phone = source.getPriority().value;
+        email = source.getDescription().value;
         address = source.getAddress().value;
         categorized = new ArrayList<>();
         for (Category category : source.getCategories()) {

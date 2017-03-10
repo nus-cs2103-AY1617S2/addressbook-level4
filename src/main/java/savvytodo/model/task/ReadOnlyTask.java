@@ -9,8 +9,8 @@ import savvytodo.model.category.UniqueCategoryList;
 public interface ReadOnlyTask {
 
     Name getName();
-    Priority getPhone();
-    Description getEmail();
+    Priority getPriority();
+    Description getDescription();
     Address getAddress();
 
     /**
@@ -26,8 +26,8 @@ public interface ReadOnlyTask {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                 && other.getName().equals(this.getName()) // state checks here onwards
-                && other.getPhone().equals(this.getPhone())
-                && other.getEmail().equals(this.getEmail())
+                && other.getPriority().equals(this.getPriority())
+                && other.getDescription().equals(this.getDescription())
                 && other.getAddress().equals(this.getAddress()));
     }
 
@@ -38,9 +38,9 @@ public interface ReadOnlyTask {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
                 .append(" Priority: ")
-                .append(getPhone())
+                .append(getPriority())
                 .append(" Description: ")
-                .append(getEmail())
+                .append(getDescription())
                 .append(" Address: ")
                 .append(getAddress())
                 .append(" Categories: ");

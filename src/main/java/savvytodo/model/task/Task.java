@@ -34,7 +34,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(), source.getCategories());
+        this(source.getName(), source.getPriority(), source.getDescription(), source.getAddress(), source.getCategories());
     }
 
     public void setName(Name name) {
@@ -53,7 +53,7 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
-    public Priority getPhone() {
+    public Priority getPriority() {
         return priority;
     }
 
@@ -63,7 +63,7 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
-    public Description getEmail() {
+    public Description getDescription() {
         return description;
     }
 
@@ -96,8 +96,8 @@ public class Task implements ReadOnlyTask {
         assert replacement != null;
 
         this.setName(replacement.getName());
-        this.setPhone(replacement.getPhone());
-        this.setEmail(replacement.getEmail());
+        this.setPhone(replacement.getPriority());
+        this.setEmail(replacement.getDescription());
         this.setAddress(replacement.getAddress());
         this.setCategories(replacement.getCategories());
     }

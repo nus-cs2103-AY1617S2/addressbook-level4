@@ -27,8 +27,8 @@ public class TestTask implements ReadOnlyTask {
      */
     public TestTask(TestTask taskToCopy) {
         this.name = taskToCopy.getName();
-        this.phone = taskToCopy.getPhone();
-        this.email = taskToCopy.getEmail();
+        this.phone = taskToCopy.getPriority();
+        this.email = taskToCopy.getDescription();
         this.address = taskToCopy.getAddress();
         this.categories = taskToCopy.getCategories();
     }
@@ -59,12 +59,12 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Priority getPhone() {
+    public Priority getPriority() {
         return phone;
     }
 
     @Override
-    public Description getEmail() {
+    public Description getDescription() {
         return email;
     }
 
@@ -87,9 +87,9 @@ public class TestTask implements ReadOnlyTask {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
         sb.append("a/" + this.getAddress().value + " ");
-        sb.append("p/" + this.getPhone().value + " ");
-        sb.append("e/" + this.getEmail().value + " ");
-        this.getCategories().asObservableList().stream().forEach(s -> sb.append("t/" + s.categoryName + " "));
+        sb.append("p/" + this.getPriority().value + " ");
+        sb.append("d/" + this.getDescription().value + " ");
+        this.getCategories().asObservableList().stream().forEach(s -> sb.append("c/" + s.categoryName + " "));
         return sb.toString();
     }
 }
