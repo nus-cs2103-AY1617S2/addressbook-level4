@@ -17,9 +17,9 @@ import seedu.taskmanager.model.TaskManager;
 import seedu.taskmanager.model.ReadOnlyTaskManager;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.storage.XmlTaskManagerStorage;
-import seedu.taskmanager.testutil.TypicalTestPersons;
+import seedu.taskmanager.testutil.TypicalTestTasks;
 
-public class XmlAddressBookStorageTest {
+public class XmlTaskManagerStorageTest {
     private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlAddressBookStorageTest/");
 
     @Rule
@@ -63,7 +63,7 @@ public class XmlAddressBookStorageTest {
     @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         String filePath = testFolder.getRoot().getPath() + "TempAddressBook.xml";
-        TypicalTestPersons td = new TypicalTestPersons();
+        TypicalTestTasks td = new TypicalTestTasks();
         TaskManager original = td.getTypicalTaskManager();
         XmlTaskManagerStorage xmlTaskManagerStorage = new XmlTaskManagerStorage(filePath);
 

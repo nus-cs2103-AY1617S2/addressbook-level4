@@ -27,7 +27,7 @@ import seedu.taskmanager.commons.events.BaseEvent;
 import seedu.taskmanager.model.TaskManager;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.testutil.TestUtil;
-import seedu.taskmanager.testutil.TypicalTestPersons;
+import seedu.taskmanager.testutil.TypicalTestTasks;
 
 /**
  * A GUI Test class for AddressBook.
@@ -40,7 +40,7 @@ public abstract class TaskManagerGuiTest {
 
     TestApp testApp;
 
-    protected TypicalTestPersons td = new TypicalTestPersons();
+    protected TypicalTestTasks td = new TypicalTestTasks();
 
     /*
      *   Handles to GUI elements present at the start up are created in advance
@@ -88,7 +88,7 @@ public abstract class TaskManagerGuiTest {
      */
     protected TaskManager getInitialData() {
         TaskManager ab = new TaskManager();
-        TypicalTestPersons.loadTaskManagerWithSampleData(ab);
+        TypicalTestTasks.loadTaskManagerWithSampleData(ab);
         return ab;
     }
 

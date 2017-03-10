@@ -8,11 +8,11 @@ import seedu.taskmanager.model.task.UniqueTaskList;
 /**
  *
  */
-public class TypicalTestPersons {
+public class TypicalTestTasks {
 
     public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
 
-    public TypicalTestPersons() {
+    public TypicalTestTasks() {
         try {
             alice = new TaskBuilder().withName("Alice Pauline")
                     .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@gmail.com")
@@ -44,7 +44,7 @@ public class TypicalTestPersons {
     }
 
     public static void loadTaskManagerWithSampleData(TaskManager ab) {
-        for (TestTask person : new TypicalTestPersons().getTypicalTasks()) {
+        for (TestTask person : new TypicalTestTasks().getTypicalTasks()) {
             try {
                 ab.addTask(new Task(person));
             } catch (UniqueTaskList.DuplicateTaskException e) {

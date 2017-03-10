@@ -22,7 +22,7 @@ import seedu.taskmanager.storage.Storage;
 import seedu.taskmanager.storage.StorageManager;
 import seedu.taskmanager.storage.XmlTaskManagerStorage;
 import seedu.taskmanager.testutil.EventsCollector;
-import seedu.taskmanager.testutil.TypicalTestPersons;
+import seedu.taskmanager.testutil.TypicalTestTasks;
 
 public class StorageManagerTest {
 
@@ -64,7 +64,7 @@ public class StorageManagerTest {
          * {@link XmlAddressBookStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link XmlAddressBookStorageTest} class.
          */
-        TaskManager original = new TypicalTestPersons().getTypicalTaskManager();
+        TaskManager original = new TypicalTestTasks().getTypicalTaskManager();
         storageManager.saveTaskManager(original);
         ReadOnlyTaskManager retrieved = storageManager.readTaskManager().get();
         assertEquals(original, new TaskManager(retrieved));
