@@ -2,7 +2,9 @@ package seedu.toluist.controller;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.logging.Logger;
 
+import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.util.DateTimeUtil;
 import seedu.toluist.controller.commons.TaskTokenizer;
 import seedu.toluist.dispatcher.CommandResult;
@@ -13,7 +15,7 @@ import seedu.toluist.ui.Ui;
 /**
  * AddTaskController is responsible for adding a task (and event)
  */
-public class AddTaskController extends TaskController {
+public class AddTaskController extends Controller {
 
     private static final String COMMAND_TEMPLATE = "^add"
             + "(\\s+(?<description>.+))?";
@@ -22,8 +24,10 @@ public class AddTaskController extends TaskController {
 
     private static final String RESULT_MESSAGE_ADD_TASK = "New task added";
 
+    private Logger logger = LogsCenter.getLogger(getClass());
+
     public AddTaskController(Ui renderer) {
-        super(renderer, COMMAND_TEMPLATE);
+        super(renderer);
     }
 
     public CommandResult execute(String command) {
@@ -57,6 +61,11 @@ public class AddTaskController extends TaskController {
             LocalDateTime startDateTime, LocalDateTime endDateTime) {
         todoList.add(new Task(description, startDateTime, endDateTime));
         return new CommandResult(RESULT_MESSAGE_ADD_TASK);
+    }
+
+    @Override
+    public boolean matchesCommand(String command) {
+        return command.matches(COMMAND_TEMPLATE);
     }
 
     public static String[] getCommandWords() {

@@ -1,7 +1,9 @@
 package seedu.toluist.controller;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.logging.Logger;
 
+import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.util.DateTimeUtil;
 import seedu.toluist.controller.commons.TaskTokenizer;
 import seedu.toluist.dispatcher.CommandResult;
@@ -12,7 +14,7 @@ import seedu.toluist.ui.Ui;
 /**
  * UpdateTaskController is responsible for updating a task
  */
-public class UpdateTaskController extends TaskController {
+public class UpdateTaskController extends Controller {
 
     private static final String COMMAND_TEMPLATE = "^update"
             + "(\\s+(?<index>\\d+))?"
@@ -22,8 +24,10 @@ public class UpdateTaskController extends TaskController {
 
     private static final String RESULT_MESSAGE_UPDATE_TASK = "Task updated";
 
+    private Logger logger = LogsCenter.getLogger(getClass());
+
     public UpdateTaskController(Ui renderer) {
-        super(renderer, COMMAND_TEMPLATE);
+        super(renderer);
     }
 
     public CommandResult execute(String command) {
@@ -68,6 +72,11 @@ public class UpdateTaskController extends TaskController {
             }
         }
         return new CommandResult(RESULT_MESSAGE_UPDATE_TASK);
+    }
+
+    @Override
+    public boolean matchesCommand(String command) {
+        return command.matches(COMMAND_TEMPLATE);
     }
 
     public static String[] getCommandWords() {
