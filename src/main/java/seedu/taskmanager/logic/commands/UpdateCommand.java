@@ -173,6 +173,6 @@ public class UpdateCommand extends Command {
         public Optional<UniqueCategoryList> getCategories() {
             return categories;
         }
-*/ 
+*/
     }
 }

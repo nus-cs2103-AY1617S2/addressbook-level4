@@ -27,10 +27,8 @@ public class Task implements ReadOnlyTask {
         this.date = date;
         this.endTime = endTime;
         this.startTime = startTime;
-        this.deadline = deadline;        
-
-        //        this.categories = new UniqueCategoryList(categories); // protect internal tags from changes in the arg list
-
+        this.deadline = deadline;
+//      this.categories = new UniqueCategoryList(categories); // protect internal tags from changes in the arg list
     }
 
     /**
@@ -65,7 +63,6 @@ public class Task implements ReadOnlyTask {
         this.deadline = deadline;
     }
 
-    
     @Override
     public Deadline getDeadline() {
         return deadline;
@@ -80,7 +77,6 @@ public class Task implements ReadOnlyTask {
     public StartTime getStartTime() {
         return startTime;
     }
-    
     public void setEndTime(EndTime endTime) {
         assert endTime != null;
         this.endTime = endTime;
@@ -90,8 +86,7 @@ public class Task implements ReadOnlyTask {
     public EndTime getEndTime() {
         return endTime;
     }
-    
-    /*
+
     @Override
     public UniqueCategoryList getCategories() {
         return new UniqueCategoryList(categories);
@@ -99,7 +94,7 @@ public class Task implements ReadOnlyTask {
 
     /**
      * Replaces this task's categories with the categories in the argument category list.
-     
+
     public void setCategories(UniqueCategoryList replacement) {
         categories.setCategories(replacement);
     }
@@ -111,11 +106,11 @@ public class Task implements ReadOnlyTask {
         assert replacement != null;
 
         this.setTaskName(replacement.getTaskName());
+        this.setDate(replacement.getDate());
         this.setDeadline(replacement.getDeadline());
         this.setStartTime(replacement.getStartTime());
         this.setEndTime(replacement.getEndTime());
-        this.setDate(replacement.getDate());
-//        this.setCategories(replacement.getCategories());
+//      this.setCategories(replacement.getCategories());
     }
 
     @Override
