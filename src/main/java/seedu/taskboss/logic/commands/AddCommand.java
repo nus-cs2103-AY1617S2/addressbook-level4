@@ -25,7 +25,7 @@ public class AddCommand extends Command {
             + "Parameters: NAME p/PRIORITY_LEVEL sd/START_DATE ed/END_DATE "
             + "i/INFORMATION [c/CATEGORY]...\n"
             + "Example: " + COMMAND_WORD
-            + " Submit report p/3 sd/today ed/next friday 11.59pm i/inform partner c/Work c/Project";
+            + " Submit report p/3 sd/today 5pm ed/next friday 11.59pm i/inform partner c/Work c/Project";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in TaskBoss";
@@ -37,7 +37,6 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-
     public AddCommand(String name, String priorityLevel, String startDateTime, String endDateTime,
             String information, Set<String> categories) throws IllegalValueException {
         final Set<Category> categorySet = new HashSet<>();
