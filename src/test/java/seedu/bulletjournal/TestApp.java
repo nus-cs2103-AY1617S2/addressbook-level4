@@ -4,13 +4,13 @@ import java.util.function.Supplier;
 
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import seedu.bulletjournal.MainApp;
+import seedu.bulletjournal.commons.core.Config;
+import seedu.bulletjournal.commons.core.GuiSettings;
+import seedu.bulletjournal.model.ReadOnlyTodoList;
+import seedu.bulletjournal.model.UserPrefs;
+import seedu.bulletjournal.storage.XmlSerializableAddressBook;
 import seedu.bulletjournal.testutil.TestUtil;
-import seedu.bullletjournal.MainApp;
-import seedu.bullletjournal.commons.core.Config;
-import seedu.bullletjournal.commons.core.GuiSettings;
-import seedu.bullletjournal.model.ReadOnlyTodoList;
-import seedu.bullletjournal.model.UserPrefs;
-import seedu.bullletjournal.storage.XmlSerializableAddressBook;
 
 /**
  * This class is meant to override some properties of MainApp so that it will be suited for

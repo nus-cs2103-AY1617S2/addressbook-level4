@@ -8,7 +8,7 @@ import java.net.URL;
 
 import org.junit.Test;
 
-import seedu.bullletjournal.commons.util.UrlUtil;
+import seedu.bulletjournal.commons.util.UrlUtil;
 
 /**
  * Tests the UrlUtil methods.

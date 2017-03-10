@@ -1,4 +1,4 @@
-package seedu.bullletjournal.commons.core;
+package seedu.bulletjournal.commons.core;
 
 import java.io.IOException;
 import java.util.logging.ConsoleHandler;
@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-import seedu.bullletjournal.commons.events.BaseEvent;
+import seedu.bulletjournal.commons.events.BaseEvent;
 
 /**
  * Configures and manages loggers and handlers, including their logging level

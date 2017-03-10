@@ -7,7 +7,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.bullletjournal.commons.core.Version;
+import seedu.bulletjournal.commons.core.Version;
 
 public class VersionTest {
     @Rule

@@ -1,4 +1,4 @@
-package seedu.bullletjournal.commons.events;
+package seedu.bulletjournal.commons.events;
 
 public abstract class BaseEvent {
 

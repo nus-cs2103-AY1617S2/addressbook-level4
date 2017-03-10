@@ -1,4 +1,4 @@
-package seedu.bullletjournal.commons.exceptions;
+package seedu.bulletjournal.commons.exceptions;
 
 /**
  * Signals that some given data does not fulfill some constraints.

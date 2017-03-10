@@ -1,6 +1,6 @@
-package seedu.bullletjournal.model.task;
+package seedu.bulletjournal.model.task;
 
-import seedu.bullletjournal.model.tag.UniqueTagList;
+import seedu.bulletjournal.model.tag.UniqueTagList;
 
 /**
  * A read-only immutable interface for a Person in the addressbook.

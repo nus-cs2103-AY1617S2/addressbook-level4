@@ -1,4 +1,4 @@
-package seedu.bullletjournal.logic.parser;
+package seedu.bulletjournal.logic.parser;
 
 import java.util.ArrayList;
 import java.util.Arrays;

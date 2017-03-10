@@ -11,12 +11,12 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.bulletjournal.commons.util.FileUtil;
+import seedu.bulletjournal.commons.util.XmlUtil;
+import seedu.bulletjournal.model.TodoList;
+import seedu.bulletjournal.storage.XmlSerializableAddressBook;
 import seedu.bulletjournal.testutil.TestUtil;
 import seedu.bulletjournal.testutil.TodoListBuilder;
-import seedu.bullletjournal.commons.util.FileUtil;
-import seedu.bullletjournal.commons.util.XmlUtil;
-import seedu.bullletjournal.model.TodoList;
-import seedu.bullletjournal.storage.XmlSerializableAddressBook;
 
 public class XmlUtilTest {
 

@@ -1,7 +1,7 @@
-package seedu.bullletjournal.model.task;
+package seedu.bulletjournal.model.task;
 
 
-import seedu.bullletjournal.commons.exceptions.IllegalValueException;
+import seedu.bulletjournal.commons.exceptions.IllegalValueException;
 
 /**
  * Represents a Person's address in the address book.

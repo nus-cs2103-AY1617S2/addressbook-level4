@@ -1,4 +1,4 @@
-package seedu.bullletjournal.model.tag;
+package seedu.bulletjournal.model.tag;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,10 +10,10 @@ import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.bullletjournal.commons.core.UnmodifiableObservableList;
-import seedu.bullletjournal.commons.exceptions.DuplicateDataException;
-import seedu.bullletjournal.commons.exceptions.IllegalValueException;
-import seedu.bullletjournal.commons.util.CollectionUtil;
+import seedu.bulletjournal.commons.core.UnmodifiableObservableList;
+import seedu.bulletjournal.commons.exceptions.DuplicateDataException;
+import seedu.bulletjournal.commons.exceptions.IllegalValueException;
+import seedu.bulletjournal.commons.util.CollectionUtil;
 
 /**
  * A list of tags that enforces no nulls and uniqueness between its elements.

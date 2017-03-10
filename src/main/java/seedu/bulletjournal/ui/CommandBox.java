@@ -1,4 +1,4 @@
-package seedu.bullletjournal.ui;
+package seedu.bulletjournal.ui;
 
 import java.util.logging.Logger;
 
@@ -7,12 +7,12 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
-import seedu.bullletjournal.commons.core.LogsCenter;
-import seedu.bullletjournal.commons.events.ui.NewResultAvailableEvent;
-import seedu.bullletjournal.commons.util.FxViewUtil;
-import seedu.bullletjournal.logic.Logic;
-import seedu.bullletjournal.logic.commands.CommandResult;
-import seedu.bullletjournal.logic.commands.exceptions.CommandException;
+import seedu.bulletjournal.commons.core.LogsCenter;
+import seedu.bulletjournal.commons.events.ui.NewResultAvailableEvent;
+import seedu.bulletjournal.commons.util.FxViewUtil;
+import seedu.bulletjournal.logic.Logic;
+import seedu.bulletjournal.logic.commands.CommandResult;
+import seedu.bulletjournal.logic.commands.exceptions.CommandException;
 
 public class CommandBox extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);

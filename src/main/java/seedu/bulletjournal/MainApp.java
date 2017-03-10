@@ -1,4 +1,4 @@
-package seedu.bullletjournal;
+package seedu.bulletjournal;
 
 import java.io.IOException;
 import java.util.Map;
@@ -10,26 +10,26 @@ import com.google.common.eventbus.Subscribe;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-import seedu.bullletjournal.commons.core.Config;
-import seedu.bullletjournal.commons.core.EventsCenter;
-import seedu.bullletjournal.commons.core.LogsCenter;
-import seedu.bullletjournal.commons.core.Version;
-import seedu.bullletjournal.commons.events.ui.ExitAppRequestEvent;
-import seedu.bullletjournal.commons.exceptions.DataConversionException;
-import seedu.bullletjournal.commons.util.ConfigUtil;
-import seedu.bullletjournal.commons.util.StringUtil;
-import seedu.bullletjournal.logic.Logic;
-import seedu.bullletjournal.logic.LogicManager;
-import seedu.bullletjournal.model.Model;
-import seedu.bullletjournal.model.ModelManager;
-import seedu.bullletjournal.model.ReadOnlyTodoList;
-import seedu.bullletjournal.model.TodoList;
-import seedu.bullletjournal.model.UserPrefs;
-import seedu.bullletjournal.model.util.SampleDataUtil;
-import seedu.bullletjournal.storage.Storage;
-import seedu.bullletjournal.storage.StorageManager;
-import seedu.bullletjournal.ui.Ui;
-import seedu.bullletjournal.ui.UiManager;
+import seedu.bulletjournal.commons.core.Config;
+import seedu.bulletjournal.commons.core.EventsCenter;
+import seedu.bulletjournal.commons.core.LogsCenter;
+import seedu.bulletjournal.commons.core.Version;
+import seedu.bulletjournal.commons.events.ui.ExitAppRequestEvent;
+import seedu.bulletjournal.commons.exceptions.DataConversionException;
+import seedu.bulletjournal.commons.util.ConfigUtil;
+import seedu.bulletjournal.commons.util.StringUtil;
+import seedu.bulletjournal.logic.Logic;
+import seedu.bulletjournal.logic.LogicManager;
+import seedu.bulletjournal.model.Model;
+import seedu.bulletjournal.model.ModelManager;
+import seedu.bulletjournal.model.ReadOnlyTodoList;
+import seedu.bulletjournal.model.TodoList;
+import seedu.bulletjournal.model.UserPrefs;
+import seedu.bulletjournal.model.util.SampleDataUtil;
+import seedu.bulletjournal.storage.Storage;
+import seedu.bulletjournal.storage.StorageManager;
+import seedu.bulletjournal.ui.Ui;
+import seedu.bulletjournal.ui.UiManager;
 
 /**
  * The main entry point to the application.

@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.bullletjournal.model.task.Detail;
+import seedu.bulletjournal.model.task.Detail;
 
 public class DetailTest {
 

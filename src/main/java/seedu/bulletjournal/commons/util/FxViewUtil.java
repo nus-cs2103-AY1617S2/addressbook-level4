@@ -1,4 +1,4 @@
-package seedu.bullletjournal.commons.util;
+package seedu.bulletjournal.commons.util;
 
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;

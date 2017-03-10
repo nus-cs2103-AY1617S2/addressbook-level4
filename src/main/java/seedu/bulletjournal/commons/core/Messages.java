@@ -1,4 +1,4 @@
-package seedu.bullletjournal.commons.core;
+package seedu.bulletjournal.commons.core;
 
 /**
  * Container for user visible messages.

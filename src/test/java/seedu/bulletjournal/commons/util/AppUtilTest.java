@@ -6,7 +6,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.bullletjournal.commons.util.AppUtil;
+import seedu.bulletjournal.commons.util.AppUtil;
 
 public class AppUtilTest {
 

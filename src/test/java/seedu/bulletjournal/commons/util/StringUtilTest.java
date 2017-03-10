@@ -1,3 +1,5 @@
+
+
 package seedu.bulletjournal.commons.util;
 
 import static org.hamcrest.CoreMatchers.containsString;
@@ -11,7 +13,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.bullletjournal.commons.util.StringUtil;
+import seedu.bulletjournal.commons.util.StringUtil;
 
 public class StringUtilTest {
 

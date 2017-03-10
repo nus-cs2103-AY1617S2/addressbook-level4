@@ -1,9 +1,9 @@
-package seedu.bullletjournal.model.task;
+package seedu.bulletjournal.model.task;
 
 import java.util.Objects;
 
-import seedu.bullletjournal.commons.util.CollectionUtil;
-import seedu.bullletjournal.model.tag.UniqueTagList;
+import seedu.bulletjournal.commons.util.CollectionUtil;
+import seedu.bulletjournal.model.tag.UniqueTagList;
 
 /**
  * Represents a Person in the address book.

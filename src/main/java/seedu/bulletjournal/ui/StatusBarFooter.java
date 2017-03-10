@@ -1,4 +1,4 @@
-package seedu.bullletjournal.ui;
+package seedu.bulletjournal.ui;
 
 import java.util.Date;
 import java.util.logging.Logger;
@@ -10,9 +10,9 @@ import com.google.common.eventbus.Subscribe;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
-import seedu.bullletjournal.commons.core.LogsCenter;
-import seedu.bullletjournal.commons.events.model.TodoListChangedEvent;
-import seedu.bullletjournal.commons.util.FxViewUtil;
+import seedu.bulletjournal.commons.core.LogsCenter;
+import seedu.bulletjournal.commons.events.model.TodoListChangedEvent;
+import seedu.bulletjournal.commons.util.FxViewUtil;
 
 /**
  * A ui for the status bar that is displayed at the footer of the application.

@@ -1,19 +1,19 @@
-package seedu.bullletjournal.logic.commands;
+package seedu.bulletjournal.logic.commands;
 
 import java.util.List;
 import java.util.Optional;
 
-import seedu.bullletjournal.commons.core.Messages;
-import seedu.bullletjournal.commons.util.CollectionUtil;
-import seedu.bullletjournal.logic.commands.exceptions.CommandException;
-import seedu.bullletjournal.model.tag.UniqueTagList;
-import seedu.bullletjournal.model.task.Deadline;
-import seedu.bullletjournal.model.task.Description;
-import seedu.bullletjournal.model.task.Detail;
-import seedu.bullletjournal.model.task.ReadOnlyTask;
-import seedu.bullletjournal.model.task.Status;
-import seedu.bullletjournal.model.task.Task;
-import seedu.bullletjournal.model.task.UniqueTaskList;
+import seedu.bulletjournal.commons.core.Messages;
+import seedu.bulletjournal.commons.util.CollectionUtil;
+import seedu.bulletjournal.logic.commands.exceptions.CommandException;
+import seedu.bulletjournal.model.tag.UniqueTagList;
+import seedu.bulletjournal.model.task.Deadline;
+import seedu.bulletjournal.model.task.Description;
+import seedu.bulletjournal.model.task.Detail;
+import seedu.bulletjournal.model.task.ReadOnlyTask;
+import seedu.bulletjournal.model.task.Status;
+import seedu.bulletjournal.model.task.Task;
+import seedu.bulletjournal.model.task.UniqueTaskList;
 
 /**
  * Edits the details of an existing person in the address book.

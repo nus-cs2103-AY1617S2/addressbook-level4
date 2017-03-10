@@ -1,4 +1,4 @@
-package seedu.bullletjournal.ui;
+package seedu.bulletjournal.ui;
 
 import java.util.logging.Logger;
 
@@ -9,17 +9,17 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import seedu.bullletjournal.MainApp;
-import seedu.bullletjournal.commons.core.ComponentManager;
-import seedu.bullletjournal.commons.core.Config;
-import seedu.bullletjournal.commons.core.LogsCenter;
-import seedu.bullletjournal.commons.events.storage.DataSavingExceptionEvent;
-import seedu.bullletjournal.commons.events.ui.JumpToListRequestEvent;
-import seedu.bullletjournal.commons.events.ui.ShowHelpRequestEvent;
-import seedu.bullletjournal.commons.events.ui.TaskPanelSelectionChangedEvent;
-import seedu.bullletjournal.commons.util.StringUtil;
-import seedu.bullletjournal.logic.Logic;
-import seedu.bullletjournal.model.UserPrefs;
+import seedu.bulletjournal.MainApp;
+import seedu.bulletjournal.commons.core.ComponentManager;
+import seedu.bulletjournal.commons.core.Config;
+import seedu.bulletjournal.commons.core.LogsCenter;
+import seedu.bulletjournal.commons.events.storage.DataSavingExceptionEvent;
+import seedu.bulletjournal.commons.events.ui.JumpToListRequestEvent;
+import seedu.bulletjournal.commons.events.ui.ShowHelpRequestEvent;
+import seedu.bulletjournal.commons.events.ui.TaskPanelSelectionChangedEvent;
+import seedu.bulletjournal.commons.util.StringUtil;
+import seedu.bulletjournal.logic.Logic;
+import seedu.bulletjournal.model.UserPrefs;
 
 /**
  * The manager of the UI component.

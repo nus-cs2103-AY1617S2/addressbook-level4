@@ -1,8 +1,8 @@
-package seedu.bullletjournal.logic.commands;
+package seedu.bulletjournal.logic.commands;
 
 
-import seedu.bullletjournal.commons.core.EventsCenter;
-import seedu.bullletjournal.commons.events.ui.ShowHelpRequestEvent;
+import seedu.bulletjournal.commons.core.EventsCenter;
+import seedu.bulletjournal.commons.events.ui.ShowHelpRequestEvent;
 
 /**
  * Format full help instructions for every command for display.

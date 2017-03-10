@@ -1,6 +1,6 @@
-package seedu.bullletjournal.logic.commands;
+package seedu.bulletjournal.logic.commands;
 
-import seedu.bullletjournal.model.TodoList;
+import seedu.bulletjournal.model.TodoList;
 
 /**
  * Clears the address book.

@@ -1,4 +1,4 @@
-package seedu.bullletjournal.logic.commands;
+package seedu.bulletjournal.logic.commands;
 
 import java.util.Set;
 

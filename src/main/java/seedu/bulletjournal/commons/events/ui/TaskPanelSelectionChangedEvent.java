@@ -1,7 +1,7 @@
-package seedu.bullletjournal.commons.events.ui;
+package seedu.bulletjournal.commons.events.ui;
 
-import seedu.bullletjournal.commons.events.BaseEvent;
-import seedu.bullletjournal.model.task.ReadOnlyTask;
+import seedu.bulletjournal.commons.events.BaseEvent;
+import seedu.bulletjournal.model.task.ReadOnlyTask;
 
 /**
  * Represents a selection change in the Person List Panel

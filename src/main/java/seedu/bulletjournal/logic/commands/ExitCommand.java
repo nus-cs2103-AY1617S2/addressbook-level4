@@ -1,7 +1,7 @@
-package seedu.bullletjournal.logic.commands;
+package seedu.bulletjournal.logic.commands;
 
-import seedu.bullletjournal.commons.core.EventsCenter;
-import seedu.bullletjournal.commons.events.ui.ExitAppRequestEvent;
+import seedu.bulletjournal.commons.core.EventsCenter;
+import seedu.bulletjournal.commons.events.ui.ExitAppRequestEvent;
 
 /**
  * Terminates the program.

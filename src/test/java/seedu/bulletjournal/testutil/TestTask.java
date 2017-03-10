@@ -1,11 +1,11 @@
 package seedu.bulletjournal.testutil;
 
-import seedu.bullletjournal.model.tag.UniqueTagList;
-import seedu.bullletjournal.model.task.Deadline;
-import seedu.bullletjournal.model.task.Description;
-import seedu.bullletjournal.model.task.Detail;
-import seedu.bullletjournal.model.task.ReadOnlyTask;
-import seedu.bullletjournal.model.task.Status;
+import seedu.bulletjournal.model.tag.UniqueTagList;
+import seedu.bulletjournal.model.task.Deadline;
+import seedu.bulletjournal.model.task.Description;
+import seedu.bulletjournal.model.task.Detail;
+import seedu.bulletjournal.model.task.ReadOnlyTask;
+import seedu.bulletjournal.model.task.Status;
 
 /**
  * A mutable person object. For testing only.

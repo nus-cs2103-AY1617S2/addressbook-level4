@@ -1,12 +1,12 @@
-package seedu.bullletjournal.storage;
+package seedu.bulletjournal.storage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 
 import javax.xml.bind.JAXBException;
 
-import seedu.bullletjournal.commons.exceptions.DataConversionException;
-import seedu.bullletjournal.commons.util.XmlUtil;
+import seedu.bulletjournal.commons.exceptions.DataConversionException;
+import seedu.bulletjournal.commons.util.XmlUtil;
 
 /**
  * Stores addressbook data in an XML file

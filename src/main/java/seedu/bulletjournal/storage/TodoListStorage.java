@@ -1,13 +1,13 @@
-package seedu.bullletjournal.storage;
+package seedu.bulletjournal.storage;
 
 import java.io.IOException;
 import java.util.Optional;
 
-import seedu.bullletjournal.commons.exceptions.DataConversionException;
-import seedu.bullletjournal.model.ReadOnlyTodoList;
+import seedu.bulletjournal.commons.exceptions.DataConversionException;
+import seedu.bulletjournal.model.ReadOnlyTodoList;
 
 /**
- * Represents a storage for {@link seedu.bullletjournal.model.TodoList}.
+ * Represents a storage for {@link seedu.bulletjournal.model.TodoList}.
  */
 public interface TodoListStorage {
 

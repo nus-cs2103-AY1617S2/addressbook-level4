@@ -1,9 +1,9 @@
 package seedu.bulletjournal.testutil;
 
-import seedu.bullletjournal.commons.exceptions.IllegalValueException;
-import seedu.bullletjournal.model.TodoList;
-import seedu.bullletjournal.model.task.Task;
-import seedu.bullletjournal.model.task.UniqueTaskList;
+import seedu.bulletjournal.commons.exceptions.IllegalValueException;
+import seedu.bulletjournal.model.TodoList;
+import seedu.bulletjournal.model.task.Task;
+import seedu.bulletjournal.model.task.UniqueTaskList;
 
 /**
  *

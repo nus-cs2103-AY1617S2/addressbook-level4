@@ -1,9 +1,9 @@
-package seedu.bullletjournal.logic;
+package seedu.bulletjournal.logic;
 
 import javafx.collections.ObservableList;
-import seedu.bullletjournal.logic.commands.CommandResult;
-import seedu.bullletjournal.logic.commands.exceptions.CommandException;
-import seedu.bullletjournal.model.task.ReadOnlyTask;
+import seedu.bulletjournal.logic.commands.CommandResult;
+import seedu.bulletjournal.logic.commands.exceptions.CommandException;
+import seedu.bulletjournal.model.task.ReadOnlyTask;
 
 /**
  * API of the Logic component

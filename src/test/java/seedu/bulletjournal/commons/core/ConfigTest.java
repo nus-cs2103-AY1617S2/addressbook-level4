@@ -8,7 +8,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.bullletjournal.commons.core.Config;
+import seedu.bulletjournal.commons.core.Config;
 
 public class ConfigTest {
     @Rule

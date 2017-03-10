@@ -1,4 +1,4 @@
-package seedu.bullletjournal.logic.parser;
+package seedu.bulletjournal.logic.parser;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -11,14 +11,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import seedu.bullletjournal.commons.exceptions.IllegalValueException;
-import seedu.bullletjournal.commons.util.StringUtil;
-import seedu.bullletjournal.model.tag.Tag;
-import seedu.bullletjournal.model.tag.UniqueTagList;
-import seedu.bullletjournal.model.task.Deadline;
-import seedu.bullletjournal.model.task.Description;
-import seedu.bullletjournal.model.task.Detail;
-import seedu.bullletjournal.model.task.Status;
+import seedu.bulletjournal.commons.exceptions.IllegalValueException;
+import seedu.bulletjournal.commons.util.StringUtil;
+import seedu.bulletjournal.model.tag.Tag;
+import seedu.bulletjournal.model.tag.UniqueTagList;
+import seedu.bulletjournal.model.task.Deadline;
+import seedu.bulletjournal.model.task.Description;
+import seedu.bulletjournal.model.task.Detail;
+import seedu.bulletjournal.model.task.Status;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes

@@ -1,4 +1,4 @@
-package seedu.bullletjournal.ui;
+package seedu.bulletjournal.ui;
 
 import java.io.IOException;
 import java.net.URL;
@@ -7,9 +7,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import seedu.bullletjournal.MainApp;
-import seedu.bullletjournal.commons.core.EventsCenter;
-import seedu.bullletjournal.commons.events.BaseEvent;
+import seedu.bulletjournal.MainApp;
+import seedu.bulletjournal.commons.core.EventsCenter;
+import seedu.bulletjournal.commons.events.BaseEvent;
 
 /**
  * Represents a distinct part of the UI. e.g. Windows, dialogs, panels, status bars, etc.

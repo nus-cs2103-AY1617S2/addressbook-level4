@@ -1,6 +1,6 @@
-package seedu.bullletjournal.logic.commands;
+package seedu.bulletjournal.logic.commands;
 
-import seedu.bullletjournal.logic.commands.exceptions.CommandException;
+import seedu.bulletjournal.logic.commands.exceptions.CommandException;
 
 /**
  * Represents an incorrect command. Upon execution, throws a CommandException with feedback to the user.

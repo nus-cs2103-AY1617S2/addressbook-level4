@@ -1,6 +1,6 @@
-package seedu.bullletjournal.commons.events.storage;
+package seedu.bulletjournal.commons.events.storage;
 
-import seedu.bullletjournal.commons.events.BaseEvent;
+import seedu.bulletjournal.commons.events.BaseEvent;
 
 /**
  * Indicates an exception during a file saving

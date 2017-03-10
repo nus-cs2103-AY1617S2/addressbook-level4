@@ -1,11 +1,11 @@
-package seedu.bullletjournal.ui;
+package seedu.bulletjournal.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.bullletjournal.model.task.ReadOnlyTask;
+import seedu.bulletjournal.model.task.ReadOnlyTask;
 
 public class TaskCard extends UiPart<Region> {
 

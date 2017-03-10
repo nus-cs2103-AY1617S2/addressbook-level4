@@ -1,4 +1,4 @@
-package seedu.bullletjournal.logic.commands.exceptions;
+package seedu.bulletjournal.logic.commands.exceptions;
 
 /**
  * Represents an error which occurs during execution of a {@link Command}.

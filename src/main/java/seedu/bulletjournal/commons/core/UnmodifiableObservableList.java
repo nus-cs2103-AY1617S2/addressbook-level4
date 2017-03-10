@@ -1,4 +1,4 @@
-package seedu.bullletjournal.commons.core;
+package seedu.bulletjournal.commons.core;
 
 import java.text.Collator;
 import java.util.Collection;

@@ -1,4 +1,4 @@
-package seedu.bullletjournal.ui;
+package seedu.bulletjournal.ui;
 
 import javafx.stage.Stage;
 

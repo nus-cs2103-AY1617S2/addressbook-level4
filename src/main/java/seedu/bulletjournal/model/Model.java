@@ -1,12 +1,12 @@
-package seedu.bullletjournal.model;
+package seedu.bulletjournal.model;
 
 import java.util.Set;
 
-import seedu.bullletjournal.commons.core.UnmodifiableObservableList;
-import seedu.bullletjournal.model.task.ReadOnlyTask;
-import seedu.bullletjournal.model.task.Task;
-import seedu.bullletjournal.model.task.UniqueTaskList;
-import seedu.bullletjournal.model.task.UniqueTaskList.DuplicatePersonException;
+import seedu.bulletjournal.commons.core.UnmodifiableObservableList;
+import seedu.bulletjournal.model.task.ReadOnlyTask;
+import seedu.bulletjournal.model.task.Task;
+import seedu.bulletjournal.model.task.UniqueTaskList;
+import seedu.bulletjournal.model.task.UniqueTaskList.DuplicatePersonException;
 
 /**
  * The API of the Model component.

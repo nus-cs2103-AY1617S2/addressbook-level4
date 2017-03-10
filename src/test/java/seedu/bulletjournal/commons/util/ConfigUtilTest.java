@@ -13,10 +13,10 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
-import seedu.bullletjournal.commons.core.Config;
-import seedu.bullletjournal.commons.exceptions.DataConversionException;
-import seedu.bullletjournal.commons.util.ConfigUtil;
-import seedu.bullletjournal.commons.util.FileUtil;
+import seedu.bulletjournal.commons.core.Config;
+import seedu.bulletjournal.commons.exceptions.DataConversionException;
+import seedu.bulletjournal.commons.util.ConfigUtil;
+import seedu.bulletjournal.commons.util.FileUtil;
 
 public class ConfigUtilTest {
 

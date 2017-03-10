@@ -1,17 +1,17 @@
-package seedu.bullletjournal.logic.parser;
+package seedu.bulletjournal.logic.parser;
 
-import static seedu.bullletjournal.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.bullletjournal.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.bullletjournal.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.bullletjournal.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.bullletjournal.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.bulletjournal.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.bulletjournal.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.bulletjournal.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.bulletjournal.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.bulletjournal.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.NoSuchElementException;
 
-import seedu.bullletjournal.commons.exceptions.IllegalValueException;
-import seedu.bullletjournal.logic.commands.AddCommand;
-import seedu.bullletjournal.logic.commands.Command;
-import seedu.bullletjournal.logic.commands.IncorrectCommand;
+import seedu.bulletjournal.commons.exceptions.IllegalValueException;
+import seedu.bulletjournal.logic.commands.AddCommand;
+import seedu.bulletjournal.logic.commands.Command;
+import seedu.bulletjournal.logic.commands.IncorrectCommand;
 
 /**
  * Parses input arguments and creates a new AddCommand object

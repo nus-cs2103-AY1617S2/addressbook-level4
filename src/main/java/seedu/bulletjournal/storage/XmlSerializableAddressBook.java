@@ -1,4 +1,4 @@
-package seedu.bullletjournal.storage;
+package seedu.bulletjournal.storage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,12 +9,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.bullletjournal.commons.core.UnmodifiableObservableList;
-import seedu.bullletjournal.commons.exceptions.IllegalValueException;
-import seedu.bullletjournal.model.ReadOnlyTodoList;
-import seedu.bullletjournal.model.tag.Tag;
-import seedu.bullletjournal.model.task.ReadOnlyTask;
-import seedu.bullletjournal.model.task.Task;
+import seedu.bulletjournal.commons.core.UnmodifiableObservableList;
+import seedu.bulletjournal.commons.exceptions.IllegalValueException;
+import seedu.bulletjournal.model.ReadOnlyTodoList;
+import seedu.bulletjournal.model.tag.Tag;
+import seedu.bulletjournal.model.task.ReadOnlyTask;
+import seedu.bulletjournal.model.task.Task;
 
 /**
  * An Immutable AddressBook that is serializable to XML format

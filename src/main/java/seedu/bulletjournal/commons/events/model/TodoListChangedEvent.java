@@ -1,7 +1,7 @@
-package seedu.bullletjournal.commons.events.model;
+package seedu.bulletjournal.commons.events.model;
 
-import seedu.bullletjournal.commons.events.BaseEvent;
-import seedu.bullletjournal.model.ReadOnlyTodoList;
+import seedu.bulletjournal.commons.events.BaseEvent;
+import seedu.bulletjournal.model.ReadOnlyTodoList;
 
 /** Indicates the AddressBook in the model has changed*/
 public class TodoListChangedEvent extends BaseEvent {

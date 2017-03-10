@@ -1,20 +1,20 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.bullletjournal.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.bulletjournal.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
+import seedu.bulletjournal.commons.core.Messages;
+import seedu.bulletjournal.logic.commands.EditCommand;
+import seedu.bulletjournal.model.tag.Tag;
+import seedu.bulletjournal.model.task.Deadline;
+import seedu.bulletjournal.model.task.Description;
+import seedu.bulletjournal.model.task.Detail;
+import seedu.bulletjournal.model.task.Status;
 import seedu.bulletjournal.testutil.TaskBuilder;
 import seedu.bulletjournal.testutil.TestTask;
-import seedu.bullletjournal.commons.core.Messages;
-import seedu.bullletjournal.logic.commands.EditCommand;
-import seedu.bullletjournal.model.tag.Tag;
-import seedu.bullletjournal.model.task.Deadline;
-import seedu.bullletjournal.model.task.Description;
-import seedu.bullletjournal.model.task.Detail;
-import seedu.bullletjournal.model.task.Status;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
 public class EditCommandTest extends AddressBookGuiTest {

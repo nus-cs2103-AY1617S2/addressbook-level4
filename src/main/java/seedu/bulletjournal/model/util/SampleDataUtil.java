@@ -1,15 +1,15 @@
-package seedu.bullletjournal.model.util;
+package seedu.bulletjournal.model.util;
 
-import seedu.bullletjournal.commons.exceptions.IllegalValueException;
-import seedu.bullletjournal.model.ReadOnlyTodoList;
-import seedu.bullletjournal.model.TodoList;
-import seedu.bullletjournal.model.tag.UniqueTagList;
-import seedu.bullletjournal.model.task.Deadline;
-import seedu.bullletjournal.model.task.Description;
-import seedu.bullletjournal.model.task.Detail;
-import seedu.bullletjournal.model.task.Status;
-import seedu.bullletjournal.model.task.Task;
-import seedu.bullletjournal.model.task.UniqueTaskList.DuplicatePersonException;
+import seedu.bulletjournal.commons.exceptions.IllegalValueException;
+import seedu.bulletjournal.model.ReadOnlyTodoList;
+import seedu.bulletjournal.model.TodoList;
+import seedu.bulletjournal.model.tag.UniqueTagList;
+import seedu.bulletjournal.model.task.Deadline;
+import seedu.bulletjournal.model.task.Description;
+import seedu.bulletjournal.model.task.Detail;
+import seedu.bulletjournal.model.task.Status;
+import seedu.bulletjournal.model.task.Task;
+import seedu.bulletjournal.model.task.UniqueTaskList.DuplicatePersonException;
 
 public class SampleDataUtil {
     public static Task[] getSamplePersons() {

@@ -1,7 +1,7 @@
-package seedu.bullletjournal.commons.util;
+package seedu.bulletjournal.commons.util;
 
 import javafx.scene.image.Image;
-import seedu.bullletjournal.MainApp;
+import seedu.bulletjournal.MainApp;
 
 /**
  * A container for App specific utility functions

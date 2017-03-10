@@ -1,19 +1,19 @@
-package seedu.bullletjournal.model;
+package seedu.bulletjournal.model;
 
 import java.util.Set;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
-import seedu.bullletjournal.commons.core.ComponentManager;
-import seedu.bullletjournal.commons.core.LogsCenter;
-import seedu.bullletjournal.commons.core.UnmodifiableObservableList;
-import seedu.bullletjournal.commons.events.model.TodoListChangedEvent;
-import seedu.bullletjournal.commons.util.CollectionUtil;
-import seedu.bullletjournal.commons.util.StringUtil;
-import seedu.bullletjournal.model.task.ReadOnlyTask;
-import seedu.bullletjournal.model.task.Task;
-import seedu.bullletjournal.model.task.UniqueTaskList;
-import seedu.bullletjournal.model.task.UniqueTaskList.PersonNotFoundException;
+import seedu.bulletjournal.commons.core.ComponentManager;
+import seedu.bulletjournal.commons.core.LogsCenter;
+import seedu.bulletjournal.commons.core.UnmodifiableObservableList;
+import seedu.bulletjournal.commons.events.model.TodoListChangedEvent;
+import seedu.bulletjournal.commons.util.CollectionUtil;
+import seedu.bulletjournal.commons.util.StringUtil;
+import seedu.bulletjournal.model.task.ReadOnlyTask;
+import seedu.bulletjournal.model.task.Task;
+import seedu.bulletjournal.model.task.UniqueTaskList;
+import seedu.bulletjournal.model.task.UniqueTaskList.PersonNotFoundException;
 
 /**
  * Represents the in-memory model of the address book data.

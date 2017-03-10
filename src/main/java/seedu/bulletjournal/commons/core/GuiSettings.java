@@ -1,4 +1,4 @@
-package seedu.bullletjournal.commons.core;
+package seedu.bulletjournal.commons.core;
 
 import java.awt.Point;
 import java.io.Serializable;

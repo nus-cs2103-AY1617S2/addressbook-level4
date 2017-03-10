@@ -1,17 +1,17 @@
-package seedu.bullletjournal.logic;
+package seedu.bulletjournal.logic;
 
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
-import seedu.bullletjournal.commons.core.ComponentManager;
-import seedu.bullletjournal.commons.core.LogsCenter;
-import seedu.bullletjournal.logic.commands.Command;
-import seedu.bullletjournal.logic.commands.CommandResult;
-import seedu.bullletjournal.logic.commands.exceptions.CommandException;
-import seedu.bullletjournal.logic.parser.Parser;
-import seedu.bullletjournal.model.Model;
-import seedu.bullletjournal.model.task.ReadOnlyTask;
-import seedu.bullletjournal.storage.Storage;
+import seedu.bulletjournal.commons.core.ComponentManager;
+import seedu.bulletjournal.commons.core.LogsCenter;
+import seedu.bulletjournal.logic.commands.Command;
+import seedu.bulletjournal.logic.commands.CommandResult;
+import seedu.bulletjournal.logic.commands.exceptions.CommandException;
+import seedu.bulletjournal.logic.parser.Parser;
+import seedu.bulletjournal.model.Model;
+import seedu.bulletjournal.model.task.ReadOnlyTask;
+import seedu.bulletjournal.storage.Storage;
 
 /**
  * The main LogicManager of the app.

@@ -1,4 +1,4 @@
-package seedu.bullletjournal.storage;
+package seedu.bulletjournal.storage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,10 +6,10 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-import seedu.bullletjournal.commons.core.LogsCenter;
-import seedu.bullletjournal.commons.exceptions.DataConversionException;
-import seedu.bullletjournal.commons.util.FileUtil;
-import seedu.bullletjournal.model.ReadOnlyTodoList;
+import seedu.bulletjournal.commons.core.LogsCenter;
+import seedu.bulletjournal.commons.exceptions.DataConversionException;
+import seedu.bulletjournal.commons.util.FileUtil;
+import seedu.bulletjournal.model.ReadOnlyTodoList;
 
 /**
  * A class to access AddressBook data stored as an xml file on the hard disk.

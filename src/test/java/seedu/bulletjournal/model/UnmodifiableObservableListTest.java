@@ -15,7 +15,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
-import seedu.bullletjournal.commons.core.UnmodifiableObservableList;
+import seedu.bulletjournal.commons.core.UnmodifiableObservableList;
 
 public class UnmodifiableObservableListTest {
 

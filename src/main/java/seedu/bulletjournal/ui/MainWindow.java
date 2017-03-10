@@ -1,4 +1,4 @@
-package seedu.bullletjournal.ui;
+package seedu.bulletjournal.ui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,13 +10,13 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import seedu.bullletjournal.commons.core.Config;
-import seedu.bullletjournal.commons.core.GuiSettings;
-import seedu.bullletjournal.commons.events.ui.ExitAppRequestEvent;
-import seedu.bullletjournal.commons.util.FxViewUtil;
-import seedu.bullletjournal.logic.Logic;
-import seedu.bullletjournal.model.UserPrefs;
-import seedu.bullletjournal.model.task.ReadOnlyTask;
+import seedu.bulletjournal.commons.core.Config;
+import seedu.bulletjournal.commons.core.GuiSettings;
+import seedu.bulletjournal.commons.events.ui.ExitAppRequestEvent;
+import seedu.bulletjournal.commons.util.FxViewUtil;
+import seedu.bulletjournal.logic.Logic;
+import seedu.bulletjournal.model.UserPrefs;
+import seedu.bulletjournal.model.task.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing

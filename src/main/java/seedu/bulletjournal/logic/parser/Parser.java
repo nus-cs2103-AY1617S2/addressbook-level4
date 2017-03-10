@@ -1,22 +1,22 @@
-package seedu.bullletjournal.logic.parser;
+package seedu.bulletjournal.logic.parser;
 
-import static seedu.bullletjournal.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.bullletjournal.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.bulletjournal.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.bulletjournal.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.bullletjournal.logic.commands.AddCommand;
-import seedu.bullletjournal.logic.commands.ClearCommand;
-import seedu.bullletjournal.logic.commands.Command;
-import seedu.bullletjournal.logic.commands.DeleteCommand;
-import seedu.bullletjournal.logic.commands.EditCommand;
-import seedu.bullletjournal.logic.commands.ExitCommand;
-import seedu.bullletjournal.logic.commands.FindCommand;
-import seedu.bullletjournal.logic.commands.HelpCommand;
-import seedu.bullletjournal.logic.commands.IncorrectCommand;
-import seedu.bullletjournal.logic.commands.ListCommand;
-import seedu.bullletjournal.logic.commands.SelectCommand;
+import seedu.bulletjournal.logic.commands.AddCommand;
+import seedu.bulletjournal.logic.commands.ClearCommand;
+import seedu.bulletjournal.logic.commands.Command;
+import seedu.bulletjournal.logic.commands.DeleteCommand;
+import seedu.bulletjournal.logic.commands.EditCommand;
+import seedu.bulletjournal.logic.commands.ExitCommand;
+import seedu.bulletjournal.logic.commands.FindCommand;
+import seedu.bulletjournal.logic.commands.HelpCommand;
+import seedu.bulletjournal.logic.commands.IncorrectCommand;
+import seedu.bulletjournal.logic.commands.ListCommand;
+import seedu.bulletjournal.logic.commands.SelectCommand;
 
 /**
  * Parses user input.

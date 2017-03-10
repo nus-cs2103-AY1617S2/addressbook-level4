@@ -1,4 +1,4 @@
-package seedu.bullletjournal.ui;
+package seedu.bulletjournal.ui;
 
 import java.util.logging.Logger;
 
@@ -10,10 +10,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
-import seedu.bullletjournal.commons.core.LogsCenter;
-import seedu.bullletjournal.commons.events.ui.TaskPanelSelectionChangedEvent;
-import seedu.bullletjournal.commons.util.FxViewUtil;
-import seedu.bullletjournal.model.task.ReadOnlyTask;
+import seedu.bulletjournal.commons.core.LogsCenter;
+import seedu.bulletjournal.commons.events.ui.TaskPanelSelectionChangedEvent;
+import seedu.bulletjournal.commons.util.FxViewUtil;
+import seedu.bulletjournal.model.task.ReadOnlyTask;
 
 /**
  * Panel containing the list of persons.

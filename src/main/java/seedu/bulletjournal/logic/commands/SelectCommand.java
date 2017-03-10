@@ -1,11 +1,11 @@
-package seedu.bullletjournal.logic.commands;
+package seedu.bulletjournal.logic.commands;
 
-import seedu.bullletjournal.commons.core.EventsCenter;
-import seedu.bullletjournal.commons.core.Messages;
-import seedu.bullletjournal.commons.core.UnmodifiableObservableList;
-import seedu.bullletjournal.commons.events.ui.JumpToListRequestEvent;
-import seedu.bullletjournal.logic.commands.exceptions.CommandException;
-import seedu.bullletjournal.model.task.ReadOnlyTask;
+import seedu.bulletjournal.commons.core.EventsCenter;
+import seedu.bulletjournal.commons.core.Messages;
+import seedu.bulletjournal.commons.core.UnmodifiableObservableList;
+import seedu.bulletjournal.commons.events.ui.JumpToListRequestEvent;
+import seedu.bulletjournal.logic.commands.exceptions.CommandException;
+import seedu.bulletjournal.model.task.ReadOnlyTask;
 
 /**
  * Selects a person identified using it's last displayed index from the address book.

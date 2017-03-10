@@ -1,9 +1,9 @@
-package seedu.bullletjournal.storage;
+package seedu.bulletjournal.storage;
 
 import javax.xml.bind.annotation.XmlValue;
 
-import seedu.bullletjournal.commons.exceptions.IllegalValueException;
-import seedu.bullletjournal.model.tag.Tag;
+import seedu.bulletjournal.commons.exceptions.IllegalValueException;
+import seedu.bulletjournal.model.tag.Tag;
 
 /**
  * JAXB-friendly adapted version of the Tag.

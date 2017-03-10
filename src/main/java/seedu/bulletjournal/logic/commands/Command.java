@@ -1,8 +1,8 @@
-package seedu.bullletjournal.logic.commands;
+package seedu.bulletjournal.logic.commands;
 
-import seedu.bullletjournal.commons.core.Messages;
-import seedu.bullletjournal.logic.commands.exceptions.CommandException;
-import seedu.bullletjournal.model.Model;
+import seedu.bulletjournal.commons.core.Messages;
+import seedu.bulletjournal.logic.commands.exceptions.CommandException;
+import seedu.bulletjournal.model.Model;
 
 /**
  * Represents a command with hidden internal logic and the ability to be executed.

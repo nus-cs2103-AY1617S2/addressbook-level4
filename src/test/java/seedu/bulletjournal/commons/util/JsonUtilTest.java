@@ -7,10 +7,10 @@ import java.io.IOException;
 
 import org.junit.Test;
 
+import seedu.bulletjournal.commons.util.FileUtil;
+import seedu.bulletjournal.commons.util.JsonUtil;
 import seedu.bulletjournal.testutil.SerializableTestClass;
 import seedu.bulletjournal.testutil.TestUtil;
-import seedu.bullletjournal.commons.util.FileUtil;
-import seedu.bullletjournal.commons.util.JsonUtil;
 
 /**
  * Tests JSON Read and Write

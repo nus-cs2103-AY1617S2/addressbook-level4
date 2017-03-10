@@ -1,12 +1,12 @@
-package seedu.bullletjournal.logic.parser;
+package seedu.bulletjournal.logic.parser;
 
-import static seedu.bullletjournal.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.bulletjournal.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Optional;
 
-import seedu.bullletjournal.logic.commands.Command;
-import seedu.bullletjournal.logic.commands.IncorrectCommand;
-import seedu.bullletjournal.logic.commands.SelectCommand;
+import seedu.bulletjournal.logic.commands.Command;
+import seedu.bulletjournal.logic.commands.IncorrectCommand;
+import seedu.bulletjournal.logic.commands.SelectCommand;
 
 /**
  * Parses input arguments and creates a new SelectCommand object

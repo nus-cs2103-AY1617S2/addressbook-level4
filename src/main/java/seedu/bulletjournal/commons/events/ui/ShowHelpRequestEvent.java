@@ -1,6 +1,6 @@
-package seedu.bullletjournal.commons.events.ui;
+package seedu.bulletjournal.commons.events.ui;
 
-import seedu.bullletjournal.commons.events.BaseEvent;
+import seedu.bulletjournal.commons.events.BaseEvent;
 
 /**
  * An event requesting to view the help page.

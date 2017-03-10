@@ -1,8 +1,8 @@
-package seedu.bullletjournal.model;
+package seedu.bulletjournal.model;
 
 import java.util.Objects;
 
-import seedu.bullletjournal.commons.core.GuiSettings;
+import seedu.bulletjournal.commons.core.GuiSettings;
 
 /**
  * Represents User's preferences.

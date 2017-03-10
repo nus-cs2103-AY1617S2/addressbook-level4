@@ -1,4 +1,4 @@
-package seedu.bullletjournal.commons.util;
+package seedu.bulletjournal.commons.util;
 
 import java.io.File;
 import java.io.IOException;

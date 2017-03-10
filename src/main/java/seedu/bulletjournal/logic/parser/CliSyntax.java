@@ -1,8 +1,8 @@
-package seedu.bullletjournal.logic.parser;
+package seedu.bulletjournal.logic.parser;
 
 import java.util.regex.Pattern;
 
-import seedu.bullletjournal.logic.parser.ArgumentTokenizer.Prefix;
+import seedu.bulletjournal.logic.parser.ArgumentTokenizer.Prefix;
 
 /**
  * Contains Command Line Interface (CLI) syntax definitions common to multiple commands

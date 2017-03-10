@@ -5,8 +5,8 @@ import java.util.List;
 
 import com.google.common.eventbus.Subscribe;
 
-import seedu.bullletjournal.commons.core.EventsCenter;
-import seedu.bullletjournal.commons.events.BaseEvent;
+import seedu.bulletjournal.commons.core.EventsCenter;
+import seedu.bulletjournal.commons.events.BaseEvent;
 
 /**
  * A class that collects events raised by other classes.

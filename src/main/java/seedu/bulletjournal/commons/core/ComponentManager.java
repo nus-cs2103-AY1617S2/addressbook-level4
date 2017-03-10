@@ -1,6 +1,6 @@
-package seedu.bullletjournal.commons.core;
+package seedu.bulletjournal.commons.core;
 
-import seedu.bullletjournal.commons.events.BaseEvent;
+import seedu.bulletjournal.commons.events.BaseEvent;
 
 /**
  * Base class for *Manager classes

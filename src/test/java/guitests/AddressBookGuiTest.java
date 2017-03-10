@@ -22,12 +22,12 @@ import guitests.guihandles.TaskListPanelHandle;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import seedu.bulletjournal.TestApp;
+import seedu.bulletjournal.commons.core.EventsCenter;
+import seedu.bulletjournal.commons.events.BaseEvent;
+import seedu.bulletjournal.model.TodoList;
+import seedu.bulletjournal.model.task.ReadOnlyTask;
 import seedu.bulletjournal.testutil.TestUtil;
 import seedu.bulletjournal.testutil.TypicalTestTasks;
-import seedu.bullletjournal.commons.core.EventsCenter;
-import seedu.bullletjournal.commons.events.BaseEvent;
-import seedu.bullletjournal.model.TodoList;
-import seedu.bullletjournal.model.task.ReadOnlyTask;
 
 /**
  * A GUI Test class for AddressBook.

@@ -11,7 +11,7 @@ import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import seedu.bulletjournal.TestApp;
-import seedu.bullletjournal.commons.core.LogsCenter;
+import seedu.bulletjournal.commons.core.LogsCenter;
 
 /**
  * Base class for all GUI Handles used in testing.

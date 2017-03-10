@@ -1,9 +1,9 @@
-package seedu.bullletjournal.model;
+package seedu.bulletjournal.model;
 
 
 import javafx.collections.ObservableList;
-import seedu.bullletjournal.model.tag.Tag;
-import seedu.bullletjournal.model.task.ReadOnlyTask;
+import seedu.bulletjournal.model.tag.Tag;
+import seedu.bulletjournal.model.task.ReadOnlyTask;
 
 /**
  * Unmodifiable view of an address book

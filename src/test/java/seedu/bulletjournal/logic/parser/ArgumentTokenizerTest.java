@@ -6,8 +6,8 @@ import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Test;
 
-import seedu.bullletjournal.logic.parser.ArgumentTokenizer;
-import seedu.bullletjournal.logic.parser.ArgumentTokenizer.Prefix;
+import seedu.bulletjournal.logic.parser.ArgumentTokenizer;
+import seedu.bulletjournal.logic.parser.ArgumentTokenizer.Prefix;
 
 public class ArgumentTokenizerTest {
 

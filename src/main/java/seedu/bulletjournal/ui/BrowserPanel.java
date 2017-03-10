@@ -1,12 +1,12 @@
-package seedu.bullletjournal.ui;
+package seedu.bulletjournal.ui;
 
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
-import seedu.bullletjournal.commons.util.FxViewUtil;
-import seedu.bullletjournal.model.task.ReadOnlyTask;
+import seedu.bulletjournal.commons.util.FxViewUtil;
+import seedu.bulletjournal.model.task.ReadOnlyTask;
 
 /**
  * The Browser Panel of the App.

@@ -1,13 +1,13 @@
-package seedu.bullletjournal.model.task;
+package seedu.bulletjournal.model.task;
 
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.bullletjournal.commons.core.UnmodifiableObservableList;
-import seedu.bullletjournal.commons.exceptions.DuplicateDataException;
-import seedu.bullletjournal.commons.util.CollectionUtil;
+import seedu.bulletjournal.commons.core.UnmodifiableObservableList;
+import seedu.bulletjournal.commons.exceptions.DuplicateDataException;
+import seedu.bulletjournal.commons.util.CollectionUtil;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.

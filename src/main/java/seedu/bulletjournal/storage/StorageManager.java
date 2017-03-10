@@ -1,4 +1,4 @@
-package seedu.bullletjournal.storage;
+package seedu.bulletjournal.storage;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -6,13 +6,13 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
-import seedu.bullletjournal.commons.core.ComponentManager;
-import seedu.bullletjournal.commons.core.LogsCenter;
-import seedu.bullletjournal.commons.events.model.TodoListChangedEvent;
-import seedu.bullletjournal.commons.events.storage.DataSavingExceptionEvent;
-import seedu.bullletjournal.commons.exceptions.DataConversionException;
-import seedu.bullletjournal.model.ReadOnlyTodoList;
-import seedu.bullletjournal.model.UserPrefs;
+import seedu.bulletjournal.commons.core.ComponentManager;
+import seedu.bulletjournal.commons.core.LogsCenter;
+import seedu.bulletjournal.commons.events.model.TodoListChangedEvent;
+import seedu.bulletjournal.commons.events.storage.DataSavingExceptionEvent;
+import seedu.bulletjournal.commons.exceptions.DataConversionException;
+import seedu.bulletjournal.model.ReadOnlyTodoList;
+import seedu.bulletjournal.model.UserPrefs;
 
 /**
  * Manages storage of AddressBook data in local storage.

@@ -1,10 +1,10 @@
-package seedu.bullletjournal.commons.util;
+package seedu.bulletjournal.commons.util;
 
 import java.io.IOException;
 import java.util.Optional;
 
-import seedu.bullletjournal.commons.core.Config;
-import seedu.bullletjournal.commons.exceptions.DataConversionException;
+import seedu.bulletjournal.commons.core.Config;
+import seedu.bulletjournal.commons.exceptions.DataConversionException;
 
 /**
  * A class for accessing the Config File.

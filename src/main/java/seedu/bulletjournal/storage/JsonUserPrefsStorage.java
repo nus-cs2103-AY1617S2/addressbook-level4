@@ -1,11 +1,11 @@
-package seedu.bullletjournal.storage;
+package seedu.bulletjournal.storage;
 
 import java.io.IOException;
 import java.util.Optional;
 
-import seedu.bullletjournal.commons.exceptions.DataConversionException;
-import seedu.bullletjournal.commons.util.JsonUtil;
-import seedu.bullletjournal.model.UserPrefs;
+import seedu.bulletjournal.commons.exceptions.DataConversionException;
+import seedu.bulletjournal.commons.util.JsonUtil;
+import seedu.bulletjournal.model.UserPrefs;
 
 /**
  * A class to access UserPrefs stored in the hard disk as a json file

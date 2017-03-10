@@ -11,8 +11,8 @@ import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
 import javafx.fxml.FXML;
-import seedu.bullletjournal.MainApp;
-import seedu.bullletjournal.ui.UiPart;
+import seedu.bulletjournal.MainApp;
+import seedu.bulletjournal.ui.UiPart;
 
 public class UiPartTest {
 

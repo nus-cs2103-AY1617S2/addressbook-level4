@@ -13,10 +13,10 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
-import seedu.bullletjournal.commons.exceptions.DataConversionException;
-import seedu.bullletjournal.commons.util.FileUtil;
-import seedu.bullletjournal.model.UserPrefs;
-import seedu.bullletjournal.storage.JsonUserPrefsStorage;
+import seedu.bulletjournal.commons.exceptions.DataConversionException;
+import seedu.bulletjournal.commons.util.FileUtil;
+import seedu.bulletjournal.model.UserPrefs;
+import seedu.bulletjournal.storage.JsonUserPrefsStorage;
 
 public class JsonUserPrefsStorageTest {
 

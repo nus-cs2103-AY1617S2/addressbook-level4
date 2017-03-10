@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.bullletjournal.model.task.Deadline;
+import seedu.bulletjournal.model.task.Deadline;
 
 public class DeadlineTest {
 

@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.bullletjournal.model.task.Description;
+import seedu.bulletjournal.model.task.Description;
 
 public class DescriptionTest {
 

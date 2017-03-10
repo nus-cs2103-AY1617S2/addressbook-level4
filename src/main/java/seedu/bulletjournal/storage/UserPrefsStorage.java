@@ -1,13 +1,13 @@
-package seedu.bullletjournal.storage;
+package seedu.bulletjournal.storage;
 
 import java.io.IOException;
 import java.util.Optional;
 
-import seedu.bullletjournal.commons.exceptions.DataConversionException;
-import seedu.bullletjournal.model.UserPrefs;
+import seedu.bulletjournal.commons.exceptions.DataConversionException;
+import seedu.bulletjournal.model.UserPrefs;
 
 /**
- * Represents a storage for {@link seedu.bullletjournal.model.UserPrefs}.
+ * Represents a storage for {@link seedu.bulletjournal.model.UserPrefs}.
  */
 public interface UserPrefsStorage {
 
@@ -20,7 +20,7 @@ public interface UserPrefsStorage {
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
 
     /**
-     * Saves the given {@link seedu.bullletjournal.model.UserPrefs} to the storage.
+     * Saves the given {@link seedu.bulletjournal.model.UserPrefs} to the storage.
      * @param userPrefs cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */

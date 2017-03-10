@@ -1,7 +1,7 @@
-package seedu.bullletjournal.model.tag;
+package seedu.bulletjournal.model.tag;
 
 
-import seedu.bullletjournal.commons.exceptions.IllegalValueException;
+import seedu.bulletjournal.commons.exceptions.IllegalValueException;
 
 /**
  * Represents a Tag in the address book.

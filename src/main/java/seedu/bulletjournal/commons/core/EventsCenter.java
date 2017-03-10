@@ -1,10 +1,10 @@
-package seedu.bullletjournal.commons.core;
+package seedu.bulletjournal.commons.core;
 
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.EventBus;
 
-import seedu.bullletjournal.commons.events.BaseEvent;
+import seedu.bulletjournal.commons.events.BaseEvent;
 
 /**
  * Manages the event dispatching of the app.

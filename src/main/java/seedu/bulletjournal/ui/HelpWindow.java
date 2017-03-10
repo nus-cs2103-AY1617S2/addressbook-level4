@@ -1,4 +1,4 @@
-package seedu.bullletjournal.ui;
+package seedu.bulletjournal.ui;
 
 import java.util.logging.Logger;
 
@@ -7,8 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-import seedu.bullletjournal.commons.core.LogsCenter;
-import seedu.bullletjournal.commons.util.FxViewUtil;
+import seedu.bulletjournal.commons.core.LogsCenter;
+import seedu.bulletjournal.commons.util.FxViewUtil;
 
 /**
  * Controller for a help page

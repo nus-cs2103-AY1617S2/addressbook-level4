@@ -1,13 +1,13 @@
-package seedu.bullletjournal.storage;
+package seedu.bulletjournal.storage;
 
 import java.io.IOException;
 import java.util.Optional;
 
-import seedu.bullletjournal.commons.events.model.TodoListChangedEvent;
-import seedu.bullletjournal.commons.events.storage.DataSavingExceptionEvent;
-import seedu.bullletjournal.commons.exceptions.DataConversionException;
-import seedu.bullletjournal.model.ReadOnlyTodoList;
-import seedu.bullletjournal.model.UserPrefs;
+import seedu.bulletjournal.commons.events.model.TodoListChangedEvent;
+import seedu.bulletjournal.commons.events.storage.DataSavingExceptionEvent;
+import seedu.bulletjournal.commons.exceptions.DataConversionException;
+import seedu.bulletjournal.model.ReadOnlyTodoList;
+import seedu.bulletjournal.model.UserPrefs;
 
 /**
  * API of the Storage component
