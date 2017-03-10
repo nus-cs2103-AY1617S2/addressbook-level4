@@ -1,5 +1,6 @@
 package seedu.address.model.util;
 
+import seedu.address.commons.exceptions.IllegalDateTimeValueException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyTaskManager;
 import seedu.address.model.TaskManager;
@@ -34,6 +35,8 @@ public class SampleDataUtil {
             };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);
+        } catch (IllegalDateTimeValueException e) {
+            throw new AssertionError("sample deadline cannot be parse", e);
         }
     }
 

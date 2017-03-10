@@ -4,6 +4,7 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
+import seedu.address.commons.exceptions.IllegalDateTimeValueException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.TaskBuilder;
@@ -25,7 +26,7 @@ public class TaskTest {
             Task p = new Task(pb);
             int hashcode = -909892920;
             assert(p.hashCode() == hashcode);
-        } catch (IllegalValueException e) {
+        } catch (IllegalValueException | IllegalDateTimeValueException e) {
             e.printStackTrace();
             fail("Task fail Illegal value");
         }

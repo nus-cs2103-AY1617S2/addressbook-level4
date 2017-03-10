@@ -26,6 +26,7 @@ import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import junit.framework.AssertionFailedError;
 import seedu.address.TestApp;
+import seedu.address.commons.exceptions.IllegalDateTimeValueException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
@@ -84,7 +85,7 @@ public class TestUtil {
                 new Task(new Title("Complete task 9"),  new Deadline("11-11-2017"), new UniqueLabelList())
             };
             //CHECKSTYLE.ON: LineLength
-        } catch (IllegalValueException e) {
+        } catch (IllegalValueException | IllegalDateTimeValueException e) {
             assert false;
             // not possible
             return null;

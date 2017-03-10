@@ -185,11 +185,16 @@ public class LogicManagerTest {
 
     @Test
     public void execute_add_invalidArgsFormat() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid,address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 valid@email.butNoPrefix a/valid, address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
+        String expectedTitleErrorMessage = "A Task's title should only contain alphanumeric characters and spaces,"
+                + " and it should not be blank";
+
+        assertCommandFailure("add 1234 / wrong args wrong args", expectedTitleErrorMessage);
+        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid,address",
+                expectedTitleErrorMessage);
+        assertCommandFailure("add Valid Name p/12345 valid@email.butNoPrefix a/valid, address",
+                expectedTitleErrorMessage);
+        assertCommandFailure("add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid,"
+                + " address", expectedTitleErrorMessage);
     }
 
     @Test
