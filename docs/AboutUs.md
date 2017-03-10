@@ -11,7 +11,7 @@ We are a team based in the [School of Computing, National University of Singapor
 -----
 
 #### [Daniel Mullen](http://github.com/DanielMullen3)
-<img src="images/JoshuaLee.jpg" width="150"><br>
+<img src="images/about us_edwin.jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: UI
 
