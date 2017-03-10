@@ -12,8 +12,8 @@ import seedu.jobs.model.task.Description;
 import seedu.jobs.model.task.Email;
 import seedu.jobs.model.task.Name;
 import seedu.jobs.model.task.Phone;
-import seedu.jobs.model.task.ReadOnlyTask;
-import seedu.jobs.model.task.Task;
+import seedu.jobs.model.task.ReadOnlyPerson;
+import seedu.jobs.model.task.Person;
 
 /**
  * JAXB-friendly version of the Task.
@@ -44,7 +44,7 @@ public class XmlAdaptedPerson {
      *
      * @param source future changes to this will not affect the created XmlAdaptedPerson
      */
-    public XmlAdaptedPerson(ReadOnlyTask source) {
+    public XmlAdaptedPerson(ReadOnlyPerson source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
@@ -60,7 +60,7 @@ public class XmlAdaptedPerson {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person
      */
-    public Task toModelType() throws IllegalValueException {
+    public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
@@ -70,6 +70,6 @@ public class XmlAdaptedPerson {
         final Email email = new Email(this.email);
         final Description description = new Description(this.address);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Task(name, phone, email, description, tags);
+        return new Person(name, phone, email, description, tags);
     }
 }

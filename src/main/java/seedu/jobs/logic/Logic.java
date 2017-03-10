@@ -3,7 +3,7 @@ package seedu.jobs.logic;
 import javafx.collections.ObservableList;
 import seedu.jobs.logic.commands.CommandResult;
 import seedu.jobs.logic.commands.exceptions.CommandException;
-import seedu.jobs.model.task.ReadOnlyTask;
+import seedu.jobs.model.task.ReadOnlyPerson;
 
 /**
  * API of the Logic component
@@ -18,6 +18,6 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException;
 
     /** Returns the filtered list of persons */
-    ObservableList<ReadOnlyTask> getFilteredPersonList();
+    ObservableList<ReadOnlyPerson> getFilteredPersonList();
 
 }

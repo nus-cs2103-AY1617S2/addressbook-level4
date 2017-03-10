@@ -10,8 +10,8 @@ import seedu.jobs.commons.core.UnmodifiableObservableList;
 import seedu.jobs.commons.events.model.AddressBookChangedEvent;
 import seedu.jobs.commons.util.CollectionUtil;
 import seedu.jobs.commons.util.StringUtil;
-import seedu.jobs.model.task.ReadOnlyTask;
-import seedu.jobs.model.task.Task;
+import seedu.jobs.model.task.ReadOnlyPerson;
+import seedu.jobs.model.task.Person;
 import seedu.jobs.model.task.UniqueTaskList;
 import seedu.jobs.model.task.UniqueTaskList.PersonNotFoundException;
 
@@ -23,7 +23,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
-    private final FilteredList<ReadOnlyTask> filteredPersons;
+    private final FilteredList<ReadOnlyPerson> filteredPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -59,20 +59,20 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void deletePerson(ReadOnlyTask target) throws PersonNotFoundException {
+    public synchronized void deletePerson(ReadOnlyPerson target) throws PersonNotFoundException {
         addressBook.removePerson(target);
         indicateAddressBookChanged();
     }
 
     @Override
-    public synchronized void addPerson(Task task) throws UniqueTaskList.DuplicatePersonException {
+    public synchronized void addPerson(Person task) throws UniqueTaskList.DuplicatePersonException {
         addressBook.addPerson(task);
         updateFilteredListToShowAll();
         indicateAddressBookChanged();
     }
 
     @Override
-    public void updatePerson(int filteredPersonListIndex, ReadOnlyTask editedPerson)
+    public void updatePerson(int filteredPersonListIndex, ReadOnlyPerson editedPerson)
             throws UniqueTaskList.DuplicatePersonException {
         assert editedPerson != null;
 
@@ -84,7 +84,7 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Filtered Task List Accessors =============================================================
 
     @Override
-    public UnmodifiableObservableList<ReadOnlyTask> getFilteredPersonList() {
+    public UnmodifiableObservableList<ReadOnlyPerson> getFilteredPersonList() {
         return new UnmodifiableObservableList<>(filteredPersons);
     }
 
@@ -105,7 +105,7 @@ public class ModelManager extends ComponentManager implements Model {
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
-        boolean satisfies(ReadOnlyTask person);
+        boolean satisfies(ReadOnlyPerson person);
         String toString();
     }
 
@@ -118,7 +118,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean satisfies(ReadOnlyTask person) {
+        public boolean satisfies(ReadOnlyPerson person) {
             return qualifier.run(person);
         }
 
@@ -129,7 +129,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     interface Qualifier {
-        boolean run(ReadOnlyTask person);
+        boolean run(ReadOnlyPerson person);
         String toString();
     }
 
@@ -141,7 +141,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean run(ReadOnlyTask person) {
+        public boolean run(ReadOnlyPerson person) {
             return nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword))
                     .findAny()

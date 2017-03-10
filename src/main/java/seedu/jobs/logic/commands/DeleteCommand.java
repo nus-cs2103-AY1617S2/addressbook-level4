@@ -3,7 +3,7 @@ package seedu.jobs.logic.commands;
 import seedu.jobs.commons.core.Messages;
 import seedu.jobs.commons.core.UnmodifiableObservableList;
 import seedu.jobs.logic.commands.exceptions.CommandException;
-import seedu.jobs.model.task.ReadOnlyTask;
+import seedu.jobs.model.task.ReadOnlyPerson;
 import seedu.jobs.model.task.UniqueTaskList.PersonNotFoundException;
 
 /**
@@ -30,13 +30,13 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
 
-        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredPersonList();
+        UnmodifiableObservableList<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
 
         if (lastShownList.size() < targetIndex) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask personToDelete = lastShownList.get(targetIndex - 1);
+        ReadOnlyPerson personToDelete = lastShownList.get(targetIndex - 1);
 
         try {
             model.deletePerson(personToDelete);

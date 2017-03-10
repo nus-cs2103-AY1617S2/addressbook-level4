@@ -11,7 +11,7 @@ import seedu.jobs.model.task.Description;
 import seedu.jobs.model.task.Email;
 import seedu.jobs.model.task.Name;
 import seedu.jobs.model.task.Phone;
-import seedu.jobs.model.task.Task;
+import seedu.jobs.model.task.Person;
 import seedu.jobs.model.task.UniqueTaskList;
 
 /**
@@ -29,7 +29,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
-    private final Task toAdd;
+    private final Person toAdd;
 
     /**
      * Creates an AddCommand using raw values.
@@ -42,7 +42,7 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        this.toAdd = new Task(
+        this.toAdd = new Person(
                 new Name(name),
                 new Phone(phone),
                 new Email(email),

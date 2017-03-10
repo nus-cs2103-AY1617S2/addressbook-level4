@@ -5,12 +5,12 @@ import seedu.jobs.model.task.Description;
 import seedu.jobs.model.task.Email;
 import seedu.jobs.model.task.Name;
 import seedu.jobs.model.task.Phone;
-import seedu.jobs.model.task.ReadOnlyTask;
+import seedu.jobs.model.task.ReadOnlyPerson;
 
 /**
  * A mutable person object. For testing only.
  */
-public class TestPerson implements ReadOnlyTask {
+public class TestPerson implements ReadOnlyPerson {
 
     private Name name;
     private Description description;
