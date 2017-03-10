@@ -64,14 +64,14 @@ allprojects {
         compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonDataTypeVersion"
         compile "com.google.guava:guava:$guavaVersion"
 		compile 'me.xdrop:fuzzywuzzy:1.1.6'
-		
+	
         testCompile "junit:junit:$junitVersion"
         testCompile "org.testfx:testfx-core:$testFxVersion"
         testCompile "org.testfx:testfx-junit:$testFxVersion"
         testCompile "org.testfx:testfx-legacy:$testFxVersion", {
             exclude group: "junit", module: "junit"
         }
-        testCompile "org.testfx:openjfx-monocle:$monocleVersion"        
+        testCompile "org.testfx:openjfx-monocle:$monocleVersion"   
         compile group: 'org.ocpsoft.prettytime', name: 'prettytime-nlp', version: '4.0.0.Final'
     }
 
