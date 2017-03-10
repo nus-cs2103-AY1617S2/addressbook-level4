@@ -50,5 +50,4 @@ public class AddCommandTest extends AddressBookGuiTest {
         TestEvent[] expectedList = TestUtil.addPersonsToList(currentList, personToAdd);
         assertTrue(personListPanel.isListMatching(expectedList));
     }
-
 }
