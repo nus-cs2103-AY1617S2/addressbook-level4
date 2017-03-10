@@ -1,25 +1,21 @@
-# Address Book (Level 4)
+# OneTwoDo
 
-[![Build Status](https://travis-ci.org/se-edu/addressbook-level4.svg?branch=master)](https://travis-ci.org/se-edu/addressbook-level4)
-[![Build status](https://ci.appveyor.com/api/projects/status/3boko2x2vr5cc3w2?svg=true)](https://ci.appveyor.com/project/damithc/addressbook-level4)
-[![Coverage Status](https://coveralls.io/repos/github/se-edu/addressbook-level4/badge.svg?branch=master)](https://coveralls.io/github/se-edu/addressbook-level4?branch=master)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/fc0b7775cf7f4fdeaf08776f3d8e364a)](https://www.codacy.com/app/damith/addressbook-level4?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=se-edu/addressbook-level4&amp;utm_campaign=Badge_Grade)
+[![Build Status](https://travis-ci.org/CS2103JAN2017-F14-B1/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-F14-B1/main)
+[![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-F14-B1/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-F14-B1/main?branch=master)
 
 <img src="docs/images/Ui.png" width="600"><br>
 
-Having trouble keeping track of the tasks you have to complete? Looking for a simple yet effective task manager to help you organise your day? OneTwoDo is what you are looking for.
+Having trouble keeping track with the tasks you have to complete? Looking for a simple yet effective task manager to help you organise your day? OneTwoDo is what you are looking for.
 
-OneTwoDo has a simple and clean interface. It clearly displays 3 categories of tasks, namely events, deadlines and to-do tasks. 
+OneTwoDo has a simple and clean interface. It clearly displays 3 categories of tasks, namely events, deadlines and to-do's. 
 
-OneTwoDo is specially designed to be keyboard-friendly. By simply typing commands in one line of text, OneTwoDo will faithfully execute your wish. No extra buttons are required!
-
-Beginners need not be intimidated by the Command Line Interface (CLI) as the interface is intuitive enough for anyone to get started immediately and get good with some practice.
+OneTwoDo is specially designed to be keyboard-friendly. By just typing one line of command, OneTwoDo will faithfully execute your wish. No extra buttons needed to click!
 
 Get started with OneTwoDo today!
 
 OneTwoDo also supports the following for developers:
-* Automated GUI testing.
-* Support for *Build Automation* using Gradle and for *Continuous Integration* using Travis CI.
+    * Automated GUI testing.
+    * Support for *Build Automation* using Gradle and for *Continuous Integration* using Travis CI.
 
 #### Site Map
 * [User Guide](docs/UserGuide.md)
