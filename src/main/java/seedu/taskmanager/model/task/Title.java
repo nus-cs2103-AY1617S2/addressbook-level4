@@ -24,13 +24,13 @@ public class Title {
      *
      * @throws IllegalValueException if given name string is invalid.
      */
-    public Title(String name) throws IllegalValueException {
-        assert name != null;
-        String trimmedName = name.trim();
-        if (!isValidTitle(trimmedName)) {
+    public Title(String title) throws IllegalValueException {
+        assert title != null;
+        String trimmedTitle = title.trim();
+        if (!isValidTitle(trimmedTitle)) {
             throw new IllegalValueException(MESSAGE_TITLE_CONSTRAINTS);
         }
-        this.value = trimmedName;
+        this.value = trimmedTitle;
     }
 
     /**
