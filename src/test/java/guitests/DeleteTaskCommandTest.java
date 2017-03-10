@@ -4,6 +4,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.Test;
 
@@ -24,7 +26,7 @@ public class DeleteTaskCommandTest extends ToLuistGuiTest {
     }
 
     @Test
-    public void deleteManyTasksIndividually() {
+    public void deleteMultipleTasksIndividually() {
         // Start with empty list
         commandBox.runCommand("delete 2");
         commandBox.runCommand("delete 1");
@@ -68,5 +70,95 @@ public class DeleteTaskCommandTest extends ToLuistGuiTest {
         assertFalse(isTaskShown(task));
         assertFalse(isTaskShown(task2));
         assertFalse(isTaskShown(task3));
+    }
+
+    @Test
+    public void deleteMultipleTasksTogether1() {
+        // Start with empty list
+        commandBox.runCommand("delete 2");
+        commandBox.runCommand("delete 1");
+
+        for (int i = 1; i <= 10; i++) {
+            String command = "add task " + i;
+            commandBox.runCommand(command);
+        }
+
+        String command = "delete 2-4, 6 7  11 ";
+        commandBox.runCommand(command);
+
+        int[] taskNumberLeft = {1, 5, 8, 9, 10};
+        Set<Integer> setOfTaskNumberLeft = new HashSet<Integer>();
+        for (int taskNumber: taskNumberLeft) {
+            setOfTaskNumberLeft.add(taskNumber);
+        }
+
+        for (int i = 1; i <= 10; i++) {
+            Task task = new Task("task " + i);
+            if (setOfTaskNumberLeft.contains(i)) {
+                assertTrue(isTaskShown(task));
+            } else {
+                assertFalse(isTaskShown(task));
+            }
+        }
+    }
+
+    @Test
+    public void deleteMultipleTasksTogether2() {
+        // Start with empty list
+        commandBox.runCommand("delete 2");
+        commandBox.runCommand("delete 1");
+
+        for (int i = 1; i <= 10; i++) {
+            String command = "add task " + i;
+            commandBox.runCommand(command);
+        }
+
+        String command = "delete 1-3 5- 7,  9 -10";
+        commandBox.runCommand(command);
+
+        int[] taskNumberLeft = {4, 8};
+        Set<Integer> setOfTaskNumberLeft = new HashSet<Integer>();
+        for (int taskNumber: taskNumberLeft) {
+            setOfTaskNumberLeft.add(taskNumber);
+        }
+
+        for (int i = 1; i <= 10; i++) {
+            Task task = new Task("task " + i);
+            if (setOfTaskNumberLeft.contains(i)) {
+                assertTrue(isTaskShown(task));
+            } else {
+                assertFalse(isTaskShown(task));
+            }
+        }
+    }
+
+    @Test
+    public void deleteMultipleTasksTogether3() {
+        // Start with empty list
+        commandBox.runCommand("delete 2");
+        commandBox.runCommand("delete 1");
+
+        for (int i = 1; i <= 10; i++) {
+            String command = "add task " + i;
+            commandBox.runCommand(command);
+        }
+
+        String command = "delete  - 2, 4 - 6, 8- ";
+        commandBox.runCommand(command);
+
+        int[] taskNumberLeft = {3, 7};
+        Set<Integer> setOfTaskNumberLeft = new HashSet<Integer>();
+        for (int taskNumber: taskNumberLeft) {
+            setOfTaskNumberLeft.add(taskNumber);
+        }
+
+        for (int i = 1; i <= 10; i++) {
+            Task task = new Task("task " + i);
+            if (setOfTaskNumberLeft.contains(i)) {
+                assertTrue(isTaskShown(task));
+            } else {
+                assertFalse(isTaskShown(task));
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 package seedu.toluist.controller;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Logger;
 
 import seedu.toluist.commons.core.LogsCenter;
@@ -15,7 +16,7 @@ import seedu.toluist.ui.Ui;
 public class DeleteTaskController extends Controller {
 
     private static final String COMMAND_TEMPLATE = "^delete"
-            + "(\\s+(?<index>\\d+))?\\s*";
+            + "(\\s+(?<index>.+))?\\s*";
 
     private static final String COMMAND_DELETE_TASK = "delete";
 
@@ -37,9 +38,9 @@ public class DeleteTaskController extends Controller {
         HashMap<String, String> tokens = taskTokenizer.tokenize(command, true, false);
 
         String indexToken = tokens.get(TaskTokenizer.TASK_VIEW_INDEX);
-        Task task = taskTokenizer.getTask(indexToken);
-
-        commandResult = delete(todoList, task);
+        List<Integer> indexes = taskTokenizer.splitIndexes(indexToken, todoList.getTasks().size());
+        List<Task> tasks = taskTokenizer.getTasks(indexes);
+        commandResult = delete(todoList, tasks);
 
         if (todoList.save()) {
             uiStore.setTask(todoList.getTasks());
@@ -47,6 +48,14 @@ public class DeleteTaskController extends Controller {
         }
 
         return commandResult;
+    }
+
+    private CommandResult delete(TodoList todoList, List<Task> tasks) {
+        String message = "";
+        for (Task task: tasks) {
+            message += delete(todoList, task).getFeedbackToUser() + "\n";
+        }
+        return new CommandResult(message);
     }
 
     private CommandResult delete(TodoList todoList, Task task) {
