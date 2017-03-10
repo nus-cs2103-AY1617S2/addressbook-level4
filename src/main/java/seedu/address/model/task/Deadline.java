@@ -27,6 +27,7 @@ public class Deadline {
     public static final String DATE_FORMAT = "EEE, MMM d yyyy HH:mm";
 
     public final String value;
+    private final List<DateGroup> parsedDeadline;
     
     private static PrettyTimeParser parser = new PrettyTimeParser();
     private static SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
@@ -40,11 +41,15 @@ public class Deadline {
     public Deadline(String deadline) throws IllegalValueException {
         assert deadline != null;
         String trimmedDeadline = deadline.trim();
+        this.parsedDeadline = parseDeadline(trimmedDeadline);
         if (!isValidDate(trimmedDeadline)) {
             throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
         }
-        this.value = trimmedDeadline;
-        
+        if (trimmedDeadline.equals("floating") || parsedDeadline.get(0).isRecurring()) {
+        	this.value = trimmedDeadline;
+        } else {
+        	this.value = format(nextDeadline());
+        }
     }
 
     /**
@@ -65,14 +70,33 @@ public class Deadline {
     }
     
     /**
+     * Returns a formatted String of the given Date object.
+     */
+    public static String format(Date date) {
+    	if (date != null) {
+    		return formatter.format(date);
+    	}
+    	return "";
+    }
+    
+    /**
      * Returns true if the given deadline is recurring.
      */
     public boolean isRecurring() {
-    	List<DateGroup> parsedDeadline = parseDeadline(value);
     	if (parsedDeadline.size() != 0) {
     		return parsedDeadline.get(0).isRecurring();
     	}
     	return false;
+    }
+    
+    /**
+     * Returns the next Deadline.
+     */
+    public Date nextDeadline() {
+    	if (parsedDeadline.size() != 0) {
+    		return parsedDeadline.get(0).getDates().get(0);
+    	}
+    	return null;
     }
 
     @Override
@@ -80,7 +104,6 @@ public class Deadline {
     	if (value.equals("floating")) {
     		return value;
     	}
-    	List<DateGroup> parsedDeadline = parseDeadline(value);
         return formatter.format(parsedDeadline.get(0).getDates().get(0));
     }
 
