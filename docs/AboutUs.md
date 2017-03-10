@@ -6,7 +6,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 #### [Joseph Tang](http://www.comp.nus.edu.sg/~damithch) <br>
 <img src="images/JTLX.png" width="150"><br>
-Role: Developer
+Role: Developer <br>
 Responsibilities: Team Lead, Version Control
 
 -----
