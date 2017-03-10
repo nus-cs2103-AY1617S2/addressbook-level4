@@ -8,87 +8,92 @@
 
 ## About
 
-Having trouble keeping track of the tasks you have to complete? Looking for a simple yet effective task manager to help you organise your day? OneTwoDo is what you are looking for.
+Having trouble keeping track of the tasks you need to do? Looking for a simple yet effective task manager to help you organise your day? OneTwoDo is what you need!
 
-OneTwoDo has a simple and clean interface. It clearly displays 3 categories of tasks, namely events, deadlines and to-do tasks. 
+OneTwoDo helps you to manage your evens, deadlines, and other to-do's so that you will not forget about your important tasks. 
 
-OneTwoDo is specially designed to be keyboard-friendly. By simply typing commands in one line of text, OneTwoDo will faithfully execute your wish. No extra buttons are required!
+OneTwoDo has a simple and clean interface, so that with one glance you can have a clear idea of your tasks ahead. 
 
-Beginners need not be intimidated by the Command Line Interface (CLI) as the interface is intuitive enough for anyone to get started immediately and get good with some practice.
+OneTwoDo is specially designed to be keyboard-friendly. By simply typing commands in one line of text, OneTwoDo will faithfully execute your wish. You do not need to worry about clikcing multiple buttons or links. 
+
+OneTwoDo is also extremely flexible. It is smart enough to understand various command formats and shortcuts. 
 
 Get started with OneTwoDo today!
 
 
-## Quick Start
+## Getting Started
 
-0. Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
+Before using OneTwoDo, please ensure that you have installed Java version `1.8.0_60` or later as the app does not work with earlier Java 8 versions.
 
-   > Having any Java 8 version is not enough. <br>
-   > This app will not work with earlier versions of Java 8.
+Start your OneTwoDo journey by downloading the latest `OneTwoDo.jar` from the [releases](../../../releases) tab. Download OneTwoDo directly into the home folder you want to use for the app.
 
-1. Download the latest `OneTwoDo.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for your OneToDo.
-3. Double-click the file to start the app. The GUI should appear in a few seconds.
+You can start OneTwoDo by simply double-clicking the icon!
    > <img src="images/Ui.png" width="600">
 
-4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
-   e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
-5. Some example commands you can try:
-   * **`list`** : lists all contacts
-   * **`add`**` Meeting John Doe s/tmrw 1pm e/tmrw 2pm` :
-     adds a task named `Meeting John Doe` to the OneTwoDo.
-   * **`delete`**` E3` : deletes the 3rd Event shown in the current list of Events
-   * **`exit`** : exits the app
-6. Refer to the [Features](#features) section below for details of each command.<br>
+Congratulations, now you are all set up!
+
+Try some of these commands to get started!
+
+   * **`help`**
+      - Shows the help window.
+   * **`add`**` Scubadiving session s/tmrw 1pm e/tmrw 2pm` 
+        - Adds a task named 'Scubadiving session' to your OneTwoDo.
+    * **`list`**
+      - Shows a listing of all your tasks.
+   * **`delete`**` E3`
+      - Deletes the third `Event` shown in the current list of events.
+   * **`exit`**
+      - Exits from the application.
+    
+You may refer to the [Features](#features) section for more details on all the possible commands.
 
 
 ## Features
 
 <img src="images/Ui-annotated.png" width="600">
 
-After following the quick start to download the program, simply double click the app to run it, and the user interface as shown above will be displayed.
+After you have started OneTwoDo, you will see the following:
 
-When the program is started, you will see the following:
-  
-1. Command box - Commands you want to execute are entered into this box. Type the command and press enter to execute the command.
-2. Result summary and tips - A summary of the results of the executed command is shown to the user to give feedback about the effects of the command.
-3. Task panels - Each panel displays tasks you have entered according to which category they belong to. Other commands also allow you to retreive tasks to be shown here (e.g. `list` or `find` command. Refer to the command format below).
+1. **Command box**
+    - Enter a command into this box and press enter to execute the command.
+2. **Result summary and tips**
+    - A summary of the results of the executed command is shown to the user to give feedback about the effects of the command.
+3. **Task panels**
+    - Each panel displays your tasks depending on the category they belong to. 
+    - Other commands also allow you to retreive the tasks to be shown here (e.g. `list` or `find` command. Please refer to the command format below).
 
-Tasks are separated into 3 categories, where each category is displayed in a task panel:
+Your tasks are separated into 3 categories, where each category is displayed in a task panel:
 
-1. `Deadline` - tasks with an end date but no start date
-2. `Event` - tasks with a start and end date
-3. `To-do` - tasks without a start or end date
+1. `Deadline` - This panel displays tasks with have an end date but no start date.
+2. `Event` - This panel displays tasks with a start and end date.
+3. `To-do` - This panel displays tasks without a start or end date.
 
 ### Command Format
+    
+- Command words are the first word of the command. (e.g. `find`, or `help`).
+- Command options specifies additional information needed by the command.
+    - It consists of a character followed by a forward slash (e.g. `s/`, `t/`, etc), followed by data to be specified after the forward slash if tgere are any. (e.g. `s/tomorrow 0900`). 
+    - The order of options is not fixed after the task name. (e.g. executing `add Go home p/high i/after class` is the same as executing `add Go home i/after class p/high`).
+    - Options surrounded by square brackets `[ ]` are optional.
+    - Options with ellipses `...` after them can be specified multiple times (e.g. `t/Schoolwork t/CS2103`).
+    - Options with `|` the pipe symbol means that either option on the left or right should be used.
 
-* A command consists of a command word (such as `find`, or `help`), followed by additional options, if any. 
-
-* An option is a character followed by a forward slash (e.g. `s/`, `t/`, etc), followed by data to be specified after the forward slash, if any. (e.g. `s/tomorrow 0900`). 
-    * Options surrounded by square brackets `[ ]` are optional.
-    * Options with ellipses `...` after them can be specified multiple times (e.g. `t/Schoolwork t/CS2103`).
-    * The order of options is not fixed after the task name. (e.g. executing `add Go home p/high i/after class` is the same as executing `add Go home i/after class p/high`)
-
-* `UPPER_CASE` words in the command format represent the required data for a command word or its options. Some common examples include:
-
-  + `NAME`
-    * Refers to the name of the task
-
-  + `PREFIX_INDEX`
-    * Refers to the index number shown in the most recent listing.
-    * Comprises of a category prefix (`e`, `d`, or `t`, representing `Event`, `Deadline` and `To-Do` categories respectively) and category index (a positive integer, e.g. `1`, `2`, `3`..)
-
-  + `START_DATE`
-    * Represents start date and time entered
-    * Time defaults 0000 hrs if no time is indicated
-    * Must be before `END_DATE`
-    * Refer to Date and Time format specification for what formats are accepted
-
-  + `END_DATE`
-    * Represents end date and time entered
-    * Time defaults 2359 hrs if no time is indicated
-    * Must be after `START_DATE`
-    * Refer to Date and Time format specification for what formats are accepted
+- Command parameters are `UPPER_CASE` words representing required data for a command word or its options. Some common examples include:
+    - `NAME`
+        * This refers to the name of the task.
+    - `PREFIX_INDEX`
+        * Refers to the index number shown in the most recent listing.
+        * Comprises of a category prefix (`e`, `d`, or `t`, representing `Event`, `Deadline` and `To-Do` categories respectively) and category index (a positive integer, e.g. `1`, `2`, `3`..).
+    - `START_DATE`
+        * Represents start date and time entered.
+        * Time defaults 0000 hrs if no time is indicated.
+        * Must be before `END_DATE`.
+        * Refers to Date and Time format specification for what formats are accepted.
+    - `END_DATE`
+        * Represents end date and time entered.
+        * Time defaults 2359 hrs if no time is indicated.
+        * Must be after `START_DATE`.
+        * Refers to Date and Time format specification for what formats are accepted.
 
 ### Date and Time Format Specification
 
@@ -118,7 +123,7 @@ Format: `help`
 
 The `add` command adds your tasks and displays it in the user interface, allowing you to view them any time you want.
 
-Format: `add NAME [s/START_DATE e/END_DATE d/DURATION] [r/RECUR] [p/PRIORITY] [i/INFORMATION] [t/TAG]...` 
+Format: `add NAME [s/START_DATE e/END_DATE | d/DURATION] [r/RECUR] [p/PRIORITY] [i/INFORMATION] [t/TAG]...` 
 
 **Options**
 > 1. `s/`: Start date and time of a task. 
@@ -280,37 +285,32 @@ Format: `redo`
 
 ---
 ### Marking a task as completed: `done`
-The `done` command updates a task to mark it as completed.
+The `done` command archive the task at PREFIX_INDEX.
 
 Format: `done PREFIX_INDEX`
 
-**Notes**
-> * Marks a task at the specified PREFIX_INDEX as done
-
 **Examples**
 
-> * `done e1`
+> * `done t1`
 > 
->    Mark event 1 as completed.
+>    Archive 1st to-do as completed.
 
 ---
 ### Marking a task as uncompleted: `undone`
-The `undone` command updates a task to mark it as uncompleted.
+The `undone` command unarchive the task at PREFIX_INDEX.
 
 Format: `undone PREFIX_INDEX`
 
-**Notes**
-> * Marks a task at the specified PREFIX_INDEX as not done
 
 **Examples:**
 > * `undone e1`
 > 
->    Mark event 1 as uncompleted.
+>    Unarchive 1st event as uncompleted.
 
 ---
 ### Saving the data: `save`
 
-By default, OneTwoDo data is saved in a file called `todo.txt` in the data folder. You can change the file location by provideing a new file name as the parameter.
+By default, OneTwoDo data is saved in a file called `todolist.xml` in the data folder. You can change the file location by providing a new file name as the parameter.
 
 Note that changes made to OneTwoDo are automatically saved. You do not need to manually save them each time using the`save` command.
 
@@ -336,21 +336,31 @@ Format: `exit`
 **Q**: How do I transfer my data to another Computer?
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous OneTwoDo folder.
 
+**Q**: I tend to forget the commands available. Using the `help` command always give me too much information. How do I recall all commands quickly?
+**A**: You can check the command summary located at the bottom most of the user guide.
+
+**Q**: What type of date and time format can I use?
+**A**: OneTowDo support a variety of formats. You can checkout some of the more common formats above. For complete list of format, checkout the Natty website: http://natty.joestelmach.com/doc.jsp.
+
+**Q**: How do save my OneTwoDo data?
+**A**: We will save your data automatically everytime you input.
+
+
 ---
 ## Command Summary
 
-| Command       | Format        | 
-| ------------- |:-------------| 
-|  Help         |  `help` | 
-|  Add          |  `add NAME [s/START_DATE e/END_DATE d/DURATION] [r/RECUR] [p/PRIORITY] [i/INFORMATION] [t/TAG]...` | 
-|  Find         |  `find KEYWORD [MORE_KEYWORDS] [s/SPECIFICITY] [f/FIELDS]...` | 
-|  List         |  `list [s/START_DATE e/END_DATE d/DURATION] [o/ORDER] [rev/] [done/]` | 
-|  Edit         |  `edit PREFIX_INDEX [NAME] [s/START_DATE e/END_DATE d/DURATION] [r/RECUR] [p/PRIORITY] [i/INFORMATION] [t/TAG]...` | 
-|  Delete       |  `delete PREFIX_INDEX` | 
-|  Clear        |  `clear` | 
-|  Undo         |  `undo`  | 
-|  Redo         |  `redo` | 
-|  Done         |  `done PREFIX_INDEX` | 
-|  Undone       |  `undone PREFIX_INDEX` | 
-|  Save         |  `save` | 
-|  Exit         |  `exit`  | 
+| Command       | Format        | Description |
+| ------------- |:-------------|:-------------|
+|  Help         |  `help` | Open help window |
+|  Add          |  `add NAME [s/START_DATE e/END_DATE | d/DURATION] [r/RECUR] [p/PRIORITY] [i/INFORMATION] [t/TAG]...` | Add a task| 
+|  Find         |  `find KEYWORD [MORE_KEYWORDS] [s/SPECIFICITY] [f/FIELDS]...` | Find tasks with keywords|
+|  List         |  `list [s/START_DATE e/END_DATE | d/DURATION] [o/ORDER] [rev/] [done/]` | List specified tasks| 
+|  Edit         |  `edit PREFIX_INDEX [NAME] [s/START_DATE e/END_DATE d/DURATION] [r/RECUR] [p/PRIORITY] [i/INFORMATION] [t/TAG]...` | Edit any specified task's information|
+|  Delete       |  `delete PREFIX_INDEX` | Delete specified task |
+|  Clear        |  `clear` | Clear all data in OneTwoDo|
+|  Undo         |  `undo`  | Undo previous action|
+|  Redo         |  `redo` | Redo previous action|
+|  Done         |  `done PREFIX_INDEX` | Archive the specified task|
+|  Undone       |  `undone PREFIX_INDEX` | Unarchive the specified task|
+|  Save         |  `save FILE_PATH` | Save file to specified location|
+|  Exit         |  `exit`  | Quit the program|
