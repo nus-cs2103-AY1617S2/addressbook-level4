@@ -3,10 +3,7 @@ package seedu.address.model.parser;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
-
-import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
  * A Parser for Deadline class.
@@ -43,7 +40,7 @@ public class DeadlineParser {
 
     /** Validate given string with given set of date formats. */
     public static boolean isParsable(String dateString, String[] dateFormats) {
-        for(String dateFormat : dateFormats) {
+        for (String dateFormat : dateFormats) {
             try {
                 DateFormat df = new SimpleDateFormat(dateFormat);
                 df.setLenient(false);
@@ -72,7 +69,7 @@ public class DeadlineParser {
      * Parses date string using given set of date formats.
      */
     public static Date parseString(String dateString, String[] dateFormats) {
-        for(String dateFormat : dateFormats) {
+        for (String dateFormat : dateFormats) {
             try {
                 DateFormat df = new SimpleDateFormat(dateFormat);
                 return df.parse(dateString);
@@ -107,9 +104,9 @@ public class DeadlineParser {
 
         // Add all combinations of time and date
         int index = 0;
-        for(String dateRegex : DATE_VALIDATION_REGEX) {
-            for(String separator : DATE_TIME_SEPARATORS) {
-                for(String timeRegex : TIME_VALIDATION_REGEX) {
+        for (String dateRegex : DATE_VALIDATION_REGEX) {
+            for (String separator : DATE_TIME_SEPARATORS) {
+                for (String timeRegex : TIME_VALIDATION_REGEX) {
                     dateFormats[index++] = dateRegex + separator + timeRegex;
                 }
             }
