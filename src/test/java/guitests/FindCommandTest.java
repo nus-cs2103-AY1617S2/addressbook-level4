@@ -5,18 +5,17 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.teamstbf.yats.commons.core.Messages;
 import org.teamstbf.yats.testutil.TestEvent;
-import org.teamstbf.yats.testutil.TestPerson;
 
 public class FindCommandTest extends AddressBookGuiTest {
 
     @Test
     public void find_nonEmptyList() {
         assertFindResult("find Mark"); // no results
-        assertFindResult("find Meier", td.benson, td.daniel); // multiple results
+        assertFindResult("find Meier", td.boop, td.cower); // multiple results
 
         //find after deleting one result
         commandBox.runCommand("delete 1");
-        assertFindResult("find Meier", td.daniel);
+        assertFindResult("find Meier", td.duck);
     }
 
     @Test

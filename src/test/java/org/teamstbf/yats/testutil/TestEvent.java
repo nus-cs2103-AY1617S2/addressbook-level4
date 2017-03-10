@@ -1,11 +1,9 @@
 package org.teamstbf.yats.testutil;
 
-import org.teamstbf.yats.model.item.Deadline;
 import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.Location;
 import org.teamstbf.yats.model.item.Periodic;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
-import org.teamstbf.yats.model.item.ReadOnlyItem;
 import org.teamstbf.yats.model.item.Timing;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.tag.UniqueTagList;
@@ -72,7 +70,6 @@ public class TestEvent implements ReadOnlyEvent {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getTitle().fullName + " ");
-        sb.append("a/" + this.getDescription().value + " ");
         sb.append("l/" + this.getLocation().value + " ");
         sb.append("p/" + this.getPeriod().value + " ");
         sb.append("s/" + this.getStartTime().value + " ");
@@ -104,5 +101,21 @@ public class TestEvent implements ReadOnlyEvent {
 
     public void setDescription(Description description) {
         this.description = description;
+    }
+
+    public void setPeriod(Periodic periodic) {
+        this.period = periodic;  
+    }
+    
+    public void setLocation(Location location) {
+        this.location = location;  
+    }
+    
+    public void setStartTime(Timing timing) {
+        this.startTime = timing;
+    }
+
+    public void setEndTime(Timing timing) {
+        this.endTime = timing;
     }
 }

@@ -3,14 +3,13 @@ package guitests.guihandles;
 
 import static org.junit.Assert.assertTrue;
 
-import java.awt.Event;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 import org.teamstbf.yats.TestApp;
+import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
-import org.teamstbf.yats.model.item.ReadOnlyItem;
 import org.teamstbf.yats.model.item.Task;
 import org.teamstbf.yats.testutil.TestUtil;
 
@@ -47,6 +46,8 @@ public class PersonListPanelHandle extends GuiHandle {
      * Returns true if the list is showing the person details correctly and in correct order.
      * @param expectedList A list of person in the correct order.
      */
+    public boolean isListMatching(ReadOnlyEvent... persons) {
+        return this.isListMatching(0, persons);
     }
 
     /**

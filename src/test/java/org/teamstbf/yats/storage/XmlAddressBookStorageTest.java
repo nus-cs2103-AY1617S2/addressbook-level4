@@ -14,9 +14,10 @@ import org.teamstbf.yats.commons.exceptions.DataConversionException;
 import org.teamstbf.yats.commons.util.FileUtil;
 import org.teamstbf.yats.model.ReadOnlyTaskManager;
 import org.teamstbf.yats.model.TaskManager;
+import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.Task;
 import org.teamstbf.yats.storage.XmlAddressBookStorage;
-import org.teamstbf.yats.testutil.TypicalTestPersons;
+import org.teamstbf.yats.testutil.TypicalTestEvents;
 
 public class XmlAddressBookStorageTest {
     private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlAddressBookStorageTest/");
@@ -62,7 +63,7 @@ public class XmlAddressBookStorageTest {
     @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         String filePath = testFolder.getRoot().getPath() + "TempAddressBook.xml";
-        TypicalTestPersons td = new TypicalTestPersons();
+        TypicalTestEvents td = new TypicalTestEvents();
         TaskManager original = td.getTypicalAddressBook();
         XmlAddressBookStorage xmlAddressBookStorage = new XmlAddressBookStorage(filePath);
 
@@ -72,14 +73,14 @@ public class XmlAddressBookStorageTest {
         assertEquals(original, new TaskManager(readBack));
 
         //Modify data, overwrite exiting file, and read back
-        original.addTask(new Task(td.hoon));
-        original.removePerson(new Task(td.alice));
+        original.addEvent(new Event(td.abdicate));
+        original.removePerson(new Event(td.abdicate));
         xmlAddressBookStorage.saveTaskManager(original, filePath);
         readBack = xmlAddressBookStorage.readTaskManager(filePath).get();
         assertEquals(original, new TaskManager(readBack));
 
         //Save and read without specifying file path
-        original.addTask(new Task(td.ida));
+        original.addEvent(new Event(td.boop));
         xmlAddressBookStorage.saveTaskManager(original); //file path not specified
         readBack = xmlAddressBookStorage.readTaskManager().get(); //file path not specified
         assertEquals(original, new TaskManager(readBack));

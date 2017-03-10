@@ -5,10 +5,8 @@ import static org.teamstbf.yats.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK
 
 import org.junit.Test;
 import org.teamstbf.yats.testutil.TestEvent;
-import org.teamstbf.yats.testutil.TestPerson;
 import org.teamstbf.yats.testutil.TestUtil;
 
-import t16b4.yats.testutil.TestUtil;
 
 public class DeleteCommandTest extends AddressBookGuiTest {
 

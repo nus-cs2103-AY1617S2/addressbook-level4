@@ -19,9 +19,10 @@ import org.teamstbf.yats.commons.util.XmlUtil;
 import org.teamstbf.yats.model.TaskManager;
 import org.teamstbf.yats.model.item.Deadline;
 import org.teamstbf.yats.model.item.Description;
+import org.teamstbf.yats.model.item.Event;
+import org.teamstbf.yats.model.item.Location;
+import org.teamstbf.yats.model.item.Periodic;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
-import org.teamstbf.yats.model.item.ReadOnlyItem;
-import org.teamstbf.yats.model.item.Task;
 import org.teamstbf.yats.model.item.Timing;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.tag.Tag;
@@ -53,7 +54,7 @@ public class TestUtil {
      */
     public static final String SANDBOX_FOLDER = FileUtil.getPath("./src/test/data/sandbox/");
 
-    public static final Task[] SAMPLE_PERSON_DATA = getSamplePersonData();
+    public static final Event[] SAMPLE_PERSON_DATA = getSampleEventData();
 
     public static final Tag[] SAMPLE_TAG_DATA = getSampleTagData();
 
@@ -72,20 +73,13 @@ public class TestUtil {
                 String.format("Expected %s to be thrown, but nothing was thrown.", expected.getName()));
     }
 
-    private static Task[] getSamplePersonData() {
+    private static Event[] getSampleEventData() {
         try {
             //CHECKSTYLE.OFF: LineLength
-            return new Task[]{
-                new Task(new Title("Ali Muster"), new Deadline("9482424"), new Timing("hans@google.com"), new Description("4th street"), new UniqueTagList()),
-                new Task(new Title("Boris Mueller"), new Deadline("87249245"), new Timing("ruth@google.com"), new Description("81th street"), new UniqueTagList()),
-                new Task(new Title("Carl Kurz"), new Deadline("95352563"), new Timing("heinz@yahoo.com"), new Description("wall street"), new UniqueTagList()),
-                new Task(new Title("Daniel Meier"), new Deadline("87652533"), new Timing("cornelia@google.com"), new Description("10th street"), new UniqueTagList()),
-                new Task(new Title("Elle Meyer"), new Deadline("9482224"), new Timing("werner@gmail.com"), new Description("michegan ave"), new UniqueTagList()),
-                new Task(new Title("Fiona Kunz"), new Deadline("9482427"), new Timing("lydia@gmail.com"), new Description("little tokyo"), new UniqueTagList()),
-                new Task(new Title("George Best"), new Deadline("9482442"), new Timing("anna@google.com"), new Description("4th street"), new UniqueTagList()),
-                new Task(new Title("Hoon Meier"), new Deadline("8482424"), new Timing("stefan@mail.com"), new Description("little india"), new UniqueTagList()),
-                new Task(new Title("Ida Mueller"), new Deadline("8482131"), new Timing("hans@google.com"), new Description("chicago ave"), new UniqueTagList())
-            };
+            return new Event[]{
+                new Event(new Title("Ali Muster"), new Location("School"), new Periodic("none"),new Timing("7:00am"), new Timing("9:00am"), new Description("lame"), new UniqueTagList()),
+                new Event(new Title("Best"), new Location("Home"), new Periodic("daily"),new Timing("12:00am"), new Timing("11:00am"), new Description("do what"), new UniqueTagList())
+         };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
             assert false;
@@ -108,7 +102,7 @@ public class TestUtil {
         }
     }
 
-    public static List<Task> generateSamplePersonData() {
+    public static List<Event> generateSamplePersonData() {
         return Arrays.asList(SAMPLE_PERSON_DATA);
     }
 

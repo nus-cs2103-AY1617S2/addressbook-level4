@@ -18,7 +18,7 @@ import org.teamstbf.yats.model.item.ReadOnlyEvent;
 import org.teamstbf.yats.model.item.ReadOnlyItem;
 import org.teamstbf.yats.model.item.UniqueItemList.DuplicatePersonException;
 import org.teamstbf.yats.testutil.TestUtil;
-import org.teamstbf.yats.testutil.TypicalTestPersons;
+import org.teamstbf.yats.testutil.TypicalTestEvents;
 import org.testfx.api.FxToolkit;
 
 import guitests.guihandles.BrowserPanelHandle;
@@ -42,7 +42,7 @@ public abstract class AddressBookGuiTest {
 
     TestApp testApp;
 
-    protected TypicalTestPersons td = new TypicalTestPersons();
+    protected TypicalTestEvents td = new TypicalTestEvents();
 
     /*
      *   Handles to GUI elements present at the start up are created in advance
@@ -89,9 +89,9 @@ public abstract class AddressBookGuiTest {
      * Return null to use the data in the file specified in {@link #getDataFileLocation()}
      * @throws DuplicatePersonException 
      */
-    protected TaskManager getInitialData() throws DuplicatePersonException {
+    protected TaskManager getInitialData() {
         TaskManager ab = new TaskManager();
-        TypicalTestPersons.loadAddressBookWithSampleData(ab);
+        TypicalTestEvents.loadAddressBookWithSampleData(ab);
         return ab;
     }
 

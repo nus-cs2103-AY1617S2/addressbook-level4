@@ -21,7 +21,7 @@ import org.teamstbf.yats.storage.Storage;
 import org.teamstbf.yats.storage.StorageManager;
 import org.teamstbf.yats.storage.XmlAddressBookStorage;
 import org.teamstbf.yats.testutil.EventsCollector;
-import org.teamstbf.yats.testutil.TypicalTestPersons;
+import org.teamstbf.yats.testutil.TypicalTestEvents;
 
 public class StorageManagerTest {
 
@@ -63,7 +63,7 @@ public class StorageManagerTest {
          * {@link XmlAddressBookStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link XmlAddressBookStorageTest} class.
          */
-        TaskManager original = new TypicalTestPersons().getTypicalAddressBook();
+        TaskManager original = new TypicalTestEvents().getTypicalAddressBook();
         storageManager.saveTaskManager(original);
         ReadOnlyTaskManager retrieved = storageManager.readTaskManager().get();
         assertEquals(original, new TaskManager(retrieved));

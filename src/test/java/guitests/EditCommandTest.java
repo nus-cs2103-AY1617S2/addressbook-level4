@@ -10,7 +10,7 @@ import org.teamstbf.yats.model.item.Deadline;
 import org.teamstbf.yats.model.item.Timing;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.tag.Tag;
-import org.teamstbf.yats.testutil.TaskBuilder;
+import org.teamstbf.yats.testutil.EventBuilder;
 import org.teamstbf.yats.testutil.TestEvent;
 
 import guitests.guihandles.PersonCardHandle;
@@ -28,8 +28,8 @@ public class EditCommandTest extends AddressBookGuiTest {
         String detailsToEdit = "Bobby p/91234567 e/bobby@gmail.com a/Block 123, Bobby Street 3 t/husband";
         int addressBookIndex = 1;
 
-        TestEvent editedPerson = new TaskBuilder().withTitle("Bobby").withPhone("91234567")
-                .withEmail("bobby@gmail.com").withAddress("Block 123, Bobby Street 3").withTags("husband").build();
+        TestEvent editedPerson = new EventBuilder().withTitle("Bobby").withLocation("Block 123, Bobby Street 3").withPeriodic("daily").
+                withStartTime("7:00am").withEndTime("9:00am").withDescription("husband").withTags("nil").build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
@@ -40,7 +40,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         int addressBookIndex = 2;
 
         TestEvent personToEdit = expectedPersonsList[addressBookIndex - 1];
-        TestEvent editedPerson = new TaskBuilder(personToEdit).withTags("sweetie", "bestie").build();
+        TestEvent editedPerson = new EventBuilder(personToEdit).withTags("sweetie", "bestie").build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
@@ -51,7 +51,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         int addressBookIndex = 2;
 
         TestEvent personToEdit = expectedPersonsList[addressBookIndex - 1];
-        TestEvent editedPerson = new TaskBuilder(personToEdit).withTags().build();
+        TestEvent editedPerson = new EventBuilder(personToEdit).withTags().build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
@@ -65,7 +65,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         int addressBookIndex = 5;
 
         TestEvent personToEdit = expectedPersonsList[addressBookIndex - 1];
-        TestEvent editedPerson = new TaskBuilder(personToEdit).withTitle("Belle").build();
+        TestEvent editedPerson = new EventBuilder(personToEdit).withTitle("Belle").build();
 
         assertEditSuccess(filteredPersonListIndex, addressBookIndex, detailsToEdit, editedPerson);
     }

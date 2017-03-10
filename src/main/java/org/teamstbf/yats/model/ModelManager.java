@@ -162,9 +162,4 @@ public class ModelManager extends ComponentManager implements Model {
 		}
 	}
 
-	@Override
-	public void addEvent(Task task) throws DuplicatePersonException {
-		// TODO Auto-generated method stub
-	}
-
 }

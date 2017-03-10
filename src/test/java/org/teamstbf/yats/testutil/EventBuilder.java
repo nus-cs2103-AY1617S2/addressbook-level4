@@ -4,6 +4,7 @@ import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 import org.teamstbf.yats.model.item.Deadline;
 import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.Location;
+import org.teamstbf.yats.model.item.Periodic;
 import org.teamstbf.yats.model.item.Timing;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.tag.Tag;
@@ -12,27 +13,27 @@ import org.teamstbf.yats.model.tag.UniqueTagList;
 /**
  *
  */
-public class TaskBuilder {
+public class EventBuilder {
 
     private TestEvent task;
 
-    public TaskBuilder() {
+    public EventBuilder() {
         this.task = new TestEvent();
     }
 
     /**
      * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
-    public TaskBuilder(TestEvent taskToCopy) {
+    public EventBuilder(TestEvent taskToCopy) {
         this.task = new TestEvent(taskToCopy);
     }
 
-    public TaskBuilder withTitle(String title) throws IllegalValueException {
+    public EventBuilder withTitle(String title) throws IllegalValueException {
         this.task.setTitle(new Title(title));
         return this;
     }
 
-    public TaskBuilder withTags(String ... tags) throws IllegalValueException {
+    public EventBuilder withTags(String ... tags) throws IllegalValueException {
         task.setTags(new UniqueTagList());
         for (String tag: tags) {
             task.getTags().add(new Tag(tag));
@@ -40,17 +41,27 @@ public class TaskBuilder {
         return this;
     }
 
-    public TaskBuilder withDescription(String address) throws IllegalValueException {
+    public EventBuilder withDescription(String address) throws IllegalValueException {
         this.task.setDescription(new Description(address));
         return this;
     }
 
-    public TaskBuilder withPhone(String phone) throws IllegalValueException {
-        this.task.setLocation(new Location(phone));
+    public EventBuilder withLocation(String location) throws IllegalValueException {
+        this.task.setLocation(new Location(location));
         return this;
     }
 
-    public TaskBuilder withEmail(String email) throws IllegalValueException {
+    public EventBuilder withStartTime(String timing) throws IllegalValueException {
+        this.task.setStartTime(new Timing(timing));
+        return this;
+    }
+    
+    public EventBuilder withEndTime(String timing) throws IllegalValueException {
+        this.task.setEndTime(new Timing(timing));
+        return this;
+    }
+    
+    public EventBuilder withPeriodic(String email) throws IllegalValueException {
         this.task.setPeriod(new Periodic(email));
         return this;
     }
