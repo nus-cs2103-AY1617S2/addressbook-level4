@@ -23,7 +23,7 @@ Responsibilities: UI
 -----
 
 #### [Malik Jabati](https://github.com/SmartyMJ)
-<img src="images/LeowYijin.jpg" width="150"><br>
+<img src="images/MalikJabati.jpeg" width="150"><br>
 Role: Developer <br>
 Responsibilities: Data
 
