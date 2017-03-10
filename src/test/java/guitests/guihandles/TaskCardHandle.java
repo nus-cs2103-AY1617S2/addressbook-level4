@@ -12,7 +12,7 @@ import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.ReadOnlyTask;
 
 /**
- * Provides a handle to a person card in the person list panel.
+ * Provides a handle to a task card in the task list panel.
  */
 public class TaskCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
