@@ -1,0 +1,25 @@
+@font-face {
+    font-family: 'Avenir Light';
+    src: url('/fonts/avenir-light.ttf');
+}
+
+.header-panel {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Avenir Light";
+    -fx-font-size: 18;
+}
+
+.header-deadlines {
+    -fx-background-color: #D00101;
+    -fx-opacity: 0.6;
+}
+
+.header-events {
+    -fx-background-color: #009688;
+    -fx-opacity: 0.66;
+}
+
+.header-todo {
+    -fx-background-color: #4990E2;
+    -fx-opacity: 0.75;
+}

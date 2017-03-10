@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import java.lang.String?>
 <?import java.net.URL?>
-<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <stylesheets>
-      <URL value="@DarkTheme.css" />
-      <URL value="@Extensions.css" />
-   </stylesheets>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <MenuBar VBox.vgrow="NEVER">
          <menus>
@@ -24,33 +27,66 @@
             </Menu>
          </menus>
       </MenuBar>
-      <AnchorPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="anchor-pane-with-border">
-         <padding>
-            <Insets top="5.0" bottom="5.0" left="10.0" right="10.0"/>
-         </padding>
-      </AnchorPane>
-       <AnchorPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="anchor-pane-with-border" minHeight="100" prefHeight="100" maxHeight="100">
-           <padding>
-               <Insets top="5.0" bottom="5.0" left="10.0" right="10.0"/>
-           </padding>
-       </AnchorPane>
-      <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
+      <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.5, 0.5" VBox.vgrow="ALWAYS">
          <items>
-            <VBox fx:id="personList" minWidth="340" prefWidth="340">
+            <VBox fx:id="personList" alignment="CENTER" minWidth="340.0" prefWidth="340">
                 <padding>
-                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                 </padding>
                <children>
-                  <AnchorPane fx:id="taskListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="64.0" prefWidth="1000.0" stylesheets="@PanelTheme.css" text="Deadlines" textAlignment="CENTER" VBox.vgrow="ALWAYS">
+                     <styleClass>
+                        <String fx:value="header-deadlines" />
+                        <String fx:value="header-panel" />
+                     </styleClass>
+                  </Label>
+                  <AnchorPane fx:id="taskListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
-            <AnchorPane fx:id="browserPlaceholder" prefWidth="340" >
-                <padding>
-                    <Insets top="10" bottom="10" left="10" right="10"/>
-                </padding>
-            </AnchorPane>
+            <VBox fx:id="EventsList" alignment="CENTER" minWidth="340" prefWidth="340">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <Label alignment="CENTER" prefHeight="64.0" prefWidth="1000.0" stylesheets="@PanelTheme.css" text="Events" VBox.vgrow="ALWAYS">
+                     <styleClass>
+                        <String fx:value="header-events" />
+                        <String fx:value="header-panel" />
+                     </styleClass>
+                  </Label>
+                  <AnchorPane fx:id="taskListPanelPlaceholder1" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
+            <VBox fx:id="TodoList" alignment="CENTER" minWidth="340" prefWidth="340">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <Label alignment="CENTER" prefHeight="64.0" prefWidth="1000.0" stylesheets="@PanelTheme.css" text="To do" VBox.vgrow="ALWAYS">
+                     <styleClass>
+                        <String fx:value="header-todo" />
+                        <String fx:value="header-panel" />
+                     </styleClass>
+                  </Label>
+                  <AnchorPane fx:id="taskListPanelPlaceholder2" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
          </items>
       </SplitPane>
+      <AnchorPane fx:id="commandBoxPlaceholder" styleClass="anchor-pane-with-border" VBox.vgrow="NEVER">
+         <padding>
+            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+         </padding>
+      </AnchorPane>
+       <AnchorPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="anchor-pane-with-border" VBox.vgrow="NEVER">
+           <padding>
+               <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+           </padding>
+       </AnchorPane>
       <AnchorPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
    </children>
+   <stylesheets>
+      <URL value="@DarkTheme.css" />
+      <URL value="@Extensions.css" />
+   </stylesheets>
 </VBox>
