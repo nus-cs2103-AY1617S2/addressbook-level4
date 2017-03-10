@@ -32,7 +32,7 @@ import com.joestelmach.natty.generated.DateParser;
 import com.joestelmach.natty.generated.DateWalker;
 import com.joestelmach.natty.generated.TreeRewrite;
 
-public class DateTimeParser implements DateTime {
+public class DateTimeParserManager implements DateTimeParser {
     private TimeZone defaultTimeZone;
 
     private static final Logger logger = LoggerFactory.getLogger(Parser.class);
@@ -50,7 +50,7 @@ public class DateTimeParser implements DateTime {
      * Creates a new parser with no explicit default time zone (default will be
      * US/Eastern)
      */
-    public DateTimeParser() {
+    public DateTimeParserManager() {
         defaultTimeZone = TimeZone.getTimeZone("GMT+8");
     }
 
@@ -73,9 +73,9 @@ public class DateTimeParser implements DateTime {
      * @return
      */
     public List<DateGroup> parse(String value, Date referenceDate) {
-
         // lex the input value to obtain our global token stream
         ANTLRInputStream input = null;
+
         try {
             input = new ANTLRNoCaseInputStream(new ByteArrayInputStream(value.getBytes()));
 

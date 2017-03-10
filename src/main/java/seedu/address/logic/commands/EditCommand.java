@@ -115,7 +115,7 @@ public class EditCommand extends Command {
             return title;
         }
 
-        public void setAddress(Optional<Deadline> deadline) {
+        public void setDeadline(Optional<Deadline> deadline) {
             assert deadline != null;
             this.deadline = deadline;
         }
