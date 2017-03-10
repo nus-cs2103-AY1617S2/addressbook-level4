@@ -36,7 +36,7 @@ public class DateTime {
     }
 
     /**
-     * Returns if a given string is a valid person email.
+     * Returns if a given string is not empty.
      *
      * @throws IllegalValueException
      */
