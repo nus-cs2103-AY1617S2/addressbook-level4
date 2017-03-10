@@ -35,10 +35,10 @@ public class SaveCommand extends Command {
     public SaveCommand(String path) throws IllegalValueException {
         assert path != null;
         File directory = new File(path);
-//        if (!FileUtil.isDirectoryExists(directory)) {
-//            throw new IllegalValueException(MESSAGE_DIRECTORY_PATH_INVALID);
-//        }
-        directoryPath = path;
+        if (!FileUtil.isDirectoryExists(directory)) {
+            throw new IllegalValueException(MESSAGE_DIRECTORY_PATH_DOES_NOT_EXIST);
+        }
+        directoryPath = path + DATA_FILE_NAME;
     }
 
     @Override
