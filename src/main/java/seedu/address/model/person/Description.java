@@ -3,7 +3,7 @@ package seedu.address.model.person;
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Represents an Activity's description in the address book.
+ * Represents an Activity's description in WhatsLeft.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Description {
