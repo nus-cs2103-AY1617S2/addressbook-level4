@@ -9,9 +9,9 @@ import savvytodo.model.category.UniqueCategoryList;
 public interface ReadOnlyTask {
 
     Name getName();
-    Priority getPriority();
-    Description getDescription();
-    Location getLocation();
+    Priority getPhone();
+    Description getEmail();
+    Address getAddress();
 
     /**
      * The returned CategoryList is a deep copy of the internal CategoryList,
@@ -26,9 +26,9 @@ public interface ReadOnlyTask {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                 && other.getName().equals(this.getName()) // state checks here onwards
-                && other.getPriority().equals(this.getPriority())
-                && other.getDescription().equals(this.getDescription())
-                && other.getLocation().equals(this.getLocation()));
+                && other.getPhone().equals(this.getPhone())
+                && other.getEmail().equals(this.getEmail())
+                && other.getAddress().equals(this.getAddress()));
     }
 
     /**
@@ -37,13 +37,13 @@ public interface ReadOnlyTask {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append(" Priority: ")
-                .append(getPriority())
-                .append(" Description: ")
-                .append(getDescription())
-                .append(" Location: ")
-                .append(getLocation())
-                .append(" Categories: ");
+                .append(" Phone: ")
+                .append(getPhone())
+                .append(" Email: ")
+                .append(getEmail())
+                .append(" Address: ")
+                .append(getAddress())
+                .append(" Categries: ");
         getCategories().forEach(builder::append);
         return builder.toString();
     }

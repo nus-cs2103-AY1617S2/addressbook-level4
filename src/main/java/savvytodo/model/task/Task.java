@@ -14,17 +14,17 @@ public class Task implements ReadOnlyTask {
     private Name name;
     private Priority priority;
     private Description description;
-    private Location address;
+    private Address address;
 
     private UniqueCategoryList categories;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Priority priority, Description email, Location address, UniqueCategoryList categories) {
-        assert !CollectionUtil.isAnyNull(name, priority, email, address, categories);
+    public Task(Name name, Priority phone, Description email, Address address, UniqueCategoryList categories) {
+        assert !CollectionUtil.isAnyNull(name, phone, email, address, categories);
         this.name = name;
-        this.priority = priority;
+        this.priority = phone;
         this.description = email;
         this.address = address;
         this.categories = new UniqueCategoryList(categories); //protect internal categories from changes in the arg list
@@ -34,7 +34,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getPriority(), source.getDescription(), source.getLocation(), source.getCategories());
+        this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(), source.getCategories());
     }
 
     public void setName(Name name) {
@@ -47,13 +47,13 @@ public class Task implements ReadOnlyTask {
         return name;
     }
 
-    public void setPriority(Priority priority) {
-        assert priority != null;
-        this.priority = priority;
+    public void setPhone(Priority phone) {
+        assert phone != null;
+        this.priority = phone;
     }
 
     @Override
-    public Priority getPriority() {
+    public Priority getPhone() {
         return priority;
     }
 
@@ -63,17 +63,17 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
-    public Description getDescription() {
+    public Description getEmail() {
         return description;
     }
 
-    public void setAddress(Location address) {
+    public void setAddress(Address address) {
         assert address != null;
         this.address = address;
     }
 
     @Override
-    public Location getLocation() {
+    public Address getAddress() {
         return address;
     }
 
@@ -96,9 +96,9 @@ public class Task implements ReadOnlyTask {
         assert replacement != null;
 
         this.setName(replacement.getName());
-        this.setPriority(replacement.getPriority());
-        this.setEmail(replacement.getDescription());
-        this.setAddress(replacement.getLocation());
+        this.setPhone(replacement.getPhone());
+        this.setEmail(replacement.getEmail());
+        this.setAddress(replacement.getAddress());
         this.setCategories(replacement.getCategories());
     }
 

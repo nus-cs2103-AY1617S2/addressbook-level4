@@ -7,7 +7,7 @@ import savvytodo.commons.core.Messages;
 import savvytodo.commons.util.CollectionUtil;
 import savvytodo.logic.commands.exceptions.CommandException;
 import savvytodo.model.category.UniqueCategoryList;
-import savvytodo.model.task.Location;
+import savvytodo.model.task.Address;
 import savvytodo.model.task.Description;
 import savvytodo.model.task.Name;
 import savvytodo.model.task.Priority;
@@ -16,7 +16,7 @@ import savvytodo.model.task.Task;
 import savvytodo.model.task.UniqueTaskList;
 
 /**
- * Edits the details of an existing task in the task manager.
+ * Edits the details of an existing task in the address book.
  */
 public class EditCommand extends Command {
 
@@ -26,12 +26,12 @@ public class EditCommand extends Command {
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[NAME] [p/PRIORITY] [d/DESCRIPTION] [a/ADDRESS ] [c/CATEGORIES]...\n"
-            + "Example: " + COMMAND_WORD + " 1 p/low d/Buy something";
+            + "[NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS ] [c/CATEGORIES]...\n"
+            + "Example: " + COMMAND_WORD + " 1 p/91234567 e/johndoe@yahoo.com";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book.";
 
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
@@ -79,12 +79,12 @@ public class EditCommand extends Command {
         assert taskToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
-        Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
-        Description updatedEmail = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
-        Location updatedLocation = editTaskDescriptor.getLocation().orElseGet(taskToEdit::getLocation);
+        Priority updatedPhone = editTaskDescriptor.getPhone().orElseGet(taskToEdit::getPhone);
+        Description updatedEmail = editTaskDescriptor.getEmail().orElseGet(taskToEdit::getEmail);
+        Address updatedAddress = editTaskDescriptor.getAddress().orElseGet(taskToEdit::getAddress);
         UniqueCategoryList updatedCategories = editTaskDescriptor.getCategories().orElseGet(taskToEdit::getCategories);
 
-        return new Task(updatedName, updatedPriority, updatedEmail, updatedLocation, updatedCategories);
+        return new Task(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCategories);
     }
 
     /**
@@ -93,18 +93,18 @@ public class EditCommand extends Command {
      */
     public static class EditTaskDescriptor {
         private Optional<Name> name = Optional.empty();
-        private Optional<Priority> priority = Optional.empty();
-        private Optional<Description> description = Optional.empty();
-        private Optional<Location> location = Optional.empty();
+        private Optional<Priority> phone = Optional.empty();
+        private Optional<Description> email = Optional.empty();
+        private Optional<Address> address = Optional.empty();
         private Optional<UniqueCategoryList> categories = Optional.empty();
 
         public EditTaskDescriptor() {}
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.name = toCopy.getName();
-            this.priority = toCopy.getPriority();
-            this.description = toCopy.getDescription();
-            this.location = toCopy.getLocation();
+            this.phone = toCopy.getPhone();
+            this.email = toCopy.getEmail();
+            this.address = toCopy.getAddress();
             this.categories = toCopy.getCategories();
         }
 
@@ -112,7 +112,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.priority, this.description, this.location, this.categories);
+            return CollectionUtil.isAnyPresent(this.name, this.phone, this.email, this.address, this.categories);
         }
 
         public void setName(Optional<Name> name) {
@@ -124,31 +124,31 @@ public class EditCommand extends Command {
             return name;
         }
 
-        public void setPriority(Optional<Priority> priority) {
-            assert priority != null;
-            this.priority = priority;
+        public void setPhone(Optional<Priority> phone) {
+            assert phone != null;
+            this.phone = phone;
         }
 
-        public Optional<Priority> getPriority() {
-            return priority;
+        public Optional<Priority> getPhone() {
+            return phone;
         }
 
         public void setEmail(Optional<Description> email) {
             assert email != null;
-            this.description = email;
+            this.email = email;
         }
 
-        public Optional<Description> getDescription() {
-            return description;
+        public Optional<Description> getEmail() {
+            return email;
         }
 
-        public void setLocation(Optional<Location> location) {
-            assert location != null;
-            this.location = location;
+        public void setAddress(Optional<Address> address) {
+            assert address != null;
+            this.address = address;
         }
 
-        public Optional<Location> getLocation() {
-            return location;
+        public Optional<Address> getAddress() {
+            return address;
         }
 
         public void setCategories(Optional<UniqueCategoryList> categories) {
