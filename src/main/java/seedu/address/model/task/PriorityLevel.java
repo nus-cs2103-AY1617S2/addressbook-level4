@@ -26,13 +26,14 @@ public class PriorityLevel {
     public PriorityLevel(String priority) throws IllegalValueException{
         //assert priority != null;
         String trimmedPriority = priority.trim();
-        if (trimmedPriority == null)
+        if (trimmedPriority.equals(""))
         	this.value = trimmedPriority;
-        else if (!isValidPriorityLevel(trimmedPriority)) {
-            throw new IllegalValueException(MESSAGE_PRIORITY_LEVEL_CONSTRAINTS);
+        else{
+        	if (!isValidPriorityLevel(trimmedPriority)) {
+                throw new IllegalValueException(MESSAGE_PRIORITY_LEVEL_CONSTRAINTS);
+            }
+        	this.value = trimmedPriority;
         }
-        else
-        	this.value = trimmedPriority;
     }
 
     /**
