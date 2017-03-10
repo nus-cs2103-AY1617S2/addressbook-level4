@@ -20,10 +20,13 @@ By : `W09-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nb
 ## 0. Introduction
 
 We are making Burdens to make sense of our daily lives and list our tasks and deadlines on a command-line platform.
+You are welcome to contribute in any way!
 
 ## 1. Setting up
 
 ### 1.1. Prerequisites
+
+Please ensure you have this prerequisites before contributing to development:
 
 1. **JDK `1.8.0_60`**  or later<br>
 
