@@ -48,22 +48,6 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.resetData(newData);
         indicateTaskManagerChanged();
     }
-    
-    public TaskManager getCopy(){
-        return taskManagerCopy;
-    }
-    
-    public void updateCopy(ReadOnlyTaskManager newData){
-        taskManagerCopy = new TaskManager(newData);
-    }
-    
-    public void clearCopy(){
-        taskManagerCopy = new TaskManager(); // can change to delete all tasks once implemented
-    }
-    
-    public boolean checkChanges(){
-        return taskManagerCopy.isEmpty();
-    }
 
     @Override
     public ReadOnlyTaskManager getTaskManager() {
@@ -95,6 +79,22 @@ public class ModelManager extends ComponentManager implements Model {
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();
+    }
+    
+    public TaskManager getCopy(){
+        return taskManagerCopy;
+    }
+    
+    public void updateCopy(ReadOnlyTaskManager newData){
+        taskManagerCopy = new TaskManager(newData);
+    }
+    
+    public void clearCopy(){
+        taskManagerCopy = new TaskManager(); // can change to delete all tasks once implemented
+    }
+    
+    public boolean checkChanges(){
+        return taskManagerCopy.isEmpty();
     }
 
     //=========== Filtered Task List Accessors =============================================================
