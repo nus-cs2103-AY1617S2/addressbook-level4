@@ -10,7 +10,6 @@ import savvytodo.commons.core.Messages;
 import savvytodo.logic.commands.EditCommand;
 import savvytodo.model.category.Category;
 import savvytodo.model.task.Address;
-import savvytodo.model.task.Description;
 import savvytodo.model.task.Name;
 import savvytodo.model.task.Priority;
 import savvytodo.testutil.TaskBuilder;

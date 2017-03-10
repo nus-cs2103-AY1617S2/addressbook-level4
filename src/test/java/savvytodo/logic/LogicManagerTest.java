@@ -504,8 +504,8 @@ public class LogicManagerTest {
          * Generates a Task object with given name. Other fields will have some dummy values.
          */
         Task generateTaskWithName(String name) throws Exception {
-            return new Task(new Name(name), new Priority("low"), new Description("1 description"), new Address("House of 1"),
-                    new UniqueCategoryList(new Category("category")));
+            return new Task(new Name(name), new Priority("low"), new Description("1 description"),
+                    new Address("House of 1"), new UniqueCategoryList(new Category("category")));
         }
     }
 }
