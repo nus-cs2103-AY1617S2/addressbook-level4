@@ -38,7 +38,7 @@ public class AddCommand extends Command {
         final Set<Tag> tagSet = new HashSet<>();
         String deadline;
         int priority;
-        String notes;
+        String notes = "";
         boolean tagging = false;
         boolean noting = false;
         
@@ -57,7 +57,7 @@ public class AddCommand extends Command {
                 noting = true;
             }else{
                 if(tagging == true) {
-                    tagSet.add(input);
+                    tagSet.add(new Tag(input));
                 }else if(noting == true) {
                     notes.concat(input + " ");
                 }
