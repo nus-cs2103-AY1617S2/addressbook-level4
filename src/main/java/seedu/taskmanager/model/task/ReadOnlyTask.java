@@ -3,7 +3,7 @@ package seedu.taskmanager.model.task;
 import seedu.taskmanager.model.tag.UniqueTagList;
 
 /**
- * A read-only immutable interface for a Person in the addressbook.
+ * A read-only immutable interface for a Task in the taskmanager.
  * Implementations should guarantee: details are present and not null, field values are validated.
  */
 public interface ReadOnlyTask {
@@ -32,16 +32,16 @@ public interface ReadOnlyTask {
     }
 
     /**
-     * Formats the person as text, showing all contact details.
+     * Formats the task as text, showing all task details.
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getTitle())
-                .append(" Phone: ")
+                .append(" StartDate: ")
                 .append(getStartDate())
-                .append(" Email: ")
+                .append(" EndDate: ")
                 .append(getEndDate())
-                .append(" Address: ")
+                .append(" Description: ")
                 .append(getDescription())
                 .append(" Tags: ");
         getTags().forEach(builder::append);

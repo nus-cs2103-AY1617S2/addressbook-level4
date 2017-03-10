@@ -13,7 +13,7 @@ public class Description {
             "Person addresses can take any values, and it should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of the task must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String DESCRIPTION_VALIDATION_REGEX = "[^\\s].*";
@@ -21,7 +21,7 @@ public class Description {
     public final String value;
 
     /**
-     * Validates given address.
+     * Validates given task.
      *
      * @throws IllegalValueException if given description string is invalid.
      */

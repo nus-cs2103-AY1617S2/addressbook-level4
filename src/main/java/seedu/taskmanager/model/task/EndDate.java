@@ -4,7 +4,7 @@ package seedu.taskmanager.model.task;
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's start date in the address book.
+ * Represents a Task's start date in the task manager.
  * Guarantees: immutable; is valid as declared in {@link #isValidEndDate(String)}
  */
 public class EndDate {
@@ -16,7 +16,7 @@ public class EndDate {
     public final String value;
 
     /**
-     * Validates given email.
+     * Validates given end date.
      *
      * @throws IllegalValueException if given end date string is invalid.
      */

@@ -12,7 +12,7 @@ public class Title {
             "Task titles should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of the title must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String TITLE_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
@@ -34,7 +34,7 @@ public class Title {
     }
 
     /**
-     * Returns true if a given string is a valid person name.
+     * Returns true if a given string is a valid title.
      */
     public static boolean isValidTitle(String test) {
         return test.matches(TITLE_VALIDATION_REGEX);
