@@ -1,5 +1,6 @@
 package guitests.guihandles;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -73,11 +74,16 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     public boolean isSameTask(ReadOnlyTask task) {
+    	List<String> testTag = getTags();
+    	List<String> taskTag = getTags(task.getTags());
+    	Collections.sort(testTag);
+    	Collections.sort(taskTag);
+    	
         return getName().equals(task.getName().fullName)
                 && getDate().equals(task.getDate().value)
                 && getRemark().equals(task.getRemark().value)
                 && getLocation().equals(task.getLocation().value)
-                && getTags().equals(getTags(task.getTags()));
+                && testTag.equals(taskTag);
     }
 
     @Override

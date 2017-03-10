@@ -120,7 +120,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
      *
      * @param filteredTaskListIndex index of task to edit in filtered list
      * @param taskManagerIndex index of task to edit in the task manager.
-     *      Must refer to the task task as {@code filteredTaskListIndex}
+     *      Must refer to the task as {@code filteredTaskListIndex}
      * @param detailsToEdit details to edit the task with as input to the edit command
      * @param editedTask the expected task after editing the task's details
      */
