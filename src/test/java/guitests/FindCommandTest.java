@@ -2,12 +2,11 @@ package guitests;
 
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.testutil.TestTask;
-@Ignore
+
 public class FindCommandTest extends AddressBookGuiTest {
 
     @Test

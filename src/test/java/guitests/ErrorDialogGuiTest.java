@@ -4,12 +4,11 @@ import static junit.framework.TestCase.assertTrue;
 
 import java.io.IOException;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import guitests.guihandles.AlertDialogHandle;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
-@Ignore
+
 public class ErrorDialogGuiTest extends AddressBookGuiTest {
 
     @Test

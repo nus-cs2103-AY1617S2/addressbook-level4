@@ -9,7 +9,7 @@ import seedu.address.model.TaskList;
 import seedu.address.model.task.Task;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.TestUtil;
-@Ignore
+
 public class SampleDataTest extends AddressBookGuiTest {
     @Override
     protected TaskList getInitialData() {
