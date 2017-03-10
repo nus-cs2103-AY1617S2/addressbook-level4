@@ -281,9 +281,9 @@ public class TestUtil {
      * @return The modified tasks after removal of the subset from tasks.
      */
     public static TestTask[] removeTasksFromList(final TestTask[] tasks, TestTask... tasksToRemove) {
-        List<TestTask> listOfPersons = asList(tasks);
-        listOfPersons.removeAll(asList(tasksToRemove));
-        return listOfPersons.toArray(new TestTask[listOfPersons.size()]);
+        List<TestTask> listOfTasks = asList(tasks);
+        listOfTasks.removeAll(asList(tasksToRemove));
+        return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
 
 
@@ -315,9 +315,9 @@ public class TestUtil {
      * @return The modified array of tasks.
      */
     public static TestTask[] addTasksToList(final TestTask[] tasks, TestTask... tasksToAdd) {
-        List<TestTask> listOfPersons = asList(tasks);
-        listOfPersons.addAll(asList(tasksToAdd));
-        return listOfPersons.toArray(new TestTask[listOfPersons.size()]);
+        List<TestTask> listOfTasks = asList(tasks);
+        listOfTasks.addAll(asList(tasksToAdd));
+        return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
 
     private static <T> List<T> asList(T[] objs) {

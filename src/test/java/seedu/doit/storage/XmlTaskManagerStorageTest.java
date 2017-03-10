@@ -61,27 +61,27 @@ public class XmlTaskManagerStorageTest {
 
     @Test
     public void readAndSaveTaskManager_allInOrder_success() throws Exception {
-        String filePath = testFolder.getRoot().getPath() + "TempAddressBook.xml";
+        String filePath = testFolder.getRoot().getPath() + "TempTaskManager.xml";
         TypicalTestTasks td = new TypicalTestTasks();
         TaskManager original = td.getTypicalTaskManager();
-        XmlTaskManagerStorage xmlAddressBookStorage = new XmlTaskManagerStorage(filePath);
+        XmlTaskManagerStorage xmlTaskManagerStorage = new XmlTaskManagerStorage(filePath);
 
         //Save in new file and read back
-        xmlAddressBookStorage.saveTaskManager(original, filePath);
-        ReadOnlyTaskManager readBack = xmlAddressBookStorage.readTaskManager(filePath).get();
+        xmlTaskManagerStorage.saveTaskManager(original, filePath);
+        ReadOnlyTaskManager readBack = xmlTaskManagerStorage.readTaskManager(filePath).get();
         assertEquals(original, new TaskManager(readBack));
 
         //Modify data, overwrite exiting file, and read back
         original.addTask(new Task(td.hoon));
         original.removeTask(new Task(td.alice));
-        xmlAddressBookStorage.saveTaskManager(original, filePath);
-        readBack = xmlAddressBookStorage.readTaskManager(filePath).get();
+        xmlTaskManagerStorage.saveTaskManager(original, filePath);
+        readBack = xmlTaskManagerStorage.readTaskManager(filePath).get();
         assertEquals(original, new TaskManager(readBack));
 
         //Save and read without specifying file path
         original.addTask(new Task(td.ida));
-        xmlAddressBookStorage.saveTaskManager(original); //file path not specified
-        readBack = xmlAddressBookStorage.readTaskManager().get(); //file path not specified
+        xmlTaskManagerStorage.saveTaskManager(original); //file path not specified
+        readBack = xmlTaskManagerStorage.readTaskManager().get(); //file path not specified
         assertEquals(original, new TaskManager(readBack));
 
     }
@@ -92,8 +92,8 @@ public class XmlTaskManagerStorageTest {
         saveTaskManager(null, "SomeFile.xml");
     }
 
-    private void saveTaskManager(ReadOnlyTaskManager addressBook, String filePath) throws IOException {
-        new XmlTaskManagerStorage(filePath).saveTaskManager(addressBook, addToTestDataPathIfNotNull(filePath));
+    private void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException {
+        new XmlTaskManagerStorage(filePath).saveTaskManager(taskManager, addToTestDataPathIfNotNull(filePath));
     }
 
     @Test

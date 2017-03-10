@@ -107,8 +107,8 @@ public abstract class TaskManagerGuiTest {
     /**
      * Asserts the task shown in the card is same as the given task
      */
-    public void assertMatching(ReadOnlyTask person, taskCardHandle card) {
-        assertTrue(TestUtil.compareCardAndTask(card, person));
+    public void assertMatching(ReadOnlyTask task, taskCardHandle card) {
+        assertTrue(TestUtil.compareCardAndTask(card, task));
     }
 
     /**

@@ -93,7 +93,7 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> deadline} into an {@code Optional<Deadline>} if {@code deadline} is present.
      */
-    public static Optional<Deadline> parseEmail(Optional<String> deadline) throws IllegalValueException {
+    public static Optional<Deadline> parseDeadline(Optional<String> deadline) throws IllegalValueException {
         assert deadline != null;
         return deadline.isPresent() ? Optional.of(new Deadline(deadline.get())) : Optional.empty();
     }
