@@ -21,6 +21,8 @@ public class SaveCommand extends Command {
             + "Example: " + COMMAND_WORD
             + " C:\\Users\\Tom\\Desktop";
 
+    public static final String DATA_FILE_NAME = "\\ezDo.xml";
+    public static final String MESSAGE_DIRECTORY_PATH_DOES_NOT_EXIST = "The directory path given does not exist.";
     public static final String MESSAGE_DIRECTORY_PATH_INVALID = "The directory path given is invalid.";
     public static final String MESSAGE_SAVE_TASK_SUCCESS = "New Save Location: %1$s";
 
