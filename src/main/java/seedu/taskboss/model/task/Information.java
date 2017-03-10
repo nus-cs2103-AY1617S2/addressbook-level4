@@ -10,7 +10,7 @@ import seedu.taskboss.commons.exceptions.IllegalValueException;
 public class Information {
 
     public static final String MESSAGE_INFORMATION_CONSTRAINTS =
-            "Task information can take any values, and it should not be blank";
+            "Task information can take any values, and it can be blank";
 
     /*
      * The first character of the information must not be a whitespace,
@@ -37,7 +37,9 @@ public class Information {
      * Returns true if a given string is a valid person email.
      */
     public static boolean isValidInformation(String test) {
-        return test.matches(INFORMATION_VALIDATION_REGEX);
+        return test.matches(INFORMATION_VALIDATION_REGEX) ||
+                test.equals("");
+
     }
 
     @Override
