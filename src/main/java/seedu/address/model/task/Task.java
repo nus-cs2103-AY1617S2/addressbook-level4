@@ -56,7 +56,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getDeadline(), source.getID(), source.getDescription());
+        this(source.getName(), source.getDeadline(), source.getID(), source.getDescription(), source.getTags());
     }
 
     public Task(Name name2, IdentificationNumber identificationNumber, Description description2, Deadline deadline2,
@@ -74,6 +74,10 @@ public class Task implements ReadOnlyTask {
     @Override
     public IdentificationNumber getID() {
         return ID;
+    }
+
+    public boolean isIDUnassigned() {
+        return ID.equals(DEFAULT_ID);
     }
 
     public void setName(Name name) {
