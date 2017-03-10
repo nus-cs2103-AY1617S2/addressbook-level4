@@ -50,28 +50,28 @@ public class Task implements Comparable<Task> {
     }
 
     public boolean validateDescriptionMustNotBeEmpty() {
-        return getDescription() != null && !getDescription().isEmpty();
+        return description != null && !description.isEmpty();
     }
 
     public boolean validateStartDateMustBeBeforeEndDate() {
-        if (getStartDateTime() != null && getEndDateTime() != null) {
-            return getStartDateTime().isBefore(getEndDateTime());
+        if (startDateTime != null && endDateTime != null) {
+            return startDateTime.isBefore(endDateTime);
         }
         return true;
     }
 
     public boolean validateTaskIsFloatingIsEventOrHasDeadline() {
-        return getStartDateTime() == null || getEndDateTime() != null;
+        return startDateTime == null || endDateTime != null;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Task // instanceof handles nulls
-                && this.getDescription().equals(((Task) other).getDescription())) // state check
+                && this.description.equals(((Task) other).description)) // state check
                 && this.allTags.equals(((Task) other).allTags)
-                && Objects.equals(this.getStartDateTime(), ((Task) other).getStartDateTime()) // handles null
-                && Objects.equals(this.getEndDateTime(), ((Task) other).getEndDateTime()) // handles null
+                && Objects.equals(this.startDateTime, ((Task) other).startDateTime) // handles null
+                && Objects.equals(this.endDateTime, ((Task) other).endDateTime) // handles null
                 && Objects.equals(this.completionDateTime, ((Task) other).completionDateTime); // handles null
     }
 
@@ -111,7 +111,7 @@ public class Task implements Comparable<Task> {
     }
 
     public boolean isOverdue() {
-        return !isCompleted() && (getStartDateTime() != null && getStartDateTime().isBefore(LocalDateTime.now()));
+        return !isCompleted() && (endDateTime != null && endDateTime.isBefore(LocalDateTime.now()));
     }
 
     public boolean isCompleted() {
@@ -120,7 +120,7 @@ public class Task implements Comparable<Task> {
 
     public boolean isAnyKeywordsContainedInDescriptionIgnoreCase(String[] keywords) {
         for (String keyword: keywords) {
-            if (getDescription().toLowerCase().contains(keyword.toLowerCase())) {
+            if (description.toLowerCase().contains(keyword.toLowerCase())) {
                 return true;
             }
         }
@@ -140,13 +140,13 @@ public class Task implements Comparable<Task> {
 
     @Override
     public int compareTo(Task comparison) {
-        if (getStartDateTime().compareTo(comparison.getStartDateTime()) != 0) {
-            return getStartDateTime().compareTo(comparison.getStartDateTime());
+        if (endDateTime.compareTo(comparison.endDateTime) != 0) {
+            return endDateTime.compareTo(comparison.endDateTime);
         } else if (false) {
             //TODO add priority comparison with variable
             return -1;
         } else {
-            return this.getDescription().compareToIgnoreCase(comparison.getDescription());
+            return this.description.compareToIgnoreCase(comparison.description);
         }
     }
 
