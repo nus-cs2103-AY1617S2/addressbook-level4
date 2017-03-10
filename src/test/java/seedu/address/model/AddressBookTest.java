@@ -24,11 +24,11 @@ public class AddressBookTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final AddressBook addressBook = new AddressBook();
+    private final TaskList addressBook = new TaskList();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), addressBook.getTaskList());
         assertEquals(Collections.emptyList(), addressBook.getTagList());
     }
 
@@ -40,7 +40,7 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = new TypicalTestTasks().getTypicalAddressBook();
+        TaskList newData = new TypicalTestTasks().getTypicalAddressBook();
         addressBook.resetData(newData);
         assertEquals(newData, addressBook);
     }
@@ -59,8 +59,8 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
-        AddressBook typicalAddressBook = new TypicalTestTasks().getTypicalAddressBook();
-        List<ReadOnlyTask> newPersons = typicalAddressBook.getPersonList();
+        TaskList typicalAddressBook = new TypicalTestTasks().getTypicalAddressBook();
+        List<ReadOnlyTask> newPersons = typicalAddressBook.getTaskList();
         List<Tag> newTags = new ArrayList<>(typicalAddressBook.getTagList());
         // Repeat the first tag twice
         newTags.add(newTags.get(0));
@@ -73,7 +73,7 @@ public class AddressBookTest {
     /**
      * A stub ReadOnlyAddressBook whose persons and tags lists can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class AddressBookStub implements ReadOnlyTaskList {
         private final ObservableList<ReadOnlyTask> persons = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
@@ -83,7 +83,7 @@ public class AddressBookTest {
         }
 
         @Override
-        public ObservableList<ReadOnlyTask> getPersonList() {
+        public ObservableList<ReadOnlyTask> getTaskList() {
             return persons;
         }
 
