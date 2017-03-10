@@ -9,11 +9,10 @@ public class InformationTest {
 
     @Test
     public void isValidAddress() {
-        // invalid addresses
-        assertFalse(Information.isValidInformation("")); // empty string
-        assertFalse(Information.isValidInformation(" ")); // spaces only
 
         // valid addresses
+        assertTrue(Information.isValidInformation("")); // empty string
+        assertTrue(Information.isValidInformation(" ")); // spaces only
         assertTrue(Information.isValidInformation("Blk 456, Den Road, #01-355"));
         assertTrue(Information.isValidInformation("-")); // one character
         assertTrue(Information.isValidInformation("Leng Inc; 1234 Market St;"

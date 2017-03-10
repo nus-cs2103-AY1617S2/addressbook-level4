@@ -209,9 +209,9 @@ public class LogicManagerTest {
     public void execute_add_invalidTaskData() {
         assertCommandFailure("add []\\[;] p/1 i/valid, information",
                 Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/not_numbers i/valid, information",
+        assertCommandFailure("add n/Valid Name p/not_numbers i/valid, information",
                 PriorityLevel.MESSAGE_PRIORITY_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/1 i/valid, information c/invalid_-[.category",
+        assertCommandFailure("add n/Valid Name p/1 i/valid, information c/invalid_-[.category",
                 Category.MESSAGE_CATEGORY_CONSTRAINTS);
 
     }
@@ -449,7 +449,7 @@ public class LogicManagerTest {
 
             cmd.append("add ");
 
-            cmd.append(p.getName().toString());
+            cmd.append(" n/").append(p.getName().toString());
             cmd.append(" p/").append(p.getPriorityLevel());
             cmd.append(" i/").append(p.getInformation());
 

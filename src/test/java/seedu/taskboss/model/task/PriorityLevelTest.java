@@ -10,13 +10,13 @@ public class PriorityLevelTest {
     @Test
     public void isValidPriorityLevel() {
         // invalid priority level
-        assertFalse(PriorityLevel.isValidPriorityLevel("")); // empty string
         assertFalse(PriorityLevel.isValidPriorityLevel(" ")); // spaces only
         assertFalse(PriorityLevel.isValidPriorityLevel("priorityLevel")); // non-numeric
         assertFalse(PriorityLevel.isValidPriorityLevel("9")); // invalid range
         assertFalse(PriorityLevel.isValidPriorityLevel("0")); // invalid range
 
         // valid priority level
+        assertFalse(PriorityLevel.isValidPriorityLevel("")); // empty string
         assertTrue(PriorityLevel.isValidPriorityLevel("1"));
         assertTrue(PriorityLevel.isValidPriorityLevel("2"));
         assertTrue(PriorityLevel.isValidPriorityLevel("3"));
