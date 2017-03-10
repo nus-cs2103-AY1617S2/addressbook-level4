@@ -9,7 +9,6 @@ import guitests.guihandles.TaskCardHandle;
 import seedu.taskboss.commons.core.Messages;
 import seedu.taskboss.logic.commands.EditCommand;
 import seedu.taskboss.model.category.Category;
-import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
 import seedu.taskboss.testutil.TaskBuilder;
@@ -94,9 +93,6 @@ public class EditCommandTest extends TaskBossGuiTest {
 
         commandBox.runCommand("edit 1 p/abcd");
         assertResultMessage(PriorityLevel.MESSAGE_PRIORITY_CONSTRAINTS);
-
-        commandBox.runCommand("edit 1 i/");
-        assertResultMessage(Information.MESSAGE_INFORMATION_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 c/*&");
         assertResultMessage(Category.MESSAGE_CATEGORY_CONSTRAINTS);

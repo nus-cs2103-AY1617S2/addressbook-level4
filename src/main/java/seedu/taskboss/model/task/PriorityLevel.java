@@ -9,7 +9,7 @@ import seedu.taskboss.commons.exceptions.IllegalValueException;
 public class PriorityLevel {
 
     public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority level should only contain"
-            + " numbers 1, 2 or 3";
+            + " numbers 1, 2 or 3, or it can be blank.";
     public static final String PRIORITY_VALIDATION_REGEX = "[1-3]";
 
     public final String value;
@@ -32,7 +32,8 @@ public class PriorityLevel {
      * Returns true if a given string is a valid task priority level.
      */
     public static boolean isValidPriorityLevel(String test) {
-        return test.matches(PRIORITY_VALIDATION_REGEX);
+        return test.matches(PRIORITY_VALIDATION_REGEX) ||
+                "".equals(test);
     }
 
     @Override
