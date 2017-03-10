@@ -4,7 +4,7 @@ package savvytodo.model.task;
 import savvytodo.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's address in the address book.
+ * Represents a Task's address in the task manager.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
 public class Address {

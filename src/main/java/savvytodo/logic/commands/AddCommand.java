@@ -15,7 +15,7 @@ import savvytodo.model.task.Task;
 import savvytodo.model.task.UniqueTaskList;
 
 /**
- * Adds a task to the address book.
+ * Adds a task to the task manager.
  */
 public class AddCommand extends Command {
 
@@ -27,7 +27,7 @@ public class AddCommand extends Command {
             + "Dinner p/low d/with family a/311, Clementi Ave 2, #02-25 c/friends c/owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
 
     private final Task toAdd;
 

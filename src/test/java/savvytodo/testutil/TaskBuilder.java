@@ -44,13 +44,13 @@ public class TaskBuilder {
         return this;
     }
 
-    public TaskBuilder withPriority(String phone) throws IllegalValueException {
-        this.task.setPhone(new Priority(phone));
+    public TaskBuilder withPriority(String priority) throws IllegalValueException {
+        this.task.setPhone(new Priority(priority));
         return this;
     }
 
-    public TaskBuilder withEmail(String email) throws IllegalValueException {
-        this.task.setEmail(new Description(email));
+    public TaskBuilder withDescription(String description) throws IllegalValueException {
+        this.task.setEmail(new Description(description));
         return this;
     }
 

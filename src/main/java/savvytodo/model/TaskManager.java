@@ -75,7 +75,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     }
 
     /**
-     * Adds a task to the address book.
+     * Adds a task to the task manager.
      * Also checks the new task's categories and updates {@link #categories} with any new categoies found,
      * and updates the Category objects in the task to point to those in {@link #categories}.
      *

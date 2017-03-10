@@ -10,33 +10,33 @@ import savvytodo.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
+    public TestTask assignment, appointment, birthday, meeting, test, presentation, project, discussion, interview;
 
     public TypicalTestTasks() {
         try {
-            alice = new TaskBuilder().withName("Alice Pauline")
-                    .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@gmail.com")
-                    .withPriority("low")
+            assignment = new TaskBuilder().withName("Assignment 1")
+                    .withAddress("None").withDescription("2359 Mon 23 Aug")
+                    .withPriority("high")
                     .withCategories("friends").build();
-            benson = new TaskBuilder().withName("Benson Meier").withAddress("311, Clementi Ave 2, #02-25")
-                    .withEmail("johnd@gmail.com").withPriority("low")
+            appointment = new TaskBuilder().withName("dental").withAddress("KTPH")
+                    .withDescription("Wisdom tooth").withPriority("high")
                     .withCategories("owesMoney", "friends").build();
-            carl = new TaskBuilder().withName("Carl Kurz").withPriority("low")
-                    .withEmail("heinz@yahoo.com").withAddress("wall street").build();
-            daniel = new TaskBuilder().withName("Daniel Meier").withPriority("low")
-                    .withEmail("cornelia@google.com").withAddress("10th street").build();
-            elle = new TaskBuilder().withName("Elle Meyer").withPriority("low")
-                    .withEmail("werner@gmail.com").withAddress("michegan ave").build();
-            fiona = new TaskBuilder().withName("Fiona Kunz").withPriority("low")
-                    .withEmail("lydia@gmail.com").withAddress("little tokyo").build();
-            george = new TaskBuilder().withName("George Best").withPriority("low")
-                    .withEmail("anna@google.com").withAddress("4th street").build();
+            birthday = new TaskBuilder().withName("My birthday").withPriority("medium")
+                    .withDescription("Celebration @ 1pm").withAddress("wall street").build();
+            meeting = new TaskBuilder().withName("CS2103 Project Meeting").withPriority("medium")
+                    .withDescription("cornelia@google.com").withAddress("10th street").build();
+            test = new TaskBuilder().withName("CS2103 midterm test").withPriority("high")
+                    .withDescription("2pm Mon 23 Aug").withAddress("NUS MPSH 4").build();
+            presentation = new TaskBuilder().withName("Informal Presentation").withPriority("low")
+                    .withDescription("3pm").withAddress("NUS HALL").build();
+            project = new TaskBuilder().withName("Project Milestone 2").withPriority("high")
+                    .withDescription("anna@google.com").withAddress("4th street").build();
 
             // Manually added
-            hoon = new TaskBuilder().withName("Hoon Meier").withPriority("low")
-                    .withEmail("stefan@mail.com").withAddress("little india").build();
-            ida = new TaskBuilder().withName("Ida Mueller").withPriority("low")
-                    .withEmail("hans@google.com").withAddress("chicago ave").build();
+            discussion = new TaskBuilder().withName("CS2103 Project Discussion").withPriority("low")
+                    .withDescription("stefan@mail.com").withAddress("NUS MALL").build();
+            interview = new TaskBuilder().withName("Google Interview").withPriority("medium")
+                    .withDescription("Prepare for interview questions").withAddress("Google SG").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -54,7 +54,7 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
+        return new TestTask[]{assignment, appointment, birthday, meeting, test, presentation, project};
     }
 
     public TaskManager getTypicalTaskManager() {

@@ -192,12 +192,10 @@ public class LogicManagerTest {
 
     @Test
     public void execute_add_invalidTaskData() {
-        assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address", Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
+        assertCommandFailure("add []\\[;] p/low d/valid description a/valid, address", Name.MESSAGE_NAME_CONSTRAINTS);
+        assertCommandFailure("add Valid Name p/not_numbers d/valid description a/valid, address",
                 Priority.MESSAGE_PRIORITY_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
-                Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.category",
+        assertCommandFailure("add Valid Name p/low d/valid description a/valid, address c/invalid_-[.category",
                 Category.MESSAGE_CATEGORY_CONSTRAINTS);
 
     }
@@ -206,7 +204,7 @@ public class LogicManagerTest {
     public void execute_add_successful() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.adam();
+        Task toBeAdded = helper.assessment();
         TaskManager expectedAB = new TaskManager();
         expectedAB.addCategory(toBeAdded);
 
@@ -220,7 +218,7 @@ public class LogicManagerTest {
     public void execute_addDuplicate_notAllowed() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.adam();
+        Task toBeAdded = helper.assessment();
 
         // setup starting state
         model.addTask(toBeAdded); // task already in internal address book
@@ -389,10 +387,10 @@ public class LogicManagerTest {
      */
     class TestDataHelper {
 
-        Task adam() throws Exception {
-            Name name = new Name("Adam Brown");
-            Priority privatePhone = new Priority("low");
-            Description description = new Description("adam@gmail.com");
+        Task assessment() throws Exception {
+            Name name = new Name("Assessment 2");
+            Priority privatePhone = new Priority("high");
+            Description description = new Description("Weightage 15%");
             Address privateAddress = new Address("111, alpha street");
             Category category1 = new Category("category1");
             Category category2 = new Category("longercategory2");
@@ -423,13 +421,13 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getName().toString());
-            cmd.append(" e/").append(p.getDescription());
+            cmd.append(" d/").append(p.getDescription());
             cmd.append(" p/").append(p.getPriority());
             cmd.append(" a/").append(p.getAddress());
 
             UniqueCategoryList categories = p.getCategories();
             for (Category t : categories) {
-                cmd.append(" t/").append(t.categoryName);
+                cmd.append(" c/").append(t.categoryName);
             }
 
             return cmd.toString();
@@ -506,7 +504,7 @@ public class LogicManagerTest {
          * Generates a Task object with given name. Other fields will have some dummy values.
          */
         Task generateTaskWithName(String name) throws Exception {
-            return new Task(new Name(name), new Priority("1"), new Description("1@email"), new Address("House of 1"),
+            return new Task(new Name(name), new Priority("low"), new Description("1 description"), new Address("House of 1"),
                     new UniqueCategoryList(new Category("category")));
         }
     }

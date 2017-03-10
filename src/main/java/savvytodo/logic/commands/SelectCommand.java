@@ -8,7 +8,7 @@ import savvytodo.logic.commands.exceptions.CommandException;
 import savvytodo.model.task.ReadOnlyTask;
 
 /**
- * Selects a task identified using it's last displayed index from the address book.
+ * Selects a task identified using it's last displayed index from the task manager.
  */
 public class SelectCommand extends Command {
 

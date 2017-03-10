@@ -4,7 +4,7 @@ package savvytodo.model.category;
 import savvytodo.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Category in the address book.
+ * Represents a Category in the task manager.
  * Guarantees: immutable; name is valid as declared in {@link #isValidCategoryName(String)}
  */
 public class Category {

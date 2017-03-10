@@ -28,7 +28,7 @@ public class SampleDataUtil {
                             new Address("Blk 436 Botanic Gardens Street 26, #16-43"),
                             new UniqueCategoryList("family")),
                     new Task(new Name("Driving lesson"), new Priority("medium"), new Description("Bring PDL and wear shoes"),
-                            new Address("Ubi Crescent"), new UniqueCategoryList("Drving")),
+                            new Address("Ubi Crescent"), new UniqueCategoryList("Driving")),
                     new Task(new Name("CS8888 Test"), new Priority("high"), new Description("3pm, Open Book"),
                             new Address("NUS, MPSH 4"), new UniqueCategoryList("test")) };
         } catch (IllegalValueException e) {

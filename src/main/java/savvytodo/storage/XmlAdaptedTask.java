@@ -23,9 +23,9 @@ public class XmlAdaptedTask {
     @XmlElement(required = true)
     private String name;
     @XmlElement(required = true)
-    private String phone;
+    private String priority;
     @XmlElement(required = true)
-    private String email;
+    private String description;
     @XmlElement(required = true)
     private String address;
 
@@ -46,8 +46,8 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getName().fullName;
-        phone = source.getPriority().value;
-        email = source.getDescription().value;
+        priority = source.getPriority().value;
+        description = source.getDescription().value;
         address = source.getAddress().value;
         categorized = new ArrayList<>();
         for (Category category : source.getCategories()) {
@@ -66,10 +66,10 @@ public class XmlAdaptedTask {
             taskCategories.add(category.toModelType());
         }
         final Name name = new Name(this.name);
-        final Priority phone = new Priority(this.phone);
-        final Description email = new Description(this.email);
+        final Priority priority = new Priority(this.priority);
+        final Description description = new Description(this.description);
         final Address address = new Address(this.address);
         final UniqueCategoryList categories = new UniqueCategoryList(taskCategories);
-        return new Task(name, phone, email, address, categories);
+        return new Task(name, priority, description, address, categories);
     }
 }

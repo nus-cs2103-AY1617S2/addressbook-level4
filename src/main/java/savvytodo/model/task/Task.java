@@ -6,7 +6,7 @@ import savvytodo.commons.util.CollectionUtil;
 import savvytodo.model.category.UniqueCategoryList;
 
 /**
- * Represents a Task in the address book.
+ * Represents a Task in the task manager.
  * Guarantees: details are present and not null, field values are validated.
  */
 public class Task implements ReadOnlyTask {

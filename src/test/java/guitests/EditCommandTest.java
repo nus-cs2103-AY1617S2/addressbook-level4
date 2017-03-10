@@ -25,18 +25,18 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby p/91234567 e/bobby@gmail.com a/Block 123, Bobby Street 3 t/husband";
+        String detailsToEdit = "Project 1 p/high d/2pm a/NUS mall c/Meeting";
         int taskManagerIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withName("Bobby").withPriority("91234567").withEmail("bobby@gmail.com")
-                .withAddress("Block 123, Bobby Street 3").withCategories("husband").build();
+        TestTask editedTask = new TaskBuilder().withName("Project 1").withPriority("high").withDescription("2pm")
+                .withAddress("NUS mall").withCategories("Meeting").build();
 
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
 
     @Test
     public void edit_notAllFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "t/sweetie t/bestie";
+        String detailsToEdit = "c/sweetie c/bestie";
         int taskManagerIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
@@ -47,7 +47,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_clearCategories_success() throws Exception {
-        String detailsToEdit = "t/";
+        String detailsToEdit = "c/";
         int taskManagerIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
@@ -58,14 +58,14 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
-        commandBox.runCommand("find Elle");
+        commandBox.runCommand("find test");
 
-        String detailsToEdit = "Belle";
+        String detailsToEdit = "Midterm test 2";
         int filteredTaskListIndex = 1;
         int taskManagerIndex = 5;
 
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withName("Belle").build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withName("Midterm test 2").build();
 
         assertEditSuccess(filteredTaskListIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
@@ -96,20 +96,17 @@ public class EditCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("edit 1 p/abcd");
         assertResultMessage(Priority.MESSAGE_PRIORITY_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 e/yahoo!!!");
-        assertResultMessage(Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
-
         commandBox.runCommand("edit 1 a/");
         assertResultMessage(Address.MESSAGE_ADDRESS_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 t/*&");
+        commandBox.runCommand("edit 1 c/*&");
         assertResultMessage(Category.MESSAGE_CATEGORY_CONSTRAINTS);
     }
 
     @Test
     public void edit_duplicateTask_failure() {
         commandBox.runCommand(
-                "edit 3 Alice Pauline p/85355255 e/alice@gmail.com " + "a/123, Jurong West Ave 6, #08-111 t/friends");
+                "edit 3 Assignment 1 p/high d/2359 Mon 23 Aug " + "a/None");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
