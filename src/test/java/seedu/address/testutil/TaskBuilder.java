@@ -4,57 +4,57 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Description;
-import seedu.address.model.task.TaskDate;
 import seedu.address.model.task.Priority;
+import seedu.address.model.task.TaskDate;
 
 /**
  *
  */
 public class TaskBuilder {
 
-    private TestTask Task;
+    private TestTask task;
 
     public TaskBuilder() {
-        this.Task = new TestTask();
+        this.task = new TestTask();
     }
 
     /**
-     * Initializes the TaskBuilder with the data of {@code TaskToCopy}.
+     * Initializes the TaskBuilder with the data of {@code taskToCopy}.
      */
-    public TaskBuilder(TestTask TaskToCopy) {
-        this.Task = new TestTask(TaskToCopy);
+    public TaskBuilder(TestTask taskToCopy) {
+        this.task = new TestTask(taskToCopy);
     }
 
     public TaskBuilder withDescription(String description) throws IllegalValueException {
-        this.Task.setDescription(new Description(description));
+        this.task.setDescription(new Description(description));
         return this;
     }
 
     public TaskBuilder withPriority(String priority) throws IllegalValueException {
-        this.Task.setPriority(new Priority(priority));
+        this.task.setPriority(new Priority(priority));
         return this;
     }
 
     public TaskBuilder withStartDate(String startDate) throws IllegalValueException {
-        this.Task.setStartDate(new TaskDate(startDate));
+        this.task.setStartDate(new TaskDate(startDate));
         return this;
     }
 
     public TaskBuilder withEndDate(String endDate) throws IllegalValueException {
-        this.Task.setEndDate(new TaskDate(endDate));
+        this.task.setEndDate(new TaskDate(endDate));
         return this;
     }
 
     public TaskBuilder withTags(String ... tags) throws IllegalValueException {
-        Task.setTags(new UniqueTagList());
+        task.setTags(new UniqueTagList());
         for (String tag: tags) {
-            Task.getTags().add(new Tag(tag));
+            task.getTags().add(new Tag(tag));
         }
         return this;
     }
 
     public TestTask build() {
-        return this.Task;
+        return this.task;
     }
 
 }

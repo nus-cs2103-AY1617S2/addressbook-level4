@@ -59,9 +59,9 @@ public class TypicalTestTasks {
     }
 
     public static void loadAddressBookWithSampleData(TaskList ab) {
-        for (TestTask Task : new TypicalTestTasks().getTypicalTasks()) {
+        for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
             try {
-                ab.addTask(new Task(Task));
+                ab.addTask(new Task(task));
             } catch (UniqueTaskList.DuplicateTaskException e) {
                 assert false : "not possible";
             }

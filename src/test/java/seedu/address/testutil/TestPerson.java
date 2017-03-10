@@ -2,9 +2,9 @@ package seedu.address.testutil;
 
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Description;
-import seedu.address.model.task.TaskDate;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.TaskDate;
 
 /**
  * A mutable person object. For testing only.
@@ -67,10 +67,10 @@ public class TestPerson implements ReadOnlyTask {
         return startDate;
     }
 
-	@Override
-	public TaskDate getEndDate() {
-		return endDate;
-	}
+    @Override
+    public TaskDate getEndDate() {
+        return endDate;
+    }
 
     @Override
     public UniqueTagList getTags() {
