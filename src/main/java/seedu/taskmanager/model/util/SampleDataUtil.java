@@ -15,31 +15,28 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         try {
             return new Task[] {
-                new Task(new Title("Alex Yeoh"), new StartDate("87438807"), new EndDate("alexyeoh@gmail.com"),
-                    new Description("Blk 30 Geylang Street 29, #06-40"),
-                    new UniqueTagList("friends")),
-                new Task(new Title("Bernice Yu"), new StartDate("99272758"), new EndDate("berniceyu@gmail.com"),
-                    new Description("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                    new UniqueTagList("colleagues", "friends")),
-                new Task(new Title("Charlotte Oliveiro"), new StartDate("93210283"), new EndDate("charlotte@yahoo.com"),
-                    new Description("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                    new UniqueTagList("neighbours")),
-                new Task(new Title("David Li"), new StartDate("91031282"), new EndDate("lidavid@google.com"),
-                    new Description("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                    new UniqueTagList("family")),
-                new Task(new Title("Irfan Ibrahim"), new StartDate("92492021"), new EndDate("irfan@outlook.com"),
-                    new Description("Blk 47 Tampines Street 20, #17-35"),
-                    new UniqueTagList("classmates")),
-                new Task(new Title("Roy Balakrishnan"), new StartDate("92624417"), new EndDate("royb@gmail.com"),
-                    new Description("Blk 45 Aljunied Street 85, #11-31"),
-                    new UniqueTagList("colleagues"))
+                new Task(new Title("Visit Alex Yeoh"), new StartDate("01/11/2017"), new EndDate("02/11/2017"),
+                    new Description("His address is Blk 30 Geylang Street 29, #06-40"),
+                    new UniqueTagList("social")),
+                new Task(new Title("Collect files from Bernice Yu"), new StartDate("05/11/2017"), new EndDate("08/11/2017"),
+                    new Description("Important business files"),
+                    new UniqueTagList("colleagues", "business")),
+                new Task(new Title("Visit Charlotte Oliveiro"), new StartDate("20/12/2017"), new EndDate("20/12/2017"),
+                    new Description("Her address is Blk 11 Ang Mo Kio Street 74, #11-04"),
+                    new UniqueTagList("social")),
+                new Task(new Title("Call David Li about CS2103 project"), new StartDate("08/08/2017"), new EndDate("10/08/2017"),
+                    new Description("his number is 12345678"),
+                    new UniqueTagList("schoolwork")),
+                new Task(new Title("Submit project report"), new StartDate("20/07/2017"), new EndDate("21/07/2017"),
+                    new Description("Submit to tutor in class"),
+                    new UniqueTagList("schoolwork"))               
             };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);
         }
     }
 
-    public static ReadOnlyTaskManager getSampleAddressBook() {
+    public static ReadOnlyTaskManager getSampleTaskManager() {
         try {
             TaskManager sampleAB = new TaskManager();
             for (Task sampleTask : getSampleTasks()) {
@@ -47,7 +44,7 @@ public class SampleDataUtil {
             }
             return sampleAB;
         } catch (DuplicateTaskException e) {
-            throw new AssertionError("sample data cannot contain duplicate persons", e);
+            throw new AssertionError("sample data cannot contain duplicate tasks", e);
         }
     }
 }
