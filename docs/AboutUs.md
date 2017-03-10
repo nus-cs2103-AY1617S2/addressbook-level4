@@ -12,7 +12,7 @@ Responsibilities: Documentation, Deliverables and Deadlines, Scheduling and trac
 -----
 
 #### [Daniel Mullen](http://github.com/DanielMullen3)
-<img src="images/daniel.jpg" width="150"><br>
+<img src="images/dan2.jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: Testing, Back End
 
