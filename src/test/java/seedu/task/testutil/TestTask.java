@@ -16,7 +16,6 @@ public class TestTask implements ReadOnlyTask {
     private Location location;
     private Remark remark;
     private Date date;
-    private boolean isDone;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -31,7 +30,6 @@ public class TestTask implements ReadOnlyTask {
         this.date = taskToCopy.getDate();
         this.remark = taskToCopy.getRemark();
         this.location = taskToCopy.getLocation();
-        this.isDone = false;
         this.tags = taskToCopy.getTags();
     }
 
@@ -49,10 +47,6 @@ public class TestTask implements ReadOnlyTask {
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    public void setIsDone(boolean isDone) {
-        this.isDone = isDone;
     }
 
     public void setTags(UniqueTagList tags) {
@@ -79,11 +73,6 @@ public class TestTask implements ReadOnlyTask {
         return location;
     }
 
-    @Override
-    public boolean isDone() {
-        return isDone;
-    }
-    
     @Override
     public UniqueTagList getTags() {
         return tags;

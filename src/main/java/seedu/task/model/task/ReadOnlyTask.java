@@ -12,7 +12,6 @@ public interface ReadOnlyTask {
     Date getDate();
     Remark getRemark();
     Location getLocation();
-    boolean isDone();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
