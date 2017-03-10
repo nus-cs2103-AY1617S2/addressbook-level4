@@ -10,7 +10,7 @@ import seedu.address.commons.events.BaseEvent;
 public abstract class ComponentManager {
     protected EventsCenter eventsCenter;
 
-    /**
+/**
      * Uses default {@link EventsCenter}
      */
     public ComponentManager() {
