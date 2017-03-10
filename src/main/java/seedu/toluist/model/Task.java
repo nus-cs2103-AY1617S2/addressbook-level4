@@ -95,20 +95,21 @@ public class Task implements Comparable<Task> {
     }
 
     public boolean addTag(Tag tag) {
-        boolean isDifferent = true;
         if (allTags.contains(tag)) {
-            isDifferent = false;
+            return false;
         }
 
-        if (isDifferent) {
-            this.allTags.add(tag);
-        }
-
-        return isDifferent;
+        this.allTags.add(tag);
+        return true;
     }
 
-    public void removeTag(Tag tag) {
-        this.allTags.remove(tag);
+    public boolean removeTag(Tag tag) {
+        if (!allTags.contains(tag)) {
+            return false;
+        }
+
+        allTags.remove(tag);
+        return true;
     }
 
     public void replaceTags(Collection<Tag> tags) {
