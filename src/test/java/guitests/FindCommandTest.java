@@ -12,11 +12,11 @@ public class FindCommandTest extends TaskManagerGuiTest {
     @Test
     public void find_nonEmptyList() {
         assertFindResult("find Mark"); // no results
-        assertFindResult("find Meier", td.benson, td.daniel); // multiple results
+        assertFindResult("find Meier", td.buy2, td.meeting2); // multiple results
 
         //find after deleting one result
         commandBox.runCommand("delete 1");
-        assertFindResult("find Meier", td.daniel);
+        assertFindResult("find Meier", td.meeting2);
     }
 
     @Test
@@ -34,7 +34,7 @@ public class FindCommandTest extends TaskManagerGuiTest {
     private void assertFindResult(String command, TestTask... expectedHits) {
         commandBox.runCommand(command);
         assertListSize(expectedHits.length);
-        assertResultMessage(expectedHits.length + " persons listed!");
+        assertResultMessage(expectedHits.length + " tasks listed!");
         assertTrue(taskListPanel.isListMatching(expectedHits));
     }
 }

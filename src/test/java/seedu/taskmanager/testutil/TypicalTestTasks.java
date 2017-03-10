@@ -10,33 +10,33 @@ import seedu.taskmanager.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
+    public TestTask buy1, buy2, meeting1, meeting2, submit1, submit2, send1, send2, call1;
 
     public TypicalTestTasks() {
         try {
-            alice = new TaskBuilder().withTitle("Alice Pauline")
-                    .withDescription("123, Jurong West Ave 6, #08-111").withEndDate("alice@gmail.com")
-                    .withStartDate("85355255")
+            buy1 = new TaskBuilder().withTitle("Buy Banana")
+                    .withDescription("Sunpride brand").withEndDate("12/03/2017")
+                    .withStartDate("12/03/2017")
                     .withTags("friends").build();
-            benson = new TaskBuilder().withTitle("Benson Meier").withDescription("311, Clementi Ave 2, #02-25")
-                    .withEndDate("johnd@gmail.com").withStartDate("98765432")
+            buy2 = new TaskBuilder().withTitle("Buy new house").withDescription("at 311, Clementi Ave 2, #02-25")
+                    .withEndDate("15/03/2017").withStartDate("12/03/2017")
                     .withTags("owesMoney", "friends").build();
-            carl = new TaskBuilder().withTitle("Carl Kurz").withStartDate("95352563")
-                    .withEndDate("heinz@yahoo.com").withDescription("wall street").build();
-            daniel = new TaskBuilder().withTitle("Daniel Meier").withStartDate("87652533")
-                    .withEndDate("cornelia@google.com").withDescription("10th street").build();
-            elle = new TaskBuilder().withTitle("Elle Meyer").withStartDate("9482224")
-                    .withEndDate("werner@gmail.com").withDescription("michegan ave").build();
-            fiona = new TaskBuilder().withTitle("Fiona Kunz").withStartDate("9482427")
-                    .withEndDate("lydia@gmail.com").withDescription("little tokyo").build();
-            george = new TaskBuilder().withTitle("George Best").withStartDate("9482442")
-                    .withEndDate("anna@google.com").withDescription("4th street").build();
+            meeting1 = new TaskBuilder().withTitle("Meeting boss").withStartDate("17/03/2017")
+                    .withEndDate("17/03/2017").withDescription("at the office").build();
+            meeting2 = new TaskBuilder().withTitle("Meeting Daniel Meier").withStartDate("18/03/2017")
+                    .withEndDate("12/03/2017").withDescription("at 10th street").build();
+            submit1 = new TaskBuilder().withTitle("Submit CS2013").withStartDate("03/04/2017")
+                    .withEndDate("05/04/2017").withDescription("TaskManager Version 1.0.2").build();
+            submit2 = new TaskBuilder().withTitle("Submit FYP Report").withStartDate("31/03/2017")
+                    .withEndDate("31/03/2017").withDescription("a big burden").build();
+            send1 = new TaskBuilder().withTitle("Send encyrpted package").withStartDate("14/03/2017")
+                    .withEndDate("20/03/2017").withDescription("CIA Secret Files").build();
 
             // Manually added
-            hoon = new TaskBuilder().withTitle("Hoon Meier").withStartDate("8482424")
-                    .withEndDate("stefan@mail.com").withDescription("little india").build();
-            ida = new TaskBuilder().withTitle("Ida Mueller").withStartDate("8482131")
-                    .withEndDate("hans@google.com").withDescription("chicago ave").build();
+            send2 = new TaskBuilder().withTitle("Send package to Hoon Meier").withStartDate("20/03/2017")
+                    .withEndDate("25/03/2017").withDescription("at 345 Little India").build();
+            call1 = new TaskBuilder().withTitle("Call Ida Mueller").withStartDate("12/03/2017")
+                    .withEndDate("30/03/2017").withDescription("Discuss about Chicago Ave").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -44,9 +44,9 @@ public class TypicalTestTasks {
     }
 
     public static void loadTaskManagerWithSampleData(TaskManager ab) {
-        for (TestTask person : new TypicalTestTasks().getTypicalTasks()) {
+        for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
             try {
-                ab.addTask(new Task(person));
+                ab.addTask(new Task(task));
             } catch (UniqueTaskList.DuplicateTaskException e) {
                 assert false : "not possible";
             }
@@ -54,7 +54,7 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
+        return new TestTask[]{buy1, buy2, meeting1, meeting2, submit1, submit2, send1};
     }
 
     public TaskManager getTypicalTaskManager() {
