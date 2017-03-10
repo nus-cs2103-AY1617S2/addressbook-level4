@@ -1,9 +1,10 @@
-# AddressBook Level 4 - Developer Guide
+# Burdens - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `W09-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
+0. [Introduction](#introduction)
 1. [Setting Up](#setting-up)
 2. [Design](#design)
 3. [Implementation](#implementation)
@@ -16,6 +17,9 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 * [Appendix D: Glossary](#appendix-d--glossary)
 * [Appendix E : Product Survey](#appendix-e--product-survey)
 
+## 0. Introduction
+
+We are making Burdens to make sense of our daily lives and list our tasks and deadlines on a command-line platform.
 
 ## 1. Setting up
 
