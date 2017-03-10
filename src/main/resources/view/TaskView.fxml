@@ -19,7 +19,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label fx:id="name" text="Label" wrapText="true">
+            <Label fx:id="name" maxWidth="450.0" text="Label" wrapText="true">
                <FlowPane.margin>
                   <Insets left="5.0" />
                </FlowPane.margin>
