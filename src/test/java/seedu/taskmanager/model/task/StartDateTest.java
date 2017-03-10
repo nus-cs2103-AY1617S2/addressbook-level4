@@ -1,4 +1,4 @@
-package seedu.taskmanager.model.person;
+package seedu.taskmanager.model.task;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import seedu.taskmanager.model.task.StartDate;
 
-public class PhoneTest {
+public class StartDateTest {
 
     @Test
     public void isValidPhone() {
