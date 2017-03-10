@@ -28,11 +28,11 @@ public class SampleDataUtil {
                     new Location("Blk 436 Serangoon Gardens Street 26, #16-43"),
                     new UniqueTagList("finals")),
                 new Task(new Name("Invite friends over for housewarming"), new Date("09-03-2017"),
-                	new Remark("prepare food as well"),
+                    new Remark("prepare food as well"),
                     new Location("Blk 47 Tampines Street 20, #17-35"),
                     new UniqueTagList("friends", "house")),
                 new Task(new Name("Rewatch lecture 4 webcast"), new Date("17-03-2017"),
-                	new Remark("on algebraic query"),
+                    new Remark("on algebraic query"),
                     new Location("Blk 45 Aljunied Street 85, #11-31"),
                     new UniqueTagList("finals"))
             };
