@@ -3,7 +3,6 @@ package seedu.address.model.task;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 
@@ -42,7 +41,6 @@ public class TaskDate {
         sdf.setLenient(false);
         try {
             //throws ParseException if date is not valid
-            /*Date date = */
             sdf.parse(test);
         } catch (ParseException e) {
             e.printStackTrace();
