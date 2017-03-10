@@ -52,7 +52,7 @@ public class TestUtil {
      */
     public static final String SANDBOX_FOLDER = FileUtil.getPath("./src/test/data/sandbox/");
 
-    public static final Task[] SAMPLE_PERSON_DATA = getSampleTaskData();
+    public static final Task[] SAMPLE_TASK_DATA = getSampleTaskData();
 
     public static final Tag[] SAMPLE_TAG_DATA = getSampleTagData();
 
@@ -75,15 +75,11 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Title("Ali Muster"), new StartDate("9482424"), new EndDate("hans@google.com"), new Description("4th street"), new UniqueTagList()),
-                new Task(new Title("Boris Mueller"), new StartDate("87249245"), new EndDate("ruth@google.com"), new Description("81th street"), new UniqueTagList()),
-                new Task(new Title("Carl Kurz"), new StartDate("95352563"), new EndDate("heinz@yahoo.com"), new Description("wall street"), new UniqueTagList()),
-                new Task(new Title("Daniel Meier"), new StartDate("87652533"), new EndDate("cornelia@google.com"), new Description("10th street"), new UniqueTagList()),
-                new Task(new Title("Elle Meyer"), new StartDate("9482224"), new EndDate("werner@gmail.com"), new Description("michegan ave"), new UniqueTagList()),
-                new Task(new Title("Fiona Kunz"), new StartDate("9482427"), new EndDate("lydia@gmail.com"), new Description("little tokyo"), new UniqueTagList()),
-                new Task(new Title("George Best"), new StartDate("9482442"), new EndDate("anna@google.com"), new Description("4th street"), new UniqueTagList()),
-                new Task(new Title("Hoon Meier"), new StartDate("8482424"), new EndDate("stefan@mail.com"), new Description("little india"), new UniqueTagList()),
-                new Task(new Title("Ida Mueller"), new StartDate("8482131"), new EndDate("hans@google.com"), new Description("chicago ave"), new UniqueTagList())
+                    new Task(new Title("Visit Alex Yeoh"), new StartDate("01/11/2017"), new EndDate("02/11/2017"), new Description("His address is Blk 30 Geylang Street 29, #06-40"), new UniqueTagList()),
+                    new Task(new Title("Borrow Pencils"), new StartDate("04/03/2017"), new EndDate("04/03/2017"), new Description("Must be non-mechanical"), new UniqueTagList()),
+                    new Task(new Title("Finish CS2103 testing"), new StartDate("10/03/2017"), new EndDate("15/03/2017"), new Description("The best module eva"), new UniqueTagList()),
+                    new Task(new Title("Buy Toothpick"), new StartDate("20/05/2016"), new EndDate("21/05/2017"), new Description("Buy 1000pcs"), new UniqueTagList()),
+                    new Task(new Title("Make baos for gathering"), new StartDate("10/03/2017"), new EndDate("20/03/2017"), new Description("3 flavours: chocolate, red bean, and green bean"), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -108,7 +104,7 @@ public class TestUtil {
     }
 
     public static List<Task> generateSampleTaskData() {
-        return Arrays.asList(SAMPLE_PERSON_DATA);
+        return Arrays.asList(SAMPLE_TASK_DATA);
     }
 
     /**
