@@ -8,8 +8,8 @@ import t15b1.taskcrusher.model.shared.Name;
  */
 public class EventDate {
     public static final String MESSAGE_EVENT_DATE_CONSTRAINTS = "";
-    public static final String NAME_VALIDATION_REGEX = "";
-    //public static final Timer to check if valid eventdate
+    public static final String EVENT_DATE_VALIDATION_REGEX = "";
+    //TODO: public static final Timer to check if valid eventdate
     
     //Note that these are public, and therefore no setters/getters
     public final String startDate;
@@ -26,7 +26,7 @@ public class EventDate {
     }
     
     private boolean isValidEventDate(String startDate, String endDate){
-        //is start > end
+        //TODO: is start > end
         //if start < currentTime
         //if invalid start, end format
         

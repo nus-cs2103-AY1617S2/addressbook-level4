@@ -1,5 +1,7 @@
 package t15b1.taskcrusher.model.event;
 
+import java.util.Optional;
+
 import t15b1.taskcrusher.model.shared.Description;
 import t15b1.taskcrusher.model.shared.Name;
 import t15b1.taskcrusher.model.tag.UniqueTagList;
@@ -12,9 +14,11 @@ public interface ReadOnlyEvent {
 
     Name getEventName();
     
-    Description getDescription();
-    
     EventDate getEventDate();
+    
+    Optional<Description> getDescription();
+    
+    Optional<Location> getLocation();
     
     /**
      * The returned TagList is a deep copy of the internal TagList,
