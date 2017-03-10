@@ -16,15 +16,15 @@ public class StartDate {
     /**
      * Validates given start date.
      *
-     * @throws IllegalValueException if given phone string is invalid.
+     * @throws IllegalValueException if given start date is invalid.
      */
     public StartDate(String startDate) throws IllegalValueException {
         assert startDate != null;
-        String trimmedPhone = startDate.trim();
-        if (!isValidStartDate(trimmedPhone)) {
+        String trimmedStartDate = startDate.trim();
+        if (!isValidStartDate(trimmedStartDate)) {
             throw new IllegalValueException(MESSAGE_STARTDATE_CONSTRAINTS);
         }
-        this.value = trimmedPhone;
+        this.value = trimmedStartDate;
     }
 
     /**
