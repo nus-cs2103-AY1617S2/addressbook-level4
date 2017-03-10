@@ -9,7 +9,7 @@ import seedu.doit.model.task.UniqueTaskList;
 /**
  * A utility class to help with building TaskManager objects.
  * Example usage: <br>
- *     {@code TaskManager ab = new TaskManagerBuilder().withTask("John", "Doe").withTag("Friend").build();}
+ * {@code TaskManager ab = new TaskManagerBuilder().withTask("John", "Doe").withTag("Friend").build();}
  */
 public class TaskManagerBuilder {
 

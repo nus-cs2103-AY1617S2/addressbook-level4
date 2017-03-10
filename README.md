@@ -2,8 +2,7 @@
 
 
 [![Build Status](https://travis-ci.org/CS2103JAN2017-W14-B3/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-W14-B3/main)
-[![Build status](https://ci.appveyor.com/api/projects/status/3boko2x2vr5cc3w2?svg=true)]
-(https://ci.appveyor.com/project/jinshunlee/main)
+[![Build status](https://ci.appveyor.com/api/projects/status/3boko2x2vr5cc3w2?svg=true)](https://ci.appveyor.com/project/jinshunlee/main)
 [![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-W14-B3/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-W14-B3/main?branch=master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/02ba7ff85b714d3eb7f9ede4c067856e)](https://www.codacy.com/app/jinshunlee/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103JAN2017-W14-B3/main&amp;utm_campaign=Badge_Grade)
 

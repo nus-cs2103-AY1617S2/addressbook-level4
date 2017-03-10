@@ -11,7 +11,7 @@ import seedu.doit.commons.util.CollectionUtil;
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
- *
+ * <p>
  * Supports a minimal set of list operations.
  *
  * @see Task#equals(Object)
@@ -45,8 +45,8 @@ public class UniqueTaskList implements Iterable<Task> {
     /**
      * Updates the task in the list at position {@code index} with {@code editedTask}.
      *
-     * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
-     *      another existing task in the list.
+     * @throws DuplicateTaskException    if updating the task's details causes the task to be equivalent to
+     *                                   another existing task in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
     public void updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException {
@@ -102,9 +102,9 @@ public class UniqueTaskList implements Iterable<Task> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniqueTaskList // instanceof handles nulls
-                && this.internalList.equals(
-                ((UniqueTaskList) other).internalList));
+            || (other instanceof UniqueTaskList // instanceof handles nulls
+            && this.internalList.equals(
+            ((UniqueTaskList) other).internalList));
     }
 
     @Override
@@ -125,6 +125,7 @@ public class UniqueTaskList implements Iterable<Task> {
      * Signals that an operation targeting a specified task in the list would fail because
      * there is no such matching task in the list.
      */
-    public static class TaskNotFoundException extends Exception {}
+    public static class TaskNotFoundException extends Exception {
+    }
 
 }

@@ -14,8 +14,9 @@ import java.util.Optional;
 import seedu.doit.commons.exceptions.IllegalValueException;
 import seedu.doit.logic.commands.Command;
 import seedu.doit.logic.commands.EditCommand;
-import seedu.doit.logic.commands.IncorrectCommand;
 import seedu.doit.logic.commands.EditCommand.EditTaskDescriptor;
+import seedu.doit.logic.commands.IncorrectCommand;
+
 import seedu.doit.model.tag.UniqueTagList;
 
 /**
@@ -30,7 +31,7 @@ public class EditCommandParser {
     public Command parse(String args) {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_END, PREFIX_DESCRIPTION, PREFIX_TAG);
+            new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_END, PREFIX_DESCRIPTION, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 

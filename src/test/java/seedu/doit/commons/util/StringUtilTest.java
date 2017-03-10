@@ -11,8 +11,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.doit.commons.util.StringUtil;
-
 public class StringUtilTest {
 
     @Rule
@@ -141,7 +139,7 @@ public class StringUtilTest {
     @Test
     public void getDetails_exceptionGiven() {
         assertThat(StringUtil.getDetails(new FileNotFoundException("file not found")),
-                   containsString("java.io.FileNotFoundException: file not found"));
+            containsString("java.io.FileNotFoundException: file not found"));
     }
 
     @Test

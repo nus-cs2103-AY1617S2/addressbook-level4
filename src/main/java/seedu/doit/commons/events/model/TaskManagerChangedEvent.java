@@ -3,7 +3,9 @@ package seedu.doit.commons.events.model;
 import seedu.doit.commons.events.BaseEvent;
 import seedu.doit.model.ReadOnlyTaskManager;
 
-/** Indicates the TaskManager in the model has changed*/
+/**
+ * Indicates the TaskManager in the model has changed
+ */
 public class TaskManagerChangedEvent extends BaseEvent {
 
     public final ReadOnlyTaskManager data;

@@ -53,7 +53,9 @@ public class ModelManager extends ComponentManager implements Model {
         return taskManager;
     }
 
-    /** Raises an event to indicate the model has changed */
+    /**
+     * Raises an event to indicate the model has changed
+     */
     private void indicateTaskManagerChanged() {
         raise(new TaskManagerChangedEvent(taskManager));
     }
@@ -73,7 +75,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-            throws UniqueTaskList.DuplicateTaskException {
+        throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
 
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
@@ -106,6 +108,13 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
+
+        String toString();
+    }
+
+    interface Qualifier {
+        boolean run(ReadOnlyTask task);
+
         String toString();
     }
 
@@ -128,11 +137,6 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-    interface Qualifier {
-        boolean run(ReadOnlyTask task);
-        String toString();
-    }
-
     private class NameQualifier implements Qualifier {
         private Set<String> nameKeyWords;
 
@@ -143,9 +147,9 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword))
-                    .findAny()
-                    .isPresent();
+                .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword))
+                .findAny()
+                .isPresent();
         }
 
         @Override
