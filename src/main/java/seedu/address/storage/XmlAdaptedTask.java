@@ -54,20 +54,20 @@ public class XmlAdaptedTask {
     }
 
     /**
-     * Converts this jaxb-friendly adapted person object into the model's Task object.
+     * Converts this jaxb-friendly adapted task object into the model's Task object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person
+     * @throws IllegalValueException if there were any data constraints violated in the adapted task
      */
     public Task toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<Tag> taskTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+            taskTags.add(tag.toModelType());
         }
         final Name name = new Name(this.name);
         final Time time = new Time(this.time);
         final Email email = new Email(this.email);
         final Address address = new Address(this.address);
-        final UniqueTagList tags = new UniqueTagList(personTags);
+        final UniqueTagList tags = new UniqueTagList(taskTags);
         return new Task(name, time, tags);
     }
 }
