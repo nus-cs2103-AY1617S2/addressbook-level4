@@ -1,5 +1,6 @@
 package guitests.guihandles;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -73,11 +74,17 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     public boolean isSameTask(ReadOnlyTask task) {
+        /*System.out.println(getID() + task.getID().toString());
+        System.out.println(getName() + task.getName().toString());
+        System.out.println(getDeadline() + task.getDeadline().toString());
+        System.out.println(getDescription() + task.getDescription().toString());
+        System.out.println(getTags());
+        System.out.println(getTags(task.getTags()));*/
         return getName().equals(task.getName().toString())
                 && getDeadline().equals(task.getDeadline().toString())
                 && getDescription().equals(task.getDescription().toString())
                 && getID().equals(task.getID().toString())
-                && getTags().equals(getTags(task.getTags()));
+                && compareStringListOrderInsensitive(getTags(), getTags(task.getTags()));
     }
 
     @Override
@@ -88,9 +95,13 @@ public class TaskCardHandle extends GuiHandle {
                     && getDeadline().equals(handle.getDeadline())
                     && getDescription().equals(handle.getDescription())
                     && getID().equals(handle.getID())
-                    && getTags().equals(handle.getTags());
+                    && compareStringListOrderInsensitive(getTags(), getTags(handle.getTags()));
         }
         return super.equals(obj);
+    }
+
+    public boolean compareStringListOrderInsensitive(List<String> list1, List<String> list2) {
+        return list1 == list2 || new HashSet<>(list1).equals(new HashSet<>(list2));
     }
 
     @Override
