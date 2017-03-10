@@ -4,7 +4,7 @@ package seedu.address.model.person;
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Represents an Activity's location in the address book.
+ * Represents an Activity's location in WhatsLeft.
  * Guarantees: immutable; is valid as declared in {@link #isValidLocation(String)}
  */
 public class Location {
