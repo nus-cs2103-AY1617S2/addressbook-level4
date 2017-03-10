@@ -14,14 +14,14 @@ public class Person implements ReadOnlyPerson {
     private Name name;
     private Phone phone;
     private Email email;
-    private Description description;
+    private Address description;
 
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Description description, UniqueTagList tags) {
+    public Person(Name name, Phone phone, Email email, Address description, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, phone, email, description, tags);
         this.name = name;
         this.phone = phone;
@@ -67,13 +67,13 @@ public class Person implements ReadOnlyPerson {
         return email;
     }
 
-    public void setAddress(Description description) {
+    public void setAddress(Address description) {
         assert description != null;
         this.description = description;
     }
 
     @Override
-    public Description getAddress() {
+    public Address getAddress() {
         return description;
     }
 

@@ -7,7 +7,7 @@ import seedu.jobs.commons.core.Messages;
 import seedu.jobs.commons.util.CollectionUtil;
 import seedu.jobs.logic.commands.exceptions.CommandException;
 import seedu.jobs.model.tag.UniqueTagList;
-import seedu.jobs.model.task.Description;
+import seedu.jobs.model.task.Address;
 import seedu.jobs.model.task.Email;
 import seedu.jobs.model.task.Name;
 import seedu.jobs.model.task.Phone;
@@ -80,7 +80,7 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
         Phone updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
         Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
-        Description updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
+        Address updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
@@ -94,7 +94,7 @@ public class EditCommand extends Command {
         private Optional<Name> name = Optional.empty();
         private Optional<Phone> phone = Optional.empty();
         private Optional<Email> email = Optional.empty();
-        private Optional<Description> description = Optional.empty();
+        private Optional<Address> description = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditPersonDescriptor() {}
@@ -141,12 +141,12 @@ public class EditCommand extends Command {
             return email;
         }
 
-        public void setAddress(Optional<Description> description) {
+        public void setAddress(Optional<Address> description) {
             assert description != null;
             this.description = description;
         }
 
-        public Optional<Description> getAddress() {
+        public Optional<Address> getAddress() {
             return description;
         }
 

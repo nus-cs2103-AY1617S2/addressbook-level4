@@ -3,7 +3,7 @@ package seedu.jobs.testutil;
 import seedu.jobs.commons.exceptions.IllegalValueException;
 import seedu.jobs.model.tag.Tag;
 import seedu.jobs.model.tag.UniqueTagList;
-import seedu.jobs.model.task.Description;
+import seedu.jobs.model.task.Address;
 import seedu.jobs.model.task.Email;
 import seedu.jobs.model.task.Name;
 import seedu.jobs.model.task.Phone;
@@ -40,7 +40,7 @@ public class PersonBuilder {
     }
 
     public PersonBuilder withAddress(String address) throws IllegalValueException {
-        this.person.setAddress(new Description(address));
+        this.person.setAddress(new Address(address));
         return this;
     }
 

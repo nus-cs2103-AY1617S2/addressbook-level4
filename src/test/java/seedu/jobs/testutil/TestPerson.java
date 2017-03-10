@@ -1,7 +1,7 @@
 package seedu.jobs.testutil;
 
 import seedu.jobs.model.tag.UniqueTagList;
-import seedu.jobs.model.task.Description;
+import seedu.jobs.model.task.Address;
 import seedu.jobs.model.task.Email;
 import seedu.jobs.model.task.Name;
 import seedu.jobs.model.task.Phone;
@@ -13,7 +13,7 @@ import seedu.jobs.model.task.ReadOnlyPerson;
 public class TestPerson implements ReadOnlyPerson {
 
     private Name name;
-    private Description description;
+    private Address description;
     private Email email;
     private Phone phone;
     private UniqueTagList tags;
@@ -37,7 +37,7 @@ public class TestPerson implements ReadOnlyPerson {
         this.name = name;
     }
 
-    public void setAddress(Description description) {
+    public void setAddress(Address description) {
         this.description = description;
     }
 
@@ -69,7 +69,7 @@ public class TestPerson implements ReadOnlyPerson {
     }
 
     @Override
-    public Description getAddress() {
+    public Address getAddress() {
         return description;
     }
 
