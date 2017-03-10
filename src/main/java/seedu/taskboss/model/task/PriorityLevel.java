@@ -33,7 +33,7 @@ public class PriorityLevel {
      */
     public static boolean isValidPriorityLevel(String test) {
         return test.matches(PRIORITY_VALIDATION_REGEX) ||
-                test.equals("");
+                "".equals(test);
     }
 
     @Override

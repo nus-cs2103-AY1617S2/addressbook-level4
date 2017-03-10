@@ -38,7 +38,7 @@ public class Information {
      */
     public static boolean isValidInformation(String test) {
         return test.matches(INFORMATION_VALIDATION_REGEX) ||
-                test.equals("");
+                "".equals(test);
 
     }
 
