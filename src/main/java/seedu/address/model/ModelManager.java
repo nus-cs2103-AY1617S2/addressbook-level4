@@ -16,26 +16,26 @@ import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the task list data.
  * All changes to any model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final TaskList addressBook;
+    private final TaskList taskList;
     private final FilteredList<ReadOnlyTask> filteredTasks;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given taskList and userPrefs.
      */
-    public ModelManager(ReadOnlyTaskList addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTaskList taskList, UserPrefs userPrefs) {
         super();
-        assert !CollectionUtil.isAnyNull(addressBook, userPrefs);
+        assert !CollectionUtil.isAnyNull(taskList, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with task list: " + taskList + " and user prefs " + userPrefs);
 
-        this.addressBook = new TaskList(addressBook);
-        filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
+        this.taskList = new TaskList(taskList);
+        filteredTasks = new FilteredList<>(this.taskList.getTaskList());
     }
 
     public ModelManager() {
@@ -44,31 +44,31 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyTaskList newData) {
-        addressBook.resetData(newData);
-        indicateAddressBookChanged();
+        taskList.resetData(newData);
+        indicateTaskListChanged();
     }
 
     @Override
-    public ReadOnlyTaskList getAddressBook() {
-        return addressBook;
+    public ReadOnlyTaskList getTaskList() {
+        return taskList;
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateAddressBookChanged() {
-        raise(new AddressBookChangedEvent(addressBook));
+    private void indicateTaskListChanged() {
+        raise(new AddressBookChangedEvent(taskList));
     }
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-        addressBook.removeTask(target);
-        indicateAddressBookChanged();
+        taskList.removeTask(target);
+        indicateTaskListChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        addressBook.addTask(task);
+        taskList.addTask(task);
         updateFilteredListToShowAll();
-        indicateAddressBookChanged();
+        indicateTaskListChanged();
     }
 
     @Override
@@ -76,12 +76,13 @@ public class ModelManager extends ComponentManager implements Model {
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
 
-        int addressBookIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        addressBook.updateTask(addressBookIndex, editedTask);
-        indicateAddressBookChanged();
+        // TODO originally addressBookIndex, probably should have been personIndex
+        int taskIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
+        taskList.updateTask(taskIndex, editedTask);
+        indicateTaskListChanged();
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Task List Accessors =============================================================
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {

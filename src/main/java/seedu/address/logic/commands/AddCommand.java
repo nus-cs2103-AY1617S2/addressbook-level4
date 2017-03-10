@@ -24,7 +24,7 @@ public class AddCommand extends Command {
             + " exam t/CS2010";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the task list";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task list";
 
     private final Task toAdd;
 
@@ -52,7 +52,7 @@ public class AddCommand extends Command {
             model.addTask(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
     }
