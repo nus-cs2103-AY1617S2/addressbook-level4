@@ -1,5 +1,7 @@
 package seedu.toluist.ui.view;
 
+import java.util.stream.Collectors;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -38,7 +40,9 @@ public class TaskUiView extends UiView {
     @Override
     protected void viewDidMount() {
         FxViewUtil.makeFullWidth(getRoot());
-        name.setText(task.getDescription());
+        String tagText = " " + String.join(", ", task.getAllTags().stream()
+                .map(tag -> "#" + tag.tagName).collect(Collectors.toList()));
+        name.setText(task.getDescription() + tagText);
         id.setText(displayedIndex + ". ");
         if (task.isTask()) {
             date.setText(DateTimeFormatterUtil.formatTaskDeadline(task.getEndDateTime()));
