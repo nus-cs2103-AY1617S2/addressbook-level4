@@ -75,15 +75,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Name("Ali Muster"), new Deadline("4th street"), new Description("hans@google.com"), new IdentificationNumber("9482424"), new UniqueTagList()),
-                new Task(new Name("Boris Mueller"), new Deadline("81th street"), new Description("ruth@google.com"), new IdentificationNumber("87249245"), new UniqueTagList()),
-                new Task(new Name("Carl Kurz"), new Deadline("wall street"), new Description("heinz@yahoo.com"), new IdentificationNumber("95352563"), new UniqueTagList()),
-                new Task(new Name("Daniel Meier"), new Deadline("10th street"), new Description("cornelia@google.com"), new IdentificationNumber("87652533"), new UniqueTagList()),
-                new Task(new Name("Elle Meyer"), new Deadline("michegan ave"), new Description("werner@gmail.com"), new IdentificationNumber("9482224"), new UniqueTagList()),
-                new Task(new Name("Fiona Kunz"), new Deadline("little tokyo"), new Description("lydia@gmail.com"), new IdentificationNumber("9482427"), new UniqueTagList()),
-                new Task(new Name("George Best"), new Deadline("4th street"), new Description("anna@google.com"), new IdentificationNumber("9482442"), new UniqueTagList()),
-                new Task(new Name("Hoon Meier"),  new Deadline("little india"), new Description("stefan@mail.com"), new IdentificationNumber("8482424"), new UniqueTagList()),
-                new Task(new Name("Ida Mueller"), new Deadline("chicago ave"), new Description("hans@google.com"), new IdentificationNumber("8482131"), new UniqueTagList())
+                new Task(new Name("Ali Muster"), new Deadline("20/2/2012"), new Description("hans@google.com"), new IdentificationNumber("9482424"), new UniqueTagList()),
+                new Task(new Name("Boris Mueller"), new Deadline("20/2/2012"), new Description("ruth@google.com"), new IdentificationNumber("87249245"), new UniqueTagList()),
+                new Task(new Name("Carl Kurz"), new Deadline("20/2/2012"), new Description("heinz@yahoo.com"), new IdentificationNumber("95352563"), new UniqueTagList()),
+                new Task(new Name("Daniel Meier"), new Deadline("20/2/2012"), new Description("cornelia@google.com"), new IdentificationNumber("87652533"), new UniqueTagList()),
+                new Task(new Name("Elle Meyer"), new Deadline("20/2/2012"), new Description("werner@gmail.com"), new IdentificationNumber("9482224"), new UniqueTagList()),
+                new Task(new Name("Fiona Kunz"), new Deadline("20/2/2012"), new Description("lydia@gmail.com"), new IdentificationNumber("9482427"), new UniqueTagList()),
+                new Task(new Name("George Best"), new Deadline("20/2/2012"), new Description("anna@google.com"), new IdentificationNumber("9482442"), new UniqueTagList()),
+                new Task(new Name("Hoon Meier"),  new Deadline("20/2/2012"), new Description("stefan@mail.com"), new IdentificationNumber("8482424"), new UniqueTagList()),
+                new Task(new Name("Ida Mueller"), new Deadline("20/2/2012"), new Description("hans@google.com"), new IdentificationNumber("8482131"), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {

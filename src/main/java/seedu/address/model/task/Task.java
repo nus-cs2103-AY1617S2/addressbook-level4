@@ -56,7 +56,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getDeadline(), source.getID(), source.getDescription());
+        this(source.getName(), source.getDeadline(), source.getID(), source.getDescription(), source.getTags());
     }
 
     public Task(Name name2, IdentificationNumber identificationNumber, Description description2, Deadline deadline2,
@@ -67,8 +67,9 @@ public class Task implements ReadOnlyTask {
     /**
      * Getters and setters
      */
-    public void setID(IdentificationNumber ID) {
+    public Task setID(IdentificationNumber ID) {
         this.ID = ID;
+        return this;
     }
 
     @Override
@@ -76,9 +77,14 @@ public class Task implements ReadOnlyTask {
         return ID;
     }
 
-    public void setName(Name name) {
+    public boolean isIDUnassigned() {
+        return ID.equals(DEFAULT_ID);
+    }
+
+    public Task setName(Name name) {
         assert name != null;
         this.name = name;
+        return this;
     }
 
     @Override
@@ -86,9 +92,10 @@ public class Task implements ReadOnlyTask {
         return name;
     }
 
-    public void setDeadline(Deadline deadline) {
+    public Task setDeadline(Deadline deadline) {
         assert deadline != null;
         this.deadline = deadline;
+        return this;
     }
 
     @Override
@@ -96,12 +103,13 @@ public class Task implements ReadOnlyTask {
         return deadline;
     }
 
-    public void setDescription(Description description) {
+    public Task setDescription(Description description) {
         if (description == null) {
             this.description = new Description(DEFAULT_DESCRIPTION);
         } else {
             this.description = description;
         }
+        return this;
     }
 
     @Override
@@ -112,8 +120,9 @@ public class Task implements ReadOnlyTask {
     /**
      * Replaces this task's tags with the tags in the argument tag list.
      */
-    public void setTags(UniqueTagList replacement) {
+    public Task setTags(UniqueTagList replacement) {
         tags.setTags(replacement);
+        return this;
     }
 
     @Override
@@ -124,12 +133,15 @@ public class Task implements ReadOnlyTask {
     /**
      * Updates this task with the details of {@code replacement}.
      */
-    public void resetData(ReadOnlyTask replacement) {
+    public Task resetData(ReadOnlyTask replacement) {
         assert replacement != null;
 
+        this.setID(replacement.getID());
         this.setName(replacement.getName());
         this.setDeadline(replacement.getDeadline());
         this.setDescription(replacement.getDescription());
+        this.setTags(replacement.getTags());
+        return this;
     }
 
     @Override

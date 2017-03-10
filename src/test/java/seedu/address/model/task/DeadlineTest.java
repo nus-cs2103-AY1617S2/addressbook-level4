@@ -1,15 +1,15 @@
 package seedu.address.model.task;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
+
+import seedu.address.commons.exceptions.IllegalValueException;
 
 public class DeadlineTest {
 

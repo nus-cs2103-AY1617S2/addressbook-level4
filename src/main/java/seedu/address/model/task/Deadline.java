@@ -1,9 +1,6 @@
 package seedu.address.model.task;
 
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -15,7 +12,7 @@ import seedu.address.model.parser.DeadlineParser;
  */
 public class Deadline {
 
-    public enum DEADLINE_TYPES {
+    public enum DeadlineType {
         DATEONLY, DATETIME
     };
 
@@ -37,7 +34,7 @@ public class Deadline {
     public static final String READABLE_DATEONLY_OUTPUT_FORMAT = "EEE, MMM dd yyyy";
 
     private final Date date;
-    private final DEADLINE_TYPES type;
+    private final DeadlineType type;
 
     /**
      * Constructor for Deadline.
@@ -50,18 +47,18 @@ public class Deadline {
         // Try date-only format
         if (DeadlineParser.isParsableDate(dateString)) {
             date = DeadlineParser.parseDateString(dateString);
-            type = DEADLINE_TYPES.DATEONLY;
+            type = DeadlineType.DATEONLY;
 
         // Try time-only format
         } else if (DeadlineParser.isParsableTime(dateString)) {
             // The default date value to be assigned is today
             date = combineDateTime(new Date(), DeadlineParser.parseTimeString(dateString));
-            type = DEADLINE_TYPES.DATETIME;
+            type = DeadlineType.DATETIME;
 
         // Try complete date-time formats
         } else if (DeadlineParser.isParsableDateTime(dateString)) {
             date = DeadlineParser.parseDateTimeString(dateString);
-            type = DEADLINE_TYPES.DATETIME;
+            type = DeadlineType.DATETIME;
 
         } else {
             throw new IllegalValueException(MESSAGE_DEADLINE_CONSTRAINTS);
@@ -89,14 +86,14 @@ public class Deadline {
     @Override
     public String toString() {
         switch (type) {
-            case DATETIME:
-                return new SimpleDateFormat(READABLE_DATETIME_OUTPUT_FORMAT).format(date);
+        case DATETIME:
+            return new SimpleDateFormat(READABLE_DATETIME_OUTPUT_FORMAT).format(date);
 
-            case DATEONLY:
-                return new SimpleDateFormat(READABLE_DATEONLY_OUTPUT_FORMAT).format(date);
+        case DATEONLY:
+            return new SimpleDateFormat(READABLE_DATEONLY_OUTPUT_FORMAT).format(date);
 
-            default:
-                return date.toString();
+        default:
+            return date.toString();
         }
     }
 
