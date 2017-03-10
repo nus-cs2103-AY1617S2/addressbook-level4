@@ -3,13 +3,13 @@ package seedu.taskmanager.model.task;
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's name in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ * Represents a Task's title in the task manager.
+ * Guarantees: immutable; is valid as declared in {@link #isValidTitle(String)}
  */
 public class Title {
 
-    public static final String MESSAGE_NAME_CONSTRAINTS =
-            "Person names should only contain alphanumeric characters and spaces, and it should not be blank";
+    public static final String MESSAGE_TITLE_CONSTRAINTS =
+            "Task titles should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -27,8 +27,8 @@ public class Title {
     public Title(String name) throws IllegalValueException {
         assert name != null;
         String trimmedName = name.trim();
-        if (!isValidName(trimmedName)) {
-            throw new IllegalValueException(MESSAGE_NAME_CONSTRAINTS);
+        if (!isValidTitle(trimmedName)) {
+            throw new IllegalValueException(MESSAGE_TITLE_CONSTRAINTS);
         }
         this.value = trimmedName;
     }
@@ -36,7 +36,7 @@ public class Title {
     /**
      * Returns true if a given string is a valid person name.
      */
-    public static boolean isValidName(String test) {
+    public static boolean isValidTitle(String test) {
         return test.matches(NAME_VALIDATION_REGEX);
     }
 

@@ -9,31 +9,31 @@ import seedu.taskmanager.commons.exceptions.IllegalValueException;
  */
 public class EndDate {
 
-    public static final String MESSAGE_EMAIL_CONSTRAINTS =
+    public static final String MESSAGE_ENDDATE_CONSTRAINTS =
             "Person emails should be 2 alphanumeric/period strings separated by '@'";
-    public static final String EMAIL_VALIDATION_REGEX = "[\\w\\.]+@[\\w\\.]+";
+    public static final String ENDDATE_VALIDATION_REGEX = "[\\w\\.]+@[\\w\\.]+";
 
     public final String value;
 
     /**
      * Validates given email.
      *
-     * @throws IllegalValueException if given email address string is invalid.
+     * @throws IllegalValueException if given end date string is invalid.
      */
     public EndDate(String endDate) throws IllegalValueException {
         assert endDate != null;
-        String trimmedEmail = endDate.trim();
-        if (!isValidEndDate(trimmedEmail)) {
-            throw new IllegalValueException(MESSAGE_EMAIL_CONSTRAINTS);
+        String trimmedEndDate = endDate.trim();
+        if (!isValidEndDate(trimmedEndDate)) {
+            throw new IllegalValueException(MESSAGE_ENDDATE_CONSTRAINTS);
         }
-        this.value = trimmedEmail;
+        this.value = trimmedEndDate;
     }
 
     /**
      * Returns if a given string is a valid person email.
      */
     public static boolean isValidEndDate(String test) {
-        return test.matches(EMAIL_VALIDATION_REGEX);
+        return test.matches(ENDDATE_VALIDATION_REGEX);
     }
 
     @Override
