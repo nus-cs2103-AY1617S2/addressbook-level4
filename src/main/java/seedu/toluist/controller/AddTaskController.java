@@ -41,10 +41,6 @@ public class AddTaskController extends TaskController {
         String endDateToken = tokens.get(TASK_END_DATE_KEYWORD);
         LocalDateTime endDateTime = DateTimeUtil.toDate(endDateToken);
 
-        System.out.println("Description Token: " + description);
-        System.out.println("Start Date Token: " + startDateToken);
-        System.out.println("End Date Token: " + endDateToken);
-
         commandResult = add(todoList, description, startDateTime, endDateTime);
 
         if (todoList.save()) {

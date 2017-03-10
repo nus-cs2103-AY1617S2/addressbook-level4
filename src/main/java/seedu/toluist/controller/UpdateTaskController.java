@@ -44,11 +44,6 @@ public class UpdateTaskController extends TaskController {
         String endDateToken = tokens.get(TASK_END_DATE_KEYWORD);
         LocalDateTime endDateTime = DateTimeUtil.toDate(endDateToken);
 
-        System.out.println("Index Token: " + indexToken);
-        System.out.println("Description Token: " + description);
-        System.out.println("Start Date Token: " + startDateToken);
-        System.out.println("End Date Token: " + endDateToken);
-
         commandResult = update(todoList, task, description, startDateTime, endDateTime);
 
         if (todoList.save()) {
