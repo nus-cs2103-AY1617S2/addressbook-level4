@@ -8,8 +8,12 @@
 plugins {
     id "com.github.kt3k.coveralls" version "2.4.0"
     id "com.github.johnrengelman.shadow" version '1.2.3'
+    id 'net.saliman.cobertura' version '2.3.1'
     id 'application'
+    
 }
+
+cobertura.coverageFormats = ['html', 'xml']
 
 // Specifies the entry point of the application
 mainClassName = 'seedu.address.MainApp'

@@ -2,6 +2,8 @@
 
 
 [![Build Status](https://travis-ci.org/CS2103JAN2017-T09-B1/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-T09-B1/main)
+[![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-T09-B1/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-T09-B1/main?branch=master)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0aa12c839f2041b79c00112847b33551)](https://www.codacy.com/app/senyuuri/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103JAN2017-T09-B1/main&amp;utm_campaign=Badge_Grade)
 
 <img src="docs/images/ui.png" width="600"><br>
 Best task manager EVER!
