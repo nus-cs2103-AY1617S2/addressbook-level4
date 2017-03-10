@@ -12,7 +12,7 @@
        * [Adding a pending task with END DATE & TIME only] (#adding-a-pending-task-with-end-date--time-only)
        * [Adding a pending task with both START DATE & TIME and END DATE & TIME](#adding-a-pending-task-with-both-start-date--time-and-end-date--time)
     * [Adding a recurring task] (#adding-a-recurring-task)
-    * [Editng a task] (#editing-a-task)
+    * [Editing a task] (#editing-a-task)
     * [Deleting a task] (#deleting-a-task)
     * [Viewing tasks] (#viewing-tasks)
       * [Viewing all tasks] (#viewing-all-tasks)
