@@ -2,6 +2,11 @@ package seedu.jobs.model.task;
 
 import seedu.jobs.commons.exceptions.IllegalValueException;
 
+/**
+ * Represents a Task's time signature in JOBS.
+ * Guarantees: immutable; is valid as declared in {@link #isValidTime(String)}
+ */
+
 public class Time {
 	
 	public static final String MESSAGE_TIME_CONSTRAINT = "Time should always follow the dd/mm/yy hh:mm format";
@@ -9,6 +14,13 @@ public class Time {
 	public static final String DEFAULT_TIME ="";
 	public final String value;
 	
+	
+	
+	/**
+     * Validates given time-values input.
+     *
+     * @throws IllegalValueException if the input is invalid
+     */
 	public Time(String time) throws IllegalValueException{
 		if(time==null){
 			this.value = DEFAULT_TIME;
@@ -20,7 +32,10 @@ public class Time {
 			this.value = time;
 		}
 	}
-			
+	
+	/**
+     * Returns true if a given string is in valid time format
+     */
 	public static boolean isValidTime(String test) {
         return test.matches(TIME_VALIDATION_REGEX);
     }

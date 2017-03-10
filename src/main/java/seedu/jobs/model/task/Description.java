@@ -1,5 +1,9 @@
 package seedu.jobs.model.task;
 
+/**
+ * Represents a Task's description in JOBS.
+ */
+
 public class Description {
 	
 	public static final String DEFAULT_VALUE = "";
