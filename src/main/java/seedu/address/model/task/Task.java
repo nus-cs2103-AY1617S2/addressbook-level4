@@ -16,7 +16,6 @@ public class Task implements ReadOnlyTask {
     private TaskDate startDate;
     private TaskDate endDate;
 
-
     private UniqueTagList tags;
 
     /**
