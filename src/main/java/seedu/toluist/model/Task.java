@@ -24,12 +24,10 @@ public class Task implements Comparable<Task> {
 
     public Task(String description) {
         this(description, null, null);
-        validate();
     }
 
     public Task(String description, LocalDateTime endDateTime) {
         this(description, null, endDateTime);
-        validate();
     }
 
     public Task(String description, LocalDateTime startDateTime, LocalDateTime endDateTime) {
