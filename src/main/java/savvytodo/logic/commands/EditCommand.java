@@ -26,8 +26,8 @@ public class EditCommand extends Command {
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS ] [c/CATEGORIES]...\n"
-            + "Example: " + COMMAND_WORD + " 1 p/91234567 e/johndoe@yahoo.com";
+            + "[NAME] [p/PRIORITY] [d/DESCRIPTION] [a/ADDRESS ] [c/CATEGORIES]...\n"
+            + "Example: " + COMMAND_WORD + " 1 p/low d/2pm";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

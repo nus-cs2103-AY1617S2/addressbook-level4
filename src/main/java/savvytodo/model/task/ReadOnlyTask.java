@@ -43,7 +43,7 @@ public interface ReadOnlyTask {
                 .append(getEmail())
                 .append(" Address: ")
                 .append(getAddress())
-                .append(" Categries: ");
+                .append(" Categories: ");
         getCategories().forEach(builder::append);
         return builder.toString();
     }
