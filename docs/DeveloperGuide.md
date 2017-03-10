@@ -372,7 +372,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user with many tasks | list all tasks by tag | recall all the tasks with a particular tag
 `* *` | user | have shortcuts | set up a reminder quicker
 `*` | user who works with complex tasks | create subtasks | break a task into smaller tasks for easier management
-`*` | user who also use other task managing applications | synchronize my task list across all my applications | manage the same tasks from different applications 
+`*` | user who also use other task managing applications | synchronize my task list across all my applications | manage the same tasks from different applications
 `*` | user | be able to customize the colours | make it look more appealing
 `*` | user | have UI dark mode | ease the stress on my eyes
 
@@ -425,7 +425,7 @@ Use case ends.
 
 > 5a1. KoolToDoManager shows an error message <br>
   Use case resumes at step 4
-  
+
 #### Use case: Create subtasks
 
 **MSS**
@@ -448,7 +448,7 @@ Use case ends.
 
 > 5a1. KoolToDoManager shows an error message <br>
   Use case resumes at step 4
-  
+
 #### Use case: Adding a new task
 
 **MSS**
@@ -488,7 +488,7 @@ Use case ends.
 1. User requests to edit a task
 2. KoolToDoManager prompts user for name of task
 3. User inputs name of task
-4. KoolToDoManager prompts user for new details of task 
+4. KoolToDoManager prompts user for new details of task
 5. User inputs new details of task
 6. KoolToDoManager edits the task <br>
 Use case ends.
@@ -554,7 +554,7 @@ Use case ends.
 
 **Extensions**
 
-2a. Date or time does not exist 
+2a. Date or time does not exist
 
 > KoolToDoManager shows an error message <br>
   Use case resumes at step 2
@@ -569,7 +569,7 @@ Use case ends.
 
 **Extensions**
 
-2a. The list is empty 
+2a. The list is empty
 
 > Use case ends
 
@@ -693,7 +693,7 @@ Use case ends.
 2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. Should be easy to install 
+4. Should be easy to install
 5. Should be quick when starting the application(within 1 second)
 6. Should be a free and open source project
 7. Should be reliable and outputs error messages correctly

@@ -3,16 +3,14 @@ package seedu.address.model;
 import java.util.Set;
 import java.util.logging.Logger;
 
-import me.xdrop.fuzzywuzzy.FuzzySearch;
-import me.xdrop.fuzzywuzzy.ratios.SimpleRatio;
-
 import javafx.collections.transformation.FilteredList;
+import me.xdrop.fuzzywuzzy.FuzzySearch;
+
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.commons.util.StringUtil;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
@@ -150,7 +148,7 @@ public class ModelManager extends ComponentManager implements Model {
                     .findAny()
                     .isPresent();
         }
-        
+
         public boolean fuzzyFind(String title, String keyword) {
             return FuzzySearch.ratio(title, keyword) > MATCHING_INDEX;
         }

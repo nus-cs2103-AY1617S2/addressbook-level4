@@ -1,12 +1,13 @@
 package seedu.address.model.task;
 
-import java.util.Date;
-import java.util.List;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
-import seedu.address.commons.exceptions.IllegalValueException;
 import org.ocpsoft.prettytime.nlp.PrettyTimeParser;
 import org.ocpsoft.prettytime.nlp.parse.DateGroup;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+
 
 /**
  * @author ryuus
@@ -16,22 +17,22 @@ import org.ocpsoft.prettytime.nlp.parse.DateGroup;
  */
 public class Deadline {
     public static final String MESSAGE_DATE_CONSTRAINTS = "The deadline entered cannot be recognized.\n"
-    		+ "Task deadline should be alphanumeric with "
-    		+ "forward slashes(/), "
-    		+ "dashes(-), and/or "
-    		+ "coma(,).\n";
-    public static final String MESSAGE_DATE_NOT_FOUND = 
-    		  "The date entered is either not recognized or not a future date.\n"
-    		+ "Please paraphrase it or choose another date.";
+            + "Task deadline should be alphanumeric with "
+            + "forward slashes(/), "
+            + "dashes(-), and/or "
+            + "coma(,).\n";
+    public static final String MESSAGE_DATE_NOT_FOUND =
+            "The date entered is either not recognized or not a future date.\n"
+            + "Please paraphrase it or choose another date.";
     public static final String DATE_VALIDATION_REGEX = "[\\s | [a-zA-Z0-9,/-:]]+";
     public static final String DATE_FORMAT = "EEE, MMM d yyyy HH:mm";
 
     public final String value;
     private final List<DateGroup> parsedDeadline;
-    
+
     private static PrettyTimeParser parser = new PrettyTimeParser();
     private static SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
-    
+
 
     /**
      * Validates given deadline value.
@@ -45,7 +46,7 @@ public class Deadline {
             throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
         }
         parsedDeadline = parseDeadline(trimmedDeadline);
-        
+
         this.value = toString();
     }
 
@@ -55,29 +56,29 @@ public class Deadline {
     public static boolean isValidDate(String deadline) {
         boolean isRegexMatched = deadline.matches(DATE_VALIDATION_REGEX);
         boolean isDeadlineFound = parser.parse(deadline).size() != 0 || deadline.equals("floating");
-    	return isRegexMatched && isDeadlineFound;
+        return isRegexMatched && isDeadlineFound;
     }
-    
+
     /**
      * Returns a List<DateGroup> object for the given deadline string.
      */
     public static List<DateGroup> parseDeadline(String deadline) {
-    	List<DateGroup> deadlines = parser.parseSyntax(deadline);
-    	return deadlines;
+        List<DateGroup> deadlines = parser.parseSyntax(deadline);
+        return deadlines;
     }
-    
+
     /**
      * Returns true if the given deadline is recurring.
      */
     public boolean isRecurring() {
-    	return parsedDeadline.get(0).isRecurring();
+        return parsedDeadline.get(0).isRecurring();
     }
 
     @Override
     public String toString() {
-    	if (parsedDeadline.size() == 0) {
-    		return "floating";
-    	}
+        if (parsedDeadline.size() == 0) {
+            return "floating";
+        }
         return formatter.format(parsedDeadline.get(0).getDates().get(0));
     }
 
