@@ -4,12 +4,13 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
+import me.xdrop.fuzzywuzzy.FuzzySearch;
+
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.commons.util.StringUtil;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
@@ -26,7 +27,8 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<ReadOnlyTask> nonFloatingTasks;
     private final FilteredList<ReadOnlyTask> floatingTasks;
     //private final FilteredList<ReadOnlyTask> completedTasks;
-
+    private static final int MATCHING_INDEX = 35;
+  
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -158,9 +160,13 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getTitle().title, keyword))
+                    .filter(keyword -> fuzzyFind(task.getTitle().title.toLowerCase(), keyword))
                     .findAny()
                     .isPresent();
+        }
+
+        public boolean fuzzyFind(String title, String keyword) {
+            return FuzzySearch.ratio(title, keyword) > MATCHING_INDEX;
         }
 
         @Override

@@ -24,7 +24,7 @@ Shortcuts
 
 Use Case
 
-JIM: I am alone and lonely and single. I want to find my soul mate. 
+JIM: I am alone and lonely and single. I want to find my soul mate.
 So I need to be organised from now on because girls like organised guys.
 
 Non-functional requirements:
