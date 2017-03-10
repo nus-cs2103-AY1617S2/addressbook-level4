@@ -30,7 +30,8 @@ public class StatusBarFooter extends UiPart<Region> {
     public StatusBarFooter(AnchorPane placeHolder, String saveLocation) {
         super(FXML);
         addToPlaceholder(placeHolder);
-        setSyncStatus("Not updated yet in this session");
+        //setSyncStatus("Not updated yet in this session");
+        setSyncStatus("Task(s) to complete today: 2");
         setSaveLocation("./" + saveLocation);
         registerAsAnEventHandler(this);
     }
