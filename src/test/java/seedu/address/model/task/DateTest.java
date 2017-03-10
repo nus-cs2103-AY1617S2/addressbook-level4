@@ -14,15 +14,16 @@ public class DateTest {
     @Test
     public void isValidDate() {
         // invalid date numbers
-        assertFalse(Date.isValidDate("")); // empty string
-        assertFalse(Date.isValidDate(" ")); // spaces only
-        assertFalse(Date.isValidDate("date")); // non-numeric
-        assertFalse(Date.isValidDate("March05")); // alphabets within digits
-        assertFalse(Date.isValidDate("05 03 2017")); // spaces within digits
-        assertFalse(Date.isValidDate("05-03-2017")); // dashes within digits
+        assertFalse(Deadline.isValidDate("")); // empty string
+        assertFalse(Deadline.isValidDate(" ")); // spaces only
+        assertFalse(Deadline.isValidDate("date")); // non-numeric
+        assertFalse(Deadline.isValidDate("05.03.2017")); // dots within digits
+        assertFalse(Deadline.isValidDate("05\03\2017")); // backward slashes within digits
 
         // valid date numbers
-        assertTrue(Date.isValidDate("05032017"));
-        assertTrue(Date.isValidDate("5317")); // short phone numbers
+        assertTrue(Deadline.isValidDate("05032017"));
+        assertTrue(Deadline.isValidDate("05/03/2017")); // slashes within digits
+        assertTrue(Deadline.isValidDate("05-03-2017")); // dashes within digits
+
     }
 }

@@ -41,7 +41,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Date;
+import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Instruction;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
@@ -123,7 +123,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, String expectedMessage) {
         AddressBook expectedAddressBook = new AddressBook(model.getAddressBook());
-        List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredTaskList());
+        List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getNonFloatingTaskList());
         assertCommandBehavior(true, inputCommand, expectedMessage, expectedAddressBook, expectedShownList);
     }
 
@@ -149,7 +149,7 @@ public class LogicManagerTest {
         }
 
         //Confirm the ui display elements should contain the right data
-        assertEquals(expectedShownList, model.getFilteredTaskList());
+        assertEquals(expectedShownList, model.getNonFloatingTaskList());
 
         //Confirm the state of data (saved and in-memory) is as expected
         assertEquals(expectedAddressBook, model.getAddressBook());
@@ -191,20 +191,20 @@ public class LogicManagerTest {
         assertCommandFailure("add wrong args wrong args", expectedMessage);
         assertCommandFailure("add Valid Title 12345 p/validPriority.butNoDatePrefix i/valid,instruction",
                 expectedMessage);
-        assertCommandFailure("add Valid Title d/12345 validDate.butNoPrefix i/valid, instruction", expectedMessage);
-        assertCommandFailure("add Valid Title d/12345 p/validDate.butNoInstructionPrefix valid, instruction",
+        assertCommandFailure("add Valid Title tomorrow validDate.butNoPrefix i/valid, instruction", expectedMessage);
+        assertCommandFailure("add Valid Title d/tomorrow p/validDate.butNoInstructionPrefix valid, instruction",
                 expectedMessage);
     }
 
     @Test
     public void execute_add_invalidTaskData() {
-        assertCommandFailure("add []\\[;] d/12345 p/validPriority i/valid, instruction",
+        assertCommandFailure("add []\\[;] d/tomorrow p/validPriority i/valid, instruction",
                 Title.MESSAGE_TITLE_CONSTRAINTS);
-        assertCommandFailure("add Valid Title d/not_numbers p/validPriority i/valid, instruction",
-                Date.MESSAGE_DATE_CONSTRAINTS);
-        assertCommandFailure("add Valid Title d/12345 p/not@a.Priority i/valid, instruction",
+        assertCommandFailure("add Valid Title d/not_valid_date p/validPriority i/valid, instruction",
+                Deadline.MESSAGE_DATE_CONSTRAINTS);
+        assertCommandFailure("add Valid Title d/tomorrow p/not@a.Priority i/valid, instruction",
                 Priority.MESSAGE_PRIORITY_CONSTRAINTS);
-        assertCommandFailure("add Valid Title d/12345 p/validPriority i/valid, instruction t/invalid_-[.tag",
+        assertCommandFailure("add Valid Title d/tomorrow p/validPriority i/valid, instruction t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
@@ -316,7 +316,7 @@ public class LogicManagerTest {
                 expectedAB,
                 expectedAB.getTaskList());
         assertEquals(1, targetedJumpIndex);
-        assertEquals(model.getFilteredTaskList().get(1), threeTasks.get(1));
+        assertEquals(model.getNonFloatingTaskList().get(1), threeTasks.get(1));
     }
 
 
@@ -418,7 +418,7 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Title title = new Title("Adam Brown");
-            Date privateDate = new Date("111111");
+            Deadline privateDate = new Deadline("tomorrow");
             Priority priority = new Priority("adam");
             Instruction privateInstruction = new Instruction("111, alpha street");
             Tag tag1 = new Tag("tag1");
@@ -437,7 +437,7 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Title("Task " + seed),
-                    new Date("" + Math.abs(seed)),
+                    new Deadline("tomorrow"),
                     new Priority(seed + "_urgent"),
                     new Instruction("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
@@ -452,7 +452,7 @@ public class LogicManagerTest {
 
             cmd.append(p.getTitle().toString());
             cmd.append(" p/").append(p.getPriority());
-            cmd.append(" d/").append(p.getDate());
+            cmd.append(" d/").append(p.getDeadline().toString());
             cmd.append(" i/").append(p.getInstruction());
 
             UniqueTagList tags = p.getTags();
@@ -536,7 +536,7 @@ public class LogicManagerTest {
         Task generateTaskWithTitle(String title) throws Exception {
             return new Task(
                     new Title(title),
-                    new Date("1"),
+                    new Deadline("tomorrow"),
                     new Priority("1"),
                     new Instruction("House of 1"),
                     new UniqueTagList(new Tag("tag"))

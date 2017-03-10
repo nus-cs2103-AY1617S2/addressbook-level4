@@ -4,12 +4,13 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
+import me.xdrop.fuzzywuzzy.FuzzySearch;
+
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.commons.util.StringUtil;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
@@ -23,8 +24,11 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
-    private final FilteredList<ReadOnlyTask> filteredTasks;
-
+    private final FilteredList<ReadOnlyTask> nonFloatingTasks;
+    private final FilteredList<ReadOnlyTask> floatingTasks;
+    //private final FilteredList<ReadOnlyTask> completedTasks;
+    private static final int MATCHING_INDEX = 35;
+  
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -35,7 +39,10 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
-        filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
+        nonFloatingTasks = new FilteredList<>(this.addressBook.getTaskList());
+        nonFloatingTasks.setPredicate(new PredicateExpression(new DateNotFloatingQualifier())::satisfies);
+        floatingTasks = new FilteredList<>(this.addressBook.getTaskList());
+        floatingTasks.setPredicate(new PredicateExpression(new DateFloatingQualifier())::satisfies);
     }
 
     public ModelManager() {
@@ -76,7 +83,7 @@ public class ModelManager extends ComponentManager implements Model {
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
 
-        int addressBookIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
+        int addressBookIndex = nonFloatingTasks.getSourceIndex(filteredTaskListIndex);
         addressBook.updateTask(addressBookIndex, editedTask);
         indicateAddressBookChanged();
     }
@@ -84,13 +91,23 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Filtered Task List Accessors =============================================================
 
     @Override
-    public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
-        return new UnmodifiableObservableList<>(filteredTasks);
+    public UnmodifiableObservableList<ReadOnlyTask> getNonFloatingTaskList() {
+        return new UnmodifiableObservableList<>(nonFloatingTasks);
+    }
+
+    public UnmodifiableObservableList<ReadOnlyTask> getFloatingTaskList() {
+        return new UnmodifiableObservableList<>(floatingTasks);
     }
 
     @Override
     public void updateFilteredListToShowAll() {
-        filteredTasks.setPredicate(null);
+        //filteredTasks.setPredicate(new PredicateExpression(new DateFloatingQualifier())::satisfies);
+        nonFloatingTasks.setPredicate(new PredicateExpression(new DateNotFloatingQualifier())::satisfies);
+        //filteredTasks.setPredicate(null);
+    }
+
+    public void updateFilteredListToShowAllFloatingTasks() {
+        floatingTasks.setPredicate(new PredicateExpression(new DateFloatingQualifier())::satisfies);
     }
 
     @Override
@@ -99,7 +116,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     private void updateFilteredTaskList(Expression expression) {
-        filteredTasks.setPredicate(expression::satisfies);
+        nonFloatingTasks.setPredicate(expression::satisfies);
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
@@ -143,9 +160,13 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getTitle().title, keyword))
+                    .filter(keyword -> fuzzyFind(task.getTitle().title.toLowerCase(), keyword))
                     .findAny()
                     .isPresent();
+        }
+
+        public boolean fuzzyFind(String title, String keyword) {
+            return FuzzySearch.ratio(title, keyword) > MATCHING_INDEX;
         }
 
         @Override
@@ -154,4 +175,21 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    private class DateFloatingQualifier implements Qualifier {
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return task.getDeadline().toString().equals("floating");
+        }
+
+    }
+
+    private class DateNotFloatingQualifier implements Qualifier {
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return !task.getDeadline().toString().equals("floating");
+        }
+
+    }
 }
