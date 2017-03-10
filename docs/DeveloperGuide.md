@@ -1,4 +1,4 @@
-<span style=“color:green;”> text goes here</span>
+# iManager Developer Guide.
 
 1. [Setting Up](#setting-up)
 2. [Design](#design)
