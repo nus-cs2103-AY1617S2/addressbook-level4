@@ -36,7 +36,7 @@ public class DateTimeUtil {
     }
 
     public static String toString(LocalDateTime dateTime) {
-        String stringDateTime = dateTime.format(DateTimeFormatter.ofPattern("d MMM uuuu, h:mm a"));
+        String stringDateTime = dateTime.format(DateTimeFormatter.ofPattern("E, d MMM uuuu h:mm a"));
         return stringDateTime;
     }
 }
