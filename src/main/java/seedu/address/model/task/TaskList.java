@@ -118,4 +118,11 @@ public class TaskList implements Iterable<Task> {
      */
     public static class TaskNotFoundException extends Exception {}
 
+    public boolean isEmpty() {
+        if(internalList.isEmpty()){
+            return false;
+        }
+        return true;
+    }
+
 }
