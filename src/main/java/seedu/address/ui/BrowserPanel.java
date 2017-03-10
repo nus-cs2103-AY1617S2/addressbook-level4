@@ -6,7 +6,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.address.commons.util.FxViewUtil;
-import seedu.address.model.task.ReadOnlyTask;
 
 /**
  * The Browser Panel of the App.
@@ -27,14 +26,6 @@ public class BrowserPanel extends UiPart<Region> {
                                                      // loaded Web page.
         FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
         placeholder.getChildren().add(browser);
-    }
-
-    public void loadPersonPage(ReadOnlyTask person) {
-        loadPage("https://www.google.com.sg/#safe=off&q=" + person.getName().fullName.replaceAll(" ", "+"));
-    }
-
-    public void loadPage(String url) {
-        browser.getEngine().load(url);
     }
 
     /**
