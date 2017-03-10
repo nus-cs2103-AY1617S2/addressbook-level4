@@ -36,15 +36,11 @@ public class DateTimeParser {
         if(input.isEmpty()) {
             return Optional.empty();
         }
-        //LocalDateTime formatDateTime = defaultDateTime.withSecond(0).withNano(0);
-        //return Optional.of(formatDateTime);
 
         // Input exist. Try to parse it using Natty.
-        
-        System.out.println("done! before parse");
         Parser parser = new Parser();
+        
         List<DateGroup> dateGroups = parser.parse(input);
-        System.out.println("done! after parse");
         if(dateGroups.isEmpty()) {
             throw new IllegalValueException(MESSAGE_DATE_PARSE_FAILURE);
         }
@@ -56,11 +52,10 @@ public class DateTimeParser {
         }
         Date parsedDateTime = dates.get(0);
         LocalDateTime localDateTime = toLocalDateTime(parsedDateTime);
-       // LocalDateTime finalisedDateTime = toFinalDateTime(localDateTime, defaultDateTime, dateGroup);
-        //LocalDateTime formattedFinalisedDateTime = finalisedDateTime.withSecond(0).withNano(0);
+        LocalDateTime finalisedDateTime = toFinalDateTime(localDateTime, defaultDateTime, dateGroup);
+        LocalDateTime formattedFinalisedDateTime = finalisedDateTime.withSecond(0).withNano(0);
 
-        //return Optional.of(formattedFinalisedDateTime);
-        return Optional.of(localDateTime);
+        return Optional.of(formattedFinalisedDateTime);
     }
     
     /**
