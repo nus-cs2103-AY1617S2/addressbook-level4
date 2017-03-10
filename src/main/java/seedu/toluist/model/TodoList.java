@@ -63,6 +63,10 @@ public class TodoList {
     public void remove(Task task) {
         allTasks.remove(task);
     }
+    
+    public Task getTask(Task task) {
+        return allTasks.get(allTasks.indexOf(task));
+    }    
 
     /**
      * Returns list of tasks based on predicate

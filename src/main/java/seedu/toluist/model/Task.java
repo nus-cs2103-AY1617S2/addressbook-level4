@@ -94,8 +94,17 @@ public class Task implements Comparable<Task> {
         setEndDateTime(to);
     }
 
-    public void addTag(Tag tag) {
-        this.allTags.add(tag);
+    public boolean addTag(Tag tag) {
+        boolean isDifferent = true;
+        if (allTags.contains(tag)) {
+            isDifferent = false;
+        }
+
+        if (isDifferent) {
+            this.allTags.add(tag);
+        }
+
+        return isDifferent;
     }
 
     public void removeTag(Tag tag) {
