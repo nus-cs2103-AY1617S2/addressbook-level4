@@ -1,10 +1,11 @@
 # Developer Guide 
 
-* [Setting Up](#setting-up)
-* [Design](#design)
-* [Implementation](#implementation)
-* [Testing](#testing)
-* [Dev Ops](#dev-ops)
+1. [Setting Up](#1-setting-up)
+2. [Design](#2-design)
+3. [Implementation](#3-implementation)
+4. [Testing](#4-testing)
+5. [Dev Ops](#5-dev-ops)
+
 * [Appendix A: User Stories](#appendix-a--user-stories)
 * [Appendix B: Use Cases](#appendix-b--use-cases)
 * [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
@@ -12,7 +13,7 @@
 * [Appendix E : Product Survey](#appendix-e--product-survey)
 
 
-## Setting up
+## 1. Setting up
 
 #### Prerequisites
 
@@ -66,7 +67,7 @@
 * Solution: [Run tests using Gardle](UsingGradle.md) once (to refresh the libraries).
  
 
-## Design
+## 2. Design
 
 ### Architecture
 
@@ -85,8 +86,8 @@ Two of those classes play important roles at the architecture level.
 * `LogsCenter` : Used by many classes to write log messages to the App's log file.
 
 The rest of the App consists four components.
-* [**`UI`**](#ui-component) : The UI of tha App.
-* [**`Logic`**](#logic-component) : The command executor.
+* [**`UI`**](#ui-component) : Renders the UI
+* [**`Logic`**](#logic-component) : Parses and executes commands
 * [**`Model`**](#model-component) : Holds the data of the App in-memory.
 * [**`Storage`**](#storage-component) : Reads data from, and writes data to, the hard disk.
 
@@ -94,7 +95,7 @@ Each of the four components
 * Defines its _API_ in an `interface` with the same name as the Component.
 * Exposes its functionality using a `{Component Name}Manager` class.
 
-For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java`
+For example, the `Logic` component (see the class diagram given below) defines its API in the `Logic.java`
 interface and exposes its functionality using the `LogicManager.java` class.<br>
 <img src="images/LogicClassDiagram.png" width="800"><br>
 
@@ -180,7 +181,7 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
-## Implementation
+## 3. Implementation
 
 ### Logging
 
@@ -207,7 +208,7 @@ Certain properties of the application can be controlled (e.g App name, logging l
 (default: `config.json`):
 
 
-## Testing
+## 4. Testing
 
 Tests can be found in the `./src/test/java` folder.
 
@@ -250,7 +251,7 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
    [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
    Delete run configurations created when you ran tests earlier.
   
-## Dev Ops
+## 5. Dev Ops
 
 ### Build Automation
 
