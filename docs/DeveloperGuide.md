@@ -4,8 +4,7 @@
 2. [Design](#2-design)
 3. [Implementation](#3-implementation)
 4. [Testing](#4-testing)
-5. [Dev Ops](#5-dev-ops)
-
+5. [Dev Ops](#5-dev-ops)<br><br>
 * [Appendix A: User Stories](#appendix-a--user-stories)
 * [Appendix B: Use Cases](#appendix-b--use-cases)
 * [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
