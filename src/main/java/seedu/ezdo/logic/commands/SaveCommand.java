@@ -48,7 +48,7 @@ public class SaveCommand extends Command {
             EventsCenter.getInstance().post(new EzDoDirectoryChangedEvent(model.getEzDo(), directoryPath));
         return new CommandResult(String.format(MESSAGE_SAVE_TASK_SUCCESS, directoryPath));
         } catch (IOException e) {
-            return new CommandResult(MESSAGE_DIRECTORY_PATH_INVALID);
+            throw new CommandException(MESSAGE_DIRECTORY_PATH_INVALID);
         }
     }
 }
