@@ -95,7 +95,7 @@ public class TaskCardHandle extends GuiHandle {
                     && getDeadline().equals(handle.getDeadline())
                     && getDescription().equals(handle.getDescription())
                     && getID().equals(handle.getID())
-                    && compareStringListOrderInsensitive(getTags(), getTags(handle.getTags()));
+                    && compareStringListOrderInsensitive(getTags(), handle.getTags());
         }
         return super.equals(obj);
     }
