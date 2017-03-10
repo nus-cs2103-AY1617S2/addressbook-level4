@@ -1,5 +1,6 @@
 # YATS - Yet Another Task Scheduler
-[!Build Status](https://travis-ci.org/CS2103JAN2017-T16-B4/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-T16-B4/main)
+[![Build Status](https://travis-ci.org/CS2103JAN2017-T16-B4/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-T16-B4/main)
+[![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-T16-B4/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-T16-B4/main?branch=master)
 <!---
 Appveyor test missing
 Coveralls test missing
@@ -11,7 +12,7 @@ Coadacy test missing
 	* A simple GUI that includes CLI and a built-in calendar.
 	* More test cases, including automated GUI testing.
 	* Support for *Build Automation* using Gradle and for *Continuous Integration* using Travis CI.
-	
+
 #### Site Map
 * [User Guide](docs/UserGuide.md)
 * [Developer Guide](docs/DeveloperGuide.md)

@@ -358,8 +358,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | Undo my actions | revert any changes done accidentally.
 `* * *` | user | Mark task as done based on index, name, or any unique identifying string for that task | Clear done tasks if needed
 `* * *` | user | List all tasks based on importance | View which tasks have higher priorities
-`* * *` | user | List all tasks based on deadlines | View which tasks needs to be completed first
-`* * *` | user | List all tasks by deadlines | Plan my schedule on the calendar
+`* * *` | user | List all tasks by deadlines | View which tasks needs to be completed first
 `* * ` | user | Set alarms for certain schedules | Be reminded of deadlines of my tasks
 `* * ` | user | Schedule my tasks with constraints | Avoid scheduling tasks during my works time and leave break time in between tasks
 `* *` | user | Add subtasks into my main task | Have a more structured view of the main task
@@ -367,14 +366,14 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user | Ask the task manager to schedule my tasks | Just enter the tasks with a deadline and decide the scheduling later
 `* *` | user | Add descriptions to my task | have additional details of my tasks
 `* *` | user | Mark the task as done/require follow-up | Have an up-to-date record of the my tasks
-`* *` | advanced user | Keep a list of done task, marked as done(strike-out) | Keep track of what I have already done
-`* *` | advance user | Clear all my done tasks | Clear done tasks from scheduler
-`* *` | advanced user | Collapse my tasks into groups in the listed view | Have a clearer overview of all my task groups
 `* *` | user | Group my tasks together with a common tag | Organized my tasks according to their groups in the scheduler
 `* *` | user | Have pop-up notifications of near deadlines | Be reminded of tasks with deadlines approaching
 `* *` | user | Have heads-up display of tasks that are about to due | Be reminded of tasks to be done
 `* *` | advanced user| Sort my tasks according to deadlines, dates or title | Have a better overviews of tasks scheduled
 `* *` | advanced user | Use shorter versions of commands/Flexi-command | Type commands easier and faster
+`* *` | advanced user | Keep a list of done task, marked as done(strike-out) | Keep track of what I have already done
+`* *` | advance user | Clear all my done tasks | Clear done tasks from scheduler
+`* *` | advanced user | Collapse my tasks into groups in the listed view | Have a clearer overview of all my task groups
 `* ` | user | Get suggestions when a task should be scheduled | Automatically click on which date and time I would like it scheduled
 `* ` | user | Specify locations that are linked to Google Maps | Know the best way to get there from my current location (Workplace)
 `* ` | user | Automatically reschedule a task I am supposed to do now | No worry about when to schedule the task
@@ -511,7 +510,7 @@ Use case ends.
 **Extensions**
 
 2a. The list is empty
-> 2a1. TaskManager shows “List is empty” message <br>
+> 2a1. TaskManager shows Â“List is emptyÂ” message <br>
 > Use case ends <br>
 
 
