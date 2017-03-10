@@ -20,4 +20,11 @@
 		<nature>org.eclipse.buildship.core.gradleprojectnature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/main/resources/images/task_manager.png</name>
+			<type>1</type>
+			<location>C:/Users/admin/Documents/GithubRepo/main/src/main/resources/images/task_manager.png</location>
+		</link>
+	</linkedResources>
 </projectDescription>
