@@ -5,12 +5,12 @@ import java.util.Set;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.person.Activity;
 import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Location;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.UniqueActivityList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -30,7 +30,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New activity added: %1$s";
     public static final String MESSAGE_DUPLICATE_ACTIVITY = "This activity already exists in WhatsLeft";
 
-    private final Person toAdd;
+    private final Activity toAdd;
 
     /**
      * Creates an AddCommand using raw values.
@@ -44,8 +44,7 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        this.toAdd = new Person(
-
+        this.toAdd = new Activity(
                 new Description(description),
                 new Phone(phone),
                 new Email(email),
@@ -58,9 +57,9 @@ public class AddCommand extends Command {
     public CommandResult execute() throws CommandException {
         assert model != null;
         try {
-            model.addPerson(toAdd);
+            model.addActivity(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-        } catch (UniquePersonList.DuplicatePersonException e) {
+        } catch (UniqueActivityList.DuplicateActivityException e) {
             throw new CommandException(MESSAGE_DUPLICATE_ACTIVITY);
         }
 
