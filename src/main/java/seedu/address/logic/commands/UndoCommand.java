@@ -15,6 +15,8 @@ public class UndoCommand extends Command {
     }
 
     public CommandResult execute() {
+        model.resetData(model.getCopy());
+        model.updateCopy(model.getTaskManager());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
