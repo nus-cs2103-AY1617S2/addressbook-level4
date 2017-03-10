@@ -38,7 +38,7 @@ import t15b1.taskcrusher.model.task.Email;
 import t15b1.taskcrusher.model.task.Priority;
 import t15b1.taskcrusher.model.task.ReadOnlyTask;
 import t15b1.taskcrusher.model.task.Task;
-import t15b1.taskcrusher.storage.XmlSerializableAddressBook;
+import t15b1.taskcrusher.storage.XmlSerializableUserInbox;
 
 /**
  * A utility class for test cases.
@@ -144,8 +144,8 @@ public class TestUtil {
         createDataFileWithSampleData(TestApp.SAVE_LOCATION_FOR_TESTING);
     }
 
-    public static XmlSerializableAddressBook generateSampleStorageAddressBook() {
-        return new XmlSerializableAddressBook(new UserInbox());
+    public static XmlSerializableUserInbox generateSampleStorageAddressBook() {
+        return new XmlSerializableUserInbox(new UserInbox());
     }
 
     /**

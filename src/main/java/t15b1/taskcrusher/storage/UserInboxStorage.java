@@ -9,7 +9,7 @@ import t15b1.taskcrusher.model.ReadOnlyUserInbox;
 /**
  * Represents a storage for {@link t15b1.taskcrusher.model.UserInbox}.
  */
-public interface AddressBookStorage {
+public interface UserInboxStorage {
 
     /**
      * Returns the file path of the data file.
@@ -17,7 +17,7 @@ public interface AddressBookStorage {
     String getUserInboxFilePath();
 
     /**
-     * Returns AddressBook data as a {@link ReadOnlyUserInbox}.
+     * Returns UserInbox data as a {@link ReadOnlyUserInbox}.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
@@ -31,14 +31,14 @@ public interface AddressBookStorage {
 
     /**
      * Saves the given {@link ReadOnlyUserInbox} to the storage.
-     * @param addressBook cannot be null.
+     * @param userInbox cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveUserInbox(ReadOnlyUserInbox addressBook) throws IOException;
+    void saveUserInbox(ReadOnlyUserInbox userInbox) throws IOException;
 
     /**
      * @see #saveUserInbox(ReadOnlyUserInbox)
      */
-    void saveUserInbox(ReadOnlyUserInbox addressBook, String filePath) throws IOException;
+    void saveUserInbox(ReadOnlyUserInbox userInbox, String filePath) throws IOException;
 
 }

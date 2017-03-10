@@ -18,37 +18,37 @@ import t15b1.taskcrusher.model.task.Task;
 /**
  * JAXB-friendly version of the Person.
  */
-public class XmlAdaptedPerson {
+public class XmlAdaptedTask {
 
     @XmlElement(required = true)
-    private String name;
+    private String taskName;
     @XmlElement(required = true)
-    private String phone;
+    private String priority;
     @XmlElement(required = true)
     private String email;
     @XmlElement(required = true)
-    private String address;
+    private String description;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
     /**
-     * Constructs an XmlAdaptedPerson.
+     * Constructs an XmlAdaptedTask.
      * This is the no-arg constructor that is required by JAXB.
      */
-    public XmlAdaptedPerson() {}
+    public XmlAdaptedTask() {}
 
 
     /**
-     * Converts a given Person into this class for JAXB use.
+     * Converts a given Task into this class for JAXB use.
      *
-     * @param source future changes to this will not affect the created XmlAdaptedPerson
+     * @param source future changes to this will not affect the created XmlAdaptedTask
      */
-    public XmlAdaptedPerson(ReadOnlyTask source) {
-        name = source.getTaskName().taskName;
-        phone = source.getPriority().value;
+    public XmlAdaptedTask(ReadOnlyTask source) {
+        taskName = source.getTaskName().taskName;
+        priority = source.getPriority().value;
         email = source.getEmail().value;
-        address = source.getDescription().value;
+        description = source.getDescription().value;
 
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
@@ -66,11 +66,11 @@ public class XmlAdaptedPerson {
         for (XmlAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
         }
-        final Name name = new Name(this.name);
-        final Priority phone = new Priority(this.phone);
+        final Name name = new Name(this.taskName);
+        final Priority priority = new Priority(this.priority);
         final Email email = new Email(this.email);
-        final Description address = new Description(this.address);
+        final Description description = new Description(this.description);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Task(name, phone, email, address, tags);
+        return new Task(name, priority, email, description, tags);
     }
 }

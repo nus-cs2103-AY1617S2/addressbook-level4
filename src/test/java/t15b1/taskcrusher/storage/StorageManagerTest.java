@@ -20,7 +20,7 @@ import t15b1.taskcrusher.model.UserPrefs;
 import t15b1.taskcrusher.storage.JsonUserPrefsStorage;
 import t15b1.taskcrusher.storage.Storage;
 import t15b1.taskcrusher.storage.StorageManager;
-import t15b1.taskcrusher.storage.XmlAddressBookStorage;
+import t15b1.taskcrusher.storage.XmlUserInboxStorage;
 import t15b1.taskcrusher.testutil.EventsCollector;
 import t15b1.taskcrusher.testutil.TypicalTestPersons;
 
@@ -89,7 +89,7 @@ public class StorageManagerTest {
     /**
      * A Stub class to throw an exception when the save method is called
      */
-    class XmlAddressBookStorageExceptionThrowingStub extends XmlAddressBookStorage {
+    class XmlAddressBookStorageExceptionThrowingStub extends XmlUserInboxStorage {
 
         public XmlAddressBookStorageExceptionThrowingStub(String filePath) {
             super(filePath);

@@ -11,7 +11,7 @@ import t15b1.taskcrusher.commons.util.FileUtil;
 import t15b1.taskcrusher.model.ReadOnlyUserInbox;
 import t15b1.taskcrusher.model.UserInbox;
 
-public class TextFileInboxStorage implements AddressBookStorage {
+public class TextFileInboxStorage implements UserInboxStorage {
     
     private static final Logger logger = LogsCenter.getLogger(TextFileInboxStorage.class);
 

@@ -9,13 +9,13 @@ import t15b1.taskcrusher.commons.exceptions.DataConversionException;
 import t15b1.taskcrusher.commons.util.XmlUtil;
 
 /**
- * Stores addressbook data in an XML file
+ * Stores userInbox data in an XML file
  */
 public class XmlFileStorage {
     /**
-     * Saves the given addressbook data to the specified file.
+     * Saves the given userInbox data to the specified file.
      */
-    public static void saveDataToFile(File file, XmlSerializableAddressBook addressBook)
+    public static void saveDataToFile(File file, XmlSerializableUserInbox addressBook)
             throws FileNotFoundException {
         try {
             XmlUtil.saveDataToFile(file, addressBook);
@@ -25,12 +25,12 @@ public class XmlFileStorage {
     }
 
     /**
-     * Returns address book in the file or an empty address book
+     * Returns userInbox book in the file or an empty user Inbox
      */
-    public static XmlSerializableAddressBook loadDataFromSaveFile(File file) throws DataConversionException,
+    public static XmlSerializableUserInbox loadDataFromSaveFile(File file) throws DataConversionException,
                                                                             FileNotFoundException {
         try {
-            return XmlUtil.getDataFromFile(file, XmlSerializableAddressBook.class);
+            return XmlUtil.getDataFromFile(file, XmlSerializableUserInbox.class);
         } catch (JAXBException e) {
             throw new DataConversionException(e);
         }

@@ -9,7 +9,7 @@ import t15b1.taskcrusher.commons.core.Config;
 import t15b1.taskcrusher.commons.core.GuiSettings;
 import t15b1.taskcrusher.model.ReadOnlyUserInbox;
 import t15b1.taskcrusher.model.UserPrefs;
-import t15b1.taskcrusher.storage.XmlSerializableAddressBook;
+import t15b1.taskcrusher.storage.XmlSerializableUserInbox;
 import t15b1.taskcrusher.testutil.TestUtil;
 
 /**
@@ -37,7 +37,7 @@ public class TestApp extends MainApp {
         // If some initial local data has been provided, write those to the file
         if (initialDataSupplier.get() != null) {
             TestUtil.createDataFileWithData(
-                    new XmlSerializableAddressBook(this.initialDataSupplier.get()),
+                    new XmlSerializableUserInbox(this.initialDataSupplier.get()),
                     this.saveFileLocation);
         }
     }

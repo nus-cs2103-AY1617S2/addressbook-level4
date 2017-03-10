@@ -12,15 +12,15 @@ import t15b1.taskcrusher.commons.util.FileUtil;
 import t15b1.taskcrusher.model.ReadOnlyUserInbox;
 
 /**
- * A class to access AddressBook data stored as an xml file on the hard disk.
+ * A class to access userInbox data stored as an xml file on the hard disk.
  */
-public class XmlAddressBookStorage implements AddressBookStorage {
+public class XmlUserInboxStorage implements UserInboxStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(XmlAddressBookStorage.class);
+    private static final Logger logger = LogsCenter.getLogger(XmlUserInboxStorage.class);
 
     private String filePath;
 
-    public XmlAddressBookStorage(String filePath) {
+    public XmlUserInboxStorage(String filePath) {
         this.filePath = filePath;
     }
 
@@ -42,34 +42,34 @@ public class XmlAddressBookStorage implements AddressBookStorage {
                                                                                  FileNotFoundException {
         assert filePath != null;
 
-        File addressBookFile = new File(filePath);
+        File userInboxFile = new File(filePath);
 
-        if (!addressBookFile.exists()) {
-            logger.info("AddressBook file "  + addressBookFile + " not found");
+        if (!userInboxFile.exists()) {
+            logger.info("User Inbox file "  + userInboxFile + " not found");
             return Optional.empty();
         }
 
-        ReadOnlyUserInbox addressBookOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
+        ReadOnlyUserInbox userInboxOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
 
-        return Optional.of(addressBookOptional);
+        return Optional.of(userInboxOptional);
     }
 
     @Override
-    public void saveUserInbox(ReadOnlyUserInbox addressBook) throws IOException {
-        saveUserInbox(addressBook, filePath);
+    public void saveUserInbox(ReadOnlyUserInbox userInbox) throws IOException {
+        saveUserInbox(userInbox, filePath);
     }
 
     /**
      * Similar to {@link #saveUserInbox(ReadOnlyUserInbox)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveUserInbox(ReadOnlyUserInbox addressBook, String filePath) throws IOException {
-        assert addressBook != null;
+    public void saveUserInbox(ReadOnlyUserInbox userInbox, String filePath) throws IOException {
+        assert userInbox != null;
         assert filePath != null;
 
         File file = new File(filePath);
         FileUtil.createIfMissing(file);
-        XmlFileStorage.saveDataToFile(file, new XmlSerializableAddressBook(addressBook));
+        XmlFileStorage.saveDataToFile(file, new XmlSerializableUserInbox(userInbox));
     }
 
 }

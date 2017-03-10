@@ -20,13 +20,13 @@ import t15b1.taskcrusher.model.UserPrefs;
 public class StorageManager extends ComponentManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AddressBookStorage addressBookStorage;
+    private UserInboxStorage userInboxStorage;
     private UserPrefsStorage userPrefsStorage;
 
 
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(UserInboxStorage userInboxStorage, UserPrefsStorage userPrefsStorage) {
         super();
-        this.addressBookStorage = addressBookStorage;
+        this.userInboxStorage = userInboxStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -55,29 +55,29 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Override
     public String getUserInboxFilePath() {
-        return addressBookStorage.getUserInboxFilePath();
+        return userInboxStorage.getUserInboxFilePath();
     }
 
     @Override
     public Optional<ReadOnlyUserInbox> readUserInbox() throws DataConversionException, IOException {
-        return readUserInbox(addressBookStorage.getUserInboxFilePath());
+        return readUserInbox(userInboxStorage.getUserInboxFilePath());
     }
 
     @Override
     public Optional<ReadOnlyUserInbox> readUserInbox(String filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return addressBookStorage.readUserInbox(filePath);
+        return userInboxStorage.readUserInbox(filePath);
     }
 
     @Override
-    public void saveUserInbox(ReadOnlyUserInbox addressBook) throws IOException {
-        saveUserInbox(addressBook, addressBookStorage.getUserInboxFilePath());
+    public void saveUserInbox(ReadOnlyUserInbox userInbox) throws IOException {
+        saveUserInbox(userInbox, userInboxStorage.getUserInboxFilePath());
     }
 
     @Override
-    public void saveUserInbox(ReadOnlyUserInbox addressBook, String filePath) throws IOException {
+    public void saveUserInbox(ReadOnlyUserInbox userInbox, String filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveUserInbox(addressBook, filePath);
+        userInboxStorage.saveUserInbox(userInbox, filePath);
     }
 
 

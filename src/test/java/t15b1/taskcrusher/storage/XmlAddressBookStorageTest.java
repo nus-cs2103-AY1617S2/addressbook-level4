@@ -16,7 +16,7 @@ import t15b1.taskcrusher.commons.util.FileUtil;
 import t15b1.taskcrusher.model.ReadOnlyUserInbox;
 import t15b1.taskcrusher.model.UserInbox;
 import t15b1.taskcrusher.model.task.Task;
-import t15b1.taskcrusher.storage.XmlAddressBookStorage;
+import t15b1.taskcrusher.storage.XmlUserInboxStorage;
 import t15b1.taskcrusher.testutil.TypicalTestPersons;
 
 public class XmlAddressBookStorageTest {
@@ -35,7 +35,7 @@ public class XmlAddressBookStorageTest {
     }
 
     private java.util.Optional<ReadOnlyUserInbox> readAddressBook(String filePath) throws Exception {
-        return new XmlAddressBookStorage(filePath).readUserInbox(addToTestDataPathIfNotNull(filePath));
+        return new XmlUserInboxStorage(filePath).readUserInbox(addToTestDataPathIfNotNull(filePath));
     }
 
     private String addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -65,7 +65,7 @@ public class XmlAddressBookStorageTest {
         String filePath = testFolder.getRoot().getPath() + "TempAddressBook.xml";
         TypicalTestPersons td = new TypicalTestPersons();
         UserInbox original = td.getTypicalAddressBook();
-        XmlAddressBookStorage xmlAddressBookStorage = new XmlAddressBookStorage(filePath);
+        XmlUserInboxStorage xmlAddressBookStorage = new XmlUserInboxStorage(filePath);
 
         //Save in new file and read back
         xmlAddressBookStorage.saveUserInbox(original, filePath);
@@ -94,7 +94,7 @@ public class XmlAddressBookStorageTest {
     }
 
     private void saveAddressBook(ReadOnlyUserInbox addressBook, String filePath) throws IOException {
-        new XmlAddressBookStorage(filePath).saveUserInbox(addressBook, addToTestDataPathIfNotNull(filePath));
+        new XmlUserInboxStorage(filePath).saveUserInbox(addressBook, addToTestDataPathIfNotNull(filePath));
     }
 
     @Test
