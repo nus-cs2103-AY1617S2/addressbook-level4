@@ -124,8 +124,8 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
         LocalDateTime startDate4 = DateTimeUtil.toDate("16 Mar 2017, 10am");
         LocalDateTime endDate4 = DateTimeUtil.toDate("16 Mar 2017, 12pm");
         String command4 = "add " + taskDescription4 + " startdate/" + startDate4 + " enddate/" + endDate4;
-        Task task4 = new Task(taskDescription4, startDate4, endDate4);
         commandBox.runCommand(command4);
+        Task task4 = new Task(taskDescription4, startDate4, endDate4);
         assertTrue(isTaskShown(task1));
         assertFalse(isTaskShown(task2));
         assertFalse(isTaskShown(task3));

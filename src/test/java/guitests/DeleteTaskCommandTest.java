@@ -68,8 +68,8 @@ public class DeleteTaskCommandTest extends ToLuistGuiTest {
         LocalDateTime startDate6 = DateTimeUtil.toDate("16 Mar 2017, 10am");
         LocalDateTime endDate6 = DateTimeUtil.toDate("16 Mar 2017, 12pm");
         String command6 = "add " + taskDescription6 + " startdate/" + startDate6 + " enddate/" + endDate6;
-        Task task6 = new Task(taskDescription6, startDate6, endDate6);
         commandBox.runCommand(command6);
+        Task task6 = new Task(taskDescription6, startDate6, endDate6);
 
         assertTrue(isTaskShown(task));
         assertTrue(isTaskShown(task2));
