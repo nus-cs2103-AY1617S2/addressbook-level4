@@ -5,7 +5,7 @@ We are a team based in the [School of Computing, National University of Singapor
 ## Project Team
 
 #### [Jacob Levy](http://github.com/levyjr) <br>
-<img src="images/Photo Jacob Levy.jpg" width="150"><br>
+<img src="images/PhotoJacobLevy.jpg" width="150"><br>
 **Role**: Project Advisor
 
 -----
