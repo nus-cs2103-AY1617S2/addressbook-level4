@@ -18,10 +18,6 @@ import seedu.taskboss.logic.commands.IncorrectCommand;
  * Parses input arguments and creates a new AddCommand object
  */
 public class AddCommandParser {
-    
-    private String taskName;
-    private String priority;
-    private String information;
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
