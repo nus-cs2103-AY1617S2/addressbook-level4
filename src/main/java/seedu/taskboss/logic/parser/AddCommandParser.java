@@ -38,5 +38,4 @@ public class AddCommandParser {
             return new IncorrectCommand(ive.getMessage());
         }
     }
-
 }
