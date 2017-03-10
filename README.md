@@ -21,11 +21,10 @@
 * [About Us](docs/AboutUs.md)
 * [Contact Us](docs/ContactUs.md)
 
-
 #### Acknowledgements
 
-* Some parts of this application were inspired by the excellent
-  [Java FX tutorial](http://code.makery.ch/library/javafx-8-tutorial/) by *Marco Jakob*.
+* Built on top of SE.edu's sample [Address Book (Level 4)](https://github.com/se-edu/addressbook-level4).
 
 
 #### Licence : [MIT](LICENSE)
+
