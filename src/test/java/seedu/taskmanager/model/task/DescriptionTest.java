@@ -10,14 +10,14 @@ import seedu.taskmanager.model.task.Description;
 public class DescriptionTest {
 
     @Test
-    public void isValidAddress() {
-        // invalid addresses
+    public void isValidDescription() {
+        // invalid description
         assertFalse(Description.isValidDescription("")); // empty string
         assertFalse(Description.isValidDescription(" ")); // spaces only
 
-        // valid addresses
-        assertTrue(Description.isValidDescription("Blk 456, Den Road, #01-355"));
+        // valid description
+        assertTrue(Description.isValidDescription("Banana must be ripe"));
         assertTrue(Description.isValidDescription("-")); // one character
-        assertTrue(Description.isValidDescription("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
+        assertTrue(Description.isValidDescription("Meeting at Leng Inc; 1234 Market St, San Francisco CA 2349879, USA")); // long address
     }
 }

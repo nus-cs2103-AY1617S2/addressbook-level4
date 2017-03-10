@@ -10,17 +10,27 @@ import seedu.taskmanager.model.task.StartDate;
 public class StartDateTest {
 
     @Test
-    public void isValidPhone() {
-        // invalid phone numbers
+    public void isValidStartDate() {
+        
+        // blank end date
         assertFalse(StartDate.isValidStartDate("")); // empty string
         assertFalse(StartDate.isValidStartDate(" ")); // spaces only
-        assertFalse(StartDate.isValidStartDate("phone")); // non-numeric
-        assertFalse(StartDate.isValidStartDate("9011p041")); // alphabets within digits
-        assertFalse(StartDate.isValidStartDate("9312 1534")); // spaces within digits
 
-        // valid phone numbers
-        assertTrue(StartDate.isValidStartDate("93121534"));
-        assertTrue(StartDate.isValidStartDate("4")); // short phone numbers
-        assertTrue(StartDate.isValidStartDate("124293842033123")); // long phone numbers
+        // missing parts
+        assertFalse(StartDate.isValidStartDate("01/03")); // missing year (YYYY)
+        assertFalse(StartDate.isValidStartDate("01/2016")); // missing day (DD)
+
+        // invalid parts
+        assertFalse(StartDate.isValidStartDate("46/02/2017")); // invalid day (DD)
+        assertFalse(StartDate.isValidStartDate("6/02/2017")); // invalid day (DD)
+        assertFalse(StartDate.isValidStartDate("01/25/2017")); // invalid month (MM)
+        assertFalse(StartDate.isValidStartDate("01/5/2017")); // invalid month (MM)
+        assertFalse(StartDate.isValidStartDate("01/02/17")); // invalid year (YYYY)
+        assertFalse(StartDate.isValidStartDate("01 / 02 / 2017")); // spaces in date
+        assertFalse(StartDate.isValidStartDate("01,02,2017")); // invalid separator
+
+        // valid end date
+        assertTrue(StartDate.isValidStartDate("01/02/2017"));
+        assertTrue(StartDate.isValidStartDate("15/12/2019"));
     }
 }

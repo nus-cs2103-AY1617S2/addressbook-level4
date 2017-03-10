@@ -15,13 +15,13 @@ public class TitleTest {
         assertFalse(Title.isValidTitle("")); // empty string
         assertFalse(Title.isValidTitle(" ")); // spaces only
         assertFalse(Title.isValidTitle("^")); // only non-alphanumeric characters
-        assertFalse(Title.isValidTitle("peter*")); // contains non-alphanumeric characters
+        assertFalse(Title.isValidTitle("peter!")); // contains non-alphanumeric characters
 
         // valid name
-        assertTrue(Title.isValidTitle("peter jack")); // alphabets only
+        assertTrue(Title.isValidTitle("borrow mouse")); // alphabets only
         assertTrue(Title.isValidTitle("12345")); // numbers only
-        assertTrue(Title.isValidTitle("peter the 2nd")); // alphanumeric characters
-        assertTrue(Title.isValidTitle("Capital Tan")); // with capital letters
-        assertTrue(Title.isValidTitle("David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(Title.isValidTitle("buy a 2nd car")); // alphanumeric characters
+        assertTrue(Title.isValidTitle("Visit NUS")); // with capital letters
+        assertTrue(Title.isValidTitle("Meeting with David Roger Jackson Ray Jr 2nd")); // long title
     }
 }
