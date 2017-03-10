@@ -14,7 +14,7 @@ import seedu.doit.model.task.ReadOnlyTask;
 /**
  * Provides a handle to a task card in the task list panel.
  */
-public class taskCardHandle extends GuiHandle {
+public class TaskCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
     private static final String DESCRIPTION_FIELD_ID = "#description";
     private static final String PRIORITY_FIELD_ID = "#priority";
@@ -23,7 +23,7 @@ public class taskCardHandle extends GuiHandle {
 
     private Node node;
 
-    public taskCardHandle(GuiRobot guiRobot, Stage primaryStage, Node node) {
+    public TaskCardHandle(GuiRobot guiRobot, Stage primaryStage, Node node) {
         super(guiRobot, primaryStage, null);
         this.node = node;
     }
@@ -54,18 +54,18 @@ public class taskCardHandle extends GuiHandle {
 
     private List<String> getTags(Region tagsContainer) {
         return tagsContainer
-                .getChildrenUnmodifiable()
-                .stream()
-                .map(node -> ((Labeled) node).getText())
-                .collect(Collectors.toList());
+            .getChildrenUnmodifiable()
+            .stream()
+            .map(node -> ((Labeled) node).getText())
+            .collect(Collectors.toList());
     }
 
     private List<String> getTags(UniqueTagList tags) {
         return tags
-                .asObservableList()
-                .stream()
-                .map(tag -> tag.tagName)
-                .collect(Collectors.toList());
+            .asObservableList()
+            .stream()
+            .map(tag -> tag.tagName)
+            .collect(Collectors.toList());
     }
 
     private Region getTagsContainer() {
@@ -74,21 +74,21 @@ public class taskCardHandle extends GuiHandle {
 
     public boolean isSameTask(ReadOnlyTask task) {
         return getFullName().equals(task.getName().fullName)
-                && getPriority().equals(task.getPriority().value)
-                && getDeadline().equals(task.getDeadline().value)
-                && getDescription().equals(task.getDescription().value)
-                && getTags().equals(getTags(task.getTags()));
+            && getPriority().equals(task.getPriority().value)
+            && getDeadline().equals(task.getDeadline().value)
+            && getDescription().equals(task.getDescription().value)
+            && getTags().equals(getTags(task.getTags()));
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof taskCardHandle) {
-            taskCardHandle handle = (taskCardHandle) obj;
+        if (obj instanceof TaskCardHandle) {
+            TaskCardHandle handle = (TaskCardHandle) obj;
             return getFullName().equals(handle.getFullName())
-                    && getPriority().equals(handle.getPriority())
-                    && getDeadline().equals(handle.getDeadline())
-                    && getDescription().equals(handle.getDescription())
-                    && getTags().equals(handle.getTags());
+                && getPriority().equals(handle.getPriority())
+                && getDeadline().equals(handle.getDeadline())
+                && getDescription().equals(handle.getDescription())
+                && getTags().equals(handle.getTags());
         }
         return super.equals(obj);
     }

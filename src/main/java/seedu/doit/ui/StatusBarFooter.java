@@ -19,13 +19,11 @@ import seedu.doit.commons.util.FxViewUtil;
  */
 public class StatusBarFooter extends UiPart<Region> {
     private static final Logger logger = LogsCenter.getLogger(StatusBarFooter.class);
-
+    private static final String FXML = "StatusBarFooter.fxml";
     @FXML
     private StatusBar syncStatus;
     @FXML
     private StatusBar saveLocationStatus;
-
-    private static final String FXML = "StatusBarFooter.fxml";
 
     public StatusBarFooter(AnchorPane placeHolder, String saveLocation) {
         super(FXML);

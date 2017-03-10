@@ -9,7 +9,7 @@ import seedu.doit.commons.exceptions.IllegalValueException;
 public class Name {
 
     public static final String MESSAGE_NAME_CONSTRAINTS =
-            "Task names should only contain alphanumeric characters and spaces, and it should not be blank";
+        "Task names should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
      * The first character of the task must not be a whitespace,
@@ -49,8 +49,8 @@ public class Name {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Name // instanceof handles nulls
-                && this.fullName.equals(((Name) other).fullName)); // state check
+            || (other instanceof Name // instanceof handles nulls
+            && this.fullName.equals(((Name) other).fullName)); // state check
     }
 
     @Override

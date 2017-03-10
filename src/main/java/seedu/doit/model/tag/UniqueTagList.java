@@ -17,7 +17,7 @@ import seedu.doit.commons.util.CollectionUtil;
 
 /**
  * A list of tags that enforces no nulls and uniqueness between its elements.
- *
+ * <p>
  * Supports minimal set of list operations for the app's features.
  *
  * @see Tag#equals(Object)
@@ -30,7 +30,8 @@ public class UniqueTagList implements Iterable<Tag> {
     /**
      * Constructs empty TagList.
      */
-    public UniqueTagList() {}
+    public UniqueTagList() {
+    }
 
     /**
      * Creates a UniqueTagList using given String tags.
@@ -112,8 +113,8 @@ public class UniqueTagList implements Iterable<Tag> {
     public void mergeFrom(UniqueTagList from) {
         final Set<Tag> alreadyInside = this.toSet();
         from.internalList.stream()
-                .filter(tag -> !alreadyInside.contains(tag))
-                .forEach(internalList::add);
+            .filter(tag -> !alreadyInside.contains(tag))
+            .forEach(internalList::add);
     }
 
     /**
@@ -149,9 +150,9 @@ public class UniqueTagList implements Iterable<Tag> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniqueTagList // instanceof handles nulls
-                && this.internalList.equals(
-                ((UniqueTagList) other).internalList));
+            || (other instanceof UniqueTagList // instanceof handles nulls
+            && this.internalList.equals(
+            ((UniqueTagList) other).internalList));
     }
 
     public boolean equalsOrderInsensitive(UniqueTagList other) {

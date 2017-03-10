@@ -84,6 +84,7 @@ public class MainWindow extends UiPart<Region> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -146,6 +147,7 @@ public class MainWindow extends UiPart<Region> {
 
     /**
      * Sets the given image as the icon of the main window.
+     *
      * @param iconSource e.g. {@code "/images/help_icon.png"}
      */
     private void setIcon(String iconSource) {
@@ -174,7 +176,7 @@ public class MainWindow extends UiPart<Region> {
      */
     GuiSettings getCurrentGuiSetting() {
         return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+            (int) primaryStage.getX(), (int) primaryStage.getY());
     }
 
     @FXML

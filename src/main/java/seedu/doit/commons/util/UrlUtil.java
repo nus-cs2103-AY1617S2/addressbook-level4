@@ -16,9 +16,9 @@ public class UrlUtil {
             return false;
         }
         return url1.getHost().toLowerCase().replaceFirst("www.", "")
-                .equalsIgnoreCase(url2.getHost().replaceFirst("www.", ""))
-                && url1.getPath().replaceAll("/", "")
-                .equalsIgnoreCase(url2.getPath().replaceAll("/", ""));
+            .equalsIgnoreCase(url2.getHost().replaceFirst("www.", ""))
+            && url1.getPath().replaceAll("/", "")
+            .equalsIgnoreCase(url2.getPath().replaceAll("/", ""));
     }
 
 }

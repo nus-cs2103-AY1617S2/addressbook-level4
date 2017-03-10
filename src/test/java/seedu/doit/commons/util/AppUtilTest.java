@@ -6,13 +6,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.doit.commons.util.AppUtil;
-
 public class AppUtilTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
-
 
 
     @Test

@@ -11,8 +11,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.doit.commons.util.FileUtil;
-import seedu.doit.commons.util.XmlUtil;
 import seedu.doit.model.TaskManager;
 import seedu.doit.storage.XmlSerializableTaskManager;
 import seedu.doit.testutil.TaskManagerBuilder;
@@ -89,7 +87,7 @@ public class XmlUtilTest {
 
         TaskManagerBuilder builder = new TaskManagerBuilder(new TaskManager());
         dataToWrite = new XmlSerializableTaskManager(
-                builder.withTask(TestUtil.generateSampleTaskData().get(0)).withTag("Friends").build());
+            builder.withTask(TestUtil.generateSampleTaskData().get(0)).withTag("Friends").build());
 
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
         dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableTaskManager.class);

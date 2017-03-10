@@ -8,7 +8,12 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.doit.commons.exceptions.IllegalValueException;
 import seedu.doit.model.tag.Tag;
 import seedu.doit.model.tag.UniqueTagList;
-import seedu.doit.model.task.*;
+import seedu.doit.model.task.Deadline;
+import seedu.doit.model.task.Description;
+import seedu.doit.model.task.Name;
+import seedu.doit.model.task.Priority;
+import seedu.doit.model.task.ReadOnlyTask;
+import seedu.doit.model.task.Task;
 
 /**
  * JAXB-friendly version of the Task.
@@ -31,7 +36,8 @@ public class XmlAdaptedTask {
      * Constructs an XmlAdaptedTask.
      * This is the no-arg constructor that is required by JAXB.
      */
-    public XmlAdaptedTask() {}
+    public XmlAdaptedTask() {
+    }
 
 
     /**
