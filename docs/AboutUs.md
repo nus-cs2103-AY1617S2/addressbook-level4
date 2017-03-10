@@ -6,13 +6,13 @@ We are a team based in the [School of Computing, National University of Singapor
 
 #### [Jacob Levy](http://github.com/levyjr) <br>
 <img src="images/PhotoJacobLevy.jpg" width="150"><br>
-Role: Developer
+Role: Developer <br>
 Responsibilities: Documentation, Deliverables and Deadlines, Scheduling and tracking
 
 -----
 
 #### [Daniel Mullen](http://github.com/DanielMullen3)
-<img src="images/daniel.jpg" width="150"><br>
+<img src="images/dan2.jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: Testing, Back End
 
