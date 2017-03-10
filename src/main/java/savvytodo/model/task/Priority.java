@@ -10,7 +10,7 @@ public class Priority {
 
     public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority should be 'low', 'medium' or 'high'";
     public static final String PRIORITY_VALIDATION_REGEX = "(^low$)|(^medium$)|(^high$)";
-
+ 
     public final String value;
 
     /**
