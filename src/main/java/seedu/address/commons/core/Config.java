@@ -42,19 +42,19 @@ public class Config {
         this.userPrefsFilePath = userPrefsFilePath;
     }
 
-    public String getAddressBookFilePath() {
+    public String getTaskManagerFilePath() {
         return taskManagerFilePath;
     }
 
-    public void setAddressBookFilePath(String addressBookFilePath) {
-        this.taskManagerFilePath = addressBookFilePath;
+    public void setTaskManagerFilePath(String taskManagerFilePath) {
+        this.taskManagerFilePath = taskManagerFilePath;
     }
 
-    public String getAddressBookName() {
+    public String getTaskManagerName() {
         return appName;
     }
 
-    public void setAddressBookName(String addressBookName) {
+    public void setTaskManagerName(String addressBookName) {
         this.appName = addressBookName;
     }
 
