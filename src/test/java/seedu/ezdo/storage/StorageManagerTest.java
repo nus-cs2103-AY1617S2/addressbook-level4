@@ -33,7 +33,7 @@ public class StorageManagerTest {
     @Before
     public void setUp() {
         config = new Config();
-        storageManager = new StorageManager(getTempFilePath("ab"), getTempFilePath("prefs"), config );
+        storageManager = new StorageManager(getTempFilePath("ab"), getTempFilePath("prefs"), config);
     }
 
 

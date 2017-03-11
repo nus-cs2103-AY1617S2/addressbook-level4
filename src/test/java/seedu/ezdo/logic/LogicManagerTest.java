@@ -66,7 +66,6 @@ public class LogicManagerTest {
 
     private Model model;
     private Logic logic;
-    private Config config;
 
     //These are for checking the correctness of the events raised
     private ReadOnlyEzDo latestSavedEzDo;
@@ -91,7 +90,7 @@ public class LogicManagerTest {
     @Before
     public void setUp() {
         model = new ModelManager();
-        config = new Config();
+        Config config = new Config();
         String tempEzDoFile = saveFolder.getRoot().getPath() + "TempEzDo.xml";
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
         logic = new LogicManager(model, new StorageManager(tempEzDoFile, tempPreferencesFile, config));
