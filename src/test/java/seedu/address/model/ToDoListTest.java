@@ -14,10 +14,12 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.task.ReadOnlyTask;
-import seedu.address.model.task.Task;
 import seedu.address.testutil.TypicalTestTasks;
+import seedu.todolist.model.ReadOnlyToDoList;
+import seedu.todolist.model.ToDoList;
+import seedu.todolist.model.tag.Tag;
+import seedu.todolist.model.task.ReadOnlyTask;
+import seedu.todolist.model.task.Task;
 
 public class ToDoListTest {
 

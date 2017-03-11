@@ -12,13 +12,17 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import seedu.address.commons.events.model.ToDoListChangedEvent;
-import seedu.address.commons.events.storage.DataSavingExceptionEvent;
-import seedu.address.model.ReadOnlyToDoList;
-import seedu.address.model.ToDoList;
-import seedu.address.model.UserPrefs;
 import seedu.address.testutil.EventsCollector;
 import seedu.address.testutil.TypicalTestTasks;
+import seedu.todolist.commons.events.model.ToDoListChangedEvent;
+import seedu.todolist.commons.events.storage.DataSavingExceptionEvent;
+import seedu.todolist.model.ReadOnlyToDoList;
+import seedu.todolist.model.ToDoList;
+import seedu.todolist.model.UserPrefs;
+import seedu.todolist.storage.JsonUserPrefsStorage;
+import seedu.todolist.storage.Storage;
+import seedu.todolist.storage.StorageManager;
+import seedu.todolist.storage.XmlAddressBookStorage;
 
 public class StorageManagerTest {
 

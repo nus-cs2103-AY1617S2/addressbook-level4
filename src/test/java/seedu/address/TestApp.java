@@ -4,12 +4,13 @@ import java.util.function.Supplier;
 
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import seedu.address.commons.core.Config;
-import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.ReadOnlyToDoList;
-import seedu.address.model.UserPrefs;
-import seedu.address.storage.XmlSerializableAddressBook;
 import seedu.address.testutil.TestUtil;
+import seedu.todolist.MainApp;
+import seedu.todolist.commons.core.Config;
+import seedu.todolist.commons.core.GuiSettings;
+import seedu.todolist.model.ReadOnlyToDoList;
+import seedu.todolist.model.UserPrefs;
+import seedu.todolist.storage.XmlSerializableAddressBook;
 
 /**
  * This class is meant to override some properties of MainApp so that it will be suited for

@@ -1,8 +1,8 @@
 package seedu.address.testutil;
 
-import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Name;
-import seedu.address.model.task.ReadOnlyTask;
+import seedu.todolist.model.tag.UniqueTagList;
+import seedu.todolist.model.task.Name;
+import seedu.todolist.model.task.ReadOnlyTask;
 
 /**
  * A mutable person object. For testing only.
