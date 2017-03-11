@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Avenir Light';
+    src: url('/fonts/avenir-light.ttf');
+}
+
 .background {
     -fx-background-color: derive(#1d1d1d, 20%);
 }
@@ -25,7 +30,10 @@
 
 .text-field {
     -fx-font-size: 12pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Avenir Light";
+    -fx-border-color: #FFFFFF;
+    -fx-focus-color: -fx-control-inner-background;
+    -fx-faint-focus-color: -fx-control-inner-background;
 }
 
 .tab-pane {
