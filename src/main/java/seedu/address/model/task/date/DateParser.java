@@ -13,6 +13,7 @@ import seedu.address.commons.util.StringUtil;
  * A Parser for TaskTime class.
  *
  * Strings will be converted to lowercase to make parsing easier
+ * Default date will be today instead of 01/01/1970 as in Java implementation.
  */
 public class DateParser {
 
@@ -74,16 +75,16 @@ public class DateParser {
                                     (DateValue) new DateOnly(parseResult.get()) : null));
     }
 
-    public static Optional<DateValue> parseTimeOnlyString(String dateString) {
-        Optional<Date> parseResult = parseString(dateString, TIME_VALIDATION_FORMAT);
-        return Optional.ofNullable((parseResult.isPresent() ?
-                                    (DateValue) new DateTime(parseResult.get()) : null));
-    }
-
     public static Optional<DateValue> parseDateTimeString(String dateString) {
-        Optional<Date> parseResult = parseString(dateString, getAllPossibleDateTimeFormats());
-        return Optional.ofNullable((parseResult.isPresent() ?
-                                    (DateValue) new DateTime(parseResult.get()) : null));
+        Optional<Date> parseResult = parseString(dateString, TIME_VALIDATION_FORMAT);
+        if (parseResult.isPresent()) {
+            // If only time is present, date is default to be today.
+            return Optional.of((DateValue) new DateTime(new Date(), parseResult.get()));
+        } else {
+            parseResult = parseString(dateString, getAllPossibleDateTimeFormats());
+            return Optional.ofNullable((parseResult.isPresent() ?
+                                        (DateValue) new DateTime(parseResult.get()) : null));
+        }
     }
 
     public static Optional<PairResult<DateValue, DateValue>> parseTimePeriodString(String dateString) {
@@ -95,19 +96,26 @@ public class DateParser {
         }
 
         String[] texts = dateString.split(TIMEPERIOD_DELIMINATORS_REGEX);
-        Optional<DateValue> beginDate = parseDateOnlyString(dateString);
-        if (!beginDate.isPresent()) {
-            beginDate = parseDateTimeString(dateString);
+        // DateString must be splitted into exactly 3 parts (empty, begin date and end date)
+        if (texts.length != 3) {
+            return Optional.ofNullable(null);
         }
-        Optional<DateValue> endDate = parseDateOnlyString(dateString);
+        String beginDateString = texts[1];
+        String endDateString = texts[2];
+
+        Optional<DateValue> beginDate = parseDateOnlyString(beginDateString);
+        if (!beginDate.isPresent()) {
+            beginDate = parseDateTimeString(beginDateString);
+        }
+        Optional<DateValue> endDate = parseDateOnlyString(endDateString);
         if (!endDate.isPresent()) {
-            endDate = parseDateTimeString(dateString);
+            endDate = parseDateTimeString(endDateString);
         }
 
         if (beginDate.isPresent() && endDate.isPresent()) {
             return Optional.of(new PairResult<DateValue, DateValue>(beginDate.get(), endDate.get()));
         } else {
-            return null;
+            return Optional.ofNullable(null);
         }
     }
 

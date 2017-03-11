@@ -26,12 +26,6 @@ public class TimePoint implements TaskDate {
             return;
         }
 
-        parseResult = DateParser.parseTimeOnlyString(dateString);
-        if (parseResult.isPresent()) {
-            date = ((DateValue) new DateTime(new Date(), parseResult.get().getValue()));
-            return;
-        }
-
         parseResult = DateParser.parseDateTimeString(dateString);
         if (parseResult.isPresent()) {
             date = parseResult.get();
