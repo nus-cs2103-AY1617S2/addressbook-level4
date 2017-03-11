@@ -2,7 +2,6 @@ package seedu.toluist.model;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.util.Arrays;
 import java.util.List;
@@ -56,42 +55,9 @@ public class TodoListTest {
     }
 
     @Test
-    public void testGetTask_getValidTask() {
-        Task task = todoList1.getTask("3");
-        assertTrue(task.equals(task3));
-    }
-
-    @Test
-    public void testGetTask_getInvalidTask() {
-        try {
-            todoList1.getTask("-1");
-            fail("Should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
-        }
-        try {
-            todoList1.getTask("5");
-            fail("Should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
-        }
-        try {
-            todoList1.getTask("Banana");
-            fail("Should throw NumberFormatException");
-        } catch (NumberFormatException numberFormatException) {
-        }
-    }
-
-    @Test
     public void testGetTasks_allTasks() {
         List<Task> actual = todoList1.getTasks();
         List<Task> expected = Arrays.asList(task1, task2, task3, task4);
-        assertTrue(actual.equals(expected));
-    }
-
-    @Test
-    public void testGetTasks_someTasks() {
-        List<Integer> indexes = Arrays.asList(1, 3);
-        List<Task> actual = todoList1.getTasks(indexes);
-        List<Task> expected = Arrays.asList(task1, task3);
         assertTrue(actual.equals(expected));
     }
 
