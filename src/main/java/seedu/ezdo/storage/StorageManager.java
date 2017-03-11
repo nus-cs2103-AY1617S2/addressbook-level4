@@ -128,4 +128,9 @@ public class StorageManager extends ComponentManager implements Storage {
         }
     }
 
+    @Override
+    public void moveEzDo(String oldPath, String newPath) throws IOException {
+        ezDoStorage.moveEzDo(oldPath, newPath);
+    }
+
 }

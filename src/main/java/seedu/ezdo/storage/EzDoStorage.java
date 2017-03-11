@@ -46,4 +46,6 @@ public interface EzDoStorage {
      */
     void saveEzDo(ReadOnlyEzDo ezDo, String filePath) throws IOException;
 
+    void moveEzDo(String newPath, String oldPath) throws IOException;
+
 }
