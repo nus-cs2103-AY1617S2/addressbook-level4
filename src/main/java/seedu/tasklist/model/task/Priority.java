@@ -1,5 +1,7 @@
 package seedu.tasklist.model.task;
 
+import com.google.common.base.Optional;
+
 import seedu.tasklist.commons.exceptions.IllegalValueException;
 
 public class Priority {
@@ -11,6 +13,9 @@ public class Priority {
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String PRIORITY_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String PRIORITY_LOW = "low";
+    public static final String PRIORITY_MEDIUM = "medium";
+    public static final String PRIORITY_HIGH = "high";
 
     public final String priority;
 
@@ -28,11 +33,47 @@ public class Priority {
         this.priority = trimmedPriority;
     }
 
+    public Priority(Optional<String> priority) throws IllegalValueException {
+        if (priority.isPresent()) {
+            String priorityString = priority.get();
+            assert priority != null;
+            if (!isValidPriority(priorityString)) {
+                throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
+            }
+            this.priority = getPriorityType(priorityString);
+        } else {
+            this.priority = null;
+        }
+    }
+
     /**
-     * Returns true if a given string is a valid Task name.
+     * Returns true if Priority is present
+     */
+    public boolean isPriorityPresent(Optional<String> priority) {
+        return priority.isPresent();
+    }
+
+    /**
+     * Returns true if a given string is a valid Priority.
      */
     public static boolean isValidPriority(String test) {
         return test.matches(PRIORITY_VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns the priority type. Throws IllegalArgumentException if not available
+     */
+    public static String getPriorityType(String priority) throws IllegalArgumentException {
+        String lowerCasePriority = priority.toLowerCase();
+        if (lowerCasePriority.equals(PRIORITY_LOW)) {
+            return PRIORITY_LOW;
+        } else if (lowerCasePriority.equals(PRIORITY_MEDIUM)) {
+            return PRIORITY_MEDIUM;
+        } else if (lowerCasePriority.equals(PRIORITY_HIGH)) {
+            return PRIORITY_HIGH;
+        } else {
+            throw new IllegalArgumentException(MESSAGE_PRIORITY_CONSTRAINTS);
+        }
     }
 
     @Override
