@@ -27,11 +27,12 @@ public class DateParser {
 
     public DateTime parseStartDate(String rawStartDate) throws IllegalValueException {
 
+        String currentStartDate = rawStartDate;
         if (Locale.getDefault().equals(Locale.US)) {
-            rawStartDate = rawStartDate.replaceAll("(\\d{1,2})-(\\d{1,2})-((?:\\d\\d){1,2})", "$2-$1-$3");
+            currentStartDate = rawStartDate.replaceAll("(\\d{1,2})-(\\d{1,2})-((?:\\d\\d){1,2})", "$2-$1-$3");
         }
 
-        List<DateGroup> dateGroupList = this.nattyParser.parse(rawStartDate);
+        List<DateGroup> dateGroupList = this.nattyParser.parse(currentStartDate);
         int numDates = countDates(dateGroupList);
 
         if (numDates == 0) {
@@ -50,11 +51,12 @@ public class DateParser {
 
     public DateTime parseEndDate(String rawEndDate) throws IllegalValueException {
 
+        String currentEndDate = rawEndDate;
         if (Locale.getDefault().equals(Locale.US)) {
-            rawEndDate = rawEndDate.replaceAll("(\\d{1,2})-(\\d{1,2})-((?:\\d\\d){1,2})", "$2-$1-$3");
+            currentEndDate = rawEndDate.replaceAll("(\\d{1,2})-(\\d{1,2})-((?:\\d\\d){1,2})", "$2-$1-$3");
         }
 
-        List<DateGroup> dateGroupList = this.nattyParser.parse(rawEndDate);
+        List<DateGroup> dateGroupList = this.nattyParser.parse(currentEndDate);
         int numDates = countDates(dateGroupList);
 
         if (numDates == 0) {
