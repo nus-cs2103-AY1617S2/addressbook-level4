@@ -21,6 +21,6 @@ public class NameTest {
         assertTrue(Name.isValidName("buy 2 pens")); // alphanumeric characters
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
         assertTrue(Name.isValidName("Remember to buy birthday card and cake for Andy")); // long task names
-        assertTrue(Name.isValidName("TERM TEST")); // all capital letters 
+        assertTrue(Name.isValidName("TERM TEST")); // all capital letters
     }
 }
