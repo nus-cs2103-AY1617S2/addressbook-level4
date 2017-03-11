@@ -41,8 +41,8 @@ public class XmlAdaptedTask {
      *            XmlAdaptedTask
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
-        name = source.getName().fullName;
-        date = source.getDate().value;
+        name = source.getName().getValue();
+        date = source.getDate().getValue();
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));

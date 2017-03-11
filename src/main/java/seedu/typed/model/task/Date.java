@@ -9,7 +9,7 @@ import seedu.typed.commons.exceptions.IllegalValueException;
 public class Date {
 
     public static final String MESSAGE_DATE_CONSTRAINTS = "Task date should be in the format DD/MM/YYYY";
-    public static final String DATE_VALIDATION_REGEX = "\\d{2}\\/\\d{2}\\/\\d{4}\\";
+    public static final String DATE_VALIDATION_REGEX = "\\d{2}\\/\\d{2}\\/\\d{4}";
 
     private final String value;
 
