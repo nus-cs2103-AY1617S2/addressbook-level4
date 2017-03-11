@@ -37,6 +37,16 @@ public class StringUtil {
     }
 
     /**
+     * Trims leading, trailing and continuous spaces in a string
+     *
+     * @param text cannot be null
+     */
+    public static String removeRedundantSpaces(String text) {
+        assert text != null;
+        return text.trim().replace(" +", " ");
+    }
+
+    /**
      * Returns a detailed message of the t, including the stack trace.
      */
     public static String getDetails(Throwable t) {
