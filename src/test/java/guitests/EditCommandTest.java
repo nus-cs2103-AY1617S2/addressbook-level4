@@ -23,7 +23,7 @@ public class EditCommandTest extends TaskBossGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Alice p/1 sd/10am Feb 19, 2017 ed/10am Feb 28, 2017 i/123,"
+        String detailsToEdit = "n/Alice p/1 sd/10am Feb 19, 2017 ed/10am Feb 28, 2017 i/123,"
                 + " Jurong West Ave 6, #08-111 c/friends";
         int taskBossIndex = 1;
 
