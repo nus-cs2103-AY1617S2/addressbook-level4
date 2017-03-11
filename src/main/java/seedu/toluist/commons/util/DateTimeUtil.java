@@ -1,8 +1,8 @@
 package seedu.toluist.commons.util;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -10,11 +10,9 @@ import com.joestelmach.natty.DateGroup;
 import com.joestelmach.natty.Parser;
 
 /**
- * Represent date nicely in human-readable format.
+ * Utility class for DateTime
  */
 public class DateTimeUtil {
-    public static final String DATE_TIME_FORMATTER_PATTERN = "E, d MMM uuuu h:mm a";
-
     public static LocalDateTime parseDateString(String stringDate) {
         if (stringDate == null) {
             return null;
@@ -33,8 +31,39 @@ public class DateTimeUtil {
         return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
     }
 
-    public static String toString(LocalDateTime dateTime) {
-        String stringDateTime = dateTime.format(DateTimeFormatter.ofPattern(DATE_TIME_FORMATTER_PATTERN));
-        return stringDateTime;
+    /**
+     * Check if datetime is from today
+     *
+     * @param dateTime a datetime
+     * @return true / false
+     */
+    public static boolean isToday(LocalDateTime dateTime) {
+        LocalDate today = LocalDate.now();
+        LocalDate date = dateTime.toLocalDate();
+        return date.equals(today);
+    }
+
+    /**
+     * Check if datetime is from yesterday
+     *
+     * @param dateTime a datetime
+     * @return true / false
+     */
+    public static boolean isYesterday(LocalDateTime dateTime) {
+        LocalDate yesterday = LocalDate.now().plusDays(-1);
+        LocalDate date = dateTime.toLocalDate();
+        return date.equals(yesterday);
+    }
+
+    /**
+     * Check if datetime is from tomorrow
+     *
+     * @param dateTime a datetime
+     * @return true / false
+     */
+    public static boolean isTomorrow(LocalDateTime dateTime) {
+        LocalDate tomorrow = LocalDate.now().plusDays(1);
+        LocalDate date = dateTime.toLocalDate();
+        return date.equals(tomorrow);
     }
 }

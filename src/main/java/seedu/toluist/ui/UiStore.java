@@ -1,6 +1,7 @@
 package seedu.toluist.ui;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,6 +20,8 @@ public class UiStore {
     }
 
     public void setTask(ArrayList<Task> tasks) {
+        // Sorted by default
+        Collections.sort(tasks);
         this.viewedTasks = tasks;
     }
 

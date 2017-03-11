@@ -27,4 +27,10 @@ public class FxViewUtil {
     public static void makeFullWidth(Node node) {
         applyAnchorBoundaryParameters(node, 0.0, 0.0, 0.0, 0.0);
     }
+
+    public static void addStyleClass(Node node, String styleClass) {
+        if (!node.getStyleClass().contains(styleClass)) {
+            node.getStyleClass().add(styleClass);
+        }
+    }
 }

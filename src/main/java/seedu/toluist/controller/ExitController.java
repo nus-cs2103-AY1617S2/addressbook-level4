@@ -7,8 +7,9 @@ import seedu.toluist.ui.Ui;
  * Handle exit command
  */
 public class ExitController extends Controller {
-    private static final String COMMAND_TEMPLATE = "^exit$";
-    private static final String COMMAND_WORD = "exit";
+    private static final String COMMAND_TEMPLATE = "^(exit|quit)$";
+    private static final String COMMAND_WORD_EXIT = "exit";
+    private static final String COMMAND_WORD_QUIT = "quit";
 
     public ExitController(Ui renderer) {
         super(renderer);
@@ -26,6 +27,6 @@ public class ExitController extends Controller {
     }
 
     public static String[] getCommandWords() {
-        return new String[] { COMMAND_WORD };
+        return new String[] { COMMAND_WORD_EXIT, COMMAND_WORD_QUIT };
     }
 }

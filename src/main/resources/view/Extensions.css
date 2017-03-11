@@ -14,3 +14,7 @@
 .tooltip-text {
     -fx-text-fill: white;
 }
+
+.completed .text {
+    -fx-strikethrough: true;
+}

@@ -16,6 +16,11 @@ public class Task implements Comparable<Task> {
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
     private LocalDateTime completionDateTime;
+    private TaskPriority priority = TaskPriority.LOW;
+
+    public enum TaskPriority {
+        LOW, HIGH
+    }
 
     /**
      * To be used with json deserialisation
@@ -69,6 +74,7 @@ public class Task implements Comparable<Task> {
         return other == this // short circuit if same object
                 || (other instanceof Task // instanceof handles nulls
                 && this.description.equals(((Task) other).description)) // state check
+                && this.priority.equals(((Task) other).priority)
                 && this.allTags.equals(((Task) other).allTags)
                 && Objects.equals(this.startDateTime, ((Task) other).startDateTime) // handles null
                 && Objects.equals(this.endDateTime, ((Task) other).endDateTime) // handles null
@@ -94,12 +100,22 @@ public class Task implements Comparable<Task> {
         setEndDateTime(to);
     }
 
-    public void addTag(Tag tag) {
+    public boolean addTag(Tag tag) {
+        if (allTags.contains(tag)) {
+            return false;
+        }
+
         this.allTags.add(tag);
+        return true;
     }
 
-    public void removeTag(Tag tag) {
-        this.allTags.remove(tag);
+    public boolean removeTag(Tag tag) {
+        if (!allTags.contains(tag)) {
+            return false;
+        }
+
+        allTags.remove(tag);
+        return true;
     }
 
     public void replaceTags(Collection<Tag> tags) {
@@ -112,6 +128,18 @@ public class Task implements Comparable<Task> {
 
     public boolean isOverdue() {
         return !isCompleted() && (endDateTime != null && endDateTime.isBefore(LocalDateTime.now()));
+    }
+
+    public boolean isFloatingTask() {
+        return startDateTime == null && endDateTime == null;
+    }
+
+    public boolean isTaskWithDeadline() {
+        return startDateTime == null && endDateTime != null;
+    }
+
+    public boolean isEvent() {
+        return startDateTime != null && endDateTime != null;
     }
 
     public boolean isCompleted() {
@@ -139,12 +167,25 @@ public class Task implements Comparable<Task> {
     }
 
     @Override
+    /**
+     * Compare by end date -> start date -> priority -> description
+     * Floating tasks are put to the end
+     */
     public int compareTo(Task comparison) {
-        if (endDateTime.compareTo(comparison.endDateTime) != 0) {
-            return endDateTime.compareTo(comparison.endDateTime);
-        } else if (false) {
-            //TODO add priority comparison with variable
+        if (endDateTime == null && comparison.endDateTime != null) {
+            return 1;
+        }
+        if (endDateTime != null && comparison.endDateTime == null) {
             return -1;
+        }
+        if (endDateTime != null && comparison.endDateTime != null
+            && endDateTime.compareTo(comparison.endDateTime) != 0) {
+            return endDateTime.compareTo(comparison.endDateTime);
+        } else if (startDateTime != null && comparison.startDateTime != null
+            && startDateTime.compareTo(comparison.startDateTime) != 0) {
+            return startDateTime.compareTo(comparison.startDateTime);
+        } else if (priority.compareTo(comparison.priority) != 0) {
+            return priority.compareTo(comparison.priority);
         } else {
             return this.description.compareToIgnoreCase(comparison.description);
         }
@@ -172,5 +213,13 @@ public class Task implements Comparable<Task> {
 
     public void setStartDateTime(LocalDateTime startDateTime) {
         this.startDateTime = startDateTime;
+    }
+
+    public TaskPriority getTaskPriority() {
+        return priority;
+    }
+
+    public void setTaskPriority(TaskPriority priority) {
+        this.priority = priority;
     }
 }

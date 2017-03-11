@@ -1,8 +1,12 @@
 package seedu.toluist.ui.view;
 
+import java.util.stream.Collectors;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import seedu.toluist.commons.util.DateTimeUtil;
+import javafx.scene.image.ImageView;
+import seedu.toluist.commons.util.AppUtil;
+import seedu.toluist.commons.util.DateTimeFormatterUtil;
 import seedu.toluist.commons.util.FxViewUtil;
 import seedu.toluist.model.Task;
 
@@ -12,11 +16,17 @@ import seedu.toluist.model.Task;
 public class TaskUiView extends UiView {
 
     private static final String FXML = "TaskView.fxml";
+    private static final String CLOCK_ICON_IMAGE_PATH = "/images/clock.png";
+    private static final String COMPLETED_STYLE_CLASS = "completed";
 
     @FXML
     private Label name;
     @FXML
     private Label id;
+    @FXML
+    private Label date;
+    @FXML
+    private ImageView clockIcon;
 
     private Task task;
     private int displayedIndex;
@@ -30,15 +40,27 @@ public class TaskUiView extends UiView {
 
     @Override
     protected void viewDidMount() {
-        String fullDescription = task.getDescription();
-        if (task.getStartDateTime() != null) {
-            fullDescription += "\nStart: " + DateTimeUtil.toString(task.getStartDateTime());
-        }
-        if (task.getEndDateTime() != null) {
-            fullDescription += "\nEnd: " + DateTimeUtil.toString(task.getEndDateTime());
-        }
-        name.setText(fullDescription);
-        id.setText(displayedIndex + ". ");
         FxViewUtil.makeFullWidth(getRoot());
+        boolean isFloatingTask = task.isFloatingTask();
+        boolean isTaskWithDeadline = task.isTaskWithDeadline();
+        boolean isTask = isFloatingTask || isTaskWithDeadline;
+        boolean isEvent = task.isEvent();
+
+        String tagText = " " + String.join(" ", task.getAllTags().stream()
+                .map(tag -> "#" + tag.tagName).collect(Collectors.toList()));
+        String taskTypeText = isTask ? " (Task)" : " (Event)";
+        name.setText(task.getDescription() + taskTypeText + tagText);
+        id.setText(displayedIndex + ". ");
+        if (isTaskWithDeadline) {
+            date.setText(DateTimeFormatterUtil.formatTaskDeadline(task.getEndDateTime()));
+        } else if (isEvent) {
+            date.setText(DateTimeFormatterUtil.formatEventRange(task.getStartDateTime(), task.getEndDateTime()));
+        }
+        if (isTaskWithDeadline || task.isEvent()) {
+            clockIcon.setImage(AppUtil.getImage(CLOCK_ICON_IMAGE_PATH));
+        }
+        if (task.isCompleted()) {
+            FxViewUtil.addStyleClass(name, COMPLETED_STYLE_CLASS);
+        }
     }
 }

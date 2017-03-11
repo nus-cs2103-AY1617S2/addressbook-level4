@@ -24,8 +24,10 @@ import seedu.toluist.controller.FindController;
 import seedu.toluist.controller.ListController;
 import seedu.toluist.controller.RedoController;
 import seedu.toluist.controller.StoreController;
+import seedu.toluist.controller.TagController;
 import seedu.toluist.controller.UnaliasController;
 import seedu.toluist.controller.UndoController;
+import seedu.toluist.controller.UntagController;
 import seedu.toluist.controller.UpdateTaskController;
 import seedu.toluist.controller.ViewAliasController;
 import seedu.toluist.model.CommandAliasConfig;
@@ -73,7 +75,9 @@ public class CommandDispatcher extends Dispatcher {
                 AliasController.class,
                 UnaliasController.class,
                 ViewAliasController.class,
+                UntagController.class,
                 FindController.class,
+                TagController.class,
                 ListController.class
         ));
     }

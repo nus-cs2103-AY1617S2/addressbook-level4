@@ -2,6 +2,7 @@ package seedu.toluist.model;
 
 import static org.junit.Assert.assertEquals;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -103,6 +104,64 @@ public class TaskTest {
 
         floatingTask.replaceTags(tagsList);
         assertSimilarTags(floatingTask, tag1, tag4);
+    }
+
+    @Test
+    public void compareTo_DifferentEndDateTime() {
+        Task floatingTask = new Task("floating");
+        Task taskWithDeadline = new Task("task with deadline", LocalDateTime.now());
+        Task event = new Task("event", LocalDateTime.now().minusDays(1), LocalDateTime.now().plusDays(1));
+
+        assertEquals(taskWithDeadline.compareTo(event), -1);
+        assertEquals(event.compareTo(floatingTask), -1);
+    }
+
+    @Test
+    public void compareTo_SameEndDateTimeDifferentStartDateTime() {
+        LocalDateTime to = LocalDateTime.now();
+        Task event1 = new Task("event 1", to.minusDays(1), to);
+        Task event2 = new Task("event 2", to.minusDays(2), to);
+        assertEquals(event2.compareTo(event1), -1);
+    }
+
+    @Test
+    public void compareTo_SameEndDateTimeSameStartDateTimeDifferentPriority() {
+        LocalDateTime to = LocalDateTime.now();
+        LocalDateTime from  = to.minusDays(1);
+        Task event1 = new Task("event 1", from, to);
+        Task event2 = new Task("event 2", from, to);
+        event1.setTaskPriority(Task.TaskPriority.HIGH);
+        event2.setTaskPriority(Task.TaskPriority.LOW);
+        assertEquals(event2.compareTo(event1), -1);
+
+        Task taskWithDeadline1 = new Task("task 1", to);
+        Task taskWithDeadline2 = new Task("task 2", to);
+        taskWithDeadline1.setTaskPriority(Task.TaskPriority.LOW);
+        taskWithDeadline2.setTaskPriority(Task.TaskPriority.HIGH);
+        assertEquals(taskWithDeadline1.compareTo(taskWithDeadline2), -1);
+
+        Task floatingTask1 = new Task("floating 1");
+        Task floatingTask2 = new Task("floating 2");
+        floatingTask1.setTaskPriority(Task.TaskPriority.HIGH);
+        floatingTask2.setTaskPriority(Task.TaskPriority.LOW);
+        assertEquals(floatingTask2.compareTo(floatingTask1), -1);
+    }
+
+    @Test
+    public void compareTo_SameEndDateTimeSameStartDateTimeSamePriorityDifferentDescription() {
+        LocalDateTime to = LocalDateTime.now();
+        LocalDateTime from  = to.minusDays(1);
+        Task event1 = new Task("event 1", from, to);
+        Task event2 = new Task("event 2", from, to);
+        assertEquals(event1.compareTo(event2), -1);
+
+        Task taskWithDeadline1 = new Task("task 1", to);
+        Task taskWithDeadline2 = new Task("task 2", to);
+        assertEquals(taskWithDeadline1.compareTo(taskWithDeadline2), -1);
+
+        Task floatingTask1 = new Task("floating 1");
+        Task floatingTask2 = new Task("floating 2");
+        assertEquals(floatingTask1.compareTo(floatingTask2), -1);
     }
 
     /**

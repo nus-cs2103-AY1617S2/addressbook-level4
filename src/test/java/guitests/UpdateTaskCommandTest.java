@@ -28,7 +28,7 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
 
     @Test
     public void updateTaskWithDeadline() {
-        int eventIndex = 3;
+        int eventIndex = 1;
 
         // add task with deadline
         String taskDescription = "get v0.2 ready";
@@ -69,7 +69,7 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
 
     @Test
     public void updateEvents() {
-        int eventIndex = 3;
+        int eventIndex = 1;
 
         // add event
         String taskDescription = "attend CS2103T tutorial";
