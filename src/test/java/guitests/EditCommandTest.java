@@ -8,15 +8,9 @@ import org.junit.Test;
 import guitests.guihandles.ActivityCardHandle;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.EditCommand;
-<<<<<<< HEAD
-import seedu.address.model.person.Location;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Description;
-=======
 import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Location;
->>>>>>> [v0.2][test][guitests]update command tests
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.ActivityBuilder;
