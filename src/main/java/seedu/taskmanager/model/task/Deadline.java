@@ -8,8 +8,9 @@ import seedu.taskmanager.commons.exceptions.IllegalValueException;
  */
 public class Deadline {
 
-    public static final String MESSAGE_DEADLINE_CONSTRAINTS = "Task deadline should only contain numbers";
-    public static final String DEADLINE_VALIDATION_REGEX = "\\d+";
+    public static final String MESSAGE_DEADLINE_CONSTRAINTS = "Task date should be either a day (e.g. thursday) or a date with the format: DD/MM/YY (e.g. 03/03/17)";
+    public static final String DEADLINE_VALIDATION_REGEX1 = "\\d{2}/\\d{2}/\\d{2}";
+    public static final String DEADLINE_VALIDATION_REGEX2 = "[a-zA-Z]+";
 
     public final String value;
 
@@ -31,7 +32,7 @@ public class Deadline {
      * Returns true if a given string is a valid Task due time.
      */
     public static boolean isValidDeadline(String test) {
-        return test.matches(DEADLINE_VALIDATION_REGEX);
+        return test.matches(DEADLINE_VALIDATION_REGEX1) || test.matches(DEADLINE_VALIDATION_REGEX2);
     }
 
     @Override

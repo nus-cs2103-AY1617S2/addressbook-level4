@@ -2,7 +2,7 @@ package seedu.taskmanager.logic.parser;
 
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_TIME;
+import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_STARTTIME;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_ENDTIME;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_CATEGORY;
@@ -25,14 +25,15 @@ public class AddCommandParser {
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(/*PREFIX_TIME,*/ PREFIX_DATE/*, PREFIX_ENDTIME, PREFIX_DEADLINE , PREFIX_CATEGORY*/);
+                new ArgumentTokenizer(PREFIX_DATE, PREFIX_DEADLINE, PREFIX_STARTTIME, PREFIX_ENDTIME/*, PREFIX_CATEGORY*/);
         argsTokenizer.tokenize(args);
         try {
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
-                    argsTokenizer.getValue(PREFIX_DATE).get()
-//                    argsTokenizer.getValue(PREFIX_ENDTIME).get()
-//                    argsTokenizer.getValue(PREFIX_DEADLINE).get()
+                    argsTokenizer.getValue(PREFIX_DATE).get(),
+                    argsTokenizer.getValue(PREFIX_DEADLINE).get(),
+                    argsTokenizer.getValue(PREFIX_STARTTIME).get(),
+                    argsTokenizer.getValue(PREFIX_ENDTIME).get()
 //                    ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_CATEGORY)
             );
         } catch (NoSuchElementException nsee) {

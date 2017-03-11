@@ -11,6 +11,7 @@ import seedu.taskmanager.model.task.Date;
 import seedu.taskmanager.model.task.TaskName;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.EndTime;
+import seedu.taskmanager.model.task.StartTime;
 import seedu.taskmanager.model.task.Deadline;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.model.category.Category;
@@ -25,6 +26,8 @@ public class XmlAdaptedTask {
     private String taskname;
     @XmlElement(required = true)
     private String endtime;
+    @XmlElement(required = true)
+    private String starttime;
     @XmlElement(required = true)
     private String date;
     @XmlElement(required = true)
@@ -49,9 +52,10 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         taskname = source.getTaskName().fullTaskName;
-//        time = source.getEndTime().value;
         date = source.getDate().value;
-//        deadline = source.getDeadline().value;
+        deadline = source.getDeadline().value;
+        starttime = source.getStartTime().value;
+        endtime = source.getEndTime().value;
 //        categorised = new ArrayList<>();
 //        for (Category category : source.getCategories()) {
 //        	categorised.add(new XmlAdaptedCategory(category));
@@ -70,11 +74,12 @@ public class XmlAdaptedTask {
 //        }
         final TaskName taskname = new TaskName(this.taskname);
         final Date date = new Date(this.date);
-//        final EndTime endtime = new EndTime(this.endtime);
-//        final Deadline deadline = new Deadline(this.deadline);
+        final Deadline deadline = new Deadline(this.deadline);
+        final StartTime starttime = new StartTime(this.starttime);
+        final EndTime endtime = new EndTime(this.endtime);
 //        final Address address = new Address(this.address);
 //        final UniqueCategoryList categories = new UniqueCategoryList(taskCategories);
-        return new Task(taskname/*, deadline*/, date/*, categories*/);
+        return new Task(taskname, date, deadline, starttime, endtime/*, categories*/);
 
     }
 }
