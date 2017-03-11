@@ -56,6 +56,9 @@ public class AddCommand extends Command {
                     new Status(),
                     new UniqueTagList(tagSet)
             );
+        } else {
+            //Temporary to remove errors before deadlines and events are added
+            this.toAdd = null;
         }
     }
 
