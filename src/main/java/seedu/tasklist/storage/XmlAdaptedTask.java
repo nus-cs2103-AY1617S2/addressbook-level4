@@ -29,7 +29,7 @@ public class XmlAdaptedTask {
     private String priority;
     @XmlElement(required = false)
     private boolean status;
-    
+
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 

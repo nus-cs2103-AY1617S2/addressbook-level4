@@ -14,11 +14,10 @@ public abstract class Task implements ReadOnlyTask {
     private Name name;
     private Comment comment;
     private Priority priority;
-    private Status status; 
+    private Status status;
 
     private UniqueTagList tags;
-    
-   
+
     /**
      * Every field must be present and not null.
      */
@@ -63,18 +62,18 @@ public abstract class Task implements ReadOnlyTask {
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
     }
-    
-    public void setPriority(Priority priority){
+
+    public void setPriority(Priority priority) {
         assert priority != null;
         this.priority = priority;
     }
-    
+
     @Override
     public Priority getPriority() {
         return priority;
     }
-    
-    public void setStatus(Status status){
+
+    public void setStatus(Status status) {
         assert status != null;
         this.status = status;
     }

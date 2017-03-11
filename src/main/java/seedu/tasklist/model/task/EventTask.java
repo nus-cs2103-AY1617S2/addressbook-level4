@@ -11,17 +11,18 @@ import seedu.tasklist.model.tag.UniqueTagList;
 * Guarantees: details are present and not null, field values are validated.
 */
 public class EventTask extends Task implements ReadOnlyEventTask {
-    
+
     private Name name;
     private Comment comment;
     private Priority priority;
-    private Status status; 
+    private Status status;
     private Date startDate;
-    private Date endDate; 
-    
-    private UniqueTagList tags; 
+    private Date endDate;
 
-    public EventTask(Name name, Comment comment, Priority priority, Status status, Date startDate, Date endDate, UniqueTagList tags) {
+    private UniqueTagList tags;
+
+    public EventTask(Name name, Comment comment, Priority priority, Status status,
+                     Date startDate, Date endDate, UniqueTagList tags) {
         super(name, comment, priority, status, tags);
         assert !CollectionUtil.isAnyNull(name, startDate, endDate, status);
         this.name = name;
@@ -31,37 +32,38 @@ public class EventTask extends Task implements ReadOnlyEventTask {
         this.startDate = startDate;
         this.endDate = endDate;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
-        
+
     }
-    
+
     /**
      * Creates a copy of the given ReadOnlyEventTask.
      */
     public EventTask(ReadOnlyEventTask source) {
-        this(source.getName(), source.getComment(), source.getPriority(), source.getStatus(), source.getStartDate(), source.getEndDate(), source.getTags());
+        this(source.getName(), source.getComment(), source.getPriority(),
+             source.getStatus(), source.getStartDate(), source.getEndDate(), source.getTags());
     }
-    
-    public void setStartDate(Date startDate){
+
+    public void setStartDate(Date startDate) {
         assert startDate != null;
         this.startDate = startDate;
     }
-    
-    public void setEndDate(Date endDate){
+
+    public void setEndDate(Date endDate) {
         assert endDate != null;
         this.endDate = endDate;
     }
-    
-    public void setPriority(Priority priority){
+
+    public void setPriority(Priority priority) {
         assert priority != null;
         this.priority = priority;
     }
-    
+
     @Override
     public Priority getPriority() {
         return null;
     }
-    
-    public void setStatus(Status status){
+
+    public void setStatus(Status status) {
         assert status != null;
         this.status = status;
     }
@@ -75,12 +77,12 @@ public class EventTask extends Task implements ReadOnlyEventTask {
         assert name != null;
         this.name = name;
     }
-    
+
     @Override
     public Name getName() {
         return name;
     }
-    
+
     public void setComment(Comment comment) {
         assert comment != null;
         this.comment = comment;
@@ -105,7 +107,7 @@ public class EventTask extends Task implements ReadOnlyEventTask {
     public UniqueTagList getTags() {
         return tags;
     }
-    
+
     /**
      * Replaces this person's tags with the tags in the argument tag list.
      */
@@ -127,7 +129,7 @@ public class EventTask extends Task implements ReadOnlyEventTask {
         this.setEndDate(replacement.getEndDate());
         this.setTags(replacement.getTags());
     }
-    
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
