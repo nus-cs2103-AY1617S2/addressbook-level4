@@ -19,7 +19,7 @@ import seedu.taskmanager.model.task.StartDate;
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
 public class EditCommandTest extends TaskManagerGuiTest {
 
-    // The list of persons in the person list panel is expected to match this list.
+    // The list of tasks in the task list panel is expected to match this list.
     // This list is updated with every successful call to assertEditSuccess().
     TestTask[] expectedTasksList = td.getTypicalTasks();
 
@@ -28,32 +28,32 @@ public class EditCommandTest extends TaskManagerGuiTest {
         String detailsToEdit = "Bobby p/91234567 e/bobby@gmail.com a/Block 123, Bobby Street 3 t/husband";
         int taskManagerIndex = 1;
 
-        TestTask editedPerson = new TaskBuilder().withTitle("Bobby").withStartDate("91234567")
+        TestTask editedTask = new TaskBuilder().withTitle("Bobby").withStartDate("91234567")
                 .withEndDate("bobby@gmail.com").withDescription("Block 123, Bobby Street 3").withTags("husband").build();
 
-        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedPerson);
+        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
 
     @Test
     public void edit_notAllFieldsSpecified_success() throws Exception {
         String detailsToEdit = "t/sweetie t/bestie";
-        int addressBookIndex = 2;
+        int taskManagerIndex = 2;
 
-        TestTask personToEdit = expectedTasksList[addressBookIndex - 1];
-        TestTask editedPerson = new TaskBuilder(personToEdit).withTags("sweetie", "bestie").build();
+        TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
+        TestTask editedTask = new TaskBuilder(taskToEdit).withTags("sweetie", "bestie").build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
+        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
 
     @Test
     public void edit_clearTags_success() throws Exception {
         String detailsToEdit = "t/";
-        int addressBookIndex = 2;
+        int taskManagerIndex = 2;
 
-        TestTask personToEdit = expectedTasksList[addressBookIndex - 1];
-        TestTask editedPerson = new TaskBuilder(personToEdit).withTags().build();
+        TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
+        TestTask editedTask = new TaskBuilder(taskToEdit).withTags().build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
+        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
 
     @Test
@@ -62,12 +62,12 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
         String detailsToEdit = "Belle";
         int filteredPersonListIndex = 1;
-        int addressBookIndex = 5;
+        int taskManagerIndex = 5;
 
-        TestTask personToEdit = expectedTasksList[addressBookIndex - 1];
-        TestTask editedPerson = new TaskBuilder(personToEdit).withTitle("Belle").build();
+        TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
+        TestTask editedTask = new TaskBuilder(taskToEdit).withTitle("Belle").build();
 
-        assertEditSuccess(filteredPersonListIndex, addressBookIndex, detailsToEdit, editedPerson);
+        assertEditSuccess(filteredPersonListIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
 
     @Test
@@ -114,13 +114,13 @@ public class EditCommandTest extends TaskManagerGuiTest {
     }
 
     /**
-     * Checks whether the edited person has the correct updated details.
+     * Checks whether the edited task has the correct updated details.
      *
-     * @param filteredTaskListIndex index of person to edit in filtered list
-     * @param taskManagerIndex index of person to edit in the address book.
+     * @param filteredTaskListIndex index of task to edit in filtered list
+     * @param taskManagerIndex index of task to edit in the task manager.
      *      Must refer to the same person as {@code filteredPersonListIndex}
-     * @param detailsToEdit details to edit the person with as input to the edit command
-     * @param editedTask the expected person after editing the person's details
+     * @param detailsToEdit details to edit the task with as input to the edit command
+     * @param editedTask the expected task after editing the task's details
      */
     private void assertEditSuccess(int filteredTaskListIndex, int taskManagerIndex,
                                     String detailsToEdit, TestTask editedTask) {
