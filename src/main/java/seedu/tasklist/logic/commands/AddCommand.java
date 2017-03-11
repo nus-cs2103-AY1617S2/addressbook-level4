@@ -11,7 +11,10 @@ import seedu.tasklist.logic.commands.exceptions.CommandException;
 import seedu.tasklist.model.tag.Tag;
 import seedu.tasklist.model.tag.UniqueTagList;
 import seedu.tasklist.model.task.Comment;
+import seedu.tasklist.model.task.FloatingTask;
 import seedu.tasklist.model.task.Name;
+import seedu.tasklist.model.task.Priority;
+import seedu.tasklist.model.task.Status;
 import seedu.tasklist.model.task.Task;
 import seedu.tasklist.model.task.UniqueTaskList;
 
@@ -43,11 +46,24 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        this.toAdd = new Task(
-                new Name(name),
-                new Comment(comment),
-                new UniqueTagList(tagSet)
-        );
+
+        //Checks if it is a FloatingTask
+        if (isDateEmpty(dates)) {
+            this.toAdd = new FloatingTask(
+                    new Name(name),
+                    new Comment(comment),
+                    new Priority(priority),
+                    new Status(),
+                    new UniqueTagList(tagSet)
+            );
+        }
+    }
+
+    /**
+     * Returns true if dates are present. Used to check for FloatingTask
+     */
+    public boolean isDateEmpty(List<Date> dates) {
+        return dates.isEmpty();
     }
 
     @Override
