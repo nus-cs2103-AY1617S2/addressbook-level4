@@ -14,7 +14,6 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.taskmanager.model.ReadOnlyTaskManager;
 import seedu.taskmanager.model.tag.Tag;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.model.task.Task;
