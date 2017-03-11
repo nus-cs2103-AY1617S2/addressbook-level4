@@ -30,14 +30,14 @@ public class AddCommandParser {
         	String priority = new String("");
         	String info = new String("");
         	
-        	if(argsTokenizer.getValue(PREFIX_DEADLINE).isPresent()){
+        	if(argsTokenizer.getValue(PREFIX_DEADLINE).isPresent()) {
         		deadline = argsTokenizer.getValue(PREFIX_DEADLINE).get();
         	}
-        	if(argsTokenizer.getValue(PREFIX_PRIORITY_LEVEL).isPresent()){
-        		priority = argsTokenizer.getValue(PREFIX_PRIORITY_LEVEL).get();
+        	if(argsTokenizer.getValue(PREFIX_PRIORITY_LEVEL).isPresent()) {
+        			priority = argsTokenizer.getValue(PREFIX_PRIORITY_LEVEL).get();
         	}
-        	if(argsTokenizer.getValue(PREFIX_ANY_INFO).isPresent()){
-        		info = argsTokenizer.getValue(PREFIX_ANY_INFO).get();
+        	if(argsTokenizer.getValue(PREFIX_ANY_INFO).isPresent()) {
+        			info = argsTokenizer.getValue(PREFIX_ANY_INFO).get();
         	}
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
