@@ -4,14 +4,14 @@ package seedu.doit.model.item;
 import seedu.doit.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's deadline in the task manager.
- * Guarantees: immutable; is valid as declared in {@link #isValidDeadline(String)}
+ * Represents a Task's end time in the task manager.
+ * Guarantees: immutable; is valid as declared in {@link #isValidEndTime(String)}
  */
 public class EndTime {
 
-    public static final String MESSAGE_DEADLINE_CONSTRAINTS =
+    public static final String MESSAGE_ENDTIME_CONSTRAINTS =
         "Task End Time should be 2 alphanumeric/period strings separated by '@'";
-    public static final String DEADLINE_VALIDATION_REGEX = "[^\\s].*";
+    public static final String ENDTIME_VALIDATION_REGEX = "[^\\s].*";
 
     public final String value;
 
@@ -20,20 +20,20 @@ public class EndTime {
      *
      * @throws IllegalValueException if given deadline string is invalid.
      */
-    public EndTime(String deadline) throws IllegalValueException {
-        assert deadline != null;
-        String trimmedDeadline = deadline.trim();
-        if (!isValidDeadline(trimmedDeadline)) {
-            throw new IllegalValueException(MESSAGE_DEADLINE_CONSTRAINTS);
+    public EndTime(String endTime) throws IllegalValueException {
+        assert endTime != null;
+        String trimmedEndTime = endTime.trim();
+        if (!isValidEndTime(trimmedEndTime)) {
+            throw new IllegalValueException(MESSAGE_ENDTIME_CONSTRAINTS);
         }
-        this.value = trimmedDeadline;
+        this.value = trimmedEndTime;
     }
 
     /**
      * Returns if a given string is a valid task deadline.
      */
-    public static boolean isValidDeadline(String test) {
-        return test.matches(DEADLINE_VALIDATION_REGEX);
+    public static boolean isValidEndTime(String test) {
+        return test.matches(ENDTIME_VALIDATION_REGEX);
     }
 
     @Override
