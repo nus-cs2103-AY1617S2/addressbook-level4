@@ -6,8 +6,8 @@ import static seedu.todolist.logic.commands.DeleteCommand.MESSAGE_DELETE_PERSON_
 
 import org.junit.Test;
 
-import seedu.address.testutil.TestTask;
-import seedu.address.testutil.TestUtil;
+import seedu.todolist.testutil.TestTask;
+import seedu.todolist.testutil.TestUtil;
 
 public class DeleteCommandTest extends ToDoListGuiTest {
 

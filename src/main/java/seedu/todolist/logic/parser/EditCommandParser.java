@@ -11,8 +11,8 @@ import java.util.Optional;
 import seedu.todolist.commons.exceptions.IllegalValueException;
 import seedu.todolist.logic.commands.Command;
 import seedu.todolist.logic.commands.EditCommand;
-import seedu.todolist.logic.commands.IncorrectCommand;
 import seedu.todolist.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.todolist.logic.commands.IncorrectCommand;
 import seedu.todolist.model.tag.UniqueTagList;
 
 /**
