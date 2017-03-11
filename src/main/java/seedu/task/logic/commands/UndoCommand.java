@@ -1,5 +1,6 @@
 package seedu.task.logic.commands;
 
+import java.util.EmptyStackException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,8 +28,13 @@ public class UndoCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-	// TODO Auto-generated method stub
-	return null;
+        assert model != null;
+        try {
+            model.undo();
+            return new CommandResult(MESSAGE_SUCCESS);
+        } catch (EmptyStackException e) {
+            throw new CommandException(MESSAGE_NO_LAST_ACTION);
+        }
     }
 
 }

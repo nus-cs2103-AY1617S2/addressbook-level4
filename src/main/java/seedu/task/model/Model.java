@@ -1,5 +1,6 @@
 package seedu.task.model;
 
+import java.util.EmptyStackException;
 import java.util.Set;
 
 import seedu.address.commons.core.UnmodifiableObservableList;
@@ -32,6 +33,12 @@ public interface Model {
      */
     void updateTask(int filteredPersonListIndex, ReadOnlyTask editedPerson)
             throws UniqueTaskList.DuplicateTaskException;
+    
+    /** Undoes the previous mutable action */
+    void undo() throws EmptyStackException;
+    
+    /** Redoes the last undo */
+    void redo() throws EmptyStackException;
 
     /** Returns the filtered person list as an {@code UnmodifiableObservableList<ReadOnlyPerson>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();

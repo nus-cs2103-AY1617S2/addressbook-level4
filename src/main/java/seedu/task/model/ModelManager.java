@@ -1,5 +1,6 @@
 package seedu.task.model;
 
+import java.util.EmptyStackException;
 import java.util.Set;
 import java.util.Stack;
 import java.util.logging.Logger;
@@ -91,6 +92,17 @@ public class ModelManager extends ComponentManager implements Model {
         int addressBookIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskBook.updateTask(addressBookIndex, editedTask);
         indicateTaskBookChanged();
+    }
+    
+    @Override
+    public void undo() throws EmptyStackException{
+	taskBook.resetData(undoStack.peek());
+	redoStack.push(undoStack.pop());
+    }
+    
+    @Override
+    public void redo() {
+	
     }
 
     //=========== Filtered Person List Accessors =============================================================
