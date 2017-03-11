@@ -38,15 +38,16 @@ public class StringUtil {
         }
         return false;
     }
-    
+
     public static boolean containsWordIgnoreCase(UniqueTagList tags, String keyword) {
-		for(Tag t : tags){
-			if(containsWordIgnoreCase((t.tagName),keyword))
-				return true;
-		}
-		return false;
-	}
-    
+        for (Tag t : tags) {
+            if (containsWordIgnoreCase((t.tagName), keyword)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     /**
      * Returns a detailed message of the t, including the stack trace.
@@ -68,5 +69,4 @@ public class StringUtil {
         return s != null && s.matches("^0*[1-9]\\d*$");
     }
 
-	
 }

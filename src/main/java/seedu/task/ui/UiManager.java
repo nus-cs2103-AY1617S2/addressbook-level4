@@ -113,11 +113,11 @@ public class UiManager extends ComponentManager implements Ui {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.handleHelp();
     }
-    
+
     @Subscribe
     private void handleShowHelpFormatEvent(ShowHelpFormatRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-    	mainWindow.handleHelpFormat();
+        mainWindow.handleHelpFormat();
     }
 
     @Subscribe

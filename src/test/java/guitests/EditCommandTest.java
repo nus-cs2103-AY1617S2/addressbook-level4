@@ -10,9 +10,7 @@ import seedu.task.commons.core.Messages;
 import seedu.task.logic.commands.EditCommand;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.task.Date;
-import seedu.task.model.task.Location;
 import seedu.task.model.task.Name;
-import seedu.task.model.task.Remark;
 import seedu.task.testutil.TaskBuilder;
 import seedu.task.testutil.TestTask;
 
@@ -28,8 +26,9 @@ public class EditCommandTest extends TaskManagerGuiTest {
         String detailsToEdit = "Buy milk s/10 mar 17 e/12-03-2017 r/remark l/Block 123, Bobby Street 3 t/shopping";
         int taskManagerIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withName("Buy milk").withStartDate("10 mar 17").withEndDate("12-03-2017")
-                .withRemark("remark").withLocation("Block 123, Bobby Street 3").withTags("shopping").build();
+        TestTask editedTask = new TaskBuilder().withName("Buy milk").withStartDate("10 mar 17")
+                .withEndDate("12-03-2017").withRemark("remark")
+                .withLocation("Block 123, Bobby Street 3").withTags("shopping").build();
 
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
@@ -95,7 +94,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
         commandBox.runCommand("edit 1 s/abcd");
         assertResultMessage(Date.MESSAGE_DATE_CONSTRAINTS);
-        
+
         commandBox.runCommand("edit 1 e/abcd");
         assertResultMessage(Date.MESSAGE_DATE_CONSTRAINTS);
 

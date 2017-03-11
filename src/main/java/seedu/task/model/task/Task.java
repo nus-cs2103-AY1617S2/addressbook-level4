@@ -38,7 +38,8 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getStartDate(), source.getEndDate(), source.getRemark(), source.getLocation(), source.getTags());
+        this(source.getName(), source.getStartDate(), source.getEndDate(), source.getRemark(),
+                source.getLocation(), source.getTags());
     }
 
     public void setName(Name name) {
@@ -60,7 +61,7 @@ public class Task implements ReadOnlyTask {
     public Date getStartDate() {
         return startDate;
     }
-    
+
     public void setEndDate(Date endDate) {
         assert endDate != null;
         this.endDate = endDate;
@@ -99,7 +100,7 @@ public class Task implements ReadOnlyTask {
     public boolean isDone() {
         return isDone;
     }
-    
+
     @Override
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);

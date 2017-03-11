@@ -25,7 +25,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [NAME] [s/START] [e/END] [r/REMARK] [l/LOCATION ] [t/TAG]...\n"
+            + "Parameters: INDEX (must be a positive integer) [NAME] [s/START] [e/END] "
+            + "[r/REMARK] [l/LOCATION ] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 s/03-04-2017 r/walk the dog";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
@@ -114,7 +115,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.startDate, this.endDate, this.remark, this.location, this.tags);
+            return CollectionUtil.isAnyPresent(this.name, this.startDate, this.endDate,
+                    this.remark, this.location, this.tags);
         }
 
         public void setName(Optional<Name> name) {
@@ -134,7 +136,7 @@ public class EditCommand extends Command {
         public Optional<Date> getStartDate() {
             return startDate;
         }
-        
+
         public void setEndDate(Optional<Date> endDate) {
             assert endDate != null;
             this.endDate = endDate;

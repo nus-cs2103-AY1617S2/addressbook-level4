@@ -5,8 +5,8 @@ import seedu.task.logic.commands.ListByTagCommand;
 
 public class ListByTagCommandParser {
 
-	public Command parse(String arguments) {
-		return new ListByTagCommand(arguments);
-	}
+    public Command parse(String arguments) {
+        return new ListByTagCommand(arguments);
+    }
 
 }

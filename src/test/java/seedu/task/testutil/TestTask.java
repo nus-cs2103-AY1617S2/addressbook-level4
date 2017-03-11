@@ -52,7 +52,7 @@ public class TestTask implements ReadOnlyTask {
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
-    
+
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
@@ -74,7 +74,7 @@ public class TestTask implements ReadOnlyTask {
     public Date getStartDate() {
         return startDate;
     }
-    
+
     @Override
     public Date getEndDate() {
         return endDate;
@@ -94,7 +94,7 @@ public class TestTask implements ReadOnlyTask {
     public boolean isDone() {
         return isDone;
     }
-    
+
     @Override
     public UniqueTagList getTags() {
         return tags;

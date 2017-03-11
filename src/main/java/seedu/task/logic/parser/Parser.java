@@ -66,24 +66,24 @@ public class Parser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
-            
+
         case ListByTagCommand.COMMAND_WORD:
         case ListByTagCommand.COMMAND_WORD_SINGLE_T:
         case ListByTagCommand.COMMAND_WORD_LONGER_HOTKEY:
         case ListByTagCommand.COMMAND_WORD_HOTKEY:
-        	return new ListByTagCommandParser().parse(arguments);
+            return new ListByTagCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-            
+
         case HelpFormatCommand.COMMAND_WORD:
         case HelpFormatCommand.COMMAND_WORD_FULL:
         case HelpFormatCommand.COMMAND_WORD_SHORT:
         case HelpFormatCommand.COMMAND_WORD_SUMMARY:
-        	return new HelpFormatCommand();
+            return new HelpFormatCommand();
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

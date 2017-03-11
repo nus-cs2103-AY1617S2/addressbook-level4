@@ -48,7 +48,7 @@ public class TaskBuilder {
         this.task.setStartDate(new Date(startDate));
         return this;
     }
-    
+
     public TaskBuilder withEndDate(String endDate) throws IllegalValueException {
         this.task.setEndDate(new Date(endDate));
         return this;

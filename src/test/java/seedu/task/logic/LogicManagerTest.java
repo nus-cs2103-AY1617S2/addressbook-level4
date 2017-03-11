@@ -190,9 +190,11 @@ public class LogicManagerTest {
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add wrong args wrong args", expectedMessage);
-        //assertCommandFailure("add Valid Name 12345 r/valid@remark.butNodatePrefix l/valid, location", expectedMessage);
-        assertCommandFailure("add Valid Name s/04-05-15 e/05-05-2015 validRemark.butNoPrefix l/valid, location", expectedMessage);
-        //assertCommandFailure("add Valid Name d/05-05-2015 r/valid@email.butNoAddressPrefix valid, address", expectedMessage);
+        assertCommandFailure("add Valid Name 12345 r/valid@remark.butNodatePrefix l/valid, location", expectedMessage);
+        assertCommandFailure("add Valid Name s/04-05-15 e/05-05-2015 validRemark.butNoPrefix "
+                + "l/valid, location", expectedMessage);
+        assertCommandFailure("add Valid Name d/05-05-2015 r/valid@email.butNoAddressPrefix "
+                + "valid, address", expectedMessage);
     }
 
     @Test
@@ -440,7 +442,8 @@ public class LogicManagerTest {
                     new Date("4-05-15"), //not random for now
                     new Date("05-05-2015"),
                     new Remark(seed + "@email"),
-                    new Location("House of " + seed), new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
+                    new Location("House of " + seed),
+                    new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
 
