@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.Test;
@@ -12,6 +13,7 @@ import org.junit.Test;
 import seedu.toluist.commons.util.DateTimeUtil;
 import seedu.toluist.model.Task;
 import seedu.toluist.testutil.TypicalTestTodoLists;
+import seedu.toluist.ui.UiStore;
 
 /**
  * Gui tests for delete task command
@@ -72,7 +74,7 @@ public class DeleteTaskCommandTest extends ToLuistGuiTest {
         assertFalse(isTaskShown(task));
     }
 
-    public void deleteMultipleTasksTogether(String deleteCommand, int[] taskNumberLeft) {
+    public void deleteMultipleTasksTogether(String deleteCommand, int[] taskIndexesLeft) {
         // Start with empty list
         commandBox.runCommand("delete 2");
         commandBox.runCommand("delete 1");
@@ -82,19 +84,22 @@ public class DeleteTaskCommandTest extends ToLuistGuiTest {
             commandBox.runCommand(command);
         }
 
+        // Use shallow copy of task list so it doesn't mutate upon calling delete command
+        List<Task> allTasks = (List<Task>) UiStore.getInstance().getTasks().clone();
+
         commandBox.runCommand(deleteCommand);
 
-        Set<Integer> setOfTaskNumberLeft = new HashSet<Integer>();
-        for (int taskNumber: taskNumberLeft) {
-            setOfTaskNumberLeft.add(taskNumber);
+        Set<Integer> setOfTaskIndexLeft = new HashSet<Integer>();
+        for (int taskIndex: taskIndexesLeft) {
+            setOfTaskIndexLeft.add(taskIndex);
         }
 
         for (int i = 1; i <= 10; i++) {
-            Task task = new Task("task " + i);
-            if (setOfTaskNumberLeft.contains(i)) {
-                assertTrue(isTaskShown(task));
+            // If task index exist in the set, that particular task should be shown in the UI.
+            if (setOfTaskIndexLeft.contains(i)) {
+                assertTrue(isTaskShown(allTasks.get(i - 1)));
             } else {
-                assertFalse(isTaskShown(task));
+                assertFalse(isTaskShown(allTasks.get(i - 1)));
             }
         }
     }
@@ -102,7 +107,7 @@ public class DeleteTaskCommandTest extends ToLuistGuiTest {
     @Test
     public void deleteMultipleTasksTogether1() {
         String command = "delete  - 2, 4 -  5, 7    9- ";
-        int[] taskNumberLeft = {3, 6, 8};
-        deleteMultipleTasksTogether(command, taskNumberLeft);
+        int[] taskIndexesLeft = {3, 6, 8};
+        deleteMultipleTasksTogether(command, taskIndexesLeft);
     }
 }
