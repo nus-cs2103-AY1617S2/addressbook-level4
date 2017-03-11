@@ -90,6 +90,10 @@ public class EditCommand extends Command {
         private Optional<Name> name = Optional.empty();
         private Optional<Comment> comment = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
+        private Optional<Priority> priority = Optional.empty();
+        private Optional<Date> deadline = Optional.empty();
+        private Optional<Date> startDate = Optional.empty();
+        private Optional<Date> endDate = Optional.empty();
 
         public EditTaskDescriptor() {}
 
@@ -97,13 +101,23 @@ public class EditCommand extends Command {
             this.name = toCopy.getName();
             this.comment = toCopy.getComment();
             this.tags = toCopy.getTags();
+            this.priority = toCopy.getPriority();
+            this.deadline = toCopy.getDeadline();
+            this.startDate = toCopy.getStartDate();
+            this.endDate = toCopy.getEndDate();
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.comment, this.tags);
+            return CollectionUtil.isAnyPresent(this.name,
+                                               this.comment,
+                                               this.tags,
+                                               this.priority,
+                                               this.deadline,
+                                               this.startDate,
+                                               this.endDate);
         }
 
         public void setName(Optional<Name> name) {
@@ -131,6 +145,38 @@ public class EditCommand extends Command {
 
         public Optional<UniqueTagList> getTags() {
             return tags;
+        }
+
+        public Optional<Date> getDeadline() {
+            return deadline;
+        }
+
+        public void setDeadline(Optional<Date> deadline) {
+            this.deadline = deadline;
+        }
+
+        public Optional<Date> getStartDate() {
+            return startDate;
+        }
+
+        public void setStartDate(Optional<Date> startDate) {
+            this.startDate = startDate;
+        }
+
+        public Optional<Date> getEndDate() {
+            return endDate;
+        }
+
+        public void setEndDate(Optional<Date> endDate) {
+            this.endDate = endDate;
+        }
+
+        public Optional<Priority> getPriority() {
+            return priority;
+        }
+
+        public void setPriority(Optional<Priority> priority) {
+            this.priority = priority;
         }
     }
 }
