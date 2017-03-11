@@ -71,7 +71,7 @@ public class Parser {
         case ListByTagCommand.COMMAND_WORD_SINGLE_T:
         case ListByTagCommand.COMMAND_WORD_LONGER_HOTKEY:
         case ListByTagCommand.COMMAND_WORD_HOTKEY:
-        	return new ListByTagCommandPaser().parse(arguments);
+        	return new ListByTagCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
