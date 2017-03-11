@@ -11,7 +11,7 @@ public class StartDateTest {
 
     @Test
     public void isValidStartDate() {
-        
+
         // blank end date
         assertFalse(StartDate.isValidStartDate("")); // empty string
         assertFalse(StartDate.isValidStartDate(" ")); // spaces only
