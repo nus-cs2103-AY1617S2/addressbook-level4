@@ -18,7 +18,7 @@ public class ConfigTest {
                 "Current log level : INFO\n" +
                 "Preference file Location : preferences.json\n" +
                 "Local data file location : data/geekeep.xml\n" +
-                "AddressBook name : MyGeeKeep";
+                "GeeKeep name : MyGeeKeep";
 
         assertEquals(defaultConfigAsString, new Config().toString());
     }

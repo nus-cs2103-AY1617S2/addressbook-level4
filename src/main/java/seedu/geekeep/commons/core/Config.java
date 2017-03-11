@@ -46,15 +46,15 @@ public class Config {
         return geeKeepFilePath;
     }
 
-    public void setAddressBookFilePath(String geeKeepFilePath) {
+    public void setGeeKeepFilePath(String geeKeepFilePath) {
         this.geeKeepFilePath = geeKeepFilePath;
     }
 
-    public String getAddressBookName() {
+    public String getGeeKeepName() {
         return geeKeepName;
     }
 
-    public void setAddressBookName(String geeKeepName) {
+    public void setGeeKeepName(String geeKeepName) {
         this.geeKeepName = geeKeepName;
     }
 
