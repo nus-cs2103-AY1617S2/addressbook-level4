@@ -15,7 +15,7 @@ import seedu.task.model.ReadOnlyTaskList;
 import seedu.task.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of TaskList data in local storage.
  */
 public class StorageManager extends ComponentManager implements Storage {
 
@@ -30,8 +30,8 @@ public class StorageManager extends ComponentManager implements Storage {
         this.userPrefsStorage = userPrefsStorage;
     }
 
-    public StorageManager(String addressBookFilePath, String userPrefsFilePath) {
-        this(new XmlTaskListStorage(addressBookFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
+    public StorageManager(String taskListFilePath, String userPrefsFilePath) {
+        this(new XmlTaskListStorage(taskListFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
     }
 
     // ================ UserPrefs methods ==============================
@@ -47,42 +47,42 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ TaskList methods ==============================
 
     @Override
-    public String getAddressBookFilePath() {
-        return taskListStorage.getAddressBookFilePath();
+    public String getTaskListFilePath() {
+        return taskListStorage.getTaskListFilePath();
     }
 
     @Override
     public Optional<ReadOnlyTaskList> readTaskList() throws DataConversionException, IOException {
-        return readAddressBook(taskListStorage.getAddressBookFilePath());
+        return readTaskList(taskListStorage.getTaskListFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyTaskList> readAddressBook(String filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyTaskList> readTaskList(String filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return taskListStorage.readAddressBook(filePath);
+        return taskListStorage.readTaskList(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyTaskList addressBook) throws IOException {
-        saveAddressBook(addressBook, taskListStorage.getAddressBookFilePath());
+    public void saveTaskList(ReadOnlyTaskList taskList) throws IOException {
+        saveTaskList(taskList, taskListStorage.getTaskListFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyTaskList addressBook, String filePath) throws IOException {
+    public void saveTaskList(ReadOnlyTaskList taskList, String filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        taskListStorage.saveAddressBook(addressBook, filePath);
+        taskListStorage.saveTaskList(taskList, filePath);
     }
 
 
     @Override
     @Subscribe
-    public void handleAddressBookChangedEvent(TaskListChangedEvent event) {
+    public void handleTaskListChangedEvent(TaskListChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
-            saveAddressBook(event.data);
+            saveTaskList(event.data);
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }

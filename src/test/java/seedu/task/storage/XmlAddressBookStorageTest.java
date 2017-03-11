@@ -34,7 +34,7 @@ public class XmlAddressBookStorageTest {
     }
 
     private java.util.Optional<ReadOnlyTaskList> readAddressBook(String filePath) throws Exception {
-        return new XmlTaskListStorage(filePath).readAddressBook(addToTestDataPathIfNotNull(filePath));
+        return new XmlTaskListStorage(filePath).readTaskList(addToTestDataPathIfNotNull(filePath));
     }
 
     private String addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -67,20 +67,20 @@ public class XmlAddressBookStorageTest {
         XmlTaskListStorage xmlTaskListStorage = new XmlTaskListStorage(filePath);
 
         //Save in new file and read back
-        xmlTaskListStorage.saveAddressBook(original, filePath);
-        ReadOnlyTaskList readBack = xmlTaskListStorage.readAddressBook(filePath).get();
+        xmlTaskListStorage.saveTaskList(original, filePath);
+        ReadOnlyTaskList readBack = xmlTaskListStorage.readTaskList(filePath).get();
         assertEquals(original, new TaskList(readBack));
 
         //Modify data, overwrite exiting file, and read back
         original.addTask(new Task(td.hoon));
         original.removeTask(new Task(td.alice));
-        xmlTaskListStorage.saveAddressBook(original, filePath);
-        readBack = xmlTaskListStorage.readAddressBook(filePath).get();
+        xmlTaskListStorage.saveTaskList(original, filePath);
+        readBack = xmlTaskListStorage.readTaskList(filePath).get();
         assertEquals(original, new TaskList(readBack));
 
         //Save and read without specifying file path
         original.addTask(new Task(td.ida));
-        xmlTaskListStorage.saveAddressBook(original); //file path not specified
+        xmlTaskListStorage.saveTaskList(original); //file path not specified
         readBack = xmlTaskListStorage.readTaskList().get(); //file path not specified
         assertEquals(original, new TaskList(readBack));
 
@@ -93,7 +93,7 @@ public class XmlAddressBookStorageTest {
     }
 
     private void saveAddressBook(ReadOnlyTaskList addressBook, String filePath) throws IOException {
-        new XmlTaskListStorage(filePath).saveAddressBook(addressBook, addToTestDataPathIfNotNull(filePath));
+        new XmlTaskListStorage(filePath).saveTaskList(addressBook, addToTestDataPathIfNotNull(filePath));
     }
 
     @Test

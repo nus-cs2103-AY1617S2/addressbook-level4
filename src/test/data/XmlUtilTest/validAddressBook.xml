@@ -1,57 +1,55 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addressbook>
-    <persons>
-        <name>Hans Muster</name>
-        <phone isPrivate="false">9482424</phone>
-        <email isPrivate="false">hans@google.com</email>
-        <address isPrivate="false">4th street</address>
-    </persons>
-    <persons>
-        <name>Ruth Mueller</name>
-        <phone isPrivate="false">87249245</phone>
-        <email isPrivate="false">ruth@google.com</email>
-        <address isPrivate="false">81th street</address>
-    </persons>
-    <persons>
-        <name>Heinz Kurz</name>
-        <phone isPrivate="false">95352563</phone>
-        <email isPrivate="false">heinz@yahoo.com</email>
-        <address isPrivate="false">wall street</address>
-    </persons>
-    <persons>
-        <name>Cornelia Meier</name>
-        <phone isPrivate="false">87652533</phone>
-        <email isPrivate="false">cornelia@google.com</email>
-        <address isPrivate="false">10th street</address>
-    </persons>
-    <persons>
-        <name>Werner Meyer</name>
-        <phone isPrivate="false">9482224</phone>
-        <email isPrivate="false">werner@gmail.com</email>
-        <address isPrivate="false">michegan ave</address>
-    </persons>
-    <persons>
-        <name>Lydia Kunz</name>
-        <phone isPrivate="false">9482427</phone>
-        <email isPrivate="false">lydia@gmail.com</email>
-        <address isPrivate="false">little tokyo</address>
-    </persons>
-    <persons>
-        <name>Anna Best</name>
-        <phone isPrivate="false">9482442</phone>
-        <email isPrivate="false">anna@google.com</email>
-        <address isPrivate="false">4th street</address>
-    </persons>
-    <persons>
-        <name>Stefan Meier</name>
-        <phone isPrivate="false">8482424</phone>
-        <email isPrivate="false">stefan@mail.com</email>
-        <address isPrivate="false">little india</address>
-    </persons>
-    <persons>
-        <name>Martin Mueller</name>
-        <phone isPrivate="false">8482131</phone>
-        <email isPrivate="false">hans@google.com</email>
-        <address isPrivate="false">chicago ave</address>
-    </persons>
-</addressbook>
+<tasklist>
+    <tasks>
+        <name>Walk the dog</name>
+        <description isPrivate="false">Take Zelda on a walk around the park</description>
+        <startDateTime isPrivate="false">03/01/2016 0900</startDateTime>
+        <endDateTime isPrivate="false">03/01/2016 1100</endDateTime>
+    </tasks>
+    <tasks>
+        <name>Get groceries</name>
+        <description isPrivate="false">Egg, cheese, and milk</description>
+        <startDateTime isPrivate="false">10/01/2016 1900</startDateTime>
+        <endDateTime isPrivate="false">10/01/2016 2100</endDateTime>
+    </tasks>
+    <tasks>
+        <name>Finish report</name>
+        <description isPrivate="false">Do up citations and references</description>
+        <startDateTime isPrivate="false">15/03/2016 1000</startDateTime>
+        <endDateTime isPrivate="false">23/03/2016 2359</endDateTime>
+    </tasks>
+    <tasks>
+        <name>Take out the trash</name>
+        <description isPrivate="false"></description>
+        <startDateTime isPrivate="false">25/12/2015 1400</startDateTime>
+        <endDateTime isPrivate="false">25/12/2015 1415</endDateTime>
+    </tasks>
+    <tasks>
+        <name>Do Christmas shopping</name>
+        <description isPrivate="false">Compare prices with Amazon</description>
+        <startDateTime isPrivate="false">20/12/2015 1200</startDateTime>
+        <endDateTime isPrivate="false">24/12/2015 2200</endDateTime>
+    </tasks>
+    <tasks>
+        <name>Learn how to cook</name>
+        <description isPrivate="false">Google instant noodle recipes</description>
+        <startDateTime isPrivate="false">11/11/2015 0900</startDateTime>
+        <endDateTime isPrivate="false">11/11/2015 1900</endDateTime>
+    </tasks>
+    <tasks>
+        <name>Learn how to cook</name>
+        <description isPrivate="false">Google instant noodle recipes</description>
+        <startDateTime isPrivate="false">11/11/2015 0900</startDateTime>
+        <endDateTime isPrivate="false">11/11/2015 1900</endDateTime>
+    </tasks><tasks>
+        <name>Learn how to cook</name>
+        <description isPrivate="false">Google instant noodle recipes</description>
+        <startDateTime isPrivate="false">11/11/2015 0900</startDateTime>
+        <endDateTime isPrivate="false">11/11/2015 1900</endDateTime>
+    </tasks><tasks>
+        <name>Learn how to cook</name>
+        <description isPrivate="false">Google instant noodle recipes</description>
+        <startDateTime isPrivate="false">11/11/2015 0900</startDateTime>
+        <endDateTime isPrivate="false">11/11/2015 1900</endDateTime>
+    </tasks>
+</tasklist>

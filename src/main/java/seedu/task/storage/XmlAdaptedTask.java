@@ -16,18 +16,18 @@ import seedu.task.model.task.StartDateTime;
 import seedu.task.model.task.Task;
 
 /**
- * JAXB-friendly version of the Person.
+ * JAXB-friendly version of the Task.
  */
 public class XmlAdaptedTask {
 
     @XmlElement(required = true)
     private String name;
+    @XmlElement(required = false)
+    private String description;
     @XmlElement(required = true)
-    private String phone;
+    private String startDateTime;
     @XmlElement(required = true)
-    private String email;
-    @XmlElement(required = true)
-    private String address;
+    private String endDateTime;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -40,15 +40,15 @@ public class XmlAdaptedTask {
 
 
     /**
-     * Converts a given Person into this class for JAXB use.
+     * Converts a given Task into this class for JAXB use.
      *
      * @param source future changes to this will not affect the created XmlAdaptedTask
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getName().taskName;
-        phone = source.getDescription().toString();
-        email = source.getStartDateTime().toString();
-        address = source.getEndDateTime().toString();
+        description = source.getDescription().toString();
+        startDateTime = source.getStartDateTime().toString();
+        endDateTime = source.getEndDateTime().toString();
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -58,18 +58,18 @@ public class XmlAdaptedTask {
     /**
      * Converts this jaxb-friendly adapted person object into the model's Person object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person
+     * @throws IllegalValueException if there were any data constraints violated in the adapted task
      */
     public Task toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<Tag> taskTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+            taskTags.add(tag.toModelType());
         }
         final Name name = new Name(this.name);
-        final Description phone = new Description(this.phone);
-        final StartDateTime email = new StartDateTime(this.email);
-        final EndDateTime address = new EndDateTime(this.address);
-        final UniqueTagList tags = new UniqueTagList(personTags);
+        final Description phone = new Description(this.description);
+        final StartDateTime email = new StartDateTime(this.startDateTime);
+        final EndDateTime address = new EndDateTime(this.endDateTime);
+        final UniqueTagList tags = new UniqueTagList(taskTags);
         return new Task(name, phone, email, address, tags);
     }
 }

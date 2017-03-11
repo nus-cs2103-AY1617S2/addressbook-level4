@@ -16,9 +16,9 @@ import seedu.task.model.task.ReadOnlyTask;
  */
 public class PersonCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
-    private static final String ADDRESS_FIELD_ID = "#address";
-    private static final String PHONE_FIELD_ID = "#phone";
-    private static final String EMAIL_FIELD_ID = "#email";
+    private static final String ADDRESS_FIELD_ID = "#startDateTime";
+    private static final String PHONE_FIELD_ID = "#description";
+    private static final String EMAIL_FIELD_ID = "#endDateTime";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private Node node;
