@@ -28,7 +28,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         int taskManagerIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Project 1").withPriority("high").withDescription("2pm")
-                .withAddress("NUS mall").withCategories("Meeting").build();
+                .withLocation("NUS mall").withCategories("Meeting").build();
 
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
@@ -127,7 +127,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
 
         // confirm the new card contains the right data
-        TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getName().fullName);
+        TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getName().name);
         assertMatching(editedTask, editedCard);
 
         // confirm the list now contains all previous tasks plus the task with

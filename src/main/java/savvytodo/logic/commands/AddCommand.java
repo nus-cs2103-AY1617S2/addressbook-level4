@@ -36,7 +36,7 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, String priority, String description, String address, Set<String> categories)
+    public AddCommand(String name, String priority, String description, String location, Set<String> categories)
             throws IllegalValueException {
         final Set<Category> categorySet = new HashSet<>();
         for (String categoryName : categories) {
@@ -46,7 +46,7 @@ public class AddCommand extends Command {
                 new Name(name),
                 new Priority(priority),
                 new Description(description),
-                new Location(address),
+                new Location(location),
                 new UniqueCategoryList(categorySet)
         );
     }

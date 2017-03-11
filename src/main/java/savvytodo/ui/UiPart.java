@@ -33,7 +33,8 @@ public abstract class UiPart<T> {
         try {
             fxmlLoader.load();
         } catch (IOException e) {
-            throw new AssertionError(e);
+            e.printStackTrace();
+//            throw new AssertionError(e);
         }
     }
 

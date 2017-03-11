@@ -3,7 +3,7 @@ package savvytodo.model.task;
 import savvytodo.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's address in the task manager. Guarantees: immutable; is
+ * Represents a Task's location in the task manager. Guarantees: immutable; is
  * valid as declared in {@link #isValidLocation(String)}
  */
 public class Location {
@@ -20,7 +20,7 @@ public class Location {
     public final String value;
 
     /**
-     * Validates given address.
+     * Validates given location.
      *
      * @throws IllegalValueException
      *             if given location string is invalid.
@@ -34,7 +34,7 @@ public class Location {
     }
 
     /**
-     * Returns true if a given string is a valid task email.
+     * Returns true if a given string is a valid task location.
      */
     public static boolean isValidLocation(String test) {
         String trimmedString = test.trim();

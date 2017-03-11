@@ -45,7 +45,7 @@ public class XmlAdaptedTask {
      * @param source future changes to this will not affect the created XmlAdaptedTask
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
-        name = source.getName().fullName;
+        name = source.getName().name;
         priority = source.getPriority().value;
         description = source.getDescription().value;
         location = source.getLocation().value;
@@ -68,8 +68,8 @@ public class XmlAdaptedTask {
         final Name name = new Name(this.name);
         final Priority priority = new Priority(this.priority);
         final Description description = new Description(this.description);
-        final Location address = new Location(this.location);
+        final Location location = new Location(this.location);
         final UniqueCategoryList categories = new UniqueCategoryList(taskCategories);
-        return new Task(name, priority, description, address, categories);
+        return new Task(name, priority, description, location, categories);
     }
 }

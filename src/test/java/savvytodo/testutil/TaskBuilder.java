@@ -39,18 +39,18 @@ public class TaskBuilder {
         return this;
     }
 
-    public TaskBuilder withAddress(String address) throws IllegalValueException {
-        this.task.setAddress(new Location(address));
+    public TaskBuilder withLocation(String location) throws IllegalValueException {
+        this.task.setLocation(new Location(location));
         return this;
     }
 
     public TaskBuilder withPriority(String priority) throws IllegalValueException {
-        this.task.setPhone(new Priority(priority));
+        this.task.setPriority(new Priority(priority));
         return this;
     }
 
     public TaskBuilder withDescription(String description) throws IllegalValueException {
-        this.task.setEmail(new Description(description));
+        this.task.setDescription(new Description(description));
         return this;
     }
 

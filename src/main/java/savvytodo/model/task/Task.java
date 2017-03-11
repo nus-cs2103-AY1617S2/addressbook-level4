@@ -14,19 +14,20 @@ public class Task implements ReadOnlyTask {
     private Name name;
     private Priority priority;
     private Description description;
-    private Location address;
+    private Location location;
 
     private UniqueCategoryList categories;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Priority phone, Description email, Location address, UniqueCategoryList categories) {
-        assert !CollectionUtil.isAnyNull(name, phone, email, address, categories);
+    public Task(Name name, Priority priority, Description description, Location location,
+            UniqueCategoryList categories) {
+        assert !CollectionUtil.isAnyNull(name, priority, description, location, categories);
         this.name = name;
-        this.priority = phone;
-        this.description = email;
-        this.address = address;
+        this.priority = priority;
+        this.description = description;
+        this.location = location;
         this.categories = new UniqueCategoryList(categories); //protect internal categories from changes in the arg list
     }
 
@@ -48,9 +49,9 @@ public class Task implements ReadOnlyTask {
         return name;
     }
 
-    public void setPhone(Priority phone) {
-        assert phone != null;
-        this.priority = phone;
+    public void setPriority(Priority priority) {
+        assert priority != null;
+        this.priority = priority;
     }
 
     @Override
@@ -58,9 +59,9 @@ public class Task implements ReadOnlyTask {
         return priority;
     }
 
-    public void setEmail(Description email) {
-        assert email != null;
-        this.description = email;
+    public void setDescription(Description description) {
+        assert description != null;
+        this.description = description;
     }
 
     @Override
@@ -68,14 +69,14 @@ public class Task implements ReadOnlyTask {
         return description;
     }
 
-    public void setAddress(Location address) {
-        assert address != null;
-        this.address = address;
+    public void setLocation(Location location) {
+        assert location != null;
+        this.location = location;
     }
 
     @Override
     public Location getLocation() {
-        return address;
+        return location;
     }
 
     @Override
@@ -97,9 +98,9 @@ public class Task implements ReadOnlyTask {
         assert replacement != null;
 
         this.setName(replacement.getName());
-        this.setPhone(replacement.getPriority());
-        this.setEmail(replacement.getDescription());
-        this.setAddress(replacement.getLocation());
+        this.setPriority(replacement.getPriority());
+        this.setDescription(replacement.getDescription());
+        this.setLocation(replacement.getLocation());
         this.setCategories(replacement.getCategories());
     }
 
@@ -113,7 +114,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, priority, description, address, categories);
+        return Objects.hash(name, priority, description, location, categories);
     }
 
     @Override

@@ -15,28 +15,28 @@ public class TypicalTestTasks {
     public TypicalTestTasks() {
         try {
             assignment = new TaskBuilder().withName("Assignment 1")
-                    .withAddress("None").withDescription("2359 Mon 23 Aug")
+                    .withLocation("None").withDescription("2359 Mon 23 Aug")
                     .withPriority("high")
                     .withCategories("friends").build();
-            appointment = new TaskBuilder().withName("dental").withAddress("KTPH")
+            appointment = new TaskBuilder().withName("dental").withLocation("KTPH")
                     .withDescription("Wisdom tooth").withPriority("high")
                     .withCategories("owesMoney", "friends").build();
             birthday = new TaskBuilder().withName("My birthday").withPriority("medium")
-                    .withDescription("Celebration @ 1pm").withAddress("wall street").build();
+                    .withDescription("Celebration @ 1pm").withLocation("wall street").build();
             meeting = new TaskBuilder().withName("CS2103 Project Meeting").withPriority("medium")
-                    .withDescription("cornelia@google.com").withAddress("10th street").build();
+                    .withDescription("cornelia@google.com").withLocation("10th street").build();
             test = new TaskBuilder().withName("CS2103 midterm test").withPriority("high")
-                    .withDescription("2pm Mon 23 Aug").withAddress("NUS MPSH 4").build();
+                    .withDescription("2pm Mon 23 Aug").withLocation("NUS MPSH 4").build();
             presentation = new TaskBuilder().withName("Informal Presentation").withPriority("low")
-                    .withDescription("3pm").withAddress("NUS HALL").build();
+                    .withDescription("3pm").withLocation("NUS HALL").build();
             project = new TaskBuilder().withName("Project Milestone 2").withPriority("high")
-                    .withDescription("anna@google.com").withAddress("4th street").build();
+                    .withDescription("anna@google.com").withLocation("4th street").build();
 
             // Manually added
             discussion = new TaskBuilder().withName("CS2103 Project Discussion").withPriority("low")
-                    .withDescription("stefan@mail.com").withAddress("NUS MALL").build();
+                    .withDescription("stefan@mail.com").withLocation("NUS MALL").build();
             interview = new TaskBuilder().withName("Google Interview").withPriority("medium")
-                    .withDescription("Prepare for interview questions").withAddress("Google SG").build();
+                    .withDescription("Prepare for interview questions").withLocation("Google SG").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";

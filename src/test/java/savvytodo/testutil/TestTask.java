@@ -13,7 +13,7 @@ import savvytodo.model.task.ReadOnlyTask;
 public class TestTask implements ReadOnlyTask {
 
     private Name name;
-    private Description email;
+    private Description description;
     private Location location;
     private Priority priority;
     private UniqueCategoryList categories;
@@ -28,7 +28,7 @@ public class TestTask implements ReadOnlyTask {
     public TestTask(TestTask taskToCopy) {
         this.name = taskToCopy.getName();
         this.priority = taskToCopy.getPriority();
-        this.email = taskToCopy.getDescription();
+        this.description = taskToCopy.getDescription();
         this.location = taskToCopy.getLocation();
         this.categories = taskToCopy.getCategories();
     }
@@ -37,16 +37,16 @@ public class TestTask implements ReadOnlyTask {
         this.name = name;
     }
 
-    public void setAddress(Location address) {
-        this.location = address;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
-    public void setEmail(Description email) {
-        this.email = email;
+    public void setDescription(Description description) {
+        this.description = description;
     }
 
-    public void setPhone(Priority phone) {
-        this.priority = phone;
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 
     public void setCategories(UniqueCategoryList categories) {
@@ -65,7 +65,7 @@ public class TestTask implements ReadOnlyTask {
 
     @Override
     public Description getDescription() {
-        return email;
+        return description;
     }
 
     @Override
@@ -85,7 +85,7 @@ public class TestTask implements ReadOnlyTask {
 
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
-        sb.append("add " + this.getName().fullName + " ");
+        sb.append("add " + this.getName().name + " ");
         sb.append("l/" + this.getLocation().value + " ");
         sb.append("p/" + this.getPriority().value + " ");
         sb.append("d/" + this.getDescription().value + " ");

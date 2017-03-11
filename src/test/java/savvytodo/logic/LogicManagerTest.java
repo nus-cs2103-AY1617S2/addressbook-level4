@@ -185,9 +185,9 @@ public class LogicManagerTest {
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 123 e/valid@email.butNoPhonePrefix l/valid,location", expectedMessage);
-        assertCommandFailure("add Valid Name p/123 valid@email.butNoPrefix l/valid, location", expectedMessage);
-        assertCommandFailure("add Valid Name p/123 e/valid@email.butNoLocationPrefix valid, location", expectedMessage);
+        assertCommandFailure("add Valid Name 123 e/valid@descr.butNoPriorityPrefix l/valid,location", expectedMessage);
+        assertCommandFailure("add Valid Name p/123 valid@descr.butNoPrefix l/valid, location", expectedMessage);
+        assertCommandFailure("add Valid Name p/123 e/valid@descr.butNoLocationPrefix valid, location", expectedMessage);
     }
 
     @Test
@@ -389,13 +389,13 @@ public class LogicManagerTest {
 
         Task assessment() throws Exception {
             Name name = new Name("Assessment 2");
-            Priority privatePhone = new Priority("high");
+            Priority privatePriority = new Priority("high");
             Description description = new Description("Weightage 15%");
             Location privateLocation = new Location("111, alpha street");
             Category category1 = new Category("category1");
             Category category2 = new Category("longercategory2");
             UniqueCategoryList categories = new UniqueCategoryList(category1, category2);
-            return new Task(name, privatePhone, description, privateLocation, categories);
+            return new Task(name, privatePriority, description, privateLocation, categories);
         }
 
         private final String[] SEED_PRIORITIES = { "low", "medium", "high" };
