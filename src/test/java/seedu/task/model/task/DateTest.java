@@ -20,22 +20,22 @@ public class DateTest {
 
         testDate = new Date("25-12-36 14:59");
         assertEquals("25/12/2036 2:59 PM", testDate.toString());
-        
+
         testDate = new Date("25/12/1936 23:59");
         assertEquals("25/12/1936 11:59 PM", testDate.toString());
-        
+
         testDate = new Date("1/1/00 1:23");
         assertEquals("1/1/2000 1:23 AM", testDate.toString());
 
         testDate = new Date("25 Dec 15");
         assertEquals("25/12/2015 12:00 AM", testDate.toString());
-        
+
         testDate = new Date("3pm");
         java.util.Date currentDate = new java.util.Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/y");
         assertEquals(dateFormat.format(currentDate) + " 3:00 PM", testDate.toString());
     }
-    
+
     @Test
     public void isValidDate() {
         // invalid dates
@@ -53,14 +53,14 @@ public class DateTest {
         assertFalse(Date.isValidDate("23/12/99 13:59 pm")); // time wrong
         assertFalse(Date.isValidDate("23/12-2017 11:59 Am")); // mix of both separator
         assertFalse(Date.isValidDate("12/23/2017")); // month and date wrong
-        assertFalse(Date.isValidDate("20 Marc"));  // no separator        
-        assertFalse(Date.isValidDate("23122014"));  // no separator        
+        assertFalse(Date.isValidDate("20 Marc"));  // no separator
+        assertFalse(Date.isValidDate("23122014"));  // no separator
         assertFalse(Date.isValidDate("12")); // only hour
         assertFalse(Date.isValidDate("1330pM")); // no separator
         assertFalse(Date.isValidDate("25:61")); // wrong time
         assertFalse(Date.isValidDate("13:30 pm")); // wrong time
         assertFalse(Date.isValidDate("13pm")); // wrong time
-        
+
         // valid dates
         assertTrue(Date.isValidDate("23-12-2017 23:59"));
         assertTrue(Date.isValidDate("23-12-2017 2359"));
