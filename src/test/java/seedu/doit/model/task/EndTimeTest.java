@@ -7,10 +7,10 @@ import org.junit.Test;
 
 import seedu.doit.model.item.EndTime;
 
-public class DeadlineTest {
+public class EndTimeTest {
 
     @Test
-    public void isValidDeadline() {
+    public void isValidEndTime() {
         // blank deadline
         assertFalse(EndTime.isValidDeadline("")); // empty string
         assertFalse(EndTime.isValidDeadline(" ")); // spaces only
