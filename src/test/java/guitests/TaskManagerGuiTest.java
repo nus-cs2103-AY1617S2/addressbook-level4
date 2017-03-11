@@ -88,7 +88,7 @@ public abstract class TaskManagerGuiTest {
      */
     protected TaskManager getInitialData() {
         TaskManager taskManager = new TaskManager();
-        TypicalTestTasks.loadAddressBookWithSampleData(taskManager);
+        TypicalTestTasks.loadTaskManagerWithSampleData(taskManager);
         return taskManager;
     }
 

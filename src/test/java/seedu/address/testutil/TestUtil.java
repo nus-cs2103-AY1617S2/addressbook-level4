@@ -280,10 +280,10 @@ public class TestUtil {
     }
 
     /**
-     * Removes a subset from the list of persons.
-     * @param tasks The list of persons
-     * @param tasksToRemove The subset of persons.
-     * @return The modified persons after removal of the subset from persons.
+     * Removes a subset from the list of tasks.
+     * @param tasks The list of tasks
+     * @param tasksToRemove The subset of tasks.
+     * @return The modified tasks after removal of the subset from tasks.
      */
     public static TestTask[] removeTasksFromList(final TestTask[] tasks, TestTask... tasksToRemove) {
         List<TestTask> listOfTasks = asList(tasks);
@@ -293,7 +293,7 @@ public class TestUtil {
 
 
     /**
-     * Returns a copy of the list with the person at specified index removed.
+     * Returns a copy of the list with the task at specified index removed.
      * @param list original list to copy from
      * @param targetIndexInOneIndexedFormat e.g. index 1 if the first element is to be removed
      */
@@ -320,9 +320,9 @@ public class TestUtil {
      * @return The modified array of tasks.
      */
     public static TestTask[] addTasksToList(final TestTask[] tasks, TestTask... tasksToAdd) {
-        List<TestTask> listOfPersons = asList(tasks);
-        listOfPersons.addAll(asList(tasksToAdd));
-        return listOfPersons.toArray(new TestTask[listOfPersons.size()]);
+        List<TestTask> listOfTasks = asList(tasks);
+        listOfTasks.addAll(asList(tasksToAdd));
+        return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
 
     private static <T> List<T> asList(T[] objs) {

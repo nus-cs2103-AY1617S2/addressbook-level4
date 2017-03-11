@@ -40,7 +40,7 @@ public class TaskManagerTest {
 
     @Test
     public void resetData_withValidReadOnlyTaskManager_replacesData() {
-        TaskManager newData = new TypicalTestTasks().getTypicalAddressBook();
+        TaskManager newData = new TypicalTestTasks().getTypicalTaskManager();
         taskManager.resetData(newData);
         assertEquals(newData, taskManager);
     }
@@ -59,7 +59,7 @@ public class TaskManagerTest {
 
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
-        TaskManager typicalTaskManager = new TypicalTestTasks().getTypicalAddressBook();
+        TaskManager typicalTaskManager = new TypicalTestTasks().getTypicalTaskManager();
         List<ReadOnlyTask> newTasks = typicalTaskManager.getTaskList();
         List<Tag> newTags = new ArrayList<>(typicalTaskManager.getTagList());
         // Repeat the first tag twice

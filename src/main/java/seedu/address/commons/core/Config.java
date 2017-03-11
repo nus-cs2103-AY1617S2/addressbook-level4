@@ -54,10 +54,9 @@ public class Config {
         return appName;
     }
 
-    public void setTaskManagerName(String addressBookName) {
-        this.appName = addressBookName;
+    public void setTaskManagerName(String taskManagerName) {
+        this.appName = taskManagerName;
     }
-
 
     @Override
     public boolean equals(Object other) {

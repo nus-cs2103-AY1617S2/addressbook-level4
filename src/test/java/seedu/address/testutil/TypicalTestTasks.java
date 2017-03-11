@@ -43,10 +43,10 @@ public class TypicalTestTasks {
         }
     }
 
-    public static void loadAddressBookWithSampleData(TaskManager ab) {
-        for (TestTask person : new TypicalTestTasks().getTypicalTasks()) {
+    public static void loadTaskManagerWithSampleData(TaskManager tm) {
+        for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
             try {
-                ab.addTask(new Task(person));
+                tm.addTask(new Task(task));
             } catch (UniqueTaskList.DuplicateTaskException e) {
                 assert false : "not possible";
             }
@@ -57,9 +57,9 @@ public class TypicalTestTasks {
         return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
     }
 
-    public TaskManager getTypicalAddressBook() {
+    public TaskManager getTypicalTaskManager() {
         TaskManager taskManager = new TaskManager();
-        loadAddressBookWithSampleData(taskManager);
+        loadTaskManagerWithSampleData(taskManager);
         return taskManager;
     }
 }

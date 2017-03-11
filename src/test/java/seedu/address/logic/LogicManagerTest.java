@@ -495,8 +495,8 @@ public class LogicManagerTest {
          * Adds the given list of Tasks to the given model
          */
         void addToModel(Model model, List<Task> tasksToAdd) throws Exception {
-            for (Task p: tasksToAdd) {
-                model.addTask(p);
+            for (Task t: tasksToAdd) {
+                model.addTask(t);
             }
         }
 

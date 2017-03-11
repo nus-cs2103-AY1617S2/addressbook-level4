@@ -62,7 +62,7 @@ public class XmlTaskManagerStorageTest {
     public void readAndSaveTaskManagerWithAllInOrderTestSuccess() throws Exception {
         String filePath = testFolder.getRoot().getPath() + "TempTaskManager.xml";
         TypicalTestTasks td = new TypicalTestTasks();
-        TaskManager original = td.getTypicalAddressBook();
+        TaskManager original = td.getTypicalTaskManager();
         XmlTaskManagerStorage xmlTaskManagerStorage = new XmlTaskManagerStorage(filePath);
 
         //Save in new file and read back
