@@ -1,6 +1,8 @@
 package seedu.tasklist.model.task;
 
 
+import java.util.Optional;
+
 import seedu.tasklist.commons.exceptions.IllegalValueException;
 
 /**
@@ -31,6 +33,23 @@ public class Comment {
             throw new IllegalValueException(MESSAGE_COMMENT_CONSTRAINTS);
         }
         this.value = comment;
+    }
+
+    public Comment(Optional<String> comment) throws IllegalValueException {
+        if (isCommentPresent(comment)) {
+            String commentString = comment.get();
+            assert commentString != null;
+            if (!isValidComment(commentString)) {
+                throw new IllegalValueException(MESSAGE_COMMENT_CONSTRAINTS);
+            }
+            this.value = commentString;
+        } else {
+            this.value = null;
+        }
+    }
+
+    public boolean isCommentPresent(Optional<String> comment) {
+        return comment.isPresent();
     }
 
     /**
