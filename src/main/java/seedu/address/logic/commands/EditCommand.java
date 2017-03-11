@@ -110,7 +110,7 @@ public class EditCommand extends Command {
         public Optional<Time> getTime() {
             return time;
         }
-        
+
         public void setTime(Optional<Time> time) {
             assert time != null;
             this.time = time;

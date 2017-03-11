@@ -60,7 +60,6 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<ReadOnlyTask> persons = FXCollections.observableArrayList();
-        
 
         AddressBookStub(Collection<? extends ReadOnlyTask> persons) {
             this.persons.setAll(persons);
