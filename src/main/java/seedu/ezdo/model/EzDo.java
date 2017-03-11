@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.ezdo.commons.core.UnmodifiableObservableList;
@@ -16,7 +17,6 @@ import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.UniqueTaskList;
 import seedu.ezdo.model.todo.UniqueTaskList.DuplicateTaskException;
-import seedu.ezdo.model.todo.DoneList;
 
 /**
  * Wraps all data at the ezDo level
@@ -26,7 +26,6 @@ public class EzDo implements ReadOnlyEzDo {
 
     private final UniqueTaskList tasks;
     private final UniqueTagList tags;
-    private final DoneList done;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -38,7 +37,6 @@ public class EzDo implements ReadOnlyEzDo {
     {
         tasks = new UniqueTaskList();
         tags = new UniqueTagList();
-        done = new DoneList();
     }
 
     public EzDo() {}
@@ -60,10 +58,6 @@ public class EzDo implements ReadOnlyEzDo {
 
     public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
         this.tags.setTags(tags);
-    }
-    
-    public void setDone(DoneList done) {
-        this.done.setDone(done);
     }
     
     public void resetData(ReadOnlyEzDo newData) {
@@ -154,8 +148,12 @@ public class EzDo implements ReadOnlyEzDo {
         }
     }
     
-    public void doneTask(ReadOnlyTask p) {
-        done.add(p);
+    public void doneTask(Task p) throws UniqueTaskList.TaskNotFoundException{
+        if (tasks.contains(p)) {
+            p.setDone();
+        } else {
+            throw new UniqueTaskList.TaskNotFoundException();
+        }
     }
 
 //// tag-level operations
@@ -165,7 +163,7 @@ public class EzDo implements ReadOnlyEzDo {
     }
 
 //// util methods
-
+    
     @Override
     public String toString() {
         return tasks.asObservableList().size() + " tasks, " + tags.asObservableList().size() +  " tags";
