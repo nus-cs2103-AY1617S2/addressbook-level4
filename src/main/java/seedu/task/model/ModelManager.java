@@ -101,8 +101,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
     
     @Override
-    public void redo() {
-	
+    public void redo() throws EmptyStackException{
+	taskBook.resetData(redoStack.peek());
+	undoStack.push(redoStack.pop());
     }
 
     //=========== Filtered Person List Accessors =============================================================
