@@ -59,8 +59,8 @@
                <children>
                   <AnchorPane fx:id="floatingListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
                </children>
-            </VBox>          
-         </items>
+            </VBox>
+          </items>
       </SplitPane>
       <AnchorPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
    </children>
