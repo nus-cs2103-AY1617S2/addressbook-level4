@@ -27,10 +27,13 @@ public class AddCommandParser {
                 new ArgumentTokenizer(PREFIX_START_DATE, PREFIX_END_DATE, PREFIX_DESCRIPTION, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         try {
+            String startDate = argsTokenizer.getValue(PREFIX_START_DATE).orElse("");
+            String endDate = argsTokenizer.getValue(PREFIX_END_DATE).orElse("");
+            checkTaskInvariant(startDate, endDate);
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
-                    argsTokenizer.getValue(PREFIX_START_DATE).orElse(""),
-                    argsTokenizer.getValue(PREFIX_END_DATE).orElse(""),
+                    startDate,
+                    endDate,
                     argsTokenizer.getValue(PREFIX_DESCRIPTION).orElse(""),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
             );
@@ -38,6 +41,13 @@ public class AddCommandParser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
+        }
+    }
+    
+    private void checkTaskInvariant(String startDate, String endDate) throws IllegalValueException {
+        if (!startDate.isEmpty() && endDate.isEmpty()) {
+            throw new IllegalValueException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, 
+                    AddCommand.MESSAGE_MISSING_DATE) + AddCommand.MESSAGE_USAGE);
         }
     }
 
