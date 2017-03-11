@@ -4,21 +4,21 @@ package seedu.doit.model.item;
 import seedu.doit.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's end time in the task manager.
+ * Represents a Item's end time in the item manager.
  * Guarantees: immutable; is valid as declared in {@link #isValidEndTime(String)}
  */
 public class EndTime {
 
     public static final String MESSAGE_ENDTIME_CONSTRAINTS =
-        "Task End Time should be 2 alphanumeric/period strings separated by '@'";
+        "Item End Time should be 2 alphanumeric/period strings separated by '@'";
     public static final String ENDTIME_VALIDATION_REGEX = "[^\\s].*";
 
     public final String value;
 
     /**
-     * Validates given deadline.
+     * Validates given endTime.
      *
-     * @throws IllegalValueException if given deadline string is invalid.
+     * @throws IllegalValueException if given endTime string is invalid.
      */
     public EndTime(String endTime) throws IllegalValueException {
         assert endTime != null;
@@ -30,7 +30,7 @@ public class EndTime {
     }
 
     /**
-     * Returns if a given string is a valid task deadline.
+     * Returns if a given string is a valid item end time.
      */
     public static boolean isValidEndTime(String test) {
         return test.matches(ENDTIME_VALIDATION_REGEX);
