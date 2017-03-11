@@ -91,7 +91,7 @@ public class XmlEzDoStorage implements EzDoStorage {
             Files.move(Paths.get(oldPath), Paths.get(newPath), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException ioe) {
             logger.info("I/O Exception when moving ezDo.xml to new directory.");
-            throw new IOException(ioe.getMessage());
+            throw new IOException("Error moving file to new directory.");
         }
     }
 }

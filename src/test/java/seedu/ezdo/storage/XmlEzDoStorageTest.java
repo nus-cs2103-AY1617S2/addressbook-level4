@@ -5,11 +5,19 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
+import org.junit.runner.RunWith;
+import org.mockito.BDDMockito;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import seedu.ezdo.commons.exceptions.DataConversionException;
 import seedu.ezdo.commons.util.FileUtil;
@@ -18,6 +26,8 @@ import seedu.ezdo.model.ReadOnlyEzDo;
 import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.testutil.TypicalTestTasks;
 
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(Files.class)
 public class XmlEzDoStorageTest {
     private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlEzDoStorageTest/");
 
@@ -122,5 +132,15 @@ public class XmlEzDoStorageTest {
 
     private void moveEzDo(String oldPath, String filePath) throws IOException {
         new XmlEzDoStorage(filePath).moveEzDo(oldPath, addToTestDataPathIfNotNull(filePath));
+    }
+
+
+    @Test
+    public void testIOException_moveEzDo() throws IOException {
+        PowerMockito.mockStatic(Files.class);
+        BDDMockito.given(Files.move(Paths.get("lol"), Paths.get("omg"), StandardCopyOption.REPLACE_EXISTING))
+                .willThrow(new IOException("Error moving file to new directory"));
+        thrown.expect(IOException.class);
+        moveEzDo("lol", "omg");
     }
 }
