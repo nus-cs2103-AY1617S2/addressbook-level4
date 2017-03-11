@@ -4,7 +4,7 @@ import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 import org.teamstbf.yats.model.TaskManager;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.Task;
-import org.teamstbf.yats.model.item.UniqueItemList;
+import org.teamstbf.yats.model.item.UniqueEventList;
 
 /**
  *
@@ -44,7 +44,7 @@ public class TypicalTestEvents {
         for (TestEvent person : new TypicalTestEvents().getTypicalPersons()) {
             try {
                 ab.addEvent(new Event(person));
-            } catch (UniqueItemList.DuplicatePersonException e) {
+            } catch (UniqueEventList.DuplicateEventException e) {
                 assert false : "not possible";
             }
         }

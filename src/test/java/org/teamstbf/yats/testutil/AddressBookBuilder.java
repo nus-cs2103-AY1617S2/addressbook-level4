@@ -4,7 +4,7 @@ import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 import org.teamstbf.yats.model.TaskManager;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.Task;
-import org.teamstbf.yats.model.item.UniqueItemList;
+import org.teamstbf.yats.model.item.UniqueEventList;
 import org.teamstbf.yats.model.tag.Tag;
 
 /**
@@ -20,7 +20,7 @@ public class AddressBookBuilder {
         this.addressBook = addressBook;
     }
 
-    public AddressBookBuilder withPerson(Event person) throws UniqueItemList.DuplicatePersonException {
+    public AddressBookBuilder withPerson(Event person) throws UniqueEventList.DuplicateEventException {
         addressBook.addEvent(person);
         return this;
     }

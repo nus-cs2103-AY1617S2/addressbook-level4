@@ -4,7 +4,7 @@ import org.teamstbf.yats.commons.core.Messages;
 import org.teamstbf.yats.commons.core.UnmodifiableObservableList;
 import org.teamstbf.yats.logic.commands.exceptions.CommandException;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
-import org.teamstbf.yats.model.item.UniqueItemList.PersonNotFoundException;
+import org.teamstbf.yats.model.item.UniqueEventList.EventNotFoundException;
 
 /**
  * Deletes a person identified using it's last displayed index from the address book.
@@ -30,7 +30,7 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
 
-        UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredTaskList();
+        UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredEventList();
 
         if (lastShownList.size() < targetIndex) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
@@ -39,8 +39,8 @@ public class DeleteCommand extends Command {
         ReadOnlyEvent personToDelete = lastShownList.get(targetIndex - 1);
 
         try {
-            model.deletePerson(personToDelete);
-        } catch (PersonNotFoundException pnfe) {
+            model.deleteEvent(personToDelete);
+        } catch (EventNotFoundException pnfe) {
             assert false : "The target task cannot be missing";
         }
 

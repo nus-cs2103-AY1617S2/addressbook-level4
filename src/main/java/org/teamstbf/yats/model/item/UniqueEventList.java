@@ -18,7 +18,7 @@ import javafx.collections.ObservableList;
  * @see Task#equals(Object)
  * @see CollectionUtil#elementsAreUnique(Collection)
  */
-public class UniqueItemList implements Iterable<Event> {
+public class UniqueEventList implements Iterable<Event> {
 
     private final ObservableList<Event> internalList = FXCollections.observableArrayList();
 
@@ -33,12 +33,12 @@ public class UniqueItemList implements Iterable<Event> {
     /**
      * Adds a person to the list.
      *
-     * @throws DuplicatePersonException if the person to add is a duplicate of an existing person in the list.
+     * @throws DuplicateEventException if the person to add is a duplicate of an existing person in the list.
      */
-    public void add(Event p) throws DuplicatePersonException {
+    public void add(Event p) throws DuplicateEventException {
         assert p != null;
         if (contains(p)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateEventException();
         }
         internalList.add(p);
     }
@@ -46,16 +46,16 @@ public class UniqueItemList implements Iterable<Event> {
     /**
      * Updates the person in the list at position {@code index} with {@code editedPerson}.
      *
-     * @throws DuplicatePersonException if updating the person's details causes the person to be equivalent to
+     * @throws DuplicateEventException if updating the person's details causes the person to be equivalent to
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updatePerson(int index, ReadOnlyEvent editedEvent) throws DuplicatePersonException {
+    public void updatePerson(int index, ReadOnlyEvent editedEvent) throws DuplicateEventException {
         assert editedEvent != null;
 
         Event personToUpdate = internalList.get(index);
         if (!personToUpdate.equals(editedEvent) && internalList.contains(editedEvent)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateEventException();
         }
 
         personToUpdate.resetData(editedEvent);
@@ -68,23 +68,23 @@ public class UniqueItemList implements Iterable<Event> {
     /**
      * Removes the equivalent person from the list.
      *
-     * @throws PersonNotFoundException if no such person could be found in the list.
+     * @throws EventNotFoundException if no such person could be found in the list.
      */
-    public boolean remove(ReadOnlyEvent toRemove) throws PersonNotFoundException {
+    public boolean remove(ReadOnlyEvent toRemove) throws EventNotFoundException {
         assert toRemove != null;
         final boolean personFoundAndDeleted = internalList.remove(toRemove);
         if (!personFoundAndDeleted) {
-            throw new PersonNotFoundException();
+            throw new EventNotFoundException();
         }
         return personFoundAndDeleted;
     }
 
-    public void setPersons(UniqueItemList replacement) {
+    public void setPersons(UniqueEventList replacement) {
         this.internalList.setAll(replacement.internalList);
     }
 
-    public void setPersons(List<? extends ReadOnlyEvent> persons) throws DuplicatePersonException {
-        final UniqueItemList replacement = new UniqueItemList();
+    public void setPersons(List<? extends ReadOnlyEvent> persons) throws DuplicateEventException {
+        final UniqueEventList replacement = new UniqueEventList();
         for (final ReadOnlyEvent person : persons) {
             replacement.add(new Event(person));
         }
@@ -103,9 +103,9 @@ public class UniqueItemList implements Iterable<Event> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniqueItemList // instanceof handles nulls
+                || (other instanceof UniqueEventList // instanceof handles nulls
                 && this.internalList.equals(
-                ((UniqueItemList) other).internalList));
+                ((UniqueEventList) other).internalList));
     }
 
     @Override
@@ -116,8 +116,8 @@ public class UniqueItemList implements Iterable<Event> {
     /**
      * Signals that an operation would have violated the 'no duplicates' property of the list.
      */
-    public static class DuplicatePersonException extends DuplicateDataException {
-        protected DuplicatePersonException() {
+    public static class DuplicateEventException extends DuplicateDataException {
+        protected DuplicateEventException() {
             super("Operation would result in duplicate persons");
         }
     }
@@ -126,6 +126,6 @@ public class UniqueItemList implements Iterable<Event> {
      * Signals that an operation targeting a specified person in the list would fail because
      * there is no such matching person in the list.
      */
-    public static class PersonNotFoundException extends Exception {}
+    public static class EventNotFoundException extends Exception {}
 
 }

@@ -13,7 +13,7 @@ import org.teamstbf.yats.model.item.ReadOnlyEvent;
 import org.teamstbf.yats.model.item.Timing;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.item.Deadline;
-import org.teamstbf.yats.model.item.UniqueItemList;
+import org.teamstbf.yats.model.item.UniqueEventList;
 import org.teamstbf.yats.model.tag.UniqueTagList;
 
 /**
@@ -52,7 +52,7 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyEvent> lastShownList = model.getFilteredTaskList();
+        List<ReadOnlyEvent> lastShownList = model.getFilteredEventList();
 
         if (filteredTaskListIndex >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
@@ -62,8 +62,8 @@ public class EditCommand extends Command {
         Event editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
         try {
-            model.updatePerson(filteredTaskListIndex, editedTask);
-        } catch (UniqueItemList.DuplicatePersonException dpe) {
+            model.updateEvent(filteredTaskListIndex, editedTask);
+        } catch (UniqueEventList.DuplicateEventException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
         model.updateFilteredListToShowAll();

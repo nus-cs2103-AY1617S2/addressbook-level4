@@ -16,7 +16,7 @@ import org.teamstbf.yats.commons.events.BaseEvent;
 import org.teamstbf.yats.model.TaskManager;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
 import org.teamstbf.yats.model.item.ReadOnlyItem;
-import org.teamstbf.yats.model.item.UniqueItemList.DuplicatePersonException;
+import org.teamstbf.yats.model.item.UniqueEventList.DuplicateEventException;
 import org.teamstbf.yats.testutil.TestUtil;
 import org.teamstbf.yats.testutil.TypicalTestEvents;
 import org.testfx.api.FxToolkit;
@@ -87,7 +87,7 @@ public abstract class AddressBookGuiTest {
     /**
      * Override this in child classes to set the initial local data.
      * Return null to use the data in the file specified in {@link #getDataFileLocation()}
-     * @throws DuplicatePersonException 
+     * @throws DuplicateEventException 
      */
     protected TaskManager getInitialData() {
         TaskManager ab = new TaskManager();

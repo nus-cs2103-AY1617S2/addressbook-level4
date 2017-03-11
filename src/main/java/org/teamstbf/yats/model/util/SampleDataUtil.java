@@ -9,7 +9,7 @@ import org.teamstbf.yats.model.item.Location;
 import org.teamstbf.yats.model.item.Periodic;
 import org.teamstbf.yats.model.item.Timing;
 import org.teamstbf.yats.model.item.Title;
-import org.teamstbf.yats.model.item.UniqueItemList.DuplicatePersonException;
+import org.teamstbf.yats.model.item.UniqueEventList.DuplicateEventException;
 import org.teamstbf.yats.model.tag.UniqueTagList;
 
 public class SampleDataUtil {
@@ -59,7 +59,7 @@ public class SampleDataUtil {
 				sampleTM.addEvent(sampleTask);
 			}
 			return sampleTM;
-		} catch (DuplicatePersonException e) {
+		} catch (DuplicateEventException e) {
 			throw new AssertionError("sample data cannot contain duplicate persons", e);
 		}
 	}

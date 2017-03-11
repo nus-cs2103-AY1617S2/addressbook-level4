@@ -11,8 +11,8 @@ import java.util.Set;
 import org.teamstbf.yats.commons.core.UnmodifiableObservableList;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
-import org.teamstbf.yats.model.item.UniqueItemList;
-import org.teamstbf.yats.model.item.UniqueItemList.DuplicatePersonException;
+import org.teamstbf.yats.model.item.UniqueEventList;
+import org.teamstbf.yats.model.item.UniqueEventList.DuplicateEventException;
 import org.teamstbf.yats.model.tag.Tag;
 import org.teamstbf.yats.model.tag.UniqueTagList;
 
@@ -24,7 +24,7 @@ import javafx.collections.ObservableList;
  */
 public class TaskManager implements ReadOnlyTaskManager {
 
-    private final UniqueItemList events;
+    private final UniqueEventList events;
     private final UniqueTagList tags;
 
     /*
@@ -35,7 +35,7 @@ public class TaskManager implements ReadOnlyTaskManager {
      *   among constructors.
      */
     {
-        events = new UniqueItemList();
+        events = new UniqueEventList();
         tags = new UniqueTagList();
     }
 
@@ -52,7 +52,7 @@ public class TaskManager implements ReadOnlyTaskManager {
 //// list overwrite operations
 
     public void setPersons(List<? extends ReadOnlyEvent> persons)
-            throws UniqueItemList.DuplicatePersonException {
+            throws UniqueEventList.DuplicateEventException {
         this.events.setPersons(persons);
     }
 
@@ -64,7 +64,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         assert newData != null;
         try {
             setPersons(newData.getTaskList());
-        } catch (UniqueItemList.DuplicatePersonException e) {
+        } catch (UniqueEventList.DuplicateEventException e) {
             assert false : "AddressBooks should not have duplicate persons";
         }
         try {
@@ -82,9 +82,9 @@ public class TaskManager implements ReadOnlyTaskManager {
      * Also checks the new person's tags and updates {@link #tags} with any new tags found,
      * and updates the Tag objects in the person to point to those in {@link #tags}.
      *
-     * @throws UniqueItemList.DuplicatePersonException if an equivalent person already exists.
+     * @throws UniqueEventList.DuplicateEventException if an equivalent person already exists.
      */
-    public void addEvent(Event p) throws UniqueItemList.DuplicatePersonException {
+    public void addEvent(Event p) throws UniqueEventList.DuplicateEventException {
         syncMasterTagListWith(p);
         events.add(p);
     }
@@ -94,12 +94,12 @@ public class TaskManager implements ReadOnlyTaskManager {
      * {@code AddressBook}'s tag list will be updated with the tags of {@code editedReadOnlyPerson}.
      * @see #syncMasterTagListWith(Task)
      *
-     * @throws DuplicatePersonException if updating the person's details causes the person to be equivalent to
+     * @throws DuplicateEventException if updating the person's details causes the person to be equivalent to
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
     public void updatePerson(int index, ReadOnlyEvent editedReadOnlyPerson)
-            throws UniqueItemList.DuplicatePersonException {
+            throws UniqueEventList.DuplicateEventException {
         assert editedReadOnlyPerson != null;
 
         Event editedPerson = new Event(editedReadOnlyPerson);
@@ -136,15 +136,15 @@ public class TaskManager implements ReadOnlyTaskManager {
      *  - points to a Tag object in the master list
      *  @see #syncMasterTagListWith(Task)
      */
-    private void syncMasterTagListWith(UniqueItemList persons) {
+    private void syncMasterTagListWith(UniqueEventList persons) {
         persons.forEach(this::syncMasterTagListWith);
     }
 
-    public boolean removePerson(ReadOnlyEvent key) throws UniqueItemList.PersonNotFoundException {
+    public boolean removePerson(ReadOnlyEvent key) throws UniqueEventList.EventNotFoundException {
         if (events.remove(key)) {
             return true;
         } else {
-            throw new UniqueItemList.PersonNotFoundException();
+            throw new UniqueEventList.EventNotFoundException();
         }
     }
 

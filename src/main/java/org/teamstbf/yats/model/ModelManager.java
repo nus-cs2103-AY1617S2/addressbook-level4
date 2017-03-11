@@ -12,9 +12,9 @@ import org.teamstbf.yats.commons.util.StringUtil;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
 import org.teamstbf.yats.model.item.Task;
-import org.teamstbf.yats.model.item.UniqueItemList;
-import org.teamstbf.yats.model.item.UniqueItemList.DuplicatePersonException;
-import org.teamstbf.yats.model.item.UniqueItemList.PersonNotFoundException;
+import org.teamstbf.yats.model.item.UniqueEventList;
+import org.teamstbf.yats.model.item.UniqueEventList.DuplicateEventException;
+import org.teamstbf.yats.model.item.UniqueEventList.EventNotFoundException;
 
 import javafx.collections.transformation.FilteredList;
 
@@ -52,7 +52,7 @@ public class ModelManager extends ComponentManager implements Model {
 	}
 
 	@Override
-	public ReadOnlyTaskManager getAddressBook() {
+	public ReadOnlyTaskManager getTaskManager() {
 		return taskManager;
 	}
 
@@ -62,21 +62,21 @@ public class ModelManager extends ComponentManager implements Model {
 	}
 
 	@Override
-	public synchronized void deletePerson(ReadOnlyEvent target) throws PersonNotFoundException {
+	public synchronized void deleteEvent(ReadOnlyEvent target) throws EventNotFoundException {
 		taskManager.removePerson(target);
 		indicateAddressBookChanged();
 	}
 
 	@Override
-	public synchronized void addEvent(Event event) throws UniqueItemList.DuplicatePersonException {
+	public synchronized void addEvent(Event event) throws UniqueEventList.DuplicateEventException {
 		taskManager.addEvent(event);
 		updateFilteredListToShowAll();
 		indicateAddressBookChanged();
 	}
 
 	@Override
-	public void updatePerson(int filteredPersonListIndex, ReadOnlyEvent editedPerson)
-			throws UniqueItemList.DuplicatePersonException {
+	public void updateEvent(int filteredPersonListIndex, ReadOnlyEvent editedPerson)
+			throws UniqueEventList.DuplicateEventException {
 		assert editedPerson != null;
 
 		int addressBookIndex = filteredPersons.getSourceIndex(filteredPersonListIndex);
@@ -85,14 +85,14 @@ public class ModelManager extends ComponentManager implements Model {
 	}
 
 	@Override
-	public void updatePerson(int filteredPersonListIndex, Event editedPerson) throws DuplicatePersonException {
+	public void updateEvent(int filteredPersonListIndex, Event editedPerson) throws DuplicateEventException {
 		// TODO Auto-generated method stub
 	}
 
 	//=========== Filtered Person List Accessors =============================================================
 
 	@Override
-	public UnmodifiableObservableList<ReadOnlyEvent> getFilteredTaskList() {
+	public UnmodifiableObservableList<ReadOnlyEvent> getFilteredEventList() {
 		return new UnmodifiableObservableList<>(filteredPersons);
 	}
 
@@ -102,7 +102,7 @@ public class ModelManager extends ComponentManager implements Model {
 	}
 
 	@Override
-	public void updateFilteredPersonList(Set<String> keywords) {
+	public void updateFilteredEventList(Set<String> keywords) {
 		updateFilteredPersonList(new PredicateExpression(new NameQualifier(keywords)));
 	}
 

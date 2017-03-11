@@ -9,7 +9,7 @@ import org.teamstbf.yats.logic.commands.ListCommand;
 public class ListCommandParser {
 
 	/**
-	 * Parses the give {@code String} of arguments in the context of the ListCommand
+	 * Parses the given {@code String} of arguments in the context of the ListCommand
 	 * and returns a ListCommand object for execution.
 	 */
 	public Command parse(String args) {

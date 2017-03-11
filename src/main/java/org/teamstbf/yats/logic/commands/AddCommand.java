@@ -11,7 +11,7 @@ import org.teamstbf.yats.model.item.Location;
 import org.teamstbf.yats.model.item.Periodic;
 import org.teamstbf.yats.model.item.Timing;
 import org.teamstbf.yats.model.item.Title;
-import org.teamstbf.yats.model.item.UniqueItemList;
+import org.teamstbf.yats.model.item.UniqueEventList;
 import org.teamstbf.yats.model.tag.Tag;
 import org.teamstbf.yats.model.tag.UniqueTagList;
 
@@ -64,7 +64,7 @@ public class AddCommand extends Command {
         try {
             model.addEvent(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-        } catch (UniqueItemList.DuplicatePersonException e) {
+        } catch (UniqueEventList.DuplicateEventException e) {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }
 
