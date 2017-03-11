@@ -202,10 +202,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add n/wrong args wrong args", expectedMessage);
-        assertCommandFailure("add n/Valid Name p/1 sd/today ed/tomorrow "
-                + "validInformation.butNoInformationPrefix",
-                expectedMessage);
+        assertCommandFailure("add Valid Name p/1 sd/today ed/tomorrow", expectedMessage);
     }
 
     @Test
@@ -466,7 +463,6 @@ public class LogicManagerTest {
                 cmd.append(" c/").append(t.categoryName);
             }
 
-            System.out.println(cmd.toString());
             return cmd.toString();
         }
 
