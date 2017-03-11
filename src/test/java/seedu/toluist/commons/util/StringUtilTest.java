@@ -6,6 +6,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.FileNotFoundException;
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -148,5 +150,40 @@ public class StringUtilTest {
         StringUtil.getDetails(null);
     }
 
+    //---------------- Tests for splitIndexes --------------------------------------
 
+    @Test
+    public void splitIndexes_obtainIndexesToEndIndex() {
+        List<Integer> actual = StringUtil.splitIndexes(" - 3", 8);
+        List<Integer> expected = Arrays.asList(1, 2, 3);
+        assertTrue(actual.equals(expected));
+    }
+
+    @Test
+    public void splitIndexes_obtainIndexesFromStartIndex() {
+        List<Integer> actual = StringUtil.splitIndexes(" 3 -", 8);
+        List<Integer> expected = Arrays.asList(3, 4, 5, 6, 7, 8);
+        assertTrue(actual.equals(expected));
+    }
+
+    @Test
+    public void splitIndexes_obtainIndexesFromStartIndexToEndIndex() {
+        List<Integer> actual = StringUtil.splitIndexes("3-5", 8);
+        List<Integer> expected = Arrays.asList(3, 4, 5);
+        assertTrue(actual.equals(expected));
+    }
+
+    @Test
+    public void splitIndexes_obtainIndexesFromAssortedIndexes() {
+        List<Integer> actual = StringUtil.splitIndexes("1 3,  7", 8);
+        List<Integer> expected = Arrays.asList(1, 3, 7);
+        assertTrue(actual.equals(expected));
+    }
+
+    @Test
+    public void splitIndexes_obtainIndexesComplexStringIndexes() {
+        List<Integer> actual = StringUtil.splitIndexes("- 3, 5, 7 - 12", 8);
+        List<Integer> expected = Arrays.asList(1, 2, 3, 5, 7, 8);
+        assertTrue(actual.equals(expected));
+    }
 }
