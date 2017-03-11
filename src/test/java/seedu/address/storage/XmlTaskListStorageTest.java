@@ -28,7 +28,7 @@ public class XmlTaskListStorageTest {
     public TemporaryFolder testFolder = new TemporaryFolder();
 
     @Test
-    public void readTaskList_nullFilePath_assertionFailure() throws Exception {
+    public void readTaskListNullFilePathAssertionFailure() throws Exception {
         thrown.expect(AssertionError.class);
         readTaskList(null);
     }
@@ -44,12 +44,12 @@ public class XmlTaskListStorageTest {
     }
 
     @Test
-    public void read_missingFile_emptyResult() throws Exception {
+    public void readMissingFileEmptyResult() throws Exception {
         assertFalse(readTaskList("NonExistentFile.xml").isPresent());
     }
 
     @Test
-    public void read_notXmlFormat_exceptionThrown() throws Exception {
+    public void readNotXmlFormatExceptionThrown() throws Exception {
 
         thrown.expect(DataConversionException.class);
         readTaskList("NotXmlFormatTaskList.xml");
@@ -60,7 +60,7 @@ public class XmlTaskListStorageTest {
     }
 
     @Test
-    public void readAndSaveTaskList_allInOrder_success() throws Exception {
+    public void readAndSaveTaskListAllInOrderSuccess() throws Exception {
         String filePath = testFolder.getRoot().getPath() + "TempTaskList.xml";
         TypicalTestTasks td = new TypicalTestTasks();
         TaskList original = td.getTypicalTaskList();
@@ -87,7 +87,7 @@ public class XmlTaskListStorageTest {
     }
 
     @Test
-    public void saveTaskList_nullTaskList_assertionFailure() throws IOException {
+    public void saveTaskListNullTaskListAssertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
         saveTaskList(null, "SomeFile.xml");
     }
@@ -97,7 +97,7 @@ public class XmlTaskListStorageTest {
     }
 
     @Test
-    public void saveTaskList_nullFilePath_assertionFailure() throws IOException {
+    public void saveTaskListNullFilePathAssertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
         saveTaskList(new TaskList(), null);
     }
