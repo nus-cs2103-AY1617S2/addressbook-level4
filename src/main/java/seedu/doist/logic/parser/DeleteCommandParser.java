@@ -22,8 +22,8 @@ public class DeleteCommandParser {
         List<Optional<Integer>> optionalIndices = ParserUtil.parseIndices(args);
         for (Optional<Integer> optionalIndex : optionalIndices) {
             if (!optionalIndex.isPresent()) {
-                return new IncorrectCommand(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                                                          DeleteCommand.MESSAGE_USAGE));
             }
         }
         int[] indices = new int[optionalIndices.size()];

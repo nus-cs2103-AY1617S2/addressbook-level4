@@ -26,7 +26,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = info().getUsageTextForCommandWords()
             + ": Edits the details of the task identified " + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [DESCRIPTION] [/as PRIORITY] [/under TAG]...\n"
+            + "Parameters: INDEX (must be a positive integer) [DESCRIPTION] [\\as PRIORITY] [\\under TAG]...\n"
             + "Example: " + DEFAULT_COMMAND_WORD + " 1 do stuff today";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";

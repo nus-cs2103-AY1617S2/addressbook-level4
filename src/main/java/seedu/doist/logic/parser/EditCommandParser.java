@@ -1,7 +1,6 @@
 package seedu.doist.logic.parser;
 
 import static seedu.doist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.doist.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.doist.logic.parser.CliSyntax.PREFIX_UNDER;
 
 
@@ -28,8 +27,7 @@ public class EditCommandParser {
      */
     public Command parse(String args) {
         assert args != null;
-        ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_FROM);
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_UNDER);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
@@ -41,9 +39,6 @@ public class EditCommandParser {
         EditTaskDescriptor editPersonDescriptor = new EditTaskDescriptor();
         try {
             editPersonDescriptor.setDesc(ParserUtil.parseDesc(preambleFields.get(1)));
-            //editPersonDescriptor.setPhone(ParserUtil.parsePhone(argsTokenizer.getValue(PREFIX_PHONE)));
-            //editPersonDescriptor.setEmail(ParserUtil.parseEmail(argsTokenizer.getValue(PREFIX_EMAIL)));
-            //editPersonDescriptor.setAddress(ParserUtil.parseAddress(argsTokenizer.getValue(PREFIX_ADDRESS)));
             editPersonDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_UNDER))));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
