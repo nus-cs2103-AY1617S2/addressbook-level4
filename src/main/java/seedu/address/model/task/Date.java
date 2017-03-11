@@ -2,31 +2,35 @@ package seedu.address.model.task;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 
+/**
+ * Represents a task's date in the task manager.
+ * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
+ */
 public class Date {
-    public static final String MESSAGE_PHONE_CONSTRAINTS = "Person phone numbers should only contain numbers";
-    public static final String PHONE_VALIDATION_REGEX = "\\d+";
+    public static final String MESSAGE_DATE_CONSTRAINTS = "Task's date should be in this format DDMMYYY";
+    public static final String DATE_VALIDATION_REGEX = "\\d+";
 
     public final String value;
 
     /**
-     * Validates given phone number.
+     * Validates given date.
      *
      * @throws IllegalValueException if given phone string is invalid.
      */
-    public Date(String phone) throws IllegalValueException {
-        assert phone != null;
-        String trimmedPhone = phone.trim();
-        if (!isValidPhone(trimmedPhone)) {
-            throw new IllegalValueException(MESSAGE_PHONE_CONSTRAINTS);
+    public Date(String date) throws IllegalValueException {
+        assert date != null;
+        String trimmedDate = date.trim();
+        if (!isValidDate(trimmedDate)) {
+            throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
         }
-        this.value = trimmedPhone;
+        this.value = trimmedDate;
     }
 
     /**
-     * Returns true if a given string is a valid person phone number.
+     * Returns true if a given string is a valid task date.
      */
-    public static boolean isValidPhone(String test) {
-        return test.matches(PHONE_VALIDATION_REGEX);
+    public static boolean isValidDate(String test) {
+        return test.matches(DATE_VALIDATION_REGEX);
     }
 
     @Override
