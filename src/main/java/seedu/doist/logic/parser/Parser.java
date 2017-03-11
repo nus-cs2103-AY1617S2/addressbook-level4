@@ -43,6 +43,7 @@ public class Parser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+
         if (AddCommand.info().canBeTriggeredByWord(commandWord)) {
             return new AddCommandParser().parse(arguments);
         } else if (EditCommand.info().canBeTriggeredByWord(commandWord)) {

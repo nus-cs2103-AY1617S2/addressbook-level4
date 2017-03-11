@@ -39,8 +39,11 @@ public interface ReadOnlyTask {
         return builder.toString();
     }
 
+    /**
+     * Compare the priority of two tasks
+     * @return: -1 task2 has a lower priority than task1
+     */
     public class ReadOnlyTaskPriorityComparator implements Comparator<ReadOnlyTask> {
-
         @Override
         public int compare(ReadOnlyTask task1, ReadOnlyTask task2) {
             // Highest priority to lowest priority
