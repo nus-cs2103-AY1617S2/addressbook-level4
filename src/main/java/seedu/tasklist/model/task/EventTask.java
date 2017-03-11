@@ -60,7 +60,7 @@ public class EventTask extends Task implements ReadOnlyEventTask {
 
     @Override
     public Priority getPriority() {
-        return null;
+        return priority;
     }
 
     public void setStatus(Status status) {
