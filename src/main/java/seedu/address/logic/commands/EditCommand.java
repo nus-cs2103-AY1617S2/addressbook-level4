@@ -33,36 +33,41 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the instruction book.";
 
-    private final int filteredTaskListIndex;
+    private final int targetIndex;
+    private final String targetList;
     private final EditTaskDescriptor editTaskDescriptor;
 
     /**
      * @param filteredTaskListIndex the index of the task in the filtered task list to edit
      * @param editTaskDescriptor details to edit the task with
      */
-    public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
-        assert filteredTaskListIndex > 0;
+    public EditCommand(String targetList, int targetIndex, EditTaskDescriptor editTaskDescriptor) {
+        assert targetIndex > 0;
         assert editTaskDescriptor != null;
 
         // converts filteredTaskListIndex from one-based to zero-based.
-        this.filteredTaskListIndex = filteredTaskListIndex - 1;
-
+        this.targetIndex = targetIndex - 1;
+        this.targetList = targetList;
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
     }
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyTask> lastShownList = model.getNonFloatingTaskList();
-
-        if (filteredTaskListIndex >= lastShownList.size()) {
+        List<ReadOnlyTask> lastShownList;
+        if(targetList.equals("floating")){
+            lastShownList = model.getFloatingTaskList();
+        }else {
+            lastShownList = model.getNonFloatingTaskList();
+        }
+        if (targetIndex >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
+        ReadOnlyTask taskToEdit = lastShownList.get(targetIndex);
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
         try {
-            model.updateTask(filteredTaskListIndex, editedTask);
+            model.updateTask(targetList, targetIndex, editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }

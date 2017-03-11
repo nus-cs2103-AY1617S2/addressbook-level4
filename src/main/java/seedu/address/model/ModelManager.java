@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -79,11 +80,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
+    public void updateTask(String targetList, int taskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
-
-        int addressBookIndex = nonFloatingTasks.getSourceIndex(filteredTaskListIndex);
+        int addressBookIndex = nonFloatingTasks.getSourceIndex(taskListIndex);
+        if(targetList.equals("floating")){
+            addressBookIndex = floatingTasks.getSourceIndex(taskListIndex);
+        }
         addressBook.updateTask(addressBookIndex, editedTask);
         indicateAddressBookChanged();
     }
