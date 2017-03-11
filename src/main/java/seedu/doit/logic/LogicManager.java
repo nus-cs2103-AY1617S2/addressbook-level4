@@ -10,7 +10,7 @@ import seedu.doit.logic.commands.CommandResult;
 import seedu.doit.logic.commands.exceptions.CommandException;
 import seedu.doit.logic.parser.Parser;
 import seedu.doit.model.Model;
-import seedu.doit.model.task.ReadOnlyTask;
+import seedu.doit.model.item.ReadOnlyTask;
 import seedu.doit.storage.Storage;
 
 /**

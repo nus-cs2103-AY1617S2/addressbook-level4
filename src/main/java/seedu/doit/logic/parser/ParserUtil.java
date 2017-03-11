@@ -13,12 +13,12 @@ import java.util.stream.Collectors;
 
 import seedu.doit.commons.exceptions.IllegalValueException;
 import seedu.doit.commons.util.StringUtil;
+import seedu.doit.model.item.Description;
+import seedu.doit.model.item.EndTime;
+import seedu.doit.model.item.Name;
+import seedu.doit.model.item.Priority;
 import seedu.doit.model.tag.Tag;
 import seedu.doit.model.tag.UniqueTagList;
-import seedu.doit.model.task.Description;
-import seedu.doit.model.task.EndTime;
-import seedu.doit.model.task.Name;
-import seedu.doit.model.task.Priority;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes

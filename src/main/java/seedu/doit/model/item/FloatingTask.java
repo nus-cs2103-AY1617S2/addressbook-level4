@@ -1,4 +1,4 @@
-package seedu.doit.model.task;
+package seedu.doit.model.item;
 
 import java.util.Objects;
 
@@ -9,7 +9,7 @@ import seedu.doit.model.tag.UniqueTagList;
  * Represents a Task in the task manager.
  * Guarantees: details are present and not null, field values are validated.
  */
-public class Task implements ReadOnlyTask {
+public class FloatingTask implements ReadOnlyTask {
 
     private Name name;
     private Priority priority;
@@ -20,7 +20,7 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Priority priority, EndTime deadline, Description description, UniqueTagList tags) {
+    public FloatingTask(Name name, Priority priority, EndTime deadline, Description description, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, priority, deadline, description, tags);
         this.name = name;
         this.priority = priority;
@@ -32,7 +32,7 @@ public class Task implements ReadOnlyTask {
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
-    public Task(ReadOnlyTask source) {
+    public FloatingTask(ReadOnlyTask source) {
         this(source.getName(), source.getPriority(), source.getDeadline(), source.getDescription(), source.getTags());
     }
 
@@ -56,6 +56,7 @@ public class Task implements ReadOnlyTask {
         this.priority = priority;
     }
 
+    @Override
     public EndTime getDeadline() {
         return deadline;
     }

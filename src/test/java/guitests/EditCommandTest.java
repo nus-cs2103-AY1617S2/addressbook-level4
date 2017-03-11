@@ -8,9 +8,9 @@ import org.junit.Test;
 import guitests.guihandles.TaskCardHandle;
 import seedu.doit.commons.core.Messages;
 import seedu.doit.logic.commands.EditCommand;
+import seedu.doit.model.item.Name;
+import seedu.doit.model.item.Priority;
 import seedu.doit.model.tag.Tag;
-import seedu.doit.model.task.Name;
-import seedu.doit.model.task.Priority;
 import seedu.doit.testutil.TaskBuilder;
 import seedu.doit.testutil.TestTask;
 

@@ -6,14 +6,14 @@ import java.util.Optional;
 import seedu.doit.commons.core.Messages;
 import seedu.doit.commons.util.CollectionUtil;
 import seedu.doit.logic.commands.exceptions.CommandException;
+import seedu.doit.model.item.Description;
+import seedu.doit.model.item.EndTime;
+import seedu.doit.model.item.Name;
+import seedu.doit.model.item.Priority;
+import seedu.doit.model.item.ReadOnlyTask;
+import seedu.doit.model.item.Task;
+import seedu.doit.model.item.UniqueTaskList;
 import seedu.doit.model.tag.UniqueTagList;
-import seedu.doit.model.task.Description;
-import seedu.doit.model.task.EndTime;
-import seedu.doit.model.task.Name;
-import seedu.doit.model.task.Priority;
-import seedu.doit.model.task.ReadOnlyTask;
-import seedu.doit.model.task.Task;
-import seedu.doit.model.task.UniqueTaskList;
 
 /**
  * Edits the details of an existing task in the task manager.

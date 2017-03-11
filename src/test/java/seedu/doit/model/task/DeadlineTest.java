@@ -5,6 +5,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import seedu.doit.model.item.EndTime;
+
 public class DeadlineTest {
 
     @Test

@@ -30,14 +30,14 @@ import seedu.doit.commons.exceptions.IllegalValueException;
 import seedu.doit.commons.util.FileUtil;
 import seedu.doit.commons.util.XmlUtil;
 import seedu.doit.model.TaskManager;
+import seedu.doit.model.item.Description;
+import seedu.doit.model.item.EndTime;
+import seedu.doit.model.item.Name;
+import seedu.doit.model.item.Priority;
+import seedu.doit.model.item.ReadOnlyTask;
+import seedu.doit.model.item.Task;
 import seedu.doit.model.tag.Tag;
 import seedu.doit.model.tag.UniqueTagList;
-import seedu.doit.model.task.Description;
-import seedu.doit.model.task.EndTime;
-import seedu.doit.model.task.Name;
-import seedu.doit.model.task.Priority;
-import seedu.doit.model.task.ReadOnlyTask;
-import seedu.doit.model.task.Task;
 import seedu.doit.storage.XmlSerializableTaskManager;
 
 /**

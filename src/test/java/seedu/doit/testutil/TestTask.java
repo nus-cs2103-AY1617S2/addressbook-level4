@@ -1,11 +1,11 @@
 package seedu.doit.testutil;
 
+import seedu.doit.model.item.Description;
+import seedu.doit.model.item.EndTime;
+import seedu.doit.model.item.Name;
+import seedu.doit.model.item.Priority;
+import seedu.doit.model.item.ReadOnlyTask;
 import seedu.doit.model.tag.UniqueTagList;
-import seedu.doit.model.task.Description;
-import seedu.doit.model.task.EndTime;
-import seedu.doit.model.task.Name;
-import seedu.doit.model.task.Priority;
-import seedu.doit.model.task.ReadOnlyTask;
 
 /**
  * A mutable task object. For testing only.

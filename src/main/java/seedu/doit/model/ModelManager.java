@@ -10,10 +10,10 @@ import seedu.doit.commons.core.UnmodifiableObservableList;
 import seedu.doit.commons.events.model.TaskManagerChangedEvent;
 import seedu.doit.commons.util.CollectionUtil;
 import seedu.doit.commons.util.StringUtil;
-import seedu.doit.model.task.ReadOnlyTask;
-import seedu.doit.model.task.Task;
-import seedu.doit.model.task.UniqueTaskList;
-import seedu.doit.model.task.UniqueTaskList.TaskNotFoundException;
+import seedu.doit.model.item.ReadOnlyTask;
+import seedu.doit.model.item.Task;
+import seedu.doit.model.item.UniqueTaskList;
+import seedu.doit.model.item.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Represents the in-memory model of the task manager data.

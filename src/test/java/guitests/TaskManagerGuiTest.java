@@ -26,7 +26,7 @@ import seedu.doit.TestApp;
 import seedu.doit.commons.core.EventsCenter;
 import seedu.doit.commons.events.BaseEvent;
 import seedu.doit.model.TaskManager;
-import seedu.doit.model.task.ReadOnlyTask;
+import seedu.doit.model.item.ReadOnlyTask;
 import seedu.doit.testutil.TestUtil;
 import seedu.doit.testutil.TypicalTestTasks;
 

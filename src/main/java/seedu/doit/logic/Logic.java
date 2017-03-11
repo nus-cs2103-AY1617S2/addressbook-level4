@@ -3,7 +3,7 @@ package seedu.doit.logic;
 import javafx.collections.ObservableList;
 import seedu.doit.logic.commands.CommandResult;
 import seedu.doit.logic.commands.exceptions.CommandException;
-import seedu.doit.model.task.ReadOnlyTask;
+import seedu.doit.model.item.ReadOnlyTask;
 
 /**
  * API of the Logic component

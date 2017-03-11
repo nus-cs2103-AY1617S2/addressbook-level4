@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.doit.model.TaskManager;
-import seedu.doit.model.task.Task;
+import seedu.doit.model.item.Task;
 import seedu.doit.model.util.SampleDataUtil;
 import seedu.doit.testutil.TestUtil;
 

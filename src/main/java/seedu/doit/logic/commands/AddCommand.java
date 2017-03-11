@@ -5,14 +5,14 @@ import java.util.Set;
 
 import seedu.doit.commons.exceptions.IllegalValueException;
 import seedu.doit.logic.commands.exceptions.CommandException;
+import seedu.doit.model.item.Description;
+import seedu.doit.model.item.EndTime;
+import seedu.doit.model.item.Name;
+import seedu.doit.model.item.Priority;
+import seedu.doit.model.item.Task;
+import seedu.doit.model.item.UniqueTaskList;
 import seedu.doit.model.tag.Tag;
 import seedu.doit.model.tag.UniqueTagList;
-import seedu.doit.model.task.Description;
-import seedu.doit.model.task.EndTime;
-import seedu.doit.model.task.Name;
-import seedu.doit.model.task.Priority;
-import seedu.doit.model.task.Task;
-import seedu.doit.model.task.UniqueTaskList;
 
 /**
  * Adds a task to the task manager.

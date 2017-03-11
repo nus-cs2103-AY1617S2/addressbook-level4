@@ -3,10 +3,10 @@ package seedu.doit.model;
 import java.util.Set;
 
 import seedu.doit.commons.core.UnmodifiableObservableList;
-import seedu.doit.model.task.ReadOnlyTask;
-import seedu.doit.model.task.Task;
-import seedu.doit.model.task.UniqueTaskList;
-import seedu.doit.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.doit.model.item.ReadOnlyTask;
+import seedu.doit.model.item.Task;
+import seedu.doit.model.item.UniqueTaskList;
+import seedu.doit.model.item.UniqueTaskList.DuplicateTaskException;
 
 /**
  * The API of the Model component.

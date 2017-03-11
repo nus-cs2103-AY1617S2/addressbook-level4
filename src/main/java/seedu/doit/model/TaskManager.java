@@ -10,12 +10,12 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.doit.commons.core.UnmodifiableObservableList;
+import seedu.doit.model.item.ReadOnlyTask;
+import seedu.doit.model.item.Task;
+import seedu.doit.model.item.UniqueTaskList;
+import seedu.doit.model.item.UniqueTaskList.DuplicateTaskException;
 import seedu.doit.model.tag.Tag;
 import seedu.doit.model.tag.UniqueTagList;
-import seedu.doit.model.task.ReadOnlyTask;
-import seedu.doit.model.task.Task;
-import seedu.doit.model.task.UniqueTaskList;
-import seedu.doit.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
  * Wraps all data at the task manager level
