@@ -25,6 +25,7 @@ import org.junit.rules.TemporaryFolder;
 
 import com.google.common.eventbus.Subscribe;
 
+import seedu.ezdo.commons.core.Config;
 import seedu.ezdo.commons.core.EventsCenter;
 import seedu.ezdo.commons.events.model.EzDoChangedEvent;
 import seedu.ezdo.commons.events.ui.JumpToListRequestEvent;
@@ -65,6 +66,7 @@ public class LogicManagerTest {
 
     private Model model;
     private Logic logic;
+    private Config config;
 
     //These are for checking the correctness of the events raised
     private ReadOnlyEzDo latestSavedEzDo;
@@ -89,9 +91,10 @@ public class LogicManagerTest {
     @Before
     public void setUp() {
         model = new ModelManager();
+        config = new Config();
         String tempEzDoFile = saveFolder.getRoot().getPath() + "TempEzDo.xml";
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
-        logic = new LogicManager(model, new StorageManager(tempEzDoFile, tempPreferencesFile));
+        logic = new LogicManager(model, new StorageManager(tempEzDoFile, tempPreferencesFile, config));
         EventsCenter.getInstance().registerHandler(this);
 
         latestSavedEzDo = new EzDo(model.getEzDo()); // last saved assumed to be up to date

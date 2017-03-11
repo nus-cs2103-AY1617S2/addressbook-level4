@@ -9,7 +9,7 @@ import seedu.ezdo.logic.commands.SaveCommand;
 public class SaveCommandTest extends EzDoGuiTest {
 
     private final String validDirectory = "data/";
-    private final String invalidDirectory = "data/COWABUNGA";
+    private final String inexistentDirectory = "data/COWABUNGA";
 // later fix travis failing this
 //    @Test
 //    public void save_validDirectory_success() {
@@ -25,8 +25,8 @@ public class SaveCommandTest extends EzDoGuiTest {
 
     @Test
     public void save_invalidDirectory_failure() {
-        commandBox.runCommand("save " + invalidDirectory);
-        assertResultMessage(String.format(SaveCommand.MESSAGE_DIRECTORY_PATH_INVALID));
+        commandBox.runCommand("save " + inexistentDirectory);
+        assertResultMessage(String.format(SaveCommand.MESSAGE_DIRECTORY_PATH_DOES_NOT_EXIST));
     }
 
 }
