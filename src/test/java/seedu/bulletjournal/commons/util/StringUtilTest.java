@@ -13,8 +13,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.bulletjournal.commons.util.StringUtil;
-
 public class StringUtilTest {
 
     @Rule

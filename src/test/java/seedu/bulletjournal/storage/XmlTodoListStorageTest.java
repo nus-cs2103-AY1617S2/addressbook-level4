@@ -1,6 +1,5 @@
 package seedu.bulletjournal.storage;
 
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
@@ -16,7 +15,6 @@ import seedu.bulletjournal.commons.util.FileUtil;
 import seedu.bulletjournal.model.ReadOnlyTodoList;
 import seedu.bulletjournal.model.TodoList;
 import seedu.bulletjournal.model.task.Task;
-import seedu.bulletjournal.storage.XmlAddressBookStorage;
 import seedu.bulletjournal.testutil.TypicalTestTasks;
 
 public class XmlTodoListStorageTest {

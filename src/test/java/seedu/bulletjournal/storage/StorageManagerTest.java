@@ -1,6 +1,5 @@
 package seedu.bulletjournal.storage;
 
-
 import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -17,10 +16,6 @@ import seedu.bulletjournal.commons.events.storage.DataSavingExceptionEvent;
 import seedu.bulletjournal.model.ReadOnlyTodoList;
 import seedu.bulletjournal.model.TodoList;
 import seedu.bulletjournal.model.UserPrefs;
-import seedu.bulletjournal.storage.JsonUserPrefsStorage;
-import seedu.bulletjournal.storage.Storage;
-import seedu.bulletjournal.storage.StorageManager;
-import seedu.bulletjournal.storage.XmlAddressBookStorage;
 import seedu.bulletjournal.testutil.EventsCollector;
 import seedu.bulletjournal.testutil.TypicalTestTasks;
 

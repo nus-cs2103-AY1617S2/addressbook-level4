@@ -10,9 +10,9 @@ import seedu.bulletjournal.commons.core.Messages;
 import seedu.bulletjournal.logic.commands.EditCommand;
 import seedu.bulletjournal.model.tag.Tag;
 import seedu.bulletjournal.model.task.Deadline;
-import seedu.bulletjournal.model.task.TaskName;
 import seedu.bulletjournal.model.task.Detail;
 import seedu.bulletjournal.model.task.Status;
+import seedu.bulletjournal.model.task.TaskName;
 import seedu.bulletjournal.testutil.TaskBuilder;
 import seedu.bulletjournal.testutil.TestTask;
 

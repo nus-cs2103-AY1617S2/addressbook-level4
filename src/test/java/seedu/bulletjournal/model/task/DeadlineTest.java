@@ -5,8 +5,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.bulletjournal.model.task.Deadline;
-
 public class DeadlineTest {
 
     @Test

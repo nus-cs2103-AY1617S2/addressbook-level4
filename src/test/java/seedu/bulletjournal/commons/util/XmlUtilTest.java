@@ -11,8 +11,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.bulletjournal.commons.util.FileUtil;
-import seedu.bulletjournal.commons.util.XmlUtil;
 import seedu.bulletjournal.model.TodoList;
 import seedu.bulletjournal.storage.XmlSerializableAddressBook;
 import seedu.bulletjournal.testutil.TestUtil;

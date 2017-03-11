@@ -5,10 +5,10 @@ import seedu.bulletjournal.model.ReadOnlyTodoList;
 import seedu.bulletjournal.model.TodoList;
 import seedu.bulletjournal.model.tag.UniqueTagList;
 import seedu.bulletjournal.model.task.Deadline;
-import seedu.bulletjournal.model.task.TaskName;
 import seedu.bulletjournal.model.task.Detail;
 import seedu.bulletjournal.model.task.Status;
 import seedu.bulletjournal.model.task.Task;
+import seedu.bulletjournal.model.task.TaskName;
 import seedu.bulletjournal.model.task.UniqueTaskList.DuplicatePersonException;
 
 public class SampleDataUtil {
