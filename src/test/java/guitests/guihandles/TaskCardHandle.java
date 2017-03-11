@@ -17,8 +17,8 @@ import seedu.address.model.task.ReadOnlyTask;
 public class TaskCardHandle extends GuiHandle {
     private static final String TITLE_FIELD_ID = "#title";
     private static final String VENUE_FIELD_ID = "#venue";
-    private static final String STARTTIME_FIELD_ID = "#starttime";
-    private static final String ENDTIME_FIELD_ID = "#endtime";
+    private static final String STARTTIME_FIELD_ID = "#startTime";
+    private static final String ENDTIME_FIELD_ID = "#endTime";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private Node node;
