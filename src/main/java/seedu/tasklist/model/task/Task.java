@@ -8,9 +8,7 @@ import seedu.tasklist.model.tag.UniqueTagList;
  */
 public abstract class Task implements ReadOnlyTask {
 
-<<<<<<< HEAD
     public abstract void setName(Name name);
-=======
     private Name name;
     private Comment comment;
     private Priority priority;
@@ -30,7 +28,6 @@ public abstract class Task implements ReadOnlyTask {
         this.status = status;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
->>>>>>> FIxed some checkstyle errors
 
     public abstract Name getName();
 
@@ -44,29 +41,7 @@ public abstract class Task implements ReadOnlyTask {
 
     public abstract Priority getPriority();
 
-<<<<<<< HEAD
     public abstract void setStatus(Status status);
-=======
-    @Override
-    public UniqueTagList getTags() {
-        return new UniqueTagList(tags);
-    }
-
-    public void setPriority(Priority priority){
-        assert priority != null;
-        this.priority = priority;
-    }
-
-    @Override
-    public Priority getPriority() {
-        return priority;
-    }
-
-    public void setStatus(Status status){
-        assert status != null;
-        this.status = status;
-    }
->>>>>>> FIxed some checkstyle errors
 
     public abstract Status getStatus();
 

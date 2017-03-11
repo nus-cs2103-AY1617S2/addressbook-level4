@@ -110,12 +110,15 @@ public class TaskList implements ReadOnlyTaskList {
         Task editedTask = null;
         String type = editedReadOnlyTask.getType();
         switch (type) {
-            case FloatingTask.TYPE:
-                editedTask = new FloatingTask((ReadOnlyFloatingTask) editedReadOnlyTask);
-            case DeadlineTask.TYPE:
-                editedTask = new DeadlineTask((ReadOnlyDeadlineTask) editedReadOnlyTask);
-            case EventTask.TYPE:
-                editedTask = new EventTask((ReadOnlyEventTask) editedReadOnlyTask);
+        case FloatingTask.TYPE:
+            editedTask = new FloatingTask((ReadOnlyFloatingTask) editedReadOnlyTask);
+            break;
+        case DeadlineTask.TYPE:
+            editedTask = new DeadlineTask((ReadOnlyDeadlineTask) editedReadOnlyTask);
+            break;
+        case EventTask.TYPE:
+            editedTask = new EventTask((ReadOnlyEventTask) editedReadOnlyTask);
+            break;
         }
         syncMasterTagListWith(editedTask);
         // TODO: the tags master list will be updated even though the below line fails.
