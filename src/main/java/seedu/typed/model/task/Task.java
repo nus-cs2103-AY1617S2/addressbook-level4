@@ -1,6 +1,8 @@
 package seedu.typed.model.task;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.commons.util.CollectionUtil;
@@ -104,7 +106,8 @@ public class Task implements ReadOnlyTask {
      * TaskBuilder helps to build a Task object by being flexible in
      * what attributes a Task object will initialise with. In particular,
      * only a name is compulsory whereas other attributes are optional.
-     * Also takes in existing task for modifications to attributes.
+     * @param ReadOnlyTask An existing task to modify
+     * @return Task
      * @author YIM CHIA HUI
      *
      */
@@ -135,6 +138,15 @@ public class Task implements ReadOnlyTask {
 
         public TaskBuilder setTags(String tag) throws DuplicateTagException, IllegalValueException {
             this.tags.add(new Tag(tag));
+            return this;
+        }
+        
+        public TaskBuilder setTags(Set<String> tags) throws IllegalValueException {
+            final Set<Tag> tagSet = new HashSet<>();
+            for (String tagName : tags) {
+                tagSet.add(new Tag(tagName));
+            }
+            this.tags = new UniqueTagList(tagSet);
             return this;
         }
 
