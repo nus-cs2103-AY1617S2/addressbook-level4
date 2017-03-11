@@ -4,6 +4,7 @@ package seedu.address.storage;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
 
 import java.io.IOException;
 
@@ -92,6 +93,7 @@ public class XmlTaskListStorageTest {
     public void saveTaskListNullTaskListAssertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
         saveTaskList(null, "SomeFile.xml");
+        fail();
     }
 
     private void saveTaskList(ReadOnlyTaskList taskList, String filePath) throws IOException {
@@ -102,6 +104,7 @@ public class XmlTaskListStorageTest {
     public void saveTaskListNullFilePathAssertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
         saveTaskList(new TaskList(), null);
+        fail();
     }
 
 
