@@ -10,13 +10,13 @@ public class SaveCommandTest extends EzDoGuiTest {
 
     private final String validDirectory = "data/";
     private final String inexistentDirectory = "data/COWABUNGA";
-// later fix travis failing this
-//    @Test
-//    public void save_validDirectory_success() {
-//       commandBox.runCommand("save " + validDirectory);
-//        assertResultMessage(String.format(SaveCommand.MESSAGE_SAVE_TASK_SUCCESS, validDirectory));
-//    }
-
+/*
+    @Test
+    public void save_validDirectory_success() {
+       commandBox.runCommand("save " + validDirectory);
+      assertResultMessage(String.format(SaveCommand.MESSAGE_SAVE_TASK_SUCCESS, validDirectory));
+    }
+*/
     @Test
     public void save_invalidFormat_failure() {
         commandBox.runCommand("save");
