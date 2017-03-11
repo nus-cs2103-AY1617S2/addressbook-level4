@@ -23,7 +23,7 @@ public class SampleDataUtil {
             throw new AssertionError("sample data cannot be invalid", e);
         }
     }
-    
+
     public static Task[] getSampleDetailedTasks() {
         try {
             return new Task[] {
@@ -47,7 +47,7 @@ public class SampleDataUtil {
             throw new AssertionError("sample data cannot contain duplicate tasks", e);
         }
     }
-    
+
     public static ReadOnlyTaskManager getSampleDetailedTaskManager() {
         try {
             TaskManager sampleAB = new TaskManager();
