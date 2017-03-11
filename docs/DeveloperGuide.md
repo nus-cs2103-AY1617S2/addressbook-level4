@@ -602,7 +602,7 @@ Pros:
 * Has location reminders
 * Fast and responsive UI
 * Supports hand drawings on mobile app
-* Works offline 
+* Works offline
 
 Cons:
 
