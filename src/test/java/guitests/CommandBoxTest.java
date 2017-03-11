@@ -112,6 +112,17 @@ public class CommandBoxTest extends TaskManagerGuiTest {
         assertEquals("add task1", commandBox.getCommandInput());
         commandBox.pressDown();
         assertEquals("add task2", commandBox.getCommandInput());
+        commandBox.pressUp();
+        commandBox.pressUp();
+        commandBox.pressUp();
+        commandBox.pressUp();
+        assertEquals("add task1", commandBox.getCommandInput());
+        commandBox.pressDown();
+        commandBox.pressDown();
+        commandBox.pressDown();
+        commandBox.pressDown();
+        assertEquals("add task2", commandBox.getCommandInput());
+
     }
 
 }
