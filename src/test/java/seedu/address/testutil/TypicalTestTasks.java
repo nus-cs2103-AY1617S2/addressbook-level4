@@ -1,18 +1,17 @@
 package seedu.address.testutil;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.TaskManager;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.UniquePersonList;
 
 /**
  *
  */
-public class TypicalTestPersons {
+public class TypicalTestTasks {
 
     public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
 
-    public TypicalTestPersons() {
+    public TypicalTestTasks() {
         try {
             alice = new TaskBuilder().withName("Alice Pauline").build();
             benson = new TaskBuilder().withName("Benson Meier").build();
@@ -31,23 +30,19 @@ public class TypicalTestPersons {
         }
     }
 
-    public static void loadAddressBookWithSampleData(AddressBook ab) {
-        for (TestTask person : new TypicalTestPersons().getTypicalPersons()) {
-            try {
-                ab.addPerson(new Task(person));
-            } catch (UniquePersonList.DuplicatePersonException e) {
-                assert false : "not possible";
-            }
+    public static void loadTaskManagerWithSampleData(TaskManager tm) {
+        for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
+            tm.addTask(new Task(task));
         }
     }
 
-    public TestTask[] getTypicalPersons() {
+    public TestTask[] getTypicalTasks() {
         return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
     }
 
-    public AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
-        loadAddressBookWithSampleData(ab);
-        return ab;
+    public TaskManager getTypicalTaskManager() {
+        TaskManager tm = new TaskManager();
+        loadTaskManagerWithSampleData(tm);
+        return tm;
     }
 }
