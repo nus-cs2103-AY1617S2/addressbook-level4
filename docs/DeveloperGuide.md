@@ -295,7 +295,7 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
 
 #### 5.1.1. General Guidelines
 
-All members should work on their individual branches for **code implementation**. Please avoid committing code changes directly into master. Instead, push your local branch to our central remote repo, create a new PR of your branch, and assign another member to review. Since we have 2 people in charge of each component, please assign the relevant member as your reviewer.    
+All members should work on their individual branches for **code implementation**. Please avoid committing code changes directly into master. Instead, push your local branch to our central remote repo, create a new PR of your branch, and assign another member to review. Since we have 2 people in charge of each component, please assign the relevant member as your reviewer.
 
 For new pull request (PR), code changes should be **reviewed by at least one other member** before merging PR. The reviewer should at least comment that the PR is ok to merge so the team may know PR has been reviewed.
 
@@ -308,8 +308,8 @@ For new pull request (PR), code changes should be **reviewed by at least one oth
 
 #### 5.1.2. Merge Branches
 
-1. After you have made necessary changes on your local feature branch and decided to merge into our remote master branch, try to pull the remote master into your local master first. 
-2. Merge the local master into your local feature branch with **rebase** (*not merge*). 
+1. After you have made necessary changes on your local feature branch and decided to merge into our remote master branch, try to pull the remote master into your local master first.
+2. Merge the local master into your local feature branch with **rebase** (*not merge*).
 3. Push your local feature branch to remote feature branch.
 4. Create a new pull request and assign a reviewer (as described in 5.1.1)
 
@@ -510,10 +510,10 @@ Author: Wang Yu
 
 Pros:
 
-*Apple's built-in Notes App is nothing different from a paper notebook except that it is electronic which makes it capable of storing more than enough notes and deleting notes that are no longer needed. 
+*Apple's built-in Notes App is nothing different from a paper notebook except that it is electronic which makes it capable of storing more than enough notes and deleting notes that are no longer needed.
 
 *Due to its sustainability, Notes is very suitable for traditional notes takers who are not comfortable with being restricted by commands and forms.
- 
+
 *With the Notes App on iCloud.com, users can easily get to see their notes on different platforms if Internet connection is available.
 
 Cons:
@@ -521,9 +521,9 @@ Cons:
 *Notes is only available for the Apple OS platform. As our target are MS users, Notes is not an option for them.
 
 *Notes cannot recognize task's data and group them together.
- 
+
 *All the updating need to be done by directly manipulating the text, which is quite a bother.
- 
+
 *If the user mistakenly edited something wrongly, there is no turning back for them since there is no undo function.
 
 **Calendar in iPhone**
