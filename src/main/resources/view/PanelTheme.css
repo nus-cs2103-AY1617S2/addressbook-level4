@@ -3,10 +3,10 @@
     src: url('/fonts/avenir-light.ttf');
 }
 
-.header-panel {
+.header-font {
     -fx-text-fill: #FFFFFF;
     -fx-font-family: "Avenir Light";
-    -fx-font-size: 18;
+    -fx-font-size: 15;
 }
 
 .header-deadlines {

@@ -3,12 +3,16 @@
 <?import java.lang.String?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
@@ -29,17 +33,31 @@
       </MenuBar>
       <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.5, 0.5" VBox.vgrow="ALWAYS">
          <items>
-            <VBox fx:id="personList" alignment="CENTER" minWidth="340.0" prefWidth="340">
+            <VBox fx:id="personList" alignment="CENTER" prefWidth="340">
                 <padding>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                 </padding>
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="64.0" prefWidth="1000.0" stylesheets="@PanelTheme.css" text="Deadlines" textAlignment="CENTER" VBox.vgrow="ALWAYS">
-                     <styleClass>
-                        <String fx:value="header-deadlines" />
-                        <String fx:value="header-panel" />
-                     </styleClass>
-                  </Label>
+                  <HBox prefHeight="64.0" prefWidth="320.0" styleClass="header-deadlines" stylesheets="@PanelTheme.css">
+                     <children>
+                        <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true">
+                           <viewport>
+                              <Rectangle2D />
+                           </viewport>
+                           <HBox.margin>
+                              <Insets left="30.0" top="21.0" />
+                           </HBox.margin>
+                           <image>
+                              <Image url="@../images/alarm.png" />
+                           </image>
+                        </ImageView>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="64.0" prefWidth="1000.0" styleClass="header-font" stylesheets="@PanelTheme.css" text="Deadlines" textAlignment="CENTER">
+                           <HBox.margin>
+                              <Insets right="30.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
                   <AnchorPane fx:id="taskListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
@@ -48,12 +66,26 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
                <children>
-                  <Label alignment="CENTER" prefHeight="64.0" prefWidth="1000.0" stylesheets="@PanelTheme.css" text="Events" VBox.vgrow="ALWAYS">
-                     <styleClass>
-                        <String fx:value="header-events" />
-                        <String fx:value="header-panel" />
-                     </styleClass>
-                  </Label>
+                  <HBox prefHeight="64.0" prefWidth="320.0" styleClass="header-events" stylesheets="@PanelTheme.css">
+                     <children>
+                        <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true">
+                           <viewport>
+                              <Rectangle2D />
+                           </viewport>
+                           <image>
+                              <Image url="@../images/events-calendar.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="30.0" top="21.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="64.0" prefWidth="1000.0" styleClass="header-font" stylesheets="@PanelTheme.css" text="Events" textAlignment="CENTER">
+                           <HBox.margin>
+                              <Insets right="30.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
                   <AnchorPane fx:id="taskListPanelPlaceholder1" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
@@ -62,27 +94,45 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
                <children>
-                  <Label alignment="CENTER" prefHeight="64.0" prefWidth="1000.0" stylesheets="@PanelTheme.css" text="To do" VBox.vgrow="ALWAYS">
+                  <HBox prefHeight="64.0" prefWidth="320.0" stylesheets="@PanelTheme.css">
+                     <children>
+                        <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true">
+                           <viewport>
+                              <Rectangle2D />
+                           </viewport>
+                           <image>
+                              <Image url="@../images/no-alarm.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="30.0" top="21.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="64.0" prefWidth="1000.0" styleClass="header-font" stylesheets="@PanelTheme.css" text="To do" textAlignment="CENTER">
+                           <HBox.margin>
+                              <Insets right="30.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
                      <styleClass>
+                        <String fx:value="header-task-panel" />
                         <String fx:value="header-todo" />
-                        <String fx:value="header-panel" />
                      </styleClass>
-                  </Label>
+                  </HBox>
                   <AnchorPane fx:id="taskListPanelPlaceholder2" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
          </items>
       </SplitPane>
-      <AnchorPane fx:id="commandBoxPlaceholder" styleClass="anchor-pane-with-border" VBox.vgrow="NEVER">
-         <padding>
-            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-         </padding>
-      </AnchorPane>
        <AnchorPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="anchor-pane-with-border" VBox.vgrow="NEVER">
            <padding>
                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
            </padding>
        </AnchorPane>
+      <AnchorPane fx:id="commandBoxPlaceholder" styleClass="anchor-pane-with-border" VBox.vgrow="NEVER">
+         <padding>
+            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+         </padding>
+      </AnchorPane>
       <AnchorPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
    </children>
    <stylesheets>
