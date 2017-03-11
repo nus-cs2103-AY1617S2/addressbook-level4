@@ -1,48 +1,42 @@
 package seedu.address.testutil;
 
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Address;
 import seedu.address.model.task.Date;
-import seedu.address.model.task.Email;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Time;
 
 /**
  * A mutable person object. For testing only.
  */
-public class TestPerson implements ReadOnlyTask {
+public class TestTask implements ReadOnlyTask {
 
     private Name name;
-    private Address address;
-    private Email email;
-    private Date phone;
+    private Date date;
+    private Time time;
     private UniqueTagList tags;
 
-    public TestPerson() {
+    public TestTask() {
         tags = new UniqueTagList();
     }
 
     /**
-     * Creates a copy of {@code personToCopy}.
+     * Creates a copy of {@code taskToCopy}.
      */
-    public TestPerson(TestPerson personToCopy) {
-        this.name = personToCopy.getName();
+    public TestTask(TestTask taskToCopy) {
+        this.name = taskToCopy.getName();
     }
 
     public void setName(Name name) {
         this.name = name;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setTime(Time time) {
+        this.time = time;
     }
 
-    public void setEmail(Email email) {
-        this.email = email;
-    }
-
-    public void setPhone(Date phone) {
-        this.phone = phone;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public void setTags(UniqueTagList tags) {

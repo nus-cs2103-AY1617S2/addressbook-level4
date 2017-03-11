@@ -77,8 +77,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updatePerson(int index, ReadOnlyTask editedReadOnlyPerson)
-            throws UniquePersonList.DuplicatePersonException {
+    public void updatePerson(int index, ReadOnlyTask editedReadOnlyPerson) {
         assert editedReadOnlyPerson != null;
 
         Task editedPerson = new Task(editedReadOnlyPerson);

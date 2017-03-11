@@ -49,13 +49,10 @@ public class UniquePersonList implements Iterable<Task> {
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updatePerson(int index, ReadOnlyTask editedPerson) throws DuplicatePersonException {
+    public void updatePerson(int index, ReadOnlyTask editedPerson) {
         assert editedPerson != null;
 
         Task personToUpdate = internalList.get(index);
-        if (!personToUpdate.equals(editedPerson) && internalList.contains(editedPerson)) {
-            throw new DuplicatePersonException();
-        }
 
         personToUpdate.resetData(editedPerson);
         // TODO: The code below is just a workaround to notify observers of the updated person.
