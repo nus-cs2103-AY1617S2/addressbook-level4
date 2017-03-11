@@ -1,8 +1,8 @@
 package seedu.taskmanager.model.util;
 
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
-import seedu.taskmanager.model.TaskManager;
 import seedu.taskmanager.model.ReadOnlyTaskManager;
+import seedu.taskmanager.model.TaskManager;
 import seedu.taskmanager.model.tag.UniqueTagList;
 import seedu.taskmanager.model.task.Description;
 import seedu.taskmanager.model.task.EndDate;
