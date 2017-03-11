@@ -5,12 +5,14 @@ import java.util.Set;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
+
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+
 import seedu.address.model.task.Description;
-import seedu.address.model.task.Email;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskDate;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
@@ -21,9 +23,9 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
-            + "Parameters: TASK_NAME p/PRIORITY_LEVEL d/DATE [t/TAG]...\n"
+            + "Parameters: TASK_NAME p/PRIORITY_LEVEL sd/DATE ed/DATE [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " Study for midterm p/1 d/04032017 t/study t/midterm";
+            + " Study for midterm p/1 sd/04/03/2017 ed/06/03/2017 t/study t/midterm";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the task manager";
@@ -35,7 +37,7 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, String priority, String email, Set<String> tags)
+    public AddCommand(String name, String priority, String startDate, String endDate, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
@@ -44,7 +46,8 @@ public class AddCommand extends Command {
         this.toAdd = new Task(
                 new Description(name),
                 new Priority(priority),
-                new Email(email),
+                new TaskDate(startDate),
+                new TaskDate(endDate),
                 new UniqueTagList(tagSet)
         );
     }

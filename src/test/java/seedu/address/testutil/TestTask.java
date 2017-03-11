@@ -7,41 +7,42 @@ import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.TaskDate;
 
 /**
- * A mutable person object. For testing only.
+ * A mutable Task object. For testing only.
  */
-public class TestPerson implements ReadOnlyTask {
+public class TestTask implements ReadOnlyTask {
 
     private Description description;
+    private Priority priority;
     private TaskDate startDate;
     private TaskDate endDate;
-    private Priority priority;
+
     private UniqueTagList tags;
 
-    public TestPerson() {
+    public TestTask() {
         tags = new UniqueTagList();
     }
 
     /**
-     * Creates a copy of {@code personToCopy}.
+     * Creates a copy of {@code taskToCopy}.
      */
-    public TestPerson(TestPerson personToCopy) {
-        this.description = personToCopy.getDescription();
-        this.priority = personToCopy.getPriority();
-        this.startDate = personToCopy.getStartDate();
-        this.endDate = personToCopy.getEndDate();
-        this.tags = personToCopy.getTags();
+    public TestTask(TestTask taskToCopy) {
+        this.description = taskToCopy.getDescription();
+        this.priority = taskToCopy.getPriority();
+        this.startDate = taskToCopy.getStartDate();
+        this.endDate = taskToCopy.getEndDate();
+        this.tags = taskToCopy.getTags();
     }
 
     public void setDescription(Description description) {
         this.description = description;
     }
 
-    public void setStartDate(TaskDate taskDate) {
-        this.startDate = taskDate;
+    public void setStartDate(TaskDate startDate) {
+        this.startDate = startDate;
     }
 
-    public void setEndDate(TaskDate taskDate) {
-        this.endDate = taskDate;
+    public void setEndDate(TaskDate endDate) {
+        this.endDate = endDate;
     }
 
     public void setPriority(Priority priority) {
@@ -91,6 +92,5 @@ public class TestPerson implements ReadOnlyTask {
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
-
 
 }

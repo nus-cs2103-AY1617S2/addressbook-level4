@@ -13,18 +13,20 @@ public class Task implements ReadOnlyTask {
 
     private Description description;
     private Priority priority;
-    private Email date;
+    private TaskDate startDate;
+    private TaskDate endDate;
 
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Description description, Priority priority, Email date, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(description, priority, date, tags);
+    public Task(Description description, Priority priority, TaskDate startDate, TaskDate endDate, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(description, priority, startDate, tags);
         this.description = description;
         this.priority = priority;
-        this.date = date;
+        this.startDate = startDate;
+        this.endDate = endDate;
 
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
@@ -33,7 +35,8 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getDescription(), source.getPriority(), source.getDate(), source.getTags());
+        this(source.getDescription(), source.getPriority(), source.getStartDate(),
+            source.getEndDate(), source.getTags());
     }
 
     public void setDescription(Description description) {
@@ -56,14 +59,24 @@ public class Task implements ReadOnlyTask {
         return priority;
     }
 
-    public void setEmail(Email date) {
+    public void setStartDate(TaskDate date) {
         assert date != null;
-        this.date = date;
+        this.startDate = date;
     }
 
     @Override
-    public Email getDate() {
-        return date;
+    public TaskDate getStartDate() {
+        return startDate;
+    }
+
+    public void setEndDate(TaskDate date) {
+        assert date != null;
+        this.endDate = date;
+    }
+
+    @Override
+    public TaskDate getEndDate() {
+        return endDate;
     }
 
     @Override
@@ -79,14 +92,15 @@ public class Task implements ReadOnlyTask {
     }
 
     /**
-     * Updates this person with the details of {@code replacement}.
+     * Updates this task with the details of {@code replacement}.
      */
     public void resetData(ReadOnlyTask replacement) {
         assert replacement != null;
 
         this.setDescription(replacement.getDescription());
         this.setPriority(replacement.getPriority());
-        this.setEmail(replacement.getDate());
+        this.setStartDate(replacement.getStartDate());
+        this.setEndDate(replacement.getEndDate());
         this.setTags(replacement.getTags());
     }
 
@@ -100,7 +114,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(description, priority, date, tags);
+        return Objects.hash(description, priority, startDate, endDate, tags);
     }
 
     @Override

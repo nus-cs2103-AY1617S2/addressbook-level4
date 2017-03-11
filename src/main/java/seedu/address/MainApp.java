@@ -60,11 +60,8 @@ public class MainApp extends Application {
         initLogging(config);
 
         model = initModelManager(storage, userPrefs);
-
         logic = new LogicManager(model, storage);
-
         ui = new UiManager(logic, config, userPrefs);
-
         initEventsCenter();
     }
 
@@ -77,7 +74,7 @@ public class MainApp extends Application {
         Optional<ReadOnlyTaskList> addressBookOptional;
         ReadOnlyTaskList initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
+            addressBookOptional = storage.readTaskList();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample TaskList");
             }
@@ -89,7 +86,6 @@ public class MainApp extends Application {
             logger.warning("Problem while reading from the file. Will be starting with an empty TaskList");
             initialData = new TaskList();
         }
-
         return new ModelManager(initialData, userPrefs);
     }
 

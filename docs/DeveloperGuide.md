@@ -346,31 +346,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | user | add a new task | record tasks that need to be done ‘some day’. 
-`* * *` | user | view upcoming tasks | see what needs to be done soon. 
-`* * *` | user | delete a task | remove tasks that I no longer care to track. 
-`* * *` | new user | view more information about a particular command | learn how to use various commands. 
+`* * *` | user | add a new task | record tasks that need to be done ‘some day’.
+`* * *` | user | view upcoming tasks | see what needs to be done soon.
+`* * *` | user | delete a task | remove tasks that I no longer care to track.
+`* * *` | new user | view more information about a particular command | learn how to use various commands.
 `* * *` | user | add task deadlines | prioritize what is most urgent.
 `* * *` | user | mark a task as completed | view old tasks.
 `* * *` | user | undo last command | revert my last action if I make a mistake.
 `* * *` | user | add task notes | keep relevant information nearby.
-`* * *` | user | confirm a delete action | avoid accidently delete a task.  
+`* * *` | user | confirm a delete action | avoid accidently delete a task.
 `* * *` | user | view tasks by day | view relevant tasks.
 `* * *` | user | add notification timings | see a popup for high priority tasks prior to the deadline.
 `* * *` | user | assign task prioritize | view tasks by importance.
 `* * *` | user | close the application | save CPU resources.
 `* * *` | user | schedule time to work on a task | plan my time.
 `* * *` | user | modify task details | update tasks.
-`* *` | advanced user | use command shortcuts | save time. 
+`* *` | advanced user | use command shortcuts | save time.
 `* *` | user | backup my data | protect against data loss.
 `* *` | user | create subtasks | break up large tasks.
-`* *` | user | choose custom background | have a pleasant viewing experience. 
+`* *` | user | choose custom background | have a pleasant viewing experience.
 `* *` | user | hear nice sounds | further enjoy completing tasks.
 `* *` | user | get reminders | know to start doing something.
-`* *` | user | change calendar view between month/week/day | see my schedule for that time frame. 
-`* *` | user | add recurring tasks | avoid repetitive task input. 
+`* *` | user | change calendar view between month/week/day | see my schedule for that time frame.
+`* *` | user | add recurring tasks | avoid repetitive task input.
 `* *` | user | estimate task length | know how much effort is required.
-`* *` | user | add collaborators | know who I have to work with. 
+`* *` | user | add collaborators | know who I have to work with.
 `* *` | user | see error messages for invalid commands | know how to fix my mistake.
 `* *` | user | sort tasks by priority | choose most urgent tasks.
 `* *` | new user | see user guide in a sidebar | have it for easy reference.
@@ -503,7 +503,7 @@ Use case ends.
 **Extensions**
 
 2a. The task does not exist
-> 2a1. TaskManager shows an error message 
+> 2a1. TaskManager shows an error message
   Use case resumes at step 1
 {More to be added}
 
@@ -517,14 +517,14 @@ Use case ends.
 4. Should be open source.
 6. Should open the app in less than 5 sec.
 7. The GUI should not be overcrowded.
-8. If the input data's format changes, the developers should be able to make needed adjustments in <20 hours. 
+8. If the input data's format changes, the developers should be able to make needed adjustments in <20 hours.
 9. A user can install and operate the program without assistance of any kind (except consulting the User Guide Documentation).
-10. The level of security will be minimal for this product since it is only accessed by a single user. 
+10. The level of security will be minimal for this product since it is only accessed by a single user.
 11. To extend the software, proper security measures can be put into place in <100 hours.
 12. Aesthetics of the calendar GUI should be sleek and appealing to 90% of users.
 13. Should be scalable so that a user can change the layout of the GUI based on personal preference.
 14. Should not overload the CPU so that other running process start to lag.
-15. Should not have seperate administrative functions as there is one user who is the Admin by default.  
+15. Should not have seperate administrative functions as there is one user who is the Admin by default.
 
 {More to be added}
 
@@ -546,19 +546,19 @@ Use case ends.
 Author: Jay Kabra
 
 Pros:
-* Syncs with your phone so that the calendar is viewable from gmail on your laptop as well as on your phone 
+* Syncs with your phone so that the calendar is viewable from gmail on your laptop as well as on your phone
 * Allows you to add reminder notifications for events at a customized amount of time
-* Can customize tasks by color 
+* Can customize tasks by color
 * Can easily perform CRUD operations on events
-* Can add recurring events and edit them individually if there are exceptions for a particular day  
-* More GUI based rather than command line 
-* Relatively intuitive for new users 
+* Can add recurring events and edit them individually if there are exceptions for a particular day
+* More GUI based rather than command line
+* Relatively intuitive for new users
 
 Cons:
-* No way to prioritize tasks 
-* Need connection to the internet to view on laptop - not a desktop application 
-* Since it is more GUI based, takes more clicks to add a task rather than typing the task in a command line and having the task added 
-* appropriately  
+* No way to prioritize tasks
+* Need connection to the internet to view on laptop - not a desktop application
+* Since it is more GUI based, takes more clicks to add a task rather than typing the task in a command line and having the task added
+* appropriately
 
 **Google Tasks**
 
@@ -567,7 +567,7 @@ Pros:
 * easy to use
 * have all the basic functions a normal user would use.
 * easy to install
- 
+
 Cons:
 * cannot change the color of tasks based on priority
 * alert would not pop out automatically

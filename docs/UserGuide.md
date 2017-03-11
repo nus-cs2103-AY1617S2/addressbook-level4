@@ -77,7 +77,7 @@ Format: `list t/ALL<br>
 Examples:
 * `list t/complete`<br>
   Shows a list of all completed tasks. The `complete` tag is a reserved tag.
-  
+
 * `list d/04-03-17`
   Shows a list of all tasks due on 04-03-17.
 
@@ -92,7 +92,7 @@ Format: `edit INDEX [NAME] s/START_DATE d/DUE_DATE [t/TAG]...`
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
 > * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
-> * You can remove all the task's tags by typing `t/` without specifying any tags after it. 
+> * You can remove all the task's tags by typing `t/` without specifying any tags after it.
 
 Examples:
 
