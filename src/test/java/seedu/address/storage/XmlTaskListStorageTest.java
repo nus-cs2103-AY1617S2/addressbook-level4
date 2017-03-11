@@ -3,6 +3,7 @@ package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 
 import java.io.IOException;
 
@@ -30,7 +31,8 @@ public class XmlTaskListStorageTest {
     @Test
     public void readTaskListNullFilePathAssertionFailure() throws Exception {
         thrown.expect(AssertionError.class);
-        readTaskList(null);
+        java.util.Optional<ReadOnlyTaskList> tl = readTaskList(null);
+        assertNull(tl);
     }
 
     private java.util.Optional<ReadOnlyTaskList> readTaskList(String filePath) throws Exception {
