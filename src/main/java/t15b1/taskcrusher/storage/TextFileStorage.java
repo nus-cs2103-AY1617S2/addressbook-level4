@@ -97,7 +97,7 @@ public class TextFileStorage {
         		Name taskName = new Name(str.nextToken());
         		Description description = new Description(str.nextToken().replaceAll("/", ""));
         		UniqueTagList tagList = new UniqueTagList();
-        		tasksRead.add(new Task(taskName, description, tagList));
+        		//TODO tasksRead.add(new Task(taskName, description, tagList));
         		inboxToReturn.setTasks(tasksRead);
         	}    		
     	} catch (Exception e) {

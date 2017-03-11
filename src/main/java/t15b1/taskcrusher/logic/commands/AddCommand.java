@@ -9,6 +9,7 @@ import t15b1.taskcrusher.model.shared.Description;
 import t15b1.taskcrusher.model.shared.Name;
 import t15b1.taskcrusher.model.tag.Tag;
 import t15b1.taskcrusher.model.tag.UniqueTagList;
+import t15b1.taskcrusher.model.task.Deadline;
 import t15b1.taskcrusher.model.task.Email;
 import t15b1.taskcrusher.model.task.Priority;
 import t15b1.taskcrusher.model.task.Task;
@@ -37,7 +38,7 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, String description, Set<String> tags)
+    public AddCommand(String name, String deadline, String priority, String description, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
@@ -45,6 +46,8 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Task(
                 new Name(name),
+                new Deadline(deadline),
+                new Priority(priority),
                 new Description(description),
                 new UniqueTagList(tagSet)
         );

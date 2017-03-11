@@ -3,6 +3,7 @@ package t15b1.taskcrusher.testutil;
 import t15b1.taskcrusher.model.shared.Description;
 import t15b1.taskcrusher.model.shared.Name;
 import t15b1.taskcrusher.model.tag.UniqueTagList;
+import t15b1.taskcrusher.model.task.Deadline;
 import t15b1.taskcrusher.model.task.Email;
 import t15b1.taskcrusher.model.task.Priority;
 import t15b1.taskcrusher.model.task.ReadOnlyTask;
@@ -13,9 +14,9 @@ import t15b1.taskcrusher.model.task.ReadOnlyTask;
 public class TestPerson implements ReadOnlyTask {
 
     private Name name;
-    private Description address;
-    private Email email;
-    private Priority phone;
+    private Description description;
+    private Deadline deadline;
+    private Priority priority;
     private UniqueTagList tags;
 
     public TestPerson() {
@@ -23,30 +24,30 @@ public class TestPerson implements ReadOnlyTask {
     }
 
     /**
-     * Creates a copy of {@code personToCopy}.
+     * Creates a copy of {@code taskToCopy}.
      */
-    public TestPerson(TestPerson personToCopy) {
-        this.name = personToCopy.getTaskName();
-        this.phone = personToCopy.getPriority();
-        this.email = personToCopy.getEmail();
-        this.address = personToCopy.getDescription();
-        this.tags = personToCopy.getTags();
+    public TestPerson(TestPerson taskToCopy) {
+        this.name = taskToCopy.getTaskName();
+        this.priority = taskToCopy.getPriority();
+        this.deadline = taskToCopy.getDeadline();
+        this.description = taskToCopy.getDescription();
+        this.tags = taskToCopy.getTags();
     }
 
     public void setName(Name name) {
         this.name = name;
     }
 
-    public void setAddress(Description address) {
-        this.address = address;
+    public void setDescription(Description description) {
+        this.description = description;
+    }
+    
+    public void setDeadline(Deadline deadline){
+        this.deadline = deadline;
     }
 
-    public void setEmail(Email email) {
-        this.email = email;
-    }
-
-    public void setPhone(Priority phone) {
-        this.phone = phone;
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 
     public void setTags(UniqueTagList tags) {
@@ -57,20 +58,20 @@ public class TestPerson implements ReadOnlyTask {
     public Name getTaskName() {
         return name;
     }
-
+    
+    @Override
+    public Deadline getDeadline() {
+        return deadline;
+    }
+    
     @Override
     public Priority getPriority() {
-        return phone;
-    }
-
-    @Override
-    public Email getEmail() {
-        return email;
+        return priority;
     }
 
     @Override
     public Description getDescription() {
-        return address;
+        return description;
     }
 
     @Override
@@ -84,11 +85,18 @@ public class TestPerson implements ReadOnlyTask {
     }
 
     public String getAddCommand() {
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("add " + this.getTaskName().taskName + " ");
+//        sb.append("a/" + this.getDescription().value + " ");
+//        sb.append("p/" + this.getPriority().value + " ");
+//        sb.append("e/" + this.getEmail().value + " ");
+//        this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
+//        return sb.toString();
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getTaskName().taskName + " ");
-        sb.append("a/" + this.getDescription().value + " ");
+        sb.append("d/" + this.getDeadline().value + " ");
         sb.append("p/" + this.getPriority().value + " ");
-        sb.append("e/" + this.getEmail().value + " ");
+        sb.append("//" + this.getDescription().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }

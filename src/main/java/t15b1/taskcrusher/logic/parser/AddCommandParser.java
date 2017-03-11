@@ -1,7 +1,7 @@
 package t15b1.taskcrusher.logic.parser;
 
 import static t15b1.taskcrusher.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static t15b1.taskcrusher.logic.parser.CliSyntax.PREFIX_DEADLINE_TIME;
+import static t15b1.taskcrusher.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static t15b1.taskcrusher.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static t15b1.taskcrusher.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static t15b1.taskcrusher.logic.parser.CliSyntax.PREFIX_TAG;
@@ -24,11 +24,13 @@ public class AddCommandParser {
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_DEADLINE_TIME, PREFIX_TAG, PREFIX_PRIORITY, PREFIX_DESCRIPTION);
+                new ArgumentTokenizer(PREFIX_DEADLINE, PREFIX_TAG, PREFIX_PRIORITY, PREFIX_DESCRIPTION);
         argsTokenizer.tokenize(args);
         try {
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
+                    argsTokenizer.getValue(PREFIX_DEADLINE).get(),
+                    argsTokenizer.getValue(PREFIX_PRIORITY).get(),
                     argsTokenizer.getValue(PREFIX_DESCRIPTION).get(),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
             );

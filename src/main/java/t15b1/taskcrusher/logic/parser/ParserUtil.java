@@ -17,6 +17,7 @@ import t15b1.taskcrusher.model.shared.Description;
 import t15b1.taskcrusher.model.shared.Name;
 import t15b1.taskcrusher.model.tag.Tag;
 import t15b1.taskcrusher.model.tag.UniqueTagList;
+import t15b1.taskcrusher.model.task.Deadline;
 import t15b1.taskcrusher.model.task.Email;
 import t15b1.taskcrusher.model.task.Priority;
 
@@ -77,25 +78,25 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> phone} into an {@code Optional<Phone>} if {@code phone} is present.
      */
-    public static Optional<Priority> parsePhone(Optional<String> phone) throws IllegalValueException {
-        assert phone != null;
-        return phone.isPresent() ? Optional.of(new Priority(phone.get())) : Optional.empty();
+    public static Optional<Priority> parsePriority(Optional<String> priority) throws IllegalValueException {
+        assert priority != null;
+        return priority.isPresent() ? Optional.of(new Priority(priority.get())) : Optional.empty();
     }
 
     /**
      * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.
      */
-    public static Optional<Description> parseAddress(Optional<String> address) throws IllegalValueException {
+    public static Optional<Description> parseDescription(Optional<String> address) throws IllegalValueException {
         assert address != null;
         return address.isPresent() ? Optional.of(new Description(address.get())) : Optional.empty();
     }
-
+    
     /**
-     * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
+     * Parses a {@code Optional<String> deadline} into an {@code Optional<Deadline>} if {@code deadline} is present.
      */
-    public static Optional<Email> parseEmail(Optional<String> email) throws IllegalValueException {
-        assert email != null;
-        return email.isPresent() ? Optional.of(new Email(email.get())) : Optional.empty();
+    public static Optional<Deadline> parseDeadline(Optional<String> deadline) throws IllegalValueException {
+        assert deadline != null;
+        return deadline.isPresent() ? Optional.of(new Deadline(deadline.get())) : Optional.empty();
     }
 
     /**

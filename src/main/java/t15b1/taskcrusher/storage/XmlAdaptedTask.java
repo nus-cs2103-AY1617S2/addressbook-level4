@@ -2,6 +2,7 @@ package t15b1.taskcrusher.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.xml.bind.annotation.XmlElement;
 
@@ -10,6 +11,7 @@ import t15b1.taskcrusher.model.shared.Description;
 import t15b1.taskcrusher.model.shared.Name;
 import t15b1.taskcrusher.model.tag.Tag;
 import t15b1.taskcrusher.model.tag.UniqueTagList;
+import t15b1.taskcrusher.model.task.Deadline;
 import t15b1.taskcrusher.model.task.Email;
 import t15b1.taskcrusher.model.task.Priority;
 import t15b1.taskcrusher.model.task.ReadOnlyTask;
@@ -25,7 +27,7 @@ public class XmlAdaptedTask {
     @XmlElement(required = true)
     private String priority;
     @XmlElement(required = true)
-    private String email;
+    private String deadline;
     @XmlElement(required = true)
     private String description;
 
@@ -47,7 +49,7 @@ public class XmlAdaptedTask {
     public XmlAdaptedTask(ReadOnlyTask source) {
         taskName = source.getTaskName().taskName;
         priority = source.getPriority().value;
-        email = source.getEmail().value;
+        deadline = source.getDeadline().value;
         description = source.getDescription().value;
 
         tagged = new ArrayList<>();
@@ -68,9 +70,9 @@ public class XmlAdaptedTask {
         }
         final Name name = new Name(this.taskName);
         final Priority priority = new Priority(this.priority);
-        final Email email = new Email(this.email);
+        final Deadline deadline = new Deadline(this.deadline);
         final Description description = new Description(this.description);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Task(name, priority, email, description, tags);
+        return new Task(name, deadline, priority, description, tags);
     }
 }

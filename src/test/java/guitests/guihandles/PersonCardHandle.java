@@ -72,12 +72,12 @@ public class PersonCardHandle extends GuiHandle {
         return guiRobot.from(node).lookup(TAGS_FIELD_ID).query();
     }
 
-    public boolean isSamePerson(ReadOnlyTask person) {
-        return getFullName().equals(person.getTaskName().taskName)
-                && getPhone().equals(person.getPriority().value)
-                && getEmail().equals(person.getEmail().value)
-                && getAddress().equals(person.getDescription().value)
-                && getTags().equals(getTags(person.getTags()));
+    public boolean isSameTask(ReadOnlyTask task) {
+        return getFullName().equals(task.getTaskName().taskName)
+                && getPhone().equals(task.getPriority().value)
+                && getEmail().equals(task.getEmail().value)
+                && getAddress().equals(task.getDescription().value)
+                && getTags().equals(getTags(task.getTags()));
     }
 
     @Override

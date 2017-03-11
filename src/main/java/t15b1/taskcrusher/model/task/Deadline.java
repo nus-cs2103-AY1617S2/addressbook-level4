@@ -5,13 +5,18 @@ import java.util.Optional;
 import t15b1.taskcrusher.commons.exceptions.IllegalValueException;
 import t15b1.taskcrusher.model.event.EventDate;
 
+/**
+ * Represents a deadline for a task. Empty value means no deadline. 
+ */
 public class Deadline {
     public static final String MESSAGE_DEADLINE_CONSTRAINTS = "";
     public static final String DEADLINE_VALIDATION_REGEX = "";
+    public static final String NO_DEADLINE = "";
     
-    public final Optional<String> value;
+    public final String value;
+    public final int inMilseconds = 0;
     
-    public Deadline(Optional<String> value) throws IllegalValueException{
+    public Deadline(String value) throws IllegalValueException{
         assert value != null;
         if(!isValidDeadline(value)){
             throw new IllegalValueException(MESSAGE_DEADLINE_CONSTRAINTS);
@@ -19,9 +24,15 @@ public class Deadline {
         this.value = value;
     }
     
-    private boolean isValidDeadline(Optional<String> value){
+    private boolean isValidDeadline(String value){
+        if(value.equals(NO_DEADLINE))
+            return true;
         //TODO: if deadline already past
         return false;
+    }
+    
+    private boolean hasNoDeadline(){
+        return value.equals(NO_DEADLINE);
     }
     
     @Override

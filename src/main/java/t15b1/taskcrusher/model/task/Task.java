@@ -1,6 +1,7 @@
 package t15b1.taskcrusher.model.task;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import t15b1.taskcrusher.commons.exceptions.IllegalValueException;
 import t15b1.taskcrusher.commons.util.CollectionUtil;
@@ -9,39 +10,27 @@ import t15b1.taskcrusher.model.shared.Name;
 import t15b1.taskcrusher.model.tag.UniqueTagList;
 
 /**
- * Represents a Task in the address book.
- * Guarantees: details are present and not null, field values are validated.
+ * Represents an active task.
+ * Guarantees: details are present and not null (just empty in <Optional>), field values are validated.
  */
 public class Task implements ReadOnlyTask {
 
     private Name name;
+    private Deadline deadline;
     private Priority priority;
-    private Email email;
     private Description description;
 
     private UniqueTagList tags;
 
     /**
-     * left for the sake of leaving.
-     */
-    public Task(Name name, Priority phone, Email email, Description description, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, phone, email, description, tags);
-        this.name = name;
-        this.priority = phone;
-        this.email = email;
-        this.description = description;
-        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
-    }
-
-    /**
      * Modified for Task. 
-     * @throws IllegalValueException 
      */
-    public Task(Name name, Description description, UniqueTagList tags) throws IllegalValueException {
-        assert !CollectionUtil.isAnyNull(name, description, tags);
+    public Task(Name name, Deadline deadline, Priority priority, Description description, UniqueTagList tags){
+        assert !CollectionUtil.isAnyNull(name);
+        
         this.name = name;
-        this.priority = null;
-        this.email = null;
+        this.deadline = deadline;
+        this.priority = priority;
         this.description = description;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
@@ -49,8 +38,8 @@ public class Task implements ReadOnlyTask {
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
-    public Task(ReadOnlyTask source) {
-        this(source.getTaskName(), source.getPriority(), source.getEmail(), source.getDescription(), source.getTags());
+    public Task(ReadOnlyTask source){
+        this(source.getTaskName(), source.getDeadline(), source.getPriority(), source.getDescription(), source.getTags());
     }
 
     public void setTaskName(Name name) {
@@ -63,9 +52,9 @@ public class Task implements ReadOnlyTask {
         return name;
     }
 
-    public void setPhone(Priority phone) {
-        assert phone != null;
-        this.priority = phone;
+    public void setPriority(Priority priority) {
+        assert priority != null;
+        this.priority = priority;
     }
 
     @Override
@@ -73,24 +62,24 @@ public class Task implements ReadOnlyTask {
         return priority;
     }
 
-    public void setEmail(Email email) {
-        assert email != null;
-        this.email = email;
-    }
-
     @Override
-    public Email getEmail() {
-        return email;
+    public Deadline getDeadline() {
+        return deadline;
     }
-
-    public void setDescription(Description address) {
-        assert address != null;
-        this.description = address;
+    
+    public void setDeadline(Deadline deadline) {
+        assert deadline != null;
+        this.deadline = deadline;
     }
 
     @Override
     public Description getDescription() {
         return description;
+    }
+    
+    public void setDescription(Description description) {
+        assert description != null;
+        this.description = description;
     }
 
     @Override
@@ -112,8 +101,8 @@ public class Task implements ReadOnlyTask {
         assert replacement != null;
 
         this.setTaskName(replacement.getTaskName());
-        this.setPhone(replacement.getPriority());
-        this.setEmail(replacement.getEmail());
+        this.setPriority(replacement.getPriority());
+        this.setDeadline(replacement.getDeadline());
         this.setDescription(replacement.getDescription());
         this.setTags(replacement.getTags());
     }
@@ -127,8 +116,7 @@ public class Task implements ReadOnlyTask {
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, priority, email, description, tags);
+        return Objects.hash(name, deadline, priority, description, tags);
     }
 
     @Override
