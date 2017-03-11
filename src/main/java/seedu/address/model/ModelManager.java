@@ -10,8 +10,8 @@ import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.model.ToDoListChangedEvent;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.model.task.Task;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 
@@ -22,20 +22,20 @@ import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final ToDoList ToDoList;
+    private final ToDoList todoList;
     private final FilteredList<ReadOnlyTask> filteredTasks;
 
     /**
      * Initializes a ModelManager with the given ToDoList and userPrefs.
      */
-    public ModelManager(ReadOnlyToDoList ToDoList, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyToDoList todoList, UserPrefs userPrefs) {
         super();
-        assert !CollectionUtil.isAnyNull(ToDoList, userPrefs);
+        assert !CollectionUtil.isAnyNull(todoList, userPrefs);
 
-        logger.fine("Initializing with address book: " + ToDoList + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + todoList + " and user prefs " + userPrefs);
 
-        this.ToDoList = new ToDoList(ToDoList);
-        filteredTasks = new FilteredList<>(this.ToDoList.getTaskList());
+        this.todoList = new ToDoList(todoList);
+        filteredTasks = new FilteredList<>(this.todoList.getTaskList());
     }
 
     public ModelManager() {
@@ -44,29 +44,29 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyToDoList newData) {
-        ToDoList.resetData(newData);
+        todoList.resetData(newData);
         indicateToDoListChanged();
     }
 
     @Override
     public ReadOnlyToDoList getToDoList() {
-        return ToDoList;
+        return todoList;
     }
 
     /** Raises an event to indicate the model has changed */
     private void indicateToDoListChanged() {
-        raise(new ToDoListChangedEvent(ToDoList));
+        raise(new ToDoListChangedEvent(todoList));
     }
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-        ToDoList.removeTask(target);
+        todoList.removeTask(target);
         indicateToDoListChanged();
     }
 
     @Override
-    public synchronized void addTask(Task Task) throws UniqueTaskList.DuplicateTaskException {
-        ToDoList.addTask(Task);
+    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+        todoList.addTask(task);
         updateFilteredListToShowAll();
         indicateToDoListChanged();
     }
@@ -76,8 +76,8 @@ public class ModelManager extends ComponentManager implements Model {
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
 
-        int ToDoListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        ToDoList.updateTask(ToDoListIndex, editedTask);
+        int todoListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
+        todoList.updateTask(todoListIndex, editedTask);
         indicateToDoListChanged();
     }
 
@@ -105,7 +105,8 @@ public class ModelManager extends ComponentManager implements Model {
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
-        boolean satisfies(ReadOnlyTask Task);
+        boolean satisfies(ReadOnlyTask task);
+        @Override
         String toString();
     }
 
@@ -118,8 +119,8 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean satisfies(ReadOnlyTask Task) {
-            return qualifier.run(Task);
+        public boolean satisfies(ReadOnlyTask task) {
+            return qualifier.run(task);
         }
 
         @Override
@@ -129,7 +130,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     interface Qualifier {
-        boolean run(ReadOnlyTask Task);
+        boolean run(ReadOnlyTask task);
+        @Override
         String toString();
     }
 
@@ -141,9 +143,9 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean run(ReadOnlyTask Task) {
+        public boolean run(ReadOnlyTask task) {
             return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(Task.getTitle().title, keyword))
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getTitle().title, keyword))
                     .findAny()
                     .isPresent();
         }

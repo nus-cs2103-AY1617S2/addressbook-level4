@@ -1,15 +1,15 @@
 package seedu.address.model.util;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.ToDoList;
 import seedu.address.model.ReadOnlyToDoList;
+import seedu.address.model.ToDoList;
+import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.EndTime;
 import seedu.address.model.task.StartTime;
-import seedu.address.model.task.Title;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.Venue;
+import seedu.address.model.task.Title;
 import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
-import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Venue;
 
 public class SampleDataUtil {
     public static Task[] getSampleTasks() {

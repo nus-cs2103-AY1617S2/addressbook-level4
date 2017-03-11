@@ -24,6 +24,7 @@ public class XmlToDoListStorage implements ToDoListStorage {
         this.filePath = filePath;
     }
 
+    @Override
     public String getToDoListFilePath() {
         return filePath;
     }
@@ -38,38 +39,40 @@ public class XmlToDoListStorage implements ToDoListStorage {
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
+    @Override
     public Optional<ReadOnlyToDoList> readToDoList(String filePath) throws DataConversionException,
                                                                                  FileNotFoundException {
         assert filePath != null;
 
-        File ToDoListFile = new File(filePath);
+        File todoListFile = new File(filePath);
 
-        if (!ToDoListFile.exists()) {
-            logger.info("ToDoList file "  + ToDoListFile + " not found");
+        if (!todoListFile.exists()) {
+            logger.info("ToDoList file "  + todoListFile + " not found");
             return Optional.empty();
         }
 
-        ReadOnlyToDoList ToDoListOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
+        ReadOnlyToDoList todoListOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
 
-        return Optional.of(ToDoListOptional);
+        return Optional.of(todoListOptional);
     }
 
     @Override
-    public void saveToDoList(ReadOnlyToDoList ToDoList) throws IOException {
-        saveToDoList(ToDoList, filePath);
+    public void saveToDoList(ReadOnlyToDoList todoList) throws IOException {
+        saveToDoList(todoList, filePath);
     }
 
     /**
      * Similar to {@link #saveToDoList(ReadOnlyToDoList)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveToDoList(ReadOnlyToDoList ToDoList, String filePath) throws IOException {
-        assert ToDoList != null;
+    @Override
+    public void saveToDoList(ReadOnlyToDoList todoList, String filePath) throws IOException {
+        assert todoList != null;
         assert filePath != null;
 
         File file = new File(filePath);
         FileUtil.createIfMissing(file);
-        XmlFileStorage.saveDataToFile(file, new XmlSerializableToDoList(ToDoList));
+        XmlFileStorage.saveDataToFile(file, new XmlSerializableToDoList(todoList));
     }
 
 }

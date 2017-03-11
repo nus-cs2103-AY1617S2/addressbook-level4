@@ -30,14 +30,14 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.ToDoList;
-import seedu.address.model.task.EndTime;
-import seedu.address.model.task.StartTime;
-import seedu.address.model.task.Title;
-import seedu.address.model.task.Task;
-import seedu.address.model.task.Venue;
-import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.EndTime;
+import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.StartTime;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.Title;
+import seedu.address.model.task.Venue;
 import seedu.address.storage.XmlSerializableToDoList;
 
 /**
@@ -73,19 +73,27 @@ public class TestUtil {
 
     private static Task[] getSampleTaskData() {
         try {
-            //CHECKSTYLE.OFF: LineLength
-            return new Task[]{
-                new Task(new Title("Ali Muster"), new Venue("9482424"), new StartTime("hans@google.com"), new EndTime("4th street"), new UniqueTagList()),
-                new Task(new Title("Boris Mueller"), new Venue("87249245"), new StartTime("ruth@google.com"), new EndTime("81th street"), new UniqueTagList()),
-                new Task(new Title("Carl Kurz"), new Venue("95352563"), new StartTime("heinz@yahoo.com"), new EndTime("wall street"), new UniqueTagList()),
-                new Task(new Title("Daniel Meier"), new Venue("87652533"), new StartTime("cornelia@google.com"), new EndTime("10th street"), new UniqueTagList()),
-                new Task(new Title("Elle Meyer"), new Venue("9482224"), new StartTime("werner@gmail.com"), new EndTime("michegan ave"), new UniqueTagList()),
-                new Task(new Title("Fiona Kunz"), new Venue("9482427"), new StartTime("lydia@gmail.com"), new EndTime("little tokyo"), new UniqueTagList()),
-                new Task(new Title("George Best"), new Venue("9482442"), new StartTime("anna@google.com"), new EndTime("4th street"), new UniqueTagList()),
-                new Task(new Title("Hoon Meier"), new Venue("8482424"), new StartTime("stefan@mail.com"), new EndTime("little india"), new UniqueTagList()),
-                new Task(new Title("Ida Mueller"), new Venue("8482131"), new StartTime("hans@google.com"), new EndTime("chicago ave"), new UniqueTagList())
-            };
-            //CHECKSTYLE.ON: LineLength
+            // CHECKSTYLE.OFF: LineLength
+            return new Task[] {
+                new Task(new Title("Ali Muster"), new Venue("9482424"), new StartTime("hans@google.com"),
+                        new EndTime("4th street"), new UniqueTagList()),
+                new Task(new Title("Boris Mueller"), new Venue("87249245"), new StartTime("ruth@google.com"),
+                        new EndTime("81th street"), new UniqueTagList()),
+                new Task(new Title("Carl Kurz"), new Venue("95352563"), new StartTime("heinz@yahoo.com"),
+                        new EndTime("wall street"), new UniqueTagList()),
+                new Task(new Title("Daniel Meier"), new Venue("87652533"), new StartTime("cornelia@google.com"),
+                        new EndTime("10th street"), new UniqueTagList()),
+                new Task(new Title("Elle Meyer"), new Venue("9482224"), new StartTime("werner@gmail.com"),
+                        new EndTime("michegan ave"), new UniqueTagList()),
+                new Task(new Title("Fiona Kunz"), new Venue("9482427"), new StartTime("lydia@gmail.com"),
+                        new EndTime("little tokyo"), new UniqueTagList()),
+                new Task(new Title("George Best"), new Venue("9482442"), new StartTime("anna@google.com"),
+                        new EndTime("4th street"), new UniqueTagList()),
+                new Task(new Title("Hoon Meier"), new Venue("8482424"), new StartTime("stefan@mail.com"),
+                        new EndTime("little india"), new UniqueTagList()),
+                new Task(new Title("Ida Mueller"), new Venue("8482131"), new StartTime("hans@google.com"),
+                        new EndTime("chicago ave"), new UniqueTagList()) };
+            // CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
             assert false;
             // not possible
@@ -93,17 +101,13 @@ public class TestUtil {
         }
     }
 
-
     private static Tag[] getSampleTagData() {
         try {
-            return new Tag[]{
-                new Tag("relatives"),
-                new Tag("friends")
-            };
+            return new Tag[] { new Tag("relatives"), new Tag("friends") };
         } catch (IllegalValueException e) {
             assert false;
             return null;
-            //not possible
+            // not possible
         }
     }
 
@@ -114,6 +118,7 @@ public class TestUtil {
     /**
      * Appends the file name to the sandbox folder path.
      * Creates the sandbox folder if it doesn't exist.
+     *
      * @param fileTitle
      * @return
      */
@@ -149,7 +154,8 @@ public class TestUtil {
     }
 
     /**
-     * Tweaks the {@code keyCodeCombination} to resolve the {@code KeyCode.SHORTCUT} to their
+     * Tweaks the {@code keyCodeCombination} to resolve the
+     * {@code KeyCode.SHORTCUT} to their
      * respective platform-specific keycodes
      */
     public static KeyCode[] scrub(KeyCodeCombination keyCodeCombination) {
@@ -167,7 +173,7 @@ public class TestUtil {
             keys.add(KeyCode.CONTROL);
         }
         keys.add(keyCodeCombination.getCode());
-        return keys.toArray(new KeyCode[]{});
+        return keys.toArray(new KeyCode[] {});
     }
 
     public static boolean isHeadlessEnvironment() {
@@ -186,18 +192,17 @@ public class TestUtil {
 
     public static String descOnFail(Object... comparedObjects) {
         return "Comparison failed \n"
-                + Arrays.asList(comparedObjects).stream()
-                .map(Object::toString)
-                .collect(Collectors.joining("\n"));
+                + Arrays.asList(comparedObjects).stream().map(Object::toString).collect(Collectors.joining("\n"));
     }
 
-    public static void setFinalStatic(Field field, Object newValue) throws NoSuchFieldException,
-                                                                           IllegalAccessException {
+    public static void setFinalStatic(Field field, Object newValue)
+            throws NoSuchFieldException, IllegalAccessException {
         field.setAccessible(true);
         // remove final modifier from field
         Field modifiersField = Field.class.getDeclaredField("modifiers");
         modifiersField.setAccessible(true);
-        // ~Modifier.FINAL is used to remove the final modifier from field so that its value is no longer
+        // ~Modifier.FINAL is used to remove the final modifier from field so
+        // that its value is no longer
         // final and can be changed
         modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
         field.set(null, newValue);
@@ -216,7 +221,8 @@ public class TestUtil {
      * Gets private method of a class
      * Invoke the method using method.invoke(objectInstance, params...)
      *
-     * Caveat: only find method declared in the current Class, not inherited from supertypes
+     * Caveat: only find method declared in the current Class, not inherited
+     * from supertypes
      */
     public static Method getPrivateMethod(Class<?> objectClass, String methodTitle) throws NoSuchMethodException {
         Method method = objectClass.getDeclaredMethod(methodTitle);
@@ -234,6 +240,7 @@ public class TestUtil {
 
     /**
      * Gets mid point of a node relative to the screen.
+     *
      * @param node
      * @return
      */
@@ -245,6 +252,7 @@ public class TestUtil {
 
     /**
      * Gets mid point of a node relative to its scene.
+     *
      * @param node
      * @return
      */
@@ -256,6 +264,7 @@ public class TestUtil {
 
     /**
      * Gets the bound of the node relative to the parent scene.
+     *
      * @param node
      * @return
      */
@@ -281,8 +290,11 @@ public class TestUtil {
 
     /**
      * Removes a subset from the list of tasks.
-     * @param tasks The list of tasks
-     * @param tasksToRemove The subset of tasks.
+     *
+     * @param tasks
+     *            The list of tasks
+     * @param tasksToRemove
+     *            The subset of tasks.
      * @return The modified tasks after removal of the subset from tasks.
      */
     public static TestTask[] removeTasksFromList(final TestTask[] tasks, TestTask... tasksToRemove) {
@@ -291,11 +303,13 @@ public class TestUtil {
         return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
 
-
     /**
      * Returns a copy of the list with the task at specified index removed.
-     * @param list original list to copy from
-     * @param targetIndexInOneIndexedFormat e.g. index 1 if the first element is to be removed
+     *
+     * @param list
+     *            original list to copy from
+     * @param targetIndexInOneIndexedFormat
+     *            e.g. index 1 if the first element is to be removed
      */
     public static TestTask[] removeTaskFromList(final TestTask[] list, int targetIndexInOneIndexedFormat) {
         return removeTasksFromList(list, list[targetIndexInOneIndexedFormat - 1]);
@@ -303,9 +317,13 @@ public class TestUtil {
 
     /**
      * Replaces tasks[i] with a task.
-     * @param tasks The array of tasks.
-     * @param task The replacement task
-     * @param index The index of the task to be replaced.
+     *
+     * @param tasks
+     *            The array of tasks.
+     * @param task
+     *            The replacement task
+     * @param index
+     *            The index of the task to be replaced.
      * @return
      */
     public static TestTask[] replaceTaskFromList(TestTask[] tasks, TestTask task, int index) {
@@ -315,8 +333,11 @@ public class TestUtil {
 
     /**
      * Appends tasks to the array of tasks.
-     * @param tasks A array of tasks.
-     * @param tasksToAdd The tasks that are to be appended behind the original array.
+     *
+     * @param tasks
+     *            A array of tasks.
+     * @param tasksToAdd
+     *            The tasks that are to be appended behind the original array.
      * @return The modified array of tasks.
      */
     public static TestTask[] addTasksToList(final TestTask[] tasks, TestTask... tasksToAdd) {
@@ -339,7 +360,7 @@ public class TestUtil {
 
     public static Tag[] getTagList(String tags) {
         if ("".equals(tags)) {
-            return new Tag[]{};
+            return new Tag[] {};
         }
 
         final String[] split = tags.split(", ");
@@ -348,7 +369,7 @@ public class TestUtil {
             try {
                 return new Tag(e.replaceFirst("Tag: ", ""));
             } catch (IllegalValueException e1) {
-                //not possible
+                // not possible
                 assert false;
                 return null;
             }

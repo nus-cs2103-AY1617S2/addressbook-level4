@@ -6,14 +6,14 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.task.EndTime;
-import seedu.address.model.task.StartTime;
-import seedu.address.model.task.Title;
-import seedu.address.model.task.Task;
-import seedu.address.model.task.Venue;
-import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.EndTime;
+import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.StartTime;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.Title;
+import seedu.address.model.task.Venue;
 
 /**
  * JAXB-friendly version of the Task.
@@ -61,15 +61,15 @@ public class XmlAdaptedTask {
      * @throws IllegalValueException if there were any data constraints violated in the adapted Task
      */
     public Task toModelType() throws IllegalValueException {
-        final List<Tag> TaskTags = new ArrayList<>();
+        final List<Tag> taskTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
-            TaskTags.add(tag.toModelType());
+            taskTags.add(tag.toModelType());
         }
         final Title title = new Title(this.title);
         final Venue venue = new Venue(this.venue);
         final StartTime startTime = new StartTime(this.startTime);
         final EndTime endTime = new EndTime(this.endTime);
-        final UniqueTagList tags = new UniqueTagList(TaskTags);
+        final UniqueTagList tags = new UniqueTagList(taskTags);
         return new Task(title, venue, startTime, endTime, tags);
     }
 }

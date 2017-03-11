@@ -23,7 +23,7 @@ public class SampleDataTest extends ToDoListGuiTest {
     }
 
     @Test
-    public void ToDoList_dataFileDoesNotExist_loadSampleData() throws Exception {
+    public void todoList_dataFileDoesNotExist_loadSampleData() throws Exception {
         Task[] expectedList = SampleDataUtil.getSampleTasks();
         assertTrue(taskListPanel.isListMatching(expectedList));
     }

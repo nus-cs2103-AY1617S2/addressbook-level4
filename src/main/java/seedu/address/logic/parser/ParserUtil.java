@@ -13,12 +13,12 @@ import java.util.stream.Collectors;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.EndTime;
 import seedu.address.model.task.StartTime;
 import seedu.address.model.task.Title;
 import seedu.address.model.task.Venue;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -77,9 +77,9 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> phone} into an {@code Optional<Venue>} if {@code phone} is present.
      */
-    public static Optional<Venue> parseVenue(Optional<String> phone) throws IllegalValueException {
-        assert phone != null;
-        return phone.isPresent() ? Optional.of(new Venue(phone.get())) : Optional.empty();
+    public static Optional<Venue> parseVenue(Optional<String> venue) throws IllegalValueException {
+        assert venue != null;
+        return venue.isPresent() ? Optional.of(new Venue(venue.get())) : Optional.empty();
     }
 
     /**
@@ -93,9 +93,9 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> email} into an {@code Optional<StartTime>} if {@code email} is present.
      */
-    public static Optional<StartTime> parseStartTime(Optional<String> email) throws IllegalValueException {
-        assert email != null;
-        return email.isPresent() ? Optional.of(new StartTime(email.get())) : Optional.empty();
+    public static Optional<StartTime> parseStartTime(Optional<String> startTime) throws IllegalValueException {
+        assert startTime != null;
+        return startTime.isPresent() ? Optional.of(new StartTime(startTime.get())) : Optional.empty();
     }
 
     /**

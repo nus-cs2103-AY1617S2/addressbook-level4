@@ -1,11 +1,11 @@
 package seedu.address.testutil;
 
+import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.EndTime;
+import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.StartTime;
 import seedu.address.model.task.Title;
 import seedu.address.model.task.Venue;
-import seedu.address.model.task.ReadOnlyTask;
-import seedu.address.model.tag.UniqueTagList;
 
 /**
  * A mutable task object. For testing only.
@@ -86,9 +86,9 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getTitle().title + " ");
-        sb.append("a/" + this.getEndTime().value + " ");
-        sb.append("p/" + this.getVenue().value + " ");
-        sb.append("e/" + this.getStartTime().value + " ");
+        sb.append("v/" + this.getVenue().value + " ");
+        sb.append("s/" + this.getStartTime().value + " ");
+        sb.append("e/" + this.getEndTime().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
