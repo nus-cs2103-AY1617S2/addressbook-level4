@@ -41,4 +41,16 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
 
+    /** Updates undo copy of task list*/
+    void updateCopy(ReadOnlyTaskManager taskManager);
+
+    /** Returns undo copy of task list*/
+    ReadOnlyTaskManager getCopy();
+
+    /** Clears undo copy of task list*/
+    void clearCopy();
+
+    /** Checks if there are any undoable commands*/
+    boolean checkChanges();
+
 }
