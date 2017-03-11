@@ -14,25 +14,25 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
+    private Label title;
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label venue;
     @FXML
-    private Label address;
+    private Label starttime;
     @FXML
-    private Label email;
+    private Label endtime;
     @FXML
     private FlowPane tags;
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
-        name.setText(task.getTitle().title);
+        title.setText(task.getTitle().title);
         id.setText(displayedIndex + ". ");
-        phone.setText(task.getVenue().value);
-        address.setText(task.getEndTime().value);
-        email.setText(task.getStartTime().value);
+        venue.setText(task.getVenue().value);
+        starttime.setText(task.getEndTime().value);
+        endtime.setText(task.getStartTime().value);
         initTags(task);
     }
 
