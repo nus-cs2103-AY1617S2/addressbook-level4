@@ -12,18 +12,18 @@ import seedu.address.model.person.ReadOnlyActivity;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Provides a handle to a person card in the person list panel.
+ * Provides a handle to an activity card in the activity list panel.
  */
-public class PersonCardHandle extends GuiHandle {
-    private static final String NAME_FIELD_ID = "#name";
-    private static final String ADDRESS_FIELD_ID = "#address";
+public class ActivityCardHandle extends GuiHandle {
+    private static final String DESCRIPTION_FIELD_ID = "#description";
+    private static final String LOCATION_FIELD_ID = "#location";
     private static final String PHONE_FIELD_ID = "#phone";
     private static final String EMAIL_FIELD_ID = "#email";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private Node node;
 
-    public PersonCardHandle(GuiRobot guiRobot, Stage primaryStage, Node node) {
+    public ActivityCardHandle(GuiRobot guiRobot, Stage primaryStage, Node node) {
         super(guiRobot, primaryStage, null);
         this.node = node;
     }
@@ -32,12 +32,12 @@ public class PersonCardHandle extends GuiHandle {
         return getTextFromLabel(fieldId, node);
     }
 
-    public String getFullName() {
-        return getTextFromLabel(NAME_FIELD_ID);
+    public String getDescription() {
+        return getTextFromLabel(DESCRIPTION_FIELD_ID);
     }
 
-    public String getAddress() {
-        return getTextFromLabel(ADDRESS_FIELD_ID);
+    public String getLocation() {
+        return getTextFromLabel(LOCATION_FIELD_ID);
     }
 
     public String getPhone() {
@@ -73,21 +73,21 @@ public class PersonCardHandle extends GuiHandle {
     }
 
     public boolean isSameActivity(ReadOnlyActivity activity) {
-        return getFullName().equals(activity.getDescription().description)
+        return getDescription().equals(activity.getDescription().description)
                 && getPhone().equals(activity.getPhone().value)
                 && getEmail().equals(activity.getEmail().value)
-                && getAddress().equals(activity.getLocation().value)
+                && getLocation().equals(activity.getLocation().value)
                 && getTags().equals(getTags(activity.getTags()));
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof PersonCardHandle) {
-            PersonCardHandle handle = (PersonCardHandle) obj;
-            return getFullName().equals(handle.getFullName())
+        if (obj instanceof ActivityCardHandle) {
+            ActivityCardHandle handle = (ActivityCardHandle) obj;
+            return getDescription().equals(handle.getDescription())
                     && getPhone().equals(handle.getPhone())
                     && getEmail().equals(handle.getEmail())
-                    && getAddress().equals(handle.getAddress())
+                    && getLocation().equals(handle.getLocation())
                     && getTags().equals(handle.getTags());
         }
         return super.equals(obj);
@@ -95,6 +95,6 @@ public class PersonCardHandle extends GuiHandle {
 
     @Override
     public String toString() {
-        return getFullName() + " " + getAddress();
+        return getDescription() + " " + getLocation();
     }
 }

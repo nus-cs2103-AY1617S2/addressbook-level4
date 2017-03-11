@@ -1,9 +1,9 @@
 package seedu.address.testutil;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Location;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.Description;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Location;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;

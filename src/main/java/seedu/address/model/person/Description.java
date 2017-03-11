@@ -3,8 +3,8 @@ package seedu.address.model.person;
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a task's description in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidDescription(String)}
+ * Represents an Activity's description in WhatsLeft.
+ * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Description {
 
@@ -20,9 +20,9 @@ public class Description {
     public final String description;
 
     /**
-     * Validates given name.
+     * Validates given description.
      *
-     * @throws IllegalValueException if given name string is invalid.
+     * @throws IllegalValueException if given description string is invalid.
      */
     public Description(String description) throws IllegalValueException {
         assert description != null;
@@ -34,7 +34,7 @@ public class Description {
     }
 
     /**
-     * Returns true if a given string is a valid person name.
+     * Returns true if a given string is a valid activity description.
      */
     public static boolean isValidDescription(String test) {
         return test.matches(DESCRIPTION_VALIDATION_REGEX);

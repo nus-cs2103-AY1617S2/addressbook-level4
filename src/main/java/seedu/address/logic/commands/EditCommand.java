@@ -6,100 +6,102 @@ import java.util.Optional;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.person.Activity;
 import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Location;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.ReadOnlyActivity;
+import seedu.address.model.person.UniqueActivityList;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing activity in WhatsLeft.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
-            + "by the index number used in the last task listing. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the activity identified "
+            + "by the index number used in the last activity listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be positive int) [DESCRIPTION] [p/PHONE] [e/EMAIL] [l/LOCATION ] [t/TAG]...\n"
+            + "Parameters: INDEX (must be a positive integer) "
+            + "[DESCRIPTION] [p/PHONE] [e/EMAIL] [l/LOCATION ] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 p/91234567 e/johndoe@yahoo.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_ACTIVITY_SUCCESS = "Edited Activity: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_ACTIVITY = "This activity already exists in WhatsLeft.";
 
-    private final int filteredPersonListIndex;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final int filteredActivityListIndex;
+    private final EditActivityDescriptor editActivityDescriptor;
 
     /**
-     * @param filteredPersonListIndex the index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param filteredActivityListIndex the index of the activity in the filtered activity list to edit
+     * @param editActivityDescriptor details to edit the activity with
      */
-    public EditCommand(int filteredPersonListIndex, EditPersonDescriptor editPersonDescriptor) {
-        assert filteredPersonListIndex > 0;
-        assert editPersonDescriptor != null;
+    public EditCommand(int filteredActivityListIndex, EditActivityDescriptor editActivityDescriptor) {
+        assert filteredActivityListIndex > 0;
+        assert editActivityDescriptor != null;
 
-        // converts filteredPersonListIndex from one-based to zero-based.
-        this.filteredPersonListIndex = filteredPersonListIndex - 1;
+        // converts filteredActivityListIndex from one-based to zero-based.
+        this.filteredActivityListIndex = filteredActivityListIndex - 1;
 
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editActivityDescriptor = new EditActivityDescriptor(editActivityDescriptor);
     }
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
+        List<ReadOnlyActivity> lastShownList = model.getFilteredActivityList();
 
-        if (filteredPersonListIndex >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (filteredActivityListIndex >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_ACTIVITY_DISPLAYED_INDEX);
         }
 
-        ReadOnlyPerson personToEdit = lastShownList.get(filteredPersonListIndex);
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        ReadOnlyActivity activityToEdit = lastShownList.get(filteredActivityListIndex);
+        Activity editedActivity = createEditedActivity(activityToEdit, editActivityDescriptor);
 
         try {
-            model.updatePerson(filteredPersonListIndex, editedPerson);
-        } catch (UniquePersonList.DuplicatePersonException dpe) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            model.updateActivity(filteredActivityListIndex, editedActivity);
+        } catch (UniqueActivityList.DuplicateActivityException dpe) {
+            throw new CommandException(MESSAGE_DUPLICATE_ACTIVITY);
         }
         model.updateFilteredListToShowAll();
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, personToEdit));
+        return new CommandResult(String.format(MESSAGE_EDIT_ACTIVITY_SUCCESS, activityToEdit));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Activity} with the details of {@code activityToEdit}
+     * edited with {@code editActivityDescriptor}.
      */
-    private static Person createEditedPerson(ReadOnlyPerson personToEdit,
-                                             EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Activity createEditedActivity(ReadOnlyActivity activityToEdit,
+                                             EditActivityDescriptor editActivityDescriptor) {
+        assert activityToEdit != null;
 
-        Description updatedDescription = editPersonDescriptor.getDescription().orElseGet(personToEdit::getDescription);
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
-        Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
-        Location updatedLocation = editPersonDescriptor.getLocation().orElseGet(personToEdit::getLocation);
-        UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
+        Description updatedDescription = editActivityDescriptor.getDescription().orElseGet(
+            activityToEdit::getDescription);
+        Phone updatedPhone = editActivityDescriptor.getPhone().orElseGet(activityToEdit::getPhone);
+        Email updatedEmail = editActivityDescriptor.getEmail().orElseGet(activityToEdit::getEmail);
+        Location updatedLocation = editActivityDescriptor.getLocation().orElseGet(activityToEdit::getLocation);
+        UniqueTagList updatedTags = editActivityDescriptor.getTags().orElseGet(activityToEdit::getTags);
 
-        return new Person(updatedDescription, updatedPhone, updatedEmail, updatedLocation, updatedTags);
+        return new Activity(updatedDescription, updatedPhone, updatedEmail, updatedLocation, updatedTags);
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the activity with. Each non-empty field value will replace the
+     * corresponding field value of the activity.
      */
-    public static class EditPersonDescriptor {
+    public static class EditActivityDescriptor {
         private Optional<Description> description = Optional.empty();
         private Optional<Phone> phone = Optional.empty();
         private Optional<Email> email = Optional.empty();
         private Optional<Location> location = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
-        public EditPersonDescriptor() {}
+        public EditActivityDescriptor() {}
 
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditActivityDescriptor(EditActivityDescriptor toCopy) {
             this.description = toCopy.getDescription();
             this.phone = toCopy.getPhone();
             this.email = toCopy.getEmail();

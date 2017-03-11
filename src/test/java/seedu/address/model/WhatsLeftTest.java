@@ -14,21 +14,21 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.person.Activity;
+import seedu.address.model.person.ReadOnlyActivity;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.TypicalTestPersons;
+import seedu.address.testutil.TypicalTestActivities;
 
-public class AddressBookTest {
+public class WhatsLeftTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final AddressBook addressBook = new AddressBook();
+    private final WhatsLeft addressBook = new WhatsLeft();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), addressBook.getActivityList());
         assertEquals(Collections.emptyList(), addressBook.getTagList());
     }
 
@@ -39,19 +39,19 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = new TypicalTestPersons().getTypicalAddressBook();
+    public void resetData_withValidReadOnlyWhatsLeft_replacesData() {
+        WhatsLeft newData = new TypicalTestActivities().getTypicalWhatsLeft();
         addressBook.resetData(newData);
         assertEquals(newData, addressBook);
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsAssertionError() {
-        TypicalTestPersons td = new TypicalTestPersons();
+    public void resetData_withDuplicateActivities_throwsAssertionError() {
+        TypicalTestActivities td = new TypicalTestActivities();
         // Repeat td.alice twice
-        List<Person> newPersons = Arrays.asList(new Person(td.alice), new Person(td.alice));
+        List<Activity> newActivities = Arrays.asList(new Activity(td.alice), new Activity(td.alice));
         List<Tag> newTags = td.alice.getTags().asObservableList();
-        AddressBookStub newData = new AddressBookStub(newPersons, newTags);
+        WhatsLeftStub newData = new WhatsLeftStub(newActivities, newTags);
 
         thrown.expect(AssertionError.class);
         addressBook.resetData(newData);
@@ -59,31 +59,31 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
-        AddressBook typicalAddressBook = new TypicalTestPersons().getTypicalAddressBook();
-        List<ReadOnlyPerson> newPersons = typicalAddressBook.getPersonList();
-        List<Tag> newTags = new ArrayList<>(typicalAddressBook.getTagList());
+        WhatsLeft typicalWhatsLeft = new TypicalTestActivities().getTypicalWhatsLeft();
+        List<ReadOnlyActivity> newActivities = typicalWhatsLeft.getActivityList();
+        List<Tag> newTags = new ArrayList<>(typicalWhatsLeft.getTagList());
         // Repeat the first tag twice
         newTags.add(newTags.get(0));
-        AddressBookStub newData = new AddressBookStub(newPersons, newTags);
+        WhatsLeftStub newData = new WhatsLeftStub(newActivities, newTags);
 
         thrown.expect(AssertionError.class);
         addressBook.resetData(newData);
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons and tags lists can violate interface constraints.
+     * A stub ReadOnlyWhatsLeft whose persons and tags lists can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
-        private final ObservableList<ReadOnlyPerson> persons = FXCollections.observableArrayList();
+    private static class WhatsLeftStub implements ReadOnlyWhatsLeft {
+        private final ObservableList<ReadOnlyActivity> persons = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<? extends ReadOnlyPerson> persons, Collection<? extends Tag> tags) {
+        WhatsLeftStub(Collection<? extends ReadOnlyActivity> persons, Collection<? extends Tag> tags) {
             this.persons.setAll(persons);
             this.tags.setAll(tags);
         }
 
         @Override
-        public ObservableList<ReadOnlyPerson> getPersonList() {
+        public ObservableList<ReadOnlyActivity> getActivityList() {
             return persons;
         }
 

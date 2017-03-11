@@ -6,10 +6,10 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Represents a Person in the address book.
+ * Represents an Activity in WhatsLeft.
  * Guarantees: details are present and not null, field values are validated.
  */
-public class Person implements ReadOnlyPerson {
+public class Activity implements ReadOnlyActivity {
 
     private Description description;
     private Phone phone;
@@ -21,25 +21,25 @@ public class Person implements ReadOnlyPerson {
     /**
      * Every field must be present and not null.
      */
-    public Person(Description description, Phone phone, Email email, Location address, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(description, phone, email, address, tags);
+    public Activity(Description description, Phone phone, Email email, Location location, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(description, phone, email, location, tags);
         this.description = description;
         this.phone = phone;
         this.email = email;
-        this.location = address;
+        this.location = location;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
     /**
-     * Creates a copy of the given ReadOnlyPerson.
+     * Creates a copy of the given ReadOnlyActivity.
      */
-    public Person(ReadOnlyPerson source) {
+    public Activity(ReadOnlyActivity source) {
         this(source.getDescription(), source.getPhone(), source.getEmail(), source.getLocation(), source.getTags());
     }
 
-    public void setDescription(Description name) {
-        assert name != null;
-        this.description = name;
+    public void setDescription(Description description) {
+        assert description != null;
+        this.description = description;
     }
 
     @Override
@@ -83,16 +83,16 @@ public class Person implements ReadOnlyPerson {
     }
 
     /**
-     * Replaces this person's tags with the tags in the argument tag list.
+     * Replaces this activity's tags with the tags in the argument tag list.
      */
     public void setTags(UniqueTagList replacement) {
         tags.setTags(replacement);
     }
 
     /**
-     * Updates this person with the details of {@code replacement}.
+     * Updates this activity with the details of {@code replacement}.
      */
-    public void resetData(ReadOnlyPerson replacement) {
+    public void resetData(ReadOnlyActivity replacement) {
         assert replacement != null;
 
         this.setDescription(replacement.getDescription());
@@ -105,8 +105,8 @@ public class Person implements ReadOnlyPerson {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ReadOnlyPerson // instanceof handles nulls
-                && this.isSameStateAs((ReadOnlyPerson) other));
+                || (other instanceof ReadOnlyActivity // instanceof handles nulls
+                && this.isSameStateAs((ReadOnlyActivity) other));
     }
 
     @Override

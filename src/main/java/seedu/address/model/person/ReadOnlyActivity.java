@@ -3,10 +3,10 @@ package seedu.address.model.person;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * A read-only immutable interface for a Person in the addressbook.
+ * A read-only immutable interface for an Activity in WhatsLeft.
  * Implementations should guarantee: details are present and not null, field values are validated.
  */
-public interface ReadOnlyPerson {
+public interface ReadOnlyActivity {
 
     Description getDescription();
     Phone getPhone();
@@ -15,14 +15,14 @@ public interface ReadOnlyPerson {
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
-     * changes on the returned list will not affect the person's internal tags.
+     * changes on the returned list will not affect the activity's internal tags.
      */
     UniqueTagList getTags();
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
      */
-    default boolean isSameStateAs(ReadOnlyPerson other) {
+    default boolean isSameStateAs(ReadOnlyActivity other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                 && other.getDescription().equals(this.getDescription()) // state checks here onwards
@@ -32,7 +32,7 @@ public interface ReadOnlyPerson {
     }
 
     /**
-     * Formats the person as text, showing all contact details.
+     * Formats the activity as text, showing all contact details.
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
@@ -41,7 +41,7 @@ public interface ReadOnlyPerson {
                 .append(getPhone())
                 .append(" Email: ")
                 .append(getEmail())
-                .append(" Address: ")
+                .append(" Location: ")
                 .append(getLocation())
                 .append(" Tags: ");
         getTags().forEach(builder::append);

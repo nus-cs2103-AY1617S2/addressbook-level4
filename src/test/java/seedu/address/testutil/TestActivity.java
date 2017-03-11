@@ -10,35 +10,35 @@ import seedu.address.model.tag.UniqueTagList;
 /**
  * A mutable person object. For testing only.
  */
-public class TestPerson implements ReadOnlyActivity {
+public class TestActivity implements ReadOnlyActivity {
 
-    private Description name;
-    private Location address;
+    private Description description;
+    private Location location;
     private Email email;
     private Phone phone;
     private UniqueTagList tags;
 
-    public TestPerson() {
+    public TestActivity() {
         tags = new UniqueTagList();
     }
 
     /**
-     * Creates a copy of {@code personToCopy}.
+     * Creates a copy of {@code activityToCopy}.
      */
-    public TestPerson(TestPerson personToCopy) {
-        this.name = personToCopy.getDescription();
-        this.phone = personToCopy.getPhone();
-        this.email = personToCopy.getEmail();
-        this.address = personToCopy.getLocation();
-        this.tags = personToCopy.getTags();
+    public TestActivity(TestActivity activityToCopy) {
+        this.description = activityToCopy.getDescription();
+        this.phone = activityToCopy.getPhone();
+        this.email = activityToCopy.getEmail();
+        this.location = activityToCopy.getLocation();
+        this.tags = activityToCopy.getTags();
     }
 
-    public void setName(Description name) {
-        this.name = name;
+    public void setDescription(Description description) {
+        this.description = description;
     }
 
-    public void setAddress(Location address) {
-        this.address = address;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     public void setEmail(Email email) {
@@ -55,7 +55,7 @@ public class TestPerson implements ReadOnlyActivity {
 
     @Override
     public Description getDescription() {
-        return name;
+        return description;
     }
 
     @Override
@@ -70,7 +70,7 @@ public class TestPerson implements ReadOnlyActivity {
 
     @Override
     public Location getLocation() {
-        return address;
+        return location;
     }
 
     @Override
@@ -86,7 +86,7 @@ public class TestPerson implements ReadOnlyActivity {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getDescription().description + " ");
-        sb.append("a/" + this.getLocation().value + " ");
+        sb.append("l/" + this.getLocation().value + " ");
         sb.append("p/" + this.getPhone().value + " ");
         sb.append("e/" + this.getEmail().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));

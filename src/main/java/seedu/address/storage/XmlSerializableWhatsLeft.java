@@ -11,27 +11,27 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.ReadOnlyWhatsLeft;
+import seedu.address.model.person.Activity;
+import seedu.address.model.person.ReadOnlyActivity;
 import seedu.address.model.tag.Tag;
 
 /**
- * An Immutable AddressBook that is serializable to XML format
+ * An Immutable WhatsLeft that is serializable to XML format
  */
-@XmlRootElement(name = "addressbook")
-public class XmlSerializableAddressBook implements ReadOnlyAddressBook {
+@XmlRootElement(name = "whatsleft")
+public class XmlSerializableWhatsLeft implements ReadOnlyWhatsLeft {
 
     @XmlElement
-    private List<XmlAdaptedPerson> persons;
+    private List<XmlAdaptedActivity> persons;
     @XmlElement
     private List<XmlAdaptedTag> tags;
 
     /**
-     * Creates an empty XmlSerializableAddressBook.
+     * Creates an empty XmlSerializableWhatsLeft.
      * This empty constructor is required for marshalling.
      */
-    public XmlSerializableAddressBook() {
+    public XmlSerializableWhatsLeft() {
         persons = new ArrayList<>();
         tags = new ArrayList<>();
     }
@@ -39,15 +39,15 @@ public class XmlSerializableAddressBook implements ReadOnlyAddressBook {
     /**
      * Conversion
      */
-    public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
+    public XmlSerializableWhatsLeft(ReadOnlyWhatsLeft src) {
         this();
-        persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        persons.addAll(src.getActivityList().stream().map(XmlAdaptedActivity::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
     }
 
     @Override
-    public ObservableList<ReadOnlyPerson> getPersonList() {
-        final ObservableList<Person> persons = this.persons.stream().map(p -> {
+    public ObservableList<ReadOnlyActivity> getActivityList() {
+        final ObservableList<Activity> persons = this.persons.stream().map(p -> {
             try {
                 return p.toModelType();
             } catch (IllegalValueException e) {

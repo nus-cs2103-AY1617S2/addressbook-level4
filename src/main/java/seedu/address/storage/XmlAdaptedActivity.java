@@ -6,19 +6,19 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.Activity;
 import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Location;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.person.ReadOnlyActivity;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * JAXB-friendly version of the Person.
+ * JAXB-friendly version of the Activity.
  */
-public class XmlAdaptedPerson {
+public class XmlAdaptedActivity {
 
     @XmlElement(required = true)
     private String description;
@@ -33,18 +33,18 @@ public class XmlAdaptedPerson {
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
     /**
-     * Constructs an XmlAdaptedPerson.
+     * Constructs an XmlAdaptedActivity.
      * This is the no-arg constructor that is required by JAXB.
      */
-    public XmlAdaptedPerson() {}
+    public XmlAdaptedActivity() {}
 
 
     /**
-     * Converts a given Person into this class for JAXB use.
+     * Converts a given Activity into this class for JAXB use.
      *
-     * @param source future changes to this will not affect the created XmlAdaptedPerson
+     * @param source future changes to this will not affect the created XmlAdaptedActivity
      */
-    public XmlAdaptedPerson(ReadOnlyPerson source) {
+    public XmlAdaptedActivity(ReadOnlyActivity source) {
         description = source.getDescription().description;
         phone = source.getPhone().value;
         email = source.getEmail().value;
@@ -56,11 +56,11 @@ public class XmlAdaptedPerson {
     }
 
     /**
-     * Converts this jaxb-friendly adapted person object into the model's Person object.
+     * Converts this jaxb-friendly adapted person object into the model's Activity object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person
      */
-    public Person toModelType() throws IllegalValueException {
+    public Activity toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
@@ -70,6 +70,6 @@ public class XmlAdaptedPerson {
         final Email email = new Email(this.email);
         final Location location = new Location(this.location);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Person(description, phone, email, location, tags);
+        return new Activity(description, phone, email, location, tags);
     }
 }
