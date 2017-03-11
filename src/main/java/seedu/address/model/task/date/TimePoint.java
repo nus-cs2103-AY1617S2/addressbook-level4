@@ -1,6 +1,5 @@
 package seedu.address.model.task.date;
 
-import java.util.Date;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.IllegalValueException;
