@@ -10,7 +10,6 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.DeleteLabelCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditLabelCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -59,9 +58,6 @@ public class Parser {
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
-
-        case DeleteLabelCommand.COMMAND_WORD:
-            return new DeleteLabelCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();

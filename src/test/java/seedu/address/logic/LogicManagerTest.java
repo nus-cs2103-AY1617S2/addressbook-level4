@@ -320,7 +320,11 @@ public class LogicManagerTest {
     @Test
     public void execute_deleteInvalidArgsFormat_errorMessageShown() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
-        assertIncorrectIndexFormatBehaviorForCommand("delete", expectedMessage);
+        String commandWord = "delete";
+        assertCommandFailure(commandWord , expectedMessage); //label or index missing
+        assertCommandFailure(commandWord + " +1", expectedMessage); //signed index treated as invalid label
+        assertCommandFailure(commandWord + " -1", expectedMessage); //signed index treated as invalid label
+        assertCommandFailure(commandWord + " 0", expectedMessage); //index cannot be 0
     }
 
     @Test
@@ -342,7 +346,6 @@ public class LogicManagerTest {
                 expectedAB,
                 expectedAB.getTaskList());
     }
-
 
     @Test
     public void execute_find_invalidArgsFormat() {

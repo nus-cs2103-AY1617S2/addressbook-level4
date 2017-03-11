@@ -17,13 +17,6 @@ import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
  */
 public class DeleteLabelCommand extends Command {
 
-    public static final String COMMAND_WORD = "deletelabel";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a label \n"
-            + "All labels with this label name will be deleted from its attached task.\n"
-            + "Parameters: LABEL_TO_DELETE\n"
-            + "Example: " + COMMAND_WORD + " friends";
-
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Label %1$s deleted from all tasks";
     public static final String MESSAGE_LABEL_NOT_EXIST = "Specified label does not exist in any task saved";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
