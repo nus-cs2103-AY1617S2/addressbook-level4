@@ -41,7 +41,7 @@ import seedu.geekeep.model.ReadOnlyTaskManager;
 import seedu.geekeep.model.TaskManager;
 import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.tag.UniqueTagList;
-import seedu.geekeep.model.task.EndDateTime;
+import seedu.geekeep.model.task.DateTime;
 import seedu.geekeep.model.task.Location;
 import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.model.task.StartDateTime;
@@ -203,7 +203,7 @@ public class LogicManagerTest {
         assertCommandFailure("add []\\[;] s/2017-04-01T10:16:30 e/2017-04-01T10:16:30 l/valid, address",
                 Title.MESSAGE_TITLE_CONSTRAINTS);
         assertCommandFailure("add Valid Name s/not_numbers e/2017-04-01T10:16:30 l/valid, address",
-                EndDateTime.MESSAGE_DATETIME_CONSTRAINTS);
+                DateTime.MESSAGE_DATETIME_CONSTRAINTS);
         assertCommandFailure("add Valid Name s/2017-04-01T10:16:30 e/notAnEmail l/valid, address",
                 StartDateTime.MESSAGE_DATETIME_CONSTRAINTS);
         assertCommandFailure(
@@ -421,7 +421,7 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Title title = new Title("Adam Brown");
-            EndDateTime privateEndDateTime = new EndDateTime("2017-04-01T10:16:30");
+            DateTime privateEndDateTime = new DateTime("2017-04-01T10:16:30");
             StartDateTime startDateTime = new StartDateTime("2017-04-01T10:16:30");
             Location privateLocation = new Location("111, alpha street");
             Tag tag1 = new Tag("tag1");
@@ -441,7 +441,7 @@ public class LogicManagerTest {
             return new Task(
                     new Title("Person " + seed),
                     new StartDateTime("2017-04-01T10:16:30"),
-                    new EndDateTime("2017-04-01T10:16:30"),
+                    new DateTime("2017-04-01T10:16:30"),
                     new Location("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
@@ -540,7 +540,7 @@ public class LogicManagerTest {
             return new Task(
                     new Title(name),
                     new StartDateTime("2017-04-01T10:16:30"),
-                    new EndDateTime("2017-04-01T10:16:30"),
+                    new DateTime("2017-04-01T10:16:30"),
                     new Location("House of 1"),
                     new UniqueTagList(new Tag("tag"))
             );

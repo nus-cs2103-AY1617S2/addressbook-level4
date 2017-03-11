@@ -9,7 +9,7 @@ import guitests.guihandles.PersonCardHandle;
 import seedu.geekeep.commons.core.Messages;
 import seedu.geekeep.logic.commands.EditCommand;
 import seedu.geekeep.model.tag.Tag;
-import seedu.geekeep.model.task.EndDateTime;
+import seedu.geekeep.model.task.DateTime;
 import seedu.geekeep.model.task.Location;
 import seedu.geekeep.model.task.StartDateTime;
 import seedu.geekeep.model.task.Title;
@@ -98,7 +98,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         assertResultMessage(Title.MESSAGE_TITLE_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 e/abcd");
-        assertResultMessage(EndDateTime.MESSAGE_DATETIME_CONSTRAINTS);
+        assertResultMessage(DateTime.MESSAGE_DATETIME_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 s/yahoo!!!");
         assertResultMessage(StartDateTime.MESSAGE_DATETIME_CONSTRAINTS);

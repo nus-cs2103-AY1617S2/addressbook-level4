@@ -1,7 +1,7 @@
 package seedu.geekeep.testutil;
 
 import seedu.geekeep.model.tag.UniqueTagList;
-import seedu.geekeep.model.task.EndDateTime;
+import seedu.geekeep.model.task.DateTime;
 import seedu.geekeep.model.task.Location;
 import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.model.task.StartDateTime;
@@ -15,7 +15,7 @@ public class TestPerson implements ReadOnlyTask {
     private Title title;
     private Location location;
     private StartDateTime startDateTime;
-    private EndDateTime endDateTime;
+    private DateTime endDateTime;
     private UniqueTagList tags;
 
     public TestPerson() {
@@ -45,7 +45,7 @@ public class TestPerson implements ReadOnlyTask {
         this.startDateTime = startDateTime;
     }
 
-    public void setEndDateTime(EndDateTime endDateTime) {
+    public void setEndDateTime(DateTime endDateTime) {
         this.endDateTime = endDateTime;
     }
 
@@ -59,7 +59,7 @@ public class TestPerson implements ReadOnlyTask {
     }
 
     @Override
-    public EndDateTime getEndDateTime() {
+    public DateTime getEndDateTime() {
         return endDateTime;
     }
 

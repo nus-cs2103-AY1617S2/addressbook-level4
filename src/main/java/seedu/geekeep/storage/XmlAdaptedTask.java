@@ -8,10 +8,9 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.tag.UniqueTagList;
-import seedu.geekeep.model.task.EndDateTime;
+import seedu.geekeep.model.task.DateTime;
 import seedu.geekeep.model.task.Location;
 import seedu.geekeep.model.task.ReadOnlyTask;
-import seedu.geekeep.model.task.StartDateTime;
 import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.Title;
 
@@ -66,8 +65,8 @@ public class XmlAdaptedTask {
             personTags.add(tag.toModelType());
         }
         final Title title = new Title(this.name);
-        final EndDateTime endDateTime = new EndDateTime(this.phone);
-        final StartDateTime startDateTime = new StartDateTime(this.email);
+        final DateTime endDateTime = new DateTime(this.phone);
+        final DateTime startDateTime = new DateTime(this.email);
         final Location location = new Location(this.address);
         final UniqueTagList tags = new UniqueTagList(personTags);
         return new Task(title, startDateTime, endDateTime, location, tags);
