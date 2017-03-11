@@ -37,6 +37,7 @@ import seedu.task.logic.commands.FindCommand;
 import seedu.task.logic.commands.HelpCommand;
 import seedu.task.logic.commands.ListCommand;
 import seedu.task.logic.commands.SelectCommand;
+import seedu.task.logic.commands.UndoCommand;
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.Model;
 import seedu.task.model.ModelManager;
@@ -408,6 +409,33 @@ public class LogicManagerTest {
                 Command.getMessageForPersonListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
+    }
+
+    @Test
+    public void execute_undo_withPriorMutablePriorAction() throws Exception {
+
+        TestDataHelper helper = new TestDataHelper();
+        Task toBeAdded = helper.adam();
+        TaskBook expectedTaskBook = new TaskBook();
+        expectedTaskBook.addTask(toBeAdded);
+
+        // execute command and verify result
+        assertCommandSuccess(helper.generateAddCommand(toBeAdded),
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedTaskBook,
+                expectedTaskBook.getPersonList());
+
+        //add one more task
+        Task newTask = helper.generatePerson(1);
+        TaskBook newExpectedTaskBook = new TaskBook();
+        newExpectedTaskBook.addTask(toBeAdded);
+        newExpectedTaskBook.addTask(newTask);
+        assertCommandSuccess(helper.generateAddCommand(newTask),
+                String.format(AddCommand.MESSAGE_SUCCESS, newTask),
+                newExpectedTaskBook,
+                newExpectedTaskBook.getPersonList());
+
+        assertCommandSuccess("undo", UndoCommand.MESSAGE_SUCCESS, expectedTaskBook, expectedTaskBook.getPersonList());
     }
 
 
