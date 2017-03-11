@@ -20,145 +20,145 @@ import seedu.bulletjournal.model.task.UniqueTaskList;
  */
 public class EditCommand extends Command {
 
-	public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "edit";
 
-	public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-			+ "by the index number used in the last person listing. "
-			+ "Existing values will be overwritten by the input values.\n"
-			+ "Parameters: INDEX (must be a positive integer) [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS ] [t/TAG]...\n"
-			+ "Example: " + COMMAND_WORD + " 1 p/91234567 e/johndoe@yahoo.com";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
+            + "by the index number used in the last person listing. "
+            + "Existing values will be overwritten by the input values.\n"
+            + "Parameters: INDEX (must be a positive integer) [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS ] [t/TAG]...\n"
+            + "Example: " + COMMAND_WORD + " 1 p/91234567 e/johndoe@yahoo.com";
 
-	public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
-	public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-	public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
-	private final int filteredPersonListIndex;
-	private final EditPersonDescriptor editPersonDescriptor;
+    private final int filteredPersonListIndex;
+    private final EditPersonDescriptor editPersonDescriptor;
 
-	/**
-	 * @param filteredPersonListIndex
-	 *            the index of the person in the filtered person list to edit
-	 * @param editPersonDescriptor
-	 *            details to edit the person with
-	 */
-	public EditCommand(int filteredPersonListIndex, EditPersonDescriptor editPersonDescriptor) {
-		assert filteredPersonListIndex > 0;
-		assert editPersonDescriptor != null;
+    /**
+     * @param filteredPersonListIndex
+     *            the index of the person in the filtered person list to edit
+     * @param editPersonDescriptor
+     *            details to edit the person with
+     */
+    public EditCommand(int filteredPersonListIndex, EditPersonDescriptor editPersonDescriptor) {
+        assert filteredPersonListIndex > 0;
+        assert editPersonDescriptor != null;
 
-		// converts filteredPersonListIndex from one-based to zero-based.
-		this.filteredPersonListIndex = filteredPersonListIndex - 1;
+        // converts filteredPersonListIndex from one-based to zero-based.
+        this.filteredPersonListIndex = filteredPersonListIndex - 1;
 
-		this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
-	}
+        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+    }
 
-	@Override
-	public CommandResult execute() throws CommandException {
-		List<ReadOnlyTask> lastShownList = model.getFilteredPersonList();
+    @Override
+    public CommandResult execute() throws CommandException {
+        List<ReadOnlyTask> lastShownList = model.getFilteredPersonList();
 
-		if (filteredPersonListIndex >= lastShownList.size()) {
-			throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-		}
+        if (filteredPersonListIndex >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
 
-		ReadOnlyTask personToEdit = lastShownList.get(filteredPersonListIndex);
-		Task editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        ReadOnlyTask personToEdit = lastShownList.get(filteredPersonListIndex);
+        Task editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-		try {
-			model.updatePerson(filteredPersonListIndex, editedPerson);
-		} catch (UniqueTaskList.DuplicatePersonException dpe) {
-			throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-		}
-		model.updateFilteredListToShowAll();
-		return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, personToEdit));
-	}
+        try {
+            model.updatePerson(filteredPersonListIndex, editedPerson);
+        } catch (UniqueTaskList.DuplicatePersonException dpe) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+        model.updateFilteredListToShowAll();
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, personToEdit));
+    }
 
-	/**
-	 * Creates and returns a {@code Person} with the details of
-	 * {@code personToEdit} edited with {@code editPersonDescriptor}.
-	 */
-	private static Task createEditedPerson(ReadOnlyTask personToEdit, EditPersonDescriptor editPersonDescriptor) {
-		assert personToEdit != null;
+    /**
+     * Creates and returns a {@code Person} with the details of
+     * {@code personToEdit} edited with {@code editPersonDescriptor}.
+     */
+    private static Task createEditedPerson(ReadOnlyTask personToEdit, EditPersonDescriptor editPersonDescriptor) {
+        assert personToEdit != null;
 
-		TaskName updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
-		Deadline updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
-		Status updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
-		Detail updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
-		UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
+        TaskName updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
+        Deadline updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
+        Status updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
+        Detail updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
+        UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
-		return new Task(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
-	}
+        return new Task(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+    }
 
-	/**
-	 * Stores the details to edit the person with. Each non-empty field value
-	 * will replace the corresponding field value of the person.
-	 */
-	public static class EditPersonDescriptor {
-		private Optional<TaskName> taskName = Optional.empty();
-		private Optional<Deadline> deadline = Optional.empty();
-		private Optional<Status> status = Optional.empty();
-		private Optional<Detail> detail = Optional.empty();
-		private Optional<UniqueTagList> tags = Optional.empty();
+    /**
+     * Stores the details to edit the person with. Each non-empty field value
+     * will replace the corresponding field value of the person.
+     */
+    public static class EditPersonDescriptor {
+        private Optional<TaskName> taskName = Optional.empty();
+        private Optional<Deadline> deadline = Optional.empty();
+        private Optional<Status> status = Optional.empty();
+        private Optional<Detail> detail = Optional.empty();
+        private Optional<UniqueTagList> tags = Optional.empty();
 
-		public EditPersonDescriptor() {
-		}
+        public EditPersonDescriptor() {
+        }
 
-		public EditPersonDescriptor(EditPersonDescriptor toCopy) {
-			this.taskName = toCopy.getName();
-			this.deadline = toCopy.getPhone();
-			this.status = toCopy.getEmail();
-			this.detail = toCopy.getAddress();
-			this.tags = toCopy.getTags();
-		}
+        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+            this.taskName = toCopy.getName();
+            this.deadline = toCopy.getPhone();
+            this.status = toCopy.getEmail();
+            this.detail = toCopy.getAddress();
+            this.tags = toCopy.getTags();
+        }
 
-		/**
-		 * Returns true if at least one field is edited.
-		 */
-		public boolean isAnyFieldEdited() {
-			return CollectionUtil.isAnyPresent(this.taskName, this.deadline, this.status, this.detail, this.tags);
-		}
+        /**
+         * Returns true if at least one field is edited.
+         */
+        public boolean isAnyFieldEdited() {
+            return CollectionUtil.isAnyPresent(this.taskName, this.deadline, this.status, this.detail, this.tags);
+        }
 
-		public void setName(Optional<TaskName> taskName) {
-			assert taskName != null;
-			this.taskName = taskName;
-		}
+        public void setName(Optional<TaskName> taskName) {
+            assert taskName != null;
+            this.taskName = taskName;
+        }
 
-		public Optional<TaskName> getName() {
-			return taskName;
-		}
+        public Optional<TaskName> getName() {
+            return taskName;
+        }
 
-		public void setPhone(Optional<Deadline> deadline) {
-			assert deadline != null;
-			this.deadline = deadline;
-		}
+        public void setPhone(Optional<Deadline> deadline) {
+            assert deadline != null;
+            this.deadline = deadline;
+        }
 
-		public Optional<Deadline> getPhone() {
-			return deadline;
-		}
+        public Optional<Deadline> getPhone() {
+            return deadline;
+        }
 
-		public void setEmail(Optional<Status> status) {
-			assert status != null;
-			this.status = status;
-		}
+        public void setEmail(Optional<Status> status) {
+            assert status != null;
+            this.status = status;
+        }
 
-		public Optional<Status> getEmail() {
-			return status;
-		}
+        public Optional<Status> getEmail() {
+            return status;
+        }
 
-		public void setAddress(Optional<Detail> detail) {
-			assert detail != null;
-			this.detail = detail;
-		}
+        public void setAddress(Optional<Detail> detail) {
+            assert detail != null;
+            this.detail = detail;
+        }
 
-		public Optional<Detail> getAddress() {
-			return detail;
-		}
+        public Optional<Detail> getAddress() {
+            return detail;
+        }
 
-		public void setTags(Optional<UniqueTagList> tags) {
-			assert tags != null;
-			this.tags = tags;
-		}
+        public void setTags(Optional<UniqueTagList> tags) {
+            assert tags != null;
+            this.tags = tags;
+        }
 
-		public Optional<UniqueTagList> getTags() {
-			return tags;
-		}
-	}
+        public Optional<UniqueTagList> getTags() {
+            return tags;
+        }
+    }
 }
