@@ -1,20 +1,21 @@
 package seedu.toluist.controller;
 
+import static junit.framework.TestCase.fail;
+import static org.mockito.Mockito.when;
+
+import java.util.Optional;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
+
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.storage.Storage;
 import seedu.toluist.testutil.TypicalTestTodoLists;
 import seedu.toluist.ui.Ui;
-
-import java.util.Optional;
-
-import static junit.framework.TestCase.fail;
-import static org.mockito.Mockito.when;
 
 /**
  * Base class for Controller tests. All Controller tests should extend this class
@@ -33,7 +34,7 @@ public abstract class ControllerTest {
      * Returns an instance of the controller to be teste
      * @return the controller instance to be tested
      */
-    abstract protected Controller controllerUnderTest(Ui renderer);
+    protected abstract Controller controllerUnderTest(Ui renderer);
 
     @Before
     public void setUp() {
