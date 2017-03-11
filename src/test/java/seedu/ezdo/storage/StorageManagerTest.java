@@ -15,6 +15,7 @@ import org.junit.rules.TemporaryFolder;
 import seedu.ezdo.commons.core.Config;
 import seedu.ezdo.commons.events.model.EzDoChangedEvent;
 import seedu.ezdo.commons.events.storage.DataSavingExceptionEvent;
+import seedu.ezdo.commons.events.storage.EzDoDirectoryChangedEvent;
 import seedu.ezdo.model.EzDo;
 import seedu.ezdo.model.ReadOnlyEzDo;
 import seedu.ezdo.model.UserPrefs;
@@ -84,9 +85,17 @@ public class StorageManagerTest {
         assertTrue(eventCollector.get(0) instanceof DataSavingExceptionEvent);
     }
 
+    @Test
+    public void handleEzDoDirectoryChangedEvent_exceptionThrown_eventRaised() throws IOException {
+        Storage storage = new StorageManager(new XmlEzDoStorageExceptionThrowingStub("dummy"),
+                new JsonUserPrefsStorage("dummy"), config);
+        EventsCollector eventCollector = new EventsCollector();
+        storage.handleEzDoDirectoryChangedEvent(new EzDoDirectoryChangedEvent(new EzDo(), "dummy path"));
+        assertTrue(eventCollector.get(0) instanceof DataSavingExceptionEvent);
+    }
 
     /**
-     * A Stub class to throw an exception when the save method is called
+     * A Stub class to throw an exception when the save or move method is called
      */
     class XmlEzDoStorageExceptionThrowingStub extends XmlEzDoStorage {
 
@@ -96,6 +105,11 @@ public class StorageManagerTest {
 
         @Override
         public void saveEzDo(ReadOnlyEzDo ezDo, String filePath) throws IOException {
+            throw new IOException("dummy exception");
+        }
+
+        @Override
+        public void moveEzDo(String oldPath, String newPath) throws IOException {
             throw new IOException("dummy exception");
         }
     }
