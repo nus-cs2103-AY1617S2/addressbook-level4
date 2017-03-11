@@ -81,7 +81,7 @@ public class MainApp extends Application {
             if (!taskListOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample TaskList");
             }
-            initialData = taskListOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = taskListOptional.orElseGet(SampleDataUtil::getSampleTaskList);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty TaskList");
             initialData = new TaskList();

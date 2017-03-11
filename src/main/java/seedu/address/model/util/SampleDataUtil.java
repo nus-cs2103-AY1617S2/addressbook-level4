@@ -9,7 +9,7 @@ import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
-    public static Task[] getSamplePersons() {
+    public static Task[] getSampleTasks() {
         try {
             return new Task[] {
                 new Task(new Name("EE2021"), new UniqueTagList("homework")),
@@ -24,15 +24,15 @@ public class SampleDataUtil {
         }
     }
 
-    public static ReadOnlyTaskList getSampleAddressBook() {
+    public static ReadOnlyTaskList getSampleTaskList() {
         try {
-            TaskList sampleAB = new TaskList();
-            for (Task samplePerson : getSamplePersons()) {
-                sampleAB.addTask(samplePerson);
+            TaskList sampleTaskList = new TaskList();
+            for (Task sampleTask : getSampleTasks()) {
+                sampleTaskList.addTask(sampleTask);
             }
-            return sampleAB;
+            return sampleTaskList;
         } catch (DuplicateTaskException e) {
-            throw new AssertionError("sample data cannot contain duplicate persons", e);
+            throw new AssertionError("sample data cannot contain duplicate tasks", e);
         }
     }
 }
