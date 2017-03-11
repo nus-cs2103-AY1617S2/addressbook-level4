@@ -26,10 +26,10 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    public TaskCard(ReadOnlyTask task, int displayedIndex, String indexPrefix) {
+    public TaskCard(ReadOnlyTask task, int displayedIndex, char indexPrefix) {
         super(FXML);
         name.setText(task.getName().fullName);
-        id.setText(indexPrefix + displayedIndex);
+        id.setText(Character.toString(indexPrefix) + displayedIndex);
         startDate.setText(task.getStartDate().value);
         description.setText(task.getDescription().value);
         endDate.setText(task.getEndDate().value);

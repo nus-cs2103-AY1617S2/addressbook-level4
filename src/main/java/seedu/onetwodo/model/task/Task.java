@@ -2,7 +2,6 @@ package seedu.onetwodo.model.task;
 
 import java.util.Objects;
 
-import seedu.onetwodo.commons.util.CollectionUtil;
 import seedu.onetwodo.model.tag.UniqueTagList;
 
 /**

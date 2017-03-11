@@ -1,9 +1,11 @@
 package seedu.onetwodo.logic.commands;
 
+import javafx.collections.transformation.FilteredList;
 import seedu.onetwodo.commons.core.Messages;
 import seedu.onetwodo.commons.core.UnmodifiableObservableList;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
 import seedu.onetwodo.model.task.ReadOnlyTask;
+import seedu.onetwodo.model.task.TaskType;
 import seedu.onetwodo.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -20,9 +22,11 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
 
+    public final TaskType taskType;
     public final int targetIndex;
 
-    public DeleteCommand(int targetIndex) {
+    public DeleteCommand(char taskType, int targetIndex) {
+        this.taskType = TaskType.getTaskTypeFromChar(taskType);
         this.targetIndex = targetIndex;
     }
 
@@ -36,7 +40,9 @@ public class DeleteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask taskToDelete = lastShownList.get(targetIndex - 1);
+        FilteredList<ReadOnlyTask> filtered = lastShownList.filtered(t -> t.getTaskType() == taskType);
+        
+        ReadOnlyTask taskToDelete = filtered.get(targetIndex - 1);
 
         try {
             model.deleteTask(taskToDelete);
