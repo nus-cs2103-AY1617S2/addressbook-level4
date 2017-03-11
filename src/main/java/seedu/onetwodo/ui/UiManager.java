@@ -123,7 +123,8 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.loadTaskPage(event.getNewSelection());
+        // Opens browserPanel
+        // mainWindow.loadTaskPage(event.getNewSelection());
     }
 
 }

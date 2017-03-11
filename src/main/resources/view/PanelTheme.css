@@ -10,16 +10,76 @@
 }
 
 .header-deadlines {
-    -fx-background-color: #D00101;
-    -fx-opacity: 0.6;
+    -fx-background-color: #E55A5A;
 }
 
 .header-events {
-    -fx-background-color: #009688;
-    -fx-opacity: 0.66;
+    -fx-background-color: #4AB6AC;
 }
 
 .header-todo {
-    -fx-background-color: #4990E2;
-    -fx-opacity: 0.75;
+    -fx-background-color: #6BA0DD;
+}
+
+.panel-shadow {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);
+}
+
+.tasklist {
+	-fx-background-color: #FFFFFF;
+	-fx-border-width: 3;
+	-fx-border-color: #FFFFFF;
+}
+
+.list-cell {
+	-fx-background-color: #FFFFFF;
+    -fx-label-padding: 0 0 0 0;
+    -fx-graphic-text-gap : 0;
+    -fx-padding: 0 0 0 0;
+}
+
+.list-cell .label {
+    -fx-text-fill: #010504;
+}
+
+.grid-pane {
+    -fx-background-color: transparent;
+}
+
+.grid-pane .anchor-pane {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+}
+
+
+.scroll-bar {
+    -fx-border-color: transparent;
+	-fx-background-color: #FFFFFF;
+}
+
+.scroll-bar .track {
+	-fx-background-color: #FFFFFF;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: derive(gray, 33%);
+    -fx-background-insets: 6, 0, 0;
+    -fx-background-radius: 3em;
+}
+
+.scroll-bar .increment-button, .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0 0 0 0;
+}
+
+.scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+}
+
+.scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
+    -fx-padding: 1 8 1 8;
+}
+
+.scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
+    -fx-padding: 8 1 8 1;
 }

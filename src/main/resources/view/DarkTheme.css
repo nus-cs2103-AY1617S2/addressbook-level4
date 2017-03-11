@@ -3,6 +3,10 @@
     src: url('/fonts/avenir-light.ttf');
 }
 
+.root { 
+    -fx-focus-color: transparent; 
+}
+
 .background {
     -fx-background-color: derive(#1d1d1d, 20%);
 }
@@ -94,16 +98,6 @@
     -fx-background-color: derive(#FDFDFD, 20%);
 }
 
-.list-cell {
-    -fx-label-padding: 0 0 0 0;
-    -fx-graphic-text-gap : 0;
-    -fx-padding: 0 0 0 0;
-}
-
-.list-cell .label {
-    -fx-text-fill: #010504;
-}
-
 .cell_big_label {
     -fx-font-size: 16px;
     -fx-text-fill: #010504;
@@ -149,16 +143,6 @@
 
 .status-bar-with-border .label {
     -fx-text-fill: white;
-}
-
-.grid-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
-    -fx-border-color: derive(#1d1d1d, 30%);
-    -fx-border-width: 1px;
-}
-
-.grid-pane .anchor-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
 }
 
 .context-menu {
@@ -256,28 +240,6 @@
     -fx-font-style: italic;
     -fx-fill: white;
     -fx-text-fill: white;
-}
-
-.scroll-bar .thumb {
-    -fx-background-color: derive(#1d1d1d, 50%);
-    -fx-background-insets: 3;
-}
-
-.scroll-bar .increment-button, .scroll-bar .decrement-button {
-    -fx-background-color: transparent;
-    -fx-padding: 0 0 0 0;
-}
-
-.scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
-    -fx-shape: " ";
-}
-
-.scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
-    -fx-padding: 1 8 1 8;
-}
-
-.scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
-    -fx-padding: 8 1 8 1;
 }
 
 #cardPane {
