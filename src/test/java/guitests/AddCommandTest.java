@@ -43,7 +43,7 @@ public class AddCommandTest extends TaskListGuiTest {
         commandBox.runCommand(taskToAdd.getAddCommand());
 
         //confirm the new card contains the right data
-        PersonCardHandle addedCard = personListPanel.navigateToPerson(taskToAdd.getName().fullName);
+        PersonCardHandle addedCard = personListPanel.navigateToPerson(taskToAdd.getName().value);
         assertMatching(taskToAdd, addedCard);
 
         //confirm the list now contains all previous persons plus the new person
