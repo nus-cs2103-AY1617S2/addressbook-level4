@@ -10,9 +10,9 @@ import seedu.taskmanager.model.tag.Tag;
 import seedu.taskmanager.model.tag.UniqueTagList;
 import seedu.taskmanager.model.task.Description;
 import seedu.taskmanager.model.task.EndDate;
-import seedu.taskmanager.model.task.Title;
-import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.StartDate;
+import seedu.taskmanager.model.task.Task;
+import seedu.taskmanager.model.task.Title;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 
 /**

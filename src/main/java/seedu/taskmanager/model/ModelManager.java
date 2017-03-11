@@ -9,9 +9,9 @@ import seedu.taskmanager.commons.core.LogsCenter;
 import seedu.taskmanager.commons.core.UnmodifiableObservableList;
 import seedu.taskmanager.commons.events.model.TaskManagerChangedEvent;
 import seedu.taskmanager.commons.util.CollectionUtil;
+import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.commons.util.StringUtil;
 import seedu.taskmanager.model.task.Task;
-import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.model.task.UniqueTaskList;
 import seedu.taskmanager.model.task.UniqueTaskList.TaskNotFoundException;
 
