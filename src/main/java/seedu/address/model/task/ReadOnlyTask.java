@@ -12,6 +12,10 @@ public interface ReadOnlyTask {
     Deadline getDeadline();
     Priority getPriority();
     Instruction getInstruction();
+    
+    public final String TASK_NAME_COMPLETED = "completed";
+    public final String TASK_NAME_FLOATING = "floating";
+    public final String TASK_NAME_NON_FLOATING = "non-floating";
 
     /**
      * The returned TagList is a deep copy of the internal TagList,

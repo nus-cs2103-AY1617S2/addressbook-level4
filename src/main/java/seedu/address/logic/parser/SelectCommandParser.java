@@ -19,12 +19,13 @@ public class SelectCommandParser {
      */
     public Command parse(String args) {
         Optional<Integer> index = ParserUtil.parseIndex(args);
-        if (!index.isPresent()) {
+        Optional<String> listName = ParserUtil.parseListName(args);
+        if (!index.isPresent() || !listName.isPresent()) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
         }
 
-        return new SelectCommand(index.get());
+        return new SelectCommand(listName.get(), index.get());
     }
 
 }

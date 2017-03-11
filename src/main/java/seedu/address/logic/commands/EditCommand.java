@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import java.util.List;
 import java.util.Optional;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.UniqueTagList;
@@ -26,8 +25,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [TITLE] [d/DATE] [p/PRIORITY] [i/INSTRUCTION] [t/TAG]..\n"
-            + "Example: " + COMMAND_WORD + " 1 p/91234567 e/johndoe@yahoo.com";
+            + "Parameters: [LIST_NAME] INDEX (must be a positive integer) [TITLE] [d/DATE] [p/PRIORITY] [i/INSTRUCTION] [t/TAG]..\n"
+            + "Example: " + COMMAND_WORD + " 1 d/tomorrow i/add some tasks";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -53,15 +52,9 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyTask> lastShownList;
-        if(targetList.equals("floating")){
-            lastShownList = model.getFloatingTaskList();
-        }else {
-            lastShownList = model.getNonFloatingTaskList();
-        }
-        if (targetIndex >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-        }
+        List<ReadOnlyTask> lastShownList = getTargetTaskList(targetList);
+        
+        validateTargetIndex(targetIndex, lastShownList);
 
         ReadOnlyTask taskToEdit = lastShownList.get(targetIndex);
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
