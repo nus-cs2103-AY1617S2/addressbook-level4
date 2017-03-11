@@ -9,10 +9,10 @@ import seedu.taskmanager.logic.commands.exceptions.CommandException;
 import seedu.taskmanager.model.tag.UniqueTagList;
 import seedu.taskmanager.model.task.Description;
 import seedu.taskmanager.model.task.EndDate;
-import seedu.taskmanager.model.task.Title;
-import seedu.taskmanager.model.task.Task;
-import seedu.taskmanager.model.task.StartDate;
 import seedu.taskmanager.model.task.ReadOnlyTask;
+import seedu.taskmanager.model.task.StartDate;
+import seedu.taskmanager.model.task.Task;
+import seedu.taskmanager.model.task.Title;
 import seedu.taskmanager.model.task.UniqueTaskList;
 
 /**
@@ -25,7 +25,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [TITLE] [s/STARTDATE] [e/ENDDATE] [d/DESCRIPTION ] [#TAG]...\n"
+            + "Parameters: INDEX (must be a positive integer)"
+            + "[TITLE] [s/STARTDATE] [e/ENDDATE] [d/DESCRIPTION ] [#TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 s/23/05/2017 d/Go to John's house instead";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";

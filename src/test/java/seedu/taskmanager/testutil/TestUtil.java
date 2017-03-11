@@ -34,10 +34,10 @@ import seedu.taskmanager.model.tag.Tag;
 import seedu.taskmanager.model.tag.UniqueTagList;
 import seedu.taskmanager.model.task.Description;
 import seedu.taskmanager.model.task.EndDate;
-import seedu.taskmanager.model.task.Title;
-import seedu.taskmanager.model.task.Task;
-import seedu.taskmanager.model.task.StartDate;
 import seedu.taskmanager.model.task.ReadOnlyTask;
+import seedu.taskmanager.model.task.StartDate;
+import seedu.taskmanager.model.task.Task;
+import seedu.taskmanager.model.task.Title;
 import seedu.taskmanager.storage.XmlSerializableTaskManager;
 
 /**
@@ -75,11 +75,11 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                    new Task(new Title("Visit Alex Yeoh"), new StartDate("01/11/2017"), new EndDate("02/11/2017"), new Description("His address is Blk 30 Geylang Street 29, #06-40"), new UniqueTagList()),
-                    new Task(new Title("Borrow Pencils"), new StartDate("04/03/2017"), new EndDate("04/03/2017"), new Description("Must be non-mechanical"), new UniqueTagList()),
-                    new Task(new Title("Finish CS2103 testing"), new StartDate("10/03/2017"), new EndDate("15/03/2017"), new Description("The best module eva"), new UniqueTagList()),
-                    new Task(new Title("Buy Toothpick"), new StartDate("20/05/2016"), new EndDate("21/05/2017"), new Description("Buy 1000pcs"), new UniqueTagList()),
-                    new Task(new Title("Make baos for gathering"), new StartDate("10/03/2017"), new EndDate("20/03/2017"), new Description("3 flavours: chocolate, red bean, and green bean"), new UniqueTagList())
+                new Task(new Title("Visit Alex Yeoh"), new StartDate("01/11/2017"), new EndDate("02/11/2017"), new Description("His address is Blk 30 Geylang Street 29, #06-40"), new UniqueTagList()),
+                new Task(new Title("Borrow Pencils"), new StartDate("04/03/2017"), new EndDate("04/03/2017"), new Description("Must be non-mechanical"), new UniqueTagList()),
+                new Task(new Title("Finish CS2103 testing"), new StartDate("10/03/2017"), new EndDate("15/03/2017"), new Description("The best module eva"), new UniqueTagList()),
+                new Task(new Title("Buy Toothpick"), new StartDate("20/05/2016"), new EndDate("21/05/2017"), new Description("Buy 1000pcs"), new UniqueTagList()),
+                new Task(new Title("Make baos for gathering"), new StartDate("10/03/2017"), new EndDate("20/03/2017"), new Description("3 flavours: chocolate, red bean, and green bean"), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {

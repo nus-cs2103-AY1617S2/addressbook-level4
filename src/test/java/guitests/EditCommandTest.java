@@ -11,10 +11,10 @@ import seedu.taskmanager.logic.commands.EditCommand;
 import seedu.taskmanager.model.tag.Tag;
 import seedu.taskmanager.model.task.Description;
 import seedu.taskmanager.model.task.EndDate;
+import seedu.taskmanager.model.task.StartDate;
 import seedu.taskmanager.model.task.Title;
 import seedu.taskmanager.testutil.TaskBuilder;
 import seedu.taskmanager.testutil.TestTask;
-import seedu.taskmanager.model.task.StartDate;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
 public class EditCommandTest extends TaskManagerGuiTest {
@@ -25,11 +25,12 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby p/91234567 e/bobby@gmail.com a/Block 123, Bobby Street 3 t/husband";
+        String detailsToEdit = "Celebrate Bobby's birthday s/01/01/2017 e/02/01/2017 d/party! #husband";
         int taskManagerIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withTitle("Bobby").withStartDate("91234567")
-                .withEndDate("bobby@gmail.com").withDescription("Block 123, Bobby Street 3").withTags("husband").build();
+        TestTask editedTask = new TaskBuilder().withTitle("Celebrate Bobby's birthday").withStartDate("01/01/2017")
+                .withEndDate("02/01/2017")
+                .withDescription("party!").withTags("husband").build();
 
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }

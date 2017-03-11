@@ -5,8 +5,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.taskmanager.model.task.EndDate;
-
 public class EndDateTest {
 
     @Test
