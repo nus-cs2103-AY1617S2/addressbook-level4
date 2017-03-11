@@ -58,6 +58,10 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
+    /**
+     * Hijacks the tab character for autocompletion
+     * @param ke
+     */
     @FXML
     private void handleOnKeyPressed(KeyEvent ke) {
         if (ke.getCode() == KeyCode.TAB) {

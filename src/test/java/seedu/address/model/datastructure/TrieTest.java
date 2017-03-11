@@ -1,4 +1,4 @@
-package seedu.address.model;
+package seedu.address.model.datastructure;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -8,9 +8,6 @@ import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import seedu.address.model.datastructure.Trie;
-import seedu.address.model.datastructure.TrieNode;
 
 /**
  * Testing class for Trie and TrieNode data structure used for auto completion
@@ -59,6 +56,7 @@ public class TrieTest {
     public void trie_TestMatchPrefix_ReturnTrue() {
         assertTrue(trie.matchPrefix("ex"));
         assertTrue(trie.matchPrefix(""));
+        assertFalse(trie.matchPrefix("nonexistentprefix"));
     }
 
     @Test
@@ -83,9 +81,13 @@ public class TrieTest {
     }
 
     @Test
-    public void trieNode_TestContains_returnFalse() {
+    public void trieNode_TestContains() {
         TrieNode node = new TrieNode('a');
-        assertFalse(node.contains('a')); //Should not contain
+        assertFalse(node.contains('b')); //Should not contain
+
+        node.add('b');
+        assertTrue(node.contains('b'));
+        assertFalse(node.contains('\0'));
     }
 
     @Test
