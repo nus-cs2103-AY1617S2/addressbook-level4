@@ -134,7 +134,7 @@ Command | Syntax | Example
 ------- | ------ | -------
 Help    | help
 Add     | add TASK                                      | add t/submit report by f/Friday
-        | add TASK by FINISHING TIME                    | 
+        | add TASK by FINISHING TIME                    |
         | add TASK from STARTING TIME by FINISHING TIME |
 List    | list
 Select  | select INDEX                    | select 3

@@ -5,57 +5,57 @@ import seedu.taskmanager.model.tag.Tag;
 import seedu.taskmanager.model.tag.UniqueTagList;
 import seedu.taskmanager.model.task.Description;
 import seedu.taskmanager.model.task.EndDate;
-import seedu.taskmanager.model.task.Title;
 import seedu.taskmanager.model.task.StartDate;
+import seedu.taskmanager.model.task.Title;
 
 /**
  *
  */
 public class TaskBuilder {
 
-    private TestPerson person;
+    private TestTask task;
 
     public TaskBuilder() {
-        this.person = new TestPerson();
+        this.task = new TestTask();
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the TaskBuilder with the data of {@code taskToCopy}.
      */
-    public TaskBuilder(TestPerson personToCopy) {
-        this.person = new TestPerson(personToCopy);
+    public TaskBuilder(TestTask taskToCopy) {
+        this.task = new TestTask(taskToCopy);
     }
 
-    public TaskBuilder withName(String name) throws IllegalValueException {
-        this.person.setTitle(new Title(name));
+    public TaskBuilder withTitle(String title) throws IllegalValueException {
+        this.task.setTitle(new Title(title));
         return this;
     }
 
     public TaskBuilder withTags(String ... tags) throws IllegalValueException {
-        person.setTags(new UniqueTagList());
+        task.setTags(new UniqueTagList());
         for (String tag: tags) {
-            person.getTags().add(new Tag(tag));
+            task.getTags().add(new Tag(tag));
         }
         return this;
     }
 
-    public TaskBuilder withAddress(String address) throws IllegalValueException {
-        this.person.setDescription(new Description(address));
+    public TaskBuilder withDescription(String description) throws IllegalValueException {
+        this.task.setDescription(new Description(description));
         return this;
     }
 
-    public TaskBuilder withPhone(String phone) throws IllegalValueException {
-        this.person.setStartDate(new StartDate(phone));
+    public TaskBuilder withStartDate(String startDate) throws IllegalValueException {
+        this.task.setStartDate(new StartDate(startDate));
         return this;
     }
 
-    public TaskBuilder withEmail(String email) throws IllegalValueException {
-        this.person.setEndDate(new EndDate(email));
+    public TaskBuilder withEndDate(String endDate) throws IllegalValueException {
+        this.task.setEndDate(new EndDate(endDate));
         return this;
     }
 
-    public TestPerson build() {
-        return this.person;
+    public TestTask build() {
+        return this.task;
     }
 
 }

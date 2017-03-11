@@ -17,8 +17,8 @@ import seedu.taskmanager.model.tag.Tag;
 import seedu.taskmanager.model.tag.UniqueTagList;
 import seedu.taskmanager.model.task.Description;
 import seedu.taskmanager.model.task.EndDate;
-import seedu.taskmanager.model.task.Title;
 import seedu.taskmanager.model.task.StartDate;
+import seedu.taskmanager.model.task.Title;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -83,7 +83,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> description} into an {@code Optional<Description>} if {@code description} is present.
+     * Parses a {@code Optional<String> description} into an {@code Optional<Description>}
+     * if {@code description} is present.
      */
     public static Optional<Description> parseDescription(Optional<String> description) throws IllegalValueException {
         assert description != null;

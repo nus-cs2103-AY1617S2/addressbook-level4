@@ -15,8 +15,6 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.taskmanager.commons.core.Config;
 import seedu.taskmanager.commons.exceptions.DataConversionException;
-import seedu.taskmanager.commons.util.ConfigUtil;
-import seedu.taskmanager.commons.util.FileUtil;
 
 public class ConfigUtilTest {
 
@@ -78,8 +76,8 @@ public class ConfigUtilTest {
         config.setAppTitle("Typical App Title");
         config.setLogLevel(Level.INFO);
         config.setUserPrefsFilePath("C:\\preferences.json");
-        config.setTaskManagerFilePath("addressbook.xml");
-        config.setTaskManagerName("TypicalAddressBookName");
+        config.setTaskManagerFilePath("taskmanager.xml");
+        config.setTaskManagerName("TypicalTaskManagerName");
         return config;
     }
 

@@ -3,14 +3,14 @@ package seedu.taskmanager.testutil;
 import seedu.taskmanager.model.tag.UniqueTagList;
 import seedu.taskmanager.model.task.Description;
 import seedu.taskmanager.model.task.EndDate;
-import seedu.taskmanager.model.task.Title;
-import seedu.taskmanager.model.task.StartDate;
 import seedu.taskmanager.model.task.ReadOnlyTask;
+import seedu.taskmanager.model.task.StartDate;
+import seedu.taskmanager.model.task.Title;
 
 /**
- * A mutable person object. For testing only.
+ * A mutable task object. For testing only.
  */
-public class TestPerson implements ReadOnlyTask {
+public class TestTask implements ReadOnlyTask {
 
     private Title title;
     private Description description;
@@ -18,19 +18,19 @@ public class TestPerson implements ReadOnlyTask {
     private StartDate startDate;
     private UniqueTagList tags;
 
-    public TestPerson() {
+    public TestTask() {
         tags = new UniqueTagList();
     }
 
     /**
-     * Creates a copy of {@code personToCopy}.
+     * Creates a copy of {@code taskToCopy}.
      */
-    public TestPerson(TestPerson personToCopy) {
-        this.title = personToCopy.getTitle();
-        this.startDate = personToCopy.getStartDate();
-        this.endDate = personToCopy.getEndDate();
-        this.description = personToCopy.getDescription();
-        this.tags = personToCopy.getTags();
+    public TestTask(TestTask taskToCopy) {
+        this.title = taskToCopy.getTitle();
+        this.startDate = taskToCopy.getStartDate();
+        this.endDate = taskToCopy.getEndDate();
+        this.description = taskToCopy.getDescription();
+        this.tags = taskToCopy.getTags();
     }
 
     public void setTitle(Title title) {
@@ -86,9 +86,9 @@ public class TestPerson implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getTitle().value + " ");
-        sb.append("a/" + this.getDescription().value + " ");
-        sb.append("p/" + this.getStartDate().value + " ");
+        sb.append("s/" + this.getStartDate().value + " ");
         sb.append("e/" + this.getEndDate().value + " ");
+        sb.append("d/" + this.getDescription().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
