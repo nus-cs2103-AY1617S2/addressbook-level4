@@ -1,5 +1,6 @@
 package seedu.tasklist.logic.commands;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,8 +9,15 @@ import seedu.tasklist.commons.util.CollectionUtil;
 import seedu.tasklist.logic.commands.exceptions.CommandException;
 import seedu.tasklist.model.tag.UniqueTagList;
 import seedu.tasklist.model.task.Comment;
+import seedu.tasklist.model.task.DeadlineTask;
+import seedu.tasklist.model.task.EventTask;
+import seedu.tasklist.model.task.FloatingTask;
 import seedu.tasklist.model.task.Name;
+import seedu.tasklist.model.task.Priority;
+import seedu.tasklist.model.task.ReadOnlyDeadlineTask;
+import seedu.tasklist.model.task.ReadOnlyEventTask;
 import seedu.tasklist.model.task.ReadOnlyTask;
+import seedu.tasklist.model.task.Status;
 import seedu.tasklist.model.task.Task;
 import seedu.tasklist.model.task.UniqueTaskList;
 
@@ -23,7 +31,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [TASK NAME] [c/COMMENT ] [t/TAG]...\n"
+            + "Parameters: INDEX (must be a positive integer) [TASK NAME] [c/COMMENT] [p/PRIORITY] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 c/new comment here";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
@@ -78,8 +86,27 @@ public class EditCommand extends Command {
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
         Comment updatedComment = editTaskDescriptor.getComment().orElseGet(taskToEdit::getComment);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
+        Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
+        Status updatedStatus = taskToEdit.getStatus();
 
-        return new Task(updatedName, updatedComment, updatedTags);
+        String type = taskToEdit.getType();
+        switch (type) {
+        case FloatingTask.TYPE:
+            return new FloatingTask(updatedName, updatedComment, updatedPriority, updatedStatus, updatedTags);
+        case DeadlineTask.TYPE:
+            ReadOnlyDeadlineTask deadlineTaskToEdit = (ReadOnlyDeadlineTask) taskToEdit;
+            Date updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(deadlineTaskToEdit::getDeadline);
+            return new DeadlineTask(updatedName, updatedComment, updatedPriority,
+                                    updatedStatus, updatedDeadline, updatedTags);
+        case EventTask.TYPE:
+            ReadOnlyEventTask eventTaskToEdit = (ReadOnlyEventTask) taskToEdit;
+            Date updatedStartDate = editTaskDescriptor.getStartDate().orElseGet(eventTaskToEdit::getStartDate);
+            Date updatedEndDate = editTaskDescriptor.getEndDate().orElseGet(eventTaskToEdit::getEndDate);
+            return new EventTask(updatedName, updatedComment, updatedPriority,
+                                 updatedStatus, updatedStartDate, updatedEndDate, updatedTags);
+        default:
+            return null;
+        }
     }
 
     /**
@@ -90,6 +117,10 @@ public class EditCommand extends Command {
         private Optional<Name> name = Optional.empty();
         private Optional<Comment> comment = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
+        private Optional<Priority> priority = Optional.empty();
+        private Optional<Date> deadline = Optional.empty();
+        private Optional<Date> startDate = Optional.empty();
+        private Optional<Date> endDate = Optional.empty();
 
         public EditTaskDescriptor() {}
 
@@ -97,13 +128,23 @@ public class EditCommand extends Command {
             this.name = toCopy.getName();
             this.comment = toCopy.getComment();
             this.tags = toCopy.getTags();
+            this.priority = toCopy.getPriority();
+            this.deadline = toCopy.getDeadline();
+            this.startDate = toCopy.getStartDate();
+            this.endDate = toCopy.getEndDate();
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.comment, this.tags);
+            return CollectionUtil.isAnyPresent(this.name,
+                                               this.comment,
+                                               this.tags,
+                                               this.priority,
+                                               this.deadline,
+                                               this.startDate,
+                                               this.endDate);
         }
 
         public void setName(Optional<Name> name) {
@@ -131,6 +172,38 @@ public class EditCommand extends Command {
 
         public Optional<UniqueTagList> getTags() {
             return tags;
+        }
+
+        public Optional<Date> getDeadline() {
+            return deadline;
+        }
+
+        public void setDeadline(Optional<Date> deadline) {
+            this.deadline = deadline;
+        }
+
+        public Optional<Date> getStartDate() {
+            return startDate;
+        }
+
+        public void setStartDate(Optional<Date> startDate) {
+            this.startDate = startDate;
+        }
+
+        public Optional<Date> getEndDate() {
+            return endDate;
+        }
+
+        public void setEndDate(Optional<Date> endDate) {
+            this.endDate = endDate;
+        }
+
+        public Optional<Priority> getPriority() {
+            return priority;
+        }
+
+        public void setPriority(Optional<Priority> priority) {
+            this.priority = priority;
         }
     }
 }

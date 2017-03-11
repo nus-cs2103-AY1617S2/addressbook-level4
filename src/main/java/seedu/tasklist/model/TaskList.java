@@ -12,6 +12,12 @@ import javafx.collections.ObservableList;
 import seedu.tasklist.commons.core.UnmodifiableObservableList;
 import seedu.tasklist.model.tag.Tag;
 import seedu.tasklist.model.tag.UniqueTagList;
+import seedu.tasklist.model.task.DeadlineTask;
+import seedu.tasklist.model.task.EventTask;
+import seedu.tasklist.model.task.FloatingTask;
+import seedu.tasklist.model.task.ReadOnlyDeadlineTask;
+import seedu.tasklist.model.task.ReadOnlyEventTask;
+import seedu.tasklist.model.task.ReadOnlyFloatingTask;
 import seedu.tasklist.model.task.ReadOnlyTask;
 import seedu.tasklist.model.task.Task;
 import seedu.tasklist.model.task.UniqueTaskList;
@@ -101,7 +107,19 @@ public class TaskList implements ReadOnlyTaskList {
             throws UniqueTaskList.DuplicateTaskException {
         assert editedReadOnlyTask != null;
 
-        Task editedTask = new Task(editedReadOnlyTask);
+        Task editedTask = null;
+        String type = editedReadOnlyTask.getType();
+        switch (type) {
+        case FloatingTask.TYPE:
+            editedTask = new FloatingTask((ReadOnlyFloatingTask) editedReadOnlyTask);
+            break;
+        case DeadlineTask.TYPE:
+            editedTask = new DeadlineTask((ReadOnlyDeadlineTask) editedReadOnlyTask);
+            break;
+        case EventTask.TYPE:
+            editedTask = new EventTask((ReadOnlyEventTask) editedReadOnlyTask);
+            break;
+        }
         syncMasterTagListWith(editedTask);
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any person

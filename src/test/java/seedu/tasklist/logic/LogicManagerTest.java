@@ -431,7 +431,7 @@ public class LogicManagerTest {
             return new FloatingTask(
                     new Name("Task " + seed),
                     new Comment("House of " + seed),
-                    new Priority("High"), 
+                    new Priority("High"),
                     new Status(),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
