@@ -15,6 +15,7 @@ import seedu.task.logic.commands.ExitCommand;
 import seedu.task.logic.commands.FindCommand;
 import seedu.task.logic.commands.HelpCommand;
 import seedu.task.logic.commands.IncorrectCommand;
+import seedu.task.logic.commands.ListByTagCommand;
 import seedu.task.logic.commands.ListCommand;
 import seedu.task.logic.commands.SelectCommand;
 
@@ -64,6 +65,12 @@ public class Parser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+            
+        case ListByTagCommand.COMMAND_WORD:
+        case ListByTagCommand.COMMAND_WORD_SINGLE_T:
+        case ListByTagCommand.COMMAND_WORD_LONGER_HOTKEY:
+        case ListByTagCommand.COMMAND_WORD_HOTKEY:
+        	return new ListByTagCommandPaser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

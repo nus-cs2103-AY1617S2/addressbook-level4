@@ -8,146 +8,147 @@ import java.util.ArrayList;
 import seedu.task.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's date in KIT.
- * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
+ * Represents a Task's date in KIT. Guarantees: immutable; is valid as declared
+ * in {@link #isValidDate(String)}
  */
 public class Date {
 
-    //add to user guide
-    public static final String MESSAGE_DATE_CONSTRAINTS = "Date format invalid, use help to see allowed formats or try this format: DD-MM-YY hh:mm AM/PM";
-    public static final ArrayList<SimpleDateFormat> allowedFormats = new ArrayList<>();
-    private final java.util.Date value;
-    private SimpleDateFormat format = new SimpleDateFormat("d/M/y h:m a");
+	// add to user guide
+	public static final String MESSAGE_DATE_CONSTRAINTS = "Date format invalid, use help to see allowed formats or try this format: DD-MM-YY hh:mm AM/PM";
+	public static final ArrayList<SimpleDateFormat> allowedFormats = new ArrayList<>();
+	private final java.util.Date value;
+	private static SimpleDateFormat format = new SimpleDateFormat("d/M/y h:m a");
 
-    /**
-     * Validates given date.
-     *
-     * @throws IllegalValueException if given date string is invalid.
-     */
-    public Date(String date) throws IllegalValueException {        
-        assert date != null;
-        String trimmedDate = date.trim();   
-        
-        if (!isValidDate(trimmedDate)) {
-            throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
-        }        
-                
-        if (!trimmedDate.contains("-") && !trimmedDate.contains("/") && !trimmedDate.matches("[0-9]* [a-zA-Z]{3,}.*")) {
-            java.util.Date currentDate = new java.util.Date();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/y");
-            trimmedDate = dateFormat.format(currentDate) + " " + trimmedDate;
-        }
-                
-        this.value = new java.util.Date(getTime(trimmedDate));
-    }
+	/**
+	 * Validates given date.
+	 *
+	 * @throws IllegalValueException
+	 *             if given date string is invalid.
+	 */
+	public Date(String date) throws IllegalValueException {
+		assert date != null;
+		String trimmedDate = date.trim();
 
-    //date must be valid
-    private long getTime(String date) {
-        this.format = getDateFormat(date);
-        assert (format) != null;
-        try {
-             return format.parse(date).getTime();
-        } catch (ParseException e) {
-            return 0;
-        }
-    }
+		if (!isValidDate(trimmedDate)) {
+			throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
+		}
 
-    //allow both datetime, date only, time only = current date, 
-    //time assume 24HR unless AM/PM specified
-    private static void prepareDateFormats() {
-        allowedFormats.add(new SimpleDateFormat("d-M-y H:m"));
-        allowedFormats.add(new SimpleDateFormat("d-M-y HHmm"));
-        allowedFormats.add(new SimpleDateFormat("d-M-y h:m a"));
-        allowedFormats.add(new SimpleDateFormat("d-M-y h:mma"));
-        allowedFormats.add(new SimpleDateFormat("d-M-y ha"));
-        allowedFormats.add(new SimpleDateFormat("d-M-y hha"));
-        allowedFormats.add(new SimpleDateFormat("d-M-y"));
-        allowedFormats.add(new SimpleDateFormat("d/M/y H:m"));
-        allowedFormats.add(new SimpleDateFormat("d/M/y HHmm"));
-        allowedFormats.add(new SimpleDateFormat("d/M/y h:m a"));
-        allowedFormats.add(new SimpleDateFormat("d/M/y h:mma"));
-        allowedFormats.add(new SimpleDateFormat("d/M/y ha"));
-        allowedFormats.add(new SimpleDateFormat("d/M/y hha"));
-        allowedFormats.add(new SimpleDateFormat("d/M/y"));
-        allowedFormats.add(new SimpleDateFormat("dd MMM H:m"));
-        allowedFormats.add(new SimpleDateFormat("dd MMM HHmm"));
-        allowedFormats.add(new SimpleDateFormat("dd MMM h:m a"));
-        allowedFormats.add(new SimpleDateFormat("dd MMM h:mma"));
-        allowedFormats.add(new SimpleDateFormat("dd MMM ha"));
-        allowedFormats.add(new SimpleDateFormat("dd MMM hha"));
-        allowedFormats.add(new SimpleDateFormat("dd MMM"));
-        allowedFormats.add(new SimpleDateFormat("H:m"));
-        allowedFormats.add(new SimpleDateFormat("HHmm"));
-        allowedFormats.add(new SimpleDateFormat("h:m a"));
-        allowedFormats.add(new SimpleDateFormat("h:mma"));
-        allowedFormats.add(new SimpleDateFormat("ha"));
-        allowedFormats.add(new SimpleDateFormat("hha"));       
+		if (!trimmedDate.contains("-") && !trimmedDate.contains("/") && !trimmedDate.matches("[0-9]* [a-zA-Z]{3,}.*")) {
+			java.util.Date currentDate = new java.util.Date();
+			SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/y");
+			trimmedDate = dateFormat.format(currentDate) + " " + trimmedDate;
+		}
 
-    }
+		this.value = new java.util.Date(getTime(trimmedDate));
+	}
 
-    private static SimpleDateFormat getDateFormat(String input) {
-        for (SimpleDateFormat format : allowedFormats) {
-            try {                
-                ParsePosition position = new ParsePosition(0);
-                format.setLenient(false);
-                format.parse(input, position).getTime();
-                
-                if (position.getIndex() != input.length()) {
-                    throw new ParseException(input, 0);
-                } else {
-                    return format;
-                }
-            } catch (ParseException e) {
-                // check next
-            } catch (NullPointerException e) {
-                // check next
-            }
-        }        
-        return null;
-    }    
-    
-    /**
-     * Returns true if a given string is a valid date.
-     */
-    public static boolean isValidDate(String input) {
-<<<<<<< HEAD
-    	format.setLenient(false);
-    	try {
-            format.parse(input);
-            return true;
-        } catch (ParseException e) {
-=======
-        
-        if(input.trim().isEmpty()){
->>>>>>> bef7aebe6d63c2a500a6b578400fa89a45cf9e21
-            return false;
-        }
-        
-        prepareDateFormats();
-        
-       if (getDateFormat(input) != null){
-           return true;           
-       } else {
-           return false;           
-       }        
-    }
+	// date must be valid
+	private long getTime(String date) {
+		this.format = getDateFormat(date);
+		assert (format) != null;
+		try {
+			return format.parse(date).getTime();
+		} catch (ParseException e) {
+			return 0;
+		}
+	}
 
-    @Override
-    public String toString() {
-        SimpleDateFormat displayFormat = new SimpleDateFormat("d/M/y h:mm a");
-        return displayFormat.format(value);
-    }
+	// allow both datetime, date only, time only = current date,
+	// time assume 24HR unless AM/PM specified
+	private static void prepareDateFormats() {
+		allowedFormats.add(new SimpleDateFormat("d-M-y H:m"));
+		allowedFormats.add(new SimpleDateFormat("d-M-y HHmm"));
+		allowedFormats.add(new SimpleDateFormat("d-M-y h:m a"));
+		allowedFormats.add(new SimpleDateFormat("d-M-y h:mma"));
+		allowedFormats.add(new SimpleDateFormat("d-M-y ha"));
+		allowedFormats.add(new SimpleDateFormat("d-M-y hha"));
+		allowedFormats.add(new SimpleDateFormat("d-M-y"));
+		allowedFormats.add(new SimpleDateFormat("d/M/y H:m"));
+		allowedFormats.add(new SimpleDateFormat("d/M/y HHmm"));
+		allowedFormats.add(new SimpleDateFormat("d/M/y h:m a"));
+		allowedFormats.add(new SimpleDateFormat("d/M/y h:mma"));
+		allowedFormats.add(new SimpleDateFormat("d/M/y ha"));
+		allowedFormats.add(new SimpleDateFormat("d/M/y hha"));
+		allowedFormats.add(new SimpleDateFormat("d/M/y"));
+		allowedFormats.add(new SimpleDateFormat("dd MMM H:m"));
+		allowedFormats.add(new SimpleDateFormat("dd MMM HHmm"));
+		allowedFormats.add(new SimpleDateFormat("dd MMM h:m a"));
+		allowedFormats.add(new SimpleDateFormat("dd MMM h:mma"));
+		allowedFormats.add(new SimpleDateFormat("dd MMM ha"));
+		allowedFormats.add(new SimpleDateFormat("dd MMM hha"));
+		allowedFormats.add(new SimpleDateFormat("dd MMM"));
+		allowedFormats.add(new SimpleDateFormat("H:m"));
+		allowedFormats.add(new SimpleDateFormat("HHmm"));
+		allowedFormats.add(new SimpleDateFormat("h:m a"));
+		allowedFormats.add(new SimpleDateFormat("h:mma"));
+		allowedFormats.add(new SimpleDateFormat("ha"));
+		allowedFormats.add(new SimpleDateFormat("hha"));
 
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Date // instanceof handles nulls
-                && this.value.equals(((Date) other).value)); // state check
-    }
+	}
 
-    @Override
-    public int hashCode() {
-        return value.hashCode();
-    }
+	private static SimpleDateFormat getDateFormat(String input) {
+		for (SimpleDateFormat format : allowedFormats) {
+			try {
+				ParsePosition position = new ParsePosition(0);
+				format.setLenient(false);
+				format.parse(input, position).getTime();
+
+				if (position.getIndex() != input.length()) {
+					throw new ParseException(input, 0);
+				} else {
+					return format;
+				}
+			} catch (ParseException e) {
+				// check next
+			} catch (NullPointerException e) {
+				// check next
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Returns true if a given string is a valid date.
+	 */
+	public static boolean isValidDate(String input) {
+
+		format.setLenient(false);
+		try {
+			format.parse(input);
+			return true;
+		} catch (ParseException e) {
+
+			if (input.trim().isEmpty()) {
+				return false;
+			}
+
+			prepareDateFormats();
+
+			if (getDateFormat(input) != null) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	@Override
+	public String toString() {
+		SimpleDateFormat displayFormat = new SimpleDateFormat("d/M/y h:mm a");
+		return displayFormat.format(value);
+	}
+
+	@Override
+	public boolean equals(Object other) {
+		return other == this // short circuit if same object
+				|| (other instanceof Date // instanceof handles nulls
+						&& this.value.equals(((Date) other).value)); // state
+																		// check
+	}
+
+	@Override
+	public int hashCode() {
+		return value.hashCode();
+	}
 
 }

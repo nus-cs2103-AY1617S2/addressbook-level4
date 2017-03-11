@@ -43,13 +43,10 @@ public class DateTest {
         assertFalse(Date.isValidDate("")); // empty string
         assertFalse(Date.isValidDate(" ")); // spaces only
         assertFalse(Date.isValidDate("phone")); // non-numeric
-<<<<<<< HEAD
         assertFalse(Date.isValidDate("9011p041")); // alphabets within digits
         assertFalse(Date.isValidDate("9312 1534")); // spaces within digits
         assertFalse(Date.isValidDate("00-00-0000")); // invalid record
         assertFalse(Date.isValidDate("16-16-1993")); // invalid month
-
-=======
         assertFalse(Date.isValidDate("pm09:11")); // wrong order
         assertFalse(Date.isValidDate("31-02-2017 23:59")); // no 31 feb
         assertFalse(Date.isValidDate("23-13-2017 11:59 pM")); //no 13th month
@@ -65,7 +62,6 @@ public class DateTest {
         assertFalse(Date.isValidDate("13:30 pm")); // wrong time
         assertFalse(Date.isValidDate("13pm")); // wrong time
         
->>>>>>> bef7aebe6d63c2a500a6b578400fa89a45cf9e21
         // valid dates
         assertTrue(Date.isValidDate("23-12-2017 23:59"));
         assertTrue(Date.isValidDate("23-12-2017 2359"));

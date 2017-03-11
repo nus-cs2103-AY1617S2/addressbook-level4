@@ -3,6 +3,9 @@ package seedu.task.commons.util;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import seedu.task.model.tag.Tag;
+import seedu.task.model.tag.UniqueTagList;
+
 /**
  * Helper functions for handling strings.
  */
@@ -35,6 +38,15 @@ public class StringUtil {
         }
         return false;
     }
+    
+    public static boolean containsWordIgnoreCase(UniqueTagList tags, String keyword) {
+		for(Tag t : tags){
+			if(containsWordIgnoreCase((t.tagName),keyword))
+				return true;
+		}
+		return false;
+	}
+    
 
     /**
      * Returns a detailed message of the t, including the stack trace.
@@ -55,4 +67,6 @@ public class StringUtil {
     public static boolean isUnsignedInteger(String s) {
         return s != null && s.matches("^0*[1-9]\\d*$");
     }
+
+	
 }
