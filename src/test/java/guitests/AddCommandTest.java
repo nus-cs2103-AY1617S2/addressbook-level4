@@ -5,10 +5,10 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import guitests.guihandles.PersonCardHandle;
-import seedu.address.commons.core.Messages;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.testutil.TestPerson;
-import seedu.address.testutil.TestUtil;
+import seedu.geekeep.commons.core.Messages;
+import seedu.geekeep.logic.commands.AddCommand;
+import seedu.geekeep.testutil.TestPerson;
+import seedu.geekeep.testutil.TestUtil;
 
 public class AddCommandTest extends AddressBookGuiTest {
 
@@ -27,7 +27,7 @@ public class AddCommandTest extends AddressBookGuiTest {
 
         //add duplicate person
         commandBox.runCommand(td.hoon.getAddCommand());
-        assertResultMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
         assertTrue(personListPanel.isListMatching(currentList));
 
         //add to empty list
@@ -43,7 +43,7 @@ public class AddCommandTest extends AddressBookGuiTest {
         commandBox.runCommand(personToAdd.getAddCommand());
 
         //confirm the new card contains the right data
-        PersonCardHandle addedCard = personListPanel.navigateToPerson(personToAdd.getName().fullName);
+        PersonCardHandle addedCard = personListPanel.navigateToPerson(personToAdd.getTitle().fullTitle);
         assertMatching(personToAdd, addedCard);
 
         //confirm the list now contains all previous persons plus the new person
