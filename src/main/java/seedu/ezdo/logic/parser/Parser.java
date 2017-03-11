@@ -16,8 +16,8 @@ import seedu.ezdo.logic.commands.HelpCommand;
 import seedu.ezdo.logic.commands.IncorrectCommand;
 import seedu.ezdo.logic.commands.KillCommand;
 import seedu.ezdo.logic.commands.ListCommand;
-import seedu.ezdo.logic.commands.SelectCommand;
 import seedu.ezdo.logic.commands.DoneCommand;
+import seedu.ezdo.logic.commands.SelectCommand;
 
 /**
  * Parses user input.

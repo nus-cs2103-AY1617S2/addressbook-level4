@@ -5,8 +5,9 @@ import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import java.util.Optional;
 
 import seedu.ezdo.logic.commands.Command;
-import seedu.ezdo.logic.commands.IncorrectCommand;
 import seedu.ezdo.logic.commands.DoneCommand;
+import seedu.ezdo.logic.commands.IncorrectCommand;
+
 
 /**
  * Parses input arguments and creates a new DoneCommand object
