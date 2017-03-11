@@ -24,7 +24,7 @@ public class TaskList implements Iterable<Task> {
                 return Optional.of(task);
             }
         }
-        return null;
+        return Optional.ofNullable(null);
     }
 
     /** Adds a task to the list.  */
