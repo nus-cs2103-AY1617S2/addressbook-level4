@@ -9,7 +9,7 @@ import seedu.doit.model.tag.UniqueTagList;
  * Represents a Task in the task manager.
  * Guarantees: details are present and not null, field values are validated.
  */
-public class Event implements ReadOnlyTask {
+public class Event implements ReadOnlyEvent {
 
     private Name name;
     private Priority priority;
@@ -30,9 +30,9 @@ public class Event implements ReadOnlyTask {
     }
 
     /**
-     * Creates a copy of the given ReadOnlyTask.
+     * Creates a copy of the given ReadOnlyEvent.
      */
-    public Event(ReadOnlyTask source) {
+    public Event(ReadOnlyEvent source) {
         this(source.getName(), source.getPriority(), source.getDeadline(), source.getDescription(), source.getTags());
     }
 
@@ -91,7 +91,7 @@ public class Event implements ReadOnlyTask {
     /**
      * Updates this task with the details of {@code replacement}.
      */
-    public void resetData(ReadOnlyTask replacement) {
+    public void resetData(ReadOnlyEvent replacement) {
         assert replacement != null;
 
         this.setName(replacement.getName());
@@ -104,8 +104,8 @@ public class Event implements ReadOnlyTask {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-            || (other instanceof ReadOnlyTask // instanceof handles nulls
-            && this.isSameStateAs((ReadOnlyTask) other));
+            || (other instanceof ReadOnlyEvent // instanceof handles nulls
+            && this.isSameStateAs((ReadOnlyEvent) other));
     }
 
     @Override
