@@ -38,18 +38,13 @@ public class SortCommand extends Command {
     @Override
     public CommandResult execute() {
         switch(sortType) {
-
         case PRIORITY:
             model.sortTasksByPriority();
             return new CommandResult(getMessageForPersonListSortedSummary(sortType));
         default:
-            break;
+            model.sortTasksByPriority();
+            return new CommandResult(getMessageForPersonListSortedSummary(sortType));
         }
-        return null;
-    }
-
-    public static boolean canCommandBeTriggeredByWord(String word) {
-        return commandWords.contains(word) || DEFAULT_COMMAND_WORD.equals(word);
     }
 
     public static CommandInfo info() {

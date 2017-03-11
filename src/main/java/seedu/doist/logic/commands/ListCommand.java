@@ -42,16 +42,20 @@ public class ListCommand extends Command {
             return new CommandResult(MESSAGE_SUCCESS);
         } else {
             model.updateFilteredTaskList(tagList);
-            String message = MESSAGE_SUCCESS + " under: ";
-            for (Tag tag : tagList) {
-                message += tag.tagName + " ";
-            }
-            message = message.trim();
-            return new CommandResult(message);
+            return new CommandResult(getSuccessMessageListUnder(tagList));
         }
     }
 
     public static CommandInfo info() {
         return new CommandInfo(commandWords, DEFAULT_COMMAND_WORD);
+    }
+
+    public static String getSuccessMessageListUnder(UniqueTagList tagList) {
+        String message = MESSAGE_SUCCESS + " under: ";
+        for (Tag tag : tagList) {
+            message += tag.tagName + " ";
+        }
+        message = message.trim();
+        return message;
     }
 }

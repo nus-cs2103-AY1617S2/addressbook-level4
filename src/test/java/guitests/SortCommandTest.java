@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.Test;
 
 import seedu.doist.logic.commands.Command;
+import seedu.doist.logic.commands.SortCommand;
 import seedu.doist.logic.commands.SortCommand.SortType;
 import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskPriorityComparator;
@@ -15,10 +16,16 @@ import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskPriorityComparator;
 public class SortCommandTest extends AddressBookGuiTest {
 
     @Test
-    public void sort() {
+    public void testSortByPriority() {
         commandBox.runCommand("sort priority");
         assertSortedByPriority();
         assertResultMessage(Command.getMessageForPersonListSortedSummary(SortType.PRIORITY));
+    }
+
+    @Test
+    public void testSortByInvalidCriterion() {
+        commandBox.runCommand("sort some_invalid_criterion");
+        assertResultMessage(SortCommand.MESSAGE_SORT_CONSTRAINTS);
     }
 
     private void assertSortedByPriority() {

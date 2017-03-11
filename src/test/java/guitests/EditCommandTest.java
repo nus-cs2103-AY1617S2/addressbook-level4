@@ -10,6 +10,7 @@ import seedu.doist.commons.core.Messages;
 import seedu.doist.logic.commands.EditCommand;
 import seedu.doist.model.tag.Tag;
 import seedu.doist.model.task.Description;
+import seedu.doist.model.task.Priority;
 import seedu.doist.testutil.TaskBuilder;
 import seedu.doist.testutil.TestTask;
 
@@ -97,6 +98,12 @@ public class EditCommandTest extends AddressBookGuiTest {
     public void edit_duplicatePerson_failure() {
         commandBox.runCommand("edit 3 Alice Pauline");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
+    }
+
+    @Test
+    public void testInvalidPriority() {
+        commandBox.runCommand("edit 3 \\as invalidPriority");
+        assertResultMessage(Priority.MESSAGE_PRIORITY_CONSTRAINTS);
     }
 
     /**
