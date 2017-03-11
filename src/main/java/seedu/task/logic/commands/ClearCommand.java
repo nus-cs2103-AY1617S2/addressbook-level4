@@ -17,4 +17,9 @@ public class ClearCommand extends Command {
         model.resetData(new TaskBook());
         return new CommandResult(MESSAGE_SUCCESS);
     }
+    
+    @Override
+    public boolean isMutable() {
+	return true;
+    }
 }
