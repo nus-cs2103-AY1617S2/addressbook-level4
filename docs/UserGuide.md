@@ -129,6 +129,29 @@ Examples:
   Returns Any task having names `Lab1`, `OP1`, or `OP2`
 
 
+### Marking specified items from the task manager as done: `done`
+Marking the specified item from the task manager as done.<br>
+Format: `done [ITEM_TYPE] INDEX`
+
+> Marks the item at the specified `INDEX` as done. <br>
+> `ITEM_TYPE` can be `ftask`, `floating tasks` and `anytime` for floating tasks or nothing,`task` and `before` for tasks. This is only use for the default page, where there are multiple columns.
+<img src="" width>
+> The index otherwise refers to the index number shown in the most recent listing of pop-ups.<br>
+<img src="" width>
+> The index **must be a positive integer** 1, 2, 3, ...
+> Events cannot be marked.
+> 
+Examples:
+
+* `done 2`<br>
+  Marks the 2nd item in the task manager as done.
+* `find MA1521 Tutorial 1`<br>
+  `done 1`<br>
+  Marks the 1st item in the results of the `find` command.
+* `done ftask 2`<br>
+  Marks the 3rd floating task shown in the floating task column of the default  task manager page as done.
+
+
 ### Deleting specified items from the task manager: `delete`
 Deletes the specified item from the task manager.<br>
 Format: `delete INDEX`
@@ -176,7 +199,8 @@ There is no need to save manually.
 * **Add Task** : `add TASKNAME d/DEADLINE DATE [t/DEADLINE TIME] [p/PRIORITY] [#TAG]...`<br>
   e.g.
   * `add completeUserGuide d/28-Feb-2017 t/2400 p/high #Important`
-* **Add Floating Task** : `add FLOATINGTASKNAME [p/PRIORITY] [#TAG]...`<br>
+
+* * **Add Floating Task** : `add FLOATINGTASKNAME [p/PRIORITY] [#TAG]...`<br>
   e.g. 
   * `add reachDiamondRank p/low #Overwatch`
 
@@ -184,21 +208,34 @@ There is no need to save manually.
   e.g. 
   * `add finishCS3230Lab sd/01-Mar-17 ed/01-Mar-17 st/2000 et/2200 p/med #CS3230`
   * `add finishCS3230Lab sd/01-Mar-17 st/2000 p/med #CS3230`
+
 * **Undo** : `undo` <br>
   e.g.
   * `undo`
+
 * **Edit**  `edit INDEX [t/DEADLINE TIME] [p/PRIORITY] [#TAG]...`<br>
   e.g.
   * `edit 1 t/9pm p/high #CS1010`
-
-* **Clear** : `clear`
-  e.g.
-  * `clear`
-* **Delete** : `delete INDEX` <br>
-  e.g.
-  * `delete 3`
 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
   e.g.
   * `find MA1101R assignment`
   * `find 01-Mar-2017`
+
+* **Done** : `done [ITEM_TYPE] INDEX` <br>
+  e.g.
+  * `done 1`
+  * `done ftask 1`
+  * `done task 3`
+
+* **Delete** : `delete INDEX` <br>
+  e.g.
+  * `delete 3`
+
+* **Clear** : `clear` <br>
+  e.g.
+  * `clear`
+
+
+  
+
