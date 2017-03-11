@@ -39,6 +39,7 @@ import seedu.ezdo.logic.commands.FindCommand;
 import seedu.ezdo.logic.commands.HelpCommand;
 import seedu.ezdo.logic.commands.KillCommand;
 import seedu.ezdo.logic.commands.ListCommand;
+import seedu.ezdo.logic.commands.SaveCommand;
 import seedu.ezdo.logic.commands.SelectCommand;
 import seedu.ezdo.logic.commands.exceptions.CommandException;
 import seedu.ezdo.model.EzDo;
@@ -418,6 +419,13 @@ public class LogicManagerTest {
                 expectedList);
     }
 
+    @Test
+    public void execute_save_successful() {
+        String directory = "./";
+
+        assertCommandSuccess("save " + directory, String.format(SaveCommand.MESSAGE_SAVE_TASK_SUCCESS,
+                directory + SaveCommand.DATA_FILE_NAME), new EzDo(), Collections.emptyList());
+    }
 
     /**
      * A utility class to generate test data.
