@@ -36,6 +36,7 @@ public class LogicManager extends ComponentManager implements Logic {
         Command command = parser.parseCommand(commandText);
         if(command.isMutable()) {
             undoStack.push(new TaskBook(model.getTaskBook()));
+            redoStack.clear();
         }
         command.setData(model);
         return command.execute();
