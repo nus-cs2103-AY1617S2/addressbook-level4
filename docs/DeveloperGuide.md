@@ -393,38 +393,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | simple search for finding an item | navigate to certain tasks more conveniently
 `* * *` | user | view uncompleted/completed tasks | feel sense of achievement and stress
 `* * *` | user | specify which folder data is stored | manipulate the data more directly
-`* *` | user | break my tasks into subtasks | be clear of the individual steps of the task
-`* *` | user | have a bullet journal workflow | use my favourite workflow more effectively
-`* *` | user | group my todos | arrange them by projects, assignments, classes, etc.
-`* *` | user | retrieve my todos by groups | determine my focus when needed
-`* *` | user | add deadlines for my todos | keep track of when tasks are due
-`* *` | user | view my todos by deadlines | know which ones are more urgent
-`* *` | user | set daily goals of the min no. of completed tasks | have clear targets
-`* *` | user | get reminders of my goals and set their frequency | remember my goals
-`* *` | user | receive meaningful rewards for completing my daily goals | stay motivated
-`* *` | user | have my friends who use the app share their todos with me | keep track of tasks without adding them myself
-`* *` | user | receive a weekly, monthly or annually report of my done tasks and remaining todos | regularly review my efficiency
-`* *` | user | view my done tasks of up to a month | stay accountable and be proud of myself once in a while
-`* *` | user | check if event falls on a local PH | to avoid inconvenience
-`* *` | user | merge multiple events to become subtasks under one event | clean up the space
-`* *` | user | display tasks by date | clearly know what to do at which day
-`* *` | user | add periodic tasks | need not to add one task for many times
-`* *` | user | have short yet clear command words | need not to try very hard to remember them
-`* *` | user | have a shortcut for showing and hiding the main window | need not to look for it when I need it
-`* *` | user | hide the overdue tasks into one single row and unfolded by a click | usually see today's tasks
-`* *` | user | search for certain task by the name or tag | locate the task easily
-`* *` | user | show tasks of certain day | get an idea of what to do on that day
-`* *` | user | divide multiple-days task to several tasks and show them on different days | clearly see each day's tasks
-`* *` | user | only show the days with tasks | need not to scroll through a lot of no-tasks days to find the days with tasks
-`*` | user | have inspirational quotes reminders | feel more motivated when doing my tasks
-`*` | user | see my goals | see how my tasks are in line with them
-`*` | user | read productivity tips | be more productive by trying new things
-`*` | user | see suggestions on how to do tasks | remove barriers that stop me
-`*` | user | see how much time I spend on tasks | know where i'm spending my time
-`*` | user | do tasks via pomodoro | work on my tasks in 25 minute sprints
-`*` | user | have shortcuts for adding tasks | save time using the software
-`*` | user | see advice from influential people | make more meaningful decisions about my day
-`*` | user | see when i'm most efficient | work accordingly and get more things done
+
 
 ## Appendix B : Use Cases
 
