@@ -81,10 +81,6 @@ public class StringUtil {
                 stream(splittedStringIndexes).
                 filter(s -> !s.isEmpty()).
                 toArray(String[]::new);
-        for (String splittedStringIndex: splittedStringIndexes) {
-            System.out.print(" " + splittedStringIndex);
-        }
-        System.out.println("");
 
         // Process formatted stringIndexes
         List<Integer> indexes = new ArrayList<Integer>();

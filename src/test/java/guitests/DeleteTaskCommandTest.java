@@ -101,22 +101,8 @@ public class DeleteTaskCommandTest extends ToLuistGuiTest {
 
     @Test
     public void deleteMultipleTasksTogether1() {
-        String command = "delete 2-4, 6 7  11 ";
-        int[] taskNumberLeft = {1, 5, 8, 9, 10};
-        deleteMultipleTasksTogether(command, taskNumberLeft);
-    }
-
-    @Test
-    public void deleteMultipleTasksTogether2() {
-        String command = "delete 1-3 5- 7,  9 -10";
-        int[] taskNumberLeft = {4, 8};
-        deleteMultipleTasksTogether(command, taskNumberLeft);
-    }
-
-    @Test
-    public void deleteMultipleTasksTogether3() {
-        String command = "delete  - 2, 4 - 6, 8- ";
-        int[] taskNumberLeft = {3, 7};
+        String command = "delete  - 2, 4 -  5, 7    9- ";
+        int[] taskNumberLeft = {3, 6, 8};
         deleteMultipleTasksTogether(command, taskNumberLeft);
     }
 }

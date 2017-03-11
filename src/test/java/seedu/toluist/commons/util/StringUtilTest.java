@@ -174,9 +174,23 @@ public class StringUtilTest {
     }
 
     @Test
+    public void splitIndexes_obtainIndexesFromPoorlyFormattedStringIndexes() {
+        List<Integer> actual = StringUtil.splitIndexes("1-2  ,    3-   4   5  -6   , 7   -      8", 8);
+        List<Integer> expected = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8);
+        assertTrue(actual.equals(expected));
+    }
+
+    @Test
     public void splitIndexes_obtainIndexesFromAssortedIndexes() {
         List<Integer> actual = StringUtil.splitIndexes("1 3,  7", 8);
         List<Integer> expected = Arrays.asList(1, 3, 7);
+        assertTrue(actual.equals(expected));
+    }
+
+    @Test
+    public void splitIndexes_obtainIndexesFromAssortedUnorderedIndexes() {
+        List<Integer> actual = StringUtil.splitIndexes("3, 2, 8, 5-7", 8);
+        List<Integer> expected = Arrays.asList(3, 2, 8, 5, 6, 7);
         assertTrue(actual.equals(expected));
     }
 

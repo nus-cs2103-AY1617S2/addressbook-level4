@@ -38,10 +38,8 @@ public class TodoList {
     public ArrayList<Task> getTasks(List<Integer> indexes) {
         ArrayList<Task> tasks = new ArrayList<Task>();
         for (int index: indexes) {
-            System.out.print(" " + index);
             tasks.add(allTasks.get(index - 1));
         }
-        System.out.println("");
         return tasks;
     }
 
