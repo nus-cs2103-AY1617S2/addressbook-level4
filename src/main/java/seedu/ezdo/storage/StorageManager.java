@@ -46,7 +46,8 @@ public class StorageManager extends ComponentManager implements Storage {
         this(new XmlEzDoStorage(ezDoFilePath), new JsonUserPrefsStorage(userPrefsFilePath), config);
     }
 //    public StorageManager(String ezDoFilePath, String userPrefsFilePath, String configFilePath) {
-//        this(new XmlEzDoStorage(ezDoFilePath), new JsonUserPrefsStorage(userPrefsFilePath), new JsonConfigStorage(configFilePath));
+//        this(new XmlEzDoStorage(ezDoFilePath), new JsonUserPrefsStorage(userPrefsFilePath),
+//    new JsonConfigStorage(configFilePath));
 //    }
     // ================ UserPrefs methods ==============================
 
