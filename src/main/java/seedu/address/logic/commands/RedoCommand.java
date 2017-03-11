@@ -28,32 +28,35 @@ public class RedoCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Redone";
     public static final String MESSAGE_DUPLICATE_TASK = "No previous command/invalid action";
 
-    private final Task toAdd;
+    //private final Task toAdd;
 
     /**
-     * Creates a Redo Command using raw values.
-     *
-     * @throws IllegalValueException if any of the raw values are invalid
+     * Creates a Redo Command.
      */
-    public RedoCommand(String title, Optional<Deadline> date, String priority, String instruction, Set<String> tags)
-            throws IllegalValueException {
-        final Set<Tag> tagSet = new HashSet<>();
+    public RedoCommand() {
+        /*
+    	final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
         toAdd = null;
+        */
         //Where is the hashset stored?
     }
     
     @Override
     public CommandResult execute() throws CommandException {
-        assert model != null;
+        /*
+    	assert model != null;
         try {
             model.addTask(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
-
+		*/
+    	
+    	// Dummy return
+    	return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 }

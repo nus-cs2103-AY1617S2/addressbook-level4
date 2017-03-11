@@ -27,25 +27,25 @@ public class UndoCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Undone";
     public static final String MESSAGE_DUPLICATE_TASK = "Unable to undo";
-
+    /*
     private final Task toAdd;
-
+	*/
     /**
-     * Creates an AddCommand using raw values.
-     *
-     * @throws IllegalValueException if any of the raw values are invalid
+     * Creates an Undo command.
      */
-    public UndoCommand(String title, Optional<Deadline> date, String priority, String instruction, Set<String> tags)
-            throws IllegalValueException {
+    public UndoCommand() {
+    	/*
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
         toAdd = null;
+        */
     }
 
     @Override
     public CommandResult execute() throws CommandException {
+    	/*
         assert model != null;
         try {
             model.addTask(toAdd);
@@ -53,7 +53,10 @@ public class UndoCommand extends Command {
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
-
+		*/
+    	
+    	// Dummy return
+    	return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 
 }
