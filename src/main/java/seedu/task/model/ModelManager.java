@@ -101,6 +101,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
         redoStack.push(new TaskBook(taskBook));
         taskBook.resetData(undoStack.pop());
+        indicateTaskBookChanged();
     }
 
     @Override
@@ -110,6 +111,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
         undoStack.push(new TaskBook(taskBook));
         taskBook.resetData(redoStack.pop());
+        indicateTaskBookChanged();
     }
 
     //=========== Filtered Person List Accessors =============================================================
