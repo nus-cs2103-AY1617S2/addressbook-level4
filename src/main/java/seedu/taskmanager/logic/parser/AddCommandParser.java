@@ -18,7 +18,9 @@ import seedu.taskmanager.logic.commands.IncorrectCommand;
  * Parses input arguments and creates a new AddCommand object
  */
 public class AddCommandParser {
-
+     
+	public static final String EMPTY_FIELD ="EMPTY_FIELD";
+	
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
@@ -28,12 +30,17 @@ public class AddCommandParser {
                 new ArgumentTokenizer(PREFIX_DATE, PREFIX_DEADLINE, PREFIX_STARTTIME, PREFIX_ENDTIME/*, PREFIX_CATEGORY*/);
         argsTokenizer.tokenize(args);
         try {
+        	String taskname = argsTokenizer.getPreamble().get();
+        	String date = argsTokenizer.getValue(PREFIX_DATE).orElse(EMPTY_FIELD);
+        	String deadline = argsTokenizer.getValue(PREFIX_DEADLINE).orElse(EMPTY_FIELD);
+        	String starttime = argsTokenizer.getValue(PREFIX_STARTTIME).orElse(EMPTY_FIELD);
+        	String endtime = argsTokenizer.getValue(PREFIX_ENDTIME).orElse(EMPTY_FIELD);
             return new AddCommand(
-                    argsTokenizer.getPreamble().get(),
-                    argsTokenizer.getValue(PREFIX_DATE).get(),
-                    argsTokenizer.getValue(PREFIX_DEADLINE).get(),
-                    argsTokenizer.getValue(PREFIX_STARTTIME).get(),
-                    argsTokenizer.getValue(PREFIX_ENDTIME).get()
+                    taskname,
+                    date,
+                    deadline,
+                    starttime,
+                    endtime
 //                    ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_CATEGORY)
             );
         } catch (NoSuchElementException nsee) {

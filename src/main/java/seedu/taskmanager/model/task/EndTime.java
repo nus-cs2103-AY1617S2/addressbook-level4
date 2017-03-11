@@ -12,6 +12,9 @@ public class EndTime {
     public static final String ENDTIME_VALIDATION_REGEX1 = "\\d+";
     public static final String ENDTIME_VALIDATION_REGEX2 = "[a-zA-Z]+";
     public static final String ENDTIME_VALIDATION_REGEX3 = "\\d{2}/\\d{2}/\\d{2}";
+    public static final String ENDTIME_VALIDATION_REGEX4 = "\\w+ \\d+";
+    public static final String ENDTIME_VALIDATION_REGEX5 = "(\\d{2}/\\d{2}/\\d{2}) (\\d+)";
+    public static final String EMPTY_FIELD ="EMPTY_FIELD";
 
     public final String value;
 
@@ -33,7 +36,9 @@ public class EndTime {
      * Returns true if a given string is a valid Task end time.
      */
     public static boolean isValidEndTime(String test) {
-        return test.matches(ENDTIME_VALIDATION_REGEX1) || test.matches(ENDTIME_VALIDATION_REGEX2) || test.matches(ENDTIME_VALIDATION_REGEX3);
+        return test.matches(ENDTIME_VALIDATION_REGEX1) || test.matches(ENDTIME_VALIDATION_REGEX2) 
+        		|| test.matches(ENDTIME_VALIDATION_REGEX3) || test.matches(ENDTIME_VALIDATION_REGEX4) 
+        		|| test.matches(ENDTIME_VALIDATION_REGEX5) || test.matches(EMPTY_FIELD);
     }
 
     @Override
