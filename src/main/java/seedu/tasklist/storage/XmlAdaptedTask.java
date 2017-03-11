@@ -35,16 +35,12 @@ public class XmlAdaptedTask {
     private String priority;
     @XmlElement(required = false)
     private boolean status;
-<<<<<<< HEAD
-=======
     @XmlElement(required = false)
     private String deadline;
     @XmlElement(required = false)
     private String startDate;
     @XmlElement(required = false)
     private String endDate;
->>>>>>> Changed TaskList to take in 3 types of tasks
-
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
@@ -86,17 +82,17 @@ public class XmlAdaptedTask {
         final Status status = new Status(this.status);
         final UniqueTagList tags = new UniqueTagList(taskTags);
         switch (this.type) {
-            case FloatingTask.TYPE:
-                return new FloatingTask(name, comment, priority, status, tags);
-            case DeadlineTask.TYPE:
-                final Date deadline = new Date(this.deadline);
-                return new DeadlineTask(name, comment, priority, status, deadline, tags);
-            case EventTask.TYPE:
-                final Date startDate = new Date(this.startDate);
-                final Date endDate = new Date(this.endDate);
-                return new EventTask(name, comment, priority, status, startDate, endDate, tags);
-            default:
-                return null;
+        case FloatingTask.TYPE:
+            return new FloatingTask(name, comment, priority, status, tags);
+        case DeadlineTask.TYPE:
+            final Date deadline = new Date(this.deadline);
+            return new DeadlineTask(name, comment, priority, status, deadline, tags);
+        case EventTask.TYPE:
+            final Date startDate = new Date(this.startDate);
+            final Date endDate = new Date(this.endDate);
+            return new EventTask(name, comment, priority, status, startDate, endDate, tags);
+        default:
+            return null;
         }
     }
 }

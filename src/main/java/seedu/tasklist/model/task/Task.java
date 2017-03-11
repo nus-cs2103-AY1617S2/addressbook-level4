@@ -9,25 +9,6 @@ import seedu.tasklist.model.tag.UniqueTagList;
 public abstract class Task implements ReadOnlyTask {
 
     public abstract void setName(Name name);
-    private Name name;
-    private Comment comment;
-    private Priority priority;
-    private Status status;
-
-    private UniqueTagList tags;
-
-
-    /**
-     * Every field must be present and not null.
-     */
-    public Task(Name name, Comment comment, Priority priority, Status status, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, comment, priority, status, tags);
-        this.name = name;
-        this.comment = comment;
-        this.priority = priority;
-        this.status = status;
-        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
-    }
 
     public abstract Name getName();
 

@@ -91,21 +91,21 @@ public class EditCommand extends Command {
 
         String type = taskToEdit.getType();
         switch (type) {
-            case FloatingTask.TYPE:
-                return new FloatingTask(updatedName, updatedComment, updatedPriority, updatedStatus, updatedTags);
-            case DeadlineTask.TYPE:
-                ReadOnlyDeadlineTask deadlineTaskToEdit = (ReadOnlyDeadlineTask) taskToEdit;
-                Date updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(deadlineTaskToEdit::getDeadline);
-                return new DeadlineTask(updatedName, updatedComment, updatedPriority,
-                                        updatedStatus, updatedDeadline, updatedTags);
-            case EventTask.TYPE:
-                ReadOnlyEventTask eventTaskToEdit = (ReadOnlyEventTask) taskToEdit;
-                Date updatedStartDate = editTaskDescriptor.getStartDate().orElseGet(eventTaskToEdit::getStartDate);
-                Date updatedEndDate = editTaskDescriptor.getEndDate().orElseGet(eventTaskToEdit::getEndDate);
-                return new EventTask(updatedName, updatedComment, updatedPriority,
-                                     updatedStatus, updatedStartDate, updatedEndDate, updatedTags);
-            default:
-                return null;
+        case FloatingTask.TYPE:
+            return new FloatingTask(updatedName, updatedComment, updatedPriority, updatedStatus, updatedTags);
+        case DeadlineTask.TYPE:
+            ReadOnlyDeadlineTask deadlineTaskToEdit = (ReadOnlyDeadlineTask) taskToEdit;
+            Date updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(deadlineTaskToEdit::getDeadline);
+            return new DeadlineTask(updatedName, updatedComment, updatedPriority,
+                                    updatedStatus, updatedDeadline, updatedTags);
+        case EventTask.TYPE:
+            ReadOnlyEventTask eventTaskToEdit = (ReadOnlyEventTask) taskToEdit;
+            Date updatedStartDate = editTaskDescriptor.getStartDate().orElseGet(eventTaskToEdit::getStartDate);
+            Date updatedEndDate = editTaskDescriptor.getEndDate().orElseGet(eventTaskToEdit::getEndDate);
+            return new EventTask(updatedName, updatedComment, updatedPriority,
+                                 updatedStatus, updatedStartDate, updatedEndDate, updatedTags);
+        default:
+            return null;
         }
     }
 

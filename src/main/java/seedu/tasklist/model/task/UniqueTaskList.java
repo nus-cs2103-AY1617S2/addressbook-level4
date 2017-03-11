@@ -56,8 +56,18 @@ public class UniqueTaskList implements Iterable<Task> {
         if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
             throw new DuplicateTaskException();
         }
-
-        taskToUpdate.resetData(editedTask);
+        String type = taskToUpdate.getType();
+        switch (type) {
+        case FloatingTask.TYPE:
+            ((FloatingTask) taskToUpdate).resetData((ReadOnlyFloatingTask) editedTask);
+            break;
+        case DeadlineTask.TYPE:
+            ((DeadlineTask) taskToUpdate).resetData((ReadOnlyDeadlineTask) editedTask);
+            break;
+        case EventTask.TYPE:
+            ((EventTask) taskToUpdate).resetData((ReadOnlyEventTask) editedTask);
+            break;
+        }
         // TODO: The code below is just a workaround to notify observers of the updated task.
         // The right way is to implement observable properties in the Task class.
         // Then, TaskCard should then bind its text labels to those observable properties.
@@ -87,12 +97,15 @@ public class UniqueTaskList implements Iterable<Task> {
         for (final ReadOnlyTask task : tasks) {
             String type = task.getType();
             switch (type) {
-                case FloatingTask.TYPE:
-                    replacement.add(new FloatingTask((ReadOnlyFloatingTask) task));
-                case DeadlineTask.TYPE:
-                    replacement.add(new DeadlineTask((ReadOnlyDeadlineTask) task));
-                case EventTask.TYPE:
-                    replacement.add(new EventTask((ReadOnlyEventTask) task));
+            case FloatingTask.TYPE:
+                replacement.add(new FloatingTask((ReadOnlyFloatingTask) task));
+                break;
+            case DeadlineTask.TYPE:
+                replacement.add(new DeadlineTask((ReadOnlyDeadlineTask) task));
+                break;
+            case EventTask.TYPE:
+                replacement.add(new EventTask((ReadOnlyEventTask) task));
+                break;
             }
         }
         setTasks(replacement);
