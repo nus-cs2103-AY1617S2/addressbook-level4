@@ -213,11 +213,11 @@ public class LogicManagerTest {
 
     @Test
     public void execute_add_invalidTaskData() {
-        assertCommandFailure("add []\\[;] p/1 sd/today ed/tomorrow i/valid, information",
+        assertCommandFailure("add n/[]\\[;] p/1 sd/today ed/tomorrow i/valid, information",
                 Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/not_numbers sd/today ed/tomorrow i/valid, information",
+        assertCommandFailure("add n/Valid Name p/not_numbers sd/today ed/tomorrow i/valid, information",
                 PriorityLevel.MESSAGE_PRIORITY_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/1 sd/today ed/tomorrow "
+        assertCommandFailure("add n/Valid Name p/1 sd/today ed/tomorrow "
                 + "i/valid, information c/invalid_-[.category",
                 Category.MESSAGE_CATEGORY_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/1 sd/today to next week ed/tomorrow i/valid, information",
@@ -458,7 +458,7 @@ public class LogicManagerTest {
 
             cmd.append("add ");
 
-            cmd.append(p.getName().toString());
+            cmd.append(" n/").append(p.getName().toString());
             cmd.append(" p/").append(p.getPriorityLevel());
             cmd.append(" sd/").append(ParserUtil.parseStartDate(p.getStartDateTime().toString()));
             cmd.append(" ed/").append(ParserUtil.parseEndDate(p.getEndDateTime().toString()));

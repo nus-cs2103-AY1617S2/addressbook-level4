@@ -100,7 +100,7 @@ public class TestTask implements ReadOnlyTask {
 
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
-        sb.append("add " + this.getName().fullName + " ");
+        sb.append("add " + "n/" + this.getName().fullName + " ");
         sb.append("p/" + this.getPriorityLevel().value + " ");
         sb.append("sd/" + this.getStartDateTime().value + " ");
         sb.append("ed/" + this.getEndDateTime().value + " ");

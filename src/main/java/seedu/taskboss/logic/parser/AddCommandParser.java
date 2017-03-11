@@ -4,10 +4,12 @@ import static seedu.taskboss.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMA
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_INFORMATION;
+import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_START_DATE;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.AddCommand;
@@ -25,22 +27,30 @@ public class AddCommandParser {
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_START_DATE,
+                new ArgumentTokenizer(PREFIX_NAME, PREFIX_PRIORITY, PREFIX_START_DATE,
                         PREFIX_END_DATE, PREFIX_INFORMATION, PREFIX_CATEGORY);
         argsTokenizer.tokenize(args);
         try {
             return new AddCommand(
-                    argsTokenizer.getPreamble().get(),
-                    argsTokenizer.getValue(PREFIX_PRIORITY).get(),
+                    argsTokenizer.getValue(PREFIX_NAME).get(),
+                    checkEmpty(argsTokenizer.getValue(PREFIX_PRIORITY)),
                     ParserUtil.parseStartDate(argsTokenizer.getValue(PREFIX_START_DATE).get()),
                     ParserUtil.parseEndDate(argsTokenizer.getValue(PREFIX_END_DATE).get()),
-                    argsTokenizer.getValue(PREFIX_INFORMATION).get(),
+                    checkEmpty(argsTokenizer.getValue(PREFIX_INFORMATION)),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_CATEGORY))
             );
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
+        }
+    }
+
+    private String checkEmpty(Optional<String> test) {
+        try {
+            return test.get();
+        } catch (NoSuchElementException nsee) {
+            return "";
         }
     }
 
