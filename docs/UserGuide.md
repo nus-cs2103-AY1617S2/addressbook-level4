@@ -53,7 +53,7 @@ Without further ado, let us get started.
 1. Download the latest `iManager.jar` from the [releases](../../../releases) tab.
 2. Copy the file to the folder you want to use as the home folder for your iManager application.
 3. Double-click the file to start the app. The GUI should appear in a few seconds. Refer to [UI Control](#ui-control) for a more detailed walkthrough of various UI components. 
-   > <img src="images/UIOverview.png" width="800">
+   > <img src="images/Ui.png" width="800">
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window. 
