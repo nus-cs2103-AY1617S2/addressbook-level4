@@ -84,7 +84,11 @@ public class EditCommand extends Command {
         Date updatedDate = editTaskDescriptor.getDate().orElseGet(taskToEdit::getDate);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedName, updatedDate, updatedTags);
+        return new Task.TaskBuilder()
+                .setName(updatedName)
+                .setDate(updatedDate)
+                .setTags(updatedTags)
+                .build();
     }
 
     /**

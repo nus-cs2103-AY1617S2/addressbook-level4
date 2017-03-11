@@ -130,14 +130,29 @@ public class Task implements ReadOnlyTask {
             this.name = new Name(name);
             return this;
         }
+        
+        public TaskBuilder setName(Name name) {
+            this.name = name;
+            return this;
+        }
 
         public TaskBuilder setDate(String date) throws IllegalValueException {
             this.date = new Date(date);
             return this;
         }
+        
+        public TaskBuilder setDate(Date date) {
+            this.date = date;
+            return this;
+        }
 
         public TaskBuilder setTags(String tag) throws DuplicateTagException, IllegalValueException {
             this.tags.add(new Tag(tag));
+            return this;
+        }
+        
+        public TaskBuilder setTags(UniqueTagList tags) {
+            this.tags = tags;
             return this;
         }
         
