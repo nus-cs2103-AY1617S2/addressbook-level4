@@ -22,7 +22,7 @@ public class FloatingTask extends Task implements ReadOnlyFloatingTask {
      * Every field must be present and not null.
      */
     public FloatingTask(Name name, Comment comment, Priority priority, Status status, UniqueTagList tags) {
-        super(name, comment, priority, status, tags);
+        
         assert !CollectionUtil.isAnyNull(name, comment, priority, status, tags);
         this.name = name;
         this.comment = comment;
