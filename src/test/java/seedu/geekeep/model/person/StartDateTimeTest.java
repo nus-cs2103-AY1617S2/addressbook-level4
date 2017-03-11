@@ -5,17 +5,17 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.geekeep.model.task.StartDateTime;
+import seedu.geekeep.model.task.DateTime;
 
 public class StartDateTimeTest {
 
     @Test
     public void isValidStartDateTime() {
         // invalid start date time
-        assertFalse(StartDateTime.isValidDateTime("")); // empty string
-        assertFalse(StartDateTime.isValidDateTime(" ")); // spaces only
+        assertFalse(DateTime.isValidDateTime("")); // empty string
+        assertFalse(DateTime.isValidDateTime(" ")); // spaces only
 
         // valid start date time
-        assertTrue(StartDateTime.isValidDateTime("2017-04-01T10:16:30"));
+        assertTrue(DateTime.isValidDateTime("2017-04-01T10:16:30"));
     }
 }

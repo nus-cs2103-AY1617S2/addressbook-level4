@@ -1,10 +1,9 @@
 package seedu.geekeep.testutil;
 
 import seedu.geekeep.model.tag.UniqueTagList;
-import seedu.geekeep.model.task.EndDateTime;
+import seedu.geekeep.model.task.DateTime;
 import seedu.geekeep.model.task.Location;
 import seedu.geekeep.model.task.ReadOnlyTask;
-import seedu.geekeep.model.task.StartDateTime;
 import seedu.geekeep.model.task.Title;
 
 /**
@@ -14,8 +13,8 @@ public class TestPerson implements ReadOnlyTask {
 
     private Title title;
     private Location location;
-    private StartDateTime startDateTime;
-    private EndDateTime endDateTime;
+    private DateTime startDateTime;
+    private DateTime endDateTime;
     private UniqueTagList tags;
 
     public TestPerson() {
@@ -33,56 +32,6 @@ public class TestPerson implements ReadOnlyTask {
         this.tags = personToCopy.getTags();
     }
 
-    public void setTitle(Title title) {
-        this.title = title;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
-    public void setStartDateTime(StartDateTime startDateTime) {
-        this.startDateTime = startDateTime;
-    }
-
-    public void setEndDateTime(EndDateTime endDateTime) {
-        this.endDateTime = endDateTime;
-    }
-
-    public void setTags(UniqueTagList tags) {
-        this.tags = tags;
-    }
-
-    @Override
-    public Title getTitle() {
-        return title;
-    }
-
-    @Override
-    public EndDateTime getEndDateTime() {
-        return endDateTime;
-    }
-
-    @Override
-    public StartDateTime getStartDateTime() {
-        return startDateTime;
-    }
-
-    @Override
-    public Location getLocation() {
-        return location;
-    }
-
-    @Override
-    public UniqueTagList getTags() {
-        return tags;
-    }
-
-    @Override
-    public String toString() {
-        return getAsText();
-    }
-
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getTitle().fullTitle + " ");
@@ -91,5 +40,55 @@ public class TestPerson implements ReadOnlyTask {
         sb.append("s/" + this.getStartDateTime().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
+    }
+
+    @Override
+    public DateTime getEndDateTime() {
+        return endDateTime;
+    }
+
+    @Override
+    public Location getLocation() {
+        return location;
+    }
+
+    @Override
+    public DateTime getStartDateTime() {
+        return startDateTime;
+    }
+
+    @Override
+    public UniqueTagList getTags() {
+        return tags;
+    }
+
+    @Override
+    public Title getTitle() {
+        return title;
+    }
+
+    public void setEndDateTime(DateTime endDateTime) {
+        this.endDateTime = endDateTime;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public void setStartDateTime(DateTime startDateTime) {
+        this.startDateTime = startDateTime;
+    }
+
+    public void setTags(UniqueTagList tags) {
+        this.tags = tags;
+    }
+
+    public void setTitle(Title title) {
+        this.title = title;
+    }
+
+    @Override
+    public String toString() {
+        return getAsText();
     }
 }
