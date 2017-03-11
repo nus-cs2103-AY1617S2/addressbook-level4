@@ -19,7 +19,7 @@ import seedu.tache.model.task.Task;
 import seedu.tache.testutil.TypicalTestTasks;
 
 public class XmlTaskManagerStorageTest {
-    private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlAddressBookStorageTest/");
+    private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlTaskManagerStorageTest/");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -97,7 +97,7 @@ public class XmlTaskManagerStorageTest {
     }
 
     @Test
-    public void saveAddressBook_nullFilePath_assertionFailure() throws IOException {
+    public void saveTaskManager_nullFilePath_assertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
         saveTaskManager(new TaskManager(), null);
     }
