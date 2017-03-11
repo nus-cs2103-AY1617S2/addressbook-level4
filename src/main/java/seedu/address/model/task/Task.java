@@ -5,7 +5,7 @@ import java.util.Objects;
 import seedu.address.commons.util.CollectionUtil;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Task in TypeTask.
  * Guarantees: details are present and not null, field values are validated.
  */
 public class Task implements ReadOnlyTask {
@@ -23,7 +23,7 @@ public class Task implements ReadOnlyTask {
     }
 
     /**
-     * Creates a copy of the given ReadOnlyPerson.
+     * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
         this(source.getName());
@@ -40,7 +40,7 @@ public class Task implements ReadOnlyTask {
     }
 
     /**
-     * Updates this person with the details of {@code replacement}.
+     * Updates this task with the details of {@code replacement}.
      */
     public void resetData(ReadOnlyTask replacement) {
         assert replacement != null;

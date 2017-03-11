@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 
-public class PhoneTest {
+public class DateTest {
 
     @Test
     public void isValidPhone() {

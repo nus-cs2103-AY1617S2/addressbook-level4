@@ -1,7 +1,5 @@
 package seedu.address.storage;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 
@@ -23,8 +21,6 @@ public class XmlAdaptedPerson {
     @XmlElement(required = true)
     private String address;
 
-    @XmlElement
-    private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
     /**
      * Constructs an XmlAdaptedPerson.
