@@ -6,7 +6,7 @@ import java.util.List;
 import org.ocpsoft.prettytime.nlp.PrettyTimeParser;
 
 public class DateParser {
-    
+
     /**
      * Uses PrettyTime NLP library to parse the dates into a list of Date objects
      */
