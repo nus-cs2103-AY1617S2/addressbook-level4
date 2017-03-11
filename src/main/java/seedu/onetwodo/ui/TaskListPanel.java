@@ -21,14 +21,18 @@ import seedu.onetwodo.model.person.ReadOnlyTask;
 public class TaskListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
     private static final String FXML = "TaskListPanel.fxml";
+    private String indexPrefix;
 
     @FXML
     private ListView<ReadOnlyTask> taskListView;
 
-    public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
+    public TaskListPanel(AnchorPane taskListPlaceholder, 
+    		ObservableList<ReadOnlyTask> taskList, 
+    		String indexPrefix) {
         super(FXML);
         setConnections(taskList);
         addToPlaceholder(taskListPlaceholder);
+        this.indexPrefix = indexPrefix;
     }
 
     private void setConnections(ObservableList<ReadOnlyTask> taskList) {
@@ -70,7 +74,7 @@ public class TaskListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
+                setGraphic(new TaskCard(task, getIndex() + 1, indexPrefix).getRoot());
             }
         }
     }

@@ -30,13 +30,19 @@ public class MainWindow extends UiPart<Region> {
     private static final String FONT_AVENIR = "/fonts/avenir-light.ttf";
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 450;
+    private static final String DEADLINE_PREFIX = "D";
+    private static final String EVENT_PREFIX = "E";
+    private static final String TODO_PREFIX = "T";
 
     private Stage primaryStage;
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
-    private TaskListPanel taskListPanel;
+    private TaskListPanel deadlineTaskListPanel;
+    private TaskListPanel eventTaskListPanel;
+    private TaskListPanel todoTaskListPanel;
+
     private Config config;
 
     @FXML
@@ -46,7 +52,13 @@ public class MainWindow extends UiPart<Region> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private AnchorPane taskListPanelPlaceholder;
+    private AnchorPane deadlineListPanelPlaceholder;
+
+    @FXML
+    private AnchorPane eventListPanelPlaceholder;
+    
+    @FXML
+    private AnchorPane todoListPanelPlaceholder;
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
@@ -117,7 +129,9 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
+        deadlineTaskListPanel = new TaskListPanel(getDeadlineListPlaceholder(), logic.getFilteredTaskList(), DEADLINE_PREFIX);
+        eventTaskListPanel = new TaskListPanel(getEventListPlaceholder(), logic.getFilteredTaskList(), EVENT_PREFIX);
+        todoTaskListPanel = new TaskListPanel(getTodosListPlaceholder(), logic.getFilteredTaskList(), TODO_PREFIX);
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getToDoListFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
@@ -135,8 +149,16 @@ public class MainWindow extends UiPart<Region> {
         return resultDisplayPlaceholder;
     }
 
-    private AnchorPane getTaskListPlaceholder() {
-        return taskListPanelPlaceholder;
+    private AnchorPane getDeadlineListPlaceholder() {
+        return deadlineListPanelPlaceholder;
+    }
+
+    private AnchorPane getEventListPlaceholder() {
+        return eventListPanelPlaceholder;
+    }
+
+    private AnchorPane getTodosListPlaceholder() {
+        return todoListPanelPlaceholder;
     }
 
     void hide() {
@@ -198,8 +220,16 @@ public class MainWindow extends UiPart<Region> {
         raise(new ExitAppRequestEvent());
     }
 
-    public TaskListPanel getTaskListPanel() {
-        return this.taskListPanel;
+    public TaskListPanel getDeadlineTaskListPanel() {
+        return this.deadlineTaskListPanel;
+    }
+
+    public TaskListPanel getEventTaskListPanel() {
+        return this.eventTaskListPanel;
+    }
+
+    public TaskListPanel getTodoTaskListPanel() {
+        return this.todoTaskListPanel;
     }
 
     void loadTaskPage(ReadOnlyTask task) {

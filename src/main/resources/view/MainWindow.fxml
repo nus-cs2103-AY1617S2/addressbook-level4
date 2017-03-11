@@ -58,7 +58,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <AnchorPane fx:id="taskListPanelPlaceholder" styleClass="list-view" VBox.vgrow="ALWAYS" />
+                  <AnchorPane fx:id="deadlineListPanelPlaceholder" styleClass="list-view" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
             <VBox fx:id="EventsList" alignment="CENTER" minWidth="340" prefWidth="340" styleClass="panel-shadow" stylesheets="@PanelTheme.css">
@@ -86,7 +86,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <AnchorPane fx:id="taskListPanelPlaceholder1" VBox.vgrow="ALWAYS" />
+                  <AnchorPane fx:id="eventListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
             <VBox fx:id="TodoList" alignment="CENTER" minWidth="340" prefWidth="340" styleClass="panel-shadow" stylesheets="@PanelTheme.css">
@@ -118,7 +118,7 @@
                         <String fx:value="header-todo" />
                      </styleClass>
                   </HBox>
-                  <AnchorPane fx:id="taskListPanelPlaceholder2" VBox.vgrow="ALWAYS" />
+                  <AnchorPane fx:id="todoListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
          </items>
