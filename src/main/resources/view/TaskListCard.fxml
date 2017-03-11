@@ -19,13 +19,10 @@
             <children>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label style="-fx-background-radius: 40; -fx-background-color: lightgray; -fx-text-fill: white;" styleClass="chip" stylesheets="@PanelTheme.css" text="Label">
+                  <Label fx:id="id" alignment="CENTER" contentDisplay="CENTER" minHeight="33.0" minWidth="33.0" style="-fx-background-radius: 40; -fx-background-color: lightgray; -fx-text-fill: white;" styleClass="chip" stylesheets="@PanelTheme.css" text="E1" textAlignment="CENTER" HBox.hgrow="NEVER">
                      <HBox.margin>
-                        <Insets left="15.0" top="30.0" />
+                        <Insets left="18.0" right="6.0" top="21.0" />
                      </HBox.margin>
-                     <padding>
-                        <Insets bottom="15.0" left="15.0" right="15.0" top="10.0" />
-                     </padding>
                   </Label>
                       <VBox alignment="CENTER_LEFT" minHeight="105.0">
                           <stylesheets>
@@ -41,7 +38,6 @@
                               <HBox alignment="CENTER_LEFT" spacing="5">
                                   <children>
                                       <HBox>
-                                          <Label fx:id="id" styleClass="cell_big_label" />
                                           <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
                                       </HBox>
                                   </children>

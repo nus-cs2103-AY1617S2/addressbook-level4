@@ -29,7 +29,7 @@ public class TaskCard extends UiPart<Region> {
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
         name.setText(task.getName().fullName);
-        id.setText(displayedIndex + ". ");
+        id.setText("D" + displayedIndex);
         time.setText(task.getTime().value);
         description.setText(task.getDescription().value);
         date.setText(task.getDate().value);
