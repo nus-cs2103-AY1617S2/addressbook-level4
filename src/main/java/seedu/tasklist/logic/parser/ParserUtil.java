@@ -12,8 +12,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import org.ocpsoft.prettytime.shade.com.joestelmach.natty.generated.DateParser;
-
 import seedu.tasklist.commons.exceptions.IllegalValueException;
 import seedu.tasklist.commons.util.StringUtil;
 import seedu.tasklist.model.tag.Tag;
@@ -95,9 +93,9 @@ public class ParserUtil {
         }
         return new UniqueTagList(tagSet);
     }
-    
+
     public static Optional<List<Date>> parseDate(Optional<String> date) throws IllegalValueException {
         assert date != null;
-        return date.isPresent() ? Optional.of(DateParser.parse(date))) : Optional.empty();
+        return date.isPresent() ? Optional.of(DateParser.parse(date.get())) : Optional.empty();
     }
 }
