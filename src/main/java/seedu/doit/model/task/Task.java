@@ -13,14 +13,14 @@ public class Task implements ReadOnlyTask {
 
     private Name name;
     private Priority priority;
-    private Deadline deadline;
+    private EndTime deadline;
     private Description description;
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Priority priority, Deadline deadline, Description description, UniqueTagList tags) {
+    public Task(Name name, Priority priority, EndTime deadline, Description description, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, priority, deadline, description, tags);
         this.name = name;
         this.priority = priority;
@@ -56,11 +56,11 @@ public class Task implements ReadOnlyTask {
         this.priority = priority;
     }
 
-    public Deadline getDeadline() {
+    public EndTime getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(Deadline deadline) {
+    public void setDeadline(EndTime deadline) {
         assert deadline != null;
         this.deadline = deadline;
     }

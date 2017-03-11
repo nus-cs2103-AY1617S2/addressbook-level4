@@ -15,8 +15,8 @@ import seedu.doit.commons.exceptions.IllegalValueException;
 import seedu.doit.commons.util.StringUtil;
 import seedu.doit.model.tag.Tag;
 import seedu.doit.model.tag.UniqueTagList;
-import seedu.doit.model.task.Deadline;
 import seedu.doit.model.task.Description;
+import seedu.doit.model.task.EndTime;
 import seedu.doit.model.task.Name;
 import seedu.doit.model.task.Priority;
 
@@ -98,9 +98,9 @@ public class ParserUtil {
      * Parses a {@code Optional<String> deadline} into an {@code Optional<Deadline>}
      * if {@code deadline} is present.
      */
-    public static Optional<Deadline> parseDeadline(Optional<String> deadline) throws IllegalValueException {
+    public static Optional<EndTime> parseDeadline(Optional<String> deadline) throws IllegalValueException {
         assert deadline != null;
-        return deadline.isPresent() ? Optional.of(new Deadline(deadline.get())) : Optional.empty();
+        return deadline.isPresent() ? Optional.of(new EndTime(deadline.get())) : Optional.empty();
     }
 
     /**

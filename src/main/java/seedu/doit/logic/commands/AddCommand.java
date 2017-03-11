@@ -7,8 +7,8 @@ import seedu.doit.commons.exceptions.IllegalValueException;
 import seedu.doit.logic.commands.exceptions.CommandException;
 import seedu.doit.model.tag.Tag;
 import seedu.doit.model.tag.UniqueTagList;
-import seedu.doit.model.task.Deadline;
 import seedu.doit.model.task.Description;
+import seedu.doit.model.task.EndTime;
 import seedu.doit.model.task.Name;
 import seedu.doit.model.task.Priority;
 import seedu.doit.model.task.Task;
@@ -45,7 +45,7 @@ public class AddCommand extends Command {
         this.toAdd = new Task(
             new Name(name),
             new Priority(priority),
-            new Deadline(dueDate),
+            new EndTime(dueDate),
             new Description(text),
             new UniqueTagList(tagSet)
         );

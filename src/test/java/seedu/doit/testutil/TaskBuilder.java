@@ -3,8 +3,8 @@ package seedu.doit.testutil;
 import seedu.doit.commons.exceptions.IllegalValueException;
 import seedu.doit.model.tag.Tag;
 import seedu.doit.model.tag.UniqueTagList;
-import seedu.doit.model.task.Deadline;
 import seedu.doit.model.task.Description;
+import seedu.doit.model.task.EndTime;
 import seedu.doit.model.task.Name;
 import seedu.doit.model.task.Priority;
 
@@ -50,7 +50,7 @@ public class TaskBuilder {
     }
 
     public TaskBuilder withDeadline(String deadline) throws IllegalValueException {
-        this.task.setDeadline(new Deadline(deadline));
+        this.task.setDeadline(new EndTime(deadline));
         return this;
     }
 

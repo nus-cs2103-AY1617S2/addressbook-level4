@@ -41,8 +41,8 @@ import seedu.doit.model.ReadOnlyTaskManager;
 import seedu.doit.model.TaskManager;
 import seedu.doit.model.tag.Tag;
 import seedu.doit.model.tag.UniqueTagList;
-import seedu.doit.model.task.Deadline;
 import seedu.doit.model.task.Description;
+import seedu.doit.model.task.EndTime;
 import seedu.doit.model.task.Name;
 import seedu.doit.model.task.Priority;
 import seedu.doit.model.task.ReadOnlyTask;
@@ -417,7 +417,7 @@ public class LogicManagerTest {
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
             Priority privatePriority = new Priority("111111");
-            Deadline deadline = new Deadline("adam@gmail.com");
+            EndTime deadline = new EndTime("adam@gmail.com");
             Description description = new Description("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
@@ -436,7 +436,7 @@ public class LogicManagerTest {
             return new Task(
                 new Name("Task " + seed),
                 new Priority("" + Math.abs(seed)),
-                new Deadline(seed + "2359"),
+                new EndTime(seed + "2359"),
                 new Description("House of " + seed),
                 new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
@@ -539,7 +539,7 @@ public class LogicManagerTest {
             return new Task(
                 new Name(name),
                 new Priority("1"),
-                new Deadline("today"),
+                new EndTime("today"),
                 new Description("House of 1"),
                 new UniqueTagList(new Tag("tag"))
             );

@@ -7,8 +7,8 @@ import seedu.doit.commons.core.Messages;
 import seedu.doit.commons.util.CollectionUtil;
 import seedu.doit.logic.commands.exceptions.CommandException;
 import seedu.doit.model.tag.UniqueTagList;
-import seedu.doit.model.task.Deadline;
 import seedu.doit.model.task.Description;
+import seedu.doit.model.task.EndTime;
 import seedu.doit.model.task.Name;
 import seedu.doit.model.task.Priority;
 import seedu.doit.model.task.ReadOnlyTask;
@@ -60,7 +60,7 @@ public class EditCommand extends Command {
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
         Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
-        Deadline updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(taskToEdit::getDeadline);
+        EndTime updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(taskToEdit::getDeadline);
         Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
@@ -94,7 +94,7 @@ public class EditCommand extends Command {
     public static class EditTaskDescriptor {
         private Optional<Name> name = Optional.empty();
         private Optional<Priority> priority = Optional.empty();
-        private Optional<Deadline> deadline = Optional.empty();
+        private Optional<EndTime> deadline = Optional.empty();
         private Optional<Description> description = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
@@ -134,11 +134,11 @@ public class EditCommand extends Command {
             this.priority = priority;
         }
 
-        public Optional<Deadline> getDeadline() {
+        public Optional<EndTime> getDeadline() {
             return deadline;
         }
 
-        public void setDeadline(Optional<Deadline> deadline) {
+        public void setDeadline(Optional<EndTime> deadline) {
             assert deadline != null;
             this.deadline = deadline;
         }

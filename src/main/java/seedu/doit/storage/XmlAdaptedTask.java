@@ -8,8 +8,8 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.doit.commons.exceptions.IllegalValueException;
 import seedu.doit.model.tag.Tag;
 import seedu.doit.model.tag.UniqueTagList;
-import seedu.doit.model.task.Deadline;
 import seedu.doit.model.task.Description;
+import seedu.doit.model.task.EndTime;
 import seedu.doit.model.task.Name;
 import seedu.doit.model.task.Priority;
 import seedu.doit.model.task.ReadOnlyTask;
@@ -68,7 +68,7 @@ public class XmlAdaptedTask {
         }
         final Name name = new Name(this.name);
         final Priority priority = new Priority(this.priority);
-        final Deadline deadline = new Deadline(this.deadline);
+        final EndTime deadline = new EndTime(this.deadline);
         final Description description = new Description(this.description);
         final UniqueTagList tags = new UniqueTagList(taskTags);
         return new Task(name, priority, deadline, description, tags);

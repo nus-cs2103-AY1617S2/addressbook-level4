@@ -1,8 +1,8 @@
 package seedu.doit.testutil;
 
 import seedu.doit.model.tag.UniqueTagList;
-import seedu.doit.model.task.Deadline;
 import seedu.doit.model.task.Description;
+import seedu.doit.model.task.EndTime;
 import seedu.doit.model.task.Name;
 import seedu.doit.model.task.Priority;
 import seedu.doit.model.task.ReadOnlyTask;
@@ -14,7 +14,7 @@ public class TestTask implements ReadOnlyTask {
 
     private Name name;
     private Description description;
-    private Deadline deadline;
+    private EndTime deadline;
     private Priority priority;
     private UniqueTagList tags;
 
@@ -51,11 +51,12 @@ public class TestTask implements ReadOnlyTask {
         this.priority = priority;
     }
 
-    public Deadline getDeadline() {
+    @Override
+    public EndTime getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(Deadline deadline) {
+    public void setDeadline(EndTime deadline) {
         this.deadline = deadline;
     }
 

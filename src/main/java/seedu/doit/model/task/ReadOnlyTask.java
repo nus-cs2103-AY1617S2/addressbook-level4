@@ -12,7 +12,7 @@ public interface ReadOnlyTask {
 
     Priority getPriority();
 
-    Deadline getDeadline();
+    EndTime getDeadline();
 
     Description getDescription();
 
