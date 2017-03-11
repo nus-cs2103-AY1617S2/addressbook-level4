@@ -13,7 +13,6 @@ public class SaveCommandParser {
 
     public Command parse(String args) {
         assert args != null;
-        System.out.println("Arguments are:" + args);
         ArgumentTokenizer argsTokenizer = new ArgumentTokenizer();
         argsTokenizer.tokenize(args);
         try {
