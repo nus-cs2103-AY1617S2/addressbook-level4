@@ -23,23 +23,16 @@ public class LogicManager extends ComponentManager implements Logic {
 
     private final Model model;
     private final Parser parser;
-    private static Stack<TaskBook> undoStack, redoStack;
 
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.parser = new Parser();
-        undoStack = new Stack<TaskBook>();
-        redoStack = new Stack<TaskBook>();
     }
 
     @Override
     public CommandResult execute(String commandText) throws CommandException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         Command command = parser.parseCommand(commandText);
-        if(command.isMutable()) {
-            undoStack.push(new TaskBook(model.getTaskBook()));
-            redoStack.clear();
-        }
         command.setData(model);
         return command.execute();
     }

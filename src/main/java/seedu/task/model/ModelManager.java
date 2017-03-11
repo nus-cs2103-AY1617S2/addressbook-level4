@@ -1,6 +1,7 @@
 package seedu.task.model;
 
 import java.util.Set;
+import java.util.Stack;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
@@ -24,6 +25,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final TaskBook taskBook;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+    private static Stack<TaskBook> undoStack, redoStack;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -36,6 +38,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.taskBook = new TaskBook(taskBook);
         filteredTasks = new FilteredList<>(this.taskBook.getPersonList());
+        undoStack = new Stack<TaskBook>();
+        redoStack = new Stack<TaskBook>();
     }
 
     public ModelManager() {
@@ -44,6 +48,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyTaskBook newData) {
+        undoStack.push(new TaskBook(taskBook));
+        redoStack.clear();
         taskBook.resetData(newData);
         indicateTaskBookChanged();
     }
@@ -60,12 +66,16 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
+        undoStack.push(new TaskBook(taskBook));
+        redoStack.clear();
         taskBook.removeTask(target);
         indicateTaskBookChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+        undoStack.push(new TaskBook(taskBook));
+        redoStack.clear();
         taskBook.addTask(task);
         updateFilteredListToShowAll();
         indicateTaskBookChanged();
@@ -75,7 +85,9 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
-
+        
+        undoStack.push(new TaskBook(taskBook));
+        redoStack.clear();
         int addressBookIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskBook.updateTask(addressBookIndex, editedTask);
         indicateTaskBookChanged();
