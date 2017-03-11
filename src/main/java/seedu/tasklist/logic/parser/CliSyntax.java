@@ -12,6 +12,7 @@ public class CliSyntax {
     /* Prefix definitions */
     public static final Prefix PREFIX_COMMENT = new Prefix("c/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
+    public static final Prefix PREFIX_PRIORITY = new Prefix("p/");
 
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT =

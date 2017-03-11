@@ -17,6 +17,7 @@ import seedu.tasklist.model.tag.Tag;
 import seedu.tasklist.model.tag.UniqueTagList;
 import seedu.tasklist.model.task.Comment;
 import seedu.tasklist.model.task.Name;
+import seedu.tasklist.model.task.Priority;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -91,5 +92,13 @@ public class ParserUtil {
             tagSet.add(new Tag(tagName));
         }
         return new UniqueTagList(tagSet);
+    }
+
+    /**
+     * Parses a {@code Optional<String> priority} into an {@code Optional<priority>} if {@code priority} is present.
+     */
+    public static Optional<Priority> parsePriority(Optional<String> priority) throws IllegalValueException {
+        assert priority != null;
+        return priority.isPresent() ? Optional.of(new Priority(priority.get())) : Optional.empty();
     }
 }
