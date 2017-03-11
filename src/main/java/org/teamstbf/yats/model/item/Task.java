@@ -11,7 +11,7 @@ import org.teamstbf.yats.model.tag.UniqueTagList;
  */
 public class Task implements ReadOnlyItem {
 
-	private Title name;
+	private Title title;
 	private Deadline deadline;
 	private Timing timing;
 	private Description description;
@@ -22,9 +22,9 @@ public class Task implements ReadOnlyItem {
 	/**
 	 * Every field must be present and not null.
 	 */
-	public Task(Title name, Deadline deadline, Timing timing, Description description, UniqueTagList tags) {
-		assert !CollectionUtil.isAnyNull(name, deadline, timing, description, tags);
-		this.name = name;
+	public Task(Title title, Deadline deadline, Timing timing, Description description, UniqueTagList tags) {
+		assert !CollectionUtil.isAnyNull(title, deadline, timing, description, tags);
+		this.title = title;
 		this.deadline = deadline;
 		this.timing = timing;
 		this.description = description;
@@ -40,12 +40,12 @@ public class Task implements ReadOnlyItem {
 
 	public void setTitle(Title name) {
 		assert name != null;
-		this.name = name;
+		this.title = name;
 	}
 
 	@Override
 	public Title getTitle() {
-		return name;
+		return title;
 	}
 
 	public void setDeadline(Deadline deadline) {
@@ -123,7 +123,7 @@ public class Task implements ReadOnlyItem {
 	@Override
 	public int hashCode() {
 		// use this method for custom fields hashing instead of implementing your own
-		return Objects.hash(name, deadline, timing, description, tags);
+		return Objects.hash(title, deadline, timing, description, tags);
 	}
 
 	@Override
