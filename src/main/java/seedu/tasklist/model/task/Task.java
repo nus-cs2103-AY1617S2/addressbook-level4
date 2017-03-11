@@ -31,9 +31,5 @@ public abstract class Task implements ReadOnlyTask {
      */
     public abstract void setTags(UniqueTagList replacement);
 
-    /**
-     * Updates this person with the details of {@code replacement}.
-     */
-    public abstract void resetData(ReadOnlyTask replacement);
 
 }
