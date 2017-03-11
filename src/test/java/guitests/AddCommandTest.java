@@ -7,7 +7,7 @@ import org.junit.Test;
 import guitests.guihandles.TaskCardHandle;
 import seedu.taskmanager.commons.core.Messages;
 import seedu.taskmanager.logic.commands.AddCommand;
-import seedu.taskmanager.testutil.TestPerson;
+import seedu.taskmanager.testutil.TestTask;
 import seedu.taskmanager.testutil.TestUtil;
 
 public class AddCommandTest extends TaskManagerGuiTest {
@@ -15,31 +15,31 @@ public class AddCommandTest extends TaskManagerGuiTest {
     @Test
     public void add() {
         //add one person
-        TestPerson[] currentList = td.getTypicalTasks();
-        TestPerson personToAdd = td.hoon;
-        assertAddSuccess(personToAdd, currentList);
-        currentList = TestUtil.addTasksToList(currentList, personToAdd);
+        TestTask[] currentList = td.getTypicalTasks();
+        TestTask taskToAdd = td.send2;
+        assertAddSuccess(taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         //add another person
-        personToAdd = td.ida;
-        assertAddSuccess(personToAdd, currentList);
-        currentList = TestUtil.addTasksToList(currentList, personToAdd);
+        taskToAdd = td.call1;
+        assertAddSuccess(taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         //add duplicate person
-        commandBox.runCommand(td.hoon.getAddCommand());
+        commandBox.runCommand(td.send2.getAddCommand());
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
         assertTrue(taskListPanel.isListMatching(currentList));
 
         //add to empty list
         commandBox.runCommand("clear");
-        assertAddSuccess(td.alice);
+        assertAddSuccess(td.buy1);
 
         //invalid command
         commandBox.runCommand("adds Johnny");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
-    private void assertAddSuccess(TestPerson personToAdd, TestPerson... currentList) {
+    private void assertAddSuccess(TestTask personToAdd, TestTask... currentList) {
         commandBox.runCommand(personToAdd.getAddCommand());
 
         //confirm the new card contains the right data
@@ -47,7 +47,7 @@ public class AddCommandTest extends TaskManagerGuiTest {
         assertMatching(personToAdd, addedCard);
 
         //confirm the list now contains all previous persons plus the new person
-        TestPerson[] expectedList = TestUtil.addTasksToList(currentList, personToAdd);
+        TestTask[] expectedList = TestUtil.addTasksToList(currentList, personToAdd);
         assertTrue(taskListPanel.isListMatching(expectedList));
     }
 

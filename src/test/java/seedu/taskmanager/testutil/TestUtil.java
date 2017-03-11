@@ -52,7 +52,7 @@ public class TestUtil {
      */
     public static final String SANDBOX_FOLDER = FileUtil.getPath("./src/test/data/sandbox/");
 
-    public static final Task[] SAMPLE_PERSON_DATA = getSampleTaskData();
+    public static final Task[] SAMPLE_TASK_DATA = getSampleTaskData();
 
     public static final Tag[] SAMPLE_TAG_DATA = getSampleTagData();
 
@@ -75,15 +75,11 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Title("Ali Muster"), new StartDate("9482424"), new EndDate("hans@google.com"), new Description("4th street"), new UniqueTagList()),
-                new Task(new Title("Boris Mueller"), new StartDate("87249245"), new EndDate("ruth@google.com"), new Description("81th street"), new UniqueTagList()),
-                new Task(new Title("Carl Kurz"), new StartDate("95352563"), new EndDate("heinz@yahoo.com"), new Description("wall street"), new UniqueTagList()),
-                new Task(new Title("Daniel Meier"), new StartDate("87652533"), new EndDate("cornelia@google.com"), new Description("10th street"), new UniqueTagList()),
-                new Task(new Title("Elle Meyer"), new StartDate("9482224"), new EndDate("werner@gmail.com"), new Description("michegan ave"), new UniqueTagList()),
-                new Task(new Title("Fiona Kunz"), new StartDate("9482427"), new EndDate("lydia@gmail.com"), new Description("little tokyo"), new UniqueTagList()),
-                new Task(new Title("George Best"), new StartDate("9482442"), new EndDate("anna@google.com"), new Description("4th street"), new UniqueTagList()),
-                new Task(new Title("Hoon Meier"), new StartDate("8482424"), new EndDate("stefan@mail.com"), new Description("little india"), new UniqueTagList()),
-                new Task(new Title("Ida Mueller"), new StartDate("8482131"), new EndDate("hans@google.com"), new Description("chicago ave"), new UniqueTagList())
+                    new Task(new Title("Visit Alex Yeoh"), new StartDate("01/11/2017"), new EndDate("02/11/2017"), new Description("His address is Blk 30 Geylang Street 29, #06-40"), new UniqueTagList()),
+                    new Task(new Title("Borrow Pencils"), new StartDate("04/03/2017"), new EndDate("04/03/2017"), new Description("Must be non-mechanical"), new UniqueTagList()),
+                    new Task(new Title("Finish CS2103 testing"), new StartDate("10/03/2017"), new EndDate("15/03/2017"), new Description("The best module eva"), new UniqueTagList()),
+                    new Task(new Title("Buy Toothpick"), new StartDate("20/05/2016"), new EndDate("21/05/2017"), new Description("Buy 1000pcs"), new UniqueTagList()),
+                    new Task(new Title("Make baos for gathering"), new StartDate("10/03/2017"), new EndDate("20/03/2017"), new Description("3 flavours: chocolate, red bean, and green bean"), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -108,7 +104,7 @@ public class TestUtil {
     }
 
     public static List<Task> generateSampleTaskData() {
-        return Arrays.asList(SAMPLE_PERSON_DATA);
+        return Arrays.asList(SAMPLE_TASK_DATA);
     }
 
     /**
@@ -280,49 +276,49 @@ public class TestUtil {
     }
 
     /**
-     * Removes a subset from the list of persons.
-     * @param tasks The list of persons
-     * @param tasksToRemove The subset of persons.
-     * @return The modified persons after removal of the subset from persons.
+     * Removes a subset from the list of tasks.
+     * @param tasks The list of tasks
+     * @param tasksToRemove The subset of tasks.
+     * @return The modified tasks after removal of the subset from tasks.
      */
-    public static TestPerson[] removeTasksFromList(final TestPerson[] tasks, TestPerson... tasksToRemove) {
-        List<TestPerson> listOfPersons = asList(tasks);
-        listOfPersons.removeAll(asList(tasksToRemove));
-        return listOfPersons.toArray(new TestPerson[listOfPersons.size()]);
+    public static TestTask[] removeTasksFromList(final TestTask[] tasks, TestTask... tasksToRemove) {
+        List<TestTask> listOfTasks = asList(tasks);
+        listOfTasks.removeAll(asList(tasksToRemove));
+        return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
 
 
     /**
-     * Returns a copy of the list with the person at specified index removed.
+     * Returns a copy of the list with the task at specified index removed.
      * @param list original list to copy from
      * @param targetIndexInOneIndexedFormat e.g. index 1 if the first element is to be removed
      */
-    public static TestPerson[] removeTaskFromList(final TestPerson[] list, int targetIndexInOneIndexedFormat) {
+    public static TestTask[] removeTaskFromList(final TestTask[] list, int targetIndexInOneIndexedFormat) {
         return removeTasksFromList(list, list[targetIndexInOneIndexedFormat - 1]);
     }
 
     /**
-     * Replaces persons[i] with a person.
-     * @param tasks The array of persons.
-     * @param task The replacement person
-     * @param index The index of the person to be replaced.
+     * Replaces tasks[i] with a task.
+     * @param tasks The array of tasks.
+     * @param task The replacement task
+     * @param index The index of the task to be replaced.
      * @return
      */
-    public static TestPerson[] replaceTaskFromList(TestPerson[] tasks, TestPerson task, int index) {
+    public static TestTask[] replaceTaskFromList(TestTask[] tasks, TestTask task, int index) {
         tasks[index] = task;
         return tasks;
     }
 
     /**
-     * Appends persons to the array of persons.
-     * @param tasks A array of persons.
-     * @param tasksToAdd The persons that are to be appended behind the original array.
-     * @return The modified array of persons.
+     * Appends tasks to the array of tasks.
+     * @param tasks A array of tasks.
+     * @param tasksToAdd The tasks that are to be appended behind the original array.
+     * @return The modified array of tasks.
      */
-    public static TestPerson[] addTasksToList(final TestPerson[] tasks, TestPerson... tasksToAdd) {
-        List<TestPerson> listOfPersons = asList(tasks);
-        listOfPersons.addAll(asList(tasksToAdd));
-        return listOfPersons.toArray(new TestPerson[listOfPersons.size()]);
+    public static TestTask[] addTasksToList(final TestTask[] tasks, TestTask... tasksToAdd) {
+        List<TestTask> listOfTasks = asList(tasks);
+        listOfTasks.addAll(asList(tasksToAdd));
+        return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
 
     private static <T> List<T> asList(T[] objs) {
