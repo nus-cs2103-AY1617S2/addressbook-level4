@@ -8,13 +8,13 @@ import seedu.ezdo.logic.commands.SaveCommand;
 
 public class SaveCommandTest extends EzDoGuiTest {
 
-    private final String validDirectory = "data/test.xml";
-    private final String inexistentDirectory = "data/COWABUNGA/";
+    private final String validDirectory = "./";
+    private final String inexistentDirectory = "data/COWABUNGA";
 
     @Test
     public void save_validDirectory_success() {
         commandBox.runCommand("save " + validDirectory);
-        assertResultMessage(String.format(SaveCommand.MESSAGE_SAVE_TASK_SUCCESS, validDirectory));
+        assertResultMessage(String.format(SaveCommand.MESSAGE_SAVE_TASK_SUCCESS, validDirectory + SaveCommand.DATA_FILE_NAME));
     }
 
     @Test
