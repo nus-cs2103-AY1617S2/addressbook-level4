@@ -24,12 +24,12 @@ public class EditCommandTest extends TaskBossGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Alice p/1 sd/Feb 19, 2017 ed/Feb 28, 2017 i/123,"
+        String detailsToEdit = "Alice p/1 sd/10am Feb 19, 2017 ed/10am Feb 28, 2017 i/123,"
                 + " Jurong West Ave 6, #08-111 c/friends";
         int taskBossIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Alice").withPriorityLevel("1")
-               .withStartDateTime("Feb 19, 2017").withEndDateTime("Feb 28, 2017")
+               .withStartDateTime("10am Feb 19, 2017").withEndDateTime("10am Feb 28, 2017")
                .withInformation("123, Jurong West Ave 6, #08-111").withCategories("friends").build();
 
         assertEditSuccess(taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
