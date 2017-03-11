@@ -53,21 +53,21 @@ public class AddCommandParser {
             return "";
         }
     }
-    
+
     private String checkStartDateTimeEmpty(Optional<String> test) throws IllegalValueException {
         try {
             return ParserUtil.parseStartDate(test.get());
         } catch (NoSuchElementException nsee) {
             return "";
-        } 
+        }
     }
-    
+
     private String checkEndDateTimeEmpty(Optional<String> test) throws IllegalValueException {
         try {
             return ParserUtil.parseEndDate(test.get());
         } catch (NoSuchElementException nsee) {
             return "";
-        } 
+        }
     }
 
 }
