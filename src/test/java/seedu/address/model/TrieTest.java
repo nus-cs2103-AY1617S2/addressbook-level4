@@ -9,6 +9,9 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
+import seedu.address.model.datastructure.Trie;
+import seedu.address.model.datastructure.TrieNode;
+
 /**
  * Testing class for Trie and TrieNode data structure used for auto completion
  */
