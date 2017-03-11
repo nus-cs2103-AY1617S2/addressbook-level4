@@ -12,7 +12,7 @@ import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
-    public static Task[] getSamplePersons() {
+    public static Task[] getSampleTasks() {
         try {
             return new Task[] {
                 new Task(new Name("Finalise CS2101 Report"), new Priority("2"), new Status("incomplete"),
@@ -36,10 +36,10 @@ public class SampleDataUtil {
         }
     }
 
-    public static ReadOnlyTaskManager getSampleAddressBook() {
+    public static ReadOnlyTaskManager getSampleTaskManager() {
         try {
             TaskManager sampleTaskManager = new TaskManager();
-            for (Task sampleTask : getSamplePersons()) {
+            for (Task sampleTask : getSampleTasks()) {
                 sampleTaskManager.addTask(sampleTask);
             }
             return sampleTaskManager;
