@@ -56,7 +56,7 @@ public class XmlTaskListStorageTest {
 
         thrown.expect(DataConversionException.class);
         readTaskList("NotXmlFormatTaskList.xml");
-
+        fail();
         /* IMPORTANT: Any code below an exception-throwing line (like the one above) will be ignored.
          * That means you should not have more than one exception test in one method
          */
