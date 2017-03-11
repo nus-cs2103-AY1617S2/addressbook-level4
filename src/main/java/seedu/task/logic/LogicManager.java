@@ -34,6 +34,9 @@ public class LogicManager extends ComponentManager implements Logic {
     public CommandResult execute(String commandText) throws CommandException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         Command command = parser.parseCommand(commandText);
+        if(command.isMutable()) {
+            undoStack.push(new TaskBook(model.getTaskBook()));
+        }
         command.setData(model);
         return command.execute();
     }
