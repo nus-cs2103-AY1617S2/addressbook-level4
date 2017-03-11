@@ -3,8 +3,8 @@ package seedu.onetwodo.logic.commands;
 import seedu.onetwodo.commons.core.Messages;
 import seedu.onetwodo.commons.core.UnmodifiableObservableList;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
-import seedu.onetwodo.model.person.ReadOnlyTask;
-import seedu.onetwodo.model.person.UniqueTaskList.TaskNotFoundException;
+import seedu.onetwodo.model.task.ReadOnlyTask;
+import seedu.onetwodo.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Deletes a task identified using it's last displayed index from the todo list.

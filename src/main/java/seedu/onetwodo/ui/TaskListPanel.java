@@ -15,7 +15,7 @@ import javafx.scene.layout.Region;
 import seedu.onetwodo.commons.core.LogsCenter;
 import seedu.onetwodo.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.onetwodo.commons.util.FxViewUtil;
-import seedu.onetwodo.model.person.ReadOnlyTask;
+import seedu.onetwodo.model.task.ReadOnlyTask;
 
 /**
  * Panel containing the list of tasks.

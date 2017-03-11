@@ -12,9 +12,9 @@ import javafx.collections.ObservableList;
 import seedu.onetwodo.commons.core.UnmodifiableObservableList;
 import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.model.ReadOnlyToDoList;
-import seedu.onetwodo.model.person.ReadOnlyTask;
-import seedu.onetwodo.model.person.Task;
 import seedu.onetwodo.model.tag.Tag;
+import seedu.onetwodo.model.task.ReadOnlyTask;
+import seedu.onetwodo.model.task.Task;
 
 /**
  * An Immutable ToDoList that is serializable to XML format

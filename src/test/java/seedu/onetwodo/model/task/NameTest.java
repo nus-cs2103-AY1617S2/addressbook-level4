@@ -1,9 +1,11 @@
-package seedu.onetwodo.model.person;
+package seedu.onetwodo.model.task;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+
+import seedu.onetwodo.model.task.Name;
 
 public class NameTest {
 

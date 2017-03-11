@@ -23,7 +23,7 @@ import seedu.onetwodo.commons.events.ui.ExitAppRequestEvent;
 import seedu.onetwodo.commons.util.FxViewUtil;
 import seedu.onetwodo.logic.Logic;
 import seedu.onetwodo.model.UserPrefs;
-import seedu.onetwodo.model.person.ReadOnlyTask;
+import seedu.onetwodo.model.task.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing

@@ -10,10 +10,10 @@ import seedu.onetwodo.commons.core.UnmodifiableObservableList;
 import seedu.onetwodo.commons.events.model.ToDoListChangedEvent;
 import seedu.onetwodo.commons.util.CollectionUtil;
 import seedu.onetwodo.commons.util.StringUtil;
-import seedu.onetwodo.model.person.ReadOnlyTask;
-import seedu.onetwodo.model.person.Task;
-import seedu.onetwodo.model.person.UniqueTaskList;
-import seedu.onetwodo.model.person.UniqueTaskList.TaskNotFoundException;
+import seedu.onetwodo.model.task.ReadOnlyTask;
+import seedu.onetwodo.model.task.Task;
+import seedu.onetwodo.model.task.UniqueTaskList;
+import seedu.onetwodo.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Represents the in-memory model of the todo list data.

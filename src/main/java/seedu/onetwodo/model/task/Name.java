@@ -1,4 +1,4 @@
-package seedu.onetwodo.model.person;
+package seedu.onetwodo.model.task;
 
 import seedu.onetwodo.commons.exceptions.IllegalValueException;
 

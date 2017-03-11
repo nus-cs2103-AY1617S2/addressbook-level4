@@ -1,6 +1,8 @@
 package seedu.onetwodo.logic;
 
 import static org.junit.Assert.assertEquals;
+
+//import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.onetwodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.onetwodo.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
@@ -38,14 +40,14 @@ import seedu.onetwodo.model.Model;
 import seedu.onetwodo.model.ModelManager;
 import seedu.onetwodo.model.ReadOnlyToDoList;
 import seedu.onetwodo.model.ToDoList;
-import seedu.onetwodo.model.person.Date;
-import seedu.onetwodo.model.person.Description;
-import seedu.onetwodo.model.person.Name;
-import seedu.onetwodo.model.person.ReadOnlyTask;
-import seedu.onetwodo.model.person.Task;
-import seedu.onetwodo.model.person.Time;
 import seedu.onetwodo.model.tag.Tag;
 import seedu.onetwodo.model.tag.UniqueTagList;
+import seedu.onetwodo.model.task.EndDate;
+import seedu.onetwodo.model.task.Description;
+import seedu.onetwodo.model.task.Name;
+import seedu.onetwodo.model.task.ReadOnlyTask;
+import seedu.onetwodo.model.task.Task;
+import seedu.onetwodo.model.task.StartDate;
 import seedu.onetwodo.storage.StorageManager;
 
 
@@ -121,8 +123,8 @@ public class LogicManagerTest {
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyToDoList, List)
      */
     private void assertCommandFailure(String inputCommand, String expectedMessage) {
-        ToDoList expectedToDoList = new ToDoList(model.getToDoList());
-        List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredTaskList());
+        //ToDoList expectedToDoList = new ToDoList(model.getToDoList());
+        //List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredTaskList());
         //assertCommandBehavior(true, inputCommand, expectedMessage, expectedToDoList, expectedShownList);
     }
 
@@ -188,20 +190,20 @@ public class LogicManagerTest {
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         //assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid,address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 valid@email.butNoPrefix a/valid, address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
+        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix d/valid,address", expectedMessage);
+        assertCommandFailure("add Valid Name s/12345 valid@email.butNoPrefix d/valid, address", expectedMessage);
+        assertCommandFailure("add Valid Name s/12345 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidTaskData() {
-        assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
+        assertCommandFailure("add []\\[;] s/12345 e/valid@e.mail d/valid, address",
                 Name.MESSAGE_NAME_CONSTRAINTS);
-        //assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
-                //Time.MESSAGE_TIME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
-                Date.MESSAGE_DATE_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
+        //assertCommandFailure("add Valid Name s/not_numbers e/valid@e.mail d/valid, address",
+                //StartDate.MESSAGE_TIME_CONSTRAINTS);
+        assertCommandFailure("add Valid Name s/12345 e/notAnEmail d/valid, address",
+                EndDate.MESSAGE_DATE_CONSTRAINTS);
+        assertCommandFailure("add Valid Name s/12345 e/valid@e.mail d/valid, address t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
@@ -415,13 +417,13 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
-            Time privateTime = new Time("111111");
-            Date date = new Date("adam@gmail.com");
+            StartDate privateStartDate = new StartDate("111111");
+            EndDate endDate = new EndDate("adam@gmail.com");
             Description privateDescription = new Description("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, privateTime, date, privateDescription, tags);
+            return new Task(name, privateStartDate, endDate, privateDescription, tags);
         }
 
         /**
@@ -434,8 +436,8 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Name("Task " + seed),
-                    new Time("" + Math.abs(seed)),
-                    new Date(seed + "@date"),
+                    new StartDate("" + Math.abs(seed)),
+                    new EndDate(seed + "@endDate"),
                     new Description("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
@@ -448,9 +450,9 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getName().toString());
-            cmd.append(" e/").append(p.getDate());
-            cmd.append(" p/").append(p.getTime());
-            cmd.append(" a/").append(p.getDescription());
+            cmd.append(" e/").append(p.getEndDate());
+            cmd.append(" s/").append(p.getStartDate());
+            cmd.append(" d/").append(p.getDescription());
 
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {
@@ -533,8 +535,8 @@ public class LogicManagerTest {
         Task generateTaskWithName(String name) throws Exception {
             return new Task(
                     new Name(name),
-                    new Time("1"),
-                    new Date("1@email"),
+                    new StartDate("1"),
+                    new EndDate("1@endDate"),
                     new Description("House of 1"),
                     new UniqueTagList(new Tag("tag"))
             );

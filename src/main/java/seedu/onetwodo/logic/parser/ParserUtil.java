@@ -13,12 +13,12 @@ import java.util.stream.Collectors;
 
 import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.commons.util.StringUtil;
-import seedu.onetwodo.model.person.Date;
-import seedu.onetwodo.model.person.Description;
-import seedu.onetwodo.model.person.Name;
-import seedu.onetwodo.model.person.Time;
 import seedu.onetwodo.model.tag.Tag;
 import seedu.onetwodo.model.tag.UniqueTagList;
+import seedu.onetwodo.model.task.EndDate;
+import seedu.onetwodo.model.task.Description;
+import seedu.onetwodo.model.task.Name;
+import seedu.onetwodo.model.task.StartDate;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -75,11 +75,11 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> time} into an {@code Optional<Time>} if {@code time} is present.
+     * Parses a {@code Optional<String> time} into an {@code Optional<StartDate>} if {@code time} is present.
      */
-    public static Optional<Time> parseTime(Optional<String> time) throws IllegalValueException {
+    public static Optional<StartDate> parseTime(Optional<String> time) throws IllegalValueException {
         assert time != null;
-        return time.isPresent() ? Optional.of(new Time(time.get())) : Optional.empty();
+        return time.isPresent() ? Optional.of(new StartDate(time.get())) : Optional.empty();
     }
 
     /**
@@ -92,11 +92,11 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> date} into an {@code Optional<Date>} if {@code date} is present.
+     * Parses a {@code Optional<String> date} into an {@code Optional<EndDate>} if {@code date} is present.
      */
-    public static Optional<Date> parseDate(Optional<String> date) throws IllegalValueException {
+    public static Optional<EndDate> parseDate(Optional<String> date) throws IllegalValueException {
         assert date != null;
-        return date.isPresent() ? Optional.of(new Date(date.get())) : Optional.empty();
+        return date.isPresent() ? Optional.of(new EndDate(date.get())) : Optional.empty();
     }
 
     /**

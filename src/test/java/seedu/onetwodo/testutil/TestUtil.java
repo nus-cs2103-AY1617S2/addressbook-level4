@@ -30,14 +30,14 @@ import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.commons.util.FileUtil;
 import seedu.onetwodo.commons.util.XmlUtil;
 import seedu.onetwodo.model.ToDoList;
-import seedu.onetwodo.model.person.Date;
-import seedu.onetwodo.model.person.Description;
-import seedu.onetwodo.model.person.Name;
-import seedu.onetwodo.model.person.ReadOnlyTask;
-import seedu.onetwodo.model.person.Task;
-import seedu.onetwodo.model.person.Time;
 import seedu.onetwodo.model.tag.Tag;
 import seedu.onetwodo.model.tag.UniqueTagList;
+import seedu.onetwodo.model.task.EndDate;
+import seedu.onetwodo.model.task.Description;
+import seedu.onetwodo.model.task.Name;
+import seedu.onetwodo.model.task.ReadOnlyTask;
+import seedu.onetwodo.model.task.Task;
+import seedu.onetwodo.model.task.StartDate;
 import seedu.onetwodo.storage.XmlSerializableToDoList;
 
 /**
@@ -75,15 +75,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Name("Ali Muster"), new Time("9482424"), new Date("hans@google.com"), new Description("4th street"), new UniqueTagList()),
-                new Task(new Name("Boris Mueller"), new Time("87249245"), new Date("ruth@google.com"), new Description("81th street"), new UniqueTagList()),
-                new Task(new Name("Carl Kurz"), new Time("95352563"), new Date("heinz@yahoo.com"), new Description("wall street"), new UniqueTagList()),
-                new Task(new Name("Daniel Meier"), new Time("87652533"), new Date("cornelia@google.com"), new Description("10th street"), new UniqueTagList()),
-                new Task(new Name("Elle Meyer"), new Time("9482224"), new Date("werner@gmail.com"), new Description("michegan ave"), new UniqueTagList()),
-                new Task(new Name("Fiona Kunz"), new Time("9482427"), new Date("lydia@gmail.com"), new Description("little tokyo"), new UniqueTagList()),
-                new Task(new Name("George Best"), new Time("9482442"), new Date("anna@google.com"), new Description("4th street"), new UniqueTagList()),
-                new Task(new Name("Hoon Meier"), new Time("8482424"), new Date("stefan@mail.com"), new Description("little india"), new UniqueTagList()),
-                new Task(new Name("Ida Mueller"), new Time("8482131"), new Date("hans@google.com"), new Description("chicago ave"), new UniqueTagList())
+                new Task(new Name("Ali Muster"), new StartDate("9482424"), new EndDate("hans@google.com"), new Description("4th street"), new UniqueTagList()),
+                new Task(new Name("Boris Mueller"), new StartDate("87249245"), new EndDate("ruth@google.com"), new Description("81th street"), new UniqueTagList()),
+                new Task(new Name("Carl Kurz"), new StartDate("95352563"), new EndDate("heinz@yahoo.com"), new Description("wall street"), new UniqueTagList()),
+                new Task(new Name("Daniel Meier"), new StartDate("87652533"), new EndDate("cornelia@google.com"), new Description("10th street"), new UniqueTagList()),
+                new Task(new Name("Elle Meyer"), new StartDate("9482224"), new EndDate("werner@gmail.com"), new Description("michegan ave"), new UniqueTagList()),
+                new Task(new Name("Fiona Kunz"), new StartDate("9482427"), new EndDate("lydia@gmail.com"), new Description("little tokyo"), new UniqueTagList()),
+                new Task(new Name("George Best"), new StartDate("9482442"), new EndDate("anna@google.com"), new Description("4th street"), new UniqueTagList()),
+                new Task(new Name("Hoon Meier"), new StartDate("8482424"), new EndDate("stefan@mail.com"), new Description("little india"), new UniqueTagList()),
+                new Task(new Name("Ida Mueller"), new StartDate("8482131"), new EndDate("hans@google.com"), new Description("chicago ave"), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {

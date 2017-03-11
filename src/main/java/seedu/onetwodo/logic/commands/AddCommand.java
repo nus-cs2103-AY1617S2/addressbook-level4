@@ -5,14 +5,14 @@ import java.util.Set;
 
 import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
-import seedu.onetwodo.model.person.Date;
-import seedu.onetwodo.model.person.Description;
-import seedu.onetwodo.model.person.Name;
-import seedu.onetwodo.model.person.Task;
-import seedu.onetwodo.model.person.Time;
-import seedu.onetwodo.model.person.UniqueTaskList;
 import seedu.onetwodo.model.tag.Tag;
 import seedu.onetwodo.model.tag.UniqueTagList;
+import seedu.onetwodo.model.task.EndDate;
+import seedu.onetwodo.model.task.Description;
+import seedu.onetwodo.model.task.Name;
+import seedu.onetwodo.model.task.Task;
+import seedu.onetwodo.model.task.StartDate;
+import seedu.onetwodo.model.task.UniqueTaskList;
 
 /**
  * Adds a person to the todo list.
@@ -22,9 +22,9 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the todo list. "
-            + "Parameters: NAME p/TIME e/DATE a/DESCRIPTION  [t/TAG]...\n"
+            + "Parameters: NAME  s/START_DATE  e/END_DATE  d/DESCRIPTION  [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " John Doe p/98765432 e/johnd@gmail.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney";
+            + " Take a nap s/03 Mar 2017 17:00 e/03 Mar 2017 21:00 d/tonight don't need to sleep alr t/nap t/habbit";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the todo list";
@@ -36,7 +36,7 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, String time, String date, String description, Set<String> tags)
+    public AddCommand(String name, String startDate, String endDate, String description, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
@@ -44,8 +44,8 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Task(
                 new Name(name),
-                new Time(time),
-                new Date(date),
+                new StartDate(startDate),
+                new EndDate(endDate),
                 new Description(description),
                 new UniqueTagList(tagSet)
         );

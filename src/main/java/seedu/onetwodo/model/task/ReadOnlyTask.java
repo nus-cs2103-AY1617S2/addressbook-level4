@@ -1,4 +1,4 @@
-package seedu.onetwodo.model.person;
+package seedu.onetwodo.model.task;
 
 import seedu.onetwodo.model.tag.UniqueTagList;
 
@@ -9,8 +9,9 @@ import seedu.onetwodo.model.tag.UniqueTagList;
 public interface ReadOnlyTask {
 
     Name getName();
-    Time getTime();
-    Date getDate();
+    StartDate getStartDate();
+    EndDate getEndDate();
+    TaskType getTaskType();
     Description getDescription();
 
     /**
@@ -26,9 +27,10 @@ public interface ReadOnlyTask {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                 && other.getName().equals(this.getName()) // state checks here onwards
-                && other.getTime().equals(this.getTime())
-                && other.getDate().equals(this.getDate())
-                && other.getDescription().equals(this.getDescription()));
+                && other.getStartDate().equals(this.getStartDate())
+                && other.getEndDate().equals(this.getEndDate())
+                && other.getTaskType().equals(this.getTaskType()))
+                && other.getDescription().equals(this.getDescription());
     }
 
     /**
@@ -37,10 +39,10 @@ public interface ReadOnlyTask {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append(" Time: ")
-                .append(getTime())
-                .append(" Date: ")
-                .append(getDate())
+                .append(" StartDate: ")
+                .append(getStartDate())
+                .append(" EndDate: ")
+                .append(getEndDate())
                 .append(" Description: ")
                 .append(getDescription())
                 .append(" Tags: ");

@@ -6,14 +6,14 @@ import java.util.Optional;
 import seedu.onetwodo.commons.core.Messages;
 import seedu.onetwodo.commons.util.CollectionUtil;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
-import seedu.onetwodo.model.person.Date;
-import seedu.onetwodo.model.person.Description;
-import seedu.onetwodo.model.person.Name;
-import seedu.onetwodo.model.person.ReadOnlyTask;
-import seedu.onetwodo.model.person.Task;
-import seedu.onetwodo.model.person.Time;
-import seedu.onetwodo.model.person.UniqueTaskList;
 import seedu.onetwodo.model.tag.UniqueTagList;
+import seedu.onetwodo.model.task.EndDate;
+import seedu.onetwodo.model.task.Description;
+import seedu.onetwodo.model.task.Name;
+import seedu.onetwodo.model.task.ReadOnlyTask;
+import seedu.onetwodo.model.task.Task;
+import seedu.onetwodo.model.task.StartDate;
+import seedu.onetwodo.model.task.UniqueTaskList;
 
 /**
  * Edits the details of an existing task in the todo task.
@@ -25,7 +25,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [NAME] [p/TIME] [e/DATE] [a/DESCRIPTION ] [t/TAG]...\n"
+            + "Parameters: INDEX (must be a positive integer) [NAME] "
+            + "[s/START_DATE] [e/END_DATE] [d/DESCRIPTION ] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 p/91234567 e/johndoe@yahoo.com";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
@@ -78,12 +79,12 @@ public class EditCommand extends Command {
         assert taskToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
-        Time updatedTime = editTaskDescriptor.getTime().orElseGet(taskToEdit::getTime);
-        Date updatedDate = editTaskDescriptor.getDate().orElseGet(taskToEdit::getDate);
+        StartDate updatedStartDate = editTaskDescriptor.getStartDate().orElseGet(taskToEdit::getStartDate);
+        EndDate updatedEndDate = editTaskDescriptor.getDate().orElseGet(taskToEdit::getEndDate);
         Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedName, updatedTime, updatedDate, updatedDescription, updatedTags);
+        return new Task(updatedName, updatedStartDate, updatedEndDate, updatedDescription, updatedTags);
     }
 
     /**
@@ -92,8 +93,8 @@ public class EditCommand extends Command {
      */
     public static class EditTaskDescriptor {
         private Optional<Name> name = Optional.empty();
-        private Optional<Time> time = Optional.empty();
-        private Optional<Date> date = Optional.empty();
+        private Optional<StartDate> startDate = Optional.empty();
+        private Optional<EndDate> endDate = Optional.empty();
         private Optional<Description> description = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
@@ -101,8 +102,8 @@ public class EditCommand extends Command {
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.name = toCopy.getName();
-            this.time = toCopy.getTime();
-            this.date = toCopy.getDate();
+            this.startDate = toCopy.getStartDate();
+            this.endDate = toCopy.getDate();
             this.description = toCopy.getDescription();
             this.tags = toCopy.getTags();
         }
@@ -111,7 +112,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.time, this.date, this.description, this.tags);
+            return CollectionUtil.isAnyPresent(this.name, this.startDate, this.endDate, this.description, this.tags);
         }
 
         public void setName(Optional<Name> name) {
@@ -123,22 +124,22 @@ public class EditCommand extends Command {
             return name;
         }
 
-        public void setTime(Optional<Time> time) {
-            assert time != null;
-            this.time = time;
+        public void setTime(Optional<StartDate> startDate) {
+            assert startDate != null;
+            this.startDate = startDate;
         }
 
-        public Optional<Time> getTime() {
-            return time;
+        public Optional<StartDate> getStartDate() {
+            return startDate;
         }
 
-        public void setDate(Optional<Date> date) {
-            assert date != null;
-            this.date = date;
+        public void setDate(Optional<EndDate> endDate) {
+            assert endDate != null;
+            this.endDate = endDate;
         }
 
-        public Optional<Date> getDate() {
-            return date;
+        public Optional<EndDate> getDate() {
+            return endDate;
         }
 
         public void setDescription(Optional<Description> address) {

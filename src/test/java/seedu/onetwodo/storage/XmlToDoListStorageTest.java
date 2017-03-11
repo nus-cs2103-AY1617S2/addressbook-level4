@@ -15,7 +15,7 @@ import seedu.onetwodo.commons.exceptions.DataConversionException;
 import seedu.onetwodo.commons.util.FileUtil;
 import seedu.onetwodo.model.ReadOnlyToDoList;
 import seedu.onetwodo.model.ToDoList;
-import seedu.onetwodo.model.person.Task;
+import seedu.onetwodo.model.task.Task;
 import seedu.onetwodo.testutil.TypicalTestTasks;
 
 public class XmlToDoListStorageTest {

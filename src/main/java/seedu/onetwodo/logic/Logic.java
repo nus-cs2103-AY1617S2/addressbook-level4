@@ -3,7 +3,7 @@ package seedu.onetwodo.logic;
 import javafx.collections.ObservableList;
 import seedu.onetwodo.logic.commands.CommandResult;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
-import seedu.onetwodo.model.person.ReadOnlyTask;
+import seedu.onetwodo.model.task.ReadOnlyTask;
 
 /**
  * API of the Logic component
