@@ -78,14 +78,14 @@ public class AddCommandParser {
         UniqueTagList tagList = new UniqueTagList();
 
         // create task with specified tags
-        List<String> tagsParameterStringList = parameters.get(CliSyntax.PREFIX_UNDER.toString());
+        List<String> tagsParameterStringList = parameters.get(PREFIX_UNDER.toString());
         if (tagsParameterStringList != null && !tagsParameterStringList.isEmpty()) {
             tagList = ParserUtil.parseTagsFromString(tagsParameterStringList.get(0));
         }
         Task toAdd = new Task(new Description(preamble), tagList);
 
         // set priority
-        List<String> priority = parameters.get(CliSyntax.PREFIX_AS.toString());
+        List<String> priority = parameters.get(PREFIX_AS.toString());
         if (priority != null && !priority.isEmpty()) {
             String priorityStr = priority.get(0).trim();
             toAdd.setPriority(new Priority(priorityStr));

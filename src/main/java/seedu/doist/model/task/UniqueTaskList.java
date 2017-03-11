@@ -52,25 +52,25 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
-     * Updates the person in the list at position {@code index} with {@code editedPerson}.
+     * Updates the person in the list at position {@code index} with {@code editedTask}.
      *
      * @throws DuplicateTaskException if updating the person's details causes the person to be equivalent to
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updateTask(int index, ReadOnlyTask editedPerson) throws DuplicateTaskException {
-        assert editedPerson != null;
+    public void updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException {
+        assert editedTask != null;
 
-        Task personToUpdate = internalList.get(index);
-        if (!personToUpdate.equals(editedPerson) && internalList.contains(editedPerson)) {
+        Task taskToUpdate = internalList.get(index);
+        if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
             throw new DuplicateTaskException();
         }
 
-        personToUpdate.resetData(editedPerson);
+        taskToUpdate.resetData(editedTask);
         // TODO: The code below is just a workaround to notify observers of the updated person.
         // The right way is to implement observable properties in the Person class.
         // Then, PersonCard should then bind its text labels to those observable properties.
-        internalList.set(index, personToUpdate);
+        internalList.set(index, taskToUpdate);
     }
 
     /**

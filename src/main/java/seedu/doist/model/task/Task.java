@@ -75,6 +75,7 @@ public class Task implements ReadOnlyTask {
         assert replacement != null;
 
         this.setDescription(replacement.getDescription());
+        this.setPriority(replacement.getPriority());
         this.setTags(replacement.getTags());
     }
 

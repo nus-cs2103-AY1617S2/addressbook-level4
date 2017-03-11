@@ -18,6 +18,7 @@ import seedu.doist.commons.util.StringUtil;
 import seedu.doist.model.tag.Tag;
 import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.Description;
+import seedu.doist.model.task.Priority;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -82,6 +83,14 @@ public class ParserUtil {
     public static Optional<Description> parseDesc(Optional<String> desc) throws IllegalValueException {
         assert desc != null;
         return desc.isPresent() ? Optional.of(new Description(desc.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code Optional<String> priority} into an {@code Optional<Priority>} if {@code priority} is present.
+     */
+    public static Optional<Priority> parsePriority(Optional<String> priorityRawValue) throws IllegalValueException {
+        assert priorityRawValue != null;
+        return priorityRawValue.isPresent() ? Optional.of(new Priority(priorityRawValue.get())) : Optional.empty();
     }
 
     /**

@@ -105,6 +105,7 @@ public class EditCommand extends Command {
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.desc = toCopy.getDesc();
+            this.priority = toCopy.getPriority();
             this.tags = toCopy.getTags();
         }
 
@@ -112,13 +113,18 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.desc, this.tags);
+            return CollectionUtil.isAnyPresent(this.desc, this.priority, this.tags);
 
         }
 
         public void setDesc(Optional<Description> desc) {
             assert desc != null;
             this.desc = desc;
+        }
+
+        public void setPriority(Optional<Priority> priority) {
+            assert priority != null;
+            this.priority = priority;
         }
 
         public Optional<Description> getDesc() {

@@ -89,7 +89,7 @@ public class ModelManager extends ComponentManager implements Model {
         todoList.sortTasks(new ReadOnlyTaskPriorityComparator());
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Task List Accessors =============================================================
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
