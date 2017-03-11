@@ -6,25 +6,23 @@ import seedu.doit.commons.util.CollectionUtil;
 import seedu.doit.model.tag.UniqueTagList;
 
 /**
- * Represents a Task in the task manager.
+ * Represents a FloatingTask in the task manager.
  * Guarantees: details are present and not null, field values are validated.
  */
 public class FloatingTask implements ReadOnlyFloatingTask {
 
     private Name name;
     private Priority priority;
-    private EndTime deadline;
     private Description description;
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public FloatingTask(Name name, Priority priority, EndTime deadline, Description description, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, priority, deadline, description, tags);
+    public FloatingTask(Name name, Priority priority, Description description, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, priority, description, tags);
         this.name = name;
         this.priority = priority;
-        this.deadline = deadline;
         this.description = description;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
@@ -33,7 +31,7 @@ public class FloatingTask implements ReadOnlyFloatingTask {
      * Creates a copy of the given ReadOnlyFloatingTask.
      */
     public FloatingTask(ReadOnlyFloatingTask source) {
-        this(source.getName(), source.getPriority(), source.getDeadline(), source.getDescription(), source.getTags());
+        this(source.getName(), source.getPriority(), source.getDescription(), source.getTags());
     }
 
     @Override
@@ -54,16 +52,6 @@ public class FloatingTask implements ReadOnlyFloatingTask {
     public void setPriority(Priority priority) {
         assert priority != null;
         this.priority = priority;
-    }
-
-    @Override
-    public EndTime getDeadline() {
-        return deadline;
-    }
-
-    public void setDeadline(EndTime deadline) {
-        assert deadline != null;
-        this.deadline = deadline;
     }
 
     @Override
@@ -96,7 +84,6 @@ public class FloatingTask implements ReadOnlyFloatingTask {
 
         this.setName(replacement.getName());
         this.setPriority(replacement.getPriority());
-        this.setDeadline(replacement.getDeadline());
         this.setDescription(replacement.getDescription());
         this.setTags(replacement.getTags());
     }
@@ -111,7 +98,7 @@ public class FloatingTask implements ReadOnlyFloatingTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, priority, deadline, description, tags);
+        return Objects.hash(name, priority, description, tags);
     }
 
     @Override

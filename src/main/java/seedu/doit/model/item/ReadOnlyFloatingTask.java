@@ -1,26 +1,10 @@
 package seedu.doit.model.item;
 
-import seedu.doit.model.tag.UniqueTagList;
-
 /**
- * A read-only immutable interface for a Task in the task manager.
+ * A read-only immutable interface for a FloatingTask in the task manager.
  * Implementations should guarantee: details are present and not null, field values are validated.
  */
-public interface ReadOnlyFloatingTask {
-
-    Name getName();
-
-    Priority getPriority();
-
-    EndTime getDeadline();
-
-    Description getDescription();
-
-    /**
-     * The returned TagList is a deep copy of the internal TagList,
-     * changes on the returned list will not affect the task's internal tags.
-     */
-    UniqueTagList getTags();
+public interface ReadOnlyFloatingTask extends Item {
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
@@ -30,20 +14,18 @@ public interface ReadOnlyFloatingTask {
             || (other != null // this is first to avoid NPE below
             && other.getName().equals(this.getName()) // state checks here onwards
             && other.getPriority().equals(this.getPriority())
-            && other.getDeadline().equals(this.getDeadline())
             && other.getDescription().equals(this.getDescription()));
     }
 
     /**
-     * Formats the task as text, showing all contact details.
+     * Formats the floatingTask as text, showing all details.
      */
+    @Override
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
             .append(" Priority: ")
             .append(getPriority())
-            .append(" Deadline: ")
-            .append(getDeadline())
             .append(" Description: ")
             .append(getDescription())
             .append(" Tags: ");
