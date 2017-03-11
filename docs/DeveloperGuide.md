@@ -1,7 +1,7 @@
 # Bullet Journal - Developer Guide
 
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team F12-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `March 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -447,7 +447,7 @@ Use case ends.
 
 Author: Bryan Lee
 
-Pros:
+**Pros:**
 
 *Google Calendar is easy and fast to set up, especially if you use a Google account
 
@@ -455,7 +455,7 @@ Pros:
 
 *Organize events and appointments via different calendars
 
-Cons:
+**Cons:**
 
 *Possible problems communicating with other calendars such as iCal
 
@@ -465,19 +465,26 @@ Cons:
 
 Author: Aris Huynh
 
-Pros:
+**Pros:**
 
-*...
+- Central focus task visibly displayed in the center of the site.
+- Accessible from Chrome
+- Local Storage of tasks in browser
+- Simple to-do list with checkboxes as done indicator.
 
-Cons:
+**Cons:**
 
-*...
+- Lack of data persistence when Chrome cache is cleared
+- Poor sync for the same account across browsers and devices
+- Poor responsiveness on small screen size
+- Tasks can only be text-based for free version.
+
 
 **Apple's Notes App**
 
 Author: Wang Yu
 
-Pros:
+**Pros:**
 
 *Apple's built-in Notes App is nothing different from a paper notebook except that it is electronic which makes it capable of storing more than enough notes and deleting notes that are no longer needed.
 
@@ -485,7 +492,7 @@ Pros:
 
 *With the Notes App on iCloud.com, users can easily get to see their notes on different platforms if Internet connection is available.
 
-Cons:
+**Cons:**
 
 *Notes is only available for the Apple OS platform. As our target are MS users, Notes is not an option for them.
 
@@ -499,7 +506,11 @@ Cons:
 
 Author: Zhang Heyang
 
-Cons:
+**Pros:**
+
+*Supports iPhone and related devices.
+
+**Cons:**
 
 *No localisation, for instance in China there is not lunar calendar and no Japanese traditional holidays calendar in Japan.
 
