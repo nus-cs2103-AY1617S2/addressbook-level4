@@ -107,21 +107,18 @@ public class XmlEzDoStorageTest {
     public void moveEzDo_nullOldFilePath_assertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
         moveEzDo(null, "Somewhere.xml");
-        assertTrue(true);
     }
 
     @Test
     public void moveEzDo_nullNewFilePath_assertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
         moveEzDo("Somewhere.xml", null);
-        assertTrue(true);
     }
 
     @Test
     public void moveEzDo_nullFilePaths_assertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
         moveEzDo(null, null);
-        assertTrue(true);
     }
 
     private void moveEzDo(String oldPath, String filePath) throws IOException {
