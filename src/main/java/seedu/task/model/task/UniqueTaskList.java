@@ -5,9 +5,9 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.commons.exceptions.DuplicateDataException;
-import seedu.address.commons.util.CollectionUtil;
+import seedu.task.commons.core.UnmodifiableObservableList;
+import seedu.task.commons.exceptions.DuplicateDataException;
+import seedu.task.commons.util.CollectionUtil;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not
@@ -68,7 +68,7 @@ public class UniqueTaskList implements Iterable<Task> {
         // updated person.
         // The right way is to implement observable properties in the Person
         // class.
-        // Then, PersonCard should then bind its text labels to those observable
+        // Then, TaskCard should then bind its text labels to those observable
         // properties.
         internalList.set(index, personToUpdate);
     }

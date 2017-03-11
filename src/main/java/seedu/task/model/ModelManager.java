@@ -4,12 +4,12 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
-import seedu.address.commons.core.ComponentManager;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.commons.events.model.TaskBookChangedEvent;
-import seedu.address.commons.util.CollectionUtil;
-import seedu.address.commons.util.StringUtil;
+import seedu.task.commons.core.ComponentManager;
+import seedu.task.commons.core.LogsCenter;
+import seedu.task.commons.core.UnmodifiableObservableList;
+import seedu.task.commons.events.model.TaskBookChangedEvent;
+import seedu.task.commons.util.CollectionUtil;
+import seedu.task.commons.util.StringUtil;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
@@ -22,51 +22,51 @@ import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final TaskBook taskBook;
+    private final TaskList taskList;
     private final FilteredList<ReadOnlyTask> filteredTasks;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyTaskBook taskBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTaskList taskBook, UserPrefs userPrefs) {
         super();
         assert !CollectionUtil.isAnyNull(taskBook, userPrefs);
 
         logger.fine("Initializing with address book: " + taskBook + " and user prefs " + userPrefs);
 
-        this.taskBook = new TaskBook(taskBook);
-        filteredTasks = new FilteredList<>(this.taskBook.getPersonList());
+        this.taskList = new TaskList(taskBook);
+        filteredTasks = new FilteredList<>(this.taskList.getPersonList());
     }
 
     public ModelManager() {
-        this(new TaskBook(), new UserPrefs());
+        this(new TaskList(), new UserPrefs());
     }
 
     @Override
-    public void resetData(ReadOnlyTaskBook newData) {
-        taskBook.resetData(newData);
+    public void resetData(ReadOnlyTaskList newData) {
+        taskList.resetData(newData);
         indicateTaskBookChanged();
     }
 
     @Override
-    public ReadOnlyTaskBook getTaskBook() {
-        return taskBook;
+    public ReadOnlyTaskList getTaskBook() {
+        return taskList;
     }
 
     /** Raises an event to indicate the model has changed */
     private void indicateTaskBookChanged() {
-        raise(new TaskBookChangedEvent(taskBook));
+        raise(new TaskBookChangedEvent(taskList));
     }
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-        taskBook.removeTask(target);
+        taskList.removeTask(target);
         indicateTaskBookChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        taskBook.addTask(task);
+        taskList.addTask(task);
         updateFilteredListToShowAll();
         indicateTaskBookChanged();
     }
@@ -77,7 +77,7 @@ public class ModelManager extends ComponentManager implements Model {
         assert editedTask != null;
 
         int addressBookIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        taskBook.updateTask(addressBookIndex, editedTask);
+        taskList.updateTask(addressBookIndex, editedTask);
         indicateTaskBookChanged();
     }
 

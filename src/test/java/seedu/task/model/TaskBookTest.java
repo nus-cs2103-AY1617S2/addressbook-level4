@@ -14,17 +14,17 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.testutil.TypicalTestPersons;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
+import seedu.task.testutil.TypicalTestPersons;
 
 public class TaskBookTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final TaskBook addressBook = new TaskBook();
+    private final TaskList addressBook = new TaskList();
 
     @Test
     public void constructor() {
@@ -40,7 +40,7 @@ public class TaskBookTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        TaskBook newData = new TypicalTestPersons().getTypicalAddressBook();
+        TaskList newData = new TypicalTestPersons().getTypicalAddressBook();
         addressBook.resetData(newData);
         assertEquals(newData, addressBook);
     }
@@ -59,7 +59,7 @@ public class TaskBookTest {
 
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
-        TaskBook typicalAddressBook = new TypicalTestPersons().getTypicalAddressBook();
+        TaskList typicalAddressBook = new TypicalTestPersons().getTypicalAddressBook();
         List<ReadOnlyTask> newPersons = typicalAddressBook.getPersonList();
         List<Tag> newTags = new ArrayList<>(typicalAddressBook.getTagList());
         // Repeat the first tag twice
@@ -73,7 +73,7 @@ public class TaskBookTest {
     /**
      * A stub ReadOnlyAddressBook whose persons and tags lists can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyTaskBook {
+    private static class AddressBookStub implements ReadOnlyTaskList {
         private final ObservableList<ReadOnlyTask> persons = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 

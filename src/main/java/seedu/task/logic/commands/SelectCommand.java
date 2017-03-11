@@ -1,9 +1,9 @@
 package seedu.task.logic.commands;
 
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
+import seedu.task.commons.core.EventsCenter;
+import seedu.task.commons.core.Messages;
+import seedu.task.commons.core.UnmodifiableObservableList;
+import seedu.task.commons.events.ui.JumpToListRequestEvent;
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.task.ReadOnlyTask;
 

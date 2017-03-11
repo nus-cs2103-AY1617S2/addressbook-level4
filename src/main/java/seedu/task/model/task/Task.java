@@ -2,7 +2,7 @@ package seedu.task.model.task;
 
 import java.util.Objects;
 
-import seedu.address.commons.util.CollectionUtil;
+import seedu.task.commons.util.CollectionUtil;
 import seedu.task.model.tag.UniqueTagList;
 
 /**

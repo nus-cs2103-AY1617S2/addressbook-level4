@@ -1,6 +1,6 @@
 package seedu.task.logic.commands;
 
-import seedu.address.commons.core.Messages;
+import seedu.task.commons.core.Messages;
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.Model;
 

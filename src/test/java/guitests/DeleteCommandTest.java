@@ -5,8 +5,8 @@ import static seedu.task.logic.commands.DeleteCommand.MESSAGE_DELETE_PERSON_SUCC
 
 import org.junit.Test;
 
-import seedu.address.testutil.TestPerson;
-import seedu.address.testutil.TestUtil;
+import seedu.task.testutil.TestPerson;
+import seedu.task.testutil.TestUtil;
 
 public class DeleteCommandTest extends AddressBookGuiTest {
 

@@ -2,7 +2,7 @@ package seedu.task.model;
 
 import java.util.Set;
 
-import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
@@ -12,10 +12,10 @@ import seedu.task.model.task.UniqueTaskList;
  */
 public interface Model {
     /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyTaskBook newData);
+    void resetData(ReadOnlyTaskList newData);
 
     /** Returns the AddressBook */
-    ReadOnlyTaskBook getTaskBook();
+    ReadOnlyTaskList getTaskBook();
 
     /** Deletes the given person. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
