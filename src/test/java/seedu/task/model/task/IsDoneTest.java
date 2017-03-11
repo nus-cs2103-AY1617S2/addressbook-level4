@@ -14,7 +14,7 @@ public class IsDoneTest {
     @Test
     public void isDone() throws IllegalValueException {
         
-        TestTask taskToTest = new TaskBuilder().withName("Buy milk").withDate("12-03-2017")
+        TestTask taskToTest = new TaskBuilder().withName("Buy milk").withEndDate("12-03-2017")
                 .withRemark("remark").withLocation("Block 123, Bobby Street 3").withTags("shopping").build();
         
         assertFalse(taskToTest.isDone()); // default should be not done

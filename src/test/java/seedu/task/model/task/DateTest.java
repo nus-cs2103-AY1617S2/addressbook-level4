@@ -5,7 +5,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 import org.junit.Test;
 
@@ -28,8 +27,8 @@ public class DateTest {
         testDate = new Date("1/1/00 1:23");
         assertEquals("1/1/2000 1:23 AM", testDate.toString());
 
-        testDate = new Date("25 Dec");
-        assertEquals("25/12/1970 12:00 AM", testDate.toString());
+        testDate = new Date("25 Dec 15");
+        assertEquals("25/12/2015 12:00 AM", testDate.toString());
         
         testDate = new Date("3pm");
         java.util.Date currentDate = new java.util.Date();
@@ -72,11 +71,11 @@ public class DateTest {
         assertTrue(Date.isValidDate("23/12/17 11:59 Am"));
         assertTrue(Date.isValidDate("23/12/17 9Am"));
         assertTrue(Date.isValidDate("23/12/2017"));
-        assertTrue(Date.isValidDate("30 Jun 2359"));
-        assertTrue(Date.isValidDate("4 July 10:09Pm"));
-        assertTrue(Date.isValidDate("1 Sep 4:09 AM"));
-        assertTrue(Date.isValidDate("31 Jul"));
-        assertTrue(Date.isValidDate("31 January"));
+        assertTrue(Date.isValidDate("30 Jun 17 2359"));
+        assertTrue(Date.isValidDate("4 July 17 10:09Pm"));
+        assertTrue(Date.isValidDate("1 Sep 17 4:09 AM"));
+        assertTrue(Date.isValidDate("31 Jul 17"));
+        assertTrue(Date.isValidDate("31 January 17"));
         assertTrue(Date.isValidDate("1530"));
         assertTrue(Date.isValidDate("3:30 pm"));
         assertTrue(Date.isValidDate("03:30 pm"));

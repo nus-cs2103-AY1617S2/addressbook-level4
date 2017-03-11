@@ -70,13 +70,13 @@ public class Date {
 		allowedFormats.add(new SimpleDateFormat("d/M/y ha"));
 		allowedFormats.add(new SimpleDateFormat("d/M/y hha"));
 		allowedFormats.add(new SimpleDateFormat("d/M/y"));
-		allowedFormats.add(new SimpleDateFormat("dd MMM H:m"));
-		allowedFormats.add(new SimpleDateFormat("dd MMM HHmm"));
-		allowedFormats.add(new SimpleDateFormat("dd MMM h:m a"));
-		allowedFormats.add(new SimpleDateFormat("dd MMM h:mma"));
-		allowedFormats.add(new SimpleDateFormat("dd MMM ha"));
-		allowedFormats.add(new SimpleDateFormat("dd MMM hha"));
-		allowedFormats.add(new SimpleDateFormat("dd MMM"));
+        allowedFormats.add(new SimpleDateFormat("dd MMM yy H:m"));
+        allowedFormats.add(new SimpleDateFormat("dd MMM yy HHmm"));
+        allowedFormats.add(new SimpleDateFormat("dd MMM yy h:m a"));
+        allowedFormats.add(new SimpleDateFormat("dd MMM yy h:mma"));
+        allowedFormats.add(new SimpleDateFormat("dd MMM yy ha"));
+        allowedFormats.add(new SimpleDateFormat("dd MMM yy hha"));
+        allowedFormats.add(new SimpleDateFormat("dd MMM yy"));
 		allowedFormats.add(new SimpleDateFormat("H:m"));
 		allowedFormats.add(new SimpleDateFormat("HHmm"));
 		allowedFormats.add(new SimpleDateFormat("h:m a"));
@@ -111,25 +111,17 @@ public class Date {
 	 * Returns true if a given string is a valid date.
 	 */
 	public static boolean isValidDate(String input) {
-
-		format.setLenient(false);
-		try {
-			format.parse(input);
-			return true;
-		} catch (ParseException e) {
-
-			if (input.trim().isEmpty()) {
-				return false;
-			}
-
-			prepareDateFormats();
-
-			if (getDateFormat(input) != null) {
-				return true;
-			} else {
-				return false;
-			}
+		if (input.trim().isEmpty()) {
+			return false;
 		}
+		
+		prepareDateFormats();
+		
+		if (getDateFormat(input) != null) {
+			return true;
+		} else {
+			return false;
+		}		
 	}
 
 	@Override
