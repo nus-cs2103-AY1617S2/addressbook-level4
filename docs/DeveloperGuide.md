@@ -1,6 +1,6 @@
-# AddressBook Level 4 - Developer Guide
+# Typed - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Typedwriters`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `March 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -263,13 +263,13 @@ We have two types of tests:
 
 2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
    1. _Unit tests_ targeting the lowest level methods/classes. <br>
-      e.g. `seedu.address.commons.UrlUtilTest`
+      e.g. `seedu.typed.commons.UrlUtilTest`
    2. _Integration tests_ that are checking the integration of multiple code units
      (those code units are assumed to be working).<br>
-      e.g. `seedu.address.storage.StorageManagerTest`
+      e.g. `seedu.typed.storage.StorageManagerTest`
    3. Hybrids of unit and integration tests. These test are checking multiple code units as well as
       how the are connected together.<br>
-      e.g. `seedu.address.logic.LogicManagerTest`
+      e.g. `seedu.typed.logic.LogicManagerTest`
 
 #### Headless GUI Testing
 Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
@@ -343,53 +343,233 @@ b. Require developers to download those libraries manually (this creates extra w
 
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
 
+### Our User Stories
 
+### Add Functions
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | user | add a new task with a specified deadline | track when it is due <br>
+`* * *` | user | add a new task without specifying deadline | do it sometime later <br>
+`* * *` | user | add a new event | reserve that time <br>
+`* * *` | user | add a tentative event | hold my schedule until confirmation <br>
+`* * *` | user | add recurring tasks | add all at once <br>
+`* * *` | user | add tasks using everyday phrases (e.g. today, next monday) | save time looking the exact dates up on a calendar<br>
+`* *` | user | add subtasks to a bigger task | organise my tasks into smaller parts <br>
+`* *` | user | add comments to a task | refer back to details about the task <br>
+`* *` | user | add tasks with multiple tags | track overlapping tasks <br>
+`* *` | user | add attachments to a task | complete my task with greater ease <br>
+`* *` | user | be alerted when adding clashing events | know I am unavailable <br>
 
-{More to be added}
+
+### Find Functions
+Priority | As a ... | I want to ... | So that I can...
+-------- | :-------- | :--------- | :-----------
+`* * *` | user | find tasks with upcoming deadlines | prioritise these tasks <br>
+`* * *` | user | find my upcoming events | be aware of my upcoming schedule <br>
+`* * *` | user | find a task by name | easily view more about it <br>
+`* * *` | user | find tasks by tag | retrieve tasks i have categorised <br>
+`* * *` | user | search for a keyword | view all associated tasks <br>
+`* * *` | user | do power searching | find tasks whose exact names I have forgotten <br>
+
+### Sort Functions
+Priority | As a ... | I want to ... | So that I can...
+-------- | :-------- | :--------- | :-----------
+`* *` | user | task type filter | view tasks by their types <br>
+`* *` | user | sort the tasks based on tags | view tasks by tags <br>
+`* *` | user | sort tasks by name | locate a task easily <br>
+`* *` | user | sort tasks by deadline | do what is more urgent first <br>
+`* *` | user | sort tasks by priority | attend to the more important tasks first <br>
+
+### Edit Functions
+Priority | As a ... | I want to ... | So that I can...
+-------- | :-------- | :--------- | :-----------
+`* * *` | user | mark a task as done | remove it from my to-dos  <br>
+`* * *` | user | delete a task | remove it completely from storage <br>
+`* * *` | user | edit a task | modify and update its details  <br>
+`* * *` | user | undo my last move | correct my mistake <br>
+`* * *` | user | redo my last move | redo an undo action <br>
+`* *` | user | undo a series of moves | correct multiple consecutive mistakes <br>
+`* *` | user | redo a series of moves | redo multiple consecutive undo actions <br>
+`* *` | user | mark a whole group of tasks as done | save time and effort <br>
+`* *` | user | archive a done task | track what I have completed <br>
+
+### View Functions
+Priority | As a ... | I want to ... | So that I can...
+-------- | :-------- | :--------- | :-----------
+`* * *` | user | see my overdue tasks | finish them right away <br>
+`* * *` | user | view my tasks by day | know what my tasks and schedule are for a certain day <br>
+`* *` | user | weekly overview of what is due this week | plan my time in advance <br>
+`* *` | user | big picture overview of my daily performance | learn the patterns of my own productivity  <br>
+`* *` | user | see all upcoming deadlines in a calendar view | have an overview of all my tasks <br>
+`* *` | user | see a countdown timer | know how much time is left to do each task <br>
+`* *` | user | view a confirmation that my command has been processed | be assured  <br>
+
+### Help Functions
+Priority | As a ... | I want to ... | So that I can...
+-------- | :-------- | :--------- | :-----------
+`* * *` | user | view information about a particular command | learn to use it <br>
+`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App <br>
+`* *` | user | have the option of having a tutorial | be taught to use the task manager <br>
+`* *` | user | see command formats as I type | refer to it if I am unsure of the format <br>
+
+### Advanced Functions
+Priority | As a ... | I want to ... | So that I can...
+-------- | :-------- | :--------- | :-----------
+`* * *` | advanced user | enter commands with the use of flags | specify the perimeters of the command more clearly <br>
+`* * *` | advanced user | use shorter versions of commands | type each command faster <br>
+`* *` | advanced user | create new shortcuts | speed up my workflow <br>
+
+### Integration Functions
+Priority | As a ... | I want to ... | So that I can...
+-------- | :-------- | :--------- | :-----------
+`* *` | user | have integration with text notifications | receive text alerts on important tasks that are due when I am away from my task manager <br>
+`* *` | user | access my email alongside the task manager | do not need to switch screens in order to add tasks <br>
+`* *` | user | my task manager to link to the necessary resources such as email or IVLE exact pages | I do not have to open a browser to do such things <br>
+`* *` | user | open the respective application to complete a particular task | save extra steps <br>
+`* *` | user | have my list of to-dos sync across all my devices | work without the computer <br>
+`* *` | user | port my whole schedule over to online platforms such as Dropbox | can access it on any computer <br>
+`* *` | user | import calendars' schedule into the task manager | I can look at my calendar <br>
+
+### Design/UIUX Functions
+Priority | As a ... | I want to ... | So that I can...
+-------- | :-------- | :--------- | :-----------
+`* * *` | user | have a few colour themes I can choose between | select colours I am more comfortable with <br>
+`* * *` | user | a simple user interface | be less distracted and more productive <br>
+`* *` | user | change font, font size, colour of words | personalise my task manager to my preference <br>
+`*` | user | see affirmations of my effort upon task completions | look forward to accomplishing more tasks <br>
+`*` | user | be greeted with motivational lines when I launch the task manager | feel motivated to start doing things <br>
+`*` | user | greeted with a compliment when I launch the task manager | be in a good mood to start doing things <br>
+`*` | user | receive encouragement | feel good about myself and want to use the task manager more <br>
+`*` | user | some sort of punishment when I fail to complete a task | find motivation to do my tasks <br>
+
+### Unique Functions
+Priority | As a ... | I want to ... | So that I can...
+-------- | :-------- | :--------- | :-----------
+`* * *` | user | commands to be highlighted | know they are valid commands <br>
+`* *` | user | have a daily progress check-in function | know I have worked on a task today even if I cannot complete it <br>
+`* *` | user | have some sort of points or incentive system | accomplish more and be more motivated to be productive <br>
+`* *` | user | have a priority system on my tasks | finish those of higher priority first <br>
+`* *` | user | have spellcheck as I type commands | correct errors immediately <br>
+`* *` | user | a reminder function | get notified when deadlines or events are nearer <br>
+
+### Basic Functions
+Priority | As a ... | I want to ... | So that I can...
+-------- | :-------- | :--------- | :-----------
+`* * *` | user | be able to do everything through typing | it is convenient for me <br>
+`* * *` | user | have each command processed within a second | be more efficient and productive in managing my tasks <br>
+`* *` | user | enable backup | have a backup copy in case the storage fails or crashes <br>
+
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Typed` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: View history of actions ####
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+User keys in a series of command(s)
+User requests to view history of actions
+Typed displays the list of past actions
 Use case ends.
 
 **Extensions**
 
-2a. The list is empty
+1a. Command is typed in wrongly
+	| Systems indicate error and output a list of valid commands
+2a. List is empty
+	| System indicate History Command only
+2b. List size is way too large
+	| System shows the recent 10 commands
 
-> Use case ends
+#### Use case: Perform simple keyword query ####
 
-3a. The given index is invalid
+**MSS**
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+User enters a keyword to find any matching to do in Typed.
+Typed displays all the todos with matching keywords.
 
-{More to be added}
+**Extensions**
+1a. Typed is empty
+	| User search his todos using keywords
+	| Typed displays that there are no todo with the any matching keywords.
+	| Use case ends
+
+#### Use case: Undo previous action ####
+
+**MSS**
+
+User keys in a series of command(s) changing information stored in Typed.
+User requests to undo the last action done.
+Typed undoes the last action done.
+Typed displays text informing user that the last action has been successfully undone.
+Use case ends.
+
+**Extensions**
+
+1a. User does not key in any command at all
+	| User requests to undo the last action done
+	| Typed displays text informing user that there are no actions to be undone
+	| Use case ends
+
+1b. User keys in a series of command(s) that do not change the information stored in Typed
+	| User requests to undo the last action done
+	| Typed displays text informing user that there are no actions to be undone
+	| Use case ends
+
+2a. User restarts the session
+	| User requests to undo the last action done
+	| Typed displays text informing user that there are no actions to be undone
+	| Use case ends
+
+#### Use case: Redo previous undone action ####
+
+**MSS**
+
+User keys in a series of command(s) changing information stored in Typed.
+User requests to undo the last action done.
+User requests to redo the previously undone action.
+Typed redoes the last action undone by Typed.
+Typed displays text informing user that the last undone action has been successfully redone.
+Use case ends.
+
+**Extensions**
+
+1a. User does not key in any command at all
+	| User requests to undo the last action done
+	| Typed displays text informing user that there are no actions to be undone
+	| Use case ends
+
+1b. User keys in a series of command(s) that do not change the information stored in Typed
+	| User requests to undo the last action done
+	| Typed displays text informing user that there are no actions to be undone
+	| Use case ends
+
+2a. User restarts the session
+	| User requests to undo the last action done
+	| Typed displays text informing user that there are no actions to be undone
+	| Use case ends
+
+3a. User keys in a command that changes the information stored in Typed
+	| User requests to redo the last action done
+	| Typed displays text informing user that there are no undone actions to be redone
+	| Use case ends
+
+3b. User keys in a series of command(s) that do not change the information stored in Typed
+	| Use case continues from step 3
+
+3c. User restarts the session
+	| User requests to redo the last action done
+	| Typed displays text informing user that there are no undone actions to be redone
+	| Use case ends
+
 
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-{More to be added}
 
 ## Appendix D : Glossary
 
@@ -397,23 +577,80 @@ Use case ends.
 
 > Windows, Linux, Unix, OS-X
 
-##### Private contact detail
-
-> A contact detail that is not meant to be shared with others
-
 ## Appendix E : Product Survey
 
-**Product Name**
+### **Eclipse**
 
-Author: ...
+Author: Lee Pei Xuan
 
 Pros:
-
-* ...
-* ...
+* Organise tasks into projects
+* Organise projects by classifying them into groups
+* Color coding according to groups
+* Get overall status of each project at one glance using progress bars that inform you how many percent of the project is completed
+* View all tasks by deadlines to prioritise your time better
+* Stamp tasks that you have worked on but not completed each day
 
 Cons:
+* Typed navigation is not available
+* No offline functionality
+* Only available on Windows 10 computers
 
-* ...
-* ...
+### **Reminder**
+
+Author: Low Yong Siang
+
+Pros:
+* Multi-device syncing allows for the user to be able to continue on different devices.
+* Able to mark off the list of todos and it is transferred to the Completed section.
+* Able to set a reminder notification on a date or given a location.
+* Offline functionality, and will sync across devices when internet connection is available.
+* Able to add priority to each task (3 levels in total).
+* Clean and intuitive user interface.
+* Able to add comments and notes to a to do which helps to organise thoughts on the specific task.
+* Able to color code todo, for organization.
+
+Cons:
+* Multi-device syncing only happens when internet connection is available.
+* Does not sort the list in the priority level. Only shows the priority symbol at the side of the task.
+* Only available on Apple devices.
+* Typed navigation to the completed and pending list is not available.
+
+### **Evernote**
+
+Author: Mun Le Yuan
+
+Pros:
+* Can be accessed on both laptops and smartphones
+* Notes can be tagged with text and location
+* Allows great extent of organisation by giving users the ability to group notes into notebooks and even group notebooks
+* Users can add images and sound clips to notes
+* Users can attach documents to notes
+* Users can share notes with others (not really relevant)
+* Users can search through notes using key words
+* Allows notes or notebooks to be added to shortcuts for easy access
+* Users can set reminders for notes
+* Data is stored in the cloud
+* Shows search history
+* Users can clip webpages to the notes (only on laptops)
+* Allows users to forward emails to Evernote
+
+Cons:
+* Involves quite a bit of GUI (not very suitable for Jim)
+* Does not allow users to prioritise tasks in notes
+
+### **Any.do**
+
+Author: Yim Chia Hui
+
+Pros:
+* Minimalist design reduces the clutter on the screen
+* Provides Any.do Moment which runs through the things to do for the day/review what has been done already
+* Organise into categories
+* View based on priorities
+* GUI is simple and easy to learn
+
+Cons:
+* Not much customizable possible
+* No calendar view
 

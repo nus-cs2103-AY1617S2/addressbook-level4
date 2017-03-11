@@ -10,8 +10,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import seedu.address.TestApp;
-import seedu.address.commons.core.LogsCenter;
+import seedu.typed.TestApp;
+import seedu.typed.commons.core.LogsCenter;
 
 /**
  * Base class for all GUI Handles used in testing.
@@ -20,7 +20,8 @@ public class GuiHandle {
     protected final GuiRobot guiRobot;
     protected final Stage primaryStage;
     /**
-     * An optional stage that exists in the App other than the primaryStage, could be a alert dialog, popup window, etc.
+     * An optional stage that exists in the App other than the primaryStage,
+     * could be a alert dialog, popup window, etc.
      */
     protected Optional<Stage> intermediateStage = Optional.empty();
     protected final String stageTitle;
@@ -36,8 +37,7 @@ public class GuiHandle {
 
     public void focusOnWindow(String stageTitle) {
         logger.info("Focusing " + stageTitle);
-        Optional<Window> window = guiRobot.listTargetWindows()
-                .stream()
+        Optional<Window> window = guiRobot.listTargetWindows().stream()
                 .filter(w -> w instanceof Stage && ((Stage) w).getTitle().equals(stageTitle)).findAny();
 
         if (!window.isPresent()) {
@@ -63,7 +63,8 @@ public class GuiHandle {
         guiRobot.clickOn(textFieldId);
         TextField textField = getNode(textFieldId);
         textField.setText(newText);
-        guiRobot.sleep(500); // so that the texts stays visible on the GUI for a short period
+        guiRobot.sleep(500); // so that the texts stays visible on the GUI for a
+                             // short period
     }
 
     public void pressEnter() {
@@ -85,8 +86,7 @@ public class GuiHandle {
     }
 
     public void closeWindow() {
-        Optional<Window> window = guiRobot.listTargetWindows()
-                .stream()
+        Optional<Window> window = guiRobot.listTargetWindows().stream()
                 .filter(w -> w instanceof Stage && ((Stage) w).getTitle().equals(stageTitle)).findAny();
 
         if (!window.isPresent()) {
