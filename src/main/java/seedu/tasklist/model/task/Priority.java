@@ -1,6 +1,6 @@
 package seedu.tasklist.model.task;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 
 import seedu.tasklist.commons.exceptions.IllegalValueException;
 
