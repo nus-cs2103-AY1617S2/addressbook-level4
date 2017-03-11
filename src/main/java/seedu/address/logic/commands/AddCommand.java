@@ -8,8 +8,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Content;
-import seedu.address.model.task.TaskDateTime;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskDateTime;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
@@ -20,9 +20,9 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
-            + "Parameters: CONTENT DATE_TIME [t/TAG]...\n"
+            + "Parameters: CONTENT DATE_TIME [#TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " Project Meeting 12/12/2017 11:00 t/project t/meeting";
+            + " Project Meeting 12/12/2017 11:00 #project #meeting";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";

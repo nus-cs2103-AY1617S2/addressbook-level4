@@ -16,6 +16,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Content;
+import seedu.address.model.task.TaskDateTime;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -64,11 +65,19 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> name} into an {@code Optional<Name>} if {@code name} is present.
+     * Parses a {@code Optional<String> content} into an {@code Optional<Content>} if {@code content} is present.
      */
-    public static Optional<Content> parseName(Optional<String> name) throws IllegalValueException {
-        assert name != null;
-        return name.isPresent() ? Optional.of(new Content(name.get())) : Optional.empty();
+    public static Optional<Content> parseContent(Optional<String> content) throws IllegalValueException {
+        assert content != null;
+        return content.isPresent() ? Optional.of(new Content(content.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code Optional<String> dateTime} into an {@code Optional<TaskDateTime>} if {@code dateTime} is present.
+     */
+    public static Optional<TaskDateTime> parseDateTime(Optional<String> dateTime) throws IllegalValueException {
+        assert dateTime != null;
+        return dateTime.isPresent() ? Optional.of(new TaskDateTime(dateTime.get())) : Optional.empty();
     }
 
     /**

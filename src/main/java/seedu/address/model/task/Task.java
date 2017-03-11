@@ -42,7 +42,13 @@ public class Task implements ReadOnlyTask {
     public Content getContent() {
         return content;
     }
-    
+
+
+    public void setDateTime(TaskDateTime dateTime) {
+        assert dateTime != null;
+        this.dateTime = dateTime;
+    }
+
     @Override
     public TaskDateTime getDateTime() {
         return dateTime;
@@ -67,6 +73,7 @@ public class Task implements ReadOnlyTask {
         assert replacement != null;
 
         this.setContent(replacement.getContent());
+        this.setDateTime(replacement.getDateTime());
         this.setTags(replacement.getTags());
     }
 
@@ -80,7 +87,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(content, tags);
+        return Objects.hash(content, dateTime, tags);
     }
 
     @Override

@@ -30,7 +30,7 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         name.setText(task.getContent().fullContent);
         id.setText(displayedIndex + ". ");
-        dateTime.setText("Due by " + task.getDateTime().value);
+        dateTime.setText("Due by " + task.getDateTime().date.toString());
         address.setText("");
         email.setText("");
         initTags(task);

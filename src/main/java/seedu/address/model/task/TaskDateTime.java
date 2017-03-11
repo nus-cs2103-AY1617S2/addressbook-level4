@@ -3,11 +3,8 @@ package seedu.address.model.task;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Logger;
 
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.ModelManager;
 
 /**
  * Represents a Task's due date in the task manager. Guarantees: immutable; is
@@ -15,16 +12,11 @@ import seedu.address.model.ModelManager;
  */
 public class TaskDateTime {
 
-    public static final String MESSAGE_DATE_TIME_CONSTRAINTS = "Due date should contain day/month/year hour:minute";
-
-    private static final Logger logger = LogsCenter.getLogger(TaskDateTime.class);
+    public static final String MESSAGE_DATE_TIME_CONSTRAINTS = "Due date should contain valid date in format "
+            + "day/month/year hour:minute";
 
     public final String value;
-    public final Integer day;
-    public final Integer month;
-    public final Integer year;
-    public final Integer hour;
-    public final Integer minute;
+    public final Date date;
 
     /**
      * Validates given name.
@@ -33,33 +25,49 @@ public class TaskDateTime {
      *             if given name string is invalid.
      */
     public TaskDateTime(String dateTime) throws IllegalValueException {
-        if (!dateTime.equals("")) {
-            String trimmedDateTime = dateTime.trim();
+
+        String trimmedDateTime = dateTime.trim();
+        if (!isThereDateTime(trimmedDateTime)) {
+            this.value = trimmedDateTime;
+            this.date = null;
+        } else if (!isValidDateTime(trimmedDateTime)) {
+            throw new IllegalValueException(MESSAGE_DATE_TIME_CONSTRAINTS);
+        } else {
             Date parsedDateTime = parseDateTime(trimmedDateTime);
             this.value = trimmedDateTime;
-            this.day = parsedDateTime.getDay();
-            this.month = parsedDateTime.getMonth();
-            this.year = parsedDateTime.getYear();
-            this.hour = parsedDateTime.getHours();
-            this.minute = parsedDateTime.getMinutes();
-        } else {
-            this.value = "";
-            this.day = 0;
-            this.month = 0;
-            this.year = 0;
-            this.hour = -1;
-            this.minute = -1;
+            this.date = parsedDateTime;
         }
     }
 
     /**
+     * Returns true if a given string is valid date
+     */
+    public static boolean isValidDateTime(String value) {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        format.setLenient(false);
+        try {
+            format.parse(value);
+        } catch (ParseException e) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Returns true if input string is not null
+     */
+    public static boolean isThereDateTime(String value) {
+        return !value.equals("");
+    }
+
+    /**
      * Returns object containing date and time given by string value
-     * 
      * @param value
      * @return
      */
     public Date parseDateTime(String value) throws IllegalValueException {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        format.setLenient(false);
         Date result;
         try {
             result = format.parse(value);

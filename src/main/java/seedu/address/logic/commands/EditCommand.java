@@ -23,8 +23,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) CONTENT [t/TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 pay bill";
+            + "Parameters: INDEX (must be a positive integer) CONTENT [#TAG]...\n"
+            + "Example: " + COMMAND_WORD + " 1 pay bill 15/1/2017 10:00 #overspeed";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -95,6 +95,7 @@ public class EditCommand extends Command {
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.content = toCopy.getContent();
+            this.dateTime = toCopy.getDateTime();
             this.tags = toCopy.getTags();
         }
 
@@ -102,16 +103,21 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.content, this.tags);
+            return CollectionUtil.isAnyPresent(this.content, this.dateTime, this.tags);
         }
 
-        public void setName(Optional<Content> name) {
-            assert name != null;
-            this.content = name;
+        public void setContent(Optional<Content> content) {
+            assert content != null;
+            this.content = content;
         }
 
         public Optional<Content> getContent() {
             return content;
+        }
+
+        public void setDateTime(Optional<TaskDateTime> dateTime) {
+            assert dateTime != null;
+            this.dateTime = dateTime;
         }
 
         public Optional<TaskDateTime> getDateTime() {
