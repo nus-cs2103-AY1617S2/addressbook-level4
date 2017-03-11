@@ -86,14 +86,14 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
-        
+
         undoStack.push(new TaskBook(taskBook));
         redoStack.clear();
         int addressBookIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskBook.updateTask(addressBookIndex, editedTask);
         indicateTaskBookChanged();
     }
-    
+
     @Override
     public void undo() throws EmptyStackException{
 	if(undoStack.isEmpty()) {
@@ -102,14 +102,14 @@ public class ModelManager extends ComponentManager implements Model {
 	redoStack.push(new TaskBook(taskBook));
 	taskBook.resetData(undoStack.pop());
     }
-    
+
     @Override
     public void redo() throws EmptyStackException{
 	if(redoStack.isEmpty()) {
 	    throw new EmptyStackException();
 	}
 	undoStack.push(new TaskBook(taskBook));
-	taskBook.resetData(redoStack.pop());	
+	taskBook.resetData(redoStack.pop());
     }
 
     //=========== Filtered Person List Accessors =============================================================

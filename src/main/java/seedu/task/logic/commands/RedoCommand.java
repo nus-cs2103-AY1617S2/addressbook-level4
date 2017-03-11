@@ -17,7 +17,7 @@ import seedu.task.model.task.UniqueTaskList;
 
 
 public class RedoCommand extends Command {
-    
+
     public static final String COMMAND_WORD = "redo";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Redoes the last undo. ";
@@ -36,5 +36,4 @@ public class RedoCommand extends Command {
             throw new CommandException(MESSAGE_NO_LAST_ACTION);
         }
     }
-
 }

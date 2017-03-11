@@ -17,7 +17,7 @@ import seedu.task.model.task.UniqueTaskList;
 
 
 public class UndoCommand extends Command {
-    
+
     public static final String COMMAND_WORD = "undo";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Undoes the last mutable action performed. ";
@@ -36,5 +36,4 @@ public class UndoCommand extends Command {
             throw new CommandException(MESSAGE_NO_LAST_ACTION);
         }
     }
-
 }
