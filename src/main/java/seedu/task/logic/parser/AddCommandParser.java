@@ -1,9 +1,9 @@
 package seedu.task.logic.parser;
 
 import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.task.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.task.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.task.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.task.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.task.logic.parser.CliSyntax.PREFIX_ENDDATETIME;
+import static seedu.task.logic.parser.CliSyntax.PREFIX_STARTDATETIME;
 import static seedu.task.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.NoSuchElementException;
@@ -24,14 +24,14 @@ public class AddCommandParser {
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                new ArgumentTokenizer(PREFIX_DESCRIPTION, PREFIX_STARTDATETIME, PREFIX_ENDDATETIME, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         try {
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
-                    argsTokenizer.getValue(PREFIX_PHONE).get(),
-                    argsTokenizer.getValue(PREFIX_EMAIL).get(),
-                    argsTokenizer.getValue(PREFIX_ADDRESS).get(),
+                    argsTokenizer.getValue(PREFIX_DESCRIPTION).get(),
+                    argsTokenizer.getValue(PREFIX_STARTDATETIME).get(),
+                    argsTokenizer.getValue(PREFIX_ENDDATETIME).get(),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
             );
         } catch (NoSuchElementException nsee) {
