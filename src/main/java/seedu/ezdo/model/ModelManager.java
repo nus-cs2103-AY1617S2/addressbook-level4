@@ -72,9 +72,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
     
     @Override
-    public synchronized void doneTask(ReadOnlyTask task) {
-        ezDo.doneTask(task);
-        updateFilteredListToShowAll();
+    public synchronized void doneTask(Task DoneTask) throws TaskNotFoundException {
+        ezDo.doneTask(DoneTask);
+        updateFilteredDoneList();
         indicateEzDoChanged();
     }
 
@@ -89,22 +89,26 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //=========== Filtered Task List Accessors =============================================================
-
+    
     @Override
-    public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {        
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 
     @Override
     public void updateFilteredListToShowAll() {
-        filteredTasks.setPredicate(null);
+        updateFilteredTaskList(new PredicateExpression(new notDoneQualifier()));
     }
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
-
+    
+    public void updateFilteredDoneList() {
+        updateFilteredTaskList(new PredicateExpression(new DoneQualifier()));
+    }
+    
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
@@ -139,6 +143,42 @@ public class ModelManager extends ComponentManager implements Model {
         boolean run(ReadOnlyTask task);
         String toString();
     }
+    
+    private class DoneQualifier implements Qualifier {
+        
+        DoneQualifier() {
+            
+        }
+        
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return task.getDone();
+        }
+        
+        @Override
+        public String toString() {
+            return "";
+        }
+        
+    }
+    
+    private class notDoneQualifier implements Qualifier {
+        
+        notDoneQualifier() {
+            
+        }
+        
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return !task.getDone();
+        }
+        
+        @Override
+        public String toString() {
+            return "";
+        }
+        
+    }
 
     private class NameQualifier implements Qualifier {
         private Set<String> nameKeyWords;
@@ -152,7 +192,8 @@ public class ModelManager extends ComponentManager implements Model {
             return nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword))
                     .findAny()
-                    .isPresent();
+                    .isPresent()
+                    && !task.getDone();
         }
 
         @Override
