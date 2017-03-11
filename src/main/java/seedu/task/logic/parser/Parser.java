@@ -14,6 +14,7 @@ import seedu.task.logic.commands.EditCommand;
 import seedu.task.logic.commands.ExitCommand;
 import seedu.task.logic.commands.FindCommand;
 import seedu.task.logic.commands.HelpCommand;
+import seedu.task.logic.commands.HelpFormatCommand;
 import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.logic.commands.ListByTagCommand;
 import seedu.task.logic.commands.ListCommand;
@@ -77,6 +78,12 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+            
+        case HelpFormatCommand.COMMAND_WORD:
+        case HelpFormatCommand.COMMAND_WORD_FULL:
+        case HelpFormatCommand.COMMAND_WORD_SHORT:
+        case HelpFormatCommand.COMMAND_WORD_SUMMARY:
+        	return new HelpFormatCommand();
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

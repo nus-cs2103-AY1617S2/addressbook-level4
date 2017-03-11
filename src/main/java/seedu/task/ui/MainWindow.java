@@ -182,6 +182,12 @@ public class MainWindow extends UiPart<Region> {
         HelpWindow helpWindow = new HelpWindow();
         helpWindow.show();
     }
+    
+    @FXML
+    public void handleHelpFormat() {
+    	HelpFormatWindow helpFormatWindow = new HelpFormatWindow();
+    	helpFormatWindow.show();
+    }
 
     void show() {
         primaryStage.show();
