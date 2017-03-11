@@ -40,7 +40,7 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, List<Date> dates, Optional<String> comment,
+    public AddCommand(String name, Optional<List<Date>> dates, Optional<String> comment,
             Optional<String> priority, Set<String> tags) throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
@@ -48,7 +48,7 @@ public class AddCommand extends Command {
         }
 
         //Checks if it is a FloatingTask
-        if (isDateEmpty(dates)) {
+        if (!isDatePresent(dates)) {
             this.toAdd = new FloatingTask(
                     new Name(name),
                     new Comment(comment),
@@ -65,8 +65,8 @@ public class AddCommand extends Command {
     /**
      * Returns true if dates are present. Used to check for FloatingTask
      */
-    public boolean isDateEmpty(List<Date> dates) {
-        return dates.isEmpty();
+    public boolean isDatePresent(Optional<List<Date>> dates) {
+        return dates.isPresent();
     }
 
     @Override
