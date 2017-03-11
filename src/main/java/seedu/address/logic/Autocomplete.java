@@ -9,7 +9,7 @@ import seedu.address.model.datastructure.Trie;
  */
 public class Autocomplete {
     public static String[] autocompleteData = {"help", "add", "by", "repeat", "list"
-            , "update", "find", "delete", "select", "book"
+            , "edit", "find", "delete", "select", "book"
             , "confirm", "editlabel", "undo", "clear", "push"
             , "pull", "export", "exit", "to", "on"
             , "hourly", "daily", "weekly", "monthly", "yearly"

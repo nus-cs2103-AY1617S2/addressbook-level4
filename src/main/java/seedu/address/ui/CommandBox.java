@@ -14,6 +14,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Autocomplete;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -24,6 +25,7 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
     public static final String ERROR_STYLE_CLASS = "error";
     private Autocomplete autocomplete;
+    private CommandHistory commandHistory;
 
     private final Logic logic;
 
@@ -33,6 +35,7 @@ public class CommandBox extends UiPart<Region> {
     public CommandBox(AnchorPane commandBoxPlaceholder, Logic logic) {
         super(FXML);
         this.autocomplete = new Autocomplete();
+        this.commandHistory = new CommandHistory();
         this.logic = logic;
         addToPlaceholder(commandBoxPlaceholder);
     }
@@ -47,14 +50,15 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     private void handleCommandInputChanged() {
         try {
-            CommandResult commandResult = logic.execute(commandTextField.getText());
+            String command = commandTextField.getText();
+            CommandResult commandResult = logic.execute(command);
 
             // process result of the command
             setStyleToIndicateCommandSuccess();
             commandTextField.setText("");
             logger.info("Result: " + commandResult.feedbackToUser);
             raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
-
+            commandHistory.addCommand(command);
         } catch (CommandException e) {
             // handle command failure
             setStyleToIndicateCommandFailure();
@@ -64,7 +68,7 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
-     * Hijacks the tab character for auto-completion
+     * Hijacks the tab character for auto-completion, up/down for iterating through the command
      * @param ke
      */
     @FXML
@@ -76,7 +80,31 @@ public class CommandBox extends UiPart<Region> {
             moveCursorToEnd();
             //Consume the event so the textfield will not go to the next ui component
             ke.consume();
+        } else if (ke.getCode() == KeyCode.UP) {
+            getPreviousCommand();
+        } else if (ke.getCode() == KeyCode.DOWN) {
+            getNextCommand();
         }
+    }
+
+    /**
+     * Gets the next executed command from the current command (if iterated through before)
+     */
+    private void getNextCommand() {
+        String text = commandHistory.next();
+        text = text == null ? commandTextField.getText() : text;
+        commandTextField.setText(text);
+        moveCursorToEnd();
+    }
+
+    /**
+     * Gets the previously executed command from the current command
+     */
+    private void getPreviousCommand() {
+        String text = commandHistory.previous();
+        text = text == null ? commandTextField.getText() : text;
+        commandTextField.setText(text);
+        moveCursorToEnd();
     }
 
     /**
@@ -111,6 +139,10 @@ public class CommandBox extends UiPart<Region> {
     }
 
     private void replaceLastTokenWithSuggestion(String suggestion) {
+        replaceLastTokenWithSuggestion(suggestion, true);
+    }
+
+    private void replaceLastTokenWithSuggestion(String suggestion, boolean appendSpace) {
         String commandBoxText = commandTextField.getText();
         String afterReplace = commandBoxText.replace(extractLastKey(), (suggestion + " "));
         commandTextField.setText(afterReplace);
