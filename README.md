@@ -1,6 +1,7 @@
 # YATS - Yet Another Task Scheduler
 [![Build Status](https://travis-ci.org/CS2103JAN2017-T16-B4/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-T16-B4/main)
 [![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-T16-B4/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-T16-B4/main?branch=master)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d37dc6715f5441c9b27778f0ccc979e0)](https://www.codacy.com/app/Team16-B4/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103JAN2017-T16-B4/main&amp;utm_campaign=Badge_Grade)
 <!---
 Appveyor test missing
 Coveralls test missing
