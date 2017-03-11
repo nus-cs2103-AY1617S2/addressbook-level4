@@ -1,6 +1,5 @@
 package seedu.onetwodo.model.task;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -11,14 +10,11 @@ public class DescriptionTest {
 
     @Test
     public void isValidDescription() {
-        
-        assertTrue(Description.isValidDescription("")); 
-        
+        assertTrue(Description.isValidDescription(""));
         /*
          * // invalid description
          * assertFalse(Description.isValidDescription("")); // empty string
          * assertFalse(Description.isValidDescription(" ")); // spaces only
-         * 
          * // valid description assertTrue(Description.
          * isValidDescription("Blk 456, Den Road, #01-355"));
          * assertTrue(Description.isValidDescription("-")); // one character
