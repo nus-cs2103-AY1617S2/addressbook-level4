@@ -50,7 +50,20 @@ import seedu.geekeep.storage.StorageManager;
 
 
 public class LogicManagerTest {
+    /**
+     * See https://github.com/junit-team/junit4/wiki/rules#temporaryfolder-rule
+     */
+    @Rule
+    public TemporaryFolder saveFolder = new TemporaryFolder();
+    private Model model;
 
+    private Logic logic;
+    //These are for checking the correctness of the events raised
+    private ReadOnlyTaskManager latestSavedAddressBook;
+    private boolean helpShown;
+
+    private int targetedJumpIndex;
+    
     /**
      * A utility class to generate test data.
      */
@@ -184,19 +197,7 @@ public class LogicManagerTest {
         }
     }
 
-    /**
-     * See https://github.com/junit-team/junit4/wiki/rules#temporaryfolder-rule
-     */
-    @Rule
-    public TemporaryFolder saveFolder = new TemporaryFolder();
-    private Model model;
 
-    private Logic logic;
-    //These are for checking the correctness of the events raised
-    private ReadOnlyTaskManager latestSavedAddressBook;
-    private boolean helpShown;
-
-    private int targetedJumpIndex;
 
     /**
      * Executes the command, confirms that the result message is correct
