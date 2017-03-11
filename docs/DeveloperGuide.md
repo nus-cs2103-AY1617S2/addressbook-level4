@@ -1,8 +1,6 @@
-# AddressBook Level 4 - Developer Guide
+# ToLuist - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
-
----
+By : `Team ToLuist`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 1. [Setting Up](#setting-up)
 2. [Design](#design)
@@ -51,7 +49,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 ### 1.3. Configuring Checkstyle
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
-3. Enter an arbitrary configuration name e.g. addressbook
+3. Enter an arbitrary configuration name e.g. toluist
 4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
 5. Click OK once, go to the `Main` tab, use the newly imported check configuration.
 6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
@@ -78,9 +76,9 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 ### 2.1. Architecture
 
 <img src="images/Architecture.png" width="600"><br>
-_Figure 2.1.1 : Architecture Diagram_
+_Figure 2.1 : Architecture Diagram_
 
-The **_Architecture Diagram_** given above explains the high-level design of the App.
+The **_Architecture Diagram_** given above explains the high-level design of ToLuist.
 Given below is a quick overview of each component.
 
 > Tip: The `.pptx` files used to create diagrams in this document can be found in the [diagrams](diagrams/) folder.
@@ -101,118 +99,118 @@ Two of those classes play important roles at the architecture level.
 The rest of the App consists of four components.
 
 * [**`UI`**](#ui-component) : The UI of the App.
-* [**`Logic`**](#logic-component) : The command executor.
+* [**`Dispatcher`**](#dispatcher-component): Invokes the suitable command executor.
+* [**`Controller`**](#logic-component) : The command executor.
 * [**`Model`**](#model-component) : Holds the data of the App in-memory.
 * [**`Storage`**](#storage-component) : Reads data from, and writes data to, the hard disk.
 
-Each of the four components
+Each of the five components defines its _API_ in an `interface` with the same name as the Component.
 
-* Defines its _API_ in an `interface` with the same name as the Component.
-* Exposes its functionality using a `{Component Name}Manager` class.
-
-For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java`
-interface and exposes its functionality using the `LogicManager.java` class.<br>
-<img src="images/LogicClassDiagram.png" width="800"><br>
-_Figure 2.1.2 : Class Diagram of the Logic Component_
-
-#### Events-Driven nature of the design
-
-The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
-command `delete 1`.
-
-<img src="images\SDforDeletePerson.png" width="800"><br>
-_Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
-
->Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed,
- instead of asking the `Storage` to save the updates to the hard disk.
-
-The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
-being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
-<img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
-_Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
-
-> Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
-  to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
-  coupling between components.
+Our architecture follows the MVC Pattern: UI displays data and interacts with the user; Commands are passed through Dispatcher and routed to a suitable Controller, Controller receives requests from the Dispatcher and acts as the bridge between UI and Model; Model & Storage stores and maintain the data. A lot of inspirations come from MVC architectures used by web MVC frameworks such as [Ruby on Rails](http://paulhan221.tumblr.com/post/114731592051/rails-http-requests-for-mvc) and [Laravel](http://laravelbook.com/laravel-architecture/).
 
 The sections below give more details of each component.
 
-### 2.2. UI component
-
-Author: Alice Bee
+### 2.1. UI component
 
 <img src="images/UiClassDiagram.png" width="800"><br>
-_Figure 2.2.1 : Structure of the UI Component_
+_Figure 2.1 : Structure of the UI Component_
 
-**API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
+**API** : [`Ui.java`](../src/main/java/seedu/toluist/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
-`StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+**JavaFX** is used for the UI. `MainWindow` holds all the views that make up the different parts of the UI. These views inherit from the abstract `UiView` class, while `MainWindow` itself inherits from the abstract `UiPart` class.
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
- that are in the `src/main/resources/view` folder.<br>
- For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
- [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
+#### 2.1.1. UiView
 
-The `UI` component,
+**API** : [`UiView.java`](../src/main/java/seedu/toluist/ui/view/UiView.java)
 
-* Executes user commands using the `Logic` component.
-* Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
-* Responds to events raised from various parts of the App and updates the UI accordingly.
+`UiView` is the building block for the UI. Each `UiView` should preferably be responsible for only one UI functionality.
 
-### 2.3. Logic component
+Some of the key properties of a `UiView` are described below
 
-Author: Bernard Choo
+####Associated with a FXML ####
+Each UIView class is associated with a FXML file. For example, `TaskView` is associated with `TaskView.fxml` file. The corresponding FXML file will be loaded automatically when a new `UiView` instance is created.
 
-<img src="images/LogicClassDiagram.png" width="800"><br>
-_Figure 2.3.1 : Structure of the Logic Component_
+#### Attachable to one single parent node ####
+Each `UiView` can be attached to a parent node. At any point in time, there should always be a maximum of one parent. The parent node must be an object of `Pane` class or any of its subclasses.
 
-**API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
+#### Idempotent rendering ####
 
-1. `Logic` uses the `Parser` class to parse the user command.
-2. This results in a `Command` object which is executed by the `LogicManager`.
-3. The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
-4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
+After being attached to a parent node, a `UiView` can be rendered by calling its public method `.render()`. Each render call is guaranteed to be idempotent, i.e. subsequent calls to `render()` will render the same UI, as long as the data do not change.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
- API call.<br>
-<img src="images/DeletePersonSdForLogic.png" width="800"><br>
-_Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
+#### Able to load subviews
 
-### 2.4. Model component
+Each `UiView` has a mini lifecycle. `viewDidLoad` is run after `render` is called. There are a few uses of `viewDidLoad`:
 
-Author: Cynthia Dharman
+- Control UI-specific properties which cannot be done in FXML
+- Set UI component values (e.g. using `setText` on an FXML `Text` object)
+- Attach subviews and propagate the chain
 
-<img src="images/ModelClassDiagram.png" width="800"><br>
-_Figure 2.4.1 : Structure of the Model Component_
+#### 2.1.2. UiStore ####
 
-**API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
+**API** : [`UiStore.java`](../src/main/java/seedu/toluist/ui/UiStore.java)
+
+`UiStore` holds the data to be used by the `UI`. An example would be the task data to be displayed to the user.
+
+#### 2.1.3. Reactive nature of the UI ####
+
+To keep the UI predictable and to reduce the number of lines of codes used to dictate how the UI should change based on state changes, reactive programming is used. How the UI should be rendered can be simply declared based on the states held by the `UiStore`.
+
+The diagram below shows how the UI reacts when an add command is called. The UI simply needs to display all the tasks available in the UiStore, without knowing what is the exact change
+
+<img src="images/UiSequence.png" width="600"><br>
+_Figure 2.1.3 : Interactions Inside the UI for the `add study` Command_
+
+The reactive approach is borrowed from modern Javascript front-end frameworks such as React.js and Vue.js.
+
+#### 2.2 Dispatcher component ####
+
+**API** : [`Dispatcher.java`](../src/main/java/seedu/toluist/dispatcher/Dispatcher.java)
+
+`Dispatcher` acts like a router in a Web MVC architecture. On receiving new input from the UI, `Dispatcher` decides which `Controller` is the best candidate to handle the input, instantiate and ask the `Controller` object to execute the event.
+
+`Dispatcher` acts as bridge from the Ui to the controllers, nothing more nothing less.
+
+### 2.3. Controller component
+
+<img src="images/ControllerClassDiagram.png" width="800"><br>
+_Figure 2.3.1 : Structure of the Controller Component_
+
+**API** : [`Controller.java`](../src/main/java/seedu/toluist/controller/Controller.java)
+
+1. `Controller` has a `execute` method to execute the command passed by the dispatcher.
+2. The command execution can affect the `Model`, the `Storage` (e.g. adding a task) and/or raise events.
+3. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the dispatcher.
+4. After every `execute` invocation, `Controller` can optionally set new states in the `UiStore` and ask the `UI` to re-render.
+
+
+### 2.4. Model Component ###
 
 The `Model`,
-
-* stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
-* exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
-  so that the UI automatically updates when the data in the list change.
-* does not depend on any of the other three components.
+* stores the task data.
+* does not depend on any of the other four components.
 
 ### 2.5. Storage component
 
-Author: Darius Foong
+**API** : [`Storage.java`](../src/main/java/seedu/toluist/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="800"><br>
-_Figure 2.5.1 : Structure of the Storage Component_
-
-**API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
+The `Storage` acts like a database in the application. It provides read/write funcionalities to the `Model`, encapsuling all the inner implementation details. The `Storage` is a singleton, analogous to how a typical database service is always runninng in a traditional database-dependent application.
 
 The `Storage` component,
+* can save the task data in json format and read it back.
+* holds the history of all data changes
 
-* can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+####Undoable History
+
+`historyStack` hold the serialized json strings of the task list data. The minimum size of this stack is always 1. The json string at the top of the stack is the serialization of the current todo list data.
+
+To undo the most recent changes, we simply pop the irrelevant data the top of the `historyStack` and deserialize the json at the top of the stack into task list data.
+
+This approach is reliable as it eliminates the need to implement an "unexecute" method and store the changes separately for each command that will mutate the task list.
+
 
 ### 2.6. Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.toluist.commons` package.
 
 ## 3. Implementation
 
@@ -347,49 +345,143 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
-
-{More to be added}
+`* * *` | user | add a new task | remind myself of things I have to do
+`* * *` | user | add a new task with completion date | remind myself of things I have to do and the deadlines to meet
+`* * *` | user | add a new [recurring task](#recurring-task) | prevent the need of keying the same cyclical task every period
+`* * *` | user | see all tasks | have an overview of all the things I need to do and decide what I should do first
+`* * *` | user | update a task | change entries that are errorneous or outdated
+`* * *` | user | mark a task as completed/incompleted | focus on the tasks I have still not cleared
+`* * *` | user | delete a task | remove entries that I no longer need
+`* * *` | user | add a new event | remind myself of things I have to attend
+`* * *` | user | see all events | have an overview of all the things I need to events
+`* * *` | user | update an event | change entries that are errorneous or outdated
+`* * *` | user | delete an event | remove entries that I no longer need
+`* * *` | user | find a task by name | locate details of task without having to go through the entire list
+`* * *` | user | find a task by tag | locate details of task without having to go through the entire list
+`* * *` | user | add tag to task | group my tasks to provide more context
+`* * *` | user | update tag in task | change entries that are errorneous or outdated
+`* * *` | user | remove tag from task | remove entries that I no longer need
+`* * *` | user | undo previous command(s) | recover gracefully from making mistakes
+`* * *` | user | redo previously undone command(s) | recover gracefully from  wrongly resolving a mistake
+`* * *` | user | see my [command history](#command-history) | to identify what I have to recover if I accidentally performed some wrong commands.
+`* * *` | user | change my storage file path | decide where I want to save my files for my own use
+`* * *` | user | exit the program | gracefully shut down the program when I don't need to use it
+`* *` | experienced user | add an [alias](#alias) for a command | customise my own keyboard shortcuts to improve my efficiency
+`* *` | experienced user | update an alias for a command | change entries that are errorneous or outdated
+`* *` | experienced user | view all alias for commands | review the alias in case I forget what I set for them
+`* *` | experienced user | delete an alias for a command | remove entries that I no longer need
+`* *` | experienced user | remove multiple tasks at once | reduce the number of commands I use to get the job done
+`*` | user | clear all tasks | start afresh with a new task list fast
+`*` | user with many tasks | sort task by [priority level](#priority-level) then by end date | figure out which task should be cleared first
+`*` | user with many tasks | see statistics for my number of tasks undone, doing, completed | figure out how much work I have left
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+(For all use cases below, the **System** is `ToLuist` and the **Actor** is the `user`, unless specified otherwise)
+
+#### Use case 1: Add a task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. Actor requests to add a task with `description` in the input box.
+2. System adds the task. System shows a feedback message ("Task `description` added") and displays the updated list.<br>
 Use case ends.
 
 **Extensions**
 
-2a. The list is empty
+1a. `description` is not provided.
 
+> 1a1. System shows an error message ("Please provide a task description") with the correct format example.<br>
+> Use case resumes at step 1
+
+#### Use case 2: Delete a task
+
+**MSS**
+
+1. Actor requests to delete a task with `index` number in the input box.
+2. System finds the task and deletes it. System shows a feedback message ("Task `description` removed") and displays the updated list.<br>
+Use case ends.
+
+**Extensions**
+
+2a. `index` number given is invalid or cannot be found (i.e. `index` number is not a positive integer, or an out-of-range positive integer).
+
+> 2a1. System shows an error message ("Please provide a proper index number") with the correct format example.
+> Use case resumes at step 1
+
+#### Use case 3: Undo previous mutated command
+
+**MSS**
+
+1. Actor requests to `undo` action in the input box.
+2. System finds the most recent command that mutates the list and undoes it. System shows a feedback message ("Undo '`previous command`'") and displays the updated list.<br>
+Use case ends.
+
+**Extensions**
+
+2a. No previous mutated command to undo
+
+> 2a1. System does nothing since there is nothing to undo.
 > Use case ends
 
-3a. The given index is invalid
+#### Use case 4: Add alias command
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+**MSS**
 
-{More to be added}
+1. Actor requests to `alias` a command in the input box with a `new alias name`.
+2. System finds the command and alias it. System shows a feedback message ("`new alias name` is set as the new alias for `command`.").<br>
+Use case ends.
+
+2a. The alias is already reserved for other commands.
+
+> 2a1. System updates the alias name to refer to the new command.<br>
+> Use case resumes at step 3.
+
+#### Use case 5: Set data storage file path
+
+**MSS**
+
+1. Actor requests to save data to a `new file path`.
+2. System saves task list to the new data storage file path and delete the old file. System shows a message ("Storage file path is updated to: `new file path`").<br>
+Use case ends.
+
+**Extensions**
+
+1a. File path entered is `default`.
+
+> 1a1. System updates data storage file path to default file path. System shows a message ("Storage file path is updated to: `default file path`").<br>
+> Use case ends.
+
+1b. File path is not in the correct format.
+
+> 1b1. System shows an error message ("Storage file path is in the wrong format.") with the correct format example.<br>
+> Use case resumes at step 1.
+
+1c. File path already exist.
+
+> 1c1. System shows an error message ("Storage file path is already being used, please choose another location.").<br>
+> Use case resumes at step 1.
+
 
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Commands should be reasonably fluid and flexible (i.e. look like written English) so it is more intuitive for users.
+5. When the command entered is errorneous, the system should guess the user's intentions to the best of its ability, and execute the corrected command after the user give his confirmation.
+6. The stored data should never, ever be destroyed unless that is what the user wants.
+7. Should have nice UI/UX so user have a pleasant experience using this App.
+8. Each command should finish executing in less than 2 seconds.
+9. Should have automated unit tests.
+10. Should use Continuous Integration.
+11. Should be kept open source.
+12. Should be a free software.
+13. Source code should be well-documented.
+14. Application should be easy to set up (i.e. no installer required, no assistance required other than a user guide).
 
-{More to be added}
 
 ## Appendix D : Glossary
 
@@ -397,23 +489,53 @@ Use case ends.
 
 > Windows, Linux, Unix, OS-X
 
-##### Private contact detail
+##### Recurring task
 
-> A contact detail that is not meant to be shared with others
+> A task that has to be done every fixed length of time.
+
+##### Command history
+
+> A list of commands that the user has entered.
+
+##### Alias
+
+> An alternative name to a default command name.
+
+##### Priority level
+
+> The relative importance or urgency of a task compared to other tasks.
 
 ## Appendix E : Product Survey
 
-**Product Name**
-
-Author: ...
+**Google Calendar**
 
 Pros:
 
-* ...
-* ...
+* Support recurring events.
+* Monthly, weekly, daily calendar view is useful for users to visualise their schedule.
+* Support fuzzy search for events.
+* Certain operations does not require clicking (e.g. add event).
+* Support sharing of calendar with other users through export to CSV or iCal.
+* Can be used offline.
 
 Cons:
 
-* ...
-* ...
+* Does not support task without deadline.
+* Does not support marking task as complete/incomplete.
+* Certain operations requires clicking (e.g. update task), which is not what Jim wants.
+
+**Trello**
+
+Pros:
+
+* Geared towards task management.
+* Intuitive UI that gives an overview of a different task in a pipeline.
+* Support collaboration on the task board.
+
+Cons:
+
+* Does not have good calendar integration.
+* Can not be used offline.
+* Certain operations requires clicking (e.g. dragging and dropping tasks between list), which is not what Jim wants.
+
 
