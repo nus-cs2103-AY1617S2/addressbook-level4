@@ -55,14 +55,14 @@ public class TodoListTest {
     }
 
     @Test
-    public void testGetTasks_allTasks() {
+    public void testGetAllTasks() {
         List<Task> actual = todoList1.getTasks();
         List<Task> expected = Arrays.asList(task1, task2, task3, task4);
         assertTrue(actual.equals(expected));
     }
 
     @Test
-    public void testAddTask_addDuplicatedTask() {
+    public void testAddDuplicatedTask() {
         todoList1.add(task1);
         List<Task> actual = todoList1.getTasks();
         List<Task> expected = Arrays.asList(task1, task2, task3, task4);
@@ -70,7 +70,7 @@ public class TodoListTest {
     }
 
     @Test
-    public void testAddTask_addNewTask() {
+    public void testAddNewTask() {
         todoList1.add(task5);
         List<Task> actual = todoList1.getTasks();
         List<Task> expected = Arrays.asList(task1, task2, task3, task4, task5);
@@ -78,7 +78,7 @@ public class TodoListTest {
     }
 
     @Test
-    public void testRemoveTask_addExistingTask() {
+    public void testRemoveExistingTask() {
         todoList1.remove(task2);
         List<Task> actual = todoList1.getTasks();
         List<Task> expected = Arrays.asList(task1, task3, task4);
@@ -86,7 +86,7 @@ public class TodoListTest {
     }
 
     @Test
-    public void testRemoveTask_addNonExistingTask() {
+    public void testRemoveNonExistingTask() {
         todoList1.remove(task5);
         List<Task> actual = todoList1.getTasks();
         List<Task> expected = Arrays.asList(task1, task2, task3, task4);

@@ -74,12 +74,12 @@ public class DeleteTaskCommandTest extends ToLuistGuiTest {
         assertFalse(isTaskShown(task));
     }
 
-    public void deleteMultipleTasksTogether(String deleteCommand, int[] taskIndexesLeft) {
+    public void deleteMultipleTasksTogether(String deleteCommand, int listSize, int... taskIndexesLeft) {
         // Start with empty list
         commandBox.runCommand("delete 2");
         commandBox.runCommand("delete 1");
 
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 1; i <= listSize; i++) {
             String command = "add task " + i;
             commandBox.runCommand(command);
         }
@@ -94,7 +94,7 @@ public class DeleteTaskCommandTest extends ToLuistGuiTest {
             setOfTaskIndexLeft.add(taskIndex);
         }
 
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 1; i <= listSize; i++) {
             // If task index exist in the set, that particular task should be shown in the UI.
             if (setOfTaskIndexLeft.contains(i)) {
                 assertTrue(isTaskShown(allTasks.get(i - 1)));
@@ -107,7 +107,6 @@ public class DeleteTaskCommandTest extends ToLuistGuiTest {
     @Test
     public void deleteMultipleTasksTogether1() {
         String command = "delete  - 2, 4 -  5, 7    9- ";
-        int[] taskIndexesLeft = {3, 6, 8};
-        deleteMultipleTasksTogether(command, taskIndexesLeft);
+        deleteMultipleTasksTogether(command, 10, 3, 6, 8);
     }
 }
