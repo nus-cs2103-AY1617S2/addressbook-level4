@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import seedu.toluist.storage.JsonStorage;
 import seedu.toluist.storage.Storage;
+import seedu.toluist.ui.UiStore;
 
 /**
  * TodoList Model
@@ -27,7 +28,7 @@ public class TodoList {
 
     public Task getTask(String indexToken) {
         int index = indexToken == null ? -1 : Integer.parseInt(indexToken) - 1;
-        Task task = indexToken == null ? null : allTasks.get(index);
+        Task task = indexToken == null ? null : UiStore.getInstance().getTasks().get(index);
         return task;
     }
 
@@ -38,7 +39,7 @@ public class TodoList {
     public ArrayList<Task> getTasks(List<Integer> indexes) {
         ArrayList<Task> tasks = new ArrayList<Task>();
         for (int index: indexes) {
-            tasks.add(allTasks.get(index - 1));
+            tasks.add(UiStore.getInstance().getTasks().get(index - 1));
         }
         return tasks;
     }
