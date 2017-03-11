@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import guitests.guihandles.HelpWindowHandle;
 
-public class HelpWindowTest extends AddressBookGuiTest {
+public class HelpWindowTest extends TaskListGuiTest {
 
     @Test
     public void openHelpWindow() {
@@ -18,7 +18,7 @@ public class HelpWindowTest extends AddressBookGuiTest {
         resultDisplay.clickOnTextArea();
         assertHelpWindowOpen(mainMenu.openHelpWindowUsingAccelerator());
 
-        personListPanel.clickOnListView();
+        personListPanel.clickOnListView(); // TODO ui
         assertHelpWindowOpen(mainMenu.openHelpWindowUsingAccelerator());
 
         browserPanel.clickOnWebView();

@@ -24,15 +24,15 @@ import javafx.stage.Stage;
 import seedu.address.TestApp;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.AddressBook;
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.TaskList;
+import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.testutil.TestUtil;
-import seedu.address.testutil.TypicalTestPersons;
+import seedu.address.testutil.TypicalTestTasks;
 
 /**
- * A GUI Test class for AddressBook.
+ * A GUI Test class for TaskList.
  */
-public abstract class AddressBookGuiTest {
+public abstract class TaskListGuiTest {
 
     /* The TestName Rule makes the current test name available inside test methods */
     @Rule
@@ -40,7 +40,7 @@ public abstract class AddressBookGuiTest {
 
     TestApp testApp;
 
-    protected TypicalTestPersons td = new TypicalTestPersons();
+    protected TypicalTestTasks td = new TypicalTestTasks();
 
     /*
      *   Handles to GUI elements present at the start up are created in advance
@@ -86,10 +86,10 @@ public abstract class AddressBookGuiTest {
      * Override this in child classes to set the initial local data.
      * Return null to use the data in the file specified in {@link #getDataFileLocation()}
      */
-    protected AddressBook getInitialData() {
-        AddressBook ab = new AddressBook();
-        TypicalTestPersons.loadAddressBookWithSampleData(ab);
-        return ab;
+    protected TaskList getInitialData() {
+        TaskList taskList = new TaskList();
+        TypicalTestTasks.loadTaskListWithSampleData(taskList);
+        return taskList;
     }
 
     /**
@@ -105,14 +105,14 @@ public abstract class AddressBookGuiTest {
     }
 
     /**
-     * Asserts the person shown in the card is same as the given person
+     * Asserts the task shown in the card is same as the given task
      */
-    public void assertMatching(ReadOnlyPerson person, PersonCardHandle card) {
-        assertTrue(TestUtil.compareCardAndPerson(card, person));
+    public void assertMatching(ReadOnlyTask task, PersonCardHandle card) {
+        assertTrue(TestUtil.compareCardAndPerson(card, task)); // TODO UI renaming
     }
 
     /**
-     * Asserts the size of the person list is equal to the given number.
+     * Asserts the size of the person list is equal to the given number. // TODO UI renaming
      */
     protected void assertListSize(int size) {
         int numberOfPeople = personListPanel.getNumberOfPeople();
