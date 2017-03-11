@@ -18,7 +18,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import seedu.onetwodo.commons.core.Config;
-import seedu.onetwodo.commons.core.EventsCenter;
 import seedu.onetwodo.commons.core.GuiSettings;
 import seedu.onetwodo.commons.events.ui.ExitAppRequestEvent;
 import seedu.onetwodo.commons.util.FxViewUtil;
@@ -73,7 +72,7 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private AnchorPane statusbarPlaceholder;
-    
+
     @FXML
     private StackPane dialogStackPane;
 
@@ -249,15 +248,14 @@ public class MainWindow extends UiPart<Region> {
     void loadTaskPage(ReadOnlyTask task) {
         browserPanel.loadTaskPage(task);
     }
-    
+
     public void openDialog(ReadOnlyTask task) {
-    	JFXDialogLayout content = new JFXDialogLayout();
-    	content.setHeading(new Text(task.getName().fullName));
-    	content.setBody(new Text(task.getDescription().value));
-    	JFXDialog dialog = new JFXDialog(dialogStackPane, content, JFXDialog.DialogTransition.CENTER, true);
-    	dialog.show();
-    	
-    	primaryStage.getScene().setOnKeyReleased(new EventHandler<KeyEvent>() {
+        JFXDialogLayout content = new JFXDialogLayout();
+        content.setHeading(new Text(task.getName().fullName));
+        content.setBody(new Text(task.getDescription().value));
+        JFXDialog dialog = new JFXDialog(dialogStackPane, content, JFXDialog.DialogTransition.CENTER, true);
+        dialog.show();
+        primaryStage.getScene().setOnKeyReleased(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent ke) {
                 dialog.close();
                 commandBox.focus();

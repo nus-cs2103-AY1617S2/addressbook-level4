@@ -70,9 +70,9 @@ public class CommandBox extends UiPart<Region> {
     private void setStyleToIndicateCommandFailure() {
         commandTextField.getStyleClass().add(ERROR_STYLE_CLASS);
     }
-    
+
     public void focus() {
-    	commandTextField.requestFocus();
+        commandTextField.requestFocus();
     }
 
 }
