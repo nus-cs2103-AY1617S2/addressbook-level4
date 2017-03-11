@@ -104,4 +104,10 @@ public class TestTask implements ReadOnlyTask {
                 && other.getName().equals(this.getName()) // state checks here onwards
                 && other.getComment().equals(this.getComment()));
     }
+
+    @Override
+    public String getType() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }
