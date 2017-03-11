@@ -19,12 +19,16 @@ public class Time {
      * @throws IllegalValueException if given time string is invalid.
      */
     public Time(String time) throws IllegalValueException {
-        assert time != null;
-        String trimmedTime = time.trim();
-        if (!isValidTime(trimmedTime)) {
-            throw new IllegalValueException(MESSAGE_TIME_CONSTRAINTS);
+        if (time == null) {
+            this.value = "";
+        } else {
+            String trimmedTime = time.trim();
+            if (!isValidTime(trimmedTime)) {
+                throw new IllegalValueException(MESSAGE_TIME_CONSTRAINTS);
+            }
+            this.value = trimmedTime;    
         }
-        this.value = trimmedTime;
+        
     }
 
     /**

@@ -21,12 +21,15 @@ public class Date {
      * @throws IllegalValueException if given date toDo string is invalid.
      */
     public Date(String date) throws IllegalValueException {
-        assert date != null;
-        String trimmerDate = date.trim();
-        if (!isValidDate(trimmerDate)) {
-            throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
+        if (date == null) {
+            this.value = "";
+        } else {
+            String trimmerDate = date.trim();
+            if (!isValidDate(trimmerDate)) {
+                throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
+            }
+            this.value = trimmerDate;
         }
-        this.value = trimmerDate;
     }
 
     /**
