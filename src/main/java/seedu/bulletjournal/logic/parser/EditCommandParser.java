@@ -1,11 +1,5 @@
 package seedu.bulletjournal.logic.parser;
 
-import static seedu.bulletjournal.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.bulletjournal.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.bulletjournal.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.bulletjournal.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.bulletjournal.logic.parser.CliSyntax.PREFIX_TAG;
-
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -13,10 +7,16 @@ import java.util.Optional;
 
 import seedu.bulletjournal.commons.exceptions.IllegalValueException;
 import seedu.bulletjournal.logic.commands.Command;
+import seedu.bulletjournal.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.bulletjournal.logic.commands.EditCommand;
 import seedu.bulletjournal.logic.commands.IncorrectCommand;
-import seedu.bulletjournal.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.bulletjournal.model.tag.UniqueTagList;
+
+import static seedu.bulletjournal.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.bulletjournal.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.bulletjournal.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.bulletjournal.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.bulletjournal.logic.parser.CliSyntax.PREFIX_TAG;
 
 /**
  * Parses input arguments and creates a new EditCommand object
