@@ -18,7 +18,7 @@ import seedu.address.model.task.Task;
 /**
  * An Immutable AddressBook that is serializable to XML format
  */
-@XmlRootElement(name = "TaskList")
+@XmlRootElement(name = "addressbook")
 public class XmlSerializableAddressBook implements ReadOnlyAddressBook {
 
     @XmlElement
