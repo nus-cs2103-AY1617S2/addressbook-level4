@@ -25,13 +25,13 @@ public class DateParser {
         this.nattyParser = new com.joestelmach.natty.Parser();
     }
 
-    public DateTime parseStartDate(String date) throws IllegalValueException {
+    public DateTime parseStartDate(String startDate) throws IllegalValueException {
 
         if (Locale.getDefault().equals(Locale.US)) {
-            date = date.replaceAll("(\\d{1,2})-(\\d{1,2})-((?:\\d\\d){1,2})", "$2-$1-$3");
+            startDate = startDate.replaceAll("(\\d{1,2})-(\\d{1,2})-((?:\\d\\d){1,2})", "$2-$1-$3");
         }
 
-        List<DateGroup> dateGroupList = this.nattyParser.parse(date);
+        List<DateGroup> dateGroupList = this.nattyParser.parse(startDate);
         int numDates = countDates(dateGroupList);
 
         if (numDates == 0) {
@@ -48,13 +48,13 @@ public class DateParser {
 
     }
 
-    public DateTime parseEndDate(String date) throws IllegalValueException {
+    public DateTime parseEndDate(String endDate) throws IllegalValueException {
 
         if (Locale.getDefault().equals(Locale.US)) {
-            date = date.replaceAll("(\\d{1,2})-(\\d{1,2})-((?:\\d\\d){1,2})", "$2-$1-$3");
+            endDate = endDate.replaceAll("(\\d{1,2})-(\\d{1,2})-((?:\\d\\d){1,2})", "$2-$1-$3");
         }
 
-        List<DateGroup> dateGroupList = this.nattyParser.parse(date);
+        List<DateGroup> dateGroupList = this.nattyParser.parse(endDate);
         int numDates = countDates(dateGroupList);
 
         if (numDates == 0) {

@@ -453,7 +453,7 @@ public class LogicManagerTest {
 
         /** Generates the correct add command based on the task given
          * @throws IllegalValueException */
-        String generateAddCommand(Task p) throws IllegalValueException {
+        private String generateAddCommand(Task p) throws IllegalValueException {
             StringBuffer cmd = new StringBuffer();
 
             cmd.append("add ");
