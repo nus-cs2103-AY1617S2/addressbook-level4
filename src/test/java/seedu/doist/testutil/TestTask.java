@@ -8,13 +8,13 @@ import seedu.doist.model.task.ReadOnlyTask;
 /**
  * A mutable person object. For testing only.
  */
-public class TestPerson implements ReadOnlyTask {
+public class TestTask implements ReadOnlyTask {
 
-    private Description name;
+    private Description desc;
     private Priority priority;
     private UniqueTagList tags;
 
-    public TestPerson() {
+    public TestTask() {
         tags = new UniqueTagList();
         priority = new Priority();
     }
@@ -22,14 +22,14 @@ public class TestPerson implements ReadOnlyTask {
     /**
      * Creates a copy of {@code personToCopy}.
      */
-    public TestPerson(TestPerson personToCopy) {
-        this.name = personToCopy.getDescription();
+    public TestTask(TestTask personToCopy) {
+        this.desc = personToCopy.getDescription();
         this.priority = personToCopy.getPriority();
         this.tags = personToCopy.getTags();
     }
 
-    public void setName(Description name) {
-        this.name = name;
+    public void setName(Description desc) {
+        this.desc = desc;
     }
 
     public void setPriority(Priority priority) {
@@ -42,7 +42,7 @@ public class TestPerson implements ReadOnlyTask {
 
     @Override
     public Description getDescription() {
-        return name;
+        return desc;
     }
 
     @Override

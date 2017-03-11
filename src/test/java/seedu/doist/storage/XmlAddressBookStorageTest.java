@@ -16,7 +16,7 @@ import seedu.doist.commons.util.FileUtil;
 import seedu.doist.model.ReadOnlyTodoList;
 import seedu.doist.model.TodoList;
 import seedu.doist.model.task.Task;
-import seedu.doist.testutil.TypicalTestPersons;
+import seedu.doist.testutil.TypicalTestTasks;
 
 public class XmlAddressBookStorageTest {
     private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlAddressBookStorageTest/");
@@ -62,7 +62,7 @@ public class XmlAddressBookStorageTest {
     @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         String filePath = testFolder.getRoot().getPath() + "TempAddressBook.xml";
-        TypicalTestPersons td = new TypicalTestPersons();
+        TypicalTestTasks td = new TypicalTestTasks();
         TodoList original = td.getTypicalAddressBook();
         XmlTodoListStorage xmlAddressBookStorage = new XmlTodoListStorage(filePath);
 

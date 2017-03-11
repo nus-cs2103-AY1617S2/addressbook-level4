@@ -27,7 +27,7 @@ import seedu.doist.commons.events.BaseEvent;
 import seedu.doist.model.TodoList;
 import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.testutil.TestUtil;
-import seedu.doist.testutil.TypicalTestPersons;
+import seedu.doist.testutil.TypicalTestTasks;
 
 /**
  * A GUI Test class for AddressBook.
@@ -40,7 +40,7 @@ public abstract class AddressBookGuiTest {
 
     TestApp testApp;
 
-    protected TypicalTestPersons td = new TypicalTestPersons();
+    protected TypicalTestTasks td = new TypicalTestTasks();
 
     /*
      *   Handles to GUI elements present at the start up are created in advance
@@ -88,7 +88,7 @@ public abstract class AddressBookGuiTest {
      */
     protected TodoList getInitialData() {
         TodoList ab = new TodoList();
-        TypicalTestPersons.loadAddressBookWithSampleData(ab);
+        TypicalTestTasks.loadAddressBookWithSampleData(ab);
         return ab;
     }
 

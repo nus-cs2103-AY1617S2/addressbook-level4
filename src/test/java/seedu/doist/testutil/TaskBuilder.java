@@ -11,17 +11,17 @@ import seedu.doist.model.task.Priority;
  */
 public class TaskBuilder {
 
-    private TestPerson person;
+    private TestTask person;
 
     public TaskBuilder() {
-        this.person = new TestPerson();
+        this.person = new TestTask();
     }
 
     /**
      * Initializes the TaskBuilder with the data of {@code personToCopy}.
      */
-    public TaskBuilder(TestPerson personToCopy) {
-        this.person = new TestPerson(personToCopy);
+    public TaskBuilder(TestTask personToCopy) {
+        this.person = new TestTask(personToCopy);
     }
 
     public TaskBuilder withName(String name) throws IllegalValueException {
@@ -42,7 +42,7 @@ public class TaskBuilder {
         return this;
     }
 
-    public TestPerson build() {
+    public TestTask build() {
         return this.person;
     }
 

@@ -72,7 +72,7 @@ public class AddCommandParser {
     private Task createTaskFromParameters(String preamble,
                                           Map<String, List<String>> parameters) throws IllegalValueException {
         if (preamble == null || preamble.trim().isEmpty()) {
-            throw new IllegalValueException("You can't add a task without a description!");
+            throw new IllegalValueException(AddCommand.MESSAGE_NO_DESC);
         }
 
         UniqueTagList tagList = new UniqueTagList();

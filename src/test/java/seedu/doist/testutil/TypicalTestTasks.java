@@ -8,16 +8,17 @@ import seedu.doist.model.task.UniqueTaskList;
 /**
  *
  */
-public class TypicalTestPersons {
+public class TypicalTestTasks {
 
-    public TestPerson alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
+    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida, taskWithPriority;
 
-    public TypicalTestPersons() {
+    public TypicalTestTasks() {
         try {
             alice = new TaskBuilder().withName("Alice Pauline").build();  //.withTags("friends").build();
             benson = new TaskBuilder().withName("Benson Meier").withTags("owesMoney", "friends").build();
             carl = new TaskBuilder().withName("Carl Kurz").withPriority("VERYIMPORTANT").build();
             daniel = new TaskBuilder().withName("Daniel Meier").withPriority("IMPORTANT").build();
+            taskWithPriority = new TaskBuilder().withName("a task with priority").withPriority("IMPORTANT").build();
             elle = new TaskBuilder().withName("Elle Meyer").build();
             fiona = new TaskBuilder().withName("Fiona Kunz").build();
             george = new TaskBuilder().withName("George Best").build();
@@ -32,7 +33,7 @@ public class TypicalTestPersons {
     }
 
     public static void loadAddressBookWithSampleData(TodoList ab) {
-        for (TestPerson person : new TypicalTestPersons().getTypicalTasks()) {
+        for (TestTask person : new TypicalTestTasks().getTypicalTasks()) {
             try {
                 ab.addTask(new Task(person));
             } catch (UniqueTaskList.DuplicateTaskException e) {
@@ -41,8 +42,8 @@ public class TypicalTestPersons {
         }
     }
 
-    public TestPerson[] getTypicalTasks() {
-        return new TestPerson[]{alice, benson, carl, daniel, elle, fiona, george};
+    public TestTask[] getTypicalTasks() {
+        return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
     }
 
     public TodoList getTypicalAddressBook() {

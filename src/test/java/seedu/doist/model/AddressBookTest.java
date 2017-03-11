@@ -17,7 +17,7 @@ import javafx.collections.ObservableList;
 import seedu.doist.model.tag.Tag;
 import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.Task;
-import seedu.doist.testutil.TypicalTestPersons;
+import seedu.doist.testutil.TypicalTestTasks;
 
 public class AddressBookTest {
 
@@ -40,14 +40,14 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        TodoList newData = new TypicalTestPersons().getTypicalAddressBook();
+        TodoList newData = new TypicalTestTasks().getTypicalAddressBook();
         addressBook.resetData(newData);
         assertEquals(newData, addressBook);
     }
 
     @Test
     public void resetData_withDuplicatePersons_throwsAssertionError() {
-        TypicalTestPersons td = new TypicalTestPersons();
+        TypicalTestTasks td = new TypicalTestTasks();
         // Repeat td.alice twice
         List<Task> newPersons = Arrays.asList(new Task(td.alice), new Task(td.alice));
         List<Tag> newTags = td.alice.getTags().asObservableList();
@@ -59,7 +59,7 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
-        TodoList typicalAddressBook = new TypicalTestPersons().getTypicalAddressBook();
+        TodoList typicalAddressBook = new TypicalTestTasks().getTypicalAddressBook();
         List<ReadOnlyTask> newPersons = typicalAddressBook.getTaskList();
         List<Tag> newTags = new ArrayList<>(typicalAddressBook.getTagList());
         // Repeat the first tag twice
