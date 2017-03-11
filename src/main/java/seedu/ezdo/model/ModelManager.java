@@ -94,14 +94,14 @@ public class ModelManager extends ComponentManager implements Model {
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
-    
+
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
 
     @Override
-    public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {        
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 
@@ -144,41 +144,41 @@ public class ModelManager extends ComponentManager implements Model {
         boolean run(ReadOnlyTask task);
         String toString();
     }
-    
+
     private class DoneQualifier implements Qualifier {
-        
+
         DoneQualifier() {
-            
+
         }
-        
+
         @Override
         public boolean run(ReadOnlyTask task) {
             return task.getDone();
         }
-        
+
         @Override
         public String toString() {
             return "";
         }
-        
+
     }
-    
+
     private class notDoneQualifier implements Qualifier {
-        
+
         notDoneQualifier() {
-            
+
         }
-        
+
         @Override
         public boolean run(ReadOnlyTask task) {
             return !task.getDone();
         }
-        
+
         @Override
         public String toString() {
             return "";
         }
-        
+
     }
 
     private class NameQualifier implements Qualifier {

@@ -48,7 +48,7 @@ public class Task implements ReadOnlyTask {
     public void setDone(boolean doneStatus) {
         this.done = doneStatus;
     }
-    
+
     public void setDone() {
         this.done = true;
     }
@@ -72,7 +72,7 @@ public class Task implements ReadOnlyTask {
         assert startDate != null;
         this.startDate = startDate;
     }
-    
+
     @Override
     public boolean getDone() {
         return this.done;

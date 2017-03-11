@@ -54,7 +54,7 @@ public class XmlAdaptedTask {
         startDate = source.getStartDate().value;
         dueDate = source.getDueDate().value;
         done = source.getDone();
-        
+
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
