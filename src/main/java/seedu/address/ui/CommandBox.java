@@ -74,6 +74,7 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     private void handleOnKeyPressed(KeyEvent ke) {
         if (ke.getCode() == KeyCode.TAB) {
+            commandTextField.setText(commandTextField.getText().replaceAll("\\s+$", ""));
             String lastToken = extractLastKey();
             List<String> suggestions = autocomplete.getSuggestions(lastToken);
             handleSuggestions(suggestions);
@@ -82,8 +83,10 @@ public class CommandBox extends UiPart<Region> {
             ke.consume();
         } else if (ke.getCode() == KeyCode.UP) {
             getPreviousCommand();
+            ke.consume();
         } else if (ke.getCode() == KeyCode.DOWN) {
             getNextCommand();
+            ke.consume();
         }
     }
 
@@ -126,7 +129,6 @@ public class CommandBox extends UiPart<Region> {
         } else { //show suggestions in the output box
             showSuggestions(suggestions);
         }
-
     }
 
     /**
@@ -135,16 +137,43 @@ public class CommandBox extends UiPart<Region> {
      */
     private void showSuggestions(List<String> suggestions) {
         logger.info("Suggestions: " + suggestions);
+
+        String longestString = getLongestString(suggestions);
+        int commonSubstringIndex = 0;
+        char currentChar;
+        commonSubstring:
+        for (int charIndex = 0; charIndex < longestString.length(); charIndex++) {
+            currentChar = longestString.charAt(charIndex);
+            for (String suggestion : suggestions) {
+                if (suggestion.length() <= charIndex || suggestion.charAt(charIndex) != currentChar) {
+                    break commonSubstring;
+                }
+            }
+            commonSubstringIndex++;
+        }
+
+        String commonSubstring = longestString.substring(0, commonSubstringIndex);
+        replaceLastTokenWithSuggestion(commonSubstring, "");
         raise(new NewResultAvailableEvent(suggestions.toString()));
     }
 
-    private void replaceLastTokenWithSuggestion(String suggestion) {
-        replaceLastTokenWithSuggestion(suggestion, true);
+    private String getLongestString(List<String> suggestions) {
+        String longest = "";
+        for (String suggestion : suggestions) {
+            if (suggestion.length() >= longest.length()) {
+                longest = suggestion;
+            }
+        }
+        return longest;
     }
 
-    private void replaceLastTokenWithSuggestion(String suggestion, boolean appendSpace) {
+    private void replaceLastTokenWithSuggestion(String suggestion) {
+        replaceLastTokenWithSuggestion(suggestion, " ");
+    }
+
+    private void replaceLastTokenWithSuggestion(String suggestion, String appendSpace) {
         String commandBoxText = commandTextField.getText();
-        String afterReplace = commandBoxText.replace(extractLastKey(), (suggestion + " "));
+        String afterReplace = commandBoxText.replace(extractLastKey(), (suggestion + appendSpace));
         commandTextField.setText(afterReplace);
     }
 
@@ -163,7 +192,8 @@ public class CommandBox extends UiPart<Region> {
      * @return index of the last space, 0 otherwise
      */
     private int getIndexAfterLastSpace(String input) {
-        return input.lastIndexOf(" ") > 0 ? input.lastIndexOf(" ") + 1 : 0;
+        return input.replaceAll("\\s+$", "").lastIndexOf(" ") > 0 ? input.replaceAll("\\s+$", "").lastIndexOf(" ") + 1
+                                                                  : 0;
     }
 
     /**

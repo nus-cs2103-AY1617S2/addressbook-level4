@@ -69,14 +69,49 @@ public class CommandBoxTest extends TaskManagerGuiTest {
         assertEquals("ex", commandBox.getCommandInput());
 
         //Single suggestions with words
-        commandBox.enterCommand("randomString edi");
+        commandBox.enterCommand("randomString ed");
         commandBox.pressTab();
-        assertEquals("randomString editlabel ", commandBox.getCommandInput());
+        assertEquals("randomString edit", commandBox.getCommandInput());
 
         //Nonexistent string
         commandBox.enterCommand("randomString nonExistentStri");
         commandBox.pressTab();
         assertEquals("randomString nonExistentStri", commandBox.getCommandInput());
+
+      //pressing tab multiple times should not affect the auto completion
+        commandBox.enterCommand("he");
+        commandBox.pressTab();
+        commandBox.pressTab();
+        commandBox.pressTab();
+        commandBox.pressTab();
+        commandBox.pressTab();
+        commandBox.pressTab();
+        commandBox.pressTab();
+        assertEquals("help ", commandBox.getCommandInput());
+
+      //pressing tab multiple times should not affect the auto completion
+        commandBox.enterCommand("randomString ed");
+        commandBox.pressTab();
+        commandBox.pressTab();
+        commandBox.pressTab();
+        commandBox.pressTab();
+        commandBox.pressTab();
+        commandBox.pressTab();
+        commandBox.pressTab();
+        assertEquals("randomString edit", commandBox.getCommandInput());
+    }
+
+    @Test
+    public void commandBox_IterateCommandTest() {
+        //Single suggestion
+        commandBox.runCommand("add task1");
+        commandBox.runCommand("add task2");
+        commandBox.pressUp();
+        assertEquals("add task2", commandBox.getCommandInput());
+        commandBox.pressUp();
+        assertEquals("add task1", commandBox.getCommandInput());
+        commandBox.pressDown();
+        assertEquals("add task2", commandBox.getCommandInput());
     }
 
 }
