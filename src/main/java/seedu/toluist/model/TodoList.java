@@ -25,8 +25,24 @@ public class TodoList {
                 && allTasks.equals(((TodoList) other).getTasks()));
     }
 
+    public Task getTask(String indexToken) {
+        int index = indexToken == null ? -1 : Integer.parseInt(indexToken) - 1;
+        Task task = indexToken == null ? null : allTasks.get(index);
+        return task;
+    }
+
     public ArrayList<Task> getTasks() {
         return allTasks;
+    }
+
+    public ArrayList<Task> getTasks(List<Integer> indexes) {
+        ArrayList<Task> tasks = new ArrayList<Task>();
+        for (int index: indexes) {
+            System.out.print(" " + index);
+            tasks.add(allTasks.get(index - 1));
+        }
+        System.out.println("");
+        return tasks;
     }
 
     public static void setStorage(Storage storage) {

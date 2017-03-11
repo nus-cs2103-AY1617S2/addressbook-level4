@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import seedu.toluist.commons.core.LogsCenter;
+import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.controller.commons.TaskTokenizer;
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.Task;
@@ -38,8 +39,8 @@ public class DeleteTaskController extends Controller {
         HashMap<String, String> tokens = taskTokenizer.tokenize(command, true, false);
 
         String indexToken = tokens.get(TaskTokenizer.TASK_VIEW_INDEX);
-        List<Integer> indexes = taskTokenizer.splitIndexes(indexToken, todoList.getTasks().size());
-        List<Task> tasks = taskTokenizer.getTasks(indexes);
+        List<Integer> indexes = StringUtil.splitIndexes(indexToken, todoList.getTasks().size());
+        List<Task> tasks = todoList.getTasks(indexes);
         commandResult = delete(todoList, tasks);
 
         if (todoList.save()) {
