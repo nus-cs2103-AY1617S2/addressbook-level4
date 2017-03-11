@@ -1,19 +1,8 @@
 package seedu.task.logic.commands;
 
 import java.util.EmptyStackException;
-import java.util.HashSet;
-import java.util.Set;
 
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.task.logic.commands.exceptions.CommandException;
-import seedu.task.model.tag.Tag;
-import seedu.task.model.tag.UniqueTagList;
-import seedu.task.model.task.Description;
-import seedu.task.model.task.EndDateTime;
-import seedu.task.model.task.Name;
-import seedu.task.model.task.StartDateTime;
-import seedu.task.model.task.Task;
-import seedu.task.model.task.UniqueTaskList;
 
 
 public class RedoCommand extends Command {

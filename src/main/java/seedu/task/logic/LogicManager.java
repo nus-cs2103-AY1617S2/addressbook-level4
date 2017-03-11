@@ -1,6 +1,5 @@
 package seedu.task.logic;
 
-import java.util.Stack;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -12,7 +11,6 @@ import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.CommandResult;
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.Model;
-import seedu.task.model.TaskBook;
 import seedu.task.model.task.ReadOnlyTask;
 
 /**
