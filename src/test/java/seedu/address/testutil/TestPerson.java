@@ -2,9 +2,9 @@ package seedu.address.testutil;
 
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Address;
+import seedu.address.model.task.Date;
 import seedu.address.model.task.Email;
 import seedu.address.model.task.Name;
-import seedu.address.model.task.Phone;
 import seedu.address.model.task.ReadOnlyTask;
 
 /**
@@ -15,7 +15,7 @@ public class TestPerson implements ReadOnlyTask {
     private Name name;
     private Address address;
     private Email email;
-    private Phone phone;
+    private Date phone;
     private UniqueTagList tags;
 
     public TestPerson() {
@@ -41,7 +41,7 @@ public class TestPerson implements ReadOnlyTask {
         this.email = email;
     }
 
-    public void setPhone(Phone phone) {
+    public void setPhone(Date phone) {
         this.phone = phone;
     }
 

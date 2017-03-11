@@ -42,9 +42,9 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Address;
+import seedu.address.model.task.Date;
 import seedu.address.model.task.Email;
 import seedu.address.model.task.Name;
-import seedu.address.model.task.Phone;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.storage.StorageManager;
@@ -197,7 +197,7 @@ public class LogicManagerTest {
         //assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
                 //Name.MESSAGE_NAME_CONSTRAINTS);
         //assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
-                //Phone.MESSAGE_PHONE_CONSTRAINTS);
+                //Date.MESSAGE_PHONE_CONSTRAINTS);
         //assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
                 //Email.MESSAGE_EMAIL_CONSTRAINTS);
         //assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
@@ -414,7 +414,7 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
-            Phone privatePhone = new Phone("111111");
+            Date privatePhone = new Date("111111");
             Email email = new Email("adam@gmail.com");
             Address privateAddress = new Address("111, alpha street");
             Tag tag1 = new Tag("tag1");
