@@ -107,7 +107,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredListToShowAll() {
-        updateFilteredTaskList(new PredicateExpression(new notDoneQualifier()));
+        updateFilteredTaskList(new PredicateExpression(new NotDoneQualifier()));
     }
 
     public void updateFilteredDoneList() {
@@ -163,9 +163,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     }
 
-    private class notDoneQualifier implements Qualifier {
+    private class NotDoneQualifier implements Qualifier {
 
-        notDoneQualifier() {
+        NotDoneQualifier() {
 
         }
 

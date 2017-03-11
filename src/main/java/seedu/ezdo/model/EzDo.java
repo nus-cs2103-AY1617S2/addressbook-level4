@@ -58,7 +58,7 @@ public class EzDo implements ReadOnlyEzDo {
     public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
         this.tags.setTags(tags);
     }
-    
+
     public void resetData(ReadOnlyEzDo newData) {
         assert newData != null;
         try {
@@ -108,7 +108,7 @@ public class EzDo implements ReadOnlyEzDo {
         // in the task list.
         tasks.updateTask(index, editedTask);
     }
-    
+
     /**
      * Ensures that every tag in this task:
      *  - exists in the master list {@link #tags}
@@ -146,7 +146,7 @@ public class EzDo implements ReadOnlyEzDo {
             throw new UniqueTaskList.TaskNotFoundException();
         }
     }
-    
+
     public void doneTask(Task p) throws UniqueTaskList.TaskNotFoundException {
         if (tasks.contains(p)) {
             p.setDone();
@@ -162,7 +162,7 @@ public class EzDo implements ReadOnlyEzDo {
     }
 
 //// util methods
-    
+
     @Override
     public String toString() {
         return tasks.asObservableList().size() + " tasks, " + tags.asObservableList().size() +  " tags";

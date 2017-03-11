@@ -25,10 +25,10 @@ public interface Model {
     /** Adds the given task. */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
-    /** Marks a task as done. 
+    /** Marks a task as done.
      * @throws TaskNotFoundException */
     void doneTask(Task task) throws TaskNotFoundException;
-    
+
     /**
      * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
      *
@@ -47,5 +47,5 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
-    
+
 }
