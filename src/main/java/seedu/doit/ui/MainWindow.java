@@ -117,7 +117,7 @@ public class MainWindow extends UiPart<Region> {
         });
     }
 
-    void fillInnerParts() {
+    protected void fillInnerParts() {
         this.taskListPanel = new TaskListPanel(getTaskListPlaceholder(), this.logic.getFilteredTaskList());
         this.eventListPanel = new TaskListPanel(getEventListPlaceholder(), this.logic.getFilteredTaskList());
         this.floatingListPanel = new TaskListPanel(getFloatingListPlaceholder(), this.logic.getFilteredTaskList());
@@ -150,7 +150,7 @@ public class MainWindow extends UiPart<Region> {
         return this.floatingListPanelPlaceholder;
     }
 
-    void hide() {
+    protected void hide() {
         this.primaryStage.hide();
     }
 
@@ -188,7 +188,7 @@ public class MainWindow extends UiPart<Region> {
     /**
      * Returns the current size and the position of the main Window.
      */
-    GuiSettings getCurrentGuiSetting() {
+    protected GuiSettings getCurrentGuiSetting() {
         return new GuiSettings(this.primaryStage.getWidth(), this.primaryStage.getHeight(),
                 (int) this.primaryStage.getX(), (int) this.primaryStage.getY());
     }
@@ -213,6 +213,14 @@ public class MainWindow extends UiPart<Region> {
 
     public TaskListPanel getTaskListPanel() {
         return this.taskListPanel;
+    }
+
+    public TaskListPanel getEventListPanel() {
+        return this.eventListPanel;
+    }
+
+    public TaskListPanel getFloatingListPanel() {
+        return this.floatingListPanel;
     }
 
 }
