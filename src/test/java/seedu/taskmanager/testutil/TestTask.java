@@ -3,9 +3,9 @@ package seedu.taskmanager.testutil;
 import seedu.taskmanager.model.tag.UniqueTagList;
 import seedu.taskmanager.model.task.Description;
 import seedu.taskmanager.model.task.EndDate;
-import seedu.taskmanager.model.task.Title;
-import seedu.taskmanager.model.task.StartDate;
 import seedu.taskmanager.model.task.ReadOnlyTask;
+import seedu.taskmanager.model.task.StartDate;
+import seedu.taskmanager.model.task.Title;
 
 /**
  * A mutable task object. For testing only.

@@ -24,8 +24,6 @@ import seedu.taskmanager.commons.core.EventsCenter;
 import seedu.taskmanager.commons.events.model.TaskManagerChangedEvent;
 import seedu.taskmanager.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskmanager.commons.events.ui.ShowHelpRequestEvent;
-import seedu.taskmanager.logic.Logic;
-import seedu.taskmanager.logic.LogicManager;
 import seedu.taskmanager.logic.commands.AddCommand;
 import seedu.taskmanager.logic.commands.ClearCommand;
 import seedu.taskmanager.logic.commands.Command;
@@ -37,18 +35,18 @@ import seedu.taskmanager.logic.commands.HelpCommand;
 import seedu.taskmanager.logic.commands.ListCommand;
 import seedu.taskmanager.logic.commands.SelectCommand;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
-import seedu.taskmanager.model.TaskManager;
 import seedu.taskmanager.model.Model;
 import seedu.taskmanager.model.ModelManager;
 import seedu.taskmanager.model.ReadOnlyTaskManager;
+import seedu.taskmanager.model.TaskManager;
 import seedu.taskmanager.model.tag.Tag;
 import seedu.taskmanager.model.tag.UniqueTagList;
 import seedu.taskmanager.model.task.Description;
 import seedu.taskmanager.model.task.EndDate;
-import seedu.taskmanager.model.task.Title;
-import seedu.taskmanager.model.task.Task;
-import seedu.taskmanager.model.task.StartDate;
 import seedu.taskmanager.model.task.ReadOnlyTask;
+import seedu.taskmanager.model.task.StartDate;
+import seedu.taskmanager.model.task.Task;
+import seedu.taskmanager.model.task.Title;
 import seedu.taskmanager.storage.StorageManager;
 
 
@@ -191,9 +189,12 @@ public class LogicManagerTest {
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Title 01/03/2017 e/05/03/2017 d/valid,description.butNoStartDatePrefix", expectedMessage);
-        assertCommandFailure("add Valid Title s/01/03/2017 05/03/2017 d/valid, description.butNoEndDatePrefix", expectedMessage);
-        assertCommandFailure("add Valid Title s/01/03/2017 e/05/03/2017 valid, description.butNoDescriptionPrefix", expectedMessage);
+        assertCommandFailure("add Valid Title 01/03/2017 e/05/03/2017 d/valid, "
+                + "description.butNoStartDatePrefix", expectedMessage);
+        assertCommandFailure("add Valid Title s/01/03/2017 05/03/2017 d/valid, "
+                + "description.butNoEndDatePrefix", expectedMessage);
+        assertCommandFailure("add Valid Title s/01/03/2017 e/05/03/2017 valid, "
+                + "description.butNoDescriptionPrefix", expectedMessage);
     }
 
     @Test

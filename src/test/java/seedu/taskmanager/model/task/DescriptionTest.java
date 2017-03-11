@@ -5,8 +5,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.taskmanager.model.task.Description;
-
 public class DescriptionTest {
 
     @Test
@@ -18,6 +16,7 @@ public class DescriptionTest {
         // valid description
         assertTrue(Description.isValidDescription("Banana must be ripe"));
         assertTrue(Description.isValidDescription("-")); // one character
-        assertTrue(Description.isValidDescription("Meeting at Leng Inc; 1234 Market St, San Francisco CA 2349879, USA")); // long address
+        assertTrue(Description.isValidDescription("Meeting at Leng Inc; "
+                + "1234 Market St, San Francisco CA 2349879, USA")); // long address
     }
 }

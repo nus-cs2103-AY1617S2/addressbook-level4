@@ -14,12 +14,12 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.taskmanager.model.TaskManager;
 import seedu.taskmanager.model.ReadOnlyTaskManager;
 import seedu.taskmanager.model.tag.Tag;
+import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.testutil.TypicalTestTasks;
-import seedu.taskmanager.model.task.ReadOnlyTask;
+
 
 public class TaskManagerTest {
 
