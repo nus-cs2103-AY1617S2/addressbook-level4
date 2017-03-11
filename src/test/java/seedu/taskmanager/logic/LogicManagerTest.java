@@ -204,7 +204,7 @@ public class LogicManagerTest {
                 StartDate.MESSAGE_STARTDATE_CONSTRAINTS);
         assertCommandFailure("add Valid Title s/01/03/2017 e/not_numbers d/valid, description",
                 EndDate.MESSAGE_ENDDATE_CONSTRAINTS);
-        assertCommandFailure("add Valid Title s/12345 e/05/03/2017 d/valid, description t/invalid_-[.tag",
+        assertCommandFailure("add Valid Title s/12345 e/05/03/2017 d/valid, description #invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
@@ -437,8 +437,8 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Title("Task " + seed),
-                    new StartDate("" + Math.abs(seed)),
-                    new EndDate(seed + "@email"),
+                    new StartDate("01/01/2017"),
+                    new EndDate("01/01/2017"),
                     new Description("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
@@ -457,7 +457,7 @@ public class LogicManagerTest {
 
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {
-                cmd.append(" t/").append(t.tagName);
+                cmd.append(" #").append(t.tagName);
             }
 
             return cmd.toString();
