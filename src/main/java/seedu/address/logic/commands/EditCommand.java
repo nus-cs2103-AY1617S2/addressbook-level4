@@ -6,11 +6,11 @@ import java.util.Optional;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Date;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.Time;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -81,21 +81,21 @@ public class EditCommand extends Command {
     public static class EditTaskDescriptor {
         private Optional<Name> name = Optional.empty();
         private Optional<Date> date = Optional.empty();
-        private Optional<UniqueTagList> tags = Optional.empty();
+        private Optional<Time> time = Optional.empty();
 
         public EditTaskDescriptor() {}
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.name = toCopy.getName();
             this.date = toCopy.getDate();
-            this.tags = toCopy.getTags();
+            this.time = toCopy.getTime();
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.date, this.tags);
+            return CollectionUtil.isAnyPresent(this.name, this.date, this.time);
         }
 
         public void setName(Optional<Name> name) {
@@ -107,6 +107,14 @@ public class EditCommand extends Command {
             return name;
         }
 
+        public Optional<Time> getTime() {
+            return time;
+        }
+        
+        public void setTime(Optional<Time> time) {
+            assert time != null;
+            this.time = time;
+        }
         public void setDate(Optional<Date> date) {
             assert date != null;
             this.date = date;
@@ -116,14 +124,5 @@ public class EditCommand extends Command {
             return date;
         }
 
-
-        public void setTags(Optional<UniqueTagList> tags) {
-            assert tags != null;
-            this.tags = tags;
-        }
-
-        public Optional<UniqueTagList> getTags() {
-            return tags;
-        }
     }
 }

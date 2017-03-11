@@ -8,7 +8,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.ReadOnlyTask;
 
 /**
@@ -57,14 +56,6 @@ public class PersonCardHandle extends GuiHandle {
                 .getChildrenUnmodifiable()
                 .stream()
                 .map(node -> ((Labeled) node).getText())
-                .collect(Collectors.toList());
-    }
-
-    private List<String> getTags(UniqueTagList tags) {
-        return tags
-                .asObservableList()
-                .stream()
-                .map(tag -> tag.tagName)
                 .collect(Collectors.toList());
     }
 

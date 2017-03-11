@@ -18,21 +18,18 @@ import seedu.address.model.task.Task;
 /**
  * An Immutable AddressBook that is serializable to XML format
  */
-@XmlRootElement(name = "addressbook")
+@XmlRootElement(name = "TaskList")
 public class XmlSerializableAddressBook implements ReadOnlyAddressBook {
 
     @XmlElement
-    private List<XmlAdaptedPerson> persons;
-    @XmlElement
-    private List<XmlAdaptedTag> tags;
+    private List<XmlAdaptedPerson> tasks;
 
     /**
      * Creates an empty XmlSerializableAddressBook.
      * This empty constructor is required for marshalling.
      */
     public XmlSerializableAddressBook() {
-        persons = new ArrayList<>();
-        tags = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     /**
@@ -40,12 +37,12 @@ public class XmlSerializableAddressBook implements ReadOnlyAddressBook {
      */
     public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
         this();
-        persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        tasks.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
     }
 
     @Override
     public ObservableList<ReadOnlyTask> getPersonList() {
-        final ObservableList<Task> persons = this.persons.stream().map(p -> {
+        final ObservableList<Task> persons = this.tasks.stream().map(p -> {
             try {
                 return p.toModelType();
             } catch (IllegalValueException e) {

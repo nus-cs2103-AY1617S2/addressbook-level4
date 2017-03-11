@@ -30,7 +30,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.AddressBook;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
@@ -50,7 +49,6 @@ public class TestUtil {
 
     public static final Task[] SAMPLE_PERSON_DATA = getSamplePersonData();
 
-    public static final Tag[] SAMPLE_TAG_DATA = getSampleTagData();
 
     public static void assertThrows(Class<? extends Throwable> expected, Runnable executable) {
         try {
@@ -86,20 +84,6 @@ public class TestUtil {
             assert false;
             // not possible
             return null;
-        }
-    }
-
-
-    private static Tag[] getSampleTagData() {
-        try {
-            return new Tag[]{
-                new Tag("relatives"),
-                new Tag("friends")
-            };
-        } catch (IllegalValueException e) {
-            assert false;
-            return null;
-            //not possible
         }
     }
 
@@ -333,24 +317,5 @@ public class TestUtil {
         return card.isSamePerson(person);
     }
 
-    public static Tag[] getTagList(String tags) {
-        if ("".equals(tags)) {
-            return new Tag[]{};
-        }
-
-        final String[] split = tags.split(", ");
-
-        final List<Tag> collect = Arrays.asList(split).stream().map(e -> {
-            try {
-                return new Tag(e.replaceFirst("Tag: ", ""));
-            } catch (IllegalValueException e1) {
-                //not possible
-                assert false;
-                return null;
-            }
-        }).collect(Collectors.toList());
-
-        return collect.toArray(new Tag[split.length]);
-    }
 
 }

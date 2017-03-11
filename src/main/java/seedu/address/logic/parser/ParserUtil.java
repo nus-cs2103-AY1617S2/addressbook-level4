@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -13,8 +12,6 @@ import java.util.stream.Collectors;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Date;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Time;
@@ -92,7 +89,7 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
      */
-    public static Optional<Time> parseEmail(Optional<String> time) throws IllegalValueException {
+    public static Optional<Time> parseTime(Optional<String> time) throws IllegalValueException {
         assert time != null;
         return time.isPresent() ? Optional.of(new Time(time.get())) : Optional.empty();
     }
@@ -100,12 +97,5 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.
      */
-    public static UniqueTagList parseTags(Collection<String> tags) throws IllegalValueException {
-        assert tags != null;
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(new Tag(tagName));
-        }
-        return new UniqueTagList(tagSet);
-    }
+
 }

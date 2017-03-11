@@ -15,7 +15,7 @@ public class Date {
     /**
      * Validates given date.
      *
-     * @throws IllegalValueException if given phone string is invalid.
+     * @throws IllegalValueException if given date string is invalid.
      */
     public Date(String date) throws IllegalValueException {
         assert date != null;

@@ -33,7 +33,7 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_notAllFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "t/sweetie t/bestie";
+        String detailsToEdit = "d/101010";
         int addressBookIndex = 2;
 
         TestTask personToEdit = expectedPersonsList[addressBookIndex - 1];
