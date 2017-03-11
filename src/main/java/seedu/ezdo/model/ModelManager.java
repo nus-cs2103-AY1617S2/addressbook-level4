@@ -36,6 +36,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.ezDo = new EzDo(ezDo);
         filteredTasks = new FilteredList<>(this.ezDo.getTaskList());
+        updateFilteredListToShowAll();
     }
 
     public ModelManager() {
