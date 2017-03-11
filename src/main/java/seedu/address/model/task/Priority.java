@@ -17,10 +17,9 @@ public class Priority {
 
     public Priority(String priority) {
         String amended = priority.substring(2).trim();
-        if(amended.toLowerCase().compareTo("true") == 0) {
+        if (amended.toLowerCase().compareTo("true") == 0) {
             this.priority = true;
-        }
-        else {
+        } else {
             this.priority = false;
         }
     }
