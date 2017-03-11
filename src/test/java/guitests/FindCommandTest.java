@@ -12,7 +12,7 @@ public class FindCommandTest extends TaskManagerGuiTest {
     @Test
     public void find_nonEmptyList() {
         assertFindResult("find Mark"); // no results
-        assertFindResult("find Meier", td.buy2, td.meeting2); // multiple results
+        assertFindResult("find Meier", td.send2, td.meeting2); // multiple results
 
         //find after deleting one result
         commandBox.runCommand("delete 1");
