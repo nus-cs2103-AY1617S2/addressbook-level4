@@ -40,23 +40,13 @@ public class TaskCard extends UiPart<Region> {
 
         // Set dates to desired format for UI
         String rawStartDateTime = task.getStartDateTime().value;
-        String rawEndDateTime = task.getEndDateTime().value;
         SimpleDateFormat originalDf = new SimpleDateFormat("EEE MMM dd kk:mm:ss zzz yyyy");
+        Date startDate = originalDf.parse(rawStartDateTime);
         SimpleDateFormat convertedDf = new SimpleDateFormat("MMM dd, yyyy K:mm aa");
-
-        if (rawStartDateTime != null) {
-            Date startDate = originalDf.parse(rawStartDateTime);
-            startDateTime.setText(convertedDf.format(startDate));
-        } else {
-            startDateTime.setText(rawStartDateTime);
-        }
-
-        if (rawEndDateTime != null) {
-            Date endDate = originalDf.parse(rawEndDateTime);
-            endDateTime.setText(convertedDf.format(endDate));
-        } else {
-            endDateTime.setText(rawEndDateTime);
-        }
+        startDateTime.setText(convertedDf.format(startDate));
+        String rawEndDateTime = task.getEndDateTime().value;
+        Date endDate = originalDf.parse(rawEndDateTime);
+        endDateTime.setText(convertedDf.format(endDate));
 
         information.setText(task.getInformation().value);
 
