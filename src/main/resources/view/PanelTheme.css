@@ -51,35 +51,9 @@
     -fx-border-width: 0;
 }
 
-
-.scroll-bar {
-    -fx-border-color: transparent;
-	-fx-background-color: #FFFFFF;
-}
-
-.scroll-bar .track {
-	-fx-background-color: #FFFFFF;
-}
-
-.scroll-bar .thumb {
-    -fx-background-color: derive(gray, 33%);
-    -fx-background-insets: 6, 0, 0;
-    -fx-background-radius: 3em;
-}
-
-.scroll-bar .increment-button, .scroll-bar .decrement-button {
-    -fx-background-color: transparent;
-    -fx-padding: 0 0 0 0;
-}
-
-.scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
-    -fx-shape: " ";
-}
-
-.scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
-    -fx-padding: 1 8 1 8;
-}
-
-.scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
-    -fx-padding: 8 1 8 1;
+.chip {
+    -fx-background-color: lightgrey;
+    -fx-background-radius: 40;
+    -fx-text-fill: white;
+    -fx-background-position: center center;
 }
