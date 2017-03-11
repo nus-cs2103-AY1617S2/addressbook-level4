@@ -146,7 +146,7 @@ public class Task implements ReadOnlyTask {
             return this;
         }
 
-        public TaskBuilder setTags(String tag) throws DuplicateTagException, IllegalValueException {
+        public TaskBuilder addTags(String tag) throws DuplicateTagException, IllegalValueException {
             this.tags.add(new Tag(tag));
             return this;
         }

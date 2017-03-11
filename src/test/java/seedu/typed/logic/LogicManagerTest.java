@@ -424,13 +424,18 @@ public class LogicManagerTest {
          *
          * Assumes maximally 9 Tasks are generated. //TODO: extend support for >9 Tasks
          *
-         * @param seed
-         *            used to generate the task data field values
+         * @param seed used to generate the task data field values
+         * @author YIM CHIA HUI
+         *            
          */
         Task generateTask(int seed) throws Exception {
             String seedDate = "00/00/000" + String.valueOf(seed);
-            return new Task(new Name("Task " + seed), new Date("" + seedDate),
-                    new UniqueTagList(new Tag("tag" + seed), new Tag("tag" + (seed + 1))));
+            return new Task.TaskBuilder()
+                    .setName("Task " + seed)
+                    .setDate("" + seedDate)
+                    .addTags("tag" + seed)
+                    .addTags("tag" + (seed + 1))
+                    .build();
         }
 
         /** Generates the correct add command based on the task given */
