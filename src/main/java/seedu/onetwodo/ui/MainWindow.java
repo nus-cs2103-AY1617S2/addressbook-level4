@@ -56,7 +56,7 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private AnchorPane eventListPanelPlaceholder;
-    
+
     @FXML
     private AnchorPane todoListPanelPlaceholder;
 
@@ -129,9 +129,12 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        deadlineTaskListPanel = new TaskListPanel(getDeadlineListPlaceholder(), logic.getFilteredTaskList(), DEADLINE_PREFIX);
-        eventTaskListPanel = new TaskListPanel(getEventListPlaceholder(), logic.getFilteredTaskList(), EVENT_PREFIX);
-        todoTaskListPanel = new TaskListPanel(getTodosListPlaceholder(), logic.getFilteredTaskList(), TODO_PREFIX);
+        deadlineTaskListPanel = new TaskListPanel(getDeadlineListPlaceholder(), logic.getFilteredTaskList(),
+                DEADLINE_PREFIX);
+        eventTaskListPanel = new TaskListPanel(getEventListPlaceholder(), logic.getFilteredTaskList(),
+                EVENT_PREFIX);
+        todoTaskListPanel = new TaskListPanel(getTodosListPlaceholder(), logic.getFilteredTaskList(),
+                TODO_PREFIX);
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getToDoListFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);

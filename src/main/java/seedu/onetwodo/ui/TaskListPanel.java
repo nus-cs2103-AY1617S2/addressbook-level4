@@ -26,9 +26,8 @@ public class TaskListPanel extends UiPart<Region> {
     @FXML
     private ListView<ReadOnlyTask> taskListView;
 
-    public TaskListPanel(AnchorPane taskListPlaceholder, 
-    		ObservableList<ReadOnlyTask> taskList, 
-    		String indexPrefix) {
+    public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList,
+            String indexPrefix) {
         super(FXML);
         setConnections(taskList);
         addToPlaceholder(taskListPlaceholder);
