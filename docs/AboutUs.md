@@ -22,7 +22,7 @@ Year 2 Computer Science Major<br>
 Year 2 Computer Science Major<br>
 **Role**: Developer <br>
 **Responsibilities**: Testing, Integration <br>
-* Components in charge of: 
+* Components in charge of: Logic 
 * Code written: 
 * Contributions:
  * 
@@ -36,7 +36,7 @@ Year 2 Computer Science Major<br>
 Year 2 Computer Science Major<br>
 **Role**: Developer <br>
 **Responsibilities**: Code quality <br>
-* Components in charge of: 
+* Components in charge of: Model, Storage
 * Code written: 
 * Contributions:
  * 
