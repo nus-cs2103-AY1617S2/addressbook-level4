@@ -70,14 +70,14 @@ public class MainWindow extends UiPart<Region> {
         Scene scene = new Scene(getRoot());
         loadFonts(scene);
         primaryStage.setScene(scene);
-        
+
         setAccelerators();
     }
 
     private void loadFonts(Scene scene) {
         Font.loadFont(MainWindow.class.getResource(FONT_AVENIR).toExternalForm(), 10);
     }
-    
+
     public Stage getPrimaryStage() {
         return primaryStage;
     }
