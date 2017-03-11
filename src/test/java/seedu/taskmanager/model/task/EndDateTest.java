@@ -31,6 +31,5 @@ public class EndDateTest {
         // valid end date
         assertTrue(EndDate.isValidEndDate("01/02/2017"));
         assertTrue(EndDate.isValidEndDate("15/12/2019"));
-        
     }
 }
