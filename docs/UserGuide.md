@@ -39,7 +39,6 @@ By : `Team F12-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbs
 
 
 ## 2. Features
-[//]: # (@@author jingloon,yeejfe)
 > **Command Format**
 >
 > * Words in `UPPER_CASE` are the parameters.
@@ -54,7 +53,6 @@ Format: `help`
 > Help is also shown if you enter an incorrect command e.g. `abcd`
 
 ### 2.2. Adding a task: `add`
-[//]: # (@@author yeejfe)
 Adds a task to the Savvy To-Do<br>
 Format: `add TASK_NAME [s/START_DATE] [e/END_DATE] [l/LOCATION] [p/PRIORITY_LEVEL] [r/RECURRING_TYPE] [n/NUMBER_OF_RECURRENCE] [c/CATEGORY] [d/DESCRIPTION]`
 
@@ -199,9 +197,6 @@ There is no need to save manually.
 * **Help** : `help` <br>
 
 * **Select** : `select INDEX` <br>
-
-
-[//]: # (@@author yeejfe)
 
 ## 5. Keyboard Shortcuts
 
