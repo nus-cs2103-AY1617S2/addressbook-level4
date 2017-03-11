@@ -63,7 +63,7 @@ public class LogicManagerTest {
     private boolean helpShown;
 
     private int targetedJumpIndex;
-    
+
     /**
      * A utility class to generate test data.
      */
