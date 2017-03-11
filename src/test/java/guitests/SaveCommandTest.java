@@ -14,7 +14,8 @@ public class SaveCommandTest extends EzDoGuiTest {
     @Test
     public void save_validDirectory_success() {
         commandBox.runCommand("save " + validDirectory);
-        assertResultMessage(String.format(SaveCommand.MESSAGE_SAVE_TASK_SUCCESS, validDirectory + SaveCommand.DATA_FILE_NAME));
+        assertResultMessage(String.format(SaveCommand.MESSAGE_SAVE_TASK_SUCCESS,
+                validDirectory + SaveCommand.DATA_FILE_NAME));
     }
 
     @Test
