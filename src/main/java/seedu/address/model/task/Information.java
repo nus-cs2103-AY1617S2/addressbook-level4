@@ -1,6 +1,5 @@
 package seedu.address.model.task;
 
-
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
@@ -26,7 +25,7 @@ public class Information {
      *
      * @throws IllegalValueException if given information string is invalid.
      */
-    public Information(String info){
+    public Information(String info) {
         /*assert info != null;
         if (!isValidInformation(info)) {
             throw new IllegalValueException(MESSAGE_INFORMATION_CONSTRAINTS);

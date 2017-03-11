@@ -22,15 +22,14 @@ public class Deadline {
      */
     public Deadline(String date) throws IllegalValueException {
         //assert date != null;
-    	if(date.equals("")) {
-    		this.value = date;
-    	}
-        else {
+        if (date.equals("")) {
+            this.value = date;
+        } else {
             String trimmedDate = date.trim();
-        	if(!isValidDeadline(trimmedDate)) {
+            if (!isValidDeadline(trimmedDate)) {
                 throw new IllegalValueException(MESSAGE_DEADLINE_CONSTRAINTS);
-        	}
-        	this.value = trimmedDate;
+            }
+            this.value = trimmedDate;
         }
     }
 

@@ -10,9 +10,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Deadline;
-import seedu.address.model.task.Information;
 import seedu.address.model.task.PriorityLevel;
-import seedu.address.model.task.TaskName;
 import seedu.address.testutil.TaskBuilder;
 import seedu.address.testutil.TestTask;
 
