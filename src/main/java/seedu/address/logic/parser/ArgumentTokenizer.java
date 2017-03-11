@@ -27,7 +27,7 @@ public class ArgumentTokenizer {
 
     /** Arguments found after tokenizing **/
     private final Map<Prefix, List<String>> tokenizedArguments = new HashMap<>();
-
+    private List<PrefixPosition> positions;
     /**
      * Creates an ArgumentTokenizer that can tokenize arguments string as described by prefixes
      */
@@ -36,15 +36,23 @@ public class ArgumentTokenizer {
     }
 
     /**
-     * @param argsString arguments string of the form: preamble <prefix>value <prefix>value ...
+     * @param argsString arguments string of the form: preamble <prefix>value <prefix>value ... for add command
      */
     public void tokenize(String argsString) {
         resetTokenizerState();
-        saveArgument(PREFIX_NOTE, "");
-        saveArgument(PREFIX_PRIORITY, "");
-        saveArgument(PREFIX_STATUS, "");
-        List<PrefixPosition> positions = findAllPrefixPositions(argsString);
+        positions = findAllPrefixPositions(argsString);
         extractArguments(argsString, positions);
+    }
+
+    /**
+     * Creates a floating task with empty parameters
+     */
+    public void createFloatingTask() {
+        if (positions.isEmpty()) {
+            saveArgument(PREFIX_NOTE, "");
+            saveArgument(PREFIX_PRIORITY, "");
+            saveArgument(PREFIX_STATUS, "");
+        }
     }
 
     /**
