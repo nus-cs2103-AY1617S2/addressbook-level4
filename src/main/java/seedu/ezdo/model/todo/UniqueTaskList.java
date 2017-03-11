@@ -38,7 +38,7 @@ public class UniqueTaskList implements Iterable<Task> {
         assert toAdd != null;
         if (contains(toAdd)) {
             throw new DuplicateTaskException();
-        }
+        }       
         internalList.add(toAdd);
     }
 
@@ -85,7 +85,9 @@ public class UniqueTaskList implements Iterable<Task> {
     public void setTasks(List<? extends ReadOnlyTask> tasks) throws DuplicateTaskException {
         final UniqueTaskList replacement = new UniqueTaskList();
         for (final ReadOnlyTask task : tasks) {
-            replacement.add(new Task(task));
+            Task toAdd = new Task(task);
+            toAdd.setDone(task.getDone());
+            replacement.add(toAdd);
         }
         setTasks(replacement);
     }

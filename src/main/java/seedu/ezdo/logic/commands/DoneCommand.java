@@ -4,6 +4,7 @@ import seedu.ezdo.commons.core.Messages;
 import seedu.ezdo.commons.core.UnmodifiableObservableList;
 import seedu.ezdo.logic.commands.exceptions.CommandException;
 import seedu.ezdo.model.todo.ReadOnlyTask;
+import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -36,10 +37,9 @@ public class DoneCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask taskToDone = lastShownList.get(targetIndex - 1);
+        Task taskToDone = (Task) lastShownList.get(targetIndex - 1);
 
         try {
-            model.killTask(taskToDone);
             model.doneTask(taskToDone);
         } catch (TaskNotFoundException tnfe) {
             assert false : "The target task cannot be missing";
