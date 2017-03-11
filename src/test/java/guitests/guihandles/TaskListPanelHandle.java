@@ -155,7 +155,8 @@ public class TaskListPanelHandle extends GuiHandle {
     }
 
     public TaskCardHandle getTaskCardHandle(int index) {
-        return getTaskCardHandle(new Task(getListView().getItems().get(index)));
+        return getTaskCardHandle(new Task.TaskBuilder(getListView().getItems().get(index))
+                .build());
     }
 
     public TaskCardHandle getTaskCardHandle(ReadOnlyTask task) {

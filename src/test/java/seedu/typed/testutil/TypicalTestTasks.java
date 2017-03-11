@@ -35,7 +35,8 @@ public class TypicalTestTasks {
     public static void loadTaskManagerWithSampleData(TaskManager tm) {
         for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
             try {
-                tm.addTask(new Task(task));
+                tm.addTask(new Task.TaskBuilder(task)
+                        .build());
             } catch (UniqueTaskList.DuplicateTaskException e) {
                 assert false : "not possible";
             }

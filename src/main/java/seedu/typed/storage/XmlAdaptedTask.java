@@ -8,8 +8,6 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.model.tag.Tag;
 import seedu.typed.model.tag.UniqueTagList;
-import seedu.typed.model.task.Date;
-import seedu.typed.model.task.Name;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
 
@@ -62,9 +60,11 @@ public class XmlAdaptedTask {
         for (XmlAdaptedTag tag : tagged) {
             taskTags.add(tag.toModelType());
         }
-        final Name name = new Name(this.name);
-        final Date date = new Date(this.date);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(name, date, tags);
+        return new Task.TaskBuilder()
+                .setName(this.name)
+                .setDate(this.date)
+                .setTags(tags)
+                .build();
     }
 }

@@ -31,9 +31,6 @@ import seedu.typed.commons.util.FileUtil;
 import seedu.typed.commons.util.XmlUtil;
 import seedu.typed.model.TaskManager;
 import seedu.typed.model.tag.Tag;
-import seedu.typed.model.tag.UniqueTagList;
-import seedu.typed.model.task.Date;
-import seedu.typed.model.task.Name;
 import seedu.typed.model.task.ReadOnlyTask;
 import seedu.typed.model.task.Task;
 import seedu.typed.storage.XmlSerializableTaskManager;
@@ -72,15 +69,19 @@ public class TestUtil {
     private static Task[] getSampleTaskData() {
         try {
             // CHECKSTYLE.OFF: LineLength
-            return new Task[] { new Task(new Name("Meet Ali Muster"), new Date("30/01/2018"), new UniqueTagList()),
-                new Task(new Name("Meet Boris Mueller"), new Date("31/01/2018"), new UniqueTagList()),
-                new Task(new Name("Meet Carl Kurz"), new Date("03/01/2018"), new UniqueTagList()),
-                new Task(new Name("Meet Daniel Meier"), new Date("04/01/2018"), new UniqueTagList()),
-                new Task(new Name("Meet Elle Meyer"), new Date("05/01/2018"), new UniqueTagList()),
-                new Task(new Name("Meet Fiona Kunz"), new Date("06/01/2018"), new UniqueTagList()),
-                new Task(new Name("Meet George Best"), new Date("07/01/2018"), new UniqueTagList()),
-                new Task(new Name("Meet Hoon Meier"), new Date("08/02/2018"), new UniqueTagList()),
-                new Task(new Name("Meet Ida Mueller"), new Date("09/02/2018"), new UniqueTagList()) };
+            int taskNumber = 9;
+            Task[] tasks = new Task[taskNumber];
+            String[] names = new String[] {"Meet Ali Muster", "Meet Boris Mueller", "Meet Carl Kurz", "Meet Daniel Meier",
+                "Meet Elle Meyer", "Meet Fiona Kunz", "Meet George Best", "Meet Hoon Meier", "Meet Ida Mueller"};
+            String[] dates = new String[] {"30/01/2018", "31/01/2018", "03/01/2018", "04/01/2018", "05/01/2018", "06/01/2018",
+                "07/01/2018", "08/01/2018", "09/01/2018"};
+            for (int i = 0; i < taskNumber; i++) {
+                tasks[i] = new Task.TaskBuilder()
+                        .setName(names[i])
+                        .setDate(dates[i])
+                        .build();
+            }
+            return tasks;
             // CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
             assert false;

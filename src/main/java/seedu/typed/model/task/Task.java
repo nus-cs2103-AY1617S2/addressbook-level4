@@ -130,7 +130,7 @@ public class Task implements ReadOnlyTask {
             this.name = new Name(name);
             return this;
         }
-        
+
         public TaskBuilder setName(Name name) {
             this.name = name;
             return this;
@@ -140,7 +140,7 @@ public class Task implements ReadOnlyTask {
             this.date = new Date(date);
             return this;
         }
-        
+
         public TaskBuilder setDate(Date date) {
             this.date = date;
             return this;
@@ -150,12 +150,12 @@ public class Task implements ReadOnlyTask {
             this.tags.add(new Tag(tag));
             return this;
         }
-        
+
         public TaskBuilder setTags(UniqueTagList tags) {
             this.tags = tags;
             return this;
         }
-        
+
         public TaskBuilder setTags(Set<String> tags) throws IllegalValueException {
             final Set<Tag> tagSet = new HashSet<>();
             for (String tagName : tags) {

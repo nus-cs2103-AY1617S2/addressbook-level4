@@ -1,14 +1,9 @@
 package seedu.typed.logic.commands;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import seedu.typed.commons.exceptions.IllegalValueException;
 import seedu.typed.logic.commands.exceptions.CommandException;
-import seedu.typed.model.tag.Tag;
-import seedu.typed.model.tag.UniqueTagList;
-import seedu.typed.model.task.Date;
-import seedu.typed.model.task.Name;
 import seedu.typed.model.task.Task;
 import seedu.typed.model.task.UniqueTaskList;
 
