@@ -41,6 +41,6 @@ public abstract class Command {
      * @return true if command is mutable, false if not
      */
     public boolean isMutable() {
-	return false;
+        return false;
     }
 }

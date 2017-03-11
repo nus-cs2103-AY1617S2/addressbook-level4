@@ -95,21 +95,21 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void undo() throws EmptyStackException{
-	if(undoStack.isEmpty()) {
-	    throw new EmptyStackException();
-	}
-	redoStack.push(new TaskBook(taskBook));
-	taskBook.resetData(undoStack.pop());
+    public void undo() throws EmptyStackException {
+        if (undoStack.isEmpty()) {
+            throw new EmptyStackException();
+        }
+        redoStack.push(new TaskBook(taskBook));
+        taskBook.resetData(undoStack.pop());
     }
 
     @Override
-    public void redo() throws EmptyStackException{
-	if(redoStack.isEmpty()) {
-	    throw new EmptyStackException();
-	}
-	undoStack.push(new TaskBook(taskBook));
-	taskBook.resetData(redoStack.pop());
+    public void redo() throws EmptyStackException {
+        if (redoStack.isEmpty()) {
+            throw new EmptyStackException();
+        }
+        undoStack.push(new TaskBook(taskBook));
+        taskBook.resetData(redoStack.pop());
     }
 
     //=========== Filtered Person List Accessors =============================================================
