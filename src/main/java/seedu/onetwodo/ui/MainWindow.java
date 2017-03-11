@@ -1,6 +1,10 @@
 package seedu.onetwodo.ui;
 
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
+
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
@@ -9,9 +13,12 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import seedu.onetwodo.commons.core.Config;
+import seedu.onetwodo.commons.core.EventsCenter;
 import seedu.onetwodo.commons.core.GuiSettings;
 import seedu.onetwodo.commons.events.ui.ExitAppRequestEvent;
 import seedu.onetwodo.commons.util.FxViewUtil;
@@ -42,6 +49,7 @@ public class MainWindow extends UiPart<Region> {
     private TaskListPanel deadlineTaskListPanel;
     private TaskListPanel eventTaskListPanel;
     private TaskListPanel todoTaskListPanel;
+    private CommandBox commandBox;
 
     private Config config;
 
@@ -65,6 +73,9 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private AnchorPane statusbarPlaceholder;
+    
+    @FXML
+    private StackPane dialogStackPane;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML);
@@ -137,7 +148,7 @@ public class MainWindow extends UiPart<Region> {
                 TODO_PREFIX);
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getToDoListFilePath());
-        new CommandBox(getCommandBoxPlaceholder(), logic);
+        commandBox = new CommandBox(getCommandBoxPlaceholder(), logic);
     }
 
     private AnchorPane getCommandBoxPlaceholder() {
@@ -237,6 +248,21 @@ public class MainWindow extends UiPart<Region> {
 
     void loadTaskPage(ReadOnlyTask task) {
         browserPanel.loadTaskPage(task);
+    }
+    
+    public void openDialog(ReadOnlyTask task) {
+    	JFXDialogLayout content = new JFXDialogLayout();
+    	content.setHeading(new Text(task.getName().fullName));
+    	content.setBody(new Text(task.getDescription().value));
+    	JFXDialog dialog = new JFXDialog(dialogStackPane, content, JFXDialog.DialogTransition.CENTER, true);
+    	dialog.show();
+    	
+    	primaryStage.getScene().setOnKeyReleased(new EventHandler<KeyEvent>() {
+            public void handle(KeyEvent ke) {
+                dialog.close();
+                commandBox.focus();
+            }
+        });
     }
 
     void releaseResources() {
