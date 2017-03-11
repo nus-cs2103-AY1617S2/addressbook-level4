@@ -41,7 +41,7 @@ public class SampleDataUtil {
         }
     }
 
-    public static ReadOnlyTaskList getSampleAddressBook() {
+    public static ReadOnlyTaskList getSampleTaskList() {
         try {
             TaskList sampleAB = new TaskList();
             for (Task samplePerson : getSamplePersons()) {

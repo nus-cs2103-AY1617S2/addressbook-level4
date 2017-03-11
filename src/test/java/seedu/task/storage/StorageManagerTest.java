@@ -62,7 +62,7 @@ public class StorageManagerTest {
          */
         TaskList original = new TypicalTestPersons().getTypicalAddressBook();
         storageManager.saveAddressBook(original);
-        ReadOnlyTaskList retrieved = storageManager.readAddressBook().get();
+        ReadOnlyTaskList retrieved = storageManager.readTaskList().get();
         assertEquals(original, new TaskList(retrieved));
     }
 
