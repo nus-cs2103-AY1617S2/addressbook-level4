@@ -56,4 +56,27 @@ public class CommandBoxTest extends TaskManagerGuiTest {
         assertEquals(defaultStyleOfCommandBox, commandBox.getStyleClass());
     }
 
+    @Test
+    public void commandBox_AutoCompleteTest() {
+        //Single suggestion
+        commandBox.enterCommand("he");
+        commandBox.pressTab();
+        assertEquals("help ", commandBox.getCommandInput());
+
+        //Multiple suggestions
+        commandBox.enterCommand("ex");
+        commandBox.pressTab();
+        assertEquals("ex", commandBox.getCommandInput());
+
+        //Single suggestions with words
+        commandBox.enterCommand("randomString edi");
+        commandBox.pressTab();
+        assertEquals("randomString editlabel ", commandBox.getCommandInput());
+
+        //Nonexistent string
+        commandBox.enterCommand("randomString nonExistentStri");
+        commandBox.pressTab();
+        assertEquals("randomString nonExistentStri", commandBox.getCommandInput());
+    }
+
 }
