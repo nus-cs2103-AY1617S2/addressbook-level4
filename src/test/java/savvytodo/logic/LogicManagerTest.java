@@ -41,8 +41,8 @@ import savvytodo.model.ReadOnlyTaskManager;
 import savvytodo.model.TaskManager;
 import savvytodo.model.category.Category;
 import savvytodo.model.category.UniqueCategoryList;
-import savvytodo.model.task.Address;
 import savvytodo.model.task.Description;
+import savvytodo.model.task.Location;
 import savvytodo.model.task.Name;
 import savvytodo.model.task.Priority;
 import savvytodo.model.task.ReadOnlyTask;
@@ -185,17 +185,17 @@ public class LogicManagerTest {
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid,address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 valid@email.butNoPrefix a/valid, address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
+        assertCommandFailure("add Valid Name 123 e/valid@email.butNoPhonePrefix l/valid,location", expectedMessage);
+        assertCommandFailure("add Valid Name p/123 valid@email.butNoPrefix l/valid, location", expectedMessage);
+        assertCommandFailure("add Valid Name p/123 e/valid@email.butNoLocationPrefix valid, location", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidTaskData() {
-        assertCommandFailure("add []\\[;] p/low d/valid description a/valid, address", Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/not_numbers d/valid description a/valid, address",
+        assertCommandFailure("add []\\[;] p/low d/valid description l/valid, location", Name.MESSAGE_NAME_CONSTRAINTS);
+        assertCommandFailure("add Valid Name p/not_numbers d/valid description l/valid, location",
                 Priority.MESSAGE_PRIORITY_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/low d/valid description a/valid, address c/invalid_-[.category",
+        assertCommandFailure("add Valid Name p/low d/valid description l/valid, addlocation c/invalid_-[.category",
                 Category.MESSAGE_CATEGORY_CONSTRAINTS);
 
     }
@@ -391,11 +391,11 @@ public class LogicManagerTest {
             Name name = new Name("Assessment 2");
             Priority privatePhone = new Priority("high");
             Description description = new Description("Weightage 15%");
-            Address privateAddress = new Address("111, alpha street");
+            Location privateLocation = new Location("111, alpha street");
             Category category1 = new Category("category1");
             Category category2 = new Category("longercategory2");
             UniqueCategoryList categories = new UniqueCategoryList(category1, category2);
-            return new Task(name, privatePhone, description, privateAddress, categories);
+            return new Task(name, privatePhone, description, privateLocation, categories);
         }
 
         private final String[] SEED_PRIORITIES = { "low", "medium", "high" };
@@ -410,7 +410,7 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
 
             return new Task(new Name("Task " + seed), new Priority(SEED_PRIORITIES[seed % 3]),
-                    new Description("describe " + seed), new Address("House of " + seed), new UniqueCategoryList(
+                    new Description("describe " + seed), new Location("House of " + seed), new UniqueCategoryList(
                             new Category("category" + Math.abs(seed)), new Category("category" + Math.abs(seed + 1))));
         }
 
@@ -423,7 +423,7 @@ public class LogicManagerTest {
             cmd.append(p.getName().toString());
             cmd.append(" d/").append(p.getDescription());
             cmd.append(" p/").append(p.getPriority());
-            cmd.append(" a/").append(p.getAddress());
+            cmd.append(" l/").append(p.getLocation());
 
             UniqueCategoryList categories = p.getCategories();
             for (Category t : categories) {
@@ -505,7 +505,7 @@ public class LogicManagerTest {
          */
         Task generateTaskWithName(String name) throws Exception {
             return new Task(new Name(name), new Priority("low"), new Description("1 description"),
-                    new Address("House of 1"), new UniqueCategoryList(new Category("category")));
+                    new Location("House of 1"), new UniqueCategoryList(new Category("category")));
         }
     }
 }

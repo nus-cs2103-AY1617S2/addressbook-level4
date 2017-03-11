@@ -11,7 +11,7 @@ public interface ReadOnlyTask {
     Name getName();
     Priority getPriority();
     Description getDescription();
-    Address getAddress();
+    Location getLocation();
 
     /**
      * The returned CategoryList is a deep copy of the internal CategoryList,
@@ -28,7 +28,7 @@ public interface ReadOnlyTask {
                 && other.getName().equals(this.getName()) // state checks here onwards
                 && other.getPriority().equals(this.getPriority())
                 && other.getDescription().equals(this.getDescription())
-                && other.getAddress().equals(this.getAddress()));
+                && other.getLocation().equals(this.getLocation()));
     }
 
     /**
@@ -41,8 +41,8 @@ public interface ReadOnlyTask {
                 .append(getPriority())
                 .append(" Description: ")
                 .append(getDescription())
-                .append(" Address: ")
-                .append(getAddress())
+                .append(" Location: ")
+                .append(getLocation())
                 .append(" Categories: ");
         getCategories().forEach(builder::append);
         return builder.toString();

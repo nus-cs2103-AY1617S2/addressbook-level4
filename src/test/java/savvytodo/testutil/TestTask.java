@@ -1,8 +1,8 @@
 package savvytodo.testutil;
 
 import savvytodo.model.category.UniqueCategoryList;
-import savvytodo.model.task.Address;
 import savvytodo.model.task.Description;
+import savvytodo.model.task.Location;
 import savvytodo.model.task.Name;
 import savvytodo.model.task.Priority;
 import savvytodo.model.task.ReadOnlyTask;
@@ -13,9 +13,9 @@ import savvytodo.model.task.ReadOnlyTask;
 public class TestTask implements ReadOnlyTask {
 
     private Name name;
-    private Address address;
     private Description email;
-    private Priority phone;
+    private Location location;
+    private Priority priority;
     private UniqueCategoryList categories;
 
     public TestTask() {
@@ -27,9 +27,9 @@ public class TestTask implements ReadOnlyTask {
      */
     public TestTask(TestTask taskToCopy) {
         this.name = taskToCopy.getName();
-        this.phone = taskToCopy.getPriority();
+        this.priority = taskToCopy.getPriority();
         this.email = taskToCopy.getDescription();
-        this.address = taskToCopy.getAddress();
+        this.location = taskToCopy.getLocation();
         this.categories = taskToCopy.getCategories();
     }
 
@@ -37,8 +37,8 @@ public class TestTask implements ReadOnlyTask {
         this.name = name;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setAddress(Location address) {
+        this.location = address;
     }
 
     public void setEmail(Description email) {
@@ -46,7 +46,7 @@ public class TestTask implements ReadOnlyTask {
     }
 
     public void setPhone(Priority phone) {
-        this.phone = phone;
+        this.priority = phone;
     }
 
     public void setCategories(UniqueCategoryList categories) {
@@ -60,7 +60,7 @@ public class TestTask implements ReadOnlyTask {
 
     @Override
     public Priority getPriority() {
-        return phone;
+        return priority;
     }
 
     @Override
@@ -69,8 +69,8 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Address getAddress() {
-        return address;
+    public Location getLocation() {
+        return location;
     }
 
     @Override
@@ -86,7 +86,7 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
-        sb.append("a/" + this.getAddress().value + " ");
+        sb.append("l/" + this.getLocation().value + " ");
         sb.append("p/" + this.getPriority().value + " ");
         sb.append("d/" + this.getDescription().value + " ");
         this.getCategories().asObservableList().stream().forEach(s -> sb.append("c/" + s.categoryName + " "));

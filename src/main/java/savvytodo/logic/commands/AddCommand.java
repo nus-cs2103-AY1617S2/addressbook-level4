@@ -7,8 +7,8 @@ import savvytodo.commons.exceptions.IllegalValueException;
 import savvytodo.logic.commands.exceptions.CommandException;
 import savvytodo.model.category.Category;
 import savvytodo.model.category.UniqueCategoryList;
-import savvytodo.model.task.Address;
 import savvytodo.model.task.Description;
+import savvytodo.model.task.Location;
 import savvytodo.model.task.Name;
 import savvytodo.model.task.Priority;
 import savvytodo.model.task.Task;
@@ -22,9 +22,9 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
-            + "Parameters: NAME p/PRIORTY d/DESCRIPTION a/ADDRESS  [c/CATEGORY]...\n"
+            + "Parameters: NAME p/PRIORTY d/DESCRIPTION l/LOCATION  [c/CATEGORIES]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + "Dinner p/low d/with family a/311, Clementi Ave 2, #02-25 c/friends c/owesMoney";
+            + "Dinner p/low d/with family l/311, Clementi Ave 2, #02-25 c/friends c/owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
@@ -46,7 +46,7 @@ public class AddCommand extends Command {
                 new Name(name),
                 new Priority(priority),
                 new Description(description),
-                new Address(address),
+                new Location(address),
                 new UniqueCategoryList(categorySet)
         );
     }

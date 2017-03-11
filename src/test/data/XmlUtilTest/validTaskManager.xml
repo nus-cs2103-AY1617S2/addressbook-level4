@@ -4,54 +4,54 @@
         <name>Hans Muster</name>
         <priority isPrivate="false">low</priority>
         <description isPrivate="false">hans@google.com</description>
-        <address isPrivate="false">4th street</address>
+        <location isPrivate="false">4th street</location>
     </tasks>
     <tasks>
         <name>Ruth Mueller</name>
         <priority isPrivate="false">low</priority>
         <description isPrivate="false">ruth@google.com</description>
-        <address isPrivate="false">81th street</address>
+        <location isPrivate="false">81th street</location>
     </tasks>
     <tasks>
         <name>Heinz Kurz</name>
         <priority isPrivate="false">low</priority>
         <description isPrivate="false">heinz@yahoo.com</description>
-        <address isPrivate="false">wall street</address>
+        <location isPrivate="false">wall street</location>
     </tasks>
     <tasks>
         <name>Cornelia Meier</name>
         <priority isPrivate="false">medium</priority>
         <description isPrivate="false">cornelia@google.com</description>
-        <address isPrivate="false">10th street</address>
+        <location isPrivate="false">10th street</location>
     </tasks>
     <tasks>
         <name>Werner Meyer</name>
         <priority isPrivate="false">medium</priority>
         <description isPrivate="false">werner@gmail.com</description>
-        <address isPrivate="false">michegan ave</address>
+        <location isPrivate="false">michegan ave</location>
     </tasks>
     <tasks>
         <name>Lydia Kunz</name>
         <priority isPrivate="false">medium</priority>
         <description isPrivate="false">lydia@gmail.com</description>
-        <address isPrivate="false">little tokyo</address>
+        <location isPrivate="false">little tokyo</location>
     </tasks>
     <tasks>
         <name>Anna Best</name>
         <priority isPrivate="false">high</priority>
         <description isPrivate="false">anna@google.com</description>
-        <address isPrivate="false">4th street</address>
+        <location isPrivate="false">4th street</location>
     </tasks>
     <tasks>
         <name>Stefan Meier</name>
         <priority isPrivate="false">high</priority>
         <description isPrivate="false">stefan@mail.com</description>
-        <address isPrivate="false">little india</address>
+        <location isPrivate="false">little india</location>
     </tasks>
     <tasks>
         <name>Martin Mueller</name>
         <priority isPrivate="false">high</priority>
         <description isPrivate="false">hans@google.com</description>
-        <address isPrivate="false">chicago ave</address>
+        <location isPrivate="false">chicago ave</location>
     </tasks>
 </taskmanager>

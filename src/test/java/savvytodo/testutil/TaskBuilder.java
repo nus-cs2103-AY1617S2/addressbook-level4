@@ -3,8 +3,8 @@ package savvytodo.testutil;
 import savvytodo.commons.exceptions.IllegalValueException;
 import savvytodo.model.category.Category;
 import savvytodo.model.category.UniqueCategoryList;
-import savvytodo.model.task.Address;
 import savvytodo.model.task.Description;
+import savvytodo.model.task.Location;
 import savvytodo.model.task.Name;
 import savvytodo.model.task.Priority;
 
@@ -40,7 +40,7 @@ public class TaskBuilder {
     }
 
     public TaskBuilder withAddress(String address) throws IllegalValueException {
-        this.task.setAddress(new Address(address));
+        this.task.setAddress(new Location(address));
         return this;
     }
 

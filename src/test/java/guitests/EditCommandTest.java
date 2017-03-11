@@ -9,7 +9,7 @@ import guitests.guihandles.TaskCardHandle;
 import savvytodo.commons.core.Messages;
 import savvytodo.logic.commands.EditCommand;
 import savvytodo.model.category.Category;
-import savvytodo.model.task.Address;
+import savvytodo.model.task.Location;
 import savvytodo.model.task.Name;
 import savvytodo.model.task.Priority;
 import savvytodo.testutil.TaskBuilder;
@@ -24,7 +24,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Project 1 p/high d/2pm a/NUS mall c/Meeting";
+        String detailsToEdit = "Project 1 p/high d/2pm l/NUS mall c/Meeting";
         int taskManagerIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Project 1").withPriority("high").withDescription("2pm")
@@ -95,8 +95,8 @@ public class EditCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("edit 1 p/abcd");
         assertResultMessage(Priority.MESSAGE_PRIORITY_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 a/");
-        assertResultMessage(Address.MESSAGE_ADDRESS_CONSTRAINTS);
+        commandBox.runCommand("edit 1 l/");
+        assertResultMessage(Location.MESSAGE_LOCATION_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 c/*&");
         assertResultMessage(Category.MESSAGE_CATEGORY_CONSTRAINTS);
@@ -105,7 +105,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
     @Test
     public void edit_duplicateTask_failure() {
         commandBox.runCommand(
-                "edit 3 Assignment 1 p/high d/2359 Mon 23 Aug " + "a/None");
+                "edit 3 Assignment 1 p/high d/2359 Mon 23 Aug " + "l/None");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 

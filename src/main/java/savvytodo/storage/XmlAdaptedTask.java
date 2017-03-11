@@ -8,8 +8,8 @@ import javax.xml.bind.annotation.XmlElement;
 import savvytodo.commons.exceptions.IllegalValueException;
 import savvytodo.model.category.Category;
 import savvytodo.model.category.UniqueCategoryList;
-import savvytodo.model.task.Address;
 import savvytodo.model.task.Description;
+import savvytodo.model.task.Location;
 import savvytodo.model.task.Name;
 import savvytodo.model.task.Priority;
 import savvytodo.model.task.ReadOnlyTask;
@@ -27,7 +27,7 @@ public class XmlAdaptedTask {
     @XmlElement(required = true)
     private String description;
     @XmlElement(required = true)
-    private String address;
+    private String location;
 
     @XmlElement
     private List<XmlAdaptedCategory> categorized = new ArrayList<>();
@@ -48,7 +48,7 @@ public class XmlAdaptedTask {
         name = source.getName().fullName;
         priority = source.getPriority().value;
         description = source.getDescription().value;
-        address = source.getAddress().value;
+        location = source.getLocation().value;
         categorized = new ArrayList<>();
         for (Category category : source.getCategories()) {
             categorized.add(new XmlAdaptedCategory(category));
@@ -68,7 +68,7 @@ public class XmlAdaptedTask {
         final Name name = new Name(this.name);
         final Priority priority = new Priority(this.priority);
         final Description description = new Description(this.description);
-        final Address address = new Address(this.address);
+        final Location address = new Location(this.location);
         final UniqueCategoryList categories = new UniqueCategoryList(taskCategories);
         return new Task(name, priority, description, address, categories);
     }

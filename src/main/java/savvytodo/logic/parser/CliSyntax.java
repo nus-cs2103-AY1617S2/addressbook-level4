@@ -12,7 +12,7 @@ public class CliSyntax {
     /* Prefix definitions */
     public static final Prefix PREFIX_PRIORITY = new Prefix("p/");
     public static final Prefix PREFIX_DESCRIPTION = new Prefix("d/");
-    public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
+    public static final Prefix PREFIX_LOCATION = new Prefix("l/");
     public static final Prefix PREFIX_CATEGORY = new Prefix("c/");
 
     /* Patterns definitions */

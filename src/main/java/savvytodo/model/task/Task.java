@@ -14,14 +14,14 @@ public class Task implements ReadOnlyTask {
     private Name name;
     private Priority priority;
     private Description description;
-    private Address address;
+    private Location address;
 
     private UniqueCategoryList categories;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Priority phone, Description email, Address address, UniqueCategoryList categories) {
+    public Task(Name name, Priority phone, Description email, Location address, UniqueCategoryList categories) {
         assert !CollectionUtil.isAnyNull(name, phone, email, address, categories);
         this.name = name;
         this.priority = phone;
@@ -34,7 +34,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getPriority(), source.getDescription(), source.getAddress(),
+        this(source.getName(), source.getPriority(), source.getDescription(), source.getLocation(),
                 source.getCategories());
     }
 
@@ -68,13 +68,13 @@ public class Task implements ReadOnlyTask {
         return description;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(Location address) {
         assert address != null;
         this.address = address;
     }
 
     @Override
-    public Address getAddress() {
+    public Location getLocation() {
         return address;
     }
 
@@ -99,7 +99,7 @@ public class Task implements ReadOnlyTask {
         this.setName(replacement.getName());
         this.setPhone(replacement.getPriority());
         this.setEmail(replacement.getDescription());
-        this.setAddress(replacement.getAddress());
+        this.setAddress(replacement.getLocation());
         this.setCategories(replacement.getCategories());
     }
 

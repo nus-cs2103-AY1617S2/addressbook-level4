@@ -7,8 +7,8 @@ import savvytodo.commons.core.Messages;
 import savvytodo.commons.util.CollectionUtil;
 import savvytodo.logic.commands.exceptions.CommandException;
 import savvytodo.model.category.UniqueCategoryList;
-import savvytodo.model.task.Address;
 import savvytodo.model.task.Description;
+import savvytodo.model.task.Location;
 import savvytodo.model.task.Name;
 import savvytodo.model.task.Priority;
 import savvytodo.model.task.ReadOnlyTask;
@@ -26,7 +26,7 @@ public class EditCommand extends Command {
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[NAME] [p/PRIORITY] [d/DESCRIPTION] [a/ADDRESS ] [c/CATEGORIES]...\n"
+            + "[NAME] [p/PRIORITY] [d/DESCRIPTION] [l/LOCATION ] [c/CATEGORIES]...\n"
             + "Example: " + COMMAND_WORD + " 1 p/low d/2pm";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
@@ -81,7 +81,7 @@ public class EditCommand extends Command {
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
         Priority updatedPhone = editTaskDescriptor.getPhone().orElseGet(taskToEdit::getPriority);
         Description updatedEmail = editTaskDescriptor.getEmail().orElseGet(taskToEdit::getDescription);
-        Address updatedAddress = editTaskDescriptor.getAddress().orElseGet(taskToEdit::getAddress);
+        Location updatedAddress = editTaskDescriptor.getAddress().orElseGet(taskToEdit::getLocation);
         UniqueCategoryList updatedCategories = editTaskDescriptor.getCategories().orElseGet(taskToEdit::getCategories);
 
         return new Task(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCategories);
@@ -95,7 +95,7 @@ public class EditCommand extends Command {
         private Optional<Name> name = Optional.empty();
         private Optional<Priority> phone = Optional.empty();
         private Optional<Description> email = Optional.empty();
-        private Optional<Address> address = Optional.empty();
+        private Optional<Location> address = Optional.empty();
         private Optional<UniqueCategoryList> categories = Optional.empty();
 
         public EditTaskDescriptor() {}
@@ -142,12 +142,12 @@ public class EditCommand extends Command {
             return email;
         }
 
-        public void setAddress(Optional<Address> address) {
+        public void setAddress(Optional<Location> address) {
             assert address != null;
             this.address = address;
         }
 
-        public Optional<Address> getAddress() {
+        public Optional<Location> getAddress() {
             return address;
         }
 
