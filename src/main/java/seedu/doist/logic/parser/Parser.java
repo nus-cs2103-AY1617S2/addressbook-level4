@@ -17,6 +17,7 @@ import seedu.doist.logic.commands.HelpCommand;
 import seedu.doist.logic.commands.IncorrectCommand;
 import seedu.doist.logic.commands.ListCommand;
 import seedu.doist.logic.commands.SelectCommand;
+import seedu.doist.logic.commands.SortCommand;
 
 /**
  * Parses user input.
@@ -48,6 +49,8 @@ public class Parser {
             return new EditCommandParser().parse(arguments);
         } else if (SelectCommand.info().canBeTriggeredByWord(commandWord)) {
             return new SelectCommandParser().parse(arguments);
+        } else if (SortCommand.info().canBeTriggeredByWord(commandWord)) {
+            return new SortCommandParser().parse(arguments);
         } else if (DeleteCommand.info().canBeTriggeredByWord(commandWord)) {
             return new DeleteCommandParser().parse(arguments);
         } else if (ClearCommand.info().canBeTriggeredByWord(commandWord)) {
