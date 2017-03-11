@@ -1,9 +1,5 @@
 package seedu.taskboss.ui;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -32,22 +28,13 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private FlowPane categories;
 
-    public TaskCard(ReadOnlyTask task, int displayedIndex) throws ParseException {
+    public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
         priorityLevel.setText(task.getPriorityLevel().value);
-
-        // Set dates to desired format for UI
-        String rawStartDateTime = task.getStartDateTime().value;
-        SimpleDateFormat originalDf = new SimpleDateFormat("EEE MMM dd kk:mm:ss zzz yyyy");
-        Date startDate = originalDf.parse(rawStartDateTime);
-        SimpleDateFormat convertedDf = new SimpleDateFormat("MMM dd, yyyy K:mm aa");
-        startDateTime.setText(convertedDf.format(startDate));
-        String rawEndDateTime = task.getEndDateTime().value;
-        Date endDate = originalDf.parse(rawEndDateTime);
-        endDateTime.setText(convertedDf.format(endDate));
-
+        startDateTime.setText(task.getStartDateTime().value);
+        endDateTime.setText(task.getEndDateTime().value);
         information.setText(task.getInformation().value);
 
         initCategories(task);

@@ -1,6 +1,5 @@
 package seedu.taskboss.ui;
 
-import java.text.ParseException;
 import java.util.logging.Logger;
 
 import javafx.application.Platform;
@@ -71,11 +70,7 @@ public class TaskListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                try {
-                    setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
             }
         }
     }
