@@ -6,7 +6,7 @@ import seedu.task.commons.util.CollectionUtil;
 import seedu.task.model.tag.UniqueTagList;
 
 /**
- * Represents a Task in the task book. Guarantees: name is present and not null,
+ * Represents a Task in the task list. Guarantees: name is present and not null,
  * field values are validated.
  */
 public class Task implements ReadOnlyTask {

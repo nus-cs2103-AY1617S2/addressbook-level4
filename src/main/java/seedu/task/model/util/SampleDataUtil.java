@@ -12,30 +12,28 @@ import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
 
 public class SampleDataUtil {
-    public static Task[] getSamplePersons() {
+    public static Task[] getSampleTasks() {
         try {
             return new Task[] {
-                new Task(new Name("Alex Yeoh"), new Description("87438807"), new StartDateTime("01/01/1980 0000"),
-                    new EndDateTime("01/01/1980 0000"),
-                    new UniqueTagList("friends")),
-                new Task(new Name("Bernice Yu"), new Description("99272758"), new StartDateTime("01/01/1980 0000"),
-                    new EndDateTime("01/01/1980 0000"),
-                    new UniqueTagList("colleagues", "friends")),
-                new Task(new Name("Charlotte Oliveiro"), new Description("93210283"),
-                    new StartDateTime("01/01/1980 0000"),
-                    new EndDateTime("01/01/1980 0000"),
-                    new UniqueTagList("neighbours")),
-                new Task(new Name("David Li"), new Description("91031282"), new StartDateTime("01/01/1980 0000"),
-                    new EndDateTime("01/01/1980 0000"),
-                    new UniqueTagList("family")),
-                new Task(new Name("Irfan Ibrahim"), new Description("92492021"), new StartDateTime("01/01/1980 0000"),
-                    new EndDateTime("01/01/1980 0000"),
-                    new UniqueTagList("classmates")),
-                new Task(new Name("Roy Balakrishnan"), new Description("92624417"),
-                    new StartDateTime("01/01/1980 0000"),
-                    new EndDateTime("01/01/1980 0000"),
-                    new UniqueTagList("colleagues"))
-            };
+                new Task(new Name("Walk the dog"),
+                        new Description("Take Zelda on a walk around the park"),
+                        new StartDateTime("03/01/2016 0900"), new EndDateTime("03/01/2016 1100"),
+                        new UniqueTagList("Incomplete")),
+                new Task(new Name("Get groceries"), new Description("Egg, cheese, and milk"),
+                        new StartDateTime("10/01/2016 1900"), new EndDateTime("10/01/2016 2100"),
+                        new UniqueTagList("Incomplete")),
+                new Task(new Name("Finish report"), new Description("Do up citations and references"),
+                        new StartDateTime("15/03/2016 1000"), new EndDateTime("23/03/2016 2359"),
+                        new UniqueTagList("Incomplete")),
+                new Task(new Name("Take out the trash"), new Description(""),
+                        new StartDateTime("25/12/2015 1400"), new EndDateTime("25/12/2015 1415"),
+                        new UniqueTagList("Completed")),
+                new Task(new Name("Do Christmas shopping"), new Description("Compare prices with Amazon"),
+                        new StartDateTime("20/12/2015 1200"), new EndDateTime("24/12/2015 2200"),
+                        new UniqueTagList("Complete")),
+                new Task(new Name("Learn how to cook"), new Description("Google instant noodle recipes"),
+                        new StartDateTime("11/11/2015 0900"), new EndDateTime("11/11/2015 1900"),
+                        new UniqueTagList("Complete")) };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);
         }
@@ -43,13 +41,13 @@ public class SampleDataUtil {
 
     public static ReadOnlyTaskList getSampleTaskList() {
         try {
-            TaskList sampleAB = new TaskList();
-            for (Task samplePerson : getSamplePersons()) {
-                sampleAB.addTask(samplePerson);
+            TaskList sampleTaskList = new TaskList();
+            for (Task sampleTask : getSampleTasks()) {
+                sampleTaskList.addTask(sampleTask);
             }
-            return sampleAB;
+            return sampleTaskList;
         } catch (UniqueTaskList.DuplicateTaskException e) {
-            throw new AssertionError("sample data cannot contain duplicate persons", e);
+            throw new AssertionError("sample data cannot contain duplicate tasks", e);
         }
     }
 }

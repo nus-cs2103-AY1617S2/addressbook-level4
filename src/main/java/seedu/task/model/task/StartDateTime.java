@@ -19,7 +19,7 @@ public class StartDateTime {
     public final Date value;
 
     /**
-     * Validates given start datetime.
+     * Validates given start date time.
      *
      * @throws IllegalValueException if given email address string is invalid.
      */
