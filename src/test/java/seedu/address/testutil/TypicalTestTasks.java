@@ -14,12 +14,11 @@ public class TypicalTestTasks {
 
     public TypicalTestTasks() {
         try {
-            alice = new TaskBuilder().withTitle("Alice Pauline")
-                    .withEndTime("123, Jurong West Ave 6, #08-111").withStartTime("alice@gmail.com")
-                    .withVenue("85355255")
+            alice = new TaskBuilder().withTitle("Alice Pauline").withVenue("85355255")
+                    .withStartTime("alice@gmail.com").withEndTime("123, Jurong West Ave 6, #08-111")
                     .withTags("friends").build();
-            benson = new TaskBuilder().withTitle("Benson Meier").withEndTime("311, Clementi Ave 2, #02-25")
-                    .withStartTime("johnd@gmail.com").withVenue("98765432")
+            benson = new TaskBuilder().withTitle("Benson Meier").withVenue("98765432")
+                    .withStartTime("johnd@gmail.com").withEndTime("311, Clementi Ave 2, #02-25")
                     .withTags("owesMoney", "friends").build();
             carl = new TaskBuilder().withTitle("Carl Kurz").withVenue("95352563")
                     .withStartTime("heinz@yahoo.com").withEndTime("wall street").build();

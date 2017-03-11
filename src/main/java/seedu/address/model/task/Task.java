@@ -12,9 +12,9 @@ import seedu.address.model.tag.UniqueTagList;
 public class Task implements ReadOnlyTask {
 
     private Title title;
-    private StartTime starttime;
+    private StartTime startTime;
     private Venue venue;
-    private EndTime endtime;
+    private EndTime endTime;
 
     private UniqueTagList tags;
 
@@ -25,8 +25,8 @@ public class Task implements ReadOnlyTask {
         assert !CollectionUtil.isAnyNull(title, starttime, venue, endtime, tags);
         this.title = title;
         this.venue = venue;
-        this.starttime = starttime;
-        this.endtime = endtime;
+        this.startTime = starttime;
+        this.endTime = endtime;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -47,14 +47,14 @@ public class Task implements ReadOnlyTask {
         return title;
     }
 
-    public void setStartTime(StartTime starttime) {
-        assert starttime != null;
-        this.starttime = starttime;
+    public void setStartTime(StartTime startTime) {
+        assert startTime != null;
+        this.startTime = startTime;
     }
 
     @Override
     public StartTime getStartTime() {
-        return starttime;
+        return startTime;
     }
 
     public void setVenue(Venue venue) {
@@ -67,14 +67,14 @@ public class Task implements ReadOnlyTask {
         return venue;
     }
 
-    public void setEndTime(EndTime endtime) {
-        assert endtime != null;
-        this.endtime = endtime;
+    public void setEndTime(EndTime endTime) {
+        assert endTime != null;
+        this.endTime = endTime;
     }
 
     @Override
     public EndTime getEndTime() {
-        return endtime;
+        return endTime;
     }
 
     @Override
@@ -112,7 +112,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(title, venue, starttime, endtime, tags);
+        return Objects.hash(title, venue, startTime, endTime, tags);
     }
 
     @Override

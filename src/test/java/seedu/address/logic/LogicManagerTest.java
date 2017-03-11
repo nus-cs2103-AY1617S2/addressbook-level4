@@ -438,12 +438,12 @@ public class LogicManagerTest {
         Task adam() throws Exception {
             Title name = new Title("Adam Brown");
             Venue privateVenue = new Venue("111111");
-            StartTime email = new StartTime("adam@gmail.com");
+            StartTime privateStartTime = new StartTime("adam@gmail.com");
             EndTime privateEndTime = new EndTime("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, privateVenue, email, privateEndTime, tags);
+            return new Task(name, privateVenue, privateStartTime, privateEndTime, tags);
         }
 
         /**

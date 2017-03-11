@@ -57,7 +57,7 @@ public class TaskListPanelHandle extends GuiHandle {
      * @param startPosition
      *            The starting position of the sub list.
      * @param tasks
-     * 
+     *
      *            A list of task in the correct order.
      */
     public boolean isListMatching(int startPosition, ReadOnlyTask... tasks) throws IllegalArgumentException {
