@@ -4,49 +4,31 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Damith C. Rajapakse](http://www.comp.nus.edu.sg/~damithch) <br>
-<img src="images/DamithRajapakse.jpg" width="150"><br>
-**Role**: Project Advisor
+#### [Xu Bili](http://github.com/xbili)
+<img src="images/xbili.png" width="150"><br>
+**Role**: Team Lead<br>
+**Responsibilities**: UI
+* Scheduling & deadlines
+* Assign tasks
+* Faciliate feature discussions<br>
 
------
+#### [Shi Yanzhang](http://github.com/mynameisyz)
+<img src="images/mynameisyz.png" width="150"><br>
+**Role**: Testing & QA<br>
+**Responsibilities**: Storage
+* Ensure test cases covers all edge cases
+* Review test cases for each PR<br>
 
-#### [Joshua Lee](http://github.com/lejolly)
-<img src="images/JoshuaLee.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: UI
+#### [Lam Guang Jun](http://github.com/gjlam95)
+<img src="images/gjlam95.png" width="150"><br>
+**Role**: Code quality<br>
+**Responsibilities**: Logic
+* Ensures project's code quality
+* Only person who can merge PRs after code review<br>
 
------
-
-#### [Leow Yijin](http://github.com/yijinl)
-<img src="images/LeowYijin.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Data
-
------
-
-#### [Martin Choo](http://github.com/m133225)
-<img src="images/MartinChoo.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Dev Ops
-
------
-
-#### [Thien Nguyen](https://github.com/ndt93)
- Role: Developer <br>
- Responsibilities: Threading
-
- -----
-
-#### [You Liang](http://github.com/yl-coder)
-<img src="images/YouLiang.jpg" width="150"><br>
- Role: Developer <br>
- Responsibilities: UI
-
- -----
-
-# Contributors
-
-We welcome contributions. See [Contact Us](ContactUs.md) page for more info.
-
-* [Akshay Narayan](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Aokkhoy)
-* [Sam Yong](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Amauris)
+#### [Han Lynn](http://github.com/hlynn93)
+<img src="images/hlynn93.png" width="150"><br>
+**Role**: Integration & architecture<br>
+**Responsibilities**: Model
+* Coordinate inter-component APIs
+* Make architecture decisions<br>
