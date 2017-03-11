@@ -1,5 +1,6 @@
 package seedu.task.ui;
 
+import java.net.URL;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -7,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import seedu.task.MainApp;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.util.FxViewUtil;
 
@@ -19,8 +21,7 @@ public class HelpWindow extends UiPart<Region> {
     private static final String ICON = "/images/help_icon.png";
     private static final String FXML = "HelpWindow.fxml";
     private static final String TITLE = "Help";
-    private static final String USERGUIDE_URL =
-            "https://github.com/CS2103JAN2017-F14-B2/main/blob/master/docs/KIT%20User%20Guide.md";
+    private static final String USERGUIDE_URL = "/view/KITUserGuide.html";
 
     @FXML
     private WebView browser;
@@ -32,10 +33,11 @@ public class HelpWindow extends UiPart<Region> {
         Scene scene = new Scene(getRoot());
         //Null passed as the parent stage to make it non-modal.
         dialogStage = createDialogStage(TITLE, null, scene);
-        dialogStage.setMaximized(true); //TODO: set a more appropriate initial size
+        dialogStage.setMaximized(false); //TODO: set a more appropriate initial size
         FxViewUtil.setStageIcon(dialogStage, ICON);
 
-        browser.getEngine().load(USERGUIDE_URL);
+        URL help = MainApp.class.getResource(USERGUIDE_URL);
+        browser.getEngine().load(help.toString());
         FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
     }
 
