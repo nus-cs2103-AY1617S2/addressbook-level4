@@ -3,10 +3,10 @@ package seedu.address.model.util;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyToDoList;
 import seedu.address.model.ToDoList;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Task;
-import seedu.address.model.person.UniqueTaskList.DuplicateTaskException;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Name;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
     public static Task[] getSamplePersons() {
