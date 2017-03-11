@@ -5,7 +5,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.UniquePersonList;
+
 
 /**
  * Adds a person to the address book.
@@ -38,13 +38,8 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
-        try {
-            model.addPerson(toAdd);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-        } catch (UniquePersonList.DuplicatePersonException e) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-
+        model.addTask(toAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
 }

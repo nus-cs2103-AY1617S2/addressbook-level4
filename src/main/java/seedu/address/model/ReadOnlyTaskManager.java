@@ -5,14 +5,14 @@ import javafx.collections.ObservableList;
 import seedu.address.model.task.ReadOnlyTask;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of a TaskManager
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyTaskManager {
 
     /**
      * Returns an unmodifiable view of the persons list.
      * This list will not contain any duplicate persons.
      */
-    ObservableList<ReadOnlyTask> getPersonList();
+    ObservableList<ReadOnlyTask> getTaskList();
 
 }
