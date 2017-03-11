@@ -41,7 +41,8 @@ public class DateTime {
      * @throws IllegalValueException
      */
     public boolean isValidDateTime(String date) {
-        return date.length() > EMPTY;
+        //return (date.length() > EMPTY || "".equals(date));
+        return true;
     }
 
     @Override
