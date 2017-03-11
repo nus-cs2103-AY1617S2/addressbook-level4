@@ -24,6 +24,7 @@ import seedu.onetwodo.commons.util.FxViewUtil;
 import seedu.onetwodo.logic.Logic;
 import seedu.onetwodo.model.UserPrefs;
 import seedu.onetwodo.model.task.ReadOnlyTask;
+import seedu.onetwodo.model.task.TaskType;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -36,9 +37,6 @@ public class MainWindow extends UiPart<Region> {
     private static final String FONT_AVENIR = "/fonts/avenir-light.ttf";
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 450;
-    private static final String DEADLINE_PREFIX = "D";
-    private static final String EVENT_PREFIX = "E";
-    private static final String TODO_PREFIX = "T";
 
     private Stage primaryStage;
     private Logic logic;
@@ -140,11 +138,11 @@ public class MainWindow extends UiPart<Region> {
 
     void fillInnerParts() {
         deadlineTaskListPanel = new TaskListPanel(getDeadlineListPlaceholder(), logic.getFilteredTaskList(),
-                DEADLINE_PREFIX);
+                TaskType.DEADLINE);
         eventTaskListPanel = new TaskListPanel(getEventListPlaceholder(), logic.getFilteredTaskList(),
-                EVENT_PREFIX);
+                TaskType.EVENT);
         todoTaskListPanel = new TaskListPanel(getTodosListPlaceholder(), logic.getFilteredTaskList(),
-                TODO_PREFIX);
+                TaskType.FLOATING);
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getToDoListFilePath());
         commandBox = new CommandBox(getCommandBoxPlaceholder(), logic);

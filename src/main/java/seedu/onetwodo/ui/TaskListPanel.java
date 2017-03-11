@@ -1,9 +1,9 @@
 package seedu.onetwodo.ui;
 
 import java.util.logging.Logger;
-
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -16,6 +16,7 @@ import seedu.onetwodo.commons.core.LogsCenter;
 import seedu.onetwodo.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.onetwodo.commons.util.FxViewUtil;
 import seedu.onetwodo.model.task.ReadOnlyTask;
+import seedu.onetwodo.model.task.TaskType;
 
 /**
  * Panel containing the list of tasks.
@@ -23,23 +24,27 @@ import seedu.onetwodo.model.task.ReadOnlyTask;
 public class TaskListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
     private static final String FXML = "TaskListPanel.fxml";
-    private String indexPrefix;
+    private TaskType taskType;
 
     @FXML
     private ListView<ReadOnlyTask> taskListView;
 
     public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList,
-            String indexPrefix) {
+            TaskType taskType) {
         super(FXML);
+        this.taskType = taskType;
         setConnections(taskList);
         addToPlaceholder(taskListPlaceholder);
-        this.indexPrefix = indexPrefix;
     }
 
     private void setConnections(ObservableList<ReadOnlyTask> taskList) {
-        taskListView.setItems(taskList);
+        taskListView.setItems(getFilteredTasks(taskList));
         taskListView.setCellFactory(listView -> new TaskListViewCell());
         setEventHandlerForSelectionChangeEvent();
+    }
+
+    private FilteredList<ReadOnlyTask> getFilteredTasks(ObservableList<ReadOnlyTask> taskList) {
+        return new FilteredList<ReadOnlyTask>(taskList, t -> t.getTaskType() == taskType);
     }
 
     private void addToPlaceholder(AnchorPane placeHolderPane) {
@@ -78,7 +83,7 @@ public class TaskListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TaskCard(task, getIndex() + 1, indexPrefix).getRoot());
+                setGraphic(new TaskCard(task, getIndex() + 1, taskType.getPrefix()).getRoot());
             }
         }
     }

@@ -25,40 +25,20 @@ public class Task implements ReadOnlyTask {
      * Event
      */
     public Task(Name name, StartDate startDate, EndDate endDate, Description description, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, startDate, endDate, description, tags);
+        if (startDate.toString().isEmpty() && endDate.toString().isEmpty()) {
+            this.type = TaskType.FLOATING;    
+        } else if (startDate.toString().isEmpty() && !endDate.toString().isEmpty()) {
+            this.type = TaskType.DEADLINE;
+        } else if (!startDate.toString().isEmpty() && !endDate.toString().isEmpty()) {
+            this.type = TaskType.EVENT;
+        }
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.type = TaskType.EVENT;
         this.description = description;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
-    
-    /**
-     * Every field must be present and not null.
-     * Deadline
-     */
-    public Task(Name name, EndDate endDate, Description description, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, startDate, endDate, description, tags);
-        this.name = name;
-        this.endDate = endDate;
-        this.type = TaskType.DEADLINE;
-        this.description = description;
-        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
-    }
-    
-    /**
-     * Every field must be present and not null.
-     * Floating task
-     */
-    public Task(Name name, Description description, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, startDate, endDate, description, tags);
-        this.name = name;
-        this.type = TaskType.FLOATING;
-        this.description = description;
-        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
-    }
-    
+
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
