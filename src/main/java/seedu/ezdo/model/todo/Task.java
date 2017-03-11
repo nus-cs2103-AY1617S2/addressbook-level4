@@ -15,7 +15,7 @@ public class Task implements ReadOnlyTask {
     private Priority priority;
     private TaskDate startDate;
     private TaskDate dueDate;
-    private boolean Done;
+    private boolean done;
 
     private UniqueTagList tags;
 
@@ -29,8 +29,8 @@ public class Task implements ReadOnlyTask {
         this.startDate = startDate;
         this.dueDate = dueDate;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
-        this.Done = false;
-    }   
+        this.done = false;
+    }
 
     /**
      * Creates a copy of the given ReadOnlyTask.
@@ -44,13 +44,13 @@ public class Task implements ReadOnlyTask {
         assert name != null;
         this.name = name;
     }
-    
+
     public void setDone(boolean doneStatus) {
-        this.Done = doneStatus;
+        this.done = doneStatus;
     }
     
     public void setDone() {
-        this.Done = true;
+        this.done = true;
     }
 
     @Override
@@ -75,7 +75,7 @@ public class Task implements ReadOnlyTask {
     
     @Override
     public boolean getDone() {
-        return this.Done;
+        return this.done;
     }
 
     @Override
