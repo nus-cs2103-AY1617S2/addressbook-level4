@@ -10,7 +10,7 @@ We are a team based in the [School of Computing, National University of Singapor
 -----
 
 #### [Lee Wan Qing](https://github.com/wanqingg) <br>
-<img src="images/wanqing.jpg" width="150"><br>
+<img src="images/wanqingg.jpg" width="150"><br>
 **Role**: Code Quality, Timekeeper, Scheduling and tracking, Design expert
 
 -----
