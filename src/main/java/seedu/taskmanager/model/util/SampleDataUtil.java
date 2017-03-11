@@ -29,7 +29,7 @@ public class SampleDataUtil {
                     new UniqueTagList("schoolwork")),
                 new Task(new Title("Submit project report"), new StartDate("20/07/2017"), new EndDate("21/07/2017"),
                     new Description("Submit to tutor in class"),
-                    new UniqueTagList("schoolwork"))               
+                    new UniqueTagList("schoolwork"))
             };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);
