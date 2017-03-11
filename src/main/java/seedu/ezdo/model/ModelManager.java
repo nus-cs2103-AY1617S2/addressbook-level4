@@ -71,10 +71,10 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowAll();
         indicateEzDoChanged();
     }
-    
+
     @Override
-    public synchronized void doneTask(Task DoneTask) throws TaskNotFoundException {
-        ezDo.doneTask(DoneTask);
+    public synchronized void doneTask(Task doneTask) throws TaskNotFoundException {
+        ezDo.doneTask(doneTask);
         updateFilteredDoneList();
         indicateEzDoChanged();
     }
@@ -90,7 +90,16 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //=========== Filtered Task List Accessors =============================================================
+
+    private void updateFilteredTaskList(Expression expression) {
+        filteredTasks.setPredicate(expression::satisfies);
+    }
     
+    @Override
+    public void updateFilteredTaskList(Set<String> keywords) {
+        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
+    }
+
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {        
         return new UnmodifiableObservableList<>(filteredTasks);
@@ -101,17 +110,8 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new notDoneQualifier()));
     }
 
-    @Override
-    public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
-    }
-    
     public void updateFilteredDoneList() {
         updateFilteredTaskList(new PredicateExpression(new DoneQualifier()));
-    }
-    
-    private void updateFilteredTaskList(Expression expression) {
-        filteredTasks.setPredicate(expression::satisfies);
     }
 
     //========== Inner classes/interfaces used for filtering =================================================

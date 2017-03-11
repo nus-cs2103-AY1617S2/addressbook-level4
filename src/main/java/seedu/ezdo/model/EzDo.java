@@ -147,7 +147,7 @@ public class EzDo implements ReadOnlyEzDo {
         }
     }
     
-    public void doneTask(Task p) throws UniqueTaskList.TaskNotFoundException{
+    public void doneTask(Task p) throws UniqueTaskList.TaskNotFoundException {
         if (tasks.contains(p)) {
             p.setDone();
         } else {

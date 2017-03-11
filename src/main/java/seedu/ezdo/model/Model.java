@@ -24,7 +24,7 @@ public interface Model {
 
     /** Adds the given task. */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
-    
+
     /** Marks a task as done. 
      * @throws TaskNotFoundException */
     void doneTask(Task task) throws TaskNotFoundException;
