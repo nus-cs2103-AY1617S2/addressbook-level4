@@ -34,8 +34,8 @@ public class AddCommandParser {
             return new AddCommand(
                     argsTokenizer.getValue(PREFIX_NAME).get(),
                     checkEmpty(argsTokenizer.getValue(PREFIX_PRIORITY)),
-                    ParserUtil.parseStartDate(argsTokenizer.getValue(PREFIX_START_DATE).get()),
-                    ParserUtil.parseEndDate(argsTokenizer.getValue(PREFIX_END_DATE).get()),
+                    checkStartDateTimeEmpty(argsTokenizer.getValue(PREFIX_START_DATE)),
+                    checkEndDateTimeEmpty(argsTokenizer.getValue(PREFIX_END_DATE)),
                     checkEmpty(argsTokenizer.getValue(PREFIX_INFORMATION)),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_CATEGORY))
             );
@@ -52,6 +52,22 @@ public class AddCommandParser {
         } catch (NoSuchElementException nsee) {
             return "";
         }
+    }
+    
+    private String checkStartDateTimeEmpty(Optional<String> test) throws IllegalValueException {
+        try {
+            return ParserUtil.parseStartDate(test.get());
+        } catch (NoSuchElementException nsee) {
+            return "";
+        } 
+    }
+    
+    private String checkEndDateTimeEmpty(Optional<String> test) throws IllegalValueException {
+        try {
+            return ParserUtil.parseEndDate(test.get());
+        } catch (NoSuchElementException nsee) {
+            return "";
+        } 
     }
 
 }
