@@ -12,7 +12,6 @@ import org.junit.rules.TemporaryFolder;
 
 import javafx.fxml.FXML;
 import seedu.bulletjournal.MainApp;
-import seedu.bulletjournal.ui.UiPart;
 
 public class UiPartTest {
 

@@ -24,8 +24,6 @@ import seedu.bulletjournal.commons.core.EventsCenter;
 import seedu.bulletjournal.commons.events.model.TodoListChangedEvent;
 import seedu.bulletjournal.commons.events.ui.JumpToListRequestEvent;
 import seedu.bulletjournal.commons.events.ui.ShowHelpRequestEvent;
-import seedu.bulletjournal.logic.Logic;
-import seedu.bulletjournal.logic.LogicManager;
 import seedu.bulletjournal.logic.commands.AddCommand;
 import seedu.bulletjournal.logic.commands.ClearCommand;
 import seedu.bulletjournal.logic.commands.Command;
@@ -44,11 +42,11 @@ import seedu.bulletjournal.model.TodoList;
 import seedu.bulletjournal.model.tag.Tag;
 import seedu.bulletjournal.model.tag.UniqueTagList;
 import seedu.bulletjournal.model.task.Deadline;
-import seedu.bulletjournal.model.task.TaskName;
 import seedu.bulletjournal.model.task.Detail;
 import seedu.bulletjournal.model.task.ReadOnlyTask;
 import seedu.bulletjournal.model.task.Status;
 import seedu.bulletjournal.model.task.Task;
+import seedu.bulletjournal.model.task.TaskName;
 import seedu.bulletjournal.storage.StorageManager;
 
 
