@@ -10,6 +10,7 @@ import java.util.List;
  * Helper functions for handling strings.
  */
 public class StringUtil {
+    private static final String HYPHEN = "-";
 
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
@@ -75,7 +76,7 @@ public class StringUtil {
     public static List<Integer> splitIndexes(String stringIndexes, int maxIndex) {
         // Prepare stringIndexes in the correct format to be processed
         // Correct format example: ["2", "-", "5", "7", "11", "-", "13", "15"]
-        String processedStringIndexes = stringIndexes.replaceAll("-", " - ");
+        String processedStringIndexes = stringIndexes.replaceAll(HYPHEN, " - ");
         String[] splittedStringIndexes = processedStringIndexes.split(" |\\,");
         splittedStringIndexes = Arrays.
                 stream(splittedStringIndexes).
@@ -99,7 +100,7 @@ public class StringUtil {
                     return indexes;
                 }
 
-            } else if (splittedStringIndex.equals("-")) {
+            } else if (splittedStringIndex.equals(HYPHEN)) {
 
                 // If stringIndexes starts with "-", the startIndex will be 0;
                 int startIndex = (indexes.isEmpty()) ? 0 : indexes.get(indexes.size() - 1);
