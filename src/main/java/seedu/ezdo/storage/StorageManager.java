@@ -45,11 +45,9 @@ public class StorageManager extends ComponentManager implements Storage {
     public StorageManager(String ezDoFilePath, String userPrefsFilePath, Config config) {
         this(new XmlEzDoStorage(ezDoFilePath), new JsonUserPrefsStorage(userPrefsFilePath), config);
     }
-
 //    public StorageManager(String ezDoFilePath, String userPrefsFilePath, String configFilePath) {
 //        this(new XmlEzDoStorage(ezDoFilePath), new JsonUserPrefsStorage(userPrefsFilePath), new JsonConfigStorage(configFilePath));
 //    }
-
     // ================ UserPrefs methods ==============================
 
 
@@ -100,7 +98,6 @@ public class StorageManager extends ComponentManager implements Storage {
         ezDoStorage.saveEzDo(ezDo, filePath);
     }
 
-
     @Override
     @Subscribe
     public void handleEzDoChangedEvent(EzDoChangedEvent event) {
@@ -117,14 +114,15 @@ public class StorageManager extends ComponentManager implements Storage {
     public void handleEzDoDirectoryChangedEvent(EzDoDirectoryChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Directory changed, saving to new directory at: "
                 + event.getPath()));
-        setEzDoFilePath(event.getPath());
+        String oldPath = config.getEzDoFilePath();
         try {
-            saveEzDo(event.getData());
+            moveEzDo(oldPath, event.getPath());
             config.setEzDoFilePath(event.getPath());
-            System.out.println("file path for config is: " + config.getEzDoFilePath());
+            setEzDoFilePath(event.getPath());
             ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
-        } catch (IOException e) { // we checked for this in SaveCommand alr so it shouldn't happen
-            System.out.println("siao liao la");
+        } catch (IOException ioe) {
+            config.setEzDoFilePath(oldPath);
+            raise (new DataSavingExceptionEvent(ioe));
         }
     }
 

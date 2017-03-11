@@ -3,6 +3,11 @@ package seedu.ezdo.storage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.CopyOption;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -29,6 +34,7 @@ public class XmlEzDoStorage implements EzDoStorage {
         return filePath;
     }
 
+    @Override
     public void setEzDoFilePath(String filePath) {
         this.filePath = filePath;
     }
@@ -80,4 +86,14 @@ public class XmlEzDoStorage implements EzDoStorage {
     }
 
     @Override
+    public void moveEzDo(String oldPath, String newPath) throws IOException {
+        assert oldPath != null;
+        assert newPath != null;
+        try {
+            Path a = Files.move(Paths.get(oldPath), Paths.get(newPath), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException ioe) {
+            logger.info("I/O Exception when moving ezDo.xml to new directory.");
+            throw new IOException(ioe.getMessage());
+        }
+    }
 }
