@@ -14,8 +14,8 @@ import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.model.task.Task;
-import seedu.taskmanager.testutil.TestUtil;
 import seedu.taskmanager.TestApp;
+import seedu.taskmanager.testutil.TestUtil;
 
 /**
  * Provides a handle for the panel containing the task list.
