@@ -21,9 +21,11 @@ public class EventTask extends Task implements ReadOnlyEventTask {
 
     private UniqueTagList tags;
 
+    public static final String TYPE = "event";
+
+
     public EventTask(Name name, Comment comment, Priority priority, Status status,
                      Date startDate, Date endDate, UniqueTagList tags) {
-        super(name, comment, priority, status, tags);
         assert !CollectionUtil.isAnyNull(name, startDate, endDate, status);
         this.name = name;
         this.comment = comment;
@@ -146,6 +148,11 @@ public class EventTask extends Task implements ReadOnlyEventTask {
     @Override
     public String toString() {
         return getAsText();
+    }
+
+    @Override
+    public String getType() {
+        return TYPE;
     }
 
 }

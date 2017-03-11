@@ -20,9 +20,10 @@ public class DeadlineTask extends Task implements ReadOnlyDeadlineTask {
 
     private UniqueTagList tags;
 
+    public static final String TYPE = "deadline";
+
     public DeadlineTask(Name name, Comment comment, Priority priority,
                         Status status, Date deadline, UniqueTagList tags) {
-        super(name, comment, priority, status, tags);
         assert !CollectionUtil.isAnyNull(name, deadline, status);
         this.name = name;
         this.comment = comment;
@@ -134,4 +135,8 @@ public class DeadlineTask extends Task implements ReadOnlyDeadlineTask {
         return getAsText();
     }
 
+    @Override
+    public String getType() {
+        return TYPE;
+    }
 }

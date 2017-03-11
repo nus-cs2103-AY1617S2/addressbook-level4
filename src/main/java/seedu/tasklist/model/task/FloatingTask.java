@@ -18,11 +18,12 @@ public class FloatingTask extends Task implements ReadOnlyFloatingTask {
 
     private UniqueTagList tags;
 
+    public static final String TYPE = "floating";
+
     /**
      * Every field must be present and not null.
      */
     public FloatingTask(Name name, Comment comment, Priority priority, Status status, UniqueTagList tags) {
-        
         assert !CollectionUtil.isAnyNull(name, comment, priority, status, tags);
         this.name = name;
         this.comment = comment;
@@ -118,6 +119,11 @@ public class FloatingTask extends Task implements ReadOnlyFloatingTask {
     @Override
     public String toString() {
         return getAsText();
+    }
+
+    @Override
+    public String getType() {
+        return TYPE;
     }
 
 }
