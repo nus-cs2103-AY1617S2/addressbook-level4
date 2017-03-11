@@ -220,9 +220,9 @@ public class LogicManagerTest {
         assertCommandFailure("add n/Valid Name p/1 sd/today ed/tomorrow "
                 + "i/valid, information c/invalid_-[.category",
                 Category.MESSAGE_CATEGORY_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/1 sd/today to next week ed/tomorrow i/valid, information",
+        assertCommandFailure("add n/Valid Name p/1 sd/today to next week ed/tomorrow i/valid, information",
                 DateParser.getStartDateMultipleDatesError());
-        assertCommandFailure("add Valid Name p/1 sd/invalid date ed/monday to friday i/valid, information",
+        assertCommandFailure("add n/Valid Name p/1 sd/invalid date ed/monday to friday i/valid, information",
                 DateParser.getStartDateInvalidDateError());
     }
 
