@@ -16,17 +16,17 @@ public class ListCommandParser {
      * and returns an DeleteCommand object for execution.
      */
     public Command parse(String args) {
+        String taskType = args.trim().toLowerCase();
 
-        if (!validSearchType(args)) {
+        if (!validTaskType(taskType)) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }
 
-        return new ListCommand(args);
+        return new ListCommand(taskType);
     }
 
-    public boolean validSearchType(String arg) {
-        String taskType = arg.trim().toLowerCase();
+    public boolean validTaskType(String taskType) {
 
         switch(taskType) {
 

@@ -30,18 +30,22 @@ public class ListCommand extends Command {
         switch(taskType) {
 
         case TYPE_INCOMPLETE:
+            System.out.println("Executing task type " + TYPE_INCOMPLETE);
             model.getFilteredIncompleteTaskList();
             break;
 
         case TYPE_COMPLETE:
+            System.out.println("Executing task type " + TYPE_COMPLETE);
             model.getFilteredCompleteTaskList();
             break;
 
         case TYPE_OVERDUE:
+            System.out.println("Executing task type " + TYPE_OVERDUE);
             model.getFilteredOverdueTaskList();
             break;
 
         default:
+            System.out.println("Executing list all tasks");
             model.updateFilteredListToShowAll();
         }
         return new CommandResult(MESSAGE_SUCCESS);

@@ -1,6 +1,7 @@
 package seedu.todolist.model;
 
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
@@ -91,8 +92,8 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     //@@author A0139633B
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredIncompleteTaskList() {
-        filteredTasks.setPredicate((Predicate<? super Task>) task -> {
-            return task.isComplete();
+        filteredTasks.setPredicate((Predicate<? super ReadOnlyTask>) task -> {
+            return !task.isComplete();
         });
         return new UnmodifiableObservableList<>(filteredTasks);
     }
@@ -100,10 +101,14 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     //@@author A0139633B
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredCompleteTaskList() {
+        filteredTasks.setPredicate((Predicate<? super ReadOnlyTask>) task -> {
+            return task.isComplete();
+        });
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 
     @Override
+    //TODO
     //@@author A0139633B
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredOverdueTaskList() {
         return new UnmodifiableObservableList<>(filteredTasks);

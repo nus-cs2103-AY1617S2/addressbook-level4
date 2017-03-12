@@ -16,6 +16,8 @@ public interface ReadOnlyTask {
      */
     UniqueTagList getTags();
 
+    boolean isComplete();
+
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
      */
@@ -30,8 +32,7 @@ public interface ReadOnlyTask {
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append(" Tags: ");
+        builder.append(getName()).append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }

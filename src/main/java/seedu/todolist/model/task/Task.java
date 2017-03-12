@@ -47,7 +47,12 @@ public class Task implements ReadOnlyTask {
         return new UniqueTagList(tags);
     }
 
+    @Override
     public boolean isComplete() {
+        return this.completed;
+    }
+
+    public boolean getCompletionStatus() {
         return this.completed;
     }
 
