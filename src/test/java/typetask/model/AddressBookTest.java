@@ -11,8 +11,6 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import typetask.model.ReadOnlyTaskManager;
-import typetask.model.TaskManager;
 import typetask.model.task.ReadOnlyTask;
 import typetask.testutil.TypicalTestTasks;
 

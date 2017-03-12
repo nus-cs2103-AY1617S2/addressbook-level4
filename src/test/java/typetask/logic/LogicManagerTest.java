@@ -24,8 +24,6 @@ import typetask.commons.core.EventsCenter;
 import typetask.commons.events.model.AddressBookChangedEvent;
 import typetask.commons.events.ui.JumpToListRequestEvent;
 import typetask.commons.events.ui.ShowHelpRequestEvent;
-import typetask.logic.Logic;
-import typetask.logic.LogicManager;
 import typetask.logic.commands.AddCommand;
 import typetask.logic.commands.ClearCommand;
 import typetask.logic.commands.Command;

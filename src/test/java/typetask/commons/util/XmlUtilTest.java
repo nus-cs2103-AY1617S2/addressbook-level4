@@ -11,8 +11,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import typetask.commons.util.FileUtil;
-import typetask.commons.util.XmlUtil;
 import typetask.model.TaskManager;
 import typetask.storage.XmlSerializableAddressBook;
 import typetask.testutil.TaskManagerBuilder;

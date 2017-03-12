@@ -16,7 +16,6 @@ import org.junit.rules.TemporaryFolder;
 import typetask.commons.exceptions.DataConversionException;
 import typetask.commons.util.FileUtil;
 import typetask.model.UserPrefs;
-import typetask.storage.JsonUserPrefsStorage;
 
 public class JsonUserPrefsStorageTest {
 

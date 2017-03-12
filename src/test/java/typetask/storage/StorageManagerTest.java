@@ -17,10 +17,6 @@ import typetask.commons.events.storage.DataSavingExceptionEvent;
 import typetask.model.ReadOnlyTaskManager;
 import typetask.model.TaskManager;
 import typetask.model.UserPrefs;
-import typetask.storage.JsonUserPrefsStorage;
-import typetask.storage.Storage;
-import typetask.storage.StorageManager;
-import typetask.storage.XmlAddressBookStorage;
 import typetask.testutil.EventsCollector;
 import typetask.testutil.TypicalTestTasks;
 

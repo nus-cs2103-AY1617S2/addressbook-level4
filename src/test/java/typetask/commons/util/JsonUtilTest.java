@@ -7,8 +7,6 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-import typetask.commons.util.FileUtil;
-import typetask.commons.util.JsonUtil;
 import typetask.testutil.SerializableTestClass;
 import typetask.testutil.TestUtil;
 

@@ -4,7 +4,6 @@ import java.util.function.Supplier;
 
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import typetask.MainApp;
 import typetask.commons.core.Config;
 import typetask.commons.core.GuiSettings;
 import typetask.model.ReadOnlyTaskManager;

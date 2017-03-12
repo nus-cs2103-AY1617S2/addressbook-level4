@@ -16,7 +16,6 @@ import typetask.commons.util.FileUtil;
 import typetask.model.ReadOnlyTaskManager;
 import typetask.model.TaskManager;
 import typetask.model.task.Task;
-import typetask.storage.XmlAddressBookStorage;
 import typetask.testutil.TypicalTestTasks;
 
 public class XmlAddressBookStorageTest {

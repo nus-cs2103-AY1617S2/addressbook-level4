@@ -15,8 +15,6 @@ import org.junit.rules.TemporaryFolder;
 
 import typetask.commons.core.Config;
 import typetask.commons.exceptions.DataConversionException;
-import typetask.commons.util.ConfigUtil;
-import typetask.commons.util.FileUtil;
 
 public class ConfigUtilTest {
 
