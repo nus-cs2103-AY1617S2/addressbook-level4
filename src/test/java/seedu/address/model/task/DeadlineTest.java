@@ -34,6 +34,8 @@ public class DeadlineTest {
         assertFalse(deadline1.equals(null));
         assertFalse(deadline1.equals(deadline3));
 
+        Deadline dl = new Deadline();
+
         //hashCode
         assertTrue(deadline1.hashCode() == deadline2.hashCode());
 
@@ -43,6 +45,7 @@ public class DeadlineTest {
         assertTrue(Deadline.isValidDeadline("11-12-2106")); // date
         assertTrue(Deadline.isValidDeadline("Tomorrow"));
         assertTrue(Deadline.isValidDeadline("9pm")); // two characters only
+        assertTrue(new Deadline().isValidDeadline(dl.toString()));
         assertTrue(Deadline.isValidDeadline("")); // empty string
         assertTrue(Deadline.isValidDeadline(" ")); // spaces only
     }
