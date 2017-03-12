@@ -12,6 +12,7 @@ import seedu.onetwodo.logic.commands.AddCommand;
 import seedu.onetwodo.logic.commands.ClearCommand;
 import seedu.onetwodo.logic.commands.Command;
 import seedu.onetwodo.logic.commands.DeleteCommand;
+import seedu.onetwodo.logic.commands.DoneCommand;
 import seedu.onetwodo.logic.commands.EditCommand;
 import seedu.onetwodo.logic.commands.ExitCommand;
 import seedu.onetwodo.logic.commands.FindCommand;
@@ -62,6 +63,9 @@ public class Parser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
+        case DoneCommand.COMMAND_WORD:
+            return new DoneCommandParser().parse(arguments);
+            
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
