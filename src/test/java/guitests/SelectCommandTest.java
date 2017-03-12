@@ -16,7 +16,7 @@ public class SelectCommandTest extends TaskManagerGuiTest {
         assertNoTaskSelected();
 
         assertSelectionSuccess(1); // first task in the list
-        int taskCount = td.getTypicalPersons().length;
+        int taskCount = td.getTypicalTasks().length;
         assertSelectionSuccess(taskCount); // last task in the list
         int middleIndex = taskCount / 2;
         assertSelectionSuccess(middleIndex); // a task in the middle of the list
@@ -46,14 +46,14 @@ public class SelectCommandTest extends TaskManagerGuiTest {
     }
 
     private void assertTaskSelected(int index) {
-        assertEquals(taskListPanel.getSelectedPersons().size(), 1);
-        ReadOnlyTask selectedTask = taskListPanel.getSelectedPersons().get(0);
-        assertEquals(taskListPanel.getPerson(index - 1), selectedTask);
+        assertEquals(taskListPanel.getSelectedTasks().size(), 1);
+        ReadOnlyTask selectedTask = taskListPanel.getSelectedTasks().get(0);
+        assertEquals(taskListPanel.getTask(index - 1), selectedTask);
         //TODO: confirm the correct page is loaded in the Browser Panel
     }
 
     private void assertNoTaskSelected() {
-        assertEquals(taskListPanel.getSelectedPersons().size(), 0);
+        assertEquals(taskListPanel.getSelectedTasks().size(), 0);
     }
 
 }

@@ -11,11 +11,11 @@ public class Config {
     public static final String DEFAULT_CONFIG_FILE = "config.json";
 
     // Config values customizable through config file
-    private String appTitle = "Address App";
+    private String appTitle = "Opus";
     private Level logLevel = Level.INFO;
     private String userPrefsFilePath = "preferences.json";
-    private String taskManagerFilePath = "data/addressbook.xml";
-    private String appName = "MyAddressBook";
+    private String taskManagerFilePath = "data/opus.xml";
+    private String appName = "Opus";
 
 
     public String getAppTitle() {
@@ -42,22 +42,21 @@ public class Config {
         this.userPrefsFilePath = userPrefsFilePath;
     }
 
-    public String getAddressBookFilePath() {
+    public String getTaskManagerFilePath() {
         return taskManagerFilePath;
     }
 
-    public void setAddressBookFilePath(String addressBookFilePath) {
-        this.taskManagerFilePath = addressBookFilePath;
+    public void setTaskManagerFilePath(String taskManagerFilePath) {
+        this.taskManagerFilePath = taskManagerFilePath;
     }
 
-    public String getAddressBookName() {
+    public String getTaskManagerName() {
         return appName;
     }
 
-    public void setAddressBookName(String addressBookName) {
-        this.appName = addressBookName;
+    public void setTaskManagerName(String taskManagerName) {
+        this.appName = taskManagerName;
     }
-
 
     @Override
     public boolean equals(Object other) {

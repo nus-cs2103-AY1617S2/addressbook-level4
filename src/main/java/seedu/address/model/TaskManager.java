@@ -106,7 +106,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any task
         // in the task list.
-        tasks.updatePerson(index, editedTask);
+        tasks.updateTask(index, editedTask);
     }
 
     /**
