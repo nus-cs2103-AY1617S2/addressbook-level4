@@ -15,7 +15,7 @@ public interface Ui {
     /** Stops the UI. */
     void stop();
 
-    void init(Config config, Dispatcher dispatcher);
+    void init(Dispatcher dispatcher);
 
     void render();
 

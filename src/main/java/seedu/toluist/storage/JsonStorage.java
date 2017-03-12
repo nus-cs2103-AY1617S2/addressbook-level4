@@ -17,7 +17,7 @@ import seedu.toluist.model.TodoList;
 public class JsonStorage implements TodoListStorage {
     private static JsonStorage instance;
 
-    private String storagePath = Config.load().getTodoListFilePath();
+    private String storagePath = Config.getInstance().getTodoListFilePath();
     private ArrayDeque<String> historyStack = new ArrayDeque<>();
     private ArrayDeque<String> redoHistoryStack = new ArrayDeque<>();
 
@@ -40,7 +40,7 @@ public class JsonStorage implements TodoListStorage {
         }
     }
 
-    public boolean move(String storagePath) {
+    public boolean move(String newStoragePath) {
         String oldStoragePath = storagePath;
 
         Optional<TodoList> todoListOptional = load();
@@ -48,12 +48,15 @@ public class JsonStorage implements TodoListStorage {
             return false;
         }
 
-        if (!saveNotAffectingHistory(todoListOptional.get(), storagePath)) {
+        if (!saveNotAffectingHistory(todoListOptional.get(), newStoragePath)) {
             return false;
         }
-        this.storagePath = storagePath;
+        storagePath = newStoragePath;
         FileUtil.removeFile(FileUtil.getFile(oldStoragePath));
-        return true;
+
+        Config config = Config.getInstance();
+        config.setTodoListFilePath(newStoragePath);
+        return config.save();
     }
 
     public boolean save(TodoList todoList) {

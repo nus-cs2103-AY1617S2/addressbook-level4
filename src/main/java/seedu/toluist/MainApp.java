@@ -27,7 +27,7 @@ public class MainApp extends Application {
 
     protected Ui ui;
     protected Dispatcher dispatcher;
-    protected Config config = new Config();
+    protected Config config;
 
 
     @Override
@@ -35,13 +35,18 @@ public class MainApp extends Application {
         logger.info("=============================[ Initializing ToLuist ]===========================");
         super.init();
 
+        initConfig();
         initLogging(config);
 
         dispatcher = new CommandDispatcher();
         ui = UiManager.getInstance();
-        ui.init(config, dispatcher);
+        ui.init(dispatcher);
 
         initEventsCenter();
+    }
+
+    private void initConfig() {
+        config = Config.getInstance();
     }
 
     private void initLogging(Config config) {

@@ -5,19 +5,19 @@ import seedu.toluist.commons.util.JsonUtil;
 import seedu.toluist.model.CommandAliasConfig;
 
 import java.io.IOException;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  * Config values used by the app
+ * Since Config is largely a global state, singleton pattern can be largely applied here
  */
 public class Config {
-
+    private static final Logger logger = LogsCenter.getLogger(Config.class);
     public static final String DEFAULT_CONFIG_FILE_PATH = "data/config.json";
     public static final String DEFAULT_TODO_LIST_FILE_PATH = "data/todolist.json";
 
-    private static final Logger logger = LogsCenter.getLogger(Config.class);
+    private static Config instance;
     private static String configFilePath = DEFAULT_CONFIG_FILE_PATH;
 
     // Config values customizable through config file
@@ -30,14 +30,15 @@ public class Config {
      * Load config from disk
      * @return Config data
      */
-    public static Config load() {
-        try {
-            Optional<Config> configOptional = JsonUtil.readJsonFile(configFilePath, Config.class);
-            return configOptional.isPresent() ? configOptional.get() : new Config();
-        } catch (DataConversionException e) {
-            logger.severe("Loading config failed");
-            return new Config();
+    public static Config getInstance() {
+        if (instance == null) {
+            try {
+                instance = JsonUtil.readJsonFile(configFilePath, Config.class).orElse(new Config());
+            } catch (DataConversionException e) {
+                instance = new Config();
+            }
         }
+        return instance;
     }
 
     /**
@@ -64,10 +65,6 @@ public class Config {
 
     public String getTodoListFilePath() {
         return todoListFilePath;
-    }
-
-    public String getConfigFilePath() {
-        return configFilePath;
     }
 
     public String getAppTitle() {

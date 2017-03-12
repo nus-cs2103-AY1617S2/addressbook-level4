@@ -37,7 +37,7 @@ import seedu.toluist.ui.Ui;
 public class CommandDispatcher extends Dispatcher {
     private final Logger logger = LogsCenter.getLogger(getClass());
     private final EventsCenter eventsCenter = EventsCenter.getInstance();
-    private final CommandAliasConfig aliasConfig = Config.load().getCommandAliasConfig();
+    private final CommandAliasConfig aliasConfig = Config.getInstance().getCommandAliasConfig();
 
     public CommandDispatcher() {
         super();

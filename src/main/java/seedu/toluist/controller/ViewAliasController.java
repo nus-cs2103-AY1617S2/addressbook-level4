@@ -20,7 +20,7 @@ public class ViewAliasController extends Controller {
     private static final String NEW_LINE = "\n";
     public static final String NO_ALIAS_MESSAGE = "No aliases found";
 
-    private final CommandAliasConfig aliasConfig = Config.load().getCommandAliasConfig();
+    private final CommandAliasConfig aliasConfig = Config.getInstance().getCommandAliasConfig();
 
     public ViewAliasController(Ui renderer) {
         super(renderer);

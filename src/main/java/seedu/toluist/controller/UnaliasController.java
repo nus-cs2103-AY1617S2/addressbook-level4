@@ -21,7 +21,7 @@ public class UnaliasController extends Controller {
 
     private static final String ALIAS_TERM = "alias";
 
-    private final CommandAliasConfig aliasConfig = Config.load().getCommandAliasConfig();
+    private final CommandAliasConfig aliasConfig = Config.getInstance().getCommandAliasConfig();
 
     public UnaliasController(Ui renderer) {
         super(renderer);
@@ -35,7 +35,7 @@ public class UnaliasController extends Controller {
             return new CommandResult(String.format(RESULT_MESSAGE_NOT_ALIAS, alias));
         }
 
-        if (aliasConfig.removeAlias(alias)) {
+        if (aliasConfig.removeAlias(alias) && Config.getInstance().save()) {
             return new CommandResult(String.format(RESULT_MESSAGE_SUCCESS, alias));
         } else {
             return new CommandResult(String.format(RESULT_MESSAGE_FAILURE, alias));

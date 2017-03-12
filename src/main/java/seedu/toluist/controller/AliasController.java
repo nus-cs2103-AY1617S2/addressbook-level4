@@ -22,7 +22,7 @@ public class AliasController extends Controller {
     private static final String ALIAS_TERM = "alias";
     private static final String COMMAND_TERM = "command";
 
-    private final CommandAliasConfig aliasConfig = Config.load().getCommandAliasConfig();
+    private final CommandAliasConfig aliasConfig = Config.getInstance().getCommandAliasConfig();
 
     public AliasController(Ui renderer) {
         super(renderer);
@@ -37,7 +37,7 @@ public class AliasController extends Controller {
             return new CommandResult(String.format(RESULT_MESSAGE_RESERVED_WORD, alias));
         }
 
-        if (aliasConfig.setAlias(alias, commandPhrase)) {
+        if (aliasConfig.setAlias(alias, commandPhrase) && Config.getInstance().save()) {
             return new CommandResult(String.format(RESULT_MESSAGE_SUCCESS, alias, commandPhrase));
         } else {
             return new CommandResult(String.format(RESULT_MESSAGE_FAILURE, alias, commandPhrase));
