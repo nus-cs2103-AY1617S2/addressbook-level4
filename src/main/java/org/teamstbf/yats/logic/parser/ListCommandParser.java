@@ -5,7 +5,6 @@ import org.teamstbf.yats.logic.commands.ListCommand;
 import org.teamstbf.yats.logic.commands.ListCommandDeadline;
 import org.teamstbf.yats.logic.commands.ListCommandDone;
 import org.teamstbf.yats.logic.commands.ListCommandLocation;
-import org.teamstbf.yats.logic.commands.ListCommandStartTime;
 import org.teamstbf.yats.logic.commands.ListCommandTag;
 import org.teamstbf.yats.logic.commands.ListCommandTiming;
 import org.teamstbf.yats.logic.commands.ListCommandTitle;
@@ -30,8 +29,6 @@ public class ListCommandParser {
 				return new ListCommandDeadline();
 			case(ListCommand.COMMAND_WORD_SUFFIX_TIMING):
 				return new ListCommandTiming();
-			case(ListCommand.COMMAND_WORD_SUFFIX_STARTTIME):
-				return new ListCommandStartTime();
 			case(ListCommand.COMMAND_WORD_SUFFIX_LOCATION):
 				return new ListCommandLocation();
 			case(ListCommand.COMMAND_WORD_SUFFIX_DONE):
@@ -44,6 +41,7 @@ public class ListCommandParser {
 		
 		// Need to add command input variations such as for the case of no extension 
 		// for the case of wrong command
+		// for the case of repeating events, only need to list one
 	}
 
 	/**
