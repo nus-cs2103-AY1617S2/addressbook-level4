@@ -9,6 +9,7 @@ import seedu.tasklist.commons.core.ComponentManager;
 import seedu.tasklist.commons.core.LogsCenter;
 import seedu.tasklist.commons.core.UnmodifiableObservableList;
 import seedu.tasklist.commons.events.model.TaskListChangedEvent;
+import seedu.tasklist.commons.exceptions.EmptyModelStackException;
 import seedu.tasklist.commons.util.CollectionUtil;
 import seedu.tasklist.commons.util.StringUtil;
 import seedu.tasklist.model.task.ReadOnlyTask;
@@ -88,13 +89,15 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void getPreviousState() {
+    public ReadOnlyTaskList getPreviousState() throws EmptyModelStackException {
 
+        return taskList;
     }
 
     @Override
-    public void getNextState() {
+    public ReadOnlyTaskList getNextState() throws EmptyModelStackException {
 
+        return taskList;
     }
 
     //=========== Filtered Task List Accessors =============================================================

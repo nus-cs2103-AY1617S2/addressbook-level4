@@ -45,9 +45,9 @@ public interface Model {
     void updateFilteredTaskList(Set<String> keywords);
 
     /** Get the previous state (undo) of the task list */
-    public void getPreviousState() throws EmptyModelStackException;
+    public ReadOnlyTaskList getPreviousState() throws EmptyModelStackException;
 
     /** Get the next state (redo) of the task list */
-    public void getNextState() throws EmptyModelStackException;
+    public ReadOnlyTaskList getNextState() throws EmptyModelStackException;
 
 }
