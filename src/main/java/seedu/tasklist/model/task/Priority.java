@@ -16,6 +16,7 @@ public class Priority {
     public static final String PRIORITY_LOW = "low";
     public static final String PRIORITY_MEDIUM = "medium";
     public static final String PRIORITY_HIGH = "high";
+    public static final String PRIORITY_NIL = "NIL";
 
     public final String priority;
 
@@ -42,7 +43,7 @@ public class Priority {
             }
             this.priority = getPriorityType(priorityString);
         } else {
-            this.priority = null;
+            this.priority = "NIL";
         }
     }
 
@@ -57,7 +58,18 @@ public class Priority {
      * Returns true if a given string is a valid Priority.
      */
     public static boolean isValidPriority(String test) {
-        return test.matches(PRIORITY_VALIDATION_REGEX);
+        switch (test) {
+        case PRIORITY_HIGH:
+            return true;
+        case PRIORITY_MEDIUM:
+            return true;
+        case PRIORITY_LOW:
+            return true;
+        case PRIORITY_NIL:
+            return true;
+        default:
+            return false;
+        }
     }
 
     /**

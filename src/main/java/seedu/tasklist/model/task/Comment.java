@@ -1,6 +1,5 @@
 package seedu.tasklist.model.task;
 
-
 import java.util.Optional;
 
 import seedu.tasklist.commons.exceptions.IllegalValueException;
@@ -44,7 +43,7 @@ public class Comment {
             }
             this.value = commentString;
         } else {
-            this.value = null;
+            this.value = "NIL";
         }
     }
 

@@ -27,7 +27,7 @@ public class XmlAdaptedTask {
 
     @XmlElement(required = true)
     private String name;
-    @XmlElement(required = true)
+    @XmlElement(required = false)
     private String comment;
     @XmlElement(required = true)
     private String type;
@@ -62,6 +62,7 @@ public class XmlAdaptedTask {
         comment = source.getComment().value;
         priority = source.getPriority().priority;
         tagged = new ArrayList<>();
+        type = source.getType();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
         }
