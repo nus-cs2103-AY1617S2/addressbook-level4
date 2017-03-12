@@ -29,8 +29,8 @@ public class TypicalTestTasks {
                     .withStatus("incomplete").withNote("Include more reflection rather than description").build();
             fiona = new TaskBuilder().withName("Meet Prof Joe for consultation").withPriority("mid")
                     .withStatus("incomplete").withNote("COM02-01").build();
-            george = new TaskBuilder().withName("George Best").withPriority("9482442")
-                    .withStatus("anna@google.com").withNote("4th street").build();
+            george = new TaskBuilder().withName("Pay school fees").withPriority("hi")
+                    .withStatus("incomplete").withNote("Pay it on myISIS").build();
 
             // Manually added
             hoon = new TaskBuilder().withName("Hoon Meier").withPriority("8482424")
