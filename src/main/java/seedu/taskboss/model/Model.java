@@ -1,6 +1,7 @@
 package seedu.taskboss.model;
 
 import java.util.Set;
+import java.util.EmptyStackException;
 
 import seedu.taskboss.commons.core.UnmodifiableObservableList;
 import seedu.taskboss.model.task.ReadOnlyTask;
@@ -42,5 +43,8 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
+    
+    /** Undoes previous command of TaskBoss */
+    void undoTaskboss() throws EmptyStackException;
 
 }
