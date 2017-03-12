@@ -57,7 +57,7 @@ public class ModelManager extends ComponentManager implements Model {
     public ReadOnlyTaskBoss getTaskBoss() {
         return taskBoss;
     }
-    
+
     @Override
     public void undoTaskboss() throws EmptyStackException {
     	taskBoss.resetData(taskbossHistory.pop());
