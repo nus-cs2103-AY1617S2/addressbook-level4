@@ -5,7 +5,6 @@ import static seedu.taskboss.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMA
 
 import org.junit.Test;
 
-import guitests.guihandles.TaskCardHandle;
 import seedu.taskboss.commons.core.Messages;
 import seedu.taskboss.logic.commands.MarkDoneCommand;
 import seedu.taskboss.testutil.TaskBuilder;
@@ -59,9 +58,6 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
             TestTask markedDoneTask) {
         commandBox.runCommand("done " + filteredTaskListIndex);
 
-        // confirm the new card contains the right data
-        TaskCardHandle editedCard = taskListPanel.navigateToTask(markedDoneTask.getName().fullName);
-        assertMatching(markedDoneTask, editedCard);
 
         // confirm the list now contains all previous tasks plus the task with updated details
         expectedTasksList[taskBossIndex - 1] = markedDoneTask;
