@@ -5,9 +5,9 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import guitests.guihandles.PersonCardHandle;
-import seedu.address.commons.core.Messages;
-import seedu.address.testutil.TestTask;
-import seedu.address.testutil.TestUtil;
+import typetask.commons.core.Messages;
+import typetask.testutil.TestTask;
+import typetask.testutil.TestUtil;
 
 public class AddCommandTest extends AddressBookGuiTest {
 
