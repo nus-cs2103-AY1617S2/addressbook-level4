@@ -78,7 +78,7 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
+        return new TestTask[]{alice, benson, carl, daniel, elle, fiona, submission, george};
     }
 
     public TaskBoss getTypicalTaskBoss() {
