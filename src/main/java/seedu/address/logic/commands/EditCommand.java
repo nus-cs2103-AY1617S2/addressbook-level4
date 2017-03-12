@@ -76,10 +76,11 @@ public class EditCommand extends Command {
         assert taskToEdit != null;
 
         Title updatedTitle = editTaskDescriptor.getTitle().orElseGet(taskToEdit::getTitle);
+        Deadline updatedStartTime = editTaskDescriptor.getStartTime().orElseGet(taskToEdit::getStartTime);
         Deadline updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(taskToEdit::getDeadline);
         UniqueLabelList updatedLabels = editTaskDescriptor.getLabels().orElseGet(taskToEdit::getLabels);
 
-        return new Task(updatedTitle, updatedDeadline, updatedLabels);
+        return new Task(updatedTitle, updatedStartTime, updatedDeadline, updatedLabels);
     }
 
     /**
@@ -88,6 +89,7 @@ public class EditCommand extends Command {
      */
     public static class EditTaskDescriptor {
         private Optional<Title> title = Optional.empty();
+        private Optional<Deadline> startTime = Optional.empty();
         private Optional<Deadline> deadline = Optional.empty();
         private Optional<UniqueLabelList> labels = Optional.empty();
 
@@ -113,6 +115,15 @@ public class EditCommand extends Command {
 
         public Optional<Title> getTitle() {
             return title;
+        }
+        
+        public void setStartTime(Optional<Deadline> startTime) {
+            assert startTime != null;
+            this.startTime = startTime;
+        }
+        
+        public Optional<Deadline> getStartTime() {
+            return startTime;
         }
 
         public void setDeadline(Optional<Deadline> deadline) {

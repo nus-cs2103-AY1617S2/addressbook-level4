@@ -70,17 +70,18 @@ public class AddCommand extends Command {
      * Creates an AddCommand using raw values.
      *
      * @throws IllegalValueException if any of the raw values are invalid
+     * @throws IllegalDateTimeValueException if deadline values are invalid
      */
     public AddCommand(String title, String startDate, String deadline, Set<String> labels)
-            throws IllegalValueException {
+            throws IllegalValueException, IllegalDateTimeValueException {
         final Set<Label> labelSet = new HashSet<>();
         for (String labelName : labels) {
             labelSet.add(new Label(labelName));
         }
-        //TODO
         this.toAdd = new Task(
                 new Title(title),
-                new Deadline(startDate, deadline),
+                new Deadline(startDate),
+                new Deadline(deadline),
                 new UniqueLabelList(labelSet)
         );
     }

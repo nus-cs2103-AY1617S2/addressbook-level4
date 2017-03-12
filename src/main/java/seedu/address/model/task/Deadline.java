@@ -59,23 +59,6 @@ public class Deadline {
     }
 
     /**
-     * Validates given deadline.
-     *
-     * @throws IllegalValueException if given deadline string is invalid.
-     */
-    public Deadline(String startDeadline, String endDeadline) throws IllegalValueException {
-        assert startDeadline != null;
-        if (!isValidDeadline(startDeadline) && !isValidDeadline(endDeadline)) {
-            throw new IllegalValueException(MESSAGE_DEADLINE_CONSTRAINTS);
-        }
-        //TODO
-        List<Date> startDateList = dateParser.parse(startDeadline).get(0).getDates();
-        List<Date> endDateList = dateParser.parse(endDeadline).get(0).getDates();
-        this.deadline = startDateList.get(0);
-        this.value = deadline.toString();
-    }
-
-    /**
      * Returns true if a given string is a valid deadline.
      */
     public static boolean isValidDeadline(String test) {

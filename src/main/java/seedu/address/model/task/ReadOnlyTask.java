@@ -10,6 +10,7 @@ public interface ReadOnlyTask {
 
     Title getTitle();
     Deadline getDeadline();
+    Deadline getStartTime();
 
     /**
      * The returned LabelList is a deep copy of the internal LabelList,
@@ -24,7 +25,8 @@ public interface ReadOnlyTask {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                 && other.getTitle().equals(this.getTitle()) // state checks here onwards
-                && other.getDeadline().equals(this.getDeadline()));
+                && other.getDeadline().equals(this.getDeadline())
+                && other.getStartTime().equals(this.getStartTime()));
     }
 
     /**
@@ -33,6 +35,8 @@ public interface ReadOnlyTask {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getTitle())
+            .append("Start: ")
+            .append(getStartTime().toString())
             .append(" Deadline: ")
             .append(getDeadline().toString())
             .append(" Label: ");
