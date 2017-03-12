@@ -28,11 +28,11 @@ public class TestTask implements ReadOnlyTask {
     public void setName(Name name) {
         this.name = name;
     }
-    
+
     public void setDone(boolean done) {
-    	this.done = done;
+        this.done = done;
     }
-    
+
 
     public void setTags(UniqueTagList tags) {
         this.tags = tags;
@@ -42,11 +42,11 @@ public class TestTask implements ReadOnlyTask {
     public Name getName() {
         return name;
     }
-    
-	@Override
-	public boolean isDone() {
-		return done;
-	}
+
+    @Override
+    public boolean isDone() {
+        return done;
+    }
 
 
     @Override
