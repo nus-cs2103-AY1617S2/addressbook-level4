@@ -4,25 +4,32 @@ import java.util.Objects;
 
 public class DeadlineTask extends Task{
     private Name name;
-    private DateTime deadline;
+    private Date date;
+    private Time time;
     
-	public DeadlineTask(Name name, DateTime deadline) {
+	public DeadlineTask(Name name, Date date, Time time) {
 		super(name);
-		this.deadline = deadline;
+		this.date = date;
+		this.time = time;
 	}
 	
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public DeadlineTask(ReadOnlyTask source) {
-    	super(source); 
+    	super(source);
         if (source instanceof DeadlineTask) {
-            deadline = ((DeadlineTask) source).getDeadline();
+        	date = ((DeadlineTask) source).getDateDeadline();
+            time = ((DeadlineTask) source).getTimeDeadline();
         }
     }
 	
-    public DateTime getDeadline() {
-        return deadline;
+    public Date getDateDeadline() {
+        return date;
+    }
+    
+    public Time getTimeDeadline() {
+        return time;
     }
     
     @Override
@@ -34,7 +41,7 @@ public class DeadlineTask extends Task{
     
     @Override
     public int hashCode() {
-        return Objects.hash(name, deadline);
+        return Objects.hash(name, date, time);
     }
 
     @Override
