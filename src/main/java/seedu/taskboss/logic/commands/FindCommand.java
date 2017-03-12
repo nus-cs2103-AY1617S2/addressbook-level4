@@ -14,7 +14,7 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks whose names contain any of "
             + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: n/NAME \n"
+            + "Parameters: n/NAME or sd/STARTDATETIME or ed/ENDDATETIME \n"
             + "Example: " + COMMAND_WORD + " n/meeting";
 
     private final Set<String> keywords;
@@ -28,7 +28,7 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute() {
         if (prefix.equals(PREFIX_NAME)) {
-            model.updateFilteredTaskList(keywords);
+            model.updateFilteredTaskListByName(keywords);
             return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
         } else {
             model.updateFilteredTaskList(keywords);

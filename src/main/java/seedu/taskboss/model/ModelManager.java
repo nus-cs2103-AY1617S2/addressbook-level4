@@ -94,8 +94,18 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskList(Set<String> keywords) {
+    public void updateFilteredTaskListByName(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
+    }
+    
+    @Override
+    public void updateFilteredTaskListByStartDateTime(Set<String> keywords) {
+        updateFilteredTaskList(new PredicateExpression(new StartDatetimeQualifier(keywords)));
+    }
+    
+    @Override
+    public void updateFilteredTaskListByEndDateTime(Set<String> keywords) {
+        updateFilteredTaskList(new PredicateExpression(new EndDatetimeQualifier(keywords)));
     }
 
     private void updateFilteredTaskList(Expression expression) {
@@ -151,6 +161,50 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
+        }
+    }
+    
+    private class StartDatetimeQualifier implements Qualifier {
+        private Set<String> startDateKeyWords;
+
+        StartDatetimeQualifier(Set<String> startDateKeyWords) {
+            this.startDateKeyWords = startDateKeyWords;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return startDateKeyWords.stream()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getStartDateTime()
+                            .toString(), keyword))
+                    .findAny()
+                    .isPresent();
+        }
+
+        @Override
+        public String toString() {
+            return "startDateTime=" + String.join(", ", startDateKeyWords);
+        }
+    }
+    
+    private class EndDatetimeQualifier implements Qualifier {
+        private Set<String> endDateKeyWords;
+
+        EndDatetimeQualifier(Set<String> startDateKeyWords) {
+            this.endDateKeyWords = startDateKeyWords;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return endDateKeyWords.stream()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getEndDateTime()
+                            .toString(), keyword))
+                    .findAny()
+                    .isPresent();
+        }
+
+        @Override
+        public String toString() {
+            return "endDateTime=" + String.join(", ", endDateKeyWords);
         }
     }
 
