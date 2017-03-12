@@ -7,7 +7,7 @@ We are a team based in the [School of Computing, National University of Singapor
 #### [Amro Shohoud](https://github.com/AmroShohoud) <br>
 <img src="images/amroshohoud.png" width="150"><br>
 **Role**: Developer <br>
-Responsibilities: Data, Scheduling and tracking
+Responsibilities: In charge of logic, Scheduling and tracking
 
 -----
 
