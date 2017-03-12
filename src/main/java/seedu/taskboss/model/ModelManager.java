@@ -97,12 +97,12 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTaskListByName(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
-    
+
     @Override
     public void updateFilteredTaskListByStartDateTime(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new StartDatetimeQualifier(keywords)));
     }
-    
+
     @Override
     public void updateFilteredTaskListByEndDateTime(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new EndDatetimeQualifier(keywords)));
@@ -163,7 +163,7 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
-    
+
     private class StartDatetimeQualifier implements Qualifier {
         private Set<String> startDateKeyWords;
 
@@ -185,7 +185,7 @@ public class ModelManager extends ComponentManager implements Model {
             return "startDateTime=" + String.join(", ", startDateKeyWords);
         }
     }
-    
+
     private class EndDatetimeQualifier implements Qualifier {
         private Set<String> endDateKeyWords;
 

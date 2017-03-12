@@ -42,10 +42,10 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to filter by the given keywords as task name*/
     void updateFilteredTaskListByName(Set<String> keywords);
-    
+
     /** Updates the filter of the filtered task list to filter by the given keywords as start date*/
     void updateFilteredTaskListByStartDateTime(Set<String> keywords);
-    
+
     /** Updates the filter of the filtered task list to filter by the given keywords as end date*/
     void updateFilteredTaskListByEndDateTime(Set<String> keywords);
 
