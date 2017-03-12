@@ -71,7 +71,7 @@ public class IndexTokenizer {
                     // Invalid state, early termination
                     return indexes;
                 }
-                // Valid states: Negation of the above if-statement, which leads to the following 2 cases.
+                // Valid states: Negation of the above if-statement, one of the following 2 cases must be true.
                 // If (i + 1 == splittedStringIndexes.length) is true, let endIndex = maxIndex
                 // If (next splittedStringIndex) is a positive integer, let endIndex = next splittedStringIndex.
                 if (i + 1 < splittedStringIndexes.length) {
