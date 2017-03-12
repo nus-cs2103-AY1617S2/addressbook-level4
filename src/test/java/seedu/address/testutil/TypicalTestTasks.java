@@ -14,13 +14,13 @@ public class TypicalTestTasks {
 
     public TypicalTestTasks() {
         try {
-            alice = new TaskBuilder().withName("Alice Pauline")
-                    .withNote("123, Jurong West Ave 6, #08-111").withStatus("alice@gmail.com")
-                    .withPriority("85355255")
-                    .withTags("friends").build();
-            benson = new TaskBuilder().withName("Benson Meier").withNote("311, Clementi Ave 2, #02-25")
-                    .withStatus("johnd@gmail.com").withPriority("98765432")
-                    .withTags("owesMoney", "friends").build();
+            alice = new TaskBuilder().withName("Do laundry")
+                    .withNote("Twice as many detergent this time").withStatus("incomplete")
+                    .withPriority("hi")
+                    .withTags("chores").build();
+            benson = new TaskBuilder().withName("Wash the dishes").withNote("They're in the sink")
+                    .withStatus("incomplete").withPriority("mid")
+                    .withTags("chores").build();
             carl = new TaskBuilder().withName("Carl Kurz").withPriority("95352563")
                     .withStatus("heinz@yahoo.com").withNote("wall street").build();
             daniel = new TaskBuilder().withName("Daniel Meier").withPriority("87652533")
