@@ -189,8 +189,8 @@ public class ModelManager extends ComponentManager implements Model {
     private class EndDatetimeQualifier implements Qualifier {
         private Set<String> endDateKeyWords;
 
-        EndDatetimeQualifier(Set<String> startDateKeyWords) {
-            this.endDateKeyWords = startDateKeyWords;
+        EndDatetimeQualifier(Set<String> endDateKeyWords) {
+            this.endDateKeyWords = endDateKeyWords;
         }
 
         @Override
