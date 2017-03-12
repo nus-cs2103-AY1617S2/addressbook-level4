@@ -11,6 +11,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
+import seedu.toluist.commons.core.Config;
+import seedu.toluist.commons.core.GuiSettings;
 import seedu.toluist.commons.events.ui.ExitAppRequestEvent;
 import seedu.toluist.dispatcher.Dispatcher;
 import seedu.toluist.ui.view.CommandBox;
@@ -57,7 +59,7 @@ public class MainWindow extends UiPart<Region> {
 
         // Configure the UI
         setWindowMinSize();
-//        setWindowDefaultSize(prefs);
+        setWindowDefaultSize();
         Scene scene = new Scene(getRoot());
         primaryStage.setScene(scene);
         setAccelerators();
@@ -129,6 +131,19 @@ public class MainWindow extends UiPart<Region> {
         primaryStage.setMinWidth(MIN_WIDTH);
     }
 
+    /**
+     * Sets the default size based on user config.
+     */
+    private void setWindowDefaultSize() {
+        GuiSettings guiSettings = Config.getInstance().getGuiSettings();
+        primaryStage.setHeight(guiSettings.getWindowHeight());
+        primaryStage.setWidth(guiSettings.getWindowWidth());
+        if (guiSettings.getWindowCoordinates() != null) {
+            primaryStage.setX(guiSettings.getWindowCoordinates().getX());
+            primaryStage.setY(guiSettings.getWindowCoordinates().getY());
+        }
+    }
+
     private void configureChildrenViews() {
         taskListUiView = new TaskListUiView();
         taskListUiView.setParent(getTaskListPlaceholder());
@@ -142,6 +157,14 @@ public class MainWindow extends UiPart<Region> {
 
     void show() {
         primaryStage.show();
+    }
+
+    /**
+     * Returns the current size and the position of the main Window.
+     */
+    GuiSettings getCurrentGuiSetting() {
+        return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
+                (int) primaryStage.getX(), (int) primaryStage.getY());
     }
 
     /** ================ ACTION HANDLERS ================== **/

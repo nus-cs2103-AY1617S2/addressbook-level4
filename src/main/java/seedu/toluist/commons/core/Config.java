@@ -26,6 +26,7 @@ public class Config {
     private Level logLevel = Level.INFO;
     private AliasTable aliasTable = new AliasTable();
     private String todoListFilePath = DEFAULT_TODO_LIST_FILE_PATH;
+    private GuiSettings guiSettings = new GuiSettings();
 
     /**
      * Load config from disk
@@ -64,6 +65,14 @@ public class Config {
         this.todoListFilePath = todoListFilePath;
     }
 
+    public void setLogLevel(Level logLevel) {
+        this.logLevel = logLevel;
+    }
+
+    public void setGuiSettings(GuiSettings guiSettings) {
+        this.guiSettings = guiSettings;
+    }
+
     public String getTodoListFilePath() {
         return todoListFilePath;
     }
@@ -76,12 +85,12 @@ public class Config {
         return logLevel;
     }
 
-    public void setLogLevel(Level logLevel) {
-        this.logLevel = logLevel;
-    }
-
     public AliasTable getAliasTable() {
         return aliasTable;
+    }
+
+    public GuiSettings getGuiSettings() {
+        return guiSettings;
     }
 
     @Override
@@ -91,6 +100,7 @@ public class Config {
                 && appTitle.equals(((Config) other).appTitle)
                 && logLevel.equals(((Config) other).logLevel)
                 && todoListFilePath.equals(((Config) other).todoListFilePath)
-                && aliasTable.equals(((Config) other).aliasTable));
+                && aliasTable.equals(((Config) other).aliasTable)
+                && guiSettings.equals(((Config) other).guiSettings));
     }
 }

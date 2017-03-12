@@ -55,6 +55,9 @@ public class UiManager extends ComponentManager implements Ui {
 
     @Override
     public void stop() {
+        // Save the last used gui settings
+        Config.getInstance().setGuiSettings(mainWindow.getCurrentGuiSetting());
+        Config.getInstance().save();
         mainWindow.hide();
     }
 

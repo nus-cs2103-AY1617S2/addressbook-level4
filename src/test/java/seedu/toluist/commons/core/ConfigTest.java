@@ -109,6 +109,7 @@ public class ConfigTest {
         Config config = new Config();
         config.setTodoListFilePath("data/b.json");
         config.getAliasTable().setAlias("a", "add");
+        config.setGuiSettings(new GuiSettings(600.0, 600.0, 400, 60));
         return config;
     }
 
@@ -120,5 +121,6 @@ public class ConfigTest {
         assertEquals(config.getAliasTable(), new AliasTable());
         assertEquals(config.getLogLevel(), Level.INFO);
         assertEquals(config.getTodoListFilePath(), Config.DEFAULT_TODO_LIST_FILE_PATH);
+        assertEquals(config.getGuiSettings(), new GuiSettings());
     }
 }
