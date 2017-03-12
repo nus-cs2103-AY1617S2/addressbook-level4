@@ -25,7 +25,7 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
                .withPriorityLevel("1").withStartDateTime("10am Feb 19, 2017")
                .withEndDateTime("10am Feb 28, 2017")
                .withInformation("notify department head")
-               .withCategories("friends").build();
+               .withCategories("Done").build();
 
         assertMarkDoneSuccess(taskBossIndex, taskBossIndex, markedDoneTask);
     }
@@ -45,13 +45,13 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
 
     @Test
     public void markDone_missingTaskIndex_failure() {
-        commandBox.runCommand("edit ");
+        commandBox.runCommand("done ");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkDoneCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void markDone_invalidTaskIndex_failure() {
-        commandBox.runCommand("edit 8");
+        commandBox.runCommand("done 8");
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
@@ -59,7 +59,7 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
             TestTask markedDoneTask) {
         commandBox.runCommand("done " + filteredTaskListIndex);
 
-     // confirm the new card contains the right data
+        // confirm the new card contains the right data
         TaskCardHandle editedCard = taskListPanel.navigateToTask(markedDoneTask.getName().fullName);
         assertMatching(markedDoneTask, editedCard);
 
