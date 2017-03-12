@@ -10,7 +10,7 @@ import seedu.taskboss.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask alice, benson, carl, daniel, elle, fiona, george, submission, hoon, ida;
+    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
 
     public TypicalTestTasks() {
         try {
@@ -42,11 +42,6 @@ public class TypicalTestTasks {
                     .withStartDateTime("Feb 19, 2017 5pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
                     .withInformation("little tokyo").build();
-            submission = new TaskBuilder().withName("Submit progress report").withPriorityLevel("3")
-                    .withStartDateTime("Feb 9, 2017 5pm")
-                    .withEndDateTime("10am Feb 24, 2017 5pm")
-                    .withInformation("notify department head")
-                    .withCategories("Work", "Project").build();
             george = new TaskBuilder().withName("George Best").withPriorityLevel("2")
                     .withStartDateTime("Feb 19, 2017 5pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
@@ -78,7 +73,7 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{alice, benson, carl, daniel, elle, fiona, submission, george};
+        return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
     }
 
     public TaskBoss getTypicalTaskBoss() {

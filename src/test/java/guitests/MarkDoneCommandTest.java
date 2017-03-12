@@ -18,23 +18,22 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
 
     @Test
     public void markTaskDone_success() throws Exception {
-        int taskBossIndex = 7;
+        int taskBossIndex = 3;
 
-        TestTask markedDoneTask = new TaskBuilder().withName("Submit progress report")
-               .withPriorityLevel("3").withStartDateTime("Feb 9, 2017 5pm")
-               .withEndDateTime("10am Feb 24, 2017 5pm")
-               .withInformation("notify department head")
-               .withCategories("Done").build();
+        TestTask markedDoneTask = new TaskBuilder().withName("Carl Kurz").withPriorityLevel("3")
+                .withStartDateTime("Feb 19, 2017 5pm")
+                .withEndDateTime("Feb 28, 2017 5pm")
+                .withInformation("wall street").withCategories("Done").build();
 
         assertMarkDoneSuccess(taskBossIndex, taskBossIndex, markedDoneTask);
     }
 
     @Test
     public void markDone_findThenMarkDone_success() throws Exception {
-        commandBox.runCommand("find n/Submit progress report");
+        commandBox.runCommand("find n/Carl");
 
         int filteredTaskListIndex = 1;
-        int taskBossIndex = 6;
+        int taskBossIndex = 3;
 
         TestTask taskToMarkDone = expectedTasksList[taskBossIndex - 1];
         TestTask markedDoneTask = new TaskBuilder(taskToMarkDone).withCategories("Done").build();
