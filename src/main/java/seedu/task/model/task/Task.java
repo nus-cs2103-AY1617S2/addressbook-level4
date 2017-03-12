@@ -40,7 +40,7 @@ public class Task implements ReadOnlyTask {
      */
     public Task(ReadOnlyTask source) {
         this(source.getName(), source.getStartDate(), source.getEndDate(), source.getRemark(),
-                source.getLocation(), source.getTags(), false);
+                source.getLocation(), source.getTags(), source.isDone());
     }
 
     public void setName(Name name) {
