@@ -44,7 +44,7 @@ public class MarkController extends Controller {
         String markTypeToken = tokens.get(MARK_TERM);
         List<Integer> indexes = IndexTokenizer.splitIndexes(indexToken, UiStore.getInstance().getTasks().size());
 
-        if (indexes.size() == 0) {
+        if (indexes.isEmpty()) {
             return new CommandResult(Messages.MESSAGE_INVALID_TASK_INDEX);
         }
 
