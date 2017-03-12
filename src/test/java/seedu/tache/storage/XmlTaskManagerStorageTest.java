@@ -19,7 +19,7 @@ import seedu.tache.model.task.Task;
 import seedu.tache.testutil.TypicalTestTasks;
 
 public class XmlTaskManagerStorageTest {
-    private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlAddressBookStorageTest/");
+    private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlTaskManagerStorageTest/");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -72,14 +72,14 @@ public class XmlTaskManagerStorageTest {
         assertEquals(original, new TaskManager(readBack));
 
         //Modify data, overwrite exiting file, and read back
-        original.addTask(new Task(td.hoon));
-        original.removeTask(new Task(td.alice));
+        original.addTask(new Task(td.getFit));
+        original.removeTask(new Task(td.eggsAndBread));
         xmlTaskManagerStorage.saveTaskManager(original, filePath);
         readBack = xmlTaskManagerStorage.readTaskManager(filePath).get();
         assertEquals(original, new TaskManager(readBack));
 
         //Save and read without specifying file path
-        original.addTask(new Task(td.ida));
+        original.addTask(new Task(td.findGirlfriend));
         xmlTaskManagerStorage.saveTaskManager(original); //file path not specified
         readBack = xmlTaskManagerStorage.readTaskManager().get(); //file path not specified
         assertEquals(original, new TaskManager(readBack));
@@ -97,7 +97,7 @@ public class XmlTaskManagerStorageTest {
     }
 
     @Test
-    public void saveAddressBook_nullFilePath_assertionFailure() throws IOException {
+    public void saveTaskManager_nullFilePath_assertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
         saveTaskManager(new TaskManager(), null);
     }

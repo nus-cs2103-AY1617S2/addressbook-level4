@@ -2,6 +2,8 @@ package seedu.tache.testutil;
 
 import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.model.TaskManager;
+import seedu.tache.model.tag.UniqueTagList;
+import seedu.tache.model.task.Name;
 import seedu.tache.model.task.Task;
 import seedu.tache.model.task.UniqueTaskList;
 
@@ -10,23 +12,22 @@ import seedu.tache.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
+    public TestTask eggsAndBread, readBook, visitGrandma, payDavid, getFit, findGirlfriend, visitSarah;
 
     public TypicalTestTasks() {
         try {
-            alice = new TaskBuilder().withName("Alice Pauline")
-                    .withTags("friends").build();
-            benson = new TaskBuilder().withName("Benson Meier")
-                    .withTags("owesMoney", "friends").build();
-            carl = new TaskBuilder().withName("Carl Kurz").build();
-            daniel = new TaskBuilder().withName("Daniel Meier").build();
-            elle = new TaskBuilder().withName("Elle Meyer").build();
-            fiona = new TaskBuilder().withName("Fiona Kunz").build();
-            george = new TaskBuilder().withName("George Best").build();
+            eggsAndBread = new TaskBuilder().withName("Buy Eggs and Bread")
+                    .withTags("HighPriority").build();
+            readBook = new TaskBuilder().withName("Read Book about Software Engineering")
+                    .withTags("LowPriority").build();
+            visitGrandma = new TaskBuilder().withName("Visit Grandma").build();
+            payDavid = new TaskBuilder().withName("Pay David 20 for cab").build();
+            visitSarah = new TaskBuilder().withName("Visit Sarah")
+            		.withTags("MediumPriority").build();
 
             // Manually added
-            hoon = new TaskBuilder().withName("Hoon Meier").build();
-            ida = new TaskBuilder().withName("Ida Mueller").build();
+            getFit = new TaskBuilder().withName("Get fit").build();
+            findGirlfriend = new TaskBuilder().withName("Find a girlfriend").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -44,7 +45,7 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
+        return new TestTask[]{eggsAndBread, readBook, visitGrandma, payDavid, visitSarah};
     }
 
     public TaskManager getTypicalTaskManager() {

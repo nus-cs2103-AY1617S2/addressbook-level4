@@ -13,13 +13,13 @@ public class NameTest {
         assertFalse(Name.isValidName("")); // empty string
         assertFalse(Name.isValidName(" ")); // spaces only
         assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
-        assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
+        assertFalse(Name.isValidName("swimming*")); // contains non-alphanumeric characters
 
         // valid name
-        assertTrue(Name.isValidName("peter jack")); // alphabets only
+        assertTrue(Name.isValidName("go to the gym")); // alphabets only
         assertTrue(Name.isValidName("12345")); // numbers only
-        assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
-        assertTrue(Name.isValidName("Capital Tan")); // with capital letters
-        assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(Name.isValidName("home alone 3")); // alphanumeric characters
+        assertTrue(Name.isValidName("Dr Wong")); // with capital letters
+        assertTrue(Name.isValidName("Research on the Meaning of Life")); // long names
     }
 }
