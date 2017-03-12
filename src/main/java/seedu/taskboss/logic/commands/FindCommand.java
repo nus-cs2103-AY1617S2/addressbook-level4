@@ -30,7 +30,7 @@ public class FindCommand extends Command {
         if (prefix.equals(PREFIX_NAME.toString())) {
             model.updateFilteredTaskListByName(keywords);
             return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
-        } else if (prefix.equals(PREFIX_START_DATE.toString())){
+        } else if (prefix.equals(PREFIX_START_DATE.toString())) {
             model.updateFilteredTaskListByStartDateTime(keywords);
             return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
         } else {
