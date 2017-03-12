@@ -7,8 +7,8 @@ We are a team based in the [School of Computing, National University of Singapor
 #### [Alvin Loh](http://github.com/alvinlyj) <br>
 <img src="images/AlvinLoh.png" width="150"><br>
 **Role:** Team Leader <br>
-**Responsibilities:** Implementation & Documentation
-**Component:** UI
+**Responsibilities:** Integration & Documentation
+**Component:** UI, Storage & Commons
 
 -----
 
@@ -23,7 +23,7 @@ We are a team based in the [School of Computing, National University of Singapor
 #### [Koh Jun Wei](http://github.com/KohJunWei)
 <img src="images/KohJunWei.png" width="150"><br>
 **Role:** Developer <br>
-**Responsibilities:** Code Quality
+**Responsibilities:** Code Quality & Implementation
 **Component:** Model
 
 -----
