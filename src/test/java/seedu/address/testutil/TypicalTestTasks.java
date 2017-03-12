@@ -14,29 +14,29 @@ public class TypicalTestTasks {
 
     public TypicalTestTasks() {
         try {
-            alice = new TaskBuilder().withName("Alice Pauline")
-                    .withNote("123, Jurong West Ave 6, #08-111").withStatus("alice@gmail.com")
-                    .withPriority("85355255")
-                    .withTags("friends").build();
-            benson = new TaskBuilder().withName("Benson Meier").withNote("311, Clementi Ave 2, #02-25")
-                    .withStatus("johnd@gmail.com").withPriority("98765432")
-                    .withTags("owesMoney", "friends").build();
-            carl = new TaskBuilder().withName("Carl Kurz").withPriority("95352563")
-                    .withStatus("heinz@yahoo.com").withNote("wall street").build();
-            daniel = new TaskBuilder().withName("Daniel Meier").withPriority("87652533")
-                    .withStatus("cornelia@google.com").withNote("10th street").build();
-            elle = new TaskBuilder().withName("Elle Meyer").withPriority("9482224")
-                    .withStatus("werner@gmail.com").withNote("michegan ave").build();
-            fiona = new TaskBuilder().withName("Fiona Kunz").withPriority("9482427")
-                    .withStatus("lydia@gmail.com").withNote("little tokyo").build();
-            george = new TaskBuilder().withName("George Best").withPriority("9482442")
-                    .withStatus("anna@google.com").withNote("4th street").build();
+            alice = new TaskBuilder().withName("Do laundry")
+                    .withNote("Twice as many detergent this time").withStatus("incomplete")
+                    .withPriority("hi")
+                    .withTags("chores").build();
+            benson = new TaskBuilder().withName("Wash the dishes").withNote("They're in the sink")
+                    .withStatus("incomplete").withPriority("mid")
+                    .withTags("chores").build();
+            carl = new TaskBuilder().withName("Do CS2103T post lecture quiz").withPriority("hi")
+                    .withStatus("incomplete").withNote("On IVLE").build();
+            daniel = new TaskBuilder().withName("Buy milk").withPriority("lo")
+                    .withStatus("incomplete").withNote("Low fat").build();
+            elle = new TaskBuilder().withName("Write reflections for CS2101").withPriority("hi")
+                    .withStatus("incomplete").withNote("Include more reflection rather than description").build();
+            fiona = new TaskBuilder().withName("Meet Prof Joe for consultation").withPriority("mid")
+                    .withStatus("incomplete").withNote("COM02-01").build();
+            george = new TaskBuilder().withName("Pay school fees").withPriority("hi")
+                    .withStatus("incomplete").withNote("Pay it on myISIS").build();
 
             // Manually added
-            hoon = new TaskBuilder().withName("Hoon Meier").withPriority("8482424")
-                    .withStatus("stefan@mail.com").withNote("little india").build();
-            ida = new TaskBuilder().withName("Ida Mueller").withPriority("8482131")
-                    .withStatus("hans@google.com").withNote("chicago ave").build();
+            hoon = new TaskBuilder().withName("Submit research proposal").withPriority("hi")
+                    .withStatus("incomplete").withNote("To Prof Obama's pigeonhole").build();
+            ida = new TaskBuilder().withName("Apply for scholarship").withPriority("lo")
+                    .withStatus("incomplete").withNote("Apply via iDA website").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
