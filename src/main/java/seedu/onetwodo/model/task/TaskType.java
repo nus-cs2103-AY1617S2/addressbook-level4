@@ -16,6 +16,10 @@ public enum TaskType {
         return prefix;
     }
     
+    public String toString() {
+        return String.valueOf(prefix);
+    }
+    
     public static char[] getAllPrefixes() {
         return new char[] {TODO.prefix, DEADLINE.prefix, EVENT.prefix};
     }

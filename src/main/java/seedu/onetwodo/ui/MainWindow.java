@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -145,7 +146,9 @@ public class MainWindow extends UiPart<Region> {
                 TaskType.TODO);
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getToDoListFilePath());
+        
         commandBox = new CommandBox(getCommandBoxPlaceholder(), logic);
+        commandBox.focus();
     }
 
     private AnchorPane getCommandBoxPlaceholder() {
@@ -255,8 +258,12 @@ public class MainWindow extends UiPart<Region> {
         dialog.show();
         primaryStage.getScene().setOnKeyReleased(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent ke) {
+                if (ke.getCode() == KeyCode.ENTER) {
+                    return;
+                }
                 dialog.close();
                 commandBox.focus();
+                ke.consume();
             }
         });
     }

@@ -1,11 +1,14 @@
 package seedu.onetwodo.logic.commands;
 
+import javafx.collections.transformation.FilteredList;
 import seedu.onetwodo.commons.core.EventsCenter;
 import seedu.onetwodo.commons.core.Messages;
 import seedu.onetwodo.commons.core.UnmodifiableObservableList;
 import seedu.onetwodo.commons.events.ui.JumpToListRequestEvent;
+import seedu.onetwodo.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
 import seedu.onetwodo.model.task.ReadOnlyTask;
+import seedu.onetwodo.model.task.TaskType;
 
 /**
  * Selects a task identified using it's last displayed index from the todo list.
@@ -13,6 +16,8 @@ import seedu.onetwodo.model.task.ReadOnlyTask;
 public class SelectCommand extends Command {
 
     public final int targetIndex;
+
+    private TaskType taskType;
 
     public static final String COMMAND_WORD = "select";
 
@@ -23,21 +28,25 @@ public class SelectCommand extends Command {
 
     public static final String MESSAGE_SELECT_TASK_SUCCESS = "Selected Task: %1$s";
 
-    public SelectCommand(int targetIndex) {
+    public SelectCommand(int targetIndex, char taskType) {
         this.targetIndex = targetIndex;
+        this.taskType = TaskType.getTaskTypeFromChar(taskType);
     }
 
     @Override
     public CommandResult execute() throws CommandException {
 
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        FilteredList<ReadOnlyTask> filtered = lastShownList.filtered(t -> t.getTaskType() == taskType);
 
-        if (lastShownList.size() < targetIndex) {
+        if (filtered.size() < targetIndex) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
+        ReadOnlyTask taskToSelect = filtered.get(targetIndex - 1);
 
-        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex - 1));
-        return new CommandResult(String.format(MESSAGE_SELECT_TASK_SUCCESS, targetIndex));
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex - 1, taskType));
+        EventsCenter.getInstance().post(new TaskPanelSelectionChangedEvent(taskToSelect));
+        return new CommandResult(String.format(MESSAGE_SELECT_TASK_SUCCESS, taskType.toString() + targetIndex));
 
     }
 

@@ -116,9 +116,19 @@ public class UiManager extends ComponentManager implements Ui {
 
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
+        // Scroll when testing
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        // Unused method
-        mainWindow.getDeadlineTaskListPanel().scrollTo(event.targetIndex);
+        switch (event.taskType) {
+        case DEADLINE: 
+            mainWindow.getDeadlineTaskListPanel().scrollTo(event.targetIndex);
+            break;
+        case EVENT: 
+            mainWindow.getEventTaskListPanel().scrollTo(event.targetIndex);
+            break;
+        case TODO: 
+            mainWindow.getTodoTaskListPanel().scrollTo(event.targetIndex);
+            break;
+        }
     }
 
     @Subscribe
