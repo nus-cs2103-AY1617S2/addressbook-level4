@@ -1,7 +1,9 @@
 package org.teamstbf.yats.model.item;
 
+import java.util.HashMap;
 import java.util.Objects;
 
+import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 import org.teamstbf.yats.commons.util.CollectionUtil;
 import org.teamstbf.yats.model.tag.UniqueTagList;
 
@@ -41,6 +43,51 @@ public class Event implements ReadOnlyEvent {
 
     public Event() {
 
+    }
+
+    /**
+     * Creates an Event object using map of parameters, only name is compulsory, others are optional
+     * @param map of parameters
+     * @param tags
+     * @throws IllegalValueException
+     */
+    public Event(HashMap<String, Object> parameters, UniqueTagList tags) throws IllegalValueException {
+        assert !CollectionUtil.isAnyNull(parameters.get("name"));
+        this.name = new Title((String) parameters.get("name"));
+        
+        //check optional parameters' existence
+        if (parameters.get("period") != null) {
+            this.period = new Periodic((String) parameters.get("period"));
+        } else {
+            this.period = new Periodic("none");
+        }
+        
+        if (parameters.get("location") != null) {
+            this.location = new Location((String) parameters.get("location"));
+        } else {
+            this.location = new Location("nowhere");
+        }
+        
+        if (parameters.get("start") != null) {
+            this.startTime = new Timing((String) parameters.get("start"));
+        } else {
+            this.startTime = new Timing("12:00am");
+        }
+        
+        if (parameters.get("end") != null) {
+            this.endTime = new Timing((String) parameters.get("end"));
+        } else {
+            this.endTime = new Timing("12:00am");
+        }
+        
+        if (parameters.get("description") != null) {
+            this.description = new Description((String) parameters.get("description"));
+        } else {
+            this.description = new Description("NA");
+        }
+        
+        this.isDone = false;
+        this.tags = new UniqueTagList(tags); 
     }
 
     public void setTitle(Title name) {
