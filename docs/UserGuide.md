@@ -1,6 +1,6 @@
-# AddressBook Level 4 - User Guide
+# Task Manager - User Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `W13-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -16,18 +16,18 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
    > Having any Java 8 version is not enough. <br>
    > This app will not work with earlier versions of Java 8.
 
-1. Download the latest `addressbook.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for your Address Book.
+1. Download the latest `taskmanager.jar` from the [releases](../../../releases) tab.
+2. Copy the file to the folder you want to use as the home folder for your Task Manager.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
    > <img src="images/Ui.png" width="600">
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
-   * **`list`** : lists all contacts
-   * **`add`**` John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01` :
-     adds a contact named `John Doe` to the Address Book.
-   * **`delete`**` 3` : deletes the 3rd contact shown in the current list
+   * **`list`** : lists all tasks
+   * **`add`**` Meeting dl/15-05-2017 ds/Meeting Room 1 t/important` :
+     adds a task named `Meeting` to the Task Manager.
+   * **`delete`**` 3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
@@ -40,120 +40,97 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 > * Items in `SQUARE_BRACKETS` are optional.
 > * Items with `...` after them can have multiple instances.
 > * Parameters can be in any order.
+> * Date has to be in the format DD-MM-YYYY
 
-### 2.1. Viewing help : `help`
+## 2.1. Viewing help : `help`
 
-Format: `help`
+Format: help
 
-> Help is also shown if you enter an incorrect command e.g. `abcd`
+> Is also displayed when an incorrect command is entered
 
-### 2.2. Adding a person: `add`
+## 2.2. Adding a task: `add`
 
-Adds a person to the address book<br>
-Format: `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
-
-> Persons can have any number of tags (including 0)
-
-Examples:
-
-* `add John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01`
-* `add Betsy Crowe t/friend e/betsycrowe@gmail.com a/Newgate Prison p/1234567 t/criminal`
-
-### 2.3. Listing all persons : `list`
-
-Shows a list of all persons in the address book.<br>
-Format: `list`
-
-### 2.4. Editing a person : `edit`
-
-Edits an existing person in the address book.<br>
-Format: `edit INDEX [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
-
-> * Edits the person at the specified `INDEX`.
-    The index refers to the index number shown in the last person listing.<br>
-    The index **must be a positive integer** 1, 2, 3, ...
-> * At least one of the optional fields must be provided.
-> * Existing values will be updated to the input values.
-> * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-> * You can remove all the person's tags by typing `t/` without specifying any tags after it. 
+Adds a task to task list
+<<<<<<< HEAD
+Format: add TASKNAME -d DATE [-o DESCRIPTION] [-p]
+=======
+Format: add TASKNAME dl/DATE [ds/DESCRIPTION] [-p]
+>>>>>>> origin/master
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@yahoo.com`<br>
-  Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@yahoo.com` respectively.
+* `add Make payment dl/01/08/2017 ds/Pay credit card bills -p`
+* `add Complete project dl/12/12/2017`
 
-* `edit 2 Betsy Crower t/`<br>
-  Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+## 2.3. Modifying a task: `edit`
 
-### 2.5. Finding all persons containing any keyword in their name: `find`
-
-Finds persons whose names contain any of the given keywords.<br>
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-> * The search is case sensitive. e.g `hans` will not match `Hans`
-> * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-> * Only the name is searched.
-> * Only full words will be matched e.g. `Han` will not match `Hans`
-> * Persons matching at least one keyword will be returned (i.e. `OR` search).
-    e.g. `Hans` will match `Hans Bo`
+Updates an existing task in the task list
+Format: update INDEX [-n TASKNAME] [-d DATE] [-o DESCRIPTION] [-p]
+Format: edit INDEX [TASKNAME] [dl/DATE] [ds/DESCRIPTION] [-p]
 
 Examples:
 
-* `find John`<br>
-  Returns `John Doe` but not `john`
-* `find Betsy Tim John`<br>
-  Returns Any person having names `Betsy`, `Tim`, or `John`
+* `edit 3 buy eggs dl/29-02-2017 ds/as soon as possible`
+* `edit 1 tie shoelace dl/25-12-2017`
 
-### 2.6. Deleting a person : `delete`
+## 2.4. Delete a task: `delete`
 
-Deletes the specified person from the address book. Irreversible.<br>
-Format: `delete INDEX`
-
-> Deletes the person at the specified `INDEX`. <br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+Deletes an existing task
+Format: delete INDEX
 
 Examples:
 
-* `list`<br>
-  `delete 2`<br>
-  Deletes the 2nd person in the address book.
-* `find Betsy`<br>
-  `delete 1`<br>
-  Deletes the 1st person in the results of the `find` command.
+* `delete 1`
 
-### 2.7. Select a person : `select`
+## 2.5. Undo a command: 'undo'
 
-Selects the person identified by the index number used in the last person listing.<br>
-Format: `select INDEX`
+Undo most recent command
+Format: undo
 
-> Selects the person and loads the Google search page the person at the specified `INDEX`.<br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+## 2.6. Listing all tasks: `list`
+
+Shows a list of all tasks
+Format: list
+
+## 2.7. Exiting the program : `exit`
+
+Exits the program.
+Format: exit
+
+## 2.8. View tasks : `view`
+
+Views the details of a task
+Format: view INDEX
 
 Examples:
 
-* `list`<br>
-  `select 2`<br>
-  Selects the 2nd person in the address book.
-* `find Betsy` <br>
-  `select 1`<br>
-  Selects the 1st person in the results of the `find` command.
+* `view 1`
 
-### 2.8. Clearing all entries : `clear`
+## 2.9. Finding all tasks containing any keyword in the task name: `find`
 
-Clears all entries from the address book.<br>
-Format: `clear`
+Finds tasks that satisfy given parameters
+Format: find KEYWORDS [dl/DATE] [ds/KEYWORDS] 
 
-### 2.9. Exiting the program : `exit`
+> finds tasks whose task name contain any of the given keywords
+> ‘find dl/’ finds tasks whose deadline falls on specified date
+> ‘find ds/’ finds tasks whose task description contain any of the given keywords
+> 
+> The search is case sensitive, the order of the keywords does not matter, only the name is searched, and tasks matching at least one keyword will be returned
 
-Exits the program.<br>
-Format: `exit`
+Examples:
 
-### 2.10. Saving the data
+* `find Project Name`
+* `find ds/Some description of the project`
+* `find dl/12-08-2017`
 
-Address book data are saved in the hard disk automatically after any command that changes the data.<br>
-There is no need to save manually.
+## 2.10. Clearing all entries : `clear`
+
+Format: clear
+
+## 2.11. Saving the data
+
+Application data are saved onto hard drive automatically after any commands are executed that changes the data.
+There is no need to manually save the data
 
 ## 3. FAQ
 
@@ -163,24 +140,23 @@ There is no need to save manually.
 
 ## 4. Command Summary
 
-* **Add**  `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` <br>
-  e.g. `add James Ho p/22224444 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+* **Help** : `help`
 
-* **Clear** : `clear`
+* **Add**  `add TASKNAME dl/DATE [ds/DESCRIPTION] [-p]` <br>
+  e.g. `add Make payment dl/01-08-2017 ds/Pay credit card bills -p`
+
+* **Update** : `update INDEX [TASKNAME] [dl/DATE] [ds/DESCRIPTION] [-p]` <br>
+  e.g. `update 3 buy eggs dl/29-02-2017 ds/as soon as possible`
 
 * **Delete** : `delete INDEX` <br>
    e.g. `delete 3`
 
-* **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
+* **Find** : `find [KEYWORDS] [ds/KEYWORDS] [dl/DATE]` <br>
   e.g. `find James Jake`
 
 * **List** : `list` <br>
-  e.g.
 
-* **Help** : `help` <br>
-  e.g.
+* **View** : `view INDEX` <br>
+  e.g. `view 1`
 
-* **Select** : `select INDEX` <br>
-  e.g.`select 2`
-
-
+* **Exit** : `exit` <br>
