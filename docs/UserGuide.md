@@ -328,6 +328,3 @@ Format:
 |[save](#10-moving-the-save-file-save)      |**`save DIRECTORY`**    |
 |[quit](#11-exiting-the-program-quit--q)    |**`quit`**              |
 |[help](#12-viewing-help-help--h)           |**`help`**    |
-
-<br>
-<br>
