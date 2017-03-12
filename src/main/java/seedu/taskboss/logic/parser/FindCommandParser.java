@@ -65,7 +65,6 @@ public class FindCommandParser {
 
     private boolean notValid(String test1, String test2, String test3) {
         String sum = test1 + test2 + test3;
-        System.out.println("sum " + sum);
         return (!sum.equals(test1) && !sum.equals(test2) && !sum.equals(test3));
     }
 
