@@ -2,7 +2,7 @@ package typetask.model.task;
 
 import java.util.Objects;
 
-public class DeadlineTask extends Task{
+public class DeadlineTask extends Task {
 
     private Name name;
     private Date date;
