@@ -18,7 +18,7 @@ public class Priority {
     public static final String PRIORITY_HIGH = "high";
     public static final String PRIORITY_NIL = "NIL";
 
-    public final String priority;
+    public final String value;
 
     /**
      * Validates given priority.
@@ -31,7 +31,7 @@ public class Priority {
         if (!isValidPriority(trimmedPriority)) {
             throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
         }
-        this.priority = trimmedPriority;
+        this.value = trimmedPriority;
     }
 
     public Priority(Optional<String> priority) throws IllegalValueException {
@@ -41,9 +41,9 @@ public class Priority {
             if (!isValidPriority(priorityString)) {
                 throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
             }
-            this.priority = getPriorityType(priorityString);
+            this.value = getPriorityType(priorityString);
         } else {
-            this.priority = "NIL";
+            this.value = "NIL";
         }
     }
 
@@ -90,18 +90,18 @@ public class Priority {
 
     @Override
     public String toString() {
-        return priority;
+        return value;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Priority // instanceof handles nulls
-                && this.priority.equals(((Priority) other).priority)); // state check
+                && this.value.equals(((Priority) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return priority.hashCode();
+        return value.hashCode();
     }
 }
