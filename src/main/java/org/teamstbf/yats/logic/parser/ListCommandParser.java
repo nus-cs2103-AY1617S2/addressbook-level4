@@ -8,17 +8,23 @@ import org.teamstbf.yats.logic.commands.ListCommand;
  */
 public class ListCommandParser {
 
+	private final int LISTCOMMANDSUFFIX = 3;
 	/**
 	 * Parses the given {@code String} of arguments in the context of the ListCommand
 	 * and returns a ListCommand object for execution.
 	 */
 	public Command parse(String args) {
-		// if (args.contains(ListCommand.COMMAND_WORD_EXTENTION)) {
-		//	switch(args) {
-		//	case (ListCommand.COMMAND_WORD_SUFFIX_TITLE):
-		//	case (ListCommand.COMMAND_WORD_SUFFIX_DEADLINE):
-		//	case (ListCommand.COMMAND_WORD_SUFFIX_TIMING):
-		//	case (ListCommand.COMMAND_WORD_SUFFIX_TAG):
+		switch(stringTokenizer(args)) {
+		case(ListCommand.COMMAND_WORD_SUFFIX_TITLE):
+			return new ListCommand();
+		case(ListCommand.COMMAND_WORD_SUFFIX_DEADLINE):
+			return new ListCommand();
+		}
 		return new ListCommand();
+	}
+
+	public String stringTokenizer(String commandText) {
+		String commandTextArray[] = commandText.split(" ");
+		return commandTextArray[LISTCOMMANDSUFFIX];
 	}
 }
