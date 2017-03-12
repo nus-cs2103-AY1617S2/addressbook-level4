@@ -277,7 +277,7 @@ Example:
 * `switch T` <br>
   Switches the displayed view to 'Today'.
 
-### 2.18. Complete or Make Uncomplete a Task : `mark`
+### 2.18. Complete or Make Incomplete a Task : `mark`
 
 Marks a task to be complete or incomplete.
 Format: `mark [complete/incomplete] INDEX`
@@ -370,9 +370,9 @@ Example:
   e.g. `switch 2` <br>
   e.g. `switch T`
 
-* **Complete or Make Uncomplete a Task** : `mark [complete/uncomplete] INDEX` <br>
+* **Complete or Make Incomplete a Task** : `mark [complete/incomplete] INDEX` <br>
   e.g. `mark complete 1` <br>
-  e.g. `mark uncomplete 2` <br>
+  e.g. `mark incomplete 2` <br>
   e.g. `mark 3`
 
 * **Add a Tag to a Task** : `tag INDEX TAG...` <br>
