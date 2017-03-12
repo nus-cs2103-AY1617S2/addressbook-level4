@@ -22,7 +22,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Meet Bob by Sunday 2359 t/husband";
+        String detailsToEdit = "Meet Bob by Sunday 2359 #husband";
         int addressBookIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withTitle("Meet Bob")
@@ -33,7 +33,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_notAllFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "t/sweetie t/bestie";
+        String detailsToEdit = "#sweetie #bestie";
         int addressBookIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
@@ -44,7 +44,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_clearLabels_success() throws Exception {
-        String detailsToEdit = "t/";
+        String detailsToEdit = "#";
         int addressBookIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
@@ -90,7 +90,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("edit 1 *&");
         assertResultMessage(Title.MESSAGE_TITLE_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 t/*&");
+        commandBox.runCommand("edit 1 #*&");
         assertResultMessage(Label.MESSAGE_LABEL_CONSTRAINTS);
     }
 

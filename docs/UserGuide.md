@@ -43,7 +43,7 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Adds a task to DoOrDie<br />
-Format: `add TASKNAME [label LABEL] ([(by|on) DEADLINE] | [from START_DATE to END_DATE]) [repeat (hourly|daily|weekly|monthly|yearly)]`
+Format: `add TASKNAME [#LABEL...] ([(by|on) DEADLINE] | [from START_DATE to END_DATE]) [repeat (hourly|daily|weekly|monthly|yearly)]`
 
 > * Tasks can have a deadline, or can do without one as well.
 >   * Tasks added without specifying a deadline will be displayed under "No Deadline".
@@ -61,7 +61,7 @@ Format: `add TASKNAME [label LABEL] ([(by|on) DEADLINE] | [from START_DATE to EN
 Examples:
 
  * `add CS2106 Mid terms`
- * `add CS2103 V0.0 by tmr`
+ * `add CS2103 V0.0 by tmr #module`
  * `add task Make baby by next wednesday`
  * `add task Go to school repeat daily`
 
@@ -107,7 +107,7 @@ Examples:
 
 Edits the specified task's details.
 
-Format:`update [TASK_ID] [TASKNAME] [label LABEL] ([(by|on) DATE] | [from START_DATE to END_DATE]) [done]`
+Format:`update [TASK_ID] [TASKNAME] [#LABEL...] ([(by|on) DATE] | [from START_DATE to END_DATE]) [done]`
 
 > * Edits the task with the `TASK_ID`
     The index refers to the id of the task.<br />
@@ -115,7 +115,7 @@ Format:`update [TASK_ID] [TASKNAME] [label LABEL] ([(by|on) DATE] | [from START_
 > * At least one of the optional fields excluding `TASK_ID` must be provided.
 > * Existing values will be updated to the input values.
 > * When editing labels, the existing labels of the task will be removed i.e adding of labels is not cumulative.
-> * You can remove all the task's tags by typing `label` without specifying any tags after it.
+> * You can remove all the task's tags by typing `#` without specifying any tags after it.
 > * Marking a task as `done` will indicate that the task is completed
 
 Examples:
@@ -194,7 +194,7 @@ Examples:
 ### 2.8. Add a booking : `book`
 
 Reserve time slots for a certain task that has not been confirmed yet.<br />
-Format: `book TASKNAME [label LABEL] , DATE, [MORE_DATES]...`
+Format: `book TASKNAME [#LABEL...] , DATE, [MORE_DATES]...`
 
 > * Date formats can be flexible. The application is able to parse commonly-used human-readable date formats.
 >   * e.g. `Monday`, `next wed`, `tomorrow`, `5 days after`, `4 Apr` etc.
@@ -302,14 +302,14 @@ There is no need to save manually.
 
 * **Help** `help`
 
-* **Add** `add [task] TASKNAME [label LABEL] [(by|on) DEADLINE] [repeat (hourly|daily|weekly|monthly|yearly)]`<br />
-  e.g. `add CS2106 Mid terms`
+* **Add** `add [task] TASKNAME [#LABEL...] [(by|on) DEADLINE] [repeat (hourly|daily|weekly|monthly|yearly)]`<br />
+  e.g. `add CS2106 Mid terms #school`
 
 * **List** `list [TYPE]`<br />
   e.g. `list outstanding tasks`
 
-* **Update** `update [TASK_ID] [TASKNAME] [label LABEL] ([(by|on) DATE] | [from START_DATE to END_DATE])`<br />
-  e.g. `update 1 label tedious work by thursday`
+* **Update** `update [TASK_ID] [TASKNAME] [#LABEL...] ([(by|on) DATE] | [from START_DATE to END_DATE])`<br />
+  e.g. `update 1 label tedious work by thursday #work`
 
 * **Find** `find [TYPE] KEYWORD [MORE_KEYWORDS]...`<br />
   e.g. `find CS2103`
@@ -320,7 +320,7 @@ There is no need to save manually.
 * **Select** `select TASK_ID`<br />
   e.g. `select 2`
 
-* **Book** `book TASKNAME [label LABEL] , DATE, [MORE_DATES]...`<br />
+* **Book** `book TASKNAME [#LABEL...] , DATE, [MORE_DATES]...`<br />
   e.g. `book CS2103 Meeting 1/1/2017 4pm, 2/1/2017 8pm`
 
 * **Confirm** `confirm TASK_ID (SLOT_NUMBER|DATE)`<br />

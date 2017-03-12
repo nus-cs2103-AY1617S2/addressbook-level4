@@ -13,7 +13,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_DEADLINE = new Prefix("by ");
     public static final Prefix PREFIX_TIMEINTERVAL_END = new Prefix("to ");
     public static final Prefix PREFIX_TIMEINTERVAL_START = new Prefix("from ");
-    public static final Prefix PREFIX_LABEL = new Prefix("t/");
+    public static final Prefix PREFIX_LABEL = new Prefix("#");
 
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT =
