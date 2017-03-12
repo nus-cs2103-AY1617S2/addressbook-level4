@@ -3,7 +3,7 @@ package seedu.doist.model.task;
 import seedu.doist.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's priority in the address book.
+ * Represents a task's priority in the to-do list
  * Guarantees: immutable; is valid as declared in {@link #isValidPriority(String)}
  * Default value is 1 if not set by user.
  */
@@ -11,11 +11,21 @@ public class Priority {
 
     public static final String EXAMPLE = "HIGH";
     public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority should be 'NORMAL', "
-            + "'IMPORTANT' or 'VERYIMPORTANT'";
+            + "'IMPORTANT' or 'VERY IMPORTANT'";
     public static final PriorityLevel DEFAULT_PRIORITY = PriorityLevel.NORMAL;
 
     public enum PriorityLevel {
-        NORMAL, IMPORTANT, VERYIMPORTANT
+        NORMAL("Normal"), IMPORTANT("Important"), VERY_IMPORTANT("Very Important");
+
+        private String strValue;
+        PriorityLevel(String value) {
+            this.strValue = value;
+        }
+
+        @Override
+        public String toString() {
+            return this.strValue;
+        }
     }
     public final PriorityLevel priority;
 
@@ -32,11 +42,7 @@ public class Priority {
      * @throws IllegalValueException if given priority string is invalid.
      */
     public Priority(String priority) throws IllegalValueException {
-        // Remove trailing whitespace, spaces and change to upper case
-        String processedPriority = priority.trim();
-        processedPriority = processedPriority.replaceAll(" ", "");
-        processedPriority = processedPriority.toUpperCase();
-
+        final String processedPriority = processPriorityString(priority);
         if (!isValidPriority(processedPriority)) {
             throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
         }
@@ -51,9 +57,22 @@ public class Priority {
      * Returns true if a given string is a valid priority
      */
     public static boolean isValidPriority(String priority) {
-        return priority.equals(PriorityLevel.VERYIMPORTANT.toString())
+        return priority.equals(PriorityLevel.VERY_IMPORTANT.toString())
                 || priority.equals(PriorityLevel.IMPORTANT.toString())
                 || priority.equals(PriorityLevel.NORMAL.toString());
+    }
+
+    /**
+     * Process string to remove trailing whitespace, spaces and
+     * change all characters to upper case so that it will be a
+     * valid priority string
+     * @returns string of the processed priority string
+     */
+    public static String processPriorityString(String priority) {
+        String processedPriority = priority.trim();
+        processedPriority = processedPriority.replaceAll(" ", "");
+        processedPriority = processedPriority.toUpperCase();
+        return processedPriority;
     }
 
     @Override
