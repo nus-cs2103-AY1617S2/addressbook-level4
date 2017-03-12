@@ -256,8 +256,8 @@ public class MainWindow extends UiPart<Region> {
         JFXDialogLayout content = new JFXDialogLayout();
         content.setHeading(new Text(task.getName().fullName));
         content.setBody(new Text(task.getDescription().value));
-        this.dialog = new JFXDialog(dialogStackPane, content, JFXDialog.DialogTransition.CENTER, true);
-        this.dialog.show();
+        dialog = new JFXDialog(dialogStackPane, content, JFXDialog.DialogTransition.CENTER, true);
+        dialog.show();
         setCloseDialogHandler();
     }
     
@@ -278,7 +278,11 @@ public class MainWindow extends UiPart<Region> {
     }
     
     void closeDialog() {
+        if (dialog == null) {
+            return;
+        }
         dialog.close();
+        dialog = null;
         commandBox.focus();        
     }
 
