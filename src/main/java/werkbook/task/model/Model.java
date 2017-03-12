@@ -1,5 +1,6 @@
 package werkbook.task.model;
 
+import java.util.EmptyStackException;
 import java.util.Set;
 
 import werkbook.task.commons.core.UnmodifiableObservableList;
@@ -32,6 +33,12 @@ public interface Model {
      */
     void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException;
+
+    /** Undoes the previous mutable action */
+    void undo() throws EmptyStackException;
+
+    /** Redoes the last undo */
+    void redo() throws EmptyStackException;
 
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();

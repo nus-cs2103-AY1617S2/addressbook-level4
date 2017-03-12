@@ -36,4 +36,11 @@ public abstract class Command {
     public void setData(Model model) {
         this.model = model;
     }
+    /**
+     * Checks if the command is mutable or not
+     * @return true if command is mutable, false if not
+     */
+    public boolean isMutable() {
+        return false;
+    }
 }

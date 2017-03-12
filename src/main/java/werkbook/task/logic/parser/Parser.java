@@ -16,7 +16,9 @@ import werkbook.task.logic.commands.FindCommand;
 import werkbook.task.logic.commands.HelpCommand;
 import werkbook.task.logic.commands.IncorrectCommand;
 import werkbook.task.logic.commands.ListCommand;
+import werkbook.task.logic.commands.RedoCommand;
 import werkbook.task.logic.commands.SelectCommand;
+import werkbook.task.logic.commands.UndoCommand;
 
 /**
  * Parses user input.
@@ -70,6 +72,12 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
+
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

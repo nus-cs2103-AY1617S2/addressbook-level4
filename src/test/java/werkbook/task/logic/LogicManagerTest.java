@@ -34,6 +34,7 @@ import werkbook.task.logic.commands.FindCommand;
 import werkbook.task.logic.commands.HelpCommand;
 import werkbook.task.logic.commands.ListCommand;
 import werkbook.task.logic.commands.SelectCommand;
+import werkbook.task.logic.commands.UndoCommand;
 import werkbook.task.logic.commands.exceptions.CommandException;
 import werkbook.task.model.Model;
 import werkbook.task.model.ModelManager;
@@ -413,6 +414,33 @@ public class LogicManagerTest {
         assertCommandSuccess("find key rAnDoM",
                 Command.getMessageForTaskListShownSummary(expectedList.size()), expectedTaskList,
                 expectedList);
+    }
+
+    @Test
+    public void execute_undo_withPriorMutablePriorAction() throws Exception {
+
+        TestDataHelper helper = new TestDataHelper();
+        Task toBeAdded = helper.adam();
+        TaskList expectedTaskList = new TaskList();
+        expectedTaskList.addTask(toBeAdded);
+
+        // execute command and verify result
+        assertCommandSuccess(helper.generateAddCommand(toBeAdded),
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedTaskList,
+                expectedTaskList.getTaskList());
+
+        //add one more task
+        Task newTask = helper.generateTask(1);
+        TaskList newExpectedTaskList = new TaskList();
+        newExpectedTaskList.addTask(toBeAdded);
+        newExpectedTaskList.addTask(newTask);
+        assertCommandSuccess(helper.generateAddCommand(newTask),
+                String.format(AddCommand.MESSAGE_SUCCESS, newTask),
+                newExpectedTaskList,
+                newExpectedTaskList.getTaskList());
+
+        assertCommandSuccess("undo", UndoCommand.MESSAGE_SUCCESS, expectedTaskList, expectedTaskList.getTaskList());
     }
 
     /**

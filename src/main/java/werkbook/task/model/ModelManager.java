@@ -1,6 +1,8 @@
 package werkbook.task.model;
 
+import java.util.EmptyStackException;
 import java.util.Set;
+import java.util.Stack;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
@@ -24,6 +26,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final TaskList taskList;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+    private static Stack<TaskList> undoStack, redoStack;
 
     /**
      * Initializes a ModelManager with the given taskList and userPrefs.
@@ -36,6 +39,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.taskList = new TaskList(taskList);
         filteredTasks = new FilteredList<>(this.taskList.getTaskList());
+        undoStack = new Stack<TaskList>();
+        redoStack = new Stack<TaskList>();
     }
 
     public ModelManager() {
@@ -44,6 +49,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyTaskList newData) {
+        undoStack.push(new TaskList(taskList));
+        redoStack.clear();
         taskList.resetData(newData);
         indicateTaskListChanged();
     }
@@ -60,12 +67,16 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
+        undoStack.push(new TaskList(taskList));
+        redoStack.clear();
         taskList.removeTask(target);
         indicateTaskListChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+        undoStack.push(new TaskList(taskList));
+        redoStack.clear();
         taskList.addTask(task);
         updateFilteredListToShowAll();
         indicateTaskListChanged();
@@ -76,8 +87,30 @@ public class ModelManager extends ComponentManager implements Model {
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
 
-        int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        taskList.updateTask(taskListIndex, editedTask);
+        undoStack.push(new TaskList(taskList));
+        redoStack.clear();
+        int addressBookIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
+        taskList.updateTask(addressBookIndex, editedTask);
+        indicateTaskListChanged();
+    }
+
+    @Override
+    public void undo() throws EmptyStackException {
+        if (undoStack.isEmpty()) {
+            throw new EmptyStackException();
+        }
+        redoStack.push(new TaskList(taskList));
+        taskList.resetData(undoStack.pop());
+        indicateTaskListChanged();
+    }
+
+    @Override
+    public void redo() throws EmptyStackException {
+        if (redoStack.isEmpty()) {
+            throw new EmptyStackException();
+        }
+        undoStack.push(new TaskList(taskList));
+        taskList.resetData(redoStack.pop());
         indicateTaskListChanged();
     }
 
