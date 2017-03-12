@@ -14,8 +14,8 @@ public class TypicalTestTasks {
 
     public TypicalTestTasks() {
         try {
-            alice = new TaskBuilder().withName("Alice Pauline")
-                    .withInformation("123, Jurong West Ave 6, #08-111")
+            alice = new TaskBuilder().withName("Submit progress report")
+                    .withInformation("notify department head")
                     .withPriorityLevel("3")
                     .withStartDateTime("Feb 19, 2017 5pm")
                     .withEndDateTime("Feb 28, 2017 5pm")

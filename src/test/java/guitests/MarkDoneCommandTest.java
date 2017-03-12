@@ -21,7 +21,7 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
         int taskBossIndex = 1;
 
         TestTask markedDoneTask = new TaskBuilder().withName("Submit progress report")
-               .withPriorityLevel("1").withStartDateTime("10am Feb 19, 2017")
+               .withPriorityLevel("3").withStartDateTime("10am Feb 19, 2017")
                .withEndDateTime("10am Feb 28, 2017")
                .withInformation("notify department head")
                .withCategories("Done").build();
