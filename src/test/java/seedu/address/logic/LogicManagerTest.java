@@ -437,7 +437,7 @@ public class LogicManagerTest {
             return new Task(
                     new Name("Task " + seed),
                     new Deadline("" + Math.abs(seed) % 28 + "/" + (Math.abs(seed)
-                        % 12) + 1 + "/" + Math.abs(seed) % 2050),
+                        % 12 + 1) + "/" + Math.abs(seed) % 2050),
                     new Description("House of " + seed),
                     new IdentificationNumber("" + Math.abs(seed)),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
@@ -451,9 +451,9 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getName().toString());
-            cmd.append(" e/").append(p.getDeadline());
-            cmd.append(" p/").append(p.getDescription());
-            cmd.append(" a/").append(p.getID());
+            cmd.append(" dl/").append(p.getDeadline());
+            cmd.append(" ds/").append(p.getDescription());
+            cmd.append(" id/").append(p.getID());
 
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {
@@ -538,8 +538,7 @@ public class LogicManagerTest {
                     new Name(name),
                     new Deadline("11/11/1111"),
                     new Description("some desceiption"),
-                    new IdentificationNumber("123"),
-                    new UniqueTagList(new Tag("tag"))
+                    new IdentificationNumber("123")
             );
         }
     }

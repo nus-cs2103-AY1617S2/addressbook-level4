@@ -1,57 +1,80 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addressbook>
-    <persons>
-        <name>Hans Muster</name>
-        <phone isPrivate="false">9482424</phone>
-        <email isPrivate="false">hans@google.com</email>
-        <address isPrivate="false">4th street</address>
-    </persons>
-    <persons>
-        <name>Ruth Mueller</name>
-        <phone isPrivate="false">87249245</phone>
-        <email isPrivate="false">ruth@google.com</email>
-        <address isPrivate="false">81th street</address>
-    </persons>
-    <persons>
-        <name>Heinz Kurz</name>
-        <phone isPrivate="false">95352563</phone>
-        <email isPrivate="false">heinz@yahoo.com</email>
-        <address isPrivate="false">wall street</address>
-    </persons>
-    <persons>
-        <name>Cornelia Meier</name>
-        <phone isPrivate="false">87652533</phone>
-        <email isPrivate="false">cornelia@google.com</email>
-        <address isPrivate="false">10th street</address>
-    </persons>
-    <persons>
-        <name>Werner Meyer</name>
-        <phone isPrivate="false">9482224</phone>
-        <email isPrivate="false">werner@gmail.com</email>
-        <address isPrivate="false">michegan ave</address>
-    </persons>
-    <persons>
-        <name>Lydia Kunz</name>
-        <phone isPrivate="false">9482427</phone>
-        <email isPrivate="false">lydia@gmail.com</email>
-        <address isPrivate="false">little tokyo</address>
-    </persons>
-    <persons>
-        <name>Anna Best</name>
-        <phone isPrivate="false">9482442</phone>
-        <email isPrivate="false">anna@google.com</email>
-        <address isPrivate="false">4th street</address>
-    </persons>
-    <persons>
-        <name>Stefan Meier</name>
-        <phone isPrivate="false">8482424</phone>
-        <email isPrivate="false">stefan@mail.com</email>
-        <address isPrivate="false">little india</address>
-    </persons>
-    <persons>
-        <name>Martin Mueller</name>
-        <phone isPrivate="false">8482131</phone>
-        <email isPrivate="false">hans@google.com</email>
-        <address isPrivate="false">chicago ave</address>
-    </persons>
-</addressbook>
+<taskmanager>
+    <tasks>
+        <name>Go fly kite</name>
+        <deadline>Mon, Feb 27 2017</deadline>
+        <description>Flying kite at park</description>
+        <id>1</id>
+        <tagged>friends</tagged>
+    </tasks>
+    <tasks>
+        <name>Buy christmas presents</name>
+        <deadline>Sat, Dec 23 2017</deadline>
+        <description>Buy presents for Familiy and Friends</description>
+        <id>2</id>
+        <tagged>christmas</tagged>
+        <tagged>presents</tagged>
+    </tasks>
+    <tasks>
+        <name>Meeting with Charlotte Oliveiro</name>
+        <deadline>Thu, Feb 02 2017</deadline>
+        <description>Prepare for Meeting with Charlotte</description>
+        <id>3</id>
+        <tagged>important</tagged>
+        <tagged>meeting</tagged>
+    </tasks>
+    <tasks>
+        <name>Dinner outing with family</name>
+        <deadline>Sun, Dec 17 2017</deadline>
+        <description>Going to the zoo with family</description>
+        <id>4</id>
+        <tagged>zoo</tagged>
+        <tagged>family</tagged>
+    </tasks>
+    <tasks>
+        <name>Class reunion</name>
+        <deadline>Mon, Jan 15 2018</deadline>
+        <description>Secondary school class reunion</description>
+        <id>5</id>
+        <tagged>classmates</tagged>
+    </tasks>
+    <tasks>
+        <name>Company meeting</name>
+        <deadline>Thu, May 04 2017</deadline>
+        <description>Prepare for company meeting</description>
+        <id>6</id>
+        <tagged>important</tagged>
+        <tagged>meeting</tagged>
+    </tasks>
+    <tasks>
+        <name>Company meeting</name>
+        <deadline>Thu, May 04 2017</deadline>
+        <description>Prepare for company meeting</description>
+        <id>7</id>
+        <tagged>important</tagged>
+        <tagged>meeting</tagged>
+    </tasks>
+    <tasks>
+        <name>Company meeting</name>
+        <deadline>Thu, May 04 2017</deadline>
+        <description>Prepare for company meeting</description>
+        <id>8</id>
+        <tagged>important</tagged>
+        <tagged>meeting</tagged>
+    </tasks>
+    <tasks>
+        <name>newtask</name>
+        <deadline>Fri, Mar 10 2017</deadline>
+        <description>buy eggs</description>
+        <id>12</id>
+        <tagged>no</tagged>
+    </tasks>
+    <tags>friends</tags>
+    <tags>presents</tags>
+    <tags>christmas</tags>
+    <tags>important</tags>
+    <tags>meeting</tags>
+    <tags>family</tags>
+    <tags>zoo</tags>
+    <tags>classmates</tags>
+</taskmanager>

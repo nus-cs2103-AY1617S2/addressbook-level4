@@ -77,8 +77,8 @@ public class TaskManager implements ReadOnlyTaskManager {
         if (t.isIDUnassigned()) {
             t.setID(new IdentificationNumber(nextAvailableID));
             nextAvailableID.inc();
-            syncMasterTagListWith(t);
         }
+        syncMasterTagListWith(t);
         tasks.add(t);
     }
 
@@ -174,6 +174,14 @@ public class TaskManager implements ReadOnlyTaskManager {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(tasks, tags);
+    }
+
+    // Checks if task list is empty
+    public boolean isEmpty() {
+        if (this.tasks.isEmpty()) {
+            return true;
+        }
+        return false;
     }
 
 }
