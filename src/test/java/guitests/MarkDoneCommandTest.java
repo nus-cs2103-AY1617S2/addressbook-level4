@@ -31,7 +31,7 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
 
     @Test
     public void markDone_findThenMarkDone_success() throws Exception {
-        commandBox.runCommand("find n/Elle");
+        commandBox.runCommand("find n/progress");
 
         int filteredTaskListIndex = 1;
         int taskBossIndex = 8;
