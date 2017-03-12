@@ -33,8 +33,8 @@ public class TypicalTestTasks {
                     .withStatus("incomplete").withNote("Pay it on myISIS").build();
 
             // Manually added
-            hoon = new TaskBuilder().withName("Hoon Meier").withPriority("8482424")
-                    .withStatus("stefan@mail.com").withNote("little india").build();
+            hoon = new TaskBuilder().withName("Submit research proposal").withPriority("hi")
+                    .withStatus("incomplete").withNote("To Prof Obama's pigeonhole").build();
             ida = new TaskBuilder().withName("Ida Mueller").withPriority("8482131")
                     .withStatus("hans@google.com").withNote("chicago ave").build();
         } catch (IllegalValueException e) {
