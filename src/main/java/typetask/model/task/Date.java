@@ -49,5 +49,4 @@ public class Date {
     public int hashCode() {
         return value.hashCode();
     }
-
 }
