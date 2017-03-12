@@ -1,6 +1,6 @@
-# AddressBook Level 4 - User Guide
+# TaskManager - User Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team CS2103-W15-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -16,141 +16,254 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
    > Having any Java 8 version is not enough. <br>
    > This app will not work with earlier versions of Java 8.
 
-1. Download the latest `addressbook.jar` from the [releases](../../../releases) tab.
+1. Download the latest `taskmanager.jar` from the [releases](../../../releases) tab.
 2. Copy the file to the folder you want to use as the home folder for your Address Book.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
    > <img src="images/Ui.png" width="600">
-
-4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
-   e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
-5. Some example commands you can try:
-   * **`list`** : lists all contacts
-   * **`add`**` John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01` :
-     adds a contact named `John Doe` to the Address Book.
-   * **`delete`**` 3` : deletes the 3rd contact shown in the current list
-   * **`exit`** : exits the app
-6. Refer to the [Features](#features) section below for details of each command.<br>
+4. Refer to the [Features](#features) section below for details of each feature available.<br>
 
 
 ## 2. Features
 
 > **Command Format**
->
-> * Words in `UPPER_CASE` are the parameters.
-> * Items in `SQUARE_BRACKETS` are optional.
-> * Items with `...` after them can have multiple instances.
-> * Parameters can be in any order.
+> `Square brackets [ ]` denote a required field
+> `Curved brackets ( )` denote an optional field'
+> `...` denotes that you can have multiple instances
 
-### 2.1. Viewing help : `help`
+## 2.01 View help: `help`
+View all the available commands and how to use them
 
-Format: `help`
+_Format:_
+`help`
 
-> Help is also shown if you enter an incorrect command e.g. `abcd`
+## 2.02 Add task: `add`
+Adds a task to your todo list
 
-### 2.2. Adding a person: `add`
+_Format:_
+`add [Name-of-Task] [Deadline] (#Tag-1) (#Tag-2) …`
 
-Adds a person to the address book<br>
-Format: `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+_Example:_
+`add send TPS report to Bill by Friday 6pm #TPS #report`
 
-> Persons can have any number of tags (including 0)
+## 2.03 Delete task: `delete`
+Removes a task from your todo list
+
+_Format:_
+`remove [Task-Number]`
+
+
+## 2.04 Edit task: `edit`
+Edit task details
+
+_Format:_
+`edit [Task-Number]`
+
+## 2.05 Complete task: `complete`
+Marks task as completed
+
+_Format:_
+`complete [Task-Number]`
+
+_Example:_
+`complete 2`
+
+## 2.06 Search: `search`
+
+Search for tasks with matching keywords in their names and tags
+
+> The search is case insensitive.
+
+_Format:_
+`search [tag/name]`
+
+_Example:_
+`search report`
+Returns a list of tasks (if any) with the phrase report in its name or tag
+
+## 2.07 View overdue tasks: `overdue`
+
+View a list of tasks which are overdue
+
+_Format:_
+`overdue`
+
+_Example:_
+`overdue`
+Returns a list of overdue tasks (if any)
+
+
+## 2.08 View tasks by deadline: `due`
+
+View a list of tasks due by a certain date
+
+> You can type in the actual date after the command word due or you can just type in relative dates like today, tomorrow until this month.
+
+_Format:_
+`due 23/1` <br>
+`due today` <br>
+`due this week`
+
+_Example:_
+`due tomorrow` <br>
+Returns a list of tasks due by tomorrow
+
+
+## 2.09 Undo previous command: `undo`
+
+Undo a previous command, like how a Ctrl-Z works.
+
+> This will undo the most previous command that mutated the data for example add, edit, delete.
+
+_Format:_
+`undo`
+
+_Example:_
+`undo` <br>
+Returns the undoing of the previous command that mutated the data, e.g. “ add send TPS report to Bill by Friday 6pm undone”
+
+## 2.10 Add tags to created task: `tag`
+
+Add a tag to a task
+> Add tags to the task at the specified index. The index refers to the index number shown in the last person listing.
+
+_Format:_
+`tag [Task-Number] [#Tag-1] (#Tag-2) ...`
+
+_Example:_
+`tag 1 urgent, for mom` <br>
+Returns the task name with the changed tags
+
+## 2.11 Repeat tasks: `repeat`
+
+Repeat a task at a fixed periodic time for e.g. weekly
+> * Add tags to the task at the specified index. The index refers to the index number shown in the last person listing.
+> * The periodic time specified must start with the word “every” and must be followed by one of the seven days of the week.
+
+_Format:_
+`repeat [Task-Number] [periodic time]`
+
+_Example:_
+`repeat 2 every friday`
+Returns the task name that was put on repeat
+
+
+## 2.12 Attach links: `addlink`
+Attach relevant link(s) to the specified task.
+
+> The TASK_NUMBER refers to the index number shown in the most recent listing of the task.
+> This command works for all types of tasks: completed, uncompleted, overdue, etc.
+
+_Format:_
+`addlink RELEVANT_LINK TASK_NUMBER`
+
+_Examples:_
+
+`addlink https://www.google.com/drive/presentation-to-boss 5`
+Attach the link `https://www.google.com/drive/presentation-to-boss` to task number 5 in the list of task.
+
+`addlink https://mail.google.com/my-mail-box/important-email 10`
+Attach the link `https://mail.google.com/my-mail-box/important-email` to task number 10 in the list of tasks.
+
+## 2.13 Progress report: `report`
+Report to the user his/her completed tasks in the past 1 week, overdue tasks in the past 1 week, and uncompleted tasks in the coming week.
+
+_Format_:
+`report`
+
+## 2.14 Calendar view: `calendarview`
+Views the current month and upcoming month’s tasks in the form of a calendar
+> The TASK_NUMBER refers to the index number shown in the most recent listing of the task.
+> This command works for all types of tasks: completed, uncompleted, overdue, etc.
+
+Format:
+`calendarview`
+
+
+## 2.15 Scroll through previous commands
+Format: `up/down arrow key`
+>Use the arrow keys to scroll through your previous commands from the most recent the the earliest
+
+
+## 2.2 Settings
+>Enter the command `settings` to access these features
+
+## 2.21 Change font size
+Change the font size
+> You can specify how much you want to increase or decrease the font size by adding a “by” followed by an integer from 1-10.
+> If no integer is specified, the app will change the font size by 1.
+
+_Format:_
+`increase font (by 1)`
+`decrease font (by 1)`
+
+_Examples:_
+* `increase font by 3`
+  The app will increase the font size by 3.
+
+* `decrease font`
+  The app will decrease the font size by 1.
+
+
+## 2.22 Message of the Day
+Set/Change a message of the day
+> Display a motivational message or some ascii art which will be shown when the todo list first starts up
+
+_Format:_
+`motd`
+
+_Example:_
+```
+motd
+I can do it!
+```
+
+
+## 2.23 Sync with Google Calendar: `sync`
+Sync the list of tasks with the user's Google Calendar. User will be prompted to enter his/her password after entering the command.
+
+_Format:_ `sync USER_EMAIL`
+
+## 2.24 Customize file storing: `store`
+Tell the task manager to store its data at the location specified by the user.
+
+_Format:_
+`store PATH_TO_STORAGE_FILE`
+> Store all the data of the task manager in the file located at PATH_TO_STORAGE_FILE. It is required that this file be a .txt file located in StorageFile/a folder rooted at StorageFile, and that it is created before the command is called.
 
 Examples:
+* `store StorageFile/StoreHereInstead/MyStorage.txt`
+The task manager will store its data in MyStorage.txt located at StorageFile/StoreHereInstead/MyStorage.txt, provided that this file exists before calling the command.
 
-* `add John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01`
-* `add Betsy Crowe t/friend e/betsycrowe@gmail.com a/Newgate Prison p/1234567 t/criminal`
+* `store StorageFile/AnotherStorage.txt`
+The task manager will store its data in AnotherStorage.txt located under StorageFile instead of the default storage location, provided that this file exists before calling the command.
 
-### 2.3. Listing all persons : `list`
+## 2.25 Reminder mode: `reminder`
+Tell the task manager to/not to remind the user when it is a) 1 hour before the deadline of the most urgent task and b) 30 minutes before the deadline of the most urgent task.
 
-Shows a list of all persons in the address book.<br>
-Format: `list`
+_Format:_
+`reminder on TASK_NAME [MORE_TASKS]` to turn **on** the reminder mode for the specified tasks.
+`reminder off TASK_NAME [MORE_TASKS]` to turn **off** the reminder mode for the specified tasks.
+`reminder on/off all` to turn **on**/**off** the reminder mode for all tasks.
+> The task(s) has to be **uncompleted**, **not overdued** task(s).
+> By **default**, reminder mode is switched **on** for all **uncompleted**, **not overdued** tasks.
 
-### 2.4. Editing a person : `edit`
+_Examples:_
+* `reminder off [do laundry] [buy grocery]`
+Tell the task manager not to remind the user for the tasks `do laundry` and `buy grocery`.
 
-Edits an existing person in the address book.<br>
-Format: `edit INDEX [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+* `reminder on [reply boss email]`
+Tell the task manager to remind the user 1 hour and 30 minutes before the task `reply boss email` is due.
 
-> * Edits the person at the specified `INDEX`.
-    The index refers to the index number shown in the last person listing.<br>
-    The index **must be a positive integer** 1, 2, 3, ...
-> * At least one of the optional fields must be provided.
-> * Existing values will be updated to the input values.
-> * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-> * You can remove all the person's tags by typing `t/` without specifying any tags after it. 
 
-Examples:
+## 2.26 Collaborate with others: `collaborate`
+Collaborate with other colleagues in managing the user's to-do list.
+_Format:_
+`collaborate EMAIL_1 [MORE EMAILS]`
+_Examples:_
+* `collaborate jane@gmail.com mary@hotmail.com terence@gmail.com`
+Allow users with specified address to view your to-do list.
 
-* `edit 1 p/91234567 e/johndoe@yahoo.com`<br>
-  Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@yahoo.com` respectively.
-
-* `edit 2 Betsy Crower t/`<br>
-  Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-
-### 2.5. Finding all persons containing any keyword in their name: `find`
-
-Finds persons whose names contain any of the given keywords.<br>
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-> * The search is case sensitive. e.g `hans` will not match `Hans`
-> * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-> * Only the name is searched.
-> * Only full words will be matched e.g. `Han` will not match `Hans`
-> * Persons matching at least one keyword will be returned (i.e. `OR` search).
-    e.g. `Hans` will match `Hans Bo`
-
-Examples:
-
-* `find John`<br>
-  Returns `John Doe` but not `john`
-* `find Betsy Tim John`<br>
-  Returns Any person having names `Betsy`, `Tim`, or `John`
-
-### 2.6. Deleting a person : `delete`
-
-Deletes the specified person from the address book. Irreversible.<br>
-Format: `delete INDEX`
-
-> Deletes the person at the specified `INDEX`. <br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
-
-Examples:
-
-* `list`<br>
-  `delete 2`<br>
-  Deletes the 2nd person in the address book.
-* `find Betsy`<br>
-  `delete 1`<br>
-  Deletes the 1st person in the results of the `find` command.
-
-### 2.7. Select a person : `select`
-
-Selects the person identified by the index number used in the last person listing.<br>
-Format: `select INDEX`
-
-> Selects the person and loads the Google search page the person at the specified `INDEX`.<br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
-
-Examples:
-
-* `list`<br>
-  `select 2`<br>
-  Selects the 2nd person in the address book.
-* `find Betsy` <br>
-  `select 1`<br>
-  Selects the 1st person in the results of the `find` command.
-
-### 2.8. Clearing all entries : `clear`
-
-Clears all entries from the address book.<br>
-Format: `clear`
-
-### 2.9. Exiting the program : `exit`
-
-Exits the program.<br>
-Format: `exit`
-
-### 2.10. Saving the data
+### Saving the data
 
 Address book data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
