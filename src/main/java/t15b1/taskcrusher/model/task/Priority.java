@@ -8,8 +8,10 @@ import t15b1.taskcrusher.commons.exceptions.IllegalValueException;
  */
 public class Priority {
 
-    public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Priority should only take the value from 1 to 3";
-    public static final String PRIORITY_VALIDATION_REGEX = "[1-3]";
+    public static final String MESSAGE_PRIORITY_CONSTRAINTS = 
+            "Priority should only take the value from 1 to 3 when specified. It's default is 0";
+    public static final String PRIORITY_VALIDATION_REGEX = "[0-3]";
+    public static final String PRIORITY_DEFAULT_VALUE = "0";
 
     public final String value;
 
@@ -26,13 +28,18 @@ public class Priority {
         }
         this.value = trimmedPriority;
     }
-
+    
+    public boolean isDefaultPriority(){
+        return value.equals(PRIORITY_DEFAULT_VALUE);
+    }
+    
     /**
      * Returns true if a given string is a valid priority value
      */
     public static boolean isValidPriority(String test) {
         return test.matches(PRIORITY_VALIDATION_REGEX);
     }
+
 
     @Override
     public String toString() {

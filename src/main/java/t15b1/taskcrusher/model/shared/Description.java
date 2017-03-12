@@ -33,6 +33,10 @@ public class Description {
         this.value = description;
     }
 
+    public boolean hasNoDescription(){
+        return value.isEmpty();
+    }
+    
     /**
      * Returns true if a given string is a valid task description.
      */
