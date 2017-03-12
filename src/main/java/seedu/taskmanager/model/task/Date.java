@@ -13,6 +13,7 @@ public class Date {
             "Task date should be either a day (e.g. thursday) or a date with the format: DD/MM/YY (e.g. 03/03/17)";
     public static final String DATE_VALIDATION_REGEX1 = "\\d{2}/\\d{2}/\\d{2}";
     public static final String DATE_VALIDATION_REGEX2 = "[a-zA-Z]+";
+    public static final String EMPTY_FIELD ="EMPTY_FIELD";
 
     public final String value;
 
@@ -34,7 +35,7 @@ public class Date {
      * Returns if a given string is a valid task date.
      */
     public static boolean isValidDate(String test) {
-        return test.matches(DATE_VALIDATION_REGEX1) || test.matches(DATE_VALIDATION_REGEX2);
+        return test.matches(DATE_VALIDATION_REGEX1) || test.matches(DATE_VALIDATION_REGEX2) || test.matches(EMPTY_FIELD);
     }
 
     @Override
