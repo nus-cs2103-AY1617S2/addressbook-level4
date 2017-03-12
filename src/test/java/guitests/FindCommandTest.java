@@ -33,12 +33,15 @@ public class FindCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void find_nonEmptyListStartEndDate_singleResult() {
+        assertFindResult("find by 10-11-2017 2359", td.task6); // 1 result
         assertFindResult("find from today to 11-11-2017 0000", td.task6); // 1 result
     }
 
     @Test
     public void find_nonEmptyListStartEndDate_pass() {
         assertFindResult("find from today to christmas",
+                td.task1, td.task2, td.task3, td.task4, td.task5, td.task6, td.task7); // 7 result
+        assertFindResult("find by christmas",
                 td.task1, td.task2, td.task3, td.task4, td.task5, td.task6, td.task7); // 7 result
     }
 
@@ -52,6 +55,12 @@ public class FindCommandTest extends TaskManagerGuiTest {
     public void find_invalidCommand_fail() {
         commandBox.runCommand("findsomething");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
+    }
+
+    @Test
+    public void find_invalidDate_fail() {
+        commandBox.runCommand("find by from to ");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
     @Test
