@@ -17,21 +17,11 @@ public class TimePoint implements TaskDate {
     private final DateValue date;
 
     public TimePoint(String dateString) throws IllegalValueException {
-        Optional<DateValue> parseResult;
-
-        parseResult = DateParser.parseDateOnlyString(dateString);
-        if (parseResult.isPresent()) {
-            date = parseResult.get();
-            return;
+        Optional<DateValue> parseResult = DateParser.parseTimePointString(dateString);
+        if (!parseResult.isPresent()) {
+            throw new IllegalValueException(MESSAGE_TIMEPOINT_CONSTRAINTS);
         }
-
-        parseResult = DateParser.parseDateTimeString(dateString);
-        if (parseResult.isPresent()) {
-            date = parseResult.get();
-            return;
-        }
-
-        throw new IllegalValueException(MESSAGE_TIMEPOINT_CONSTRAINTS);
+        date = parseResult.get();
     }
 
     @Override

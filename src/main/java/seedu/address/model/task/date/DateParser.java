@@ -87,6 +87,17 @@ public class DateParser {
         }
     }
 
+    public static Optional<DateValue> parseTimePointString(String dateString) {
+        Optional<DateValue> parseResult = parseDateTimeString(dateString);
+        if (!parseResult.isPresent()) {
+            parseResult = parseDateOnlyString(dateString);
+            return Optional.ofNullable((parseResult.isPresent() ?
+                                        (DateValue) new DateOnly(parseResult.get()) : null));
+        }
+        return Optional.of((DateValue) new DateTime(parseResult.get()));
+    }
+
+
     public static Optional<PairResult<DateValue, DateValue>> parseTimePeriodString(String dateString) {
         dateString = StringUtil.removeRedundantSpaces(dateString);
         dateString = dateString.toLowerCase();
@@ -103,14 +114,8 @@ public class DateParser {
         String beginDateString = texts[1];
         String endDateString = texts[2];
 
-        Optional<DateValue> beginDate = parseDateOnlyString(beginDateString);
-        if (!beginDate.isPresent()) {
-            beginDate = parseDateTimeString(beginDateString);
-        }
-        Optional<DateValue> endDate = parseDateOnlyString(endDateString);
-        if (!endDate.isPresent()) {
-            endDate = parseDateTimeString(endDateString);
-        }
+        Optional<DateValue> beginDate = parseTimePointString(beginDateString);
+        Optional<DateValue> endDate = parseTimePointString(endDateString);
 
         if (beginDate.isPresent() && endDate.isPresent()) {
             return Optional.of(new PairResult<DateValue, DateValue>(beginDate.get(), endDate.get()));

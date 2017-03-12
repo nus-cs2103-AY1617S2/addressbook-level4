@@ -70,6 +70,25 @@ public class DeadlineTest {
     }
 
     @Test
+    public void testDateTime() {
+        try {
+            Deadline date = new Deadline("Thursday, March 9 2017, 10:20 am");
+            Date expectedDate = new Date();
+            expectedDate.setDate(9);
+            expectedDate.setMonth(2);
+            expectedDate.setYear(117);
+            expectedDate.setHours(10);
+            expectedDate.setMinutes(20);
+            String expectedOutput = new SimpleDateFormat(DateTime.READABLE_DATETIME_OUTPUT_FORMAT)
+                                            .format(expectedDate);
+
+            assertEquals(date.toString(), expectedOutput);
+        } catch (IllegalValueException e) {
+            assertTrue(false);
+        }
+    }
+
+    @Test
     public void testTimePeriod() {
         try {
             Deadline date = new Deadline("from Thursday, March 9 2017 to 12:23 pm");
