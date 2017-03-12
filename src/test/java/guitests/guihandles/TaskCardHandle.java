@@ -19,7 +19,7 @@ public class TaskCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
     private static final String DEADLINE_FIELD_ID = "#deadline";
     private static final String DESCRIPTION_FIELD_ID = "#description";
-    private static final String ID_FIELD_ID = "#id";
+    private static final String ID_FIELD_ID = "#identificationnumber";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private Node node;
