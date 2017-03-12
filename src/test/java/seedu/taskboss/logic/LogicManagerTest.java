@@ -105,7 +105,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_invalid() {
+    public void execute_invalid() throws IllegalValueException {
         String invalidCommand = "       ";
         assertCommandFailure(invalidCommand, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                HelpCommand.MESSAGE_USAGE));
@@ -115,13 +115,14 @@ public class LogicManagerTest {
      * Executes the command, confirms that a CommandException is not thrown and
      * that the result message is correct. Also confirms that both the
      * 'taskboss' and the 'last shown list' are as specified.
+     * @throws IllegalValueException
      *
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskBoss,
      *      List)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
             ReadOnlyTaskBoss expectedTaskBoss,
-            List<? extends ReadOnlyTask> expectedShownList) {
+            List<? extends ReadOnlyTask> expectedShownList) throws IllegalValueException {
         assertCommandBehavior(false, inputCommand, expectedMessage, expectedTaskBoss, expectedShownList);
     }
 
@@ -129,11 +130,12 @@ public class LogicManagerTest {
      * Executes the command, confirms that a CommandException is thrown and that
      * the result message is correct. Both the 'taskboss' and the 'last shown
      * list' are verified to be unchanged.
+     * @throws IllegalValueException
      *
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskBoss,
      *      List)
      */
-    private void assertCommandFailure(String inputCommand, String expectedMessage) {
+    private void assertCommandFailure(String inputCommand, String expectedMessage) throws IllegalValueException {
         TaskBoss expectedTaskBoss = new TaskBoss(model.getTaskBoss());
         List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredTaskList());
         assertCommandBehavior(true, inputCommand, expectedMessage, expectedTaskBoss, expectedShownList);
@@ -148,10 +150,11 @@ public class LogicManagerTest {
      * {@code expectedTaskBoss} <br>
      * - the backing list shown by UI matches the {@code shownList} <br>
      * - {@code expectedTaskBoss} was saved to the storage file. <br>
+     * @throws IllegalValueException
      */
     private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand,
             String expectedMessage, ReadOnlyTaskBoss expectedTaskBoss,
-            List<? extends ReadOnlyTask> expectedShownList) {
+            List<? extends ReadOnlyTask> expectedShownList) throws IllegalValueException {
 
         try {
             CommandResult result = logic.execute(inputCommand);
@@ -171,20 +174,20 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_unknownCommandWord() {
+    public void execute_unknownCommandWord() throws IllegalValueException {
         String unknownCommand = "uicfhmowqewca";
         assertCommandFailure(unknownCommand, MESSAGE_UNKNOWN_COMMAND);
     }
 
     @Test
-    public void execute_help() {
+    public void execute_help() throws IllegalValueException {
         assertCommandSuccess("help", HelpCommand.SHOWING_HELP_MESSAGE,
                 new TaskBoss(), Collections.emptyList());
         assertTrue(helpShown);
     }
 
     @Test
-    public void execute_exit() {
+    public void execute_exit() throws IllegalValueException {
         assertCommandSuccess("exit", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
                 new TaskBoss(), Collections.emptyList());
     }
@@ -200,13 +203,13 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_add_invalidArgsFormat() {
+    public void execute_add_invalidArgsFormat() throws IllegalValueException {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add Valid Name p/1 sd/today ed/tomorrow", expectedMessage);
     }
 
     @Test
-    public void execute_add_invalidTaskData() {
+    public void execute_add_invalidTaskData() throws IllegalValueException {
         assertCommandFailure("add n/[]\\[;] p/1 sd/today ed/tomorrow i/valid, information",
                 Name.MESSAGE_NAME_CONSTRAINTS);
         assertCommandFailure("add n/Valid Name p/not_numbers sd/today ed/tomorrow i/valid, information",
@@ -351,7 +354,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_find_invalidArgsFormat() {
+    public void execute_find_invalidArgsFormat() throws IllegalValueException {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
         assertCommandFailure("find ", expectedMessage);
     }

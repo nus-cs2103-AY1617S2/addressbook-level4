@@ -20,7 +20,7 @@ public class MarkDoneCommand extends Command {
             + "Example: " + COMMAND_WORD
             + " 1";
 
-    private static final String MESSAGE_MARK_TASK_DONE_SUCCESS = "Task marked done: %1$s";
+    public static final String MESSAGE_MARK_TASK_DONE_SUCCESS = "Task marked done: %1$s";
 
     private final int filteredTaskListIndex;
 
@@ -38,6 +38,7 @@ public class MarkDoneCommand extends Command {
 
         ReadOnlyTask taskToMarkDone = lastShownList.get(filteredTaskListIndex);
         Task taskMarked = new Task(taskToMarkDone.getName(), taskToMarkDone.getPriorityLevel(),
+                taskToMarkDone.getStartDateTime(), taskToMarkDone.getEndDateTime(),
                 taskToMarkDone.getInformation(), new UniqueCategoryList("Done"));
 
         model.updateTask(filteredTaskListIndex, taskMarked);
