@@ -128,7 +128,6 @@ public class PersonListPanelHandle extends GuiHandle {
         return getPersonCardHandle(person);
     }
 
-
     /**
      * Returns the position of the person given, {@code NOT_FOUND} if not found in the list.
      */
