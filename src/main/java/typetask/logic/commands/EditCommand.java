@@ -13,14 +13,14 @@ import typetask.model.task.Task;
 import typetask.model.task.Time;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing task in the TaskManager.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the last person listing. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
+            + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) [NAME] [d/DATE] [t/TIME] [p/PRIORITY ]\n"
             + "Example: " + COMMAND_WORD + " 1 p/91234567 t/11:25pm p/1";
@@ -39,7 +39,7 @@ public class EditCommand extends Command {
         assert filteredTaskListIndex > 0;
         assert editTaskDescriptor != null;
 
-        // converts filteredPersonListIndex from one-based to zero-based.
+        // converts filteredTaskListIndex from one-based to zero-based.
         this.filteredTaskListIndex = filteredTaskListIndex - 1;
 
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);

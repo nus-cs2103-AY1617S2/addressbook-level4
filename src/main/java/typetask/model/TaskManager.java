@@ -10,8 +10,7 @@ import typetask.model.task.Task;
 import typetask.model.task.TaskList;
 
 /**
- * Wraps all data at the address-book level
- * Duplicates are not allowed (by .equals comparison)
+ * Wraps all data at the TaskManager level
  */
 public class TaskManager implements ReadOnlyTaskManager {
 
@@ -67,7 +66,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         assert editedReadOnlyTask != null;
 
         Task editedTask = new Task(editedReadOnlyTask);
-        tasks.updatePerson(index, editedTask);
+        tasks.updateTask(index, editedTask);
     }
 
     public boolean removeTask(ReadOnlyTask key) throws TaskList.TaskNotFoundException {
