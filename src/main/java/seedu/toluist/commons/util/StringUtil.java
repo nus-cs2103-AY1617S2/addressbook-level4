@@ -47,12 +47,12 @@ public class StringUtil {
     }
 
     /**
-     * Returns true if s represents an unsigned integer e.g. 1, 2, 3, ... <br>
+     * Returns true if s represents a positive integer e.g. 1, 2, 3, ... <br>
      * Will return false if the string is:
      * null, empty string, "-1", "0", "+1", and " 2 " (untrimmed) "3 0" (contains whitespace).
      * @param s Should be trimmed.
      */
-    public static boolean isUnsignedInteger(String s) {
+    public static boolean isPositiveInteger(String s) {
         return s != null && s.matches("^0*[1-9]\\d*$");
     }
 }

@@ -4,9 +4,6 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.toluist.model.Task;
-import seedu.toluist.ui.UiStore;
-
 /**
  * Tokenize task into index, description, start date and/or end date.
  */
@@ -57,12 +54,5 @@ public class TaskTokenizer {
             tokens.put(TASK_END_DATE_KEYWORD, endDate);
         }
         return tokens;
-    }
-
-    // TODO Move this somewhere else
-    public Task getTask(String indexToken) {
-        int index = indexToken == null ? INVALID_INDEX : Integer.parseInt(indexToken) - 1;
-        Task task = indexToken == null ? null : UiStore.getInstance().getTasks().get(index);
-        return task;
     }
 }
