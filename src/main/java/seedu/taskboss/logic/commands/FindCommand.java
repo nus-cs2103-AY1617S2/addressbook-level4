@@ -1,5 +1,8 @@
 package seedu.taskboss.logic.commands;
 
+import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_START_DATE;
+
 import java.util.Set;
 
 
@@ -10,7 +13,6 @@ import java.util.Set;
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
-    public static final String PREFIX_NAME = "/n";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks whose names contain any of "
             + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
@@ -30,10 +32,13 @@ public class FindCommand extends Command {
         if (prefix.equals(PREFIX_NAME)) {
             model.updateFilteredTaskListByName(keywords);
             return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
-        } else {
-            model.updateFilteredTaskList(keywords);
+        } else if (prefix.equals(PREFIX_START_DATE)){
+            model.updateFilteredTaskListByStartDateTime(keywords);
             return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
-        }
+        } else {
+            model.updateFilteredTaskListByEndDateTime(keywords);
+            return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
+        } 
     }
 
 }
