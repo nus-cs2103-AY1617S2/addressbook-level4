@@ -48,9 +48,9 @@ public class TaskListTest {
     @Test
     public void resetData_withDuplicateTasks_throwsAssertionError() {
         TypicalTestTasks td = new TypicalTestTasks();
-        // Repeat td.alice twice
-        List<Task> newTasks = Arrays.asList(new Task(td.alice), new Task(td.alice));
-        List<Tag> newTags = td.alice.getTags().asObservableList();
+        // Repeat td.tutorial twice
+        List<Task> newTasks = Arrays.asList(new Task(td.tutorial), new Task(td.tutorial));
+        List<Tag> newTags = td.tutorial.getTags().asObservableList();
         TaskListStub newData = new TaskListStub(newTasks, newTags);
 
         thrown.expect(AssertionError.class);

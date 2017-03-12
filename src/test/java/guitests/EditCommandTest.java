@@ -59,7 +59,7 @@ public class EditCommandTest extends TaskListGuiTest {
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
-        commandBox.runCommand("find Elle");
+        commandBox.runCommand("find Java");
 
         String detailsToEdit = "Belle";
         int filteredTaskListIndex = 1;
@@ -103,8 +103,8 @@ public class EditCommandTest extends TaskListGuiTest {
 
     @Test
     public void edit_duplicateTask_failure() {
-        commandBox.runCommand("edit 3 Alice Pauline "
-                                + "c/123, Jurong West Ave 6, #08-111 t/friends");
+        commandBox.runCommand("edit 3 CS2103T tutorial "
+                                + "c/prepare V0.2 presentation t/class");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 

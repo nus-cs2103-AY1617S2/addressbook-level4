@@ -32,7 +32,7 @@ public class AddCommandTest extends TaskListGuiTest {
 
         //add to empty list
         commandBox.runCommand("clear");
-        assertAddSuccess(td.alice);
+        assertAddSuccess(td.tutorial);
 
         //invalid command
         commandBox.runCommand("adds Johnny");
