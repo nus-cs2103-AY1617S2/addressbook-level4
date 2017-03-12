@@ -30,12 +30,12 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
     }
 
     @Override
-    public Optional<ReadOnlyTaskManager> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(filePath);
+    public Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException {
+        return readTaskManager(filePath);
     }
 
     /**
-     * Similar to {@link #readAddressBook()}
+     * Similar to {@link #readTaskManager()}
      *
      * @param filePath
      *            location of the data. Cannot be null
@@ -43,7 +43,7 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
      *             if the file is not in the correct format.
      */
     @Override
-    public Optional<ReadOnlyTaskManager> readAddressBook(String filePath)
+    public Optional<ReadOnlyTaskManager> readTaskManager(String filePath)
             throws DataConversionException, FileNotFoundException {
         assert filePath != null;
 
