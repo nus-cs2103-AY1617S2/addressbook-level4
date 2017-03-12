@@ -57,6 +57,10 @@ public class TestTask implements ReadOnlyTask {
     public void setPriority(Priority priority) {
         this.priority = priority;
     }
+    
+    public void setDone() {
+        this.done = true;
+    }
 
     public void setTags(UniqueTagList tags) {
         this.tags = tags;
