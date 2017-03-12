@@ -16,18 +16,12 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
    > Having any Java 8 version is not enough. <br>
    > This app will not work with earlier versions of Java 8.
 
-1. Download the latest `addressbook.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for your Address Book.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
    > <img src="images/Ui.png" width="600">
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
-   * **`list`** : lists all contacts
-   * **`add`**` John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01` :
-     adds a contact named `John Doe` to the Address Book.
-   * **`delete`**` 3` : deletes the 3rd contact shown in the current list
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
@@ -55,18 +49,13 @@ Format: add TASKNAME -d DATE [-o DESCRIPTION] [-p]
 
 Examples:
 
-* `add -n Make payment -d 01/08/2017 -o Pay credit card bills -p`
-* `add -n Complete project -d 12/12/2017`
 
-## 2.3. Modifying a task: `update`
 
 Updates an existing task in the task list
 Format: update INDEX [-n TASKNAME] [-d DATE] [-o DESCRIPTION] [-p]
 
 Examples:
 
-* `update 3 -n buy eggs -d 29/02/2017 -o as soon as possible`
-* `update 1 -n tie shoelace -d 25/12/2017`
 
 ## 2.4. Delete a task: `delete`
 
@@ -104,19 +93,12 @@ Examples:
 ## 2.9. Finding all tasks containing any keyword in the task name: `find`
 
 Finds tasks that satisfy given parameters
-Format: find [-n KEYWORDS] [-o KEYWORDS] [-d DATE]
 
-> ‘find -n’ finds tasks whose task name contain any of the given keywords
-> ‘find -o’ finds tasks whose task description contain any of the given keywords
-> ‘find -d’ finds tasks whose deadline falls on specified date
 > 
 > The search is case sensitive, the order of the keywords does not matter, only the name is searched, and tasks matching at least one keyword will be returned
 
 Examples:
 
-* `find -n Project`
-* `find -o Project`
-* `find -d 12/08/2017`
 
 ## 2.10. Clearing all entries : `clear`
 
@@ -137,16 +119,11 @@ There is no need to manually save the data
 
 * **Help** : `help`
 
-* **Add**  `add -n TASKNAME -d DATE [-o DESCRIPTION] [-p]` <br>
-  e.g. `add -n Make payment -d 01/08/2017 -o Pay credit card bills -p`
 
-* **Update** : `update INDEX [-n TASKNAME] [-d DATE] [-o DESCRIPTION] [-p]` <br>
-  e.g. `update 3 -n buy eggs -d 29/02/2017 -o as soon as possible`
 
 * **Delete** : `delete INDEX` <br>
    e.g. `delete 3`
 
-* **Find** : `find [-n KEYWORDS] [-o KEYWORDS] [-d DATE]` <br>
   e.g. `find James Jake`
 
 * **List** : `list` <br>
