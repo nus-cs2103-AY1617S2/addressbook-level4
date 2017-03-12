@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import seedu.toluist.commons.core.Config;
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.CommandAliasConfig;
 import seedu.toluist.ui.Ui;
@@ -19,7 +20,7 @@ public class ViewAliasController extends Controller {
     private static final String NEW_LINE = "\n";
     public static final String NO_ALIAS_MESSAGE = "No aliases found";
 
-    private final CommandAliasConfig aliasConfig = CommandAliasConfig.getInstance();
+    private final CommandAliasConfig aliasConfig = Config.load().getCommandAliasConfig();
 
     public ViewAliasController(Ui renderer) {
         super(renderer);

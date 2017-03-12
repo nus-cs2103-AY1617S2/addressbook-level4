@@ -13,7 +13,7 @@ import org.mockito.junit.MockitoRule;
 
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
-import seedu.toluist.storage.Storage;
+import seedu.toluist.storage.TodoListStorage;
 import seedu.toluist.testutil.TypicalTestTodoLists;
 import seedu.toluist.ui.Ui;
 
@@ -25,7 +25,7 @@ public abstract class ControllerTest {
     public MockitoRule rule = MockitoJUnit.rule();
 
     @Mock
-    protected Storage storage;
+    protected TodoListStorage storage;
     @Mock
     protected Ui renderer;
     protected Controller controller;

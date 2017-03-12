@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.storage.JsonStorage;
-import seedu.toluist.storage.Storage;
+import seedu.toluist.storage.TodoListStorage;
 import seedu.toluist.ui.Ui;
 import seedu.toluist.ui.UiStore;
 
@@ -21,9 +21,9 @@ public abstract class Controller {
     /**
      * Persistent storage to interact with the models
      */
-    protected static Storage storage = JsonStorage.getInstance();
+    protected static TodoListStorage storage = new JsonStorage();
 
-    public static void setStorage(Storage storage) {
+    public static void setStorage(TodoListStorage storage) {
         Controller.storage = storage;
     }
 

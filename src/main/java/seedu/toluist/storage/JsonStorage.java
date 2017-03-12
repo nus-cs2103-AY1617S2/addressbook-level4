@@ -6,6 +6,7 @@ import java.util.ArrayDeque;
 import java.util.Optional;
 
 import javafx.util.Pair;
+import seedu.toluist.commons.core.Config;
 import seedu.toluist.commons.util.FileUtil;
 import seedu.toluist.commons.util.JsonUtil;
 import seedu.toluist.model.TodoList;
@@ -13,10 +14,10 @@ import seedu.toluist.model.TodoList;
 /**
  * JsonStorage saves TodoList object to json file.
  */
-public class JsonStorage implements Storage {
+public class JsonStorage implements TodoListStorage {
     private static JsonStorage instance;
 
-    private String storagePath = "data/todolist.json";
+    private String storagePath = Config.load().getTodoListFilePath();
     private ArrayDeque<String> historyStack = new ArrayDeque<>();
     private ArrayDeque<String> redoHistoryStack = new ArrayDeque<>();
 
@@ -26,16 +27,9 @@ public class JsonStorage implements Storage {
         this.storagePath = storagePath;
     }
 
-    public static JsonStorage getInstance() {
-        if (instance == null) {
-            instance = new JsonStorage();
-        }
-        return instance;
-    }
-
     public Optional<TodoList> load() {
         try {
-            String jsonString = getDataJson().get();
+            String jsonString = getDataJson(storagePath).get();
             // push todo list json string into historyStack if the stack is empty
             if (historyStack.isEmpty()) {
                 historyStack.addLast(jsonString);
@@ -47,27 +41,23 @@ public class JsonStorage implements Storage {
     }
 
     public boolean move(String storagePath) {
-        String oldStoragePath = getStoragePath();
+        String oldStoragePath = storagePath;
 
-        Optional<TodoList> todoList = load();
-        if (!todoList.isPresent()) {
+        Optional<TodoList> todoListOptional = load();
+        if (!todoListOptional.isPresent()) {
             return false;
         }
 
-        if (!save(todoList.get(), storagePath)) {
+        if (!saveNotAffectingHistory(todoListOptional.get(), storagePath)) {
             return false;
         }
-        setStoragePath(storagePath);
+        this.storagePath = storagePath;
         FileUtil.removeFile(FileUtil.getFile(oldStoragePath));
         return true;
     }
 
-    public String getStoragePath() {
-        return storagePath;
-    }
-
     public boolean save(TodoList todoList) {
-        if (!save(todoList, storagePath)) {
+        if (!saveNotAffectingHistory(todoList, storagePath)) {
             return false;
         }
         try {
@@ -79,9 +69,9 @@ public class JsonStorage implements Storage {
         return true;
     }
 
-    private boolean save(TodoList todoList, String storagePath) {
+    private boolean saveNotAffectingHistory(TodoList todoList, String storagePath) {
         try {
-            final String jsonString = JsonUtil.toJsonString(todoList);
+            String jsonString = JsonUtil.toJsonString(todoList);
             FileUtil.writeToFile(FileUtil.getFile(storagePath), jsonString);
             return true;
         } catch (IOException e) {
@@ -103,7 +93,7 @@ public class JsonStorage implements Storage {
         }
         TodoList todoList = todoListFromJson(historyStack.peekLast()).get();
         // So as to not clear the redo history
-        save(todoList, getStoragePath());
+        saveNotAffectingHistory(todoList, storagePath);
         return new Pair<>(todoList, times - steps);
     }
 
@@ -116,8 +106,12 @@ public class JsonStorage implements Storage {
 
         TodoList todoList = todoListFromJson(historyStack.peekLast()).get();
         // So as to not clear the redo history
-        save(todoList, getStoragePath());
+        saveNotAffectingHistory(todoList, storagePath);
         return new Pair<>(todoList, times - steps);
+    }
+
+    public String getStoragePath() {
+        return storagePath;
     }
 
     private Optional<TodoList> todoListFromJson(String json) {
@@ -127,20 +121,18 @@ public class JsonStorage implements Storage {
             return Optional.empty();
         }
     }
-
-    private Optional<String> getDataJson() {
+    
+    /**
+     * Read the json data from a file
+     * @param storagePath a file path
+     * @return Optional.of(jsonString) if the data can be read, Optional.empty() otherwise
+     */
+    private Optional<String> getDataJson(String storagePath) {
+        File storageFile = new File(storagePath);
         try {
-            return Optional.of(FileUtil.readFromFile(getStorageFile()));
+            return Optional.of(FileUtil.readFromFile(storageFile));
         } catch (IOException e) {
             return Optional.empty();
         }
-    }
-
-    private File getStorageFile() {
-        return new File(getStoragePath());
-    }
-
-    private void setStoragePath(String storagePath) {
-        this.storagePath = storagePath;
     }
 }

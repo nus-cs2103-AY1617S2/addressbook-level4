@@ -9,20 +9,11 @@ import java.util.Set;
  * A model to manage alias
  */
 public class CommandAliasConfig {
-    private static CommandAliasConfig instance;
-
     private Map<String, String> aliasMapping = new HashMap<>();
     private Set<String> reservedKeywords = new HashSet<>();
 
     public Map<String, String> getAliasMapping() {
         return aliasMapping;
-    }
-
-    public static CommandAliasConfig getInstance() {
-        if (instance == null) {
-            instance = new CommandAliasConfig();
-        }
-        return instance;
     }
 
     /**

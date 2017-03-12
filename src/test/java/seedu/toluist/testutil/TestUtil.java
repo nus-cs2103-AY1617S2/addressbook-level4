@@ -18,7 +18,7 @@ import seedu.toluist.commons.util.FileUtil;
 import seedu.toluist.controller.Controller;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.storage.JsonStorage;
-import seedu.toluist.storage.Storage;
+import seedu.toluist.storage.TodoListStorage;
 
 /**
  * A utility class for test cases.
@@ -53,7 +53,7 @@ public class TestUtil {
      * @param filePath storagePath
      */
     public static void setTodoListTestData(TodoList todoList, String filePath) {
-        Storage storage = new JsonStorage(filePath);
+        TodoListStorage storage = new JsonStorage(filePath);
         TodoList.setStorage(storage);
         Controller.setStorage(storage);
         todoList.save();

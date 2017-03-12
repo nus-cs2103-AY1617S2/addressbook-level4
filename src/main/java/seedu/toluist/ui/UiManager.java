@@ -102,7 +102,7 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handleDataSavingExceptionEvent(DataSavingExceptionEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        showFileOperationAlertAndWait("Could not save data", "Could not save data to file", event.exception);
+        showFileOperationAlertAndWait("Could not saveConfig data", "Could not saveConfig data to file", event.exception);
     }
 
     @Subscribe

@@ -6,14 +6,14 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import seedu.toluist.storage.JsonStorage;
-import seedu.toluist.storage.Storage;
+import seedu.toluist.storage.TodoListStorage;
 
 /**
  * TodoList Model
  */
 public class TodoList {
 
-    private static Storage storage = JsonStorage.getInstance();
+    private static TodoListStorage storage = new JsonStorage();
 
     private static TodoList currentTodoList;
 
@@ -29,12 +29,8 @@ public class TodoList {
         return allTasks;
     }
 
-    public static void setStorage(Storage storage) {
+    public static void setStorage(TodoListStorage storage) {
         TodoList.storage = storage;
-    }
-
-    public static Storage getStorage() {
-        return storage;
     }
 
     public static TodoList load() {

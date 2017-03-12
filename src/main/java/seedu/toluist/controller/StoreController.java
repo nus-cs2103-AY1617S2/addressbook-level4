@@ -14,9 +14,9 @@ import seedu.toluist.ui.Ui;
  */
 public class StoreController extends Controller {
     private static final String COMMAND_TEMPLATE = "^save\\s+(?<directory>\\S+)\\s*";
-    private static final String COMMAND_WORD = "save";
+    private static final String COMMAND_WORD = "saveConfig";
     private static final String STORE_DIRECTORY = "directory";
-    private static final String RESULT_MESSAGE_TEMPLATE = "Storage is changed %s";
+    private static final String RESULT_MESSAGE_TEMPLATE = "TodoListStorage is changed %s";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 

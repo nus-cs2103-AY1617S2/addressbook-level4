@@ -10,13 +10,13 @@ import seedu.toluist.testutil.TestUtil;
 import seedu.toluist.testutil.TypicalTestTodoLists;
 
 /**
- * Gui tests for save command
+ * Gui tests for saveConfig command
  */
 public class SaveCommandTest extends ToLuistGuiTest {
     @Test
     public void save() {
         String newPath = TestUtil.getFilePathInSandboxFolder("save_test.json");
-        String command = "save " + newPath;
+        String command = "saveConfig " + newPath;
         commandBox.runCommand(command);
 
         // Check that storage path is changed
