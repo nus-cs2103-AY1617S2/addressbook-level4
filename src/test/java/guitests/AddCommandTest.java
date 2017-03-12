@@ -35,7 +35,7 @@ public class AddCommandTest extends TaskManagerGuiTest {
         assertAddSuccess(td.alice);
 
         //invalid command
-        commandBox.runCommand("adds Johnny");
+        commandBox.runCommand("adds Buy bread");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 

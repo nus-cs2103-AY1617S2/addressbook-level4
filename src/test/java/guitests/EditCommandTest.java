@@ -20,22 +20,22 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby p/91234567 s/bobby@gmail.com n/Block 123, Bobby Street 3 t/husband";
+        String detailsToEdit = "Create a google doc p/lo s/incomplete n/For our project proposal t/";
         int addressBookIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withName("Bobby").withPriority("91234567")
-                .withStatus("bobby@gmail.com").withNote("Block 123, Bobby Street 3").withTags("husband").build();
+        TestTask editedTask = new TaskBuilder().withName("Create a google doc").withPriority("lo")
+                .withStatus("incomplete").withNote("For our project proposal").build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
     }
 
     @Test
     public void edit_notAllFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "t/sweetie t/bestie";
+        String detailsToEdit = "t/cs2103";
         int addressBookIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withTags("sweetie", "bestie").build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withTags("cs2103").build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
     }
@@ -67,13 +67,13 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_missingTaskIndex_failure() {
-        commandBox.runCommand("edit Bobby");
+        commandBox.runCommand("edit Return library book");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void edit_invalidTaskIndex_failure() {
-        commandBox.runCommand("edit 8 Bobby");
+        commandBox.runCommand("edit 8 Return library book");
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
