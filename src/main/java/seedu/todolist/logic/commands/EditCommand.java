@@ -120,4 +120,9 @@ public class EditCommand extends Command {
             return tags;
         }
     }
+
+    @Override
+    public boolean isMutating() {
+        return true;
+    }
 }

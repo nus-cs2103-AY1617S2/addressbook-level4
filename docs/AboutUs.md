@@ -5,7 +5,7 @@ We are a team based in the [School of Computing, National University of Singapor
 ## Project Team
 
 #### [Gng Jia Hui](http://github.com/gngster)
-<img src="images/GngJiaHui.png" width="150"><br>
+<img src="images/gngster.png" width="150"><br>
 Role: Developer <br>
 Responsibilities: Testing. <br>
 Components: UI, Logic.
@@ -13,7 +13,7 @@ Components: UI, Logic.
 -----
 
 #### [Le Minh Phuc](http://github.com/le-minhphuc) <br>
-<img src="images/LeMinhPhuc.jpg" width="150"><br>
+<img src="images/le-minhphuc.png" width="150"><br>
 Role: Developer <br>
 Responsibilities: Documentation, Integration. <br>
 Components: Logic, Storage.
@@ -21,7 +21,7 @@ Components: Logic, Storage.
 -----
 
 #### [Shao Hui](http://github.com/shinlos)
-<img src="images/NgShaoHui.JPG" width="150"><br>
+<img src="images/shinlos.png" width="150"><br>
 Role: Developer <br>
 Responsibilities: Code Quality, Deliverables and Deadlines. <br>
 Components: Model, Storage.
@@ -29,7 +29,7 @@ Components: Model, Storage.
 -----
 
 #### [Low Tian Wei](http://github.com/tianweiweizx)
-<img src="images/LowTianWei.jpg" width="150"><br>
+<img src="images/tianweiweizx.png" width="150"><br>
 Role: Developer <br>
 Responsibilities: Scheduling and Tracking <br>
 Components: Events Center, Log Center.
