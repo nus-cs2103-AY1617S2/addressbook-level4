@@ -31,17 +31,17 @@ public abstract class Command {
      * @return the intended list of tasks
      */
     protected UnmodifiableObservableList<ReadOnlyTask> getTargetTaskList(String targetList) {
-    	UnmodifiableObservableList<ReadOnlyTask> lastShownList;
+        UnmodifiableObservableList<ReadOnlyTask> lastShownList;
         switch (targetList) {
         case ReadOnlyTask.TASK_NAME_FLOATING:
-        	lastShownList = model.getFloatingTaskList();
-        	break;
+            lastShownList = model.getFloatingTaskList();
+            break;
         case ReadOnlyTask.TASK_NAME_NON_FLOATING:
-        	lastShownList = model.getNonFloatingTaskList();
-        	break;
+            lastShownList = model.getNonFloatingTaskList();
+            break;
         default:
-        	lastShownList = model.getNonFloatingTaskList();
-        	break;
+            lastShownList = model.getNonFloatingTaskList();
+            break;
         }
         return lastShownList;
     }

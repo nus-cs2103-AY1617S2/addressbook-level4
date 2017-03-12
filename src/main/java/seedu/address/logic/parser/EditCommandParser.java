@@ -42,14 +42,15 @@ public class EditCommandParser {
         String listNameOrIndexString = listNameOrIndex.get();
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
-            if(!StringUtil.isUnsignedInteger(listNameOrIndexString)){
+            if (!StringUtil.isUnsignedInteger(listNameOrIndexString)) {
                 index = preambleFields.get(1);
                 if (!index.isPresent() || !StringUtil.isUnsignedInteger(index.get())) {
-                    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+                    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                            EditCommand.MESSAGE_USAGE));
                 }
                 editTaskDescriptor.setTitle(ParserUtil.parseTitle(preambleFields.get(2)));
             } else {
-            	index = listNameOrIndex;
+                index = listNameOrIndex;
                 editTaskDescriptor.setTitle(ParserUtil.parseTitle(preambleFields.get(1)));
             }
             editTaskDescriptor.setDate(ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_DATE)));

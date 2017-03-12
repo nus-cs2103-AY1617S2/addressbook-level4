@@ -27,7 +27,7 @@ import seedu.address.model.task.Title;
 public class ParserUtil {
 
     private static final Pattern LISTNAME_INDEX_ARGS_FORMAT = Pattern.compile(
-    		"(?<listName>("
+            "(?<listName>("
     		+ Task.TASK_NAME_FLOATING
     		+ "|"
     		+ Task.TASK_NAME_NON_FLOATING
