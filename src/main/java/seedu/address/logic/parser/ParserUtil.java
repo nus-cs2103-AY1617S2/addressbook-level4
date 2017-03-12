@@ -28,12 +28,12 @@ public class ParserUtil {
 
     private static final Pattern LISTNAME_INDEX_ARGS_FORMAT = Pattern.compile(
             "(?<listName>("
-    		+ Task.TASK_NAME_FLOATING
-    		+ "|"
-    		+ Task.TASK_NAME_NON_FLOATING
-    		+ ")?)"
-    		+ "(\\s?)(?<targetIndex>[1-9]+)"
-    		);
+            + Task.TASK_NAME_FLOATING
+            + "|"
+            + Task.TASK_NAME_NON_FLOATING
+            + ")?)"
+            + "(\\s?)(?<targetIndex>[1-9]+)"
+            );
 
     /**
      * Returns the specified index in the {@code command} if it is a positive unsigned integer

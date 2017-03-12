@@ -54,7 +54,7 @@ public abstract class Command {
      * @throws CommandException
      */
     protected void validateTargetIndex(int targetIndex, List<ReadOnlyTask> taskList) throws CommandException {
-    	if (targetIndex >= taskList.size()) {
+        if (targetIndex >= taskList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
     }
