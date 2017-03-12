@@ -13,7 +13,7 @@ public class TaskBuilder {
 
     private TestTask task;
 
-    public TaskBuilder() {
+    public TaskBuilder() throws IllegalValueException {
         this.task = new TestTask();
     }
 

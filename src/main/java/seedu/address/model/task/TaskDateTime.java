@@ -27,7 +27,7 @@ public class TaskDateTime {
     public TaskDateTime(String dateTime) throws IllegalValueException {
 
         String trimmedDateTime = dateTime.trim();
-        if (!isThereDateTime(trimmedDateTime)) {
+        if (!isThereDateTimeInInput(trimmedDateTime)) {
             this.value = trimmedDateTime;
             this.date = null;
         } else if (!isValidDateTime(trimmedDateTime)) {
@@ -56,8 +56,15 @@ public class TaskDateTime {
     /**
      * Returns true if input string is not null
      */
-    public static boolean isThereDateTime(String value) {
+    public static boolean isThereDateTimeInInput(String value) {
         return !value.equals("");
+    }
+
+    /**
+     * Returns true if this TaskDateTime contains non-null date and time
+     */
+    public boolean isThereDateTime() {
+        return !this.value.equals("");
     }
 
     /**
