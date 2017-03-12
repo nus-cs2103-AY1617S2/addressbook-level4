@@ -72,15 +72,13 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Name("Ali Muster"), new UniqueTagList()),
-                new Task(new Name("Boris Mueller"), new UniqueTagList()),
-                new Task(new Name("Carl Kurz"), new UniqueTagList()),
-                new Task(new Name("Daniel Meier"), new UniqueTagList()),
-                new Task(new Name("Elle Meyer"), new UniqueTagList()),
-                new Task(new Name("Fiona Kunz"), new UniqueTagList()),
-                new Task(new Name("George Best"), new UniqueTagList()),
-                new Task(new Name("Hoon Meier"), new UniqueTagList()),
-                new Task(new Name("Ida Mueller"), new UniqueTagList())
+                new Task(new Name("Buy Eggs and Bread"), new UniqueTagList()),
+                new Task(new Name("Read Book About Software Engineering"), new UniqueTagList()),
+                new Task(new Name("Visit Grandma"), new UniqueTagList()),
+                new Task(new Name("Pay David 20 for cab"), new UniqueTagList()),
+                new Task(new Name("Visit Sarah"), new UniqueTagList()),
+                new Task(new Name("Get fit"), new UniqueTagList()),
+                new Task(new Name("Find a girlfriend"), new UniqueTagList()),
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -94,8 +92,8 @@ public class TestUtil {
     private static Tag[] getSampleTagData() {
         try {
             return new Tag[]{
-                new Tag("relatives"),
-                new Tag("friends")
+                new Tag("movies"),
+                new Tag("work")
             };
         } catch (IllegalValueException e) {
             assert false;
