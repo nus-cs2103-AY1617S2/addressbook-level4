@@ -54,27 +54,27 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void taskListReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link XmlTaskListStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link XmlAddressBookStorageTest} class.
+         * More extensive testing of UserPref saving/reading is done in {@link XmlTaskListStorageTest} class.
          */
-        TaskList original = new TypicalTestTasks().getTypicalAddressBook();
+        TaskList original = new TypicalTestTasks().getTypicalTaskList();
         storageManager.saveTaskList(original);
         ReadOnlyTaskList retrieved = storageManager.readTaskList().get();
         assertEquals(original, new TaskList(retrieved));
     }
 
     @Test
-    public void getAddressBookFilePath() {
+    public void getTaskListFilePath() {
         assertNotNull(storageManager.getTaskListFilePath());
     }
 
     @Test
-    public void handleAddressBookChangedEvent_exceptionThrown_eventRaised() throws IOException {
+    public void handleTaskListChangedEvent_exceptionThrown_eventRaised() throws IOException {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
-        Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub("dummy"),
+        Storage storage = new StorageManager(new XmlTaskListStorageExceptionThrowingStub("dummy"),
                                              new JsonUserPrefsStorage("dummy"));
         EventsCollector eventCollector = new EventsCollector();
         storage.handleTaskListChangedEvent(new TaskListChangedEvent(new TaskList()));
@@ -85,14 +85,14 @@ public class StorageManagerTest {
     /**
      * A Stub class to throw an exception when the save method is called
      */
-    class XmlAddressBookStorageExceptionThrowingStub extends XmlTaskListStorage {
+    class XmlTaskListStorageExceptionThrowingStub extends XmlTaskListStorage {
 
-        public XmlAddressBookStorageExceptionThrowingStub(String filePath) {
+        public XmlTaskListStorageExceptionThrowingStub(String filePath) {
             super(filePath);
         }
 
         @Override
-        public void saveTaskList(ReadOnlyTaskList addressBook, String filePath) throws IOException {
+        public void saveTaskList(ReadOnlyTaskList taskList, String filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }

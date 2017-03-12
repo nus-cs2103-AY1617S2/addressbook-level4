@@ -63,7 +63,7 @@ public class TypicalTestTasks {
         return new TestTask[] { alice, benson, carl, daniel, elle, fiona, george };
     }
 
-    public TaskList getTypicalAddressBook() {
+    public TaskList getTypicalTaskList() {
         TaskList ab = new TaskList();
         loadTaskListWithSampleData(ab);
         return ab;
