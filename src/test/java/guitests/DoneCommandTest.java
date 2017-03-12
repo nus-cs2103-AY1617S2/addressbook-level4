@@ -16,14 +16,13 @@ public class DoneCommandTest extends EzDoGuiTest {
 
     @Test
     public void done_success() {
-
         //marks first task in the list as done
         TestTask[] currentList = td.getTypicalTasks();
         TestTask[] doneList = td.getTypicalDoneTasks();
         int targetIndex = 1;
         TestTask toDone = currentList[targetIndex - 1];
         assertDoneSuccess(targetIndex, currentList, doneList);
-        
+
         //marks the middle task in the list as done
         currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
         doneList = TestUtil.addTasksToList(doneList, toDone);
@@ -46,7 +45,7 @@ public class DoneCommandTest extends EzDoGuiTest {
         //invalid command
         commandBox.runCommand("done a");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
-        
+
         //invalid command
         commandBox.runCommand("dones 1");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
@@ -70,12 +69,11 @@ public class DoneCommandTest extends EzDoGuiTest {
         //confirm the new card contains the right data
         TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToDone.getName().fullName);
         assertMatching(taskToDone, addedCard);
-        
+
         //confirm the undone list does not contain the task just marked as done
         commandBox.runCommand("list");
         assertTrue(taskListPanel.isListMatching(expectedRemainder));
-        
-        
+
     }
 
 }
