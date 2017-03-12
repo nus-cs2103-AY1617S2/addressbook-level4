@@ -31,7 +31,7 @@ public class Deadline {
         return false;
     }
     
-    private boolean hasNoDeadline(){
+    public boolean hasNoDeadline(){
         return value.equals(NO_DEADLINE);
     }
     

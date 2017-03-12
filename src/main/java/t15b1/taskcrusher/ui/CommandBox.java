@@ -44,7 +44,6 @@ public class CommandBox extends UiPart<Region> {
 
             // process result of the command
             setStyleToIndicateCommandSuccess();
-            commandTextField.setText("");
             logger.info("Result: " + commandResult.feedbackToUser);
             raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
 
@@ -53,6 +52,9 @@ public class CommandBox extends UiPart<Region> {
             setStyleToIndicateCommandFailure();
             logger.info("Invalid command: " + commandTextField.getText());
             raise(new NewResultAvailableEvent(e.getMessage()));
+            
+        } finally {
+            commandTextField.setText("");
         }
     }
 

@@ -41,6 +41,7 @@ public class HelpWindow extends UiPart<Region> {
 
     public void show() {
         logger.fine("Showing help page about the application.");
+        //TODO: fix string index out of bounds when switching to our md file url
         dialogStage.showAndWait();
     }
 }
