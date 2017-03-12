@@ -123,7 +123,7 @@ command `delete 1`.
 <img src="images\SDforDeleteTask.png" width="800"><br>
 _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 
->Note how the `Model` simply raises a `TaskItChangedEvent` when the Address Book data are changed,
+>Note how the `Model` simply raises a `TaskItChangedEvent` when the Task Manager data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
@@ -191,8 +191,8 @@ _Figure 2.4.1 : Structure of the Model Component_
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
-* exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
+* stores the Task Manager data.
+* exposes a `UnmodifiableObservableList<ReadOnly>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
@@ -208,7 +208,7 @@ _Figure 2.5.1 : Structure of the Storage Component_
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the Task Manager data in xml format and read it back.
 
 ### 2.6. Common classes
 
@@ -332,7 +332,7 @@ Here are the steps to convert the project documentation files to PDF format.
 
 ### 5.6. Managing Dependencies
 
-A project often depends on third-party libraries. For example, Address Book depends on the
+A project often depends on third-party libraries. For example, Task Manager depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
 can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
 is better than these alternatives.<br>
@@ -398,7 +398,7 @@ Use case ends.
 > Use case resumes at step 1 <br>
 Use case ends.
 
-1b. The end time of an event is before the start time
+1b. The end date or time of an event is before the start date or time
 > 1b1. TaskIt notifies the user of this error
 > Use case resumes at step 1 <br>
 Use case ends.
