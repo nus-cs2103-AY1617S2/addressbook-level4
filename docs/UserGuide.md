@@ -23,9 +23,11 @@ For an ez™ life, use ezDo™.
 
 1. Ensure that you have [Java version `1.8.0_60`](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) or later installed in your computer.<br>
 2. Download the latest `ezDo.jar` from the [releases](../../../releases) tab. <p align="center"><img src="images/Release.png" width="500"></p>
-3. Copy the latest `ezDo.jar` to the folder you want to use. This folder will be the home folder for ezDo. <br>
+3. Copy the latest `ezDo.jar` to the folder you want to use. This folder will be the home folder for ezDo.
 
-### Launch 
+<br>
+
+### Launch
 To start the application, double-click on `ezDo.jar`. The user interface should appear in a few seconds. <p align="center"><img src="images/Ui.png" width="500"></p><br>
 
 ### Visual Introduction
@@ -43,9 +45,7 @@ Each task in ezDo is represented by a taskcard with the following properties:<br
     * <font color="orange">Orange</font>: medium priority (2)
     * <font color="red">Red</font>: high priority (3)</br>
 * Taskcards may have a start/end time.<br>
-* Taskcards may have any number of tags associated with it.<br>
-
-<br>
+* Taskcards may have any number of tags associated with it.
 
 Now that we are familiar with ezDo's interface, let us get started with the features of ezDo!
 
@@ -186,10 +186,10 @@ Example:
 
 You have just added a few tasks to ezDo with the Add command:
 
- **`add Dye hair p/3 s/06/05/2017 d/07/08/2017`**
- **`add Buy milk p/1 s/04/05/2017 d/09/06/2017`** 
- **`add Cut hair p/2 s/05/05/2017 d/08/07/2017`** 
- 
+ **`add Dye hair p/3 s/06/05/2017 d/07/08/2017`**<br>
+ **`add Buy milk p/1 s/04/05/2017 d/09/06/2017`**<br>
+ **`add Cut hair p/2 s/05/05/2017 d/08/07/2017`**
+
 You can now sort the tasks by name:
 
 <p align="center"><img src="images/Sorting.png" width="700"></p>
@@ -232,6 +232,7 @@ Examples:
 Lists all the tasks in ezDo. <br>
 Format:
 **`list`**
+
 <br>
 
 ### 8. Reverts the command: `undo / u`
@@ -288,8 +289,6 @@ Format:
 
 <br>
 
-
-
 ### 12. Viewing help: `help / h`
 ---
 Brings up the help guide in a separate window. <br>
@@ -305,13 +304,12 @@ Format:
 **Question: How do I transfer my data to another computer?** <br>
 **Answer**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ezDo.
 <br>
+
 **Question: How do I save my ezDo tasks?** <br>
 **Answer**: ezDo data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 <br>
 
-
 ## Command Summary
-<br>
 
 |Command|Description                                                |
 |:-----:|---------------------------------------------------------|
