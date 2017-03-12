@@ -34,10 +34,10 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
         commandBox.runCommand("find n/Elle");
 
         int filteredTaskListIndex = 1;
-        int taskBossIndex = 5;
+        int taskBossIndex = 8;
 
         TestTask taskToMarkDone = expectedTasksList[taskBossIndex - 1];
-        TestTask markedDoneTask = new TaskBuilder(taskToMarkDone).withName("Belle").build();
+        TestTask markedDoneTask = new TaskBuilder(taskToMarkDone).withCategories("Done").build();
 
         assertMarkDoneSuccess(filteredTaskListIndex, taskBossIndex, markedDoneTask);
     }
