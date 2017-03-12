@@ -527,7 +527,7 @@ public class LogicManagerTest {
             );
         }
 
-        Priority generatePriorityWithSeed(int seed) {
+        private Priority generatePriorityWithSeed(int seed) {
             switch(seed) {
             case 1:
                 return new Priority(Priority.Type.LOW);
