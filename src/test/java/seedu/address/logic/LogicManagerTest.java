@@ -34,6 +34,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.NotDoneCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -343,6 +344,35 @@ public class LogicManagerTest {
 
         assertCommandSuccess("done 2",
                 String.format(DoneCommand.MESSAGE_DONE_TASK_SUCCESS, doneTask),
+                expectedAB,
+                expectedAB.getTaskList());
+    }
+    
+    @Test
+    public void execute_notdone_invalidArgsFormat() {
+    	String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, NotDoneCommand.MESSAGE_USAGE);
+    	assertCommandFailure("notdone ", expectedMessage);
+    }
+    
+    @Test
+    public void execute_notdoneIndexNotFound_errorMessageShown() throws Exception {
+        assertIndexNotFoundBehaviorForCommand("notdone");
+    }
+    
+    @Test
+    public void execute_notdone_valid() throws Exception{
+        TestDataHelper helper = new TestDataHelper();
+        List<Task> threeTasks = helper.generateTaskList(3);
+        Task taskToNotDone = threeTasks.get(1);
+        taskToNotDone.setDone(true);
+        Task notDoneTask = new Task(taskToNotDone.getName(), taskToNotDone.getTags(), false);
+
+        TaskManager expectedAB = helper.generateTaskManager(threeTasks);
+        expectedAB.updateTask(1, notDoneTask);
+        helper.addToModel(model, threeTasks);
+
+        assertCommandSuccess("notdone 2",
+                String.format(NotDoneCommand.MESSAGE_NOTDONE_TASK_SUCCESS, notDoneTask),
                 expectedAB,
                 expectedAB.getTaskList());
     }
