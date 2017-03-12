@@ -26,9 +26,12 @@
 
 #### Acknowledgements
 
-* Some parts of this sample application were inspired by the excellent
-  [Java FX tutorial](http://code.makery.ch/library/javafx-8-tutorial/) by *Marco Jakob*.
+* Some parts of this sample application were inspired by the excellent [Java FX tutorial](http://code.makery.ch/library/javafx-8-tutorial/) by *Marco Jakob*.
 * The sample project created by [SE-EDU](https://github.com/se-edu/) initiative.
 
+#### External Libraries
+
+* [Natty](http://natty.joestelmach.com/) - A framework to parse relative dates into absolute dates
+* [itextPDF](http://itextpdf.com/) - For exporting data to PDF files
 
 #### Licence : [MIT](LICENSE)
