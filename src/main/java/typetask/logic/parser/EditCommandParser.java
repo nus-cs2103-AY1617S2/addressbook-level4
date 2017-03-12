@@ -12,8 +12,9 @@ import java.util.Optional;
 import typetask.commons.exceptions.IllegalValueException;
 import typetask.logic.commands.Command;
 import typetask.logic.commands.EditCommand;
-import typetask.logic.commands.IncorrectCommand;
 import typetask.logic.commands.EditCommand.EditTaskDescriptor;
+import typetask.logic.commands.IncorrectCommand;
+
 
 /**
  * Parses input arguments and creates a new EditCommand object
