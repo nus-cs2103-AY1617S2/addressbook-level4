@@ -1,15 +1,5 @@
 package seedu.toluist.controller;
 
-import seedu.toluist.commons.core.LogsCenter;
-import seedu.toluist.commons.core.Messages;
-import seedu.toluist.controller.commons.IndexTokenizer;
-import seedu.toluist.dispatcher.CommandResult;
-import seedu.toluist.model.CommandAliasConfig;
-import seedu.toluist.model.Task;
-import seedu.toluist.model.TodoList;
-import seedu.toluist.ui.Ui;
-import seedu.toluist.ui.UiStore;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +7,15 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import seedu.toluist.commons.core.LogsCenter;
+import seedu.toluist.commons.core.Messages;
+import seedu.toluist.controller.commons.IndexTokenizer;
+import seedu.toluist.dispatcher.CommandResult;
+import seedu.toluist.model.Task;
+import seedu.toluist.model.TodoList;
+import seedu.toluist.ui.Ui;
+import seedu.toluist.ui.UiStore;
 
 /**
  * Mark Controller is responsible for marking task complete or incomplete
@@ -32,8 +31,6 @@ public class MarkController extends Controller {
     private static final String MARK_COMPLETE = "complete";
     private static final String MARK_INCOMPLETE = "incomplete";
     private final Logger logger = LogsCenter.getLogger(getClass());
-
-    private final CommandAliasConfig aliasConfig = CommandAliasConfig.getInstance();
 
     public MarkController(Ui renderer) {
         super(renderer);

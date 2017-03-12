@@ -5,10 +5,12 @@ import static org.junit.Assert.assertEquals;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
+
 import org.junit.rules.TestName;
 import org.testfx.api.FxToolkit;
 
@@ -18,6 +20,7 @@ import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.TaskListHandle;
 
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 import seedu.toluist.TestApp;
 import seedu.toluist.commons.core.EventsCenter;
@@ -107,10 +110,17 @@ public abstract class ToLuistGuiTest {
     }
 
     /**
+     * Returns the lists of tasks shown on UI
+     */
+    protected ObservableList<Task> getTasksShown() {
+        return taskList.getTaskList().getItems();
+    }
+
+    /**
      * Check if a task is shown in the TaskList
      */
     protected boolean isTaskShown(Task task) {
-        boolean taskIsPresent = taskList.getTaskList().getItems().stream()
+        boolean taskIsPresent = getTasksShown().stream()
                 .filter(t -> t.equals(task))
                 .findFirst()
                 .isPresent();
