@@ -23,11 +23,13 @@ public class EditCommandTest extends TaskBossGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby p/1 i/Block 123, Bobby Street 3 c/husband";
+        String detailsToEdit = "Alice p/1 sd/10am Feb 19, 2017 ed/10am Feb 28, 2017 i/123,"
+                + " Jurong West Ave 6, #08-111 c/friends";
         int taskBossIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withName("Bobby").withPriorityLevel("1")
-               .withInformation("Block 123, Bobby Street 3").withCategories("husband").build();
+        TestTask editedTask = new TaskBuilder().withName("Alice").withPriorityLevel("1")
+               .withStartDateTime("10am Feb 19, 2017").withEndDateTime("10am Feb 28, 2017")
+               .withInformation("123, Jurong West Ave 6, #08-111").withCategories("friends").build();
 
         assertEditSuccess(taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
     }
@@ -100,7 +102,7 @@ public class EditCommandTest extends TaskBossGuiTest {
 
     @Test
     public void edit_duplicateTask_failure() {
-        commandBox.runCommand("edit 3 Alice Pauline p/3 "
+        commandBox.runCommand("edit 3 Alice Pauline p/3 sd/Feb 19, 2017 5pm ed/Feb 28, 2017 5pm"
                                 + "i/123, Jurong West Ave 6, #08-111 c/friends");
 
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);

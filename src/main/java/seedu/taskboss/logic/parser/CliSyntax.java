@@ -14,7 +14,9 @@ public class CliSyntax {
     public static final Prefix PREFIX_INFORMATION = new Prefix("i/");
     public static final Prefix PREFIX_CATEGORY = new Prefix("c/");
     public static final Prefix PREFIX_NAME = new Prefix("n/");
-    public static final Prefix PREFIX_DATE = new Prefix("d/");
+    public static final Prefix PREFIX_START_DATE = new Prefix("sd/");
+    public static final Prefix PREFIX_END_DATE = new Prefix("ed/");
+
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT =
             Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace

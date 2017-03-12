@@ -18,6 +18,8 @@ public class TaskCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
     private static final String INFORMATION_FIELD_ID = "#information";
     private static final String PRIORITY_FIELD_ID = "#priorityLevel";
+    private static final String START_DATE_FIELD_ID = "#startDateTime";
+    private static final String END_DATE_FIELD_ID = "#endDateTime";
     private static final String CATEGORIES_FIELD_ID = "#categories";
 
     private Node node;
@@ -41,6 +43,14 @@ public class TaskCardHandle extends GuiHandle {
 
     public String getPriority() {
         return getTextFromLabel(PRIORITY_FIELD_ID);
+    }
+
+    public String getStartDateTime() {
+        return getTextFromLabel(START_DATE_FIELD_ID);
+    }
+
+    public String getEndDateTime() {
+        return getTextFromLabel(END_DATE_FIELD_ID);
     }
 
     public List<String> getCategories() {
@@ -70,6 +80,8 @@ public class TaskCardHandle extends GuiHandle {
     public boolean isSameTask(ReadOnlyTask task) {
         return getFullName().equals(task.getName().fullName)
                 && getPriority().equals(task.getPriorityLevel().value)
+                && getStartDateTime().equals(task.getStartDateTime().value)
+                && getEndDateTime().equals(task.getEndDateTime().value)
                 && getInformation().equals(task.getInformation().value)
                 && getCategories().equals(getCategories(task.getCategories()));
     }
@@ -80,6 +92,8 @@ public class TaskCardHandle extends GuiHandle {
             TaskCardHandle handle = (TaskCardHandle) obj;
             return getFullName().equals(handle.getFullName())
                     && getPriority().equals(handle.getPriority())
+                    && getStartDateTime().equals(handle.getStartDateTime())
+                    && getEndDateTime().equals(handle.getEndDateTime())
                     && getInformation().equals(handle.getInformation())
                     && getCategories().equals(handle.getCategories());
         }

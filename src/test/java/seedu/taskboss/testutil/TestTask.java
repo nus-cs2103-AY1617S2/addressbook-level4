@@ -1,6 +1,9 @@
 package seedu.taskboss.testutil;
 
+import seedu.taskboss.commons.exceptions.IllegalValueException;
+import seedu.taskboss.logic.parser.ParserUtil;
 import seedu.taskboss.model.category.UniqueCategoryList;
+import seedu.taskboss.model.task.DateTime;
 import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
@@ -14,6 +17,8 @@ public class TestTask implements ReadOnlyTask {
     private Name name;
     private Information information;
     private PriorityLevel priorityLevel;
+    private DateTime startDateTime;
+    private DateTime endDateTime;
     private UniqueCategoryList categories;
 
     public TestTask() {
@@ -26,6 +31,8 @@ public class TestTask implements ReadOnlyTask {
     public TestTask(TestTask taskToCopy) {
         this.name = taskToCopy.getName();
         this.priorityLevel = taskToCopy.getPriorityLevel();
+        this.startDateTime = taskToCopy.getStartDateTime();
+        this.endDateTime = taskToCopy.getEndDateTime();
         this.information = taskToCopy.getInformation();
         this.categories = taskToCopy.getCategories();
     }
@@ -42,6 +49,16 @@ public class TestTask implements ReadOnlyTask {
         this.priorityLevel = priorityLevel;
     }
 
+    public void setStartDateTime(DateTime startDateTime) throws IllegalValueException {
+        DateTime parsedStartDateTime = new DateTime(ParserUtil.parseStartDate(startDateTime.value));
+        this.startDateTime = parsedStartDateTime;
+    }
+
+    public void setEndDateTime(DateTime endDateTime) throws IllegalValueException {
+        DateTime parsedEndDateTime = new DateTime(ParserUtil.parseEndDate(endDateTime.value));
+        this.endDateTime = parsedEndDateTime;
+    }
+
     public void setCategories(UniqueCategoryList categories) {
         this.categories = categories;
     }
@@ -54,6 +71,16 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public PriorityLevel getPriorityLevel() {
         return priorityLevel;
+    }
+
+    @Override
+    public DateTime getStartDateTime() {
+        return startDateTime;
+    }
+
+    @Override
+    public DateTime getEndDateTime() {
+        return endDateTime;
     }
 
     @Override
@@ -74,8 +101,10 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + "n/" + this.getName().fullName + " ");
-        sb.append("i/" + this.getInformation().value + " ");
         sb.append("p/" + this.getPriorityLevel().value + " ");
+        sb.append("sd/" + this.getStartDateTime().value + " ");
+        sb.append("ed/" + this.getEndDateTime().value + " ");
+        sb.append("i/" + this.getInformation().value + " ");
         this.getCategories().asObservableList().stream().forEach(s -> sb.append("c/" + s.categoryName + " "));
         return sb.toString();
     }

@@ -24,6 +24,7 @@ import seedu.taskboss.commons.core.EventsCenter;
 import seedu.taskboss.commons.events.model.TaskBossChangedEvent;
 import seedu.taskboss.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskboss.commons.events.ui.ShowHelpRequestEvent;
+import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.AddCommand;
 import seedu.taskboss.logic.commands.ClearCommand;
 import seedu.taskboss.logic.commands.Command;
@@ -35,12 +36,15 @@ import seedu.taskboss.logic.commands.HelpCommand;
 import seedu.taskboss.logic.commands.ListCommand;
 import seedu.taskboss.logic.commands.SelectCommand;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
+import seedu.taskboss.logic.parser.DateParser;
+import seedu.taskboss.logic.parser.ParserUtil;
 import seedu.taskboss.model.Model;
 import seedu.taskboss.model.ModelManager;
 import seedu.taskboss.model.ReadOnlyTaskBoss;
 import seedu.taskboss.model.TaskBoss;
 import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.category.UniqueCategoryList;
+import seedu.taskboss.model.task.DateTime;
 import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
@@ -198,22 +202,22 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 12345 i/validInformation.butNoPriorityLevelPrefix",
-                expectedMessage);
-        assertCommandFailure("add Valid Name p/1 validInformation.butNoInformationPrefix",
-                expectedMessage);
+        assertCommandFailure("add Valid Name p/1 sd/today ed/tomorrow", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidTaskData() {
-        assertCommandFailure("add n/[]\\[;] p/1 i/valid, information",
+        assertCommandFailure("add n/[]\\[;] p/1 sd/today ed/tomorrow i/valid, information",
                 Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add n/Valid Name p/not_numbers i/valid, information",
+        assertCommandFailure("add n/Valid Name p/not_numbers sd/today ed/tomorrow i/valid, information",
                 PriorityLevel.MESSAGE_PRIORITY_CONSTRAINTS);
-        assertCommandFailure("add n/Valid Name p/1 i/valid, information c/invalid_-[.category",
+        assertCommandFailure("add n/Valid Name p/1 sd/today ed/tomorrow "
+                + "i/valid, information c/invalid_-[.category",
                 Category.MESSAGE_CATEGORY_CONSTRAINTS);
-
+        assertCommandFailure("add n/Valid Name p/1 sd/today to next week ed/tomorrow i/valid, information",
+                DateParser.getStartDateMultipleDatesError());
+        assertCommandFailure("add n/Valid Name p/1 sd/invalid date ed/monday to friday i/valid, information",
+                DateParser.getStartDateInvalidDateError());
     }
 
     @Test
@@ -262,22 +266,15 @@ public class LogicManagerTest {
      * Confirms the 'invalid argument index number behaviour' for the given
      * command targeting a single task in the shown list, using visible index.
      *
-     * @param commandWord
-     *            to test assuming it targets a single task in the last shown
-     *            list based on visible index.
+     * @param commandWord to test assuming it targets a single task in the last shown
+     * list based on visible index.
      */
     private void assertIncorrectIndexFormatBehaviorForCommand(String commandWord, String expectedMessage)
             throws Exception {
         assertCommandFailure(commandWord, expectedMessage); // index missing
-        assertCommandFailure(commandWord + " +1", expectedMessage); // index
-        // should be
-        // unsigned
-        assertCommandFailure(commandWord + " -1", expectedMessage); // index
-        // should be
-        // unsigned
-        assertCommandFailure(commandWord + " 0", expectedMessage); // index
-        // cannot be
-        // 0
+        assertCommandFailure(commandWord + " +1", expectedMessage); // index should be unsigned
+        assertCommandFailure(commandWord + " -1", expectedMessage); // index should be unsigned
+        assertCommandFailure(commandWord + " 0", expectedMessage); // index åcannot be 0
         assertCommandFailure(commandWord + " not_a_number", expectedMessage);
     }
 
@@ -418,11 +415,14 @@ public class LogicManagerTest {
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
             PriorityLevel privatePriorityLevel = new PriorityLevel("1");
+            DateTime startDateTime = new DateTime(ParserUtil.parseStartDate("today 5pm"));
+            DateTime endDateTime = new DateTime(ParserUtil.parseEndDate("tomorrow 8pm"));
             Information privateInformation = new Information("111, alpha street");
             Category category1 = new Category("category1");
             Category category2 = new Category("longercategory2");
             UniqueCategoryList categories = new UniqueCategoryList(category1, category2);
-            return new Task(name, privatePriorityLevel, privateInformation, categories);
+            return new Task(name, privatePriorityLevel, startDateTime,
+                    endDateTime, privateInformation, categories);
         }
 
         /**
@@ -437,20 +437,25 @@ public class LogicManagerTest {
             return new Task(
                     new Name("Task " + seed),
                     new PriorityLevel("" + Math.abs(seed)),
+                    new DateTime("Feb 19 10am, 2017"),
+                    new DateTime("Feb 20 10am, 2017"),
                     new Information("House of " + seed),
                     new UniqueCategoryList(new Category("category" + Math.abs(seed)),
                            new Category("category" + Math.abs(seed + 1)))
             );
         }
 
-        /** Generates the correct add command based on the task given */
-        String generateAddCommand(Task p) {
+        /** Generates the correct add command based on the task given
+         * @throws IllegalValueException */
+        private String generateAddCommand(Task p) throws IllegalValueException {
             StringBuffer cmd = new StringBuffer();
 
             cmd.append("add ");
 
             cmd.append(" n/").append(p.getName().toString());
             cmd.append(" p/").append(p.getPriorityLevel());
+            cmd.append(" sd/").append(ParserUtil.parseStartDate(p.getStartDateTime().toString()));
+            cmd.append(" ed/").append(ParserUtil.parseEndDate(p.getEndDateTime().toString()));
             cmd.append(" i/").append(p.getInformation());
 
             UniqueCategoryList categories = p.getCategories();
@@ -540,6 +545,8 @@ public class LogicManagerTest {
             return new Task(
                     new Name(name),
                     new PriorityLevel("1"),
+                    new DateTime("Feb 19 10am, 2017"),
+                    new DateTime("Feb 20 10am, 2017"),
                     new Information("House of 1"),
                     new UniqueCategoryList(new Category("category"))
             );

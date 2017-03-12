@@ -14,17 +14,23 @@ public class Task implements ReadOnlyTask {
     private Name name;
     private PriorityLevel priorityLevel;
     private Information information;
+    private DateTime startDateTime;
+    private DateTime endDateTime;
 
     private UniqueCategoryList categories;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, PriorityLevel priorityLevel, Information information, UniqueCategoryList categories) {
-        assert !CollectionUtil.isAnyNull(name, priorityLevel, information, categories);
+    public Task(Name name, PriorityLevel priorityLevel, DateTime startDateTime,
+            DateTime endDateTime, Information information, UniqueCategoryList categories) {
+        assert !CollectionUtil.isAnyNull(name, priorityLevel, startDateTime,
+                endDateTime, information, categories);
 
         this.name = name;
         this.priorityLevel = priorityLevel;
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
         this.information = information;
         // protect internal categories from changes in the arg list
         this.categories = new UniqueCategoryList(categories);
@@ -34,7 +40,8 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyPerson.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getPriorityLevel(), source.getInformation(), source.getCategories());
+        this(source.getName(), source.getPriorityLevel(), source.getStartDateTime(),
+                source.getEndDateTime(), source.getInformation(), source.getCategories());
     }
 
     public void setName(Name name) {
@@ -55,6 +62,26 @@ public class Task implements ReadOnlyTask {
     @Override
     public PriorityLevel getPriorityLevel() {
         return priorityLevel;
+    }
+
+    public void setStartDateTime(DateTime startDateTime) {
+        assert startDateTime != null;
+        this.startDateTime = startDateTime;
+    }
+
+    @Override
+    public DateTime getStartDateTime() {
+        return startDateTime;
+    }
+
+    public void setEndDateTime(DateTime endDateTime) {
+        assert endDateTime != null;
+        this.endDateTime = endDateTime;
+    }
+
+    @Override
+    public DateTime getEndDateTime() {
+        return endDateTime;
     }
 
     public void setInformation(Information information) {
@@ -87,6 +114,8 @@ public class Task implements ReadOnlyTask {
 
         this.setName(replacement.getName());
         this.setPriorityLevel(replacement.getPriorityLevel());
+        this.setStartDateTime(replacement.getStartDateTime());
+        this.setEndDateTime(replacement.getEndDateTime());
         this.setInformation(replacement.getInformation());
         this.setCategories(replacement.getCategories());
     }
@@ -101,7 +130,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, priorityLevel, information, categories);
+        return Objects.hash(name, priorityLevel, startDateTime, endDateTime, information, categories);
     }
 
     @Override

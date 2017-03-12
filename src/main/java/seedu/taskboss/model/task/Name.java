@@ -9,7 +9,7 @@ import seedu.taskboss.commons.exceptions.IllegalValueException;
 public class Name {
 
     public static final String MESSAGE_NAME_CONSTRAINTS =
-            "Person names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Task names should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
      * The first character of the information must not be a whitespace,

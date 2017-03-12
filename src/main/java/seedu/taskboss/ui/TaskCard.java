@@ -20,6 +20,10 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label priorityLevel;
     @FXML
+    private Label startDateTime;
+    @FXML
+    private Label endDateTime;
+    @FXML
     private Label information;
     @FXML
     private FlowPane categories;
@@ -29,6 +33,8 @@ public class TaskCard extends UiPart<Region> {
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
         priorityLevel.setText(task.getPriorityLevel().value);
+        startDateTime.setText(task.getStartDateTime().value);
+        endDateTime.setText(task.getEndDateTime().value);
         information.setText(task.getInformation().value);
 
         initCategories(task);

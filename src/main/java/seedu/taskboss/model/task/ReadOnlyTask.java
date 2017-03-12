@@ -11,6 +11,8 @@ public interface ReadOnlyTask {
     Name getName();
     PriorityLevel getPriorityLevel();
     Information getInformation();
+    DateTime getStartDateTime();
+    DateTime getEndDateTime();
 
     /**
      * The returned CategoryList is a deep copy of the internal CategoryList,
@@ -26,6 +28,8 @@ public interface ReadOnlyTask {
                 || (other != null // this is first to avoid NPE below
                 && other.getName().equals(this.getName()) // state checks here onwards
                 && other.getPriorityLevel().equals(this.getPriorityLevel())
+                && other.getStartDateTime().equals(this.getStartDateTime())
+                && other.getEndDateTime().equals(this.getEndDateTime())
                 && other.getInformation().equals(this.getInformation()));
     }
 
@@ -37,6 +41,10 @@ public interface ReadOnlyTask {
         builder.append(getName())
                 .append(" Priority Level: ")
                 .append(getPriorityLevel())
+                .append(" Start Date: ")
+                .append(getStartDateTime())
+                .append(" End Date: ")
+                .append(getEndDateTime())
                 .append(" Information: ")
                 .append(getInformation())
                 .append(" Categories: ");

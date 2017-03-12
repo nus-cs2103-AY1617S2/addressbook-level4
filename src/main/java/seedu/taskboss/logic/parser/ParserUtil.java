@@ -15,6 +15,7 @@ import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.commons.util.StringUtil;
 import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.category.UniqueCategoryList;
+import seedu.taskboss.model.task.DateTime;
 import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
@@ -81,6 +82,74 @@ public class ParserUtil {
             throws IllegalValueException {
         assert priorityLevel != null;
         return priorityLevel.isPresent() ? Optional.of(new PriorityLevel(priorityLevel.get())) : Optional.empty();
+    }
+
+    public static Optional<DateTime> parseStartDateTime(Optional<String> startDateTime) {
+        assert startDateTime != null;
+
+        if (startDateTime.isPresent()) {
+            try {
+                DateParser dateParser = new DateParser();
+                DateTime dt = dateParser.parseStartDate(startDateTime.toString().trim());
+                return Optional.of(dt);
+            } catch (IllegalValueException ive) {
+                return Optional.empty();
+            }
+        } else {
+            return Optional.empty();
+        }
+    }
+
+    public static Optional<DateTime> parseEndDateTime(Optional<String> endDateTime) {
+        assert endDateTime != null;
+
+        if (endDateTime.isPresent()) {
+            try {
+                DateParser dateParser = new DateParser();
+                DateTime dt = dateParser.parseEndDate(endDateTime.toString().trim());
+                return Optional.of(dt);
+            } catch (IllegalValueException ive) {
+                return Optional.empty();
+            }
+        } else {
+            return Optional.empty();
+        }
+    }
+
+    /**
+     * Parses a {@code String date}
+     *
+     * @return parsed dateTime in String
+     */
+    public static String parseStartDate(String startDateTime) throws IllegalValueException {
+        assert startDateTime != null;
+
+        try {
+            DateParser dateParser = new DateParser();
+            DateTime dateTimeParsed = dateParser.parseStartDate(startDateTime.trim());
+            return dateTimeParsed.toString();
+        } catch (IllegalValueException ive) {
+            throw new IllegalValueException(ive.getMessage());
+        }
+
+    }
+
+    /**
+     * Parses a {@code String date}
+     *
+     * @return parsed dateTime in String
+     */
+    public static String parseEndDate(String endDateTime) throws IllegalValueException {
+        assert endDateTime != null;
+
+        try {
+            DateParser dateParser = new DateParser();
+            DateTime dateTimeParsed = dateParser.parseEndDate(endDateTime.trim());
+            return dateTimeParsed.toString();
+        } catch (IllegalValueException ive) {
+            throw new IllegalValueException(ive.getMessage());
+        }
+
     }
 
     /**

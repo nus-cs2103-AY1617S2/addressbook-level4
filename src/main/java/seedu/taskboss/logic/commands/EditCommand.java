@@ -7,6 +7,7 @@ import seedu.taskboss.commons.core.Messages;
 import seedu.taskboss.commons.util.CollectionUtil;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.model.category.UniqueCategoryList;
+import seedu.taskboss.model.task.DateTime;
 import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
@@ -25,6 +26,7 @@ public class EditCommand extends Command {
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) [NAME] [p/PRIORITY_LEVEL]"
+            + " [sd/START_DATE] [ed/END_DATE]"
             + " [i/INFORMATION ] [c/CATEGORY]...\n"
             + "Example: " + COMMAND_WORD + " 1 p/1";
 
@@ -80,10 +82,17 @@ public class EditCommand extends Command {
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
         PriorityLevel updatedPriorityLevel = editTaskDescriptor.getPriorityLevel()
                 .orElseGet(taskToEdit::getPriorityLevel);
-        Information updatedInformation = editTaskDescriptor.getInformation().orElseGet(taskToEdit::getInformation);
-        UniqueCategoryList updatedCategories = editTaskDescriptor.getCategories().orElseGet(taskToEdit::getCategories);
+        DateTime updatedStartDateTime = editTaskDescriptor.getStartDateTime()
+                .orElseGet(taskToEdit::getStartDateTime);
+        DateTime updatedEndDateTime = editTaskDescriptor.getEndDateTime()
+                .orElseGet(taskToEdit::getEndDateTime);
+        Information updatedInformation = editTaskDescriptor.getInformation()
+                .orElseGet(taskToEdit::getInformation);
+        UniqueCategoryList updatedCategories = editTaskDescriptor.getCategories()
+                .orElseGet(taskToEdit::getCategories);
 
-        return new Task(updatedName, updatedPriorityLevel, updatedInformation, updatedCategories);
+        return new Task(updatedName, updatedPriorityLevel, updatedStartDateTime, updatedEndDateTime,
+                updatedInformation, updatedCategories);
     }
 
     /**
@@ -95,6 +104,8 @@ public class EditCommand extends Command {
 
         private Optional<PriorityLevel> priorityLevel = Optional.empty();
         private Optional<Information> information = Optional.empty();
+        private Optional<DateTime> startDateTime = Optional.empty();
+        private Optional<DateTime> endDateTime = Optional.empty();
         private Optional<UniqueCategoryList> categories = Optional.empty();
 
         public EditTaskDescriptor() {}
@@ -102,6 +113,8 @@ public class EditCommand extends Command {
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.name = toCopy.getName();
             this.priorityLevel = toCopy.getPriorityLevel();
+            this.startDateTime = toCopy.getStartDateTime();
+            this.endDateTime = toCopy.getEndDateTime();
             this.information = toCopy.getInformation();
             this.categories = toCopy.getCategories();
         }
@@ -110,7 +123,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.priorityLevel, this.information, this.categories);
+            return CollectionUtil.isAnyPresent(this.name, this.priorityLevel, this.startDateTime,
+                    this.endDateTime, this.information, this.categories);
         }
 
         public void setName(Optional<Name> name) {
@@ -129,6 +143,24 @@ public class EditCommand extends Command {
 
         public Optional<PriorityLevel> getPriorityLevel() {
             return priorityLevel;
+        }
+
+        public void setStartDateTime(Optional<DateTime> startDateTime) {
+            assert startDateTime != null;
+            this.startDateTime = startDateTime;
+        }
+
+        public Optional<DateTime> getStartDateTime() {
+            return startDateTime;
+        }
+
+        public void setEndDateTime(Optional<DateTime> endDateTime) {
+            assert endDateTime != null;
+            this.endDateTime = endDateTime;
+        }
+
+        public Optional<DateTime> getEndDateTime() {
+            return endDateTime;
         }
 
         public void setInformation(Optional<Information> information) {

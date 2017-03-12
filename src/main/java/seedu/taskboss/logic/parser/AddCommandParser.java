@@ -2,9 +2,11 @@ package seedu.taskboss.logic.parser;
 
 import static seedu.taskboss.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_INFORMATION;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_START_DATE;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -25,12 +27,15 @@ public class AddCommandParser {
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_NAME, PREFIX_PRIORITY, PREFIX_INFORMATION, PREFIX_CATEGORY);
+                new ArgumentTokenizer(PREFIX_NAME, PREFIX_PRIORITY, PREFIX_START_DATE,
+                        PREFIX_END_DATE, PREFIX_INFORMATION, PREFIX_CATEGORY);
         argsTokenizer.tokenize(args);
         try {
             return new AddCommand(
                     argsTokenizer.getValue(PREFIX_NAME).get(),
                     checkEmpty(argsTokenizer.getValue(PREFIX_PRIORITY)),
+                    checkStartDateTimeEmpty(argsTokenizer.getValue(PREFIX_START_DATE)),
+                    checkEndDateTimeEmpty(argsTokenizer.getValue(PREFIX_END_DATE)),
                     checkEmpty(argsTokenizer.getValue(PREFIX_INFORMATION)),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_CATEGORY))
             );
@@ -44,6 +49,22 @@ public class AddCommandParser {
     private String checkEmpty(Optional<String> test) {
         try {
             return test.get();
+        } catch (NoSuchElementException nsee) {
+            return "";
+        }
+    }
+
+    private String checkStartDateTimeEmpty(Optional<String> test) throws IllegalValueException {
+        try {
+            return ParserUtil.parseStartDate(test.get());
+        } catch (NoSuchElementException nsee) {
+            return "";
+        }
+    }
+
+    private String checkEndDateTimeEmpty(Optional<String> test) throws IllegalValueException {
+        try {
+            return ParserUtil.parseEndDate(test.get());
         } catch (NoSuchElementException nsee) {
             return "";
         }

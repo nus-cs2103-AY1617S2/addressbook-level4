@@ -7,6 +7,7 @@ import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.category.UniqueCategoryList;
+import seedu.taskboss.model.task.DateTime;
 import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
@@ -21,9 +22,10 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to TaskBoss. "
-            + "Parameters: n/NAME p/PRIORITY_LEVEL i/INFORMATION [c/CATEGORY]...\n"
+            + "Parameters: NAME p/PRIORITY_LEVEL sd/START_DATE ed/END_DATE "
+            + "i/INFORMATION [c/CATEGORY]...\n"
             + "Example: " + COMMAND_WORD
-            + " n/Submit report p/3 i/inform partner c/Work c/Project";
+            + " Submit report p/3 sd/today 5pm ed/next friday 11.59pm i/inform partner c/Work c/Project";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in TaskBoss";
@@ -35,9 +37,8 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-
-    public AddCommand(String name, String priorityLevel, String information, Set<String> categories)
-            throws IllegalValueException {
+    public AddCommand(String name, String priorityLevel, String startDateTime, String endDateTime,
+            String information, Set<String> categories) throws IllegalValueException {
         final Set<Category> categorySet = new HashSet<>();
         for (String categoryName : categories) {
             categorySet.add(new Category(categoryName));
@@ -45,6 +46,8 @@ public class AddCommand extends Command {
         this.toAdd = new Task(
                 new Name(name),
                 new PriorityLevel(priorityLevel),
+                new DateTime(startDateTime),
+                new DateTime(endDateTime),
                 new Information(information),
                 new UniqueCategoryList(categorySet)
         );
