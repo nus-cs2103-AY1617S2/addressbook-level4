@@ -8,11 +8,9 @@ public class PriorityTest {
 
     @Test
     public void isValidPriority() {
-        // invalid priorities
-
         // valid priorities
         assertTrue(Priority.isValidPriority("93121534"));
-        assertTrue(Priority.isValidPriority("4")); // short phone numbers
-        assertTrue(Priority.isValidPriority("124293842033123")); // long phone numbers
+        assertTrue(Priority.isValidPriority("4"));
+        assertTrue(Priority.isValidPriority("124293842033123"));
     }
 }
