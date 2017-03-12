@@ -67,39 +67,61 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
+        undoStack.push(taskList);
         taskList.removeTask(target);
         indicateTaskListChanged();
+
     }
 
     @Override
     public synchronized void addTask(Task person) throws UniqueTaskList.DuplicateTaskException {
+        undoStack.push(taskList);
         taskList.addTask(person);
+        assert taskList != undoStack.peek();
         updateFilteredListToShowAll();
         indicateTaskListChanged();
+
     }
 
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
-
+        undoStack.push(taskList);
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskList.updateTask(taskListIndex, editedTask);
         indicateTaskListChanged();
+
     }
 
     @Override
-    public ReadOnlyTaskList getPreviousState() throws EmptyModelStackException {
+    public void setPreviousState() throws EmptyUndoRedoStackException {
+        if (undoStack.empty()) {
+            throw new EmptyUndoRedoStackException();
+        }
+        redoStack.push(taskList);
+        ReadOnlyTaskList previousState = undoStack.pop();
 
-        return taskList;
+        resetData(previousState);
+        updateFilteredListToShowAll();
     }
 
     @Override
-    public ReadOnlyTaskList getNextState() throws EmptyModelStackException {
-
-        return taskList;
+    public void setNextState() throws EmptyUndoRedoStackException {
+        if (redoStack.empty()) {
+            throw new EmptyUndoRedoStackException();
+        }
+        undoStack.push(taskList);
+        ReadOnlyTaskList nextState = redoStack.pop();
+        resetData(nextState);
+        updateFilteredListToShowAll();
     }
 
+    public static class EmptyUndoRedoStackException extends EmptyModelStackException {
+        protected EmptyUndoRedoStackException() {
+            super("No available states");
+        }
+    }
     //=========== Filtered Task List Accessors =============================================================
 
     @Override

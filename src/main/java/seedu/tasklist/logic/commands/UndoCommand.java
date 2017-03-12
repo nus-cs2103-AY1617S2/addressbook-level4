@@ -11,7 +11,7 @@ public class UndoCommand extends Command {
     @Override
     public CommandResult execute() {
         try {
-            model.getPreviousState();
+            model.setPreviousState();
             return new CommandResult(MESSAGE_UNDO_SUCCESS);
         } catch (EmptyModelStackException e) {
             return new CommandResult(MESSAGE_UNDO_FAILED);

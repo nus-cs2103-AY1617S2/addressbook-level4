@@ -11,7 +11,7 @@ public class RedoCommand extends Command {
     @Override
     public CommandResult execute() {
         try {
-            model.getNextState();
+            model.setNextState();
             return new CommandResult(MESSAGE_REDO_SUCCESS);
         } catch (EmptyModelStackException e) {
             return new CommandResult(MESSAGE_REDO_FAILED);
