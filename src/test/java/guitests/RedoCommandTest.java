@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.toluist.model.Task;
+import seedu.toluist.model.TodoList;
 
 /**
  * Gui tests for redo command
@@ -22,10 +23,12 @@ public class RedoCommandTest extends ToLuistGuiTest {
         String undoCommand = "undo";
         commandBox.runCommand(undoCommand);
         assertFalse(isTaskShown(task));
+        assertFalse(TodoList.load().getTasks().contains(task));
 
         String redoCommand = "redo";
         commandBox.runCommand(redoCommand);
         assertTrue(isTaskShown(task));
+        assertTrue(TodoList.load().getTasks().contains(task));
     }
 
     @Test
@@ -46,6 +49,7 @@ public class RedoCommandTest extends ToLuistGuiTest {
         commandBox.runCommand(undoCommand);
         assertFalse(isTaskShown(task));
         assertFalse(isTaskShown(task2));
+        assertFalse(TodoList.load().getTasks().contains(task));
 
         String redoCommand = "redo 2";
         commandBox.runCommand(redoCommand);
