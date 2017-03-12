@@ -1,8 +1,8 @@
 # Task Book
 
 [![Build Status](https://travis-ci.org/CS2103JAN2017-W15-B2/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-W15-B2/main)
+[![Build status](https://ci.appveyor.com/api/projects/status/rema14vqhp69adwc?svg=true)](https://ci.appveyor.com/project/pzyu/main-2khow)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/af383e34b7e646d2893c81cd564bc671)](https://www.codacy.com/app/pzyu/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103JAN2017-W15-B2/main&amp;utm_campaign=Badge_Grade)
-[//]: # ([![Build status](https://ci.appveyor.com/api/projects/status/3boko2x2vr5cc3w2?svg=true)](https://ci.appveyor.com/project/damithc/addressbook-level4)
 [//]: # ([![Coverage Status](https://coveralls.io/repos/github/se-edu/addressbook-level4/badge.svg?branch=master)](https://coveralls.io/github/se-edu/addressbook-level4?branch=master))
 
 
