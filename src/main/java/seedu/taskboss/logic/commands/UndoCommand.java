@@ -11,8 +11,8 @@ public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-    		+ ": Undoes the most recent operation entered by user\n"
-    		+ "Example: " + COMMAND_WORD;
+            + ": Undoes the most recent operation entered by user\n"
+            + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "The most recent operation has been undone!";
 
