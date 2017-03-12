@@ -49,7 +49,7 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private AnchorPane taskListPanelPlaceholder;
-    
+
     @FXML
     private AnchorPane taskListPanelPlaceholder2;
 
@@ -140,7 +140,7 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane getTaskListPlaceholder() {
         return taskListPanelPlaceholder;
     }
-    
+
     private AnchorPane getTaskListPlaceholder2() {
         return taskListPanelPlaceholder2;
     }
@@ -207,7 +207,7 @@ public class MainWindow extends UiPart<Region> {
     public TaskListPanel getTaskListPanel() {
         return this.taskListPanel;
     }
-    
+
     public TaskListPanel getTaskListPanel2() {
         return this.taskListPanel2;
     }
