@@ -61,6 +61,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void undoTaskboss() throws EmptyStackException {
     	taskBoss.resetData(taskbossHistory.pop());
+        indicateTaskBossChanged();
     }
 
     /** Raises an event to indicate the model has changed */
