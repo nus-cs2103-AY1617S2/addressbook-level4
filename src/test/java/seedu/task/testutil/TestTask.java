@@ -10,7 +10,7 @@ import seedu.task.model.task.StartDateTime;
 /**
  * A mutable person object. For testing only.
  */
-public class TestPerson implements ReadOnlyTask {
+public class TestTask implements ReadOnlyTask {
 
     private Name name;
     private Description description;
@@ -18,14 +18,14 @@ public class TestPerson implements ReadOnlyTask {
     private EndDateTime endDateTime;
     private UniqueTagList tags;
 
-    public TestPerson() {
+    public TestTask() {
         tags = new UniqueTagList();
     }
 
     /**
      * Creates a copy of {@code personToCopy}.
      */
-    public TestPerson(TestPerson personToCopy) {
+    public TestTask(TestTask personToCopy) {
         this.name = personToCopy.getName();
         this.description = personToCopy.getDescription();
         this.startDateTime = personToCopy.getStartDateTime();

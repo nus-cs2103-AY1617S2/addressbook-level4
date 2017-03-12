@@ -11,27 +11,27 @@ import seedu.task.model.task.StartDateTime;
 /**
  *
  */
-public class PersonBuilder {
+public class TaskBuilder {
 
-    private TestPerson person;
+    private TestTask person;
 
-    public PersonBuilder() {
-        this.person = new TestPerson();
+    public TaskBuilder() {
+        this.person = new TestTask();
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the TaskBuilder with the data of {@code personToCopy}.
      */
-    public PersonBuilder(TestPerson personToCopy) {
-        this.person = new TestPerson(personToCopy);
+    public TaskBuilder(TestTask personToCopy) {
+        this.person = new TestTask(personToCopy);
     }
 
-    public PersonBuilder withName(String name) throws IllegalValueException {
+    public TaskBuilder withName(String name) throws IllegalValueException {
         this.person.setName(new Name(name));
         return this;
     }
 
-    public PersonBuilder withTags(String... tags) throws IllegalValueException {
+    public TaskBuilder withTags(String... tags) throws IllegalValueException {
         person.setTags(new UniqueTagList());
         for (String tag : tags) {
             person.getTags().add(new Tag(tag));
@@ -39,22 +39,22 @@ public class PersonBuilder {
         return this;
     }
 
-    public PersonBuilder withDescription(String phone) throws IllegalValueException {
+    public TaskBuilder withDescription(String phone) throws IllegalValueException {
         this.person.setDescription(new Description(phone));
         return this;
     }
 
-    public PersonBuilder withStartDateTime(String email) throws IllegalValueException {
+    public TaskBuilder withStartDateTime(String email) throws IllegalValueException {
         this.person.setStartDateTime(new StartDateTime(email));
         return this;
     }
 
-    public PersonBuilder withEndDateTime(String address) throws IllegalValueException {
+    public TaskBuilder withEndDateTime(String address) throws IllegalValueException {
         this.person.setEndDateTime(new EndDateTime(address));
         return this;
     }
 
-    public TestPerson build() {
+    public TestTask build() {
         return this.person;
     }
 

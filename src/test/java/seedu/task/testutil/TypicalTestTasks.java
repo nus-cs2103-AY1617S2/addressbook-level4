@@ -8,39 +8,39 @@ import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 /**
  *
  */
-public class TypicalTestPersons {
+public class TypicalTestTasks {
 
-    public TestPerson alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
+    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
 
-    public TypicalTestPersons() {
+    public TypicalTestTasks() {
         try {
-            alice = new PersonBuilder().withName("Walk the dog")
+            alice = new TaskBuilder().withName("Walk the dog")
                     .withDescription("Take Zelda on a walk at the park").withStartDateTime("01/01/2016 0900")
-                    .withEndDateTime("01/01/2016 1000").withTags("Important").build();
-            benson = new PersonBuilder().withName("Walk the cat")
+                    .withEndDateTime("01/01/2016 1000").withTags("Incomplete").build();
+            benson = new TaskBuilder().withName("Walk the cat")
                     .withDescription("Take Zelda on a walk at the park").withStartDateTime("01/01/2016 0900")
-                    .withEndDateTime("01/01/2016 1000").withTags("Important").build();
-            carl = new PersonBuilder().withName("Walk the cow")
+                    .withEndDateTime("01/01/2016 1000").withTags("Incomplete").build();
+            carl = new TaskBuilder().withName("Walk the cow")
                     .withDescription("Take Zelda on a walk at the park").withStartDateTime("01/01/2016 0900")
-                    .withEndDateTime("01/01/2016 1000").withTags("Important").build();
-            daniel = new PersonBuilder().withName("Walk the nyan cat")
+                    .withEndDateTime("01/01/2016 1000").withTags("Incomplete").build();
+            daniel = new TaskBuilder().withName("Walk the nyan cat")
                     .withDescription("Take Zelda on a walk at the park").withStartDateTime("01/01/2016 0900")
-                    .withEndDateTime("01/01/2016 1000").withTags("Important").build();
-            elle = new PersonBuilder().withName("Walk the fish")
+                    .withEndDateTime("01/01/2016 1000").withTags("Incomplete").build();
+            elle = new TaskBuilder().withName("Walk the fish")
                     .withDescription("Take Zelda on a walk at the park").withStartDateTime("01/01/2016 0900")
-                    .withEndDateTime("01/01/2016 1000").withTags("Important").build();
-            fiona = new PersonBuilder().withName("Walk the lion")
+                    .withEndDateTime("01/01/2016 1000").withTags("Complete").build();
+            fiona = new TaskBuilder().withName("Walk the lion")
                     .withDescription("Take Zelda on a walk at the park").withStartDateTime("01/01/2016 0900")
-                    .withEndDateTime("01/01/2016 1000").withTags("Unimportant").build();
-            george = new PersonBuilder().withName("Walk the elephant")
+                    .withEndDateTime("01/01/2016 1000").withTags("Complete").build();
+            george = new TaskBuilder().withName("Walk the elephant")
                     .withDescription("Take Zelda on a walk at the park").withStartDateTime("01/01/2016 0900")
-                    .withEndDateTime("01/01/2016 1000").withTags("Unimportant").build();
+                    .withEndDateTime("01/01/2016 1000").withTags("Complete").build();
 
             // Manually added
-            hoon = new PersonBuilder().withName("Walk the tiger")
+            hoon = new TaskBuilder().withName("Walk the tiger")
                     .withDescription("Take Zelda on a walk at the park").withStartDateTime("01/01/2016 0900")
                     .withEndDateTime("01/01/2016 1000").build();
-            ida = new PersonBuilder().withName("Walk the zebra")
+            ida = new TaskBuilder().withName("Walk the zebra")
                     .withDescription("Take Zelda on a walk at the park").withStartDateTime("01/01/2016 0900")
                     .withEndDateTime("01/01/2016 1000").build();
         } catch (IllegalValueException e) {
@@ -49,8 +49,8 @@ public class TypicalTestPersons {
         }
     }
 
-    public static void loadAddressBookWithSampleData(TaskList ab) {
-        for (TestPerson person : new TypicalTestPersons().getTypicalPersons()) {
+    public static void loadTaskListWithSampleData(TaskList ab) {
+        for (TestTask person : new TypicalTestTasks().getTypicalTasks()) {
             try {
                 ab.addTask(new Task(person));
             } catch (DuplicateTaskException e) {
@@ -59,13 +59,13 @@ public class TypicalTestPersons {
         }
     }
 
-    public TestPerson[] getTypicalPersons() {
-        return new TestPerson[] { alice, benson, carl, daniel, elle, fiona, george };
+    public TestTask[] getTypicalTasks() {
+        return new TestTask[] { alice, benson, carl, daniel, elle, fiona, george };
     }
 
     public TaskList getTypicalAddressBook() {
         TaskList ab = new TaskList();
-        loadAddressBookWithSampleData(ab);
+        loadTaskListWithSampleData(ab);
         return ab;
     }
 }
