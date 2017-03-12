@@ -18,6 +18,8 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
+    private Label startTime;
+    @FXML
     private Label deadline;
     @FXML
     private FlowPane labels;
@@ -26,6 +28,7 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         title.setText(task.getTitle().title);
         id.setText(displayedIndex + ". ");
+        startTime.setText(task.getStartTime().toString());
         deadline.setText(task.getDeadline().toString());
         initLabels(task);
     }
