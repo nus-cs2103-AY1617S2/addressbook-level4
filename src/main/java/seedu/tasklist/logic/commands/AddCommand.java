@@ -11,6 +11,7 @@ import seedu.tasklist.logic.commands.exceptions.CommandException;
 import seedu.tasklist.model.tag.Tag;
 import seedu.tasklist.model.tag.UniqueTagList;
 import seedu.tasklist.model.task.Comment;
+import seedu.tasklist.model.task.DeadlineTask;
 import seedu.tasklist.model.task.FloatingTask;
 import seedu.tasklist.model.task.Name;
 import seedu.tasklist.model.task.Priority;
@@ -32,6 +33,9 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task list";
+
+    public static final int DEADLINE_SIZE = 1;
+    public static final int EVENT_SIZE = 2;
 
     private final Task toAdd;
 
@@ -57,8 +61,20 @@ public class AddCommand extends Command {
                     new UniqueTagList(tagSet)
             );
         } else {
-            //Temporary to remove errors before deadlines and events are added
-            this.toAdd = null;
+            List<Date> dateList = dates.get();
+            if (isDeadline(dateList)) {
+                this.toAdd = new DeadlineTask(
+                        new Name(name),
+                        new Comment(comment),
+                        new Priority(priority),
+                        new Status(),
+                        getDeadline(dateList),
+                        new UniqueTagList(tagSet)
+                        );
+            } else {
+                //Temporary to remove errors before deadlines and events are added
+                this.toAdd = null;
+            }
         }
     }
 
@@ -67,6 +83,21 @@ public class AddCommand extends Command {
      */
     public boolean isDatePresent(Optional<List<Date>> dates) {
         return dates.isPresent();
+    }
+
+    /**
+     * Returns true if task added is a Deadline
+     */
+    public boolean isDeadline(List<Date> dates) {
+        int dateListSize = dates.size();
+        return (dateListSize == DEADLINE_SIZE);
+    }
+
+    /**
+     * Returns Deadline
+     */
+    public Date getDeadline(List<Date> dates) {
+        return dates.get(0);
     }
 
     @Override
