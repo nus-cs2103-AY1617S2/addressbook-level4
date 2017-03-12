@@ -12,6 +12,7 @@ import seedu.tasklist.model.tag.Tag;
 import seedu.tasklist.model.tag.UniqueTagList;
 import seedu.tasklist.model.task.Comment;
 import seedu.tasklist.model.task.DeadlineTask;
+import seedu.tasklist.model.task.EventTask;
 import seedu.tasklist.model.task.FloatingTask;
 import seedu.tasklist.model.task.Name;
 import seedu.tasklist.model.task.Priority;
@@ -71,8 +72,18 @@ public class AddCommand extends Command {
                         getDeadline(dateList),
                         new UniqueTagList(tagSet)
                         );
+            } else if (isEvent(dateList)) {
+                this.toAdd = new EventTask(
+                        new Name(name),
+                        new Comment(comment),
+                        new Priority(priority),
+                        new Status(),
+                        getStartDate(dateList),
+                        getEndDate(dateList),
+                        new UniqueTagList(tagSet)
+                        );
             } else {
-                //Temporary to remove errors before deadlines and events are added
+                //Should never reach here. Temporary this until replaced with exception
                 this.toAdd = null;
             }
         }
@@ -94,10 +105,32 @@ public class AddCommand extends Command {
     }
 
     /**
+     * Returns true if task added is an Event
+     */
+    public boolean isEvent(List<Date> dates) {
+        int dateListSize = dates.size();
+        return (dateListSize == EVENT_SIZE);
+    }
+
+    /**
      * Returns Deadline
      */
     public Date getDeadline(List<Date> dates) {
         return dates.get(0);
+    }
+
+    /**
+     * Returns Starting Date for an event
+     */
+    public Date getStartDate(List<Date> dates) {
+        return dates.get(0);
+    }
+
+    /**
+     * Returns End Date for an event
+     */
+    public Date getEndDate(List<Date> dates) {
+        return dates.get(1);
     }
 
     @Override
