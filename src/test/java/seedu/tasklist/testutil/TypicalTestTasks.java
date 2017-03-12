@@ -10,7 +10,7 @@ import seedu.tasklist.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask tutorial, homework, groceries, lifegoals, java, CS2103T, drink, hoon, ida;
+    public TestTask tutorial, homework, groceries, lifegoals, java, CS2103T, drink, internship, ida;
 
     public TypicalTestTasks() {
         try {
@@ -26,7 +26,7 @@ public class TypicalTestTasks {
             drink = new TaskBuilder().withName("Drink water").withComment("To improve brain function").build();
 
             // Manually added
-            hoon = new TaskBuilder().withName("Internship interview").withComment("at mediacorp").build();
+            internship = new TaskBuilder().withName("Internship interview").withComment("at mediacorp").build();
             ida = new TaskBuilder().withName("Yet another interview").withComment("also at mediacorp").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
