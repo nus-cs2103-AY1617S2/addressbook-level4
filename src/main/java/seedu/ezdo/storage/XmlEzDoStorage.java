@@ -3,6 +3,9 @@ package seedu.ezdo.storage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -24,8 +27,14 @@ public class XmlEzDoStorage implements EzDoStorage {
         this.filePath = filePath;
     }
 
+    @Override
     public String getEzDoFilePath() {
         return filePath;
+    }
+
+    @Override
+    public void setEzDoFilePath(String filePath) {
+        this.filePath = filePath;
     }
 
     @Override
@@ -38,6 +47,7 @@ public class XmlEzDoStorage implements EzDoStorage {
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
+    @Override
     public Optional<ReadOnlyEzDo> readEzDo(String filePath) throws DataConversionException,
                                                                                  FileNotFoundException {
         assert filePath != null;
@@ -63,6 +73,7 @@ public class XmlEzDoStorage implements EzDoStorage {
      * Similar to {@link #saveEzDo(ReadOnlyEzDo)}
      * @param filePath location of the data. Cannot be null
      */
+    @Override
     public void saveEzDo(ReadOnlyEzDo ezDo, String filePath) throws IOException {
         assert ezDo != null;
         assert filePath != null;
@@ -72,4 +83,15 @@ public class XmlEzDoStorage implements EzDoStorage {
         XmlFileStorage.saveDataToFile(file, new XmlSerializableEzDo(ezDo));
     }
 
+    @Override
+    public void moveEzDo(String oldPath, String newPath) throws IOException {
+        assert oldPath != null;
+        assert newPath != null;
+        try {
+            Files.move(Paths.get(oldPath), Paths.get(newPath), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException ioe) {
+            logger.info("I/O Exception when moving ezDo.xml to new directory.");
+            throw new IOException("Error moving file to new directory.");
+        }
+    }
 }

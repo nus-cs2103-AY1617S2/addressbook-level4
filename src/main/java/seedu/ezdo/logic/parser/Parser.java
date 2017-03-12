@@ -16,6 +16,7 @@ import seedu.ezdo.logic.commands.HelpCommand;
 import seedu.ezdo.logic.commands.IncorrectCommand;
 import seedu.ezdo.logic.commands.KillCommand;
 import seedu.ezdo.logic.commands.ListCommand;
+import seedu.ezdo.logic.commands.SaveCommand;
 import seedu.ezdo.logic.commands.SelectCommand;
 
 /**
@@ -70,6 +71,9 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case SaveCommand.COMMAND_WORD:
+            return new SaveCommandParser().parse(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
