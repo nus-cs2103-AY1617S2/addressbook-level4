@@ -4,8 +4,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.task.commons.core.Messages;
-import seedu.task.testutil.TestTask;
+import werkbook.task.commons.core.Messages;
+import werkbook.task.testutil.TestTask;
 
 public class FindCommandTest extends TaskListGuiTest {
 

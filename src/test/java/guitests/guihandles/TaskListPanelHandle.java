@@ -12,13 +12,13 @@ import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-import seedu.task.TestApp;
-import seedu.task.model.task.ReadOnlyTask;
-import seedu.task.model.task.Task;
-import seedu.task.testutil.TestUtil;
+import werkbook.task.TestApp;
+import werkbook.task.model.task.ReadOnlyTask;
+import werkbook.task.model.task.Task;
+import werkbook.task.testutil.TestUtil;
 
 /**
- * Provides a handle for the panel containing the person list.
+ * Provides a handle for the panel containing the task list.
  */
 public class TaskListPanelHandle extends GuiHandle {
 

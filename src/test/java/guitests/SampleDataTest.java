@@ -4,10 +4,10 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.task.model.TaskList;
-import seedu.task.model.task.Task;
-import seedu.task.model.util.SampleDataUtil;
-import seedu.task.testutil.TestUtil;
+import werkbook.task.model.TaskList;
+import werkbook.task.model.task.Task;
+import werkbook.task.model.util.SampleDataUtil;
+import werkbook.task.testutil.TestUtil;
 
 public class SampleDataTest extends TaskListGuiTest {
     @Override
@@ -23,7 +23,7 @@ public class SampleDataTest extends TaskListGuiTest {
     }
 
     @Test
-    public void addressBook_dataFileDoesNotExist_loadSampleData() throws Exception {
+    public void taskList_dataFileDoesNotExist_loadSampleData() throws Exception {
         Task[] expectedList = SampleDataUtil.getSampleTasks();
         assertTrue(taskListPanel.isListMatching(expectedList));
     }

@@ -21,13 +21,13 @@ import guitests.guihandles.TaskCardHandle;
 import guitests.guihandles.TaskListPanelHandle;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-import seedu.task.TestApp;
-import seedu.task.commons.core.EventsCenter;
-import seedu.task.commons.events.BaseEvent;
-import seedu.task.model.TaskList;
-import seedu.task.model.task.ReadOnlyTask;
-import seedu.task.testutil.TestUtil;
-import seedu.task.testutil.TypicalTestTasks;
+import werkbook.task.TestApp;
+import werkbook.task.commons.core.EventsCenter;
+import werkbook.task.commons.events.BaseEvent;
+import werkbook.task.model.TaskList;
+import werkbook.task.model.task.ReadOnlyTask;
+import werkbook.task.testutil.TestUtil;
+import werkbook.task.testutil.TypicalTestTasks;
 
 /**
  * A GUI Test class for TaskList.

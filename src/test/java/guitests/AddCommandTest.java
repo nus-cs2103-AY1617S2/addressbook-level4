@@ -5,10 +5,10 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
-import seedu.task.commons.core.Messages;
-import seedu.task.logic.commands.AddCommand;
-import seedu.task.testutil.TestTask;
-import seedu.task.testutil.TestUtil;
+import werkbook.task.commons.core.Messages;
+import werkbook.task.logic.commands.AddCommand;
+import werkbook.task.testutil.TestTask;
+import werkbook.task.testutil.TestUtil;
 
 public class AddCommandTest extends TaskListGuiTest {
 
@@ -20,12 +20,12 @@ public class AddCommandTest extends TaskListGuiTest {
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTaskToList(currentList, taskToAdd);
 
-        //add another person
+        //add another task
         taskToAdd = td.ida;
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTaskToList(currentList, taskToAdd);
 
-        //add duplicate person
+        //add duplicate task
         commandBox.runCommand(td.hoon.getAddCommand());
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
         assertTrue(taskListPanel.isListMatching(currentList));
