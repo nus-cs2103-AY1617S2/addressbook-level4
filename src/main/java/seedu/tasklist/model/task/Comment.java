@@ -1,16 +1,17 @@
 package seedu.tasklist.model.task;
 
+import java.util.Optional;
 
 import seedu.tasklist.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's comment in the task list.
+ * Represents a Task's comment in the task list.
  * Guarantees: immutable; is valid as declared in {@link #isValidComment(String)}
  */
 public class Comment {
 
     public static final String MESSAGE_COMMENT_CONSTRAINTS =
-            "Person commentes can take any values, and it should not be blank";
+            "Task comments can take any values, and it should not be blank";
 
     /*
      * The first character of the comment must not be a whitespace,
@@ -33,8 +34,25 @@ public class Comment {
         this.value = comment;
     }
 
+    public Comment(Optional<String> comment) throws IllegalValueException {
+        if (isCommentPresent(comment)) {
+            String commentString = comment.get();
+            assert commentString != null;
+            if (!isValidComment(commentString)) {
+                throw new IllegalValueException(MESSAGE_COMMENT_CONSTRAINTS);
+            }
+            this.value = commentString;
+        } else {
+            this.value = "NIL";
+        }
+    }
+
+    public boolean isCommentPresent(Optional<String> comment) {
+        return comment.isPresent();
+    }
+
     /**
-     * Returns true if a given string is a valid person email.
+     * Returns true if a given string is a valid Task email.
      */
     public static boolean isValidComment(String test) {
         return test.matches(COMMENT_VALIDATION_REGEX);

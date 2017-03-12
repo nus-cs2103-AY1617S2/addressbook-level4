@@ -3,11 +3,11 @@ package seedu.tasklist.model.task;
 import seedu.tasklist.model.tag.UniqueTagList;
 
 /**
- * A read-only immutable interface for a Task in the task list.
+ * A read-only immutable interface for a floating task in the task list.
  * Implementations should guarantee: details are present and not null, field values are validated.
+ *
  */
-public interface ReadOnlyTask {
-
+public interface ReadOnlyFloatingTask extends ReadOnlyTask {
     Name getName();
     Comment getComment();
     Priority getPriority();
@@ -26,7 +26,9 @@ public interface ReadOnlyTask {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                 && other.getName().equals(this.getName()) // state checks here onwards
-                && other.getComment().equals(this.getComment()));
+                && other.getComment().equals(this.getComment()))
+                && other.getPriority().equals(this.getPriority())
+                && other.getStatus().equals(this.getStatus());
     }
 
     /**
@@ -37,9 +39,13 @@ public interface ReadOnlyTask {
         builder.append(getName())
                 .append(" Comment: ")
                 .append(getComment())
+                .append("Priority: ")
+                .append(getPriority())
+                .append("Status: ")
+                .append(getStatus())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
-    String getType();
+
 }

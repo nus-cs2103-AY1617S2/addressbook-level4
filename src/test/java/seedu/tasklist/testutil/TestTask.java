@@ -3,7 +3,9 @@ package seedu.tasklist.testutil;
 import seedu.tasklist.model.tag.UniqueTagList;
 import seedu.tasklist.model.task.Comment;
 import seedu.tasklist.model.task.Name;
+import seedu.tasklist.model.task.Priority;
 import seedu.tasklist.model.task.ReadOnlyTask;
+import seedu.tasklist.model.task.Status;
 
 /**
  * A mutable task object. For testing only.
@@ -12,6 +14,8 @@ public class TestTask implements ReadOnlyTask {
 
     private Name name;
     private Comment comment;
+    private Priority priority;
+    private Status status;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -24,6 +28,8 @@ public class TestTask implements ReadOnlyTask {
     public TestTask(TestTask taskToCopy) {
         this.name = taskToCopy.getName();
         this.comment = taskToCopy.getComment();
+        this.priority = taskToCopy.getPriority();
+        this.status = taskToCopy.getStatus();
         this.tags = taskToCopy.getTags();
     }
 
@@ -57,6 +63,16 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
+    public Priority getPriority() {
+        return priority;
+    }
+
+    @Override
+    public Status getStatus() {
+        return status;
+    }
+
+    @Override
     public String toString() {
         return getAsText();
     }
@@ -67,5 +83,31 @@ public class TestTask implements ReadOnlyTask {
         sb.append("c/" + this.getComment().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
+    }
+
+
+    @Override
+    public String getAsText() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getName())
+                .append(" Comment: ")
+                .append(getComment())
+                .append(" Tags: ");
+        getTags().forEach(builder::append);
+        return builder.toString();
+    }
+
+    @Override
+    public boolean isSameStateAs(ReadOnlyTask other) {
+        return other == this // short circuit if same object
+                || (other != null // this is first to avoid NPE below
+                && other.getName().equals(this.getName()) // state checks here onwards
+                && other.getComment().equals(this.getComment()));
+    }
+
+    @Override
+    public String getType() {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

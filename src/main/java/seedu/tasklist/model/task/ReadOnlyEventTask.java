@@ -1,17 +1,19 @@
 package seedu.tasklist.model.task;
 
+import java.util.Date;
+
 import seedu.tasklist.model.tag.UniqueTagList;
 
 /**
- * A read-only immutable interface for a Task in the task list.
+ * A read-only immutable interface for an event task (contains 2 dates) in the task list.
  * Implementations should guarantee: details are present and not null, field values are validated.
+ *
  */
-public interface ReadOnlyTask {
-
+public interface ReadOnlyEventTask extends ReadOnlyTask {
     Name getName();
     Comment getComment();
-    Priority getPriority();
-    Status getStatus();
+    Date getStartDate();
+    Date getEndDate();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -41,5 +43,4 @@ public interface ReadOnlyTask {
         getTags().forEach(builder::append);
         return builder.toString();
     }
-    String getType();
 }

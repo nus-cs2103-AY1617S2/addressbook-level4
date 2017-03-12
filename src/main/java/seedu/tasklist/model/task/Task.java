@@ -1,98 +1,35 @@
 package seedu.tasklist.model.task;
 
-import java.util.Objects;
-
-import seedu.tasklist.commons.util.CollectionUtil;
 import seedu.tasklist.model.tag.UniqueTagList;
 
 /**
- * Represents a Task in the address book.
+ * Represents a Task in the task list.
  * Guarantees: details are present and not null, field values are validated.
  */
-public class Task implements ReadOnlyTask {
+public abstract class Task implements ReadOnlyTask {
 
-    private Name name;
-    private Comment comment;
+    public abstract void setName(Name name);
 
-    private UniqueTagList tags;
+    public abstract Name getName();
 
-    /**
-     * Every field must be present and not null.
-     */
-    public Task(Name name, Comment comment, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, comment, tags);
-        this.name = name;
-        this.comment = comment;
-        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
-    }
+    public abstract void setComment(Comment comment);
 
-    /**
-     * Creates a copy of the given ReadOnlyTask.
-     */
-    public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getComment(), source.getTags());
-    }
+    public abstract Comment getComment();
 
-    public void setName(Name name) {
-        assert name != null;
-        this.name = name;
-    }
+    public abstract UniqueTagList getTags();
 
-    @Override
-    public Name getName() {
-        return name;
-    }
+    public abstract void setPriority(Priority priority);
 
+    public abstract Priority getPriority();
 
-    public void setComment(Comment comment) {
-        assert comment != null;
-        this.comment = comment;
-    }
+    public abstract void setStatus(Status status);
 
-    @Override
-    public Comment getComment() {
-        return comment;
-    }
-
-    @Override
-    public UniqueTagList getTags() {
-        return new UniqueTagList(tags);
-    }
+    public abstract Status getStatus();
 
     /**
      * Replaces this person's tags with the tags in the argument tag list.
      */
-    public void setTags(UniqueTagList replacement) {
-        tags.setTags(replacement);
-    }
+    public abstract void setTags(UniqueTagList replacement);
 
-    /**
-     * Updates this person with the details of {@code replacement}.
-     */
-    public void resetData(ReadOnlyTask replacement) {
-        assert replacement != null;
-
-        this.setName(replacement.getName());
-        this.setComment(replacement.getComment());
-        this.setTags(replacement.getTags());
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof ReadOnlyTask // instanceof handles nulls
-                && this.isSameStateAs((ReadOnlyTask) other));
-    }
-
-    @Override
-    public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, comment, tags);
-    }
-
-    @Override
-    public String toString() {
-        return getAsText();
-    }
 
 }
