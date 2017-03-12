@@ -1,8 +1,12 @@
 package seedu.doist.logic.commands;
 
+import java.util.ArrayList;
+
 import seedu.doist.commons.core.Messages;
+import seedu.doist.commons.core.UnmodifiableObservableList;
 import seedu.doist.logic.commands.exceptions.CommandException;
 import seedu.doist.model.Model;
+import seedu.doist.model.task.ReadOnlyTask;
 
 /**
  * Represents a command with hidden internal logic and the ability to be executed.
@@ -45,5 +49,19 @@ public abstract class Command {
      */
     public void setData(Model model) {
         this.model = model;
+    }
+
+    public ArrayList<ReadOnlyTask> getMultipleTasksFromIndices(int[] targetIndices) throws CommandException {
+        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        ArrayList<ReadOnlyTask> relatedTasks = new ArrayList<ReadOnlyTask>();
+
+        for (int targetIndex : targetIndices) {
+            if (lastShownList.size() < targetIndex) {
+                throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+            }
+            ReadOnlyTask relatedTask = lastShownList.get(targetIndex - 1);
+            relatedTasks.add(relatedTask);
+        }
+        return relatedTasks;
     }
 }

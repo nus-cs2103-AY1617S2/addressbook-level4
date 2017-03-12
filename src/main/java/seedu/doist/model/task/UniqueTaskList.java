@@ -1,5 +1,6 @@
 package seedu.doist.model.task;
 
+
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -8,15 +9,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.doist.commons.core.UnmodifiableObservableList;
 import seedu.doist.commons.exceptions.DuplicateDataException;
-import seedu.doist.commons.util.CollectionUtil;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
+ * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
  *
  * Supports a minimal set of list operations.
  *
  * @see Task#equals(Object)
- * @see CollectionUtil#elementsAreUnique(Collection)
  */
 public class UniqueTaskList implements Iterable<Task> {
 
@@ -74,9 +73,9 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
-     * Removes the equivalent person from the list.
+     * Removes the equivalent task from the list.
      *
-     * @throws TaskNotFoundException if no such person could be found in the list.
+     * @throws TaskNotFoundException if no such task could be found in the list.
      */
     public boolean remove(ReadOnlyTask toRemove) throws TaskNotFoundException {
         assert toRemove != null;
@@ -85,6 +84,23 @@ public class UniqueTaskList implements Iterable<Task> {
             throw new TaskNotFoundException();
         }
         return personFoundAndDeleted;
+    }
+
+    /**
+     * Finishes the equivalent task from the list.
+     *
+     * @throws TaskNotFoundException if no such task could be found in the list.
+     */
+    public boolean finish(ReadOnlyTask toFinish) throws TaskNotFoundException {
+        assert toFinish != null;
+        final int taskIndex = internalList.indexOf(toFinish);
+        boolean taskExists = taskIndex < 0 ? false : true;
+        if (!taskExists) {
+            throw new TaskNotFoundException();
+        } else {
+            internalList.get(taskIndex).setFinishedStatus(true);
+        }
+        return taskExists;
     }
 
     public void setPersons(UniqueTaskList replacement) {

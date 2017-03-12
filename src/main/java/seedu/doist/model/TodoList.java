@@ -152,6 +152,14 @@ public class TodoList implements ReadOnlyTodoList {
         }
     }
 
+    public boolean finishTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
+        if (tasks.finish(key)) {
+            return true;
+        } else {
+            throw new UniqueTaskList.TaskNotFoundException();
+        }
+    }
+
 //// tag-level operations
 
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {

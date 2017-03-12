@@ -68,6 +68,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public synchronized void finishTask(ReadOnlyTask target) throws TaskNotFoundException {
+        todoList.finishTask(target);
+        indicateTodoListChanged();
+    }
+
+    @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         todoList.addTask(task);
         updateFilteredListToShowAll();
