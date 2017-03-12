@@ -54,7 +54,7 @@ public class CommandAliasConfig {
      * Remove all aliases.
      */
     public void clearAliases() {
-        aliasMapping.clear();;
+        aliasMapping.clear();
     }
 
     /**
