@@ -48,34 +48,39 @@ public class IndexTokenizer {
         int i = 0;
         while (i < splittedStringIndexes.length) {
             String splittedStringIndex = splittedStringIndexes[i];
+            if (!StringUtil.isPositiveInteger(splittedStringIndex) && !splittedStringIndex.equals(HYPHEN)) {
+                // Invalid state, early termination
+                return indexes;
+            }
             if (StringUtil.isPositiveInteger(splittedStringIndex)) {
                 int index = Integer.valueOf(splittedStringIndex);
-                if (index <= maxIndex) {
-                    indexes.add(Integer.valueOf(splittedStringIndex));
-                    i += 1;
-                } else {
+                if (index > maxIndex) {
                     // Invalid state, early termination
                     return indexes;
                 }
+                indexes.add(Integer.valueOf(splittedStringIndex));
+                i++;
             } else if (splittedStringIndex.equals(HYPHEN)) {
-                // If stringIndexes starts with "-", the startIndex will be 0;
+                // If stringIndexes starts with "-", the startIndex will be 0
                 int startIndex = (indexes.isEmpty()) ? 0 : indexes.get(indexes.size() - 1);
-                // If stringIndexes ends with "-", the endIndex will be todoListSize
+                // If stringIndexes ends with "-", the endIndex will be maxIndex
                 int endIndex = maxIndex;
-                if (i + 1 < splittedStringIndexes.length
-                        && StringUtil.isPositiveInteger(splittedStringIndexes[i + 1])) {
-                    endIndex = Integer.valueOf(splittedStringIndexes[i + 1]);
-                } else if (i + 1 > splittedStringIndexes.length) {
+                if (i + 1 > splittedStringIndexes.length
+                        || (i + 1 < splittedStringIndexes.length
+                                && !StringUtil.isPositiveInteger(splittedStringIndexes[i + 1]))) {
                     // Invalid state, early termination
                     return indexes;
+                }
+                // Valid states: Negation of the above if-statement, which leads to the following 2 cases.
+                // If (i + 1 == splittedStringIndexes.length) is true, let endIndex = maxIndex
+                // If (next splittedStringIndex) is a positive integer, let endIndex = next splittedStringIndex.
+                if (i + 1 < splittedStringIndexes.length) {
+                    endIndex = Integer.valueOf(splittedStringIndexes[i + 1]);
                 }
                 for (int value = startIndex + 1; value <= Integer.min(endIndex, maxIndex); value++) {
                     indexes.add(value);
                 }
                 i += 2;
-            } else {
-                // Invalid state, early termination
-                return indexes;
             }
         }
         return indexes;
