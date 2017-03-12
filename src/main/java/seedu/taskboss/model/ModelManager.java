@@ -193,7 +193,7 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             return task.getEndDateTime().toString().contains(endDateKeyWords) ||
-                    task.getEndDateTime().toString().toLowerCase().contains(endDateKeyWords) ;
+                    task.getEndDateTime().toString().toLowerCase().contains(endDateKeyWords);
         }
 
         @Override
