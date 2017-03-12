@@ -31,13 +31,13 @@ import seedu.toluist.controller.UndoController;
 import seedu.toluist.controller.UntagController;
 import seedu.toluist.controller.UpdateTaskController;
 import seedu.toluist.controller.ViewAliasController;
-import seedu.toluist.model.CommandAliasConfig;
+import seedu.toluist.model.AliasTable;
 import seedu.toluist.ui.Ui;
 
 public class CommandDispatcher extends Dispatcher {
     private final Logger logger = LogsCenter.getLogger(getClass());
     private final EventsCenter eventsCenter = EventsCenter.getInstance();
-    private final CommandAliasConfig aliasConfig = Config.getInstance().getCommandAliasConfig();
+    private final AliasTable aliasConfig = Config.getInstance().getAliasTable();
 
     public CommandDispatcher() {
         super();

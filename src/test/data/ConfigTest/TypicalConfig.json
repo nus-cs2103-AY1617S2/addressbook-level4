@@ -1,0 +1,11 @@
+{
+  "appTitle" : "ToLuist App",
+  "logLevel" : "INFO",
+  "aliasTable" : {
+    "aliasMapping" : {
+      "a" : "add"
+    },
+    "reservedKeywords" : [ ]
+  },
+  "todoListFilePath" : "data/b.json"
+}

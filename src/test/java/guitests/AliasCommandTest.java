@@ -5,7 +5,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import seedu.toluist.model.CommandAliasConfig;
+import seedu.toluist.commons.core.Config;
+import seedu.toluist.model.AliasTable;
 import seedu.toluist.model.Task;
 
 /**
@@ -14,7 +15,7 @@ import seedu.toluist.model.Task;
 public class AliasCommandTest extends ToLuistGuiTest {
     @Before
     public void setUp() {
-        CommandAliasConfig.getInstance().clearAliases();
+        Config.getInstance().getAliasTable().clearAliases();
     }
 
     @Test

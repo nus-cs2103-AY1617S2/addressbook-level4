@@ -2,7 +2,7 @@ package seedu.toluist.commons.core;
 
 import seedu.toluist.commons.exceptions.DataConversionException;
 import seedu.toluist.commons.util.JsonUtil;
-import seedu.toluist.model.CommandAliasConfig;
+import seedu.toluist.model.AliasTable;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -16,14 +16,15 @@ public class Config {
     private static final Logger logger = LogsCenter.getLogger(Config.class);
     public static final String DEFAULT_CONFIG_FILE_PATH = "data/config.json";
     public static final String DEFAULT_TODO_LIST_FILE_PATH = "data/todolist.json";
+    public static final String APP_NAME = "ToLuist App";
 
     private static Config instance;
     private static String configFilePath = DEFAULT_CONFIG_FILE_PATH;
 
     // Config values customizable through config file
-    private final String appTitle = "ToLuist App";
+    private final String appTitle = APP_NAME;
     private Level logLevel = Level.INFO;
-    private CommandAliasConfig commandAliasConfig = new CommandAliasConfig();
+    private AliasTable aliasTable = new AliasTable();
     private String todoListFilePath = DEFAULT_TODO_LIST_FILE_PATH;
 
     /**
@@ -79,7 +80,17 @@ public class Config {
         this.logLevel = logLevel;
     }
 
-    public CommandAliasConfig getCommandAliasConfig() {
-        return commandAliasConfig;
+    public AliasTable getAliasTable() {
+        return aliasTable;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Config // instanceof handles nulls
+                && appTitle.equals(((Config) other).appTitle)
+                && logLevel.equals(((Config) other).logLevel)
+                && todoListFilePath.equals(((Config) other).todoListFilePath)
+                && aliasTable.equals(((Config) other).aliasTable));
     }
 }

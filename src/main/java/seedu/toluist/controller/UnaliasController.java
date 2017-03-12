@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 import seedu.toluist.commons.core.Config;
 import seedu.toluist.dispatcher.CommandResult;
-import seedu.toluist.model.CommandAliasConfig;
+import seedu.toluist.model.AliasTable;
 import seedu.toluist.ui.Ui;
 
 /**
@@ -21,7 +21,7 @@ public class UnaliasController extends Controller {
 
     private static final String ALIAS_TERM = "alias";
 
-    private final CommandAliasConfig aliasConfig = Config.getInstance().getCommandAliasConfig();
+    private final AliasTable aliasConfig = Config.getInstance().getAliasTable();
 
     public UnaliasController(Ui renderer) {
         super(renderer);

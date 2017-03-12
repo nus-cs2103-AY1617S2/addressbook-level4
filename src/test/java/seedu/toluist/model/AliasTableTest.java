@@ -1,7 +1,11 @@
 package seedu.toluist.model;
 
+import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -11,11 +15,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Tests for CommandAliasConfig
+ * Tests for AliasTable
  */
-public class CommandAliasConfigTest {
-    private final CommandAliasConfig aliasConfig = new CommandAliasConfig();
-    private final CommandAliasConfig aliasConfigWithReservedWords = new CommandAliasConfig();
+public class AliasTableTest {
+    private final AliasTable aliasConfig = new AliasTable();
+    private final AliasTable aliasConfigWithReservedWords = new AliasTable();
     private final String resersedWordA = "add";
     private final String resersedWordB = "update";
 
@@ -26,6 +30,27 @@ public class CommandAliasConfigTest {
         reservedWords.add(resersedWordA);
         reservedWords.add(resersedWordB);
         aliasConfigWithReservedWords.setReservedKeywords(reservedWords);
+    }
+
+    @Test
+    public void equalsMethod() {
+        // Tables with no aliases are equal
+        AliasTable aliasTable1 = new AliasTable();
+        AliasTable aliasTable2 = new AliasTable();
+        assertEquals(aliasTable1, aliasTable2);
+
+        // Table is not equal to null
+        assertNotEquals(aliasTable1, null);
+
+        // Tables with equals alias mapping are equal
+        aliasTable1.setAlias("a", "add");
+        aliasTable2.setAlias("a", "add");
+        assertEquals(aliasTable1, aliasTable2);
+
+        // Tables with same reserved keywords are equal
+        aliasTable1.setReservedKeywords(new HashSet<String>(Arrays.asList(new String[] { "add" })));
+        aliasTable2.setReservedKeywords(new HashSet<String>(Arrays.asList(new String[] { "add" })));
+        assertEquals(aliasTable1, aliasTable2);
     }
 
     @Test

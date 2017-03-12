@@ -3,12 +3,13 @@ package seedu.toluist.model;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 /**
  * A model to manage alias
  */
-public class CommandAliasConfig {
+public class AliasTable {
     private Map<String, String> aliasMapping = new HashMap<>();
     private Set<String> reservedKeywords = new HashSet<>();
 
@@ -88,5 +89,13 @@ public class CommandAliasConfig {
             }
         }
         return command;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof AliasTable // instanceof handles nulls
+                && reservedKeywords.equals(((AliasTable) other).reservedKeywords)
+                && aliasMapping.equals(((AliasTable) other).aliasMapping));
     }
 }

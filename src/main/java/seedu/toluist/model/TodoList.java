@@ -33,6 +33,10 @@ public class TodoList {
         TodoList.storage = storage;
     }
 
+    public static TodoListStorage getStorage() {
+        return storage;
+    }
+
     public static TodoList load() {
         // Initialize currentTodoList if not done
         if (currentTodoList == null) {

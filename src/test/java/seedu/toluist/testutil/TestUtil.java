@@ -2,6 +2,7 @@ package seedu.toluist.testutil;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -102,6 +103,20 @@ public class TestUtil {
         Method method = objectClass.getDeclaredMethod(methodName);
         method.setAccessible(true);
         return method;
+    }
+
+    /**
+     * Reset the instance for a singleton class
+     * @param klass The singleton class to reset the instance
+     * @throws SecurityException
+     * @throws NoSuchFieldException
+     * @throws IllegalArgumentException
+     * @throws IllegalAccessException
+     */
+    public static void resetSingleton(Class klass) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+        Field instance = klass.getDeclaredField("instance");
+        instance.setAccessible(true);
+        instance.set(null, null);
     }
 
     /**
