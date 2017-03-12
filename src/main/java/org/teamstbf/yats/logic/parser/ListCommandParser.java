@@ -21,7 +21,6 @@ public class ListCommandParser {
 	 * and returns a ListCommand object that is according to the suffix for execution.
 	 */
 	public Command parse(String args) {
-
 		if (args.contains(ListCommand.COMMAND_WORD_EXTENTION)) {
 			String[] commandTextArray = stringTokenizer(args);
 			switch(commandTextArray[LISTCOMMANDSUFFIX]) {
@@ -42,6 +41,9 @@ public class ListCommandParser {
 			}
 		}
 		return new ListCommand();
+		
+		// Need to add command input variations such as for the case of no extension 
+		// for the case of wrong command
 	}
 
 	/**
