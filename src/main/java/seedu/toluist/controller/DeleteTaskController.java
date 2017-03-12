@@ -22,7 +22,7 @@ public class DeleteTaskController extends Controller {
 
     private static final String COMMAND_DELETE_TASK = "delete";
 
-    private static final String RESULT_MESSAGE_DELETE_TASK = "Task deleted";
+    private static final String RESULT_MESSAGE_DELETE_TASK = "Deleted %s";
 
     private Logger logger = LogsCenter.getLogger(getClass());
 
@@ -63,7 +63,7 @@ public class DeleteTaskController extends Controller {
 
     private CommandResult delete(TodoList todoList, Task task) {
         todoList.remove(task);
-        return new CommandResult(RESULT_MESSAGE_DELETE_TASK);
+        return new CommandResult(String.format(RESULT_MESSAGE_DELETE_TASK, task.getDescription()));
     }
 
     @Override
