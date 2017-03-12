@@ -3,6 +3,7 @@ package savvytodo.model.task;
 import savvytodo.model.category.UniqueCategoryList;
 
 /**
+ * @author A0140016B (Contributer)
  * A read-only immutable interface for a Task in the taskManager.
  * Implementations should guarantee: details are present and not null, field values are validated.
  */
@@ -12,6 +13,8 @@ public interface ReadOnlyTask {
     Priority getPriority();
     Description getDescription();
     Location getLocation();
+    DateTime getDateTime();
+    Recurrence getRecurrence();
 
     /**
      * The returned CategoryList is a deep copy of the internal CategoryList,

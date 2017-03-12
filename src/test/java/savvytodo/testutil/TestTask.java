@@ -1,11 +1,13 @@
 package savvytodo.testutil;
 
 import savvytodo.model.category.UniqueCategoryList;
+import savvytodo.model.task.DateTime;
 import savvytodo.model.task.Description;
 import savvytodo.model.task.Location;
 import savvytodo.model.task.Name;
 import savvytodo.model.task.Priority;
 import savvytodo.model.task.ReadOnlyTask;
+import savvytodo.model.task.Recurrence;
 
 /**
  * A mutable task object. For testing only.
@@ -16,6 +18,8 @@ public class TestTask implements ReadOnlyTask {
     private Description description;
     private Location location;
     private Priority priority;
+    private DateTime dateTime;
+    private Recurrence recurrence;
     private UniqueCategoryList categories;
 
     public TestTask() {
@@ -71,6 +75,26 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public Location getLocation() {
         return location;
+    }
+
+    public void setDateTime(DateTime dateTime) {
+        assert dateTime != null;
+        this.dateTime = dateTime;
+    }
+
+    @Override
+    public DateTime getDateTime() {
+        return dateTime;
+    }
+
+    public void setRecurrence(Recurrence recurrence) {
+        assert recurrence != null;
+        this.recurrence = recurrence;
+    }
+
+    @Override
+    public Recurrence getRecurrence() {
+        return recurrence;
     }
 
     @Override

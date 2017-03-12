@@ -15,6 +15,8 @@ public class Task implements ReadOnlyTask {
     private Priority priority;
     private Description description;
     private Location location;
+    private DateTime dateTime;
+    private Recurrence recurrence;
 
     private UniqueCategoryList categories;
 
@@ -77,6 +79,26 @@ public class Task implements ReadOnlyTask {
     @Override
     public Location getLocation() {
         return location;
+    }
+
+    public void setDateTime(DateTime dateTime) {
+        assert dateTime != null;
+        this.dateTime = dateTime;
+    }
+
+    @Override
+    public DateTime getDateTime() {
+        return dateTime;
+    }
+
+    public void setRecurrence(Recurrence recurrence) {
+        assert recurrence != null;
+        this.recurrence = recurrence;
+    }
+
+    @Override
+    public Recurrence getRecurrence() {
+        return recurrence;
     }
 
     @Override
