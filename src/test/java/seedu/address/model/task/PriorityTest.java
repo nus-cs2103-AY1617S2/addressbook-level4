@@ -14,8 +14,9 @@ public class PriorityTest {
         assertFalse(Priority.isValidPriority(" ")); // spaces only
 
         // valid phone numbers
-        assertTrue(Priority.isValidPriority("93121534"));
-        assertTrue(Priority.isValidPriority("4")); // short phone numbers
-        assertTrue(Priority.isValidPriority("124293842033123")); // long phone numbers
+        assertTrue(Priority.isValidPriority("none")); // no priority
+        assertTrue(Priority.isValidPriority("hi")); // high priority
+        assertTrue(Priority.isValidPriority("mid")); // medium priority
+        assertTrue(Priority.isValidPriority("low")); // low priority
     }
 }
