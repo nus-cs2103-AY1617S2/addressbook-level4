@@ -91,7 +91,7 @@ public class Task implements ReadOnlyTask {
     public Location getLocation() {
         return location;
     }
-
+   
     public void setIsDone(boolean isDone) {
         this.isDone = isDone;
     }

@@ -14,7 +14,7 @@ public interface ReadOnlyTask {
     Remark getRemark();
     Location getLocation();
     boolean isDone();
-
+   
     /**
      * The returned TagList is a deep copy of the internal TagList,
      * changes on the returned list will not affect the task's internal tags.
@@ -52,5 +52,6 @@ public interface ReadOnlyTask {
         getTags().forEach(builder::append);
         return builder.toString();
     }
+	
 
 }
