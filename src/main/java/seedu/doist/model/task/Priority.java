@@ -5,7 +5,7 @@ import seedu.doist.commons.exceptions.IllegalValueException;
 /**
  * Represents a task's priority in the to-do list
  * Guarantees: immutable; is valid as declared in {@link #isValidPriority(String)}
- * Default value is 1 if not set by user.
+ * Default value is NORMAL if not set by user.
  */
 public class Priority {
 
@@ -57,9 +57,9 @@ public class Priority {
      * Returns true if a given string is a valid priority
      */
     public static boolean isValidPriority(String priority) {
-        return priority.equals(PriorityLevel.VERY_IMPORTANT.toString())
-                || priority.equals(PriorityLevel.IMPORTANT.toString())
-                || priority.equals(PriorityLevel.NORMAL.toString());
+        return priority.equals(PriorityLevel.VERY_IMPORTANT.name())
+                || priority.equals(PriorityLevel.IMPORTANT.name())
+                || priority.equals(PriorityLevel.NORMAL.name());
     }
 
     /**
@@ -70,7 +70,7 @@ public class Priority {
      */
     public static String processPriorityString(String priority) {
         String processedPriority = priority.trim();
-        processedPriority = processedPriority.replaceAll(" ", "");
+        processedPriority = processedPriority.replaceAll(" ", "_");
         processedPriority = processedPriority.toUpperCase();
         return processedPriority;
     }
