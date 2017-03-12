@@ -1,6 +1,5 @@
 package seedu.taskboss.model;
 
-import java.util.Set;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
@@ -9,7 +8,6 @@ import seedu.taskboss.commons.core.LogsCenter;
 import seedu.taskboss.commons.core.UnmodifiableObservableList;
 import seedu.taskboss.commons.events.model.TaskBossChangedEvent;
 import seedu.taskboss.commons.util.CollectionUtil;
-import seedu.taskboss.commons.util.StringUtil;
 import seedu.taskboss.model.task.ReadOnlyTask;
 import seedu.taskboss.model.task.Task;
 import seedu.taskboss.model.task.UniqueTaskList;
@@ -94,17 +92,17 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskListByName(Set<String> keywords) {
+    public void updateFilteredTaskListByName(String keywords) {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
 
     @Override
-    public void updateFilteredTaskListByStartDateTime(Set<String> keywords) {
+    public void updateFilteredTaskListByStartDateTime(String keywords) {
         updateFilteredTaskList(new PredicateExpression(new StartDatetimeQualifier(keywords)));
     }
 
     @Override
-    public void updateFilteredTaskListByEndDateTime(Set<String> keywords) {
+    public void updateFilteredTaskListByEndDateTime(String keywords) {
         updateFilteredTaskList(new PredicateExpression(new EndDatetimeQualifier(keywords)));
     }
 
@@ -144,18 +142,15 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     private class NameQualifier implements Qualifier {
-        private Set<String> nameKeyWords;
+        private String nameKeyWords;
 
-        NameQualifier(Set<String> nameKeyWords) {
+        NameQualifier(String nameKeyWords) {
             this.nameKeyWords = nameKeyWords;
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword))
-                    .findAny()
-                    .isPresent();
+            return task.getName().fullName.contains(nameKeyWords);
         }
 
         @Override
@@ -165,19 +160,15 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     private class StartDatetimeQualifier implements Qualifier {
-        private Set<String> startDateKeyWords;
+        private String startDateKeyWords;
 
-        StartDatetimeQualifier(Set<String> startDateKeyWords) {
+        StartDatetimeQualifier(String startDateKeyWords) {
             this.startDateKeyWords = startDateKeyWords;
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return startDateKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getStartDateTime()
-                            .toString(), keyword))
-                    .findAny()
-                    .isPresent();
+            return task.getStartDateTime().toString().contains(startDateKeyWords);
         }
 
         @Override
@@ -187,19 +178,15 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     private class EndDatetimeQualifier implements Qualifier {
-        private Set<String> endDateKeyWords;
+        private String endDateKeyWords;
 
-        EndDatetimeQualifier(Set<String> endDateKeyWords) {
+        EndDatetimeQualifier(String endDateKeyWords) {
             this.endDateKeyWords = endDateKeyWords;
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return endDateKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getEndDateTime()
-                            .toString(), keyword))
-                    .findAny()
-                    .isPresent();
+            return task.getEndDateTime().toString().contains(endDateKeyWords);
         }
 
         @Override

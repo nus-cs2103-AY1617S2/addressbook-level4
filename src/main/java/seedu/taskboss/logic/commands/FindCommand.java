@@ -3,8 +3,6 @@ package seedu.taskboss.logic.commands;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_START_DATE;
 
-import java.util.Set;
-
 
 /**
  * Finds and lists all tasks in TaskBoss whose name contains any of the argument keywords.
@@ -19,10 +17,10 @@ public class FindCommand extends Command {
             + "Parameters: n/NAME or sd/STARTDATETIME or ed/ENDDATETIME \n"
             + "Example: " + COMMAND_WORD + " n/meeting";
 
-    private final Set<String> keywords;
+    private final String keywords;
     private final String prefix;
 
-    public FindCommand(String pre, Set<String> keywords) {
+    public FindCommand(String pre, String keywords) {
         this.prefix = pre;
         this.keywords = keywords;
     }

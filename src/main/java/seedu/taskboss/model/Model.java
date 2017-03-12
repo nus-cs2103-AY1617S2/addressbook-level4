@@ -1,7 +1,5 @@
 package seedu.taskboss.model;
 
-import java.util.Set;
-
 import seedu.taskboss.commons.core.UnmodifiableObservableList;
 import seedu.taskboss.model.task.ReadOnlyTask;
 import seedu.taskboss.model.task.Task;
@@ -41,12 +39,12 @@ public interface Model {
     void updateFilteredListToShowAll();
 
     /** Updates the filter of the filtered task list to filter by the given keywords as task name*/
-    void updateFilteredTaskListByName(Set<String> keywords);
+    void updateFilteredTaskListByName(String keywords);
 
     /** Updates the filter of the filtered task list to filter by the given keywords as start date*/
-    void updateFilteredTaskListByStartDateTime(Set<String> keywords);
+    void updateFilteredTaskListByStartDateTime(String keywords);
 
     /** Updates the filter of the filtered task list to filter by the given keywords as end date*/
-    void updateFilteredTaskListByEndDateTime(Set<String> keywords);
+    void updateFilteredTaskListByEndDateTime(String keywords);
 
 }
