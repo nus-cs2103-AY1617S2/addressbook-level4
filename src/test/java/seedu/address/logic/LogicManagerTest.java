@@ -186,17 +186,18 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid,address", expectedMessage);
+        /*
+        assertCommandFailure("add Valid Content 12345 e/valid@email.butNoPhonePrefix a/valid,address", expectedMessage);
         assertCommandFailure("add Valid Name p/12345 valid@email.butNoPrefix a/valid, address", expectedMessage);
         assertCommandFailure("add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
+        */
     }
 
     @Test
     public void execute_add_invalidPersonData() {
         assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
                 Content.MESSAGE_CONTENT_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
+        assertCommandFailure("add Valid Name by 11/11/2011 11:11 #invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
@@ -410,7 +411,7 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Content content = new Content("Project Meeting");
-            TaskDateTime dateTime = new TaskDateTime("");
+            TaskDateTime dateTime = new TaskDateTime("8/3/2017 15:00");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
@@ -427,7 +428,7 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Content("Task " + seed),
-                    new TaskDateTime("DateTime " + seed),
+                    new TaskDateTime("8/3/2017 15:00"),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -440,9 +441,11 @@ public class LogicManagerTest {
 
             cmd.append(p.getContent().toString());
 
+            cmd.append(" by ").append(p.getDateTime().value);
+
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {
-                cmd.append(" t/").append(t.tagName);
+                cmd.append(" #").append(t.tagName);
             }
 
             return cmd.toString();
