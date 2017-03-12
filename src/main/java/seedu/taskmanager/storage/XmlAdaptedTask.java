@@ -25,9 +25,9 @@ public class XmlAdaptedTask {
     @XmlElement(required = true)
     private String taskname;
     @XmlElement(required = true)
-    private String endtime;
+    private String endTime;
     @XmlElement(required = true)
-    private String starttime;
+    private String startTime;
     @XmlElement(required = true)
     private String date;
     @XmlElement(required = true)
@@ -54,8 +54,8 @@ public class XmlAdaptedTask {
         taskname = source.getTaskName().fullTaskName;
         date = source.getDate().value;
         deadline = source.getDeadline().value;
-        starttime = source.getStartTime().value;
-        endtime = source.getEndTime().value;
+        startTime = source.getStartTime().value;
+        endTime = source.getEndTime().value;
 //        categorised = new ArrayList<>();
 //        for (Category category : source.getCategories()) {
 //        	categorised.add(new XmlAdaptedCategory(category));
@@ -75,8 +75,8 @@ public class XmlAdaptedTask {
         final TaskName taskname = new TaskName(this.taskname);
         final Date date = new Date(this.date);
         final Deadline deadline = new Deadline(this.deadline);
-        final StartTime starttime = new StartTime(this.starttime);
-        final EndTime endtime = new EndTime(this.endtime);
+        final StartTime starttime = new StartTime(this.startTime);
+        final EndTime endtime = new EndTime(this.endTime);
 //        final Address address = new Address(this.address);
 //        final UniqueCategoryList categories = new UniqueCategoryList(taskCategories);
         return new Task(taskname, date, deadline, starttime, endtime/*, categories*/);

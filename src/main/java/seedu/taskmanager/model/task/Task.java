@@ -25,9 +25,9 @@ public class Task implements ReadOnlyTask {
         assert !CollectionUtil.isAnyNull(taskName, date , deadline, startTime, endTime/*, categories*/);
         this.taskName = taskName;
         this.date = date;
-        this.endTime = endTime;
-        this.startTime = startTime;
         this.deadline = deadline;
+        this.startTime = startTime;
+        this.endTime = endTime;
 //      this.categories = new UniqueCategoryList(categories); // protect internal tags from changes in the arg list
     }
 
@@ -86,12 +86,12 @@ public class Task implements ReadOnlyTask {
     public EndTime getEndTime() {
         return endTime;
     }
-
+/*
     @Override
     public UniqueCategoryList getCategories() {
         return new UniqueCategoryList(categories);
     }
-
+*/
     /**
      * Replaces this task's categories with the categories in the argument category list.
 
