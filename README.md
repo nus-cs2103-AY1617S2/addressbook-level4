@@ -31,7 +31,7 @@
 
 #### External Libraries
 
-* [Natty](http://natty.joestelmach.com/) - A framework to parse relative dates into absolute dates
-* [itextPDF](http://itextpdf.com/) - For exporting data to PDF files
+* [Natty](http://natty.joestelmach.com/) by joestelmach - A framework to parse relative dates into absolute dates
+* [itextPDF](http://itextpdf.com/) by iText Software - For exporting data to PDF files
 
 #### Licence : [MIT](LICENSE)
