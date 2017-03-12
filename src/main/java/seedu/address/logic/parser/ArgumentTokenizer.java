@@ -45,13 +45,20 @@ public class ArgumentTokenizer {
     }
 
     /**
-     * Creates a floating task with empty parameters
+     * Create a floating task according to parameters entered
      */
     public void createFloatingTask() {
-        if (positions.isEmpty()) {
-            saveArgument(PREFIX_NOTE, "");
-            saveArgument(PREFIX_PRIORITY, "");
-            saveArgument(PREFIX_STATUS, "");
+        List<Prefix> prefix = new ArrayList<>();
+        prefix.add(PREFIX_NOTE);
+        prefix.add(PREFIX_PRIORITY);
+        prefix.add(PREFIX_STATUS);
+
+        for (int i = 0; i < positions.size(); i++) {
+            prefix.remove(positions.get(i).getPrefix());
+        }
+
+        for (int i = 0; i < prefix.size(); i++) {
+            saveArgument(prefix.get(i), "");
         }
     }
 
