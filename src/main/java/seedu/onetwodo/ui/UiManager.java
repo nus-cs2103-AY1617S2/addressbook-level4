@@ -14,6 +14,7 @@ import seedu.onetwodo.commons.core.ComponentManager;
 import seedu.onetwodo.commons.core.Config;
 import seedu.onetwodo.commons.core.LogsCenter;
 import seedu.onetwodo.commons.events.storage.DataSavingExceptionEvent;
+import seedu.onetwodo.commons.events.ui.CloseDialogEvent;
 import seedu.onetwodo.commons.events.ui.JumpToListRequestEvent;
 import seedu.onetwodo.commons.events.ui.ShowHelpRequestEvent;
 import seedu.onetwodo.commons.events.ui.TaskPanelSelectionChangedEvent;
@@ -101,7 +102,11 @@ public class UiManager extends ComponentManager implements Ui {
     }
 
     //==================== Event Handling Code ===============================================================
-
+    @Subscribe
+    private void handleCloseDialog(CloseDialogEvent event){
+        mainWindow.closeDialog();
+    }
+    
     @Subscribe
     private void handleDataSavingExceptionEvent(DataSavingExceptionEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));

@@ -37,7 +37,7 @@ public class MainWindow extends UiPart<Region> {
     private static final String FXML = "MainWindow.fxml";
     private static final String FONT_AVENIR = "/fonts/avenir-light.ttf";
     private static final int MIN_HEIGHT = 600;
-    private static final int MIN_WIDTH = 450;
+    private static final int MIN_WIDTH = 650;
 
     private Stage primaryStage;
     private Logic logic;
@@ -48,6 +48,8 @@ public class MainWindow extends UiPart<Region> {
     private TaskListPanel eventTaskListPanel;
     private TaskListPanel todoTaskListPanel;
     private CommandBox commandBox;
+    
+    private JFXDialog dialog;
 
     private Config config;
 
@@ -254,18 +256,30 @@ public class MainWindow extends UiPart<Region> {
         JFXDialogLayout content = new JFXDialogLayout();
         content.setHeading(new Text(task.getName().fullName));
         content.setBody(new Text(task.getDescription().value));
-        JFXDialog dialog = new JFXDialog(dialogStackPane, content, JFXDialog.DialogTransition.CENTER, true);
-        dialog.show();
-        primaryStage.getScene().setOnKeyReleased(new EventHandler<KeyEvent>() {
+        this.dialog = new JFXDialog(dialogStackPane, content, JFXDialog.DialogTransition.CENTER, true);
+        this.dialog.show();
+        setCloseDialogHandler();
+    }
+    
+    private void setCloseDialogHandler() {
+        EventHandler<KeyEvent> eventHandler = new EventHandler<KeyEvent>() {
             public void handle(KeyEvent ke) {
                 if (ke.getCode() == KeyCode.ENTER) {
+                    // Ignore initial enter event from command,
+                    // instead handle empty string commands in parser.
                     return;
                 }
-                dialog.close();
-                commandBox.focus();
                 ke.consume();
+                closeDialog();
+                primaryStage.getScene().setOnKeyReleased(null);        
             }
-        });
+        };
+        primaryStage.getScene().setOnKeyReleased(eventHandler);
+    }
+    
+    void closeDialog() {
+        dialog.close();
+        commandBox.focus();        
     }
 
     void releaseResources() {
