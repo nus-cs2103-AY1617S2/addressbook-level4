@@ -72,7 +72,7 @@ Format: `list undone`
 ### 2.4. Updating an existing task : `update`
 
 Edits an existing task in TaskIt.<br>
-Format: `update <index>  <name|description|deadline|tag> <new>`
+Format: `update <index>  <title|description|deadline|tag> <new>`
 
 > * Edits the task at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
@@ -83,8 +83,8 @@ Format: `update <index>  <name|description|deadline|tag> <new>`
 
 Examples:
 
-* `update 2 name finish SWE HW`<br>
-  Update the second task name to finish SWE HW.
+* `update 2 title finish SWE HW`<br>
+  Update the second task title to finish SWE HW.
 
 * `Update 4 description work on user guide`<br>
   Update the fourth task description to work on user guide.
