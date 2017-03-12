@@ -14,14 +14,14 @@ public class TypicalTestTasks {
 
     public TypicalTestTasks() {
         try {
-            alice = new TaskBuilder().withName("Submit progress report")
-                    .withInformation("notify department head")
+            alice = new TaskBuilder().withName("Alice Pauline")
+                    .withInformation("123, Jurong West Ave 6, #08-111")
                     .withPriorityLevel("3")
                     .withStartDateTime("Feb 19, 2017 5pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
                     .withCategories("friends").build();
-            benson = new TaskBuilder().withName("Benson Meier")
-                    .withInformation("311, Clementi Ave 2, #02-25")
+            benson = new TaskBuilder().withName("Submit progress report")
+                    .withInformation("notify department head")
                     .withPriorityLevel("3")
                     .withStartDateTime("Feb 19, 2017 5pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
