@@ -15,12 +15,13 @@ import seedu.ezdo.logic.commands.IncorrectCommand;
 /**
  * Parses input arguments and creates a new FindCommand object
  */
-public class FindCommandParser {
+public class FindCommandParser implements CommandParser {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns an FindCommand object for execution.
      */
+    @Override
     public Command parse(String args) {
         final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {

@@ -9,8 +9,9 @@ import seedu.ezdo.logic.commands.Command;
 import seedu.ezdo.logic.commands.IncorrectCommand;
 import seedu.ezdo.logic.commands.SaveCommand;
 
-public class SaveCommandParser {
+public class SaveCommandParser implements CommandParser {
 
+    @Override
     public Command parse(String args) {
         assert args != null;
         ArgumentTokenizer argsTokenizer = new ArgumentTokenizer();
