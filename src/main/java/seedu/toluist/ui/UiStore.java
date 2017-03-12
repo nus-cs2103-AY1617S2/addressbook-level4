@@ -26,10 +26,8 @@ public class UiStore {
         this.viewedTasks = tasks;
     }
 
-    public Task getTask(String indexToken) {
-        int index = indexToken == null ? -1 : Integer.parseInt(indexToken) - 1;
-        Task task = indexToken == null ? null : viewedTasks.get(index);
-        return task;
+    public Task getTask(int index) {
+        return viewedTasks.get(index);
     }
 
     public ArrayList<Task> getTasks() {
@@ -38,7 +36,7 @@ public class UiStore {
 
     public ArrayList<Task> getTasks(List<Integer> indexes) {
         ArrayList<Task> tasks = new ArrayList<Task>();
-        for (int index: indexes) {
+        for (int index : indexes) {
             tasks.add(viewedTasks.get(index - 1));
         }
         return tasks;

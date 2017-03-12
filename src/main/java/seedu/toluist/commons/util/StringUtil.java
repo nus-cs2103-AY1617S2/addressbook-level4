@@ -61,6 +61,14 @@ public class StringUtil {
     }
 
     /**
+     * Returns the index if indexToken holds a valid index number, else returns -1
+     * @param indexToken the string holding the index number
+     */
+    public static int getIndex(String indexToken) {
+        return indexToken == null ? -1 : Integer.parseInt(indexToken) - 1;
+    }
+
+    /**
      * Splits a string of indexes into a list.
      *   Examples:
      *   splitIndexes(" - 3",           8) -> [1, 2, 3]
@@ -88,9 +96,7 @@ public class StringUtil {
         int i = 0;
         while (i < splittedStringIndexes.length) {
             String splittedStringIndex = splittedStringIndexes[i];
-
             if (StringUtil.isUnsignedInteger(splittedStringIndex)) {
-
                 int index = Integer.valueOf(splittedStringIndex);
                 if (index <= maxIndex) {
                     indexes.add(Integer.valueOf(splittedStringIndex));
@@ -99,9 +105,7 @@ public class StringUtil {
                     // Invalid state, early termination
                     return indexes;
                 }
-
             } else if (splittedStringIndex.equals(HYPHEN)) {
-
                 // If stringIndexes starts with "-", the startIndex will be 0;
                 int startIndex = (indexes.isEmpty()) ? 0 : indexes.get(indexes.size() - 1);
                 // If stringIndexes ends with "-", the endIndex will be todoListSize
@@ -117,7 +121,6 @@ public class StringUtil {
                     indexes.add(value);
                 }
                 i += 2;
-
             } else {
                 // Invalid state, early termination
                 return indexes;

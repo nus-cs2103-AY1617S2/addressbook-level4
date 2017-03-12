@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.util.DateTimeUtil;
+import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.controller.commons.TaskTokenizer;
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.Task;
@@ -42,7 +43,8 @@ public class UpdateTaskController extends Controller {
         String description = tokens.get(TaskTokenizer.TASK_DESCRIPTION);
 
         String indexToken = tokens.get(TaskTokenizer.TASK_VIEW_INDEX);
-        Task task = uiStore.getTask(indexToken);
+        int index = StringUtil.getIndex(indexToken);
+        Task task = uiStore.getTask(index);
 
         String startDateToken = tokens.get(TaskTokenizer.TASK_START_DATE_KEYWORD);
         LocalDateTime startDateTime = DateTimeUtil.parseDateString(startDateToken);
