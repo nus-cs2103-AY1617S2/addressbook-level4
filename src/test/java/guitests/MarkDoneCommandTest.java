@@ -18,11 +18,11 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
 
     @Test
     public void markTaskDone_success() throws Exception {
-        int taskBossIndex = 2;
+        int taskBossIndex = 8;
 
         TestTask markedDoneTask = new TaskBuilder().withName("Submit progress report")
-               .withPriorityLevel("3").withStartDateTime("10am Feb 19, 2017")
-               .withEndDateTime("10am Feb 28, 2017")
+               .withPriorityLevel("3").withStartDateTime("Feb 9, 2017 5pm")
+               .withEndDateTime("10am Feb 24, 2017 5pm")
                .withInformation("notify department head")
                .withCategories("Done").build();
 
