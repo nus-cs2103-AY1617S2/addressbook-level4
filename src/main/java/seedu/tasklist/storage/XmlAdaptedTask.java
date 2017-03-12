@@ -60,7 +60,7 @@ public class XmlAdaptedTask {
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getName().fullName;
         comment = source.getComment().value;
-        priority = source.getPriority().priority;
+        priority = source.getPriority().value;
         tagged = new ArrayList<>();
         type = source.getType();
         for (Tag tag : source.getTags()) {
