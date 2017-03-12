@@ -16,12 +16,18 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
    > Having any Java 8 version is not enough. <br>
    > This app will not work with earlier versions of Java 8.
 
+1. Download the latest `taskmanager.jar` from the [releases](../../../releases) tab.
+2. Copy the file to the folder you want to use as the home folder for your Task Manager.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
    > <img src="images/Ui.png" width="600">
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
+   * **`list`** : lists all tasks
+   * **`add`**` Meeting dl/15-05-2017 ds/Meeting Room 1 t/important` :
+     adds a task named `Meeting` to the Task Manager.
+   * **`delete`**` 3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
@@ -45,17 +51,27 @@ Format: help
 ## 2.2. Adding a task: `add`
 
 Adds a task to task list
+<<<<<<< HEAD
 Format: add TASKNAME -d DATE [-o DESCRIPTION] [-p]
+=======
+Format: add TASKNAME dl/DATE [ds/DESCRIPTION] [-p]
+>>>>>>> origin/master
 
 Examples:
 
+* `add Make payment dl/01/08/2017 ds/Pay credit card bills -p`
+* `add Complete project dl/12/12/2017`
 
+## 2.3. Modifying a task: `edit`
 
 Updates an existing task in the task list
 Format: update INDEX [-n TASKNAME] [-d DATE] [-o DESCRIPTION] [-p]
+Format: edit INDEX [TASKNAME] [dl/DATE] [ds/DESCRIPTION] [-p]
 
 Examples:
 
+* `edit 3 buy eggs dl/29-02-2017 ds/as soon as possible`
+* `edit 1 tie shoelace dl/25-12-2017`
 
 ## 2.4. Delete a task: `delete`
 
@@ -93,12 +109,19 @@ Examples:
 ## 2.9. Finding all tasks containing any keyword in the task name: `find`
 
 Finds tasks that satisfy given parameters
+Format: find KEYWORDS [dl/DATE] [ds/KEYWORDS] 
 
+> finds tasks whose task name contain any of the given keywords
+> ‘find dl/’ finds tasks whose deadline falls on specified date
+> ‘find ds/’ finds tasks whose task description contain any of the given keywords
 > 
 > The search is case sensitive, the order of the keywords does not matter, only the name is searched, and tasks matching at least one keyword will be returned
 
 Examples:
 
+* `find Project Name`
+* `find ds/Some description of the project`
+* `find dl/12-08-2017`
 
 ## 2.10. Clearing all entries : `clear`
 
@@ -119,11 +142,16 @@ There is no need to manually save the data
 
 * **Help** : `help`
 
+* **Add**  `add TASKNAME dl/DATE [ds/DESCRIPTION] [-p]` <br>
+  e.g. `add Make payment dl/01-08-2017 ds/Pay credit card bills -p`
 
+* **Update** : `update INDEX [TASKNAME] [dl/DATE] [ds/DESCRIPTION] [-p]` <br>
+  e.g. `update 3 buy eggs dl/29-02-2017 ds/as soon as possible`
 
 * **Delete** : `delete INDEX` <br>
    e.g. `delete 3`
 
+* **Find** : `find [KEYWORDS] [ds/KEYWORDS] [dl/DATE]` <br>
   e.g. `find James Jake`
 
 * **List** : `list` <br>
