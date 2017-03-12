@@ -1,7 +1,6 @@
 package seedu.doist.logic.parser;
 
 import static seedu.doist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import static seedu.doist.logic.parser.CliSyntax.PREFIX_AS;
 import static seedu.doist.logic.parser.CliSyntax.PREFIX_BY;
 import static seedu.doist.logic.parser.CliSyntax.PREFIX_EVERY;
@@ -11,8 +10,7 @@ import static seedu.doist.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.doist.logic.parser.CliSyntax.PREFIX_UNDER;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -56,7 +54,7 @@ public class AddCommandParser {
         argsTokenizer.tokenize(parameters);
 
         try {
-            Task taskToAdd = createTaskFromParameters(preamble, argsTokenizer.getTokenizedArguments());
+            Task taskToAdd = createTaskFromParameters(preamble, argsTokenizer);
             return new AddCommand(taskToAdd);
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
@@ -69,8 +67,7 @@ public class AddCommandParser {
      * @throws IllegalValueException
      *             if any of the raw values are invalid
      */
-    private Task createTaskFromParameters(String preamble,
-                                          Map<String, List<String>> parameters) throws IllegalValueException {
+    private Task createTaskFromParameters(String preamble, ArgumentTokenizer tokenizer) throws IllegalValueException {
         if (preamble == null || preamble.trim().isEmpty()) {
             throw new IllegalValueException(AddCommand.MESSAGE_NO_DESC);
         }
@@ -78,19 +75,17 @@ public class AddCommandParser {
         UniqueTagList tagList = new UniqueTagList();
 
         // create task with specified tags
-        List<String> tagsParameterStringList = parameters.get(PREFIX_UNDER.toString());
-        if (tagsParameterStringList != null && !tagsParameterStringList.isEmpty()) {
-            tagList = ParserUtil.parseTagsFromString(tagsParameterStringList.get(0));
+        Optional<String> tagsParameterString = tokenizer.getValue(PREFIX_UNDER);
+        if (tagsParameterString.isPresent()) {
+            tagList = ParserUtil.parseTagsFromString(tagsParameterString.get());
         }
         Task toAdd = new Task(new Description(preamble), tagList);
 
         // set priority
-        List<String> priority = parameters.get(PREFIX_AS.toString());
-        if (priority != null && !priority.isEmpty()) {
-            String priorityStr = priority.get(0).trim();
-            toAdd.setPriority(new Priority(priorityStr));
+        Optional<Priority> priority = ParserUtil.parsePriority(tokenizer.getValue(PREFIX_AS));
+        if (priority.isPresent()) {
+            toAdd.setPriority(priority.get());
         }
-
         return toAdd;
     }
 }
