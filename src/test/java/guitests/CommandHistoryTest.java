@@ -1,5 +1,5 @@
 package guitests;
 
-public class CommandHistoryTest {
+public class CommandHistoryTest extends DoistGUITest{
 
 }

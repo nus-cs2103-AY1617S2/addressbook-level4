@@ -14,8 +14,8 @@ public class ClearCommandTest extends DoistGUITest {
         assertClearCommandSuccess();
 
         //verify other commands can work after a clear command
-        commandBox.runCommand(td.hoon.getAddCommand());
-        assertTrue(personListPanel.isListMatching(td.hoon));
+        commandBox.runCommand(td.email.getAddCommand());
+        assertTrue(personListPanel.isListMatching(td.email));
         commandBox.runCommand("delete 1");
         assertListSize(0);
 

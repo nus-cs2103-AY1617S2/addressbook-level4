@@ -5,7 +5,7 @@ import static seedu.doist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
 
-import guitests.guihandles.PersonCardHandle;
+import guitests.guihandles.TaskCardHandle;
 import seedu.doist.commons.core.Messages;
 import seedu.doist.logic.commands.EditCommand;
 //import seedu.doist.model.tag.Tag;
@@ -114,7 +114,7 @@ public class EditCommandTest extends DoistGUITest {
         commandBox.runCommand("edit " + filteredPersonListIndex + " " + detailsToEdit);
 
         // confirm the new card contains the right data
-        PersonCardHandle editedCard = personListPanel.navigateToPerson(editedPerson.getDescription().desc);
+        TaskCardHandle editedCard = personListPanel.navigateToPerson(editedPerson.getDescription().desc);
         assertMatching(editedPerson, editedCard);
 
         // confirm the list now contains all previous persons plus the person with updated details
