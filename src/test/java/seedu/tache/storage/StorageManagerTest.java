@@ -57,8 +57,8 @@ public class StorageManagerTest {
     public void taskManagerReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link XmlAddressBookStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link XmlAddressBookStorageTest} class.
+         * {@link XmlTaskManagerStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link XmlTaskManagerStorageTest} class.
          */
         TaskManager original = new TypicalTestTasks().getTypicalTaskManager();
         storageManager.saveTaskManager(original);
@@ -68,7 +68,7 @@ public class StorageManagerTest {
 
     @Test
     public void getTaskManagerFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+        assertNotNull(storageManager.getTaskManagerFilePath());
     }
 
     @Test

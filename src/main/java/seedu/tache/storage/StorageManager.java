@@ -15,23 +15,23 @@ import seedu.tache.model.ReadOnlyTaskManager;
 import seedu.tache.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of Task Manager data in local storage.
  */
 public class StorageManager extends ComponentManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private TaskManagerStorage addressBookStorage;
+    private TaskManagerStorage taskManagerStorage;
     private UserPrefsStorage userPrefsStorage;
 
 
-    public StorageManager(TaskManagerStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(TaskManagerStorage taskManagerStorage, UserPrefsStorage userPrefsStorage) {
         super();
-        this.addressBookStorage = addressBookStorage;
+        this.taskManagerStorage = taskManagerStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
-    public StorageManager(String addressBookFilePath, String userPrefsFilePath) {
-        this(new XmlTaskManagerStorage(addressBookFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
+    public StorageManager(String taskManagerFilePath, String userPrefsFilePath) {
+        this(new XmlTaskManagerStorage(taskManagerFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
     }
 
     // ================ UserPrefs methods ==============================
@@ -47,33 +47,33 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ TaskManager methods ==============================
 
     @Override
-    public String getAddressBookFilePath() {
-        return addressBookStorage.getAddressBookFilePath();
+    public String getTaskManagerFilePath() {
+        return taskManagerStorage.getTaskManagerFilePath();
     }
 
     @Override
     public Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException {
-        return readTaskManager(addressBookStorage.getAddressBookFilePath());
+        return readTaskManager(taskManagerStorage.getTaskManagerFilePath());
     }
 
     @Override
     public Optional<ReadOnlyTaskManager> readTaskManager(String filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return addressBookStorage.readTaskManager(filePath);
+        return taskManagerStorage.readTaskManager(filePath);
     }
 
     @Override
-    public void saveTaskManager(ReadOnlyTaskManager addressBook) throws IOException {
-        saveTaskManager(addressBook, addressBookStorage.getAddressBookFilePath());
+    public void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException {
+        saveTaskManager(taskManager, taskManagerStorage.getTaskManagerFilePath());
     }
 
     @Override
-    public void saveTaskManager(ReadOnlyTaskManager addressBook, String filePath) throws IOException {
+    public void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveTaskManager(addressBook, filePath);
+        taskManagerStorage.saveTaskManager(taskManager, filePath);
     }
 
 

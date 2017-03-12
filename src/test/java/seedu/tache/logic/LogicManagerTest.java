@@ -59,13 +59,13 @@ public class LogicManagerTest {
     private Logic logic;
 
     //These are for checking the correctness of the events raised
-    private ReadOnlyTaskManager latestSavedAddressBook;
+    private ReadOnlyTaskManager latestSavedTaskManager;
     private boolean helpShown;
     private int targetedJumpIndex;
 
     @Subscribe
     private void handleLocalModelChangedEvent(TaskManagerChangedEvent abce) {
-        latestSavedAddressBook = new TaskManager(abce.data);
+        latestSavedTaskManager = new TaskManager(abce.data);
     }
 
     @Subscribe
@@ -81,12 +81,12 @@ public class LogicManagerTest {
     @Before
     public void setUp() {
         model = new ModelManager();
-        String tempAddressBookFile = saveFolder.getRoot().getPath() + "TempTaskManager.xml";
+        String tempTaskManagerFile = saveFolder.getRoot().getPath() + "TempTaskManager.xml";
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
-        logic = new LogicManager(model, new StorageManager(tempAddressBookFile, tempPreferencesFile));
+        logic = new LogicManager(model, new StorageManager(tempTaskManagerFile, tempPreferencesFile));
         EventsCenter.getInstance().registerHandler(this);
 
-        latestSavedAddressBook = new TaskManager(model.getTaskManager()); // last saved assumed to be up to date
+        latestSavedTaskManager = new TaskManager(model.getTaskManager()); // last saved assumed to be up to date
         helpShown = false;
         targetedJumpIndex = -1; // non yet
     }
@@ -108,9 +108,9 @@ public class LogicManagerTest {
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager, List)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
-                                      ReadOnlyTaskManager expectedAddressBook,
+                                      ReadOnlyTaskManager expectedTaskManager,
                                       List<? extends ReadOnlyTask> expectedShownList) {
-        assertCommandBehavior(false, inputCommand, expectedMessage, expectedAddressBook, expectedShownList);
+        assertCommandBehavior(false, inputCommand, expectedMessage, expectedTaskManager, expectedShownList);
     }
 
     /**
@@ -119,21 +119,21 @@ public class LogicManagerTest {
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager, List)
      */
     private void assertCommandFailure(String inputCommand, String expectedMessage) {
-        TaskManager expectedAddressBook = new TaskManager(model.getTaskManager());
+        TaskManager expectedTaskManager = new TaskManager(model.getTaskManager());
         List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredTaskList());
-        assertCommandBehavior(true, inputCommand, expectedMessage, expectedAddressBook, expectedShownList);
+        assertCommandBehavior(true, inputCommand, expectedMessage, expectedTaskManager, expectedShownList);
     }
 
     /**
      * Executes the command, confirms that the result message is correct
      * and that a CommandException is thrown if expected
      * and also confirms that the following three parts of the LogicManager object's state are as expected:<br>
-     *      - the internal task manager data are same as those in the {@code expectedAddressBook} <br>
+     *      - the internal task manager data are same as those in the {@code expectedTaskManager} <br>
      *      - the backing list shown by UI matches the {@code shownList} <br>
-     *      - {@code expectedAddressBook} was saved to the storage file. <br>
+     *      - {@code expectedTaskManager} was saved to the storage file. <br>
      */
     private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand, String expectedMessage,
-                                       ReadOnlyTaskManager expectedAddressBook,
+                                       ReadOnlyTaskManager expectedTaskManager,
                                        List<? extends ReadOnlyTask> expectedShownList) {
 
         try {
@@ -149,8 +149,8 @@ public class LogicManagerTest {
         assertEquals(expectedShownList, model.getFilteredTaskList());
 
         //Confirm the state of data (saved and in-memory) is as expected
-        assertEquals(expectedAddressBook, model.getTaskManager());
-        assertEquals(expectedAddressBook, latestSavedAddressBook);
+        assertEquals(expectedTaskManager, model.getTaskManager());
+        assertEquals(expectedTaskManager, latestSavedTaskManager);
     }
 
     @Test
@@ -223,7 +223,7 @@ public class LogicManagerTest {
         Task toBeAdded = helper.adam();
 
         // setup starting state
-        model.addTask(toBeAdded); // task already in internal address book
+        model.addTask(toBeAdded); // task already in internal task manager
 
         // execute command and verify result
         assertCommandFailure(helper.generateAddCommand(toBeAdded),  AddCommand.MESSAGE_DUPLICATE_TASK);
@@ -235,10 +235,10 @@ public class LogicManagerTest {
     public void execute_list_showsAllTasks() throws Exception {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
-        TaskManager expectedAB = helper.generateAddressBook(2);
+        TaskManager expectedAB = helper.generateTaskManager(2);
         List<? extends ReadOnlyTask> expectedList = expectedAB.getTaskList();
 
-        // prepare address book state
+        // prepare task manager state
         helper.addToModel(model, 2);
 
         assertCommandSuccess("list",
@@ -299,7 +299,7 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
 
-        TaskManager expectedAB = helper.generateAddressBook(threeTasks);
+        TaskManager expectedAB = helper.generateTaskManager(threeTasks);
         helper.addToModel(model, threeTasks);
 
         assertCommandSuccess("select 2",
@@ -327,7 +327,7 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
 
-        TaskManager expectedAB = helper.generateAddressBook(threeTasks);
+        TaskManager expectedAB = helper.generateTaskManager(threeTasks);
         expectedAB.removeTask(threeTasks.get(1));
         helper.addToModel(model, threeTasks);
 
@@ -353,7 +353,7 @@ public class LogicManagerTest {
         Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(p1, pTarget1, p2, pTarget2);
-        TaskManager expectedAB = helper.generateAddressBook(fourTasks);
+        TaskManager expectedAB = helper.generateTaskManager(fourTasks);
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2);
         helper.addToModel(model, fourTasks);
 
@@ -372,7 +372,7 @@ public class LogicManagerTest {
         Task p4 = helper.generateTaskWithName("KEy sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(p3, p1, p4, p2);
-        TaskManager expectedAB = helper.generateAddressBook(fourTasks);
+        TaskManager expectedAB = helper.generateTaskManager(fourTasks);
         List<Task> expectedList = fourTasks;
         helper.addToModel(model, fourTasks);
 
@@ -391,7 +391,7 @@ public class LogicManagerTest {
         Task p1 = helper.generateTaskWithName("sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(pTarget1, p1, pTarget2, pTarget3);
-        TaskManager expectedAB = helper.generateAddressBook(fourTasks);
+        TaskManager expectedAB = helper.generateTaskManager(fourTasks);
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
         helper.addToModel(model, fourTasks);
 
@@ -446,37 +446,37 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates an AddressBook with auto-generated tasks.
+         * Generates an TaskManager with auto-generated tasks.
          */
-        TaskManager generateAddressBook(int numGenerated) throws Exception {
-            TaskManager addressBook = new TaskManager();
-            addToAddressBook(addressBook, numGenerated);
-            return addressBook;
+        TaskManager generateTaskManager(int numGenerated) throws Exception {
+            TaskManager taskManager = new TaskManager();
+            addToTaskManager(taskManager, numGenerated);
+            return taskManager;
         }
 
         /**
-         * Generates an AddressBook based on the list of Tasks given.
+         * Generates an TaskManager based on the list of Tasks given.
          */
-        TaskManager generateAddressBook(List<Task> tasks) throws Exception {
-            TaskManager addressBook = new TaskManager();
-            addToAddressBook(addressBook, tasks);
-            return addressBook;
+        TaskManager generateTaskManager(List<Task> tasks) throws Exception {
+            TaskManager taskManager = new TaskManager();
+            addToTaskManager(taskManager, tasks);
+            return taskManager;
         }
 
         /**
-         * Adds auto-generated Task objects to the given AddressBook
-         * @param addressBook The AddressBook to which the Tasks will be added
+         * Adds auto-generated Task objects to the given TaskManager
+         * @param taskManager The TaskManager to which the Tasks will be added
          */
-        void addToAddressBook(TaskManager addressBook, int numGenerated) throws Exception {
-            addToAddressBook(addressBook, generateTaskList(numGenerated));
+        void addToTaskManager(TaskManager taskManager, int numGenerated) throws Exception {
+            addToTaskManager(taskManager, generateTaskList(numGenerated));
         }
 
         /**
-         * Adds the given list of Tasks to the given AddressBook
+         * Adds the given list of Tasks to the given TaskManager
          */
-        void addToAddressBook(TaskManager addressBook, List<Task> tasksToAdd) throws Exception {
+        void addToTaskManager(TaskManager taskManager, List<Task> tasksToAdd) throws Exception {
             for (Task p: tasksToAdd) {
-                addressBook.addTask(p);
+                taskManager.addTask(p);
             }
         }
 

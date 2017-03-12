@@ -24,10 +24,34 @@ public class SampleDataUtil {
         }
     }
 
+    public static Task[] getSampleDetailedTasks() {
+        try {
+            return new Task[] {
+                new Task(new Name("Walk the Dog from 8-8.30pm"), new UniqueTagList("MediumPriority")),
+                new Task(new Name("Buy Medicine at 12 noon"), new UniqueTagList("LowPriority")),
+                new Task(new Name("Submit Project Proposal by 3pm"), new UniqueTagList("HighPriority")),
+            };
+        } catch (IllegalValueException e) {
+            throw new AssertionError("sample data cannot be invalid", e);
+        }
+    }
+
     public static ReadOnlyTaskManager getSampleTaskManager() {
         try {
             TaskManager sampleAB = new TaskManager();
             for (Task sampleTask : getSampleTasks()) {
+                sampleAB.addTask(sampleTask);
+            }
+            return sampleAB;
+        } catch (DuplicateTaskException e) {
+            throw new AssertionError("sample data cannot contain duplicate tasks", e);
+        }
+    }
+
+    public static ReadOnlyTaskManager getSampleDetailedTaskManager() {
+        try {
+            TaskManager sampleAB = new TaskManager();
+            for (Task sampleTask : getSampleDetailedTasks()) {
                 sampleAB.addTask(sampleTask);
             }
             return sampleAB;
