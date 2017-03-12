@@ -37,7 +37,7 @@ public class IndexTokenizer {
         // Prepare stringIndexes in the correct format to be processed
         // Correct format example: ["2", "-", "5", "7", "11", "-", "13", "15"]
         String processedStringIndexes = stringIndexes.replaceAll(HYPHEN, " - ");
-        String[] splittedStringIndexes = processedStringIndexes.split(" |\\,");
+        String[] splittedStringIndexes = processedStringIndexes.split(" |,");
         splittedStringIndexes = Arrays.
                 stream(splittedStringIndexes).
                 filter(s -> !s.isEmpty()).
@@ -48,7 +48,7 @@ public class IndexTokenizer {
         int i = 0;
         while (i < splittedStringIndexes.length) {
             String splittedStringIndex = splittedStringIndexes[i];
-            if (StringUtil.isUnsignedInteger(splittedStringIndex)) {
+            if (StringUtil.isPositiveInteger(splittedStringIndex)) {
                 int index = Integer.valueOf(splittedStringIndex);
                 if (index <= maxIndex) {
                     indexes.add(Integer.valueOf(splittedStringIndex));
@@ -63,7 +63,7 @@ public class IndexTokenizer {
                 // If stringIndexes ends with "-", the endIndex will be todoListSize
                 int endIndex = maxIndex;
                 if (i + 1 < splittedStringIndexes.length
-                        && StringUtil.isUnsignedInteger(splittedStringIndexes[i + 1])) {
+                        && StringUtil.isPositiveInteger(splittedStringIndexes[i + 1])) {
                     endIndex = Integer.valueOf(splittedStringIndexes[i + 1]);
                 } else if (i + 1 > splittedStringIndexes.length) {
                     // Invalid state, early termination
