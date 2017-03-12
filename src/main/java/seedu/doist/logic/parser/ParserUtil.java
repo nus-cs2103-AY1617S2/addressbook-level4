@@ -45,13 +45,30 @@ public class ParserUtil {
     }
 
     /**
-     * Returns an array of integers separated using space in the input string
+     * Returns an list of integers separated using space in the input string
      */
     public static List<Optional<Integer>> parseIndices(String command) {
         ArrayList<Optional<Integer>> indices = new ArrayList<Optional<Integer>>();
         String[] commandStringComponents = command.trim().split(" ");
         for (String component : commandStringComponents) {
             indices.add(parseIndex(component));
+        }
+        return indices;
+    }
+
+    /**
+     * Returns an array of integers separated using space in the input string
+     */
+    public static int[] parseStringToIntArray(String string) {
+        List<Optional<Integer>> optionalIndices = ParserUtil.parseIndices(string);
+        for (Optional<Integer> optionalIndex : optionalIndices) {
+            if (!optionalIndex.isPresent()) {
+                return null;
+            }
+        }
+        int[] indices = new int[optionalIndices.size()];
+        for (int i = 0; i < indices.length; i++) {
+            indices[i] = optionalIndices.get(i).get().intValue();
         }
         return indices;
     }
