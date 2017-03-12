@@ -14,7 +14,6 @@ import java.util.regex.Matcher;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.IncorrectCommand;
-import seedu.address.logic.commands.ListCommand;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -43,7 +42,7 @@ public class FindCommandParser {
                 return new FindCommand(argsTokenizer.getValue(PREFIX_DEADLINE).get());
             }
         } catch (Exception e) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
         // keywords delimited by whitespace
