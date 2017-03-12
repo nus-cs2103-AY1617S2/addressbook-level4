@@ -6,15 +6,15 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Represents a Task in the address book.
- * Guarantees: details are present and not null, field values are validated.
+ * Represents a Task in the address book. Guarantees: details are present and
+ * not null, field values are validated.
  */
 public class Task implements ReadOnlyTask {
 
     private Name name;
 
     private UniqueTagList tags;
-    
+
     private boolean done;
 
     /**
@@ -23,7 +23,8 @@ public class Task implements ReadOnlyTask {
     public Task(Name name, UniqueTagList tags, boolean done) {
         assert !CollectionUtil.isAnyNull(name, tags);
         this.name = name;
-        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.tags = new UniqueTagList(tags); // protect internal tags from
+                                             // changes in the arg list
         this.done = done;
     }
 
@@ -38,19 +39,19 @@ public class Task implements ReadOnlyTask {
         assert name != null;
         this.name = name;
     }
-    
+
     public void setDone(boolean done) {
-    	this.done = done;
+        this.done = done;
     }
 
     @Override
     public Name getName() {
         return name;
     }
-    
+
     @Override
     public boolean isDone() {
-    	return done;
+        return done;
     }
 
     @Override
@@ -80,12 +81,13 @@ public class Task implements ReadOnlyTask {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ReadOnlyTask // instanceof handles nulls
-                && this.isSameStateAs((ReadOnlyTask) other));
+                        && this.isSameStateAs((ReadOnlyTask) other));
     }
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
+        // use this method for custom fields hashing instead of implementing
+        // your own
         return Objects.hash(name, tags, done);
     }
 
