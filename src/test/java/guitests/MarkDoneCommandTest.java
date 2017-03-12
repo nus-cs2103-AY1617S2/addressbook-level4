@@ -34,7 +34,7 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
         commandBox.runCommand("find n/Submit progress report");
 
         int filteredTaskListIndex = 1;
-        int taskBossIndex = 7;
+        int taskBossIndex = 6;
 
         TestTask taskToMarkDone = expectedTasksList[taskBossIndex - 1];
         TestTask markedDoneTask = new TaskBuilder(taskToMarkDone).withCategories("Done").build();
