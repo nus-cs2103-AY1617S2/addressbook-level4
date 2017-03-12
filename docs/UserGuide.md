@@ -74,7 +74,7 @@ Format: `edit INDEX [TITLE] [d/DATE] [p/PRIORITY] [i/INSTRUCTION] [t/TAG]...`
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
 > * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
-> * You can remove all the task's tags by typing `t/` without specifying any tags after it. 
+> * You can remove all the task's tags by typing `t/` without specifying any tags after it.
 
 Examples:
 
@@ -101,7 +101,7 @@ Examples:
 * `find groceries Buy`<br>
    Returns `Buy groceries` but not `Groceries`
 * `find buy webcast`<br>
-   Returns Any tasks having titles `buy` or `webcast`   
+   Returns Any tasks having titles `buy` or `webcast`
 
 ### 2.6. Deleting a task : `delete`
 

@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+//import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.UnmodifiableObservableList;
@@ -26,16 +27,21 @@ public interface Model {
 
     /**
      * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
+     * @param targetList
      *
      * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
      *      another existing task in the list.
      * @throws IndexOutOfBoundsException if {@code filteredTaskListIndex} < 0 or >= the size of the filtered list.
      */
-    void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
+    void updateTask(String targetList, int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException;
 
-    /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    /** Returns the filtered non-floating task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getNonFloatingTaskList();
+
+    /** Returns the filtered floating task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    UnmodifiableObservableList<ReadOnlyTask> getFloatingTaskList();
+
 
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();

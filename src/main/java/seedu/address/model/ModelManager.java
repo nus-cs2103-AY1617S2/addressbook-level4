@@ -1,15 +1,17 @@
 package seedu.address.model;
 
+//import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
+import me.xdrop.fuzzywuzzy.FuzzySearch;
+
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.commons.util.StringUtil;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
@@ -26,6 +28,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<ReadOnlyTask> nonFloatingTasks;
     private final FilteredList<ReadOnlyTask> floatingTasks;
     //private final FilteredList<ReadOnlyTask> completedTasks;
+    private static final int MATCHING_INDEX = 35;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -77,11 +80,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
+    public void updateTask(String targetList, int taskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
-
-        int addressBookIndex = nonFloatingTasks.getSourceIndex(filteredTaskListIndex);
+        int addressBookIndex = nonFloatingTasks.getSourceIndex(taskListIndex);
+        if (targetList.equals("floating")) {
+            addressBookIndex = floatingTasks.getSourceIndex(taskListIndex);
+        }
         addressBook.updateTask(addressBookIndex, editedTask);
         indicateAddressBookChanged();
     }
@@ -96,15 +101,15 @@ public class ModelManager extends ComponentManager implements Model {
     public UnmodifiableObservableList<ReadOnlyTask> getFloatingTaskList() {
         return new UnmodifiableObservableList<>(floatingTasks);
     }
-    
+
     @Override
     public void updateFilteredListToShowAll() {
         //filteredTasks.setPredicate(new PredicateExpression(new DateFloatingQualifier())::satisfies);
-    	nonFloatingTasks.setPredicate(new PredicateExpression(new DateNotFloatingQualifier())::satisfies);
-    	//filteredTasks.setPredicate(null);
+        nonFloatingTasks.setPredicate(new PredicateExpression(new DateNotFloatingQualifier())::satisfies);
+        //filteredTasks.setPredicate(null);
     }
 
-    public void updateFilteredListToShowAllFloatingTasks(){
+    public void updateFilteredListToShowAllFloatingTasks() {
         floatingTasks.setPredicate(new PredicateExpression(new DateFloatingQualifier())::satisfies);
     }
 
@@ -158,9 +163,13 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getTitle().title, keyword))
+                    .filter(keyword -> fuzzyFind(task.getTitle().title.toLowerCase(), keyword))
                     .findAny()
                     .isPresent();
+        }
+
+        public boolean fuzzyFind(String title, String keyword) {
+            return FuzzySearch.ratio(title, keyword) > MATCHING_INDEX;
         }
 
         @Override
@@ -168,22 +177,22 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
-    
+
     private class DateFloatingQualifier implements Qualifier {
-    	
-    	@Override
-    	public boolean run(ReadOnlyTask task) {
-    		return task.getDeadline().toString().equals("floating");
-    	}
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return task.getDeadline().toString().equals("floating");
+        }
 
     }
-    
+
     private class DateNotFloatingQualifier implements Qualifier {
-    	
-    	@Override
-    	public boolean run(ReadOnlyTask task) {
-    		return !task.getDeadline().toString().equals("floating");
-    	}
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return !task.getDeadline().toString().equals("floating");
+        }
 
     }
 }

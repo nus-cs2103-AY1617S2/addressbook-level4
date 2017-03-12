@@ -1,4 +1,4 @@
-# Burdens (v0.1)
+# Burdens (v0.2)
 
 [![Build Status](https://api.travis-ci.org/CS2103JAN2017-W09-B1/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-W09-B1/main)
 [![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-W09-B1/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-W09-B1/main?branch=master)
@@ -34,7 +34,7 @@
 
 * Some parts of this application is inspired by the excellent
   [Java FX tutorial](http://code.makery.ch/library/javafx-8-tutorial/) by *Marco Jakob*.
-* Some parts of this application is also inspired by the excellent SE-EDU initiative at 
+* Some parts of this application is also inspired by the excellent SE-EDU initiative at
   (https://github.com/se-edu/)
 
 #### Licence : [MIT](LICENSE)

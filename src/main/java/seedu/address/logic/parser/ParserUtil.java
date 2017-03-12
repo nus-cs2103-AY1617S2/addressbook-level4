@@ -18,6 +18,7 @@ import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Instruction;
 import seedu.address.model.task.Priority;
+import seedu.address.model.task.Task;
 import seedu.address.model.task.Title;
 
 /**
@@ -25,14 +26,21 @@ import seedu.address.model.task.Title;
  */
 public class ParserUtil {
 
-    private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
+    private static final Pattern LISTNAME_INDEX_ARGS_FORMAT = Pattern.compile(
+            "(?<listName>("
+            + Task.TASK_NAME_FLOATING
+            + "|"
+            + Task.TASK_NAME_NON_FLOATING
+            + ")?)"
+            + "(\\s?)(?<targetIndex>[1-9]+)"
+            );
 
     /**
      * Returns the specified index in the {@code command} if it is a positive unsigned integer
      * Returns an {@code Optional.empty()} otherwise.
      */
     public static Optional<Integer> parseIndex(String command) {
-        final Matcher matcher = INDEX_ARGS_FORMAT.matcher(command.trim());
+        final Matcher matcher = LISTNAME_INDEX_ARGS_FORMAT.matcher(command.trim());
         if (!matcher.matches()) {
             return Optional.empty();
         }
@@ -42,6 +50,22 @@ public class ParserUtil {
             return Optional.empty();
         }
         return Optional.of(Integer.parseInt(index));
+
+    }
+
+    /**
+     * Returns the specified task list name in the {@code command} if it is an alpha-non-numeric string
+     * that corresponds to a valid task list name.
+     * Returns "invalid" otherwise.
+     */
+    public static Optional<String> parseListName(String command) {
+        final Matcher matcher = LISTNAME_INDEX_ARGS_FORMAT.matcher(command.trim());
+        if (!matcher.matches()) {
+            return Optional.empty();
+        }
+
+        String listName = matcher.group("listName") == null ? Task.TASK_NAME_FLOATING : matcher.group("listName");
+        return Optional.of(listName);
 
     }
 
