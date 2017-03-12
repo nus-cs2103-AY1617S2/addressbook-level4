@@ -60,7 +60,7 @@ public class EditCommand extends Command {
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
         Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
-        EndTime updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(taskToEdit::getDeadline);
+        EndTime updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(taskToEdit::getEndTime);
         Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 

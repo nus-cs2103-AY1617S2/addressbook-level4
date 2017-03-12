@@ -28,7 +28,7 @@ public class TestTask implements ReadOnlyTask {
     public TestTask(TestTask taskToCopy) {
         this.name = taskToCopy.getName();
         this.priority = taskToCopy.getPriority();
-        this.deadline = taskToCopy.getDeadline();
+        this.deadline = taskToCopy.getEndTime();
         this.description = taskToCopy.getDescription();
         this.tags = taskToCopy.getTags();
     }
@@ -52,7 +52,7 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public EndTime getDeadline() {
+    public EndTime getEndTime() {
         return deadline;
     }
 
@@ -88,7 +88,7 @@ public class TestTask implements ReadOnlyTask {
         sb.append("add " + this.getName().fullName + " ");
         sb.append("d/" + this.getDescription().value + " ");
         sb.append("p/" + this.getPriority().value + " ");
-        sb.append("e/" + this.getDeadline().value + " ");
+        sb.append("e/" + this.getEndTime().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }

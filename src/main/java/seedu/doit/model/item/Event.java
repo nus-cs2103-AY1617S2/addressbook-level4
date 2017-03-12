@@ -13,18 +13,21 @@ public class Event implements ReadOnlyEvent {
 
     private Name name;
     private Priority priority;
-    private EndTime deadline;
+    private StartTime startTime;
+    private EndTime endTime;
     private Description description;
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Event(Name name, Priority priority, EndTime deadline, Description description, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, priority, deadline, description, tags);
+    public Event(Name name, Priority priority, StartTime startTime, EndTime endTime,
+                 Description description, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, priority, startTime, endTime, description, tags);
         this.name = name;
         this.priority = priority;
-        this.deadline = deadline;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.description = description;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
@@ -33,7 +36,8 @@ public class Event implements ReadOnlyEvent {
      * Creates a copy of the given ReadOnlyEvent.
      */
     public Event(ReadOnlyEvent source) {
-        this(source.getName(), source.getPriority(), source.getDeadline(), source.getDescription(), source.getTags());
+        this(source.getName(), source.getPriority(), source.getStartTime(),
+             source.getEndTime(), source.getDescription(), source.getTags());
     }
 
     @Override
@@ -57,13 +61,24 @@ public class Event implements ReadOnlyEvent {
     }
 
     @Override
-    public EndTime getDeadline() {
-        return deadline;
+    public StartTime getStartTime() {
+        return startTime;
     }
 
-    public void setDeadline(EndTime deadline) {
-        assert deadline != null;
-        this.deadline = deadline;
+    public void setStartTime(StartTime startTime) {
+        assert startTime != null;
+        this.startTime = startTime;
+    }
+
+
+    @Override
+    public EndTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(EndTime endTime) {
+        assert endTime != null;
+        this.endTime = endTime;
     }
 
     @Override
@@ -96,7 +111,7 @@ public class Event implements ReadOnlyEvent {
 
         this.setName(replacement.getName());
         this.setPriority(replacement.getPriority());
-        this.setDeadline(replacement.getDeadline());
+        this.setEndTime(replacement.getEndTime());
         this.setDescription(replacement.getDescription());
         this.setTags(replacement.getTags());
     }
@@ -111,12 +126,11 @@ public class Event implements ReadOnlyEvent {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, priority, deadline, description, tags);
+        return Objects.hash(name, priority, endTime, description, tags);
     }
 
     @Override
     public String toString() {
         return getAsText();
     }
-
 }
