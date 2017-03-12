@@ -2,9 +2,11 @@ package seedu.toluist.commons.util;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -69,5 +71,13 @@ public class CollectionUtil {
             }
         }
         return false;
+    }
+
+    /**
+     * Convert items to string, using each item's default toString method
+     */
+    public static <T> String toString(String delimiter, Collection<T> items) {
+        List<String> itemStringList = items.stream().map(T::toString).collect(Collectors.toList());
+        return String.join(delimiter, itemStringList);
     }
 }

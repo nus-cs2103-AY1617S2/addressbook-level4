@@ -1,15 +1,16 @@
 package seedu.toluist.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.core.Messages;
+import seedu.toluist.commons.util.CollectionUtil;
 import seedu.toluist.controller.commons.IndexTokenizer;
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.Task;
@@ -64,23 +65,16 @@ public class MarkController extends Controller {
         return commandResult;
     }
 
-    private CommandResult mark(List<Integer> taskIndexes, boolean toBeSetCompleted) {
+    private CommandResult mark(List<Integer> taskIndexes, boolean isCompleted) {
         ArrayList<Task> tasks = UiStore.getInstance().getTasks(taskIndexes);
         for (Task task : tasks) {
-            task.setCompleted(toBeSetCompleted);
+            task.setCompleted(isCompleted);
         }
-        String indexString = indexesToString(taskIndexes);
-        String messageTemplate = toBeSetCompleted
+        String indexString = CollectionUtil.toString(", ", Arrays.asList(taskIndexes));
+        String messageTemplate = isCompleted
                 ? RESULT_MESSAGE_COMPLETED_SUCCESS
                 : RESULT_MESSAGE_INCOMPLETE_SUCCESS;
         return new CommandResult(String.format(messageTemplate, indexString));
-    }
-
-    private String indexesToString(List<Integer> indexes) {
-        List<String> indexStringList = indexes.stream()
-                .map(index -> index.toString())
-                .collect(Collectors.toList());
-        return String.join(", ", indexStringList);
     }
 
     @Override
