@@ -3,12 +3,12 @@ package typetask.logic.commands;
 import typetask.model.TaskManager;
 
 /**
- * Clears the address book.
+ * Clears the TaskManager.
  */
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
+    public static final String MESSAGE_SUCCESS = "TaskManager has been cleared!";
 
 
     @Override

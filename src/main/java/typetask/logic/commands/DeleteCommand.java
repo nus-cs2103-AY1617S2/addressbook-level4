@@ -7,7 +7,7 @@ import typetask.model.task.ReadOnlyTask;
 import typetask.model.task.TaskList.TaskNotFoundException;
 
 /**
- * Deletes a person identified using it's last displayed index from the address book.
+ * Deletes a task identified using it's last displayed index from the TaskManager.
  */
 public class DeleteCommand extends Command {
 

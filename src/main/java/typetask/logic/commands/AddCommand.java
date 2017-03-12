@@ -8,7 +8,7 @@ import typetask.model.task.Task;
 
 
 /**
- * Adds a person to the address book.
+ * Adds a task to the TaskManager.
  */
 public class AddCommand extends Command {
 
@@ -21,7 +21,6 @@ public class AddCommand extends Command {
             + " Read Harry Potter book 1";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
     private final Task toAdd;
 

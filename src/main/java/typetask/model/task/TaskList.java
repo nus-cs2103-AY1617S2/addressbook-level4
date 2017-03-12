@@ -46,13 +46,13 @@ public class TaskList implements Iterable<Task> {
      * Updates the task in the list at position {@code index} with {@code editedTask}.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updatePerson(int index, ReadOnlyTask editedTask) {
+    public void updateTask(int index, ReadOnlyTask editedTask) {
         assert editedTask != null;
 
         Task taskToUpdate = internalList.get(index);
 
         taskToUpdate.resetData(editedTask);
-        // TODO: The code below is just a workaround to notify observers of the updated person.
+        // TODO: The code below is just a workaround to notify observers of the updated task.
         // The right way is to implement observable properties in the Task class.
         // Then, TaskCard should then bind its text labels to those observable properties.
         internalList.set(index, taskToUpdate);
@@ -61,7 +61,7 @@ public class TaskList implements Iterable<Task> {
     /**
      * Removes the equivalent task from the list.
      *
-     * @throws taskNotFoundException if no such person could be found in the list.
+     * @throws taskNotFoundException if no such task could be found in the list.
      */
     public boolean remove(ReadOnlyTask toRemove) throws TaskNotFoundException {
         assert toRemove != null;

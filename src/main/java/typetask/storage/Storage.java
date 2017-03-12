@@ -3,7 +3,7 @@ package typetask.storage;
 import java.io.IOException;
 import java.util.Optional;
 
-import typetask.commons.events.model.AddressBookChangedEvent;
+import typetask.commons.events.model.TaskManagerChangedEvent;
 import typetask.commons.events.storage.DataSavingExceptionEvent;
 import typetask.commons.exceptions.DataConversionException;
 import typetask.model.ReadOnlyTaskManager;
@@ -34,5 +34,5 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
      *   Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
-    void handleAddressBookChangedEvent(AddressBookChangedEvent abce);
+    void handleAddressBookChangedEvent(TaskManagerChangedEvent abce);
 }

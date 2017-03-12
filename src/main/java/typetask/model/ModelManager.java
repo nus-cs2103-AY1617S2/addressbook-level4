@@ -7,7 +7,7 @@ import javafx.collections.transformation.FilteredList;
 import typetask.commons.core.ComponentManager;
 import typetask.commons.core.LogsCenter;
 import typetask.commons.core.UnmodifiableObservableList;
-import typetask.commons.events.model.AddressBookChangedEvent;
+import typetask.commons.events.model.TaskManagerChangedEvent;
 import typetask.commons.util.CollectionUtil;
 import typetask.commons.util.StringUtil;
 import typetask.model.task.ReadOnlyTask;
@@ -25,7 +25,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<ReadOnlyTask> filteredTasks;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given taskManager and userPrefs.
      */
     public ModelManager(ReadOnlyTaskManager taskManager, UserPrefs userPrefs) {
         super();
@@ -54,7 +54,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the model has changed */
     private void indicateTaskManagerChanged() {
-        raise(new AddressBookChangedEvent(taskManager));
+        raise(new TaskManagerChangedEvent(taskManager));
     }
 
     @Override
