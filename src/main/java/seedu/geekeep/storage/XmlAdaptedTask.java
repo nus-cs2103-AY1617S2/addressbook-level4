@@ -15,7 +15,7 @@ import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.Title;
 
 /**
- * JAXB-friendly version of the Person.
+ * JAXB-friendly version of the Task.
  */
 public class XmlAdaptedTask {
 
@@ -32,16 +32,16 @@ public class XmlAdaptedTask {
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
     /**
-     * Constructs an XmlAdaptedPerson.
+     * Constructs an XmlAdaptedTask.
      * This is the no-arg constructor that is required by JAXB.
      */
     public XmlAdaptedTask() {}
 
 
     /**
-     * Converts a given Person into this class for JAXB use.
+     * Converts a given Task into this class for JAXB use.
      *
-     * @param source future changes to this will not affect the created XmlAdaptedPerson
+     * @param source future changes to this will not affect the created XmlAdaptedTask
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getTitle().fullTitle;
@@ -55,20 +55,20 @@ public class XmlAdaptedTask {
     }
 
     /**
-     * Converts this jaxb-friendly adapted person object into the model's Person object.
+     * Converts this jaxb-friendly adapted task object into the model's Task object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person
+     * @throws IllegalValueException if there were any data constraints violated in the adapted task
      */
     public Task toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<Tag> taskTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+            taskTags.add(tag.toModelType());
         }
         final Title title = new Title(this.name);
         final DateTime endDateTime = new DateTime(this.phone);
         final DateTime startDateTime = new DateTime(this.email);
         final Location location = new Location(this.address);
-        final UniqueTagList tags = new UniqueTagList(personTags);
+        final UniqueTagList tags = new UniqueTagList(taskTags);
         return new Task(title, startDateTime, endDateTime, location, tags);
     }
 }
