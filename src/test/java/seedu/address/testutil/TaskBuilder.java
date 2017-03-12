@@ -38,6 +38,10 @@ public class TaskBuilder {
         return this;
     }
 
+    public TaskBuilder withStartTime(String startTime) throws IllegalValueException, IllegalDateTimeValueException {
+        this.task.setStartTime(new Deadline(startTime));
+        return this;
+    }
     public TaskBuilder withDeadline(String deadline) throws IllegalValueException, IllegalDateTimeValueException {
         this.task.setDeadline(new Deadline(deadline));
         return this;

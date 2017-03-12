@@ -9,6 +9,7 @@ import guitests.guihandles.TaskCardHandle;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.label.Label;
+import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Title;
 import seedu.address.testutil.TaskBuilder;
 import seedu.address.testutil.TestTask;
@@ -22,10 +23,10 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Meet Bob by Sunday 2359 t/husband";
+        String detailsToEdit = "Meet Bob from Saturday 0900 to Sunday 2359 t/husband";
         int addressBookIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withTitle("Meet Bob")
+        TestTask editedTask = new TaskBuilder().withTitle("Meet Bob").withStartTime("Saturday 0900")
                 .withDeadline("Sunday 2359").withLabels("husband").build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
@@ -97,7 +98,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
     @Test
     public void edit_duplicateTask_failure() {
         commandBox.runCommand("edit 3 Complete task 4"
-                                + " by 11-11-2017 2300 t/friends");
+                                + " from 10-10-2017 0100 to 11-11-2017 2300 t/friends");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 

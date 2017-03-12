@@ -43,6 +43,7 @@ public class AddCommand extends Command {
         this.toAdd = new Task(
                 new Title(title),
                 new Deadline(),
+                new Deadline(),
                 new UniqueLabelList(labelSet)
         );
     }
@@ -61,6 +62,7 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Task(
                 new Title(title),
+                new Deadline(),
                 new Deadline(deadline),
                 new UniqueLabelList(labelSet)
         );

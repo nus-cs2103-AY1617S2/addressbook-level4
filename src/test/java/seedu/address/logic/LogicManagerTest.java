@@ -414,12 +414,13 @@ public class LogicManagerTest {
     class TestDataHelper {
 
         Task adam() throws Exception {
-            Title name = new Title("Adam Brown");
+            Title name = new Title("Meet Adam Brown");
+            Deadline startTime = new Deadline("today 1800");
             Deadline deadline = new Deadline("today 2100");
             Label label1 = new Label("label1");
             Label label2 = new Label("longerlabel2");
             UniqueLabelList labels = new UniqueLabelList(label1, label2);
-            return new Task(name, deadline, labels);
+            return new Task(name, startTime, deadline, labels);
         }
 
         /**
@@ -432,6 +433,7 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Title("Task " + seed),
+                    new Deadline("tomorrow 0100"),
                     new Deadline("tomorrow 2359"),
                     new UniqueLabelList(new Label("label" + Math.abs(seed)), new Label("label" + Math.abs(seed + 1)))
                     );
@@ -445,7 +447,11 @@ public class LogicManagerTest {
 
             cmd.append(p.getTitle().toString());
 
-            cmd.append(" by ");
+            cmd.append(" from ");
+            
+            cmd.append(p.getStartTime());
+            
+            cmd.append(" to ");
 
             cmd.append(p.getDeadline());
 
@@ -530,6 +536,7 @@ public class LogicManagerTest {
         Task generateTaskWithName(String name) throws Exception {
             return new Task(
                     new Title(name),
+                    new Deadline("today"),
                     new Deadline("next wed 2359"),
                     new UniqueLabelList(new Label("label"))
                     );

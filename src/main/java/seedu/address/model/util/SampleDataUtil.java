@@ -15,21 +15,27 @@ public class SampleDataUtil {
         try {
             return new Task[] {
                 new Task(new Title("Meet Prof Alex Yeoh"),
+                    new Deadline(),
                     new Deadline("Tomorrow 2300"),
                     new UniqueLabelList("school")),
                 new Task(new Title("Dinner with family"),
+                    new Deadline(),
                     new Deadline("Sunday 2300"),
                     new UniqueLabelList("family")),
                 new Task(new Title("CS2103 Project Meeting"),
+                    new Deadline(),
                     new Deadline("Saturday 1900"),
                     new UniqueLabelList("school")),
                 new Task(new Title("Birthday Party for David"),
+                    new Deadline(),
                     new Deadline("01-04-2017 1900"),
                     new UniqueLabelList("family")),
                 new Task(new Title("Catch up with Irfan Ibrahim"),
+                    new Deadline(),
                     new Deadline("07-03-2017 1900"),
                     new UniqueLabelList("classmates")),
                 new Task(new Title("Meet Roy Balakrishnan for coffee"),
+                    new Deadline(),
                     new Deadline("next week 2300"),
                     new UniqueLabelList("colleagues"))
             };

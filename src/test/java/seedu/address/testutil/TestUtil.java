@@ -74,15 +74,24 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Title("Complete task 1"), new Deadline("11-11-2017"), new UniqueLabelList()),
-                new Task(new Title("Complete task 2"), new Deadline("11-11-2017"), new UniqueLabelList()),
-                new Task(new Title("Complete task 3"), new Deadline("11-11-2017"), new UniqueLabelList()),
-                new Task(new Title("Complete task 4"), new Deadline("11-11-2017"), new UniqueLabelList()),
-                new Task(new Title("Complete task 5"), new Deadline("11-11-2017"), new UniqueLabelList()),
-                new Task(new Title("Complete task 6"), new Deadline("11-11-2017"), new UniqueLabelList()),
-                new Task(new Title("Complete task 7"), new Deadline("11-11-2017"), new UniqueLabelList()),
-                new Task(new Title("Complete task 8"), new Deadline("11-11-2017"), new UniqueLabelList()),
-                new Task(new Title("Complete task 9"),  new Deadline("11-11-2017"), new UniqueLabelList())
+                new Task(new Title("Complete task 1"), new Deadline("10-10-2017 0100"), 
+                        new Deadline("11-11-2017"), new UniqueLabelList()),
+                new Task(new Title("Complete task 2"), new Deadline("10-10-2017 0100"), 
+                        new Deadline("11-11-2017"), new UniqueLabelList()),
+                new Task(new Title("Complete task 3"), new Deadline("10-10-2017 0100"),
+                        new Deadline("11-11-2017"), new UniqueLabelList()),
+                new Task(new Title("Complete task 4"), new Deadline("10-10-2017 0100"), 
+                        new Deadline("11-11-2017"), new UniqueLabelList()),
+                new Task(new Title("Complete task 5"), new Deadline("10-10-2017 0100"), 
+                        new Deadline("11-11-2017"), new UniqueLabelList()),
+                new Task(new Title("Complete task 6"), new Deadline("10-10-2017 0100"), 
+                        new Deadline("11-11-2017"), new UniqueLabelList()),
+                new Task(new Title("Complete task 7"), new Deadline("10-10-2017 0100"), 
+                        new Deadline("11-11-2017"), new UniqueLabelList()),
+                new Task(new Title("Complete task 8"), new Deadline("10-10-2017 0100"),
+                        new Deadline("11-11-2017"), new UniqueLabelList()),
+                new Task(new Title("Complete task 9"), new Deadline("10-10-2017 0100"),
+                        new Deadline("11-11-2017"), new UniqueLabelList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException | IllegalDateTimeValueException e) {

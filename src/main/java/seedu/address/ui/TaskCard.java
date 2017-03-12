@@ -29,9 +29,9 @@ public class TaskCard extends UiPart<Region> {
         title.setText(task.getTitle().title);
         id.setText(displayedIndex + ". ");
         if (task.getStartTime() != null) {
-            startTime.setText("Start: " + task.getStartTime().toString());
+            startTime.setText(task.getStartTime().toString());
         }
-        deadline.setText("End: " + task.getDeadline().toString());
+        deadline.setText(task.getDeadline().toString());
         initLabels(task);
     }
 

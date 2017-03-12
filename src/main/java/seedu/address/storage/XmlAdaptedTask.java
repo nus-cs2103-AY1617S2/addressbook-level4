@@ -23,6 +23,8 @@ public class XmlAdaptedTask {
     private String title;
     @XmlElement(required = true)
     private String deadline;
+    @XmlElement(required = true)
+    private String startTime;
 
     @XmlElement
     private List<XmlAdaptedLabel> labeled = new ArrayList<>();
@@ -41,6 +43,7 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         title = source.getTitle().title;
+        startTime = source.getStartTime().toString();
         deadline = source.getDeadline().toString();
         labeled = new ArrayList<>();
         for (Label label : source.getLabels()) {
@@ -59,8 +62,9 @@ public class XmlAdaptedTask {
             taskLabels.add(label.toModelType());
         }
         final Title title = new Title(this.title);
+        final Deadline startTime = new Deadline(this.startTime);
         final Deadline deadline = new Deadline(this.deadline);
         final UniqueLabelList labels = new UniqueLabelList(taskLabels);
-        return new Task(title, deadline, labels);
+        return new Task(title, startTime, deadline, labels);
     }
 }

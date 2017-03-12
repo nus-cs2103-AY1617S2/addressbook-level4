@@ -28,7 +28,8 @@ public class Deadline {
     private String value;
 
     public Deadline() {
-        value = "";
+        deadline = new Date();
+        value = deadline.toString();
     }
 
     /**

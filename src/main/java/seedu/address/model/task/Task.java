@@ -29,16 +29,6 @@ public class Task implements ReadOnlyTask {
     }
     
     /**
-     * Every field must be present and not null.
-     */
-    public Task(Title title, Deadline deadline, UniqueLabelList labels) {
-        assert !CollectionUtil.isAnyNull(title, deadline, labels);
-        this.title = title;
-        this.deadline = deadline;
-        this.labels = new UniqueLabelList(labels); // protect internal labels from changes in the arg list
-    }
-
-    /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
@@ -92,8 +82,8 @@ public class Task implements ReadOnlyTask {
      */
     public void resetData(ReadOnlyTask replacement) {
         assert replacement != null;
-
         this.setName(replacement.getTitle());
+        this.setStartTime(replacement.getStartTime());
         this.setDeadline(replacement.getDeadline());
         this.setLabels(replacement.getLabels());
     }
@@ -108,7 +98,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(title, deadline, labels);
+        return Objects.hash(title, startTime, deadline, labels);
     }
 
     @Override

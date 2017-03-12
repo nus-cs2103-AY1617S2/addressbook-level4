@@ -29,7 +29,7 @@ public class EditCommandParser {
     public Command parse(String args) {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_DEADLINE, PREFIX_LABEL);
+                new ArgumentTokenizer(PREFIX_DEADLINE, CliSyntax.PREFIX_TIMEINTERVAL_START, CliSyntax.PREFIX_TIMEINTERVAL_END, PREFIX_LABEL);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 

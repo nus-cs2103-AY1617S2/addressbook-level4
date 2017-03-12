@@ -16,6 +16,7 @@ import seedu.address.model.task.ReadOnlyTask;
  */
 public class TaskCardHandle extends GuiHandle {
     private static final String TITLE_FIELD_ID = "#title";
+    private static final String STARTTIME_FIELD_ID = "#startTime";
     private static final String DEADLINE_FIELD_ID = "#deadline";
     private static final String LABELS_FIELD_ID = "#labels";
 
@@ -34,6 +35,10 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(TITLE_FIELD_ID);
     }
 
+    public String getStartTime() {
+        return getTextFromLabel(STARTTIME_FIELD_ID);
+    }
+    
     public String getDeadline() {
         return getTextFromLabel(DEADLINE_FIELD_ID);
     }
@@ -66,6 +71,7 @@ public class TaskCardHandle extends GuiHandle {
         return getTitle().equals(task.getTitle().title)
                 && getDeadline().equals(task.getDeadline().toString())
                 && getLabels().equals(getLabels(task.getLabels()));
+                //&& getStartTime().equals(task.getStartTime()); 
     }
 
     @Override
@@ -73,6 +79,7 @@ public class TaskCardHandle extends GuiHandle {
         if (obj instanceof TaskCardHandle) {
             TaskCardHandle handle = (TaskCardHandle) obj;
             return getTitle().equals(handle.getTitle())
+                    && getStartTime().equals(handle.getStartTime())
                     && getDeadline().equals(handle.getDeadline())
                     && getLabels().equals(handle.getLabels());
         }
