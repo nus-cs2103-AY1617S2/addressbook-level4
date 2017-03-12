@@ -1,6 +1,7 @@
 package seedu.address.model;
 
-//import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -23,12 +24,15 @@ import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-
-    private final AddressBook addressBook;
-    private final FilteredList<ReadOnlyTask> nonFloatingTasks;
-    private final FilteredList<ReadOnlyTask> floatingTasks;
-    //private final FilteredList<ReadOnlyTask> completedTasks;
+    
+    private List<AddressBook> addressBookStates;
+    private AddressBook currentAddressBook;
+    private int currentAddressBookStateIndex;
     private static final int MATCHING_INDEX = 35;
+    
+    public FilteredList<ReadOnlyTask> nonFloatingTasks;
+    public FilteredList<ReadOnlyTask> floatingTasks;
+    //public final FilteredList<ReadOnlyTask> completedTasks;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -38,44 +42,93 @@ public class ModelManager extends ComponentManager implements Model {
         assert !CollectionUtil.isAnyNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        
+        this.addressBookStates = new ArrayList<AddressBook>();
+        this.addressBookStates.add(new AddressBook(addressBook));
+        this.currentAddressBookStateIndex = 0;
+        this.currentAddressBook = new AddressBook(this.addressBookStates.get(this.currentAddressBookStateIndex));
 
-        this.addressBook = new AddressBook(addressBook);
-        nonFloatingTasks = new FilteredList<>(this.addressBook.getTaskList());
-        nonFloatingTasks.setPredicate(new PredicateExpression(new DateNotFloatingQualifier())::satisfies);
-        floatingTasks = new FilteredList<>(this.addressBook.getTaskList());
-        floatingTasks.setPredicate(new PredicateExpression(new DateFloatingQualifier())::satisfies);
-    }
+        setAddressBookState();
+    } 
 
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
     }
+    
+    public void setAddressBookState() {
+        this.nonFloatingTasks = new FilteredList<>(this.currentAddressBook.getTaskList());
+        this.floatingTasks = new FilteredList<>(this.currentAddressBook.getTaskList());
+        updateFilteredListToShowAll();
+        updateFilteredListToShowAllFloatingTasks();
+    }
+    
+    /**
+     * Records the current state of AddressBook to facilitate state transition.
+     */
+    private void recordCurrentStateOfAddressBook() {
+        this.currentAddressBookStateIndex++;
+        this.addressBookStates = new ArrayList<AddressBook>(this.addressBookStates.subList(0, this.currentAddressBookStateIndex));
+        this.addressBookStates.add(new AddressBook(this.currentAddressBook));
+    }
 
     @Override
     public void resetData(ReadOnlyAddressBook newData) {
-        addressBook.resetData(newData);
+        this.currentAddressBook.resetData(newData);
+        recordCurrentStateOfAddressBook();
         indicateAddressBookChanged();
     }
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+        return this.currentAddressBook;
     }
 
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
-        raise(new AddressBookChangedEvent(addressBook));
+        raise(new AddressBookChangedEvent(this.currentAddressBook));
+    }
+    
+    /** Raises an event to indicate the model and its state have changed */
+    private void indicateAddressBookStateChanged() {
+        AddressBookChangedEvent abce = new AddressBookChangedEvent(this.currentAddressBook);
+        abce.setFloatingTasks(getFloatingTaskList());
+        abce.setNonFloatingTasks(getNonFloatingTaskList());
+        raise(abce);
+    }
+    
+    @Override
+    public void setAddressBookStateForwards() throws StateLimitReachedException {
+        if (this.currentAddressBookStateIndex >= this.addressBookStates.size() - 1) {
+            throw new StateLimitReachedException();
+        }
+        this.currentAddressBookStateIndex++;
+        this.currentAddressBook = new AddressBook(this.addressBookStates.get(this.currentAddressBookStateIndex));
+        setAddressBookState();
+        indicateAddressBookStateChanged();
+    }
+    
+    @Override
+    public void setAddressBookStateBackwards() throws StateLimitReachedException {
+        if (this.currentAddressBookStateIndex <= 0) {
+            throw new StateLimitReachedException();
+        }
+        this.currentAddressBookStateIndex--;
+        this.currentAddressBook = new AddressBook(this.addressBookStates.get(this.currentAddressBookStateIndex));
+        setAddressBookState();
+        indicateAddressBookStateChanged();
     }
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-        addressBook.removeTask(target);
+        this.currentAddressBook.removeTask(target);
+        recordCurrentStateOfAddressBook();
         indicateAddressBookChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        addressBook.addTask(task);
-        updateFilteredListToShowAll();
+        this.currentAddressBook.addTask(task);
+        recordCurrentStateOfAddressBook();
         indicateAddressBookChanged();
     }
 
@@ -83,11 +136,12 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateTask(String targetList, int taskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
-        int addressBookIndex = nonFloatingTasks.getSourceIndex(taskListIndex);
+        int addressBookIndex = this.nonFloatingTasks.getSourceIndex(taskListIndex);
         if (targetList.equals("floating")) {
-            addressBookIndex = floatingTasks.getSourceIndex(taskListIndex);
+            addressBookIndex = this.floatingTasks.getSourceIndex(taskListIndex);
         }
-        addressBook.updateTask(addressBookIndex, editedTask);
+        this.currentAddressBook.updateTask(addressBookIndex, editedTask);
+        recordCurrentStateOfAddressBook();
         indicateAddressBookChanged();
     }
 
@@ -95,22 +149,20 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getNonFloatingTaskList() {
-        return new UnmodifiableObservableList<>(nonFloatingTasks);
+        return new UnmodifiableObservableList<>(this.nonFloatingTasks);
     }
 
     public UnmodifiableObservableList<ReadOnlyTask> getFloatingTaskList() {
-        return new UnmodifiableObservableList<>(floatingTasks);
+        return new UnmodifiableObservableList<>(this.floatingTasks);
     }
 
     @Override
     public void updateFilteredListToShowAll() {
-        //filteredTasks.setPredicate(new PredicateExpression(new DateFloatingQualifier())::satisfies);
-        nonFloatingTasks.setPredicate(new PredicateExpression(new DateNotFloatingQualifier())::satisfies);
-        //filteredTasks.setPredicate(null);
+        this.nonFloatingTasks.setPredicate(new PredicateExpression(new DateNotFloatingQualifier())::satisfies);
     }
 
     public void updateFilteredListToShowAllFloatingTasks() {
-        floatingTasks.setPredicate(new PredicateExpression(new DateFloatingQualifier())::satisfies);
+        this.floatingTasks.setPredicate(new PredicateExpression(new DateFloatingQualifier())::satisfies);
     }
 
     @Override
@@ -119,7 +171,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     private void updateFilteredTaskList(Expression expression) {
-        nonFloatingTasks.setPredicate(expression::satisfies);
+        this.nonFloatingTasks.setPredicate(expression::satisfies);
+        this.floatingTasks.setPredicate(expression::satisfies);
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
