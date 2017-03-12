@@ -26,19 +26,19 @@ public class ModelManager extends ComponentManager implements Model {
 	private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
 	private final TaskManager taskManager;
-	private final FilteredList<ReadOnlyEvent> filteredPersons;
+	private final FilteredList<ReadOnlyEvent> filteredEvents;
 
 	/**
 	 * Initializes a ModelManager with the given addressBook and userPrefs.
 	 */
-	public ModelManager(ReadOnlyTaskManager addressBook, UserPrefs userPrefs) {
+	public ModelManager(ReadOnlyTaskManager taskManager, UserPrefs userPrefs) {
 		super();
-		assert !CollectionUtil.isAnyNull(addressBook, userPrefs);
+		assert !CollectionUtil.isAnyNull(taskManager, userPrefs);
 
-		logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+		logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
 
-		this.taskManager = new TaskManager(addressBook);
-		filteredPersons = new FilteredList<>(this.taskManager.getTaskList());
+		this.taskManager = new TaskManager(taskManager);
+		filteredEvents = new FilteredList<>(this.taskManager.getTaskList());
 	}
 
 	public ModelManager() {
@@ -63,7 +63,7 @@ public class ModelManager extends ComponentManager implements Model {
 
 	@Override
 	public synchronized void deleteEvent(ReadOnlyEvent target) throws EventNotFoundException {
-		taskManager.removePerson(target);
+		taskManager.removeEvent(target);
 		indicateAddressBookChanged();
 	}
 
@@ -75,45 +75,45 @@ public class ModelManager extends ComponentManager implements Model {
 	}
 
 	@Override
-	public void updateEvent(int filteredPersonListIndex, ReadOnlyEvent editedPerson)
+	public void updateEvent(int filteredEventListIndex, ReadOnlyEvent editedEvent)
 			throws UniqueEventList.DuplicateEventException {
-		assert editedPerson != null;
+		assert editedEvent != null;
 
-		int addressBookIndex = filteredPersons.getSourceIndex(filteredPersonListIndex);
-		taskManager.updatePerson(addressBookIndex, editedPerson);
+		int taskManagerIndex = filteredEvents.getSourceIndex(filteredEventListIndex);
+		taskManager.updateEvent(taskManagerIndex, editedEvent);
 		indicateAddressBookChanged();
 	}
 
 	@Override
-	public void updateEvent(int filteredPersonListIndex, Event editedPerson) throws DuplicateEventException {
+	public void updateEvent(int filteredEventListIndex, Event editedEvent) throws DuplicateEventException {
 		// TODO Auto-generated method stub
 	}
 
-	//=========== Filtered Person List Accessors =============================================================
+	//=========== Filtered Event List Accessors =============================================================
 
 	@Override
 	public UnmodifiableObservableList<ReadOnlyEvent> getFilteredEventList() {
-		return new UnmodifiableObservableList<>(filteredPersons);
+		return new UnmodifiableObservableList<>(filteredEvents);
 	}
 
 	@Override
 	public void updateFilteredListToShowAll() {
-		filteredPersons.setPredicate(null);
+		filteredEvents.setPredicate(null);
 	}
 
 	@Override
 	public void updateFilteredEventList(Set<String> keywords) {
-		updateFilteredPersonList(new PredicateExpression(new NameQualifier(keywords)));
+		updateFilteredEventList(new PredicateExpression(new NameQualifier(keywords)));
 	}
 
-	private void updateFilteredPersonList(Expression expression) {
-		filteredPersons.setPredicate(expression::satisfies);
+	private void updateFilteredEventList(Expression expression) {
+		filteredEvents.setPredicate(expression::satisfies);
 	}
 
 	//========== Inner classes/interfaces used for filtering =================================================
 
 	interface Expression {
-		boolean satisfies(ReadOnlyEvent person);
+		boolean satisfies(ReadOnlyEvent event);
 		String toString();
 	}
 
@@ -126,8 +126,8 @@ public class ModelManager extends ComponentManager implements Model {
 		}
 
 		@Override
-		public boolean satisfies(ReadOnlyEvent person) {
-			return qualifier.run(person);
+		public boolean satisfies(ReadOnlyEvent event) {
+			return qualifier.run(event);
 		}
 
 		@Override
@@ -137,7 +137,7 @@ public class ModelManager extends ComponentManager implements Model {
 	}
 
 	interface Qualifier {
-		boolean run(ReadOnlyEvent person);
+		boolean run(ReadOnlyEvent event);
 		String toString();
 	}
 
@@ -149,16 +149,16 @@ public class ModelManager extends ComponentManager implements Model {
 		}
 
 		@Override
-		public boolean run(ReadOnlyEvent person) {
+		public boolean run(ReadOnlyEvent event) {
 			return nameKeyWords.stream()
-					.filter(keyword -> StringUtil.containsWordIgnoreCase(person.getTitle().fullName, keyword))
+					.filter(keyword -> StringUtil.containsWordIgnoreCase(event.getTitle().fullName, keyword))
 					.findAny()
 					.isPresent();
 		}
 
 		@Override
 		public String toString() {
-			return "name=" + String.join(", ", nameKeyWords);
+			return "title=" + String.join(", ", nameKeyWords);
 		}
 	}
 

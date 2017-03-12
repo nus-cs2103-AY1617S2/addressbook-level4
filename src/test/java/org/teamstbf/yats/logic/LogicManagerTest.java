@@ -340,7 +340,7 @@ public class LogicManagerTest {
         List<Event> threePersons = helper.generatePersonList(3);
 
         TaskManager expectedAB = helper.generateAddressBook(threePersons);
-        expectedAB.removePerson(threePersons.get(1));
+        expectedAB.removeEvent(threePersons.get(1));
         helper.addToModel(model, threePersons);
 
         assertCommandSuccess("delete 2",

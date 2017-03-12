@@ -98,7 +98,7 @@ public class TaskManager implements ReadOnlyTaskManager {
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updatePerson(int index, ReadOnlyEvent editedReadOnlyPerson)
+    public void updateEvent(int index, ReadOnlyEvent editedReadOnlyPerson)
             throws UniqueEventList.DuplicateEventException {
         assert editedReadOnlyPerson != null;
 
@@ -140,7 +140,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         persons.forEach(this::syncMasterTagListWith);
     }
 
-    public boolean removePerson(ReadOnlyEvent key) throws UniqueEventList.EventNotFoundException {
+    public boolean removeEvent(ReadOnlyEvent key) throws UniqueEventList.EventNotFoundException {
         if (events.remove(key)) {
             return true;
         } else {
