@@ -29,9 +29,12 @@ public class EditCommandParser {
      */
     public Command parse(String args) {
         assert args != null;
+        String argsTrimmed = args.trim();
+        char taskType = argsTrimmed.charAt(0);
+
         ArgumentTokenizer argsTokenizer =
                 new ArgumentTokenizer(PREFIX_START_DATE, PREFIX_END_DATE, PREFIX_DESCRIPTION, PREFIX_TAG);
-        argsTokenizer.tokenize(args);
+        argsTokenizer.tokenize(argsTrimmed.substring(1));
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
         Optional<Integer> index = preambleFields.get(0).flatMap(ParserUtil::parseIndex);
@@ -54,7 +57,7 @@ public class EditCommandParser {
             return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index.get(), editTaskDescriptor);
+        return new EditCommand(index.get(), editTaskDescriptor, taskType);
     }
 
     /**

@@ -142,7 +142,7 @@ public class MainWindow extends UiPart<Region> {
         eventTaskListPanel = new TaskListPanel(getEventListPlaceholder(), logic.getFilteredTaskList(),
                 TaskType.EVENT);
         todoTaskListPanel = new TaskListPanel(getTodosListPlaceholder(), logic.getFilteredTaskList(),
-                TaskType.FLOATING);
+                TaskType.TODO);
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getToDoListFilePath());
         commandBox = new CommandBox(getCommandBoxPlaceholder(), logic);

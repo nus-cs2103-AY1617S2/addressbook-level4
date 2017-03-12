@@ -2,14 +2,14 @@ package seedu.onetwodo.model.task;
 
 //@@author A0141138N
 public enum TaskType {
-    FLOATING, DEADLINE, EVENT;
+    TODO('T'), 
+    DEADLINE('D'), 
+    EVENT('E');
     
-    private char prefix;
+    private final char prefix;
     
-    static {
-        FLOATING.prefix = 'F';
-        DEADLINE.prefix = 'D';
-        EVENT.prefix = 'E';
+    TaskType(char prefix) {
+        this.prefix = prefix;
     }
 
     public char getPrefix() {
@@ -17,15 +17,18 @@ public enum TaskType {
     }
     
     public static char[] getAllPrefixes() {
-        return new char[] {FLOATING.prefix, DEADLINE.prefix, EVENT.prefix};
+        return new char[] {TODO.prefix, DEADLINE.prefix, EVENT.prefix};
     }
     
     public static TaskType getTaskTypeFromChar(char taskType) {
-        switch (Character.toLowerCase(taskType)) {
-        case 'f': return FLOATING;
-        case 'd': return DEADLINE;
-        case 'e': return EVENT;
-        };
+        char taskTypeCap = Character.toUpperCase(taskType);
+        if (taskTypeCap == TODO.prefix) {
+            return TODO;
+        } else if (taskTypeCap == DEADLINE.prefix) {
+            return DEADLINE;
+        } else if (taskTypeCap == EVENT.prefix) {
+            return EVENT;
+        }
         return null;
     }
 }

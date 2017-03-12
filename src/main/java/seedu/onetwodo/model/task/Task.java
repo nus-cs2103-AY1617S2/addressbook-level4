@@ -25,7 +25,7 @@ public class Task implements ReadOnlyTask {
      */
     public Task(Name name, StartDate startDate, EndDate endDate, Description description, UniqueTagList tags) {
         if (startDate.toString().isEmpty() && endDate.toString().isEmpty()) {
-            this.type = TaskType.FLOATING;    
+            this.type = TaskType.TODO;    
         } else if (startDate.toString().isEmpty() && !endDate.toString().isEmpty()) {
             this.type = TaskType.DEADLINE;
         } else if (!startDate.toString().isEmpty() && !endDate.toString().isEmpty()) {

@@ -3,7 +3,9 @@ package seedu.onetwodo.logic.commands;
 import java.util.List;
 import java.util.Optional;
 
+import javafx.collections.transformation.FilteredList;
 import seedu.onetwodo.commons.core.Messages;
+import seedu.onetwodo.commons.core.UnmodifiableObservableList;
 import seedu.onetwodo.commons.util.CollectionUtil;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
 import seedu.onetwodo.model.tag.UniqueTagList;
@@ -12,6 +14,7 @@ import seedu.onetwodo.model.task.Description;
 import seedu.onetwodo.model.task.Name;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 import seedu.onetwodo.model.task.Task;
+import seedu.onetwodo.model.task.TaskType;
 import seedu.onetwodo.model.task.StartDate;
 import seedu.onetwodo.model.task.UniqueTaskList;
 
@@ -35,34 +38,38 @@ public class EditCommand extends Command {
 
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
+    private final TaskType taskType;
 
     /**
      * @param filteredTaskListIndex the index of the task in the filtered task list to edit
      * @param editTaskDescriptor details to edit the task with
      */
-    public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
+    public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor, char taskType) {
         assert filteredTaskListIndex > 0;
         assert editTaskDescriptor != null;
 
         // converts filteredTaskListIndex from one-based to zero-based.
-        this.filteredTaskListIndex = filteredTaskListIndex - 1;
-
+        this.filteredTaskListIndex = filteredTaskListIndex;
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
+        this.taskType = TaskType.getTaskTypeFromChar(taskType);
     }
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
-        if (filteredTaskListIndex >= lastShownList.size()) {
+        if (lastShownList.size() < filteredTaskListIndex || taskType == null) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
-
-        ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
+        
+        FilteredList<ReadOnlyTask> filtered = lastShownList.filtered(t -> t.getTaskType() == taskType);
+        
+        ReadOnlyTask taskToEdit = filtered.get(filteredTaskListIndex - 1);
+        int internalIndex = lastShownList.indexOf(taskToEdit);
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
         try {
-            model.updateTask(filteredTaskListIndex, editedTask);
+            model.updateTask(internalIndex, editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }

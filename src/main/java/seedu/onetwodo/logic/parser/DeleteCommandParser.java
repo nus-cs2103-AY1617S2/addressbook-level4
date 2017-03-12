@@ -4,8 +4,6 @@ import static seedu.onetwodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMA
 
 import java.util.Optional;
 
-import javax.xml.stream.events.Characters;
-
 import seedu.onetwodo.logic.commands.Command;
 import seedu.onetwodo.logic.commands.DeleteCommand;
 import seedu.onetwodo.logic.commands.IncorrectCommand;
