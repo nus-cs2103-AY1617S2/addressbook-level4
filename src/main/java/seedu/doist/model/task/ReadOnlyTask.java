@@ -13,7 +13,7 @@ public interface ReadOnlyTask {
 
     Description getDescription();
     Priority getPriority();
-
+    FinishedStatus getFinishedStatus();
     /**
      * The returned TagList is a deep copy of the internal TagList,
      * changes on the returned list will not affect the person's internal tags.
@@ -26,7 +26,8 @@ public interface ReadOnlyTask {
     default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                && other.getDescription().equals(this.getDescription())); // state checks here onwards
+                && other.getDescription().equals(this.getDescription())
+                && other.getFinishedStatus().equals(this.getFinishedStatus())); // state checks here onwards
     }
 
     /**

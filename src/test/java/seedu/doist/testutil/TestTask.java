@@ -2,6 +2,7 @@ package seedu.doist.testutil;
 
 import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.Description;
+import seedu.doist.model.task.FinishedStatus;
 import seedu.doist.model.task.Priority;
 import seedu.doist.model.task.ReadOnlyTask;
 
@@ -12,20 +13,23 @@ public class TestTask implements ReadOnlyTask {
 
     private Description desc;
     private Priority priority;
+    private FinishedStatus finishedStatus;
     private UniqueTagList tags;
 
     public TestTask() {
         tags = new UniqueTagList();
+        finishedStatus = new FinishedStatus();
         priority = new Priority();
     }
 
     /**
-     * Creates a copy of {@code personToCopy}.
+     * Creates a copy of {@code taskToCopy}.
      */
-    public TestTask(TestTask personToCopy) {
-        this.desc = personToCopy.getDescription();
-        this.priority = personToCopy.getPriority();
-        this.tags = personToCopy.getTags();
+    public TestTask(TestTask taskToCopy) {
+        this.desc = taskToCopy.getDescription();
+        this.priority = taskToCopy.getPriority();
+        this.finishedStatus = taskToCopy.getFinishedStatus();
+        this.tags = taskToCopy.getTags();
     }
 
     public void setName(Description desc) {
@@ -34,6 +38,10 @@ public class TestTask implements ReadOnlyTask {
 
     public void setPriority(Priority priority) {
         this.priority = priority;
+    }
+
+    public void setFinishedStatus(boolean isFinished) {
+        this.finishedStatus.setIsFinished(isFinished);
     }
 
     public void setTags(UniqueTagList tags) {
@@ -53,6 +61,11 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public Priority getPriority() {
         return priority;
+    }
+
+    @Override
+    public FinishedStatus getFinishedStatus() {
+        return this.getFinishedStatus();
     }
 
     @Override

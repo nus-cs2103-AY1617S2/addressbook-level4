@@ -13,6 +13,7 @@ public class Task implements ReadOnlyTask {
 
     private Description desc;
     private Priority priority;
+    private FinishedStatus finishedStatus;
     private UniqueTagList tags;
 
     /**
@@ -22,6 +23,7 @@ public class Task implements ReadOnlyTask {
         assert !CollectionUtil.isAnyNull(name, tags);
         this.desc = name;
         this.priority = priority;
+        this.finishedStatus = new FinishedStatus();
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -54,6 +56,16 @@ public class Task implements ReadOnlyTask {
     @Override
     public Priority getPriority() {
         return priority;
+    }
+
+    public void setFinishedStatus(boolean isFinished) {
+        assert finishedStatus != null;
+        this.finishedStatus.setIsFinished(isFinished);
+    }
+
+    @Override
+    public FinishedStatus getFinishedStatus() {
+        return this.getFinishedStatus();
     }
 
     @Override
