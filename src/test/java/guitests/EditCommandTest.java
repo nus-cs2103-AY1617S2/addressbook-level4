@@ -10,8 +10,16 @@ import seedu.tasklist.commons.core.Messages;
 import seedu.tasklist.logic.commands.EditCommand;
 import seedu.tasklist.model.tag.Tag;
 import seedu.tasklist.model.task.Comment;
+import seedu.tasklist.model.task.DeadlineTask;
+import seedu.tasklist.model.task.EventTask;
+import seedu.tasklist.model.task.FloatingTask;
 import seedu.tasklist.model.task.Name;
-import seedu.tasklist.testutil.TaskBuilder;
+import seedu.tasklist.testutil.DeadlineTaskBuilder;
+import seedu.tasklist.testutil.EventTaskBuilder;
+import seedu.tasklist.testutil.FloatingTaskBuilder;
+import seedu.tasklist.testutil.TestDeadlineTask;
+import seedu.tasklist.testutil.TestEventTask;
+import seedu.tasklist.testutil.TestFloatingTask;
 import seedu.tasklist.testutil.TestTask;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
@@ -26,7 +34,7 @@ public class EditCommandTest extends TaskListGuiTest {
         String detailsToEdit = "Drink water c/to improve brain function t/life";
         int taskListIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().
+        TestTask editedTask = new FloatingTaskBuilder().
                 withName("Drink water").
                 withComment("to improve brain function").
                 withTags("life").
@@ -41,7 +49,22 @@ public class EditCommandTest extends TaskListGuiTest {
         int taskListIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[taskListIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withTags("sweetie", "bestie").build();
+        TestTask editedTask;
+        String type = taskToEdit.getType();
+        switch (type) {
+        case FloatingTask.TYPE:
+            editedTask = new FloatingTaskBuilder((TestFloatingTask) taskToEdit).withTags("sweetie", "bestie").build();
+            break;
+        case DeadlineTask.TYPE:
+            editedTask = new DeadlineTaskBuilder((TestDeadlineTask) taskToEdit).withTags("sweetie", "bestie").build();
+            break;
+        case EventTask.TYPE:
+            editedTask = new EventTaskBuilder((TestEventTask) taskToEdit).withTags("sweetie", "bestie").build();
+            break;
+        default:
+            editedTask = null;
+        }
+
 
         assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit, editedTask);
     }
@@ -52,7 +75,21 @@ public class EditCommandTest extends TaskListGuiTest {
         int taskListIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[taskListIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withTags().build();
+        TestTask editedTask;
+        String type = taskToEdit.getType();
+        switch (type) {
+        case FloatingTask.TYPE:
+            editedTask = new FloatingTaskBuilder((TestFloatingTask) taskToEdit).withTags().build();
+            break;
+        case DeadlineTask.TYPE:
+            editedTask = new DeadlineTaskBuilder((TestDeadlineTask) taskToEdit).withTags().build();
+            break;
+        case EventTask.TYPE:
+            editedTask = new EventTaskBuilder((TestEventTask) taskToEdit).withTags().build();
+            break;
+        default:
+            editedTask = null;
+        }
 
         assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit, editedTask);
     }
@@ -66,7 +103,21 @@ public class EditCommandTest extends TaskListGuiTest {
         int taskListIndex = 5;
 
         TestTask taskToEdit = expectedTasksList[taskListIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withName("Python").build();
+        TestTask editedTask;
+        String type = taskToEdit.getType();
+        switch (type) {
+        case FloatingTask.TYPE:
+            editedTask = new FloatingTaskBuilder((TestFloatingTask) taskToEdit).withName("Python").build();
+            break;
+        case DeadlineTask.TYPE:
+            editedTask = new DeadlineTaskBuilder((TestDeadlineTask) taskToEdit).withName("Python").build();
+            break;
+        case EventTask.TYPE:
+            editedTask = new EventTaskBuilder((TestEventTask) taskToEdit).withName("Python").build();
+            break;
+        default:
+            editedTask = null;
+        }
 
         assertEditSuccess(filteredTaskListIndex, taskListIndex, detailsToEdit, editedTask);
     }
