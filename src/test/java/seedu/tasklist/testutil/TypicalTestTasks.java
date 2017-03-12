@@ -20,8 +20,10 @@ public class TypicalTestTasks {
             homework = new TaskBuilder().withName("CS3245 homework 3").withComment("discuss with classmates")
                     .withTags("class").build();
             groceries = new TaskBuilder().withName("Buy groceries").withComment("go NTUC").build();
-            lifegoals = new TaskBuilder().withName("Find ways to not feel left out").withComment("#IFeelLeftOut").build();
-            java = new TaskBuilder().withName("Update Java for CS2103T").withComment("Find out why jdk is not displaying the correct ver").build();
+            lifegoals = new TaskBuilder().withName("Find ways to not feel left out")
+                    .withComment("#IFeelLeftOut").build();
+            java = new TaskBuilder().withName("Update Java for CS2103T")
+                    .withComment("Find out why jdk is not displaying the correct ver").build();
             CS2103T = new TaskBuilder().withName("Implement undo for this").withComment("By today").build();
             drink = new TaskBuilder().withName("Drink water").withComment("To improve brain function").build();
 

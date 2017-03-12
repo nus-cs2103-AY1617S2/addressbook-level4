@@ -5,7 +5,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.tasklist.model.task.Comment;
 
 public class CommentTest {
 
