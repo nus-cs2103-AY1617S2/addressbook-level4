@@ -53,14 +53,14 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
-        commandBox.runCommand("find Elle");
+        commandBox.runCommand("find reflections");
 
-        String detailsToEdit = "Revise for CS2103 midterms";
+        String detailsToEdit = "Presentation for CS2101";
         int filteredTaskListIndex = 1;
         int addressBookIndex = 5;
 
         TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withName("Revise for CS2103 midterms").build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withName("Presentation for CS2101").build();
 
         assertEditSuccess(filteredTaskListIndex, addressBookIndex, detailsToEdit, editedTask);
     }
@@ -89,8 +89,8 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_duplicateTask_failure() {
-        commandBox.runCommand("edit 3 Alice Pauline p/85355255 s/alice@gmail.com "
-                                + "n/123, Jurong West Ave 6, #08-111 t/friends");
+        commandBox.runCommand("edit 3 Do laundry p/hi s/incomplete "
+                                + "n/Twice as many detergent this time t/chore");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
