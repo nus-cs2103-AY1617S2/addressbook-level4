@@ -11,6 +11,7 @@ import seedu.address.model.task.Title;
 public class TestTask implements ReadOnlyTask {
 
     private Title title;
+    private Deadline startTime;
     private Deadline deadline;
     private UniqueLabelList labels;
 
@@ -23,6 +24,7 @@ public class TestTask implements ReadOnlyTask {
      */
     public TestTask(TestTask taskToCopy) {
         this.title = taskToCopy.getTitle();
+        this.startTime = taskToCopy.getStartTime();
         this.deadline = taskToCopy.getDeadline();
         this.labels = taskToCopy.getLabels();
     }
@@ -65,5 +67,10 @@ public class TestTask implements ReadOnlyTask {
         sb.append(" by " + this.getDeadline().toString() + " ");
         this.getLabels().asObservableList().stream().forEach(s -> sb.append("t/" + s.labelName + " "));
         return sb.toString();
+    }
+
+    @Override
+    public Deadline getStartTime() {
+        return startTime;
     }
 }
