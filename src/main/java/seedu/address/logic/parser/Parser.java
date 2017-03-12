@@ -72,10 +72,10 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-            
+
         case ImportCommand.COMMAND_WORD:
             return new ImportCommand();
-            
+
         case ExportCommand.COMMAND_WORD:
             return new ExportCommand();
 

@@ -23,10 +23,10 @@ public abstract class Command {
     public static String getMessageForTaskListShownSummary(int displaySize) {
         return String.format(Messages.MESSAGE_TASKS_LISTED_OVERVIEW, displaySize);
     }
-    
+
     /**
      * Returns the list of tasks corresponds to the given string.
-     * 
+     *
      * @param targetList
      * @return the intended list of tasks
      */
@@ -45,10 +45,10 @@ public abstract class Command {
         }
         return lastShownList;
     }
-    
+
     /**
      * Throws an exception if the given index number is invalid for the given task list
-     * 
+     *
      * @param targetIndex
      * @param taskList
      * @throws CommandException
@@ -75,5 +75,5 @@ public abstract class Command {
     public void setData(Model model) {
         this.model = model;
     }
-    
+
 }

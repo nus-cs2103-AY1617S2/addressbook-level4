@@ -24,7 +24,7 @@ public class ImportCommand extends Command {
     public static final String COMMAND_WORD = "import";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": filepath";
-    
+
     public static final String MESSAGE_SUCCESS = "Imported successfully";
     public static final String MESSAGE_DUPLICATE_FILE_EXISTS = "Duplicate file exists";
 
@@ -43,7 +43,7 @@ public class ImportCommand extends Command {
         */
         //Where is the hashset stored?
     }
-    
+
     @Override
     public CommandResult execute() throws CommandException {
         /*
@@ -55,7 +55,7 @@ public class ImportCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
         */
-        
+
         // Dummy return
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }

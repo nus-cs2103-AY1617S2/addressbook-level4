@@ -52,7 +52,7 @@ public class ParserUtil {
         return Optional.of(Integer.parseInt(index));
 
     }
-    
+
     /**
      * Returns the specified task list name in the {@code command} if it is an alpha-non-numeric string
      * that corresponds to a valid task list name.

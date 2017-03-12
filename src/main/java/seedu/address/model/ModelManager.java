@@ -29,7 +29,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<ReadOnlyTask> floatingTasks;
     //private final FilteredList<ReadOnlyTask> completedTasks;
     private static final int MATCHING_INDEX = 35;
-  
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
