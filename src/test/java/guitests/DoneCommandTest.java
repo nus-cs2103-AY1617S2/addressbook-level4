@@ -7,6 +7,7 @@ import static seedu.ezdo.logic.commands.DoneCommand.MESSAGE_DONE_TASK_SUCCESS;
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
+import seedu.ezdo.commons.core.Messages;
 import seedu.ezdo.logic.commands.DoneCommand;
 import seedu.ezdo.testutil.TestTask;
 import seedu.ezdo.testutil.TestUtil;
@@ -24,7 +25,10 @@ public class DoneCommandTest extends EzDoGuiTest {
         assertDoneSuccess(targetIndex, currentList, doneList);
         
         //marks the middle task in the list as done
+        currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
+        doneList = TestUtil.addTasksToList(doneList, toDone);
         targetIndex = currentList.length / 2;
+        toDone = currentList[targetIndex - 1];
         assertDoneSuccess(targetIndex, currentList, doneList);
 
         //marks last task in the list as done
@@ -40,10 +44,12 @@ public class DoneCommandTest extends EzDoGuiTest {
         assertResultMessage("The task index provided is invalid");
 
         //invalid command
-        currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
-        doneList = TestUtil.addTasksToList(doneList, toDone);
-        commandBox.runCommand("dones 1");
+        commandBox.runCommand("done a");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
+        
+        //invalid command
+        commandBox.runCommand("dones 1");
+        assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
 
     }
 
@@ -54,7 +60,7 @@ public class DoneCommandTest extends EzDoGuiTest {
         TestTask[] expectedDone = TestUtil.addTasksToList(doneList, taskToDone);
 
         commandBox.runCommand("done " + targetIndexOneIndexed);
-
+    //    for (int i =0; i< expectedDone.length; i++) {System.out.println(expectedDone[i]);}
         //confirm the list now contains all done tasks including the one just marked as done
         assertTrue(taskListPanel.isListMatching(expectedDone));
 
@@ -64,10 +70,12 @@ public class DoneCommandTest extends EzDoGuiTest {
         //confirm the new card contains the right data
         TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToDone.getName().fullName);
         assertMatching(taskToDone, addedCard);
-
+        
         //confirm the undone list does not contain the task just marked as done
         commandBox.runCommand("list");
         assertTrue(taskListPanel.isListMatching(expectedRemainder));
+        
+        
     }
 
 }
