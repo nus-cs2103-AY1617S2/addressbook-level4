@@ -3,6 +3,10 @@ package seedu.taskboss.logic.commands;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_START_DATE;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 
 /**
  * Finds and lists all tasks in TaskBoss whose name contains any of the argument keywords.
@@ -28,7 +32,9 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute() {
         if (prefix.equals(PREFIX_NAME.toString())) {
-            model.updateFilteredTaskListByName(keywords);
+            String[] keywordsList = keywords.split("\\s+");
+            final Set<String> keywordSet = new HashSet<String>(Arrays.asList(keywordsList));
+            model.updateFilteredTaskListByName(keywordSet);
             return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
         } else if (prefix.equals(PREFIX_START_DATE.toString())) {
             model.updateFilteredTaskListByStartDateTime(keywords);

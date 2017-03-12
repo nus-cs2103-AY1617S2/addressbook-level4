@@ -1,5 +1,6 @@
 package seedu.taskboss.model;
 
+import java.util.Set;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
@@ -8,6 +9,7 @@ import seedu.taskboss.commons.core.LogsCenter;
 import seedu.taskboss.commons.core.UnmodifiableObservableList;
 import seedu.taskboss.commons.events.model.TaskBossChangedEvent;
 import seedu.taskboss.commons.util.CollectionUtil;
+import seedu.taskboss.commons.util.StringUtil;
 import seedu.taskboss.model.task.ReadOnlyTask;
 import seedu.taskboss.model.task.Task;
 import seedu.taskboss.model.task.UniqueTaskList;
@@ -92,7 +94,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskListByName(String keywords) {
+    public void updateFilteredTaskListByName(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
 
@@ -142,16 +144,18 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     private class NameQualifier implements Qualifier {
-        private String nameKeyWords;
+        private Set<String> nameKeyWords;
 
-        NameQualifier(String nameKeyWords) {
+        NameQualifier(Set<String> nameKeyWords) {
             this.nameKeyWords = nameKeyWords;
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return task.getName().fullName.contains(nameKeyWords) ||
-                    task.getName().fullName.toLowerCase().contains(nameKeyWords);
+            return nameKeyWords.stream()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword))
+                    .findAny()
+                    .isPresent();
         }
 
         @Override
@@ -175,7 +179,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public String toString() {
-            return "startDateTime=" + String.join(", ", startDateKeyWords);
+            return "startDateTime=" + startDateKeyWords;
         }
     }
 
@@ -194,7 +198,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public String toString() {
-            return "endDateTime=" + String.join(", ", endDateKeyWords);
+            return "endDateTime=" + endDateKeyWords;
         }
     }
 
