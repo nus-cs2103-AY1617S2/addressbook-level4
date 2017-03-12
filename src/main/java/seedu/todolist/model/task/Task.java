@@ -11,77 +11,76 @@ import seedu.todolist.model.tag.UniqueTagList;
  */
 public class Task implements ReadOnlyTask {
 
-	private Name name;
-	private UniqueTagList tags;
-	private boolean completed;
+    private Name name;
+    private UniqueTagList tags;
+    private boolean completed;
 
-	/**
-	 * Every field must be present and not null.
-	 */
-	public Task(Name name, UniqueTagList tags) {
-		assert !CollectionUtil.isAnyNull(name, tags);
-		this.name = name;
-		this.tags = new UniqueTagList(tags); // protect internal tags from
-												// changes in the arg list
-		this.completed = false;
-	}
+    /**
+     * Every field must be present and not null.
+     */
+    public Task(Name name, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, tags);
+        this.name = name;
+        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.completed = false;
+    }
 
-	/**
-	 * Creates a copy of the given ReadOnlyPerson.
-	 */
-	public Task(ReadOnlyTask source) {
-		this(source.getName(), source.getTags());
-	}
+    /**
+     * Creates a copy of the given ReadOnlyPerson.
+     */
+    public Task(ReadOnlyTask source) {
+        this(source.getName(), source.getTags());
+    }
 
-	public void setName(Name name) {
-		assert name != null;
-		this.name = name;
-	}
+    public void setName(Name name) {
+        assert name != null;
+        this.name = name;
+    }
 
-	@Override
-	public Name getName() {
-		return name;
-	}
+    @Override
+    public Name getName() {
+        return name;
+    }
 
-	@Override
-	public UniqueTagList getTags() {
-		return new UniqueTagList(tags);
-	}
+    @Override
+    public UniqueTagList getTags() {
+        return new UniqueTagList(tags);
+    }
 
-	/**
-	 * Replaces this person's tags with the tags in the argument tag list.
-	 */
-	public void setTags(UniqueTagList replacement) {
-		tags.setTags(replacement);
-	}
+    /**
+     * Replaces this person's tags with the tags in the argument tag list.
+     */
+    public void setTags(UniqueTagList replacement) {
+        tags.setTags(replacement);
+    }
 
-	/**
-	 * Updates this person with the details of {@code replacement}.
-	 */
-	public void resetData(ReadOnlyTask replacement) {
-		assert replacement != null;
+    /**
+     * Updates this person with the details of {@code replacement}.
+     */
+    public void resetData(ReadOnlyTask replacement) {
+        assert replacement != null;
 
-		this.setName(replacement.getName());
-		this.setTags(replacement.getTags());
-	}
+        this.setName(replacement.getName());
+        this.setTags(replacement.getTags());
+    }
 
-	@Override
-	public boolean equals(Object other) {
-		return other == this // short circuit if same object
-				|| (other instanceof ReadOnlyTask // instanceof handles nulls
-						&& this.isSameStateAs((ReadOnlyTask) other));
-	}
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ReadOnlyTask // instanceof handles nulls
+                        && this.isSameStateAs((ReadOnlyTask) other));
+    }
 
-	@Override
-	public int hashCode() {
-		// use this method for custom fields hashing instead of implementing
-		// your own
-		return Objects.hash(name, tags);
-	}
+    @Override
+    public int hashCode() {
+        // use this method for custom fields hashing instead of implementing
+        // your own
+        return Objects.hash(name, tags);
+    }
 
-	@Override
-	public String toString() {
-		return getAsText();
-	}
+    @Override
+    public String toString() {
+        return getAsText();
+    }
 
 }
