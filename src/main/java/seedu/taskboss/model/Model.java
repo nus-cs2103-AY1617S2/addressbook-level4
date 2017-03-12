@@ -1,7 +1,7 @@
 package seedu.taskboss.model;
 
-import java.util.Set;
 import java.util.EmptyStackException;
+import java.util.Set;
 
 import seedu.taskboss.commons.core.UnmodifiableObservableList;
 import seedu.taskboss.model.task.ReadOnlyTask;
