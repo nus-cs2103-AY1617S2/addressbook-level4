@@ -11,11 +11,11 @@ public class Config {
     public static final String DEFAULT_CONFIG_FILE = "config.json";
 
     // Config values customizable through config file
-    private String appTitle = "Address App";
+    private String appTitle = "TaskCrusher";
     private Level logLevel = Level.INFO;
     private String userPrefsFilePath = "preferences.json";
-    private String addressBookFilePath = "data/addressbook.txt";
-    private String addressBookName = "MyAddressBook";
+    private String addressBookFilePath = "data/userInbox.xml";
+    private String userInboxName = "MyTaskCrusher";
 
 
     public String getAppTitle() {
@@ -51,11 +51,11 @@ public class Config {
     }
 
     public String getAddressBookName() {
-        return addressBookName;
+        return userInboxName;
     }
 
     public void setAddressBookName(String addressBookName) {
-        this.addressBookName = addressBookName;
+        this.userInboxName = addressBookName;
     }
 
 
@@ -74,12 +74,12 @@ public class Config {
                 && Objects.equals(logLevel, o.logLevel)
                 && Objects.equals(userPrefsFilePath, o.userPrefsFilePath)
                 && Objects.equals(addressBookFilePath, o.addressBookFilePath)
-                && Objects.equals(addressBookName, o.addressBookName);
+                && Objects.equals(userInboxName, o.userInboxName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(appTitle, logLevel, userPrefsFilePath, addressBookFilePath, addressBookName);
+        return Objects.hash(appTitle, logLevel, userPrefsFilePath, addressBookFilePath, userInboxName);
     }
 
     @Override
@@ -89,7 +89,7 @@ public class Config {
         sb.append("\nCurrent log level : " + logLevel);
         sb.append("\nPreference file Location : " + userPrefsFilePath);
         sb.append("\nLocal data file location : " + addressBookFilePath);
-        sb.append("\nAddressBook name : " + addressBookName);
+        sb.append("\nAddressBook name : " + userInboxName);
         return sb.toString();
     }
 
