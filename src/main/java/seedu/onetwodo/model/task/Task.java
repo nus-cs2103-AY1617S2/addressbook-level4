@@ -17,6 +17,8 @@ public class Task implements ReadOnlyTask {
 
     private UniqueTagList tags;
     private TaskType type;
+    
+    private boolean isCompleted;
 
     //@@author A0141138N
     /**
@@ -36,6 +38,7 @@ public class Task implements ReadOnlyTask {
         this.endDate = endDate;
         this.description = description;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.isCompleted = false;
     }
 
     /**
@@ -99,6 +102,16 @@ public class Task implements ReadOnlyTask {
         return new UniqueTagList(tags);
     }
 
+    @Override
+    public boolean getCompleteStatus() {
+        return isCompleted;
+    }
+    
+    public void setCompleted(){
+        assert isCompleted == false;
+        isCompleted = true;
+    }
+    
     /**
      * Replaces this task's tags with the tags in the argument tag list.
      */

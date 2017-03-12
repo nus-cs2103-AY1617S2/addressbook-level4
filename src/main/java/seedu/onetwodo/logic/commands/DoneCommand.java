@@ -40,14 +40,15 @@ public class DoneCommand extends Command{
 
         FilteredList<ReadOnlyTask> filtered = lastShownList.filtered(t -> t.getTaskType() == taskType);
         
-        ReadOnlyTask taskToDelete = filtered.get(targetIndex - 1);
-
+        ReadOnlyTask taskToComplete = filtered.get(targetIndex - 1);
+        int internalIndex = lastShownList.indexOf(taskToComplete);
+        
         try {
-            model.deleteTask(taskToDelete); //to edit
+            model.doneTask(internalIndex);
         } catch (TaskNotFoundException tnfe) {
             assert false : "The target task cannot be missing";
         }
-
-        return new CommandResult(String.format(MESSAGE_DONE_TASK_SUCCESS, taskToDelete));
+        
+        return new CommandResult(String.format(MESSAGE_DONE_TASK_SUCCESS, taskToComplete));
     }
 }

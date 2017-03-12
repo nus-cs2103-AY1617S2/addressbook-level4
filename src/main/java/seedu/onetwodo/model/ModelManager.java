@@ -1,8 +1,10 @@
 package seedu.onetwodo.model;
 
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.NamedArg;
 import javafx.collections.transformation.FilteredList;
 import seedu.onetwodo.commons.core.ComponentManager;
 import seedu.onetwodo.commons.core.LogsCenter;
@@ -63,6 +65,14 @@ public class ModelManager extends ComponentManager implements Model {
         toDoList.removeTask(target);
         indicateToDoListChanged();
     }
+    
+    @Override
+    public synchronized void doneTask(int filteredTaskListIndex) {
+        int toDoListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
+        toDoList.doneTask(toDoListIndex);
+        updateFilteredTaskList(new PredicateExpression(p -> p.getCompleteStatus()==false));
+        indicateToDoListChanged();
+    }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
@@ -101,6 +111,10 @@ public class ModelManager extends ComponentManager implements Model {
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
+    
+//    public void updateFilteredTaskList(Predicate<ReadOnlyTask> predicate){
+//        filteredTasks.setPredicate(predicate);
+//    }
 
     //========== Inner classes/interfaces used for filtering =================================================
 
