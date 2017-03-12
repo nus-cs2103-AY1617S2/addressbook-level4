@@ -5,7 +5,7 @@ import static t15b1.taskcrusher.commons.core.Messages.MESSAGE_INVALID_COMMAND_FO
 
 import org.junit.Test;
 
-import guitests.guihandles.PersonCardHandle;
+import guitests.guihandles.TaskCardHandle;
 import t15b1.taskcrusher.commons.core.Messages;
 import t15b1.taskcrusher.logic.commands.EditCommand;
 import t15b1.taskcrusher.model.shared.Description;
@@ -127,7 +127,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("edit " + filteredPersonListIndex + " " + detailsToEdit);
 
         // confirm the new card contains the right data
-        PersonCardHandle editedCard = personListPanel.navigateToPerson(editedPerson.getTaskName().taskName);
+        TaskCardHandle editedCard = personListPanel.navigateToPerson(editedPerson.getTaskName().taskName);
         assertMatching(editedPerson, editedCard);
 
         // confirm the list now contains all previous persons plus the person with updated details

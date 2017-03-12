@@ -12,18 +12,18 @@ import t15b1.taskcrusher.model.tag.UniqueTagList;
 import t15b1.taskcrusher.model.task.ReadOnlyTask;
 
 /**
- * Provides a handle to a person card in the person list panel.
+ * Provides a handle to a task card in the task list panel.
  */
-public class PersonCardHandle extends GuiHandle {
+public class TaskCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
-    private static final String ADDRESS_FIELD_ID = "#address";
-    private static final String PHONE_FIELD_ID = "#phone";
-    private static final String EMAIL_FIELD_ID = "#email";
     private static final String TAGS_FIELD_ID = "#tags";
+    private static final String DEADLINE_FIELD_ID = "#deadline";
+    private static final String PRIORITY_FIELD_ID = "#priority";
+    private static final String DESCRIPTION_FIELD_ID = "#description";
 
     private Node node;
 
-    public PersonCardHandle(GuiRobot guiRobot, Stage primaryStage, Node node) {
+    public TaskCardHandle(GuiRobot guiRobot, Stage primaryStage, Node node) {
         super(guiRobot, primaryStage, null);
         this.node = node;
     }
@@ -32,22 +32,22 @@ public class PersonCardHandle extends GuiHandle {
         return getTextFromLabel(fieldId, node);
     }
 
-    public String getFullName() {
+    public String getTaskName() {
         return getTextFromLabel(NAME_FIELD_ID);
     }
 
-    public String getAddress() {
-        return getTextFromLabel(ADDRESS_FIELD_ID);
+    public String getDescription() {
+        return getTextFromLabel(DESCRIPTION_FIELD_ID);
     }
 
-    public String getPhone() {
-        return getTextFromLabel(PHONE_FIELD_ID);
+    public String getPriority() {
+        return getTextFromLabel(PRIORITY_FIELD_ID);
     }
 
-    public String getEmail() {
-        return getTextFromLabel(EMAIL_FIELD_ID);
+    public String getDeadline() {
+        return getTextFromLabel(DEADLINE_FIELD_ID);
     }
-
+    
     public List<String> getTags() {
         return getTags(getTagsContainer());
     }
@@ -73,21 +73,21 @@ public class PersonCardHandle extends GuiHandle {
     }
 
     public boolean isSameTask(ReadOnlyTask task) {
-        return getFullName().equals(task.getTaskName().taskName)
-                && getPhone().equals(task.getPriority().value)
-                && getEmail().equals(task.getEmail().value)
-                && getAddress().equals(task.getDescription().value)
+        return getTaskName().equals(task.getTaskName().taskName)
+                && getPriority().equals(task.getPriority().value)
+                && getDeadline().equals(task.getDeadline().value)
+                && getDescription().equals(task.getDescription().value)
                 && getTags().equals(getTags(task.getTags()));
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof PersonCardHandle) {
-            PersonCardHandle handle = (PersonCardHandle) obj;
-            return getFullName().equals(handle.getFullName())
-                    && getPhone().equals(handle.getPhone())
-                    && getEmail().equals(handle.getEmail())
-                    && getAddress().equals(handle.getAddress())
+        if (obj instanceof TaskCardHandle) {
+            TaskCardHandle handle = (TaskCardHandle) obj;
+            return getTaskName().equals(handle.getTaskName())
+                    && getPriority().equals(handle.getPriority())
+                    && getDeadline().equals(handle.getDeadline())
+                    && getDescription().equals(handle.getDescription())
                     && getTags().equals(handle.getTags());
         }
         return super.equals(obj);
@@ -95,6 +95,6 @@ public class PersonCardHandle extends GuiHandle {
 
     @Override
     public String toString() {
-        return getFullName() + " " + getAddress();
+        return getTaskName() + " " + getDescription();
     }
 }

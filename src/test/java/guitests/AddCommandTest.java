@@ -4,7 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import guitests.guihandles.PersonCardHandle;
+import guitests.guihandles.TaskCardHandle;
 import t15b1.taskcrusher.commons.core.Messages;
 import t15b1.taskcrusher.logic.commands.AddCommand;
 import t15b1.taskcrusher.testutil.TestPerson;
@@ -43,7 +43,7 @@ public class AddCommandTest extends AddressBookGuiTest {
         commandBox.runCommand(personToAdd.getAddCommand());
 
         //confirm the new card contains the right data
-        PersonCardHandle addedCard = personListPanel.navigateToPerson(personToAdd.getTaskName().taskName);
+        TaskCardHandle addedCard = personListPanel.navigateToPerson(personToAdd.getTaskName().taskName);
         assertMatching(personToAdd, addedCard);
 
         //confirm the list now contains all previous persons plus the new person
