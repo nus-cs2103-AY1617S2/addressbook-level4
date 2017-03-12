@@ -19,14 +19,14 @@ public class TaskTest {
         TestTask pb;
         try {
             pb = (new TaskBuilder())
-                    .withStartTime("today")
+                    .withStartTime("06-03-2017 0900")
                     .withDeadline("07-03-2017 2300")
                     .withLabels("testLabel")
                     .withTitle("Do something")
                     .build();
             Task p = new Task(pb);
-            int hashcode = 999869056;
-            int hashcode2 = p.hashCode();
+            int hashcode = -1501850788;
+            assert(p.hashCode() == hashcode);
         } catch (IllegalValueException | IllegalDateTimeValueException e) {
             e.printStackTrace();
             fail("Task fail Illegal value");

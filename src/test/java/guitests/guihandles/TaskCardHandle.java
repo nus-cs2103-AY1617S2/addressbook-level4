@@ -71,7 +71,7 @@ public class TaskCardHandle extends GuiHandle {
         return getTitle().equals(task.getTitle().title)
                 && getDeadline().equals(task.getDeadline().toString())
                 && getLabels().equals(getLabels(task.getLabels()));
-                //&& getStartTime().equals(task.getStartTime()); 
+                //&& getStartTime().equals(task.getStartTime()); //TODO: Fix!
     }
 
     @Override

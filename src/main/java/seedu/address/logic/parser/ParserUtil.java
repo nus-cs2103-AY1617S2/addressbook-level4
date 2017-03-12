@@ -77,10 +77,10 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.
      */
-    public static Optional<Deadline> parseAddress(Optional<String> address)
+    public static Optional<Deadline> parseDeadline(Optional<String> deadline)
             throws IllegalValueException, IllegalDateTimeValueException {
-        assert address != null;
-        return address.isPresent() ? Optional.of(new Deadline(address.get())) : Optional.empty();
+        assert deadline != null;
+        return deadline.isPresent() ? Optional.of(new Deadline(deadline.get())) : Optional.empty();
     }
 
 

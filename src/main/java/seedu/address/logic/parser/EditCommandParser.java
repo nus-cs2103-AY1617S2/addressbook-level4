@@ -41,7 +41,8 @@ public class EditCommandParser {
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
             editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
-            editTaskDescriptor.setDeadline(ParserUtil.parseAddress(argsTokenizer.getValue(PREFIX_DEADLINE)));
+            editTaskDescriptor.setStartTime(ParserUtil.parseDeadline(argsTokenizer.getValue(CliSyntax.PREFIX_TIMEINTERVAL_START)));
+            editTaskDescriptor.setDeadline(ParserUtil.parseDeadline(argsTokenizer.getValue(CliSyntax.PREFIX_TIMEINTERVAL_END)));
             editTaskDescriptor.setLabels(parseLabelsForEdit(ParserUtil.toSet(
                     argsTokenizer.getAllValues(PREFIX_LABEL))));
         } catch (IllegalValueException ive) {

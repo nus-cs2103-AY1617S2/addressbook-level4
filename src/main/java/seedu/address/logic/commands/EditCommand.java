@@ -97,6 +97,7 @@ public class EditCommand extends Command {
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.title = toCopy.getTitle();
+            this.startTime = toCopy.getStartTime();
             this.deadline = toCopy.getDeadline();
             this.labels = toCopy.getLabels();
         }
@@ -105,7 +106,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.title, this.deadline, this.labels);
+            return CollectionUtil.isAnyPresent(this.title, this.startTime, this.deadline, this.labels);
         }
 
         public void setName(Optional<Title> title) {
