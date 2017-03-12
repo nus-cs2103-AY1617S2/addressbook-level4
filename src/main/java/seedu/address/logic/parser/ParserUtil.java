@@ -16,7 +16,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Location;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.Priority;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -78,9 +78,9 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> phone} into an {@code Optional<Phone>} if {@code phone} is present.
      */
-    public static Optional<Phone> parsePhone(Optional<String> phone) throws IllegalValueException {
+    public static Optional<Priority> parsePhone(Optional<String> phone) throws IllegalValueException {
         assert phone != null;
-        return phone.isPresent() ? Optional.of(new Phone(phone.get())) : Optional.empty();
+        return phone.isPresent() ? Optional.of(new Priority(phone.get())) : Optional.empty();
     }
 
     /**

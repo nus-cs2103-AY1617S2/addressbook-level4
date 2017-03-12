@@ -43,7 +43,7 @@ import seedu.address.model.person.Activity;
 import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Location;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.Priority;
 import seedu.address.model.person.ReadOnlyActivity;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
@@ -196,13 +196,13 @@ public class LogicManagerTest {
 
     @Test
     public void execute_add_invalidActivityData() {
-        assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
+        assertCommandFailure("add  p/12345 e/valid@email.com l/address",
                 Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
-                Phone.MESSAGE_PHONE_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
+        assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail l/valid, address",
+                Priority.MESSAGE_PHONE_CONSTRAINTS);
+        assertCommandFailure("add Valid Name p/12345 e/notAnEmail l/valid, address",
                 Email.MESSAGE_EMAIL_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
+        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail l/valid, address t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
@@ -416,7 +416,7 @@ public class LogicManagerTest {
 
         Activity adam() throws Exception {
             Description name = new Description("Adam Brown");
-            Phone privatePhone = new Phone("111111");
+            Priority privatePhone = new Priority("111111");
             Email email = new Email("adam@gmail.com");
             Location privateLocation = new Location("111, alpha street");
             Tag tag1 = new Tag("tag1");
@@ -436,7 +436,7 @@ public class LogicManagerTest {
         Activity generateActivity(int seed) throws Exception {
             return new Activity(
                     new Description("Activity " + seed),
-                    new Phone("" + Math.abs(seed)),
+                    new Priority("" + Math.abs(seed)),
                     new Email(seed + "@email"),
                     new Location("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
@@ -451,7 +451,7 @@ public class LogicManagerTest {
 
             cmd.append(p.getDescription().toString());
             cmd.append(" e/").append(p.getEmail());
-            cmd.append(" p/").append(p.getPhone());
+            cmd.append(" p/").append(p.getPriority());
             cmd.append(" l/").append(p.getLocation());
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {
@@ -534,7 +534,7 @@ public class LogicManagerTest {
         Activity generateActivityWithName(String description) throws Exception {
             return new Activity(
                     new Description(description),
-                    new Phone("1"),
+                    new Priority("1"),
                     new Email("1@email"),
                     new Location("House of 1"),
                     new UniqueTagList(new Tag("tag"))

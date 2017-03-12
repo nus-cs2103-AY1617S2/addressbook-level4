@@ -18,7 +18,7 @@ public class ActivityCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label priority;
     @FXML
     private Label locations;
     @FXML
@@ -30,7 +30,7 @@ public class ActivityCard extends UiPart<Region> {
         super(FXML);
         description.setText(activity.getDescription().description);
         id.setText(displayedIndex + ". ");
-        phone.setText(activity.getPhone().value);
+        priority.setText(activity.getPriority().value);
         locations.setText(activity.getLocation().value);
         email.setText(activity.getEmail().value);
         initTags(activity);

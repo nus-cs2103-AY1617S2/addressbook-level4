@@ -10,7 +10,7 @@ import seedu.address.model.person.Activity;
 import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Location;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.Priority;
 import seedu.address.model.person.ReadOnlyActivity;
 import seedu.address.model.person.UniqueActivityList;
 import seedu.address.model.tag.UniqueTagList;
@@ -80,7 +80,7 @@ public class EditCommand extends Command {
 
         Description updatedDescription = editActivityDescriptor.getDescription().orElseGet(
             activityToEdit::getDescription);
-        Phone updatedPhone = editActivityDescriptor.getPhone().orElseGet(activityToEdit::getPhone);
+        Priority updatedPhone = editActivityDescriptor.getPhone().orElseGet(activityToEdit::getPriority);
         Email updatedEmail = editActivityDescriptor.getEmail().orElseGet(activityToEdit::getEmail);
         Location updatedLocation = editActivityDescriptor.getLocation().orElseGet(activityToEdit::getLocation);
         UniqueTagList updatedTags = editActivityDescriptor.getTags().orElseGet(activityToEdit::getTags);
@@ -94,7 +94,7 @@ public class EditCommand extends Command {
      */
     public static class EditActivityDescriptor {
         private Optional<Description> description = Optional.empty();
-        private Optional<Phone> phone = Optional.empty();
+        private Optional<Priority> phone = Optional.empty();
         private Optional<Email> email = Optional.empty();
         private Optional<Location> location = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
@@ -125,12 +125,12 @@ public class EditCommand extends Command {
             return description;
         }
 
-        public void setPhone(Optional<Phone> phone) {
+        public void setPhone(Optional<Priority> phone) {
             assert phone != null;
             this.phone = phone;
         }
 
-        public Optional<Phone> getPhone() {
+        public Optional<Priority> getPhone() {
             return phone;
         }
 

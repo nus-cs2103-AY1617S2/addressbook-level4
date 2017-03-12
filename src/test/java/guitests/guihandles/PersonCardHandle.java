@@ -74,7 +74,7 @@ public class PersonCardHandle extends GuiHandle {
 
     public boolean isSameActivity(ReadOnlyActivity activity) {
         return getFullName().equals(activity.getDescription().description)
-                && getPhone().equals(activity.getPhone().value)
+                && getPhone().equals(activity.getPriority().value)
                 && getEmail().equals(activity.getEmail().value)
                 && getAddress().equals(activity.getLocation().value)
                 && getTags().equals(getTags(activity.getTags()));

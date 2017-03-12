@@ -10,7 +10,7 @@ import seedu.address.model.person.Activity;
 import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Location;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.Priority;
 import seedu.address.model.person.ReadOnlyActivity;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
@@ -46,7 +46,7 @@ public class XmlAdaptedActivity {
      */
     public XmlAdaptedActivity(ReadOnlyActivity source) {
         description = source.getDescription().description;
-        phone = source.getPhone().value;
+        phone = source.getPriority().value;
         email = source.getEmail().value;
         location = source.getLocation().value;
         tagged = new ArrayList<>();
@@ -66,7 +66,7 @@ public class XmlAdaptedActivity {
             personTags.add(tag.toModelType());
         }
         final Description description = new Description(this.description);
-        final Phone phone = new Phone(this.phone);
+        final Priority phone = new Priority(this.phone);
         final Email email = new Email(this.email);
         final Location location = new Location(this.location);
         final UniqueTagList tags = new UniqueTagList(personTags);

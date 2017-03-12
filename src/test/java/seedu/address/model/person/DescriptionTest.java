@@ -12,14 +12,12 @@ public class DescriptionTest {
         // invalid description
         assertFalse(Description.isValidDescription("")); // empty string
         assertFalse(Description.isValidDescription(" ")); // spaces only
-        assertFalse(Description.isValidDescription("^")); // only non-alphanumeric characters
-        assertFalse(Description.isValidDescription("peter*")); // contains non-alphanumeric characters
 
         // valid description
-        assertTrue(Description.isValidDescription("peter jack")); // alphabets only
+        assertTrue(Description.isValidDescription("school test")); // alphabets only
         assertTrue(Description.isValidDescription("12345")); // numbers only
-        assertTrue(Description.isValidDescription("peter the 2nd")); // alphanumeric characters
-        assertTrue(Description.isValidDescription("Capital Tan")); // with capital letters
-        assertTrue(Description.isValidDescription("David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(Description.isValidDescription("cs2103 2nd test")); // alphanumeric characters
+        assertTrue(Description.isValidDescription("CS2103 Test")); // with capital letters
+        assertTrue(Description.isValidDescription("First exam of the CS2105")); // long names
     }
 }

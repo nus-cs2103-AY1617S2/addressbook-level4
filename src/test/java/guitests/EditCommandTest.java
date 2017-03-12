@@ -11,7 +11,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Location;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.Priority;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.ActivityBuilder;
 import seedu.address.testutil.TestActivity;
@@ -94,7 +94,7 @@ public class EditCommandTest extends WhatsLeftGuiTest {
         assertResultMessage(Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 p/abcd");
-        assertResultMessage(Phone.MESSAGE_PHONE_CONSTRAINTS);
+        assertResultMessage(Priority.MESSAGE_PHONE_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 e/yahoo!!!");
         assertResultMessage(Email.MESSAGE_EMAIL_CONSTRAINTS);
