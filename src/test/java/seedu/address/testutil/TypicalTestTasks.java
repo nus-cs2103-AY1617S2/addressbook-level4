@@ -35,8 +35,8 @@ public class TypicalTestTasks {
             // Manually added
             hoon = new TaskBuilder().withName("Submit research proposal").withPriority("hi")
                     .withStatus("incomplete").withNote("To Prof Obama's pigeonhole").build();
-            ida = new TaskBuilder().withName("Ida Mueller").withPriority("8482131")
-                    .withStatus("hans@google.com").withNote("chicago ave").build();
+            ida = new TaskBuilder().withName("Apply for scholarship").withPriority("lo")
+                    .withStatus("incomplete").withNote("Apply via iDA website").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
