@@ -47,6 +47,10 @@ public class Task implements ReadOnlyTask {
         return new UniqueTagList(tags);
     }
 
+    public boolean isComplete() {
+        return this.completed;
+    }
+
     /**
      * Replaces this person's tags with the tags in the argument tag list.
      */

@@ -91,12 +91,21 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     //@@author A0139633B
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredIncompleteTaskList() {
+        filteredTasks.setPredicate((Predicate<? super Task>) task -> {
+            return task.isComplete();
+        });
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 
     @Override
     //@@author A0139633B
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredCompleteTaskList() {
+        return new UnmodifiableObservableList<>(filteredTasks);
+    }
+
+    @Override
+    //@@author A0139633B
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredOverdueTaskList() {
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 

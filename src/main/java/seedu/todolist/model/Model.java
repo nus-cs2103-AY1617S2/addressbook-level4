@@ -45,6 +45,10 @@ public interface Model {
     //@@author A0139633B
     UnmodifiableObservableList<ReadOnlyTask> getFilteredCompleteTaskList();
 
+    /** Returns the filtered task list of overdue tasks as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    //@@author A0139633B
+    UnmodifiableObservableList<ReadOnlyTask> getFilteredOverdueTaskList();
+
     /** Updates the filter of the filtered task list to show all persons */
     void updateFilteredListToShowAll();
 

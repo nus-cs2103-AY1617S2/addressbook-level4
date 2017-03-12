@@ -10,6 +10,7 @@ public class ListCommand extends Command {
     public static final String TYPE_ALL = "all";
     public static final String TYPE_INCOMPLETE = "incomplete";
     public static final String TYPE_COMPLETE = "complete";
+    public static final String TYPE_OVERDUE = "overdue";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Lists the type of tasks specified.\n"
@@ -27,10 +28,19 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute() {
         switch(taskType) {
+
         case TYPE_INCOMPLETE:
             model.getFilteredIncompleteTaskList();
+            break;
+
         case TYPE_COMPLETE:
             model.getFilteredCompleteTaskList();
+            break;
+
+        case TYPE_OVERDUE:
+            model.getFilteredOverdueTaskList();
+            break;
+
         default:
             model.updateFilteredListToShowAll();
         }
