@@ -22,15 +22,16 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      * @param startDate TODO
+     * @param isDone TODO
      */
-    public Task(Name name, Date startDate, Date endDate, Remark remark, Location location, UniqueTagList tags) {
+    public Task(Name name, Date startDate, Date endDate, Remark remark, Location location, UniqueTagList tags, boolean isDone) {
         assert !CollectionUtil.isAnyNull(name, endDate, remark, location, tags);
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.remark = remark;
         this.location = location;
-        this.isDone = false;
+        this.isDone = isDone;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -39,7 +40,7 @@ public class Task implements ReadOnlyTask {
      */
     public Task(ReadOnlyTask source) {
         this(source.getName(), source.getStartDate(), source.getEndDate(), source.getRemark(),
-                source.getLocation(), source.getTags());
+                source.getLocation(), source.getTags(), false);
     }
 
     public void setName(Name name) {

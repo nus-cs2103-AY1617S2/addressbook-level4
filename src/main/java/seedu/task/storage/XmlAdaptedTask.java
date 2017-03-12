@@ -75,6 +75,6 @@ public class XmlAdaptedTask {
         final Remark remark = new Remark(this.remark);
         final Location location = new Location(this.location);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(name, startDate, endDate, remark, location, tags);
+        return new Task(name, startDate, endDate, remark, location, tags, false);
     }
 }
