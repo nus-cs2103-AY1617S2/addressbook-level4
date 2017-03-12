@@ -10,7 +10,7 @@ import savvytodo.commons.exceptions.IllegalValueException;
 public class Description {
 
     public static final String MESSAGE_DESCRIPTION_CONSTRAINTS =
-            "There are no constraints";
+            "Description should not be empty";
     public static final String DESCRIPTION_VALIDATION_REGEX = ".*";
 
     public final String value;

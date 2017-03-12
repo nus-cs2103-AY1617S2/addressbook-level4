@@ -55,4 +55,15 @@ public class StringUtil {
     public static boolean isUnsignedInteger(String s) {
         return s != null && s.matches("^0*[1-9]\\d*$");
     }
+
+    /**
+     * @author A0140016B
+     * @param string cannot be null
+     * @param string Should be trimmed
+     * @return string of first character upper case and the rest lower case
+     */
+    public static String firstCharUpperCaseRestLowerCase(String string) {
+        return string.substring(0, 1).toUpperCase() + string.substring(1).toLowerCase();
+    }
+
 }
