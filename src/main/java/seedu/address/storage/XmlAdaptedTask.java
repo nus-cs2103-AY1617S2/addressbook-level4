@@ -47,7 +47,7 @@ public class XmlAdaptedTask {
     public XmlAdaptedTask(ReadOnlyTask source) {
         title = source.getTitle().title;
         date = source.getDate().value;
-        priority = source.getPriority().value;
+        priority = source.getPriority().number;
         instruction = source.getInstruction().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {

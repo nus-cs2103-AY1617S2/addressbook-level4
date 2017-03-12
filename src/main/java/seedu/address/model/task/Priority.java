@@ -13,8 +13,8 @@ import seedu.address.commons.exceptions.IllegalValueException;
 public class Priority {
 
     public static final String MESSAGE_PRIORITY_CONSTRAINTS =
-            "Priority Levels are only 1-5 or lame, decent, moderate, forreal, urgent";
-    public static final String PRIORITY_VALIDATION_REGEX = "(lame|decent|moderate|forreal|urgent|1|2|3|4|5)";
+            "Priority Levels are only 1-5";
+    public static final String PRIORITY_VALIDATION_REGEX = "(1|2|3|4|5)";
     
     public static final String PRIORITY_LEVEL_ONE = "lame";
     public static final String PRIORITY_LEVEL_TWO = "decent";
@@ -30,6 +30,8 @@ public class Priority {
     public static final String PRIORITY_LEVEL_5 = "5";
 
     public String value;
+	public HashMap<String, String> priorityMap = new HashMap<String, String>();
+	public String number;
     
 
     /**
@@ -38,7 +40,6 @@ public class Priority {
      * @throws IllegalValueException if given email address string is invalid.
      */
     public Priority(String priority) throws IllegalValueException {
-    	HashMap<String, String> priorityMap = new HashMap<String, String>();
         priorityMap.put(PRIORITY_LEVEL_1, PRIORITY_LEVEL_ONE);
         priorityMap.put(PRIORITY_LEVEL_2, PRIORITY_LEVEL_TWO);
         priorityMap.put(PRIORITY_LEVEL_3, PRIORITY_LEVEL_THREE);
@@ -47,19 +48,15 @@ public class Priority {
     	
     	
     	assert priority != null;
-        String trimmedPriority = priority.trim();
+        
+    	String trimmedPriority = priority.trim();
         if (!isValidPriority(trimmedPriority)) {
             throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
         }
+        
   
-        try {
-        	int tempInt = -1;
-        	tempInt = Integer.parseInt(trimmedPriority);
-        	this.value = priorityMap.get(trimmedPriority);
-        	
-        } catch (NumberFormatException nfe) {
-        	this.value = trimmedPriority;
-        }
+        this.value = priorityMap.get(trimmedPriority);
+        this.number = trimmedPriority;
 
         
         
@@ -81,11 +78,15 @@ public class Priority {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Priority // instanceof handles nulls
-                && this.value.equals(((Priority) other).value)); // state check
+                && this.number.equals(((Priority) other).number)); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return number.hashCode();
+    }
+    
+    public void setAsComplete() {
+    	this.value = PRIORITY_LEVEL_DONE;
     }
 }
