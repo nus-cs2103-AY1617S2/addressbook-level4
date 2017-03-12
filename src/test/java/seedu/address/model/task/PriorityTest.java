@@ -9,7 +9,7 @@ public class PriorityTest {
 
     @Test
     public void isValidPriority() {
-        // invalid priorities 
+        // invalid priorities
         assertFalse(Priority.isValidPriority("")); // empty string
         assertFalse(Priority.isValidPriority(" ")); // spaces only
 
