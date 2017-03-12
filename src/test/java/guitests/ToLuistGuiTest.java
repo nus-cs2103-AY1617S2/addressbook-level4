@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
