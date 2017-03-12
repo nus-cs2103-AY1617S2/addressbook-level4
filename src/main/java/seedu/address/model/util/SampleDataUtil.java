@@ -14,22 +14,22 @@ public class SampleDataUtil {
             return new Task[] {
                 new Task(new Name("Alex Yeoh"),
                     new UniqueTagList("friends"),
-                		false),
+                        false),
                 new Task(new Name("Bernice Yu"),
                     new UniqueTagList("colleagues", "friends"),
-                		false),
+                        false),
                 new Task(new Name("Charlotte Oliveiro"),
                     new UniqueTagList("neighbours"),
-                		true),
+                        true),
                 new Task(new Name("David Li"),
                     new UniqueTagList("family"),
-                		true),
+                        true),
                 new Task(new Name("Irfan Ibrahim"),
                     new UniqueTagList("classmates"),
-                    	true),
+                        true),
                 new Task(new Name("Roy Balakrishnan"),
                     new UniqueTagList("colleagues"),
-                		false)
+                        false)
             };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);

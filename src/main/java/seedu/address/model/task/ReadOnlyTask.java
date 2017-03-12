@@ -35,7 +35,7 @@ public interface ReadOnlyTask {
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         builder.append(" Done: ")
-        	.append(isDone());
+            .append(isDone());
         return builder.toString();
     }
 

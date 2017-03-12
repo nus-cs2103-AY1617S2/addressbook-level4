@@ -14,7 +14,7 @@ public class Task implements ReadOnlyTask {
     private Name name;
 
     private UniqueTagList tags;
-    
+
     private boolean done;
 
     /**
@@ -38,19 +38,19 @@ public class Task implements ReadOnlyTask {
         assert name != null;
         this.name = name;
     }
-    
+
     public void setDone(boolean done) {
-    	this.done = done;
+        this.done = done;
     }
 
     @Override
     public Name getName() {
         return name;
     }
-    
+
     @Override
     public boolean isDone() {
-    	return done;
+        return done;
     }
 
     @Override
