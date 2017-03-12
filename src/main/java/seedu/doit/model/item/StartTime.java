@@ -1,7 +1,9 @@
 package seedu.doit.model.item;
 
+import java.time.LocalDateTime;
 
 import seedu.doit.commons.exceptions.IllegalValueException;
+import seedu.doit.logic.parser.DateTimeParser;
 
 /**
  * Represents a Item's start time in the task manager.
@@ -23,10 +25,16 @@ public class StartTime {
     public StartTime(String startTime) throws IllegalValueException {
         assert startTime != null;
         String trimmedStartTime = startTime.trim();
-        if (!isValidStartTime(trimmedStartTime)) {
+
+        LocalDateTime date = DateTimeParser.parseDateTime(trimmedStartTime).orElseThrow(()
+            -> new IllegalValueException("Invalid Date Format: " + trimmedStartTime));
+        String dateInString = date.toString();
+
+        if (!isValidStartTime(dateInString)) {
             throw new IllegalValueException(MESSAGE_STARTTIME_CONSTRAINTS);
         }
-        this.value = trimmedStartTime;
+
+        this.value = dateInString;
     }
 
     /**

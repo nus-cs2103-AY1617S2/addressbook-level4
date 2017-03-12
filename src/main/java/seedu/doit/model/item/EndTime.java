@@ -1,7 +1,9 @@
 package seedu.doit.model.item;
 
+import java.time.LocalDateTime;
 
 import seedu.doit.commons.exceptions.IllegalValueException;
+import seedu.doit.logic.parser.DateTimeParser;
 
 /**
  * Represents a Item's end time in the item manager.
@@ -23,10 +25,15 @@ public class EndTime {
     public EndTime(String endTime) throws IllegalValueException {
         assert endTime != null;
         String trimmedEndTime = endTime.trim();
-        if (!isValidEndTime(trimmedEndTime)) {
+
+        LocalDateTime date = DateTimeParser.parseDateTime(trimmedEndTime).orElseThrow(()
+            -> new IllegalValueException("Invalid Date Format: " + trimmedEndTime));
+        String dateInString = date.toString();
+
+        if (!isValidEndTime(dateInString)) {
             throw new IllegalValueException(MESSAGE_ENDTIME_CONSTRAINTS);
         }
-        this.value = trimmedEndTime;
+        this.value = dateInString;
     }
 
     /**

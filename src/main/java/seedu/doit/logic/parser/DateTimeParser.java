@@ -14,16 +14,16 @@ import com.joestelmach.natty.Parser;
  */
 
 public class DateTimeParser {
+
     /**
      * Parses string input into LocalDateTime object using natty
+     *
      * @param input naturally typed date/time with reference to current date
      * @return Optional type of LocalDateTime object, returns optional type of empty if  unable to parse
      */
-
-    private Date date = new Date(); //get current date
-    private Parser dateTimeParser = new Parser();
-
-    public Optional<LocalDateTime> parseDateTime(String input) {
+    public static Optional<LocalDateTime> parseDateTime(String input) {
+        Date date = new Date(); //get current date
+        Parser dateTimeParser = new Parser();
         List<DateGroup> groupsOfDateGroup = dateTimeParser.parse(input, date);
 
         if (groupsOfDateGroup.isEmpty()) {
