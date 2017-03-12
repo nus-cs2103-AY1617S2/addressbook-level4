@@ -7,16 +7,16 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import seedu.doist.testutil.TestPerson;
+import seedu.doist.testutil.TestTask;
 import seedu.doist.testutil.TestUtil;
 
-public class DeleteCommandTest extends AddressBookGuiTest {
+public class DeleteCommandTest extends DoistGUITest {
 
     @Test
     public void delete() {
 
         //delete the first in the list
-        TestPerson[] currentList = td.getTypicalTasks();
+        TestTask[] currentList = td.getTypicalTasks();
         int targetIndex = 1;
         assertDeleteSuccess(targetIndex, currentList);
 
@@ -41,9 +41,9 @@ public class DeleteCommandTest extends AddressBookGuiTest {
      * @param targetIndexOneIndexed e.g. index 1 to delete the first person in the list,
      * @param currentList A copy of the current list of persons (before deletion).
      */
-    private void assertDeleteSuccess(int targetIndexOneIndexed, final TestPerson[] currentList) {
-        TestPerson personToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
-        TestPerson[] expectedRemainder = TestUtil.removePersonFromList(currentList, targetIndexOneIndexed);
+    private void assertDeleteSuccess(int targetIndexOneIndexed, final TestTask[] currentList) {
+        TestTask personToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
+        TestTask[] expectedRemainder = TestUtil.removePersonFromList(currentList, targetIndexOneIndexed);
 
         commandBox.runCommand("delete " + targetIndexOneIndexed);
 
@@ -51,7 +51,7 @@ public class DeleteCommandTest extends AddressBookGuiTest {
         assertTrue(personListPanel.isListMatching(expectedRemainder));
 
         //confirm the result message is correct
-        ArrayList<TestPerson> personsToDelete = new ArrayList<TestPerson>();
+        ArrayList<TestTask> personsToDelete = new ArrayList<TestTask>();
         personsToDelete.add(personToDelete);
         assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, personsToDelete));
     }

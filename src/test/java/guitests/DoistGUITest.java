@@ -30,9 +30,9 @@ import seedu.doist.testutil.TestUtil;
 import seedu.doist.testutil.TypicalTestPersons;
 
 /**
- * A GUI Test class for AddressBook.
+ * A GUI Test class for Doist
  */
-public abstract class AddressBookGuiTest {
+public abstract class DoistGUITest {
 
     /* The TestName Rule makes the current test name available inside test methods */
     @Rule
