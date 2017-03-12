@@ -21,10 +21,10 @@ public class TypicalTestTasks {
             benson = new TaskBuilder().withName("Wash the dishes").withNote("They're in the sink")
                     .withStatus("incomplete").withPriority("mid")
                     .withTags("chores").build();
-            carl = new TaskBuilder().withName("Carl Kurz").withPriority("95352563")
-                    .withStatus("heinz@yahoo.com").withNote("wall street").build();
-            daniel = new TaskBuilder().withName("Daniel Meier").withPriority("87652533")
-                    .withStatus("cornelia@google.com").withNote("10th street").build();
+            carl = new TaskBuilder().withName("Do CS2103T post lecture quiz").withPriority("hi")
+                    .withStatus("incomplete").withNote("On IVLE").build();
+            daniel = new TaskBuilder().withName("Buy milk").withPriority("lo")
+                    .withStatus("incomplete").withNote("Low fat").build();
             elle = new TaskBuilder().withName("Elle Meyer").withPriority("9482224")
                     .withStatus("werner@gmail.com").withNote("michegan ave").build();
             fiona = new TaskBuilder().withName("Fiona Kunz").withPriority("9482427")
