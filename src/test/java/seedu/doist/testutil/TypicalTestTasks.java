@@ -16,7 +16,7 @@ public class TypicalTestTasks {
         try {
             alice = new TaskBuilder().withName("Alice Pauline").build();  //.withTags("friends").build();
             benson = new TaskBuilder().withName("Benson Meier").withTags("owesMoney", "friends").build();
-            carl = new TaskBuilder().withName("Carl Kurz").withPriority("VERYIMPORTANT").build();
+            carl = new TaskBuilder().withName("Carl Kurz").withPriority("VERY IMPORTANT").build();
             daniel = new TaskBuilder().withName("Daniel Meier").withPriority("IMPORTANT").build();
             taskWithPriority = new TaskBuilder().withName("a task with priority").withPriority("IMPORTANT").build();
             elle = new TaskBuilder().withName("Elle Meyer").build();

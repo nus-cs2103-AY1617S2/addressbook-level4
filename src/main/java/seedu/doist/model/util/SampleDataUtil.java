@@ -13,7 +13,7 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         try {
             return new Task[] {
-                new Task(new Description("Buy milk"), new Priority("VERYIMPORTANT"), new UniqueTagList("health")),
+                new Task(new Description("Buy milk"), new Priority("VERY IMPORTANT"), new UniqueTagList("health")),
                 new Task(new Description("Do CS2103 tutorial"), new Priority("IMPORTANT"),
                         new UniqueTagList("NUS", "tutorial")),
                 new Task(new Description("Exercise at home"), new Priority("NORMAL"),
