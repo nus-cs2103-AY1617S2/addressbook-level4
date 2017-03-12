@@ -14,7 +14,7 @@ import java.util.Optional;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -39,22 +39,22 @@ public class EditCommandParser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
-            editPersonDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
-            editPersonDescriptor.setPriority(ParserUtil.parsePhone(argsTokenizer.getValue(PREFIX_PRIORITY)));
-            editPersonDescriptor.setStatus(ParserUtil.parseEmail(argsTokenizer.getValue(PREFIX_STATUS)));
-            editPersonDescriptor.setNote(ParserUtil.parseAddress(argsTokenizer.getValue(PREFIX_NOTE)));
-            editPersonDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
+            editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
+            editTaskDescriptor.setPriority(ParserUtil.parsePhone(argsTokenizer.getValue(PREFIX_PRIORITY)));
+            editTaskDescriptor.setStatus(ParserUtil.parseEmail(argsTokenizer.getValue(PREFIX_STATUS)));
+            editTaskDescriptor.setNote(ParserUtil.parseAddress(argsTokenizer.getValue(PREFIX_NOTE)));
+            editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
 
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
+        if (!editTaskDescriptor.isAnyFieldEdited()) {
             return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index.get(), editPersonDescriptor);
+        return new EditCommand(index.get(), editTaskDescriptor);
     }
 
     /**

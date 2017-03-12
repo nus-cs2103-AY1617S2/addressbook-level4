@@ -12,18 +12,18 @@ import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.ReadOnlyTask;
 
 /**
- * Provides a handle to a person card in the person list panel.
+ * Provides a handle to a task card in the task list panel.
  */
-public class PersonCardHandle extends GuiHandle {
+public class TaskCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
-    private static final String ADDRESS_FIELD_ID = "#address";
-    private static final String PHONE_FIELD_ID = "#phone";
-    private static final String EMAIL_FIELD_ID = "#email";
+    private static final String NOTE_FIELD_ID = "#note";
+    private static final String PRIORITY_FIELD_ID = "#priority";
+    private static final String STATUS_FIELD_ID = "#status";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private Node node;
 
-    public PersonCardHandle(GuiRobot guiRobot, Stage primaryStage, Node node) {
+    public TaskCardHandle(GuiRobot guiRobot, Stage primaryStage, Node node) {
         super(guiRobot, primaryStage, null);
         this.node = node;
     }
@@ -37,15 +37,15 @@ public class PersonCardHandle extends GuiHandle {
     }
 
     public String getNote() {
-        return getTextFromLabel(ADDRESS_FIELD_ID);
+        return getTextFromLabel(NOTE_FIELD_ID);
     }
 
     public String getPriority() {
-        return getTextFromLabel(PHONE_FIELD_ID);
+        return getTextFromLabel(PRIORITY_FIELD_ID);
     }
 
     public String getStatus() {
-        return getTextFromLabel(EMAIL_FIELD_ID);
+        return getTextFromLabel(STATUS_FIELD_ID);
     }
 
     public List<String> getTags() {
@@ -72,18 +72,18 @@ public class PersonCardHandle extends GuiHandle {
         return guiRobot.from(node).lookup(TAGS_FIELD_ID).query();
     }
 
-    public boolean isSamePerson(ReadOnlyTask person) {
-        return getFullName().equals(person.getName().fullName)
-                && getPriority().equals(person.getPriority().value)
-                && getStatus().equals(person.getStatus().value)
-                && getNote().equals(person.getNote().value)
-                && getTags().equals(getTags(person.getTags()));
+    public boolean isSameTask(ReadOnlyTask task) {
+        return getFullName().equals(task.getName().fullName)
+                && getPriority().equals(task.getPriority().value)
+                && getStatus().equals(task.getStatus().value)
+                && getNote().equals(task.getNote().value)
+                && getTags().equals(getTags(task.getTags()));
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof PersonCardHandle) {
-            PersonCardHandle handle = (PersonCardHandle) obj;
+        if (obj instanceof TaskCardHandle) {
+            TaskCardHandle handle = (TaskCardHandle) obj;
             return getFullName().equals(handle.getFullName())
                     && getPriority().equals(handle.getPriority())
                     && getStatus().equals(handle.getStatus())

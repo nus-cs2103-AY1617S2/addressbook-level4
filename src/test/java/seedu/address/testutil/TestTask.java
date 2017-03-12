@@ -10,27 +10,27 @@ import seedu.address.model.task.Status;
 /**
  * A mutable person object. For testing only.
  */
-public class TestPerson implements ReadOnlyTask {
+public class TestTask implements ReadOnlyTask {
 
     private Name name;
-    private Note address;
-    private Status email;
-    private Priority phone;
+    private Note note;
+    private Status status;
+    private Priority priority;
     private UniqueTagList tags;
 
-    public TestPerson() {
+    public TestTask() {
         tags = new UniqueTagList();
     }
 
     /**
      * Creates a copy of {@code personToCopy}.
      */
-    public TestPerson(TestPerson personToCopy) {
-        this.name = personToCopy.getName();
-        this.phone = personToCopy.getPriority();
-        this.email = personToCopy.getStatus();
-        this.address = personToCopy.getNote();
-        this.tags = personToCopy.getTags();
+    public TestTask(TestTask taskToCopy) {
+        this.name = taskToCopy.getName();
+        this.priority = taskToCopy.getPriority();
+        this.status = taskToCopy.getStatus();
+        this.note = taskToCopy.getNote();
+        this.tags = taskToCopy.getTags();
     }
 
     public void setName(Name name) {
@@ -38,15 +38,15 @@ public class TestPerson implements ReadOnlyTask {
     }
 
     public void setNote(Note address) {
-        this.address = address;
+        this.note = address;
     }
 
     public void setStatus(Status email) {
-        this.email = email;
+        this.status = email;
     }
 
     public void setPriority(Priority phone) {
-        this.phone = phone;
+        this.priority = phone;
     }
 
     public void setTags(UniqueTagList tags) {
@@ -60,17 +60,17 @@ public class TestPerson implements ReadOnlyTask {
 
     @Override
     public Priority getPriority() {
-        return phone;
+        return priority;
     }
 
     @Override
     public Status getStatus() {
-        return email;
+        return status;
     }
 
     @Override
     public Note getNote() {
-        return address;
+        return note;
     }
 
     @Override
