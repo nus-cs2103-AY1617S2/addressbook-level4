@@ -8,7 +8,7 @@ import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.StartDateTime;
 
 /**
- * A mutable person object. For testing only.
+ * A mutable task object. For testing only.
  */
 public class TestTask implements ReadOnlyTask {
 
@@ -23,14 +23,14 @@ public class TestTask implements ReadOnlyTask {
     }
 
     /**
-     * Creates a copy of {@code personToCopy}.
+     * Creates a copy of {@code taskToCopy}.
      */
-    public TestTask(TestTask personToCopy) {
-        this.name = personToCopy.getName();
-        this.description = personToCopy.getDescription();
-        this.startDateTime = personToCopy.getStartDateTime();
-        this.endDateTime = personToCopy.getEndDateTime();
-        this.tags = personToCopy.getTags();
+    public TestTask(TestTask taskToCopy) {
+        this.name = taskToCopy.getName();
+        this.description = taskToCopy.getDescription();
+        this.startDateTime = taskToCopy.getStartDateTime();
+        this.endDateTime = taskToCopy.getEndDateTime();
+        this.tags = taskToCopy.getTags();
     }
 
     public void setName(Name name) {

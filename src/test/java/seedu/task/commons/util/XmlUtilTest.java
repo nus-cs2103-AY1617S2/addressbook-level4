@@ -13,7 +13,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.task.model.TaskList;
 import seedu.task.storage.XmlSerializableTaskList;
-import seedu.task.testutil.AddressBookBuilder;
+import seedu.task.testutil.TaskListBuilder;
 import seedu.task.testutil.TestUtil;
 
 public class XmlUtilTest {
@@ -85,9 +85,9 @@ public class XmlUtilTest {
         assertEquals((new TaskList(dataToWrite)).toString(), (new TaskList(dataFromFile)).toString());
         //TODO: use equality instead of string comparisons
 
-        AddressBookBuilder builder = new AddressBookBuilder(new TaskList());
+        TaskListBuilder builder = new TaskListBuilder(new TaskList());
         dataToWrite = new XmlSerializableTaskList(
-                builder.withPerson(TestUtil.generateSamplePersonData().get(0)).withTag("Friends").build());
+                builder.withTask(TestUtil.generateSampleTaskData().get(0)).withTag("Friends").build());
 
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
         dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableTaskList.class);

@@ -49,10 +49,10 @@ public class TypicalTestTasks {
         }
     }
 
-    public static void loadTaskListWithSampleData(TaskList ab) {
-        for (TestTask person : new TypicalTestTasks().getTypicalTasks()) {
+    public static void loadTaskListWithSampleData(TaskList taskList) {
+        for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
             try {
-                ab.addTask(new Task(person));
+                taskList.addTask(new Task(task));
             } catch (DuplicateTaskException e) {
                 assert false : "not possible";
             }

@@ -13,49 +13,49 @@ import seedu.task.model.task.StartDateTime;
  */
 public class TaskBuilder {
 
-    private TestTask person;
+    private TestTask task;
 
     public TaskBuilder() {
-        this.person = new TestTask();
+        this.task = new TestTask();
     }
 
     /**
-     * Initializes the TaskBuilder with the data of {@code personToCopy}.
+     * Initializes the TaskBuilder with the data of {@code taskToCopy}.
      */
-    public TaskBuilder(TestTask personToCopy) {
-        this.person = new TestTask(personToCopy);
+    public TaskBuilder(TestTask taskToCopy) {
+        this.task = new TestTask(taskToCopy);
     }
 
     public TaskBuilder withName(String name) throws IllegalValueException {
-        this.person.setName(new Name(name));
+        this.task.setName(new Name(name));
         return this;
     }
 
     public TaskBuilder withTags(String... tags) throws IllegalValueException {
-        person.setTags(new UniqueTagList());
+        task.setTags(new UniqueTagList());
         for (String tag : tags) {
-            person.getTags().add(new Tag(tag));
+            task.getTags().add(new Tag(tag));
         }
         return this;
     }
 
     public TaskBuilder withDescription(String phone) throws IllegalValueException {
-        this.person.setDescription(new Description(phone));
+        this.task.setDescription(new Description(phone));
         return this;
     }
 
     public TaskBuilder withStartDateTime(String email) throws IllegalValueException {
-        this.person.setStartDateTime(new StartDateTime(email));
+        this.task.setStartDateTime(new StartDateTime(email));
         return this;
     }
 
     public TaskBuilder withEndDateTime(String address) throws IllegalValueException {
-        this.person.setEndDateTime(new EndDateTime(address));
+        this.task.setEndDateTime(new EndDateTime(address));
         return this;
     }
 
     public TestTask build() {
-        return this.person;
+        return this.task;
     }
 
 }
