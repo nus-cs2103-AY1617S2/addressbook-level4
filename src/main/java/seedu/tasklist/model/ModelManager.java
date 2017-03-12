@@ -1,6 +1,7 @@
 package seedu.tasklist.model;
 
 import java.util.Set;
+import java.util.Stack;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
@@ -24,6 +25,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final TaskList taskList;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+    private Stack<TaskList> undoStack;
+    private Stack<TaskList> redoStack;
 
     /**
      * Initializes a ModelManager with the given taskList and userPrefs.
@@ -36,6 +39,9 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.taskList = new TaskList(taskList);
         filteredTasks = new FilteredList<>(this.taskList.getTaskList());
+
+        this.undoStack = new Stack<TaskList>();
+        this.redoStack = new Stack<TaskList>();
     }
 
     public ModelManager() {
@@ -79,6 +85,16 @@ public class ModelManager extends ComponentManager implements Model {
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskList.updateTask(taskListIndex, editedTask);
         indicateTaskListChanged();
+    }
+
+    @Override
+    public void getPreviousState() {
+
+    }
+
+    @Override
+    public void getNextState() {
+
     }
 
     //=========== Filtered Task List Accessors =============================================================
