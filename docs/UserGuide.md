@@ -93,14 +93,24 @@ Examples:
 * `delete 3,4,5,6`
 
 **Marking task as complete**
-Format: `complete <id1, id2, ...>`
+Format: `done <id1, id2, ...>`
 
 > id : displayed task id
 
 Examples:
 
-* `complete 3`
-* `complete 3,4,5,6`
+* `done 3`
+* `done 3,4,5,6`
+
+**Marking task as not complete**
+Format: `notdone <id1, id2, ...>`
+
+> id : displayed task id
+
+Examples:
+
+* `notdone 3`
+* `notdone 3,4,5,6`
 
 ### Managing Tags
 
