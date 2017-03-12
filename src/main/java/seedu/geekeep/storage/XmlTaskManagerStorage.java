@@ -25,7 +25,7 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
     }
 
     @Override
-    public String getAddressBookFilePath() {
+    public String getTaskManagerFilePath() {
         return filePath;
     }
 

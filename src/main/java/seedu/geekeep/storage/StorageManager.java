@@ -50,13 +50,13 @@ public class StorageManager extends ComponentManager implements Storage {
     // ================ AddressBook methods ==============================
 
     @Override
-    public String getAddressBookFilePath() {
-        return taskManagerStorage.getAddressBookFilePath();
+    public String getTaskManagerFilePath() {
+        return taskManagerStorage.getTaskManagerFilePath();
     }
 
     @Override
     public Optional<ReadOnlyTaskManager> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(taskManagerStorage.getAddressBookFilePath());
+        return readAddressBook(taskManagerStorage.getTaskManagerFilePath());
     }
 
     @Override
@@ -67,7 +67,7 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Override
     public void saveAddressBook(ReadOnlyTaskManager addressBook) throws IOException {
-        saveAddressBook(addressBook, taskManagerStorage.getAddressBookFilePath());
+        saveAddressBook(addressBook, taskManagerStorage.getTaskManagerFilePath());
     }
 
     @Override

@@ -21,7 +21,7 @@ public interface Storage extends TaskManagerStorage, UserPrefsStorage {
     void saveUserPrefs(UserPrefs userPrefs) throws IOException;
 
     @Override
-    String getAddressBookFilePath();
+    String getTaskManagerFilePath();
 
     @Override
     Optional<ReadOnlyTaskManager> readAddressBook() throws DataConversionException, IOException;

@@ -14,7 +14,7 @@ public interface TaskManagerStorage {
     /**
      * Returns the file path of the data file.
      */
-    String getAddressBookFilePath();
+    String getTaskManagerFilePath();
 
     /**
      * Returns AddressBook data as a {@link ReadOnlyTaskManager}.
@@ -25,7 +25,7 @@ public interface TaskManagerStorage {
     Optional<ReadOnlyTaskManager> readAddressBook() throws DataConversionException, IOException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getTaskManagerFilePath()
      */
     Optional<ReadOnlyTaskManager> readAddressBook(String filePath) throws DataConversionException, IOException;
 
