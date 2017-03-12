@@ -14,31 +14,43 @@ public class Task implements ReadOnlyTask {
     private Name name;
 
     private UniqueTagList tags;
+    
+    private boolean done;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, UniqueTagList tags) {
+    public Task(Name name, UniqueTagList tags, boolean done) {
         assert !CollectionUtil.isAnyNull(name, tags);
         this.name = name;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.done = done;
     }
 
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getTags());
+        this(source.getName(), source.getTags(), source.isDone());
     }
 
     public void setName(Name name) {
         assert name != null;
         this.name = name;
     }
+    
+    public void setDone(boolean done) {
+    	this.done = done;
+    }
 
     @Override
     public Name getName() {
         return name;
+    }
+    
+    @Override
+    public boolean isDone() {
+    	return done;
     }
 
     @Override
@@ -61,6 +73,7 @@ public class Task implements ReadOnlyTask {
 
         this.setName(replacement.getName());
         this.setTags(replacement.getTags());
+        this.setDone(replacement.isDone());
     }
 
     @Override
@@ -73,7 +86,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, tags);
+        return Objects.hash(name, tags, done);
     }
 
     @Override

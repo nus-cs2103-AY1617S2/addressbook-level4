@@ -9,6 +9,7 @@ import seedu.address.model.tag.UniqueTagList;
 public interface ReadOnlyTask {
 
     Name getName();
+    boolean isDone();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -33,6 +34,8 @@ public interface ReadOnlyTask {
         builder.append(getName())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
+        builder.append(" Done: ")
+        	.append(isDone());
         return builder.toString();
     }
 
