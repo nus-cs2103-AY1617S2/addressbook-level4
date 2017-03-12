@@ -124,10 +124,6 @@ Format: `add NAME [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` <br>
 Examples: 
 * `add exam` <br>
    Add a floating task named "exam" to the task list.
-* `add exam p/1` <br>
-   Add a priority 1 floating task named "exam" to the task list.
-* `add exam p/1 d/SR1` <br>
-   Add a priority 1 floating task named "exam" with description "SR1" to the task list.
 * `add exam p/1 d/SR1 t/CS2010`<br>
    Add a priority 1 floating task named "exam" with description "SR1" and tag "CS2010" to the task list.
 
@@ -146,12 +142,6 @@ Format: `add NAME on START_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` <br>
 Examples:
 * `add exam on 10-22-2017` <br> 
    Add a pending task named "exam" on 22 October 2017, current time to the task list.
-* `add exam on 10-22-2017 1500` <br>
-   Add a pending task named "exam" on 22 October 2017, 1500 to the task list.
-* `add exam on 10-22-2017 1500 p/1` <br>
-   Add a priority 1 pending task named "exam" on 22 October 2017, 1500 to the task list.
-* `add exam on 10-22-2017 1500 p/1 d/SR1` <br>
-   Add a priority 1 pending task named "exam" on 22 October 2017, 1500 with description "SR1" to the task list.
 * `add exam on 10-22-2017 1500 p/1 d/SR1 t/CS2010`<br>
    Add a priority 1 pending task named "exam" on 22 October 2017, 1500 with description "SR1" and tag "CS2010" to the task list.
  
@@ -171,12 +161,6 @@ Format: `add NAME by END_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` <br>
 Examples: 
 * `add exam by 10-22-2017` <br>
    Add a pending task named "exam" that starts now and end by 22 October 2017, 2359 to the task list.
-* `add exam by 10-22-2017 1500` <br>
-   Add a pending task named "exam" that starts now and end by 22 October 2017, 1500 to the task list.
-* `add exam by 10-22-2017 1500 p/1` <br>
-   Add a priority 1 pending task named "exam" that starts now and end by 22 October 2017, 1500 to the task list.
-* `add exam by 10-22-2017 1500 p/1 d/SR1` <br>
-   Add a priority 1 pending task named "exam" that starts now and end by 22 October 2017, 1500 with description "SR1" to the task list.
 * `add exam by 10-22-2017 1500 p/1 d/SR1 t/CS2010`<br>
    Add a priority 1 pending task named "exam" that starts now and end by 22 October 2017, 1500 with description "SR1" and tag "CS2010" 
    to the task list.
@@ -197,13 +181,6 @@ Format: `add NAME from START_DATETIME to END_DATETIME [p/PRIORITY] [d/DESCRIPTIO
 Examples:
 * `add exam from 10-22-2017 to 10-22-2016` <br>
    Add a pending task named "exam" that starts from 22 October 2017, current time to 22 October 2017, 2359 to the task list.
-* `add exam from 10-22-2017 1300 to 10-22-2016 1500` <br>
-   Add a pending task named "exam" that starts from 22 October 2017, 1300 to 22 October 2017, 1500 to the task list.
-* `add exam from 10-22-2017 1300 to 10-22-2016 1500 p/1` <br>
-   Add a priority 1 pending task named "exam" that starts from 22 October 2017, 1300 to 22 October 2017, 1500 to the task list.
-* `add exam from 10-22-2017 1300 to 10-22-2016 1500 p/1 d/SR1` <br>
-   Add a priority 1 pending task named "exam" that starts from 22 October 2017, 1300 to 22 October 2017, 1500 with description "SR1" to 
-   the task list.
 * `add exam from 10-22-2017 1300 to 10-22-2016 1500 p/1 d/SR1 t/CS2010`<br>
    Add a priority 1 pending task named "exam" that starts from 22 October 2017, 1300 to 22 October 2017, 1500 with description "SR1" and 
    tag "CS2010" to the task list.
@@ -229,67 +206,6 @@ Examples:
 * `add exam every day p/1 d/SR1 t/CS2010`<br>
    Add a priority 1 pending task named "exam" that starts at the current time everyday with description "SR1" and tag "CS2010" to the 
    task list.
-   
-* `add exam at 1300 every day p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" that starts at 1300 everyday with description "SR1" and tag "CS2010" to the task list.
-   
-* `add exam by 1500 every day p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" that starts at the current time and end by 1500 everyday with description "SR1" and tag 
-   "CS2010" to the task list.
-   
-* `add exam from 1300 to 1500 every day p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" that starts from 1300 to 1500 everyday with description "SR1" and tag "CS2010" to the task 
-   list.
-   
-   
-   
-* `add exam every Tue p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" that starts at the current time every Tuesday with description "SR1" and tag "CS2010" to 
-   the task list.
-   
-* `add exam at 1300 every Tue p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" that starts at 1300 every Tuesday with description "SR1" and tag "CS2010" to the task 
-   list.
-* `add exam by 1500 every Tue p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" that starts at the current time and end by 1500 every Tuesday with description "SR1" and 
-   tag "CS2010" to the task list.
-   
-* `add exam from 1300 to 1500 every Tue p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" that starts from 1300 to 1500 every Tuesday with description "SR1" and tag "CS2010" to the 
-   task list.
-
-
-
-* `add exam on 10-22-2017 every month p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" that starts on the 22nd of every month, current time, with description "SR1" and tag 
-   "CS2010" to the task list.
-   
-* `add exam on 10-22-2017 1300 every month p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" that starts on 22nd of every month 1300 with description "SR1" and tag "CS2010" to the 
-   task list.
-   
-* `add exam from 10-22-2017 to 10-22-2017 every month p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" that starts from the 22nd of every month, current time, to 22nd of every month 2359 with
-   description "SR1" and tag "CS2010" to the task list.
-   
-* `add exam from 10-22-2017 1300 to 10-22-2017 1500 every month p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" that starts from the 22nd of every month 1300 to 22nd of every month 1500 with description 
-   "SR1" and tag "CS2010" to the task list.
-   
-   
-   
-* `add exam on 10-22-2017 every year p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" that starts on the 22nd October of every year, current time,  with description "SR1" and 
-   tag "CS2010" to the task list.
-   
-* `add exam on 10-22-2017 1300 every year p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" that starts on the 22nd October of every year 1300 with description "SR1" and tag "CS2010" 
-   to the task list.
-   
-* `add exam from 10-22-2017 to 10-22-2017 every year p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" that starts on the 22nd October of every year, current time, to 22nd October of every year 
-   2359 with description "SR1" and tag "CS2010" to the task list.
-   
 * `add exam from 10-22-2017 1300 to 10-22-2017 1500 every year p/1 d/SR1 t/CS2010`<br>
    Add a priority 1 pending task named "exam" that starts on the 22nd October of every year 1300 to 22nd October of every year 1500 with 
    description "SR1" and tag "CS2010" to the task list.
@@ -315,15 +231,6 @@ Examples:
 * `Edit 1 on 10-22-2017 1500 p/1 d/SR1`<br>
    Edit the first task in the task list such that it is a priority 1 pending task named "exam" on 22 October 2017, 1500 with description 
    "SR1".
-* `Edit exam on 10-22-2017 1500 p/1 d/SR1`<br>
-   Edit a task named "exam" in the task list such that it is a priority 1 pending task named "exam" on 22 October 2017, 1500 with 
-   description "SR1".
-* `Edit exam on 10-22-2017 1500 p/1 d/SR1 t/CS2010`<br>
-   Edit a task named "exam" in the task list such that it is a priority 1 pending task named "exam" on 22 October 2017, 1500  with 
-   description "SR1" and append tag "CS2010" to "exam".
-* `Edit exam on 10-22-2017 1500 p/1 d/SR1 t/none`<br>
-   Edit a task named "exam" in the task list such that it is a priority 1 pending task named "exam" on 22 October 2017, 1500  with 
-   description "SR1" and remove all tags from "exam".
 * `Edit exam from 10-22-2017 1300 to 10-22-2017 1500 every year p/1 d/SR1 t/CS2010`<br>
    Edit the first task in the task list such that it start on the 22nd October of every year 1300 to 22nd October of every year 1500 
    with description "SR1" and append tag "CS2010" to "exam".
@@ -431,10 +338,6 @@ Format: `find [KEYWORDS...]`
 Advanced Examples: 
 * `find exam \p1 \dSR1`<br>
    Find all tasks whoose name contains "exam" or priority contains "1" or description contains "SR1".
-* `find \dSR1 \tCS2010 exam`<br>
-   Find all tasks whoose description contains "SR1" or tag contains "2010" or description contains "SR1". 
-* `find 10-22-2017 \h1500`<br>
-   Find all tasks whoose start date or end date contains "10-22-2017" or start time or end time contains "1500".
 * `find exam \p1 \dSR1 \tCS2010 \m10-2017 \h1500`<br>
    Find all tasks whoose name contains "exam" or priority contains "1" or description contains "SR1" or tag contains "2010" or (starts 
    or ends on October 2017") or (start time or end time contains "1500").
