@@ -60,7 +60,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void undoTaskboss() throws EmptyStackException {
-    	taskBoss.resetData(taskbossHistory.pop());
+        taskBoss.resetData(taskbossHistory.pop());
         indicateTaskBossChanged();
     }
 
