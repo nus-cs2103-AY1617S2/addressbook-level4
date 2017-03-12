@@ -49,5 +49,4 @@ public interface Model {
 
     /** Get the next state (redo) of the task list */
     public void setNextState() throws EmptyModelStackException;
-
 }

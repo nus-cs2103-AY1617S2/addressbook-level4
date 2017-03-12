@@ -4,6 +4,7 @@ import java.util.Set;
 import java.util.Stack;
 import java.util.logging.Logger;
 
+
 import javafx.collections.transformation.FilteredList;
 import seedu.tasklist.commons.core.ComponentManager;
 import seedu.tasklist.commons.core.LogsCenter;
@@ -26,8 +27,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final TaskList taskList;
     private final FilteredList<ReadOnlyTask> filteredTasks;
-    private Stack<TaskList> undoStack;
-    private Stack<TaskList> redoStack;
+    private Stack<ReadOnlyTaskList> undoStack;
+    private Stack<ReadOnlyTaskList> redoStack;
 
     /**
      * Initializes a ModelManager with the given taskList and userPrefs.
@@ -41,8 +42,8 @@ public class ModelManager extends ComponentManager implements Model {
         this.taskList = new TaskList(taskList);
         filteredTasks = new FilteredList<>(this.taskList.getTaskList());
 
-        this.undoStack = new Stack<TaskList>();
-        this.redoStack = new Stack<TaskList>();
+        this.undoStack = new Stack<ReadOnlyTaskList>();
+        this.redoStack = new Stack<ReadOnlyTaskList>();
     }
 
     public ModelManager() {
@@ -67,19 +68,20 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-        undoStack.push(taskList);
+        undoStack.push(new TaskList(taskList));
         taskList.removeTask(target);
         indicateTaskListChanged();
+
 
     }
 
     @Override
     public synchronized void addTask(Task person) throws UniqueTaskList.DuplicateTaskException {
-        undoStack.push(taskList);
+        undoStack.push(new TaskList(taskList));
         taskList.addTask(person);
-        assert taskList != undoStack.peek();
         updateFilteredListToShowAll();
         indicateTaskListChanged();
+
 
     }
 
@@ -87,7 +89,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
-        undoStack.push(taskList);
+        undoStack.push(new TaskList(taskList));
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskList.updateTask(taskListIndex, editedTask);
         indicateTaskListChanged();
@@ -99,10 +101,9 @@ public class ModelManager extends ComponentManager implements Model {
         if (undoStack.empty()) {
             throw new EmptyUndoRedoStackException();
         }
-        redoStack.push(taskList);
+        redoStack.push(new TaskList(taskList));
         ReadOnlyTaskList previousState = undoStack.pop();
-
-        resetData(previousState);
+        taskList.resetData(previousState);
         updateFilteredListToShowAll();
     }
 
@@ -111,9 +112,9 @@ public class ModelManager extends ComponentManager implements Model {
         if (redoStack.empty()) {
             throw new EmptyUndoRedoStackException();
         }
-        undoStack.push(taskList);
+        undoStack.push(new TaskList(taskList));
         ReadOnlyTaskList nextState = redoStack.pop();
-        resetData(nextState);
+        taskList.resetData(nextState);
         updateFilteredListToShowAll();
     }
 
