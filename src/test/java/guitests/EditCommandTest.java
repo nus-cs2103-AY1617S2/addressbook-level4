@@ -23,13 +23,13 @@ public class EditCommandTest extends TaskListGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby c/Block 123, Bobby Street 3 t/husband";
+        String detailsToEdit = "Drink water c/to improve brain function t/life";
         int taskListIndex = 1;
 
         TestTask editedTask = new TaskBuilder().
-                withName("Bobby").
-                withComment("Block 123, Bobby Street 3").
-                withTags("husband").
+                withName("Drink water").
+                withComment("to improve brain function").
+                withTags("life").
                 build();
 
         assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit, editedTask);
@@ -59,27 +59,27 @@ public class EditCommandTest extends TaskListGuiTest {
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
-        commandBox.runCommand("find Elle");
+        commandBox.runCommand("find Java");
 
-        String detailsToEdit = "Belle";
+        String detailsToEdit = "Python";
         int filteredTaskListIndex = 1;
         int taskListIndex = 5;
 
         TestTask taskToEdit = expectedTasksList[taskListIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withName("Belle").build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withName("Python").build();
 
         assertEditSuccess(filteredTaskListIndex, taskListIndex, detailsToEdit, editedTask);
     }
 
     @Test
     public void edit_missingTaskIndex_failure() {
-        commandBox.runCommand("edit Bobby");
+        commandBox.runCommand("edit 2103T");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void edit_invalidTaskIndex_failure() {
-        commandBox.runCommand("edit 8 Bobby");
+        commandBox.runCommand("edit 8 2103T");
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
@@ -103,8 +103,8 @@ public class EditCommandTest extends TaskListGuiTest {
 
     @Test
     public void edit_duplicateTask_failure() {
-        commandBox.runCommand("edit 3 Alice Pauline "
-                                + "c/123, Jurong West Ave 6, #08-111 t/friends");
+        commandBox.runCommand("edit 3 CS2103T tutorial "
+                                + "c/prepare V0.2 presentation t/class");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 

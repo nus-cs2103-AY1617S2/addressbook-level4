@@ -10,24 +10,26 @@ import seedu.tasklist.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
+    public TestTask tutorial, homework, groceries, lifegoals, java, CS2103T, drink, internship, ida;
 
     public TypicalTestTasks() {
         try {
-            alice = new TaskBuilder().withName("Alice Pauline")
-                    .withComment("123, Jurong West Ave 6, #08-111")
-                    .withTags("friends").build();
-            benson = new TaskBuilder().withName("Benson Meier").withComment("311, Clementi Ave 2, #02-25")
-                    .withTags("owesMoney", "friends").build();
-            carl = new TaskBuilder().withName("Carl Kurz").withComment("wall street").build();
-            daniel = new TaskBuilder().withName("Daniel Meier").withComment("10th street").build();
-            elle = new TaskBuilder().withName("Elle Meyer").withComment("michegan ave").build();
-            fiona = new TaskBuilder().withName("Fiona Kunz").withComment("little tokyo").build();
-            george = new TaskBuilder().withName("George Best").withComment("4th street").build();
+            tutorial = new TaskBuilder().withName("CS2103T tutorial")
+                    .withComment("prepare V0.2 presentation")
+                    .withTags("class").build();
+            homework = new TaskBuilder().withName("CS3245 homework 3").withComment("discuss with classmates")
+                    .withTags("class").build();
+            groceries = new TaskBuilder().withName("Buy groceries").withComment("go NTUC").build();
+            lifegoals = new TaskBuilder().withName("Find ways to not feel left out")
+                    .withComment("#IFeelLeftOut").build();
+            java = new TaskBuilder().withName("Update Java for CS2103T")
+                    .withComment("Find out why jdk is not displaying the correct ver").build();
+            CS2103T = new TaskBuilder().withName("Implement undo for this").withComment("By today").build();
+            drink = new TaskBuilder().withName("Drink water").withComment("To improve brain function").build();
 
             // Manually added
-            hoon = new TaskBuilder().withName("Hoon Meier").withComment("little india").build();
-            ida = new TaskBuilder().withName("Ida Mueller").withComment("chicago ave").build();
+            internship = new TaskBuilder().withName("Internship interview").withComment("at mediacorp").build();
+            ida = new TaskBuilder().withName("Yet another interview").withComment("also at mediacorp").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -45,7 +47,7 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
+        return new TestTask[]{tutorial, homework, groceries, lifegoals, java, CS2103T, drink};
     }
 
     public TaskList getTypicalTaskList() {
