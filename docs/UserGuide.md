@@ -22,15 +22,14 @@ For an ez™ life, use ezDo™.
 ### Installation Instructions
 
 1. Ensure that you have [Java version `1.8.0_60`](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) or later installed in your computer.<br>
-2. Download the latest `ezDo.jar` from the [releases](../../../releases) tab. <br> <div style="margin: 0 auto; width:500px;"><img src="http://i.imgur.com/feeehXl.png" width="500" style="margin:30px 0 30px 0; border: 1px solid black;" ></div><br>
+2. Download the latest `ezDo.jar` from the [releases](../../../releases) tab. <p align="center"><img src="images/Release.png" width="500"></p>
 3. Copy the latest `ezDo.jar` to the folder you want to use. This folder will be the home folder for ezDo. <br>
 
 ### Launch 
-To start the application, double-click on `ezDo.jar`. The user interface should appear in a few seconds. <img src="images/Ui.png" width="600"><br>
-
+To start the application, double-click on `ezDo.jar`. The user interface should appear in a few seconds. <p align="center"><img src="images/Ui.png" width="500"></p><br>
 
 ### Visual Introduction
-<div style="margin: 0 auto; width:500px;"><img src="http://i.imgur.com/UMzAZ6g.png" width="500" style="margin:15px 30px 15px 15px; border: 1px solid black;"></div>
+<p align="center"><img src="images/VisualIntroduction.png" width="500"></p>
 
 #### 1. Command Box
 Your commands should be typed here.<br>
@@ -193,7 +192,7 @@ You have just added a few tasks to ezDo with the Add command:
  
 You can now sort the tasks by name:
 
-<div style="margin: 0 auto; width:700px;"><img src="http://i.imgur.com/urlcy03.png" width="700" style="margin: 0px 0 30px 0; border: 0px solid black;"></div>
+<p align="center"><img src="images/Sorting.png" width="700"></p>
 
 
 <br>
