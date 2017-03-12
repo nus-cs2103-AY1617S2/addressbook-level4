@@ -42,15 +42,15 @@ public class TypicalTestTasks {
                     .withStartDateTime("Feb 19, 2017 5pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
                     .withInformation("little tokyo").build();
-            george = new TaskBuilder().withName("George Best").withPriorityLevel("2")
-                    .withStartDateTime("Feb 19, 2017 5pm")
-                    .withEndDateTime("Feb 28, 2017 5pm")
-                    .withInformation("4th street").build();
             submission = new TaskBuilder().withName("Submit progress report").withPriorityLevel("3")
                     .withStartDateTime("Feb 9, 2017 5pm")
                     .withEndDateTime("10am Feb 24, 2017 5pm")
                     .withInformation("notify department head")
                     .withCategories("Work", "Project").build();
+            george = new TaskBuilder().withName("George Best").withPriorityLevel("2")
+                    .withStartDateTime("Feb 19, 2017 5pm")
+                    .withEndDateTime("Feb 28, 2017 5pm")
+                    .withInformation("4th street").build();
 
             // Manually added
             hoon = new TaskBuilder().withName("Hoon Meier").withPriorityLevel("2")

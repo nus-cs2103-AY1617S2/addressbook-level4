@@ -18,7 +18,7 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
 
     @Test
     public void markTaskDone_success() throws Exception {
-        int taskBossIndex = 8;
+        int taskBossIndex = 7;
 
         TestTask markedDoneTask = new TaskBuilder().withName("Submit progress report")
                .withPriorityLevel("3").withStartDateTime("Feb 9, 2017 5pm")
@@ -34,7 +34,7 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
         commandBox.runCommand("find n/Submit progress report");
 
         int filteredTaskListIndex = 1;
-        int taskBossIndex = 8;
+        int taskBossIndex = 7;
 
         TestTask taskToMarkDone = expectedTasksList[taskBossIndex - 1];
         TestTask markedDoneTask = new TaskBuilder(taskToMarkDone).withCategories("Done").build();
@@ -50,7 +50,7 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
 
     @Test
     public void markDone_invalidTaskIndex_failure() {
-        commandBox.runCommand("done 8");
+        commandBox.runCommand("done 9");
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
