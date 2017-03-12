@@ -5,10 +5,10 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
-import seedu.address.commons.core.Messages;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.testutil.TestTask;
-import seedu.address.testutil.TestUtil;
+import seedu.todolist.commons.core.Messages;
+import seedu.todolist.logic.commands.AddCommand;
+import seedu.todolist.testutil.TestTask;
+import seedu.todolist.testutil.TestUtil;
 
 public class AddCommandTest extends ToDoListGuiTest {
 
@@ -43,7 +43,7 @@ public class AddCommandTest extends ToDoListGuiTest {
         commandBox.runCommand(personToAdd.getAddCommand());
 
         //confirm the new card contains the right data
-        TaskCardHandle addedCard = taskListPanel.navigateToPerson(personToAdd.getName().fullName);
+        TaskCardHandle addedCard = taskListPanel.navigateToTask(personToAdd.getName().fullName);
         assertMatching(personToAdd, addedCard);
 
         //confirm the list now contains all previous persons plus the new person

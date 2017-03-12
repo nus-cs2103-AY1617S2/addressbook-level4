@@ -1,19 +1,19 @@
-# AddressBook Level 4 - Developer Guide
+# TaskManager - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team W15-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
-1. [Setting Up](#setting-up)
-2. [Design](#design)
-3. [Implementation](#implementation)
-4. [Testing](#testing)
-5. [Dev Ops](#dev-ops)
+1. [Setting Up](#1-setting-up)
+2. [Design](#2-design)
+3. [Implementation](#3-implementation)
+4. [Testing](#4-testing)
+5. [Dev Ops](#5-dev-ops)
 
-* [Appendix A: User Stories](#appendix-a--user-stories)
-* [Appendix B: Use Cases](#appendix-b--use-cases)
-* [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
-* [Appendix D: Glossary](#appendix-d--glossary)
+* [Appendix A : User Stories](#appendix-a--user-stories)
+* [Appendix B : Use Cases](#appendix-b--use-cases)
+* [Appendix C : Non Functional Requirements](#appendix-c--non-functional-requirements)
+* [Appendix D : Glossary](#appendix-d--glossary)
 * [Appendix E : Product Survey](#appendix-e--product-survey)
 
 
@@ -51,7 +51,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 ### 1.3. Configuring Checkstyle
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
-3. Enter an arbitrary configuration name e.g. addressbook
+3. Enter an arbitrary configuration name e.g. taskmanager
 4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
 5. Click OK once, go to the `Main` tab, use the newly imported check configuration.
 6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
@@ -123,7 +123,7 @@ command `delete 1`.
 <img src="images\SDforDeletePerson.png" width="800"><br>
 _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 
->Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed,
+>Note how the `Model` simply raises a `TaskManagerChangedEvent` when the Task Manager data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
@@ -144,7 +144,8 @@ Author: Alice Bee
 <img src="images/UiClassDiagram.png" width="800"><br>
 _Figure 2.2.1 : Structure of the UI Component_
 
-**API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
+**API** : [`Ui.java`](../src/main/java/seedu/
+/ui/Ui.java)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
 `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
@@ -212,7 +213,7 @@ The `Storage` component,
 
 ### 2.6. Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.taskmanager.commons` package.
 
 ## 3. Implementation
 
@@ -323,7 +324,7 @@ Here are the steps to convert the project documentation files to PDF format.
  1. Make sure you have set up GitHub Pages as described in [UsingGithubPages.md](UsingGithubPages.md#setting-up).
  1. Using Chrome, go to the [GitHub Pages version](UsingGithubPages.md#viewing-the-project-site) of the
     documentation file. <br>
-    e.g. For [UserGuide.md](UserGuide.md), the URL will be `https://<your-username-or-organization-name>.github.io/addressbook-level4/docs/UserGuide.html`.
+    e.g. For [UserGuide.md](UserGuide.md), the URL will be `https://<your-username-or-organization-name>.github.io/taskmanager-level4/docs/UserGuide.html`.
  1. Click on the `Print` option in Chrome's menu.
  1. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. <br>
     For best results, use the settings indicated in the screenshot below. <br>
@@ -346,51 +347,54 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-|`***`|New User|view instructions|keep track of things to do|
+|`***`|New User|view instructions|read documentation on how to use the program|
 |`***`|User|add task|keep track of things to do|
+|`***`|User|delete a task|remove tasks I no longer want to keep track of|
 |`***`|User|complete task|update my progress|
+|`***`|User|edit task|correct or revise the task name and its details|
+|`***`|User|add tags to task|be able to group tasks under a category|
+|`***`|User|search for keyword|search for a task by keywords|
 |`***`|User|view incomplete tasks|keep track of what I still need to do|
 |`***`|User|view complete tasks|keep track of tasks I have completed|
-|`***`|User|delete a task|remove tasks I no longer want to keep track of|
-|`***`|User|edit task|correct or revise the task name and its details|
+|`***`|User|view overdue tasks|know which tasks to prioritise finishing|
 |`***`|User|view task progress|keep track of my progress|
 |`***`|User|sync list with Google Calendar|view my todo list across different platforms|
 |`***`|User|undo previous command|revert accidental changes|
-|`***`|User|search for keyword|search for a task by keywords|
-|`***`|User|view overdue tasks|know which tasks to prioritise finishing|
-|`***`|User|add tags to task|be able to group tasks under a category|
+|`***`|User|change UI theme|customise the application|
 |`***`|User|choose location to store save data|adjust application according to my needs|
-|`**`|User|view upcoming deadlines|keep track of my deadlines|
+|`**`|User|list upcoming deadlines|keep track of my deadlines|
 |`**`|User|have a relevant link for my task|keep track of the task details|
 |`**`|User|snooze my tasks|adjust application according to my needs|
 |`**`|User|be reminded of my tasks x minutes before deadline|get reminder to do my task|
-|`**`|User|change UI theme|customise the application|
 |`**`|User|repeat tasks|add a repeating task just once|
 |`**`|User|add notes about a task|keep track of my progress|
 |`**`|User|be alerted of conflicting tasks|avoid duplicates|
+|`*`|User|use arrow keys to scroll through previously typed commands|save myself the trouble of typing similar words|
 |`*`|User|change font size|adjust application according to my needs|
 |`*`|User|view progress report|have a detailed overview of my current progress|
 |`*`|User|view my tasks in calendar form|have a visual representation of my schedule|
-|`*`|User|use arrow keys to scroll through previously typed commands|save myself the trouble of typing similar words|
 |`*`|User|add a message of the day|customise the application|
 
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook`)
+(For all use cases below, the **System** is the `TaskManager`)
 
 | Use Case | Description |
 |-----|-----|
-|[Display Help](#use-case-display-help)|Displays a list of possible instructions|
-|[Add Task](#use-case-add-task)|Adds a task to the todo list. The task may have a concrete or floating time. Including tags at the end of the task is optional|
+|[Display help](#use-case-display-help)|Displays a list of possible instructions|
+|[Add task](#use-case-add-task)|Adds a task to the todo list. The task may have a concrete or floating time. Including tags at the end of the task is optional|
+|[Delete task](#use-case-delete-task)|Removes a task from the todo list|
 |[Mark task as complete](#use-case-complete-task)|Marks a task done by its name|
-|[View Upcoming Deadlines](#use-case-view-upcoming-deadlines)|Lists the tasks with upcoming deadlines within the next 2 weeks|
+|[List Upcoming Deadlines](#use-case-list-upcoming-deadlines)|Lists the tasks with upcoming deadlines within the next 2 weeks|
+|[List uncompleted tasks](#use-case-list-uncompleted-tasks)| Lists all uncompleted tasks|
+|[List completed tasks](#use-case-list-completed-tasks)| Lists all completed tasks|
 |[Calendar View](#use-case-calendar-view)|View the todo list as a calendar|
 |[Sync with Google Calendar](#use-case-sync-with-google-calendar)|Synchronise the todo list with a Google Calendar|
 |[Customize File Storing](#use-case-customize-file-storing)|Set a custom location for where to save the data|
 |[Reminder mode](#use-case-reminder-mode)|Sets whether the application will send a reminder as a task's deadline draws near|
 |[Attach Links](#use-case-attach-links)|Attaches links to a task|
-|[Show Progress Report](#use-case-show-progress-report)|Displays the current statistics on how many tasks have been added, completed, and pending completion|
+|[Show Progress Report](#use-case-show-task-progress-report)|Displays the current statistics on how many tasks have been added, completed, and pending completion|
 |[Search](#use-case-search)|Displays a list of tasks with matching keywords as queried|
 |[View Overdue Tasks](#use-case-view-overdue-tasks)|Displays a list of tasks that are overdue|
 |[Undo Previous Command](#use-case-undo-previous-command)|Undo the previous command|
@@ -435,40 +439,134 @@ Priority | As a ... | I want to ... | So that I can...
 
 ---
 
+### Use case: Delete Task
+#### Main Success Scenario:
+1. User requests to list tasks.
+2. System displays tasks.
+3. User deletes a task by its index.
+4. System displays new list without the deleted task.
+5. Use case ends.
+
+##### Extensions
+2a. There is no list.
+> Use case ends.
+
+3a. The given index is invalid.
+> 3a1. System gives an error message.
+Use case resumes at step 2.
+
+---
+
 ### Use Case: Complete Task
 
 #### Main Success Scenario:
-1. User selects a task based on its task number and marks it as completed.
-2. System marks the task as completed.
+1. User requests to list tasks.
+2. System displays tasks.
+3. User selects a task based on its task number and marks it as completed.
+4. System marks the task as completed.
+5. Use case ends.
+
+#### Extension
+2a. There is no list.
+> Use case ends.
+
+3a. The task has already been completed.
+> 3a1. System shows error message that the task has already been completed.
+> 3a2. Use case ends.
+
+3b. The provided task number does not exist.
+> 3b1. System shows error message that the task number does not exist.
+> 3b2. Use case ends.
+
+---
+
+### Use case: Edit Task
+#### Main Success Scenario:
+1. User requests to list uncompleted tasks.
+2. System displays uncompleted tasks.
+3. User edits a task.
+4. System saves the edits.
+5. Use case ends.
+
+##### Extensions
+2a. There is no list.
+> 2a1. Use case ends.
+
+3a. The given index is invalid.
+> 3a1. System gives an error message.
+> 3a2. Use case resumes at step 2.
+
+---
+
+### Use case: Add Tags to Created Task
+1. User requests to list tasks.
+2. System shows a list of tasks.
+3. User requests to add tags to a specific task in the list.
+4. System adds the tags and displays the task.
+5. Use case ends.
+
+##### Extensions
+2a. There is no list.
+> 2a1. Use case ends.
+
+3a. The given index is invalid.
+> 3a1. System gives an error message.
+> 3a2. Use case resumes at step 2.
+
+---
+
+### Use case: Search
+#### Main Success Scenario:
+1. User requests for a list of tasks that have matching keywords typed in.
+2. System shows a list of tasks that have the matching keywords.  
+3. Use case ends. 
+
+---
+
+### Use case: List Uncompleted Tasks
+#### Main Success Scenario:
+1. User requests for list of uncompleted tasks.
+2. System display list of uncompleted task.
+3. Use case ends.
+
+##### Extensions
+2a. No uncompleted tasks
+> 2a1. System displays no uncompleted tasks.
+> 2a2. Use case ends.
+
+---
+
+### Use case: List Completed Tasks
+#### Main Success Scenario:
+1. User requests for list of completed tasks.
+2. System display list of completed task.
+3. Use case ends.
+
+##### Extensions
+2a. No completed tasks
+> 2a1. System displays no completed tasks.
+> 2a2. Use case ends.
+
+---
+
+### Use case: View Overdue Tasks
+#### Main Success Scenario:
+1. User requests for a list of overdue tasks. 
+2. System shows a list of tasks that are overdue. 
+3. Use case ends.
+
+---
+
+### Use case: Show Task Progress Report
+
+#### Main Success Scenario:
+1. User requests for a report of his/her completed tasks, overdue tasks and upcoming tasks.
+2. System shows a report of the user's completed tasks, overdue tasks and upcoming tasks.
 3. Use case ends.
 
 #### Extension
-1a. The task has already been completed.
-> 1a1. System shows error message that the task has already been completed.
-> 1a2. Use case ends.
-
-1b. The provided task number does not exist.
-> 1b1. System shows error message that the task number does not exist.
-> 1b2. Use case ends.
-
----
-
-### Use Case: View Upcoming Deadlines
-
-#### Main Success Scenario:
-1. User requests to view all upcoming deadlines.
-2. System displays all tasks that have yet to be marked as complete.
-3. Use case ends.
-
----
-
-### Use case: Calendar View
-
-#### Main Success Scenario:
-1. User requests to view todo list in the form of a calendar.
-2. System displays the current and next month as a calendar.
-3. System populates the days with dots for incomplete tasks' due dates.
-4. Use case ends.
+2a. The list is empty.
+> 2a1. Use case ends.
 
 ---
 
@@ -488,6 +586,18 @@ Priority | As a ... | I want to ... | So that I can...
 
 ---
 
+### Use case: Undo Previous Command
+#### Main Success Scenario:
+1. User requests to undo a previous command that mutates the data. 
+2. System returns the command that was undone.
+3. Use case ends.
+
+##### Extensions
+2. There is nothing to undo.
+> 2a1. Use case ends. 
+
+---
+
 ### Use case: Customize File Storing
 #### Main Success Scenario:
 1. User requests to store data in the specified file instead of the default storing location.
@@ -503,6 +613,61 @@ Priority | As a ... | I want to ... | So that I can...
 1b. Specified file is not a .txt file
 > 1b1. System shows error message that specified file's format is not valid.
 > 1b2. Use case ends.
+
+---
+
+
+### Use Case: List Upcoming Deadlines
+
+#### Main Success Scenario:
+1. User requests to view all upcoming deadlines.
+2. System displays all tasks that have yet to be marked as complete.
+3. Use case ends.
+
+---
+
+### Use case: Attach Links
+#### Main Success Scenario:
+1. User inputs a link and requests for it to be attached to a task corresponding to the input task number.
+2. System attach the specified link to the specified task.
+3. System shows success message.
+4. Use case ends.
+
+#### Extension
+1a. The provided link is of invalid format.
+> 1a1. System shows error message that the link is of invalid format.
+> 1a2. Use case ends.
+
+1b. The provided task number does not exist.
+> 1b1. System shows error message that the task number does not exist.
+> 1b2. Use case ends.
+
+---
+
+### Use case: Calendar View
+
+#### Main Success Scenario:
+1. User requests to view todo list in the form of a calendar.
+2. System displays the current and next month as a calendar.
+3. System populates the days with dots for incomplete tasks' due dates.
+4. Use case ends.
+
+---
+
+### Use case: Snooze Tasks
+#### Main Success Scenario:
+1. User requests to list tasks.
+2. System displays tasks.
+3. User snoozes a task.
+4. System saves the edits.
+5. Use case ends.
+
+##### Extensions
+3a. There is no such task.
+> 3a1. Use case ends.
+
+3b. Task not completed.
+> 3b2. Use case ends.
 
 ---
 
@@ -525,102 +690,21 @@ Priority | As a ... | I want to ... | So that I can...
 
 ---
 
-### Use case: Attach Links
-#### Main Success Scenario:
-1. User inputs a link and requests for it to be attached to a task corresponding to the input task number.
-2. System attach the specified link to the specified task.
-3. System shows success message.
-4. Use case ends.
-
-#### Extension
-1a. The provided link is of invalid format.
-> 1a1. System shows error message that the link is of invalid format.
-> 1a2. Use case ends.
-
-1b. The provided task number does not exist.
-> 1b1. System shows error message that the task number does not exist.
-> 1b2. Use case ends.
-
----
-
-### Use case: Show Progress Report
-
-#### Main Success Scenario:
-1. User requests for a report of his/her completed tasks, overdue tasks and upcoming tasks.
-2. System shows a report of the user's completed tasks, overdue tasks and upcoming tasks.
-3. Use case ends.
-
-#### Extension
-2a. The list is empty.
-> 2a1. Use case ends.
-
----
-
-### Use case: Collaborate with Others
-
-#### Main Success Scenario:
-1. User requests for a report of his/her completed tasks, overdue tasks and upcoming tasks.
-2. System shows a report of the user's completed tasks, overdue tasks and upcoming tasks.
-3. Use case ends.
-
-#### Extension
-2a. The list is empty.
-> 2a1. Use case ends.
-
----
-
-### Use case: Search
-#### Main Success Scenario:
-1. User requests for a list of tasks that have matching keywords typed in.
-2. System shows a list of tasks that have the matching keywords.  
-3. Use case ends. 
-
----
-
-### Use case: View Overdue Tasks
-#### Main Success Scenario:
-1. User requests for a list of overdue tasks. 
-2. System shows a list of tasks that are overdue. 
-3. Use case ends.
-
----
-
-### Use case: Undo Previous Command
-#### Main Success Scenario:
-1. User requests to undo a previous command that mutates the data. 
-2. System returns the command that was undone.  
-3. Use case ends.
-
-##### Extensions
-2. There is nothing to undo.  
-> 2a1. Use case ends. 
-
----
-
 ### Use case: Repeat Task
 #### Main Success Scenario:
 1. User requests to list persons.
 2. System shows a list of persons. 
 3. User requests to repeat a specific task in the list. 
-4. System puts the task that was put on repeat and displays the task.   
+4. System puts the task that was put on repeat and displays the task.
 5. Use case ends.
 
 ##### Extensions
-2a. There is no list.  
+2a. There is no list.
 > Use case ends.
 
-3a. The given index is invalid.  
-> 3a1. System gives an error message.  
+3a. The given index is invalid.
+> 3a1. System gives an error message.
 Use case resumes at step 2.
-
----
-
-### Use case: Add Tags to Created Task
-1. User requests to list persons.
-2. System shows a list of persons.
-3. User requests to add tags to a specific task in the list.
-4. System adds the tags and displays the task.
-5. Use case ends.
 
 ---
 
@@ -650,77 +734,7 @@ Use case resumes at step 2.
 
 ---
 
-### Use case: See A List Of Completed Tasks
-#### Main Success Scenario:
-1. User requests for list of completed tasks.
-2. System display list of completed task.
-3. Use case ends.
-
-##### Extensions
-2a. No completed tasks
-> 2a1. System displays no completed tasks.
-> 2a2. Use case ends.
-
----
-
-### Use case: Edit Tasks
-#### Main Success Scenario:
-1. User requests to list uncompleted tasks.
-2. System displays uncompleted tasks.
-3. User edits a task.
-4. System saves the edits.
-5. Use case ends.
-
-##### Extensions
-2. There is nothing uncompleted.  
-> 2a1. Use case ends. 
-
----
-
-### Use case: See A List Of Uncompleted Tasks
-#### Main Success Scenario:
-1. User requests for list of uncompleted tasks.
-2. System display list of uncompleted task.
-3. Use case ends.
-
-##### Extensions
-2a. No uncompleted tasks
-> 2a1. System displays no uncompleted tasks.
-> 2a2. Use case ends.
-
----
-
-### Use case: Delete Tasks
-#### Main Success Scenario:
-1. User requests to list tasks.
-2. System displays tasks.
-3. User deletes a task.
-4. System displays new list without the deleted task.
-5. Use case ends.
-
-##### Extensions
-3. There is no such task.  
-> 3a1. Use case ends.
-
----
-
-### Use case: Snooze Tasks
-#### Main Success Scenario:
-1. User requests to list tasks.
-2. System displays tasks.
-3. User snoozes a task.
-4. System saves the edits.
-5. Use case ends.
-
-##### Extensions
-3a. There is no such task.  
-> 3a1. Use case ends.
-
-3b. Task not completed.
-> 3b2. Use case ends.
-
----
-### Use case: View My Task Progress
+### Use case: View A Task Progress
 #### Main Success Scenario:
 1. User requests to list uncompleted tasks.
 2. System displays uncompleted tasks.
@@ -729,7 +743,7 @@ Use case resumes at step 2.
 5. Use case ends.
 
 ##### Extensions
-2. There is no such task.  
+2. There is no such task.
 > 2a1. Use case ends.
 
 ---
@@ -743,11 +757,10 @@ Use case resumes at step 2.
 5. Use case ends.
 
 ##### Extensions
-3. Same name detected again.  
+3. Same name detected again.
 > 3a1. Go back to 2.
 
 ---
-
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
@@ -763,23 +776,19 @@ Use case resumes at step 2.
 
 > Windows, Linux, Unix, OS-X
 
-##### Private contact detail
-
-> A contact detail that is not meant to be shared with others
-
 ## Appendix E : Product Survey
-
 
 **Reminders**
 
 > Pros:
-> *  Simple and intuitive interface
-> *  Syncs across Apple devices
+> * Simple and intuitive interface
+> * Syncs across Apple devices
+> * Desktop version available
 
 > Cons:
-> *  Only available on iOS
-> *  Lacks collaborative features
-> *  Unable to customise
+> * Only available on iOS
+> * Lacks collaborative features
+> * Unable to customise
 
 **Todoist**
 
@@ -793,4 +802,40 @@ Use case resumes at step 2.
 > * Good functions are premium and user has to pay
 > * Search function limited in free plan
 > * Not available in Windows except for Windows 10
+
+**Cozi Family Organiser**
+
+> Pros:
+> * Many relevant categories like Upcoming Events, Groceries and Calendar
+> * Easy to collaborate with other family members
+> * Easily updated from mobile phone or computer
+> * Available in iTunes and Google Play
+
+> Cons:
+> * Requires a working internet connection
+> * Some categories like Birthdays are only available in the premium version
+> * Calendar cannot be synced to Google Calendar
+
+**Evernote**
+
+> Pros:
+> * Able to store multiple lists under different headings
+> * Desktop version available
+> * Can add tags to a task
+> * Flexibility in items that can be added, such as images and web clippings
+
+> Cons:
+> * Need to pay to access app over more than 2 devices
+> * No calendar view
+
+**Wunderlist**
+> Pros:
+> * Cross platform
+> * Desktop version available
+> * Simple to use
+> * Able to share the lists
+
+> Cons:
+> * Unable to repeat tasks
+> * Unable to add subtasks
 

@@ -1,17 +1,17 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.todolist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
-import seedu.address.commons.core.Messages;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.model.person.Name;
-import seedu.address.model.tag.Tag;
-import seedu.address.testutil.TaskBuilder;
-import seedu.address.testutil.TestTask;
+import seedu.todolist.commons.core.Messages;
+import seedu.todolist.logic.commands.EditCommand;
+import seedu.todolist.model.tag.Tag;
+import seedu.todolist.model.task.Name;
+import seedu.todolist.testutil.TaskBuilder;
+import seedu.todolist.testutil.TestTask;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
 public class EditCommandTest extends ToDoListGuiTest {
@@ -113,7 +113,7 @@ public class EditCommandTest extends ToDoListGuiTest {
         commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
 
         // confirm the new card contains the right data
-        TaskCardHandle editedCard = taskListPanel.navigateToPerson(editedTask.getName().fullName);
+        TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getName().fullName);
         assertMatching(editedTask, editedCard);
 
         // confirm the list now contains all previous persons plus the person with updated details

@@ -2,12 +2,12 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS;
+import static seedu.todolist.logic.commands.DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS;
 
 import org.junit.Test;
 
-import seedu.address.testutil.TestTask;
-import seedu.address.testutil.TestUtil;
+import seedu.todolist.testutil.TestTask;
+import seedu.todolist.testutil.TestUtil;
 
 public class DeleteCommandTest extends ToDoListGuiTest {
 
