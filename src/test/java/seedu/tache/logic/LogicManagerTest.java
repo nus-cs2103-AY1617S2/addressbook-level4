@@ -186,16 +186,13 @@ public class LogicManagerTest {
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid,address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 valid@email.butNoPrefix a/valid, address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidTaskData() {
-        assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
+        assertCommandFailure("add []\\[;] t/HighPriority",
                 Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
+        assertCommandFailure("add Valid Task t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
@@ -204,7 +201,7 @@ public class LogicManagerTest {
     public void execute_add_successful() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.adam();
+        Task toBeAdded = helper.celebrate();
         TaskManager expectedAB = new TaskManager();
         expectedAB.addTask(toBeAdded);
 
@@ -220,7 +217,7 @@ public class LogicManagerTest {
     public void execute_addDuplicate_notAllowed() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.adam();
+        Task toBeAdded = helper.celebrate();
 
         // setup starting state
         model.addTask(toBeAdded); // task already in internal task manager
@@ -347,14 +344,14 @@ public class LogicManagerTest {
     @Test
     public void execute_find_onlyMatchesFullWordsInNames() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
-        Task pTarget2 = helper.generateTaskWithName("bla KEY bla bceofeia");
-        Task p1 = helper.generateTaskWithName("KE Y");
-        Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
+        Task tTarget1 = helper.generateTaskWithName("bla bla KEY bla");
+        Task tTarget2 = helper.generateTaskWithName("bla KEY bla bceofeia");
+        Task t1 = helper.generateTaskWithName("KE Y");
+        Task t2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
 
-        List<Task> fourTasks = helper.generateTaskList(p1, pTarget1, p2, pTarget2);
+        List<Task> fourTasks = helper.generateTaskList(t1, tTarget1, t2, tTarget2);
         TaskManager expectedAB = helper.generateTaskManager(fourTasks);
-        List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2);
+        List<Task> expectedList = helper.generateTaskList(tTarget1, tTarget2);
         helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find KEY",
@@ -385,14 +382,14 @@ public class LogicManagerTest {
     @Test
     public void execute_find_matchesIfAnyKeywordPresent() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
-        Task pTarget2 = helper.generateTaskWithName("bla rAnDoM bla bceofeia");
-        Task pTarget3 = helper.generateTaskWithName("key key");
-        Task p1 = helper.generateTaskWithName("sduauo");
+        Task tTarget1 = helper.generateTaskWithName("bla bla KEY bla");
+        Task tTarget2 = helper.generateTaskWithName("bla rAnDoM bla bceofeia");
+        Task tTarget3 = helper.generateTaskWithName("key key");
+        Task t1 = helper.generateTaskWithName("sduauo");
 
-        List<Task> fourTasks = helper.generateTaskList(pTarget1, p1, pTarget2, pTarget3);
+        List<Task> fourTasks = helper.generateTaskList(tTarget1, t1, tTarget2, tTarget3);
         TaskManager expectedAB = helper.generateTaskManager(fourTasks);
-        List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
+        List<Task> expectedList = helper.generateTaskList(tTarget1, tTarget2, tTarget3);
         helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find key rAnDoM",
@@ -407,8 +404,8 @@ public class LogicManagerTest {
      */
     class TestDataHelper {
 
-        Task adam() throws Exception {
-            Name name = new Name("Adam Brown");
+        Task celebrate() throws Exception {
+            Name name = new Name("Celebrate");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
@@ -446,7 +443,7 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates an TaskManager with auto-generated tasks.
+         * Generates an Task Manager with auto-generated tasks.
          */
         TaskManager generateTaskManager(int numGenerated) throws Exception {
             TaskManager taskManager = new TaskManager();
@@ -455,7 +452,7 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates an TaskManager based on the list of Tasks given.
+         * Generates a task manager based on the list of Tasks given.
          */
         TaskManager generateTaskManager(List<Task> tasks) throws Exception {
             TaskManager taskManager = new TaskManager();
@@ -464,7 +461,7 @@ public class LogicManagerTest {
         }
 
         /**
-         * Adds auto-generated Task objects to the given TaskManager
+         * Adds auto-generated Task objects to the given task manager.
          * @param taskManager The TaskManager to which the Tasks will be added
          */
         void addToTaskManager(TaskManager taskManager, int numGenerated) throws Exception {
@@ -472,7 +469,7 @@ public class LogicManagerTest {
         }
 
         /**
-         * Adds the given list of Tasks to the given TaskManager
+         * Adds the given list of Tasks to the given task manager
          */
         void addToTaskManager(TaskManager taskManager, List<Task> tasksToAdd) throws Exception {
             for (Task p: tasksToAdd) {

@@ -22,21 +22,20 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby p/91234567 e/bobby@gmail.com a/Block 123, Bobby Street 3 t/husband";
+        String detailsToEdit = "Buy Eggs and Bread t/HighPriority";
         int taskManagerIndex = 1;
-
-        TestTask editedTask = new TaskBuilder().withName("Bobby").withTags("husband").build();
+        TestTask editedTask = new TaskBuilder().withName("Buy Eggs and Bread").withTags("MediumPriority").build();
 
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
 
     @Test
     public void edit_notAllFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "t/sweetie t/bestie";
+        String detailsToEdit = "t/LowPriority t/HighPriority";
         int taskManagerIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withTags("sweetie", "bestie").build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withTags("LowPriority", "HighPriority").build();
 
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
@@ -54,27 +53,27 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
-        commandBox.runCommand("find Elle");
+        commandBox.runCommand("find Grandma");
 
-        String detailsToEdit = "Belle";
+        String detailsToEdit = "Visit Grandpa";
         int filteredTaskListIndex = 1;
-        int taskManagerIndex = 5;
+        int taskManagerIndex = 3;
 
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withName("Belle").build();
-
+        TestTask editedTask = new TaskBuilder(taskToEdit).withName("Visit Grandpa").build();
+        
         assertEditSuccess(filteredTaskListIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
 
     @Test
     public void edit_missingTaskIndex_failure() {
-        commandBox.runCommand("edit Bobby");
+        commandBox.runCommand("edit Project");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void edit_invalidTaskIndex_failure() {
-        commandBox.runCommand("edit 8 Bobby");
+        commandBox.runCommand("edit 8 Project");
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
@@ -95,8 +94,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_duplicateTask_failure() {
-        commandBox.runCommand("edit 3 Alice Pauline p/85355255 e/alice@gmail.com "
-                                + "a/123, Jurong West Ave 6, #08-111 t/friends");
+        commandBox.runCommand("edit 3 Buy Eggs and Bread t/HighPriority");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
