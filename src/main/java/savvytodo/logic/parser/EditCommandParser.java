@@ -14,7 +14,6 @@ import java.util.Optional;
 import savvytodo.commons.exceptions.IllegalValueException;
 import savvytodo.logic.commands.Command;
 import savvytodo.logic.commands.EditCommand;
-import savvytodo.logic.commands.EditCommand.EditTaskDescriptor;
 import savvytodo.logic.commands.IncorrectCommand;
 import savvytodo.model.category.UniqueCategoryList;
 
@@ -39,23 +38,23 @@ public class EditCommandParser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
-        EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
+        CommandTaskDescriptor cmdTaskDescriptor = new CommandTaskDescriptor();
         try {
-            editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
-            editTaskDescriptor.setPriority(ParserUtil.parsePriority(argsTokenizer.getValue(PREFIX_PRIORITY)));
-            editTaskDescriptor.setDescription(ParserUtil.parseDescription(argsTokenizer.getValue(PREFIX_DESCRIPTION)));
-            editTaskDescriptor.setLocation(ParserUtil.parseLocation(argsTokenizer.getValue(PREFIX_LOCATION)));
-            editTaskDescriptor.setCategories(
+            cmdTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
+            cmdTaskDescriptor.setPriority(ParserUtil.parsePriority(argsTokenizer.getValue(PREFIX_PRIORITY)));
+            cmdTaskDescriptor.setDescription(ParserUtil.parseDescription(argsTokenizer.getValue(PREFIX_DESCRIPTION)));
+            cmdTaskDescriptor.setLocation(ParserUtil.parseLocation(argsTokenizer.getValue(PREFIX_LOCATION)));
+            cmdTaskDescriptor.setCategories(
                     parseCategoriesForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_CATEGORY))));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
 
-        if (!editTaskDescriptor.isAnyFieldEdited()) {
+        if (!cmdTaskDescriptor.isAnyFieldEdited()) {
             return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index.get(), editTaskDescriptor);
+        return new EditCommand(index.get(), cmdTaskDescriptor);
     }
 
     /**

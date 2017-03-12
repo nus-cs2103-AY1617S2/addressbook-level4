@@ -1,11 +1,10 @@
 package savvytodo.logic.commands;
 
 import java.util.List;
-import java.util.Optional;
 
 import savvytodo.commons.core.Messages;
-import savvytodo.commons.util.CollectionUtil;
 import savvytodo.logic.commands.exceptions.CommandException;
+import savvytodo.logic.parser.CommandTaskDescriptor;
 import savvytodo.model.category.UniqueCategoryList;
 import savvytodo.model.task.Description;
 import savvytodo.model.task.Location;
@@ -34,20 +33,20 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
 
     private final int filteredTaskListIndex;
-    private final EditTaskDescriptor editTaskDescriptor;
+    private final CommandTaskDescriptor cmdTaskDescriptor;
 
     /**
      * @param filteredTaskListIndex the index of the task in the filtered task list to edit
      * @param editTaskDescriptor details to edit the task with
      */
-    public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
+    public EditCommand(int filteredTaskListIndex, CommandTaskDescriptor cmdTaskDescriptor) {
         assert filteredTaskListIndex > 0;
-        assert editTaskDescriptor != null;
+        assert cmdTaskDescriptor != null;
 
         // converts filteredTaskListIndex from one-based to zero-based.
         this.filteredTaskListIndex = filteredTaskListIndex - 1;
 
-        this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
+        this.cmdTaskDescriptor = new CommandTaskDescriptor(cmdTaskDescriptor);
     }
 
     @Override
@@ -59,7 +58,7 @@ public class EditCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
-        Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        Task editedTask = createEditedTask(taskToEdit, cmdTaskDescriptor);
 
         try {
             model.updateTask(filteredTaskListIndex, editedTask);
@@ -72,93 +71,18 @@ public class EditCommand extends Command {
 
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
-     * edited with {@code editTaskDescriptor}.
+     * edited with {@code cmdTaskDescriptor}.
      */
-    private static Task createEditedTask(ReadOnlyTask taskToEdit,
-                                             EditTaskDescriptor editTaskDescriptor) {
+    private static Task createEditedTask(ReadOnlyTask taskToEdit, CommandTaskDescriptor cmdTaskDescriptor) {
         assert taskToEdit != null;
 
-        Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
-        Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
-        Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
-        Location updatedLocation = editTaskDescriptor.getLocation().orElseGet(taskToEdit::getLocation);
-        UniqueCategoryList updatedCategories = editTaskDescriptor.getCategories().orElseGet(taskToEdit::getCategories);
+        Name updatedName = cmdTaskDescriptor.getName().orElseGet(taskToEdit::getName);
+        Priority updatedPriority = cmdTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
+        Description updatedDescription = cmdTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
+        Location updatedLocation = cmdTaskDescriptor.getLocation().orElseGet(taskToEdit::getLocation);
+        UniqueCategoryList updatedCategories = cmdTaskDescriptor.getCategories().orElseGet(taskToEdit::getCategories);
 
         return new Task(updatedName, updatedPriority, updatedDescription, updatedLocation, updatedCategories);
     }
 
-    /**
-     * Stores the details to edit the task with. Each non-empty field value will replace the
-     * corresponding field value of the task.
-     */
-    public static class EditTaskDescriptor {
-        private Optional<Name> name = Optional.empty();
-        private Optional<Priority> priority = Optional.empty();
-        private Optional<Description> description = Optional.empty();
-        private Optional<Location> location = Optional.empty();
-        private Optional<UniqueCategoryList> categories = Optional.empty();
-
-        public EditTaskDescriptor() {}
-
-        public EditTaskDescriptor(EditTaskDescriptor toCopy) {
-            this.name = toCopy.getName();
-            this.priority = toCopy.getPriority();
-            this.description = toCopy.getDescription();
-            this.location = toCopy.getLocation();
-            this.categories = toCopy.getCategories();
-        }
-
-        /**
-         * Returns true if at least one field is edited.
-         */
-        public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.priority, this.description, this.location,
-                    this.categories);
-        }
-
-        public void setName(Optional<Name> name) {
-            assert name != null;
-            this.name = name;
-        }
-
-        public Optional<Name> getName() {
-            return name;
-        }
-
-        public void setPriority(Optional<Priority> priority) {
-            assert priority != null;
-            this.priority = priority;
-        }
-
-        public Optional<Priority> getPriority() {
-            return priority;
-        }
-
-        public void setDescription(Optional<Description> description) {
-            assert description != null;
-            this.description = description;
-        }
-
-        public Optional<Description> getDescription() {
-            return description;
-        }
-
-        public void setLocation(Optional<Location> location) {
-            assert location != null;
-            this.location = location;
-        }
-
-        public Optional<Location> getLocation() {
-            return location;
-        }
-
-        public void setCategories(Optional<UniqueCategoryList> categories) {
-            assert categories != null;
-            this.categories = categories;
-        }
-
-        public Optional<UniqueCategoryList> getCategories() {
-            return categories;
-        }
-    }
 }
