@@ -42,8 +42,10 @@ import seedu.todolist.model.ReadOnlyToDoList;
 import seedu.todolist.model.ToDoList;
 import seedu.todolist.model.tag.Tag;
 import seedu.todolist.model.tag.UniqueTagList;
+import seedu.todolist.model.task.EndTime;
 import seedu.todolist.model.task.Name;
 import seedu.todolist.model.task.ReadOnlyTask;
+import seedu.todolist.model.task.StartTime;
 import seedu.todolist.model.task.Task;
 import seedu.todolist.storage.StorageManager;
 
@@ -175,9 +177,9 @@ public class LogicManagerTest {
     @Test
     public void execute_clear() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        model.addTask(helper.generatePerson(1));
-        model.addTask(helper.generatePerson(2));
-        model.addTask(helper.generatePerson(3));
+        model.addTask(helper.generateTask(1));
+        model.addTask(helper.generateTask(2));
+        model.addTask(helper.generateTask(3));
 
         assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new ToDoList(), Collections.emptyList());
     }
@@ -202,7 +204,7 @@ public class LogicManagerTest {
     public void execute_add_successful() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.adam();
+        Task toBeAdded = helper.finishUserReport();
         ToDoList expectedAB = new ToDoList();
         expectedAB.addTask(toBeAdded);
 
@@ -218,7 +220,7 @@ public class LogicManagerTest {
     public void execute_addDuplicate_notAllowed() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.adam();
+        Task toBeAdded = helper.finishUserReport();
 
         // setup starting state
         model.addTask(toBeAdded); // person already in internal address book
@@ -405,24 +407,28 @@ public class LogicManagerTest {
      */
     class TestDataHelper {
 
-        Task adam() throws Exception {
+        Task finishUserReport() throws Exception {
             Name name = new Name("Adam Brown");
+            StartTime startTime = new StartTime("09/03/2017 4.55 PM");
+            EndTime endTime = new EndTime("09/03/2017 8.30 PM");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, tags);
+            return new Task(name, startTime, endTime, tags);
         }
 
         /**
-         * Generates a valid person using the given seed.
+         * Generates a valid task using the given seed.
          * Running this function with the same parameter values guarantees the returned person will have the same state.
          * Each unique seed will generate a unique Person object.
          *
          * @param seed used to generate the person data field values
          */
-        Task generatePerson(int seed) throws Exception {
+        Task generateTask(int seed) throws Exception {
             return new Task(
                     new Name("Person " + seed),
+                    new StartTime("01/01/20" + Math.abs(seed) + " 4.00 PM"),
+                    new EndTime("01/01/20" + Math.abs(seed) + " 5.00 PM"),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -501,7 +507,7 @@ public class LogicManagerTest {
         List<Task> generatePersonList(int numGenerated) throws Exception {
             List<Task> persons = new ArrayList<>();
             for (int i = 1; i <= numGenerated; i++) {
-                persons.add(generatePerson(i));
+                persons.add(generateTask(i));
             }
             return persons;
         }
@@ -516,6 +522,8 @@ public class LogicManagerTest {
         Task generateTaskWithName(String name) throws Exception {
             return new Task(
                     new Name(name),
+                    new StartTime("01/01/1995 4.00 PM"),
+                    new EndTime("01/01/1995 5.00 PM"),
                     new UniqueTagList(new Tag("tag"))
             );
         }

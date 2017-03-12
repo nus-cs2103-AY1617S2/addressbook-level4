@@ -11,6 +11,8 @@ public class CliSyntax {
 
     /* Prefix definitions */
     public static final Prefix PREFIX_TAG = new Prefix("t/");
+    public static final Prefix PREFIX_START = new Prefix("s/");
+    public static final Prefix PREFIX_END = new Prefix("e/");
 
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT =

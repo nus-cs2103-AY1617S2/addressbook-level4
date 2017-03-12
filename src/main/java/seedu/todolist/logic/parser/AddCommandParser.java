@@ -1,7 +1,9 @@
 package seedu.todolist.logic.parser;
 
 import static seedu.todolist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.todolist.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.todolist.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.todolist.logic.parser.CliSyntax.PREFIX_START;
 
 import java.util.NoSuchElementException;
 
@@ -21,11 +23,13 @@ public class AddCommandParser {
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_TAG);
+                new ArgumentTokenizer(PREFIX_START, PREFIX_END, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         try {
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
+                    argsTokenizer.getValue(PREFIX_START).get(),
+                    argsTokenizer.getValue(PREFIX_END).get(),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
             );
         } catch (NoSuchElementException nsee) {

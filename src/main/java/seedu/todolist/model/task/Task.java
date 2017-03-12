@@ -12,22 +12,36 @@ import seedu.todolist.model.tag.UniqueTagList;
 public class Task implements ReadOnlyTask {
 
     private Name name;
+    private StartTime startTime;
+    private EndTime endTime;
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
+     * @param starTime TODO
+     * @param endTime TODO
      */
-    public Task(Name name, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, tags);
+    public Task(Name name, StartTime startTime, EndTime endTime, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, startTime, endTime, tags);
         this.name = name;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
+    
+    /**
+     * Overloaded constructor to support floating tasks
+     * i.e. tasks without start time/end time
+     */
 
     /**
-     * Creates a copy of the given ReadOnlyPerson.
+     * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getTags());
+        this(source.getName(), 
+                source.getStartTime(),
+                source.getEndTime(),
+                source.getTags());
     }
 
     public void setName(Name name) {
@@ -35,12 +49,28 @@ public class Task implements ReadOnlyTask {
         this.name = name;
     }
 
-    @Override
     public Name getName() {
         return name;
     }
+    
+    public StartTime getStartTime() {
+        return startTime;
+    }
 
-    @Override
+    public void setStartTime(StartTime startTime) {
+        assert startTime != null;
+        this.startTime = startTime;
+    }
+
+    public EndTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(EndTime endTime) {
+        assert endTime != null;
+        this.endTime = endTime;
+    }
+
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
     }

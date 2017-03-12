@@ -7,7 +7,9 @@ import seedu.todolist.commons.exceptions.IllegalValueException;
 import seedu.todolist.logic.commands.exceptions.CommandException;
 import seedu.todolist.model.tag.Tag;
 import seedu.todolist.model.tag.UniqueTagList;
+import seedu.todolist.model.task.EndTime;
 import seedu.todolist.model.task.Name;
+import seedu.todolist.model.task.StartTime;
 import seedu.todolist.model.task.Task;
 import seedu.todolist.model.task.UniqueTaskList;
 
@@ -33,7 +35,10 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, Set<String> tags)
+    public AddCommand(String name, 
+            String startTime,
+            String endTime,
+            Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
@@ -41,6 +46,8 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Task(
                 new Name(name),
+                new StartTime(startTime),
+                new EndTime(endTime),
                 new UniqueTagList(tagSet)
         );
     }

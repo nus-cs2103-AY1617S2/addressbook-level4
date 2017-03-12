@@ -72,15 +72,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Name("Ali Muster"), new UniqueTagList()),
-                new Task(new Name("Boris Mueller"), new UniqueTagList()),
-                new Task(new Name("Carl Kurz"), new UniqueTagList()),
-                new Task(new Name("Daniel Meier"), new UniqueTagList()),
-                new Task(new Name("Elle Meyer"), new UniqueTagList()),
-                new Task(new Name("Fiona Kunz"), new UniqueTagList()),
-                new Task(new Name("George Best"), new UniqueTagList()),
-                new Task(new Name("Hoon Meier"), new UniqueTagList()),
-                new Task(new Name("Ida Mueller"), new UniqueTagList())
+                new Task(new Name("Ali Muster"), new UniqueTagList(), null, null),
+                new Task(new Name("Boris Mueller"), new UniqueTagList(), null, null),
+                new Task(new Name("Carl Kurz"), new UniqueTagList(), null, null),
+                new Task(new Name("Daniel Meier"), new UniqueTagList(), null, null),
+                new Task(new Name("Elle Meyer"), new UniqueTagList(), null, null),
+                new Task(new Name("Fiona Kunz"), new UniqueTagList(), null, null),
+                new Task(new Name("George Best"), new UniqueTagList(), null, null),
+                new Task(new Name("Hoon Meier"), new UniqueTagList(), null, null),
+                new Task(new Name("Ida Mueller"), new UniqueTagList(), null, null)
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {

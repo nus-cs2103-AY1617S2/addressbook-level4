@@ -9,7 +9,7 @@ import seedu.todolist.model.task.Task;
 import seedu.todolist.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
-    public static Task[] getSamplePersons() {
+    public static Task[] getSampleTasks() {
         try {
             return new Task[] {
                 new Task(new Name("Alex Yeoh"), new UniqueTagList("friends")),
@@ -27,7 +27,7 @@ public class SampleDataUtil {
     public static ReadOnlyToDoList getSampleAddressBook() {
         try {
             ToDoList sampleAB = new ToDoList();
-            for (Task samplePerson : getSamplePersons()) {
+            for (Task samplePerson : getSampleTasks()) {
                 sampleAB.addTask(samplePerson);
             }
             return sampleAB;
