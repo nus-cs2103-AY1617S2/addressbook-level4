@@ -11,39 +11,39 @@ import seedu.doist.model.task.Priority;
  */
 public class TaskBuilder {
 
-    private TestPerson person;
+    private TestTask task;
 
     public TaskBuilder() {
-        this.person = new TestPerson();
+        this.task = new TestTask();
     }
 
     /**
      * Initializes the TaskBuilder with the data of {@code personToCopy}.
      */
-    public TaskBuilder(TestPerson personToCopy) {
-        this.person = new TestPerson(personToCopy);
+    public TaskBuilder(TestTask taskToCopy) {
+        this.task = new TestTask(taskToCopy);
     }
 
     public TaskBuilder withName(String name) throws IllegalValueException {
-        this.person.setName(new Description(name));
+        this.task.setName(new Description(name));
         return this;
     }
 
     public TaskBuilder withPriority(String priority) throws IllegalValueException {
-        this.person.setPriority(new Priority(priority));
+        this.task.setPriority(new Priority(priority));
         return this;
     }
 
     public TaskBuilder withTags(String ... tags) throws IllegalValueException {
-        person.setTags(new UniqueTagList());
+        task.setTags(new UniqueTagList());
         for (String tag: tags) {
-            person.getTags().add(new Tag(tag));
+            task.getTags().add(new Tag(tag));
         }
         return this;
     }
 
-    public TestPerson build() {
-        return this.person;
+    public TestTask build() {
+        return this.task;
     }
 
 }
