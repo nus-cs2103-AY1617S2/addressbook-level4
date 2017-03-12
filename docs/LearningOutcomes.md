@@ -38,7 +38,7 @@ facilitate communication between event creators and event consumers.
 ## Use API Design `[LO-ApiDesign]`
 
 Note how components of AddressBook have well-defined APIs. For example, the API of the `Logic` component
-is given in the [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
+is given in the [`Logic.java`](../src/main/java/werkbook/address/logic/Logic.java)
 <img src="images/LogicClassDiagram.png" width="800"><br>
 
 **Resources**
@@ -158,10 +158,10 @@ coverage of code pushed to your repo. [Here](https://coveralls.io/github/se-edu/
 
 ## Apply Test Case Design Heuristics `[LO-TestCaseDesignHeuristics]`
 
-The [`StringUtilTest.java`](../src/test/java/seedu/address/commons/util/StringUtilTest.java) class gives some examples
+The [`StringUtilTest.java`](../src/test/java/werkbook/address/commons/util/StringUtilTest.java) class gives some examples
 of how to use _Equivalence Partitions_, _Boundary Value Analysis_, and _Test Input Combination Heuristics_ to improve
 the efficiency and effectiveness of test cases testing the
-[`StringUtil.java`](../src/main/java/seedu/address/commons/util/StringUtil.java) class.
+[`StringUtil.java`](../src/main/java/werkbook/address/commons/util/StringUtil.java) class.
 
 
 #### Exercise: Apply Test Case Design Heuristics to other places
@@ -176,7 +176,7 @@ the efficiency and effectiveness of test cases testing the
 
 ## Write Integration Tests `[LO-IntegrationTests]`
 
-Consider the [`StorageManagerTest.java`](../src/test/java/seedu/address/storage/StorageManagerTest.java) class.
+Consider the [`StorageManagerTest.java`](../src/test/java/werkbook/address/storage/StorageManagerTest.java) class.
 
 * Test methods `prefsReadSave()` and `addressBookReadSave()` are integration tests. Note how they simply test if
   The `StorageManager` class is correctly wired to its dependencies.
@@ -185,7 +185,7 @@ Consider the [`StorageManagerTest.java`](../src/test/java/seedu/address/storage/
   _dependency injection_ to isolate the SUT `StorageManger::handleAddressBookChangedEvent(...)` from its
   dependencies.
 
-Compare the above with [`LogicManagerTest`](../src/test/java/seedu/address/logic/LogicManagerTest.java).
+Compare the above with [`LogicManagerTest`](../src/test/java/werkbook/address/logic/LogicManagerTest.java).
 Many of the tests in that class (e.g. `execute_add_*` methods) tests are neither integration nor unit tests.
 They are a _integration + unit_ tests because they not only checks if the LogicManager is correctly wired to its
 dependencies, but also checks the working of its dependencies. For example, the following two lines test the
@@ -234,13 +234,13 @@ Note how this project uses TextFX library to automate GUI testing, including
 
 Here are some example design patterns used in the code base.
 
-* **Singleton Pattern** : [`EventsCenter.java`](../src/main/java/seedu/address/commons/core/EventsCenter.java) is
+* **Singleton Pattern** : [`EventsCenter.java`](../src/main/java/werkbook/address/commons/core/EventsCenter.java) is
   Singleton class. Its single instance can be accessed using the `EventsCenter.getInsance()` method.
-* **Facade Pattern** : [`StorageManager.java`](../src/main/java/seedu/address/storage/StorageManager.java) is
+* **Facade Pattern** : [`StorageManager.java`](../src/main/java/werkbook/address/storage/StorageManager.java) is
   not only shielding the internals of the Storage component from outsiders, it is mostly redirecting methods calls
   to its internal components (i.e. minimal logic in the class itself). Therefore, `StorageManager` can be considered a
   Facade class.
-* **Command Pattern** : The [`Command.java`](../src/main/java/seedu/address/logic/commands/Command.java) and its
+* **Command Pattern** : The [`Command.java`](../src/main/java/werkbook/address/logic/commands/Command.java) and its
   sub classes implement the Command Pattern.
 * **Observer Pattern** : The [event driven mechanism](DeveloperGuide.md#events-driven-nature-of-the-design) used by
   this code base employs the Observer pattern.<br>
@@ -253,7 +253,7 @@ Here are some example design patterns used in the code base.
   * The 'View' part of the application is mostly in the `.fxml` files in the `src/main/resources/view`
   folder.
   * `Model` component contains the 'Model'.
-  * Sub classes of [`UiPart`](../src/main/java/seedu/address/ui/UiPart.java) (e.g. `PersonListPanel` )
+  * Sub classes of [`UiPart`](../src/main/java/werkbook/address/ui/UiPart.java) (e.g. `PersonListPanel` )
   act as 'Controllers', each controlling some part of the UI and communicating with the 'Model' via a `Logic`
   component which sits between the 'Controller' and the 'Model'.
 * **Abstraction Occurrence Pattern** : Not currently used in the app.
