@@ -150,7 +150,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return task.getName().fullName.contains(nameKeyWords);
+            return task.getName().fullName.contains(nameKeyWords) ||
+                    task.getName().fullName.toLowerCase().contains(nameKeyWords);
         }
 
         @Override
@@ -168,7 +169,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return task.getStartDateTime().toString().contains(startDateKeyWords);
+            return task.getStartDateTime().toString().contains(startDateKeyWords) ||
+                    task.getStartDateTime().toString().toLowerCase().contains(startDateKeyWords);
         }
 
         @Override
@@ -186,7 +188,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return task.getEndDateTime().toString().contains(endDateKeyWords);
+            return task.getEndDateTime().toString().contains(endDateKeyWords) ||
+                    task.getEndDateTime().toString().toLowerCase().contains(endDateKeyWords) ;
         }
 
         @Override
