@@ -19,8 +19,8 @@ Responsibilities: UI
 -----
 
 #### [Peng Chong](https://github.com/Ellie-Peng)<br>
-
-Role: Developer <br>
+<img src="images/pengchong.jpg" width="150"><br>
+**Role**: Developer <br>
 Responsibilities: UI
 
 -----
