@@ -66,8 +66,8 @@ public class IndexTokenizer {
                 // If stringIndexes ends with "-", the endIndex will be maxIndex
                 int endIndex = maxIndex;
                 if (i + 1 > splittedStringIndexes.length
-                        || (i + 1 < splittedStringIndexes.length
-                                && !StringUtil.isPositiveInteger(splittedStringIndexes[i + 1]))) {
+                    || (i + 1 < splittedStringIndexes.length
+                    && !StringUtil.isPositiveInteger(splittedStringIndexes[i + 1]))) {
                     // Invalid state, early termination
                     return indexes;
                 }

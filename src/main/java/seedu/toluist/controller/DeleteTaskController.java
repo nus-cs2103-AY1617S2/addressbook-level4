@@ -2,6 +2,7 @@ package seedu.toluist.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.controller.commons.IndexTokenizer;
@@ -52,11 +53,12 @@ public class DeleteTaskController extends Controller {
     }
 
     private CommandResult delete(TodoList todoList, List<Task> tasks) {
-        String message = "";
-        for (Task task: tasks) {
-            message += delete(todoList, task).getFeedbackToUser() + "\n";
-        }
-        return new CommandResult(message);
+        List<String> messages = tasks.
+                                stream().
+                                map(task -> delete(todoList, task).
+                                        getFeedbackToUser()).
+                                collect(Collectors.toList());
+        return new CommandResult(String.join("\n", messages));
     }
 
     private CommandResult delete(TodoList todoList, Task task) {
