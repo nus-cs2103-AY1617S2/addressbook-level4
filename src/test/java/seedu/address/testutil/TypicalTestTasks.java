@@ -25,8 +25,8 @@ public class TypicalTestTasks {
                     .withStatus("incomplete").withNote("On IVLE").build();
             daniel = new TaskBuilder().withName("Buy milk").withPriority("lo")
                     .withStatus("incomplete").withNote("Low fat").build();
-            elle = new TaskBuilder().withName("Elle Meyer").withPriority("9482224")
-                    .withStatus("werner@gmail.com").withNote("michegan ave").build();
+            elle = new TaskBuilder().withName("Write reflections for CS2101").withPriority("hi")
+                    .withStatus("incomplete").withNote("Include more reflection rather than description").build();
             fiona = new TaskBuilder().withName("Fiona Kunz").withPriority("9482427")
                     .withStatus("lydia@gmail.com").withNote("little tokyo").build();
             george = new TaskBuilder().withName("George Best").withPriority("9482442")
