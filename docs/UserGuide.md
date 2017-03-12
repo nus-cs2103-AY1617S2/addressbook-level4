@@ -51,7 +51,7 @@ Format: help
 ## 2.2. Adding a task: `add`
 
 Adds a task to task list
-Format: add -n TASKNAME -d DATE [-o DESCRIPTION] [-p]
+Format: add TASKNAME -d DATE [-o DESCRIPTION] [-p]
 
 Examples:
 
@@ -77,17 +77,22 @@ Examples:
 
 * `delete 1`
 
-## 2.5. Listing all tasks: `list`
+## 2.5. Undo a command: 'undo'
+
+Undo most recent command
+Format: undo
+
+## 2.6. Listing all tasks: `list`
 
 Shows a list of all tasks
 Format: list
 
-## 2.6. Exiting the program : `exit`
+## 2.7. Exiting the program : `exit`
 
 Exits the program.
 Format: exit
 
-## 2.7. View tasks : `view`
+## 2.8. View tasks : `view`
 
 Views the details of a task
 Format: view INDEX
@@ -96,7 +101,7 @@ Examples:
 
 * `view 1`
 
-## 2.8. Finding all tasks containing any keyword in the task name: `find`
+## 2.9. Finding all tasks containing any keyword in the task name: `find`
 
 Finds tasks that satisfy given parameters
 Format: find [-n KEYWORDS] [-o KEYWORDS] [-d DATE]
@@ -113,11 +118,11 @@ Examples:
 * `find -o Project`
 * `find -d 12/08/2017`
 
-## 2.9. Clearing all entries : `clear`
+## 2.10. Clearing all entries : `clear`
 
 Format: clear
 
-## 2.10. Saving the data
+## 2.11. Saving the data
 
 Application data are saved onto hard drive automatically after any commands are executed that changes the data.
 There is no need to manually save the data
