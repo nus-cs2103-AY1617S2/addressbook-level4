@@ -15,21 +15,15 @@ import seedu.toluist.model.TodoList;
  * JsonStorage saves TodoList object to json file.
  */
 public class JsonStorage implements TodoListStorage {
-    private static JsonStorage instance;
-
-    private String storagePath = Config.getInstance().getTodoListFilePath();
+    private Config config = Config.getInstance();
     private ArrayDeque<String> historyStack = new ArrayDeque<>();
     private ArrayDeque<String> redoHistoryStack = new ArrayDeque<>();
 
     public JsonStorage() {}
 
-    public JsonStorage(String storagePath) {
-        this.storagePath = storagePath;
-    }
-
     public Optional<TodoList> load() {
         try {
-            String jsonString = getDataJson(storagePath).get();
+            String jsonString = getDataJson().get();
             // push todo list json string into historyStack if the stack is empty
             if (historyStack.isEmpty()) {
                 historyStack.addLast(jsonString);
@@ -41,7 +35,7 @@ public class JsonStorage implements TodoListStorage {
     }
 
     public boolean move(String newStoragePath) {
-        String oldStoragePath = storagePath;
+        String oldStoragePath = config.getTodoListFilePath();
 
         Optional<TodoList> todoListOptional = load();
         if (!todoListOptional.isPresent()) {
@@ -51,18 +45,18 @@ public class JsonStorage implements TodoListStorage {
         if (!saveNotAffectingHistory(todoListOptional.get(), newStoragePath)) {
             return false;
         }
-        storagePath = newStoragePath;
+
         FileUtil.removeFile(FileUtil.getFile(oldStoragePath));
 
-        Config config = Config.getInstance();
         config.setTodoListFilePath(newStoragePath);
         return config.save();
     }
 
     public boolean save(TodoList todoList) {
-        if (!saveNotAffectingHistory(todoList, storagePath)) {
+        if (!saveNotAffectingHistory(todoList, config.getTodoListFilePath())) {
             return false;
         }
+        // push current todo list json string into historyStack if the stack is empty
         try {
             historyStack.addLast(JsonUtil.toJsonString(todoList));
             redoHistoryStack.clear();
@@ -96,7 +90,7 @@ public class JsonStorage implements TodoListStorage {
         }
         TodoList todoList = todoListFromJson(historyStack.peekLast()).get();
         // So as to not clear the redo history
-        saveNotAffectingHistory(todoList, storagePath);
+        saveNotAffectingHistory(todoList, config.getTodoListFilePath());
         return new Pair<>(todoList, times - steps);
     }
 
@@ -109,12 +103,8 @@ public class JsonStorage implements TodoListStorage {
 
         TodoList todoList = todoListFromJson(historyStack.peekLast()).get();
         // So as to not clear the redo history
-        saveNotAffectingHistory(todoList, storagePath);
+        saveNotAffectingHistory(todoList, config.getTodoListFilePath());
         return new Pair<>(todoList, times - steps);
-    }
-
-    public String getStoragePath() {
-        return storagePath;
     }
 
     private Optional<TodoList> todoListFromJson(String json) {
@@ -124,14 +114,13 @@ public class JsonStorage implements TodoListStorage {
             return Optional.empty();
         }
     }
-    
+
     /**
-     * Read the json data from a file
-     * @param storagePath a file path
+     * Read the json data of the current todo list
      * @return Optional.of(jsonString) if the data can be read, Optional.empty() otherwise
      */
-    private Optional<String> getDataJson(String storagePath) {
-        File storageFile = new File(storagePath);
+    private Optional<String> getDataJson() {
+        File storageFile = new File(Config.getInstance().getTodoListFilePath());
         try {
             return Optional.of(FileUtil.readFromFile(storageFile));
         } catch (IOException e) {

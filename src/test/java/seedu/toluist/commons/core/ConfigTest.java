@@ -3,27 +3,23 @@ package seedu.toluist.commons.core;
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-
-import com.sun.glass.ui.monocle.util.C;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import org.junit.rules.TemporaryFolder;
-import seedu.toluist.commons.util.FileUtil;
-import seedu.toluist.model.AliasTable;
-import seedu.toluist.testutil.TestUtil;
 
 import java.io.File;
 import java.util.logging.Level;
 
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
+
+import seedu.toluist.commons.util.FileUtil;
+import seedu.toluist.model.AliasTable;
+import seedu.toluist.testutil.TestUtil;
+
 public class ConfigTest {
     private static final String TEST_CONFIG_FILE_PATH = FileUtil.getPath("./src/test/data/ConfigTest/");
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
     @Rule
     public TemporaryFolder folder = new TemporaryFolder();
 
@@ -96,7 +92,7 @@ public class ConfigTest {
         // Then save another config
         getTypicalConfig().save();
 
-        // Remove this file if it exists
+        // Check that data was overwritten
         assertNotEquals(defaultConfig, Config.getInstance());
         assertEquals(getTypicalConfig(), Config.getInstance());
     }

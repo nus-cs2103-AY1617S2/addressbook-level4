@@ -1,7 +1,6 @@
 package seedu.toluist.ui;
 
 import javafx.stage.Stage;
-import seedu.toluist.commons.core.Config;
 import seedu.toluist.dispatcher.Dispatcher;
 
 /**

@@ -11,7 +11,6 @@ import javafx.stage.Stage;
 import seedu.toluist.commons.core.ComponentManager;
 import seedu.toluist.commons.core.Config;
 import seedu.toluist.commons.core.LogsCenter;
-import seedu.toluist.commons.events.storage.DataSavingExceptionEvent;
 import seedu.toluist.commons.events.ui.ShowHelpRequestEvent;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.dispatcher.Dispatcher;

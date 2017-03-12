@@ -14,12 +14,10 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
+import seedu.toluist.commons.core.Config;
 import seedu.toluist.commons.util.CollectionUtil;
 import seedu.toluist.commons.util.FileUtil;
-import seedu.toluist.controller.Controller;
 import seedu.toluist.model.TodoList;
-import seedu.toluist.storage.JsonStorage;
-import seedu.toluist.storage.TodoListStorage;
 
 /**
  * A utility class for test cases.
@@ -51,12 +49,13 @@ public class TestUtil {
     /**
      * Do the necessary configuration so that todolist data can be used for testing
      * @param todoList todo list data
-     * @param filePath storagePath
+     * @param todoListfilePath storagePath
      */
-    public static void setTodoListTestData(TodoList todoList, String filePath) {
-        TodoListStorage storage = new JsonStorage(filePath);
-        TodoList.setStorage(storage);
-        Controller.setStorage(storage);
+    public static void setTodoListTestData(TodoList todoList, String configFilePath, String todoListfilePath) {
+        Config.setConfigFilePath(configFilePath);
+        Config config = Config.getInstance();
+        config.setTodoListFilePath(todoListfilePath);
+        config.save();
         todoList.save();
     }
 
@@ -113,7 +112,8 @@ public class TestUtil {
      * @throws IllegalArgumentException
      * @throws IllegalAccessException
      */
-    public static void resetSingleton(Class klass) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+    public static void resetSingleton(Class klass) throws SecurityException, NoSuchFieldException,
+            IllegalArgumentException, IllegalAccessException {
         Field instance = klass.getDeclaredField("instance");
         instance.setAccessible(true);
         instance.set(null, null);

@@ -5,8 +5,10 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.toluist.commons.core.Config;
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.dispatcher.CommandResult;
+import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.Ui;
 
 /**
@@ -16,7 +18,7 @@ public class StoreController extends Controller {
     private static final String COMMAND_TEMPLATE = "^save\\s+(?<directory>\\S+)\\s*";
     private static final String COMMAND_WORD = "saveConfig";
     private static final String STORE_DIRECTORY = "directory";
-    private static final String RESULT_MESSAGE_TEMPLATE = "TodoListStorage is changed %s";
+    private static final String RESULT_MESSAGE_TEMPLATE = "Data storage path was changed to %s";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -28,8 +30,8 @@ public class StoreController extends Controller {
         logger.info(getClass() + "will handle command");
         HashMap<String, String> tokens = tokenize(command);
         String directory = tokens.get(STORE_DIRECTORY);
-        storage.move(directory);
-        return new CommandResult(String.format(RESULT_MESSAGE_TEMPLATE, storage.getStoragePath()));
+        TodoList.getStorage().move(directory);
+        return new CommandResult(String.format(RESULT_MESSAGE_TEMPLATE, Config.getInstance().getTodoListFilePath()));
     }
 
     @Override

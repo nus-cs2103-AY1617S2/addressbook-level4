@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import seedu.toluist.commons.core.Config;
-import seedu.toluist.model.AliasTable;
 import seedu.toluist.model.Task;
 
 /**

@@ -42,9 +42,4 @@ public interface TodoListStorage {
      * @return Pair of todolist, the resulting todo list and an integer denoting the number of actual redo times
      */
     Pair<TodoList, Integer> redo(int times);
-
-    /**
-     * Returns the storage path for the todo list data
-     */
-    String getStoragePath();
 }

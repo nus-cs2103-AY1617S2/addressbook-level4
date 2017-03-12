@@ -1,12 +1,12 @@
 package seedu.toluist.commons.core;
 
-import seedu.toluist.commons.exceptions.DataConversionException;
-import seedu.toluist.commons.util.JsonUtil;
-import seedu.toluist.model.AliasTable;
-
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import seedu.toluist.commons.exceptions.DataConversionException;
+import seedu.toluist.commons.util.JsonUtil;
+import seedu.toluist.model.AliasTable;
 
 /**
  * Config values used by the app

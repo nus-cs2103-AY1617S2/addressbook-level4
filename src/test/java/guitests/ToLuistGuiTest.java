@@ -65,7 +65,9 @@ public abstract class ToLuistGuiTest {
             this.stage = stage;
         });
         EventsCenter.clearSubscribers();
-        testApp = (TestApp) FxToolkit.setupApplication(() -> new TestApp(this::getInitialData, getDataFileLocation()));
+        testApp = (TestApp) FxToolkit.setupApplication(() -> new TestApp(this::getInitialData,
+                                                                        getConfigFileLocation(),
+                                                                        getDataFileLocation()));
         // Sleep for 1 second to allow initial data to be loaded
         TimeUnit.SECONDS.sleep(1);
         FxToolkit.showStage();
@@ -80,6 +82,13 @@ public abstract class ToLuistGuiTest {
     protected TodoList getInitialData() {
         TodoList todoList = new TypicalTestTodoLists().getTypicalTodoList();
         return todoList;
+    }
+
+    /**
+     * Override this in child classes to set the config file location.
+     */
+    protected String getConfigFileLocation() {
+        return TestApp.CONFIG_LOCATION_FOR_TESTING;
     }
 
     /**

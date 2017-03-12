@@ -5,7 +5,6 @@ import org.junit.Test;
 
 import seedu.toluist.commons.core.Config;
 import seedu.toluist.controller.ViewAliasController;
-import seedu.toluist.model.AliasTable;
 
 /**
  * Gui tests for viewalias command

@@ -3,7 +3,6 @@ package seedu.toluist.model;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -83,9 +82,17 @@ public class AliasTable {
      * @return converted command
      */
     public String dealias(String command) {
+        String[] wordsInCommand = command.split("\\s+");
+        if (wordsInCommand.length == 0) {
+            return command;
+        }
+
+        String firstWord = wordsInCommand[0];
+
         for (String alias : aliasMapping.keySet()) {
-            if (command.startsWith(alias)) {
-                return aliasMapping.get(alias) + command.substring(alias.length(), command.length());
+            if (firstWord.equals(alias)) {
+                wordsInCommand[0] = aliasMapping.get(alias);
+                return String.join(" ", wordsInCommand);
             }
         }
         return command;

@@ -33,7 +33,7 @@ public class UndoController extends Controller {
         String undoTimesToken = tokens.get(UNDO_TIMES);
         int undoTimes = undoTimesToken != null ? Integer.parseInt(undoTimesToken) : 1;
 
-        Pair<TodoList, Integer> undoResult = storage.undo(undoTimes);
+        Pair<TodoList, Integer> undoResult = TodoList.getStorage().undo(undoTimes);
         TodoList todoList = undoResult.getKey();
         int actualUndoTimes =  undoResult.getValue();
 
