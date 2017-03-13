@@ -14,7 +14,7 @@ public class ClearCommandTest extends EzDoGuiTest {
         assertClearCommandSuccess();
 
         //verify other commands can work after a clear command
-        commandBox.runCommand(td.hoon.getAddCommand());
+        commandBox.runCommand(td.hoon.getAddCommand(false));
         assertTrue(taskListPanel.isListMatching(td.hoon));
         commandBox.runCommand("kill 1");
         assertListSize(0);

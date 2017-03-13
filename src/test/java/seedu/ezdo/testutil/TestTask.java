@@ -86,9 +86,18 @@ public class TestTask implements ReadOnlyTask {
         return getAsText();
     }
 
-    public String getAddCommand() {
+    /**
+     * Constructs an add command for the test task.
+     * @param usesShortCommand Specifies if the long or short version of the command should be used. ("add" or "a")
+     * @return This is the add command that will add the test task.
+     */
+    public String getAddCommand(boolean usesShortCommand) {
         StringBuilder sb = new StringBuilder();
-        sb.append("add " + this.getName().fullName + " ");
+        if (usesShortCommand) {
+            sb.append("a " + this.getName().fullName + " ");
+        } else {
+            sb.append("add " + this.getName().fullName + " ");
+        }
         sb.append(PREFIX_STARTDATE + this.getStartDate().value + " ");
         sb.append(PREFIX_DUEDATE + this.getDueDate().value + " ");
         sb.append(PREFIX_PRIORITY + this.getPriority().value + " ");
