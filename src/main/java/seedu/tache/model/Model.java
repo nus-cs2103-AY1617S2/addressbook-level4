@@ -3,6 +3,8 @@ package seedu.tache.model;
 import java.util.Set;
 
 import seedu.tache.commons.core.UnmodifiableObservableList;
+import seedu.tache.model.task.DetailedTask;
+import seedu.tache.model.task.ReadOnlyDetailedTask;
 import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.model.task.Task;
 import seedu.tache.model.task.UniqueTaskList;
@@ -21,8 +23,14 @@ public interface Model {
     /** Deletes the given task. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
+    /** Deletes the given task. */
+    void deleteDetailedTask(ReadOnlyDetailedTask target) throws UniqueTaskList.TaskNotFoundException;
+
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
+
+    /** Adds the given detailed task */
+    void addDetailedTask(DetailedTask detailedTask) throws UniqueTaskList.DuplicateTaskException;
 
     /**
      * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
