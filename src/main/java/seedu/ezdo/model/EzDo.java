@@ -148,7 +148,7 @@ public class EzDo implements ReadOnlyEzDo {
     }
 
     public void doneTask(Task p) {
-            p.setDone();
+        p.setDone();
     }
 
 //// tag-level operations

@@ -19,11 +19,11 @@ public class DoneCommandParser {
      * and returns an DoneCommand object for execution.
      */
     public Command parse(String args) {
- 
-        if (args.equals("")) {
+
+        if (("").equals(args)) {
             return new DoneCommand();
         }
-        
+
         Optional<Integer> index = ParserUtil.parseIndex(args);
         if (!index.isPresent()) {
             return new IncorrectCommand(

@@ -50,7 +50,7 @@ public class DoneCommandTest extends EzDoGuiTest {
         //invalid command
         commandBox.runCommand("dones 1");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
-        
+
         //view done tasks
         commandBox.runCommand("done");
         assertTrue(taskListPanel.isListMatching(doneList));

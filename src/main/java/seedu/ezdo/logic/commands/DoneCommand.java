@@ -24,12 +24,12 @@ public class DoneCommand extends Command {
 
     public final int targetIndex;
     public final boolean requestToViewDoneOnly;
-    
+
     public DoneCommand(int targetIndex) {
         this.targetIndex = targetIndex;
         this.requestToViewDoneOnly = false;
     }
-    
+
     public DoneCommand() {
         this.targetIndex = 0;
         this.requestToViewDoneOnly = true;
@@ -41,7 +41,7 @@ public class DoneCommand extends Command {
 
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
-        if (requestToViewDoneOnly == true) {
+        if (requestToViewDoneOnly) {
             model.updateFilteredDoneList();
             return new CommandResult(MESSAGE_DONE_LISTED);
         }
