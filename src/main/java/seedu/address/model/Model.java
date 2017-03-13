@@ -4,6 +4,7 @@ package seedu.address.model;
 import java.util.Set;
 
 import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.address.model.Model.StateLimitReachedException;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
@@ -45,8 +46,27 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
+    
+    /** Updates the filter of the filtered task list to show all floating tasks */
+    void updateFilteredListToShowAllFloatingTasks();
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
+    
+    /**
+     * Overwrites AddressBook state to 1 step forwards.
+     */
+    void setAddressBookStateForwards() throws StateLimitReachedException;
+    
+    /**
+     * Overwrites AddressBook state to 1 step backwards.
+     */
+    void setAddressBookStateBackwards() throws StateLimitReachedException;
+    
+    /**
+     * Signals that the state change command would fail because
+     * the border of the state space is reached.
+     */
+    public static class StateLimitReachedException extends Exception {}
 
 }
