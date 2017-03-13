@@ -11,6 +11,7 @@ public class TestTask implements ReadOnlyTask {
 
     private Name name;
     private UniqueTagList tags;
+    private boolean done;
 
     public TestTask() {
         tags = new UniqueTagList();
@@ -28,6 +29,11 @@ public class TestTask implements ReadOnlyTask {
         this.name = name;
     }
 
+    public void setDone(boolean done) {
+        this.done = done;
+    }
+
+
     public void setTags(UniqueTagList tags) {
         this.tags = tags;
     }
@@ -35,6 +41,11 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public Name getName() {
         return name;
+    }
+
+    @Override
+    public boolean isDone() {
+        return done;
     }
 
 
@@ -54,4 +65,5 @@ public class TestTask implements ReadOnlyTask {
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
+
 }

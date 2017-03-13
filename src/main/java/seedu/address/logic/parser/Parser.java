@@ -54,6 +54,14 @@ public class Parser {
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
 
+        /* TODO: implement done & undone command
+        case DoneCommand.COMMAND_WORD:
+            return new DoneCommandParser().parse(arguments);
+
+        case NotDoneCommand.COMMAND_WORD:
+            return new NotDoneCommandParser().parse(arguments);
+         */
+
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 

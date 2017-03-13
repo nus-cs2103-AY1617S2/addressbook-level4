@@ -335,6 +335,71 @@ public class LogicManagerTest {
                 expectedAB, expectedAB.getTaskList());
     }
 
+    /*TODO: remove comment when DoneCommand is implemented
+    @Test
+    public void execute_done_invalidArgsFormat() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE);
+        assertCommandFailure("done ", expectedMessage);
+    }
+    */
+
+    @Test
+    public void execute_doneIndexNotFound_errorMessageShown() throws Exception {
+        assertIndexNotFoundBehaviorForCommand("done");
+    }
+
+    @Test
+    public void execute_done_valid() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        List<Task> threeTasks = helper.generateTaskList(3);
+        Task taskToDone = threeTasks.get(1);
+        Task doneTask = new Task(taskToDone.getName(), taskToDone.getTags(), true);
+
+        TaskManager expectedAB = helper.generateTaskManager(threeTasks);
+        expectedAB.updateTask(1, doneTask);;
+        helper.addToModel(model, threeTasks);
+
+        /*TODO: remove comment when DoneCommand is implemented
+        assertCommandSuccess("done 2",
+                String.format(DoneCommand.MESSAGE_DONE_TASK_SUCCESS, doneTask),
+                expectedAB,
+                expectedAB.getTaskList());
+        */
+    }
+
+    /*TODO: remove comment when DoneCommand is implemented
+    @Test
+    public void execute_notdone_invalidArgsFormat() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, NotDoneCommand.MESSAGE_USAGE);
+        assertCommandFailure("notdone ", expectedMessage);
+    }
+    */
+
+    @Test
+    public void execute_notdoneIndexNotFound_errorMessageShown() throws Exception {
+        assertIndexNotFoundBehaviorForCommand("notdone");
+    }
+
+    @Test
+    public void execute_notdone_valid() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        List<Task> threeTasks = helper.generateTaskList(3);
+        Task taskToNotDone = threeTasks.get(1);
+        taskToNotDone.setDone(true);
+        Task notDoneTask = new Task(taskToNotDone.getName(), taskToNotDone.getTags(), false);
+
+        TaskManager expectedAB = helper.generateTaskManager(threeTasks);
+        expectedAB.updateTask(1, notDoneTask);
+        helper.addToModel(model, threeTasks);
+
+        /*TODO: remove comment when DoneCommand is implemented
+        assertCommandSuccess("notdone 2",
+                String.format(NotDoneCommand.MESSAGE_NOTDONE_TASK_SUCCESS, notDoneTask),
+                expectedAB,
+                expectedAB.getTaskList());
+        */
+    }
+
     @Test
     public void execute_find_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
@@ -458,7 +523,8 @@ public class LogicManagerTest {
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, tags);
+            boolean done = false;
+            return new Task(name, tags, done);
         }
 
         /**
@@ -472,6 +538,7 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(new Name("Task " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))));
+                    seed % 2 == 0
         }
 
         /** Generates the correct add command based on the task given */
@@ -567,6 +634,7 @@ public class LogicManagerTest {
          */
         Task generateTaskWithName(String name) throws Exception {
             return new Task(new Name(name), new UniqueTagList(new Tag("tag")));
+
         }
     }
 }
