@@ -83,7 +83,7 @@ public class TestUtil {
                 new Task(new Name("Fiona Kunz"), new Priority("9482427"), new EndTime("sunday"), new Description("little tokyo"), new UniqueTagList()),
                 new Task(new Name("George Best"), new Priority("9482442"), new EndTime("22/12/17"), new Description("4th street"), new UniqueTagList()),
                 new Task(new Name("Hoon Meier"), new Priority("8482424"), new EndTime("9pm"), new Description("little india"), new UniqueTagList()),
-                new Task(new Name("Ida Mueller"), new Priority("8482131"), new EndTime("tomorrow 5pm" ), new Description("chicago ave"), new UniqueTagList())
+                new Task(new Name("Ida Mueller"), new Priority("8482131"), new EndTime("tomorrow 5pm"), new Description("chicago ave"), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
