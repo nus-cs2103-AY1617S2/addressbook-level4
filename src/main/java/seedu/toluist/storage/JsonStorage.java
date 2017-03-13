@@ -109,7 +109,10 @@ public class JsonStorage implements TodoListStorage {
 
     private Optional<TodoList> todoListFromJson(String json) {
         try {
-            return Optional.of(JsonUtil.fromJsonString(json, TodoList.class));
+            TodoList todoList = JsonUtil.fromJsonString(json, TodoList.class);
+            // Inject self as storage dependency
+            todoList.setStorage(this);
+            return Optional.of(todoList);
         } catch (IOException e) {
             return Optional.empty();
         }

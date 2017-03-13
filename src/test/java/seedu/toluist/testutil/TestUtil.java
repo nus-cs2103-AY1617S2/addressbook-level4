@@ -18,6 +18,7 @@ import seedu.toluist.commons.core.Config;
 import seedu.toluist.commons.util.CollectionUtil;
 import seedu.toluist.commons.util.FileUtil;
 import seedu.toluist.model.TodoList;
+import seedu.toluist.storage.JsonStorage;
 
 /**
  * A utility class for test cases.
@@ -49,13 +50,15 @@ public class TestUtil {
     /**
      * Do the necessary configuration so that todolist data can be used for testing
      * @param todoList todo list data
-     * @param todoListfilePath storagePath
+     * @parem configFilePath storage pah for config test data
+     * @param todoListFilePath storage path for todo list test data
      */
-    public static void setTodoListTestData(TodoList todoList, String configFilePath, String todoListfilePath) {
+    public static void setTodoListTestData(TodoList todoList, String configFilePath, String todoListFilePath) {
         Config.setConfigFilePath(configFilePath);
         Config config = Config.getInstance();
-        config.setTodoListFilePath(todoListfilePath);
+        config.setTodoListFilePath(todoListFilePath);
         config.save();
+        todoList.setStorage(new JsonStorage());
         todoList.save();
     }
 

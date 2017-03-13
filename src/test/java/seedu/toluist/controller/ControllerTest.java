@@ -29,6 +29,7 @@ public abstract class ControllerTest {
     @Mock
     protected Ui renderer;
     protected Controller controller;
+    protected TodoList todoList;
 
     /**
      * Returns an instance of the controller to be teste
@@ -39,7 +40,7 @@ public abstract class ControllerTest {
     @Before
     public void setUp() {
         when(storage.load()).thenReturn(Optional.of(new TypicalTestTodoLists().getTypicalTodoList()));
-        TodoList.setStorage(storage);
+        todoList = new TodoList(storage);
         controller = controllerUnderTest(renderer);
     }
 
@@ -49,7 +50,7 @@ public abstract class ControllerTest {
      */
     protected void assertTasksExist(Task... tasks) {
         for (Task task : tasks) {
-            if (!TodoList.load().getTasks().contains(task)) {
+            if (!todoList.getTasks().contains(task)) {
                 fail("Task should exist");
             }
         }

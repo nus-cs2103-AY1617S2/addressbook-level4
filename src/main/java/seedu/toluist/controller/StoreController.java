@@ -30,7 +30,7 @@ public class StoreController extends Controller {
         logger.info(getClass() + "will handle command");
         HashMap<String, String> tokens = tokenize(command);
         String directory = tokens.get(STORE_DIRECTORY);
-        TodoList.getStorage().move(directory);
+        TodoList.load().getStorage().move(directory);
         return new CommandResult(String.format(RESULT_MESSAGE_TEMPLATE, Config.getInstance().getTodoListFilePath()));
     }
 

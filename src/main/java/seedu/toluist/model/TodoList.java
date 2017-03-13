@@ -2,8 +2,11 @@ package seedu.toluist.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import seedu.toluist.storage.JsonStorage;
 import seedu.toluist.storage.TodoListStorage;
@@ -13,11 +16,12 @@ import seedu.toluist.storage.TodoListStorage;
  */
 public class TodoList {
 
-    private static TodoListStorage storage = new JsonStorage();
-
     private static TodoList currentTodoList;
+    private static final TodoListStorage DEFAULT_STORAGE = new JsonStorage();
 
     private ArrayList<Task> allTasks = new ArrayList<>();
+    @JsonIgnore
+    private TodoListStorage storage = new JsonStorage();
 
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -29,25 +33,47 @@ public class TodoList {
         return allTasks;
     }
 
-    public static void setStorage(TodoListStorage storage) {
-        TodoList.storage = storage;
-    }
-
-    public static TodoListStorage getStorage() {
-        return storage;
-    }
-
+    /**
+     * Load the todo list data using the default storage if currentTodoList is null
+     * Otherwise returns the current in-memory todo list
+     */
     public static TodoList load() {
         // Initialize currentTodoList if not done
         if (currentTodoList == null) {
-            currentTodoList = storage.load().orElse(new TodoList());
+            currentTodoList = new TodoList(DEFAULT_STORAGE);
         }
 
         return currentTodoList;
     }
 
-    public static void setCurrentTodoList(TodoList todoList) {
-        currentTodoList = todoList;
+    /**
+     * Construct a todo list. Use the tasks saved in the storage
+     * Replaces the static currentTodoList
+     * @param storage a todo list storage
+     */
+    public TodoList(TodoListStorage storage) {
+        currentTodoList = this;
+        this.storage = storage;
+        Optional<TodoList> todoListOptional = storage.load();
+        if (todoListOptional.isPresent()) {
+            allTasks = todoListOptional.get().getTasks();
+        }
+    }
+
+    /**
+     * Construct a todo list. use the default storage
+     */
+    public TodoList() {
+        currentTodoList = this;
+        this.storage = DEFAULT_STORAGE;
+    }
+
+    public TodoListStorage setStorage(TodoListStorage storage) {
+        return storage;
+    }
+
+    public TodoListStorage getStorage() {
+        return storage;
     }
 
     public boolean save() {
