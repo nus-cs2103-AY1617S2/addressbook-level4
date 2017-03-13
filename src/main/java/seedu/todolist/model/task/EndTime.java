@@ -21,7 +21,7 @@ public class EndTime {
     private Date _endTime;
     
     public EndTime(String endTime) throws IllegalValueException {
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy h:mm a");
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy h.mm a");
         Date temp = dateFormatter.parse(endTime,new ParsePosition(0));
         if (temp == null) {
             throw new IllegalValueException(MESSAGE_ENDTIME_CONSTRAINTS);

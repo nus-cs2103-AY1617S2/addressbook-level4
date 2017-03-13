@@ -21,7 +21,7 @@ public class StartTime {
     private Date _startTime;
     
     public StartTime(String startTime) throws IllegalValueException {
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy h:mm a");
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy h.mm a");
         Date temp = dateFormatter.parse(startTime,new ParsePosition(0));
         if (temp == null) {
             throw new IllegalValueException(MESSAGE_STARTTIME_CONSTRAINTS);

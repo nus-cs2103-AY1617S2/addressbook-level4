@@ -235,7 +235,7 @@ public class LogicManagerTest {
     public void execute_list_showsAllPersons() throws Exception {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
-        ToDoList expectedAB = helper.generateAddressBook(2);
+        ToDoList expectedAB = helper.generateToDoList(2);
         List<? extends ReadOnlyTask> expectedList = expectedAB.getTaskList();
 
         // prepare address book state
@@ -272,7 +272,7 @@ public class LogicManagerTest {
     private void assertIndexNotFoundBehaviorForCommand(String commandWord) throws Exception {
         String expectedMessage = MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
         TestDataHelper helper = new TestDataHelper();
-        List<Task> personList = helper.generatePersonList(2);
+        List<Task> personList = helper.generateTaskList(2);
 
         // set AB state to 2 persons
         model.resetData(new ToDoList());
@@ -297,7 +297,7 @@ public class LogicManagerTest {
     @Test
     public void execute_select_jumpsToCorrectPerson() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        List<Task> threePersons = helper.generatePersonList(3);
+        List<Task> threePersons = helper.generateTaskList(3);
 
         ToDoList expectedAB = helper.generateAddressBook(threePersons);
         helper.addToModel(model, threePersons);
@@ -325,7 +325,7 @@ public class LogicManagerTest {
     @Test
     public void execute_delete_removesCorrectPerson() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        List<Task> threePersons = helper.generatePersonList(3);
+        List<Task> threePersons = helper.generateTaskList(3);
 
         ToDoList expectedAB = helper.generateAddressBook(threePersons);
         expectedAB.removeTask(threePersons.get(1));
@@ -452,10 +452,10 @@ public class LogicManagerTest {
         /**
          * Generates an AddressBook with auto-generated persons.
          */
-        ToDoList generateAddressBook(int numGenerated) throws Exception {
-            ToDoList addressBook = new ToDoList();
-            addToAddressBook(addressBook, numGenerated);
-            return addressBook;
+        ToDoList generateToDoList(int numGenerated) throws Exception {
+            ToDoList toDoList = new ToDoList();
+            addToToDoList(toDoList, numGenerated);
+            return toDoList;
         }
 
         /**
@@ -463,22 +463,22 @@ public class LogicManagerTest {
          */
         ToDoList generateAddressBook(List<Task> persons) throws Exception {
             ToDoList addressBook = new ToDoList();
-            addToAddressBook(addressBook, persons);
+            addToToDoList(addressBook, persons);
             return addressBook;
         }
 
         /**
-         * Adds auto-generated Person objects to the given AddressBook
-         * @param addressBook The AddressBook to which the Persons will be added
+         * Adds auto-generated Task objects to the given ToDoList
+         * @param toDoList The ToDoList to which the Tasks will be added
          */
-        void addToAddressBook(ToDoList addressBook, int numGenerated) throws Exception {
-            addToAddressBook(addressBook, generatePersonList(numGenerated));
+        void addToToDoList(ToDoList toDoList, int numGenerated) throws Exception {
+            addToToDoList(toDoList, generateTaskList(numGenerated));
         }
 
         /**
          * Adds the given list of Persons to the given AddressBook
          */
-        void addToAddressBook(ToDoList addressBook, List<Task> personsToAdd) throws Exception {
+        void addToToDoList(ToDoList addressBook, List<Task> personsToAdd) throws Exception {
             for (Task p: personsToAdd) {
                 addressBook.addTask(p);
             }
@@ -489,7 +489,7 @@ public class LogicManagerTest {
          * @param model The model to which the Persons will be added
          */
         void addToModel(Model model, int numGenerated) throws Exception {
-            addToModel(model, generatePersonList(numGenerated));
+            addToModel(model, generateTaskList(numGenerated));
         }
 
         /**
@@ -502,14 +502,14 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates a list of Persons based on the flags.
+         * Generates a list of Tasks based on the flags.
          */
-        List<Task> generatePersonList(int numGenerated) throws Exception {
-            List<Task> persons = new ArrayList<>();
+        List<Task> generateTaskList(int numGenerated) throws Exception {
+            List<Task> tasks = new ArrayList<>();
             for (int i = 1; i <= numGenerated; i++) {
-                persons.add(generateTask(i));
+                tasks.add(generateTask(i));
             }
-            return persons;
+            return tasks;
         }
 
         List<Task> generateTaskList(Task... tasks) {
