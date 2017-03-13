@@ -18,6 +18,8 @@ public interface ReadOnlyTask {
      */
     UniqueTagList getTags();
 
+    boolean isComplete();
+
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
      */
