@@ -427,8 +427,8 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Name("Person " + seed),
-                    new StartTime("01/01/20" + Math.abs(seed) + " 4.00 PM"),
-                    new EndTime("01/01/20" + Math.abs(seed) + " 5.00 PM"),
+                    new StartTime("01/01/2017 4.00 PM"),
+                    new EndTime("01/01/2017 5.00 PM"),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
