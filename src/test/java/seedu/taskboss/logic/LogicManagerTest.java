@@ -355,9 +355,15 @@ public class LogicManagerTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
         assertCommandFailure("find ", expectedMessage);
     }
+    
+    @Test
+    public void execute_find_invalidArgsFormatWithPrefix() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
+        assertCommandFailure("find st/Mar", expectedMessage);
+    }
 
     @Test
-    public void execute_find_onlyMatchesFullWordsInNames() throws Exception {
+    public void execute_findName_onlyMatchesFullWordsInNames() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
         Task pTarget2 = helper.generateTaskWithName("bla KEY bla bceofeia");
@@ -374,7 +380,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_find_isNotCaseSensitive() throws Exception {
+    public void execute_findName_isNotCaseSensitive() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task p1 = helper.generateTaskWithName("bla bla KEY bla");
         Task p2 = helper.generateTaskWithName("bla KEY bla bceofeia");
@@ -391,7 +397,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_find_matchesIfAnyKeywordPresent() throws Exception {
+    public void execute_findName_matchesIfAnyKeywordPresent() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
         Task pTarget2 = helper.generateTaskWithName("bla rAnDoM bla bceofeia");
@@ -404,6 +410,40 @@ public class LogicManagerTest {
         helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find n/key rAnDoM", Command.getMessageForTaskListShownSummary(expectedList.size()),
+                expectedAB, expectedList);
+    }
+
+    @Test
+    public void execute_findStartDatetime_matchesOnlyIfKeywordPresentInOrder() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task pTarget1 = helper.generateTaskWithStartDateTime("Monday, 13 March, 2017");
+        Task p1 = helper.generateTaskWithStartDateTime("16 March, 2017");
+        Task p2 = helper.generateTaskWithStartDateTime("Monday, 1 May, 2017");
+        Task p3 = helper.generateTaskWithStartDateTime("2 July, 2017");
+
+        List<Task> fourTasks = helper.generateTaskList(pTarget1, p1, p2, p3);
+        TaskBoss expectedAB = helper.generateTaskBoss(fourTasks);
+        List<Task> expectedList = helper.generateTaskList(pTarget1);
+        helper.addToModel(model, fourTasks);
+
+        assertCommandSuccess("find sd/Mon Mar", Command.getMessageForTaskListShownSummary(expectedList.size()),
+                expectedAB, expectedList);
+    }
+    
+    @Test
+    public void execute_findEndDatetime_matchesOnlyIfKeywordPresentInOrder() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task pTarget1 = helper.generateTaskWithEndDateTime("Monday, 13 March, 2017");
+        Task p1 = helper.generateTaskWithEndDateTime("16 March, 2017");
+        Task p2 = helper.generateTaskWithEndDateTime("Monday, 1 May, 2017");
+        Task p3 = helper.generateTaskWithEndDateTime("2 July, 2017");
+
+        List<Task> fourTasks = helper.generateTaskList(pTarget1, p1, p2, p3);
+        TaskBoss expectedAB = helper.generateTaskBoss(fourTasks);
+        List<Task> expectedList = helper.generateTaskList(pTarget1);
+        helper.addToModel(model, fourTasks);
+
+        assertCommandSuccess("find ed/Mon Mar", Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB, expectedList);
     }
 
@@ -547,6 +587,36 @@ public class LogicManagerTest {
                     new PriorityLevel("1"),
                     new DateTime("Feb 19 10am, 2017"),
                     new DateTime("Feb 20 10am, 2017"),
+                    new Information("House of 1"),
+                    new UniqueCategoryList(new Category("category"))
+            );
+        }
+
+        /**
+         * Generates a Task object with given startDatetime. Other fields will have some
+         * dummy values.
+         */
+        Task generateTaskWithStartDateTime(String startDatetime) throws Exception {
+            return new Task(
+                    new Name("testTask"),
+                    new PriorityLevel("1"),
+                    new DateTime(ParserUtil.parseStartDate(startDatetime)),
+                    new DateTime("Feb 20 10am, 2018"),
+                    new Information("House of 1"),
+                    new UniqueCategoryList(new Category("category"))
+            );
+        }
+
+        /**
+         * Generates a Task object with given endDatetime. Other fields will have some
+         * dummy values.
+         */
+        Task generateTaskWithEndDateTime(String endDatetime) throws Exception {
+            return new Task(
+                    new Name("testTask"),
+                    new PriorityLevel("1"),
+                    new DateTime("Feb 20 10am, 2017"),
+                    new DateTime(ParserUtil.parseStartDate(endDatetime)),
                     new Information("House of 1"),
                     new UniqueCategoryList(new Category("category"))
             );
