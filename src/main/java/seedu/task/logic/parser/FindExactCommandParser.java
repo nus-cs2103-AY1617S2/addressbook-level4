@@ -12,7 +12,7 @@ import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.FindExactCommand;
 import seedu.task.logic.commands.IncorrectCommand;
 
-public class FindExactCommandParser extends FindCommandParser{
+public class FindExactCommandParser extends FindCommandParser {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
