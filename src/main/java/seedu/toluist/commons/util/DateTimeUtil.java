@@ -82,6 +82,9 @@ public class DateTimeUtil {
         if (dateTime2 == null) {
             return true;
         }
+        if (dateTime1 == null) {
+            return false;
+        }
         return dateTime1.isBefore(dateTime2);
     }
 }
