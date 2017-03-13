@@ -16,9 +16,9 @@ import seedu.address.model.task.ReadOnlyTask;
  */
 public class TaskCardHandle extends GuiHandle {
     private static final String TITLE_FIELD_ID = "#title";
-    private static final String ADDRESS_FIELD_ID = "#address";
-    private static final String VENUE_FIELD_ID = "#phone";
-    private static final String EMAIL_FIELD_ID = "#email";
+    private static final String VENUE_FIELD_ID = "#venue";
+    private static final String STARTTIME_FIELD_ID = "#startTime";
+    private static final String ENDTIME_FIELD_ID = "#endTime";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private Node node;
@@ -37,7 +37,7 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     public String getEndTime() {
-        return getTextFromLabel(ADDRESS_FIELD_ID);
+        return getTextFromLabel(ENDTIME_FIELD_ID);
     }
 
     public String getVenue() {
@@ -45,7 +45,7 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     public String getStartTime() {
-        return getTextFromLabel(EMAIL_FIELD_ID);
+        return getTextFromLabel(STARTTIME_FIELD_ID);
     }
 
     public List<String> getTags() {
@@ -74,7 +74,7 @@ public class TaskCardHandle extends GuiHandle {
 
     public boolean isSameTask(ReadOnlyTask task) {
         return getTitle().equals(task.getTitle().title)
-                && getVenue().equals(task.getTitle().title)
+                && getVenue().equals(task.getVenue().value)
                 && getStartTime().equals(task.getStartTime().value)
                 && getEndTime().equals(task.getEndTime().value)
                 && getTags().equals(getTags(task.getTags()));
