@@ -12,6 +12,7 @@ import seedu.address.model.task.StartTime;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Title;
 import seedu.address.model.task.UniqueTaskList;
+import seedu.address.model.task.UrgencyLevel;
 import seedu.address.model.task.Venue;
 
 /**
@@ -36,7 +37,7 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String title, String venue, String starttime, String endtime, Set<String> tags)
+    public AddCommand(String title, String venue, String starttime, String endtime, String urgencyLevel, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
@@ -47,6 +48,7 @@ public class AddCommand extends Command {
                 new Venue(venue),
                 new StartTime(starttime),
                 new EndTime(endtime),
+                new UrgencyLevel(urgencyLevel),
                 new UniqueTagList(tagSet)
         );
     }
