@@ -22,10 +22,10 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobbie by 12/5/2017 23:00 #husband";
+        String detailsToEdit = "Bobby by/12/5/2017 23:00 #husband";
         int addressBookIndex = 1;
 
-        TestTask editedPerson = new TaskBuilder().withContent("Bobbie")
+        TestTask editedPerson = new TaskBuilder().withContent("Bobby")
                 .withTaskDateTime("12/5/2017 23:00")
                 .withTags("husband").build();
 
@@ -97,7 +97,7 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_duplicatePerson_failure() {
-        commandBox.runCommand("edit 3 Alice Pauline by 1/2/2013 9:00 #friends");
+        commandBox.runCommand("edit 3 Alice Pauline by/1/2/2013 9:00 #friends");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
