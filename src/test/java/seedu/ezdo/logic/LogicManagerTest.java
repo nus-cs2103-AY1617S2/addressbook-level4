@@ -34,7 +34,7 @@ import seedu.ezdo.logic.commands.AddCommand;
 import seedu.ezdo.logic.commands.ClearCommand;
 import seedu.ezdo.logic.commands.Command;
 import seedu.ezdo.logic.commands.CommandResult;
-import seedu.ezdo.logic.commands.ExitCommand;
+import seedu.ezdo.logic.commands.QuitCommand;
 import seedu.ezdo.logic.commands.FindCommand;
 import seedu.ezdo.logic.commands.HelpCommand;
 import seedu.ezdo.logic.commands.KillCommand;
@@ -178,8 +178,10 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_exit() {
-        assertCommandSuccess("exit", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
+    public void execute_quit() {
+        assertCommandSuccess("quit", QuitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
+                new EzDo(), Collections.emptyList());
+    }
                 new EzDo(), Collections.emptyList());
     }
 
