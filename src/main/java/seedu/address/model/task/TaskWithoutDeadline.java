@@ -10,4 +10,14 @@ public class TaskWithoutDeadline extends Task {
     public TaskWithoutDeadline(ReadOnlyTask source) {
         super(source);
     }
+
+    @Override
+    public TaskType getTaskType() {
+        return TaskType.TaskWithNoDeadline;
+    }
+
+    @Override
+    public String getTaskDateTime() {
+        return "";
+    }
 }

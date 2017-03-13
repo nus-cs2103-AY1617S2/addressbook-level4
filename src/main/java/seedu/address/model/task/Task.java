@@ -6,8 +6,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Represents a Task in the task manager.
- * not null, field values are validated.
+ * Represents a Task in the task manager. not null, field values are validated.
  */
 public class Task implements ReadOnlyTask {
 
@@ -94,6 +93,16 @@ public class Task implements ReadOnlyTask {
     @Override
     public String toString() {
         return getAsText();
+    }
+
+    @Override
+    public TaskType getTaskType() {
+        return null;
+    }
+
+    @Override
+    public String getTaskDateTime() {
+        return null;
     }
 
 }
