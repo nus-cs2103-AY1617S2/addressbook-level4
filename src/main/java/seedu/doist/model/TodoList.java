@@ -157,11 +157,7 @@ public class TodoList implements ReadOnlyTodoList {
 
     public boolean finishTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException,
             TaskAlreadyFinishedException {
-        if (tasks.finish(key)) {
-            return true;
-        } else {
-            return false;
-        }
+        return tasks.finish(key);
     }
 
 //// tag-level operations
