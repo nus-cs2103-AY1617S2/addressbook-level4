@@ -88,7 +88,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
-
+        taskbossHistory.push(new TaskBoss(this.taskBoss));
         int taskBossIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskBoss.updateTask(taskBossIndex, editedTask);
         indicateTaskBossChanged();
