@@ -1,14 +1,18 @@
 package seedu.address.logic.commands;
 
+import seedu.address.commons.core.Config;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.storage.Storage;
 
 /**
  * Represents a command with hidden internal logic and the ability to be executed.
  */
 public abstract class Command {
     protected Model model;
+    protected Storage storage;
+    protected Config config;
 
     /**
      * Constructs a feedback message to summarise an operation that displayed a listing of tasks.
@@ -35,5 +39,16 @@ public abstract class Command {
      */
     public void setData(Model model) {
         this.model = model;
+    }
+
+    /**
+     * Provides commands with access to storage file.
+     */
+    public void setStorage(Storage storage) {
+        this.storage = storage;
+    }
+
+    public void setConfig(Config config) {
+        this.config = config;
     }
 }

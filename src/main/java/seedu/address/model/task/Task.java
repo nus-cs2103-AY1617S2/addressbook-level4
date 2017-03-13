@@ -6,7 +6,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Represents a Task in the address book. Guarantees: details are present and
+ * Represents a Task in the task manager.
  * not null, field values are validated.
  */
 public class Task implements ReadOnlyTask {

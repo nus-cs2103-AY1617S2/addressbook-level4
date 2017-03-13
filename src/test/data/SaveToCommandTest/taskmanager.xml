@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskmanager>
+    <tasks>
+        <name>Buy Meier stove</name>
+        <tagged>appliance</tagged>
+        <tagged>stove</tagged>
+    </tasks>
+    <tasks>
+        <name>Write english essay</name>
+    </tasks>
+    <tasks>
+        <name>Buy Meier rice cooker</name>
+    </tasks>
+    <tasks>
+        <name>Complete CS2106 Lab Assignment</name>
+    </tasks>
+    <tasks>
+        <name>Mark CS1010S</name>
+    </tasks>
+    <tasks>
+        <name>Go for a night run</name>
+    </tasks>
+    <tasks>
+        <name>Meet Prof Hoon Meier</name>
+    </tasks>
+    <tags>math</tags>
+    <tags>appliance</tags>
+    <tags>stove</tags>
+</taskmanager>

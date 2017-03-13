@@ -76,6 +76,12 @@ public class StorageManager extends ComponentManager implements Storage {
         taskManagerStorage.saveTaskManager(taskManager, filePath);
     }
 
+    @Override
+    public void setTaskManagerFilePath(String filePath) {
+        logger.fine("Setting task manager save location to: " + filePath);
+        taskManagerStorage.setTaskManagerFilePath(filePath);
+    }
+
 
     @Override
     @Subscribe

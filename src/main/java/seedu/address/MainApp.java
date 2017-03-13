@@ -51,7 +51,6 @@ public class MainApp extends Application {
     public void init() throws Exception {
         logger.info("=============================[ Initializing TaskManager ]===========================");
         super.init();
-
         config = initConfig(getApplicationParameter("config"));
         storage = new StorageManager(config.getTaskManagerFilePath(), config.getUserPrefsFilePath());
 
@@ -61,7 +60,7 @@ public class MainApp extends Application {
 
         model = initModelManager(storage, userPrefs);
 
-        logic = new LogicManager(model, storage);
+        logic = new LogicManager(model, storage, config);
 
         ui = new UiManager(logic, config, userPrefs);
 

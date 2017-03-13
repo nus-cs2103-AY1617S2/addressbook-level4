@@ -41,4 +41,11 @@ public interface TaskManagerStorage {
      */
     void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException;
 
+    /*
+     * Set TaskManager's save location to specified filePath
+     *
+     * @param filePath must be a valid absolute file path
+     */
+    void setTaskManagerFilePath(String filePath);
+
 }

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskmanager>
+    <tasks>
+        <name>Alex Yeoh</name>
+        <tagged>friends</tagged>
+    </tasks>
+    <tasks>
+        <name>Bernice Yu</name>
+        <tagged>colleagues</tagged>
+        <tagged>friends</tagged>
+    </tasks>
+    <tasks>
+        <name>Charlotte Oliveiro</name>
+        <tagged>neighbours</tagged>
+    </tasks>
+    <tasks>
+        <name>David Li</name>
+        <tagged>family</tagged>
+    </tasks>
+    <tasks>
+        <name>Irfan Ibrahim</name>
+        <tagged>classmates</tagged>
+    </tasks>
+    <tasks>
+        <name>Roy Balakrishnan</name>
+        <tagged>colleagues</tagged>
+    </tasks>
+    <tags>friends</tags>
+    <tags>colleagues</tags>
+    <tags>neighbours</tags>
+    <tags>family</tags>
+    <tags>classmates</tags>
+</taskmanager>
