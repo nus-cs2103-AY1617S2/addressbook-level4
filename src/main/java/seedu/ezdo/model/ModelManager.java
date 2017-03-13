@@ -110,6 +110,7 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new NotDoneQualifier()));
     }
 
+    @Override
     public void updateFilteredDoneList() {
         updateFilteredTaskList(new PredicateExpression(new DoneQualifier()));
     }
