@@ -10,7 +10,6 @@ public interface ReadOnlyTask {
 
     TaskName getTaskName();
     Date getDate();
-    Deadline getDeadline();
     StartTime getStartTime();
     EndTime getEndTime();
 
@@ -27,7 +26,6 @@ public interface ReadOnlyTask {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                 && other.getTaskName().equals(this.getTaskName()) // state checks here onwards
-                && other.getDeadline().equals(this.getDeadline())
                 && other.getStartTime().equals(this.getStartTime())
                 && other.getEndTime().equals(this.getEndTime())
                 && other.getDate().equals(this.getDate()));
@@ -39,22 +37,17 @@ public interface ReadOnlyTask {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getTaskName());
-        
+
         if (getDate().toString() != "EMPTY_FIELD"){
         	builder.append(" Date: ")
         	.append(getDate());
         }
-        
-        if (getDeadline().toString() != "EMPTY_FIELD"){
-                builder.append(" Deadline: ")
-                .append(getDeadline());
-        }
-        
+
         if (getStartTime().toString() != "EMPTY_FIELD"){
                 builder.append(" Start Time: ")
                 .append(getStartTime());
         }
-        
+
         if (getEndTime().toString() != "EMPTY_FIELD"){
                 builder.append(" End Time: ")
                 .append(getEndTime());
@@ -63,5 +56,4 @@ public interface ReadOnlyTask {
 //        getCategories().forEach(builder::append);
         return builder.toString();
     }
-
 }

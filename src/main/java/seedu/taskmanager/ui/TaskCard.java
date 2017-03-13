@@ -22,13 +22,11 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label date;
     @FXML
-    private Label deadline;
-    @FXML
     private Label startTime;
     @FXML
     private Label endTime;
-    @FXML
-    private FlowPane categories;
+//    @FXML
+//    private FlowPane categories;
     
     private final StringProperty empty = new SimpleStringProperty("");
 
@@ -40,12 +38,7 @@ public class TaskCard extends UiPart<Region> {
         		date.textProperty().bind(empty);
         	} else {
                 date.setText(task.getDate().value);
-        	}
-        	if((task.getDeadline().value) == "EMPTY_FIELD") {
-        		deadline.textProperty().bind(empty);
-        	} else {
-                deadline.setText(task.getDeadline().value);
-        	}        	
+        	}	
         	if((task.getStartTime().value) == "EMPTY_FIELD") {
         		startTime.textProperty().bind(empty);
         	} else {

@@ -15,17 +15,15 @@ public class Task implements ReadOnlyTask {
     private Date date;
     private StartTime startTime;
     private EndTime endTime;
-    private Deadline deadline;
 //    private UniqueCategoryList categories;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(TaskName taskName, Date date , Deadline deadline, StartTime startTime, EndTime endTime /*,UniqueCategoryList categories*/) {
-        assert !CollectionUtil.isAnyNull(taskName, date , deadline, startTime, endTime/*, categories*/);
+    public Task(TaskName taskName, Date date, StartTime startTime, EndTime endTime /*,UniqueCategoryList categories*/) {
+        assert !CollectionUtil.isAnyNull(taskName, date, startTime, endTime/*, categories*/);
         this.taskName = taskName;
         this.date = date;
-        this.deadline = deadline;
         this.startTime = startTime;
         this.endTime = endTime;
 //      this.categories = new UniqueCategoryList(categories); // protect internal tags from changes in the arg list
@@ -35,7 +33,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getTaskName(), source.getDate(), source.getDeadline(), source.getStartTime() ,source.getEndTime() /*,source.getCategories()*/);
+        this(source.getTaskName(), source.getDate(), source.getStartTime() ,source.getEndTime() /*,source.getCategories()*/);
     }
 
     public void setTaskName(TaskName taskName) {
@@ -57,16 +55,6 @@ public class Task implements ReadOnlyTask {
     public Date getDate() {
         return date;
     }  
-    
-    public void setDeadline(Deadline deadline) {
-        assert deadline != null;
-        this.deadline = deadline;
-    }
-
-    @Override
-    public Deadline getDeadline() {
-        return deadline;
-    }
 
     public void setStartTime(StartTime startTime) {
         assert startTime != null;
@@ -107,7 +95,6 @@ public class Task implements ReadOnlyTask {
 
         this.setTaskName(replacement.getTaskName());
         this.setDate(replacement.getDate());
-        this.setDeadline(replacement.getDeadline());
         this.setStartTime(replacement.getStartTime());
         this.setEndTime(replacement.getEndTime());
 //      this.setCategories(replacement.getCategories());
@@ -123,7 +110,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(taskName, date, deadline, startTime, endTime/*, categories*/);
+        return Objects.hash(taskName, date, startTime, endTime/*, categories*/);
     }
 
     @Override

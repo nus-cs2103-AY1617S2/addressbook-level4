@@ -32,20 +32,25 @@ public class AddCommandParser {
                 new ArgumentTokenizer(PREFIX_DATE, PREFIX_DEADLINE, PREFIX_STARTTIME, PREFIX_ENDTIME/*, PREFIX_CATEGORY*/);
         argsTokenizer.tokenize(args);
         try {
-        	String taskname = argsTokenizer.getPreamble().get();
+        	String taskName = argsTokenizer.getPreamble().get();
         	String date = argsTokenizer.getValue(PREFIX_DATE).orElse(EMPTY_FIELD);
         	String deadline = argsTokenizer.getValue(PREFIX_DEADLINE).orElse(EMPTY_FIELD);
-        	String starttime = argsTokenizer.getValue(PREFIX_STARTTIME).orElse(EMPTY_FIELD);
-        	String endtime = argsTokenizer.getValue(PREFIX_ENDTIME).orElse(EMPTY_FIELD);
-        	
+        	String startTime = argsTokenizer.getValue(PREFIX_STARTTIME).orElse(EMPTY_FIELD);
+        	String endTime = argsTokenizer.getValue(PREFIX_ENDTIME).orElse(EMPTY_FIELD);
+
+        	if (!(deadline.equals(EMPTY_FIELD))) {
+        		String[] splited = deadline.split("\\s+");
+        		date = splited[0];
+        		startTime = splited[1];
+        	}
+
         	if (date.matches(DATE_VALIDATION_REGEX2)) date = CurrentDate.getNewDate(date);
         	
             return new AddCommand(
-                    taskname,
+                    taskName,
                     date,
-                    deadline,
-                    starttime,
-                    endtime
+                    startTime,
+                    endTime
 //                    ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_CATEGORY)
             );
         } catch (NoSuchElementException nsee) {
