@@ -13,6 +13,11 @@ public class DeadlineTask extends Task {
         this.date = date;
         this.time = time;
     }
+    
+    public DeadlineTask(Name name, Date date) {
+        super(name);
+        this.date = date;
+    }
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
