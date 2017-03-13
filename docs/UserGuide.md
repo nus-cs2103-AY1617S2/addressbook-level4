@@ -164,14 +164,14 @@ Examples:
 
 **Change storage location**
 Set a new storage location
-Format: `save to <dir_location>`
+Format: `saveto <dir_location>`
 
 > dir_location : path to new save location
 
 Examples:
 
-* `save to C:\Desktop`
-* `save to ..\mySecretFolder`
+* `saveto C:\Desktop`
+* `saveto ..\mySecretFolder`
 
 ## 3. FAQ
 
@@ -187,10 +187,10 @@ Examples:
 * **Find Task**: `find <keyword1 keyword2 ...>`
 * **Update Task**: `update <id> [<new_task_name>] [due <new_datetime>] [tag <tag1, tag2, ...>] [remove tag <tag1, tag2, ...>]`
 * **Delete Task**: `delete <id1, id2, id3>`
-* **Complete Task**: `complete <id1, id2, ...>`
+* **Complete Task**: `done <id1, id2, ...>`
 * **Rename Tag**: `rename tag from <tag_name> to <new_tag_name>`
 * **Help**: `help [<command>]`
 * **Exit**: `exit`
 * **Export**: `export to <dir_location>`
 * **Import**: `import from <path_to_file>`
-* **Change Storage Location**: `save to <dir_location>`
+* **Change Storage Location**: `saveto <dir_location>`
