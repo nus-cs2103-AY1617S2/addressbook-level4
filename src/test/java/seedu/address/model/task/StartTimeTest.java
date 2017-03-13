@@ -50,22 +50,14 @@ public class StartTimeTest {
                                                                           // name
 
         // valid email
-        assertTrue(StartTime.isValidStartTime("PeterJack_1190@WEB.Mail.com"));
-        assertTrue(StartTime.isValidStartTime("a@b")); // minimal
-        assertTrue(StartTime.isValidStartTime("test@localhost")); // alphabets
-                                                                  // only
-        assertTrue(StartTime.isValidStartTime("123@145")); // numeric local part
+        assertTrue(StartTime.isValidStartTime("march fifteenth")); //alphabets
+        assertTrue(StartTime.isValidStartTime("20170315")); // number
+        assertTrue(StartTime.isValidStartTime("By end of March")); // alphabets with capital
+        assertTrue(StartTime.isValidStartTime("March 15 2017")); // numeric and alphabet
                                                            // and domain name
-        assertTrue(StartTime.isValidStartTime("a1@sg50.org")); // mixture of
+        assertTrue(StartTime.isValidStartTime("March 15, 2017")); // mixture of
                                                                // alphanumeric
-                                                               // and dot
+                                                               // and comma
                                                                // characters
-        assertTrue(StartTime.isValidStartTime("_user_@_do_main_.com_")); // underscores
-        assertTrue(StartTime.isValidStartTime("peter_jack@a_very_long_domain_AVLD.com")); // long
-                                                                                          // domain
-                                                                                          // name
-        assertTrue(StartTime.isValidStartTime("if.you.dream.it_you.can.do.it@youth_email.com")); // long
-                                                                                                 // local
-                                                                                                 // part
     }
 }
