@@ -106,7 +106,7 @@ public class EditCommandTest extends AddressBookGuiTest {
     public void edit_duplicatePerson_failure() {
         commandBox.runCommand("edit 3 Alice Pauline p/85355255 e/alice@gmail.com "
                                 + "a/123, Jurong West Ave 6, #08-111 t/friends");
-        assertResultMessage(EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
     /**
@@ -129,6 +129,6 @@ public class EditCommandTest extends AddressBookGuiTest {
         // confirm the list now contains all previous persons plus the person with updated details
         expectedPersonsList[addressBookIndex - 1] = editedPerson;
         assertTrue(personListPanel.isListMatching(expectedPersonsList));
-        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedPerson));
     }
 }
