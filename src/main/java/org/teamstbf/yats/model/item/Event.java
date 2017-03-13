@@ -65,25 +65,25 @@ public class Event implements ReadOnlyEvent {
         if (parameters.get("location") != null) {
             this.location = new Location((String) parameters.get("location"));
         } else {
-            this.location = new Location("nowhere");
+            this.location = new Location(" ");
         }
         
         if (parameters.get("start") != null) {
             this.startTime = new Timing((String) parameters.get("start"));
         } else {
-            this.startTime = new Timing("11:00am");
+            this.startTime = new Timing("  ");
         }
         
         if (parameters.get("end") != null) {
             this.endTime = new Timing((String) parameters.get("end"));
         } else {
-            this.endTime = new Timing("12:00am");
+            this.endTime = new Timing("  ");
         }
         
         if (parameters.get("description") != null) {
             this.description = new Description((String) parameters.get("description"));
         } else {
-            this.description = new Description("NA");
+            this.description = new Description(" ");
         }
         
         this.isDone = false;
