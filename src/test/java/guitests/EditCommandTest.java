@@ -68,13 +68,13 @@ public class EditCommandTest extends DoistGUITest {
 
     @Test
     public void edit_missingPersonIndex_failure() {
-        commandBox.runCommand("edit Bobby");
+        commandBox.runCommand("edit Maths");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void edit_invalidPersonIndex_failure() {
-        commandBox.runCommand("edit 8 Bobby");
+        commandBox.runCommand("edit 8 Maths");
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
@@ -95,7 +95,7 @@ public class EditCommandTest extends DoistGUITest {
 
     @Test
     public void edit_duplicatePerson_failure() {
-        commandBox.runCommand("edit 3 Alice Pauline");
+        commandBox.runCommand("edit 3 Do laundry");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 

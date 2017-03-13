@@ -13,7 +13,7 @@ import seedu.doist.model.tag.Tag;
 import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.ReadOnlyTask;
 
-public class ListCommandTest extends AddressBookGuiTest {
+public class ListCommandTest extends DoistGUITest {
 
     @Test
     public void testListUnderValidTagName() {
