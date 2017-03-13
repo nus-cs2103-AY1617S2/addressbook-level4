@@ -95,7 +95,7 @@ Given below is a quick overview of each component.
 > Tip: The `.pptx` files used to create diagrams in this document can be found in the [diagrams](diagrams/) folder.
 > To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
 
-`Main` has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java). It is responsible for,
+`Main` has only one class called [`MainApp`](../src/main/java/seedu/taskboss/MainApp.java). It is responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
@@ -132,7 +132,7 @@ command `delete 1`.
 <img src="images\SDforDeletePerson.png" width="800"><br>
 _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 
->Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed,
+>Note how the `Model` simply raises a `TaskBossChangedEvent` when the TaskBoss data is changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
