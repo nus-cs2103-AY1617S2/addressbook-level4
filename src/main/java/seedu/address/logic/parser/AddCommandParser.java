@@ -29,21 +29,21 @@ public class AddCommandParser {
         String priority, startDate, endDate;
 
         try {
-        	priority = argsTokenizer.getValue(PREFIX_PRIORITY).get();
+            priority = argsTokenizer.getValue(PREFIX_PRIORITY).get();
         } catch (NoSuchElementException e) {
-        	priority = null;
+            priority = null;
         }
 
         try {
-        	startDate = argsTokenizer.getValue(PREFIX_START_DATE).get();
+            startDate = argsTokenizer.getValue(PREFIX_START_DATE).get();
         } catch (NoSuchElementException e) {
-        	startDate = null;
+            startDate = null;
         }
 
         try {
-        	endDate = argsTokenizer.getValue(PREFIX_END_DATE).get();
+            endDate = argsTokenizer.getValue(PREFIX_END_DATE).get();
         } catch (NoSuchElementException e) {
-        	endDate = null;
+            endDate = null;
         }
 
         try {

@@ -1,6 +1,5 @@
 package seedu.address.model.task;
 
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -26,13 +25,13 @@ public class TaskDate {
      */
     public TaskDate(String date) throws IllegalValueException {
         if (date != null) {
-        	String trimmedDate = date.trim();
+            String trimmedDate = date.trim();
             if (!isValidDate(trimmedDate)) {
                 throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
             }
             this.value = trimmedDate;
         } else {
-        	this.value = null;
+            this.value = null;
         }
     }
 

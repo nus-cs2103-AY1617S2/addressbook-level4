@@ -19,13 +19,13 @@ public class Priority {
      */
     public Priority(String priority) throws IllegalValueException {
         if (priority != null) {
-        	String trimmedPriority = priority.trim();
-        	if (!isValidPriority(trimmedPriority)) {
-        		throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
-        	}
-        	this.value = trimmedPriority;
+            String trimmedPriority = priority.trim();
+            if (!isValidPriority(trimmedPriority)) {
+                throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
+            }
+            this.value = trimmedPriority;
         } else {
-        	this.value = null;
+            this.value = null;
         }
     }
 
