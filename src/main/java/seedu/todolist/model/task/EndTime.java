@@ -2,7 +2,7 @@ package seedu.todolist.model.task;
 
 import java.util.Date;
 
-import java.text.DateFormat;
+import java.text.FieldPosition;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 
@@ -31,8 +31,9 @@ public class EndTime {
     }
     
     public String toString() {
-        DateFormat dateFormatter = DateFormat.getDateInstance();
-        return dateFormatter.format(_endTime);
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy h.mm a");
+        StringBuffer endTimeBuffer = dateFormatter.format(_endTime, new StringBuffer(), new FieldPosition(0));
+        return endTimeBuffer.toString();
     }
     
     public boolean equals(Object other) {
