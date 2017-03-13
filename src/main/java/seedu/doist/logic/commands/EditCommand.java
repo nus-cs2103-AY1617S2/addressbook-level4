@@ -26,8 +26,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = info().getUsageTextForCommandWords()
             + ": Edits the details of the task identified " + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [DESCRIPTION] [/as PRIORITY] [/under TAG]...\n"
-            + "Example: " + DEFAULT_COMMAND_WORD + " 1 do stuff today";
+            + "Parameters: INDEX (must be a positive integer) [DESCRIPTION] [\\as PRIORITY] [\\under TAG]...\n"
+            + "Example: " + DEFAULT_COMMAND_WORD + " 1 do things today \\as IMPORTANT";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -105,6 +105,7 @@ public class EditCommand extends Command {
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.desc = toCopy.getDesc();
+            this.priority = toCopy.getPriority();
             this.tags = toCopy.getTags();
         }
 
@@ -112,13 +113,18 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.desc, this.tags);
+            return CollectionUtil.isAnyPresent(this.desc, this.priority, this.tags);
 
         }
 
         public void setDesc(Optional<Description> desc) {
             assert desc != null;
             this.desc = desc;
+        }
+
+        public void setPriority(Optional<Priority> priority) {
+            assert priority != null;
+            this.priority = priority;
         }
 
         public Optional<Description> getDesc() {

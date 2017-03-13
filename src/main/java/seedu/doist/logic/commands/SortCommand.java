@@ -3,8 +3,6 @@ package seedu.doist.logic.commands;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import seedu.doist.commons.exceptions.IllegalValueException;
-
 
 /**
  * Sorts all persons in the to-do list by the specified parameter and shows it to the user.
@@ -22,7 +20,8 @@ public class SortCommand extends Command {
     public static ArrayList<String> commandWords =
             new ArrayList<>(Arrays.asList(DEFAULT_COMMAND_WORD, "sorted", "sort_by"));
 
-    public static final String MESSAGE_USAGE = DEFAULT_COMMAND_WORD + ":\n" + "Sorts previously listed tasks." + "\n"
+    public static final String MESSAGE_USAGE = DEFAULT_COMMAND_WORD
+            + ":\n" + "Sorts previously listed tasks." + "\n"
             + "Can sort by priority for now. \n\t"
             + "Parameters: SORTTYPE " + "\n\t"
             + "Example: " + DEFAULT_COMMAND_WORD
@@ -32,40 +31,20 @@ public class SortCommand extends Command {
             "You can only " + DEFAULT_COMMAND_WORD + "\n"
             + SortType.PRIORITY.toString();
 
-    public SortCommand(String argument) throws IllegalValueException {
-        // Remove trailing whitespace, spaces and change to upper case
-        String processedArgument = argument.trim();
-        processedArgument = processedArgument.replaceAll(" ", "");
-        processedArgument = processedArgument.toUpperCase();
-
-        if (!isValidSortArgument(processedArgument)) {
-            throw new IllegalValueException(MESSAGE_SORT_CONSTRAINTS);
-        }
-        this.sortType = SortType.valueOf(processedArgument);
-    }
-    /**
-     * Returns true if a given string is a valid sort argument
-     */
-    public static boolean isValidSortArgument(String argument) {
-        // Only priority for now
-        return argument.equals(SortType.PRIORITY.toString());
+    public SortCommand(SortType type) {
+        this.sortType = type;
     }
 
     @Override
     public CommandResult execute() {
         switch(sortType) {
-
         case PRIORITY:
             model.sortTasksByPriority();
             return new CommandResult(getMessageForPersonListSortedSummary(sortType));
         default:
-            break;
+            model.sortTasksByPriority();
+            return new CommandResult(getMessageForPersonListSortedSummary(sortType));
         }
-        return null;
-    }
-
-    public static boolean canCommandBeTriggeredByWord(String word) {
-        return commandWords.contains(word) || DEFAULT_COMMAND_WORD.equals(word);
     }
 
     public static CommandInfo info() {

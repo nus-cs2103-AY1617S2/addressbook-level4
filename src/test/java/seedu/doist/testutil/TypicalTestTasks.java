@@ -16,7 +16,6 @@ public class TypicalTestTasks {
         try {
             laundry = new TaskBuilder().withName("Do laundry").build();
             homework = new TaskBuilder().withName("Complete math homework").withTags("school", "math").build();
-            chores = new TaskBuilder().withName("Clean up house").withPriority("VERYIMPORTANT").build();
             work = new TaskBuilder().withName("Schedule meeting with boss").withPriority("IMPORTANT").build();
             school = new TaskBuilder().withName("Submit chemistry assignment").build();
             groceries = new TaskBuilder().withName("Pick up milk").build();
@@ -25,6 +24,7 @@ public class TypicalTestTasks {
             // Manually added
             email = new TaskBuilder().withName("Send emails to client").build();
             exercise = new TaskBuilder().withName("Go for a run").build();
+            chores = new TaskBuilder().withName("Clean up house").withPriority("VERYIMPORTANT").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -42,7 +42,7 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{laundry, homework, chores, work, school, groceries, shopping};
+        return new TestTask[]{laundry, homework, work, school, groceries, shopping};
     }
 
     public TodoList getTypicalAddressBook() {

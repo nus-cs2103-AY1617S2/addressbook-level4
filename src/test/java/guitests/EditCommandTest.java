@@ -8,8 +8,9 @@ import org.junit.Test;
 import guitests.guihandles.TaskCardHandle;
 import seedu.doist.commons.core.Messages;
 import seedu.doist.logic.commands.EditCommand;
-//import seedu.doist.model.tag.Tag;
+import seedu.doist.model.tag.Tag;
 import seedu.doist.model.task.Description;
+import seedu.doist.model.task.Priority;
 import seedu.doist.testutil.TaskBuilder;
 import seedu.doist.testutil.TestTask;
 
@@ -35,8 +36,8 @@ public class EditCommandTest extends DoistGUITest {
 //        String detailsToEdit = "t/sweetie t/bestie";
 //        int addressBookIndex = 2;
 //
-//        TestPerson personToEdit = expectedPersonsList[addressBookIndex - 1];
-//        TestPerson editedPerson = new TaskBuilder(personToEdit).withTags("sweetie", "bestie").build();
+//        TestTask personToEdit = expectedPersonsList[addressBookIndex - 1];
+//        TestTask editedPerson = new TaskBuilder(personToEdit).withTags("sweetie", "bestie").build();
 //
 //        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
 //    }
@@ -46,8 +47,8 @@ public class EditCommandTest extends DoistGUITest {
 //        String detailsToEdit = "t/";
 //        int addressBookIndex = 2;
 //
-//        TestPerson personToEdit = expectedPersonsList[addressBookIndex - 1];
-//        TestPerson editedPerson = new TaskBuilder(personToEdit).withTags().build();
+//        TestTask personToEdit = expectedPersonsList[addressBookIndex - 1];
+//        TestTask editedPerson = new TaskBuilder(personToEdit).withTags().build();
 //
 //        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
 //    }
@@ -62,19 +63,18 @@ public class EditCommandTest extends DoistGUITest {
 
         TestTask personToEdit = expectedPersonsList[addressBookIndex - 1];
         TestTask editedPerson = new TaskBuilder(personToEdit).withName("Complete chemistry homework").build();
-
         assertEditSuccess(filteredPersonListIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
 
     @Test
     public void edit_missingPersonIndex_failure() {
-        commandBox.runCommand("edit Bobby");
+        commandBox.runCommand("edit Maths");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void edit_invalidPersonIndex_failure() {
-        commandBox.runCommand("edit 8 Bobby");
+        commandBox.runCommand("edit 8 Maths");
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
@@ -88,17 +88,22 @@ public class EditCommandTest extends DoistGUITest {
     public void edit_invalidValues_failure() {
         commandBox.runCommand("edit 1 *&");
         assertResultMessage(Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
-//
-//        commandBox.runCommand("edit 1 t/*&");
-//        assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
+
+        commandBox.runCommand("edit 1 \\under *&");
+        assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
-//    @Test
-//    public void edit_duplicatePerson_failure() {
-//        commandBox.runCommand("edit 3 Alice Pauline p/85355255 e/alice@gmail.com "
-//                                + "a/123, Jurong West Ave 6, #08-111 t/friends");
-//        assertResultMessage(EditCommand.MESSAGE_DUPLICATE_PERSON);
-//    }
+    @Test
+    public void edit_duplicatePerson_failure() {
+        commandBox.runCommand("edit 3 Do laundry");
+        assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
+    }
+
+    @Test
+    public void testInvalidPriority() {
+        commandBox.runCommand("edit 3 \\as invalidPriority");
+        assertResultMessage(Priority.MESSAGE_PRIORITY_CONSTRAINTS);
+    }
 
     /**
      * Checks whether the edited person has the correct updated details.

@@ -10,7 +10,7 @@ import seedu.doist.model.task.ReadOnlyTask;
  */
 public class TestTask implements ReadOnlyTask {
 
-    private Description name;
+    private Description desc;
     private Priority priority;
     private UniqueTagList tags;
 
@@ -20,16 +20,16 @@ public class TestTask implements ReadOnlyTask {
     }
 
     /**
-     * Creates a copy of {@code personToCopy}.
+     * Creates a copy of {@code taskToCopy}.
      */
     public TestTask(TestTask taskToCopy) {
-        this.name = taskToCopy.getDescription();
+        this.desc = taskToCopy.getDescription();
         this.priority = taskToCopy.getPriority();
         this.tags = taskToCopy.getTags();
     }
 
-    public void setName(Description name) {
-        this.name = name;
+    public void setName(Description desc) {
+        this.desc = desc;
     }
 
     public void setPriority(Priority priority) {
@@ -42,7 +42,7 @@ public class TestTask implements ReadOnlyTask {
 
     @Override
     public Description getDescription() {
-        return name;
+        return desc;
     }
 
     @Override
