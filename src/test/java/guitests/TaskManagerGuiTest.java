@@ -115,8 +115,8 @@ public abstract class TaskManagerGuiTest {
      * Asserts the size of the task list is equal to the given number.
      */
     protected void assertListSize(int size) {
-        int numberOfPeople = taskListPanel.getNumberOfPeople();
-        assertEquals(size, numberOfPeople);
+        int numberOfTasks = taskListPanel.getNumberOfTasks();
+        assertEquals(size, numberOfTasks);
     }
 
     /**
