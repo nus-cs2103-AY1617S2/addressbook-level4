@@ -65,35 +65,11 @@ public class PdfUtilTest extends TaskManagerGuiTest {
                                     .withDeadline("11 November 2017 1520").build();
         tasks[tasks.length - 4] = (new TaskBuilder()).withTitle("Complete Task 888")
                                     .withDeadline("16 November 2017 1540").build();
-        tasks[tasks.length - 3] = (new TaskBuilder()).withTitle("Complete Task 666666666666666666"
-                                                                + "666666666666666666666666666666"
-                                                                + "666666666666666666666666666666"
-                                                                + "666666666666666666666666666666"
-                                                                + "666666666666666666666666666666"
-                                                                + "666666666666666666666666666666"
-                                                                + "666666666666666666666666666666"
-                                                                + "666666666666666666666666666666"
-                                                                + "666666666666667")
+        tasks[tasks.length - 3] = (new TaskBuilder()).withTitle("Complete Task 777")
                                     .withDeadline("23 November 2017 1720").build();
-        tasks[tasks.length - 2] = (new TaskBuilder()).withTitle("Complete Task 666666666666666666"
-                                                                + "666666666666666666666666666666"
-                                                                + "666666666666666666666666666666"
-                                                                + "666666666666666666666666666666"
-                                                                + "666666666666666666666666666666"
-                                                                + "666666666666666666666666666666"
-                                                                + "666666666666666666666666666666"
-                                                                + "666666666666666666666666666666"
-                                                                + "66666666666666")
+        tasks[tasks.length - 2] = (new TaskBuilder()).withTitle("Complete Task 666")
                                     .withDeadline("26 November 2017 1020").build();
-        tasks[tasks.length - 1] = (new TaskBuilder()).withTitle("Complete Task 555555555555555555"
-                                                                + "555555555555555555555555555555"
-                                                                + "555555555555555555555555555555"
-                                                                + "555555555555555555555555555555"
-                                                                + "555555555555555555555555555555"
-                                                                + "555555555555555555555555555555"
-                                                                + "555555555555555555555555555555"
-                                                                + "555555555555555555555555555555"
-                                                                + "55555555555555")
+        tasks[tasks.length - 1] = (new TaskBuilder()).withTitle("Complete Task 555")
                                     .withDeadline("23 November 2017 1220").build();
 
         //Initialize fonts
