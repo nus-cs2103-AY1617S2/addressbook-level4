@@ -1,10 +1,10 @@
 package seedu.todolist.model.task;
 
-import java.util.Date;
-
 import java.text.FieldPosition;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+
+import java.util.Date;
 
 import seedu.todolist.commons.exceptions.IllegalValueException;
 
@@ -18,21 +18,21 @@ public class EndTime {
             "End time should follow the format: DD-MM-YYYY TIME. E.g. \n"
             + "12-12-2008 3.30 PM";
 
-    private Date _endTime;
+    private Date endTime;
 
     public EndTime(String endTime) throws IllegalValueException {
         SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy h.mm a");
-        Date temp = dateFormatter.parse(endTime,new ParsePosition(0));
+        Date temp = dateFormatter.parse(endTime, new ParsePosition(0));
         if (temp == null) {
             throw new IllegalValueException(MESSAGE_ENDTIME_CONSTRAINTS);
         } else {
-            _endTime = temp;
+            this.endTime = temp;
         }
     }
 
     public String toString() {
         SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy h.mm a");
-        StringBuffer endTimeBuffer = dateFormatter.format(_endTime, new StringBuffer(), new FieldPosition(0));
+        StringBuffer endTimeBuffer = dateFormatter.format(endTime, new StringBuffer(), new FieldPosition(0));
         return endTimeBuffer.toString();
     }
 
