@@ -2,38 +2,45 @@
 <todolist>
     <tasks>
         <desc>Buy milk</desc>
-        <priority>VERYIMPORTANT</priority>
+        <priority>Very Important</priority>
+        <finishedStatus>false</finishedStatus>
         <tagged>health</tagged>
     </tasks>
     <tasks>
         <desc>Do CS2103 tutorial</desc>
-        <priority>IMPORTANT</priority>
+        <priority>Important</priority>
+        <finishedStatus>false</finishedStatus>
         <tagged>tutorial</tagged>
         <tagged>NUS</tagged>
     </tasks>
     <tasks>
         <desc>Exercise at home</desc>
-        <priority>NORMAL</priority>
+        <priority>Normal</priority>
+        <finishedStatus>false</finishedStatus>
         <tagged>health</tagged>
     </tasks>
     <tasks>
         <desc>Have some beauty sleep</desc>
-        <priority>NORMAL</priority>
+        <priority>Normal</priority>
+        <finishedStatus>false</finishedStatus>
         <tagged>health</tagged>
     </tasks>
     <tasks>
         <desc>Do more tutorials</desc>
-        <priority>IMPORTANT</priority>
+        <priority>Important</priority>
+        <finishedStatus>false</finishedStatus>
         <tagged>tutorial</tagged>
     </tasks>
     <tasks>
         <desc>Talk to people</desc>
-        <priority>NORMAL</priority>
+        <priority>Normal</priority>
+        <finishedStatus>false</finishedStatus>
         <tagged>interests</tagged>
     </tasks>
     <tasks>
         <desc>Download Doist</desc>
-        <priority>NORMAL</priority>
+        <priority>Normal</priority>
+        <finishedStatus>false</finishedStatus>
     </tasks>
     <tags>health</tags>
     <tags>NUS</tags>

@@ -24,7 +24,7 @@ public class TypicalTestTasks {
             // Manually added
             email = new TaskBuilder().withName("Send emails to client").build();
             exercise = new TaskBuilder().withName("Go for a run").build();
-            chores = new TaskBuilder().withName("Clean up house").withPriority("VERYIMPORTANT").build();
+            chores = new TaskBuilder().withName("Clean up house").withPriority("VERY IMPORTANT").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";

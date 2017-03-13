@@ -3,6 +3,8 @@
     <tasks>
         <desc>Make some friends</desc>
         <priority>NORMAL</priority>
+        <finishedStatus>false</finishedStatus>
+        <tagged>Friends</tagged>
     </tasks>
     <tags>Friends</tags>
 </todolist>
