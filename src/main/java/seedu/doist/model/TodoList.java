@@ -89,8 +89,10 @@ public class TodoList implements ReadOnlyTodoList {
      * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
      */
     public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
-        syncMasterTagListWith(p);
-        tasks.add(p);
+        if (tasks.add(p)) {
+            // Only sync master tag list if addition of task is successful
+            syncMasterTagListWith(p);
+        }
     }
 
     /**
@@ -107,11 +109,11 @@ public class TodoList implements ReadOnlyTodoList {
         assert editedReadOnlyTask != null;
 
         Task editedTask = new Task(editedReadOnlyTask);
-        syncMasterTagListWith(editedTask);
-        // TODO: the tags master list will be updated even though the below line fails.
-        // This can cause the tags master list to have additional tags that are not tagged to any task
-        // in the task list.
-        tasks.updateTask(index, editedTask);
+        if (tasks.updateTask(index, editedTask)) {
+            //Only sync master tag list if editing of task is successful
+            syncMasterTagListWith(editedTask);
+        }
+
     }
 
     /**
