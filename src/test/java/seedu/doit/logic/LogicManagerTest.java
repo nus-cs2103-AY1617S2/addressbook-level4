@@ -417,7 +417,7 @@ public class LogicManagerTest {
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
             Priority privatePriority = new Priority("111111");
-            EndTime deadline = new EndTime("adam@gmail.com");
+            EndTime deadline = new EndTime("tomorrow");
             Description description = new Description("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
