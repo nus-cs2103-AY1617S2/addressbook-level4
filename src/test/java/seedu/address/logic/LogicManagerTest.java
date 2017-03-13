@@ -334,7 +334,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_mark_markCompleteTest() throws Exception {
+    public void executeMarkCompleteTest() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
 
@@ -352,7 +352,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_mark_invalidArgsFormat() {
+    public void executeMarkInvalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE);
         assertCommandFailure("mark ", expectedMessage);
     }

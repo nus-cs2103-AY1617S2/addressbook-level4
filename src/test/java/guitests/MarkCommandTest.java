@@ -11,10 +11,10 @@ import seedu.address.testutil.TestTask;
 
 public class MarkCommandTest extends TaskManagerGuiTest {
 
-    TestTask[] expectedTasksList = td.getTypicalTasks();
+    private TestTask[] expectedTasksList = td.getTypicalTasks();
 
     @Test
-    public void mark_task_success() throws Exception {
+    public void markTestSuccess() throws Exception {
         int taskManagerIndex = 1;
 
         TestTask taskToMark = expectedTasksList[taskManagerIndex - 1];
