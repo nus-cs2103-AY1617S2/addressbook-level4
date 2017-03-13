@@ -67,7 +67,7 @@ public class XmlAdaptedTask {
         }
         final Description name = new Description(this.desc);
         final Priority priority = new Priority(this.priority);
-        final FinishedStatus finishedStatus = new FinishedStatus(this.finishedStatus.equals("true"));
+        final FinishedStatus finishedStatus = new FinishedStatus(Boolean.parseBoolean(this.finishedStatus));
         final UniqueTagList tags = new UniqueTagList(personTags);
 
         return new Task(name, priority, finishedStatus, tags);
