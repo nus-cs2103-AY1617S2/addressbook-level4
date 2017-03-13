@@ -21,7 +21,7 @@ public class ViewAliasCommandTest extends ToLuistGuiTest {
     }
 
     @Test
-    public void viewAlias_OneAlias() {
+    public void viewAlias_oneAlias() {
         String aliasCommand = "alias d add";
         commandBox.runCommand(aliasCommand);
 
@@ -30,7 +30,7 @@ public class ViewAliasCommandTest extends ToLuistGuiTest {
     }
 
     @Test
-    public void viewAlias_MultipleAliases() {
+    public void viewAlias_multipleAliases() {
         String aliasCommandForAdd = "alias d add";
         commandBox.runCommand(aliasCommandForAdd);
 
