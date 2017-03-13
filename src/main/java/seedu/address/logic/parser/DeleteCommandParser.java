@@ -15,24 +15,24 @@ public class DeleteCommandParser {
 
 	private static Optional<Integer> index;
 
-    /**
-     * Parses the given {@code String} of arguments in the context of the DeleteCommand
-     * and returns an DeleteCommand object for execution.
-     */
-    public Command parse(String args) {
+	/**
+	 * Parses the given {@code String} of arguments in the context of the
+	 * DeleteCommand and returns an DeleteCommand object for execution.
+	 */
+	public Command parse(String args) {
 
-        Optional<Integer> index = ParserUtil.parseIndex(args);
-        if (!index.isPresent()) {
-        	index=DeleteCommandParser.index;
-        	if(!index.isPresent())
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
-        }
+		Optional<Integer> index = ParserUtil.parseIndex(args);
+		if (!index.isPresent()) {
+			index = DeleteCommandParser.index;
+			if (!index.isPresent()) {
+				return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+			}
+		}
 
-        return new DeleteCommand(index.get());
-    }
+		return new DeleteCommand(index.get());
+	}
 
-    public static void setIndex (int index){
-    	DeleteCommandParser.index=Optional.of(index);
-    }
+	public static void setIndex(int index) {
+		DeleteCommandParser.index = Optional.of(index);
+	}
 }
