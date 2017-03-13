@@ -2,32 +2,34 @@ package typetask.model.task;
 
 import java.util.Objects;
 
-public class DeadlineTask extends Task{
+public class DeadlineTask extends Task {
+
     private Name name;
     private Date date;
     private Time time;
-	public DeadlineTask(Name name, Date date, Time time) {
-		super(name);
-		this.date = date;
-		this.time = time;
-	}
+
+    public DeadlineTask(Name name, Date date, Time time) {
+        super(name);
+        this.date = date;
+        this.time = time;
+    }
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public DeadlineTask(ReadOnlyTask source) {
-    	super(source);
+        super(source);
         if (source instanceof DeadlineTask) {
-        	date = ((DeadlineTask) source).getDateDeadline();
+            date = ((DeadlineTask) source).getDateDeadline();
             time = ((DeadlineTask) source).getTimeDeadline();
         }
     }
 
     public Date getDateDeadline() {
-    	return date;
+        return date;
     }
 
     public Time getTimeDeadline() {
-    	return time;
+        return time;
     }
 
     @Override
@@ -38,7 +40,7 @@ public class DeadlineTask extends Task{
 
     @Override
     public int hashCode() {
-    	return Objects.hash(name, date, time);
+        return Objects.hash(name, date, time);
     }
 
     @Override

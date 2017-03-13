@@ -31,7 +31,7 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_notAllFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "d/101010";
+        String detailsToEdit = "d/10/10/1993";
         int addressBookIndex = 2;
 
         TestTask personToEdit = expectedPersonsList[addressBookIndex - 1];

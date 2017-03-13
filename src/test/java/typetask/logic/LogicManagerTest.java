@@ -397,7 +397,7 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
-            Date deadline = new Date("111111");
+            Date deadline = new Date("11/11/2017");
             return new Task(name);
         }
 

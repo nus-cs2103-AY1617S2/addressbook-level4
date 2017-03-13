@@ -18,8 +18,8 @@ public class DateTest {
         assertFalse(Date.isValidDate("2 8 2017")); // spaces within digits
         // valid date
 
-        assertTrue(Date.isValidDate("282017"));
-        assertTrue(Date.isValidDate("0207")); // short phone numbers
-        assertTrue(Date.isValidDate("02082017")); // long phone numbers
+        assertTrue(Date.isValidDate("28/01/2017")); //Number start with 0 for month
+        assertTrue(Date.isValidDate("02/7/1992")); // Number start with 0 for day
+        assertTrue(Date.isValidDate("12/8/2017")); // Correct Date example
     }
 }
