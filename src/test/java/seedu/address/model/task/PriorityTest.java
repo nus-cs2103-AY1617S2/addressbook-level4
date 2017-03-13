@@ -37,9 +37,8 @@ public class PriorityTest {
         assertEquals(Priority.parseUserInputString("low"), Priority.Type.LOW);
     }
 
-    @Test
+    @Test (expected = IllegalValueException.class)
     public void parseInvalidUserInputString() throws IllegalValueException {
-        thrown.expect(IllegalValueException.class);
         Priority.parseUserInputString("1a$");
     }
 
@@ -59,9 +58,8 @@ public class PriorityTest {
         assertEquals(Priority.parseXmlString("LOW"), Priority.Type.LOW);
     }
 
-    @Test
+    @Test (expected = IllegalValueException.class)
     public void pareseInvalidXmlString() throws IllegalValueException {
-        thrown.expect(IllegalValueException.class);
         Priority.parseXmlString("NON");
     }
 }
