@@ -106,7 +106,7 @@ public class TaskTest {
         assertNull(testTask.getCompletionDateTime());
         assertFalse(testTask.isCompleted());
     }
-    
+
     @Test
     public void isOverdue() {
         // incomplete task with end date passed is overdue

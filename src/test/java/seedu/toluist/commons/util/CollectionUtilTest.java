@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -82,6 +83,26 @@ public class CollectionUtilTest {
     public void isAnyNullCollection_nullReference_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         CollectionUtil.isAnyNull((Collection<Object>) null);
+    }
+
+    @Test
+    public void isAnyPresent() throws Exception {
+        // no arguments
+        assertFalse(CollectionUtil.isAnyPresent());
+
+        // any non-presentt argument list
+        assertFalse(CollectionUtil.isAnyPresent(Optional.empty(), Optional.empty()));
+        assertFalse(CollectionUtil.isAnyPresent(Optional.empty()));
+
+        // argument lists with just one present at the beginning
+        assertTrue(CollectionUtil.isAnyPresent(Optional.of(1)));
+        assertTrue(CollectionUtil.isAnyPresent(Optional.of(false), Optional.empty(), Optional.empty()));
+
+        // argument lists with present optional in the middle
+        assertTrue(CollectionUtil.isAnyPresent(Optional.empty(), Optional.of(""), Optional.empty()));
+
+        // argument lists with one present as the last argument
+        assertTrue(CollectionUtil.isAnyPresent(Optional.empty(), Optional.empty(), Optional.of(true)));
     }
 
     @Test
