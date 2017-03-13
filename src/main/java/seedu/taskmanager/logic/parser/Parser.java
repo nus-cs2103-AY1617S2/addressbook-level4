@@ -12,7 +12,7 @@ import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.DeleteCommand;
 import seedu.taskmanager.logic.commands.UpdateCommand;
 import seedu.taskmanager.logic.commands.ExitCommand;
-import seedu.taskmanager.logic.commands.FindCommand;
+import seedu.taskmanager.logic.commands.SearchCommand;
 import seedu.taskmanager.logic.commands.HelpCommand;
 import seedu.taskmanager.logic.commands.IncorrectCommand;
 import seedu.taskmanager.logic.commands.ListCommand;
@@ -59,8 +59,8 @@ public class Parser {
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+        case SearchCommand.COMMAND_WORD:
+            return new SearchCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
