@@ -37,6 +37,16 @@ public class FileUtil {
     }
 
     /**
+     * Deletes a file
+     *
+     *@param file to be deleted; assumed not null
+     * @return true if file is deleted
+     */
+    public static boolean deleteFile(File file) {
+        return file.delete();
+    }
+
+    /**
      * Creates the given directory along with its parent directories
      *
      * @param dir the directory to be created; assumed not null
@@ -83,6 +93,21 @@ public class FileUtil {
         assert pathWithForwardSlash != null;
         assert pathWithForwardSlash.contains("/");
         return pathWithForwardSlash.replace("/", File.separator);
+    }
+
+    /**
+     * Checks if a filepath is writable
+     *
+     * @param path to a file
+     * @return True if filepath is writeable
+     */
+    public static boolean isWritable(String path) {
+        File file = new File(path);
+        while (!file.exists()) {
+            file = file.getParentFile();
+        }
+
+        return Files.isWritable(file.toPath());
     }
 
 }

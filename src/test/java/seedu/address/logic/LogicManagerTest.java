@@ -7,6 +7,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -20,6 +21,7 @@ import org.junit.rules.TemporaryFolder;
 
 import com.google.common.eventbus.Subscribe;
 
+import seedu.address.commons.core.Config;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.model.TaskManagerChangedEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
@@ -33,6 +35,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SaveToCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -49,6 +52,8 @@ import seedu.address.storage.StorageManager;
 
 public class LogicManagerTest {
 
+    private static final String TASK_MANAGER_FILE_NAME = "taskmanager.xml";
+
     /**
      * See https://github.com/junit-team/junit4/wiki/rules#temporaryfolder-rule
      */
@@ -57,6 +62,7 @@ public class LogicManagerTest {
 
     private Model model;
     private Logic logic;
+    private Config config;
 
     //These are for checking the correctness of the events raised
     private ReadOnlyTaskManager latestSavedTaskManager;
@@ -83,7 +89,8 @@ public class LogicManagerTest {
         model = new ModelManager();
         String tempTaskManagerFile = saveFolder.getRoot().getPath() + "TempTaskManager.xml";
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
-        logic = new LogicManager(model, new StorageManager(tempTaskManagerFile, tempPreferencesFile));
+        config = new Config();
+        logic = new LogicManager(model, new StorageManager(tempTaskManagerFile, tempPreferencesFile), config);
         EventsCenter.getInstance().registerHandler(this);
 
         latestSavedTaskManager = new TaskManager(model.getTaskManager()); // last saved assumed to be up to date
@@ -104,7 +111,7 @@ public class LogicManagerTest {
 
     /**
      * Executes the command, confirms that a CommandException is not thrown and that the result message is correct.
-     * Also confirms that both the 'address book' and the 'last shown list' are as specified.
+     * Also confirms that both the 'task manager' and the 'last shown list' are as specified.
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager, List)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
@@ -115,7 +122,7 @@ public class LogicManagerTest {
 
     /**
      * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
-     * Both the 'address book' and the 'last shown list' are verified to be unchanged.
+     * Both the 'task manager' and the 'last shown list' are verified to be unchanged.
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager, List)
      */
     private void assertCommandFailure(String inputCommand, String expectedMessage) {
@@ -128,7 +135,7 @@ public class LogicManagerTest {
      * Executes the command, confirms that the result message is correct
      * and that a CommandException is thrown if expected
      * and also confirms that the following three parts of the LogicManager object's state are as expected:<br>
-     *      - the internal address book data are same as those in the {@code expectedTaskManager} <br>
+     *      - the internal task manager data are same as those in the {@code expectedTaskManager} <br>
      *      - the backing list shown by UI matches the {@code shownList} <br>
      *      - {@code expectedTaskManager} was saved to the storage file. <br>
      */
@@ -204,7 +211,7 @@ public class LogicManagerTest {
         Task toBeAdded = helper.adam();
 
         // setup starting state
-        model.addTask(toBeAdded); // task already in internal address book
+        model.addTask(toBeAdded); // task already in internal task manager
 
         // execute command and verify result
         assertCommandFailure(helper.generateAddCommand(toBeAdded),  AddCommand.MESSAGE_DUPLICATE_PERSON);
@@ -219,7 +226,7 @@ public class LogicManagerTest {
         TaskManager expectedAB = helper.generateTaskManager(2);
         List<? extends ReadOnlyTask> expectedList = expectedAB.getTaskList();
 
-        // prepare address book state
+        // prepare task manager state
         helper.addToModel(model, 2);
 
         assertCommandSuccess("list",
@@ -364,7 +371,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_find_matchesIfAnyKeywordPresent() throws Exception {
+    public void execute_find_invalidArgs() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
         Task pTarget2 = helper.generateTaskWithName("bla rAnDoM bla bceofeia");
@@ -381,6 +388,84 @@ public class LogicManagerTest {
                 expectedAB,
                 expectedList);
     }
+
+    // SaveToCommand Tests
+
+    @Test
+    public void execute_saveTo_invalidArgs() throws Exception {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveToCommand.MESSAGE_USAGE);
+        assertCommandFailure("save to ", expectedMessage);
+    }
+
+
+    @Test
+    public void execute_saveTo_canonicalSameDirectory() throws Exception {
+
+        assertCommandSuccess("save to .",
+                String.format(SaveToCommand.MESSAGE_SUCCESS, new File(".", TASK_MANAGER_FILE_NAME)
+                        .getAbsolutePath()),
+                new TaskManager(),
+                Collections.emptyList());
+    }
+
+
+    @Test
+    public void execute_saveTo_canonicalParentDirectory() throws Exception {
+
+        assertCommandSuccess("save to ..",
+                String.format(SaveToCommand.MESSAGE_SUCCESS, new File("..", TASK_MANAGER_FILE_NAME)
+                        .getAbsolutePath()),
+                new TaskManager(),
+                Collections.emptyList());
+    }
+
+
+    @Test
+    public void execute_saveTo_canonicalSubDirectory() throws Exception {
+
+        assertCommandSuccess("save to testSubDir",
+                String.format(SaveToCommand.MESSAGE_SUCCESS, new File("testSubDir", TASK_MANAGER_FILE_NAME)
+                        .getAbsolutePath()),
+                new TaskManager(),
+                Collections.emptyList());
+    }
+
+
+    @Test
+    public void execute_saveTo_absoluteSameDirectory() throws Exception {
+
+        assertCommandSuccess("save to .",
+                String.format(SaveToCommand.MESSAGE_SUCCESS, new File(".", TASK_MANAGER_FILE_NAME)
+                        .getAbsolutePath()),
+                new TaskManager(),
+                Collections.emptyList());
+    }
+
+
+    @Test
+    public void execute_saveTo_absoluteParentDirectory() throws Exception {
+
+        assertCommandSuccess("save to ..",
+                String.format(SaveToCommand.MESSAGE_SUCCESS, new File("..", TASK_MANAGER_FILE_NAME)
+                        .getAbsolutePath()),
+                new TaskManager(),
+                Collections.emptyList());
+    }
+
+
+    @Test
+    public void execute_saveTo_absoluteSubDirectory() throws Exception {
+
+        assertCommandSuccess("save to testSubDir",
+                String.format(SaveToCommand.MESSAGE_SUCCESS, new File("testSubDir", TASK_MANAGER_FILE_NAME)
+                        .getAbsolutePath()),
+                new TaskManager(),
+                Collections.emptyList());
+    }
+
+    // TODO: non-existent folder, no_write_permissions_shows_error
+
+    // End SaveToCommand tests
 
 
     /**
