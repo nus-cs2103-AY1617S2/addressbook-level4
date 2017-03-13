@@ -16,7 +16,7 @@ public class UndoCommandTest extends TaskBossGuiTest {
         //without any last command
         commandBox.runCommand("undo");
         assertResultMessage(UndoCommand.MESSAGE_WITHOUT_PREVIOUS_OPERATION);
-    	
+
         //undo one command
         TestTask[] currentList = td.getTypicalTasks();
         TestTask taskToAdd = td.wedding;
@@ -24,7 +24,7 @@ public class UndoCommandTest extends TaskBossGuiTest {
         commandBox.runCommand("delete " + currentList.length);
         TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
         assertUndoCommandSuccess(expectedList);
-              
+ 
         //undo another command after undoing one command
         assertUndoCommandSuccess(currentList);
 
@@ -32,7 +32,7 @@ public class UndoCommandTest extends TaskBossGuiTest {
         commandBox.runCommand("undo2");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
-    
+
     private void assertUndoCommandSuccess(TestTask[] expectedList) {
         commandBox.runCommand("undo");
         assertTrue(taskListPanel.isListMatching(expectedList));
