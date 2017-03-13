@@ -357,12 +357,6 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_find_invalidArgsFormatWithPrefix() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
-        assertCommandFailure("find st/Mar", expectedMessage);
-    }
-
-    @Test
     public void execute_findName_onlyMatchesFullWordsInNames() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
