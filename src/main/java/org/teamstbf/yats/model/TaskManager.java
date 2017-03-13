@@ -53,7 +53,7 @@ public class TaskManager implements ReadOnlyTaskManager {
 
     public void setPersons(List<? extends ReadOnlyEvent> persons)
             throws UniqueEventList.DuplicateEventException {
-        this.events.setPersons(persons);
+        this.events.setEvents(persons);
     }
 
     public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
@@ -107,7 +107,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any person
         // in the person list.
-        events.updatePerson(index, editedPerson);
+        events.updateEvent(index, editedPerson);
     }
 
     /**

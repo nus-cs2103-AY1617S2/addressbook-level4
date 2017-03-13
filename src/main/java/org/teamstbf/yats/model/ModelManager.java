@@ -11,15 +11,15 @@ import org.teamstbf.yats.commons.util.CollectionUtil;
 import org.teamstbf.yats.commons.util.StringUtil;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
-import org.teamstbf.yats.model.item.Task;
 import org.teamstbf.yats.model.item.UniqueEventList;
 import org.teamstbf.yats.model.item.UniqueEventList.DuplicateEventException;
 import org.teamstbf.yats.model.item.UniqueEventList.EventNotFoundException;
 
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the task manager data.
  * All changes to any model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
@@ -29,7 +29,7 @@ public class ModelManager extends ComponentManager implements Model {
 	private final FilteredList<ReadOnlyEvent> filteredEvents;
 
 	/**
-	 * Initializes a ModelManager with the given addressBook and userPrefs.
+	 * Initializes a ModelManager with the given taskManager and userPrefs.
 	 */
 	public ModelManager(ReadOnlyTaskManager taskManager, UserPrefs userPrefs) {
 		super();
@@ -48,7 +48,7 @@ public class ModelManager extends ComponentManager implements Model {
 	@Override
 	public void resetData(ReadOnlyTaskManager newData) {
 		taskManager.resetData(newData);
-		indicateAddressBookChanged();
+		indicateTaskManagerChanged();
 	}
 
 	@Override
@@ -57,21 +57,21 @@ public class ModelManager extends ComponentManager implements Model {
 	}
 
 	/** Raises an event to indicate the model has changed */
-	private void indicateAddressBookChanged() {
+	private void indicateTaskManagerChanged() {
 		raise(new TaskManagerChangedEvent(taskManager));
 	}
 
 	@Override
 	public synchronized void deleteEvent(ReadOnlyEvent target) throws EventNotFoundException {
 		taskManager.removeEvent(target);
-		indicateAddressBookChanged();
+		indicateTaskManagerChanged();
 	}
 
 	@Override
 	public synchronized void addEvent(Event event) throws UniqueEventList.DuplicateEventException {
 		taskManager.addEvent(event);
 		updateFilteredListToShowAll();
-		indicateAddressBookChanged();
+		indicateTaskManagerChanged();
 	}
 
 	@Override
@@ -81,7 +81,7 @@ public class ModelManager extends ComponentManager implements Model {
 
 		int taskManagerIndex = filteredEvents.getSourceIndex(filteredEventListIndex);
 		taskManager.updateEvent(taskManagerIndex, editedEvent);
-		indicateAddressBookChanged();
+		indicateTaskManagerChanged();
 	}
 
 	@Override
@@ -90,9 +90,9 @@ public class ModelManager extends ComponentManager implements Model {
 	}
 
 	//=========== Filtered Event List Accessors =============================================================
-
+	
 	@Override
-	public UnmodifiableObservableList<ReadOnlyEvent> getFilteredEventList() {
+	public UnmodifiableObservableList<ReadOnlyEvent> getFilteredTaskList() {
 		return new UnmodifiableObservableList<>(filteredEvents);
 	}
 
@@ -104,6 +104,12 @@ public class ModelManager extends ComponentManager implements Model {
 	@Override
 	public void updateFilteredEventList(Set<String> keywords) {
 		updateFilteredEventList(new PredicateExpression(new NameQualifier(keywords)));
+	}
+	
+	@Override
+	public void sortFilteredEventList() {
+		SortedList<ReadOnlyEvent> sortedEventList = new SortedList<ReadOnlyEvent>(filteredEvents);
+		sortedEventList.sorted();
 	}
 
 	private void updateFilteredEventList(Expression expression) {

@@ -7,7 +7,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
-public class PersonCard extends UiPart<Region> {
+public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
 
@@ -26,7 +26,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    public PersonCard(ReadOnlyEvent person, int displayedIndex) {
+    public TaskCard(ReadOnlyEvent person, int displayedIndex) {
         super(FXML);
         name.setText(person.getTitle().fullName);
         id.setText(displayedIndex + ". ");
