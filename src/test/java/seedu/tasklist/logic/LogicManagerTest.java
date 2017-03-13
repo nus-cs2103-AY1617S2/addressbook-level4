@@ -412,7 +412,7 @@ public class LogicManagerTest {
         Task adam() throws Exception {
             Name name = new Name("Event");
             Comment privateComment = new Comment("urgent");
-            Priority priority = new Priority("High");
+            Priority priority = new Priority("high");
             Status status = new Status();
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
@@ -431,7 +431,7 @@ public class LogicManagerTest {
             return new FloatingTask(
                     new Name("Task " + seed),
                     new Comment("House of " + seed),
-                    new Priority("High"),
+                    new Priority("high"),
                     new Status(),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
@@ -528,7 +528,7 @@ public class LogicManagerTest {
             return new FloatingTask(
                     new Name(name),
                     new Comment("House of 1"),
-                    new Priority("High"),
+                    new Priority("high"),
                     new Status(),
                     new UniqueTagList(new Tag("tag"))
             );
