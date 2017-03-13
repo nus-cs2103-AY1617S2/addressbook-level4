@@ -1,6 +1,5 @@
 package seedu.address.model.task;
 
-import java.util.Date;
 import java.util.Objects;
 
 import seedu.address.commons.util.CollectionUtil;
@@ -37,8 +36,8 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getPriority(), source.getStatus(), 
-        		source.getNote(), source.getDeadline(), source.getTags());
+        this(source.getName(), source.getPriority(), source.getStatus(),
+                source.getNote(), source.getDeadline(), source.getTags());
     }
 
     public void setName(Name name) {
@@ -80,17 +79,17 @@ public class Task implements ReadOnlyTask {
     public Note getNote() {
         return note;
     }
-    
+
     @Override
     public Deadline getDeadline() {
-		return deadline;
-	}
+        return deadline;
+    }
 
-	public void setDeadline(Deadline deadline) {
-		this.deadline = deadline;
-	}
+    public void setDeadline(Deadline deadline) {
+        this.deadline = deadline;
+    }
 
-	@Override
+    @Override
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
     }

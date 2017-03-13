@@ -26,7 +26,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [NAME] [p/PRIORITY] [n/NOTE] [s/STATUS] [d/DEADLINE] [t/TAG]...\n"
+            + "Parameters: INDEX (must be a positive integer) "
+            + "[NAME] [p/PRIORITY] [n/NOTE] [s/STATUS] [d/DEADLINE] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 p/mid s/complete";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
@@ -82,7 +83,7 @@ public class EditCommand extends Command {
         Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
         Status updatedStatus = editTaskDescriptor.getStatus().orElseGet(taskToEdit::getStatus);
         Note updatedNote = editTaskDescriptor.getNote().orElseGet(taskToEdit::getNote);
-        Deadline updatedDeadline= editTaskDescriptor.getDeadline().orElseGet(taskToEdit::getDeadline);
+        Deadline updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(taskToEdit::getDeadline);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
         return new Task(updatedName, updatedPriority, updatedStatus, updatedNote, updatedDeadline, updatedTags);
@@ -97,7 +98,7 @@ public class EditCommand extends Command {
         private Optional<Priority> priority = Optional.empty();
         private Optional<Status> status = Optional.empty();
         private Optional<Note> note = Optional.empty();
-        private Optional<Deadline> deadline= Optional.empty();
+        private Optional<Deadline> deadline = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditTaskDescriptor() {}
@@ -115,7 +116,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.priority, this.status, this.note, this.deadline, this.tags);
+            return CollectionUtil.isAnyPresent(this.name, this.priority, this.status,
+                    this.note, this.deadline, this.tags);
         }
 
         public void setName(Optional<Name> name) {
@@ -153,7 +155,7 @@ public class EditCommand extends Command {
         public Optional<Note> getNote() {
             return note;
         }
-        
+
         public void setDeadline(Optional<Deadline> deadline) {
             assert deadline != null;
             this.deadline = deadline;

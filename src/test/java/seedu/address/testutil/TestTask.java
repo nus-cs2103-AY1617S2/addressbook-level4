@@ -50,7 +50,7 @@ public class TestTask implements ReadOnlyTask {
     public void setPriority(Priority priority) {
         this.priority = priority;
     }
-    
+
     public void setDeadline(Deadline deadline) {
         this.deadline = deadline;
     }
@@ -78,11 +78,11 @@ public class TestTask implements ReadOnlyTask {
     public Note getNote() {
         return note;
     }
-    
+
     @Override
-	public Deadline getDeadline() {
-		return deadline;
-	}
+    public Deadline getDeadline() {
+        return deadline;
+    }
 
     @Override
     public UniqueTagList getTags() {

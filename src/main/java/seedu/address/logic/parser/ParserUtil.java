@@ -98,7 +98,7 @@ public class ParserUtil {
         assert email != null;
         return email.isPresent() ? Optional.of(new Status(email.get())) : Optional.empty();
     }
-    
+
     /**
      * Parses a {@code Optional<String> deadline} into an {@code Optional<Deadline>} if {@code deadline} is present.
      */

@@ -35,15 +35,15 @@ public class Deadline {
     public Deadline(String deadline) throws IllegalValueException {
         assert deadline != null;
         Date deadlineObj = null;
-		try {
-			deadlineObj = formatter.parse(deadline);
-			if (!isValidDeadline(deadlineObj)) {
-	            throw new IllegalValueException(MESSAGE_DEADLINE_CONSTRAINTS);
-	        }
-		} catch (ParseException e) {
-			e.printStackTrace();
-			throw new IllegalValueException(MESSAGE_DEADLINE_CONSTRAINTS);
-		}
+        try {
+            deadlineObj = formatter.parse(deadline);
+            if (!isValidDeadline(deadlineObj)) {
+                throw new IllegalValueException(MESSAGE_DEADLINE_CONSTRAINTS);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+            throw new IllegalValueException(MESSAGE_DEADLINE_CONSTRAINTS);
+        }
         this.deadline = deadlineObj;
     }
 
@@ -53,13 +53,13 @@ public class Deadline {
     public static boolean isValidDeadline(Date test) {
         return test.after(new Date());
     }
-    
+
     public static boolean isValidDeadline(String test) {
         try {
-			return formatter.parse(test).after(new Date());
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+            return formatter.parse(test).after(new Date());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 

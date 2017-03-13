@@ -8,10 +8,10 @@ import java.util.Date;
 import org.junit.Test;
 
 public class DeadlineTest {
-	
-	public static Date CURRENT_DATE = new Date();
-	
-	@Test
+
+    public static Date CURRENT_DATE = new Date();
+
+    @Test
     public void isValidDeadline() {
         // invalid deadline
         assertFalse(Deadline.isValidDeadline("03/12/2016")); // inputs a date earlier than the current date
