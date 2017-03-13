@@ -48,6 +48,7 @@ public class AddCommandParser {
         final String flag = matcher.group("flag");
         final String name = matcher.group("name");
         
+        //parse time
         PrettyTimeParser timeParser = new PrettyTimeParser();
         Optional<String> deadline = argsTokenizer.getValue(PREFIX_DEADLINE);
         List<Date> parsedDeadline = null;
@@ -55,12 +56,18 @@ public class AddCommandParser {
         	parsedDeadline = timeParser.parse(deadline.get());        	
         }
         
+        //empty string as default if no description
+        String description = "";
+        if (argsTokenizer.getValue(PREFIX_DESCRIPTION).isPresent()) {
+        	description = argsTokenizer.getValue(PREFIX_DESCRIPTION).get();
+        }
+        
         switch (flag) {
         	case AddCommand.EVENT_FLAG:
         		//TODO when events are supported
         		return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         	case AddCommand.TASK_FLAG:
-        		return addTask(argsTokenizer, name, parsedDeadline);
+        		return addTask(argsTokenizer, name, parsedDeadline, description);
         	default:
         		//TODO error
         		return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
@@ -68,13 +75,13 @@ public class AddCommandParser {
         
     }
     
-    private Command addTask(ArgumentTokenizer argsTokenizer, String name, List<Date> parsedDeadline) {
+    private Command addTask(ArgumentTokenizer argsTokenizer, String name, List<Date> parsedDeadline, String description) {
     	try {
     		return new AddCommand(
     				name,
     				parsedDeadline,
     				argsTokenizer.getValue(PREFIX_PRIORITY).get(),
-    				argsTokenizer.getValue(PREFIX_DESCRIPTION).get(),
+    				description,
     				ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)));
     	} catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
