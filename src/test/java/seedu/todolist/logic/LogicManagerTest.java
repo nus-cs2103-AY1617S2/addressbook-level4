@@ -409,8 +409,8 @@ public class LogicManagerTest {
 
         Task finishUserReport() throws Exception {
             Name name = new Name("Adam Brown");
-            StartTime startTime = new StartTime("09/03/2017 4.55 PM");
-            EndTime endTime = new EndTime("09/03/2017 8.30 PM");
+            StartTime startTime = new StartTime("09-03-2017 4.55 PM");
+            EndTime endTime = new EndTime("09-03-2017 8.30 PM");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
@@ -427,8 +427,8 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Name("Person " + seed),
-                    new StartTime("01/01/2017 4.00 PM"),
-                    new EndTime("01/01/2017 5.00 PM"),
+                    new StartTime("01-01-2017 4.00 PM"),
+                    new EndTime("01-01-2017 5.00 PM"),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -522,8 +522,8 @@ public class LogicManagerTest {
         Task generateTaskWithName(String name) throws Exception {
             return new Task(
                     new Name(name),
-                    new StartTime("01/01/1995 4.00 PM"),
-                    new EndTime("01/01/1995 5.00 PM"),
+                    new StartTime("01-01-1995 4.00 PM"),
+                    new EndTime("01-01-1995 5.00 PM"),
                     new UniqueTagList(new Tag("tag"))
             );
         }
