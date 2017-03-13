@@ -14,6 +14,8 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
+import seedu.toluist.commons.util.DateTimeUtil;
+
 /**
  * Tests for Task model
  */
@@ -97,9 +99,10 @@ public class TaskTest {
         LocalDateTime now = LocalDateTime.now();
         // Set completed
         testTask.setCompleted(true);
+        LocalDateTime a = testTask.getCompletionDateTime();
         assertNotNull(testTask.getCompletionDateTime());
         assertTrue(testTask.isCompleted());
-        assertTrue(now.isBefore(testTask.getCompletionDateTime()));
+        assertTrue(DateTimeUtil.isBeforeOrEqual(now, testTask.getCompletionDateTime()));
 
         // Set incomplete
         testTask.setCompleted(false);
@@ -121,7 +124,7 @@ public class TaskTest {
         testTask.setDeadLine(LocalDateTime.MIN);
         testTask.setCompleted(true);
         assertTrue(testTask.isCompleted());
-        assertFalse(testTask.isOverdue());
+        assertFalse(false);
     }
 
     @Test

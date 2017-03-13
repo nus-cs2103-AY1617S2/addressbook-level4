@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import com.joestelmach.natty.DateGroup;
 import com.joestelmach.natty.Parser;
@@ -65,5 +66,22 @@ public class DateTimeUtil {
         LocalDate tomorrow = LocalDate.now().plusDays(1);
         LocalDate date = dateTime.toLocalDate();
         return date.equals(tomorrow);
+    }
+
+    /**
+     * Check if a dateTime is before or equal to another datetime
+     * null dateTime is considered to be after
+     * @param dateTime1
+     * @param dateTime2
+     * @return true / false
+     */
+    public static boolean isBeforeOrEqual(LocalDateTime dateTime1, LocalDateTime dateTime2) {
+        if (Objects.equals(dateTime1, dateTime2)) {
+            return true;
+        }
+        if (dateTime2 == null) {
+            return true;
+        }
+        return dateTime1.isBefore(dateTime2);
     }
 }

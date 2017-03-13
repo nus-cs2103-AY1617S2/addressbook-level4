@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 
+import seedu.toluist.commons.util.DateTimeUtil;
+
 /**
  * Represents a Task
  */
@@ -127,7 +129,7 @@ public class Task implements Comparable<Task> {
     }
 
     public boolean isOverdue() {
-        return !isCompleted() && endDateTime != null && endDateTime.isBefore(LocalDateTime.now());
+        return !isCompleted() && endDateTime != null && DateTimeUtil.isBeforeOrEqual(endDateTime, LocalDateTime.now());
     }
 
     public boolean isFloatingTask() {
@@ -143,7 +145,7 @@ public class Task implements Comparable<Task> {
     }
 
     public boolean isCompleted() {
-        return completionDateTime != null && completionDateTime.isBefore(LocalDateTime.now());
+        return completionDateTime != null && DateTimeUtil.isBeforeOrEqual(completionDateTime, LocalDateTime.now());
     }
 
     public boolean isAnyKeywordsContainedInDescriptionIgnoreCase(String[] keywords) {
@@ -172,18 +174,10 @@ public class Task implements Comparable<Task> {
      * Floating tasks are put to the end
      */
     public int compareTo(Task comparison) {
-        if (endDateTime == null && comparison.endDateTime != null) {
-            return 1;
-        }
-        if (endDateTime != null && comparison.endDateTime == null) {
-            return -1;
-        }
-        if (endDateTime != null && comparison.endDateTime != null
-            && endDateTime.compareTo(comparison.endDateTime) != 0) {
-            return endDateTime.compareTo(comparison.endDateTime);
-        } else if (startDateTime != null && comparison.startDateTime != null
-            && startDateTime.compareTo(comparison.startDateTime) != 0) {
-            return startDateTime.compareTo(comparison.startDateTime);
+        if (!Objects.equals(endDateTime, comparison.endDateTime)) {
+            return DateTimeUtil.isBeforeOrEqual(endDateTime, comparison.endDateTime) ? -1 : 1;
+        } else if (!Objects.equals(startDateTime, comparison.startDateTime)) {
+            return DateTimeUtil.isBeforeOrEqual(startDateTime, comparison.startDateTime) ? -1 : 1;
         } else if (priority.compareTo(comparison.priority) != 0) {
             return priority.compareTo(comparison.priority);
         } else {
