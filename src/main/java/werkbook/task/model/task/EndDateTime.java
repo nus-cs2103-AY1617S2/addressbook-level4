@@ -51,6 +51,10 @@ public class EndDateTime {
         return true;
     }
 
+    public boolean isPresent() {
+        return this.value.isPresent();
+    }
+
     @Override
     public String toString() {
         if (this.value.isPresent()) {

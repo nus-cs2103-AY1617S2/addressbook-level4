@@ -10,6 +10,7 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import werkbook.task.commons.core.UnmodifiableObservableList;
+import werkbook.task.commons.exceptions.IllegalValueException;
 import werkbook.task.model.tag.Tag;
 import werkbook.task.model.tag.UniqueTagList;
 import werkbook.task.model.task.ReadOnlyTask;
@@ -106,7 +107,13 @@ public class TaskList implements ReadOnlyTaskList {
             throws UniqueTaskList.DuplicateTaskException {
         assert editedReadOnlyTask != null;
 
-        Task editedTask = new Task(editedReadOnlyTask);
+        Task editedTask = null;
+        try {
+            editedTask = new Task(editedReadOnlyTask);
+        } catch (IllegalValueException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         syncMasterTagListWith(editedTask);
         // TODO: the tags master list will be updated even though the below line
         // fails.
