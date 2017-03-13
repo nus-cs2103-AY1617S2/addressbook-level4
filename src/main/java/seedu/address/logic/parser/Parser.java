@@ -58,6 +58,7 @@ public class Parser {
 
         case CompleteCommand.COMMAND_WORD:
             return new CompleteCommandParser().parse(arguments);
+            
         case IncompleteCommand.COMMAND_WORD:
             return new IncompleteCommandParser().parse(arguments);
             

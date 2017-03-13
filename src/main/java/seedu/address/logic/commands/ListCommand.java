@@ -15,6 +15,7 @@ public class ListCommand extends Command {
     public CommandResult execute() {
         model.updateFilteredListToShowAll();
         model.updateFilteredListToShowAllFloatingTasks();
+        model.updateFilteredListToShowAllCompletedTasks();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

@@ -30,29 +30,21 @@ public class EditCommandParser {
      */
     public Command parse(String args) {
         assert args != null;
+        if (StringUtil.isUnsignedInteger(Character.toString(args.charAt(1)))) {
+            args = "non-floating " + args;
+        }
         ArgumentTokenizer argsTokenizer =
                 new ArgumentTokenizer(PREFIX_DATE, PREFIX_PRIORITY, PREFIX_INSTRUCTION, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 3);
-        Optional<String> listNameOrIndex = preambleFields.get(0);
-        Optional<String> index;
-        if (!listNameOrIndex.isPresent()) {
+        Optional<String> targetList = preambleFields.get(0);
+        Optional<String> index = preambleFields.get(1);
+        if (!targetList.isPresent() || !index.isPresent() || !StringUtil.isUnsignedInteger(index.get())) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
-        String listNameOrIndexString = listNameOrIndex.get();
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
-            if (!StringUtil.isUnsignedInteger(listNameOrIndexString)) {
-                index = preambleFields.get(1);
-                if (!index.isPresent() || !StringUtil.isUnsignedInteger(index.get())) {
-                    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                            EditCommand.MESSAGE_USAGE));
-                }
-                editTaskDescriptor.setTitle(ParserUtil.parseTitle(preambleFields.get(2)));
-            } else {
-                index = listNameOrIndex;
-                editTaskDescriptor.setTitle(ParserUtil.parseTitle(preambleFields.get(1)));
-            }
+            editTaskDescriptor.setTitle(ParserUtil.parseTitle(preambleFields.get(2)));
             editTaskDescriptor.setDate(ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_DATE)));
             editTaskDescriptor.setPriority(ParserUtil.parsePriority(argsTokenizer.getValue(PREFIX_PRIORITY)));
             editTaskDescriptor.setInstruction(ParserUtil.parseInstruction(argsTokenizer.getValue(PREFIX_INSTRUCTION)));
@@ -65,7 +57,7 @@ public class EditCommandParser {
             return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(listNameOrIndex.get(), Integer.parseInt(index.get()), editTaskDescriptor);
+        return new EditCommand(targetList.get(), Integer.parseInt(index.get()), editTaskDescriptor);
     }
 
     /**

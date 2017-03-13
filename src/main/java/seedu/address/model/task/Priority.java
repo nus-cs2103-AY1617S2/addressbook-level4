@@ -29,9 +29,9 @@ public class Priority {
     public static final String PRIORITY_LEVEL_4 = "4";
     public static final String PRIORITY_LEVEL_5 = "5";
 
-    public String value;
+    //public String value;
     public HashMap<String, String> priorityMap = new HashMap<String, String>();
-    public String number;
+    public final String value;
     
 
     /**
@@ -54,7 +54,8 @@ public class Priority {
             throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
         }
         
-        int actualValue = Integer.parseInt(trimmedPriority);
+        /*int actualValue = Integer.parseInt(trimmedPriority);
+        
         if (actualValue < 0) { // means task is completed
         	this.number = trimmedPriority;
         	this.value = PRIORITY_LEVEL_DONE;
@@ -65,7 +66,8 @@ public class Priority {
         	this.value = priorityMap.get(trimmedPriority); // string word
         	this.number = trimmedPriority; // string number
         }
-
+        */
+        this.value = trimmedPriority;
         
         
     }
@@ -79,30 +81,26 @@ public class Priority {
 
     @Override
     public String toString() {
-        return value;
+        if (Integer.parseInt(value) < 0) {
+            return PRIORITY_LEVEL_DONE;
+        } else {
+            return priorityMap.get(value);
+        }
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Priority // instanceof handles nulls
-                && this.number.equals(((Priority) other).number)); // state check
+                && this.value.equals(((Priority) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return number.hashCode();
+        return value.hashCode();
     }
-    
-    public void setAsComplete() {
-    	String negativeNum = "-" + this.number;
-    	this.number = negativeNum;
-        this.value = PRIORITY_LEVEL_DONE;
-    }
-    
-    public void setAsIncomplete() {
-    	String toBeReplaced = priorityMap.get(this.number.substring(1));
-    	this.value = toBeReplaced;
-    	this.number = this.number.substring(1);
+
+    public boolean isCompleted() {
+        return Integer.parseInt(value) < 0;
     }
 }

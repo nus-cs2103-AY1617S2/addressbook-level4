@@ -12,7 +12,7 @@ public class AddressBookChangedEvent extends BaseEvent {
     public final ReadOnlyAddressBook data;
     public UnmodifiableObservableList<ReadOnlyTask> nonFloatingTasks;
     public UnmodifiableObservableList<ReadOnlyTask> floatingTasks;
-    //public final UnmodifiableObservableList<ReadOnlyTask> completedTasks;
+    public UnmodifiableObservableList<ReadOnlyTask> completedTasks;
 
     //UNDO OR REDO HERE
     public AddressBookChangedEvent(ReadOnlyAddressBook data) {
@@ -25,6 +25,10 @@ public class AddressBookChangedEvent extends BaseEvent {
     
     public void setFloatingTasks(UnmodifiableObservableList<ReadOnlyTask> floatingTasks) {
         this.floatingTasks = floatingTasks;
+    }
+    
+    public void setCompletedTasks(UnmodifiableObservableList<ReadOnlyTask> completedTasks) {
+        this.completedTasks = completedTasks;
     }
 
     @Override

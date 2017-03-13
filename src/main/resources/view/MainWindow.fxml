@@ -57,6 +57,14 @@
                   <AnchorPane fx:id="floatingTaskListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
+            <VBox fx:id="completedTaskList" minWidth="330" prefWidth="330">
+                <padding>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                </padding>
+               <children>
+                  <AnchorPane fx:id="completedTaskListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
             <!--
             <AnchorPane fx:id="browserPlaceholder" prefWidth="340">
                 <padding>

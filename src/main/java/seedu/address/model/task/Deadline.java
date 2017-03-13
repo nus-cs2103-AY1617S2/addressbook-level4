@@ -26,6 +26,7 @@ public class Deadline {
             + "Please paraphrase it or choose another date.";
     public static final String DATE_VALIDATION_REGEX = "[\\s | [a-zA-Z0-9,/:-]]+";
     public static final String DATE_FORMAT = "EEE, MMM d yyyy HH:mm";
+    public static final String DATE_TYPE_FLOATING = "floating";
 
     public final String value;
     private final List<DateGroup> parsedDeadline;
@@ -88,6 +89,13 @@ public class Deadline {
             return parsedDeadline.get(0).isRecurring();
         }
         return false;
+    }
+    
+    /**
+     * Returns true if the deadline type is floating.
+     */
+    public boolean isFloating() {
+        return this.value.equals(DATE_TYPE_FLOATING);
     }
 
     /**

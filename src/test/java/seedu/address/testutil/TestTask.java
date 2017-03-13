@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Instruction;
@@ -52,6 +53,16 @@ public class TestTask implements ReadOnlyTask {
     public void setTags(UniqueTagList tags) {
         this.tags = tags;
     }
+    
+    @Override
+    public boolean isCompleted() {
+        return priority.isCompleted();
+    }
+    
+    @Override
+    public boolean isFloating() {
+        return date.isFloating();
+    }
 
     @Override
     public Title getTitle() {
@@ -88,8 +99,32 @@ public class TestTask implements ReadOnlyTask {
         sb.append("add " + this.getTitle().title + " ");
         sb.append("i/" + this.getInstruction().value + " ");
         sb.append("d/" + this.getDeadline().toString() + " ");
-        sb.append("p/" + this.getPriority().value + " ");
+        sb.append("p/" + this.getPriority().toString() + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
+    }
+
+    @Override
+    public void setAsCompleted() {
+        if (!isCompleted()) {
+            int currentPriorityValue = Integer.parseInt(priority.value);
+            int newPriorityValue = currentPriorityValue * (-1);
+            try {
+                this.priority = new Priority(Integer.toString(newPriorityValue));
+            } catch (IllegalValueException e) {
+            }
+        }
+    }
+    
+    @Override
+    public void setAsIncompleted() {
+        if (isCompleted()) {
+            int currentPriorityValue = Integer.parseInt(priority.value);
+            int newPriorityValue = currentPriorityValue * (-1);
+            try {
+                this.priority = new Priority(Integer.toString(newPriorityValue));
+            } catch (IllegalValueException e) {
+            }
+        }
     }
 }

@@ -39,6 +39,9 @@ public abstract class Command {
         case ReadOnlyTask.TASK_NAME_NON_FLOATING:
             lastShownList = model.getNonFloatingTaskList();
             break;
+        case ReadOnlyTask.TASK_NAME_COMPLETED:
+            lastShownList = model.getCompletedTaskList();
+            break;
         default:
             lastShownList = model.getNonFloatingTaskList();
             break;

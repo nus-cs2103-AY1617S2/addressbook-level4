@@ -2,6 +2,7 @@ package seedu.address.model.task;
 
 import java.util.Objects;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -102,6 +103,40 @@ public class Task implements ReadOnlyTask {
         this.setPriority(replacement.getPriority());
         this.setInstruction(replacement.getInstruction());
         this.setTags(replacement.getTags());
+    }
+    
+    @Override
+    public boolean isFloating() {
+        return date.isFloating();
+    }
+    
+    @Override
+    public boolean isCompleted() {
+        return priority.isCompleted();
+    }
+    
+    @Override
+    public void setAsCompleted() {
+        if (!isCompleted()) {
+            int currentPriorityValue = Integer.parseInt(priority.value);
+            int newPriorityValue = currentPriorityValue * (-1);
+            try {
+                this.priority = new Priority(Integer.toString(newPriorityValue));
+            } catch (IllegalValueException e) {
+            }
+        }
+    }
+    
+    @Override
+    public void setAsIncompleted() {
+        if (isCompleted()) {
+            int currentPriorityValue = Integer.parseInt(priority.value);
+            int newPriorityValue = currentPriorityValue * (-1);
+            try {
+                this.priority = new Priority(Integer.toString(newPriorityValue));
+            } catch (IllegalValueException e) {
+            }
+        }
     }
 
     @Override

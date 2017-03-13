@@ -31,8 +31,10 @@ public class ParserUtil {
             + Task.TASK_NAME_FLOATING
             + "|"
             + Task.TASK_NAME_NON_FLOATING
+            + "|"
+            + Task.TASK_NAME_COMPLETED
             + ")?)"
-            + "(\\s?)(?<targetIndex>[1-9]+)"
+            + "(\\s?)(?<targetIndex>[0-9]+)"
             );
 
     /**

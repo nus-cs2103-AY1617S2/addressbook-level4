@@ -32,7 +32,7 @@ public class TaskCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         date.setText(task.getDeadline().toString());
         instruction.setText(task.getInstruction().value);
-        priority.setText(task.getPriority().value);
+        priority.setText(task.getPriority().toString());
         initTags(task);
     }
 

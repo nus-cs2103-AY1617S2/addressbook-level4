@@ -43,6 +43,7 @@ public class MainWindow extends UiPart<Region> {
     //private BrowserPanel browserPanel;
     private TaskListPanel nonFloatingTaskListPanel;
     private TaskListPanel floatingTaskListPanel;
+    private TaskListPanel completedTaskListPanel;
     private Config config;
 
     @FXML
@@ -59,6 +60,9 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private AnchorPane floatingTaskListPanelPlaceholder;
+    
+    @FXML
+    private AnchorPane completedTaskListPanelPlaceholder;
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
@@ -134,6 +138,10 @@ public class MainWindow extends UiPart<Region> {
                 getFloatingTaskListPlaceholder(),
                 logic.getFilteredFloatingTaskList()
                 );
+        completedTaskListPanel = new TaskListPanel(
+                getCompletedTaskListPlaceholder(),
+                logic.getFilteredCompletedTaskList()
+                );
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
@@ -157,6 +165,10 @@ public class MainWindow extends UiPart<Region> {
 
     private AnchorPane getFloatingTaskListPlaceholder() {
         return floatingTaskListPanelPlaceholder;
+    }
+    
+    private AnchorPane getCompletedTaskListPlaceholder() {
+        return completedTaskListPanelPlaceholder;
     }
 
     void hide() {
@@ -225,6 +237,10 @@ public class MainWindow extends UiPart<Region> {
     public TaskListPanel getFloatingTaskListPanel() {
         return this.floatingTaskListPanel;
     }
+    
+    public TaskListPanel getCompletedTaskListPanel() {
+        return this.completedTaskListPanel;
+    }
 
     /*
     void loadTaskPage(ReadOnlyTask task) {
@@ -249,6 +265,10 @@ public class MainWindow extends UiPart<Region> {
             floatingTaskListPanel = new TaskListPanel(
                     getFloatingTaskListPlaceholder(),
                     abce.floatingTasks
+                    );
+            completedTaskListPanel = new TaskListPanel(
+                    getCompletedTaskListPlaceholder(),
+                    abce.completedTasks
                     );
         }
         

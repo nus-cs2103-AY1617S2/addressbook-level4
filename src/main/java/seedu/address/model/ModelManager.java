@@ -32,7 +32,7 @@ public class ModelManager extends ComponentManager implements Model {
     
     public FilteredList<ReadOnlyTask> nonFloatingTasks;
     public FilteredList<ReadOnlyTask> floatingTasks;
-    //public final FilteredList<ReadOnlyTask> completedTasks;
+    public FilteredList<ReadOnlyTask> completedTasks;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -49,7 +49,7 @@ public class ModelManager extends ComponentManager implements Model {
         this.currentAddressBook = new AddressBook(this.addressBookStates.get(this.currentAddressBookStateIndex));
 
         setAddressBookState();
-    } 
+    }
 
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
@@ -58,8 +58,10 @@ public class ModelManager extends ComponentManager implements Model {
     public void setAddressBookState() {
         this.nonFloatingTasks = new FilteredList<>(this.currentAddressBook.getTaskList());
         this.floatingTasks = new FilteredList<>(this.currentAddressBook.getTaskList());
+        this.completedTasks = new FilteredList<>(this.currentAddressBook.getTaskList());
         updateFilteredListToShowAll();
         updateFilteredListToShowAllFloatingTasks();
+        updateFilteredListToShowAllCompletedTasks();
     }
     
     /**
@@ -93,6 +95,7 @@ public class ModelManager extends ComponentManager implements Model {
         AddressBookChangedEvent abce = new AddressBookChangedEvent(this.currentAddressBook);
         abce.setFloatingTasks(getFloatingTaskList());
         abce.setNonFloatingTasks(getNonFloatingTaskList());
+        abce.setCompletedTasks(getCompletedTaskList());
         raise(abce);
     }
     
@@ -136,10 +139,22 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateTask(String targetList, int taskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
-        int addressBookIndex = this.nonFloatingTasks.getSourceIndex(taskListIndex);
-        if (targetList.equals("floating")) {
+        int addressBookIndex = 0;
+        switch (targetList) {
+        case Task.TASK_NAME_FLOATING:
             addressBookIndex = this.floatingTasks.getSourceIndex(taskListIndex);
+            break;
+        case Task.TASK_NAME_COMPLETED:
+            addressBookIndex = this.completedTasks.getSourceIndex(taskListIndex);
+            break;
+        case Task.TASK_NAME_NON_FLOATING:
+            addressBookIndex = this.nonFloatingTasks.getSourceIndex(taskListIndex);
+            break;
+        default:
+            addressBookIndex = this.nonFloatingTasks.getSourceIndex(taskListIndex);
+            break;
         }
+
         this.currentAddressBook.updateTask(addressBookIndex, editedTask);
         recordCurrentStateOfAddressBook();
         indicateAddressBookChanged();
@@ -152,17 +167,29 @@ public class ModelManager extends ComponentManager implements Model {
         return new UnmodifiableObservableList<>(this.nonFloatingTasks);
     }
 
+    @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFloatingTaskList() {
         return new UnmodifiableObservableList<>(this.floatingTasks);
+    }
+    
+    @Override
+    public UnmodifiableObservableList<ReadOnlyTask> getCompletedTaskList() {
+        return new UnmodifiableObservableList<>(this.completedTasks);
     }
 
     @Override
     public void updateFilteredListToShowAll() {
         this.nonFloatingTasks.setPredicate(new PredicateExpression(new DateNotFloatingQualifier())::satisfies);
     }
-
+    
+    @Override
     public void updateFilteredListToShowAllFloatingTasks() {
         this.floatingTasks.setPredicate(new PredicateExpression(new DateFloatingQualifier())::satisfies);
+    }
+    
+    @Override
+    public void updateFilteredListToShowAllCompletedTasks() {
+        this.completedTasks.setPredicate(new PredicateExpression(new TaskIsCompleteQualifier())::satisfies);
     }
 
     @Override
@@ -173,6 +200,7 @@ public class ModelManager extends ComponentManager implements Model {
     private void updateFilteredTaskList(Expression expression) {
         this.nonFloatingTasks.setPredicate(expression::satisfies);
         this.floatingTasks.setPredicate(expression::satisfies);
+        this.completedTasks.setPredicate(expression::satisfies);
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
@@ -235,7 +263,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return task.getDeadline().toString().equals("floating");
+            return !task.isCompleted() && task.isFloating();
         }
 
     }
@@ -244,7 +272,16 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return !task.getDeadline().toString().equals("floating");
+            return !task.isCompleted() && !task.isFloating();
+        }
+
+    }
+    
+    private class TaskIsCompleteQualifier implements Qualifier {
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return task.isCompleted();
         }
 
     }
