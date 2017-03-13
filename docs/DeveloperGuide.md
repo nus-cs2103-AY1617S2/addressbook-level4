@@ -79,7 +79,7 @@ Our target users (eg. `Jim`) are people who:
 * usually work alone on their personal or office computer
 * do not share their computer with others
 * prefer a command-line approach over a mouse-clicking approach
-* would like to have an organized set up of tasks to categorize, sort, and prioritise them for ease of task management  
+* would like to have an organized set up of tasks to categorize, sort, and prioritise them for ease of task management
 
 
 ## Design
