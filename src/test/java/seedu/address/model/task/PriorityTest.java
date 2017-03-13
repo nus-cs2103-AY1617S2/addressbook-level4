@@ -31,6 +31,7 @@ public class PriorityTest {
 
     @Test (expected = IllegalValueException.class)
     public void initialisePriorityWithInvalidArgs() throws IllegalValueException {
+        @SuppressWarnings("unused")
         Priority invalidPriority = new Priority("invalid");
     }
 

@@ -89,8 +89,9 @@ public class Priority {
             return PRIORITY_MEDIUM;
         case LOW:
             return PRIORITY_LOW;
+        default:
+            throw new AssertionError();
         }
-        throw new AssertionError();
     }
 
     public static Priority.Type parseXmlString(String priority) throws IllegalValueException {
