@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -13,7 +14,7 @@ import java.util.Optional;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -29,7 +30,7 @@ public class EditCommandParser {
     public Command parse(String args) {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_START_DATE, PREFIX_TAG);
+                new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_START_DATE, PREFIX_END_DATE, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
@@ -38,21 +39,22 @@ public class EditCommandParser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
-            editPersonDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
-            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argsTokenizer.getValue(PREFIX_PRIORITY)));
-            editPersonDescriptor.setEmail(ParserUtil.parseEmail(argsTokenizer.getValue(PREFIX_START_DATE)));
-            editPersonDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
+            editTaskDescriptor.setDescription(ParserUtil.parseDescription(preambleFields.get(1)));
+            editTaskDescriptor.setPriority(ParserUtil.parsePhone(argsTokenizer.getValue(PREFIX_PRIORITY)));
+            editTaskDescriptor.setStartDate(ParserUtil.parseEmail(argsTokenizer.getValue(PREFIX_START_DATE)));
+            editTaskDescriptor.setEndDate(ParserUtil.parseEmail(argsTokenizer.getValue(PREFIX_END_DATE)));
+            editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
 
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
+        if (!editTaskDescriptor.isAnyFieldEdited()) {
             return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index.get(), editPersonDescriptor);
+        return new EditCommand(index.get(), editTaskDescriptor);
     }
 
     /**

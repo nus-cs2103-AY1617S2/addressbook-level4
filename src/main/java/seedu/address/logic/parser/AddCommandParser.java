@@ -26,12 +26,30 @@ public class AddCommandParser {
         ArgumentTokenizer argsTokenizer =
                 new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_START_DATE, PREFIX_END_DATE, PREFIX_TAG);
         argsTokenizer.tokenize(args);
+        String priority, startDate, endDate;
+
+        try {
+            priority = argsTokenizer.getValue(PREFIX_PRIORITY).get();
+        } catch (NoSuchElementException e) {
+            priority = null;
+        }
+
+        try {
+            startDate = argsTokenizer.getValue(PREFIX_START_DATE).get();
+        } catch (NoSuchElementException e) {
+            startDate = null;
+        }
+
+        try {
+            endDate = argsTokenizer.getValue(PREFIX_END_DATE).get();
+        } catch (NoSuchElementException e) {
+            endDate = null;
+        }
+
         try {
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
-                    argsTokenizer.getValue(PREFIX_PRIORITY).get(),
-                    argsTokenizer.getValue(PREFIX_START_DATE).get(),
-                    argsTokenizer.getValue(PREFIX_END_DATE).get(),
+                    priority, startDate, endDate,
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
             );
         } catch (NoSuchElementException nsee) {

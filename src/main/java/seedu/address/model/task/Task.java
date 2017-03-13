@@ -15,6 +15,7 @@ public class Task implements ReadOnlyTask {
     private Priority priority;
     private TaskDate startDate;
     private TaskDate endDate;
+    private boolean complete;
 
     private UniqueTagList tags;
 
@@ -27,7 +28,7 @@ public class Task implements ReadOnlyTask {
         this.priority = priority;
         this.startDate = startDate;
         this.endDate = endDate;
-
+        this.complete = false;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -77,6 +78,14 @@ public class Task implements ReadOnlyTask {
     @Override
     public TaskDate getEndDate() {
         return endDate;
+    }
+
+    public void setComplete() {
+        this.complete = true;
+    }
+
+    public boolean isComplete() {
+        return this.complete;
     }
 
     @Override
