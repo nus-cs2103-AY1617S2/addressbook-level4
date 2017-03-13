@@ -34,10 +34,7 @@ public interface ReadOnlyTask {
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-               .append(" Start Time: " + getStartTime().toString())
-               .append(" End Time: " + getEndTime().toString())
-                .append(" Tags: ");
+        builder.append(getName());
         if (getStartTime() != null) {
             builder.append(" Start Time: " + getStartTime().toString());
         }
