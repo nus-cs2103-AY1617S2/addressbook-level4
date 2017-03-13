@@ -8,7 +8,7 @@ import javafx.stage.Stage;
  */
 public class HelpFormatWindowHandle extends GuiHandle {
 
-    private static final String HELP_WINDOW_TITLE = "Summary";
+    private static final String HELP_WINDOW_TITLE = "Command Summary";
     private static final String HELP_WINDOW_ROOT_FIELD_ID = "#helpWindowRoot";
 
     public HelpFormatWindowHandle(GuiRobot guiRobot, Stage primaryStage) {
