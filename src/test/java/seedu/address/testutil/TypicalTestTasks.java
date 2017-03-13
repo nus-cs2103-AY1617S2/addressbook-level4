@@ -46,10 +46,16 @@ public class TypicalTestTasks {
                     .withInformation("Information 7").build();
 
             // Manually added
-            task8 = new TaskBuilder().withName("Task8").withDeadline("888888")
-                    .withPriorityLevel("4").withInformation("Information 8").build();
-            task9 = new TaskBuilder().withName("Task9").withDeadline("999999")
-                    .withPriorityLevel("1").withInformation("Information 9").build();
+            task8 = new TaskBuilder().withName("Task8")
+                    .withDeadline("888888")
+                    .withPriorityLevel("4")
+                    .withInformation("Information 8").build();
+
+            task9 = new TaskBuilder().withName("Task9")
+                    .withDeadline("999999")
+                    .withPriorityLevel("1")
+                    .withInformation("Information 9").build();
+
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
