@@ -78,6 +78,7 @@ public class Parser {
             return new QuitCommand();
 
         case DoneCommand.COMMAND_WORD:
+        case DoneCommand.SHORT_COMMAND_WORD:
             return new DoneCommandParser().parse(arguments);
 
         case HelpCommand.COMMAND_WORD:
