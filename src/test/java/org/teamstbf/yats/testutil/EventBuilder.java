@@ -1,11 +1,11 @@
 package org.teamstbf.yats.testutil;
 
 import org.teamstbf.yats.commons.exceptions.IllegalValueException;
-import org.teamstbf.yats.model.item.Deadline;
+import org.teamstbf.yats.model.item.Date;
 import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.Location;
 import org.teamstbf.yats.model.item.Periodic;
-import org.teamstbf.yats.model.item.Timing;
+import org.teamstbf.yats.model.item.Schedule;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.tag.Tag;
 import org.teamstbf.yats.model.tag.UniqueTagList;
@@ -52,12 +52,12 @@ public class EventBuilder {
     }
 
     public EventBuilder withStartTime(String timing) throws IllegalValueException {
-        this.task.setStartTime(new Timing(timing));
+        this.task.setStartTime(new Schedule(timing));
         return this;
     }
     
     public EventBuilder withEndTime(String timing) throws IllegalValueException {
-        this.task.setEndTime(new Timing(timing));
+        this.task.setEndTime(new Schedule(timing));
         return this;
     }
     

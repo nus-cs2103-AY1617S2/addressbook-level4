@@ -38,13 +38,13 @@ import org.teamstbf.yats.model.Model;
 import org.teamstbf.yats.model.ModelManager;
 import org.teamstbf.yats.model.ReadOnlyTaskManager;
 import org.teamstbf.yats.model.TaskManager;
-import org.teamstbf.yats.model.item.Deadline;
+import org.teamstbf.yats.model.item.Date;
 import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.Location;
 import org.teamstbf.yats.model.item.Periodic;
-import org.teamstbf.yats.model.item.Timing;
+import org.teamstbf.yats.model.item.Schedule;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.tag.Tag;
 import org.teamstbf.yats.model.tag.UniqueTagList;
@@ -204,9 +204,9 @@ public class LogicManagerTest {
         assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
                 Title.MESSAGE_NAME_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
-                Deadline.MESSAGE_DEADLINE_CONSTRAINTS);
+                Date.MESSAGE_DEADLINE_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
-                Timing.MESSAGE_TIMING_CONSTRAINTS);
+                Schedule.MESSAGE_TIMING_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
@@ -423,8 +423,8 @@ public class LogicManagerTest {
             Title name = new Title("sleep");
             Location location = new Location("bed");
             Periodic period = new Periodic("none");
-            Timing startTime = new Timing("12:00am");
-            Timing endTime = new Timing("8:00am");
+            Schedule startTime = new Schedule("12:00am");
+            Schedule endTime = new Schedule("8:00am");
             Description description = new Description("oh no can't sleep i'm tired");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
@@ -441,8 +441,8 @@ public class LogicManagerTest {
          */
         Event generatePerson(int seed) throws Exception {
             return new Event(
-                    new Title("person"+ seed),new Location("bed"+ seed),new Periodic("none"),new Timing("12:00am"),
-                    new Timing("8:00am"), new Description("oh no can't sleep i'm tired"+ seed),
+                    new Title("person"+ seed),new Location("bed"+ seed),new Periodic("none"),new Schedule("12:00am"),
+                    new Schedule("8:00am"), new Description("oh no can't sleep i'm tired"+ seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -542,8 +542,8 @@ public class LogicManagerTest {
                     new Title(name),
                     new Location("home"),
                     new Periodic("daily"),
-                    new Timing("7:00am"),
-                    new Timing("9:00am"),
+                    new Schedule("7:00am"),
+                    new Schedule("9:00am"),
                     new Description("House of 1"),
                     new UniqueTagList(new Tag("tag"))
             );

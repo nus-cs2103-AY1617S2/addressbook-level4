@@ -11,8 +11,8 @@ public class Event implements ReadOnlyEvent {
 
     private Title name;
     private Periodic period;
-    private Timing startTime;
-    private Timing endTime;
+    private Schedule startTime;
+    private Schedule endTime;
     private Description description;
     private boolean isDone;
     private Location location;
@@ -21,8 +21,8 @@ public class Event implements ReadOnlyEvent {
     /**
      * Every field must be present and not null.
      */
-    public Event(Title name, Location location, Periodic periodic, Timing startTime,
-    		Timing endTime, Description description, UniqueTagList tags) {
+    public Event(Title name, Location location, Periodic periodic, Schedule startTime,
+    		Schedule endTime, Description description, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name);
         this.name = name;
         this.period = periodic;
@@ -69,15 +69,15 @@ public class Event implements ReadOnlyEvent {
         }
         
         if (parameters.get("start") != null) {
-            this.startTime = new Timing((String) parameters.get("start"));
+            this.startTime = new Schedule((String) parameters.get("start"));
         } else {
-            this.startTime = new Timing("  ");
+            this.startTime = new Schedule(" ");
         }
         
         if (parameters.get("end") != null) {
-            this.endTime = new Timing((String) parameters.get("end"));
+            this.endTime = new Schedule((String) parameters.get("end"));
         } else {
-            this.endTime = new Timing("  ");
+            this.endTime = new Schedule(" ");
         }
         
         if (parameters.get("description") != null) {
@@ -109,21 +109,21 @@ public class Event implements ReadOnlyEvent {
         return this.period;
     }
 
-    public void setStartTime(Timing timing) {
+    public void setStartTime(Schedule schedule) {
         assert startTime != null;
-        this.startTime = timing;
+        this.startTime = schedule;
     }
 
-    public Timing getStartTime() {
+    public Schedule getStartTime() {
         return startTime;
     }
 
-    public void setEndTime(Timing timing) {
+    public void setEndTime(Schedule schedule) {
         assert endTime != null;
-        this.endTime = timing;
+        this.endTime = schedule;
     }
 
-    public Timing getEndTime() {
+    public Schedule getEndTime() {
         return endTime;
     }
     public void setDescription(Description description) {
@@ -192,7 +192,7 @@ public class Event implements ReadOnlyEvent {
     }
 
     @Override
-    public Deadline getDeadline() {
+    public Date getDeadline() {
         // TODO Auto-generated method stub
         return null;
     }

@@ -10,7 +10,7 @@ import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.Location;
 import org.teamstbf.yats.model.item.Periodic;
-import org.teamstbf.yats.model.item.Timing;
+import org.teamstbf.yats.model.item.Schedule;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.item.UniqueEventList;
 import org.teamstbf.yats.model.tag.Tag;
@@ -26,7 +26,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an task or event to the task manager. "
             + "Parameters: task name l/location p/period(none/daily/weekly/monthly) s/START TIME  e/END TIME  d/ description [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " meeting with boss l/work p/daily s/7:00pm  e/9:00pm  "
+            + " meeting with boss l/work p/daily s/7:00pm,18/03/2017  e/9:00pm,18/03/2017  "
             + "d/get scolded for being lazy t/kthxbye";
 
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
@@ -52,8 +52,8 @@ public class AddCommand extends Command {
                 new Title(name),
                 new Location(location),
                 new Periodic(period),
-                new Timing(startTime),
-                new Timing(endTime),
+                new Schedule(startTime),
+                new Schedule(endTime),
                 new Description(description),
                 new UniqueTagList(tagSet)
         );

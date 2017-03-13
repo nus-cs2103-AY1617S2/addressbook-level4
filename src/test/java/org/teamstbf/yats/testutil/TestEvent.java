@@ -1,11 +1,11 @@
 package org.teamstbf.yats.testutil;
 
-import org.teamstbf.yats.model.item.Deadline;
+import org.teamstbf.yats.model.item.Date;
 import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.Location;
 import org.teamstbf.yats.model.item.Periodic;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
-import org.teamstbf.yats.model.item.Timing;
+import org.teamstbf.yats.model.item.Schedule;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.tag.UniqueTagList;
 
@@ -16,8 +16,8 @@ public class TestEvent implements ReadOnlyEvent {
 
     private Title name;
     private Periodic period;
-    private Timing startTime;
-    private Timing endTime;
+    private Schedule startTime;
+    private Schedule endTime;
     private Description description;
     private boolean isDone;
     private Location location;
@@ -86,12 +86,12 @@ public class TestEvent implements ReadOnlyEvent {
     }
 
     @Override
-    public Timing getStartTime() {
+    public Schedule getStartTime() {
         return startTime;
     }
 
     @Override
-    public Timing getEndTime() {
+    public Schedule getEndTime() {
         return endTime;
     }
 
@@ -112,16 +112,16 @@ public class TestEvent implements ReadOnlyEvent {
         this.location = location;  
     }
     
-    public void setStartTime(Timing timing) {
-        this.startTime = timing;
+    public void setStartTime(Schedule schedule) {
+        this.startTime = schedule;
     }
 
-    public void setEndTime(Timing timing) {
-        this.endTime = timing;
+    public void setEndTime(Schedule schedule) {
+        this.endTime = schedule;
     }
 
     @Override
-    public Deadline getDeadline() {
+    public Date getDeadline() {
         // TODO Auto-generated method stub
         return null;
     }

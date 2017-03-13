@@ -11,9 +11,9 @@ public interface ReadOnlyEvent {
 	Title getTitle();
 	Description getDescription();
 	Location getLocation();
-	Timing getStartTime();
-	Timing getEndTime();
-	Deadline getDeadline();
+	Schedule getStartTime();
+	Schedule getEndTime();
+	Date getDeadline();
 	Periodic getPeriod();
 
 

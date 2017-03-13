@@ -12,9 +12,9 @@ import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.Periodic;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
-import org.teamstbf.yats.model.item.Timing;
+import org.teamstbf.yats.model.item.Schedule;
 import org.teamstbf.yats.model.item.Title;
-import org.teamstbf.yats.model.item.Deadline;
+import org.teamstbf.yats.model.item.Date;
 import org.teamstbf.yats.model.item.UniqueEventList;
 import org.teamstbf.yats.model.tag.UniqueTagList;
 
@@ -83,9 +83,9 @@ public class EditCommand extends Command {
         Title updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getTitle);
         // Deadline updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getDeadline);
         // Timing updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getTiming);
-        Timing updatedStartTime = editTaskDescriptor.getStartTime().orElseGet(taskToEdit::getStartTime);
-        Timing updatedEndTime = editTaskDescriptor.getStartTime().orElseGet(taskToEdit::getEndTime);
-        Deadline updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(taskToEdit::getDeadline);
+        Schedule updatedStartTime = editTaskDescriptor.getStartTime().orElseGet(taskToEdit::getStartTime);
+        Schedule updatedEndTime = editTaskDescriptor.getStartTime().orElseGet(taskToEdit::getEndTime);
+        Date updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(taskToEdit::getDeadline);
         Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
@@ -98,9 +98,9 @@ public class EditCommand extends Command {
      */
     public static class EditTaskDescriptor {
         private Optional<Title> name = Optional.empty();
-        private Optional<Deadline> deadline = Optional.empty();
-        private Optional<Timing> startTime = Optional.empty();
-        private Optional<Timing> endTime = Optional.empty();
+        private Optional<Date> deadline = Optional.empty();
+        private Optional<Schedule> startTime = Optional.empty();
+        private Optional<Schedule> endTime = Optional.empty();
         private Optional<Description> description = Optional.empty();
         private Optional<Periodic> periodic = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
@@ -133,30 +133,30 @@ public class EditCommand extends Command {
             return name;
         }
 
-        public void setDeadline(Optional<Deadline> deadline) {
+        public void setDeadline(Optional<Date> deadline) {
             assert deadline != null;
             this.deadline = deadline;
         }
 
-        public Optional<Deadline> getDeadline() {
+        public Optional<Date> getDeadline() {
             return deadline;
         }
 
-        public void setStartTime(Optional<Timing> timing) {
-            assert timing != null;
-            this.startTime = timing;
+        public void setStartTime(Optional<Schedule> schedule) {
+            assert schedule != null;
+            this.startTime = schedule;
         }
 
-        public Optional<Timing> getStartTime() {
+        public Optional<Schedule> getStartTime() {
             return startTime;
         }
         
-        public void setEndTime(Optional<Timing> timing) {
-        	assert timing != null;
-        	this.endTime = timing;
+        public void setEndTime(Optional<Schedule> schedule) {
+        	assert schedule != null;
+        	this.endTime = schedule;
         }
         
-        public Optional<Timing> getEndTime() {
+        public Optional<Schedule> getEndTime() {
         	return endTime;
         }
 
