@@ -10,7 +10,7 @@ public abstract class TaskDate {
     public final String value;
 
     public static final String TASKDATE_VALIDATION_REGEX =
-        "^$|([12][0-9]|3[01]|0?[1-9])/(0?[1-9]|1[012])/((?:19|20)\\d\\d)";;
+        "^$|([12][0-9]|3[01]|0?[1-9])/(0?[1-9]|1[012])/((?:19|20)\\d\\d)";
 
     public TaskDate(String taskDate) {
     	Parser parser = new Parser();
