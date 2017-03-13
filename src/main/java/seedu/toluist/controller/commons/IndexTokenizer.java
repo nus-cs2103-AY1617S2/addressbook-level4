@@ -3,6 +3,8 @@ package seedu.toluist.controller.commons;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import seedu.toluist.commons.util.StringUtil;
 
@@ -21,14 +23,33 @@ public class IndexTokenizer {
     }
 
     /**
+     *
+     */
+    public static List<Integer> splitStringToIndexes(String indexToken, int maxIndex) {
+        String[] splittedStringIndexes = indexToken.split(",");
+        Set<Integer> setOfIndexes = new TreeSet<Integer>();
+        for (String splittedStringIndex : splittedStringIndexes) {
+            List<Integer> splittedIndexes = splitIndexes(splittedStringIndex, maxIndex);
+            for (int splittedIndex : splittedIndexes) {
+                setOfIndexes.add(splittedIndex);
+            }
+        }
+        List<Integer> indexes = new ArrayList<Integer>();
+        for (int index : setOfIndexes) {
+            indexes.add(index);
+        }
+        return indexes;
+    }
+
+    /**
      * Splits a string of indexes into a list.
      *   Examples:
      *   splitIndexes(" - 3",           8) -> [1, 2, 3]
      *   splitIndexes(" 3 -",           8) -> [3, 4, 5, 6, 7, 8]
-     *   splitIndexes("3 4,  5",        8) -> [3, 4, 5]
+     *   splitIndexes("3 4  5",         8) -> [3, 4, 5]
      *   splitIndexes("3 - 5",          8) -> [3, 4, 5]
-     *   splitIndexes("- 3, 5, 7 - 12", 8) -> [1, 2, 3, 5, 7, 8]
-     * This function is robust enough to handle excessive white spaces (" ") and commas (",").
+     *   splitIndexes("- 3 5 7 - 12",   8) -> [1, 2, 3, 5, 7, 8]
+     * This function is robust enough to handle excessive white spaces (" ").
      * @param stringIndexes, the unprocessed string of indexes from user's input
      * @param maxIndex, the maximum possible index number
      * @return a list of integer containing all valid indexes
@@ -37,7 +58,7 @@ public class IndexTokenizer {
         // Prepare stringIndexes in the correct format to be processed
         // Correct format example: ["2", "-", "5", "7", "11", "-", "13", "15"]
         String processedStringIndexes = stringIndexes.replaceAll(HYPHEN, " - ");
-        String[] splittedStringIndexes = processedStringIndexes.split(" |,");
+        String[] splittedStringIndexes = processedStringIndexes.split(" ");
         splittedStringIndexes = Arrays.
                 stream(splittedStringIndexes).
                 filter(s -> !s.isEmpty()).

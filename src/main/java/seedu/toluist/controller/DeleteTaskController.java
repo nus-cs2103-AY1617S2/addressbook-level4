@@ -40,7 +40,7 @@ public class DeleteTaskController extends Controller {
         HashMap<String, String> tokens = taskTokenizer.tokenize(command, true, false);
 
         String indexToken = tokens.get(TaskTokenizer.TASK_VIEW_INDEX);
-        List<Integer> indexes = IndexTokenizer.splitIndexes(indexToken, todoList.getTasks().size());
+        List<Integer> indexes = IndexTokenizer.splitStringToIndexes(indexToken, todoList.getTasks().size());
         List<Task> tasks = uiStore.getTasks(indexes);
         commandResult = delete(todoList, tasks);
 
