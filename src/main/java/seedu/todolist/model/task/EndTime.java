@@ -3,7 +3,8 @@ package seedu.todolist.model.task;
 import java.util.Date;
 
 import java.text.DateFormat;
-import java.text.ParseException;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 
 import seedu.todolist.commons.exceptions.IllegalValueException;
 
@@ -14,17 +15,18 @@ import seedu.todolist.commons.exceptions.IllegalValueException;
 public class EndTime {
     
     public static final String MESSAGE_ENDTIME_CONSTRAINTS = 
-            "End time should follow the format: DD/MM/YYYY TIME. E.g. \n"
-            + "12/12/2008 3.30 PM";
+            "End time should follow the format: DD-MM-YYYY TIME. E.g. \n"
+            + "12-12-2008 3.30 PM";
     
     private Date _endTime;
     
     public EndTime(String endTime) throws IllegalValueException {
-        try {
-            DateFormat dateFormatter = DateFormat.getDateInstance();
-            _endTime = dateFormatter.parse(endTime);
-        } catch (ParseException e) {
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy h:mm a");
+        Date temp = dateFormatter.parse(endTime,new ParsePosition(0));
+        if (temp == null) {
             throw new IllegalValueException(MESSAGE_ENDTIME_CONSTRAINTS);
+        } else {
+            _endTime = temp;
         }
     }
     
