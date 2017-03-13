@@ -52,7 +52,8 @@ public class TaskList implements ReadOnlyTaskList {
 
     //// list overwrite operations
 
-    public void setTasks(List<? extends ReadOnlyTask> tasks) throws UniqueTaskList.DuplicateTaskException {
+    public void setTasks(List<? extends ReadOnlyTask> tasks)
+            throws UniqueTaskList.DuplicateTaskException, IllegalValueException {
         this.tasks.setTasks(tasks);
     }
 
@@ -64,7 +65,7 @@ public class TaskList implements ReadOnlyTaskList {
         assert newData != null;
         try {
             setTasks(newData.getTaskList());
-        } catch (UniqueTaskList.DuplicateTaskException e) {
+        } catch (IllegalValueException e) {
             assert false : "TaskLists should not have duplicate tasks";
         }
         try {

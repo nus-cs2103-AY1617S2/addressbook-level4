@@ -55,6 +55,8 @@ public class TypicalTestTasks {
                 taskList.addTask(new Task(task));
             } catch (DuplicateTaskException e) {
                 assert false : "not possible";
+            } catch (IllegalValueException ive) {
+                assert false : "illegal values";
             }
         }
     }
