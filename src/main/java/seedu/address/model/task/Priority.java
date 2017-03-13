@@ -14,7 +14,7 @@ public class Priority {
 
     public static final String MESSAGE_PRIORITY_CONSTRAINTS =
             "Priority Levels are only 1-5";
-    public static final String PRIORITY_VALIDATION_REGEX = "(1|2|3|4|5)";
+    public static final String PRIORITY_VALIDATION_REGEX = "[-]?(1|2|3|4|5)";
     
     public static final String PRIORITY_LEVEL_ONE = "lame";
     public static final String PRIORITY_LEVEL_TWO = "decent";
@@ -54,9 +54,17 @@ public class Priority {
             throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
         }
         
+        int actualValue = Integer.parseInt(trimmedPriority);
+        if (actualValue < 0) { // means task is completed
+        	this.number = trimmedPriority;
+        	this.value = PRIORITY_LEVEL_DONE;
+        	
+        } else {
+        
   
-        this.value = priorityMap.get(trimmedPriority);
-        this.number = trimmedPriority;
+        	this.value = priorityMap.get(trimmedPriority); // string word
+        	this.number = trimmedPriority; // string number
+        }
 
         
         
@@ -87,6 +95,14 @@ public class Priority {
     }
     
     public void setAsComplete() {
+    	String negativeNum = "-" + this.number;
+    	this.number = negativeNum;
         this.value = PRIORITY_LEVEL_DONE;
+    }
+    
+    public void setAsIncomplete() {
+    	String toBeReplaced = priorityMap.get(this.number.substring(1));
+    	this.value = toBeReplaced;
+    	this.number = this.number.substring(1);
     }
 }
