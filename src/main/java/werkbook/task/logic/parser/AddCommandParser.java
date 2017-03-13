@@ -29,9 +29,9 @@ public class AddCommandParser {
         try {
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
-                    argsTokenizer.getValue(PREFIX_DESCRIPTION).get(),
-                    argsTokenizer.getValue(PREFIX_STARTDATETIME).get(),
-                    argsTokenizer.getValue(PREFIX_ENDDATETIME).get(),
+                    argsTokenizer.getValue(PREFIX_DESCRIPTION).orElse(""),
+                    argsTokenizer.getValue(PREFIX_STARTDATETIME).orElse(""),
+                    argsTokenizer.getValue(PREFIX_ENDDATETIME).orElse(""),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
             );
         } catch (NoSuchElementException nsee) {
@@ -40,5 +40,4 @@ public class AddCommandParser {
             return new IncorrectCommand(ive.getMessage());
         }
     }
-
 }
