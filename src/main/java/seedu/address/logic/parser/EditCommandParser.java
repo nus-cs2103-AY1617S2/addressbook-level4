@@ -22,6 +22,8 @@ import seedu.address.model.tag.UniqueTagList;
  * Parses input arguments and creates a new EditCommand object
  */
 public class EditCommandParser {
+	
+	private static Optional<Integer> index;
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
@@ -36,6 +38,8 @@ public class EditCommandParser {
 
         Optional<Integer> index = preambleFields.get(0).flatMap(ParserUtil::parseIndex);
         if (!index.isPresent()) {
+        	index=EditCommandParser.index;
+        	if(!index.isPresent())
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
@@ -71,5 +75,11 @@ public class EditCommandParser {
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
+    
+    public static void setIndex (int index){
+    	EditCommandParser.index=Optional.of(index);
+    	
+    }
+
 
 }
