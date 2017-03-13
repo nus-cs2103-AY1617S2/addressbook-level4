@@ -5,12 +5,13 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import seedu.toluist.commons.core.Config;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.testutil.TestUtil;
 import seedu.toluist.testutil.TypicalTestTodoLists;
 
 /**
- * Gui tests for save command
+ * Gui tests for saveConfig command
  */
 public class SaveCommandTest extends ToLuistGuiTest {
     @Test
@@ -20,7 +21,7 @@ public class SaveCommandTest extends ToLuistGuiTest {
         commandBox.runCommand(command);
 
         // Check that storage path is changed
-        assertEquals(TodoList.getStorage().getStoragePath(), newPath);
+        assertEquals(Config.getInstance().getTodoListFilePath(), newPath);
 
         // Check that todo list loaded is the same as previous todo list
         TodoList todoListAtSavedLocation = TodoList.load();

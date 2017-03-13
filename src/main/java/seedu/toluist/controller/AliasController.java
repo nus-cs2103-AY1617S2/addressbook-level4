@@ -4,24 +4,25 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.toluist.commons.core.Config;
 import seedu.toluist.dispatcher.CommandResult;
-import seedu.toluist.model.CommandAliasConfig;
+import seedu.toluist.model.AliasTable;
 import seedu.toluist.ui.Ui;
 
 /**
  * Alias Controller is responsible for handling alias requests
  */
 public class AliasController extends Controller {
-    private static final String RESULT_MESSAGE_SUCCESS = "Alias %s for %s added";
-    private static final String RESULT_MESSAGE_FAILURE = "Alias %s for %s cannot be added";
-    private static final String RESULT_MESSGE_RESERVED_WORD = "%s is a reserved word";
+    private static final String RESULT_MESSAGE_SUCCESS = "Alias %s for %s was added";
+    private static final String RESULT_MESSAGE_FAILURE = "Alias %s for %s could not be added";
+    private static final String RESULT_MESSAGE_RESERVED_WORD = "%s is a reserved word";
     private static final String COMMAND_TEMPLATE = "alias\\s+(?<alias>\\S+)\\s+(?<command>.+)";
     private static final String COMMAND_WORD = "alias";
 
     private static final String ALIAS_TERM = "alias";
     private static final String COMMAND_TERM = "command";
 
-    private final CommandAliasConfig aliasConfig = CommandAliasConfig.getInstance();
+    private final AliasTable aliasConfig = Config.getInstance().getAliasTable();
 
     public AliasController(Ui renderer) {
         super(renderer);
@@ -33,10 +34,10 @@ public class AliasController extends Controller {
         String commandPhrase = tokens.get(COMMAND_TERM);
 
         if (aliasConfig.isReservedWord(alias)) {
-            return new CommandResult(String.format(RESULT_MESSGE_RESERVED_WORD, alias));
+            return new CommandResult(String.format(RESULT_MESSAGE_RESERVED_WORD, alias));
         }
 
-        if (aliasConfig.setAlias(alias, commandPhrase)) {
+        if (aliasConfig.setAlias(alias, commandPhrase) && Config.getInstance().save()) {
             return new CommandResult(String.format(RESULT_MESSAGE_SUCCESS, alias, commandPhrase));
         } else {
             return new CommandResult(String.format(RESULT_MESSAGE_FAILURE, alias, commandPhrase));

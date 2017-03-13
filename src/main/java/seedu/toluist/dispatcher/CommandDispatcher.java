@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import seedu.toluist.commons.core.Config;
 import seedu.toluist.commons.core.EventsCenter;
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.events.ui.NewResultAvailableEvent;
@@ -31,13 +32,13 @@ import seedu.toluist.controller.UndoController;
 import seedu.toluist.controller.UntagController;
 import seedu.toluist.controller.UpdateTaskController;
 import seedu.toluist.controller.ViewAliasController;
-import seedu.toluist.model.CommandAliasConfig;
+import seedu.toluist.model.AliasTable;
 import seedu.toluist.ui.Ui;
 
 public class CommandDispatcher extends Dispatcher {
     private final Logger logger = LogsCenter.getLogger(getClass());
     private final EventsCenter eventsCenter = EventsCenter.getInstance();
-    private final CommandAliasConfig aliasConfig = CommandAliasConfig.getInstance();
+    private final AliasTable aliasConfig = Config.getInstance().getAliasTable();
 
     public CommandDispatcher() {
         super();

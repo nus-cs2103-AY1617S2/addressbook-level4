@@ -33,11 +33,10 @@ public class RedoController extends Controller {
         String redoTimesToken = tokens.get(REDO_TIMES);
         int redoTimes = redoTimesToken != null ? Integer.parseInt(redoTimesToken) : 1;
 
-        Pair<TodoList, Integer> redoResult = storage.redo(redoTimes);
+        Pair<TodoList, Integer> redoResult = TodoList.load().getStorage().redo(redoTimes);
         TodoList todoList = redoResult.getKey();
         int actualRedoTimes = redoResult.getValue();
 
-        TodoList.setCurrentTodoList(todoList);
         uiStore.setTask(todoList.getTasks());
         renderer.render();
 

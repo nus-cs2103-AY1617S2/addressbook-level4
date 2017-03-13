@@ -1,7 +1,6 @@
 package seedu.toluist.ui;
 
 import javafx.stage.Stage;
-import seedu.toluist.commons.core.Config;
 import seedu.toluist.dispatcher.Dispatcher;
 
 /**
@@ -15,7 +14,7 @@ public interface Ui {
     /** Stops the UI. */
     void stop();
 
-    void init(Config config, Dispatcher dispatcher);
+    void init(Dispatcher dispatcher);
 
     void render();
 

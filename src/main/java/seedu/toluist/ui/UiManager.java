@@ -11,7 +11,6 @@ import javafx.stage.Stage;
 import seedu.toluist.commons.core.ComponentManager;
 import seedu.toluist.commons.core.Config;
 import seedu.toluist.commons.core.LogsCenter;
-import seedu.toluist.commons.events.storage.DataSavingExceptionEvent;
 import seedu.toluist.commons.events.ui.ShowHelpRequestEvent;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.dispatcher.Dispatcher;
@@ -24,7 +23,6 @@ public class UiManager extends ComponentManager implements Ui {
     private static UiManager instance;
 
     private MainWindow mainWindow;
-    private Config config;
     private Dispatcher dispatcher;
 
     public static UiManager getInstance() {
@@ -41,6 +39,7 @@ public class UiManager extends ComponentManager implements Ui {
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting UI...");
+        Config config = Config.getInstance();
         primaryStage.setTitle(config.getAppTitle());
 
         try {
@@ -56,23 +55,19 @@ public class UiManager extends ComponentManager implements Ui {
 
     @Override
     public void stop() {
+        // Save the last used gui settings
+        Config.getInstance().setGuiSettings(mainWindow.getCurrentGuiSetting());
+        Config.getInstance().save();
         mainWindow.hide();
     }
 
-    public void init(Config config, Dispatcher dispatcher) {
-        this.config = config;
+    public void init(Dispatcher dispatcher) {
         this.dispatcher = dispatcher;
     }
 
     public void render() {
-        assert config != null;
         assert dispatcher != null;
         mainWindow.render();
-    }
-
-    private void showFileOperationAlertAndWait(String description, String details, Throwable cause) {
-        final String content = details + ":\n" + cause.toString();
-        showAlertDialogAndWait(AlertType.ERROR, "File Op Error", description, content);
     }
 
     void showAlertDialogAndWait(Alert.AlertType type, String title, String headerText, String contentText) {
@@ -98,12 +93,6 @@ public class UiManager extends ComponentManager implements Ui {
     }
 
     //==================== Event Handling Code ===============================================================
-
-    @Subscribe
-    private void handleDataSavingExceptionEvent(DataSavingExceptionEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        showFileOperationAlertAndWait("Could not save data", "Could not save data to file", event.exception);
-    }
 
     @Subscribe
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {

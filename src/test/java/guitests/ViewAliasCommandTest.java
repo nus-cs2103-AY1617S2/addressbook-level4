@@ -3,8 +3,8 @@ package guitests;
 import org.junit.Before;
 import org.junit.Test;
 
+import seedu.toluist.commons.core.Config;
 import seedu.toluist.controller.ViewAliasController;
-import seedu.toluist.model.CommandAliasConfig;
 
 /**
  * Gui tests for viewalias command
@@ -12,7 +12,7 @@ import seedu.toluist.model.CommandAliasConfig;
 public class ViewAliasCommandTest extends ToLuistGuiTest {
     @Before
     public void setUp() {
-        CommandAliasConfig.getInstance().clearAliases();
+        Config.getInstance().getAliasTable().clearAliases();
     }
 
     @Test

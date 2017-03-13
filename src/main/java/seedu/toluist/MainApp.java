@@ -27,7 +27,7 @@ public class MainApp extends Application {
 
     protected Ui ui;
     protected Dispatcher dispatcher;
-    protected Config config = new Config();
+    protected Config config = Config.getInstance();
 
 
     @Override
@@ -37,9 +37,10 @@ public class MainApp extends Application {
 
         initLogging(config);
 
+        // Configure dependencies
         dispatcher = new CommandDispatcher();
         ui = UiManager.getInstance();
-        ui.init(config, dispatcher);
+        ui.init(dispatcher);
 
         initEventsCenter();
     }

@@ -13,7 +13,7 @@ import org.mockito.junit.MockitoRule;
 
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
-import seedu.toluist.storage.Storage;
+import seedu.toluist.storage.TodoListStorage;
 import seedu.toluist.testutil.TypicalTestTodoLists;
 import seedu.toluist.ui.Ui;
 
@@ -25,10 +25,11 @@ public abstract class ControllerTest {
     public MockitoRule rule = MockitoJUnit.rule();
 
     @Mock
-    protected Storage storage;
+    protected TodoListStorage storage;
     @Mock
     protected Ui renderer;
     protected Controller controller;
+    protected TodoList todoList;
 
     /**
      * Returns an instance of the controller to be teste
@@ -39,7 +40,7 @@ public abstract class ControllerTest {
     @Before
     public void setUp() {
         when(storage.load()).thenReturn(Optional.of(new TypicalTestTodoLists().getTypicalTodoList()));
-        TodoList.setStorage(storage);
+        todoList = new TodoList(storage);
         controller = controllerUnderTest(renderer);
     }
 
@@ -49,7 +50,7 @@ public abstract class ControllerTest {
      */
     protected void assertTasksExist(Task... tasks) {
         for (Task task : tasks) {
-            if (!TodoList.load().getTasks().contains(task)) {
+            if (!todoList.getTasks().contains(task)) {
                 fail("Task should exist");
             }
         }

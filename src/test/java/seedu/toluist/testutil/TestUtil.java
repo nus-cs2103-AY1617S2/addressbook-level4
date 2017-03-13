@@ -2,6 +2,7 @@ package seedu.toluist.testutil;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,12 +14,11 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
+import seedu.toluist.commons.core.Config;
 import seedu.toluist.commons.util.CollectionUtil;
 import seedu.toluist.commons.util.FileUtil;
-import seedu.toluist.controller.Controller;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.storage.JsonStorage;
-import seedu.toluist.storage.Storage;
 
 /**
  * A utility class for test cases.
@@ -50,12 +50,15 @@ public class TestUtil {
     /**
      * Do the necessary configuration so that todolist data can be used for testing
      * @param todoList todo list data
-     * @param filePath storagePath
+     * @parem configFilePath storage pah for config test data
+     * @param todoListFilePath storage path for todo list test data
      */
-    public static void setTodoListTestData(TodoList todoList, String filePath) {
-        Storage storage = new JsonStorage(filePath);
-        TodoList.setStorage(storage);
-        Controller.setStorage(storage);
+    public static void setTodoListTestData(TodoList todoList, String configFilePath, String todoListFilePath) {
+        Config.setConfigFilePath(configFilePath);
+        Config config = Config.getInstance();
+        config.setTodoListFilePath(todoListFilePath);
+        config.save();
+        todoList.setStorage(new JsonStorage());
         todoList.save();
     }
 
@@ -102,6 +105,21 @@ public class TestUtil {
         Method method = objectClass.getDeclaredMethod(methodName);
         method.setAccessible(true);
         return method;
+    }
+
+    /**
+     * Reset the instance for a singleton class
+     * @param klass The singleton class to reset the instance
+     * @throws SecurityException
+     * @throws NoSuchFieldException
+     * @throws IllegalArgumentException
+     * @throws IllegalAccessException
+     */
+    public static void resetSingleton(Class klass) throws SecurityException, NoSuchFieldException,
+            IllegalArgumentException, IllegalAccessException {
+        Field instance = klass.getDeclaredField("instance");
+        instance.setAccessible(true);
+        instance.set(null, null);
     }
 
     /**

@@ -3,8 +3,6 @@ package seedu.toluist.controller;
 import java.util.HashMap;
 
 import seedu.toluist.dispatcher.CommandResult;
-import seedu.toluist.storage.JsonStorage;
-import seedu.toluist.storage.Storage;
 import seedu.toluist.ui.Ui;
 import seedu.toluist.ui.UiStore;
 
@@ -17,15 +15,6 @@ import seedu.toluist.ui.UiStore;
 public abstract class Controller {
 
     protected final Ui renderer;
-
-    /**
-     * Persistent storage to interact with the models
-     */
-    protected static Storage storage = JsonStorage.getInstance();
-
-    public static void setStorage(Storage storage) {
-        Controller.storage = storage;
-    }
 
     /**
      * UiStore to store data to be used by Ui

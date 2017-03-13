@@ -6,6 +6,7 @@ import java.util.ArrayDeque;
 import java.util.Optional;
 
 import javafx.util.Pair;
+import seedu.toluist.commons.core.Config;
 import seedu.toluist.commons.util.FileUtil;
 import seedu.toluist.commons.util.JsonUtil;
 import seedu.toluist.model.TodoList;
@@ -13,25 +14,12 @@ import seedu.toluist.model.TodoList;
 /**
  * JsonStorage saves TodoList object to json file.
  */
-public class JsonStorage implements Storage {
-    private static JsonStorage instance;
-
-    private String storagePath = "data/todolist.json";
+public class JsonStorage implements TodoListStorage {
+    private Config config = Config.getInstance();
     private ArrayDeque<String> historyStack = new ArrayDeque<>();
     private ArrayDeque<String> redoHistoryStack = new ArrayDeque<>();
 
     public JsonStorage() {}
-
-    public JsonStorage(String storagePath) {
-        this.storagePath = storagePath;
-    }
-
-    public static JsonStorage getInstance() {
-        if (instance == null) {
-            instance = new JsonStorage();
-        }
-        return instance;
-    }
 
     public Optional<TodoList> load() {
         try {
@@ -46,30 +34,29 @@ public class JsonStorage implements Storage {
         }
     }
 
-    public boolean move(String storagePath) {
-        String oldStoragePath = getStoragePath();
+    public boolean move(String newStoragePath) {
+        String oldStoragePath = config.getTodoListFilePath();
 
-        Optional<TodoList> todoList = load();
-        if (!todoList.isPresent()) {
+        Optional<TodoList> todoListOptional = load();
+        if (!todoListOptional.isPresent()) {
             return false;
         }
 
-        if (!save(todoList.get(), storagePath)) {
+        if (!saveNotAffectingHistory(todoListOptional.get(), newStoragePath)) {
             return false;
         }
-        setStoragePath(storagePath);
+
         FileUtil.removeFile(FileUtil.getFile(oldStoragePath));
-        return true;
-    }
 
-    public String getStoragePath() {
-        return storagePath;
+        config.setTodoListFilePath(newStoragePath);
+        return config.save();
     }
 
     public boolean save(TodoList todoList) {
-        if (!save(todoList, storagePath)) {
+        if (!saveNotAffectingHistory(todoList, config.getTodoListFilePath())) {
             return false;
         }
+        // push current todo list json string into historyStack if the stack is empty
         try {
             historyStack.addLast(JsonUtil.toJsonString(todoList));
             redoHistoryStack.clear();
@@ -79,9 +66,9 @@ public class JsonStorage implements Storage {
         return true;
     }
 
-    private boolean save(TodoList todoList, String storagePath) {
+    private boolean saveNotAffectingHistory(TodoList todoList, String storagePath) {
         try {
-            final String jsonString = JsonUtil.toJsonString(todoList);
+            String jsonString = JsonUtil.toJsonString(todoList);
             FileUtil.writeToFile(FileUtil.getFile(storagePath), jsonString);
             return true;
         } catch (IOException e) {
@@ -103,7 +90,7 @@ public class JsonStorage implements Storage {
         }
         TodoList todoList = todoListFromJson(historyStack.peekLast()).get();
         // So as to not clear the redo history
-        save(todoList, getStoragePath());
+        saveNotAffectingHistory(todoList, config.getTodoListFilePath());
         return new Pair<>(todoList, times - steps);
     }
 
@@ -116,31 +103,31 @@ public class JsonStorage implements Storage {
 
         TodoList todoList = todoListFromJson(historyStack.peekLast()).get();
         // So as to not clear the redo history
-        save(todoList, getStoragePath());
+        saveNotAffectingHistory(todoList, config.getTodoListFilePath());
         return new Pair<>(todoList, times - steps);
     }
 
     private Optional<TodoList> todoListFromJson(String json) {
         try {
-            return Optional.of(JsonUtil.fromJsonString(json, TodoList.class));
+            TodoList todoList = JsonUtil.fromJsonString(json, TodoList.class);
+            // Inject self as storage dependency
+            todoList.setStorage(this);
+            return Optional.of(todoList);
         } catch (IOException e) {
             return Optional.empty();
         }
     }
 
+    /**
+     * Read the json data of the current todo list
+     * @return Optional.of(jsonString) if the data can be read, Optional.empty() otherwise
+     */
     private Optional<String> getDataJson() {
+        File storageFile = new File(Config.getInstance().getTodoListFilePath());
         try {
-            return Optional.of(FileUtil.readFromFile(getStorageFile()));
+            return Optional.of(FileUtil.readFromFile(storageFile));
         } catch (IOException e) {
             return Optional.empty();
         }
-    }
-
-    private File getStorageFile() {
-        return new File(getStoragePath());
-    }
-
-    private void setStoragePath(String storagePath) {
-        this.storagePath = storagePath;
     }
 }

@@ -8,21 +8,12 @@ import java.util.Set;
 /**
  * A model to manage alias
  */
-public class CommandAliasConfig {
-    private static CommandAliasConfig instance;
-
+public class AliasTable {
     private Map<String, String> aliasMapping = new HashMap<>();
     private Set<String> reservedKeywords = new HashSet<>();
 
     public Map<String, String> getAliasMapping() {
         return aliasMapping;
-    }
-
-    public static CommandAliasConfig getInstance() {
-        if (instance == null) {
-            instance = new CommandAliasConfig();
-        }
-        return instance;
     }
 
     /**
@@ -91,11 +82,27 @@ public class CommandAliasConfig {
      * @return converted command
      */
     public String dealias(String command) {
+        String[] wordsInCommand = command.split("\\s+");
+        if (wordsInCommand.length == 0) {
+            return command;
+        }
+
+        String firstWord = wordsInCommand[0];
+
         for (String alias : aliasMapping.keySet()) {
-            if (command.startsWith(alias)) {
-                return aliasMapping.get(alias) + command.substring(alias.length(), command.length());
+            if (firstWord.equals(alias)) {
+                wordsInCommand[0] = aliasMapping.get(alias);
+                return String.join(" ", wordsInCommand);
             }
         }
         return command;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof AliasTable // instanceof handles nulls
+                && reservedKeywords.equals(((AliasTable) other).reservedKeywords)
+                && aliasMapping.equals(((AliasTable) other).aliasMapping));
     }
 }
