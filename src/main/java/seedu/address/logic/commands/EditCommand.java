@@ -78,9 +78,10 @@ public class EditCommand extends Command {
         Title updatedTitle = editTaskDescriptor.getTitle().orElseGet(taskToEdit::getTitle);
         Optional<Deadline> updatedStartTime = editTaskDescriptor.getStartTime();
         Optional<Deadline> updatedDeadline = editTaskDescriptor.getDeadline();
+        Boolean isCompleted = editTaskDescriptor.isCompleted().orElseGet(taskToEdit::isCompleted);
         UniqueLabelList updatedLabels = editTaskDescriptor.getLabels().orElseGet(taskToEdit::getLabels);
 
-        return new Task(updatedTitle, updatedStartTime, updatedDeadline, updatedLabels);
+        return new Task(updatedTitle, updatedStartTime, updatedDeadline, isCompleted, updatedLabels);
     }
 
     /**
@@ -92,13 +93,16 @@ public class EditCommand extends Command {
         private Optional<Deadline> startTime = Optional.empty();
         private Optional<Deadline> deadline = Optional.empty();
         private Optional<UniqueLabelList> labels = Optional.empty();
+        private Optional<Boolean> isCompleted = Optional.empty();
 
         public EditTaskDescriptor() {}
+
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.title = toCopy.getTitle();
             this.startTime = toCopy.getStartTime();
             this.deadline = toCopy.getDeadline();
+            this.isCompleted = toCopy.isCompleted();
             this.labels = toCopy.getLabels();
         }
 
@@ -106,7 +110,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.title, this.startTime, this.deadline, this.labels);
+            return CollectionUtil.isAnyPresent(this.title, this.startTime, this.isCompleted, this.deadline, this.labels);
         }
 
         public void setName(Optional<Title> title) {
@@ -143,6 +147,13 @@ public class EditCommand extends Command {
 
         public Optional<UniqueLabelList> getLabels() {
             return labels;
+        }
+        
+        public void setIsCompleted(Optional<Boolean> isCompleted) {
+            this.isCompleted = isCompleted;
+        }
+        public Optional<Boolean> isCompleted() {
+            return isCompleted;
         }
     }
 }

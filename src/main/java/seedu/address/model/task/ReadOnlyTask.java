@@ -13,6 +13,7 @@ public interface ReadOnlyTask {
     Title getTitle();
     Optional<Deadline> getDeadline();
     Optional<Deadline> getStartTime();
+    Boolean isCompleted();
 
     /**
      * The returned LabelList is a deep copy of the internal LabelList,
@@ -46,5 +47,6 @@ public interface ReadOnlyTask {
         getLabels().forEach(builder::append);
         return builder.toString();
     }
+    
 
 }

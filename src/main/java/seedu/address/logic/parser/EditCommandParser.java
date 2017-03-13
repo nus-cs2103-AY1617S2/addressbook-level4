@@ -3,6 +3,10 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LABEL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS_COMPLETED;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS_INCOMPLETE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMEINTERVAL_START;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMEINTERVAL_END;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -15,6 +19,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.address.logic.commands.IncorrectCommand;
+import seedu.address.logic.commands.ListCommand;
 import seedu.address.model.label.UniqueLabelList;
 
 /**
@@ -29,7 +34,8 @@ public class EditCommandParser {
     public Command parse(String args) {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_DEADLINE, CliSyntax.PREFIX_TIMEINTERVAL_START, CliSyntax.PREFIX_TIMEINTERVAL_END, PREFIX_LABEL);
+                new ArgumentTokenizer(PREFIX_DEADLINE, PREFIX_TIMEINTERVAL_START, PREFIX_TIMEINTERVAL_END, PREFIX_LABEL,
+                        PREFIX_STATUS_COMPLETED, PREFIX_STATUS_INCOMPLETE);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
@@ -37,12 +43,17 @@ public class EditCommandParser {
         if (!index.isPresent()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
-
+            
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
             editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
-            editTaskDescriptor.setStartTime(ParserUtil.parseDeadline(argsTokenizer.getValue(CliSyntax.PREFIX_TIMEINTERVAL_START)));
-            editTaskDescriptor.setDeadline(ParserUtil.parseDeadline(argsTokenizer.getValue(CliSyntax.PREFIX_TIMEINTERVAL_END)));
+            editTaskDescriptor.setStartTime(ParserUtil.parseDeadline(argsTokenizer.getValue(PREFIX_TIMEINTERVAL_START)));
+            editTaskDescriptor.setDeadline(ParserUtil.parseDeadline(argsTokenizer.getValue(PREFIX_TIMEINTERVAL_END)));
+            if (args.trim().contains(PREFIX_STATUS_COMPLETED.getPrefix())) {
+                editTaskDescriptor.setIsCompleted(Optional.ofNullable(true));
+            } else if (args.trim().contains(PREFIX_STATUS_INCOMPLETE.getPrefix())) {
+                editTaskDescriptor.setIsCompleted(Optional.ofNullable(false));
+            } 
             editTaskDescriptor.setLabels(parseLabelsForEdit(ParserUtil.toSet(
                     argsTokenizer.getAllValues(PREFIX_LABEL))));
         } catch (IllegalValueException ive) {

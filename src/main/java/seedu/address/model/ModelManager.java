@@ -111,6 +111,15 @@ public class ModelManager extends ComponentManager implements Model {
     private void updateFilteredTaskListByDate(DateFilter dateFilter) {
         filteredTasks.setPredicate(dateFilter::run);
     }
+    
+    @Override
+    public void updateFilteredTaskList(Boolean isCompleted) {
+        updateFilteredTaskListByCompletion(new StatusFilter(isCompleted));
+    }
+    
+    private void updateFilteredTaskListByCompletion(StatusFilter statusFilter) {
+        filteredTasks.setPredicate(statusFilter::run);
+    }
 
     //========== Inner classes/interfaces used for filtering =================================================
 
@@ -190,5 +199,17 @@ public class ModelManager extends ComponentManager implements Model {
             return false;
         }
     }
-
+    
+    private class StatusFilter {
+        private boolean isCompleted;
+        
+        StatusFilter(boolean isCompleted) {
+            this.isCompleted = isCompleted;
+        }
+        
+        public boolean run(ReadOnlyTask task) {
+            return task.isCompleted().booleanValue() == isCompleted;
+        }
+    }
+    
 }

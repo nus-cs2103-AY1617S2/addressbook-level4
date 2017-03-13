@@ -17,13 +17,16 @@ public class ListCommand extends Command {
     private static DateTimeParser dateParser;
     private final Date endDate;
     private final Date startDate;
+    private final Boolean isCompleted;
 
     public ListCommand() {
+        isCompleted = null;
         endDate = null;
         startDate = null;
     }
 
     public ListCommand(String endDate) throws IllegalDateTimeValueException {
+        isCompleted = null;
         if (isParsableDate(endDate)) {
             if (endDate.matches("[a-zA-Z]+")) {
                 this.endDate = dateParser.parse(endDate + "235959").get(0).getDates().get(0);
@@ -37,6 +40,7 @@ public class ListCommand extends Command {
     }
 
     public ListCommand(String startDate, String endDate) throws IllegalDateTimeValueException {
+        isCompleted = null;
         if (isParsableDate(startDate) && isParsableDate(endDate)) {
             if (startDate.matches("[a-zA-Z]+")) {
                 this.startDate = dateParser.parse(startDate + " 000000").get(0).getDates().get(0);
@@ -53,11 +57,19 @@ public class ListCommand extends Command {
             throw new IllegalDateTimeValueException();
         }
     }
+    
+    public ListCommand(Boolean isCompleted) {
+        this.isCompleted = isCompleted;
+        startDate  = null;
+        endDate = null;
+    }
 
     @Override
     public CommandResult execute() {
         if (endDate != null && startDate != null) {
             model.updateFilteredTaskList(startDate, endDate);
+        } else if (isCompleted != null) {
+            model.updateFilteredTaskList(isCompleted);
         } else {
             model.updateFilteredListToShowAll();
         }
