@@ -49,7 +49,6 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        System.out.println("adsfaf");
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (filteredTaskListIndex >= lastShownList.size()) {
