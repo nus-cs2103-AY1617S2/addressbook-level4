@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Content;
 import seedu.address.model.task.ReadOnlyTask;
@@ -14,7 +15,8 @@ public class TestTask implements ReadOnlyTask {
     private TaskDateTime dateTime;
     private UniqueTagList tags;
 
-    public TestTask() {
+    public TestTask() throws IllegalValueException {
+        dateTime = new TaskDateTime("");
         tags = new UniqueTagList();
     }
 
@@ -23,6 +25,7 @@ public class TestTask implements ReadOnlyTask {
      */
     public TestTask(TestTask taskToCopy) {
         this.content = taskToCopy.getContent();
+        this.dateTime = taskToCopy.getDateTime();
         this.tags = taskToCopy.getTags();
     }
 
@@ -44,6 +47,11 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
+    public TaskDateTime getDateTime() {
+        return dateTime;
+    }
+
+    @Override
     public UniqueTagList getTags() {
         return tags;
     }
@@ -56,13 +64,11 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getContent().fullContent + " ");
-        this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
+        if (this.getDateTime().isThereDateTime()) {
+            sb.append("by " + this.getDateTime().value + " ");
+        }
+        this.getTags().asObservableList().stream().forEach(s -> sb.append("#" + s.tagName + " "));
         return sb.toString();
-    }
-
-    @Override
-    public TaskDateTime getDateTime() {
-        return dateTime;
     }
 }
 
