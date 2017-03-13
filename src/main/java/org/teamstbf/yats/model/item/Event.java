@@ -71,7 +71,7 @@ public class Event implements ReadOnlyEvent {
         if (parameters.get("start") != null) {
             this.startTime = new Timing((String) parameters.get("start"));
         } else {
-            this.startTime = new Timing("12:00am");
+            this.startTime = new Timing("11:00am");
         }
         
         if (parameters.get("end") != null) {
@@ -189,6 +189,12 @@ public class Event implements ReadOnlyEvent {
     @Override
     public String toString() {
         return getAsText();
+    }
+
+    @Override
+    public Deadline getDeadline() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

@@ -19,7 +19,7 @@ import org.teamstbf.yats.model.UserPrefs;
 import org.teamstbf.yats.storage.JsonUserPrefsStorage;
 import org.teamstbf.yats.storage.Storage;
 import org.teamstbf.yats.storage.StorageManager;
-import org.teamstbf.yats.storage.XmlAddressBookStorage;
+import org.teamstbf.yats.storage.XmlTaskManagerStorage;
 import org.teamstbf.yats.testutil.EventsCollector;
 import org.teamstbf.yats.testutil.TypicalTestEvents;
 
@@ -88,7 +88,7 @@ public class StorageManagerTest {
     /**
      * A Stub class to throw an exception when the save method is called
      */
-    class XmlAddressBookStorageExceptionThrowingStub extends XmlAddressBookStorage {
+    class XmlAddressBookStorageExceptionThrowingStub extends XmlTaskManagerStorage {
 
         public XmlAddressBookStorageExceptionThrowingStub(String filePath) {
             super(filePath);

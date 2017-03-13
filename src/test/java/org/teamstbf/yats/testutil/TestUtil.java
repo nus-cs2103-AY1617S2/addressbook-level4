@@ -27,7 +27,7 @@ import org.teamstbf.yats.model.item.Timing;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.tag.Tag;
 import org.teamstbf.yats.model.tag.UniqueTagList;
-import org.teamstbf.yats.storage.XmlSerializableAddressBook;
+import org.teamstbf.yats.storage.XmlSerializableTaskManager;
 import org.testfx.api.FxToolkit;
 
 import com.google.common.io.Files;
@@ -139,8 +139,8 @@ public class TestUtil {
         createDataFileWithSampleData(TestApp.SAVE_LOCATION_FOR_TESTING);
     }
 
-    public static XmlSerializableAddressBook generateSampleStorageAddressBook() {
-        return new XmlSerializableAddressBook(new TaskManager());
+    public static XmlSerializableTaskManager generateSampleStorageAddressBook() {
+        return new XmlSerializableTaskManager(new TaskManager());
     }
 
     /**

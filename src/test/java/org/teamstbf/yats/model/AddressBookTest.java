@@ -33,7 +33,7 @@ public class AddressBookTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), addressBook.getTaskList());
         assertEquals(Collections.emptyList(), addressBook.getTagList());
     }
 
@@ -54,7 +54,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
         TaskManager typicalAddressBook = new TypicalTestEvents().getTypicalAddressBook();
-        List<ReadOnlyEvent> newPersons = typicalAddressBook.getPersonList();
+        List<ReadOnlyEvent> newPersons = typicalAddressBook.getTaskList();
         List<Tag> newTags = new ArrayList<>(typicalAddressBook.getTagList());
         // Repeat the first tag twice
         newTags.add(newTags.get(0));
@@ -77,7 +77,7 @@ public class AddressBookTest {
         }
 
         @Override
-        public ObservableList<ReadOnlyEvent> getPersonList() {
+        public ObservableList<ReadOnlyEvent> getTaskList() {
             return persons;
         }
 

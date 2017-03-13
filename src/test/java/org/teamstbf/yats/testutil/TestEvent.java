@@ -1,5 +1,6 @@
 package org.teamstbf.yats.testutil;
 
+import org.teamstbf.yats.model.item.Deadline;
 import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.Location;
 import org.teamstbf.yats.model.item.Periodic;
@@ -117,5 +118,11 @@ public class TestEvent implements ReadOnlyEvent {
 
     public void setEndTime(Timing timing) {
         this.endTime = timing;
+    }
+
+    @Override
+    public Deadline getDeadline() {
+        // TODO Auto-generated method stub
+        return null;
     }
 }
