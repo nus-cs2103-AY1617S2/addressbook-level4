@@ -13,7 +13,7 @@ import seedu.doist.logic.commands.SortCommand.SortType;
 import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskPriorityComparator;
 
-public class SortCommandTest extends AddressBookGuiTest {
+public class SortCommandTest extends DoistGUITest {
 
     @Test
     public void testSortByPriority() {

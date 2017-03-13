@@ -5,7 +5,7 @@ import static seedu.doist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
 
-import guitests.guihandles.PersonCardHandle;
+import guitests.guihandles.TaskCardHandle;
 import seedu.doist.commons.core.Messages;
 import seedu.doist.logic.commands.EditCommand;
 import seedu.doist.model.tag.Tag;
@@ -15,7 +15,7 @@ import seedu.doist.testutil.TaskBuilder;
 import seedu.doist.testutil.TestTask;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
-public class EditCommandTest extends AddressBookGuiTest {
+public class EditCommandTest extends DoistGUITest {
 
     // The list of persons in the person list panel is expected to match this list.
     // This list is updated with every successful call to assertEditSuccess().
@@ -55,27 +55,26 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
-        commandBox.runCommand("find Elle");
+        commandBox.runCommand("find math");
 
-        String detailsToEdit = "Belle";
+        String detailsToEdit = "Complete chemistry homework";
         int filteredPersonListIndex = 1;
-        int addressBookIndex = 5;
+        int addressBookIndex = 2;
 
         TestTask personToEdit = expectedPersonsList[addressBookIndex - 1];
-        TestTask editedPerson = new TaskBuilder(personToEdit).withName("Belle").build();
-
+        TestTask editedPerson = new TaskBuilder(personToEdit).withName("Complete chemistry homework").build();
         assertEditSuccess(filteredPersonListIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
 
     @Test
     public void edit_missingPersonIndex_failure() {
-        commandBox.runCommand("edit Bobby");
+        commandBox.runCommand("edit Maths");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void edit_invalidPersonIndex_failure() {
-        commandBox.runCommand("edit 8 Bobby");
+        commandBox.runCommand("edit 8 Maths");
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
@@ -96,7 +95,7 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_duplicatePerson_failure() {
-        commandBox.runCommand("edit 3 Alice Pauline");
+        commandBox.runCommand("edit 3 Do laundry");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
@@ -120,7 +119,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("edit " + filteredPersonListIndex + " " + detailsToEdit);
 
         // confirm the new card contains the right data
-        PersonCardHandle editedCard = personListPanel.navigateToPerson(editedPerson.getDescription().desc);
+        TaskCardHandle editedCard = personListPanel.navigateToPerson(editedPerson.getDescription().desc);
         assertMatching(editedPerson, editedCard);
 
         // confirm the list now contains all previous persons plus the person with updated details
