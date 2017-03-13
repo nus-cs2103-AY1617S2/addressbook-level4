@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
+import seedu.address.logic.LogicManager;
 
 /**
  * Terminates the program.
@@ -14,8 +15,14 @@ public class ExitCommand extends Command {
 
     @Override
     public CommandResult execute() {
+        LogicManager.undoCommandHistory.clear();
         EventsCenter.getInstance().post(new ExitAppRequestEvent());
         return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT);
+    }
+
+    @Override
+    public boolean isMutating() {
+        return false;
     }
 
 }
