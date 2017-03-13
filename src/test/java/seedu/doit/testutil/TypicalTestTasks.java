@@ -30,11 +30,11 @@ public class TypicalTestTasks {
             fiona = new TaskBuilder().withName("Fiona Kunz").withPriority("9482427")
                 .withDeadline("sunday").withDescription("little tokyo").build();
             george = new TaskBuilder().withName("George Best").withPriority("9482442")
-                .withDeadline("20/3/17").withDescription("4th street").build();
+                .withDeadline("3/20/17").withDescription("4th street").build();
 
             // Manually added
             hoon = new TaskBuilder().withName("Hoon Meier").withPriority("8482424")
-                .withDeadline("21/3/18").withDescription("little india").build();
+                .withDeadline("3/14/18").withDescription("little india").build();
             ida = new TaskBuilder().withName("Ida Mueller").withPriority("8482131")
                 .withDeadline("04/04/17").withDescription("chicago ave").build();
         } catch (IllegalValueException e) {

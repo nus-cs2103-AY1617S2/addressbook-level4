@@ -1,6 +1,7 @@
 package seedu.doit.model.item;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import seedu.doit.commons.exceptions.IllegalValueException;
 import seedu.doit.logic.parser.DateTimeParser;
@@ -13,7 +14,7 @@ public class EndTime {
 
     public static final String MESSAGE_ENDTIME_CONSTRAINTS =
         "Item End Time should be 2 alphanumeric/period strings separated by '@'";
-    public static final String ENDTIME_VALIDATION_REGEX = "[^\\s].*";
+    public static final String ENDTIME_VALIDATION_REGEX = ".*";
 
     public final String value;
 
@@ -28,7 +29,8 @@ public class EndTime {
 
         LocalDateTime date = DateTimeParser.parseDateTime(trimmedEndTime).orElseThrow(()
             -> new IllegalValueException("Invalid Date Format: " + trimmedEndTime));
-        String dateInString = date.toString();
+
+        String dateInString = formatDate(date);
 
         if (!isValidEndTime(dateInString)) {
             throw new IllegalValueException(MESSAGE_ENDTIME_CONSTRAINTS);
@@ -58,6 +60,11 @@ public class EndTime {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    private static String formatDate(LocalDateTime input) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
+        return input.format(formatter);
     }
 
 }
