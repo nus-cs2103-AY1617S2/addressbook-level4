@@ -14,12 +14,10 @@ import seedu.address.logic.commands.exceptions.CommandException;
  */
 public class SaveToCommand extends Command {
 
-
-    public static final String COMMAND_WORD = "save";
+    public static final String COMMAND_WORD = "saveto";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " to: Saves to the specified directory.\n"
-            + "Parameters: dir_location\n"
-            + "Example: " + COMMAND_WORD + "to .\\example_folder";
+            + "Parameters: dir_location\n" + "Example: " + COMMAND_WORD + "to .\\example_folder";
     public static final String MESSAGE_SUCCESS = "Save location has been changed to: %1$s";
     public static final String MESSAGE_CONFIG_SAVE_FAILURE = "Unable to save config file.";
     public static final String MESSAGE_WRITE_ACCESS_DENIED = "No write permissions to: %1$s";
@@ -31,7 +29,8 @@ public class SaveToCommand extends Command {
     /**
      * Creates an SaveToCommand using raw values.
      *
-     * @throws IllegalValueException if any of the raw values are invalid
+     * @throws IllegalValueException
+     *             if any of the raw values are invalid
      */
     public SaveToCommand(String dirLocation) {
         this.saveToDir = dirLocation;
@@ -55,8 +54,7 @@ public class SaveToCommand extends Command {
             throw new CommandException(MESSAGE_CONFIG_SAVE_FAILURE);
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS,
-                new File(saveToDir, TASK_MANAGER_FILE_NAME).getAbsolutePath()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, path));
     }
 
 }
