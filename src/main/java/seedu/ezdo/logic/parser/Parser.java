@@ -46,33 +46,41 @@ public class Parser {
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
+        case AddCommand.SHORT_COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
+        case EditCommand.SHORT_COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
 
         case KillCommand.COMMAND_WORD:
+        case KillCommand.SHORT_COMMAND_WORD:
             return new KillCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
+        case ClearCommand.SHORT_COMMAND_WORD:
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
+        case FindCommand.SHORT_COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
+        case ListCommand.SHORT_COMMAND_WORD:
             return new ListCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
+        case HelpCommand.SHORT_COMMAND_WORD:
             return new HelpCommand();
 
         case SaveCommand.COMMAND_WORD:
+        case SaveCommand.SHORT_COMMAND_WORD:
             return new SaveCommandParser().parse(arguments);
 
         default:
