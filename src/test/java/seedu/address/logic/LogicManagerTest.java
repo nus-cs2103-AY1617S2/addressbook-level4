@@ -358,6 +358,11 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void executeMarkInvalidIndex() throws Exception {
+        assertIndexNotFoundBehaviorForCommand("mark");
+    }
+
+    @Test
     public void execute_find_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
         assertCommandFailure("find ", expectedMessage);
