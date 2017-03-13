@@ -14,6 +14,13 @@ public class DeadlineTask extends Task {
         this.time = time;
     }
     /**
+     * Copy of Constructor.
+     */
+    public DeadlineTask(Name name, Date date) {
+        super(name);
+        this.date = date;
+    }
+    /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public DeadlineTask(ReadOnlyTask source) {
