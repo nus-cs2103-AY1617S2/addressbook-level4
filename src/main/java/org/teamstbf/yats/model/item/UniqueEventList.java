@@ -11,7 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
+ * A list of events that enforces uniqueness between its elements and does not allow nulls.
  *
  * Supports a minimal set of list operations.
  *
@@ -23,7 +23,7 @@ public class UniqueEventList implements Iterable<Event> {
     private final ObservableList<Event> internalList = FXCollections.observableArrayList();
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent event as the given argument.
      */
     public boolean contains(ReadOnlyEvent p) {
         assert p != null;
@@ -31,9 +31,9 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
-     * Adds a person to the list.
+     * Adds a event to the list.
      *
-     * @throws DuplicateEventException if the person to add is a duplicate of an existing person in the list.
+     * @throws DuplicateEventException if the event to add is a duplicate of an existing event in the list.
      */
     public void add(Event p) throws DuplicateEventException {
         assert p != null;
@@ -44,51 +44,51 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
-     * Updates the person in the list at position {@code index} with {@code editedPerson}.
+     * Updates the event in the list at position {@code index} with {@code editedEvent}.
      *
-     * @throws DuplicateEventException if updating the person's details causes the person to be equivalent to
-     *      another existing person in the list.
+     * @throws DuplicateEventException if updating the event's details causes the event to be equivalent to
+     *      another existing event in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updatePerson(int index, ReadOnlyEvent editedEvent) throws DuplicateEventException {
+    public void updateEvent(int index, ReadOnlyEvent editedEvent) throws DuplicateEventException {
         assert editedEvent != null;
 
-        Event personToUpdate = internalList.get(index);
-        if (!personToUpdate.equals(editedEvent) && internalList.contains(editedEvent)) {
+        Event eventToUpdate = internalList.get(index);
+        if (!eventToUpdate.equals(editedEvent) && internalList.contains(editedEvent)) {
             throw new DuplicateEventException();
         }
 
-        personToUpdate.resetData(editedEvent);
-        // TODO: The code below is just a workaround to notify observers of the updated person.
-        // The right way is to implement observable properties in the Person class.
-        // Then, PersonCard should then bind its text labels to those observable properties.
-        internalList.set(index, personToUpdate);
+        eventToUpdate.resetData(editedEvent);
+        // TODO: The code below is just a workaround to notify observers of the updated event.
+        // The right way is to implement observable properties in the Event class.
+        // Then, EventCard should then bind its text labels to those observable properties.
+        internalList.set(index, eventToUpdate);
     }
 
     /**
-     * Removes the equivalent person from the list.
+     * Removes the equivalent event from the list.
      *
-     * @throws EventNotFoundException if no such person could be found in the list.
+     * @throws EventNotFoundException if no such event could be found in the list.
      */
     public boolean remove(ReadOnlyEvent toRemove) throws EventNotFoundException {
         assert toRemove != null;
-        final boolean personFoundAndDeleted = internalList.remove(toRemove);
-        if (!personFoundAndDeleted) {
+        final boolean eventFoundAndDeleted = internalList.remove(toRemove);
+        if (!eventFoundAndDeleted) {
             throw new EventNotFoundException();
         }
-        return personFoundAndDeleted;
+        return eventFoundAndDeleted;
     }
 
-    public void setPersons(UniqueEventList replacement) {
+    public void setEvents(UniqueEventList replacement) {
         this.internalList.setAll(replacement.internalList);
     }
 
-    public void setPersons(List<? extends ReadOnlyEvent> persons) throws DuplicateEventException {
+    public void setEvents(List<? extends ReadOnlyEvent> events) throws DuplicateEventException {
         final UniqueEventList replacement = new UniqueEventList();
-        for (final ReadOnlyEvent person : persons) {
-            replacement.add(new Event(person));
+        for (final ReadOnlyEvent event : events) {
+            replacement.add(new Event(event));
         }
-        setPersons(replacement);
+        setEvents(replacement);
     }
 
     public UnmodifiableObservableList<Event> asObservableList() {
@@ -118,13 +118,13 @@ public class UniqueEventList implements Iterable<Event> {
      */
     public static class DuplicateEventException extends DuplicateDataException {
         protected DuplicateEventException() {
-            super("Operation would result in duplicate persons");
+            super("Operation would result in duplicate events");
         }
     }
 
     /**
-     * Signals that an operation targeting a specified person in the list would fail because
-     * there is no such matching person in the list.
+     * Signals that an operation targeting a specified event in the list would fail because
+     * there is no such matching event in the list.
      */
     public static class EventNotFoundException extends Exception {}
 

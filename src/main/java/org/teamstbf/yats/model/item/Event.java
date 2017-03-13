@@ -5,9 +5,9 @@ import java.util.Objects;
 import org.teamstbf.yats.commons.util.CollectionUtil;
 import org.teamstbf.yats.model.tag.UniqueTagList;
 
-public class Event implements ReadOnlyEvent {
+public class Event implements ReadOnlyEvent, Comparable<Event> {
 
-    private Title name;
+    private Title title;
     private Periodic period;
     private Timing startTime;
     private Timing endTime;
@@ -19,10 +19,10 @@ public class Event implements ReadOnlyEvent {
     /**
      * Every field must be present and not null.
      */
-    public Event(Title name, Location location, Periodic periodic, Timing startTime,
+    public Event(Title title, Location location, Periodic periodic, Timing startTime,
     		Timing endTime, Description description, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name);
-        this.name = name;
+        assert !CollectionUtil.isAnyNull(title);
+        this.title = title;
         this.period = periodic;
         this.location = location;
         this.startTime = startTime;
@@ -32,25 +32,25 @@ public class Event implements ReadOnlyEvent {
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
-    public Event(ReadOnlyEvent editedReadOnlyPerson) {
-        this(editedReadOnlyPerson.getTitle(), editedReadOnlyPerson.getLocation(),
-        		editedReadOnlyPerson.getPeriod(), editedReadOnlyPerson.getStartTime(),
-                editedReadOnlyPerson.getEndTime(), editedReadOnlyPerson.getDescription(),
-                editedReadOnlyPerson.getTags());
+    public Event(ReadOnlyEvent editedReadOnlyEvent) {
+        this(editedReadOnlyEvent.getTitle(), editedReadOnlyEvent.getLocation(),
+        		editedReadOnlyEvent.getPeriod(), editedReadOnlyEvent.getStartTime(),
+                editedReadOnlyEvent.getEndTime(), editedReadOnlyEvent.getDescription(),
+                editedReadOnlyEvent.getTags());
     }
 
     public Event() {
 
     }
 
-    public void setTitle(Title name) {
-        assert name != null;
-        this.name = name;
+    public void setTitle(Title title) {
+        assert title != null;
+        this.title = title;
     }
 
     @Override
     public Title getTitle() {
-        return name;
+        return title;
     }
 
     public void setPeriod(Periodic period) {
@@ -136,12 +136,18 @@ public class Event implements ReadOnlyEvent {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, location, period, startTime, endTime, description, tags);
+        return Objects.hash(title, location, period, startTime, endTime, description, tags);
     }
 
     @Override
     public String toString() {
         return getAsText();
     }
+
+	@Override
+	public int compareTo(Event e) {
+		return (this.title.toString()).compareTo(e.getTitle().toString());
+	}
+
 
 }

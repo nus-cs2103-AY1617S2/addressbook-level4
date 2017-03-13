@@ -5,7 +5,6 @@ import java.util.Set;
 import org.teamstbf.yats.commons.core.UnmodifiableObservableList;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
-import org.teamstbf.yats.model.item.Task;
 import org.teamstbf.yats.model.item.UniqueEventList;
 import org.teamstbf.yats.model.item.UniqueEventList.DuplicateEventException;
 
@@ -39,13 +38,15 @@ public interface Model {
 			throws DuplicateEventException;
 
 	/** Returns the filtered event list as an {@code UnmodifiableObservableList<ReadOnlyEvent>} */
-	UnmodifiableObservableList<ReadOnlyEvent> getFilteredEventList();
+	UnmodifiableObservableList<ReadOnlyEvent> getFilteredTaskList();
 
 	/** Updates the filter of the filtered event list to show all events */
 	void updateFilteredListToShowAll();
 
-	/** Updates the filter of the filtered event list to filter by the given keywords*/
+	/** Updates the filter of the filtered event list to filter by the given keywords */
 	void updateFilteredEventList(Set<String> keywords);
-
+	
+	/** Sorts the filtered event list */
+	void sortFilteredEventList();
 
 }

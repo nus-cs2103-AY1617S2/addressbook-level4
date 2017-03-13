@@ -42,7 +42,6 @@ public class Periodic {
 		}
 		this.value = trimmedPeriod;
 		int repeatFrequency = parsePeriod(trimmedPeriod);
-		setupScheduleArray(scheduleArray, repeatFrequency);
 	}
 
 	/**
@@ -75,10 +74,7 @@ public class Periodic {
 		return scheduleArray;
 	}
 
-	private void setupScheduleArray(ArrayList<Schedule> scheduleArray, int repeatFrequency) {
-		for(int i=0; i<repeatFrequency; i++) {
-			scheduleArray.add(new Schedule());
-		}
+	public void setupScheduleArray() {
 	}
 
 	/**
