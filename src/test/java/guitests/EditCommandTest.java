@@ -20,10 +20,10 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Create a google doc p/lo s/incomplete n/For our project proposal t/";
+        String detailsToEdit = "Create a google doc p/low s/incomplete n/For our project proposal t/";
         int addressBookIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withName("Create a google doc").withPriority("lo")
+        TestTask editedTask = new TaskBuilder().withName("Create a google doc").withPriority("low")
                 .withStatus("incomplete").withNote("For our project proposal").build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);

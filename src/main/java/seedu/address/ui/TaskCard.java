@@ -30,7 +30,7 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
-        priority.setText(task.getPriority().value);
+        priority.setText(task.getPriority().value.toString());
         note.setText(task.getNote().value);
         status.setText(task.getStatus().value);
         initTags(task);

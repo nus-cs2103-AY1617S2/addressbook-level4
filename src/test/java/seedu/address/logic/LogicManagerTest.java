@@ -29,10 +29,12 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -184,14 +186,13 @@ public class LogicManagerTest {
         assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
     }
 
-
     @Test
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add wrong args wrong args", expectedMessage);
         assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid,address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 valid@email.butNoPrefix a/valid, address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
+        assertCommandFailure("add Valid Name p/hi valid@email.butNoPrefix a/valid, address", expectedMessage);
+        assertCommandFailure("add Valid Name p/mid e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
     }
 
     @Test
@@ -331,6 +332,34 @@ public class LogicManagerTest {
                 expectedTaskManager.getTaskList());
     }
 
+    @Test
+    public void executeMarkCompleteTest() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        List<Task> threeTasks = helper.generateTaskList(3);
+
+        TaskManager expectedTaskManager = helper.generateAddressBook(threeTasks);
+        Task editedTask = threeTasks.get(0);
+        editedTask.setStatus(new Status("complete"));
+
+        expectedTaskManager.updateTask(0, editedTask);
+        helper.addToModel(model, threeTasks);
+
+        assertCommandSuccess("mark 1",
+                String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, threeTasks.get(0)),
+                expectedTaskManager,
+                expectedTaskManager.getTaskList());
+    }
+
+    @Test
+    public void executeMarkInvalidArgsFormat() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE);
+        assertCommandFailure("mark ", expectedMessage);
+    }
+
+    @Test
+    public void executeMarkInvalidIndex() throws Exception {
+        assertIndexNotFoundBehaviorForCommand("mark");
+    }
 
     @Test
     public void execute_find_invalidArgsFormat() {
@@ -402,14 +431,14 @@ public class LogicManagerTest {
     class TestDataHelper {
 
         Task adam() throws Exception {
-            Name name = new Name("Adam Brown");
-            Priority privatePhone = new Priority("111111");
-            Status email = new Status("adam@gmail.com");
-            Note privateAddress = new Note("111, alpha street");
+            Name name = new Name("Rehearse OP1");
+            Priority priority = new Priority("hi");
+            Status email = new Status("incomplete");
+            Note note = new Note("edit slides");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, privatePhone, email, privateAddress, tags);
+            return new Task(name, priority, email, note, tags);
         }
 
         /**
@@ -422,7 +451,7 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Name("Task " + seed),
-                    new Priority("" + Math.abs(seed)),
+                    generatePriorityWithSeed(seed),
                     new Status(seed + "@email"),
                     new Note("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
@@ -437,7 +466,7 @@ public class LogicManagerTest {
 
             cmd.append(p.getName().toString());
             cmd.append(" s/").append(p.getStatus());
-            cmd.append(" p/").append(p.getPriority());
+            cmd.append(" p/").append(Priority.toUserInputString(p.getPriority().value));
             cmd.append(" n/").append(p.getNote());
 
             UniqueTagList tags = p.getTags();
@@ -521,11 +550,24 @@ public class LogicManagerTest {
         Task generateTaskWithName(String name) throws Exception {
             return new Task(
                     new Name(name),
-                    new Priority("1"),
-                    new Status("1@email"),
+                    new Priority("hi"),
+                    new Status("incomplete"),
                     new Note("House of 1"),
                     new UniqueTagList(new Tag("tag"))
             );
+        }
+
+        private Priority generatePriorityWithSeed(int seed) {
+            switch(seed) {
+            case 1:
+                return new Priority(Priority.Type.LOW);
+            case 2:
+                return new Priority(Priority.Type.MEDIUM);
+            case 3:
+                return new Priority(Priority.Type.HIGH);
+            default:
+                return new Priority(Priority.Type.NONE);
+            }
         }
     }
 }
