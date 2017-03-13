@@ -25,22 +25,18 @@ public class IndexTokenizer {
     /**
      * Split a string of unprocessed indexes into a list.
      * This function splits the list by comma (","), then parse each substring to get a list of index.
-     * @return the list of indexes in sorted order (which is the union of all the parsed substring)
+     * @return the list of unique indexes in sorted order (which is the union of all the parsed substring)
      */
     public static List<Integer> splitStringToIndexes(String indexToken, int maxIndex) {
         String[] splittedStringIndexes = indexToken.split(",");
-        Set<Integer> setOfIndexes = new TreeSet<Integer>();
+        Set<Integer> indexes = new TreeSet<Integer>();
         for (String splittedStringIndex : splittedStringIndexes) {
             List<Integer> splittedIndexes = parseIndexes(splittedStringIndex, maxIndex);
             for (int splittedIndex : splittedIndexes) {
-                setOfIndexes.add(splittedIndex);
+                indexes.add(splittedIndex);
             }
         }
-        List<Integer> indexes = new ArrayList<Integer>();
-        for (int index : setOfIndexes) {
-            indexes.add(index);
-        }
-        return indexes;
+        return new ArrayList<Integer>(indexes);
     }
 
     /**

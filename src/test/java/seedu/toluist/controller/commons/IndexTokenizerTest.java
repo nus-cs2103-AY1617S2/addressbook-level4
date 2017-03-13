@@ -53,9 +53,16 @@ public class IndexTokenizerTest {
     }
 
     @Test
-    public void splitIndexes_obtainIndexesFromAssortedUnorderedIndexes() {
+    public void splitIndexes_obtainIndexesFromAssortedUnorderedIndexes1() {
         List<Integer> actual = IndexTokenizer.splitStringToIndexes("3, 2, 8, 5-7", 8);
         List<Integer> expected = Arrays.asList(2, 3, 5, 6, 7, 8);
+        assertTrue(actual.equals(expected));
+    }
+
+    @Test
+    public void splitIndexes_obtainIndexesFromAssortedUnorderedIndexes2() {
+        List<Integer> actual = IndexTokenizer.splitStringToIndexes("7, - 3", 8);
+        List<Integer> expected = Arrays.asList(1, 2, 3, 7);
         assertTrue(actual.equals(expected));
     }
 
