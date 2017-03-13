@@ -94,8 +94,18 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskList(Set<String> keywords) {
+    public void updateFilteredTaskListByName(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
+    }
+
+    @Override
+    public void updateFilteredTaskListByStartDateTime(String keywords) {
+        updateFilteredTaskList(new PredicateExpression(new StartDatetimeQualifier(keywords)));
+    }
+
+    @Override
+    public void updateFilteredTaskListByEndDateTime(String keywords) {
+        updateFilteredTaskList(new PredicateExpression(new EndDatetimeQualifier(keywords)));
     }
 
     private void updateFilteredTaskList(Expression expression) {
@@ -151,6 +161,44 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
+        }
+    }
+
+    private class StartDatetimeQualifier implements Qualifier {
+        private String startDateKeyWords;
+
+        StartDatetimeQualifier(String startDateKeyWords) {
+            this.startDateKeyWords = startDateKeyWords;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return task.getStartDateTime().toString().contains(startDateKeyWords) ||
+                    task.getStartDateTime().toString().toLowerCase().contains(startDateKeyWords);
+        }
+
+        @Override
+        public String toString() {
+            return "startDateTime=" + startDateKeyWords;
+        }
+    }
+
+    private class EndDatetimeQualifier implements Qualifier {
+        private String endDateKeyWords;
+
+        EndDatetimeQualifier(String endDateKeyWords) {
+            this.endDateKeyWords = endDateKeyWords;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return task.getEndDateTime().toString().contains(endDateKeyWords) ||
+                    task.getEndDateTime().toString().toLowerCase().contains(endDateKeyWords);
+        }
+
+        @Override
+        public String toString() {
+            return "endDateTime=" + endDateKeyWords;
         }
     }
 
