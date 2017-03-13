@@ -14,6 +14,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.logic.parser.DeleteCommandParser;
 
 /**
  * Panel containing the list of tasks.
@@ -57,6 +58,7 @@ public class TaskListPanel extends UiPart<Region> {
         Platform.runLater(() -> {
             taskListView.scrollTo(index);
             taskListView.getSelectionModel().clearAndSelect(index);
+            DeleteCommandParser.setIndex(index+1);         
         });
     }
 
