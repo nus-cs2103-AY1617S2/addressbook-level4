@@ -15,7 +15,7 @@ import seedu.geekeep.model.ReadOnlyTaskManager;
 import seedu.geekeep.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of TaskManager data in local storage.
  */
 public class StorageManager extends ComponentManager implements Storage {
 
@@ -30,8 +30,8 @@ public class StorageManager extends ComponentManager implements Storage {
         this.userPrefsStorage = userPrefsStorage;
     }
 
-    public StorageManager(String addressBookFilePath, String userPrefsFilePath) {
-        this(new XmlTaskManagerStorage(addressBookFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
+    public StorageManager(String taskManagerFilePath, String userPrefsFilePath) {
+        this(new XmlTaskManagerStorage(taskManagerFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
     }
 
     // ================ UserPrefs methods ==============================
@@ -47,7 +47,7 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ TaskManager methods ==============================
 
     @Override
     public String getTaskManagerFilePath() {
@@ -66,14 +66,14 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public void saveTaskManager(ReadOnlyTaskManager addressBook) throws IOException {
-        saveTaskManager(addressBook, taskManagerStorage.getTaskManagerFilePath());
+    public void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException {
+        saveTaskManager(taskManager, taskManagerStorage.getTaskManagerFilePath());
     }
 
     @Override
-    public void saveTaskManager(ReadOnlyTaskManager addressBook, String filePath) throws IOException {
+    public void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        taskManagerStorage.saveTaskManager(addressBook, filePath);
+        taskManagerStorage.saveTaskManager(taskManager, filePath);
     }
 
 
