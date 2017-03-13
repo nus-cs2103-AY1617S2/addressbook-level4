@@ -70,7 +70,7 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void doneTask(int filteredTaskListIndex) {
         int toDoListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         toDoList.doneTask(toDoListIndex);
-        updateFilteredTaskList(new PredicateExpression(p -> p.getCompleteStatus()==false));
+        updateFilteredTaskList(new PredicateExpression(p -> p.getDoneStatus()==false));
         indicateToDoListChanged();
     }
 
