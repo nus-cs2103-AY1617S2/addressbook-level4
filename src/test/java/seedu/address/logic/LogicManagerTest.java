@@ -456,7 +456,7 @@ public class LogicManagerTest {
                     generatePriorityWithSeed(seed),
                     new Status(seed + "@email"),
                     new Note("House of " + seed),
-                    new Deadline("12/12/" + seed),
+                    new Deadline("12/12/" + (2017 + seed)),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -471,6 +471,7 @@ public class LogicManagerTest {
             cmd.append(" s/").append(p.getStatus());
             cmd.append(" p/").append(Priority.toUserInputString(p.getPriority().value));
             cmd.append(" n/").append(p.getNote());
+            cmd.append(" d/").append(p.getDeadline().toString());
 
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {

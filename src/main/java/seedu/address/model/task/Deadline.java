@@ -71,8 +71,8 @@ public class Deadline {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Name // instanceof handles nulls
-                && this.deadline.equals(((Name) other).fullName)); // state check
+                || (other instanceof Deadline // instanceof handles nulls
+                && this.deadline.equals(((Deadline) other).deadline)); // state check
 
     }
 
