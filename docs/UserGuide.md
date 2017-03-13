@@ -69,10 +69,10 @@ Format: `list`
 List only the undone tasks in TaskIt.<br>
 Format: `list undone`
 
-### 2.4. Updating an existing task : `update`
+### 2.4. Editing an existing task : `edit`
 
 Edits an existing task in TaskIt.<br>
-Format: `update <index>  <title|description|deadline|tag> <new>`
+Format: `edit <index>  <title|description|deadline|tag> <new>`
 
 > * Edits the task at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
@@ -83,14 +83,14 @@ Format: `update <index>  <title|description|deadline|tag> <new>`
 
 Examples:
 
-* `update 2 title finish SWE HW`<br>
-  Update the second task title to finish SWE HW.
+* `edit 2 title finish SWE HW`<br>
+  Edit the second task title to finish SWE HW.
 
-* `Update 4 description work on user guide`<br>
-  Update the fourth task description to work on user guide.
+* `edit 4 description work on user guide`<br>
+  Edit the fourth task description to work on user guide.
   
-* `Update 1 deadline this Friday 3 pm`<br>
-  Update the first task deadline to this Friday 3pm.
+* `edit 1 deadline this Friday 3 pm`<br>
+  Edit the first task deadline to this Friday 3pm.
 
 ### 2.5. Searching all tasks containing any keyword in their name: `find`
 
