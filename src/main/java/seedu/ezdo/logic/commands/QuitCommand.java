@@ -9,6 +9,7 @@ import seedu.ezdo.commons.events.ui.ExitAppRequestEvent;
 public class QuitCommand extends Command {
 
     public static final String COMMAND_WORD = "quit";
+    public static final String SHORT_COMMAND_WORD = "q";
 
     public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Exiting EzDo as requested ...";
 

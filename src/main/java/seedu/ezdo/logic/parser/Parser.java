@@ -73,6 +73,7 @@ public class Parser {
             return new ListCommand();
 
         case QuitCommand.COMMAND_WORD:
+        case QuitCommand.SHORT_COMMAND_WORD:
             return new QuitCommand();
 
         case HelpCommand.COMMAND_WORD:
