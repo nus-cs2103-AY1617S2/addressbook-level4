@@ -12,11 +12,15 @@ public class FindCommandTest extends TaskManagerGuiTest {
     @Test
     public void find_nonEmptyList() {
         assertFindResult("find Mark"); // no results
-        assertFindResult("find Task10"); // multiple results
+        assertFindResult("find Task4", td.task4); // multiple results
 
         //find after deleting one result
         commandBox.runCommand("delete 1");
-        assertFindResult("find Task10");
+        assertFindResult("find Task7", td.task7);
+
+        //find task after deleting it
+        commandBox.runCommand("delete 1");
+        commandBox.runCommand("find Task7");
     }
 
     @Test
