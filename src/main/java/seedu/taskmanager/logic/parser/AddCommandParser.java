@@ -6,6 +6,8 @@ import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_STARTTIME;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_ENDTIME;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static seedu.taskmanager.model.task.Date.DATE_VALIDATION_REGEX2;
+import seedu.taskmanager.commons.util.CurrentDate;
 
 import java.util.NoSuchElementException;
 
@@ -35,6 +37,9 @@ public class AddCommandParser {
         	String deadline = argsTokenizer.getValue(PREFIX_DEADLINE).orElse(EMPTY_FIELD);
         	String starttime = argsTokenizer.getValue(PREFIX_STARTTIME).orElse(EMPTY_FIELD);
         	String endtime = argsTokenizer.getValue(PREFIX_ENDTIME).orElse(EMPTY_FIELD);
+        	
+        	if (date.matches(DATE_VALIDATION_REGEX2)) date = CurrentDate.getNewDate(date);
+        	
             return new AddCommand(
                     taskname,
                     date,
