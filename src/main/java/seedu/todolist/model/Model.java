@@ -25,22 +25,34 @@ public interface Model {
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
     /**
-     * Updates the person located at {@code filteredPersonListIndex} with {@code editedPerson}.
+     * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
      *
-     * @throws DuplicateTaskException if updating the person's details causes the person to be equivalent to
-     *      another existing person in the list.
-     * @throws IndexOutOfBoundsException if {@code filteredPersonListIndex} < 0 or >= the size of the filtered list.
+     * @throws DuplicateTaskException if updating the person's details causes the task to be equivalent to
+     *      another existing task in the list.
+     * @throws IndexOutOfBoundsException if {@code filteredTaskListIndex} < 0 or >= the size of the filtered list.
      */
     void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException;
 
-    /** Returns the filtered person list as an {@code UnmodifiableObservableList<ReadOnlyPerson>} */
+    /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
 
-    /** Updates the filter of the filtered person list to show all persons */
+    /** Returns the filtered task list of incomplete tasks as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    //@@author A0139633B
+    UnmodifiableObservableList<ReadOnlyTask> getFilteredIncompleteTaskList();
+
+    /** Returns the filtered task list of complete tasks as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    //@@author A0139633B
+    UnmodifiableObservableList<ReadOnlyTask> getFilteredCompleteTaskList();
+
+    /** Returns the filtered task list of overdue tasks as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    //@@author A0139633B
+    UnmodifiableObservableList<ReadOnlyTask> getFilteredOverdueTaskList();
+
+    /** Updates the filter of the filtered task list to show all persons */
     void updateFilteredListToShowAll();
 
-    /** Updates the filter of the filtered person list to filter by the given keywords*/
+    /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
 
 }

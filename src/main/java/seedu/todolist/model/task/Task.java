@@ -6,13 +6,14 @@ import seedu.todolist.commons.util.CollectionUtil;
 import seedu.todolist.model.tag.UniqueTagList;
 
 /**
- * Represents a Task in the todo list.
- * Guarantees: details are present and not null, field values are validated.
+ * Represents a Task in the todo list. Guarantees: details are present and not
+ * null, field values are validated.
  */
 public class Task implements ReadOnlyTask {
 
     private Name name;
     private UniqueTagList tags;
+    private boolean completed;
 
     /**
      * Every field must be present and not null.
@@ -21,6 +22,7 @@ public class Task implements ReadOnlyTask {
         assert !CollectionUtil.isAnyNull(name, tags);
         this.name = name;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.completed = false;
     }
 
     /**
@@ -45,6 +47,15 @@ public class Task implements ReadOnlyTask {
         return new UniqueTagList(tags);
     }
 
+    @Override
+    public boolean isComplete() {
+        return this.completed;
+    }
+
+    public boolean getCompletionStatus() {
+        return this.completed;
+    }
+
     /**
      * Replaces this person's tags with the tags in the argument tag list.
      */
@@ -66,12 +77,13 @@ public class Task implements ReadOnlyTask {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ReadOnlyTask // instanceof handles nulls
-                && this.isSameStateAs((ReadOnlyTask) other));
+                        && this.isSameStateAs((ReadOnlyTask) other));
     }
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
+        // use this method for custom fields hashing instead of implementing
+        // your own
         return Objects.hash(name, tags);
     }
 
