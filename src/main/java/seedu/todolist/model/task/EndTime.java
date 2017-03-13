@@ -45,4 +45,5 @@ public class EndTime {
     public int hashCode() {
         return this.toString().hashCode();
     }
+
 }
