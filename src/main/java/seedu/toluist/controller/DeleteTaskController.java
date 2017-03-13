@@ -1,8 +1,11 @@
 package seedu.toluist.controller;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import seedu.toluist.commons.core.LogsCenter;
+import seedu.toluist.controller.commons.IndexTokenizer;
 import seedu.toluist.controller.commons.TaskTokenizer;
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.Task;
@@ -15,11 +18,11 @@ import seedu.toluist.ui.Ui;
 public class DeleteTaskController extends Controller {
 
     private static final String COMMAND_TEMPLATE = "^delete"
-            + "(\\s+(?<index>\\d+))?\\s*";
+            + "(\\s+(?<index>.+))?\\s*";
 
     private static final String COMMAND_DELETE_TASK = "delete";
 
-    private static final String RESULT_MESSAGE_DELETE_TASK = "Task deleted";
+    private static final String RESULT_MESSAGE_DELETE_TASK = "Deleted %s: %s";
 
     private Logger logger = LogsCenter.getLogger(getClass());
 
@@ -37,9 +40,9 @@ public class DeleteTaskController extends Controller {
         HashMap<String, String> tokens = taskTokenizer.tokenize(command, true, false);
 
         String indexToken = tokens.get(TaskTokenizer.TASK_VIEW_INDEX);
-        Task task = taskTokenizer.getTask(indexToken);
-
-        commandResult = delete(todoList, task);
+        List<Integer> indexes = IndexTokenizer.splitIndexes(indexToken, todoList.getTasks().size());
+        List<Task> tasks = uiStore.getTasks(indexes);
+        commandResult = delete(todoList, tasks);
 
         if (todoList.save()) {
             uiStore.setTask(todoList.getTasks());
@@ -49,9 +52,19 @@ public class DeleteTaskController extends Controller {
         return commandResult;
     }
 
+    private CommandResult delete(TodoList todoList, List<Task> tasks) {
+        List<String> messages = tasks.
+                                stream().
+                                map(task -> delete(todoList, task).
+                                        getFeedbackToUser()).
+                                collect(Collectors.toList());
+        return new CommandResult(String.join("\n", messages));
+    }
+
     private CommandResult delete(TodoList todoList, Task task) {
         todoList.remove(task);
-        return new CommandResult(RESULT_MESSAGE_DELETE_TASK);
+        String taskType = task.isEvent() ? "Event" : "Task";
+        return new CommandResult(String.format(RESULT_MESSAGE_DELETE_TASK, taskType, task.getDescription()));
     }
 
     @Override

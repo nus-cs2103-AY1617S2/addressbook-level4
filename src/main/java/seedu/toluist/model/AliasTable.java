@@ -45,7 +45,7 @@ public class AliasTable {
      * Remove all aliases.
      */
     public void clearAliases() {
-        aliasMapping.clear();;
+        aliasMapping.clear();
     }
 
     /**

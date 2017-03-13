@@ -22,30 +22,30 @@ public class StringUtilTest {
     public void isUnsignedPositiveInteger() {
 
         // Equivalence partition: null
-        assertFalse(StringUtil.isUnsignedInteger(null));
+        assertFalse(StringUtil.isPositiveInteger(null));
 
         // EP: empty strings
-        assertFalse(StringUtil.isUnsignedInteger("")); // Boundary value
-        assertFalse(StringUtil.isUnsignedInteger("  "));
+        assertFalse(StringUtil.isPositiveInteger("")); // Boundary value
+        assertFalse(StringUtil.isPositiveInteger("  "));
 
         // EP: not a number
-        assertFalse(StringUtil.isUnsignedInteger("a"));
-        assertFalse(StringUtil.isUnsignedInteger("aaa"));
+        assertFalse(StringUtil.isPositiveInteger("a"));
+        assertFalse(StringUtil.isPositiveInteger("aaa"));
 
         // EP: zero
-        assertFalse(StringUtil.isUnsignedInteger("0"));
+        assertFalse(StringUtil.isPositiveInteger("0"));
 
         // EP: signed numbers
-        assertFalse(StringUtil.isUnsignedInteger("-1"));
-        assertFalse(StringUtil.isUnsignedInteger("+1"));
+        assertFalse(StringUtil.isPositiveInteger("-1"));
+        assertFalse(StringUtil.isPositiveInteger("+1"));
 
         // EP: numbers with white space
-        assertFalse(StringUtil.isUnsignedInteger(" 10 ")); // Leading/trailing spaces
-        assertFalse(StringUtil.isUnsignedInteger("1 0"));  // Spaces in the middle
+        assertFalse(StringUtil.isPositiveInteger(" 10 ")); // Leading/trailing spaces
+        assertFalse(StringUtil.isPositiveInteger("1 0"));  // Spaces in the middle
 
         // EP: valid numbers, should return true
-        assertTrue(StringUtil.isUnsignedInteger("1")); // Boundary value
-        assertTrue(StringUtil.isUnsignedInteger("10"));
+        assertTrue(StringUtil.isPositiveInteger("1")); // Boundary value
+        assertTrue(StringUtil.isPositiveInteger("10"));
     }
 
 
@@ -147,6 +147,4 @@ public class StringUtilTest {
         thrown.expect(AssertionError.class);
         StringUtil.getDetails(null);
     }
-
-
 }

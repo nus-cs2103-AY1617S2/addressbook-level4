@@ -46,6 +46,10 @@ public class TodoList {
         return currentTodoList;
     }
 
+    public static void setCurrentTodoList(TodoList todoList) {
+        currentTodoList = todoList;
+    }
+
     public boolean save() {
         currentTodoList = this;
         return storage.save(this);

@@ -37,6 +37,7 @@ public class UndoController extends Controller {
         TodoList todoList = undoResult.getKey();
         int actualUndoTimes =  undoResult.getValue();
 
+        TodoList.setCurrentTodoList(todoList);
         uiStore.setTask(todoList.getTasks());
         renderer.render();
 

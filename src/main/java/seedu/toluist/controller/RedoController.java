@@ -37,6 +37,7 @@ public class RedoController extends Controller {
         TodoList todoList = redoResult.getKey();
         int actualRedoTimes = redoResult.getValue();
 
+        TodoList.setCurrentTodoList(todoList);
         uiStore.setTask(todoList.getTasks());
         renderer.render();
 
