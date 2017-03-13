@@ -80,7 +80,6 @@ public class Parser {
             return new HelpCommand();
 
         case SaveCommand.COMMAND_WORD:
-        case SaveCommand.SHORT_COMMAND_WORD:
             return new SaveCommandParser().parse(arguments);
 
         default:

@@ -15,7 +15,6 @@ import seedu.ezdo.logic.commands.exceptions.CommandException;
 public class SaveCommand extends Command {
 
     public static final String COMMAND_WORD = "save";
-    public static final String SHORT_COMMAND_WORD = "s";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes the save location of ezDo. "
             + "Parameters: DIRECTORYPATH \n"
