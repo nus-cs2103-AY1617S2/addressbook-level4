@@ -9,8 +9,8 @@ import java.util.Objects;
  */
 public class GuiSettings implements Serializable {
 
-    private static final double DEFAULT_HEIGHT = 600;
-    private static final double DEFAULT_WIDTH = 740;
+    private static final double DEFAULT_HEIGHT = 700;
+    private static final double DEFAULT_WIDTH = 1100;
 
     private Double windowWidth;
     private Double windowHeight;
@@ -29,15 +29,15 @@ public class GuiSettings implements Serializable {
     }
 
     public Double getWindowWidth() {
-        return windowWidth;
+        return this.windowWidth;
     }
 
     public Double getWindowHeight() {
-        return windowHeight;
+        return this.windowHeight;
     }
 
     public Point getWindowCoordinates() {
-        return windowCoordinates;
+        return this.windowCoordinates;
     }
 
     @Override
@@ -51,23 +51,23 @@ public class GuiSettings implements Serializable {
 
         GuiSettings o = (GuiSettings) other;
 
-        return Objects.equals(windowWidth, o.windowWidth)
-            && Objects.equals(windowHeight, o.windowHeight)
-            && Objects.equals(windowCoordinates.x, o.windowCoordinates.x)
-            && Objects.equals(windowCoordinates.y, o.windowCoordinates.y);
+        return Objects.equals(this.windowWidth, o.windowWidth)
+            && Objects.equals(this.windowHeight, o.windowHeight)
+            && Objects.equals(this.windowCoordinates.x, o.windowCoordinates.x)
+            && Objects.equals(this.windowCoordinates.y, o.windowCoordinates.y);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(windowWidth, windowHeight, windowCoordinates);
+        return Objects.hash(this.windowWidth, this.windowHeight, this.windowCoordinates);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Width : " + windowWidth + "\n");
-        sb.append("Height : " + windowHeight + "\n");
-        sb.append("Position : " + windowCoordinates);
+        sb.append("Width : " + this.windowWidth + "\n");
+        sb.append("Height : " + this.windowHeight + "\n");
+        sb.append("Position : " + this.windowCoordinates);
         return sb.toString();
     }
 }
