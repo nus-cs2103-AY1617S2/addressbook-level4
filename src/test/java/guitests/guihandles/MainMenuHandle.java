@@ -31,7 +31,7 @@ public class MainMenuHandle extends GuiHandle {
     }
 
     public HelpFormatWindowHandle openHelpFormatWindowUsingMenu() {
-        clickOn("Summary", "F2");
+        clickOn("Help", "Summary", "F2");
         return new HelpFormatWindowHandle(guiRobot, primaryStage);
     }
 
