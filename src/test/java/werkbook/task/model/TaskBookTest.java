@@ -14,6 +14,7 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import werkbook.task.commons.exceptions.IllegalValueException;
 import werkbook.task.model.tag.Tag;
 import werkbook.task.model.task.ReadOnlyTask;
 import werkbook.task.model.task.Task;
@@ -49,7 +50,12 @@ public class TaskBookTest {
     public void resetData_withDuplicateTasks_throwsAssertionError() {
         TypicalTestTasks td = new TypicalTestTasks();
         // Repeat td.alice twice
-        List<Task> newTasks = Arrays.asList(new Task(td.alice), new Task(td.alice));
+        List<Task> newTasks = null;
+        try {
+            newTasks = Arrays.asList(new Task(td.alice), new Task(td.alice));
+        } catch (IllegalValueException e) {
+            assert false : "illegal values";
+        }
         List<Tag> newTags = td.alice.getTags().asObservableList();
         TaskListStub newData = new TaskListStub(newTasks, newTags);
 

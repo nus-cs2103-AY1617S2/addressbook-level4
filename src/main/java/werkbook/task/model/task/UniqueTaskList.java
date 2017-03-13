@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import werkbook.task.commons.core.UnmodifiableObservableList;
 import werkbook.task.commons.exceptions.DuplicateDataException;
+import werkbook.task.commons.exceptions.IllegalValueException;
 import werkbook.task.commons.util.CollectionUtil;
 
 /**
@@ -92,7 +93,7 @@ public class UniqueTaskList implements Iterable<Task> {
         this.internalList.setAll(replacement.internalList);
     }
 
-    public void setTasks(List<? extends ReadOnlyTask> tasks) throws DuplicateTaskException {
+    public void setTasks(List<? extends ReadOnlyTask> tasks) throws DuplicateTaskException, IllegalValueException {
         final UniqueTaskList replacement = new UniqueTaskList();
         for (final ReadOnlyTask task : tasks) {
             replacement.add(new Task(task));

@@ -199,16 +199,10 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add wrong args wrong args", expectedMessage);
-        // No description prefix
-        assertCommandFailure("add Valid Name 12345 s/01/01/1980 e/01/01/1980",
-                expectedMessage);
-        // No start date prefix
-        assertCommandFailure("add Valid Name p/12345 01/01/1980 e/01/01/1980",
-                expectedMessage);
-        // No end date prefix
-        assertCommandFailure("add Valid Name p/12345 s/01/01/1980 01/01/1980",
-                expectedMessage);
+        // Add without any arguments
+        assertCommandFailure("add", expectedMessage);
+        // Add without task name
+        assertCommandFailure("add s/01/01/1980 1111", expectedMessage);
     }
 
     @Test
@@ -220,6 +214,12 @@ public class LogicManagerTest {
         assertCommandFailure(
                 "add Valid Name d/12345 s/01/01/1980 0000 e/01/01/1980 0000 t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
+        assertCommandFailure(
+                "add Valid Name d/12345 s/01/01/1980 0000",
+                Task.MESSAGE_START_WITHOUT_END_CONSTRAINTS);
+        assertCommandFailure(
+                "add Valid Name d/12345 s/01/01/1980 0000 e/01/01/1979 0000",
+                Task.MESSAGE_END_BEFORE_START_CONSTRAINTS);
 
     }
 

@@ -3,6 +3,7 @@ package werkbook.task.model.task;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Optional;
 
 import werkbook.task.commons.exceptions.IllegalValueException;
 
@@ -16,7 +17,7 @@ public class StartDateTime {
             + "DD/MM/YYYY HHMM, where time is represented in 24 hours";
     public static final SimpleDateFormat START_DATETIME_FORMATTER = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
-    public final Date value;
+    public final Optional<Date> value;
 
     /**
      * Validates given start date time.
@@ -26,10 +27,14 @@ public class StartDateTime {
     public StartDateTime(String startDateTime) throws IllegalValueException {
         assert startDateTime != null;
         String trimmedStartDateTime = startDateTime.trim();
-        try {
-            this.value = START_DATETIME_FORMATTER.parse(trimmedStartDateTime);
-        } catch (ParseException e) {
-            throw new IllegalValueException(MESSAGE_START_DATETIME_CONSTRAINTS);
+        if (trimmedStartDateTime.equals("")) {
+            this.value = Optional.empty();
+        } else {
+            try {
+                this.value = Optional.of(START_DATETIME_FORMATTER.parse(trimmedStartDateTime));
+            } catch (ParseException e) {
+                throw new IllegalValueException(MESSAGE_START_DATETIME_CONSTRAINTS);
+            }
         }
     }
 
@@ -46,9 +51,17 @@ public class StartDateTime {
         return true;
     }
 
+    public boolean isPresent() {
+        return this.value.isPresent();
+    }
+
     @Override
     public String toString() {
-        return START_DATETIME_FORMATTER.format(value);
+        if (this.value.isPresent()) {
+            return START_DATETIME_FORMATTER.format(this.value.get());
+        } else {
+            return "";
+        }
     }
 
     @Override

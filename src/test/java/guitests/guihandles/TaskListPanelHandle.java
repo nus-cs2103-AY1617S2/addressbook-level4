@@ -13,6 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import werkbook.task.TestApp;
+import werkbook.task.commons.exceptions.IllegalValueException;
 import werkbook.task.model.task.ReadOnlyTask;
 import werkbook.task.model.task.Task;
 import werkbook.task.testutil.TestUtil;
@@ -148,7 +149,13 @@ public class TaskListPanelHandle extends GuiHandle {
     }
 
     public TaskCardHandle getTaskCardHandle(int index) {
-        return getTaskCardHandle(new Task(getListView().getItems().get(index)));
+        TaskCardHandle taskCardHandle = null;
+        try {
+            taskCardHandle = getTaskCardHandle(new Task(getListView().getItems().get(index)));
+        } catch (IllegalValueException ive) {
+            assert false : "illegal values";
+        }
+        return taskCardHandle;
     }
 
     public TaskCardHandle getTaskCardHandle(ReadOnlyTask task) {

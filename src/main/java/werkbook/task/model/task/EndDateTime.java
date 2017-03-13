@@ -3,6 +3,7 @@ package werkbook.task.model.task;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Optional;
 
 import werkbook.task.commons.exceptions.IllegalValueException;
 
@@ -16,7 +17,7 @@ public class EndDateTime {
             + "DD/MM/YYYY HHMM, where time is represented in 24 hours";
     public static final SimpleDateFormat END_DATETIME_FORMATTER = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
-    public final Date value;
+    public final Optional<Date> value;
 
     /**
      * Validates given start datetime.
@@ -25,11 +26,15 @@ public class EndDateTime {
      */
     public EndDateTime(String endDateTime) throws IllegalValueException {
         assert endDateTime != null;
-        String trimmedendDateTime = endDateTime.trim();
-        try {
-            this.value = END_DATETIME_FORMATTER.parse(trimmedendDateTime);
-        } catch (ParseException e) {
-            throw new IllegalValueException(MESSAGE_END_DATETIME_CONSTRAINTS);
+        String trimmedEndDateTime = endDateTime.trim();
+        if (trimmedEndDateTime.equals("")) {
+            this.value = Optional.empty();
+        } else {
+            try {
+                this.value = Optional.of(END_DATETIME_FORMATTER.parse(trimmedEndDateTime));
+            } catch (ParseException e) {
+                throw new IllegalValueException(MESSAGE_END_DATETIME_CONSTRAINTS);
+            }
         }
     }
 
@@ -46,9 +51,17 @@ public class EndDateTime {
         return true;
     }
 
+    public boolean isPresent() {
+        return this.value.isPresent();
+    }
+
     @Override
     public String toString() {
-        return END_DATETIME_FORMATTER.format(value);
+        if (this.value.isPresent()) {
+            return END_DATETIME_FORMATTER.format(this.value.get());
+        } else {
+            return "";
+        }
     }
 
     @Override

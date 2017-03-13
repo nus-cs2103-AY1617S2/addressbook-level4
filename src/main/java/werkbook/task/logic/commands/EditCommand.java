@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import werkbook.task.commons.core.Messages;
+import werkbook.task.commons.exceptions.IllegalValueException;
 import werkbook.task.commons.util.CollectionUtil;
 import werkbook.task.logic.commands.exceptions.CommandException;
 import werkbook.task.model.tag.UniqueTagList;
@@ -60,7 +61,12 @@ public class EditCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
-        Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        Task editedTask;
+        try {
+            editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        } catch (IllegalValueException ive) {
+            return new CommandResult(ive.getMessage());
+        }
 
         try {
             model.updateTask(filteredTaskListIndex, editedTask);
@@ -74,8 +80,10 @@ public class EditCommand extends Command {
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
+     * @throws IllegalValueException
      */
-    private static Task createEditedTask(ReadOnlyTask taskToEdit, EditTaskDescriptor editTaskDescriptor) {
+    private static Task createEditedTask(ReadOnlyTask taskToEdit, EditTaskDescriptor editTaskDescriptor)
+            throws IllegalValueException {
         assert taskToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);

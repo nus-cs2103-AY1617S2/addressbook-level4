@@ -1,7 +1,9 @@
 package werkbook.task.model.task;
 
+import java.text.SimpleDateFormat;
 import java.util.Objects;
 
+import werkbook.task.commons.exceptions.IllegalValueException;
 import werkbook.task.commons.util.CollectionUtil;
 import werkbook.task.model.tag.UniqueTagList;
 
@@ -10,6 +12,12 @@ import werkbook.task.model.tag.UniqueTagList;
  * field values are validated.
  */
 public class Task implements ReadOnlyTask {
+
+    public static final String MESSAGE_START_WITHOUT_END_CONSTRAINTS = "End Date/Time must be specified " +
+            "if Start Date/Time is specified";
+    public static final String MESSAGE_END_BEFORE_START_CONSTRAINTS = "End Date/Time must occur after " +
+            "Start Date/Time";
+    public static final SimpleDateFormat START_DATETIME_FORMATTER = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
     private Name name;
     private Description description;
@@ -20,10 +28,19 @@ public class Task implements ReadOnlyTask {
 
     /**
      * Name must be present and not null.
+     * @throws IllegalValueException when EndDateTime is not present or occurs after StartDateTime when
+     * StartDateTime is present
      */
     public Task(Name name, Description description, StartDateTime startDateTime, EndDateTime endDateTime,
-            UniqueTagList tags) {
+            UniqueTagList tags) throws IllegalValueException {
         assert !CollectionUtil.isAnyNull(name);
+        if (startDateTime.isPresent()) {
+            if (!endDateTime.isPresent()) {
+                throw new IllegalValueException(MESSAGE_START_WITHOUT_END_CONSTRAINTS);
+            } else if (endDateTime.value.get().before(startDateTime.value.get())) {
+                throw new IllegalValueException(MESSAGE_END_BEFORE_START_CONSTRAINTS);
+            }
+        }
         this.name = name;
         this.description = description;
         this.startDateTime = startDateTime;
@@ -34,8 +51,9 @@ public class Task implements ReadOnlyTask {
 
     /**
      * Creates a copy of the given ReadOnlyTask.
+     * @throws IllegalValueException
      */
-    public Task(ReadOnlyTask source) {
+    public Task(ReadOnlyTask source) throws IllegalValueException {
         this(source.getName(), source.getDescription(), source.getStartDateTime(), source.getEndDateTime(),
                 source.getTags());
     }

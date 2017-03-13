@@ -47,11 +47,13 @@ Format: `help`
 
 > Help is also shown if you enter an incorrect command e.g. `abcd`
 
-### 2.2. Adding a task: `add`
+### 2.2. Adding tasks: `add`
 
 Adds a task to the task book<br>
 Date and time must be formatted as DD/MM/YYYY HHMM<br>
-Format: `add NAME d/DESCRIPTION s/START_DATETIME e/END_DATETIME [t/TAG]`
+A task must have a name, the description is optional<br>
+The task can also optionally have a End Date/Time, or both a Start Date/Time and End Date/Time<br>
+Format: `add NAME [d/DESCRIPTION] [s/START_DATETIME] [e/END_DATETIME] [t/TAG]`
 
 Examples:
 
@@ -71,12 +73,15 @@ Format: `edit INDEX [NAME] [d/DESCRIPTION] [s/START_DATETIME] [e/END_DATETIME] [
     The index refers to the index number shown in the last task listing.<br>
     The index **must be a positive integer** 1, 2, 3, ...
 > * At least one of the optional fields must be provided.
+> * Providing the prefix for start or end date/time without supplying a date/time will remove it from the task
 > * Existing values will be updated to the input values.
 
 Examples:
 
 * `edit 1 d/Get the Fish`<br>
   Edits the description of the 1st task to be `Get the Fish`.
+* `edit 2 s/`<br>
+  Removes the start date/time of the 2nd task.
 
 ### 2.5. Finding all tasks containing any keyword in their name or description: `find`
 
