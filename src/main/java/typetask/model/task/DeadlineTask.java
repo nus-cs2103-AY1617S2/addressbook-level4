@@ -13,7 +13,9 @@ public class DeadlineTask extends Task {
         this.date = date;
         this.time = time;
     }
-    
+    /**
+     * Copy of Constructor.
+     */
     public DeadlineTask(Name name, Date date) {
         super(name);
         this.date = date;
