@@ -355,7 +355,7 @@ public class LogicManagerTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
         assertCommandFailure("find ", expectedMessage);
     }
-    
+
     @Test
     public void execute_find_invalidArgsFormatWithPrefix() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
@@ -429,7 +429,7 @@ public class LogicManagerTest {
         assertCommandSuccess("find sd/Mon Mar", Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB, expectedList);
     }
-    
+
     @Test
     public void execute_findEndDatetime_matchesOnlyIfKeywordPresentInOrder() throws Exception {
         TestDataHelper helper = new TestDataHelper();
