@@ -16,6 +16,7 @@ import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskPriorityComparator;
 import seedu.doist.model.task.Task;
 import seedu.doist.model.task.UniqueTaskList;
+import seedu.doist.model.task.UniqueTaskList.TaskAlreadyFinishedException;
 import seedu.doist.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -68,7 +69,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void finishTask(ReadOnlyTask target) throws TaskNotFoundException {
+    public synchronized void finishTask(ReadOnlyTask target) throws TaskNotFoundException,
+        TaskAlreadyFinishedException {
         todoList.finishTask(target);
         indicateTodoListChanged();
     }

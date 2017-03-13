@@ -17,6 +17,7 @@ import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.Task;
 import seedu.doist.model.task.UniqueTaskList;
 import seedu.doist.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.doist.model.task.UniqueTaskList.TaskAlreadyFinishedException;
 
 /**
  * Wraps all data at the to-do list level
@@ -154,11 +155,12 @@ public class TodoList implements ReadOnlyTodoList {
         }
     }
 
-    public boolean finishTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
+    public boolean finishTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException,
+            TaskAlreadyFinishedException {
         if (tasks.finish(key)) {
             return true;
         } else {
-            throw new UniqueTaskList.TaskNotFoundException();
+            return false;
         }
     }
 

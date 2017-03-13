@@ -4,9 +4,11 @@ package seedu.doist.model.task;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.doist.commons.core.LogsCenter;
 import seedu.doist.commons.core.UnmodifiableObservableList;
 import seedu.doist.commons.exceptions.DuplicateDataException;
 
@@ -19,6 +21,7 @@ import seedu.doist.commons.exceptions.DuplicateDataException;
  */
 public class UniqueTaskList implements Iterable<Task> {
 
+    private static final Logger logger = LogsCenter.getLogger(UniqueTaskList.class);
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
 
     /**
@@ -94,15 +97,22 @@ public class UniqueTaskList implements Iterable<Task> {
      * Finishes the equivalent task from the list.
      *
      * @throws TaskNotFoundException if no such task could be found in the list.
+     * @throws TaskAlreadyFinishedException if task is already finished
      */
-    public boolean finish(ReadOnlyTask toFinish) throws TaskNotFoundException {
+    public boolean finish(ReadOnlyTask toFinish) throws TaskNotFoundException, TaskAlreadyFinishedException {
         assert toFinish != null;
         final int taskIndex = internalList.indexOf(toFinish);
         boolean taskExists = taskIndex < 0 ? false : true;
         if (!taskExists) {
             throw new TaskNotFoundException();
         } else {
-            internalList.get(taskIndex).setFinishedStatus(true);
+            Task task = internalList.get(taskIndex);
+            if (task.getFinishedStatus().getIsFinished()) {
+                logger.info("Attemping to finish task already finished, taskIndex: " + taskIndex);
+                throw new TaskAlreadyFinishedException();
+            } else {
+                task.setFinishedStatus(true);
+            }
         }
         return taskExists;
     }
@@ -155,5 +165,10 @@ public class UniqueTaskList implements Iterable<Task> {
      * there is no such matching task in the list.
      */
     public static class TaskNotFoundException extends Exception {}
+
+    /**
+     * Signals that a task is already finished and you are trying to finish it again
+     */
+    public static class TaskAlreadyFinishedException extends Exception {}
 
 }

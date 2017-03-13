@@ -10,11 +10,15 @@ public class FinishedStatus {
     private boolean isFinished;
 
     public FinishedStatus() {
-        this.isFinished = false;
+        this(false);
+    }
+
+    public FinishedStatus(boolean status) {
+        this.isFinished = status;
     }
 
     public boolean getIsFinished() {
-        return isFinished;
+        return this.isFinished;
     }
 
     public void setIsFinished(boolean isFinished) {

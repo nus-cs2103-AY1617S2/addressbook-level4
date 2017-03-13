@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import seedu.doist.logic.commands.exceptions.CommandException;
 import seedu.doist.model.task.ReadOnlyTask;
+import seedu.doist.model.task.UniqueTaskList.TaskAlreadyFinishedException;
 import seedu.doist.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -20,7 +21,8 @@ public class FinishCommand extends Command {
             + "Parameters: INDEX [INDEX...] (must be a positive integer)\n"
             + "Example: " + DEFAULT_COMMAND_WORD + " 1 8";
 
-    public static final String MESSAGE_FINISH_TASK_SUCCESS = "Finished Task: %1$s";
+    public static final String MESSAGE_FINISH_TASK_SUCCESS = "Finished Tasks: %1$s";
+    public static final String MESSAGE_TASK_ALREADY_FINISHED = "Tasks already finished: %1$s";
 
     public final int[] targetIndices;
 
@@ -30,15 +32,29 @@ public class FinishCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
+        String outputMessage = "";
+
         ArrayList<ReadOnlyTask> tasksToFinish = getMultipleTasksFromIndices(targetIndices);
+        ArrayList<ReadOnlyTask> tasksFinished = new ArrayList<ReadOnlyTask>();
+        ArrayList<ReadOnlyTask> tasksAlreadyFinished = new ArrayList<ReadOnlyTask>();
+
         for (ReadOnlyTask task : tasksToFinish) {
             try {
                 model.finishTask(task);
+                tasksFinished.add(task);
             } catch (TaskNotFoundException pnfe) {
                 assert false : "The target task cannot be missing";
+            } catch (TaskAlreadyFinishedException e) {
+                tasksAlreadyFinished.add(task);
             }
         }
-        return new CommandResult(String.format(MESSAGE_FINISH_TASK_SUCCESS, tasksToFinish));
+        if (!tasksAlreadyFinished.isEmpty()) {
+            outputMessage += String.format(MESSAGE_TASK_ALREADY_FINISHED, tasksAlreadyFinished + "\n");
+        }
+        if (!tasksFinished.isEmpty()) {
+            outputMessage += String.format(MESSAGE_FINISH_TASK_SUCCESS, tasksFinished);
+        }
+        return new CommandResult(outputMessage);
     }
 
     public static CommandInfo info() {
