@@ -2,26 +2,33 @@
 <taskmanager>
     <tasks>
         <name>Buy Meier stove</name>
+        <done>false</done>
         <tagged>appliance</tagged>
         <tagged>stove</tagged>
     </tasks>
     <tasks>
         <name>Write english essay</name>
+        <done>false</done>
     </tasks>
     <tasks>
         <name>Buy Meier rice cooker</name>
+        <done>false</done>
     </tasks>
     <tasks>
         <name>Complete CS2106 Lab Assignment</name>
+        <done>false</done>
     </tasks>
     <tasks>
         <name>Mark CS1010S</name>
+        <done>false</done>
     </tasks>
     <tasks>
         <name>Go for a night run</name>
+        <done>false</done>
     </tasks>
     <tasks>
         <name>Meet Prof Hoon Meier</name>
+        <done>false</done>
     </tasks>
     <tags>math</tags>
     <tags>appliance</tags>
