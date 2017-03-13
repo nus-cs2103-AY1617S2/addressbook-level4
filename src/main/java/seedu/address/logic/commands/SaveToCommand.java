@@ -22,7 +22,7 @@ public class SaveToCommand extends Command {
     public static final String MESSAGE_CONFIG_SAVE_FAILURE = "Unable to save config file.";
     public static final String MESSAGE_WRITE_ACCESS_DENIED = "No write permissions to: %1$s";
 
-    private static final String TASK_MANAGER_FILE_NAME = "taskmanager.xml";
+    public static final String TASK_MANAGER_FILE_NAME = "taskmanager.xml";
 
     private final String saveToDir;
 

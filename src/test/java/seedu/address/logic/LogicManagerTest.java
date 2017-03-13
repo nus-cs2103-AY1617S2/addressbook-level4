@@ -51,8 +51,6 @@ import seedu.address.storage.StorageManager;
 
 public class LogicManagerTest {
 
-    private static final String TASK_MANAGER_FILE_NAME = "taskmanager.xml";
-
     /**
      * See https://github.com/junit-team/junit4/wiki/rules#temporaryfolder-rule
      */
@@ -335,13 +333,14 @@ public class LogicManagerTest {
                 expectedAB, expectedAB.getTaskList());
     }
 
-    /*TODO: remove comment when DoneCommand is implemented
-    @Test
-    public void execute_done_invalidArgsFormat() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE);
-        assertCommandFailure("done ", expectedMessage);
-    }
-    */
+    /*
+     * TODO: remove comment when DoneCommand is implemented
+     *
+     * @Test public void execute_done_invalidArgsFormat() { String
+     * expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+     * DoneCommand.MESSAGE_USAGE); assertCommandFailure("done ",
+     * expectedMessage); }
+     */
 
     @Test
     public void execute_doneIndexNotFound_errorMessageShown() throws Exception {
@@ -356,24 +355,26 @@ public class LogicManagerTest {
         Task doneTask = new Task(taskToDone.getName(), taskToDone.getTags(), true);
 
         TaskManager expectedAB = helper.generateTaskManager(threeTasks);
-        expectedAB.updateTask(1, doneTask);;
+        expectedAB.updateTask(1, doneTask);
+        ;
         helper.addToModel(model, threeTasks);
 
-        /*TODO: remove comment when DoneCommand is implemented
-        assertCommandSuccess("done 2",
-                String.format(DoneCommand.MESSAGE_DONE_TASK_SUCCESS, doneTask),
-                expectedAB,
-                expectedAB.getTaskList());
-        */
+        /*
+         * TODO: remove comment when DoneCommand is implemented
+         * assertCommandSuccess("done 2",
+         * String.format(DoneCommand.MESSAGE_DONE_TASK_SUCCESS, doneTask),
+         * expectedAB, expectedAB.getTaskList());
+         */
     }
 
-    /*TODO: remove comment when DoneCommand is implemented
-    @Test
-    public void execute_notdone_invalidArgsFormat() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, NotDoneCommand.MESSAGE_USAGE);
-        assertCommandFailure("notdone ", expectedMessage);
-    }
-    */
+    /*
+     * TODO: remove comment when DoneCommand is implemented
+     *
+     * @Test public void execute_notdone_invalidArgsFormat() { String
+     * expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+     * NotDoneCommand.MESSAGE_USAGE); assertCommandFailure("notdone ",
+     * expectedMessage); }
+     */
 
     @Test
     public void execute_notdoneIndexNotFound_errorMessageShown() throws Exception {
@@ -392,12 +393,12 @@ public class LogicManagerTest {
         expectedAB.updateTask(1, notDoneTask);
         helper.addToModel(model, threeTasks);
 
-        /*TODO: remove comment when DoneCommand is implemented
-        assertCommandSuccess("notdone 2",
-                String.format(NotDoneCommand.MESSAGE_NOTDONE_TASK_SUCCESS, notDoneTask),
-                expectedAB,
-                expectedAB.getTaskList());
-        */
+        /*
+         * TODO: remove comment when DoneCommand is implemented
+         * assertCommandSuccess("notdone 2",
+         * String.format(NotDoneCommand.MESSAGE_NOTDONE_TASK_SUCCESS,
+         * notDoneTask), expectedAB, expectedAB.getTaskList());
+         */
     }
 
     @Test
@@ -463,7 +464,8 @@ public class LogicManagerTest {
     public void execute_saveTo_canonicalSameDirectory() throws Exception {
 
         assertCommandSuccess("saveto .",
-                String.format(SaveToCommand.MESSAGE_SUCCESS, new File(".", TASK_MANAGER_FILE_NAME).getAbsolutePath()),
+                String.format(SaveToCommand.MESSAGE_SUCCESS,
+                        new File(".", SaveToCommand.TASK_MANAGER_FILE_NAME).getAbsolutePath()),
                 new TaskManager(), Collections.emptyList());
     }
 
@@ -471,7 +473,8 @@ public class LogicManagerTest {
     public void execute_saveTo_canonicalParentDirectory() throws Exception {
 
         assertCommandSuccess("saveto ..",
-                String.format(SaveToCommand.MESSAGE_SUCCESS, new File("..", TASK_MANAGER_FILE_NAME).getAbsolutePath()),
+                String.format(SaveToCommand.MESSAGE_SUCCESS,
+                        new File("..", SaveToCommand.TASK_MANAGER_FILE_NAME).getAbsolutePath()),
                 new TaskManager(), Collections.emptyList());
     }
 
@@ -480,7 +483,7 @@ public class LogicManagerTest {
 
         assertCommandSuccess("saveto testSubDir",
                 String.format(SaveToCommand.MESSAGE_SUCCESS,
-                        new File("testSubDir", TASK_MANAGER_FILE_NAME).getAbsolutePath()),
+                        new File("testSubDir", SaveToCommand.TASK_MANAGER_FILE_NAME).getAbsolutePath()),
                 new TaskManager(), Collections.emptyList());
     }
 
@@ -488,7 +491,8 @@ public class LogicManagerTest {
     public void execute_saveTo_absoluteSameDirectory() throws Exception {
 
         assertCommandSuccess("saveto .",
-                String.format(SaveToCommand.MESSAGE_SUCCESS, new File(".", TASK_MANAGER_FILE_NAME).getAbsolutePath()),
+                String.format(SaveToCommand.MESSAGE_SUCCESS,
+                        new File(".", SaveToCommand.TASK_MANAGER_FILE_NAME).getAbsolutePath()),
                 new TaskManager(), Collections.emptyList());
     }
 
@@ -496,7 +500,8 @@ public class LogicManagerTest {
     public void execute_saveTo_absoluteParentDirectory() throws Exception {
 
         assertCommandSuccess("saveto ..",
-                String.format(SaveToCommand.MESSAGE_SUCCESS, new File("..", TASK_MANAGER_FILE_NAME).getAbsolutePath()),
+                String.format(SaveToCommand.MESSAGE_SUCCESS,
+                        new File("..", SaveToCommand.TASK_MANAGER_FILE_NAME).getAbsolutePath()),
                 new TaskManager(), Collections.emptyList());
     }
 
@@ -505,11 +510,15 @@ public class LogicManagerTest {
 
         assertCommandSuccess("saveto testSubDir",
                 String.format(SaveToCommand.MESSAGE_SUCCESS,
-                        new File("testSubDir", TASK_MANAGER_FILE_NAME).getAbsolutePath()),
+                        new File("testSubDir", SaveToCommand.TASK_MANAGER_FILE_NAME).getAbsolutePath()),
                 new TaskManager(), Collections.emptyList());
     }
 
-    // TODO: non-existent folder, no_write_permissions_shows_error
+    @Test
+    public void execute_saveTo_noWritePermissions() throws Exception {
+        assertCommandFailure("saveto C:/", String.format(SaveToCommand.MESSAGE_WRITE_ACCESS_DENIED,
+                new File("C:/", SaveToCommand.TASK_MANAGER_FILE_NAME).getAbsolutePath()));
+    }
 
     // End SaveToCommand tests
 
@@ -537,8 +546,8 @@ public class LogicManagerTest {
          */
         Task generateTask(int seed) throws Exception {
             return new Task(new Name("Task " + seed),
-                    new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))));
-                    seed % 2 == 0
+                    new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))),
+                    seed % 2 == 0);
         }
 
         /** Generates the correct add command based on the task given */
@@ -633,8 +642,7 @@ public class LogicManagerTest {
          * dummy values.
          */
         Task generateTaskWithName(String name) throws Exception {
-            return new Task(new Name(name), new UniqueTagList(new Tag("tag")));
-
+            return new Task(new Name(name), new UniqueTagList(new Tag("tag")), false);
         }
     }
 }

@@ -10,12 +10,14 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DoneCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.NotDoneCommand;
 import seedu.address.logic.commands.SaveToCommand;
 import seedu.address.logic.commands.SelectCommand;
 
@@ -32,7 +34,8 @@ public class Parser {
     /**
      * Parses user input into command for execution.
      *
-     * @param userInput full user input string
+     * @param userInput
+     *            full user input string
      * @return the command based on the user input
      */
     public Command parseCommand(String userInput) {
@@ -54,13 +57,11 @@ public class Parser {
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
 
-        /* TODO: implement done & undone command
         case DoneCommand.COMMAND_WORD:
             return new DoneCommandParser().parse(arguments);
 
         case NotDoneCommand.COMMAND_WORD:
             return new NotDoneCommandParser().parse(arguments);
-         */
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
