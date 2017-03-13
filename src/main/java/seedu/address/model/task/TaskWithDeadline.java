@@ -84,7 +84,7 @@ public class TaskWithDeadline extends Task {
         if (startingTime == null) {
             return "Due: " + deadline.toString();
         } else {
-            return "Begin: " + startingTime.toString() + "Due: " + deadline.toString();
+            return "Begin: " + startingTime.toString() + ";Due: " + deadline.toString();
         }
     }
 }
