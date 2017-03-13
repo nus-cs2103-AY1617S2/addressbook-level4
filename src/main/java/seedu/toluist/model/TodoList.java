@@ -2,6 +2,7 @@ package seedu.toluist.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -15,9 +16,8 @@ import seedu.toluist.storage.TodoListStorage;
  * TodoList Model
  */
 public class TodoList {
-
+    public static final TodoListStorage DEFAULT_STORAGE = new JsonStorage();
     private static TodoList currentTodoList;
-    private static final TodoListStorage DEFAULT_STORAGE = new JsonStorage();
 
     private ArrayList<Task> allTasks = new ArrayList<>();
     @JsonIgnore
@@ -26,7 +26,8 @@ public class TodoList {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TodoList // instanceof handles nulls
-                && allTasks.equals(((TodoList) other).getTasks()));
+                && allTasks.equals(((TodoList) other).getTasks())
+                && Objects.equals(storage, ((TodoList) other).storage));
     }
 
     public ArrayList<Task> getTasks() {

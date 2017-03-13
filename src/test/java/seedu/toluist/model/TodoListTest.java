@@ -1,19 +1,35 @@
 package seedu.toluist.model;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
+import seedu.toluist.storage.TodoListStorage;
+import seedu.toluist.testutil.TypicalTestTodoLists;
 
 /**
  * Tests for TodoList model
  */
 public class TodoListTest {
+    @Rule
+    public MockitoRule rule = MockitoJUnit.rule();
+
+    @Mock
+    private TodoListStorage storage;
     private TodoList todoList1;
+    private TodoList todoListWithStorage;
+    private TodoList sampleTodoList = new TypicalTestTodoLists().getTypicalTodoList();
     private final Task task1 = new Task("Task 1");
     private final Task task2 = new Task("Task 2");
     private final Task task3 = new Task("Task 3");
@@ -22,11 +38,28 @@ public class TodoListTest {
 
     @Before
     public void setUp() {
+        when(storage.load()).thenReturn(Optional.of(sampleTodoList));
         todoList1 = new TodoList();
         todoList1.add(task1);
         todoList1.add(task2);
         todoList1.add(task3);
         todoList1.add(task4);
+        todoListWithStorage = new TodoList(storage);
+    }
+
+    @Test
+    public void constructor_withoutStorage_defaultStorage() {
+        assertEquals(todoList1.getStorage(), TodoList.DEFAULT_STORAGE);
+    }
+
+    @Test
+    public void constructor_withStorage_usesStorage() {
+        assertEquals(todoListWithStorage.getStorage(), storage);
+    }
+
+    @Test
+    public void constructor_withStorage_loadTasks() {
+        assertEquals(todoListWithStorage.getTasks(), sampleTodoList.getTasks());
     }
 
     @Test
