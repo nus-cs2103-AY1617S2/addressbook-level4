@@ -1,6 +1,7 @@
 package seedu.taskboss.logic.commands;
 
 import seedu.taskboss.commons.core.Messages;
+import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.model.Model;
 
@@ -25,8 +26,9 @@ public abstract class Command {
      *
      * @return feedback message of the operation result for display
      * @throws CommandException If an error occurs during command execution.
+     * @throws IllegalValueException
      */
-    public abstract CommandResult execute() throws CommandException;
+    public abstract CommandResult execute() throws CommandException, IllegalValueException;
 
     /**
      * Provides any needed dependencies to the command.
