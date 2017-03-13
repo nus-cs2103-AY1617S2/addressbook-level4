@@ -21,21 +21,21 @@ public class DoneCommandTest extends EzDoGuiTest {
         TestTask[] doneList = td.getTypicalDoneTasks();
         int targetIndex = 1;
         TestTask toDone = currentList[targetIndex - 1];
-        assertDoneSuccess(targetIndex, currentList, doneList);
+        assertDoneSuccess(false, targetIndex, currentList, doneList);
 
         //marks the middle task in the list as done
         currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
         doneList = TestUtil.addTasksToList(doneList, toDone);
         targetIndex = currentList.length / 2;
         toDone = currentList[targetIndex - 1];
-        assertDoneSuccess(targetIndex, currentList, doneList);
+        assertDoneSuccess(true, targetIndex, currentList, doneList);
 
         //marks last task in the list as done
         currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
         doneList = TestUtil.addTasksToList(doneList, toDone);
         targetIndex = currentList.length;
         toDone = currentList[targetIndex - 1];
-        assertDoneSuccess(targetIndex, currentList, doneList);
+        assertDoneSuccess(false, targetIndex, currentList, doneList);
 
         //invalid index
         currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
@@ -57,13 +57,17 @@ public class DoneCommandTest extends EzDoGuiTest {
 
     }
 
-    private void assertDoneSuccess(int targetIndexOneIndexed, final TestTask[] currentList, final TestTask[] doneList) {
+    private void assertDoneSuccess(boolean usesShortCommand, int targetIndexOneIndexed, final TestTask[] currentList, final TestTask[] doneList) {
 
         TestTask taskToDone = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
         TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList, targetIndexOneIndexed);
         TestTask[] expectedDone = TestUtil.addTasksToList(doneList, taskToDone);
 
-        commandBox.runCommand("done " + targetIndexOneIndexed);
+        if (usesShortCommand) {
+            commandBox.runCommand("d " + targetIndexOneIndexed);
+        } else {
+            commandBox.runCommand("done " + targetIndexOneIndexed);
+        }
     //    for (int i =0; i< expectedDone.length; i++) {System.out.println(expectedDone[i]);}
         //confirm the list now contains all done tasks including the one just marked as done
         assertTrue(taskListPanel.isListMatching(expectedDone));
