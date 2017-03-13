@@ -90,8 +90,8 @@ public class Task implements Comparable<Task> {
     }
 
     public void setDeadLine(LocalDateTime deadLine) {
-        setEndDateTime(null);
-        setStartDateTime(deadLine);
+        setEndDateTime(deadLine);
+        setStartDateTime(null);
     }
 
     public void setFromTo(LocalDateTime from, LocalDateTime to) {
@@ -127,7 +127,7 @@ public class Task implements Comparable<Task> {
     }
 
     public boolean isOverdue() {
-        return !isCompleted() && (endDateTime != null && endDateTime.isBefore(LocalDateTime.now()));
+        return !isCompleted() && endDateTime != null && endDateTime.isBefore(LocalDateTime.now());
     }
 
     public boolean isFloatingTask() {
@@ -221,5 +221,9 @@ public class Task implements Comparable<Task> {
 
     public void setTaskPriority(TaskPriority priority) {
         this.priority = priority;
+    }
+
+    public LocalDateTime getCompletionDateTime() {
+        return completionDateTime;
     }
 }

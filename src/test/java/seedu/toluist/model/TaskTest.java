@@ -1,6 +1,10 @@
 package seedu.toluist.model;
 
+import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -14,8 +18,9 @@ import org.junit.Test;
  * Tests for Task model
  */
 public class TaskTest {
-    private Task floatingTask;
-    private final String floatingTaskDescripion = "floating task";
+    private Task testTask;
+    private final String taskDescription = "a description";
+
     private final Tag tag1 = new Tag("nature");
     private final Tag tag2 = new Tag("nature");
     private final Tag tag3 = new Tag("wolf");
@@ -24,56 +29,140 @@ public class TaskTest {
 
     @Before
     public void setUp() {
-        floatingTask = new Task(floatingTaskDescripion);
-        floatingTask.addTag(tag1);
+        testTask = new Task(taskDescription);
+        testTask.addTag(tag1);
     }
 
     @Test
-    public void testConstruct_floatingTask() {
-        assertEquals(floatingTask.getDescription(), floatingTaskDescripion);
-        assertSimilarTags(floatingTask, tag1);
+    public void testConstruct_testTask() {
+        Task task = new Task(taskDescription);
+        assertEquals(task.getDescription(), taskDescription);
+        assertNull(task.getStartDateTime());
+        assertNull(task.getEndDateTime());
+        assertNull(task.getCompletionDateTime());
+        assertEquals(task.getTaskPriority(), Task.TaskPriority.LOW);
+        assertTrue(task.getAllTags().isEmpty());
+        assertTrue(task.isFloatingTask());
+    }
+
+    @Test
+    public void testConstruct_taskWithDeadline() {
+        LocalDateTime dateTime = LocalDateTime.now();
+        Task task = new Task(taskDescription, dateTime);
+        assertEquals(task.getDescription(), taskDescription);
+        assertNull(task.getStartDateTime());
+        assertEquals(task.getEndDateTime(), dateTime);
+        assertNull(task.getCompletionDateTime());
+        assertEquals(task.getTaskPriority(), Task.TaskPriority.LOW);
+        assertTrue(task.getAllTags().isEmpty());
+        assertTrue(task.isTaskWithDeadline());
+    }
+
+    @Test
+    public void testConstruct_event() {
+        LocalDateTime from = LocalDateTime.now().minusDays(1);
+        LocalDateTime to = LocalDateTime.now();
+        Task event = new Task(taskDescription, from, to);
+        assertEquals(event.getDescription(), taskDescription);
+        assertEquals(event.getStartDateTime(), from);
+        assertEquals(event.getEndDateTime(), to);
+        assertNull(event.getCompletionDateTime());
+        assertEquals(event.getTaskPriority(), Task.TaskPriority.LOW);
+        assertTrue(event.getAllTags().isEmpty());
+        assertTrue(event.isEvent());
+    }
+
+    @Test
+    public void setDeadline() {
+        LocalDateTime now = LocalDateTime.now();
+        testTask.setDeadLine(now);
+        assertEquals(testTask.getEndDateTime(), now);
+        // task is now a task with deadline
+        assertTrue(testTask.isTaskWithDeadline());
+    }
+
+    @Test
+    public void setFromTo() {
+        LocalDateTime from = LocalDateTime.now().minusDays(1);
+        LocalDateTime to = LocalDateTime.now();
+        testTask.setFromTo(from, to);
+        assertEquals(testTask.getStartDateTime(), from);
+        assertEquals(testTask.getEndDateTime(), to);
+        // task is now an event
+        assertTrue(testTask.isEvent());
+    }
+
+    @Test
+    public void setComplete() {
+        LocalDateTime now = LocalDateTime.now();
+        // Set completed
+        testTask.setCompleted(true);
+        assertNotNull(testTask.getCompletionDateTime());
+        assertTrue(testTask.isCompleted());
+        assertTrue(now.isBefore(testTask.getCompletionDateTime()));
+
+        // Set incomplete
+        testTask.setCompleted(false);
+        assertNull(testTask.getCompletionDateTime());
+        assertFalse(testTask.isCompleted());
+    }
+    
+    @Test
+    public void isOverdue() {
+        // incomplete task with end date passed is overdue
+        testTask.setDeadLine(LocalDateTime.now().minusDays(1));
+        assertTrue(testTask.isOverdue());
+
+        // incomplete task with end date in future is not overdue
+        testTask.setDeadLine(LocalDateTime.MAX);
+        assertFalse(testTask.isOverdue());
+
+        // complete task with end date passed is not overdue
+        testTask.setDeadLine(LocalDateTime.MIN);
+        testTask.setCompleted(true);
+        assertFalse(testTask.isOverdue());
     }
 
     @Test
     public void addTag_newTag_tagIsAdded() {
-        floatingTask.addTag(tag3);
-        assertSimilarTags(floatingTask, tag1, tag3);
+        testTask.addTag(tag3);
+        assertSimilarTags(testTask, tag1, tag3);
     }
 
     @Test
     public void addTag_existingTag_tagIsNotAddedTwice() {
-        floatingTask.addTag(tag1);
-        assertSimilarTags(floatingTask, tag1);
+        testTask.addTag(tag1);
+        assertSimilarTags(testTask, tag1);
     }
 
     @Test
     public void addTag_tagWithSameTagName_tagIsNotAddedTwice() {
-        floatingTask.addTag(tag2);
-        assertSimilarTags(floatingTask, tag1);
+        testTask.addTag(tag2);
+        assertSimilarTags(testTask, tag1);
     }
 
     @Test
     public void removeTag_existingTag_tagIsRemoved() {
-        floatingTask.removeTag(tag1);
-        assertSimilarTags(floatingTask);
+        testTask.removeTag(tag1);
+        assertSimilarTags(testTask);
     }
 
     @Test
     public void removeTag_tagWithSameTagName_tagIsRemoved() {
-        floatingTask.removeTag(tag2);
-        assertSimilarTags(floatingTask);
+        testTask.removeTag(tag2);
+        assertSimilarTags(testTask);
     }
 
     @Test
-    public void addTag_nonExistingTag_noEffect() {
-        floatingTask.addTag(tag2);
-        assertSimilarTags(floatingTask, tag1);
+    public void removeTag_nonExistingTag_noEffect() {
+        testTask.removeTag(tag3);
+        assertSimilarTags(testTask, tag1);
     }
 
     @Test
     public void replaceTag_emptyTagList_replaceTags() {
-        floatingTask.replaceTags(new ArrayList<>());
-        assertSimilarTags(floatingTask);
+        testTask.replaceTags(new ArrayList<>());
+        assertSimilarTags(testTask);
     }
 
     @Test
@@ -81,8 +170,8 @@ public class TaskTest {
         ArrayList<Tag> tagsList = new ArrayList<>();
         tagsList.add(tag3);
 
-        floatingTask.replaceTags(tagsList);
-        assertSimilarTags(floatingTask, tag3);
+        testTask.replaceTags(tagsList);
+        assertSimilarTags(testTask, tag3);
     }
 
     @Test
@@ -91,8 +180,8 @@ public class TaskTest {
         tagsList.add(tag3);
         tagsList.add(tag4);
 
-        floatingTask.replaceTags(tagsList);
-        assertSimilarTags(floatingTask, tag3, tag4);
+        testTask.replaceTags(tagsList);
+        assertSimilarTags(testTask, tag3, tag4);
     }
 
     @Test
@@ -102,18 +191,18 @@ public class TaskTest {
         tagsList.add(tag2);
         tagsList.add(tag4);
 
-        floatingTask.replaceTags(tagsList);
-        assertSimilarTags(floatingTask, tag1, tag4);
+        testTask.replaceTags(tagsList);
+        assertSimilarTags(testTask, tag1, tag4);
     }
 
     @Test
     public void compareTo_differentEndDateTime() {
-        Task floatingTask = new Task("floating");
+        Task testTask = new Task("floating");
         Task taskWithDeadline = new Task("task with deadline", LocalDateTime.now());
         Task event = new Task("event", LocalDateTime.now().minusDays(1), LocalDateTime.now().plusDays(1));
 
         assertEquals(taskWithDeadline.compareTo(event), -1);
-        assertEquals(event.compareTo(floatingTask), -1);
+        assertEquals(event.compareTo(testTask), -1);
     }
 
     @Test
@@ -140,11 +229,11 @@ public class TaskTest {
         taskWithDeadline2.setTaskPriority(Task.TaskPriority.HIGH);
         assertEquals(taskWithDeadline1.compareTo(taskWithDeadline2), -1);
 
-        Task floatingTask1 = new Task("floating 1");
-        Task floatingTask2 = new Task("floating 2");
-        floatingTask1.setTaskPriority(Task.TaskPriority.HIGH);
-        floatingTask2.setTaskPriority(Task.TaskPriority.LOW);
-        assertEquals(floatingTask2.compareTo(floatingTask1), -1);
+        Task testTask1 = new Task("floating 1");
+        Task testTask2 = new Task("floating 2");
+        testTask1.setTaskPriority(Task.TaskPriority.HIGH);
+        testTask2.setTaskPriority(Task.TaskPriority.LOW);
+        assertEquals(testTask2.compareTo(testTask1), -1);
     }
 
     @Test
@@ -159,9 +248,9 @@ public class TaskTest {
         Task taskWithDeadline2 = new Task("task 2", to);
         assertEquals(taskWithDeadline1.compareTo(taskWithDeadline2), -1);
 
-        Task floatingTask1 = new Task("floating 1");
-        Task floatingTask2 = new Task("floating 2");
-        assertEquals(floatingTask1.compareTo(floatingTask2), -1);
+        Task testTask1 = new Task("floating 1");
+        Task testTask2 = new Task("floating 2");
+        assertEquals(testTask1.compareTo(testTask2), -1);
     }
 
     /**
@@ -173,6 +262,6 @@ public class TaskTest {
             tagSet.add(tag);
         }
 
-        assertEquals(floatingTask.getAllTags(), tagSet);
+        assertEquals(testTask.getAllTags(), tagSet);
     }
 }
