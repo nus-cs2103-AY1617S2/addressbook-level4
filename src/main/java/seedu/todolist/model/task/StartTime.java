@@ -14,7 +14,7 @@ import seedu.todolist.commons.exceptions.IllegalValueException;
 
 public class StartTime {
 
-    public static final String MESSAGE_STARTTIME_CONSTRAINTS = 
+    public static final String MESSAGE_STARTTIME_CONSTRAINTS =
             "Start time should follow the format: DD-MM-YYYY TIME. E.g. \n"
             + "12-12-2008 3.30 PM";
 

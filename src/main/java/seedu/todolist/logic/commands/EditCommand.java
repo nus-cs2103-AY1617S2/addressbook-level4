@@ -121,7 +121,7 @@ public class EditCommand extends Command {
         public Optional<Name> getName() {
             return name;
         }
-        
+
         public void setStartTime(Optional<StartTime> startTime) {
             assert startTime != null;
             this.startTime = startTime;
@@ -130,7 +130,7 @@ public class EditCommand extends Command {
         public Optional<StartTime> getStartTime() {
             return startTime;
         }
-        
+
         public void setEndTime(Optional<EndTime> endTime) {
             assert endTime != null;
             this.endTime = endTime;

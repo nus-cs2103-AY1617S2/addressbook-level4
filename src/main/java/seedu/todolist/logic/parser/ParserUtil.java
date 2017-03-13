@@ -72,7 +72,7 @@ public class ParserUtil {
         assert name != null;
         return name.isPresent() ? Optional.of(new Name(name.get())) : Optional.empty();
     }
-    
+
     /**
      * Parses a {@code Optional<String> startTime} into an {@code Optional<StartTime>} if {@code startTime} is present.
      */
@@ -80,7 +80,7 @@ public class ParserUtil {
         assert startTime != null;
         return startTime.isPresent() ? Optional.of(new StartTime(startTime.get())) : Optional.empty();
     }
-    
+
     /**
      * Parses a {@code Optional<String> endTime} into an {@code Optional<EndTime>} if {@code endTime} is present.
      */
