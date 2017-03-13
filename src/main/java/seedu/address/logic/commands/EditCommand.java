@@ -139,12 +139,12 @@ public class EditCommand extends Command {
         public Optional<TaskDate> getStartDate() {
             return startDate;
         }
-        
+
         public void setEndDate(Optional<TaskDate> endDate) {
         	assert endDate != null;
         	this.endDate = endDate;
         }
-        
+
         public Optional<TaskDate> getEndDate() {
         	return endDate;
         }
