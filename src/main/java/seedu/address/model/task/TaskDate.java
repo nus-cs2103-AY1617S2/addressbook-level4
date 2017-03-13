@@ -25,12 +25,15 @@ public class TaskDate {
      * @throws IllegalValueException if given date string is invalid.
      */
     public TaskDate(String date) throws IllegalValueException {
-        assert date != null;
-        String trimmedDate = date.trim();
-        if (!isValidDate(trimmedDate)) {
-            throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
+        if (date != null) {
+        	String trimmedDate = date.trim();
+            if (!isValidDate(trimmedDate)) {
+                throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
+            }
+            this.value = trimmedDate;
+        } else {
+        	this.value = null;
         }
-        this.value = trimmedDate;
     }
 
     /**

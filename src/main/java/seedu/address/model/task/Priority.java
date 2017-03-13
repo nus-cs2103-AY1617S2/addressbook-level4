@@ -18,12 +18,15 @@ public class Priority {
      * @throws IllegalValueException if given phone string is invalid.
      */
     public Priority(String priority) throws IllegalValueException {
-        assert priority != null;
-        String trimmedPriority = priority.trim();
-        if (!isValidPriority(trimmedPriority)) {
-            throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
+        if (priority != null) {
+        	String trimmedPriority = priority.trim();
+        	if (!isValidPriority(trimmedPriority)) {
+        		throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
+        	}
+        	this.value = trimmedPriority;
+        } else {
+        	this.value = null;
         }
-        this.value = trimmedPriority;
     }
 
     /**
