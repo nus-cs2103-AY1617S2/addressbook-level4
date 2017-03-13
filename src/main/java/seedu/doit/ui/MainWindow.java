@@ -33,8 +33,8 @@ public class MainWindow extends UiPart<Region> {
     // Independent Ui parts residing in this Ui container
 
     private TaskListPanel taskListPanel;
-    private TaskListPanel eventListPanel;
-    private TaskListPanel floatingListPanel;
+    private EventListPanel eventListPanel;
+    private FloatingTaskListPanel fListPanel;
     private Config config;
 
     @FXML
@@ -119,8 +119,8 @@ public class MainWindow extends UiPart<Region> {
 
     protected void fillInnerParts() {
         this.taskListPanel = new TaskListPanel(getTaskListPlaceholder(), this.logic.getFilteredTaskList());
-        this.eventListPanel = new TaskListPanel(getEventListPlaceholder(), this.logic.getFilteredTaskList());
-        this.floatingListPanel = new TaskListPanel(getFloatingListPlaceholder(), this.logic.getFilteredTaskList());
+        this.eventListPanel = new EventListPanel(getEventListPlaceholder(), this.logic.getFilteredEventList());
+        this.fListPanel = new FloatingTaskListPanel(getFListPlaceholder(), this.logic.getFilteredFloatingTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), this.config.getTaskManagerFilePath());
         new CommandBox(getCommandBoxPlaceholder(), this.logic);
@@ -146,7 +146,7 @@ public class MainWindow extends UiPart<Region> {
         return this.eventListPanelPlaceholder;
     }
 
-    private AnchorPane getFloatingListPlaceholder() {
+    private AnchorPane getFListPlaceholder() {
         return this.floatingListPanelPlaceholder;
     }
 
@@ -215,12 +215,12 @@ public class MainWindow extends UiPart<Region> {
         return this.taskListPanel;
     }
 
-    public TaskListPanel getEventListPanel() {
+    public EventListPanel getEventListPanel() {
         return this.eventListPanel;
     }
 
-    public TaskListPanel getFloatingListPanel() {
-        return this.floatingListPanel;
+    public FloatingTaskListPanel getFloatingListPanel() {
+        return this.fListPanel;
     }
 
 }
