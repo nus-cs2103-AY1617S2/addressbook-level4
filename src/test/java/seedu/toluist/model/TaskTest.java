@@ -1,7 +1,7 @@
 package seedu.toluist.model;
 
-import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -120,6 +120,7 @@ public class TaskTest {
         // complete task with end date passed is not overdue
         testTask.setDeadLine(LocalDateTime.MIN);
         testTask.setCompleted(true);
+        assertTrue(testTask.isCompleted());
         assertFalse(testTask.isOverdue());
     }
 
