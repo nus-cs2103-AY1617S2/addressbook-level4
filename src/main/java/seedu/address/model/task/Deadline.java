@@ -1,5 +1,7 @@
 package seedu.address.model.task;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -15,6 +17,7 @@ public class Deadline {
             "Task deadline should be after the current time";
 
     public final Date deadline;
+    private SimpleDateFormat formattter = new SimpleDateFormat("dd/MM/yyyy");
 
     /**
      * Validates given deadline.
@@ -29,6 +32,15 @@ public class Deadline {
         this.deadline = deadline;
     }
 
+    public Deadline(String deadline) throws IllegalValueException, ParseException {
+        assert deadline != null;
+        Date deadlineObj = formattter.parse(deadline);
+        if (!isValidDeadline(deadlineObj)) {
+            throw new IllegalValueException(MESSAGE_DEADLINE_CONSTRAINTS);
+        }
+        this.deadline = deadlineObj;
+    }
+
     /**
      * Returns true if a given date is a valid task deadline.
      */
@@ -38,7 +50,7 @@ public class Deadline {
 
     @Override
     public String toString() {
-        return deadline.toString();
+        return formattter.format(deadline);
     }
 
     @Override
@@ -46,7 +58,7 @@ public class Deadline {
         return other == this // short circuit if same object
                 || (other instanceof Name // instanceof handles nulls
                 && this.deadline.equals(((Name) other).fullName)); // state check
-        
+
     }
 
     @Override
