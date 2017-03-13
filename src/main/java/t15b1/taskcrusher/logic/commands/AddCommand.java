@@ -1,5 +1,8 @@
 package t15b1.taskcrusher.logic.commands;
 
+import java.util.Date;
+import java.util.List;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,8 +22,10 @@ import t15b1.taskcrusher.model.task.UniqueTaskList;
  * Adds a task to user inbox.
  */
 public class AddCommand extends Command {
-
+	
     public static final String COMMAND_WORD = "add";
+    public static final String TASK_FLAG = "t";
+    public static final String EVENT_FLAG = "e";
 
     //TODO these messages
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the active list. "
@@ -39,6 +44,26 @@ public class AddCommand extends Command {
      * @throws IllegalValueException if any of the raw values are invalid
      */
     public AddCommand(String name, String deadline, String priority, String description, Set<String> tags)
+            throws IllegalValueException {
+        final Set<Tag> tagSet = new HashSet<>();
+        for (String tagName : tags) {
+            tagSet.add(new Tag(tagName));
+        }
+        this.toAdd = new Task(
+                new Name(name),
+                new Deadline(deadline),
+                new Priority(priority),
+                new Description(description),
+                new UniqueTagList(tagSet)
+        );
+    }
+    
+    /**
+     * Creates an AddCommand using raw values.
+     *
+     * @throws IllegalValueException if any of the raw values are invalid
+     */
+    public AddCommand(String name, List<Date> deadline, String priority, String description, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
