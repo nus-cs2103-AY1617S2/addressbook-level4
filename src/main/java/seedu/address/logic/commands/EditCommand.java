@@ -154,7 +154,7 @@ public class EditCommand extends Command {
         public Optional<EndTime> getEndTime() {
             return endTime;
         }
-        
+
         public void setUrgencyLevel(Optional<UrgencyLevel> urgencyLevel) {
             assert urgencyLevel != null;
             this.urgencyLevel = urgencyLevel;

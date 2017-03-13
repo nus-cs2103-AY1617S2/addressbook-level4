@@ -51,7 +51,7 @@ public class TestTask implements ReadOnlyTask {
     public void setVenue(Venue venue) {
         this.venue = venue;
     }
-    
+
 	public void setUrgencyLevel(UrgencyLevel urgencyLevel) {
 		this.urgencyLevel = urgencyLevel;
 	}
@@ -79,7 +79,7 @@ public class TestTask implements ReadOnlyTask {
     public EndTime getEndTime() {
         return endtime;
     }
-    
+
 	@Override
 	public UrgencyLevel getUrgencyLevel() {
 		return urgencyLevel;

@@ -83,7 +83,7 @@ public class Task implements ReadOnlyTask {
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
     }
-    
+
     @Override
     public UrgencyLevel getUrgencyLevel() {
         return urgencyLevel;

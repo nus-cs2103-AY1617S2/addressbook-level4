@@ -54,7 +54,7 @@ public class TaskBuilder {
         this.task.setStartTime(new StartTime(starttime));
         return this;
     }
-    
+
     public TaskBuilder withUrgencyLevel(String urgencyLevel) throws IllegalValueException {
         this.task.setUrgencyLevel(new UrgencyLevel(urgencyLevel));
         return this;

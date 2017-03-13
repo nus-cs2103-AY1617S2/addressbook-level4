@@ -12,7 +12,7 @@ public class EndTimeTest {
         // blank email
         assertFalse(EndTime.isValidEndTime("")); // empty string
         //assertFalse(EndTime.isValidEndTime(" ")); // spaces only
-        
+
         // valid email
         assertTrue(EndTime.isValidEndTime("march fifteenth")); //alphabets
         assertTrue(EndTime.isValidEndTime("20170315")); // number
