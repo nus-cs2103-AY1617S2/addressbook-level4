@@ -34,6 +34,7 @@ public class DoneCommandTest extends EzDoGuiTest {
         currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
         doneList = TestUtil.addTasksToList(doneList, toDone);
         targetIndex = currentList.length;
+        toDone = currentList[targetIndex - 1];
         assertDoneSuccess(targetIndex, currentList, doneList);
 
         //invalid index
@@ -49,6 +50,10 @@ public class DoneCommandTest extends EzDoGuiTest {
         //invalid command
         commandBox.runCommand("dones 1");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
+        
+        //view done tasks
+        commandBox.runCommand("done");
+        assertTrue(taskListPanel.isListMatching(doneList));
 
     }
 
