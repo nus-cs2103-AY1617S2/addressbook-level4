@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CompleteCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -52,6 +53,9 @@ public class Parser {
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
+        case CompleteCommand.COMMAND_WORD:
+            return new CompleteCommandParser().parse(arguments);
+            
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
 
@@ -66,7 +70,7 @@ public class Parser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
-
+            
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
@@ -78,7 +82,7 @@ public class Parser {
 
         case ExportCommand.COMMAND_WORD:
             return new ExportCommand();
-
+        
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }

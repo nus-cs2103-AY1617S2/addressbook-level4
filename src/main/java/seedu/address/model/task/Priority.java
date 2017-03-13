@@ -1,5 +1,7 @@
 package seedu.address.model.task;
 
+import java.util.HashMap;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
@@ -11,10 +13,26 @@ import seedu.address.commons.exceptions.IllegalValueException;
 public class Priority {
 
     public static final String MESSAGE_PRIORITY_CONSTRAINTS =
-            "Task priority should be 1 alphanumeric string";
-    public static final String PRIORITY_VALIDATION_REGEX = "[\\w\\.]+";
+            "Priority Levels are only 1-5";
+    public static final String PRIORITY_VALIDATION_REGEX = "(1|2|3|4|5)";
+    
+    public static final String PRIORITY_LEVEL_ONE = "lame";
+    public static final String PRIORITY_LEVEL_TWO = "decent";
+    public static final String PRIORITY_LEVEL_THREE = "moderate";
+    public static final String PRIORITY_LEVEL_FOUR = "forreal";
+    public static final String PRIORITY_LEVEL_FIVE = "urgent";
+    public static final String PRIORITY_LEVEL_DONE = "completed";
+    
+    public static final String PRIORITY_LEVEL_1 = "1";
+    public static final String PRIORITY_LEVEL_2 = "2";
+    public static final String PRIORITY_LEVEL_3 = "3";
+    public static final String PRIORITY_LEVEL_4 = "4";
+    public static final String PRIORITY_LEVEL_5 = "5";
 
-    public final String value;
+    public String value;
+    public HashMap<String, String> priorityMap = new HashMap<String, String>();
+    public String number;
+    
 
     /**
      * Validates given email.
@@ -22,12 +40,26 @@ public class Priority {
      * @throws IllegalValueException if given email address string is invalid.
      */
     public Priority(String priority) throws IllegalValueException {
+        priorityMap.put(PRIORITY_LEVEL_1, PRIORITY_LEVEL_ONE);
+        priorityMap.put(PRIORITY_LEVEL_2, PRIORITY_LEVEL_TWO);
+        priorityMap.put(PRIORITY_LEVEL_3, PRIORITY_LEVEL_THREE);
+        priorityMap.put(PRIORITY_LEVEL_4, PRIORITY_LEVEL_FOUR);
+        priorityMap.put(PRIORITY_LEVEL_5, PRIORITY_LEVEL_FIVE);
+        
+        
         assert priority != null;
+        
         String trimmedPriority = priority.trim();
         if (!isValidPriority(trimmedPriority)) {
             throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
         }
-        this.value = trimmedPriority;
+        
+  
+        this.value = priorityMap.get(trimmedPriority);
+        this.number = trimmedPriority;
+
+        
+        
     }
 
     /**
@@ -46,11 +78,15 @@ public class Priority {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Priority // instanceof handles nulls
-                && this.value.equals(((Priority) other).value)); // state check
+                && this.number.equals(((Priority) other).number)); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return number.hashCode();
+    }
+    
+    public void setAsComplete() {
+        this.value = PRIORITY_LEVEL_DONE;
     }
 }
