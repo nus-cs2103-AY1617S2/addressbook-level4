@@ -10,29 +10,28 @@ import seedu.doist.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida, taskWithPriority;
+    public TestTask laundry, homework, chores, work, school, groceries, shopping, email, exercise;
 
     public TypicalTestTasks() {
         try {
-            alice = new TaskBuilder().withName("Alice Pauline").build();  //.withTags("friends").build();
-            benson = new TaskBuilder().withName("Benson Meier").withTags("owesMoney", "friends").build();
-            carl = new TaskBuilder().withName("Carl Kurz").withPriority("VERYIMPORTANT").build();
-            daniel = new TaskBuilder().withName("Daniel Meier").withPriority("IMPORTANT").build();
-            taskWithPriority = new TaskBuilder().withName("a task with priority").withPriority("IMPORTANT").build();
-            elle = new TaskBuilder().withName("Elle Meyer").build();
-            fiona = new TaskBuilder().withName("Fiona Kunz").build();
-            george = new TaskBuilder().withName("George Best").build();
+            laundry = new TaskBuilder().withName("Do laundry").build();
+            homework = new TaskBuilder().withName("Complete math homework").withTags("school", "math").build();
+            chores = new TaskBuilder().withName("Clean up house").withPriority("VERYIMPORTANT").build();
+            work = new TaskBuilder().withName("Schedule meeting with boss").withPriority("IMPORTANT").build();
+            school = new TaskBuilder().withName("Submit chemistry assignment").build();
+            groceries = new TaskBuilder().withName("Pick up milk").build();
+            shopping = new TaskBuilder().withName("Buy new clock").build();
 
             // Manually added
-            hoon = new TaskBuilder().withName("Hoon Meier").build();
-            ida = new TaskBuilder().withName("Ida Mueller").build();
+            email = new TaskBuilder().withName("Send emails to client").build();
+            exercise = new TaskBuilder().withName("Go for a run").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
         }
     }
 
-    public static void loadAddressBookWithSampleData(TodoList ab) {
+    public static void loadDoistWithSampleData(TodoList ab) {
         for (TestTask person : new TypicalTestTasks().getTypicalTasks()) {
             try {
                 ab.addTask(new Task(person));
@@ -43,12 +42,12 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
+        return new TestTask[]{laundry, homework, chores, work, school, groceries, shopping};
     }
 
     public TodoList getTypicalAddressBook() {
         TodoList ab = new TodoList();
-        loadAddressBookWithSampleData(ab);
+        loadDoistWithSampleData(ab);
         return ab;
     }
 }
