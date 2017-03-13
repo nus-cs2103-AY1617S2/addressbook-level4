@@ -58,7 +58,11 @@ public class ArgumentTokenizer {
         }
 
         for (int i = 0; i < prefix.size(); i++) {
-            saveArgument(prefix.get(i), "");
+            if (prefix.get(i).equals(PREFIX_PRIORITY)) {
+                saveArgument(prefix.get(i), "none");
+            } else {
+                saveArgument(prefix.get(i), "");
+            }
         }
     }
 
