@@ -147,12 +147,8 @@ public class EzDo implements ReadOnlyEzDo {
         }
     }
 
-    public void doneTask(Task p) throws UniqueTaskList.TaskNotFoundException {
-        if (tasks.contains(p)) {
+    public void doneTask(Task p) {
             p.setDone();
-        } else {
-            throw new UniqueTaskList.TaskNotFoundException();
-        }
     }
 
 //// tag-level operations
