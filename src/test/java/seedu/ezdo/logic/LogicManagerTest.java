@@ -182,6 +182,10 @@ public class LogicManagerTest {
         assertCommandSuccess("quit", QuitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
                 new EzDo(), Collections.emptyList());
     }
+
+    @Test
+    public void execute_quitShortCommand() {
+        assertCommandSuccess("q", QuitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
                 new EzDo(), Collections.emptyList());
     }
 
