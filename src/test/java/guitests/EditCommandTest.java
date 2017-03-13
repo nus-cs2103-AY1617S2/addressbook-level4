@@ -100,7 +100,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_duplicateTask_failure() {
-        commandBox.runCommand("edit 3 Alice Pauline p/85355255 e/1 "
+        commandBox.runCommand("edit 3 Alice Pauline p/85355255 e/friday "
             + "d/123, Jurong West Ave 6, #08-111 t/friends");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }

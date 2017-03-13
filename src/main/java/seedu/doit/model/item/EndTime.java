@@ -15,6 +15,7 @@ public class EndTime {
     public static final String MESSAGE_ENDTIME_CONSTRAINTS =
         "Item End Time should be 2 alphanumeric/period strings separated by '@'";
     public static final String ENDTIME_VALIDATION_REGEX = ".*";
+    //TO DO: UPDATE REGEX FOR TIME
 
     public final String value;
 
@@ -63,7 +64,7 @@ public class EndTime {
     }
 
     private static String formatDate(LocalDateTime input) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy HH:mm");
         return input.format(formatter);
     }
 
