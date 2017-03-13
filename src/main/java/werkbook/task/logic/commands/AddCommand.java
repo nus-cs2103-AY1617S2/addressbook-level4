@@ -21,7 +21,10 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task list.\n"
+            + "The task must have a task name, description is optional.\n"
+            + "The task can optionally have an end date and time "
+            + "but is required if it also has a start date and time.\n"
             + "Parameters: Task name [d/Description] [s/Start date and time] [e/End date and time]  [t/Tag]...\n"
             + "Example: " + COMMAND_WORD
             + " Walk the dog d/Take Zelda on a walk around the park s/01/01/2017 1000 e/01/01/2017 1200 t/Important";

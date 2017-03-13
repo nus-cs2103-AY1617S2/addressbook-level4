@@ -51,7 +51,8 @@ Format: `help`
 
 Adds a task to the task book<br>
 Date and time must be formatted as DD/MM/YYYY HHMM<br>
-If Start Date/Time is specfied, End Date/Time must be specified too<br>
+A task must have a name, the description is optional<br>
+The task can also optionally have a End Date/Time, or both a Start Date/Time and End Date/Time<br>
 Format: `add NAME [d/DESCRIPTION] [s/START_DATETIME] [e/END_DATETIME] [t/TAG]`
 
 Examples:
