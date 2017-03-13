@@ -302,7 +302,7 @@ public class TestUtil {
     public static TestTask[] removeTaskFromList(final TestTask[] list, int targetIndexInOneIndexedFormat) {
         return removeTasksFromList(list, list[targetIndexInOneIndexedFormat - 1]);
     }
-
+    
     /**
      * Replaces tasks[i] with a task.
      * @param tasks The array of tasks.
@@ -359,4 +359,5 @@ public class TestUtil {
         return collect.toArray(new Tag[split.length]);
     }
 
+	
 }
