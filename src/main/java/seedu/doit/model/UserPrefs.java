@@ -12,7 +12,7 @@ public class UserPrefs {
     public GuiSettings guiSettings;
 
     public UserPrefs() {
-        this.setGuiSettings(700, 1100, 200, 8);
+        this.setGuiSettings(500, 1100, 200, 8);
     }
 
     public GuiSettings getGuiSettings() {
