@@ -57,7 +57,8 @@ public class DoneCommandTest extends EzDoGuiTest {
 
     }
 
-    private void assertDoneSuccess(boolean usesShortCommand, int targetIndexOneIndexed, final TestTask[] currentList, final TestTask[] doneList) {
+    private void assertDoneSuccess(boolean usesShortCommand, int targetIndexOneIndexed, final TestTask[] currentList,
+                                   final TestTask[] doneList) {
 
         TestTask taskToDone = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
         TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList, targetIndexOneIndexed);
