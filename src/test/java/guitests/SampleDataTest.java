@@ -9,7 +9,7 @@ import seedu.doist.model.TodoList;
 //import seedu.doist.model.util.SampleDataUtil;
 import seedu.doist.testutil.TestUtil;
 
-public class SampleDataTest extends AddressBookGuiTest {
+public class SampleDataTest extends DoistGUITest {
     @Override
     protected TodoList getInitialData() {
         // return null to force test app to load data from file only

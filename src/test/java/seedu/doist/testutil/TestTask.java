@@ -20,12 +20,12 @@ public class TestTask implements ReadOnlyTask {
     }
 
     /**
-     * Creates a copy of {@code personToCopy}.
+     * Creates a copy of {@code taskToCopy}.
      */
-    public TestTask(TestTask personToCopy) {
-        this.desc = personToCopy.getDescription();
-        this.priority = personToCopy.getPriority();
-        this.tags = personToCopy.getTags();
+    public TestTask(TestTask taskToCopy) {
+        this.desc = taskToCopy.getDescription();
+        this.priority = taskToCopy.getPriority();
+        this.tags = taskToCopy.getTags();
     }
 
     public void setName(Description desc) {
@@ -63,7 +63,10 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getDescription().desc + " ");
-        this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
+        if (!this.getTags().isEmpty()) {
+            sb.append("\\under");
+            this.getTags().asObservableList().stream().forEach(s -> sb.append(" " + s.tagName));
+        }
         return sb.toString();
     }
 }

@@ -16,9 +16,9 @@ import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainGuiHandle;
 import guitests.guihandles.MainMenuHandle;
-import guitests.guihandles.PersonCardHandle;
 import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
+import guitests.guihandles.TaskCardHandle;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import seedu.doist.TestApp;
@@ -30,9 +30,9 @@ import seedu.doist.testutil.TestUtil;
 import seedu.doist.testutil.TypicalTestTasks;
 
 /**
- * A GUI Test class for AddressBook.
+ * A GUI Test class for Doist
  */
-public abstract class AddressBookGuiTest {
+public abstract class DoistGUITest {
 
     /* The TestName Rule makes the current test name available inside test methods */
     @Rule
@@ -88,7 +88,7 @@ public abstract class AddressBookGuiTest {
      */
     protected TodoList getInitialData() {
         TodoList ab = new TodoList();
-        TypicalTestTasks.loadAddressBookWithSampleData(ab);
+        TypicalTestTasks.loadDoistWithSampleData(ab);
         return ab;
     }
 
@@ -107,8 +107,8 @@ public abstract class AddressBookGuiTest {
     /**
      * Asserts the person shown in the card is same as the given person
      */
-    public void assertMatching(ReadOnlyTask person, PersonCardHandle card) {
-        assertTrue(TestUtil.compareCardAndPerson(card, person));
+    public void assertMatching(ReadOnlyTask task, TaskCardHandle card) {
+        assertTrue(TestUtil.compareCardAndPerson(card, task));
     }
 
     /**

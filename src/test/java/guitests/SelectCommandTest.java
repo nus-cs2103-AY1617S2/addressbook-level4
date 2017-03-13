@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import seedu.doist.model.task.ReadOnlyTask;
 
-public class SelectCommandTest extends AddressBookGuiTest {
+public class SelectCommandTest extends DoistGUITest {
 
 
     @Test
