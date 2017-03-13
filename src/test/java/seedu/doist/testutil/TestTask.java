@@ -65,7 +65,7 @@ public class TestTask implements ReadOnlyTask {
 
     @Override
     public FinishedStatus getFinishedStatus() {
-        return this.getFinishedStatus();
+        return finishedStatus;
     }
 
     @Override
