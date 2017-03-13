@@ -38,11 +38,11 @@ public class XmlAdaptedTask {
     @XmlElement(required = false)
     private boolean status;
     @XmlElement(required = false)
-    private String deadline;
+    private Date deadline;
     @XmlElement(required = false)
-    private String startDate;
+    private Date startDate;
     @XmlElement(required = false)
-    private String endDate;
+    private Date endDate;
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
@@ -67,11 +67,11 @@ public class XmlAdaptedTask {
         type = source.getType();
         switch (type) {
         case DeadlineTask.TYPE:
-            deadline = ((ReadOnlyDeadlineTask) source).getDeadline().toString();
+            deadline = ((ReadOnlyDeadlineTask) source).getDeadline();
             break;
         case EventTask.TYPE:
-            startDate = ((ReadOnlyEventTask) source).getStartDate().toString();
-            endDate = ((ReadOnlyEventTask) source).getEndDate().toString();
+            startDate = ((ReadOnlyEventTask) source).getStartDate();
+            endDate = ((ReadOnlyEventTask) source).getEndDate();
             break;
         }
         for (Tag tag : source.getTags()) {
@@ -98,11 +98,11 @@ public class XmlAdaptedTask {
         case FloatingTask.TYPE:
             return new FloatingTask(name, comment, priority, status, tags);
         case DeadlineTask.TYPE:
-            final Date deadline = new Date(this.deadline);
+            final Date deadline = this.deadline;
             return new DeadlineTask(name, comment, priority, status, deadline, tags);
         case EventTask.TYPE:
-            final Date startDate = new Date(this.startDate);
-            final Date endDate = new Date(this.endDate);
+            final Date startDate = this.startDate;
+            final Date endDate = this.endDate;
             return new EventTask(name, comment, priority, status, startDate, endDate, tags);
         default:
             return null;
