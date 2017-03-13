@@ -38,6 +38,13 @@ public interface ReadOnlyTask {
                .append(" Start Time: " + getStartTime().toString())
                .append(" End Time: " + getEndTime().toString())
                 .append(" Tags: ");
+        if (getStartTime() != null) {
+            builder.append(" Start Time: " + getStartTime().toString());
+        }
+        if (getEndTime() != null) {
+            builder.append(" End Time: " + getEndTime().toString());
+        }
+        builder.append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
