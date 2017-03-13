@@ -20,11 +20,19 @@ public class DoneCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DONE_TASK_SUCCESS = "Done Task: %1$s";
+    public static final String MESSAGE_DONE_LISTED = "Done Tasks listed";
 
     public final int targetIndex;
-
+    public final boolean requestToViewDoneOnly;
+    
     public DoneCommand(int targetIndex) {
         this.targetIndex = targetIndex;
+        this.requestToViewDoneOnly = false;
+    }
+    
+    public DoneCommand() {
+        this.targetIndex = 0;
+        this.requestToViewDoneOnly = true;
     }
 
 
@@ -32,6 +40,11 @@ public class DoneCommand extends Command {
     public CommandResult execute() throws CommandException {
 
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+
+        if (requestToViewDoneOnly == true) {
+            model.updateFilteredDoneList();
+            return new CommandResult(MESSAGE_DONE_LISTED);
+        }
 
         if (lastShownList.size() < targetIndex) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
