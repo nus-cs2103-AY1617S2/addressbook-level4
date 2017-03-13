@@ -20,7 +20,6 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 
 public class CommandBox extends UiPart<Region> {
-    private static final int ONLY_SUGGESTION_INDEX = 0;
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private static final String FXML = "CommandBox.fxml";
     public static final String ERROR_STYLE_CLASS = "error";
@@ -74,11 +73,10 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     private void handleOnKeyPressed(KeyEvent ke) {
         if (ke.getCode() == KeyCode.TAB) {
-            commandTextField.setText(commandTextField.getText().replaceAll("\\s+$", ""));
-            String lastToken = extractLastKey();
-            List<String> suggestions = autocomplete.getSuggestions(lastToken);
+            //commandTextField.setText(commandTextField.getText().replaceAll("\\s+$", ""));
+            String wordAtCursor = getWordAtCursor();
+            List<String> suggestions = autocomplete.getSuggestions(wordAtCursor);
             handleSuggestions(suggestions);
-            moveCursorToEnd();
             //Consume the event so the textfield will not go to the next ui component
             ke.consume();
         } else if (ke.getCode() == KeyCode.UP) {
@@ -97,7 +95,7 @@ public class CommandBox extends UiPart<Region> {
         String text = commandHistory.next();
         text = text == null ? commandTextField.getText() : text;
         commandTextField.setText(text);
-        moveCursorToEnd();
+        moveCursorToEndOfField();
     }
 
     /**
@@ -107,13 +105,13 @@ public class CommandBox extends UiPart<Region> {
         String text = commandHistory.previous();
         text = text == null ? commandTextField.getText() : text;
         commandTextField.setText(text);
-        moveCursorToEnd();
+        moveCursorToEndOfField();
     }
 
     /**
      * Moves the cursor in commandTextField to the end of the string
      */
-    private void moveCursorToEnd() {
+    private void moveCursorToEndOfField() {
         commandTextField.positionCaret(commandTextField.getLength());
     }
 
@@ -122,12 +120,11 @@ public class CommandBox extends UiPart<Region> {
      * @param suggestions - list of suggestions
      */
     private void handleSuggestions(List<String> suggestions) {
-        if (suggestions.isEmpty()) {
+        //if empty or no match
+        if (suggestions.isEmpty() || suggestions.size() == Autocomplete.autocompleteData.length) {
             return;
-        } else if (suggestions.size() == 1) { //exactly 1 suggestion
-            replaceLastTokenWithSuggestion(suggestions.get(ONLY_SUGGESTION_INDEX));
         } else { //show suggestions in the output box
-            showSuggestions(suggestions);
+            processSuggestions(suggestions);
         }
     }
 
@@ -135,9 +132,39 @@ public class CommandBox extends UiPart<Region> {
      * Shows suggestions in the output box
      * @param suggestions - list of suggestions
      */
-    private void showSuggestions(List<String> suggestions) {
+    private void processSuggestions(List<String> suggestions) {
         logger.info("Suggestions: " + suggestions);
 
+        String longestString = getLongestString(suggestions);
+        int commonSubstringIndex = getCommonSubstringEndIndexFromStart(suggestions);
+
+        String commonSubstring = longestString.substring(0, commonSubstringIndex);
+        String appendCharacter = "";
+        int cursorWordEndIndex = getEndIndexOfWordAtCursor();
+        String currentWord = getWordAtCursor();
+        boolean endHasSpace = false;
+        if (cursorWordEndIndex == commandTextField.getText().trim().length() && //is last word of command
+                suggestions.size() == 1) { //Only have 1 suggestion
+            //Append a space if there is a space at the end already
+            if (commandTextField.getText().charAt(commandTextField.getLength() - 1) != ' ') {
+                appendCharacter = " ";
+            }
+            endHasSpace = true;
+        }
+        replaceCurrentWordWithSuggestion(commonSubstring, appendCharacter);
+        commandTextField.positionCaret((cursorWordEndIndex - currentWord.length() + commonSubstring.length()) +
+                                        (endHasSpace ? 1 : 0));
+        if (suggestions.size() > 1) {
+            raise(new NewResultAvailableEvent(suggestions.toString()));
+        } else {
+            raise(new NewResultAvailableEvent(""));
+        }
+    }
+
+    /**
+     * Returns the character index of the common substring for all Strings in the suggestion
+     */
+    private int getCommonSubstringEndIndexFromStart(List<String> suggestions) {
         String longestString = getLongestString(suggestions);
         int commonSubstringIndex = 0;
         char currentChar;
@@ -151,12 +178,12 @@ public class CommandBox extends UiPart<Region> {
             }
             commonSubstringIndex++;
         }
-
-        String commonSubstring = longestString.substring(0, commonSubstringIndex);
-        replaceLastTokenWithSuggestion(commonSubstring, "");
-        raise(new NewResultAvailableEvent(suggestions.toString()));
+        return commonSubstringIndex;
     }
 
+    /**
+     * Returns the longest string in the list
+     */
     private String getLongestString(List<String> suggestions) {
         String longest = "";
         for (String suggestion : suggestions) {
@@ -167,33 +194,67 @@ public class CommandBox extends UiPart<Region> {
         return longest;
     }
 
-    private void replaceLastTokenWithSuggestion(String suggestion) {
-        replaceLastTokenWithSuggestion(suggestion, " ");
-    }
-
-    private void replaceLastTokenWithSuggestion(String suggestion, String appendSpace) {
-        String commandBoxText = commandTextField.getText();
-        String afterReplace = commandBoxText.replace(extractLastKey(), (suggestion + appendSpace));
-        commandTextField.setText(afterReplace);
-    }
-
-    /**
-     * Extracts the last word from the last space
-     * @return String from the last space
-     */
-    private String extractLastKey() {
-        String commandBoxText = commandTextField.getText();
-        int lastSpaceIndex = getIndexAfterLastSpace(commandBoxText);
-        return commandBoxText.substring(lastSpaceIndex);
+    private void replaceCurrentWordWithSuggestion(String suggestion, String toAppend) {
+        StringBuffer commandBoxText = new StringBuffer(commandTextField.getText());
+        commandBoxText.replace(getStartIndexOfWordAtCursor(),
+                                    getEndIndexOfWordAtCursor(),
+                                    (suggestion + toAppend));
+        commandTextField.setText(commandBoxText.toString());
     }
 
     /**
-     * Returns the last index of a space character of a given input string
-     * @return index of the last space, 0 otherwise
+     * Extracts the word at the current cursor (cursor always represents the character on the left of it)
      */
-    private int getIndexAfterLastSpace(String input) {
-        return input.replaceAll("\\s+$", "").lastIndexOf(" ") > 0 ? input.replaceAll("\\s+$", "").lastIndexOf(" ") + 1
-                                                                  : 0;
+    private String getWordAtCursor() {
+        String text = commandTextField.getText();
+
+        if (!text.trim().equals("")) {
+            int startIndex = getStartIndexOfWordAtCursor();
+            int endIndex = getEndIndexOfWordAtCursor();
+            return text.substring(startIndex, endIndex);
+        } else {
+            return text;
+        }
+
+    }
+
+    /**
+     * Gets the start index of the word at cursor
+     */
+    private int getStartIndexOfWordAtCursor() {
+        String text = commandTextField.getText();
+        int currentPosition = commandTextField.getCaretPosition();
+        int startIndex;
+        currentPosition = currentPosition - 1 < 0 ? 0 : currentPosition - 1;
+        while (currentPosition > 0  &&
+                currentPosition < text.length() &&
+                !Character.isWhitespace(text.charAt(currentPosition))) {
+            currentPosition--;
+        }
+
+        //Increment index by 1 if whitespace is met
+        if (Character.isWhitespace(text.charAt(currentPosition))) {
+            currentPosition++;
+        }
+
+        startIndex = currentPosition;
+        return startIndex;
+    }
+
+    /**
+     * Gets the end index of the word at cursor
+     */
+    private int getEndIndexOfWordAtCursor() {
+        String text = commandTextField.getText();
+        int currentPosition = commandTextField.getCaretPosition();
+        int endIndex;
+        while (currentPosition >= 0  &&
+                currentPosition < text.length() &&
+                !Character.isWhitespace(text.charAt(currentPosition))) {
+            currentPosition++;
+        }
+        endIndex = currentPosition;
+        return endIndex;
     }
 
     /**

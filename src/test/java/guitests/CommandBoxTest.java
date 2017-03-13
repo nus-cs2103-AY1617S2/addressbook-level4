@@ -60,45 +60,84 @@ public class CommandBoxTest extends TaskManagerGuiTest {
     public void commandBox_AutoCompleteTest() {
         //Single suggestion
         commandBox.enterCommand("he");
+        moveCursorRight("he".length());
         commandBox.pressTab();
         assertEquals("help ", commandBox.getCommandInput());
 
         //Multiple suggestions
         commandBox.enterCommand("ex");
+        moveCursorRight("ex".length());
         commandBox.pressTab();
         assertEquals("ex", commandBox.getCommandInput());
 
-        //Single suggestions with words
+        //Single suggestions with words (partial)
         commandBox.enterCommand("randomString ed");
+        moveCursorRight("randomString ed".length());
         commandBox.pressTab();
         assertEquals("randomString edit", commandBox.getCommandInput());
 
+      //Single suggestions with words
+        commandBox.enterCommand("randomString editl");
+        moveCursorRight("randomString edi".length());
+        commandBox.pressTab();
+        assertEquals("randomString editlabel ", commandBox.getCommandInput());
+
+        //Auto complete keyword before multiple suggestions
+        commandBox.enterCommand("ed randomString");
+        moveCursorRight(1);
+        commandBox.pressTab();
+        assertEquals("edit randomString", commandBox.getCommandInput());
+
+        //Auto complete keyword before single suggestion
+        commandBox.enterCommand("editl randomString");
+        moveCursorRight(1);
+        commandBox.pressTab();
+        assertEquals("editlabel randomString", commandBox.getCommandInput());
+
         //Nonexistent string
         commandBox.enterCommand("randomString nonExistentStri");
+        moveCursorRight("randomString nonExis".length());
         commandBox.pressTab();
         assertEquals("randomString nonExistentStri", commandBox.getCommandInput());
 
-      //pressing tab multiple times should not affect the auto completion
+        //Empty text
+        commandBox.enterCommand("");
+        commandBox.pressTab();
+        assertEquals("", commandBox.getCommandInput());
+
+        //pressing tab multiple times should not affect the auto completion
         commandBox.enterCommand("he");
         commandBox.pressTab();
         commandBox.pressTab();
         commandBox.pressTab();
+        moveCursorRight("he".length());
         commandBox.pressTab();
         commandBox.pressTab();
         commandBox.pressTab();
         commandBox.pressTab();
         assertEquals("help ", commandBox.getCommandInput());
 
-      //pressing tab multiple times should not affect the auto completion
+        //pressing tab multiple times should not affect the auto completion
         commandBox.enterCommand("randomString ed");
         commandBox.pressTab();
         commandBox.pressTab();
         commandBox.pressTab();
+        moveCursorRight("randomString ed".length());
         commandBox.pressTab();
         commandBox.pressTab();
         commandBox.pressTab();
         commandBox.pressTab();
         assertEquals("randomString edit", commandBox.getCommandInput());
+    }
+
+    /**
+     * Moves the cursor to the right {@value count} times
+     * @param count - number of times to move right
+     */
+    public void moveCursorRight(int count) {
+        for (int i = 0; i < count; i++) {
+            commandBox.pressRight();
+        }
     }
 
     @Test

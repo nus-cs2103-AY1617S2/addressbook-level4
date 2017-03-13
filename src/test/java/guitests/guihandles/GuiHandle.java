@@ -74,6 +74,10 @@ public class GuiHandle {
         guiRobot.type(KeyCode.TAB).sleep(1);
     }
 
+    public void pressRight() {
+        guiRobot.type(KeyCode.RIGHT);
+    }
+
     public void pressUp() {
         guiRobot.type(KeyCode.UP).sleep(1);
     }
