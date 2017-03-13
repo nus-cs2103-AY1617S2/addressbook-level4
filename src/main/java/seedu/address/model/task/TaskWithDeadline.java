@@ -69,4 +69,22 @@ public class TaskWithDeadline extends Task {
     public String timeTilDeadline() {
         return deadline.getDuration(new Date());
     }
+
+    @Override
+    public TaskType getTaskType() {
+        if (startingTime == null) {
+            return TaskType.TaskWithOnlyDeadline;
+        } else {
+            return TaskType.TaskWithDeadlineAndStartingTime;
+        }
+    }
+
+    @Override
+    public String getTaskDateTime() {
+        if (startingTime == null) {
+            return "Due: " + deadline.toString();
+        } else {
+            return "Begin: " + startingTime.toString() + "Due: " + deadline.toString();
+        }
+    }
 }

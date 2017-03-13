@@ -43,4 +43,11 @@ public interface ReadOnlyTask {
         return builder.toString();
     }
 
+    enum TaskType {
+        TaskWithNoDeadline, TaskWithOnlyDeadline, TaskWithDeadlineAndStartingTime, RecurringTask;
+    }
+
+    TaskType getTaskType();
+
+    String getTaskDateTime();
 }
