@@ -29,6 +29,7 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -331,6 +332,23 @@ public class LogicManagerTest {
                 expectedTaskManager.getTaskList());
     }
 
+    @Test
+    public void execute_mark_markCompleteTest() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        List<Task> threeTasks = helper.generateTaskList(3);
+
+        TaskManager expectedTaskManager = helper.generateAddressBook(threeTasks);
+        Task editedTask = threeTasks.get(0);
+        editedTask.setStatus(new Status("complete"));
+
+        expectedTaskManager.updateTask(0, editedTask);
+        helper.addToModel(model, threeTasks);
+
+        assertCommandSuccess("mark 1",
+                String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, threeTasks.get(0)),
+                expectedTaskManager,
+                expectedTaskManager.getTaskList());
+    }
 
     @Test
     public void execute_find_invalidArgsFormat() {
