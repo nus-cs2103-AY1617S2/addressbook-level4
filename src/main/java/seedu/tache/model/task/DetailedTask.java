@@ -2,7 +2,7 @@ package seedu.tache.model.task;
 
 import seedu.tache.model.tag.UniqueTagList;
 
-public class DetailedTask extends Task {
+public class DetailedTask extends Task implements ReadOnlyDetailedTask {
 
     private Date startDate;
     private Date endDate;
@@ -21,6 +21,15 @@ public class DetailedTask extends Task {
         this.duration = duration;
     }
 
+    /**
+     * Creates a copy of the given ReadOnlyDetailedTask.
+     */
+    public DetailedTask(ReadOnlyDetailedTask source) {
+        this(source.getName(), source.getStartDate(), source.getEndDate(), source.getTime(), source.getDuration(),
+             source.getTags());
+    }
+
+    @Override
     public Date getStartDate() {
         return startDate;
     }
@@ -29,6 +38,7 @@ public class DetailedTask extends Task {
         this.startDate = startDate;
     }
 
+    @Override
     public Date getEndDate() {
         return endDate;
     }
@@ -37,6 +47,7 @@ public class DetailedTask extends Task {
         this.endDate = endDate;
     }
 
+    @Override
     public Duration getDuration() {
         return duration;
     }
@@ -45,12 +56,38 @@ public class DetailedTask extends Task {
         this.duration = duration;
     }
 
+    @Override
     public Time getTime() {
         return time;
     }
 
     public void setTime(Time time) {
         this.time = time;
+    }
+
+    /**
+     * Updates this detailed task with the details of {@code replacement}.
+     */
+    public void resetData(ReadOnlyDetailedTask replacement) {
+        assert replacement != null;
+        this.setName(replacement.getName());
+        this.setDuration(replacement.getDuration());
+        this.setEndDate(replacement.getEndDate());
+        this.setStartDate(replacement.getStartDate());
+        this.setTime(replacement.getTime());
+        this.setTags(replacement.getTags());
+    }
+
+    @Override
+    public boolean isSameStateAs(ReadOnlyTask other) {
+        // TODO Auto-generated method stub
+        return ReadOnlyDetailedTask.super.isSameStateAs(other);
+    }
+
+    @Override
+    public String getAsText() {
+        // TODO Auto-generated method stub
+        return ReadOnlyDetailedTask.super.getAsText();
     }
 
 }

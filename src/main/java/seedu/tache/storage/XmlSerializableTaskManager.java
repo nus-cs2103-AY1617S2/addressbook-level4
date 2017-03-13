@@ -13,6 +13,7 @@ import seedu.tache.commons.core.UnmodifiableObservableList;
 import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.model.ReadOnlyTaskManager;
 import seedu.tache.model.tag.Tag;
+import seedu.tache.model.task.ReadOnlyDetailedTask;
 import seedu.tache.model.task.ReadOnlyTask;
 
 /**
@@ -24,6 +25,8 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
     @XmlElement
     private List<XmlAdaptedTask> tasks;
     @XmlElement
+    private List<XmlAdaptedDetailedTask> detailedTasks;
+    @XmlElement
     private List<XmlAdaptedTag> tags;
 
     /**
@@ -32,6 +35,7 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
      */
     public XmlSerializableTaskManager() {
         tasks = new ArrayList<>();
+        detailedTasks = new ArrayList<>();
         tags = new ArrayList<>();
     }
 
@@ -41,6 +45,8 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
     public XmlSerializableTaskManager(ReadOnlyTaskManager src) {
         this();
         tasks.addAll(src.getTaskList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
+        detailedTasks.addAll(src.getDetailedTaskList().stream().map(XmlAdaptedDetailedTask::new)
+                             .collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
     }
 
@@ -56,6 +62,20 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
             }
         }).collect(Collectors.toCollection(FXCollections::observableArrayList));
         return new UnmodifiableObservableList<>(tasks);
+    }
+
+    @Override
+    public ObservableList<ReadOnlyDetailedTask> getDetailedTaskList() {
+        final ObservableList<ReadOnlyDetailedTask> detailedTasks = this.detailedTasks.stream().map(p -> {
+            try {
+                return p.toModelType();
+            } catch (IllegalValueException e) {
+                e.printStackTrace();
+                //TODO: better error handling
+                return null;
+            }
+        }).collect(Collectors.toCollection(FXCollections::observableArrayList));
+        return new UnmodifiableObservableList<>(detailedTasks);
     }
 
     @Override

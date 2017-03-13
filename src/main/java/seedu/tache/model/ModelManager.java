@@ -10,9 +10,12 @@ import seedu.tache.commons.core.UnmodifiableObservableList;
 import seedu.tache.commons.events.model.TaskManagerChangedEvent;
 import seedu.tache.commons.util.CollectionUtil;
 import seedu.tache.commons.util.StringUtil;
+import seedu.tache.model.task.DetailedTask;
+import seedu.tache.model.task.ReadOnlyDetailedTask;
 import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.model.task.Task;
 import seedu.tache.model.task.UniqueTaskList;
+import seedu.tache.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.tache.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -24,6 +27,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+    private final FilteredList<ReadOnlyDetailedTask> filteredDetailedTasks;
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -36,6 +40,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
+        filteredDetailedTasks = new FilteredList<>(this.taskManager.getDetailedTaskList());
     }
 
     public ModelManager() {
@@ -152,6 +157,18 @@ public class ModelManager extends ComponentManager implements Model {
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
         }
+    }
+
+    @Override
+    public void deleteDetailedTask(ReadOnlyDetailedTask target) throws TaskNotFoundException {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void addDetailedTask(DetailedTask detailedTask) throws DuplicateTaskException {
+        // TODO Auto-generated method stub
+
     }
 
 }
