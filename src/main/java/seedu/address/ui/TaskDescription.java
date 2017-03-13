@@ -8,7 +8,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.task.ReadOnlyTask;
 
 /**
- * The Browser Panel of the App.
+ * The Task Description of the App.
  */
 public class TaskDescription extends UiPart<Region> {
 
@@ -26,17 +26,19 @@ public class TaskDescription extends UiPart<Region> {
     public TaskDescription(AnchorPane placeholder) {
         super(FXML);
         label = new Label("Task Description");
+        content = new TextArea();
         //FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
         //FxViewUtil.applyAnchorBoundaryParameters(content, 0.0, 0.0, 0.0, 0.0);
         content.setPrefHeight(600.0);
         content.setPrefWidth(600.0);
 
-        placeholder.getChildren().add(content);
-        placeholder.getChildren().add(label);
+        //content.setScaleY(0.1);
+
+        placeholder.getChildren().addAll(content, label);
     }
 
     public void loadPersonPage(ReadOnlyTask person) {
-        //content = new TextArea(person.getAsText());
+        content.setText(person.getAsText());
         /*Label label = new Label("Task Description");
         HBox hb = new HBox();
         hb.getChildren().addAll(label, content);

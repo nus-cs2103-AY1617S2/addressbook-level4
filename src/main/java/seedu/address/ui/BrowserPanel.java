@@ -34,7 +34,7 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     public void loadPage(String url) {
-        browser.getEngine().load(url);;
+        browser.getEngine().load(url);
     }
 
     /**
