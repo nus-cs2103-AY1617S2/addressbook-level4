@@ -15,17 +15,19 @@ public class Task implements ReadOnlyTask {
     private Title title;
     private Optional<Deadline> deadline;
     private Optional<Deadline> startTime;
+    private Boolean isCompleted;
 
     private UniqueLabelList labels;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Title title, Optional<Deadline> startTime, Optional<Deadline> deadline, UniqueLabelList labels) {
-        assert !CollectionUtil.isAnyNull(title, labels);
+    public Task(Title title, Optional<Deadline> startTime, Optional<Deadline> deadline, boolean isCompleted, UniqueLabelList labels) {
+        assert !CollectionUtil.isAnyNull(title, isCompleted, labels);
         this.title = title;
         this.deadline = deadline;
         this.startTime = startTime;
+        this.isCompleted = isCompleted;
         this.labels = new UniqueLabelList(labels); // protect internal labels from changes in the arg list
     }
     
@@ -33,7 +35,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getTitle(), source.getStartTime(), source.getDeadline(), source.getLabels());
+        this(source.getTitle(), source.getStartTime(), source.getDeadline(), source.isCompleted(), source.getLabels());
     }
 
     public void setName(Title name) {
@@ -89,6 +91,7 @@ public class Task implements ReadOnlyTask {
         this.setStartTime(replacement.getStartTime());
         this.setDeadline(replacement.getDeadline());
         this.setLabels(replacement.getLabels());
+        this.setIsCompleted(replacement.isCompleted());
     }
 
     @Override
@@ -107,6 +110,15 @@ public class Task implements ReadOnlyTask {
     @Override
     public String toString() {
         return getAsText();
+    }
+
+    @Override
+    public Boolean isCompleted() {
+        return isCompleted;
+    }
+    
+    public void setIsCompleted(Boolean isCompleted) {
+        this.isCompleted = isCompleted;
     }
 
 }

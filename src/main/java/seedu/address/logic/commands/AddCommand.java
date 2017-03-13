@@ -45,6 +45,7 @@ public class AddCommand extends Command {
                 new Title(title),
                 Optional.empty(),
                 Optional.empty(),
+                false,
                 new UniqueLabelList(labelSet)
         );
     }
@@ -65,6 +66,7 @@ public class AddCommand extends Command {
                 new Title(title),
                 Optional.empty(),
                 Optional.ofNullable(new Deadline(deadline)),
+                false,
                 new UniqueLabelList(labelSet)
         );
     }
@@ -85,6 +87,7 @@ public class AddCommand extends Command {
                 new Title(title),
                 Optional.ofNullable(new Deadline(startDate)),
                 Optional.ofNullable(new Deadline(deadline)),
+                false,
                 new UniqueLabelList(labelSet)
         );
     }

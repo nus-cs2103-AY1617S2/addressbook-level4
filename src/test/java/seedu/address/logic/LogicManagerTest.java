@@ -421,7 +421,7 @@ public class LogicManagerTest {
             Label label1 = new Label("label1");
             Label label2 = new Label("longerlabel2");
             UniqueLabelList labels = new UniqueLabelList(label1, label2);
-            return new Task(name, startTime, deadline, labels);
+            return new Task(name, startTime, deadline, false, labels);
         }
 
         /**
@@ -436,6 +436,7 @@ public class LogicManagerTest {
                     new Title("Task " + seed),
                     Optional.ofNullable(new Deadline("tomorrow 0100")),
                     Optional.ofNullable(new Deadline("tomorrow 2359")),
+                    false,
                     new UniqueLabelList(new Label("label" + Math.abs(seed)), new Label("label" + Math.abs(seed + 1)))
                     );
         }
@@ -539,6 +540,7 @@ public class LogicManagerTest {
                     new Title(name),
                     Optional.ofNullable(new Deadline("today")),
                     Optional.ofNullable(new Deadline("next wed 2359")),
+                    false,
                     new UniqueLabelList(new Label("label"))
                     );
         }

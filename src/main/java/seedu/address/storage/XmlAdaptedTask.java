@@ -26,6 +26,8 @@ public class XmlAdaptedTask {
     private String deadline;
     @XmlElement(required = false)
     private String startTime;
+    @XmlElement(required = true)
+    private boolean isCompleted; 
 
     @XmlElement
     private List<XmlAdaptedLabel> labeled = new ArrayList<>();
@@ -46,14 +48,11 @@ public class XmlAdaptedTask {
         title = source.getTitle().title;
         if (source.getStartTime().isPresent()) {
             startTime = source.getStartTime().get().toString();
-        } else {
-            startTime = "No StartTime";
-        }
+        } 
         if (source.getDeadline().isPresent()) {
             deadline = source.getDeadline().get().toString();
-        } else {
-            deadline = "No Deadline";
-        }
+        } 
+        isCompleted = source.isCompleted();
         labeled = new ArrayList<>();
         for (Label label : source.getLabels()) {
             labeled.add(new XmlAdaptedLabel(label));
@@ -84,6 +83,6 @@ public class XmlAdaptedTask {
             deadline = Optional.empty();
         }
         final UniqueLabelList labels = new UniqueLabelList(taskLabels);
-        return new Task(title, startTime, deadline, labels);
+        return new Task(title, startTime, deadline, isCompleted, labels);
     }
 }

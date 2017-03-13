@@ -22,6 +22,8 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label deadline;
     @FXML
+    private Label status;
+    @FXML
     private FlowPane labels;
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
@@ -37,6 +39,11 @@ public class TaskCard extends UiPart<Region> {
             deadline.setText(task.getDeadline().get().toString());
         } else {
             deadline.setVisible(false);
+        }
+        if (task.isCompleted()) {
+            status.setText("Completed");
+        } else {
+            status.setText("Incomplete");
         }
         initLabels(task);
     }
