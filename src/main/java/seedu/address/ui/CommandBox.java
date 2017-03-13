@@ -73,10 +73,12 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     private void handleOnKeyPressed(KeyEvent ke) {
         if (ke.getCode() == KeyCode.TAB) {
-            //commandTextField.setText(commandTextField.getText().replaceAll("\\s+$", ""));
-            String wordAtCursor = getWordAtCursor();
+            String command = commandTextField.getText();
+            int caretPosition = commandTextField.getCaretPosition();
+            String wordAtCursor = autocomplete.getWordAtCursor(command, caretPosition);
             List<String> suggestions = autocomplete.getSuggestions(wordAtCursor);
-            handleSuggestions(suggestions);
+
+            handleSuggestions(command, caretPosition, suggestions);
             //Consume the event so the textfield will not go to the next ui component
             ke.consume();
         } else if (ke.getCode() == KeyCode.UP) {
@@ -119,42 +121,52 @@ public class CommandBox extends UiPart<Region> {
      * Handles suggestions to replace/suggest
      * @param suggestions - list of suggestions
      */
-    private void handleSuggestions(List<String> suggestions) {
+    private void handleSuggestions(String command, int caretPosition, List<String> suggestions) {
         //if empty or no match
         if (suggestions.isEmpty() || suggestions.size() == Autocomplete.autocompleteData.length) {
             return;
         } else { //show suggestions in the output box
-            processSuggestions(suggestions);
+            processSuggestions(command, caretPosition, suggestions);
         }
     }
 
     /**
      * Shows suggestions in the output box
-     * @param suggestions - list of suggestions
      */
-    private void processSuggestions(List<String> suggestions) {
+    private void processSuggestions(String command, int caretPosition, List<String> suggestions) {
         logger.info("Suggestions: " + suggestions);
 
-        String longestString = getLongestString(suggestions);
-        int commonSubstringIndex = getCommonSubstringEndIndexFromStart(suggestions);
-
+        String longestString = autocomplete.getLongestString(suggestions);
+        int commonSubstringIndex = autocomplete.getCommonSubstringEndIndexFromStart(suggestions);
         String commonSubstring = longestString.substring(0, commonSubstringIndex);
+
+        //Append a space IF AND ONLY IF the auto-completed word is the last word of the command
         String appendCharacter = "";
-        int cursorWordEndIndex = getEndIndexOfWordAtCursor();
-        String currentWord = getWordAtCursor();
+        int cursorWordEndIndex = autocomplete.getEndIndexOfWordAtCursor(command, caretPosition);
         boolean endHasSpace = false;
-        if (cursorWordEndIndex == commandTextField.getText().trim().length() && //is last word of command
-                suggestions.size() == 1) { //Only have 1 suggestion
+        if (cursorWordEndIndex == command.trim().length() && suggestions.size() == 1) {
             //Append a space if there is a space at the end already
-            if (commandTextField.getText().charAt(commandTextField.getLength() - 1) != ' ') {
+            if (command.charAt(command.length() - 1) != ' ') {
                 appendCharacter = " ";
             }
             endHasSpace = true;
         }
-        replaceCurrentWordWithSuggestion(commonSubstring, appendCharacter);
-        commandTextField.positionCaret((cursorWordEndIndex - currentWord.length() + commonSubstring.length()) +
-                                        (endHasSpace ? 1 : 0));
-        if (suggestions.size() > 1) {
+        replaceCurrentWordWithSuggestion(command, caretPosition, commonSubstring, appendCharacter);
+
+        //Move position caret to after auto completed word
+        String currentWord = autocomplete.getWordAtCursor(command, caretPosition);
+        int newPositionCaret = (cursorWordEndIndex - currentWord.length() + commonSubstring.length()) +
+                                (endHasSpace ? 1 : 0);
+        commandTextField.positionCaret(newPositionCaret);
+
+        updateAutocompleteFeedback(suggestions);
+    }
+
+    /**
+     * Updates the output window to either nothing or a list of suggestions
+     */
+    private void updateAutocompleteFeedback(List<String> suggestions) {
+        if (suggestions.size() > 1) { //Show list of suggestions if more than 1
             raise(new NewResultAvailableEvent(suggestions.toString()));
         } else {
             raise(new NewResultAvailableEvent(""));
@@ -162,99 +174,12 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
-     * Returns the character index of the common substring for all Strings in the suggestion
+     * Replaces the current word with the suggestion provided
      */
-    private int getCommonSubstringEndIndexFromStart(List<String> suggestions) {
-        String longestString = getLongestString(suggestions);
-        int commonSubstringIndex = 0;
-        char currentChar;
-        commonSubstring:
-        for (int charIndex = 0; charIndex < longestString.length(); charIndex++) {
-            currentChar = longestString.charAt(charIndex);
-            for (String suggestion : suggestions) {
-                if (suggestion.length() <= charIndex || suggestion.charAt(charIndex) != currentChar) {
-                    break commonSubstring;
-                }
-            }
-            commonSubstringIndex++;
-        }
-        return commonSubstringIndex;
-    }
-
-    /**
-     * Returns the longest string in the list
-     */
-    private String getLongestString(List<String> suggestions) {
-        String longest = "";
-        for (String suggestion : suggestions) {
-            if (suggestion.length() >= longest.length()) {
-                longest = suggestion;
-            }
-        }
-        return longest;
-    }
-
-    private void replaceCurrentWordWithSuggestion(String suggestion, String toAppend) {
-        StringBuffer commandBoxText = new StringBuffer(commandTextField.getText());
-        commandBoxText.replace(getStartIndexOfWordAtCursor(),
-                                    getEndIndexOfWordAtCursor(),
-                                    (suggestion + toAppend));
-        commandTextField.setText(commandBoxText.toString());
-    }
-
-    /**
-     * Extracts the word at the current cursor (cursor always represents the character on the left of it)
-     */
-    private String getWordAtCursor() {
-        String text = commandTextField.getText();
-
-        if (!text.trim().equals("")) {
-            int startIndex = getStartIndexOfWordAtCursor();
-            int endIndex = getEndIndexOfWordAtCursor();
-            return text.substring(startIndex, endIndex);
-        } else {
-            return text;
-        }
-
-    }
-
-    /**
-     * Gets the start index of the word at cursor
-     */
-    private int getStartIndexOfWordAtCursor() {
-        String text = commandTextField.getText();
-        int currentPosition = commandTextField.getCaretPosition();
-        int startIndex;
-        currentPosition = currentPosition - 1 < 0 ? 0 : currentPosition - 1;
-        while (currentPosition > 0  &&
-                currentPosition < text.length() &&
-                !Character.isWhitespace(text.charAt(currentPosition))) {
-            currentPosition--;
-        }
-
-        //Increment index by 1 if whitespace is met
-        if (Character.isWhitespace(text.charAt(currentPosition))) {
-            currentPosition++;
-        }
-
-        startIndex = currentPosition;
-        return startIndex;
-    }
-
-    /**
-     * Gets the end index of the word at cursor
-     */
-    private int getEndIndexOfWordAtCursor() {
-        String text = commandTextField.getText();
-        int currentPosition = commandTextField.getCaretPosition();
-        int endIndex;
-        while (currentPosition >= 0  &&
-                currentPosition < text.length() &&
-                !Character.isWhitespace(text.charAt(currentPosition))) {
-            currentPosition++;
-        }
-        endIndex = currentPosition;
-        return endIndex;
+    private void replaceCurrentWordWithSuggestion(String command, int caretPosition,
+                                                    String suggestion, String toAppend) {
+        commandTextField.setText(autocomplete.replaceCurrentWordWithSuggestion(command, caretPosition,
+                                                                                suggestion, toAppend));
     }
 
     /**
