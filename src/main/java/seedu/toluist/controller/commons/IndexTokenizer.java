@@ -23,13 +23,15 @@ public class IndexTokenizer {
     }
 
     /**
-     *
+     * Split a string of unprocessed indexes into a list.
+     * This function splits the list by comma (","), then parse each substring to get a list of index.
+     * @return the list of indexes in sorted order (which is the union of all the parsed substring)
      */
     public static List<Integer> splitStringToIndexes(String indexToken, int maxIndex) {
         String[] splittedStringIndexes = indexToken.split(",");
         Set<Integer> setOfIndexes = new TreeSet<Integer>();
         for (String splittedStringIndex : splittedStringIndexes) {
-            List<Integer> splittedIndexes = splitIndexes(splittedStringIndex, maxIndex);
+            List<Integer> splittedIndexes = parseIndexes(splittedStringIndex, maxIndex);
             for (int splittedIndex : splittedIndexes) {
                 setOfIndexes.add(splittedIndex);
             }
@@ -54,7 +56,7 @@ public class IndexTokenizer {
      * @param maxIndex, the maximum possible index number
      * @return a list of integer containing all valid indexes
      */
-    public static List<Integer> splitIndexes(String stringIndexes, int maxIndex) {
+    public static List<Integer> parseIndexes(String stringIndexes, int maxIndex) {
         // Prepare stringIndexes in the correct format to be processed
         // Correct format example: ["2", "-", "5", "7", "11", "-", "13", "15"]
         String processedStringIndexes = stringIndexes.replaceAll(HYPHEN, " - ");
