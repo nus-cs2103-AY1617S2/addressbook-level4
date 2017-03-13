@@ -1,6 +1,6 @@
-# AddressBook Level 4 - Developer Guide
+# TypeTask - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team T09-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -425,7 +425,6 @@ Use case ends
 4b. Task does not exist
   > 4b1. System shows an error message
   > Use case resumes at step 3
-
 
 
 #### Use Case: Delete an existing task
