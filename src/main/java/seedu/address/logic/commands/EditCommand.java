@@ -21,15 +21,15 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the last person listing. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
+            + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS ] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 p/91234567 e/johndoe@yahoo.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the address book.";
 
     private final int filteredPersonListIndex;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -78,8 +78,8 @@ public class EditCommand extends Command {
 
         Description updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getDescription);
         Priority updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPriority);
-        TaskDate startDate = editPersonDescriptor.getEmail().orElseGet(personToEdit::getStartDate);
-        TaskDate endDate = editPersonDescriptor.getEmail().orElseGet(personToEdit::getStartDate);
+        TaskDate startDate = editPersonDescriptor.getStartDate().orElseGet(personToEdit::getStartDate);
+        TaskDate endDate = editPersonDescriptor.getEndDate().orElseGet(personToEdit::getStartDate);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
         return new Task(updatedName, updatedPhone, startDate, endDate, updatedTags);
@@ -92,7 +92,8 @@ public class EditCommand extends Command {
     public static class EditPersonDescriptor {
         private Optional<Description> description = Optional.empty();
         private Optional<Priority> priority = Optional.empty();
-        private Optional<TaskDate> taskDate = Optional.empty();
+        private Optional<TaskDate> startDate = Optional.empty();
+        private Optional<TaskDate> endDate = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditPersonDescriptor() {}
@@ -100,7 +101,8 @@ public class EditCommand extends Command {
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             this.description = toCopy.getName();
             this.priority = toCopy.getPhone();
-            this.taskDate = toCopy.getEmail();
+            this.startDate = toCopy.getStartDate();
+            this.endDate = toCopy.getEndDate();
             this.tags = toCopy.getTags();
         }
 
@@ -108,7 +110,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.description, this.priority, this.taskDate, this.tags);
+            return CollectionUtil.isAnyPresent(this.description, this.priority, this.startDate, this.endDate, this.tags);
         }
 
         public void setName(Optional<Description> description) {
@@ -129,13 +131,22 @@ public class EditCommand extends Command {
             return priority;
         }
 
-        public void setEmail(Optional<TaskDate> taskDate) {
-            assert taskDate != null;
-            this.taskDate = taskDate;
+        public void setStartDate(Optional<TaskDate> startDate) {
+            assert startDate != null;
+            this.startDate = startDate;
         }
 
-        public Optional<TaskDate> getEmail() {
-            return taskDate;
+        public Optional<TaskDate> getStartDate() {
+            return startDate;
+        }
+        
+        public void setEndDate(Optional<TaskDate> endDate) {
+        	assert endDate != null;
+        	this.endDate = endDate;
+        }
+        
+        public Optional<TaskDate> getEndDate() {
+        	return endDate;
         }
 
 
