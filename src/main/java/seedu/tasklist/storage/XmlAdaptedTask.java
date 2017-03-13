@@ -15,6 +15,8 @@ import seedu.tasklist.model.task.EventTask;
 import seedu.tasklist.model.task.FloatingTask;
 import seedu.tasklist.model.task.Name;
 import seedu.tasklist.model.task.Priority;
+import seedu.tasklist.model.task.ReadOnlyDeadlineTask;
+import seedu.tasklist.model.task.ReadOnlyEventTask;
 import seedu.tasklist.model.task.ReadOnlyTask;
 import seedu.tasklist.model.task.Status;
 import seedu.tasklist.model.task.Task;
@@ -63,6 +65,15 @@ public class XmlAdaptedTask {
         priority = source.getPriority().value;
         tagged = new ArrayList<>();
         type = source.getType();
+        switch (type) {
+        case DeadlineTask.TYPE:
+            deadline = ((ReadOnlyDeadlineTask) source).getDeadline().toString();
+            break;
+        case EventTask.TYPE:
+            startDate = ((ReadOnlyEventTask) source).getStartDate().toString();
+            endDate = ((ReadOnlyEventTask) source).getEndDate().toString();
+            break;
+        }
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
         }
