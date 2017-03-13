@@ -12,7 +12,7 @@ import seedu.address.logic.commands.IncorrectCommand;
  * Parses input arguments and creates a new DeleteCommand object
  */
 public class DeleteCommandParser {
-	
+
 	private static Optional<Integer> index;
 
     /**
@@ -31,10 +31,8 @@ public class DeleteCommandParser {
 
         return new DeleteCommand(index.get());
     }
-    
+
     public static void setIndex (int index){
     	DeleteCommandParser.index=Optional.of(index);
-    	
     }
-
 }

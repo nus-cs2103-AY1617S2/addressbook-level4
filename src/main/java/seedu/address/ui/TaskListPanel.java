@@ -59,8 +59,8 @@ public class TaskListPanel extends UiPart<Region> {
         Platform.runLater(() -> {
             taskListView.scrollTo(index);
             taskListView.getSelectionModel().clearAndSelect(index);
-            DeleteCommandParser.setIndex(index+1);     
-            EditCommandParser.setIndex(index+1);   
+            DeleteCommandParser.setIndex(index+1);
+            EditCommandParser.setIndex(index+1);
         });
     }
 
