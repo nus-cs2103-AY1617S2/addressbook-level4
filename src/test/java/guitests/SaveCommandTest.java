@@ -19,6 +19,13 @@ public class SaveCommandTest extends EzDoGuiTest {
     }
 
     @Test
+    public void save_shortCommand_success() {
+        commandBox.runCommand("s " + validDirectory);
+        assertResultMessage(String.format(SaveCommand.MESSAGE_SAVE_TASK_SUCCESS,
+                validDirectory + SaveCommand.DATA_FILE_NAME));
+    }
+
+    @Test
     public void save_invalidFormat_failure() {
         commandBox.runCommand("save");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveCommand.MESSAGE_USAGE));
