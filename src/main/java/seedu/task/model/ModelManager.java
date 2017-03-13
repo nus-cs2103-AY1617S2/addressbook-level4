@@ -95,7 +95,12 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
+        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords,false)));
+    }
+    
+    @Override
+    public void updateFilteredTaskList(Set<String> keywords, boolean isExact) {
+        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords,isExact)));
     }
 
     @Override
@@ -139,20 +144,28 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     private class NameQualifier implements Qualifier {
+        private boolean isExact = false;
         private Set<String> nameKeyWords;
 
-        NameQualifier(Set<String> nameKeyWords) {
+        NameQualifier(Set<String> nameKeyWords, boolean isExact) {
+            this.isExact = isExact;
             this.nameKeyWords = nameKeyWords;
         }
 
+            
         @Override
         public boolean run(ReadOnlyTask task) {
+            if(isExact){
+                return StringUtil.containsExactWordsIgnoreCase(task.getName().fullName, nameKeyWords);
+            }
+            
+            else{
             return nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword))
                     .findAny()
                     .isPresent();
+            }
         }
-
         @Override
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
@@ -169,7 +182,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return StringUtil.containsWordIgnoreCase(task.getTags(), tagKeyWord);
+            return StringUtil.containsTagIgnoreCase(task.getTags(), tagKeyWord);
         }
 
         @Override

@@ -13,6 +13,7 @@ import seedu.task.logic.commands.DeleteCommand;
 import seedu.task.logic.commands.EditCommand;
 import seedu.task.logic.commands.ExitCommand;
 import seedu.task.logic.commands.FindCommand;
+import seedu.task.logic.commands.FindExactCommand;
 import seedu.task.logic.commands.HelpCommand;
 import seedu.task.logic.commands.HelpFormatCommand;
 import seedu.task.logic.commands.IncorrectCommand;
@@ -63,6 +64,9 @@ public class Parser {
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
+            
+        case FindExactCommand.COMMAND_WORD:
+            return new FindExactCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();

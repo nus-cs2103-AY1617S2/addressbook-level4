@@ -2,6 +2,9 @@ package seedu.task.commons.util;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
@@ -38,8 +41,37 @@ public class StringUtil {
         }
         return false;
     }
-
-    public static boolean containsWordIgnoreCase(UniqueTagList tags, String keyword) {
+    
+    /**
+     * Returns true if the {@code sentence} contains the {@code keywords}.
+     *   Ignores case, but a full word match is required for each keyword.
+     * @param sentence cannot be null
+     * @param keywords cannot be null, cannot be empty, must a set of words
+     */
+    public static boolean containsExactWordsIgnoreCase(String sentence, Set<String> keywords){
+       
+        String lowerCaseSentence = sentence.toLowerCase();
+        Set<String> lowerCaseKeywords = new HashSet<>(keywords.size());
+        for(String s : keywords){
+            String a = s.toLowerCase();
+            keywords.remove(s);
+            lowerCaseKeywords.add(a);
+        }
+        String[] tokenizedTaskName = lowerCaseSentence.split(" ");
+        Set<String> tokenizedTaskNameInSet = new HashSet<>(Arrays.asList(tokenizedTaskName));
+        return tokenizedTaskNameInSet.containsAll(keywords);
+    }
+    
+    
+    /**
+     * Returns true if {@code tags} contains the {@code keyword}.
+     * Ignores case, but a full word match is required.
+     * 
+     * @param tags may be null
+     * @param keyword cannot be null, cannot be empty, must be a single word
+     * @return
+     */
+    public static boolean containsTagIgnoreCase(UniqueTagList tags, String keyword) {
         for (Tag t : tags) {
             if (containsWordIgnoreCase((t.tagName), keyword)) {
                 return true;
