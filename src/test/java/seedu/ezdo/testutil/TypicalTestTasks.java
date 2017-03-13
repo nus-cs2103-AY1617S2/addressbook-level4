@@ -59,9 +59,14 @@ public class TypicalTestTasks {
         return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
     }
 
+    public TestTask[] getTypicalDoneTasks() {
+        return new TestTask[]{};
+    }
+
     public EzDo getTypicalEzDo() {
         EzDo ez = new EzDo();
         loadEzDoWithSampleData(ez);
         return ez;
     }
+
 }

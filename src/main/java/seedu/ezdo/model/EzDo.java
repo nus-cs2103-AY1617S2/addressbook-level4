@@ -147,6 +147,10 @@ public class EzDo implements ReadOnlyEzDo {
         }
     }
 
+    public void doneTask(Task p) {
+        p.setDone();
+    }
+
 //// tag-level operations
 
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {

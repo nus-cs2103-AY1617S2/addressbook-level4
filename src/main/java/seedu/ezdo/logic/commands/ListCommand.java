@@ -2,7 +2,7 @@ package seedu.ezdo.logic.commands;
 
 
 /**
- * Lists all tasks in ezDo to the user.
+ * Lists all undone tasks in ezDo to the user.
  */
 public class ListCommand extends Command {
 
