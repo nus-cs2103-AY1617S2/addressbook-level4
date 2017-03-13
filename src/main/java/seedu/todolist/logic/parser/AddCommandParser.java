@@ -28,8 +28,8 @@ public class AddCommandParser {
         try {
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
-                    argsTokenizer.getValue(PREFIX_START).get(),
-                    argsTokenizer.getValue(PREFIX_END).get(),
+                    (argsTokenizer.getValue(PREFIX_START).isPresent() ? argsTokenizer.getValue(PREFIX_START).get() : null),
+                    (argsTokenizer.getValue(PREFIX_END).isPresent() ? argsTokenizer.getValue(PREFIX_END).get() : null),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
             );
         } catch (NoSuchElementException nsee) {
