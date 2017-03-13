@@ -14,10 +14,9 @@ public class DeadlineTest {
 	@Test
     public void isValidDeadline() {
         // invalid deadline
-        assertFalse(Deadline.isValidDeadline(new Date(0))); // inputs a date earlier than the current date
-        assertFalse(Deadline.isValidDeadline(CURRENT_DATE)); // inputs the current time
+        assertFalse(Deadline.isValidDeadline("03/12/2016")); // inputs a date earlier than the current date
 
         // valid deadline
-        assertTrue(Deadline.isValidDeadline(new Date(CURRENT_DATE.getTime() + 1000))); // inputs a date later than the current date
+        assertTrue(Deadline.isValidDeadline("03/12/2217")); // inputs a date later than the current date
     }
 }

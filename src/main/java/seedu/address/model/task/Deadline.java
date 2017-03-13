@@ -17,7 +17,7 @@ public class Deadline {
             "Task deadline should be after the current time";
 
     public final Date deadline;
-    private SimpleDateFormat formattter = new SimpleDateFormat("dd/MM/yyyy");
+    private static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
     /**
      * Validates given deadline.
@@ -34,7 +34,7 @@ public class Deadline {
 
     public Deadline(String deadline) throws IllegalValueException, ParseException {
         assert deadline != null;
-        Date deadlineObj = formattter.parse(deadline);
+        Date deadlineObj = formatter.parse(deadline);
         if (!isValidDeadline(deadlineObj)) {
             throw new IllegalValueException(MESSAGE_DEADLINE_CONSTRAINTS);
         }
@@ -47,10 +47,19 @@ public class Deadline {
     public static boolean isValidDeadline(Date test) {
         return test.after(new Date());
     }
+    
+    public static boolean isValidDeadline(String test) {
+        try {
+			return formatter.parse(test).after(new Date());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+        return false;
+    }
 
     @Override
     public String toString() {
-        return formattter.format(deadline);
+        return formatter.format(deadline);
     }
 
     @Override
