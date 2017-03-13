@@ -46,6 +46,8 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         title = source.getTitle().title;
+        date = source.getDeadline().value;
+        priority = source.getPriority().value;
         date = source.getDate().value;
         priority = source.getPriority().number;
         instruction = source.getInstruction().value;
