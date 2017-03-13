@@ -13,7 +13,6 @@ public class Deadline {
 
     public static final String MESSAGE_DEADLINE_CONSTRAINTS =
             "Task deadline should be after the current time";
-    private static final int LATER_THAN_CURRENT_DATE = 1;
 
     public final Date deadline;
 
@@ -34,11 +33,7 @@ public class Deadline {
      * Returns true if a given date is a valid task deadline.
      */
     public static boolean isValidDeadline(Date test) {
-        int result = test.compareTo(new Date());
-        if (result == LATER_THAN_CURRENT_DATE) {
-            return true;
-        }
-        return false;
+        return test.after(new Date());
     }
 
     @Override
