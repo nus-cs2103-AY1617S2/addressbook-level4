@@ -54,14 +54,14 @@ public class EditCommandTest extends DoistGUITest {
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
-        commandBox.runCommand("find Elle");
+        commandBox.runCommand("find math");
 
-        String detailsToEdit = "Belle";
+        String detailsToEdit = "Complete chemistry homework";
         int filteredPersonListIndex = 1;
-        int addressBookIndex = 5;
+        int addressBookIndex = 2;
 
         TestTask personToEdit = expectedPersonsList[addressBookIndex - 1];
-        TestTask editedPerson = new TaskBuilder(personToEdit).withName("Belle").build();
+        TestTask editedPerson = new TaskBuilder(personToEdit).withName("Complete chemistry homework").build();
 
         assertEditSuccess(filteredPersonListIndex, addressBookIndex, detailsToEdit, editedPerson);
     }

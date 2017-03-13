@@ -38,10 +38,10 @@ public class CommandBoxTest extends DoistGUITest {
     }
 
     @Test
-    public void commandBox_commandFails_textStaysAndErrorStyleClassAdded() {
+    public void commandBox_commandFails_textErasedAndErrorStyleClassAdded() {
         commandBox.runCommand(COMMAND_THAT_FAILS);
 
-        assertEquals(COMMAND_THAT_FAILS, commandBox.getCommandInput());
+        assertEquals("", commandBox.getCommandInput());
         assertEquals(errorStyleOfCommandBox, commandBox.getStyleClass());
     }
 

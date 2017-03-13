@@ -11,12 +11,12 @@ public class FindCommandTest extends DoistGUITest {
 
     @Test
     public void find_nonEmptyList() {
-        assertFindResult("find Mark"); // no results
-        assertFindResult("find Meier", td.homework, td.work); // multiple results
+        assertFindResult("find Apple"); // no results
+        assertFindResult("find homework", td.homework); // one results
 
         //find after deleting one result
         commandBox.runCommand("delete 1");
-        assertFindResult("find Meier", td.work);
+        assertFindResult("find homework");
     }
 
     @Test
