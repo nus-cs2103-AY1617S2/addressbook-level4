@@ -1,9 +1,11 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import java.util.Date;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import java.util.NoSuchElementException;
+import org.ocpsoft.prettytime.nlp.PrettyTimeParser;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddCommand;
@@ -15,24 +17,64 @@ import seedu.address.logic.commands.IncorrectCommand;
  */
 public class AddCommandParser {
 
+    final static int LEAST_DATES_FOR_DEADLINE_ONLY_TASK = 1;
+    final static int LEAST_DATES_FOR_DEADLINE_AND_STARTING_TIME_TASK = 2;
+
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the
+     * AddCommand and returns an AddCommand object for execution.
      */
     public Command parse(String args) {
-        ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_TAG);
-        argsTokenizer.tokenize(args);
+
+        Matcher matcher;
+        String tags[] = {};
+
+        System.out.println("add command accpected");
+        Pattern pattern = Pattern.compile(CliSyntax.WILDCARD + CliSyntax.WITH_TAGS + CliSyntax.WILDCARD);
+        matcher = pattern.matcher(args);
+        if (matcher.matches()) {
+            matcher = Pattern.compile(CliSyntax.WITH_TAGS).matcher(args);
+            tags = args.substring(matcher.end(matcher.groupCount()) + 1, args.length()).split(" ");
+            args = args.substring(0, matcher.start(matcher.groupCount()));
+        }
+
+        // args do not have tags now
+        pattern = Pattern.compile(CliSyntax.WILDCARD + CliSyntax.WITH_DEADLINE_AND_STARTING_TIME + CliSyntax.WILDCARD);
+        matcher = pattern.matcher(args);
+        if (matcher.matches()) {
+            List<Date> dates = new PrettyTimeParser().parse(args);
+            if (dates.size() < LEAST_DATES_FOR_DEADLINE_AND_STARTING_TIME_TASK) {
+                matcher = Pattern.compile(CliSyntax.WILDCARD + CliSyntax.WITH_STARTING_TIME).matcher(args);
+                String taskName = args.substring(0, matcher.start(matcher.groupCount())).trim();
+                try {
+                    return new AddCommand(taskName, dates.get(0), dates.get(1), tags);
+                } catch (IllegalValueException ive) {
+                    return new IncorrectCommand(ive.getMessage());
+                }
+            }
+        }
+
+        pattern = Pattern.compile(CliSyntax.WILDCARD + CliSyntax.WITH_DEADLINE_ONLY + CliSyntax.WILDCARD);
+        matcher = pattern.matcher(args);
+        if (matcher.matches()) {
+            List<Date> dates = new PrettyTimeParser().parse(args);
+            if (dates.size() < LEAST_DATES_FOR_DEADLINE_ONLY_TASK) {
+                matcher = Pattern.compile(CliSyntax.WILDCARD + CliSyntax.WITH_DEADLINE_ONLY).matcher(args);
+                String taskName = args.substring(0, matcher.start(matcher.groupCount())).trim();
+                try {
+                    return new AddCommand(taskName, dates.get(0), tags);
+                } catch (IllegalValueException ive) {
+                    return new IncorrectCommand(ive.getMessage());
+                }
+            }
+        }
+
         try {
-            return new AddCommand(
-                    argsTokenizer.getPreamble().get(),
-                    ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
-            );
-        } catch (NoSuchElementException nsee) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            return new AddCommand(args.trim(), tags);
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
+
     }
 
 }

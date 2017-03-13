@@ -33,7 +33,6 @@ public class TestTask implements ReadOnlyTask {
         this.done = done;
     }
 
-
     public void setTags(UniqueTagList tags) {
         this.tags = tags;
     }
@@ -47,7 +46,6 @@ public class TestTask implements ReadOnlyTask {
     public boolean isDone() {
         return done;
     }
-
 
     @Override
     public UniqueTagList getTags() {
@@ -64,6 +62,18 @@ public class TestTask implements ReadOnlyTask {
         sb.append("add " + this.getName().fullName + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
+    }
+
+    @Override
+    public TaskType getTaskType() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String getTaskDateTime() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }
