@@ -70,7 +70,7 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void doneTask(int filteredTaskListIndex) {
         int toDoListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         toDoList.doneTask(toDoListIndex);
-        updateFilteredTaskList(new PredicateExpression(p -> p.getDoneStatus()==false));
+        updateFilteredUndoneTaskList();
         indicateToDoListChanged();
     }
 
@@ -112,9 +112,15 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(expression::satisfies);
     }
     
-//    public void updateFilteredTaskList(Predicate<ReadOnlyTask> predicate){
-//        filteredTasks.setPredicate(predicate);
-//    }
+    @Override
+    public void updateFilteredUndoneTaskList(){
+        updateFilteredTaskList(new PredicateExpression(p -> p.getDoneStatus()==false));
+    }
+    
+    @Override
+    public void updateFilteredDoneTaskList(){
+        updateFilteredTaskList(new PredicateExpression(p -> p.getDoneStatus()==true));
+    }
 
     //========== Inner classes/interfaces used for filtering =================================================
 
