@@ -66,4 +66,16 @@ public class TestTask implements ReadOnlyTask {
         return sb.toString();
     }
 
+    @Override
+    public TaskType getTaskType() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String getTaskDateTime() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }
