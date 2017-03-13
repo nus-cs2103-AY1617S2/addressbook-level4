@@ -21,6 +21,7 @@ public class TestTask implements ReadOnlyTask {
     private DateTime dateTime;
     private Recurrence recurrence;
     private UniqueCategoryList categories;
+    private boolean isCompleted;
 
     public TestTask() {
         categories = new UniqueCategoryList();
@@ -95,6 +96,15 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public Recurrence getRecurrence() {
         return recurrence;
+    }
+
+    @Override
+    public boolean isCompleted() {
+        return isCompleted;
+    }
+
+    public void setCompleted(boolean isCompleted) {
+        this.isCompleted = isCompleted;
     }
 
     @Override

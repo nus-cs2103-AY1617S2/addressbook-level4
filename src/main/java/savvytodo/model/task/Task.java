@@ -17,15 +17,16 @@ public class Task implements ReadOnlyTask {
     private Location location;
     private DateTime dateTime;
     private Recurrence recurrence;
+    private boolean isCompleted;
 
     private UniqueCategoryList categories;
 
     /**
-     * Every field must be present and not null.
+     * Every field except name must be present and not null.
      */
     public Task(Name name, Priority priority, Description description, Location location,
             UniqueCategoryList categories) {
-        assert !CollectionUtil.isAnyNull(name, priority, description, location, categories);
+        assert !CollectionUtil.isAnyNull(name);
         this.name = name;
         this.priority = priority;
         this.description = description;
@@ -99,6 +100,15 @@ public class Task implements ReadOnlyTask {
     @Override
     public Recurrence getRecurrence() {
         return recurrence;
+    }
+
+    @Override
+    public boolean isCompleted() {
+        return isCompleted;
+    }
+
+    public void setCompleted(boolean isCompleted) {
+        this.isCompleted = isCompleted;
     }
 
     @Override
