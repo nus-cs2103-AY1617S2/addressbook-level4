@@ -5,12 +5,8 @@ import java.util.Vector;
 public class CompletedStatus {
 
     private boolean completed;
-    
-    //Task that is associated with the current completedStatus.
-    private Task task;
-    
-    //Keeps a list of all tasks that are completed.
-    private static Vector<Task> completedList = new Vector<Task>();
+    private Task task; //Task that is associated with the current completedStatus.
+    private static Vector<Task> completedList = new Vector<Task>(); //Keeps a list of all tasks that are completed.
     
     public CompletedStatus(Task task) {
         this.task = task;
