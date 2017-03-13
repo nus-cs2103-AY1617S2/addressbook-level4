@@ -63,6 +63,7 @@ allprojects {
         compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
         compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonDataTypeVersion"
         compile "com.google.guava:guava:$guavaVersion"
+        compile "com.joestelmach:natty:0.13"
         testCompile "org.powermock:powermock-api-mockito:1.6.6"
         testCompile "org.powermock:powermock-module-junit4:1.6.6"
         testCompile "org.mockito:mockito-core:1.+"
