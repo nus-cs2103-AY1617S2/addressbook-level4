@@ -29,6 +29,11 @@ public class PriorityTest {
         assertTrue(Priority.isValidPriority("low")); // low priority
     }
 
+    @Test (expected = IllegalValueException.class)
+    public void initialisePriorityWithInvalidArgs() throws IllegalValueException {
+        Priority invalidPriority = new Priority("invalid");
+    }
+
     @Test
     public void parseValidUserInputString() throws IllegalValueException {
         assertEquals(Priority.parseUserInputString("none"), Priority.Type.NONE);
@@ -48,6 +53,11 @@ public class PriorityTest {
         assertEquals(Priority.toUserInputString(Type.HIGH), Priority.PRIORITY_HIGH);
         assertEquals(Priority.toUserInputString(Type.MEDIUM), Priority.PRIORITY_MEDIUM);
         assertEquals(Priority.toUserInputString(Type.LOW), Priority.PRIORITY_LOW);
+    }
+
+    @Test (expected = AssertionError.class)
+    public void toUserInputStringWithInvalidArgs() {
+        Priority.toUserInputString(null);
     }
 
     @Test

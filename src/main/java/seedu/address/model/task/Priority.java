@@ -89,9 +89,8 @@ public class Priority {
             return PRIORITY_MEDIUM;
         case LOW:
             return PRIORITY_LOW;
-        default:
-            return null;
         }
+        throw new AssertionError();
     }
 
     public static Priority.Type parseXmlString(String priority) throws IllegalValueException {
@@ -104,7 +103,7 @@ public class Priority {
     }
 
     /**
-     * Returns true if a given string is a valid priority.
+     * Returns true if a given string is a valid input.
      */
     public static boolean isValidPriority(String test) {
         switch (test.toLowerCase()) {
