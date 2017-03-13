@@ -3,9 +3,9 @@ package seedu.task.logic.commands;
 import java.util.Set;
 
 public class FindExactCommand extends Command {
-    
+
     private static final boolean isExact = true;
-    
+
     public static final String COMMAND_WORD = "findexact";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks whose names contain all of "
@@ -21,7 +21,7 @@ public class FindExactCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        model.updateFilteredTaskList(keywords,isExact);
+        model.updateFilteredTaskList(keywords, isExact);
         return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
     }
 

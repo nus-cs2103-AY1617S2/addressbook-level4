@@ -47,6 +47,9 @@ public class MainWindow extends UiPart<Region> {
     private MenuItem helpMenuItem;
 
     @FXML
+    private MenuItem helpFormatMenuItem;
+
+    @FXML
     private AnchorPane taskListPanelPlaceholder;
 
     @FXML
@@ -80,6 +83,7 @@ public class MainWindow extends UiPart<Region> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(helpFormatMenuItem, KeyCombination.valueOf("F2"));
     }
 
     /**

@@ -95,12 +95,12 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords,false)));
+        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords, false)));
     }
-    
+
     @Override
     public void updateFilteredTaskList(Set<String> keywords, boolean isExact) {
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords,isExact)));
+        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords, isExact)));
     }
 
     @Override
@@ -152,15 +152,12 @@ public class ModelManager extends ComponentManager implements Model {
             this.nameKeyWords = nameKeyWords;
         }
 
-            
         @Override
         public boolean run(ReadOnlyTask task) {
-            if(isExact){
+            if (isExact) {
                 return StringUtil.containsExactWordsIgnoreCase(task.getName().fullName, nameKeyWords);
-            }
-            
-            else{
-            return nameKeyWords.stream()
+            } else {
+                return nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword))
                     .findAny()
                     .isPresent();
