@@ -43,40 +43,61 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     private void handleKeyPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
-            try {
-                String userCommandText = commandTextField.getText();
-                CommandHistory.restore();
-                if (!CommandHistory.addCommandHistory(userCommandText)) {
-                    throw new ArrayIndexOutOfBoundsException();
-                }
-                CommandResult commandResult = logic.execute(userCommandText);
-                // process result of the command
-                setStyleToIndicateCommandSuccess();
-                commandTextField.setText("");
-                logger.info("Result: " + commandResult.feedbackToUser);
-                raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
-
-            } catch (CommandException e) {
-                // handle command failure
-                setStyleToIndicateCommandFailure();
-                commandTextField.setText("");
-                logger.info("Invalid command: " + commandTextField.getText());
-                raise(new NewResultAvailableEvent(e.getMessage()));
-            }
+            handleEnterKey();
         } else if (event.getCode() == KeyCode.UP) {
-            String userCommandText = CommandHistory.getPreviousCommand();
-            if (userCommandText == null) {
-                setCommandInput("");
-            } else {
-                setCommandInput(userCommandText);
-            }
+            handleUpKey();
         } else if (event.getCode() == KeyCode.DOWN) {
-            String userCommandText = CommandHistory.getNextCommand();
-            if (userCommandText == null) {
-                setCommandInput("");
-            } else {
-                setCommandInput(userCommandText);
-            }
+            handleDownKey();
+        }
+    }
+
+    //Handles Down key press
+    private void handleDownKey() {
+        String userCommandText = CommandHistory.getNextCommand();
+        if (userCommandText == null) {
+            setCommandInput("");
+        } else {
+            setCommandInput(userCommandText);
+        }
+    }
+
+    //Handle Up key press
+    private void handleUpKey() {
+        String userCommandText = CommandHistory.getPreviousCommand();
+        if (userCommandText == null) {
+            setCommandInput("");
+        } else {
+            setCommandInput(userCommandText);
+        }
+    }
+
+    //Handle Enter key press
+    private void handleEnterKey() {
+        try {
+            String userCommandText = commandTextField.getText();
+            manageCommandHistory(userCommandText);
+            CommandResult commandResult = logic.execute(userCommandText);
+            // process result of the command
+            setStyleToIndicateCommandSuccess();
+            commandTextField.setText("");
+            logger.info("Result: " + commandResult.feedbackToUser);
+            raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
+
+        } catch (CommandException e) {
+            // handle command failure
+            setStyleToIndicateCommandFailure();
+            commandTextField.setText("");
+            logger.info("Invalid command: " + commandTextField.getText());
+            raise(new NewResultAvailableEvent(e.getMessage()));
+        }
+    }
+
+    //Restores the command history pointer
+    //Throws exception is 'add' fails
+    private void manageCommandHistory(String userCommandText) {
+        CommandHistory.restore();
+        if (!CommandHistory.addCommandHistory(userCommandText)) {
+            throw new ArrayIndexOutOfBoundsException();
         }
     }
 
