@@ -40,7 +40,7 @@ public class PersonBuilder {
     }
 
     public PersonBuilder withAddress(String address) throws IllegalValueException {
-        this.person.setAddress(new CompletionStatus(address));
+        this.person.setAddress(new CompletionStatus(Boolean.valueOf(address)));
         return this;
     }
 

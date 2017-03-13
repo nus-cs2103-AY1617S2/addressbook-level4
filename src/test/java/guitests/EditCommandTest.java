@@ -9,7 +9,6 @@ import guitests.guihandles.PersonCardHandle;
 import seedu.task.commons.core.Messages;
 import seedu.task.logic.commands.EditCommand;
 import seedu.task.model.tag.Tag;
-import seedu.task.model.task.CompletionStatus;
 import seedu.task.model.task.EndTime;
 import seedu.task.model.task.Name;
 import seedu.task.model.task.StartTime;
@@ -112,9 +111,6 @@ public class EditCommandTest extends AddressBookGuiTest {
 
         commandBox.runCommand("edit 1 e/yahoo!!!");
         assertResultMessage(EndTime.MESSAGE_TIME_CONSTRAINTS);
-
-        commandBox.runCommand("edit 1 c/");
-        assertResultMessage(CompletionStatus.MESSAGE_COMPLETION_STATUS_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 #*&");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
