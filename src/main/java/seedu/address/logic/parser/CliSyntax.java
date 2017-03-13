@@ -14,6 +14,9 @@ public class CliSyntax {
     public static final Prefix PREFIX_EMAIL = new Prefix("e/");
     public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
+    public static final String FIELDWORD_TITLE= new String("title");
+    public static final String FIELDWORD_DESCRIPTION= new String("description");
+    public static final String FIELDWORD_TAG= new String("tag");
     
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT =

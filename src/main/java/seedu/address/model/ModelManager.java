@@ -85,6 +85,15 @@ public class ModelManager extends ComponentManager implements Model {
         addressBook.updatePerson(addressBookIndex, editedPerson);
         indicateAddressBookChanged();
     }
+    
+    public void updateTask(int filteredTaskListIndex, Task editedTask)
+            throws UniqueTaskList.DuplicateTaskException {
+        assert editedTask != null;
+
+        int addressBookIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
+        addressBook.updateTask(addressBookIndex, editedTask);
+        indicateAddressBookChanged();
+    }
 
     //=========== Filtered Person List Accessors =============================================================
 

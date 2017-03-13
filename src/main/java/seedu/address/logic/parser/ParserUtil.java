@@ -19,6 +19,8 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Description;
+import seedu.address.model.task.Title;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -65,6 +67,35 @@ public class ParserUtil {
                 .map(Optional::ofNullable)
                 .collect(Collectors.toList());
     }
+    
+    /**
+     * Splits an argument string into ordered fields.
+     * @return A list of size {@code numFields} where the first element is the index, second element is 
+     *         the fieldword and last element is the update information, 
+     *         {@code Optional.empty()} otherwise.
+     */
+     public static List<Optional<String>> splitArgument(String args, int numFields) {
+         return Arrays.stream(args.split("\\s+", numFields))
+                 .map(Optional::ofNullable)
+                 .collect(Collectors.toList());
+     }
+    
+    /**
+     * Parses a {@code Optional<String> title} into an {@code Optional<Title>} if {@code title} is present.
+     */
+    public static Optional<Title> parseTitle(Optional<String> title) throws IllegalValueException {
+        assert title != null;
+        return title.isPresent() ? Optional.of(new Title(title.get())) : Optional.empty();
+    }
+    /**
+     * Parses a {@code Optional<String> description} into an {@code Optional<Description>} 
+     * if {@code description} is present.
+     */
+    public static Optional<Description> parseDescription(Optional<String> description) 
+            throws IllegalValueException{
+        assert description != null;
+        return description.isPresent() ? Optional.of(new Description(description.get())) : Optional.empty();
+    }
 
     /**
      * Parses a {@code Optional<String> name} into an {@code Optional<Name>} if {@code name} is present.
@@ -109,4 +140,5 @@ public class ParserUtil {
         }
         return new UniqueTagList(tagSet);
     }
+
 }

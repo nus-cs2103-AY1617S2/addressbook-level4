@@ -84,7 +84,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
 //// person-level operations
-
+    
     /**
      * Adds a task to the TaskIt.
      * Also checks the new task's tags and updates {@link #tags} with any new tags found,
@@ -116,6 +116,26 @@ public class AddressBook implements ReadOnlyAddressBook {
         // This can cause the tags master list to have additional tags that are not tagged to any person
         // in the person list.
         persons.updatePerson(index, editedPerson);
+    }
+    
+    /**
+     * Updates the task in the list at position {@code index} with {@code editedTask}.
+     * {@code AddressBook}'s tag list will be updated with the tags of {@code editedTask}.
+     * @see #syncMasterTagListWith(Task)
+     *
+     * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
+     *      another existing task in the list.
+     * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
+     */
+    public void updateTask(int index, Task editedTask)
+            throws UniqueTaskList.DuplicateTaskException {
+        assert editedTask != null;
+
+        syncMasterTagListWith(editedTask);
+        // TODO: the tags master list will be updated even though the below line fails.
+        // This can cause the tags master list to have additional tags that are not tagged to any task
+        // in the task list.
+        tasks.updateTask(index, editedTask);
     }
     
     /**
