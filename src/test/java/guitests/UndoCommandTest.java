@@ -24,7 +24,7 @@ public class UndoCommandTest extends TaskBossGuiTest {
         commandBox.runCommand("delete " + currentList.length);
         TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
         assertUndoCommandSuccess(expectedList);
- 
+
         //undo another command after undoing one command
         assertUndoCommandSuccess(currentList);
 
