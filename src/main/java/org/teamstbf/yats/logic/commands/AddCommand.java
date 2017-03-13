@@ -1,5 +1,6 @@
 package org.teamstbf.yats.logic.commands;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -56,6 +57,19 @@ public class AddCommand extends Command {
                 new Description(description),
                 new UniqueTagList(tagSet)
         );
+    }
+
+    /**
+     * Creates an addCommand using a map of parameters
+     * @param addParam
+     * @throws IllegalValueException if any of the parameters are invalid
+     */
+    public AddCommand(HashMap<String, Object> parameters) throws IllegalValueException {
+        final Set<Tag> tagSet = new HashSet<>();
+        for (String tagName : (Set<String>) parameters.get("tag")) {
+            tagSet.add(new Tag(tagName));
+        }
+        this.toAdd = new Event(parameters, new UniqueTagList(tagSet));
     }
 
     @Override
