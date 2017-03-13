@@ -33,11 +33,11 @@ public class TestTask implements ReadOnlyTask {
     public void setName(Name name) {
         this.name = name;
     }
-    
+
     public void setStartTime(StartTime startTime) {
         this.startTime = startTime;
     }
-    
+
     public void setEndTime(EndTime endTime) {
         this.endTime = endTime;
     }
@@ -50,11 +50,11 @@ public class TestTask implements ReadOnlyTask {
     public Name getName() {
         return name;
     }
-    
+
     public StartTime getStartTime() {
         return startTime;
     }
-    
+
     public EndTime getEndTime() {
         return endTime;
     }

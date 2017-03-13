@@ -31,11 +31,6 @@ public class Task implements ReadOnlyTask {
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
         this.completed = false;
     }
-    
-    /**
-     * Overloaded constructor to support floating tasks
-     * i.e. tasks without start time/end time
-     */
 
     /**
      * Creates a copy of the given ReadOnlyTask.
@@ -55,7 +50,7 @@ public class Task implements ReadOnlyTask {
     public Name getName() {
         return name;
     }
-    
+
     public StartTime getStartTime() {
         return startTime;
     }

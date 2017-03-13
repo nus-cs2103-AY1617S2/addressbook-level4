@@ -440,11 +440,11 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getName().toString());
-            
+
             if (p.getStartTime() != null) {
                 cmd.append(" s/" + p.getStartTime().toString());
             }
-            
+
             if (p.getEndTime() != null) {
                 cmd.append(" e/" + p.getEndTime().toString());
             }
