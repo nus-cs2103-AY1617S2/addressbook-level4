@@ -21,10 +21,12 @@ public class LogicManager extends ComponentManager implements Logic {
 
     private final Model model;
     private final Parser parser;
+    private UndoManager undoManager;
 
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.parser = new Parser();
+        this.undoManager = new UndoManager();
     }
 
     @Override
@@ -32,6 +34,9 @@ public class LogicManager extends ComponentManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         Command command = parser.parseCommand(commandText);
         command.setData(model);
+        if(command.isMutating()) {
+        	undoManager.addMutatingTask(command);
+        }
         return command.execute();
     }
 
