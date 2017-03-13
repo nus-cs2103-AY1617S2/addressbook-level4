@@ -10,6 +10,7 @@ public class CommandAndState {
 	public CommandAndState(Command command, ReadOnlyToDoList state) {
 	    this.command = command;
 	    this.state = state;
+
 	}
 
     public Command getCommand() {
