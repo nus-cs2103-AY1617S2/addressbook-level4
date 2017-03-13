@@ -61,7 +61,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withName("Visit Grandpa").build();
-        
+
         assertEditSuccess(filteredTaskListIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
 

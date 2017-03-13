@@ -2,8 +2,6 @@ package seedu.tache.testutil;
 
 import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.model.TaskManager;
-import seedu.tache.model.tag.UniqueTagList;
-import seedu.tache.model.task.Name;
 import seedu.tache.model.task.Task;
 import seedu.tache.model.task.UniqueTaskList;
 
@@ -23,7 +21,7 @@ public class TypicalTestTasks {
             visitGrandma = new TaskBuilder().withName("Visit Grandma").build();
             payDavid = new TaskBuilder().withName("Pay David 20 for cab").build();
             visitSarah = new TaskBuilder().withName("Visit Sarah")
-            		.withTags("MediumPriority").build();
+                                          .withTags("MediumPriority").build();
 
             // Manually added
             getFit = new TaskBuilder().withName("Get fit").build();

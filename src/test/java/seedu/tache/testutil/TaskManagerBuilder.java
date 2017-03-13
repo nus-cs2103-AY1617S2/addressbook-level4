@@ -9,7 +9,8 @@ import seedu.tache.model.task.UniqueTaskList;
 /**
  * A utility class to help with building TaskManager objects.
  * Example usage: <br>
- *     {@code TaskManager tache = new TaskManagerBuilder().withTask("Buy", "Eggs", "and", "Bread").withTag("HighPriority").build();}
+ *     {@code TaskManager tache = new TaskManagerBuilder().withTask("Buy", "Eggs", "and", "Bread")
+ *                                                        .withTag("HighPriority").build();}
  */
 public class TaskManagerBuilder {
 
