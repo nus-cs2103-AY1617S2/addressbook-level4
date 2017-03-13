@@ -10,10 +10,10 @@ public class SearchCommand extends Command {
 
     public static final String COMMAND_WORD = "SEARCH";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Searches all tasks whose tasknames contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Searches all tasks who contain any of "
             + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " eat food lunch ";
+            + "Example: " + COMMAND_WORD + " eat food lunch 03/03/17";
 
     private final Set<String> keywords;
 
