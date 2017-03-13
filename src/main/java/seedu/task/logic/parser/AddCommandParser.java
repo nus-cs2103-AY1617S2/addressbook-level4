@@ -6,7 +6,9 @@ import static seedu.task.logic.parser.CliSyntax.PREFIX_ENDDATE;
 import static seedu.task.logic.parser.CliSyntax.PREFIX_STARTDATE;
 import static seedu.task.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.HashSet;
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.logic.commands.AddCommand;
@@ -23,17 +25,37 @@ public class AddCommandParser {
      * and returns an AddCommand object for execution.
      */
     public Command parse(String args) {
-        ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_STARTDATE, PREFIX_ENDDATE, PREFIX_COMPLETIONSTATUS, PREFIX_TAG);
-        argsTokenizer.tokenize(args);
+
         try {
+            ArgumentTokenizer argsTokenizer =
+                new ArgumentTokenizer(PREFIX_STARTDATE, PREFIX_ENDDATE, PREFIX_COMPLETIONSTATUS, PREFIX_TAG);
+            argsTokenizer.tokenize(args);
+
+            String taskName = argsTokenizer.getPreamble().get();
+            String startDate = "";
+            String endDate = "";
+            String completionStatus = "Not Done";
+            Set<String> tagSet = new HashSet<String>();
+            System.out.println(args);
+            if (args.contains("s/")) {
+        	startDate = argsTokenizer.getValue(PREFIX_STARTDATE).get();
+            }
+            if (args.contains("e/")) {
+        	endDate = argsTokenizer.getValue(PREFIX_ENDDATE).get();
+            }
+            if (args.contains("c/")) {
+        	completionStatus = argsTokenizer.getValue(PREFIX_COMPLETIONSTATUS).get();
+            }
+            if (args.contains("t/")) {
+        	tagSet = ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG));
+            }
+
             return new AddCommand(
-                    argsTokenizer.getPreamble().get(),
-                    argsTokenizer.getValue(PREFIX_STARTDATE).get(),
-                    argsTokenizer.getValue(PREFIX_ENDDATE).get(),
-                    argsTokenizer.getValue(PREFIX_COMPLETIONSTATUS).get(),
-                    ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
-            );
+        	    taskName,
+                    startDate,
+                    endDate,
+                    completionStatus,
+                    tagSet);
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         } catch (IllegalValueException ive) {

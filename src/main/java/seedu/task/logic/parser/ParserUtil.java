@@ -90,7 +90,7 @@ public class ParserUtil {
             throws IllegalValueException {
         assert completionStatus != null;
         return completionStatus.isPresent() ?
-                Optional.of(new CompletionStatus(completionStatus.get())) : Optional.empty();
+                Optional.of(new CompletionStatus(Boolean.valueOf(completionStatus.get()))) : Optional.empty();
     }
 
     /**

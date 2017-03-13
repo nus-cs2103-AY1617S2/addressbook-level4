@@ -48,7 +48,7 @@ public class XmlAdaptedTask {
         name = source.getName().fullName;
         startDate = source.getStartTime().value;
         endDate = source.getEndTime().value;
-        completionStatus = source.getCompletionStatus().value;
+        completionStatus = source.getCompletionStatus().toString();
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -68,7 +68,7 @@ public class XmlAdaptedTask {
         final Name name = new Name(this.name);
         final StartTime startTime = new StartTime(this.startDate);
         final EndTime endTime = new EndTime(this.endDate);
-        final CompletionStatus completionStatus = new CompletionStatus(this.completionStatus);
+        final CompletionStatus completionStatus = new CompletionStatus(Boolean.valueOf(this.completionStatus));
         final UniqueTagList tags = new UniqueTagList(taskTags);
         return new Task(name, startTime, endTime, completionStatus, tags);
     }

@@ -42,7 +42,7 @@ public interface ReadOnlyTask {
                 .append(" End Date: ")
                 .append(getEndTime())
                 .append(" Completion Status: ")
-                .append(getCompletionStatus())
+                .append(getCompletionStatus().toString())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

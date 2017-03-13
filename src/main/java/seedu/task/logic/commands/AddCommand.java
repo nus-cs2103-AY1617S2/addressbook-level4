@@ -22,9 +22,9 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
-            + "Parameters: NAME [s/STARTDATE] [e/ENDDATE] [c/COMPLETIONSTATUS]  [t/TAG]...\n"
+            + "Parameters: NAME [s/STARTDATE] [e/ENDDATE]  [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " Do CS2103 tutorial s/060317 e/080317 c/Not Done t/CS2103 t/uni";
+            + " Do CS2103 tutorial s/060317 e/080317 t/CS2103 t/uni";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
@@ -46,9 +46,26 @@ public class AddCommand extends Command {
                 new Name(name),
                 new StartTime(startDate),
                 new EndTime(endDate),
-                new CompletionStatus(completionStatus),
+                new CompletionStatus(Boolean.valueOf(completionStatus)),
                 new UniqueTagList(tagSet)
                 );
+    }
+
+    /**
+     * Creates an AddCommand using raw values.
+     *
+     * @throws IllegalValueException if any of the raw values are invalid
+     */
+    public AddCommand(String name)
+            throws IllegalValueException {
+        final Set<Tag> tagSet = new HashSet<>();
+        this.toAdd = new Task(
+                new Name(name),
+                new StartTime(""),
+                new EndTime(""),
+                new CompletionStatus(false),
+                new UniqueTagList(tagSet)
+        );
     }
 
     @Override
