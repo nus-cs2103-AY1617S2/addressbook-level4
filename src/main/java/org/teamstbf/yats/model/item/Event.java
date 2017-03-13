@@ -11,6 +11,7 @@ public class Event implements ReadOnlyEvent {
     private Periodic period;
     private Timing startTime;
     private Timing endTime;
+    private Deadline deadline;
     private Description description;
     private boolean isDone;
     private Location location;
@@ -20,13 +21,14 @@ public class Event implements ReadOnlyEvent {
      * Every field must be present and not null.
      */
     public Event(Title name, Location location, Periodic periodic, Timing startTime,
-    		Timing endTime, Description description, UniqueTagList tags) {
+    		Timing endTime, Deadline deadline, Description description, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name);
         this.name = name;
         this.period = periodic;
         this.location = location;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.deadline = deadline;
         this.description = description;
         this.isDone = false;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
@@ -35,7 +37,7 @@ public class Event implements ReadOnlyEvent {
     public Event(ReadOnlyEvent editedReadOnlyPerson) {
         this(editedReadOnlyPerson.getTitle(), editedReadOnlyPerson.getLocation(),
         		editedReadOnlyPerson.getPeriod(), editedReadOnlyPerson.getStartTime(),
-                editedReadOnlyPerson.getEndTime(), editedReadOnlyPerson.getDescription(),
+                editedReadOnlyPerson.getEndTime(), editedReadOnlyPerson.getDeadline(), editedReadOnlyPerson.getDescription(),
                 editedReadOnlyPerson.getTags());
     }
 
@@ -78,6 +80,15 @@ public class Event implements ReadOnlyEvent {
 
     public Timing getEndTime() {
         return endTime;
+    }
+    
+    public void setDeadline(Deadline deadline) {
+    	assert deadline != null;
+    	this.deadline = deadline;
+    }
+    
+    public Deadline getDeadline() {
+    	return deadline;
     }
     public void setDescription(Description description) {
         assert description != null;

@@ -13,6 +13,7 @@ public interface ReadOnlyEvent {
 	Location getLocation();
 	Timing getStartTime();
 	Timing getEndTime();
+	Deadline getDeadline();
 	Periodic getPeriod();
 
 

@@ -1,15 +1,13 @@
 package org.teamstbf.yats.logic.parser;
 
 import static org.teamstbf.yats.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_PHONE;
 import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_TAG;
 import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_PERIOD;
 import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_DEADLINE;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -35,7 +33,7 @@ public class EditCommandParser {
     public Command parse(String args) {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                new ArgumentTokenizer(PREFIX_DEADLINE, PREFIX_DESCRIPTION, PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
@@ -44,22 +42,23 @@ public class EditCommandParser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
-        EditTaskDescriptor editPersonDescriptor = new EditTaskDescriptor();
+        EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
-            editPersonDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
-            editPersonDescriptor.setDeadline(ParserUtil.parseDeadline(argsTokenizer.getValue(PREFIX_PHONE)));
-            editPersonDescriptor.setTiming(ParserUtil.parseTiming(argsTokenizer.getValue(PREFIX_EMAIL)));
-            editPersonDescriptor.setDescription(ParserUtil.parseDescription(argsTokenizer.getValue(PREFIX_DESCRIPTION)));
-            editPersonDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
+            editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
+            editTaskDescriptor.setDeadline(ParserUtil.parseDeadline(argsTokenizer.getValue(PREFIX_DEADLINE)));
+            editTaskDescriptor.setStartTime(ParserUtil.parseTiming(argsTokenizer.getValue(PREFIX_START_TIME)));
+            editTaskDescriptor.setEndTime(ParserUtil.parseTiming(argsTokenizer.getValue(PREFIX_END_TIME)));
+            editTaskDescriptor.setDescription(ParserUtil.parseDescription(argsTokenizer.getValue(PREFIX_DESCRIPTION)));
+            editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
 
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
+        if (!editTaskDescriptor.isAnyFieldEdited()) {
             return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index.get(), editPersonDescriptor);
+        return new EditCommand(index.get(), editTaskDescriptor);
     }
 
     /**
