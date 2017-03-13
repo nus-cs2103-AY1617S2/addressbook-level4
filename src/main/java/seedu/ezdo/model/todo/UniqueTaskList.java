@@ -22,11 +22,17 @@ public class UniqueTaskList implements Iterable<Task> {
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
 
     /**
-     * Returns true if the list contains an equivalent task as the given argument.
+     * Returns true if the list contains an equivalent task that is not done as the given argument.
      */
     public boolean contains(ReadOnlyTask toCheck) {
         assert toCheck != null;
-        return internalList.contains(toCheck);
+        boolean containsDuplicate = false;
+        for (int i = 0; i < internalList.size(); i++) {
+            ReadOnlyTask taskToCheck = internalList.get(i);
+            containsDuplicate = (taskToCheck.equals(toCheck) && !taskToCheck.getDone())
+                                                             || containsDuplicate;
+        }
+        return containsDuplicate;
     }
 
     /**
@@ -85,7 +91,9 @@ public class UniqueTaskList implements Iterable<Task> {
     public void setTasks(List<? extends ReadOnlyTask> tasks) throws DuplicateTaskException {
         final UniqueTaskList replacement = new UniqueTaskList();
         for (final ReadOnlyTask task : tasks) {
-            replacement.add(new Task(task));
+            Task toAdd = new Task(task);
+            toAdd.setDone(task.getDone());
+            replacement.add(toAdd);
         }
         setTasks(replacement);
     }

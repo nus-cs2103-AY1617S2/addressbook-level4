@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import seedu.ezdo.logic.commands.AddCommand;
 import seedu.ezdo.logic.commands.ClearCommand;
 import seedu.ezdo.logic.commands.Command;
+import seedu.ezdo.logic.commands.DoneCommand;
 import seedu.ezdo.logic.commands.EditCommand;
 import seedu.ezdo.logic.commands.ExitCommand;
 import seedu.ezdo.logic.commands.FindCommand;
@@ -65,6 +66,9 @@ public class Parser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case DoneCommand.COMMAND_WORD:
+            return new DoneCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

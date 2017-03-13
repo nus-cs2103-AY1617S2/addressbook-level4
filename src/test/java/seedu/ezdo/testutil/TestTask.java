@@ -19,6 +19,7 @@ public class TestTask implements ReadOnlyTask {
     private TaskDate startDate;
     private TaskDate dueDate;
     private Priority priority;
+    private boolean done;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -33,11 +34,16 @@ public class TestTask implements ReadOnlyTask {
         this.priority = taskToCopy.getPriority();
         this.startDate = taskToCopy.getStartDate();
         this.dueDate = taskToCopy.getDueDate();
+        this.done = taskToCopy.getDone();
         this.tags = taskToCopy.getTags();
     }
 
     public void setName(Name name) {
         this.name = name;
+    }
+
+    public boolean getDone() {
+        return this.done;
     }
 
     public void setStartDate(TaskDate startDate) {
@@ -50,6 +56,10 @@ public class TestTask implements ReadOnlyTask {
 
     public void setPriority(Priority priority) {
         this.priority = priority;
+    }
+
+    public void setDone() {
+        this.done = true;
     }
 
     public void setTags(UniqueTagList tags) {
