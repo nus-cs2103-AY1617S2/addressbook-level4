@@ -1,6 +1,5 @@
 package seedu.address.model.task;
 
-
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
@@ -24,12 +23,16 @@ public class PriorityLevel {
      */
 
     public PriorityLevel(String priority) throws IllegalValueException {
-        assert priority != null;
+        //assert priority != null;
         String trimmedPriority = priority.trim();
-        if (!isValidPriorityLevel(trimmedPriority)) {
-            throw new IllegalValueException(MESSAGE_PRIORITY_LEVEL_CONSTRAINTS);
+        if (trimmedPriority.equals("")) {
+            this.value = trimmedPriority;
+        } else {
+            if (!isValidPriorityLevel(trimmedPriority)) {
+                throw new IllegalValueException(MESSAGE_PRIORITY_LEVEL_CONSTRAINTS);
+            }
+            this.value = trimmedPriority;
         }
-        this.value = trimmedPriority;
     }
 
     /**

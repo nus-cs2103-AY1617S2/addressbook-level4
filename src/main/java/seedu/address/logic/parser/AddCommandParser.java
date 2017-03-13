@@ -26,11 +26,23 @@ public class AddCommandParser {
                 new ArgumentTokenizer(PREFIX_DEADLINE, PREFIX_PRIORITY_LEVEL, PREFIX_ANY_INFO, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         try {
+            String deadline = new String("");
+            String priority = new String("");
+            String info = new String("");
+            if (argsTokenizer.getValue(PREFIX_DEADLINE).isPresent()) {
+                deadline = argsTokenizer.getValue(PREFIX_DEADLINE).get();
+            }
+            if (argsTokenizer.getValue(PREFIX_PRIORITY_LEVEL).isPresent()) {
+                priority = argsTokenizer.getValue(PREFIX_PRIORITY_LEVEL).get();
+            }
+            if (argsTokenizer.getValue(PREFIX_ANY_INFO).isPresent()) {
+                info = argsTokenizer.getValue(PREFIX_ANY_INFO).get();
+            }
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
-                    argsTokenizer.getValue(PREFIX_DEADLINE).get(),
-                    argsTokenizer.getValue(PREFIX_PRIORITY_LEVEL).get(),
-                    argsTokenizer.getValue(PREFIX_ANY_INFO).get(),
+                    deadline,
+                    priority,
+                    info,
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
             );
         } catch (NoSuchElementException nsee) {

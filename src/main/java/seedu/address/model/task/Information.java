@@ -1,6 +1,5 @@
 package seedu.address.model.task;
 
-
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
@@ -11,7 +10,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 public class Information {
 
     public static final String MESSAGE_INFORMATION_CONSTRAINTS =
-            "Task's information can take any values, and it should not be blank";
+            "Task's information can take any values";
 
     /*
      * The first character of the information must not be a whitespace,
@@ -26,11 +25,11 @@ public class Information {
      *
      * @throws IllegalValueException if given information string is invalid.
      */
-    public Information(String info) throws IllegalValueException {
-        assert info != null;
+    public Information(String info) {
+        /*assert info != null;
         if (!isValidInformation(info)) {
             throw new IllegalValueException(MESSAGE_INFORMATION_CONSTRAINTS);
-        }
+        }*/
         this.value = info;
     }
 

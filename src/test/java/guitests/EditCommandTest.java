@@ -10,9 +10,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Deadline;
-import seedu.address.model.task.Information;
 import seedu.address.model.task.PriorityLevel;
-import seedu.address.model.task.TaskName;
 import seedu.address.testutil.TaskBuilder;
 import seedu.address.testutil.TestTask;
 
@@ -90,17 +88,11 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_invalidValues_failure() {
-        commandBox.runCommand("edit 1 *&");
-        assertResultMessage(TaskName.MESSAGE_TASKNAME_CONSTRAINTS);
-
         commandBox.runCommand("edit 1 p/abcd");
         assertResultMessage(PriorityLevel.MESSAGE_PRIORITY_LEVEL_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 d/yahoo!!!");
         assertResultMessage(Deadline.MESSAGE_DEADLINE_CONSTRAINTS);
-
-        commandBox.runCommand("edit 1 i/");
-        assertResultMessage(Information.MESSAGE_INFORMATION_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 t/*&");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);

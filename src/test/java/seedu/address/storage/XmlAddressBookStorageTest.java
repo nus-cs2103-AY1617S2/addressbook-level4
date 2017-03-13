@@ -1,6 +1,5 @@
 package seedu.address.storage;
 
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
@@ -62,6 +61,7 @@ public class XmlAddressBookStorageTest {
     @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         String filePath = testFolder.getRoot().getPath() + "TempAddressBook.xml";
+        //creates tasks 1 to 9
         TypicalTestTasks td = new TypicalTestTasks();
         TaskManager original = td.getTypicalTaskManger();
         XmlAddressBookStorage xmlAddressBookStorage = new XmlAddressBookStorage(filePath);

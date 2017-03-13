@@ -1,6 +1,3 @@
-
-
-
 package guitests;
 
 import static org.junit.Assert.assertTrue;
@@ -15,11 +12,15 @@ public class FindCommandTest extends TaskManagerGuiTest {
     @Test
     public void find_nonEmptyList() {
         assertFindResult("find Mark"); // no results
-        assertFindResult("find Task2", td.task2); // multiple results
+        assertFindResult("find Task4", td.task4); // multiple results
 
         //find after deleting one result
         commandBox.runCommand("delete 1");
-        assertFindResult("find Task4", td.task4);
+        assertFindResult("find Task7", td.task7);
+
+        //find task after deleting it
+        commandBox.runCommand("delete 1");
+        commandBox.runCommand("find Task7");
     }
 
     @Test

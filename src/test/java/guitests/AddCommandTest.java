@@ -1,12 +1,14 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
+//import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.model.task.Deadline;
 import seedu.address.testutil.TestTask;
 import seedu.address.testutil.TestUtil;
 
@@ -37,6 +39,10 @@ public class AddCommandTest extends TaskManagerGuiTest {
         //invalid command
         commandBox.runCommand("adds Johnny");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
+
+        //add task with exception thrown
+        commandBox.runCommand("add Do Something d/123 p/1 t/someTags");
+        assertResultMessage(Deadline.MESSAGE_DEADLINE_CONSTRAINTS);
     }
 
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
