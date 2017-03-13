@@ -12,6 +12,7 @@ public interface ReadOnlyTask {
     StartTime getStartTime();
     Venue getVenue();
     EndTime getEndTime();
+    UrgencyLevel getUrgencyLevel();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -28,7 +29,8 @@ public interface ReadOnlyTask {
                 && other.getTitle().equals(this.getTitle()) // state checks here onwards
                 && other.getStartTime().equals(this.getStartTime())
                 && other.getVenue().equals(this.getVenue())
-                && other.getEndTime().equals(this.getEndTime()));
+                && other.getEndTime().equals(this.getEndTime())
+        		&& other.getUrgencyLevel().equals(this.getUrgencyLevel());
     }
 
     /**
@@ -43,6 +45,8 @@ public interface ReadOnlyTask {
                 .append(getStartTime())
                 .append(" EndTime: ")
                 .append(getEndTime())
+                .append(" Urgency level: ")
+                .append(getUrgencyLevel())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
