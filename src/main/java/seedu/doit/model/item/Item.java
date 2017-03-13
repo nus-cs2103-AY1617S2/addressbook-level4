@@ -3,7 +3,7 @@ package seedu.doit.model.item;
 import seedu.doit.model.tag.UniqueTagList;
 
 /**
- * A read-only immutable interface for a Task in the task manager.
+ * A read-only immutable interface for an Item in the task manager.
  * Implementations should guarantee: details are present and not null, field values are validated.
  */
 public interface Item {
