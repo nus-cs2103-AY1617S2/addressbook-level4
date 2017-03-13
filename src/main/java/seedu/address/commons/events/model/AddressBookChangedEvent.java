@@ -8,6 +8,7 @@ public class AddressBookChangedEvent extends BaseEvent {
 
     public final ReadOnlyAddressBook data;
 
+    //UNDO OR REDO HERE
     public AddressBookChangedEvent(ReadOnlyAddressBook data) {
         this.data = data;
     }

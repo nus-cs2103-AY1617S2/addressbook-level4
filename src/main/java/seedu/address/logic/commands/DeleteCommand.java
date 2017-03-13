@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.task.ReadOnlyTask;
@@ -15,26 +14,27 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the task identified by the index number used in the last task listing.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "The name of the list can also be specified.\n"
+            + "Parameters: [LIST_NAME] INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " floating 1" + " or " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
 
     public final int targetIndex;
+    public final String targetList;
 
-    public DeleteCommand(int targetIndex) {
+    public DeleteCommand(String targetList, int targetIndex) {
         this.targetIndex = targetIndex;
+        this.targetList = targetList;
     }
 
 
     @Override
     public CommandResult execute() throws CommandException {
 
-        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        UnmodifiableObservableList<ReadOnlyTask> lastShownList = getTargetTaskList(targetList);
 
-        if (lastShownList.size() < targetIndex) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-        }
+        validateTargetIndex(targetIndex, lastShownList);
 
         ReadOnlyTask taskToDelete = lastShownList.get(targetIndex - 1);
 

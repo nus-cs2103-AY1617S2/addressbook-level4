@@ -3,11 +3,10 @@ package seedu.address.logic.commands;
 import java.util.List;
 import java.util.Optional;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Date;
+import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Instruction;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
@@ -26,48 +25,48 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [TITLE] [d/DATE] [p/PRIORITY] [i/INSTRUCTION] [t/TAG]..\n"
-            + "Example: " + COMMAND_WORD + " 1 p/91234567 e/johndoe@yahoo.com";
+            + "Parameters: [LIST_NAME] INDEX (must be a positive integer) [TITLE] [d/DATE] "
+            + "[p/PRIORITY] [i/INSTRUCTION] [t/TAG]..\n"
+            + "Example: " + COMMAND_WORD + " 1 d/tomorrow i/add some tasks";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Task: %1$s";
+    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the instruction book.";
 
-    private final int filteredTaskListIndex;
+    private final int targetIndex;
+    private final String targetList;
     private final EditTaskDescriptor editTaskDescriptor;
 
     /**
      * @param filteredTaskListIndex the index of the task in the filtered task list to edit
      * @param editTaskDescriptor details to edit the task with
      */
-    public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
-        assert filteredTaskListIndex > 0;
+    public EditCommand(String targetList, int targetIndex, EditTaskDescriptor editTaskDescriptor) {
+        assert targetIndex > 0;
         assert editTaskDescriptor != null;
 
         // converts filteredTaskListIndex from one-based to zero-based.
-        this.filteredTaskListIndex = filteredTaskListIndex - 1;
-
+        this.targetIndex = targetIndex - 1;
+        this.targetList = targetList;
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
     }
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        List<ReadOnlyTask> lastShownList = getTargetTaskList(targetList);
 
-        if (filteredTaskListIndex >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-        }
+        validateTargetIndex(targetIndex, lastShownList);
 
-        ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
+        ReadOnlyTask taskToEdit = lastShownList.get(targetIndex);
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
         try {
-            model.updateTask(filteredTaskListIndex, editedTask);
+            model.updateTask(targetList, targetIndex, editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
         model.updateFilteredListToShowAll();
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, taskToEdit));
+        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
 
     /**
@@ -79,7 +78,7 @@ public class EditCommand extends Command {
         assert taskToEdit != null;
 
         Title updatedTitle = editTaskDescriptor.getTitle().orElseGet(taskToEdit::getTitle);
-        Date updatedDate = editTaskDescriptor.getDate().orElseGet(taskToEdit::getDate);
+        Deadline updatedDate = editTaskDescriptor.getDate().orElseGet(taskToEdit::getDeadline);
         Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
         Instruction updatedInstruction = editTaskDescriptor.getInstruction().orElseGet(taskToEdit::getInstruction);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
@@ -93,7 +92,7 @@ public class EditCommand extends Command {
      */
     public static class EditTaskDescriptor {
         private Optional<Title> title = Optional.empty();
-        private Optional<Date> date = Optional.empty();
+        private Optional<Deadline> date = Optional.empty();
         private Optional<Priority> priority = Optional.empty();
         private Optional<Instruction> instruction = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
@@ -124,12 +123,12 @@ public class EditCommand extends Command {
             return title;
         }
 
-        public void setDate(Optional<Date> date) {
+        public void setDate(Optional<Deadline> date) {
             assert date != null;
             this.date = date;
         }
 
-        public Optional<Date> getDate() {
+        public Optional<Deadline> getDate() {
             return date;
         }
 

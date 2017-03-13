@@ -54,16 +54,16 @@ public class UniqueTaskList implements Iterable<Task> {
     public void updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException {
         assert editedTask != null;
 
-        Task TaskToUpdate = internalList.get(index);
-        if (!TaskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
+        Task taskToUpdate = internalList.get(index);
+        if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
             throw new DuplicateTaskException();
         }
 
-        TaskToUpdate.resetData(editedTask);
+        taskToUpdate.resetData(editedTask);
         // TODO: The code below is just a workaround to notify observers of the updated Task.
         // The right way is to implement observable properties in the Task class.
         // Then, TaskCard should then bind its text labels to those observable properties.
-        internalList.set(index, TaskToUpdate);
+        internalList.set(index, taskToUpdate);
     }
 
     /**
@@ -73,21 +73,21 @@ public class UniqueTaskList implements Iterable<Task> {
      */
     public boolean remove(ReadOnlyTask toRemove) throws TaskNotFoundException {
         assert toRemove != null;
-        final boolean TaskFoundAndDeleted = internalList.remove(toRemove);
-        if (!TaskFoundAndDeleted) {
+        final boolean taskFoundAndDeleted = internalList.remove(toRemove);
+        if (!taskFoundAndDeleted) {
             throw new TaskNotFoundException();
         }
-        return TaskFoundAndDeleted;
+        return taskFoundAndDeleted;
     }
 
     public void setTasks(UniqueTaskList replacement) {
         this.internalList.setAll(replacement.internalList);
     }
 
-    public void setTasks(List<? extends ReadOnlyTask> Tasks) throws DuplicateTaskException {
+    public void setTasks(List<? extends ReadOnlyTask> tasks) throws DuplicateTaskException {
         final UniqueTaskList replacement = new UniqueTaskList();
-        for (final ReadOnlyTask Task : Tasks) {
-            replacement.add(new Task(Task));
+        for (final ReadOnlyTask task : tasks) {
+            replacement.add(new Task(task));
         }
         setTasks(replacement);
     }
