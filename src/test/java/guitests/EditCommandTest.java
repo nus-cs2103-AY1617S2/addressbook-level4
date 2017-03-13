@@ -102,9 +102,6 @@ public class EditCommandTest extends TaskListGuiTest {
         commandBox.runCommand("edit 1 s/yahoo!!!");
         assertResultMessage(StartDateTime.MESSAGE_START_DATETIME_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 e/");
-        assertResultMessage(EndDateTime.MESSAGE_END_DATETIME_CONSTRAINTS);
-
         commandBox.runCommand("edit 1 t/*&");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
     }
