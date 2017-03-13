@@ -27,11 +27,6 @@ public class Deadline {
     private Date deadline;
     private String value;
 
-    public Deadline() {
-        deadline = new Date();
-        value = deadline.toString();
-    }
-
     /**
      * Validates given deadline.
      *

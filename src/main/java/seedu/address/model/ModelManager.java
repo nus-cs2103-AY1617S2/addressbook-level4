@@ -182,10 +182,10 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         public boolean run(ReadOnlyTask task) {
-            if (task.getDeadline().getDateTime() != null) {
-                return (task.getDeadline().getDateTime().before(endTime)
-                        && task.getDeadline().getDateTime().after(startTime))
-                        || task.getDeadline().getDateTime().equals(endTime);
+            if (task.getDeadline().isPresent() && task.getStartTime().isPresent()) {
+                return (task.getDeadline().get().getDateTime().before(endTime)
+                        && task.getDeadline().get().getDateTime().after(startTime))
+                        || task.getDeadline().get().getDateTime().equals(endTime);
             }
             return false;
         }

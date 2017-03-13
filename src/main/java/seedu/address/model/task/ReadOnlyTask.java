@@ -1,5 +1,7 @@
 package seedu.address.model.task;
 
+import java.util.Optional;
+
 import seedu.address.model.label.UniqueLabelList;
 
 /**
@@ -9,8 +11,8 @@ import seedu.address.model.label.UniqueLabelList;
 public interface ReadOnlyTask {
 
     Title getTitle();
-    Deadline getDeadline();
-    Deadline getStartTime();
+    Optional<Deadline> getDeadline();
+    Optional<Deadline> getStartTime();
 
     /**
      * The returned LabelList is a deep copy of the internal LabelList,

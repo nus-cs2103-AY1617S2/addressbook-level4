@@ -28,10 +28,16 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         title.setText(task.getTitle().title);
         id.setText(displayedIndex + ". ");
-        if (task.getStartTime() != null) {
-            startTime.setText(task.getStartTime().toString());
+        if (task.getStartTime().isPresent()) {
+            startTime.setText(task.getStartTime().get().toString());
+        } else {
+            startTime.setVisible(false);
         }
-        deadline.setText(task.getDeadline().toString());
+        if (task.getDeadline().isPresent()) {
+            deadline.setText(task.getDeadline().get().toString());
+        } else {
+            deadline.setVisible(false);
+        }
         initLabels(task);
     }
 

@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.xml.bind.annotation.XmlElement;
 
@@ -21,9 +22,9 @@ public class XmlAdaptedTask {
 
     @XmlElement(required = true)
     private String title;
-    @XmlElement(required = true)
+    @XmlElement(required = false)
     private String deadline;
-    @XmlElement(required = true)
+    @XmlElement(required = false)
     private String startTime;
 
     @XmlElement
@@ -37,14 +38,22 @@ public class XmlAdaptedTask {
 
 
     /**
-     * Converts a given Person into this class for JAXB use.
+     * Converts a given Task into this class for JAXB use.
      *
-     * @param source future changes to this will not affect the created XmlAdaptedPerson
+     * @param source future changes to this will not affect the created XmlAdaptedTask
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         title = source.getTitle().title;
-        startTime = source.getStartTime().toString();
-        deadline = source.getDeadline().toString();
+        if (source.getStartTime().isPresent()) {
+            startTime = source.getStartTime().get().toString();
+        } else {
+            startTime = "No StartTime";
+        }
+        if (source.getDeadline().isPresent()) {
+            deadline = source.getDeadline().get().toString();
+        } else {
+            deadline = "No Deadline";
+        }
         labeled = new ArrayList<>();
         for (Label label : source.getLabels()) {
             labeled.add(new XmlAdaptedLabel(label));
@@ -58,12 +67,22 @@ public class XmlAdaptedTask {
      */
     public Task toModelType() throws IllegalValueException, IllegalDateTimeValueException {
         final List<Label> taskLabels = new ArrayList<>();
+        final Optional<Deadline> startTime;
+        final Optional<Deadline> deadline;
         for (XmlAdaptedLabel label : labeled) {
             taskLabels.add(label.toModelType());
         }
         final Title title = new Title(this.title);
-        final Deadline startTime = new Deadline(this.startTime);
-        final Deadline deadline = new Deadline(this.deadline);
+        if (this.startTime != null) {
+            startTime = Optional.ofNullable(new Deadline(this.startTime));
+        } else {
+            startTime = Optional.empty();
+        }
+        if (this.deadline != null) {
+            deadline = Optional.ofNullable(new Deadline(this.deadline));
+        } else {
+            deadline = Optional.empty();
+        }
         final UniqueLabelList labels = new UniqueLabelList(taskLabels);
         return new Task(title, startTime, deadline, labels);
     }

@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.exceptions.IllegalDateTimeValueException;
@@ -42,8 +43,8 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Task(
                 new Title(title),
-                new Deadline(),
-                new Deadline(),
+                Optional.empty(),
+                Optional.empty(),
                 new UniqueLabelList(labelSet)
         );
     }
@@ -62,8 +63,8 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Task(
                 new Title(title),
-                new Deadline(),
-                new Deadline(deadline),
+                Optional.empty(),
+                Optional.ofNullable(new Deadline(deadline)),
                 new UniqueLabelList(labelSet)
         );
     }
@@ -82,8 +83,8 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Task(
                 new Title(title),
-                new Deadline(startDate),
-                new Deadline(deadline),
+                Optional.ofNullable(new Deadline(startDate)),
+                Optional.ofNullable(new Deadline(deadline)),
                 new UniqueLabelList(labelSet)
         );
     }

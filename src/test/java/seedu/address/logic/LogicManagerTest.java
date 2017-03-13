@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.After;
 import org.junit.Before;
@@ -415,8 +416,8 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Title name = new Title("Meet Adam Brown");
-            Deadline startTime = new Deadline("today 1800");
-            Deadline deadline = new Deadline("today 2100");
+            Optional<Deadline> startTime = Optional.ofNullable(new Deadline("today 1800"));
+            Optional<Deadline> deadline = Optional.ofNullable(new Deadline("today 2100"));
             Label label1 = new Label("label1");
             Label label2 = new Label("longerlabel2");
             UniqueLabelList labels = new UniqueLabelList(label1, label2);
@@ -433,8 +434,8 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Title("Task " + seed),
-                    new Deadline("tomorrow 0100"),
-                    new Deadline("tomorrow 2359"),
+                    Optional.ofNullable(new Deadline("tomorrow 0100")),
+                    Optional.ofNullable(new Deadline("tomorrow 2359")),
                     new UniqueLabelList(new Label("label" + Math.abs(seed)), new Label("label" + Math.abs(seed + 1)))
                     );
         }
@@ -536,8 +537,8 @@ public class LogicManagerTest {
         Task generateTaskWithName(String name) throws Exception {
             return new Task(
                     new Title(name),
-                    new Deadline("today"),
-                    new Deadline("next wed 2359"),
+                    Optional.ofNullable(new Deadline("today")),
+                    Optional.ofNullable(new Deadline("next wed 2359")),
                     new UniqueLabelList(new Label("label"))
                     );
         }

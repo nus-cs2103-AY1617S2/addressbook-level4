@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import java.util.Optional;
+
 import seedu.address.model.label.UniqueLabelList;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.ReadOnlyTask;
@@ -11,8 +13,8 @@ import seedu.address.model.task.Title;
 public class TestTask implements ReadOnlyTask {
 
     private Title title;
-    private Deadline startTime;
-    private Deadline deadline;
+    private Optional<Deadline> startTime;
+    private Optional<Deadline> deadline;
     private UniqueLabelList labels;
 
     public TestTask() {
@@ -33,8 +35,10 @@ public class TestTask implements ReadOnlyTask {
         this.title = name;
     }
 
-    public void setDeadline(Deadline deadline) {
-        this.deadline = deadline;
+    public void setDeadline(Optional<Deadline> deadline) {
+        if (deadline.isPresent()) {
+            this.deadline = deadline;
+        }
     }
 
     public void setLabels(UniqueLabelList labels) {
@@ -47,7 +51,7 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Deadline getDeadline() {
+    public Optional<Deadline> getDeadline() {
         return deadline;
     }
 
@@ -62,6 +66,33 @@ public class TestTask implements ReadOnlyTask {
     }
 
     public String getAddCommand() {
+        String addCommand;
+        if (this.getStartTime().isPresent() && this.getDeadline().isPresent()) {
+            addCommand = getAddCommandWithInterval();
+        } else if (this.getDeadline().isPresent()) {
+            addCommand = getAddCommandWithDeadline();
+        } else {
+            addCommand = getAddCommandWithoutDate();
+        }
+        return addCommand;
+    }
+    
+    private String getAddCommandWithoutDate() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("add " + this.getTitle().title + " ");
+        this.getLabels().asObservableList().stream().forEach(s -> sb.append("t/" + s.labelName + " "));
+        return sb.toString();
+    }
+    
+    private String getAddCommandWithDeadline() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("add " + this.getTitle().title + " ");
+        sb.append(" by " + this.getDeadline().toString() + " ");
+        this.getLabels().asObservableList().stream().forEach(s -> sb.append("t/" + s.labelName + " "));
+        return sb.toString();
+    }
+    
+    private String getAddCommandWithInterval() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getTitle().title + " ");
         sb.append(" from " + this.getStartTime().toString() + " ");
@@ -70,12 +101,14 @@ public class TestTask implements ReadOnlyTask {
         return sb.toString();
     }
     
-    public void setStartTime(Deadline startTime) {
-        this.startTime = startTime;
+    public void setStartTime(Optional<Deadline> startTime) {
+        if (startTime.isPresent()) {
+            this.startTime = startTime;
+        }
     }
 
     @Override
-    public Deadline getStartTime() {
+    public Optional<Deadline> getStartTime() {
         return startTime;
     }
 }

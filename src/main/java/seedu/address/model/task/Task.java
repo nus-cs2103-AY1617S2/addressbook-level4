@@ -1,6 +1,7 @@
 package seedu.address.model.task;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.label.UniqueLabelList;
@@ -12,16 +13,16 @@ import seedu.address.model.label.UniqueLabelList;
 public class Task implements ReadOnlyTask {
 
     private Title title;
-    private Deadline deadline;
-    private Deadline startTime;
+    private Optional<Deadline> deadline;
+    private Optional<Deadline> startTime;
 
     private UniqueLabelList labels;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Title title, Deadline startTime, Deadline deadline, UniqueLabelList labels) {
-        assert !CollectionUtil.isAnyNull(title, deadline, labels);
+    public Task(Title title, Optional<Deadline> startTime, Optional<Deadline> deadline, UniqueLabelList labels) {
+        assert !CollectionUtil.isAnyNull(title, labels);
         this.title = title;
         this.deadline = deadline;
         this.startTime = startTime;
@@ -45,23 +46,25 @@ public class Task implements ReadOnlyTask {
         return title;
     }
 
-    public void setStartTime(Deadline startTime) {
-        assert startTime != null;
-        this.startTime = startTime;
+    public void setStartTime(Optional<Deadline> startTime) {
+        if (startTime.isPresent()) {
+            this.startTime = startTime;
+        }
     }
     
     @Override
-    public Deadline getStartTime() {
+    public Optional<Deadline> getStartTime() {
         return startTime;
     }
     
-    public void setDeadline(Deadline deadline) {
-        assert deadline != null;
-        this.deadline = deadline;
+    public void setDeadline(Optional<Deadline> deadline) {
+        if (deadline.isPresent()) {
+            this.deadline = deadline;
+        }
     }
 
     @Override
-    public Deadline getDeadline() {
+    public Optional<Deadline> getDeadline() {
         return deadline;
     }
 

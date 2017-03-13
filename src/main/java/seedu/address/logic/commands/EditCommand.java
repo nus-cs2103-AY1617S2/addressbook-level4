@@ -76,8 +76,8 @@ public class EditCommand extends Command {
         assert taskToEdit != null;
 
         Title updatedTitle = editTaskDescriptor.getTitle().orElseGet(taskToEdit::getTitle);
-        Deadline updatedStartTime = editTaskDescriptor.getStartTime().orElseGet(taskToEdit::getStartTime);
-        Deadline updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(taskToEdit::getDeadline);
+        Optional<Deadline> updatedStartTime = editTaskDescriptor.getStartTime();
+        Optional<Deadline> updatedDeadline = editTaskDescriptor.getDeadline();
         UniqueLabelList updatedLabels = editTaskDescriptor.getLabels().orElseGet(taskToEdit::getLabels);
 
         return new Task(updatedTitle, updatedStartTime, updatedDeadline, updatedLabels);

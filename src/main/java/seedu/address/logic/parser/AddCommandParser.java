@@ -44,8 +44,7 @@ public class AddCommandParser {
                 );
             } else if (args.contains(PREFIX_TIMEINTERVAL_START.getPrefix())
                     && args.contains(PREFIX_TIMEINTERVAL_END.getPrefix())) {
-
-                //TODO
+                
                 return new AddCommand(
                         argsTokenizer.getPreamble().get(),
                         argsTokenizer.getValue(PREFIX_TIMEINTERVAL_START).get(),
