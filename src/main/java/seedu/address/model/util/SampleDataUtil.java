@@ -15,19 +15,19 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         try {
             return new Task[] {
-                new Task(new Name("Finalise CS2101 Report"), new Priority("2"), new Status("incomplete"),
+                new Task(new Name("Finalise CS2101 Report"), new Priority("hi"), new Status("incomplete"),
                     new Note("User Guide and Developer Guide"),
                     new UniqueTagList("school")),
-                new Task(new Name("Buy a new laptop"), new Priority("3"), new Status("incomplete"),
+                new Task(new Name("Buy a new laptop"), new Priority("mid"), new Status("incomplete"),
                     new Note("Avoid HP. Because, reasons."),
                     new UniqueTagList("personal")),
-                new Task(new Name("Clean the toilet"), new Priority("1"), new Status("incomplete"),
+                new Task(new Name("Clean the toilet"), new Priority("low"), new Status("incomplete"),
                     new Note("Mom says she can smell it from a mile away."),
                     new UniqueTagList("personal")),
-                new Task(new Name("Prepare for job interviews"), new Priority("3"), new Status("incomplete"),
+                new Task(new Name("Prepare for job interviews"), new Priority("mid"), new Status("incomplete"),
                     new Note("Equip yourself to overcome the quarter-life crisis"),
                     new UniqueTagList("work")),
-                new Task(new Name("Do CS2103 Tutorial"), new Priority("1"), new Status("incomplete"),
+                new Task(new Name("Do CS2103 Tutorial"), new Priority("low"), new Status("incomplete"),
                     new Note("You need it to pass the module, trust me."),
                     new UniqueTagList("classmates")),
             };

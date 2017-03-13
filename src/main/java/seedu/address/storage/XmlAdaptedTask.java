@@ -46,7 +46,7 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getName().fullName;
-        priority = source.getPriority().value;
+        priority = source.getPriority().value.toString();
         status = source.getStatus().value;
         note = source.getNote().value;
         tagged = new ArrayList<>();
@@ -66,7 +66,7 @@ public class XmlAdaptedTask {
             taskTags.add(tag.toModelType());
         }
         final Name name = new Name(this.name);
-        final Priority priority = new Priority(this.priority);
+        final Priority priority = new Priority(Priority.parseXmlString(this.priority));
         final Status status = new Status(this.status);
         final Note note = new Note(this.note);
         final UniqueTagList tags = new UniqueTagList(taskTags);
