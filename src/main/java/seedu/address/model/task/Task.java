@@ -15,18 +15,20 @@ public class Task implements ReadOnlyTask {
     private StartTime startTime;
     private Venue venue;
     private EndTime endTime;
+    private UrgencyLevel urgencyLevel;
 
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Title title, Venue venue, StartTime starttime, EndTime endtime, UniqueTagList tags) {
+    public Task(Title title, Venue venue, StartTime starttime, EndTime endtime, UrgencyLevel urgencylevel, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(title, starttime, venue, endtime, tags);
         this.title = title;
         this.venue = venue;
         this.startTime = starttime;
         this.endTime = endtime;
+        this.urgencyLevel = urgencylevel;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -34,7 +36,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getTitle(), source.getVenue(), source.getStartTime(), source.getEndTime(), source.getTags());
+        this(source.getTitle(), source.getVenue(), source.getStartTime(), source.getEndTime(), source.getUrgencyLevel(), source.getTags());
     }
 
     public void setTitle(Title name) {
@@ -80,6 +82,16 @@ public class Task implements ReadOnlyTask {
     @Override
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
+    }
+    
+    @Override
+    public UrgencyLevel getUrgencyLevel() {
+        return urgencyLevel;
+    }
+
+    public void setUrgencyLevel(UrgencyLevel urgencyLevel) {
+        assert urgencyLevel != null;
+        this.urgencyLevel = urgencyLevel;
     }
 
     /**
