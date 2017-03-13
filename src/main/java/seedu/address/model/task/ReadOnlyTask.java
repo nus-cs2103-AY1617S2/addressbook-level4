@@ -40,10 +40,15 @@ public interface ReadOnlyTask {
         final StringBuilder builder = new StringBuilder();
         builder.append(getTitle())
             .append(" Start: ")
-            .append(getStartTime().toString())
+            .append(getStartTime().get().toString())
             .append(" Deadline: ")
-            .append(getDeadline().toString())
-            .append(" Label: ");
+            .append(getDeadline().get().toString());
+        if (isCompleted()) {
+            builder.append("Status: Completed");
+        } else {
+            builder.append("Status: Incomplete");
+        }
+        builder.append(" Label: ");
         getLabels().forEach(builder::append);
         return builder.toString();
     }
