@@ -24,7 +24,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label endTime;
     @FXML
-    private Label urgencyLevel;  
+    private Label urgencyLevel;
     @FXML
     private FlowPane tags;
 
