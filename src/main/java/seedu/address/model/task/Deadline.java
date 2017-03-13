@@ -32,12 +32,18 @@ public class Deadline {
         this.deadline = deadline;
     }
 
-    public Deadline(String deadline) throws IllegalValueException, ParseException {
+    public Deadline(String deadline) throws IllegalValueException {
         assert deadline != null;
-        Date deadlineObj = formatter.parse(deadline);
-        if (!isValidDeadline(deadlineObj)) {
-            throw new IllegalValueException(MESSAGE_DEADLINE_CONSTRAINTS);
-        }
+        Date deadlineObj = null;
+		try {
+			deadlineObj = formatter.parse(deadline);
+			if (!isValidDeadline(deadlineObj)) {
+	            throw new IllegalValueException(MESSAGE_DEADLINE_CONSTRAINTS);
+	        }
+		} catch (ParseException e) {
+			e.printStackTrace();
+			throw new IllegalValueException(MESSAGE_DEADLINE_CONSTRAINTS);
+		}
         this.deadline = deadlineObj;
     }
 
