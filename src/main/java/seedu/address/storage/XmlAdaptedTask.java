@@ -48,6 +48,8 @@ public class XmlAdaptedTask {
         title = source.getTitle().title;
         date = source.getDeadline().value;
         priority = source.getPriority().value;
+        date = source.getDate().value;
+        priority = source.getPriority().number;
         instruction = source.getInstruction().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
