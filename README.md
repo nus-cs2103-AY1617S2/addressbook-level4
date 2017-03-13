@@ -21,7 +21,7 @@ Best task manager EVER!
 
 * The project is developed based on FOSS's Software Engineering Education Resource.
   [se-edu-taskmanager-level4](https://github.com/se-edu/taskmanager-level4)
-  
+
 * Some parts of this sample application were inspired by the excellent
   [Java FX tutorial](http://code.makery.ch/library/javafx-8-tutorial/) by *Marco Jakob*.
 
