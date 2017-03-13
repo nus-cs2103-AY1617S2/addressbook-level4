@@ -17,12 +17,13 @@ public class Task implements ReadOnlyTask {
     private UniqueTagList tags;
 
     /**
-     * Every field must be present and not null.
+     * name and tags must be present and not null.
+     * startTime and endTime are optional fields.
      * @param starTime TODO
      * @param endTime TODO
      */
     public Task(Name name, StartTime startTime, EndTime endTime, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, startTime, endTime, tags);
+        assert !CollectionUtil.isAnyNull(name, tags);
         this.name = name;
         this.startTime = startTime;
         this.endTime = endTime;
