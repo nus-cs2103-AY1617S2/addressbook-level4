@@ -88,18 +88,19 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Adds a task to the TaskBoss<br>
-Format: `add TASK_NAME [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIORITY_LEVEL]`
+Format: `add [n/TASK_NAME] [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIORITY_LEVEL]`
 
-> * Date can be written in any format whether using slashes, dashes, or words  <br>
+> * Date can be written in any format whether using slashes, dashes, or natural language  <br>
 > * Time should be in 24-hour clock format or 12 hour format with AM or PM next to it, i.e `hr:min <PM/AM>` <br>
 > * Priority level is either `1` (low priority), `2` (medium priority) or `3` (high priority).
 > * Order of optional parameters does not matter.
+> * All fields are optional except TASK_NAME.
 
 Examples:
 
-* `add Buy groceries ed/19-02-2017 c/Home p/3`
-* `add Dinner with Jim i/@Orchard v0.0 sd/next friday ed/19-02-2017 c/Leisure p/2`
-* `add Post-exam celebration i/@Zouk sd/tomorrow at 3 PM ed/tomorrow 20.30  c/Leisure p/1`
+* `add n/Buy groceries ed/19-02-2017 c/Home p/3`
+* `add n/Dinner with Jim i/@Orchard v0.0 sd/next friday ed/19-02-2017 c/Leisure p/2`
+* `add n/Post-exam celebration i/@Zouk sd/tomorrow at 3 PM ed/tomorrow 20.30  c/Leisure p/1`
 
 
 ### 2.3. Listing all tasks : `list`
@@ -267,8 +268,8 @@ Format: `save n/FILE_PATH NEW_FILE_NAME`
 
 ## 3. Command Summary
 
-* **Add**  `add TASK_NAME [i/INFO] [sd/START_DATE] [ed/END_DATE] [st/START_TIME] [et/END_TIME] [c/CATEGORY] [p/PRIORITY_LEVEL]` <br>
-  e.g. `add Post-exam celebration i/@Zouk sd/10-03-2017 ed/11-03-2017 st/12:00 et/15:00 c/Leisure p/1`
+* **Add**  `add [n/TASK_NAME] [i/INFO] [sd/START_DATE] [ed/END_DATE] [st/START_TIME] [et/END_TIME] [c/CATEGORY] [p/PRIORITY_LEVEL]` <br>
+  e.g. `add n/Post-exam celebration i/@Zouk sd/10-03-2017 ed/11-03-2017 st/12:00 et/15:00 c/Leisure p/1`
 
 * **Clear by Category** : `clear CATEGORY`
   e.g. `clear School`
