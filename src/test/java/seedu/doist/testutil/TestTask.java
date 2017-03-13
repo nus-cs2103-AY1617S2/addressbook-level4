@@ -8,13 +8,13 @@ import seedu.doist.model.task.ReadOnlyTask;
 /**
  * A mutable person object. For testing only.
  */
-public class TestPerson implements ReadOnlyTask {
+public class TestTask implements ReadOnlyTask {
 
     private Description name;
     private Priority priority;
     private UniqueTagList tags;
 
-    public TestPerson() {
+    public TestTask() {
         tags = new UniqueTagList();
         priority = new Priority();
     }
@@ -22,10 +22,10 @@ public class TestPerson implements ReadOnlyTask {
     /**
      * Creates a copy of {@code personToCopy}.
      */
-    public TestPerson(TestPerson personToCopy) {
-        this.name = personToCopy.getDescription();
-        this.priority = personToCopy.getPriority();
-        this.tags = personToCopy.getTags();
+    public TestTask(TestTask taskToCopy) {
+        this.name = taskToCopy.getDescription();
+        this.priority = taskToCopy.getPriority();
+        this.tags = taskToCopy.getTags();
     }
 
     public void setName(Description name) {
@@ -63,7 +63,10 @@ public class TestPerson implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getDescription().desc + " ");
-        this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
+        if (!this.getTags().isEmpty()) {
+            sb.append("\\under");
+            this.getTags().asObservableList().stream().forEach(s -> sb.append(" " + s.tagName));
+        }
         return sb.toString();
     }
 }

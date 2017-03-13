@@ -5,18 +5,18 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.doist.commons.core.Messages;
-import seedu.doist.testutil.TestPerson;
+import seedu.doist.testutil.TestTask;
 
-public class FindCommandTest extends AddressBookGuiTest {
+public class FindCommandTest extends DoistGUITest {
 
     @Test
     public void find_nonEmptyList() {
-        assertFindResult("find Mark"); // no results
-        assertFindResult("find Meier", td.benson, td.daniel); // multiple results
+        assertFindResult("find Apple"); // no results
+        assertFindResult("find homework", td.homework); // one results
 
         //find after deleting one result
         commandBox.runCommand("delete 1");
-        assertFindResult("find Meier", td.daniel);
+        assertFindResult("find homework");
     }
 
     @Test
@@ -31,7 +31,7 @@ public class FindCommandTest extends AddressBookGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
-    private void assertFindResult(String command, TestPerson... expectedHits) {
+    private void assertFindResult(String command, TestTask... expectedHits) {
         commandBox.runCommand(command);
         assertListSize(expectedHits.length);
         assertResultMessage(expectedHits.length + " tasks listed!");

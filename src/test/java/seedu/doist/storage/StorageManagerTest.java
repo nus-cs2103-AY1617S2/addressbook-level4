@@ -18,7 +18,7 @@ import seedu.doist.model.ReadOnlyTodoList;
 import seedu.doist.model.TodoList;
 import seedu.doist.model.UserPrefs;
 import seedu.doist.testutil.EventsCollector;
-import seedu.doist.testutil.TypicalTestPersons;
+import seedu.doist.testutil.TypicalTestTasks;
 
 public class StorageManagerTest {
 
@@ -60,7 +60,7 @@ public class StorageManagerTest {
          * {@link XmlAddressBookStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link XmlAddressBookStorageTest} class.
          */
-        TodoList original = new TypicalTestPersons().getTypicalAddressBook();
+        TodoList original = new TypicalTestTasks().getTypicalAddressBook();
         storageManager.saveTodoList(original);
         ReadOnlyTodoList retrieved = storageManager.readTodoList().get();
         assertEquals(original, new TodoList(retrieved));

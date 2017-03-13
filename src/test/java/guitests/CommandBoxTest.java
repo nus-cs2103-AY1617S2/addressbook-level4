@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import seedu.doist.ui.CommandBox;
 
-public class CommandBoxTest extends AddressBookGuiTest {
+public class CommandBoxTest extends DoistGUITest {
 
     private static final String COMMAND_THAT_SUCCEEDS = "select 3";
     private static final String COMMAND_THAT_FAILS = "invalid command";
@@ -38,10 +38,10 @@ public class CommandBoxTest extends AddressBookGuiTest {
     }
 
     @Test
-    public void commandBox_commandFails_textStaysAndErrorStyleClassAdded() {
+    public void commandBox_commandFails_textErasedAndErrorStyleClassAdded() {
         commandBox.runCommand(COMMAND_THAT_FAILS);
 
-        assertEquals(COMMAND_THAT_FAILS, commandBox.getCommandInput());
+        assertEquals("", commandBox.getCommandInput());
         assertEquals(errorStyleOfCommandBox, commandBox.getStyleClass());
     }
 
