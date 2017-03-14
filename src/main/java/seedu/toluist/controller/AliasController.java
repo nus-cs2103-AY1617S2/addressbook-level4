@@ -19,7 +19,7 @@ public class AliasController extends Controller {
 
     private static final String RESULT_MESSAGE_SUCCESS = "Alias %s for %s was added";
     private static final String RESULT_MESSAGE_FAILURE = "Alias %s for %s could not be added";
-    private static final String RESULT_MESSAGE_RESERVED_WORD = "%s is a reserved word";
+    public static final String RESULT_MESSAGE_RESERVED_WORD = "%s is a reserved word";
     private static final String COMMAND_TEMPLATE = "alias\\s+(?<alias>\\S+)\\s+(?<command>.+)";
 
     private final AliasTable aliasConfig = Config.getInstance().getAliasTable();

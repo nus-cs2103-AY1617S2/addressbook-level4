@@ -15,7 +15,7 @@ import seedu.toluist.ui.Ui;
 public class UnaliasController extends Controller {
     private static final String RESULT_MESSAGE_SUCCESS = "Alias %s has been removed";
     private static final String RESULT_MESSAGE_FAILURE = "Alias %s cannot be removed";
-    private static final String RESULT_MESSAGE_NOT_ALIAS = "%s is not an alias";
+    public static final String RESULT_MESSAGE_NOT_ALIAS = "%s is not an alias";
     private static final String COMMAND_TEMPLATE = "unalias\\s+(?<alias>\\S+)\\s*";
     private static final String COMMAND_WORD = "unalias";
 

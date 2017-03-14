@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import seedu.toluist.commons.core.Config;
+import seedu.toluist.controller.AliasController;
 import seedu.toluist.model.Task;
 
 /**
@@ -18,7 +19,14 @@ public class AliasCommandTest extends ToLuistGuiTest {
     }
 
     @Test
-    public void aliasSingleWord() {
+    public void alias_ReservedWord() {
+        String aliasCommand = "alias alias alias";
+        commandBox.runCommand(aliasCommand);
+        assertResultMessage(AliasController.RESULT_MESSAGE_RESERVED_WORD);
+    }
+
+    @Test
+    public void alias_singleWord() {
         String aliasCommand = "alias d add";
         commandBox.runCommand(aliasCommand);
 
@@ -30,7 +38,7 @@ public class AliasCommandTest extends ToLuistGuiTest {
     }
 
     @Test
-    public void aliasPhraseWithMultipleWords() {
+    public void alias_phraseWithMultipleWords() {
         String aliasCommand = "alias d add a task";
         commandBox.runCommand(aliasCommand);
 

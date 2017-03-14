@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import seedu.toluist.commons.core.Config;
+import seedu.toluist.controller.UnaliasController;
 import seedu.toluist.model.Task;
 
 /**
@@ -18,7 +19,14 @@ public class UnaliasCommandTest extends ToLuistGuiTest {
     }
 
     @Test
-    public void aliasAddCommandThenUnaliasIt() {
+    public void unalias_nonExistingAlias() {
+        String unaliasCommand = "unalias d";
+        commandBox.runCommand(unaliasCommand);
+        assertResultMessage(UnaliasController.RESULT_MESSAGE_NOT_ALIAS);
+    }
+
+    @Test
+    public void unalias_existingAlias() {
         String aliasCommand = "alias d add";
         commandBox.runCommand(aliasCommand);
 

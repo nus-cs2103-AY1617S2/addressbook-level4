@@ -4,11 +4,11 @@ import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Arrays;
+
 import org.junit.Test;
 
 import seedu.toluist.ui.Ui;
-
-import java.util.Arrays;
 
 /**
  * Tests for ExitController
