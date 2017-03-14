@@ -15,8 +15,12 @@ public abstract class TaskDate {
 
     public final String value;
 
-    public static final String TASKDATE_VALIDATION_REGEX =
-        "^$|([12][0-9]|3[01]|0?[1-9])/(0?[1-9]|1[012])/((?:19|20)\\d\\d)";
+    public final SimpleDateFormat userDateFormat = new SimpleDateFormat(USER_DATE_FORMAT);
+    public final SimpleDateFormat nattyDateFormat = new SimpleDateFormat(NATTY_DATE_FORMAT);
+
+    public static final String TASKDATE_VALIDATION_REGEX = "^$|([12][0-9]|3[01]|0?[1-9])/(0?[1-9]|1[012])/((?:19|20)\\d\\d)";
+    public static final String USER_DATE_FORMAT = "dd/MM/yyyy";
+    public static final String NATTY_DATE_FORMAT = "EEE MMM dd hh:mm:ss zzz yyyy";
 
     public TaskDate(String taskDate) {
 
@@ -33,7 +37,7 @@ public abstract class TaskDate {
             this.value = formattedFinalTaskDate;
 
         } else {
-            this.value = "";
+            this.value = new String();
         }
 
     }
@@ -46,16 +50,16 @@ public abstract class TaskDate {
      * @return Manipulated date input
      */
     public Date parseNatty(String date) {
-        
+
         // Initialises Natty parser
         Parser parser = new Parser();
-        
+
         // Parses input String into a list of DateGroups
         List<DateGroup> dateGroupList = parser.parse(date);
-        
+
         // Retrieves parsed date
         Date parsedDate = dateGroupList.get(0).getDates().get(0);
-        
+
         return parsedDate;
     }
 
@@ -67,12 +71,10 @@ public abstract class TaskDate {
      */
     public String changeToNattyDateFormat(String input) {
 
-        String output = "";
+        String output = new String();
 
         try {
-            SimpleDateFormat userDateFormat = new SimpleDateFormat("dd/MM/yyyy");
             Date userDateObject = userDateFormat.parse(input);
-            SimpleDateFormat nattyDateFormat = new SimpleDateFormat("EEE MMM dd hh:mm:ss zzz yyyy");
             output = nattyDateFormat.format(userDateObject);
         } catch (ParseException pe) {
             System.out.println("User input date format to Natty date format: Parse Exception error!");
@@ -88,8 +90,7 @@ public abstract class TaskDate {
      * @return Formatted date in string format for user
      */
     public String changeToUserDateFormat(Date input) {
-        SimpleDateFormat outputDateFormat = new SimpleDateFormat("dd/MM/YYYY");
-        return outputDateFormat.format(input);
+        return userDateFormat.format(input);
     }
 
     @Override
@@ -101,7 +102,8 @@ public abstract class TaskDate {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TaskDate // instanceof handles nulls
-                && this.value.equals(((TaskDate) other).value)); // state check
+                        && this.value.equals(((TaskDate) other).value)); // state
+                                                                         // check
     }
 
     @Override
