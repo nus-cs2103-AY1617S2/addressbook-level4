@@ -189,4 +189,8 @@ public class TaskManager implements ReadOnlyTaskManager {
     public void markTaskDone(int index) {
         tasks.markTaskDone(index);
     }
+
+    public void markTaskUndone(int index) {
+        tasks.markTaskUndone(index);
+    }
 }

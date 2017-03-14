@@ -165,8 +165,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void markTaskUndone(int filteredTaskListIndex) {
-        // TODO Auto-generated method stub
-
+        int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
+        taskManager.markTaskUndone(taskListIndex);
+        indicateAddressBookChanged();
     }
 
     @Override
