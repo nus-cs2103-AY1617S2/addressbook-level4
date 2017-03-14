@@ -34,8 +34,11 @@ public class AddCommandParser {
         matcher = pattern.matcher(args);
         if (matcher.matches()) {
             matcher = Pattern.compile(CliSyntax.WITH_TAGS).matcher(args);
-            int last
-            tags = args.substring(matcher.end(matcher.groupCount()) + 1, args.length()).split(" ");
+            int lastOccurance = 0;
+            while (matcher.find()) {
+                lastOccurance = matcher.end();
+            }
+            tags = args.substring(lastOccurance + 1, args.length()).split(" ");
             args = args.substring(0, matcher.start(matcher.groupCount()));
         }
 
@@ -45,8 +48,12 @@ public class AddCommandParser {
         if (matcher.matches()) {
             List<Date> dates = new PrettyTimeParser().parse(args);
             if (dates.size() < LEAST_DATES_FOR_DEADLINE_AND_STARTING_TIME_TASK) {
-                matcher = Pattern.compile(CliSyntax.WILDCARD + CliSyntax.WITH_STARTING_TIME).matcher(args);
-                String taskName = args.substring(0, matcher.start(matcher.groupCount())).trim();
+                matcher = Pattern.compile(CliSyntax.WITH_STARTING_TIME).matcher(args);
+                int lastOccurance = args.length() - 1;
+                while (matcher.find()) {
+                    lastOccurance = matcher.start();
+                }
+                String taskName = args.substring(0, lastOccurance).trim();
                 try {
                     return new AddCommand(taskName, dates.get(0), dates.get(1), tags);
                 } catch (IllegalValueException ive) {
