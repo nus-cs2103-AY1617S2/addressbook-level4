@@ -9,9 +9,7 @@ public class DateParser {
             "String given to the DateParser must be of the form YYYY/MM/DD HHMM";
 
     private static int DEFAULT_SECONDS = 0;
-    private static final String DATE_STRING_VALIDATION_REGEX = "[0-9]{4}/[0-1][0-9]/[1-3][0-9] [0-2][0-9][0-5][0-9]";
-    
-    
+    private static final String DATE_STRING_VALIDATION_REGEX = "[0-9]{4}/[0-1][0-9]/[0-3][0-9] [0-2][0-9][0-5][0-9]";
 
 	public static Calendar parse(String date) throws IllegalValueException{
 		if (isValidDateString(date)) {
@@ -27,7 +25,7 @@ public class DateParser {
 		return cal;
 	}
 
-	private static boolean isValidDateString(String test) {
+	public static boolean isValidDateString(String test) {
         return test.matches(DATE_STRING_VALIDATION_REGEX);
 	}
 
