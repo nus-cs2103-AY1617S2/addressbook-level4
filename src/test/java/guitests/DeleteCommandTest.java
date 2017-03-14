@@ -36,23 +36,23 @@ public class DeleteCommandTest extends DoistGUITest {
     }
 
     /**
-     * Runs the delete command to delete the person at specified index and confirms the result is correct.
-     * @param targetIndexOneIndexed e.g. index 1 to delete the first person in the list,
-     * @param currentList A copy of the current list of persons (before deletion).
+     * Runs the delete command to delete the task at specified index and confirms the result is correct.
+     * @param targetIndexOneIndexed e.g. index 1 to delete the first task in the list,
+     * @param currentList A copy of the current list of tasks (before deletion).
      */
     private void assertDeleteSuccess(int targetIndexOneIndexed, final TestTask[] currentList) {
-        TestTask personToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
+        TestTask taskToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
         TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList, targetIndexOneIndexed);
 
         commandBox.runCommand("delete " + targetIndexOneIndexed);
 
-        //confirm the list now contains all previous persons except the deleted person
+        //confirm the list now contains all previous tasks except the deleted task
         assertTrue(personListPanel.isListMatching(expectedRemainder));
 
         //confirm the result message is correct
-        ArrayList<TestTask> personsToDelete = new ArrayList<TestTask>();
-        personsToDelete.add(personToDelete);
-        assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, personsToDelete));
+        ArrayList<TestTask> tasksToDelete = new ArrayList<TestTask>();
+        tasksToDelete.add(taskToDelete);
+        assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, tasksToDelete));
     }
 
 }
