@@ -179,16 +179,16 @@ public class EditCommand extends Command {
             return deadline;
         }
 
-        public void setDeadline(Optional<List<Date>> deadline) {
+        public void setDeadline(Optional<List<Date>> deadline) throws IllegalArgumentException {
             try {
                 List<Date> dateList = deadline.get();
                 if (dateList.size() == 1) {
                     this.deadline = Optional.of(deadline.get().get(0));
                 } else {
-                    this.deadline = Optional.empty();
+                    throw new NoSuchElementException();
                 }
             } catch (NoSuchElementException nse) {
-                throw new IllegalArgumentException();
+                this.startDate = Optional.empty();
             }
         }
 
@@ -202,10 +202,10 @@ public class EditCommand extends Command {
                 if (dateList.size() == 2) {
                     this.startDate = Optional.of(startDate.get().get(0));
                 } else {
-                    this.startDate = Optional.empty();
+                    throw new NoSuchElementException();
                 }
             } catch (NoSuchElementException nse) {
-                throw new IllegalArgumentException();
+                this.startDate = Optional.empty();
             }
         }
 
@@ -219,10 +219,10 @@ public class EditCommand extends Command {
                 if (dateList.size() == 2) {
                     this.endDate = Optional.of(endDate.get().get(1));
                 } else {
-                    this.endDate = Optional.empty();
+                    throw new NoSuchElementException();
                 }
             } catch (NoSuchElementException nse) {
-                throw new IllegalArgumentException();
+                this.endDate = Optional.empty();
             }
         }
 
