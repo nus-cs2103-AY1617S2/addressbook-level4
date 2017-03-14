@@ -24,21 +24,21 @@ public abstract class TaskDate {
 
     public TaskDate(String taskDate) {
 
-        if (isValidTaskDate(taskDate)) {
-            // Format input string to suit Natty dependency
-            String formattedInitialTaskDate = changeToNattyDateFormat(taskDate);
+	if (isValidTaskDate(taskDate)) {
+	    // Format input string to suit Natty dependency
+	    String formattedInitialTaskDate = changeToNattyDateFormat(taskDate);
 
-            // Use Natty dependency to manipulate date input
-            Date parsedTaskDate = parseNatty(formattedInitialTaskDate);
+	    // Use Natty dependency to manipulate date input
+	    Date parsedTaskDate = parseNatty(formattedInitialTaskDate);
 
-            // Format parsed date to suit the regex
-            String formattedFinalTaskDate = changeToUserDateFormat(parsedTaskDate);
+	    // Format parsed date to suit the regex
+	    String formattedFinalTaskDate = changeToUserDateFormat(parsedTaskDate);
 
-            this.value = formattedFinalTaskDate;
+	    this.value = formattedFinalTaskDate;
 
-        } else {
-            this.value = new String();
-        }
+	} else {
+	    this.value = new String();
+	}
 
     }
 
@@ -51,16 +51,16 @@ public abstract class TaskDate {
      */
     public Date parseNatty(String date) {
 
-        // Initialises Natty parser
-        Parser parser = new Parser();
+	// Initialises Natty parser
+	Parser parser = new Parser();
 
-        // Parses input String into a list of DateGroups
-        List<DateGroup> dateGroupList = parser.parse(date);
+	// Parses input String into a list of DateGroups
+	List<DateGroup> dateGroupList = parser.parse(date);
 
-        // Retrieves parsed date
-        Date parsedDate = dateGroupList.get(0).getDates().get(0);
+	// Retrieves parsed date
+	Date parsedDate = dateGroupList.get(0).getDates().get(0);
 
-        return parsedDate;
+	return parsedDate;
     }
 
     /**
@@ -71,16 +71,16 @@ public abstract class TaskDate {
      */
     public String changeToNattyDateFormat(String input) {
 
-        String output = new String();
+	String output = new String();
 
-        try {
-            Date userDateObject = userDateFormat.parse(input);
-            output = nattyDateFormat.format(userDateObject);
-        } catch (ParseException pe) {
-            System.out.println("User input date format to Natty date format: Parse Exception error!");
-        }
+	try {
+	    Date userDateObject = userDateFormat.parse(input);
+	    output = nattyDateFormat.format(userDateObject);
+	} catch (ParseException pe) {
+	    System.out.println("User input date format to Natty date format: Parse Exception error!");
+	}
 
-        return output;
+	return output;
     }
 
     /**
@@ -90,31 +90,31 @@ public abstract class TaskDate {
      * @return Formatted date in string format for user
      */
     public String changeToUserDateFormat(Date input) {
-        return userDateFormat.format(input);
+	return userDateFormat.format(input);
     }
 
     @Override
     public String toString() {
-        return value;
+	return value;
     }
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof TaskDate // instanceof handles nulls
-                        && this.value.equals(((TaskDate) other).value)); // state
-                                                                         // check
+	return other == this // short circuit if same object
+		|| (other instanceof TaskDate // instanceof handles nulls
+			&& this.value.equals(((TaskDate) other).value)); // state
+									 // check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+	return value.hashCode();
     }
 
     /**
      * Returns true if a given string is a valid task date.
      */
     public static boolean isValidTaskDate(String test) {
-        return test.matches(TASKDATE_VALIDATION_REGEX);
+	return test.matches(TASKDATE_VALIDATION_REGEX);
     }
 }
