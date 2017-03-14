@@ -5,6 +5,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.person.Task;
+import t15b1.taskcrusher.model.task.Deadline;
+import t15b1.taskcrusher.model.task.Priority;
 import t15b1.taskcrusher.model.task.ReadOnlyTask;
 
 public class TaskCard extends UiPart<Region> {
@@ -47,11 +50,11 @@ public class TaskCard extends UiPart<Region> {
     private void showPriority(ReadOnlyTask task) {
         if (task.getPriority().hasPriority()) {
             StringBuilder stars = new StringBuilder();
-            for(int i=0; i<Integer.parseInt(task.getPriority().value); i++)
+            for(int i=0; i<Integer.parseInt(task.getPriority().toString()); i++)
                 stars.append("*");
             priority.setText(PRIORITY_PREPEND + stars.toString());
         } else {
-            priority.setText(Task.NO_PRIORITY);
+            priority.setText("");
         }
     }
 
