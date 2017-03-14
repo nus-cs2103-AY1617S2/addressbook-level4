@@ -7,6 +7,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import seedu.address.commons.util.FxViewUtil;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.task.ReadOnlyTask;
 
 /**
@@ -43,10 +44,12 @@ public class TaskDetail extends UiPart<Region> {
     }
 
     public void loadPersonPage(ReadOnlyTask task) {
-        labelTaskName.setTextFill(Color.CHOCOLATE);
+        String taggings = "";
         taskName.setText(task.getContent().toString());
         startTime.setText(task.getDateTime().toString());
-        tags.setText(task.getTags().toString());
+        for(Tag tag : task.getTags()) {
+            taggings += tag.toString();
+        }
+        tags.setText(taggings);
     }
-
 }

@@ -118,11 +118,11 @@ public class MainWindow extends UiPart<Region> {
 
     void fillInnerParts() {
         taskDescription = new TaskDescription(getTaskDescriptionPlaceholder());
+        taskDetail = new TaskDetail(getTaskDetailsPlaceholder());
         personListPanel = new TaskListPanel(getPersonListPlaceholder(), logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
-        new TaskDetail(getTaskDetailsPlaceholder());
     }
 
     private AnchorPane getCommandBoxPlaceholder() {
