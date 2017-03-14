@@ -20,7 +20,7 @@ public class DueDate extends TaskDate {
      */
     public DueDate(String dueDate) throws IllegalValueException {
         super(dueDate);
-        if (!isValidTaskDate(dueDate)) {
+        if (!isValidTaskDate(this.value)) {
             throw new IllegalValueException(MESSAGE_DUEDATE_CONSTRAINTS);
         }
     }

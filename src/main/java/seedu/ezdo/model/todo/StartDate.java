@@ -20,7 +20,7 @@ public class StartDate extends TaskDate {
      */
     public StartDate(String startDate) throws IllegalValueException {
         super(startDate);
-        if (!isValidTaskDate(startDate)) {
+        if (!isValidTaskDate(this.value)) {
             throw new IllegalValueException(MESSAGE_STARTDATE_CONSTRAINTS);
         }
     }
