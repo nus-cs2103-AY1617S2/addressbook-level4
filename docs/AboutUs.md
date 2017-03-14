@@ -4,34 +4,49 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Jacob Levy](http://github.com/levyjr) <br>
-<img src="images/PhotoJacobLevy.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Documentation, Deliverables and Deadlines, Scheduling and tracking
+#### [Damith C. Rajapakse](http://www.comp.nus.edu.sg/~damithch) <br>
+<img src="images/DamithRajapakse.jpg" width="150"><br>
+**Role**: Project Advisor
 
 -----
 
-#### [Daniel Mullen](http://github.com/DanielMullen3)
-<img src="images/dan2.jpg" width="150"><br>
+#### [Joshua Lee](http://github.com/lejolly)
+<img src="images/JoshuaLee.jpg" width="150"><br>
 Role: Developer <br>
-Responsibilities: Testing, Back End
+Responsibilities: UI
 
 -----
 
-#### [Edwin Yeap](http://github.com/edwinyeap)
-<img src="images/aboutus_edwin.jpg" width="150"><br>
+#### [Leow Yijin](http://github.com/yijinl)
+<img src="images/LeowYijin.jpg" width="150"><br>
 Role: Developer <br>
-Responsibilities: UI, Integration of Version Control 
+Responsibilities: Data
 
 -----
 
-#### [Yunchun Liu](http://github.com/yunchun-liu)
-<img src="images/edith.jpg" width="150"><br>
+#### [Martin Choo](http://github.com/m133225)
+<img src="images/MartinChoo.jpg" width="150"><br>
 Role: Developer <br>
-Responsibilities: Front end, Testing 
+Responsibilities: Dev Ops
 
 -----
 
-# Source
+#### [Thien Nguyen](https://github.com/ndt93)
+ Role: Developer <br>
+ Responsibilities: Threading
 
-The source of this project derives from a sample project created by SE-EDU initiative at https://github.com/se-edu/
+ -----
+
+#### [You Liang](http://github.com/yl-coder)
+<img src="images/YouLiang.jpg" width="150"><br>
+ Role: Developer <br>
+ Responsibilities: UI
+
+ -----
+
+# Contributors
+
+We welcome contributions. See [Contact Us](ContactUs.md) page for more info.
+
+* [Akshay Narayan](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Aokkhoy)
+* [Sam Yong](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Amauris)
