@@ -22,7 +22,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final TaskManager taskManager;
-    private final FilteredList<ReadOnlyTask> filteredPersons;
+    private final FilteredList<ReadOnlyTask> filteredTasks;
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -34,7 +34,7 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with address book: " + taskManager + " and user prefs " + userPrefs);
 
         this.taskManager = new TaskManager(taskManager);
-        filteredPersons = new FilteredList<>(this.taskManager.getTaskList());
+        filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
     }
 
     public ModelManager() {
@@ -75,7 +75,7 @@ public class ModelManager extends ComponentManager implements Model {
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
 
-        int taskListIndex = filteredPersons.getSourceIndex(filteredTaskListIndex);
+        int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskListIndex, editedTask);
         indicateAddressBookChanged();
     }
@@ -84,12 +84,12 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
-        return new UnmodifiableObservableList<>(filteredPersons);
+        return new UnmodifiableObservableList<>(filteredTasks);
     }
 
     @Override
     public void updateFilteredListToShowAll() {
-        filteredPersons.setPredicate(null);
+        filteredTasks.setPredicate(null);
     }
 
     @Override
@@ -98,7 +98,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     private void updateFilteredPersonList(Expression expression) {
-        filteredPersons.setPredicate(expression::satisfies);
+        filteredTasks.setPredicate(expression::satisfies);
     }
 
     // ========== Inner classes/interfaces used for filtering =================================================
@@ -158,8 +158,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void markTaskDone(int filteredTaskListIndex) {
-        // TODO Auto-generated method stub
-
+        int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
+        taskManager.markTaskDone(taskListIndex);
+        indicateAddressBookChanged();
     }
 
     @Override

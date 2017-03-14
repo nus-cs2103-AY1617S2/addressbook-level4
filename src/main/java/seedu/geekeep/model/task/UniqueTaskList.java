@@ -131,4 +131,9 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.set(index, taskToUpdate);
     }
 
+    public void markTaskDone(int index) {
+        Task taskToMark = internalList.get(index);
+        taskToMark.markDone();
+    }
+
 }
