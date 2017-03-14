@@ -85,8 +85,7 @@ public class LogicManagerTest {
         this.model = new ModelManager();
         String tempTaskManagerFile = this.saveFolder.getRoot().getPath() + "TempTaskManager.xml";
         String tempPreferencesFile = this.saveFolder.getRoot().getPath() + "TempPreferences.json";
-        this.logic = new LogicManager(this.model,
-                new StorageManager(tempTaskManagerFile, tempPreferencesFile));
+        this.logic = new LogicManager(this.model, new StorageManager(tempTaskManagerFile, tempPreferencesFile));
         EventsCenter.getInstance().registerHandler(this);
 
         this.latestSavedTaskManager = new TaskManager(this.model.getTaskManager()); // last
@@ -203,9 +202,8 @@ public class LogicManagerTest {
         assertCommandFailure("add wrong args wrong args", expectedMessage);
         assertCommandFailure("add Valid Name 5 e/valid,deadline.butNoPriorityPrefix d/valid,description",
                 expectedMessage);
-        assertCommandFailure("add Valid Name p/4 valid,deadline.butNoPrefix d/valid, description", expectedMessage);
-        assertCommandFailure("add Valid Name p/2 e/valid,deadline.butNoDescriptionPrefix valid, description",
-                expectedMessage);
+        assertCommandFailure("add Valid Name d/valid", expectedMessage);
+        assertCommandFailure("add Valid Name e/valid", expectedMessage);
     }
 
     @Test
