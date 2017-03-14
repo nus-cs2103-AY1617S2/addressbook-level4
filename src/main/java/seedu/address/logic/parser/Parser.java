@@ -16,6 +16,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.UndoCommand;
 
 /**
  * Parses user input.
@@ -27,6 +28,17 @@ public class Parser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
+    /**
+     * Modifying command that was previously executed most recently
+     */
+    private Command previousModifyingCommand;
+    
+    public void setPreviousModifyingCommand(Command previousCommand) {
+    	if (previousCommand.isModifying()) {
+    		this.previousModifyingCommand = previousCommand;
+    	}
+    }
+    
     /**
      * Parses user input into command for execution.
      *
@@ -66,7 +78,10 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-
+            
+        case UndoCommand.COMMAND_WORD:
+        	return new UndoCommand(previousModifyingCommand);
+        	
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
