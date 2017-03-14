@@ -80,6 +80,7 @@ public class EditCommand extends Command {
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
+     *
      * @throws IllegalValueException
      */
     private static Task createEditedTask(ReadOnlyTask taskToEdit, EditTaskDescriptor editTaskDescriptor)
@@ -95,14 +96,15 @@ public class EditCommand extends Command {
                 .orElseGet(taskToEdit::getEndDateTime);
         // Must make it not override first tag
         taskToEdit.getTags().mergeFromFirst(editTaskDescriptor.getTags());
+        UniqueTagList updatedTags = new UniqueTagList(taskToEdit.getTags());
 
         return new Task(updatedName, updatedDescription, updatedStartDateTime, updatedEndDateTime,
-                taskToEdit.getTags());
+                updatedTags);
     }
 
     /**
-     * Stores the details to edit the task with. Each non-empty field value
-     * will replace the corresponding field value of the task.
+     * Stores the details to edit the task with. Each non-empty field value will
+     * replace the corresponding field value of the task.
      */
     public static class EditTaskDescriptor {
         private Optional<Name> name = Optional.empty();

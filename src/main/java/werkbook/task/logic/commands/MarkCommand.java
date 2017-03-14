@@ -41,7 +41,6 @@ public class MarkCommand extends Command {
      */
     public MarkCommand(int targetIndex) {
         assert targetIndex > 0;
-        assert markTaskDescriptor != null;
 
         // converts targetIndex from one-based to zero-based.
         this.targetIndex = targetIndex - 1;
