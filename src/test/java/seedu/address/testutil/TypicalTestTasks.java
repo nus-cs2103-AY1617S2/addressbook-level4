@@ -10,32 +10,32 @@ import seedu.address.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
+    public TestTask CS2103_Tutorial, DBS_Interview, Hang_out_Joe, Stats_soc, Tuition_part_time, Strings_rehearsal, dinner_auntie, MA3269_Quiz, laundry;
 
     public TypicalTestTasks() {
         try {
-            alice = new TaskBuilder().withTitle("Alice Pauline").withVenue("85355255")
-                    .withStartTime("alice@gmail.com").withEndTime("123, Jurong West Ave 6, #08-111")
-                    .withTags("friends").withUrgencyLevel("3").withDescription("I love you").build();
-            benson = new TaskBuilder().withTitle("Benson Meier").withVenue("98765432")
-                    .withStartTime("johnd@gmail.com").withEndTime("311, Clementi Ave 2, #02-25")
-                    .withTags("owesMoney", "friends").withUrgencyLevel("3").withDescription("I love you").build();
-            carl = new TaskBuilder().withTitle("Carl Kurz").withVenue("95352563")
-                    .withStartTime("heinz@yahoo.com").withEndTime("wall street").withUrgencyLevel("3").withDescription("I love you").build();
-            daniel = new TaskBuilder().withTitle("Daniel Meier").withVenue("87652533")
-                    .withStartTime("cornelia@google.com").withEndTime("10th street").withUrgencyLevel("3").withDescription("I love you").build();
-            elle = new TaskBuilder().withTitle("Elle Meyer").withVenue("9482224")
-                    .withStartTime("werner@gmail.com").withEndTime("michegan ave").withUrgencyLevel("3").withDescription("I love you").build();
-            fiona = new TaskBuilder().withTitle("Fiona Kunz").withVenue("9482427")
-                    .withStartTime("lydia@gmail.com").withEndTime("little tokyo").withUrgencyLevel("3").withDescription("I love you").build();
-            george = new TaskBuilder().withTitle("George Best").withVenue("9482442")
-                    .withStartTime("anna@google.com").withEndTime("4th street").withUrgencyLevel("3").withDescription("I love you").build();
+            CS2103_Tutorial = new TaskBuilder().withTitle("CS2103 Tutorial").withVenue("COM1-B103")
+                    .withStartTime("Tuesday 10:00").withEndTime("Tuesday 11:00")
+                    .withTags("lesson").withUrgencyLevel("5").withDescription("I love you").build();
+            DBS_Interview = new TaskBuilder().withTitle("DBS Internship interview").withVenue("Raffles Place")
+                    .withStartTime("March 31, 9:30").withEndTime("March 31, 11:30")
+                    .withTags("interview", "internship","important").withUrgencyLevel("4").withDescription("I love you").build();
+            Hang_out_Joe = new TaskBuilder().withTitle("Hang out with Joe").withVenue("313 Somerset")
+                    .withStartTime("Saturday 17:00").withEndTime("Saturday 21:00").withUrgencyLevel("8").withDescription("I love you").build();
+            Stats_soc = new TaskBuilder().withTitle("Statistics society meeting").withVenue("S16 04-30")
+                    .withStartTime("Wednesday 19:00").withEndTime("Wednesday 21:00").withUrgencyLevel("1").withDescription("I love you").build();
+            Tuition_part_time = new TaskBuilder().withTitle("Tuition part-time job").withVenue("Jun Wei's house at Jurong Ease Avenue 1")
+                    .withStartTime("Next Thursday 19:00").withEndTime("Next Thursday 21:00").withUrgencyLevel("7").withDescription("I love you").build();
+            Strings_rehearsal = new TaskBuilder().withTitle("Strings ensemble rehearsal").withVenue("UCC hall")
+                    .withStartTime("Friday 9:00").withEndTime("Friday 18:00").withUrgencyLevel("2").withDescription("I love you").build();
+            dinner_auntie = new TaskBuilder().withTitle("Dinner with auntie").withVenue("Home")
+                    .withStartTime("Friday 19:00").withEndTime("Friday 20:00").withUrgencyLevel("4").withDescription("I love you").build();
 
             // Manually added
-            hoon = new TaskBuilder().withTitle("Hoon Meier").withVenue("8482424")
-                    .withStartTime("stefan@mail.com").withEndTime("little india").withUrgencyLevel("3").withDescription("I love you").build();
-            ida = new TaskBuilder().withTitle("Ida Mueller").withVenue("8482131")
-                    .withStartTime("hans@google.com").withEndTime("chicago ave").withUrgencyLevel("3").withDescription("I love you").build();
+            MA3269_Quiz = new TaskBuilder().withTitle("MA3269 Quiz").withVenue("LT26")
+                    .withStartTime("Thursday 12:00").withEndTime("Thursday 14:00").withUrgencyLevel("10").withDescription("I love you").build();
+            laundry = new TaskBuilder().withTitle("Do laundryr").withVenue("Hostel")
+                    .withStartTime("now").withEndTime("1 hour later chores").withUrgencyLevel("6").withDescription("I love you").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -53,7 +53,7 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
+        return new TestTask[]{CS2103_Tutorial, DBS_Interview, Hang_out_Joe, Stats_soc, Tuition_part_time, Strings_rehearsal, dinner_auntie};
     }
 
     public ToDoList getTypicalToDoList() {
