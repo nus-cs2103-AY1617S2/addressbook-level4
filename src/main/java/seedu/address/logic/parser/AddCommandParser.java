@@ -34,6 +34,7 @@ public class AddCommandParser {
         matcher = pattern.matcher(args);
         if (matcher.matches()) {
             matcher = Pattern.compile(CliSyntax.WITH_TAGS).matcher(args);
+            int last
             tags = args.substring(matcher.end(matcher.groupCount()) + 1, args.length()).split(" ");
             args = args.substring(0, matcher.start(matcher.groupCount()));
         }

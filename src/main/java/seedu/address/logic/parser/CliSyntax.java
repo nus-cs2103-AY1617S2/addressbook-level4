@@ -19,12 +19,12 @@ public class CliSyntax {
     /* Add Command key words */
     public static final String WILDCARD = ".*";
 
-    public static final String WITH_DEADLINE_ONLY = "\bdue\b";
+    public static final String WITH_DEADLINE_ONLY = "\\bdue\\b";
 
-    public static final String WITH_DEADLINE_AND_STARTING_TIME = "\bfrom.*to\b";
+    public static final String WITH_DEADLINE_AND_STARTING_TIME = "\\bfrom.*to\\b";
 
-    public static final String WITH_STARTING_TIME = "\bfrom\b";
-    public static final String WITH_DEADLINE = "\bto\b";
+    public static final String WITH_STARTING_TIME = "\\bfrom\\b";
+    public static final String WITH_DEADLINE = "\\bto\\b";
 
-    public static final String WITH_TAGS = "\btag\b";
+    public static final String WITH_TAGS = "\\btag\\b";
 }
