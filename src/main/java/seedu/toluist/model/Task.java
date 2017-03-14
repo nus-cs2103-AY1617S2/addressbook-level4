@@ -92,8 +92,8 @@ public class Task implements Comparable<Task> {
     }
 
     public void setDeadLine(LocalDateTime deadLine) {
-        setEndDateTime(deadLine);
         setStartDateTime(null);
+        setEndDateTime(deadLine);
     }
 
     public void setFromTo(LocalDateTime from, LocalDateTime to) {

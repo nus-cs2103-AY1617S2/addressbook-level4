@@ -99,7 +99,6 @@ public class TaskTest {
         LocalDateTime now = LocalDateTime.now();
         // Set completed
         testTask.setCompleted(true);
-        LocalDateTime a = testTask.getCompletionDateTime();
         assertNotNull(testTask.getCompletionDateTime());
         assertTrue(testTask.isCompleted());
         assertTrue(DateTimeUtil.isBeforeOrEqual(now, testTask.getCompletionDateTime()));
