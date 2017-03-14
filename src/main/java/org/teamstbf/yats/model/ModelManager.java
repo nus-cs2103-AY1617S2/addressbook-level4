@@ -26,7 +26,8 @@ public class ModelManager extends ComponentManager implements Model {
 	private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
 	private final TaskManager taskManager;
-	private final FilteredList<ReadOnlyEvent> filteredEvents;
+	
+	private FilteredList<ReadOnlyEvent> filteredEvents;
 
 	/**
 	 * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -44,7 +45,11 @@ public class ModelManager extends ComponentManager implements Model {
 	public ModelManager() {
 		this(new TaskManager(), new UserPrefs());
 	}
-
+	
+	public void setFilteredEventList(FilteredList<ReadOnlyEvent> filteredEvents) {
+		this.filteredEvents = filteredEvents;
+	}
+	
 	@Override
 	public void resetData(ReadOnlyTaskManager newData) {
 		taskManager.resetData(newData);
@@ -108,8 +113,8 @@ public class ModelManager extends ComponentManager implements Model {
 	
 	@Override
 	public void sortFilteredEventList() {
-		SortedList<ReadOnlyEvent> sortedEventList = new SortedList<ReadOnlyEvent>(filteredEvents);
-		sortedEventList.sorted();
+		FilteredList<ReadOnlyEvent> sortedList = new FilteredList<>(getTaskManager().getTaskList());
+		setFilteredEventList(sortedList);
 	}
 
 	private void updateFilteredEventList(Expression expression) {
