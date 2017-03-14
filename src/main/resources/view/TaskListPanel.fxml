@@ -2,7 +2,6 @@
 
 <?import java.net.URL?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
@@ -11,9 +10,6 @@
         <URL value="@Extensions.css" />
     </stylesheets>
     <children>
-        <ListView fx:id="taskListView" VBox.vgrow="ALWAYS">
-         <effect>
-            <ColorAdjust brightness="-0.57" contrast="-0.45" hue="-0.02" saturation="-0.45" />
-         </effect></ListView>
+        <ListView fx:id="taskListView" VBox.vgrow="ALWAYS" />
     </children>
 </VBox>

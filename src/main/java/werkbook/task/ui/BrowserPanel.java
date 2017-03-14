@@ -49,7 +49,9 @@ public class BrowserPanel extends UiPart<Region> {
         description1.setText(task.getDescription().toString());
         start_time.setText(task.getStartDateTime().toString());
         end_time.setText(task.getEndDateTime().toString());
-        task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        tags.setAccessibleText(task.getTags().toString());
+        task.getTags().forEach(tag -> tags.getChildren().toString());
+  //    task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
 }
