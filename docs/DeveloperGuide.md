@@ -7,20 +7,20 @@ By : `T09-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nb
 1. [Introduction](#1-introduction)
 2. [Setting Up](#2-setting-up)
 3. [Design](#3-design) <br>
-	3.1. [Architecture](#3-1-architecture) <br>
-	3.2. [User Interface](#3-2-ui-component) <br>
-	3.3. [Logic](#3-3-logic-component) <br>
-	3.4. [Model](#3-4-model-component) <br>
-	3.5. [Storage](#3-5-storage-component) <br>
+	3.1. [Architecture](#31-architecture) <br>
+	3.2. [User Interface](#32-ui-component) <br>
+	3.3. [Logic](#33-logic-component) <br>
+	3.4. [Model](#34-model-component) <br>
+	3.5. [Storage](#35-storage-component) <br>
 4. [Implementation](#4-implementation)
-5. [Dev Ops](#6-dev-ops)
 6. [Testing](#5-testing) 
+5. [Dev Ops](#6-dev-ops)
 
-* [Appendix A: User Stories](#appendix-a-user-stories)
-* [Appendix B: Use Cases](#appendix-b-use-cases)
-* [Appendix C: Non Functional Requirements](#appendix-c-non-functional-requirements)
-* [Appendix D: Glossary](#appendix-d-glossary)
-* [Appendix E : Product Survey](#appendix-e-product-survey)
+* [Appendix A: User Stories](#appendix-a--user-stories)
+* [Appendix B: Use Cases](#appendix-b--use-cases)
+* [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
+* [Appendix D: Glossary](#appendix-d--glossary)
+* [Appendix E : Product Survey](#appendix-e--product-survey)
 
 
 ## 1. Introduction
