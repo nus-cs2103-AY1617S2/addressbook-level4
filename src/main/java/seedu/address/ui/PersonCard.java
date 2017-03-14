@@ -45,7 +45,7 @@ public class PersonCard extends UiPart<Region> {
         	Label label1 = new Label(tag.tagName);
         	//cannot use == to do string comparison
         	if(tag.tagName.equals(complete)){
-        		label1.setStyle("-fx-border-color:pink; -fx-background-color:green;");
+        		label1.setStyle("-fx-border-color:yellow; -fx-background-color:green;");
         	}
         	tags.getChildren().add(label1);   
         });
