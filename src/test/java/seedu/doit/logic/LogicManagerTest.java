@@ -416,7 +416,7 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
-            Priority privatePriority = new Priority("111111");
+            Priority privatePriority = new Priority("low");
             EndTime deadline = new EndTime("tomorrow");
             Description description = new Description("111, alpha street");
             Tag tag1 = new Tag("tag1");
@@ -435,7 +435,7 @@ public class LogicManagerTest {
         private Task generateTask(int seed) throws Exception {
             return new Task(
                 new Name("Task " + seed),
-                new Priority("" + Math.abs(seed)),
+                new Priority("high"),
                 new EndTime(seed + "2359"),
                 new Description("House of " + seed),
                 new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
@@ -538,7 +538,7 @@ public class LogicManagerTest {
         private Task generateTaskWithName(String name) throws Exception {
             return new Task(
                 new Name(name),
-                new Priority("1"),
+                new Priority("low"),
                 new EndTime("today"),
                 new Description("House of 1"),
                 new UniqueTagList(new Tag("tag"))

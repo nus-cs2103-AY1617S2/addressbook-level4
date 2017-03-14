@@ -15,22 +15,22 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         try {
             return new Task[] {
-                new Task(new Name("Refactor"), new Priority("1"), new EndTime("today"),
+                new Task(new Name("Refactor"), new Priority("low"), new EndTime("today"),
                     new Description("Refactor all mentions of task / taskManager"),
                     new UniqueTagList("Huanhui")),
-                new Task(new Name("pass Travis"), new Priority("1"), new EndTime("today"),
+                new Task(new Name("pass Travis"), new Priority("med"), new EndTime("today"),
                     new Description("Remove trailing whitespaces in md files for Travis to pass"),
                     new UniqueTagList("keanwai", "z")),
-                new Task(new Name("help"), new Priority("1"), new EndTime("today"),
+                new Task(new Name("help"), new Priority("high"), new EndTime("today"),
                     new Description("Update help command"),
                     new UniqueTagList("ChiaSin")),
-                new Task(new Name("merge"), new Priority("1"), new EndTime("today"),
+                new Task(new Name("merge"), new Priority("med"), new EndTime("today"),
                     new Description("Fix the master branch merge conflicts"),
                     new UniqueTagList("JinShun")),
-                new Task(new Name("help botton"), new Priority("2"), new EndTime("next week"),
+                new Task(new Name("help botton"), new Priority("high"), new EndTime("next week"),
                     new Description("Update Help button to our user guide"),
                     new UniqueTagList("ChiaSin")),
-                new Task(new Name("UI interface"), new Priority("3"), new EndTime("next week"),
+                new Task(new Name("UI interface"), new Priority("low"), new EndTime("next week"),
                     new Description("have 3 lists"),
                     new UniqueTagList("Huanhui"))
             };
