@@ -173,13 +173,31 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredTaskListToShowDone() {
-        filteredTasks.setPredicate(t -> ((Task)t).isDone());
+        filteredTasks.setPredicate(t -> t.isDone());
 
     }
 
     @Override
     public void updateFilteredTaskListToShowUndone() {
-        filteredTasks.setPredicate(t -> !((Task)t).isDone());
+        filteredTasks.setPredicate(t -> !t.isDone());
+
+    }
+
+    @Override
+    public void updateFilteredTaskListToShowEvents() {
+        filteredTasks.setPredicate(t -> t.isEvent());
+
+    }
+
+    @Override
+    public void updateFilteredTaskListToShowDeadlines() {
+        filteredTasks.setPredicate(t -> t.isDeadline());
+
+    }
+
+    @Override
+    public void updateFilteredTaskListToShowFloatingTasks() {
+        filteredTasks.setPredicate(t -> t.isFloatingTask());
 
     }
 

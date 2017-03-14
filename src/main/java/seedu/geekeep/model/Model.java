@@ -36,6 +36,12 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by status of the tasks */
     void updateFilteredTaskListToShowUndone();
 
+    void updateFilteredTaskListToShowEvents();
+
+    void updateFilteredTaskListToShowDeadlines();
+
+    void updateFilteredTaskListToShowFloatingTasks();
+
     /**
      * Updates the person located at {@code filteredTaskListIndex} with {@code editedTask}.
      *
