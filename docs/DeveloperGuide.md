@@ -352,6 +352,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | find specific tasks by keywords | locate my task easily
 `* * *` | user | specify a particular path or folder to store my task lists | retrieve the file easily and conveniently
 `* * *` | user | undo the recent action | revert back in case I decide to change my mind.
+`* * *` | user | list all tasts I created | so that I can plan my day more efficiently.
 `* *` | user | add tasks that recur on a consistent basis (e.g. Tutorials and lectures) | add recurring tasks more conveniently, since the item only needs to be added once
 `* *` | user | add some comments for a particular task | store additional information that I will need when handling that task
 `* *` | user | include a tag on the task | retrieve all the tasks that belong to the same tag
@@ -366,20 +367,23 @@ Priority | As a ... | I want to ... | So that I can...
 
 
 ## Appendix B: Use Cases
+
+(For all use cases below, the **System** is FlexiTask and the **Actor** is the `user`, unless specified otherwise)
+
 #### Use case: Create a task
 
 **MSS**
 
 1. User inputs the command with the correct keywords
-2. Task Manager confirms the addition by showing the confirmation message <br>
+2. FlexiTask confirms the addition by showing the confirmation message <br>
 
 > Use case ends.
 
 **EXTENSIONS**
 
-2a. The given input is invalid
+2a. The given input is invalid (Wrong number of dates entered, wrong type of priority entered, etc)
 
-> 2a1. Task Manager shows an error message <br>
+> 2a1. FlexiTask shows an error message <br>
 Use case ends
 
 #### Use case: Find specific tasks
@@ -387,7 +391,7 @@ Use case ends
 **MSS**
 
 1. User inputs the command with the correct keywords
-2. Task Manager shows the list of tasks that match the input <br>
+2. FlexiTask shows the list of tasks that match the input <br>
 
 > Use case ends.
 
@@ -395,11 +399,11 @@ Use case ends
 
 2a. The given input is invalid
 
-> 2a1. Task Manager shows an error message <br>
+> 2a1. FlexiTask shows an error message <br>
 Use case ends
 
 3a. The list is empty
-
+> "No task found" is displayed
 > Use case ends
 
 4a. The list contains no matching entries
@@ -411,7 +415,7 @@ Use case ends
 **MSS**
 
 1. User requests to edit a task and inputs the command with correct keywords
-2. Task Manager shows the updated task on the UI <br>
+2. FlexiTask updates the task with new details and displays a confirmation of the operation on the screen<br>
 
 > Use case ends.
 
@@ -419,11 +423,11 @@ Use case ends
 
 2a. The given input is invalid
 
-> 2a1. Task Manager shows an error message for such situation<br>
+> 2a1. FlexiTask shows an error message for such situation<br>
 Use case ends
 
 3a. The list contains no matching entries for the user to edit
-> 3a1. Task Manager shows an error message for such situation <br>
+> 3a1. FlexiTask shows an error message for such situation <br>
 
 > Use case ends
 
@@ -432,9 +436,9 @@ Use case ends
 **MSS**
 
 1. User requests to delete a task and inputs the command with correct keywords
-2. Task Manager shows a message to ask for confirmation of deletion.
+2. FlexiTask shows a message to ask for confirmation of deletion.
 3. User inputs the command for confirmation.
-4. Task Manager deletes the task <br>
+4. FlexiTask deletes the task <br>
 
 > Use case ends
 
@@ -442,17 +446,54 @@ Use case ends
 
 2a. The given input is invalid
 
-> 2a1. Task Manager shows an error message for such situation<br>
-Use case ends
+> 2a1. FlexiTask shows an error message for such situation<br>
+
+> Use case ends
 
 3a. The list contains no matching entries for the user to edit
-> 3a1. Task Manager shows an error message for such situation <br>
+> 3a1. FlexiTask shows an error message for such situation <br>
 
 > Use case ends
 
 4a. The list is empty
+> "0 task listed" will be displayed.
 
 > Use case ends
+
+#### Use case: Undo an action
+
+**MSS**
+
+1. User requests to undo
+2. FlexiTask undos the latest action by the user
+
+> Use case ends
+
+**Extensions**
+1a. No action to undo
+> 1a1. FlexiTask shows an error message for no action to undo
+
+> Use case ends
+
+#### Use case: Redo an action
+
+**MSS**
+
+1. User requests to redo
+2. FlexiTask reverses the last undo done by user
+
+**Extensions**
+1a. No action to redo
+> 1a1. FlexiTask shows an error message for no action to redo
+
+> Use case ends
+
+#### Use case: Clearing FlexiTask
+
+**MSS**
+
+1. User requests to clear the FlexiTask
+2. FlexiTask clears all the tasks
 
 
 ## Appendix C : Non Functional Requirements
