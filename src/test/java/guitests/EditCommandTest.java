@@ -58,16 +58,16 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
-        commandBox.runCommand("find nothing");
+        commandBox.runCommand("find level");
 
-        String detailsToEdit = "nothing";
+        String detailsToEdit = "sleep";
         int filteredPersonListIndex = 1;
-        int addressBookIndex = 2;
+        int addressBookIndex = 5;
 
         TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withName("nothing").build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withName("sleep").build();
 
-        assertEditSuccess(filteredPersonListIndex, addressBookIndex, detailsToEdit, editedTask);
+       assertEditSuccess(filteredPersonListIndex, addressBookIndex, detailsToEdit, editedTask);
     }
 
     @Test
@@ -129,7 +129,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
         // confirm the list now contains all previous persons plus the person with updated details
         expectedTasksList[addressBookIndex - 1] = editedTask;
-        assertTrue(taskListPanel.isListMatching(expectedTasksList));
+        assertTrue("task list panel is not matching", taskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
 }
