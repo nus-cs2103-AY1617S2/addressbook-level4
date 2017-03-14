@@ -7,6 +7,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Description;
 import seedu.address.model.task.EndTime;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.StartTime;
@@ -26,7 +27,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [TITLE] [v/VENUE] [s/STARTTIME] [e/ENDTIME ] [ul/URGENCYLEVEL] [t/TAG]...\n"
+            + "Parameters: INDEX (must be a positive integer) [TITLE] [v/VENUE] [s/STARTTIME] [e/ENDTIME ] [ul/URGENCYLEVEL] [d/DESCRIPTION] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 v/Toilet s/March 10, 10:00";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Task: %1$s";
@@ -83,9 +84,10 @@ public class EditCommand extends Command {
         StartTime updatedStartTime = editTaskDescriptor.getStartTime().orElseGet(taskToEdit::getStartTime);
         EndTime updatedEndTime = editTaskDescriptor.getEndTime().orElseGet(taskToEdit::getEndTime);
         UrgencyLevel updatedUrgencyLevel = editTaskDescriptor.getUrgencyLevel().orElseGet(taskToEdit::getUrgencyLevel);
+        Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedTitle, updatedVenue, updatedStartTime, updatedEndTime, updatedUrgencyLevel, updatedTags);
+        return new Task(updatedTitle, updatedVenue, updatedStartTime, updatedEndTime, updatedUrgencyLevel, updatedDescription, updatedTags);
     }
 
     /**
@@ -98,6 +100,7 @@ public class EditCommand extends Command {
         private Optional<StartTime> startTime = Optional.empty();
         private Optional<EndTime> endTime = Optional.empty();
         private Optional<UrgencyLevel> urgencyLevel = Optional.empty();
+        private Optional<Description> description = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditTaskDescriptor() {}
@@ -108,6 +111,7 @@ public class EditCommand extends Command {
             this.startTime = toCopy.getStartTime();
             this.endTime = toCopy.getEndTime();
             this.urgencyLevel = toCopy.getUrgencyLevel();
+            this.description = toCopy.getDescription();
             this.tags = toCopy.getTags();
         }
 
@@ -162,6 +166,15 @@ public class EditCommand extends Command {
 
         public Optional<UrgencyLevel> getUrgencyLevel() {
             return urgencyLevel;
+        }
+
+        public void setDescription(Optional<Description> description) {
+            assert description != null;
+            this.description = description;
+        }
+
+        public Optional<Description> getDescription() {
+            return description;
         }
 
         public void setTags(Optional<UniqueTagList> tags) {
