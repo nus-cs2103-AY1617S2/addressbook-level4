@@ -1,10 +1,13 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import java.util.Date;
 import java.util.Set;
 
 import seedu.address.commons.exceptions.IllegalDateTimeValueException;
 import seedu.address.logic.LogicManager;
+import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
  * Finds and lists all tasks in task manager whose name contains any of the
@@ -49,13 +52,13 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() {
+    public CommandResult execute() throws CommandException {
         try {
             executeFindCommandLogic();
+            return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
         } catch (IllegalDateTimeValueException e) {
-            e.printStackTrace();
+            throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-        return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
     }
 
     public void executeFindCommandLogic() throws IllegalDateTimeValueException {
