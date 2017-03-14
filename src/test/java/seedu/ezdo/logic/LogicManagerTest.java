@@ -25,6 +25,7 @@ import org.junit.rules.TemporaryFolder;
 
 import com.google.common.eventbus.Subscribe;
 
+import seedu.ezdo.commons.core.Config;
 import seedu.ezdo.commons.core.EventsCenter;
 import seedu.ezdo.commons.events.model.EzDoChangedEvent;
 import seedu.ezdo.commons.events.ui.JumpToListRequestEvent;
@@ -33,11 +34,12 @@ import seedu.ezdo.logic.commands.AddCommand;
 import seedu.ezdo.logic.commands.ClearCommand;
 import seedu.ezdo.logic.commands.Command;
 import seedu.ezdo.logic.commands.CommandResult;
-import seedu.ezdo.logic.commands.ExitCommand;
 import seedu.ezdo.logic.commands.FindCommand;
 import seedu.ezdo.logic.commands.HelpCommand;
 import seedu.ezdo.logic.commands.KillCommand;
 import seedu.ezdo.logic.commands.ListCommand;
+import seedu.ezdo.logic.commands.QuitCommand;
+import seedu.ezdo.logic.commands.SaveCommand;
 import seedu.ezdo.logic.commands.SelectCommand;
 import seedu.ezdo.logic.commands.exceptions.CommandException;
 import seedu.ezdo.model.EzDo;
@@ -90,9 +92,10 @@ public class LogicManagerTest {
     @Before
     public void setUp() {
         model = new ModelManager();
+        Config config = new Config();
         String tempEzDoFile = saveFolder.getRoot().getPath() + "TempEzDo.xml";
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
-        logic = new LogicManager(model, new StorageManager(tempEzDoFile, tempPreferencesFile));
+        logic = new LogicManager(model, new StorageManager(tempEzDoFile, tempPreferencesFile, config));
         EventsCenter.getInstance().registerHandler(this);
 
         latestSavedEzDo = new EzDo(model.getEzDo()); // last saved assumed to be up to date
@@ -175,8 +178,14 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_exit() {
-        assertCommandSuccess("exit", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
+    public void execute_quit() {
+        assertCommandSuccess("quit", QuitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
+                new EzDo(), Collections.emptyList());
+    }
+
+    @Test
+    public void execute_quitShortCommand() {
+        assertCommandSuccess("q", QuitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
                 new EzDo(), Collections.emptyList());
     }
 
@@ -417,6 +426,13 @@ public class LogicManagerTest {
                 expectedList);
     }
 
+    @Test
+    public void execute_save_successful() {
+        String directory = "./";
+
+        assertCommandSuccess("save " + directory, String.format(SaveCommand.MESSAGE_SAVE_TASK_SUCCESS,
+                directory + SaveCommand.DATA_FILE_NAME), new EzDo(), Collections.emptyList());
+    }
 
     /**
      * A utility class to generate test data.

@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import seedu.ezdo.commons.events.model.EzDoChangedEvent;
 import seedu.ezdo.commons.events.storage.DataSavingExceptionEvent;
+import seedu.ezdo.commons.events.storage.EzDoDirectoryChangedEvent;
 import seedu.ezdo.commons.exceptions.DataConversionException;
 import seedu.ezdo.model.ReadOnlyEzDo;
 import seedu.ezdo.model.UserPrefs;
@@ -24,6 +25,9 @@ public interface Storage extends EzDoStorage, UserPrefsStorage {
     String getEzDoFilePath();
 
     @Override
+    void setEzDoFilePath(String path);
+
+    @Override
     Optional<ReadOnlyEzDo> readEzDo() throws DataConversionException, IOException;
 
     @Override
@@ -35,4 +39,9 @@ public interface Storage extends EzDoStorage, UserPrefsStorage {
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     void handleEzDoChangedEvent(EzDoChangedEvent ezce);
+
+    /**
+     * Changes the current directory of the ezDo
+     */
+    void handleEzDoDirectoryChangedEvent(EzDoDirectoryChangedEvent ezdce);
 }
