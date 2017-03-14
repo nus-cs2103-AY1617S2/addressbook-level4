@@ -55,6 +55,8 @@ public class XmlAdaptedTask {
         venue = source.getVenue().value;
         startTime = source.getStartTime().value;
         endTime = source.getEndTime().value;
+        urgencyLevel = source.getUrgencyLevel().value;
+        description = source.getDescription().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
