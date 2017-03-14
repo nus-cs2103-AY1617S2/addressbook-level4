@@ -23,16 +23,16 @@ public class EditCommand extends Command {
      * Stores the details to edit the person with. Each non-empty field value will replace the
      * corresponding field value of the person.
      */
-    public static class EditPersonDescriptor {
+    public static class EditTaskDescriptor {
         private Optional<Title> title = Optional.empty();
         private Optional<DateTime> endDateTime = Optional.empty();
         private Optional<DateTime> startDateTime = Optional.empty();
         private Optional<Location> location = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
-        public EditPersonDescriptor() {}
+        public EditTaskDescriptor() {}
 
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.title = toCopy.getTitle();
             this.endDateTime = toCopy.getEndDateTime();
             this.startDateTime = toCopy.getStartDateTime();
@@ -107,40 +107,40 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
+     * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Task createEditedTask(ReadOnlyTask personToEdit,
-                                             EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Task createEditedTask(ReadOnlyTask taskToEdit,
+                                             EditTaskDescriptor editTaskDescriptor) {
+        assert taskToEdit != null;
 
-        Title updatedTitle = editPersonDescriptor.getTitle().orElseGet(personToEdit::getTitle);
+        Title updatedTitle = editTaskDescriptor.getTitle().orElseGet(taskToEdit::getTitle);
         DateTime updatedEndDateTime
-                = editPersonDescriptor.getEndDateTime().orElseGet(personToEdit::getEndDateTime);
+                = editTaskDescriptor.getEndDateTime().orElseGet(taskToEdit::getEndDateTime);
         DateTime updatedStartDateTime
-                = editPersonDescriptor.getStartDateTime().orElseGet(personToEdit::getStartDateTime);
-        Location updatedLocation = editPersonDescriptor.getLocation().orElseGet(personToEdit::getLocation);
-        UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
+                = editTaskDescriptor.getStartDateTime().orElseGet(taskToEdit::getStartDateTime);
+        Location updatedLocation = editTaskDescriptor.getLocation().orElseGet(taskToEdit::getLocation);
+        UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
         return new Task(updatedTitle, updatedStartDateTime, updatedEndDateTime, updatedLocation, updatedTags);
     }
 
     private final int filteredPersonListIndex;
 
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditTaskDescriptor editTaskDescriptor;
 
     /**
      * @param filteredPersonListIndex the index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param editTaskDescriptor details to edit the person with
      */
-    public EditCommand(int filteredPersonListIndex, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(int filteredPersonListIndex, EditTaskDescriptor editTaskDescriptor) {
         assert filteredPersonListIndex > 0;
-        assert editPersonDescriptor != null;
+        assert editTaskDescriptor != null;
 
         // converts filteredPersonListIndex from one-based to zero-based.
         this.filteredPersonListIndex = filteredPersonListIndex - 1;
 
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
     }
 
     @Override
@@ -152,7 +152,7 @@ public class EditCommand extends Command {
         }
 
         ReadOnlyTask personToEdit = lastShownList.get(filteredPersonListIndex);
-        Task editedTask = createEditedTask(personToEdit, editPersonDescriptor);
+        Task editedTask = createEditedTask(personToEdit, editTaskDescriptor);
 
         try {
             model.updatePerson(filteredPersonListIndex, editedTask);
