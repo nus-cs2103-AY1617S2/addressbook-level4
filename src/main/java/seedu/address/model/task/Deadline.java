@@ -12,7 +12,8 @@ import seedu.address.model.task.date.TaskDate;
 public class Deadline {
 
     public static final String MESSAGE_DEADLINE_CONSTRAINTS =
-        "Task deadline should strictly follow this format DD/MM/YYYY";
+        "Deadline accepts following formats: 30-10-2012 10:10 am; Sun, March 14 2017 23:59, ...\n"
+        + "Please make sure valid existing date is used";
 
 
     private final TaskDate date;
