@@ -17,7 +17,6 @@ import seedu.doit.logic.commands.Command;
 import seedu.doit.logic.commands.EditCommand;
 import seedu.doit.logic.commands.EditCommand.EditEventDescriptor;
 import seedu.doit.logic.commands.IncorrectCommand;
-import seedu.doit.model.item.ReadOnlyTask;
 import seedu.doit.model.tag.UniqueTagList;
 
 
