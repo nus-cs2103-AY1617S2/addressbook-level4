@@ -15,8 +15,12 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.tasklist.model.tag.Tag;
+import seedu.tasklist.model.task.EventTask;
+import seedu.tasklist.model.task.FloatingTask;
 import seedu.tasklist.model.task.ReadOnlyTask;
 import seedu.tasklist.model.task.Task;
+import seedu.tasklist.testutil.TestEventTask;
+import seedu.tasklist.testutil.TestFloatingTask;
 import seedu.tasklist.testutil.TypicalTestTasks;
 
 public class TaskListTest {
@@ -48,9 +52,10 @@ public class TaskListTest {
     @Test
     public void resetData_withDuplicateTasks_throwsAssertionError() {
         TypicalTestTasks td = new TypicalTestTasks();
-        // Repeat td.alice twice
-        List<Task> newTasks = Arrays.asList(new Task(td.alice), new Task(td.alice));
-        List<Tag> newTags = td.alice.getTags().asObservableList();
+        // Repeat td.tutorial twice
+        List<Task> newTasks = Arrays.asList(new EventTask((TestEventTask) td.tutorial),
+                                            new FloatingTask((TestFloatingTask) td.homework));
+        List<Tag> newTags = td.tutorial.getTags().asObservableList();
         TaskListStub newData = new TaskListStub(newTasks, newTags);
 
         thrown.expect(AssertionError.class);

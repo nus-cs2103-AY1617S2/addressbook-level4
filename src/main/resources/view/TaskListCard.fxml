@@ -37,7 +37,10 @@
                         </HBox>
                         <FlowPane fx:id="tags" />
                         <Label fx:id="comment" styleClass="cell_small_label" text="\$comment" />
-                    </children>
+                        <Label fx:id="priority" styleClass="cell_small_label" text="\$priority" />
+                        <Label fx:id="startDate" styleClass="cell_small_label" text="\$startDate" />
+                        <Label fx:id="endDate" styleClass="cell_small_label" text="\$endDate" />
+                     </children>
                 </VBox>
             </children>
         </GridPane>

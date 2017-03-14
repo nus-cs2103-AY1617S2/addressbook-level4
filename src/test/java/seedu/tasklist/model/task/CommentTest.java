@@ -1,11 +1,10 @@
-package seedu.tasklist.model.person;
+package seedu.tasklist.model.task;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.tasklist.model.task.Comment;
 
 public class CommentTest {
 
@@ -16,8 +15,8 @@ public class CommentTest {
         assertFalse(Comment.isValidComment(" ")); // spaces only
 
         // valid addresses
-        assertTrue(Comment.isValidComment("Blk 456, Den Road, #01-355"));
+        assertTrue(Comment.isValidComment("Find ways to not feel left out"));
         assertTrue(Comment.isValidComment("-")); // one character
-        assertTrue(Comment.isValidComment("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
+        assertTrue(Comment.isValidComment("Find out why jdk is not displaying the correct ver")); // long comment
     }
 }

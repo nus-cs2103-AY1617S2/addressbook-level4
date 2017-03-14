@@ -1,6 +1,5 @@
 package seedu.tasklist.storage;
 
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
@@ -15,7 +14,8 @@ import seedu.tasklist.commons.exceptions.DataConversionException;
 import seedu.tasklist.commons.util.FileUtil;
 import seedu.tasklist.model.ReadOnlyTaskList;
 import seedu.tasklist.model.TaskList;
-import seedu.tasklist.model.task.Task;
+import seedu.tasklist.model.task.EventTask;
+import seedu.tasklist.testutil.TestEventTask;
 import seedu.tasklist.testutil.TypicalTestTasks;
 
 public class XmlTasklistStorageTest {
@@ -72,14 +72,14 @@ public class XmlTasklistStorageTest {
         assertEquals(original, new TaskList(readBack));
 
         //Modify data, overwrite exiting file, and read back
-        original.addTask(new Task(td.hoon));
-        original.removeTask(new Task(td.alice));
+        original.addTask(new EventTask((TestEventTask) td.internship));
+        original.removeTask(new EventTask((TestEventTask) td.tutorial));
         xmlTaskListStorage.saveTaskList(original, filePath);
         readBack = xmlTaskListStorage.readTaskList(filePath).get();
         assertEquals(original, new TaskList(readBack));
 
         //Save and read without specifying file path
-        original.addTask(new Task(td.ida));
+        original.addTask(new EventTask((TestEventTask) td.ida));
         xmlTaskListStorage.saveTaskList(original); //file path not specified
         readBack = xmlTaskListStorage.readTaskList().get(); //file path not specified
         assertEquals(original, new TaskList(readBack));

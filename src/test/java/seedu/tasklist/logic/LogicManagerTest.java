@@ -42,8 +42,11 @@ import seedu.tasklist.model.TaskList;
 import seedu.tasklist.model.tag.Tag;
 import seedu.tasklist.model.tag.UniqueTagList;
 import seedu.tasklist.model.task.Comment;
+import seedu.tasklist.model.task.FloatingTask;
 import seedu.tasklist.model.task.Name;
+import seedu.tasklist.model.task.Priority;
 import seedu.tasklist.model.task.ReadOnlyTask;
+import seedu.tasklist.model.task.Status;
 import seedu.tasklist.model.task.Task;
 import seedu.tasklist.storage.StorageManager;
 
@@ -186,8 +189,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name.butNoCommentPrefix valid, address", expectedMessage);
+        assertCommandFailure("add t/friends", expectedMessage);
     }
 
     @Test
@@ -409,10 +411,12 @@ public class LogicManagerTest {
         Task adam() throws Exception {
             Name name = new Name("Event");
             Comment privateComment = new Comment("urgent");
+            Priority priority = new Priority("high");
+            Status status = new Status();
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, privateComment, tags);
+            return new FloatingTask(name, privateComment, priority, status, tags);
         }
 
         /**
@@ -423,9 +427,11 @@ public class LogicManagerTest {
          * @param seed used to generate the task data field values
          */
         Task generateTask(int seed) throws Exception {
-            return new Task(
+            return new FloatingTask(
                     new Name("Task " + seed),
                     new Comment("House of " + seed),
+                    new Priority("high"),
+                    new Status(),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -438,7 +444,7 @@ public class LogicManagerTest {
 
             cmd.append(p.getName().toString());
             cmd.append(" c/").append(p.getComment());
-
+            cmd.append(" p/").append(p.getPriority());
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {
                 cmd.append(" t/").append(t.tagName);
@@ -518,9 +524,11 @@ public class LogicManagerTest {
          * Generates a Task object with given name. Other fields will have some dummy values.
          */
         Task generateTaskWithName(String name) throws Exception {
-            return new Task(
+            return new FloatingTask(
                     new Name(name),
                     new Comment("House of 1"),
+                    new Priority("high"),
+                    new Status(),
                     new UniqueTagList(new Tag("tag"))
             );
         }

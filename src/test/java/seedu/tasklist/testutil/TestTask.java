@@ -3,69 +3,43 @@ package seedu.tasklist.testutil;
 import seedu.tasklist.model.tag.UniqueTagList;
 import seedu.tasklist.model.task.Comment;
 import seedu.tasklist.model.task.Name;
+import seedu.tasklist.model.task.Priority;
 import seedu.tasklist.model.task.ReadOnlyTask;
+import seedu.tasklist.model.task.Status;
 
 /**
  * A mutable task object. For testing only.
  */
-public class TestTask implements ReadOnlyTask {
+public abstract class TestTask implements ReadOnlyTask {
 
-    private Name name;
-    private Comment comment;
-    private UniqueTagList tags;
+    public abstract void setName(Name name);
 
-    public TestTask() {
-        tags = new UniqueTagList();
-    }
+    public abstract Name getName();
+
+    public abstract void setComment(Comment comment);
+
+    public abstract Comment getComment();
+
+    public abstract UniqueTagList getTags();
+
+    public abstract void setPriority(Priority priority);
+
+    public abstract Priority getPriority();
+
+    public abstract void setStatus(Status status);
+
+    public abstract Status getStatus();
+
+    public abstract String getAddCommand();
+
+    public abstract String toString();
+
+    public abstract String getAsText();
+
+    public abstract boolean isSameStateAs(ReadOnlyTask other);
 
     /**
-     * Creates a copy of {@code taskToCopy}.
+     * Replaces this person's tags with the tags in the argument tag list.
      */
-    public TestTask(TestTask taskToCopy) {
-        this.name = taskToCopy.getName();
-        this.comment = taskToCopy.getComment();
-        this.tags = taskToCopy.getTags();
-    }
-
-    public void setName(Name name) {
-        this.name = name;
-    }
-
-    public void setComment(Comment comment) {
-        this.comment = comment;
-    }
-
-
-    public void setTags(UniqueTagList tags) {
-        this.tags = tags;
-    }
-
-    @Override
-    public Name getName() {
-        return name;
-    }
-
-
-    @Override
-    public Comment getComment() {
-        return comment;
-    }
-
-    @Override
-    public UniqueTagList getTags() {
-        return tags;
-    }
-
-    @Override
-    public String toString() {
-        return getAsText();
-    }
-
-    public String getAddCommand() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("add " + this.getName().fullName + " ");
-        sb.append("c/" + this.getComment().value + " ");
-        this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
-        return sb.toString();
-    }
+    public abstract void setTags(UniqueTagList replacement);
 }

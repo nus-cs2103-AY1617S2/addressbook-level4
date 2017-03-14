@@ -2,6 +2,7 @@ package seedu.tasklist.logic.parser;
 
 import static seedu.tasklist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.tasklist.logic.parser.CliSyntax.PREFIX_COMMENT;
+import static seedu.tasklist.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.tasklist.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -42,6 +43,7 @@ public class EditCommandParser {
             editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
             editTaskDescriptor.setComment(ParserUtil.parseComment(argsTokenizer.getValue(PREFIX_COMMENT)));
             editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
+            editTaskDescriptor.setPriority(ParserUtil.parsePriority(argsTokenizer.getValue(PREFIX_PRIORITY)));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
