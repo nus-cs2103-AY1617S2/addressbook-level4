@@ -7,6 +7,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.tasklist.model.task.DeadlineTask;
 import seedu.tasklist.model.task.EventTask;
+import seedu.tasklist.model.task.FloatingTask;
 import seedu.tasklist.model.task.ReadOnlyDeadlineTask;
 import seedu.tasklist.model.task.ReadOnlyEventTask;
 import seedu.tasklist.model.task.ReadOnlyTask;
@@ -49,6 +50,8 @@ public class TaskCard extends UiPart<Region> {
         case EventTask.TYPE:
             startDate.setText(((ReadOnlyEventTask) task).getStartDateString());
             endDate.setText(((ReadOnlyEventTask) task).getEndDateString());
+            break;
+        case FloatingTask.TYPE:
             break;
         }
 
