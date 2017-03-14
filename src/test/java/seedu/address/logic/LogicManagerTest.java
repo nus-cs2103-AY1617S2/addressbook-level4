@@ -196,8 +196,9 @@ public class LogicManagerTest {
 
     @Test
     public void execute_add_invalidActivityData() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add  p/high e/valid@email.com l/address",
-                Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
+                expectedMessage);
         assertCommandFailure("add Valid Name p/123 e/valid@e.mail l/valid, address",
                 Priority.MESSAGE_PHONE_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/high e/notAnEmail l/valid, address",
