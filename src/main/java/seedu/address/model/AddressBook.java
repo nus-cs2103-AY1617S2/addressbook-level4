@@ -100,9 +100,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void updatePerson(int index, ReadOnlyPerson editedReadOnlyPerson)
             throws UniquePersonList.DuplicatePersonException {
         assert editedReadOnlyPerson != null;
-
+        
         Person editedPerson = new Person(editedReadOnlyPerson);
-        syncMasterTagListWith(editedPerson);
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any person
         // in the person list.
@@ -175,13 +174,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && this.persons.equals(((AddressBook) other).persons)
-                && this.tags.equalsOrderInsensitive(((AddressBook) other).tags));
+                && this.persons.equals(((AddressBook) other).persons));
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(persons, tags);
+        return Objects.hash(persons);
     }
 }

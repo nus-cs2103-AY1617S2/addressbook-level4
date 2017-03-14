@@ -118,11 +118,11 @@ public class Person implements ReadOnlyPerson {
     public void resetData(ReadOnlyPerson replacement) {
         assert replacement != null;
 
-        this.setName(replacement.getName());
-        this.setPhone(replacement.getPhone());
-        this.setEmail(replacement.getEmail());
-        this.setAddress(replacement.getAddress());
-        this.setTags(replacement.getTags());
+        this.setTaskName(replacement.getTaskName());
+        this.setDate(replacement.getDate());
+        this.setStartTime(replacement.getStartTime());
+        this.setEndTime(replacement.getEndTime());
+        this.setDescription(replacement.getDescription());
     }
 
     @Override
@@ -156,6 +156,21 @@ public class Person implements ReadOnlyPerson {
     }
     public String getDescription() {
     	return description;
+    }
+    public void setTaskName(Name taskName) {
+    	this.taskName = taskName;
+    }
+    public void setDate(Date date) {
+    	this.date = date;
+    }
+    public void setStartTime(Time startTime) {
+    	this.startTime = startTime;
+    }
+    public void setEndTime(Time endTime) {
+    	this.endTime = endTime;
+    }
+    public void setDescription(String description) {
+    	this.description = description;
     }
 
 }

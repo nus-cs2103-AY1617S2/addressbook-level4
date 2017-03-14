@@ -84,6 +84,7 @@ public class EditCommand extends Command {
         Time updatedStartTime = editPersonDescriptor.getStartTime().orElseGet(personToEdit::getStartTime);
         Time updatedEndTime = editPersonDescriptor.getEndTime().orElseGet(personToEdit::getEndTime);
         String updatedDescription = editPersonDescriptor.getDescription().orElseGet(personToEdit::getDescription);
+        
 
         return new Person(updatedTaskName, updatedDate, updatedStartTime, updatedEndTime, updatedDescription);
     }
