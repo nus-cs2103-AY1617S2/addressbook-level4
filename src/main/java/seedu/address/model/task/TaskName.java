@@ -3,17 +3,17 @@ package seedu.address.model.task;
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a task's name in the task manager.
+ * Represents a Task's name in the task manager.
  * Guarantees: immutable; is valid as declared in {@link #isValidTaskName(String)}
  */
 
 public class TaskName {
 
     public static final String MESSAGE_TASKNAME_CONSTRAINTS =
-            "Task names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Task's names should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of the Task's name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String TASKNAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
@@ -21,7 +21,7 @@ public class TaskName {
     public final String taskName;
 
     /**
-     * Validates given task name.
+     * Validates given Task's name.
      *
      * @throws IllegalValueException if given task name string is invalid.
      */
@@ -35,7 +35,7 @@ public class TaskName {
     }
 
     /**
-     * Returns true if a given string is a valid task name.
+     * Returns true if a given string is a valid Task's name.
      */
     public static boolean isValidTaskName(String test) {
         return test.matches(TASKNAME_VALIDATION_REGEX);

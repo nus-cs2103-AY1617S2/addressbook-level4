@@ -8,17 +8,18 @@ import org.junit.Test;
 public class PriorityLevelTest {
 
     @Test
-    public void isValidEmail() {
+    public void isValidPriority() {
         // blank priority
         assertFalse(PriorityLevel.isValidPriorityLevel("")); // empty string
         assertFalse(PriorityLevel.isValidPriorityLevel(" ")); // spaces only
 
-        // invalid priority digits
-        assertFalse(PriorityLevel.isValidPriorityLevel("-12"));
-        assertFalse(PriorityLevel.isValidPriorityLevel("asd"));
+        // invalid priority inputs
+        assertFalse(PriorityLevel.isValidPriorityLevel("-5"));
         assertFalse(PriorityLevel.isValidPriorityLevel("5"));
+        assertFalse(PriorityLevel.isValidPriorityLevel("LOW"));
+        assertFalse(PriorityLevel.isValidPriorityLevel("HIGH"));
 
-        // valid priority digits
+        // valid priority inputs
         assertTrue(PriorityLevel.isValidPriorityLevel("1"));
         assertTrue(PriorityLevel.isValidPriorityLevel("2"));
         assertTrue(PriorityLevel.isValidPriorityLevel("3"));

@@ -13,13 +13,12 @@ public class TaskNameTest {
         assertFalse(TaskName.isValidTaskName("")); // empty string
         assertFalse(TaskName.isValidTaskName(" ")); // spaces only
         assertFalse(TaskName.isValidTaskName("^")); // only non-alphanumeric characters
-        assertFalse(TaskName.isValidTaskName("peter*")); // contains non-alphanumeric characters
+        assertFalse(TaskName.isValidTaskName("project*")); // contains non-alphanumeric characters
 
         // valid name
-        assertTrue(TaskName.isValidTaskName("peter jack")); // alphabets only
-        assertTrue(TaskName.isValidTaskName("12345")); // numbers only
-        assertTrue(TaskName.isValidTaskName("peter the 2nd")); // alphanumeric characters
-        assertTrue(TaskName.isValidTaskName("Capital Tan")); // with capital letters
-        assertTrue(TaskName.isValidTaskName("David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(TaskName.isValidTaskName("project")); // alphabets only
+        assertTrue(TaskName.isValidTaskName("2103")); // numbers only
+        assertTrue(TaskName.isValidTaskName("cs2103t project")); // alphanumeric characters
+        assertTrue(TaskName.isValidTaskName("Discussion of CS2103T Project with team members")); // long names
     }
 }
