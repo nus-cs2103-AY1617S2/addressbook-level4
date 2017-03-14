@@ -69,7 +69,7 @@ public class ModelManager extends ComponentManager implements Model {
      */
     private void recordCurrentStateOfAddressBook() {
         this.currentAddressBookStateIndex++;
-        this.addressBookStates = 
+        this.addressBookStates =
                 new ArrayList<AddressBook>(this.addressBookStates.subList(0, this.currentAddressBookStateIndex));
         this.addressBookStates.add(new AddressBook(this.currentAddressBook));
     }
