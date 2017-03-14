@@ -21,8 +21,8 @@ public class TypicalTestTasks {
         try {
             tutorial = new EventTaskBuilder().withName("CS2103T tutorial")
                     .withComment("prepare V0.2 presentation")
-                    .withTags("class").withStartDate(new Date(2017, 5, 5, 15, 0).toString())
-                    .withEndDate(new Date(2017, 5, 5, 17, 0).toString()).build();
+                    .withTags("class").withStartDate(new Date(117, 5, 5, 15, 0).toString())
+                    .withEndDate(new Date(117, 5, 5, 17, 0).toString()).build();
             homework = new FloatingTaskBuilder().withName("CS3245 homework 3").withComment("discuss with classmates")
                     .withTags("class").build();
             groceries = new FloatingTaskBuilder().withName("Buy groceries").withComment("go NTUC").build();

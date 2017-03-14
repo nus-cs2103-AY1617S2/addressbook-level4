@@ -80,8 +80,8 @@ public class TestUtil {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
                 new EventTask(new Name("CS2103T tutorial"), new Comment("prepare V0.2 presentation"),
-                                new Priority("high"), new Status(), new Date(2017, 5, 5, 15, 0),
-                                new Date(2017, 5, 5, 17, 0), new UniqueTagList("class")),
+                                new Priority("high"), new Status(), new Date(117, 5, 5, 15, 0),
+                                new Date(117, 5, 5, 17, 0), new UniqueTagList("class")),
                 new FloatingTask(new Name("CS3245 homework 3"), new Comment("discuss with classmates"),
                                     new Priority("medium"), new Status(), new UniqueTagList("class")),
                 new FloatingTask(new Name("Buy groceries"), new Comment("go NTUC"), new Priority("low"),
@@ -94,9 +94,9 @@ public class TestUtil {
                 new FloatingTask(new Name("Drink water"), new Comment("To improve brain function"),
                                     new Priority("medium"), new Status(), new UniqueTagList()),
                 new EventTask(new Name("Internship interview"), new Comment("at mediacorp"), new Priority("high"),
-                                    new Status(), new Date(2017, 5, 5, 17, 0), new Date(2017, 5, 5, 17, 0), new UniqueTagList()),
+                                    new Status(), new Date(117, 5, 5, 17, 0), new Date(117, 5, 5, 17, 0), new UniqueTagList()),
                 new EventTask(new Name("Yet another interview"), new Comment("also at mediacorp"),
-                                    new Priority("high"), new Status(), new Date(2017, 5, 5, 17, 0), new Date(2017, 5, 5, 17, 0), new UniqueTagList())
+                                    new Priority("high"), new Status(), new Date(117, 5, 5, 17, 0), new Date(117, 5, 5, 17, 0), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
