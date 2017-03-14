@@ -59,7 +59,7 @@ public class Priority {
         if (actualValue < 0) { // means task is completed
         	this.number = trimmedPriority;
         	this.value = PRIORITY_LEVEL_DONE;
-	
+
         } else {
 
 
