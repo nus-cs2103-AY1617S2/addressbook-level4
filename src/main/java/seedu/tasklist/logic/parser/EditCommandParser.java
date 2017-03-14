@@ -2,6 +2,7 @@ package seedu.tasklist.logic.parser;
 
 import static seedu.tasklist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.tasklist.logic.parser.CliSyntax.PREFIX_COMMENT;
+import static seedu.tasklist.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.tasklist.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.tasklist.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -44,6 +45,9 @@ public class EditCommandParser {
             editTaskDescriptor.setComment(ParserUtil.parseComment(argsTokenizer.getValue(PREFIX_COMMENT)));
             editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
             editTaskDescriptor.setPriority(ParserUtil.parsePriority(argsTokenizer.getValue(PREFIX_PRIORITY)));
+            editTaskDescriptor.setDeadline(ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_DATE)));
+            editTaskDescriptor.setStartDate(ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_DATE)));
+            editTaskDescriptor.setEndDate(ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_DATE)));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
@@ -54,6 +58,7 @@ public class EditCommandParser {
 
         return new EditCommand(index.get(), editTaskDescriptor);
     }
+
 
     /**
      * Parses {@code Collection<String> tags} into an {@code Optional<UniqueTagList>} if {@code tags} is non-empty.
