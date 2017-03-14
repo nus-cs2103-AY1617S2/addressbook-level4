@@ -1,60 +1,105 @@
-# User Guide
+# Doit User Guide
 
-1. [Quick Start](#quick-start)
-2. [Features](#features)
-3. [FAQ](#faq)
-4. [Command Summary](#command-summary)
+## Table of Contents
 
-## Quick Start
+1. [Introduction](#introduction)
+    1.1 [About Doit](#about-doit)
+    1.2 [Terminologies Used](#terminologies-used)
+2. [Getting Started](#getting-started)
+    2.1 [Downloading Doit](#downloading-doit)
+    2.1 [Launching Doit](#launching-doit)
+3. [Quick Start](#quick-start)
+    3.1 [Visual Walkthrough](#visual-walkthrough)
+    3.2 [Command Format](#command-format)
+4. [Features](#features)
+    4.1 Viewing Help
+5. [FAQ](#faq)
+6. [Command Summary](#command-summary)
 
-1. Ensure you have Java version `1.8.0_60` or later installed in your computer.<br>
+## Introduction
 
-   > Having any Java 8 version is not enough. <br>
-   > This app will not work with earlier versions of Java 8.
+### About Doit
+Doit is a personal task management software that helps you to organise your task by providing an overview of the different tasks that you may have at a glance.
 
-2. Download the latest `YOLOLOL.jar` from the [releases](../../../releases) tab.
-3. Copy the file to the folder you want to use as the home folder for your task manager.
-4. Double-click the file to start the app. The GUI should appear in a few seconds.
-    > <img src="images/Ui.png" width="600">
+Doit is simple to use as all functions can be executed with just a single line of command meaning that you will only need a keyboard to fully navigate this software.
 
-
-
-5. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
-   e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
-6. Some example commands you can try:
-   * **`add`** ` completeUserGuide d/28-Feb-2017 t/2359 p/high #Important`: adds a task named completeUserGuide to the task manager.
-   * **`delete`**` 3` : deletes the 3rd item shown in the UI
-   * **`exit`** : exits the app
-   * **`help`** : displays help prompt
-7. Refer to the [Features](#features) section below for details of each command.<br>
-
-## Terminologies used
+### Terminologies Used
 
 * Task: A job to be done that has a deadline.
 * Event: An event to be participated that has a start and end time.
 * Floating Task: A job to be done that has no deadline.
 * Items: A generic term used to describe a collection of tasks, events and floating tasks.
+* GUI : Graphical User Interface.
+
+## Getting Started
+
+### Downloading Doit
+
+1. Ensure that you have Java version `1.8.0_60` or later installed on your computer.<br>
+
+   > Just having any Java 8 version is not enough. <br>
+   > Doit will not work with earlier versions of Java 8.<br>
+   > You can download the latest version of Java 8 at http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html.
+
+2. Download the latest `Doit.jar` from the [releases](../../../releases) tab.
+3. Copy the file to the folder you want to use as the home folder for Doit.
+
+### Launching Doit
+
+1. Double-click on `Doit.jar` to launch the app.
+2. The main interface should appear as shown in figure 1 in a few seconds.
+    > <img src="images/MainInterface.png" width="600">
+    > _Figure 1 : Main GUI_
+
+## Quick Start
+
+### Visual Walkthrough
+
+1. Figure 2 shows how Doit may look with a few items added.
+    > <img src="images/Ui.png" width="600">
+    > _Figure 2 : Example of a GUI instance_
+
+2. Note how Doit has 3 columns "On", "By" and "Anytime".
+   * The "On" Column shows you events that take place between a certain time period
+   * The "By" Column shows you tasks which have to be completed by a certain deadline
+   * The "Anytime" Column shows you floating tasks which can be completed anytime
+
+3. You can type a command in the command box at the bottom and press <kbd>Enter</kbd> to execute it. <br>
+   e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
+   
+4. Here are some sample commands that you may try:
+   * **`help`** : Displays help prompt
+   * **`add`** ` completeUserGuide d/28-Feb-2017 t/2359 p/high #Important`
+    : Adds a task named completeUserGuide to the task manager.
+   * **`delete`**`3` : Deletes the 3rd item shown in the UI
+   * **`help`** : Displays help prompt
+   * **`exit`** : Exits the app
+
+5. You can refer to the [Features](#features) section below for the details of each command.<br>
+
+### Command Format
+
+* Words in **`Bold`** are the commands
+* Words in `UPPER_CASE` are the parameters.
+* Words in `[SQUARE_BRACKETS]` are optional parameters.
+* Words with `...` after them can have multiple instances.
+* Parameters & optional parameters can be in any order.
 
 
 
 ## Features
 
-> **Command Format**
->
-> * Words in `UPPER_CASE` are the parameters.
-> * Words in `SQUARE_BRACKETS` are optional parameters.
-> * Words with `...` after them can have multiple instances.
-> * Parameters & optional parameters can be in any order.
 
+### Getting Help : `help`
 
-### Viewing help : `help`
+Displays the help window
 
-Format: `help`
+Format: **`help`**
 
 > Help is also shown if you enter an incorrect command e.g. `abcd`
 
 
-### Adding an item: `add`
+### Adding an Item: `add`
 
 Adds an item to the task manager<br>
 Format: `add NAME [st/STARTTIME] [et/ENDTIME] [d/DESCRIPTION] [p/PRIORITY] [#TAG]...`
@@ -74,7 +119,7 @@ Examples:
 * `add event st/28-Feb-2017 et/31-Mar-2017 p/high #Important`
 
 
-### Undoing the previous command : `undo`
+### Undoing the Previous Command : `undo`
 
 Undos the previous command that is not the undo command.<br>
 Format: `undo`
@@ -82,7 +127,7 @@ Format: `undo`
 > * You can undo <strong>N</strong> commands that is not the undo command by typing undo <strong>N</strong> number of times.<br>
 > * You can only revert up to 1 command that is not the undo command.<br>
 
-### Editing an item : `edit`
+### Editing an Item : `edit`
 
 Edits an existing item in the task manager.<br>
 Format: `edit INDEX [st/STARTTIME] [et/ENDTIME] [d/DESCRIPTION] [p/PRIORITY] [#TAG]...`
@@ -105,7 +150,7 @@ Examples:
   Edits the name of the 2nd item's deadline to `9pm` and priority to `high` and clears all existing tags.
 
 
-### Finding all items containing any keywords in their names, tags and timings: `find`
+### Finding all Items Containing any Keywords in Their Names, Tags and Timings: `find`
 
 Finds items whose names, tags and timings contain any of the given keywords.<br>
 Format: `find KEYWORD [MORE_KEYWORDS]`
@@ -120,7 +165,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 
 * `find 1-Mar-2017`
-  events, tasks and floating tasks lists show items that take place on 1-Mar-2017
+  The events, tasks and floating tasks lists will show items that take place on 1-Mar-2017
 
 * `find OP` <br>
   Returns `OP1`
@@ -174,6 +219,19 @@ Examples:
 Clears all entries from the Task Manager.<br>
 Format: `clear`
 
+### Saving the data into a specified filename and location  : `save`
+
+Exits the program.<br>
+Format: `save FILE_PATH/FILE_NAME.xml`
+> Saves the data file with your own file name in the layers of folder you declare yourself.
+> Saved file must be of type xml. Hence, it must end with .xml.
+> Saved file location will be limited in the Doit Application folder.
+> 
+Examples:
+* `save folder1/folder2/savefile.xml`<br>
+  Saves the data file in a file named savefile.xml at inside folder2 which is inside folder1 of the Doit Application folder.
+* `save savefile.xml`<br> 
+  Saves the data file in a file named savefile.xml in the Doit Application folder.
 ### Exiting the program : `exit`
 
 Exits the program.<br>
@@ -200,7 +258,7 @@ There is no need to save manually.
   e.g.
   * `add completeUserGuide d/28-Feb-2017 t/2400 p/high #Important`
 
-* * **Add Floating Task** : `add FLOATINGTASKNAME [p/PRIORITY] [#TAG]...`<br>
+* **Add Floating Task** : `add FLOATINGTASKNAME [p/PRIORITY] [#TAG]...`<br>
   e.g. 
   * `add reachDiamondRank p/low #Overwatch`
 
@@ -235,7 +293,11 @@ There is no need to save manually.
 * **Clear** : `clear` <br>
   e.g.
   * `clear`
-
-
   
+* **Save** : `save FILE_PATH/FOLDER_NAME.xml`
+  e.g.
+  * `save folder1/folder2/savefile.xml`
 
+* **Exit** : `exit`
+  e.g.
+  * `exit`
