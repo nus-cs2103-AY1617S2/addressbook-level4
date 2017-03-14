@@ -21,8 +21,10 @@ It has a GUI but most of the user interactions happen using a CLI (Command Line 
 
 #### Acknowledgements
 
-* Some parts of this sample application were inspired by the excellent
+* The original source of this code was used from the sample project created by [SE-EDU initiative](https://github.com/se-edu/addressbook-level4).
+* Some parts of TaskBoss were inspired by the excellent
   [Java FX tutorial](http://code.makery.ch/library/javafx-8-tutorial/) by *Marco Jakob*.
-
+* [Natty](http://natty.joestelmach.com/) date parser by *Joe Stelmach*. 
+  
 
 #### Licence : [MIT](LICENSE)
