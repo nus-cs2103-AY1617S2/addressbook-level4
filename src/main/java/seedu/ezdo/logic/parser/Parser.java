@@ -91,9 +91,11 @@ public class Parser {
             return new SaveCommandParser().parse(arguments);
 
         case UndoCommand.COMMAND_WORD:
+        case UndoCommand.SHORT_COMMAND_WORD:
             return new UndoCommand();
 
         case RedoCommand.COMMAND_WORD:
+        case RedoCommand.SHORT_COMMAND_WORD:
             return new RedoCommand();
 
         default:
