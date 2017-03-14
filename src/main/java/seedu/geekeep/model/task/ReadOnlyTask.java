@@ -46,12 +46,12 @@ public interface ReadOnlyTask {
                         && other.getTitle().equals(this.getTitle()) // state checks here onwards
                         && other.getEndDateTime().equals(this.getEndDateTime())
                         && other.getStartDateTime().equals(this.getStartDateTime()))
-                || (other !=null
+                || (other != null
                         && other.isDeadline()
                         && this.isDeadline()
                         && other.getTitle().equals(this.getTitle()) // state checks here onwards
                         && other.getEndDateTime().equals(this.getEndDateTime()))
-                || (other !=null
+                || (other != null
                         && other.isFloatingTask()
                         && this.isFloatingTask()
                         && other.getTitle().equals(this.getTitle())); // state checks here onwards

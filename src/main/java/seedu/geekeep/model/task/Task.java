@@ -37,9 +37,13 @@ public class Task implements ReadOnlyTask {
     public Task(Title title, DateTime startDateTime,
                 DateTime endDateTime, Location location, UniqueTagList tags, boolean isDone) {
         assert !CollectionUtil.isAnyNull(title);
-        if (startDateTime != null) assert endDateTime != null;
-        if(startDateTime != null && endDateTime != null)
+        if (startDateTime != null) {
+            assert endDateTime != null;
+        }
+        if(startDateTime != null && endDateTime != null){
             assert endDateTime.dateTime.isAfter(startDateTime.dateTime);
+        }
+
 
         this.title = title;
         this.endDateTime = endDateTime;
