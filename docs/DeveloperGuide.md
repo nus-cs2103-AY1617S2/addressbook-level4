@@ -4,20 +4,25 @@ By : `Team T09-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbs
 
 ---
 
-* [Setting Up](#setting-up)
-* [Design](#design)
-* [Implementation](#implementation)
-* [Testing](#testing)
-* [Dev Ops](#dev-ops)
+* 1.[Introduction](#intoduction)
+* 2.[Setting Up](#setting-up)
+* 3.[Design](#design)
+* 4.[Implementation](#implementation)
+* 5.[Testing](#testing)
+* 6.[Dev Ops](#dev-ops)
+* 7.[Appendix A: User Stories](#appendix-a--user-stories)
+* 8.[Appendix B: Use Cases](#appendix-b--use-cases)
+* 9.[Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
+* 10.[Appendix D: Glossary](#appendix-d--glossary)
+* 11.[Appendix E : Product Survey](#appendix-e--product-survey)
 
-* [Appendix A: User Stories](#appendix-a--user-stories)
-* [Appendix B: Use Cases](#appendix-b--use-cases)
-* [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
-* [Appendix D: Glossary](#appendix-d--glossary)
-* [Appendix E : Product Survey](#appendix-e--product-survey)
+## 1.Introduction
 
+TypeTask is a task manager for active users who prefer to manage their tasks and plans by keyboard commands. TypeTask works on a Java desktop application that has a graphical user interface (GUI) executed with JavaFX.
 
-## Setting up
+This guide illustrates the design and implementation of TypeTask. It will guide you as a developer to understand how TypeTask functions and show you how to be a part of its progress. 
+
+## 2. Setting up
 
 ### 1.1. Prerequisites
 
@@ -86,11 +91,12 @@ Given below is a quick overview of each component.
 > Tip: The `.pptx` files used to create diagrams in this document can be found in the [diagrams](diagrams/) folder.
 > To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
 
-`Main` has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java). It is responsible for,
-
+#### `Commons`
+The **`Main`** has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
 
+#### `Commons`
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 Two of those classes play important roles at the architecture level.
 
@@ -99,11 +105,17 @@ Two of those classes play important roles at the architecture level.
 * `LogsCenter` : Used by many classes to write log messages to the App's log file.
 
 The rest of the App consists of four components.
+#### `UI`
+The [**`UI`**](#ui-component) component is the interaction between the user and the application.
 
-* [**`UI`**](#ui-component) : The UI is the interaction between the user and the application.
-* [**`Logic`**](#logic-component) : The Logic contains the command executor.
-* [**`Model`**](#model-component) : The model Holds the data of the App in-memory.
-* [**`Storage`**](#storage-component) : The storage Reads data from, and writes data to, the hard disk.
+#### `Logic`
+The [**`Logic`**](#logic-component) component contains the command executor.
+
+#### `Model`
+The [**`Model`**](#model-component) component Holds the data of the App in-memory.
+
+#### `Storage`
+The [**`Storage`**](#storage-component) component Reads data from, and writes data to, the hard disk.
 
 Each of the four components
 
