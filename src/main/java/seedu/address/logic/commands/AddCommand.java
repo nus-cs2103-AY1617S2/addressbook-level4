@@ -54,6 +54,7 @@ public class AddCommand extends Command {
     public CommandResult execute() throws CommandException {
         assert model != null;
         model.updateCopy(model.getTaskManager());
+        model.updateFlag("undo copy");
         model.addTask(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
 
