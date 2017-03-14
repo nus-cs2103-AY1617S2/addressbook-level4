@@ -31,35 +31,26 @@ public class TaskCard extends UiPart<Region> {
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
-        name.setText(task.getTaskName().taskName);
+        name.setText(task.getTaskName().toString());
         id.setText(displayedIndex + ". ");
-        showDeadlineIfExists(task);
-        showPriorityIfExists(task);
-        showDescriptionIfExists(task);
+        showDeadline(task);
+        showPriority(task);
+        showDescription(task);
             
         initTags(task);
     }
 
-    private void showDescriptionIfExists(ReadOnlyTask task) {
-        if(task.getDescription().hasNoDescription())
-            description.setText("");
-        else
-            description.setText(task.getDescription().value);
+    private void showDescription(ReadOnlyTask task) {
+    	description.setText(task.getDescription().toString());
     }
 
-    private void showPriorityIfExists(ReadOnlyTask task) {
+    private void showPriority(ReadOnlyTask task) {
         //TODO: make it nicer to show the priority just like how the tags appear
-        if(task.getPriority().isDefaultPriority())
-            priority.setText("");
-        else
-            priority.setText(PRIORITY_PREPEND + task.getPriority().value);
+    	priority.setText(PRIORITY_PREPEND + task.getPriority().toString());
     }
 
-    private void showDeadlineIfExists(ReadOnlyTask task) {
-        if(task.getDeadline().hasNoDeadline())
-            deadline.setText(NO_DEADLINE);
-        else 
-            deadline.setText(DEADLINE_BY + task.getDeadline().value);
+    private void showDeadline(ReadOnlyTask task) {
+    	deadline.setText(task.getDeadline().toString());
     }
 
     private void initTags(ReadOnlyTask person) {

@@ -2,7 +2,6 @@ package t15b1.taskcrusher.storage;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.xml.bind.annotation.XmlElement;
 
@@ -12,7 +11,6 @@ import t15b1.taskcrusher.model.shared.Name;
 import t15b1.taskcrusher.model.tag.Tag;
 import t15b1.taskcrusher.model.tag.UniqueTagList;
 import t15b1.taskcrusher.model.task.Deadline;
-import t15b1.taskcrusher.model.task.Email;
 import t15b1.taskcrusher.model.task.Priority;
 import t15b1.taskcrusher.model.task.ReadOnlyTask;
 import t15b1.taskcrusher.model.task.Task;
@@ -47,10 +45,10 @@ public class XmlAdaptedTask {
      * @param source future changes to this will not affect the created XmlAdaptedTask
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
-        taskName = source.getTaskName().taskName;
-        priority = source.getPriority().value;
-        deadline = source.getDeadline().value;
-        description = source.getDescription().value;
+        taskName = source.getTaskName().toString();
+        priority = source.getPriority().toString();
+        deadline = source.getDeadline().toString();
+        description = source.getDescription().toString();
 
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {

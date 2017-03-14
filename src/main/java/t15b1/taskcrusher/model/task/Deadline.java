@@ -16,7 +16,7 @@ public class Deadline {
 	public static final String MESSAGE_DEADLINE_CONSTRAINTS = "Deadline provided must be a relative or absolute date";
 	public static final String NO_DEADLINE = "";
 
-	public String deadline;
+	private final String deadline;
 
 	/**
 	 * Creates a Deadline using the String passed
@@ -35,6 +35,15 @@ public class Deadline {
 			throw new IllegalValueException(MESSAGE_DEADLINE_CONSTRAINTS);
 		}
 
+	}
+
+	@Override
+	public String toString() {
+		if (hasDeadline()) {
+			return getDate().get().toString();
+		} else {
+			return Deadline.NO_DEADLINE;			
+		}
 	}
 
 	@Override
@@ -62,11 +71,6 @@ public class Deadline {
 		}
 
 		return deadlineAsDate;
-	}
-
-	@Override
-	public String toString() {
-		return this.deadline;
 	}
 
 	/**

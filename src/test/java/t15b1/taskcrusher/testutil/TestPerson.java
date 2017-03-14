@@ -93,10 +93,10 @@ public class TestPerson implements ReadOnlyTask {
 //        this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
 //        return sb.toString();
         StringBuilder sb = new StringBuilder();
-        sb.append("add " + this.getTaskName().taskName + " ");
-        sb.append("d/" + this.getDeadline().value + " ");
-        sb.append("p/" + this.getPriority().value + " ");
-        sb.append("//" + this.getDescription().value + " ");
+        sb.append("add " + this.getTaskName().name + " ");
+        sb.append("d/" + this.getDeadline().deadline + " ");
+        sb.append("p/" + this.getPriority().priority + " ");
+        sb.append("//" + this.getDescription().description + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }

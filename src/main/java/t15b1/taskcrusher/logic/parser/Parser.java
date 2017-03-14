@@ -63,7 +63,7 @@ public class Parser {
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            return new ExitCommand(); //remove later
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
