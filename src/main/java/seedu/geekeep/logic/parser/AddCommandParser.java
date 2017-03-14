@@ -7,6 +7,7 @@ import static seedu.geekeep.logic.parser.CliSyntax.PREFIX_STARTING_DATETIME;
 import static seedu.geekeep.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.logic.commands.AddCommand;
@@ -28,9 +29,9 @@ public class AddCommandParser {
         argsTokenizer.tokenize(args);
         try {
             String title = argsTokenizer.getPreamble().get();
-            String startDateTime = argsTokenizer.getValue(PREFIX_STARTING_DATETIME).orElse(null);
-            String endDateTime = argsTokenizer.getValue(PREFIX_ENDING_DATETIME).orElse(null);
-            String location = argsTokenizer.getValue(PREFIX_LOCATION).orElse(null);
+            Optional<String> startDateTime = argsTokenizer.getValue(PREFIX_STARTING_DATETIME);
+            Optional<String> endDateTime = argsTokenizer.getValue(PREFIX_ENDING_DATETIME);
+            Optional<String> location = argsTokenizer.getValue(PREFIX_LOCATION);
             return new AddCommand(
                     title,
                     startDateTime,
