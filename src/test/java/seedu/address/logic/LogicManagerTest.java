@@ -196,13 +196,13 @@ public class LogicManagerTest {
 
     @Test
     public void execute_add_invalidActivityData() {
-        assertCommandFailure("add  p/12345 e/valid@email.com l/address",
+        assertCommandFailure("add  p/high e/valid@email.com l/address",
                 Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail l/valid, address",
+        assertCommandFailure("add Valid Name p/123 e/valid@e.mail l/valid, address",
                 Priority.MESSAGE_PHONE_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/notAnEmail l/valid, address",
+        assertCommandFailure("add Valid Name p/high e/notAnEmail l/valid, address",
                 Email.MESSAGE_EMAIL_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail l/valid, address t/invalid_-[.tag",
+        assertCommandFailure("add Valid Name p/high e/valid@e.mail l/valid, address t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
@@ -415,8 +415,8 @@ public class LogicManagerTest {
     class TestDataHelper {
 
         Activity adam() throws Exception {
-            Description name = new Description("Adam Brown");
-            Priority privatePhone = new Priority("111111");
+            Description name = new Description("Assignment2");
+            Priority privatePhone = new Priority("high");
             Email email = new Email("adam@gmail.com");
             Location privateLocation = new Location("111, alpha street");
             Tag tag1 = new Tag("tag1");
@@ -436,7 +436,7 @@ public class LogicManagerTest {
         Activity generateActivity(int seed) throws Exception {
             return new Activity(
                     new Description("Activity " + seed),
-                    new Priority("" + Math.abs(seed)),
+                    new Priority("high"),
                     new Email(seed + "@email"),
                     new Location("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
@@ -534,7 +534,7 @@ public class LogicManagerTest {
         Activity generateActivityWithName(String description) throws Exception {
             return new Activity(
                     new Description(description),
-                    new Priority("1"),
+                    new Priority("low"),
                     new Email("1@email"),
                     new Location("House of 1"),
                     new UniqueTagList(new Tag("tag"))

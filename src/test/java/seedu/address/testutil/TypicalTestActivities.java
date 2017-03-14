@@ -16,26 +16,26 @@ public class TypicalTestActivities {
         try {
             alice = new ActivityBuilder().withDescription("Alice Pauline")
                     .withLocation("123, Jurong West Ave 6, #08-111").withEmail("alice@gmail.com")
-                    .withPhone("85355255")
+                    .withPhone("high")
                     .withTags("friends").build();
             benson = new ActivityBuilder().withDescription("Benson Meier").withLocation("311, Clementi Ave 2, #02-25")
-                    .withEmail("johnd@gmail.com").withPhone("98765432")
+                    .withEmail("johnd@gmail.com").withPhone("high")
                     .withTags("owesMoney", "friends").build();
-            carl = new ActivityBuilder().withDescription("Carl Kurz").withPhone("95352563")
+            carl = new ActivityBuilder().withDescription("Carl Kurz").withPhone("high")
                     .withEmail("heinz@yahoo.com").withLocation("wall street").build();
-            daniel = new ActivityBuilder().withDescription("Daniel Meier").withPhone("87652533")
+            daniel = new ActivityBuilder().withDescription("Daniel Meier").withPhone("high")
                     .withEmail("cornelia@google.com").withLocation("10th street").build();
-            elle = new ActivityBuilder().withDescription("Elle Meyer").withPhone("9482224")
+            elle = new ActivityBuilder().withDescription("Elle Meyer").withPhone("high")
                     .withEmail("werner@gmail.com").withLocation("michegan ave").build();
-            fiona = new ActivityBuilder().withDescription("Fiona Kunz").withPhone("9482427")
+            fiona = new ActivityBuilder().withDescription("Fiona Kunz").withPhone("high")
                     .withEmail("lydia@gmail.com").withLocation("little tokyo").build();
-            george = new ActivityBuilder().withDescription("George Best").withPhone("9482442")
+            george = new ActivityBuilder().withDescription("George Best").withPhone("high")
                     .withEmail("anna@google.com").withLocation("4th street").build();
 
             // Manually added
-            hoon = new ActivityBuilder().withDescription("Hoon Meier").withPhone("8482424")
+            hoon = new ActivityBuilder().withDescription("Hoon Meier").withPhone("high")
                     .withEmail("stefan@mail.com").withLocation("little india").build();
-            ida = new ActivityBuilder().withDescription("Ida Mueller").withPhone("8482131")
+            ida = new ActivityBuilder().withDescription("Ida Mueller").withPhone("high")
                     .withEmail("hans@google.com").withLocation("chicago ave").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
