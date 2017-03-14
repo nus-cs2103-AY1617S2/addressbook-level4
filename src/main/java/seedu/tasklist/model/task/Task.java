@@ -27,7 +27,7 @@ public abstract class Task implements ReadOnlyTask {
     public abstract Status getStatus();
 
     /**
-     * Replaces this person's tags with the tags in the argument tag list.
+     * Replaces this task's tags with the tags in the argument tag list.
      */
     public abstract void setTags(UniqueTagList replacement);
 

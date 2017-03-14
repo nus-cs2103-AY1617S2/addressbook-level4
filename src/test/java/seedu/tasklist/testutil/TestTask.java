@@ -39,7 +39,7 @@ public abstract class TestTask implements ReadOnlyTask {
     public abstract boolean isSameStateAs(ReadOnlyTask other);
 
     /**
-     * Replaces this person's tags with the tags in the argument tag list.
+     * Replaces this task's tags with the tags in the argument tag list.
      */
     public abstract void setTags(UniqueTagList replacement);
 }
