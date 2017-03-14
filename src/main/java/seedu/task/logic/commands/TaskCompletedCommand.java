@@ -29,10 +29,8 @@ public class TaskCompletedCommand extends Command {
 
     private final int filteredTaskListIndex;
 
-    public TaskCompletedCommand (int filteredTaskListIndex){
-
-    	this.filteredTaskListIndex = filteredTaskListIndex - 1;
-
+    public TaskCompletedCommand (int filteredTaskListIndex) {
+        this.filteredTaskListIndex = filteredTaskListIndex - 1;
     }
 
     @Override
@@ -55,16 +53,16 @@ public class TaskCompletedCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToMarkComplete.getName()));
     }
 
-    private static Task changeTaskCompletion (ReadOnlyTask taskToMarkComplete){
+    private static Task changeTaskCompletion (ReadOnlyTask taskToMarkComplete) {
 
-    	Name name = taskToMarkComplete.getName();
-    	StartTime startTime = taskToMarkComplete.getStartTime();
-    	EndTime endTime = taskToMarkComplete.getEndTime();
-    	UniqueTagList tagList = taskToMarkComplete.getTags();
-    	CompletionStatus updatedCompletionStatus = taskToMarkComplete.getCompletionStatus();
-    	updatedCompletionStatus.swapStatus();
+        Name name = taskToMarkComplete.getName();
+        StartTime startTime = taskToMarkComplete.getStartTime();
+        EndTime endTime = taskToMarkComplete.getEndTime();
+        UniqueTagList tagList = taskToMarkComplete.getTags();
+        CompletionStatus updatedCompletionStatus = taskToMarkComplete.getCompletionStatus();
+        updatedCompletionStatus.swapStatus();
 
-    	return new Task(name, startTime, endTime, updatedCompletionStatus, tagList);
+        return new Task(name, startTime, endTime, updatedCompletionStatus, tagList);
     }
 
 }

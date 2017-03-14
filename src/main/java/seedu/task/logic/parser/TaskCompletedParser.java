@@ -9,14 +9,13 @@ import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.logic.commands.TaskCompletedCommand;
 
 public class TaskCompletedParser {
-	public Command parse(String args){
+    public Command parse(String args) {
 
-		Optional<Integer> index = ParserUtil.parseIndex(args);
-		if(!index.isPresent()){
-			return new IncorrectCommand(
-					String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskCompletedCommand.MESSAGE_USAGE));
-		}
-
-		return new TaskCompletedCommand(index.get());
-	}
+        Optional<Integer> index = ParserUtil.parseIndex(args);
+        if (!index.isPresent()) {
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskCompletedCommand.MESSAGE_USAGE));
+        }
+        return new TaskCompletedCommand(index.get());
+    }
 }
