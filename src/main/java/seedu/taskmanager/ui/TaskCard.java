@@ -29,7 +29,7 @@ public class TaskCard extends UiPart<Region> {
     private Label toLabel;
 //    @FXML
 //    private FlowPane categories;
-    
+
     private final StringProperty empty = new SimpleStringProperty("");
     private final StringProperty to = new SimpleStringProperty("to");
 

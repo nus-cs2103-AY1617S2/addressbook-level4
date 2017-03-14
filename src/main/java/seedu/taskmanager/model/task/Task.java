@@ -45,7 +45,7 @@ public class Task implements ReadOnlyTask {
     public TaskName getTaskName() {
         return taskName;
     }
-    
+
     public void setDate(Date date) {
         assert date != null;
         this.date = date;
@@ -54,7 +54,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public Date getDate() {
         return date;
-    }  
+    }
 
     public void setStartTime(StartTime startTime) {
         assert startTime != null;

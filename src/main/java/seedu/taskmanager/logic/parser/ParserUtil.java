@@ -89,7 +89,7 @@ public class ParserUtil {
     	assert starttime != null;
     	return starttime.isPresent() ? Optional.of(new StartTime(starttime.get())) : Optional.empty();
     }
-    
+
     /**
      * Parses a {@code Optional<String> endtime} into an {@code Optional<EndTime>} if {@code endtime} is present.
      */
