@@ -27,4 +27,9 @@ public class FindCommand extends Command {
         return new CommandResult(getMessageForTodoListShownSummary(model.getFilteredTodoList().size()));
     }
 
+    @Override
+    public Boolean isModifying() {
+    	return false;
+    }
+    
 }

@@ -65,6 +65,11 @@ public class EditCommand extends Command {
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_EDIT_TODO_SUCCESS, todoToEdit));
     }
+    
+    @Override
+    public Boolean isModifying() {
+    	return true;
+    }
 
     /**
      * Creates and returns a {@code Todo} with the details of {@code todoToEdit}

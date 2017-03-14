@@ -36,4 +36,9 @@ public abstract class Command {
     public void setData(Model model) {
         this.model = model;
     }
+    
+    /**
+     * Returns true if command modifies data
+     */
+    public abstract Boolean isModifying();
 }

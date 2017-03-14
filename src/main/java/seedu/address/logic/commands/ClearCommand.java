@@ -17,4 +17,9 @@ public class ClearCommand extends Command {
         model.resetData(new TodoList());
         return new CommandResult(MESSAGE_SUCCESS);
     }
+    
+    @Override
+    public Boolean isModifying() {
+    	return true;
+    }
 }

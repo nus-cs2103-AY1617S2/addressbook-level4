@@ -17,5 +17,10 @@ public class ExitCommand extends Command {
         EventsCenter.getInstance().post(new ExitAppRequestEvent());
         return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT);
     }
+    
+    @Override
+    public Boolean isModifying() {
+    	return false;
+    }
 
 }
