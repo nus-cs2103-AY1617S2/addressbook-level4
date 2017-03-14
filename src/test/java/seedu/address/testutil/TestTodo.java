@@ -140,7 +140,7 @@ public class TestTodo implements ReadOnlyTodo {
             String endDate = dateFormat.format(this.getEndTime());
             sb.append("s/" + startDate + " e/" + endDate + " ");
         }
-        
+
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }

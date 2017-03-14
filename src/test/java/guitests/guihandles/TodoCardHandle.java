@@ -68,7 +68,7 @@ public class TodoCardHandle extends GuiHandle {
     }
     public boolean isSameTodo(ReadOnlyTodo todo) {
         if (todo.getStartTime() != null && todo.getEndTime() != null) {
-            
+
             DateFormat dateFormat = new SimpleDateFormat("EEE MMM dd hh:mm:ss z yyyy");
             String strStartTime = dateFormat.format(todo.getStartTime());
             String strEndTime = dateFormat.format(todo.getEndTime());
