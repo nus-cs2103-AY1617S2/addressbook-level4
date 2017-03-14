@@ -29,7 +29,6 @@ public class AddCommandParser {
         try {
             String startDate = argsTokenizer.getValue(PREFIX_START_DATE).orElse("");
             String endDate = argsTokenizer.getValue(PREFIX_END_DATE).orElse("");
-            checkTaskInvariant(startDate, endDate);
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
                     startDate,
@@ -44,11 +43,4 @@ public class AddCommandParser {
         }
     }
     
-    private void checkTaskInvariant(String startDate, String endDate) throws IllegalValueException {
-        if (!startDate.isEmpty() && endDate.isEmpty()) {
-            throw new IllegalValueException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, 
-                    AddCommand.MESSAGE_MISSING_DATE) + AddCommand.MESSAGE_USAGE);
-        }
-    }
-
 }

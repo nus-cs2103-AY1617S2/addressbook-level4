@@ -4,6 +4,7 @@ package seedu.onetwodo.model.task;
 import seedu.onetwodo.commons.exceptions.IllegalValueException;
 
 import java.time.*;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 
@@ -59,6 +60,10 @@ public class Date {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+    
+    public LocalDateTime getLocalDateTime() throws NoSuchElementException{
+        return localDateTime.get();
     }
 
 }

@@ -1,5 +1,6 @@
 package seedu.onetwodo.logic.commands;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,6 +12,7 @@ import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Description;
 import seedu.onetwodo.model.task.Name;
 import seedu.onetwodo.model.task.Task;
+import seedu.onetwodo.model.task.TaskAttributesChecker;
 import seedu.onetwodo.model.task.StartDate;
 import seedu.onetwodo.model.task.UniqueTaskList;
 
@@ -25,12 +27,12 @@ public class AddCommand extends Command {
             + "Parameters: NAME  s/START_DATE  e/END_DATE  d/DESCRIPTION  [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
             + " Take a nap s/03 Mar 2017 17:00 e/03 Mar 2017 21:00 d/tonight don't need to sleep alr t/nap t/habbit";
-
-    public static final String MESSAGE_MISSING_DATE = "A task with a start date needs an end date or duration.";
+    
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the todo list";
 
     private final Task toAdd;
+    private final LocalDateTime dateCreated;
 
     /**
      * Creates an AddCommand using raw values.
@@ -39,6 +41,9 @@ public class AddCommand extends Command {
      */
     public AddCommand(String name, String startDate, String endDate, String description, Set<String> tags)
             throws IllegalValueException {
+        
+        dateCreated = LocalDateTime.now().withHour(0).withMinute(0);
+        
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
@@ -50,10 +55,11 @@ public class AddCommand extends Command {
                 new Description(description),
                 new UniqueTagList(tagSet)
         );
+        TaskAttributesChecker.checkValidAttributes(toAdd, dateCreated);
     }
 
     @Override
-    public CommandResult execute() throws CommandException {
+    public CommandResult execute() throws CommandException{
         assert model != null;
         try {
             model.addTask(toAdd);
