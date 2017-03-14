@@ -15,7 +15,9 @@ import seedu.todolist.commons.exceptions.IllegalValueException;
 import seedu.todolist.commons.util.StringUtil;
 import seedu.todolist.model.tag.Tag;
 import seedu.todolist.model.tag.UniqueTagList;
+import seedu.todolist.model.task.EndTime;
 import seedu.todolist.model.task.Name;
+import seedu.todolist.model.task.StartTime;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -69,6 +71,22 @@ public class ParserUtil {
     public static Optional<Name> parseName(Optional<String> name) throws IllegalValueException {
         assert name != null;
         return name.isPresent() ? Optional.of(new Name(name.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code Optional<String> startTime} into an {@code Optional<StartTime>} if {@code startTime} is present.
+     */
+    public static Optional<StartTime> parseStartTime(Optional<String> startTime) throws IllegalValueException {
+        assert startTime != null;
+        return startTime.isPresent() ? Optional.of(new StartTime(startTime.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code Optional<String> endTime} into an {@code Optional<EndTime>} if {@code endTime} is present.
+     */
+    public static Optional<EndTime> parseEndTime(Optional<String> endTime) throws IllegalValueException {
+        assert endTime != null;
+        return endTime.isPresent() ? Optional.of(new EndTime(endTime.get())) : Optional.empty();
     }
 
     /**

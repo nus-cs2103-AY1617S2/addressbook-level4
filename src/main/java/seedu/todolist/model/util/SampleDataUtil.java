@@ -9,15 +9,15 @@ import seedu.todolist.model.task.Task;
 import seedu.todolist.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
-    public static Task[] getSamplePersons() {
+    public static Task[] getSampleTasks() {
         try {
             return new Task[] {
-                new Task(new Name("Alex Yeoh"), new UniqueTagList("friends")),
-                new Task(new Name("Bernice Yu"), new UniqueTagList("colleagues", "friends")),
-                new Task(new Name("Charlotte Oliveiro"), new UniqueTagList("neighbours")),
-                new Task(new Name("David Li"), new UniqueTagList("family")),
-                new Task(new Name("Irfan Ibrahim"), new UniqueTagList("classmates")),
-                new Task(new Name("Roy Balakrishnan"), new UniqueTagList("colleagues"))
+                new Task(new Name("Alex Yeoh"), null, null, new UniqueTagList("friends")),
+                new Task(new Name("Bernice Yu"), null, null, new UniqueTagList("colleagues", "friends")),
+                new Task(new Name("Charlotte Oliveiro"), null, null, new UniqueTagList("neighbours")),
+                new Task(new Name("David Li"), null, null, new UniqueTagList("family")),
+                new Task(new Name("Irfan Ibrahim"), null, null, new UniqueTagList("classmates")),
+                new Task(new Name("Roy Balakrishnan"), null, null, new UniqueTagList("colleagues"))
             };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);
@@ -27,7 +27,7 @@ public class SampleDataUtil {
     public static ReadOnlyToDoList getSampleAddressBook() {
         try {
             ToDoList sampleAB = new ToDoList();
-            for (Task samplePerson : getSamplePersons()) {
+            for (Task samplePerson : getSampleTasks()) {
                 sampleAB.addTask(samplePerson);
             }
             return sampleAB;

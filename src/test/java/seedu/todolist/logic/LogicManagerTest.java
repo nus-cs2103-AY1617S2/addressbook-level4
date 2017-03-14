@@ -42,8 +42,10 @@ import seedu.todolist.model.ReadOnlyToDoList;
 import seedu.todolist.model.ToDoList;
 import seedu.todolist.model.tag.Tag;
 import seedu.todolist.model.tag.UniqueTagList;
+import seedu.todolist.model.task.EndTime;
 import seedu.todolist.model.task.Name;
 import seedu.todolist.model.task.ReadOnlyTask;
+import seedu.todolist.model.task.StartTime;
 import seedu.todolist.model.task.Task;
 import seedu.todolist.storage.StorageManager;
 
@@ -175,9 +177,9 @@ public class LogicManagerTest {
     @Test
     public void execute_clear() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        model.addTask(helper.generatePerson(1));
-        model.addTask(helper.generatePerson(2));
-        model.addTask(helper.generatePerson(3));
+        model.addTask(helper.generateTask(1));
+        model.addTask(helper.generateTask(2));
+        model.addTask(helper.generateTask(3));
 
         assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new ToDoList(), Collections.emptyList());
     }
@@ -190,7 +192,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_add_invalidPersonData() {
+    public void execute_add_invalidTaskData() {
         assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
                 Name.MESSAGE_NAME_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
@@ -202,7 +204,7 @@ public class LogicManagerTest {
     public void execute_add_successful() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.adam();
+        Task toBeAdded = helper.finishUserReport();
         ToDoList expectedAB = new ToDoList();
         expectedAB.addTask(toBeAdded);
 
@@ -218,7 +220,7 @@ public class LogicManagerTest {
     public void execute_addDuplicate_notAllowed() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.adam();
+        Task toBeAdded = helper.finishUserReport();
 
         // setup starting state
         model.addTask(toBeAdded); // person already in internal address book
@@ -233,7 +235,7 @@ public class LogicManagerTest {
     public void execute_list_showsAllPersons() throws Exception {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
-        ToDoList expectedAB = helper.generateAddressBook(2);
+        ToDoList expectedAB = helper.generateToDoList(2);
         List<? extends ReadOnlyTask> expectedList = expectedAB.getTaskList();
 
         // prepare address book state
@@ -270,7 +272,7 @@ public class LogicManagerTest {
     private void assertIndexNotFoundBehaviorForCommand(String commandWord) throws Exception {
         String expectedMessage = MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
         TestDataHelper helper = new TestDataHelper();
-        List<Task> personList = helper.generatePersonList(2);
+        List<Task> personList = helper.generateTaskList(2);
 
         // set AB state to 2 persons
         model.resetData(new ToDoList());
@@ -295,7 +297,7 @@ public class LogicManagerTest {
     @Test
     public void execute_select_jumpsToCorrectPerson() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        List<Task> threePersons = helper.generatePersonList(3);
+        List<Task> threePersons = helper.generateTaskList(3);
 
         ToDoList expectedAB = helper.generateAddressBook(threePersons);
         helper.addToModel(model, threePersons);
@@ -323,7 +325,7 @@ public class LogicManagerTest {
     @Test
     public void execute_delete_removesCorrectPerson() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        List<Task> threePersons = helper.generatePersonList(3);
+        List<Task> threePersons = helper.generateTaskList(3);
 
         ToDoList expectedAB = helper.generateAddressBook(threePersons);
         expectedAB.removeTask(threePersons.get(1));
@@ -405,35 +407,47 @@ public class LogicManagerTest {
      */
     class TestDataHelper {
 
-        Task adam() throws Exception {
+        Task finishUserReport() throws Exception {
             Name name = new Name("Adam Brown");
+            StartTime startTime = new StartTime("09-03-2017 4.55 PM");
+            EndTime endTime = new EndTime("09-03-2017 8.30 PM");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, tags);
+            return new Task(name, startTime, endTime, tags);
         }
 
         /**
-         * Generates a valid person using the given seed.
+         * Generates a valid task using the given seed.
          * Running this function with the same parameter values guarantees the returned person will have the same state.
          * Each unique seed will generate a unique Person object.
          *
          * @param seed used to generate the person data field values
          */
-        Task generatePerson(int seed) throws Exception {
+        Task generateTask(int seed) throws Exception {
             return new Task(
                     new Name("Person " + seed),
+                    new StartTime("01-01-2017 4.00 PM"),
+                    new EndTime("01-01-2017 5.00 PM"),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
 
-        /** Generates the correct add command based on the person given */
+        /** Generates the correct add command based on the task given */
         String generateAddCommand(Task p) {
             StringBuffer cmd = new StringBuffer();
 
             cmd.append("add ");
 
             cmd.append(p.getName().toString());
+
+            if (p.getStartTime() != null) {
+                cmd.append(" s/" + p.getStartTime().toString());
+            }
+
+            if (p.getEndTime() != null) {
+                cmd.append(" e/" + p.getEndTime().toString());
+            }
 
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {
@@ -446,10 +460,10 @@ public class LogicManagerTest {
         /**
          * Generates an AddressBook with auto-generated persons.
          */
-        ToDoList generateAddressBook(int numGenerated) throws Exception {
-            ToDoList addressBook = new ToDoList();
-            addToAddressBook(addressBook, numGenerated);
-            return addressBook;
+        ToDoList generateToDoList(int numGenerated) throws Exception {
+            ToDoList toDoList = new ToDoList();
+            addToToDoList(toDoList, numGenerated);
+            return toDoList;
         }
 
         /**
@@ -457,22 +471,22 @@ public class LogicManagerTest {
          */
         ToDoList generateAddressBook(List<Task> persons) throws Exception {
             ToDoList addressBook = new ToDoList();
-            addToAddressBook(addressBook, persons);
+            addToToDoList(addressBook, persons);
             return addressBook;
         }
 
         /**
-         * Adds auto-generated Person objects to the given AddressBook
-         * @param addressBook The AddressBook to which the Persons will be added
+         * Adds auto-generated Task objects to the given ToDoList
+         * @param toDoList The ToDoList to which the Tasks will be added
          */
-        void addToAddressBook(ToDoList addressBook, int numGenerated) throws Exception {
-            addToAddressBook(addressBook, generatePersonList(numGenerated));
+        void addToToDoList(ToDoList toDoList, int numGenerated) throws Exception {
+            addToToDoList(toDoList, generateTaskList(numGenerated));
         }
 
         /**
          * Adds the given list of Persons to the given AddressBook
          */
-        void addToAddressBook(ToDoList addressBook, List<Task> personsToAdd) throws Exception {
+        void addToToDoList(ToDoList addressBook, List<Task> personsToAdd) throws Exception {
             for (Task p: personsToAdd) {
                 addressBook.addTask(p);
             }
@@ -483,7 +497,7 @@ public class LogicManagerTest {
          * @param model The model to which the Persons will be added
          */
         void addToModel(Model model, int numGenerated) throws Exception {
-            addToModel(model, generatePersonList(numGenerated));
+            addToModel(model, generateTaskList(numGenerated));
         }
 
         /**
@@ -496,14 +510,14 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates a list of Persons based on the flags.
+         * Generates a list of Tasks based on the flags.
          */
-        List<Task> generatePersonList(int numGenerated) throws Exception {
-            List<Task> persons = new ArrayList<>();
+        List<Task> generateTaskList(int numGenerated) throws Exception {
+            List<Task> tasks = new ArrayList<>();
             for (int i = 1; i <= numGenerated; i++) {
-                persons.add(generatePerson(i));
+                tasks.add(generateTask(i));
             }
-            return persons;
+            return tasks;
         }
 
         List<Task> generateTaskList(Task... tasks) {
@@ -516,6 +530,8 @@ public class LogicManagerTest {
         Task generateTaskWithName(String name) throws Exception {
             return new Task(
                     new Name(name),
+                    new StartTime("01-01-1995 4.00 PM"),
+                    new EndTime("01-01-1995 5.00 PM"),
                     new UniqueTagList(new Tag("tag"))
             );
         }

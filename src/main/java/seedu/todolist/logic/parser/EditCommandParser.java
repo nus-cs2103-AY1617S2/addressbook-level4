@@ -1,6 +1,8 @@
 package seedu.todolist.logic.parser;
 
 import static seedu.todolist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.todolist.logic.parser.CliSyntax.PREFIX_END;
+import static seedu.todolist.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.todolist.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -11,7 +13,7 @@ import java.util.Optional;
 import seedu.todolist.commons.exceptions.IllegalValueException;
 import seedu.todolist.logic.commands.Command;
 import seedu.todolist.logic.commands.EditCommand;
-import seedu.todolist.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.todolist.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.todolist.logic.commands.IncorrectCommand;
 import seedu.todolist.model.tag.UniqueTagList;
 
@@ -27,7 +29,9 @@ public class EditCommandParser {
     public Command parse(String args) {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_TAG);
+                new ArgumentTokenizer(PREFIX_START,
+                        PREFIX_END,
+                        PREFIX_TAG);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
@@ -36,19 +40,21 @@ public class EditCommandParser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
-            editPersonDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
-            editPersonDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
+            editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
+            editTaskDescriptor.setStartTime(ParserUtil.parseStartTime(argsTokenizer.getValue(PREFIX_START)));
+            editTaskDescriptor.setEndTime(ParserUtil.parseEndTime(argsTokenizer.getValue(PREFIX_END)));
+            editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
 
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
+        if (!editTaskDescriptor.isAnyFieldEdited()) {
             return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index.get(), editPersonDescriptor);
+        return new EditCommand(index.get(), editTaskDescriptor);
     }
 
     /**

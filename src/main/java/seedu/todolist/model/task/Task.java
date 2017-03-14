@@ -12,24 +12,34 @@ import seedu.todolist.model.tag.UniqueTagList;
 public class Task implements ReadOnlyTask {
 
     private Name name;
+    private StartTime startTime;
+    private EndTime endTime;
     private UniqueTagList tags;
     private boolean completed;
 
     /**
-     * Every field must be present and not null.
+     * name and tags must be present and not null.
+     * startTime and endTime are optional fields.
+     * @param starTime TODO
+     * @param endTime TODO
      */
-    public Task(Name name, UniqueTagList tags) {
+    public Task(Name name, StartTime startTime, EndTime endTime, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, tags);
         this.name = name;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
         this.completed = false;
     }
 
     /**
-     * Creates a copy of the given ReadOnlyPerson.
+     * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getTags());
+        this(source.getName(),
+                source.getStartTime(),
+                source.getEndTime(),
+                source.getTags());
     }
 
     public void setName(Name name) {
@@ -37,12 +47,28 @@ public class Task implements ReadOnlyTask {
         this.name = name;
     }
 
-    @Override
     public Name getName() {
         return name;
     }
 
-    @Override
+    public StartTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(StartTime startTime) {
+        assert startTime != null;
+        this.startTime = startTime;
+    }
+
+    public EndTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(EndTime endTime) {
+        assert endTime != null;
+        this.endTime = endTime;
+    }
+
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
     }
