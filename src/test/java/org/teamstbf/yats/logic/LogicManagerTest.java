@@ -38,13 +38,13 @@ import org.teamstbf.yats.model.Model;
 import org.teamstbf.yats.model.ModelManager;
 import org.teamstbf.yats.model.ReadOnlyTaskManager;
 import org.teamstbf.yats.model.TaskManager;
-import org.teamstbf.yats.model.item.Deadline;
+import org.teamstbf.yats.model.item.Date;
 import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.Location;
 import org.teamstbf.yats.model.item.Periodic;
-import org.teamstbf.yats.model.item.Timing;
+import org.teamstbf.yats.model.item.Schedule;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.tag.Tag;
 import org.teamstbf.yats.model.tag.UniqueTagList;
@@ -94,7 +94,7 @@ public class LogicManagerTest {
         logic = new LogicManager(model, new StorageManager(tempAddressBookFile, tempPreferencesFile));
         EventsCenter.getInstance().registerHandler(this);
 
-        latestSavedAddressBook = new TaskManager(model.getAddressBook()); // last saved assumed to be up to date
+        latestSavedAddressBook = new TaskManager(model.getTaskManager()); // last saved assumed to be up to date
         helpShown = false;
         targetedJumpIndex = -1; // non yet
     }
@@ -127,7 +127,7 @@ public class LogicManagerTest {
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager, List)
      */
     private void assertCommandFailure(String inputCommand, String expectedMessage) {
-        TaskManager expectedAddressBook = new TaskManager(model.getAddressBook());
+        TaskManager expectedAddressBook = new TaskManager(model.getTaskManager());
         List<ReadOnlyEvent> expectedShownList = new ArrayList<>(model.getFilteredTaskList());
         assertCommandBehavior(true, inputCommand, expectedMessage, expectedAddressBook, expectedShownList);
     }
@@ -157,7 +157,7 @@ public class LogicManagerTest {
         assertEquals(expectedShownList, model.getFilteredTaskList());
 
         //Confirm the state of data (saved and in-memory) is as expected
-        assertEquals(expectedAddressBook, model.getAddressBook());
+        assertEquals(expectedAddressBook, model.getTaskManager());
         assertEquals(expectedAddressBook, latestSavedAddressBook);
     }
 
@@ -204,9 +204,9 @@ public class LogicManagerTest {
         assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
                 Title.MESSAGE_NAME_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
-                Deadline.MESSAGE_DEADLINE_CONSTRAINTS);
+                Date.MESSAGE_DEADLINE_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
-                Timing.MESSAGE_TIMING_CONSTRAINTS);
+                Schedule.MESSAGE_TIMING_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
@@ -224,7 +224,7 @@ public class LogicManagerTest {
         assertCommandSuccess(helper.generateAddCommand(toBeAdded),
                 String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
                 expectedAB,
-                expectedAB.getPersonList());
+                expectedAB.getTaskList());
 
     }
 
@@ -248,7 +248,7 @@ public class LogicManagerTest {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
         TaskManager expectedAB = helper.generateAddressBook(2);
-        List<? extends ReadOnlyEvent> expectedList = expectedAB.getPersonList();
+        List<? extends ReadOnlyEvent> expectedList = expectedAB.getTaskList();
 
         // prepare address book state
         helper.addToModel(model, 2);
@@ -317,7 +317,7 @@ public class LogicManagerTest {
         assertCommandSuccess("select 2",
                 String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, 2),
                 expectedAB,
-                expectedAB.getPersonList());
+                expectedAB.getTaskList());
         assertEquals(1, targetedJumpIndex);
         assertEquals(model.getFilteredTaskList().get(1), threePersons.get(1));
     }
@@ -346,7 +346,7 @@ public class LogicManagerTest {
         assertCommandSuccess("delete 2",
                 String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, threePersons.get(1)),
                 expectedAB,
-                expectedAB.getPersonList());
+                expectedAB.getTaskList());
     }
 
 
@@ -423,8 +423,8 @@ public class LogicManagerTest {
             Title name = new Title("sleep");
             Location location = new Location("bed");
             Periodic period = new Periodic("none");
-            Timing startTime = new Timing("12:00am");
-            Timing endTime = new Timing("8:00am");
+            Schedule startTime = new Schedule("12:00am");
+            Schedule endTime = new Schedule("8:00am");
             Description description = new Description("oh no can't sleep i'm tired");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
@@ -441,8 +441,8 @@ public class LogicManagerTest {
          */
         Event generatePerson(int seed) throws Exception {
             return new Event(
-                    new Title("person"+ seed),new Location("bed"+ seed),new Periodic("none"),new Timing("12:00am"),
-                    new Timing("8:00am"), new Description("oh no can't sleep i'm tired"+ seed),
+                    new Title("person"+ seed),new Location("bed"+ seed),new Periodic("none"),new Schedule("12:00am"),
+                    new Schedule("8:00am"), new Description("oh no can't sleep i'm tired"+ seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -542,8 +542,8 @@ public class LogicManagerTest {
                     new Title(name),
                     new Location("home"),
                     new Periodic("daily"),
-                    new Timing("7:00am"),
-                    new Timing("9:00am"),
+                    new Schedule("7:00am"),
+                    new Schedule("9:00am"),
                     new Description("House of 1"),
                     new UniqueTagList(new Tag("tag"))
             );

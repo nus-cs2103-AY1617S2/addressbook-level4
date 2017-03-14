@@ -3,6 +3,8 @@ package org.teamstbf.yats.logic.commands;
 import java.util.List;
 import java.util.Optional;
 
+import javax.tools.DocumentationTool.Location;
+
 import org.teamstbf.yats.commons.core.Messages;
 import org.teamstbf.yats.commons.util.CollectionUtil;
 import org.teamstbf.yats.logic.commands.exceptions.CommandException;
@@ -10,9 +12,9 @@ import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.Periodic;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
-import org.teamstbf.yats.model.item.Timing;
+import org.teamstbf.yats.model.item.Schedule;
 import org.teamstbf.yats.model.item.Title;
-import org.teamstbf.yats.model.item.Deadline;
+import org.teamstbf.yats.model.item.Date;
 import org.teamstbf.yats.model.item.UniqueEventList;
 import org.teamstbf.yats.model.tag.UniqueTagList;
 
@@ -71,18 +73,21 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Task} with the details of {@code taskToEdit}
+     * edited with {@code editTaskDescriptor}.
      */
-    private static Event createEditedTask(ReadOnlyEvent personToEdit,
-                                             EditTaskDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Event createEditedTask(ReadOnlyEvent taskToEdit,
+                                             EditTaskDescriptor editTaskDescriptor) {
+        assert taskToEdit != null;
 
-        Title updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getTitle);
+        Title updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getTitle);
         // Deadline updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getDeadline);
         // Timing updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getTiming);
-        Description updatedAddress = editPersonDescriptor.getDescription().orElseGet(personToEdit::getDescription);
-        UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
+        Schedule updatedStartTime = editTaskDescriptor.getStartTime().orElseGet(taskToEdit::getStartTime);
+        Schedule updatedEndTime = editTaskDescriptor.getStartTime().orElseGet(taskToEdit::getEndTime);
+        Date updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(taskToEdit::getDeadline);
+        Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
+        UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
         return new Event();
     }
@@ -93,8 +98,9 @@ public class EditCommand extends Command {
      */
     public static class EditTaskDescriptor {
         private Optional<Title> name = Optional.empty();
-        private Optional<Deadline> deadline = Optional.empty();
-        private Optional<Timing> timing = Optional.empty();
+        private Optional<Date> deadline = Optional.empty();
+        private Optional<Schedule> startTime = Optional.empty();
+        private Optional<Schedule> endTime = Optional.empty();
         private Optional<Description> description = Optional.empty();
         private Optional<Periodic> periodic = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
@@ -104,7 +110,8 @@ public class EditCommand extends Command {
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.name = toCopy.getName();
             this.deadline = toCopy.getDeadline();
-            this.timing = toCopy.getTiming();
+            this.startTime = toCopy.getStartTime();
+            this.endTime = toCopy.getStartTime();
             this.description = toCopy.getDescription();
             this.periodic = toCopy.getPeriodic();
             this.tags = toCopy.getTags();
@@ -114,7 +121,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.deadline, this.timing, this.description, this.periodic, this.tags);
+            return CollectionUtil.isAnyPresent(this.name, this.deadline, this.startTime, this.description, this.periodic, this.tags);
         }
 
         public void setName(Optional<Title> name) {
@@ -126,22 +133,31 @@ public class EditCommand extends Command {
             return name;
         }
 
-        public void setDeadline(Optional<Deadline> deadline) {
+        public void setDeadline(Optional<Date> deadline) {
             assert deadline != null;
             this.deadline = deadline;
         }
 
-        public Optional<Deadline> getDeadline() {
+        public Optional<Date> getDeadline() {
             return deadline;
         }
 
-        public void setTiming(Optional<Timing> timing) {
-            assert timing != null;
-            this.timing = timing;
+        public void setStartTime(Optional<Schedule> schedule) {
+            assert schedule != null;
+            this.startTime = schedule;
         }
 
-        public Optional<Timing> getTiming() {
-            return timing;
+        public Optional<Schedule> getStartTime() {
+            return startTime;
+        }
+        
+        public void setEndTime(Optional<Schedule> schedule) {
+        	assert schedule != null;
+        	this.endTime = schedule;
+        }
+        
+        public Optional<Schedule> getEndTime() {
+        	return endTime;
         }
 
         public void setDescription(Optional<Description> description) {

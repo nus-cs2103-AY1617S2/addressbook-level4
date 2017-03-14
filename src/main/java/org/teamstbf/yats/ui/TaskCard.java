@@ -24,6 +24,8 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label endtime;
+    @FXML
     private FlowPane tags;
 
     public TaskCard(ReadOnlyEvent person, int displayedIndex) {
@@ -33,6 +35,7 @@ public class TaskCard extends UiPart<Region> {
         phone.setText(person.getLocation().value);
         address.setText(person.getDescription().value);
         email.setText(person.getStartTime().value);
+        endtime.setText(person.getEndTime().value);
         initTags(person);
     }
 

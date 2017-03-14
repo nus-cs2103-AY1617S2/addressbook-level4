@@ -6,8 +6,8 @@ import static org.teamstbf.yats.commons.core.Messages.MESSAGE_INVALID_COMMAND_FO
 import org.junit.Test;
 import org.teamstbf.yats.commons.core.Messages;
 import org.teamstbf.yats.logic.commands.EditCommand;
-import org.teamstbf.yats.model.item.Deadline;
-import org.teamstbf.yats.model.item.Timing;
+import org.teamstbf.yats.model.item.Date;
+import org.teamstbf.yats.model.item.Schedule;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.tag.Tag;
 import org.teamstbf.yats.testutil.EventBuilder;
@@ -94,10 +94,10 @@ public class EditCommandTest extends AddressBookGuiTest {
         assertResultMessage(Title.MESSAGE_NAME_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 p/abcd");
-        assertResultMessage(Deadline.MESSAGE_DEADLINE_CONSTRAINTS);
+        assertResultMessage(Date.MESSAGE_DEADLINE_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 e/yahoo!!!");
-        assertResultMessage(Timing.MESSAGE_TIMING_CONSTRAINTS);
+        assertResultMessage(Schedule.MESSAGE_TIMING_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 a/");
         // assertResultMessage(Description.MESSAGE_ADDRESS_CONSTRAINTS);

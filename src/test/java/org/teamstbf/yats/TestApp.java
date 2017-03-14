@@ -7,7 +7,7 @@ import org.teamstbf.yats.commons.core.Config;
 import org.teamstbf.yats.commons.core.GuiSettings;
 import org.teamstbf.yats.model.ReadOnlyTaskManager;
 import org.teamstbf.yats.model.UserPrefs;
-import org.teamstbf.yats.storage.XmlSerializableAddressBook;
+import org.teamstbf.yats.storage.XmlSerializableTaskManager;
 import org.teamstbf.yats.testutil.TestUtil;
 
 import javafx.stage.Screen;
@@ -38,7 +38,7 @@ public class TestApp extends MainApp {
         // If some initial local data has been provided, write those to the file
         if (initialDataSupplier.get() != null) {
             TestUtil.createDataFileWithData(
-                    new XmlSerializableAddressBook(this.initialDataSupplier.get()),
+                    new XmlSerializableTaskManager(this.initialDataSupplier.get()),
                     this.saveFileLocation);
         }
     }

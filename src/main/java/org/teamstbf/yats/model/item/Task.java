@@ -12,8 +12,8 @@ import org.teamstbf.yats.model.tag.UniqueTagList;
 public class Task implements ReadOnlyItem {
 
 	private Title title;
-	private Deadline deadline;
-	private Timing timing;
+	private Date deadline;
+	private Schedule schedule;
 	private Description description;
 	private Periodic periodic;
 
@@ -22,11 +22,11 @@ public class Task implements ReadOnlyItem {
 	/**
 	 * Every field must be present and not null.
 	 */
-	public Task(Title title, Deadline deadline, Timing timing, Description description, UniqueTagList tags) {
-		assert !CollectionUtil.isAnyNull(title, deadline, timing, description, tags);
+	public Task(Title title, Date deadline, Schedule schedule, Description description, UniqueTagList tags) {
+		assert !CollectionUtil.isAnyNull(title, deadline, schedule, description, tags);
 		this.title = title;
 		this.deadline = deadline;
-		this.timing = timing;
+		this.schedule = schedule;
 		this.description = description;
 		this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
 	}
@@ -48,24 +48,24 @@ public class Task implements ReadOnlyItem {
 		return title;
 	}
 
-	public void setDeadline(Deadline deadline) {
+	public void setDeadline(Date deadline) {
 		assert deadline != null;
 		this.deadline = deadline;
 	}
 
 	@Override
-	public Deadline getDeadline() {
+	public Date getDeadline() {
 		return deadline;
 	}
 
-	public void setTiming(Timing timing) {
-		assert timing != null;
-		this.timing = timing;
+	public void setTiming(Schedule schedule) {
+		assert schedule != null;
+		this.schedule = schedule;
 	}
 
 	@Override
-	public Timing getTiming() {
-		return timing;
+	public Schedule getTiming() {
+		return schedule;
 	}
 
 	public void setDescription(Description description) {
@@ -123,7 +123,7 @@ public class Task implements ReadOnlyItem {
 	@Override
 	public int hashCode() {
 		// use this method for custom fields hashing instead of implementing your own
-		return Objects.hash(title, deadline, timing, description, tags);
+		return Objects.hash(title, deadline, schedule, description, tags);
 	}
 
 	@Override
