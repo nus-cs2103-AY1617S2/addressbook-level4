@@ -25,7 +25,7 @@ public class MarkCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks an existing task in task list as done "
             + "by the index number used in the last task listing. "
-            + "Parameters: INDEX (must be a positive integer)" + "Example: " + COMMAND_WORD + " mark 1";
+            + "Parameters: INDEX (must be a positive integer)" + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_MARK_TASK_SUCCESS = "Marked %1$s as complete!";
     public static final String MESSAGE_UNMARK_TASK_SUCCESS = "Unmark %1$s as complete!";
@@ -39,7 +39,7 @@ public class MarkCommand extends Command {
      *            edit
      * @param markTaskDescriptor details to edit the task with
      */
-    public MarkCommand(int targetIndex, MarkTaskDescriptor markTaskDescriptor) {
+    public MarkCommand(int targetIndex) {
         assert targetIndex > 0;
         assert markTaskDescriptor != null;
 

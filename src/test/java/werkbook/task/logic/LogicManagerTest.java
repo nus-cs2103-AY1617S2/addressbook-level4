@@ -443,20 +443,6 @@ public class LogicManagerTest {
         assertCommandSuccess("undo", UndoCommand.MESSAGE_SUCCESS, expectedTaskList, expectedTaskList.getTaskList());
     }
 
-    @Test
-    public void execute_mark_tagShowsOpposite() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.adam();
-        TaskList expectedTaskList = new TaskList();
-        expectedTaskList.addTask(toBeAdded);
-
-        // execute command and verify result
-        assertCommandSuccess(helper.generateAddCommand(toBeAdded),
-                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
-                expectedTaskList,
-                expectedTaskList.getTaskList());
-    }
-
     /**
      * A utility class to generate test data.
      */
@@ -482,7 +468,7 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(new Name("Task " + seed), new Description("" + Math.abs(seed)),
                     new StartDateTime("01/01/2016 0900"), new EndDateTime("02/01/2016 1000"),
-                    new UniqueTagList());
+                    new UniqueTagList("Incomplete"));
         }
 
         /** Generates the correct add command based on the task given */

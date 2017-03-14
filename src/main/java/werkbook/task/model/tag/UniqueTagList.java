@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import javafx.collections.FXCollections;
@@ -112,6 +113,18 @@ public class UniqueTagList implements Iterable<Tag> {
     public void mergeFrom(UniqueTagList from) {
         final Set<Tag> alreadyInside = this.toSet();
         from.internalList.stream().filter(tag -> !alreadyInside.contains(tag)).forEach(internalList::add);
+    }
+
+    public void mergeFromFirst(Optional<UniqueTagList> from) {
+        if (!from.isPresent()) {
+            return;
+        }
+
+        final Set<Tag> alreadyInside = this.toSet();
+        // Remove all behind first element, then add the new tags in
+        internalList.remove(1, internalList.size());
+        from.get().internalList.stream().filter(tag -> !alreadyInside.contains(tag))
+                .forEach(internalList::add);
     }
 
     /**

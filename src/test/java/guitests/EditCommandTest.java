@@ -42,7 +42,7 @@ public class EditCommandTest extends TaskListGuiTest {
         int taskListIndex = 2;
 
         TestTask taskToEdit = expectedTaskList[taskListIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withTags("sweetie", "bestie").build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withTags("Incomplete", "sweetie", "bestie").build();
 
         assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit, editedTask);
     }
@@ -53,7 +53,7 @@ public class EditCommandTest extends TaskListGuiTest {
         int taskListIndex = 2;
 
         TestTask taskToEdit = expectedTaskList[taskListIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withTags().build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withTags("Incomplete").build();
 
         assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit, editedTask);
     }

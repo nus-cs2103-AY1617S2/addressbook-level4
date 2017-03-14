@@ -93,10 +93,11 @@ public class EditCommand extends Command {
                 .orElseGet(taskToEdit::getStartDateTime);
         EndDateTime updatedEndDateTime = editTaskDescriptor.getEndDateTime()
                 .orElseGet(taskToEdit::getEndDateTime);
-        UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
+        // Must make it not override first tag
+        taskToEdit.getTags().mergeFromFirst(editTaskDescriptor.getTags());
 
         return new Task(updatedName, updatedDescription, updatedStartDateTime, updatedEndDateTime,
-                updatedTags);
+                taskToEdit.getTags());
     }
 
     /**
