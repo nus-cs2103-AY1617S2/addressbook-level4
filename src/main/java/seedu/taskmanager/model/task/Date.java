@@ -4,14 +4,12 @@ import seedu.taskmanager.commons.exceptions.IllegalValueException;
 
 /**
  * Represents date of a task in ProcrastiNomore. Guarantees: immutable; is valid
- * as declared in {@link #isValidEmail(String)}
+ * as declared in {@link #isValidDate(String)}
  */
 public class Date {
 
 	public static final String DATE_VALIDATION_REGEX1 = "\\d{2}/\\d{2}/\\d{2}";
 	public static final String DATE_VALIDATION_REGEX2 = "[a-zA-Z]+";
-	public static final String DATE_VALIDATION_REGEX3 = "[a-zA-Z]+ \\d+";
-	public static final String DATE_VALIDATION_REGEX4 = "(\\d{2}/\\d{2}/\\d{2}) (\\d+)";
 	public static final String EMPTY_FIELD = "EMPTY_FIELD";
 	public static final String MESSAGE_DATE_CONSTRAINTS = "Task date should be either a day (e.g. thursday) or a date with the format: DD/MM/YY (e.g. 03/03/17)\nMay also include time (e.g. 1400) behind date \nEnter HELP for user guide with detailed explanations of all commands";
 
@@ -37,7 +35,6 @@ public class Date {
 	 */
 	public static boolean isValidDate(String test) {
 		return test.matches(DATE_VALIDATION_REGEX1) || test.matches(DATE_VALIDATION_REGEX2)
-				|| test.matches(DATE_VALIDATION_REGEX3) || test.matches(DATE_VALIDATION_REGEX4)
 				|| test.matches(EMPTY_FIELD);
 	}
 

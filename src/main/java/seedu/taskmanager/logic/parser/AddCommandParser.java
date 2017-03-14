@@ -155,6 +155,66 @@ public class AddCommandParser {
 			if (date.matches(DATE_VALIDATION_REGEX2)) {
 				date = CurrentDate.getNewDate(date);
 			}
+			
+			if (startTime.matches("[a-zA-Z]+")){
+				StringBuilder stringBuilderStartTime = new StringBuilder();
+
+				stringBuilderStartTime.append(startTime);
+				stringBuilderStartTime.append(" ");
+				stringBuilderStartTime.append("0000");
+
+				startTime = stringBuilderStartTime.toString();
+			}
+
+			if (endTime.matches("[a-zA-Z]+")){
+				StringBuilder stringBuilderEndTime = new StringBuilder();
+
+				stringBuilderEndTime.append(endTime);
+				stringBuilderEndTime.append(" ");
+				stringBuilderEndTime.append("2359");
+
+				endTime = stringBuilderEndTime.toString();
+			}
+
+			if ((!startTime.equals("EMPTY_FIELD")) && (!startTime.equals("\\d+"))) {
+				String[] splitedStartTime = startTime.split("\\s+");
+				try {
+					if (splitedStartTime[0].matches(DATE_VALIDATION_REGEX2)) {
+						splitedStartTime[0] = CurrentDate.getNewDate(splitedStartTime[0]);
+					}
+					StringBuilder stringBuilder = new StringBuilder();
+
+					stringBuilder.append(splitedStartTime[0]);
+					stringBuilder.append(" ");
+					stringBuilder.append(splitedStartTime[1]);
+
+					startTime = stringBuilder.toString();
+				} catch (ArrayIndexOutOfBoundsException aioobe) {
+					if (splitedStartTime[0].matches(DATE_VALIDATION_REGEX2)) {
+						startTime = CurrentDate.getNewDate(splitedStartTime[0]);
+					}
+				}
+			}
+
+			if ((!endTime.equals("EMPTY_FIELD")) && (!endTime.matches("\\d+"))) {
+				String[] splitedEndTime = endTime.split("\\s+");
+				try {
+					if (splitedEndTime[0].matches(DATE_VALIDATION_REGEX2)) {
+						splitedEndTime[0] = CurrentDate.getNewDate(splitedEndTime[0]);
+					}
+					StringBuilder stringBuilder = new StringBuilder();
+
+					stringBuilder.append(splitedEndTime[0]);
+					stringBuilder.append(" ");
+					stringBuilder.append(splitedEndTime[1]);
+
+					endTime = stringBuilder.toString();
+				} catch (ArrayIndexOutOfBoundsException aioobe) {
+					if (splitedEndTime[0].matches(DATE_VALIDATION_REGEX2)) {
+						endTime = CurrentDate.getNewDate(splitedEndTime[0]);
+					}
+				}
+			}
 
 			return new AddCommand(taskName, date, startTime, endTime
 			// ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_CATEGORY)

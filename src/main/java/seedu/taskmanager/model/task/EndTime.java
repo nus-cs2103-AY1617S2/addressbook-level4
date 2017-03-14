@@ -12,8 +12,7 @@ public class EndTime {
 	public static final String ENDTIME_VALIDATION_REGEX1 = "\\d+";
 	public static final String ENDTIME_VALIDATION_REGEX2 = "[a-zA-Z]+";
 	public static final String ENDTIME_VALIDATION_REGEX3 = "\\d{2}/\\d{2}/\\d{2}";
-	public static final String ENDTIME_VALIDATION_REGEX4 = "[a-zA-Z]+ \\d+";
-	public static final String ENDTIME_VALIDATION_REGEX5 = "(\\d{2}/\\d{2}/\\d{2}) (\\d+)";
+	public static final String ENDTIME_VALIDATION_REGEX4 = "(\\d{2}/\\d{2}/\\d{2}) (\\d+)";
 	public static final String MESSAGE_ENDTIME_CONSTRAINTS = "End time for task should only contain a day (e.g. thursday) or a date with the format: DD/MM/YY (e.g. 03/03/17)\nMay also include time (e.g. 1400) behind date in some instances\nEnter HELP for user guide with detailed explanations of all commands";
 
 	public final String value;
@@ -39,7 +38,7 @@ public class EndTime {
 	public static boolean isValidEndTime(String test) {
 		return test.matches(ENDTIME_VALIDATION_REGEX1) || test.matches(ENDTIME_VALIDATION_REGEX2)
 				|| test.matches(ENDTIME_VALIDATION_REGEX3) || test.matches(ENDTIME_VALIDATION_REGEX4)
-				|| test.matches(ENDTIME_VALIDATION_REGEX5) || test.matches(EMPTY_FIELD);
+				|| test.matches(EMPTY_FIELD);
 	}
 
 	@Override

@@ -13,8 +13,7 @@ public class StartTime {
 	public static final String STARTTIME_VALIDATION_REGEX1 = "\\d+";
 	public static final String STARTTIME_VALIDATION_REGEX2 = "[a-zA-Z]+";
 	public static final String STARTTIME_VALIDATION_REGEX3 = "\\d{2}/\\d{2}/\\d{2}";
-	public static final String STARTTIME_VALIDATION_REGEX4 = "[a-zA-Z]+ \\d+";
-	public static final String STARTTIME_VALIDATION_REGEX5 = "(\\d{2}/\\d{2}/\\d{2}) (\\d+)";
+	public static final String STARTTIME_VALIDATION_REGEX4 = "(\\d{2}/\\d{2}/\\d{2}) (\\d+)";
 
 	public final String value;
 
@@ -39,7 +38,7 @@ public class StartTime {
 	public static boolean isValidStartTime(String test) {
 		return test.matches(STARTTIME_VALIDATION_REGEX1) || test.matches(STARTTIME_VALIDATION_REGEX2)
 				|| test.matches(STARTTIME_VALIDATION_REGEX3) || test.matches(STARTTIME_VALIDATION_REGEX4)
-				|| test.matches(STARTTIME_VALIDATION_REGEX5) || test.matches(EMPTY_FIELD);
+				|| test.matches(EMPTY_FIELD);
 	}
 
 	@Override
