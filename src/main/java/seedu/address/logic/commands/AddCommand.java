@@ -54,8 +54,7 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName.trim()));
         }
-        this.toAdd = new TaskWithDeadline(new Name(name), new UniqueTagList(tagSet), Deadline, false, false, null,
-                false, false, false);
+        this.toAdd = new TaskWithDeadline(new Name(name), new UniqueTagList(tagSet), Deadline, null, false);
     }
 
     /**
@@ -69,8 +68,7 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName.trim()));
         }
-        this.toAdd = new TaskWithDeadline(new Name(name), new UniqueTagList(tagSet), Deadline, false, false,
-                StartingTime, false, false, false);
+        this.toAdd = new TaskWithDeadline(new Name(name), new UniqueTagList(tagSet), Deadline, StartingTime, false);
     }
 
     @Override
