@@ -6,14 +6,14 @@ By : `T09B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`
 
 1. [Introduction](#introduction)
 2. [Quick Start](#quick-start)
-3. [Features](#features)
-    3.1. [Adding Tasks](#adding-tasks)
-    3.2. [Viewing Tasks](#viewing-tasks)
-    3.3. [Managing Tasks](#managing-tasks)
-    3.4. [Managing Tags](#managing-tags)
-    3.5. [Undo/Redo Commands](#undoredo-commands)
-    3.6. [Miscellaneous](#miscellaneous)
-    3.6. [Advanced Usage](#advanced-usage)
+3. [Features](#features)<br>
+    3.1. [Adding Tasks](#adding-tasks)<br>
+    3.2. [Viewing Tasks](#viewing-tasks)<br>
+    3.3. [Managing Tasks](#managing-tasks)<br>
+    3.4. [Managing Tags](#managing-tags)<br>
+    3.5. [Undo/Redo Commands](#undoredo-commands)<br>
+    3.6. [Miscellaneous](#miscellaneous)<br>
+    3.6. [Advanced Usage](#advanced-usage)<br>
 4. [FAQ](#faq)
 5. [Command Summary](#command-summary)
 
@@ -50,14 +50,12 @@ At the start of every working day, go through your inbox and `add` new tasks to 
 Rinse and repeat until you've no more tasks left for the day!
 
 ## Features
-:::info
-**<span style="font-size:20px">Input Format</span>**
+
+> **<span style="font-size:20px">Input Format</span>**
 <br>
-- normal text denotes command keywords
-- `< >` denotes parameters
-- `[ ]` denotes that the parameter is optional
-<br>
-:::
+>- normal text denotes command keywords
+>- `< >` denotes parameters
+>- `[ ]` denotes that the parameter is optional
 ### Adding Tasks
 
 #### Adding a task
@@ -79,9 +77,7 @@ The first step to organizing your tasks is to make sure you have all of them in 
 * `add Study for CS2106 due 3pm today`
 * `add Study for CS2106 due 02/03/17`
 
-:::info
-**Note**: Do not use the keywords like `due` in your `<task_name>` or **Today** might misunderstand
-:::
+>**Note**: Do not use the keywords like `due` in your `<task_name>` or **Today** might misunderstand
 
 #### Adding a new event
 
