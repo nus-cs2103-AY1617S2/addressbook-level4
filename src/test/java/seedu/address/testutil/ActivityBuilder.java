@@ -4,7 +4,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Location;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.Priority;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -44,8 +44,8 @@ public class ActivityBuilder {
         return this;
     }
 
-    public ActivityBuilder withPhone(String phone) throws IllegalValueException {
-        this.activity.setPhone(new Phone(phone));
+    public ActivityBuilder withPriority(String priority) throws IllegalValueException {
+        this.activity.setPriority(new Priority(priority));
         return this;
     }
 

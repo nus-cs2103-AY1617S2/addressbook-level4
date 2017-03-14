@@ -8,10 +8,9 @@ import org.junit.Test;
 import guitests.guihandles.ActivityCardHandle;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Location;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.Priority;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.ActivityBuilder;
 import seedu.address.testutil.TestActivity;
@@ -25,10 +24,10 @@ public class EditCommandTest extends WhatsLeftGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby p/91234567 e/bobby@gmail.com a/Block 123, Bobby Street 3 t/husband";
+        String detailsToEdit = "Bobby p/high e/bobby@gmail.com l/Block 123, Bobby Street 3 t/husband";
         int whatsLeftIndex = 1;
 
-        TestActivity editedActivity = new ActivityBuilder().withDescription("Bobby").withPhone("91234567")
+        TestActivity editedActivity = new ActivityBuilder().withDescription("Bobby").withPriority("high")
                 .withEmail("bobby@gmail.com").withLocation("Block 123, Bobby Street 3").withTags("husband").build();
 
         assertEditSuccess(whatsLeftIndex, whatsLeftIndex, detailsToEdit, editedActivity);
@@ -86,20 +85,20 @@ public class EditCommandTest extends WhatsLeftGuiTest {
     public void edit_noFieldsSpecified_failure() {
         commandBox.runCommand("edit 1");
         assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
+
+        commandBox.runCommand("edit 1  ");
+        assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
     }
 
     @Test
     public void edit_invalidValues_failure() {
-        commandBox.runCommand("edit 1 *&");
-        assertResultMessage(Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
-
         commandBox.runCommand("edit 1 p/abcd");
-        assertResultMessage(Phone.MESSAGE_PHONE_CONSTRAINTS);
+        assertResultMessage(Priority.MESSAGE_PRIORITY_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 e/yahoo!!!");
         assertResultMessage(Email.MESSAGE_EMAIL_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 a/");
+        commandBox.runCommand("edit 1 l/");
         assertResultMessage(Location.MESSAGE_LOCATION_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 t/*&");
@@ -108,8 +107,8 @@ public class EditCommandTest extends WhatsLeftGuiTest {
 
     @Test
     public void edit_duplicateActivity_failure() {
-        commandBox.runCommand("edit 3 Alice Pauline p/85355255 e/alice@gmail.com "
-                                + "a/123, Jurong West Ave 6, #08-111 t/friends");
+        commandBox.runCommand("edit 3 Alice Pauline p/high e/alice@gmail.com "
+                                + "l/123, Jurong West Ave 6, #08-111 t/friends");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_ACTIVITY);
     }
 

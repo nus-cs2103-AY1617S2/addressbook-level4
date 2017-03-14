@@ -12,7 +12,7 @@ import seedu.address.model.tag.UniqueTagList;
 public class Activity implements ReadOnlyActivity {
 
     private Description description;
-    private Phone phone;
+    private Priority priority;
     private Email email;
     private Location location;
 
@@ -21,10 +21,10 @@ public class Activity implements ReadOnlyActivity {
     /**
      * Every field must be present and not null.
      */
-    public Activity(Description description, Phone phone, Email email, Location location, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(description, phone, email, location, tags);
+    public Activity(Description description, Priority priority, Email email, Location location, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(description, priority, email, location, tags);
         this.description = description;
-        this.phone = phone;
+        this.priority = priority;
         this.email = email;
         this.location = location;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
@@ -34,7 +34,7 @@ public class Activity implements ReadOnlyActivity {
      * Creates a copy of the given ReadOnlyActivity.
      */
     public Activity(ReadOnlyActivity source) {
-        this(source.getDescription(), source.getPhone(), source.getEmail(), source.getLocation(), source.getTags());
+        this(source.getDescription(), source.getPriority(), source.getEmail(), source.getLocation(), source.getTags());
     }
 
     public void setDescription(Description description) {
@@ -47,14 +47,14 @@ public class Activity implements ReadOnlyActivity {
         return description;
     }
 
-    public void setPhone(Phone phone) {
-        assert phone != null;
-        this.phone = phone;
+    public void setPriority(Priority priority) {
+        assert priority != null;
+        this.priority = priority;
     }
 
     @Override
-    public Phone getPhone() {
-        return phone;
+    public Priority getPriority() {
+        return priority;
     }
 
     public void setEmail(Email email) {
@@ -96,7 +96,7 @@ public class Activity implements ReadOnlyActivity {
         assert replacement != null;
 
         this.setDescription(replacement.getDescription());
-        this.setPhone(replacement.getPhone());
+        this.setPriority(replacement.getPriority());
         this.setEmail(replacement.getEmail());
         this.setLocation(replacement.getLocation());
         this.setTags(replacement.getTags());
@@ -112,7 +112,7 @@ public class Activity implements ReadOnlyActivity {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(description, phone, email, location, tags);
+        return Objects.hash(description, priority, email, location, tags);
     }
 
     @Override

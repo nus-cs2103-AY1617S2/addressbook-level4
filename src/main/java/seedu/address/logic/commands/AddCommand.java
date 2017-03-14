@@ -9,7 +9,7 @@ import seedu.address.model.person.Activity;
 import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Location;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.Priority;
 import seedu.address.model.person.UniqueActivityList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
@@ -23,9 +23,9 @@ public class AddCommand extends Command {
 
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an activity to WhatsLeft. "
-            + "Parameters: DESCRIPTION p/PHONE e/EMAIL l/LOCATION  [t/TAG]...\n"
+            + "Parameters: DESCRIPTION p/PRIORITY e/EMAIL l/LOCATION  [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " Project Discussion p/98765432 e/johnd@gmail.com l/discussion room 4 t/friends t/owesMoney";
+            + " Project Discussion p/high e/johnd@gmail.com l/discussion room 4 t/friends t/owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New activity added: %1$s";
     public static final String MESSAGE_DUPLICATE_ACTIVITY = "This activity already exists in WhatsLeft";
@@ -46,7 +46,7 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Activity(
                 new Description(description),
-                new Phone(phone),
+                new Priority(phone),
                 new Email(email),
                 new Location(location),
                 new UniqueTagList(tagSet)

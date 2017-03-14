@@ -16,8 +16,8 @@ import seedu.address.model.tag.UniqueTagList;
  */
 public class ActivityCardHandle extends GuiHandle {
     private static final String DESCRIPTION_FIELD_ID = "#description";
-    private static final String LOCATION_FIELD_ID = "#location";
-    private static final String PHONE_FIELD_ID = "#phone";
+    private static final String LOCATION_FIELD_ID = "#locations";
+    private static final String PRIORITY_FIELD_ID = "#priority";
     private static final String EMAIL_FIELD_ID = "#email";
     private static final String TAGS_FIELD_ID = "#tags";
 
@@ -40,8 +40,8 @@ public class ActivityCardHandle extends GuiHandle {
         return getTextFromLabel(LOCATION_FIELD_ID);
     }
 
-    public String getPhone() {
-        return getTextFromLabel(PHONE_FIELD_ID);
+    public String getPriority() {
+        return getTextFromLabel(PRIORITY_FIELD_ID);
     }
 
     public String getEmail() {
@@ -74,7 +74,7 @@ public class ActivityCardHandle extends GuiHandle {
 
     public boolean isSameActivity(ReadOnlyActivity activity) {
         return getDescription().equals(activity.getDescription().description)
-                && getPhone().equals(activity.getPhone().value)
+                && getPriority().equals(activity.getPriority().value)
                 && getEmail().equals(activity.getEmail().value)
                 && getLocation().equals(activity.getLocation().value)
                 && getTags().equals(getTags(activity.getTags()));
@@ -85,7 +85,7 @@ public class ActivityCardHandle extends GuiHandle {
         if (obj instanceof ActivityCardHandle) {
             ActivityCardHandle handle = (ActivityCardHandle) obj;
             return getDescription().equals(handle.getDescription())
-                    && getPhone().equals(handle.getPhone())
+                    && getPriority().equals(handle.getPriority())
                     && getEmail().equals(handle.getEmail())
                     && getLocation().equals(handle.getLocation())
                     && getTags().equals(handle.getTags());
