@@ -46,26 +46,11 @@ public interface Model {
     /** Returns the filtered completed task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getCompletedTaskList();
 
-    /** Updates the filter of the filtered task list to show all tasks */
-    void updateFilteredListToShowAllNonFloating();
-
-    /** Updates the filter of the filtered task list to show all floating tasks */
-    void updateFilteredListToShowAllFloatingTasks();
-
-    /** Updates the filter of the filtered task list to show all completed tasks */
-    void updateFilteredListToShowAllCompletedTasks();
-
-    /** Updates the filter of the filtered task list to show all tasks */
-    void updateFilteredListToShowFilteredNonFloatingTasks(Set<String> keywords);
-
-    /** Updates the filter of the filtered task list to show all floating tasks */
-    void updateFilteredListToShowFilteredFloatingTasks(Set<String> keywords);
-
-    /** Updates the filter of the filtered task list to show all completed tasks */
-    void updateFilteredListToShowFilteredCompletedTasks(Set<String> keywords);
+    /** Updates the filter of the filtered task lists to show all tasks */
+    void updateFilteredTaskListToShowAllTasks();
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
-    void updateFilteredTaskList(Set<String> keywords);
+    void updateFilteredTaskListToShowFilteredTasks(Set<String> keywords);
 
     /**
      * Overwrites AddressBook state to 1 step forwards.

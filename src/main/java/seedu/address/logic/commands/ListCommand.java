@@ -13,9 +13,7 @@ public class ListCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        model.updateFilteredListToShowAllNonFloating();
-        model.updateFilteredListToShowAllFloatingTasks();
-        model.updateFilteredListToShowAllCompletedTasks();
+        model.updateFilteredTaskListToShowAllTasks();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

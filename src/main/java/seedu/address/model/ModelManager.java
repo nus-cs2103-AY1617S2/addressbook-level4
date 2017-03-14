@@ -34,6 +34,10 @@ public class ModelManager extends ComponentManager implements Model {
     public FilteredList<ReadOnlyTask> floatingTasks;
     public FilteredList<ReadOnlyTask> completedTasks;
 
+    private Expression currentNonFloatingTasksExpression;
+    private Expression currentFloatingTasksExpression;
+    private Expression currentCompletedTasksExpression;
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -47,7 +51,7 @@ public class ModelManager extends ComponentManager implements Model {
         this.addressBookStates.add(new AddressBook(addressBook));
         this.currentAddressBookStateIndex = 0;
         this.currentAddressBook = new AddressBook(this.addressBookStates.get(this.currentAddressBookStateIndex));
-
+        setCurrentPredicateToShowAllTasks();
         setAddressBookState();
     }
 
@@ -55,13 +59,29 @@ public class ModelManager extends ComponentManager implements Model {
         this(new AddressBook(), new UserPrefs());
     }
 
-    public void setAddressBookState() {
+    /**
+     * Sets current predicates for task lists to show all tasks.
+     */
+    private void setCurrentPredicateToShowAllTasks() {
+        currentNonFloatingTasksExpression = new PredicateExpression(new TaskIsNotFloatingQualifier());
+        currentFloatingTasksExpression = new PredicateExpression(new TaskIsFloatingQualifier());
+        currentCompletedTasksExpression = new PredicateExpression(new TaskIsCompleteQualifier());
+    }
+
+    private void setAddressBookState() {
         this.nonFloatingTasks = new FilteredList<>(this.currentAddressBook.getTaskList());
         this.floatingTasks = new FilteredList<>(this.currentAddressBook.getTaskList());
         this.completedTasks = new FilteredList<>(this.currentAddressBook.getTaskList());
-        updateFilteredListToShowAllNonFloating();
-        updateFilteredListToShowAllFloatingTasks();
-        updateFilteredListToShowAllCompletedTasks();
+        updateTaskListPredicate();
+    }
+
+    /**
+     * Applies current predicates to the respective task lists.
+     */
+    private void updateTaskListPredicate() {
+        this.nonFloatingTasks.setPredicate(currentNonFloatingTasksExpression::satisfies);
+        this.floatingTasks.setPredicate(currentFloatingTasksExpression::satisfies);
+        this.completedTasks.setPredicate(currentCompletedTasksExpression::satisfies);
     }
 
     /**
@@ -157,6 +177,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         this.currentAddressBook.updateTask(addressBookIndex, editedTask);
+        updateFilteredTaskListToShowAllTasks();
         recordCurrentStateOfAddressBook();
         indicateAddressBookChanged();
     }
@@ -179,41 +200,17 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredListToShowAllNonFloating() {
-        this.nonFloatingTasks.setPredicate(new PredicateExpression(new TaskIsNotFloatingQualifier())::satisfies);
+    public void updateFilteredTaskListToShowFilteredTasks(Set<String> keywords) {
+        currentNonFloatingTasksExpression = new PredicateExpression(new NameNonFloatingTaskQualifier(keywords));
+        currentFloatingTasksExpression = new PredicateExpression(new NameFloatingTaskQualifier(keywords));
+        currentCompletedTasksExpression = new PredicateExpression(new NameCompletedTaskQualifier(keywords));
+        updateTaskListPredicate();
     }
 
     @Override
-    public void updateFilteredListToShowAllFloatingTasks() {
-        this.floatingTasks.setPredicate(new PredicateExpression(new TaskIsFloatingQualifier())::satisfies);
-    }
-
-    @Override
-    public void updateFilteredListToShowAllCompletedTasks() {
-        this.completedTasks.setPredicate(new PredicateExpression(new TaskIsCompleteQualifier())::satisfies);
-    }
-
-    @Override
-    public void updateFilteredListToShowFilteredNonFloatingTasks(Set<String> keywords) {
-        this.nonFloatingTasks.setPredicate(new PredicateExpression(
-                new NameNonFloatingTaskQualifier(keywords))::satisfies);
-    }
-
-    @Override
-    public void updateFilteredListToShowFilteredFloatingTasks(Set<String> keywords) {
-        this.floatingTasks.setPredicate(new PredicateExpression(new NameFloatingTaskQualifier(keywords))::satisfies);
-    }
-
-    @Override
-    public void updateFilteredListToShowFilteredCompletedTasks(Set<String> keywords) {
-        this.completedTasks.setPredicate(new PredicateExpression(new NameCompletedTaskQualifier(keywords))::satisfies);
-    }
-
-    @Override
-    public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredListToShowFilteredNonFloatingTasks(keywords);
-        updateFilteredListToShowFilteredFloatingTasks(keywords);
-        updateFilteredListToShowFilteredCompletedTasks(keywords);
+    public void updateFilteredTaskListToShowAllTasks() {
+        setCurrentPredicateToShowAllTasks();
+        updateTaskListPredicate();
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
