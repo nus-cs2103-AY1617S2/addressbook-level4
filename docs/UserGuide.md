@@ -4,7 +4,7 @@
 * [Quick Start](#quick-start)
     * [Installation Instructions](#installation-instructions)
     * [Launch](#launch)
-    * [Visual Introduction](#visual-introduction) 
+    * [Visual Introduction](#visual-introduction)
 * [Features](#features)
 * [Command Summary](#command-summary)
 * [Frequently Asked Questions](#frequently-asked-questions)
@@ -80,7 +80,7 @@ Now that we are familiar with ezDo's interface, let us get started with the feat
 ### 1. Adding a task: `add / a`
 ---
 Adds a task to ezDo.<br>
-Format: 
+Format:
 **`add TASKNAME [p/PRIORITY] [s/STARTDATE] [d/DUEDATE] [t/TAGNAME1] [t/TAGNAME2]...`**
 <br>
 > - The task name must be inputted as the first parameter; all entries following the task name are optional.<br>
@@ -90,7 +90,7 @@ Format:
 
 <br>
 
-Examples: 
+Examples:
 * You need to buy milk:
 **`add Buy milk`** <br>
 * You need to buy plane tickets to Hong Kong urgently:
@@ -105,7 +105,7 @@ Examples:
 ### 2. Editing a task: `edit / e`
 ---
 Edits a particular task by <u>specifying its index</u> and <u>its new information to be updated</u>.<br>
-Format: 
+Format:
 **`edit INDEX [NEWTASKNAME] [p/NEWPRIORITY] [s/NEWSTARTDATE] [d/NEWDUEDATE] [t/NEWTAGNAME]...`**
 <br>
 > - If a task does not have any information in the specified field previously, the new information will be added to the field instead. <br>
@@ -114,11 +114,11 @@ Format:
 <br>
 
 Example:
-    
+
 You have just added this task to ezDo at index 1 with the Add command:
 
- **`add Buy milk p/1 t/NTUC`** 
- 
+ **`add Buy milk p/1 t/NTUC`**
+
 You can now edit the task in several ways:
 
 * You wish to change the task name:
@@ -133,7 +133,7 @@ You can now edit the task in several ways:
 ### 3. Marking a task as done: `done / d`
 ---
 Marks the task at a specified index as done.<br>
-Format: 
+Format:
 **`done INDEX`**
 <br>
 > - The index must be a positive integer.
@@ -152,7 +152,7 @@ Example:
 ### 4. Deleting a task: `kill / k`
 ---
 Marks the task at a specified index as deleted.<br>
-Format: 
+Format:
 **`kill INDEX`**
 <br>
 > - The index must be a positive integer.
@@ -171,14 +171,14 @@ Example:
 ---
 
 Sorts the list of tasks according to the specified ordertype lexicographically.<br>
-Format: 
+Format:
 **`sort ORDERTYPE`**
 <br>
 > `ORDERTYPE` can be any of the following:
 > - n - name
 > - p - priority
-> - s - start date 
-> - d - due date 
+> - s - start date
+> - d - due date
 
 <br>
 
@@ -200,15 +200,15 @@ You can now sort the tasks by name:
 ### 6. Finding tasks: `find / f`
 ---
 Finds tasks whose information contains any of the given keywords specified by its prefix. <br>
-Format: 
+Format:
 **`find [KEYWORD] [MORE_KEYWORDS] [p/PRIORITY] [s/STARTDATE] [d/DUEDATE] [t/TAGNAME1] [t/TAGNAME2]...`**
 <br>
 > - At least one field is needed to search.
-> - The search is case insensitive. 
+> - The search is case insensitive.
 > e.g. `find Milk` will match the task with the name `milk`. <br>
 > - The order of the keywords does not matter.
 > e.g. `find Buy Milk` will match the task with the name `Milk Buy`. <br>
-> - Only full words will be matched. 
+> - Only full words will be matched.
 > e.g. `find Milk` will not match the task with the name `Milks`. <br>
 > - Only tasks matching all keywords will be returned.
     e.g. `find Milk p/1` will not match with the task `Buy Milk` with priority of 2.
@@ -238,7 +238,7 @@ Format:
 ### 8. Reverts the command: `undo / u`
 ---
 Reverts the last command. <br>
-Format: 
+Format:
 **`undo`**
 <br>
 > - You can only undo the following commands - `add/edit/kill/clear/sort`.
@@ -248,14 +248,14 @@ Format:
 
 Example:
 *  You just deleted the task: `buy milk` but you can restore it to the task list with the command - `undo`
-   
+
 
 <br>
 
 ### 9. Clearing all entries: `clear / c`
 ---
 Clears all entries from ezDo. <br>
-Format: 
+Format:
 **`clear`**
 <br>
 > - User will be prompted with clear confirmation.
@@ -265,7 +265,7 @@ Format:
 ### 10. Moving the save file: `save`
 ---
 Moves the save file of ezDo to a specified directory. <br>
-Format: 
+Format:
 **`save DIRECTORY`**
 <br>
 > - The directory specified must be valid.

@@ -45,7 +45,7 @@
 ### Importing the project into Eclipse
 1. From [this repository](https://github.com/CS2103JAN2017-W14-B4/main), ___fork___ and ___clone___ it to your computer.
 
-2. Open your ___Eclipse IDE___. 
+2. Open your ___Eclipse IDE___.
    > Ensure that you have installed the [e(fx)clipse](https://wiki.eclipse.org/Efxclipse/Tutorials/AddingE(fx)clipse_to_eclipse_) and [Buildship Gradle Integration](http://marketplace.eclipse.org/content/buildship-gradle-integration) plugins as given in the prerequisites above.
 
 3. Click ___`File`___ > ___`Import`___ .
@@ -68,7 +68,7 @@ The **_Architecture Diagram_** given above explains the high-level design of ezD
 Given below is a quick overview of each component.
 
 > * The `.pptx` files used to create diagrams in this document can be found in the [diagrams](diagrams/) folder.
-> 
+>
 > * To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
 
 <br>
@@ -85,7 +85,7 @@ Two of those classes play important roles at the architecture level.
 
 * `EventsCenter` : This class (written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained))
   is used by components to communicate with other components using events (i.e. a form of _Event Driven_ design).
-  
+
 * `LogsCenter` : Used by many classes to write log messages to ezDo's log file.
 
 <br>
@@ -115,7 +115,7 @@ For example, the **`Logic`** component (see the class diagram given below) defin
 
 The _sequence diagram_ below shows how the components interact for the scenario where the user issues the command `kill 1`.
 
-<br><center><img src="images\SDforDeletePerson.png" width="800"></center><br>
+<br><center><img src="images/SDforDeletePerson.png" width="800"></center><br>
 <center>Figure 3 : Component Interactions for `kill 1` Command (Part 1)</center><br>
 
 >Note how the **`Model`** simply raises a `EzDoChangedEvent` when ezDo data is changed, instead of asking the **`Storage`** to save the updates to the hard disk.
@@ -124,7 +124,7 @@ The _sequence diagram_ below shows how the components interact for the scenario 
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
 
-<br><center><img src="images\SDforDeletePersonEventHandling.png" width="800"></center><br>
+<br><center><img src="images/SDforDeletePersonEventHandling.png" width="800"></center><br>
 <center>Figure 4 : Component Interactions for `kill 1` Command (Part 2)_</center><br>
 
 > Note how the event is propagated through the `EventsCenter` to the **`Storage`** and **`UI`** without **`Model`** having to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct coupling between components.
@@ -148,7 +148,7 @@ The **`UI`** consists of a `MainWindow` that consists of several parts e.g.`Comm
 
 The **`UI`** component uses `JavaFX UI` framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.<br>
  For example, the layout of the [`MainWindow`](../src/main/java/seedu/ezdo/ui/MainWindow.java) is specified in [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml).
- 
+
  <br>
 
 The **`UI`** component,
@@ -165,7 +165,7 @@ The **`UI`** component,
 
 ### Logic
 
-<br><center><img src="images\LogicClassDiagram" width="800"></center>
+<br><center><img src="images/LogicClassDiagram.png" width="800"></center>
 <br><center>Figure 6 : Structure of the Logic Component</center><br>
 
 **API** : [`Logic.java`](../src/main/java/seedu/ezdo/logic/Logic.java)
@@ -181,15 +181,15 @@ The **`UI`** component,
 
 The _sequence diagram_ (in Figure 7) shows the interactions within the `Logic` component for the _`execute("kill 1")`_ API call.
 
-<br><center><img src="images\DeletePersonSdForLogic" width="800"></center>
+<br><center><img src="images/DeletePersonSdForLogic.png" width="800"></center>
 <br><center>Figure 7: Interactions Inside the Logic Component</center><br>
 
 ---
 
-### Model 
+### Model
 
 
-<center><img src="images\ModelClassDiagram" width="800"></center><br>
+<center><img src="images/ModelClassDiagram.png" width="800"></center><br>
 <center>Figure 8: Structure of the Model Component</center><br>
 
 **API** : [`Model.java`](../src/main/java/seedu/ezdo/model/Model.java)
@@ -203,9 +203,9 @@ The _sequence diagram_ (in Figure 7) shows the interactions within the `Logic` c
 
 ---
 
-### Storage 
+### Storage
 
-<center><img src="images\StorageClassDiagram" width="800"></center><br>
+<center><img src="images/StorageClassDiagram.png" width="800"></center><br>
 <center>Figure 9: Structure of the Storage Component</center><br>
 
 **API** : [`Storage.java`](../src/main/java/seedu/ezdo/storage/Storage.java)
@@ -245,14 +245,14 @@ All tests can be found in the `./src/test/java` folder.
 1. **GUI Tests** - These are _system tests_ that test the entire application by simulating user actions on the GUI. These are in the `guitests` package.
 
 2. **Non-GUI Tests** - These are tests not involving the GUI. They include :
-   * ___Unit tests___ 
-      These tests target the lowest level methods/classes. 
+   * ___Unit tests___
+      These tests target the lowest level methods/classes.
       e.g. `seedu.ezdo.commons.UrlUtilTest`
-      
+
    * ___Integration tests___
       These tests check the integration of multiple code units (i.e. those code units are assumed to be working).
       e.g. `seedu.ezdo.storage.StorageManagerTest`
-      
+
    * ___Hybrids of unit and integration tests___
       These tests check the multiple code units (i.e. how they are connected together).
       e.g. `seedu.ezdo.logic.LogicManagerTest`
@@ -273,7 +273,7 @@ With compliments to the [TestFX](https://github.com/TestFX/TestFX) library we us
  In the headless mode, GUI tests do not show up on the screen.
  That means the developer can do other things on the computer while the tests are running.<br>
 See [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in headless mode.
- 
+
 <br>
 
 ## Dev Ops
@@ -294,9 +294,9 @@ See [UsingGithubPages.md](UsingGithubPages.md) to learn how to use GitHub Pages 
 #### To create a new release,
 
  1. ___Generate a JAR file___ [using Gradle](UsingGradle.md#creating-the-jar-file).
- 
+
  2. ___Tag the repo___ with the version number. _(e.g. `v0.1`)_
- 
+
  3. [___Create a new release___ using GitHub](https://help.github.com/articles/creating-releases/) and ___upload the JAR file you created___.
 
 <br>
@@ -307,13 +307,13 @@ We use [Google Chrome](https://www.google.com/chrome/browser/desktop/) for conve
 #### To convert the project documentation files to PDF format,
 
  1. Make sure you have set up GitHub Pages as described in [UsingGithubPages.md](UsingGithubPages.md#setting-up).
- 
+
  2. Using Chrome, ___go to the [GitHub Pages version](UsingGithubPages.md#viewing-the-project-site) of the documentation file___.
     e.g. For [UserGuide.md](UserGuide.md), the URL will be `https://cs2103jan2017-w14-b4.github.io/main/docs/UserGuide.html`.
  3. ___Click on the `Print` option___ in Chrome's menu.
  4. ___Set the destination to `Save as PDF`___ , then ___click `Save`___ to save a copy of the file in PDF format. <br>
     For best results, use the settings indicated in the screenshot below.<br>
-    
+
     <center><img src="images/chrome_save_as_pdf.png" width="300"></center><br>
 <center>Figure 10: Saving Documentation as PDF Files in Chrome</center><br>
 
