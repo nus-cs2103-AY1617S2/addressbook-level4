@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.logging.Logger;
 
 import org.controlsfx.control.StatusBar;
+import org.ocpsoft.prettytime.PrettyTime;
 
 import com.google.common.eventbus.Subscribe;
 
@@ -50,7 +51,9 @@ public class StatusBarFooter extends UiPart<Region> {
 
     @Subscribe
     public void handleTaskManagerChangedEvent(TaskManagerChangedEvent abce) {
-        String lastUpdated = (new Date()).toString();
+        PrettyTime pretty = new PrettyTime();
+        Date now = new Date();
+        String lastUpdated = (new Date()).toString() + ", " + pretty.format(now);
         logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
         setSyncStatus("Last Updated: " + lastUpdated);
     }

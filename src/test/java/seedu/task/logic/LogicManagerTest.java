@@ -419,8 +419,8 @@ public class LogicManagerTest {
 
         Task allocate() throws Exception {
             Name name = new Name("Allocate time for exercise");
-            Date startDate = new Date("9-03-2017");
-            Date endDate = new Date("10-03-2017");
+            Date startDate = new Date("9-03-2017 2300");
+            Date endDate = new Date("10-03-2017 2300");
             Remark remark = new Remark("Just do it");
             Location privateLocation = new Location("111, alpha street");
             Tag tag1 = new Tag("tag1");
@@ -439,8 +439,8 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Name("Task " + seed),
-                    new Date("4-05-15"), //not random for now
-                    new Date("05-05-2015"),
+                    new Date("4-05-15 2200"), //not random for now
+                    new Date("05-05-2015 2100"),
                     new Remark(seed + "@email"),
                     new Location("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))), false
