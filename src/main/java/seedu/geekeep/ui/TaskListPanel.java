@@ -34,18 +34,20 @@ public class TaskListPanel extends UiPart<Region> {
     private ListView<ReadOnlyTask> completedListView;
 
 
-    //empty panel for v0.2
+    //TODO only works for v0.2 checks
     public TaskListPanel(String type, AnchorPane taskListPlaceholder) {
         super(getFxmlFromType(type));
         addToPlaceholder(taskListPlaceholder);
     }
-    //usable for v0.2
+
+    //TODO  only works for v0.2 checks
     public TaskListPanel(String type, AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> allList) {
         super(getFxmlFromType(type));
         setConnections(allList);
         addToPlaceholder(taskListPlaceholder);
     }
 
+    //TODO only works for v0.2 checks
     public TaskListPanel(AnchorPane taskListPlaceholder, String type, ObservableList<ReadOnlyTask>... categories) {
         super(getFxmlFromType(type));
         for (ObservableList<ReadOnlyTask> list : categories) {
@@ -53,7 +55,8 @@ public class TaskListPanel extends UiPart<Region> {
         }
         addToPlaceholder(taskListPlaceholder);
     }
-    //strange
+
+    //TODO this method should not be there. After v0.2 it is to remove
     private static String getFxmlFromType(String type) {
         if (type.equals("deadline")) {
             return DEADLINEFXML;
@@ -63,7 +66,8 @@ public class TaskListPanel extends UiPart<Region> {
             return EVENTFXML;
         }
     }
-    //to-do to remove
+
+    //TODO this method should not be there. After v0.2 it is to remove
     private void setConnections(ObservableList<ReadOnlyTask> taskList) {
         setConnections(taskList, allListView);
     }
@@ -97,10 +101,10 @@ public class TaskListPanel extends UiPart<Region> {
         });
     }
 
-//  //to-do
-//  public void scrollToVersion2() {
-//
-//  }
+/*  //TODO scrollTo should works for all the ListView
+    public void scrollToVersion2() {
+
+    }*/
 
     class PersonListViewCell extends ListCell<ReadOnlyTask> {
 
