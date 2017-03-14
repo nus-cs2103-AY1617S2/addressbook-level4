@@ -13,25 +13,25 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.address.commons.util.FxViewUtil;
-import seedu.address.model.task.Task;
+import seedu.address.model.task.ReadOnlyTask;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of tasks.
  */
 public class TaskListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
     private static final String FXML = "TaskListPanel.fxml";
 
     @FXML
-    private ListView<Task> taskListView;
+    private ListView<ReadOnlyTask> taskListView;
 
-    public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<Task> taskList) {
+    public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
         super(FXML);
         setConnections(taskList);
         addToPlaceholder(taskListPlaceholder);
     }
 
-    private void setConnections(ObservableList<Task> taskList) {
+    private void setConnections(ObservableList<ReadOnlyTask> taskList) {
         taskListView.setItems(taskList);
         taskListView.setCellFactory(listView -> new TaskListViewCell());
         setEventHandlerForSelectionChangeEvent();
@@ -47,7 +47,7 @@ public class TaskListPanel extends UiPart<Region> {
         taskListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
-                        logger.fine("Selection in person list panel changed to : '" + newValue + "'");
+                        logger.fine("Selection in Task list panel changed to : '" + newValue + "'");
                         raise(new TaskPanelSelectionChangedEvent(newValue));
                     }
                 });
@@ -60,10 +60,10 @@ public class TaskListPanel extends UiPart<Region> {
         });
     }
 
-    class TaskListViewCell extends ListCell<Task> {
+    class TaskListViewCell extends ListCell<ReadOnlyTask> {
 
         @Override
-        protected void updateItem(Task task, boolean empty) {
+        protected void updateItem(ReadOnlyTask task, boolean empty) {
             super.updateItem(task, empty);
 
             if (empty || task == null) {

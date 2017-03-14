@@ -12,9 +12,8 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 
 /**
@@ -23,8 +22,6 @@ import seedu.address.model.task.Task;
 @XmlRootElement(name = "addressbook")
 public class XmlSerializableAddressBook implements ReadOnlyAddressBook {
 
-    @XmlElement
-    private List<XmlAdaptedPerson> persons;
     @XmlElement
     private List<XmlAdaptedTag> tags;
     @XmlElement
@@ -49,7 +46,7 @@ public class XmlSerializableAddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<Task> getTaskList() {
+    public ObservableList<ReadOnlyTask> getTaskList() {
         final ObservableList<Task> tasks = this.tasks.stream().map(t -> {
             try {
                 return t.toModelType();

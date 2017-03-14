@@ -25,7 +25,7 @@ public class UniqueTaskList implements Iterable<Task> {
     /**
      * Returns true if the list contains an equivalent task as the given argument.
      */
-    public boolean contains(Task toCheck) {
+    public boolean contains(ReadOnlyTask toCheck) {
         assert toCheck != null;
         return internalList.contains(toCheck);
     }
@@ -70,7 +70,7 @@ public class UniqueTaskList implements Iterable<Task> {
      *
      * @throws TaskNotFoundException if no such task could be found in the list.
      */
-    public boolean remove(Task toRemove) throws TaskNotFoundException {
+    public boolean remove(ReadOnlyTask toRemove) throws TaskNotFoundException {
         assert toRemove != null;
         final boolean taskFoundAndDeleted = internalList.remove(toRemove);
         if (!taskFoundAndDeleted) {
@@ -83,9 +83,9 @@ public class UniqueTaskList implements Iterable<Task> {
         this.internalList.setAll(replacement.internalList);
     }
 
-    public void setTasks(List<? extends Task> tasks) throws DuplicateTaskException {
+    public void setTasks(List<? extends ReadOnlyTask> tasks) throws DuplicateTaskException {
         final UniqueTaskList replacement = new UniqueTaskList();
-        for (final Task task : tasks) {
+        for (final ReadOnlyTask task : tasks) {
             replacement.add(new Task(task));
         }
         setTasks(replacement);

@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import seedu.address.model.tag.UniqueTagList;
 
-public class Task {
+public class Task implements ReadOnlyTask{
     
     protected Title title;
     
@@ -19,7 +19,7 @@ public class Task {
     /**
      * Creates a copy of the given Task.
      */
-    public Task(Task source) {
+    public Task(ReadOnlyTask source) {
         this(source.getTitle(), source.getTags());
     }
     
@@ -50,7 +50,7 @@ public class Task {
     /**
      * Updates this task with the details of {@code replacement}.
      */
-    public void resetData(Task replacement) {
+    public void resetData(ReadOnlyTask replacement) {
         assert replacement != null;
 
         this.setTitle(replacement.getTitle());
