@@ -48,7 +48,7 @@ public class DateParserTest {
     @Test
     public void parse() throws IllegalValueException {
         Calendar cal = Calendar.getInstance();
-        cal.set(2000, 01, 01, 0, 0, 0);
+        cal.set(2000, 00, 01, 0, 0, 0);
         assertEquals(dropMillis(cal.getTimeInMillis()), dropMillis(DateParser.parse("2000/01/01 0000").getTimeInMillis()));
     }
 }
