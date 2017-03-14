@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import javafx.collections.ObservableList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -138,9 +139,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         tasks.forEach(this::syncMasterTagListWith);
     }
 
-    public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
+    public int removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
+    	
+    	int indexRemoved = tasks.getInternalList().indexOf(key);
         if (tasks.remove(key)) {
-            return true;
+            return indexRemoved;
         } else {
             throw new UniqueTaskList.TaskNotFoundException();
         }
