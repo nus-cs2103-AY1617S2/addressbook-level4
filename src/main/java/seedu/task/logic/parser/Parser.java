@@ -17,6 +17,7 @@ import seedu.task.logic.commands.HelpCommand;
 import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.logic.commands.ListCommand;
 import seedu.task.logic.commands.SelectCommand;
+import seedu.task.logic.commands.TaskCompletedCommand;
 
 /**
  * Parses user input.
@@ -70,6 +71,9 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case TaskCompletedCommand.COMMAND_WORD:
+            return new TaskCompletedParser().parse(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
