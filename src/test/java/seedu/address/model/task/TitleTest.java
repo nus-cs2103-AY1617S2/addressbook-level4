@@ -18,12 +18,12 @@ public class TitleTest {
                                                    // characters
 
         // valid name
-        assertTrue(Title.isValidTitle("debugging")); // alphabets only
+        assertTrue(Title.isValidTitle("peter jack")); // alphabets only
         assertTrue(Title.isValidTitle("12345")); // numbers only
-        assertTrue(Title.isValidTitle("debug for CS2103")); // alphanumeric
+        assertTrue(Title.isValidTitle("peter the 2nd")); // alphanumeric
                                                          // characters
-        assertTrue(Title.isValidTitle("Debugging")); // with capital letters
-        assertTrue(Title.isValidTitle("Debugging until the sun rises again at 7am")); // long
+        assertTrue(Title.isValidTitle("Capital Tan")); // with capital letters
+        assertTrue(Title.isValidTitle("David Roger Jackson Ray Jr 2nd")); // long
                                                                           // names
     }
 }

@@ -47,9 +47,9 @@ public class TestUtil {
 
     public static final String LS = System.lineSeparator();
 
-	/**
-	 * Folder used for temp files created during testing. Ignored by Git.
-	 */
+    /**
+     * Folder used for temp files created during testing. Ignored by Git.
+     */
     public static final String SANDBOX_FOLDER = FileUtil.getPath("./src/test/data/sandbox/");
 
     public static final Task[] SAMPLE_TASK_DATA = getSampleTaskData();
@@ -75,24 +75,24 @@ public class TestUtil {
         try {
             // CHECKSTYLE.OFF: LineLength
             return new Task[] {
-                new Task(new Title("CS2103 Tutorial"), new Venue("COM1-B103"), new StartTime("Tuesday 10:00"),
-                        new EndTime("Tuesday 11:00"), new UniqueTagList()),
-                new Task(new Title("DBS Internship interview"), new Venue("Raffles Place"), new StartTime("March 31, 9:30"),
-                        new EndTime("Wednesday 12:00"), new UniqueTagList()),
-                new Task(new Title("Hang out with Joe"), new Venue("313 Somerset"), new StartTime("Saturday 11:00"),
-                        new EndTime("Saturday 17:00"), new UniqueTagList()),
-                new Task(new Title("Statistics society meeting"), new Venue("S16 04-30"), new StartTime("Every Wednesday 19:00"),
-                        new EndTime("Wednesday 21:00"), new UniqueTagList()),
-                new Task(new Title("Tuition part-time job"), new Venue("Jun Wei's house at Jurong Ease Avenue 1"), new StartTime("Next Thursday 19:00"),
-                        new EndTime("Thursday 21:00"), new UniqueTagList()),
-                new Task(new Title("Strings ensemble rehearsal"), new Venue("UCC hall"), new StartTime("Friday 9:00"),
-                        new EndTime("Friday 17:00"), new UniqueTagList()),
-                new Task(new Title("Dinner with auntie"), new Venue("Home"), new StartTime("Friday 19:00"),
-                        new EndTime("Friday 20:00"), new UniqueTagList()),
-                new Task(new Title("MA3269 Quiz"), new Venue("LT26"), new StartTime("Thursday 12:00"),
-                        new EndTime("Thursday 14:00"), new UniqueTagList()),
-                new Task(new Title("Submit FIN3101 Tutorial"), new Venue("Biz1-0748 Prof Tan's office"), new StartTime("now"),
-                        new EndTime("Thursday 11am"), new UniqueTagList()) };
+                new Task(new Title("Ali Muster"), new Venue("9482424"), new StartTime("hans@google.com"),
+                        new EndTime("4th street"), new UniqueTagList()),
+                new Task(new Title("Boris Mueller"), new Venue("87249245"), new StartTime("ruth@google.com"),
+                        new EndTime("81th street"), new UniqueTagList()),
+                new Task(new Title("Carl Kurz"), new Venue("95352563"), new StartTime("heinz@yahoo.com"),
+                        new EndTime("wall street"), new UniqueTagList()),
+                new Task(new Title("Daniel Meier"), new Venue("87652533"), new StartTime("cornelia@google.com"),
+                        new EndTime("10th street"), new UniqueTagList()),
+                new Task(new Title("Elle Meyer"), new Venue("9482224"), new StartTime("werner@gmail.com"),
+                        new EndTime("michegan ave"), new UniqueTagList()),
+                new Task(new Title("Fiona Kunz"), new Venue("9482427"), new StartTime("lydia@gmail.com"),
+                        new EndTime("little tokyo"), new UniqueTagList()),
+                new Task(new Title("George Best"), new Venue("9482442"), new StartTime("anna@google.com"),
+                        new EndTime("4th street"), new UniqueTagList()),
+                new Task(new Title("Hoon Meier"), new Venue("8482424"), new StartTime("stefan@mail.com"),
+                        new EndTime("little india"), new UniqueTagList()),
+                new Task(new Title("Ida Mueller"), new Venue("8482131"), new StartTime("hans@google.com"),
+                        new EndTime("chicago ave"), new UniqueTagList()) };
             // CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
             assert false;
@@ -103,7 +103,7 @@ public class TestUtil {
 
     private static Tag[] getSampleTagData() {
         try {
-            return new Tag[] { new Tag("exams"), new Tag("important") };
+            return new Tag[] { new Tag("relatives"), new Tag("friends") };
         } catch (IllegalValueException e) {
             assert false;
             return null;
@@ -155,15 +155,16 @@ public class TestUtil {
 
     /**
      * Tweaks the {@code keyCodeCombination} to resolve the
-     * {@code KeyCode.SHORTCUT} to their respective platform-specific keycodes
+     * {@code KeyCode.SHORTCUT} to their
+     * respective platform-specific keycodes
      */
-	public static KeyCode[] scrub(KeyCodeCombination keyCodeCombination) {
-		List<KeyCode> keys = new ArrayList<>();
-		if (keyCodeCombination.getAlt() == KeyCombination.ModifierValue.DOWN) {
-			keys.add(KeyCode.ALT);
-		}
-		if (keyCodeCombination.getShift() == KeyCombination.ModifierValue.DOWN) {
-			keys.add(KeyCode.SHIFT);
+    public static KeyCode[] scrub(KeyCodeCombination keyCodeCombination) {
+        List<KeyCode> keys = new ArrayList<>();
+        if (keyCodeCombination.getAlt() == KeyCombination.ModifierValue.DOWN) {
+            keys.add(KeyCode.ALT);
+        }
+        if (keyCodeCombination.getShift() == KeyCombination.ModifierValue.DOWN) {
+            keys.add(KeyCode.SHIFT);
         }
         if (keyCodeCombination.getMeta() == KeyCombination.ModifierValue.DOWN) {
             keys.add(KeyCode.META);
