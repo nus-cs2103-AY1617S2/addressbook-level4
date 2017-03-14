@@ -184,7 +184,7 @@ Examples:
 
 ### 2.7. Creating a category : `new`
 
-Creates a new category in the task Boss.<br>
+Creates a new category in TaskBoss.<br>
 Format: `new CATEGORY`
 
 Example:
@@ -200,7 +200,7 @@ Format: `clear CATEGORY`
 
 ### 2.9. Viewing a task : `view`
 
-Views a task by entering the task index from the TaskBoss.<br>
+Views a task by entering the task index from TaskBoss.<br>
 Format: `view INDEX`
 
 > Views the task at the specified `INDEX`. <br>
@@ -219,7 +219,7 @@ Example:
 ### 2.11. Listing tasks by category : `listcategory`
 
 Lists all tasks under a specified category.<br>
-Format: `listcategory CATEGORYNAME`
+Format: `listcategory CATEGORY`
 
 Example:
 
