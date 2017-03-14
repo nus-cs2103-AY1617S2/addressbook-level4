@@ -91,14 +91,6 @@ public class ModelManager extends ComponentManager implements Model {
         taskManagerCopy = new TaskManager(newData);
     }
 
-    public void clearCopy() {
-        taskManagerCopy = new TaskManager(); // can change to delete all tasks once implemented
-    }
-
-    public boolean checkChanges() {
-        return taskManagerCopy.isEmpty();
-    }
-
     public void updateFlag(String newFlag) {
         flag = newFlag;
     }
