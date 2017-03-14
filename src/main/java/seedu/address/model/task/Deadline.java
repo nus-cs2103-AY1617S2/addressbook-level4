@@ -5,8 +5,8 @@ import java.util.List;
 
 import seedu.address.commons.exceptions.IllegalDateTimeValueException;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.dateparser.DateTimeParserManager;
 import seedu.address.logic.parser.DateTimeParser;
-import seedu.address.logic.parser.DateTimeParserManager;
 
 /**
  * Represents a Task's deadline in the task manager.

@@ -1,4 +1,4 @@
-package seedu.address.logic;
+package seedu.address.logic.undo;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.datastructure.UndoPair;

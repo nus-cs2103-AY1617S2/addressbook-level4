@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.dateparser;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -31,6 +31,9 @@ import com.joestelmach.natty.generated.DateLexer;
 import com.joestelmach.natty.generated.DateParser;
 import com.joestelmach.natty.generated.DateWalker;
 import com.joestelmach.natty.generated.TreeRewrite;
+
+import seedu.address.logic.parser.DateTimeParser;
+import seedu.address.logic.parser.Parser;
 
 public class DateTimeParserManager implements DateTimeParser {
     private TimeZone defaultTimeZone;

@@ -3,7 +3,6 @@ package seedu.address.logic.undo;
 import java.util.LinkedList;
 
 import javafx.collections.ObservableList;
-import seedu.address.logic.Changeable;
 import seedu.address.model.datastructure.UndoPair;
 import seedu.address.model.label.Label;
 import seedu.address.model.task.ReadOnlyTask;
