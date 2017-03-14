@@ -9,20 +9,21 @@ import seedu.ezdo.model.todo.UniqueTaskList.TaskNotFoundException;
 /**
  * Deletes a task identified using its last displayed index from ezDo.
  */
-public class DeleteCommand extends Command {
+public class KillCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_WORD = "kill";
+    public static final String SHORT_COMMAND_WORD = "k";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the task identified by the index number used in the last task listing.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
+    public static final String MESSAGE_KILL_TASK_SUCCESS = "Deleted Task: %1$s";
 
     public final int targetIndex;
 
-    public DeleteCommand(int targetIndex) {
+    public KillCommand(int targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -36,15 +37,15 @@ public class DeleteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask taskToDelete = lastShownList.get(targetIndex - 1);
+        ReadOnlyTask taskToKill = lastShownList.get(targetIndex - 1);
 
         try {
-            model.deleteTask(taskToDelete);
+            model.killTask(taskToKill);
         } catch (TaskNotFoundException tnfe) {
             assert false : "The target task cannot be missing";
         }
 
-        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
+        return new CommandResult(String.format(MESSAGE_KILL_TASK_SUCCESS, taskToKill));
     }
 
 }

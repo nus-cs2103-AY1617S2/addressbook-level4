@@ -6,7 +6,6 @@ import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_STARTDATE;
 import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_TAG;
 
-
 import java.util.NoSuchElementException;
 
 import seedu.ezdo.commons.exceptions.IllegalValueException;
@@ -18,12 +17,13 @@ import seedu.ezdo.logic.parser.ArgumentTokenizer.Prefix;
 /**
  * Parses input arguments and creates a new AddCommand object
  */
-public class AddCommandParser {
+public class AddCommandParser implements CommandParser {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
      */
+    @Override
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer =
                 new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_STARTDATE, PREFIX_DUEDATE, PREFIX_TAG);
@@ -43,7 +43,7 @@ public class AddCommandParser {
         }
     }
 
-    private String getOptionalValue(ArgumentTokenizer tokenizer, Prefix prefix) {
+    private static String getOptionalValue(ArgumentTokenizer tokenizer, Prefix prefix) {
         if (!tokenizer.getValue(prefix).isPresent()) {
             return "";
         } else {

@@ -7,12 +7,11 @@ import seedu.ezdo.commons.core.Messages;
 import seedu.ezdo.commons.util.CollectionUtil;
 import seedu.ezdo.logic.commands.exceptions.CommandException;
 import seedu.ezdo.model.tag.UniqueTagList;
-import seedu.ezdo.model.todo.DueDate;
 import seedu.ezdo.model.todo.Name;
 import seedu.ezdo.model.todo.Priority;
 import seedu.ezdo.model.todo.ReadOnlyTask;
-import seedu.ezdo.model.todo.StartDate;
 import seedu.ezdo.model.todo.Task;
+import seedu.ezdo.model.todo.TaskDate;
 import seedu.ezdo.model.todo.UniqueTaskList;
 
 /**
@@ -21,6 +20,7 @@ import seedu.ezdo.model.todo.UniqueTaskList;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
+    public static final String SHORT_COMMAND_WORD = "e";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
@@ -80,8 +80,8 @@ public class EditCommand extends Command {
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
         Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
-        StartDate updatedStartDate = editTaskDescriptor.getStartDate().orElseGet(taskToEdit::getStartDate);
-        DueDate updatedDueDate = editTaskDescriptor.getDueDate().orElseGet(taskToEdit::getDueDate);
+        TaskDate updatedStartDate = editTaskDescriptor.getStartDate().orElseGet(taskToEdit::getStartDate);
+        TaskDate updatedDueDate = editTaskDescriptor.getDueDate().orElseGet(taskToEdit::getDueDate);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
         return new Task(updatedName, updatedPriority, updatedStartDate, updatedDueDate, updatedTags);
@@ -94,8 +94,8 @@ public class EditCommand extends Command {
     public static class EditTaskDescriptor {
         private Optional<Name> name = Optional.empty();
         private Optional<Priority> priority = Optional.empty();
-        private Optional<StartDate> startDate = Optional.empty();
-        private Optional<DueDate> dueDate = Optional.empty();
+        private Optional<TaskDate> startDate = Optional.empty();
+        private Optional<TaskDate> dueDate = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditTaskDescriptor() {}
@@ -134,21 +134,21 @@ public class EditCommand extends Command {
             return priority;
         }
 
-        public void setStartDate(Optional<StartDate> startDate) {
+        public void setStartDate(Optional<TaskDate> startDate) {
             assert startDate != null;
             this.startDate = startDate;
         }
 
-        public Optional<StartDate> getStartDate() {
+        public Optional<TaskDate> getStartDate() {
             return startDate;
         }
 
-        public void setDueDate(Optional<DueDate> dueDate) {
+        public void setDueDate(Optional<TaskDate> dueDate) {
             assert dueDate != null;
             this.dueDate = dueDate;
         }
 
-        public Optional<DueDate> getDueDate() {
+        public Optional<TaskDate> getDueDate() {
             return dueDate;
         }
 

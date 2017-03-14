@@ -1,26 +1,25 @@
 package seedu.ezdo.testutil;
 
 import seedu.ezdo.model.tag.UniqueTagList;
-import seedu.ezdo.model.todo.DueDate;
 import seedu.ezdo.model.todo.Name;
 import seedu.ezdo.model.todo.Priority;
 import seedu.ezdo.model.todo.ReadOnlyTask;
-import seedu.ezdo.model.todo.StartDate;
+import seedu.ezdo.model.todo.TaskDate;
 
 /**
  * A mutable task object. For testing only.
  */
 public class TestTask implements ReadOnlyTask {
 
-    private static final String PREFIX_EMAIL = "e/";
     private static final String PREFIX_PRIORITY = "p/";
     private static final String PREFIX_STARTDATE = "s/";
     private static final String PREFIX_DUEDATE = "d/";
 
     private Name name;
-    private StartDate startDate;
-    private DueDate dueDate;
+    private TaskDate startDate;
+    private TaskDate dueDate;
     private Priority priority;
+    private boolean done;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -35,6 +34,7 @@ public class TestTask implements ReadOnlyTask {
         this.priority = taskToCopy.getPriority();
         this.startDate = taskToCopy.getStartDate();
         this.dueDate = taskToCopy.getDueDate();
+        this.done = taskToCopy.getDone();
         this.tags = taskToCopy.getTags();
     }
 
@@ -42,16 +42,24 @@ public class TestTask implements ReadOnlyTask {
         this.name = name;
     }
 
-    public void setStartDate(StartDate startDate) {
+    public boolean getDone() {
+        return this.done;
+    }
+
+    public void setStartDate(TaskDate startDate) {
         this.startDate = startDate;
     }
 
-    public void setDueDate(DueDate dueDate) {
+    public void setDueDate(TaskDate dueDate) {
         this.dueDate = dueDate;
     }
 
     public void setPriority(Priority priority) {
         this.priority = priority;
+    }
+
+    public void setDone() {
+        this.done = true;
     }
 
     public void setTags(UniqueTagList tags) {
@@ -69,12 +77,12 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public StartDate getStartDate() {
+    public TaskDate getStartDate() {
         return startDate;
     }
 
     @Override
-    public DueDate getDueDate() {
+    public TaskDate getDueDate() {
         return dueDate;
     }
 
@@ -88,9 +96,18 @@ public class TestTask implements ReadOnlyTask {
         return getAsText();
     }
 
-    public String getAddCommand() {
+    /**
+     * Constructs an add command for the test task.
+     * @param usesShortCommand Specifies if the long or short version of the command should be used. ("add" or "a")
+     * @return This is the add command that will add the test task.
+     */
+    public String getAddCommand(boolean usesShortCommand) {
         StringBuilder sb = new StringBuilder();
-        sb.append("add " + this.getName().fullName + " ");
+        if (usesShortCommand) {
+            sb.append("a " + this.getName().fullName + " ");
+        } else {
+            sb.append("add " + this.getName().fullName + " ");
+        }
         sb.append(PREFIX_STARTDATE + this.getStartDate().value + " ");
         sb.append(PREFIX_DUEDATE + this.getDueDate().value + " ");
         sb.append(PREFIX_PRIORITY + this.getPriority().value + " ");

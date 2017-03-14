@@ -19,6 +19,7 @@ import seedu.ezdo.model.todo.DueDate;
 import seedu.ezdo.model.todo.Name;
 import seedu.ezdo.model.todo.Priority;
 import seedu.ezdo.model.todo.StartDate;
+import seedu.ezdo.model.todo.TaskDate;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -85,7 +86,7 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> startDate} into an {@code Optional<StartDate>} if {@code startDate} is present.
      */
-    public static Optional<StartDate> parseStartDate(Optional<String> startDate) throws IllegalValueException {
+    public static Optional<TaskDate> parseStartDate(Optional<String> startDate) throws IllegalValueException {
         assert startDate != null;
         return startDate.isPresent() ? Optional.of(new StartDate(startDate.get())) : Optional.empty();
     }
@@ -93,7 +94,7 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> dueDate} into an {@code Optional<DueDate>} if {@code dueDate} is present.
      */
-    public static Optional<DueDate> parseDueDate(Optional<String> dueDate) throws IllegalValueException {
+    public static Optional<TaskDate> parseDueDate(Optional<String> dueDate) throws IllegalValueException {
         assert dueDate != null;
         return dueDate.isPresent() ? Optional.of(new DueDate(dueDate.get())) : Optional.empty();
     }

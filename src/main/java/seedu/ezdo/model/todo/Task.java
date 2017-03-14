@@ -13,21 +13,23 @@ public class Task implements ReadOnlyTask {
 
     private Name name;
     private Priority priority;
-    private StartDate startDate;
-    private DueDate dueDate;
+    private TaskDate startDate;
+    private TaskDate dueDate;
+    private boolean done;
 
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Priority priority, StartDate startDate, DueDate dueDate, UniqueTagList tags) {
+    public Task(Name name, Priority priority, TaskDate startDate, TaskDate dueDate, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, priority, startDate, tags);
         this.name = name;
         this.priority = priority;
         this.startDate = startDate;
         this.dueDate = dueDate;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.done = false;
     }
 
     /**
@@ -41,6 +43,14 @@ public class Task implements ReadOnlyTask {
     public void setName(Name name) {
         assert name != null;
         this.name = name;
+    }
+
+    public void setDone(boolean doneStatus) {
+        this.done = doneStatus;
+    }
+
+    public void setDone() {
+        this.done = true;
     }
 
     @Override
@@ -58,23 +68,28 @@ public class Task implements ReadOnlyTask {
         return priority;
     }
 
-    public void setStartDate(StartDate startDate) {
+    public void setStartDate(TaskDate startDate) {
         assert startDate != null;
         this.startDate = startDate;
     }
 
     @Override
-    public StartDate getStartDate() {
+    public boolean getDone() {
+        return this.done;
+    }
+
+    @Override
+    public TaskDate getStartDate() {
         return startDate;
     }
 
-    public void setDueDate(DueDate dueDate) {
+    public void setDueDate(TaskDate dueDate) {
         assert dueDate != null;
         this.dueDate = dueDate;
     }
 
     @Override
-    public DueDate getDueDate() {
+    public TaskDate getDueDate() {
         return dueDate;
     }
 

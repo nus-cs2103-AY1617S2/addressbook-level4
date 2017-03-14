@@ -15,8 +15,18 @@ public class FindCommandTest extends EzDoGuiTest {
         assertFindResult("find Meier", td.benson, td.daniel); // multiple results
 
         //find after deleting one result
-        commandBox.runCommand("delete 1");
+        commandBox.runCommand("kill 1");
         assertFindResult("find Meier", td.daniel);
+    }
+
+    @Test
+    public void find_shortCommand() {
+        assertFindResult("f Mark"); // no results
+        assertFindResult("f Meier", td.benson, td.daniel); // multiple results
+
+        //find after deleting one result
+        commandBox.runCommand("kill 1");
+        assertFindResult("f Meier", td.daniel);
     }
 
     @Test
