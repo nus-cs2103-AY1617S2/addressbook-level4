@@ -123,7 +123,7 @@ public class TaskTest {
         testTask.setDeadLine(LocalDateTime.MIN);
         testTask.setCompleted(true);
         assertTrue(testTask.isCompleted());
-        assertFalse(false);
+        assertFalse(testTask.isOverdue());
     }
 
     @Test
