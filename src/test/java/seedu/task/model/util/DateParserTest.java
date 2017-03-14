@@ -1,6 +1,8 @@
 package seedu.task.model.util;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Calendar;
 
@@ -49,6 +51,8 @@ public class DateParserTest {
     public void parse() throws IllegalValueException {
         Calendar cal = Calendar.getInstance();
         cal.set(2000, 00, 01, 0, 0, 0);
-        assertEquals(dropMillis(cal.getTimeInMillis()), dropMillis(DateParser.parse("2000/01/01 0000").getTimeInMillis()));
+        assertEquals(
+                dropMillis(cal.getTimeInMillis()),
+                dropMillis(DateParser.parse("2000/01/01 0000").getTimeInMillis()));
     }
 }
