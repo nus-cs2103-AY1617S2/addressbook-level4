@@ -69,7 +69,7 @@ public class DeleteCommand extends Command {
 
             return new CommandResult(String.format(MESSAGE_DELETE_EVENT_SUCCESS, taskToDelete));
         } else if (taskAndEventSize < targetIndex &&  targetIndex <= totalSize) {
-            ReadOnlyFloatingTask taskToDelete = lastShownFloatingTaskList.get(targetIndex - 1);
+            ReadOnlyFloatingTask taskToDelete = lastShownFloatingTaskList.get(targetIndex - 1 - taskAndEventSize);
 
             try {
                 model.deleteFloatingTask(taskToDelete);
