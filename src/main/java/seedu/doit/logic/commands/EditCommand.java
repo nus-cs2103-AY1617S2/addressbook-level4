@@ -83,6 +83,7 @@ public class EditCommand extends Command {
     private static Task createEditedTask(ReadOnlyTask taskToEdit,
                                          EditTaskDescriptor editTaskDescriptor) {
         assert taskToEdit != null;
+        assert editTaskDescriptor != null;
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
         Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
@@ -138,6 +139,7 @@ public class EditCommand extends Command {
 
         if (filteredTaskListIndex <= taskSize) {
             ReadOnlyTask taskToEdit = lastShownTaskList.get(filteredTaskListIndex);
+            assert taskToEdit != null;
             Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
             try {
