@@ -20,9 +20,9 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
-            + "Parameters: CONTENT by DATE_TIME [#TAG]...\n"
+            + "Parameters: CONTENT DATE_TIME [#TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " Project Meeting by 12/12/2017 11:00 #project #meeting";
+            + " Project Meeting 12/12/2017 11:00 #project #meeting";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
@@ -52,6 +52,8 @@ public class AddCommand extends Command {
         assert model != null;
         try {
             model.addTask(toAdd);
+			model.getUndoStack().push(COMMAND_WORD);
+			model.getDeletedStackOfTasksAdd().push(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
