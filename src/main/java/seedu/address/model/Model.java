@@ -53,4 +53,10 @@ public interface Model {
     /** Checks if there are any undoable commands*/
     boolean checkChanges();
 
+    /** Updates flag for copy of address book*/
+    void updateFlag(String newFlag);
+
+    /** Returns flag for copy of address book*/
+    String getFlag();
+
 }
