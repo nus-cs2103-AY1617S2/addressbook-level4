@@ -1,13 +1,13 @@
 package seedu.todolist.logic.commands;
 
 import seedu.todolist.logic.CommandAndState;
-import seedu.todolist.logic.commands.exceptions.CommandException;
 import seedu.todolist.model.ReadOnlyToDoList;
 
 public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD = "undo";
-    public static final String MESSAGE_UNDO_PERSON_SUCCESS = "Undone: %1$s";
+    public static final String MESSAGE_UNDO_PERSON_SUCCESS = "Undone - %1$s";
+    public static final String MESSAGE_NOTHING_TO_UNDO = "Nothing to undo!";
     private CommandAndState commAndState;
     private String commandText;
 
@@ -15,7 +15,10 @@ public class UndoCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() throws CommandException {
+    public CommandResult execute() {
+        if (undoManager.getStack().empty()) {
+            return new CommandResult(MESSAGE_NOTHING_TO_UNDO);
+        }
         commAndState =  undoManager.getCommandAndStateToUndo();
         undoManager.undoLatestTask();
         String command = commAndState.getCommand().getCommandText();
