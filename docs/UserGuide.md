@@ -122,11 +122,11 @@ Examples:
   Deletes the 3rd, 4th, 5th, and 6th task in the todo list.
   Note that the system is whitespace insensitive so `delete 3-6` or `delete 3- 6` would work as well.
 * `delete 3 -`<br>
-  Deletes the 3rd task, 4th task, ..., last task in the todo list.
+  Deletes from 3rd to last in the todo list.
 * `delete - 5`<br>
-  Deletes the first task, 2nd task, ... 5th task in the todo list.
+  Deletes from first to 5th task in the todo list.
 * `delete 5, - 3, 7-8 10, 12 -`<br>
-  Deletes from 1st to 3rd, 5th, 7th, 8th, 10th, and 12th task onwards in the todo list.
+  Deletes from 1st to 3rd, 5th, 7th, 8th, 10th, and from 12th to last task in the todo list.
 
 ### 2.6. Clearing all entries : `clear`
 
