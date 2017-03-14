@@ -1,5 +1,7 @@
 package seedu.tasklist.testutil;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import seedu.tasklist.model.tag.UniqueTagList;
@@ -144,5 +146,11 @@ public class TestDeadlineTask extends TestTask implements ReadOnlyDeadlineTask {
 
     public void setDeadline(Date deadline) {
         this.deadline = deadline;
+    }
+
+    @Override
+    public String getDeadlineString() {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        return dateFormat.format(this.deadline);
     }
 }

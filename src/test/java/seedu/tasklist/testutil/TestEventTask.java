@@ -1,5 +1,7 @@
 package seedu.tasklist.testutil;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import seedu.tasklist.model.tag.UniqueTagList;
@@ -158,5 +160,17 @@ public class TestEventTask extends TestTask implements ReadOnlyEventTask {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    @Override
+    public String getStartDateString() {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        return dateFormat.format(this.startDate);
+    }
+
+    @Override
+    public String getEndDateString() {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        return dateFormat.format(this.endDate);
     }
 }
