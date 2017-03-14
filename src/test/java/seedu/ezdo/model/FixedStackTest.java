@@ -17,21 +17,34 @@ public class FixedStackTest {
 
     @Test
     public void popEmpty_Exception() throws EmptyStackException {
-        stack = new FixedStack<String>(5);
+        stack = new FixedStack<String>(ModelManager.STACK_CAPACITY);
         thrown.expect(EmptyStackException.class);
         stack.pop();
     }
 
     @Test
+    public void push_wrapAround_success() {
+        stack = new FixedStack<String>(ModelManager.STACK_CAPACITY);
+        stack.push("hey");
+        stack.push("meow");
+        stack.push("kitty");
+        stack.push("dog");
+        stack.push("BAZINGA");
+        stack.push("world");
+        assertTrue("world".equals(stack.pop()));
+    }
+
+    @Test
     public void push_success_notEmpty() {
-        stack = new FixedStack<String>(5);
+        stack = new FixedStack<String>(ModelManager.STACK_CAPACITY);
         stack.push("MEOWR");
         assertFalse(stack.isEmpty());
+        assertTrue("MEOWR".equals(stack.pop()));
     }
 
     @Test
     public void popIndexZero_success_equalsPushed() {
-        stack = new FixedStack<String>(5);
+        stack = new FixedStack<String>(ModelManager.STACK_CAPACITY);
         stack.push("MEOWR");
         String popped = stack.pop();
         assertTrue(("MEOWR").equals(popped));
@@ -39,7 +52,7 @@ public class FixedStackTest {
 
     @Test
     public void pop_OtherIndex_success_equalsPushed() {
-        stack = new FixedStack<String>(5);
+        stack = new FixedStack<String>(ModelManager.STACK_CAPACITY);
         stack.push("lol");
         stack.push("omg");
         String popped = stack.pop();
@@ -48,7 +61,7 @@ public class FixedStackTest {
 
     @Test
     public void clear_isEmpty() {
-        stack = new FixedStack<String>(5);
+        stack = new FixedStack<String>(ModelManager.STACK_CAPACITY);
         stack.push("omg");
         stack.push("hello");
         stack.clear();
