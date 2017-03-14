@@ -93,10 +93,11 @@ Given below is a quick overview of each component.
 > Tip: The `.pptx` files used to create diagrams in this document can be found in the [diagrams](diagrams/) folder.
 > To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
 
-#### `Commons`
+#### `Main`
 The **`Main`** has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
+
 
 #### `Commons`
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
@@ -106,15 +107,18 @@ Two of those classes play important roles at the architecture level.
   is used by components to communicate with other components using events (i.e. a form of _Event Driven_ design)
 * `LogsCenter` : Used by many classes to write log messages to the App's log file.
 
-The rest of the App consists of four components.
+
 #### `UI`
 The [**`UI`**](#ui-component) component is the interaction between the user and the application.
+
 
 #### `Logic`
 The [**`Logic`**](#logic-component) component contains the command executor.
 
+
 #### `Model`
 The [**`Model`**](#model-component) component Holds the data of the App in-memory.
+
 
 #### `Storage`
 The [**`Storage`**](#storage-component) component Reads data from, and writes data to, the hard disk.
@@ -124,9 +128,8 @@ Each of the four components
 * Defines its _API_ in an `interface` with the same name as the Component.
 * Exposes its functionality using a `{Component Name}Manager` class.
 
-For example, the `Logic` component (see the class diagram given below) defines its API in the `Logic.java`
+For example, the `Logic` component ([Figure 2.1.2](#logic)) defines its API in the `Logic.java`
 interface and exposes its functionality using the `LogicManager.java` class.<br>
-see [Figure 2.1.2](#logic) : Class Diagram of the Logic Component <br>
 
 #### Events-Driven nature of the design
 
@@ -141,6 +144,7 @@ _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
+
 <img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
 _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 
@@ -185,6 +189,7 @@ _Figure 2.3.1 : Structure of the Logic Component_
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
+ 
 <img src="images/DeletePersonSdForLogic.png" width="800"><br>
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
@@ -333,7 +338,8 @@ Here are the steps to convert the project documentation files to PDF format.
  1. Click on the `Print` option in Chrome's menu.
  1. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. <br>
     For best results, use the settings indicated in the screenshot below. <br>
-    <img src="images/chrome_save_as_pdf.png" width="300"><br>
+   
+   <img src="images/chrome_save_as_pdf.png" width="300"><br>
     _Figure 5.4.1 : Saving documentation as PDF files in Chrome_
 
 ### 5.6. Managing Dependencies
