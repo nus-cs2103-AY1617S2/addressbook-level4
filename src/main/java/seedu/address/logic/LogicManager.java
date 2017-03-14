@@ -24,12 +24,13 @@ public class LogicManager extends ComponentManager implements Logic {
     private final Model model;
     private final Parser parser;
     private final DateTimeParser dtParser;
-    public static UndoManager undoCommandHistory = new UndoManager();
+    public static UndoManager undoCommandHistory;
 
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.parser = new Parser();
         dtParser = new DateTimeParserManager();
+        undoCommandHistory = UndoManager.getInstance();
     }
 
     @Override

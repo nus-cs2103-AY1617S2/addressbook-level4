@@ -63,31 +63,34 @@ public class FindCommand extends Command {
         Date end;
         if (keywords == null) {
             if ("".equals(startDate) && isParsableDate(endDate)) {
-                if (endDate.matches("[a-zA-Z]+"))
+                if (endDate.matches("[a-zA-Z]+")) {
                     end = dtParser.parse(endDate + "235959").get(0).getDates().get(0);
-                else
+                } else {
                     end = dtParser.parse(endDate).get(0).getDates().get(0);
-
+                }
                 start = dtParser.parse("today 000000").get(0).getDates().get(0);
 
                 saveCurrentState();
                 model.updateFilteredTaskList(start, end);
             } else if (isParsableDate(startDate) && isParsableDate(endDate)) {
-                if (startDate.matches("[a-zA-Z]+"))
+                if (startDate.matches("[a-zA-Z]+")) {
                     start = dtParser.parse(this.startDate + " 000000").get(0).getDates().get(0);
-                else
+                } else {
                     start = dtParser.parse(this.startDate).get(0).getDates().get(0);
+                }
 
-                if (endDate.matches("[a-zA-Z]+"))
+                if (endDate.matches("[a-zA-Z]+")) {
                     end = dtParser.parse(this.endDate + " 235959").get(0).getDates().get(0);
-                else
+                } else {
                     end = dtParser.parse(this.endDate).get(0).getDates().get(0);
+                }
 
                 saveCurrentState();
-                if (end.before(start))
+                if (end.before(start)) {
                     model.updateFilteredTaskList(end, start);
-                else
+                } else {
                     model.updateFilteredTaskList(start, end);
+                }
 
             } else {
                 throw new IllegalDateTimeValueException();

@@ -13,9 +13,11 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.commons.util.FxViewUtil;
-import seedu.address.logic.Autocomplete;
-import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Logic;
+import seedu.address.logic.autocomplete.Autocomplete;
+import seedu.address.logic.autocomplete.AutocompleteTrie;
+import seedu.address.logic.commandhistory.CommandHistory;
+import seedu.address.logic.commandhistory.CommandHistoryLinkedList;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 
@@ -33,8 +35,8 @@ public class CommandBox extends UiPart<Region> {
 
     public CommandBox(AnchorPane commandBoxPlaceholder, Logic logic) {
         super(FXML);
-        this.autocomplete = new Autocomplete();
-        this.commandHistory = new CommandHistory();
+        this.autocomplete = new AutocompleteTrie();
+        this.commandHistory = new CommandHistoryLinkedList();
         this.logic = logic;
         addToPlaceholder(commandBoxPlaceholder);
     }
@@ -123,7 +125,7 @@ public class CommandBox extends UiPart<Region> {
      */
     private void handleSuggestions(String command, int caretPosition, List<String> suggestions) {
         //if empty or no match
-        if (suggestions.isEmpty() || suggestions.size() == Autocomplete.autocompleteData.length) {
+        if (suggestions.isEmpty() || suggestions.size() == AutocompleteTrie.AUTOCOMPLETE_DATA.length) {
             return;
         } else { //show suggestions in the output box
             processSuggestions(command, caretPosition, suggestions);

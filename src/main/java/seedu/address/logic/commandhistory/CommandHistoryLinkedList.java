@@ -1,4 +1,4 @@
-package seedu.address.logic;
+package seedu.address.logic.commandhistory;
 
 import java.util.LinkedList;
 import java.util.ListIterator;
@@ -6,29 +6,24 @@ import java.util.ListIterator;
 /**
  * Class to keep track of previous command executions
  */
-public class CommandHistory {
+public class CommandHistoryLinkedList implements CommandHistory {
     private LinkedList<String> history;
     private ListIterator<String> cursor;
     private boolean hasDirection = false;
     private boolean isTraversingBack = true;
 
-    public CommandHistory() {
+    public CommandHistoryLinkedList() {
         history = new LinkedList<String>();
         resetIterator();
     }
 
-    /**
-     * Adds a command which has been executed previously
-     * @param command - previously executed
-     */
+    @Override
     public void addCommand(String command) {
         history.addFirst(command);
         resetIterator();
     }
 
-    /**
-     * Returns a previously executed command
-     */
+    @Override
     public String previous() {
         if (cursor.hasNext()) {
             if (hasDirection && !isTraversingBack) {
@@ -44,9 +39,7 @@ public class CommandHistory {
         return null;
     }
 
-    /**
-     * Returns the next command (if any) if the user has previously iterated through his commands before
-     */
+    @Override
     public String next() {
         if (cursor.hasPrevious()) {
             if (hasDirection && isTraversingBack) {

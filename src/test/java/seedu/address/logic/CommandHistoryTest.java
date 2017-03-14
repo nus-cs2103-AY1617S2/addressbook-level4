@@ -5,12 +5,15 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
+import seedu.address.logic.commandhistory.CommandHistory;
+import seedu.address.logic.commandhistory.CommandHistoryLinkedList;
+
 public class CommandHistoryTest {
     private CommandHistory history;
 
     @Before
     public void setup() {
-        history = new CommandHistory();
+        history = new CommandHistoryLinkedList();
     }
 
     @Test
@@ -56,7 +59,8 @@ public class CommandHistoryTest {
         assertTrue(history.previous().equals("command7"));
 
         //Iterator all the way with overlaps
-        history.resetIterator();
+        history.addCommand("command8");
+        assertTrue(history.previous().equals("command8"));
         assertTrue(history.previous().equals("command7"));
         assertTrue(history.previous().equals("command6"));
         assertTrue(history.previous().equals("command5"));
@@ -73,9 +77,11 @@ public class CommandHistoryTest {
         assertTrue(history.next().equals("command5"));
         assertTrue(history.next().equals("command6"));
         assertTrue(history.next().equals("command7"));
+        assertTrue(history.next().equals("command8"));
         assertTrue(history.next() == null);
         assertTrue(history.next() == null);
         assertTrue(history.next() == null);
+        assertTrue(history.previous().equals("command8"));
         assertTrue(history.previous().equals("command7"));
         assertTrue(history.previous().equals("command6"));
         assertTrue(history.previous().equals("command5"));

@@ -9,10 +9,18 @@ import seedu.address.model.task.ReadOnlyTask;
 
 public class UndoManager implements Changeable {
 
+    private static UndoManager instance = null;
     private LinkedList<UndoPair<ObservableList<ReadOnlyTask>, ObservableList<Label>>> storageHistory;
 
-    public UndoManager() {
+    private UndoManager() {
         storageHistory = new LinkedList<UndoPair<ObservableList<ReadOnlyTask>, ObservableList<Label>>>();
+    }
+
+    public static UndoManager getInstance() {
+        if (instance == null) {
+            instance = new UndoManager();
+        }
+        return instance;
     }
 
     public void addStorageHistory(ObservableList<ReadOnlyTask> oldTaskState, ObservableList<Label> oldLabelState) {

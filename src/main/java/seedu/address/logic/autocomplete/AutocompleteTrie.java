@@ -1,60 +1,44 @@
-package seedu.address.logic;
+package seedu.address.logic.autocomplete;
 
 import java.util.List;
 
 import seedu.address.model.datastructure.Trie;
 
 /**
- * Handles the autocompletion of the inpur
+ * Handles the auto-completion of the input
  */
-public class Autocomplete {
-    public static String[] autocompleteData = {"help", "add", "by", "repeat", "list"
-            , "edit", "find", "delete", "select", "book"
-            , "confirm", "editlabel", "undo", "clear", "push"
-            , "pull", "export", "exit", "to", "on"
-            , "hourly", "daily", "weekly", "monthly", "yearly"
-            , "overdue", "outstanding", "completed", "today", "yesterday"
-            , "tomorrow", "bookings"};
+public class AutocompleteTrie implements Autocomplete {
     private Trie trie;
 
     /**
      * Initializes auto-complete object with default auto-complete data
      */
-    public Autocomplete() {
+    public AutocompleteTrie() {
         trie = new Trie();
-        trie.load(autocompleteData);
+        trie.load(AUTOCOMPLETE_DATA);
     }
 
     /**
      * Initializes auto-complete object with specified auto-complete data
      */
-    public Autocomplete(String... data) {
+    public AutocompleteTrie(String... data) {
         trie = new Trie();
         trie.load(data);
     }
 
-    /**
-     * Adds more strings for auto completion
-     * @param phrases
-     */
+    @Override
     public void addData(String... phrases) {
         trie.load(phrases);
     }
 
-    /**
-     * Find auto-complete suggestions given a search term
-     * @param term - search term
-     * @return a list of suggestions for the given term
-     */
+    @Override
     public List<String> getSuggestions(String term) {
         return trie.findCompletions(term);
     }
 
     //Command utilities to get word/start index/end index/replace position at current caret position
 
-    /**
-     * Returns the character index at which the characters in the list of suggestions start to differ
-     */
+    @Override
     public int getCommonSubstringEndIndexFromStart(List<String> suggestions) {
         String longestString = getLongestString(suggestions);
         int commonSubstringIndex = 0;
@@ -72,9 +56,7 @@ public class Autocomplete {
         return commonSubstringIndex;
     }
 
-    /**
-     * Returns the longest string in the list, empty string otherwise
-     */
+    @Override
     public String getLongestString(List<String> suggestions) {
         String longest = "";
         for (String suggestion : suggestions) {
@@ -85,10 +67,7 @@ public class Autocomplete {
         return longest;
     }
 
-    /**
-     * Extracts the word at the current the caretPosition in commandTextField
-     * The caret always represents the character on the left of it
-     */
+    @Override
     public String getWordAtCursor(String command, int caretPosition) {
         if (command != null && !command.trim().equals("")) {
             int startIndex = getStartIndexOfWordAtCursor(command, caretPosition);
@@ -100,9 +79,7 @@ public class Autocomplete {
 
     }
 
-    /**
-     * Gets the start index of the word at the caretPosition in commandTextField
-     */
+    @Override
     public int getStartIndexOfWordAtCursor(String command, int caretPosition) {
         int currentPosition = caretPosition;
         int startIndex;
@@ -122,9 +99,7 @@ public class Autocomplete {
         return startIndex;
     }
 
-    /**
-     * Gets the end index of the word at the caretPosition in commandTextField
-     */
+    @Override
     public int getEndIndexOfWordAtCursor(String command, int caretPosition) {
         int currentPosition = caretPosition;
         int endIndex;
@@ -137,9 +112,7 @@ public class Autocomplete {
         return endIndex;
     }
 
-    /**
-     * replace the current word with the suggestion provided
-     */
+    @Override
     public String replaceCurrentWordWithSuggestion(String command, int caretPosition,
                                                     String suggestion, String toAppend) {
         StringBuffer commandAutocompleted = new StringBuffer(command);
@@ -151,7 +124,7 @@ public class Autocomplete {
 
     @Override
     public boolean equals(Object other) {
-        if (other instanceof Autocomplete) {
+        if (other instanceof AutocompleteTrie) {
             Autocomplete compare = (Autocomplete) other;
             return getSuggestions("").containsAll(compare.getSuggestions(""));
         } else {
