@@ -144,7 +144,7 @@ public class Task implements ReadOnlyTask {
         isDone = true;
     }
 
-    public void markUndoen () {
+    public void markUndone () {
         isDone = false;
     }
 
