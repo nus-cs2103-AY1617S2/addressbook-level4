@@ -1,11 +1,14 @@
 package seedu.jobs.model.task;
 
+import seedu.jobs.model.tag.UniqueTagList;
+
 public interface ReadOnlyTask {
 		
 	Name getName();
 	Time getStartTime();
 	Time getEndTime();
 	Description getDescription();
+	UniqueTagList getTags();
 	boolean isCompleted();
 	
 	
