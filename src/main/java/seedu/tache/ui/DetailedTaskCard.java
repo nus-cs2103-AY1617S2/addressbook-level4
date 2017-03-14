@@ -15,6 +15,9 @@ public class DetailedTaskCard extends UiPart<Region> {
     private HBox cardPane;
 
     @FXML
+    private Label id;
+    
+    @FXML
     private Label name;
 
     @FXML
@@ -34,6 +37,7 @@ public class DetailedTaskCard extends UiPart<Region> {
 
     public DetailedTaskCard(ReadOnlyDetailedTask detailedTask, int displayedIndex) {
         super(FXML);
+        id.setText(toAlphabetic(displayedIndex) + ". ");
         name.setText(detailedTask.getName().toString());
         startDate.setText(detailedTask.getStartDate().toString());
         endDate.setText(detailedTask.getEndDate().toString());
@@ -44,5 +48,21 @@ public class DetailedTaskCard extends UiPart<Region> {
 
     private void initTags(ReadOnlyDetailedTask detailedTask) {
         detailedTask.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+    
+    private static String toAlphabetic(int i) {
+        int input = i - 1;
+        if( input<0 ) {
+            return "-"+toAlphabetic(-input-1);
+        }
+
+        int quot = input/26;
+        int rem = input%26;
+        char letter = (char)((int)'A' + rem);
+        if( quot == 0 ) {
+            return ""+letter;
+        } else {
+            return toAlphabetic(quot-1) + letter;
+        }
     }
 }
