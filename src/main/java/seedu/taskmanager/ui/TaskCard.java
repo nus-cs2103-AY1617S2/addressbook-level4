@@ -51,8 +51,13 @@ public class TaskCard extends UiPart<Region> {
         	endTime.textProperty().bind(empty);
         	toLabel.textProperty().bind(empty);
         } else {
-            endTime.setText(task.getEndTime().value);
-            toLabel.textProperty().bind(to);
+        	if ((task.getStartTime().value).equals("EMPTY_FIELD")) {
+                endTime.setText(task.getEndTime().value);
+            	toLabel.textProperty().bind(empty);
+        	} else {
+                endTime.setText(task.getEndTime().value);
+                toLabel.textProperty().bind(to);        		
+        	}
         }
  //        initCategory(task);
     }
