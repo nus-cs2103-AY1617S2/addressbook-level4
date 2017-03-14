@@ -48,11 +48,6 @@ public class DeleteCommand extends Command {
         int taskAndEventSize = taskSize + lastShownEventList.size();
         int totalSize = taskAndEventSize + lastShownFloatingTaskList.size();
 
-        System.out.println("taskSize = " + taskSize);
-        System.out.println("taskAndEventSize = " + taskAndEventSize);
-        System.out.println("totalSize = " + totalSize);
-
-
         if (targetIndex <= taskSize) {
             ReadOnlyTask taskToDelete = lastShownTaskList.get(targetIndex - 1);
 
