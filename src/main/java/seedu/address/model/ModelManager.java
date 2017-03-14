@@ -59,7 +59,7 @@ public class ModelManager extends ComponentManager implements Model {
         this.nonFloatingTasks = new FilteredList<>(this.currentAddressBook.getTaskList());
         this.floatingTasks = new FilteredList<>(this.currentAddressBook.getTaskList());
         this.completedTasks = new FilteredList<>(this.currentAddressBook.getTaskList());
-        updateFilteredListToShowAll();
+        updateFilteredListToShowAllNonFloating();
         updateFilteredListToShowAllFloatingTasks();
         updateFilteredListToShowAllCompletedTasks();
     }
@@ -178,29 +178,40 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredListToShowAll() {
-        this.nonFloatingTasks.setPredicate(new PredicateExpression(new DateNotFloatingQualifier())::satisfies);
+    public void updateFilteredListToShowAllNonFloating() {
+        this.nonFloatingTasks.setPredicate(new PredicateExpression(new TaskIsNotFloatingQualifier())::satisfies);
     }
 
     @Override
     public void updateFilteredListToShowAllFloatingTasks() {
-        this.floatingTasks.setPredicate(new PredicateExpression(new DateFloatingQualifier())::satisfies);
+        this.floatingTasks.setPredicate(new PredicateExpression(new TaskIsFloatingQualifier())::satisfies);
     }
 
     @Override
     public void updateFilteredListToShowAllCompletedTasks() {
         this.completedTasks.setPredicate(new PredicateExpression(new TaskIsCompleteQualifier())::satisfies);
     }
+    
+    @Override
+    public void updateFilteredListToShowFilteredNonFloatingTasks(Set<String> keywords) {
+        this.nonFloatingTasks.setPredicate(new PredicateExpression(new NameNonFloatingTaskQualifier(keywords))::satisfies);
+    }
+    
+    @Override
+    public void updateFilteredListToShowFilteredFloatingTasks(Set<String> keywords) {
+        this.floatingTasks.setPredicate(new PredicateExpression(new NameFloatingTaskQualifier(keywords))::satisfies);
+    }
+    
+    @Override
+    public void updateFilteredListToShowFilteredCompletedTasks(Set<String> keywords) {
+        this.completedTasks.setPredicate(new PredicateExpression(new NameCompletedTaskQualifier(keywords))::satisfies);
+    }
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
-    }
-
-    private void updateFilteredTaskList(Expression expression) {
-        this.nonFloatingTasks.setPredicate(expression::satisfies);
-        this.floatingTasks.setPredicate(expression::satisfies);
-        this.completedTasks.setPredicate(expression::satisfies);
+    	updateFilteredListToShowFilteredNonFloatingTasks(keywords);
+    	updateFilteredListToShowFilteredFloatingTasks(keywords);
+    	updateFilteredListToShowFilteredCompletedTasks(keywords);
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
@@ -233,24 +244,21 @@ public class ModelManager extends ComponentManager implements Model {
         boolean run(ReadOnlyTask task);
         String toString();
     }
-
-    private class NameQualifier implements Qualifier {
+    
+    private class NameFloatingTaskQualifier implements Qualifier {
         private Set<String> nameKeyWords;
+        private FuzzyFinder fuzzyFinder;
 
-        NameQualifier(Set<String> nameKeyWords) {
+        NameFloatingTaskQualifier(Set<String> nameKeyWords) {
             this.nameKeyWords = nameKeyWords;
+            this.fuzzyFinder = new FuzzyFinder();
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return nameKeyWords.stream()
-                    .filter(keyword -> fuzzyFind(task.getTitle().title.toLowerCase(), keyword))
-                    .findAny()
-                    .isPresent();
-        }
-
-        public boolean fuzzyFind(String title, String keyword) {
-            return FuzzySearch.ratio(title, keyword) > MATCHING_INDEX;
+            boolean isKeywordPresent = fuzzyFinder.check(task, nameKeyWords);
+            boolean isFloatingTask = !task.isCompleted() && task.isFloating();
+            return isFloatingTask && isKeywordPresent;
         }
 
         @Override
@@ -258,8 +266,66 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
+    
+    private class NameNonFloatingTaskQualifier implements Qualifier {
+        private Set<String> nameKeyWords;
+        private FuzzyFinder fuzzyFinder;
 
-    private class DateFloatingQualifier implements Qualifier {
+        NameNonFloatingTaskQualifier(Set<String> nameKeyWords) {
+            this.nameKeyWords = nameKeyWords;
+            this.fuzzyFinder = new FuzzyFinder();
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            boolean isKeywordPresent = fuzzyFinder.check(task, nameKeyWords);
+            boolean isNonFloatingTask = !task.isCompleted() && !task.isFloating();
+            return isNonFloatingTask && isKeywordPresent;
+        }
+
+        @Override
+        public String toString() {
+            return "name=" + String.join(", ", nameKeyWords);
+        }
+    }
+    
+    private class NameCompletedTaskQualifier implements Qualifier {
+        private Set<String> nameKeyWords;
+        private FuzzyFinder fuzzyFinder;
+
+        NameCompletedTaskQualifier(Set<String> nameKeyWords) {
+            this.nameKeyWords = nameKeyWords;
+            this.fuzzyFinder = new FuzzyFinder();
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            boolean isKeywordPresent = fuzzyFinder.check(task, nameKeyWords);
+            boolean isCompletedTask = task.isCompleted();
+            return isCompletedTask && isKeywordPresent;
+        }
+
+        @Override
+        public String toString() {
+            return "name=" + String.join(", ", nameKeyWords);
+        }
+    }
+    
+    private class FuzzyFinder {
+
+        public boolean check(ReadOnlyTask task, Set<String> nameKeyWords) {
+            return nameKeyWords.stream()
+                    .filter(keyword -> fuzzyFind(task.getTitle().title.toLowerCase(), keyword.toLowerCase()))
+                    .findAny()
+                    .isPresent();
+        }
+
+        public boolean fuzzyFind(String title, String keyword) {
+            return FuzzySearch.ratio(title, keyword) > MATCHING_INDEX;
+        }
+    }
+
+    private class TaskIsFloatingQualifier implements Qualifier {
 
         @Override
         public boolean run(ReadOnlyTask task) {
@@ -268,7 +334,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     }
 
-    private class DateNotFloatingQualifier implements Qualifier {
+    private class TaskIsNotFloatingQualifier implements Qualifier {
 
         @Override
         public boolean run(ReadOnlyTask task) {

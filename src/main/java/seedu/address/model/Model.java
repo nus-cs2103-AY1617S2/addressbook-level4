@@ -47,13 +47,22 @@ public interface Model {
     UnmodifiableObservableList<ReadOnlyTask> getCompletedTaskList();
 
     /** Updates the filter of the filtered task list to show all tasks */
-    void updateFilteredListToShowAll();
-
+    void updateFilteredListToShowAllNonFloating();
+    
     /** Updates the filter of the filtered task list to show all floating tasks */
     void updateFilteredListToShowAllFloatingTasks();
 
     /** Updates the filter of the filtered task list to show all completed tasks */
     void updateFilteredListToShowAllCompletedTasks();
+    
+    /** Updates the filter of the filtered task list to show all tasks */
+    void updateFilteredListToShowFilteredNonFloatingTasks(Set<String> keywords);
+    
+    /** Updates the filter of the filtered task list to show all floating tasks */
+    void updateFilteredListToShowFilteredFloatingTasks(Set<String> keywords);
+    
+    /** Updates the filter of the filtered task list to show all completed tasks */
+    void updateFilteredListToShowFilteredCompletedTasks(Set<String> keywords);
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
