@@ -14,7 +14,8 @@ public class StartTime {
 
     public static final String MESSAGE_STARTTIME_CONSTRAINTS =
         "Item Start Time should be 2 alphanumeric/period strings separated by '@'";
-    public static final String STARTTIME_VALIDATION_REGEX = ".*";
+    public static final String STARTTIME_VALIDATION_REGEX =
+        "^(0[0-9]||1[0-2])/([0-2][0-9]||3[0-1])/([0-9][0-9])?[0-9][0-9] [0-2]\\d:[0-6]\\d$";
 
     public final String value;
 
