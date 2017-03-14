@@ -4,6 +4,7 @@ import static seedu.doit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.doit.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.doit.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.doit.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static seedu.doit.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.doit.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -14,10 +15,10 @@ import java.util.Optional;
 import seedu.doit.commons.exceptions.IllegalValueException;
 import seedu.doit.logic.commands.Command;
 import seedu.doit.logic.commands.EditCommand;
-import seedu.doit.logic.commands.EditCommand.EditTaskDescriptor;
+import seedu.doit.logic.commands.EditCommand.EditEventDescriptor;
 import seedu.doit.logic.commands.IncorrectCommand;
-
 import seedu.doit.model.tag.UniqueTagList;
+
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -28,10 +29,11 @@ public class EditCommandParser {
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
      */
+
     public Command parse(String args) {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
-            new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_END, PREFIX_DESCRIPTION, PREFIX_TAG);
+            new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_START, PREFIX_END, PREFIX_DESCRIPTION, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
@@ -40,22 +42,27 @@ public class EditCommandParser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
-        EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
+        EditEventDescriptor editEventDescriptor = new EditEventDescriptor();
+
         try {
-            editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
-            editTaskDescriptor.setPriority(ParserUtil.parsePriority(argsTokenizer.getValue(PREFIX_PRIORITY)));
-            editTaskDescriptor.setDeadline(ParserUtil.parseDeadline(argsTokenizer.getValue(PREFIX_END)));
-            editTaskDescriptor.setDescription(ParserUtil.parseDescription(argsTokenizer.getValue(PREFIX_DESCRIPTION)));
-            editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
+            editEventDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
+            editEventDescriptor.setPriority(ParserUtil.parsePriority(argsTokenizer.getValue(PREFIX_PRIORITY)));
+            editEventDescriptor.setStartTime(ParserUtil.parseStartTime(argsTokenizer.getValue(PREFIX_START)));
+            editEventDescriptor.setDeadline(ParserUtil.parseDeadline(argsTokenizer.getValue(PREFIX_END)));
+            editEventDescriptor.setDescription(ParserUtil.parseDescription(argsTokenizer.getValue(PREFIX_DESCRIPTION)));
+            editEventDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
+
+            if (!editEventDescriptor.isAnyFieldEdited()) {
+                return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
+            }
+
+            return new EditCommand(index.get(), editEventDescriptor);
+
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
 
-        if (!editTaskDescriptor.isAnyFieldEdited()) {
-            return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
-        }
 
-        return new EditCommand(index.get(), editTaskDescriptor);
     }
 
     /**
