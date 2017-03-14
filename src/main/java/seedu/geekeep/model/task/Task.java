@@ -14,6 +14,7 @@ public class Task implements ReadOnlyTask {
     private DateTime endDateTime;
     private DateTime startDateTime;
     private Location location;
+    private boolean isDone;
 
     private UniqueTagList tags;
 
@@ -133,6 +134,18 @@ public class Task implements ReadOnlyTask {
 
     public boolean isDeadline() {
         return startDateTime == null && endDateTime != null;
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public void markDone() {
+        isDone = true;
+    }
+
+    public void markUndoen () {
+        isDone = false;
     }
 
 }
