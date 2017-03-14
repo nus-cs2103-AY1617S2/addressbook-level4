@@ -20,7 +20,7 @@ public class EditCommandTest extends ToDoListGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby @@91234567 from:bobby@gmail.com to:Block 123, Bobby Street 3 ##husband";
+        String detailsToEdit = "Bobby @@91234567 from/bobby@gmail.com to.Block 123, Bobby Street 3 ##husband";
         int todoListIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withTitle("Bobby").withVenue("91234567")
@@ -105,7 +105,7 @@ public class EditCommandTest extends ToDoListGuiTest {
     public void edit_duplicateTask_failure() {
         commandBox.runCommand("edit 3 Alice Pauline @@85355255 from:alice@gmail.com "
                                 + "to:123, Jurong West Ave 6 ##/friends");
-        assertResultMessage(EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
     /**
@@ -128,6 +128,6 @@ public class EditCommandTest extends ToDoListGuiTest {
         // confirm the list now contains all previous tasks plus the task with updated details
         expectedTasksList[todoListIndex - 1] = editedTask;
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
-        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedTask));
+        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
 }
