@@ -9,24 +9,28 @@ import seedu.address.model.tag.UniqueTagList;
  * Represents a Task in the endtime book.
  * Guarantees: details are present and not null, field values are validated.
  */
-public class Task implements ReadOnlyTask {
+public class Task implements ReadOnlyTask, Comparable<Task>{
 
     private Title title;
     private StartTime startTime;
     private Venue venue;
     private EndTime endTime;
+    private UrgencyLevel urgencyLevel;
+    private Description description;
 
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Title title, Venue venue, StartTime starttime, EndTime endtime, UniqueTagList tags) {
+    public Task(Title title, Venue venue, StartTime starttime, EndTime endtime, UrgencyLevel urgencylevel,Description description, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(title, starttime, venue, endtime, tags);
         this.title = title;
         this.venue = venue;
         this.startTime = starttime;
         this.endTime = endtime;
+        this.urgencyLevel = urgencylevel;
+        this.description = description;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -34,7 +38,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getTitle(), source.getVenue(), source.getStartTime(), source.getEndTime(), source.getTags());
+        this(source.getTitle(), source.getVenue(), source.getStartTime(), source.getEndTime(), source.getUrgencyLevel(), source.getDescription(),source.getTags());
     }
 
     public void setTitle(Title name) {
@@ -82,6 +86,26 @@ public class Task implements ReadOnlyTask {
         return new UniqueTagList(tags);
     }
 
+    @Override
+    public UrgencyLevel getUrgencyLevel() {
+        return urgencyLevel;
+    }
+    
+    @Override
+    public Description getDescription() {
+        return description;
+    }
+
+    public void setDescription(Description description) {
+        assert description != null;
+        this.description = description;
+    }
+
+    public void setUrgencyLevel(UrgencyLevel urgencyLevel) {
+        assert urgencyLevel != null;
+        this.urgencyLevel = urgencyLevel;
+    }
+
     /**
      * Replaces this Task's tags with the tags in the argument tag list.
      */
@@ -99,6 +123,8 @@ public class Task implements ReadOnlyTask {
         this.setStartTime(replacement.getStartTime());
         this.setVenue(replacement.getVenue());
         this.setEndTime(replacement.getEndTime());
+        this.setUrgencyLevel(replacement.getUrgencyLevel());
+        this.setDescription(replacement.getDescription());
         this.setTags(replacement.getTags());
     }
 
@@ -112,12 +138,17 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(title, venue, startTime, endTime, tags);
+        return Objects.hash(title, venue, startTime, endTime, urgencyLevel, description, tags);
     }
 
     @Override
     public String toString() {
         return getAsText();
+    }
+    
+    @Override
+    public int compareTo(Task task) {
+        return task.getUrgencyLevel().getIntValue() - this.getUrgencyLevel().getIntValue();
     }
 
 }

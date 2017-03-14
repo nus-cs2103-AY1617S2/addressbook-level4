@@ -47,7 +47,7 @@ public class XmlToDoListStorage implements ToDoListStorage {
         File todoListFile = new File(filePath);
 
         if (!todoListFile.exists()) {
-            logger.info("ToDoList file "  + todoListFile + " not found");
+            logger.info("To-do List file "  + todoListFile + " not found");
             return Optional.empty();
         }
 
