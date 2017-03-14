@@ -2,7 +2,10 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 
+import java.text.ParseException;
 import java.util.NoSuchElementException;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -18,14 +21,17 @@ public class AddCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
+     * @throws ParseException 
      */
-    public Command parse(String args) {
+    public Command parse(String args) throws ParseException {
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_TAG);
+                new ArgumentTokenizer(PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         try {
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
+                    argsTokenizer.getValue(PREFIX_START_TIME).get(),
+                    argsTokenizer.getValue(PREFIX_END_TIME).get(),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
             );
         } catch (NoSuchElementException nsee) {

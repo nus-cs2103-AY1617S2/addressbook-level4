@@ -1,5 +1,9 @@
 package seedu.address.logic.commands;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,7 +25,6 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a todo to the todo list. "
             + "Parameters: TODO [t/TAG] \n"
-            + "OR: TODO d/DEADLINE [t/TAG] \n"
             + "OR: TODO s/STARTTIME e/ENDTIME [t/TAG] \n"
             + "Example: " + COMMAND_WORD
             + " Take dog for walk s/11-11-17/5:00pm e/11-11-17/6:00pm t/todoal";
@@ -36,17 +39,33 @@ public class AddCommand extends Command {
      * * Only adds floating task for now
      *
      * @throws IllegalValueException if any of the raw values are invalid
+     * @throws ParseException 
      */
-    public AddCommand(String todo, Set<String> tags)
-            throws IllegalValueException {
+    public AddCommand(String todo, 
+    				  String startTime,
+    				  String endTime,
+    				  Set<String> tags)
+            throws IllegalValueException, ParseException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        this.toAdd = new Todo(
-                new Name(todo),
-                new UniqueTagList(tagSet)
-        );
+        
+        //String inputString = "11-11-2012";
+        DateFormat dateFormat = new SimpleDateFormat("yy-MM-dd");
+
+        if (startTime != null && endTime != null) {
+        	this.toAdd = new Todo(
+        			new Name(todo),
+        			dateFormat.parse(startTime),
+        			dateFormat.parse(endTime),
+        			new UniqueTagList(tagSet));
+        } else {
+        	this.toAdd = new Todo(
+                    new Name(todo),
+                    new UniqueTagList(tagSet)
+            );
+        }
     }
 
     @Override
