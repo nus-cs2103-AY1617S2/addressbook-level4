@@ -53,8 +53,6 @@ Format: `help`
 Adds a task to the todo list<br>
 Format: `add NAME [startdate/STARTDATE] [enddate/ENDDATE]`
 
-> Tasks can have any number of tags (including 0).
-
 Examples:
 
 * `add Do Homework` <br>
@@ -127,7 +125,7 @@ Examples:
   Deletes the 3rd task, 4th task, ..., last task in the todo list.
 * `delete - 5`<br>
   Deletes the first task, 2nd task, ... 5th task in the todo list.
-* `delete 5, - 3, 7-8 10, 12 -`
+* `delete 5, - 3, 7-8 10, 12 -`<br>
   Deletes from 1st to 3rd, 5th, 7th, 8th, 10th, and 12th task onwards in the todo list.
 
 ### 2.6. Clearing all entries : `clear`
