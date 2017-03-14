@@ -32,8 +32,8 @@
                                 <HBox>
                                     <Label fx:id="id" styleClass="cell_big_label"/>
                                     <Label fx:id="name" text="\$first" styleClass="cell_big_label"/>
-                                    <Label fx:id="start" text="\$start" styleClass="cell_small_label"/>
-                                    <Label fx:id="end" text="\$end" styleClass="cell_small_label"/>
+                                    <Label fx:id="start" styleClass="cell_small_label"/>
+                                    <Label fx:id="end" styleClass="cell_small_label"/>
                                 </HBox>
                             </children>
                         </HBox>
