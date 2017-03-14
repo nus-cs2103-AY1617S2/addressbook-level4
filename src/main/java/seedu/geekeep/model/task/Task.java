@@ -31,6 +31,11 @@ public class Task implements ReadOnlyTask {
      */
     public Task(Title title, DateTime startDateTime,
                 DateTime endDateTime, Location location, UniqueTagList tags) {
+        this(title, startDateTime, endDateTime, location, tags, false);
+    }
+
+    public Task(Title title, DateTime startDateTime,
+                DateTime endDateTime, Location location, UniqueTagList tags, boolean isDone) {
         assert !CollectionUtil.isAnyNull(title);
         if (startDateTime != null) assert endDateTime != null;
         if(startDateTime != null && endDateTime != null)
@@ -40,6 +45,7 @@ public class Task implements ReadOnlyTask {
         this.endDateTime = endDateTime;
         this.startDateTime = startDateTime;
         this.location = location;
+        this.isDone = isDone;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -141,6 +147,7 @@ public class Task implements ReadOnlyTask {
         return startDateTime == null && endDateTime != null;
     }
 
+    @Override
     public boolean isDone() {
         return isDone;
     }

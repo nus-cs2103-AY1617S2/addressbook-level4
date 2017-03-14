@@ -92,5 +92,29 @@ public class TestTask implements ReadOnlyTask {
         return getAsText();
     }
 
+    @Override
+    public boolean isFloatingTask() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean isEvent() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean isDeadline() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean isDone() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
 
 }
