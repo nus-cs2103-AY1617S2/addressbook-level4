@@ -95,7 +95,7 @@ public class Task implements ReadOnlyTask {
     public Description getDescription() {
         return description;
     }
-    
+
     public void setDescription(Description description) {
         assert description != null;
         this.description = description;
