@@ -35,6 +35,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
+
     }
 
     public ModelManager() {
@@ -172,13 +173,13 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredTaskListToShowDone() {
-        filteredTasks.setPredicate(t -> t.isDone());
+        filteredTasks.setPredicate(t -> ((Task)t).isDone());
 
     }
 
     @Override
     public void updateFilteredTaskListToShowUndone() {
-        filteredTasks.setPredicate(t -> !t.isDone());
+        filteredTasks.setPredicate(t -> !((Task)t).isDone());
 
     }
 

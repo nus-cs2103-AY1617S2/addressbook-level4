@@ -10,7 +10,7 @@ import seedu.geekeep.model.task.UniqueTaskList;
  */
 public class TypicalTestPersons {
 
-    public TestPerson alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
+    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
 
     public TypicalTestPersons() {
         try {
@@ -44,7 +44,7 @@ public class TypicalTestPersons {
     }
 
     public static void loadTaskManagerWithSampleData(TaskManager ab) {
-        for (TestPerson person : new TypicalTestPersons().getTypicalPersons()) {
+        for (TestTask person : new TypicalTestPersons().getTypicalPersons()) {
             try {
                 ab.addTask(new Task(person));
             } catch (UniqueTaskList.DuplicateTaskException e) {
@@ -53,8 +53,8 @@ public class TypicalTestPersons {
         }
     }
 
-    public TestPerson[] getTypicalPersons() {
-        return new TestPerson[]{alice, benson, carl, daniel, elle, fiona, george};
+    public TestTask[] getTypicalPersons() {
+        return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
     }
 
     public TaskManager getTypicalTaskManager() {

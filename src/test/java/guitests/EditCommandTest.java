@@ -13,14 +13,14 @@ import seedu.geekeep.model.task.DateTime;
 import seedu.geekeep.model.task.Location;
 import seedu.geekeep.model.task.Title;
 import seedu.geekeep.testutil.PersonBuilder;
-import seedu.geekeep.testutil.TestPerson;
+import seedu.geekeep.testutil.TestTask;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
 public class EditCommandTest extends AddressBookGuiTest {
 
     // The list of persons in the person list panel is expected to match this list.
     // This list is updated with every successful call to assertEditSuccess().
-    TestPerson[] expectedPersonsList = td.getTypicalPersons();
+    TestTask[] expectedPersonsList = td.getTypicalPersons();
 
     /**
      * Checks whether the edited person has the correct updated details.
@@ -32,7 +32,7 @@ public class EditCommandTest extends AddressBookGuiTest {
      * @param editedPerson the expected person after editing the person's details
      */
     private void assertEditSuccess(int filteredPersonListIndex, int addressBookIndex,
-                                    String detailsToEdit, TestPerson editedPerson) {
+                                    String detailsToEdit, TestTask editedPerson) {
         commandBox.runCommand("edit " + filteredPersonListIndex + " " + detailsToEdit);
 
         // confirm the new card contains the right data
@@ -51,7 +51,7 @@ public class EditCommandTest extends AddressBookGuiTest {
             = "Bobby s/2017-04-01T10:16:30 e/2017-04-01T10:16:30 l/Block 123, Bobby Street 3 t/husband";
         int addressBookIndex = 1;
 
-        TestPerson editedPerson = new PersonBuilder().withName("Bobby")
+        TestTask editedPerson = new PersonBuilder().withName("Bobby")
                 .withEndDateTime("2017-04-01T10:16:30")
                 .withStartDateTime("2017-04-01T10:16:30")
                 .withLocation("Block 123, Bobby Street 3")
@@ -65,8 +65,8 @@ public class EditCommandTest extends AddressBookGuiTest {
         String detailsToEdit = "t/";
         int addressBookIndex = 2;
 
-        TestPerson personToEdit = expectedPersonsList[addressBookIndex - 1];
-        TestPerson editedPerson = new PersonBuilder(personToEdit).withTags().build();
+        TestTask personToEdit = expectedPersonsList[addressBookIndex - 1];
+        TestTask editedPerson = new PersonBuilder(personToEdit).withTags().build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
@@ -86,8 +86,8 @@ public class EditCommandTest extends AddressBookGuiTest {
         int filteredPersonListIndex = 1;
         int addressBookIndex = 5;
 
-        TestPerson personToEdit = expectedPersonsList[addressBookIndex - 1];
-        TestPerson editedPerson = new PersonBuilder(personToEdit).withName("Belle").build();
+        TestTask personToEdit = expectedPersonsList[addressBookIndex - 1];
+        TestTask editedPerson = new PersonBuilder(personToEdit).withName("Belle").build();
 
         assertEditSuccess(filteredPersonListIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
@@ -133,8 +133,8 @@ public class EditCommandTest extends AddressBookGuiTest {
         String detailsToEdit = "t/sweetie t/bestie";
         int addressBookIndex = 2;
 
-        TestPerson personToEdit = expectedPersonsList[addressBookIndex - 1];
-        TestPerson editedPerson = new PersonBuilder(personToEdit).withTags("sweetie", "bestie").build();
+        TestTask personToEdit = expectedPersonsList[addressBookIndex - 1];
+        TestTask editedPerson = new PersonBuilder(personToEdit).withTags("sweetie", "bestie").build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
