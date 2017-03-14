@@ -142,11 +142,11 @@ public class UniqueTagList implements Iterable<Tag> {
      *
      * @throws TagNotFoundException if no such tag could be found in the list.
      */
-    public boolean remove(ReadOnlyTag toRemove) throws TagNotFoundException {
+    public boolean remove(Tag toRemove) throws TagNotFoundException {
         assert toRemove != null;
         final boolean tagFoundAndDeleted = internalList.remove(toRemove);
         if (!tagFoundAndDeleted) {
-            throw new tagNotFoundException();
+            throw new TagNotFoundException();
         }
         return tagFoundAndDeleted;
     }
@@ -185,5 +185,10 @@ public class UniqueTagList implements Iterable<Tag> {
             super("Operation would result in duplicate tags");
         }
     }
-
+    
+    /**
+     * Signals that an operation targeting a specified person in the list would fail because
+     * there is no such matching person in the list.
+     */
+    public static class TagNotFoundException extends Exception {}
 }
