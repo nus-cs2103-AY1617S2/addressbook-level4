@@ -8,7 +8,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
-import javafx.scene.web.WebView;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.task.model.task.ReadOnlyTask;
 
