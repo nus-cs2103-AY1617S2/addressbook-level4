@@ -18,8 +18,8 @@ import seedu.geekeep.model.TaskManager;
 import seedu.geekeep.model.task.Task;
 import seedu.geekeep.testutil.TypicalTestPersons;
 
-public class XmlAddressBookStorageTest {
-    private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlAddressBookStorageTest/");
+public class XmlTaskManagerStorageTest {
+    private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlTaskManagerStorageTest/");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
