@@ -126,14 +126,17 @@ public class Task implements ReadOnlyTask {
         return getAsText();
     }
 
+    @Override
     public boolean isFloatingTask() {
         return startDateTime == null && endDateTime == null;
     }
 
+    @Override
     public boolean isEvent() {
         return startDateTime != null && endDateTime != null;
     }
 
+    @Override
     public boolean isDeadline() {
         return startDateTime == null && endDateTime != null;
     }
