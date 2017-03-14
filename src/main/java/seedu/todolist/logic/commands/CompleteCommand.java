@@ -33,7 +33,7 @@ public class CompleteCommand extends Command {
     }
 
     public CommandResult execute() throws CommandException {
-    
+
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (targetIndex >= lastShownList.size()) {
