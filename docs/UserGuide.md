@@ -51,11 +51,11 @@ Rinse and repeat until you've no more tasks left for the day!
 
 ## Features
 
-> **<span style="font-size:20px">Input Format</span>**
-<br>
->- normal text denotes command keywords
->- `< >` denotes parameters
->- `[ ]` denotes that the parameter is optional
+> **<span style="font-size:20px">Input Format</span>**<br>
+> * normal text denotes command keywords
+> * `< >` denotes parameters
+> * `[ ]` denotes that the parameter is optional
+
 ### Adding Tasks
 
 #### Adding a task
