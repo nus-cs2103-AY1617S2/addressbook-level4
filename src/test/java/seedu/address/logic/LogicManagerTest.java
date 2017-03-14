@@ -480,6 +480,8 @@ public class LogicManagerTest {
             cmd.append(" s/").append(p.getStartTime());
             cmd.append(" v/").append(p.getVenue());
             cmd.append(" e/").append(p.getEndTime());
+            cmd.append(" ul/").append(p.getUrgencyLevel());
+            cmd.append(" d/").append(p.getDescription());
 
             UniqueTagList tags = p.getTags();
             for (Tag t : tags) {
