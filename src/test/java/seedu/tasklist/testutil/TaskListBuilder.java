@@ -7,9 +7,9 @@ import seedu.tasklist.model.task.Task;
 import seedu.tasklist.model.task.UniqueTaskList;
 
 /**
- * A utility class to help with building Addressbook objects.
+ * A utility class to help with building FlexiTask objects.
  * Example usage: <br>
- *     {@code AddressBook ab = new AddressBookBuilder().withTask("John", "Doe").withTag("Friend").build();}
+ *     {@code FlexiTask ab = new TaskListBuilder().withTask("John", "Doe").withTag("Friend").build();}
  */
 public class TaskListBuilder {
 
