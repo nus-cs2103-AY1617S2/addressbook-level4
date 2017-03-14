@@ -38,7 +38,7 @@ public class TaskCard extends UiPart<Region> {
         String taskType = task.getType();
         switch(taskType) {
         case DeadlineTask.TYPE:
-            endDate.setText(((ReadOnlyDeadlineTask) task).getDeadline());
+            endDate.setText(((ReadOnlyDeadlineTask) task).getDeadlineString());
         }
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");

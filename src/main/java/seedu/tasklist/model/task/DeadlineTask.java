@@ -1,5 +1,7 @@
 package seedu.tasklist.model.task;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
@@ -50,6 +52,11 @@ public class DeadlineTask extends Task implements ReadOnlyDeadlineTask {
     @Override
     public Date getDeadline() {
         return deadline;
+    }
+
+    public String getDeadlineString() {
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        return dateFormat.format(deadline);
     }
 
     public void setName(Name name) {
