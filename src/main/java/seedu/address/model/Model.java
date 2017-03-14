@@ -47,12 +47,6 @@ public interface Model {
     /** Returns undo copy of task list*/
     ReadOnlyTaskManager getCopy();
 
-    /** Clears undo copy of task list*/
-    void clearCopy();
-
-    /** Checks if there are any undoable commands*/
-    boolean checkChanges();
-
     /** Updates flag for copy of address book*/
     void updateFlag(String newFlag);
 
