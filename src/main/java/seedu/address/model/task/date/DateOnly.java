@@ -32,6 +32,16 @@ public class DateOnly extends DateValue {
         super(other);
     }
 
+    public DateOnly getBeginning() {
+        Date date = new Date(getYear(), getMonth(), getDate(), 0, 0, 0);
+        return new DateOnly(date);
+    }
+
+    public DateOnly getEnding() {
+        Date date = new Date(getYear(), getMonth(), getDate(), 23, 59, 59);
+        return new DateOnly(date);
+    }
+
     @Override
     public String toString() {
         return new SimpleDateFormat(READABLE_DATEONLY_OUTPUT_FORMAT).format(date);

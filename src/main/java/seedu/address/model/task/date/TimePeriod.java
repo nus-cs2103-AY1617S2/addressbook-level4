@@ -4,6 +4,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.DateUtil;
 import seedu.address.model.task.date.DateParser.PairResult;
 
 /**
@@ -26,6 +27,33 @@ public class TimePeriod implements TaskDate {
         }
         beginDate = parseResult.get().first;
         endDate = parseResult.get().second;
+    }
+
+    /* Floating taskDate contains no value */
+    public boolean isFloating() {
+        return false;
+    }
+
+    public boolean hasPassed() {
+        return endDate.before(DateUtil.getToday());
+    }
+
+    public boolean isHappeningToday() {
+        DateValue today = DateUtil.getToday();
+        return DateUtil.haveIntersection(beginDate.getBeginning(), endDate.getEnding(),
+                                DateUtil.getBeginOfDay(today), DateUtil.getEndOfDay(today));
+    }
+
+    public boolean isHappeningTomorrow() {
+        DateValue tmr = DateUtil.getTomorrow();
+        return DateUtil.haveIntersection(beginDate.getBeginning(), endDate.getEnding(),
+                                DateUtil.getBeginOfDay(tmr), DateUtil.getEndOfDay(tmr));
+    }
+
+    public boolean isHappeningThisWeek() {
+        DateValue today = DateUtil.getToday();
+        return DateUtil.haveIntersection(beginDate.getBeginning(), endDate.getEnding(),
+                                DateUtil.getBeginOfWeek(today), DateUtil.getEndOfWeek(today));
     }
 
     @Override

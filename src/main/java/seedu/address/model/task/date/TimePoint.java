@@ -3,6 +3,7 @@ package seedu.address.model.task.date;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.DateUtil;
 
 /**
  * Represents a Time Period with beginning and ending dates.
@@ -22,6 +23,32 @@ public class TimePoint implements TaskDate {
             throw new IllegalValueException(MESSAGE_TIMEPOINT_CONSTRAINTS);
         }
         date = parseResult.get();
+    }
+
+    public boolean isFloating() {
+        return false;
+    }
+
+    public boolean hasPassed() {
+        return date.before(DateUtil.getToday());
+    }
+
+    public boolean isHappeningToday() {
+        DateValue today = DateUtil.getToday();
+        return DateUtil.haveIntersection(date.getBeginning(), date.getEnding(),
+                                DateUtil.getBeginOfDay(today), DateUtil.getEndOfDay(today));
+    }
+
+    public boolean isHappeningTomorrow() {
+        DateValue tmr = DateUtil.getTomorrow();
+        return DateUtil.haveIntersection(date.getBeginning(), date.getEnding(),
+                                DateUtil.getBeginOfDay(tmr), DateUtil.getEndOfDay(tmr));
+    }
+
+    public boolean isHappeningThisWeek() {
+        DateValue today = DateUtil.getToday();
+        return DateUtil.haveIntersection(date.getBeginning(), date.getEnding(),
+                                DateUtil.getBeginOfWeek(today), DateUtil.getEndOfWeek(today));
     }
 
     @Override

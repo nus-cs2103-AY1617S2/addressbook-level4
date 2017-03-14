@@ -41,6 +41,14 @@ public class DateTime extends DateValue {
                                 time.getHours(), time.getMinutes()));
     }
 
+    public DateTime getBeginning() {
+        return new DateTime(this.date);
+    }
+
+    public DateTime getEnding() {
+        return new DateTime(this.date);
+    }
+
     @Override
     public String toString() {
         return new SimpleDateFormat(READABLE_DATETIME_OUTPUT_FORMAT).format(date);
