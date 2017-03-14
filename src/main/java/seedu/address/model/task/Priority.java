@@ -15,14 +15,14 @@ public class Priority {
     public static final String MESSAGE_PRIORITY_CONSTRAINTS =
             "Priority Levels are only 1-5";
     public static final String PRIORITY_VALIDATION_REGEX = "[-]?(1|2|3|4|5)";
-    
+
     public static final String PRIORITY_LEVEL_ONE = "lame";
     public static final String PRIORITY_LEVEL_TWO = "decent";
     public static final String PRIORITY_LEVEL_THREE = "moderate";
     public static final String PRIORITY_LEVEL_FOUR = "forreal";
     public static final String PRIORITY_LEVEL_FIVE = "urgent";
     public static final String PRIORITY_LEVEL_DONE = "completed";
-    
+
     public static final String PRIORITY_LEVEL_1 = "1";
     public static final String PRIORITY_LEVEL_2 = "2";
     public static final String PRIORITY_LEVEL_3 = "3";
@@ -32,7 +32,7 @@ public class Priority {
     //public String value;
     public HashMap<String, String> priorityMap = new HashMap<String, String>();
     public final String value;
-    
+
 
     /**
      * Validates given email.
@@ -45,31 +45,31 @@ public class Priority {
         priorityMap.put(PRIORITY_LEVEL_3, PRIORITY_LEVEL_THREE);
         priorityMap.put(PRIORITY_LEVEL_4, PRIORITY_LEVEL_FOUR);
         priorityMap.put(PRIORITY_LEVEL_5, PRIORITY_LEVEL_FIVE);
-        
-        
+
+
         assert priority != null;
-        
+
         String trimmedPriority = priority.trim();
         if (!isValidPriority(trimmedPriority)) {
             throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
         }
-        
+
         /*int actualValue = Integer.parseInt(trimmedPriority);
-        
+
         if (actualValue < 0) { // means task is completed
         	this.number = trimmedPriority;
         	this.value = PRIORITY_LEVEL_DONE;
-        	
+	
         } else {
-        
-  
+
+
         	this.value = priorityMap.get(trimmedPriority); // string word
         	this.number = trimmedPriority; // string number
         }
         */
         this.value = trimmedPriority;
-        
-        
+
+
     }
 
     /**

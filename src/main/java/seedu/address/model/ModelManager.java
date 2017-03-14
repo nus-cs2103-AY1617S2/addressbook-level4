@@ -24,12 +24,12 @@ import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-    
+
     private List<AddressBook> addressBookStates;
     private AddressBook currentAddressBook;
     private int currentAddressBookStateIndex;
     private static final int MATCHING_INDEX = 35;
-    
+
     public FilteredList<ReadOnlyTask> nonFloatingTasks;
     public FilteredList<ReadOnlyTask> floatingTasks;
     public FilteredList<ReadOnlyTask> completedTasks;
@@ -42,7 +42,7 @@ public class ModelManager extends ComponentManager implements Model {
         assert !CollectionUtil.isAnyNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
-        
+
         this.addressBookStates = new ArrayList<AddressBook>();
         this.addressBookStates.add(new AddressBook(addressBook));
         this.currentAddressBookStateIndex = 0;
@@ -54,7 +54,7 @@ public class ModelManager extends ComponentManager implements Model {
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
     }
-    
+
     public void setAddressBookState() {
         this.nonFloatingTasks = new FilteredList<>(this.currentAddressBook.getTaskList());
         this.floatingTasks = new FilteredList<>(this.currentAddressBook.getTaskList());
@@ -63,7 +63,7 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowAllFloatingTasks();
         updateFilteredListToShowAllCompletedTasks();
     }
-    
+
     /**
      * Records the current state of AddressBook to facilitate state transition.
      */
@@ -89,7 +89,7 @@ public class ModelManager extends ComponentManager implements Model {
     private void indicateAddressBookChanged() {
         raise(new AddressBookChangedEvent(this.currentAddressBook));
     }
-    
+
     /** Raises an event to indicate the model and its state have changed */
     private void indicateAddressBookStateChanged() {
         AddressBookChangedEvent abce = new AddressBookChangedEvent(this.currentAddressBook);
@@ -98,7 +98,7 @@ public class ModelManager extends ComponentManager implements Model {
         abce.setCompletedTasks(getCompletedTaskList());
         raise(abce);
     }
-    
+
     @Override
     public void setAddressBookStateForwards() throws StateLimitReachedException {
         if (this.currentAddressBookStateIndex >= this.addressBookStates.size() - 1) {
@@ -109,7 +109,7 @@ public class ModelManager extends ComponentManager implements Model {
         setAddressBookState();
         indicateAddressBookStateChanged();
     }
-    
+
     @Override
     public void setAddressBookStateBackwards() throws StateLimitReachedException {
         if (this.currentAddressBookStateIndex <= 0) {
@@ -171,7 +171,7 @@ public class ModelManager extends ComponentManager implements Model {
     public UnmodifiableObservableList<ReadOnlyTask> getFloatingTaskList() {
         return new UnmodifiableObservableList<>(this.floatingTasks);
     }
-    
+
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getCompletedTaskList() {
         return new UnmodifiableObservableList<>(this.completedTasks);
@@ -181,12 +181,12 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredListToShowAll() {
         this.nonFloatingTasks.setPredicate(new PredicateExpression(new DateNotFloatingQualifier())::satisfies);
     }
-    
+
     @Override
     public void updateFilteredListToShowAllFloatingTasks() {
         this.floatingTasks.setPredicate(new PredicateExpression(new DateFloatingQualifier())::satisfies);
     }
-    
+
     @Override
     public void updateFilteredListToShowAllCompletedTasks() {
         this.completedTasks.setPredicate(new PredicateExpression(new TaskIsCompleteQualifier())::satisfies);
@@ -276,7 +276,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
     }
-    
+
     private class TaskIsCompleteQualifier implements Qualifier {
 
         @Override

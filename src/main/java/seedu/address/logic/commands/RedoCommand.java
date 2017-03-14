@@ -12,7 +12,7 @@ public class RedoCommand extends Command {
     public static final String COMMAND_WORD = "redo";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Redo previous undone action ";
-    
+
     public static final String MESSAGE_SUCCESS = "Redone";
     public static final String MESSAGE_NO_FORWARDS_COMMAND = "There's no command to redo.";
 
@@ -31,7 +31,7 @@ public class RedoCommand extends Command {
         */
         //Where is the hashset stored?
     }
-    
+
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;

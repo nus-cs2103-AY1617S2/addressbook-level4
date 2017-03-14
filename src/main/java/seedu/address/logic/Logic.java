@@ -22,7 +22,7 @@ public interface Logic {
 
     /** Returns the filtered list of floating tasks */
     ObservableList<ReadOnlyTask> getFilteredFloatingTaskList();
-    
+
     /** Returns the filtered list of completed tasks */
     ObservableList<ReadOnlyTask> getFilteredCompletedTaskList();
 

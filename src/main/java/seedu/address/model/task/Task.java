@@ -104,17 +104,17 @@ public class Task implements ReadOnlyTask {
         this.setInstruction(replacement.getInstruction());
         this.setTags(replacement.getTags());
     }
-    
+
     @Override
     public boolean isFloating() {
         return date.isFloating();
     }
-    
+
     @Override
     public boolean isCompleted() {
         return priority.isCompleted();
     }
-    
+
     @Override
     public void setAsCompleted() {
         if (!isCompleted()) {
@@ -126,7 +126,7 @@ public class Task implements ReadOnlyTask {
             }
         }
     }
-    
+
     @Override
     public void setAsIncompleted() {
         if (isCompleted()) {

@@ -58,10 +58,10 @@ public class Parser {
 
         case CompleteCommand.COMMAND_WORD:
             return new CompleteCommandParser().parse(arguments);
-            
+
         case IncompleteCommand.COMMAND_WORD:
             return new IncompleteCommandParser().parse(arguments);
-            
+
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
 
@@ -76,16 +76,16 @@ public class Parser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
-            
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-            
+
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
-        
+
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
 
@@ -94,7 +94,7 @@ public class Parser {
 
         case ExportCommand.COMMAND_WORD:
             return new ExportCommand();
-        
+
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }

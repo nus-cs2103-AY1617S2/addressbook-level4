@@ -23,7 +23,7 @@ public class CompleteCommand extends Command {
 
     public static final String COMMAND_WORD = "complete";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD 
+    public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the task as complete "
             + "by the index number used in the last task listing. "
             + "Existing priority level will be changed to completed"

@@ -23,7 +23,7 @@ public class IncompleteCommand extends Command {
 
     public static final String COMMAND_WORD = "incomplete";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD 
+    public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the task as incomplete "
             + "by the index number used in the last task listing. "
             + "Completed priority level will be changed to previous priority level "

@@ -12,7 +12,7 @@ public interface ReadOnlyTask {
     Deadline getDeadline();
     Priority getPriority();
     Instruction getInstruction();
-    
+
     public final String TASK_NAME_COMPLETED = "completed";
     public final String TASK_NAME_FLOATING = "floating";
     public final String TASK_NAME_NON_FLOATING = "non-floating";
@@ -22,22 +22,22 @@ public interface ReadOnlyTask {
      * changes on the returned list will not affect the person's internal tags.
      */
     UniqueTagList getTags();
-    
+
     /**
      * Returns true if this task is not completed yet.
      */
     public boolean isCompleted();
-    
+
     /**
      * Returns true if this task is of type floating.
      */
     public boolean isFloating();
-    
+
     /**
      * Mark this task as completed.
      */
     public void setAsCompleted();
-    
+
     /**
      * Mark this task as incompleted.
      */

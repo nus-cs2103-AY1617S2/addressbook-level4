@@ -53,12 +53,12 @@ public class TestTask implements ReadOnlyTask {
     public void setTags(UniqueTagList tags) {
         this.tags = tags;
     }
-    
+
     @Override
     public boolean isCompleted() {
         return priority.isCompleted();
     }
-    
+
     @Override
     public boolean isFloating() {
         return date.isFloating();
@@ -115,7 +115,7 @@ public class TestTask implements ReadOnlyTask {
             }
         }
     }
-    
+
     @Override
     public void setAsIncompleted() {
         if (isCompleted()) {

@@ -60,7 +60,7 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private AnchorPane floatingTaskListPanelPlaceholder;
-    
+
     @FXML
     private AnchorPane completedTaskListPanelPlaceholder;
 
@@ -166,7 +166,7 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane getFloatingTaskListPlaceholder() {
         return floatingTaskListPanelPlaceholder;
     }
-    
+
     private AnchorPane getCompletedTaskListPlaceholder() {
         return completedTaskListPanelPlaceholder;
     }
@@ -237,7 +237,7 @@ public class MainWindow extends UiPart<Region> {
     public TaskListPanel getFloatingTaskListPanel() {
         return this.floatingTaskListPanel;
     }
-    
+
     public TaskListPanel getCompletedTaskListPanel() {
         return this.completedTaskListPanel;
     }
@@ -253,7 +253,7 @@ public class MainWindow extends UiPart<Region> {
         browserPanel.freeResources();
     }
     */
-    
+
     @Subscribe
     public void handleAddressBookChangedEvent(AddressBookChangedEvent abce) {
         if (abce.floatingTasks != null && abce.nonFloatingTasks != null) {
@@ -271,6 +271,6 @@ public class MainWindow extends UiPart<Region> {
                     abce.completedTasks
                     );
         }
-        
+
     }
 }

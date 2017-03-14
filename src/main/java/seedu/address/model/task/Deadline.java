@@ -90,7 +90,7 @@ public class Deadline {
         }
         return false;
     }
-    
+
     /**
      * Returns true if the deadline type is floating.
      */

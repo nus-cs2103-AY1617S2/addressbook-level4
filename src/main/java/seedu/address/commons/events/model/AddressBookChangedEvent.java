@@ -18,15 +18,15 @@ public class AddressBookChangedEvent extends BaseEvent {
     public AddressBookChangedEvent(ReadOnlyAddressBook data) {
         this.data = data;
     }
-    
+
     public void setNonFloatingTasks(UnmodifiableObservableList<ReadOnlyTask> nonFloatingTasks) {
         this.nonFloatingTasks = nonFloatingTasks;
     }
-    
+
     public void setFloatingTasks(UnmodifiableObservableList<ReadOnlyTask> floatingTasks) {
         this.floatingTasks = floatingTasks;
     }
-    
+
     public void setCompletedTasks(UnmodifiableObservableList<ReadOnlyTask> completedTasks) {
         this.completedTasks = completedTasks;
     }
