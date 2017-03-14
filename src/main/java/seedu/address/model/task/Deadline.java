@@ -1,5 +1,6 @@
 package seedu.address.model.task;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import org.ocpsoft.prettytime.PrettyTime;
@@ -41,12 +42,22 @@ public class Deadline extends DateTime {
 
     @Override
     public String toString() {
-        return dateTime.toString();
+        return new PrettyTime().format(this.dateTime.getReference());
     }
 
     @Override
     public String getDuration(Date date) {
         PrettyTime duration = new PrettyTime();
         return duration.format(this.dateTime.calculatePreciseDuration(date));
+    }
+
+    @Override
+    public boolean isSameDay(Date date) {
+        Calendar cal1 = Calendar.getInstance();
+        Calendar cal2 = Calendar.getInstance();
+        cal1.setTime(date);
+        cal2.setTime(dateTime.getReference());
+        return cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) && cal1
+                .get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR);
     }
 }
