@@ -37,19 +37,19 @@ public class TaskDetail extends UiPart<Region> {
      */
     public TaskDetail(AnchorPane placeholder) {
         super(FXML);
-
-        labelTaskName.setTextFill(Color.CHOCOLATE);
         FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
         placeholder.getChildren().addAll(getRoot());
     }
 
     public void loadPersonPage(ReadOnlyTask task) {
+        labelTaskName.setTextFill(Color.CHOCOLATE);
         String taggings = "";
         taskName.setText(task.getContent().toString());
         startTime.setText(task.getDateTime().toString());
-        for(Tag tag : task.getTags()) {
+        for(Tag tag : task.getTags()){
             taggings += tag.toString();
         }
         tags.setText(taggings);
     }
+
 }
