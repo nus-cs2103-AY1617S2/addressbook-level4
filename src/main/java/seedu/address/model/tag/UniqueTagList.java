@@ -187,8 +187,8 @@ public class UniqueTagList implements Iterable<Tag> {
     }
     
     /**
-     * Signals that an operation targeting a specified person in the list would fail because
-     * there is no such matching person in the list.
+     * Signals that an operation targeting a specified tag in the list would fail because
+     * there is no such matching tag in the list.
      */
     public static class TagNotFoundException extends Exception {}
 }
