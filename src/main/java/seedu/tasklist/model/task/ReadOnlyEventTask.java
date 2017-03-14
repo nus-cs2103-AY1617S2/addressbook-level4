@@ -45,7 +45,7 @@ public interface ReadOnlyEventTask extends ReadOnlyTask {
                 .append(getEndDateString())
                 .append(" Comment: ")
                 .append(getComment())
-                .append(" Date: ")
+                .append(" Priority: ")
                 .append(getPriority())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
