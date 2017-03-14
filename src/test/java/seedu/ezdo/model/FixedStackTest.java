@@ -34,7 +34,7 @@ public class FixedStackTest {
         stack = new FixedStack<String>(5);
         stack.push("MEOWR");
         String popped = stack.pop();
-        assertTrue(popped.equals("MEOWR"));
+        assertTrue(("MEOWR").equals(popped));
     }
 
     @Test
@@ -43,6 +43,6 @@ public class FixedStackTest {
         stack.push("lol");
         stack.push("omg");
         String popped = stack.pop();
-        assertTrue(popped.equals("omg"));
+        assertTrue(("omg").equals(popped));
     }
 }

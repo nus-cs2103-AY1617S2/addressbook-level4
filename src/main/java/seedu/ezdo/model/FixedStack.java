@@ -6,25 +6,25 @@ import java.util.EmptyStackException;
  * Array-based implementation for a stack with fixed size. Used for undo & redo stacks.
  * If stack goes past max capacity, the oldest item to be pushed is replaced.
  */
-public class FixedStack<Item> {
+public class FixedStack<T> {
     private int index;
-    private Item[] array;
+    private T[] array;
 
     public FixedStack(int capacity) {
-        array = (Item[]) new Object[capacity];
+        array = (T[]) new Object[capacity];
         index = -1;
     }
 
-    public void push(Item item) {
+    public void push(T item) {
         index = (index + 1) % 5; // wraps around
         array[index] = item;
     }
 
-    public Item pop() throws EmptyStackException {
+    public T pop() throws EmptyStackException {
         if (index == -1 || array[index] == null) {
             throw new EmptyStackException();
         }
-        Item item = array[index];
+        T item = array[index];
         array[index] = null;
         if (index == 0) {
             index = array.length - 1;
