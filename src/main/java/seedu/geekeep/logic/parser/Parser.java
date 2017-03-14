@@ -74,10 +74,10 @@ public class Parser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
-            
+
         case ListUndoneCommand.COMMAND_WORD:
             return new ListUndoneCommand();
-            
+
         case ListDoneCommand.COMMAND_WORD:
             return new ListDoneCommand();
 

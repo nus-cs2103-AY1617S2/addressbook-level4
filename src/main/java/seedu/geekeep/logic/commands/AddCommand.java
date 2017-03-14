@@ -46,7 +46,7 @@ public class AddCommand extends Command {
 
         DateTime start = null, end = null;
         Location loc = null;
-        
+
         if (startDateTime.isPresent()) {
             start = new DateTime(startDateTime.get());
         }
