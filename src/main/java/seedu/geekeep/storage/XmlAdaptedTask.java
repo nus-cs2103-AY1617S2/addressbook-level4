@@ -20,7 +20,7 @@ import seedu.geekeep.model.task.Title;
 public class XmlAdaptedTask {
 
     @XmlElement(required = true)
-    private String name;
+    private String title;
     @XmlElement(required = true)
     private String phone;
     @XmlElement(required = true)
@@ -44,7 +44,7 @@ public class XmlAdaptedTask {
      * @param source future changes to this will not affect the created XmlAdaptedTask
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
-        name = source.getTitle().fullTitle;
+        title = source.getTitle().fullTitle;
         phone = source.getEndDateTime().value;
         email = source.getStartDateTime().value;
         address = source.getLocation().value;
@@ -64,7 +64,7 @@ public class XmlAdaptedTask {
         for (XmlAdaptedTag tag : tagged) {
             taskTags.add(tag.toModelType());
         }
-        final Title title = new Title(this.name);
+        final Title title = new Title(this.title);
         final DateTime endDateTime = new DateTime(this.phone);
         final DateTime startDateTime = new DateTime(this.email);
         final Location location = new Location(this.address);
