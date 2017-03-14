@@ -23,13 +23,13 @@ public class PriorityTest {
         assertFalse(Priority.isValidPriority("{{{{{{{{"));
 
         // valid priorities
-        assertTrue(Priority.isValidPriority("urgent"));
-        assertTrue(Priority.isValidPriority("very_urgent"));
-        assertTrue(Priority.isValidPriority("very..urgent"));
-        assertTrue(Priority.isValidPriority("urgentLevel2"));
-        assertTrue(Priority.isValidPriority("urgent..."));
-        assertTrue(Priority.isValidPriority("very.urgent"));
-        assertTrue(Priority.isValidPriority("so_urgent_that_i_can_t_even_start"));
-        assertTrue(Priority.isValidPriority("so.urgent.that.i.don.t.have.to.start.now."));
+        assertTrue(Priority.isValidPriority("1"));
+        assertTrue(Priority.isValidPriority("2"));
+        assertTrue(Priority.isValidPriority("3"));
+        assertTrue(Priority.isValidPriority("4"));
+        assertTrue(Priority.isValidPriority("5"));
+        assertTrue(Priority.isValidPriority("-1"));
+        assertTrue(Priority.isValidPriority("-2"));
+        assertTrue(Priority.isValidPriority("-3"));
     }
 }

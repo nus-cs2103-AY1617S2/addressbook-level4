@@ -75,15 +75,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Title("Ali Muster"), new Deadline("floating"), new Priority("urgent"), new Instruction("4th street"), new UniqueTagList()),
-                new Task(new Title("Boris Mueller"), new Deadline("floating"), new Priority("urgent"), new Instruction("81th street"), new UniqueTagList()),
-                new Task(new Title("Carl Kurz"), new Deadline("floating"), new Priority("urgent"), new Instruction("wall street"), new UniqueTagList()),
-                new Task(new Title("Daniel Meier"), new Deadline("floating"), new Priority("urgent"), new Instruction("10th street"), new UniqueTagList()),
-                new Task(new Title("Elle Meyer"), new Deadline("floating"), new Priority("urgent"), new Instruction("michegan ave"), new UniqueTagList()),
-                new Task(new Title("Fiona Kunz"), new Deadline("floating"), new Priority("urgent"), new Instruction("little tokyo"), new UniqueTagList()),
-                new Task(new Title("George Best"), new Deadline("floating"), new Priority("urgent"), new Instruction("4th street"), new UniqueTagList()),
-                new Task(new Title("Hoon Meier"), new Deadline("floating"), new Priority("urgent"), new Instruction("little india"), new UniqueTagList()),
-                new Task(new Title("Ida Mueller"), new Deadline("floating"), new Priority("urgent"), new Instruction("chicago ave"), new UniqueTagList())
+                new Task(new Title("Ali Muster"), new Deadline("floating"), new Priority("1"), new Instruction("4th street"), new UniqueTagList()),
+                new Task(new Title("Boris Mueller"), new Deadline("floating"), new Priority("1"), new Instruction("81th street"), new UniqueTagList()),
+                new Task(new Title("Carl Kurz"), new Deadline("floating"), new Priority("1"), new Instruction("wall street"), new UniqueTagList()),
+                new Task(new Title("Daniel Meier"), new Deadline("floating"), new Priority("1"), new Instruction("10th street"), new UniqueTagList()),
+                new Task(new Title("Elle Meyer"), new Deadline("floating"), new Priority("1"), new Instruction("michegan ave"), new UniqueTagList()),
+                new Task(new Title("Fiona Kunz"), new Deadline("floating"), new Priority("1"), new Instruction("little tokyo"), new UniqueTagList()),
+                new Task(new Title("George Best"), new Deadline("floating"), new Priority("1"), new Instruction("4th street"), new UniqueTagList()),
+                new Task(new Title("Hoon Meier"), new Deadline("floating"), new Priority("1"), new Instruction("little india"), new UniqueTagList()),
+                new Task(new Title("Ida Mueller"), new Deadline("floating"), new Priority("1"), new Instruction("chicago ave"), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
