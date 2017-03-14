@@ -13,17 +13,17 @@ import t15b1.taskcrusher.model.task.Priority;
  */
 public class PersonBuilder {
 
-    private TestPerson person;
+    private TestCard person;
 
     public PersonBuilder() {
-        this.person = new TestPerson();
+        this.person = new TestCard();
     }
 
     /**
      * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
-    public PersonBuilder(TestPerson personToCopy) {
-        this.person = new TestPerson(personToCopy);
+    public PersonBuilder(TestCard personToCopy) {
+        this.person = new TestCard(personToCopy);
     }
 
     public PersonBuilder withName(String name) throws IllegalValueException {
@@ -54,7 +54,7 @@ public class PersonBuilder {
         return this;
     }
 
-    public TestPerson build() {
+    public TestCard build() {
         return this.person;
     }
 

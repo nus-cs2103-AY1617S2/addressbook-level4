@@ -10,7 +10,7 @@ import t15b1.taskcrusher.model.task.UniqueTaskList;
  */
 public class TypicalTestPersons {
 
-    public TestPerson alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
+    public TestCard alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
 
     public TypicalTestPersons() {
         try {
@@ -44,7 +44,7 @@ public class TypicalTestPersons {
     }
 
     public static void loadAddressBookWithSampleData(UserInbox ab) {
-        for (TestPerson person : new TypicalTestPersons().getTypicalPersons()) {
+        for (TestCard person : new TypicalTestPersons().getTypicalPersons()) {
             try {
                 ab.addTask(new Task(person));
             } catch (UniqueTaskList.DuplicateTaskException e) {
@@ -53,8 +53,8 @@ public class TypicalTestPersons {
         }
     }
 
-    public TestPerson[] getTypicalPersons() {
-        return new TestPerson[]{alice, benson, carl, daniel, elle, fiona, george};
+    public TestCard[] getTypicalPersons() {
+        return new TestCard[]{alice, benson, carl, daniel, elle, fiona, george};
     }
 
     public UserInbox getTypicalAddressBook() {

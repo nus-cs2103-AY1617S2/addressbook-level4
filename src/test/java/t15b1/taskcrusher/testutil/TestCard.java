@@ -4,14 +4,12 @@ import t15b1.taskcrusher.model.shared.Description;
 import t15b1.taskcrusher.model.shared.Name;
 import t15b1.taskcrusher.model.tag.UniqueTagList;
 import t15b1.taskcrusher.model.task.Deadline;
-import t15b1.taskcrusher.model.task.Email;
 import t15b1.taskcrusher.model.task.Priority;
 import t15b1.taskcrusher.model.task.ReadOnlyTask;
-
 /**
- * A mutable person object. For testing only.
+ * A mutable task object. For testing only.
  */
-public class TestPerson implements ReadOnlyTask {
+public class TestCard implements ReadOnlyTask {
 
     private Name name;
     private Description description;
@@ -19,14 +17,14 @@ public class TestPerson implements ReadOnlyTask {
     private Priority priority;
     private UniqueTagList tags;
 
-    public TestPerson() {
+    public TestCard() {
         tags = new UniqueTagList();
     }
 
     /**
      * Creates a copy of {@code taskToCopy}.
      */
-    public TestPerson(TestPerson taskToCopy) {
+    public TestCard(TestCard taskToCopy) {
         this.name = taskToCopy.getTaskName();
         this.priority = taskToCopy.getPriority();
         this.deadline = taskToCopy.getDeadline();
@@ -85,13 +83,7 @@ public class TestPerson implements ReadOnlyTask {
     }
 
     public String getAddCommand() {
-//        StringBuilder sb = new StringBuilder();
-//        sb.append("add " + this.getTaskName().taskName + " ");
-//        sb.append("a/" + this.getDescription().value + " ");
-//        sb.append("p/" + this.getPriority().value + " ");
-//        sb.append("e/" + this.getEmail().value + " ");
-//        this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
-//        return sb.toString();
+        //TODO: What if the deadlines and descriptions are empty 
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getTaskName().taskName + " ");
         sb.append("d/" + this.getDeadline().value + " ");

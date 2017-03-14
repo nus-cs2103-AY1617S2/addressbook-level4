@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import t15b1.taskcrusher.commons.core.Messages;
-import t15b1.taskcrusher.testutil.TestPerson;
+import t15b1.taskcrusher.testutil.TestCard;
 
 public class FindCommandTest extends AddressBookGuiTest {
 
@@ -31,7 +31,7 @@ public class FindCommandTest extends AddressBookGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
-    private void assertFindResult(String command, TestPerson... expectedHits) {
+    private void assertFindResult(String command, TestCard... expectedHits) {
         commandBox.runCommand(command);
         assertListSize(expectedHits.length);
         assertResultMessage(expectedHits.length + " persons listed!");

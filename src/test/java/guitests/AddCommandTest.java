@@ -7,7 +7,7 @@ import org.junit.Test;
 import guitests.guihandles.TaskCardHandle;
 import t15b1.taskcrusher.commons.core.Messages;
 import t15b1.taskcrusher.logic.commands.AddCommand;
-import t15b1.taskcrusher.testutil.TestPerson;
+import t15b1.taskcrusher.testutil.TestCard;
 import t15b1.taskcrusher.testutil.TestUtil;
 
 public class AddCommandTest extends AddressBookGuiTest {
@@ -15,8 +15,8 @@ public class AddCommandTest extends AddressBookGuiTest {
     @Test
     public void add() {
         //add one person
-        TestPerson[] currentList = td.getTypicalPersons();
-        TestPerson personToAdd = td.hoon;
+        TestCard[] currentList = td.getTypicalPersons();
+        TestCard personToAdd = td.hoon;
         assertAddSuccess(personToAdd, currentList);
         currentList = TestUtil.addPersonsToList(currentList, personToAdd);
 
@@ -39,7 +39,7 @@ public class AddCommandTest extends AddressBookGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
-    private void assertAddSuccess(TestPerson personToAdd, TestPerson... currentList) {
+    private void assertAddSuccess(TestCard personToAdd, TestCard... currentList) {
         commandBox.runCommand(personToAdd.getAddCommand());
 
         //confirm the new card contains the right data
@@ -47,7 +47,7 @@ public class AddCommandTest extends AddressBookGuiTest {
         assertMatching(personToAdd, addedCard);
 
         //confirm the list now contains all previous persons plus the new person
-        TestPerson[] expectedList = TestUtil.addPersonsToList(currentList, personToAdd);
+        TestCard[] expectedList = TestUtil.addPersonsToList(currentList, personToAdd);
         assertTrue(personListPanel.isListMatching(expectedList));
     }
 
