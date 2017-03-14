@@ -111,13 +111,11 @@ public class TestDeadlineTask extends TestTask implements ReadOnlyDeadlineTask {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
                 .append(" Deadline: ")
-                .append(getDeadline())
-                .append(" Status: ")
-                .append(getStatus())
-                .append(" Priority ")
-                .append(getPriority())
+                .append(getDeadlineString())
                 .append(" Comment: ")
                 .append(getComment())
+                .append(" Priority: ")
+                .append(getPriority())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

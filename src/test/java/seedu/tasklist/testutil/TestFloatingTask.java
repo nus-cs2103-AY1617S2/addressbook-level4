@@ -89,12 +89,10 @@ public class TestFloatingTask extends TestTask implements ReadOnlyFloatingTask {
     public String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append(" Status: ")
-                .append(getStatus())
-                .append(" Priority ")
-                .append(getPriority())
                 .append(" Comment: ")
                 .append(getComment())
+                .append(" Priority: ")
+                .append(getPriority())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

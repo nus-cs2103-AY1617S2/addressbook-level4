@@ -122,16 +122,14 @@ public class TestEventTask extends TestTask implements ReadOnlyEventTask {
     public String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append(" From: ")
-                .append(getStartDate())
-                .append(" To: ")
-                .append(getEndDate())
-                .append(" Status: ")
-                .append(getStatus())
-                .append(" Priority ")
-                .append(getPriority())
+                .append(" StartDate: ")
+                .append(getStartDateString())
+                .append(" EndDate: ")
+                .append(getEndDateString())
                 .append(" Comment: ")
                 .append(getComment())
+                .append(" Priority: ")
+                .append(getPriority())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
