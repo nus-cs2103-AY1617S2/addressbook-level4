@@ -39,9 +39,9 @@ public interface ReadOnlyFloatingTask extends ReadOnlyTask {
         builder.append(getName())
                 .append(" Comment: ")
                 .append(getComment())
-                .append("Priority: ")
+                .append(" Priority: ")
                 .append(getPriority())
-                .append("Status: ")
+                .append(" Status: ")
                 .append(getStatus())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
