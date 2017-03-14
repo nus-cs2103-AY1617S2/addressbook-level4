@@ -2,6 +2,9 @@ package seedu.todolist.commons.util;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Set;
+
+import seedu.todolist.model.tag.Tag;
 
 /**
  * Helper functions for handling strings.
@@ -10,32 +13,51 @@ public class StringUtil {
 
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
-     *   Ignores case, but a full word match is required.
+     *   Ignores case, a full word match is not required.
      *   <br>examples:<pre>
-     *       containsWordIgnoreCase("ABc def", "abc") == true
-     *       containsWordIgnoreCase("ABc def", "DEF") == true
-     *       containsWordIgnoreCase("ABc def", "AB") == false //not a full word match
+     *       containsIgnoreCase("ABc def", "abc") == true
+     *       containsIgnoreCase("ABc def", "DEF") == true
+     *       containsIgnoreCase("ABc def", "AB") == true
      *       </pre>
      * @param sentence cannot be null
      * @param word cannot be null, cannot be empty, must be a single word
      */
-    public static boolean containsIgnoreCase(String sentence, String word) {
+    public static boolean containsIgnoreCase(String name, Set<Tag> tags, String word) {
         assert word != null : "Word parameter cannot be null";
-        assert sentence != null : "Sentence parameter cannot be null";
+        assert name != null : "Sentence parameter cannot be null";
+
 
         String preppedWord = word.trim();
-        //String[] wordsInPreppedSentence = preppedWord.split("\\s+");
         assert !preppedWord.isEmpty() : "Word parameter cannot be empty";
+
+        //if word passed in is a search for a tag t/
+        if (preppedWord.startsWith("t/")) {
+            String tagKeyword = preppedWord.substring(2);
+            //the tag must be a full tag match
+            for (Tag tag: tags) {
+                if (tag.getTagName().toLowerCase().equals(tagKeyword.toLowerCase())) {
+                    return true;
+                }
+            }
+        } else {
+            if (name.toLowerCase().contains(preppedWord.toLowerCase())) return true;
+        }
+
+        return false;
+
+        //String[] wordsInPreppedSentence = preppedWord.split("\\s+");
         //assert preppedWord.split("\\s+").length == 1 : "Word parameter should be a single word";
 
         //String preppedSentence = sentence;
         //String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
 
         //for (String stringQuery: wordsInPreppedSentence) {
-        if (sentence.toLowerCase().contains(preppedWord.toLowerCase())) return true;
+
         //}
-        return false;
+
     }
+
+
 
     /**
      * Returns a detailed message of the t, including the stack trace.
