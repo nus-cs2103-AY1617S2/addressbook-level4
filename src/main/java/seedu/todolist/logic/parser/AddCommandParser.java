@@ -30,10 +30,10 @@ public class AddCommandParser {
                     argsTokenizer.getPreamble().get(),
                     (argsTokenizer.getValue(PREFIX_START).isPresent() ?
                             argsTokenizer.getValue(PREFIX_START).get()
-                                :null),
+                                : null),
                     (argsTokenizer.getValue(PREFIX_END).isPresent() ?
                             argsTokenizer.getValue(PREFIX_END).get()
-                            :null),
+                            : null),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
             );
         } catch (NoSuchElementException nsee) {
