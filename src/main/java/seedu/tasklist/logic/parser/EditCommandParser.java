@@ -30,9 +30,10 @@ public class EditCommandParser {
     public Command parse(String args) {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_COMMENT, PREFIX_TAG);
+                new ArgumentTokenizer(PREFIX_COMMENT, PREFIX_TAG, PREFIX_DATE, PREFIX_PRIORITY);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
+        System.out.println(preambleFields.get(1));
 
         Optional<Integer> index = preambleFields.get(0).flatMap(ParserUtil::parseIndex);
         if (!index.isPresent()) {
@@ -55,7 +56,6 @@ public class EditCommandParser {
         if (!editTaskDescriptor.isAnyFieldEdited()) {
             return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
         }
-
         return new EditCommand(index.get(), editTaskDescriptor);
     }
 

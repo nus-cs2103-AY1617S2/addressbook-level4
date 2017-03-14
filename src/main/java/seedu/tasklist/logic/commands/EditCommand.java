@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import seedu.tasklist.commons.core.Messages;
+import seedu.tasklist.commons.exceptions.IllegalValueException;
 import seedu.tasklist.commons.util.CollectionUtil;
 import seedu.tasklist.logic.commands.exceptions.CommandException;
 import seedu.tasklist.model.tag.UniqueTagList;
@@ -38,6 +39,9 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book.";
+    public static final String MESSAGE_ADD_DATE_FLOATING = "Dates cannot be edited in Floating Task.";
+    public static final String MESSAGE_ADD_DATE_DEADLINE = "Only one date can be edited in Deadline Task.";
+    public static final String MESSAGE_ADD_DATE_EVENT = "Two dates must be edited in Event Task.";
 
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
@@ -65,7 +69,12 @@ public class EditCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
-        Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        Task editedTask;
+        try {
+            editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        } catch (IllegalValueException ive) {
+            throw new CommandException(ive.getMessage());
+        }
 
         try {
             model.updateTask(filteredTaskListIndex, editedTask);
@@ -79,9 +88,10 @@ public class EditCommand extends Command {
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
+     * @throws IllegalValueException
      */
     private static Task createEditedTask(ReadOnlyTask taskToEdit,
-                                             EditTaskDescriptor editTaskDescriptor) {
+                                             EditTaskDescriptor editTaskDescriptor) throws IllegalValueException {
         assert taskToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
@@ -93,13 +103,24 @@ public class EditCommand extends Command {
         String type = taskToEdit.getType();
         switch (type) {
         case FloatingTask.TYPE:
+            if (editTaskDescriptor.getDeadline().isPresent() ||
+                editTaskDescriptor.getStartDate().isPresent() ||
+                editTaskDescriptor.getEndDate().isPresent()) {
+                throw new IllegalValueException(MESSAGE_ADD_DATE_FLOATING);
+            }
             return new FloatingTask(updatedName, updatedComment, updatedPriority, updatedStatus, updatedTags);
         case DeadlineTask.TYPE:
+            if (editTaskDescriptor.getStartDate().isPresent() || editTaskDescriptor.getEndDate().isPresent()) {
+                throw new IllegalValueException(MESSAGE_ADD_DATE_DEADLINE);
+            }
             ReadOnlyDeadlineTask deadlineTaskToEdit = (ReadOnlyDeadlineTask) taskToEdit;
             Date updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(deadlineTaskToEdit::getDeadline);
             return new DeadlineTask(updatedName, updatedComment, updatedPriority,
                                     updatedStatus, updatedDeadline, updatedTags);
         case EventTask.TYPE:
+            if (editTaskDescriptor.getDeadline().isPresent()) {
+                throw new IllegalValueException(MESSAGE_ADD_DATE_EVENT);
+            }
             ReadOnlyEventTask eventTaskToEdit = (ReadOnlyEventTask) taskToEdit;
             Date updatedStartDate = editTaskDescriptor.getStartDate().orElseGet(eventTaskToEdit::getStartDate);
             Date updatedEndDate = editTaskDescriptor.getEndDate().orElseGet(eventTaskToEdit::getEndDate);
