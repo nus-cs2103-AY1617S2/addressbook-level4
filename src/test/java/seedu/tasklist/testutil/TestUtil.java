@@ -94,9 +94,9 @@ public class TestUtil {
                 new FloatingTask(new Name("Drink water"), new Comment("To improve brain function"),
                                     new Priority("medium"), new Status(), new UniqueTagList()),
                 new EventTask(new Name("Internship interview"), new Comment("at mediacorp"), new Priority("high"),
-                                    new Status(), null, null, new UniqueTagList()),
+                                    new Status(), new Date(2017, 5, 5, 17, 0), new Date(2017, 5, 5, 17, 0), new UniqueTagList()),
                 new EventTask(new Name("Yet another interview"), new Comment("also at mediacorp"),
-                                    new Priority("high"), new Status(), null, null, new UniqueTagList())
+                                    new Priority("high"), new Status(), new Date(2017, 5, 5, 17, 0), new Date(2017, 5, 5, 17, 0), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
