@@ -10,7 +10,7 @@ import seedu.task.model.task.StartTime;
 /**
  * A mutable person object. For testing only.
  */
-public class TestPerson implements ReadOnlyTask {
+public class TestTask implements ReadOnlyTask {
 
     private Name name;
     private CompletionStatus address;
@@ -18,19 +18,19 @@ public class TestPerson implements ReadOnlyTask {
     private StartTime phone;
     private UniqueTagList tags;
 
-    public TestPerson() {
+    public TestTask() {
         tags = new UniqueTagList();
     }
 
     /**
      * Creates a copy of {@code personToCopy}.
      */
-    public TestPerson(TestPerson personToCopy) {
-        this.name = personToCopy.getName();
-        this.phone = personToCopy.getStartTime();
-        this.email = personToCopy.getEndTime();
-        this.address = personToCopy.getCompletionStatus();
-        this.tags = personToCopy.getTags();
+    public TestTask(TestTask taskToCopy) {
+        this.name = taskToCopy.getName();
+        this.phone = taskToCopy.getStartTime();
+        this.email = taskToCopy.getEndTime();
+        this.address = taskToCopy.getCompletionStatus();
+        this.tags = taskToCopy.getTags();
     }
 
     public void setName(Name name) {
@@ -86,7 +86,7 @@ public class TestPerson implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
-        sb.append("c/" + this.getCompletionStatus().value + " ");
+        sb.append("c/" + this.getCompletionStatus().toString() + " ");
         sb.append("s/" + this.getStartTime().value + " ");
         sb.append("e/" + this.getEndTime().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("#" + s.tagName + " "));
