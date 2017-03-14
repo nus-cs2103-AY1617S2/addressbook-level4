@@ -1,5 +1,5 @@
 .background {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: linear-gradient(to left, #FF512F , #DD2476);
 }
 
 .label {
@@ -83,7 +83,7 @@
 .split-pane {
     -fx-border-radius: 1;
     -fx-border-width: 1;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: linear-gradient(to left, #FF512F , #DD2476);
 }
 
 .list-cell {
@@ -107,22 +107,22 @@
 }
 
 .anchor-pane {
-     -fx-background-color: derive(#1d1d1d, 20%);
+     -fx-background-color:linear-gradient(to left, #FF512F , #DD2476);
 }
 
 .anchor-pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
+     -fx-background-color: linear-gradient(to left, #FF512F , #DD2476);
+     -fx-border-color: linear-gradient(to left, #FF512F , #DD2476);
      -fx-border-top-width: 1px;
 }
 
 .status-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: linear-gradient(to left, #FF512F , #DD2476);
     -fx-text-fill: black;
 }
 
 .result-display {
-    -fx-background-color: #ffffff;
+    -fx-background-color: linear-gradient(to left, #FF512F , #DD2476);
 }
 
 .result-display .label {
@@ -134,7 +134,7 @@
 }
 
 .status-bar-with-border {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: linear-gradient(to left, #FF512F , #DD2476);
     -fx-border-color: derive(#1d1d1d, 25%);
     -fx-border-width: 1px;
 }
@@ -154,7 +154,7 @@
 }
 
 .context-menu {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: linear-gradient(to left, #FF512F , #DD2476);
 }
 
 .context-menu .label {
@@ -162,7 +162,7 @@
 }
 
 .menu-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color:linear-gradient(to left, #FF512F , #DD2476);
 }
 
 .menu-bar .label {
