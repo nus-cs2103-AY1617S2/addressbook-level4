@@ -27,12 +27,12 @@ By : `Miao Ling` , `Ian` , `Qi Xiang` and `Dylan` - `[W09-B4]` Since : `Feb 2017
 
    > **Today/Date**
    >
-   > * Shows you the list of tasks you have for the specified date. By default, it will show the tasks for today. Click left/right arrow to navigate between the dates.
+   > * Shows you the list of tasks you have for the specified date. By default, it will show the tasks for today. Press Ctrl+Left Arrow or Ctrl+Right Arrow to navigate between the dates.
    > <img src="images/today_screen.jpg" width="600">
    >
    > **Overview**
    >
-   > * Shows you an overall view of the dates. The highest priority tasks will be shown as a preview for every single date. Scroll to navigate between the dates.
+   > * Shows you an overall view of the dates. The highest priority tasks will be shown as a preview for every single date. Hold the Down Arrow key to navigate between the dates.
    > <img src="images/overview_screen.jpg" width="600">
    >
    > **Priority**
@@ -56,24 +56,41 @@ Format: `help`<br>
 > Help is shown if you enter an incorrect command e.g. `asdf` <br>
 > Alternatively, type /help to obtain a list of commands that you can use.
 
-### 2.2. Adding a Task : `add`
+### 2.2. Shifting tabs: `switch`
+Switch the current tab to the next tab.
+Format: `switch`
+> There will be 3 tabs, which can be toggled using this command.
+> The order in which the tabs will be switched is as follows: 'Priority' -> 'Overview' -> 'Today' -> 'Priority'.
+
+### 2.3. Adding a Task : `add`
 Adds a task to the task manager. <br>
-Format: `add TASK_NAME d/DEADLINE p/PRIORITY_LEVEL [i/ANY_INFO] [t/TAGS]...`
-   > `DEADLINE` will be in the format of "date month (indicated by first three letters) year"
-   > `PRIORITY_LEVEL` should be defined by integers 1 (high) to 4(low).<br>
-   > `ANY_INFO` allows you to key in details with regards to the task, optional.<br>
-   > `TAGS` allows you to assign tags to the tasks, optional.
+> doTASK currently supports the use of floating tasks and tasks with a single deadline.<br>
+
+Adds a floating task to the task manager. <br>
+Format: `add TASK_NAME p/PRIORITY_LEVEL [i/ANY_INFO] [t/TAGS]`
+	 > `PRIORITY_LEVEL` should be defined by integers 1 (high) to 4(low).<br>
+	 > `ANY_INFO` allows you to key in details with regards to the task, optional.<br>
+	 > `TAGS` allows you to assign tags to the tasks, optional.
+
+Adds a task, with a specified deadline, to the task manager. <br>
+Format: `add TASK_NAME d/DEADLINE p/PRIORITY_LEVEL [i/ANY_INFO] [t/TAGS]`
+   > `DEADLINE` can be entered in the format of "date month", "month date", "date month year" or "month date year".
+	 > If no year is specified, the current year of the system will be used as the year of the deadline.
+	 > The month must be typed out as the first three letters of the month.
+
 
 Examples:
+* add Buy Milk p/4 t/Chores
 * add CS3230 Assignment 1 d/8 Jan 2018 p/1 i/How to do? t/School t/CS3230
-* add Buy Milk d/23 Feb 2017 p/4 t/Chores
 
-### 2.3. Listing the tasks: `list`
+
+### 2.4. Listing the tasks: `list`
 
 Shows a list of all the tasks in the task manager.<br>
 > Listing is done automatically when user switches between the tabs.<br>
-> However, user can specify to list all the tasks he has in, which will be shown in a pop up.<br>
+> However, user can specify to list all the tasks he has in the task manager, which will be shown in a pop up.<br>
 > User can also sort it accordingly to the deadlines, priorities, etc.
+> The index of the task as referenced by the task manager will be shown beside the task description, no matter what sort of list is queried.
 
 Shows a list of all the tasks in lexographical order.<br>
 Format: `list all`
@@ -91,7 +108,6 @@ Format: `list priority PRIORITY_LEVEL`
 
 Examples:
 * `list priority 1`
-* `list priority 2`
 
 Shows a list of tasks of the tags sorted in lexographical order.<br>
 Format: `list t/TAGS...`
@@ -100,22 +116,18 @@ Format: `list t/TAGS...`
 Examples:
 * `list t/CS3230 t/Work`
 
-### 2.4. Editing an existing task: `edit`
+### 2.5. Editing an existing task: `edit`
 Edits an existing task in the task manager.<br>
 Format: `edit i/INDEX [n/TASK_NAME] [d/DEADLINE] [p/PRIORITY_LEVEL] [i/ANY_INFO] [t/TAGS]...`
 
 > * Edits the task labeled by the INDEX digit as shown on the screen. The INDEX must be a positive integer, e.g. 1, 2, 3, ...
+> * The index of a task can be found beside the task description when viewed via the list or search command.
 > * At least one of the optional [fields] must be provided.
 > * Existing fields will be overwritten.
 
 Examples:
 * `edit i/1 n/Assignment 2 d/25 Feb 2018 p/2`
 * `edit i/4 n/Exercise`
-
-### 2.5. Shifting tabs: `switch`
-Switch the current tab to the next tab.
-Format: `switch`
-> There will be 3 tabs, which can be toggled using this command.
 
 ### 2.6. Deleting a task: `delete`
 Deletes the specified task.
@@ -141,12 +153,12 @@ Examples:
 
 ### 2.8. Track overall progress: `progress`
 
-Shows all the tasks completed over time and also specifying the tasks overdued.<br>
+Shows all the tasks completed over time and also specifying any overdue tasks.<br>
 > A general overview of performance/efficiency based on the usage of the task manager will be shown.<br>
 
 Format: `progress NUMBER_OF_DAYS`
-> NUMBER_OF_DAYS is a interger which indicates the your progress for these past days (excluding today).<br>
-> It will provide an analysis on the number of task that you have completed/overdue.
+> `NUMBER_OF_DAYS` is a integer which indicates the your progress for the past `NUMBER_OF_DAYS` days (excluding today).<br>
+> This command will provide an analysis on the number of task that you have completed/overdue.
 
 Examples:
 * `progress 7`
@@ -166,14 +178,14 @@ Examples:
 
 Undos previous action that user made.<br>
 Format : `undo`
-> Any previous valid input will be reversed.
-> Only 1 input will be reversed at a time.
+> Any previous valid command will be reversed.
+> Only 1 command will be reversed at a time.
 
 ### 2.11. Redo previous action : `redo`
 
 Redos previous `undo` that user made.<br>
 Format : `redo`
-> Any previous `undo` will be reversed.
+> Any previous `undo` will be reversed, in successive order.
 
 ### 2.12. Saving the tasks
 
@@ -199,10 +211,15 @@ Upon creation of tasks, the tasks will be automatically saved in the folder wher
 
 ## 4. Command Summary
 
+* **Help** : `help`
+
+* **Switching between tabs** : `switch`
+
+* **Add a Floating Task** : `add TASK_NAME p/PRIORITY_LEVEL [i/ANY_INFO] [t/TAGS]...`<br>
+  e.g. `add Buy a new fan p/4 t/Home`
+
 * **Add** : `add TASK_NAME d/DEADLINE p/PRIORITY_LEVEL [i/ANY_INFO] [t/TAGS]...`<br>
 	e.g. `add Sleep d/27 December 2018 p/1 i/Sleep is good t/Home`
-
-* **Help** : `help`
 
 * **List All** : `list all`
 
@@ -215,8 +232,6 @@ Upon creation of tasks, the tasks will be automatically saved in the folder wher
 
 * **List by Tags** : `list t/TAGS [MORE_TAGS]`<br>
 	e.g. `list t/CS2103 t/Work t/School`
-
-* **Switching between tabs** : `switch`
 
 * **Edit** : `edit`<br>
 	e.g. `edit i/3 n/Buy a house`
@@ -232,9 +247,7 @@ Upon creation of tasks, the tasks will be automatically saved in the folder wher
 
 * **Search for tasks** : `search KEYWORD`<br>
 	e.g. `search potato`
-	
+
 * **Undo previous action** : `undo`<br>
 
 * **Redo previous action** : `redo`<br>
-
-
