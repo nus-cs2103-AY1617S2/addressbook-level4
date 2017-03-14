@@ -24,8 +24,7 @@ public class Task implements ReadOnlyTask {
      * @param startDate TODO
      * @param isDone TODO
      */
-    public Task(Name name, Date startDate, Date endDate, Remark remark,
-    		Location location, UniqueTagList tags, boolean isDone) {
+    public Task(Name name, Date startDate, Date endDate, Remark remark, Location location, UniqueTagList tags, boolean isDone) {
         assert !CollectionUtil.isAnyNull(name, endDate, remark, location, tags);
         this.name = name;
         this.startDate = startDate;

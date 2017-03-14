@@ -41,9 +41,10 @@ public class TaskCard extends UiPart<Region> {
             done.setText("Done");
         } else {
             done.setText("Not Done");
+        }
             remark.setText(task.getRemark().value);
             initTags(task);
-        }
+        
     }
 
     private void initTags(ReadOnlyTask task) {
