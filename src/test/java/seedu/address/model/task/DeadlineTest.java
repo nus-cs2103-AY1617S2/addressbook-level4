@@ -82,5 +82,23 @@ public class DeadlineTest {
         new Deadline("-");
         exception.expect(IllegalDateTimeValueException.class);
         new Deadline("a");
+        exception.expect(IllegalDateTimeValueException.class);
+        new Deadline("");
+    }
+
+    @Test
+    public void deadline_CheckIsParsable_ReturnTrue() throws IllegalValueException, IllegalDateTimeValueException {
+        assertTrue(Deadline.isParsableDate("Today"));
+        assertTrue(Deadline.isParsableDate("tmr"));
+        assertTrue(Deadline.isParsableDate("next wed"));
+        assertTrue(Deadline.isParsableDate("Today 2359"));
+    }
+
+    @Test
+    public void deadline_CheckIsParsable_ReturnFalse() throws IllegalValueException, IllegalDateTimeValueException {
+        assertFalse(Deadline.isParsableDate("invalidDate"));
+        assertFalse(Deadline.isParsableDate("tooooo"));
+        assertFalse(Deadline.isParsableDate("nulll"));
+        assertFalse(Deadline.isParsableDate("wrong input"));
     }
 }

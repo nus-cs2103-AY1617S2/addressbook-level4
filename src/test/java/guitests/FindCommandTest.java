@@ -41,8 +41,13 @@ public class FindCommandTest extends TaskManagerGuiTest {
     public void find_nonEmptyListStartEndDate_pass() {
         assertFindResult("FIND FROM today TO christmas",
                 td.task1, td.task2, td.task3, td.task4, td.task5, td.task6, td.task7); // 7 result
+        assertFindResult("FIND FROM 25-12-2017 2359 TO 01-01-2017 2359",
+                td.task1, td.task2, td.task3, td.task4, td.task5, td.task6, td.task7); // 7 result
         assertFindResult("FIND BY christmas",
                 td.task1, td.task2, td.task3, td.task4, td.task5, td.task6, td.task7); // 7 result
+        assertFindResult("FIND BY 25-12-2017",
+                td.task1, td.task2, td.task3, td.task4, td.task5, td.task6, td.task7); // 7 result
+        assertFindResult("FIND BY 01-01-2016"); // 7 result
     }
 
     @Test

@@ -100,7 +100,7 @@ public class ListCommand extends Command {
      * Returns true if a given string is a valid date.
      */
     public boolean isParsableDate(String dateTime) {
-        return dtParser.parse(dateTime).size() > 0;
+        return !dtParser.parse(dateTime).isEmpty();
     }
 
     @Override

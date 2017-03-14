@@ -100,8 +100,7 @@ public class Deadline {
      * Returns true if a given string is a valid date.
      */
     public static boolean isParsableDate(String test) {
-        List<Date> dateList = dateParser.parse(test).get(0).getDates();
-        return dateList.size() != 0;
+        return !dateParser.parse(test).isEmpty();
     }
 
     public Date getDateTime() {
