@@ -35,6 +35,8 @@ public class MainWindow extends UiPart<Region> {
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
     private TaskListPanel taskListPanel;
+    private TaskListPanel eventListPanel;
+    private TaskListPanel deadlineListPanel;
     private Config config;
 
     @FXML
@@ -47,7 +49,13 @@ public class MainWindow extends UiPart<Region> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private AnchorPane personListPanelPlaceholder;
+    private AnchorPane taskListPanelPlaceholder;
+
+    @FXML
+    private AnchorPane eventListPanelPlaceholder;
+
+    @FXML
+    private AnchorPane deadlineListPanelPlaceholder;
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
@@ -113,8 +121,10 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        browserPanel = new BrowserPanel(browserPlaceholder);
-        taskListPanel = new TaskListPanel(getPersonListPlaceholder(), logic.getFilteredPersonList());
+        //browserPanel = new BrowserPanel(browserPlaceholder);
+        taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredPersonList());
+        eventListPanel = new TaskListPanel(getEventListPlaceholder(), logic.getFilteredPersonList());
+        deadlineListPanel = new TaskListPanel(getDeadlineListPlaceholder(), logic.getFilteredPersonList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getGeekeepFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
@@ -132,10 +142,17 @@ public class MainWindow extends UiPart<Region> {
         return resultDisplayPlaceholder;
     }
 
-    private AnchorPane getPersonListPlaceholder() {
-        return personListPanelPlaceholder;
+    private AnchorPane getTaskListPlaceholder() {
+        return taskListPanelPlaceholder;
     }
 
+    private AnchorPane getEventListPlaceholder() {
+        return eventListPanelPlaceholder;
+    }
+
+    private AnchorPane getDeadlineListPlaceholder() {
+        return deadlineListPanelPlaceholder;
+    }
     void hide() {
         primaryStage.hide();
     }
@@ -204,7 +221,7 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void releaseResources() {
-        browserPanel.freeResources();
+        //browserPanel.freeResources();
     }
 
 }
