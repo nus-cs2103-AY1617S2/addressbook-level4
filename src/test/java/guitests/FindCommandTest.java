@@ -4,8 +4,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.testutil.TestPerson;
+import seedu.task.commons.core.Messages;
+import seedu.task.testutil.TestPerson;
 
 public class FindCommandTest extends AddressBookGuiTest {
 
