@@ -24,7 +24,7 @@ import seedu.toluist.ui.UiStore;
 public class MarkController extends Controller {
     private static final String RESULT_MESSAGE_COMPLETED_SUCCESS = "Task(s) %s marked completed";
     private static final String RESULT_MESSAGE_INCOMPLETE_SUCCESS = "Task(s) %s marked incomplete";
-    private static final String COMMAND_TEMPLATE = "mark\\s+(?<markType>(complete|incomplete))(?<index>.*)";
+    private static final String COMMAND_TEMPLATE = "mark(\\s+(?<markType>(complete|incomplete)))?(?<index>.*)";
     private static final String COMMAND_WORD = "mark";
 
     private static final String MARK_TERM = "markType";
@@ -51,10 +51,10 @@ public class MarkController extends Controller {
         }
 
         CommandResult commandResult;
-        if (markTypeToken.equals(MARK_COMPLETE)) {
-            commandResult = mark(indexes, true);
-        } else {
+        if (markTypeToken.equals(MARK_INCOMPLETE)) {
             commandResult = mark(indexes, false);
+        } else {
+            commandResult = mark(indexes, true);
         }
 
         TodoList todoList = TodoList.load();
