@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.doit.logic.Logic;
 import seedu.doit.model.item.ReadOnlyFloatingTask;
 
 public class FloatingTaskCard extends UiPart<Region> {
@@ -24,9 +25,11 @@ public class FloatingTaskCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    public FloatingTaskCard(ReadOnlyFloatingTask floatingTask, int displayedIndex) {
+    public FloatingTaskCard(ReadOnlyFloatingTask floatingTask, int displayedIndex, Logic logic) {
         super(FXML);
         this.name.setText(floatingTask.getName().fullName);
+        displayedIndex += logic.getFilteredTaskList().size();
+        displayedIndex += logic.getFilteredEventList().size();
         this.id.setText(displayedIndex + ". ");
         this.priority.setText(floatingTask.getPriority().value);
         this.description.setText(floatingTask.getDescription().value);

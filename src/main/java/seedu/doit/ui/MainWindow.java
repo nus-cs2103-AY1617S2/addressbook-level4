@@ -119,8 +119,10 @@ public class MainWindow extends UiPart<Region> {
 
     protected void fillInnerParts() {
         this.taskListPanel = new TaskListPanel(getTaskListPlaceholder(), this.logic.getFilteredTaskList());
-        this.eventListPanel = new EventListPanel(getEventListPlaceholder(), this.logic.getFilteredEventList());
-        this.fListPanel = new FloatingTaskListPanel(getFListPlaceholder(), this.logic.getFilteredFloatingTaskList());
+        this.eventListPanel = new EventListPanel(getEventListPlaceholder(), this.logic.getFilteredEventList(),
+                              this.logic);
+        this.fListPanel = new FloatingTaskListPanel(getFListPlaceholder(), this.logic.getFilteredFloatingTaskList(),
+                              this.logic);
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), this.config.getTaskManagerFilePath());
         new CommandBox(getCommandBoxPlaceholder(), this.logic);
