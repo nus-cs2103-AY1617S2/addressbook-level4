@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.ezdo.commons.core.LogsCenter;
 import seedu.ezdo.commons.events.model.EzDoChangedEvent;
+import seedu.ezdo.commons.events.storage.EzDoDirectoryChangedEvent;
 import seedu.ezdo.commons.util.FxViewUtil;
 
 /**
@@ -31,7 +32,7 @@ public class StatusBarFooter extends UiPart<Region> {
         super(FXML);
         addToPlaceholder(placeHolder);
         setSyncStatus("Not updated yet in this session");
-        setSaveLocation("./" + saveLocation);
+        setSaveLocation(saveLocation);
         registerAsAnEventHandler(this);
     }
 
@@ -53,5 +54,14 @@ public class StatusBarFooter extends UiPart<Region> {
         String lastUpdated = (new Date()).toString();
         logger.info(LogsCenter.getEventHandlingLogMessage(ezce, "Setting last updated status to " + lastUpdated));
         setSyncStatus("Last Updated: " + lastUpdated);
+    }
+
+    @Subscribe
+    public void handleEzDoDirectoryChangedEvent(EzDoDirectoryChangedEvent ezce) {
+        String lastUpdated = (new Date()).toString();
+        logger.info(LogsCenter.getEventHandlingLogMessage(ezce, "Setting last updated status to " + lastUpdated));
+        logger.info(LogsCenter.getEventHandlingLogMessage(ezce, "Setting save location to " + ezce.getPath()));
+        setSyncStatus("Last Updated: " + lastUpdated);
+        setSaveLocation(ezce.getPath());
     }
 }
