@@ -17,11 +17,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.tasklist.model.tag.Tag;
 import seedu.tasklist.model.task.EventTask;
-import seedu.tasklist.model.task.FloatingTask;
 import seedu.tasklist.model.task.ReadOnlyTask;
 import seedu.tasklist.model.task.Task;
 import seedu.tasklist.testutil.TestEventTask;
-import seedu.tasklist.testutil.TestFloatingTask;
 import seedu.tasklist.testutil.TypicalTestTasks;
 
 public class TaskListTest {
