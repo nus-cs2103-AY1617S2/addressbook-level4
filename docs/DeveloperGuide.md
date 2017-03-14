@@ -4,27 +4,28 @@ By : `Team T09-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbs
 
 ---
 
-* 1.[Introduction](#intoduction)
-* 2.[Setting Up](#setting-up)
-* 3.[Design](#design)
-* 4.[Implementation](#implementation)
-* 5.[Testing](#testing)
-* 6.[Dev Ops](#dev-ops)
-* 7.[Appendix A: User Stories](#appendix-a--user-stories)
-* 8.[Appendix B: Use Cases](#appendix-b--use-cases)
-* 9.[Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
-* 10.[Appendix D: Glossary](#appendix-d--glossary)
-* 11.[Appendix E : Product Survey](#appendix-e--product-survey)
+* 1. [Introduction](#intoduction)
+* 2. [Setting Up](#setting-up)
+* 3. [Design](#design)
+* 4. [Implementation](#implementation)
+* 5. [Testing](#testing)
+* 6. [Dev Ops](#dev-ops)
+* [Appendix A: User Stories](#appendix-a--user-stories)
+* [Appendix B: Use Cases](#appendix-b--use-cases)
+* [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
+* [Appendix D: Glossary](#appendix-d--glossary)
+* [Appendix E : Product Survey](#appendix-e--product-survey)
 
-## 1.Introduction
+## 1. Introduction
 
 TypeTask is a task manager for active users who prefer to manage their tasks and plans by keyboard commands. TypeTask works on a Java desktop application that has a graphical user interface (GUI) executed with JavaFX.
 
 This guide illustrates the design and implementation of TypeTask. It will guide you as a developer to understand how TypeTask functions and show you how to be a part of its progress. 
 
+
 ## 2. Setting up
 
-### 1.1. Prerequisites
+### 2.1. Prerequisites
 
 1. **JDK `1.8.0_60`**  or later<br>
 
@@ -38,7 +39,7 @@ This guide illustrates the design and implementation of TypeTask. It will guide 
 5. **Checkstyle Plug-in** plugin from the Eclipse Marketplace
 
 
-### 1.2. Importing the project into Eclipse
+### 2.2. Importing the project into Eclipse
 
 0. Fork this repo, and clone the fork to your computer
 1. Open Eclipse (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
@@ -53,7 +54,7 @@ This guide illustrates the design and implementation of TypeTask. It will guide 
       (This is because Gradle downloads library files from servers during the project set up process)
   > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
 
-### 1.3. Configuring Checkstyle
+### 2.3. Configuring Checkstyle
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
 3. Enter an arbitrary configuration name e.g. addressbook
@@ -64,7 +65,7 @@ This guide illustrates the design and implementation of TypeTask. It will guide 
 
 > Note to click on the `files from packages` text after ticking in order to enable the `Change...` button
 
-### 1.4. Troubleshooting project setup
+### 2.4. Troubleshooting project setup
 
 **Problem: Eclipse reports compile errors after new commits are pulled from Git**
 
@@ -78,9 +79,9 @@ This guide illustrates the design and implementation of TypeTask. It will guide 
 * Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries).
 
 
-## 2. Design
+## 3. Design
 
-### 2.1. Architecture
+### 3.1. Architecture
 
 <img src="images/Architecture.png" width="600"><br>
 _Figure 2.1.1 : Architecture Diagram_
@@ -148,9 +149,7 @@ _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 
 The sections below give more details of each component.
 
-### 2.2. UI component
-
-Author: Alice Bee
+### 3.2. UI component
 
 <img src="images/UiClassDiagram.png" width="800"><br>
 _Figure 2.2.1 : Structure of the UI Component_
@@ -171,9 +170,7 @@ The `UI` component,
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
 
-### 2.3. Logic component
-
-Author: Bernard Choo
+### 3.3. Logic component
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
@@ -190,9 +187,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 <img src="images/DeletePersonSdForLogic.png" width="800"><br>
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
-### 2.4. Model component
-
-Author: Cynthia Dharman
+### 3.4. Model component
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 2.4.1 : Structure of the Model Component_
@@ -207,9 +202,7 @@ The `Model`,
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
-### 2.5. Storage component
-
-Author: Darius Foong
+### 3.5. Storage component
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
@@ -221,13 +214,13 @@ The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
 * can save the Address Book data in xml format and read it back.
 
-### 2.6. Common classes
+### 3.6. Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
-## 3. Implementation
+## 4. Implementation
 
-### 3.1. Logging
+### 4.1. Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels
 and logging destinations.
@@ -299,6 +292,7 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
    [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
    Delete run configurations created when you ran tests earlier.
 
+
 ## 5. Dev Ops
 
 ### 5.1. Build Automation
@@ -350,6 +344,7 @@ is better than these alternatives.<br>
 a. Include those libraries in the repo (this bloats the repo size)<br>
 b. Require developers to download those libraries manually (this creates extra work for developers)<br>
 
+
 ## Appendix A : User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
@@ -390,8 +385,7 @@ Priority | As a ... | I want to ... | So that I can...
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `Task Manager` and the **Actor** is the `user`, unless specified otherwise)
-
+>For all use cases below, the **System** is the `Task Manager` and the **Actor** is the `user`, unless specified otherwise)
 
 #### Use Case: Add task
 
@@ -411,12 +405,11 @@ Use case ends.
 
 2b. Task’s date and time clashes with a blocked date and time
 
-  > 2b1. A window pop up warning will be shown to confirm user’s request
-  > 2b2. User click ok
-  > Use case ends
-   > 2b2.1 User click no
-  > Use case ends.
-
+> 2b1. A window pop up warning will be shown to confirm user’s request
+> 2b2. User click ok
+> Use case ends
+> 2b2.1 User click no
+> Use case ends.
 
 #### Use Case: Search for existing task
 
@@ -429,15 +422,18 @@ Use case ends
 **Extensions**
 
 2a. List is empty
-  > 2a1. System shows a message that indicates the command has been executed
-  > Use case ends
-4a. Invalid format
-  > 4a1. System shows an error message
-  > Use case resumes at step 3
-4b. Task does not exist
-  > 4b1. System shows an error message
-  > Use case resumes at step 3
 
+> 2a1. System shows a message that indicates the command has been executed
+> Use case ends
+4a. Invalid format
+
+> 4a1. System shows an error message
+> Use case resumes at step 3
+  
+4b. Task does not exist
+
+> 4b1. System shows an error message
+> Use case resumes at step 3
 
 #### Use Case: Delete an existing task
 
@@ -452,15 +448,19 @@ Use case ends
 **Extensions**
 
 2a. List is empty
-  > 2a1. System shows a message that indicates the command has been executed
-  > Use case ends
+
+> 2a1. System shows a message that indicates the command has been executed
+> Use case ends
+  
 4a. Invalid format
+
 > 4a1. System shows an error message
 > Use case resumes at step 3
+  
 4b. Task does not exist
-  > 4b1. System shows an error message
-  > Use case resumes at step 3
 
+> 4b1. System shows an error message
+> Use case resumes at step 3
 
 #### Use Case: Deleting multiple task
 
@@ -475,17 +475,19 @@ Use case ends
 **Extensions**
 
 2a. List is empty
-  > 2a1. System shows a message that indicates the command has been executed
-Use case ends
+
+> 2a1. System shows a message that indicates the command has been executed
+> Use case ends
 
 4a. Invalid format
+
 > 4a1. System shows an error message
 > Use case resumes at step 3
 
 4b. Task does not exist in one of the multiple id
-  > 4b1. System shows an error message
-> Use case resumes at step 3
 
+> 4b1. System shows an error message
+> Use case resumes at step 3
 
 #### Use Case: Editing an existing task
 
@@ -500,13 +502,18 @@ Use case ends
 **Extensions**
 
 2a. List is empty
+
   > 2a1. System shows a message that indicates the command has been executed
+
 4a. Invalid format
+
 > 4a1. System shows an error message
 > Use case resumes at step 3
+
 4b. Task does not exist
-  > 4b1. System shows an error message
-  > Use case resumes at step 3
+
+> 4b1. System shows an error message
+> Use case resumes at step 3
 
 #### Use Case: Mark task as complete
 
@@ -521,17 +528,19 @@ Use case ends
 **Extensions**
 
 2a. List is empty
+
 > 2a1. System shows a message that indicates the command has been executed
 > Use case ends
 
 4a. Invalid format
+
 > 4a1. System shows an error message
 > Use case resumes at step 3
 
 4b. Task does not exist
-  > 4b1. System shows an error message
-  > Use case resumes at step 3
 
+> 4b1. System shows an error message
+> Use case resumes at step 3
 
 #### Use Case: List today task
 
@@ -544,9 +553,9 @@ Use case ends
 **Extensions**
 
 2a. List is empty
-  > 2a1. System shows a message that indicates the command has been executed
+ 
+ > 2a1. System shows a message that indicates the command has been executed
  > Use case ends
-
 
 #### Use Case: List all task in chronological order
 
@@ -559,9 +568,9 @@ Use case ends
 **Extensions**
 
 2a. List is empty
-  > 2a1. System shows a message that indicates the command has been executed
+  
+> 2a1. System shows a message that indicates the command has been executed
 > Use case ends
-
 
 #### Use Case: List of completed task
 
@@ -574,9 +583,9 @@ Use case ends
 **Extensions**
 
 2a. List is empty
-  > 2a1. System shows a message that indicates the command has been executed
-> Use case ends
 
+> 2a1. System shows a message that indicates the command has been executed
+> Use case ends
 
 #### Use Case: List all priority task
 
@@ -589,9 +598,9 @@ Use case ends
 **Extensions**
 
 2a. List is empty
-  > 2a1. System shows a message that indicates the command has been executed
-> Use case ends
 
+> 2a1. System shows a message that indicates the command has been executed
+> Use case ends
 
 #### Use Case: Learning useful commands
 
@@ -604,50 +613,9 @@ Use case ends
 **Extensions**
 
 2a. Invalid format
-  > 2a1. System shows an error message
+
+> 2a1. System shows an error message
 > Use case ends
-
-
-#### Use Case: Block existing task
-
-**MSS**
-
-1.  User searches for an existing task
-2.  System displays the tasks
-3.  User enters the block command with the task id
-4.  System will add the blocked task’s date and time into the block list
-Use case ends
-
-**Extensions**
-
-2a. List is empty
-  > 2a1. System shows a message that indicates the command has been executed
-> Use case ends
-4a. Task does not exist
-  > 4a1. System shows an error message
-  > Use case resumes at step 3
-4b. Invalid format
-  > 4b1. System shows an error message
-  > Use case resumes at step 3
-
-
-#### Use Case: Unblock existing task
-
-**MSS**
-
-1.  User enters unblock command with the blocked task id 
-2.  System will unblock the task and add it to the task list
-Use case ends
-
-**Extensions**
-
-2a. Task does not exist
- >  2a1. System shows an error message
- >  Use case resumes at step 3
-2b. Invalid format
-  > 2b1. System shows an error message
-  > Use case resumes at step 3
-2c. Duplicate task with same date and same time found 
 
 #### Use Case: Saving data in another folder
 
@@ -660,15 +628,18 @@ Use case ends
 **Extensions**
 
 2a. Invalid format
-  > 2a1. System shows error message
+
+> 2a1. System shows error message
 > Use case ends
 
 2b. Invalid path
- >  2b1. System shows error message.
+
+> 2b1. System shows error message.
 > Use case ends
 
 2c. Existing file found
-  > 2c1. System will overwrite the existing file.
+
+> 2c1. System will overwrite the existing file.
 > Use case ends.
 
 #### Use case: Changing default storage folder
@@ -682,15 +653,18 @@ Use case ends
 **Extensions**
 
 2a. Invalid format
-  > 2a1. System shows error message
+
+> 2a1. System shows error message
 > Use case ends
 
 2b. Invalid path
-  > 2b1. System shows error message
+
+> 2b1. System shows error message
 > Use case ends 
 
 2c. Existing file found
-  > 2c1. System will overwrite the existing file
+
+> 2c1. System will overwrite the existing file
 > Use case ends.
 
 
@@ -705,10 +679,13 @@ Use case ends
 **Extensions**
 
 2a. Invalid format
- >  2a1. System shows an error message
+
+> 2a1. System shows an error message
 > Use case ends
+
 2b. Invalid file path
-  > 2b1. System shows an error message
+
+> 2b1. System shows an error message
 > Use case ends
 
 
@@ -723,11 +700,13 @@ Use case ends
 **Extensions**
 
 2a. Invalid format
-  > 2a1. System shows an error message
+
+> 2a1. System shows an error message
 > Use case ends
 
 2b. No previous command exists
-  > 2b1. System shows an error message
+
+> 2b1. System shows an error message
 > Use case ends
 
 #### Use case: Exit application
@@ -740,7 +719,8 @@ Use case ends
 **Extensions**
 
 2a. Invalid format
-  > 2a1. System shows an error message
+
+> 2a1. System shows an error message
 > Use case ends
 
 
@@ -770,10 +750,6 @@ Use case ends
 ##### Floating Task
 
 > A task that does not need to be completed by a certain date or time
-
-##### Block
-
-> A command to ensure that no other task can be added to the specific date and time
 
 ##### Storage folder
 
