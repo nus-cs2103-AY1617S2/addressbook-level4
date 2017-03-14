@@ -176,12 +176,4 @@ public class TaskManager implements ReadOnlyTaskManager {
         return Objects.hash(tasks, tags);
     }
 
-    // Checks if task list is empty
-    public boolean isEmpty() {
-        if (this.tasks.isEmpty()) {
-            return true;
-        }
-        return false;
-    }
-
 }
