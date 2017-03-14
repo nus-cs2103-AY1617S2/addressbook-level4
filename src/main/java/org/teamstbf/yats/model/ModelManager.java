@@ -27,7 +27,7 @@ public class ModelManager extends ComponentManager implements Model {
 
 	private final TaskManager taskManager;
 	
-	private FilteredList<ReadOnlyEvent> filteredEvents;
+	private final FilteredList<ReadOnlyEvent> filteredEvents;
 
 	/**
 	 * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -44,10 +44,6 @@ public class ModelManager extends ComponentManager implements Model {
 
 	public ModelManager() {
 		this(new TaskManager(), new UserPrefs());
-	}
-	
-	public void setFilteredEventList(FilteredList<ReadOnlyEvent> filteredEvents) {
-		this.filteredEvents = filteredEvents;
 	}
 	
 	@Override
@@ -113,8 +109,7 @@ public class ModelManager extends ComponentManager implements Model {
 	
 	@Override
 	public void sortFilteredEventList() {
-		FilteredList<ReadOnlyEvent> sortedList = new FilteredList<>(getTaskManager().getTaskList());
-		setFilteredEventList(sortedList);
+		getFilteredTaskList().sorted();
 	}
 
 	private void updateFilteredEventList(Expression expression) {
