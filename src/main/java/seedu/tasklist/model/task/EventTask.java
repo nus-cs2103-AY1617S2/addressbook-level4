@@ -169,4 +169,20 @@ public class EventTask extends Task implements ReadOnlyEventTask {
         return TYPE;
     }
 
+    @Override
+    public String getAsText() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getName())
+                .append(" StartDate: ")
+                .append(getStartDateString())
+                .append(" EndDate: ")
+                .append(getEndDateString())
+                .append(" Comment: ")
+                .append(getComment())
+                .append(" Priority: ")
+                .append(getPriority())
+                .append(" Tags: ");
+        getTags().forEach(builder::append);
+        return builder.toString();
+    }
 }

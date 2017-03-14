@@ -34,18 +34,5 @@ public interface ReadOnlyFloatingTask extends ReadOnlyTask {
     /**
      * Formats the person as text, showing all contact details.
      */
-    default String getAsText() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append(" Comment: ")
-                .append(getComment())
-                .append(" Priority: ")
-                .append(getPriority())
-                .append(" Status: ")
-                .append(getStatus())
-                .append(" Tags: ");
-        getTags().forEach(builder::append);
-        return builder.toString();
-    }
-
+    String getAsText();
 }

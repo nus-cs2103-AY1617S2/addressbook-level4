@@ -147,4 +147,19 @@ public class DeadlineTask extends Task implements ReadOnlyDeadlineTask {
     public String getType() {
         return TYPE;
     }
+
+    @Override
+    public String getAsText() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getName())
+                .append(" Deadline: ")
+                .append(getDeadlineString())
+                .append(" Comment: ")
+                .append(getComment())
+                .append(" Priority: ")
+                .append(getPriority())
+                .append(" Tags: ");
+        getTags().forEach(builder::append);
+        return builder.toString();
+    }
 }

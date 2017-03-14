@@ -34,21 +34,7 @@ public interface ReadOnlyEventTask extends ReadOnlyTask {
     }
 
     /**
-     * Formats the person as text, showing all contact details.
+     * Formats the person as text, showing all task details.
      */
-    default String getAsText() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append(" StartDate: ")
-                .append(getStartDateString())
-                .append(" EndDate: ")
-                .append(getEndDateString())
-                .append(" Comment: ")
-                .append(getComment())
-                .append(" Priority: ")
-                .append(getPriority())
-                .append(" Tags: ");
-        getTags().forEach(builder::append);
-        return builder.toString();
-    }
+    String getAsText();
 }
