@@ -1,23 +1,13 @@
 package seedu.tasklist.model.task;
 
-import seedu.tasklist.model.tag.UniqueTagList;
-
 /**
  * A read-only immutable interface for a floating task in the task list.
  * Implementations should guarantee: details are present and not null, field values are validated.
  *
  */
 public interface ReadOnlyFloatingTask extends ReadOnlyTask {
-    Name getName();
-    Comment getComment();
     Priority getPriority();
     Status getStatus();
-
-    /**
-     * The returned TagList is a deep copy of the internal TagList,
-     * changes on the returned list will not affect the person's internal tags.
-     */
-    UniqueTagList getTags();
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
@@ -32,7 +22,7 @@ public interface ReadOnlyFloatingTask extends ReadOnlyTask {
     }
 
     /**
-     * Formats the person as text, showing all contact details.
+     * Formats the task as text, showing all contact details.
      */
     String getAsText();
 }
