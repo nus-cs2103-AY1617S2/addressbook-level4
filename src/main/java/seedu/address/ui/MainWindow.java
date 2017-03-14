@@ -33,13 +33,10 @@ public class MainWindow extends UiPart<Region> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    //private BrowserPanel browserPanel;
     private TaskListPanel personListPanel;
     private Config config;
     private TaskDescription taskDescription;
     private TaskDetail taskDetail;
-
-    //private AnchorPane browserPlaceholder;
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
@@ -219,9 +216,4 @@ public class MainWindow extends UiPart<Region> {
         taskDescription.loadPersonPage(person);
         taskDetail.loadPersonPage(person);
     }
-
-    /*void releaseResources() {
-        browserPanel.freeResources();
-    }*/
-
 }

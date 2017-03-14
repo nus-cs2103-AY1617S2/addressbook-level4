@@ -22,23 +22,12 @@ public class TaskDescription extends UiPart<Region> {
      */
     public TaskDescription(AnchorPane placeholder) {
         super(FXML);
-        //content = new TextArea();
-        //FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
         FxViewUtil.applyAnchorBoundaryParameters(content, 0.0, 0.0, 0.0, 0.0);
-        //content.setPrefHeight(600.0);
-        //content.setPrefWidth(600.0);
-
-        //content.setScaleY(0.1);
-
         placeholder.getChildren().addAll(content);
     }
 
     public void loadPersonPage(ReadOnlyTask person) {
         content.setText(person.getAsText());
-        /*Label label = new Label("Task Description");
-        HBox hb = new HBox();
-        hb.getChildren().addAll(label, content);
-        hb.setSpacing(10);*/
     }
 
 }
