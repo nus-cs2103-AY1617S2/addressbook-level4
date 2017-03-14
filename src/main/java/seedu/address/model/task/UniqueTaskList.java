@@ -93,6 +93,10 @@ public class UniqueTaskList implements Iterable<Task> {
     public UnmodifiableObservableList<Task> asObservableList() {
         return new UnmodifiableObservableList<>(internalList);
     }
+    
+    public ObservableList<Task> getInternalList() {
+        return internalList;
+    }
 
     @Override
     public Iterator<Task> iterator() {
@@ -128,4 +132,5 @@ public class UniqueTaskList implements Iterable<Task> {
     public static class TaskNotFoundException extends Exception {}
 
 }
+
 
