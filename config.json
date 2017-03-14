@@ -1,7 +1,0 @@
-{
-  "appTitle" : "whatsleft",
-  "logLevel" : "INFO",
-  "userPrefsFilePath" : "preferences.json",
-  "whatsLeftFilePath" : "data/whatsleft.xml",
-  "whatsLeftName" : "MyWhatsLeft"
-}
