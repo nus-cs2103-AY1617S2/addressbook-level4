@@ -19,7 +19,7 @@ public class TaskCardHandle extends GuiHandle {
     private static final String VENUE_FIELD_ID = "#venue";
     private static final String STARTTIME_FIELD_ID = "#startTime";
     private static final String ENDTIME_FIELD_ID = "#endTime";
-    private static final String URGENCYLEVEL_FIELD_ID = "#urgency Level";
+    private static final String URGENCYLEVEL_FIELD_ID = "#urgencyLevel";
     private static final String DESCRIPTION_FIELD_ID = "#description";
     private static final String TAGS_FIELD_ID = "#tags";
 
