@@ -30,6 +30,8 @@ public class XmlAdaptedTask {
     private String remark;
     @XmlElement(required = true)
     private String location;
+    @XmlElement(required = true)
+    private boolean done;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -53,6 +55,7 @@ public class XmlAdaptedTask {
         endDate = source.getEndDate().toString();
         remark = source.getRemark().value;
         location = source.getLocation().value;
+        done = source.isDone();
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -75,6 +78,6 @@ public class XmlAdaptedTask {
         final Remark remark = new Remark(this.remark);
         final Location location = new Location(this.location);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(name, startDate, endDate, remark, location, tags);
+        return new Task(name, startDate, endDate, remark, location, tags, this.done);
     }
 }
