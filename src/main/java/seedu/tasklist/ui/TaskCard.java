@@ -46,13 +46,16 @@ public class TaskCard extends UiPart<Region> {
         initTags(task);
         switch(taskType) {
         case DeadlineTask.TYPE:
-            endDate.setText("Deadline: " + ((ReadOnlyDeadlineTask) task).getDeadlineString());
+            startDate.setText("Deadline: " + ((ReadOnlyDeadlineTask) task).getDeadlineString());
+            endDate.setVisible(false);
             break;
         case EventTask.TYPE:
             startDate.setText("Start Date: " + ((ReadOnlyEventTask) task).getStartDateString());
             endDate.setText("End Date: " + ((ReadOnlyEventTask) task).getEndDateString());
             break;
         case FloatingTask.TYPE:
+            startDate.setVisible(false);
+            endDate.setVisible(false);
             break;
         }
 
