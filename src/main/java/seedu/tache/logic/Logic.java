@@ -3,6 +3,7 @@ package seedu.tache.logic;
 import javafx.collections.ObservableList;
 import seedu.tache.logic.commands.CommandResult;
 import seedu.tache.logic.commands.exceptions.CommandException;
+import seedu.tache.model.task.ReadOnlyDetailedTask;
 import seedu.tache.model.task.ReadOnlyTask;
 
 /**
@@ -19,5 +20,8 @@ public interface Logic {
 
     /** Returns the filtered list of tasks */
     ObservableList<ReadOnlyTask> getFilteredTaskList();
+
+    /** Returns the filtered list of detailed tasks */
+    ObservableList<ReadOnlyDetailedTask> getFilteredDetailedTaskList();
 
 }

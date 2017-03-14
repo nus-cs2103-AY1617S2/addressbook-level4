@@ -7,23 +7,32 @@ import seedu.tache.model.task.UniqueDetailedTaskList;
 
 public class TypicalTestDetailedTasks {
 
-    public TestDetailedTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
+    public TestDetailedTask taskA, taskB, taskC, taskH, taskI;
 
     public TypicalTestDetailedTasks() {
         try {
-            alice = new DetailedTaskBuilder().withName("Alice Pauline")
-                    .withTags("friends").build();
-            benson = new DetailedTaskBuilder().withName("Benson Meier")
-                    .withTags("owesMoney", "friends").build();
-            carl = new DetailedTaskBuilder().withName("Carl Kurz").build();
-            daniel = new DetailedTaskBuilder().withName("Daniel Meier").build();
-            elle = new DetailedTaskBuilder().withName("Elle Meyer").build();
-            fiona = new DetailedTaskBuilder().withName("Fiona Kunz").build();
-            george = new DetailedTaskBuilder().withName("George Best").build();
+            taskA = new DetailedTaskBuilder().withName("Walk the Dog")
+                    .withStartDate("14 April 2017")
+                    .withEndDate("14 April 2017")
+                    .withTime("17:00")
+                    .withDuration("2Hrs")
+                    .withTags("MediumPriority").build();
+            taskB = new DetailedTaskBuilder().withName("Buy Medicine")
+                    .withStartDate("15 April 2017")
+                    .withEndDate("-")
+                    .withTime("12:00")
+                    .withDuration("-")
+                    .withTags("LowPriority").build();
+            taskC = new DetailedTaskBuilder().withName("Submit Project Proposal")
+                    .withStartDate("-")
+                    .withEndDate("17 April 2017")
+                    .withTime("15:00")
+                    .withDuration("-")
+                    .withTags("HighPriority").build();
 
             // Manually added
-            hoon = new DetailedTaskBuilder().withName("Hoon Meier").build();
-            ida = new DetailedTaskBuilder().withName("Ida Mueller").build();
+            taskH = new DetailedTaskBuilder().withName("Hoon Meier").build();
+            taskI = new DetailedTaskBuilder().withName("Ida Mueller").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -34,14 +43,14 @@ public class TypicalTestDetailedTasks {
         for (TestDetailedTask task : new TypicalTestDetailedTasks().getTypicalDetailedTasks()) {
             try {
                 ab.addDetailedTask(new DetailedTask(task));
-            } catch (UniqueDetailedTaskList.DuplicateTaskException e) {
+            } catch (UniqueDetailedTaskList.DuplicateDetailedTaskException e) {
                 assert false : "not possible";
             }
         }
     }
 
     public TestDetailedTask[] getTypicalDetailedTasks() {
-        return new TestDetailedTask[]{alice, benson, carl, daniel, elle, fiona, george};
+        return new TestDetailedTask[]{taskA, taskB, taskC, taskH, taskI};
     }
 
     public TaskManager getTypicalTaskManager() {

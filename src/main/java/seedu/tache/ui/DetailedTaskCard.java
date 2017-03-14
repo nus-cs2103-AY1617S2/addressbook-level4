@@ -1,0 +1,48 @@
+package seedu.tache.ui;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import seedu.tache.model.task.ReadOnlyDetailedTask;
+
+public class DetailedTaskCard extends UiPart<Region> {
+
+    private static final String FXML = "DetailedTaskListCard.fxml";
+
+    @FXML
+    private HBox cardPane;
+
+    @FXML
+    private Label name;
+
+    @FXML
+    private Label startDate;
+
+    @FXML
+    private Label endDate;
+
+    @FXML
+    private Label time;
+
+    @FXML
+    private Label duration;
+
+    @FXML
+    private FlowPane tags;
+
+    public DetailedTaskCard(ReadOnlyDetailedTask detailedTask, int displayedIndex) {
+        super(FXML);
+        name.setText(detailedTask.getName().toString());
+        startDate.setText(detailedTask.getStartDate().toString());
+        endDate.setText(detailedTask.getEndDate().toString());
+        time.setText(detailedTask.getTime().toString());
+        duration.setText(detailedTask.getDuration().toString());
+        initTags(detailedTask);
+    }
+
+    private void initTags(ReadOnlyDetailedTask detailedTask) {
+        detailedTask.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+}

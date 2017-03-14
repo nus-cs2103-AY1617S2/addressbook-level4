@@ -94,6 +94,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public UnmodifiableObservableList<ReadOnlyDetailedTask> getFilteredDetailedTaskList() {
+        return new UnmodifiableObservableList<>(filteredDetailedTasks);
+    }
+
+    @Override
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
     }

@@ -4,8 +4,13 @@ import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.model.ReadOnlyTaskManager;
 import seedu.tache.model.TaskManager;
 import seedu.tache.model.tag.UniqueTagList;
+import seedu.tache.model.task.Date;
+import seedu.tache.model.task.DetailedTask;
+import seedu.tache.model.task.Duration;
 import seedu.tache.model.task.Name;
 import seedu.tache.model.task.Task;
+import seedu.tache.model.task.Time;
+import seedu.tache.model.task.UniqueDetailedTaskList.DuplicateDetailedTaskException;
 import seedu.tache.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
@@ -24,12 +29,15 @@ public class SampleDataUtil {
         }
     }
 
-    public static Task[] getSampleDetailedTasks() {
+    public static DetailedTask[] getSampleDetailedTasks() {
         try {
-            return new Task[] {
-                new Task(new Name("Walk the Dog from 8-8.30pm"), new UniqueTagList("MediumPriority")),
-                new Task(new Name("Buy Medicine at 12 noon"), new UniqueTagList("LowPriority")),
-                new Task(new Name("Submit Project Proposal by 3pm"), new UniqueTagList("HighPriority")),
+            return new DetailedTask[] {
+                new DetailedTask(new Name("Walk the Dog"), new Date("14 April 2017"), new Date("14 April 2017"),
+                                 new Time("17:00"), new Duration("2Hrs"), new UniqueTagList("MediumPriority")),
+                new DetailedTask(new Name("Buy Medicine"), new Date("15 April 2017"), new Date("-"),
+                                 new Time("12:00"), new Duration("-"), new UniqueTagList("LowPriority")),
+                new DetailedTask(new Name("Submit Project Proposal"), new Date("-"), new Date("17 April 2017"),
+                                 new Time("15:00"), new Duration("-"), new UniqueTagList("HighPriority")),
             };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);
@@ -42,21 +50,14 @@ public class SampleDataUtil {
             for (Task sampleTask : getSampleTasks()) {
                 sampleAB.addTask(sampleTask);
             }
-            return sampleAB;
-        } catch (DuplicateTaskException e) {
-            throw new AssertionError("sample data cannot contain duplicate tasks", e);
-        }
-    }
-
-    public static ReadOnlyTaskManager getSampleDetailedTaskManager() {
-        try {
-            TaskManager sampleAB = new TaskManager();
-            for (Task sampleTask : getSampleDetailedTasks()) {
-                sampleAB.addTask(sampleTask);
+            for (DetailedTask sampleDetailedTask : getSampleDetailedTasks()) {
+                sampleAB.addDetailedTask(sampleDetailedTask);
             }
             return sampleAB;
         } catch (DuplicateTaskException e) {
             throw new AssertionError("sample data cannot contain duplicate tasks", e);
+        } catch (DuplicateDetailedTaskException e) {
+            throw new AssertionError("sample data cannot contain duplicate detailed tasks", e);
         }
     }
 }

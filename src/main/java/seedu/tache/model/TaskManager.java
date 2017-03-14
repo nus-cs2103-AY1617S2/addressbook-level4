@@ -60,7 +60,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     }
 
     public void setDetailedTasks(List<? extends ReadOnlyDetailedTask> detailedTasks)
-            throws UniqueDetailedTaskList.DuplicateTaskException {
+            throws UniqueDetailedTaskList.DuplicateDetailedTaskException {
         this.detailedTasks.setDetailedTasks(detailedTasks);
     }
 
@@ -77,7 +77,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         }
         try {
             setDetailedTasks(newData.getDetailedTaskList());
-        } catch (UniqueDetailedTaskList.DuplicateTaskException e) {
+        } catch (UniqueDetailedTaskList.DuplicateDetailedTaskException e) {
             assert false : "TaskManagers should not have duplicate detailed tasks";
         }
         try {
@@ -108,9 +108,10 @@ public class TaskManager implements ReadOnlyTaskManager {
      * Also checks the new detailed task's tags and updates {@link #tags} with any new tags found,
      * and updates the Tag objects in the detailed task to point to those in {@link #tags}.
      *
-     * @throws UniqueDetailedTaskList.DuplicateTaskException if an equivalent detailed task already exists.
+     * @throws UniqueDetailedTaskList.DuplicateDetailedTaskException if an equivalent detailed task already exists.
      */
-    public void addDetailedTask(DetailedTask detailedTask) throws UniqueDetailedTaskList.DuplicateTaskException {
+    public void addDetailedTask(DetailedTask detailedTask)
+            throws UniqueDetailedTaskList.DuplicateDetailedTaskException {
         syncMasterTagListWith(detailedTask);
         detailedTasks.add(detailedTask);
     }
@@ -120,7 +121,7 @@ public class TaskManager implements ReadOnlyTaskManager {
      * {@code TaskManager}'s tag list will be updated with the tags of {@code editedReadOnlyTask}.
      * @see #syncMasterTagListWith(Task)
      *
-     * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
+     * @throws DuplicateDetailedTaskException if updating the task's details causes the task to be equivalent to
      *      another existing task in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
