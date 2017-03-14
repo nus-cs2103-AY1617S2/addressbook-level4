@@ -51,22 +51,26 @@ Format: `helpf`, `hf`
 
 ### 2.2 Adding a task: `add`
 
-If you are ready to start exploring KIT,do it by adding a task! 
+If you are ready to start exploring KIT, do it by adding a task! 
 
 Adds a task to KIT. New tasks are [not done] by default. <br>
 
-Format: `add NAME [r/REMARKS] [d/DEADLINE] [l/LOCATION] [t/TAG]...`
+Format: `add NAME [r/REMARKS] [s/STARTDATE] [e/ENDDATE] [l/LOCATION] [t/TAG]...`
 
 > * If you need to type the character /, put a \ before it to avoid t/ getting recognized as tag. eg. carrot\/cabbage <br>
 > * Tasks can have any number of tags (including 0).
 
 Here are some examples:
 
-* `add do 2103 project r/waiting for john’s reply d/03-03-2017 l/nus soc t/school`
-* `add buy groceries r/cabbage and broccoli d/02-03-2017 t/personal`
+* `add do 2103 project r/waiting for john’s reply e/3 march 17 l/nus soc t/school`
+* `add buy groceries r/cabbage and broccoli s/2 jul 17 t/personal`
+* `add feed the cat\/dog t/personal t/family e/01-01/2017` 
 
-* `add feed the cat\/dog t/personal t/family d/01-01/2017` 
-
+Supported Date/Time formats:
+> * DD/MM/YY, DD-MM-YY and also dates such as 12 march 17.
+> * HH:mm in 24 hour format or hh:mm am/pm.
+> * time without am/pm are assumed to be in 24 hour format
+> * You may include either both date and time seperated with a space or just either one or even none at all
 
 ### 2.3.1	Listing of all task: `list`
 
@@ -97,7 +101,7 @@ Format: `listtag TAGNAME`, `lt TAGNAME`
 ### 2.4	Marking a task as done: `done`
 
 Congratulations!
-Now that you have completed a task and would like to mark it as done, you can do so by using `done` function.
+Now that you have completed a task and would like to mark it as done, you can do so by using the `done` function.
 
 Description: Marks the task at the specified `INDEX`. <br>
 
@@ -141,7 +145,7 @@ If you wish to edit the details of a current task, `edit` function allows you to
 
 Description: Edits an existing task in KIT. <br>
 
-Format: `edit INDEX [NAME] [r/REMARKS] [d/DEADLINE] [l/LOCATION] [t/TAG]...`
+Format: `edit INDEX [NAME] [r/REMARKS] [s/STARTDATE] [e/ENDDATE] [l/LOCATION] [t/TAG]...`
 
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
@@ -217,31 +221,26 @@ In KIT, data are saved automatically after a change has been made. There is no n
 
 ## 3. FAQ
 
-**Q**: How do I transfer my data to another Computer? <br>
-**A**: Copy the files to the other computer and overwrite the empty data file it creates with
-       the file that contains the data of your previous KIT folder. The data file is called KIT.xml .
+**Q**: Does KIT support Windows 10? <br>
+**A**: Yes! KIT works on computers running Windows 7 and later.
 
-**Q**: Is it a desktop or web application? <br>
-**A**: It’s a desktop application.
+**Q**: Will my tasks be saved after I close the application?  <br>
+**A**: Yes. Your data is saved after every command, you can safely exit KIT when you are done.
 
-**Q**: Does it have a in-built synchronization with the real-time calendar? <br>
-**A**: It has access to the time and calendar of the device on which the program is run, not necessarily the internet calendar.
+**Q**: Can I have two task with the same name?  <br>
+**A**: Sure, tasks with same names are allowed.
 
-**Q**: Does the application support Windows 10? <br>
-**A**: Yes. The application works on Windows 7 and later.
+**Q**: I accidentally created two exact same tasks, how do I remove just one of them?  <br>
+**A**: You can do so by typing undo if you just added the task. Otherwise, you can use find or list to search for the tasks and delete one of them. The other task will remain in KIT. Instructions on these commands can be found in 2.7 Undo, 2.6 Finding a task, 2.2 Listing tasks  and 2.5 Deleting a task.
 
-**Q**: Will my files be saved after I close the application? <br>
-**A**: Yes. Data is saved after every command, you can safely just turn off the application when you are done.
+**Q**: Can I manually edit the storage file?  <br>
+**A**: Yes, It is a xml file. The file is called Kit.xml . It can be found under data\kit.xml  by default. Be careful in making changes to it if you are unfamiliar with XML, the program might not start properly if the file’s format is invalid.
 
-**Q**: Can i have two task with the same name? <br>
-**A**: Yes, task with duplicate names are accepted.
+**Q**: I use two computers. Can I transfer my data between the two computers? <br>
+**A**: Yes, you can! Your data are saved in a file called Kit.xml . Just copy this file to your computer and place in under data\kit.xml . You can change the file location later using the save command. For more information you can look at 2.10.2 Specifying save location
 
-**Q**: I accidentally created two exact same tasks, how do I remove just one of them? <br>
-**A**: You can do so by typing undo if the creation of one of the tasks was the previous command, or list all the tasks and delete one of them. The other task will remain in KIT.
-
-**Q**: Can I manually edit the storage file? <br>
-**A**: Yes, it is a xml file. It is called KIT.xml . It can be found in the folder data by default. Be careful in making changes to it if you are unfamiliar with XML, the program might not start properly if the file’s format is invalid.
-
+**Q**: It’s troublesome to constantly transfer my data between two computers, is there any way for it to synchronize automatically?  <br>
+**A**: Sorry, we currently do not support automatically synchronization. We are however working on it, and hope to implement this feature soon.
 
 ## 4. Command Summary
 
@@ -249,8 +248,8 @@ In KIT, data are saved automatically after a change has been made. There is no n
 
 * **Help format** : `helpf`, `hf` <br>
 
-* **Add**  `add NAME [r/REMARKS] [d/DEADLINE] [l/LOCATION] [t/TAG]...`
-  e.g.  `add do 2103 project r/waiting for john’s reply d/03-03-2017 l/nus soc t/school`
+* **Add**  `add NAME [r/REMARKS] [s/STARTDATE] [e/ENDDATE] [l/LOCATION] [t/TAG]...`
+  e.g.  `add do 2103 project r/waiting for john’s reply e/3 mar 17 l/nus soc t/school`
 
 * **List** : `list`, `l`, `ls` <br>
 
@@ -266,7 +265,7 @@ In KIT, data are saved automatically after a change has been made. There is no n
 
 * **Undo** : `undo`
 
-* **Edit**  `edit NAME [r/REMARKS] [d/DEADLINE] [l/LOCATION] [t/TAG]...`
+* **Edit**  `edit NAME [r/REMARKS] [s/STARTDATE] [e/ENDDATE] [l/LOCATION] [t/TAG]...`
   e.g.  `edit 1 r/finish up user guide l/home`
 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]`
