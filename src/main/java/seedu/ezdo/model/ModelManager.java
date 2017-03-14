@@ -75,7 +75,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void doneTask(Task doneTask) throws TaskNotFoundException {
         ezDo.doneTask(doneTask);
-        updateFilteredDoneList();
+        updateFilteredListToShowAll();
         indicateEzDoChanged();
     }
 
