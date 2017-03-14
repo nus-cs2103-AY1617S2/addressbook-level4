@@ -35,9 +35,8 @@ public class DateParser {
      */
     private String changeToNattyDateFormat(String input) throws ParseException {
 
-        String output = new String();
         Date userDateObject = userInputDateFormat.parse(input);
-        output = nattyDateFormat.format(userDateObject);
+        String output = nattyDateFormat.format(userDateObject);
 
         return output;
     }
