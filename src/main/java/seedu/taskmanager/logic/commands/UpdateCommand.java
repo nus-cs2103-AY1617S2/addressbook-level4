@@ -68,7 +68,7 @@ public class UpdateCommand extends Command {
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
-        
+
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_UPDATE_TASK_SUCCESS, taskToUpdate));
     }
@@ -86,7 +86,7 @@ public class UpdateCommand extends Command {
         StartTime updatedStartTime = updateTaskDescriptor.getStartTime().orElseGet(taskToUpdate::getStartTime);
         EndTime updatedEndTime = updateTaskDescriptor.getEndTime().orElseGet(taskToUpdate::getEndTime);
 //        UniqueCategoryList updatedCategories = updateTaskDescriptor.getCategories().orElseGet(taskToUpdate::getCategories);
-               
+
         return new Task(updatedTaskName, updatedDate, updatedStartTime, updatedEndTime/*, updatedCategories*/);
     }
 
@@ -145,7 +145,7 @@ public class UpdateCommand extends Command {
         public Optional<StartTime> getStartTime() {
         	return starttime;
         }
-        
+
         public void setEndTime(Optional<EndTime> endtime) {
         	assert endtime != null;
         	this.endtime = endtime;

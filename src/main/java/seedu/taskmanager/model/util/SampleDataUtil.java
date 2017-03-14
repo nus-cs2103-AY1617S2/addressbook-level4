@@ -18,7 +18,7 @@ public class SampleDataUtil {
             return new Task[] {
                 new Task(new TaskName("eat lunch"), new Date("03/03/17"), new StartTime("1400"), new EndTime("1600")
                     /*new UniqueCategoryList("friends")*/),
-                new Task(new TaskName("eat breakfast"), new Date("23/11/17"), new StartTime("1400"), new EndTime("1600") 
+                new Task(new TaskName("eat breakfast"), new Date("23/11/17"), new StartTime("1400"), new EndTime("1600")
                 		/*new UniqueCategoryList("colleagues", "friends")*/),
                 new Task(new TaskName("eat some more"), new Date("13/01/17"), new StartTime("2100"), new EndTime("2200")
                     /*new UniqueCategoryList("neighbours")*/),

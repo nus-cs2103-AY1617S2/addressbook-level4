@@ -105,7 +105,7 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
 
         commandBox.runCommand("UPDATE 1 TO 1300hrs");
         assertResultMessage(EndTime.MESSAGE_ENDTIME_CONSTRAINTS);
-        
+
 //        commandBox.runCommand("UPDATE 1 t/*&");
 //        assertResultMessage(Category.MESSAGE_TAG_CONSTRAINTS);
     }

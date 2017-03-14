@@ -131,7 +131,7 @@ public class CurrentDate {
 		}
 
 	}
-	
+
 	public static int getCurrentDay() {
 		Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
 		// getTime() returns the current date in default time zone
@@ -146,7 +146,7 @@ public class CurrentDate {
 
 		return day;
 	}
-	
+
 	public static String getCurrentDate() {
 		String newdate = "";
 		String stringDay = "";
@@ -180,7 +180,7 @@ public class CurrentDate {
 
 		return newdate;
 	}
-	
+
 	public static String getNewDate(String givenDay) throws IllegalValueException {
 
 		if (!isValidDay(givenDay)) {
