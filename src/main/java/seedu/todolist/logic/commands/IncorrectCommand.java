@@ -23,5 +23,10 @@ public class IncorrectCommand extends Command {
         return false;
     }
 
+    @Override
+    public String getCommandText() {
+        return feedbackToUser;
+    }
+
 }
 

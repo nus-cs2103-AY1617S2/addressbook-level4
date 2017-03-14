@@ -22,6 +22,8 @@ public class DeleteCommand extends Command {
 
     public final int targetIndex;
 
+    private String commandText;
+
     public DeleteCommand(int targetIndex) {
         this.targetIndex = targetIndex;
     }
@@ -44,12 +46,18 @@ public class DeleteCommand extends Command {
             assert false : "The target person cannot be missing";
         }
 
+        commandText = String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
     }
 
     @Override
     public boolean isMutating() {
         return true;
+    }
+
+    @Override
+    public String getCommandText() {
+        return commandText;
     }
 
 }

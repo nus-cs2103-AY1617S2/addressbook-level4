@@ -41,4 +41,6 @@ public abstract class Command {
     }
 
     public abstract boolean isMutating();
+
+    public abstract String getCommandText();
 }
