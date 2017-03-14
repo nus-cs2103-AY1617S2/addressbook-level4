@@ -97,7 +97,9 @@ public class TestDeadlineTask extends TestTask implements ReadOnlyDeadlineTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
-        sb.append("d/" + this.getDeadline().toString() + " ");
+        sb.append("d/" + this.getDeadline().getMonth() + "-" + this.getDeadline().getDay() + "-"
+                + this.getDeadline().getYear() + " " + this.getDeadline().getHours() + ":"
+                + this.getDeadline().getMinutes() + ":" + this.getDeadline().getSeconds() + " ");
         sb.append("c/" + this.getComment().value + " ");
         sb.append("p/" + this.getPriority().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
