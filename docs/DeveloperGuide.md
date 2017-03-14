@@ -112,7 +112,7 @@ The sections below give more details of each component.
 
 ### 2.1. UI component
 
-<img src="images/UiClassDiagram.png" width="800"><br>
+<img src="images/UiClassDiagram.png" width="600"><br>
 _Figure 2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/toluist/ui/Ui.java)
