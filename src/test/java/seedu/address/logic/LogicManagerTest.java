@@ -46,6 +46,7 @@ import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.StartTime;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Title;
+import seedu.address.model.task.UrgencyLevel;
 import seedu.address.model.task.Venue;
 import seedu.address.storage.StorageManager;
 
@@ -436,14 +437,15 @@ public class LogicManagerTest {
     class TestDataHelper {
 
         Task adam() throws Exception {
-            Title name = new Title("Adam Brown");
-            Venue privateVenue = new Venue("111111");
-            StartTime privateStartTime = new StartTime("adam@gmail.com");
-            EndTime privateEndTime = new EndTime("111, alpha street");
+            Title name = new Title("CS2103 Tutorial");
+            Venue privateVenue = new Venue("COM1 B103");
+            StartTime privateStartTime = new StartTime("Wednesday 10am");
+            EndTime privateEndTime = new EndTime("Wednesday 11am");
+            UrgencyLevel privateUrgencyLevel = new UrgencyLevel("3");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, privateVenue, privateStartTime, privateEndTime, tags);
+            return new Task(name, privateVenue, privateStartTime, privateEndTime, privateUrgencyLevel, tags);
         }
 
         /**
@@ -461,6 +463,7 @@ public class LogicManagerTest {
                     new Venue("" + Math.abs(seed)),
                     new StartTime(seed + "@email"),
                     new EndTime("House of " + seed),
+                    new UrgencyLevel("3"),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))));
         }
 
@@ -561,9 +564,10 @@ public class LogicManagerTest {
         Task generateTaskWithTitle(String name) throws Exception {
             return new Task(
                     new Title(name),
-                    new Venue("1"),
-                    new StartTime("1@email"),
-                    new EndTime("House of 1"),
+                    new Venue("Sky"),
+                    new StartTime("Tue"),
+                    new EndTime("Thu"),
+                    new UrgencyLevel("3"),
                     new UniqueTagList(new Tag("tag")));
         }
     }

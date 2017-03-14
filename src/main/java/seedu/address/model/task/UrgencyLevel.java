@@ -9,7 +9,7 @@ public class UrgencyLevel {
  */
 
     public static final String MESSAGE_URGENCYLEVEL_CONSTRAINTS = "Task urgency levels should only contain numbers";
-    public static final String URGENCYLEVEL_VALIDATION_REGEX = ".+";
+    public static final String URGENCYLEVEL_VALIDATION_REGEX = "^[0-5]*$";
 
     public final String value;
 

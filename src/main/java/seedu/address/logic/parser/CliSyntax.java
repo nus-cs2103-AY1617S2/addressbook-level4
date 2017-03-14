@@ -14,6 +14,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_STARTTIME = new Prefix("s/");
     public static final Prefix PREFIX_ENDTIME = new Prefix("e/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
+    public static final Prefix PREFIX_URGENCYLEVEL = new Prefix("ul/");
 
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT =

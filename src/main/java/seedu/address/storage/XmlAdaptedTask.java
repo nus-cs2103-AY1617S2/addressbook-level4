@@ -13,6 +13,7 @@ import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.StartTime;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Title;
+import seedu.address.model.task.UrgencyLevel;
 import seedu.address.model.task.Venue;
 
 /**
@@ -28,6 +29,8 @@ public class XmlAdaptedTask {
     private String startTime;
     @XmlElement(required = true)
     private String endTime;
+    @XmlElement(required = true)
+    private String urgencyLevel;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -69,7 +72,8 @@ public class XmlAdaptedTask {
         final Venue venue = new Venue(this.venue);
         final StartTime startTime = new StartTime(this.startTime);
         final EndTime endTime = new EndTime(this.endTime);
+        final UrgencyLevel urgencyLevel = new UrgencyLevel(this.urgencyLevel);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(title, venue, startTime, endTime, tags);
+        return new Task(title, venue, startTime, endTime, urgencyLevel, tags);
     }
 }

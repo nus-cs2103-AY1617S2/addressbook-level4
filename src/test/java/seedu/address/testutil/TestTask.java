@@ -5,6 +5,7 @@ import seedu.address.model.task.EndTime;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.StartTime;
 import seedu.address.model.task.Title;
+import seedu.address.model.task.UrgencyLevel;
 import seedu.address.model.task.Venue;
 
 /**
@@ -16,6 +17,7 @@ public class TestTask implements ReadOnlyTask {
     private EndTime endtime;
     private StartTime starttime;
     private Venue venue;
+    private UrgencyLevel urgencyLevel;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -30,6 +32,7 @@ public class TestTask implements ReadOnlyTask {
         this.venue = taskToCopy.getVenue();
         this.starttime = taskToCopy.getStartTime();
         this.endtime = taskToCopy.getEndTime();
+        this.urgencyLevel = taskToCopy.getUrgencyLevel();
         this.tags = taskToCopy.getTags();
     }
 
@@ -48,6 +51,10 @@ public class TestTask implements ReadOnlyTask {
     public void setVenue(Venue venue) {
         this.venue = venue;
     }
+
+	public void setUrgencyLevel(UrgencyLevel urgencyLevel) {
+		this.urgencyLevel = urgencyLevel;
+	}
 
     public void setTags(UniqueTagList tags) {
         this.tags = tags;
@@ -72,6 +79,11 @@ public class TestTask implements ReadOnlyTask {
     public EndTime getEndTime() {
         return endtime;
     }
+
+	@Override
+	public UrgencyLevel getUrgencyLevel() {
+		return urgencyLevel;
+	}
 
     @Override
     public UniqueTagList getTags() {

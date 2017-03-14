@@ -13,6 +13,7 @@ import seedu.address.model.task.StartTime;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Title;
 import seedu.address.model.task.UniqueTaskList;
+import seedu.address.model.task.UrgencyLevel;
 import seedu.address.model.task.Venue;
 
 /**
@@ -25,12 +26,12 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS ] [t/TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 p/91234567 e/johndoe@yahoo.com";
+            + "Parameters: INDEX (must be a positive integer) [TITLE] [v/VENUE] [s/STARTTIME] [e/ENDTIME ] [ul/URGENCYLEVEL] [t/TAG]...\n"
+            + "Example: " + COMMAND_WORD + " 1 v/Toilet s/March 10, 10:00";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the to-do list.";
 
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
@@ -81,9 +82,10 @@ public class EditCommand extends Command {
         Venue updatedVenue = editTaskDescriptor.getVenue().orElseGet(taskToEdit::getVenue);
         StartTime updatedStartTime = editTaskDescriptor.getStartTime().orElseGet(taskToEdit::getStartTime);
         EndTime updatedEndTime = editTaskDescriptor.getEndTime().orElseGet(taskToEdit::getEndTime);
+        UrgencyLevel updatedUrgencyLevel = editTaskDescriptor.getUrgencyLevel().orElseGet(taskToEdit::getUrgencyLevel);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedTitle, updatedVenue, updatedStartTime, updatedEndTime, updatedTags);
+        return new Task(updatedTitle, updatedVenue, updatedStartTime, updatedEndTime, updatedUrgencyLevel, updatedTags);
     }
 
     /**
@@ -95,6 +97,7 @@ public class EditCommand extends Command {
         private Optional<Venue> venue = Optional.empty();
         private Optional<StartTime> startTime = Optional.empty();
         private Optional<EndTime> endTime = Optional.empty();
+        private Optional<UrgencyLevel> urgencyLevel = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditTaskDescriptor() {}
@@ -104,10 +107,12 @@ public class EditCommand extends Command {
             this.venue = toCopy.getVenue();
             this.startTime = toCopy.getStartTime();
             this.endTime = toCopy.getEndTime();
+            this.urgencyLevel = toCopy.getUrgencyLevel();
             this.tags = toCopy.getTags();
         }
 
-        /**
+
+		/**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
@@ -148,6 +153,15 @@ public class EditCommand extends Command {
 
         public Optional<EndTime> getEndTime() {
             return endTime;
+        }
+
+        public void setUrgencyLevel(Optional<UrgencyLevel> urgencyLevel) {
+            assert urgencyLevel != null;
+            this.urgencyLevel = urgencyLevel;
+        }
+
+        public Optional<UrgencyLevel> getUrgencyLevel() {
+            return urgencyLevel;
         }
 
         public void setTags(Optional<UniqueTagList> tags) {
