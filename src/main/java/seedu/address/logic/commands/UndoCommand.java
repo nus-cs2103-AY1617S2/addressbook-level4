@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import seedu.address.model.TaskManager;
+
 public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD = "undo";
@@ -17,8 +19,10 @@ public class UndoCommand extends Command {
         if (!model.getFlag().equals("undo copy")) {
             return new CommandResult(MESSAGE_NO_CHANGE);
         } else {
+            TaskManager temp = new TaskManager(model.getTaskManager());
             model.resetData(model.getCopy());
-            model.updateFlag("empty copy");
+            model.updateFlag("redo copy");
+            model.updateCopy(temp);
             return new CommandResult(MESSAGE_SUCCESS);
         }
     }
