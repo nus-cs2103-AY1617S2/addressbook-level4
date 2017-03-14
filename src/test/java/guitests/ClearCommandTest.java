@@ -7,7 +7,7 @@ import org.junit.Test;
 
 public class ClearCommandTest extends ToDoListGuiTest {
 
-    @Ignore @Test
+    @Test
     public void clear() {
 
         //verify a non-empty list can be cleared
