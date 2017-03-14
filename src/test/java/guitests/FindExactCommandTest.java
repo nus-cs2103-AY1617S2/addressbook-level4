@@ -9,39 +9,35 @@ import seedu.task.testutil.TestTask;
 
 public class FindExactCommandTest extends TaskManagerGuiTest {
 
-  @Test
+    @Test
     public void find_nonEmptyList() {
 
-        
-    assertFindExactResult("fe buy pENcil", td.buy); // single result
-    assertFindExactResult("findexact Give present",td.give); // single result
-        
-        
-        
-    assertFindExactResult("fe Mark"); // no results
-    assertFindExactResult("finde apply", td.apply); // single result
+        assertFindExactResult("fe buy pENcil", td.buy); // single result
+        assertFindExactResult("findexact Give present", td.give); // single result
+        assertFindExactResult("fe Mark"); // no results
+        assertFindExactResult("finde apply", td.apply); // single result
 
-    //find after deleting one result
-    commandBox.runCommand("delete 1");
-    assertFindExactResult("fexact apply");//no result
-  }
+        // find after deleting one result
+        commandBox.runCommand("delete 1");
+        assertFindExactResult("fexact apply"); // no result
+    }
 
-  @Test
+    @Test
     public void find_emptyList() {
-    commandBox.runCommand("clear");
-    assertFindExactResult("findexact Jean"); // no results
-  }
+        commandBox.runCommand("clear");
+        assertFindExactResult("findexact Jean"); // no results
+    }
 
-  @Test
+    @Test
     public void find_invalidCommand_fail() {
-    commandBox.runCommand("findexactgeorge");
-    assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
-  }
+        commandBox.runCommand("findexactgeorge");
+        assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
+    }
 
-  private void assertFindExactResult(String command, TestTask... expectedHits) {
-    commandBox.runCommand(command);
-    assertListSize(expectedHits.length);
-    assertResultMessage(expectedHits.length + " tasks listed!");
-    assertTrue(taskListPanel.isListMatching(expectedHits));
-  }
+    private void assertFindExactResult(String command, TestTask... expectedHits) {
+        commandBox.runCommand(command);
+        assertListSize(expectedHits.length);
+        assertResultMessage(expectedHits.length + " tasks listed!");
+        assertTrue(taskListPanel.isListMatching(expectedHits));
+    }
 }
