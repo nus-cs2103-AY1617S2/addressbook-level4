@@ -3,9 +3,8 @@ package seedu.geekeep.testutil;
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.tag.UniqueTagList;
-import seedu.geekeep.model.task.EndDateTime;
+import seedu.geekeep.model.task.DateTime;
 import seedu.geekeep.model.task.Location;
-import seedu.geekeep.model.task.StartDateTime;
 import seedu.geekeep.model.task.Title;
 
 /**
@@ -26,8 +25,27 @@ public class PersonBuilder {
         this.person = new TestPerson(personToCopy);
     }
 
+    public TestPerson build() {
+        return this.person;
+    }
+
+    public PersonBuilder withEndDateTime(String phone) throws IllegalValueException {
+        this.person.setEndDateTime(new DateTime(phone));
+        return this;
+    }
+
+    public PersonBuilder withLocation(String address) throws IllegalValueException {
+        this.person.setLocation(new Location(address));
+        return this;
+    }
+
     public PersonBuilder withName(String name) throws IllegalValueException {
         this.person.setTitle(new Title(name));
+        return this;
+    }
+
+    public PersonBuilder withStartDateTime(String email) throws IllegalValueException {
+        this.person.setStartDateTime(new DateTime(email));
         return this;
     }
 
@@ -37,25 +55,6 @@ public class PersonBuilder {
             person.getTags().add(new Tag(tag));
         }
         return this;
-    }
-
-    public PersonBuilder withLocation(String address) throws IllegalValueException {
-        this.person.setLocation(new Location(address));
-        return this;
-    }
-
-    public PersonBuilder withEndDateTime(String phone) throws IllegalValueException {
-        this.person.setEndDateTime(new EndDateTime(phone));
-        return this;
-    }
-
-    public PersonBuilder withStartDateTime(String email) throws IllegalValueException {
-        this.person.setStartDateTime(new StartDateTime(email));
-        return this;
-    }
-
-    public TestPerson build() {
-        return this.person;
     }
 
 }

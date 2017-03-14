@@ -8,13 +8,23 @@ import seedu.geekeep.model.tag.UniqueTagList;
  */
 public interface ReadOnlyTask {
 
-    Title getTitle();
+    /**
+     * Formats the Task as text, showing all contact details.
+     */
+    default String getAsText() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getTitle()).append(" Ending DateTime: ").append(getEndDateTime())
+               .append(" Starting DateTime: ").append(getStartDateTime())
+               .append(" Location: ").append(getLocation()).append(" Tags: ");
+        getTags().forEach(builder::append);
+        return builder.toString();
+    }
 
-    EndDateTime getEndDateTime();
-
-    StartDateTime getStartDateTime();
+    DateTime getEndDateTime();
 
     Location getLocation();
+
+    DateTime getStartDateTime();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -22,6 +32,8 @@ public interface ReadOnlyTask {
      * person's internal tags.
      */
     UniqueTagList getTags();
+
+    Title getTitle();
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
@@ -35,16 +47,6 @@ public interface ReadOnlyTask {
                         && other.getLocation().equals(this.getLocation()));
     }
 
-    /**
-     * Formats the Task as text, showing all contact details.
-     */
-    default String getAsText() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(getTitle()).append(" Ending DateTime: ").append(getEndDateTime())
-               .append(" Starting DateTime: ").append(getStartDateTime())
-               .append(" Location: ").append(getLocation()).append(" Tags: ");
-        getTags().forEach(builder::append);
-        return builder.toString();
-    }
+    boolean isDone();
 
 }

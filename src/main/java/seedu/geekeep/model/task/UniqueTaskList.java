@@ -95,7 +95,7 @@ public class UniqueTaskList implements Iterable<Task> {
         return taskFoundAndDeleted;
     }
 
-    public void setPersons(List<? extends ReadOnlyTask> tasks) throws DuplicateTaskException {
+    public void setTasks(List<? extends ReadOnlyTask> tasks) throws DuplicateTaskException {
         final UniqueTaskList replacement = new UniqueTaskList();
         for (final ReadOnlyTask task : tasks) {
             replacement.add(new Task(task));
@@ -129,6 +129,16 @@ public class UniqueTaskList implements Iterable<Task> {
         // The right way is to implement observable properties in the Person class.
         // Then, PersonCard should then bind its text labels to those observable properties.
         internalList.set(index, taskToUpdate);
+    }
+
+    public void markTaskDone(int index) {
+        Task taskToMark = internalList.get(index);
+        taskToMark.markDone();
+    }
+
+    public void markTaskUndone(int index) {
+        Task taskToMark = internalList.get(index);
+        taskToMark.markUndone();
     }
 
 }

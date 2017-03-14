@@ -8,7 +8,7 @@ import seedu.geekeep.commons.exceptions.IllegalValueException;
  * Represents the ending date and time of a task. Guarantees: immutable; is valid as declared in
  * {@link #isValidDateTime()}
  */
-public class EndDateTime {
+public class DateTime {
 
     public static final String MESSAGE_DATETIME_CONSTRAINTS =
             "Date and time format should be in this format: YYYY-MM-DDTHH:MM:SS";
@@ -24,7 +24,7 @@ public class EndDateTime {
     public final LocalDateTime dateTime;
     public final String value;
 
-    public EndDateTime(String dateTimeString) throws IllegalValueException {
+    public DateTime(String dateTimeString) throws IllegalValueException {
         if (!isValidDateTime(dateTimeString)) {
             throw new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS);
         }
@@ -35,8 +35,8 @@ public class EndDateTime {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof EndDateTime // instanceof handles nulls
-                        && this.value.equals(((EndDateTime) other).value)); // state check
+                || (other instanceof DateTime // instanceof handles nulls
+                        && this.value.equals(((DateTime) other).value)); // state check
     }
 
     @Override

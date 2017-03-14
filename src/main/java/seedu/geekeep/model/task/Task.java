@@ -11,24 +11,12 @@ import seedu.geekeep.model.tag.UniqueTagList;
 public class Task implements ReadOnlyTask {
 
     private Title title;
-    private EndDateTime endDateTime;
-    private StartDateTime startDateTime;
+    private DateTime endDateTime;
+    private DateTime startDateTime;
     private Location location;
+    private boolean isDone;
 
     private UniqueTagList tags;
-
-    /**
-     * Every field must be present and not null.
-     */
-    public Task(Title title, StartDateTime startDateTime,
-                EndDateTime endDateTime, Location location, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(title, endDateTime, startDateTime, location, tags);
-        this.title = title;
-        this.endDateTime = endDateTime;
-        this.startDateTime = startDateTime;
-        this.location = location;
-        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
-    }
 
     /**
      * Creates a copy of the given ReadOnlyTask.
@@ -38,39 +26,33 @@ public class Task implements ReadOnlyTask {
              source.getEndDateTime(), source.getLocation(), source.getTags());
     }
 
-    public void setTitle(Title title) {
-        assert title != null;
+    /**
+     * Every field must be present and not null.
+     */
+    public Task(Title title, DateTime startDateTime,
+                DateTime endDateTime, Location location, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(title);
+        if (startDateTime != null) assert endDateTime != null;
+        if(startDateTime != null && endDateTime != null)
+            assert endDateTime.dateTime.isAfter(startDateTime.dateTime);
+
         this.title = title;
-    }
-
-    @Override
-    public Title getTitle() {
-        return title;
-    }
-
-    public void setEndDateTime(EndDateTime endDateTime) {
-        assert endDateTime != null;
         this.endDateTime = endDateTime;
-    }
-
-    @Override
-    public EndDateTime getEndDateTime() {
-        return endDateTime;
-    }
-
-    public void setStartDateTime(StartDateTime startDateTime) {
-        assert startDateTime != null;
         this.startDateTime = startDateTime;
+        this.location = location;
+        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
     @Override
-    public StartDateTime getStartDateTime() {
-        return startDateTime;
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ReadOnlyTask // instanceof handles nulls
+                        && this.isSameStateAs((ReadOnlyTask) other));
     }
 
-    public void setLocation(Location location) {
-        assert location != null;
-        this.location = location;
+    @Override
+    public DateTime getEndDateTime() {
+        return endDateTime;
     }
 
     @Override
@@ -79,15 +61,24 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
+    public DateTime getStartDateTime() {
+        return startDateTime;
+    }
+
+    @Override
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
     }
 
-    /**
-     * Replaces this Task's tags with the tags in the argument tag list.
-     */
-    public void setTags(UniqueTagList replacement) {
-        tags.setTags(replacement);
+    @Override
+    public Title getTitle() {
+        return title;
+    }
+
+    @Override
+    public int hashCode() {
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(title, endDateTime, startDateTime, location, tags);
     }
 
     /**
@@ -103,22 +94,61 @@ public class Task implements ReadOnlyTask {
         this.setTags(replacement.getTags());
     }
 
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof ReadOnlyTask // instanceof handles nulls
-                        && this.isSameStateAs((ReadOnlyTask) other));
+    public void setStartDateTime(DateTime startDateTime) {
+        assert startDateTime != null;
+        this.startDateTime = startDateTime;
     }
 
-    @Override
-    public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(title, endDateTime, startDateTime, location, tags);
+    public void setEndDateTime(DateTime endDateTime) {
+        assert endDateTime != null;
+        this.endDateTime = endDateTime;
+    }
+
+    public void setLocation(Location location) {
+        assert location != null;
+        this.location = location;
+    }
+
+    /**
+     * Replaces this Task's tags with the tags in the argument tag list.
+     */
+    public void setTags(UniqueTagList replacement) {
+        tags.setTags(replacement);
+    }
+
+    public void setTitle(Title title) {
+        assert title != null;
+        this.title = title;
     }
 
     @Override
     public String toString() {
         return getAsText();
+    }
+
+    public boolean isFloatingTask() {
+        return startDateTime == null && endDateTime == null;
+    }
+
+    public boolean isEvent() {
+        return startDateTime != null && endDateTime != null;
+    }
+
+    public boolean isDeadline() {
+        return startDateTime == null && endDateTime != null;
+    }
+
+    @Override
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public void markDone() {
+        isDone = true;
+    }
+
+    public void markUndone () {
+        isDone = false;
     }
 
 }
