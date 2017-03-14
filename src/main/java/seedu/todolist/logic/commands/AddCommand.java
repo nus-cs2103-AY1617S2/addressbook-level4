@@ -28,6 +28,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book";
 
+    private String commandText;
     private final Task toAdd;
 
     /**
@@ -57,6 +58,7 @@ public class AddCommand extends Command {
         assert model != null;
         try {
             model.addTask(toAdd);
+            commandText = String.format(MESSAGE_SUCCESS, toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
@@ -67,6 +69,11 @@ public class AddCommand extends Command {
     @Override
     public boolean isMutating() {
         return true;
+    }
+
+    @Override
+    public String getCommandText() {
+        return commandText;
     }
 
 }

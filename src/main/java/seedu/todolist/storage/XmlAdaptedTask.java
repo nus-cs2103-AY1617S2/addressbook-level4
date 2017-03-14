@@ -21,12 +21,14 @@ public class XmlAdaptedTask {
 
     @XmlElement(required = true)
     private String name;
-    @XmlElement(required = true)
+    @XmlElement
     private StartTime startTime;
-    @XmlElement(required = true)
+    @XmlElement
     private EndTime endTime;
     @XmlElement(required = true)
     private boolean completed;
+    @XmlElement
+    private String description;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();

@@ -23,6 +23,7 @@ public class CompleteCommand extends Command {
     public static final String MESSAGE_INDEX_CONSTRAINTS = "Index number of the task must be at least 1.";
 
     public final int targetIndex;
+    private String commandText;
 
     public CompleteCommand (int targetIndex) throws IllegalValueException {
         if (targetIndex < 1) {
@@ -52,5 +53,9 @@ public class CompleteCommand extends Command {
     
     public boolean isMutating() {
         return true;
+    }
+    
+    public String getCommandText() {
+        return commandText;
     }
 }

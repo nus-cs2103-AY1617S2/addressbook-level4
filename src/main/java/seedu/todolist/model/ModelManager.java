@@ -137,6 +137,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Expression {
         boolean satisfies(ReadOnlyTask person);
+        @Override
         String toString();
     }
 
@@ -161,6 +162,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Qualifier {
         boolean run(ReadOnlyTask person);
+        @Override
         String toString();
     }
 
@@ -174,7 +176,8 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsIgnoreCase(task.getName().fullName, keyword))
+                    .filter(keyword -> StringUtil.containsIgnoreCase(task.getName().fullName,
+                                       task.getTags().toSet(), keyword))
                     .findAny()
                     .isPresent();
         }

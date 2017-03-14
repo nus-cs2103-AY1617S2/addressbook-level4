@@ -46,4 +46,8 @@ public class SelectCommand extends Command {
         return false;
     }
 
+    @Override
+    public String getCommandText() {
+        return String.format(MESSAGE_SELECT_PERSON_SUCCESS, targetIndex);
+    }
 }

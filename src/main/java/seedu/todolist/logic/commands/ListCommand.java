@@ -55,4 +55,9 @@ public class ListCommand extends Command {
     public boolean isMutating() {
         return false;
     }
+
+    @Override
+    public String getCommandText() {
+        return MESSAGE_SUCCESS;
+    }
 }
