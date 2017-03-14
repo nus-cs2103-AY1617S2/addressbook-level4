@@ -40,6 +40,7 @@ public class DeleteCommand extends Command {
 
         try {
             model.updateCopy(model.getTaskManager());
+            model.updateFlag("undo copy");
             model.deleteTask(taskToDelete);
         } catch (TaskNotFoundException pnfe) {
             assert false : "The target task cannot be missing";
