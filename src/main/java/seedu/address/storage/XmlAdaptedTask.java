@@ -6,6 +6,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.Task;
@@ -19,6 +20,7 @@ public class XmlAdaptedTask {
 
     @XmlElement(required = true)
     private String name;
+    private String deadline;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -54,7 +56,8 @@ public class XmlAdaptedTask {
             personTags.add(tag.toModelType());
         }
         final Name name = new Name(this.name);
+        final Deadline deadline = new Deadline(this.deadline);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Task(name, tags);
+        return new Task(name, deadline, tags);
     }
 }

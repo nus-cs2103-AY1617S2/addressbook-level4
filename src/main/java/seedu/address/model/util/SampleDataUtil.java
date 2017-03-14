@@ -3,6 +3,7 @@ package seedu.address.model.util;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyToDoApp;
 import seedu.address.model.ToDoApp;
+import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.UniqueTaskList.DuplicateTaskException;
@@ -12,9 +13,9 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         try {
             return new Task[] {
-                new Task(new Name("Buy printer"),
+                new Task(new Name("Buy printer"), new Deadline(""),
                     new UniqueTagList("shopping")),
-                new Task(new Name("Go to the gym"),
+                new Task(new Name("Go to the gym"), new Deadline(""),
                     new UniqueTagList("exercise")),
             };
         } catch (IllegalValueException e) {
