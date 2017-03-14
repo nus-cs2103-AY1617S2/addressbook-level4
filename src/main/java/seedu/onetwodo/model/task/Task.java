@@ -14,10 +14,9 @@ public class Task implements ReadOnlyTask {
     private StartDate startDate;
     private EndDate endDate;
     private Description description;
-
     private UniqueTagList tags;
-    private TaskType type;
     
+    private TaskType type;
     private boolean isDone;
 
     //@@author A0141138N

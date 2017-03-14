@@ -1,5 +1,7 @@
 package seedu.onetwodo.testutil;
 
+import seedu.onetwodo.logic.commands.AddCommand;
+import seedu.onetwodo.logic.commands.EditCommand;
 import seedu.onetwodo.model.tag.UniqueTagList;
 import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Description;
@@ -17,13 +19,12 @@ public class TestTask implements ReadOnlyTask {
     private EndDate endDate;
     private StartDate startDate;
     private Description description;
-    // private boolean isDone;
+    private boolean isDone;
     private TaskType type;
     private UniqueTagList tags;
 
     public TestTask() {
         tags = new UniqueTagList();
-        type = TaskType.TODO;
     }
 
     /**
@@ -36,6 +37,7 @@ public class TestTask implements ReadOnlyTask {
         this.description = taskToCopy.getDescription();
         this.tags = taskToCopy.getTags();
         this.type = taskToCopy.getTaskType();
+        this.isDone = taskToCopy.getDoneStatus();
     }
     
     // Getters
@@ -61,7 +63,7 @@ public class TestTask implements ReadOnlyTask {
 
     @Override
     public boolean getDoneStatus() {
-        return false;
+        return isDone;
     }
     
     @Override
@@ -84,16 +86,20 @@ public class TestTask implements ReadOnlyTask {
         this.name = name;
     }
 
+    public void setStartDate(StartDate startDate) {
+        this.startDate = startDate;
+    }
+    
     public void setEndDate(EndDate endDate) {
         this.endDate = endDate;
     }
 
-    public void setStartDate(StartDate startDate) {
-        this.startDate = startDate;
-    }
-
     public void setDescription(Description description) {
         this.description = description;
+    }
+    
+    public void setDoneStatus(boolean isDone) {
+        this.isDone = isDone;
     }
     
     public void setTaskType(TaskType type) {
@@ -122,6 +128,13 @@ public class TestTask implements ReadOnlyTask {
         
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
+    }
+    
+    public String getEditCommand(String prefixIndex) {
+        String addCommand = getAddCommand();
+        String editCommand = addCommand.replace(AddCommand.COMMAND_WORD, EditCommand.COMMAND_WORD
+                + " " + prefixIndex + " ");
+        return editCommand;
     }
 
 }

@@ -19,13 +19,10 @@ public class StartDate extends Date {
      */
     public StartDate(String dateString) throws IllegalValueException {
         super(dateString);
+        assert dateString != null;
         defaultDateTime.withHour(0).withMinute(0);
-        if (dateString != null) {
-            String trimmedInput = dateString.trim();
-            this.localDateTime = DateTimeParser.parseDateTime(trimmedInput, defaultDateTime);
-        } else {
-            this.localDateTime = DateTimeParser.parseDateTime("today", defaultDateTime);
-        }
+        String trimmedInput = dateString.trim();
+        this.localDateTime = DateTimeParser.parseDateTime(trimmedInput, defaultDateTime);
         this.value = createDisplayValue(localDateTime);
     }
     

@@ -3,8 +3,8 @@ package seedu.onetwodo.testutil;
 import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.model.tag.Tag;
 import seedu.onetwodo.model.tag.UniqueTagList;
-import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Description;
+import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Name;
 import seedu.onetwodo.model.task.StartDate;
 
@@ -31,19 +31,6 @@ public class TaskBuilder {
         return this;
     }
 
-    public TaskBuilder withTags(String ... tags) throws IllegalValueException {
-        task.setTags(new UniqueTagList());
-        for (String tag: tags) {
-            task.getTags().add(new Tag(tag));
-        }
-        return this;
-    }
-
-    public TaskBuilder withDescription(String description) throws IllegalValueException {
-        this.task.setDescription(new Description(description));
-        return this;
-    }
-
     public TaskBuilder withStartDate(String startDate) throws IllegalValueException {
         this.task.setStartDate(new StartDate(startDate));
         return this;
@@ -51,6 +38,19 @@ public class TaskBuilder {
 
     public TaskBuilder withEndDate(String endDate) throws IllegalValueException {
         this.task.setEndDate(new EndDate(endDate));
+        return this;
+    }
+    
+    public TaskBuilder withDescription(String description) throws IllegalValueException {
+        this.task.setDescription(new Description(description));
+        return this;
+    }
+    
+    public TaskBuilder withTags(String ... tags) throws IllegalValueException {
+        task.setTags(new UniqueTagList());
+        for (String tag: tags) {
+            task.getTags().add(new Tag(tag));
+        }
         return this;
     }
 

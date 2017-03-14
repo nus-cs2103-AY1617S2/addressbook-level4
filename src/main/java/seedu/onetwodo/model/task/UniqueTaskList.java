@@ -43,7 +43,7 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
-     * Updates the task in the list at position {@code index} with {@code editedPerson}.
+     * Updates the task in the list at position {@code index} with {@code editedTask}.
      *
      * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
      *      another existing task in the list.
