@@ -21,8 +21,10 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
-            + "Parameters: NAME [t/TAG]...\n" + "Example: " + COMMAND_WORD + " CS2103 Refactoring Task t/CS2103";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Adds a task to the task manager. "
+            + "Parameters: NAME [t/TAG]...\n" + "Example: " + COMMAND_WORD
+            + " CS2103 Refactoring Task t/CS2103";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the task manager";
@@ -40,7 +42,8 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName.trim()));
         }
-        this.toAdd = new TaskWithoutDeadline(new Name(name), new UniqueTagList(tagSet), false);
+        this.toAdd = new TaskWithoutDeadline(new Name(name),
+                new UniqueTagList(tagSet), false);
     }
 
     /**
@@ -49,12 +52,15 @@ public class AddCommand extends Command {
      * @throws IllegalValueException
      *             if any of the raw values are invalid
      */
-    public AddCommand(String name, Date Deadline, String tags[]) throws IllegalValueException {
+    public AddCommand(String name, Date deadline, String tags[])
+            throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName.trim()));
         }
-        this.toAdd = new TaskWithDeadline(new Name(name), new UniqueTagList(tagSet), Deadline, null, false);
+        System.out.print("deadline: " + deadline);
+        this.toAdd = new TaskWithDeadline(new Name(name),
+                new UniqueTagList(tagSet), deadline, null, false);
     }
 
     /**
@@ -63,12 +69,14 @@ public class AddCommand extends Command {
      * @throws IllegalValueException
      *             if any of the raw values are invalid
      */
-    public AddCommand(String name, Date Deadline, Date StartingTime, String tags[]) throws IllegalValueException {
+    public AddCommand(String name, Date Deadline, Date StartingTime,
+            String tags[]) throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName.trim()));
         }
-        this.toAdd = new TaskWithDeadline(new Name(name), new UniqueTagList(tagSet), Deadline, StartingTime, false);
+        this.toAdd = new TaskWithDeadline(new Name(name),
+                new UniqueTagList(tagSet), Deadline, StartingTime, false);
     }
 
     @Override
