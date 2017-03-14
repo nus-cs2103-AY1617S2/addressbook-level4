@@ -23,12 +23,12 @@ public abstract class TaskDate {
     public final SimpleDateFormat userInputDateFormat = new SimpleDateFormat(USER_DATE_INPUT_FORMAT);
     public final SimpleDateFormat userOutputDateFormat = new SimpleDateFormat(USER_DATE_OUTPUT_FORMAT);
     public final SimpleDateFormat nattyDateFormat = new SimpleDateFormat(NATTY_DATE_FORMAT);
-    
+
     public TaskDate(String taskDate) {
         try {
-	    // Format input string to suit Natty dependency
-	    String formattedInitialTaskDate = changeToNattyDateFormat(taskDate);
-	    this.value = nattyManipulation(formattedInitialTaskDate);
+            // Format input string to suit Natty dependency
+            String formattedInitialTaskDate = changeToNattyDateFormat(taskDate);
+            this.value = nattyManipulation(formattedInitialTaskDate);
         } catch (ParseException pe) {
             this.value = nattyManipulation(taskDate);
         }
@@ -39,8 +39,8 @@ public abstract class TaskDate {
      * input in String.
      */
     private String nattyManipulation(String taskDate) {
- 
-	try {
+
+        try {
             // Initialises Natty parser
             Parser parser = new Parser();
 
@@ -52,12 +52,12 @@ public abstract class TaskDate {
 
             // Format parsed date to suit the UI
             String formattedFinalTaskDate = userOutputDateFormat.format(parsedDate);
-            
+
             return formattedFinalTaskDate;
-            
-	} catch (IndexOutOfBoundsException e) {
-	    return taskDate;
-	}
+
+        } catch (IndexOutOfBoundsException e) {
+            return taskDate;
+        }
 
     }
 
@@ -66,35 +66,35 @@ public abstract class TaskDate {
      */
     private String changeToNattyDateFormat(String input) throws ParseException {
 
-	String output = new String();
-	Date userDateObject = userInputDateFormat.parse(input);
-	output = nattyDateFormat.format(userDateObject);
+        String output = new String();
+        Date userDateObject = userInputDateFormat.parse(input);
+        output = nattyDateFormat.format(userDateObject);
 
-	return output;
+        return output;
     }
 
     @Override
     public String toString() {
-	return value;
+        return value;
     }
 
     @Override
     public boolean equals(Object other) {
-	return other == this // short circuit if same object
-		|| (other instanceof TaskDate // instanceof handles nulls
-			&& this.value.equals(((TaskDate) other).value)); // state
-									 // check
+        return other == this // short circuit if same object
+                || (other instanceof TaskDate // instanceof handles nulls
+                        && this.value.equals(((TaskDate) other).value)); // state
+                                                                         // check
     }
 
     @Override
     public int hashCode() {
-	return value.hashCode();
+        return value.hashCode();
     }
 
     /**
      * Returns true if a given string is a valid task date.
      */
     public static boolean isValidTaskDate(String test) {
-	return test.matches(TASKDATE_VALIDATION_REGEX);
+        return test.matches(TASKDATE_VALIDATION_REGEX);
     }
 }
