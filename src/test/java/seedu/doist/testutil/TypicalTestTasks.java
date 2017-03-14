@@ -32,9 +32,21 @@ public class TypicalTestTasks {
     }
 
     public static void loadDoistWithSampleData(TodoList ab) {
-        for (TestTask person : new TypicalTestTasks().getTypicalTasks()) {
+        for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
             try {
-                ab.addTask(new Task(person));
+                ab.addTask(new Task(task));
+            } catch (UniqueTaskList.DuplicateTaskException e) {
+                assert false : "not possible";
+            }
+        }
+    }
+
+    public static void loadDoistWithSampleDataAllFinished(TodoList ab) {
+        for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
+            try {
+                Task newTask = new Task(task);
+                newTask.setFinishedStatus(true);
+                ab.addTask(newTask);
             } catch (UniqueTaskList.DuplicateTaskException e) {
                 assert false : "not possible";
             }
@@ -43,6 +55,14 @@ public class TypicalTestTasks {
 
     public TestTask[] getTypicalTasks() {
         return new TestTask[]{laundry, homework, work, school, groceries, shopping};
+    }
+
+    public TestTask[] getAllFinishedTypicalTasks() {
+        TestTask[] testTasks = new TestTask[]{laundry, homework, work, school, groceries, shopping};
+        for (TestTask task : testTasks) {
+            task.setFinishedStatus(true);
+        }
+        return testTasks;
     }
 
     public TodoList getTypicalAddressBook() {
