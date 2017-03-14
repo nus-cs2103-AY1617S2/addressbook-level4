@@ -172,13 +172,13 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredTaskListToShowDone() {
-        // TODO Auto-generated method stub
+        filteredTasks.setPredicate(t -> t.isDone());
 
     }
 
     @Override
     public void updateFilteredTaskListToShowUndone() {
-        // TODO Auto-generated method stub
+        filteredTasks.setPredicate(t -> !t.isDone());
 
     }
 
