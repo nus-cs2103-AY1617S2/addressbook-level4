@@ -27,6 +27,9 @@ public class TimePeriod implements TaskDate {
         }
         beginDate = parseResult.get().first;
         endDate = parseResult.get().second;
+        if (beginDate.after(endDate)) {
+            throw new IllegalValueException(MESSAGE_TIMEPERIOD_CONSTRAINTS);
+        }
     }
 
     /* Floating taskDate contains no value */

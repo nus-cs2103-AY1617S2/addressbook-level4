@@ -24,6 +24,7 @@ public class DeadlineTest {
         assertFalse(Deadline.isValidDeadline("^")); // Random string
         assertFalse(Deadline.isValidDeadline("01/13/2017")); // American format
         assertFalse(Deadline.isValidDeadline("You, Aprial 3 2000")); // Invalid month, day
+        assertFalse(Deadline.isValidDeadline("from 10:00 am to Thu, March 9 2017, 10:00 pm")); // Full format in word
 
         // Valid deadline
         assertTrue(Deadline.isValidDeadline("28/02/1996")); // Seperated by slash
@@ -34,6 +35,7 @@ public class DeadlineTest {
         assertTrue(Deadline.isValidDeadline("Thursday, March 9 2017")); // Word format
         assertTrue(Deadline.isValidDeadline("Thu, March 9 2017 23:59")); // Full format in word
         assertTrue(Deadline.isValidDeadline("Thu, March 9 2017, 10:00 pm")); // Full format in word
+        assertTrue(Deadline.isValidDeadline("from Thu, March 9 2017, 10:00 pm to 10:00 am")); // Full format in word
     }
 
     @Test
