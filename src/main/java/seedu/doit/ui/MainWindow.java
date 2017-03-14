@@ -33,6 +33,7 @@ public class MainWindow extends UiPart<Region> {
     // Independent Ui parts residing in this Ui container
 
     private TaskListPanel taskListPanel;
+
     private EventListPanel eventListPanel;
     private FloatingTaskListPanel fListPanel;
     private Config config;
@@ -149,6 +150,7 @@ public class MainWindow extends UiPart<Region> {
     }
 
     private AnchorPane getFListPlaceholder() {
+
         return this.floatingListPanelPlaceholder;
     }
 
