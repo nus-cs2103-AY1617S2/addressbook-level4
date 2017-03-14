@@ -9,7 +9,7 @@ import seedu.address.model.tag.UniqueTagList;
  * Represents a Task in the endtime book.
  * Guarantees: details are present and not null, field values are validated.
  */
-public class Task implements ReadOnlyTask {
+public class Task implements ReadOnlyTask, Comparable<Task>{
 
     private Title title;
     private StartTime startTime;
@@ -144,6 +144,11 @@ public class Task implements ReadOnlyTask {
     @Override
     public String toString() {
         return getAsText();
+    }
+    
+    @Override
+    public int compareTo(Task task) {
+        return this.getUrgencyLevel().getIntValue() - task.getUrgencyLevel().getIntValue();
     }
 
 }
