@@ -32,10 +32,10 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the Task Manager";
 
     private final Object toAdd; //TO DO: Should change event and floating task to inherit from task
-    private final TASK_TYPE taskType;
+    private final TASKTYPE taskType;
 
 
-    public enum TASK_TYPE {
+    public enum TASKTYPE {
         TASK, FLOATING_TASK, EVENT
     }
 
@@ -47,7 +47,7 @@ public class AddCommand extends Command {
     public AddCommand(String name, String priority, String dueDate, String text, Set<String> tags)
         throws IllegalValueException {
 
-        taskType = TASK_TYPE.TASK;
+        taskType = TASKTYPE.TASK;
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
@@ -64,7 +64,7 @@ public class AddCommand extends Command {
     public AddCommand(String name, String priority, String startDate, String dueDate, String text, Set<String> tags)
         throws IllegalValueException {
 
-        taskType = TASK_TYPE.EVENT;
+        taskType = TASKTYPE.EVENT;
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
@@ -82,7 +82,7 @@ public class AddCommand extends Command {
     public AddCommand(String name, String priority, String text, Set<String> tags)
         throws IllegalValueException {
 
-        taskType = TASK_TYPE.FLOATING_TASK;
+        taskType = TASKTYPE.FLOATING_TASK;
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
