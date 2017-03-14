@@ -221,10 +221,10 @@ public class LogicManagerTest {
         }
 
         //Confirm the ui display elements should contain the right data
-        assertEquals(expectedShownList, model.getFilteredPersonList());
+        assertEquals(expectedShownList, model.getFilteredTaskList());
 
         //Confirm the state of data (saved and in-memory) is as expected
-        assertEquals(expectedAddressBook, model.getAddressBook());
+        assertEquals(expectedAddressBook, model.getTaskManager());
         assertEquals(expectedAddressBook, latestSavedAddressBook);
     }
 
@@ -234,8 +234,8 @@ public class LogicManagerTest {
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager, List)
      */
     private void assertCommandFailure(String inputCommand, String expectedMessage) {
-        TaskManager expectedTaskManager = new TaskManager(model.getAddressBook());
-        List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredPersonList());
+        TaskManager expectedTaskManager = new TaskManager(model.getTaskManager());
+        List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredTaskList());
         assertCommandBehavior(true, inputCommand, expectedMessage, expectedTaskManager, expectedShownList);
     }
 
@@ -324,7 +324,7 @@ public class LogicManagerTest {
         assertCommandSuccess(helper.generateAddCommand(toBeAdded),
                 String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
                 expectedAB,
-                expectedAB.getPersonList());
+                expectedAB.getTaskList());
 
     }
 
@@ -358,13 +358,13 @@ public class LogicManagerTest {
         List<Task> threeTasks = helper.generateTaskList(3);
 
         TaskManager expectedAB = helper.generateTaskManager(threeTasks);
-        expectedAB.removePerson(threeTasks.get(1));
+        expectedAB.removeTask(threeTasks.get(1));
         helper.addToModel(model, threeTasks);
 
         assertCommandSuccess("delete 2",
                 String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, threeTasks.get(1)),
                 expectedAB,
-                expectedAB.getPersonList());
+                expectedAB.getTaskList());
     }
 
     @Test
@@ -467,7 +467,7 @@ public class LogicManagerTest {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
         TaskManager expectedAB = helper.generateTaskManager(2);
-        List<? extends ReadOnlyTask> expectedList = expectedAB.getPersonList();
+        List<? extends ReadOnlyTask> expectedList = expectedAB.getTaskList();
 
         // prepare address book state
         helper.addToModel(model, 2);
@@ -489,9 +489,9 @@ public class LogicManagerTest {
         assertCommandSuccess("select 2",
                 String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, 2),
                 expectedAB,
-                expectedAB.getPersonList());
+                expectedAB.getTaskList());
         assertEquals(1, targetedJumpIndex);
-        assertEquals(model.getFilteredPersonList().get(1), threeTasks.get(1));
+        assertEquals(model.getFilteredTaskList().get(1), threeTasks.get(1));
     }
 
 
@@ -536,7 +536,7 @@ public class LogicManagerTest {
         logic = new LogicManager(model, new StorageManager(tempAddressBookFile, tempPreferencesFile));
         EventsCenter.getInstance().registerHandler(this);
 
-        latestSavedAddressBook = new TaskManager(model.getAddressBook()); // last saved assumed to be up to date
+        latestSavedAddressBook = new TaskManager(model.getTaskManager()); // last saved assumed to be up to date
         helpShown = false;
         targetedJumpIndex = -1; // non yet
     }
