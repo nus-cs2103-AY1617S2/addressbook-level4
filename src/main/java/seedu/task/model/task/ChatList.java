@@ -5,7 +5,7 @@ import java.util.Iterator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class ChatList implements Iterable<Chat>{
+public class ChatList implements Iterable<Chat> {
     private ObservableList<Chat> internalList = FXCollections.observableArrayList();
 
     @Override

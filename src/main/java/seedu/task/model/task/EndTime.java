@@ -1,6 +1,5 @@
 package seedu.task.model.task;
 
-
 import seedu.task.commons.exceptions.IllegalValueException;
 
 /**
@@ -45,7 +44,7 @@ public class EndTime {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof EndTime // instanceof handles nulls
-                && this.value.equals(((EndTime) other).value)); // state check
+                        && this.value.equals(((EndTime) other).value)); // state check
     }
 
     @Override
