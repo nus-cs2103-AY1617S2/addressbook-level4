@@ -22,7 +22,8 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(Title title, Optional<Deadline> startTime, Optional<Deadline> deadline, boolean isCompleted, UniqueLabelList labels) {
+    public Task(Title title, Optional<Deadline> startTime, Optional<Deadline> deadline,
+            boolean isCompleted, UniqueLabelList labels) {
         assert !CollectionUtil.isAnyNull(title, isCompleted, labels);
         this.title = title;
         this.deadline = deadline;
@@ -30,7 +31,7 @@ public class Task implements ReadOnlyTask {
         this.isCompleted = isCompleted;
         this.labels = new UniqueLabelList(labels); // protect internal labels from changes in the arg list
     }
-    
+
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
@@ -53,12 +54,12 @@ public class Task implements ReadOnlyTask {
             this.startTime = startTime;
         }
     }
-    
+
     @Override
     public Optional<Deadline> getStartTime() {
         return startTime == null ? Optional.empty() : startTime;
     }
-    
+
     public void setDeadline(Optional<Deadline> deadline) {
         if (deadline.isPresent()) {
             this.deadline = deadline;
@@ -116,7 +117,7 @@ public class Task implements ReadOnlyTask {
     public Boolean isCompleted() {
         return isCompleted;
     }
-    
+
     public void setIsCompleted(Boolean isCompleted) {
         this.isCompleted = isCompleted;
     }

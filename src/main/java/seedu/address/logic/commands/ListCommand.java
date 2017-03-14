@@ -57,7 +57,7 @@ public class ListCommand extends Command {
             throw new IllegalDateTimeValueException();
         }
     }
-    
+
     public ListCommand(Boolean isCompleted) {
         this.isCompleted = isCompleted;
         startDate  = null;

@@ -46,7 +46,7 @@ public interface ReadOnlyTask {
         if (getDeadline().isPresent()) {
             builder.append(" Deadline: ")
                 .append(getDeadline().get().toString());
-        }            
+        }
         if (isCompleted()) {
             builder.append(" Status: Completed");
         } else {
@@ -56,6 +56,6 @@ public interface ReadOnlyTask {
         getLabels().forEach(builder::append);
         return builder.toString();
     }
-    
+
 
 }

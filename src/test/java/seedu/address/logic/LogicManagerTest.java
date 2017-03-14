@@ -450,9 +450,9 @@ public class LogicManagerTest {
             cmd.append(p.getTitle().toString());
 
             cmd.append(" from ");
-            
+
             cmd.append(p.getStartTime());
-            
+
             cmd.append(" to ");
 
             cmd.append(p.getDeadline());

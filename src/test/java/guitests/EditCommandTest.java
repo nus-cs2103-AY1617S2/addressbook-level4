@@ -9,7 +9,6 @@ import guitests.guihandles.TaskCardHandle;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.label.Label;
-import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Title;
 import seedu.address.testutil.TaskBuilder;
 import seedu.address.testutil.TestTask;

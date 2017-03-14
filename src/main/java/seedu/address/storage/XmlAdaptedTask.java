@@ -27,7 +27,7 @@ public class XmlAdaptedTask {
     @XmlElement(required = false)
     private String startTime;
     @XmlElement(required = true)
-    private boolean isCompleted; 
+    private boolean isCompleted;
 
     @XmlElement
     private List<XmlAdaptedLabel> labeled = new ArrayList<>();
@@ -50,10 +50,10 @@ public class XmlAdaptedTask {
         //TODO: fix for tests!
         if (source.getStartTime().isPresent()) {
             startTime = source.getStartTime().get().toString();
-        } 
+        }
         if (source.getDeadline().isPresent()) {
             deadline = source.getDeadline().get().toString();
-        } 
+        }
         isCompleted = source.isCompleted();
         labeled = new ArrayList<>();
         for (Label label : source.getLabels()) {

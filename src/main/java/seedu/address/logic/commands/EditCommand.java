@@ -110,14 +110,15 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.title, this.startTime, this.isCompleted, this.deadline, this.labels);
+            return CollectionUtil.isAnyPresent(this.title, this.startTime,
+                    this.isCompleted, this.deadline, this.labels);
         }
-        
+
         /**
          * Returns true if any date is edited.
          */
         public boolean isDateEdited() {
-            return CollectionUtil.isAnyPresent(this.startTime,this.deadline);
+            return CollectionUtil.isAnyPresent(this.startTime, this.deadline);
         }
 
         public void setName(Optional<Title> title) {
@@ -128,12 +129,12 @@ public class EditCommand extends Command {
         public Optional<Title> getTitle() {
             return title;
         }
-        
+
         public void setStartTime(Optional<Deadline> startTime) {
             assert startTime != null;
             this.startTime = startTime;
         }
-        
+
         public Optional<Deadline> getStartTime() {
             return startTime;
         }
@@ -155,7 +156,7 @@ public class EditCommand extends Command {
         public Optional<UniqueLabelList> getLabels() {
             return labels;
         }
-        
+
         public void setIsCompleted(Optional<Boolean> isCompleted) {
             this.isCompleted = isCompleted;
         }

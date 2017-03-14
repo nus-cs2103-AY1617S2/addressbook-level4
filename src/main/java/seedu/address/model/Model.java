@@ -46,7 +46,7 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Date startDate, Date endDate);
-    
+
     /** Updates the filter of the filtered task list to  filter by the given completion status*/
     void updateFilteredTaskList(Boolean isCompleted);
 

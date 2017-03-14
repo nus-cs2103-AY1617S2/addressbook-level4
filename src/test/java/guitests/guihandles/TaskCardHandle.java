@@ -39,7 +39,7 @@ public class TaskCardHandle extends GuiHandle {
     public String getStartTime() {
         return getTextFromLabel(STARTTIME_FIELD_ID);
     }
-    
+
     public String getDeadline() {
         return getTextFromLabel(DEADLINE_FIELD_ID);
     }

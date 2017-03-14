@@ -48,7 +48,7 @@ public class TaskBuilder {
         }
         return this;
     }
-    
+
     public TaskBuilder withDeadline(String deadline) throws IllegalValueException, IllegalDateTimeValueException {
         if (deadline != null) {
             this.task.setStartTime(Optional.ofNullable(new Deadline(deadline)));
@@ -57,7 +57,7 @@ public class TaskBuilder {
         }
         return this;
     }
-    
+
     public TaskBuilder withStatus(boolean isCompleted) {
         this.task.setIsCompleted(isCompleted);
         return this;

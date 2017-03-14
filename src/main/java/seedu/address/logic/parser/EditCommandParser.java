@@ -5,8 +5,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LABEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS_COMPLETED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS_INCOMPLETE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMEINTERVAL_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMEINTERVAL_END;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMEINTERVAL_START;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -19,7 +19,6 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.address.logic.commands.IncorrectCommand;
-import seedu.address.logic.commands.ListCommand;
 import seedu.address.model.label.UniqueLabelList;
 
 /**
@@ -43,11 +42,12 @@ public class EditCommandParser {
         if (!index.isPresent()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
-            
+
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
-            editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));            
-            editTaskDescriptor.setStartTime(ParserUtil.parseDeadline(argsTokenizer.getValue(PREFIX_TIMEINTERVAL_START)));
+            editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
+            editTaskDescriptor.setStartTime(ParserUtil.parseDeadline(
+                    argsTokenizer.getValue(PREFIX_TIMEINTERVAL_START)));
             editTaskDescriptor.setDeadline(ParserUtil.parseDeadline(argsTokenizer.getValue(PREFIX_TIMEINTERVAL_END)));
             if (!editTaskDescriptor.isDateEdited()) {
                 editTaskDescriptor.setDeadline(ParserUtil.parseDeadline(argsTokenizer.getValue(PREFIX_DEADLINE)));
@@ -56,7 +56,7 @@ public class EditCommandParser {
                 editTaskDescriptor.setIsCompleted(Optional.ofNullable(true));
             } else if (args.trim().contains(PREFIX_STATUS_INCOMPLETE.getPrefix())) {
                 editTaskDescriptor.setIsCompleted(Optional.ofNullable(false));
-            } 
+            }
             editTaskDescriptor.setLabels(parseLabelsForEdit(ParserUtil.toSet(
                     argsTokenizer.getAllValues(PREFIX_LABEL))));
         } catch (IllegalValueException ive) {
