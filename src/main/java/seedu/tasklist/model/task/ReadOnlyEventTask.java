@@ -14,6 +14,8 @@ public interface ReadOnlyEventTask extends ReadOnlyTask {
     Comment getComment();
     Date getStartDate();
     Date getEndDate();
+    String getStartDateString();
+    String getEndDateString();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
