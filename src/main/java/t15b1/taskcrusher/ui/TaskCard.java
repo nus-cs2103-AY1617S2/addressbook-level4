@@ -12,7 +12,7 @@ public class TaskCard extends UiPart<Region> {
     private static final String FXML = "PersonListCard.fxml";
     private static final String NO_DEADLINE = "no deadline";
     private static final String DEADLINE_BY = "By ";
-    private static final String PRIORITY_PREPEND = "              Priority = ";
+    private static final String PRIORITY_PREPEND = " ";
 
     @FXML
     private HBox cardPane;
@@ -48,18 +48,21 @@ public class TaskCard extends UiPart<Region> {
     }
 
     private void showPriorityIfExists(ReadOnlyTask task) {
-        //TODO: make it nicer to show the priority just like how the tags appear
         if(task.getPriority().isDefaultPriority())
             priority.setText("");
-        else
-            priority.setText(PRIORITY_PREPEND + task.getPriority().value);
+        else{
+            StringBuilder stars = new StringBuilder();
+            for(int i=0; i<Integer.parseInt(task.getPriority().value); i++)
+                stars.append("*");
+            priority.setText(PRIORITY_PREPEND + stars.toString());
+        }
     }
 
     private void showDeadlineIfExists(ReadOnlyTask task) {
-        if(task.getDeadline().hasNoDeadline())
+        if(!task.getDeadline().hasDeadline())
             deadline.setText(NO_DEADLINE);
-        else 
-            deadline.setText(DEADLINE_BY + task.getDeadline().value);
+        else
+            deadline.setText(DEADLINE_BY + task.getDeadline().deadline);
     }
 
     private void initTags(ReadOnlyTask person) {
