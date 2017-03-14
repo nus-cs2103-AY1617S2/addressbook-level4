@@ -21,7 +21,7 @@ public class UndoCommand extends Command {
      * Creates an Undo command.
      */
     public UndoCommand() {
-    	/*
+        /*
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
