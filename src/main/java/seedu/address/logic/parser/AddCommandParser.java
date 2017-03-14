@@ -70,9 +70,6 @@ public class AddCommandParser {
             }
             dates.addAll(new PrettyTimeParser().parse(
                     args.substring(lastOccuranceEnd + 1, args.length())));
-            for (Date date : dates) {
-                System.out.println(date);
-            }
             if (dates
                     .size() >= LEAST_DATES_FOR_DEADLINE_AND_STARTING_TIME_TASK) {
                 String taskName = args.substring(0, lastOccuranceStart).trim();

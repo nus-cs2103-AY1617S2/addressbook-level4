@@ -14,7 +14,6 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.ReadOnlyTask.TaskType;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskWithDeadline;
 import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 
@@ -190,16 +189,12 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            System.out.println("Type: " + task.getTaskType());
             if (task.getTaskType() != null
                     && task.getTaskType() != TaskType.TaskWithNoDeadline) {
-                TaskWithDeadline taskWithDeadline = (TaskWithDeadline) task;
-                System.out.println(task.getTaskDateTime());
                 return nameKeyWords.stream()
                         .filter(keyword -> (StringUtil.containsWordIgnoreCase(
                                 task.getName().fullName, keyword)
-                                || taskWithDeadline.getDeadline()
-                                        .isSameDay(date)))
+                                || task.getDeadline().isSameDay(date)))
                         .findAny().isPresent();
             } else {
                 return nameKeyWords.stream()
