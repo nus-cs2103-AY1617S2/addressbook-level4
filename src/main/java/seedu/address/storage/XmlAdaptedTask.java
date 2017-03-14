@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Description;
 import seedu.address.model.task.EndTime;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.StartTime;
@@ -31,6 +32,8 @@ public class XmlAdaptedTask {
     private String endTime;
     @XmlElement(required = true)
     private String urgencyLevel;
+    @XmlElement(required = true)
+    private String description;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -73,7 +76,8 @@ public class XmlAdaptedTask {
         final StartTime startTime = new StartTime(this.startTime);
         final EndTime endTime = new EndTime(this.endTime);
         final UrgencyLevel urgencyLevel = new UrgencyLevel(this.urgencyLevel);
+        final Description description = new Description(this.description);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(title, venue, startTime, endTime, urgencyLevel, tags);
+        return new Task(title, venue, startTime, endTime, urgencyLevel, description, tags);
     }
 }
