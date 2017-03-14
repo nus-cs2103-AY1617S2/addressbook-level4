@@ -67,8 +67,12 @@ public class AddCommandParser {
         if (matcher.matches()) {
             List<Date> dates = new PrettyTimeParser().parse(args);
             if (dates.size() < LEAST_DATES_FOR_DEADLINE_ONLY_TASK) {
-                matcher = Pattern.compile(CliSyntax.WILDCARD + CliSyntax.WITH_DEADLINE_ONLY).matcher(args);
-                String taskName = args.substring(0, matcher.start(matcher.groupCount())).trim();
+                matcher = Pattern.compile(CliSyntax.WITH_DEADLINE_ONLY).matcher(args);
+                int lastOccurance = args.length() - 1;
+                while (matcher.find()) {
+                    lastOccurance = matcher.start();
+                }
+                String taskName = args.substring(0, lastOccurance).trim();
                 try {
                     return new AddCommand(taskName, dates.get(0), tags);
                 } catch (IllegalValueException ive) {
