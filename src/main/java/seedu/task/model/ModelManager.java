@@ -65,7 +65,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void IsDoneTask(int index, ReadOnlyTask target) throws TaskNotFoundException {
+    public void isDoneTask(int index, ReadOnlyTask target) throws TaskNotFoundException {
         taskManager.updateDone(index, target);
         indicateTaskManagerChanged();
     }

@@ -35,7 +35,7 @@ public class EditIsDoneCommand extends Command {
 
         ReadOnlyTask updatedTaskDone = lastShownList.get(targetIndex - 1);
         try {
-            model.IsDoneTask(targetIndex - 1, updatedTaskDone);
+            model.isDoneTask(targetIndex - 1, updatedTaskDone);
         } catch (TaskNotFoundException pnfe) {
             assert false : "The target task cannot be missing";
         }
