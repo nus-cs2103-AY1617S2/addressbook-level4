@@ -34,4 +34,6 @@ public abstract class DateTime {
      * @return the duration in plain English
      */
     public abstract String getDuration(Date date);
+
+    public abstract boolean isSameDay(Date date);
 }

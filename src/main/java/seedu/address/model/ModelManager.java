@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.util.Date;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -11,16 +12,18 @@ import seedu.address.commons.events.model.TaskManagerChangedEvent;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.ReadOnlyTask.TaskType;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
- * Represents the in-memory model of the task manager data.
- * All changes to any model should be synchronized.
+ * Represents the in-memory model of the task manager data. All changes to any
+ * model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
-    private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    private static final Logger logger = LogsCenter
+            .getLogger(ModelManager.class);
 
     private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
@@ -32,7 +35,8 @@ public class ModelManager extends ComponentManager implements Model {
         super();
         assert !CollectionUtil.isAnyNull(taskManager, userPrefs);
 
-        logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
+        logger.fine("Initializing with task manager: " + taskManager
+                + " and user prefs " + userPrefs);
 
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
@@ -59,13 +63,15 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
+    public synchronized void deleteTask(ReadOnlyTask target)
+            throws TaskNotFoundException {
         taskManager.removeTask(target);
         indicateTaskManagerChanged();
     }
 
     @Override
-    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+    public synchronized void addTask(Task task)
+            throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTask(task);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
@@ -76,7 +82,8 @@ public class ModelManager extends ComponentManager implements Model {
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
 
-        int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
+        int taskManagerIndex = filteredTasks
+                .getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();
     }
@@ -86,8 +93,8 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
-
-    //=========== Filtered Task List Accessors =============================================================
+    // =========== Filtered Task List Accessors
+    // =============================================================
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
@@ -100,18 +107,27 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
+    public void updateFilteredTaskList(Set<String> keywords, Date date) {
+        if (date == null) {
+            updateFilteredTaskList(
+                    new PredicateExpression(new NameQualifier(keywords)));
+        } else {
+            updateFilteredTaskList(new PredicateExpression(
+                    new NameAndDateQualifier(keywords, date)));
+        }
     }
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
 
-    //========== Inner classes/interfaces used for filtering =================================================
+    // ========== Inner classes/interfaces used for filtering
+    // =================================================
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
+
+        @Override
         String toString();
     }
 
@@ -136,6 +152,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Qualifier {
         boolean run(ReadOnlyTask task);
+
+        @Override
         String toString();
     }
 
@@ -149,9 +167,9 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword))
-                    .findAny()
-                    .isPresent();
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(
+                            task.getName().fullName, keyword))
+                    .findAny().isPresent();
         }
 
         @Override
@@ -160,4 +178,36 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    private class NameAndDateQualifier implements Qualifier {
+        private Set<String> nameKeyWords;
+        private Date date;
+
+        NameAndDateQualifier(Set<String> nameKeyWords, Date date) {
+            this.nameKeyWords = nameKeyWords;
+            this.date = date;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            if (task.getTaskType() != null
+                    && task.getTaskType() != TaskType.TaskWithNoDeadline) {
+                return nameKeyWords.stream()
+                        .filter(keyword -> (StringUtil.containsWordIgnoreCase(
+                                task.getName().fullName, keyword)
+                                || task.getDeadline().isSameDay(date)))
+                        .findAny().isPresent();
+            } else {
+                return nameKeyWords.stream()
+                        .filter(keyword -> StringUtil.containsWordIgnoreCase(
+                                task.getName().fullName, keyword))
+                        .findAny().isPresent();
+            }
+        }
+
+        @Override
+        public String toString() {
+            return "name=" + String.join(", ", nameKeyWords);
+        }
+
+    }
 }

@@ -116,4 +116,9 @@ public class Task implements ReadOnlyTask {
         return today;
     }
 
+    @Override
+    public DateTime getDeadline() {
+        return null;
+    }
+
 }
