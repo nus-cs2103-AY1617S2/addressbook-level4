@@ -47,6 +47,101 @@ public class TaskTest {
         assertEquals(task.getType(), DeadlineTask.TYPE);
     }
 
+    @Test
+    public void setName_FloatingTask_successful() throws Exception {
+        task = helper.createFloatingTask();
+        task.setName(new Name("testSetName"));
+        assertEquals(task.getName().toString(), "testSetName");
+
+    }
+
+    @Test
+    public void setName_DeadlineTask_successful() throws Exception {
+        task = helper.createDeadlineTask();
+        task.setName(new Name("testDeadlineSetName"));
+        assertEquals(task.getName().toString(), "testDeadlineSetName");
+
+    }
+
+    @Test
+    public void setName_EventTask_successful() throws Exception {
+        task = helper.createEventTask();
+        task.setName(new Name("testEventSetName"));
+        assertEquals(task.getName().toString(), "testEventSetName");
+
+    }
+
+    @Test
+    public void setPriority_FloatingTask_successful() throws Exception {
+        task = helper.createFloatingTask();
+        task.setPriority(new Priority("high"));
+        assertEquals(task.getPriority().toString(), "high");
+
+    }
+
+    @Test
+    public void setPriority_EventTask_successful() throws Exception {
+        task = helper.createEventTask();
+        task.setPriority(new Priority("high"));
+        assertEquals(task.getPriority().toString(), "high");
+
+    }
+
+    @Test
+    public void setPriority_DeadlineTask_successful() throws Exception {
+        task = helper.createDeadlineTask();
+        task.setPriority(new Priority("high"));
+        assertEquals(task.getPriority().toString(), "high");
+
+    }
+
+    @Test
+    public void setStatus_FloatingTask_successful() throws Exception {
+        task = helper.createFloatingTask();
+        task.setStatus(new Status(true));
+        assertEquals(task.getStatus().toString(), "completed");
+
+    }
+
+    @Test
+    public void setStatus_DeadlineTask_successful() throws Exception {
+        task = helper.createDeadlineTask();
+        task.setStatus(new Status(true));
+        assertEquals(task.getStatus().toString(), "completed");
+
+    }
+
+    @Test
+    public void setStatus_EventTask_successful() throws Exception {
+        task = helper.createEventTask();
+        task.setStatus(new Status(true));
+        assertEquals(task.getStatus().toString(), "completed");
+
+    }
+
+    @Test
+    public void setComment_FloatingTask_successful() throws Exception {
+        task = helper.createFloatingTask();
+        task.setComment(new Comment("testCommentFT"));
+        assertEquals(task.getComment().toString(), "testCommentFT");
+
+    }
+
+    @Test
+    public void setComment_DeadlineTask_successful() throws Exception {
+        task = helper.createDeadlineTask();
+        task.setComment(new Comment("testCommentDT"));
+        assertEquals(task.getComment().toString(), "testCommentDT");
+
+    }
+
+    @Test
+    public void setComment_EventTask_successful() throws Exception {
+        task = helper.createEventTask();
+        task.setComment(new Comment("testCommentET"));
+        assertEquals(task.getComment().toString(), "testCommentET");
+
+    }
 
     class TaskTestHelper {
 
@@ -71,7 +166,7 @@ public class TaskTest {
          */
         public Task createDeadlineTask() throws IllegalValueException {
             return new DeadlineTask(new Name("testDeadlineTask1"), new Comment("test"),
-                                    new Priority("high"), new Status(), new Date(), new UniqueTagList());
+                                    new Priority("low"), new Status(), new Date(), new UniqueTagList());
         }
     }
 }
