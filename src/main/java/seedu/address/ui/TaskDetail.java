@@ -43,8 +43,8 @@ public class TaskDetail extends UiPart<Region> {
 
     public void loadPersonPage(ReadOnlyTask task) {
         taskName.setText(task.getContent().toString());
-        //startTime.setText(task.getDateTime().toString());
-        //tags.setText(task.getTags().toString());
+        startTime.setText(task.getDateTime().toString());
+        tags.setText(task.getTags().toString());
     }
 
 }

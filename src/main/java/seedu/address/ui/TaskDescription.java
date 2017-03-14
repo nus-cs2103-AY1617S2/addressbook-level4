@@ -30,7 +30,7 @@ public class TaskDescription extends UiPart<Region> {
 
         //content.setScaleY(0.1);
 
-        placeholder.getChildren().addAll();
+        placeholder.getChildren().addAll(content);
     }
 
     public void loadPersonPage(ReadOnlyTask person) {
