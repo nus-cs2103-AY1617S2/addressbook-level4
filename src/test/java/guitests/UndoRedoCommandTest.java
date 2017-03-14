@@ -17,7 +17,7 @@ public class UndoRedoCommandTest extends TaskListGuiTest {
 
     @Test
     public void assertUndoRedoAddSuccess() {
-        TestTask taskToBeAdded = td.hoon;
+        TestTask taskToBeAdded = td.internship;
         commandBox.runCommand(taskToBeAdded.getAddCommand());
         commandBox.runCommand("undo");
         TestTask[] expectedTaskList = td.getTypicalTasks();
@@ -26,7 +26,7 @@ public class UndoRedoCommandTest extends TaskListGuiTest {
 
         //redo
         commandBox.runCommand("redo");
-        TestTask[] currentList = TestUtil.addTasksToList(td.getTypicalTasks(), td.hoon);
+        TestTask[] currentList = TestUtil.addTasksToList(td.getTypicalTasks(), td.internship);
         assertTrue(taskListPanel.isListMatching(currentList));
         assertResultMessage(String.format(RedoCommand.MESSAGE_REDO_SUCCESS));
     }
@@ -38,7 +38,7 @@ public class UndoRedoCommandTest extends TaskListGuiTest {
 
     @Test
     public void assertUndoRedoEditSuccess() throws IllegalValueException {
-        commandBox.runCommand("edit 1 Wang PC");
+        commandBox.runCommand("edit 1 Evalution Report");
         commandBox.runCommand("undo");
         TestTask[] expectedTaskList = td.getTypicalTasks();
         assertTrue(taskListPanel.isListMatching(expectedTaskList));
@@ -46,7 +46,7 @@ public class UndoRedoCommandTest extends TaskListGuiTest {
 
         //redo
         commandBox.runCommand("redo");
-        expectedTaskList[0].setName(new Name("Wang PC"));
+        expectedTaskList[0].setName(new Name("Evalution Report"));
         assertTrue(taskListPanel.isListMatching(expectedTaskList));
         assertResultMessage(String.format(RedoCommand.MESSAGE_REDO_SUCCESS));
     }
@@ -73,7 +73,7 @@ public class UndoRedoCommandTest extends TaskListGuiTest {
      */
     @Test
     public void assertUndoRedoFail() {
-        TestTask taskToBeAdded = td.hoon;
+        TestTask taskToBeAdded = td.internship;
         commandBox.runCommand(taskToBeAdded.getAddCommand());
         commandBox.runCommand("undo");
         assertResultMessage(UndoCommand.MESSAGE_UNDO_SUCCESS);
