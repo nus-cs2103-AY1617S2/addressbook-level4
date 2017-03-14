@@ -393,7 +393,7 @@ public class LogicManagerTest {
                 expectedList);
     }
 
-    
+
     /*
     @Test
     public void execute_find_matchesIfAnyKeywordPresent() throws Exception {
