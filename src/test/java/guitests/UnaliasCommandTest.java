@@ -22,13 +22,12 @@ public class UnaliasCommandTest extends ToLuistGuiTest {
     public void unalias_nonExistingAlias() {
         String unaliasCommand = "unalias d";
         commandBox.runCommand(unaliasCommand);
-        assertResultMessage(UnaliasController.RESULT_MESSAGE_NOT_ALIAS);
+        assertResultMessage(String.format(UnaliasController.RESULT_MESSAGE_NOT_ALIAS, "d"));
     }
 
     @Test
     public void unalias_existingAlias() {
-        String aliasCommand = "alias d add";
-        commandBox.runCommand(aliasCommand);
+        Config.getInstance().getAliasTable().setAlias("d", "add");
 
         String unaliasCommand = "unalias d";
         commandBox.runCommand(unaliasCommand);

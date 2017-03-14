@@ -11,7 +11,7 @@ import seedu.toluist.ui.Ui;
 public class ExitController extends Controller {
     public static final String COMMAND_WORD_EXIT = "exit";
     public static final String COMMAND_WORD_QUIT = "quit";
-    private static final String COMMAND_TEMPLATE = "^(exit|quit)$";
+    private static final String COMMAND_TEMPLATE = "^(exit|quit)\\s*";
 
     public ExitController(Ui renderer) {
         super(renderer);
