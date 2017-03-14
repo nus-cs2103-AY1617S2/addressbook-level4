@@ -29,10 +29,22 @@ public class TaskCard extends UiPart<Region> {
     public TaskCard(ReadOnlyTask person, int displayedIndex) {
         super(FXML);
         name.setText(person.getTitle().fullTitle);
-        id.setText(displayedIndex + ". ");
-        phone.setText(person.getEndDateTime().value);
-        address.setText(person.getLocation().value);
-        email.setText(person.getStartDateTime().value);
+        id.setText("#" + displayedIndex + " ");
+
+        if (person.getEndDateTime() != null && person.getStartDateTime() != null) {
+            phone.setText(person.getStartDateTime() + " until " + person.getEndDateTime());
+        } else if (person.getEndDateTime() != null && person.getStartDateTime() == null) {
+            phone.setText(person.getEndDateTime().value);
+        } else {
+            phone.setText(null);
+        }
+
+        if (person.getLocation() == null) {
+            address.setText("");
+        } else {
+            address.setText(person.getLocation().value);
+        }
+
         initTags(person);
     }
 

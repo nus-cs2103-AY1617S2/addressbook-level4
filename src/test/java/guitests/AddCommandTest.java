@@ -28,7 +28,7 @@ public class AddCommandTest extends AddressBookGuiTest {
         //add duplicate person
         commandBox.runCommand(td.hoon.getAddCommand());
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
-        assertTrue(personListPanel.isListMatching(currentList));
+        assertTrue(taskListPanel.isListMatching(currentList));
 
         //add to empty list
         commandBox.runCommand("clear");
@@ -43,12 +43,14 @@ public class AddCommandTest extends AddressBookGuiTest {
         commandBox.runCommand(personToAdd.getAddCommand());
 
         //confirm the new card contains the right data
-        PersonCardHandle addedCard = personListPanel.navigateToPerson(personToAdd.getTitle().fullTitle);
+        PersonCardHandle addedCard = taskListPanel.navigateToPerson(personToAdd.getTitle().fullTitle);
         assertMatching(personToAdd, addedCard);
 
         //confirm the list now contains all previous persons plus the new person
+
         TestTask[] expectedList = TestUtil.addPersonsToList(currentList, personToAdd);
-        assertTrue(personListPanel.isListMatching(expectedList));
+        assertTrue(taskListPanel.isListMatching(expectedList));
+
     }
 
 }
