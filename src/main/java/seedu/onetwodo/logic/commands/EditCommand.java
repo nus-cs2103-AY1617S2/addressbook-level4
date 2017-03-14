@@ -56,16 +56,15 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        filterTasksByDoneStatus();
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
-        FilteredList<ReadOnlyTask> filtered = lastShownList.filtered(t -> t.getTaskType() == taskType);
+        FilteredList<ReadOnlyTask> filteredByTaskType = lastShownList.filtered(t -> t.getTaskType() == taskType);
+        FilteredList<ReadOnlyTask> filteredByDoneStatus = filterTasksByDoneStatus(filteredByTaskType);
 
-        if (filtered.size() < filteredTaskListIndex || taskType == null) {
+        if (filteredByDoneStatus.size() < filteredTaskListIndex || taskType == null) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
         
-        
-        ReadOnlyTask taskToEdit = filtered.get(filteredTaskListIndex - 1);
+        ReadOnlyTask taskToEdit = filteredByDoneStatus.get(filteredTaskListIndex - 1);
         int internalIndex = lastShownList.indexOf(taskToEdit);
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 

@@ -25,7 +25,7 @@ public class ListCommandParser {
         } else if (argsTrimmed.equals("undone")) {
             return new ListCommand("UNDONE");
         } else {
-            return new IncorrectCommand("invalide list command");
+            return new IncorrectCommand("Invalid list command");
         }
     }
 }

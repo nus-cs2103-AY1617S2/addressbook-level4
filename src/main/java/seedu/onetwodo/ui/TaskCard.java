@@ -1,5 +1,6 @@
 package seedu.onetwodo.ui;
 
+import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -34,6 +35,10 @@ public class TaskCard extends UiPart<Region> {
         description.setText(task.getDescription().value);
         endDate.setText(task.getEndDate().value);
         initTags(task);
+        if (task.getDoneStatus()) {
+            PseudoClass donePseudoClass = PseudoClass.getPseudoClass("done");
+            name.pseudoClassStateChanged(donePseudoClass, true);
+        }
     }
 
     private void initTags(ReadOnlyTask task) {

@@ -37,6 +37,7 @@ public class MainWindow extends UiPart<Region> {
     private static final String ICON = "/images/address_book_32.png";
     private static final String FXML = "MainWindow.fxml";
     private static final String FONT_AVENIR = "/fonts/avenir-light.ttf";
+    private static final String DONE_STYLESHEET = "view/Strikethrough.css";
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 650;
 
@@ -93,6 +94,7 @@ public class MainWindow extends UiPart<Region> {
         setWindowDefaultSize(prefs);
         Scene scene = new Scene(getRoot());
         loadFonts(scene);
+        loadStyleSheets(scene);
         primaryStage.setScene(scene);
 
         setAccelerators();
@@ -100,6 +102,10 @@ public class MainWindow extends UiPart<Region> {
 
     private void loadFonts(Scene scene) {
         Font.loadFont(MainWindow.class.getResource(FONT_AVENIR).toExternalForm(), 10);
+    }
+    
+    private void loadStyleSheets(Scene scene) {
+        scene.getStylesheets().add(DONE_STYLESHEET);
     }
 
     public Stage getPrimaryStage() {

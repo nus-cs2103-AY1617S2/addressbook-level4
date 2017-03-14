@@ -42,18 +42,17 @@ public abstract class Command {
         this.model = model;
     }
     
-    public void filterTasksByDoneStatus() {
+    public FilteredList<ReadOnlyTask> filterTasksByDoneStatus(FilteredList<ReadOnlyTask> filtered) {
         DoneStatus doneStatus = model.getDoneStatus();
         switch (doneStatus) {
+        case DONE:
+            return filtered.filtered(t -> t.getDoneStatus() == true);
+        case UNDONE:
+            return filtered.filtered(t -> t.getDoneStatus() == false);
         case ALL: 
         case DEFAULT:
-            model.updateFilteredListToShowAll();
-            break;
-        case DONE:
-            model.updateFilteredDoneTaskList();
-            break;
-        case UNDONE:
-            model.updateFilteredUndoneTaskList();
-        }   
+        default:
+            return filtered;
+        }
     }
  }

@@ -32,15 +32,15 @@ public class DoneCommand extends Command {
     
     @Override
     public CommandResult execute() throws CommandException {
-        filterTasksByDoneStatus();
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
-        FilteredList<ReadOnlyTask> filtered = lastShownList.filtered(t -> t.getTaskType() == taskType);
+        FilteredList<ReadOnlyTask> filteredByTaskType = lastShownList.filtered(t -> t.getTaskType() == taskType);
+        FilteredList<ReadOnlyTask> filteredByDoneStatus = filterTasksByDoneStatus(filteredByTaskType);
 
-        if (filtered.size() < targetIndex || taskType == null) {
+        if (filteredByDoneStatus.size() < targetIndex || taskType == null) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
         
-        ReadOnlyTask taskToComplete = filtered.get(targetIndex - 1);
+        ReadOnlyTask taskToComplete = filteredByDoneStatus.get(targetIndex - 1);
         int internalIndex = lastShownList.indexOf(taskToComplete);
         
         try {

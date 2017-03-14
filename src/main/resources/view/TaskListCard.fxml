@@ -37,7 +37,7 @@
                               <HBox alignment="CENTER_LEFT" spacing="5">
                                   <children>
                                       <HBox>
-                                          <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
+                                          <Label fx:id="name" styleClass="cell_big_label" stylesheets="@PanelTheme.css" text="\$first" />
                                       </HBox>
                                   </children>
                               </HBox>

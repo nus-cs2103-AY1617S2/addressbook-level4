@@ -1,5 +1,6 @@
 package seedu.onetwodo.model.task;
 
+import seedu.onetwodo.logic.parser.DoneStatus;
 import seedu.onetwodo.model.tag.UniqueTagList;
 
 /**
@@ -31,7 +32,8 @@ public interface ReadOnlyTask {
                 && other.getStartDate().equals(this.getStartDate())
                 && other.getEndDate().equals(this.getEndDate())
                 && other.getTaskType().equals(this.getTaskType()))
-                && other.getDescription().equals(this.getDescription());
+                && other.getDescription().equals(this.getDescription())
+                && other.getDoneStatus() == this.getDoneStatus();
     }
 
     /**
@@ -46,7 +48,9 @@ public interface ReadOnlyTask {
                 .append(getEndDate())
                 .append(" Description: ")
                 .append(getDescription())
-                .append(" Tags: ");
+                .append(" Tags: ")
+                .append(" Is Done: ")
+                .append(getDoneStatus());
         getTags().forEach(builder::append);
         return builder.toString();
     }
