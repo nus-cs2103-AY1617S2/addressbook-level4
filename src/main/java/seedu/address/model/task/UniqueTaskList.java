@@ -10,7 +10,7 @@ import seedu.address.commons.exceptions.DuplicateDataException;
 import seedu.address.commons.util.CollectionUtil;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
+ * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
  *
  * Supports a minimal set of list operations.
  *
@@ -22,7 +22,7 @@ public class UniqueTaskList implements Iterable<Task> {
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent task as the given argument.
      */
     public boolean contains(ReadOnlyTask toCheck) {
         assert toCheck != null;
@@ -117,13 +117,13 @@ public class UniqueTaskList implements Iterable<Task> {
      */
     public static class DuplicateTaskException extends DuplicateDataException {
         protected DuplicateTaskException() {
-            super("Operation would result in duplicate persons");
+            super("Operation would result in duplicate tasks");
         }
     }
 
     /**
-     * Signals that an operation targeting a specified person in the list would fail because
-     * there is no such matching person in the list.
+     * Signals that an operation targeting a specified task in the list would fail because
+     * there is no such matching task in the list.
      */
     public static class TaskNotFoundException extends Exception {}
 
