@@ -1,11 +1,13 @@
 package seedu.address.testutil;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Description;
 import seedu.address.model.task.IdentificationNumber;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Status;
 
 /**
  * A mutable task object. For testing only.
@@ -17,8 +19,13 @@ public class TestTask implements ReadOnlyTask {
     private Description description;
     private IdentificationNumber id;
     private UniqueTagList tags;
+    private Status status;
 
     public TestTask() {
+        id = new IdentificationNumber();
+        description = new Description();
+        deadline = new Deadline();
+        status = new Status();
         tags = new UniqueTagList();
     }
 
@@ -31,6 +38,8 @@ public class TestTask implements ReadOnlyTask {
         this.description = taskToCopy.getDescription();
         this.id = taskToCopy.getID();
         this.tags = taskToCopy.getTags();
+        this.status = taskToCopy.getStatus();
+        updateStatus();
     }
 
     public TestTask setName(Name name) {
@@ -40,6 +49,7 @@ public class TestTask implements ReadOnlyTask {
 
     public TestTask setDeadline(Deadline deadline) {
         this.deadline = deadline;
+        updateStatus();
         return this;
     }
 
@@ -56,6 +66,50 @@ public class TestTask implements ReadOnlyTask {
     public TestTask setTags(UniqueTagList tags) {
         this.tags = tags;
         return this;
+    }
+
+    public TestTask setStatus(Status status) {
+        this.status = status;
+        updateStatus();
+        return this;
+    }
+
+    @Override
+    public Status getStatus() {
+        return updateStatus();
+    }
+
+    public Status updateStatus() {
+        String currentStatus = status.toString();
+        if (currentStatus.equals(Status.DONE)) {
+            // No change
+            return status;
+        } else {
+            // Update status base on Deadline and current time
+            try {
+                if (deadline.isFloating()) {
+                    return status = new Status(Status.FLOATING);
+
+                } else if (deadline.isOverdue()) {
+                    return status = new Status(Status.OVERDUE);
+
+                } else if (deadline.isToday()) {
+                    return status = new Status(Status.TODAY);
+
+                } else if (deadline.isTomorrow()) {
+                    return status = new Status(Status.TOMORROW);
+
+                } else if (deadline.isThisWeek()) {
+                    return status = new Status(Status.THIS_WEEK);
+
+                } else {
+                    return status = new Status(Status.IN_FUTURE);
+                }
+            } catch (IllegalValueException e) {
+                // Impossible
+                return status;
+            }
+        }
     }
 
     @Override

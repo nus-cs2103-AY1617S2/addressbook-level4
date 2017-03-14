@@ -12,6 +12,7 @@ public interface ReadOnlyTask {
     Deadline getDeadline();
     Description getDescription();
     UniqueTagList getTags();
+    Status getStatus();
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
@@ -23,7 +24,8 @@ public interface ReadOnlyTask {
                 && other.getName().equals(this.getName()) // state checks here onwards
                 && other.getDeadline().equals(this.getDeadline())
                 && other.getDescription().equals(this.getDescription())
-                && other.getTags().equals(this.getTags()));
+                && other.getTags().equals(this.getTags())
+                && other.getStatus().equals(this.getStatus()));
     }
 
     /**
@@ -37,7 +39,9 @@ public interface ReadOnlyTask {
                 .append(" Deadline: ")
                 .append(getDeadline())
                 .append(" Description: ")
-                .append(getDescription());
+                .append(getDescription())
+                .append(" Status: ")
+                .append(getStatus());
         return builder.toString();
     }
 

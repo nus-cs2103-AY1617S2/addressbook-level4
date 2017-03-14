@@ -17,13 +17,11 @@ public class DateFactory {
             // Do nothing & continue with next case
         }
 
-        try {
-            return ((TaskDate) new TimePoint(dateString));
-        } catch (IllegalValueException e) {
-            // Do nothing & continue with next case
-        }
+        return ((TaskDate) new TimePoint(dateString));
+    }
 
-        return ((TaskDate) new TimeUnassigned(dateString));
+    public TaskDate getUnassignedTime() {
+        return (TaskDate) new TimeUnassigned();
     }
 }
 
