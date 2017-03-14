@@ -46,8 +46,7 @@ public class TaskTest {
         task = helper.createDeadlineTask();
         assertEquals(task.getType(), DeadlineTask.TYPE);
     }
-    
-    
+
 
     class TaskTestHelper {
 
