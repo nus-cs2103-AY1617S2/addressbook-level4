@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tasklist>
+    <tasks>
+        <id>1</id>
+        <name>Clear the trash</name>
+        <description></description>
+        <startDateTime></startDateTime>
+        <endDateTime></endDateTime>
+    </tasks>
+    <tags>
+        <name>Completed</name>
+    </tags>
+</tasklist>
