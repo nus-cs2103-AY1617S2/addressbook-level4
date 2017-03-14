@@ -21,7 +21,7 @@ public class FixedStack<Item> {
     }
 
     public Item pop() throws EmptyStackException {
-        if (array[index] == null) {
+        if (index == -1 || array[index] == null) {
             throw new EmptyStackException();
         }
         Item item = array[index];
