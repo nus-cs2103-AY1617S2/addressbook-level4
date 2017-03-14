@@ -1,6 +1,8 @@
 package seedu.taskboss.model;
 
+import java.util.EmptyStackException;
 import java.util.Set;
+import java.util.Stack;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
@@ -10,6 +12,7 @@ import seedu.taskboss.commons.core.UnmodifiableObservableList;
 import seedu.taskboss.commons.events.model.TaskBossChangedEvent;
 import seedu.taskboss.commons.util.CollectionUtil;
 import seedu.taskboss.commons.util.StringUtil;
+import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.task.ReadOnlyTask;
 import seedu.taskboss.model.task.Task;
 import seedu.taskboss.model.task.UniqueTaskList;
@@ -24,6 +27,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final TaskBoss taskBoss;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+    private final Stack<ReadOnlyTaskBoss> taskbossHistory;
 
     /**
      * Initializes a ModelManager with the given TaskBoss and userPrefs.
@@ -36,6 +40,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.taskBoss = new TaskBoss(taskBoss);
         filteredTasks = new FilteredList<>(this.taskBoss.getTaskList());
+        taskbossHistory = new Stack<ReadOnlyTaskBoss>();
     }
 
     public ModelManager() {
@@ -44,6 +49,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyTaskBoss newData) {
+        taskbossHistory.push(new TaskBoss(this.taskBoss));
         taskBoss.resetData(newData);
         indicateTaskBossChanged();
     }
@@ -53,6 +59,12 @@ public class ModelManager extends ComponentManager implements Model {
         return taskBoss;
     }
 
+    @Override
+    public void undoTaskboss() throws EmptyStackException {
+        taskBoss.resetData(taskbossHistory.pop());
+        indicateTaskBossChanged();
+    }
+
     /** Raises an event to indicate the model has changed */
     private void indicateTaskBossChanged() {
         raise(new TaskBossChangedEvent(taskBoss));
@@ -60,12 +72,14 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
+        taskbossHistory.push(new TaskBoss(this.taskBoss));
         taskBoss.removeTask(target);
         indicateTaskBossChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+        taskbossHistory.push(new TaskBoss(this.taskBoss));
         taskBoss.addTask(task);
         updateFilteredListToShowAll();
         indicateTaskBossChanged();
@@ -75,7 +89,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
-
+        taskbossHistory.push(new TaskBoss(this.taskBoss));
         int taskBossIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskBoss.updateTask(taskBossIndex, editedTask);
         indicateTaskBossChanged();
@@ -106,6 +120,11 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredTaskListByEndDateTime(String keywords) {
         updateFilteredTaskList(new PredicateExpression(new EndDatetimeQualifier(keywords)));
+    }
+
+    @Override
+    public void updateFilteredTaskListByCategory(Category category) {
+        updateFilteredTaskList(new PredicateExpression(new CategoryQualifier(category)));
     }
 
     private void updateFilteredTaskList(Expression expression) {
@@ -199,6 +218,24 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public String toString() {
             return "endDateTime=" + endDateKeyWords;
+        }
+    }
+
+    private class CategoryQualifier implements Qualifier {
+        private Category categoryKeyWords;
+
+        CategoryQualifier(Category categoryKeyWords) {
+            this.categoryKeyWords = categoryKeyWords;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return task.getCategories().contains(categoryKeyWords);
+        }
+
+        @Override
+        public String toString() {
+            return "category=" + categoryKeyWords.categoryName;
         }
     }
 

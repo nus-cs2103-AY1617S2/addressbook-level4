@@ -15,10 +15,11 @@ import seedu.taskboss.logic.commands.ExitCommand;
 import seedu.taskboss.logic.commands.FindCommand;
 import seedu.taskboss.logic.commands.HelpCommand;
 import seedu.taskboss.logic.commands.IncorrectCommand;
+import seedu.taskboss.logic.commands.ListByCategoryCommand;
 import seedu.taskboss.logic.commands.ListCommand;
 import seedu.taskboss.logic.commands.MarkDoneCommand;
 import seedu.taskboss.logic.commands.SelectCommand;
-
+import seedu.taskboss.logic.commands.UndoCommand;
 /**
  * Parses user input.
  */
@@ -68,11 +69,17 @@ public class Parser {
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
+        case ListByCategoryCommand.COMMAND_WORD:
+            return new ListByCategoryCommandParser().parse(arguments);
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
