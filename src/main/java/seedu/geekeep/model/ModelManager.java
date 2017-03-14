@@ -25,16 +25,16 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<ReadOnlyTask> filteredPersons;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given taskManager and userPrefs.
      */
-    public ModelManager(ReadOnlyTaskManager addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTaskManager taskManager, UserPrefs userPrefs) {
         super();
-        assert !CollectionUtil.isAnyNull(addressBook, userPrefs);
+        assert !CollectionUtil.isAnyNull(taskManager, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + taskManager + " and user prefs " + userPrefs);
 
-        this.taskManager = new TaskManager(addressBook);
-        filteredPersons = new FilteredList<>(this.taskManager.getPersonList());
+        this.taskManager = new TaskManager(taskManager);
+        filteredPersons = new FilteredList<>(this.taskManager.getTaskList());
     }
 
     public ModelManager() {
@@ -48,7 +48,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public ReadOnlyTaskManager getAddressBook() {
+    public ReadOnlyTaskManager getTaskManager() {
         return taskManager;
     }
 
@@ -58,8 +58,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void deletePerson(ReadOnlyTask target) throws TaskNotFoundException {
-        taskManager.removePerson(target);
+    public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
+        taskManager.removeTask(target);
         indicateAddressBookChanged();
     }
 
@@ -71,19 +71,19 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updatePerson(int filteredPersonListIndex, ReadOnlyTask editedPerson)
+    public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
-        assert editedPerson != null;
+        assert editedTask != null;
 
-        int addressBookIndex = filteredPersons.getSourceIndex(filteredPersonListIndex);
-        taskManager.updateTask(addressBookIndex, editedPerson);
+        int taskListIndex = filteredPersons.getSourceIndex(filteredTaskListIndex);
+        taskManager.updateTask(taskListIndex, editedTask);
         indicateAddressBookChanged();
     }
 
     // =========== Filtered Person List Accessors =============================================================
 
     @Override
-    public UnmodifiableObservableList<ReadOnlyTask> getFilteredPersonList() {
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
         return new UnmodifiableObservableList<>(filteredPersons);
     }
 
@@ -93,7 +93,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredPersonList(Set<String> keywords) {
+    public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredPersonList(new PredicateExpression(new NameQualifier(keywords)));
     }
 
@@ -106,6 +106,7 @@ public class ModelManager extends ComponentManager implements Model {
     interface Expression {
         boolean satisfies(ReadOnlyTask person);
 
+        @Override
         String toString();
     }
 
@@ -131,6 +132,7 @@ public class ModelManager extends ComponentManager implements Model {
     interface Qualifier {
         boolean run(ReadOnlyTask person);
 
+        @Override
         String toString();
     }
 
@@ -153,5 +155,7 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
+
+
 
 }
