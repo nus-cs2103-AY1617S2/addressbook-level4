@@ -45,9 +45,9 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         title = source.getTitle().fullTitle;
-        endDateTime = source.getEndDateTime().value;
-        startDateTime = source.getStartDateTime().value;
-        location = source.getLocation().value;
+        endDateTime = source.getEndDateTime() == null ? "" : source.getEndDateTime().value;
+        startDateTime = source.getStartDateTime() == null ? "" : source.getStartDateTime().value;
+        location = source.getLocation() == null ? "" : source.getLocation().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -65,9 +65,9 @@ public class XmlAdaptedTask {
             taskTags.add(tag.toModelType());
         }
         final Title title = new Title(this.title);
-        final DateTime endDateTime = new DateTime(this.endDateTime);
-        final DateTime startDateTime = new DateTime(this.startDateTime);
-        final Location location = new Location(this.location);
+        final DateTime endDateTime = this.endDateTime.isEmpty() ? null : new DateTime(this.endDateTime);
+        final DateTime startDateTime = this.startDateTime.isEmpty() ? null : new DateTime(this.startDateTime);
+        final Location location = this.location.isEmpty() ? null : new Location(this.location);
         final UniqueTagList tags = new UniqueTagList(taskTags);
         return new Task(title, startDateTime, endDateTime, location, tags);
     }
