@@ -1,5 +1,7 @@
 package seedu.ezdo.logic.commands;
 
+import java.util.EmptyStackException;
+
 import seedu.ezdo.logic.commands.exceptions.CommandException;
 
 /*
@@ -16,8 +18,12 @@ public class RedoCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        // TODO Auto-generated method stub
-        return null;
+        try {
+            model.redo();
+            return new CommandResult(MESSAGE_SUCCESS);
+        } catch (EmptyStackException ese) {
+            throw new CommandException(MESSAGE_NO_PREV_COMMAND);
+        }
     }
 
 }
