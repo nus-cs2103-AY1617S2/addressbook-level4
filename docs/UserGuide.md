@@ -119,7 +119,7 @@ Examples:
 * `delete 2`<br>
   Deletes the 2nd task in the todo list.
 * `delete 3 - 6`<br>
-  Deletes the 3rd, 4th, 5th, and 6th task in the todo list.
+  Deletes the 3rd, 4th, 5th, and 6th task in the todo list.<br>
   Note that the system is whitespace insensitive so `delete 3-6` or `delete 3- 6` would work as well.
 * `delete 3 -`<br>
   Deletes from 3rd to last in the todo list.
