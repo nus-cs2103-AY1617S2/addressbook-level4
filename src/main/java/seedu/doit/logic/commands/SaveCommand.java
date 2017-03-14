@@ -24,8 +24,10 @@ public class SaveCommand extends Command {
             + " save/xml/in/this/file/as/name.xml";
 
     public static final String MESSAGE_SUCCESS = " Tasks saved at %1$s";
-    public static final String MESSAGE_DUPLICATE_FILE = "This file already exists in the file path";
-    public static final String MESSAGE_PATH_DOES_NOT_EXIST = "The file path does not exists";
+    public static final String MESSAGE_DUPLICATE_FILE = "Another file already exists in the file path.";
+    public static final String MESSAGE_NOT_XML_FILE = "It must be a .xml file.";
+    public static final String MESSAGE_USING_SAME_FILE = "It is the current file you are choosing. It will be auto saved.";
+    public static final String MESSAGE_CANNOT_CREATE_FILE = "Cannot create the .xml file.";
 
     public final String saveFilePath;
     public TaskManagerStorage taskManagerStorage;
@@ -35,15 +37,13 @@ public class SaveCommand extends Command {
      * Creates an SaveCommand using raw values.
      *
      * @throws IllegalValueException
-     *             if file path does not exists
+     *             if file is not xml
      */
     public SaveCommand(String newFilePath) throws IllegalValueException {
         assert newFilePath != null;
         this.saveFilePath = newFilePath;
-        File file = new File(this.saveFilePath);
-
-        if (!FileUtil.isFileExists(file)) {
-            throw new IllegalValueException(MESSAGE_PATH_DOES_NOT_EXIST);
+        if (!newFilePath.endsWith(".xml")) {
+            throw new IllegalValueException(MESSAGE_NOT_XML_FILE);
         }
 
     }
@@ -52,11 +52,17 @@ public class SaveCommand extends Command {
     public CommandResult execute() throws CommandException {
         assert this.model != null;
         File file = new File(this.saveFilePath);
+        if (this.saveFilePath.equals(this.storage.getTaskManagerFilePath())) {
+            return new CommandResult(MESSAGE_USING_SAME_FILE);
+        }
+        if (file.exists()) {
+            return new CommandResult(MESSAGE_DUPLICATE_FILE);
+        }
         logger.info("created file : " + file.toString());
         try {
             FileUtil.createIfMissing(file);
         } catch (IOException e) {
-            throw new CommandException(MESSAGE_DUPLICATE_FILE);
+            throw new CommandException(MESSAGE_CANNOT_CREATE_FILE);
         }
         logger.info("created file : " + file.toString());
         TaskManagerSaveChangedEvent event = new TaskManagerSaveChangedEvent(this.model.getTaskManager(),
