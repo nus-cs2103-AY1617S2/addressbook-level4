@@ -9,19 +9,14 @@ public class EndTimeTest {
 
     @Test
     public void isValidEndTime() {
-        // blank email
+        // invalid addresses
         assertFalse(EndTime.isValidEndTime("")); // empty string
         //assertFalse(EndTime.isValidEndTime(" ")); // spaces only
-        
-        // valid email
-        assertTrue(EndTime.isValidEndTime("march fifteenth")); //alphabets
-        assertTrue(EndTime.isValidEndTime("20170315")); // number
-        assertTrue(EndTime.isValidEndTime("By end of March")); // alphabets with capital
-        assertTrue(EndTime.isValidEndTime("March 15 2017")); // numeric and alphabet
-                                                           // and domain name
-        assertTrue(EndTime.isValidEndTime("March 15, 2017")); // mixture of
-                                                               // alphanumeric
-                                                               // and comma
-                                                               // characters
+
+        // valid addresses
+        assertTrue(EndTime.isValidEndTime("Blk 456, Den Road, #01-355"));
+        assertTrue(EndTime.isValidEndTime("-")); // one character
+        assertTrue(EndTime.isValidEndTime("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long
+                                                                                                       // address
     }
 }

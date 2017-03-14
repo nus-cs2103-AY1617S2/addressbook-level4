@@ -471,13 +471,13 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getTitle().toString());
-            cmd.append(" @@").append(p.getVenue());
-            cmd.append(" from:").append(p.getStartTime());
-            cmd.append(" to:").append(p.getEndTime());
+            cmd.append(" s/").append(p.getStartTime());
+            cmd.append(" v/").append(p.getVenue());
+            cmd.append(" e/").append(p.getEndTime());
 
             UniqueTagList tags = p.getTags();
             for (Tag t : tags) {
-                cmd.append(" ##").append(t.tagName);
+                cmd.append(" t/").append(t.tagName);
             }
 
             return cmd.toString();
@@ -561,10 +561,10 @@ public class LogicManagerTest {
         Task generateTaskWithTitle(String name) throws Exception {
             return new Task(
                     new Title(name),
-                    new Venue("location"),
-                    new StartTime("dawn"),
-                    new EndTime("dusk"),
-                    new UniqueTagList(new Tag("hashtag")));
+                    new Venue("1"),
+                    new StartTime("1@email"),
+                    new EndTime("House of 1"),
+                    new UniqueTagList(new Tag("tag")));
         }
     }
 }

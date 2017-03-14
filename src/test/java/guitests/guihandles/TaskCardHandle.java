@@ -36,9 +36,6 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(TITLE_FIELD_ID);
     }
 
-    public String getEndTime() {
-        return getTextFromLabel(ENDTIME_FIELD_ID);
-    }
 
     public String getVenue() {
         return getTextFromLabel(VENUE_FIELD_ID);
@@ -46,6 +43,10 @@ public class TaskCardHandle extends GuiHandle {
 
     public String getStartTime() {
         return getTextFromLabel(STARTTIME_FIELD_ID);
+    }
+
+    public String getEndTime() {
+        return getTextFromLabel(ENDTIME_FIELD_ID);
     }
 
     public List<String> getTags() {
@@ -85,9 +86,9 @@ public class TaskCardHandle extends GuiHandle {
         if (obj instanceof TaskCardHandle) {
             TaskCardHandle handle = (TaskCardHandle) obj;
             return getTitle().equals(handle.getTitle())
+                    && getVenue().equals(handle.getVenue())
                     && getStartTime().equals(handle.getStartTime())
                     && getEndTime().equals(handle.getEndTime())
-                    && getVenue().equals(handle.getVenue())
                     && getTags().equals(handle.getTags());
         }
         return super.equals(obj);
