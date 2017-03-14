@@ -103,7 +103,7 @@ public class TestEventTask extends TestTask implements ReadOnlyEventTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
-        sb.append("d/ " + this.getStartDate().toString() + " ");
+        sb.append("d/" + this.getStartDate().toString() + " ");
         sb.append("to " + this.getEndDate().toString() + " ");
         sb.append("c/" + this.getComment().value + " ");
         sb.append("p/" + this.getPriority().value + " ");
