@@ -189,8 +189,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name.butNoCommentPrefix valid, address", expectedMessage);
+        assertCommandFailure("add t/friends", expectedMessage);
     }
 
     @Test
