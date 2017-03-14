@@ -14,9 +14,9 @@ public class Priority {
     public final String value;
 
     /**
-     * Validates given phone number.
+     * Validates given priority level.
      *
-     * @throws IllegalValueException if given phone string is invalid.
+     * @throws IllegalValueException if given priority level is invalid.
      */
     public Priority(String priority) throws IllegalValueException {
         assert priority != null;
