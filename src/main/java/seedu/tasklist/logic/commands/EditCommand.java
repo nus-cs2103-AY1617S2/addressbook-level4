@@ -2,6 +2,7 @@ package seedu.tasklist.logic.commands;
 
 import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import seedu.tasklist.commons.core.Messages;
@@ -178,24 +179,51 @@ public class EditCommand extends Command {
             return deadline;
         }
 
-        public void setDeadline(Optional<Date> deadline) {
-            this.deadline = deadline;
+        public void setDeadline(Optional<List<Date>> deadline) {
+            try {
+                List<Date> dateList = deadline.get();
+                if (dateList.size() == 1) {
+                    this.deadline = Optional.of(deadline.get().get(0));
+                } else {
+                    this.deadline = Optional.empty();
+                }
+            } catch (NoSuchElementException nse) {
+                throw new IllegalArgumentException();
+            }
         }
 
         public Optional<Date> getStartDate() {
             return startDate;
         }
 
-        public void setStartDate(Optional<Date> startDate) {
-            this.startDate = startDate;
+        public void setStartDate(Optional<List<Date>> startDate) {
+            try {
+                List<Date> dateList = startDate.get();
+                if (dateList.size() == 2) {
+                    this.startDate = Optional.of(startDate.get().get(0));
+                } else {
+                    this.startDate = Optional.empty();
+                }
+            } catch (NoSuchElementException nse) {
+                throw new IllegalArgumentException();
+            }
         }
 
         public Optional<Date> getEndDate() {
             return endDate;
         }
 
-        public void setEndDate(Optional<Date> endDate) {
-            this.endDate = endDate;
+        public void setEndDate(Optional<List<Date>> endDate) {
+            try {
+                List<Date> dateList = endDate.get();
+                if (dateList.size() == 2) {
+                    this.endDate = Optional.of(endDate.get().get(1));
+                } else {
+                    this.endDate = Optional.empty();
+                }
+            } catch (NoSuchElementException nse) {
+                throw new IllegalArgumentException();
+            }
         }
 
         public Optional<Priority> getPriority() {
