@@ -1,4 +1,4 @@
-package t15b1.taskcrusher.model.person;
+package t15b1.taskcrusher.model.task;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -7,17 +7,17 @@ import org.junit.Test;
 
 import t15b1.taskcrusher.model.shared.Description;
 
-public class AddressTest {
+public class DescriptionTest {
 
     @Test
-    public void isValidAddress() {
-        // invalid addresses
+    public void isValidDescription() {
+        // invalid descriptions
         assertFalse(Description.isValidDescription("")); // empty string
         assertFalse(Description.isValidDescription(" ")); // spaces only
 
-        // valid addresses
-        assertTrue(Description.isValidDescription("Blk 456, Den Road, #01-355"));
+        // valid descriptions
+        assertTrue(Description.isValidDescription("To kill a mocking bird"));
         assertTrue(Description.isValidDescription("-")); // one character
-        assertTrue(Description.isValidDescription("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
+        assertTrue(Description.isValidDescription("This should be done after I actually sleep enough")); // long description
     }
 }

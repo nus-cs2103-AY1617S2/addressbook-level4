@@ -89,7 +89,7 @@ public class Config {
         sb.append("\nCurrent log level : " + logLevel);
         sb.append("\nPreference file Location : " + userPrefsFilePath);
         sb.append("\nLocal data file location : " + addressBookFilePath);
-        sb.append("\nAddressBook name : " + userInboxName);
+        sb.append("\nuserInbox name : " + userInboxName);
         return sb.toString();
     }
 

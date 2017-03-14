@@ -12,7 +12,6 @@ import t15b1.taskcrusher.model.shared.Name;
 import t15b1.taskcrusher.model.tag.Tag;
 import t15b1.taskcrusher.model.tag.UniqueTagList;
 import t15b1.taskcrusher.model.task.Deadline;
-import t15b1.taskcrusher.model.task.Email;
 import t15b1.taskcrusher.model.task.Priority;
 import t15b1.taskcrusher.model.task.ReadOnlyTask;
 import t15b1.taskcrusher.model.task.Task;
@@ -49,7 +48,7 @@ public class XmlAdaptedTask {
     public XmlAdaptedTask(ReadOnlyTask source) {
         taskName = source.getTaskName().taskName;
         priority = source.getPriority().value;
-        deadline = source.getDeadline().value;
+        deadline = source.getDeadline().deadline;
         description = source.getDescription().value;
 
         tagged = new ArrayList<>();

@@ -21,7 +21,7 @@ import t15b1.taskcrusher.model.task.ReadOnlyTask;
 import t15b1.taskcrusher.model.task.Task;
 import t15b1.taskcrusher.testutil.TypicalTestPersons;
 
-public class AddressBookTest {
+public class UserInboxTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
