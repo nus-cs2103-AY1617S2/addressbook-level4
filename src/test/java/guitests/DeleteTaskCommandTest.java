@@ -54,24 +54,24 @@ public class DeleteTaskCommandTest extends ToLuistGuiTest {
         commandBox.runCommand(command3);
         Task task3 = new Task(taskDescription3, startDate3, endDate3);
 
-        assertTrue(isTaskShown(task3));
-        assertTrue(isTaskShown(task2));
         assertTrue(isTaskShown(task));
+        assertTrue(isTaskShown(task2));
+        assertTrue(isTaskShown(task3));
 
         commandBox.runCommand("delete 3");
+        assertFalse(isTaskShown(task));
         assertTrue(isTaskShown(task2));
         assertTrue(isTaskShown(task3));
-        assertFalse(isTaskShown(task));
 
         commandBox.runCommand("delete 1");
+        assertFalse(isTaskShown(task));
         assertFalse(isTaskShown(task2));
         assertTrue(isTaskShown(task3));
-        assertFalse(isTaskShown(task));
 
         commandBox.runCommand("delete 1");
+        assertFalse(isTaskShown(task));
         assertFalse(isTaskShown(task2));
         assertFalse(isTaskShown(task3));
-        assertFalse(isTaskShown(task));
     }
 
     public void deleteMultipleTasksTogether(String deleteCommand, int listSize, int... taskIndexesLeft) {

@@ -77,9 +77,6 @@ Format: `update INDEX [NAME] [startdate/STARTDATE] [enddate/ENDDATE] [recurring/
 
 Examples:
 
-* `update 1`<br>
-  Updates the 1st task to be 'completed' if not completed. If it was already completed, update the task to 'not completed'.
-
 * `update 2 Assignment 3 tag/schoolwork`<br>
   Updates the name of the 2nd task to be `Assignment 3` and adds the tag 'schoolwork' if it did not exist. If it already existed, removes the tag 'schoolwork'.
 
@@ -280,10 +277,10 @@ Example:
 * `switch T` <br>
   Switches the displayed view to 'Today'.
 
-### 2.18. Complete or Make Uncomplete a Task : `mark`
+### 2.18. Complete or Make Incomplete a Task : `mark`
 
 Marks a task to be complete or incomplete.
-Format: `mark [complete/uncomplete] INDEX`
+Format: `mark [complete/incomplete] INDEX`
 
 > * Using complete as a parameter will mark the selected task as complete.
 > * Using incomplete as a parameter will mark the selected task as incomplete.
@@ -292,7 +289,7 @@ Format: `mark [complete/uncomplete] INDEX`
 Example:
 * `mark complete 1` <br>
   Marks task 1 as complete.
-* `mark uncomplete 2` <br>
+* `mark incomplete 2` <br>
   Marks task 2 as incomplete.
 * `mark 3` <br>
   Marks task 3 as complete.
@@ -373,9 +370,9 @@ Example:
   e.g. `switch 2` <br>
   e.g. `switch T`
 
-* **Complete or Make Uncomplete a Task** : `mark [complete/uncomplete] INDEX` <br>
+* **Complete or Make Incomplete a Task** : `mark [complete/incomplete] INDEX` <br>
   e.g. `mark complete 1` <br>
-  e.g. `mark uncomplete 2` <br>
+  e.g. `mark incomplete 2` <br>
   e.g. `mark 3`
 
 * **Add a Tag to a Task** : `tag INDEX TAG...` <br>

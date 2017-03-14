@@ -43,7 +43,8 @@ public class MarkController extends Controller {
         HashMap<String, String> tokens = tokenize(command);
         String indexToken = tokens.get(INDEX_TERM);
         String markTypeToken = tokens.get(MARK_TERM);
-        List<Integer> indexes = IndexTokenizer.splitIndexes(indexToken, UiStore.getInstance().getTasks().size());
+        List<Integer> indexes = IndexTokenizer.splitStringToIndexes(indexToken,
+                UiStore.getInstance().getTasks().size());
 
         if (indexes.isEmpty()) {
             return new CommandResult(Messages.MESSAGE_INVALID_TASK_INDEX);
