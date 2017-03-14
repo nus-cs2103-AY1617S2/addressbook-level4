@@ -57,14 +57,14 @@ public class Priority {
         /*int actualValue = Integer.parseInt(trimmedPriority);
 
         if (actualValue < 0) { // means task is completed
-        	this.number = trimmedPriority;
-        	this.value = PRIORITY_LEVEL_DONE;
+            this.number = trimmedPriority;
+            this.value = PRIORITY_LEVEL_DONE;
 
         } else {
 
 
-        	this.value = priorityMap.get(trimmedPriority); // string word
-        	this.number = trimmedPriority; // string number
+            this.value = priorityMap.get(trimmedPriority); // string word
+            this.number = trimmedPriority; // string number
         }
         */
         this.value = trimmedPriority;

@@ -23,7 +23,7 @@ public class RedoCommand extends Command {
      */
     public RedoCommand() {
         /*
-    	final Set<Tag> tagSet = new HashSet<>();
+        final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }

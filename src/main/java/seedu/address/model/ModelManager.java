@@ -69,7 +69,8 @@ public class ModelManager extends ComponentManager implements Model {
      */
     private void recordCurrentStateOfAddressBook() {
         this.currentAddressBookStateIndex++;
-        this.addressBookStates = new ArrayList<AddressBook>(this.addressBookStates.subList(0, this.currentAddressBookStateIndex));
+        this.addressBookStates = 
+                new ArrayList<AddressBook>(this.addressBookStates.subList(0, this.currentAddressBookStateIndex));
         this.addressBookStates.add(new AddressBook(this.currentAddressBook));
     }
 
@@ -194,7 +195,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredListToShowFilteredNonFloatingTasks(Set<String> keywords) {
-        this.nonFloatingTasks.setPredicate(new PredicateExpression(new NameNonFloatingTaskQualifier(keywords))::satisfies);
+        this.nonFloatingTasks.setPredicate(new PredicateExpression(
+                new NameNonFloatingTaskQualifier(keywords))::satisfies);
     }
 
     @Override
@@ -209,9 +211,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
-    	updateFilteredListToShowFilteredNonFloatingTasks(keywords);
-    	updateFilteredListToShowFilteredFloatingTasks(keywords);
-    	updateFilteredListToShowFilteredCompletedTasks(keywords);
+        updateFilteredListToShowFilteredNonFloatingTasks(keywords);
+        updateFilteredListToShowFilteredFloatingTasks(keywords);
+        updateFilteredListToShowFilteredCompletedTasks(keywords);
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
