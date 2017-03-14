@@ -20,7 +20,6 @@ import org.junit.rules.TemporaryFolder;
 
 import com.google.common.eventbus.Subscribe;
 
-import seedu.doit.commons.core.Config;
 import seedu.doit.commons.core.EventsCenter;
 import seedu.doit.commons.events.model.TaskManagerChangedEvent;
 import seedu.doit.commons.events.ui.JumpToListRequestEvent;
@@ -87,7 +86,7 @@ public class LogicManagerTest {
         String tempTaskManagerFile = this.saveFolder.getRoot().getPath() + "TempTaskManager.xml";
         String tempPreferencesFile = this.saveFolder.getRoot().getPath() + "TempPreferences.json";
         this.logic = new LogicManager(this.model,
-                new StorageManager(tempTaskManagerFile, tempPreferencesFile, new Config()));
+                new StorageManager(tempTaskManagerFile, tempPreferencesFile));
         EventsCenter.getInstance().registerHandler(this);
 
         this.latestSavedTaskManager = new TaskManager(this.model.getTaskManager()); // last

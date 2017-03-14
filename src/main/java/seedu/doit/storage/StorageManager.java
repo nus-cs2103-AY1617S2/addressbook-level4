@@ -34,12 +34,14 @@ public class StorageManager extends ComponentManager implements Storage {
         this.config = config;
     }
 
-    public StorageManager(String taskManagerFilePath, String userPrefsFilePath, Config config) {
+    public StorageManager(String taskManagerFilePath, String userPrefsFilePath) {
         this(new XmlTaskManagerStorage(taskManagerFilePath), new JsonUserPrefsStorage(userPrefsFilePath), new Config());
+        this.config.setTaskManagerFilePath(taskManagerFilePath);
+        this.config.setUserPrefsFilePath(userPrefsFilePath);
     }
 
     public StorageManager(Config config) {
-        this(config.getTaskManagerFilePath(), config.getUserPrefsFilePath(), config);
+        this(config.getTaskManagerFilePath(), config.getUserPrefsFilePath());
     }
 
     public Config getConfig() {
@@ -125,7 +127,6 @@ public class StorageManager extends ComponentManager implements Storage {
     @Override
     public void setTaskManagerFilePath(String filePath) {
         this.taskManagerStorage.setTaskManagerFilePath(filePath);
-        ;
     }
 
     @Override

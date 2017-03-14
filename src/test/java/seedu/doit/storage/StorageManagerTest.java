@@ -28,7 +28,7 @@ public class StorageManagerTest {
 
     @Before
     public void setUp() {
-        this.storageManager = new StorageManager(getTempFilePath("ab"), getTempFilePath("prefs"), new Config());
+        this.storageManager = new StorageManager(getTempFilePath("ab"), getTempFilePath("prefs"));
     }
 
     private String getTempFilePath(String fileName) {
