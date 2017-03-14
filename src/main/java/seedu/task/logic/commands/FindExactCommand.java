@@ -4,29 +4,29 @@ import java.util.Set;
 
 public class FindExactCommand extends Command {
 
-    private static final boolean isExact = true;
+  private static final boolean isExact = true;
 
-    public static final String COMMAND_WORD = "findexact";
-    public static final String COMMAND_WORD_SHORTER = "fexact";
-    public static final String COMMAND_WORD_SHORTEST = "finde";
-    public static final String COMMAND_WORD_HOTKEY = "fe";
+  public static final String COMMAND_WORD = "findexact";
+  public static final String COMMAND_WORD_SHORTER = "fexact";
+  public static final String COMMAND_WORD_SHORTEST = "finde";
+  public static final String COMMAND_WORD_HOTKEY = "fe";
 
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks whose names contain all of "
+  public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks whose names contain all of "
             + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " do homework";
 
-    private final Set<String> keywords;
+  private final Set<String> keywords;
 
-    public FindExactCommand(Set<String> keywords) {
-        this.keywords = keywords;
-    }
+  public FindExactCommand(Set<String> keywords) {
+    this.keywords = keywords;
+  }
 
-    @Override
+  @Override
     public CommandResult execute() {
-        model.updateFilteredTaskList(keywords, isExact);
-        return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
-    }
+    model.updateFilteredTaskList(keywords, isExact);
+     return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
+  }
 
 }
