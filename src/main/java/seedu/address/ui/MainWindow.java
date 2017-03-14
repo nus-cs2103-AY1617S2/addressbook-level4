@@ -130,6 +130,7 @@ public class MainWindow extends UiPart<Region> {
         //TODO: show completedTaskPanel when show completed command is implemented
         completedTaskListPanel = new CompletedTaskListPanel(getCompletedTaskListPlaceholder(),taskListCompleted);
     }
+    
     /*
      * Prepares categorised task list for today/future/completed ListView
      * 
@@ -141,7 +142,9 @@ public class MainWindow extends UiPart<Region> {
         ListIterator<ReadOnlyTask> iter = taskList.listIterator();
         while(iter.hasNext()){
             ReadOnlyTask tmpTask = iter.next();
-            if(tmpTask.isToday()){
+            // set task id to be displayed, the id here is 1-based
+            tmpTask.setID(iter.nextIndex());
+            if(tmpTask.isToday() && !tmpTask.isDone()){
                 taskListToday.add(tmpTask);
             }else if(!tmpTask.isDone()){
                 taskListFuture.add(tmpTask);
