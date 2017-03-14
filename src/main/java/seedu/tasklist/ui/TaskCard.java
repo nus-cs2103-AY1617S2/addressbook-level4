@@ -42,15 +42,15 @@ public class TaskCard extends UiPart<Region> {
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
         comment.setText(task.getComment().value);
-        priority.setText(task.getPriority().value);
+        priority.setText("Priority: " + task.getPriority().value);
         initTags(task);
         switch(taskType) {
         case DeadlineTask.TYPE:
-            endDate.setText(((ReadOnlyDeadlineTask) task).getDeadlineString());
+            endDate.setText("Deadline: " + ((ReadOnlyDeadlineTask) task).getDeadlineString());
             break;
         case EventTask.TYPE:
-            startDate.setText(((ReadOnlyEventTask) task).getStartDateString());
-            endDate.setText(((ReadOnlyEventTask) task).getEndDateString());
+            startDate.setText("Start Date: " + ((ReadOnlyEventTask) task).getStartDateString());
+            endDate.setText("End Date: " + ((ReadOnlyEventTask) task).getEndDateString());
             break;
         case FloatingTask.TYPE:
             break;
