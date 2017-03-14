@@ -3,8 +3,8 @@ package seedu.address.model.task;
 import seedu.address.model.tag.UniqueTagList;
 
 public class TaskWithoutDeadline extends Task {
-    public TaskWithoutDeadline(Name name, UniqueTagList tags) {
-        super(name, tags, false);
+    public TaskWithoutDeadline(Name name, UniqueTagList tags, boolean isDone) {
+        super(name, tags, isDone);
     }
 
     public TaskWithoutDeadline(ReadOnlyTask source) {
