@@ -71,7 +71,7 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Title title = new Title("Adam Brown");
-            DateTime privateEndDateTime = new DateTime("2017-04-01T10:16:30");
+            DateTime privateEndDateTime = new DateTime("2017-05-01T10:16:30");
             DateTime startDateTime = new DateTime("2017-04-01T10:16:30");
             Location privateLocation = new Location("111, alpha street");
             Tag tag1 = new Tag("tag1");
@@ -144,7 +144,7 @@ public class LogicManagerTest {
             return new Task(
                     new Title("Person " + seed),
                     new DateTime("2017-04-01T10:16:30"),
-                    new DateTime("2017-04-01T10:16:30"),
+                    new DateTime("2017-05-01T10:16:30"),
                     new Location("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
@@ -190,7 +190,7 @@ public class LogicManagerTest {
             return new Task(
                     new Title(name),
                     new DateTime("2017-04-01T10:16:30"),
-                    new DateTime("2017-04-01T10:16:30"),
+                    new DateTime("2017-05-01T10:16:30"),
                     new Location("House of 1"),
                     new UniqueTagList(new Tag("tag"))
             );
@@ -288,26 +288,21 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add wrong args wrong args",
+        assertCommandFailure("add",
                 expectedMessage);
-        assertCommandFailure("add Valid Name 2017-04-01T10:16:30 e/2017-04-01T10:16:30 l/valid,address",
-                expectedMessage);
-        assertCommandFailure("add Valid Name s/2017-04-01T10:16:30 2017-04-01T10:16:30 l/valid, address",
-                expectedMessage);
-        assertCommandFailure("add Valid Name s/2017-04-01T10:16:30 e/2017-04-01T10:16:30 valid, address",
-                expectedMessage);
+
     }
 
     @Test
     public void execute_add_invalidPersonData() {
-        assertCommandFailure("add []\\[;] s/2017-04-01T10:16:30 e/2017-04-01T10:16:30 l/valid, address",
+        assertCommandFailure("add []\\[;] s/2017-04-01T10:16:30 e/2017-05-01T10:16:30 l/valid, address",
                 Title.MESSAGE_TITLE_CONSTRAINTS);
-        assertCommandFailure("add Valid Name s/not_numbers e/2017-04-01T10:16:30 l/valid, address",
+        assertCommandFailure("add Valid Name s/not_numbers e/2017-05-01T10:16:30 l/valid, address",
                 DateTime.MESSAGE_DATETIME_CONSTRAINTS);
         assertCommandFailure("add Valid Name s/2017-04-01T10:16:30 e/notAnEmail l/valid, address",
                 DateTime.MESSAGE_DATETIME_CONSTRAINTS);
         assertCommandFailure(
-                "add Valid Name s/2017-04-01T10:16:30 e/2017-04-01T10:16:30 l/valid, address t/invalid_-[.tag",
+                "add Valid Name s/2017-04-01T10:16:30 e/2017-05-01T10:16:30 l/valid, address t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
