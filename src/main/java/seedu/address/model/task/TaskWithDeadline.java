@@ -101,4 +101,8 @@ public class TaskWithDeadline extends Task {
                 && cal1.get(Calendar.DAY_OF_YEAR) == cal2
                         .get(Calendar.DAY_OF_YEAR));
     }
+
+    public DateTime getDeadline() {
+        return deadline;
+    }
 }

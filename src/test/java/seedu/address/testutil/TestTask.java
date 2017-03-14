@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.DateTime;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyTask;
 
@@ -60,7 +61,8 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
-        this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
+        this.getTags().asObservableList().stream()
+                .forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
 
@@ -86,5 +88,11 @@ public class TestTask implements ReadOnlyTask {
     public boolean isToday() {
         // TODO Auto-generated method stub
         return false;
+    }
+
+    @Override
+    public DateTime getDeadline() {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

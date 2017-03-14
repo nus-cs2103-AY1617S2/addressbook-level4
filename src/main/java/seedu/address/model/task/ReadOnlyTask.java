@@ -54,4 +54,6 @@ public interface ReadOnlyTask {
     TaskType getTaskType();
 
     String getTaskDateTime();
+
+    DateTime getDeadline();
 }
