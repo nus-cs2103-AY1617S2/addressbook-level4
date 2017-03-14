@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
@@ -52,6 +53,7 @@ public class ArgumentTokenizer {
         prefix.add(PREFIX_NOTE);
         prefix.add(PREFIX_PRIORITY);
         prefix.add(PREFIX_STATUS);
+        prefix.add(PREFIX_DEADLINE);
 
         for (int i = 0; i < positions.size(); i++) {
             prefix.remove(positions.get(i).getPrefix());
@@ -60,6 +62,8 @@ public class ArgumentTokenizer {
         for (int i = 0; i < prefix.size(); i++) {
             if (prefix.get(i).equals(PREFIX_PRIORITY)) {
                 saveArgument(prefix.get(i), "none");
+            } else if (prefix.get(i).equals(PREFIX_DEADLINE)) {
+                saveArgument(prefix.get(i), "31/12/2017");
             } else {
                 saveArgument(prefix.get(i), "");
             }
