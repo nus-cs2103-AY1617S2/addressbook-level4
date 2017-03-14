@@ -37,12 +37,13 @@ public class TaskCard extends UiPart<Region> {
         startDate.setText(task.getStartDate().toString());
         endDate.setText(task.getEndDate().toString());
         loc.setText(task.getLocation().value);
-        if(task.isDone()==true)
-        	done.setText("Done");
-        else
-        	done.setText("Not Done");
-        remark.setText(task.getRemark().value);
-        initTags(task);
+        if (task.isDone() == true) {
+            done.setText("Done");
+        } else {
+            done.setText("Not Done");
+            remark.setText(task.getRemark().value);
+            initTags(task);
+        }
     }
 
     private void initTags(ReadOnlyTask task) {

@@ -147,7 +147,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         }
     }
 
-    
+
 //// tag-level operations
 
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
@@ -186,11 +186,9 @@ public class TaskManager implements ReadOnlyTaskManager {
         return Objects.hash(tasks, tags);
     }
 
-	public void updateDone(int index, ReadOnlyTask target) {
-		// TODO Auto-generated method stub
-		tasks.done(index);
-		
-	}
+    public void updateDone(int index, ReadOnlyTask target) {
+    // TODO Auto-generated method stub
+        tasks.done(index);
+    }
 
-	
 }

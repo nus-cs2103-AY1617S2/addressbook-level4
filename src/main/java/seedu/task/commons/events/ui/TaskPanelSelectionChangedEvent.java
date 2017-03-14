@@ -1,6 +1,5 @@
 package seedu.task.commons.events.ui;
 
-
 import seedu.task.commons.events.BaseEvent;
 import seedu.task.model.task.ReadOnlyTask;
 

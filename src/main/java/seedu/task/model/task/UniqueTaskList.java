@@ -63,13 +63,13 @@ public class UniqueTaskList implements Iterable<Task> {
         // Then, TaskCard should then bind its text labels to those observable properties.
         internalList.set(index, taskToUpdate);
     }
-    
+
     public void done(int index) {
-		// TODO Auto-generated method stub
-    	Task taskDone = internalList.get(index);
-		taskDone.setIsDone(true);
-		internalList.set(index, taskDone);
-	}
+    // TODO Auto-generated method stub
+        Task taskDone = internalList.get(index);
+        taskDone.setIsDone(true);
+        internalList.set(index, taskDone);
+    }
 
 
     /**
@@ -85,8 +85,7 @@ public class UniqueTaskList implements Iterable<Task> {
         }
         return taskFoundAndDeleted;
     }
-    
-    
+
 
     public void setTasks(UniqueTaskList replacement) {
         this.internalList.setAll(replacement.internalList);
@@ -137,5 +136,4 @@ public class UniqueTaskList implements Iterable<Task> {
      */
     public static class TaskNotFoundException extends Exception {}
 
-	
 }

@@ -11,6 +11,7 @@ import seedu.task.logic.commands.ClearCommand;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.DeleteCommand;
 import seedu.task.logic.commands.EditCommand;
+import seedu.task.logic.commands.EditIsDoneCommand;
 import seedu.task.logic.commands.ExitCommand;
 import seedu.task.logic.commands.FindCommand;
 import seedu.task.logic.commands.HelpCommand;
@@ -19,7 +20,7 @@ import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.logic.commands.ListByTagCommand;
 import seedu.task.logic.commands.ListCommand;
 import seedu.task.logic.commands.SelectCommand;
-import seedu.task.logic.commands.EditIsDoneCommand;
+
 
 /**
  * Parses user input.
@@ -49,9 +50,9 @@ public class Parser {
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
-            
+
         case EditIsDoneCommand.COMMAND_WORD:
-        	return new EditIsDoneParser().parse(arguments);
+            return new EditIsDoneParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);

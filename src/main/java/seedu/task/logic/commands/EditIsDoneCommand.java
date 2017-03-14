@@ -7,8 +7,8 @@ import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 public class EditIsDoneCommand extends Command {
-	
-	public static final String COMMAND_WORD = "done";
+
+    public static final String COMMAND_WORD = "done";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": the task identified by the index number used in the last task listing.\n"
@@ -35,7 +35,7 @@ public class EditIsDoneCommand extends Command {
 
         ReadOnlyTask updatedTaskDone = lastShownList.get(targetIndex - 1);
         try {
-            model.IsDoneTask(targetIndex-1,updatedTaskDone);
+            model.IsDoneTask(targetIndex - 1, updatedTaskDone);
         } catch (TaskNotFoundException pnfe) {
             assert false : "The target task cannot be missing";
         }
