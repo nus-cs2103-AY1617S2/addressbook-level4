@@ -16,8 +16,8 @@ import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainGuiHandle;
 import guitests.guihandles.MainMenuHandle;
-import guitests.guihandles.TaskCardHandle;
-import guitests.guihandles.TaskListPanelHandle;
+import guitests.guihandles.PersonCardHandle;
+import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import javafx.application.Platform;
 import javafx.stage.Stage;
@@ -27,12 +27,12 @@ import seedu.task.commons.events.BaseEvent;
 import seedu.task.model.TaskManager;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.testutil.TestUtil;
-import seedu.task.testutil.TypicalTestTasks;
+import seedu.task.testutil.TypicalTestPersons;
 
 /**
  * A GUI Test class for TaskManager.
  */
-public abstract class TaskManagerGuiTest {
+public abstract class AddressBookGuiTest {
 
     /* The TestName Rule makes the current test name available inside test methods */
     @Rule
@@ -40,7 +40,7 @@ public abstract class TaskManagerGuiTest {
 
     TestApp testApp;
 
-    protected TypicalTestTasks td = new TypicalTestTasks();
+    protected TypicalTestPersons td = new TypicalTestPersons();
 
     /*
      *   Handles to GUI elements present at the start up are created in advance
@@ -48,7 +48,7 @@ public abstract class TaskManagerGuiTest {
      */
     protected MainGuiHandle mainGui;
     protected MainMenuHandle mainMenu;
-    protected TaskListPanelHandle taskListPanel;
+    protected PersonListPanelHandle personListPanel;
     protected ResultDisplayHandle resultDisplay;
     protected CommandBoxHandle commandBox;
     protected BrowserPanelHandle browserPanel;
@@ -69,7 +69,7 @@ public abstract class TaskManagerGuiTest {
         FxToolkit.setupStage((stage) -> {
             mainGui = new MainGuiHandle(new GuiRobot(), stage);
             mainMenu = mainGui.getMainMenu();
-            taskListPanel = mainGui.getPersonListPanel();
+            personListPanel = mainGui.getPersonListPanel();
             resultDisplay = mainGui.getResultDisplay();
             commandBox = mainGui.getCommandBox();
             browserPanel = mainGui.getBrowserPanel();
@@ -88,7 +88,7 @@ public abstract class TaskManagerGuiTest {
      */
     protected TaskManager getInitialData() {
         TaskManager ab = new TaskManager();
-        TypicalTestTasks.loadTaskManagerWithSampleData(ab);
+        TypicalTestPersons.loadTaskManagerWithSampleData(ab);
         return ab;
     }
 
@@ -107,7 +107,7 @@ public abstract class TaskManagerGuiTest {
     /**
      * Asserts the person shown in the card is same as the given person
      */
-    public void assertMatching(ReadOnlyTask person, TaskCardHandle card) {
+    public void assertMatching(ReadOnlyTask person, PersonCardHandle card) {
         assertTrue(TestUtil.compareCardAndPerson(card, person));
     }
 
@@ -115,7 +115,7 @@ public abstract class TaskManagerGuiTest {
      * Asserts the size of the person list is equal to the given number.
      */
     protected void assertListSize(int size) {
-        int numberOfPeople = taskListPanel.getNumberOfPeople();
+        int numberOfPeople = personListPanel.getNumberOfPeople();
         assertEquals(size, numberOfPeople);
     }
 

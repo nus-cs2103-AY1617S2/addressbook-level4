@@ -19,16 +19,6 @@ public class CompletionStatus {
         this.status = completionStatus;
     }
 
-    /**
-     * @return the status
-     */
-    public boolean getStatus() {
-        return status;
-    }
-
-    /**
-     * Changes status of CompletionStatus to the opposite of its previous value i.e false to true
-     */
     public void swapStatus() {
         this.status = !this.status;
     }

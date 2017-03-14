@@ -16,7 +16,7 @@ import org.testfx.api.FxToolkit;
 
 import com.google.common.io.Files;
 
-import guitests.guihandles.TaskCardHandle;
+import guitests.guihandles.PersonCardHandle;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -75,15 +75,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Name("Ali Muster"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus(false), new UniqueTagList()),
-                new Task(new Name("Boris Mueller"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus(false), new UniqueTagList()),
-                new Task(new Name("Carl Kurz"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus(false), new UniqueTagList()),
-                new Task(new Name("Daniel Meier"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus(false), new UniqueTagList()),
-                new Task(new Name("Elle Meyer"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus(false), new UniqueTagList()),
-                new Task(new Name("Fiona Kunz"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus(false), new UniqueTagList()),
-                new Task(new Name("George Best"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus(false), new UniqueTagList()),
-                new Task(new Name("Hoon Meier"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus(false), new UniqueTagList()),
-                new Task(new Name("Ida Mueller"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus(false), new UniqueTagList())
+                new Task(new Name("Ali Muster"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus("4th street"), new UniqueTagList()),
+                new Task(new Name("Boris Mueller"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus("81th street"), new UniqueTagList()),
+                new Task(new Name("Carl Kurz"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus("wall street"), new UniqueTagList()),
+                new Task(new Name("Daniel Meier"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus("10th street"), new UniqueTagList()),
+                new Task(new Name("Elle Meyer"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus("michegan ave"), new UniqueTagList()),
+                new Task(new Name("Fiona Kunz"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus("little tokyo"), new UniqueTagList()),
+                new Task(new Name("George Best"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus("4th street"), new UniqueTagList()),
+                new Task(new Name("Hoon Meier"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus("little india"), new UniqueTagList()),
+                new Task(new Name("Ida Mueller"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus("chicago ave"), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -285,10 +285,10 @@ public class TestUtil {
      * @param personsToRemove The subset of persons.
      * @return The modified persons after removal of the subset from persons.
      */
-    public static TestTask[] removeTasksFromList(final TestTask[] persons, TestTask... personsToRemove) {
-        List<TestTask> listOfTasks = asList(persons);
-        listOfTasks.removeAll(asList(personsToRemove));
-        return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
+    public static TestPerson[] removePersonsFromList(final TestPerson[] persons, TestPerson... personsToRemove) {
+        List<TestPerson> listOfPersons = asList(persons);
+        listOfPersons.removeAll(asList(personsToRemove));
+        return listOfPersons.toArray(new TestPerson[listOfPersons.size()]);
     }
 
 
@@ -297,19 +297,19 @@ public class TestUtil {
      * @param list original list to copy from
      * @param targetIndexInOneIndexedFormat e.g. index 1 if the first element is to be removed
      */
-    public static TestTask[] removeTaskFromList(final TestTask[] list, int targetIndexInOneIndexedFormat) {
-        return removeTasksFromList(list, list[targetIndexInOneIndexedFormat - 1]);
+    public static TestPerson[] removePersonFromList(final TestPerson[] list, int targetIndexInOneIndexedFormat) {
+        return removePersonsFromList(list, list[targetIndexInOneIndexedFormat - 1]);
     }
 
     /**
      * Replaces persons[i] with a person.
      * @param persons The array of persons.
-     * @param task The replacement person
+     * @param person The replacement person
      * @param index The index of the person to be replaced.
      * @return
      */
-    public static TestTask[] replaceTaskFromList(TestTask[] persons, TestTask task, int index) {
-        persons[index] = task;
+    public static TestPerson[] replacePersonFromList(TestPerson[] persons, TestPerson person, int index) {
+        persons[index] = person;
         return persons;
     }
 
@@ -319,10 +319,10 @@ public class TestUtil {
      * @param personsToAdd The persons that are to be appended behind the original array.
      * @return The modified array of persons.
      */
-    public static TestTask[] addTasksToList(final TestTask[] persons, TestTask... personsToAdd) {
-        List<TestTask> listOfTasks = asList(persons);
-        listOfTasks.addAll(asList(personsToAdd));
-        return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
+    public static TestPerson[] addPersonsToList(final TestPerson[] persons, TestPerson... personsToAdd) {
+        List<TestPerson> listOfPersons = asList(persons);
+        listOfPersons.addAll(asList(personsToAdd));
+        return listOfPersons.toArray(new TestPerson[listOfPersons.size()]);
     }
 
     private static <T> List<T> asList(T[] objs) {
@@ -333,7 +333,7 @@ public class TestUtil {
         return list;
     }
 
-    public static boolean compareCardAndPerson(TaskCardHandle card, ReadOnlyTask person) {
+    public static boolean compareCardAndPerson(PersonCardHandle card, ReadOnlyTask person) {
         return card.isSamePerson(person);
     }
 

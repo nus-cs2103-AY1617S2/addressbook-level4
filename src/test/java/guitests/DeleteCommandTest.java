@@ -5,26 +5,26 @@ import static seedu.task.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUCCES
 
 import org.junit.Test;
 
-import seedu.task.testutil.TestTask;
+import seedu.task.testutil.TestPerson;
 import seedu.task.testutil.TestUtil;
 
-public class DeleteCommandTest extends TaskManagerGuiTest {
+public class DeleteCommandTest extends AddressBookGuiTest {
 
     @Test
     public void delete() {
 
         //delete the first in the list
-        TestTask[] currentList = td.getTypicalTasks();
+        TestPerson[] currentList = td.getTypicalPersons();
         int targetIndex = 1;
         assertDeleteSuccess(targetIndex, currentList);
 
         //delete the last in the list
-        currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
+        currentList = TestUtil.removePersonFromList(currentList, targetIndex);
         targetIndex = currentList.length;
         assertDeleteSuccess(targetIndex, currentList);
 
         //delete from the middle of the list
-        currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
+        currentList = TestUtil.removePersonFromList(currentList, targetIndex);
         targetIndex = currentList.length / 2;
         assertDeleteSuccess(targetIndex, currentList);
 
@@ -39,17 +39,17 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
      * @param targetIndexOneIndexed e.g. index 1 to delete the first person in the list,
      * @param currentList A copy of the current list of persons (before deletion).
      */
-    private void assertDeleteSuccess(int targetIndexOneIndexed, final TestTask[] currentList) {
-        TestTask taskToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
-        TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList, targetIndexOneIndexed);
+    private void assertDeleteSuccess(int targetIndexOneIndexed, final TestPerson[] currentList) {
+        TestPerson personToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
+        TestPerson[] expectedRemainder = TestUtil.removePersonFromList(currentList, targetIndexOneIndexed);
 
         commandBox.runCommand("delete " + targetIndexOneIndexed);
 
         //confirm the list now contains all previous persons except the deleted person
-        assertTrue(taskListPanel.isListMatching(expectedRemainder));
+        assertTrue(personListPanel.isListMatching(expectedRemainder));
 
         //confirm the result message is correct
-        assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
+        assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, personToDelete));
     }
 
 }

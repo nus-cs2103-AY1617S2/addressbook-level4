@@ -46,7 +46,7 @@ public class AddCommandParser {
             if (args.contains("c/")) {
                 completionStatus = argsTokenizer.getValue(PREFIX_COMPLETIONSTATUS).get();
             }
-            if (args.contains("#")) {
+            if (args.contains("t/")) {
                 tagSet = ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG));
             }
 

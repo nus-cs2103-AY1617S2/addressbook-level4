@@ -188,10 +188,10 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-//this is now a valid add assertCommandFailure("add wrong args wrong args", expectedMessage);
-//task are allowed to not have start date        assertCommandFailure("add Valid Name no start prefix 090917 0000 e/090917 0000 c/true", expectedMessage);
-//tasks are allowed to not have end date        assertCommandFailure("add Valid Name no end prefix s/090917 0000 090917 0000 c/true", expectedMessage);
-//tasks are allowed to not have completionStatus defined by user        assertCommandFailure("add Valid Name no completion prefix s/090917 0000 e/090917 0000 true", expectedMessage);
+        assertCommandFailure("add wrong args wrong args", expectedMessage);
+        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid,address", expectedMessage);
+        assertCommandFailure("add Valid Name p/12345 valid@email.butNoPrefix a/valid, address", expectedMessage);
+        assertCommandFailure("add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
     }
 
     @Test
@@ -418,7 +418,7 @@ public class LogicManagerTest {
             Name name = new Name("Adam Brown");
             StartTime privatePhone = new StartTime("111211 0909");
             EndTime email = new EndTime("111211 0909");
-            CompletionStatus privateAddress = new CompletionStatus(false);
+            CompletionStatus privateAddress = new CompletionStatus("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
@@ -437,7 +437,7 @@ public class LogicManagerTest {
                     new Name("Task " + seed),
                     new StartTime("111211 0909"),
                     new EndTime("111211 0909"),
-                    new CompletionStatus(false),
+                    new CompletionStatus("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -536,7 +536,7 @@ public class LogicManagerTest {
                     new Name(name),
                     new StartTime("121112 0000"),
                     new EndTime("121112 0000"),
-                    new CompletionStatus(false),
+                    new CompletionStatus("House of 1"),
                     new UniqueTagList(new Tag("tag"))
             );
         }

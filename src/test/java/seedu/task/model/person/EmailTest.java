@@ -1,21 +1,23 @@
-package seedu.task.model.task;
+package seedu.task.model.person;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-public class EndTimeTest {
+import seedu.task.model.task.EndTime;
+
+public class EmailTest {
 
     @Test
-    public void isValidEndTime() {
+    public void isValidEmail() {
         // blank email
         //        assertFalse(EndTime.isValidTime("")); // empty string
         //        assertFalse(EndTime.isValidTime(" ")); // spaces only
 
         // missing parts
-        assertFalse(EndTime.isValidTime("2359")); // missing date part
-        assertFalse(EndTime.isValidTime("270717")); // missing time part
+        assertFalse(EndTime.isValidTime("@webmail.com")); // missing local part
+        assertFalse(EndTime.isValidTime("peterjackwebmail.com")); // missing '@' symbol
         assertFalse(EndTime.isValidTime("peterjack@")); // missing domain name
 
         // invalid parts

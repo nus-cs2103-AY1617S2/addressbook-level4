@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import seedu.task.model.task.ReadOnlyTask;
 
-public class SelectCommandTest extends TaskManagerGuiTest {
+public class SelectCommandTest extends AddressBookGuiTest {
 
 
     @Test
@@ -16,7 +16,7 @@ public class SelectCommandTest extends TaskManagerGuiTest {
         assertNoPersonSelected();
 
         assertSelectionSuccess(1); // first person in the list
-        int personCount = td.getTypicalTasks().length;
+        int personCount = td.getTypicalPersons().length;
         assertSelectionSuccess(personCount); // last person in the list
         int middleIndex = personCount / 2;
         assertSelectionSuccess(middleIndex); // a person in the middle of the list
@@ -46,14 +46,14 @@ public class SelectCommandTest extends TaskManagerGuiTest {
     }
 
     private void assertPersonSelected(int index) {
-        assertEquals(taskListPanel.getSelectedPersons().size(), 1);
-        ReadOnlyTask selectedPerson = taskListPanel.getSelectedPersons().get(0);
-        assertEquals(taskListPanel.getPerson(index - 1), selectedPerson);
+        assertEquals(personListPanel.getSelectedPersons().size(), 1);
+        ReadOnlyTask selectedPerson = personListPanel.getSelectedPersons().get(0);
+        assertEquals(personListPanel.getPerson(index - 1), selectedPerson);
         //TODO: confirm the correct page is loaded in the Browser Panel
     }
 
     private void assertNoPersonSelected() {
-        assertEquals(taskListPanel.getSelectedPersons().size(), 0);
+        assertEquals(personListPanel.getSelectedPersons().size(), 0);
     }
 
 }

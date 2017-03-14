@@ -9,22 +9,22 @@ import seedu.task.model.task.UniqueTaskList;
 /**
  * A utility class to help with building Addressbook objects.
  * Example usage: <br>
- *     {@code TaskManager ab = new TaskManagerBuilder().withPerson("John", "Doe").withTag("Friend").build();}
+ *     {@code TaskManager ab = new AddressBookBuilder().withPerson("John", "Doe").withTag("Friend").build();}
  */
-public class TaskManagerBuilder {
+public class AddressBookBuilder {
 
     private TaskManager taskManager;
 
-    public TaskManagerBuilder(TaskManager taskManager) {
+    public AddressBookBuilder(TaskManager taskManager) {
         this.taskManager = taskManager;
     }
 
-    public TaskManagerBuilder withTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+    public AddressBookBuilder withTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTask(task);
         return this;
     }
 
-    public TaskManagerBuilder withTag(String tagName) throws IllegalValueException {
+    public AddressBookBuilder withTag(String tagName) throws IllegalValueException {
         taskManager.addTag(new Tag(tagName));
         return this;
     }

@@ -18,7 +18,7 @@ import seedu.task.model.ReadOnlyTaskManager;
 import seedu.task.model.TaskManager;
 import seedu.task.model.UserPrefs;
 import seedu.task.testutil.EventsCollector;
-import seedu.task.testutil.TypicalTestTasks;
+import seedu.task.testutil.TypicalTestPersons;
 
 public class StorageManagerTest {
 
@@ -54,27 +54,27 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void taskManagerReadSave() throws Exception {
+    public void addressBookReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link XmlTaskManagerStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link XmlTaskManagerStorageTest} class.
+         * More extensive testing of UserPref saving/reading is done in {@link XmlAddressBookStorageTest} class.
          */
-        TaskManager original = new TypicalTestTasks().getTypicalTaskManager();
+        TaskManager original = new TypicalTestPersons().getTypicalTaskManager();
         storageManager.saveTaskManager(original);
         ReadOnlyTaskManager retrieved = storageManager.readTaskManager().get();
         assertEquals(original, new TaskManager(retrieved));
     }
 
     @Test
-    public void getTaskManagerFilePath() {
+    public void getAddressBookFilePath() {
         assertNotNull(storageManager.getTaskManagerFilePath());
     }
 
     @Test
-    public void handleTaskManagerChangedEvent_exceptionThrown_eventRaised() throws IOException {
+    public void handleAddressBookChangedEvent_exceptionThrown_eventRaised() throws IOException {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
-        Storage storage = new StorageManager(new XmlTaskManagerStorageExceptionThrowingStub("dummy"),
+        Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub("dummy"),
                 new JsonUserPrefsStorage("dummy"));
         EventsCollector eventCollector = new EventsCollector();
         storage.handleTaskManagerChangedEvent(new TaskManagerChangedEvent(new TaskManager()));
@@ -85,14 +85,14 @@ public class StorageManagerTest {
     /**
      * A Stub class to throw an exception when the save method is called
      */
-    class XmlTaskManagerStorageExceptionThrowingStub extends XmlTaskManagerStorage {
+    class XmlAddressBookStorageExceptionThrowingStub extends XmlTaskManagerStorage {
 
-        public XmlTaskManagerStorageExceptionThrowingStub(String filePath) {
+        public XmlAddressBookStorageExceptionThrowingStub(String filePath) {
             super(filePath);
         }
 
         @Override
-        public void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException {
+        public void saveTaskManager(ReadOnlyTaskManager addressBook, String filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }
