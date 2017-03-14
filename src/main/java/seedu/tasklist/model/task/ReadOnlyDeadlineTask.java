@@ -14,6 +14,7 @@ public interface ReadOnlyDeadlineTask extends ReadOnlyTask {
     Name getName();
     Comment getComment();
     Date getDeadline();
+    String getDeadlineString();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
