@@ -34,16 +34,16 @@ Please refer to the [Setting up](DeveloperGuide.md#setting-up) section to learn 
 > * Items with `...` after them can have multiple instances.
 > * Parameters can be in any order.
 
-### 2.1. Viewing help : `help`
+### 2.1. Viewing help : `HELP`
 
 Format: `help`
 
 > * Help is also shown if you enter an incorrect command e.g. `abcd`
 
-### 2.2. Adding a task: `add`
+### 2.2. Adding a task: `ADD`
 
 Adds a task to DoOrDie<br />
-Format: `add TASKNAME [#LABEL...] ([(by|on) DEADLINE] | [from START_DATE to END_DATE]) [repeat (hourly|daily|weekly|monthly|yearly)]`
+Format: `ADD TASKNAME [#LABEL...] ([BY DEADLINE] | [FROM START_DATE TO END_DATE]) [repeat (hourly|daily|weekly|monthly|yearly)]`
 
 > * Tasks can have a deadline, or can do without one as well.
 >   * Tasks added without specifying a deadline will be displayed under "No Deadline".
@@ -56,58 +56,58 @@ Format: `add TASKNAME [#LABEL...] ([(by|on) DEADLINE] | [from START_DATE to END_
 >     * e.g. `Monday 3pm`, `today 1930`, `5:30pm`, `10.00 am`
 > * Recurring task will have the same deadline if `daily/weekly/monthly/yearly` is used
 > * Tasks can have any number of label name. (including 0).
-> * Using the `add` command without specifying `task` will interpret the command as `add task`.
+> * The `ADD ` command adds tasks without specifying `task`.
 
 Examples:
 
- * `add CS2106 Mid terms`
- * `add CS2103 V0.0 by tmr #module`
- * `add task Make baby by next wednesday`
- * `add task Go to school repeat daily`
+ * `ADD CS2106 Mid terms`
+ * `ADD CS2103 V0.0 BY tmr #module`
+ * `ADD Make baby BY next wednesday`
+ * `ADD go to school repeat daily`
 
-### 2.3 Listing all tasks : `list`
+### 2.3 Listing all tasks : `LIST`
 
 Shows a list of all tasks in DoOrDie. Able to filter by type of task (task), or based on status of task such as completed or outstanding.
 
-Format: `list [TYPE]`
+Format: `LIST [TYPE]`
 
 > Valid parameters for TYPE:
 > * `tasks` / `task`
-> * `complete` / `completed`
-> * `incomplete` / `outstanding`
-> * `overdue` / `over`
-> * `by DATE`
-> * `from STARTDATE to ENDDATE`
-> * `bookings` / `booking`
+> * `Complete` / `Completed`
+> * `Incomplete` / `Outstanding`
+> * `Overdue` / `Over`
+> * `BY DATE`
+> * `FROM STARTDATE TO ENDDATE`
+> * `BOOKINGS` / `BOOKING`
 
 Examples:
 
-* `list`<br />
+* `LIST`<br />
  Lists all tasks.
 
-* `list overdue tasks`<br />
+* `LIST Overdue`<br />
  Lists all overdue tasks
 
-* `list outstanding tasks`<br />
+* `LIST Outstanding`<br />
  Lists all outstanding tasks
 
-* `list completed tasks`<br />
+* `LIST Completed`<br />
  Lists all completed tasks
 
-* `list by today`<br />
+* `LIST BY today`<br />
  Lists all tasks due by today
 
-* `list from monday to friday`<br />
+* `LIST FROM monday TO friday`<br />
  Lists all tasks due within Monday-Friday
 
-* `list bookings`<br />
+* `LIST BOOKINGS`<br />
  Lists all unconfirmed tasks with their respective bookings
 
-### 2.4. Editing a task : `update`
+### 2.4. Editing a task : `UPDATE`
 
 Edits the specified task's details.
 
-Format:`update [TASK_ID] [TASKNAME] [#LABEL...] ([(by|on) DATE] | [from START_DATE to END_DATE]) [done]`
+Format:`UPDATE [TASK_ID] [TASKNAME] [#LABEL...] ([BY DATE] | [FROM START_DATE TO END_DATE]) [done]`
 
 > * Edits the task with the `TASK_ID`
     The index refers to the id of the task.<br />
@@ -120,48 +120,49 @@ Format:`update [TASK_ID] [TASKNAME] [#LABEL...] ([(by|on) DATE] | [from START_DA
 
 Examples:
 
-* `update CS2106Assignment label`<br />
+* `UPDATE CS2106Assignment label`<br />
   Edits the name of the currently selected task to be `CS2106Assignment` and clears all existing labels.
 
-* `update 1 label tedious work by thursday`<br />
+* `UPDATE 1 label tedious work BY thursday`<br />
   Edits the label and deadline of the task with id 1 to be `tedious work` and deadline to `Thursday` respectively.
 
-### 2.5. Finding all task containing any keyword in task name and labels : `find`
+### 2.5. Finding all task containing any keyword in task name and labels : `FIND`
 
 Finds tasks whose name and labels containing any of the specified keywords.
 
-Format: `find [TYPE] KEYWORD [MORE_KEYWORDS]...`
+Format: `FIND [TYPE] KEYWORD [MORE_KEYWORDS]...`
 
 > Valid parameters:
 > * `TaskName`
 > * `LabelName`
 > * `Complete` / `Completed`
 > * `Incomplete` / `Outstanding`
+> * `BY DATE`
 > * `DATE`
-> * `from STARTDATE to ENDDATE`
+> * `FROM STARTDATE TO ENDDATE`
 
 > * The search is case insensitive and the order of the keywords does not matter.
 > * Task names, label names will be searched, and tasks with at least one keyword match will be return and display to user.
 
 Examples:
 
-* `find CS2103`<br />
+* `FIND CS2103`<br />
 Returns all task containing the keyword or label containing `CS2103` & `cs2103`.
 
-* `find project`<br />
+* `FIND project`<br />
 Returns all task with the name containing `project` & `Project`.
 
-* `find glocery`<br />
+* `FIND glocery`<br />
 Returns all task with the label name containing `glocery` & `Glocery`.
 
-* `find project glocery`<br />
+* `FIND project glocery`<br />
 Returns all tasks having name or label name containing `project`, `Project`,  `glocery`, `Glocery`.
 
-### 2.6. Deleting a task : `delete`
+### 2.6. Deleting a task : `DELETE`
 
 Deletes the specified task from the task manager. Reversible via undo command.
 
-Format: `delete [INDEX|LABEL]`
+Format: `DELETE [INDEX|LABEL]`
 
 > * Deletes the task at the specified `INDEX` or all task with `LABEL`. <br />
 > * The index refers to the index of the task in the display list.
@@ -170,17 +171,17 @@ Format: `delete [INDEX|LABEL]`
 
 Examples:
 
-* `delete`<br />
+* `DELETE`<br />
   Deletes the currently selected task in DoOrDie.
-* `delete 2`<br />
+* `DELETE 2`<br />
   Deletes the task with the id `2` in the DoOrDie.
-* `delete school`<br />
+* `DELETE school`<br />
   Deletes all task with the label `school`.
 
-### 2.7. Select a Task : `select`
+### 2.7. Select a Task : `SELECT`
 
 Selects the task identified by its `id`<br />
-Format: `select TASK_ID`
+Format: `SELECT TASK_ID`
 
 > * Selects the task and loads the saved links/attachments/details of `TASK_ID`.<br />
 > * The index refers to the id of the task.<br />
@@ -188,13 +189,13 @@ Format: `select TASK_ID`
 
 Examples:
 
-* `select 2`<br />
+* `SELECT 2`<br />
   Selects the task of id 2
 
-### 2.8. Add a booking : `book`
+### 2.8. Add a booking : `BOOK`
 
 Reserve time slots for a certain task that has not been confirmed yet.<br />
-Format: `book TASKNAME [#LABEL...] , DATE, [MORE_DATES]...`
+Format: `BOOK TASKNAME [#LABEL...] ON DATE, DATE, [MORE_DATES]...`
 
 > * Date formats can be flexible. The application is able to parse commonly-used human-readable date formats.
 >   * e.g. `Monday`, `next wed`, `tomorrow`, `5 days after`, `4 Apr` etc.
@@ -208,13 +209,13 @@ Format: `book TASKNAME [#LABEL...] , DATE, [MORE_DATES]...`
 
 Examples:
 
-* `book CS2103 Meeting 1/1/2017 4pm, 2/1/2017 8pm`<br />
+* `BOOK CS2103 Meeting ON 1/1/2017 4pm, 2/1/2017 8pm`<br />
   Reserves time slots on the 1st January 2017 4pm and 2nd January 8pm for CS2103 Meeting
 
-### 2.9. Confirm a booking : `confirm`
+### 2.9. Confirm a booking : `CONFIRM`
 
 Confirm booking of a task and releases other bookings for the confirmed task.<br />
-Format: `confirm TASK_ID (SLOT_NUMBER|DATE)`
+Format: `CONFIRM TASK_ID (SLOT_NUMBER|DATE)`
 
 > * DATE specified should be one of the bookings that has been made
 > * SLOT_NUMBER will be respective to the dates added in that order
@@ -223,49 +224,49 @@ Format: `confirm TASK_ID (SLOT_NUMBER|DATE)`
 
 Examples:
 
-* `book CS2103 Meeting 1/1/2017 4pm, 2/1/2017 8pm`<br />
-  `confirm 1 1/1/2017 4pm`<br />
+* `BOOK CS2103 Meeting ON 1/1/2017 4pm, 2/1/2017 8pm`<br />
+  `CONFIRM 1 1/1/2017 4pm`<br />
   Confirms the task CS2103 Meeting for 1st January 2017 4pm and releases 2nd January 2017 8pm slot for other tasks
-* `book CS2103 Meeting 1/1/2017 4pm, 2/1/2017 8pm`<br />
-  `confirm 1 1`<br />
+* `BOOK CS2103 Meeting 1/1/2017 4pm, 2/1/2017 8pm`<br />
+  `CONFIRM 1 1`<br />
   Confirms the task CS2103 Meeting for 1st January 2017 4pm and releases 2nd January 2017 8pm slot for other tasks
 
-### 2.10. Edit a label : `editlabel`
+### 2.10. Edit a label : `EDITLABEL`
 
 Renames a specific label to another label<br />
-Format: `editlabel OLD_LABEL NEW_LABEL`
+Format: `EDITLABEL OLD_LABEL NEW_LABEL`
 
 > * Label names must be alphanumberic
 
 Examples:
 
-* `editlabel friends oldfriends`<br />
+* `EDITLABEL friends oldfriends`<br />
   Renames all task with the tag `friends` to `oldfriends`.
 
-### 2.11. Undo the previously executed command : `undo`
+### 2.11. Undo the previously executed command : `UNDO`
 
 Revert results of a previously executed command. If the previously executed command does not modify the data of DoOrDie, nothing will be reverted.<br />
-Format: `undo`
+Format: `UNDO`
 
-### 2.12. Clearing all entries : `clear`
+### 2.12. Clearing all entries : `CLEAR`
 
 Clears all entries from DoOrDie.<br />
-Format: `clear`
+Format: `CLEAR`
 
-### 2.13. Push task changes to Google Calendar : `push`
+### 2.13. Push task changes to Google Calendar : `PUSH`
 
 Updates `Google Calendar` with newly added/modified tasks. Priority goes to `DoOrDie` if there is a conflict.<br />
-Format: `push`
+Format: `PUSH`
 
-### 2.14. Pull task changes from Google Calendar : `pull`
+### 2.14. Pull task changes from Google Calendar : `PULL`
 
 Downloads data from Google Calendar. Priority goes to `Google Calendar` if there is a conflict.<br />
-Format: `pull`
+Format: `PULL`
 
-### 2.15. Export agenda to PDF file : `export`
+### 2.15. Export agenda to PDF file : `EXPORT`
 
 Saves a PDF format with all tasks and details to the same directory as `doordie.jar`.<br />
-Format: `export [DATE|START_DATE to END_DATE]`
+Format: `EXPORT [DATE | FROM START_DATE TO END_DATE]`
 
 > * If no date is specified, the default date will be today's date
 > * Date formats can be flexible. The application is able to parse commonly-used human-readable date formats.
@@ -278,15 +279,15 @@ Format: `export [DATE|START_DATE to END_DATE]`
 
 Examples:
 
-* `export today`<br />
+* `EXPORT today`<br />
   Saves a PDF with tasks and details of today
-* `export 2nd Feb to 9th Feb`<br />
+* `EXPORT FROM 2nd Feb TO 9th Feb`<br />
   Saves a PDF with tasks and details from 2nd February to 9th February of the current year
 
-### 2.16. Exiting the program : `exit`
+### 2.16. Exiting the program : `EXIT`
 
 Exits DoOrDie<br />
-Format: `exit`
+Format: `EXIT`
 
 ### 2.17. Saving the data
 
@@ -300,44 +301,44 @@ There is no need to save manually.
 
 ## 4. Command Summary
 
-* **Help** `help`
+* **Help** `HELP`
 
-* **Add** `add [task] TASKNAME [#LABEL...] [(by|on) DEADLINE] [repeat (hourly|daily|weekly|monthly|yearly)]`<br />
-  e.g. `add CS2106 Mid terms #school`
+* **Add** `ADD TASKNAME [#LABEL...] [BY DEADLINE] [repeat (hourly|daily|weekly|monthly|yearly)]`<br />
+  e.g. `ADD CS2106 Mid terms BY tmr 1300 #school`
 
-* **List** `list [TYPE]`<br />
-  e.g. `list outstanding tasks`
+* **List** `LIST [TYPE]`<br />
+  e.g. `LIST outstanding tasks`
 
-* **Update** `update [TASK_ID] [TASKNAME] [#LABEL...] ([(by|on) DATE] | [from START_DATE to END_DATE])`<br />
-  e.g. `update 1 label tedious work by thursday #work`
+* **Update** `UPDATE [TASK_ID] [TASKNAME] [#LABEL...] ([BY DATE] | [FROM START_DATE TO END_DATE])`<br />
+  e.g. `UPDATE 1 #label tedious work BY thursday #work`
 
-* **Find** `find [TYPE] KEYWORD [MORE_KEYWORDS]...`<br />
-  e.g. `find CS2103`
+* **Find** `FIND [TYPE] KEYWORD [MORE_KEYWORDS]...`<br />
+  e.g. `FIND CS2103`
 
-* **Delete** `delete [TASK_ID|LABEL]`<br />
-  e.g. `delete 1`
+* **Delete** `DELETE [TASK_ID|LABEL]`<br />
+  e.g. `DELETE 1`
 
-* **Select** `select TASK_ID`<br />
-  e.g. `select 2`
+* **Select** `SELECT TASK_ID`<br />
+  e.g. `SELECT 2`
 
-* **Book** `book TASKNAME [#LABEL...] , DATE, [MORE_DATES]...`<br />
-  e.g. `book CS2103 Meeting 1/1/2017 4pm, 2/1/2017 8pm`
+* **Book** `BOOK TASKNAME [#LABEL...] ON DATE, [MORE_DATES]...`<br />
+  e.g. `BOOK CS2103 Meeting ON 1/1/2017 4pm, 2/1/2017 8pm`
 
-* **Confirm** `confirm TASK_ID (SLOT_NUMBER|DATE)`<br />
-  e.g. `book CS2103 Meeting 1/1/2017 4pm, 2/1/2017 8pm`
+* **Confirm** `CONFIRM TASK_ID (SLOT_NUMBER|DATE)`<br />
+  e.g. `CONFIRM 1 1`
 
 * **Edit Label** `editlabel OLD_LABEL NEW_LABEL`<br />
-  e.g. `editlabel friends oldFriends`
+  e.g. `EDITLABEL friends oldFriends`
 
-* **Undo** `undo`
+* **Undo** `UNDO`
 
-* **Clear** `clear`
+* **Clear** `CLEAR`
 
-* **Push** `push`
+* **Push** `PUSH`
 
-* **Pull** `pull`
+* **Pull** `PULL`
 
-* **Export** `export [DATE|START_DATE to END_DATE]`<br />
-  e.g. `export today`
+* **Export** `EXPORT [BY DATE | FROM START_DATE TO END_DATE]`<br />
+  e.g. `EXPORT today`
 
-* **Exit** `exit`
+* **Exit** `EXIT`
