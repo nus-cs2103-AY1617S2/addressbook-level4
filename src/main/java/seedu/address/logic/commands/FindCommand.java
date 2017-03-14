@@ -4,7 +4,7 @@ import java.util.Set;
 
 /**
  * Finds and lists all tasks in myPotato whose content contains any of the argument keywords.
- * Keyword matching is case sensitive.
+ * Keyword matching is case insensitive.
  */
 public class FindCommand extends Command {
 
