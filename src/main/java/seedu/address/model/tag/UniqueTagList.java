@@ -137,6 +137,20 @@ public class UniqueTagList implements Iterable<Tag> {
         internalList.add(toAdd);
     }
 
+    /**
+     * Removes the equivalent tag from the list.
+     *
+     * @throws TagNotFoundException if no such tag could be found in the list.
+     */
+    public boolean remove(ReadOnlyTag toRemove) throws TagNotFoundException {
+        assert toRemove != null;
+        final boolean tagFoundAndDeleted = internalList.remove(toRemove);
+        if (!tagFoundAndDeleted) {
+            throw new tagNotFoundException();
+        }
+        return tagFoundAndDeleted;
+    }
+
     @Override
     public Iterator<Tag> iterator() {
         return internalList.iterator();
