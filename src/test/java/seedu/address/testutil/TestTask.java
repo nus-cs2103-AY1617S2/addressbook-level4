@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Description;
 import seedu.address.model.task.EndTime;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.StartTime;
@@ -18,6 +19,7 @@ public class TestTask implements ReadOnlyTask {
     private StartTime starttime;
     private Venue venue;
     private UrgencyLevel urgencyLevel;
+    private Description description;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -33,6 +35,7 @@ public class TestTask implements ReadOnlyTask {
         this.starttime = taskToCopy.getStartTime();
         this.endtime = taskToCopy.getEndTime();
         this.urgencyLevel = taskToCopy.getUrgencyLevel();
+        this.description = taskToCopy.getDescription();
         this.tags = taskToCopy.getTags();
     }
 
@@ -55,6 +58,10 @@ public class TestTask implements ReadOnlyTask {
 	public void setUrgencyLevel(UrgencyLevel urgencyLevel) {
 		this.urgencyLevel = urgencyLevel;
 	}
+
+    public void setDescription(Description description) {
+        this.description = description;
+    }
 
     public void setTags(UniqueTagList tags) {
         this.tags = tags;
@@ -86,6 +93,11 @@ public class TestTask implements ReadOnlyTask {
 	}
 
     @Override
+    public Description getDescription() {
+        return description;
+    }
+
+    @Override
     public UniqueTagList getTags() {
         return tags;
     }
@@ -101,6 +113,8 @@ public class TestTask implements ReadOnlyTask {
         sb.append("v/" + this.getVenue().value + " ");
         sb.append("s/" + this.getStartTime().value + " ");
         sb.append("e/" + this.getEndTime().value + " ");
+        sb.append("ul/" + this.getUrgencyLevel().value + " ");
+        sb.append("d/" + this.getDescription().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
