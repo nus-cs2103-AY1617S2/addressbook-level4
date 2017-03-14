@@ -20,40 +20,40 @@ public class CommandBoxTest extends TaskManagerGuiTest {
 
     @Before
     public void setUp() {
-        defaultStyleOfCommandBox = new ArrayList<>(commandBox.getStyleClass());
+        this.defaultStyleOfCommandBox = new ArrayList<>(this.commandBox.getStyleClass());
         assertFalse("CommandBox default style classes should not contain error style class.",
-            defaultStyleOfCommandBox.contains(CommandBox.ERROR_STYLE_CLASS));
+                this.defaultStyleOfCommandBox.contains(CommandBox.ERROR_STYLE_CLASS));
 
         // build style class for error
-        errorStyleOfCommandBox = new ArrayList<>(defaultStyleOfCommandBox);
-        errorStyleOfCommandBox.add(CommandBox.ERROR_STYLE_CLASS);
+        this.errorStyleOfCommandBox = new ArrayList<>(this.defaultStyleOfCommandBox);
+        this.errorStyleOfCommandBox.add(CommandBox.ERROR_STYLE_CLASS);
     }
 
     @Test
     public void commandBox_commandSucceeds_textClearedAndStyleClassRemainsTheSame() {
-        commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
+        this.commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
 
-        assertEquals("", commandBox.getCommandInput());
-        assertEquals(defaultStyleOfCommandBox, commandBox.getStyleClass());
+        assertEquals("", this.commandBox.getCommandInput());
+        assertEquals(this.defaultStyleOfCommandBox, this.commandBox.getStyleClass());
     }
 
     @Test
     public void commandBox_commandFails_textStaysAndErrorStyleClassAdded() {
-        commandBox.runCommand(COMMAND_THAT_FAILS);
+        this.commandBox.runCommand(COMMAND_THAT_FAILS);
 
-        assertEquals(COMMAND_THAT_FAILS, commandBox.getCommandInput());
-        assertEquals(errorStyleOfCommandBox, commandBox.getStyleClass());
+        assertEquals(COMMAND_THAT_FAILS, this.commandBox.getCommandInput());
+        assertEquals(this.errorStyleOfCommandBox, this.commandBox.getStyleClass());
     }
 
     @Test
     public void commandBox_commandSucceedsAfterFailedCommand_textClearedAndErrorStyleClassRemoved() {
         // add error style to simulate a failed command
-        commandBox.getStyleClass().add(CommandBox.ERROR_STYLE_CLASS);
+        this.commandBox.getStyleClass().add(CommandBox.ERROR_STYLE_CLASS);
 
-        commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
+        this.commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
 
-        assertEquals("", commandBox.getCommandInput());
-        assertEquals(defaultStyleOfCommandBox, commandBox.getStyleClass());
+        assertEquals("", this.commandBox.getCommandInput());
+        assertEquals(this.defaultStyleOfCommandBox, this.commandBox.getStyleClass());
     }
 
 }
