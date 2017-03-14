@@ -45,7 +45,8 @@ public class MainWindow extends UiPart<Region> {
     public ObservableList<ReadOnlyTask> taskListToday;
     private ObservableList<ReadOnlyTask> taskListFuture;
     private ObservableList<ReadOnlyTask> taskListCompleted;
-
+    
+    
     @FXML
     private AnchorPane commandBoxPlaceholder;
 
@@ -127,7 +128,7 @@ public class MainWindow extends UiPart<Region> {
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
         //TODO: show completedTaskPanel when show completed command is implemented
-        //completedTaskListPanel = new CompletedTaskListPanel(getCompletedTaskListPlaceholder(),taskListCompleted);
+        completedTaskListPanel = new CompletedTaskListPanel(getCompletedTaskListPlaceholder(),taskListCompleted);
     }
     /*
      * Prepares categorised task list for today/future/completed ListView
@@ -210,6 +211,12 @@ public class MainWindow extends UiPart<Region> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
     }
 
+    @FXML
+    public void menuTest(){
+        completedTaskListPanel.menuTest();
+    }
+   
+    
     @FXML
     public void handleHelp() {
         HelpWindow helpWindow = new HelpWindow();

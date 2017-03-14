@@ -23,6 +23,11 @@
                         <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
                      </items>
                   </Menu>
+                  <Menu mnemonicParsing="false" text="TestCompletedPanel">
+                    <items>
+                      <MenuItem fx:id="menuTest" mnemonicParsing="false" onAction="#menuTest" text="Action 1" />
+                    </items>
+                  </Menu>
                </menus>
             </MenuBar>
             <AnchorPane>
@@ -39,7 +44,7 @@
             </AnchorPane>
          </children>
       </VBox>
-      <AnchorPane fx:id="completedTaskListPlaceholder" prefHeight="300.0" />
+      <AnchorPane fx:id="completedTaskListPlaceholder" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
             <AnchorPane fx:id="commandBoxPlaceholder" styleClass="anchor-pane-with-border">
