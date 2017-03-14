@@ -22,7 +22,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label description;
     @FXML
-    private Label time;
+    private Label deadline;
     @FXML
     private FlowPane tags;
 
@@ -32,7 +32,7 @@ public class TaskCard extends UiPart<Region> {
         this.id.setText(displayedIndex + ". ");
         this.priority.setText(task.getPriority().value);
         this.description.setText(task.getDescription().value);
-        this.time.setText(task.getEndTime().value);
+        this.deadline.setText(task.getEndTime().value);
         initTags(task);
     }
 
