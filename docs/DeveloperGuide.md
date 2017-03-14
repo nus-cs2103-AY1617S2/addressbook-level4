@@ -351,7 +351,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | delete a task | remove task that I no longer need
 `* * *` | user | update a task | update task details so that my task is update to date
 `* * *` | user | view an existing task | view the details of the task
-`* * *` | user | list outstanding tasks in a chronological order | know what tasks I need to complete and in which order
+`* * *` | user | list outstanding/completed/overdue tasks in a chronological order | know what tasks I need to complete and in which order
 `* * *` | user | add attachments and links to a task | find all the resources and information I need to complete the task in one place
 `* * *` | user | undo my previous operation | can undo any mistakes executed in the previous command
 `* * *` | user | find task based on keywords | find out what are the tasks with the same nature
@@ -678,6 +678,7 @@ Use case ends
 > 2a1. System notifies the user that there is no completed task<br />
   Use case ends
 
+
 #### Use case: Add location to a task
 Use case ID: UC18 Add location to a task<br />
 Actor: User<br />
@@ -804,6 +805,24 @@ Use case ends
 1a. The given date time range is invalid.
 
 > Use case ends
+
+#### Use case: View overdue tasks
+Use case ID: UC25 View Overdue tasks<br />
+Actor: User<br />
+Precondition: User has opened the applications<br />
+
+**MSS**
+
+1. User request to list overdue tasks
+2. System shows a list of overdue task<br />
+Use case ends
+
+**Extensions**
+
+2a. The list is empty
+
+> 2a1. System notifies the user that there are no overdue tasks<br />
+  Use case ends
 
 ## Appendix C : Non Functional Requirements
 
