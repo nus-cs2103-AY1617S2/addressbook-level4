@@ -1,9 +1,10 @@
-# AddressBook Level 4 - Developer Guide
+# Burdens - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `W09-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
+0. [Introduction](#introduction)
 1. [Setting Up](#setting-up)
 2. [Design](#design)
 3. [Implementation](#implementation)
@@ -16,10 +17,16 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 * [Appendix D: Glossary](#appendix-d--glossary)
 * [Appendix E : Product Survey](#appendix-e--product-survey)
 
+## 0. Introduction
+
+We are making Burdens to make sense of our daily lives and list our tasks and deadlines on a command-line platform.
+You are welcome to contribute in any way!
 
 ## 1. Setting up
 
 ### 1.1. Prerequisites
+
+Please ensure you have this prerequisites before contributing to development:
 
 1. **JDK `1.8.0_60`**  or later<br>
 
@@ -346,12 +353,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | user | add task | add task
+`* * *` | user | delete task | remove tasks that I have completed
+`* * *` | user | edit task | update my tasks accordingly
+`* * *` | user | view task | recall the details of the task that I have input earlier
+`* * *` | user | be able to mark completed tasks | differentiate between completed and uncompleted tasks
+`* * *` | user | be able to undo action | undo unwanted command
+`* * *` | user | be able to redo action | restore previous command
+`* * *` | user | set alarms and reminders | remember tasks on hand
+`* * *` | user | have a list of commands to show | see all commands
+`* *` | user working in teams | be able to import task files | add multiple tasks given by team mates
+`* *` | user working in teams | be able to export task files | transfer multiple tasks to team mates
+`* *` | user with many tasks | list all tasks | recall all the tasks I have so far
+`* *` | user with many tasks | list all urgent tasks | recall all the important tasks to be completed
+`* *` | user with many tasks | list all tasks by alphabetical order | recall all the tasks by alphabetical order
+`* *` | user with many tasks | list all tasks by date | recall all tasks by date
+`* *` | user with many tasks | list all tasks by priority | recall all the tasks by priority
+`* *` | user with many tasks | list all tasks by tag | recall all the tasks with a particular tag
+`* *` | user | have shortcuts | set up a reminder quicker
+`*` | user who works with complex tasks | create subtasks | break a task into smaller tasks for easier management
+`*` | user who also use other task managing applications | synchronize my task list across all my applications | manage the same tasks from different applications
+`*` | user | be able to customize the colours | make it look more appealing
+`*` | user | have UI dark mode | ease the stress on my eyes
 
 {More to be added}
 
@@ -359,14 +382,14 @@ Priority | As a ... | I want to ... | So that I can...
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: Mark task as complete
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User requests to list tasks
+2. KoolToDoManager shows a list of tasks
+3. User requests to mark a specific task in the list as complete
+4. KoolToDoManager updates the task <br>
 Use case ends.
 
 **Extensions**
@@ -377,7 +400,289 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. AddressBook shows an error message <br>
+> 3a1. KoolToDoManager shows an error message <br>
+  Use case resumes at step 2
+
+#### Use case: Export task files
+
+**MSS**
+
+1. User requests to list tasks
+2. KoolToDoManager shows a list of tasks
+3. User requests to export specific tasks in the list to file
+4. KoolToDoManager requests for the desired file name and path
+5. User inputs file name and path
+6. KoolToDoManager outputs task file to the specified path <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+5a. The given file name or path is invalid
+
+> 5a1. KoolToDoManager shows an error message <br>
+  Use case resumes at step 4
+
+#### Use case: Create subtasks
+
+**MSS**
+
+1. User requests to list tasks
+2. KoolToDoManager shows a list of tasks
+3. User requests to specify a task as a subtask of another task
+4. KoolToDoManager requests for the index of the subtask and the parent task
+5. User inputs the indexes of subtask and parent task
+6. KoolToDoManager updates task list <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty or contains only 1 task
+
+> Use case ends
+
+5a. The given indexes are invalid
+
+> 5a1. KoolToDoManager shows an error message <br>
+  Use case resumes at step 4
+
+#### Use case: Adding a new task
+
+**MSS**
+
+1. User requests to add tasks
+2. KoolToDoManager prompts user for name of task
+3. User inputs name of task
+4. KoolToDoManager adds the task <br>
+Use case ends.
+
+**Extensions**
+
+3a. Name of task is empty
+
+> Use case resumes at step 2
+
+
+#### Use case: Deleting a task
+
+**MSS**
+
+1. User requests to delete tasks
+2. KoolToDoManager prompts user for name of task
+3. User inputs name of task
+4. KoolToDoManager deletes the task <br>
+Use case ends.
+
+**Extensions**
+
+3a. No such name of task exists
+> Use case resumes at step 2
+
+#### Use case: Editing a task
+
+**MSS**
+
+1. User requests to edit a task
+2. KoolToDoManager prompts user for name of task
+3. User inputs name of task
+4. KoolToDoManager prompts user for new details of task
+5. User inputs new details of task
+6. KoolToDoManager edits the task <br>
+Use case ends.
+
+**Extensions**
+
+3a. No such name of task exists
+> Use case resumes at step 2
+
+5a. New details of task is empty
+> Use case resumes at step 4
+
+#### Use case: View task
+
+**MSS**
+
+1. User requests to view a task
+2. KoolToDoManager prompts for name of task
+3. User inputs name of task
+4. KoolToDoManager brings up details of task <br>
+Use case ends.
+
+**Extensions**
+
+3a. No such name of task exists
+> Use case resumes at step 2
+
+#### Use case: List all tasks
+
+**MSS**
+
+1. User requests to list all tasks
+2. KoolToDoManager lists all tasks <br>
+Use case ends.
+
+**Extensions**
+
+1a. No tasks exist
+> KoolToDoManager shows an error message <br>
+
+#### Use case: List all urgent tasks
+
+**MSS**
+
+1. User requests to list all urgent tasks
+2. KoolToDoManager lists all urgent tasks <br>
+Use case ends.
+
+**Extensions**
+
+1a. No urgent tasks exist
+> KoolToDoManager shows an error message
+
+#### Use case: Create alarms and reminders
+
+**MSS**
+
+1. User requests to create alarm
+2. KoolToDoManager prompts for date and time
+3. User inputs date and time
+4. KoolToDoManager creates alarm <br>
+Use case ends.
+
+**Extensions**
+
+2a. Date or time does not exist
+
+> KoolToDoManager shows an error message <br>
+  Use case resumes at step 2
+
+#### Use case: List commands
+
+**MSS**
+
+1. User requests to list commands
+2. KoolToDoManager shows a list of commands <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+#### Use case: Use shortcuts
+
+1. KoolToDoManager requests for a shortcut
+2. User keys in a shortcut
+3. KoolToDoManager executes shortcut <br>
+Use case ends.
+
+**Extensions**
+
+3a. Shortcut does not exist
+
+> Use case resumes at step 1
+
+#### Use case: Undo action
+
+**MSS**
+
+1. User requests to undo action
+2. KoolToDoManager prompts for confirmation
+3. User inputs "yes"
+4. KoolToDoManager undo action <br>
+Use case ends.
+
+**Extensions**
+
+1a. No action has been done
+
+> Use case ends
+
+2a. User inputs "no"
+
+> Use case ends
+
+#### Use case: Redo action
+
+**MSS**
+
+1. User requests to redo action
+2. KoolToDoManager prompts for confirmation
+3. User inputs "yes"
+4. KoolToDoManager redo action <br>
+Use case ends.
+
+**Extensions**
+
+1a. No action has been done
+
+> Use case ends
+
+2a. User inputs "no"
+
+> Use case ends
+
+#### Use case: List all tasks by alphabetical order
+
+**MSS**
+
+1. User requests to list all tasks by alphabetical order
+2. KoolToDoManager executes command <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+#### Use case: List all tasks by date
+
+**MSS**
+
+1. User requests to list all tasks by date
+2. KoolToDoManager executes command <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+#### Use case: List all tasks by priority
+
+**MSS**
+
+1. User requests to list all tasks by priority
+2. KoolToDoManager executes command <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+#### Use case: List all tasks by tag
+
+**MSS**
+
+1. User requests to list all tasks by tag
+2. KoolToDoManager prompts for name of tag
+3. User inputs name of tag
+4. KoolToDoManager executes command <br>
+Use case ends.
+
+**Extensions**
+
+3a. Name of tag does not exist
+
+> KoolToDoManager shows an error message <br>
   Use case resumes at step 2
 
 {More to be added}
@@ -385,10 +690,15 @@ Use case ends.
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
-
+4. Should be easy to install
+5. Should be quick when starting the application(within 1 second)
+6. Should be a free and open source project
+7. Should be reliable and outputs error messages correctly
+8. Should complete an operation within 0.5 seconds
+9. Should be easy to use and non-technical
 {More to be added}
 
 ## Appendix D : Glossary

@@ -1,12 +1,14 @@
 package seedu.address.model;
 
+//import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.person.UniquePersonList.DuplicatePersonException;
+import seedu.address.model.Model.StateLimitReachedException;
+import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.UniqueTaskList;
+import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
  * The API of the Model component.
@@ -18,29 +20,67 @@ public interface Model {
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 
-    /** Deletes the given person. */
-    void deletePerson(ReadOnlyPerson target) throws UniquePersonList.PersonNotFoundException;
+    /** Deletes the given task. */
+    void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
-    /** Adds the given person */
-    void addPerson(Person person) throws UniquePersonList.DuplicatePersonException;
+    /** Adds the given task */
+    void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
     /**
-     * Updates the person located at {@code filteredPersonListIndex} with {@code editedPerson}.
+     * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
+     * @param targetList
      *
-     * @throws DuplicatePersonException if updating the person's details causes the person to be equivalent to
-     *      another existing person in the list.
-     * @throws IndexOutOfBoundsException if {@code filteredPersonListIndex} < 0 or >= the size of the filtered list.
+     * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
+     *      another existing task in the list.
+     * @throws IndexOutOfBoundsException if {@code filteredTaskListIndex} < 0 or >= the size of the filtered list.
      */
-    void updatePerson(int filteredPersonListIndex, ReadOnlyPerson editedPerson)
-            throws UniquePersonList.DuplicatePersonException;
+    void updateTask(String targetList, int filteredTaskListIndex, ReadOnlyTask editedTask)
+            throws UniqueTaskList.DuplicateTaskException;
 
-    /** Returns the filtered person list as an {@code UnmodifiableObservableList<ReadOnlyPerson>} */
-    UnmodifiableObservableList<ReadOnlyPerson> getFilteredPersonList();
+    /** Returns the filtered non-floating task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    UnmodifiableObservableList<ReadOnlyTask> getNonFloatingTaskList();
 
-    /** Updates the filter of the filtered person list to show all persons */
-    void updateFilteredListToShowAll();
+    /** Returns the filtered floating task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    UnmodifiableObservableList<ReadOnlyTask> getFloatingTaskList();
 
-    /** Updates the filter of the filtered person list to filter by the given keywords*/
-    void updateFilteredPersonList(Set<String> keywords);
+    /** Returns the filtered completed task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    UnmodifiableObservableList<ReadOnlyTask> getCompletedTaskList();
+
+    /** Updates the filter of the filtered task list to show all tasks */
+    void updateFilteredListToShowAllNonFloating();
+    
+    /** Updates the filter of the filtered task list to show all floating tasks */
+    void updateFilteredListToShowAllFloatingTasks();
+
+    /** Updates the filter of the filtered task list to show all completed tasks */
+    void updateFilteredListToShowAllCompletedTasks();
+    
+    /** Updates the filter of the filtered task list to show all tasks */
+    void updateFilteredListToShowFilteredNonFloatingTasks(Set<String> keywords);
+    
+    /** Updates the filter of the filtered task list to show all floating tasks */
+    void updateFilteredListToShowFilteredFloatingTasks(Set<String> keywords);
+    
+    /** Updates the filter of the filtered task list to show all completed tasks */
+    void updateFilteredListToShowFilteredCompletedTasks(Set<String> keywords);
+
+    /** Updates the filter of the filtered task list to filter by the given keywords*/
+    void updateFilteredTaskList(Set<String> keywords);
+
+    /**
+     * Overwrites AddressBook state to 1 step forwards.
+     */
+    void setAddressBookStateForwards() throws StateLimitReachedException;
+
+    /**
+     * Overwrites AddressBook state to 1 step backwards.
+     */
+    void setAddressBookStateBackwards() throws StateLimitReachedException;
+
+    /**
+     * Signals that the state change command would fail because
+     * the border of the state space is reached.
+     */
+    public static class StateLimitReachedException extends Exception {}
 
 }

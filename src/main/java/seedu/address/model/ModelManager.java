@@ -1,19 +1,22 @@
 package seedu.address.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
+import me.xdrop.fuzzywuzzy.FuzzySearch;
+
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.commons.util.StringUtil;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.person.UniquePersonList.PersonNotFoundException;
+import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.UniqueTaskList;
+import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,8 +25,14 @@ import seedu.address.model.person.UniquePersonList.PersonNotFoundException;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
-    private final FilteredList<ReadOnlyPerson> filteredPersons;
+    private List<AddressBook> addressBookStates;
+    private AddressBook currentAddressBook;
+    private int currentAddressBookStateIndex;
+    private static final int MATCHING_INDEX = 35;
+
+    public FilteredList<ReadOnlyTask> nonFloatingTasks;
+    public FilteredList<ReadOnlyTask> floatingTasks;
+    public FilteredList<ReadOnlyTask> completedTasks;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,78 +43,181 @@ public class ModelManager extends ComponentManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.addressBookStates = new ArrayList<AddressBook>();
+        this.addressBookStates.add(new AddressBook(addressBook));
+        this.currentAddressBookStateIndex = 0;
+        this.currentAddressBook = new AddressBook(this.addressBookStates.get(this.currentAddressBookStateIndex));
+
+        setAddressBookState();
     }
 
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
     }
 
+    public void setAddressBookState() {
+        this.nonFloatingTasks = new FilteredList<>(this.currentAddressBook.getTaskList());
+        this.floatingTasks = new FilteredList<>(this.currentAddressBook.getTaskList());
+        this.completedTasks = new FilteredList<>(this.currentAddressBook.getTaskList());
+        updateFilteredListToShowAllNonFloating();
+        updateFilteredListToShowAllFloatingTasks();
+        updateFilteredListToShowAllCompletedTasks();
+    }
+
+    /**
+     * Records the current state of AddressBook to facilitate state transition.
+     */
+    private void recordCurrentStateOfAddressBook() {
+        this.currentAddressBookStateIndex++;
+        this.addressBookStates = new ArrayList<AddressBook>(this.addressBookStates.subList(0, this.currentAddressBookStateIndex));
+        this.addressBookStates.add(new AddressBook(this.currentAddressBook));
+    }
+
     @Override
     public void resetData(ReadOnlyAddressBook newData) {
-        addressBook.resetData(newData);
+        this.currentAddressBook.resetData(newData);
+        recordCurrentStateOfAddressBook();
         indicateAddressBookChanged();
     }
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+        return this.currentAddressBook;
     }
 
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
-        raise(new AddressBookChangedEvent(addressBook));
+        raise(new AddressBookChangedEvent(this.currentAddressBook));
+    }
+
+    /** Raises an event to indicate the model and its state have changed */
+    private void indicateAddressBookStateChanged() {
+        AddressBookChangedEvent abce = new AddressBookChangedEvent(this.currentAddressBook);
+        abce.setFloatingTasks(getFloatingTaskList());
+        abce.setNonFloatingTasks(getNonFloatingTaskList());
+        abce.setCompletedTasks(getCompletedTaskList());
+        raise(abce);
     }
 
     @Override
-    public synchronized void deletePerson(ReadOnlyPerson target) throws PersonNotFoundException {
-        addressBook.removePerson(target);
+    public void setAddressBookStateForwards() throws StateLimitReachedException {
+        if (this.currentAddressBookStateIndex >= this.addressBookStates.size() - 1) {
+            throw new StateLimitReachedException();
+        }
+        this.currentAddressBookStateIndex++;
+        this.currentAddressBook = new AddressBook(this.addressBookStates.get(this.currentAddressBookStateIndex));
+        setAddressBookState();
+        indicateAddressBookStateChanged();
+    }
+
+    @Override
+    public void setAddressBookStateBackwards() throws StateLimitReachedException {
+        if (this.currentAddressBookStateIndex <= 0) {
+            throw new StateLimitReachedException();
+        }
+        this.currentAddressBookStateIndex--;
+        this.currentAddressBook = new AddressBook(this.addressBookStates.get(this.currentAddressBookStateIndex));
+        setAddressBookState();
+        indicateAddressBookStateChanged();
+    }
+
+    @Override
+    public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
+        this.currentAddressBook.removeTask(target);
+        recordCurrentStateOfAddressBook();
         indicateAddressBookChanged();
     }
 
     @Override
-    public synchronized void addPerson(Person person) throws UniquePersonList.DuplicatePersonException {
-        addressBook.addPerson(person);
-        updateFilteredListToShowAll();
+    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+        this.currentAddressBook.addTask(task);
+        recordCurrentStateOfAddressBook();
         indicateAddressBookChanged();
     }
 
     @Override
-    public void updatePerson(int filteredPersonListIndex, ReadOnlyPerson editedPerson)
-            throws UniquePersonList.DuplicatePersonException {
-        assert editedPerson != null;
+    public void updateTask(String targetList, int taskListIndex, ReadOnlyTask editedTask)
+            throws UniqueTaskList.DuplicateTaskException {
+        assert editedTask != null;
+        int addressBookIndex = 0;
+        switch (targetList) {
+        case Task.TASK_NAME_FLOATING:
+            addressBookIndex = this.floatingTasks.getSourceIndex(taskListIndex);
+            break;
+        case Task.TASK_NAME_COMPLETED:
+            addressBookIndex = this.completedTasks.getSourceIndex(taskListIndex);
+            break;
+        case Task.TASK_NAME_NON_FLOATING:
+            addressBookIndex = this.nonFloatingTasks.getSourceIndex(taskListIndex);
+            break;
+        default:
+            addressBookIndex = this.nonFloatingTasks.getSourceIndex(taskListIndex);
+            break;
+        }
 
-        int addressBookIndex = filteredPersons.getSourceIndex(filteredPersonListIndex);
-        addressBook.updatePerson(addressBookIndex, editedPerson);
+        this.currentAddressBook.updateTask(addressBookIndex, editedTask);
+        recordCurrentStateOfAddressBook();
         indicateAddressBookChanged();
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Task List Accessors =============================================================
 
     @Override
-    public UnmodifiableObservableList<ReadOnlyPerson> getFilteredPersonList() {
-        return new UnmodifiableObservableList<>(filteredPersons);
+    public UnmodifiableObservableList<ReadOnlyTask> getNonFloatingTaskList() {
+        return new UnmodifiableObservableList<>(this.nonFloatingTasks);
     }
 
     @Override
-    public void updateFilteredListToShowAll() {
-        filteredPersons.setPredicate(null);
+    public UnmodifiableObservableList<ReadOnlyTask> getFloatingTaskList() {
+        return new UnmodifiableObservableList<>(this.floatingTasks);
     }
 
     @Override
-    public void updateFilteredPersonList(Set<String> keywords) {
-        updateFilteredPersonList(new PredicateExpression(new NameQualifier(keywords)));
+    public UnmodifiableObservableList<ReadOnlyTask> getCompletedTaskList() {
+        return new UnmodifiableObservableList<>(this.completedTasks);
     }
 
-    private void updateFilteredPersonList(Expression expression) {
-        filteredPersons.setPredicate(expression::satisfies);
+    @Override
+    public void updateFilteredListToShowAllNonFloating() {
+        this.nonFloatingTasks.setPredicate(new PredicateExpression(new TaskIsNotFloatingQualifier())::satisfies);
+    }
+
+    @Override
+    public void updateFilteredListToShowAllFloatingTasks() {
+        this.floatingTasks.setPredicate(new PredicateExpression(new TaskIsFloatingQualifier())::satisfies);
+    }
+
+    @Override
+    public void updateFilteredListToShowAllCompletedTasks() {
+        this.completedTasks.setPredicate(new PredicateExpression(new TaskIsCompleteQualifier())::satisfies);
+    }
+    
+    @Override
+    public void updateFilteredListToShowFilteredNonFloatingTasks(Set<String> keywords) {
+        this.nonFloatingTasks.setPredicate(new PredicateExpression(new NameNonFloatingTaskQualifier(keywords))::satisfies);
+    }
+    
+    @Override
+    public void updateFilteredListToShowFilteredFloatingTasks(Set<String> keywords) {
+        this.floatingTasks.setPredicate(new PredicateExpression(new NameFloatingTaskQualifier(keywords))::satisfies);
+    }
+    
+    @Override
+    public void updateFilteredListToShowFilteredCompletedTasks(Set<String> keywords) {
+        this.completedTasks.setPredicate(new PredicateExpression(new NameCompletedTaskQualifier(keywords))::satisfies);
+    }
+
+    @Override
+    public void updateFilteredTaskList(Set<String> keywords) {
+    	updateFilteredListToShowFilteredNonFloatingTasks(keywords);
+    	updateFilteredListToShowFilteredFloatingTasks(keywords);
+    	updateFilteredListToShowFilteredCompletedTasks(keywords);
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
-        boolean satisfies(ReadOnlyPerson person);
+        boolean satisfies(ReadOnlyTask task);
         String toString();
     }
 
@@ -118,8 +230,8 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean satisfies(ReadOnlyPerson person) {
-            return qualifier.run(person);
+        public boolean satisfies(ReadOnlyTask task) {
+            return qualifier.run(task);
         }
 
         @Override
@@ -129,23 +241,24 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     interface Qualifier {
-        boolean run(ReadOnlyPerson person);
+        boolean run(ReadOnlyTask task);
         String toString();
     }
-
-    private class NameQualifier implements Qualifier {
+    
+    private class NameFloatingTaskQualifier implements Qualifier {
         private Set<String> nameKeyWords;
+        private FuzzyFinder fuzzyFinder;
 
-        NameQualifier(Set<String> nameKeyWords) {
+        NameFloatingTaskQualifier(Set<String> nameKeyWords) {
             this.nameKeyWords = nameKeyWords;
+            this.fuzzyFinder = new FuzzyFinder();
         }
 
         @Override
-        public boolean run(ReadOnlyPerson person) {
-            return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword))
-                    .findAny()
-                    .isPresent();
+        public boolean run(ReadOnlyTask task) {
+            boolean isKeywordPresent = fuzzyFinder.check(task, nameKeyWords);
+            boolean isFloatingTask = !task.isCompleted() && task.isFloating();
+            return isFloatingTask && isKeywordPresent;
         }
 
         @Override
@@ -153,5 +266,89 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
+    
+    private class NameNonFloatingTaskQualifier implements Qualifier {
+        private Set<String> nameKeyWords;
+        private FuzzyFinder fuzzyFinder;
 
+        NameNonFloatingTaskQualifier(Set<String> nameKeyWords) {
+            this.nameKeyWords = nameKeyWords;
+            this.fuzzyFinder = new FuzzyFinder();
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            boolean isKeywordPresent = fuzzyFinder.check(task, nameKeyWords);
+            boolean isNonFloatingTask = !task.isCompleted() && !task.isFloating();
+            return isNonFloatingTask && isKeywordPresent;
+        }
+
+        @Override
+        public String toString() {
+            return "name=" + String.join(", ", nameKeyWords);
+        }
+    }
+    
+    private class NameCompletedTaskQualifier implements Qualifier {
+        private Set<String> nameKeyWords;
+        private FuzzyFinder fuzzyFinder;
+
+        NameCompletedTaskQualifier(Set<String> nameKeyWords) {
+            this.nameKeyWords = nameKeyWords;
+            this.fuzzyFinder = new FuzzyFinder();
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            boolean isKeywordPresent = fuzzyFinder.check(task, nameKeyWords);
+            boolean isCompletedTask = task.isCompleted();
+            return isCompletedTask && isKeywordPresent;
+        }
+
+        @Override
+        public String toString() {
+            return "name=" + String.join(", ", nameKeyWords);
+        }
+    }
+    
+    private class FuzzyFinder {
+
+        public boolean check(ReadOnlyTask task, Set<String> nameKeyWords) {
+            return nameKeyWords.stream()
+                    .filter(keyword -> fuzzyFind(task.getTitle().title.toLowerCase(), keyword.toLowerCase()))
+                    .findAny()
+                    .isPresent();
+        }
+
+        public boolean fuzzyFind(String title, String keyword) {
+            return FuzzySearch.ratio(title, keyword) > MATCHING_INDEX;
+        }
+    }
+
+    private class TaskIsFloatingQualifier implements Qualifier {
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return !task.isCompleted() && task.isFloating();
+        }
+
+    }
+
+    private class TaskIsNotFloatingQualifier implements Qualifier {
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return !task.isCompleted() && !task.isFloating();
+        }
+
+    }
+
+    private class TaskIsCompleteQualifier implements Qualifier {
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return task.isCompleted();
+        }
+
+    }
 }

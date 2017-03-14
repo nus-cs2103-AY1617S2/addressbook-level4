@@ -1,5 +1,9 @@
 package seedu.address.ui;
 
+import java.util.logging.Logger;
+
+import com.google.common.eventbus.Subscribe;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -12,11 +16,13 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.ReadOnlyPerson;
+//import seedu.address.model.task.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -28,13 +34,16 @@ public class MainWindow extends UiPart<Region> {
     private static final String FXML = "MainWindow.fxml";
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 450;
+    private static final Logger logger = LogsCenter.getLogger(StatusBarFooter.class);
 
     private Stage primaryStage;
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
-    private PersonListPanel personListPanel;
+    //private BrowserPanel browserPanel;
+    private TaskListPanel nonFloatingTaskListPanel;
+    private TaskListPanel floatingTaskListPanel;
+    private TaskListPanel completedTaskListPanel;
     private Config config;
 
     @FXML
@@ -47,7 +56,13 @@ public class MainWindow extends UiPart<Region> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private AnchorPane personListPanelPlaceholder;
+    private AnchorPane nonFloatingTaskListPanelPlaceholder;
+
+    @FXML
+    private AnchorPane floatingTaskListPanelPlaceholder;
+
+    @FXML
+    private AnchorPane completedTaskListPanelPlaceholder;
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
@@ -72,6 +87,7 @@ public class MainWindow extends UiPart<Region> {
         primaryStage.setScene(scene);
 
         setAccelerators();
+        registerAsAnEventHandler(this);
     }
 
     public Stage getPrimaryStage() {
@@ -113,8 +129,19 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        browserPanel = new BrowserPanel(browserPlaceholder);
-        personListPanel = new PersonListPanel(getPersonListPlaceholder(), logic.getFilteredPersonList());
+        //browserPanel = new BrowserPanel(browserPlaceholder);
+        nonFloatingTaskListPanel = new TaskListPanel(
+                getNonFloatingTaskListPlaceholder(),
+                logic.getFilteredNonFloatingTaskList()
+                );
+        floatingTaskListPanel = new TaskListPanel(
+                getFloatingTaskListPlaceholder(),
+                logic.getFilteredFloatingTaskList()
+                );
+        completedTaskListPanel = new TaskListPanel(
+                getCompletedTaskListPlaceholder(),
+                logic.getFilteredCompletedTaskList()
+                );
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
@@ -132,8 +159,16 @@ public class MainWindow extends UiPart<Region> {
         return resultDisplayPlaceholder;
     }
 
-    private AnchorPane getPersonListPlaceholder() {
-        return personListPanelPlaceholder;
+    private AnchorPane getNonFloatingTaskListPlaceholder() {
+        return nonFloatingTaskListPanelPlaceholder;
+    }
+
+    private AnchorPane getFloatingTaskListPlaceholder() {
+        return floatingTaskListPanelPlaceholder;
+    }
+
+    private AnchorPane getCompletedTaskListPlaceholder() {
+        return completedTaskListPanelPlaceholder;
     }
 
     void hide() {
@@ -195,16 +230,47 @@ public class MainWindow extends UiPart<Region> {
         raise(new ExitAppRequestEvent());
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return this.personListPanel;
+    public TaskListPanel getNonFloatingTaskListPanel() {
+        return this.nonFloatingTaskListPanel;
     }
 
-    void loadPersonPage(ReadOnlyPerson person) {
-        browserPanel.loadPersonPage(person);
+    public TaskListPanel getFloatingTaskListPanel() {
+        return this.floatingTaskListPanel;
     }
 
+    public TaskListPanel getCompletedTaskListPanel() {
+        return this.completedTaskListPanel;
+    }
+
+    /*
+    void loadTaskPage(ReadOnlyTask task) {
+        browserPanel.loadTaskPage(task);
+    }
+    */
+
+    /*
     void releaseResources() {
         browserPanel.freeResources();
     }
+    */
 
+    @Subscribe
+    public void handleAddressBookChangedEvent(AddressBookChangedEvent abce) {
+        if (abce.floatingTasks != null && abce.nonFloatingTasks != null) {
+            logger.info(LogsCenter.getEventHandlingLogMessage(abce, "State change acknowledged."));
+            nonFloatingTaskListPanel = new TaskListPanel(
+                    getNonFloatingTaskListPlaceholder(),
+                    abce.nonFloatingTasks
+                    );
+            floatingTaskListPanel = new TaskListPanel(
+                    getFloatingTaskListPlaceholder(),
+                    abce.floatingTasks
+                    );
+            completedTaskListPanel = new TaskListPanel(
+                    getCompletedTaskListPlaceholder(),
+                    abce.completedTasks
+                    );
+        }
+
+    }
 }

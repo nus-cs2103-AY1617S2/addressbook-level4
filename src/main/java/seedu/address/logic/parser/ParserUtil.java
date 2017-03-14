@@ -13,26 +13,36 @@ import java.util.stream.Collectors;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Instruction;
+import seedu.address.model.task.Priority;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.Title;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
  */
 public class ParserUtil {
 
-    private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
+    private static final Pattern LISTNAME_INDEX_ARGS_FORMAT = Pattern.compile(
+            "(?<listName>("
+            + Task.TASK_NAME_FLOATING
+            + "|"
+            + Task.TASK_NAME_NON_FLOATING
+            + "|"
+            + Task.TASK_NAME_COMPLETED
+            + ")?)"
+            + "(\\s?)(?<targetIndex>[0-9]+)"
+            );
 
     /**
      * Returns the specified index in the {@code command} if it is a positive unsigned integer
      * Returns an {@code Optional.empty()} otherwise.
      */
     public static Optional<Integer> parseIndex(String command) {
-        final Matcher matcher = INDEX_ARGS_FORMAT.matcher(command.trim());
+        final Matcher matcher = LISTNAME_INDEX_ARGS_FORMAT.matcher(command.trim());
         if (!matcher.matches()) {
             return Optional.empty();
         }
@@ -42,6 +52,22 @@ public class ParserUtil {
             return Optional.empty();
         }
         return Optional.of(Integer.parseInt(index));
+
+    }
+
+    /**
+     * Returns the specified task list name in the {@code command} if it is an alpha-non-numeric string
+     * that corresponds to a valid task list name.
+     * Returns "invalid" otherwise.
+     */
+    public static Optional<String> parseListName(String command) {
+        final Matcher matcher = LISTNAME_INDEX_ARGS_FORMAT.matcher(command.trim());
+        if (!matcher.matches()) {
+            return Optional.empty();
+        }
+
+        String listName = matcher.group("listName") == null ? Task.TASK_NAME_FLOATING : matcher.group("listName");
+        return Optional.of(listName);
 
     }
 
@@ -67,35 +93,36 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> name} into an {@code Optional<Name>} if {@code name} is present.
+     * Parses a {@code Optional<String> title} into an {@code Optional<Title>} if {@code title} is present.
      */
-    public static Optional<Name> parseName(Optional<String> name) throws IllegalValueException {
-        assert name != null;
-        return name.isPresent() ? Optional.of(new Name(name.get())) : Optional.empty();
+    public static Optional<Title> parseTitle(Optional<String> title) throws IllegalValueException {
+        assert title != null;
+        return title.isPresent() ? Optional.of(new Title(title.get())) : Optional.empty();
     }
 
     /**
-     * Parses a {@code Optional<String> phone} into an {@code Optional<Phone>} if {@code phone} is present.
+     * Parses a {@code Optional<String> date} into an {@code Optional<Date>} if {@code date} is present.
      */
-    public static Optional<Phone> parsePhone(Optional<String> phone) throws IllegalValueException {
-        assert phone != null;
-        return phone.isPresent() ? Optional.of(new Phone(phone.get())) : Optional.empty();
+    public static Optional<Deadline> parseDate(Optional<String> date) throws IllegalValueException {
+        assert date != null;
+        return date.isPresent() ? Optional.of(new Deadline(date.get())) : Optional.empty();
     }
 
     /**
-     * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.
+     * Parses a {@code Optional<String> instruction} into an {@code Optional<Instruction>} if {@code instruction}
+     * is present.
      */
-    public static Optional<Address> parseAddress(Optional<String> address) throws IllegalValueException {
-        assert address != null;
-        return address.isPresent() ? Optional.of(new Address(address.get())) : Optional.empty();
+    public static Optional<Instruction> parseInstruction(Optional<String> instruction) throws IllegalValueException {
+        assert instruction != null;
+        return instruction.isPresent() ? Optional.of(new Instruction(instruction.get())) : Optional.empty();
     }
 
     /**
-     * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
+     * Parses a {@code Optional<String> priority} into an {@code Optional<Priority>} if {@code priority} is present.
      */
-    public static Optional<Email> parseEmail(Optional<String> email) throws IllegalValueException {
-        assert email != null;
-        return email.isPresent() ? Optional.of(new Email(email.get())) : Optional.empty();
+    public static Optional<Priority> parsePriority(Optional<String> priority) throws IllegalValueException {
+        assert priority != null;
+        return priority.isPresent() ? Optional.of(new Priority(priority.get())) : Optional.empty();
     }
 
     /**
@@ -104,8 +131,8 @@ public class ParserUtil {
     public static UniqueTagList parseTags(Collection<String> tags) throws IllegalValueException {
         assert tags != null;
         final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(new Tag(tagName));
+        for (String tagTitle : tags) {
+            tagSet.add(new Tag(tagTitle));
         }
         return new UniqueTagList(tagSet);
     }
