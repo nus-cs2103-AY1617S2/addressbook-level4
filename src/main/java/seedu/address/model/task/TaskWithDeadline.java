@@ -1,6 +1,7 @@
 package seedu.address.model.task;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -19,8 +20,8 @@ public class TaskWithDeadline extends Task {
      * the boolean variable indicates whether the default value of deadline or
      * starting time should be used
      */
-    public TaskWithDeadline(Name name, UniqueTagList tags, Date date1, Date date2, boolean isDone)
-            throws IllegalValueException {
+    public TaskWithDeadline(Name name, UniqueTagList tags, Date date1,
+            Date date2, boolean isDone) throws IllegalValueException {
         super(name, tags, isDone);
         if (date2 != null) {
             this.deadline = new Deadline(date2);
@@ -37,7 +38,8 @@ public class TaskWithDeadline extends Task {
      * @throws IllegalValueException
      */
     private void validateDateTime() throws IllegalValueException {
-        if (this.startingTime != null && this.startingTime.getDate().after(this.deadline.getDate())) {
+        if (this.startingTime != null
+                && this.startingTime.getDate().after(this.deadline.getDate())) {
             throw new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS);
         }
     }
@@ -60,7 +62,8 @@ public class TaskWithDeadline extends Task {
      */
     public boolean isDueToday() {
         SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
-        return !this.isDone() && fmt.format(this.deadline.getDate()).equals(fmt.format(new Date()));
+        return !this.isDone() && fmt.format(this.deadline.getDate())
+                .equals(fmt.format(new Date()));
     }
 
     /**
@@ -84,7 +87,8 @@ public class TaskWithDeadline extends Task {
         if (startingTime == null) {
             return "Due: " + deadline.toString();
         } else {
-            return "Begin: " + startingTime.toString() + ";Due: " + deadline.toString();
+            return "Begin: " + startingTime.toString() + ";Due: "
+                    + deadline.toString();
         }
     }
 
@@ -94,6 +98,7 @@ public class TaskWithDeadline extends Task {
         Calendar cal2 = Calendar.getInstance();
         cal2.setTime(deadline.getDate());
         return today || (cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR)
-                && cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR));
+                && cal1.get(Calendar.DAY_OF_YEAR) == cal2
+                        .get(Calendar.DAY_OF_YEAR));
     }
 }
