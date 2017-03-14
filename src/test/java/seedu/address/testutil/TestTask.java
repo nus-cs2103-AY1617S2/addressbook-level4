@@ -1,6 +1,8 @@
 package seedu.address.testutil;
 
+import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Deadline;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -10,6 +12,7 @@ import seedu.address.model.tag.UniqueTagList;
 public class TestTask implements ReadOnlyTask {
 
     private Name name;
+    private Deadline deadline;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -28,6 +31,10 @@ public class TestTask implements ReadOnlyTask {
         this.name = name;
     }
 
+    public void setDeadline(Deadline deadline) {
+        this.deadline = deadline;
+    }
+    
     public void setTags(UniqueTagList tags) {
         this.tags = tags;
     }
@@ -35,6 +42,11 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public Name getName() {
         return name;
+    }
+
+    @Override
+    public Deadline getDeadline() {
+        return deadline;
     }
 
     @Override

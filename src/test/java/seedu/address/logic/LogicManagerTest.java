@@ -39,6 +39,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyToDoApp;
 import seedu.address.model.ToDoApp;
+import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.Task;
@@ -409,10 +410,11 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
+            Deadline deadline = new Deadline("17 March");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, tags);
+            return new Task(name, deadline, tags);
         }
 
         /**
@@ -425,6 +427,7 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Name("Task " + seed),
+                    new Deadline(""),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -518,6 +521,7 @@ public class LogicManagerTest {
         Task generateTaskWithName(String name) throws Exception {
             return new Task(
                     new Name(name),
+                    new Deadline(""),
                     new UniqueTagList(new Tag("tag"))
             );
         }

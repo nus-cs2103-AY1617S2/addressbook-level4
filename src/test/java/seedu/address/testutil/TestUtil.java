@@ -30,6 +30,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.ToDoApp;
+import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.Task;
@@ -72,15 +73,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Name("Ali Muster"), new UniqueTagList()),
-                new Task(new Name("Boris Mueller"), new UniqueTagList()),
-                new Task(new Name("Carl Kurz"), new UniqueTagList()),
-                new Task(new Name("Daniel Meier"), new UniqueTagList()),
-                new Task(new Name("Elle Meyer"), new UniqueTagList()),
-                new Task(new Name("Fiona Kunz"), new UniqueTagList()),
-                new Task(new Name("George Best"),new UniqueTagList()),
-                new Task(new Name("Hoon Meier"), new UniqueTagList()),
-                new Task(new Name("Ida Mueller"), new UniqueTagList())
+                new Task(new Name("Ali Muster"), new Deadline(""), new UniqueTagList()),
+                new Task(new Name("Boris Mueller"), new Deadline(""), new UniqueTagList()),
+                new Task(new Name("Carl Kurz"), new Deadline(""), new UniqueTagList()),
+                new Task(new Name("Daniel Meier"), new Deadline(""), new UniqueTagList()),
+                new Task(new Name("Elle Meyer"), new Deadline(""), new UniqueTagList()),
+                new Task(new Name("Fiona Kunz"), new Deadline(""), new UniqueTagList()),
+                new Task(new Name("George Best"), new Deadline(""), new UniqueTagList()),
+                new Task(new Name("Hoon Meier"), new Deadline(""), new UniqueTagList()),
+                new Task(new Name("Ida Mueller"), new Deadline(""), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
