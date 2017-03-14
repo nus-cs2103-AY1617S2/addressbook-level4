@@ -18,6 +18,8 @@ import seedu.doist.model.task.Task;
 import seedu.doist.model.task.UniqueTaskList;
 import seedu.doist.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.doist.model.task.UniqueTaskList.TaskAlreadyFinishedException;
+import seedu.doist.model.task.UniqueTaskList.TaskAlreadyUnfinishedException;
+import seedu.doist.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Wraps all data at the to-do list level
@@ -155,9 +157,9 @@ public class TodoList implements ReadOnlyTodoList {
         }
     }
 
-    public boolean finishTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException,
-            TaskAlreadyFinishedException {
-        return tasks.finish(key);
+    public boolean changeTaskFinishStatus(ReadOnlyTask key, boolean isToFinish) throws TaskNotFoundException,
+            TaskAlreadyFinishedException, TaskAlreadyUnfinishedException {
+        return tasks.changeFinishStatus(key, isToFinish);
     }
 
 //// tag-level operations

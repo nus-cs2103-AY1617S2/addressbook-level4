@@ -26,6 +26,10 @@ public interface Model {
     void finishTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException,
         UniqueTaskList.TaskAlreadyFinishedException;
 
+    /** Unfinishes the given task. */
+    void unfinishTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException,
+        UniqueTaskList.TaskAlreadyUnfinishedException;
+
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 

@@ -94,34 +94,53 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
-     * Finishes the equivalent task from the list.
+     * Changes the finish status of the equivalent task from the list.
      *
      * @throws TaskNotFoundException if no such task could be found in the list.
-     * @throws TaskAlreadyFinishedException if task is already finished
+     * @throws TaskAlreadyFinishedException if task is already finished but trying to finish it
+     * @throws TaskAlreadyUnfinishedException if task is already not finished but trying to unfinish it
      */
-    public boolean finish(ReadOnlyTask toFinish) throws TaskNotFoundException, TaskAlreadyFinishedException {
-        assert toFinish != null;
-        final int taskIndex = internalList.indexOf(toFinish);
+    public boolean changeFinishStatus(ReadOnlyTask toChangeFinish, boolean isToFinish) throws TaskNotFoundException,
+            TaskAlreadyFinishedException, TaskAlreadyUnfinishedException {
+        assert toChangeFinish != null;
+        final int taskIndex = internalList.indexOf(toChangeFinish);
         boolean taskExists = taskIndex < 0 ? false : true;
         if (!taskExists) {
             throw new TaskNotFoundException();
         } else {
             Task task = internalList.get(taskIndex);
-            if (task.getFinishedStatus().getIsFinished()) {
-                logger.info("Attemping to finish task already finished, taskIndex: " + taskIndex);
-                throw new TaskAlreadyFinishedException();
+            if (isToFinish) {
+                finishTask(task);
             } else {
-                task.setFinishedStatus(true);
-
-                // the following line is to trigger person list view to update
-                // according to the api:
-                // All changes in the ObservableList are propagated immediately to the FilteredList.
-                // without the following line, only the task is changed, but the list is not
-                // so the person list view will not be updated, the isFinished field will remain "false"
-                internalList.set(taskIndex, task);
+                unfinishTask(task);
             }
+            // the following line is to trigger person list view to update
+            // according to the api:
+            // All changes in the ObservableList are propagated immediately to the FilteredList.
+            // without the following line, only the task is changed, but the list is not
+            // so the person list view will not be updated, the isFinished field will remain "false"
+            internalList.set(taskIndex, task);
         }
         return taskExists;
+    }
+
+    private void finishTask(Task toFinish) throws TaskAlreadyFinishedException {
+        if (toFinish.getFinishedStatus().getIsFinished()) {
+            logger.info("Attemping to finish task already finished, task details:\n" + toFinish.getAsText());
+            throw new TaskAlreadyFinishedException();
+        } else {
+            toFinish.setFinishedStatus(true);
+        }
+    }
+
+    private void unfinishTask(Task toUnfinish) throws TaskAlreadyUnfinishedException {
+        if (!toUnfinish.getFinishedStatus().getIsFinished()) {
+            logger.info("Attemping to unfinish task that is already not finished, task details:\n"
+                    + toUnfinish.getAsText());
+            throw new TaskAlreadyUnfinishedException();
+        } else {
+            toUnfinish.setFinishedStatus(false);
+        }
     }
 
     public void setTasks(UniqueTaskList replacement) {
@@ -177,5 +196,12 @@ public class UniqueTaskList implements Iterable<Task> {
      * Signals that a task is already finished and you are trying to finish it again
      */
     public static class TaskAlreadyFinishedException extends Exception {}
+
+    /**
+     * Signals that a task is already not finished and you are trying to unfinish it
+     */
+    public static class TaskAlreadyUnfinishedException extends Exception {
+
+    }
 
 }
