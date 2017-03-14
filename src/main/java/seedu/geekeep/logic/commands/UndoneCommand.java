@@ -37,7 +37,7 @@ public class UndoneCommand extends Command {
 
         model.markTaskUndone(targetIndex);
 
-        return new CommandResult(String.format(MESSAGE_UNDONE_PERSON_SUCCESS, taskToMark));
+        return new CommandResult(String.format(MESSAGE_UNDONE_TASK_SUCCESS, taskToMark));
     }
 
 }

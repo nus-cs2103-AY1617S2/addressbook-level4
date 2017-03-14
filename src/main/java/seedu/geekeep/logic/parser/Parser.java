@@ -10,6 +10,7 @@ import seedu.geekeep.logic.commands.AddCommand;
 import seedu.geekeep.logic.commands.ClearCommand;
 import seedu.geekeep.logic.commands.Command;
 import seedu.geekeep.logic.commands.DeleteCommand;
+import seedu.geekeep.logic.commands.DoneCommand;
 import seedu.geekeep.logic.commands.EditCommand;
 import seedu.geekeep.logic.commands.ExitCommand;
 import seedu.geekeep.logic.commands.FindCommand;
@@ -17,6 +18,7 @@ import seedu.geekeep.logic.commands.HelpCommand;
 import seedu.geekeep.logic.commands.IncorrectCommand;
 import seedu.geekeep.logic.commands.ListCommand;
 import seedu.geekeep.logic.commands.SelectCommand;
+import seedu.geekeep.logic.commands.UndoneCommand;
 
 /**
  * Parses user input.
@@ -55,6 +57,12 @@ public class Parser {
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
+
+        case DoneCommand.COMMAND_WORD:
+            return new DoneCommandParser().parse(arguments);
+
+        case UndoneCommand.COMMAND_WORD:
+            return new UndoneCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();

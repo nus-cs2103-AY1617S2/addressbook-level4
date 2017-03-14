@@ -38,7 +38,7 @@ public class DoneCommand extends Command {
 
         model.markTaskDone(targetIndex);
 
-        return new CommandResult(String.format(MESSAGE_DONE_PERSON_SUCCESS, taskToMark));
+        return new CommandResult(String.format(MESSAGE_DONE_TASK_SUCCESS, taskToMark));
     }
 
 }
