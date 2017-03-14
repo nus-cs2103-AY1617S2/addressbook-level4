@@ -65,7 +65,6 @@ public class TaskListPanelHandle extends GuiHandle {
             guiRobot.sleep(200);
             if (!TestUtil.compareCardAndPerson(getTaskCardHandle(startPosition + i), persons[i])) {
                 assertTrue("current card: " + i + " is not correct", !TestUtil.compareCardAndPerson(getTaskCardHandle(startPosition + i), persons[i]));
-                return false;
             }
         }
         return true;
