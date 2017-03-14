@@ -13,7 +13,10 @@ public class TaskCard extends UiPart<Region> {
 
     @FXML
     private HBox cardPane;
-
+    
+    @FXML
+    private Label id;
+    
     @FXML
     private Label name;
     /*
@@ -25,6 +28,7 @@ public class TaskCard extends UiPart<Region> {
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
+        id.setText(Integer.toString(displayedIndex) + ". ");
         name.setText(task.getName().toString());
         initTags(task);
     }
