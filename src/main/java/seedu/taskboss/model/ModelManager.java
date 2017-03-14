@@ -1,6 +1,8 @@
 package seedu.taskboss.model;
 
+import java.util.EmptyStackException;
 import java.util.Set;
+import java.util.Stack;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
@@ -24,6 +26,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final TaskBoss taskBoss;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+    private final Stack<ReadOnlyTaskBoss> taskbossHistory;
 
     /**
      * Initializes a ModelManager with the given TaskBoss and userPrefs.
@@ -36,6 +39,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.taskBoss = new TaskBoss(taskBoss);
         filteredTasks = new FilteredList<>(this.taskBoss.getTaskList());
+        taskbossHistory = new Stack<ReadOnlyTaskBoss>();
     }
 
     public ModelManager() {
@@ -44,6 +48,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyTaskBoss newData) {
+        taskbossHistory.push(new TaskBoss(this.taskBoss));
         taskBoss.resetData(newData);
         indicateTaskBossChanged();
     }
@@ -53,6 +58,12 @@ public class ModelManager extends ComponentManager implements Model {
         return taskBoss;
     }
 
+    @Override
+    public void undoTaskboss() throws EmptyStackException {
+        taskBoss.resetData(taskbossHistory.pop());
+        indicateTaskBossChanged();
+    }
+
     /** Raises an event to indicate the model has changed */
     private void indicateTaskBossChanged() {
         raise(new TaskBossChangedEvent(taskBoss));
@@ -60,12 +71,14 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
+        taskbossHistory.push(new TaskBoss(this.taskBoss));
         taskBoss.removeTask(target);
         indicateTaskBossChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+        taskbossHistory.push(new TaskBoss(this.taskBoss));
         taskBoss.addTask(task);
         updateFilteredListToShowAll();
         indicateTaskBossChanged();
@@ -75,7 +88,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
-
+        taskbossHistory.push(new TaskBoss(this.taskBoss));
         int taskBossIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskBoss.updateTask(taskBossIndex, editedTask);
         indicateTaskBossChanged();

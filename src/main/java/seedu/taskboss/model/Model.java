@@ -1,5 +1,6 @@
 package seedu.taskboss.model;
 
+import java.util.EmptyStackException;
 import java.util.Set;
 
 import seedu.taskboss.commons.core.UnmodifiableObservableList;
@@ -48,5 +49,8 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to filter by the given keywords as end date*/
     void updateFilteredTaskListByEndDateTime(String keywords);
+
+    /** Undoes previous command of TaskBoss */
+    void undoTaskboss() throws EmptyStackException;
 
 }
