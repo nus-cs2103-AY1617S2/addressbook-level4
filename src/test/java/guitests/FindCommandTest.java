@@ -60,6 +60,12 @@ public class FindCommandTest extends TaskManagerGuiTest {
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
+    @Test
+    public void find_invalidDate_fail() {
+        commandBox.runCommand("find by from to ");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    }
+
     private void assertFindResult(String command, TestTask... expectedHits) {
         commandBox.runCommand(command);
         assertListSize(expectedHits.length);

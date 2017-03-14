@@ -1,10 +1,13 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import java.util.Date;
 import java.util.Set;
 
 import seedu.address.commons.exceptions.IllegalDateTimeValueException;
 import seedu.address.logic.LogicManager;
+import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
  * Finds and lists all tasks in task manager whose name contains any of the
@@ -49,13 +52,13 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() {
+    public CommandResult execute() throws CommandException {
         try {
             executeFindCommandLogic();
+            return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
         } catch (IllegalDateTimeValueException e) {
-            e.printStackTrace();
+            throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-        return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
     }
 
     public void executeFindCommandLogic() throws IllegalDateTimeValueException {
@@ -63,32 +66,33 @@ public class FindCommand extends Command {
         Date end;
         if (keywords == null) {
             if ("".equals(startDate) && isParsableDate(endDate)) {
-                if (endDate.matches("[a-zA-Z]+"))
+                if (endDate.matches("[a-zA-Z]+")) {
                     end = dtParser.parse(endDate + "235959").get(0).getDates().get(0);
-                else
+                } else {
                     end = dtParser.parse(endDate).get(0).getDates().get(0);
-
+                }
                 start = dtParser.parse("today 000000").get(0).getDates().get(0);
 
                 saveCurrentState();
                 model.updateFilteredTaskList(start, end);
             } else if (isParsableDate(startDate) && isParsableDate(endDate)) {
-                if (startDate.matches("[a-zA-Z]+"))
+                if (startDate.matches("[a-zA-Z]+")) {
                     start = dtParser.parse(this.startDate + " 000000").get(0).getDates().get(0);
-                else
+                } else {
                     start = dtParser.parse(this.startDate).get(0).getDates().get(0);
+                }
 
-                if (endDate.matches("[a-zA-Z]+"))
+                if (endDate.matches("[a-zA-Z]+")) {
                     end = dtParser.parse(this.endDate + " 235959").get(0).getDates().get(0);
-                else
+                } else {
                     end = dtParser.parse(this.endDate).get(0).getDates().get(0);
-
+                }
                 saveCurrentState();
-                if (end.before(start))
+                if (end.before(start)) {
                     model.updateFilteredTaskList(end, start);
-                else
+                } else {
                     model.updateFilteredTaskList(start, end);
-
+                }
             } else {
                 throw new IllegalDateTimeValueException();
             }
