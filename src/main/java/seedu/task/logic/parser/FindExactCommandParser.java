@@ -19,7 +19,7 @@ public class FindExactCommandParser extends FindCommandParser {
      * and returns an FindCommand object for execution.
      */
     public Command parse(String args) {
-        final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
+        final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim().toLowerCase());
         if (!matcher.matches()) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindExactCommand.MESSAGE_USAGE));

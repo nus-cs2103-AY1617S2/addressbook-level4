@@ -7,6 +7,10 @@ public class FindExactCommand extends Command {
     private static final boolean isExact = true;
 
     public static final String COMMAND_WORD = "findexact";
+    public static final String COMMAND_WORD_SHORTER = "fexact";
+    public static final String COMMAND_WORD_SHORTEST = "finde";
+    public static final String COMMAND_WORD_HOTKEY = "fe";
+
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks whose names contain all of "
             + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"

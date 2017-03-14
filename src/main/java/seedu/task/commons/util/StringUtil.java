@@ -54,7 +54,6 @@ public class StringUtil {
         Set<String> lowerCaseKeywords = new HashSet<>(keywords.size());
         for (String s : keywords) {
             String a = s.toLowerCase();
-            keywords.remove(s);
             lowerCaseKeywords.add(a);
         }
         String[] tokenizedTaskName = lowerCaseSentence.split(" ");

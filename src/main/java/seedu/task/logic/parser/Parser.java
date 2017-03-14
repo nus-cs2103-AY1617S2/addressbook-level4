@@ -66,6 +66,9 @@ public class Parser {
             return new FindCommandParser().parse(arguments);
 
         case FindExactCommand.COMMAND_WORD:
+        case FindExactCommand.COMMAND_WORD_SHORTER:
+        case FindExactCommand.COMMAND_WORD_SHORTEST:
+        case FindExactCommand.COMMAND_WORD_HOTKEY:
             return new FindExactCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
