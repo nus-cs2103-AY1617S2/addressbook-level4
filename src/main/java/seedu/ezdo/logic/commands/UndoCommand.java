@@ -2,6 +2,9 @@ package seedu.ezdo.logic.commands;
 
 import seedu.ezdo.logic.commands.exceptions.CommandException;
 
+/*
+ * Undo the last undoable command.
+ */
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
 

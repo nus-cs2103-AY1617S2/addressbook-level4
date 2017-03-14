@@ -2,6 +2,9 @@ package seedu.ezdo.logic.commands;
 
 import seedu.ezdo.logic.commands.exceptions.CommandException;
 
+/*
+ * Redo the last undone command
+ */
 public class RedoCommand extends Command {
 
     public static final String COMMAND_WORD = "redo";
