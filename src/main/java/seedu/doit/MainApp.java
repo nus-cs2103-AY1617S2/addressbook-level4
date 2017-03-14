@@ -57,18 +57,18 @@ public class MainApp extends Application {
         logger.info("=============================[ Initializing TaskManager ]===========================");
         super.init();
 
-        config = initConfig(getApplicationParameter("config"));
-        storage = new StorageManager(config.getTaskManagerFilePath(), config.getUserPrefsFilePath());
+        this.config = initConfig(getApplicationParameter("config"));
+        this.storage = new StorageManager(this.config);
 
-        userPrefs = initPrefs(config);
+        this.userPrefs = initPrefs(this.config);
 
-        initLogging(config);
+        initLogging(this.config);
 
-        model = initModelManager(storage, userPrefs);
+        this.model = initModelManager(this.storage, this.userPrefs);
 
-        logic = new LogicManager(model, storage);
+        this.logic = new LogicManager(this.model, this.storage);
 
-        ui = new UiManager(logic, config, userPrefs);
+        this.ui = new UiManager(this.logic, this.config, this.userPrefs);
 
         initEventsCenter();
     }
@@ -99,9 +99,8 @@ public class MainApp extends Application {
 
         initialFloatingTaskManagerData = new FloatingTaskManager();
         initialEventManagerData = new EventManager();
-
-        return new ModelManager(initialTaskManagerData, initialFloatingTaskManagerData,
-                                initialEventManagerData, userPrefs);
+        return new ModelManager(initialTaskManagerData, initialFloatingTaskManagerData, initialEventManagerData,
+                userPrefs);
     }
 
     private void initLogging(Config config) {
@@ -125,12 +124,13 @@ public class MainApp extends Application {
             Optional<Config> configOptional = ConfigUtil.readConfig(configFilePathUsed);
             initializedConfig = configOptional.orElse(new Config());
         } catch (DataConversionException e) {
-            logger.warning("Config file at " + configFilePathUsed + " is not in the correct format. " +
-                "Using default config properties");
+            logger.warning("Config file at " + configFilePathUsed + " is not in the correct format. "
+                    + "Using default config properties");
             initializedConfig = new Config();
         }
 
-        //Update config file in case it was missing to begin with or there are new/unused fields
+        // Update config file in case it was missing to begin with or there are
+        // new/unused fields
         try {
             ConfigUtil.saveConfig(initializedConfig, configFilePathUsed);
         } catch (IOException e) {
@@ -147,20 +147,21 @@ public class MainApp extends Application {
 
         UserPrefs initializedPrefs;
         try {
-            Optional<UserPrefs> prefsOptional = storage.readUserPrefs();
+            Optional<UserPrefs> prefsOptional = this.storage.readUserPrefs();
             initializedPrefs = prefsOptional.orElse(new UserPrefs());
         } catch (DataConversionException e) {
-            logger.warning("UserPrefs file at " + prefsFilePath + " is not in the correct format. " +
-                "Using default user prefs");
+            logger.warning("UserPrefs file at " + prefsFilePath + " is not in the correct format. "
+                    + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty TaskManager");
             initializedPrefs = new UserPrefs();
         }
 
-        //Update prefs file in case it was missing to begin with or there are new/unused fields
+        // Update prefs file in case it was missing to begin with or there are
+        // new/unused fields
         try {
-            storage.saveUserPrefs(initializedPrefs);
+            this.storage.saveUserPrefs(initializedPrefs);
         } catch (IOException e) {
             logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
         }
@@ -175,15 +176,15 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting TaskManager " + MainApp.VERSION);
-        ui.start(primaryStage);
+        this.ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
         logger.info("============================ [ Stopping Task Manager ] =============================");
-        ui.stop();
+        this.ui.stop();
         try {
-            storage.saveUserPrefs(userPrefs);
+            this.storage.saveUserPrefs(this.userPrefs);
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
