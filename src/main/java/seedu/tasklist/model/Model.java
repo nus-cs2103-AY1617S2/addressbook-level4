@@ -3,6 +3,7 @@ package seedu.tasklist.model;
 import java.util.Set;
 
 import seedu.tasklist.commons.core.UnmodifiableObservableList;
+import seedu.tasklist.commons.exceptions.EmptyModelStackException;
 import seedu.tasklist.model.task.ReadOnlyTask;
 import seedu.tasklist.model.task.Task;
 import seedu.tasklist.model.task.UniqueTaskList;
@@ -43,4 +44,12 @@ public interface Model {
     /** Updates the filter of the filtered person list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
 
+    /** Get the previous state (undo) of the task list */
+    public void setPreviousState() throws EmptyModelStackException;
+
+    /** Get the next state (redo) of the task list */
+    public void setNextState() throws EmptyModelStackException;
+
+    /** Enables undo to work after a clear command, by pushing the existing state into UndoStack. */
+    public void enableUndoForClear();
 }
