@@ -45,6 +45,7 @@ import seedu.address.model.task.Content;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDateTime;
+import seedu.address.model.task.Title;
 import seedu.address.storage.StorageManager;
 
 
@@ -349,10 +350,10 @@ public class LogicManagerTest {
     @Test
     public void execute_find_onlyMatchesFullWordsInNames() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
-        Task pTarget2 = helper.generateTaskWithName("bla KEY bla bceofeia");
-        Task p1 = helper.generateTaskWithName("KE Y");
-        Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
+        Task pTarget1 = helper.generateTaskWithTitle("bla bla KEY bla");
+        Task pTarget2 = helper.generateTaskWithTitle("bla KEY bla bceofeia");
+        Task p1 = helper.generateTaskWithTitle("KE Y");
+        Task p2 = helper.generateTaskWithTitle("KEYKEYKEY sduauo");
 
         List<Task> fourPersons = helper.generateTaskList(p1, pTarget1, p2, pTarget2);
         AddressBook expectedAB = helper.generateAddressBook(fourPersons);
@@ -368,10 +369,10 @@ public class LogicManagerTest {
     @Test
     public void execute_find_isNotCaseSensitive() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task p1 = helper.generateTaskWithName("bla bla KEY bla");
-        Task p2 = helper.generateTaskWithName("bla KEY bla bceofeia");
-        Task p3 = helper.generateTaskWithName("key key");
-        Task p4 = helper.generateTaskWithName("KEy sduauo");
+        Task p1 = helper.generateTaskWithTitle("bla bla KEY bla");
+        Task p2 = helper.generateTaskWithTitle("bla KEY bla bceofeia");
+        Task p3 = helper.generateTaskWithTitle("key key");
+        Task p4 = helper.generateTaskWithTitle("KEy sduauo");
 
         List<Task> fourPersons = helper.generateTaskList(p3, p1, p4, p2);
         AddressBook expectedAB = helper.generateAddressBook(fourPersons);
@@ -387,10 +388,10 @@ public class LogicManagerTest {
     @Test
     public void execute_find_matchesIfAnyKeywordPresent() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
-        Task pTarget2 = helper.generateTaskWithName("bla rAnDoM bla bceofeia");
-        Task pTarget3 = helper.generateTaskWithName("key key");
-        Task p1 = helper.generateTaskWithName("sduauo");
+        Task pTarget1 = helper.generateTaskWithTitle("bla bla KEY bla");
+        Task pTarget2 = helper.generateTaskWithTitle("bla rAnDoM bla bceofeia");
+        Task pTarget3 = helper.generateTaskWithTitle("key key");
+        Task p1 = helper.generateTaskWithTitle("sduauo");
 
         List<Task> fourPersons = helper.generateTaskList(pTarget1, p1, pTarget2, pTarget3);
         AddressBook expectedAB = helper.generateAddressBook(fourPersons);
@@ -410,12 +411,13 @@ public class LogicManagerTest {
     class TestDataHelper {
 
         Task adam() throws Exception {
-            Content content = new Content("Project Meeting");
+            Title title = new Title("Project Meeting");
+            Content content = new Content("Meeting project CS2103 at UTown");
             TaskDateTime dateTime = new TaskDateTime("8/3/2017 15:00");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(content, dateTime, tags);
+            return new Task(title, content, dateTime, tags);
         }
 
         /**
@@ -427,7 +429,8 @@ public class LogicManagerTest {
          */
         Task generateTask(int seed) throws Exception {
             return new Task(
-                    new Content("Task " + seed),
+                    new Title("Task " + seed),
+                    new Content(""),
                     new TaskDateTime("8/3/2017 15:00"),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
@@ -521,9 +524,10 @@ public class LogicManagerTest {
         /**
          * Generates a Person object with given name. Other fields will have some dummy values.
          */
-        Task generateTaskWithName(String name) throws Exception {
+        Task generateTaskWithTitle(String title) throws Exception {
             return new Task(
-                    new Content(name),
+                    new Title(title),
+                    new Content("content hehe"),
                     new TaskDateTime("22/2/2017 11:00"),
                     new UniqueTagList(new Tag("tag"))
             );
