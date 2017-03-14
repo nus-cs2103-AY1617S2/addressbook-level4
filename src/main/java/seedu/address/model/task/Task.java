@@ -56,7 +56,7 @@ public class Task implements ReadOnlyTask {
     
     @Override
     public Optional<Deadline> getStartTime() {
-        return startTime;
+        return startTime == null ? Optional.empty() : startTime;
     }
     
     public void setDeadline(Optional<Deadline> deadline) {
@@ -67,7 +67,7 @@ public class Task implements ReadOnlyTask {
 
     @Override
     public Optional<Deadline> getDeadline() {
-        return deadline;
+        return deadline == null ? Optional.empty() : deadline;
     }
 
     @Override
