@@ -38,8 +38,12 @@ public interface ReadOnlyDeadlineTask extends ReadOnlyTask {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+                .append(" Date: ")
+                .append(getDeadlineString())
                 .append(" Comment: ")
                 .append(getComment())
+                .append(" Priority: ")
+                .append(getPriority())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
