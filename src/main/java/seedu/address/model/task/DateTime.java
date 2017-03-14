@@ -10,7 +10,7 @@ import org.ocpsoft.prettytime.PrettyTime;
  */
 public abstract class DateTime {
 
-    PrettyTime dateTime;
+    PrettyTime dateTime = new PrettyTime();
 
     /**
      * @return a PrettyTime object

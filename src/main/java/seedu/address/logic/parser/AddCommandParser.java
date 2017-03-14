@@ -29,17 +29,18 @@ public class AddCommandParser {
         Matcher matcher;
         String tags[] = {};
 
-        System.out.println("add command accpected");
         Pattern pattern = Pattern.compile(CliSyntax.WILDCARD + CliSyntax.WITH_TAGS + CliSyntax.WILDCARD);
         matcher = pattern.matcher(args);
         if (matcher.matches()) {
             matcher = Pattern.compile(CliSyntax.WITH_TAGS).matcher(args);
-            int lastOccurance = 0;
+            int lastOccuranceEnd = 0;
+            int lastOccuranceStart = 0;
             while (matcher.find()) {
-                lastOccurance = matcher.end();
+                lastOccuranceEnd = matcher.end();
+                lastOccuranceStart = matcher.start();
             }
-            tags = args.substring(lastOccurance + 1, args.length()).split(" ");
-            args = args.substring(0, matcher.start(matcher.groupCount()));
+            tags = args.substring(lastOccuranceEnd + 1, args.length()).split(" ");
+            args = args.substring(0, lastOccuranceStart);
         }
 
         // args do not have tags now
@@ -47,7 +48,7 @@ public class AddCommandParser {
         matcher = pattern.matcher(args);
         if (matcher.matches()) {
             List<Date> dates = new PrettyTimeParser().parse(args);
-            if (dates.size() < LEAST_DATES_FOR_DEADLINE_AND_STARTING_TIME_TASK) {
+            if (dates.size() >= LEAST_DATES_FOR_DEADLINE_AND_STARTING_TIME_TASK) {
                 matcher = Pattern.compile(CliSyntax.WITH_STARTING_TIME).matcher(args);
                 int lastOccurance = args.length() - 1;
                 while (matcher.find()) {
@@ -66,7 +67,9 @@ public class AddCommandParser {
         matcher = pattern.matcher(args);
         if (matcher.matches()) {
             List<Date> dates = new PrettyTimeParser().parse(args);
-            if (dates.size() < LEAST_DATES_FOR_DEADLINE_ONLY_TASK) {
+            System.out.println("Found " + dates.size() + " dates");
+            System.out.println(dates.get(0));
+            if (dates.size() >= LEAST_DATES_FOR_DEADLINE_ONLY_TASK) {
                 matcher = Pattern.compile(CliSyntax.WITH_DEADLINE_ONLY).matcher(args);
                 int lastOccurance = args.length() - 1;
                 while (matcher.find()) {
