@@ -531,4 +531,3 @@ Cons:
 * Time-zone feature is difficult to use
 * Difficult to edit tasks in a group
 * UI is not simple or aesthetic
-https://taskwarrior.org/docs/
