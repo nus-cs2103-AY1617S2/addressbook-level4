@@ -27,7 +27,7 @@ public class AddCommand extends Command {
             + "Parameters: TODO [t/TAG] \n"
             + "OR: TODO s/STARTTIME e/ENDTIME [t/TAG] \n"
             + "Example: " + COMMAND_WORD
-            + " Take dog for walk s/11-11-17/5:00pm e/11-11-17/6:00pm t/todoal";
+            + " Take dog for walk s/11-11-17T5:00 e/11-11-17T6:00 t/todoal";
 
     public static final String MESSAGE_SUCCESS = "New todo added: %1$s";
     public static final String MESSAGE_DUPLICATE_TODO = "This todo already exists in the todo list";
@@ -52,7 +52,7 @@ public class AddCommand extends Command {
         }
         
         //String inputString = "11-11-2012";
-        DateFormat dateFormat = new SimpleDateFormat("yy-MM-dd");
+        DateFormat dateFormat = new SimpleDateFormat("yy-MM-dd'T'HH:mm");
 
     	this.toAdd = new Todo(
     			new Name(todo),
