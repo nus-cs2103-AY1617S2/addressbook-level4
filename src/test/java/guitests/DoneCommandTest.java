@@ -2,6 +2,7 @@ package guitests;
 
 import static org.junit.Assert.assertTrue;
 import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.ezdo.commons.core.Messages.MESSAGE_WRONG_LIST;
 import static seedu.ezdo.logic.commands.DoneCommand.MESSAGE_DONE_TASK_SUCCESS;
 
 import org.junit.Test;
@@ -41,7 +42,7 @@ public class DoneCommandTest extends EzDoGuiTest {
         currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
         doneList = TestUtil.addTasksToList(doneList, toDone);
         commandBox.runCommand("done " + currentList.length + 1);
-        assertResultMessage("The task index provided is invalid");
+        assertResultMessage("The task index provided is invalid.");
 
         //invalid command
         commandBox.runCommand("done a");
@@ -54,6 +55,10 @@ public class DoneCommandTest extends EzDoGuiTest {
         //view done tasks
         commandBox.runCommand("done");
         assertTrue(taskListPanel.isListMatching(doneList));
+        
+        //invalid input when viewing done task
+        commandBox.runCommand("done " + doneList.length);
+        assertResultMessage(MESSAGE_WRONG_LIST);
 
     }
 
@@ -64,16 +69,17 @@ public class DoneCommandTest extends EzDoGuiTest {
         TestTask[] expectedDone = TestUtil.addTasksToList(doneList, taskToDone);
 
         commandBox.runCommand("done " + targetIndexOneIndexed);
-    //    for (int i =0; i< expectedDone.length; i++) {System.out.println(expectedDone[i]);}
         //confirm the list now contains all done tasks including the one just marked as done
-        assertTrue(taskListPanel.isListMatching(expectedDone));
+        assertTrue(taskListPanel.isListMatching(expectedRemainder));
 
         //confirm the result message is correct
         assertResultMessage(String.format(MESSAGE_DONE_TASK_SUCCESS, taskToDone));
 
-        //confirm the new card contains the right data
+        //confirm the new done list contains the right data
+        commandBox.runCommand("done");
         TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToDone.getName().fullName);
         assertMatching(taskToDone, addedCard);
+        assertTrue(taskListPanel.isListMatching(expectedDone));
 
         //confirm the undone list does not contain the task just marked as done
         commandBox.runCommand("list");
