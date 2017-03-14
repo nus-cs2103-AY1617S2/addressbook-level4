@@ -13,7 +13,7 @@ import com.joestelmach.natty.Parser;
  */
 public abstract class TaskDate {
 
-    public final String value;
+    public String value;
 
     public final SimpleDateFormat userDateFormat = new SimpleDateFormat(USER_DATE_FORMAT);
     public final SimpleDateFormat nattyDateFormat = new SimpleDateFormat(NATTY_DATE_FORMAT);
@@ -23,57 +23,52 @@ public abstract class TaskDate {
     public static final String NATTY_DATE_FORMAT = "EEE MMM dd hh:mm:ss zzz yyyy";
     public static final String MESSAGE_PARSE_EXCEPTION = "User input date format to Natty date format: Parse Exception error!";
 
+    
     public TaskDate(String taskDate) {
-
-	if (isValidTaskDate(taskDate)) {
+        try {
 	    // Format input string to suit Natty dependency
 	    String formattedInitialTaskDate = changeToNattyDateFormat(taskDate);
-
-	    // Use Natty dependency to manipulate date input
-	    Date parsedTaskDate = parseNatty(formattedInitialTaskDate);
-
-	    // Format parsed date to suit the regex
-	    String formattedFinalTaskDate = changeToUserDateFormat(parsedTaskDate);
-
-	    this.value = formattedFinalTaskDate;
-
-	} else {
-	    this.value = new String();
-	}
-
+	    this.value = nattyManipulation(formattedInitialTaskDate);
+        } catch (ParseException pe) {
+            this.value = nattyManipulation(taskDate);
+        }
     }
 
     /**
      * Uses Natty dependency (natural language date parser) to manipulate date
      * input in String.
      */
-    public Date parseNatty(String date) {
+    private String nattyManipulation(String taskDate) {
+ 
+	try {
+            // Initialises Natty parser
+            Parser parser = new Parser();
 
-	// Initialises Natty parser
-	Parser parser = new Parser();
+            // Parses input String into a list of DateGroups
+            List<DateGroup> dateGroupList = parser.parse(taskDate);
 
-	// Parses input String into a list of DateGroups
-	List<DateGroup> dateGroupList = parser.parse(date);
+            // Retrieves parsed date
+            Date parsedDate = dateGroupList.get(0).getDates().get(0);
 
-	// Retrieves parsed date
-	Date parsedDate = dateGroupList.get(0).getDates().get(0);
+            // Format parsed date to suit the regex
+            String formattedFinalTaskDate = changeToUserDateFormat(parsedDate);
+            
+            return formattedFinalTaskDate;
+            
+	} catch (IndexOutOfBoundsException e) {
+	    return taskDate;
+	}
 
-	return parsedDate;
     }
 
     /**
      * Changes the initial date format of a string input for Natty.
      */
-    public String changeToNattyDateFormat(String input) {
+    private String changeToNattyDateFormat(String input) throws ParseException {
 
 	String output = new String();
-
-	try {
-	    Date userDateObject = userDateFormat.parse(input);
-	    output = nattyDateFormat.format(userDateObject);
-	} catch (ParseException pe) {
-	    System.out.println("MESSAGE_PARSE_CONSTRAINTS");
-	}
+	Date userDateObject = userDateFormat.parse(input);
+	output = nattyDateFormat.format(userDateObject);
 
 	return output;
     }
@@ -81,7 +76,7 @@ public abstract class TaskDate {
     /**
      * Changes the final date format of a Date input for user.
      */
-    public String changeToUserDateFormat(Date input) {
+    private String changeToUserDateFormat(Date input) {
 	return userDateFormat.format(input);
     }
 
