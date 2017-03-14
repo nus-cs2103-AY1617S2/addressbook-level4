@@ -52,7 +52,7 @@ Format: `list`
 
 **Finding tasks by keyword**
 Format: `find <keyword1 keyword2 ...>`
-> keyword1, keyword2, … : All the parameters you want in the search.
+> keyword1, keyword2, … : All the parameters you want in the search, they may be tags.
 
 Examples:
 
@@ -116,7 +116,7 @@ Examples:
 
 **Renaming tag**
 Rename an existing tag<br>
-Format: `rename tag from <tag_name> to <new_tag_name>`
+Format: `renametag <tag_name> <new_tag_name>`
 
 > tag_name : existing tag name<br>
 > new_tag_name : new tag name
