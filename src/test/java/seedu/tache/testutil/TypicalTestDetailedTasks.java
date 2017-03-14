@@ -31,8 +31,8 @@ public class TypicalTestDetailedTasks {
                     .withTags("HighPriority").build();
 
             // Manually added
-            taskH = new DetailedTaskBuilder().withName("Hoon Meier").build();
-            taskI = new DetailedTaskBuilder().withName("Ida Mueller").build();
+            //taskH = new DetailedTaskBuilder().withName("Hoon Meier").build();
+            //taskI = new DetailedTaskBuilder().withName("Ida Mueller").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -50,7 +50,7 @@ public class TypicalTestDetailedTasks {
     }
 
     public TestDetailedTask[] getTypicalDetailedTasks() {
-        return new TestDetailedTask[]{taskA, taskB, taskC, taskH, taskI};
+        return new TestDetailedTask[]{taskA, taskB, taskC};
     }
 
     public TaskManager getTypicalTaskManager() {
