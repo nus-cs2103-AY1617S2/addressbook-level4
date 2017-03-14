@@ -22,27 +22,27 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Buy Eggs and Bread t/HighPriority";
+        String detailsToEdit = "name \"Buy Eggs and Bread\"; tag HighPriority;";
         int taskManagerIndex = 1;
-        TestTask editedTask = new TaskBuilder().withName("Buy Eggs and Bread").withTags("MediumPriority").build();
+        TestTask editedTask = new TaskBuilder().withName("Buy Eggs and Bread").withTags("HighPriority").build();
 
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
 
     @Test
     public void edit_notAllFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "t/LowPriority t/HighPriority";
+        String detailsToEdit = "tag HighPriority;";
         int taskManagerIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withTags("LowPriority", "HighPriority").build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withTags("HighPriority").build();
 
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
 
     @Test
     public void edit_clearTags_success() throws Exception {
-        String detailsToEdit = "t/";
+        String detailsToEdit = "tag ;";
         int taskManagerIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
@@ -55,7 +55,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
     public void edit_findThenEdit_success() throws Exception {
         commandBox.runCommand("find Grandma");
 
-        String detailsToEdit = "Visit Grandpa";
+        String detailsToEdit = "name \"Visit Grandpa\"";
         int filteredTaskListIndex = 1;
         int taskManagerIndex = 3;
 
@@ -73,7 +73,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_invalidTaskIndex_failure() {
-        commandBox.runCommand("edit 8 Project");
+        commandBox.runCommand("edit 8; name \"Project\"");
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
@@ -85,16 +85,16 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_invalidValues_failure() {
-        commandBox.runCommand("edit 1 *&");
+        commandBox.runCommand("edit 1; *&");
         assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 t/*&");
+        commandBox.runCommand("edit 1; tag *&;");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
     @Test
     public void edit_duplicateTask_failure() {
-        commandBox.runCommand("edit 3 Buy Eggs and Bread t/HighPriority");
+        commandBox.runCommand("edit 3; name \"Buy Eggs and Bread\"; tag HighPriority;");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
@@ -110,7 +110,8 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     private void assertEditSuccess(int filteredTaskListIndex, int taskManagerIndex,
                                     String detailsToEdit, TestTask editedTask) {
-        commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
+
+        commandBox.runCommand("edit " + filteredTaskListIndex + "; " + detailsToEdit);
 
         // confirm the new card contains the right data
         TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getName().fullName);

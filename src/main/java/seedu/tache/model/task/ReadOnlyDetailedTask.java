@@ -11,8 +11,8 @@ public interface ReadOnlyDetailedTask {
     Name getName();
     Date getStartDate();
     Date getEndDate();
-    Duration getDuration();
-    Time getTime();
+    Time getStartTime();
+    Time getEndTime();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,

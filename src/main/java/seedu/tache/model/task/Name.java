@@ -9,7 +9,7 @@ import seedu.tache.commons.exceptions.IllegalValueException;
 public class Name {
 
     public static final String MESSAGE_NAME_CONSTRAINTS =
-            "Task names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "At least one field to edit must be provided.";
 
     /*
      * The first character of the address must not be a whitespace,

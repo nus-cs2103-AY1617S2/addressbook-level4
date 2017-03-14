@@ -6,26 +6,26 @@ public class DetailedTask extends Task implements ReadOnlyDetailedTask {
 
     private Date startDate;
     private Date endDate;
-    private Time time;
-    private Duration duration;
+    private Time startTime;
+    private Time endTime;
 
     public DetailedTask(Name name, UniqueTagList tags) {
         super(name, tags);
     }
 
-    public DetailedTask(Name name, Date startDate, Date endDate, Time time, Duration duration, UniqueTagList tags) {
+    public DetailedTask(Name name, Date startDate, Date endDate, Time startTime, Time endTime, UniqueTagList tags) {
         super(name, tags);
         this.startDate = startDate;
         this.endDate = endDate;
-        this.time = time;
-        this.duration = duration;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     /**
      * Creates a copy of the given ReadOnlyDetailedTask.
      */
     public DetailedTask(ReadOnlyDetailedTask source) {
-        this(source.getName(), source.getStartDate(), source.getEndDate(), source.getTime(), source.getDuration(),
+        this(source.getName(), source.getStartDate(), source.getEndDate(), source.getStartTime(), source.getEndTime(),
              source.getTags());
     }
 
@@ -48,21 +48,21 @@ public class DetailedTask extends Task implements ReadOnlyDetailedTask {
     }
 
     @Override
-    public Duration getDuration() {
-        return duration;
+    public Time getStartTime() {
+        return startTime;
     }
 
-    public void setDuration(Duration duration) {
-        this.duration = duration;
+    public void setStartTime(Time startTime) {
+        this.startTime = startTime;
     }
 
     @Override
-    public Time getTime() {
-        return time;
+    public Time getEndTime() {
+        return endTime;
     }
 
-    public void setTime(Time time) {
-        this.time = time;
+    public void setEndTime(Time endTime) {
+        this.endTime = endTime;
     }
 
     /**
@@ -71,10 +71,10 @@ public class DetailedTask extends Task implements ReadOnlyDetailedTask {
     public void resetData(ReadOnlyDetailedTask replacement) {
         assert replacement != null;
         this.setName(replacement.getName());
-        this.setDuration(replacement.getDuration());
         this.setEndDate(replacement.getEndDate());
         this.setStartDate(replacement.getStartDate());
-        this.setTime(replacement.getTime());
+        this.setStartTime(replacement.getStartTime());
+        this.setEndTime(replacement.getEndTime());
         this.setTags(replacement.getTags());
     }
 

@@ -10,7 +10,6 @@ import seedu.tache.model.tag.Tag;
 import seedu.tache.model.tag.UniqueTagList;
 import seedu.tache.model.task.Date;
 import seedu.tache.model.task.DetailedTask;
-import seedu.tache.model.task.Duration;
 import seedu.tache.model.task.Name;
 import seedu.tache.model.task.ReadOnlyDetailedTask;
 import seedu.tache.model.task.Time;
@@ -30,10 +29,10 @@ public class XmlAdaptedDetailedTask {
     private String endDate;
 
     @XmlElement
-    private String duration;
+    private String startTime;
 
     @XmlElement
-    private String time;
+    private String endTime;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -54,8 +53,8 @@ public class XmlAdaptedDetailedTask {
         name = source.getName().fullName;
         startDate = source.getStartDate().toString();
         endDate = source.getEndDate().toString();
-        duration = source.getDuration().toString();
-        time = source.getTime().toString();
+        startTime = source.getStartTime().toString();
+        endTime = source.getEndTime().toString();
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -75,9 +74,9 @@ public class XmlAdaptedDetailedTask {
         final Name name = new Name(this.name);
         final Date startDate = new Date(this.startDate);
         final Date endDate = new Date(this.endDate);
-        final Duration duration = new Duration(this.duration);
-        final Time time = new Time(this.time);
+        final Time startTime = new Time(this.startTime);
+        final Time endTime = new Time(this.endTime);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new DetailedTask(name, startDate, endDate, time, duration, tags);
+        return new DetailedTask(name, startDate, endDate, startTime, endTime, tags);
     }
 }
