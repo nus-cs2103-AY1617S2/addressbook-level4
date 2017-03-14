@@ -7,11 +7,11 @@ By : `T09-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nb
 1. [Introduction](#1-introduction)
 2. [Setting Up](#2-setting-up)
 3. [Design](#3-design)
-	3.1. [Architecture](#3-1-architecture)
-	3.2. [User Interface](#3-2-ui-component)
-	3.3. [Logic](#3-3-logic-component)
-	3.4. [Model](#3-4-model-component)
-	3.5. [Storage](#3-5-storage-component)
+	3.1. [Architecture](#3-1-architecture) <br>
+	3.2. [User Interface](#3-2-ui-component) <br>
+	3.3. [Logic](#3-3-logic-component) <br>
+	3.4. [Model](#3-4-model-component) <br>
+	3.5. [Storage](#3-5-storage-component) <br>
 4. [Implementation](#4-implementation)
 5. [Testing](#5-testing) 
 6. [Dev Ops](#6-dev-ops)
@@ -114,10 +114,10 @@ Two of those classes play important roles at the architecture level as discussed
 
 The rest of the App consists of four components.
 
-* [**`UI`**](#3.2-user-interface) : Facilitates the interaction between the user and the system. 
-* [**`Logic`**](#3.3-logic) : Executes the user's commands. 
-* [**`Model`**](#3.4-model) : Holds the data of the App in-memory.
-* [**`Storage`**](#3.5-storage) : Reads data from, and writes data to, the hard disk.
+* [**`UI`**](#3-2-ui-component) : Facilitates the interaction between the user and the system. 
+* [**`Logic`**](#3-3-logic-component) : Executes the user's commands. 
+* [**`Model`**](#3-4-model-component) : Holds the data of the App in-memory.
+* [**`Storage`**](#3-5-storage-component) : Reads data from, and writes data to, the hard disk.
 
 #### Events-Driven nature of the design
 
@@ -149,7 +149,7 @@ interface and exposes its functionality using the `LogicManager.java` class.<br>
 
 The sections below give more details of each component.
 
-### 3.2. UI component
+### 3.2. UI Component
 
 <img src="images/UiClassDiagram.png" width="800"><br>
 _Figure 3.2.1 : Structure of the UI Component_
@@ -169,7 +169,7 @@ The `UI` component,
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
 
-### 3.3. Logic component
+### 3.3. Logic Component
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 3.3.1 : Structure of the Logic Component_
@@ -186,7 +186,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 <img src="images/DeleteTaskSdForLogic.png" width="800"><br>
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
-### 3.4. Model component
+### 3.4. Model Component
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 3.4.1 : Structure of the Model Component_
@@ -201,7 +201,7 @@ The `Model`,
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
-### 3.5. Storage component
+### 3.5. Storage Component
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 3.5.1 : Structure of the Storage Component_
@@ -222,7 +222,7 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 and logging destinations.
 
 * The logging level can be controlled using the `logLevel` setting in the configuration file
-  (See [Configuration](#3-2-configuration))
+  (See [Configuration](#4-2-configuration))
 * The `Logger` for a class can be obtained using `LogsCenter.getLogger(Class)` which will log messages according to
   the specified logging level
 * Currently log messages are output through: `Console` and to a `.log` file.
@@ -278,7 +278,7 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
  That means the developer can do other things on the Computer while the tests are running.<br>
  See [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in headless mode.
 
-### 5.1. Troubleshooting tests
+### 5.1. Troubleshooting Tests
 
  **Problem: Tests fail because NullPointException when AssertionError is expected**
 
