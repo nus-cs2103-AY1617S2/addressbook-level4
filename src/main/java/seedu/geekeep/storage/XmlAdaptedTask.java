@@ -22,9 +22,9 @@ public class XmlAdaptedTask {
     @XmlElement(required = true)
     private String title;
     @XmlElement(required = true)
-    private String endDateTime;
-    @XmlElement(required = true)
     private String startDateTime;
+    @XmlElement(required = true)
+    private String endDateTime;
     @XmlElement(required = true)
     private String location;
 
