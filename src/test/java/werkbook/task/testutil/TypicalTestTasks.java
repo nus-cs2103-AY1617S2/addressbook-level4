@@ -39,10 +39,10 @@ public class TypicalTestTasks {
             // Manually added
             hoon = new TaskBuilder().withName("Walk the tiger")
                     .withDescription("Take Zelda on a walk at the park").withStartDateTime("01/01/2016 0900")
-                    .withEndDateTime("01/01/2016 1000").build();
+                    .withEndDateTime("01/01/2016 1000").withTags("Incomplete").build();
             ida = new TaskBuilder().withName("Walk the zebra")
                     .withDescription("Take Zelda on a walk at the park").withStartDateTime("01/01/2016 0900")
-                    .withEndDateTime("01/01/2016 1000").build();
+                    .withEndDateTime("01/01/2016 1000").withTags("Incomplete").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";

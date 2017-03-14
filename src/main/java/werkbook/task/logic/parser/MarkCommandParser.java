@@ -31,22 +31,22 @@ public class MarkCommandParser {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
         }
-        MarkTaskDescriptor editTaskDescriptor = new MarkTaskDescriptor();
+        MarkTaskDescriptor markTaskDescriptor = new MarkTaskDescriptor();
         try {
             ArrayList<String> newTags = new ArrayList<String>();
             newTags.add("Complete");
 
-            editTaskDescriptor
+            markTaskDescriptor
                     .setTags(parseTagsForEdit(ParserUtil.toSet(Optional.of(newTags))));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
 
-        if (!editTaskDescriptor.isAnyFieldEdited()) {
+        if (!markTaskDescriptor.isAnyFieldEdited()) {
             return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new MarkCommand(index.get(), editTaskDescriptor);
+        return new MarkCommand(index.get(), markTaskDescriptor);
     }
 
     /**

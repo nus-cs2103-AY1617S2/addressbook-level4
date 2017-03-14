@@ -2,7 +2,7 @@ package werkbook.task.model;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -139,7 +139,7 @@ public class TaskList implements ReadOnlyTaskList {
 
         // Rebuild the list of task tags to point to the relevant tags in the
         // master tag list.
-        final Set<Tag> correctTagReferences = new HashSet<>();
+        final Set<Tag> correctTagReferences = new LinkedHashSet<>();
         taskTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
         task.setTags(new UniqueTagList(correctTagReferences));
     }

@@ -443,6 +443,20 @@ public class LogicManagerTest {
         assertCommandSuccess("undo", UndoCommand.MESSAGE_SUCCESS, expectedTaskList, expectedTaskList.getTaskList());
     }
 
+    @Test
+    public void execute_mark_tagShowsOpposite() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task toBeAdded = helper.adam();
+        TaskList expectedTaskList = new TaskList();
+        expectedTaskList.addTask(toBeAdded);
+
+        // execute command and verify result
+        assertCommandSuccess(helper.generateAddCommand(toBeAdded),
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedTaskList,
+                expectedTaskList.getTaskList());
+    }
+
     /**
      * A utility class to generate test data.
      */
@@ -453,9 +467,8 @@ public class LogicManagerTest {
             Description description = new Description("By lunch time");
             StartDateTime startDateTime = new StartDateTime("01/01/1980 0000");
             EndDateTime endDateTime = new EndDateTime("01/01/1980 0500");
-            Tag tag1 = new Tag("tag1");
-            Tag tag2 = new Tag("longertag2");
-            UniqueTagList tags = new UniqueTagList(tag1, tag2);
+            Tag tag1 = new Tag("Incomplete");
+            UniqueTagList tags = new UniqueTagList(tag1);
             return new Task(name, description, startDateTime, endDateTime, tags);
         }
 
@@ -469,7 +482,7 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(new Name("Task " + seed), new Description("" + Math.abs(seed)),
                     new StartDateTime("01/01/2016 0900"), new EndDateTime("02/01/2016 1000"),
-                    new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))));
+                    new UniqueTagList());
         }
 
         /** Generates the correct add command based on the task given */
@@ -566,7 +579,7 @@ public class LogicManagerTest {
          */
         Task generateTaskWithName(String name) throws Exception {
             return new Task(new Name(name), new Description("1"), new StartDateTime("01/01/1980 0000"),
-                    new EndDateTime("01/01/1980 0100"), new UniqueTagList(new Tag("tag")));
+                    new EndDateTime("01/01/1980 0100"), new UniqueTagList());
         }
     }
 }
