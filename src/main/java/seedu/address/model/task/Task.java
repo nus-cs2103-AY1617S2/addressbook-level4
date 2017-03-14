@@ -15,6 +15,7 @@ public class Task implements ReadOnlyTask {
     private UniqueTagList tags;
 
     private boolean done;
+    protected boolean today = false;
 
     /**
      * Every field must be present and not null.
@@ -103,6 +104,16 @@ public class Task implements ReadOnlyTask {
     @Override
     public String getTaskDateTime() {
         return null;
+    }
+
+    @Override
+    public void setToday() {
+        today = true;
+    }
+
+    @Override
+    public boolean isToday() {
+        return today;
     }
 
 }
