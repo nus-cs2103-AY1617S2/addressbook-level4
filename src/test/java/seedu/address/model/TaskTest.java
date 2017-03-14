@@ -23,6 +23,7 @@ public class TaskTest {
                     .withDeadline("07-03-2017 2300")
                     .withLabels("testLabel")
                     .withTitle("Do something")
+                    .withStatus(false)
                     .build();
             Task p = new Task(pb);
             int hashcode = -1501850788;

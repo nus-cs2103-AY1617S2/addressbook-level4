@@ -71,13 +71,14 @@ public class TaskCardHandle extends GuiHandle {
     public boolean isSameTask(ReadOnlyTask task) {
         assert(task != null);
         boolean result;
-        if (task.getDeadline().isPresent() && task.getStartTime().isPresent()) {
+        if (task.getDeadline().isPresent() && task.getStartTime().isPresent()
+                && this.getDeadline() != null && this.getDeadline() != null) {
             result = getTitle().equals(task.getTitle().title)
                 && getDeadline().equals(task.getDeadline().get().toString())
                 && getLabels().equals(getLabels(task.getLabels()))
                 && getStartTime().equals(task.getStartTime().get().toString())
                 && isCompleted().equals(task.isCompleted());
-        } else if (task.getDeadline().isPresent()) {
+        } else if (task.getDeadline().isPresent() && this.getDeadline() != null) {
             result = getTitle().equals(task.getTitle().title)
                     && getDeadline().equals(task.getDeadline().get().toString())
                     && getLabels().equals(getLabels(task.getLabels()))
@@ -106,6 +107,7 @@ public class TaskCardHandle extends GuiHandle {
             return getTitle().equals(handle.getTitle())
                     && getStartTime().equals(handle.getStartTime())
                     && getDeadline().equals(handle.getDeadline())
+                    && isCompleted().equals(handle.isCompleted())
                     && getLabels().equals(handle.getLabels());
         }
         return super.equals(obj);
