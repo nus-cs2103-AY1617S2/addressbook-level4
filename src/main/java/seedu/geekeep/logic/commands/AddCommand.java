@@ -44,11 +44,24 @@ public class AddCommand extends Command {
             tagSet.add(new Tag(tagName));
         }
 
+        DateTime start = null, end = null;
+        Location loc = null;
+        
+        if (startDateTime.isPresent()) {
+            start = new DateTime(startDateTime.get());
+        }
+        if (endDateTime.isPresent()) {
+            end = new DateTime(endDateTime.get());
+        }
+        if (location.isPresent()) {
+            loc = new Location(location.get());
+        }
+
         this.toAdd = new Task(
                 new Title(title),
-                new DateTime(startDateTime.orElse(null)),
-                new DateTime(endDateTime.orElse(null)),
-                new Location(location.orElse(null)),
+                start,
+                end,
+                loc,
                 new UniqueTagList(tagSet)
         );
     }
