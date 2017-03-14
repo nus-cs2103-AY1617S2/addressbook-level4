@@ -1,10 +1,13 @@
 package seedu.taskmanager.logic.commands;
 
+import static seedu.taskmanager.model.task.Date.DATE_VALIDATION_REGEX2;
+
 import java.util.List;
 import java.util.Optional;
 
 import seedu.taskmanager.commons.core.Messages;
 import seedu.taskmanager.commons.util.CollectionUtil;
+import seedu.taskmanager.commons.util.CurrentDate;
 import seedu.taskmanager.model.task.Date;
 import seedu.taskmanager.model.task.TaskName;
 import seedu.taskmanager.model.task.Task;
@@ -65,6 +68,7 @@ public class UpdateCommand extends Command {
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
+        
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_UPDATE_TASK_SUCCESS, taskToUpdate));
     }
@@ -82,7 +86,7 @@ public class UpdateCommand extends Command {
         StartTime updatedStartTime = updateTaskDescriptor.getStartTime().orElseGet(taskToUpdate::getStartTime);
         EndTime updatedEndTime = updateTaskDescriptor.getEndTime().orElseGet(taskToUpdate::getEndTime);
 //        UniqueCategoryList updatedCategories = updateTaskDescriptor.getCategories().orElseGet(taskToUpdate::getCategories);
-
+               
         return new Task(updatedTaskName, updatedDate, updatedStartTime, updatedEndTime/*, updatedCategories*/);
     }
 
