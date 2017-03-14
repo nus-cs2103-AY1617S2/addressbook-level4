@@ -88,7 +88,7 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Adds a task to the TaskBoss<br>
-Format: `add [n/TASK_NAME] [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIORITY_LEVEL]`
+Format: `add n/TASK_NAME [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIORITY_LEVEL]`
 
 > * Date can be written in any format whether using slashes, dashes, or natural language  <br>
 > * Time should be in 24-hour clock format or 12 hour format with AM or PM next to it, i.e `hr:min <PM/AM>` <br>
@@ -149,14 +149,19 @@ Examples:
 ### 2.5. Finding all tasks by Deadline: `find`
 
 Finds tasks whose deadlines contain any of the given keywords.<br>
-Format: `find d/date and time` 
+Format: `find sd/date and time` `find ed/date and time`
 
 > * The date is searched according to the date format user enters.
 > * The date format for find date command is restricted either DD-MM-YYYY or DD/MM/YY formats 
 or MM-DD-YYYY or MM/DD/YYYY, depending on your system's settings.
 
-* `find d/04-02-2017`<br>
-  Returns all tasks with the start or end date `04-02-2017`
+Examples:
+
+* `find sd/04-02-2017`<br>
+  Returns all tasks with the start date `04-02-2017`
+  
+* `find ed/05-02-2017`<br>
+  Returns all tasks with the end date `05-02-2017`
   
 ### 2.6. Deleting a task : `delete`
 
@@ -211,14 +216,14 @@ Example:
 
 * `name School ModuleStudy`<br>
 
-### 2.11. Listing tasks by category : `list`
+### 2.11. Listing tasks by category : `listcategory`
 
 Lists all tasks under a specified category.<br>
-Format: `list CATEGORY`
+Format: `listcategory CATEGORYNAME`
 
 Example:
 
-* `list School`<br>
+* `listcategory School`<br>
 
 ### 2.12. Marking a task done : `done`
 
@@ -268,8 +273,8 @@ Format: `save n/FILE_PATH NEW_FILE_NAME`
 
 ## 3. Command Summary
 
-* **Add**  `add [n/TASK_NAME] [i/INFO] [sd/START_DATE] [ed/END_DATE] [st/START_TIME] [et/END_TIME] [c/CATEGORY] [p/PRIORITY_LEVEL]` <br>
-  e.g. `add n/Post-exam celebration i/@Zouk sd/10-03-2017 ed/11-03-2017 st/12:00 et/15:00 c/Leisure p/1`
+* **Add**  `add n/TASK_NAME [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIORITY_LEVEL]` <br>
+  e.g. `add n/Post-exam celebration i/@Zouk sd/10-03-2017 ed/11-03-2017 c/Leisure p/1`
 
 * **Clear by Category** : `clear CATEGORY`
   e.g. `clear School`
@@ -280,7 +285,7 @@ Format: `save n/FILE_PATH NEW_FILE_NAME`
 * **Find by name** : `find n/TASK_NAME` <br>
   e.g. `find n/Meeting`
 
-* **Find by end date** : `find d/END_DATE` <br>
+* **Find by end date** : `find sd/END_DATE` <br>
   e.g. `find d/03-01-2017`
 
 * **Find by task information** : `find i/INFORMATION` <br>
@@ -292,12 +297,12 @@ Format: `save n/FILE_PATH NEW_FILE_NAME`
 
 * **List** : `list` <br>
 
-* **List by category** : `list CATEGORY` <br>
-  e.g. `list study`
+* **List by category** : `listcategory` <br>
+  e.g. `listcategory study`
 
 * **Help** : `help` <br>
 
-* **Edit** : `edit INDEX [i/INFO] [sd/START_DATE] [ed/END_DATE] [st/START_TIME] [et/END_TIME] [c/CATEGORY] [p/PRIORITY_LEVEL]` <br>
+* **Edit** : `edit INDEX [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIORITY_LEVEL]` <br>
   e.g.`edit 1 i/Use Stack et/23:59`
 
 * **Undo** : `undo` <br>
