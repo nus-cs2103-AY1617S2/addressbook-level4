@@ -58,17 +58,12 @@ public class PersonListPanelHandle extends GuiHandle {
             throw new IllegalArgumentException("List size mismatched\n" +
                     "Expected " + (getListView().getItems().size() - 1) + " persons");
         }
-        assertTrue("not in order", this.containsInOrder(startPosition, persons));
+        assertTrue(this.containsInOrder(startPosition, persons));
         for (int i = 0; i < persons.length; i++) {
             final int scrollTo = i + startPosition;
             guiRobot.interact(() -> getListView().scrollTo(scrollTo));
             guiRobot.sleep(200);
-<<<<<<< HEAD:src/test/java/guitests/guihandles/TaskListPanelHandle.java
-            if (!TestUtil.compareCardAndPerson(getTaskCardHandle(startPosition + i), persons[i])) {
-                assertTrue("current card: " + i + " is not correct", !TestUtil.compareCardAndPerson(getTaskCardHandle(startPosition + i), persons[i]));
-=======
             if (!TestUtil.compareCardAndPerson(getPersonCardHandle(startPosition + i), persons[i])) {
->>>>>>> parent of 6b62a59... test commit:src/test/java/guitests/guihandles/PersonListPanelHandle.java
                 return false;
             }
         }

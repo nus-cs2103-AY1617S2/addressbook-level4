@@ -191,7 +191,7 @@ public class LogicManagerTest {
 //        assertCommandFailure("add wrong args wrong args", expectedMessage);
 //        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid,address", expectedMessage);
 //        assertCommandFailure("add Valid Name p/12345 valid@email.butNoPrefix a/valid, address", expectedMessage);
-//        assertCommandFailure("add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
+//        assertCommandFailure("add Valid Name p/12345 e/valid@email.NoAddressPrefix valid, address", expectedMessage);
     }
 
     @Test

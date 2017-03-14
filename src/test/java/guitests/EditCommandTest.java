@@ -58,18 +58,6 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
-<<<<<<< HEAD
-        commandBox.runCommand("find level");
-
-        String detailsToEdit = "sleep";
-        int filteredPersonListIndex = 1;
-        int addressBookIndex = 5;
-
-        TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withName("sleep").build();
-
-       assertEditSuccess(filteredPersonListIndex, addressBookIndex, detailsToEdit, editedTask);
-=======
         commandBox.runCommand("find Elle");
 
         String detailsToEdit = "Belle";
@@ -80,7 +68,6 @@ public class EditCommandTest extends AddressBookGuiTest {
         TestPerson editedPerson = new PersonBuilder(personToEdit).withName("Belle").build();
 
         assertEditSuccess(filteredPersonListIndex, addressBookIndex, detailsToEdit, editedPerson);
->>>>>>> parent of 6b62a59... test commit
     }
 
     @Test
@@ -141,14 +128,8 @@ public class EditCommandTest extends AddressBookGuiTest {
         assertMatching(editedPerson, editedCard);
 
         // confirm the list now contains all previous persons plus the person with updated details
-<<<<<<< HEAD
-        expectedTasksList[addressBookIndex - 1] = editedTask;
-        assertTrue("task list panel is not matching", taskListPanel.isListMatching(expectedTasksList));
-        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
-=======
         expectedPersonsList[addressBookIndex - 1] = editedPerson;
         assertTrue(personListPanel.isListMatching(expectedPersonsList));
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedPerson));
->>>>>>> parent of 6b62a59... test commit
     }
 }
