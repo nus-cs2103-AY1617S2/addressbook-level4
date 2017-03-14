@@ -33,7 +33,6 @@ public class EditCommandParser {
                 new ArgumentTokenizer(PREFIX_COMMENT, PREFIX_TAG, PREFIX_DATE, PREFIX_PRIORITY);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
-        System.out.println(preambleFields.get(1));
 
         Optional<Integer> index = preambleFields.get(0).flatMap(ParserUtil::parseIndex);
         if (!index.isPresent()) {
