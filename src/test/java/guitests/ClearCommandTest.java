@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 public class ClearCommandTest extends AddressBookGuiTest {
-	/*
+
     @Test
     public void clear() {
 
@@ -22,7 +22,6 @@ public class ClearCommandTest extends AddressBookGuiTest {
         //verify clear command works when the list is empty
         assertClearCommandSuccess();
     }
-    */
 
     private void assertClearCommandSuccess() {
         commandBox.runCommand("clear");
