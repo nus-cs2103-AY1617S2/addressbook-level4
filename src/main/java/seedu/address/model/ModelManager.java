@@ -24,6 +24,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
     private TaskManager taskManagerCopy;
+    private String flag;
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -37,6 +38,7 @@ public class ModelManager extends ComponentManager implements Model {
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
         this.taskManagerCopy = new TaskManager(taskManager);
+        this.flag = "empty copy";
     }
 
     public ModelManager() {
@@ -95,6 +97,14 @@ public class ModelManager extends ComponentManager implements Model {
 
     public boolean checkChanges() {
         return taskManagerCopy.isEmpty();
+    }
+
+    public void updateFlag(String newFlag) {
+        flag = newFlag;
+    }
+
+    public String getFlag() {
+        return this.flag;
     }
 
     //=========== Filtered Task List Accessors =============================================================
