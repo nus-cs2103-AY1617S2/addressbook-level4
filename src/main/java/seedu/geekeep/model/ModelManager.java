@@ -156,6 +156,28 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    @Override
+    public void markTaskDone(int filteredTaskListIndex) {
+        // TODO Auto-generated method stub
 
+    }
+
+    @Override
+    public void markTaskUndone(int filteredTaskListIndex) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void updateFilteredTaskListToShowDone() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void updateFilteredTaskListToShowUndone() {
+        // TODO Auto-generated method stub
+
+    }
 
 }

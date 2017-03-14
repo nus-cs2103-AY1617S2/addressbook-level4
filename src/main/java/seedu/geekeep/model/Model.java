@@ -55,3 +55,4 @@ public interface Model {
     void markTaskUndone(int filteredTaskListIndex);
 
 }
+
