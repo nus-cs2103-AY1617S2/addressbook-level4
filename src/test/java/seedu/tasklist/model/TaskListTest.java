@@ -55,7 +55,7 @@ public class TaskListTest {
         TypicalTestTasks td = new TypicalTestTasks();
         // Repeat td.tutorial twice
         List<Task> newTasks = Arrays.asList(new EventTask((TestEventTask) td.tutorial),
-                                            new FloatingTask((TestFloatingTask) td.homework));
+                                            new EventTask((TestEventTask) td.tutorial));
         List<Tag> newTags = td.tutorial.getTags().asObservableList();
         TaskListStub newData = new TaskListStub(newTasks, newTags);
 
