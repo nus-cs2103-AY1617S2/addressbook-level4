@@ -69,7 +69,7 @@ public class TestTask implements ReadOnlyTask {
     public Date getDate() {
         return date;
     }
- 
+
     @Override
     public Deadline getDeadline() {
         return deadline;
