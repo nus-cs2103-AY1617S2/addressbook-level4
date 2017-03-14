@@ -17,6 +17,11 @@ public class Deadline {
 
     private final TaskDate date;
 
+    public Deadline() {
+        DateFactory dateFactory = new DateFactory();
+        date = dateFactory.getUnassignedTime();
+    }
+
     /**
      * Constructor for Deadline.
      */
@@ -39,6 +44,26 @@ public class Deadline {
         } catch (IllegalValueException e) {
             return false;
         }
+    }
+
+    public boolean isFloating() {
+        return date.isFloating();
+    }
+
+    public boolean isOverdue() {
+        return date.hasPassed();
+    }
+
+    public boolean isToday() {
+        return date.isHappeningToday();
+    }
+
+    public boolean isTomorrow() {
+        return date.isHappeningTomorrow();
+    }
+
+    public boolean isThisWeek() {
+        return date.isHappeningThisWeek();
     }
 
     @Override
