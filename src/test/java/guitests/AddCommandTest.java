@@ -13,7 +13,7 @@ import seedu.todolist.testutil.TestUtil;
 
 public class AddCommandTest extends ToDoListGuiTest {
 
-    @Ignore @Test
+    @Test
     public void add() {
         //add one task
         TestTask[] currentList = td.getTypicalTasks();
