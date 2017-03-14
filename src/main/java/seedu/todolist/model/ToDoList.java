@@ -48,6 +48,12 @@ public class ToDoList implements ReadOnlyToDoList {
         resetData(toBeCopied);
     }
 
+    public ToDoList(ToDoList toBeCopied, boolean toStore) {
+        resetData(toBeCopied);
+    }
+
+
+
 //// list overwrite operations
 
     public void setTasks(List<? extends ReadOnlyTask> tasks)
@@ -161,6 +167,7 @@ public class ToDoList implements ReadOnlyToDoList {
         // TODO: refine later
     }
 
+
     @Override
     public ObservableList<ReadOnlyTask> getTaskList() {
         return new UnmodifiableObservableList<>(tasks.asObservableList());
@@ -183,5 +190,13 @@ public class ToDoList implements ReadOnlyToDoList {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(tasks, tags);
+    }
+
+    public UniqueTaskList getTasks() {
+        return tasks;
+    }
+
+    public UniqueTagList getTags() {
+        return tags;
     }
 }

@@ -1,6 +1,7 @@
 package seedu.todolist.logic.commands;
 
 import seedu.todolist.commons.core.Messages;
+import seedu.todolist.logic.UndoManager;
 import seedu.todolist.logic.commands.exceptions.CommandException;
 import seedu.todolist.model.Model;
 
@@ -9,6 +10,7 @@ import seedu.todolist.model.Model;
  */
 public abstract class Command {
     protected Model model;
+    protected UndoManager undoManager;
 
     /**
      * Constructs a feedback message to summarise an operation that displayed a listing of persons.
@@ -33,8 +35,9 @@ public abstract class Command {
      * Commands making use of any of these should override this method to gain
      * access to the dependencies.
      */
-    public void setData(Model model) {
+    public void setData(Model model, UndoManager undoManager) {
         this.model = model;
+        this.undoManager = undoManager;
     }
 
     public abstract boolean isMutating();
