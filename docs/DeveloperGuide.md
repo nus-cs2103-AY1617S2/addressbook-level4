@@ -1,6 +1,6 @@
-# AddressBook Level 4 - Developer Guide
+# Fast Task - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team CS2103JAN2017-F11-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -51,7 +51,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 ### 1.3. Configuring Checkstyle
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
-3. Enter an arbitrary configuration name e.g. addressbook
+3. Enter an arbitrary configuration name e.g. taskmanager
 4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
 5. Click OK once, go to the `Main` tab, use the newly imported check configuration.
 6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
@@ -120,15 +120,15 @@ _Figure 2.1.2 : Class Diagram of the Logic Component_
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
 command `delete 1`.
 
-<img src="images\SDforDeletePerson.png" width="800"><br>
+<img src="images\SDforDeleteTask.png" width="800"><br>
 _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 
->Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed,
+>Note how the `Model` simply raises a `TaskManagerChangedEvent` when the Task manager data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
-<img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
+<img src="images\SDforDeleteTaskEventHandling.png" width="800"><br>
 _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
@@ -146,7 +146,7 @@ _Figure 2.2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`,
 `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
@@ -171,12 +171,12 @@ _Figure 2.3.1 : Structure of the Logic Component_
 
 1. `Logic` uses the `Parser` class to parse the user command.
 2. This results in a `Command` object which is executed by the `LogicManager`.
-3. The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
+3. The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
 4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
-<img src="images/DeletePersonSdForLogic.png" width="800"><br>
+<img src="images/DeleteTaskSdForLogic.png" width="800"><br>
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
 ### 2.4. Model component
@@ -192,7 +192,7 @@ The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
 * stores the Address Book data.
-* exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
+* exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
@@ -212,7 +212,7 @@ The `Storage` component,
 
 ### 2.6. Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.task.commons` package.
 
 ## 3. Implementation
 
@@ -263,13 +263,13 @@ We have two types of tests:
 
 2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
    1. _Unit tests_ targeting the lowest level methods/classes. <br>
-      e.g. `seedu.address.commons.UrlUtilTest`
+      e.g. `seedu.task.commons.UrlUtilTest`
    2. _Integration tests_ that are checking the integration of multiple code units
      (those code units are assumed to be working).<br>
-      e.g. `seedu.address.storage.StorageManagerTest`
+      e.g. `seedu.task.storage.StorageManagerTest`
    3. Hybrids of unit and integration tests. These test are checking multiple code units as well as
       how the are connected together.<br>
-      e.g. `seedu.address.logic.LogicManagerTest`
+      e.g. `seedu.task.logic.LogicManagerTest`
 
 #### Headless GUI Testing
 Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
@@ -323,7 +323,7 @@ Here are the steps to convert the project documentation files to PDF format.
  1. Make sure you have set up GitHub Pages as described in [UsingGithubPages.md](UsingGithubPages.md#setting-up).
  1. Using Chrome, go to the [GitHub Pages version](UsingGithubPages.md#viewing-the-project-site) of the
     documentation file. <br>
-    e.g. For [UserGuide.md](UserGuide.md), the URL will be `https://<your-username-or-organization-name>.github.io/addressbook-level4/docs/UserGuide.html`.
+    e.g. For [UserGuide.md](UserGuide.md), the URL will be `https://<your-username-or-organization-name>.github.io/main/docs/UserGuide.html`.
  1. Click on the `Print` option in Chrome's menu.
  1. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. <br>
     For best results, use the settings indicated in the screenshot below. <br>
@@ -347,26 +347,103 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | user | add a new task|
+`* * *` | user | delete a task | remove tasks that I have completed.
+`* * *` | user | delete multiple task| remove multiple tasks that I have completed.
+`* * *` | user | edit a task | update relevant information about the task
+`* * *` | user | search for a task | see detailed information about the task.
+`* * *` | user | update the status of a task | view completed or pending tasks. 
+`* * *` | user | see upcoming tasks | see what needs to be done soon.
+`* *`   | user | categorize a task | organize the tasks.
+`* *`   | user | favourite tasks | keep track of important tasks.
+`* *`   | user | see alerts on upcoming tasks | complete time sensitive tasks.
+`* *`   | user | quickly add predefined tasks | to save time defining tasks
+`* *`   | user | can undo last command | to fix mistakes.
+`* *`   | user | be notified if two tasks have a time conflict | be aware of schedule conflicts
+`* *`   | user | can use multiple devices | have more opportunity to check task manager
+`* *`   | user | can undo last command | to fix mistakes.
+`*`     | user | drag and drop events from UI | change event times easier
+`*`     | user | copy and paste events from UI | add events quicker
+`*`     | user | can send copy of task manager | share my schedule easily
+`*`     | user | can have a shared group calendar | to coordinate with team members
 
 {More to be added}
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Task Manager` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: Add a new task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User requests to add a task
+2. Task manager shows dialouge box for users to enter task details.
+3. Task shows up in list.<br>
+Use case ends.
+
+**Extensions**
+
+3a. The task created is in invalid format
+
+> 3a1. Task manager shows an error message <br>
+  Use case resumes at step 2
+  
+3b. The task name is empty.
+
+> 3b1. Task manager shows an error message <br>
+  Use case resumes at step 2  
+
+#### Use case: Search for existing task
+
+**MSS**
+
+1. User requests to search for a task
+2. Task manager shows dialouge box for users to enter search parameters.
+3. Task shows up in list.<br>
+Use case ends.
+
+**Extensions**
+
+3a. The tasks is not in list
+
+> 3a1. Task manager shows an error message <br>
+  Use case resumes at step 2
+  
+3b. Search parameters entered could not be found
+
+> 3b1. Task manager shows an error message <br>
+  Use case resumes at step 2
+
+#### Use case: Edit an existing task
+
+**MSS**
+
+1. User requests to edit an existing task
+2. Task manager shows dialouge box for users to enter task details.
+3. Task gets updated and shows up in list.<br>
+Use case ends.
+
+**Extensions**
+
+3a. The tasks is in invalid format
+
+> 3a1. Task manager shows an error message <br>
+  Use case resumes at step 2
+
+3b. The task name is empty.
+
+> 3b1. Task manager shows an error message <br>
+  Use case resumes at step 2
+
+#### Use case: Delete a task
+
+**MSS**
+
+1. User requests to list tasks
+2. Task manager shows a list of completed and not completed tasks.
+3. User requests to delete a specific task in the list
+4. Task manager deletes the task <br>
 Use case ends.
 
 **Extensions**
@@ -375,9 +452,9 @@ Use case ends.
 
 > Use case ends
 
-3a. The given index is invalid
+3a. The given task name is invalid
 
-> 3a1. AddressBook shows an error message <br>
+> 3a1. Task manager shows an error message <br>
   Use case resumes at step 2
 
 {More to be added}
@@ -385,7 +462,7 @@ Use case ends.
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 100 tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
 
@@ -397,23 +474,39 @@ Use case ends.
 
 > Windows, Linux, Unix, OS-X
 
-##### Private contact detail
-
-> A contact detail that is not meant to be shared with others
-
 ## Appendix E : Product Survey
 
-**Product Name**
+**Couple**
 
-Author: ...
+Author: Jacob
 
 Pros:
 
-* ...
-* ...
+* Can edit tasks by clicking on the task itself 
+* Can create categories for tasks
+* Can visually cross out a completed task, similar to a sheet of paper
+* Can favorite specific tasks
 
 Cons:
 
-* ...
-* ...
+* Cannot search for a task
+* Can only have a limited number of tasks
+* Cannot set a deadline for when the task must be completed
+* Cannot write a description for the task
+
+## Appendix E : Product Survey
+
+**Begin**
+
+Author: Edwin
+
+Pros:
+
+* Has simplistic view of tasks with 3 lists, today, tommorrow and yesterday.  
+* Easy to use interface
+
+Cons:
+
+* unable to manage tasks that stretches for more than 3 days.
+* unable to see previousl completed tasks.
 
