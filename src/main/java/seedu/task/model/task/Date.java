@@ -134,7 +134,7 @@ public class Date {
 
     @Override
     public String toString() {
-        if (value == null){
+        if (value == null) {
             return new String("");
         }
         SimpleDateFormat displayFormat = new SimpleDateFormat("d/M/y h:mm a");

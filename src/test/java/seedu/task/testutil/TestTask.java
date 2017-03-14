@@ -106,12 +106,13 @@ public class TestTask implements ReadOnlyTask {
     }
 
     public String getAddCommand() {
+        //sequence name->location->start date->end date->remark->tags
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
-        sb.append("l/" + this.getLocation().value + " ");
-        sb.append("s/" + this.getStartDate().toString() + " ");
-        sb.append("e/" + this.getEndDate().toString() + " ");
-        sb.append("r/" + this.getRemark().value + " ");
+        if  (this.getLocation() != null)    sb.append("l/" + this.getLocation().value + " ");
+        if  (this.getStartDate() != null)   sb.append("s/" + this.getStartDate().toString() + " ");
+        if  (this.getEndDate() != null)    sb.append("e/" + this.getEndDate().toString() + " ");
+        if  (this.getRemark() != null)    sb.append("r/" + this.getRemark().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }

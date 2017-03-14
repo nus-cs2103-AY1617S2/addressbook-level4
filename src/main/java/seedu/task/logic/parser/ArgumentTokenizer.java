@@ -119,7 +119,6 @@ public class ArgumentTokenizer {
 
     /**
      * Extracts the preamble/arguments and stores them in local variables.
-     * 
      * @param prefixPositions
      *            must contain all prefixes in the {@code argsString}
      */
@@ -146,7 +145,6 @@ public class ArgumentTokenizer {
 
     /**
      * Returns the hashmap that stores all the tokenized arguments
-     * 
      * @return
      */
     public Map<Prefix, List<String>> getTokenizedArguments() {

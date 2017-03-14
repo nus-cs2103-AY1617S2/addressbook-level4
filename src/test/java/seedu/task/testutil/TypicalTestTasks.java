@@ -10,7 +10,7 @@ import seedu.task.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask apply, buy, calculate, decide, eat, find, give, handle, identify;
+    public TestTask apply, buy, calculate, decide, eat, find, give, handle, identify, jump, kick, look, mark, neglect;
 
     public TypicalTestTasks() {
         try {
@@ -45,6 +45,20 @@ public class TypicalTestTasks {
             identify = new TaskBuilder().withName("Identify problems in report")
                     .withStartDate("31-12-99").withEndDate("24-02-2131")
                     .withRemark("Might need help from teammates").withLocation("chicago ave").build();
+            jump = new TaskBuilder().withName("Jump ropes")
+                    .withStartDate("31-01-99").withEndDate("24-02-2131")
+                    .withRemark("Please exercise").withLocation("ERC field").build();
+            kick = new TaskBuilder().withName("Kick over the cat")
+                    .withStartDate("11-01-99").withEndDate("24-01-2131")
+                    .withLocation("Physics Lab").build();
+            look = new TaskBuilder().withName("Look for the exam location")
+                    .withStartDate("23-01-99").withEndDate("24-02-2112")
+                    .withRemark("Please help me find location").build();
+            mark = new TaskBuilder().withName("Mark the tasks completed")
+                    .withStartDate("23-01-99")
+                    .withRemark("Tick the completed tasks").build();
+            neglect = new TaskBuilder().withName("Neglect all warnings").withStartDate("8-9-2017")
+                    .withRemark("Neglect this remark please").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";

@@ -84,9 +84,10 @@ public class TaskCardHandle extends GuiHandle {
         Collections.sort(testTag);
         Collections.sort(taskTag);
         return getName().equals(task.getName().fullName)
-                && getEndDate().equals(task.getEndDate().toString())
-                && getRemark().equals(task.getRemark().value)
-                && getLocation().equals(task.getLocation().value)
+                && (task.getStartDate() == null || getStartDate().equals(task.getStartDate().toString()))
+                && (task.getEndDate() == null || getEndDate().equals(task.getEndDate().toString()))
+                && (task.getRemark() == null || getRemark().equals(task.getRemark().value))
+                && (task.getLocation() == null || getLocation().equals(task.getLocation().value))
                 && testTag.equals(taskTag);
     }
 
@@ -95,9 +96,10 @@ public class TaskCardHandle extends GuiHandle {
         if (obj instanceof TaskCardHandle) {
             TaskCardHandle handle = (TaskCardHandle) obj;
             return getName().equals(handle.getName())
-                    && getEndDate().equals(handle.getEndDate())
-                    && getRemark().equals(handle.getRemark())
-                    && getLocation().equals(handle.getLocation())
+                    && (handle.getStartDate() == null || getStartDate().equals(handle.getStartDate()))
+                    && (handle.getEndDate() == null || getEndDate().equals(handle.getEndDate()))
+                    && (handle.getRemark() == null || getRemark().equals(handle.getRemark()))
+                    && (handle.getLocation() == null || getLocation().equals(handle.getLocation()))
                     && getTags().equals(handle.getTags());
         }
         return super.equals(obj);

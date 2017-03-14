@@ -25,36 +25,28 @@ import seedu.task.model.task.Remark;
  */
 public class AddCommandParser {
 
-    private String START_DATE,END_DATE,REMARK,LOCATION;
+    private String START_DATE, END_DATE, REMARK, LOCATION;
+
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the
+     * AddCommand and returns an AddCommand object for execution.
      */
     public Command parse(String args) {
-        ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_START_DATE, PREFIX_END_DATE, PREFIX_REMARK, PREFIX_LOCATION,PREFIX_TAG);
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_START_DATE, PREFIX_END_DATE, PREFIX_REMARK,
+                PREFIX_LOCATION, PREFIX_TAG);
         argsTokenizer.tokenize(args);
-        
-        
-        Map<Prefix,List<String>> tokenizedArguments  =argsTokenizer.getTokenizedArguments();
-        START_DATE = tokenizedArguments.containsKey(PREFIX_START_DATE)?argsTokenizer.getValue(PREFIX_START_DATE).get():Date.DEFAULT_DATE;
-        END_DATE = tokenizedArguments.containsKey(PREFIX_END_DATE)?argsTokenizer.getValue(PREFIX_END_DATE).get():Date.DEFAULT_DATE;
-        REMARK = tokenizedArguments.containsKey(PREFIX_REMARK)?argsTokenizer.getValue(PREFIX_REMARK).get():Remark.DEFAULT_REMARK;
-        LOCATION = tokenizedArguments.containsKey(PREFIX_LOCATION)?argsTokenizer.getValue(PREFIX_LOCATION).get():Location.DEFAULT_LOCATION;
-        
+        Map<Prefix, List<String>> tokenizedArguments = argsTokenizer.getTokenizedArguments();
+        START_DATE = tokenizedArguments.containsKey(PREFIX_START_DATE) ? argsTokenizer.getValue(PREFIX_START_DATE).get()
+                : Date.DEFAULT_DATE;
+        END_DATE = tokenizedArguments.containsKey(PREFIX_END_DATE) ? argsTokenizer.getValue(PREFIX_END_DATE).get()
+                : Date.DEFAULT_DATE;
+        REMARK = tokenizedArguments.containsKey(PREFIX_REMARK) ? argsTokenizer.getValue(PREFIX_REMARK).get()
+                : Remark.DEFAULT_REMARK;
+        LOCATION = tokenizedArguments.containsKey(PREFIX_LOCATION) ? argsTokenizer.getValue(PREFIX_LOCATION).get()
+                : Location.DEFAULT_LOCATION;
         try {
-            return new AddCommand(
-                    argsTokenizer.getPreamble().get(),
-                  START_DATE,
-                  END_DATE,
-                  REMARK,
-                  LOCATION,
-//                    argsTokenizer.getValue(PREFIX_START_DATE).get(),  
-//                    argsTokenizer.getValue(PREFIX_END_DATE).get(),  
-//                    argsTokenizer.getValue(PREFIX_REMARK).get(),    
-//                    argsTokenizer.getValue(PREFIX_LOCATION).get(),  
-                    ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
-            );
+            return new AddCommand(argsTokenizer.getPreamble().get(), START_DATE, END_DATE, REMARK, LOCATION,
+                    ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)));
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         } catch (IllegalValueException ive) {
