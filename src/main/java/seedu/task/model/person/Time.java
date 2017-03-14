@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.task.model.person;
 
 public class Time {
 	private int hour;

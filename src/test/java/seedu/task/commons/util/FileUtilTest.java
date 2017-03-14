@@ -1,4 +1,4 @@
-package seedu.address.commons.util;
+package seedu.task.commons.util;
 
 
 import static org.junit.Assert.assertEquals;
@@ -8,6 +8,8 @@ import java.io.File;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import seedu.task.commons.util.FileUtil;
 
 public class FileUtilTest {
 

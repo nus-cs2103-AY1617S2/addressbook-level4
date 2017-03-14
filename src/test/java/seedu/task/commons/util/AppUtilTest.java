@@ -1,10 +1,12 @@
-package seedu.address.commons.util;
+package seedu.task.commons.util;
 
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import seedu.task.commons.util.AppUtil;
 
 public class AppUtilTest {
 

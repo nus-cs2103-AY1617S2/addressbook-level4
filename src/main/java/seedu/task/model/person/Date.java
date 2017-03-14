@@ -1,7 +1,7 @@
 /**
  * 
  */
-package seedu.address.model.person;
+package seedu.task.model.person;
 
 /**
  * @author Daniel Mullen

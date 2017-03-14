@@ -1,6 +1,6 @@
-package seedu.address.model.person;
+package seedu.task.model.person;
 
-import seedu.address.model.tag.UniqueTagList;
+import seedu.task.model.tag.UniqueTagList;
 
 /**
  * A read-only immutable interface for a Person in the addressbook.

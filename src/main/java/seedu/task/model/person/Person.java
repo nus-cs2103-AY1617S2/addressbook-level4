@@ -1,10 +1,10 @@
-package seedu.address.model.person;
+package seedu.task.model.person;
 
 import java.util.Objects;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.CollectionUtil;
-import seedu.address.model.tag.UniqueTagList;
+import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.commons.util.CollectionUtil;
+import seedu.task.model.tag.UniqueTagList;
 
 /**
  * Represents a Person in the address book.

@@ -1,22 +1,22 @@
-package seedu.address.logic.parser;
+package seedu.task.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.task.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.IncorrectCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.SelectCommand;
+import seedu.task.logic.commands.AddCommand;
+import seedu.task.logic.commands.ClearCommand;
+import seedu.task.logic.commands.Command;
+import seedu.task.logic.commands.DeleteCommand;
+import seedu.task.logic.commands.EditCommand;
+import seedu.task.logic.commands.ExitCommand;
+import seedu.task.logic.commands.FindCommand;
+import seedu.task.logic.commands.HelpCommand;
+import seedu.task.logic.commands.IncorrectCommand;
+import seedu.task.logic.commands.ListCommand;
+import seedu.task.logic.commands.SelectCommand;
 
 /**
  * Parses user input.

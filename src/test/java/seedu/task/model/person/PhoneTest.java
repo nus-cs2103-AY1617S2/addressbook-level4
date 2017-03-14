@@ -1,9 +1,11 @@
-package seedu.address.model.person;
+package seedu.task.model.person;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+
+import seedu.task.model.person.Phone;
 
 public class PhoneTest {
 

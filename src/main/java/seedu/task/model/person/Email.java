@@ -1,7 +1,7 @@
-package seedu.address.model.person;
+package seedu.task.model.person;
 
 
-import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.task.commons.exceptions.IllegalValueException;
 
 /**
  * Represents a Person's phone number in the address book.

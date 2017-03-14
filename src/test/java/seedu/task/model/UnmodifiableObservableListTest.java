@@ -1,7 +1,7 @@
-package seedu.address.model;
+package seedu.task.model;
 
 import static org.junit.Assert.assertSame;
-import static seedu.address.testutil.TestUtil.assertThrows;
+import static seedu.task.testutil.TestUtil.assertThrows;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -15,7 +15,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
-import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.task.commons.core.UnmodifiableObservableList;
 
 public class UnmodifiableObservableListTest {
 

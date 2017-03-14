@@ -1,21 +1,21 @@
-package seedu.address.logic.commands;
+package seedu.task.logic.commands;
 
 import java.util.List;
 import java.util.Optional;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.util.CollectionUtil;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Date;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.Time;
-import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.tag.UniqueTagList;
+import seedu.task.commons.core.Messages;
+import seedu.task.commons.util.CollectionUtil;
+import seedu.task.logic.commands.exceptions.CommandException;
+import seedu.task.model.person.Address;
+import seedu.task.model.person.Date;
+import seedu.task.model.person.Email;
+import seedu.task.model.person.Name;
+import seedu.task.model.person.Person;
+import seedu.task.model.person.Phone;
+import seedu.task.model.person.ReadOnlyPerson;
+import seedu.task.model.person.Time;
+import seedu.task.model.person.UniquePersonList;
+import seedu.task.model.tag.UniqueTagList;
 
 /**
  * Edits the details of an existing person in the address book.

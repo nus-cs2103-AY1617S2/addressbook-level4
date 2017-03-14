@@ -1,6 +1,6 @@
-package seedu.address.commons.core;
+package seedu.task.commons.core;
 
-import seedu.address.commons.events.BaseEvent;
+import seedu.task.commons.events.BaseEvent;
 
 /**
  * Base class for *Manager classes
