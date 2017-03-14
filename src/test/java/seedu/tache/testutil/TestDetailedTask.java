@@ -53,7 +53,7 @@ public class TestDetailedTask implements ReadOnlyDetailedTask  {
     public void setStartTime(Time startTime) {
         this.startTime = startTime;
     }
-    
+
     public void setEndTime(Time endTime) {
         this.endTime = endTime;
     }
@@ -82,7 +82,7 @@ public class TestDetailedTask implements ReadOnlyDetailedTask  {
     public Time getStartTime() {
         return startTime;
     }
-    
+
     @Override
     public Time getEndTime() {
         return endTime;

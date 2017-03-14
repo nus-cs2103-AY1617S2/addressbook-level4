@@ -18,7 +18,7 @@ public class CliSyntax {
     /* Parameter delimiter definitions */
     public static final String PARAMETER_DELIMITER = new String(";");
     public static final String EDIT_PARAMETER_DELIMITER = new String(" ");
-    
+
     /* Parameter names definitions */
     public static final String NAME_PARAMETER = "name";
     public static final String START_DATE_PARAMETER = "start_date";

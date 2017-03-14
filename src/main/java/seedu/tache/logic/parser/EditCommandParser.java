@@ -1,13 +1,13 @@
 package seedu.tache.logic.parser;
 
 import static seedu.tache.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_DELIMITER;
 import static seedu.tache.logic.parser.CliSyntax.EDIT_PARAMETER_DELIMITER;
-import static seedu.tache.logic.parser.CliSyntax.NAME_PARAMETER;
-import static seedu.tache.logic.parser.CliSyntax.START_DATE_PARAMETER;
 import static seedu.tache.logic.parser.CliSyntax.END_DATE_PARAMETER;
-import static seedu.tache.logic.parser.CliSyntax.START_TIME_PARAMETER;
 import static seedu.tache.logic.parser.CliSyntax.END_TIME_PARAMETER;
+import static seedu.tache.logic.parser.CliSyntax.NAME_PARAMETER;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_DELIMITER;
+import static seedu.tache.logic.parser.CliSyntax.START_DATE_PARAMETER;
+import static seedu.tache.logic.parser.CliSyntax.START_TIME_PARAMETER;
 import static seedu.tache.logic.parser.CliSyntax.TAG_PARAMETER;
 
 import java.util.Arrays;
@@ -47,29 +47,32 @@ public class EditCommandParser {
 
         for (int i = 1; i < preambleFields.length; i++) {
             try {
-                String updateParameter = preambleFields[i].substring(0, preambleFields[i].replaceAll("^\\s+", "").indexOf(EDIT_PARAMETER_DELIMITER) + 1).trim();
-                String updateValue = preambleFields[i].substring(preambleFields[i].replaceAll("^\\s+", "").indexOf(EDIT_PARAMETER_DELIMITER) + 1).trim();
-                
+                String updateParameter = preambleFields[i].substring(0, preambleFields[i].replaceAll("^\\s+", "")
+                                         .indexOf(EDIT_PARAMETER_DELIMITER) + 1).trim();
+                String updateValue = preambleFields[i].substring(preambleFields[i].replaceAll("^\\s+", "")
+                                     .indexOf(EDIT_PARAMETER_DELIMITER) + 1).trim();
+
                 switch(updateParameter) {
-                    case NAME_PARAMETER:
-                        String quotesRemovedValue = updateValue.substring(1, updateValue.length() - 1);
-                        editTaskDescriptor.setName(Optional.of(new Name(quotesRemovedValue)));
-                        break;
-                    case START_DATE_PARAMETER:
-                        editTaskDescriptor.setStartDate(Optional.of(new Date(updateValue)));
-                        break;
-                    case END_DATE_PARAMETER:
-                        editTaskDescriptor.setEndDate(Optional.of(new Date(updateValue)));
-                        break;
-                    case START_TIME_PARAMETER:
-                        editTaskDescriptor.setStartTime(Optional.of(new Time(updateValue)));
-                        break;
-                    case END_TIME_PARAMETER:
-                        editTaskDescriptor.setEndTime(Optional.of(new Time(updateValue)));
-                        break;
-                    case TAG_PARAMETER:
-                        editTaskDescriptor.setTags(parseTagsForEdit(Arrays.asList(updateValue.split(EDIT_PARAMETER_DELIMITER))));
-                        break;
+                case NAME_PARAMETER:
+                    String quotesRemovedValue = updateValue.substring(1, updateValue.length() - 1);
+                    editTaskDescriptor.setName(Optional.of(new Name(quotesRemovedValue)));
+                    break;
+                case START_DATE_PARAMETER:
+                    editTaskDescriptor.setStartDate(Optional.of(new Date(updateValue)));
+                    break;
+                case END_DATE_PARAMETER:
+                    editTaskDescriptor.setEndDate(Optional.of(new Date(updateValue)));
+                    break;
+                case START_TIME_PARAMETER:
+                    editTaskDescriptor.setStartTime(Optional.of(new Time(updateValue)));
+                    break;
+                case END_TIME_PARAMETER:
+                    editTaskDescriptor.setEndTime(Optional.of(new Time(updateValue)));
+                    break;
+                case TAG_PARAMETER:
+                    editTaskDescriptor.setTags(parseTagsForEdit(Arrays.asList(updateValue
+                                                                              .split(EDIT_PARAMETER_DELIMITER))));
+                    break;
                 }
             } catch (IllegalValueException ive) {
                 return new IncorrectCommand(ive.getMessage());

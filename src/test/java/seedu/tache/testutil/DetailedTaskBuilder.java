@@ -41,7 +41,7 @@ public class DetailedTaskBuilder {
         this.detailedTask.setStartTime(new Time(startTime));
         return this;
     }
-    
+
     public DetailedTaskBuilder withEndTime(String endTime) throws IllegalValueException {
         this.detailedTask.setEndTime(new Time(endTime));
         return this;

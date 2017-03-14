@@ -25,7 +25,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last tasks listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer); <parameter1> <new_value1>; <parameter2> <new_value2>...\n"
+            + "Parameters: INDEX (must be a positive integer); <parameter1> <new_value1>;"
+            + "<parameter2> <new_value2>...\n"
             + "Example: " + COMMAND_WORD + " 1; start_date 10/11/2017; start_time 3.30pm;";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
@@ -158,7 +159,7 @@ public class EditCommand extends Command {
         public Optional<Time> getStartTime() {
             return startTime;
         }
-        
+
         public void setEndTime(Optional<Time> endTime) {
             assert endTime != null;
             this.endTime = endTime;
