@@ -33,13 +33,13 @@ public class DeleteCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
+        filterTasksByDoneStatus();
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        FilteredList<ReadOnlyTask> filtered = lastShownList.filtered(t -> t.getTaskType() == taskType);
 
-        if (lastShownList.size() < targetIndex || taskType == null) {
+        if (filtered.size() < targetIndex || taskType == null) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
-
-        FilteredList<ReadOnlyTask> filtered = lastShownList.filtered(t -> t.getTaskType() == taskType);
         
         ReadOnlyTask taskToDelete = filtered.get(targetIndex - 1);
 

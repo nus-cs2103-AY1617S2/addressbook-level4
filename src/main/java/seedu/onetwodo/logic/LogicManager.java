@@ -21,7 +21,7 @@ public class LogicManager extends ComponentManager implements Logic {
 
     private final Model model;
     private final Parser parser;
-
+    
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.parser = new Parser();
@@ -37,6 +37,11 @@ public class LogicManager extends ComponentManager implements Logic {
 
     @Override
     public ObservableList<ReadOnlyTask> getFilteredTaskList() {
+        return model.getFilteredTaskList();
+    }
+    
+    public ObservableList<ReadOnlyTask> getFilteredDoneTaskList() {
+        model.updateFilteredUndoneTaskList();
         return model.getFilteredTaskList();
     }
 }

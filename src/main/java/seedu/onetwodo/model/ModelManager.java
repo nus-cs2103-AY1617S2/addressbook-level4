@@ -1,10 +1,8 @@
 package seedu.onetwodo.model;
 
 import java.util.Set;
-import java.util.function.Predicate;
 import java.util.logging.Logger;
 
-import javafx.beans.NamedArg;
 import javafx.collections.transformation.FilteredList;
 import seedu.onetwodo.commons.core.ComponentManager;
 import seedu.onetwodo.commons.core.LogsCenter;
@@ -12,6 +10,7 @@ import seedu.onetwodo.commons.core.UnmodifiableObservableList;
 import seedu.onetwodo.commons.events.model.ToDoListChangedEvent;
 import seedu.onetwodo.commons.util.CollectionUtil;
 import seedu.onetwodo.commons.util.StringUtil;
+import seedu.onetwodo.logic.parser.DoneStatus;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 import seedu.onetwodo.model.task.Task;
 import seedu.onetwodo.model.task.UniqueTaskList;
@@ -26,6 +25,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final ToDoList toDoList;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+    private DoneStatus doneStatus;
 
     /**
      * Initializes a ModelManager with the given toDoList and userPrefs.
@@ -37,7 +37,8 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with toDo list: " + toDoList + " and user prefs " + userPrefs);
 
         this.toDoList = new ToDoList(toDoList);
-        filteredTasks = new FilteredList<>(this.toDoList.getTaskList());
+        this.filteredTasks = new FilteredList<>(this.toDoList.getTaskList());
+        this.doneStatus = DoneStatus.UNDONE;
     }
 
     public ModelManager() {
@@ -114,15 +115,23 @@ public class ModelManager extends ComponentManager implements Model {
     
     @Override
     public void updateFilteredUndoneTaskList(){
-        updateFilteredTaskList(new PredicateExpression(p -> p.getDoneStatus()==false));
+        updateFilteredTaskList(new PredicateExpression(p -> p.getDoneStatus() == false));
     }
     
     @Override
     public void updateFilteredDoneTaskList(){
-        updateFilteredTaskList(new PredicateExpression(p -> p.getDoneStatus()==true));
+        updateFilteredTaskList(new PredicateExpression(p -> p.getDoneStatus() == true));
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
+
+    public DoneStatus getDoneStatus() {
+        return doneStatus;
+    }
+    
+    public void setDoneStatus(DoneStatus doneStatus) {
+        this.doneStatus = doneStatus;
+    }
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);

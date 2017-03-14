@@ -3,6 +3,7 @@ package seedu.onetwodo.model;
 import java.util.Set;
 
 import seedu.onetwodo.commons.core.UnmodifiableObservableList;
+import seedu.onetwodo.logic.parser.DoneStatus;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 import seedu.onetwodo.model.task.Task;
 import seedu.onetwodo.model.task.UniqueTaskList;
@@ -49,4 +50,8 @@ public interface Model {
     void updateFilteredUndoneTaskList();
     
     void updateFilteredDoneTaskList();
+    
+    DoneStatus getDoneStatus();
+    
+    void setDoneStatus(DoneStatus doneStatus);
 }

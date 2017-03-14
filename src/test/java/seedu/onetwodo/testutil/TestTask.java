@@ -19,6 +19,7 @@ public class TestTask implements ReadOnlyTask {
     private StartDate startDate;
     private UniqueTagList tags;
     private TaskType type;
+    private boolean isDone = false;
 
     public TestTask() {
         tags = new UniqueTagList();
@@ -100,5 +101,10 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public TaskType getTaskType() {
         return type;
+    }
+
+    @Override
+    public boolean getDoneStatus() {
+        return isDone;
     }
 }

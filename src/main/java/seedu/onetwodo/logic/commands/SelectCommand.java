@@ -35,7 +35,7 @@ public class SelectCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-
+        filterTasksByDoneStatus();
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
         FilteredList<ReadOnlyTask> filtered = lastShownList.filtered(t -> t.getTaskType() == taskType);
 

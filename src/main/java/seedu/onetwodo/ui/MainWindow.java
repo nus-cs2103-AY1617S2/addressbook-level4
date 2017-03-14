@@ -3,6 +3,7 @@ package seedu.onetwodo.ui;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -139,18 +140,19 @@ public class MainWindow extends UiPart<Region> {
         });
     }
 
-    void fillInnerParts() {
-        deadlineTaskListPanel = new TaskListPanel(getDeadlineListPlaceholder(), logic.getFilteredTaskList(),
-                TaskType.DEADLINE);
-        eventTaskListPanel = new TaskListPanel(getEventListPlaceholder(), logic.getFilteredTaskList(),
-                TaskType.EVENT);
-        todoTaskListPanel = new TaskListPanel(getTodosListPlaceholder(), logic.getFilteredTaskList(),
-                TaskType.TODO);
+    void fillInnerParts() { 
+        deadlineTaskListPanel = new TaskListPanel(getDeadlineListPlaceholder(), getDoneTaskList(), TaskType.DEADLINE);
+        eventTaskListPanel = new TaskListPanel(getEventListPlaceholder(), getDoneTaskList(), TaskType.EVENT);
+        todoTaskListPanel = new TaskListPanel(getTodosListPlaceholder(), getDoneTaskList(), TaskType.TODO);
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getToDoListFilePath());
         
         commandBox = new CommandBox(getCommandBoxPlaceholder(), logic);
         commandBox.focus();
+    }
+    
+    private ObservableList<ReadOnlyTask> getDoneTaskList() {
+        return logic.getFilteredTaskList().filtered(t -> t.getDoneStatus() == false);
     }
 
     private AnchorPane getCommandBoxPlaceholder() {

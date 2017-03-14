@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import seedu.onetwodo.commons.core.EventsCenter;
 import seedu.onetwodo.commons.events.ui.CloseDialogEvent;
+import seedu.onetwodo.logic.LogicManager;
 import seedu.onetwodo.logic.commands.AddCommand;
 import seedu.onetwodo.logic.commands.ClearCommand;
 import seedu.onetwodo.logic.commands.Command;
