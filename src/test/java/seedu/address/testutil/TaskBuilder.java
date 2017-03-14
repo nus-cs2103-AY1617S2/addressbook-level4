@@ -13,7 +13,7 @@ public class TaskBuilder {
 
     private TestTask task;
 
-    public TaskBuilder() {
+    public TaskBuilder() throws IllegalValueException {
         this.task = new TestTask();
     }
 
@@ -24,7 +24,7 @@ public class TaskBuilder {
         this.task = new TestTask(taskToCopy);
     }
 
-    public TaskBuilder withName(String name) throws IllegalValueException {
+    public TaskBuilder withContent(String name) throws IllegalValueException {
         this.task.setContent(new Content(name));
         return this;
     }
