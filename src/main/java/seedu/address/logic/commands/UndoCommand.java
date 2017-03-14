@@ -18,7 +18,6 @@ public class UndoCommand extends Command {
             return new CommandResult(MESSAGE_NO_CHANGE);
         } else {
             model.resetData(model.getCopy());
-            model.clearCopy();
             model.updateFlag("empty copy");
             return new CommandResult(MESSAGE_SUCCESS);
         }
