@@ -84,12 +84,12 @@ public class Task implements ReadOnlyTask {
 
         this.setTitle(replacement.getTitle());
         this.setEndDateTime(replacement.getEndDateTime());
-        this.setDateTime(replacement.getStartDateTime());
+        this.setStartDateTime(replacement.getStartDateTime());
         this.setLocation(replacement.getLocation());
         this.setTags(replacement.getTags());
     }
 
-    public void setDateTime(DateTime startDateTime) {
+    public void setStartDateTime(DateTime startDateTime) {
         assert startDateTime != null;
         this.startDateTime = startDateTime;
     }
