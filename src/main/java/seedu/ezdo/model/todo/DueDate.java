@@ -10,7 +10,7 @@ import seedu.ezdo.commons.exceptions.IllegalValueException;
 public class DueDate extends TaskDate {
 
     public static final String MESSAGE_DUEDATE_CONSTRAINTS =
-            "Due dates should be in the format DD/MM/YYYY, and it should not be blank";
+            "Due dates should at least be in the format DD/MM/YYYY HH:MM (24 hours)";
 
 
     /**
@@ -20,7 +20,7 @@ public class DueDate extends TaskDate {
      */
     public DueDate(String dueDate) throws IllegalValueException {
         super(dueDate);
-        if (!isValidTaskDate(dueDate)) {
+        if (!isValidTaskDate(this.value)) {
             throw new IllegalValueException(MESSAGE_DUEDATE_CONSTRAINTS);
         }
     }

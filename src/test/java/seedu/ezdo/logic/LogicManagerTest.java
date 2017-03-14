@@ -203,24 +203,26 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidArgsFormat() {
         assertCommandFailure("add Valid Name p/1"
-                + ", todo d/s23/03/2017", MESSAGE_PRIORITY_CONSTRAINTS);
+                + ", todo d/s23/03/2017 12:23", MESSAGE_PRIORITY_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/1 "
-                + "s/abcd d/24/04/2017", MESSAGE_STARTDATE_CONSTRAINTS);
+                + "s/abcd d/24/04/2017 21:11", MESSAGE_STARTDATE_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/1 "
-                + "s/12/12/2013 d/999", MESSAGE_DUEDATE_CONSTRAINTS);
+                + "s/abcd d/24/04/2017 10:14", MESSAGE_STARTDATE_CONSTRAINTS);
+        assertCommandFailure("add Valid Name p/1 "
+                + "s/12/12/2013 23:00 d/dueDA1E", MESSAGE_DUEDATE_CONSTRAINTS);
     }
 
     @Test
     public void execute_add_invalidPersonData() {
-        assertCommandFailure("add []\\[;] p/3 s/30/03/1999 d/31/05/1999 t/invalidName",
+        assertCommandFailure("add []\\[;] p/3 s/30/03/1999 12:00 d/31/05/1999 13:00 t/invalidName",
                 MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/not_numbers s/01/08/1998 d/11/08/1998 t/invalidPriority",
+        assertCommandFailure("add Valid Name p/not_numbers s/01/08/1998 14:22 d/11/08/1998 15:21 t/invalidPriority",
                 MESSAGE_PRIORITY_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/2 s/Invalid_Start.Date d/11/08/1998 t/invalidStartDate",
+        assertCommandFailure("add Valid Name p/2 s/Invalid_Start.Date d/11/08/1998 12:22 t/invalidStartDate",
                 MESSAGE_STARTDATE_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/1 s/01/08/1998 d/invalid_DueDate. t/invalidDueDate",
+        assertCommandFailure("add Valid Name p/1 s/01/08/1998 14:55 d/invalid_DueDate. t/invalidDueDate",
                 MESSAGE_DUEDATE_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/1 s/01/01/1990 d/01/03/1990 t/invalid_-[.tag",
+        assertCommandFailure("add Valid Name p/1 s/01/01/1990 02:33 d/01/03/1990 23:35 t/invalid_-[.tag",
                 MESSAGE_TAG_CONSTRAINTS);
 
     }
@@ -229,7 +231,7 @@ public class LogicManagerTest {
     public void execute_add_successful() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.adam();
+        Task toBeAdded = helper.test();
         EzDo expectedEZ = new EzDo();
         expectedEZ.addTask(toBeAdded);
 
@@ -245,7 +247,7 @@ public class LogicManagerTest {
     public void execute_addDuplicate_notAllowed() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.adam();
+        Task toBeAdded = helper.test();
 
         // setup starting state
         model.addTask(toBeAdded); // task already in internal ezDo
@@ -439,11 +441,11 @@ public class LogicManagerTest {
      */
     class TestDataHelper {
 
-        private Task adam() throws Exception {
-            Name name = new Name("Adam Brown");
+        private Task test() throws Exception {
+            Name name = new Name("LogicManager Test Case");
             Priority privatePriority = new Priority("1");
-            TaskDate privateStartDate = new StartDate("3/3/2017");
-            TaskDate privateDueDate = new DueDate("16/06/2016");
+            TaskDate privateStartDate = new StartDate("3/3/2015 21:12");
+            TaskDate privateDueDate = new DueDate("tomorrow");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
@@ -459,10 +461,10 @@ public class LogicManagerTest {
          */
         private Task generateTask(int seed) throws Exception {
             return new Task(
-                    new Name("Task " + seed),
+                    new Name("LogicManager Generated Task " + seed),
                     new Priority("1"),
-                    new StartDate("01/01/2000"),
-                    new DueDate("07/07/2007"),
+                    new StartDate("01/01/2000 09:09"),
+                    new DueDate("07/07/2017  12:12"),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -560,8 +562,8 @@ public class LogicManagerTest {
             return new Task(
                     new Name(name),
                     new Priority("1"),
-                    new StartDate("1/1/2017"),
-                    new DueDate("09/09/2009"),
+                    new StartDate("01/01/2009 09:14"),
+                    new DueDate("09/09/2017 10:10"),
                     new UniqueTagList(new Tag("tag"))
             );
         }

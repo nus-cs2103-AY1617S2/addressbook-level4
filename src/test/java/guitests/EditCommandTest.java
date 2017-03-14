@@ -148,7 +148,7 @@ public class EditCommandTest extends EzDoGuiTest {
         commandBox.runCommand("edit 1 p/abcd");
         assertResultMessage(Priority.MESSAGE_PRIORITY_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 d/1234");
+        commandBox.runCommand("edit 1 d/12due");
         assertResultMessage(DueDate.MESSAGE_DUEDATE_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 t/*&");
@@ -158,7 +158,7 @@ public class EditCommandTest extends EzDoGuiTest {
     @Test
     public void edit_duplicateTask_failure() {
         commandBox.runCommand("edit 3 Alice Pauline p/1 "
-                                + "s/12/12/2017 d/14/03/2015 t/friends");
+                                + "s/12/12/2016 11:22 d/14/03/2017 22:33 t/friends");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 

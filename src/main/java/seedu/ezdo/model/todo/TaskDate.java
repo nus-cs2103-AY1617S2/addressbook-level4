@@ -1,17 +1,21 @@
 package seedu.ezdo.model.todo;
 
+import seedu.ezdo.logic.parser.DateParser;
+
 /**
  * Represents the date associated with tasks.
  */
 public abstract class TaskDate {
 
-    public final String value;
+    public String value;
 
-    public static final String TASKDATE_VALIDATION_REGEX =
-        "^$|([12][0-9]|3[01]|0?[1-9])/(0?[1-9]|1[012])/((?:19|20)\\d\\d)";;
+    public static final String TASKDATE_VALIDATION_REGEX = "^$|(0[1-9]|"
+            + "[12][0-9]|3[01])[/](0[1-9]|1[012])[/](19|20)[0-9]{2} "
+            + "(2[0-3]|[0-1][0-9])[:][0-5][0-9]";
 
     public TaskDate(String taskDate) {
-        this.value = taskDate;
+        DateParser dateParser = new DateParser(taskDate);
+        this.value = dateParser.value;
     }
 
     @Override
@@ -23,7 +27,8 @@ public abstract class TaskDate {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TaskDate // instanceof handles nulls
-                && this.value.equals(((TaskDate) other).value)); // state check
+                        && this.value.equals(((TaskDate) other).value)); // state
+                                                                         // check
     }
 
     @Override

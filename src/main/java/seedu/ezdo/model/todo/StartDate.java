@@ -10,7 +10,7 @@ import seedu.ezdo.commons.exceptions.IllegalValueException;
 public class StartDate extends TaskDate {
 
     public static final String MESSAGE_STARTDATE_CONSTRAINTS =
-            "Start dates should be in the format DD/MM/YYYY, and it should not be blank";
+            "Start dates should at least be in the format DD/MM/YYYY HH:MM (24 hours)";
 
 
     /**
@@ -20,7 +20,7 @@ public class StartDate extends TaskDate {
      */
     public StartDate(String startDate) throws IllegalValueException {
         super(startDate);
-        if (!isValidTaskDate(startDate)) {
+        if (!isValidTaskDate(this.value)) {
             throw new IllegalValueException(MESSAGE_STARTDATE_CONSTRAINTS);
         }
     }
