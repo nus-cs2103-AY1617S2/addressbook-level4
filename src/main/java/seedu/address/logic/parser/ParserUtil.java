@@ -15,6 +15,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Description;
 import seedu.address.model.task.EndTime;
 import seedu.address.model.task.StartTime;
 import seedu.address.model.task.Title;
@@ -105,6 +106,14 @@ public class ParserUtil {
     public static Optional<UrgencyLevel> parseUrgencyLevel(Optional<String> urgencyLevel) throws IllegalValueException {
         assert urgencyLevel != null;
         return urgencyLevel.isPresent() ? Optional.of(new UrgencyLevel(urgencyLevel.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code Optional<String> email} into an {@code Optional<StartTime>} if {@code email} is present.
+     */
+    public static Optional<Description> parseDescription(Optional<String> description) throws IllegalValueException {
+        assert description != null;
+        return description.isPresent() ? Optional.of(new Description(description.get())) : Optional.empty();
     }
 
     /**

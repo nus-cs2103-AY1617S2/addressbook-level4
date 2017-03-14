@@ -41,6 +41,7 @@ import seedu.address.model.ReadOnlyToDoList;
 import seedu.address.model.ToDoList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Description;
 import seedu.address.model.task.EndTime;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.StartTime;
@@ -442,10 +443,11 @@ public class LogicManagerTest {
             StartTime privateStartTime = new StartTime("Wednesday 10am");
             EndTime privateEndTime = new EndTime("Wednesday 11am");
             UrgencyLevel privateUrgencyLevel = new UrgencyLevel("3");
+            Description privateDescription = new Description("I love 2103!!!");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, privateVenue, privateStartTime, privateEndTime, privateUrgencyLevel, tags);
+            return new Task(name, privateVenue, privateStartTime, privateEndTime, privateUrgencyLevel, privateDescription, tags);
         }
 
         /**
@@ -464,6 +466,7 @@ public class LogicManagerTest {
                     new StartTime(seed + "@email"),
                     new EndTime("House of " + seed),
                     new UrgencyLevel("3"),
+                    new Description("I love 2103!!"),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))));
         }
 
@@ -510,16 +513,16 @@ public class LogicManagerTest {
          * @param addressBook
          *            The ToDoList to which the Tasks will be added
          */
-        void addToToDoList(ToDoList addressBook, int numGenerated) throws Exception {
-            addToToDoList(addressBook, generateTaskList(numGenerated));
+        void addToToDoList(ToDoList toDoList, int numGenerated) throws Exception {
+            addToToDoList(toDoList, generateTaskList(numGenerated));
         }
 
         /**
          * Adds the given list of Tasks to the given ToDoList
          */
-        void addToToDoList(ToDoList addressBook, List<Task> tasksToAdd) throws Exception {
+        void addToToDoList(ToDoList toDoList, List<Task> tasksToAdd) throws Exception {
             for (Task p : tasksToAdd) {
-                addressBook.addTask(p);
+                toDoList.addTask(p);
             }
         }
 
@@ -568,6 +571,7 @@ public class LogicManagerTest {
                     new StartTime("Tue"),
                     new EndTime("Thu"),
                     new UrgencyLevel("3"),
+                    new Description("I love 2103!!"),
                     new UniqueTagList(new Tag("tag")));
         }
     }
