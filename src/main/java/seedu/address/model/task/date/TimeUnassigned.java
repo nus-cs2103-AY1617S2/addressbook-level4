@@ -1,7 +1,5 @@
 package seedu.address.model.task.date;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-
 /**
  * Represents a Time Value that is unassigned by user.
  */
