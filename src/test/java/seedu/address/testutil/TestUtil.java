@@ -17,6 +17,7 @@ import org.testfx.api.FxToolkit;
 import com.google.common.io.Files;
 
 import guitests.guihandles.PersonCardHandle;
+import guitests.guihandles.TaskCardHandle;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -38,6 +39,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Task;
 import seedu.address.storage.XmlSerializableAddressBook;
 
 /**
@@ -333,8 +335,8 @@ public class TestUtil {
         return list;
     }
 
-    public static boolean compareCardAndPerson(PersonCardHandle card, ReadOnlyPerson person) {
-        return card.isSamePerson(person);
+    public static boolean compareCardAndTask(TaskCardHandle card, Task task) {
+        return card.isSameTask(task);
     }
 
     public static Tag[] getTagList(String tags) {
