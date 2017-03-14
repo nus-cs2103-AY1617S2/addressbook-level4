@@ -39,6 +39,7 @@
             </AnchorPane>
          </children>
       </VBox>
+      <AnchorPane fx:id="completedTaskListPlaceholder" prefHeight="300.0" />
       <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
             <AnchorPane fx:id="commandBoxPlaceholder" styleClass="anchor-pane-with-border">

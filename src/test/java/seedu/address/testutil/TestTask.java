@@ -76,4 +76,15 @@ public class TestTask implements ReadOnlyTask {
         return null;
     }
 
+    @Override
+    public void setToday() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public boolean isToday() {
+        // TODO Auto-generated method stub
+        return false;
+    }
 }
