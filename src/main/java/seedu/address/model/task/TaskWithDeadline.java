@@ -1,6 +1,7 @@
 package seedu.address.model.task;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import seedu.address.commons.exceptions.IllegalValueException;
