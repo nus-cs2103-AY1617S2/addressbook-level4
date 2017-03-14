@@ -17,7 +17,7 @@ Format: `help`
  
 ## Adding a task : `add`
 Adds a task to the task manager<br>
-Format: `add TASKNAME DATE [STARTTIME] [ENDTIME] VENUE DESCRIPTION` 
+Format: `add TASKNAME [d/DATE] [s/STARTTIME] [e/ENDTIME] [m/MESSAGE]` 
  
 > Words in `UPPER_CASE` are the parameters, items in `SQUARE_BRACKETS` are optional, 
 > A format hint will be added to the command line so users know how to input the correct format
@@ -41,18 +41,26 @@ Examples:
   Returns `groceries shopping` but not `groceries`
 
 ## Deleting a task : `delete`
-Deletes a specified tasks from the task manager. Irreversible.<br>
-Format: `delete TASKNAME`
+Deletes a specified task from the task manager. Irreversible.<br>
+Format: `delete INDEX`
 
-> Deletes the name of the tasks at the specified `TASKNAME`. 
-  The name refers to the task name shown in the list. 
-  `TASKNAME` must be an exact match in order for the function to work.
+> Deletes the name of the tasks at the specified `INDEX`. 
+  The index refers to the task number shown in the list. 
+  `INDEX` must be an exact match in order for the function to work.
 
 Examples: 
 * `list`<br>
   `delete groceries shopping`<br>
   Deletes groceries shopping in the task manager.
+  
+## Editing a task : `edit`
+Edits a specified tasks from the task manager. Irreversible.<br>
+Format: `edit INDEX [TASKNAME] [d/DATE] [s/STARTTIME] [e/ENDTIME] [m/MESSAGE]`
 
+> Edits the task at the specified `INDEX`. The index refers to the 
+task number shown in the list. `INDEX` must be an exact match in order 
+for the function to work.
+  
 ## View description of a task : `view`
 Displays details of the specified task.<br>
 Format: `view TASKNAME`
