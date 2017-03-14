@@ -63,13 +63,8 @@ public class PersonListPanelHandle extends GuiHandle {
             final int scrollTo = i + startPosition;
             guiRobot.interact(() -> getListView().scrollTo(scrollTo));
             guiRobot.sleep(200);
-<<<<<<< HEAD:src/test/java/guitests/guihandles/TaskListPanelHandle.java
-            if (!TestUtil.compareCardAndPerson(getTaskCardHandle(startPosition + i), persons[i])) {
-                assertTrue("current card: " + i + " is not correct", !TestUtil.compareCardAndPerson(getTaskCardHandle(startPosition + i), persons[i]));
-=======
             if (!TestUtil.compareCardAndPerson(getPersonCardHandle(startPosition + i), persons[i])) {
                 return false;
->>>>>>> 0d6c8509633accad546f8d23e8f4efd11ae38ce2:src/test/java/guitests/guihandles/PersonListPanelHandle.java
             }
         }
         return true;
