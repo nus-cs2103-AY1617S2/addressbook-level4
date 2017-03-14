@@ -39,8 +39,14 @@ public interface ReadOnlyEventTask extends ReadOnlyTask {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+                .append(" StartDate: ")
+                .append(getStartDateString())
+                .append(" EndDate: ")
+                .append(getEndDateString())
                 .append(" Comment: ")
                 .append(getComment())
+                .append(" Date: ")
+                .append(getPriority())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
