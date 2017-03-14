@@ -15,14 +15,14 @@ public abstract class TaskDate {
 
     public String value;
 
-    public final SimpleDateFormat userDateFormat = new SimpleDateFormat(USER_DATE_FORMAT);
-    public final SimpleDateFormat nattyDateFormat = new SimpleDateFormat(NATTY_DATE_FORMAT);
-
-    public static final String TASKDATE_VALIDATION_REGEX = "^$|([12][0-9]|3[01]|0?[1-9])/(0?[1-9]|1[012])/((?:19|20)\\d\\d)";
-    public static final String USER_DATE_FORMAT = "dd/MM/yyyy";
+    public static final String TASKDATE_VALIDATION_REGEX = "^$|(0[1-9]|[12][0-9]|3[01])[/](0[1-9]|1[012])[/](19|20)[0-9]{2} (2[0-3]|[0-1][0-9])[:][0-5][0-9]";
+    public static final String USER_DATE_INPUT_FORMAT = "dd/MM/yyyy";
+    public static final String USER_DATE_OUTPUT_FORMAT = "dd/MM/yyyy H:mm";
     public static final String NATTY_DATE_FORMAT = "EEE MMM dd hh:mm:ss zzz yyyy";
-    public static final String MESSAGE_PARSE_EXCEPTION = "User input date format to Natty date format: Parse Exception error!";
 
+    public final SimpleDateFormat userInputDateFormat = new SimpleDateFormat(USER_DATE_INPUT_FORMAT);
+    public final SimpleDateFormat userOutputDateFormat = new SimpleDateFormat(USER_DATE_OUTPUT_FORMAT);
+    public final SimpleDateFormat nattyDateFormat = new SimpleDateFormat(NATTY_DATE_FORMAT);
     
     public TaskDate(String taskDate) {
         try {
@@ -50,8 +50,8 @@ public abstract class TaskDate {
             // Retrieves parsed date
             Date parsedDate = dateGroupList.get(0).getDates().get(0);
 
-            // Format parsed date to suit the regex
-            String formattedFinalTaskDate = changeToUserDateFormat(parsedDate);
+            // Format parsed date to suit the UI
+            String formattedFinalTaskDate = userOutputDateFormat.format(parsedDate);
             
             return formattedFinalTaskDate;
             
@@ -67,17 +67,10 @@ public abstract class TaskDate {
     private String changeToNattyDateFormat(String input) throws ParseException {
 
 	String output = new String();
-	Date userDateObject = userDateFormat.parse(input);
+	Date userDateObject = userInputDateFormat.parse(input);
 	output = nattyDateFormat.format(userDateObject);
 
 	return output;
-    }
-
-    /**
-     * Changes the final date format of a Date input for user.
-     */
-    private String changeToUserDateFormat(Date input) {
-	return userDateFormat.format(input);
     }
 
     @Override
