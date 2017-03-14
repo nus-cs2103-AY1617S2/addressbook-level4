@@ -45,4 +45,13 @@ public class FixedStackTest {
         String popped = stack.pop();
         assertTrue(("omg").equals(popped));
     }
+
+    @Test
+    public void clear_isEmpty() {
+        stack = new FixedStack<String>(5);
+        stack.push("omg");
+        stack.push("hello");
+        stack.clear();
+        assertTrue(stack.isEmpty());
+    }
 }
