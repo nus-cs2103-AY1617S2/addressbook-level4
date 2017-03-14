@@ -1,5 +1,7 @@
 package seedu.ezdo.logic.commands;
 
+import java.util.EmptyStackException;
+
 import seedu.ezdo.logic.commands.exceptions.CommandException;
 
 /*
@@ -14,8 +16,12 @@ public class UndoCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-
-        return null;
+        try {
+            model.undo();
+            return new CommandResult(MESSAGE_SUCCESS);
+        } catch (EmptyStackException ese) {
+            throw new CommandException(MESSAGE_NO_PREV_COMMAND);
+        }
     }
 
 }
