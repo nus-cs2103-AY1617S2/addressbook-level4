@@ -9,6 +9,7 @@ import seedu.ezdo.logic.commands.exceptions.CommandException;
  */
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
+    public static final String SHORT_COMMAND_WORD = "u";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Undo the previous undoable command.";
     public static final String MESSAGE_SUCCESS = "Previous undoable command has been undone!";
