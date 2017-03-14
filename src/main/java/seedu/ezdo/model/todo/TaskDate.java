@@ -1,5 +1,11 @@
 package seedu.ezdo.model.todo;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import com.joestelmach.natty.DateGroup;
 import com.joestelmach.natty.Parser;
 
 /**
@@ -13,8 +19,77 @@ public abstract class TaskDate {
         "^$|([12][0-9]|3[01]|0?[1-9])/(0?[1-9]|1[012])/((?:19|20)\\d\\d)";
 
     public TaskDate(String taskDate) {
-    	Parser parser = new Parser();
-        this.value = parser.parse(taskDate).get(0).getDates().get(0).toString();
+
+        if (isValidTaskDate(taskDate)) {
+            // Format input string to suit Natty dependency
+            String formattedInitialTaskDate = changeToNattyDateFormat(taskDate);
+
+            // Use Natty dependency to manipulate date input
+            Date parsedTaskDate = parseNatty(formattedInitialTaskDate);
+
+            // Format parsed date to suit the regex
+            String formattedFinalTaskDate = changeToUserDateFormat(parsedTaskDate);
+
+            this.value = formattedFinalTaskDate;
+
+        } else {
+            this.value = "";
+        }
+
+    }
+
+    /**
+     * Uses Natty dependency (natural language date parser) to manipulate date
+     * input in String.
+     * 
+     * @param date
+     * @return Manipulated date input
+     */
+    public Date parseNatty(String date) {
+        
+        // Initialises Natty parser
+        Parser parser = new Parser();
+        
+        // Parses input String into a list of DateGroups
+        List<DateGroup> dateGroupList = parser.parse(date);
+        
+        // Retrieves parsed date
+        Date parsedDate = dateGroupList.get(0).getDates().get(0);
+        
+        return parsedDate;
+    }
+
+    /**
+     * Changes the initial date format of a string input for Natty.
+     * 
+     * @param input
+     * @return Formatted date in string format for Natty
+     */
+    public String changeToNattyDateFormat(String input) {
+
+        String output = "";
+
+        try {
+            SimpleDateFormat userDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date userDateObject = userDateFormat.parse(input);
+            SimpleDateFormat nattyDateFormat = new SimpleDateFormat("EEE MMM dd hh:mm:ss zzz yyyy");
+            output = nattyDateFormat.format(userDateObject);
+        } catch (ParseException pe) {
+            System.out.println("User input date format to Natty date format: Parse Exception error!");
+        }
+
+        return output;
+    }
+
+    /**
+     * Changes the final date format of a Date input for user.
+     * 
+     * @param input
+     * @return Formatted date in string format for user
+     */
+    public String changeToUserDateFormat(Date input) {
+        SimpleDateFormat outputDateFormat = new SimpleDateFormat("dd/MM/YYYY");
+        return outputDateFormat.format(input);
     }
 
     @Override
