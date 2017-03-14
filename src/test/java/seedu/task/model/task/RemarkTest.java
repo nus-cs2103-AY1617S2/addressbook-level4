@@ -1,6 +1,5 @@
 package seedu.task.model.task;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -10,7 +9,7 @@ public class RemarkTest {
     @Test
     public void isValidRemark() {
         // blank remark
-    	assertTrue(Remark.isValidRemark("")); // empty string
+        assertTrue(Remark.isValidRemark("")); // empty string
         assertTrue(Remark.isValidRemark(" ")); // spaces only
 
         // missing parts

@@ -17,6 +17,8 @@ import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.testutil.TestUtil;
 
+
+
 /**
  * Provides a handle for the panel containing the task list.
  */
@@ -148,7 +150,7 @@ public class TaskListPanelHandle extends GuiHandle {
     }
 
     public TaskCardHandle getTaskCardHandle(int index) {
-    	return getTaskCardHandle(new Task(getListView().getItems().get(index)));
+        return getTaskCardHandle(new Task(getListView().getItems().get(index)));
     }
 
     public TaskCardHandle getTaskCardHandle(ReadOnlyTask task) {

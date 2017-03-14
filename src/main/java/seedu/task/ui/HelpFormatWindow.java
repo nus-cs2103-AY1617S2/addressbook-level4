@@ -15,20 +15,20 @@ import seedu.task.commons.util.FxViewUtil;
 /**
  * Controller for a help page
  */
-public class HelpWindow extends UiPart<Region> {
+public class HelpFormatWindow extends UiPart<Region> {
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String ICON = "/images/help_icon.png";
-    private static final String FXML = "HelpWindow.fxml";
-    private static final String TITLE = "Help";
-    private static final String USERGUIDE_URL = "/view/KITUserGuide.html";
+    private static final String FXML = "HelpFormatWindow.fxml";
+    private static final String TITLE = "Summary";
+    private static final String USERGUIDE_URL = "/view/KITHelpSummary.html";
 
     @FXML
     private WebView browser;
 
     private final Stage dialogStage;
 
-    public HelpWindow() {
+    public HelpFormatWindow() {
         super(FXML);
         Scene scene = new Scene(getRoot());
         //Null passed as the parent stage to make it non-modal.
@@ -42,7 +42,7 @@ public class HelpWindow extends UiPart<Region> {
     }
 
     public void show() {
-        logger.fine("Showing help page about the application.");
+        logger.fine("Showing help summary page about the application.");
         dialogStage.showAndWait();
     }
 }

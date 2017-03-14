@@ -9,9 +9,11 @@ import seedu.task.model.tag.UniqueTagList;
 public interface ReadOnlyTask {
 
     Name getName();
-    Date getDate();
+    Date getStartDate();
+    Date getEndDate();
     Remark getRemark();
     Location getLocation();
+    boolean isDone();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -26,7 +28,8 @@ public interface ReadOnlyTask {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                 && other.getName().equals(this.getName()) // state checks here onwards
-                && other.getDate().equals(this.getDate())
+                && other.getStartDate().equals(this.getStartDate())
+                && other.getEndDate().equals(this.getEndDate())
                 && other.getRemark().equals(this.getRemark())
                 && other.getLocation().equals(this.getLocation()));
     }
@@ -37,8 +40,10 @@ public interface ReadOnlyTask {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append(" Date: ")
-                .append(getDate())
+                .append(" Start Date: ")
+                .append(getStartDate())
+                .append(" End Date: ")
+                .append(getEndDate())
                 .append(" Remark: ")
                 .append(getRemark())
                 .append(" Location: ")

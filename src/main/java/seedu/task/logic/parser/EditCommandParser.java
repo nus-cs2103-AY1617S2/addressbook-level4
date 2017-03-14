@@ -1,9 +1,10 @@
 package seedu.task.logic.parser;
 
 import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.task.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.task.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.task.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.task.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.task.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static seedu.task.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -30,7 +31,7 @@ public class EditCommandParser {
     public Command parse(String args) {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_DATE, PREFIX_REMARK, PREFIX_LOCATION, PREFIX_TAG);
+                new ArgumentTokenizer(PREFIX_START_DATE, PREFIX_END_DATE, PREFIX_REMARK, PREFIX_LOCATION, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
@@ -42,7 +43,8 @@ public class EditCommandParser {
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
             editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
-            editTaskDescriptor.setDate(ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_DATE)));
+            editTaskDescriptor.setStartDate(ParserUtil.parseStartDate(argsTokenizer.getValue(PREFIX_START_DATE)));
+            editTaskDescriptor.setEndDate(ParserUtil.parseEndDate(argsTokenizer.getValue(PREFIX_END_DATE)));
             editTaskDescriptor.setRemark(ParserUtil.parseRemark(argsTokenizer.getValue(PREFIX_REMARK)));
             editTaskDescriptor.setLocation(ParserUtil.parseLocation(argsTokenizer.getValue(PREFIX_LOCATION)));
             editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));

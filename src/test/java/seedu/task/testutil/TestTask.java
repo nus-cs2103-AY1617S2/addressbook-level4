@@ -15,7 +15,9 @@ public class TestTask implements ReadOnlyTask {
     private Name name;
     private Location location;
     private Remark remark;
-    private Date date;
+    private Date startDate;
+    private Date endDate;
+    private boolean isDone;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -27,9 +29,11 @@ public class TestTask implements ReadOnlyTask {
      */
     public TestTask(TestTask taskToCopy) {
         this.name = taskToCopy.getName();
-        this.date = taskToCopy.getDate();
+        this.startDate = taskToCopy.getStartDate();
+        this.endDate = taskToCopy.getEndDate();
         this.remark = taskToCopy.getRemark();
         this.location = taskToCopy.getLocation();
+        this.isDone = false;
         this.tags = taskToCopy.getTags();
     }
 
@@ -45,8 +49,16 @@ public class TestTask implements ReadOnlyTask {
         this.remark = remark;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public void setIsDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     public void setTags(UniqueTagList tags) {
@@ -59,8 +71,13 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Date getDate() {
-        return date;
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    @Override
+    public Date getEndDate() {
+        return endDate;
     }
 
     @Override
@@ -71,6 +88,11 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public Location getLocation() {
         return location;
+    }
+
+    @Override
+    public boolean isDone() {
+        return isDone;
     }
 
     @Override
@@ -87,7 +109,8 @@ public class TestTask implements ReadOnlyTask {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
         sb.append("l/" + this.getLocation().value + " ");
-        sb.append("d/" + this.getDate().value + " ");
+        sb.append("s/" + this.getStartDate().toString() + " ");
+        sb.append("e/" + this.getEndDate().toString() + " ");
         sb.append("r/" + this.getRemark().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();

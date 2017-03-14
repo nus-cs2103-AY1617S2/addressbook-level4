@@ -77,9 +77,17 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> date} into an {@code Optional<Date>} if {@code date} is present.
      */
-    public static Optional<Date> parseDate(Optional<String> date) throws IllegalValueException {
-        assert date != null;
-        return date.isPresent() ? Optional.of(new Date(date.get())) : Optional.empty();
+    public static Optional<Date> parseStartDate(Optional<String> startDate) throws IllegalValueException {
+        assert startDate != null;
+        return startDate.isPresent() ? Optional.of(new Date(startDate.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code Optional<String> date} into an {@code Optional<Date>} if {@code date} is present.
+     */
+    public static Optional<Date> parseEndDate(Optional<String> endDate) throws IllegalValueException {
+        assert endDate != null;
+        return endDate.isPresent() ? Optional.of(new Date(endDate.get())) : Optional.empty();
     }
 
     /**

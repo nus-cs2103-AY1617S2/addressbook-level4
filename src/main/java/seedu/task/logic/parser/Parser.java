@@ -13,8 +13,11 @@ import seedu.task.logic.commands.DeleteCommand;
 import seedu.task.logic.commands.EditCommand;
 import seedu.task.logic.commands.ExitCommand;
 import seedu.task.logic.commands.FindCommand;
+import seedu.task.logic.commands.FindExactCommand;
 import seedu.task.logic.commands.HelpCommand;
+import seedu.task.logic.commands.HelpFormatCommand;
 import seedu.task.logic.commands.IncorrectCommand;
+import seedu.task.logic.commands.ListByTagCommand;
 import seedu.task.logic.commands.ListCommand;
 import seedu.task.logic.commands.SelectCommand;
 
@@ -62,14 +65,32 @@ public class Parser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
+        case FindExactCommand.COMMAND_WORD:
+        case FindExactCommand.COMMAND_WORD_SHORTER:
+        case FindExactCommand.COMMAND_WORD_SHORTEST:
+        case FindExactCommand.COMMAND_WORD_HOTKEY:
+            return new FindExactCommandParser().parse(arguments);
+
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case ListByTagCommand.COMMAND_WORD:
+        case ListByTagCommand.COMMAND_WORD_SINGLE_T:
+        case ListByTagCommand.COMMAND_WORD_LONGER_HOTKEY:
+        case ListByTagCommand.COMMAND_WORD_HOTKEY:
+            return new ListByTagCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case HelpFormatCommand.COMMAND_WORD:
+        case HelpFormatCommand.COMMAND_WORD_FULL:
+        case HelpFormatCommand.COMMAND_WORD_SHORT:
+        case HelpFormatCommand.COMMAND_WORD_SUMMARY:
+            return new HelpFormatCommand();
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

@@ -18,7 +18,8 @@ import seedu.task.model.task.ReadOnlyTask;
 public class TaskCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
     private static final String LOCATION_FIELD_ID = "#loc";
-    private static final String DATE_FIELD_ID = "#date";
+    private static final String START_DATE_FIELD_ID = "#startDate";
+    private static final String END_DATE_FIELD_ID = "#endDate";
     private static final String REMARK_FIELD_ID = "#remark";
     private static final String TAGS_FIELD_ID = "#tags";
 
@@ -41,8 +42,12 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(LOCATION_FIELD_ID);
     }
 
-    public String getDate() {
-        return getTextFromLabel(DATE_FIELD_ID);
+    public String getStartDate() {
+        return getTextFromLabel(START_DATE_FIELD_ID);
+    }
+
+    public String getEndDate() {
+        return getTextFromLabel(END_DATE_FIELD_ID);
     }
 
     public String getRemark() {
@@ -74,12 +79,12 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     public boolean isSameTask(ReadOnlyTask task) {
-    	List<String> testTag = getTags();
-    	List<String> taskTag = getTags(task.getTags());
-    	Collections.sort(testTag);
-    	Collections.sort(taskTag);
+        List<String> testTag = getTags();
+        List<String> taskTag = getTags(task.getTags());
+        Collections.sort(testTag);
+        Collections.sort(taskTag);
         return getName().equals(task.getName().fullName)
-                && getDate().equals(task.getDate().value)
+                && getEndDate().equals(task.getEndDate().toString())
                 && getRemark().equals(task.getRemark().value)
                 && getLocation().equals(task.getLocation().value)
                 && testTag.equals(taskTag);
@@ -90,7 +95,7 @@ public class TaskCardHandle extends GuiHandle {
         if (obj instanceof TaskCardHandle) {
             TaskCardHandle handle = (TaskCardHandle) obj;
             return getName().equals(handle.getName())
-                    && getDate().equals(handle.getDate())
+                    && getEndDate().equals(handle.getEndDate())
                     && getRemark().equals(handle.getRemark())
                     && getLocation().equals(handle.getLocation())
                     && getTags().equals(handle.getTags());
