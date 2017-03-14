@@ -87,7 +87,7 @@ allprojects {
     }
 
     shadowJar {
-        archiveName = "addressbook.jar"
+        archiveName = "flexitask.jar"
 
         destinationDir = file("${buildDir}/jar/")
     }
