@@ -47,6 +47,5 @@ public interface ReadOnlyTask {
                         && other.getLocation().equals(this.getLocation()));
     }
 
-    boolean isDone();
 
 }
