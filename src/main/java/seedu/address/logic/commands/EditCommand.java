@@ -18,7 +18,7 @@ import seedu.address.model.task.UrgencyLevel;
 import seedu.address.model.task.Venue;
 
 /**
- * Edits the details of an existing task in the address book.
+ * Edits the details of an existing task in the to-do list.
  */
 public class EditCommand extends Command {
 
@@ -27,12 +27,12 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [TITLE] [v/VENUE] [s/STARTTIME] [e/ENDTIME ] [ul/URGENCYLEVEL] [d/DESCRIPTION] [t/TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 v/Toilet s/March 10, 10:00";
+            + "Parameters: INDEX (must be a positive integer)[TITLE][@@VENUE][from:STARTTIME][ul/URGENCYLEVEL][d/DESCRIPTION][to:ENDTIME][##TAG]..\n"
+            + "Example: " + COMMAND_WORD + " 1 @@Toilet";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Task: %1$s";
+    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the to-do list.";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the to-do list.";
 
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
@@ -65,10 +65,10 @@ public class EditCommand extends Command {
         try {
             model.updateTask(filteredTaskListIndex, editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
         model.updateFilteredListToShowAll();
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, taskToEdit));
+        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
 
     /**

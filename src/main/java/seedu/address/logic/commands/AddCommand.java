@@ -24,9 +24,9 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a Task to the to-do list. "
-            + "Parameters: TITLE v/VENUE s/STARTTIME e/ENDTIME ul/URGENCYLEVEL d/DESCRIPTION [t/TAG]...\n"
+            + "Parameters: TITLE @@VENUE from:STARTTIME to:ENDTIME ul/URGENCYLEVEL d/DESCRIPTION  ##[TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " CS2103 Tutorial v/COM1-B110 s/March 8,10.00am e/March 8, 11.00am ul/3 t/lesson t/project";
+            + " CS2103 Tutorial @@COM1-B110 from:March 8,10.00am to:March 8, 11.00am ##lesson ##project";
 
     public static final String MESSAGE_SUCCESS = "New Task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This Task already exists in the address book";
