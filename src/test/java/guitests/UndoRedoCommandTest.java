@@ -4,7 +4,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-
 import seedu.tasklist.commons.exceptions.IllegalValueException;
 import seedu.tasklist.logic.commands.RedoCommand;
 import seedu.tasklist.logic.commands.UndoCommand;
@@ -86,6 +85,19 @@ public class UndoRedoCommandTest extends TaskListGuiTest {
         commandBox.runCommand("redo");
         assertResultMessage(String.format(RedoCommand.MESSAGE_REDO_FAILED));
 
+    }
+
+    @Test
+    public void assertUndoRedoClearSuccess() {
+        commandBox.runCommand("clear");
+        commandBox.runCommand("undo");
+        assertResultMessage(UndoCommand.MESSAGE_UNDO_SUCCESS);
+        TestTask[] expectedTaskList = td.getTypicalTasks();
+        assertTrue(taskListPanel.isListMatching(expectedTaskList));
+
+        commandBox.runCommand("redo");
+        assertResultMessage(RedoCommand.MESSAGE_REDO_SUCCESS);
+        assertTrue(taskListPanel.isListMatching());
     }
 }
 

@@ -118,6 +118,10 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowAll();
     }
 
+    @Override
+    public void enableUndoForClear() {
+        undoStack.push(new TaskList(taskList));
+    }
     public static class EmptyUndoRedoStackException extends EmptyModelStackException {
         protected EmptyUndoRedoStackException() {
             super("No available states");

@@ -49,4 +49,7 @@ public interface Model {
 
     /** Get the next state (redo) of the task list */
     public void setNextState() throws EmptyModelStackException;
+
+    /** Enables undo to work after a clear command, by pushing the existing state into UndoStack. */
+    public void enableUndoForClear();
 }
