@@ -10,7 +10,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.IncorrectCommand;
-
 /**
  * Parses input arguments and creates a new AddCommand object
  */
@@ -24,10 +23,12 @@ public class AddCommandParser {
         ArgumentTokenizer argsTokenizer =
                 new ArgumentTokenizer(PREFIX_DEADLINE, PREFIX_TAG);
         argsTokenizer.tokenize(args);
+        
+        String name = argsTokenizer.getPreamble().get();
+        String deadline = argsTokenizer.getValue(PREFIX_DEADLINE).orElse("");
+        
         try {
-            return new AddCommand(
-                    argsTokenizer.getPreamble().get(),
-                    argsTokenizer.getValue(PREFIX_DEADLINE).get(),
+            return new AddCommand(name, deadline,
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
             );
         } catch (NoSuchElementException nsee) {
