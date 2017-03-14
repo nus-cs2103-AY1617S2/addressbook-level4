@@ -22,8 +22,6 @@ public class FloatingTaskCard extends UiPart<Region> {
     @FXML
     private Label description;
     @FXML
-    private Label deadline;
-    @FXML
     private FlowPane tags;
 
     public FloatingTaskCard(ReadOnlyFloatingTask floatingTask, int displayedIndex) {

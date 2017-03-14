@@ -22,6 +22,8 @@ public class EventCard extends UiPart<Region> {
     @FXML
     private Label description;
     @FXML
+    private Label startTime;
+    @FXML
     private Label deadline;
     @FXML
     private FlowPane tags;
@@ -32,6 +34,7 @@ public class EventCard extends UiPart<Region> {
         this.id.setText(displayedIndex + ". ");
         this.priority.setText(event.getPriority().value);
         this.description.setText(event.getDescription().value);
+        this.startTime.setText(event.getStartTime().value);
         this.deadline.setText(event.getEndTime().value);
         initTags(event);
     }
