@@ -33,8 +33,8 @@ public class TypicalTestTasks {
             drink = new FloatingTaskBuilder().withName("Drink water").withComment("To improve brain function").build();
 
             // Manually added
-            internship = new EventTaskBuilder().withName("Internship interview").withComment("at mediacorp").build();
-            ida = new EventTaskBuilder().withName("Yet another interview").withComment("also at mediacorp").build();
+            internship = new FloatingTaskBuilder().withName("Internship interview").withComment("at mediacorp").build();
+            ida = new FloatingTaskBuilder().withName("Yet another interview").withComment("also at mediacorp").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
