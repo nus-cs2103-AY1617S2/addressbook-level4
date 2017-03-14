@@ -1,5 +1,6 @@
 package seedu.ezdo.model;
 
+import java.util.EmptyStackException;
 import java.util.Set;
 
 import seedu.ezdo.commons.core.UnmodifiableObservableList;
@@ -28,6 +29,14 @@ public interface Model {
     /** Marks a task as done.
      * @throws TaskNotFoundException */
     void doneTask(Task task) throws TaskNotFoundException;
+
+    /** Undo the previous undoable command
+     * @throws EmptyStackException */
+    void undo() throws EmptyStackException;
+
+    /** Redo the previous undone command
+     * @throws EmptyStackException */
+    void redo() throws EmptyStackException;
 
     /**
      * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
