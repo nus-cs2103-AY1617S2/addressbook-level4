@@ -12,6 +12,7 @@ public class ExitCommand extends Command {
 
     public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Exiting Address Book as requested ...";
 
+
     @Override
     public CommandResult execute() {
         EventsCenter.getInstance().post(new ExitAppRequestEvent());
@@ -21,6 +22,11 @@ public class ExitCommand extends Command {
     @Override
     public boolean isMutating() {
         return false;
+    }
+
+    @Override
+    public String getCommandText() {
+        return MESSAGE_EXIT_ACKNOWLEDGEMENT;
     }
 
 }

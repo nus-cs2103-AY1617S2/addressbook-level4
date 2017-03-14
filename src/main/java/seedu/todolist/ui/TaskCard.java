@@ -9,7 +9,7 @@ import seedu.todolist.model.task.ReadOnlyTask;
 
 public class TaskCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "TaskListCard.fxml";
 
     @FXML
     private HBox cardPane;
@@ -18,22 +18,31 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label startTime;
     @FXML
-    private Label address;
+    private Label endTime;
     @FXML
-    private Label email;
+    private Label description;
     @FXML
     private FlowPane tags;
 
-    public TaskCard(ReadOnlyTask person, int displayedIndex) {
+    public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
-        name.setText(person.getName().fullName);
+        name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
-        initTags(person);
+        startTime.setText("");
+        //initStartTime(task);
+        endTime.setText("");
+        description.setText("");
+        initTags(task);
     }
 
-    private void initTags(ReadOnlyTask person) {
-        person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    private void initTags(ReadOnlyTask task) {
+        task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
+
+    //private void initStartTime(ReadOnlyTask task) {
+    //  startTime.getChildren().add(new Label(task.getStartTime().toString()));
+    //}
+
 }

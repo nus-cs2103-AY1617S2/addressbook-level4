@@ -6,12 +6,18 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.FileNotFoundException;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.todolist.commons.exceptions.IllegalValueException;
+import seedu.todolist.model.tag.Tag;
+
 public class StringUtilTest {
+    Set<Tag> tags;
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -58,19 +64,25 @@ public class StringUtilTest {
      */
 
     @Test
-    public void containsWordIgnoreCase_nullWord_exceptionThrown() {
-        assertExceptionThrown("typical sentence", null, "Word parameter cannot be null");
+    public void containsWordIgnoreCase_nullWord_exceptionThrown() throws IllegalValueException {
+        Tag tag = new Tag("tag1");
+        tags = new HashSet<Tag> ();
+        tags.add(tag);
+        assertExceptionThrown("typical sentence", tags, null, "Word parameter cannot be null");
     }
 
-    private void assertExceptionThrown(String sentence, String word, String errorMessage) {
+    private void assertExceptionThrown(String sentence, Set<Tag> tags, String word, String errorMessage) {
         thrown.expect(AssertionError.class);
         thrown.expectMessage(errorMessage);
-        StringUtil.containsIgnoreCase(sentence, word);
+        StringUtil.containsIgnoreCase(sentence, tags, word);
     }
 
     @Test
-    public void containsWordIgnoreCase_emptyWord_exceptionThrown() {
-        assertExceptionThrown("typical sentence", "  ", "Word parameter cannot be empty");
+    public void containsWordIgnoreCase_emptyWord_exceptionThrown()  throws IllegalValueException {
+        Tag tag = new Tag("tag1");
+        tags = new HashSet<Tag> ();
+        tags.add(tag);
+        assertExceptionThrown("typical sentence", tags, "  ", "Word parameter cannot be empty");
     }
 
    // @Test
@@ -79,8 +91,11 @@ public class StringUtilTest {
    // }
 
     @Test
-    public void containsWordIgnoreCase_nullSentence_exceptionThrown() {
-        assertExceptionThrown(null, "abc", "Sentence parameter cannot be null");
+    public void containsWordIgnoreCase_nullSentence_exceptionThrown() throws IllegalValueException {
+        Tag tag = new Tag("tag1");
+        tags = new HashSet<Tag> ();
+        tags.add(tag);
+        assertExceptionThrown(null, tags,  "abc", "Sentence parameter cannot be null");
     }
 
     /*
@@ -109,25 +124,27 @@ public class StringUtilTest {
      */
 
     @Test
-    public void containsWordIgnoreCase_validInputs_correctResult() {
-
+    public void containsWordIgnoreCase_validInputs_correctResult() throws IllegalValueException {
+        Tag tag = new Tag("tag1");
+        tags = new HashSet<Tag> ();
+        tags.add(tag);
         // Empty sentence
-        assertFalse(StringUtil.containsIgnoreCase("", "abc")); // Boundary case
-        assertFalse(StringUtil.containsIgnoreCase("    ", "123"));
+        assertFalse(StringUtil.containsIgnoreCase("", tags, "abc")); // Boundary case
+        assertFalse(StringUtil.containsIgnoreCase("    ", tags, "123"));
 
         // Matches a partial word only
-        assertTrue(StringUtil.containsIgnoreCase("aaa bbb ccc", "bb")); // Sentence word bigger than query word
-        assertFalse(StringUtil.containsIgnoreCase("aaa bbb ccc", "bbbb")); // Query word bigger than sentence word
+        assertTrue(StringUtil.containsIgnoreCase("aaa bbb ccc", tags, "bb")); // Sentence word bigger than query word
+        assertFalse(StringUtil.containsIgnoreCase("aaa bbb ccc", tags, "bbbb")); // Query word bigger than sentence word
 
         // Matches word in the sentence, different upper/lower case letters
-        assertTrue(StringUtil.containsIgnoreCase("aaa bBb ccc", "Bbb")); // First word (boundary case)
-        assertTrue(StringUtil.containsIgnoreCase("aaa bBb ccc@1", "CCc@1")); // Last word (boundary case)
-        assertTrue(StringUtil.containsIgnoreCase("  AAA   bBb   ccc  ", "aaa")); // Sentence has extra spaces
-        assertTrue(StringUtil.containsIgnoreCase("Aaa", "aaa")); // Only one word in sentence (boundary case)
-        assertTrue(StringUtil.containsIgnoreCase("aaa bbb ccc", "  ccc  ")); // Leading/trailing spaces
+        assertTrue(StringUtil.containsIgnoreCase("aaa bBb ccc", tags, "Bbb")); // First word (boundary case)
+        assertTrue(StringUtil.containsIgnoreCase("aaa bBb ccc@1", tags, "CCc@1")); // Last word (boundary case)
+        assertTrue(StringUtil.containsIgnoreCase("  AAA   bBb   ccc  ", tags, "aaa")); // Sentence has extra spaces
+        assertTrue(StringUtil.containsIgnoreCase("Aaa", tags, "aaa")); // Only one word in sentence (boundary case)
+        assertTrue(StringUtil.containsIgnoreCase("aaa bbb ccc", tags, "  ccc  ")); // Leading/trailing spaces
 
         // Matches multiple words in sentence
-        assertTrue(StringUtil.containsIgnoreCase("AAA bBb ccc  bbb", "bbB"));
+        assertTrue(StringUtil.containsIgnoreCase("AAA bBb ccc  bbb", tags, "bbB"));
     }
 
     //---------------- Tests for getDetails --------------------------------------

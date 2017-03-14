@@ -26,4 +26,9 @@ public class HelpCommand extends Command {
     public boolean isMutating() {
         return false;
     }
+
+    @Override
+    public String getCommandText() {
+        return SHOWING_HELP_MESSAGE;
+    }
 }
