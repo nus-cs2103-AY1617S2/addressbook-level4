@@ -16,7 +16,7 @@ import seedu.address.model.tag.UniqueTagList;
  */
 public class ActivityCardHandle extends GuiHandle {
     private static final String DESCRIPTION_FIELD_ID = "#description";
-    private static final String LOCATION_FIELD_ID = "#location";
+    private static final String LOCATION_FIELD_ID = "#locations";
     private static final String PRIORITY_FIELD_ID = "#priority";
     private static final String EMAIL_FIELD_ID = "#email";
     private static final String TAGS_FIELD_ID = "#tags";

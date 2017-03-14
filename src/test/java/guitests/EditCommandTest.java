@@ -24,7 +24,7 @@ public class EditCommandTest extends WhatsLeftGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby p/low e/bobby@gmail.com l/Block 123, Bobby Street 3 t/husband";
+        String detailsToEdit = "Bobby p/high e/bobby@gmail.com l/Block 123, Bobby Street 3 t/husband";
         int whatsLeftIndex = 1;
 
         TestActivity editedActivity = new ActivityBuilder().withDescription("Bobby").withPriority("high")
