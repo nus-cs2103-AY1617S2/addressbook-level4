@@ -14,7 +14,7 @@ public class EndTime {
     public static final String ENDTIME_VALIDATION_REGEX3 = "\\d{2}/\\d{2}/\\d{2}";
     public static final String ENDTIME_VALIDATION_REGEX4 = "[a-zA-Z]+ \\d+";
     public static final String ENDTIME_VALIDATION_REGEX5 = "(\\d{2}/\\d{2}/\\d{2}) (\\d+)";
-    public static final String MESSAGE_ENDTIME_CONSTRAINTS = "End time for task should only contain a day (e.g. thursday) or a date with the format: DD/MM/YY (e.g. 03/03/17) or time (e.g. 1200)";
+    public static final String MESSAGE_ENDTIME_CONSTRAINTS = "End time for task should only contain a day (e.g. thursday) or a date with the format: DD/MM/YY (e.g. 03/03/17)\nMay also include time (e.g. 1400) behind date in some instances\nEnter HELP for user guide with detailed explanations of all commands";
 
     public final String value;
 

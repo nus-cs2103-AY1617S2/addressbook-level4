@@ -22,7 +22,7 @@ import seedu.taskmanager.logic.commands.IncorrectCommand;
 public class AddCommandParser {
      
 	public static final String EMPTY_FIELD ="EMPTY_FIELD";
-	public static final String INVALID_TIME = "Invalid input for time.\nTime must be between 0000 and 2359";
+	public static final String INVALID_TIME = "Invalid input for time\nTime must be between 0000 and 2359";
 	
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
