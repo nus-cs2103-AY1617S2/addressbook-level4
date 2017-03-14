@@ -9,8 +9,6 @@ import org.junit.Test;
 
 public class DeadlineTest {
 
-    public static Date CURRENT_DATE = new Date();
-
     @Test
     public void isValidDeadline() {
         // invalid deadline
