@@ -1,4 +1,4 @@
-# VeTo Developer Guide:
+# KIT Developer Guide:
 
 1. [Setting Up](#setting-up)
 2. [Design](#design)
@@ -370,7 +370,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 
 ## Appendex B : Use Cases
-(For all use cases below, the **System** is the `VeTo` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `KIT` and the **Actor** is the `user`, unless specified otherwise)
 
 
 #### Use case: UC1 - Help
@@ -378,13 +378,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 **Main success scenario**
 
 	1.  User enters help.
-	2.  VeTo displays the command list.
+	2.  KIT displays the command list.
 	Use case ends.
 
 **Extensions**
-1a. VeTo detects an error in the command.
+1a. KIT detects an error in the command.
 
-> 1a1. VeTo waits for another valid command.
+> 1a1. KIT waits for another valid command.
 1a2. User enters the correct command.
 Steps 1a1-1a2 are repeated until the command entered is valid.
 Use case resumes from step 2.
@@ -393,11 +393,11 @@ Use case resumes from step 2.
 **Main success scenario**
 
 	1.  User adds a certain task with its details via command line input.
-	2.  VeTo adds the task and displays status.
+	2.  KIT adds the task and displays status.
 	         Use case ends.
 **Extensions**
-1a. VeTo detects an error in the form of the input.
->	1a1. VeTo requests for the input with a correct form.
+1a. KIT detects an error in the form of the input.
+>	1a1. KIT requests for the input with a correct form.
 		1a2. User enters the task with its details again.
 	Steps 1a1-1a2 are repeated until the input entered is of a correct form.
 	Use case resumes from step 2.
@@ -406,26 +406,26 @@ Use case resumes from step 2.
 **Main success scenario**
 
 	1.  User enters list.
-	2.  VeTo displays all the entered tasks with in index.
+	2.  KIT displays all the entered tasks with in index.
 	3.  User chooses one of the tasks to delete by entering delete INDEX.
-	4.  VeTo requests confirmation.
+	4.  KIT requests confirmation.
 	5.  User confirms action.
-	6.  VeTo removes the task from the list and displays status.
+	6.  KIT removes the task from the list and displays status.
 	         Use case ends.
 **Extensions**
-1a. VeTo detects an error in the command.
->	1a1. VeTo waits for another valid command..
+1a. KIT detects an error in the command.
+>	1a1. KIT waits for another valid command..
 		1a2. User enters the correct command.
 	Steps 1a1-1a2 are repeated until the command entered is valid.
 	Use case resumes from step 2.
 
-3a. VeTo detects an error in the command.
->	3a1. VeTo waits for another valid command..
+3a. KIT detects an error in the command.
+>	3a1. KIT waits for another valid command..
 		3a2. User enters the valid command.
 	Steps 3a1-3a2 are repeated until the command entered is valid.
 	Use case resumes from step 4.
 
-5a. VeTo does not receive confirmation of receives invalid command.
+5a. KIT does not receive confirmation of receives invalid command.
 >	5a1. Use case ends.
 
 
@@ -434,18 +434,18 @@ Use case resumes from step 2.
 **Main success scenario**
 
     1.User enters Find with keyword or index
-    2.VeTo display all task that contain input keyword or index.
+    2.KIT display all task that contain input keyword or index.
 	Use case ends.
 
 **Extensions**
 
-1a. VeTo detects an error in command.
->  1a1. VeTo waits for another valid command..
+1a. KIT detects an error in command.
+>  1a1. KIT waits for another valid command..
     1a2. User enters the correct command.
 
-  2a. VeTo find no task with similar keyword or index
-> 2a1. VeTo show an message that says no similar task
-	2a2. VeTo waits for another valid command..
+  2a. KIT find no task with similar keyword or index
+> 2a1. KIT show an message that says no similar task
+	2a2. KIT waits for another valid command..
 
 ## Appendex C : Non Functional Requirements
 1. Core functions work without internet.
