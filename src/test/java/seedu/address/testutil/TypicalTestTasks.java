@@ -16,26 +16,26 @@ public class TypicalTestTasks {
         try {
             alice = new TaskBuilder().withTitle("Alice Pauline").withVenue("85355255")
                     .withStartTime("alice@gmail.com").withEndTime("123, Jurong West Ave 6, #08-111")
-                    .withTags("friends").build();
+                    .withTags("friends").withUrgencyLevel("3").withDescription("I love you").build();
             benson = new TaskBuilder().withTitle("Benson Meier").withVenue("98765432")
                     .withStartTime("johnd@gmail.com").withEndTime("311, Clementi Ave 2, #02-25")
-                    .withTags("owesMoney", "friends").build();
+                    .withTags("owesMoney", "friends").withUrgencyLevel("3").withDescription("I love you").build();
             carl = new TaskBuilder().withTitle("Carl Kurz").withVenue("95352563")
-                    .withStartTime("heinz@yahoo.com").withEndTime("wall street").build();
+                    .withStartTime("heinz@yahoo.com").withEndTime("wall street").withUrgencyLevel("3").withDescription("I love you").build();
             daniel = new TaskBuilder().withTitle("Daniel Meier").withVenue("87652533")
-                    .withStartTime("cornelia@google.com").withEndTime("10th street").build();
+                    .withStartTime("cornelia@google.com").withEndTime("10th street").withUrgencyLevel("3").withDescription("I love you").build();
             elle = new TaskBuilder().withTitle("Elle Meyer").withVenue("9482224")
-                    .withStartTime("werner@gmail.com").withEndTime("michegan ave").build();
+                    .withStartTime("werner@gmail.com").withEndTime("michegan ave").withUrgencyLevel("3").withDescription("I love you").build();
             fiona = new TaskBuilder().withTitle("Fiona Kunz").withVenue("9482427")
-                    .withStartTime("lydia@gmail.com").withEndTime("little tokyo").build();
+                    .withStartTime("lydia@gmail.com").withEndTime("little tokyo").withUrgencyLevel("3").withDescription("I love you").build();
             george = new TaskBuilder().withTitle("George Best").withVenue("9482442")
-                    .withStartTime("anna@google.com").withEndTime("4th street").build();
+                    .withStartTime("anna@google.com").withEndTime("4th street").withUrgencyLevel("3").withDescription("I love you").build();
 
             // Manually added
             hoon = new TaskBuilder().withTitle("Hoon Meier").withVenue("8482424")
-                    .withStartTime("stefan@mail.com").withEndTime("little india").build();
+                    .withStartTime("stefan@mail.com").withEndTime("little india").withUrgencyLevel("3").withDescription("I love you").build();
             ida = new TaskBuilder().withTitle("Ida Mueller").withVenue("8482131")
-                    .withStartTime("hans@google.com").withEndTime("chicago ave").build();
+                    .withStartTime("hans@google.com").withEndTime("chicago ave").withUrgencyLevel("3").withDescription("I love you").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
