@@ -19,7 +19,7 @@ public class TypicalTestTasks {
 
     public TestTask tutorial, homework, groceries, java, CS2103T, drink, internship, ida;
 
-    public TypicalTestTasks() throws ParseException {
+    public TypicalTestTasks() {
         try {
 
             tutorial = new EventTaskBuilder().withName("CS2103T tutorial")
@@ -43,9 +43,8 @@ public class TypicalTestTasks {
             // Manually added
             internship = new FloatingTaskBuilder().withName("Internship interview")
                     .withComment("at mediacorp").withPriority("high").withStatus(false).build();
-            ida = new FloatingTaskBuilder().withName("Yet another interview").withComment("also at mediacorp")
-                    .withPriority("high").withStatus(false).build();
-        } catch (IllegalValueException e) {
+            ida = new FloatingTaskBuilder().withName("Yet another interview").withComment("also at mediacorp").withPriority("high").withStatus(false).build();
+        } catch (IllegalValueException| ParseException e) {
             e.printStackTrace();
             assert false : "not possible";
         }
