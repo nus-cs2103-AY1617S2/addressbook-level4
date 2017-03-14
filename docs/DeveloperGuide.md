@@ -2,16 +2,14 @@
 
 By : `T09-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
----
-
 1. [Introduction](#1-introduction)
 2. [Setting Up](#2-setting-up)
-3. [Design](#3-design) <br>
-	3.1. [Architecture](#31-architecture) <br>
-	3.2. [User Interface](#32-ui-component) <br>
-	3.3. [Logic](#33-logic-component) <br>
-	3.4. [Model](#34-model-component) <br>
-	3.5. [Storage](#35-storage-component) <br>
+3. [Design](#3-design)
+	3.1. [Architecture](#31-architecture)
+	3.2. [User Interface](#32-ui-component)
+	3.3. [Logic](#33-logic-component) 
+	3.4. [Model](#34-model-component)
+	3.5. [Storage](#35-storage-component)
 4. [Implementation](#4-implementation)
 6. [Testing](#5-testing) 
 5. [Dev Ops](#6-dev-ops)
@@ -25,7 +23,9 @@ By : `T09-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 ## 1. Introduction
 
-Tâche is an application meant for people who store, retrieve and edit their to-do tasks frequently. Our target audience is also people who prefer typing on the keyboard over the mouse. Hence, primary input for the application will be command-driven and using the Command Line Interface (CLI).  
+Tâche is an application designed for people who store, retrieve and edit their to-do tasks frequently. 
+We are also targeting our application towards desktop users who prefer typing on the keyboard over the mouse. 
+Hence, primary input for the application will be command-driven and using the Command Line Interface (CLI).  
 
 ## 2. Setting up
 
@@ -46,28 +46,28 @@ Tâche is an application meant for people who store, retrieve and edit their to-d
 ### 2.2. Importing the project into Eclipse
 
 0. Fork this repo, and clone the fork to your computer
-1. Open Eclipse (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
-   in the prerequisites above)
+1. Open Eclipse
+	> Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
+   in the prerequisites above
 2. Click `File` > `Import`
 3. Click `Gradle` > `Gradle Project` > `Next` > `Next`
 4. Click `Browse`, then locate the project's directory
 5. Click `Finish`
 
   > * If you are asked whether to 'keep' or 'overwrite' config files, choose to 'keep'.
-  > * Depending on your connection speed and server load, it can even take up to 30 minutes for the set up to finish
-      (This is because Gradle downloads library files from servers during the project set up process)
+  > * Gradle downloads library files from servers during the project set up process. Hence, depending on your connection speed and server load, it can even take up to 30 minutes for the set up to finish. 
   > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
 
 ### 2.3. Configuring Checkstyle
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
 3. Enter an arbitrary configuration name e.g. tache
-4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
+4. Import the Checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
 5. Click OK once, go to the `Main` tab, use the newly imported check configuration.
 6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
-7. Click OK twice. Rebuild project if prompted
+7. Click OK twice, and rebuild project if prompted
 
-> Note to click on the `files from packages` text after ticking in order to enable the `Change...` button
+> Note: You can click on the `files from packages` text after ticking in order to enable the `Change...` button
 
 ### 2.4. Troubleshooting project setup
 
@@ -407,7 +407,7 @@ Use case ends.
 
 > Use case resumes at step 2
 
-#### Use case: Change save location
+### Use case: Change save location
 
 **MSS**
 
@@ -427,7 +427,7 @@ Use case ends
 
 > Use case ends
 
-#### Use case: Switch to console with hotkeys
+### Use case: Switch to console with hotkeys
 
 **MSS**
 
@@ -437,7 +437,7 @@ Use case ends
 4. System minimizes main window
 Use case ends
 
-#### Use case: Delete task
+### Use case: Delete task
 
 **MSS**
 
@@ -459,7 +459,7 @@ Use case ends.
 > 3a1. System informs the user that the given index is invalid<br>
 Use case resumes at step 2
 
-#### Use case: Add task
+### Use case: Add task
 
 **MSS**
 
@@ -474,7 +474,7 @@ Use case ends.
 > 1a1. System informs user that the parameters for the add command are wrong<br>
 Use case ends
 
-#### Use case: Undo task
+### Use case: Undo task
 
 **MSS**
 
@@ -512,41 +512,41 @@ Use case ends
 
 ## Appendix D : Glossary
 
-#####Parameter: 
+####Parameter: 
 
 > detail associated with a task (e.g. duration, name, start time)
 
-#####Recurring task:
+####Recurring task:
 
 > a task that has to be completed periodically (e.g. daily or monthly)
 
-#####Subtask:
+####Subtask:
 
 > a component of a task
 
-#####Autocomplete:
+####Autocomplete:
 
 > complete words or strings without the user needing to type them in full
 
-#####Sync:
+####Sync:
 
 > ensure that data files in two or more locations are updated
 
-#####Hotkey:
+####Hotkey:
 
 > a single or combination of keys that is registered with the system to perform specific activity when pressed
 
-#####Mainstream OS:
+####Mainstream OS:
 
 > Windows, Linux, Mac
 
 ## Appendix E : Product Survey
 
-**Wunderlist (free version)**
+###Wunderlist (free version)###
 
-Author: Tan Yu Wei
+**Author:** Tan Yu Wei
 
-Pros:
+**Pros:**
 
 * Customizable to-do lists for different purposes (e.g. movies to watch, grocery list)
 * Alarm reminders for task when deadline is up AND when user should be working on the task
@@ -556,7 +556,7 @@ Pros:
 * Print task lists neatly and easily
 
 
-Cons:
+**Cons:**
 
 * Files added to to-do list have a limited size (i.e. 5 MB)
 * Limited number of subtasks per task (i.e. 25)
@@ -565,11 +565,11 @@ Cons:
 * Cannot manage events (cannot add start and end time)
 * No calendar view of tasks
 
-**Google Calendar**
+###Google Calendar###
 
-Author: Lim Shun Xian
+**Author:** Lim Shun Xian
 
-Pros:
+**Pros:**
 
 * Cross platform
 * Integrated with majority of Google's app such as Gmail
@@ -577,16 +577,16 @@ Pros:
 * Able to share calendar to others to view
 * Able to send a daily reminder email of today's agenda (due tasks) at 5AM 
 
-Cons:
+**Cons:**
 
 * Difficult to migrate over should one be already using Outlook or other calendars 
 * The daily reminder email is fixed at 5AM
 
-**Wunderlist (free version)**
+###Wunderlist (free version)###
 
-Author: Brandon Tan Jian Sin
+**Author:** Brandon Tan Jian Sin
 
-Pros:
+**Pros:**
 
 * Simple layout
 * Intuitive controls
@@ -595,16 +595,17 @@ Pros:
 * Allows custom categorization of tasks
 * Email, Desktop, Push Notifications
 
-Cons:
+**Cons:**
 
 * No calendar view
 * Limitations in number of subtasks and file attachments
 * Tasks only scheduled by day not time
 
-**Get it Done**
-Author: Ang Zhi Yuan
+###Get it Done###
 
-Pros:
+**Author:** Ang Zhi Yuan
+
+**Pros:**
 
 * Simple, clear layout
 * Widely accessible across multiple platforms
@@ -612,7 +613,7 @@ Pros:
 * Clean email notifications
 * Can sync to other calendars
 
-Cons:
+**Cons:**
 
 * Subscription based
 * No calendar-view, only list view
