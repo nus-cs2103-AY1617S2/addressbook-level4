@@ -27,11 +27,15 @@ public class AddCommandParser {
                 new ArgumentTokenizer(PREFIX_STARTING_DATETIME, PREFIX_ENDING_DATETIME, PREFIX_LOCATION, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         try {
+            String title = argsTokenizer.getPreamble().get();
+            String startDateTime = argsTokenizer.getValue(PREFIX_STARTING_DATETIME).orElse(null);
+            String endDateTime = argsTokenizer.getValue(PREFIX_ENDING_DATETIME).orElse(null);
+            String location = argsTokenizer.getValue(PREFIX_LOCATION).orElse(null);
             return new AddCommand(
-                    argsTokenizer.getPreamble().get(),
-                    argsTokenizer.getValue(PREFIX_STARTING_DATETIME).get(),
-                    argsTokenizer.getValue(PREFIX_ENDING_DATETIME).get(),
-                    argsTokenizer.getValue(PREFIX_LOCATION).get(),
+                    title,
+                    startDateTime,
+                    endDateTime,
+                    location,
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
             );
         } catch (NoSuchElementException nsee) {
