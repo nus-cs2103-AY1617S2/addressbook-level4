@@ -12,14 +12,14 @@ import seedu.todolist.model.task.UniqueTaskList.TaskNotFoundException;
  */
 public class CompleteCommand extends Command {
     public static final String COMMAND_WORD = "complete";
-    
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Mark as completed the task identified by the index number used in the last task listing.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_COMPLETE_TASK_SUCCESS = "Completed Task: %1$s";
-    
+
     public static final String MESSAGE_INDEX_CONSTRAINTS = "Index number of the task must be at least 1.";
 
     public final int targetIndex;
@@ -31,9 +31,9 @@ public class CompleteCommand extends Command {
         }
         this.targetIndex = targetIndex - 1;
     }
-    
+
     public CommandResult execute() throws CommandException {
-        
+    
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (targetIndex >= lastShownList.size()) {
@@ -50,11 +50,11 @@ public class CompleteCommand extends Command {
 
         return new CommandResult(String.format(MESSAGE_COMPLETE_TASK_SUCCESS, taskToComplete));
     }
-    
+
     public boolean isMutating() {
         return true;
     }
-    
+
     public String getCommandText() {
         return commandText;
     }

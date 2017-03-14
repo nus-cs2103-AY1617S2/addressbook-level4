@@ -23,7 +23,7 @@ public interface Model {
 
     /** Adds the given person */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
-    
+
     /** Mark the given task as completed */
     void completeTask(int filteredTaskListIndex, ReadOnlyTask targetTask)
             throws UniqueTaskList.TaskNotFoundException;

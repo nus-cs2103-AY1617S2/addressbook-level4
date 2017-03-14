@@ -64,7 +64,7 @@ public class ModelManager extends ComponentManager implements Model {
         toDoList.removeTask(target);
         indicateToDoListChanged();
     }
-    
+
     public synchronized void completeTask(int filteredTaskListIndex, ReadOnlyTask target) throws TaskNotFoundException {
         toDoList.completeTask(filteredTaskListIndex, target);
         indicateToDoListChanged();

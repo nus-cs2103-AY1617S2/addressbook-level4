@@ -81,11 +81,11 @@ public class Task implements ReadOnlyTask {
     public boolean getCompletionStatus() {
         return this.completed;
     }
-    
+
     public void setAsComplete() {
         this.completed = true;
     }
-    
+
     public void setAsIncomplete() {
         this.completed = false;
     }
