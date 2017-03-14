@@ -1,8 +1,9 @@
-# TypeTask - Developer Guide
-
-By : `Team T09-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
-
+# Developer Guide
 ---
+
+&nbsp;
+
+## Table of contents
 
 1. [Introduction](#intoduction)
 2. [Setting Up](#setting-up)
@@ -16,12 +17,15 @@ By : `Team T09-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbs
 * [Appendix D: Glossary](#appendix-d--glossary)
 * [Appendix E : Product Survey](#appendix-e--product-survey)
 
+&nbsp;
+
 ## 1. Introduction
 
 TypeTask is a task manager for active users who prefer to manage their tasks and plans by keyboard commands. TypeTask works on a Java desktop application that has a graphical user interface (GUI) executed with JavaFX.
 
 This guide illustrates the design and implementation of TypeTask. It will guide you as a developer to understand how TypeTask functions and show you how to be a part of its progress. 
 
+&nbsp;
 
 ## 2. Setting up
 
@@ -37,7 +41,6 @@ This guide illustrates the design and implementation of TypeTask. It will guide 
    [this page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious))
 4. **Buildship Gradle Integration** plugin from the Eclipse Marketplace
 5. **Checkstyle Plug-in** plugin from the Eclipse Marketplace
-
 
 ### 2.2. Importing the project into Eclipse
 
@@ -79,6 +82,7 @@ This guide illustrates the design and implementation of TypeTask. It will guide 
 * Reason: Required libraries may not have been downloaded during the project import.
 * Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries).
 
+&nbsp;
 
 ## 3. Design
 
@@ -90,8 +94,8 @@ _Figure 2.1.1 : Architecture Diagram_
 The **_Architecture Diagram_** given above explains the high-level design of the App.
 Given below is a quick overview of each component.
 
-> Tip: The `.pptx` files used to create diagrams in this document can be found in the [diagrams](diagrams/) folder.
-> To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
+[comment]: # (> Tip: The `.pptx` files used to create diagrams in this document can be found in the [diagrams](diagrams/ folder.)
+[comment]: # (> To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.)
 
 #### `Main`
 The **`Main`** has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java). It is responsible for,
@@ -109,27 +113,29 @@ Two of those classes play important roles at the architecture level.
 
 
 #### `UI`
-The [**`UI`**](#ui-component) component is the interaction between the user and the application.
+The [**`UI`**](#ui-component) component interacts with the user by receiving commands and revealing information.
 
 
 #### `Logic`
-The [**`Logic`**](#logic-component) component contains the command executor.
+The [**`Logic`**](#logic-component) component processes and executes the user's commands.
 
 
 #### `Model`
-The [**`Model`**](#model-component) component Holds the data of the App in-memory.
+The [**`Model`**](#model-component) component signifies and holds TypeTask's information.
 
 
 #### `Storage`
-The [**`Storage`**](#storage-component) component Reads data from, and writes data to, the hard disk.
+The [**`Storage`**](#storage-component) component component reads data from and writes data to the hard disk.
 
-Each of the four components
+
+Each of the `UI`, `Logic`, `Model` and `Storage` components:
 
 * Defines its _API_ in an `interface` with the same name as the Component.
 * Exposes its functionality using a `{Component Name}Manager` class.
 
 For example, the `Logic` component ([Figure 2.1.2](#logic)) defines its API in the `Logic.java`
 interface and exposes its functionality using the `LogicManager.java` class.<br>
+
 
 #### Events-Driven nature of the design
 
@@ -152,7 +158,7 @@ _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
   to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
   coupling between components.
 
-The sections below give more details of each component.
+The sections below will give more details of each single component.
 
 ### 3.2. UI component
 
@@ -182,10 +188,12 @@ _Figure 2.3.1 : Structure of the Logic Component_
 
 **API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
 
-1. `Logic` uses the `Parser` class to parse the user command.
-2. This results in a `Command` object which is executed by the `LogicManager`.
-3. The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
-4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
+The `Logic` component,
+
+* `Logic` uses the `Parser` class to parse the user command.
+* This results in a `Command` object which is executed by the `LogicManager`.
+* The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
+* The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
@@ -200,7 +208,7 @@ _Figure 2.4.1 : Structure of the Model Component_
 
 **API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
 
-The `Model`,
+The `Model` component,
 
 * stores a `UserPref` object that represents the user's preferences.
 * stores the Address Book data.
@@ -223,6 +231,8 @@ The `Storage` component,
 ### 3.6. Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
+
+&nbsp;
 
 ## 4. Implementation
 
@@ -250,6 +260,7 @@ and logging destinations.
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
 (default: `config.json`):
 
+&nbsp;
 
 ## 4. Testing
 
@@ -298,6 +309,7 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
    [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
    Delete run configurations created when you ran tests earlier.
 
+&nbsp;
 
 ## 5. Dev Ops
 
