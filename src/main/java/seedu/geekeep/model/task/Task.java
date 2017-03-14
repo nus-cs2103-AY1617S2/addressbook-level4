@@ -40,7 +40,7 @@ public class Task implements ReadOnlyTask {
         if (startDateTime != null) {
             assert endDateTime != null;
         }
-        if(startDateTime != null && endDateTime != null){
+        if (startDateTime != null && endDateTime != null) {
             assert endDateTime.dateTime.isAfter(startDateTime.dateTime);
         }
 
