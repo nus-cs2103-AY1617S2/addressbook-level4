@@ -62,12 +62,18 @@ public class AddCommandParser {
         	description = argsTokenizer.getValue(PREFIX_DESCRIPTION).get();
         }
         
+        //priority 0 as default if no priority
+        String priority = "0";
+        if (argsTokenizer.getValue(PREFIX_PRIORITY).isPresent()) {
+        	description = argsTokenizer.getValue(PREFIX_PRIORITY).get();
+        }
+        
         switch (flag) {
         	case AddCommand.EVENT_FLAG:
         		//TODO when events are supported
         		return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         	case AddCommand.TASK_FLAG:
-        		return addTask(argsTokenizer, name, parsedDeadline, description);
+        		return addTask(argsTokenizer, name, parsedDeadline, priority, description);
         	default:
         		//TODO error
         		return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
@@ -75,12 +81,12 @@ public class AddCommandParser {
         
     }
     
-    private Command addTask(ArgumentTokenizer argsTokenizer, String name, List<Date> parsedDeadline, String description) {
+    private Command addTask(ArgumentTokenizer argsTokenizer, String name, List<Date> parsedDeadline, String priority, String description) {
     	try {
     		return new AddCommand(
     				name,
     				parsedDeadline,
-    				argsTokenizer.getValue(PREFIX_PRIORITY).get(),
+    				priority,
     				description,
     				ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)));
     	} catch (NoSuchElementException nsee) {

@@ -69,13 +69,25 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        this.toAdd = new Task(
-                new Name(name),
-                new Deadline(deadline),
-                new Priority(priority),
-                new Description(description),
-                new UniqueTagList(tagSet)
-        );
+ 
+        if (deadline != null) {
+            this.toAdd = new Task(
+                    new Name(name),
+                    new Deadline(deadline.get(0)),
+                    new Priority(priority),
+                    new Description(description),
+                    new UniqueTagList(tagSet)
+            );
+        } else {
+        	Date noDeadline = null;
+            this.toAdd = new Task(
+                    new Name(name),
+                    new Deadline(noDeadline),
+                    new Priority(priority),
+                    new Description(description),
+                    new UniqueTagList(tagSet)
+            );        	
+        }
     }
 
     @Override

@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.ocpsoft.prettytime.nlp.PrettyTimeParser;
+
 import t15b1.taskcrusher.commons.exceptions.IllegalValueException;
 import t15b1.taskcrusher.model.event.EventDate;
 
@@ -15,11 +17,10 @@ public class Deadline {
     public static final String DEADLINE_VALIDATION_REGEX = "";
     public static final String NO_DEADLINE = "";
     
-    public final String value;
+    public String value;
     public final int inMilseconds = 0;
     
-    private Date deadline;
-    
+    //TODO keeping for now
     public Deadline(String value) throws IllegalValueException{
         assert value != null;
         if(!isValidDeadline(value)){
@@ -28,25 +29,44 @@ public class Deadline {
         this.value = value;
     }
     
-    public Deadline(List<Date> deadline) {
+    public Deadline(Date deadline) {
     	
     	if (deadline != null) {
-    		this.deadline = deadline.get(0);
+    		this.value = deadline.toString();
     	} else {
-    		this.deadline = null;
+    		this.value = "";
     	}
     	
-    	//TODO what will this break?
-    	this.value = "";
     }
     
     private boolean isValidDeadline(String value){
-        if(value.equals(NO_DEADLINE))
-            return true;
-        //TODO: if deadline already past
-        return false;
+    	
+    	Date rightNow = new Date();
+    	PrettyTimeParser dateParser = new PrettyTimeParser();
+    	
+    	//TODO see how parse() can fail and maybe manage this more elegantly
+    	List<Date> parsedValue = dateParser.parse(value); 
+    	Date deadline = null;
+    	
+    	if (parsedValue.size() != 0) {
+    		deadline = parsedValue.get(0);
+    	}
+   	
+    	if (!this.hasDeadline() ||
+    			(deadline != null && !deadline.before(rightNow))) {
+    		return true;
+    	} else {
+    		return false;
+    	}
+
     }
     
+    public boolean hasDeadline(){
+    	this.value = ""; //TODO why is there a null pointer exception otherwise...
+        return !value.equals(NO_DEADLINE);
+    }
+    
+    //TODO replace with above to avoid double negatives, keep for now to avoid breaking code
     public boolean hasNoDeadline(){
         return value.equals(NO_DEADLINE);
     }
@@ -54,12 +74,7 @@ public class Deadline {
     @Override
     public String toString(){
         //TODO:Change it so that it deals with Optional
-    	
-    	if (deadline == null) {
-    		return "";
-    	} else {
-    		return deadline.toString();
-    	}
+    	return this.value;
     }
     
     @Override
@@ -70,5 +85,16 @@ public class Deadline {
                 && this.value.equals(((Deadline) other).value));
     }
     
-    
+    public Optional<Date> getDate() {
+    	
+    	Optional<Date> deadlineAsDate = Optional.empty();
+    	
+    	if (this.hasDeadline()) {
+    		PrettyTimeParser dateParser = new PrettyTimeParser();
+    		List<Date> deadline = dateParser.parse(this.value);
+    		deadlineAsDate = Optional.of(deadline.get(0));    		
+    	}
+    	
+    	return deadlineAsDate;
+    }
 }
