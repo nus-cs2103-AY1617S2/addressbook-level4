@@ -1,10 +1,10 @@
 package seedu.address.ui;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
+import seedu.address.commons.util.FxViewUtil;
 import seedu.address.model.task.ReadOnlyTask;
 
 /**
@@ -17,24 +17,20 @@ public class TaskDescription extends UiPart<Region> {
     @FXML
     private TextArea content;
 
-    @FXML
-    private Label label;
-
     /**
-     * @param placeholder The AnchorPane where the BrowserPanel must be inserted
+     * @param placeholder The AnchorPane where the TaskDescription must be inserted
      */
     public TaskDescription(AnchorPane placeholder) {
         super(FXML);
-        label = new Label("Task Description");
-        content = new TextArea();
+        //content = new TextArea();
         //FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
-        //FxViewUtil.applyAnchorBoundaryParameters(content, 0.0, 0.0, 0.0, 0.0);
-        content.setPrefHeight(600.0);
-        content.setPrefWidth(600.0);
+        FxViewUtil.applyAnchorBoundaryParameters(content, 0.0, 0.0, 0.0, 0.0);
+        //content.setPrefHeight(600.0);
+        //content.setPrefWidth(600.0);
 
         //content.setScaleY(0.1);
 
-        placeholder.getChildren().addAll(content, label);
+        placeholder.getChildren().addAll();
     }
 
     public void loadPersonPage(ReadOnlyTask person) {

@@ -37,9 +37,8 @@ public class MainWindow extends UiPart<Region> {
     private TaskListPanel personListPanel;
     private Config config;
     private TaskDescription taskDescription;
+    private TaskDetail taskDetail;
 
-    @FXML
-    private AnchorPane taskDescriptionPlaceholder;
     //private AnchorPane browserPlaceholder;
 
     @FXML
@@ -56,6 +55,12 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private AnchorPane statusbarPlaceholder;
+
+    @FXML
+    private AnchorPane taskDescriptionPlaceholder;
+
+    @FXML
+    private AnchorPane taskDetailsPlaceholder;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML);
@@ -120,6 +125,7 @@ public class MainWindow extends UiPart<Region> {
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
+        new TaskDetail(getTaskDetailsPlaceholder());
     }
 
     private AnchorPane getCommandBoxPlaceholder() {
@@ -140,6 +146,10 @@ public class MainWindow extends UiPart<Region> {
 
     private AnchorPane getTaskDescriptionPlaceholder() {
         return taskDescriptionPlaceholder;
+    }
+
+    private AnchorPane getTaskDetailsPlaceholder() {
+        return taskDetailsPlaceholder;
     }
 
     void hide() {
@@ -207,6 +217,7 @@ public class MainWindow extends UiPart<Region> {
 
     void loadPersonPage(ReadOnlyTask person) {
         taskDescription.loadPersonPage(person);
+        taskDetail.loadPersonPage(person);
     }
 
     /*void releaseResources() {

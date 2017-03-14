@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="label" prefHeight="17.0" prefWidth="81.0" text="Task Content" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" />
-      <TextArea fx:id="content" layoutX="2.0" layoutY="50.0" prefHeight="317.0" prefWidth="643.0" />
+      <TextArea fx:id="content" layoutX="2.0" layoutY="1.0" prefHeight="600.0" prefWidth="800.0" />
    </children>
 </AnchorPane>

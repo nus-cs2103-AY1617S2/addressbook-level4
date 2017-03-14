@@ -49,11 +49,16 @@
                   <AnchorPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
-            <AnchorPane fx:id="taskDescriptionPlaceholder" prefWidth="340">
-                <padding>
-                    <Insets bottom="10" left="10" right="10" top="10" />
-                </padding>
-            </AnchorPane>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <AnchorPane fx:id="taskDetailsPlaceholder" prefHeight="200.0" prefWidth="200.0" />
+                  <AnchorPane fx:id="taskDescriptionPlaceholder" prefWidth="340">
+                      <padding>
+                          <Insets bottom="10" left="10" right="10" top="10" />
+                      </padding>
+                  </AnchorPane>
+               </children>
+            </VBox>
          </items>
       </SplitPane>
       <AnchorPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
