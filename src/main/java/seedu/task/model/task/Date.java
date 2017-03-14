@@ -16,6 +16,8 @@ public class Date {
     // add to user guide
     public static final String MESSAGE_DATE_CONSTRAINTS = "Date format invalid, use help to see "
             + "allowed formats or try this format: DD-MM-YY hh:mm AM/PM";
+    public static final String DEFAULT_DATE = "DEFAULT_DATE";
+
     public static final ArrayList<SimpleDateFormat> ALLOWED_FORMATS = new ArrayList<>();
     private final java.util.Date value;
     private static SimpleDateFormat format = new SimpleDateFormat("d/M/y h:m a");
@@ -28,19 +30,24 @@ public class Date {
      */
     public Date(String date) throws IllegalValueException {
         assert date != null;
-        String trimmedDate = date.trim();
+        if (date.equals(DEFAULT_DATE)) {
+            this.value = null;
+        } else {
+            String trimmedDate = date.trim();
 
-        if (!isValidDate(trimmedDate)) {
-            throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
+            if (!isValidDate(trimmedDate)) {
+                throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
+            }
+
+            if (!trimmedDate.contains("-") && !trimmedDate.contains("/")
+                    && !trimmedDate.matches("[0-9]* [a-zA-Z]{3,}.*")) {
+                java.util.Date currentDate = new java.util.Date();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/y");
+                trimmedDate = dateFormat.format(currentDate) + " " + trimmedDate;
+            }
+
+            this.value = new java.util.Date(getTime(trimmedDate));
         }
-
-        if (!trimmedDate.contains("-") && !trimmedDate.contains("/") && !trimmedDate.matches("[0-9]* [a-zA-Z]{3,}.*")) {
-            java.util.Date currentDate = new java.util.Date();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/y");
-            trimmedDate = dateFormat.format(currentDate) + " " + trimmedDate;
-        }
-
-        this.value = new java.util.Date(getTime(trimmedDate));
     }
 
     // date must be valid
@@ -127,6 +134,9 @@ public class Date {
 
     @Override
     public String toString() {
+        if (value == null){
+            return new String("");
+        }
         SimpleDateFormat displayFormat = new SimpleDateFormat("d/M/y h:mm a");
         return displayFormat.format(value);
     }
@@ -136,7 +146,7 @@ public class Date {
         return other == this // short circuit if same object
                 || (other instanceof Date // instanceof handles nulls
                         && this.value.equals(((Date) other).value)); // state
-                                                                        // check
+                                                                     // check
     }
 
     @Override
