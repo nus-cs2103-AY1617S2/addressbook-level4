@@ -18,9 +18,9 @@ public class UrgencyLevel {
      *
      * @throws IllegalValueException if given start time string is invalid.
      */
-    public UrgencyLevel(String starttime) throws IllegalValueException {
-        assert starttime != null;
-        String trimmedUrgencyLevel = starttime.trim();
+    public UrgencyLevel(String urgencylevel) throws IllegalValueException {
+        assert urgencylevel != null;
+        String trimmedUrgencyLevel = urgencylevel.trim();
         if (!isValidUrgencyLevel(trimmedUrgencyLevel)) {
             throw new IllegalValueException(MESSAGE_URGENCYLEVEL_CONSTRAINTS);
         }
