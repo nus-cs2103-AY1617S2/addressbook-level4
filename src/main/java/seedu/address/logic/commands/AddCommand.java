@@ -54,20 +54,25 @@ public class AddCommand extends Command {
         //String inputString = "11-11-2012";
         DateFormat dateFormat = new SimpleDateFormat("yy-MM-dd");
 
-        if (startTime != null && endTime != null) {
-        	this.toAdd = new Todo(
-        			new Name(todo),
-        			dateFormat.parse(startTime),
-        			dateFormat.parse(endTime),
-        			new UniqueTagList(tagSet));
-        } else {
-        	this.toAdd = new Todo(
-                    new Name(todo),
-                    new UniqueTagList(tagSet)
-            );
-        }
+    	this.toAdd = new Todo(
+    			new Name(todo),
+    			dateFormat.parse(startTime),
+    			dateFormat.parse(endTime),
+    			new UniqueTagList(tagSet));
     }
-
+    
+    public AddCommand(String todo, Set<String> tags) throws IllegalValueException {
+    	final Set<Tag> tagSet = new HashSet<>();
+        for (String tagName : tags) {
+            tagSet.add(new Tag(tagName));
+        }
+        
+        this.toAdd = new Todo(
+                new Name(todo),
+                new UniqueTagList(tagSet)
+        );
+    }
+    
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
