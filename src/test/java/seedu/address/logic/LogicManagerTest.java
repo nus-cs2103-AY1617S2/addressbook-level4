@@ -104,6 +104,11 @@ public class LogicManagerTest {
 
     @After
     public void tearDown() {
+        try {
+            logic.execute("save to data/");
+        } catch (CommandException e) {
+            e.printStackTrace();
+        }
         EventsCenter.clearSubscribers();
     }
 
@@ -462,60 +467,61 @@ public class LogicManagerTest {
 
     @Test
     public void execute_saveTo_canonicalSameDirectory() throws Exception {
-
-        assertCommandSuccess("saveto .",
-                String.format(SaveToCommand.MESSAGE_SUCCESS,
-                        new File(".", SaveToCommand.TASK_MANAGER_FILE_NAME).getAbsolutePath()),
+        File tmFile = new File(".", SaveToCommand.TASK_MANAGER_FILE_NAME);
+        assertCommandSuccess("saveto .", String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getAbsolutePath()),
                 new TaskManager(), Collections.emptyList());
+        tmFile.delete();
     }
 
     @Test
     public void execute_saveTo_canonicalParentDirectory() throws Exception {
-
-        assertCommandSuccess("saveto ..",
-                String.format(SaveToCommand.MESSAGE_SUCCESS,
-                        new File("..", SaveToCommand.TASK_MANAGER_FILE_NAME).getAbsolutePath()),
+        File tmFile = new File("..", SaveToCommand.TASK_MANAGER_FILE_NAME);
+        assertCommandSuccess("saveto ..", String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getAbsolutePath()),
                 new TaskManager(), Collections.emptyList());
+        tmFile.delete();
     }
 
     @Test
     public void execute_saveTo_canonicalSubDirectory() throws Exception {
-
+        File tmFile = new File("testSubDir", SaveToCommand.TASK_MANAGER_FILE_NAME);
         assertCommandSuccess("saveto testSubDir",
-                String.format(SaveToCommand.MESSAGE_SUCCESS,
-                        new File("testSubDir", SaveToCommand.TASK_MANAGER_FILE_NAME).getAbsolutePath()),
-                new TaskManager(), Collections.emptyList());
+                String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getAbsolutePath()), new TaskManager(),
+                Collections.emptyList());
+        tmFile.delete();
+        tmFile.getParentFile().delete();
     }
 
     @Test
     public void execute_saveTo_absoluteSameDirectory() throws Exception {
-
-        assertCommandSuccess("saveto .",
-                String.format(SaveToCommand.MESSAGE_SUCCESS,
-                        new File(".", SaveToCommand.TASK_MANAGER_FILE_NAME).getAbsolutePath()),
-                new TaskManager(), Collections.emptyList());
+        File tmFile = new File(".", SaveToCommand.TASK_MANAGER_FILE_NAME);
+        assertCommandSuccess("saveto " + tmFile.getParentFile().getAbsolutePath(),
+                String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getAbsolutePath()), new TaskManager(),
+                Collections.emptyList());
+        tmFile.delete();
     }
 
     @Test
     public void execute_saveTo_absoluteParentDirectory() throws Exception {
-
-        assertCommandSuccess("saveto ..",
-                String.format(SaveToCommand.MESSAGE_SUCCESS,
-                        new File("..", SaveToCommand.TASK_MANAGER_FILE_NAME).getAbsolutePath()),
-                new TaskManager(), Collections.emptyList());
+        File tmFile = new File("..", SaveToCommand.TASK_MANAGER_FILE_NAME);
+        assertCommandSuccess("saveto " + tmFile.getParentFile().getAbsolutePath(),
+                String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getAbsolutePath()), new TaskManager(),
+                Collections.emptyList());
+        tmFile.delete();
     }
 
     @Test
     public void execute_saveTo_absoluteSubDirectory() throws Exception {
-
-        assertCommandSuccess("saveto testSubDir",
-                String.format(SaveToCommand.MESSAGE_SUCCESS,
-                        new File("testSubDir", SaveToCommand.TASK_MANAGER_FILE_NAME).getAbsolutePath()),
-                new TaskManager(), Collections.emptyList());
+        File tmFile = new File("testSubDir", SaveToCommand.TASK_MANAGER_FILE_NAME);
+        assertCommandSuccess("saveto " + tmFile.getParentFile().getAbsolutePath(),
+                String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getAbsolutePath()), new TaskManager(),
+                Collections.emptyList());
+        tmFile.delete();
+        tmFile.getParentFile().delete();
     }
 
     @Test
     public void execute_saveTo_noWritePermissions() throws Exception {
+
         assertCommandFailure("saveto C:/", String.format(SaveToCommand.MESSAGE_WRITE_ACCESS_DENIED,
                 new File("C:/", SaveToCommand.TASK_MANAGER_FILE_NAME).getAbsolutePath()));
     }
