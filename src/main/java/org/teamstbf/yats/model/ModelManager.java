@@ -16,7 +16,6 @@ import org.teamstbf.yats.model.item.UniqueEventList.DuplicateEventException;
 import org.teamstbf.yats.model.item.UniqueEventList.EventNotFoundException;
 
 import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 
 /**
  * Represents the in-memory model of the task manager data.
@@ -26,7 +25,6 @@ public class ModelManager extends ComponentManager implements Model {
 	private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
 	private final TaskManager taskManager;
-	
 	private final FilteredList<ReadOnlyEvent> filteredEvents;
 
 	/**
@@ -109,7 +107,7 @@ public class ModelManager extends ComponentManager implements Model {
 	
 	@Override
 	public void sortFilteredEventList() {
-		getFilteredTaskList().sorted();
+		filteredEvents.sorted();
 	}
 
 	private void updateFilteredEventList(Expression expression) {
