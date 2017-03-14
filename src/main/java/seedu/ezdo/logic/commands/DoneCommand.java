@@ -13,14 +13,15 @@ import seedu.ezdo.model.todo.UniqueTaskList.TaskNotFoundException;
 public class DoneCommand extends Command {
 
     public static final String COMMAND_WORD = "done";
+    public static final String SHORT_COMMAND_WORD = "d";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the task identified by the index number used in the last task listing as done\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DONE_TASK_SUCCESS = "Done Task: %1$s";
-    public static final String MESSAGE_DONE_LISTED = "Done Tasks listed";
+    public static final String MESSAGE_DONE_TASK_SUCCESS = "Done task: %1$s";
+    public static final String MESSAGE_DONE_LISTED = "Done tasks listed";
 
     public final int targetIndex;
     public final boolean requestToViewDoneOnly;
@@ -51,6 +52,10 @@ public class DoneCommand extends Command {
         }
 
         Task taskToDone = (Task) lastShownList.get(targetIndex - 1);
+
+        if (taskToDone.getDone()) {
+            throw new CommandException(Messages.MESSAGE_WRONG_LIST);
+        }
 
         try {
             model.doneTask(taskToDone);

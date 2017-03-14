@@ -28,7 +28,10 @@ public class HelpWindowTest extends EzDoGuiTest {
         assertHelpWindowOpen(mainMenu.openHelpWindowUsingMenu());
 
         //use command
-        assertHelpWindowOpen(commandBox.runHelpCommand());
+        assertHelpWindowOpen(commandBox.runHelpCommand(false));
+
+        //shortened use command
+        assertHelpWindowOpen(commandBox.runHelpCommand(true));
     }
 
     private void assertHelpWindowOpen(HelpWindowHandle helpWindowHandle) {
