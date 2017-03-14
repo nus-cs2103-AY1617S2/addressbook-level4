@@ -9,26 +9,28 @@ public class UrgencyLevel {
  */
 
     public static final String MESSAGE_URGENCYLEVEL_CONSTRAINTS = "Task urgency levels should only contain numbers";
-    public static final String URGENCYLEVEL_VALIDATION_REGEX = "^[0-5]*$";
+    public static final String URGENCYLEVEL_VALIDATION_REGEX = ".+";
 
     public final String value;
+    public final int int_value;
 
     /**
-     * Validates given start time.
+     * Validates given urgency level.
      *
-     * @throws IllegalValueException if given start time string is invalid.
+     * @throws IllegalValueException if given urgency level string is invalid.
      */
-    public UrgencyLevel(String urgencylevel) throws IllegalValueException {
-        assert urgencylevel != null;
-        String trimmedUrgencyLevel = urgencylevel.trim();
+    public UrgencyLevel(String urgencyLevel) throws IllegalValueException {
+        assert urgencyLevel != null;
+        String trimmedUrgencyLevel = urgencyLevel.trim();
         if (!isValidUrgencyLevel(trimmedUrgencyLevel)) {
             throw new IllegalValueException(MESSAGE_URGENCYLEVEL_CONSTRAINTS);
         }
         this.value = trimmedUrgencyLevel;
+        this.int_value = Integer.parseInt(value);
     }
 
     /**
-     * Returns true if a given string is a valid task start time.
+     * Returns true if a given string is a valid task urgency level.
      */
     public static boolean isValidUrgencyLevel(String test) {
         return test.matches(URGENCYLEVEL_VALIDATION_REGEX);
@@ -37,6 +39,10 @@ public class UrgencyLevel {
     @Override
     public String toString() {
         return value;
+    }
+    
+    public int getIntValue(){
+        return int_value;
     }
 
     @Override
