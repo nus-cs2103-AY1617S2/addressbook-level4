@@ -41,7 +41,7 @@ public abstract class TaskListGuiTest {
 
     TestApp testApp;
 
-        protected TypicalTestTasks td = new TypicalTestTasks();
+    protected TypicalTestTasks td = new TypicalTestTasks();
 
     /*
      *   Handles to GUI elements present at the start up are created in advance
@@ -93,7 +93,7 @@ public abstract class TaskListGuiTest {
     /**
      * Override this in child classes to set the initial local data.
      * Return null to use the data in the file specified in {@link #getDataFileLocation()}
-     * @throws ParseException 
+     * @throws ParseException
      */
     protected TaskList getInitialData() throws ParseException {
         TaskList ab = new TaskList();
