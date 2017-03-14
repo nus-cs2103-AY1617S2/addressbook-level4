@@ -9,7 +9,7 @@ import seedu.todolist.model.task.UniqueTaskList.TaskNotFoundException;
 /**
  * Mark a Task as completed using its last displayed index from the ToDoList
  */
-public class CompleteCommand {
+public class CompleteCommand extends Command {
     public static final String COMMAND_WORD = "complete";
     
     public static final String MESSAGE_USAGE = COMMAND_WORD
