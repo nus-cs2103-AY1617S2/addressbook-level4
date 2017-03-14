@@ -42,18 +42,24 @@ public class TaskBuilder {
 
     public TaskBuilder withStartTime(String startTime) throws IllegalValueException, IllegalDateTimeValueException {
         if (startTime != null) {
-            this.task.setStartTime(Optional.empty());
-        } else {
             this.task.setStartTime(Optional.ofNullable(new Deadline(startTime)));
+        } else {
+            this.task.setStartTime(Optional.empty());
         }
         return this;
     }
+    
     public TaskBuilder withDeadline(String deadline) throws IllegalValueException, IllegalDateTimeValueException {
         if (deadline != null) {
-            this.task.setStartTime(Optional.empty());
-        } else {
             this.task.setStartTime(Optional.ofNullable(new Deadline(deadline)));
+        } else {
+            this.task.setStartTime(Optional.empty());
         }
+        return this;
+    }
+    
+    public TaskBuilder withStatus(boolean isCompleted) {
+        this.task.setIsCompleted(isCompleted);
         return this;
     }
 

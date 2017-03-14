@@ -112,6 +112,13 @@ public class EditCommand extends Command {
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyPresent(this.title, this.startTime, this.isCompleted, this.deadline, this.labels);
         }
+        
+        /**
+         * Returns true if any date is edited.
+         */
+        public boolean isDateEdited() {
+            return CollectionUtil.isAnyPresent(this.startTime,this.deadline);
+        }
 
         public void setName(Optional<Title> title) {
             assert title != null;

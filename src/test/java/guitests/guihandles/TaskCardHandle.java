@@ -19,6 +19,7 @@ public class TaskCardHandle extends GuiHandle {
     private static final String STARTTIME_FIELD_ID = "#startTime";
     private static final String DEADLINE_FIELD_ID = "#deadline";
     private static final String LABELS_FIELD_ID = "#labels";
+    private static final String STATUS_FIELD_ID = "#status";
 
     private Node node;
 
@@ -68,10 +69,34 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     public boolean isSameTask(ReadOnlyTask task) {
-        return getTitle().equals(task.getTitle().title)
-                && getDeadline().equals(task.getDeadline().toString())
-                && getLabels().equals(getLabels(task.getLabels()));
-                //&& getStartTime().equals(task.getStartTime()); //TODO: Fix!
+        assert(task != null);
+        boolean result;
+        if (task.getDeadline().isPresent() && task.getStartTime().isPresent()) {
+            result = getTitle().equals(task.getTitle().title)
+                && getDeadline().equals(task.getDeadline().get().toString())
+                && getLabels().equals(getLabels(task.getLabels()))
+                && getStartTime().equals(task.getStartTime().get().toString())
+                && isCompleted().equals(task.isCompleted());
+        } else if (task.getDeadline().isPresent()) {
+            result = getTitle().equals(task.getTitle().title)
+                    && getDeadline().equals(task.getDeadline().get().toString())
+                    && getLabels().equals(getLabels(task.getLabels()))
+                    && isCompleted().equals(task.isCompleted());
+        } else {
+            result = getTitle().equals(task.getTitle().title)
+                    && getLabels().equals(getLabels(task.getLabels()))
+                    && isCompleted().equals(task.isCompleted());
+        }
+        return result;
+    }
+
+    private Boolean isCompleted() {
+        String text = getTextFromLabel(STATUS_FIELD_ID);
+        if (text.equals("completed")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override

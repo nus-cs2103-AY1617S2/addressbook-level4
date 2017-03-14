@@ -38,9 +38,7 @@ public class TestTask implements ReadOnlyTask {
     }
 
     public void setDeadline(Optional<Deadline> deadline) {
-        if (deadline.isPresent()) {
             this.deadline = deadline;
-        }
     }
 
     public void setLabels(UniqueLabelList labels) {
@@ -89,7 +87,7 @@ public class TestTask implements ReadOnlyTask {
     private String getAddCommandWithDeadline() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getTitle().title + " ");
-        sb.append(" by " + this.getDeadline().toString() + " ");
+        sb.append(" by " + this.getDeadline().get().toString() + " ");
         this.getLabels().asObservableList().stream().forEach(s -> sb.append("t/" + s.labelName + " "));
         return sb.toString();
     }
@@ -97,16 +95,14 @@ public class TestTask implements ReadOnlyTask {
     private String getAddCommandWithInterval() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getTitle().title + " ");
-        sb.append(" from " + this.getStartTime().toString() + " ");
-        sb.append(" to " + this.getDeadline().toString() + " ");
+        sb.append(" from " + this.getStartTime().get().toString() + " ");
+        sb.append(" to " + this.getDeadline().get().toString() + " ");
         this.getLabels().asObservableList().stream().forEach(s -> sb.append("t/" + s.labelName + " "));
         return sb.toString();
     }
     
     public void setStartTime(Optional<Deadline> startTime) {
-        if (startTime.isPresent()) {
             this.startTime = startTime;
-        }
     }
 
     @Override

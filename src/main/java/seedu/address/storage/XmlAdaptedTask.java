@@ -45,7 +45,9 @@ public class XmlAdaptedTask {
      * @param source future changes to this will not affect the created XmlAdaptedTask
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
+        assert(source != null);
         title = source.getTitle().title;
+        //TODO: fix for tests!
         if (source.getStartTime().isPresent()) {
             startTime = source.getStartTime().get().toString();
         } 

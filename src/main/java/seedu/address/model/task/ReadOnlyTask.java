@@ -38,15 +38,19 @@ public interface ReadOnlyTask {
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getTitle())
-            .append(" Start: ")
-            .append(getStartTime().get().toString())
-            .append(" Deadline: ")
-            .append(getDeadline().get().toString());
+        builder.append(getTitle());
+        if (getStartTime().isPresent()) {
+            builder.append(" Start: ")
+                .append(getStartTime().get().toString());
+        }
+        if (getDeadline().isPresent()) {
+            builder.append(" Deadline: ")
+                .append(getDeadline().get().toString());
+        }            
         if (isCompleted()) {
-            builder.append("Status: Completed");
+            builder.append(" Status: Completed");
         } else {
-            builder.append("Status: Incomplete");
+            builder.append(" Status: Incomplete");
         }
         builder.append(" Label: ");
         getLabels().forEach(builder::append);

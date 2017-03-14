@@ -16,25 +16,27 @@ public class TypicalTestTasks {
     public TypicalTestTasks() {
         try {
             task1 = new TaskBuilder().withTitle("Complete task 1").withStartTime("10-10-2017 0100")
-                    .withDeadline("11-11-2017 2300").withLabels("friends").build();
+                    .withDeadline("11-11-2017").withLabels("friends")
+                    .withStatus(false).build();
             task2 = new TaskBuilder().withTitle("Complete task 2").withStartTime("10-10-2017 0100")
-                    .withDeadline("11-11-2017 2300").withLabels("owesMoney", "friends").build();
+                    .withDeadline("11-11-2017").withLabels("owesMoney", "friends")
+                    .withStatus(false).build();
             task3 = new TaskBuilder().withTitle("Complete task 3").withStartTime("10-10-2017 0100")
-                    .withDeadline("11-11-2017 2300").build();
+                    .withDeadline("11-11-2017").withStatus(false).build();
             task4 = new TaskBuilder().withTitle("Complete task 4").withStartTime("10-10-2017 0100")
-                    .withDeadline("11-11-2017 2300").build();
+                    .withDeadline("11-11-2017").withStatus(false).build();
             task5 = new TaskBuilder().withTitle("Complete task 5").withStartTime("10-10-2017 0100")
-                    .withDeadline("11-11-2017 2300").build();
+                    .withDeadline("11-11-2017").withStatus(false).build();
             task6 = new TaskBuilder().withTitle("Complete task 6").withStartTime("10-10-2017 0100")
-                    .withDeadline("10-11-2017 2300").build();
+                    .withDeadline("10-11-2017").withStatus(false).build();
             task7 = new TaskBuilder().withTitle("Complete task 7").withStartTime("10-10-2017 0100")
-                    .withDeadline("11-11-2017 2300").build();
+                    .withDeadline("11-11-2017").withStatus(false).build();
 
             // Manually added
             task8 = new TaskBuilder().withTitle("Complete task 8").withStartTime("10-10-2017 0100")
-                    .withDeadline("11-11-2017 2300").build();
+                    .withDeadline("11-11-2017").withStatus(false).build();
             task9 = new TaskBuilder().withTitle("Complete task 9").withStartTime("10-10-2017 0100")
-                    .withDeadline("11-11-2017 2300").build();
+                    .withDeadline("11-11-2017").withStatus(false).build();
         } catch (IllegalValueException | IllegalDateTimeValueException e) {
             e.printStackTrace();
             assert false : "not possible";
