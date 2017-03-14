@@ -1,39 +1,57 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <flexitask>
-    <tasks>
-        <name>Hans Muster</name>
-        <comment isPrivate="false">4th street</comment>
-    </tasks>
-    <tasks>
-        <name>Ruth Mueller</name>
-        <comment isPrivate="false">81th street</comment>
-    </tasks>
-    <tasks>
-        <name>Heinz Kurz</name>
-        <comment isPrivate="false">wall street</comment>
-    </tasks>
-    <tasks>
-        <name>Cornelia Meier</name>
-        <comment isPrivate="false">10th street</comment>
-    </tasks>
-    <tasks>
-        <name>Werner Meyer</name>
-        <comment isPrivate="false">michegan ave</comment>
-    </tasks>
-    <tasks>
-        <name>Lydia Kunz</name>
-        <comment isPrivate="false">little tokyo</comment>
-    </tasks>
-    <tasks>
-        <name>Anna Best</name>
-        <comment isPrivate="false">4th street</comment>
-    </tasks>
-    <tasks>
-        <name>Stefan Meier</name>
-        <comment isPrivate="false">little india</comment>
-    </tasks>
-    <tasks>
-        <name>Martin Mueller</name>
-        <comment isPrivate="false">chicago ave</comment>
-    </tasks>
+	<tasks>
+		<name>Meeting</name>
+		<comment>prepare notes</comment>
+		<type>floating</type>
+		<priority>medium</priority>
+	</tasks>
+	<tasks>
+		<name>Shopping</name>
+		<comment>prepare notes</comment>
+		<type>floating</type>
+		<priority>medium</priority>
+	</tasks>
+	<tasks>
+		<name>AI Conference</name>
+		<comment>prepare notes</comment>
+		<type>floating</type>
+		<priority>medium</priority>
+	</tasks>
+	<tasks>
+		<name>Watch Movie</name>
+		<comment>prepare clothes</comment>
+		<type>floating</type>
+		<priority>low</priority>
+	</tasks>
+	<tasks>
+		<name>Check Email</name>
+		<comment>prepare notes</comment>
+		<type>floating</type>
+		<priority>medium</priority>
+	</tasks>
+	<tasks>
+		<name>Dinner with wife</name>
+		<comment>prepare flowers</comment>
+		<type>floating</type>
+		<priority>medium</priority>
+	</tasks>
+	<tasks>
+		<name>Project Meeting</name>
+		<comment>prepare notes</comment>
+		<type>floating</type>
+		<priority>medium</priority>
+	</tasks>
+	<tasks>
+		<name>Progress Report</name>
+		<comment>prepare notes</comment>
+		<type>floating</type>
+		<priority>high</priority>
+	</tasks>
+	<tasks>
+		<name>Evaluation Report</name>
+		<comment>prepare notes</comment>
+		<type>floating</type>
+		<priority>high</priority>
+	</tasks>
 </flexitask>
