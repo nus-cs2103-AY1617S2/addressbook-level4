@@ -117,7 +117,7 @@ public class EditCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        if (filteredTaskListIndex <= taskSize) {
+        if (filteredTaskListIndex < taskSize) {
             ReadOnlyTask taskToEdit = lastShownTaskList.get(filteredTaskListIndex);
             assert taskToEdit != null;
             Task editedTask = createEditedTask(taskToEdit, editEventDescriptor);
@@ -130,7 +130,7 @@ public class EditCommand extends Command {
             model.updateFilteredListToShowAll();
             return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
 
-        } else if (taskSize < filteredTaskListIndex && filteredTaskListIndex <= taskAndEventSize) {
+        } else if (filteredTaskListIndex >= taskSize && filteredTaskListIndex < taskAndEventSize) {
             ReadOnlyEvent taskToEdit = lastShownEventList.get(filteredTaskListIndex - taskSize);
             Event editedEvent = createEditedEvent(taskToEdit, editEventDescriptor);
 
@@ -142,7 +142,7 @@ public class EditCommand extends Command {
             model.updateFilteredListToShowAll();
             return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
 
-        } else if (taskAndEventSize < filteredTaskListIndex && filteredTaskListIndex <= totalSize) {
+        } else if (filteredTaskListIndex >= taskAndEventSize && filteredTaskListIndex < totalSize) {
             ReadOnlyFloatingTask taskToEdit = lastShownFloatingTaskList.get(filteredTaskListIndex - taskAndEventSize);
             FloatingTask editedFloatingTask = createEditedFloatingTask(taskToEdit, editEventDescriptor);
 
