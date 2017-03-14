@@ -1,6 +1,8 @@
 package seedu.tasklist.testutil;
 
-import java.util.Date;
+
+import java.text.ParseException;
+
 
 import seedu.tasklist.commons.exceptions.IllegalValueException;
 import seedu.tasklist.model.TaskList;
@@ -17,31 +19,39 @@ public class TypicalTestTasks {
 
     public TestTask tutorial, homework, groceries, java, CS2103T, drink, internship, ida;
 
-    public TypicalTestTasks() {
+    public TypicalTestTasks() throws ParseException {
         try {
+
             tutorial = new EventTaskBuilder().withName("CS2103T tutorial")
-                    .withComment("prepare V0.2 presentation")
-                    .withTags("class").withStartDate(new Date(117, 5, 5, 15, 0).toString())
-                    .withEndDate(new Date(117, 5, 5, 17, 0).toString()).build();
-            homework = new FloatingTaskBuilder().withName("CS3245 homework 3").withComment("discuss with classmates")
+                    .withComment("prepare V0.2 presentation").withStatus(false)
+                    .withPriority("high")
+                    .withTags("class").withStartDate("15/3/2017 15:00:10")
+                    .withEndDate("15/3/2017 18:00:10").build();
+            homework = new FloatingTaskBuilder().withName("CS3245 homework 3")
+                    .withComment("discuss with classmates").withPriority("high")
+                    .withStatus(false)
                     .withTags("class").build();
-            groceries = new FloatingTaskBuilder().withName("Buy groceries").withComment("go NTUC").build();
-            java = new FloatingTaskBuilder().withName("Update Java for CS2103T")
-                    .withComment("Find out why jdk is not displaying the correct ver").build();
+            groceries = new FloatingTaskBuilder().withName("Buy groceries").withComment("go NTUC")
+                    .withPriority("low").withStatus(false).build();
+            java = new FloatingTaskBuilder().withName("Update Java for CS2103T").withStatus(false)
+                    .withPriority("high").withComment("Find out why jdk is not displaying the correct ver").build();
             CS2103T = new DeadlineTaskBuilder().withName("Implement undo for this").withComment("By today")
-                    .withDeadline(new Date().toString()).build();
-            drink = new FloatingTaskBuilder().withName("Drink water").withComment("To improve brain function").build();
+                    .withPriority("high").withDeadline("15/3/2017 18:00:10").withStatus(false).build();
+            drink = new FloatingTaskBuilder().withName("Drink water").withComment("To improve brain function")
+                    .withPriority("high").withStatus(false).build();
 
             // Manually added
-            internship = new FloatingTaskBuilder().withName("Internship interview").withComment("at mediacorp").build();
-            ida = new FloatingTaskBuilder().withName("Yet another interview").withComment("also at mediacorp").build();
+            internship = new FloatingTaskBuilder().withName("Internship interview")
+                    .withComment("at mediacorp").withPriority("high").withStatus(false).build();
+            ida = new FloatingTaskBuilder().withName("Yet another interview").withComment("also at mediacorp")
+                    .withPriority("high").withStatus(false).build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
         }
     }
 
-    public static void loadTaskListWithSampleData(TaskList ab) {
+    public static void loadTaskListWithSampleData(TaskList ab) throws ParseException {
         for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
             try {
                 Task currentTask;
@@ -70,7 +80,7 @@ public class TypicalTestTasks {
         return new TestTask[]{tutorial, homework, groceries, java, CS2103T, drink};
     }
 
-    public TaskList getTypicalTaskList() {
+    public TaskList getTypicalTaskList() throws ParseException {
         TaskList ab = new TaskList();
         loadTaskListWithSampleData(ab);
         return ab;

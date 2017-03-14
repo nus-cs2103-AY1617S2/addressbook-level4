@@ -1,6 +1,8 @@
 package seedu.tasklist.testutil;
 
-import java.util.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import seedu.tasklist.commons.exceptions.IllegalValueException;
 import seedu.tasklist.model.tag.Tag;
@@ -58,13 +60,15 @@ public class EventTaskBuilder extends TaskBuilder {
         return this;
     }
 
-    public EventTaskBuilder withStartDate(String date) throws IllegalValueException {
-        this.task.setStartDate(new Date(date));
+    public EventTaskBuilder withStartDate(String date) throws IllegalValueException, ParseException {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        this.task.setStartDate(dateFormat.parse(date));
         return this;
     }
 
-    public EventTaskBuilder withEndDate(String date) throws IllegalValueException {
-        this.task.setEndDate(new Date(date));
+    public EventTaskBuilder withEndDate(String date) throws IllegalValueException, ParseException {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        this.task.setEndDate(dateFormat.parse(date));
         return this;
     }
 }

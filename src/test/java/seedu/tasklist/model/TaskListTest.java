@@ -2,6 +2,7 @@ package seedu.tasklist.model;
 
 import static org.junit.Assert.assertEquals;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -43,14 +44,14 @@ public class TaskListTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyTaskList_replacesData() {
+    public void resetData_withValidReadOnlyTaskList_replacesData() throws ParseException {
         TaskList newData = new TypicalTestTasks().getTypicalTaskList();
         taskList.resetData(newData);
         assertEquals(newData, taskList);
     }
 
     @Test
-    public void resetData_withDuplicateTasks_throwsAssertionError() {
+    public void resetData_withDuplicateTasks_throwsAssertionError() throws ParseException {
         TypicalTestTasks td = new TypicalTestTasks();
         // Repeat td.tutorial twice
         List<Task> newTasks = Arrays.asList(new EventTask((TestEventTask) td.tutorial),
@@ -63,7 +64,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void resetData_withDuplicateTags_throwsAssertionError() {
+    public void resetData_withDuplicateTags_throwsAssertionError() throws ParseException {
         TaskList typicalTaskList = new TypicalTestTasks().getTypicalTaskList();
         List<ReadOnlyTask> newTasks = typicalTaskList.getTaskList();
         List<Tag> newTags = new ArrayList<>(typicalTaskList.getTagList());
