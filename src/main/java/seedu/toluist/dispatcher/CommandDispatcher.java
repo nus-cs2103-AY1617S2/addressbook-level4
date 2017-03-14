@@ -107,7 +107,7 @@ public class CommandDispatcher extends Dispatcher {
                 .map((Class<? extends Controller> klass) -> {
                     try {
                         final String methodName = "getCommandWords";
-                        Method method = klass.getMethod(methodName, Controller.class);
+                        Method method = klass.getMethod(methodName);
                         return Arrays.asList((String[]) method.invoke(null));
                     } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
                         return new ArrayList<String>();

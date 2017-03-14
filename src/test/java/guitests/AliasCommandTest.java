@@ -22,7 +22,7 @@ public class AliasCommandTest extends ToLuistGuiTest {
     public void alias_ReservedWord() {
         String aliasCommand = "alias alias alias";
         commandBox.runCommand(aliasCommand);
-        assertResultMessage(AliasController.RESULT_MESSAGE_RESERVED_WORD);
+        assertResultMessage(String.format(AliasController.RESULT_MESSAGE_RESERVED_WORD, "alias"));
     }
 
     @Test
