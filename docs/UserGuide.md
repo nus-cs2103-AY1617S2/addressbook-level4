@@ -28,13 +28,12 @@ In our far too hectic lives, there's just so much to keep track of. Trying to ma
 Let's get you up and running.
 
 ### Installation Instructions
-<img align="middle" src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/ui.png" height="300" style="float:right">
+<img src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/ui.png" height="300" style="float:right">
 
 1. Install the latest Java [here](https://java.com/en/download/). This will be required to run the application.
 2. Download `today.jar` from the [releases](../../../releases) tab.
 3. Copy the file to the folder you want to use as the home folder for your task manager.
-4. Double-click the file to start the app and you should see an interface like the image on the right.
-
+4. Double-click the file to start the app and you should see an interface like the image above.
 5. You can start managing your tasks now:
    * `add Do my homework due today` creates a new entry `Do my homework` with a deadline `today`
    * `done 1, 3, 4` marks the 1st, 3rd and 4th task as complete and whisks them away to your completed list
