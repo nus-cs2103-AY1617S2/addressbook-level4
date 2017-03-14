@@ -2,55 +2,55 @@
 <taskmanager>
     <tasks>
         <title>Hans Muster</title>
-        <phone isPrivate="false">9482424</phone>
+        <endDateTime isPrivate="false">9482424</endDateTime>
         <email isPrivate="false">hans@google.com</email>
         <address isPrivate="false">4th street</address>
     </tasks>
     <tasks>
         <title>Ruth Mueller</title>
-        <phone isPrivate="false">87249245</phone>
+        <endDateTime isPrivate="false">87249245</endDateTime>
         <email isPrivate="false">ruth@google.com</email>
         <address isPrivate="false">81th street</address>
     </tasks>
     <tasks>
         <title>Heinz Kurz</title>
-        <phone isPrivate="false">95352563</phone>
+        <endDateTime isPrivate="false">95352563</endDateTime>
         <email isPrivate="false">heinz@yahoo.com</email>
         <address isPrivate="false">wall street</address>
     </tasks>
     <tasks>
         <title>Cornelia Meier</title>
-        <phone isPrivate="false">87652533</phone>
+        <endDateTime isPrivate="false">87652533</endDateTime>
         <email isPrivate="false">cornelia@google.com</email>
         <address isPrivate="false">10th street</address>
     </tasks>
     <tasks>
         <title>Werner Meyer</title>
-        <phone isPrivate="false">9482224</phone>
+        <endDateTime isPrivate="false">9482224</endDateTime>
         <email isPrivate="false">werner@gmail.com</email>
         <address isPrivate="false">michegan ave</address>
     </tasks>
     <tasks>
         <title>Lydia Kunz</title>
-        <phone isPrivate="false">9482427</phone>
+        <endDateTime isPrivate="false">9482427</endDateTime>
         <email isPrivate="false">lydia@gmail.com</email>
         <address isPrivate="false">little tokyo</address>
     </tasks>
     <tasks>
         <title>Anna Best</title>
-        <phone isPrivate="false">9482442</phone>
+        <endDateTime isPrivate="false">9482442</endDateTime>
         <email isPrivate="false">anna@google.com</email>
         <address isPrivate="false">4th street</address>
     </tasks>
     <tasks>
         <title>Stefan Meier</title>
-        <phone isPrivate="false">8482424</phone>
+        <endDateTime isPrivate="false">8482424</endDateTime>
         <email isPrivate="false">stefan@mail.com</email>
         <address isPrivate="false">little india</address>
     </tasks>
     <tasks>
         <title>Martin Mueller</title>
-        <phone isPrivate="false">8482131</phone>
+        <endDateTime isPrivate="false">8482131</endDateTime>
         <email isPrivate="false">hans@google.com</email>
         <address isPrivate="false">chicago ave</address>
     </tasks>
