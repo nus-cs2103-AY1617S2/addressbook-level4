@@ -36,8 +36,7 @@ public class AddTaskController extends Controller {
         TodoList todoList = TodoList.load();
         CommandResult commandResult = new CommandResult("");
 
-        TaskTokenizer taskTokenizer = new TaskTokenizer(COMMAND_TEMPLATE);
-        HashMap<String, String> tokens = taskTokenizer.tokenize(command, false, true);
+        HashMap<String, String> tokens = tokenize(command);
 
         String description = tokens.get(TaskTokenizer.TASK_DESCRIPTION);
 
@@ -57,13 +56,17 @@ public class AddTaskController extends Controller {
         return commandResult;
     }
 
+    public HashMap<String, String> tokenize(String command) {
+        TaskTokenizer taskTokenizer = new TaskTokenizer(COMMAND_TEMPLATE);
+        return taskTokenizer.tokenize(command, false, true);
+    }
+
     private CommandResult add(TodoList todoList, String description,
             LocalDateTime startDateTime, LocalDateTime endDateTime) {
         todoList.add(new Task(description, startDateTime, endDateTime));
         return new CommandResult(RESULT_MESSAGE_ADD_TASK);
     }
 
-    @Override
     public boolean matchesCommand(String command) {
         return command.matches(COMMAND_TEMPLATE);
     }

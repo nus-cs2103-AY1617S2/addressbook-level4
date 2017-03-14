@@ -15,7 +15,7 @@ import seedu.toluist.ui.Ui;
 public class UnaliasController extends Controller {
     private static final String RESULT_MESSAGE_SUCCESS = "Alias %s has been removed";
     private static final String RESULT_MESSAGE_FAILURE = "Alias %s cannot be removed";
-    private static final String RESULT_MESSAGE_NOT_ALIAS = "%s is not an alias";
+    public static final String RESULT_MESSAGE_NOT_ALIAS = "%s is not an alias";
     private static final String COMMAND_TEMPLATE = "unalias\\s+(?<alias>\\S+)\\s*";
     private static final String COMMAND_WORD = "unalias";
 
@@ -42,7 +42,6 @@ public class UnaliasController extends Controller {
         }
     }
 
-    @Override
     public HashMap<String, String> tokenize(String command) {
         Pattern pattern = Pattern.compile(COMMAND_TEMPLATE);
         Matcher matcher = pattern.matcher(command.trim());
@@ -52,7 +51,6 @@ public class UnaliasController extends Controller {
         return tokens;
     }
 
-    @Override
     public boolean matchesCommand(String command) {
         return command.matches(COMMAND_TEMPLATE);
     }

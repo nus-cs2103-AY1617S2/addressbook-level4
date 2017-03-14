@@ -23,14 +23,14 @@ public class TagTest {
     }
 
     @Test
-    public void testEquals_SameTag_isTrue() {
+    public void testEquals_sameTag_isTrue() {
         String tagName = "CS2101";
         Tag tag = new Tag(tagName);
         assertEquals(tag, tag);
     }
 
     @Test
-    public void testEquals_TagsWithIdenticalName_isTrue() {
+    public void testEquals_tagsWithIdenticalName_isTrue() {
         String tagName = "CS2101";
         Tag tag1 = new Tag(tagName);
         Tag tag2 = new Tag(tagName);
@@ -38,7 +38,7 @@ public class TagTest {
     }
 
     @Test
-    public void testHashCode_InsertTagsWithSameNameIntoSet_onlyOneItemInSet() {
+    public void testHashCode_insertTagsWithSameNameIntoSet_onlyOneItemInSet() {
         String tagName = "CS2103";
         Tag tag1 = new Tag(tagName);
         Tag tag2 = new Tag(tagName);
@@ -51,7 +51,7 @@ public class TagTest {
     }
 
     @Test
-    public void testCompareTo_InsertTagsToListThenSort_correctOrder() {
+    public void testCompareTo_insertTagsToListThenSort_correctOrder() {
         String tagName1 = "CS2103";
         Tag tag1 = new Tag(tagName1);
 

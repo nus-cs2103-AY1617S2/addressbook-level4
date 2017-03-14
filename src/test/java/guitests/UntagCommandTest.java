@@ -14,7 +14,7 @@ import seedu.toluist.testutil.TypicalTestTodoLists;
 public class UntagCommandTest extends ToLuistGuiTest {
 
     @Test
-    public void removeTag_SingleTag() {
+    public void removeTag_singleTag() {
         // add one task
         Tag lewisTag = new Tag("lewis");
         Task task = new TypicalTestTodoLists().getTypicalTasks()[0];

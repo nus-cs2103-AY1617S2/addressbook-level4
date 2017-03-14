@@ -26,6 +26,7 @@ import seedu.toluist.commons.core.EventsCenter;
 import seedu.toluist.commons.events.BaseEvent;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
+import seedu.toluist.testutil.TestUtil;
 import seedu.toluist.testutil.TypicalTestTodoLists;
 
 /**
@@ -67,6 +68,7 @@ public abstract class ToLuistGuiTest {
             this.stage = stage;
         });
         EventsCenter.clearSubscribers();
+        TestUtil.cleanSandboxFolder();
         testApp = (TestApp) FxToolkit.setupApplication(() -> new TestApp(this::getInitialData,
                                                                         getConfigFileLocation(),
                                                                         getDataFileLocation()));

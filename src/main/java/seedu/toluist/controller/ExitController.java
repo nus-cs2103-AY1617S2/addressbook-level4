@@ -1,5 +1,7 @@
 package seedu.toluist.controller;
 
+import java.util.HashMap;
+
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.ui.Ui;
 
@@ -7,9 +9,9 @@ import seedu.toluist.ui.Ui;
  * Handle exit command
  */
 public class ExitController extends Controller {
-    private static final String COMMAND_TEMPLATE = "^(exit|quit)$";
-    private static final String COMMAND_WORD_EXIT = "exit";
-    private static final String COMMAND_WORD_QUIT = "quit";
+    public static final String COMMAND_WORD_EXIT = "exit";
+    public static final String COMMAND_WORD_QUIT = "quit";
+    private static final String COMMAND_TEMPLATE = "^(exit|quit)\\s*";
 
     public ExitController(Ui renderer) {
         super(renderer);
@@ -21,7 +23,10 @@ public class ExitController extends Controller {
         return new CommandResult("");
     }
 
-    @Override
+    public HashMap<String, String> tokenize(String command) {
+        return null; // not used
+    }
+
     public boolean matchesCommand(String command) {
         return command.matches(COMMAND_TEMPLATE);
     }

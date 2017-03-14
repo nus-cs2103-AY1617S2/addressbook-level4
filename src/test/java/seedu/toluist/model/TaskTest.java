@@ -1,6 +1,10 @@
 package seedu.toluist.model;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -10,12 +14,15 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
+import seedu.toluist.commons.util.DateTimeUtil;
+
 /**
  * Tests for Task model
  */
 public class TaskTest {
-    private Task floatingTask;
-    private final String floatingTaskDescripion = "floating task";
+    private Task testTask;
+    private final String taskDescription = "a description";
+
     private final Tag tag1 = new Tag("nature");
     private final Tag tag2 = new Tag("nature");
     private final Tag tag3 = new Tag("wolf");
@@ -24,100 +31,185 @@ public class TaskTest {
 
     @Before
     public void setUp() {
-        floatingTask = new Task(floatingTaskDescripion);
-        floatingTask.addTag(tag1);
+        testTask = new Task(taskDescription);
+        testTask.addTag(tag1);
     }
 
     @Test
-    public void testConstruct_floatingTask() {
-        assertEquals(floatingTask.getDescription(), floatingTaskDescripion);
-        assertSimilarTags(floatingTask, tag1);
+    public void testConstruct_testTask() {
+        Task task = new Task(taskDescription);
+        assertEquals(task.getDescription(), taskDescription);
+        assertNull(task.getStartDateTime());
+        assertNull(task.getEndDateTime());
+        assertNull(task.getCompletionDateTime());
+        assertEquals(task.getTaskPriority(), Task.TaskPriority.LOW);
+        assertTrue(task.getAllTags().isEmpty());
+        assertTrue(task.isFloatingTask());
     }
 
     @Test
-    public void addTag_NewTag_tagIsAdded() {
-        floatingTask.addTag(tag3);
-        assertSimilarTags(floatingTask, tag1, tag3);
+    public void testConstruct_taskWithDeadline() {
+        LocalDateTime dateTime = LocalDateTime.now();
+        Task task = new Task(taskDescription, dateTime);
+        assertEquals(task.getDescription(), taskDescription);
+        assertNull(task.getStartDateTime());
+        assertEquals(task.getEndDateTime(), dateTime);
+        assertNull(task.getCompletionDateTime());
+        assertEquals(task.getTaskPriority(), Task.TaskPriority.LOW);
+        assertTrue(task.getAllTags().isEmpty());
+        assertTrue(task.isTaskWithDeadline());
     }
 
     @Test
-    public void addTag_ExistingTag_tagIsNotAddedTwice() {
-        floatingTask.addTag(tag1);
-        assertSimilarTags(floatingTask, tag1);
+    public void testConstruct_event() {
+        LocalDateTime from = LocalDateTime.now().minusDays(1);
+        LocalDateTime to = LocalDateTime.now();
+        Task event = new Task(taskDescription, from, to);
+        assertEquals(event.getDescription(), taskDescription);
+        assertEquals(event.getStartDateTime(), from);
+        assertEquals(event.getEndDateTime(), to);
+        assertNull(event.getCompletionDateTime());
+        assertEquals(event.getTaskPriority(), Task.TaskPriority.LOW);
+        assertTrue(event.getAllTags().isEmpty());
+        assertTrue(event.isEvent());
     }
 
     @Test
-    public void addTag_TagWithSameTagName_tagIsNotAddedTwice() {
-        floatingTask.addTag(tag2);
-        assertSimilarTags(floatingTask, tag1);
+    public void setDeadline() {
+        LocalDateTime now = LocalDateTime.now();
+        testTask.setDeadLine(now);
+        assertEquals(testTask.getEndDateTime(), now);
+        // task is now a task with deadline
+        assertTrue(testTask.isTaskWithDeadline());
     }
 
     @Test
-    public void removeTag_ExistingTag_tagIsRemoved() {
-        floatingTask.removeTag(tag1);
-        assertSimilarTags(floatingTask);
+    public void setFromTo() {
+        LocalDateTime from = LocalDateTime.now().minusDays(1);
+        LocalDateTime to = LocalDateTime.now();
+        testTask.setFromTo(from, to);
+        assertEquals(testTask.getStartDateTime(), from);
+        assertEquals(testTask.getEndDateTime(), to);
+        // task is now an event
+        assertTrue(testTask.isEvent());
     }
 
     @Test
-    public void removeTag_TagWithSameTagName_tagIsRemoved() {
-        floatingTask.removeTag(tag2);
-        assertSimilarTags(floatingTask);
+    public void setComplete() {
+        LocalDateTime now = LocalDateTime.now();
+        // Set completed
+        testTask.setCompleted(true);
+        assertNotNull(testTask.getCompletionDateTime());
+        assertTrue(testTask.isCompleted());
+        assertTrue(DateTimeUtil.isBeforeOrEqual(now, testTask.getCompletionDateTime()));
+
+        // Set incomplete
+        testTask.setCompleted(false);
+        assertNull(testTask.getCompletionDateTime());
+        assertFalse(testTask.isCompleted());
     }
 
     @Test
-    public void addTag_NonExistingTag_noEffect() {
-        floatingTask.addTag(tag2);
-        assertSimilarTags(floatingTask, tag1);
+    public void isOverdue() {
+        // incomplete task with end date passed is overdue
+        testTask.setDeadLine(LocalDateTime.now().minusDays(1));
+        assertTrue(testTask.isOverdue());
+
+        // incomplete task with end date in future is not overdue
+        testTask.setDeadLine(LocalDateTime.MAX);
+        assertFalse(testTask.isOverdue());
+
+        // complete task with end date passed is not overdue
+        testTask.setDeadLine(LocalDateTime.MIN);
+        testTask.setCompleted(true);
+        assertTrue(testTask.isCompleted());
+        assertFalse(testTask.isOverdue());
     }
 
     @Test
-    public void replaceTag_EmptyTagList_replaceTags() {
-        floatingTask.replaceTags(new ArrayList<>());
-        assertSimilarTags(floatingTask);
+    public void addTag_newTag_tagIsAdded() {
+        testTask.addTag(tag3);
+        assertSimilarTags(testTask, tag1, tag3);
     }
 
     @Test
-    public void replaceTag_ListWithSingleTag_replaceTags() {
+    public void addTag_existingTag_tagIsNotAddedTwice() {
+        testTask.addTag(tag1);
+        assertSimilarTags(testTask, tag1);
+    }
+
+    @Test
+    public void addTag_tagWithSameTagName_tagIsNotAddedTwice() {
+        testTask.addTag(tag2);
+        assertSimilarTags(testTask, tag1);
+    }
+
+    @Test
+    public void removeTag_existingTag_tagIsRemoved() {
+        testTask.removeTag(tag1);
+        assertSimilarTags(testTask);
+    }
+
+    @Test
+    public void removeTag_tagWithSameTagName_tagIsRemoved() {
+        testTask.removeTag(tag2);
+        assertSimilarTags(testTask);
+    }
+
+    @Test
+    public void removeTag_nonExistingTag_noEffect() {
+        testTask.removeTag(tag3);
+        assertSimilarTags(testTask, tag1);
+    }
+
+    @Test
+    public void replaceTag_emptyTagList_replaceTags() {
+        testTask.replaceTags(new ArrayList<>());
+        assertSimilarTags(testTask);
+    }
+
+    @Test
+    public void replaceTag_listWithSingleTag_replaceTags() {
         ArrayList<Tag> tagsList = new ArrayList<>();
         tagsList.add(tag3);
 
-        floatingTask.replaceTags(tagsList);
-        assertSimilarTags(floatingTask, tag3);
+        testTask.replaceTags(tagsList);
+        assertSimilarTags(testTask, tag3);
     }
 
     @Test
-    public void replaceTag_ListWithMultipleTags_replaceTags() {
+    public void replaceTag_listWithMultipleTags_replaceTags() {
         ArrayList<Tag> tagsList = new ArrayList<>();
         tagsList.add(tag3);
         tagsList.add(tag4);
 
-        floatingTask.replaceTags(tagsList);
-        assertSimilarTags(floatingTask, tag3, tag4);
+        testTask.replaceTags(tagsList);
+        assertSimilarTags(testTask, tag3, tag4);
     }
 
     @Test
-    public void replaceTag_ListWithEqualTags_keepUniqueTags() {
+    public void replaceTag_listWithEqualTags_keepUniqueTags() {
         ArrayList<Tag> tagsList = new ArrayList<>();
         tagsList.add(tag1);
         tagsList.add(tag2);
         tagsList.add(tag4);
 
-        floatingTask.replaceTags(tagsList);
-        assertSimilarTags(floatingTask, tag1, tag4);
+        testTask.replaceTags(tagsList);
+        assertSimilarTags(testTask, tag1, tag4);
     }
 
     @Test
-    public void compareTo_DifferentEndDateTime() {
-        Task floatingTask = new Task("floating");
+    public void compareTo_differentEndDateTime() {
+        Task testTask = new Task("floating");
         Task taskWithDeadline = new Task("task with deadline", LocalDateTime.now());
         Task event = new Task("event", LocalDateTime.now().minusDays(1), LocalDateTime.now().plusDays(1));
 
         assertEquals(taskWithDeadline.compareTo(event), -1);
-        assertEquals(event.compareTo(floatingTask), -1);
+        assertEquals(event.compareTo(testTask), -1);
     }
 
     @Test
-    public void compareTo_SameEndDateTimeDifferentStartDateTime() {
+    public void compareTo_sameEndDateTimeDifferentStartDateTime() {
         LocalDateTime to = LocalDateTime.now();
         Task event1 = new Task("event 1", to.minusDays(1), to);
         Task event2 = new Task("event 2", to.minusDays(2), to);
@@ -125,7 +217,7 @@ public class TaskTest {
     }
 
     @Test
-    public void compareTo_SameEndDateTimeSameStartDateTimeDifferentPriority() {
+    public void compareTo_sameEndDateTimeSameStartDateTimeDifferentPriority() {
         LocalDateTime to = LocalDateTime.now();
         LocalDateTime from  = to.minusDays(1);
         Task event1 = new Task("event 1", from, to);
@@ -140,15 +232,15 @@ public class TaskTest {
         taskWithDeadline2.setTaskPriority(Task.TaskPriority.HIGH);
         assertEquals(taskWithDeadline1.compareTo(taskWithDeadline2), -1);
 
-        Task floatingTask1 = new Task("floating 1");
-        Task floatingTask2 = new Task("floating 2");
-        floatingTask1.setTaskPriority(Task.TaskPriority.HIGH);
-        floatingTask2.setTaskPriority(Task.TaskPriority.LOW);
-        assertEquals(floatingTask2.compareTo(floatingTask1), -1);
+        Task testTask1 = new Task("floating 1");
+        Task testTask2 = new Task("floating 2");
+        testTask1.setTaskPriority(Task.TaskPriority.HIGH);
+        testTask2.setTaskPriority(Task.TaskPriority.LOW);
+        assertEquals(testTask2.compareTo(testTask1), -1);
     }
 
     @Test
-    public void compareTo_SameEndDateTimeSameStartDateTimeSamePriorityDifferentDescription() {
+    public void compareTo_sameEndDateTimeSameStartDateTimeSamePriorityDifferentDescription() {
         LocalDateTime to = LocalDateTime.now();
         LocalDateTime from  = to.minusDays(1);
         Task event1 = new Task("event 1", from, to);
@@ -159,9 +251,9 @@ public class TaskTest {
         Task taskWithDeadline2 = new Task("task 2", to);
         assertEquals(taskWithDeadline1.compareTo(taskWithDeadline2), -1);
 
-        Task floatingTask1 = new Task("floating 1");
-        Task floatingTask2 = new Task("floating 2");
-        assertEquals(floatingTask1.compareTo(floatingTask2), -1);
+        Task testTask1 = new Task("floating 1");
+        Task testTask2 = new Task("floating 2");
+        assertEquals(testTask1.compareTo(testTask2), -1);
     }
 
     /**
@@ -173,6 +265,6 @@ public class TaskTest {
             tagSet.add(tag);
         }
 
-        assertEquals(floatingTask.getAllTags(), tagSet);
+        assertEquals(testTask.getAllTags(), tagSet);
     }
 }

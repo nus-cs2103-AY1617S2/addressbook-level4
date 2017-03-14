@@ -1,12 +1,15 @@
 package seedu.toluist.commons.util;
 
+import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -83,6 +86,26 @@ public class CollectionUtilTest {
     }
 
     @Test
+    public void isAnyPresent() throws Exception {
+        // no arguments
+        assertFalse(CollectionUtil.isAnyPresent());
+
+        // any non-presentt argument list
+        assertFalse(CollectionUtil.isAnyPresent(Optional.empty(), Optional.empty()));
+        assertFalse(CollectionUtil.isAnyPresent(Optional.empty()));
+
+        // argument lists with just one present at the beginning
+        assertTrue(CollectionUtil.isAnyPresent(Optional.of(1)));
+        assertTrue(CollectionUtil.isAnyPresent(Optional.of(false), Optional.empty(), Optional.empty()));
+
+        // argument lists with present optional in the middle
+        assertTrue(CollectionUtil.isAnyPresent(Optional.empty(), Optional.of(""), Optional.empty()));
+
+        // argument lists with one present as the last argument
+        assertTrue(CollectionUtil.isAnyPresent(Optional.empty(), Optional.empty(), Optional.of(true)));
+    }
+
+    @Test
     public void elementsAreUnique() throws Exception {
         // empty list
         assertAreUnique();
@@ -105,6 +128,36 @@ public class CollectionUtilTest {
         assertNotUnique(null, 1, new Integer(1));
         assertNotUnique(null, null);
         assertNotUnique(null, "a", "b", null);
+    }
+
+    @Test
+    public void elementsAreSimilar() {
+        // empty collections
+        assertTrue(CollectionUtil.elementsAreSimilar(new HashSet<>(), new HashSet<>()));
+
+        // collections have the same elements in same order
+        assertTrue(CollectionUtil.elementsAreSimilar(Arrays.asList(true, false), Arrays.asList(true, false)));
+
+        // collections have the same elements in different order
+        assertTrue(CollectionUtil.elementsAreSimilar(Arrays.asList(1, 2), Arrays.asList(2, 1)));
+
+        // one collection has more different element
+        assertFalse(CollectionUtil.elementsAreSimilar(Arrays.asList(1, 2, 3), Arrays.asList(2, 1)));
+        assertFalse(CollectionUtil.elementsAreSimilar(Arrays.asList("a", "b"), Arrays.asList("a", "b", "c")));
+
+        // one collection has more similar element
+        assertFalse(CollectionUtil.elementsAreSimilar(Arrays.asList(1, 2, 1), Arrays.asList(2, 1)));
+        assertFalse(CollectionUtil.elementsAreSimilar(Arrays.asList("a", "b"), Arrays.asList("a", "b", "a")));
+    }
+
+    @Test
+    public void toSring() {
+        // empty collections
+        assertEquals(CollectionUtil.toString("", new HashSet<>()), "");
+
+        // collections with items
+        assertEquals(CollectionUtil.toString(", ", Arrays.asList(1, 2)), "1, 2");
+        assertEquals(CollectionUtil.toString("-", Arrays.asList("a", "b")), "a-b");
     }
 
     private void assertAreUnique(Object... objects) {

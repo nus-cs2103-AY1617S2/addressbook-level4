@@ -100,7 +100,6 @@ public class UntagController extends Controller {
         return new CommandResult(String.format(RESULT_MESSAGE_TEMPLATE, resultMessage, successCount));
     }
 
-    @Override
     public HashMap<String, String> tokenize(String command) {
         HashMap<String, String> tokens = new HashMap<>();
 
@@ -112,7 +111,6 @@ public class UntagController extends Controller {
         return tokens;
     }
 
-    @Override
     public boolean matchesCommand(String command) {
         return command.startsWith(COMMAND_UNTAG_WORD);
     }

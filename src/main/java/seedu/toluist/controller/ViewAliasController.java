@@ -1,6 +1,7 @@
 package seedu.toluist.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -31,7 +32,10 @@ public class ViewAliasController extends Controller {
         return new CommandResult(getAliasCommandResult(aliasMapping));
     }
 
-    @Override
+    public HashMap<String, String> tokenize(String command) {
+        return null; // not used
+    }
+
     public boolean matchesCommand(String command) {
         return command.matches(COMMAND_TEMPLATE);
     }

@@ -48,6 +48,19 @@ public class TestUtil {
     }
 
     /**
+     * Clear all files in the sandbox folder
+     * Creates the sandbox folder if it doesn't exist.
+     */
+    public static void cleanSandboxFolder() {
+        FileUtil.removeFile(new File(SANDBOX_FOLDER));
+        try {
+            FileUtil.createDirs(new File(SANDBOX_FOLDER));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Do the necessary configuration so that todolist data can be used for testing
      * @param todoList todo list data
      * @parem configFilePath storage pah for config test data

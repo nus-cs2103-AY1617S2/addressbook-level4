@@ -182,6 +182,36 @@ public class DateTimeUtilTest {
         assertFalse(DateTimeUtil.isTomorrow(endOfToday));
     }
 
+    @Test
+    public void isBeforeOrEqual_twoNulls_isTrue() {
+        assertTrue(DateTimeUtil.isBeforeOrEqual(null, null));
+    }
+
+    @Test
+    public void isBeforeOrEqual_nullAndNonNull_isFalse() {
+        assertFalse(DateTimeUtil.isBeforeOrEqual(null, LocalDateTime.now()));
+    }
+
+    @Test
+    public void isBeforeOrEqual_nonNullAndNull_isTrue() {
+        assertTrue(DateTimeUtil.isBeforeOrEqual(LocalDateTime.now(), null));
+    }
+
+    @Test
+    public void isBeforeOrEqual_leftAfterRight_isFalse() {
+        assertFalse(DateTimeUtil.isBeforeOrEqual(LocalDateTime.MAX, LocalDateTime.MIN));
+    }
+
+    @Test
+    public void isBeforeOrEqual_leftEqualsRight_isTrue() {
+        assertTrue(DateTimeUtil.isBeforeOrEqual(LocalDateTime.MIN, LocalDateTime.MIN));
+    }
+
+    @Test
+    public void isBeforeOrEqual_leftBeforeRight_isTrue() {
+        assertTrue(DateTimeUtil.isBeforeOrEqual(LocalDateTime.MIN, LocalDateTime.MAX));
+    }
+
     private boolean datesApproximatelyEqual(LocalDateTime localDateTime1, LocalDateTime localDateTime2) {
         // Dates are approximately equal so long as they are accurate up to the minute.
         return localDateTime1.getYear() == localDateTime2.getYear()

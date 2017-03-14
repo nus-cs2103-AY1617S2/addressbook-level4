@@ -14,7 +14,7 @@ import seedu.toluist.testutil.TypicalTestTodoLists;
 public class TagCommandTest extends ToLuistGuiTest {
 
     @Test
-    public void addTag_SingleTag() {
+    public void addTag_singleTag() {
         String tagName = "aTag";
         Task task = new TypicalTestTodoLists().getTypicalTasks()[0];
         task.addTag(new Tag(tagName));

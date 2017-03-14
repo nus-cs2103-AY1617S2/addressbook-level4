@@ -13,14 +13,14 @@ import seedu.toluist.ui.Ui;
  * Alias Controller is responsible for handling alias requests
  */
 public class AliasController extends Controller {
+    public static final String ALIAS_TERM = "alias";
+    public static final String COMMAND_TERM = "command";
+    public static final String COMMAND_WORD = "alias";
+
     private static final String RESULT_MESSAGE_SUCCESS = "Alias %s for %s was added";
     private static final String RESULT_MESSAGE_FAILURE = "Alias %s for %s could not be added";
-    private static final String RESULT_MESSAGE_RESERVED_WORD = "%s is a reserved word";
+    public static final String RESULT_MESSAGE_RESERVED_WORD = "%s is a reserved word";
     private static final String COMMAND_TEMPLATE = "alias\\s+(?<alias>\\S+)\\s+(?<command>.+)";
-    private static final String COMMAND_WORD = "alias";
-
-    private static final String ALIAS_TERM = "alias";
-    private static final String COMMAND_TERM = "command";
 
     private final AliasTable aliasConfig = Config.getInstance().getAliasTable();
 
@@ -44,7 +44,6 @@ public class AliasController extends Controller {
         }
     }
 
-    @Override
     public HashMap<String, String> tokenize(String command) {
         Pattern pattern = Pattern.compile(COMMAND_TEMPLATE);
         Matcher matcher = pattern.matcher(command.trim());
@@ -55,7 +54,6 @@ public class AliasController extends Controller {
         return tokens;
     }
 
-    @Override
     public boolean matchesCommand(String command) {
         return command.matches(COMMAND_TEMPLATE);
     }
