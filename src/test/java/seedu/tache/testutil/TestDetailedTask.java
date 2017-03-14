@@ -2,7 +2,6 @@ package seedu.tache.testutil;
 
 import seedu.tache.model.tag.UniqueTagList;
 import seedu.tache.model.task.Date;
-import seedu.tache.model.task.Duration;
 import seedu.tache.model.task.Name;
 import seedu.tache.model.task.ReadOnlyDetailedTask;
 import seedu.tache.model.task.Time;
@@ -15,8 +14,8 @@ public class TestDetailedTask implements ReadOnlyDetailedTask  {
     private Name name;
     private Date startDate;
     private Date endDate;
-    private Duration duration;
-    private Time time;
+    private Time startTime;
+    private Time endTime;
     private UniqueTagList tags;
 
     public TestDetailedTask() {
@@ -30,8 +29,8 @@ public class TestDetailedTask implements ReadOnlyDetailedTask  {
         this.name = detailedTaskToCopy.getName();
         this.startDate = detailedTaskToCopy.getStartDate();
         this.endDate = detailedTaskToCopy.getEndDate();
-        this.duration = detailedTaskToCopy.getDuration();
-        this.time = detailedTaskToCopy.getTime();
+        this.startTime = detailedTaskToCopy.getStartTime();
+        this.endTime = detailedTaskToCopy.getEndTime();
         this.tags = detailedTaskToCopy.getTags();
     }
 
@@ -51,12 +50,12 @@ public class TestDetailedTask implements ReadOnlyDetailedTask  {
         this.endDate = endDate;
     }
 
-    public void setDuration(Duration duration) {
-        this.duration = duration;
+    public void setStartTime(Time startTime) {
+        this.startTime = startTime;
     }
-
-    public void setTime(Time time) {
-        this.time = time;
+    
+    public void setEndTime(Time endTime) {
+        this.endTime = endTime;
     }
 
     @Override
@@ -80,13 +79,13 @@ public class TestDetailedTask implements ReadOnlyDetailedTask  {
     }
 
     @Override
-    public Duration getDuration() {
-        return duration;
+    public Time getStartTime() {
+        return startTime;
     }
-
+    
     @Override
-    public Time getTime() {
-        return time;
+    public Time getEndTime() {
+        return endTime;
     }
 
     @Override

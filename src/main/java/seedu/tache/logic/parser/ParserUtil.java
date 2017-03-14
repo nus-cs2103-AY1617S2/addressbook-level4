@@ -16,7 +16,6 @@ import seedu.tache.commons.util.StringUtil;
 import seedu.tache.model.tag.Tag;
 import seedu.tache.model.tag.UniqueTagList;
 import seedu.tache.model.task.Date;
-import seedu.tache.model.task.Duration;
 import seedu.tache.model.task.Name;
 import seedu.tache.model.task.Time;
 
@@ -162,8 +161,6 @@ public class ParserUtil {
             return new Date(input);
         } else if (isValidTime(input)) {
             return new Time(input);
-        } else if (isValidDuration(input)) {
-            return new Duration(input);
         } else if (isValidName(input)) {
             return new Name(input);
         }
