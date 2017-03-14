@@ -2,7 +2,7 @@ package org.teamstbf.yats.logic.parser;
 
 import org.teamstbf.yats.logic.commands.Command;
 import org.teamstbf.yats.logic.commands.ListCommand;
-import org.teamstbf.yats.logic.commands.ListCommandDeadline;
+import org.teamstbf.yats.logic.commands.ListCommandDate;
 import org.teamstbf.yats.logic.commands.ListCommandDone;
 import org.teamstbf.yats.logic.commands.ListCommandLocation;
 import org.teamstbf.yats.logic.commands.ListCommandTag;
@@ -26,7 +26,7 @@ public class ListCommandParser {
 			case(ListCommand.COMMAND_WORD_SUFFIX_TITLE):
 				return new ListCommandTitle();
 			case(ListCommand.COMMAND_WORD_SUFFIX_DEADLINE):
-				return new ListCommandDeadline();
+				return new ListCommandDate();
 			case(ListCommand.COMMAND_WORD_SUFFIX_TIMING):
 				return new ListCommandTiming();
 			case(ListCommand.COMMAND_WORD_SUFFIX_LOCATION):
