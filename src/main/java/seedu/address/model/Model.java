@@ -48,19 +48,19 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAllNonFloating();
-    
+
     /** Updates the filter of the filtered task list to show all floating tasks */
     void updateFilteredListToShowAllFloatingTasks();
 
     /** Updates the filter of the filtered task list to show all completed tasks */
     void updateFilteredListToShowAllCompletedTasks();
-    
+
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowFilteredNonFloatingTasks(Set<String> keywords);
-    
+
     /** Updates the filter of the filtered task list to show all floating tasks */
     void updateFilteredListToShowFilteredFloatingTasks(Set<String> keywords);
-    
+
     /** Updates the filter of the filtered task list to show all completed tasks */
     void updateFilteredListToShowFilteredCompletedTasks(Set<String> keywords);
 

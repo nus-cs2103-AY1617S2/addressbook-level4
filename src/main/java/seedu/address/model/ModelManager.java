@@ -191,17 +191,17 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredListToShowAllCompletedTasks() {
         this.completedTasks.setPredicate(new PredicateExpression(new TaskIsCompleteQualifier())::satisfies);
     }
-    
+
     @Override
     public void updateFilteredListToShowFilteredNonFloatingTasks(Set<String> keywords) {
         this.nonFloatingTasks.setPredicate(new PredicateExpression(new NameNonFloatingTaskQualifier(keywords))::satisfies);
     }
-    
+
     @Override
     public void updateFilteredListToShowFilteredFloatingTasks(Set<String> keywords) {
         this.floatingTasks.setPredicate(new PredicateExpression(new NameFloatingTaskQualifier(keywords))::satisfies);
     }
-    
+
     @Override
     public void updateFilteredListToShowFilteredCompletedTasks(Set<String> keywords) {
         this.completedTasks.setPredicate(new PredicateExpression(new NameCompletedTaskQualifier(keywords))::satisfies);
@@ -244,7 +244,7 @@ public class ModelManager extends ComponentManager implements Model {
         boolean run(ReadOnlyTask task);
         String toString();
     }
-    
+
     private class NameFloatingTaskQualifier implements Qualifier {
         private Set<String> nameKeyWords;
         private FuzzyFinder fuzzyFinder;
@@ -266,7 +266,7 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
-    
+
     private class NameNonFloatingTaskQualifier implements Qualifier {
         private Set<String> nameKeyWords;
         private FuzzyFinder fuzzyFinder;
@@ -288,7 +288,7 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
-    
+
     private class NameCompletedTaskQualifier implements Qualifier {
         private Set<String> nameKeyWords;
         private FuzzyFinder fuzzyFinder;
@@ -310,7 +310,7 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
-    
+
     private class FuzzyFinder {
 
         public boolean check(ReadOnlyTask task, Set<String> nameKeyWords) {
