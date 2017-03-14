@@ -12,7 +12,7 @@ public class DateParser {
     private static final String DATE_STRING_VALIDATION_REGEX = "[0-9]{4}/[0-1][0-9]/[0-3][0-9] [0-2][0-9][0-5][0-9]";
 
 	public static Calendar parse(String date) throws IllegalValueException{
-		if (isValidDateString(date)) {
+		if (!isValidDateString(date)) {
 			throw new IllegalValueException(DATE_STRING_ILLEGAL_FORMAT);
 		}
 		Calendar cal = Calendar.getInstance();
@@ -34,7 +34,7 @@ public class DateParser {
 	}
 
 	private static int getMonth(String date) {
-		return Integer.parseInt(date.substring(5,  7));
+		return Integer.parseInt(date.substring(5,  7)) - 1;
 	}
 
 	private static int getDay(String date) {
