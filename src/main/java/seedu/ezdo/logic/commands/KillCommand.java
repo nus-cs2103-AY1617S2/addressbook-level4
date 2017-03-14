@@ -12,6 +12,7 @@ import seedu.ezdo.model.todo.UniqueTaskList.TaskNotFoundException;
 public class KillCommand extends Command {
 
     public static final String COMMAND_WORD = "kill";
+    public static final String SHORT_COMMAND_WORD = "k";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the task identified by the index number used in the last task listing.\n"

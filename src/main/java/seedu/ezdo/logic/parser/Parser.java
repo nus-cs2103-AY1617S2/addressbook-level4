@@ -11,12 +11,12 @@ import seedu.ezdo.logic.commands.ClearCommand;
 import seedu.ezdo.logic.commands.Command;
 import seedu.ezdo.logic.commands.DoneCommand;
 import seedu.ezdo.logic.commands.EditCommand;
-import seedu.ezdo.logic.commands.ExitCommand;
 import seedu.ezdo.logic.commands.FindCommand;
 import seedu.ezdo.logic.commands.HelpCommand;
 import seedu.ezdo.logic.commands.IncorrectCommand;
 import seedu.ezdo.logic.commands.KillCommand;
 import seedu.ezdo.logic.commands.ListCommand;
+import seedu.ezdo.logic.commands.QuitCommand;
 import seedu.ezdo.logic.commands.RedoCommand;
 import seedu.ezdo.logic.commands.SaveCommand;
 import seedu.ezdo.logic.commands.SelectCommand;
@@ -49,33 +49,42 @@ public class Parser {
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
+        case AddCommand.SHORT_COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
+        case EditCommand.SHORT_COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
 
         case KillCommand.COMMAND_WORD:
+        case KillCommand.SHORT_COMMAND_WORD:
             return new KillCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
+        case ClearCommand.SHORT_COMMAND_WORD:
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
+        case FindCommand.SHORT_COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
+        case ListCommand.SHORT_COMMAND_WORD:
             return new ListCommand();
 
+        case QuitCommand.COMMAND_WORD:
+        case QuitCommand.SHORT_COMMAND_WORD:
+            return new QuitCommand();
+
         case DoneCommand.COMMAND_WORD:
+        case DoneCommand.SHORT_COMMAND_WORD:
             return new DoneCommandParser().parse(arguments);
 
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-
         case HelpCommand.COMMAND_WORD:
+        case HelpCommand.SHORT_COMMAND_WORD:
             return new HelpCommand();
 
         case SaveCommand.COMMAND_WORD:

@@ -20,6 +20,7 @@ import seedu.ezdo.model.todo.UniqueTaskList;
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
+    public static final String SHORT_COMMAND_WORD = "a";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to ezDo. "
             + "Parameters: NAME [p/PRIORITY] [s/START_DATE] [d/DUE_DATE] [t/TAG]...\n"
