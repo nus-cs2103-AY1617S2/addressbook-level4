@@ -22,21 +22,21 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label description;
     @FXML
-    private Label deadline;
+    private Label time;
     @FXML
     private FlowPane tags;
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
-        name.setText(task.getName().fullName);
-        id.setText(displayedIndex + ". ");
-        priority.setText(task.getPriority().value);
-        description.setText(task.getDescription().value);
-        deadline.setText(task.getEndTime().value);
+        this.name.setText(task.getName().fullName);
+        this.id.setText(displayedIndex + ". ");
+        this.priority.setText(task.getPriority().value);
+        this.description.setText(task.getDescription().value);
+        this.time.setText(task.getEndTime().value);
         initTags(task);
     }
 
     private void initTags(ReadOnlyTask task) {
-        task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        task.getTags().forEach(tag -> this.tags.getChildren().add(new Label(tag.tagName)));
     }
 }
