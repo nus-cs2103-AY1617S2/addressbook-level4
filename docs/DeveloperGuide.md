@@ -1,5 +1,4 @@
 # Developer Guide
----
 
 &nbsp;
 
