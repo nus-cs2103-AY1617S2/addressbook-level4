@@ -30,7 +30,7 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
 
-        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredPersonList();
+        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (lastShownList.size() < targetIndex) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -39,7 +39,7 @@ public class DeleteCommand extends Command {
         ReadOnlyTask personToDelete = lastShownList.get(targetIndex - 1);
 
         try {
-            model.deletePerson(personToDelete);
+            model.deleteTask(personToDelete);
         } catch (TaskNotFoundException pnfe) {
             assert false : "The target person cannot be missing";
         }
