@@ -5,6 +5,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.tasklist.model.task.DeadlineTask;
+import seedu.tasklist.model.task.ReadOnlyDeadlineTask;
 import seedu.tasklist.model.task.ReadOnlyTask;
 
 public class TaskCard extends UiPart<Region> {
@@ -20,7 +22,7 @@ public class TaskCard extends UiPart<Region> {
 
     @FXML
     private Label comment;
-    
+
     @FXML
     private Label priority;
     @FXML
@@ -33,6 +35,11 @@ public class TaskCard extends UiPart<Region> {
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
+        String taskType = task.getType();
+        switch(taskType) {
+        case DeadlineTask.TYPE:
+            endDate.setText(((ReadOnlyDeadlineTask) task).getDeadline());
+        }
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
         comment.setText(task.getComment().value);
