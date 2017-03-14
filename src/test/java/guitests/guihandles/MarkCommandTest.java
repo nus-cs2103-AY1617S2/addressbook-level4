@@ -39,7 +39,7 @@ public class MarkCommandTest extends ToLuistGuiTest {
         assertTaskComplete(true, task1);
 
         Task task2 = new TypicalTestTodoLists().getTypicalTasks()[1];
-        String command2 = "mark complete 1";
+        String command2 = "mark complete 2";
         commandBox.runCommand(command2);
         assertTaskComplete(true, task2);
     }
