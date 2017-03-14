@@ -10,6 +10,7 @@ public class DateParser {
 
     private static final int DEFAULT_SECONDS = 0;
     private static final String DATE_STRING_VALIDATION_REGEX = "[0-9]{4}/[0-1][0-9]/[0-3][0-9] [0-2][0-9][0-5][0-9]";
+    private static final String EMPTY_DATE_STRING = "";
 
     public static Calendar parse(String date) throws IllegalValueException {
         if (!isValidDateString(date)) {
@@ -29,7 +30,7 @@ public class DateParser {
         String dateString;
 
         if (date == null) {
-            return "";
+            return EMPTY_DATE_STRING;
         }
 
         int year = date.get(Calendar.YEAR);
