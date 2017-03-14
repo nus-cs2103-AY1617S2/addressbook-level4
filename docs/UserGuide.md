@@ -78,6 +78,8 @@ Examples:
 
 * `update 2 Assignment 3`<br>
   Updates the name of the 2nd task to be `Assignment 3`.
+* `update 3 startdate/today enddate/tomorrow`
+  Updates the start date and end date of the 3rd task to today and tomorrow respectively.
 
 ### 2.4. Filter all tasks containing any keyword in their name or tag or date: `filter`
 
@@ -111,7 +113,7 @@ Format: `delete INDEX`
 
 > Deletes the task at the specified `INDEX`. <br>
 > The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+> The index **must be a positive integer** 1, 2, 3, ...<br>
 > Supports deletion of multiple indexes in a single command, by best effort matching.
 
 Examples:
@@ -125,7 +127,7 @@ Examples:
   Deletes the 3rd task, 4th task, ..., last task in the todo list.
 * `delete - 5`<br>
   Deletes the first task, 2nd task, ... 5th task in the todo list.
-* `delete 5, - 3, 7-8 10, 12 -
+* `delete 5, - 3, 7-8 10, 12 -`
   Deletes from 1st to 3rd, 5th, 7th, 8th, 10th, and 12th task onwards in the todo list.
 
 ### 2.6. Clearing all entries : `clear`
