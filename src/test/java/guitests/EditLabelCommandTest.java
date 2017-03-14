@@ -20,7 +20,7 @@ public class EditLabelCommandTest extends TaskManagerGuiTest {
     @Test
     public void editLabel_LabelDoesNotExist_ReturnTrue() {
         TestTask[] currentList = td.getTypicalTasks();
-        commandBox.runCommand("editlabel nonexistentlabel newlabel");
+        commandBox.runCommand("EDITLABEL nonexistentlabel newlabel");
 
         //No change should occur
         assertTrue(taskListPanel.isListMatching(currentList));
@@ -29,19 +29,19 @@ public class EditLabelCommandTest extends TaskManagerGuiTest {
     @Test
     public void editLabel_invalidCommands() {
         TestTask[] currentList = td.getTypicalTasks();
-        commandBox.runCommand("editlabel notEnoughArguments");
+        commandBox.runCommand("EDITLABEL notEnoughArguments");
         //No change should occur
         assertTrue(taskListPanel.isListMatching(currentList));
 
-        commandBox.runCommand("editlabel");
+        commandBox.runCommand("EDITLABEL");
         //No change should occur
         assertTrue(taskListPanel.isListMatching(currentList));
 
-        commandBox.runCommand("editlabel !@#asdajn newLabel");
+        commandBox.runCommand("EDITLABEL !@#asdajn newLabel");
         //No change should occur
         assertTrue(taskListPanel.isListMatching(currentList));
 
-        commandBox.runCommand("editlabel friends !@#!@sdfs");
+        commandBox.runCommand("EDITLABEL friends !@#!@sdfs");
         //No change should occur
         assertTrue(taskListPanel.isListMatching(currentList));
     }
@@ -63,7 +63,7 @@ public class EditLabelCommandTest extends TaskManagerGuiTest {
         }
 
 
-        commandBox.runCommand("editlabel friends allies");
+        commandBox.runCommand("EDITLABEL friends allies");
 
         assertTrue(taskListPanel.isListMatching(currentList));
     }

@@ -10,9 +10,9 @@ import seedu.address.logic.parser.ArgumentTokenizer.Prefix;
 public class CliSyntax {
 
     /* Prefix definitions */
-    public static final Prefix PREFIX_DEADLINE = new Prefix("by ");
-    public static final Prefix PREFIX_TIMEINTERVAL_END = new Prefix("to ");
-    public static final Prefix PREFIX_TIMEINTERVAL_START = new Prefix("from ");
+    public static final Prefix PREFIX_DEADLINE = new Prefix("BY ");
+    public static final Prefix PREFIX_TIMEINTERVAL_END = new Prefix("TO ");
+    public static final Prefix PREFIX_TIMEINTERVAL_START = new Prefix("FROM ");
     public static final Prefix PREFIX_LABEL = new Prefix("#");
 
     /* Patterns definitions */

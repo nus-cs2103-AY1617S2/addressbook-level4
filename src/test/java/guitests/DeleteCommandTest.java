@@ -29,7 +29,7 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
         assertDeleteSuccess(targetIndex, currentList);
 
         //invalid index
-        commandBox.runCommand("delete " + currentList.length + 1);
+        commandBox.runCommand("DELETE " + currentList.length + 1);
         assertResultMessage("The task index provided is invalid");
 
     }
@@ -43,7 +43,7 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
         TestTask taskToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
         TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList, targetIndexOneIndexed);
 
-        commandBox.runCommand("delete " + targetIndexOneIndexed);
+        commandBox.runCommand("DELETE " + targetIndexOneIndexed);
 
         //confirm the list now contains all previous tasks except the deleted tasks
         assertTrue(taskListPanel.isListMatching(expectedRemainder));

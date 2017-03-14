@@ -10,9 +10,10 @@ import seedu.address.logic.LogicManager;
  */
 public class ListCommand extends Command {
 
-    public static final String COMMAND_WORD = "list";
+    public static final String COMMAND_WORD = "LIST";
     public static final String MESSAGE_SUCCESS = "Listed all tasks";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " [by DEADLINE]";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " [BY DEADLINE]";
+    public static final String DATE_VALIDATION_REGEX = "[a-zA-Z]+";
     private final String endDate;
     private final String startDate;
 
@@ -45,8 +46,8 @@ public class ListCommand extends Command {
         Date start;
         Date end;
         if ("".equals(startDate) && isParsableDate(endDate)) {
-            if (endDate.matches("[a-zA-Z]+")) {
-                end = dtParser.parse(endDate + "235959").get(0).getDates().get(0);
+            if (endDate.matches(DATE_VALIDATION_REGEX)) {
+                end = dtParser.parse(endDate + " 235959").get(0).getDates().get(0);
             } else {
                 end = dtParser.parse(endDate).get(0).getDates().get(0);
             }
@@ -55,13 +56,13 @@ public class ListCommand extends Command {
             saveCurrentState();
             model.updateFilteredTaskList(start, end);
         } else if (isParsableDate(startDate) && isParsableDate(endDate)) {
-            if (startDate.matches("[a-zA-Z]+")) {
+            if (startDate.matches(DATE_VALIDATION_REGEX)) {
                 start = dtParser.parse(startDate + " 000000").get(0).getDates().get(0);
             } else {
                 start = dtParser.parse(startDate).get(0).getDates().get(0);
             }
 
-            if (endDate.matches("[a-zA-Z]+")) {
+            if (endDate.matches(DATE_VALIDATION_REGEX)) {
                 end = dtParser.parse(endDate + " 235959").get(0).getDates().get(0);
             } else {
                 end = dtParser.parse(endDate).get(0).getDates().get(0);

@@ -31,7 +31,7 @@ public class AddCommandTest extends TaskManagerGuiTest {
         assertTrue(taskListPanel.isListMatching(currentList));
 
         //add to empty list
-        commandBox.runCommand("clear");
+        commandBox.runCommand("CLEAR");
         assertAddSuccess(td.task1);
 
         //invalid command

@@ -7,23 +7,23 @@ import org.junit.Test;
 public class CommandBoxIterateCommandTest extends TaskManagerGuiTest {
     @Test
     public void commandBox_IterateCommandTest() {
-        commandBox.runCommand("add task1");
-        commandBox.runCommand("add task2");
+        commandBox.runCommand("ADD task1");
+        commandBox.runCommand("ADD task2");
         commandBox.pressUp();
-        assertEquals("add task2", commandBox.getCommandInput());
+        assertEquals("ADD task2", commandBox.getCommandInput());
         commandBox.pressUp();
-        assertEquals("add task1", commandBox.getCommandInput());
+        assertEquals("ADD task1", commandBox.getCommandInput());
         commandBox.pressDown();
-        assertEquals("add task2", commandBox.getCommandInput());
+        assertEquals("ADD task2", commandBox.getCommandInput());
         commandBox.pressUp();
         commandBox.pressUp();
         commandBox.pressUp();
         commandBox.pressUp();
-        assertEquals("add task1", commandBox.getCommandInput());
-        commandBox.pressDown();
-        commandBox.pressDown();
+        assertEquals("ADD task1", commandBox.getCommandInput());
         commandBox.pressDown();
         commandBox.pressDown();
-        assertEquals("add task2", commandBox.getCommandInput());
+        commandBox.pressDown();
+        commandBox.pressDown();
+        assertEquals("ADD task2", commandBox.getCommandInput());
     }
 }

@@ -4,13 +4,13 @@ import java.util.List;
 
 public interface Autocomplete {
 
-    public static String[] AUTOCOMPLETE_DATA = {"help", "add", "by", "repeat", "list"
-            , "edit", "find", "delete", "select", "book"
-            , "confirm", "editlabel", "undo", "clear", "push"
-            , "pull", "export", "exit", "to", "on"
-            , "hourly", "daily", "weekly", "monthly", "yearly"
-            , "overdue", "outstanding", "completed", "today", "yesterday"
-            , "tomorrow", "bookings"};
+    public static String[] AUTOCOMPLETE_DATA = {"HELP", "ADD", "BY", "REPEAT", "LIST"
+            , "EDIT", "FIND", "DELETE", "SELECT", "BOOK"
+            , "CONFIRM", "EDITLABEL", "UNDO", "CLEAR", "PUSH"
+            , "PULL", "EXPORT", "EXIT", "TO", "FROM", "ON"
+            , "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "YEARLY"
+            , "OVERDUE", "OUTSTANDING", "COMPLETED", "TODAY", "YESTERDAY"
+            , "TOMORROW", "BOOKINGS", "INCOMPLETE"};
 
     /**
      * Adds more strings for auto completion

@@ -16,6 +16,7 @@ public class Deadline {
 
     public static final String MESSAGE_DEADLINE_CONSTRAINTS =
             "Deadline can have zero or more characters";
+    public static final String DATE_VALIDATION_REGEX = "[a-zA-Z]+";
 
     /*
      * The deadline must have at least one visible character
@@ -44,7 +45,13 @@ public class Deadline {
         } else {
             if (!isEmptyDeadline(strDeadline)) {
                 try {
-                    List<Date> dateList = dateParser.parse(strDeadline).get(0).getDates();
+                    List<Date> dateList;
+                    if (strDeadline.matches(DATE_VALIDATION_REGEX)) {
+                        dateList = dateParser.parse(strDeadline + " 235959").get(0).getDates();
+                    } else {
+                        dateList = dateParser.parse(strDeadline).get(0).getDates();
+                    }
+
                     if (dateList != null && dateList.size() > 0) {
                         this.deadline = dateList.get(0);
                         this.value = deadline.toString();

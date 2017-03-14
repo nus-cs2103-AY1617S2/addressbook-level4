@@ -20,7 +20,7 @@ public class DeleteLabelCommandTest extends TaskManagerGuiTest {
     @Test
     public void editLabel_LabelDoesNotExist_ReturnTrue() {
         TestTask[] currentList = td.getTypicalTasks();
-        commandBox.runCommand("delete nonexistentlabel");
+        commandBox.runCommand("DELETE nonexistentlabel");
 
         //No change should occur
         assertTrue(taskListPanel.isListMatching(currentList));
@@ -29,11 +29,11 @@ public class DeleteLabelCommandTest extends TaskManagerGuiTest {
     @Test
     public void editLabel_invalidCommands() {
         TestTask[] currentList = td.getTypicalTasks();
-        commandBox.runCommand("delete");
+        commandBox.runCommand("DELETE");
         //No change should occur
         assertTrue(taskListPanel.isListMatching(currentList));
 
-        commandBox.runCommand("delete !@#asdajn");
+        commandBox.runCommand("DELETE !@#asdajn");
         //No change should occur
         assertTrue(taskListPanel.isListMatching(currentList));
     }
@@ -53,7 +53,7 @@ public class DeleteLabelCommandTest extends TaskManagerGuiTest {
         }
 
 
-        commandBox.runCommand("delete friends");
+        commandBox.runCommand("DELETE friends");
 
         assertTrue(taskListPanel.isListMatching(currentList));
     }
