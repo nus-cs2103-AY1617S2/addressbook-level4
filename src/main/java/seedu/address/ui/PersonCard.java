@@ -18,11 +18,11 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label description;
     @FXML
-    private Label address;
+    private Label start_time;
     @FXML
-    private Label email;
+    private Label end_time;
     @FXML
     private FlowPane tags;
 
@@ -30,9 +30,9 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         name.setText(task.getName().taskName);
         id.setText(displayedIndex + ". ");
-        phone.setText(task.getDescription().toString());
-        address.setText(task.getStartDateTime().toString());
-        email.setText(task.getEndDateTime().toString());
+        description.setText(task.getDescription().toString());
+        start_time.setText(task.getStartDateTime().toString());
+        end_time.setText(task.getEndDateTime().toString());
         initTags(task);
     }
 
