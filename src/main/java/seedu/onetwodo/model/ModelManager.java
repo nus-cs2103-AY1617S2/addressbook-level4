@@ -125,10 +125,12 @@ public class ModelManager extends ComponentManager implements Model {
 
     //========== Inner classes/interfaces used for filtering =================================================
 
+    @Override
     public DoneStatus getDoneStatus() {
         return doneStatus;
     }
     
+    @Override
     public void setDoneStatus(DoneStatus doneStatus) {
         this.doneStatus = doneStatus;
     }

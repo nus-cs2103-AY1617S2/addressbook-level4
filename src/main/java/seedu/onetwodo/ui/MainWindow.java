@@ -152,8 +152,8 @@ public class MainWindow extends UiPart<Region> {
     }
     
     private ObservableList<ReadOnlyTask> getDoneTaskList() {
-        return logic.getFilteredTaskList().filtered(t -> t.getDoneStatus() == false);
-    }
+        return logic.getFilteredTasksByDoneStatus();
+}
 
     private AnchorPane getCommandBoxPlaceholder() {
         return commandBoxPlaceholder;

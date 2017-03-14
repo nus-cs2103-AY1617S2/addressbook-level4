@@ -8,6 +8,7 @@ import seedu.onetwodo.commons.core.LogsCenter;
 import seedu.onetwodo.logic.commands.Command;
 import seedu.onetwodo.logic.commands.CommandResult;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
+import seedu.onetwodo.logic.parser.DoneStatus;
 import seedu.onetwodo.logic.parser.Parser;
 import seedu.onetwodo.model.Model;
 import seedu.onetwodo.model.task.ReadOnlyTask;
@@ -40,8 +41,20 @@ public class LogicManager extends ComponentManager implements Logic {
         return model.getFilteredTaskList();
     }
     
-    public ObservableList<ReadOnlyTask> getFilteredDoneTaskList() {
-        model.updateFilteredUndoneTaskList();
+    public ObservableList<ReadOnlyTask> getFilteredTasksByDoneStatus() {
+        DoneStatus doneStatus = model.getDoneStatus();
+        switch (doneStatus) {
+        case ALL: 
+        case DEFAULT:
+            model.updateFilteredListToShowAll();
+            break;
+        case DONE:
+            model.updateFilteredDoneTaskList();
+            break;
+        case UNDONE:
+            model.updateFilteredUndoneTaskList();
+            break;
+        }   
         return model.getFilteredTaskList();
     }
 }
