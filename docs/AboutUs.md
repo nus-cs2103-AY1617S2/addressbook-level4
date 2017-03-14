@@ -4,49 +4,43 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Damith C. Rajapakse](http://www.comp.nus.edu.sg/~damithch) <br>
-<img src="images/DamithRajapakse.jpg" width="150"><br>
-**Role**: Project Advisor
+#### [Chan Lup Seng](http://github.com/lupseng/) <br>
+<img src="images/ChanLupSeng.png" width="150"><br>
+Role: Team lead <br>
+- Components in charge of: [Model](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/docs/DeveloperGuide.md#model-component)
+- Aspects/tools in charge of: Integration, Deliverables and deadlines 
+- Features implemented:
+- Other major contributions:
 
 -----
 
-#### [Joshua Lee](http://github.com/lejolly)
-<img src="images/JoshuaLee.jpg" width="150"><br>
+#### [Walter Tay](http://github.com/waltertay)
+<img src="images/WalterTay.png" width="150"><br>
 Role: Developer <br>
-Responsibilities: UI
+- Components in charge of: [Storage](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/docs/DeveloperGuide.md#storage-component)
+- Aspects/tools in charge of: Code quality, Git expert and deadlines. 
+- Features implemented: 
+- Other major contributions: 
 
 -----
 
-#### [Leow Yijin](http://github.com/yijinl)
-<img src="images/LeowYijin.jpg" width="150"><br>
+#### [Xu Xin Yi](http://github.com/xinyiys)
+<img src="images/XuXinYi.png" width="150"><br>
 Role: Developer <br>
-Responsibilities: Data
+- Components in charge of: [Logic](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/docs/DeveloperGuide.md#logic-component)
+- Aspects/tools in charge of: Documentation, Eclipse expert
+- Features implemented:
+- Other major contributions:
 
 -----
 
-#### [Martin Choo](http://github.com/m133225)
-<img src="images/MartinChoo.jpg" width="150"><br>
+#### [Zhang Ying](http://github.com/zing1996)
+<img src="images/ZhangYing.png" width="150"><br>
 Role: Developer <br>
-Responsibilities: Dev Ops
+- Components in charge of: [UI](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/docs/DeveloperGuide.md#ui-component)
+- Aspects/tools in charge of: Testing, Scheduling and tracking
+- Features implemented:
+- Other major contributions:
 
 -----
 
-#### [Thien Nguyen](https://github.com/ndt93)
- Role: Developer <br>
- Responsibilities: Threading
-
- -----
-
-#### [You Liang](http://github.com/yl-coder)
-<img src="images/YouLiang.jpg" width="150"><br>
- Role: Developer <br>
- Responsibilities: UI
-
- -----
-
-# Contributors
-
-We welcome contributions. See [Contact Us](ContactUs.md) page for more info.
-
-* [Akshay Narayan](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Aokkhoy)
-* [Sam Yong](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Amauris)

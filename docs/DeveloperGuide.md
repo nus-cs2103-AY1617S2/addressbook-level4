@@ -1,8 +1,4 @@
-# AddressBook Level 4 - Developer Guide
-
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
-
----
+# VeTo Developer Guide:
 
 1. [Setting Up](#setting-up)
 2. [Design](#design)
@@ -51,7 +47,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 ### 1.3. Configuring Checkstyle
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
-3. Enter an arbitrary configuration name e.g. addressbook
+3. Enter an arbitrary configuration name e.g. taskmanager
 4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
 5. Click OK once, go to the `Main` tab, use the newly imported check configuration.
 6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
@@ -86,7 +82,7 @@ Given below is a quick overview of each component.
 > Tip: The `.pptx` files used to create diagrams in this document can be found in the [diagrams](diagrams/) folder.
 > To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
 
-`Main` has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java). It is responsible for,
+`Main` has only one class called [`MainApp`](../src/main/java/seedu/task/MainApp.java). It is responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
@@ -123,7 +119,7 @@ command `delete 1`.
 <img src="images\SDforDeletePerson.png" width="800"><br>
 _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 
->Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed,
+>Note how the `Model` simply raises a `TaskManagerChangedEvent` when the Task Manager data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
@@ -144,14 +140,14 @@ Author: Alice Bee
 <img src="images/UiClassDiagram.png" width="800"><br>
 _Figure 2.2.1 : Structure of the UI Component_
 
-**API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
+**API** : [`Ui.java`](../src/main/java/seedu/task/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`,
 `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
- For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
+ For example, the layout of the [`MainWindow`](../src/main/java/seedu/task/ui/MainWindow.java) is specified in
  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
@@ -167,11 +163,11 @@ Author: Bernard Choo
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
 
-**API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](../src/main/java/seedu/task/logic/Logic.java)
 
 1. `Logic` uses the `Parser` class to parse the user command.
 2. This results in a `Command` object which is executed by the `LogicManager`.
-3. The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
+3. The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
 4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
@@ -186,13 +182,13 @@ Author: Cynthia Dharman
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 2.4.1 : Structure of the Model Component_
 
-**API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](../src/main/java/seedu/task/model/Model.java)
 
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
-* exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
+* stores the Task Manager data.
+* exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
@@ -203,16 +199,16 @@ Author: Darius Foong
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
 
-**API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](../src/main/java/seedu/task/storage/Storage.java)
 
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the Task Manager data in xml format and read it back.
 
 ### 2.6. Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.task.commons` package.
 
 ## 3. Implementation
 
@@ -263,13 +259,13 @@ We have two types of tests:
 
 2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
    1. _Unit tests_ targeting the lowest level methods/classes. <br>
-      e.g. `seedu.address.commons.UrlUtilTest`
+      e.g. `seedu.task.commons.UrlUtilTest`
    2. _Integration tests_ that are checking the integration of multiple code units
      (those code units are assumed to be working).<br>
-      e.g. `seedu.address.storage.StorageManagerTest`
+      e.g. `seedu.task.storage.StorageManagerTest`
    3. Hybrids of unit and integration tests. These test are checking multiple code units as well as
       how the are connected together.<br>
-      e.g. `seedu.address.logic.LogicManagerTest`
+      e.g. `seedu.task.logic.LogicManagerTest`
 
 #### Headless GUI Testing
 Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
@@ -332,67 +328,137 @@ Here are the steps to convert the project documentation files to PDF format.
 
 ### 5.6. Managing Dependencies
 
-A project often depends on third-party libraries. For example, Address Book depends on the
+A project often depends on third-party libraries. For example, Task Manager depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
 can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
 is better than these alternatives.<br>
 a. Include those libraries in the repo (this bloats the repo size)<br>
 b. Require developers to download those libraries manually (this creates extra work for developers)<br>
 
-## Appendix A : User Stories
+
+## Appendex A : User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
 
 
-Priority | As a ... | I want to ... | So that I can...
--------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+| Priority | As a user I want to ... | So that I can... |
+| -------- | :-------- | :--------- | :----------- |
+| `* * *` | see usage instructions | know how to use the commands |
+| `* * *` | add a new task without deadlines | plan for the future
+| `* * *` | add a new task with deadline | know when my task is due
+| `* * *` | add a new task with start and end time | fit it into my calendar
+| `* * *` | delete a task | remove task that I no longer need
+| `* * *` | edit a task | make changes or edit mistakes
+| `* * *` | undo a command | undo a mistake
+| `* * *` | search for a task | find a task with only few keywords
+| `* * *` | mark a task as done | keep track of tasks that are done
+| `* * *` | see task by done and not done | keep track of task that are not done
+| `* * *` | list task by specific tag | only see task that under a certain tag
+| `* * *` | use short form for common commands | have flexibility when i use the app, type faster
+| `* * *` | specify folder for data storage | choose where i want to save my info
+| `* *` | sort tasks by name | locate a task easily
+| `* *` | use hotkeys for commands | do things faster
+| `* *` | get feedback for my commands | know if a command is successful or system has hanged
+| `* *` | save my task to google calendar | see them on google calendar
+| `* *` | get the app to help me find a slot for a task | find a suitable time easily
+| `* *` | block multiple slots | block slots when timing of a task is uncertain
+| `* *` | list task in sorted order | plan my time
+| `* *` | list task by due date | see which task are most urgent
+| `* *` | mark a task as not done | undone a done task
 
-{More to be added}
 
-## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+## Appendex B : Use Cases
+(For all use cases below, the **System** is the `VeTo` and the **Actor** is the `user`, unless specified otherwise)
 
-**MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
-Use case ends.
+#### Use case: UC1 - Help
+
+**Main success scenario**
+
+	1.  User enters help.
+	2.  VeTo displays the command list.
+	Use case ends.
+
+**Extensions**
+1a. VeTo detects an error in the command.
+
+> 1a1. VeTo waits for another valid command.
+1a2. User enters the correct command.
+Steps 1a1-1a2 are repeated until the command entered is valid.
+Use case resumes from step 2.
+
+#### Use case: UC2 - Add task
+**Main success scenario**
+
+	1.  User adds a certain task with its details via command line input.
+	2.  VeTo adds the task and displays status.
+	         Use case ends.
+**Extensions**
+1a. VeTo detects an error in the form of the input.
+>	1a1. VeTo requests for the input with a correct form.
+		1a2. User enters the task with its details again.
+	Steps 1a1-1a2 are repeated until the input entered is of a correct form.
+	Use case resumes from step 2.
+
+#### Use case: UC3 - Delete task
+**Main success scenario**
+
+	1.  User enters list.
+	2.  VeTo displays all the entered tasks with in index.
+	3.  User chooses one of the tasks to delete by entering delete INDEX.
+	4.  VeTo requests confirmation.
+	5.  User confirms action.
+	6.  VeTo removes the task from the list and displays status.
+	         Use case ends.
+**Extensions**
+1a. VeTo detects an error in the command.
+>	1a1. VeTo waits for another valid command..
+		1a2. User enters the correct command.
+	Steps 1a1-1a2 are repeated until the command entered is valid.
+	Use case resumes from step 2.
+
+3a. VeTo detects an error in the command.
+>	3a1. VeTo waits for another valid command..
+		3a2. User enters the valid command.
+	Steps 3a1-3a2 are repeated until the command entered is valid.
+	Use case resumes from step 4.
+
+5a. VeTo does not receive confirmation of receives invalid command.
+>	5a1. Use case ends.
+
+
+
+#### Use case: UC4 - Find task
+**Main success scenario**
+
+    1.User enters Find with keyword or index
+    2.VeTo display all task that contain input keyword or index.
+	Use case ends.
 
 **Extensions**
 
-2a. The list is empty
+1a. VeTo detects an error in command.
+>  1a1. VeTo waits for another valid command..
+    1a2. User enters the correct command.
 
-> Use case ends
+  2a. VeTo find no task with similar keyword or index
+> 2a1. VeTo show an message that says no similar task
+	2a2. VeTo waits for another valid command..
 
-3a. The given index is invalid
+## Appendex C : Non Functional Requirements
+1. Core functions work without internet.
+2. Can run without installation
+3. Must be command line interface
+4. Desktop application, not mobile or web
+5. Stand-alone application. Not a plug in to another software
+6. No relational database. Use text file for data storage. Text file must be human editable
+7. Software design must follow object-oriented paradigm
+8. Work on windows 7 or later
+9. Third-party framework/libraries must be free and does not require installation
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
-
-{More to be added}
-
-## Appendix C : Non Functional Requirements
-
-1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
-   should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-{More to be added}
-
-## Appendix D : Glossary
-
+## Appendex D :  Glossary
 ##### Mainstream OS
 
 > Windows, Linux, Unix, OS-X
@@ -401,19 +467,68 @@ Use case ends.
 
 > A contact detail that is not meant to be shared with others
 
-## Appendix E : Product Survey
+{More to be added}
 
-**Product Name**
+## Appendex E : Product Survey
 
-Author: ...
+**Todoist**
+
+Author: Zhang Ying
 
 Pros:
 
-* ...
-* ...
+* “Command line” interface for inputs
+* Detects date and time through keywords e.g. on 4th February, by 6pm today.
+* Reminders for overdue tasks
+* Tagging system
+* Able to implement recurring tasks
 
 Cons:
 
-* ...
-* ...
+* Can only view tasks in chronological order
 
+**Evernote**
+
+Author: Walter
+
+Pros:
+* Search for task by tag, keyword or notebook
+* Available on multiple platform
+* Able to tag task as well
+* Able to take a list of task and turn them into checklist instantly
+* Able to link similar task together
+
+Cons:
+* Cannot index, only can tag task
+* Paying for premium services to offer more services
+
+**Google Keep**
+
+Author: Chan Lup Seng
+
+Pros:
+* Available on multiple platform on both web and mobile with synchronization
+* Able to store pictures, able to grab text from image
+* Time and location based reminders
+* Able to draw on notes
+* Able to archive
+* Able to tag
+
+Cons:
+* Not command line interface
+
+**Outlook calendar**
+
+Author: Xu Xin Yi
+
+Pros:
+* Available on multiple platforms on both web and mobile with synchronization, and performs well with windows products
+* Provides different calendars for different purposes, such as Chinese lunar holiday calendar, Singapore holiday to cater to different individuals’ needs
+* Have different display forms, in weekdays, months or years
+
+Cons:
+* Not command line interface
+* Time-zone feature is difficult to use
+* Difficult to edit tasks in a group
+* UI is not simple or aesthetic
+https://taskwarrior.org/docs/
