@@ -40,7 +40,13 @@ public class Deadline {
         } else {
             if (!isEmptyDeadline(strDeadline)) {
                 try {
-                    List<Date> dateList = dateParser.parse(strDeadline).get(0).getDates();
+                    List<Date> dateList;
+                    if (strDeadline.matches("[a-zA-Z]+")) {
+                        dateList = dateParser.parse(strDeadline + " 235959").get(0).getDates();
+                    } else {
+                        dateList = dateParser.parse(strDeadline).get(0).getDates();
+                    }
+
                     if (dateList != null && dateList.size() > 0) {
                         this.deadline = dateList.get(0);
                         this.value = deadline.toString();
