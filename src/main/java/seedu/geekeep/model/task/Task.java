@@ -31,6 +31,8 @@ public class Task implements ReadOnlyTask {
     public Task(Title title, DateTime startDateTime,
                 DateTime endDateTime, Location location, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(title);
+        if (startDateTime != null) assert endDateTime != null;
+
         this.title = title;
         this.endDateTime = endDateTime;
         this.startDateTime = startDateTime;
@@ -119,6 +121,18 @@ public class Task implements ReadOnlyTask {
     @Override
     public String toString() {
         return getAsText();
+    }
+
+    public boolean isFloatingTask() {
+        return startDateTime == null && endDateTime == null;
+    }
+
+    public boolean isEvent() {
+        return startDateTime != null && endDateTime != null;
+    }
+
+    public boolean isDeadline() {
+        return startDateTime == null && endDateTime != null;
     }
 
 }
