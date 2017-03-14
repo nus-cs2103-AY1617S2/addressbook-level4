@@ -42,6 +42,7 @@ public class TaskCard extends UiPart<Region> {
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
         comment.setText(task.getComment().value);
+        priority.setText(task.getPriority().value);
         initTags(task);
         switch(taskType) {
         case DeadlineTask.TYPE:
