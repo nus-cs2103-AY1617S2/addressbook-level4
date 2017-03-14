@@ -14,15 +14,16 @@ import seedu.onetwodo.model.task.TaskType;
 public class TestTask implements ReadOnlyTask {
 
     private Name name;
-    private Description description;
     private EndDate endDate;
     private StartDate startDate;
-    private UniqueTagList tags;
+    private Description description;
+    // private boolean isDone;
     private TaskType type;
+    private UniqueTagList tags;
 
     public TestTask() {
         tags = new UniqueTagList();
-        type = TaskType.DEADLINE;
+        type = TaskType.TODO;
     }
 
     /**
@@ -36,27 +37,8 @@ public class TestTask implements ReadOnlyTask {
         this.tags = taskToCopy.getTags();
         this.type = taskToCopy.getTaskType();
     }
-
-    public void setName(Name name) {
-        this.name = name;
-    }
-
-    public void setDescription(Description description) {
-        this.description = description;
-    }
-
-    public void setEndDate(EndDate endDate) {
-        this.endDate = endDate;
-    }
-
-    public void setStartDate(StartDate startDate) {
-        this.startDate = startDate;
-    }
-
-    public void setTags(UniqueTagList tags) {
-        this.tags = tags;
-    }
-
+    
+    // Getters
     @Override
     public Name getName() {
         return name;
@@ -78,6 +60,16 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
+    public boolean getDoneStatus() {
+        return false;
+    }
+    
+    @Override
+    public TaskType getTaskType() {
+        return type;
+    }
+    
+    @Override
     public UniqueTagList getTags() {
         return tags;
     }
@@ -86,19 +78,50 @@ public class TestTask implements ReadOnlyTask {
     public String toString() {
         return getAsText();
     }
+    
+    // Setters
+    public void setName(Name name) {
+        this.name = name;
+    }
+
+    public void setEndDate(EndDate endDate) {
+        this.endDate = endDate;
+    }
+
+    public void setStartDate(StartDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setDescription(Description description) {
+        this.description = description;
+    }
+    
+    public void setTaskType(TaskType type) {
+        this.type = type;
+    }
+    
+    public void setTags(UniqueTagList tags) {
+        this.tags = tags;
+    }
 
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
-        sb.append("d/" + this.getDescription().value + " ");
-        sb.append("s/" + this.getStartDate().value + " ");
-        sb.append("e/" + this.getEndDate().value + " ");
+        
+        if(this.hasStartDate()) {
+            sb.append("s/" + this.getStartDate().value + " ");
+        }
+        
+        if(this.hasEndDate()) {
+            sb.append("e/" + this.getEndDate().value + " ");
+        }
+        
+        if(this.hasDescription()) { 
+            sb.append("d/" + this.getDescription().value + " ");
+        }
+        
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
 
-    @Override
-    public TaskType getTaskType() {
-        return type;
-    }
 }

@@ -11,8 +11,8 @@ public interface ReadOnlyTask {
     Name getName();
     StartDate getStartDate();
     EndDate getEndDate();
-    TaskType getTaskType();
     Description getDescription();
+    TaskType getTaskType();
     boolean getDoneStatus();
 
     /**
@@ -20,6 +20,22 @@ public interface ReadOnlyTask {
      * changes on the returned list will not affect the task's internal tags.
      */
     UniqueTagList getTags();
+    
+    default boolean hasStartDate() {
+        return getStartDate().hasDate();
+    }
+    
+    default boolean hasEndDate() {
+        return getEndDate().hasDate();
+    }
+    
+    default boolean hasDescription() {
+        return getDescription().hasDescription();
+    }
+    
+    default boolean hasTag() {
+        return getTags().hasTag();
+    }
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
@@ -39,15 +55,25 @@ public interface ReadOnlyTask {
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append(" StartDate: ")
-                .append(getStartDate())
-                .append(" EndDate: ")
-                .append(getEndDate())
-                .append(" Description: ")
-                .append(getDescription())
-                .append(" Tags: ");
-        getTags().forEach(builder::append);
+        builder.append(getName());
+        
+        if(this.hasStartDate()) {
+            builder.append("\n").append(getStartDate());
+        }
+        
+        if(this.hasEndDate()) {
+            builder.append("\n").append(getEndDate());
+        }
+        
+        if(this.hasDescription()) {
+            builder.append("\n").append("Description: ").append(getDescription());
+        }
+        
+        if(this.hasTag()) {
+            builder.append("\n").append("Tags: ");
+            getTags().forEach(builder::append);
+        }
+        
         return builder.toString();
     }
 

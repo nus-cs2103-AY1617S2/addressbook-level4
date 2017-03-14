@@ -44,6 +44,14 @@ public class Date {
         }
     }
     
+    public Date getDate() {
+        return this;
+    }
+    
+    public boolean hasDate() {
+        return this.localDateTime.isPresent();
+    }
+    
     @Override
     public String toString() {
         return value;

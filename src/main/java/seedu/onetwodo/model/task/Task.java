@@ -48,19 +48,10 @@ public class Task implements ReadOnlyTask {
         this(source.getName(), source.getStartDate(), source.getEndDate(), source.getDescription(), source.getTags());
     }
 
-    public void setName(Name name) {
-        assert name != null;
-        this.name = name;
-    }
-
+    // Getters
     @Override
     public Name getName() {
         return name;
-    }
-
-    public void setStartDate(StartDate startDate) {
-        assert startDate != null;
-        this.startDate = startDate;
     }
 
     @Override
@@ -68,28 +59,9 @@ public class Task implements ReadOnlyTask {
         return startDate;
     }
 
-    public void setEndDate(EndDate endDate) {
-        assert endDate != null;
-        this.endDate = endDate;
-    }
-
     @Override
     public EndDate getEndDate() {
         return endDate;
-    }
-    
-    @Override
-    public TaskType getTaskType() {
-        return type;
-    }
-
-    public void setTaskType(TaskType type) {
-        this.type = type;
-    }
-    
-    public void setDescription(Description description) {
-        assert description != null;
-        this.description = description;
     }
 
     @Override
@@ -98,18 +70,48 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
+    public boolean getDoneStatus() {
+        return isDone;
+    }
+    
+    @Override
+    public TaskType getTaskType() {
+        return type;
+    }
+    
+    @Override
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
     }
+    
+    // Setters
+    public void setName(Name name) {
+        assert name != null;
+        this.name = name;
+    }
+    
+    public void setStartDate(StartDate startDate) {
+        assert startDate != null;
+        this.startDate = startDate;
+    }
 
-    @Override
-    public boolean getDoneStatus() {
-        return isDone;
+    public void setEndDate(EndDate endDate) {
+        assert endDate != null;
+        this.endDate = endDate;
+    }
+
+    public void setDescription(Description description) {
+        assert description != null;
+        this.description = description;
     }
     
     public void setDone(){
         assert isDone == false;
         isDone = true;
+    }
+
+    public void setTaskType(TaskType type) {
+        this.type = type;
     }
     
     /**
@@ -149,4 +151,5 @@ public class Task implements ReadOnlyTask {
     public String toString() {
         return getAsText();
     }
+    
 }

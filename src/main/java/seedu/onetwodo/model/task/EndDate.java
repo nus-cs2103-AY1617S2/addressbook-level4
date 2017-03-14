@@ -39,7 +39,7 @@ public class EndDate extends Date {
         if(!localDateTime.isPresent()) {
             return "";
         } else {
-            return "end: " + localDateTime.get().toLocalDate().toString() 
+            return "End: " + localDateTime.get().toLocalDate().toString() 
                     + " " + localDateTime.get().toLocalTime().toString();
         }
     }

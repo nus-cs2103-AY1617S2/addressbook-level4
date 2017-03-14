@@ -39,7 +39,7 @@ public class StartDate extends Date {
         if(!localDateTime.isPresent()) {
             return "";
         } else {
-            return "start: " + localDateTime.get().toLocalDate().toString() 
+            return "Start: " + localDateTime.get().toLocalDate().toString() 
                     + " " + localDateTime.get().toLocalTime().toString();
         }
     }

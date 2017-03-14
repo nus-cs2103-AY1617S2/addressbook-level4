@@ -17,8 +17,8 @@ public class DoneCommand extends Command{
     
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the task identified by the index number as completed.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Parameters: PREFIX_INDEX (must be a prefix positive integer)\n"
+            + "Example: " + COMMAND_WORD + " e1";
     
     public static final String MESSAGE_DONE_TASK_SUCCESS = "Completed Task: %1$s";
     
