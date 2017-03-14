@@ -89,7 +89,8 @@ public class StorageManager extends ComponentManager implements Storage {
     @Override
     @Subscribe
     public void handleTaskManagerChangedEvent(TaskManagerChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
+        logger.info(LogsCenter.getEventHandlingLogMessage(event,
+                "Local data changed, saving to file" + this.config.getTaskManagerFilePath()));
         try {
             saveTaskManager(event.data);
         } catch (IOException e) {
@@ -112,6 +113,11 @@ public class StorageManager extends ComponentManager implements Storage {
             this.config.setTaskManagerFilePath(oldPath);
             setTaskManagerFilePath(oldPath);
             ioe.printStackTrace();
+        }
+        try {
+            saveTaskManager(event.getData());
+        } catch (IOException e) {
+            raise(new DataSavingExceptionEvent(e));
         }
 
     }

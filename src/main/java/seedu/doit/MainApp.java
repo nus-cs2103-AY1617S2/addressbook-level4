@@ -89,6 +89,7 @@ public class MainApp extends Application {
                 logger.info("Data file not found. Will be starting with a sample TaskManager");
             }
             initialTaskManagerData = taskManagereOptional.orElseGet(SampleDataUtil::getSampleTaskManager);
+            storage.saveTaskManager(initialTaskManagerData);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty TaskManager");
             initialTaskManagerData = new TaskManager();

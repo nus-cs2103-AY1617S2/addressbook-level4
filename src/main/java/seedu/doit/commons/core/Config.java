@@ -69,15 +69,15 @@ public class Config {
         Config o = (Config) other;
 
         return Objects.equals(this.appTitle, o.appTitle) && Objects.equals(this.logLevel, o.logLevel)
-            && Objects.equals(this.userPrefsFilePath, o.userPrefsFilePath)
-            && Objects.equals(this.taskManagerFilePath, o.taskManagerFilePath)
-            && Objects.equals(this.taskManagerName, o.taskManagerName);
+                && Objects.equals(this.userPrefsFilePath, o.userPrefsFilePath)
+                && Objects.equals(this.taskManagerFilePath, o.taskManagerFilePath)
+                && Objects.equals(this.taskManagerName, o.taskManagerName);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(this.appTitle, this.logLevel, this.userPrefsFilePath, this.taskManagerFilePath,
-            this.taskManagerName);
+                this.taskManagerName);
     }
 
     @Override
