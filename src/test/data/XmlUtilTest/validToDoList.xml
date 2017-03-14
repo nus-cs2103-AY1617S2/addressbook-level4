@@ -5,7 +5,7 @@
         <venue isPrivate="false">COM1-B103</venue>
         <startTime isPrivate="false">Tuesday 10:00</startTime>
         <endTime isPrivate="false">Tuesday 11:00</endTime>
-        <urgencyLevel isPrivate="false">3</urgencyLevel>
+        <urgencyLevel isPrivate="false">5</urgencyLevel>
         <description isPrivate="false">I love you</description>
     </tasks>
     <tasks>
@@ -13,7 +13,7 @@
         <venue isPrivate="false">Raffles Place</venue>
         <startTime isPrivate="false">March 31, 9:30</startTime>
         <endTime isPrivate="false">March 31, 12:00</endTime>
-        <urgencyLevel isPrivate="false">3</urgencyLevel>
+        <urgencyLevel isPrivate="false">4</urgencyLevel>
         <description isPrivate="false">I love you</description>
     </tasks>
     <tasks>
@@ -21,7 +21,7 @@
         <venue isPrivate="false">313 Somerset</venue>
         <startTime isPrivate="false">Saturday 11:00</startTime>
         <endTime isPrivate="false">Saturday 17:00</endTime>
-        <urgencyLevel isPrivate="false">3</urgencyLevel>
+        <urgencyLevel isPrivate="false">2</urgencyLevel>
         <description isPrivate="false">I love you</description>
     </tasks>
     <tasks>
@@ -29,7 +29,7 @@
         <venue isPrivate="false">S16 04-30</venue>
         <startTime isPrivate="false">Every Wednesday 19:00</startTime>
         <endTime isPrivate="false">Every Wednesday 21:00</endTime>
-        <urgencyLevel isPrivate="false">3</urgencyLevel>
+        <urgencyLevel isPrivate="false">7</urgencyLevel>
         <description isPrivate="false">I love you</description>
     </tasks>
     <tasks>
@@ -37,7 +37,7 @@
         <venue isPrivate="false">Jun Wei's house at Jurong Ease Avenue 1</venue>
         <startTime isPrivate="false">Next Thursday 19:00</startTime>
         <endTime isPrivate="false">Next Thursday 21:00</endTime>
-        <urgencyLevel isPrivate="false">3</urgencyLevel>
+        <urgencyLevel isPrivate="false">0</urgencyLevel>
         <description isPrivate="false">I love you</description>
     </tasks>
     <tasks>
@@ -53,7 +53,7 @@
         <venue isPrivate="false">Home</venue>
         <startTime isPrivate="false">This Friday 19:00</startTime>
         <endTime isPrivate="false">This Friday 21:00</endTime>
-        <urgencyLevel isPrivate="false">3</urgencyLevel>
+        <urgencyLevel isPrivate="false">6</urgencyLevel>
         <description isPrivate="false">I love you</description>
     </tasks>
     <tasks>
@@ -61,7 +61,7 @@
         <venue isPrivate="false">LT26</venue>
         <startTime isPrivate="false">April 12, 12:00</startTime>
         <endTime isPrivate="false">April 12, 14:00</endTime>
-        <urgencyLevel isPrivate="false">3</urgencyLevel>
+        <urgencyLevel isPrivate="false">8</urgencyLevel>
         <description isPrivate="false">I love you</description>
     </tasks>
     <tasks>
@@ -69,7 +69,7 @@
         <venue isPrivate="false">Biz1-0748 Prof Tan's office</venue>
         <startTime isPrivate="false">now</startTime>
         <endTime isPrivate="false">one hour later</endTime>
-        <urgencyLevel isPrivate="false">3</urgencyLevel>
+        <urgencyLevel isPrivate="false">2</urgencyLevel>
         <description isPrivate="false">I love you</description>
     </tasks>
 </ToDoList>
