@@ -531,7 +531,7 @@ public class LogicManagerTest {
     @Before
     public void setUp() {
         model = new ModelManager();
-        String tempAddressBookFile = saveFolder.getRoot().getPath() + "TempAddressBook.xml";
+        String tempAddressBookFile = saveFolder.getRoot().getPath() + "TempTaskManager.xml";
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
         logic = new LogicManager(model, new StorageManager(tempAddressBookFile, tempPreferencesFile));
         EventsCenter.getInstance().registerHandler(this);
