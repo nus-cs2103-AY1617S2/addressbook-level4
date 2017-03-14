@@ -24,10 +24,10 @@ public class DetailedTaskCard extends UiPart<Region> {
     private Label endDate;
 
     @FXML
-    private Label time;
+    private Label startTime;
 
     @FXML
-    private Label duration;
+    private Label endTime;
 
     @FXML
     private FlowPane tags;
@@ -37,8 +37,8 @@ public class DetailedTaskCard extends UiPart<Region> {
         name.setText(detailedTask.getName().toString());
         startDate.setText(detailedTask.getStartDate().toString());
         endDate.setText(detailedTask.getEndDate().toString());
-        time.setText(detailedTask.getTime().toString());
-        duration.setText(detailedTask.getDuration().toString());
+        startTime.setText(detailedTask.getStartTime().toString());
+        endTime.setText(detailedTask.getEndTime().toString());
         initTags(detailedTask);
     }
 

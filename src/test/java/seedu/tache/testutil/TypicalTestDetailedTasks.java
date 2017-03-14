@@ -14,20 +14,20 @@ public class TypicalTestDetailedTasks {
             taskA = new DetailedTaskBuilder().withName("Walk the Dog")
                     .withStartDate("14 April 2017")
                     .withEndDate("14 April 2017")
-                    .withTime("17:00")
-                    .withDuration("2Hrs")
+                    .withStartTime("17:00")
+                    .withEndTime("17:00")
                     .withTags("MediumPriority").build();
             taskB = new DetailedTaskBuilder().withName("Buy Medicine")
                     .withStartDate("15 April 2017")
                     .withEndDate("-")
-                    .withTime("12:00")
-                    .withDuration("-")
+                    .withStartTime("12:00")
+                    .withEndTime("12:00")
                     .withTags("LowPriority").build();
             taskC = new DetailedTaskBuilder().withName("Submit Project Proposal")
                     .withStartDate("-")
                     .withEndDate("17 April 2017")
-                    .withTime("15:00")
-                    .withDuration("-")
+                    .withStartTime("15:00")
+                    .withEndTime("15:00")
                     .withTags("HighPriority").build();
 
             // Manually added

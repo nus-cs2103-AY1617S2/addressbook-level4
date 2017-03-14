@@ -4,7 +4,6 @@ import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.model.tag.Tag;
 import seedu.tache.model.tag.UniqueTagList;
 import seedu.tache.model.task.Date;
-import seedu.tache.model.task.Duration;
 import seedu.tache.model.task.Name;
 import seedu.tache.model.task.Time;
 
@@ -38,13 +37,13 @@ public class DetailedTaskBuilder {
         return this;
     }
 
-    public DetailedTaskBuilder withTime(String time) throws IllegalValueException {
-        this.detailedTask.setTime(new Time(time));
+    public DetailedTaskBuilder withStartTime(String startTime) throws IllegalValueException {
+        this.detailedTask.setStartTime(new Time(startTime));
         return this;
     }
-
-    public DetailedTaskBuilder withDuration(String duration) throws IllegalValueException {
-        this.detailedTask.setDuration(new Duration(duration));
+    
+    public DetailedTaskBuilder withEndTime(String endTime) throws IllegalValueException {
+        this.detailedTask.setEndTime(new Time(endTime));
         return this;
     }
 

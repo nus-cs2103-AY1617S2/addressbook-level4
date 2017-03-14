@@ -6,7 +6,6 @@ import seedu.tache.model.TaskManager;
 import seedu.tache.model.tag.UniqueTagList;
 import seedu.tache.model.task.Date;
 import seedu.tache.model.task.DetailedTask;
-import seedu.tache.model.task.Duration;
 import seedu.tache.model.task.Name;
 import seedu.tache.model.task.Task;
 import seedu.tache.model.task.Time;
@@ -33,11 +32,11 @@ public class SampleDataUtil {
         try {
             return new DetailedTask[] {
                 new DetailedTask(new Name("Walk the Dog"), new Date("14 April 2017"), new Date("14 April 2017"),
-                                 new Time("17:00"), new Duration("2Hrs"), new UniqueTagList("MediumPriority")),
+                                 new Time("17:00"), new Time("17:00"), new UniqueTagList("MediumPriority")),
                 new DetailedTask(new Name("Buy Medicine"), new Date("15 April 2017"), new Date("-"),
-                                 new Time("12:00"), new Duration("-"), new UniqueTagList("LowPriority")),
+                                 new Time("12:00"), new Time("12:00"), new UniqueTagList("LowPriority")),
                 new DetailedTask(new Name("Submit Project Proposal"), new Date("-"), new Date("17 April 2017"),
-                                 new Time("15:00"), new Duration("-"), new UniqueTagList("HighPriority")),
+                                 new Time("15:00"), new Time("15:00"), new UniqueTagList("HighPriority")),
             };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);
