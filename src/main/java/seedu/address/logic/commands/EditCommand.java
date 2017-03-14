@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.logic.GlobalStack;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Deadline;
@@ -59,10 +60,17 @@ public class EditCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
-        Task editedPerson = createEditedTask(taskToEdit, editTaskDescriptor);
-
+        Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        Task originalTask = obtainTaskAtIndex(taskToEdit);
+        originalTask.setEditTaskIndex(filteredTaskListIndex);
+        originalTask.setParserInfo("edit");
+        editedTask.setEditTaskIndex(filteredTaskListIndex);
+        editedTask.setParserInfo("edit");
         try {
-            model.updateTask(filteredTaskListIndex, editedPerson);
+            model.updateTask(filteredTaskListIndex, editedTask);
+            GlobalStack gStack = GlobalStack.getInstance();
+            gStack.getUndoStack().push(editedTask);
+            gStack.getUndoStack().push(originalTask);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
@@ -87,6 +95,17 @@ public class EditCommand extends Command {
         return new Task(updatedTaskName, updatedDeadline, updatedPriorityLevel, updatedInformation, updatedTags);
     }
 
+    private static Task obtainTaskAtIndex(ReadOnlyTask task) {
+        assert task != null;
+
+        TaskName taskName = task.getTaskName();
+        Deadline deadline = task.getDate();
+        PriorityLevel priorityLevel = task.getPriority();
+        Information info = task.getInfo();
+        UniqueTagList tags = task.getTags();
+
+        return new Task (taskName, deadline, priorityLevel, info, tags);
+    }
     /**
      * Stores the details to edit the task with. Each non-empty field value will replace the
      * corresponding field value of the task.

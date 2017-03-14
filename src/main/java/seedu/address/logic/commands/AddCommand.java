@@ -50,6 +50,7 @@ public class AddCommand extends Command {
                 new Information(info),
                 new UniqueTagList(tagSet)
         );
+        toAdd.setParserInfo("add");
     }
 
     @Override

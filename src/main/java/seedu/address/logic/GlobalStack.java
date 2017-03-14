@@ -26,7 +26,23 @@ public class GlobalStack {
         }
         return instance;
     }
-    public Task undo() throws NoSuchElementException {
+
+    public Task undoEdit() {
+        Task temp = undoStack.pop(); // contains originalTask
+        Task temp2 = undoStack.pop(); // contains editedTask
+        redoStack.push(temp);
+        redoStack.push(temp2);
+        return temp;
+    }
+
+    public Task redoEdit() {
+        Task temp = redoStack.pop();
+        Task temp2 = redoStack.pop();
+        undoStack.push(temp);
+        undoStack.push(temp2);
+        return temp;
+    }
+    public Task undoAdd() throws NoSuchElementException {
         try {
             Task temp = undoStack.pop();
             redoStack.push(temp);
@@ -36,7 +52,7 @@ public class GlobalStack {
         }
     }
 
-    public Task redo() throws NoSuchElementException {
+    public Task redoAdd() throws NoSuchElementException {
         try {
             Task temp = redoStack.pop();
             undoStack.push(temp);

@@ -17,7 +17,8 @@ public class Task implements ReadOnlyTask {
     private PriorityLevel priority;
     private Information info;
     private UniqueTagList tags;
-
+    private String parserInfo;
+    private int editTaskIndex;
     /**
      * Every field must be present and not null.
      */
@@ -77,11 +78,26 @@ public class Task implements ReadOnlyTask {
         return info;
     }
 
+    public void setParserInfo(String info) {
+        this.parserInfo = info;
+    }
+
+    public String getParserInfo() {
+        return this.parserInfo;
+    }
+
+    public void setEditTaskIndex(int index) {
+        this.editTaskIndex = index;
+    }
+
+    public int getEditTaskIndex() {
+        return this.editTaskIndex;
+    }
+
     @Override
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
     }
-
     /**
      * Replaces this task's tags with the tags in the argument tag list.
      */
