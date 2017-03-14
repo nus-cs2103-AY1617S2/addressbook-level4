@@ -104,7 +104,7 @@ public class EditCommandTest extends ToDoListGuiTest {
     @Test
     public void edit_duplicateTask_failure() {
         commandBox.runCommand("edit 3 Alice Pauline @@85355255 from:alice@gmail.com "
-                                + "to:123, Jurong West Ave 6 ##/friends");
+                                + "to:123, Jurong West Ave 6 ##friends");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
