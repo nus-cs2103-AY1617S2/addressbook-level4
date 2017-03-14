@@ -34,24 +34,24 @@ public class AddCommandParser {
             String taskName = argsTokenizer.getPreamble().get();
             String startDate = "";
             String endDate = "";
-            String completionStatus = "Not Done";
+            String completionStatus = "false";
             Set<String> tagSet = new HashSet<String>();
             System.out.println(args);
             if (args.contains("s/")) {
-        	startDate = argsTokenizer.getValue(PREFIX_STARTDATE).get();
+                startDate = argsTokenizer.getValue(PREFIX_STARTDATE).get();
             }
             if (args.contains("e/")) {
-        	endDate = argsTokenizer.getValue(PREFIX_ENDDATE).get();
+                endDate = argsTokenizer.getValue(PREFIX_ENDDATE).get();
             }
             if (args.contains("c/")) {
-        	completionStatus = argsTokenizer.getValue(PREFIX_COMPLETIONSTATUS).get();
+                completionStatus = argsTokenizer.getValue(PREFIX_COMPLETIONSTATUS).get();
             }
             if (args.contains("t/")) {
-        	tagSet = ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG));
+                tagSet = ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG));
             }
 
             return new AddCommand(
-        	    taskName,
+                    taskName,
                     startDate,
                     endDate,
                     completionStatus,
