@@ -10,7 +10,7 @@ public class SelectCommandTest extends TaskManagerGuiTest {
 
 
     @Test
-    public void selectTask_nonEmptyList() {
+    public void selectTaskNonEmptyList() {
 
         assertSelectionInvalid(10); // invalid index
         assertNoTaskSelected();
@@ -28,7 +28,7 @@ public class SelectCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void selectTask_emptyList() {
+    public void selectTaskEmptyList() {
         commandBox.runCommand("clear");
         assertListSize(0);
         assertSelectionInvalid(1); //invalid index

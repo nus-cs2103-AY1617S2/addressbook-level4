@@ -45,7 +45,7 @@ public class CollectionUtilTest {
     }
 
     @Test
-    public void isAnyNullVarargs_nullReference_throwsNullPointerException() {
+    public void isAnyNullVarargsNullReferenceThrowsNullPointerException() {
         thrown.expect(NullPointerException.class);
         CollectionUtil.isAnyNull((Object[]) null);
     }
@@ -77,7 +77,7 @@ public class CollectionUtilTest {
     }
 
     @Test
-    public void isAnyNullCollection_nullReference_throwsNullPointerException() {
+    public void isAnyNullCollectionNullReferenceThrowsNullPointerException() {
         thrown.expect(NullPointerException.class);
         CollectionUtil.isAnyNull((Collection<Object>) null);
     }
