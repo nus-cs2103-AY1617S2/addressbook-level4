@@ -130,6 +130,8 @@ public class TestEventTask extends TestTask implements ReadOnlyEventTask {
                 .append(getComment())
                 .append(" Priority: ")
                 .append(getPriority())
+
+
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
