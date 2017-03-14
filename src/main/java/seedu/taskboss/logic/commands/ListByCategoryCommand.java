@@ -6,7 +6,7 @@ import seedu.taskboss.model.category.Category;
  * Lists tasks under the specified category in TaskBoss to the user.
  */
 public class ListByCategoryCommand extends Command{
-    
+
     public static final String COMMAND_WORD = "listcategory";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all tasks with the specified "
