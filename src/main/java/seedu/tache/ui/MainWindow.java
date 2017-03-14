@@ -35,7 +35,7 @@ public class MainWindow extends UiPart<Region> {
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
     private TaskListPanel taskListPanel;
-    private TaskListPanel taskListPanel2;
+    private TaskListPanel detailedTaskListPanel;
     private Config config;
 
     @FXML
@@ -51,7 +51,7 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane taskListPanelPlaceholder;
 
     @FXML
-    private AnchorPane taskListPanelPlaceholder2;
+    private AnchorPane detailedTaskListPanelPlaceholder;
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
@@ -119,7 +119,8 @@ public class MainWindow extends UiPart<Region> {
     void fillInnerParts() {
         browserPanel = new BrowserPanel(browserPlaceholder);
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
-        taskListPanel2 = new TaskListPanel(getTaskListPlaceholder2(), logic.getFilteredTaskList());
+        detailedTaskListPanel = new TaskListPanel(logic.getFilteredDetailedTaskList(),
+                                                  getDetailedTaskListPlaceholder());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
@@ -141,8 +142,8 @@ public class MainWindow extends UiPart<Region> {
         return taskListPanelPlaceholder;
     }
 
-    private AnchorPane getTaskListPlaceholder2() {
-        return taskListPanelPlaceholder2;
+    private AnchorPane getDetailedTaskListPlaceholder() {
+        return detailedTaskListPanelPlaceholder;
     }
 
     void hide() {
@@ -208,8 +209,8 @@ public class MainWindow extends UiPart<Region> {
         return this.taskListPanel;
     }
 
-    public TaskListPanel getTaskListPanel2() {
-        return this.taskListPanel2;
+    public TaskListPanel getDetailedTaskListPanel() {
+        return this.detailedTaskListPanel;
     }
 
     void loadTaskPage(ReadOnlyTask task) {

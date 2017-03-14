@@ -55,7 +55,7 @@ public class TaskManagerTest {
         TypicalTestDetailedTasks ttdt = new TypicalTestDetailedTasks();
         // Repeat td.eggsAndBread twice
         List<Task> newTasks = Arrays.asList(new Task(td.eggsAndBread), new Task(td.eggsAndBread));
-        List<DetailedTask> newDetailedTasks = Arrays.asList(new DetailedTask(ttdt.alice), new DetailedTask(ttdt.alice));
+        List<DetailedTask> newDetailedTasks = Arrays.asList(new DetailedTask(ttdt.taskA), new DetailedTask(ttdt.taskA));
         List<Tag> newTags = td.eggsAndBread.getTags().asObservableList();
         TaskManagerStub newData = new TaskManagerStub(newTasks, newDetailedTasks, newTags);
 

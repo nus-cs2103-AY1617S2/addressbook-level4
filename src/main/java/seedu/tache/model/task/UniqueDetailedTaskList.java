@@ -23,13 +23,13 @@ public class UniqueDetailedTaskList implements Iterable<DetailedTask> {
     /**
      * Adds a detailed task to the list.
      *
-     * @throws DuplicateTaskException if the detailed task to add is a duplicate of an existing detailed task in the
-     *         list.
+     * @throws DuplicateDetailedTaskException if the detailed task to add is a duplicate of an
+     *         existing detailed task in the list.
      */
-    public void add(DetailedTask toAdd) throws DuplicateTaskException {
+    public void add(DetailedTask toAdd) throws DuplicateDetailedTaskException {
         assert toAdd != null;
         if (contains(toAdd)) {
-            throw new DuplicateTaskException();
+            throw new DuplicateDetailedTaskException();
         }
         internalList.add(toAdd);
     }
@@ -37,16 +37,16 @@ public class UniqueDetailedTaskList implements Iterable<DetailedTask> {
     /**
      * Updates the detailed task in the list at position {@code index} with {@code editedTask}.
      *
-     * @throws DuplicateTaskException if updating the detailed task's details causes the detailed task to be equivalent
-     *         to another existing detailed task in the list.
+     * @throws DuplicateDetailedTaskException if updating the detailed task's details causes the
+     *         detailed task to be equivalent to another existing detailed task in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updateDetailedTask(int index, ReadOnlyDetailedTask editedTask) throws DuplicateTaskException {
+    public void updateDetailedTask(int index, ReadOnlyDetailedTask editedTask) throws DuplicateDetailedTaskException {
         assert editedTask != null;
 
         DetailedTask taskToUpdate = internalList.get(index);
         if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
-            throw new DuplicateTaskException();
+            throw new DuplicateDetailedTaskException();
         }
 
         taskToUpdate.resetData(editedTask);
@@ -59,13 +59,13 @@ public class UniqueDetailedTaskList implements Iterable<DetailedTask> {
     /**
      * Removes the equivalent task from the list.
      *
-     * @throws TaskNotFoundException if no such task could be found in the list.
+     * @throws DetailedTaskNotFoundException if no such task could be found in the list.
      */
-    public boolean remove(ReadOnlyDetailedTask toRemove) throws TaskNotFoundException {
+    public boolean remove(ReadOnlyDetailedTask toRemove) throws DetailedTaskNotFoundException {
         assert toRemove != null;
         final boolean taskFoundAndDeleted = internalList.remove(toRemove);
         if (!taskFoundAndDeleted) {
-            throw new TaskNotFoundException();
+            throw new DetailedTaskNotFoundException();
         }
         return taskFoundAndDeleted;
     }
@@ -74,7 +74,8 @@ public class UniqueDetailedTaskList implements Iterable<DetailedTask> {
         this.internalList.setAll(replacement.internalList);
     }
 
-    public void setDetailedTasks(List<? extends ReadOnlyDetailedTask> detailedTasks) throws DuplicateTaskException {
+    public void setDetailedTasks(List<? extends ReadOnlyDetailedTask> detailedTasks)
+            throws DuplicateDetailedTaskException {
         final UniqueDetailedTaskList replacement = new UniqueDetailedTaskList();
         for (final ReadOnlyDetailedTask detailedTask : detailedTasks) {
             replacement.add(new DetailedTask(detailedTask));
@@ -107,8 +108,8 @@ public class UniqueDetailedTaskList implements Iterable<DetailedTask> {
     /**
      * Signals that an operation would have violated the 'no duplicates' property of the list.
      */
-    public static class DuplicateTaskException extends DuplicateDataException {
-        protected DuplicateTaskException() {
+    public static class DuplicateDetailedTaskException extends DuplicateDataException {
+        protected DuplicateDetailedTaskException() {
             super("Operation would result in duplicate tasks");
         }
     }
@@ -117,6 +118,6 @@ public class UniqueDetailedTaskList implements Iterable<DetailedTask> {
      * Signals that an operation targeting a specified detailed task in the list would fail because
      * there is no such matching detailed task in the list.
      */
-    public static class TaskNotFoundException extends Exception {}
+    public static class DetailedTaskNotFoundException extends Exception {}
 
 }
