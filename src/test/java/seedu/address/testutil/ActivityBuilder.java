@@ -44,8 +44,8 @@ public class ActivityBuilder {
         return this;
     }
 
-    public ActivityBuilder withPhone(String phone) throws IllegalValueException {
-        this.activity.setPhone(new Priority(phone));
+    public ActivityBuilder withPriority(String priority) throws IllegalValueException {
+        this.activity.setPriority(new Priority(priority));
         return this;
     }
 

@@ -16,26 +16,26 @@ public class TypicalTestActivities {
         try {
             alice = new ActivityBuilder().withDescription("Alice Pauline")
                     .withLocation("123, Jurong West Ave 6, #08-111").withEmail("alice@gmail.com")
-                    .withPhone("high")
+                    .withPriority("high")
                     .withTags("friends").build();
             benson = new ActivityBuilder().withDescription("Benson Meier").withLocation("311, Clementi Ave 2, #02-25")
-                    .withEmail("johnd@gmail.com").withPhone("high")
+                    .withEmail("johnd@gmail.com").withPriority("high")
                     .withTags("owesMoney", "friends").build();
-            carl = new ActivityBuilder().withDescription("Carl Kurz").withPhone("high")
+            carl = new ActivityBuilder().withDescription("Carl Kurz").withPriority("high")
                     .withEmail("heinz@yahoo.com").withLocation("wall street").build();
-            daniel = new ActivityBuilder().withDescription("Daniel Meier").withPhone("high")
+            daniel = new ActivityBuilder().withDescription("Daniel Meier").withPriority("high")
                     .withEmail("cornelia@google.com").withLocation("10th street").build();
-            elle = new ActivityBuilder().withDescription("Elle Meyer").withPhone("high")
+            elle = new ActivityBuilder().withDescription("Elle Meyer").withPriority("high")
                     .withEmail("werner@gmail.com").withLocation("michegan ave").build();
-            fiona = new ActivityBuilder().withDescription("Fiona Kunz").withPhone("high")
+            fiona = new ActivityBuilder().withDescription("Fiona Kunz").withPriority("high")
                     .withEmail("lydia@gmail.com").withLocation("little tokyo").build();
-            george = new ActivityBuilder().withDescription("George Best").withPhone("high")
+            george = new ActivityBuilder().withDescription("George Best").withPriority("high")
                     .withEmail("anna@google.com").withLocation("4th street").build();
 
             // Manually added
-            hoon = new ActivityBuilder().withDescription("Hoon Meier").withPhone("high")
+            hoon = new ActivityBuilder().withDescription("Hoon Meier").withPriority("high")
                     .withEmail("stefan@mail.com").withLocation("little india").build();
-            ida = new ActivityBuilder().withDescription("Ida Mueller").withPhone("high")
+            ida = new ActivityBuilder().withDescription("Ida Mueller").withPriority("high")
                     .withEmail("hans@google.com").withLocation("chicago ave").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
@@ -44,9 +44,9 @@ public class TypicalTestActivities {
     }
 
     public static void loadWhatsLeftWithSampleData(WhatsLeft ab) {
-        for (TestActivity person : new TypicalTestActivities().getTypicalActivities()) {
+        for (TestActivity activity : new TypicalTestActivities().getTypicalActivities()) {
             try {
-                ab.addActivity(new Activity(person));
+                ab.addActivity(new Activity(activity));
             } catch (UniqueActivityList.DuplicateActivityException e) {
                 assert false : "not possible";
             }

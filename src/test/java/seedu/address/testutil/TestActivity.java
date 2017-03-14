@@ -8,14 +8,14 @@ import seedu.address.model.person.ReadOnlyActivity;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * A mutable person object. For testing only.
+ * A mutable activity object. For testing only.
  */
 public class TestActivity implements ReadOnlyActivity {
 
     private Description description;
     private Location location;
     private Email email;
-    private Priority phone;
+    private Priority priority;
     private UniqueTagList tags;
 
     public TestActivity() {
@@ -27,7 +27,7 @@ public class TestActivity implements ReadOnlyActivity {
      */
     public TestActivity(TestActivity activityToCopy) {
         this.description = activityToCopy.getDescription();
-        this.phone = activityToCopy.getPriority();
+        this.priority = activityToCopy.getPriority();
         this.email = activityToCopy.getEmail();
         this.location = activityToCopy.getLocation();
         this.tags = activityToCopy.getTags();
@@ -45,8 +45,8 @@ public class TestActivity implements ReadOnlyActivity {
         this.email = email;
     }
 
-    public void setPhone(Priority phone) {
-        this.phone = phone;
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 
     public void setTags(UniqueTagList tags) {
@@ -60,7 +60,7 @@ public class TestActivity implements ReadOnlyActivity {
 
     @Override
     public Priority getPriority() {
-        return phone;
+        return priority;
     }
 
     @Override

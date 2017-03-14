@@ -8,8 +8,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
  */
 public class Priority {
 
-    public static final String MESSAGE_PHONE_CONSTRAINTS = "Activity priority should only be high, medium or low";
-    //public static final String PHONE_VALIDATION_REGEX = "\\d+";
+    public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Activity priority should only be high, medium or low";
 
     public final String value;
 
@@ -22,7 +21,7 @@ public class Priority {
         assert priority != null;
         String trimmedPriority = priority.trim();
         if (!isValidPriority(trimmedPriority)) {
-            throw new IllegalValueException(MESSAGE_PHONE_CONSTRAINTS);
+            throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
         }
         this.value = trimmedPriority;
     }

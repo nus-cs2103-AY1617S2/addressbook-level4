@@ -26,8 +26,8 @@ public class EditCommand extends Command {
             + "by the index number used in the last activity listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[DESCRIPTION] [p/PHONE] [e/EMAIL] [l/LOCATION ] [t/TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 p/91234567 e/johndoe@yahoo.com";
+            + "[DESCRIPTION] [p/PRIORITY] [e/EMAIL] [l/LOCATION ] [t/TAG]...\n"
+            + "Example: " + COMMAND_WORD + " 1 p/high e/johndoe@yahoo.com";
 
     public static final String MESSAGE_EDIT_ACTIVITY_SUCCESS = "Edited Activity: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
