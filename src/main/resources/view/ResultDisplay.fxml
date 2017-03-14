@@ -3,8 +3,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import java.net.URL?>
 <?import javafx.scene.control.TextArea?>
-<AnchorPane fx:id="placeHolder" styleClass="anchor-pane-with-border" xmlns="http://javafx.com/javafx/8"
-            xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="placeHolder" styleClass="anchor-pane-with-border"
+            xmlns="http://javafx.com/javafx/8">
     <stylesheets>
         <URL value="@DarkTheme.css"/>
         <URL value="@Extensions.css"/>

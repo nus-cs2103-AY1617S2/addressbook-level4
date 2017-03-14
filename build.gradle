@@ -12,7 +12,7 @@ plugins {
 }
 
 // Specifies the entry point of the application
-mainClassName = 'seedu.address.MainApp'
+mainClassName = 'seedu.doit.MainApp'
 
 allprojects {
     apply plugin: 'idea'
@@ -63,6 +63,8 @@ allprojects {
         compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
         compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonDataTypeVersion"
         compile "com.google.guava:guava:$guavaVersion"
+        compile group: 'com.joestelmach', name: 'natty', version: '0.13'
+
 
         testCompile "junit:junit:$junitVersion"
         testCompile "org.testfx:testfx-core:$testFxVersion"
@@ -85,7 +87,7 @@ allprojects {
     }
 
     shadowJar {
-        archiveName = "addressbook.jar"
+        archiveName = "taskmanager.jar"
 
         destinationDir = file("${buildDir}/jar/")
     }
@@ -97,7 +99,7 @@ task wrapper(type: Wrapper) {
 
 task coverage(type: JacocoReport) {
     sourceDirectories = files(allprojects.sourceSets.main.allSource.srcDirs)
-    classDirectories =  files(allprojects.sourceSets.main.output)
+    classDirectories = files(allprojects.sourceSets.main.output)
     executionData = files(allprojects.jacocoTestReport.executionData)
     afterEvaluate {
         classDirectories = files(classDirectories.files.collect {
@@ -120,9 +122,9 @@ tasks.coveralls {
     onlyIf { System.env.'CI' }
 }
 
-class AddressBookTest extends Test {
-    public AddressBookTest() {
-    	  forkEvery = 1
+class TaskManagerTest extends Test {
+    public TaskManagerTest() {
+        forkEvery = 1
         systemProperty 'testfx.setup.timeout', '60000'
 
         /*
@@ -146,7 +148,7 @@ class AddressBookTest extends Test {
     }
 }
 
-task guiTests(type: AddressBookTest) {
+task guiTests(type: TaskManagerTest) {
     include 'guitests/**'
 
     jacoco {
@@ -155,8 +157,8 @@ task guiTests(type: AddressBookTest) {
 }
 
 
-task nonGuiTests(type: AddressBookTest) {
-    include 'seedu/address/**'
+task nonGuiTests(type: TaskManagerTest) {
+    include 'seedu/doit/**'
 
     jacoco {
         destinationFile = new File("${buildDir}/jacoco/test.exec")
@@ -164,7 +166,7 @@ task nonGuiTests(type: AddressBookTest) {
 }
 
 // Test mode depends on whether headless task has been run
-task allTests(type: AddressBookTest) {
+task allTests(type: TaskManagerTest) {
     jacoco {
         destinationFile = new File("${buildDir}/jacoco/test.exec")
     }

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskmanager>
+    <tasks>
+        <name>Hans Muster</name>
+        <priority isPrivate="false">9482424</priority>
+        <deadline isPrivate="false">4</deadline>
+        <description isPrivate="false">4th street</description>
+    </tasks>
+    <tasks>
+        <name>Ruth Mueller</name>
+        <priority isPrivate="false">87249245</priority>
+        <deadline isPrivate="false">4</deadline>
+        <description isPrivate="false">81th street</description>
+    </tasks>
+    <tasks>
+        <name>Heinz Kurz</name>
+        <priority isPrivate="false">95352563</priority>
+        <deadline isPrivate="false">4</deadline>
+        <description isPrivate="false">wall street</description>
+    </tasks>
+    <tasks>
+        <name>Cornelia Meier</name>
+        <priority isPrivate="false">87652533</priority>
+        <deadline isPrivate="false">4m</deadline>
+        <description isPrivate="false">10th street</description>
+    </tasks>
+    <tasks>
+        <name>Werner Meyer</name>
+        <priority isPrivate="false">9482224</priority>
+        <deadline isPrivate="false">4m</deadline>
+        <description isPrivate="false">michegan ave</description>
+    </tasks>
+    <tasks>
+        <name>Lydia Kunz</name>
+        <priority isPrivate="false">9482427</priority>
+        <deadline isPrivate="false">4</deadline>
+        <description isPrivate="false">little tokyo</description>
+    </tasks>
+    <tasks>
+        <name>Anna Best</name>
+        <priority isPrivate="false">9482442</priority>
+        <deadline isPrivate="false">4</deadline>
+        <description isPrivate="false">4th street</description>
+    </tasks>
+    <tasks>
+        <name>Stefan Meier</name>
+        <priority isPrivate="false">8482424</priority>
+        <deadline isPrivate="false">4</deadline>
+        <description isPrivate="false">little india</description>
+    </tasks>
+    <tasks>
+        <name>Martin Mueller</name>
+        <priority isPrivate="false">8482131</priority>
+        <deadline isPrivate="false">4</deadline>
+        <description isPrivate="false">chicago ave</description>
+    </tasks>
+</taskmanager>
