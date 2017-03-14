@@ -26,7 +26,8 @@ public class SaveCommand extends Command {
     public static final String MESSAGE_SUCCESS = " Tasks saved at %1$s";
     public static final String MESSAGE_DUPLICATE_FILE = "Another file already exists in the file path.";
     public static final String MESSAGE_NOT_XML_FILE = "It must be a .xml file.";
-    public static final String MESSAGE_USING_SAME_FILE = "It is the current file you are choosing. It will be auto saved.";
+    public static final String MESSAGE_USING_SAME_FILE = "It is the current file you are choosing. "
+            + "It will be auto saved.";
     public static final String MESSAGE_CANNOT_CREATE_FILE = "Cannot create the .xml file.";
 
     public final String saveFilePath;
