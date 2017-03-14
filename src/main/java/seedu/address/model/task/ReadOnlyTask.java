@@ -26,7 +26,7 @@ public interface ReadOnlyTask {
     }
 
     /**
-     * Formats the person as text, showing all contact details.
+     * Formats the task as text, showing all details.
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
@@ -37,3 +37,4 @@ public interface ReadOnlyTask {
     }
 
 }
+
