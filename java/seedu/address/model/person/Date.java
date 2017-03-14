@@ -11,6 +11,7 @@ public class Date {
 	private int day;
 	private int month;
 	private int year;
+	public final String value;
 	private final String DATE_DELIMITER = "-";
 	private final int DAY_ARRAY_INDEX = 0;
 	private final int MONTH_ARRAY_INDEX = 1;
@@ -24,40 +25,34 @@ public class Date {
 	private static final int YEAR_END_INDEX = 6;
 	
 	public Date (String date) {
-		day = 1;
-		month = 2;
-		year = 3;
-		/*date = date.trim();
+		date = date.trim();
+		value = date;
 		int[] dateArray = dateFormatConverter(date);
 		setDay(dateArray[DAY_ARRAY_INDEX]);
 		setMonth(dateArray[MONTH_ARRAY_INDEX]);
-		setYear(dateArray[YEAR_ARRAY_INDEX]);*/
+		setYear(dateArray[YEAR_ARRAY_INDEX]);
 	}
 	
 	public void setDay (int day) {
-		this.day = day;
-		/*if (day > 0 && day <= 31) {
+		if (day > 0 && day <= 31) {
 			this.day = day;
 		} else {
 			throw new IllegalArgumentException("Invalid day");
-		}*/
+		}
 	}
 	public void setMonth (int month) {
-		this.month = month;
-		/*if (month > 0 && month <= 12) {
+		if (month > 0 && month <= 12) {
 			this.month = month;
 		} else {
 			throw new IllegalArgumentException("Invalid month");
-		}*/
+		}
 	}
 	public void setYear (int year) {
-		this.year = year;
-		/*
 		if (year > 0) {
 			this.year = year;
 		} else {
 			throw new IllegalArgumentException("Invalid year");
-		}*/
+		}
 	}
 	
 	public String toString() {
