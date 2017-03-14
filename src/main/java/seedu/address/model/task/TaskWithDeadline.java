@@ -1,6 +1,7 @@
 package seedu.address.model.task;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -19,13 +20,14 @@ public class TaskWithDeadline extends Task {
      * the boolean variable indicates whether the default value of deadline or
      * starting time should be used
      */
-    public TaskWithDeadline(Name name, UniqueTagList tags, Date deadline, boolean isDeadlineMissingDate,
-            boolean isDeadlineMissingTime, Date startingTime, boolean isStartingTimeMissingDate,
-            boolean isStartingTimeMissingTime, boolean isDone) throws IllegalValueException {
+    public TaskWithDeadline(Name name, UniqueTagList tags, Date date1, Date date2, boolean isDone)
+            throws IllegalValueException {
         super(name, tags, isDone);
-        this.deadline = new Deadline(deadline, isDeadlineMissingDate, isDeadlineMissingTime);
-        if (startingTime != null) {
-            this.startingTime = new StartingTime(startingTime, isStartingTimeMissingDate, isStartingTimeMissingTime);
+        if (date2 != null) {
+            this.deadline = new Deadline(date2);
+            this.startingTime = new StartingTime(date1);
+        } else {
+            this.deadline = new Deadline(date1);
         }
         validateDateTime();
     }
@@ -36,7 +38,7 @@ public class TaskWithDeadline extends Task {
      * @throws IllegalValueException
      */
     private void validateDateTime() throws IllegalValueException {
-        if (this.startingTime != null && this.startingTime.isAfter(this.deadline)) {
+        if (this.startingTime != null && this.startingTime.getDate().after(this.deadline.getDate())) {
             throw new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS);
         }
     }

@@ -48,9 +48,18 @@ public class AddCommandParser {
         matcher = pattern.matcher(args);
         if (matcher.matches()) {
             List<Date> dates = new PrettyTimeParser().parse(args);
+            matcher = Pattern.compile(CliSyntax.WITH_DEADLINE).matcher(args);
+            int lastOccurance = args.length() - 1;
+            while (matcher.find()) {
+                lastOccurance = matcher.end();
+            }
+            dates.addAll(new PrettyTimeParser().parse(args.substring(lastOccurance + 1, args.length())));
+            for (Date date : dates) {
+                System.out.println(date);
+            }
             if (dates.size() >= LEAST_DATES_FOR_DEADLINE_AND_STARTING_TIME_TASK) {
                 matcher = Pattern.compile(CliSyntax.WITH_STARTING_TIME).matcher(args);
-                int lastOccurance = args.length() - 1;
+                lastOccurance = args.length() - 1;
                 while (matcher.find()) {
                     lastOccurance = matcher.start();
                 }
@@ -67,8 +76,6 @@ public class AddCommandParser {
         matcher = pattern.matcher(args);
         if (matcher.matches()) {
             List<Date> dates = new PrettyTimeParser().parse(args);
-            System.out.println("Found " + dates.size() + " dates");
-            System.out.println(dates.get(0));
             if (dates.size() >= LEAST_DATES_FOR_DEADLINE_ONLY_TASK) {
                 matcher = Pattern.compile(CliSyntax.WITH_DEADLINE_ONLY).matcher(args);
                 int lastOccurance = args.length() - 1;
