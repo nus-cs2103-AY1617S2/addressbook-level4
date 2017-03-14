@@ -9,7 +9,6 @@ import seedu.address.testutil.TestTask;
 import seedu.address.testutil.TestUtil;
 
 public class DeleteCommandTest extends AddressBookGuiTest {
-	
 	/*
     @Test
     public void delete() {
