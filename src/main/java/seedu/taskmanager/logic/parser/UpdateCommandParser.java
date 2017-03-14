@@ -26,9 +26,9 @@ import seedu.taskmanager.logic.commands.UpdateCommand.UpdateTaskDescriptor;
  */
 public class UpdateCommandParser {
 
-	public static final String EMPTY_FIELD ="EMPTY_FIELD";
+	public static final String EMPTY_FIELD = "EMPTY_FIELD";
 
-    /**
+	/**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
      */
@@ -51,7 +51,7 @@ public class UpdateCommandParser {
             Optional<String> deadline = argsTokenizer.getValue(PREFIX_DEADLINE);
             Optional<String> startTime = argsTokenizer.getValue(PREFIX_STARTTIME);
             Optional<String> endTime = argsTokenizer.getValue(PREFIX_ENDTIME);
-/*
+
             if (deadline.isPresent()) {
             	String stringDeadline = deadline.toString();
             	String[] splited = stringDeadline.split("\\s+");
@@ -59,16 +59,14 @@ public class UpdateCommandParser {
             	startTime = Optional.of(splited[1]);
             }
 
-            String finalDate = date.toString();
-
-            if (!finalDate.equals("")) {
-            	if (finalDate.matches(DATE_VALIDATION_REGEX2)) {
-            		finalDate = CurrentDate.getNewDate(finalDate);            	
+            if (date.isPresent()) {
+            	if (date.get().matches(DATE_VALIDATION_REGEX2)) {
+            		date = Optional.of(CurrentDate.getNewDate(date.get()));
             	}
             }
-*/
+
             updateTaskDescriptor.setTaskName(ParserUtil.parseTaskName(taskName));
-            updateTaskDescriptor.setDate(ParserUtil.parseDate(date/*Optional.of(finalDate)*/));
+            updateTaskDescriptor.setDate(ParserUtil.parseDate(date));
             updateTaskDescriptor.setStartTime(ParserUtil.parseStartTime(startTime));
             updateTaskDescriptor.setEndTime(ParserUtil.parseEndTime(endTime));
 
