@@ -197,7 +197,7 @@ The `Storage` component
 - can save the task data in json format and read it back.
 - holds the history of all data changes
 
-####Undoable History
+#### Undoable History
 
 `historyStack` hold the serialized json strings of the task list data. The minimum size of this stack is always 1. The json string at the top of the stack is the serialization of the current todo list data.
 
