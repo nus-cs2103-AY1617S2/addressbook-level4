@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.label.UniqueLabelList;
 import seedu.address.model.task.Deadline;
@@ -43,7 +44,6 @@ public class EditCommand extends Command {
 
         // converts filteredTaskListIndex from one-based to zero-based.
         this.filteredTaskListIndex = filteredTaskListIndex - 1;
-
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
     }
 
@@ -59,6 +59,7 @@ public class EditCommand extends Command {
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
         try {
+            saveCurrentState();
             model.updateTask(filteredTaskListIndex, editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dte) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
@@ -132,5 +133,24 @@ public class EditCommand extends Command {
         public Optional<UniqueLabelList> getLabels() {
             return labels;
         }
+    }
+
+    /**
+     * Save the data in task manager if command is mutating the data
+     */
+    public void saveCurrentState() {
+        if (isMutating()) {
+            try {
+                LogicManager.undoCommandHistory.addStorageHistory(model.getRawTaskManager().getImmutableTaskList(),
+                        model.getRawTaskManager().getImmutableLabelList());
+            } catch (CloneNotSupportedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public boolean isMutating() {
+        return true;
     }
 }

@@ -47,4 +47,9 @@ public abstract class Command {
     public void setDateParser(DateTimeParser dtParser) {
         this.dtParser = dtParser;
     }
+
+    /**
+     * Returns true is the command changes the data and false otherwise.
+     */
+    public abstract boolean isMutating();
 }

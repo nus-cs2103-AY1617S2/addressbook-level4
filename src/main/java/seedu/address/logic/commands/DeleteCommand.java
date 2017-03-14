@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
@@ -39,12 +40,32 @@ public class DeleteCommand extends Command {
         ReadOnlyTask taskToDelete = lastShownList.get(targetIndex - 1);
 
         try {
+            saveCurrentState();
             model.deleteTask(taskToDelete);
         } catch (TaskNotFoundException tnfe) {
             assert false : "The target task cannot be missing";
         }
 
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
+    }
+
+    /**
+     * Save the data in task manager if command is mutating the data
+     */
+    public void saveCurrentState() {
+        if (isMutating()) {
+            try {
+                LogicManager.undoCommandHistory.addStorageHistory(model.getRawTaskManager().getImmutableTaskList(),
+                        model.getRawTaskManager().getImmutableLabelList());
+            } catch (CloneNotSupportedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public boolean isMutating() {
+        return true;
     }
 
 }
