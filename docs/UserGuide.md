@@ -18,7 +18,7 @@ By : `Team ToLuist`  &nbsp;&nbsp;&nbsp;&nbsp;
 2. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 3. Some example commands you can try:
-   * **`add`**` Try Out Todo List  d/11-12-2011` :
+   * **`add`**` Try Out Todo List` :
      adds a task named `Try Out Todo List` to the todo list.
    * **`delete`**` 3` : deletes the 3rd task shown in the current list.
    * **`exit`** : exits the app.
@@ -51,34 +51,33 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Adds a task to the todo list<br>
-Format: `add NAME [startdate/STARTDATE] [enddate/ENDDATE] [recurring/PERIOD(day/week/month)] [priority/PRIORITY] [tag/TAG]...`
-
-> Tasks can have any number of tags (including 0).
+Format: `add NAME [startdate/STARTDATE] [enddate/ENDDATE]`
 
 Examples:
 
 * `add Do Homework` <br>
   Adds a task called 'Do Homework'.
-* `add Meeting With Boss enddate/11-11-2011 19:30 startdate/11-11-2011 17:30` <br>
-  Adds a task called 'Meeting With Boss', sets the end date to be 11-11-2011 19:30, set to begin 11-11-2011 17:30.
-* `add Check Email enddate/today recurring/day` <br>
-  Adds a task called 'Check Email', sets the end date to be today's date, set to recur every day.
+* `add Meeting With Boss startdate/11-11-2011 17:30 enddate/11-11-2011 19:30` <br>
+  Adds a task called 'Meeting With Boss', set to begin 11-11-2011 17:30, and the end date to be 11-11-2011 19:30.
+* `add Check Email enddate/today` <br>
+  Adds a task called 'Check Email', sets the end date to be today's date.
 
 ### 2.3. Updating a task : `update`
 
 Updates an existing task in the todo list.<br>
-Format: `update INDEX [NAME] [startdate/STARTDATE] [enddate/ENDDATE] [recurring/PERIOD(day/week/month)] [priority/PRIORITY] [tag/TAG]...`
+Format: `update INDEX [NAME] [startdate/STARTDATE] [enddate/ENDDATE]`
 
 > * Updates the task at the specified `INDEX`. <br>
     The index refers to the index number shown in the last task listing.<br>
     The index **must be a positive integer** 1, 2, 3, ...
 > * Existing values will be updated to the input values.
-> * When editing tags, the existing tags of the task will be set to contain the new tags; the old tags will be removed.
 
 Examples:
 
-* `update 2 Assignment 3 tag/schoolwork`<br>
-  Updates the name of the 2nd task to be `Assignment 3` and adds the tag 'schoolwork' if it did not exist. If it already existed, removes the tag 'schoolwork'.
+* `update 2 Assignment 3`<br>
+  Updates the name of the 2nd task to be `Assignment 3`.
+* `update 3 startdate/today enddate/tomorrow`
+  Updates the start date and end date of the 3rd task to today and tomorrow respectively.
 
 ### 2.4. Filter all tasks containing any keyword in their name or tag or date: `filter`
 
@@ -107,21 +106,27 @@ Examples:
 
 ### 2.5. Deleting a task : `delete`
 
-Deletes the specified task from the todo list. Irreversible.<br>
+Deletes the specified task from the todo list. Reversible with `undo` command.<br>
 Format: `delete INDEX`
 
 > Deletes the task at the specified `INDEX`. <br>
 > The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+> The index **must be a positive integer** 1, 2, 3, ...<br>
+> Supports deletion of multiple indexes in a single command, by best effort matching.
 
 Examples:
 
-* `find`<br>
-  `delete 2`<br>
+* `delete 2`<br>
   Deletes the 2nd task in the todo list.
-* `find Project`<br>
-  `delete 1`<br>
-  Deletes the 1st task in the results of the `find` command.
+* `delete 3 - 6`<br>
+  Deletes the 3rd, 4th, 5th, and 6th task in the todo list.<br>
+  Note that the system is whitespace insensitive so `delete 3-6` or `delete 3- 6` would work as well.
+* `delete 3 -`<br>
+  Deletes from 3rd to last in the todo list.
+* `delete - 5`<br>
+  Deletes from first to 5th task in the todo list.
+* `delete 5, - 3, 7-8 10, 12 -`<br>
+  Deletes from 1st to 3rd, 5th, 7th, 8th, 10th, and from 12th to last task in the todo list.
 
 ### 2.6. Clearing all entries : `clear`
 
