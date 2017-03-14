@@ -34,13 +34,13 @@ public class MainWindow extends UiPart<Region> {
 
     // Independent Ui parts residing in this Ui container
     //private BrowserPanel browserPanel;
-    private TaskListPanel taskListPanel;
+    private TaskListPanel floatingTaskListPanel;
     private TaskListPanel eventListPanel;
     private TaskListPanel deadlineListPanel;
     private Config config;
 
-    @FXML
-    private AnchorPane browserPlaceholder;
+    //@FXML
+    //private AnchorPane browserPlaceholder;
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
@@ -122,9 +122,10 @@ public class MainWindow extends UiPart<Region> {
 
     void fillInnerParts() {
         //browserPanel = new BrowserPanel(browserPlaceholder);
-        taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredPersonList());
-        eventListPanel = new TaskListPanel(getEventListPlaceholder(), logic.getFilteredPersonList());
-        deadlineListPanel = new TaskListPanel(getDeadlineListPlaceholder(), logic.getFilteredPersonList());
+        //to-do: correctly display the lists
+        floatingTaskListPanel = new TaskListPanel("floatingTask", getTaskListPlaceholder());
+        eventListPanel = new TaskListPanel("event", getEventListPlaceholder(), logic.getFilteredPersonList());
+        deadlineListPanel = new TaskListPanel("deadline", getDeadlineListPlaceholder());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getGeekeepFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
@@ -213,7 +214,15 @@ public class MainWindow extends UiPart<Region> {
     }
 
     public TaskListPanel getTaskListPanel() {
-        return this.taskListPanel;
+        return this.floatingTaskListPanel;
+    }
+
+    public TaskListPanel getEventListPanel() {
+        return this.eventListPanel;
+    }
+
+    public TaskListPanel getDeadlineListPanel() {
+        return this.deadlineListPanel;
     }
 
     void loadPersonPage(ReadOnlyTask person) {

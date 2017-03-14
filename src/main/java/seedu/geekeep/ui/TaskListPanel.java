@@ -16,25 +16,62 @@ import seedu.geekeep.commons.util.FxViewUtil;
 import seedu.geekeep.model.task.ReadOnlyTask;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of tasks.
  */
 public class TaskListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
-    private static final String FXML = "PersonListPanel.fxml";
+    private static final String EVENTFXML = "EventListPanel.fxml";
+    private static final String FTASKFXML = "FloatingTaskListPanel.fxml";
+    private static final String DEADLINEFXML = "DeadlineListPanel.fxml";
 
     @FXML
-    private ListView<ReadOnlyTask> personListView;
+    private ListView<ReadOnlyTask> allListView;
 
-    public TaskListPanel(AnchorPane personListPlaceholder, ObservableList<ReadOnlyTask> personList) {
-        super(FXML);
-        setConnections(personList);
-        addToPlaceholder(personListPlaceholder);
+    @FXML
+    private ListView<ReadOnlyTask> upcomingListView;
+
+    @FXML
+    private ListView<ReadOnlyTask> completedListView;
+
+
+    //empty panel for v0.2
+    public TaskListPanel(String type, AnchorPane taskListPlaceholder) {
+        super(getFxmlFromType(type));
+        addToPlaceholder(taskListPlaceholder);
+    }
+    //usable for v0.2
+    public TaskListPanel(String type, AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> allList) {
+        super(getFxmlFromType(type));
+        setConnections(allList);
+        addToPlaceholder(taskListPlaceholder);
     }
 
-    private void setConnections(ObservableList<ReadOnlyTask> personList) {
-        personListView.setItems(personList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
-        setEventHandlerForSelectionChangeEvent();
+    public TaskListPanel(AnchorPane taskListPlaceholder, String type, ObservableList<ReadOnlyTask>... categories) {
+        super(getFxmlFromType(type));
+        for (ObservableList<ReadOnlyTask> list : categories) {
+            setConnections(list);
+        }
+        addToPlaceholder(taskListPlaceholder);
+    }
+    //strange
+    private static String getFxmlFromType(String type) {
+        if (type.equals("deadline")) {
+            return DEADLINEFXML;
+        } else if (type.equals("floatingTask")) {
+            return FTASKFXML;
+        } else {
+            return EVENTFXML;
+        }
+    }
+    //to-do to remove
+    private void setConnections(ObservableList<ReadOnlyTask> taskList) {
+        setConnections(taskList, allListView);
+    }
+
+    private void setConnections(ObservableList<ReadOnlyTask> taskList, ListView<ReadOnlyTask> taskListView) {
+        taskListView.setItems(taskList);
+        taskListView.setCellFactory(listView -> new PersonListViewCell());
+        setEventHandlerForSelectionChangeEvent(taskListView);
     }
 
     private void addToPlaceholder(AnchorPane placeHolderPane) {
@@ -43,8 +80,8 @@ public class TaskListPanel extends UiPart<Region> {
         placeHolderPane.getChildren().add(getRoot());
     }
 
-    private void setEventHandlerForSelectionChangeEvent() {
-        personListView.getSelectionModel().selectedItemProperty()
+    private void setEventHandlerForSelectionChangeEvent(ListView<ReadOnlyTask> taskListView) {
+        taskListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         logger.fine("Selection in person list panel changed to : '" + newValue + "'");
@@ -55,10 +92,15 @@ public class TaskListPanel extends UiPart<Region> {
 
     public void scrollTo(int index) {
         Platform.runLater(() -> {
-            personListView.scrollTo(index);
-            personListView.getSelectionModel().clearAndSelect(index);
+            upcomingListView.scrollTo(index);
+            upcomingListView.getSelectionModel().clearAndSelect(index);
         });
     }
+
+//  //to-do
+//  public void scrollToVersion2() {
+//
+//  }
 
     class PersonListViewCell extends ListCell<ReadOnlyTask> {
 
