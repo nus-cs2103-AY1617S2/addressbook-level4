@@ -112,7 +112,7 @@ public class UniqueTaskList implements Iterable<Task> {
                 throw new TaskAlreadyFinishedException();
             } else {
                 task.setFinishedStatus(true);
-                
+
                 // the following line is to trigger person list view to update
                 // according to the api:
                 // All changes in the ObservableList are propagated immediately to the FilteredList.
