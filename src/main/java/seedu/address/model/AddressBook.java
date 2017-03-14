@@ -74,7 +74,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
 //// person-level operations
-
+    
     /**
      * Adds a task to the TaskIt.
      * Also checks the new task's tags and updates {@link #tags} with any new tags found,
@@ -86,28 +86,28 @@ public class AddressBook implements ReadOnlyAddressBook {
         syncMasterTagListWith(t);
         tasks.add(t);
     }
-
+ 
     /**
-     * Updates the person in the list at position {@code index} with {@code editedReadOnlyPerson}.
-     * {@code AddressBook}'s tag list will be updated with the tags of {@code editedReadOnlyPerson}.
-     * @see #syncMasterTagListWith(Person)
+     * Updates the task in the list at position {@code index} with {@code editedTask}.
+     * {@code AddressBook}'s tag list will be updated with the tags of {@code editedTask}.
+     * @see #syncMasterTagListWith(Task)
      *
-     * @throws DuplicatePersonException if updating the person's details causes the person to be equivalent to
-     *      another existing person in the list.
+     * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
+     *      another existing task in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
-     
-    public void updatePerson(int index, ReadOnlyPerson editedReadOnlyPerson)
-            throws UniquePersonList.DuplicatePersonException {
-        assert editedReadOnlyPerson != null;
-
-        Person editedPerson = new Person(editedReadOnlyPerson);
-        syncMasterTagListWith(editedPerson);
+     */
+    public void updateTask(int index, ReadOnlyTask editedReadOnlyTask)
+            throws UniqueTaskList.DuplicateTaskException {
+        assert editedReadOnlyTask != null;
+        
+        Task editedTask = new Task(editedReadOnlyTask);
+        syncMasterTagListWith(editedTask);
         // TODO: the tags master list will be updated even though the below line fails.
-        // This can cause the tags master list to have additional tags that are not tagged to any person
-        // in the person list.
-        persons.updatePerson(index, editedPerson);
+        // This can cause the tags master list to have additional tags that are not tagged to any task
+        // in the task list.
+        tasks.updateTask(index, editedTask);
     }
-    */
+    
 
     /**
      * Ensures that every tag in this task:

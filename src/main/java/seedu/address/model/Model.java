@@ -3,8 +3,6 @@ package seedu.address.model;
 import java.util.Set;
 
 import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.person.UniquePersonList.DuplicatePersonException;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
@@ -27,14 +25,14 @@ public interface Model {
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
     /**
-     * Updates the person located at {@code filteredPersonListIndex} with {@code editedPerson}.
+     * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
      *
-     * @throws DuplicatePersonException if updating the person's details causes the person to be equivalent to
-     *      another existing person in the list.
-     * @throws IndexOutOfBoundsException if {@code filteredPersonListIndex} < 0 or >= the size of the filtered list.
+     * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
+     *      another existing task in the list.
+     * @throws IndexOutOfBoundsException if {@code filteredTaskListIndex} < 0 or >= the size of the filtered list.
      */
     void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-            throws UniquePersonList.DuplicatePersonException;
+            throws UniqueTaskList.DuplicateTaskException;
 
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<Task>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();

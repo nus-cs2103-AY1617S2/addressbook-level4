@@ -12,7 +12,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Adds a person to the address book.
+ * Add a new task to TaskIt
  */
 public class AddCommand extends Command {
 

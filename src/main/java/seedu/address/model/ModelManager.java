@@ -73,18 +73,17 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowAll();
         indicateAddressBookChanged();
     }
-/*
-    @Override
-    public void updatePerson(int filteredPersonListIndex, ReadOnlyPerson editedPerson)
-            throws UniquePersonList.DuplicatePersonException {
-        assert editedPerson != null;
 
-        int addressBookIndex = filteredPersons.getSourceIndex(filteredPersonListIndex);
-        addressBook.updatePerson(addressBookIndex, editedPerson);
+    public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
+            throws UniqueTaskList.DuplicateTaskException {
+        assert editedTask != null;
+
+        int addressBookIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
+        addressBook.updateTask(addressBookIndex, editedTask);
         indicateAddressBookChanged();
     }
-*/
-    //=========== Filtered Task List Accessors =============================================================
+
+//=========== Filtered Task List Accessors =============================================================
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
