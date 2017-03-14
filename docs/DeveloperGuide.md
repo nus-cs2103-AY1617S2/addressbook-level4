@@ -115,7 +115,7 @@ For example, the **`Logic`** component (see the class diagram given below) defin
 
 The _sequence diagram_ below shows how the components interact for the scenario where the user issues the command `kill 1`.
 
-<br><center><img src="images\SDforDeletePerson.png" width="800"></center><br>
+<br><center><img src="images/SDforDeletePerson.png" width="800"></center><br>
 <center>Figure 3 : Component Interactions for `kill 1` Command (Part 1)</center><br>
 
 >Note how the **`Model`** simply raises a `EzDoChangedEvent` when ezDo data is changed, instead of asking the **`Storage`** to save the updates to the hard disk.
@@ -124,7 +124,7 @@ The _sequence diagram_ below shows how the components interact for the scenario 
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
 
-<br><center><img src="images\SDforDeletePersonEventHandling.png" width="800"></center><br>
+<br><center><img src="images/SDforDeletePersonEventHandling.png" width="800"></center><br>
 <center>Figure 4 : Component Interactions for `kill 1` Command (Part 2)_</center><br>
 
 > Note how the event is propagated through the `EventsCenter` to the **`Storage`** and **`UI`** without **`Model`** having to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct coupling between components.
@@ -165,7 +165,7 @@ The **`UI`** component,
 
 ### Logic
 
-<br><center><img src="images\LogicClassDiagram" width="800"></center>
+<br><center><img src="images/LogicClassDiagram.png" width="800"></center>
 <br><center>Figure 6 : Structure of the Logic Component</center><br>
 
 **API** : [`Logic.java`](../src/main/java/seedu/ezdo/logic/Logic.java)
@@ -181,7 +181,7 @@ The **`UI`** component,
 
 The _sequence diagram_ (in Figure 7) shows the interactions within the `Logic` component for the _`execute("kill 1")`_ API call.
 
-<br><center><img src="images\DeletePersonSdForLogic" width="800"></center>
+<br><center><img src="images/DeletePersonSdForLogic.png" width="800"></center>
 <br><center>Figure 7: Interactions Inside the Logic Component</center><br>
 
 ---
@@ -189,7 +189,7 @@ The _sequence diagram_ (in Figure 7) shows the interactions within the `Logic` c
 ### Model 
 
 
-<center><img src="images\ModelClassDiagram" width="800"></center><br>
+<center><img src="images/ModelClassDiagram.png" width="800"></center><br>
 <center>Figure 8: Structure of the Model Component</center><br>
 
 **API** : [`Model.java`](../src/main/java/seedu/ezdo/model/Model.java)
@@ -205,7 +205,7 @@ The _sequence diagram_ (in Figure 7) shows the interactions within the `Logic` c
 
 ### Storage 
 
-<center><img src="images\StorageClassDiagram" width="800"></center><br>
+<center><img src="images/StorageClassDiagram.png" width="800"></center><br>
 <center>Figure 9: Structure of the Storage Component</center><br>
 
 **API** : [`Storage.java`](../src/main/java/seedu/ezdo/storage/Storage.java)
