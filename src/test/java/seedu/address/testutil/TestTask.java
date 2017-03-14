@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Note;
 import seedu.address.model.task.Priority;
@@ -16,6 +17,7 @@ public class TestTask implements ReadOnlyTask {
     private Note note;
     private Status status;
     private Priority priority;
+    private Deadline deadline;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -30,6 +32,7 @@ public class TestTask implements ReadOnlyTask {
         this.priority = taskToCopy.getPriority();
         this.status = taskToCopy.getStatus();
         this.note = taskToCopy.getNote();
+        this.deadline = taskToCopy.getDeadline();
         this.tags = taskToCopy.getTags();
     }
 
@@ -47,6 +50,10 @@ public class TestTask implements ReadOnlyTask {
 
     public void setPriority(Priority priority) {
         this.priority = priority;
+    }
+
+    public void setDeadline(Deadline deadline) {
+        this.deadline = deadline;
     }
 
     public void setTags(UniqueTagList tags) {
@@ -74,6 +81,11 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
+    public Deadline getDeadline() {
+        return deadline;
+    }
+
+    @Override
     public UniqueTagList getTags() {
         return tags;
     }
@@ -89,6 +101,7 @@ public class TestTask implements ReadOnlyTask {
         sb.append("n/" + this.getNote().value + " ");
         sb.append("p/" + Priority.toUserInputString(this.getPriority().value) + " ");
         sb.append("s/" + this.getStatus().value + " ");
+        sb.append("d/" + this.getDeadline().toString() + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }

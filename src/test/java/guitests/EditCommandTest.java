@@ -24,7 +24,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         int addressBookIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Create a google doc").withPriority("low")
-                .withStatus("incomplete").withNote("For our project proposal").build();
+                .withStatus("incomplete").withNote("For our project proposal").withDeadline("12/12/2017").build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
     }
@@ -90,7 +90,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
     @Test
     public void edit_duplicateTask_failure() {
         commandBox.runCommand("edit 3 Do laundry p/hi s/incomplete "
-                                + "n/Twice as many detergent this time t/chore");
+                                + "n/Twice as many detergent this time d/12/12/2017 t/chores");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
