@@ -55,7 +55,7 @@ By : `Team ToLuist`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nb
 6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
 7. Click OK twice. Rebuild project if prompted
 
-> Note to click on the `files from packages` text after ticking in order to enable the `Change...` button
+> You should click on the `files from packages` text after ticking in order to enable the `Change...` button
 
 ### 1.4. Troubleshooting project setup
 
@@ -96,17 +96,17 @@ Two of those classes play important roles at the architecture level.
   is used by components to communicate with other components using events (i.e. a form of _Event Driven_ design)
 * `LogsCenter` : Used by many classes to write log messages to the App's log file.
 
-The rest of the App consists of four components.
+The rest of the App consists of five components:
 
-* [**`UI`**](#ui-component) : The UI of the App.
-* [**`Dispatcher`**](#dispatcher-component): Invokes the suitable command executor.
-* [**`Controller`**](#logic-component) : The command executor.
-* [**`Model`**](#model-component) : Holds the data of the App in-memory.
-* [**`Storage`**](#storage-component) : Reads data from, and writes data to, the hard disk.
+* [**`UI`**](#ui-component) renders the GUI of the app.
+* [**`Dispatcher`**](#dispatcher-component) Invokes a suitable command executor.
+* [**`Controller`**](#logic-component) executes the command.
+* [**`Model`**](#model-component) holds the data of the application in the memory.
+* [**`Storage`**](#storage-component) reads data from, and writes data to, the hard disk.
 
 Each of the five components defines its _API_ in an `interface` with the same name as the Component.
 
-Our architecture follows the MVC Pattern: UI displays data and interacts with the user; Commands are passed through Dispatcher and routed to a suitable Controller, Controller receives requests from the Dispatcher and acts as the bridge between UI and Model; Model & Storage stores and maintain the data. A lot of inspirations come from MVC architectures used by web MVC frameworks such as [Ruby on Rails](http://paulhan221.tumblr.com/post/114731592051/rails-http-requests-for-mvc) and [Laravel](http://laravelbook.com/laravel-architecture/).
+Our architecture follows the MVC Pattern. UI displays data and interacts with the user. Commands are passed through Dispatcher and routed to a suitable Controller. Controller receives requests from the Dispatcher and acts as the bridge between UI and Model. Model & Storage stores and maintain the data. A lot of inspirations for this design are drawn from MVC architectures used by web MVC frameworks such as [Ruby on Rails](http://paulhan221.tumblr.com/post/114731592051/rails-http-requests-for-mvc) and [Laravel](http://laravelbook.com/laravel-architecture/).
 
 The sections below give more details of each component.
 
@@ -125,25 +125,25 @@ _Figure 2.1 : Structure of the UI Component_
 
 `UiView` is the building block for the UI. Each `UiView` should preferably be responsible for only one UI functionality.
 
-Some of the key properties of a `UiView` are described below
+Some of the key properties of a `UiView` are described below.
 
-####Associated with a FXML ####
+#### Associated with a FXML
 Each UIView class is associated with a FXML file. For example, `TaskView` is associated with `TaskView.fxml` file. The corresponding FXML file will be loaded automatically when a new `UiView` instance is created.
 
-#### Attachable to one single parent node ####
-Each `UiView` can be attached to a parent node. At any point in time, there should always be a maximum of one parent. The parent node must be an object of `Pane` class or any of its subclasses.
+#### Attachable to one single parent node
+You can attach a `UiView` to a parent node. At any point of time, a `UiView` should always have a maximum of one parent. The parent node must be an object of `Pane` class or any of its subclasses.
 
-#### Idempotent rendering ####
+#### Rendered idempotently
 
-After being attached to a parent node, a `UiView` can be rendered by calling its public method `.render()`. Each render call is guaranteed to be idempotent, i.e. subsequent calls to `render()` will render the same UI, as long as the data do not change.
+After attaching a `UiView` to a parent node, you can render it by invoking its public method `render()`. Each render call is guaranteed to be idempotent, i.e. subsequent calls to `render()` will render the same UI, as long as the data do not change.
 
 #### Able to load subviews
 
 Each `UiView` has a mini lifecycle. `viewDidLoad` is run after `render` is called. There are a few uses of `viewDidLoad`:
 
-- Control UI-specific properties which cannot be done in FXML
-- Set UI component values (e.g. using `setText` on an FXML `Text` object)
-- Attach subviews and propagate the chain
+- Control UI-specific properties which cannot be done in FXML.
+- Set UI component values (e.g. using `setText` on an FXML `Text` object).
+- Attach subviews and propagate the chain.
 
 #### 2.1.2. UiStore ####
 
@@ -153,60 +153,57 @@ Each `UiView` has a mini lifecycle. `viewDidLoad` is run after `render` is calle
 
 #### 2.1.3. Reactive nature of the UI ####
 
-To keep the UI predictable and to reduce the number of lines of codes used to dictate how the UI should change based on state changes, reactive programming is used. How the UI should be rendered can be simply declared based on the states held by the `UiStore`.
+To keep the UI predictable and to reduce the number of lines of codes used to dictate how the UI should change based on state changes, we make use of reactive programming in our UI. You can declare how the UI should be rendered based solely on the states held by the `UiStore`.
 
-The diagram below shows how the UI reacts when an add command is called. The UI simply needs to display all the tasks available in the UiStore, without knowing what is the exact change
+The diagram below shows how the UI reacts when an add command is called. The UI simply needs to display all the tasks available in the `UiStore`, without knowing what was the exact change.
 
 <img src="images/UiSequence.png" width="600"><br>
 _Figure 2.1.3 : Interactions Inside the UI for the `add study` Command_
 
-The reactive approach is borrowed from modern Javascript front-end frameworks such as React.js and Vue.js.
+The reactive approach is borrowed from modern Javascript front-end frameworks such as [React.js](https://facebook.github.io/react/) and [Vue.js](https://vuejs.org/v2/guide/reactivity.html).
 
-#### 2.2 Dispatcher component ####
+#### 2.2 Dispatcher component
 
 **API** : [`Dispatcher.java`](../src/main/java/seedu/toluist/dispatcher/Dispatcher.java)
 
-`Dispatcher` acts like a router in a Web MVC architecture. On receiving new input from the UI, `Dispatcher` decides which `Controller` is the best candidate to handle the input, instantiate and ask the `Controller` object to execute the event.
-
-`Dispatcher` acts as bridge from the Ui to the controllers, nothing more nothing less.
+`Dispatcher` acts like a router in a traditional Web MVC architecture. On receiving new input from the UI, `Dispatcher` decides which `Controller` is the best candidate to handle the input, then instantiates and asks the `Controller` object to execute the command.
 
 ### 2.3. Controller component
 
-<img src="images/ControllerClassDiagram.png" width="800"><br>
+<img src="images/ControllerClassDiagram.png" width="600"><br>
 _Figure 2.3.1 : Structure of the Controller Component_
 
 **API** : [`Controller.java`](../src/main/java/seedu/toluist/controller/Controller.java)
 
-1. `Controller` has a `execute` method to execute the command passed by the dispatcher.
-2. The command execution can affect the `Model`, the `Storage` (e.g. adding a task) and/or raise events.
-3. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the dispatcher.
-4. After every `execute` invocation, `Controller` can optionally set new states in the `UiStore` and ask the `UI` to re-render.
+- `Controller` has a `execute` method to execute the command passed by the dispatcher.
+- The command execution can affect the `Model`, the `Storage` (e.g. adding a task) and/or raise events.
+- The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the dispatcher.
+- After every `execute` invocation, `Controller` can optionally set new states in the `UiStore` and ask the `UI` to re-render.
 
 
-### 2.4. Model Component ###
+### 2.4. Model component
 
-The `Model`,
-* stores the task data.
-* does not depend on any of the other four components.
+**API** : [`TodoList.java`](../src/main/java/seedu/toluist/model/TodoList.java)
+
+The `Model` stores the task data for the app inside the memory.
 
 ### 2.5. Storage component
 
-**API** : [`Storage.java`](../src/main/java/seedu/toluist/storage/Storage.java)
+**API** : [`TodoListStorage.java`](../src/main/java/seedu/toluist/storage/TodoListStorage.java)
 
-The `Storage` acts like a database in the application. It provides read/write funcionalities to the `Model`, encapsuling all the inner implementation details. The `Storage` is a singleton, analogous to how a typical database service is always runninng in a traditional database-dependent application.
-
-The `Storage` component,
-* can save the task data in json format and read it back.
-* holds the history of all data changes
+The `Storage` component
+- acts like a database in the application.
+- provides read/write funcionalities to the `Model`, encapsuling all the inner implementation details.
+- can save the task data in json format and read it back.
+- holds the history of all data changes
 
 ####Undoable History
 
 `historyStack` hold the serialized json strings of the task list data. The minimum size of this stack is always 1. The json string at the top of the stack is the serialization of the current todo list data.
 
-To undo the most recent changes, we simply pop the irrelevant data the top of the `historyStack` and deserialize the json at the top of the stack into task list data.
+To undo the most recent changes, we simply pop the irrelevant strings in `historyStack` and then deserialize the json string at the top of the stack into task list data.
 
-This approach is reliable as it eliminates the need to implement an "unexecute" method and store the changes separately for each command that will mutate the task list.
-
+This approach is reliable as it eliminates the need to implement an `unexecute` method for each `Controller`, as well as stores the changes separately for each command that will mutate the task list.
 
 ### 2.6. Common classes
 
@@ -219,29 +216,28 @@ Classes used by multiple components are in the `seedu.toluist.commons` package.
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels
 and logging destinations.
 
-* The logging level can be controlled using the `logLevel` setting in the configuration file
-  (See [Configuration](#configuration))
-* The `Logger` for a class can be obtained using `LogsCenter.getLogger(Class)` which will log messages according to
-  the specified logging level
-* Currently log messages are output through: `Console` and to a `.log` file.
+* You can control the logging level by using the `logLevel` setting in the configuration file
+  (See [Configuration](#configuration)).
+* You can obtain the `Logger` for a class by using `LogsCenter.getLogger(Class)` which will log messages according to
+  the specified logging level.
+* Currently log messages are output through `Console` and to a `.log` file.
 
 **Logging Levels**
 
-* `SEVERE` : Critical problem detected which may possibly cause the termination of the application
-* `WARNING` : Can continue, but with caution
-* `INFO` : Information showing the noteworthy actions by the App
-* `FINE` : Details that is not usually noteworthy but may be useful in debugging
-  e.g. print the actual list instead of just its size
+* `SEVERE` : Critical problem detected which may possibly cause the termination of the application.
+* `WARNING` : Can continue, but with caution.
+* `INFO` : Information showing the noteworthy actions by the App.
+* `FINE` : Details that is not usually noteworthy but may be useful in debugging.
+  e.g. The actual list is printed instead of just its size.
 
 ### 3.2. Configuration
 
-Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
-(default: `config.json`):
-
+You can control certain properties of the application (e.g App name, logging level) through the configuration file
+(default: `config.json`).
 
 ## 4. Testing
 
-Tests can be found in the `./src/test/java` folder.
+You can find the tests in the `./src/test/java` folder.
 
 **In Eclipse**:
 
