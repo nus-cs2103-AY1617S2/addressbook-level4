@@ -33,7 +33,6 @@ public class TestTask implements ReadOnlyTask {
         this.done = done;
     }
 
-
     public void setTags(UniqueTagList tags) {
         this.tags = tags;
     }
@@ -47,7 +46,6 @@ public class TestTask implements ReadOnlyTask {
     public boolean isDone() {
         return done;
     }
-
 
     @Override
     public UniqueTagList getTags() {
@@ -66,4 +64,27 @@ public class TestTask implements ReadOnlyTask {
         return sb.toString();
     }
 
+    @Override
+    public TaskType getTaskType() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String getTaskDateTime() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void setToday() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public boolean isToday() {
+        // TODO Auto-generated method stub
+        return false;
+    }
 }
