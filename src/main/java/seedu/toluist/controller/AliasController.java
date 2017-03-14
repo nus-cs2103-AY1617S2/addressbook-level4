@@ -15,12 +15,12 @@ import seedu.toluist.ui.Ui;
 public class AliasController extends Controller {
     public static final String ALIAS_TERM = "alias";
     public static final String COMMAND_TERM = "command";
+    public static final String COMMAND_WORD = "alias";
 
     private static final String RESULT_MESSAGE_SUCCESS = "Alias %s for %s was added";
     private static final String RESULT_MESSAGE_FAILURE = "Alias %s for %s could not be added";
     private static final String RESULT_MESSAGE_RESERVED_WORD = "%s is a reserved word";
     private static final String COMMAND_TEMPLATE = "alias\\s+(?<alias>\\S+)\\s+(?<command>.+)";
-    private static final String COMMAND_WORD = "alias";
 
     private final AliasTable aliasConfig = Config.getInstance().getAliasTable();
 

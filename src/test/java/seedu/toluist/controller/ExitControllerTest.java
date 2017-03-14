@@ -8,12 +8,20 @@ import org.junit.Test;
 
 import seedu.toluist.ui.Ui;
 
+import java.util.Arrays;
+
 /**
  * Tests for ExitController
  */
 public class ExitControllerTest extends ControllerTest {
     protected Controller controllerUnderTest(Ui renderer) {
         return new ExitController(renderer);
+    }
+
+    @Test
+    public void getCommandWord() {
+        assertEquals(Arrays.asList(ExitController.COMMAND_WORD_EXIT, ExitController.COMMAND_WORD_QUIT),
+                    Arrays.asList(ExitController.getCommandWords()));
     }
 
     @Test
