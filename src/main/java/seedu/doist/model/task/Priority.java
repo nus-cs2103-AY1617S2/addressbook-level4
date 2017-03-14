@@ -63,14 +63,18 @@ public class Priority {
     }
 
     /**
-     * Process string to remove trailing whitespace, spaces and
+     * Process string to process all whitespace, spaces and new line and
      * change all characters to upper case so that it will be a
      * valid priority string
      * @returns string of the processed priority string
      */
     public static String processPriorityString(String priority) {
+        // remove all trailing spaces, new line characters etc
         String processedPriority = priority.trim();
-        processedPriority = processedPriority.replaceAll(" ", "_");
+        // remove all leading spaces, new line characters etc
+        processedPriority = processedPriority.replaceAll("^\\s+", "");
+        // replace in-between spaces, new line characters etc with _
+        processedPriority = processedPriority.replaceAll("\\s+", "_");
         processedPriority = processedPriority.toUpperCase();
         return processedPriority;
     }
