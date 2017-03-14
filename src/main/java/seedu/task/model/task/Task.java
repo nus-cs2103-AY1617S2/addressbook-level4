@@ -13,17 +13,21 @@ public class Task implements ReadOnlyTask {
 
     private Description description;
     private DueDate dueDate;
-
+    private Duration duration;
     private UniqueTagList tags;
 
 
     /**
-     * Every field must be present and not null.
+     * Constructor for Task
+     * @param description must not be null
+     * @param duration may be null
+     * @param tags must not be null
      */
-    public Task(Description description, DueDate dueDate, UniqueTagList tags) {
+    public Task(Description description, DueDate dueDate, Duration duration, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(description, tags);
         this.description = description;
         this.dueDate = dueDate;
+        this.duration = duration;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -31,9 +35,12 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getDescription(), source.getDueDate(), source.getTags());
+        this(source.getDescription(), source.getDueDate(), source.getDuration(), source.getTags());
     }
 
+    /**
+     * @param description must not be null
+     */
     public void setDescription(Description description) {
         assert description != null;
         this.description = description;
@@ -47,6 +54,15 @@ public class Task implements ReadOnlyTask {
     @Override
     public DueDate getDueDate() {
         return dueDate;
+    }
+
+    @Override
+    public Duration getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Duration duration) {
+        this.duration = duration;
     }
 
     @Override
@@ -68,6 +84,7 @@ public class Task implements ReadOnlyTask {
         assert replacement != null;
 
         this.setDescription(replacement.getDescription());
+        this.setDuration(replacement.getDuration());
         this.setTags(replacement.getTags());
     }
 
@@ -81,7 +98,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(description, tags);
+        return Objects.hash(description, duration, tags);
     }
 
     @Override

@@ -43,6 +43,7 @@ public class AddCommand extends Command {
         this.toAdd = new Task(
                 new Description(description),
                 new DueDate(dueDate),
+                null,
                 new UniqueTagList(tagSet)
         );
     }

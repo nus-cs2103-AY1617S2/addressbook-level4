@@ -10,6 +10,7 @@ public interface ReadOnlyTask {
 
     Description getDescription();
     DueDate getDueDate();
+    Duration getDuration();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -23,7 +24,8 @@ public interface ReadOnlyTask {
     default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                && other.getDescription().equals(this.getDescription()));
+                && other.getDescription().equals(this.getDescription())
+                && other.getDuration().equals(this.getDuration()));
     }
 
     /**
@@ -35,6 +37,9 @@ public interface ReadOnlyTask {
                 .append(" Due: ");
         if (getDueDate() != null) {
             builder.append(getDueDate());
+        }
+        if (getDuration() != null) {
+            builder.append(getDuration());
         }
         builder.append(" Tags: ");
         getTags().forEach(builder::append);
