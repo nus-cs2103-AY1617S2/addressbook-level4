@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import seedu.doit.commons.events.model.TaskManagerChangedEvent;
 import seedu.doit.commons.events.storage.DataSavingExceptionEvent;
+import seedu.doit.commons.events.storage.TaskManagerSaveChangedEvent;
 import seedu.doit.commons.exceptions.DataConversionException;
 import seedu.doit.model.ReadOnlyTaskManager;
 import seedu.doit.model.UserPrefs;
@@ -30,9 +31,17 @@ public interface Storage extends TaskManagerStorage, UserPrefsStorage {
     void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException;
 
     /**
-     * Saves the current version of the Task Manager to the hard disk.
-     * Creates the data file if it is missing.
-     * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
+     * Saves the current version of the Task Manager to the hard disk. Creates
+     * the data file if it is missing. Raises {@link DataSavingExceptionEvent}
+     * if there was an error during saving.
      */
-    void handleTaskManagerrChangedEvent(TaskManagerChangedEvent abce);
+    void handleTaskManagerChangedEvent(TaskManagerChangedEvent abce);
+
+    /**
+     * Creates a new file path for the Task Manager to save Saves the current
+     * version of the Task Manager to the hard disk at the new location. Creates
+     * the data file if it is missing. Raises {@link DataSavingExceptionEvent}
+     * if there was an error during saving.
+     */
+    void handleTaskManagerSaveChangedEvent(TaskManagerSaveChangedEvent event);
 }
