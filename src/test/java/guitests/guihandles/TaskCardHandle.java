@@ -19,6 +19,8 @@ public class TaskCardHandle extends GuiHandle {
     private static final String VENUE_FIELD_ID = "#venue";
     private static final String STARTTIME_FIELD_ID = "#startTime";
     private static final String ENDTIME_FIELD_ID = "#endTime";
+    private static final String URGENCYLEVEL_FIELD_ID = "#urgency Level";
+    private static final String DESCRIPTION_FIELD_ID = "#description";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private Node node;
@@ -46,6 +48,14 @@ public class TaskCardHandle extends GuiHandle {
 
     public String getStartTime() {
         return getTextFromLabel(STARTTIME_FIELD_ID);
+    }
+
+    public String getUrgencyLevel() {
+        return getTextFromLabel(URGENCYLEVEL_FIELD_ID);
+    }
+
+    public String getDescription() {
+        return getTextFromLabel(DESCRIPTION_FIELD_ID);
     }
 
     public List<String> getTags() {
@@ -77,6 +87,8 @@ public class TaskCardHandle extends GuiHandle {
                 && getVenue().equals(task.getVenue().value)
                 && getStartTime().equals(task.getStartTime().value)
                 && getEndTime().equals(task.getEndTime().value)
+                && getUrgencyLevel().equals(task.getUrgencyLevel().value)
+                && getDescription().equals(task.getDescription().value)
                 && getTags().equals(getTags(task.getTags()));
     }
 
@@ -88,6 +100,8 @@ public class TaskCardHandle extends GuiHandle {
                     && getStartTime().equals(handle.getStartTime())
                     && getEndTime().equals(handle.getEndTime())
                     && getVenue().equals(handle.getVenue())
+                    && getUrgencyLevel().equals(handle.getUrgencyLevel())
+                    && getDescription().equals(handle.getDescription())
                     && getTags().equals(handle.getTags());
         }
         return super.equals(obj);
