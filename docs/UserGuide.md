@@ -60,18 +60,6 @@ Format: `edit INDEX [TASKNAME] [d/DATE] [s/STARTTIME] [e/ENDTIME] [m/MESSAGE]`
 > Edits the task at the specified `INDEX`. The index refers to the 
 task number shown in the list. `INDEX` must be an exact match in order 
 for the function to work.
-  
-## View description of a task : `view`
-Displays details of the specified task.<br>
-Format: `view TASKNAME`
-
-> Views the task at the specified `TASKNAME`. 
-  The TASKNAME refers to the name shown in the list.
-  Fast Task will show all tasks that match with `TASKNAME`.
-
-Examples: 
-* `list groceries shopping`<br>
-  Views the desrciption in the task manager.
 
 ## Clearing all entries : `clear`
 Clears all tasks from the task manager.<br>
