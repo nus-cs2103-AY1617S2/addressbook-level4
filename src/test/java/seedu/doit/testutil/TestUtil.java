@@ -75,15 +75,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[] {
-                new Task(new Name("Ali Muster"), new Priority("9482424"), new EndTime("hans@google.com"), new Description("4th street"), new UniqueTagList()),
-                new Task(new Name("Boris Mueller"), new Priority("87249245"), new EndTime("ruth@google.com"), new Description("81th street"), new UniqueTagList()),
-                new Task(new Name("Carl Kurz"), new Priority("95352563"), new EndTime("heinz@yahoo.com"), new Description("wall street"), new UniqueTagList()),
-                new Task(new Name("Daniel Meier"), new Priority("87652533"), new EndTime("cornelia@google.com"), new Description("10th street"), new UniqueTagList()),
-                new Task(new Name("Elle Meyer"), new Priority("9482224"), new EndTime("werner@gmail.com"), new Description("michegan ave"), new UniqueTagList()),
-                new Task(new Name("Fiona Kunz"), new Priority("9482427"), new EndTime("lydia@gmail.com"), new Description("little tokyo"), new UniqueTagList()),
-                new Task(new Name("George Best"), new Priority("9482442"), new EndTime("anna@google.com"), new Description("4th street"), new UniqueTagList()),
-                new Task(new Name("Hoon Meier"), new Priority("8482424"), new EndTime("stefan@mail.com"), new Description("little india"), new UniqueTagList()),
-                new Task(new Name("Ida Mueller"), new Priority("8482131"), new EndTime("hans@google.com"), new Description("chicago ave"), new UniqueTagList())
+                new Task(new Name("Ali Muster"), new Priority("9482424"), new EndTime("next friday"), new Description("4th street"), new UniqueTagList()),
+                new Task(new Name("Boris Mueller"), new Priority("87249245"), new EndTime("29/5/17"), new Description("81th street"), new UniqueTagList()),
+                new Task(new Name("Carl Kurz"), new Priority("95352563"), new EndTime("friday"), new Description("wall street"), new UniqueTagList()),
+                new Task(new Name("Daniel Meier"), new Priority("87652533"), new EndTime("next monday"), new Description("10th street"), new UniqueTagList()),
+                new Task(new Name("Elle Meyer"), new Priority("9482224"), new EndTime("next monday"), new Description("michegan ave"), new UniqueTagList()),
+                new Task(new Name("Fiona Kunz"), new Priority("9482427"), new EndTime("sunday"), new Description("little tokyo"), new UniqueTagList()),
+                new Task(new Name("George Best"), new Priority("9482442"), new EndTime("22/12/17"), new Description("4th street"), new UniqueTagList()),
+                new Task(new Name("Hoon Meier"), new Priority("8482424"), new EndTime("9pm"), new Description("little india"), new UniqueTagList()),
+                new Task(new Name("Ida Mueller"), new Priority("8482131"), new EndTime("tomorrow 5pm"), new Description("chicago ave"), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
