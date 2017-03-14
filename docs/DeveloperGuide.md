@@ -4,12 +4,12 @@ By : `Team T09-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbs
 
 ---
 
-* 1. [Introduction](#intoduction)
-* 2. [Setting Up](#setting-up)
-* 3. [Design](#design)
-* 4. [Implementation](#implementation)
-* 5. [Testing](#testing)
-* 6. [Dev Ops](#dev-ops)
+1. [Introduction](#intoduction)
+2. [Setting Up](#setting-up)
+3. [Design](#design)
+4. [Implementation](#implementation)
+5. [Testing](#testing)
+6. [Dev Ops](#dev-ops)
 * [Appendix A: User Stories](#appendix-a--user-stories)
 * [Appendix B: Use Cases](#appendix-b--use-cases)
 * [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
@@ -41,13 +41,13 @@ This guide illustrates the design and implementation of TypeTask. It will guide 
 
 ### 2.2. Importing the project into Eclipse
 
-0. Fork this repo, and clone the fork to your computer
-1. Open Eclipse (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
+1. Fork this repo, and clone the fork to your computer
+2. Open Eclipse (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
    in the prerequisites above)
-2. Click `File` > `Import`
-3. Click `Gradle` > `Gradle Project` > `Next` > `Next`
-4. Click `Browse`, then locate the project's directory
-5. Click `Finish`
+3. Click `File` > `Import`
+4. Click `Gradle` > `Gradle Project` > `Next` > `Next`
+5. Click `Browse`, then locate the project's directory
+6. Click `Finish`
 
   > * If you are asked whether to 'keep' or 'overwrite' config files, choose to 'keep'.
   > * Depending on your connection speed and server load, it can even take up to 30 minutes for the set up to finish
@@ -55,6 +55,7 @@ This guide illustrates the design and implementation of TypeTask. It will guide 
   > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
 
 ### 2.3. Configuring Checkstyle
+
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
 3. Enter an arbitrary configuration name e.g. addressbook
