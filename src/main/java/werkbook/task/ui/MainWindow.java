@@ -199,17 +199,7 @@ public class MainWindow extends UiPart<Region> {
         return this.taskListPanel;
     }
 
-<<<<<<< HEAD:src/main/java/seedu/address/ui/MainWindow.java
-    void loadPersonPage(ReadOnlyTask name) {
-        browserPanel.loadPersonPage(name);
-=======
     void loadTaskPage(ReadOnlyTask task) {
         browserPanel.loadTaskPage(task);
->>>>>>> develop:src/main/java/werkbook/task/ui/MainWindow.java
     }
-
-    void releaseResources() {
-        browserPanel.freeResources();
-    }
-
 }

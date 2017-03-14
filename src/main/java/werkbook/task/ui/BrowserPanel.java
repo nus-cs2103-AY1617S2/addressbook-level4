@@ -4,8 +4,8 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
-import javafx.scene.web.WebView;
 import werkbook.task.commons.util.FxViewUtil;
 import werkbook.task.model.task.ReadOnlyTask;
 
@@ -23,14 +23,14 @@ public class BrowserPanel extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label tags;
+    private FlowPane tags;
     @FXML
     private Label description1;
     @FXML
     private Label start_time;
     @FXML
     private Label end_time;
-    
+
     /**
      * @param placeholder The AnchorPane where the BrowserPanel must be inserted
      */
@@ -41,15 +41,15 @@ public class BrowserPanel extends UiPart<Region> {
         FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
         placeholder.getChildren().add(browser);
     }
-    
-    public void TaskCard(ReadOnlyTask task, int displayedIndex) {
+
+    void loadTaskPage(ReadOnlyTask task) {
 
         name1.setText(task.getName().taskName);
-        id.setText(displayedIndex + ". ");
+//        id.setText(displayedIndex + ". ");
         description1.setText(task.getDescription().toString());
         start_time.setText(task.getStartDateTime().toString());
         end_time.setText(task.getEndDateTime().toString());
-        tags.setText(task.getTags().toString());
+        task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
 }
