@@ -30,7 +30,7 @@ public class Task implements ReadOnlyTask {
         this.startTime = starttime;
         this.endTime = endtime;
         this.urgencyLevel = urgencylevel;
-        this.description=description;
+        this.description = description;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -123,6 +123,8 @@ public class Task implements ReadOnlyTask {
         this.setStartTime(replacement.getStartTime());
         this.setVenue(replacement.getVenue());
         this.setEndTime(replacement.getEndTime());
+        this.setUrgencyLevel(replacement.getUrgencyLevel());
+        this.setDescription(replacement.getDescription());
         this.setTags(replacement.getTags());
     }
 
