@@ -58,7 +58,7 @@ public class Priority {
         return priority.matches(PRIORITY_VALIDATION_REGEX);
     }
     
-    private boolean hasPriority(){
+    public boolean hasPriority(){
         return !priority.equals(NO_PRIORITY);
     }
 

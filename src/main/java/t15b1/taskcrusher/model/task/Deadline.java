@@ -101,7 +101,7 @@ public class Deadline {
 		}
 	}
 
-	private boolean hasDeadline() {
+	public boolean hasDeadline() {
 		return !deadline.equals(NO_DEADLINE);
 	}
 

@@ -62,7 +62,7 @@ public class Description {
 		return description.matches(DESCRIPTION_VALIDATION_REGEX);
 	}
 
-	private boolean hasDescription() {
+	public boolean hasDescription() {
 		return !description.equals(NO_DESCRIPTION);
 	}
 
