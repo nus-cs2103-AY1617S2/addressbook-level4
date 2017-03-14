@@ -8,7 +8,7 @@ public class Schedule {
 		private Date date;
 		public String value;
 		
-	    public static final String MESSAGE_TIME_CONSTRAINTS = "cannot include 2 or more commas in time/date entry";
+	    public static final String MESSAGE_TIMING_CONSTRAINTS = "cannot include 2 or more commas in time/date entry";
 		/**
 		 * Represents an Event schedule in TaskManager.
 		 * Values cannot be null
@@ -21,7 +21,7 @@ public class Schedule {
 		public Schedule(String timetoparse) throws IllegalValueException {
 		    String[] stringArray= timetoparse.split(",");
 		    if (stringArray.length > 2 || stringArray.length == 0) {
-		        throw new IllegalValueException(MESSAGE_TIME_CONSTRAINTS);
+		        throw new IllegalValueException(MESSAGE_TIMING_CONSTRAINTS);
 		    }
             if (stringArray.equals(" ")) {
                 this.time = new Timing(" ");
