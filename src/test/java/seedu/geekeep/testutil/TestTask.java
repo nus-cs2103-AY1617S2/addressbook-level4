@@ -9,7 +9,7 @@ import seedu.geekeep.model.task.Title;
 /**
  * A mutable person object. For testing only.
  */
-public class TestPerson implements ReadOnlyTask {
+public class TestTask implements ReadOnlyTask {
 
     private Title title;
     private Location location;
@@ -17,14 +17,14 @@ public class TestPerson implements ReadOnlyTask {
     private DateTime endDateTime;
     private UniqueTagList tags;
 
-    public TestPerson() {
+    public TestTask() {
         tags = new UniqueTagList();
     }
 
     /**
      * Creates a copy of {@code personToCopy}.
      */
-    public TestPerson(TestPerson personToCopy) {
+    public TestTask(TestTask personToCopy) {
         this.title = personToCopy.getTitle();
         this.endDateTime = personToCopy.getEndDateTime();
         this.startDateTime = personToCopy.getStartDateTime();
@@ -90,5 +90,11 @@ public class TestPerson implements ReadOnlyTask {
     @Override
     public String toString() {
         return getAsText();
+    }
+
+    @Override
+    public boolean isDone() {
+        // TODO Auto-generated method stub
+        return false;
     }
 }
