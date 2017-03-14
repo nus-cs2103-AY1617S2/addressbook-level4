@@ -30,6 +30,12 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by the given keywords */
     void updateFilteredTaskList(Set<String> keywords);
 
+    /** Updates the filter of the filtered task list to filter by status of the tasks */
+    void updateFilteredTaskListToShowDone();
+
+    /** Updates the filter of the filtered task list to filter by status of the tasks */
+    void updateFilteredTaskListToShowUndone();
+
     /**
      * Updates the person located at {@code filteredTaskListIndex} with {@code editedTask}.
      *
@@ -41,5 +47,11 @@ public interface Model {
      */
     void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException;
+
+    /** Mark the specified task as done */
+    void markTaskDone(int filteredTaskListIndex);
+
+    /** Mark the specified task as undone */
+    void markTaskUndone(int filteredTaskListIndex);
 
 }
