@@ -189,7 +189,7 @@ public class LogicManagerTest {
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Title d/not a date p/1 i/valid,instruction",
+        assertCommandFailure("add Valid Title d/today i/valid,instruction",
                 expectedMessage);
         assertCommandFailure("add Valid Title tomorrow validDate.butNoPrefix i/valid, instruction", expectedMessage);
         assertCommandFailure("add Valid Title d/tomorrow p/1 valid, instruction",
@@ -363,7 +363,7 @@ public class LogicManagerTest {
 
         List<Task> fourTasks = helper.generateTaskList(p1, pTarget1, p2, pTarget2);
         AddressBook expectedAB = helper.generateAddressBook(fourTasks);
-        List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2);
+        List<Task> expectedList = helper.generateTaskList(pTarget2);
         helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find KEY",
@@ -382,7 +382,7 @@ public class LogicManagerTest {
 
         List<Task> fourTasks = helper.generateTaskList(p3, p1, p4, p2);
         AddressBook expectedAB = helper.generateAddressBook(fourTasks);
-        List<Task> expectedList = fourTasks;
+        List<Task> expectedList = helper.generateTaskList(p3, p4);
         helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find KEY",

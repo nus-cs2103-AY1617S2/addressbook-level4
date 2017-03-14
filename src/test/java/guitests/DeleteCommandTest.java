@@ -9,7 +9,8 @@ import seedu.address.testutil.TestTask;
 import seedu.address.testutil.TestUtil;
 
 public class DeleteCommandTest extends AddressBookGuiTest {
-
+	
+	/*
     @Test
     public void delete() {
 
@@ -33,6 +34,7 @@ public class DeleteCommandTest extends AddressBookGuiTest {
         assertResultMessage("The task index provided is invalid");
 
     }
+    */
 
     /**
      * Runs the delete command to delete the person at specified index and confirms the result is correct.
