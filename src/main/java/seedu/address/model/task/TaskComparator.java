@@ -6,7 +6,7 @@ public class TaskComparator implements Comparator<Task> {
 
     @Override
     public int compare(Task task1, Task task2) {
-        return task1.getUrgencyLevel().getIntValue() - task2.getUrgencyLevel().getIntValue();
+        return task2.getUrgencyLevel().getIntValue() - task1.getUrgencyLevel().getIntValue();
     }
 
 }

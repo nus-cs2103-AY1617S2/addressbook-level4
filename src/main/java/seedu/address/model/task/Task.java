@@ -148,7 +148,7 @@ public class Task implements ReadOnlyTask, Comparable<Task>{
     
     @Override
     public int compareTo(Task task) {
-        return this.getUrgencyLevel().getIntValue() - task.getUrgencyLevel().getIntValue();
+        return task.getUrgencyLevel().getIntValue() - this.getUrgencyLevel().getIntValue();
     }
 
 }
