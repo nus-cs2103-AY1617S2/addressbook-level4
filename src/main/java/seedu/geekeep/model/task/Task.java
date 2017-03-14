@@ -141,7 +141,6 @@ public class Task implements ReadOnlyTask {
         return startDateTime == null && endDateTime != null;
     }
 
-    @Override
     public boolean isDone() {
         return isDone;
     }

@@ -92,9 +92,5 @@ public class TestTask implements ReadOnlyTask {
         return getAsText();
     }
 
-    @Override
-    public boolean isDone() {
-        // TODO Auto-generated method stub
-        return false;
-    }
+
 }

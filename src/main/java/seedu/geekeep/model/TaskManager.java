@@ -78,7 +78,9 @@ public class TaskManager implements ReadOnlyTaskManager {
 
     @Override
     public ObservableList<ReadOnlyTask> getTaskList() {
+
         return new UnmodifiableObservableList<>(tasks.asObservableList());
+
     }
 
     @Override
@@ -103,7 +105,9 @@ public class TaskManager implements ReadOnlyTaskManager {
     public void resetData(ReadOnlyTaskManager newData) {
         assert newData != null;
         try {
+
             setTasks(newData.getTaskList());
+
         } catch (UniqueTaskList.DuplicateTaskException e) {
             assert false : "TaskManager should not have duplicate tasks";
         }

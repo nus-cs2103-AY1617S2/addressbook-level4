@@ -21,16 +21,16 @@ public interface Storage extends TaskManagerStorage, UserPrefsStorage {
     void saveUserPrefs(UserPrefs userPrefs) throws IOException;
 
     @Override
-    String getAddressBookFilePath();
+    String getTaskManagerFilePath();
 
     @Override
-    Optional<ReadOnlyTaskManager> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException;
 
     @Override
-    void saveAddressBook(ReadOnlyTaskManager addressBook) throws IOException;
+    void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException;
 
     /**
-     * Saves the current version of the Address Book to the hard disk.
+     * Saves the current version of the Task Manager to the hard disk.
      *   Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */

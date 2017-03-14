@@ -57,7 +57,6 @@ public interface ReadOnlyTask {
                         && other.getTitle().equals(this.getTitle())); // state checks here onwards
     }
 
-    boolean isDone();
 
     boolean isFloatingTask();
 
