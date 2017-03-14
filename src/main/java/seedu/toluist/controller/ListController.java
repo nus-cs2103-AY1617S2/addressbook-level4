@@ -1,5 +1,7 @@
 package seedu.toluist.controller;
 
+import java.util.HashMap;
+
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.Ui;
@@ -21,6 +23,14 @@ public class ListController extends Controller {
         UiStore.getInstance().setTask(todoList.getTasks());
         renderer.render();
         return new CommandResult(RESULT_MESSAGE);
+    }
+
+    public HashMap<String, String> tokenize(String command) {
+        return null; // not used
+    }
+
+    public boolean matchesCommand(String command) {
+        return true; // matches everything
     }
 
     public static String[] getCommandWords() {

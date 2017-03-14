@@ -42,7 +42,6 @@ public class UnaliasController extends Controller {
         }
     }
 
-    @Override
     public HashMap<String, String> tokenize(String command) {
         Pattern pattern = Pattern.compile(COMMAND_TEMPLATE);
         Matcher matcher = pattern.matcher(command.trim());
@@ -52,7 +51,6 @@ public class UnaliasController extends Controller {
         return tokens;
     }
 
-    @Override
     public boolean matchesCommand(String command) {
         return command.matches(COMMAND_TEMPLATE);
     }

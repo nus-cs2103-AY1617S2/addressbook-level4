@@ -36,8 +36,7 @@ public class DeleteTaskController extends Controller {
         TodoList todoList = TodoList.load();
         CommandResult commandResult = new CommandResult("");
 
-        TaskTokenizer taskTokenizer = new TaskTokenizer(COMMAND_TEMPLATE);
-        HashMap<String, String> tokens = taskTokenizer.tokenize(command, true, false);
+        HashMap<String, String> tokens = tokenize(command);
 
         String indexToken = tokens.get(TaskTokenizer.TASK_VIEW_INDEX);
         List<Integer> indexes = IndexTokenizer.splitIndexes(indexToken, todoList.getTasks().size());
@@ -50,6 +49,11 @@ public class DeleteTaskController extends Controller {
         }
 
         return commandResult;
+    }
+
+    public HashMap<String, String> tokenize(String command) {
+        TaskTokenizer taskTokenizer = new TaskTokenizer(COMMAND_TEMPLATE);
+        return taskTokenizer.tokenize(command, true, false);
     }
 
     private CommandResult delete(TodoList todoList, List<Task> tasks) {
@@ -67,7 +71,6 @@ public class DeleteTaskController extends Controller {
         return new CommandResult(String.format(RESULT_MESSAGE_DELETE_TASK, taskType, task.getDescription()));
     }
 
-    @Override
     public boolean matchesCommand(String command) {
         return command.matches(COMMAND_TEMPLATE);
     }

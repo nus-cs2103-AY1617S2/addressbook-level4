@@ -40,19 +40,18 @@ public abstract class Controller {
      * @param command
      * @return
      */
-    protected HashMap<String, String> tokenize(String command) {
-        return new HashMap<>();
-    }
+    public abstract HashMap<String, String> tokenize(String command);
 
     /**
      * Check if Controller can handle this command
      * @param command
      * @return
      */
-    public boolean matchesCommand(String command) {
-        return true;
-    }
+    public abstract boolean matchesCommand(String command);
 
+    /**
+     * Returns command word(s) used by controller
+     */
     public static String[] getCommandWords() {
         return new String[] {};
     }

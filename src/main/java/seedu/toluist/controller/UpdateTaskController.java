@@ -37,8 +37,7 @@ public class UpdateTaskController extends Controller {
         TodoList todoList = TodoList.load();
         CommandResult commandResult = new CommandResult("");
 
-        TaskTokenizer taskTokenizer = new TaskTokenizer(COMMAND_TEMPLATE);
-        HashMap<String, String> tokens = taskTokenizer.tokenize(command, true, true);
+        HashMap<String, String> tokens = tokenize(command);
 
         String description = tokens.get(TaskTokenizer.TASK_DESCRIPTION);
 
@@ -62,6 +61,11 @@ public class UpdateTaskController extends Controller {
         return commandResult;
     }
 
+    public HashMap<String, String> tokenize(String command) {
+        TaskTokenizer taskTokenizer = new TaskTokenizer(COMMAND_TEMPLATE);
+        return taskTokenizer.tokenize(command, true, true);
+    }
+
     private CommandResult update(Task task, String description,
             LocalDateTime startDateTime, LocalDateTime endDateTime) {
         if (!description.isEmpty()) {
@@ -76,7 +80,6 @@ public class UpdateTaskController extends Controller {
         return new CommandResult(RESULT_MESSAGE_UPDATE_TASK);
     }
 
-    @Override
     public boolean matchesCommand(String command) {
         return command.matches(COMMAND_TEMPLATE);
     }

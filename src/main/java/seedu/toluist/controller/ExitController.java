@@ -1,5 +1,7 @@
 package seedu.toluist.controller;
 
+import java.util.HashMap;
+
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.ui.Ui;
 
@@ -21,7 +23,10 @@ public class ExitController extends Controller {
         return new CommandResult("");
     }
 
-    @Override
+    public HashMap<String, String> tokenize(String command) {
+        return null; // not used
+    }
+
     public boolean matchesCommand(String command) {
         return command.matches(COMMAND_TEMPLATE);
     }
