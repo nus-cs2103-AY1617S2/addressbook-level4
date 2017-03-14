@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.doit.logic.Logic;
 import seedu.doit.model.item.ReadOnlyEvent;
 
 public class EventCard extends UiPart<Region> {
@@ -26,9 +27,10 @@ public class EventCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    public EventCard(ReadOnlyEvent event, int displayedIndex) {
+    public EventCard(ReadOnlyEvent event, int displayedIndex, Logic logic) {
         super(FXML);
         this.name.setText(event.getName().fullName);
+        displayedIndex += logic.getFilteredTaskList().size();
         this.id.setText(displayedIndex + ". ");
         this.priority.setText(event.getPriority().value);
         this.description.setText(event.getDescription().value);
