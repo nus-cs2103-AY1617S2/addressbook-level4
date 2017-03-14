@@ -28,7 +28,6 @@ import seedu.doit.model.tag.UniqueTagList;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
         + "by the index number used in the last task list. "
         + "Existing values will be overwritten by the input values.\n"
@@ -41,31 +40,12 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
 
     private final int filteredTaskListIndex;
-    private EditFloatingTaskDescriptor editFloatingTaskDescriptor;
-    private EditTaskDescriptor editTaskDescriptor;
     private EditEventDescriptor editEventDescriptor;
 
     /**
      * @param filteredTaskListIndex the index of the task in the filtered task list to edit
      * @param editTaskDescriptor    details to edit the task with
      */
-    public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
-        assert filteredTaskListIndex > 0;
-        assert editTaskDescriptor != null;
-
-        // converts filteredTaskListIndex from one-based to zero-based.
-        this.filteredTaskListIndex = filteredTaskListIndex - 1;
-        this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
-    }
-
-    public EditCommand(int filteredTaskListIndex, EditFloatingTaskDescriptor editTaskDescriptor) {
-        assert filteredTaskListIndex > 0;
-        assert editTaskDescriptor != null;
-
-        // converts filteredTaskListIndex from one-based to zero-based.
-        this.filteredTaskListIndex = filteredTaskListIndex - 1;
-        this.editFloatingTaskDescriptor = new EditFloatingTaskDescriptor(editTaskDescriptor);
-    }
 
     public EditCommand(int filteredTaskListIndex, EditEventDescriptor editTaskDescriptor) {
         assert filteredTaskListIndex > 0;
@@ -140,7 +120,7 @@ public class EditCommand extends Command {
         if (filteredTaskListIndex <= taskSize) {
             ReadOnlyTask taskToEdit = lastShownTaskList.get(filteredTaskListIndex);
             assert taskToEdit != null;
-            Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+            Task editedTask = createEditedTask(taskToEdit, editEventDescriptor);
 
             try {
                 model.updateTask(filteredTaskListIndex, editedTask);
@@ -164,7 +144,7 @@ public class EditCommand extends Command {
 
         } else if (taskAndEventSize < filteredTaskListIndex && filteredTaskListIndex <= totalSize) {
             ReadOnlyFloatingTask taskToEdit = lastShownFloatingTaskList.get(filteredTaskListIndex - taskAndEventSize);
-            FloatingTask editedFloatingTask = createEditedFloatingTask(taskToEdit, editFloatingTaskDescriptor);
+            FloatingTask editedFloatingTask = createEditedFloatingTask(taskToEdit, editEventDescriptor);
 
             try {
                 model.updateFloatingTask(filteredTaskListIndex - taskAndEventSize,
