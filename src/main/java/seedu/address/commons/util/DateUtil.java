@@ -38,7 +38,7 @@ public class DateUtil {
      */
     public static boolean haveIntersection(DateValue firstBegin, DateValue firstEnd,
                                                 DateValue secondBegin, DateValue secondEnd) {
-        if (firstEnd.after(secondBegin) || secondEnd.after(firstEnd)) {
+        if (firstBegin.after(secondEnd) || secondBegin.after(firstEnd)) {
             return false;
         } else {
             return true;

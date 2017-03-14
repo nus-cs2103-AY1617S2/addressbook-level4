@@ -43,6 +43,16 @@ public class DateOnly extends DateValue {
     }
 
     @Override
+    public boolean after(DateValue date) {
+        return getBeginning().getValue().after(date.getValue());
+    }
+
+    @Override
+    public boolean before(DateValue date) {
+        return getEnding().getValue().before(date.getValue());
+    }
+
+    @Override
     public String toString() {
         return new SimpleDateFormat(READABLE_DATEONLY_OUTPUT_FORMAT).format(date);
     }

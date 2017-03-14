@@ -26,7 +26,7 @@ public class Status {
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String[] ALLOWED_STATUS_VALUES = {
-        "Done", "Undone", "Overdue",
+        "Done", "Undone", "Floating", "Overdue",
         "Today", "Tomorrow", "This week", "In future"
     };
 
