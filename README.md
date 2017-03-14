@@ -7,12 +7,14 @@
 
 <img src="docs/images/Ui.png" width="600"><br>
 
-* Tâche is a desktop Task Manager application. It has a GUI but most of the user interactions happen using
-  a CLI (Command Line Interface).
+* Tâche is a desktop Task Manager. 
 * It is a Java sample application intended for users to manage their to-do items and events in a systematic way. 
+* It has a GUI but most of the user interactions happen using
+  a CLI (Command Line Interface).
 * The application supports:
-	* **Floating Tasks** (tasks without specific times)
+	* **Events** (i.e. have a start time and end time)
 	* **Deadlines** (tasks that have to be done before a specific deadline)
+	* **Floating Tasks** (tasks without specific times)
 
 #### Site Map
 * [User Guide](docs/UserGuide.md)
