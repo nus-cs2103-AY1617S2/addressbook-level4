@@ -1,6 +1,6 @@
 # TaskManager - User Guide
 
-By : `Team CS2103-W15-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team CS2103-W15-B1` Since: `Jun 2016` Licence: `MIT`
 
 ---
 
