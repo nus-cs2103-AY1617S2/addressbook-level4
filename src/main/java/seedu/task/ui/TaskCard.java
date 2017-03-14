@@ -37,7 +37,7 @@ public class TaskCard extends UiPart<Region> {
         startDate.setText(task.getStartDate().toString());
         endDate.setText(task.getEndDate().toString());
         loc.setText(task.getLocation().value);
-        if (task.isDone() == true) {
+        if (task.isDone()) {
             done.setText("Done");
         } else {
             done.setText("Not Done");
