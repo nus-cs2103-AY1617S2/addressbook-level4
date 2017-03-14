@@ -42,8 +42,8 @@ public class SampleDataUtil {
                     false,
                     new UniqueLabelList("classmates")),
                 new Task(new Title("Meet Roy Balakrishnan for coffee"),
-                    Optional.ofNullable(new Deadline("next Monday")),
-                    Optional.ofNullable(new Deadline("next Saturday")),
+                    Optional.ofNullable(new Deadline("next Monday 1900")),
+                    Optional.ofNullable(new Deadline("next Saturday 1900")),
                     false,
                     new UniqueLabelList("colleagues"))
             };
