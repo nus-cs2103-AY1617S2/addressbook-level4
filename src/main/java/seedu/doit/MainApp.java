@@ -20,8 +20,12 @@ import seedu.doit.commons.util.ConfigUtil;
 import seedu.doit.commons.util.StringUtil;
 import seedu.doit.logic.Logic;
 import seedu.doit.logic.LogicManager;
+import seedu.doit.model.EventManager;
+import seedu.doit.model.FloatingTaskManager;
 import seedu.doit.model.Model;
 import seedu.doit.model.ModelManager;
+import seedu.doit.model.ReadOnlyEventManager;
+import seedu.doit.model.ReadOnlyFloatingTaskManager;
 import seedu.doit.model.ReadOnlyTaskManager;
 import seedu.doit.model.TaskManager;
 import seedu.doit.model.UserPrefs;
@@ -76,22 +80,28 @@ public class MainApp extends Application {
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
         Optional<ReadOnlyTaskManager> taskManagereOptional;
-        ReadOnlyTaskManager initialData;
+        ReadOnlyTaskManager initialTaskManagerData;
+        ReadOnlyFloatingTaskManager initialFloatingTaskManagerData;
+        ReadOnlyEventManager initialEventManagerData;
         try {
             taskManagereOptional = storage.readTaskManager();
             if (!taskManagereOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample TaskManager");
             }
-            initialData = taskManagereOptional.orElseGet(SampleDataUtil::getSampleTaskManager);
+            initialTaskManagerData = taskManagereOptional.orElseGet(SampleDataUtil::getSampleTaskManager);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty TaskManager");
-            initialData = new TaskManager();
+            initialTaskManagerData = new TaskManager();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty TaskManager");
-            initialData = new TaskManager();
+            initialTaskManagerData = new TaskManager();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        initialFloatingTaskManagerData = new FloatingTaskManager();
+        initialEventManagerData = new EventManager();
+
+        return new ModelManager(initialTaskManagerData, initialFloatingTaskManagerData,
+                                initialEventManagerData, userPrefs);
     }
 
     private void initLogging(Config config) {

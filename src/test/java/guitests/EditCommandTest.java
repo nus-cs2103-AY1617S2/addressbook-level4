@@ -8,9 +8,9 @@ import org.junit.Test;
 import guitests.guihandles.TaskCardHandle;
 import seedu.doit.commons.core.Messages;
 import seedu.doit.logic.commands.EditCommand;
+import seedu.doit.model.item.Name;
+import seedu.doit.model.item.Priority;
 import seedu.doit.model.tag.Tag;
-import seedu.doit.model.task.Name;
-import seedu.doit.model.task.Priority;
 import seedu.doit.testutil.TaskBuilder;
 import seedu.doit.testutil.TestTask;
 
@@ -23,11 +23,11 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby p/91234567 e/bobby@gmail.com d/Block 123, Bobby Street 3 t/husband";
+        String detailsToEdit = "Bobby p/low e/tomorrow d/Block 123, Bobby Street 3 t/husband";
         int taskManagerIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withName("Bobby").withPriority("91234567")
-            .withDeadline("bobby@gmail.com").withDescription("Block 123, Bobby Street 3").withTags("husband").build();
+        TestTask editedTask = new TaskBuilder().withName("Bobby").withPriority("low")
+            .withDeadline("tomorrow").withDescription("Block 123, Bobby Street 3").withTags("husband").build();
 
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
@@ -100,7 +100,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_duplicateTask_failure() {
-        commandBox.runCommand("edit 3 Alice Pauline p/85355255 e/1 "
+        commandBox.runCommand("edit 3 Alice Pauline p/low e/friday "
             + "d/123, Jurong West Ave 6, #08-111 t/friends");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }

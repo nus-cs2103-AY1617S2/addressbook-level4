@@ -5,7 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.doit.model.task.ReadOnlyTask;
+import seedu.doit.model.item.ReadOnlyTask;
 
 public class TaskCard extends UiPart<Region> {
 
@@ -32,7 +32,7 @@ public class TaskCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         priority.setText(task.getPriority().value);
         description.setText(task.getDescription().value);
-        deadline.setText(task.getDeadline().value);
+        deadline.setText(task.getEndTime().value);
         initTags(task);
     }
 

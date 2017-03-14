@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import seedu.doit.model.task.ReadOnlyTask;
+import seedu.doit.model.item.ReadOnlyTask;
 
 public class SelectCommandTest extends TaskManagerGuiTest {
 

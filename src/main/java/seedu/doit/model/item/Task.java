@@ -1,4 +1,4 @@
-package seedu.doit.model.task;
+package seedu.doit.model.item;
 
 import java.util.Objects;
 
@@ -13,18 +13,18 @@ public class Task implements ReadOnlyTask {
 
     private Name name;
     private Priority priority;
-    private Deadline deadline;
+    private EndTime endTime;
     private Description description;
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Priority priority, Deadline deadline, Description description, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, priority, deadline, description, tags);
+    public Task(Name name, Priority priority, EndTime endTime, Description description, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, priority, endTime, description, tags);
         this.name = name;
         this.priority = priority;
-        this.deadline = deadline;
+        this.endTime = endTime;
         this.description = description;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
@@ -33,7 +33,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getPriority(), source.getDeadline(), source.getDescription(), source.getTags());
+        this(source.getName(), source.getPriority(), source.getEndTime(), source.getDescription(), source.getTags());
     }
 
     @Override
@@ -56,13 +56,13 @@ public class Task implements ReadOnlyTask {
         this.priority = priority;
     }
 
-    public Deadline getDeadline() {
-        return deadline;
+    public EndTime getEndTime() {
+        return endTime;
     }
 
-    public void setDeadline(Deadline deadline) {
-        assert deadline != null;
-        this.deadline = deadline;
+    public void setEndTime(EndTime endTime) {
+        assert endTime != null;
+        this.endTime = endTime;
     }
 
     @Override
@@ -95,7 +95,7 @@ public class Task implements ReadOnlyTask {
 
         this.setName(replacement.getName());
         this.setPriority(replacement.getPriority());
-        this.setDeadline(replacement.getDeadline());
+        this.setEndTime(replacement.getEndTime());
         this.setDescription(replacement.getDescription());
         this.setTags(replacement.getTags());
     }
@@ -110,7 +110,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, priority, deadline, description, tags);
+        return Objects.hash(name, priority, endTime, description, tags);
     }
 
     @Override
