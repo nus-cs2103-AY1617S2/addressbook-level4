@@ -4,28 +4,36 @@ import java.util.Stack;
 
 import seedu.todolist.logic.commands.Command;
 import seedu.todolist.model.Model;
+import seedu.todolist.model.ReadOnlyToDoList;
+import seedu.todolist.model.ToDoList;
 
 public class UndoManager {
 
     protected Model model;
-    Stack <CommandAndState> StateStack;
-    Stack <CommandAndState> UndoStack;
+    private Stack <CommandAndState> stateStack;
+    private Stack <CommandAndState> undoStack;
 
-    public UndoManager() {
-		StateStack = new Stack <CommandAndState> ();
-		UndoStack = new Stack <CommandAndState> ();
-	}
+    public UndoManager(Model model) {
+        this.model = model;
+        stateStack = new Stack <CommandAndState> ();
+        undoStack = new Stack <CommandAndState> ();
+    }
 
     public void addMutatingTask(Command command) {
-		StateStack.push(new CommandAndState(command, model.getToDoList()));
-	}
+        ReadOnlyToDoList previousState = new ToDoList(model.getToDoList());
+        stateStack.push(new CommandAndState(command, previousState));
+    }
+
+    public Stack<CommandAndState> getStack() {
+        return stateStack;
+    }
 
     public CommandAndState getCommandAndStateToUndo() {
-    	return StateStack.peek();
+        return stateStack.peek();
     }
 
     public void undoLatestTask() {
-    	UndoStack.push(StateStack.pop());
+        undoStack.push(stateStack.pop());
     }
 
 

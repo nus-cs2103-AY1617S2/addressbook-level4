@@ -26,16 +26,16 @@ public class LogicManager extends ComponentManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.parser = new Parser();
-        this.undoManager = new UndoManager();
+        this.undoManager = new UndoManager(model);
     }
 
     @Override
     public CommandResult execute(String commandText) throws CommandException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         Command command = parser.parseCommand(commandText);
-        command.setData(model);
-        if(command.isMutating()) {
-        	undoManager.addMutatingTask(command);
+        command.setData(model, undoManager);
+        if (command.isMutating()) {
+            undoManager.addMutatingTask(command);
         }
         return command.execute();
     }
