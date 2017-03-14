@@ -5,7 +5,7 @@ import seedu.tasklist.model.tag.Tag;
 import seedu.tasklist.model.task.ReadOnlyTask;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of an task list
  */
 public interface ReadOnlyTaskList {
 

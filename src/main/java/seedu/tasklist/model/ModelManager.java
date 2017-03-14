@@ -18,7 +18,7 @@ import seedu.tasklist.model.task.UniqueTaskList;
 import seedu.tasklist.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the task list data.
  * All changes to any model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
@@ -36,7 +36,7 @@ public class ModelManager extends ComponentManager implements Model {
         super();
         assert !CollectionUtil.isAnyNull(taskList, userPrefs);
 
-        logger.fine("Initializing with address book: " + taskList + " and user prefs " + userPrefs);
+        logger.fine("Initializing with task list: " + taskList + " and user prefs " + userPrefs);
 
         this.taskList = new TaskList(taskList);
         filteredTasks = new FilteredList<>(this.taskList.getTaskList());
