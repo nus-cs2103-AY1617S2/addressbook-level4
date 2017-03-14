@@ -3,6 +3,7 @@ package seedu.task.logic;
 import javafx.collections.ObservableList;
 import seedu.task.logic.commands.CommandResult;
 import seedu.task.logic.commands.exceptions.CommandException;
+import seedu.task.model.task.ChatList;
 import seedu.task.model.task.ReadOnlyTask;
 
 /**
@@ -19,5 +20,8 @@ public interface Logic {
 
     /** Returns the filtered list of tasks */
     ObservableList<ReadOnlyTask> getFilteredTaskList();
+
+    /** Returns the list of chat messages */
+    ChatList getChatList();
 
 }

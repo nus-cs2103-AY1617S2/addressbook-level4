@@ -7,6 +7,7 @@ package seedu.task.model.task;
  */
 public class CompletionStatus {
 
+    public static final String MESSAGE_COMPLETION_STATUS_CONSTRAINTS = "Edited";
     /*
      * Task is either completed or not completed, represented by a boolean status
      */
@@ -32,7 +33,7 @@ public class CompletionStatus {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof CompletionStatus // instanceof handles nulls
-                && this.status == ((CompletionStatus) other).status); // state check
+                        && this.status == ((CompletionStatus) other).status); // state check
     }
 
 

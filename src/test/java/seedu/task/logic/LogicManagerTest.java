@@ -111,8 +111,8 @@ public class LogicManagerTest {
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager, List)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
-                                      ReadOnlyTaskManager expectedAddressBook,
-                                      List<? extends ReadOnlyTask> expectedShownList) {
+            ReadOnlyTaskManager expectedAddressBook,
+            List<? extends ReadOnlyTask> expectedShownList) {
         assertCommandBehavior(false, inputCommand, expectedMessage, expectedAddressBook, expectedShownList);
     }
 
@@ -136,8 +136,8 @@ public class LogicManagerTest {
      *      - {@code expectedAddressBook} was saved to the storage file. <br>
      */
     private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand, String expectedMessage,
-                                       ReadOnlyTaskManager expectedAddressBook,
-                                       List<? extends ReadOnlyTask> expectedShownList) {
+            ReadOnlyTaskManager expectedAddressBook,
+            List<? extends ReadOnlyTask> expectedShownList) {
 
         try {
             CommandResult result = logic.execute(inputCommand);
@@ -196,14 +196,14 @@ public class LogicManagerTest {
 
     @Test
     public void execute_add_invalidPersonData() {
-//        assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
-//                Name.MESSAGE_NAME_CONSTRAINTS);
+        //        assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
+        //                Name.MESSAGE_NAME_CONSTRAINTS);
         assertCommandFailure("add Valid Name s/not_numbers e/121212 0000 c/valid, address",
                 StartTime.MESSAGE_TIME_CONSTRAINTS);
         assertCommandFailure("add Valid Name s/121212 0000 e/notAnEmail c/valid, address",
                 EndTime.MESSAGE_TIME_CONSTRAINTS);
-//        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
-//                Tag.MESSAGE_TAG_CONSTRAINTS);
+        //        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
+        //                Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
 
@@ -418,7 +418,7 @@ public class LogicManagerTest {
             Name name = new Name("Adam Brown");
             StartTime privatePhone = new StartTime("111211 0909");
             EndTime email = new EndTime("111211 0909");
-            CompletionStatus privateAddress = new CompletionStatus("111, alpha street");
+            CompletionStatus privateAddress = new CompletionStatus(false);
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
@@ -437,9 +437,9 @@ public class LogicManagerTest {
                     new Name("Task " + seed),
                     new StartTime("111211 0909"),
                     new EndTime("111211 0909"),
-                    new CompletionStatus("House of " + seed),
+                    new CompletionStatus(false),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
-            );
+                    );
         }
 
         /** Generates the correct add command based on the person given */
@@ -536,9 +536,9 @@ public class LogicManagerTest {
                     new Name(name),
                     new StartTime("121112 0000"),
                     new EndTime("121112 0000"),
-                    new CompletionStatus("House of 1"),
+                    new CompletionStatus(false),
                     new UniqueTagList(new Tag("tag"))
-            );
+                    );
         }
     }
 }

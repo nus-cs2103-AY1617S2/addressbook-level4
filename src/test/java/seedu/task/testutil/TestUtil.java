@@ -75,15 +75,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Name("Ali Muster"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus("4th street"), new UniqueTagList()),
-                new Task(new Name("Boris Mueller"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus("81th street"), new UniqueTagList()),
-                new Task(new Name("Carl Kurz"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus("wall street"), new UniqueTagList()),
-                new Task(new Name("Daniel Meier"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus("10th street"), new UniqueTagList()),
-                new Task(new Name("Elle Meyer"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus("michegan ave"), new UniqueTagList()),
-                new Task(new Name("Fiona Kunz"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus("little tokyo"), new UniqueTagList()),
-                new Task(new Name("George Best"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus("4th street"), new UniqueTagList()),
-                new Task(new Name("Hoon Meier"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus("little india"), new UniqueTagList()),
-                new Task(new Name("Ida Mueller"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus("chicago ave"), new UniqueTagList())
+                    new Task(new Name("Ali Muster"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus(false), new UniqueTagList()),
+                    new Task(new Name("Boris Mueller"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus(false), new UniqueTagList()),
+                    new Task(new Name("Carl Kurz"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus(false), new UniqueTagList()),
+                    new Task(new Name("Daniel Meier"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus(false), new UniqueTagList()),
+                    new Task(new Name("Elle Meyer"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus(false), new UniqueTagList()),
+                    new Task(new Name("Fiona Kunz"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus(false), new UniqueTagList()),
+                    new Task(new Name("George Best"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus(false), new UniqueTagList()),
+                    new Task(new Name("Hoon Meier"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus(false), new UniqueTagList()),
+                    new Task(new Name("Ida Mueller"), new StartTime("130613 0909"), new EndTime("130613 0909"), new CompletionStatus(false), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -97,8 +97,8 @@ public class TestUtil {
     private static Tag[] getSampleTagData() {
         try {
             return new Tag[]{
-                new Tag("relatives"),
-                new Tag("friends")
+                    new Tag("relatives"),
+                    new Tag("friends")
             };
         } catch (IllegalValueException e) {
             assert false;
@@ -192,7 +192,7 @@ public class TestUtil {
     }
 
     public static void setFinalStatic(Field field, Object newValue) throws NoSuchFieldException,
-                                                                           IllegalAccessException {
+    IllegalAccessException {
         field.setAccessible(true);
         // remove final modifier from field
         Field modifiersField = Field.class.getDeclaredField("modifiers");
