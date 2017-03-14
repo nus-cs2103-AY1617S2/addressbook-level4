@@ -36,19 +36,27 @@ This guide illustrates the design and implementation of TypeTask. It will guide 
     This app will not work with earlier versions of Java 8.
 
 2. **Eclipse** IDE
+
 3. **e(fx)clipse** plugin for Eclipse (Do the steps 2 onwards given in
    [this page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious))
+   
 4. **Buildship Gradle Integration** plugin from the Eclipse Marketplace
+
 5. **Checkstyle Plug-in** plugin from the Eclipse Marketplace
 
 ### 2.2. Importing the project into Eclipse
 
 1. Fork this repo, and clone the fork to your computer
+
 2. Open Eclipse (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
    in the prerequisites above)
+   
 3. Click `File` > `Import`
+
 4. Click `Gradle` > `Gradle Project` > `Next` > `Next`
+
 5. Click `Browse`, then locate the project's directory
+
 6. Click `Finish`
 
   > * If you are asked whether to 'keep' or 'overwrite' config files, choose to 'keep'.
@@ -59,11 +67,17 @@ This guide illustrates the design and implementation of TypeTask. It will guide 
 ### 2.3. Configuring Checkstyle
 
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
+
 2. Choose `External Configuration File` under `Type`
-3. Enter an arbitrary configuration name e.g. addressbook
+
+3. Enter an arbitrary configuration name e.g. taskmanager
+
 4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
+
 5. Click OK once, go to the `Main` tab, use the newly imported check configuration.
+
 6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
+
 7. Click OK twice. Rebuild project if prompted
 
 > Note to click on the `files from packages` text after ticking in order to enable the `Change...` button
