@@ -7,6 +7,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
@@ -33,8 +34,13 @@ import seedu.tasklist.model.TaskList;
 import seedu.tasklist.model.tag.Tag;
 import seedu.tasklist.model.tag.UniqueTagList;
 import seedu.tasklist.model.task.Comment;
+import seedu.tasklist.model.task.DeadlineTask;
+import seedu.tasklist.model.task.EventTask;
+import seedu.tasklist.model.task.FloatingTask;
 import seedu.tasklist.model.task.Name;
+import seedu.tasklist.model.task.Priority;
 import seedu.tasklist.model.task.ReadOnlyTask;
+import seedu.tasklist.model.task.Status;
 import seedu.tasklist.model.task.Task;
 import seedu.tasklist.storage.XmlSerializableTaskList;
 
@@ -73,15 +79,24 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Name("Ali Muster"), new Comment("4th street"), new UniqueTagList()),
-                new Task(new Name("Boris Mueller"), new Comment("81th street"), new UniqueTagList()),
-                new Task(new Name("Carl Kurz"), new Comment("wall street"), new UniqueTagList()),
-                new Task(new Name("Daniel Meier"), new Comment("10th street"), new UniqueTagList()),
-                new Task(new Name("Elle Meyer"), new Comment("michegan ave"), new UniqueTagList()),
-                new Task(new Name("Fiona Kunz"), new Comment("little tokyo"), new UniqueTagList()),
-                new Task(new Name("George Best"), new Comment("4th street"), new UniqueTagList()),
-                new Task(new Name("Hoon Meier"), new Comment("little india"), new UniqueTagList()),
-                new Task(new Name("Ida Mueller"), new Comment("chicago ave"), new UniqueTagList())
+                new EventTask(new Name("CS2103T tutorial"), new Comment("prepare V0.2 presentation"),
+                                new Priority("high"), new Status(), new Date(117, 5, 5, 15, 0),
+                                new Date(117, 5, 5, 17, 0), new UniqueTagList("class")),
+                new FloatingTask(new Name("CS3245 homework 3"), new Comment("discuss with classmates"),
+                                    new Priority("medium"), new Status(), new UniqueTagList("class")),
+                new FloatingTask(new Name("Buy groceries"), new Comment("go NTUC"), new Priority("low"),
+                                    new Status(), new UniqueTagList()),
+                new FloatingTask(new Name("Update Java for CS2103T"),
+                                    new Comment("Find out why jdk is not displaying the correct ver"),
+                                    new Priority("high"), new Status(), new UniqueTagList()),
+                new DeadlineTask(new Name("Implement undo for this"), new Comment("By today"),
+                                    new Priority("medium"), new Status(), new Date(), new UniqueTagList()),
+                new FloatingTask(new Name("Drink water"), new Comment("To improve brain function"),
+                                    new Priority("medium"), new Status(), new UniqueTagList()),
+                new EventTask(new Name("Internship interview"), new Comment("at mediacorp"), new Priority("high"),
+                                    new Status(), new Date(117, 5, 5, 17, 0), new Date(117, 5, 5, 17, 0), new UniqueTagList()),
+                new EventTask(new Name("Yet another interview"), new Comment("also at mediacorp"),
+                                    new Priority("high"), new Status(), new Date(117, 5, 5, 17, 0), new Date(117, 5, 5, 17, 0), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {

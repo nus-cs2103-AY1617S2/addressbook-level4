@@ -8,12 +8,13 @@ import seedu.tasklist.model.TaskList;
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
+    public static final String MESSAGE_SUCCESS = "Task list has been cleared!";
 
 
     @Override
     public CommandResult execute() {
         assert model != null;
+        model.enableUndoForClear();
         model.resetData(new TaskList());
         return new CommandResult(MESSAGE_SUCCESS);
     }

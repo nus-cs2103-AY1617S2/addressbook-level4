@@ -2,6 +2,8 @@ package seedu.tasklist.logic.parser;
 
 import static seedu.tasklist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.tasklist.logic.parser.CliSyntax.PREFIX_COMMENT;
+import static seedu.tasklist.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.tasklist.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.tasklist.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -28,7 +30,7 @@ public class EditCommandParser {
     public Command parse(String args) {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_COMMENT, PREFIX_TAG);
+                new ArgumentTokenizer(PREFIX_COMMENT, PREFIX_TAG, PREFIX_DATE, PREFIX_PRIORITY);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
@@ -42,6 +44,10 @@ public class EditCommandParser {
             editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
             editTaskDescriptor.setComment(ParserUtil.parseComment(argsTokenizer.getValue(PREFIX_COMMENT)));
             editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
+            editTaskDescriptor.setPriority(ParserUtil.parsePriority(argsTokenizer.getValue(PREFIX_PRIORITY)));
+            editTaskDescriptor.setDeadline(ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_DATE)));
+            editTaskDescriptor.setStartDate(ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_DATE)));
+            editTaskDescriptor.setEndDate(ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_DATE)));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
@@ -49,9 +55,9 @@ public class EditCommandParser {
         if (!editTaskDescriptor.isAnyFieldEdited()) {
             return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
         }
-
         return new EditCommand(index.get(), editTaskDescriptor);
     }
+
 
     /**
      * Parses {@code Collection<String> tags} into an {@code Optional<UniqueTagList>} if {@code tags} is non-empty.

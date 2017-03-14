@@ -3,7 +3,7 @@ package seedu.tasklist.commons.events.model;
 import seedu.tasklist.commons.events.BaseEvent;
 import seedu.tasklist.model.ReadOnlyTaskList;
 
-/** Indicates the AddressBook in the model has changed*/
+/** Indicates the FlexiTask in the model has changed*/
 public class TaskListChangedEvent extends BaseEvent {
 
     public final ReadOnlyTaskList data;
@@ -14,6 +14,6 @@ public class TaskListChangedEvent extends BaseEvent {
 
     @Override
     public String toString() {
-        return "number of persons " + data.getTaskList().size() + ", number of tags " + data.getTagList().size();
+        return "number of tasks " + data.getTaskList().size() + ", number of tags " + data.getTagList().size();
     }
 }

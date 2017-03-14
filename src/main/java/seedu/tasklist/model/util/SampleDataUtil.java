@@ -1,11 +1,18 @@
 package seedu.tasklist.model.util;
 
+import java.util.Date;
+
 import seedu.tasklist.commons.exceptions.IllegalValueException;
 import seedu.tasklist.model.ReadOnlyTaskList;
 import seedu.tasklist.model.TaskList;
 import seedu.tasklist.model.tag.UniqueTagList;
 import seedu.tasklist.model.task.Comment;
+import seedu.tasklist.model.task.DeadlineTask;
+import seedu.tasklist.model.task.EventTask;
+import seedu.tasklist.model.task.FloatingTask;
 import seedu.tasklist.model.task.Name;
+import seedu.tasklist.model.task.Priority;
+import seedu.tasklist.model.task.Status;
 import seedu.tasklist.model.task.Task;
 import seedu.tasklist.model.task.UniqueTaskList.DuplicateTaskException;
 
@@ -13,24 +20,41 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         try {
             return new Task[] {
-                new Task(new Name("Alex Yeoh"),
-                    new Comment("Blk 30 Geylang Street 29, #06-40"),
-                    new UniqueTagList("friends")),
-                new Task(new Name("Bernice Yu"),
-                    new Comment("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                    new UniqueTagList("colleagues", "friends")),
-                new Task(new Name("Charlotte Oliveiro"),
-                    new Comment("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                    new UniqueTagList("neighbours")),
-                new Task(new Name("David Li"),
-                    new Comment("Blk 436 Serangoon Gardens Street 26, #16-43"),
+                new DeadlineTask(new Name("Meeting"),
+                    new Comment("prepare notes"),
+                    new Priority("high"),
+                    new Status(),
+                    new Date(117, 4, 1),
+                    new UniqueTagList("work")),
+                new FloatingTask(new Name("Shopping"),
+                    new Comment("with mom"),
+                    new Priority("medium"),
+                    new Status(),
                     new UniqueTagList("family")),
-                new Task(new Name("Irfan Ibrahim"),
-                    new Comment("Blk 47 Tampines Street 20, #17-35"),
-                    new UniqueTagList("classmates")),
-                new Task(new Name("Roy Balakrishnan"),
-                    new Comment("Blk 45 Aljunied Street 85, #11-31"),
-                    new UniqueTagList("colleagues"))
+                new EventTask(new Name("AI Conference"),
+                    new Comment("inform boss"),
+                    new Priority("high"),
+                    new Status(),
+                    new Date(117, 4, 5),
+                    new Date(117, 4, 8),
+                    new UniqueTagList("work")),
+                new FloatingTask(new Name("Watch Movie"),
+                    new Comment("need to relax"),
+                    new Priority("low"),
+                    new Status(),
+                    new UniqueTagList("family", "friends")),
+                new FloatingTask(new Name("Check Email"),
+                    new Comment("check everyday"),
+                    new Priority("high"),
+                    new Status(),
+                    new UniqueTagList("work")),
+                new EventTask(new Name("Dinner with wife"),
+                    new Comment("At Orchard"),
+                    new Priority("medium"),
+                    new Status(),
+                    new Date(),
+                    new Date(),
+                    new UniqueTagList("family"))
             };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);
@@ -45,7 +69,7 @@ public class SampleDataUtil {
             }
             return sampleAB;
         } catch (DuplicateTaskException e) {
-            throw new AssertionError("sample data cannot contain duplicate persons", e);
+            throw new AssertionError("sample data cannot contain duplicate tasks", e);
         }
     }
 }

@@ -1,6 +1,5 @@
 package guitests.guihandles;
 
-
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
@@ -13,8 +12,13 @@ import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import seedu.tasklist.TestApp;
+import seedu.tasklist.model.task.DeadlineTask;
+import seedu.tasklist.model.task.EventTask;
+import seedu.tasklist.model.task.FloatingTask;
+import seedu.tasklist.model.task.ReadOnlyDeadlineTask;
+import seedu.tasklist.model.task.ReadOnlyEventTask;
+import seedu.tasklist.model.task.ReadOnlyFloatingTask;
 import seedu.tasklist.model.task.ReadOnlyTask;
-import seedu.tasklist.model.task.Task;
 import seedu.tasklist.testutil.TestUtil;
 
 /**
@@ -148,7 +152,18 @@ public class TaskListPanelHandle extends GuiHandle {
     }
 
     public TaskCardHandle getTaskCardHandle(int index) {
-        return getTaskCardHandle(new Task(getListView().getItems().get(index)));
+        ReadOnlyTask current = getListView().getItems().get(index);
+        String type = current.getType();
+        switch (type) {
+        case FloatingTask.TYPE:
+            return getTaskCardHandle(new FloatingTask((ReadOnlyFloatingTask) current));
+        case DeadlineTask.TYPE:
+            return getTaskCardHandle(new DeadlineTask((ReadOnlyDeadlineTask) current));
+        case EventTask.TYPE:
+            return getTaskCardHandle(new EventTask((ReadOnlyEventTask) current));
+        default:
+            return null;
+        }
     }
 
     public TaskCardHandle getTaskCardHandle(ReadOnlyTask task) {

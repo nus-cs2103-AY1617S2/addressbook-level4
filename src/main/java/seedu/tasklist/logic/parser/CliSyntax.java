@@ -10,8 +10,11 @@ import seedu.tasklist.logic.parser.ArgumentTokenizer.Prefix;
 public class CliSyntax {
 
     /* Prefix definitions */
+    public static final Prefix PREFIX_DATE = new Prefix("d/");
     public static final Prefix PREFIX_COMMENT = new Prefix("c/");
+    public static final Prefix PREFIX_PRIORITY = new Prefix("p/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
+
 
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT =
