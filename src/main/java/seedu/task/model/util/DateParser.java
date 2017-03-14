@@ -25,6 +25,19 @@ public class DateParser {
         return cal;
     }
 
+    public static String toString(Calendar date) {
+        String dateString;
+        int year = date.get(Calendar.YEAR);
+        int month = date.get(Calendar.MONTH);
+        int day = date.get(Calendar.DATE);
+        int hour = date.get(Calendar.HOUR_OF_DAY);
+        int minute = date.get(Calendar.MINUTE);
+
+        dateString = String.format("%4d/%02d/%02d %02d:%02d", year, month+1, day, hour, minute);
+
+        return dateString;
+    }
+
     public static boolean isValidDateString(String test) {
         return test.matches(DATE_STRING_VALIDATION_REGEX);
     }
