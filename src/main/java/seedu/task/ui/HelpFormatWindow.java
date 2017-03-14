@@ -17,7 +17,7 @@ import seedu.task.commons.util.FxViewUtil;
  */
 public class HelpFormatWindow extends UiPart<Region> {
 
-    private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
+    private static final Logger logger = LogsCenter.getLogger(HelpFormatWindow.class);
     private static final String ICON = "/images/help_icon.png";
     private static final String FXML = "HelpFormatWindow.fxml";
     private static final String TITLE = "Summary";

@@ -65,6 +65,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void isDoneTask(int index, ReadOnlyTask target) throws TaskNotFoundException {
+        taskManager.updateDone(index, target);
+        indicateTaskManagerChanged();
+    }
+
+    @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTask(task);
         updateFilteredListToShowAll();
@@ -187,5 +193,7 @@ public class ModelManager extends ComponentManager implements Model {
             return "Tag=" +  tagKeyWord;
         }
     }
+
+
 
 }

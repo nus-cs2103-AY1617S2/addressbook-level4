@@ -75,15 +75,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Name("Ali Muster"), new Date("23-02-24"), new Date("24-02-2424"), new Remark("hans@google.com"), new Location("4th street"), new UniqueTagList()),
-                new Task(new Name("Boris Mueller"), new Date("24-02-24"), new Date("12-09-2245"), new Remark("ruth@google.com"), new Location("81th street"), new UniqueTagList()),
-                new Task(new Name("Carl Kurz"), new Date("4-04-1963"), new Date("15-03-1963"), new Remark("heinz@yahoo.com"), new Location("wall street"), new UniqueTagList()),
-                new Task(new Name("Daniel Meier"), new Date("2-12-00"), new Date("17-07-2003"), new Remark("cornelia@google.com"), new Location("10th street"), new UniqueTagList()),
-                new Task(new Name("Elle Meyer"), new Date("1-01-00"), new Date("24-12-2004"), new Remark("werner@gmail.com"), new Location("michegan ave"), new UniqueTagList()),
-                new Task(new Name("Fiona Kunz"), new Date("29-05-2424"), new Date("04-03-2027"), new Remark("lydia@gmail.com"), new Location("little tokyo"), new UniqueTagList()),
-                new Task(new Name("George Best"), new Date("24-09-14"), new Date("14-02-2042"), new Remark("anna@google.com"), new Location("4th street"), new UniqueTagList()),
-                new Task(new Name("Hoon Meier"), new Date("14-08-2424"), new Date("04-12-2024"), new Remark("stefan@mail.com"), new Location("little india"), new UniqueTagList()),
-                new Task(new Name("Ida Mueller"), new Date("9-05-30"), new Date("04-12-2031"), new Remark("hans@google.com"), new Location("chicago ave"), new UniqueTagList())
+                new Task(new Name("Ali Muster"), new Date("23-02-24"), new Date("24-02-2424"), new Remark("hans@google.com"), new Location("4th street"), new UniqueTagList(), false),
+                new Task(new Name("Boris Mueller"), new Date("24-02-24"), new Date("12-09-2245"), new Remark("ruth@google.com"), new Location("81th street"), new UniqueTagList(), false),
+                new Task(new Name("Carl Kurz"), new Date("4-04-1963"), new Date("15-03-1963"), new Remark("heinz@yahoo.com"), new Location("wall street"), new UniqueTagList(), false),
+                new Task(new Name("Daniel Meier"), new Date("2-12-00"), new Date("17-07-2003"), new Remark("cornelia@google.com"), new Location("10th street"), new UniqueTagList(), false),
+                new Task(new Name("Elle Meyer"), new Date("1-01-00"), new Date("24-12-2004"), new Remark("werner@gmail.com"), new Location("michegan ave"), new UniqueTagList(), false),
+                new Task(new Name("Fiona Kunz"), new Date("29-05-2424"), new Date("04-03-2027"), new Remark("lydia@gmail.com"), new Location("little tokyo"), new UniqueTagList(), false),
+                new Task(new Name("George Best"), new Date("24-09-14"), new Date("14-02-2042"), new Remark("anna@google.com"), new Location("4th street"), new UniqueTagList(), false),
+                new Task(new Name("Hoon Meier"), new Date("14-08-2424"), new Date("04-12-2024"), new Remark("stefan@mail.com"), new Location("little india"), new UniqueTagList(), false),
+                new Task(new Name("Ida Mueller"), new Date("9-05-30"), new Date("04-12-2031"), new Remark("hans@google.com"), new Location("chicago ave"), new UniqueTagList(), false)
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -358,5 +358,6 @@ public class TestUtil {
 
         return collect.toArray(new Tag[split.length]);
     }
+
 
 }

@@ -1,6 +1,5 @@
 package seedu.task.logic.commands;
 
-
 import seedu.task.commons.core.EventsCenter;
 import seedu.task.commons.events.ui.ShowHelpFormatRequestEvent;
 
@@ -17,11 +16,11 @@ public class HelpFormatCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows summary of commands.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String SHOWING_HELPSUMMARY_MESSAGE = "Opened summary window.";
+    public static final String SHOWING_HELP_SUMMARY_MESSAGE = "Opened summary window.";
 
     @Override
     public CommandResult execute() {
         EventsCenter.getInstance().post(new ShowHelpFormatRequestEvent());
-        return new CommandResult(SHOWING_HELPSUMMARY_MESSAGE);
+        return new CommandResult(SHOWING_HELP_SUMMARY_MESSAGE);
     }
 }

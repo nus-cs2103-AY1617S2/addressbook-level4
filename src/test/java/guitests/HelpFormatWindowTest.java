@@ -18,14 +18,14 @@ public class HelpFormatWindowTest extends TaskManagerGuiTest {
         resultDisplay.clickOnTextArea();
         assertHelpFormatWindowOpen(mainMenu.openHelpFormatWindowUsingAccelerator());
 
-        taskListPanel.clickOnListView();
-        assertHelpFormatWindowOpen(mainMenu.openHelpFormatWindowUsingAccelerator());
+       // taskListPanel.clickOnListView();
+       // assertHelpFormatWindowOpen(mainMenu.openHelpFormatWindowUsingAccelerator());
 
-        browserPanel.clickOnWebView();
-        assertHelpFormatWindowNotOpen(mainMenu.openHelpFormatWindowUsingAccelerator());
+       // browserPanel.clickOnWebView();
+       // assertHelpFormatWindowNotOpen(mainMenu.openHelpFormatWindowUsingAccelerator());
 
         //use menu button
-        //assertHelpFormatWindowOpen(mainMenu.openHelpFormatWindowUsingMenu());
+        assertHelpFormatWindowOpen(mainMenu.openHelpFormatWindowUsingMenu());
 
         //use command
         assertHelpFormatWindowOpen(commandBox.runHelpFormatCommand());
