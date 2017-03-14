@@ -154,7 +154,7 @@ public class EditCommandTest extends TaskListGuiTest {
 
     @Test
     public void edit_duplicateTask_failure() {
-        commandBox.runCommand("edit 3 CS2103T tutorial "
+        commandBox.runCommand("edit 3 cs2103T tutorial "
                                 + "c/prepare V0.2 presentation t/class");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
