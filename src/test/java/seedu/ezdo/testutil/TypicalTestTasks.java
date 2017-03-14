@@ -10,7 +10,7 @@ import seedu.ezdo.model.todo.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
+    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida, jack;
 
     public TypicalTestTasks() {
         try {
@@ -44,7 +44,10 @@ public class TypicalTestTasks {
                     .withStartDate("12/01/2017 11:12").build();
             ida = new TaskBuilder().withName("Ida Mueller")
                     .withPriority("2").withDueDate("19/09/2017 02:00")
-                    .withStartDate("12/02/2017 13:31").build();
+                    .withStartDate("12/12/2017 13:31").build();
+            jack = new TaskBuilder().withName("Jack Bauer")
+                    .withPriority("2").withDueDate("12/09/2015 15:15")
+                    .withStartDate("12/1/2013 00:00").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -65,9 +68,14 @@ public class TypicalTestTasks {
         return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
     }
 
+    public TestTask[] getTypicalDoneTasks() {
+        return new TestTask[]{};
+    }
+
     public EzDo getTypicalEzDo() {
         EzDo ez = new EzDo();
         loadEzDoWithSampleData(ez);
         return ez;
     }
+
 }

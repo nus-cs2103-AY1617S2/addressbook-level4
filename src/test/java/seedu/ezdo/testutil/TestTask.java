@@ -19,6 +19,7 @@ public class TestTask implements ReadOnlyTask {
     private TaskDate startDate;
     private TaskDate dueDate;
     private Priority priority;
+    private boolean done;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -33,11 +34,16 @@ public class TestTask implements ReadOnlyTask {
         this.priority = taskToCopy.getPriority();
         this.startDate = taskToCopy.getStartDate();
         this.dueDate = taskToCopy.getDueDate();
+        this.done = taskToCopy.getDone();
         this.tags = taskToCopy.getTags();
     }
 
     public void setName(Name name) {
         this.name = name;
+    }
+
+    public boolean getDone() {
+        return this.done;
     }
 
     public void setStartDate(TaskDate startDate) {
@@ -50,6 +56,10 @@ public class TestTask implements ReadOnlyTask {
 
     public void setPriority(Priority priority) {
         this.priority = priority;
+    }
+
+    public void setDone() {
+        this.done = true;
     }
 
     public void setTags(UniqueTagList tags) {
@@ -86,9 +96,18 @@ public class TestTask implements ReadOnlyTask {
         return getAsText();
     }
 
-    public String getAddCommand() {
+    /**
+     * Constructs an add command for the test task.
+     * @param usesShortCommand Specifies if the long or short version of the command should be used. ("add" or "a")
+     * @return This is the add command that will add the test task.
+     */
+    public String getAddCommand(boolean usesShortCommand) {
         StringBuilder sb = new StringBuilder();
-        sb.append("add " + this.getName().fullName + " ");
+        if (usesShortCommand) {
+            sb.append("a " + this.getName().fullName + " ");
+        } else {
+            sb.append("add " + this.getName().fullName + " ");
+        }
         sb.append(PREFIX_STARTDATE + this.getStartDate().value + " ");
         sb.append(PREFIX_DUEDATE + this.getDueDate().value + " ");
         sb.append(PREFIX_PRIORITY + this.getPriority().value + " ");

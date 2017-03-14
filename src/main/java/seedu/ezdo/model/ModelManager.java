@@ -36,6 +36,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.ezDo = new EzDo(ezDo);
         filteredTasks = new FilteredList<>(this.ezDo.getTaskList());
+        updateFilteredListToShowAll();
     }
 
     public ModelManager() {
@@ -72,6 +73,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public synchronized void doneTask(Task doneTask) throws TaskNotFoundException {
+        ezDo.doneTask(doneTask);
+        updateFilteredListToShowAll();
+        indicateEzDoChanged();
+    }
+
+    @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
@@ -83,14 +91,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     //=========== Filtered Task List Accessors =============================================================
 
-    @Override
-    public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
-        return new UnmodifiableObservableList<>(filteredTasks);
-    }
-
-    @Override
-    public void updateFilteredListToShowAll() {
-        filteredTasks.setPredicate(null);
+    private void updateFilteredTaskList(Expression expression) {
+        filteredTasks.setPredicate(expression::satisfies);
     }
 
     @Override
@@ -98,8 +100,19 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
 
-    private void updateFilteredTaskList(Expression expression) {
-        filteredTasks.setPredicate(expression::satisfies);
+    @Override
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
+        return new UnmodifiableObservableList<>(filteredTasks);
+    }
+
+    @Override
+    public void updateFilteredListToShowAll() {
+        updateFilteredTaskList(new PredicateExpression(new NotDoneQualifier()));
+    }
+
+    @Override
+    public void updateFilteredDoneList() {
+        updateFilteredTaskList(new PredicateExpression(new DoneQualifier()));
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
@@ -133,6 +146,42 @@ public class ModelManager extends ComponentManager implements Model {
         String toString();
     }
 
+    private class DoneQualifier implements Qualifier {
+
+        DoneQualifier() {
+
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return task.getDone();
+        }
+
+        @Override
+        public String toString() {
+            return "";
+        }
+
+    }
+
+    private class NotDoneQualifier implements Qualifier {
+
+        NotDoneQualifier() {
+
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return !task.getDone();
+        }
+
+        @Override
+        public String toString() {
+            return "";
+        }
+
+    }
+
     private class NameQualifier implements Qualifier {
         private Set<String> nameKeyWords;
 
@@ -145,7 +194,8 @@ public class ModelManager extends ComponentManager implements Model {
             return nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword))
                     .findAny()
-                    .isPresent();
+                    .isPresent()
+                    && !task.getDone();
         }
 
         @Override

@@ -31,7 +31,19 @@ public class EditCommandTest extends EzDoGuiTest {
                 .withStartDate("01/01/2017").withDueDate("08/09/2018")
                 .withTags("husband").build();
 
-        assertEditSuccess(ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
+        assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
+    }
+
+    @Test
+    public void edit_shortCommand_success() throws Exception {
+        String detailsToEdit = "Blobby p/3 s/02/02/2017 d/10/10/2019 t/guy";
+        int ezDoIndex = 1;
+
+        TestTask editedTask = new TaskBuilder().withName("Blobby").withPriority("3")
+                .withStartDate("02/02/2017").withDueDate("10/10/2019")
+                .withTags("guy").build();
+
+        assertEditSuccess(true, ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
     }
 
     @Test
@@ -47,7 +59,7 @@ public class EditCommandTest extends EzDoGuiTest {
                 .withStartDate("01/01/2017").withDueDate("08/09/2018")
                 .withTags("husband").build();
 
-        assertEditSuccess(ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
+        assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
 
         detailsToEdit = "Bobby s/11/11/2017";
 
@@ -55,7 +67,7 @@ public class EditCommandTest extends EzDoGuiTest {
                 .withStartDate("11/11/2017").withDueDate("08/09/2018")
                 .withTags("husband").build();
 
-        assertEditSuccess(ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
+        assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
 
         detailsToEdit = "Bobby d/01/01/2018";
 
@@ -63,7 +75,7 @@ public class EditCommandTest extends EzDoGuiTest {
                 .withStartDate("11/11/2017").withDueDate("01/01/2018")
                 .withTags("husband").build();
 
-        assertEditSuccess(ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
+        assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
 
         detailsToEdit = "Bobby t/brother";
 
@@ -71,7 +83,7 @@ public class EditCommandTest extends EzDoGuiTest {
                 .withStartDate("11/11/2017").withDueDate("01/01/2018")
                 .withTags("brother").build();
 
-        assertEditSuccess(ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
+        assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
     }
 
     @Test
@@ -82,7 +94,7 @@ public class EditCommandTest extends EzDoGuiTest {
         TestTask taskToEdit = expectedTasksList[ezDoIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withTags("sweetie", "bestie").build();
 
-        assertEditSuccess(ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
+        assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
     }
 
     @Test
@@ -93,7 +105,7 @@ public class EditCommandTest extends EzDoGuiTest {
         TestTask taskToEdit = expectedTasksList[ezDoIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withTags().build();
 
-        assertEditSuccess(ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
+        assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
     }
 
     @Test
@@ -107,7 +119,7 @@ public class EditCommandTest extends EzDoGuiTest {
         TestTask taskToEdit = expectedTasksList[ezDoIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withName("Belle").build();
 
-        assertEditSuccess(filteredTaskListIndex, ezDoIndex, detailsToEdit, editedTask);
+        assertEditSuccess(false, filteredTaskListIndex, ezDoIndex, detailsToEdit, editedTask);
     }
 
     @Test
@@ -153,15 +165,20 @@ public class EditCommandTest extends EzDoGuiTest {
     /**
      * Checks whether the edited task has the correct updated details.
      *
+     * @param usesShortCommand whether to use the short or long version of the command
      * @param filteredTaskListIndex index of task to edit in filtered list
      * @param ezDoIndex index of task to edit in ezDo.
      *      Must refer to the same task as {@code filteredTaskListIndex}
      * @param detailsToEdit details to edit the task with as input to the edit command
      * @param editedTask the expected task after editing the task's details
      */
-    private void assertEditSuccess(int filteredTaskListIndex, int ezDoIndex,
+    private void assertEditSuccess(boolean usesShortCommand, int filteredTaskListIndex, int ezDoIndex,
                                     String detailsToEdit, TestTask editedTask) {
-        commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
+        if (usesShortCommand) {
+            commandBox.runCommand("e " + filteredTaskListIndex + " " + detailsToEdit);
+        } else {
+            commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
+        }
 
         // confirm the new card contains the right data
         TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getName().fullName);
