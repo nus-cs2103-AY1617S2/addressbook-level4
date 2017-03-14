@@ -15,7 +15,9 @@ import seedu.tasklist.commons.util.FileUtil;
 import seedu.tasklist.model.ReadOnlyTaskList;
 import seedu.tasklist.model.TaskList;
 import seedu.tasklist.model.task.EventTask;
+import seedu.tasklist.model.task.FloatingTask;
 import seedu.tasklist.testutil.TestEventTask;
+import seedu.tasklist.testutil.TestFloatingTask;
 import seedu.tasklist.testutil.TypicalTestTasks;
 
 public class XmlTasklistStorageTest {
@@ -72,14 +74,14 @@ public class XmlTasklistStorageTest {
         assertEquals(original, new TaskList(readBack));
 
         //Modify data, overwrite exiting file, and read back
-        original.addTask(new EventTask((TestEventTask) td.internship));
+        original.addTask(new FloatingTask((TestFloatingTask) td.internship));
         original.removeTask(new EventTask((TestEventTask) td.tutorial));
         xmlTaskListStorage.saveTaskList(original, filePath);
         readBack = xmlTaskListStorage.readTaskList(filePath).get();
         assertEquals(original, new TaskList(readBack));
 
         //Save and read without specifying file path
-        original.addTask(new EventTask((TestEventTask) td.ida));
+        original.addTask(new FloatingTask((TestFloatingTask) td.ida));
         xmlTaskListStorage.saveTaskList(original); //file path not specified
         readBack = xmlTaskListStorage.readTaskList().get(); //file path not specified
         assertEquals(original, new TaskList(readBack));
