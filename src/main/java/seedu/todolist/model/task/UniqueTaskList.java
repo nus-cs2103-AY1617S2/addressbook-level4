@@ -64,6 +64,22 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.set(index, taskToUpdate);
     }
 
+    /*
+     * Mark the targeted Task as completed.
+     *
+     * It is guaranteed that internalList contains the index provided,
+     * and that internalList contains the targetTask.
+     */
+    public void completeTask(int index, ReadOnlyTask targetTask) {
+        assert targetTask != null;
+        assert this.contains(targetTask) == true;
+
+        Task taskToComplete = internalList.get(index);
+
+        taskToComplete.setAsComplete();
+        internalList.set(index, taskToComplete);
+    }
+
     /**
      * Removes the equivalent person from the list.
      *

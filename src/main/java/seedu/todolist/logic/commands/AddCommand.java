@@ -47,8 +47,8 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Task(
                 new Name(name),
-                new StartTime(startTime),
-                new EndTime(endTime),
+                (startTime != null ? new StartTime(startTime) : null),
+                (endTime != null ? new EndTime(endTime) : null),
                 new UniqueTagList(tagSet)
         );
     }
@@ -75,6 +75,5 @@ public class AddCommand extends Command {
     public String getCommandText() {
         return commandText;
     }
-
 
 }

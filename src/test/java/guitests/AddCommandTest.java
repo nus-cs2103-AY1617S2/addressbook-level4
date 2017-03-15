@@ -2,7 +2,6 @@ package guitests;
 
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
@@ -13,7 +12,7 @@ import seedu.todolist.testutil.TestUtil;
 
 public class AddCommandTest extends ToDoListGuiTest {
 
-    @Ignore @Test
+    @Test
     public void add() {
         //add one task
         TestTask[] currentList = td.getTypicalTasks();

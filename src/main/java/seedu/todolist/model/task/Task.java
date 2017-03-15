@@ -82,6 +82,14 @@ public class Task implements ReadOnlyTask {
         return this.completed;
     }
 
+    public void setAsComplete() {
+        this.completed = true;
+    }
+
+    public void setAsIncomplete() {
+        this.completed = false;
+    }
+
     /**
      * Replaces this person's tags with the tags in the argument tag list.
      */
