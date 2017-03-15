@@ -18,6 +18,7 @@ import seedu.todolist.logic.commands.HelpCommand;
 import seedu.todolist.logic.commands.IncorrectCommand;
 import seedu.todolist.logic.commands.ListCommand;
 import seedu.todolist.logic.commands.SelectCommand;
+import seedu.todolist.logic.commands.UndoCommand;
 
 /**
  * Parses user input.
@@ -62,6 +63,9 @@ public class Parser {
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
