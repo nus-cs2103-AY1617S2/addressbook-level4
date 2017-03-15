@@ -13,31 +13,27 @@ import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
- * Renames an existing tag in the task manager.
+ * Deletes an existing tag in the task manager.
  */
-public class RenameTagCommand extends Command {
+public class DeleteTagCommand extends Command {
 
-	public static final String COMMAND_WORD = "renametag";
+	public static final String COMMAND_WORD = "deletetag";
 
-	public static final String MESSAGE_USAGE = COMMAND_WORD + ": Renames an existing tag in the task manager "
-			+ "Parameters: <tag_name> <new_tag_name>\n"
-			+ "Example: " + COMMAND_WORD + " parttime fulltime";
+	public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes an existing tag in the task manager "
+			+ "Parameters: <tag_name>\n"
+			+ "Example: " + COMMAND_WORD + " work";
 
-	public static final String MESSAGE_RENAME_TAG_SUCCESS = "Renamed Tag: %1$s to %2$s";
+	public static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted Tag: %1$s";
 
 	private final Tag oldTag;
-	private final Tag newTag;
 
 	/**
-	 * @param oldTagName is the name of the tag that will be renamed
-	 * @param newTagName is the name of the replacement tag
+	 * @param oldTagName is the name of the tag to be deleted
 	 */
-	public RenameTagCommand(String oldTagName, String newTagName) throws IllegalValueException {
+	public DeleteTagCommand(String oldTagName) throws IllegalValueException {
 		assert oldTagName != null;
-		assert newTagName != null;
 
 		this.oldTag = new Tag(oldTagName);
-		this.newTag = new Tag(newTagName);
 	}
 
 	@Override
@@ -53,7 +49,6 @@ public class RenameTagCommand extends Command {
 			for (Tag tag : tags) {
 				if (tag.getTagName().toLowerCase().equals(oldTag.getTagName().toLowerCase())) {
 					containsOldTag = true;
-					newTagList.add(newTag);
 				} else {
 					newTagList.add(tag);
 				}
@@ -71,6 +66,6 @@ public class RenameTagCommand extends Command {
 		}
 
 
-		return new CommandResult(String.format(MESSAGE_RENAME_TAG_SUCCESS, oldTag.getTagName(), newTag.getTagName()));
+		return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS, oldTag.getTagName()));
 	}
 }

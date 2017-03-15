@@ -31,6 +31,7 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteTagCommand;
 import seedu.address.logic.commands.DoneCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -499,6 +500,17 @@ public class LogicManagerTest {
 	//		assertCommandSuccess("renametag KEY newkey", String.format(RenameTagCommand.MESSAGE_RENAME_TAG_SUCCESS, "KEY", "newkey"), expectedAB,
 	//				expectedList);
 	//	}
+
+	// TODO casesensitive test for renametag
+
+	@Test
+	public void execute_deletetag_invalidArgsFormat() {
+		String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTagCommand.MESSAGE_USAGE);
+		assertCommandFailure("deletetag ", expectedMessage);
+	}
+
+	// TODO matchfullwords in deletetag
+	// TODO casesensitive test for deletetag
 
 	// SaveToCommand Tests
 

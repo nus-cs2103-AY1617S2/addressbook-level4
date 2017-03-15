@@ -10,6 +10,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteTagCommand;
 import seedu.address.logic.commands.DoneCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -69,6 +70,9 @@ public class Parser {
 
 		case RenameTagCommand.COMMAND_WORD:
 			return new RenameTagCommandParser().parse(arguments);
+
+		case DeleteTagCommand.COMMAND_WORD:
+			return new DeleteTagCommandParser().parse(arguments);
 
 		case ClearCommand.COMMAND_WORD:
 			return new ClearCommand();
