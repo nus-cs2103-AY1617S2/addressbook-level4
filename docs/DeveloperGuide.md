@@ -133,7 +133,7 @@ This collection is encapsulated in the `seedu.addressbook.commons` package. <br>
 Function of `EventsCenter`: 
 
 * Uses events to facilitate inter-component communication via an _Event-Driven_ design
-> This class is written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained). 
+  > This class is written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained). 
 
 Function of `LogsCenter`: 
 
@@ -212,11 +212,11 @@ Function of `Logic`:
 
 * Executes the user's command using the following procedure: 
 
-> 1. `Logic` uses the `Parser` class to [parse](#parse) the user command. <br>
-> 2. This results in a `Command` object which is executed by the `LogicManager`. <br>
-> 3. The command execution can affect the `Model` and/or raise events (an example of such a command is **adding a task**). <br>
-> 4. The result of the command execution is then encapsulated as a `CommandResult` object. <br>
-> 5. This object is passed back to the `UI`. <br>
+  > 1. `Logic` uses the `Parser` class to [parse](#parse) the user command. <br>
+  > 2. This results in a `Command` object which is executed by the `LogicManager`. <br>
+  > 3. The command execution can affect the `Model` and/or raise events (an example of such a command is **adding a task**). <br>
+  > 4. The result of the command execution is then encapsulated as a `CommandResult` object. <br>
+  > 5. This object is passed back to the `UI`. <br>
 
 Given below is the [Sequence Diagram](#sequence-diagram) for interactions within the `Logic` component for the 
 `execute("delete 1")` API call.<br>
@@ -235,7 +235,7 @@ Functions of `Model`:
 * Stores a `UserPref` object that represents the user's preferences
 * Stores the data in Tâche
 * Exposes an `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' 
-> E.g. The [UI](#user-interface) can be bound to this list so that it automatically 
+  > E.g. The [UI](#user-interface) can be bound to this list so that it automatically 
 updates when this list is modified. <br>
 
 `Model` does not depend on any of the other three components.
