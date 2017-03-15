@@ -49,7 +49,7 @@ public interface ReadOnlyEvent {
 	 * Returns true if both have the same state. (interfaces cannot override
 	 * .equals)
 	 */
-	default boolean isSameStateAs(ReadOnlyItem other) {
+	default boolean isSameStateAs(ReadOnlyEvent other) {
 		return other == this // short circuit if same object
 				|| (other != null // this is first to avoid NPE below
 						&& other.getTitle().equals(this.getTitle()) // state

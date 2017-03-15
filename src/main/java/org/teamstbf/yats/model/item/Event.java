@@ -97,7 +97,7 @@ public class Event implements ReadOnlyEvent {
 	public boolean equals(Object other) {
 		return other == this // short circuit if same object
 				|| (other instanceof ReadOnlyItem // instanceof handles nulls
-						&& this.isSameStateAs((ReadOnlyItem) other));
+						&& this.isSameStateAs((ReadOnlyEvent) other));
 	}
 
 	@Override
