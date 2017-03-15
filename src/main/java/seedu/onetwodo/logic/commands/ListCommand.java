@@ -35,15 +35,19 @@ public class ListCommand extends Command {
     public CommandResult execute() {
         switch (doneStatus) {
         case ALL: // 
+            model.setDoneStatus(DoneStatus.ALL);
             model.updateFilteredListToShowAll();
             return new CommandResult(MESSAGE_SUCCESS);
         case DONE: // view done
+            model.setDoneStatus(DoneStatus.DONE);
             model.updateFilteredDoneTaskList();
             return new CommandResult(MESSAGE_SUCCESS);
         case UNDONE:
+            model.setDoneStatus(DoneStatus.UNDONE);
             model.updateFilteredUndoneTaskList();
             return new CommandResult(MESSAGE_SUCCESS);
         default: // view date
+            model.setDoneStatus(DoneStatus.DEFAULT);
             model.updateFilteredUndoneTaskList();
             return new CommandResult(MESSAGE_SUCCESS);
         }

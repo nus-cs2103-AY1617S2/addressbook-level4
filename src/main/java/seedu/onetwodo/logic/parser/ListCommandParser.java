@@ -16,16 +16,16 @@ public class ListCommandParser {
     public Command parse(String args) {
         String argsTrimmed = args.trim();
         
-        if (argsTrimmed.isEmpty()){
+        if (argsTrimmed.isEmpty()) {
             return new ListCommand("DEFAULT");
-        }else if (argsTrimmed.equals("done")){
+        } else if (argsTrimmed.equals("done")) {
             return new ListCommand("DONE");
-        }else if (argsTrimmed.equals("all")){
+        } else if (argsTrimmed.equals("all")) {
             return new ListCommand("ALL");
-        }else if (argsTrimmed.equals("undone")){
+        } else if (argsTrimmed.equals("undone")) {
             return new ListCommand("UNDONE");
-        }else {
-            return new IncorrectCommand("invalide list command");
+        } else {
+            return new IncorrectCommand("Invalid list command");
         }
     }
 }

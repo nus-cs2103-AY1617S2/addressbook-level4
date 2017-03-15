@@ -3,6 +3,7 @@ package seedu.onetwodo.ui;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -36,6 +37,7 @@ public class MainWindow extends UiPart<Region> {
     private static final String ICON = "/images/address_book_32.png";
     private static final String FXML = "MainWindow.fxml";
     private static final String FONT_AVENIR = "/fonts/avenir-light.ttf";
+    private static final String DONE_STYLESHEET = "view/Strikethrough.css";
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 650;
 
@@ -92,6 +94,7 @@ public class MainWindow extends UiPart<Region> {
         setWindowDefaultSize(prefs);
         Scene scene = new Scene(getRoot());
         loadFonts(scene);
+        loadStyleSheets(scene);
         primaryStage.setScene(scene);
 
         setAccelerators();
@@ -99,6 +102,10 @@ public class MainWindow extends UiPart<Region> {
 
     private void loadFonts(Scene scene) {
         Font.loadFont(MainWindow.class.getResource(FONT_AVENIR).toExternalForm(), 10);
+    }
+    
+    private void loadStyleSheets(Scene scene) {
+        scene.getStylesheets().add(DONE_STYLESHEET);
     }
 
     public Stage getPrimaryStage() {
@@ -139,19 +146,20 @@ public class MainWindow extends UiPart<Region> {
         });
     }
 
-    void fillInnerParts() {
-        deadlineTaskListPanel = new TaskListPanel(getDeadlineListPlaceholder(), logic.getFilteredTaskList(),
-                TaskType.DEADLINE);
-        eventTaskListPanel = new TaskListPanel(getEventListPlaceholder(), logic.getFilteredTaskList(),
-                TaskType.EVENT);
-        todoTaskListPanel = new TaskListPanel(getTodosListPlaceholder(), logic.getFilteredTaskList(),
-                TaskType.TODO);
+    void fillInnerParts() { 
+        deadlineTaskListPanel = new TaskListPanel(getDeadlineListPlaceholder(), getDoneTaskList(), TaskType.DEADLINE);
+        eventTaskListPanel = new TaskListPanel(getEventListPlaceholder(), getDoneTaskList(), TaskType.EVENT);
+        todoTaskListPanel = new TaskListPanel(getTodosListPlaceholder(), getDoneTaskList(), TaskType.TODO);
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getToDoListFilePath());
         
         commandBox = new CommandBox(getCommandBoxPlaceholder(), logic);
         commandBox.focus();
     }
+    
+    private ObservableList<ReadOnlyTask> getDoneTaskList() {
+        return logic.getFilteredTasksByDoneStatus();
+}
 
     private AnchorPane getCommandBoxPlaceholder() {
         return commandBoxPlaceholder;
