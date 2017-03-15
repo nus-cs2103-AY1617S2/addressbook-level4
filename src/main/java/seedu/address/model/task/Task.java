@@ -9,7 +9,7 @@ import seedu.address.model.tag.UniqueTagList;
  * Represents a Task in the ToDo List.
  * Guarantees: details are present and not null, field values are validated.
  */
-public class Task implements ReadOnlyTask {
+public class Task implements ReadOnlyTask, Comparable<Task> {
 
     private Description description;
     private Priority priority;
@@ -130,5 +130,23 @@ public class Task implements ReadOnlyTask {
     public String toString() {
         return getAsText();
     }
+    /**
+    * Results in Tasks sorted by priority, followed by endDate, then startDate.
+    * Note: If a and b are tasks and a.compareTo(b) == 0, that does not imply a.equals(b).
+    */
+   @Override
+   public int compareTo(Task compareTask) {
+
+       int compareToResult = this.priority.compareTo(compareTask.priority);
+       
+       if (compareToResult == 0) {
+           compareToResult = this.endDate.compareTo(compareTask.endDate);
+       }
+       
+       if (compareToResult == 0) {
+           compareToResult = this.startDate.compareTo(compareTask.startDate);
+       }
+       return compareToResult;
+   }
 
 }
