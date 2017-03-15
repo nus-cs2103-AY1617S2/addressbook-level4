@@ -5,6 +5,7 @@ import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Description;
 import seedu.task.model.task.Duration;
+import seedu.task.model.task.DueDate;
 /**
  *
  */
@@ -30,6 +31,11 @@ public class TaskBuilder {
 
     public TaskBuilder withDuration(String startDate, String endDate) throws IllegalValueException {
         this.task.setDuration(new Duration(startDate, endDate));
+        return this;
+    }
+
+    public TaskBuilder withDueDate(String dueDate) throws IllegalValueException {
+        this.task.setDueDate(new DueDate(dueDate));
         return this;
     }
 
