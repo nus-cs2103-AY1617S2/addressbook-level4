@@ -1,37 +1,36 @@
 # User Guide
-
 * [Introduction](#introduction)
 * [Quick Start](#quick-start)
 * [Features](#features)
-  * [Viewing help] (#viewing-help)
-    * [Viewing a specific command] (#viewing-a-specific-command)
-  * [Adding a task] (#adding-a-task)
-    * [Adding a floating task] (#adding-a-floating-task)
-    * [Adding a pending task] (#adding-a-pending-task)
-       * [Adding a pending task with START DATE & TIME only] (#adding-a-pending-task-with-start-date--time-only)
-       * [Adding a pending task with END DATE & TIME only] (#adding-a-pending-task-with-end-date--time-only)
+  * [Viewing help](#viewing-help)
+    * [Viewing a specific command](#viewing-a-specific-command)
+  * [Adding a task](#adding-a-task)
+    * [Adding a floating task](#adding-a-floating-task)
+    * [Adding a pending task](#adding-a-pending-task)
+       * [Adding a pending task with START DATE & TIME only](#adding-a-pending-task-with-start-date--time-only)
+       * [Adding a pending task with END DATE & TIME only](#adding-a-pending-task-with-end-date--time-only)
        * [Adding a pending task with both START DATE & TIME and END DATE & TIME](#adding-a-pending-task-with-both-start-date--time-and-end-date--time)
-    * [Adding a recurring task] (#adding-a-recurring-task)
-    * [Editing a task] (#editing-a-task)
-    * [Deleting a task] (#deleting-a-task)
-    * [Viewing tasks] (#viewing-tasks)
-      * [Viewing all tasks] (#viewing-all-tasks)
-      * [Viewing a specified task] (#viewing-a-specified-task)
-      * [Viewing all Today's tasks] (#viewing-all-todays-tasks)
-      * [Viewing all pending tasks] (#viewing-all-pending-tasks)
-      * [Viewing all "done" tasks] (#viewing-all-done-tasks)
-      * [Viewing all floating tasks] (#viewing-all-floating-tasks)
-      * [Viewing all overdue tasks] (#viewing-all-overdue-tasks)
-     * [Marking a task as completed] (#marking-a-task-as-completed)
-     * [Finding for tasks] (#finding-for-tasks)
-     * [Clearing of "done" tasks] (#clearing-of-done-tasks)
-     * [Toggle Google Calendar] (#toggle-google-calendar)
-     * [Undo most recent command] (#undo-most-recent-command)
-     * [Redo most recent undo] (#redo-most-recent-undo)
-     * [Reset data] (#reset-data)
-     * [Save] (#saving-the-data)
-       * [Changing the save location] (#changing-the-save-location)
-     * [Exiting the program] (#exiting-the-application)
+   * [Adding a recurring task](#adding-a-recurring-task)
+   * [Editing a task](#editing-a-task)
+   * [Deleting a task](#deleting-a-task)
+   * [Viewing tasks](#viewing-tasks)
+     * [Viewing all tasks](#viewing-all-tasks)
+     * [Viewing a specified task](#viewing-a-specified-task)
+     * [Viewing all Today's tasks](#viewing-all-todays-tasks)
+     * [Viewing all pending tasks](#viewing-all-pending-tasks)
+     * [Viewing all "done" tasks](#viewing-all-done-tasks)
+     * [Viewing all floating tasks](#viewing-all-floating-tasks)
+     * [Viewing all overdue tasks](#viewing-all-overdue-tasks)
+   * [Marking a task as "done"](#marking-a-task-as-done)
+   * [Finding for tasks](#finding-for-tasks)
+   * [Clearing of "done" tasks](#clearing-of-done-tasks)
+   * [Toggle Google Calendar](#toggle-google-calendar)
+   * [Undo most recent command](#undo-most-recent-command)
+   * [Redo most recent undo](#redo-most-recent-undo)
+   * [Reset saved data](#reset-saved-data)
+   * [Save](#saving-the-data)
+     * [Changing the save location](#changing-the-save-location)
+   * [Exiting the program](#exiting-the-application)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 
@@ -396,7 +395,7 @@ Format : `exit`
 
 ## FAQ
 
-Q: I can't undo my previous commands after reopening ForgetMeNot <br>
+Q: I can't undo my previous commands after reopening iManager <br>
 A: Like most task managers out there, iManager does not support data backup while the application is not running.
 
 Q: Is it possible to set my storage path to a portable drive as I want to use them on different computers? <br>
@@ -409,34 +408,35 @@ A: Our iManager only shows Today's task on start-up. To view pending, "done", fl
 
 ## Command Summary
 
- Command | Format  | Description
-:--------: | -------- | -------- 
-[help](#viewing-help) | `help`| Opens a help page.
- | `help [COMMAND]`| Help with specific command. 
-[add](#adding-a-task) | `add NAME [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]`| Adds a floating task to the task list.
- | `add NAME at START_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]`| Adds a pending task with only start date&time to the task list.
- | `add NAME by END_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]`| Adds a pending task with only end date&time to the task list.
- | `add NAME from END_DATETIME to START_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]`| Adds a pending task with start date & time and end date & time to the task list.
- | `add NAME [at|on|by|from START_DATETIME to END_DATETIME] every [DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Adds a recurring task that spans over a period of time to the task list.
-[edit](#editing-a-task) | `edit INDEX|NAME [at|on|by|from START_DATETIME to END_DATETIME] [every DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Edit a task with the new parameters.
-[del](#deleting-a-task) | `del INDEX|NAME|TAG` | Delete a task from the task list.
-[view](#viewing-tasks) | `view` | View all tasks.
- | `view INDEX` | View a specified task by index.
- | `view t` | View all Today's task.
- | `view p` | View all pending task.
- | `view c` | View all "done" task.
- | `view f` | View all floating task.
- | `view o` | View all overdue task.
-[done](#marking-a-task-as-done) | `done INDEX|NAME`| Mark a task as "done".
-[find](#finding-for-tasks) | `find [KEYWORDS..]`| Find tasks with details containing any of the given keywords.
- | `find \mMM-YYYY`| Search for tasks belonging to a particular month and year, both start and end.
- | `find \yYYYY`| Search for tasks belonging to a particular year, both start and end.
- | `find\hHHMM`| Search for tasks belonging to a particular time, both start and end. 
-[clear](#clearing-of-done-tasks) | `clear` | Clear all "done" tasks.
-[toggle](#toggle-google-calendar) | `toggle` | Toggle Google Calendar.
-[undo](#undo-most-recent-command) | `undo` | Undo the most recent command.
-[redo](#redo-most-recent-command) | `redo` | Redo the most recent undo.
-[reset](#reset-saved-data) | `reset` | Reset saved data.
-[saveto](#save) | `saveto PATH` | Change the save directory.
- | `cd` | Show current save directory.
-[exit](#exiting-the-application) | `exit` | Exit the application.
+| Command | Format | Description |
+|:-------:|--------|-------------|
+| [help](#viewing-help) | `help` | Opens a help page. |
+|  | `help [COMMAND]` | Help with specific command. | 
+| [add](#adding-a-task) | `add NAME [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Adds a floating task to the task list. |
+|  | `add NAME at START_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Adds a pending task with only start date&time to the task list. |
+|  | `add NAME by END_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Adds a pending task with only end date&time to the task list. |
+|  | `add NAME from END_DATETIME to START_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Adds a pending task with start date & time and end date & time to the task list. |
+|  | `add NAME [at|on|by|from START_DATETIME to END_DATETIME] every [DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Adds a recurring task that spans over a period of time to the task list. |
+| [edit](#editing-a-task) | `edit INDEX|NAME [at|on|by|from START_DATETIME to END_DATETIME] [every DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Edit a task with the new parameters. |
+| [del](#deleting-a-task) | `del INDEX|NAME|TAG` | Delete a task from the task list. |
+| [view](#viewing-tasks) | `view` | View all tasks. |
+|  | `view INDEX` | View a specified task by index. |
+|  | `view t` | View all Today's task. |
+|  | `view p` | View all pending task. |
+|  | `view c` | View all "done" task. |
+|  | `view f` | View all floating task. |
+|  | `view o` | View all overdue task. |
+| [done](#marking-a-task-as-done) | `done INDEX|NAME` | Mark a task as "done". |
+| [find](#finding-for-tasks) | `find [KEYWORDS..]` | Find tasks with details containing any of the given keywords. |
+|  | `find \mMM-YYYY`| Search for tasks belonging to a particular month and year, both start and end. |
+|  | `find \yYYYY`| Search for tasks belonging to a particular year, both start and end. |
+|  | `find\hHHMM`| Search for tasks belonging to a particular time, both start and end.  |
+| [clear](#clearing-of-done-tasks) | `clear` | Clear all "done" tasks. |
+| [toggle](#toggle-google-calendar) | `toggle` | Toggle Google Calendar. |
+| [undo](#undo-most-recent-command) | `undo` | Undo the most recent command. |
+| [redo](#redo-most-recent-undo) | `redo` | Redo the most recent undo. |
+| [reset](#reset-saved-data) | `reset` | Reset saved data. |
+| [saveto](#save) | `saveto PATH` | Change the save directory. |
+|  | `cd` | Show current save directory. |
+| [exit](#exiting-the-application) | `exit` | Exit the application. |
+
