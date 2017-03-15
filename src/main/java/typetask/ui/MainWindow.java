@@ -34,9 +34,6 @@ public class MainWindow extends UiPart<Region> {
 
     // Independent Ui parts residing in this Ui container
 
-//	REMINDER TO SELF: REMOVE
-//    private BrowserPanel browserPanel;
-
     private PersonListPanel personListPanel;
     private Config config;
 
