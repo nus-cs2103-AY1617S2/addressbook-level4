@@ -78,8 +78,8 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Note getNote() {
-        return note;
+    public Optional<Note> getNote() {
+        return Optional.of(note);
     }
 
     @Override
