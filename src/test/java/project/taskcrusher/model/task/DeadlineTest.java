@@ -1,11 +1,9 @@
 package project.taskcrusher.model.task;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
-import org.ocpsoft.prettytime.nlp.PrettyTimeParser;
-
-import project.taskcrusher.model.task.Deadline;
 
 public class DeadlineTest {
     //before set up the current time so that you can make past deadlines that are invalid

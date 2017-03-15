@@ -73,12 +73,13 @@ public class TestUtil {
 
     private static Task[] getSamplePersonData() {
         try {
-            //CHECKSTYLE.OFF: LineLength
-            return new Task[]{
-                new Task(new Name("sample task1"), new Deadline("11-2-2020"),new Priority("1"), new Description("4th street"), new UniqueTagList()),
-                new Task(new Name("sample task2"), new Deadline("14-2-2021"),new Priority("2"), new Description("5th street"), new UniqueTagList()),
-            };
-            //CHECKSTYLE.ON: LineLength
+            // CHECKSTYLE.OFF: LineLength
+            return new Task[] {
+                new Task(new Name("sample task1"), new Deadline("11-2-2020"), new Priority("1"),
+                            new Description("4th street"), new UniqueTagList()),
+                new Task(new Name("sample task2"), new Deadline("14-2-2021"), new Priority("2"),
+                            new Description("5th street"), new UniqueTagList()), };
+            // CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
             assert false;
             // not possible
@@ -86,17 +87,13 @@ public class TestUtil {
         }
     }
 
-
     private static Tag[] getSampleTagData() {
         try {
-            return new Tag[]{
-                new Tag("relatives"),
-                new Tag("friends")
-            };
+            return new Tag[] { new Tag("relatives"), new Tag("friends") };
         } catch (IllegalValueException e) {
             assert false;
             return null;
-            //not possible
+            // not possible
         }
     }
 
@@ -105,8 +102,9 @@ public class TestUtil {
     }
 
     /**
-     * Appends the file name to the sandbox folder path.
-     * Creates the sandbox folder if it doesn't exist.
+     * Appends the file name to the sandbox folder path. Creates the sandbox
+     * folder if it doesn't exist.
+     *
      * @param fileName
      * @return
      */
@@ -142,8 +140,8 @@ public class TestUtil {
     }
 
     /**
-     * Tweaks the {@code keyCodeCombination} to resolve the {@code KeyCode.SHORTCUT} to their
-     * respective platform-specific keycodes
+     * Tweaks the {@code keyCodeCombination} to resolve the
+     * {@code KeyCode.SHORTCUT} to their respective platform-specific keycodes
      */
     public static KeyCode[] scrub(KeyCodeCombination keyCodeCombination) {
         List<KeyCode> keys = new ArrayList<>();
@@ -160,7 +158,7 @@ public class TestUtil {
             keys.add(KeyCode.CONTROL);
         }
         keys.add(keyCodeCombination.getCode());
-        return keys.toArray(new KeyCode[]{});
+        return keys.toArray(new KeyCode[] {});
     }
 
     public static boolean isHeadlessEnvironment() {
@@ -179,18 +177,17 @@ public class TestUtil {
 
     public static String descOnFail(Object... comparedObjects) {
         return "Comparison failed \n"
-                + Arrays.asList(comparedObjects).stream()
-                .map(Object::toString)
-                .collect(Collectors.joining("\n"));
+                + Arrays.asList(comparedObjects).stream().map(Object::toString).collect(Collectors.joining("\n"));
     }
 
-    public static void setFinalStatic(Field field, Object newValue) throws NoSuchFieldException,
-                                                                           IllegalAccessException {
+    public static void setFinalStatic(Field field, Object newValue)
+            throws NoSuchFieldException, IllegalAccessException {
         field.setAccessible(true);
         // remove final modifier from field
         Field modifiersField = Field.class.getDeclaredField("modifiers");
         modifiersField.setAccessible(true);
-        // ~Modifier.FINAL is used to remove the final modifier from field so that its value is no longer
+        // ~Modifier.FINAL is used to remove the final modifier from field so
+        // that its value is no longer
         // final and can be changed
         modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
         field.set(null, newValue);
@@ -206,10 +203,11 @@ public class TestUtil {
     }
 
     /**
-     * Gets private method of a class
-     * Invoke the method using method.invoke(objectInstance, params...)
+     * Gets private method of a class Invoke the method using
+     * method.invoke(objectInstance, params...)
      *
-     * Caveat: only find method declared in the current Class, not inherited from supertypes
+     * Caveat: only find method declared in the current Class, not inherited
+     * from supertypes
      */
     public static Method getPrivateMethod(Class<?> objectClass, String methodName) throws NoSuchMethodException {
         Method method = objectClass.getDeclaredMethod(methodName);
@@ -227,6 +225,7 @@ public class TestUtil {
 
     /**
      * Gets mid point of a node relative to the screen.
+     *
      * @param node
      * @return
      */
@@ -238,6 +237,7 @@ public class TestUtil {
 
     /**
      * Gets mid point of a node relative to its scene.
+     *
      * @param node
      * @return
      */
@@ -249,6 +249,7 @@ public class TestUtil {
 
     /**
      * Gets the bound of the node relative to the parent scene.
+     *
      * @param node
      * @return
      */
@@ -274,8 +275,11 @@ public class TestUtil {
 
     /**
      * Removes a subset from the list of persons.
-     * @param persons The list of persons
-     * @param personsToRemove The subset of persons.
+     *
+     * @param persons
+     *            The list of persons
+     * @param personsToRemove
+     *            The subset of persons.
      * @return The modified persons after removal of the subset from persons.
      */
     public static TestCard[] removePersonsFromList(final TestCard[] persons, TestCard... personsToRemove) {
@@ -284,11 +288,13 @@ public class TestUtil {
         return listOfPersons.toArray(new TestCard[listOfPersons.size()]);
     }
 
-
     /**
      * Returns a copy of the list with the person at specified index removed.
-     * @param list original list to copy from
-     * @param targetIndexInOneIndexedFormat e.g. index 1 if the first element is to be removed
+     *
+     * @param list
+     *            original list to copy from
+     * @param targetIndexInOneIndexedFormat
+     *            e.g. index 1 if the first element is to be removed
      */
     public static TestCard[] removePersonFromList(final TestCard[] list, int targetIndexInOneIndexedFormat) {
         return removePersonsFromList(list, list[targetIndexInOneIndexedFormat - 1]);
@@ -296,9 +302,13 @@ public class TestUtil {
 
     /**
      * Replaces persons[i] with a person.
-     * @param persons The array of persons.
-     * @param person The replacement person
-     * @param index The index of the person to be replaced.
+     *
+     * @param persons
+     *            The array of persons.
+     * @param person
+     *            The replacement person
+     * @param index
+     *            The index of the person to be replaced.
      * @return
      */
     public static TestCard[] replacePersonFromList(TestCard[] persons, TestCard person, int index) {
@@ -308,8 +318,11 @@ public class TestUtil {
 
     /**
      * Appends persons to the array of persons.
-     * @param persons A array of persons.
-     * @param personsToAdd The persons that are to be appended behind the original array.
+     *
+     * @param persons
+     *            A array of persons.
+     * @param personsToAdd
+     *            The persons that are to be appended behind the original array.
      * @return The modified array of persons.
      */
     public static TestCard[] addPersonsToList(final TestCard[] persons, TestCard... personsToAdd) {
@@ -332,7 +345,7 @@ public class TestUtil {
 
     public static Tag[] getTagList(String tags) {
         if ("".equals(tags)) {
-            return new Tag[]{};
+            return new Tag[] {};
         }
 
         final String[] split = tags.split(", ");
@@ -341,7 +354,7 @@ public class TestUtil {
             try {
                 return new Tag(e.replaceFirst("Tag: ", ""));
             } catch (IllegalValueException e1) {
-                //not possible
+                // not possible
                 assert false;
                 return null;
             }

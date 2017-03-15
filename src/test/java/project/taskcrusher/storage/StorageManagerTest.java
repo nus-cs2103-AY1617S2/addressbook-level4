@@ -1,7 +1,7 @@
 package project.taskcrusher.storage;
 
-
 import static junit.framework.TestCase.assertNotNull;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -17,10 +17,6 @@ import project.taskcrusher.commons.events.storage.DataSavingExceptionEvent;
 import project.taskcrusher.model.ReadOnlyUserInbox;
 import project.taskcrusher.model.UserInbox;
 import project.taskcrusher.model.UserPrefs;
-import project.taskcrusher.storage.JsonUserPrefsStorage;
-import project.taskcrusher.storage.Storage;
-import project.taskcrusher.storage.StorageManager;
-import project.taskcrusher.storage.XmlUserInboxStorage;
 import project.taskcrusher.testutil.EventsCollector;
 import project.taskcrusher.testutil.TypicalTestTasks;
 

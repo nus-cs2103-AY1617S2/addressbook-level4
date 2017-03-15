@@ -40,7 +40,7 @@ public class TestCard implements ReadOnlyTask {
         this.description = description;
     }
 
-    public void setDeadline(Deadline deadline){
+    public void setDeadline(Deadline deadline) {
         this.deadline = deadline;
     }
 
@@ -85,14 +85,17 @@ public class TestCard implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getTaskName().name + " ");
-        if(this.getDeadline().hasDeadline())
+        if (this.getDeadline().hasDeadline()) {
             sb.append("d/" + this.getDeadline().deadline + " ");
+        }
 
-        if(this.getPriority().hasPriority())
+        if (this.getPriority().hasPriority()) {
             sb.append("p/" + this.getPriority().priority + " ");
+        }
 
-        if(this.getDescription().hasDescription())
+        if (this.getDescription().hasDescription()) {
             sb.append("//" + this.getDescription().description + " ");
+        }
 
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
