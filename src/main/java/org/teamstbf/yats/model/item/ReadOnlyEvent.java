@@ -8,6 +8,9 @@ import org.teamstbf.yats.model.tag.UniqueTagList;
  */
 public interface ReadOnlyEvent {
 
+	public String MESSAGE_NEWLINE = "\n";
+	public String MESSAGE_HYPEN = " - ";
+	
 	Title getTitle();
 	Description getDescription();
 	Location getLocation();
@@ -39,10 +42,18 @@ public interface ReadOnlyEvent {
 	default String getAsText() {
 		final StringBuilder builder = new StringBuilder();
 		builder.append(getTitle())
-		.append(" Title: ")
-		.append(" Description: ")
+		.append(MESSAGE_NEWLINE)
+		.append("Location: ")
+		.append(getLocation())
+		.append(MESSAGE_NEWLINE)
+		.append("Description: ")
 		.append(getDescription())
-			.append(" Tags: ");
+		.append(MESSAGE_NEWLINE)
+		.append("Time: ")
+		.append(getStartTime())
+		.append(MESSAGE_HYPEN)
+		.append(getEndTime())
+		.append("Tags: ");
 		getTags().forEach(builder::append);
 		return builder.toString();
 	}
