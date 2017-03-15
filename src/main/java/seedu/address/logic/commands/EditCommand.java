@@ -7,7 +7,6 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Description;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Title;
@@ -23,7 +22,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [title|description|deadline|tag] NEW.\n"
+            + "Parameters: INDEX (must be a positive integer) [title|deadline|tag] NEW.\n"
             + "Example: " + COMMAND_WORD + " 2 title finish SWE HW";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
@@ -87,14 +86,12 @@ public class EditCommand extends Command {
      */
     public static class EditTaskDescriptor {
         private Optional<Title> title = Optional.empty();
-        private Optional<Description> description = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditTaskDescriptor() {}
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.title = toCopy.getTitle();
-            this.description = toCopy.getDescription();
             this.tags = toCopy.getTags();
         }
 
@@ -102,7 +99,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.title, this.description, this.tags);
+            return CollectionUtil.isAnyPresent(this.title, this.tags);
         }
 
         public void setTitle(Optional<Title> title) {
@@ -112,15 +109,6 @@ public class EditCommand extends Command {
 
         private Optional<Title> getTitle() {
             return title;
-        }
-        
-        public void setDescription(Optional<Description> description) {
-            assert description != null;
-            this.description = description;
-        }
-
-        private Optional<Description> getDescription() {
-            return description;
         }
 
         public void setTags(Optional<UniqueTagList> tags) {
