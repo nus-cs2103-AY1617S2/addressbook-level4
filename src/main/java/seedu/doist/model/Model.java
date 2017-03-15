@@ -53,10 +53,8 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
 
-    public void updateFilteredTaskList(TaskType type);
-
-    /** Updates the filter of the filtered task list to filter by the given keywords*/
-    void updateFilteredTaskList(UniqueTagList tags);
+    /** Updates the filter of the filtered task list to filter by the given task type and tags*/
+    void updateFilteredTaskList(TaskType type, UniqueTagList tags);
 
     void sortTasksByPriority();
 }

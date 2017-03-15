@@ -31,7 +31,7 @@ public class ListCommand extends Command {
 
     public ListCommand(String preamble, Map<String, List<String>> parameters) throws IllegalValueException {
         try {
-            type = TaskType.valueOf(preamble);
+            type = TaskType.valueOf(preamble.trim());
         } catch (IllegalArgumentException e) { }
         List<String> tagsParameterStringList = parameters.get(CliSyntax.PREFIX_UNDER.toString());
         if (tagsParameterStringList != null && !tagsParameterStringList.isEmpty()) {
@@ -41,16 +41,11 @@ public class ListCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        if (type != null) {
-            model.updateFilteredTaskList(type);
-            return new CommandResult(MESSAGE_SUCCESS);
-        } else if (tagList.isEmpty()) {
-            model.updateFilteredListToShowAll();
-            return new CommandResult(MESSAGE_SUCCESS);
-        } else {
-            model.updateFilteredTaskList(tagList);
-            return new CommandResult(getSuccessMessageListUnder(tagList));
-        }
+        model.updateFilteredTaskList(type, tagList);
+        CommandResult commandResult = tagList.isEmpty() ?
+                                      new CommandResult(MESSAGE_SUCCESS) :
+                                      new CommandResult(getSuccessMessageListUnder(tagList));
+        return commandResult;
     }
 
     public static CommandInfo info() {

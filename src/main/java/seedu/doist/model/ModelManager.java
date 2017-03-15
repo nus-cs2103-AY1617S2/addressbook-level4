@@ -1,5 +1,6 @@
 package seedu.doist.model;
 
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -133,15 +134,15 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskList(TaskType type) {
-        Qualifier[] qualifiers = {new TaskTypeQualifier(type)};
-        updateFilteredTaskList(new PredicateExpression(qualifiers));
-    }
-
-    @Override
-    public void updateFilteredTaskList(UniqueTagList tags) {
-        Qualifier[] qualifiers = {new TagQualifier(tags)};
-        updateFilteredTaskList(new PredicateExpression(qualifiers));
+    public void updateFilteredTaskList(TaskType type, UniqueTagList tags) {
+        ArrayList<Qualifier> qualifiers = new ArrayList<Qualifier>();
+        if (type != null) {
+            qualifiers.add(new TaskTypeQualifier(type));
+        }
+        if (!tags.isEmpty()) {
+            qualifiers.add(new TagQualifier(tags));
+        }
+        updateFilteredTaskList(new PredicateExpression(qualifiers.toArray(new Qualifier[qualifiers.size()])));
     }
 
     private void updateFilteredTaskList(Expression expression) {
