@@ -31,7 +31,7 @@ public interface ReadOnlyTask {
                 && other.getStartTime().equals(this.getStartTime())
                 && other.getVenue().equals(this.getVenue())
                 && other.getEndTime().equals(this.getEndTime())
-        		&& other.getUrgencyLevel().equals(this.getUrgencyLevel())
+                && other.getUrgencyLevel().equals(this.getUrgencyLevel())
                 && other.getDescription().equals(this.getDescription()));
     }
 

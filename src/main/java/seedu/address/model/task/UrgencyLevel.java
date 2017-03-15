@@ -8,7 +8,8 @@ public class UrgencyLevel {
      * Guarantees: immutable; is valid as declared in {@link #isValidUrgencyLevel(String)}
      */
 
-    public static final String MESSAGE_URGENCYLEVEL_CONSTRAINTS = "Task urgency levels should only contain numbers between 1 to 5";
+    public static final String MESSAGE_URGENCYLEVEL_CONSTRAINTS = "Task urgency levels should "
+            + "only contain numbers between 1 to 5";
     public static final String URGENCYLEVEL_VALIDATION_REGEX = "[1-5]";
 
     public final String value;

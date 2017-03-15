@@ -9,7 +9,7 @@ import seedu.address.model.tag.UniqueTagList;
  * Represents a Task in the endtime book.
  * Guarantees: details are present and not null, field values are validated.
  */
-public class Task implements ReadOnlyTask, Comparable<Task>{
+public class Task implements ReadOnlyTask, Comparable<Task> {
 
     private Title title;
     private StartTime startTime;
