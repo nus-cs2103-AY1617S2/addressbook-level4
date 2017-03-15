@@ -14,6 +14,7 @@ import seedu.tache.model.task.DetailedTask;
 import seedu.tache.model.task.ReadOnlyDetailedTask;
 import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.model.task.Task;
+import seedu.tache.model.task.UniqueDetailedTaskList.DuplicateDetailedTaskException;
 import seedu.tache.model.task.UniqueTaskList;
 import seedu.tache.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.tache.model.task.UniqueTaskList.TaskNotFoundException;
@@ -85,6 +86,17 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();
     }
+    
+    @Override
+    public void updateDetailedTask(int filteredDetailedTaskListIndex, ReadOnlyDetailedTask editedDetailedTask)
+            throws DuplicateDetailedTaskException {
+        assert editedDetailedTask != null;
+
+        int taskManagerIndex = filteredDetailedTasks.getSourceIndex(filteredDetailedTaskListIndex);
+        taskManager.updateDetailedTask(taskManagerIndex, editedDetailedTask);
+        indicateTaskManagerChanged();
+        
+    }
 
     //=========== Filtered Task List Accessors =============================================================
 
@@ -101,6 +113,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
+        filteredDetailedTasks.setPredicate(null);
     }
 
     @Override
@@ -111,11 +124,21 @@ public class ModelManager extends ComponentManager implements Model {
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
+    
+    @Override
+    public void updateFilteredDetailedTaskList(Set<String> keywords) {
+        updateFilteredDetailedTaskList(new PredicateExpression(new NameQualifier(keywords)));     
+    }
+    
+    private void updateFilteredDetailedTaskList(Expression expression) {
+        filteredDetailedTasks.setPredicate(expression::satisfies);
+    }
 
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
+        boolean satisfies(ReadOnlyDetailedTask task);
         String toString();
     }
 
@@ -131,6 +154,11 @@ public class ModelManager extends ComponentManager implements Model {
         public boolean satisfies(ReadOnlyTask task) {
             return qualifier.run(task);
         }
+        
+        @Override
+        public boolean satisfies(ReadOnlyDetailedTask detailedTask) {
+            return qualifier.run(detailedTask);
+        }
 
         @Override
         public String toString() {
@@ -140,6 +168,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Qualifier {
         boolean run(ReadOnlyTask task);
+        boolean run(ReadOnlyDetailedTask task);
         String toString();
     }
 
@@ -154,6 +183,14 @@ public class ModelManager extends ComponentManager implements Model {
         public boolean run(ReadOnlyTask task) {
             return nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword))
+                    .findAny()
+                    .isPresent();
+        }
+        
+        @Override
+        public boolean run(ReadOnlyDetailedTask detailedTask) {
+            return nameKeyWords.stream()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(detailedTask.getName().fullName, keyword))
                     .findAny()
                     .isPresent();
         }

@@ -19,6 +19,10 @@ public abstract class Command {
     public static String getMessageForTaskListShownSummary(int displaySize) {
         return String.format(Messages.MESSAGE_TASKS_LISTED_OVERVIEW, displaySize);
     }
+    
+    public static String getMessageForDetailedTaskListShownSummary(int displaySize) {
+        return String.format(Messages.MESSAGE_DETAILED_TASKS_LISTED_OVERVIEW, displaySize);
+    }
 
     /**
      * Executes the command and returns the result message.
