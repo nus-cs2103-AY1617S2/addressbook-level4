@@ -20,9 +20,9 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label description;
     @FXML
-    private Label start_time;
+    private Label startDateTime;
     @FXML
-    private Label end_time;
+    private Label endDateTime;
     @FXML
     private FlowPane tags;
 
@@ -31,8 +31,8 @@ public class TaskCard extends UiPart<Region> {
         name.setText(task.getName().taskName);
         id.setText(displayedIndex + ". ");
         description.setText(task.getDescription().toString());
-        start_time.setText(task.getStartDateTime().toString());
-        end_time.setText(task.getEndDateTime().toString());
+        startDateTime.setText(task.getStartDateTime().toString());
+        endDateTime.setText(task.getEndDateTime().toString());
         initTags(task);
     }
 
