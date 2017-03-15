@@ -30,9 +30,7 @@
    3.21. [Differentiating your Tasks’ Urgency]()<br>
 4. [FAQ](#faq)<br>
 5. [Command Summary](#command-summary)<br>
-
 &nbsp;
-
 ## 1. Introduction
 
 TypeTask is an easy-to-use task manager which lets you schedule and manage your tasks simply <br>
@@ -43,9 +41,7 @@ TypeTask is especially good for you if: <br>
 > You want to do everything through a single line of command <br>
 > You want an application that works offline <br>
 > You want to write tasks that have deadlines or start-dates <br>
-
 &nbsp;
-
 ## 2. Quick Start
 
 1. Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
@@ -75,7 +71,7 @@ Fig 1. TypeTask’s User Interface <br>
    
 7. Refer to the [Features](#features) section below for details of each command.<br>
 
-&nbsp;
+
 
 ## 3. Features
 Let us now explore the interesting features found in TypeTask!
@@ -359,12 +355,11 @@ TypeTask automatically assigns your tasks certain colours to help you differenti
 `Green`: this uncompleted task has a deadline but is not due yet. Phew! <br>
 
 ```
-> Note that all tasks that fall outside of these categories will appear normally 
+> Note that all tasks that fall outside of these categories
+  will appear normally.  
   i.e. no additional colours.
  ```
- 
-&nbsp;
- 
+&nbsp; 
 ## 4. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -373,10 +368,8 @@ TypeTask automatically assigns your tasks certain colours to help you differenti
  
 **Q**: TypeTask does not launch in Eclipse. How can I solve this issue?<br>
 Make sure that you run the program as a java application. Also, try refreshing the Gradle project 
-by try right clicking on the file -> Gradle -> Refresh Gradle project 
- 
+by try right clicking on the file -> Gradle -> Refresh Gradle project  
 &nbsp;
-
 ## 5. Command Summary
 
 <img src="images/commandShortcut.png" width="600">
