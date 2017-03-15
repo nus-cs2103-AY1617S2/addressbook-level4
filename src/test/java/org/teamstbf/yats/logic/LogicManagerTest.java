@@ -72,7 +72,7 @@ public class LogicManagerTest {
 
 		/**
 		 * Adds auto-generated Person objects to the given AddressBook
-		 * 
+		 *
 		 * @param addressBook
 		 *            The AddressBook to which the Persons will be added
 		 */
@@ -91,7 +91,7 @@ public class LogicManagerTest {
 
 		/**
 		 * Adds auto-generated Person objects to the given model
-		 * 
+		 *
 		 * @param model
 		 *            The model to which the Persons will be added
 		 */
@@ -235,7 +235,7 @@ public class LogicManagerTest {
 	 * Executes the command, confirms that a CommandException is thrown and that
 	 * the result message is correct. Both the 'address book' and the 'last
 	 * shown list' are verified to be unchanged.
-	 * 
+	 *
 	 * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager,
 	 *      List)
 	 */
@@ -249,7 +249,7 @@ public class LogicManagerTest {
 	 * Executes the command, confirms that a CommandException is not thrown and
 	 * that the result message is correct. Also confirms that both the 'address
 	 * book' and the 'last shown list' are as specified.
-	 * 
+	 *
 	 * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager,
 	 *      List)
 	 */
@@ -261,7 +261,7 @@ public class LogicManagerTest {
 	/**
 	 * Confirms the 'invalid argument index number behaviour' for the given
 	 * command targeting a single person in the shown list, using visible index.
-	 * 
+	 *
 	 * @param commandWord
 	 *            to test assuming it targets a single person in the last shown
 	 *            list based on visible index.
@@ -284,7 +284,7 @@ public class LogicManagerTest {
 	/**
 	 * Confirms the 'invalid argument index number behaviour' for the given
 	 * command targeting a single person in the shown list, using visible index.
-	 * 
+	 *
 	 * @param commandWord
 	 *            to test assuming it targets a single person in the last shown
 	 *            list based on visible index.
