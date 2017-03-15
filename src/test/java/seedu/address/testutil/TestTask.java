@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import java.util.Optional;
+
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Name;
@@ -29,7 +31,7 @@ public class TestTask implements ReadOnlyTask {
      */
     public TestTask(TestTask taskToCopy) {
         this.name = taskToCopy.getName();
-        this.priority = taskToCopy.getPriority();
+        this.priority = taskToCopy.getPriority().orElse(null);
         this.status = taskToCopy.getStatus();
         this.note = taskToCopy.getNote();
         this.deadline = taskToCopy.getDeadline();
@@ -66,8 +68,8 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Priority getPriority() {
-        return priority;
+    public Optional<Priority> getPriority() {
+        return Optional.of(priority);
     }
 
     @Override
@@ -99,7 +101,11 @@ public class TestTask implements ReadOnlyTask {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
         sb.append("n/" + this.getNote().value + " ");
-        sb.append("p/" + Priority.toUserInputString(this.getPriority().value) + " ");
+
+        if (this.getPriority().isPresent()) {
+            sb.append("p/" + this.getPriority().get().toString());
+        }
+
         sb.append("s/" + this.getStatus().value + " ");
         sb.append("d/" + this.getDeadline().toString() + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
