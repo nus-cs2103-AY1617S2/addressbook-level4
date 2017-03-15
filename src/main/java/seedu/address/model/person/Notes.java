@@ -25,7 +25,7 @@ public class Notes {
     /**
      * Validates given notes.
      *
-     * @throws IllegalValueException if given address string is invalid.
+     * @throws IllegalValueException if given notes string is invalid.
      */
     public Notes(String notes) throws IllegalValueException {
         assert notes != null;
