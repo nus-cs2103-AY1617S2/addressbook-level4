@@ -1,7 +1,5 @@
 package seedu.taskmanager.logic.commands;
 
-import static seedu.taskmanager.model.task.Date.DATE_VALIDATION_REGEX2;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -115,8 +113,8 @@ public class UpdateCommand extends Command {
          * Returns true if at least one field is updated.
          */
         public boolean isAnyFieldUpdated() {
-            return CollectionUtil.isAnyPresent(this.taskname, this.date/*,
-            		                           this.endtime, this.categories*/);
+            return CollectionUtil.isAnyPresent(this.taskname, this.date,
+            		                           this.starttime, this.endtime);
         }
 
         public void setTaskName(Optional<TaskName> taskname) {
