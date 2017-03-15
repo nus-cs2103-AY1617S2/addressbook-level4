@@ -11,7 +11,8 @@ import typetask.commons.util.CollectionUtil;
 public class Task implements ReadOnlyTask {
 
     private Name name;
-
+    private Date date;
+    private Time time;
 
     /**
      * Every field must be present and not null.
@@ -21,12 +22,17 @@ public class Task implements ReadOnlyTask {
         assert !CollectionUtil.isAnyNull(name);
         this.name = name;
     }
-
+    public Task(Name name, Date date, Time time) {
+        assert !CollectionUtil.isAnyNull(name);
+        this.name = name;
+        this.date = date;
+        this.time = time;
+    }
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName());
+       this(source.getName(), source.getDate(), source.getTime());
     }
 
     public void setName(Name name) {
@@ -34,9 +40,24 @@ public class Task implements ReadOnlyTask {
         this.name = name;
     }
 
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setTime(Time time) {
+        this.time = time;
+    }
     @Override
     public Name getName() {
         return name;
+    }
+    @Override
+    public Date getDate() {
+        return date;
+    }
+    @Override
+    public Time getTime() {
+        return time;
     }
 
     /**
@@ -45,6 +66,8 @@ public class Task implements ReadOnlyTask {
     public void resetData(ReadOnlyTask replacement) {
         assert replacement != null;
         this.setName(replacement.getName());
+        this.setDate(replacement.getDate());
+        this.setTime(replacement.getTime());
     }
 
     @Override

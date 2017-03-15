@@ -30,9 +30,11 @@ import typetask.commons.exceptions.IllegalValueException;
 import typetask.commons.util.FileUtil;
 import typetask.commons.util.XmlUtil;
 import typetask.model.TaskManager;
+import typetask.model.task.Date;
 import typetask.model.task.Name;
 import typetask.model.task.ReadOnlyTask;
 import typetask.model.task.Task;
+import typetask.model.task.Time;
 import typetask.storage.XmlSerializableAddressBook;
 
 /**
@@ -69,15 +71,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Name("Ali Muster")),
-                new Task(new Name("Boris Mueller")),
-                new Task(new Name("Carl Kurz")),
-                new Task(new Name("Daniel Meier")),
-                new Task(new Name("Elle Meyer")),
-                new Task(new Name("Fiona Kunz")),
-                new Task(new Name("George Best")),
-                new Task(new Name("Hoon Meier")),
-                new Task(new Name("Ida Mueller"))
+                new Task(new Name("Ali Muster"), new Date(""), new Time("")),
+                new Task(new Name("Boris Mueller"), new Date(""), new Time("")),
+                new Task(new Name("Carl Kurz"), new Date(""), new Time("")),
+                new Task(new Name("Daniel Meier"), new Date(""), new Time("")),
+                new Task(new Name("Elle Meyer"), new Date(""), new Time("")),
+                new Task(new Name("Fiona Kunz"), new Date(""), new Time("")),
+                new Task(new Name("George Best"), new Date(""), new Time("")),
+                new Task(new Name("Hoon Meier"), new Date(""), new Time("")),
+                new Task(new Name("Ida Mueller"), new Date(""), new Time(""))
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {

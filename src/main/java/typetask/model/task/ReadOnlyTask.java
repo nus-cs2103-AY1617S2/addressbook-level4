@@ -8,6 +8,8 @@ package typetask.model.task;
 public interface ReadOnlyTask {
 
     Name getName();
+    Date getDate();
+    Time getTime();
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
@@ -23,7 +25,11 @@ public interface ReadOnlyTask {
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName());
+        builder.append(getName())
+               .append(" DueDate: ")
+               .append(getDate())
+               .append(" Time: ")
+               .append(getTime());
         return builder.toString();
     }
 

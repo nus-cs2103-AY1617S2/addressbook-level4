@@ -43,6 +43,7 @@ import typetask.model.task.Date;
 import typetask.model.task.Name;
 import typetask.model.task.ReadOnlyTask;
 import typetask.model.task.Task;
+import typetask.model.task.Time;
 import typetask.storage.StorageManager;
 
 
@@ -397,8 +398,9 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
-            Date deadline = new Date("11/11/2017");
-            return new Task(name);
+            Date date = new Date("");
+            Time time = new Time("");
+            return new Task(name, date, time);
         }
 
         /**

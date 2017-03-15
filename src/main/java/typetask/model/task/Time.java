@@ -27,7 +27,12 @@ public class Time {
      * Returns true if a given string is a valid time.
      */
     public static boolean isValidTime(String test) {
-        return test.matches(TIME_VALIDATION_REGEX);
+        if (test.equals("")) {
+            return true;
+        } else {
+            return test.matches(TIME_VALIDATION_REGEX);
+        }
+
     }
 
     @Override

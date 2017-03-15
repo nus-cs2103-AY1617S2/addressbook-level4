@@ -30,7 +30,12 @@ public class Date {
      * Returns true if a given string is a valid task date.
      */
     public static boolean isValidDate(String test) {
-        return test.matches(DATE_VALIDATION_REGEX);
+        if (test.equals("")) {
+            return true;
+        } else {
+            return test.matches(DATE_VALIDATION_REGEX);
+        }
+
     }
 
     @Override
