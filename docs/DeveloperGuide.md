@@ -99,8 +99,15 @@ The **_Architecture Diagram_** given above explains the high-level design of the
 Given below is a quick overview of each component.
 
 #### `Main`
+The `Main` component takes charge of initializing other components (`Model`, `Logic`, `UI`) in the correct order and loading data from local storage when the app launches.  
+It also takes charge of terminating other components when Doist is shut down.
+
 #### `UI`
+The `UI` component takes charge of displaying information and handling all user interactions.
+
 #### `Logic`
+The `Logic` component takes charge of parsing the user input and executing the commands.
+
 #### `Model`
 #### `Storage`
 #### `Commons`
@@ -108,6 +115,24 @@ Given below is a quick overview of each component.
 ### 2. UI component
 ### 3. Logic component
 ### 4. Model component
+The `Model` component defines classes to represent the data that Doist operates on. It also specifies and implements the operations on these data.  
+  
+The following diagram demonstrate the structure of the `Model` component  
+<img src="images/ModelClassDiagram.png" width="600"><br>
+
+The following is a brief remarks of some key files in this component:
+- [`Model.java`](../src/main/java/seedu/doist/model/Model.java):  contains an `interface` that defines multiple operations on the data.  
+    These operations are defined using different methods (API).  
+    Some representatives methods are listed here:  
+    ```java
+    - void finishTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException, UniqueTaskList.TaskAlreadyFinishedException;
+    - void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
+    - void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
+    ```
+- `ModelManager.java`: contains a `class` that implements the operations specified in `Model.java`.
+- `TodoList.java`: contains a `class` that represents the to-do list.
+- `Task.java`: contains an `class` that represents each to-do list item (i.e. task).
+
 ### 5. Storage component
 <br>
 
@@ -255,7 +280,7 @@ Priority | As a ... | I want to ... |So that I can ...
 **`* * *`** | user | view the details of a task | see details of a task such as recurrance interval
 **`* * *`** | user | see a list of pending, overdue or finished tasks separately
 **`* * *`** | user | edit task properties
-**`* * *`** | user | mark a task as ‚ÄúFinished‚Äù
+**`* * *`** | user | mark a task as "Finished"
 **`* * *`** | user with many tasks |  find tasks using keywords (appearing in titles or in description) | easily find the task
 **`* * *`** | user | view all commands that I can use with detailed instructions, including examples
 **`* * *`** | user that makes mistakes | undo my last action(s) | revert to the previous state
@@ -266,15 +291,15 @@ Priority | As a ... | I want to ... |So that I can ...
 **`* *`** | user | add or delete tags for a specific task | better filter the tasks
 **`* *`** | user | see a list of tasks within a specified time interval
 **`* *`** | user | see a list of all tasks with a specific tag | filter tasks by tag
-**`* *`** | user |  recover a certain task in the ‚ÄúTrash Bin‚Äù
+**`* *`** | user |  recover a certain task in the ìTrash Binî
 **`* *`** | user | use arrow key to see the previous commands I execute | I can re-execute the past commands conveniently without manually typing them
 **`* *`** | user | I want an error message to appear at the feedback textbox | I know what error occured
 **`*`** | user | rename existing commands | customise to the ones I am more used to
 **`*`** | user | reset all changes to existing commands | return to using the default commands
 **`*`** | user | I want the keywords in the command to be highlighted
 **`*`** | user | I want the auto-completion / content-assistant of the keywords when I am typing
-**`*`** | user | create a new task by entering the date in a ‚Äúnatural language‚Äù way | it feels more natural when typing
-**`*`** | user | see my ‚ÄúTrash Bin‚Äù that consists of deleted tasks | view and/or recover them
+**`*`** | user | create a new task by entering the date in a ìnatural languageî way | it feels more natural when typing
+**`*`** | user | see my ìTrash Binî that consists of deleted tasks | view and/or recover them
 **`*`** | user | see my tasks on Google Calendar | integrate tasks with Google Calendar
 
 <br>
@@ -477,7 +502,7 @@ Use case ends.
 - Have multiple UI themes
 - Come with automated unit tests
 - Be able to hold up to 1000 tasks
-- Run fast enough by responding to a user‚Äôs command on the command line interface within 5 secs
+- Run fast enough by responding to a userís command on the command line interface within 5 secs
 - Be open source
 - Have flexible commands that accept variations
 - Allow user to customise default commands
@@ -528,7 +553,7 @@ http://www.comp.nus.edu.sg/~cs2103/AY1617S2/contents/handbook.html#handbook-proj
     - `Finished tasks`
     Tasks that have been `finished`
     - `Recurring task`
-    A task with a `recurrence interval` set. A new task will automatically be cloned from this task, with the recurrence interval added to the task‚Äôs `start time`, `end time` and `reminder time` when a task is marked as `Finished` or becomes `Overdue`
+    A task with a `recurrence interval` set. A new task will automatically be cloned from this task, with the recurrence interval added to the taskís `start time`, `end time` and `reminder time` when a task is marked as `Finished` or becomes `Overdue`
 
 **Mutating Command**
     Any command which causes a change in the state of apps (E.g. add, delete, finished)
@@ -547,7 +572,7 @@ Author: Lee Yan Hwa
 
 Pros:
 
-* Almost ‚Äúnatural language‚Äù command-line interface to enter tasks
+* Almost ìnatural languageî command-line interface to enter tasks
 * Neat UI to display tasks and view different types of tasks (Finished, Overdue, Not finished, Due today, Tomorrow, This Week, Trash)
 * Tasks are automatically added to Smart Lists according to criterias set by user
 * Has subtasks
@@ -559,7 +584,7 @@ Pros:
 Cons:
 
 * Some of the best features like subtasks is pro-only
-* Doesn‚Äôt have support for handwritten tasks, drawings, images, calendar view
+* Doesnít have support for handwritten tasks, drawings, images, calendar view
 * Reminder timing cannot be customised
 * No attachment of files
 
@@ -581,7 +606,7 @@ Pros:
 Cons:
 
 * Pro version is quite expensive
-* There is no dedicated ‚ÄòSync‚Äô button
+* There is no dedicated ëSyncí button
     * Setup is a bit lengthy, and may require you to download the mobile version as well
 
 
