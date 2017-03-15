@@ -34,7 +34,7 @@ public class LoadCommand extends Command {
        assert model != null;
 
         if (!isValidPath(filePath)) {
-            return new CommandResult(MESSAGE_INVALID_PATH);
+            return new CommandResult(String.format(MESSAGE_INVALID_PATH, filePath));
         }
 
         try {
