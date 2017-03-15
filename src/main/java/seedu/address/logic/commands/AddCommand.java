@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -38,21 +39,55 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String title, String venue, String starttime, String endtime, String urgencyLevel, String description, Set<String> tags)
+    public AddCommand(String title, Optional<String> venue, Optional<String> starttime, Optional<String> endtime, Optional<String> urgencyLevel, Optional<String> description, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
+
+        Title tempTitle = new Title(title);
+        Venue tempVenue = null;
+        StartTime tempStartTime = null;
+        EndTime tempEndTime = null;
+        UrgencyLevel tempUrgencyLevel = null;
+        Description tempDescription = null;
+
+        if(venue.isPresent()) {
+            tempVenue = new Venue(venue.get());
+        } else {
+            tempVenue = new Venue("");
+        }
+        if(starttime.isPresent()) {
+            tempStartTime = new StartTime(starttime.get());
+        } else {
+            tempStartTime = new StartTime("");
+        }
+        if(endtime.isPresent()) {
+            tempEndTime = new EndTime(endtime.get());
+        } else {
+            tempEndTime = new EndTime("");
+        }
+        if(urgencyLevel.isPresent()) {
+            tempUrgencyLevel = new UrgencyLevel(urgencyLevel.get());
+        } else {
+            tempUrgencyLevel = new UrgencyLevel("");
+        }
+        if(description.isPresent()) {
+            tempDescription = new Description(description.get());
+        } else {
+            tempDescription = new Description("");
+        }
+
         this.toAdd = new Task(
-                new Title(title),
-                new Venue(venue),
-                new StartTime(starttime),
-                new EndTime(endtime),
-                new UrgencyLevel(urgencyLevel),
-                new Description(description),
+                tempTitle,
+                tempVenue,
+                tempStartTime,
+                tempEndTime,
+                tempUrgencyLevel,
+                tempDescription,
                 new UniqueTagList(tagSet)
-        );
+                );
     }
 
     @Override
