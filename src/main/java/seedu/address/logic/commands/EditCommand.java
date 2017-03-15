@@ -90,7 +90,11 @@ public class EditCommand extends Command {
                 .map(Optional::of)
                 .orElseGet(taskToEdit::getNote)
                 .orElse(null);
-        Deadline updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(taskToEdit::getDeadline);
+        Deadline updatedDeadline = editTaskDescriptor
+                .getDeadline()
+                .map(Optional::of)
+                .orElseGet(taskToEdit::getDeadline)
+                .orElse(null);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
         return new Task(updatedName, updatedPriority, updatedStatus, updatedNote, updatedDeadline, updatedTags);
