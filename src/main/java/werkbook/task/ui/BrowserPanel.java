@@ -19,42 +19,44 @@ public class BrowserPanel extends UiPart<Region> {
     @FXML
     private AnchorPane browser;
     @FXML
-    private Label name1;
+    private Label name;
     @FXML
     private Label id;
     @FXML
     private FlowPane tags;
     @FXML
-    private Label description1;
+    private Label description;
     @FXML
-    private Label start_time;
+    private Label startDateTime;
     @FXML
-    private Label end_time;
+    private Label endDateTime;
 
     /**
      * @param placeholder The AnchorPane where the BrowserPanel must be inserted
      */
     public BrowserPanel(AnchorPane placeholder) {
         super(FXML);
-        placeholder.setOnKeyPressed(Event::consume); // To prevent triggering events for typing inside the
+        placeholder.setOnKeyPressed(Event::consume); // To prevent triggering
+                                                     // events for typing inside
+                                                     // the
                                                      // loaded Web page.
         FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
         placeholder.getChildren().add(browser);
     }
 
     void loadTaskPage(ReadOnlyTask task) {
-    	
-    	name1.setText(task.getName().taskName);
-//        id.setText(displayedIndex + ". ");
-        description1.setText(task.getDescription().toString());
-        start_time.setText(task.getStartDateTime().toString());
-        end_time.setText(task.getEndDateTime().toString());
+
+        name.setText(task.getName().taskName);
+        // id.setText(displayedIndex + ". ");
+        description.setText(task.getDescription().toString());
+        startDateTime.setText(task.getStartDateTime().toString());
+        endDateTime.setText(task.getEndDateTime().toString());
         initTags(task);
     }
-    
+
     private void initTags(ReadOnlyTask task) {
-    	tags.getChildren().clear();
-    	task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        tags.getChildren().clear();
+        task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
 }

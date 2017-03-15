@@ -37,8 +37,8 @@
                         </HBox>
                         <FlowPane fx:id="tags" />
                         <Label fx:id="description" styleClass="cell_small_label" text="\$description" />
-                        <Label fx:id="start_time" styleClass="cell_small_label" text="\$start_time" />
-                        <Label fx:id="end_time" styleClass="cell_small_label" text="\$end_time" />
+                        <Label fx:id="startDateTime" styleClass="cell_small_label" text="\$startDateTime" />
+                        <Label fx:id="endDateTime" styleClass="cell_small_label" text="\$endDateTime" />
                     </children>
                 </VBox>
             </children>
