@@ -70,11 +70,11 @@ The first step to organizing your tasks is to make sure you have all of them in 
     tag1, tag2, ... (optional) : tags of this task
 ##### Examples
 
-* `add Study for CS2106`
+* `add Study for CS2106 tag uni`
 * `add Study for CS2106 due 3pm`
 * `add Study for CS2106 due today`
 * `add Study for CS2106 due 3pm today`
-* `add Study for CS2106 due 02/03/17`
+* `add Study for CS2106 due 02/03/17 tag uni, work`
 
 >**Note**: Do not use the keywords like `due` in your `<task_name>` or **Today** might misunderstand
 

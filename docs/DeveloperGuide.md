@@ -6,6 +6,34 @@ By : `T09B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`
 
 <img src="images/ui.png">
 
+## Design
+
+### Logic component
+
+<img src="images/TaskManagerLogicClassDiagram.png">
+
+The **Logic** component of the software handles the input from the **UI** and calls methods from the **Model**, **Config**, and **Storage** to perform the appropriate changes.
+
+When a command is entered, the `Parser` processes the text and selects the appropriate `CommandParser` based on the first word in the text to parse the arguments as well. Its respective `Command` is then initialized which calls the relevant methods from other components, and returns a `CommandResult` to the UI to make the relevant changes.
+
+> `Parser` makes use of classes such as `ArgumentTokenizer`, `ParserUtil`, and `CliSyntax` for certain repetitive parsing tasks
+
+> `CommandParser` may return an `IncorrectCommand` in the case when the arguments are not of the suitable format
+
+### Event-Driven Nature
+
+Because there are many different components that may be affected by a single command, we use events to simplify method calling. In our code, after a command has successfully executed its primary functionality like making a change to the **Model**, it raises an `Event` which is then picked up by **Storage**, and **UI** which then calls the relevant methods to make the appropriate changes.
+
+The _Sequence Diagram_ below exemplifies this process. In the figure below, you can see that entering `delete 1` causes a change in the model which is the command's primary task.
+
+<img src="images\SDforDeletePerson.png" width="800"><br>
+_Figure _ : Primary Component interactions for `delete 1` command (part 1)_
+
+Only after the task is complete, is an `Event` raised to modify the storage and UI components as can be seen in the next diagram.
+
+<img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
+_Figure _ : Secondary Component interactions for `delete 1` command (part 2)_
+
 ## Appendix A : User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
