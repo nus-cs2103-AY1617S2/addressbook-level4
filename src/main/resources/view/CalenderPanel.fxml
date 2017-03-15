@@ -7,28 +7,28 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="label1" layoutX="112.0" layoutY="-1.0" prefHeight="20.0" prefWidth="600.0" text="                                                                     Date here" />
-      <ListView fx:id="listview1" editable="true" layoutX="130.0" layoutY="64.0" prefHeight="54.0" prefWidth="86" style="-fx-border-color: [pink;" />
+      <ListView fx:id="listview1" editable="true" layoutX="130.0" layoutY="64.0" prefHeight="54.0" prefWidth="86" style="-fx-border-color: pink;" />
       <ListView layoutX="215.0" layoutY="64.0" prefHeight="54.0" prefWidth="86.0" />
       <ListView layoutX="640.0" layoutY="64.0" prefHeight="54.0" prefWidth="86.0" />
       <ListView layoutX="300.0" layoutY="64.0" prefHeight="54.0" prefWidth="86.0" />
       <ListView layoutX="555.0" layoutY="64.0" prefHeight="54.0" prefWidth="86.0" />
       <ListView layoutX="385.0" layoutY="64.0" prefHeight="54.0" prefWidth="86.0" />
       <ListView layoutX="470.0" layoutY="64.0" prefHeight="54.0" prefWidth="86.0" />
-      <ListView fx:id="listview11" editable="true" layoutX="130.0" layoutY="152.0" prefHeight="54.0" prefWidth="86" style="-fx-border-color: [pink;" />
+      <ListView fx:id="listview11" editable="true" layoutX="130.0" layoutY="152.0" prefHeight="54.0" prefWidth="86" style="-fx-border-color: pink;" />
       <ListView layoutX="215.0" layoutY="152.0" prefHeight="54.0" prefWidth="86.0" />
       <ListView layoutX="640.0" layoutY="152.0" prefHeight="54.0" prefWidth="86.0" />
       <ListView layoutX="300.0" layoutY="152.0" prefHeight="54.0" prefWidth="86.0" />
       <ListView layoutX="555.0" layoutY="152.0" prefHeight="54.0" prefWidth="86.0" />
       <ListView layoutX="385.0" layoutY="152.0" prefHeight="54.0" prefWidth="86.0" />
       <ListView layoutX="470.0" layoutY="152.0" prefHeight="54.0" prefWidth="86.0" />
-      <ListView fx:id="listview12" editable="true" layoutX="130.0" layoutY="243.0" prefHeight="54.0" prefWidth="86" style="-fx-border-color: [pink;" />
+      <ListView fx:id="listview12" editable="true" layoutX="130.0" layoutY="243.0" prefHeight="54.0" prefWidth="86" style="-fx-border-color: pink;" />
       <ListView layoutX="215.0" layoutY="243.0" prefHeight="54.0" prefWidth="86.0" />
       <ListView layoutX="640.0" layoutY="243.0" prefHeight="54.0" prefWidth="86.0" />
       <ListView layoutX="300.0" layoutY="243.0" prefHeight="54.0" prefWidth="86.0" />
       <ListView layoutX="555.0" layoutY="243.0" prefHeight="54.0" prefWidth="86.0" />
       <ListView layoutX="385.0" layoutY="243.0" prefHeight="54.0" prefWidth="86.0" />
       <ListView layoutX="470.0" layoutY="243.0" prefHeight="54.0" prefWidth="86.0" />
-      <ListView fx:id="listview13" editable="true" layoutX="130.0" layoutY="340.0" prefHeight="54.0" prefWidth="86" style="-fx-border-color: [pink;" />
+      <ListView fx:id="listview13" editable="true" layoutX="130.0" layoutY="340.0" prefHeight="54.0" prefWidth="86" style="-fx-border-color: pink;" />
       <ListView layoutX="215.0" layoutY="340.0" prefHeight="54.0" prefWidth="86.0" />
       <ListView layoutX="640.0" layoutY="340.0" prefHeight="54.0" prefWidth="86.0" />
       <ListView layoutX="300.0" layoutY="340.0" prefHeight="54.0" prefWidth="86.0" />
