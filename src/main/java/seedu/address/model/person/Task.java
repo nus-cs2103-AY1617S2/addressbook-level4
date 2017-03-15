@@ -12,15 +12,17 @@ import seedu.address.model.tag.UniqueTagList;
 public class Task implements ReadOnlyTask {
 
     private Name name;
+    private Start start;
     private Deadline deadline;
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Deadline deadline, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, deadline, tags);
+    public Task(Name name, Start start, Deadline deadline, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, start, deadline, tags);
         this.name = name;
+        this.start = start;
         this.deadline = deadline;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
@@ -29,7 +31,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getDeadline(), source.getTags());
+        this(source.getName(), source.getStart(), source.getDeadline(), source.getTags());
     }
 
     public void setName(Name name) {
@@ -42,6 +44,16 @@ public class Task implements ReadOnlyTask {
         return name;
     }
 
+    public void setStart(Start start) {
+        assert start != null;
+        this.start = start;
+    }
+    
+    @Override
+    public Start getStart() {
+        return start;
+    }
+    
     public void setDeadline(Deadline deadline) {
         assert deadline != null;
         this.deadline = deadline;
@@ -71,6 +83,7 @@ public class Task implements ReadOnlyTask {
         assert replacement != null;
 
         this.setName(replacement.getName());
+        this.setStart(replacement.getStart());
         this.setDeadline(replacement.getDeadline());
         this.setTags(replacement.getTags());
     }
