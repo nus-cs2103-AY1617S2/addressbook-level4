@@ -134,19 +134,19 @@ Add a task with higher priorities with the `\as` key. By default, tasks are of n
 > `Priority` can be `normal`, `important`, `very important`
 
 Add a task with a reminder timing with the `\remind` key. State the number of hours before the task's end time that you want to be reminded. A pop-up would appear to remind you about the task at that specified time! <br>
-` [\remind REMINDER_RELATIVE_TIME]`
+`[\remind REMINDER_RELATIVE_TIME]`
 > **Examples:** <br>
 > `add buy milk \remind 3` <br>
 > `add buy milk \remind 5 hrs before` <br>
 
 Add a recurring task with the `\every` key. If you specify a recurrence interval, every time a task ends or is finished, the start time, end time and reminder time of the task will be updated to its next occurrence. <br>
-` [\every RECURRENCE_INTERVAL]`
+`[\every RECURRENCE_INTERVAL]`
 > **Examples:** <br>
 > `add buy milk \every 4 hours` <br>
 > `add buy milk \every week` <br>
 
 Add a task with tags with the `\under` key. Separate multiple tags with spaces.<br>
-` [\under TAG...]`
+`[\under TAG...]`
 > **Examples:** <br>
 > `add buy milk \under shopping friends` <br>
 > `add buy milk \under for_myself` <br>
@@ -162,6 +162,8 @@ Day Month Year | 1st Oct 2017
 Month Day | Oct 1st, Oct
 Day / Month | 1/10
 Relative | today, tomorrow, tmr, two days later
+
+<br><br>
 
 Time Format |Examples
 ----------- | :------- |
