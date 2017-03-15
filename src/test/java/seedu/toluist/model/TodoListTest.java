@@ -64,8 +64,23 @@ public class TodoListTest {
     }
 
     @Test
-    public void testLoad() {
+    public void constructor_replaceCurrentTodoList() {
+        TodoList anotherTodoList = new TodoList();
+        assertEquals(anotherTodoList, TodoList.load());
+    }
 
+    @Test
+    public void save_replaceCurrentTodoList() {
+        TodoList anotherTodoList = new TodoList();
+        anotherTodoList.add(new Task("ask"));
+        TodoList emptyTodoList = new TodoList();
+        anotherTodoList.save();
+        assertEquals(anotherTodoList, TodoList.load());
+    }
+
+    @Test
+    public void multipleLoad_returnsSameTodoList() {
+        assertEquals(TodoList.load(), TodoList.load());
     }
 
     @Test

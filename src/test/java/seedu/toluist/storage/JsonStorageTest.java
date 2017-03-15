@@ -1,8 +1,17 @@
 package seedu.toluist.storage;
 
-import javafx.util.Pair;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Optional;
+
 import org.junit.Before;
 import org.junit.Test;
+
+import javafx.util.Pair;
 import seedu.toluist.TestApp;
 import seedu.toluist.commons.core.Config;
 import seedu.toluist.commons.util.FileUtil;
@@ -11,14 +20,6 @@ import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.testutil.TestUtil;
 import seedu.toluist.testutil.TypicalTestTodoLists;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Optional;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Test for JsonStorage
