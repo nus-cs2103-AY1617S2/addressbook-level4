@@ -48,14 +48,14 @@ Ready? Let's begin!
 
 1. Download the latest `tache.jar` file from the [releases](../../../releases) tab.
 2. Copy the file to the folder you want to use as my home folder.
-3. Double-click the file to start me. My [GUI](#graphical-user-interface-gui) should appear in a few seconds: 
+3. Double-click the file to start me! <br>
+
+   > My [GUI](#graphical-user-interface-gui) should appear in a few seconds: 
 
    <img src="images/Ui.png" width="600"><br>
    _Figure 2.1. My GUI_
 
 4. Type your desired command in my command box and press <kbd>Enter</kbd> to execute it. <br>
-
-   > E.g. Typing **`help`** and pressing <kbd>Enter</kbd> will open my help window.
    
    **Let's Try it Out!** <br>
    
@@ -71,7 +71,7 @@ Ready? Let's begin!
    * **`list`** <br>
    
      > Lists all your tasks. <br>
-     Your task list should contain only 1 task, which is the task you added in the previous step <br>
+     Your task list should only contain 1 task, which is the task you added in the previous step <br>
      (i.e. `Finish Progress Report`). 
      
    * **`delete`** `Finish Progress Report` <br>
@@ -96,7 +96,7 @@ Ready? Let's begin!
 When typing in your commands, do take note of the following specifications: <br>
 
 > Do make sure that you follow the specifications closely, if not I will not work! <br>
-The specifications are [case-sensitive](#case-sensitive). 
+Note: These specifications are [case-sensitive](#case-sensitive). 
 
 * Durations for tasks must be specified in _hr_, _min_ and/or _sec_.
 * Times must be specified in _am_ and/or _pm_.
@@ -125,7 +125,7 @@ Adds a task to your task list. <br>
 
 > Type your [parameters](#parameter) in their respective orders. <br>
 E.g. If you are adding a task with a deadline as in **`add`** `<task>; <due date and time>`, 
-do make sure that you indicate `<task>` before `<due date and time>`, not the other way round!
+make sure that you indicate `<task>` before `<due date and time>`, not the other way round!
 
 #### Add a _floating_ task:
 
@@ -155,7 +155,7 @@ Here are some examples of floating tasks: <br>
    > It is too early to know when you have to perform these tasks by. <br>
    
    **_E.g. Watch La La Land in the theatres_** <br>
-   You might not know when the movie "La La Land" will stop showing in the cinemas. It seems to 
+   You might not know when the movie "La La Land" will stop showing in the theatres. It seems to 
    be very popular and hence, many theatres might offer showtimes for it for an extended period 
    of time. 
    
@@ -167,6 +167,8 @@ So, how do you add floating tasks? Just type in the following command:
 _Figure 3.2.1. Add Command_
 
 That's it!
+
+Here are the formats to follow when adding tasks that _have specific dates / times_: 
 
 #### Add a task with a _deadline_:
 
@@ -181,9 +183,9 @@ E.g. **`add`** `sushi restaurant promotion; 040117 10am; 110117 9pm`
 OR
 
 > **`add`** `<task>; <start date and time>; <duration>` <br>
-E.g. **`add`** `committee meeting; 150617`
+E.g. **`add`** `committee meeting; 150617 1pm; 2.5hr`
 
-#### Add a task with a _duration_:
+#### Add a task with a _duration_ only:
 
 > **`add`** `<task>; <duration>` <br>
 E.g. **`add`** `watch tv with the children; 1hr`
@@ -192,32 +194,64 @@ E.g. **`add`** `watch tv with the children; 1hr`
 
 Removes a specified task from your task list.<br>
 
+Here are some examples of tasks that you might want to delete from your task list: 
+
+* **Task that no longer need to be done** <br>
+
+> You no longer need me to help you keep track of these tasks. 
+
+E.g. **_Do financial report_** <br>
+Your supervisor had delegated the wrong task to you and just corrected his mistake.
+
+* **The task has already been completed by you** <br>
+
+> There is no need to store these tasks anymore.
+
+E.g. **_Visit the dentist_** <br>
+You have just visited your dentist last week and have not scheduled your next appointment. 
+
 > * **`delete`** `<task>` <br>
 
 <img src="images/UiDeleteCommand.png" width="600"><br>
 _Figure 3.3.1. Delete Command_
 
 > * **`delete /all`** <br>
-This command clears your entire task list. <br>
-Hence, do think twice before typing this command!
+This command clears your _entire task list_. <br>
+Do think twice before using the command!
 
 ### 3.4. Find a task : `find`
 
-Finds task(s) whose names contain the keyword or sequence of keywords `<task>`.<br>
+Finds task(s) whose name(s) contain the keyword or sequence of keywords `<task>`. <br>
 
-> For example, **`find`** `<home>` can help you search for a task called `do homework`. 
+> For example, **`find`** `<home>` can help you search for a task named `do homework`. <br>
+
+Here are some examples of reasons why you might want to find certain tasks: 
+
+* **You want to know the [parameters](#parameter) of a certain task** <br>
+
+///
+
+> You no longer need me to help you keep track of these tasks. 
+
+E.g. **_Do financial report_** <br>
+Your supervisor had delegated the wrong task to you and just corrected his mistake.
+
+* **The task has already been completed by you** <br>
+
+> There is no need to store these tasks anymore.
 
 > * **`find`** `<task>` <br>
+I will show you the tasks from your search in my `CalendarPanel` as shown
+in the following diagram. 
 
 <img src="images/UiFindCommand.png" width="600"><br>
 _Figure 3.4.1. Find Command_
 
-> * **`find`** `<task>; <due date>`
+> * **`find`** `<task>; <due date>` <br>
 E.g. **`find`** `project proposal; 041216` <br>
-
 This command shows: 
 * Your tasks that are due before `<due date>`
-* Your [floating tasks](#floating-task)
+* Your [floating tasks](#add-a-floating-task)
 
 ### 3.5. List all tasks : `list`
 
@@ -305,16 +339,16 @@ _Figure 3.10.1. Exit Command_
 
 ## 4. Command Summary
 
-| **Command** | **Usage**                             | **Example**                                  |
-|:-----------:|:-------------------------------------:|:--------------------------------------------:|
-|Add          |`add <task>; <due date and time>`      |`add sushi restaurant promotion; 040117 10am` |
-|Delete       |`delete <task>`                        |`delete watch tv with the children`           |
-|Find         |`find <task>`                          |`find project`                                |
-|List         |`list`                                 |                                              |
-|Select       |`select <task>`                        |`select presentation`                         |
-|Update       |`update <task> <parameter> <new_value>`|`select <buy bread> <name> <buy white bread>` |    
-|Help         |`help`                                 |                                              |
-|Exit         |`exit`                                 |                                              |
+| **Command** | **Usage**                                   | **Example**                                  |
+|:-----------:|:-------------------------------------------:|:--------------------------------------------:|
+|Add          |**`add`** `<task>; <due date and time>`      |`add sushi restaurant promotion; 040117 10am` |
+|Delete       |**`delete`** `<task>`                        |`delete watch tv with the children`           |
+|Find         |**`find`** `<task>`                          |`find project`                                |
+|List         |**`list`**                                   |                                              |
+|Select       |**`select`** `<task>`                        |`select presentation`                         |
+|Update       |**`update`** `<task> <parameter> <new_value>`|`select <buy bread> <name> <buy white bread>` |    
+|Help         |**`help`**                                   |                                              |
+|Exit         |**`exit`**                                   |                                              |
 
 
 ## 5. FAQ (Frequently Asked Questions)
@@ -333,10 +367,6 @@ _Figure 3.10.1. Exit Command_
 
 > Text that discriminates between upper-case and lower-case letters <br>
 E.g. _Jenny_ versus _jenny_
-
-#### Floating Task:
-
-> Task with no specific times
 
 #### Graphical User Interface (GUI): 
 
