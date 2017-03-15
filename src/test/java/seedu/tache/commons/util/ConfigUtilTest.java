@@ -2,6 +2,7 @@ package seedu.tache.commons.util;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
@@ -90,12 +91,14 @@ public class ConfigUtilTest {
     public void saveNullConfigAssertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
         save(null, "SomeFile.json");
+        fail();
     }
 
     @Test
     public void saveNullFileAssertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
         save(new Config(), null);
+        fail();
     }
 
     @Test

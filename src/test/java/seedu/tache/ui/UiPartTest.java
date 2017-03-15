@@ -2,6 +2,7 @@ package seedu.tache.ui;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 import java.net.URL;
 
@@ -30,6 +31,7 @@ public class UiPartTest {
     public void constructorNullFileUrlThrowsAssertionError() {
         thrown.expect(AssertionError.class);
         new TestUiPart<Object>((URL) null);
+        fail();
     }
 
     @Test
@@ -37,6 +39,7 @@ public class UiPartTest {
         URL missingFileUrl = new URL(testFolder.getRoot().toURI().toURL(), MISSING_FILE_PATH);
         thrown.expect(AssertionError.class);
         new TestUiPart<Object>(missingFileUrl);
+        fail();
     }
 
     @Test
@@ -44,6 +47,7 @@ public class UiPartTest {
         URL invalidFileUrl = getTestFileUrl(INVALID_FILE_PATH);
         thrown.expect(AssertionError.class);
         new TestUiPart<Object>(invalidFileUrl);
+        fail();
     }
 
     @Test
@@ -56,18 +60,21 @@ public class UiPartTest {
     public void constructorNullFileNameThrowsAssertionError() {
         thrown.expect(AssertionError.class);
         new TestUiPart<Object>((String) null);
+        fail();
     }
 
     @Test
     public void constructorMissingFileNameThrowsAssertionError() {
         thrown.expect(AssertionError.class);
         new TestUiPart<Object>(MISSING_FILE_PATH);
+        fail();
     }
 
     @Test
     public void constructorInvalidFileNameThrowsAssertionError() {
         thrown.expect(AssertionError.class);
         new TestUiPart<Object>(INVALID_FILE_PATH);
+        fail();
     }
 
     private URL getTestFileUrl(String testFilePath) {
