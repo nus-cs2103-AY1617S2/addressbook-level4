@@ -12,7 +12,7 @@ public class Schedule {
 
 	/**
 	 * Represents an Event schedule in TaskManager. Values cannot be null
-	 * 
+	 *
 	 * @param startTime
 	 * @param endTime
 	 * @param deadline

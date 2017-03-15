@@ -87,7 +87,7 @@ public class Periodic {
 
 	/**
 	 * Parses the {@code String} period to {@code int}
-	 * 
+	 *
 	 * @param value
 	 * @return period as integer
 	 */

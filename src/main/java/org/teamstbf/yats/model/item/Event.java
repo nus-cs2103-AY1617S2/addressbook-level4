@@ -25,7 +25,7 @@ public class Event implements ReadOnlyEvent {
 	/**
 	 * Creates an Event object using map of parameters, only name is compulsory,
 	 * others are optional
-	 * 
+	 *
 	 * @param map
 	 *            of parameters
 	 * @param tags
