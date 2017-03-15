@@ -27,7 +27,7 @@ public class EditCommand extends Command {
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) [s/START_TIME] [e/END_TIME] [d/DESCRIPTION] [t/TAGS]...\n"
-            + "Example: " + COMMAND_WORD + " 1 s/02-02-2017 t/school";
+            + "Example: " + COMMAND_WORD + " 1 s/10:00am,10/10/2017 e/5:00pm,10/10/2017 d/lots of work to do t/school";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -109,7 +109,7 @@ public class EditCommand extends Command {
             this.name = toCopy.getName();
             this.location = toCopy.getLocation();
             this.startTime = toCopy.getStartTime();
-            this.endTime = toCopy.getStartTime();
+            this.endTime = toCopy.getEndTime();
             this.description = toCopy.getDescription();
             this.periodic = toCopy.getPeriodic();
             this.tags = toCopy.getTags();
