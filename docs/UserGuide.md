@@ -374,4 +374,20 @@ by try right clicking on the file -> Gradle -> Refresh Gradle project
 
 ## 5. Command Summary
 
-<img src="images/commandShortcut.png" width="600">
+ Command | Shortcuts | Format | Example
+ -------- | :-------- | :--------- | :-----------
+ add | a, + | add TASK d/DATE t/TIME | add Shop Shoes d/20082017 t/4:30pm
+ find | find, search, f | find KEYWORD | find Study Math
+ delete | d, remove, rm, - | delete INDEX | delete 10
+ done | complete, finish | done INDEX | done 2
+ save | s | save FILE_PATH| use C:/Desktop/myTask
+ setting | set | setting FILE_PATH| save C:/Desktop/myTask
+ use | udf | save FILE_PATH| save C:/Desktop/myOtherTask
+ help | help, guide | | |
+ list | list, l | | |
+ listToday | listday, lt| | |
+ listProirity | list*, lp| | |
+ listDone | listdone, ld| | |
+ undo | u | | |
+ clear | cr | | |
+ exit | e | | |
