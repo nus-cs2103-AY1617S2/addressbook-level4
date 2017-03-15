@@ -53,6 +53,8 @@ public class EditCommand extends Command {
         this.filteredTaskListIndex = filteredTaskListIndex - 1;
 
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
+
+        this.taskType = TaskType.TypeTask;
     }
 
     /**

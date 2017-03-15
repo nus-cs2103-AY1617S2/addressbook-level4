@@ -84,7 +84,7 @@ public class EditCommandParser {
         if (!editTaskDescriptor.isAnyFieldEdited()) {
             return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
         }
-        if (ParserUtil.determineIndexType(args).get() == ParserUtil.TYPE_TASK) {
+        if (ParserUtil.determineIndexType(preambleFields[0]).get() == ParserUtil.TYPE_TASK) {
             return new EditCommand(index.get(), editTaskDescriptor);
         } else {
             return new EditCommand(index.get(), editTaskDescriptor, EditCommand.TaskType.TypeDetailedTask);
