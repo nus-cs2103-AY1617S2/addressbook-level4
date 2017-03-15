@@ -9,7 +9,8 @@ import seedu.address.commons.exceptions.IllegalValueException;
 public class Time {
 
     public static final String MESSAGE_TIME_CONSTRAINTS = "Task time should follow DD/MM/YYYY format.";
-    public static final String TIME_VALIDATION_REGEX = "^([0-2][0-9]||3[0-1])/(0[0-9]||1[0-2])/([0-9][0-9])?[0-9][0-9]$";
+    public static final String TIME_VALIDATION_REGEX =
+            "^([0-2][0-9]||3[0-1])/(0[0-9]||1[0-2])/([0-9][0-9])?[0-9][0-9]$";
 
     public final String value;
 
