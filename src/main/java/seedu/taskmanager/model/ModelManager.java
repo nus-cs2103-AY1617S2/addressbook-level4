@@ -10,6 +10,8 @@ import seedu.taskmanager.commons.core.UnmodifiableObservableList;
 import seedu.taskmanager.commons.events.model.TaskManagerChangedEvent;
 import seedu.taskmanager.commons.util.CollectionUtil;
 import seedu.taskmanager.commons.util.StringUtil;
+import seedu.taskmanager.model.tag.Tag;
+import seedu.taskmanager.model.tag.UniqueTagList;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.UniqueTaskList;
@@ -142,14 +144,23 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return nameKeyWords.stream()
+            boolean hasName = nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getTitle().value, keyword))
                     .findAny()
-                    .isPresent() ||
-                    nameKeyWords.stream()
+                    .isPresent();
+            boolean hasDescription = nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().value, keyword))
                     .findAny()
                     .isPresent();
+            boolean hasTag = false;
+            UniqueTagList tagList = task.getTags();
+            for (Tag tag : tagList) {
+            	hasTag = hasTag || nameKeyWords.stream()
+                        .filter(keyword -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword))
+                        .findAny()
+                        .isPresent();
+            }
+            return hasName || hasDescription || hasTag;
         }
 
         @Override
