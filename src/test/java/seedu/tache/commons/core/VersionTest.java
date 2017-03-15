@@ -11,20 +11,21 @@ public class VersionTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    public void versionParsingAcceptableVersionStringParsedVersionCorrectly() {
+    @Test
+    public void versionParsing_acceptableVersionString_parsedVersionCorrectly() {
         verifyVersionParsedCorrectly("V0.0.0ea", 0, 0, 0, true);
         verifyVersionParsedCorrectly("V3.10.2", 3, 10, 2, false);
         verifyVersionParsedCorrectly("V100.100.100ea", 100, 100, 100, true);
     }
 
     @Test
-    public void versionParsingWrongVersionStringThrowIllegalArgumentException() {
+    public void versionParsing_wrongVersionString_throwIllegalArgumentException() {
         thrown.expect(IllegalArgumentException.class);
         Version.fromString("This is not a version string");
     }
 
     @Test
-    public void versionConstructorCorrectParameterValueAsExpected() {
+    public void versionConstructor_correctParameter_valueAsExpected() {
         Version version = new Version(19, 10, 20, true);
 
         assertEquals(19, version.getMajor());
@@ -34,7 +35,7 @@ public class VersionTest {
     }
 
     @Test
-    public void versionToStringValidVersionCorrectStringRepresentation() {
+    public void versionToString_validVersion_correctStringRepresentation() {
         // boundary at 0
         Version version = new Version(0, 0, 0, true);
         assertEquals("V0.0.0ea", version.toString());
@@ -49,9 +50,8 @@ public class VersionTest {
     }
 
     @Test
-    public void versionComparableValidVersionCompareToIsCorrect() {
-        Version one;
-        Version another;
+    public void versionComparable_validVersion_compareToIsCorrect() {
+        Version one, another;
 
         // Tests equality
         one = new Version(0, 0, 0, true);
@@ -109,7 +109,7 @@ public class VersionTest {
     }
 
     @Test
-    public void versionComparableValidVersionHashCodeIsCorrect() {
+    public void versionComparable_validVersion_hashCodeIsCorrect() {
         Version version = new Version(100, 100, 100, true);
         assertEquals(100100100, version.hashCode());
 
@@ -118,7 +118,7 @@ public class VersionTest {
     }
 
     @Test
-    public void versionComparableValidVersionEqualIsCorrect() {
+    public void versionComparable_validVersion_equalIsCorrect() {
         Version one;
         Version another;
 
@@ -131,7 +131,6 @@ public class VersionTest {
         assertTrue(one.equals(another));
     }
 
-    @Test
     private void verifyVersionParsedCorrectly(String versionString,
                                               int major, int minor, int patch, boolean isEarlyAccess) {
         assertEquals(new Version(major, minor, patch, isEarlyAccess), Version.fromString(versionString));
