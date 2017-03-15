@@ -4,25 +4,19 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import seedu.onetwodo.model.task.ReadOnlyTask;
-
 public class SelectCommandTest extends ToDoListGuiTest {
 
 
     @Test
     public void selectTask_nonEmptyList() {
-
-        assertSelectionInvalid("t10"); // invalid index
         assertNoTaskSelected();
 
-/*        assertSelectionSuccess("t1"); // first task in the list
-        int taskCount = td.getTypicalTasks().length;
-        assertSelectionSuccess("t" + taskCount); // last task in the list
-        int middleIndex = taskCount / 2;
-        assertSelectionSuccess("t" + middleIndex); // a task in the middle of the list
-        int overShootIndex = taskCount + 1;
-        assertSelectionInvalid("t" + overShootIndex); // invalid index
-*/        //assertTaskSelected("t" + middleIndex); // assert previous selection remains
+        assertSelectionSuccess("t1"); // first to-do task in the list
+        assertSelectionSuccess("e2"); // 2nd event task in the list
+        assertSelectionSuccess("d3"); // last deadline task in the list
+        
+        assertSelectionInvalid("t100"); // invalid index
+        assertSelectionInvalid("t4"); // invalid index
 
         /* Testing other invalid indexes such as -1 should be done when testing the SelectCommand */
     }

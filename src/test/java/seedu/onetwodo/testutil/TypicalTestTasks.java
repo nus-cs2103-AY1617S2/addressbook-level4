@@ -10,7 +10,8 @@ import seedu.onetwodo.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask taskA, taskB, taskC, taskD, taskE, taskF, taskG, task1, task2, task3;
+    public TestTask taskA, taskB, taskC, taskD, taskE, taskF, taskG, taskH, taskI,
+            task1, task2, task3;
 
     public TypicalTestTasks() {
         try {
@@ -20,36 +21,48 @@ public class TypicalTestTasks {
                     .withDescription("bring weapon")
                     .withTags("army", "work")
                     .build();
-            // Event with missing info
+            // Event with some missing info
             taskB = new TaskBuilder().withName("study at home")
                     .withStartDate("10 Mar 2018").withEndDate("13 mar 2018")
                     .withDescription("")
+                    .withTags("work", "school")
+                    .build();
+            // Event with many missing info
+            taskC = new TaskBuilder().withName("meet boss")
+                    .withStartDate("10 Mar 2018 08:00").withEndDate("10 mar 2018 12:00")
+                    .withDescription("")
                     .build();
             // Deadline with all date info
-            taskC = new TaskBuilder().withName("submit cs2101 reflection")
+            taskD = new TaskBuilder().withName("submit cs2101 reflection")
                     .withStartDate("").withEndDate("13-05-2018 23:30")
                     .withDescription("use the 7 C")
                     .withTags("school")
                     .build();
             // Deadline with no time
-            taskD = new TaskBuilder().withName("complete 2103 tutorial")
+            taskE = new TaskBuilder().withName("complete 2103 tutorial")
                     .withStartDate("").withEndDate("tomorrow")
                     .withDescription("bring weapon")
                     .withTags("school", "favourite")
                     .build();
             // Deadline with many missing info
-            taskE = new TaskBuilder().withName("finish assignments")
+            taskF = new TaskBuilder().withName("finish assignments")
                     .withStartDate("").withEndDate("11pm")
                     .withDescription("")
                     .build();
             // To-do with all info
-            taskF = new TaskBuilder().withName("buy new bag")
+            taskG = new TaskBuilder().withName("buy new bag")
                     .withStartDate("").withEndDate("")
                     .withDescription("find cheap ones")
                     .withTags("shopping", "favourite", "hobby")
                     .build();
-            // To-do with missing info
-            taskG = new TaskBuilder().withName("change clothes")
+            // To-do with some missing info
+            taskH = new TaskBuilder().withName("change shirt")
+                    .withStartDate("").withEndDate("")
+                    .withDescription("")
+                    .withTags("habit", "favourite", "hobby")
+                    .build();
+            // To-do with many missing info
+            taskI = new TaskBuilder().withName("change pants")
                     .withStartDate("").withEndDate("")
                     .withDescription("")
                     .build();
@@ -87,7 +100,7 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{taskA, taskB, taskC, taskD, taskE, taskF, taskG};
+        return new TestTask[]{taskA, taskB, taskC, taskD, taskE, taskF, taskG, taskH, taskI};
     }
 
     public ToDoList getTypicalToDoList() {

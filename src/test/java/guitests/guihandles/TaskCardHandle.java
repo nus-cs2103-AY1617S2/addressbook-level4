@@ -16,8 +16,8 @@ import seedu.onetwodo.model.task.ReadOnlyTask;
  */
 public class TaskCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
-    private static final String START_DATE_FIELD_ID = "#startdate";
-    private static final String END_DATE_FIELD_ID = "#enddate";
+    private static final String START_DATE_FIELD_ID = "#startDate";
+    private static final String END_DATE_FIELD_ID = "#endDate";
     private static final String DESCRIPTION_FIELD_ID = "#description";
     private static final String TAGS_FIELD_ID = "#tags";
 
