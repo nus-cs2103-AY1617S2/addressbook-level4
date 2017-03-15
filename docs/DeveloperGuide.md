@@ -622,10 +622,3 @@ Cons:
 
 * There is no support for priority
 * There is no support for sorting (by priority, by deadline)
-
-
-<style>
-h2 {
-    color: #0074D9;
-}
-</style>
