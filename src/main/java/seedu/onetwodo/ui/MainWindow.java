@@ -262,8 +262,12 @@ public class MainWindow extends UiPart<Region> {
 
     public void openDialog(ReadOnlyTask task) {
         JFXDialogLayout content = new JFXDialogLayout();
-        content.setHeading(new Text(task.getName().fullName));
-        content.setBody(new Text(task.getDescription().value));
+        Text nameText = new Text(task.getName().fullName);
+        Text descriptionText = new Text(task.getDescription().value);
+        nameText.setWrappingWidth(MIN_WIDTH);
+        descriptionText.setWrappingWidth(MIN_WIDTH);
+        content.setHeading(nameText);
+        content.setBody(descriptionText);
         dialog = new JFXDialog(dialogStackPane, content, JFXDialog.DialogTransition.CENTER, true);
         dialog.show();
         setCloseDialogHandler();
@@ -279,7 +283,7 @@ public class MainWindow extends UiPart<Region> {
                 }
                 ke.consume();
                 closeDialog();
-                primaryStage.getScene().setOnKeyReleased(null);        
+                primaryStage.getScene().setOnKeyReleased(null);
             }
         };
         primaryStage.getScene().setOnKeyReleased(eventHandler);
