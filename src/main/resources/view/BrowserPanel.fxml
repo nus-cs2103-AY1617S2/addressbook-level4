@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane fx:id="browser" prefHeight="398.0" prefWidth="403.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-       <VBox alignment="CENTER_LEFT" blendMode="DARKEN" minHeight="95.0" prefHeight="261.0" prefWidth="350.0">
+       <VBox alignment="CENTER_LEFT" blendMode="DARKEN" minHeight="95.0" prefHeight="398.0" prefWidth="403.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
            <stylesheets>
                <URL value="@DarkTheme.css" />
                <URL value="@Extensions.css" />
@@ -17,7 +17,7 @@
                <Insets bottom="5.0" left="15.0" right="5.0" top="6.0" />
            </padding>
 
-                                <children>
+                                      <children>
                   <Label fx:id="name1" styleClass="cell_big_label" text="\$first" textOverrun="WORD_ELLIPSIS" />
                <FlowPane fx:id="tags" blendMode="OVERLAY">
             <children>

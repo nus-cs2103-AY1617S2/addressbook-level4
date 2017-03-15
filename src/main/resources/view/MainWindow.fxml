@@ -77,7 +77,7 @@
                     <Insets bottom="10" left="10" right="10" top="10" />
                 </padding>
                <effect>
-                  <Blend />
+                  <Blend mode="OVERLAY" />
                </effect>
             </AnchorPane>
          </items>
