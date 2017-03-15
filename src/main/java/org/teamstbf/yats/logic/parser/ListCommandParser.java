@@ -49,7 +49,7 @@ public class ListCommandParser {
 
 	/**
 	 * Returns a {@code String[]} of the command text tokens
-	 * 
+	 *
 	 * @param commandText
 	 */
 	public String[] stringTokenizer(String commandText) {

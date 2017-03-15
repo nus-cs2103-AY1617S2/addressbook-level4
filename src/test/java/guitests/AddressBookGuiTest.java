@@ -106,7 +106,7 @@ public abstract class AddressBookGuiTest {
 	/**
 	 * Override this in child classes to set the initial local data. Return null
 	 * to use the data in the file specified in {@link #getDataFileLocation()}
-	 * 
+	 *
 	 * @throws DuplicateEventException
 	 */
 	protected TaskManager getInitialData() {
