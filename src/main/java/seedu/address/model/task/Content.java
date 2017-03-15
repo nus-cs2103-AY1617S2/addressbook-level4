@@ -25,7 +25,6 @@ public class Content {
      * @throws IllegalValueException if given name string is invalid.
      */
     public Content(String content) throws IllegalValueException {
-        //assert content != null;
         String trimmedContent = content.trim();
         if (!isValidContent(trimmedContent)) {
             throw new IllegalValueException(MESSAGE_CONTENT_CONSTRAINTS);

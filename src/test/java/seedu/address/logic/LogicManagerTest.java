@@ -6,6 +6,9 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -197,7 +200,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidPersonData() {
         assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
-                Content.MESSAGE_CONTENT_CONSTRAINTS);
+                Title.MESSAGE_TITLE_CONSTRAINTS);
         assertCommandFailure("add Valid Name by 11/11/2011 11:11 #invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
@@ -357,7 +360,7 @@ public class LogicManagerTest {
 
         List<Task> fourPersons = helper.generateTaskList(p1, pTarget1, p2, pTarget2);
         AddressBook expectedAB = helper.generateAddressBook(fourPersons);
-        List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2);
+        List<Task> expectedList = helper.generateTaskList(pTarget1, p2, pTarget2);
         helper.addToModel(model, fourPersons);
 
         assertCommandSuccess("find KEY",
@@ -442,13 +445,15 @@ public class LogicManagerTest {
 
             cmd.append("add ");
 
-            cmd.append(p.getContent().toString());
+            cmd.append(p.getTitle().toString() + " ");
 
-            cmd.append(" by/").append(p.getDateTime().value);
+            cmd.append(PREFIX_CONTENT.toString()).append(p.getContent().toString() + " ");
+
+            cmd.append(PREFIX_DATE_TIME.toString()).append(p.getDateTime().value + " ");
 
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {
-                cmd.append(" #").append(t.tagName);
+                cmd.append(PREFIX_TAG.toString() + " ").append(t.tagName);
             }
 
             return cmd.toString();
