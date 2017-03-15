@@ -10,8 +10,8 @@ import seedu.jobs.model.tag.UniqueTagList;
 import seedu.jobs.model.task.Address;
 import seedu.jobs.model.task.Email;
 import seedu.jobs.model.task.Name;
-import seedu.jobs.model.task.Phone;
 import seedu.jobs.model.task.Person;
+import seedu.jobs.model.task.Phone;
 import seedu.jobs.model.task.UniqueTaskList;
 
 /**
@@ -22,8 +22,7 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
-            + "Parameters: NAME p/PHONE e/EMAIL a/ADDRESS  [t/TAG]...\n"
-            + "Example: " + COMMAND_WORD
+            + "Parameters: NAME p/PHONE e/EMAIL a/ADDRESS  [t/TAG]...\n" + "Example: " + COMMAND_WORD
             + " John Doe p/98765432 e/johnd@gmail.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
@@ -34,7 +33,8 @@ public class AddCommand extends Command {
     /**
      * Creates an AddCommand using raw values.
      *
-     * @throws IllegalValueException if any of the raw values are invalid
+     * @throws IllegalValueException
+     *             if any of the raw values are invalid
      */
     public AddCommand(String name, String phone, String email, String address, Set<String> tags)
             throws IllegalValueException {
@@ -42,13 +42,8 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        this.toAdd = new Person(
-                new Name(name),
-                new Phone(phone),
-                new Email(email),
-                new Address(address),
-                new UniqueTagList(tagSet)
-        );
+        this.toAdd = new Person(new Name(name), new Phone(phone), new Email(email), new Address(address),
+                new UniqueTagList(tagSet));
     }
 
     @Override

@@ -11,9 +11,9 @@ import seedu.jobs.model.tag.UniqueTagList;
 import seedu.jobs.model.task.Address;
 import seedu.jobs.model.task.Email;
 import seedu.jobs.model.task.Name;
+import seedu.jobs.model.task.Person;
 import seedu.jobs.model.task.Phone;
 import seedu.jobs.model.task.ReadOnlyPerson;
-import seedu.jobs.model.task.Person;
 
 /**
  * JAXB-friendly version of the Task.

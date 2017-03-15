@@ -5,14 +5,13 @@ import java.util.Objects;
 import seedu.jobs.commons.util.CollectionUtil;
 import seedu.jobs.model.tag.UniqueTagList;
 
-
 public class Task implements ReadOnlyTask {
-	
-	private Name name;
+
+    private Name name;
     private Time startTime;
     private Time endTime;
     private Description description;
-    private boolean isCompleted; 
+    private boolean isCompleted;
     private UniqueTagList tags;
 
     /**
@@ -24,7 +23,8 @@ public class Task implements ReadOnlyTask {
         this.startTime = startTime;
         this.endTime = endTime;
         this.description = description;
-        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.tags = new UniqueTagList(tags); // protect internal tags from
+                                             // changes in the arg list
         this.isCompleted = false;
     }
 
@@ -105,12 +105,13 @@ public class Task implements ReadOnlyTask {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ReadOnlyTask // instanceof handles nulls
-                && this.isSameStateAs((ReadOnlyTask) other));
+                        && this.isSameStateAs((ReadOnlyTask) other));
     }
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
+        // use this method for custom fields hashing instead of implementing
+        // your own
         return Objects.hash(name, startTime, endTime, description, tags);
     }
 
@@ -119,8 +120,8 @@ public class Task implements ReadOnlyTask {
         return getAsText();
     }
 
-	@Override
-	public boolean isCompleted() {
-		return isCompleted;
-	}
+    @Override
+    public boolean isCompleted() {
+        return isCompleted;
+    }
 }

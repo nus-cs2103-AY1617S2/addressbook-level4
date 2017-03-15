@@ -10,9 +10,9 @@ import seedu.jobs.model.tag.UniqueTagList;
 import seedu.jobs.model.task.Address;
 import seedu.jobs.model.task.Email;
 import seedu.jobs.model.task.Name;
+import seedu.jobs.model.task.Person;
 import seedu.jobs.model.task.Phone;
 import seedu.jobs.model.task.ReadOnlyPerson;
-import seedu.jobs.model.task.Person;
 import seedu.jobs.model.task.UniqueTaskList;
 
 /**
@@ -36,8 +36,10 @@ public class EditCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param filteredPersonListIndex the index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param filteredPersonListIndex
+     *            the index of the person in the filtered person list to edit
+     * @param editPersonDescriptor
+     *            details to edit the person with
      */
     public EditCommand(int filteredPersonListIndex, EditPersonDescriptor editPersonDescriptor) {
         assert filteredPersonListIndex > 0;
@@ -70,11 +72,10 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Task} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Task} with the details of
+     * {@code personToEdit} edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(ReadOnlyPerson personToEdit,
-                                             EditPersonDescriptor editPersonDescriptor) {
+    private static Person createEditedPerson(ReadOnlyPerson personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
@@ -87,8 +88,8 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the person with. Each non-empty field value
+     * will replace the corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
         private Optional<Name> name = Optional.empty();
@@ -97,7 +98,8 @@ public class EditCommand extends Command {
         private Optional<Address> description = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
-        public EditPersonDescriptor() {}
+        public EditPersonDescriptor() {
+        }
 
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             this.name = toCopy.getName();

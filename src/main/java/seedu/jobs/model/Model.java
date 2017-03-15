@@ -3,8 +3,8 @@ package seedu.jobs.model;
 import java.util.Set;
 
 import seedu.jobs.commons.core.UnmodifiableObservableList;
-import seedu.jobs.model.task.ReadOnlyPerson;
 import seedu.jobs.model.task.Person;
+import seedu.jobs.model.task.ReadOnlyPerson;
 import seedu.jobs.model.task.UniqueTaskList;
 import seedu.jobs.model.task.UniqueTaskList.DuplicatePersonException;
 
