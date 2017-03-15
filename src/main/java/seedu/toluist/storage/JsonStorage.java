@@ -12,7 +12,7 @@ import seedu.toluist.commons.util.JsonUtil;
 import seedu.toluist.model.TodoList;
 
 /**
- * JsonStorage saves TodoList object to json file.
+ * JsonStorage saves/loads TodoList object to/from json file.
  */
 public class JsonStorage implements TodoListStorage {
     private Config config = Config.getInstance();
@@ -66,16 +66,6 @@ public class JsonStorage implements TodoListStorage {
         return true;
     }
 
-    private boolean saveNotAffectingHistory(TodoList todoList, String storagePath) {
-        try {
-            String jsonString = JsonUtil.toJsonString(todoList);
-            FileUtil.writeToFile(FileUtil.getFile(storagePath), jsonString);
-            return true;
-        } catch (IOException e) {
-            return false;
-        }
-    }
-
     /**
      * Assume that the serialized history in historyStack & redoHistoryStack are reliable
      * @param times
@@ -105,6 +95,16 @@ public class JsonStorage implements TodoListStorage {
         // So as to not clear the redo history
         saveNotAffectingHistory(todoList, config.getTodoListFilePath());
         return new Pair<>(todoList, times - steps);
+    }
+
+    private boolean saveNotAffectingHistory(TodoList todoList, String storagePath) {
+        try {
+            String jsonString = JsonUtil.toJsonString(todoList);
+            FileUtil.writeToFile(FileUtil.getFile(storagePath), jsonString);
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
     }
 
     private Optional<TodoList> todoListFromJson(String json) {

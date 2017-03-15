@@ -68,8 +68,8 @@ public class TodoList {
         this.storage = DEFAULT_STORAGE;
     }
 
-    public TodoListStorage setStorage(TodoListStorage storage) {
-        return storage;
+    public void setStorage(TodoListStorage storage) {
+        this.storage = storage;
     }
 
     public TodoListStorage getStorage() {

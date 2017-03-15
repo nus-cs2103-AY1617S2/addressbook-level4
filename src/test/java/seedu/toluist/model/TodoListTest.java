@@ -64,6 +64,11 @@ public class TodoListTest {
     }
 
     @Test
+    public void testLoad() {
+
+    }
+
+    @Test
     public void testEquals() {
         TodoList todoList2 = new TodoList();
         todoList2.add(task1);

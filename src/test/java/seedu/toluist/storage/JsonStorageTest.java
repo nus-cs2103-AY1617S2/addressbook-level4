@@ -26,17 +26,22 @@ import static org.junit.Assert.assertTrue;
 public class JsonStorageTest {
     private static final String TEST_STORAGE_FILE_PATH =
             FileUtil.getPath("./src/test/data/StorageTest/");
+    private static final int ZILLION = 10000000;
 
     private JsonStorage storage;
-    private TodoList todoList = new TypicalTestTodoLists().getTypicalTodoList();
+    private TodoList emptyTodoList = new TodoList();
+    private TodoList typicalTodoList = new TypicalTestTodoLists().getTypicalTodoList();
     private TodoList anotherTodoList;
-    private int zillion = 10000000;
 
     @Before
     public void setUp() {
         storage = new JsonStorage();
         anotherTodoList = new TodoList();
         anotherTodoList.add(new Task("it's a task"));
+
+        emptyTodoList.setStorage(storage);
+        typicalTodoList.setStorage(storage);
+        anotherTodoList.setStorage(storage);
     }
 
     @Test
@@ -56,7 +61,7 @@ public class JsonStorageTest {
     public void load_typicalData() {
         Optional<TodoList> todoListOptional = loadDataFromPath(TEST_STORAGE_FILE_PATH + "TypicalData.json");
         assertTrue(todoListOptional.isPresent());
-        assertEquals(todoListOptional.get(), todoList);
+        assertEquals(todoListOptional.get(), typicalTodoList);
     }
 
     @Test
@@ -68,146 +73,122 @@ public class JsonStorageTest {
     public void save_nonExistingFile() throws IOException {
         String path = TestUtil.getFilePathInSandboxFolder("non_existing.json");
         FileUtil.removeFile(new File(path));
-        assertTrue(saveDataToPath(todoList, path));
-        assertEquals(JsonUtil.toJsonString(todoList), FileUtil.readFromFile(new File(path)));
+        assertTrue(saveDataToPath(typicalTodoList, path));
+        assertEquals(JsonUtil.toJsonString(typicalTodoList), FileUtil.readFromFile(new File(path)));
     }
 
     @Test
     public void save_overwriteFile() throws IOException {
         String path = TestUtil.getFilePathInSandboxFolder("existing.json");
         FileUtil.createFile(new File(path));
-        assertTrue(saveDataToPath(todoList, path));
-        assertEquals(JsonUtil.toJsonString(todoList), FileUtil.readFromFile(new File(path)));
+        assertTrue(saveDataToPath(typicalTodoList, path));
+        assertEquals(JsonUtil.toJsonString(typicalTodoList), FileUtil.readFromFile(new File(path)));
     }
 
     @Test
     public void move_toInvalidPath() throws IOException {
         String oldPath = TestUtil.getFilePathInSandboxFolder("old.json");
-        saveDataToPath(todoList, oldPath);
-        assertEquals(JsonUtil.toJsonString(todoList), FileUtil.readFromFile(new File(oldPath)));
+        saveDataToPath(typicalTodoList, oldPath);
+        assertEquals(JsonUtil.toJsonString(typicalTodoList), FileUtil.readFromFile(new File(oldPath)));
 
         String newPath = "///fff";
         assertFalse(storage.move(newPath));
         assertEquals(Config.getInstance().getTodoListFilePath(), oldPath);
-        assertEquals(JsonUtil.toJsonString(todoList), FileUtil.readFromFile(new File(oldPath)));
+        assertEquals(JsonUtil.toJsonString(typicalTodoList), FileUtil.readFromFile(new File(oldPath)));
     }
 
     @Test
     public void move_toValidPath() throws IOException {
         String oldPath = TestUtil.getFilePathInSandboxFolder("old.json");
-        saveDataToPath(todoList, oldPath);
-        assertEquals(JsonUtil.toJsonString(todoList), FileUtil.readFromFile(new File(oldPath)));
+        saveDataToPath(typicalTodoList, oldPath);
+        assertEquals(JsonUtil.toJsonString(typicalTodoList), FileUtil.readFromFile(new File(oldPath)));
 
         String newPath = TestUtil.getFilePathInSandboxFolder("new.json");
         assertTrue(storage.move(newPath));
         assertEquals(Config.getInstance().getTodoListFilePath(), newPath);
-        assertEquals(JsonUtil.toJsonString(todoList), FileUtil.readFromFile(new File(newPath)));
+        assertEquals(JsonUtil.toJsonString(typicalTodoList), FileUtil.readFromFile(new File(newPath)));
         assertFalse(FileUtil.isFileExists(new File(oldPath)));
     }
 
     @Test
     public void undo_nothingToUndo() {
         saveDataToPath(new TodoList(), TestApp.SAVE_LOCATION_FOR_TESTING);
-        Pair<TodoList, Integer> undoedData = storage.undo(1);
-        assertEquals(undoedData.getKey(), new TodoList());
-        assertEquals(undoedData.getValue().longValue(), 0);
+        assertValidUndoRedoData(storage.undo(1), new TodoList(), 0);
     }
 
     @Test
     public void undo_multipleOnce() {
         saveDataToPath(new TodoList(), TestApp.SAVE_LOCATION_FOR_TESTING);
-        storage.save(todoList);
+        storage.save(typicalTodoList);
         storage.save(anotherTodoList);
 
-        Pair<TodoList, Integer> undoedData = storage.undo(1);
-        assertEquals(undoedData.getKey(), todoList);
-        assertEquals(undoedData.getValue().longValue(), 1);
-
-        undoedData = storage.undo(1);
-        assertEquals(undoedData.getKey(), new TodoList());
-        assertEquals(undoedData.getValue().longValue(), 1);
+        assertValidUndoRedoData(storage.undo(1), typicalTodoList, 1);
+        assertValidUndoRedoData(storage.undo(1), new TodoList(), 1);
     }
 
     @Test
     public void undo_multipleTimesInOnce() {
         saveDataToPath(new TodoList(), TestApp.SAVE_LOCATION_FOR_TESTING);
-        storage.save(todoList);
+        storage.save(typicalTodoList);
         storage.save(anotherTodoList);
 
-        Pair<TodoList, Integer> undoedData = storage.undo(2);
-        assertEquals(undoedData.getKey(), new TodoList());
-        assertEquals(undoedData.getValue().longValue(), 2);
+        assertValidUndoRedoData(storage.undo(2), new TodoList(), 2);
     }
 
     @Test
     public void undo_zillionTimesInOnce() {
         saveDataToPath(new TodoList(), TestApp.SAVE_LOCATION_FOR_TESTING);
-        storage.save(todoList);
+        storage.save(typicalTodoList);
         storage.save(anotherTodoList);
 
-        Pair<TodoList, Integer> undoedData = storage.undo(zillion);
-        assertEquals(undoedData.getKey(), new TodoList());
-        assertEquals(undoedData.getValue().longValue(), 2);
+        assertValidUndoRedoData(storage.undo(ZILLION), new TodoList(), 2);
     }
 
     @Test
     public void redo_nothingToRedo() {
         saveDataToPath(new TodoList(), TestApp.SAVE_LOCATION_FOR_TESTING);
-        Pair<TodoList, Integer> undoedData = storage.undo(1);
-        assertEquals(undoedData.getKey(), new TodoList());
-        assertEquals(undoedData.getValue().longValue(), 0);
+        assertValidUndoRedoData(storage.redo(1), new TodoList(), 0);
     }
 
     @Test
     public void redo_multipleOnce() {
         saveDataToPath(new TodoList(), TestApp.SAVE_LOCATION_FOR_TESTING);
-        storage.save(todoList);
+        storage.save(typicalTodoList);
         storage.save(anotherTodoList);
         storage.undo(2);
 
-        Pair<TodoList, Integer> redoedData = storage.redo(1);
-        assertEquals(redoedData.getKey(), todoList);
-        assertEquals(redoedData.getValue().longValue(), 1);
-
-        redoedData = storage.redo(1);
-        assertEquals(redoedData.getKey(), anotherTodoList);
-        assertEquals(redoedData.getValue().longValue(), 1);
+        assertValidUndoRedoData(storage.redo(1), typicalTodoList, 1);
+        assertValidUndoRedoData(storage.redo(1), anotherTodoList, 1);
     }
 
     @Test
     public void redo_multipleTimesInOnce() {
         saveDataToPath(new TodoList(), TestApp.SAVE_LOCATION_FOR_TESTING);
-        storage.save(todoList);
+        storage.save(typicalTodoList);
         storage.save(anotherTodoList);
         storage.undo(2);
 
-        Pair<TodoList, Integer> redoedData = storage.redo(2);
-        assertEquals(redoedData.getKey(), anotherTodoList);
-        assertEquals(redoedData.getValue().longValue(), 2);
+        assertValidUndoRedoData(storage.redo(2), anotherTodoList, 2);
     }
 
     @Test
     public void redo_zillionTimesInOnce() {
         saveDataToPath(new TodoList(), TestApp.SAVE_LOCATION_FOR_TESTING);
-        storage.save(todoList);
+        storage.save(typicalTodoList);
         storage.save(anotherTodoList);
         storage.undo(2);
 
-        Pair<TodoList, Integer> redoedData = storage.redo(zillion);
-        assertEquals(redoedData.getKey(), anotherTodoList);
-        assertEquals(redoedData.getValue().longValue(), 2);
+        assertValidUndoRedoData(storage.redo(ZILLION), anotherTodoList, 2);
     }
 
     @Test
     public void redo_afterSave() {
         saveDataToPath(new TodoList(), TestApp.SAVE_LOCATION_FOR_TESTING);
-        storage.save(todoList);
+        storage.save(typicalTodoList);
         storage.undo(1);
         storage.save(anotherTodoList);
 
-        Pair<TodoList, Integer> redoedData = storage.redo(1);
-        assertEquals(redoedData.getKey(), anotherTodoList);
-        assertEquals(redoedData.getValue().longValue(), 0);
+        assertValidUndoRedoData(storage.redo(1), anotherTodoList, 0);
     }
 
     /**
@@ -229,5 +210,18 @@ public class JsonStorageTest {
     private boolean saveDataToPath(TodoList todoList, String path) {
         Config.getInstance().setTodoListFilePath(path);
         return storage.save(todoList);
+    }
+
+    /**
+     * Helper method to verify if the undo/redo data is correct
+     * @param data undo/redo data
+     * @param expectedTodoList todolist expected
+     * @param expectedUndoRedoTimes number of undo/redo times expected
+     */
+    private void assertValidUndoRedoData(Pair<TodoList, Integer> data, TodoList expectedTodoList, long
+            expectedUndoRedoTimes) {
+        assertEquals(data.getKey(), expectedTodoList);
+        assertEquals(data.getKey().getStorage(), storage);
+        assertEquals(data.getValue().longValue(), expectedUndoRedoTimes);
     }
 }
