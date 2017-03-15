@@ -98,7 +98,6 @@ Simply type "help" to view the help page! <br>
 
 ### Adding a new task : `add`, `do`
 
-
 Add a new task with a description using just the `add` command word. <br>
 `(add|do) TASK_DESCRIPTION`
 > **Examples:** <br>
@@ -154,13 +153,20 @@ Add a task with tags with the `\under` key. Separate multiple tags with spaces.<
 > **Tips:** <br>
 > Tasks can have any number of tags (including 0)
 
-
-**Acceptable Date Formats** <br>
 Date Format |Examples
 ----------- | :------- |
 Day Month | 1st Oct, 1 Oct
+Day Month Year | 1st Oct 2017
 Month Day | Oct 1st, Oct
 Day / Month | 1/10
+Relative | today, tomorrow, tmr, two days later
+
+Time Format |Examples
+----------- | :------- |
+Hour:Min | 03:00
+Hour.Min | 03.00, 3.00
+Hour am/pm | 3pm, 3am
+Hour | 3
 
 > **Tips:** <br>
 > - If you do not explicitly state the time, the date will be assumed to be within the next 24 hours <br>
