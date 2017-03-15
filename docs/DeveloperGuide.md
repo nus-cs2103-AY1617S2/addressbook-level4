@@ -24,8 +24,8 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 
 ## Introduction
-<p>Doist is a task manager that can accept natural language commands via keyboard.</p>
-<p>This developer guide aims to help developers better understand the design and implementation of Doist to facilitate further contribution to the development of Doist.</p>
+<p>Doist is a task manager that can simplify your life with the press of a button! Designed for users who like to use the keyboard, Doist can accept natural language commands to help you keep track of all your daily tasks.</p>
+<p>This developer guide aims to give developers a nut and bolts view of Doist, to encourage and facilitate contribution to the development of this application.</p>
 
 
 <br>
@@ -93,59 +93,58 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 <img src="images/Architecture.png" width="600"><br>
 _Figure 2.1.1 : Architecture Diagram_
 
-The **_Architecture Diagram_** given above explains the high-level design of the App.
-Given below is a quick overview of each component.
+The **_Architecture Diagram_** given above explains the high-level design of Doist. Each of the components illustrated pertain to a specfic aspect of the App, and are briefly discussed below.
 
 #### `Main`
-The `Main` component takes charge of 
+The `Main` component is the heart of the App. It is responsible for
 - initializing other components (`Model`, `Logic`, `UI`) in the correct order and loading data from local storage when the app launches.  
 - terminating other components when Doist is shut down.
 
 #### [`UI`](#2-ui-component)
-The `UI` component takes charge of displaying information and handling all user interactions.
+The `UI` component serves as the eyes and ears of the App. It handles all user interactions, as well as displaying information to the user.
 
 #### [`Logic`](#3-logic-component)
-The `Logic` component takes charge of parsing the user input and executing the commands.
+The `Logic` component is the brains behind the App. It takes charge of parsing the user input and executing the commands.
 
 #### [`Model`](#4-model-component)
-The `Model` component represent the data that Doist operates on and supports the operations on these data.
+The `Model` component is the spine around which the App has been built. It represents the data that Doist operates on and also supports the operations on the same.
 
 #### [`Storage`](#5-storage-component)
-The `Storage` component takes charge of reading data from, and writing data to, the hard disk.
+The `Storage` component handles the App's memory. It takes charge of reading data from, and writing data to, the hard disk.
 
 #### `Commons`
-The `Commons` component contains a collection of classes used by multiple other components. The following are 2 representatives.
+The `Commons` component is akin to the nervous system of the App. It contains a collection of classes used by multiple other components. The following are 2 representatives.
 - EventsCenter : supports the communication among different components using events
 - LogsCenter : enables writing log messages to the log file.
 
 ### 2. UI component
 The `UI` is the main form of interaction between Doist and the user. `UI` executes commands entered by the user and updates itself to reflect the results of these commands. It works closely with `Logic` component to execute commands, and also responds to events raised internally by Doist.
 
-The following diagram demonstrate the structure of the `UI` component  
+The following diagram represents the structure of the `UI` component  
 <br><img src="images/UIComponentClassDiagram.PNG" width="800"><br>
 
-The following are of some key files in the `Ui` component:
-- [`UI.java`](../src/main/java/seedu/doist/ui/Ui.java):  contains an `interface` that defines two operations that control the UI of the app. 
+Here are some of the key files in the `Ui` component:
+- [`UI.java`](../src/main/java/seedu/doist/ui/Ui.java):  contains an `interface` that defines two operations that control the UI of the App. 
     These operations are defined using different methods (API).  
-    Some representatives methods are listed here:  
+    Some representative methods are listed here:  
     ```java
     - void start(Stage primaryStage)
     - void stop()
     ```
 - `UiManager.java`: contains a `class` that implements the operations specified in `Ui.java`.
-- `MainWindow.java`: contains a `class` that represents the Main Window viewed by the user
-- `CommandBox.java`: contains a `class` that represents the Command Box used by the user to enter commands
+- `MainWindow.java`: contains a `class` that represents the Main Window viewed by the user.
+- `CommandBox.java`: contains a `class` that represents the Command Box used by the user to enter commands.
 
 ### 3. Logic component
-The `Logic` component handles the execution of commands entered by the user. It consists of several subcomponents, most notably the `Parser` and `Command` class. `Logic` also prepares the information to be used by the `UI` to display to the user. 
+The `Logic` component handles the execution of the commands entered by the user. It consists of several subcomponents, most notably the `Parser` and `Command` class. `Logic` also prepares the information to be used by the `UI` to display to the user. 
 
-The following diagram demonstrate the structure of the `Logic` component  
+The following diagram represents the structure of the `Logic` component  
 <br><img src="images/LogicComponentClassDiagram.jpg" width="800"><br> 
 
-The following are of some key files in the `Logic` component:
-- [`Logic.java`](../src/main/java/seedu/doist/logic/Logic.java):  contains an `interface` that defines operations to obtain   
+Here are some of the key files in the `Logic` component:
+- [`Logic.java`](../src/main/java/seedu/doist/logic/Logic.java):  contains an `interface` that defines operations to obtain the results of computations.  
     These operations are defined using different methods (API).  
-    Some representatives methods are listed here:  
+    Some representative methods are listed here:  
     ```java
     - CommandResult execute(String commandText) throws CommandException;
     - ObservableList<ReadOnlyTask> getFilteredPersonList();
@@ -153,18 +152,17 @@ The following are of some key files in the `Logic` component:
 - `LogicManager.java`: contains a `class` that implements the operations specified in `Model.java`.
 - `Parser.java`: contains a `class` that is in charge of parsing commands.
 - `Command.java`: contains a `class` that represents each command defined in Doist.
-- `ParserUtil.java`: contains a class that stores useful methods that are used by the Parser.
 
 ### 4. Model component
-The `Model` component defines classes to represent the data that Doist operates on. It also specifies and implements the operations on these data.  
+The `Model` component defines classes that represent the data Doist operates on. It also specifies and implements operations that work on the data.  
   
-The following diagram demonstrate the structure of the `Model` component  
+The following diagram represents the structure of the `Model` component  
 <br><img src="images/ModelClassDiagram.png" width="800"><br>  
 
-The following are of some key files in the `Model` component:
+Here are some of the key files in the `Model` component:
 - [`Model.java`](../src/main/java/seedu/doist/model/Model.java):  contains an `interface` that defines multiple operations on the data.  
     These operations are defined using different methods (API).  
-    Some representatives methods are listed here:  
+    Some representative methods are listed here:  
     ```java
     - void finishTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException, UniqueTaskList.TaskAlreadyFinishedException;
     - void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
@@ -176,27 +174,27 @@ The following are of some key files in the `Model` component:
 - `UserPrefs.java`: contains a class that stores user preferences such as the position and size of the app window.
 
 ### 5. Storage component
-The `Storage` component takes charge of writing/reading data to/from hard drive.
-These data consists of **user preferences** and **to-do list**
-- **user preferences** is stored in a **JSON** file
-- **to-do list** is stored in a **XML** file
+The `Storage` component takes charge of reading and writing (R/W) data, to and from the hard drive.
+This data consists of **user preferences** and **to-do list** :
+- **user preferences** is stored in a **JSON** file.
+- **to-do list** is stored in a **XML** file.
 
-The following diagram demonstrate the structure of the `Storage` component  
+The following diagram represents the structure of the `Storage` component  
 <br><img src="images/StorageClassDiagram.png" width="800"><br>  
 
-The following are of some key files in the `Storage` component:
-- [`Storage.java`](../src/main/java/seedu/doist/storage/StorageManager.java):  contains an `interface` that defines reading and writing operation of user preferences and to-do list.  
+Here are some of the key files in the `Storage` component:
+- [`Storage.java`](../src/main/java/seedu/doist/storage/StorageManager.java):  contains an `interface` that defines R/W operations on **user preferences** and **to-do list**.  
     These operations are defined using different methods (API).  
-    Some representatives methods are listed here:  
+    Some representative methods are listed here:  
     ```java
     - Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
     - void saveUserPrefs(UserPrefs userPrefs) throws IOException;
     - Optional<ReadOnlyTodoList> readTodoList() throws DataConversionException, IOException;
     - void saveTodoList(ReadOnlyTodoList todoList) throws IOException;
     ```
-- `StorageManager.java`: contains a `class` that implements the reading and writing operations specified in `Storage.java`.
-- `XmlTodoListStorage`: contains a `class` that implements the reading and writing operations of to-do list from and to an XML file. An instance of this class is utilized in `StorageManager`.
-- `JsonUserPrefsStorage`: contains a `class` that implements the reading and writing operations of user preferences from and to an JSON file. An instance of this class is utilized in `StorageManager`.
+- `StorageManager.java`: contains a `class` that implements the operations specified in `Storage.java`.
+- `XmlTodoListStorage`: contains a `class` that implements the R/W operations on **to-do list**. An instance of this class is utilized in `StorageManager`.
+- `JsonUserPrefsStorage`: contains a `class` that implements the R/W operations on **user preferences**. An instance of this class is used in `StorageManager`.
 
 <br>
 
@@ -542,7 +540,7 @@ Use case ends.
 - Have multiple UI themes
 - Come with automated unit tests
 - Be able to hold up to 1000 tasks
-- Run fast enough by responding to a users command on the command line interface within 5 secs
+- Run fast enough by responding to a user's command on the command line interface within 5 secs
 - Be open source
 - Have flexible commands that accept variations
 - Allow user to customise default commands
@@ -593,7 +591,10 @@ http://www.comp.nus.edu.sg/~cs2103/AY1617S2/contents/handbook.html#handbook-proj
     - `Finished tasks`
     Tasks that have been `finished`
     - `Recurring task`
-    A task with a `recurrence interval` set. A new task will automatically be cloned from this task, with the recurrence interval added to the tasks `start time`, `end time` and `reminder time` when a task is marked as `Finished` or becomes `Overdue`
+    A task with a `recurrence interval` set. A new task will automatically be cloned from this task, with the recurrence interval added to the task's `start time`, `end time` and `reminder time` when a task is marked as `Finished` or becomes `Overdue`
+
+**R/W**
+    Reading and Writing
 
 **Mutating Command**
     Any command which causes a change in the state of apps (E.g. add, delete, finished)
@@ -624,7 +625,7 @@ Pros:
 Cons:
 
 * Some of the best features like subtasks is pro-only
-* Doesnt have support for handwritten tasks, drawings, images, calendar view
+* Doesn't have support for handwritten tasks, drawings, images, calendar view
 * Reminder timing cannot be customised
 * No attachment of files
 
@@ -646,8 +647,8 @@ Pros:
 Cons:
 
 * Pro version is quite expensive
-* There is no dedicated Sync button
-    * Setup is a bit lengthy, and may require you to download the mobile version as well
+* There is no dedicated 'Sync' button
+* Setup is a bit lengthy, and may require you to download the mobile version as well
 
 
 
@@ -688,8 +689,6 @@ Pros:
 * Users can pin certain notes or reminders to be shown at the top
 * Can insert images and hand-drawing
 * Users can search for notes and reminders
-
-
 
 
 Cons:
