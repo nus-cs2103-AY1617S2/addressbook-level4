@@ -1,5 +1,6 @@
 package seedu.address.model.task;
 
+import java.util.Comparator;
 import java.util.Objects;
 
 import seedu.address.commons.util.CollectionUtil;
@@ -149,4 +150,13 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
        return compareToResult;
    }
 
+   public static Comparator<Task> TaskComparator
+       = new Comparator<Task>() {
+    
+        public int compare(Task task1, Task task2) {
+            return task1.compareTo(task2);
+        }
+
+};
+   
 }
