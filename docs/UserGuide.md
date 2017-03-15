@@ -185,7 +185,7 @@ Format: `done [ITEM_TYPE] INDEX`
 <img src="" width>
 > The index **must be a positive integer** 1, 2, 3, ...
 > Events cannot be marked.
-> 
+>
 Examples:
 
 * `done 2`<br>
@@ -193,7 +193,7 @@ Examples:
 * `find MA1521 Tutorial 1`<br>
  `done 1`<br>
  Marks the 1st item in the results of the `find` command.
-* `done ftask 2`<br>
+* `done 3`<br>
  Marks the 3rd floating task shown in the floating task column of the default task manager page as done.
 
 
@@ -226,11 +226,11 @@ Format: `save FILE_PATH/FILE_NAME.xml`
 > Saves the data file with your own file name in the layers of folder you declare yourself.
 > Saved file must be of type xml. Hence, it must end with .xml.
 > Saved file location will be limited in the Doit Application folder.
-> 
+>
 Examples:
 * `save folder1/folder2/savefile.xml`<br>
  Saves the data file in a file named savefile.xml at inside folder2 which is inside folder1 of the Doit Application folder.
-* `save savefile.xml`<br> 
+* `save savefile.xml`<br>
  Saves the data file in a file named savefile.xml in the Doit Application folder.
 ### Exiting the program : `exit`
 
@@ -259,11 +259,11 @@ There is no need to save manually.
  * `add completeUserGuide d/28-Feb-2017 t/2400 p/high #Important`
 
 * **Add Floating Task** : `add FLOATINGTASKNAME [p/PRIORITY] [#TAG]...`<br>
- e.g. 
+ e.g.
  * `add reachDiamondRank p/low #Overwatch`
 
 * **Add Event** : `add EVENTNAME sd/START DATE ed/END DATE [st/START TIME] [et/END TIME] [p/PRIORITY] [#TAG]...`<br>
- e.g. 
+ e.g.
  * `add finishCS3230Lab sd/01-Mar-17 ed/01-Mar-17 st/2000 et/2200 p/med #CS3230`
  * `add finishCS3230Lab sd/01-Mar-17 st/2000 p/med #CS3230`
 
@@ -293,7 +293,7 @@ There is no need to save manually.
 * **Clear** : `clear` <br>
  e.g.
  * `clear`
- 
+
 * **Save** : `save FILE_PATH/FOLDER_NAME.xml`
  e.g.
  * `save folder1/folder2/savefile.xml`

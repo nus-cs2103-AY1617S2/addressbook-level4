@@ -48,7 +48,7 @@
                <children>
                   <AnchorPane fx:id="taskListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
                </children>
-            </VBox> 
+            </VBox>
             <VBox fx:id="eventList" minWidth="340" prefWidth="340">
 
                 <padding>
