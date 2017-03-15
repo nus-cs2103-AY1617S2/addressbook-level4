@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMEINTERVAL_START;
 
 import java.util.NoSuchElementException;
 
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.IncorrectCommand;
@@ -57,8 +56,6 @@ public class AddCommandParser {
             }
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-        } catch (IllegalValueException ive) {
-            return new IncorrectCommand(ive.getMessage());
         } catch (Exception e) {
             return new IncorrectCommand(e.getMessage());
         }
