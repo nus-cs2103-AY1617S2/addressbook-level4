@@ -170,7 +170,7 @@ The `UI` component,
 
 ### 3.3. Logic component
 
-Author: Melvin Soh
+Author: Soh Wei Kiat Melvin
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
@@ -209,7 +209,7 @@ The `Model` component,
 
 ### 3.5. Storage component
 
-Author: Haya Alsharef
+Author: Al Sharef Haya Fayez M
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
@@ -391,12 +391,12 @@ Priority | As a ... | I want to ... | So that I can...
 
 (For all use cases below, the **System** is`TaskBoss` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Add a task
+### Use case: Add a task
 
 **MSS**
 
 1.  User requests to add a task according to some parameters
-2.  TaskBoss adds the new task. <br>
+2.  TaskBoss adds the new task <br>
 Use case ends
 
 **Extensions**
@@ -406,37 +406,33 @@ Use case ends
 > 1a1. TaskBoss shows an error message <br>
 Use case ends
 
-1b. The category user enters does not match the existing categories
+1b. User enters a category that does not match any existing category
 
-> 1b1. TaskBoss shows an error message <br>
-> 1b2. TaskBoss adds the new task without the category <br>
+> 1b1. TaskBoss adds the new task and creates a category with the user-specified name <br>
 Use case ends
 
-1c. User enters incorrect format for time and date
+1c. User enters incorrect format for date or time
 
-> 1c1. TaskBoss shows an error message with the expected input format <br>
-> 1c2. TaskBoss adds the new task without time and date <br>
+> 1c1. TaskBoss shows an error message <br>
 Use case ends
 
-1d. Start time and end time are the same
+1d. User enters the same start time and end time
 
 > 1d1. TaskBoss shows an error message <br>
-> 1d2. TaskBoss adds the new task without time and date <br>
 Use case ends
 
-1e. Start time is later than end time
+1e. User enters a start time that is later than the end time
 
 > 1e1. TaskBoss shows an error message <br>
-> 1e2. TaskBoss adds the new task without time and date <br>
 Use case ends
   
-#### Use case: List all tasks
+### Use case: List all tasks
 
 **MSS**
 
 1.  User requests to list all tasks
-2.  TaskBoss displays all tasks. <br>
-Use case ends.
+2.  TaskBoss displays all tasks <br>
+Use case ends
 
 **Extensions**
 
@@ -445,116 +441,116 @@ Use case ends.
 > 1a1. TaskBoss shows “No tasks to display” message <br>
 Use case ends
 
-#### Use case: Edit a task
+### Use case: Edit a task
 
 **MSS**
 
 1.  User requests to edit certain attribute(s) of a task
-2.  TaskBoss updates the task. <br>
+2.  TaskBoss updates the task <br>
 Use case ends
 
 **Extensions**
 
-1a. The given task index is invalid
+1a. User enters an invalid task index
 
 > 1a1. TaskBoss shows an error message <br>
 Use case ends
 
-#### Use case: Delete a task
+### Use case: Delete a task
 
 **MSS**
 
 1.  User requests to delete a task
-2.  TaskBoss deletes the specific task the user requests for. <br>
+2.  TaskBoss deletes that specific task <br>
 Use case ends
 
 **Extensions**
 
-1a. The given task index is invalid
+1a. User enters an invalid task index
 
 > 1a1. TaskBoss shows an error message <br>
 Use case ends
 
-#### Use case: Mark task as done
+### Use case: Mark task as done
 
 **MSS**
 
 1. User requests to mark a task as done
-2. TaskBoss adds the task to the ‘Done’ section, and removes it from ‘All Tasks’ and the task’s category. <br>
+2. TaskBoss adds the task to the ‘Done’ category, and removes it from ‘All Tasks’ and the task’s current category <br>
 Use case ends
 
 **Extensions**
 
-1a. The given task index is invalid
+1a. User enters an invalid task index
 
-> 1a1. TaskBoss shows an error message. <br>
+> 1a1. TaskBoss shows an error message <br>
 Use case ends
 
 
-#### Use case: Sort tasks by deadline
+### Use case: Sort tasks by deadline
 
 **MSS**
 
 1. User requests to sort tasks by deadline
-2. TaskBoss displays list of tasks sorted by deadline. <br>
-Use case ends.
+2. TaskBoss displays list of tasks sorted by deadline <br>
+Use case ends
 
-#### Use case: Undo previous command
+### Use case: Undo previous command
 
 **MSS**
 
 1. User requests to undo previous command
-2. TaskBoss undoes previous command and returns to a state before the previous command. <br>
+2. TaskBoss undoes previous command and returns to the previous state <br>
 Use case ends
 
 **Extensions**
 
-2a. Previous command is invalid
+2a. There is no last operation
 
-> 2a1. TaskBoss shows "cannot undo" error message. <br>
-Use case ends. 
+> 2a1. TaskBoss shows an error message <br>
+Use case ends
 
-#### Use case: Export tasks to an existing file
+### Use case: Export tasks to an existing file
 
 **MSS**
 
 1. User requests to export tasks to an existing file for data storage
-2. TaskBoss changes the storage location, and saves all existing data into the new file. <br>
+2. TaskBoss changes the storage location, and saves all existing data into the specified file <br>
 Use case ends
 
 **Extensions**
 
-2a. The given file path cannot be accessed
+2a. TaskBoss cannot access the given file path
 
-> 2a1. TaskBoss shows an error message. <br>
-Use case ends.
+> 2a1. TaskBoss shows an error message <br>
+Use case ends
 
-2b. The given file path does not exist
+2b. TaskBoss cannot find the given file path
 
-> 2b1. TaskBoss shows an error message. <br>
-Use case ends.
+> 2b1. TaskBoss shows an error message <br>
+Use case ends
 
 #### Use case: Export tasks to a new file
 
 **MSS**
 
 1. User requests to export tasks to a new file for data storage, specifying the file path and the new file name
-2. TaskBoss saves all existing data into the new file. <br>
+2. TaskBoss saves all existing data into the new file <br>
 Use case ends
 
 **Extensions**
 
-2a. The given file path cannot be accessed
+2a. TaskBoss cannot access the given file path
 
-> 2a1. TaskBoss shows "Cannot access file path" error message.<br>
- Use case ends.
+> 2a1. TaskBoss shows an error message.<br>
+ Use case ends
  
-#### Use case: Search tasks
+### Use case: Search tasks
 
 **MSS**
 
-1. User requests to search task by keyword (keyword from description, task title, or deadline)
-2. TaskBoss displays list of tasks containing keyword. <br>
+1. User requests to search for tasks (by description, task title, or deadline) by keywords 
+2. TaskBoss displays list of tasks containing keyword <br>
 Use case ends
 
 **Extensions**
@@ -564,115 +560,117 @@ Use case ends
 > 3a1. TaskBoss shows “0 tasks found” message. <br>
 Use case ends.
  
-#### Use case: List tasks by category
+### Use case: List tasks by category
 
 **MSS**
 
 1. User requests to list tasks by specified category
-2. TaskBoss displays all tasks of the category that user requests. <br>
+2. TaskBoss displays all tasks of the category that user requests <br>
 Use case ends
 
 **Extension**
 
 3a. The category does not exist
 
-> 3a1. TaskBoss shows “0 tasks found” message. <br>
-Use case ends.
+> 3a1. TaskBoss shows “0 tasks found” message <br>
+Use case ends
 
-#### Use case: Create new category
+### Use case: Create new category
 
 **MSS**
 
 1. User requests to create a new category and specifies name
-2. TaskBoss creates category. <br>
+2. TaskBoss creates category <br>
 Use case ends.
 
 **Extensions**
 
 1a. Category name already exists
 
-> 1a1. TaskBoss shows error message “Category already exists”. <br>
-Use case ends.
+> 1a1. TaskBoss shows an error message <br>
+Use case ends
 
-#### Use Case: Edit category name
+### Use Case: Edit category name
 
 **MSS**
 
 1. User requests to edit category name
-2. TaskBoss updates the category name.<br>
+2. TaskBoss updates the category name <br>
 Use case ends.
 
 **Extensions**
 
 1a. Category to be edited does not exist.
 		
-> 1a1. TaskBoss shows error message “Category does not exist”. <br>
-Use case ends.
+> 1a1. TaskBoss shows error message “Category does not exist” <br>
+Use case ends
 
-#### Use case: Exit TaskBoss
+2a. Category name already exists
 
-**MSS**
+> 2a1. TaskBoss shows an error message <br>
+Use case ends
 
-1. User requests to exit the TaskBoss application
-2. TaskBoss exits. <br>
-User case ends.
-
-#### Use case: Clear tasks under certain category
+### Use case: Clear tasks under certain category
 
 **MSS**
 
 1. User requests to clear all tasks of certain category
-2. TaskBoss clears all tasks of the specified category. <br>
-Use case ends.
+2. TaskBoss clears all tasks of the specified category <br>
+Use case ends
 
 **Extensions**
 
-1a. The category user enters does not match the existing categories.
+1a. User enters a category that does not match any existing category
 
-> 1a1. TaskBoss shows an error message. <br>
-Use case ends.
+> 1a1. TaskBoss shows an error message <br>
+Use case ends
 
-#### Use case: Display help guide
+### Use case: Display help guide
 
 **MSS**
 
 1. User requests for help guide
-2. TaskBoss displays help guide
+2. TaskBoss displays the help guide window
 3. User types any key in the command line
-4. Help guide disappears. <br>
+4. TaskBoss closes help guide window <br>
 Use case ends
 
-#### Use case: View a specific task
+### Use case: View a specific task
 
 **MSS**
 
 1. User requests to view a specific task
-2. TaskBoss displays the task user requests. <br>
+2. TaskBoss displays the task <br>
 Use case ends
 
 **Extensions**
 
-1a. The given task index is invalid
+1a. User enters an invalid task index
 
 > 1a1. TaskBoss shows an error message.<br>
 Use case ends  
 
 
+### Use case: Exit TaskBoss
+
+**MSS**
+
+1. User requests to exit TaskBoss application
+2. TaskBoss exits <br>
+User case ends
+
+
 ## Appendix C : Non Functional Requirements
 
-1. Should handle at least 100 tasks.
-2. Should work without Internet connection.
-3. Should have an intuitive user interface.
-4. Should start up in less than  2 seconds.
-5. Should respond to commands in less than 1 second.
-6. Should come with automated unit tests and open source code.
+* Should handle at least 100 tasks
+* Should work without Internet connection
+* Should have an intuitive user interface
+* Should start up in less than two seconds
+* Should respond to commands in less than one second
+* Should come with automated unit tests and open source code
  
 
 ## Appendix D : Glossary
-
-##### Priority level
-
-> A number between 1 and 3 inclusive that indicates how urgent a task is
 
 ##### Task index
 
@@ -680,7 +678,7 @@ Use case ends
 
 ##### Category
 
-> A way to classify each type of task.
+> A way for the user to classify tasks.
 
 ##### Done tasks
 
@@ -690,82 +688,79 @@ Use case ends
 
 > The last executed command.
 
-{add more here}
 
 ## Appendix E : Product Survey
 
-####Google Keep
+#### Google Keep
 
 Author: Al Sharef Haya Fayez M
 
 **Pros:**
 
-1. Uses sticky notes to record tasks
-2. Has colorful UI
-3. Provides instant capturing of anything by speech and pictures
-4. Able to be integrated with Google Drive and Google Docs
-5. Free to use 
-6. No need to set up an account
-7. Supports offline editing 
-8. Supports undo option <br>
+* Uses sticky notes to record tasks
+* Has colorful UI
+* Provides instant capturing of anything by speech and pictures
+* Able to be integrated with Google Drive and Google Docs
+* Free to use 
+* No need to set up an account
+* Supports offline editing 
+* Supports undo option <br>
 
 **Cons:**
 
-1. Does not support calendar view
-2. Hard to organize large amount of notes
-3. Unable to categorize tasks
-4. Does not support short-cut typed commands
-5. Depends on mouse clicks <br>
+* Does not support calendar view
+* Hard to organize large amount of notes
+* Unable to categorize tasks
+* Does not support short-cut typed commands
+* Depends on mouse clicks <br>
 
-####MeisterTask
+#### MeisterTask
 
 Author: Tan Wei
 
 **Pros:**
 
-1. Has beautiful user interface
-2. Free for personal use
-3. Supports third-party application integrations (eg. Google, Dropbox)
-4. Available across most platforms (Web app, Android, OS X)
-5. Can enable task relationships <br>
+* Has beautiful user interface
+* Free for personal use
+* Supports third-party application integrations (eg. Google, Dropbox)
+* Can enable task relationships <br>
 
 **Cons:**
 
-1. Does not support monthly calendar view
-2. Unable to set recurring tasks
-3. Unable to set reminders
-4. Tasks are in card-view. Can be hard to track large amount of tasks.  <br>
+* Does not support monthly calendar view
+* Unable to set recurring tasks
+* Unable to set reminders
+* Tasks are in card-view. Can be hard to track large amount of tasks.  <br>
 
-####Just
+#### Just
 
 Author: Xu RuoLan
 
 **Pros:**
-
-1. Has simple and clear user interface
-2. Provides statistical analysis to track daily/monthly/yearly statistics
-3. Support tasks categorizing 
-4. Easy to use(add, delete and sort the tasks)
-5. Supports priority setting
-6. Supports task reminders <br>
+* Has simple and clear user interface
+* Provides statistical analysis to track daily/monthly/yearly statistics
+* Support tasks categorizing 
+* Easy to use(add, delete and sort the tasks)
+* Supports priority setting
+* Supports task reminders <br>
 
 **Cons:**
 
-1. Hard to search if the to-do list is long <br>
+* Hard to search if the to-do list is long <br>
 
-####Persoda
+#### Persoda
 
 Author: Soh Wei Kiat Melvin
 
 **Pros:**
 
-1. Provides secure accounts and protected password 
-2. Has user-friendly interface
-3. Provides a wide range of functions
-4. Requires users to pay per usage
-5. Supports task reminders/hierarchy 
-6. Supports instant messaging teams within users <br>
+* Provides secure accounts and protected password 
+* Has user-friendly interface
+* Provides a wide range of functions
+* Requires users to pay per usage
+* Supports task reminders/hierarchy 
+* Supports instant messaging teams within users <br>
 
 **Cons:**
 
-1. Might be confusing to new users as features are based off different price plans <br>
+* Might be confusing to new users as features are based off different price plans <br>
