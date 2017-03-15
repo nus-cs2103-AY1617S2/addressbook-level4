@@ -226,10 +226,10 @@ Shows a list of all your tasks in the task manager.<br>
 Detailed tasks are listed in _chronological order_. 
 
 > * **`list`** <br>
-Navigate through the panels and tasks using your arrow keys. 
+Navigate through the panels and tasks using your arrow keys. <br>
 
-   <img src="images/UiListCommand.png" width="600"><br>
-   _Figure 3.5.1. List Command_
+<img src="images/UiListCommand.png" width="600"><br>
+_Figure 3.5.1. List Command_
 
 ### 3.6. Select a task : `select`
 
@@ -238,17 +238,17 @@ With this command, you can make changes to the task if needed!
 
 > * **`select`** `<task>` <br>
 
-   <img src="images/UiSelectCommand.png" width="600"><br>
-   _Figure 3.6.1. Select Command_
+<img src="images/UiSelectCommand.png" width="600"><br>
+_Figure 3.6.1. Select Command_
 
 > If there are tasks with the same name, this command will display all those tasks 
 for you to choose one. <br>
 
 > * **`unselect`** <br>
-This command cancels your previous selection so that you can select another task instead.
+This command cancels your previous selection so that you can select another task instead. <br>
 
-   <img src="images/UiUnselectCommand.png" width="600"><br>
-   _Figure 3.6.2. Unselect Command_
+<img src="images/UiUnselectCommand.png" width="600"><br>
+_Figure 3.6.2. Unselect Command_
 
 ### 3.7. Update a task : `update`
 
@@ -266,18 +266,18 @@ E.g. **`update`** `submit project proposal due time 2pm` <br>
 This command will make the specified update to a task with the name `<task>`. <br>
 You can also add more parameters to modify when using this format. <br>
 
-  <img src="images/UiUpdateCommand.png" width="600"><br>
-   _Figure 3.7.1. Update Command_
+<img src="images/UiUpdateCommand.png" width="600"><br>
+_Figure 3.7.1. Update Command_
 
 ### 3.8. Get help : `help`
 
 Shows a list of all commands and their usage instructions. <br>
 
 > * **`help`** `<command>` <br>
-This command provides specific information about the usage of `<command>`. 
+This command provides specific information about the usage of `<command>`. <br>
 
-   <img src="images/UiHelpCommand.png" width="600"><br>
-   _Figure 3.8.1. Help Command_
+<img src="images/UiHelpCommand.png" width="600"><br>
+_Figure 3.8.1. Help Command_
 
 > * **`help /all`** <br>
 This command directs you back to this user guide. 
@@ -290,18 +290,19 @@ This command directs you back to this user guide.
 This command saves all your data into the data file. 
 
 > * **`save`** `<new_save_location_directory>` <br>
-This command saves all your data in a new data file in a `<new_save_location_directory>`
+This command saves all your data in a new data file in a `<new_save_location_directory>`. <br>
 
-   <img src="images/UiSaveCommand.png" width="600"><br>
-   _Figure 3.9.1. Save Command_
+<img src="images/UiSaveCommand.png" width="600"><br>
+_Figure 3.9.1. Save Command_
 
 ### 3.10. Exiting the program : `exit`
 
 Saves all your data and exits the program. <br>
 
 > * **`exit`** <br>
-   <img src="images/UiExitCommand.png" width="600"><br>
-   _Figure 3.10.1. Exit Command_
+
+<img src="images/UiExitCommand.png" width="600"><br>
+_Figure 3.10.1. Exit Command_
 
 ## 4. Command Summary
 
