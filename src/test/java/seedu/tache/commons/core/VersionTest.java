@@ -52,7 +52,7 @@ public class VersionTest {
     public void versionComparableValidVersionCompareToIsCorrect() {
         Version one;
         Version another;
-        
+
         // Tests equality
         one = new Version(0, 0, 0, true);
         another = new  Version(0, 0, 0, true);

@@ -42,13 +42,14 @@ public interface Model {
      */
     void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException;
-    
+
     /**
      * Updates the detailed task located at {@code filteredTaskListIndex} with {@code editedDetaileddTask}.
      *
-     * @throws DuplicateDetailedTaskException if updating the detailed task's details causes the detailed task to be equivalent to
-     *      another existing detailed task in the list.
-     * @throws IndexOutOfBoundsException if {@code filteredDetailedTaskListIndex} < 0 or >= the size of the filtered list.
+     * @throws DuplicateDetailedTaskException if updating the detailed task's details causes the detailed
+     *         task to be equivalent to another existing detailed task in the list.
+     * @throws IndexOutOfBoundsException if {@code filteredDetailedTaskListIndex} < 0 or >= the size of the
+     *         filtered list.
      */
     void updateDetailedTask(int filteredDetailedTaskListIndex, ReadOnlyDetailedTask editedDetailedTask)
             throws UniqueDetailedTaskList.DuplicateDetailedTaskException;
@@ -64,7 +65,7 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
-    
+
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredDetailedTaskList(Set<String> keywords);
 
