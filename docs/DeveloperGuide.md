@@ -126,7 +126,7 @@ The `Commons` component contains a collection of classes used by multiple other 
 The `Model` component defines classes to represent the data that Doist operates on. It also specifies and implements the operations on these data.  
   
 The following diagram demonstrate the structure of the `Model` component  
-<br><img src="images/ModelClassDiagram.png" width="800"><br>
+<br><img src="images/ModelClassDiagram.png" width="800"><br>  
 
 The following is a brief remarks of some key files in the `Model` component:
 - [`Model.java`](../src/main/java/seedu/doist/model/Model.java):  contains an `interface` that defines multiple operations on the data.  
@@ -149,7 +149,8 @@ These data consists of **user preferences** and **to-do list**
 - **to-do list** is stored in a **XML** file
 
 The following diagram demonstrate the structure of the `Storage` component  
-<br><img src="images/StorageClassDiagram.png" width="800"><br>
+<br><img src="images/StorageClassDiagram.png" width="800"><br>  
+
 The following is a brief remarks of some key files in the `Storage` component:
 - [`Storage.java`](../src/main/java/seedu/doist/storage/StorageManager.java):  contains an `interface` that defines reading and writing operation of user preferences and to-do list.  
     These operations are defined using different methods (API).  
