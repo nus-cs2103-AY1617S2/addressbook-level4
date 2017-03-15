@@ -127,7 +127,7 @@ public class ModelManager extends ComponentManager implements Model {
     
     @Override
     public void updateFilteredDetailedTaskList(Set<String> keywords) {
-        updateFilteredDetailedTaskList(new PredicateExpression(new NameQualifier(keywords)));     
+        updateFilteredDetailedTaskList(new PredicateExpression(new MultiQualifier(keywords)));     
     }
     
     private void updateFilteredDetailedTaskList(Expression expression) {
@@ -199,6 +199,98 @@ public class ModelManager extends ComponentManager implements Model {
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
         }
+    }
+    
+    private class DateQualifier implements Qualifier {
+        private Set<String> dateKeyWords;
+
+        DateQualifier(Set<String> dateKeyWords) {
+            this.dateKeyWords = dateKeyWords;
+        }
+        
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return false;
+        }
+        
+        @Override
+        public boolean run(ReadOnlyDetailedTask detailedTask) {
+            return dateKeyWords.stream()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(detailedTask.getStartDate().toString(), keyword))
+                    .findAny()
+                    .isPresent() 
+                    || dateKeyWords.stream()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(detailedTask.getEndDate().toString(), keyword))
+                    .findAny()
+                    .isPresent();
+        }
+
+        @Override
+        public String toString() {
+            return "date=" + String.join(", ", dateKeyWords);
+        }
+
+    }
+    
+    private class TimeQualifier implements Qualifier {
+        private Set<String> timeKeyWords;
+
+        TimeQualifier(Set<String> timeKeyWords) {
+            this.timeKeyWords = timeKeyWords;
+        }
+        
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return false;
+        }
+        
+        @Override
+        public boolean run(ReadOnlyDetailedTask detailedTask) {
+            return timeKeyWords.stream()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(detailedTask.getStartTime().toString(), keyword))
+                    .findAny()
+                    .isPresent() 
+                    || timeKeyWords.stream()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(detailedTask.getEndTime().toString(), keyword))
+                    .findAny()
+                    .isPresent();
+        }
+
+        @Override
+        public String toString() {
+            return "time=" + String.join(", ", timeKeyWords);
+        }
+
+    }
+    
+    private class MultiQualifier implements Qualifier {
+        private Set<String> multiKeyWords;
+        private NameQualifier nameQualifier;
+        private DateQualifier dateQualifier;
+        private TimeQualifier timeQualifier;
+
+        MultiQualifier(Set<String> multiKeyWords) {
+            this.multiKeyWords = multiKeyWords;
+            nameQualifier = new NameQualifier(multiKeyWords);
+            dateQualifier = new DateQualifier(multiKeyWords);
+            timeQualifier = new TimeQualifier(multiKeyWords);
+        }
+        
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return false;
+        }
+        
+        @Override
+        public boolean run(ReadOnlyDetailedTask detailedTask) {
+            return nameQualifier.run(detailedTask) || dateQualifier.run(detailedTask) || timeQualifier.run(detailedTask);
+        }
+
+        @Override
+        public String toString() {
+            return "multi=" + String.join(", ", multiKeyWords);
+        }
+
     }
 
     @Override
