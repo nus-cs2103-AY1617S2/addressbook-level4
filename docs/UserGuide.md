@@ -71,12 +71,12 @@ Ready? Let's begin!
    
    (Do the following steps in order)
    
-   * `**add** Finish Progress Report; 030217 1159PM` <br>
+   * **`add`** `Finish Progress Report; 030217 1159PM` <br>
    
      > Adds a task with the following [parameters](#parameter) into your task list: <br>
-     > **Name**: `Finish Progress Report` <br>
-     > **Due Date**: `3 Feb 2017` <br>
-     > **Due Time**: `11.59 p.m.`
+     > Name: `Finish Progress Report` <br>
+     > Due Date: `3 Feb 2017` <br>
+     > Due Time: `11.59 p.m.`
      
    * **`list`** <br>
    
@@ -84,7 +84,7 @@ Ready? Let's begin!
      Your task list should contain only 1 task, which is the task you added in the previous step <br>
      (i.e. `Finish Progress Report`). 
      
-   * `**delete** Finish Progress Report` <br>
+   * **`delete`** `Finish Progress Report` <br>
    
      > Deletes your task with the name `Finish Progress Report`. 
      
@@ -104,7 +104,8 @@ Ready? Let's begin!
 ### 3.1. Command Formats
 
 When typing in your commands, do take note of the following specifications: <br>
-(If not, I will not work!)
+
+> Do make sure that you follow the specifications closely, if not I will not work!
 
 * Durations for tasks must be specified in _hr_, _min_ and/or _sec_.
 * Times must be specified in _am_ and/or _pm_.
@@ -131,40 +132,45 @@ When typing in your commands, do take note of the following specifications: <br>
 Adds a task to your task list. <br>
 
 > Type your [parameters](#parameter) in their respective orders as shown in the examples below. <br>
-E.g. If you are adding a task with 2 parameters as in bulleted point 3 (i.e. `add <task>; <due date and time>`), 
+E.g. If you are adding a task with a deadline as in `add <task>; <due date and time>`, 
 do make sure that you indicate `<task>` before `<due date and time>`, not the other way round!
 
-**Add a _floating_ task: **
+#### Add a _floating_ task:
 
-A floating task is a task that does not have any specific times. You are not sure when you are going to do it, nor 
-are you sure when exactly it is due. Here are some situations in which we can encounter floating tasks: <br>
+A floating task is a task that _does not have any specific times_. You are probably not sure when you are going to do it, nor 
+are you sure when exactly it is due. <br>
 
-(This list is not exhaustive!)
+Here are some examples of floating tasks: <br>
 
-* Hobby-related activities or long-term goals (e.g. learn to bake)
+> This list is not exhaustive!
 
-  > You just want to record these tasks somewhere so that you can get to them when you are free someday. 
+* **Hobby-related activities or long-term goals**
+
+  > You just want to record these tasks somewhere so that you can get to them when you are free someday. <br>
+  **E.g. Learn to bake**
   
-* New tasks which cannot be performed _yet_ (e.g. schedule meet-up with Jamie)
+* **New tasks which cannot be performed _yet_**
 
   > You want to perform these tasks but you cannot do them yet. <br>
-  For example, your friend Jamie might be overseas and uncontactable for now, so you will have to wait for 
+  **E.g. Schedule meet-up with Jamie** <br>
+  Your friend Jamie might be overseas and uncontactable for now, so you will have to wait for 
   her to return to the country in order to schedule the meet-up. 
   
- * New tasks which do not have a confirmed deadline (e.g. watch La La Land in the theatres)
+ * **New tasks which do not have a confirmed deadline**
  
    > It is too early to know when you have to perform these tasks by. <br>
-   For example, you might not know when the movie "La La Land" will stop showing in the cinemas because
-   it seems to be very popular and hence, many theatres might offer showtimes for it for an extended period 
-   of time. 
+   E.g. Watch La La Land in the theatres <br>
+   For example, you might not know when the movie "La La Land" will stop showing in the cinemas. This is 
+   because it seems to be very popular and hence, many theatres might offer showtimes for it for an 
+   extended period of time. 
    
-So, how do you deal with floating tasks? Just type in the following command: 
+So, how do you add floating tasks? Just type in the following command: 
 
 > `add <task>`
 
 That's it!
 
-**Add a task with a _deadline_: **
+#### Add a task with a _deadline_:
 
 For such tasks, type in: 
 
@@ -174,11 +180,11 @@ OR
 
 > `add <task>; <start date and time>; <duration>`
 
-**Add an _event_: **
+#### Add an _event_:
 
 > `add <task>; <due date and time>`
 
-**Add a task with a _duration_: **
+#### Add a task with a _duration_:
 
 > `add <task>; <duration>`    
 
