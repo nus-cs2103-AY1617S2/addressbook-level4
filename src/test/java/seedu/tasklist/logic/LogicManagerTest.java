@@ -33,6 +33,7 @@ import seedu.tasklist.logic.commands.ExitCommand;
 import seedu.tasklist.logic.commands.FindCommand;
 import seedu.tasklist.logic.commands.HelpCommand;
 import seedu.tasklist.logic.commands.ListCommand;
+import seedu.tasklist.logic.commands.LoadCommand;
 import seedu.tasklist.logic.commands.SelectCommand;
 import seedu.tasklist.logic.commands.exceptions.CommandException;
 import seedu.tasklist.model.Model;
@@ -104,6 +105,37 @@ public class LogicManagerTest {
     public void execute_invalid() {
         String invalidCommand = "       ";
         assertCommandFailure(invalidCommand, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+    }
+    /**
+     * Executes the command and confirms that the result message is correct.
+     * Both the 'task list' and the 'last shown list' are expected to be empty.
+     * @see #assertCommandBehavior(String, String, ReadOnlyTaskList, List)
+     */
+    private void assertCommandBehavior(String inputCommand, String expectedMessage) throws Exception {
+        assertCommandBehavior(inputCommand, expectedMessage, new TaskList(), Collections.emptyList());
+    }
+
+    /**
+     * Executes the command and confirms that the result message is correct and
+     * also confirms that the following three parts of the LogicManager object's state are as expected:<br>
+     *      - the internal task list data are same as those in the {@code expectedTaskList} <br>
+     *      - the backing list shown by UI matches the {@code shownList} <br>
+     *      - {@code expectedTaskList} was saved to the storage file. <br>
+     */
+    private void assertCommandBehavior(String inputCommand, String expectedMessage,
+                                       ReadOnlyTaskList expectedTaskList,
+                                       List<? extends ReadOnlyTask> expectedShownList) throws Exception {
+
+        //Execute the command
+        CommandResult result = logic.execute(inputCommand);
+
+        //Confirm the ui display elements should contain the right data
+        assertEquals(expectedMessage, result.feedbackToUser);
+        assertEquals(expectedShownList, model.getFilteredTaskList());
+
+        //Confirm the state of data (saved and in-memory) is as expected
+        assertEquals(expectedTaskList, model.getTaskList());
+        assertEquals(expectedTaskList, latestSavedTaskList);
     }
 
     /**
@@ -401,7 +433,25 @@ public class LogicManagerTest {
                 expectedAB,
                 expectedList);
     }
-
+    
+    @Test
+    public void load_invalidCommand_errorMessageShown() throws Exception {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoadCommand.MESSAGE_USAGE);
+        assertCommandFailure("load", expectedMessage);
+    }
+    
+    @Test
+    public void load_invalidFilePath_errorMessageShown() throws Exception {
+        String expectedMessage = String.format(LoadCommand.MESSAGE_INVALID_PATH, "dejt/%!%");
+        assertCommandBehavior("load dejt/%!%", expectedMessage);
+    }
+    
+    @Test
+    public void load_invalidFileExtension_errorMessageShown() throws Exception {
+        String expectedMessage = String.format(LoadCommand.MESSAGE_INVALID_PATH, "data/task.png");
+        assertCommandBehavior("load data/task.png", expectedMessage);
+    }
+    
 
     /**
      * A utility class to generate test data.
