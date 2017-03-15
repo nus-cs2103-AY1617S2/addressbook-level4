@@ -20,6 +20,7 @@ import seedu.address.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.task.Task;
 
 /**
  * The manager of the UI component.
@@ -116,7 +117,17 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.getNonFloatingTaskListPanel().scrollTo(event.targetIndex);
+        TaskListPanel targetListPanel;
+        switch (event.targetList) {
+        case Task.TASK_NAME_COMPLETED:
+            targetListPanel = mainWindow.getCompletedTaskListPanel();
+            break;
+        case Task.TASK_NAME_FLOATING:
+            targetListPanel = mainWindow.getFloatingTaskListPanel();
+            break;
+        default:targetListPanel = mainWindow.getNonFloatingTaskListPanel();
+        }
+        targetListPanel.scrollTo(event.targetIndex);
     }
 
     @Subscribe

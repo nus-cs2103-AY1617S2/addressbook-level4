@@ -66,7 +66,7 @@ public class ParserUtil {
             return Optional.empty();
         }
 
-        String listName = matcher.group("listName") == null ? Task.TASK_NAME_FLOATING : matcher.group("listName");
+        String listName = matcher.group("listName").isEmpty() ? Task.TASK_NAME_NON_FLOATING : matcher.group("listName");
         return Optional.of(listName);
 
     }
