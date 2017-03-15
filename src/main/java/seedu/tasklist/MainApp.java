@@ -59,7 +59,7 @@ public class MainApp extends Application {
 
         initLogging(config);
 
-        model = initModelManager(storage, userPrefs);
+        model = initModelManager(storage);
 
         logic = new LogicManager(model, storage);
 
@@ -73,15 +73,15 @@ public class MainApp extends Application {
         return applicationParameters.get(parameterName);
     }
 
-    private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyTaskList> addressBookOptional;
+    private Model initModelManager(Storage storage) {
+        Optional<ReadOnlyTaskList> flexiTaskOptional;
         ReadOnlyTaskList initialData;
         try {
-            addressBookOptional = storage.readTaskList();
-            if (!addressBookOptional.isPresent()) {
+            flexiTaskOptional = storage.readTaskList();
+            if (!flexiTaskOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample TaskList");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleTaskList);
+            initialData = flexiTaskOptional.orElseGet(SampleDataUtil::getSampleTaskList);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty TaskList");
             initialData = new TaskList();
@@ -90,7 +90,7 @@ public class MainApp extends Application {
             initialData = new TaskList();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return new ModelManager(initialData, storage);
     }
 
     private void initLogging(Config config) {
