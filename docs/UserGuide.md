@@ -25,17 +25,16 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 5. [Command Summary](#5-command-summary)
 
 ## 1. Introduction
-We all love that adrenaline rush when we place a tick on our checklist, mark our tasks as done and actually accomplish what we sought to do. But as our to-do tasks pile up, we tend to forget about them. Everyone barely has time to write our tasks down in a list.
+Love the adrenaline rush you get when you check an item off your to-do list, but too busy to actually make one? Use Doist today, and feel more organised than ever before!
 
-Be a Doist today, one line at a time! Your hands don't even have to leave the keyboard with our command-line input interface.
-Doist allows you to key in, sort, tag, search and even set reminders for your tasks and events so that you can focus on actually doing things.
+Doist is the comprehensive tool to help you in all your planning. It allows you to key in, sort, tag, set reminders and even search for your tasks and events so that you can focus on getting things done. Your hands never need to leave the keyboard with our command-line input interface, and our easy-to-use UI will keep you coming back for more. Once you are a Doist, there's no looking back. 
 
-Doist, rediscover your love for doing things.
+Doist. Rediscover your love for doing things, one line at a time!
 
 
 ## 2. Quick Start
 
-Are you ready to be a do-ist?
+Are you ready to be a Doist?
 
 0. Ensure you have Java version `1.8.0_60` or later installed in your computer.
 
@@ -44,12 +43,12 @@ Are you ready to be a do-ist?
 
 1. Download the latest `.jar` from the [releases](../../../releases) tab.
 2. Copy the file to the folder you want to use as the home folder for Doist. Note that you would be able to edit Doist's storage location of its data later.
-3. Double-click the file to start the app. The GUI should appear in a few seconds.
+3. Almost there! Double-click the file to start the app. The GUI should appear in a few seconds.
 <br> <br>
  <img src="images/Ui.png" width="450"> <br>
  Figure 1: Doist Application Window <br>
 
-4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
+4. Voila, you are ready to be more productive! Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 
 ### Getting started with commands :
@@ -68,7 +67,7 @@ Deletes the 1st task shown in the current list.
 6. **`exit`** <br>
 Exits the application.
 
-Also try out different date and time formats for the add command!
+Go ahead and try out different date and time formats for the add command!
 
 Refer to the [Features](#features) section below for details of each command.<br>
 
@@ -98,7 +97,7 @@ Simply type "help" to view the help page! <br>
 
 ### Adding a new task : `add`, `do`
 
-Use the `add` command to add tasks. Tracking your tasks is what Doist does best! <br>
+You can use the `add` command to add tasks. Tracking your tasks is what Doist does best! <br>
 `do` is an alternative command word.
 
 Add a new task with a description using just the `add` command word. <br>
@@ -145,8 +144,6 @@ Add a recurring task with the `\every` key. If you specify a recurrence interval
 > **Examples:** <br>
 > `add buy milk \every 4 hours` <br>
 > `add buy milk \every week` <br>
-> `add buy milk \every 3 weeks` <br>
-> `add buy milk \every year` <br>
 
 Add a task with tags with the `\under` key. Separate multiple tags with spaces.<br>
 ` [\under TAG...]`
