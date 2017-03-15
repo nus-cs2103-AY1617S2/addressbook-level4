@@ -48,7 +48,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyTodoList newData) {
-    	previousTodoList = new TodoList(todoList);
+        previousTodoList = new TodoList(todoList);
         todoList.resetData(newData);
         indicateTodoListChanged();
     }
@@ -65,7 +65,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void deleteTodo(ReadOnlyTodo target) throws TodoNotFoundException {
-    	TodoList tempTodoList = new TodoList(todoList);
+        TodoList tempTodoList = new TodoList(todoList);
         todoList.removeTodo(target);
         previousTodoList = tempTodoList;
         indicateTodoListChanged();
@@ -73,7 +73,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void addTodo(Todo todo) throws UniqueTodoList.DuplicateTodoException {
-    	TodoList tempTodoList = new TodoList(todoList);
+        TodoList tempTodoList = new TodoList(todoList);
         todoList.addTodo(todo);
         previousTodoList = tempTodoList;
         updateFilteredListToShowAll();
@@ -94,11 +94,11 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void loadPreviousState() throws NoPreviousStateException {
-    	if (previousTodoList == null) {
-    		throw new NoPreviousStateException();
-    	}
-    	resetData(previousTodoList);
-    	previousTodoList = null;
+        if (previousTodoList == null) {
+            throw new NoPreviousStateException();
+        }
+        resetData(previousTodoList);
+        previousTodoList = null;
     }
 
     //=========== Filtered Todo List Accessors =============================================================

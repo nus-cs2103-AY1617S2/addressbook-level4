@@ -44,11 +44,11 @@ public interface Model {
     void updateFilteredTodoList(Set<String> keywords);
 
     /** Loads the previous state of the todo list*/
-	void loadPreviousState() throws NoPreviousStateException;
+    void loadPreviousState() throws NoPreviousStateException;
 
-	/**
-	 * Signals that there is no previous todo state to load
-	 */
-	public static class NoPreviousStateException extends Exception {}
+    /**
+     * Signals that there is no previous todo state to load
+     */
+    public static class NoPreviousStateException extends Exception {}
 
 }
