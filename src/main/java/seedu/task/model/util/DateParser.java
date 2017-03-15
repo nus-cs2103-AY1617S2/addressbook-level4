@@ -42,7 +42,7 @@ public class DateParser {
         int hour = date.get(Calendar.HOUR_OF_DAY);
         int minute = date.get(Calendar.MINUTE);
 
-        dateString = String.format("%4d/%02d/%02d %02d:%02d", year, month + MONTH_OFFSET, day, hour, minute);
+        dateString = String.format("%4d/%02d/%02d %02d%02d", year, month + MONTH_OFFSET, day, hour, minute);
 
         return dateString;
     }

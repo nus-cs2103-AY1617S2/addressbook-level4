@@ -41,10 +41,20 @@ public class DateParserTest {
     @Test
     public void parse() throws IllegalValueException {
         Calendar cal = Calendar.getInstance();
-        cal.set(2000, 00, 01, 0, 0, 0);
         cal.set(Calendar.MILLISECOND, 0);
+        cal.set(2000, 00, 01, 0, 0, 0);
         assertEquals(
                 cal.getTimeInMillis(),
                 DateParser.parse("2000/01/01 0000").getTimeInMillis());
+    }
+
+    @Test
+    public void toStringTest() {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.MILLISECOND, 0);
+        cal.set(2000, 00, 01, 0, 0, 0);
+        assertEquals("2000/01/01 0000", DateParser.toString(cal));
+        cal.set(1990, 05, 22, 23, 54, 0);
+        assertEquals("1990/06/22 2354", DateParser.toString(cal));
     }
 }
