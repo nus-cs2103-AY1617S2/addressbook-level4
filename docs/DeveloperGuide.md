@@ -2,7 +2,9 @@
 
 By : `T09-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
-## Main Sections
+---
+
+## Main Content
 
 1. [Introduction](#1-introduction)
 2. [Setting Up](#2-setting-up)
@@ -72,11 +74,17 @@ Hence, primary input for the application will be _command-driven_ and using the
 ### 2.3. Configuring Checkstyle
 
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`. 
+
 2. Choose `External Configuration File` under `Type`. 
+
 3. Enter an arbitrary configuration name.  e.g. tache
+
 4. Import the Checkstyle configuration file found at `config/checkstyle/checkstyle.xml`. 
+
 5. Click OK once, go to the `Main` tab, and use the newly imported check configuration. 
+
 6. Tick and select `files from packages`, click `Change...`, and select the `resources` package. 
+
 7. Click OK twice, and rebuild project if prompted. 
 
 > Note: You can click on the `files from packages` text after ticking in order to enable the `Change...` 
@@ -94,6 +102,7 @@ button.
 **Problem: Eclipse reports some required libraries missing**
 
 * Reason: Required libraries may not have been downloaded during the project import.
+
 * Solution: [Run tests using Gradle](UsingGradle.md) once to refresh the libraries.
 
 
@@ -104,7 +113,9 @@ The `.pptx` files used to create diagrams in this section can be found in the
 
 You can update a diagram using the following steps:
 1. Modify the diagram in the pptx file. 
+
 2. Select the objects of the diagram. 
+
 3. Choose `Save as picture`. 
 
 ### 3.1. Architecture
@@ -121,6 +132,7 @@ The **_Architecture Diagram_** given above explains the high-level design of the
 Functions of `Main`: 
 
 * **At app launch:** Initializes the components in the correct sequence and connects them with one another
+
 * **At shut down:** Shuts down the components and invokes cleanup method where necessary
 
 #### Commons Component
@@ -133,6 +145,7 @@ This collection is encapsulated in the `seedu.addressbook.commons` package. <br>
 Function of `EventsCenter`: 
 
 * Uses events to facilitate inter-component communication via an _Event-Driven_ design
+
   > This class is written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained). 
 
 Function of `LogsCenter`: 
@@ -144,8 +157,11 @@ Function of `LogsCenter`:
 The rest of Tâche consists of the following four components:
 
 * [**`User Interface`**](#32-user-interface-ui-component) : Facilitates the interaction between the user and the system
+
 * [**`Logic`**](#33-logic-component) : Executes the user's commands
+
 * [**`Model`**](#34-model-component) : Holds the data of Tâche in-memory
+
 * [**`Storage`**](#35-storage-component) : Reads data from, and writes data to, the hard disk
 
 The [_Sequence Diagram_](#sequence-diagram) below shows how the different components interact when the user issues the
@@ -198,7 +214,9 @@ The layout of these UI parts are defined in matching `.fxml` files that are in t
 Functions of `UI`:  
 
 * Executes user commands using the `Logic` component
+
 * Binds itself to some data in the `Model` so that the UI of Tâche can auto-update when data in the `Model` changes
+
 * Responds to events raised from various parts of the Tâche and updates its UI accordingly
 
 ### 3.3. Logic Component
@@ -233,8 +251,11 @@ _Figure 3.4.1 : Structure of the Model Component_
 Functions of `Model`:
 
 * Stores a `UserPref` object that represents the user's preferences
+
 * Stores the data in Tâche
+
 * Exposes an `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' 
+
   > E.g. The [UI](#user-interface-ui) can be bound to this list so that it automatically 
 updates when this list is modified. <br>
 
@@ -250,6 +271,7 @@ _Figure 3.5.1 : Structure of the Storage Component_
 Functions of `Storage`: 
 
 * Saves `UserPref` objects in json format and reads it back
+
 * Saves Tâche's data in xml format and reads it back
 
 
@@ -291,6 +313,7 @@ Tests can be found in the `./src/test/java` folder.
 **Eclipse**:
 
 * To run **all tests**: Right-click on the `src/test/java` folder. 
+
 * To run **a subset of tests**: Right-click on a test package, test class, or a test. <br>
 
 Then choose `Run as` > `JUnit Test`. 
@@ -312,9 +335,11 @@ These tests are found in the `guitests` package.
 These are tests that do not involve the GUI. They include: 
    * _Unit tests_ that target the lowest level methods/classes <br>
       e.g. `seedu.tache.commons.UrlUtilTest`
+      
    * _Integration tests_ that check the integration of multiple code units 
    (those code units are assumed to be working) <br>
       e.g. `seedu.tache.storage.StorageManagerTest`
+      
    * _Hybrids of unit and integration tests_ that check multiple code units as well as
       how they are connected together <br>
       e.g. `seedu.tache.logic.LogicManagerTest`
@@ -360,7 +385,9 @@ documentation to the project site.
 You can do the following to create a new release: 
 
  1. Generate a JAR file [using Gradle](UsingGradle.md#creating-the-jar-file).
+ 
  2. Tag the repo with the version number. e.g. `v0.1`
+ 
  2. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/)
     and upload the JAR file you created.
 
