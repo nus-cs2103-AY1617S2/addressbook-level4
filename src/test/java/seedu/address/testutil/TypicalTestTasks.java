@@ -21,7 +21,7 @@ public class TypicalTestTasks {
                     .withStartTime("March 31, 9:30").withEndTime("March 31, 11:30")
                     .withTags("interview", "internship","important").withUrgencyLevel("4").withDescription("I love you").build();
             Hang_out_Joe = new TaskBuilder().withTitle("Hang out with Joe").withVenue("313 Somerset")
-                    .withStartTime("Saturday 17:00").withEndTime("Saturday 21:00").withUrgencyLevel("8").withDescription("I love you").build();
+                    .withStartTime("Saturday 17:00").withEndTime("Saturday 21:00").withUrgencyLevel("3").withDescription("I love you").build();
             Stats_soc = new TaskBuilder().withTitle("Statistics society meeting").withVenue("S16 04-30")
                     .withStartTime("Wednesday 19:00").withEndTime("Wednesday 21:00").withUrgencyLevel("1").withDescription("I love you").build();
             Tuition_part_time = new TaskBuilder().withTitle("Tuition part-time job").withVenue("Jun Wei's house at Jurong Ease Avenue 1")
@@ -33,9 +33,9 @@ public class TypicalTestTasks {
 
             // Manually added
             MA3269_Quiz = new TaskBuilder().withTitle("MA3269 Quiz").withVenue("LT26")
-                    .withStartTime("Thursday 12:00").withEndTime("Thursday 14:00").withUrgencyLevel("10").withDescription("I love you").build();
-            laundry = new TaskBuilder().withTitle("Do laundryr").withVenue("Hostel")
-                    .withStartTime("now").withEndTime("1 hour later chores").withUrgencyLevel("6").withDescription("I love you").build();
+                    .withStartTime("Thursday 12:00").withEndTime("Thursday 14:00").withUrgencyLevel("4").withDescription("I love you").build();
+            laundry = new TaskBuilder().withTitle("Do laundry").withVenue("Hostel")
+                    .withStartTime("now").withEndTime("1 hour later chores").withUrgencyLevel("2").withDescription("I love you").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
