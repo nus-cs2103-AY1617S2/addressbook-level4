@@ -68,7 +68,7 @@ public class XmlAdaptedTask {
         }
         final Name name = new Name(this.name);
         final Priority priority = new Priority(this.priority);
-        final Deadline deadline = new Deadline(this.deadline, false);
+        final Deadline deadline = new Deadline(this.deadline, Deadline.IS_LOADING_FROM_STORAGE);
         final Description description = new Description(this.description);
         final UniqueTagList tags = new UniqueTagList(personTags);
         return new Task(name, deadline, priority, description, tags);

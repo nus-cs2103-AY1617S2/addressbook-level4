@@ -11,7 +11,7 @@ import t15b1.taskcrusher.logic.commands.EditCommand;
 import t15b1.taskcrusher.model.shared.Description;
 import t15b1.taskcrusher.model.shared.Name;
 import t15b1.taskcrusher.model.tag.Tag;
-import t15b1.taskcrusher.model.task.Email;
+import t15b1.taskcrusher.model.task.Deadline;
 import t15b1.taskcrusher.model.task.Priority;
 import t15b1.taskcrusher.testutil.TaskBuilder;
 import t15b1.taskcrusher.testutil.TestCard;
@@ -96,8 +96,8 @@ public class EditCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("edit 1 p/abcd");
         assertResultMessage(Priority.MESSAGE_PRIORITY_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 e/yahoo!!!");
-        assertResultMessage(Email.MESSAGE_EMAIL_CONSTRAINTS);
+        commandBox.runCommand("edit 1 d/randomstring");
+        assertResultMessage(Deadline.MESSAGE_DEADLINE_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 a/");
         assertResultMessage(Description.MESSAGE_DESCRIPTION_CONSTRAINTS);

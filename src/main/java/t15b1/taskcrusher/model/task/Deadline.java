@@ -16,6 +16,7 @@ public class Deadline {
 
 	public static final String MESSAGE_DEADLINE_CONSTRAINTS = "Deadline provided must be a relative or absolute date";
 	public static final String NO_DEADLINE = "";
+	public static final boolean IS_LOADING_FROM_STORAGE = false;
 
 	public final String deadline;
 

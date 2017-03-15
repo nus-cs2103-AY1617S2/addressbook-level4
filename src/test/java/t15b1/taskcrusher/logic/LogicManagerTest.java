@@ -46,7 +46,6 @@ import t15b1.taskcrusher.model.shared.Name;
 import t15b1.taskcrusher.model.tag.Tag;
 import t15b1.taskcrusher.model.tag.UniqueTagList;
 import t15b1.taskcrusher.model.task.Deadline;
-import t15b1.taskcrusher.model.task.Email;
 import t15b1.taskcrusher.model.task.Priority;
 import t15b1.taskcrusher.model.task.ReadOnlyTask;
 import t15b1.taskcrusher.model.task.Task;
@@ -200,7 +199,7 @@ public class LogicManagerTest {
         assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
                 Priority.MESSAGE_PRIORITY_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
-                Email.MESSAGE_EMAIL_CONSTRAINTS);
+                Deadline.MESSAGE_DEADLINE_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
