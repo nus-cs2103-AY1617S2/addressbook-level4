@@ -4,49 +4,34 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Damith C. Rajapakse](http://www.comp.nus.edu.sg/~damithch) <br>
-<img src="images/DamithRajapakse.jpg" width="150"><br>
-**Role**: Project Advisor
-
------
-
-#### [Joshua Lee](http://github.com/lejolly)
-<img src="images/JoshuaLee.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: UI
-
------
-
-#### [Leow Yijin](http://github.com/yijinl)
-<img src="images/LeowYijin.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Data
-
------
-
-#### [Martin Choo](http://github.com/m133225)
-<img src="images/MartinChoo.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Dev Ops
-
------
-
-#### [Thien Nguyen](https://github.com/ndt93)
+#### [Leong Wei Wen](https://github.com/lwwenz)
+<img src="images/lwwenz.png" width="150"><br>
  Role: Developer <br>
- Responsibilities: Threading
+ Responsibilities: Team Leader, Deliverables and deadlines, Integration <br>
+ Component: Storage
+ 
+-----
 
- -----
+#### [Dana Baghabrah](http://github.com/danab101)
+<img src="images/danab101.png" width="150"><br>
+Role: Developer <br>
+Responsibilities: Documentation and Scheduling and tracking <br>
+Component: Model
 
-#### [You Liang](http://github.com/yl-coder)
-<img src="images/YouLiang.jpg" width="150"><br>
- Role: Developer <br>
- Responsibilities: UI
+-----
 
- -----
+#### [Francis Cheng](http://github.com/francischeng070)
+<img src="images/francischeng070.png" width="150"><br>
+Role: Developer <br>
+Responsibilities: Code quality, Testing and Integration <br>
+Component: Logic
 
-# Contributors
+-----
 
-We welcome contributions. See [Contact Us](ContactUs.md) page for more info.
+#### [Wong Jun Wei](http://github.com/wjunwei94)
+<img src="images/wjunwei94.png" width="150"><br>
+Role: Developer <br>
+Responsibilities: Documentation and Code quality <br>
+Component: Ui
 
-* [Akshay Narayan](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Aokkhoy)
-* [Sam Yong](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Amauris)
+-----

@@ -1,14 +1,14 @@
-# AddressBook Level 4 - Developer Guide
+# TypeTask - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team T09-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
-1. [Setting Up](#setting-up)
-2. [Design](#design)
-3. [Implementation](#implementation)
-4. [Testing](#testing)
-5. [Dev Ops](#dev-ops)
+* [Setting Up](#setting-up)
+* [Design](#design)
+* [Implementation](#implementation)
+* [Testing](#testing)
+* [Dev Ops](#dev-ops)
 
 * [Appendix A: User Stories](#appendix-a--user-stories)
 * [Appendix B: Use Cases](#appendix-b--use-cases)
@@ -17,7 +17,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 * [Appendix E : Product Survey](#appendix-e--product-survey)
 
 
-## 1. Setting up
+## Setting up
 
 ### 1.1. Prerequisites
 
@@ -100,20 +100,19 @@ Two of those classes play important roles at the architecture level.
 
 The rest of the App consists of four components.
 
-* [**`UI`**](#ui-component) : The UI of the App.
-* [**`Logic`**](#logic-component) : The command executor.
-* [**`Model`**](#model-component) : Holds the data of the App in-memory.
-* [**`Storage`**](#storage-component) : Reads data from, and writes data to, the hard disk.
+* [**`UI`**](#ui-component) : The UI is the interaction between the user and the application.
+* [**`Logic`**](#logic-component) : The Logic contains the command executor.
+* [**`Model`**](#model-component) : The model Holds the data of the App in-memory.
+* [**`Storage`**](#storage-component) : The storage Reads data from, and writes data to, the hard disk.
 
 Each of the four components
 
 * Defines its _API_ in an `interface` with the same name as the Component.
 * Exposes its functionality using a `{Component Name}Manager` class.
 
-For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java`
+For example, the `Logic` component (see the class diagram given below) defines its API in the `Logic.java`
 interface and exposes its functionality using the `LogicManager.java` class.<br>
-<img src="images/LogicClassDiagram.png" width="800"><br>
-_Figure 2.1.2 : Class Diagram of the Logic Component_
+see [Figure 2.1.2](#logic) : Class Diagram of the Logic Component <br>
 
 #### Events-Driven nature of the design
 
@@ -346,50 +345,409 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
-
-{More to be added}
+`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the Application
+`* * *` | user | add a floating task  | add tasks without date or time
+`* * *` | user | add a task with date and time | add tasks with a specified time and date
+`* * *` | user | delete a task  | remove entries that I no longer need
+`* * *` | user | edit a task  | update my tasks whenever I want to change some information
+`* * *` | user | mark task as completed | remove entries that I have finished
+`* * *` | user | list all my tasks  | see all the tasks I have to do
+`* * *` | user | exit the application safely  | exit the application when I am done
+`* * *` | user | find a task by name  | locate details of tasks without having to go through the entire list
+`* * *` | user | save all my information | open the application and find my information is still there
+`* * *` | user | specify a folder as the data storage location | save the data file into any directory that I want
+`* * *` | user | undo my most recent command | revert the most recent command if it was wrongly issued
+`* * *` | user | do task operations offline | remove the restriction of connecting to the internet to do operations
+`* * *` | user | list all my to-do items in chronological order  | I can easily see all my tasks in chronological order
+`* * *` | user | Use an existing data file | reuse my data file from another device
+`* * ` | user | input a personal deadline | keep track of my given deadline
+`* * ` | user | list my today tasks | view what tasks I have to do today
+`* * ` | user | prioritize my task | know this task is more important to do
+`* * ` | user | remove the priority of task | remove task from priority list
+`* * ` | user | list priority tasks | See all the urgent tasks I have to do
+`* * ` | Advanced user | use shortcut commands | type in the tasks quickly
+`* * ` | user | block a date and time for an unconfirmed event temporary but still able to add task with the same date and time | remind myself of an unconfirmed event when i add a new task with the same date and time
+`* * ` | user | list block tasks | See all the block tasks in task manager 
+`* * ` | user | delete a blocked date and time event | remove an unconfirmed event when the event is confirmed to be cancelled
+`* * ` | user | delete multiple to-do items at one go | I can quickly delete multiple items
+`*` | user | see my google calendar | view my tasks in a calendar format
+`*` | user | get a reminder to do a certain task | remind to do a task without having to forget
+`*` | user | view a list of to-do items that are done | I know what tasks I have completed
+`*` | user with many tasks in the task manager | sort task by name | locate a task easily
+`*` | user | clear all tasks | start fresh by clearing all the tasks in the task manager 
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Task Manager` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+
+#### Use Case: Add task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User enters the add command to add a new task
+2. System saves the task
 Use case ends.
 
 **Extensions**
 
-2a. The list is empty
+2a. Invalid format
+
+> 2a1. System shows an error message
 
 > Use case ends
 
-3a. The given index is invalid
+2b. Task’s date and time clashes with a blocked date and time
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+  > 2b1. A window pop up warning will be shown to confirm user’s request
+  > 2b2. User click ok
+  > Use case ends
+   > 2b2.1 User click no
+  > Use case ends.
 
-{More to be added}
+
+#### Use Case: Search for existing task
+
+**MSS**
+
+1.  User searches for an existing task
+2.  System display the task
+Use case ends
+
+**Extensions**
+
+2a. List is empty
+  > 2a1. System shows a message that indicates the command has been executed
+  > Use case ends
+4a. Invalid format
+  > 4a1. System shows an error message
+  > Use case resumes at step 3
+4b. Task does not exist
+  > 4b1. System shows an error message
+  > Use case resumes at step 3
+
+
+#### Use Case: Delete an existing task
+
+**MSS**
+
+1.  User searches for an existing task
+2.  System display the task
+3.  User enters the delete command with task ID
+4.  System deletes the task with the specified id
+Use case ends
+
+**Extensions**
+
+2a. List is empty
+  > 2a1. System shows a message that indicates the command has been executed
+  > Use case ends
+4a. Invalid format
+> 4a1. System shows an error message
+> Use case resumes at step 3
+4b. Task does not exist
+  > 4b1. System shows an error message
+  > Use case resumes at step 3
+
+
+#### Use Case: Deleting multiple task
+
+**MSS**
+
+1.  User enter the list all command
+2.  System display all tasks
+3.  User enters the delete command with multiple task ids
+4.  System deletes the task with the specified ids
+Use case ends
+
+**Extensions**
+
+2a. List is empty
+  > 2a1. System shows a message that indicates the command has been executed
+Use case ends
+
+4a. Invalid format
+> 4a1. System shows an error message
+> Use case resumes at step 3
+
+4b. Task does not exist in one of the multiple id
+  > 4b1. System shows an error message
+> Use case resumes at step 3
+
+
+#### Use Case: Editing an existing task
+
+**MSS**
+
+1.  User searches for an existing task
+2.  System display the tasks
+3.  User enters the edits command with task id
+4.  System edits the task with the specified id
+Use case ends
+
+**Extensions**
+
+2a. List is empty
+  > 2a1. System shows a message that indicates the command has been executed
+4a. Invalid format
+> 4a1. System shows an error message
+> Use case resumes at step 3
+4b. Task does not exist
+  > 4b1. System shows an error message
+  > Use case resumes at step 3
+
+#### Use Case: Mark task as complete
+
+**MSS**
+
+1.  User searches for an existing task
+2.  System display the tasks
+3.  User enters the complete command with task id
+4.  System completes the task with the specified id
+Use case ends
+
+**Extensions**
+
+2a. List is empty
+> 2a1. System shows a message that indicates the command has been executed
+> Use case ends
+
+4a. Invalid format
+> 4a1. System shows an error message
+> Use case resumes at step 3
+
+4b. Task does not exist
+  > 4b1. System shows an error message
+  > Use case resumes at step 3
+
+
+#### Use Case: List today task
+
+**MSS**
+
+1.  User enters the list today command
+2.  System displays today list tasks
+Use case ends
+
+**Extensions**
+
+2a. List is empty
+  > 2a1. System shows a message that indicates the command has been executed
+ > Use case ends
+
+
+#### Use Case: List all task in chronological order
+
+**MSS**
+
+1.  User enters the list all command
+2.  System displays all tasks
+Use case ends
+
+**Extensions**
+
+2a. List is empty
+  > 2a1. System shows a message that indicates the command has been executed
+> Use case ends
+
+
+#### Use Case: List of completed task
+
+**MSS**
+
+1.  User enters the list completed command
+2.  System displays completed tasks
+Use case ends
+
+**Extensions**
+
+2a. List is empty
+  > 2a1. System shows a message that indicates the command has been executed
+> Use case ends
+
+
+#### Use Case: List all priority task
+
+**MSS**
+
+1.  User enters the list priority command
+2.  System displays priority list tasks
+Use case ends
+
+**Extensions**
+
+2a. List is empty
+  > 2a1. System shows a message that indicates the command has been executed
+> Use case ends
+
+
+#### Use Case: Learning useful commands
+
+**MSS**
+
+1.  User enter the help command
+2.  System displays the list of commands
+Use case ends
+
+**Extensions**
+
+2a. Invalid format
+  > 2a1. System shows an error message
+> Use case ends
+
+
+#### Use Case: Block existing task
+
+**MSS**
+
+1.  User searches for an existing task
+2.  System displays the tasks
+3.  User enters the block command with the task id
+4.  System will add the blocked task’s date and time into the block list
+Use case ends
+
+**Extensions**
+
+2a. List is empty
+  > 2a1. System shows a message that indicates the command has been executed
+> Use case ends
+4a. Task does not exist
+  > 4a1. System shows an error message
+  > Use case resumes at step 3
+4b. Invalid format
+  > 4b1. System shows an error message
+  > Use case resumes at step 3
+
+
+#### Use Case: Unblock existing task
+
+**MSS**
+
+1.  User enters unblock command with the blocked task id 
+2.  System will unblock the task and add it to the task list
+Use case ends
+
+**Extensions**
+
+2a. Task does not exist
+ >  2a1. System shows an error message
+ >  Use case resumes at step 3
+2b. Invalid format
+  > 2b1. System shows an error message
+  > Use case resumes at step 3
+2c. Duplicate task with same date and same time found 
+
+#### Use Case: Saving data in another folder
+
+**MSS**
+
+1.  User enters save in another folder command
+2.  System copies the existing file to the specified folder
+Use case ends
+
+**Extensions**
+
+2a. Invalid format
+  > 2a1. System shows error message
+> Use case ends
+
+2b. Invalid path
+ >  2b1. System shows error message.
+> Use case ends
+
+2c. Existing file found
+  > 2c1. System will overwrite the existing file.
+> Use case ends.
+
+#### Use case: Changing default storage folder
+
+**MSS**
+
+1.  User enters changing default storage folder command
+2.  System will copy the existing file to the new destination folder and set the default saving path to the new destination folder
+Use case ends
+
+**Extensions**
+
+2a. Invalid format
+  > 2a1. System shows error message
+> Use case ends
+
+2b. Invalid path
+  > 2b1. System shows error message
+> Use case ends 
+
+2c. Existing file found
+  > 2c1. System will overwrite the existing file
+> Use case ends.
+
+
+#### Use case: Using data from another folder
+
+**MSS**
+
+1.  User enters use command to open another existing file
+2.  System opens the existing file and will act on this folder from this point on
+Use case ends
+
+**Extensions**
+
+2a. Invalid format
+ >  2a1. System shows an error message
+> Use case ends
+2b. Invalid file path
+  > 2b1. System shows an error message
+> Use case ends
+
+
+#### Use case: Undo last command
+
+**MSS**
+
+1.  User undos latest command
+2.  System undos latest command
+Use case ends
+
+**Extensions**
+
+2a. Invalid format
+  > 2a1. System shows an error message
+> Use case ends
+
+2b. No previous command exists
+  > 2b1. System shows an error message
+> Use case ends
+
+#### Use case: Exit application
+
+**MSS**
+
+1.  User enters exit command
+2.  System exits application
+
+**Extensions**
+
+2a. Invalid format
+  > 2a1. System shows an error message
+> Use case ends
+
 
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should function on OS,Windows 7 or later
+5. Should function on a desktop either with or without network or Internet connection
+6. Should have minimal mouse-click actions
+7. Should function stand-alone, not as a plug-in to another software
+8. Should store data locally into a human editable file
+9. Should function without requiring an installer
+10. Should be able to hold up to 1000 to-do items
+11. Should come with automated unit tests and open source code
+12. Should display command results within 100 milliseconds
 
-{More to be added}
 
 ## Appendix D : Glossary
 
@@ -397,23 +755,110 @@ Use case ends.
 
 > Windows, Linux, Unix, OS-X
 
-##### Private contact detail
+##### Floating Task
 
-> A contact detail that is not meant to be shared with others
+> A task that does not need to be completed by a certain date or time
+
+##### Block
+
+> A command to ensure that no other task can be added to the specific date and time
+
+##### Storage folder
+
+> The directory in a computer where the application stores the data
+
 
 ## Appendix E : Product Survey
 
-**Product Name**
+**Product #1: Wunderlist**
 
 Author: ...
 
 Pros:
 
-* ...
-* ...
+* Supports offline work. User does not have to depend on Internet connectivity to use application.
+* Supports adding of tasks without deadlines. User’s one-shot approach is met when adding.
+* Supports editing and deleting of existing tasks. User is able to not only reschedule, but also discard tasks that cannot be completed. 
+* Supports adding of deadlines and reminders. User will be reminded when a deadline is approaching.
+* Supports searching and sorting of to-do items. User is able to find specific tasks easily.
+* Supports viewing of tasks that are completed. User is able to know which tasks are completed and which are yet to be completed.
+* Displays tasks in a user-friendly manner.
+* Supports a way to prioritise a task. User is able to view prioritised task at the top of the task list.
+* Supports a way to recover deleted task. User is able to recover deleted task when the task is deleted unintentionally.
+* Supports grouping of task. User is able to create lists to group related task together.
+* Supports sharing of task. User is able to share task list with other users with internet connection.
+* Supports synchronisation. User is able to view updated shared list real-time with internet connection.
+* Supports predictive due date input. Wunderlist can understand more colloquial/natural inputs and translate to specific dates, e.g. Wunderlist can detect words like ‘next week’ and add a specific due date to the input task.
+
 
 Cons:
 
-* ...
-* ...
+* Does not work with event with time slots. User is not able to manage events
+* Does not categorise tasks. User may find it hard to differentiate tasks with and without deadlines
+* Does not support an "Undo" option. Tasks that were incorrectly added has to be edited or deleted manually
+* Does not store data into local storage files but links to an online user account instead. Internet connectivity is still dependent if user wants to work from different computers
+* Does not have one-shot approach when performing functions other than adding a task with no deadlines
+* Requires a few clicks to perform functions
 
+**Product #2: Google Calendar + Google Task**
+
+Pros:
+
+* Supports displaying tasks in different views. Users are able to use multiple views
+* Supports setting notification for tasks. Users are able to set notification timing for specific tasks
+* Supports syncing with multiple calendars (Personal + Shared Calendars). Users are able to see tasks/events from multiple calendars in 1 page
+* Supports sharing of calendars. Users are able to share their calendars with other users
+* Supports integration with smartphones. Users are able to view the tasks from any devices
+* Supports unique holidays calendar, e.g. Holidays in Singapore. Users are able to check on the holidays of the countries they are visiting
+* Supports daily agenda emails. Users are able to enable daily agenda emails to be reminded on the agenda of that day
+* Supports embedding of calendar. Users are able to embed their Google Calendar to their website/blog
+* Supports changing the colour of the tab. Users are able to group tasks by changing the colour of the tab
+* Supports creating repeated task, e.g. Weekly group meeting at certain timings. Users are able to create events/tasks that will be repeated every day/week/month/year, e.g. timetable
+
+Cons:
+
+* Requires a Google Account
+* Daily agenda emails are sent only at 5am of that day
+* No tutorial on all features, new users will not be able to use the hidden advanced features, e.g. Daily Agenda Emails, task, reminders (By Google Inbox)
+* Reminders from Google Inbox are shown only on the smartphones
+
+
+**Product #3: to-doist**
+
+Pros:
+
+* Supports adding of tasks that can be marked as 'done'. User is able to mark completed tasks as done
+* Supports adding of tasks without deadlines. User is able to add task without deadlines with a one shot approach
+* Supports searching of tasks. User is able to find a task quickly
+* Supports in different platform. User is able to access the application quickly from the computer or mobile devices
+* Supports offline environment. User does not have to depend on Internet connectivity to use application
+* Supports postponement of tasks. User can postpone tasks when the need arise
+
+Cons:
+
+* The user has to search through all existing tasks to look for an empty slot, which is not considered a user-friendly approach.
+* Blocking of multiple slots for tasks with unconfirmed timings is not supported. User will not be able to schedule tasks with unconfirmed timings
+* Internet connectivity is required to access the application through other devices
+
+**Product #4: Remember the Milk**
+
+Pros:
+
+* Supports searching of task. User is able to search for task through keywords
+* Supports adding of task with no deadlines
+* Supports capturing of tasks to be done after a certain date
+* Supports capturing of tasks to be done before a certain date, i.e. ‘due date’
+* Supports task repetition
+* Supports the ‘one shot’ approach through “Smart Add” feature. User is able to use each feature with the respective commands all in a single command
+* Support categorisation of tasks through “List” feature, making organisation simpler
+* Supports offline use
+* Supports prioritising of tasks
+* Supports checking off completed tasks
+* Support multi-platform use: Android, iOS, BlackBerry
+
+Cons:
+
+* Requires user to sign in
+* Certain features are only accessible through purchase
+* Does not support automatic release of blocked dates once date is confirmed
+* Does not offer a calendar view or any function to easily determine a free time slot for a task
