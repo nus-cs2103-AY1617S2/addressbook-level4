@@ -36,6 +36,25 @@ public class Deadline {
 		}
 
 	}
+	
+	/**
+	 * Creates a Deadline using the String passed
+	 * 
+	 * @param deadline
+	 * @throws IllegalValueException
+	 */
+	public Deadline(String deadline, boolean isNew) throws IllegalValueException {
+		assert deadline != null;
+
+		if (deadline.equals(NO_DEADLINE)) {
+			this.deadline = NO_DEADLINE;
+		} else if (isValidDeadline(deadline, isNew)) {
+			this.deadline = deadline;
+		} else {
+			throw new IllegalValueException(MESSAGE_DEADLINE_CONSTRAINTS);
+		}
+
+	}
 
 	@Override
 	public String toString() {
@@ -88,11 +107,45 @@ public class Deadline {
 		PrettyTimeParser dateParser = new PrettyTimeParser();
 		List<Date> parsedDeadline = dateParser.parse(deadlineToCheck);
 
-		if (parsedDeadline.size() != 1) {
-			return false;
-		}
+//		//TODO replace parsing with set deadlines to avoid ambiguity/multiple deadlines
+//		if (parsedDeadline.size() != 1) {
+//			return false;
+//		}
 
 		Date deadline = parsedDeadline.get(0);
+
+		if (!deadline.before(rightNow)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	/**
+	 * Checks whether a deadline is valid
+	 * 
+	 * @param deadlineToCheck
+	 * @return true if deadline exists and is on or after time of checking,
+	 *         false if no deadline, multiple deadlines or deadline is before
+	 *         time of checking
+	 */
+	private boolean isValidDeadline(String deadlineToCheck, boolean isNew) {
+		assert deadlineToCheck != null;
+
+		Date rightNow = new Date();
+		PrettyTimeParser dateParser = new PrettyTimeParser();
+		List<Date> parsedDeadline = dateParser.parse(deadlineToCheck);
+
+//		//TODO replace parsing with set deadlines to avoid ambiguity/multiple deadlines
+//		if (parsedDeadline.size() != 1) {
+//			return false;
+//		}
+
+		Date deadline = parsedDeadline.get(0);
+		
+		if (!isNew) {
+			return true;
+		}
 
 		if (!deadline.before(rightNow)) {
 			return true;
