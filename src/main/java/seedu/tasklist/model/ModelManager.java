@@ -1,5 +1,7 @@
 package seedu.tasklist.model;
 
+import java.io.IOException;
+import java.util.Optional;
 import java.util.Set;
 import java.util.Stack;
 import java.util.logging.Logger;
@@ -9,6 +11,7 @@ import seedu.tasklist.commons.core.ComponentManager;
 import seedu.tasklist.commons.core.LogsCenter;
 import seedu.tasklist.commons.core.UnmodifiableObservableList;
 import seedu.tasklist.commons.events.model.TaskListChangedEvent;
+import seedu.tasklist.commons.exceptions.DataConversionException;
 import seedu.tasklist.commons.exceptions.EmptyModelStackException;
 import seedu.tasklist.commons.util.CollectionUtil;
 import seedu.tasklist.commons.util.StringUtil;
@@ -16,6 +19,7 @@ import seedu.tasklist.model.task.ReadOnlyTask;
 import seedu.tasklist.model.task.Task;
 import seedu.tasklist.model.task.UniqueTaskList;
 import seedu.tasklist.model.task.UniqueTaskList.TaskNotFoundException;
+import seedu.tasklist.storage.Storage;
 
 /**
  * Represents the in-memory model of the task list data.
@@ -25,6 +29,9 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final TaskList taskList;
+    private final Storage storage;
+
+
     private final FilteredList<ReadOnlyTask> filteredTasks;
     private Stack<ReadOnlyTaskList> undoStack;
     private Stack<ReadOnlyTaskList> redoStack;
@@ -32,23 +39,24 @@ public class ModelManager extends ComponentManager implements Model {
     /**
      * Initializes a ModelManager with the given taskList and userPrefs.
      */
-    public ModelManager(ReadOnlyTaskList taskList, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTaskList taskList, Storage storage) {
         super();
-        assert !CollectionUtil.isAnyNull(taskList, userPrefs);
-
-        logger.fine("Initializing with task list: " + taskList + " and user prefs " + userPrefs);
+        assert !CollectionUtil.isAnyNull(taskList, storage);
+        
+        logger.fine("Initializing with task list: " + taskList);
 
         this.taskList = new TaskList(taskList);
+        this.storage = storage;
         filteredTasks = new FilteredList<>(this.taskList.getTaskList());
 
         this.undoStack = new Stack<ReadOnlyTaskList>();
         this.redoStack = new Stack<ReadOnlyTaskList>();
-    }
+    }   
 
-    public ModelManager() {
-        this(new TaskList(), new UserPrefs());
+    public ModelManager(Storage storage) {
+        this(new TaskList(), storage);
     }
-
+    
     @Override
     public void resetData(ReadOnlyTaskList newData) {
         taskList.resetData(newData);
@@ -127,6 +135,27 @@ public class ModelManager extends ComponentManager implements Model {
             super("No available states");
         }
     }
+    
+    @Override 
+    public synchronized void loadTaskList(String filePath) throws IOException {
+
+        Optional<ReadOnlyTaskList> flexiTaskOptional;
+        ReadOnlyTaskList loadedData = null;
+        try {
+            flexiTaskOptional = storage.readTaskList(filePath);
+            if(!flexiTaskOptional.isPresent()){
+                logger.info("File not found.");
+                throw new IOException();
+            }else{
+                taskList.resetData(flexiTaskOptional.get());
+                storage.loadTaskList(filePath);
+                updateFilteredListToShowAll();
+            }
+        } catch (DataConversionException e) {
+            logger.warning("Wrong file format.");
+        }
+    }
+       
     //=========== Filtered Task List Accessors =============================================================
 
     @Override
