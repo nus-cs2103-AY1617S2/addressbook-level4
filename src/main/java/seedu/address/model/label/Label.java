@@ -9,8 +9,9 @@ import seedu.address.commons.exceptions.IllegalValueException;
  */
 public class Label {
 
-    public static final String MESSAGE_LABEL_CONSTRAINTS = "Label names should be alphanumeric";
-    public static final String LABEL_VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_LABEL_CONSTRAINTS =
+            "Label names should be alphanumeric, first character of label should be alphabetical";
+    public static final String LABEL_VALIDATION_REGEX = "^[a-zA-Z][a-zA-Z0-9]+$";
 
     public final String labelName;
 

@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.dateparser.DateTimeParser;
 import seedu.address.model.Model;
 
 /**
@@ -9,6 +10,7 @@ import seedu.address.model.Model;
  */
 public abstract class Command {
     protected Model model;
+    protected DateTimeParser dtParser;
 
     /**
      * Constructs a feedback message to summarise an operation that displayed a listing of tasks.
@@ -36,4 +38,18 @@ public abstract class Command {
     public void setData(Model model) {
         this.model = model;
     }
+
+    /**
+     * Provides any needed dependencies to the command.
+     * Commands making use of any of these should override this method to gain
+     * access to the dependencies.
+     */
+    public void setDateParser(DateTimeParser dtParser) {
+        this.dtParser = dtParser;
+    }
+
+    /**
+     * Returns true is the command changes the data and false otherwise.
+     */
+    public abstract boolean isMutating();
 }

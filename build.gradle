@@ -30,6 +30,7 @@ allprojects {
         maven { url "https://repo.eclipse.org/content/repositories/egit-releases/" }
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         maven { url "https://mvnrepository.com/artifact/com.joestelmach/natty" }
+        maven { url "https://mvnrepository.com/artifact/com.itextpdf/itext7-core" }
     }
 
     // This part is similar to global variables
@@ -65,6 +66,12 @@ allprojects {
         compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonDataTypeVersion"
         compile "com.google.guava:guava:$guavaVersion"
         compile "com.joestelmach:natty:0.13"
+        compile group: 'com.itextpdf', name: 'kernel', version: '7.0.2'
+        compile group: 'com.itextpdf', name: 'io', version: '7.0.2'
+        compile group: 'com.itextpdf', name: 'layout', version: '7.0.2'
+        compile group: 'com.itextpdf', name: 'forms', version: '7.0.2'
+        compile group: 'com.itextpdf', name: 'pdfa', version: '7.0.2'
+        compile group: 'com.itextpdf', name: 'pdftest', version: '7.0.2'
 
         testCompile "junit:junit:$junitVersion"
         testCompile "org.testfx:testfx-core:$testFxVersion"

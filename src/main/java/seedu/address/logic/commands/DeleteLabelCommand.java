@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.label.Label;
 import seedu.address.model.label.UniqueLabelList;
@@ -16,13 +17,6 @@ import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
  * Edits a label in all tasks that exists in task manager
  */
 public class DeleteLabelCommand extends Command {
-
-    public static final String COMMAND_WORD = "deletelabel";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a label \n"
-            + "All labels with this label name will be deleted from its attached task.\n"
-            + "Parameters: LABEL_TO_DELETE\n"
-            + "Example: " + COMMAND_WORD + " friends";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Label %1$s deleted from all tasks";
     public static final String MESSAGE_LABEL_NOT_EXIST = "Specified label does not exist in any task saved";
@@ -67,6 +61,7 @@ public class DeleteLabelCommand extends Command {
                 labelExist = true;
 
                 try {
+                    saveCurrentState();
                     model.updateTask(i, task);
                 } catch (DuplicateTaskException dpe) {
                     throw new CommandException(MESSAGE_DUPLICATE_TASK);
@@ -74,6 +69,25 @@ public class DeleteLabelCommand extends Command {
             }
         }
         return labelExist;
+    }
+
+    /**
+     * Save the data in task manager if command is mutating the data
+     */
+    public void saveCurrentState() {
+        if (isMutating()) {
+            try {
+                LogicManager.undoCommandHistory.addStorageHistory(model.getRawTaskManager().getImmutableTaskList(),
+                        model.getRawTaskManager().getImmutableLabelList());
+            } catch (CloneNotSupportedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public boolean isMutating() {
+        return true;
     }
 
 }

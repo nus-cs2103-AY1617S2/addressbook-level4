@@ -74,6 +74,22 @@ public class TaskManager implements ReadOnlyTaskManager {
         syncMasterLabelListWith(tasks);
     }
 
+    public void undoData(ObservableList<ReadOnlyTask> oldTaskState, ObservableList<Label> oldLabelState) {
+        tasks.removeAll();
+        labels.removeAll();
+        try {
+            setTasks(oldTaskState);
+        } catch (UniqueTaskList.DuplicateTaskException e) {
+            assert false : "Task manager should not have duplicate tasks";
+        }
+        try {
+            setLabels(oldLabelState);
+        } catch (UniqueLabelList.DuplicateLabelException e) {
+            assert false : "Task manager should not have duplicate tasks";
+        }
+        syncMasterLabelListWith(tasks);
+    }
+
     //// task-level operations
 
     /**
@@ -169,6 +185,16 @@ public class TaskManager implements ReadOnlyTaskManager {
     @Override
     public ObservableList<Label> getLabelList() {
         return new UnmodifiableObservableList<>(labels.asObservableList());
+    }
+
+    public ObservableList<ReadOnlyTask> getImmutableTaskList() throws CloneNotSupportedException {
+        UniqueTaskList oldTaskList = tasks.clone();
+        return new UnmodifiableObservableList<>(oldTaskList.asObservableList());
+    }
+
+    public ObservableList<Label> getImmutableLabelList() throws CloneNotSupportedException {
+        UniqueLabelList oldLabelList = labels.clone();
+        return new UnmodifiableObservableList<>(oldLabelList.asObservableList());
     }
 
     @Override

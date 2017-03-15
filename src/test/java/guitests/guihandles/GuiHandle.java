@@ -63,11 +63,27 @@ public class GuiHandle {
         guiRobot.clickOn(textFieldId);
         TextField textField = getNode(textFieldId);
         textField.setText(newText);
-        guiRobot.sleep(500); // so that the texts stays visible on the GUI for a short period
+        guiRobot.sleep(1); // so that the texts stays visible on the GUI for a short period
     }
 
     public void pressEnter() {
-        guiRobot.type(KeyCode.ENTER).sleep(500);
+        guiRobot.type(KeyCode.ENTER).sleep(1);
+    }
+
+    public void pressTab() {
+        guiRobot.type(KeyCode.TAB).sleep(1);
+    }
+
+    public void pressRight() {
+        guiRobot.type(KeyCode.RIGHT);
+    }
+
+    public void pressUp() {
+        guiRobot.type(KeyCode.UP).sleep(1);
+    }
+
+    public void pressDown() {
+        guiRobot.type(KeyCode.DOWN).sleep(1);
     }
 
     protected String getTextFromLabel(String fieldId, Node parentNode) {

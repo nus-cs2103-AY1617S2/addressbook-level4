@@ -4,13 +4,16 @@ import java.util.Date;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.model.TaskManagerChangedEvent;
+import seedu.address.commons.exceptions.InvalidUndoCommandException;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.label.Label;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
@@ -23,7 +26,7 @@ import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final TaskManager taskManager;
+    private TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
 
     /**
@@ -54,6 +57,11 @@ public class ModelManager extends ComponentManager implements Model {
         return taskManager;
     }
 
+    @Override
+    public TaskManager getRawTaskManager() {
+        return taskManager;
+    }
+
     /** Raises an event to indicate the model has changed */
     private void indicateTaskManagerChanged() {
         raise(new TaskManagerChangedEvent(taskManager));
@@ -76,9 +84,16 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
-
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
+        indicateTaskManagerChanged();
+    }
+
+    @Override
+    public void undoPrevious(ObservableList<ReadOnlyTask> oldTaskState, ObservableList<Label> oldLabelState)
+            throws InvalidUndoCommandException {
+        taskManager.undoData(oldTaskState, oldLabelState);
+        updateFilteredListToShowAll();
         indicateTaskManagerChanged();
     }
 
@@ -108,8 +123,17 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
 
+    @Override
+    public void updateFilteredTaskList(Boolean isCompleted) {
+        updateFilteredTaskListByCompletion(new StatusFilter(isCompleted));
+    }
+
     private void updateFilteredTaskListByDate(DateFilter dateFilter) {
         filteredTasks.setPredicate(dateFilter::run);
+    }
+
+    private void updateFilteredTaskListByCompletion(StatusFilter statusFilter) {
+        filteredTasks.setPredicate(statusFilter::run);
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
@@ -182,9 +206,24 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         public boolean run(ReadOnlyTask task) {
-            return task.getDeadline().getDateTime().before(endTime)
-                    && task.getDeadline().getDateTime().after(startTime);
+            if (task.getDeadline().isPresent() && task.getStartTime().isPresent()) {
+                return (task.getDeadline().get().getDateTime().before(endTime)
+                        && task.getDeadline().get().getDateTime().after(startTime))
+                        || task.getDeadline().get().getDateTime().equals(endTime);
+            }
+            return false;
         }
     }
 
+    private class StatusFilter {
+        private boolean isCompleted;
+
+        StatusFilter(boolean isCompleted) {
+            this.isCompleted = isCompleted;
+        }
+
+        public boolean run(ReadOnlyTask task) {
+            return task.isCompleted().booleanValue() == isCompleted;
+        }
+    }
 }

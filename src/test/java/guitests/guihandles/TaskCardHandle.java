@@ -16,8 +16,10 @@ import seedu.address.model.task.ReadOnlyTask;
  */
 public class TaskCardHandle extends GuiHandle {
     private static final String TITLE_FIELD_ID = "#title";
+    private static final String STARTTIME_FIELD_ID = "#startTime";
     private static final String DEADLINE_FIELD_ID = "#deadline";
     private static final String LABELS_FIELD_ID = "#labels";
+    private static final String STATUS_FIELD_ID = "#status";
 
     private Node node;
 
@@ -32,6 +34,10 @@ public class TaskCardHandle extends GuiHandle {
 
     public String getTitle() {
         return getTextFromLabel(TITLE_FIELD_ID);
+    }
+
+    public String getStartTime() {
+        return getTextFromLabel(STARTTIME_FIELD_ID);
     }
 
     public String getDeadline() {
@@ -63,9 +69,35 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     public boolean isSameTask(ReadOnlyTask task) {
-        return getTitle().equals(task.getTitle().title)
-                && getDeadline().equals(task.getDeadline().toString())
-                && getLabels().equals(getLabels(task.getLabels()));
+        assert(task != null);
+        boolean result;
+        if (task.getDeadline().isPresent() && task.getStartTime().isPresent()
+                && this.getDeadline() != null && this.getDeadline() != null) {
+            result = getTitle().equals(task.getTitle().title)
+                && getDeadline().equals(task.getDeadline().get().toString())
+                && getLabels().equals(getLabels(task.getLabels()))
+                && getStartTime().equals(task.getStartTime().get().toString())
+                && isCompleted().equals(task.isCompleted());
+        } else if (task.getDeadline().isPresent() && this.getDeadline() != null) {
+            result = getTitle().equals(task.getTitle().title)
+                    && getDeadline().equals(task.getDeadline().get().toString())
+                    && getLabels().equals(getLabels(task.getLabels()))
+                    && isCompleted().equals(task.isCompleted());
+        } else {
+            result = getTitle().equals(task.getTitle().title)
+                    && getLabels().equals(getLabels(task.getLabels()))
+                    && isCompleted().equals(task.isCompleted());
+        }
+        return result;
+    }
+
+    private Boolean isCompleted() {
+        String text = getTextFromLabel(STATUS_FIELD_ID);
+        if (text.equals("Completed")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -73,7 +105,9 @@ public class TaskCardHandle extends GuiHandle {
         if (obj instanceof TaskCardHandle) {
             TaskCardHandle handle = (TaskCardHandle) obj;
             return getTitle().equals(handle.getTitle())
+                    && getStartTime().equals(handle.getStartTime())
                     && getDeadline().equals(handle.getDeadline())
+                    && isCompleted().equals(handle.isCompleted())
                     && getLabels().equals(handle.getLabels());
         }
         return super.equals(obj);
@@ -81,6 +115,13 @@ public class TaskCardHandle extends GuiHandle {
 
     @Override
     public String toString() {
-        return getTitle() + " " + getDeadline();
+        String status = "Incomplete";
+        if (isCompleted()) {
+            status = "Completed";
+        }
+        return getTitle() + " Start: " + getStartTime() +
+                " Deadline: " + getDeadline() +
+                " Status: " + status +
+                " Label: " + getLabels();
     }
 }

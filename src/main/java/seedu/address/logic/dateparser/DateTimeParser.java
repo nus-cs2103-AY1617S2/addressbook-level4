@@ -1,10 +1,13 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.dateparser;
 
 import java.util.List;
 
 import com.joestelmach.natty.DateGroup;
 
-public interface DateTime {
+/**
+ * The API of the DateTimeParser component.
+ */
+public interface DateTimeParser {
 
     /**
      * Parses the given input value to the DateTimeParser

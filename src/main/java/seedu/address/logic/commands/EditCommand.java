@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.label.UniqueLabelList;
 import seedu.address.model.task.Deadline;
@@ -18,13 +19,14 @@ import seedu.address.model.task.UniqueTaskList;
  */
 public class EditCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "EDIT";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [TITLE] [by DEADLINE] [t/LABEL]...\n"
-            + "Example: " + COMMAND_WORD + " 1 by Sunday t/new";
+            + "Parameters: INDEX (must be a positive integer) [TITLE] [BY DEADLINE] [#LABEL]...\n"
+            + "Parameters: INDEX (must be a positive integer) [TITLE] [BY DEADLINE] [FROM START TO END][#LABEL]...\n"
+            + "Example: " + COMMAND_WORD + " 1 BY Sunday #new";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -43,7 +45,6 @@ public class EditCommand extends Command {
 
         // converts filteredTaskListIndex from one-based to zero-based.
         this.filteredTaskListIndex = filteredTaskListIndex - 1;
-
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
     }
 
@@ -59,6 +60,7 @@ public class EditCommand extends Command {
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
         try {
+            saveCurrentState();
             model.updateTask(filteredTaskListIndex, editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dte) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
@@ -76,10 +78,12 @@ public class EditCommand extends Command {
         assert taskToEdit != null;
 
         Title updatedTitle = editTaskDescriptor.getTitle().orElseGet(taskToEdit::getTitle);
-        Deadline updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(taskToEdit::getDeadline);
+        Optional<Deadline> updatedStartTime = editTaskDescriptor.getStartTime();
+        Optional<Deadline> updatedDeadline = editTaskDescriptor.getDeadline();
+        Boolean isCompleted = editTaskDescriptor.isCompleted().orElseGet(taskToEdit::isCompleted);
         UniqueLabelList updatedLabels = editTaskDescriptor.getLabels().orElseGet(taskToEdit::getLabels);
 
-        return new Task(updatedTitle, updatedDeadline, updatedLabels);
+        return new Task(updatedTitle, updatedStartTime, updatedDeadline, isCompleted, updatedLabels);
     }
 
     /**
@@ -88,14 +92,19 @@ public class EditCommand extends Command {
      */
     public static class EditTaskDescriptor {
         private Optional<Title> title = Optional.empty();
+        private Optional<Deadline> startTime = Optional.empty();
         private Optional<Deadline> deadline = Optional.empty();
         private Optional<UniqueLabelList> labels = Optional.empty();
+        private Optional<Boolean> isCompleted = Optional.empty();
 
         public EditTaskDescriptor() {}
 
+
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.title = toCopy.getTitle();
+            this.startTime = toCopy.getStartTime();
             this.deadline = toCopy.getDeadline();
+            this.isCompleted = toCopy.isCompleted();
             this.labels = toCopy.getLabels();
         }
 
@@ -103,7 +112,15 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.title, this.deadline, this.labels);
+            return CollectionUtil.isAnyPresent(this.title, this.startTime,
+                    this.isCompleted, this.deadline, this.labels);
+        }
+
+        /**
+         * Returns true if any date is edited.
+         */
+        public boolean isDateEdited() {
+            return CollectionUtil.isAnyPresent(this.startTime, this.deadline);
         }
 
         public void setName(Optional<Title> title) {
@@ -115,7 +132,16 @@ public class EditCommand extends Command {
             return title;
         }
 
-        public void setAddress(Optional<Deadline> deadline) {
+        public void setStartTime(Optional<Deadline> startTime) {
+            assert startTime != null;
+            this.startTime = startTime;
+        }
+
+        public Optional<Deadline> getStartTime() {
+            return startTime;
+        }
+
+        public void setDeadline(Optional<Deadline> deadline) {
             assert deadline != null;
             this.deadline = deadline;
         }
@@ -132,5 +158,31 @@ public class EditCommand extends Command {
         public Optional<UniqueLabelList> getLabels() {
             return labels;
         }
+
+        public void setIsCompleted(Optional<Boolean> isCompleted) {
+            this.isCompleted = isCompleted;
+        }
+        public Optional<Boolean> isCompleted() {
+            return isCompleted;
+        }
+    }
+
+    /**
+     * Save the data in task manager if command is mutating the data
+     */
+    public void saveCurrentState() {
+        if (isMutating()) {
+            try {
+                LogicManager.undoCommandHistory.addStorageHistory(model.getRawTaskManager().getImmutableTaskList(),
+                        model.getRawTaskManager().getImmutableLabelList());
+            } catch (CloneNotSupportedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public boolean isMutating() {
+        return true;
     }
 }

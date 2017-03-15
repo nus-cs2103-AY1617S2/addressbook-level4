@@ -1,5 +1,8 @@
 package seedu.address.testutil;
 
+import java.util.Optional;
+
+import seedu.address.commons.exceptions.IllegalDateTimeValueException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.label.Label;
 import seedu.address.model.label.UniqueLabelList;
@@ -37,8 +40,26 @@ public class TaskBuilder {
         return this;
     }
 
-    public TaskBuilder withDeadline(String deadline) throws IllegalValueException {
-        this.task.setDeadline(new Deadline(deadline));
+    public TaskBuilder withStartTime(String startTime) throws IllegalValueException, IllegalDateTimeValueException {
+        if (startTime != null) {
+            this.task.setStartTime(Optional.ofNullable(new Deadline(startTime)));
+        } else {
+            this.task.setStartTime(Optional.empty());
+        }
+        return this;
+    }
+
+    public TaskBuilder withDeadline(String deadline) throws IllegalValueException, IllegalDateTimeValueException {
+        if (deadline != null) {
+            this.task.setDeadline(Optional.ofNullable(new Deadline(deadline)));
+        } else {
+            this.task.setDeadline(Optional.empty());
+        }
+        return this;
+    }
+
+    public TaskBuilder withStatus(boolean isCompleted) {
+        this.task.setIsCompleted(isCompleted);
         return this;
     }
 
