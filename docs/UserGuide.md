@@ -8,19 +8,19 @@ By : `T09-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 1. [Introduction](#introduction)
 2. [Getting Started](#getting-started)
-3. [Features](#features)
-	3.1. [Command Formats](#command-formats)
-	3.2. [Adding Tasks](#add-a-task-add)
-	3.3. [Deleting Tasks](#delete-a-task-delete)
-	3.4. [Finding Tasks](#find-a-task-find)
-	3.5. [Listing Tasks](#list-all-tasks)
-    3.6. [Selecting Tasks](#select-a-task)
-    3.7. [Updating Tasks](#update-a-task)
-	3.8. [Getting Help](#get-help)
-	3.9. [Change Data File Location](#change-data-file-location)
-	3.10. [Exit](#exit)
+3. [Features](#features) <br>
+	3.1. [Command Formats](#command-formats) <br>
+	3.2. [Adding Tasks](#add-a-task-add) <br>
+	3.3. [Deleting Tasks](#delete-a-task-delete) <br>
+	3.4. [Finding Tasks](#find-a-task-find) <br>
+	3.5. [Listing Tasks](#list-all-tasks-list) <br>
+    3.6. [Selecting Tasks](#select-a-task-select) <br>
+    3.7. [Updating Tasks](#update-a-task-update) <br>
+	3.8. [Getting Help](#get-help-help) <br>
+	3.9. [Change Data File Location](#change-data-file-location) <br>
+	3.10. [Exit](#exit-the-program-exit)
 4. [Command Summary](#command-summary)
-5. [FAQ](#frequently-asked-questions)
+5. [FAQ](#faq-frequently-asked-questions)
 6. [Glossary](#some-technical-terms)
 
 
@@ -135,7 +135,7 @@ Examples:
 * `add committee meeting; 15 june; 2 hr`
 * `add sushi restaurant promotion; 040117 10am; 110117 9pm`
 
-### 3.2. Deleting a task : `delete`
+### 3.3. Delete a task : `delete`
 
 Deletes the specified task from the task manager.<br>
 Formats:
@@ -147,7 +147,7 @@ Examples:
 
 * `delete watch tv with the children`
 
-### 3.3. Find a task: `find`
+### 3.4. Find a task: `find`
 
 Finds task(s) whose names contain any of the given keywords.<br>
 Formats:
@@ -160,22 +160,12 @@ Examples:
 * `find project`
 * `find meeting; monday`
 
-### 3.4. Listing all tasks : `list`
+### 3.5. List all tasks : `list`
 
 Shows a list of all tasks in the task manager.<br>
 Format:
 
 > * `list`
-
-### 3.5. Viewing help : `help`
-
-Shows a list of all commands and their usage instructions.<br>
-Formats:
-
-> * `help <command>` (provides specific information about the usage of the command)
-> * `help /all`
-
-> Help is also shown if you enter an incorrect command. e.g. `abcd`
 
 ### 3.6. Select a task : `select`
 
@@ -204,12 +194,15 @@ Examples:
 * `update start time 10am`
 * `update project proposal; name app development project proposal; end time 11.59pm`
 
-### 3.8. Exiting the program : `exit`
+### 3.8. Get help : `help`
 
-Exits the program.<br>
-Format:
+Shows a list of all commands and their usage instructions.<br>
+Formats:
 
-> * `exit`
+> * `help <command>` (provides specific information about the usage of the command)
+> * `help /all`
+
+> Help is also shown if you enter an incorrect command. e.g. `abcd`
 
 ### 3.9. Change save file location
 
@@ -221,6 +214,13 @@ Formats:
 Examples:
 
 * `save C:\Users\Jim\Desktop`
+
+### 3.8. Exiting the program : `exit`
+
+Exits the program.<br>
+Format:
+
+> * `exit`
 
 
 ## 4. Command Summary
@@ -236,7 +236,7 @@ Examples:
 |Select       |`select <task>`                  |`select presentation`                         |
 
 
-## 5. FAQ
+## 5. FAQ (Frequently Asked Questions)
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
