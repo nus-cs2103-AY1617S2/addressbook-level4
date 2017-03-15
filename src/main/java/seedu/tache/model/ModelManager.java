@@ -88,8 +88,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void addDetailedTask(DetailedTask detailedTask) throws DuplicateDetailedTaskException {
-        // TODO Auto-generated method stub
-
+        taskManager.addDetailedTask(detailedTask);
+        updateFilteredListToShowAll();
+        indicateTaskManagerChanged();
     }
 
     @Override
