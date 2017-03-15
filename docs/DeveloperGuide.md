@@ -25,7 +25,7 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 ## Introduction
 <p>Doist is a task manager that can accept natural language commands via keyboard.</p>
-<p>This developer guide aims to help developers better understand the design and implementation of Doist to facilitate further contribution of the development of Doist</p>
+<p>This developer guide aims to help developers better understand the design and implementation of Doist to facilitate further contribution of the development of Doist.</p>
 
 
 <br>
@@ -48,13 +48,13 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 ### 2. Importing the project into Eclipse
 
-0. Fork this repo, and clone the fork to your computer
-1. Open Eclipse (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
+1. Fork this repo, and clone the fork to your computer
+2. Open Eclipse (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
    in the prerequisites above)
-2. Click `File` > `Import`
-3. Click `Gradle` > `Gradle Project` > `Next` > `Next`
-4. Click `Browse`, then locate the project's directory
-5. Click `Finish`
+3. Click `File` > `Import`
+4. Click `Gradle` > `Gradle Project` > `Next` > `Next`
+5. Click `Browse`, then locate the project's directory
+6. Click `Finish`
 
   > * If you are asked whether to 'keep' or 'overwrite' config files, choose to 'keep'.
   > * Depending on your connection speed and server load, it can even take up to 30 minutes for the set up to finish
@@ -74,16 +74,16 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 ### 4. Troubleshooting project setup
 
-**Problem: Eclipse reports compile errors after new commits are pulled from Git**
+* Problem: Eclipse reports compile errors after new commits are pulled from Git
 
-* Reason: Eclipse fails to recognize new files that appeared due to the Git pull.
-* Solution: Refresh the project in Eclipse:<br>
+    > * Reason: Eclipse fails to recognize new files that appeared due to the Git pull.
+    > * Solution: Refresh the project in Eclipse:
   Right click on the project (in Eclipse package explorer), choose `Gradle` -> `Refresh Gradle Project`.
 
-**Problem: Eclipse reports some required libraries missing**
+* Problem: Eclipse reports some required libraries missing 
 
-* Reason: Required libraries may not have been downloaded during the project import.
-* Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries).
+    > * Reason: Required libraries may not have been downloaded during the project import.
+    > * Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries).
 
 <br>
 
@@ -239,11 +239,10 @@ These are tests not involving the GUI. They include,
 ### Troubleshooting tests
  * Problem: Tests fail because NullPointException when AssertionError is expected  
 
- * Reason: Assertions are not enabled for JUnit tests.
+    > * Reason: Assertions are not enabled for JUnit tests.
    This can happen if you are not using a recent Eclipse version (i.e. _Neon_ or later)  
-
- * Solution: Enable assertions in JUnit tests as described [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option).
-   Delete run configurations created when you ran tests earlier.
+    > * Solution: Enable assertions in JUnit tests as described [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option).  
+    > Delete run configurations created when you ran tests earlier.
 
 <br>
 
