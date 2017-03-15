@@ -38,7 +38,7 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Adds a task to the task list.<br>
-Format: `add TITLE d/[CONTENT] from/[DATE] [TIME] to/[DATE] [TIME] [#tags]`
+Format: `add TITLE d/[CONTENT] from/[DATE] [TIME] to/[DATE] [TIME] [#tags]`<br>
 Format: `add TITLE d/[CONTENT] by/[DATE] [TIME] [#tags]`
 
 > Tasks can have any number of tags (including 0)
@@ -55,7 +55,7 @@ Format: `list`
 ### 2.4. Editing a task: `edit`
 
 Edits an existing task in the task list. <br>
-Format: `edit INDEX TITLE d/CONTENT from/[DATE] [TIME] to/[DATE] [TIME] [#tags]`
+Format: `edit INDEX TITLE d/CONTENT from/[DATE] [TIME] to/[DATE] [TIME] [#tags]`<br>
 Format: `edit INDEX TITLE d/CONTENT by/[DATE] [TIME] [#tags]`
 
 > TheEdits the person at the specified INDEX. 
