@@ -44,7 +44,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyTaskManager newData) {
-    	taskManager.resetData(newData);
+        taskManager.resetData(newData);
         indicateTaskManagerChanged();
     }
 
@@ -60,13 +60,13 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-    	taskManager.removeTask(target);
+        taskManager.removeTask(target);
         indicateTaskManagerChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-    	taskManager.addTask(task);
+        taskManager.addTask(task);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
     }
@@ -103,7 +103,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
-
+    
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
         String toString();
