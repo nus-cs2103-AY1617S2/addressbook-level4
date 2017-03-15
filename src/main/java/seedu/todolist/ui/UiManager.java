@@ -15,8 +15,8 @@ import seedu.todolist.commons.core.Config;
 import seedu.todolist.commons.core.LogsCenter;
 import seedu.todolist.commons.events.storage.DataSavingExceptionEvent;
 import seedu.todolist.commons.events.ui.JumpToListRequestEvent;
-import seedu.todolist.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.todolist.commons.events.ui.ShowHelpRequestEvent;
+import seedu.todolist.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.todolist.commons.util.StringUtil;
 import seedu.todolist.logic.Logic;
 import seedu.todolist.model.UserPrefs;
@@ -120,7 +120,7 @@ public class UiManager extends ComponentManager implements Ui {
     }
 
     @Subscribe
-    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
+    private void handlePersonPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.loadPersonPage(event.getNewSelection());
     }

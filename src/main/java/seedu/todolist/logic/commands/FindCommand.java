@@ -3,7 +3,7 @@ package seedu.todolist.logic.commands;
 import java.util.Set;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
+ * Finds and lists all tasks in address book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class FindCommand extends Command {
@@ -25,7 +25,7 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute() {
         model.updateFilteredTaskList(keywords);
-        commandText = getMessageForPersonListShownSummary(model.getFilteredTaskList().size());
+        commandText = getMessageForTaskListShownSummary(model.getFilteredTaskList().size());
         return new CommandResult(commandText);
     }
 
