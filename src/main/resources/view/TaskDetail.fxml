@@ -21,14 +21,14 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label fx:id="labelTaskName" prefHeight="17.0" prefWidth="88.0" text="Task Name" textFill="WHITE" />
+            <Label fx:id="labelTaskName" prefHeight="17.0" prefWidth="88.0" text="Task Title" textFill="WHITE" />
             <Label prefHeight="17.0" prefWidth="80.0" text="Start Time" textFill="WHITE" GridPane.rowIndex="1" />
             <Label prefHeight="17.0" prefWidth="79.0" text="End Time" textFill="WHITE" GridPane.rowIndex="2" />
             <Label text="Tags" textFill="WHITE" GridPane.rowIndex="3" />
             <TextField fx:id="startTime" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="endTime" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="tags" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="taskName" GridPane.columnIndex="1" />
+            <TextField fx:id="title" GridPane.columnIndex="1" />
          </children>
       </GridPane>
    </children>
