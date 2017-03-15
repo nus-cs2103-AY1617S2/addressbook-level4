@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox fx:id="test" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView prefHeight="400.0" prefWidth="1050.0">
+        <columns>
+            <TableColumn prefWidth="150.0" text="Sunday" />
+          <TableColumn prefWidth="150.0" text="Monday" />
+          <TableColumn prefWidth="150.0" text="Tuesday" />
+            <TableColumn prefWidth="150.0" text="Wednesday" />
+            <TableColumn prefWidth="150.0" text="Thursday" />
+            <TableColumn prefWidth="150.0" text="Friday" />
+            <TableColumn prefWidth="150.0" text="Saturday" />
+        </columns>
+      </TableView>
+   </children>
+</HBox>
