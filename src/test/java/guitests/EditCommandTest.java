@@ -8,7 +8,6 @@ import guitests.guihandles.TaskCardHandle;
 import seedu.tache.commons.core.Messages;
 import seedu.tache.logic.commands.EditCommand;
 import seedu.tache.model.tag.Tag;
-import seedu.tache.model.task.Name;
 import seedu.tache.testutil.TaskBuilder;
 import seedu.tache.testutil.TestTask;
 

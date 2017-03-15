@@ -10,7 +10,13 @@ import seedu.tache.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask eggsAndBread, readBook, visitGrandma, payDavid, getFit, findGirlfriend, visitSarah;
+    public TestTask eggsAndBread;
+    public TestTask readBook;
+    public TestTask visitGrandma;
+    public TestTask payDavid;
+    public TestTask getFit;
+    public TestTask findGirlfriend;
+    public TestTask visitSarah;
 
     public TypicalTestTasks() {
         try {

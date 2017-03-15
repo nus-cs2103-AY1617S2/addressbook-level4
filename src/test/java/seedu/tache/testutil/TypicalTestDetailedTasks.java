@@ -7,7 +7,11 @@ import seedu.tache.model.task.UniqueDetailedTaskList;
 
 public class TypicalTestDetailedTasks {
 
-    public TestDetailedTask taskA, taskB, taskC, taskH, taskI;
+    public TestDetailedTask taskA;
+    public TestDetailedTask taskB;
+    public TestDetailedTask taskC;
+    public TestDetailedTask taskH;
+    public TestDetailedTask taskI;
 
     public TypicalTestDetailedTasks() {
         try {

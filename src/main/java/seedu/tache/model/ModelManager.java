@@ -253,8 +253,8 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyDetailedTask detailedTask) {
             return dateKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(detailedTask.getStartDate().toString()
-                            , keyword))
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(detailedTask.getStartDate().toString(), 
+                    		keyword))
                     .findAny()
                     .isPresent()
                     || dateKeyWords.stream()
@@ -285,8 +285,8 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyDetailedTask detailedTask) {
             return timeKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(detailedTask.getStartTime().toString()
-                            , keyword))
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(detailedTask.getStartTime().toString(), 
+                    		keyword))
                     .findAny()
                     .isPresent()
                     || timeKeyWords.stream()
