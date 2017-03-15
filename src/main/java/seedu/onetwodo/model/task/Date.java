@@ -14,8 +14,9 @@ import java.util.Optional;
  */
 public class Date {
 
-    public static final String MESSAGE_DATE_CONSTRAINTS = "If task date exists, it must be a valid date";
-
+    public static final String MESSAGE_DATE_INPUT_CONSTRAINTS = "Invalid date input. "
+            + "Please check the format in user guide or help command.";
+    
     public String value;  // value to be displayed to user
     protected Optional<LocalDateTime> localDateTime;
     
