@@ -26,8 +26,7 @@ public class TodoList {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TodoList // instanceof handles nulls
-                && allTasks.equals(((TodoList) other).getTasks())
-                && Objects.equals(storage, ((TodoList) other).storage));
+                && allTasks.equals(((TodoList) other).getTasks()));
     }
 
     public ArrayList<Task> getTasks() {
