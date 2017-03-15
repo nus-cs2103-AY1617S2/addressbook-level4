@@ -40,7 +40,7 @@ public class Deadline {
 	/**
 	 * Creates a Deadline using the String passed. isNew means that this Deadline object is added from user input
 	 * as opposed to being loaded from storage, and therefore the checking of whether the deadline date
-	 * is in the past should NOT be bypassed. 
+	 * is in the past should NOT be bypassed.
 	 * 
 	 * @param deadline
 	 * @throws IllegalValueException
@@ -102,7 +102,7 @@ public class Deadline {
 	 *         false if no deadline, multiple deadlines or deadline is before
 	 *         time of checking
 	 */
-	public static boolean isValidDeadline(String deadlineToCheck) {
+	private static boolean isValidDeadline(String deadlineToCheck) {
 		assert deadlineToCheck != null;
 
 		Date rightNow = new Date();
@@ -131,9 +131,13 @@ public class Deadline {
 	 *         false if no deadline, multiple deadlines or deadline is before
 	 *         time of checking
 	 */
-	private boolean isValidDeadline(String deadlineToCheck, boolean isNew) {
+	public static boolean isValidDeadline(String deadlineToCheck, boolean isNew) {
 		assert deadlineToCheck != null;
-
+		if(!isNew)
+		    return true;
+		else if(deadlineToCheck.equals(NO_DEADLINE))
+		    return true;
+		
 		Date rightNow = new Date();
 		PrettyTimeParser dateParser = new PrettyTimeParser();
 		List<Date> parsedDeadline = dateParser.parse(deadlineToCheck);
@@ -144,10 +148,6 @@ public class Deadline {
 //		}
 
 		Date deadline = parsedDeadline.get(0);
-		
-		if (!isNew) {
-			return true;
-		}
 
 		if (!deadline.before(rightNow)) {
 			return true;

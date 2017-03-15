@@ -10,11 +10,11 @@ public class Config {
 
     public static final String DEFAULT_CONFIG_FILE = "config.json";
 
-    // Config values customizable through config file
+    // Config values customizable through config file. These are default
     private String appTitle = "TaskCrusher";
     private Level logLevel = Level.INFO;
     private String userPrefsFilePath = "preferences.json";
-    private String addressBookFilePath = "data/userInbox.xml";
+    private String userInboxFilePath = "data/userInbox.xml";
     private String userInboxName = "MyTaskCrusher";
 
 
@@ -42,20 +42,20 @@ public class Config {
         this.userPrefsFilePath = userPrefsFilePath;
     }
 
-    public String getAddressBookFilePath() {
-        return addressBookFilePath;
+    public String getUserInboxFilePath() {
+        return userInboxFilePath;
     }
 
-    public void setAddressBookFilePath(String addressBookFilePath) {
-        this.addressBookFilePath = addressBookFilePath;
+    public void setUserInboxFilePath(String userInbox) {
+        this.userInboxFilePath = userInbox;
     }
 
-    public String getAddressBookName() {
+    public String getUserInboxName() {
         return userInboxName;
     }
 
-    public void setAddressBookName(String addressBookName) {
-        this.userInboxName = addressBookName;
+    public void setUserInboxName(String userInbox) {
+        this.userInboxName = userInbox;
     }
 
 
@@ -69,17 +69,16 @@ public class Config {
         }
 
         Config o = (Config) other;
-
         return Objects.equals(appTitle, o.appTitle)
                 && Objects.equals(logLevel, o.logLevel)
                 && Objects.equals(userPrefsFilePath, o.userPrefsFilePath)
-                && Objects.equals(addressBookFilePath, o.addressBookFilePath)
+                && Objects.equals(userInboxFilePath, o.userInboxFilePath)
                 && Objects.equals(userInboxName, o.userInboxName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(appTitle, logLevel, userPrefsFilePath, addressBookFilePath, userInboxName);
+        return Objects.hash(appTitle, logLevel, userPrefsFilePath, userInboxFilePath, userInboxName);
     }
 
     @Override
@@ -88,7 +87,7 @@ public class Config {
         sb.append("App title : " + appTitle);
         sb.append("\nCurrent log level : " + logLevel);
         sb.append("\nPreference file Location : " + userPrefsFilePath);
-        sb.append("\nLocal data file location : " + addressBookFilePath);
+        sb.append("\nLocal data file location : " + userInboxFilePath);
         sb.append("\nuserInbox name : " + userInboxName);
         return sb.toString();
     }

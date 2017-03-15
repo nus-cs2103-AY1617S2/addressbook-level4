@@ -54,8 +54,8 @@ public class ConfigUtilTest {
     public void read_fileInOrder_successfullyRead() throws DataConversionException {
 
         Config expected = getTypicalConfig();
-
         Config actual = read("TypicalConfig.json").get();
+        //TODO: can fail. Not reading TypicalConfig.json properly
         assertEquals(expected, actual);
     }
 
@@ -74,12 +74,13 @@ public class ConfigUtilTest {
     }
 
     private Config getTypicalConfig() {
+        //TODO: may fail some of the tests
         Config config = new Config();
         config.setAppTitle("Typical App Title");
         config.setLogLevel(Level.INFO);
         config.setUserPrefsFilePath("C:\\preferences.json");
-        config.setAddressBookFilePath("addressbook.xml");
-        config.setAddressBookName("TypicalAddressBookName");
+        config.setUserInboxFilePath("data/userInbox.xml");
+        config.setUserInboxName("MyTaskCrusher");
         return config;
     }
 

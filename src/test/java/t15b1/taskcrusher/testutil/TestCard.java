@@ -83,12 +83,17 @@ public class TestCard implements ReadOnlyTask {
     }
 
     public String getAddCommand() {
-        //TODO: What if the deadlines and descriptions are empty 
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getTaskName().name + " ");
-        sb.append("d/" + this.getDeadline().deadline + " ");
-        sb.append("p/" + this.getPriority().priority + " ");
-        sb.append("//" + this.getDescription().description + " ");
+        if(this.getDeadline().hasDeadline())
+            sb.append("d/" + this.getDeadline().deadline + " ");
+        
+        if(this.getPriority().hasPriority())
+            sb.append("p/" + this.getPriority().priority + " ");
+        
+        if(this.getDescription().hasDescription())
+            sb.append("//" + this.getDescription().description + " ");
+        
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }

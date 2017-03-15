@@ -15,7 +15,7 @@ public class AddCommandTest extends AddressBookGuiTest {
     @Test
     public void add() {
         //add one task
-        TestCard[] currentList = td.getTypicalPersons();
+        TestCard[] currentList = td.getTypicalTasks();
         TestCard personToAdd = td.hoon;
         assertAddSuccess(personToAdd, currentList);
         currentList = TestUtil.addPersonsToList(currentList, personToAdd);
@@ -32,7 +32,7 @@ public class AddCommandTest extends AddressBookGuiTest {
 
         //add to empty list
         commandBox.runCommand("clear");
-        assertAddSuccess(td.alice);
+        assertAddSuccess(td.assignment);
 
         //invalid command
         commandBox.runCommand("adds Johnny");

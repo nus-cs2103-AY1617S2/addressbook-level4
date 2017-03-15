@@ -15,7 +15,9 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         try {
             return new Task[] {
-               new Task(new Name("CS2103 tutorial"), new Deadline(""), new Priority("3"), 
+               new Task(new Name("CS2103 tutorial"), new Deadline("tomorrow"), new Priority("3"), 
+                       new Description("presentation"), new UniqueTagList("school")),
+               new Task(new Name("CS2106 assignment"), new Deadline("next Monday"), new Priority("2"), 
                        new Description("submit assignment"), new UniqueTagList("school"))
             };
         } catch (IllegalValueException e) {
@@ -23,7 +25,7 @@ public class SampleDataUtil {
         }
     }
 
-    public static ReadOnlyUserInbox getSampleAddressBook() {
+    public static ReadOnlyUserInbox getSampleUserInbox() {
         try {
             UserInbox sampleuserInbox = new UserInbox();
             for (Task sampleTask : getSampleTasks()) {

@@ -86,6 +86,10 @@ public class Task implements ReadOnlyTask {
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
     }
+    
+    public boolean hasDeadline(){
+        return this.deadline.hasDeadline();
+    }
 
     /**
      * Replaces this person's tags with the tags in the argument tag list.

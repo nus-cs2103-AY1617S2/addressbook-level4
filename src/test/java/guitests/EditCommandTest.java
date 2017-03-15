@@ -13,7 +13,7 @@ import t15b1.taskcrusher.model.shared.Name;
 import t15b1.taskcrusher.model.tag.Tag;
 import t15b1.taskcrusher.model.task.Email;
 import t15b1.taskcrusher.model.task.Priority;
-import t15b1.taskcrusher.testutil.PersonBuilder;
+import t15b1.taskcrusher.testutil.TaskBuilder;
 import t15b1.taskcrusher.testutil.TestCard;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
@@ -21,15 +21,15 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     // The list of persons in the person list panel is expected to match this list.
     // This list is updated with every successful call to assertEditSuccess().
-    TestCard[] expectedPersonsList = td.getTypicalPersons();
+    TestCard[] expectedPersonsList = td.getTypicalTasks();
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
         String detailsToEdit = "Bobby p/91234567 e/bobby@gmail.com a/Block 123, Bobby Street 3 t/husband";
         int addressBookIndex = 1;
 
-        TestCard editedPerson = new PersonBuilder().withName("Bobby").withPhone("91234567")
-                .withEmail("bobby@gmail.com").withAddress("Block 123, Bobby Street 3").withTags("husband").build();
+        TestCard editedPerson = new TaskBuilder().withName("Bobby").withPriority("91234567")
+                .withDeadline("bobby@gmail.com").withDescription("Block 123, Bobby Street 3").withTags("husband").build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
@@ -40,7 +40,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         int addressBookIndex = 2;
 
         TestCard personToEdit = expectedPersonsList[addressBookIndex - 1];
-        TestCard editedPerson = new PersonBuilder(personToEdit).withTags("sweetie", "bestie").build();
+        TestCard editedPerson = new TaskBuilder(personToEdit).withTags("sweetie", "bestie").build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
@@ -51,7 +51,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         int addressBookIndex = 2;
 
         TestCard personToEdit = expectedPersonsList[addressBookIndex - 1];
-        TestCard editedPerson = new PersonBuilder(personToEdit).withTags().build();
+        TestCard editedPerson = new TaskBuilder(personToEdit).withTags().build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
@@ -65,7 +65,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         int addressBookIndex = 5;
 
         TestCard personToEdit = expectedPersonsList[addressBookIndex - 1];
-        TestCard editedPerson = new PersonBuilder(personToEdit).withName("Belle").build();
+        TestCard editedPerson = new TaskBuilder(personToEdit).withName("Belle").build();
 
         assertEditSuccess(filteredPersonListIndex, addressBookIndex, detailsToEdit, editedPerson);
     }

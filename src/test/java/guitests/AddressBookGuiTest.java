@@ -27,7 +27,7 @@ import t15b1.taskcrusher.commons.events.BaseEvent;
 import t15b1.taskcrusher.model.UserInbox;
 import t15b1.taskcrusher.model.task.ReadOnlyTask;
 import t15b1.taskcrusher.testutil.TestUtil;
-import t15b1.taskcrusher.testutil.TypicalTestPersons;
+import t15b1.taskcrusher.testutil.TypicalTestTasks;
 
 /**
  * A GUI Test class for AddressBook.
@@ -40,7 +40,7 @@ public abstract class AddressBookGuiTest {
 
     TestApp testApp;
 
-    protected TypicalTestPersons td = new TypicalTestPersons();
+    protected TypicalTestTasks td = new TypicalTestTasks();
 
     /*
      *   Handles to GUI elements present at the start up are created in advance
@@ -88,7 +88,7 @@ public abstract class AddressBookGuiTest {
      */
     protected UserInbox getInitialData() {
         UserInbox ab = new UserInbox();
-        TypicalTestPersons.loadAddressBookWithSampleData(ab);
+        TypicalTestTasks.loadUserInboxWithSampleData(ab);
         return ab;
     }
 

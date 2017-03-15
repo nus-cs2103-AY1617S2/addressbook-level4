@@ -19,74 +19,74 @@ import t15b1.taskcrusher.model.UserInbox;
 import t15b1.taskcrusher.model.tag.Tag;
 import t15b1.taskcrusher.model.task.ReadOnlyTask;
 import t15b1.taskcrusher.model.task.Task;
-import t15b1.taskcrusher.testutil.TypicalTestPersons;
+import t15b1.taskcrusher.testutil.TypicalTestTasks;
 
 public class UserInboxTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final UserInbox addressBook = new UserInbox();
+    private final UserInbox inbox = new UserInbox();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getTaskList());
-        assertEquals(Collections.emptyList(), addressBook.getTagList());
+        assertEquals(Collections.emptyList(), inbox.getTaskList());
+        assertEquals(Collections.emptyList(), inbox.getTagList());
     }
 
     @Test
     public void resetData_null_throwsAssertionError() {
         thrown.expect(AssertionError.class);
-        addressBook.resetData(null);
+        inbox.resetData(null);
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        UserInbox newData = new TypicalTestPersons().getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+    public void resetData_withValidReadOnlyUserInbox_replacesData() {
+        UserInbox newData = new TypicalTestTasks().getTypicalUserInbox();
+        inbox.resetData(newData);
+        assertEquals(newData, inbox);
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsAssertionError() {
-        TypicalTestPersons td = new TypicalTestPersons();
-        // Repeat td.alice twice
-        List<Task> newPersons = Arrays.asList(new Task(td.alice), new Task(td.alice));
-        List<Tag> newTags = td.alice.getTags().asObservableList();
-        AddressBookStub newData = new AddressBookStub(newPersons, newTags);
+    public void resetData_withDuplicateTasks_throwsAssertionError() {
+        TypicalTestTasks td = new TypicalTestTasks();
+        // Repeat td.assignment twice
+        List<Task> duplicateTasks = Arrays.asList(new Task(td.assignment), new Task(td.assignment));
+        List<Tag> newTags = td.assignment.getTags().asObservableList();
+        UserInboxStub newData = new UserInboxStub(duplicateTasks, newTags);
 
         thrown.expect(AssertionError.class);
-        addressBook.resetData(newData);
+        inbox.resetData(newData);
     }
 
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
-        UserInbox typicalAddressBook = new TypicalTestPersons().getTypicalAddressBook();
-        List<ReadOnlyTask> newPersons = typicalAddressBook.getTaskList();
+        UserInbox typicalAddressBook = new TypicalTestTasks().getTypicalUserInbox();
+        List<ReadOnlyTask> newTasks = typicalAddressBook.getTaskList();
         List<Tag> newTags = new ArrayList<>(typicalAddressBook.getTagList());
         // Repeat the first tag twice
         newTags.add(newTags.get(0));
-        AddressBookStub newData = new AddressBookStub(newPersons, newTags);
+        UserInboxStub newData = new UserInboxStub(newTasks, newTags);
 
         thrown.expect(AssertionError.class);
-        addressBook.resetData(newData);
+        inbox.resetData(newData);
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons and tags lists can violate interface constraints.
+     * A stub ReadOnlyUserInbox whose tasks and tags lists can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyUserInbox {
-        private final ObservableList<ReadOnlyTask> persons = FXCollections.observableArrayList();
+    private static class UserInboxStub implements ReadOnlyUserInbox {
+        private final ObservableList<ReadOnlyTask> tasks = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<? extends ReadOnlyTask> persons, Collection<? extends Tag> tags) {
-            this.persons.setAll(persons);
+        UserInboxStub(Collection<? extends ReadOnlyTask> tasks, Collection<? extends Tag> tags) {
+            this.tasks.setAll(tasks);
             this.tags.setAll(tags);
         }
 
         @Override
         public ObservableList<ReadOnlyTask> getTaskList() {
-            return persons;
+            return tasks;
         }
 
         @Override
