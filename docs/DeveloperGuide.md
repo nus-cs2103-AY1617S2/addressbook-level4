@@ -99,8 +99,9 @@ The **_Architecture Diagram_** given above explains the high-level design of the
 Given below is a quick overview of each component.
 
 #### `Main`
-The `Main` component takes charge of initializing other components (`Model`, `Logic`, `UI`) in the correct order and loading data from local storage when the app launches.  
-It also takes charge of terminating other components when Doist is shut down.
+The `Main` component takes charge of 
+- initializing other components (`Model`, `Logic`, `UI`) in the correct order and loading data from local storage when the app launches.  
+- terminating other components when Doist is shut down.
 
 #### `UI`
 The `UI` component takes charge of displaying information and handling all user interactions.
@@ -109,8 +110,15 @@ The `UI` component takes charge of displaying information and handling all user 
 The `Logic` component takes charge of parsing the user input and executing the commands.
 
 #### `Model`
+The `Model` component represent the data that Doist operates on and supports the operations on these data.
+
 #### `Storage`
+The `Storage` component takes charge of reading data from, and writing data to, the hard disk.
+
 #### `Commons`
+The `Commons` component contains a collection of classes used by multiple other components. The following are 2 representatives.
+- EventsCenter : supports the communication among different components using events
+- LogsCenter : enables writing log messages to the log file.
 
 ### 2. UI component
 ### 3. Logic component
@@ -118,9 +126,9 @@ The `Logic` component takes charge of parsing the user input and executing the c
 The `Model` component defines classes to represent the data that Doist operates on. It also specifies and implements the operations on these data.  
   
 The following diagram demonstrate the structure of the `Model` component  
-<img src="images/ModelClassDiagram.png" width="600"><br>
+<br><img src="images/ModelClassDiagram.png" width="800"><br>
 
-The following is a brief remarks of some key files in this component:
+The following is a brief remarks of some key files in the `Model` component:
 - [`Model.java`](../src/main/java/seedu/doist/model/Model.java):  contains an `interface` that defines multiple operations on the data.  
     These operations are defined using different methods (API).  
     Some representatives methods are listed here:  
@@ -131,9 +139,31 @@ The following is a brief remarks of some key files in this component:
     ```
 - `ModelManager.java`: contains a `class` that implements the operations specified in `Model.java`.
 - `TodoList.java`: contains a `class` that represents the to-do list.
-- `Task.java`: contains an `class` that represents each to-do list item (i.e. task).
+- `Task.java`: contains a `class` that represents each to-do list item (i.e. task).
+- `UserPrefs.java`: contains a class that stores user preferences such as the position and size of the app window.
 
 ### 5. Storage component
+The `Storage` component takes charge of writing/reading data to/from hard drive.
+These data consists of **user preferences** and **to-do list**
+- **user preferences** is stored in a **JSON** file
+- **to-do list** is stored in a **XML** file
+
+The following diagram demonstrate the structure of the `Storage` component  
+<br><img src="images/StorageClassDiagram.png" width="800"><br>
+The following is a brief remarks of some key files in the `Storage` component:
+- [`Storage.java`](../src/main/java/seedu/doist/storage/StorageManager.java):  contains an `interface` that defines reading and writing operation of user preferences and to-do list.  
+    These operations are defined using different methods (API).  
+    Some representatives methods are listed here:  
+    ```java
+    - Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
+    - void saveUserPrefs(UserPrefs userPrefs) throws IOException;
+    - Optional<ReadOnlyTodoList> readTodoList() throws DataConversionException, IOException;
+    - void saveTodoList(ReadOnlyTodoList todoList) throws IOException;
+    ```
+- `StorageManager.java`: contains a `class` that implements the reading and writing operations specified in `Storage.java`.
+- `XmlTodoListStorage`: contains a `class` that implements the reading and writing operations of to-do list from and to an XML file. An instance of this class is utilized in `StorageManager`.
+- `JsonUserPrefsStorage`: contains a `class` that implements the reading and writing operations of user preferences from and to an JSON file. An instance of this class is utilized in `StorageManager`.
+
 <br>
 
 
