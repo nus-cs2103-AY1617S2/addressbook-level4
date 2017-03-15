@@ -178,7 +178,10 @@ That's it!
 
 #### Add a task with a _deadline_:
 
-For such tasks, type in: 
+> `add <task>; <due date and time>` <br>
+E.g. `add project proposal; 041216 2pm`
+
+#### Add an _event_:
 
 > `add <task>; <start date and time>; <end date and time>` <br>
 E.g. `add sushi restaurant promotion; 040117 10am; 110117 9pm`
@@ -187,11 +190,6 @@ OR
 
 > `add <task>; <start date and time>; <duration>` <br>
 E.g. `add committee meeting; 150617`
-
-#### Add an _event_:
-
-> `add <task>; <due date and time>` <br>
-E.g. `add project proposal; 041216 2pm`
 
 #### Add a task with a _duration_:
 
@@ -205,7 +203,7 @@ Removes a specified task from your task list.<br>
 > * `delete <task>` <br>
 E.g. `delete watch tv with the children`
 
-> `delete /all` <br>
+> * `delete /all` <br>
 This command clears your entire task list. <br>
 Hence, do think twice before typing this command!
 
@@ -213,77 +211,76 @@ Hence, do think twice before typing this command!
 
 Finds task(s) whose names contain the keyword `<task>`.<br>
 
-> For example, `find <home>` can help you search for a task called `do **home**work`. 
+> For example, `find <home>` can help you search for a task called `do homework`. 
 
-Formats:
+> * `find <task>` <br>
+E.g. `find project proposal`
 
-> * `find <task>`
-> * `find <task>; <due date>` (`show tasks before the due date and also tasks without any due date`)
-
-Examples:
-
-* `find project`
-* `find meeting; monday`
+> * `find <task>; <due date>`
+E.g. `find project proposal; 041216` <br>
+This command shows tasks due before `<due date>` and also [floating tasks](#floating-task). 
 
 ### 3.5. List all tasks : `list`
 
-Shows a list of all tasks in the task manager.<br>
-Format:
+Shows a list of all your tasks in the task manager.<br>
 
 > * `list`
 
 ### 3.6. Select a task : `select`
 
-Selects a task for user to view its details and make changes to it if needed.<br>
-Formats:
+Selects a task for you to view its details. <br>
+With this command, you can make changes to the task if needed!
 
-> * `select <task>` (display all tasks with the same name for user to choose one)
-> * `unselect`
+> * `select <task>` <br>
+E.g. `select buy detergent` <br>
+If there are tasks with the same name, this command will display all those tasks for you to choose one. <br>
+I will highlight the task that is successfully selected for you to see. 
 
-Examples:
-
-* `select presentation`
-
-> Task successfully selected will be highlighted for the user to see. 
+> * `unselect` <br>
+This command cancels your previous selection so that you can select another task instead.
 
 ### 3.7. Update a task : `update`
 
-Edits the value(s) of parameter(s) of a task.<br>
-Formats:
+Edits 1 or more [parameters](#parameter) of a task. <br>
 
-> * `update <parameter> <new_value>` (when task has already been selected using the 'select' command)
-> * `update <task>; <parameter1> <new_value1>; <parameter2> <new_value2>`
-
-Examples:
-
-* `update start time 10am`
-* `update project proposal; name app development project proposal; end time 11.59pm`
+> * `update <parameter> <new_value>` <br>
+E.g. `update start time 10am` <br>
+This command will make the specified update to a task which has already been selected using my 
+['select'](#select-a-task-select) command. <br>
+Edit more parameters concurrently using the following format: <br>
+`update <parameter1> <new_value1>; <parameter2> <new_value2>; ...`
+ 
+> * `update <task>; <parameter> <new_value>` <br>
+E.g. `update committee meeting start time 10am` <br>
+This command will make the specified update to a task with the name `<task>`. <br>
+You can also add more parameters to modify when using this format. <br>
+E.g. `update project proposal; name app development project proposal; end time 11.59pm`
 
 ### 3.8. Get help : `help`
 
-Shows a list of all commands and their usage instructions.<br>
-Formats:
+Shows a list of all commands and their usage instructions. <br>
 
-> * `help <command>` (provides specific information about the usage of the command)
+> * `help <command>` <br>
+E.g. `help update`
+This command provides specific information about the usage of `<command>`. 
+
 > * `help /all`
+This command directs you back to this user guide. 
 
-> Help is also shown if you enter an incorrect command. e.g. `abcd`
+> Help will also be shown if you enter an incorrect command. e.g. `abcd`
 
 ### 3.9. Change data file location
 
-Formats:
-
 > * `save`
+This command saves all your data into the data file. 
+
 > * `save <new_save_location_directory>`
-
-Examples:
-
-* `save C:\Users\Jim\Desktop`
+E.g. `save C:\Users\Jim\Desktop`
+This command saves all your data in a new data file in a `<new_save_location_directory>`
 
 ### 3.10. Exiting the program : `exit`
 
-Exits the program.<br>
-Format:
+Exits the program. <br>
 
 > * `exit`
 
