@@ -9,6 +9,7 @@ import seedu.ezdo.commons.core.ComponentManager;
 import seedu.ezdo.commons.core.LogsCenter;
 import seedu.ezdo.commons.core.UnmodifiableObservableList;
 import seedu.ezdo.commons.events.model.EzDoChangedEvent;
+import seedu.ezdo.commons.exceptions.DateException;
 import seedu.ezdo.commons.util.CollectionUtil;
 import seedu.ezdo.commons.util.StringUtil;
 import seedu.ezdo.model.todo.ReadOnlyTask;
@@ -128,7 +129,11 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowAll();
         indicateEzDoChanged();
     }
-
+    
+    @Override
+    public void checkTaskDate(Task task) throws DateException {
+	
+    }
     //=========== Filtered Task List Accessors =============================================================
 
     private void updateFilteredTaskList(Expression expression) {

@@ -4,6 +4,7 @@ import java.util.EmptyStackException;
 import java.util.Set;
 
 import seedu.ezdo.commons.core.UnmodifiableObservableList;
+import seedu.ezdo.commons.exceptions.DateException;
 import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.UniqueTaskList;
@@ -26,6 +27,10 @@ public interface Model {
     /** Adds the given task. */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
+    /** Checks the task and makes sure the dates are logical.
+     * i.e. start date not after due date.
+     */
+    void checkTaskDate(Task task) throws DateException;
     /** Marks a task as done.
      * @throws TaskNotFoundException */
     void doneTask(Task task) throws TaskNotFoundException;
