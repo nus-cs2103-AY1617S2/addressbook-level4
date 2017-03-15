@@ -31,13 +31,13 @@ public class AddCommandParser {
         try {
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
-                    argsTokenizer.getValue(PREFIX_VENUE).get(),
-                    argsTokenizer.getValue(PREFIX_STARTTIME).get(),
-                    argsTokenizer.getValue(PREFIX_ENDTIME).get(),
-                    argsTokenizer.getValue(PREFIX_URGENCYLEVEL).get(),
-                    argsTokenizer.getValue(PREFIX_DESCRIPTION).get(),
+                    argsTokenizer.getValue(PREFIX_VENUE),
+                    argsTokenizer.getValue(PREFIX_STARTTIME),
+                    argsTokenizer.getValue(PREFIX_ENDTIME),
+                    argsTokenizer.getValue(PREFIX_URGENCYLEVEL),
+                    argsTokenizer.getValue(PREFIX_DESCRIPTION),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
-            );
+                    );
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         } catch (IllegalValueException ive) {
