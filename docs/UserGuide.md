@@ -4,54 +4,32 @@
 
 ## Table of contents
 
-1. [Intoduction](#intoduction)
-2. [Quick Start](#quick-start)
-3. [Features](#features)
-
-   3.1.  [Viewing Help](#viewing-help)
-   
-   3.2.  [Adding a Floating Task]()
-   
-   3.3.  [Adding a Deadline Task]()
-   
-   3.4.  [Adding an Event Task]()
-   
-   3.5.  [Adding a Priority Task]()
-   
-   3.6.  [Finding a Task]() 
-   
-   3.7.  [Editing a Task]()
-   
-   3.8.  [Deleting a Task]()
-   
-   3.9.  [Completing a Task]()
-   
-   3.10. [Listing All Tasks]()
-   
-   3.11. [Listing Today’s Tasks]()
-   
-   3.12. [Listing Priority Tasks]()
-   
-   3.13. [Listing Completed Tasks]()
-   
-   3.14. [Undoing the Latest Command]()
-   
-   3.15. [Saving Data to Another Folder]()
-   
-   3.16. [Changing Default Storage Folder]()
-   
-   3.17. [Using Data from Another Folder]()
-   
-   3.18. [Clearing all Entries]()
-   
-   3.19. [Exiting the Program]()
-   
-   3.20. [Saving your Data]()
-   
-   3.21. [Differentiating your Tasks’ Urgency]()
-   
-4. [FAQ](#faq)
-5. [Command Summary](#command-summary)
+1. [Intoduction](#intoduction) <br>
+2. [Quick Start](#quick-start) <br>
+3. [Features](#features) <br>
+   3.1.  [Viewing Help](#viewing-help) <br>
+   3.2.  [Adding a Floating Task]()  <br>
+   3.3.  [Adding a Deadline Task]() <br> 
+   3.4.  [Adding an Event Task]()<br>
+   3.5.  [Adding a Priority Task]() <br>
+   3.6.  [Finding a Task]()  <br>
+   3.7.  [Editing a Task]() <br>
+   3.8.  [Deleting a Task]() <br> 
+   3.9.  [Completing a Task]() <br>
+   3.10. [Listing All Tasks]() <br>
+   3.11. [Listing Today’s Tasks]()  <br>
+   3.12. [Listing Priority Tasks]()   <br>
+   3.13. [Listing Completed Tasks]() <br> 
+   3.14. [Undoing the Latest Command]()<br>   
+   3.15. [Saving Data to Another Folder]()  <br> 
+   3.16. [Changing Default Storage Folder]() <br>  
+   3.17. [Using Data from Another Folder]() <br> 
+   3.18. [Clearing all Entries]()  <br>
+   3.19. [Exiting the Program]()   <br>
+   3.20. [Saving your Data]()  <br> 
+   3.21. [Differentiating your Tasks’ Urgency]()<br>   
+4. [FAQ](#faq)<br>
+5. [Command Summary](#command-summary)<br>
 
 &nbsp;
 
@@ -161,8 +139,10 @@ Format: `add <TASK NAME> p/<PRIORITY>`
 ```
 Things To Note:
 > Priority must be high or low
-> Priority can be applied to other type of task or event by adding this additional field “p/<PRIORITY>”
-> Priority will automatic be low if a task is added without the field “p/<PRIORITY>”
+> Priority can be applied to other type of task or event by 
+  adding this additional field “p/<PRIORITY>”
+> Priority will automatic be low if a task is added without 
+  the field “p/<PRIORITY>”
 ```
 
 Examples:
@@ -177,10 +157,12 @@ Format: `find <KEYWORD>`
 
 ```
 Things To Note:
-> The order of the keywords does not matter. e.g. Meeting Tutor will match Tutor Meeting.
-> The input that is a partial word of a task name will be matched e.g. Meeting will match Meetings.
+> The order of the keywords does not matter. 
+   e.g. Meeting Tutor will match Tutor Meeting.
+> The input that is a partial word of a task name will be matched 
+   e.g. Meeting will match Meetings.
 > The tasks that match at least one keyword will be returned (i.e. OR search).
-e.g. Meeting will match Meeting Tutor.
+   e.g. Meeting will match Meeting Tutor.
 > find is not case-sensitive, i.e. Meeting Tutor will match meeting tutor.
 ```
 
@@ -196,7 +178,8 @@ Format: `edit INDEX <TASK NAME> d/<DATE> t/<TIME> p/<PRIORITY>`
 
 ```
 Things To Note:
-> Edits the task at the specified INDEX. The index refers to the number shown in the last task listing.
+> Edits the task at the specified INDEX. 
+  The index refers to the number shown in the last task listing.
 > The index must be a positive integer 1, 2, 3, …
 > Optional fields are <TASK NAME>, <DATE>, <TIME>, <PRIORITY>
 > At least one of the optional fields must be provided.
@@ -231,7 +214,8 @@ Format: `done <INDEX>`
 
 ```
 Things To Note:
-> The task at the specified INDEX will be moved from the task list to the completed list.
+> The task at the specified INDEX will be moved from the task 
+  list to the completed list.
 > The index refers to the index number shown in the most recent listing.
 > The index must be a positive integer 1, 2, 3, ...
 ```
@@ -247,7 +231,8 @@ Format: `list`
 
 ```
 Things To Note:
-> This list will refresh itself and show you the latest list when you add a new task or event.
+> This list will refresh itself and show you the latest 
+  list when you add a new task or event.
 > This list will be sorted by Priority, Date and Time.
 ```
 
@@ -284,7 +269,8 @@ Format: `listdone`
 
 ```
 Things To Note:
-> This list will only show you the tasks that are completed. Deleted Task are not included.
+> This list will only show you the tasks that are completed. 
+  Deleted Task are not included.
 ```
 
 
@@ -369,7 +355,8 @@ TypeTask automatically assigns your tasks certain colours to help you differenti
 `Green`: this uncompleted task has a deadline but is not due yet. Phew! <br>
 
 ```
-> Note that all tasks that fall outside of these categories will appear normally (i.e. no additional colours).
+> Note that all tasks that fall outside of these categories will appear normally 
+  i.e. no additional colours.
  ```
  
 &nbsp;
