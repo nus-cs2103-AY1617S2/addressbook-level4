@@ -38,21 +38,23 @@ public class DateParserTest {
         assertTrue(DateParser.isValidDateString("2017/03/10 0317"));
     }
 
-    /**
-     * Utility function to remove the milliseconds from a time
-     * @param time the time to remove the milliseconds from
-     * @return the time with the milliseconds set to 0
-     */
-    private long dropMillis(long time) {
-        return time / 1000 * 1000;
-    }
-
     @Test
     public void parse() throws IllegalValueException {
         Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.MILLISECOND, 0);
         cal.set(2000, 00, 01, 0, 0, 0);
         assertEquals(
-                dropMillis(cal.getTimeInMillis()),
-                dropMillis(DateParser.parse("2000/01/01 0000").getTimeInMillis()));
+                cal.getTimeInMillis(),
+                DateParser.parse("2000/01/01 0000").getTimeInMillis());
+    }
+
+    @Test
+    public void toStringTest() {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.MILLISECOND, 0);
+        cal.set(2000, 00, 01, 0, 0, 0);
+        assertEquals("2000/01/01 0000", DateParser.toString(cal));
+        cal.set(1990, 05, 22, 23, 54, 0);
+        assertEquals("1990/06/22 2354", DateParser.toString(cal));
     }
 }

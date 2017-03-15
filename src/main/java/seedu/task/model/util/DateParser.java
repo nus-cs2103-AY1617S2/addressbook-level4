@@ -9,7 +9,10 @@ public class DateParser {
             "String given to the DateParser must be of the form YYYY/MM/DD HHMM";
 
     private static final int DEFAULT_SECONDS = 0;
+    private static final int DEFAULT_MILLISECONDS = 0;
     private static final String DATE_STRING_VALIDATION_REGEX = "[0-9]{4}/[0-1][0-9]/[0-3][0-9] [0-2][0-9][0-5][0-9]";
+    private static final String EMPTY_DATE_STRING = "";
+    private static final int MONTH_OFFSET = 1;
 
     public static Calendar parse(String date) throws IllegalValueException {
         if (!isValidDateString(date)) {
@@ -22,6 +25,7 @@ public class DateParser {
         int hour = getHour(date);
         int minute = getMinute(date);
         cal.set(year, month, day, hour, minute, DEFAULT_SECONDS);
+        cal.set(Calendar.MILLISECOND, DEFAULT_MILLISECONDS);
         return cal;
     }
 
@@ -29,7 +33,7 @@ public class DateParser {
         String dateString;
 
         if (date == null) {
-            return "";
+            return EMPTY_DATE_STRING;
         }
 
         int year = date.get(Calendar.YEAR);
@@ -38,7 +42,8 @@ public class DateParser {
         int hour = date.get(Calendar.HOUR_OF_DAY);
         int minute = date.get(Calendar.MINUTE);
 
-        dateString = String.format("%4d/%02d/%02d %02d:%02d", year, month + 1, day, hour, minute);
+
+        dateString = String.format("%4d/%02d/%02d %02d%02d", year, month + MONTH_OFFSET, day, hour, minute)
 
         return dateString;
     }
@@ -52,7 +57,7 @@ public class DateParser {
     }
 
     private static int getMonth(String date) {
-        return Integer.parseInt(date.substring(5,  7)) - 1;
+        return Integer.parseInt(date.substring(5,  7)) - MONTH_OFFSET;
     }
 
     private static int getDay(String date) {
