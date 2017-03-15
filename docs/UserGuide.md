@@ -214,7 +214,10 @@ _Figure 3.4.1. Find Command_
 
 > * **`find`** `<task>; <due date>`
 E.g. **`find`** `project proposal; 041216` <br>
-This command shows tasks due before `<due date>` and also [floating tasks](#floating-task). 
+
+This command shows: 
+* Your tasks that are due before `<due date>`
+* Your [floating tasks](#floating-task)
 
 ### 3.5. List all tasks : `list`
 
@@ -237,7 +240,7 @@ With this command, you can make changes to the task if needed!
 <img src="images/UiSelectCommand.png" width="600"><br>
 _Figure 3.6.1. Select Command_
 
-> If there are tasks with the same name, this command will display all those tasks 
+> If you have tasks with the same name, this command will display all those tasks 
 for you to choose one. <br>
 
 > * **`unselect`** <br>
@@ -254,7 +257,7 @@ Edits 1 or more [parameters](#parameter) of a task. <br>
 E.g. **`update`** `start time 10am` <br>
 This command will make the specified update to a task which has already been selected using my 
 ['select'](#select-a-task-select) command. <br>
-Edit more parameters concurrently using the following format: <br>
+You can edit more parameters concurrently using the following format: <br>
 **`update`** `<parameter1> <new_value1>; <parameter2> <new_value2>; ...`
  
 > * **`update`** `<task>; <parameter> <new_value>` <br>
@@ -316,11 +319,11 @@ _Figure 3.10.1. Exit Command_
 
 ## 5. FAQ (Frequently Asked Questions)
 
-**Q**: How do I transfer my data to another Computer? <br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with
+**Q**: How do I transfer my data to another computer? <br>
+**A**: Install me in the other computer and overwrite the empty data file I create with
        the file that contains the data of your previous Task Manager folder.
        
-**Q**: How do I add an event to Tâche? <br>
+**Q**: How do I add an _event_? <br>
 **A**: Type in **`add`** `<task>; <start date and time>; <end date and time>` as mentioned 
 [here](#add-an-event). 
        
