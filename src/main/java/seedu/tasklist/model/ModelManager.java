@@ -154,7 +154,7 @@ public class ModelManager extends ComponentManager implements Model {
             logger.warning("Wrong file format.");
         }
     }
-    
+
     @Override
     public synchronized void saveTaskList(String filePath) throws IOException {
         storage.saveTaskList(taskList, filePath);

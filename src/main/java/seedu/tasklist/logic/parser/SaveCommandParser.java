@@ -4,12 +4,11 @@ import static seedu.tasklist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMA
 
 import seedu.tasklist.logic.commands.Command;
 import seedu.tasklist.logic.commands.IncorrectCommand;
-import seedu.tasklist.logic.commands.LoadCommand;
 import seedu.tasklist.logic.commands.SaveCommand;
 
 
 public class SaveCommandParser {
-    
+
     public static final int CORRECT_LENGTH = 1;
     public static final int FILE_PATH = 0;
 

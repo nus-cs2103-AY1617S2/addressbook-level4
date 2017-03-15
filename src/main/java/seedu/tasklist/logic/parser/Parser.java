@@ -80,12 +80,12 @@ public class Parser {
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
-        
+
         case LoadCommand.COMMAND_WORD:
             return new LoadCommandParser().parse(arguments);
-            
+
         case SaveCommand.COMMAND_WORD:
-            return new SaveCommandParser().parse(arguments);    
+            return new SaveCommandParser().parse(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
